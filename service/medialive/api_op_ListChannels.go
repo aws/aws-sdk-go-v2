@@ -31,7 +31,7 @@ func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, op
 type ListChannelsInput struct {
 
 	// Placeholder documentation for MaxResults
-	MaxResults *int32
+	MaxResults int32
 
 	// Placeholder documentation for __string
 	NextToken *string
@@ -41,7 +41,7 @@ type ListChannelsInput struct {
 type ListChannelsOutput struct {
 
 	// Placeholder documentation for __listOfChannelSummary
-	Channels []*types.ChannelSummary
+	Channels []types.ChannelSummary
 
 	// Placeholder documentation for __string
 	NextToken *string

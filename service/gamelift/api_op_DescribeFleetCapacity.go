@@ -78,7 +78,7 @@ type DescribeFleetCapacityInput struct {
 
 	// A unique identifier for a fleet(s) to retrieve capacity information for. You can
 	// use either the fleet ID or ARN value.
-	FleetIds []*string
+	FleetIds []string
 
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages. This parameter is ignored when the
@@ -97,7 +97,7 @@ type DescribeFleetCapacityOutput struct {
 
 	// A collection of objects containing capacity information for each requested fleet
 	// ID. Leave this parameter empty to retrieve capacity information for all fleets.
-	FleetCapacity []*types.FleetCapacity
+	FleetCapacity []types.FleetCapacity
 
 	// Token that indicates where to resume retrieving results on the next call to this
 	// operation. If no token is returned, these results represent the end of the list.

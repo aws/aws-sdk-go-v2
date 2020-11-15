@@ -57,7 +57,7 @@ type GetOpenIdTokenForDeveloperIdentityInput struct {
 	// supported logins.
 	//
 	// This member is required.
-	Logins map[string]*string
+	Logins map[string]string
 
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string

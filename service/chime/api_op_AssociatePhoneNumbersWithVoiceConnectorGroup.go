@@ -32,7 +32,7 @@ type AssociatePhoneNumbersWithVoiceConnectorGroupInput struct {
 	// List of phone numbers, in E.164 format.
 	//
 	// This member is required.
-	E164PhoneNumbers []*string
+	E164PhoneNumbers []string
 
 	// The Amazon Chime Voice Connector group ID.
 	//
@@ -50,7 +50,7 @@ type AssociatePhoneNumbersWithVoiceConnectorGroupOutput struct {
 
 	// If the action fails for one or more of the phone numbers in the request, a list
 	// of the phone numbers is returned, along with error codes and error messages.
-	PhoneNumberErrors []*types.PhoneNumberError
+	PhoneNumberErrors []types.PhoneNumberError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

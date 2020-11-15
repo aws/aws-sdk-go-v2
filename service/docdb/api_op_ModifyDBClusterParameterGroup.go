@@ -49,7 +49,7 @@ type ModifyDBClusterParameterGroupInput struct {
 	// A list of parameters in the cluster parameter group to modify.
 	//
 	// This member is required.
-	Parameters []*types.Parameter
+	Parameters []types.Parameter
 }
 
 // Contains the name of a cluster parameter group.

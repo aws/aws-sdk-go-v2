@@ -73,7 +73,7 @@ type ListSharedReportGroupsOutput struct {
 
 	// The list of ARNs for the report groups shared with the current AWS account or
 	// user.
-	ReportGroups []*string
+	ReportGroups []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

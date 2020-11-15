@@ -33,8 +33,8 @@ type ErrorWithMembers struct {
 	Code         *string
 	ComplexData  *KitchenSink
 	IntegerField *int32
-	ListField    []*string
-	MapField     map[string]*string
+	ListField    []string
+	MapField     map[string]string
 	StringField  *string
 }
 

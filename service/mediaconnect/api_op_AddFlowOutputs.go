@@ -38,7 +38,7 @@ type AddFlowOutputsInput struct {
 	// A list of outputs that you want to add.
 	//
 	// This member is required.
-	Outputs []*types.AddOutputRequest
+	Outputs []types.AddOutputRequest
 }
 
 type AddFlowOutputsOutput struct {
@@ -47,7 +47,7 @@ type AddFlowOutputsOutput struct {
 	FlowArn *string
 
 	// The details of the newly added outputs.
-	Outputs []*types.Output
+	Outputs []types.Output
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

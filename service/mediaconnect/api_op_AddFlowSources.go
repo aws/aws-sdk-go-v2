@@ -38,7 +38,7 @@ type AddFlowSourcesInput struct {
 	// A list of sources that you want to add.
 	//
 	// This member is required.
-	Sources []*types.SetSourceRequest
+	Sources []types.SetSourceRequest
 }
 
 type AddFlowSourcesOutput struct {
@@ -47,7 +47,7 @@ type AddFlowSourcesOutput struct {
 	FlowArn *string
 
 	// The details of the newly added sources.
-	Sources []*types.Source
+	Sources []types.Source
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

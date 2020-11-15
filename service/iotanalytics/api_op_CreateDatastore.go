@@ -44,7 +44,7 @@ type CreateDatastoreInput struct {
 	RetentionPeriod *types.RetentionPeriod
 
 	// Metadata which can be used to manage the data store.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDatastoreOutput struct {

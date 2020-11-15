@@ -53,7 +53,7 @@ type CreateNamespaceInput struct {
 	Namespace *string
 
 	// The tags that you want to associate with the namespace that you're creating.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateNamespaceOutput struct {
@@ -82,7 +82,7 @@ type CreateNamespaceOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

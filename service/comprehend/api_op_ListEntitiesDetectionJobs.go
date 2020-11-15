@@ -44,7 +44,7 @@ type ListEntitiesDetectionJobsInput struct {
 type ListEntitiesDetectionJobsOutput struct {
 
 	// A list containing the properties of each job that is returned.
-	EntitiesDetectionJobPropertiesList []*types.EntitiesDetectionJobProperties
+	EntitiesDetectionJobPropertiesList []types.EntitiesDetectionJobProperties
 
 	// Identifies the next page of results to return.
 	NextToken *string

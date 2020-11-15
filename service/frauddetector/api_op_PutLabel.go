@@ -40,7 +40,7 @@ type PutLabelInput struct {
 	Description *string
 
 	//
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type PutLabelOutput struct {

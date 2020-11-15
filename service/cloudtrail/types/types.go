@@ -87,7 +87,7 @@ type DataResource struct {
 	// events will only be logged for
 	// arn:aws:lambda:us-west-2:111111111111:function:helloworld. They will not be
 	// logged for arn:aws:lambda:us-west-2:111111111111:function:helloworld2.
-	Values []*string
+	Values []string
 }
 
 // Contains information about an event that was returned by a lookup request. The
@@ -118,7 +118,7 @@ type Event struct {
 	ReadOnly *string
 
 	// A list of resources referenced by the event returned.
-	Resources []*Resource
+	Resources []Resource
 
 	// A user name or role name of the requester that called the API in the event
 	// returned.
@@ -144,14 +144,14 @@ type EventSelector struct {
 	// and Limits in AWS CloudTrail
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html)
 	// in the AWS CloudTrail User Guide.
-	DataResources []*DataResource
+	DataResources []DataResource
 
 	// An optional list of service event sources from which you do not want management
 	// events to be logged on your trail. In this release, the list can be empty
 	// (disables the filter), or it can filter out AWS Key Management Service events by
 	// containing "kms.amazonaws.com". By default, ExcludeManagementEventSources is
 	// empty, and AWS KMS events are included in events that are logged to your trail.
-	ExcludeManagementEventSources []*string
+	ExcludeManagementEventSources []string
 
 	// Specify if you want your event selector to include management events for your
 	// trail. For more information, see Management Events
@@ -228,7 +228,7 @@ type ResourceTag struct {
 	ResourceId *string
 
 	// A list of tags.
-	TagsList []*Tag
+	TagsList []Tag
 }
 
 // A custom key-value pair associated with a resource such as a CloudTrail trail.

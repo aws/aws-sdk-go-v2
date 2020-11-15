@@ -40,10 +40,10 @@ type SearchProductsAsAdminInput struct {
 
 	// The search filters. If no search filters are specified, the output includes all
 	// products to which the administrator has access.
-	Filters map[string][]*string
+	Filters map[string][]string
 
 	// The maximum number of items to return with this call.
-	PageSize *int32
+	PageSize int32
 
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
@@ -69,7 +69,7 @@ type SearchProductsAsAdminOutput struct {
 	NextPageToken *string
 
 	// Information about the product views.
-	ProductViewDetails []*types.ProductViewDetail
+	ProductViewDetails []types.ProductViewDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -34,14 +34,14 @@ func (c *Client) DescribeDeliveryChannelStatus(ctx context.Context, params *Desc
 type DescribeDeliveryChannelStatusInput struct {
 
 	// A list of delivery channel names.
-	DeliveryChannelNames []*string
+	DeliveryChannelNames []string
 }
 
 // The output for the DescribeDeliveryChannelStatus action.
 type DescribeDeliveryChannelStatusOutput struct {
 
 	// A list that contains the status of a specified delivery channel.
-	DeliveryChannelsStatus []*types.DeliveryChannelStatus
+	DeliveryChannelsStatus []types.DeliveryChannelStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

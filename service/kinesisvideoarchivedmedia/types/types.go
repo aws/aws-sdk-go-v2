@@ -114,7 +114,7 @@ type DASHTimestampRange struct {
 type Fragment struct {
 
 	// The playback duration or other time value associated with the fragment.
-	FragmentLengthInMilliseconds *int64
+	FragmentLengthInMilliseconds int64
 
 	// The unique identifier of the fragment. This value monotonically increases based
 	// on the ingestion order.
@@ -122,7 +122,7 @@ type Fragment struct {
 
 	// The total fragment size, including information about the fragment and contained
 	// media data.
-	FragmentSizeInBytes *int64
+	FragmentSizeInBytes int64
 
 	// The timestamp from the producer corresponding to the fragment.
 	ProducerTimestamp *time.Time

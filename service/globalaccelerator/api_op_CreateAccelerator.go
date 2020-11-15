@@ -69,13 +69,13 @@ type CreateAcceleratorInput struct {
 	// addresses. For more information, see Bring Your Own IP Addresses (BYOIP)
 	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html) in
 	// the AWS Global Accelerator Developer Guide.
-	IpAddresses []*string
+	IpAddresses []string
 
 	// Create tags for an accelerator. For more information, see Tagging in AWS Global
 	// Accelerator
 	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html)
 	// in the AWS Global Accelerator Developer Guide.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateAcceleratorOutput struct {

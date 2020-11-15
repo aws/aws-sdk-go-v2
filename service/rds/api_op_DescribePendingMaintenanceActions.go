@@ -42,7 +42,7 @@ type DescribePendingMaintenanceActionsInput struct {
 	// * db-instance-id - Accepts DB instance identifiers and DB instance ARNs.
 	// The results list will only include pending maintenance actions for the DB
 	// instances identified by these ARNs.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous
 	// DescribePendingMaintenanceActions request. If this parameter is specified, the
@@ -70,7 +70,7 @@ type DescribePendingMaintenanceActionsOutput struct {
 	Marker *string
 
 	// A list of the pending maintenance actions for the resource.
-	PendingMaintenanceActions []*types.ResourcePendingMaintenanceActions
+	PendingMaintenanceActions []types.ResourcePendingMaintenanceActions
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

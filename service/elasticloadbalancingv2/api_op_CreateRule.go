@@ -41,12 +41,12 @@ type CreateRuleInput struct {
 	// The actions.
 	//
 	// This member is required.
-	Actions []*types.Action
+	Actions []types.Action
 
 	// The conditions.
 	//
 	// This member is required.
-	Conditions []*types.RuleCondition
+	Conditions []types.RuleCondition
 
 	// The Amazon Resource Name (ARN) of the listener.
 	//
@@ -59,13 +59,13 @@ type CreateRuleInput struct {
 	Priority *int32
 
 	// The tags to assign to the rule.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateRuleOutput struct {
 
 	// Information about the rule.
-	Rules []*types.Rule
+	Rules []types.Rule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

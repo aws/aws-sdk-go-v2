@@ -53,7 +53,7 @@ func TestClient_XmlMaps_awsAwsqueryDeserialize(t *testing.T) {
 			</XmlMapsResponse>
 			`),
 			ExpectResult: &XmlMapsOutput{
-				MyMap: map[string]*types.GreetingStruct{
+				MyMap: map[string]types.GreetingStruct{
 					"foo": {
 						Hi: ptr.String("there"),
 					},

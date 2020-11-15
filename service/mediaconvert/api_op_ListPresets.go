@@ -41,7 +41,7 @@ type ListPresetsInput struct {
 	ListBy types.PresetListBy
 
 	// Optional. Number of presets, up to twenty, that will be returned at one time
-	MaxResults *int32
+	MaxResults int32
 
 	// Use this string, provided with the response to a previous request, to request
 	// the next batch of presets.
@@ -58,7 +58,7 @@ type ListPresetsOutput struct {
 	NextToken *string
 
 	// List of presets
-	Presets []*types.Preset
+	Presets []types.Preset
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

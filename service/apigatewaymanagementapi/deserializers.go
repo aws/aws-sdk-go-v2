@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
@@ -256,7 +257,7 @@ func awsRestjson1_deserializeOpDocumentGetConnectionOutput(v **GetConnectionOutp
 				if err != nil {
 					return err
 				}
-				sv.ConnectedAt = &t
+				sv.ConnectedAt = ptr.Time(t)
 			}
 
 		case "identity":
@@ -274,7 +275,7 @@ func awsRestjson1_deserializeOpDocumentGetConnectionOutput(v **GetConnectionOutp
 				if err != nil {
 					return err
 				}
-				sv.LastActiveAt = &t
+				sv.LastActiveAt = ptr.Time(t)
 			}
 
 		default:
@@ -519,7 +520,7 @@ func awsRestjson1_deserializeDocumentIdentity(v **types.Identity, value interfac
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.SourceIp = &jtv
+				sv.SourceIp = ptr.String(jtv)
 			}
 
 		case "userAgent":
@@ -528,7 +529,7 @@ func awsRestjson1_deserializeDocumentIdentity(v **types.Identity, value interfac
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.UserAgent = &jtv
+				sv.UserAgent = ptr.String(jtv)
 			}
 
 		default:
@@ -599,7 +600,7 @@ func awsRestjson1_deserializeDocumentPayloadTooLargeException(v **types.PayloadT
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

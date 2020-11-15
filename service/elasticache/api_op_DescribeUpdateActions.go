@@ -30,7 +30,7 @@ func (c *Client) DescribeUpdateActions(ctx context.Context, params *DescribeUpda
 type DescribeUpdateActionsInput struct {
 
 	// The cache cluster IDs
-	CacheClusterIds []*string
+	CacheClusterIds []string
 
 	// The Elasticache engine to which the update applies. Either Redis or Memcached
 	Engine *string
@@ -45,7 +45,7 @@ type DescribeUpdateActionsInput struct {
 	MaxRecords *int32
 
 	// The replication group IDs
-	ReplicationGroupIds []*string
+	ReplicationGroupIds []string
 
 	// The unique ID of the service update
 	ServiceUpdateName *string
@@ -73,7 +73,7 @@ type DescribeUpdateActionsOutput struct {
 	Marker *string
 
 	// Returns a list of update actions
-	UpdateActions []*types.UpdateAction
+	UpdateActions []types.UpdateAction
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

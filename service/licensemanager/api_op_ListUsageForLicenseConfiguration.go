@@ -49,7 +49,7 @@ type ListUsageForLicenseConfigurationInput struct {
 	//
 	// * resourceAccount - The ID of the account
 	// that owns the resource. Logical operators are EQUALS | NOT_EQUALS.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// Maximum number of results to return in a single call.
 	MaxResults *int32
@@ -61,7 +61,7 @@ type ListUsageForLicenseConfigurationInput struct {
 type ListUsageForLicenseConfigurationOutput struct {
 
 	// Information about the license configurations.
-	LicenseConfigurationUsageList []*types.LicenseConfigurationUsage
+	LicenseConfigurationUsageList []types.LicenseConfigurationUsage
 
 	// Token for the next set of results.
 	NextToken *string

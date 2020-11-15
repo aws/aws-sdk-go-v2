@@ -33,7 +33,7 @@ type DescribeUsersInput struct {
 	Engine *string
 
 	// Filter to determine the list of User IDs to return.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional marker returned from a prior request. Use this marker for pagination
 	// of results from this operation. If this parameter is specified, the response
@@ -59,7 +59,7 @@ type DescribeUsersOutput struct {
 	Marker *string
 
 	// A list of users.
-	Users []*types.User
+	Users []types.User
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

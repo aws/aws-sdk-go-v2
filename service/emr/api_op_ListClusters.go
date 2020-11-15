@@ -54,7 +54,7 @@ type ListClustersInput struct {
 type ListClustersOutput struct {
 
 	// The list of clusters for the account based on the given filters.
-	Clusters []*types.ClusterSummary
+	Clusters []types.ClusterSummary
 
 	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string

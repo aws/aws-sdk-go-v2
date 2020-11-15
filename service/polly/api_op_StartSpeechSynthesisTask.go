@@ -76,7 +76,7 @@ type StartSpeechSynthesisTaskInput struct {
 	// List of one or more pronunciation lexicon names you want the service to apply
 	// during synthesis. Lexicons are applied only if the language of the lexicon is
 	// the same as the language of the voice.
-	LexiconNames []*string
+	LexiconNames []string
 
 	// The Amazon S3 key prefix for the output speech file.
 	OutputS3KeyPrefix *string

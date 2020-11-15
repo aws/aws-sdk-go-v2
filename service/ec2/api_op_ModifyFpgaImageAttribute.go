@@ -44,7 +44,7 @@ type ModifyFpgaImageAttributeInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The load permission for the AFI.
 	LoadPermission *types.LoadPermissionModifications
@@ -57,15 +57,15 @@ type ModifyFpgaImageAttributeInput struct {
 
 	// The product codes. After you add a product code to an AFI, it can't be removed.
 	// This parameter is valid only when modifying the productCodes attribute.
-	ProductCodes []*string
+	ProductCodes []string
 
 	// The user groups. This parameter is valid only when modifying the loadPermission
 	// attribute.
-	UserGroups []*string
+	UserGroups []string
 
 	// The AWS account IDs. This parameter is valid only when modifying the
 	// loadPermission attribute.
-	UserIds []*string
+	UserIds []string
 }
 
 type ModifyFpgaImageAttributeOutput struct {

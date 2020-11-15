@@ -141,7 +141,7 @@ type CreateResourceOutput struct {
 	// OPTIONS is enabled on the resource, you can follow the example here to get that
 	// method. Just replace the GET of the last path segment in the request URL with
 	// OPTIONS.
-	ResourceMethods map[string]*types.Method
+	ResourceMethods map[string]types.Method
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

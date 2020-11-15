@@ -44,7 +44,7 @@ type GetClientCertificatesInput struct {
 type GetClientCertificatesOutput struct {
 
 	// The current page of elements from this collection.
-	Items []*types.ClientCertificate
+	Items []types.ClientCertificate
 
 	// The current pagination position in the paged result set.
 	Position *string

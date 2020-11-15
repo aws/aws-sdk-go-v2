@@ -41,7 +41,7 @@ type GetAnomalySubscriptionsInput struct {
 	NextPageToken *string
 
 	// A list of cost anomaly subscription ARNs.
-	SubscriptionArnList []*string
+	SubscriptionArnList []string
 }
 
 type GetAnomalySubscriptionsOutput struct {
@@ -50,7 +50,7 @@ type GetAnomalySubscriptionsOutput struct {
 	// each one.
 	//
 	// This member is required.
-	AnomalySubscriptions []*types.AnomalySubscription
+	AnomalySubscriptions []types.AnomalySubscription
 
 	// The token to retrieve the next set of results. AWS provides the token when the
 	// response from a previous call has more results than the maximum page size.

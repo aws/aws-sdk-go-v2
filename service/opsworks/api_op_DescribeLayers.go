@@ -37,7 +37,7 @@ type DescribeLayersInput struct {
 	// An array of layer IDs that specify the layers to be described. If you omit this
 	// parameter, DescribeLayers returns a description of every layer in the specified
 	// stack.
-	LayerIds []*string
+	LayerIds []string
 
 	// The stack ID.
 	StackId *string
@@ -47,7 +47,7 @@ type DescribeLayersInput struct {
 type DescribeLayersOutput struct {
 
 	// An array of Layer objects that describe the layers.
-	Layers []*types.Layer
+	Layers []types.Layer
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -53,7 +53,7 @@ type DescribeBudgetActionsForBudgetOutput struct {
 	// A list of the budget action resources information.
 	//
 	// This member is required.
-	Actions []*types.Action
+	Actions []types.Action
 
 	// A generic string.
 	NextToken *string

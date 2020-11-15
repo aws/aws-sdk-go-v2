@@ -40,7 +40,7 @@ type CreatePlacementInput struct {
 
 	// Optional user-defined key/value pairs providing contextual data (such as
 	// location or function) for the placement.
-	Attributes map[string]*string
+	Attributes map[string]string
 }
 
 type CreatePlacementOutput struct {

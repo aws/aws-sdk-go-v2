@@ -33,7 +33,7 @@ type AddInstanceGroupsInput struct {
 	// Instance groups to add.
 	//
 	// This member is required.
-	InstanceGroups []*types.InstanceGroupConfig
+	InstanceGroups []types.InstanceGroupConfig
 
 	// Job flow in which to add the instance groups.
 	//
@@ -48,7 +48,7 @@ type AddInstanceGroupsOutput struct {
 	ClusterArn *string
 
 	// Instance group IDs of the newly created instance groups.
-	InstanceGroupIds []*string
+	InstanceGroupIds []string
 
 	// The job flow ID in which the instance groups are added.
 	JobFlowId *string

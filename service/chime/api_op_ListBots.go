@@ -45,7 +45,7 @@ type ListBotsInput struct {
 type ListBotsOutput struct {
 
 	// List of bots and bot details.
-	Bots []*types.Bot
+	Bots []types.Bot
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string

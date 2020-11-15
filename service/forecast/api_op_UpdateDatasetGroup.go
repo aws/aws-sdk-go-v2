@@ -34,7 +34,7 @@ type UpdateDatasetGroupInput struct {
 	// dataset group.
 	//
 	// This member is required.
-	DatasetArns []*string
+	DatasetArns []string
 
 	// The ARN of the dataset group.
 	//

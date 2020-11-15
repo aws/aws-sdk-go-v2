@@ -38,7 +38,7 @@ type CreateIPSetInput struct {
 	// IPSet.
 	//
 	// This member is required.
-	Activate *bool
+	Activate bool
 
 	// The unique ID of the detector of the GuardDuty account that you want to create
 	// an IPSet for.
@@ -67,7 +67,7 @@ type CreateIPSetInput struct {
 	ClientToken *string
 
 	// The tags to be added to a new IP set resource.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateIPSetOutput struct {

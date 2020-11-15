@@ -38,7 +38,7 @@ type StartTaskInput struct {
 	// instances.
 	//
 	// This member is required.
-	ContainerInstances []*string
+	ContainerInstances []string
 
 	// The family and revision (family:revision) or full ARN of the task definition to
 	// start. If a revision is not specified, the latest ACTIVE revision is used.
@@ -55,7 +55,7 @@ type StartTaskInput struct {
 	// information, see Tagging Your Amazon ECS Resources
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide.
-	EnableECSManagedTags *bool
+	EnableECSManagedTags bool
 
 	// The name of the task group to associate with the task. The default value is the
 	// family name of the task definition (for example, family:my-family-name).
@@ -120,17 +120,17 @@ type StartTaskInput struct {
 	// of such as a prefix for either keys or values as it is reserved for AWS use. You
 	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
 	// do not count against your tags per resource limit.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type StartTaskOutput struct {
 
 	// Any failures associated with the call.
-	Failures []*types.Failure
+	Failures []types.Failure
 
 	// A full description of the tasks that were started. Each task that was
 	// successfully placed on your container instances is described.
-	Tasks []*types.Task
+	Tasks []types.Task
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

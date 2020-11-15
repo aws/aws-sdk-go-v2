@@ -39,7 +39,7 @@ type GetSdkTypeInput struct {
 type GetSdkTypeOutput struct {
 
 	// A list of configuration properties of an SdkType.
-	ConfigurationProperties []*types.SdkConfigurationProperty
+	ConfigurationProperties []types.SdkConfigurationProperty
 
 	// The description of an SdkType.
 	Description *string

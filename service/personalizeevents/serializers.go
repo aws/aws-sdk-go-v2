@@ -314,34 +314,26 @@ func awsRestjson1_serializeDocumentEvent(v *types.Event, value smithyjson.Value)
 	return nil
 }
 
-func awsRestjson1_serializeDocumentEventList(v []*types.Event, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentEventList(v []types.Event, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentEvent(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentEvent(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentImpression(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentImpression(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -363,17 +355,13 @@ func awsRestjson1_serializeDocumentItem(v *types.Item, value smithyjson.Value) e
 	return nil
 }
 
-func awsRestjson1_serializeDocumentItemList(v []*types.Item, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentItemList(v []types.Item, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentItem(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentItem(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -397,17 +385,13 @@ func awsRestjson1_serializeDocumentUser(v *types.User, value smithyjson.Value) e
 	return nil
 }
 
-func awsRestjson1_serializeDocumentUserList(v []*types.User, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentUserList(v []types.User, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentUser(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentUser(&v[i], av); err != nil {
 			return err
 		}
 	}

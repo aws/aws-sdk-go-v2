@@ -102,7 +102,7 @@ type DeleteObjectsInput struct {
 	// Specifies whether you want to delete this object even if it has a
 	// Governance-type Object Lock in place. You must have sufficient permissions to
 	// perform this operation.
-	BypassGovernanceRetention *bool
+	BypassGovernanceRetention bool
 
 	// The account id of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
@@ -126,11 +126,11 @@ type DeleteObjectsOutput struct {
 
 	// Container element for a successful delete. It identifies the object that was
 	// successfully deleted.
-	Deleted []*types.DeletedObject
+	Deleted []types.DeletedObject
 
 	// Container for a failed delete operation that describes the object that Amazon S3
 	// attempted to delete and the error it encountered.
-	Errors []*types.Error
+	Errors []types.Error
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.

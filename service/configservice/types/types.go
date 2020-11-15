@@ -12,13 +12,13 @@ type AccountAggregationSource struct {
 	// The 12-digit account ID of the account being aggregated.
 	//
 	// This member is required.
-	AccountIds []*string
+	AccountIds []string
 
 	// If true, aggregate existing AWS Config regions and future regions.
-	AllAwsRegions *bool
+	AllAwsRegions bool
 
 	// The source regions being aggregated.
-	AwsRegions []*string
+	AwsRegions []string
 }
 
 // Indicates whether an AWS Config rule is compliant based on account ID, region,
@@ -224,7 +224,7 @@ type BaseConfigurationItem struct {
 
 	// Configuration attributes that AWS Config returns for certain resource types to
 	// supplement the information returned for the configuration parameter.
-	SupplementaryConfiguration map[string]*string
+	SupplementaryConfiguration map[string]string
 
 	// The version number of the resource configuration.
 	Version *string
@@ -284,11 +284,11 @@ type ComplianceByResource struct {
 type ComplianceContributorCount struct {
 
 	// Indicates whether the maximum count is reached.
-	CapExceeded *bool
+	CapExceeded bool
 
 	// The number of AWS resources or AWS Config rules responsible for the current
 	// compliance of the item.
-	CappedCount *int32
+	CappedCount int32
 }
 
 // The number of AWS Config rules or AWS resources that are compliant and
@@ -476,7 +476,7 @@ type ConfigRuleEvaluationStatus struct {
 	//
 	// * false - AWS Config has not once finished evaluating your
 	// AWS resources against the rule.
-	FirstEvaluationStarted *bool
+	FirstEvaluationStarted bool
 
 	// The time that you last turned off the AWS Config rule.
 	LastDeactivatedTime *time.Time
@@ -574,7 +574,7 @@ type ConfigStreamDeliveryInfo struct {
 type ConfigurationAggregator struct {
 
 	// Provides a list of source accounts and regions to be aggregated.
-	AccountAggregationSources []*AccountAggregationSource
+	AccountAggregationSources []AccountAggregationSource
 
 	// The Amazon Resource Name (ARN) of the aggregator.
 	ConfigurationAggregatorArn *string
@@ -656,10 +656,10 @@ type ConfigurationItem struct {
 	// LookupEvents API
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_LookupEvents.html)
 	// in the AWS CloudTrail API Reference to retrieve the events for the resource.
-	RelatedEvents []*string
+	RelatedEvents []string
 
 	// A list of related AWS resources.
-	Relationships []*Relationship
+	Relationships []Relationship
 
 	// The time stamp when the resource was created.
 	ResourceCreationTime *time.Time
@@ -675,10 +675,10 @@ type ConfigurationItem struct {
 
 	// Configuration attributes that AWS Config returns for certain resource types to
 	// supplement the information returned for the configuration parameter.
-	SupplementaryConfiguration map[string]*string
+	SupplementaryConfiguration map[string]string
 
 	// A mapping of key value tags associated with the resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The version number of the resource configuration.
 	Version *string
@@ -727,7 +727,7 @@ type ConfigurationRecorderStatus struct {
 	Name *string
 
 	// Specifies whether or not the recorder is currently recording.
-	Recording *bool
+	Recording bool
 }
 
 // Filters the conformance pack by compliance types and AWS Config rule names.
@@ -738,7 +738,7 @@ type ConformancePackComplianceFilters struct {
 	ComplianceType ConformancePackComplianceType
 
 	// Filters the results by AWS Config rule names.
-	ConfigRuleNames []*string
+	ConfigRuleNames []string
 }
 
 // Summary includes the name and status of the conformance pack.
@@ -777,7 +777,7 @@ type ConformancePackDetail struct {
 	ConformancePackName *string
 
 	// A list of ConformancePackInputParameter objects.
-	ConformancePackInputParameters []*ConformancePackInputParameter
+	ConformancePackInputParameters []ConformancePackInputParameter
 
 	// AWS service that created the conformance pack.
 	CreatedBy *string
@@ -803,11 +803,11 @@ type ConformancePackEvaluationFilters struct {
 	ComplianceType ConformancePackComplianceType
 
 	// Filters the results by AWS Config rule names.
-	ConfigRuleNames []*string
+	ConfigRuleNames []string
 
 	// Filters the results by resource IDs. This is valid only when you provide
 	// resource type. If there is no resource type, you will see an error.
-	ResourceIds []*string
+	ResourceIds []string
 
 	// Filters the results by the resource type (for example, "AWS::EC2::Instance").
 	ResourceType *string
@@ -1087,7 +1087,7 @@ type ExecutionControls struct {
 type FailedDeleteRemediationExceptionsBatch struct {
 
 	// Returns remediation exception resource key object of the failed items.
-	FailedItems []*RemediationExceptionResourceKey
+	FailedItems []RemediationExceptionResourceKey
 
 	// Returns a failure message for delete remediation exception. For example, AWS
 	// Config creates an exception due to an internal error.
@@ -1098,7 +1098,7 @@ type FailedDeleteRemediationExceptionsBatch struct {
 type FailedRemediationBatch struct {
 
 	// Returns remediation configurations of the failed items.
-	FailedItems []*RemediationConfiguration
+	FailedItems []RemediationConfiguration
 
 	// Returns a failure message. For example, the resource is already compliant.
 	FailureMessage *string
@@ -1108,7 +1108,7 @@ type FailedRemediationBatch struct {
 type FailedRemediationExceptionBatch struct {
 
 	// Returns remediation exception resource key object of the failed items.
-	FailedItems []*RemediationException
+	FailedItems []RemediationException
 
 	// Returns a failure message. For example, the auto-remediation has failed.
 	FailureMessage *string
@@ -1133,7 +1133,7 @@ type GroupedResourceCount struct {
 	// The number of resources in the group.
 	//
 	// This member is required.
-	ResourceCount *int64
+	ResourceCount int64
 }
 
 // Organization config rule creation or deletion status in each member account.
@@ -1213,10 +1213,10 @@ type OrganizationAggregationSource struct {
 	RoleArn *string
 
 	// If true, aggregate existing AWS Config regions and future regions.
-	AllAwsRegions *bool
+	AllAwsRegions bool
 
 	// The source regions being aggregated.
-	AwsRegions []*string
+	AwsRegions []string
 }
 
 // An organization config rule that has information about config rules that AWS
@@ -1234,7 +1234,7 @@ type OrganizationConfigRule struct {
 	OrganizationConfigRuleName *string
 
 	// A comma-separated list of accounts excluded from organization config rule.
-	ExcludedAccounts []*string
+	ExcludedAccounts []string
 
 	// The timestamp of the last update.
 	LastUpdateTime *time.Time
@@ -1330,7 +1330,7 @@ type OrganizationConformancePack struct {
 	OrganizationConformancePackName *string
 
 	// A list of ConformancePackInputParameter objects.
-	ConformancePackInputParameters []*ConformancePackInputParameter
+	ConformancePackInputParameters []ConformancePackInputParameter
 
 	// Location of an Amazon S3 bucket where AWS Config can deliver evaluation results
 	// and conformance pack template that is used to create a pack.
@@ -1340,7 +1340,7 @@ type OrganizationConformancePack struct {
 	DeliveryS3KeyPrefix *string
 
 	// A comma-separated list of accounts excluded from organization conformance pack.
-	ExcludedAccounts []*string
+	ExcludedAccounts []string
 }
 
 // Organization conformance pack creation or deletion status in each member
@@ -1524,7 +1524,7 @@ type OrganizationCustomRuleMetadata struct {
 	ResourceIdScope *string
 
 	// The type of the AWS resource that was evaluated.
-	ResourceTypesScope []*string
+	ResourceTypesScope []string
 
 	// One part of a key-value pair that make up a tag. A key is a general label that
 	// acts like a category for more specific tag values.
@@ -1566,7 +1566,7 @@ type OrganizationManagedRuleMetadata struct {
 	ResourceIdScope *string
 
 	// The type of the AWS resource that was evaluated.
-	ResourceTypesScope []*string
+	ResourceTypesScope []string
 
 	// One part of a key-value pair that make up a tag. A key is a general label that
 	// acts like a category for more specific tag values.
@@ -1638,7 +1638,7 @@ type PendingAggregationRequest struct {
 type QueryInfo struct {
 
 	// Returns a FieldInfo object.
-	SelectFields []*FieldInfo
+	SelectFields []FieldInfo
 }
 
 // Specifies the types of AWS resource for which AWS Config records configuration
@@ -1670,7 +1670,7 @@ type RecordingGroup struct {
 	// support for a new type of regional resource, it starts recording resources of
 	// that type automatically. If you set this option to true, you cannot enumerate a
 	// list of resourceTypes.
-	AllSupported *bool
+	AllSupported bool
 
 	// Specifies whether AWS Config includes all supported types of global resources
 	// (for example, IAM resources) with the resources that it records. Before you can
@@ -1680,7 +1680,7 @@ type RecordingGroup struct {
 	// configuration details for any global resource are the same in all regions. To
 	// prevent duplicate configuration items, you should consider customizing AWS
 	// Config in only one region to record global resources.
-	IncludeGlobalResourceTypes *bool
+	IncludeGlobalResourceTypes bool
 
 	// A comma-separated list that specifies the types of AWS resources for which AWS
 	// Config records configuration changes (for example, AWS::EC2::Instance or
@@ -1733,7 +1733,7 @@ type RemediationConfiguration struct {
 	Arn *string
 
 	// The remediation is triggered automatically.
-	Automatic *bool
+	Automatic bool
 
 	// Name of the service that owns the service linked rule, if applicable.
 	CreatedByService *string
@@ -1749,7 +1749,7 @@ type RemediationConfiguration struct {
 	MaximumAutomaticAttempts *int32
 
 	// An object of the RemediationParameterValue.
-	Parameters map[string]*RemediationParameterValue
+	Parameters map[string]RemediationParameterValue
 
 	// The type of a resource.
 	ResourceType *string
@@ -1823,7 +1823,7 @@ type RemediationExecutionStatus struct {
 	State RemediationExecutionState
 
 	// Details of every step.
-	StepDetails []*RemediationExecutionStep
+	StepDetails []RemediationExecutionStep
 }
 
 // Name of the step from the SSM document.
@@ -1860,7 +1860,7 @@ type RemediationParameterValue struct {
 type ResourceCount struct {
 
 	// The number of resources.
-	Count *int64
+	Count int64
 
 	// The resource type (for example, "AWS::EC2::Instance").
 	ResourceType ResourceType
@@ -1950,7 +1950,7 @@ type RetentionConfiguration struct {
 	// applicable to the configuration item history.
 	//
 	// This member is required.
-	RetentionPeriodInDays *int32
+	RetentionPeriodInDays int32
 }
 
 // Defines which resources trigger an evaluation for an AWS Config rule. The scope
@@ -1969,7 +1969,7 @@ type Scope struct {
 	// The resource types of only those AWS resources that you want to trigger an
 	// evaluation for the rule. You can only specify one type if you also specify a
 	// resource ID for ComplianceResourceId.
-	ComplianceResourceTypes []*string
+	ComplianceResourceTypes []string
 
 	// The tag key that is applied to only those AWS resources that you want to trigger
 	// an evaluation for the rule.
@@ -2003,7 +2003,7 @@ type Source struct {
 
 	// Provides the source and type of the event that causes AWS Config to evaluate
 	// your AWS resources.
-	SourceDetails []*SourceDetail
+	SourceDetails []SourceDetail
 }
 
 // Provides the source and the message types that trigger AWS Config to evaluate
@@ -2076,7 +2076,7 @@ type StaticValue struct {
 	// A list of values. For example, the ARN of the assumed role.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // Status filter object to filter results based on specific member account ID or

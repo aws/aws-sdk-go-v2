@@ -87,7 +87,7 @@ type StartBuildInput struct {
 
 	// A set of environment variables that overrides, for this build only, the latest
 	// ones already defined in the build project.
-	EnvironmentVariablesOverride []*types.EnvironmentVariable
+	EnvironmentVariablesOverride []types.EnvironmentVariable
 
 	// The user-defined depth of history, with a minimum value of 0, that overrides,
 	// for this build only, any previous depth of history defined in the build project.
@@ -142,14 +142,14 @@ type StartBuildInput struct {
 	ReportBuildStatusOverride *bool
 
 	// An array of ProjectArtifacts objects.
-	SecondaryArtifactsOverride []*types.ProjectArtifacts
+	SecondaryArtifactsOverride []types.ProjectArtifacts
 
 	// An array of ProjectSource objects.
-	SecondarySourcesOverride []*types.ProjectSource
+	SecondarySourcesOverride []types.ProjectSource
 
 	// An array of ProjectSourceVersion objects that specify one or more versions of
 	// the project's secondary sources to be used for this build only.
-	SecondarySourcesVersionOverride []*types.ProjectSourceVersion
+	SecondarySourcesVersionOverride []types.ProjectSourceVersion
 
 	// The name of a service role for this build that overrides the one specified in
 	// the build project.

@@ -37,7 +37,7 @@ type DescribeCustomAvailabilityZonesInput struct {
 	CustomAvailabilityZoneId *string
 
 	// A filter that specifies one or more custom AZs to describe.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous
 	// DescribeCustomAvailabilityZones request. If this parameter is specified, the
@@ -55,7 +55,7 @@ type DescribeCustomAvailabilityZonesInput struct {
 type DescribeCustomAvailabilityZonesOutput struct {
 
 	// The list of CustomAvailabilityZone objects for the AWS account.
-	CustomAvailabilityZones []*types.CustomAvailabilityZone
+	CustomAvailabilityZones []types.CustomAvailabilityZone
 
 	// An optional pagination token provided by a previous
 	// DescribeCustomAvailabilityZones request. If this parameter is specified, the

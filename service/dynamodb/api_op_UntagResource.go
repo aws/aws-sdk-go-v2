@@ -42,7 +42,7 @@ type UntagResourceInput struct {
 	// list will be removed from the DynamoDB resource.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagResourceOutput struct {

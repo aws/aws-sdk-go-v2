@@ -110,7 +110,7 @@ type CreateBotVersionOutput struct {
 	IdleSessionTTLInSeconds *int32
 
 	// An array of Intent objects. For more information, see PutBot.
-	Intents []*types.Intent
+	Intents []types.Intent
 
 	// The date when the $LATEST version of this bot was updated.
 	LastUpdatedDate *time.Time

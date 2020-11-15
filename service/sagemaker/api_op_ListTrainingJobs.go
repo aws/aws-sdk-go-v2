@@ -73,7 +73,7 @@ type ListTrainingJobsOutput struct {
 	// An array of TrainingJobSummary objects, each listing a training job.
 	//
 	// This member is required.
-	TrainingJobSummaries []*types.TrainingJobSummary
+	TrainingJobSummaries []types.TrainingJobSummary
 
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
 	// the next set of training jobs, use it in the subsequent request.

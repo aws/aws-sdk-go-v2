@@ -44,7 +44,7 @@ type BotChannelAssociation struct {
 	BotAlias *string
 
 	// Provides information necessary to communicate with the messaging platform.
-	BotConfiguration map[string]*string
+	BotConfiguration map[string]string
 
 	// The name of the Amazon Lex bot to which this association is being made.
 	// Currently, Amazon Lex supports associations with Facebook and Slack, and Twilio.
@@ -170,7 +170,7 @@ type ConversationLogsRequest struct {
 	// conversation audio, or both.
 	//
 	// This member is required.
-	LogSettings []*LogSettingsRequest
+	LogSettings []LogSettingsRequest
 }
 
 // Contains information about conversation log settings.
@@ -181,7 +181,7 @@ type ConversationLogsResponse struct {
 	IamRoleArn *string
 
 	// The settings for your conversation logs. You can log text, audio, or both.
-	LogSettings []*LogSettingsResponse
+	LogSettings []LogSettingsResponse
 }
 
 // Each slot type can have a set of values. Each enumeration value represents a
@@ -202,7 +202,7 @@ type EnumerationValue struct {
 	Value *string
 
 	// Additional values related to the slot type value.
-	Synonyms []*string
+	Synonyms []string
 }
 
 // A prompt for additional activity after an intent is fulfilled. For example,
@@ -401,7 +401,7 @@ type Prompt struct {
 	// Language (SSML).
 	//
 	// This member is required.
-	Messages []*Message
+	Messages []Message
 
 	// A response card. Amazon Lex uses this prompt at runtime, in the PostText API
 	// response. It substitutes session attributes and slot values for placeholders in
@@ -459,7 +459,7 @@ type Slot struct {
 	// request for a slot value, you can provide those utterances to improve accuracy.
 	// This is optional. In most cases, Amazon Lex is capable of understanding user
 	// utterances.
-	SampleUtterances []*string
+	SampleUtterances []string
 
 	// The type of the slot, either a custom slot type that you defined or one of the
 	// built-in slot types.
@@ -532,7 +532,7 @@ type Statement struct {
 	// A collection of message objects.
 	//
 	// This member is required.
-	Messages []*Message
+	Messages []Message
 
 	// At runtime, if the client is using the PostText
 	// (http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html) API, Amazon
@@ -587,5 +587,5 @@ type UtteranceList struct {
 
 	// One or more UtteranceData objects that contain information about the utterances
 	// that have been made to a bot. The maximum number of object is 100.
-	Utterances []*UtteranceData
+	Utterances []UtteranceData
 }

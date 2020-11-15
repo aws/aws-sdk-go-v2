@@ -48,14 +48,14 @@ type DescribeImageAttributeInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 }
 
 // Describes an image attribute.
 type DescribeImageAttributeOutput struct {
 
 	// The block device mapping entries.
-	BlockDeviceMappings []*types.BlockDeviceMapping
+	BlockDeviceMappings []types.BlockDeviceMapping
 
 	// A description for the AMI.
 	Description *types.AttributeValue
@@ -67,10 +67,10 @@ type DescribeImageAttributeOutput struct {
 	KernelId *types.AttributeValue
 
 	// The launch permissions.
-	LaunchPermissions []*types.LaunchPermission
+	LaunchPermissions []types.LaunchPermission
 
 	// The product codes.
-	ProductCodes []*types.ProductCode
+	ProductCodes []types.ProductCode
 
 	// The RAM disk ID.
 	RamdiskId *types.AttributeValue

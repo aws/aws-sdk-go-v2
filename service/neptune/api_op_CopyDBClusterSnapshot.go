@@ -85,7 +85,7 @@ type CopyDBClusterSnapshotInput struct {
 	PreSignedUrl *string
 
 	// The tags to assign to the new DB cluster snapshot copy.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CopyDBClusterSnapshotOutput struct {

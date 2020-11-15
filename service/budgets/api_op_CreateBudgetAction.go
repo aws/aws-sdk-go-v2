@@ -75,7 +75,7 @@ type CreateBudgetActionInput struct {
 	// A list of subscribers.
 	//
 	// This member is required.
-	Subscribers []*types.Subscriber
+	Subscribers []types.Subscriber
 }
 
 type CreateBudgetActionOutput struct {

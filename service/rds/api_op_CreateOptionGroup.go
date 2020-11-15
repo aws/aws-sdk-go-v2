@@ -63,7 +63,7 @@ type CreateOptionGroupInput struct {
 	OptionGroupName *string
 
 	// Tags to assign to the option group.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateOptionGroupOutput struct {

@@ -127,7 +127,7 @@ type ValidationException struct {
 	Message *string
 
 	Reason    ValidationExceptionReason
-	FieldList []*ValidationExceptionField
+	FieldList []ValidationExceptionField
 }
 
 func (e *ValidationException) Error() string {

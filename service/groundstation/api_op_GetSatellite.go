@@ -39,10 +39,10 @@ type GetSatelliteInput struct {
 type GetSatelliteOutput struct {
 
 	// A list of ground stations to which the satellite is on-boarded.
-	GroundStations []*string
+	GroundStations []string
 
 	// NORAD satellite ID number.
-	NoradSatelliteID *int32
+	NoradSatelliteID int32
 
 	// ARN of a satellite.
 	SatelliteArn *string

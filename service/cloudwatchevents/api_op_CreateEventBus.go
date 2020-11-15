@@ -45,7 +45,7 @@ type CreateEventBusInput struct {
 	EventSourceName *string
 
 	// Tags to associate with the event bus.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateEventBusOutput struct {

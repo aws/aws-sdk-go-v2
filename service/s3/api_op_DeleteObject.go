@@ -79,7 +79,7 @@ type DeleteObjectInput struct {
 
 	// Indicates whether S3 Object Lock should bypass Governance-mode restrictions to
 	// process this operation.
-	BypassGovernanceRetention *bool
+	BypassGovernanceRetention bool
 
 	// The account id of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
@@ -106,7 +106,7 @@ type DeleteObjectOutput struct {
 
 	// Specifies whether the versioned object that was permanently deleted was (true)
 	// or was not (false) a delete marker.
-	DeleteMarker *bool
+	DeleteMarker bool
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.

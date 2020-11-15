@@ -37,7 +37,7 @@ type DeleteTrustInput struct {
 	TrustId *string
 
 	// Delete a conditional forwarder as part of a DeleteTrustRequest.
-	DeleteAssociatedConditionalForwarder *bool
+	DeleteAssociatedConditionalForwarder bool
 }
 
 // The result of a DeleteTrust request.

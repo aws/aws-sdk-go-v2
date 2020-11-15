@@ -76,10 +76,7 @@ func awsRestjson1_serializeOpHttpBindingsAllQueryStringTypesInput(v *AllQueryStr
 
 	if v.QueryBooleanList != nil {
 		for i := range v.QueryBooleanList {
-			if v.QueryBooleanList[i] == nil {
-				continue
-			}
-			encoder.AddQuery("BooleanList").Boolean(*v.QueryBooleanList[i])
+			encoder.AddQuery("BooleanList").Boolean(v.QueryBooleanList[i])
 		}
 	}
 
@@ -93,10 +90,7 @@ func awsRestjson1_serializeOpHttpBindingsAllQueryStringTypesInput(v *AllQueryStr
 
 	if v.QueryDoubleList != nil {
 		for i := range v.QueryDoubleList {
-			if v.QueryDoubleList[i] == nil {
-				continue
-			}
-			encoder.AddQuery("DoubleList").Double(*v.QueryDoubleList[i])
+			encoder.AddQuery("DoubleList").Double(v.QueryDoubleList[i])
 		}
 	}
 
@@ -120,19 +114,13 @@ func awsRestjson1_serializeOpHttpBindingsAllQueryStringTypesInput(v *AllQueryStr
 
 	if v.QueryIntegerList != nil {
 		for i := range v.QueryIntegerList {
-			if v.QueryIntegerList[i] == nil {
-				continue
-			}
-			encoder.AddQuery("IntegerList").Integer(*v.QueryIntegerList[i])
+			encoder.AddQuery("IntegerList").Integer(v.QueryIntegerList[i])
 		}
 	}
 
 	if v.QueryIntegerSet != nil {
 		for i := range v.QueryIntegerSet {
-			if v.QueryIntegerSet[i] == nil {
-				continue
-			}
-			encoder.AddQuery("IntegerSet").Integer(*v.QueryIntegerSet[i])
+			encoder.AddQuery("IntegerSet").Integer(v.QueryIntegerSet[i])
 		}
 	}
 
@@ -150,19 +138,13 @@ func awsRestjson1_serializeOpHttpBindingsAllQueryStringTypesInput(v *AllQueryStr
 
 	if v.QueryStringList != nil {
 		for i := range v.QueryStringList {
-			if v.QueryStringList[i] == nil {
-				continue
-			}
-			encoder.AddQuery("StringList").String(*v.QueryStringList[i])
+			encoder.AddQuery("StringList").String(v.QueryStringList[i])
 		}
 	}
 
 	if v.QueryStringSet != nil {
 		for i := range v.QueryStringSet {
-			if v.QueryStringSet[i] == nil {
-				continue
-			}
-			encoder.AddQuery("StringSet").String(*v.QueryStringSet[i])
+			encoder.AddQuery("StringSet").String(v.QueryStringSet[i])
 		}
 	}
 
@@ -172,10 +154,7 @@ func awsRestjson1_serializeOpHttpBindingsAllQueryStringTypesInput(v *AllQueryStr
 
 	if v.QueryTimestampList != nil {
 		for i := range v.QueryTimestampList {
-			if v.QueryTimestampList[i] == nil {
-				continue
-			}
-			encoder.AddQuery("TimestampList").String(smithytime.FormatDateTime(*v.QueryTimestampList[i]))
+			encoder.AddQuery("TimestampList").String(smithytime.FormatDateTime(v.QueryTimestampList[i]))
 		}
 	}
 
@@ -295,13 +274,10 @@ func awsRestjson1_serializeOpHttpBindingsConstantQueryStringInput(v *ConstantQue
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Hello == nil {
+	if v.Hello == nil || len(*v.Hello) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member hello must not be empty")}
 	}
 	if v.Hello != nil {
-		if len(*v.Hello) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member hello must not be empty")}
-		}
 		if err := encoder.SetURI("hello").String(*v.Hello); err != nil {
 			return err
 		}
@@ -472,11 +448,9 @@ func awsRestjson1_serializeOpHttpBindingsHttpPayloadTraitsInput(v *HttpPayloadTr
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Foo != nil {
+	if v.Foo != nil && len(*v.Foo) > 0 {
 		locationName := "X-Foo"
-		if len(*v.Foo) > 0 {
-			encoder.SetHeader(locationName).String(*v.Foo)
-		}
+		encoder.SetHeader(locationName).String(*v.Foo)
 	}
 
 	return nil
@@ -544,11 +518,9 @@ func awsRestjson1_serializeOpHttpBindingsHttpPayloadTraitsWithMediaTypeInput(v *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Foo != nil {
+	if v.Foo != nil && len(*v.Foo) > 0 {
 		locationName := "X-Foo"
-		if len(*v.Foo) > 0 {
-			encoder.SetHeader(locationName).String(*v.Foo)
-		}
+		encoder.SetHeader(locationName).String(*v.Foo)
 	}
 
 	return nil
@@ -670,18 +642,16 @@ func awsRestjson1_serializeOpHttpBindingsHttpPrefixHeadersInput(v *HttpPrefixHea
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Foo != nil {
+	if v.Foo != nil && len(*v.Foo) > 0 {
 		locationName := "X-Foo"
-		if len(*v.Foo) > 0 {
-			encoder.SetHeader(locationName).String(*v.Foo)
-		}
+		encoder.SetHeader(locationName).String(*v.Foo)
 	}
 
 	if v.FooMap != nil {
 		hv := encoder.Headers("X-Foo-")
 		for mapKey, mapVal := range v.FooMap {
-			if len(*mapVal) > 0 {
-				hv.SetHeader(http.CanonicalHeaderKey(mapKey)).String(*mapVal)
+			if len(mapVal) > 0 {
+				hv.SetHeader(http.CanonicalHeaderKey(mapKey)).String(mapVal)
 			}
 		}
 	}
@@ -790,25 +760,19 @@ func awsRestjson1_serializeOpHttpBindingsHttpRequestWithGreedyLabelInPathInput(v
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Baz == nil {
+	if v.Baz == nil || len(*v.Baz) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member baz must not be empty")}
 	}
 	if v.Baz != nil {
-		if len(*v.Baz) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member baz must not be empty")}
-		}
 		if err := encoder.SetURI("baz").String(*v.Baz); err != nil {
 			return err
 		}
 	}
 
-	if v.Foo == nil {
+	if v.Foo == nil || len(*v.Foo) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member foo must not be empty")}
 	}
 	if v.Foo != nil {
-		if len(*v.Foo) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member foo must not be empty")}
-		}
 		if err := encoder.SetURI("foo").String(*v.Foo); err != nil {
 			return err
 		}
@@ -922,13 +886,10 @@ func awsRestjson1_serializeOpHttpBindingsHttpRequestWithLabelsInput(v *HttpReque
 		}
 	}
 
-	if v.String_ == nil {
+	if v.String_ == nil || len(*v.String_) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member string must not be empty")}
 	}
 	if v.String_ != nil {
-		if len(*v.String_) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member string must not be empty")}
-		}
 		if err := encoder.SetURI("string").String(*v.String_); err != nil {
 			return err
 		}
@@ -1362,8 +1323,8 @@ func awsRestjson1_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *Input
 	if v.HeaderBooleanList != nil {
 		locationName := "X-Booleanlist"
 		for i := range v.HeaderBooleanList {
-			if v.HeaderBooleanList[i] != nil {
-				encoder.AddHeader(locationName).Boolean(*v.HeaderBooleanList[i])
+			{
+				encoder.AddHeader(locationName).Boolean(v.HeaderBooleanList[i])
 			}
 		}
 	}
@@ -1410,8 +1371,8 @@ func awsRestjson1_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *Input
 	if v.HeaderIntegerList != nil {
 		locationName := "X-Integerlist"
 		for i := range v.HeaderIntegerList {
-			if v.HeaderIntegerList[i] != nil {
-				encoder.AddHeader(locationName).Integer(*v.HeaderIntegerList[i])
+			{
+				encoder.AddHeader(locationName).Integer(v.HeaderIntegerList[i])
 			}
 		}
 	}
@@ -1426,18 +1387,16 @@ func awsRestjson1_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *Input
 		encoder.SetHeader(locationName).Short(*v.HeaderShort)
 	}
 
-	if v.HeaderString != nil {
+	if v.HeaderString != nil && len(*v.HeaderString) > 0 {
 		locationName := "X-String"
-		if len(*v.HeaderString) > 0 {
-			encoder.SetHeader(locationName).String(*v.HeaderString)
-		}
+		encoder.SetHeader(locationName).String(*v.HeaderString)
 	}
 
 	if v.HeaderStringList != nil {
 		locationName := "X-Stringlist"
 		for i := range v.HeaderStringList {
-			if v.HeaderStringList[i] != nil && len(*v.HeaderStringList[i]) > 0 {
-				encoder.AddHeader(locationName).String(*v.HeaderStringList[i])
+			if len(v.HeaderStringList[i]) > 0 {
+				encoder.AddHeader(locationName).String(v.HeaderStringList[i])
 			}
 		}
 	}
@@ -1445,8 +1404,8 @@ func awsRestjson1_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *Input
 	if v.HeaderStringSet != nil {
 		locationName := "X-Stringset"
 		for i := range v.HeaderStringSet {
-			if v.HeaderStringSet[i] != nil && len(*v.HeaderStringSet[i]) > 0 {
-				encoder.AddHeader(locationName).String(*v.HeaderStringSet[i])
+			if len(v.HeaderStringSet[i]) > 0 {
+				encoder.AddHeader(locationName).String(v.HeaderStringSet[i])
 			}
 		}
 	}
@@ -1454,8 +1413,8 @@ func awsRestjson1_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *Input
 	if v.HeaderTimestampList != nil {
 		locationName := "X-Timestamplist"
 		for i := range v.HeaderTimestampList {
-			if v.HeaderTimestampList[i] != nil {
-				encoder.AddHeader(locationName).String(smithytime.FormatHTTPDate(*v.HeaderTimestampList[i]))
+			{
+				encoder.AddHeader(locationName).String(smithytime.FormatHTTPDate(v.HeaderTimestampList[i]))
 			}
 		}
 	}
@@ -2058,12 +2017,10 @@ func awsRestjson1_serializeOpHttpBindingsMediaTypeHeaderInput(v *MediaTypeHeader
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Json != nil {
+	if v.Json != nil && len(*v.Json) > 0 {
 		locationName := "X-Json"
-		if len(*v.Json) > 0 {
-			encoded := ptr.String(base64.StdEncoding.EncodeToString([]byte(*v.Json)))
-			encoder.SetHeader(locationName).String(*encoded)
-		}
+		encoded := ptr.String(base64.StdEncoding.EncodeToString([]byte(*v.Json)))
+		encoder.SetHeader(locationName).String(*encoded)
 	}
 
 	return nil
@@ -2220,25 +2177,21 @@ func awsRestjson1_serializeOpHttpBindingsNullAndEmptyHeadersClientInput(v *NullA
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.A != nil {
+	if v.A != nil && len(*v.A) > 0 {
 		locationName := "X-A"
-		if len(*v.A) > 0 {
-			encoder.SetHeader(locationName).String(*v.A)
-		}
+		encoder.SetHeader(locationName).String(*v.A)
 	}
 
-	if v.B != nil {
+	if v.B != nil && len(*v.B) > 0 {
 		locationName := "X-B"
-		if len(*v.B) > 0 {
-			encoder.SetHeader(locationName).String(*v.B)
-		}
+		encoder.SetHeader(locationName).String(*v.B)
 	}
 
 	if v.C != nil {
 		locationName := "X-C"
 		for i := range v.C {
-			if v.C[i] != nil && len(*v.C[i]) > 0 {
-				encoder.AddHeader(locationName).String(*v.C[i])
+			if len(v.C[i]) > 0 {
+				encoder.AddHeader(locationName).String(v.C[i])
 			}
 		}
 	}
@@ -2297,25 +2250,21 @@ func awsRestjson1_serializeOpHttpBindingsNullAndEmptyHeadersServerInput(v *NullA
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.A != nil {
+	if v.A != nil && len(*v.A) > 0 {
 		locationName := "X-A"
-		if len(*v.A) > 0 {
-			encoder.SetHeader(locationName).String(*v.A)
-		}
+		encoder.SetHeader(locationName).String(*v.A)
 	}
 
-	if v.B != nil {
+	if v.B != nil && len(*v.B) > 0 {
 		locationName := "X-B"
-		if len(*v.B) > 0 {
-			encoder.SetHeader(locationName).String(*v.B)
-		}
+		encoder.SetHeader(locationName).String(*v.B)
 	}
 
 	if v.C != nil {
 		locationName := "X-C"
 		for i := range v.C {
-			if v.C[i] != nil && len(*v.C[i]) > 0 {
-				encoder.AddHeader(locationName).String(*v.C[i])
+			if len(v.C[i]) > 0 {
+				encoder.AddHeader(locationName).String(v.C[i])
 			}
 		}
 	}
@@ -2580,11 +2529,9 @@ func awsRestjson1_serializeOpHttpBindingsSimpleScalarPropertiesInput(v *SimpleSc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Foo != nil {
+	if v.Foo != nil && len(*v.Foo) > 0 {
 		locationName := "X-Foo"
-		if len(*v.Foo) > 0 {
-			encoder.SetHeader(locationName).String(*v.Foo)
-		}
+		encoder.SetHeader(locationName).String(*v.Foo)
 	}
 
 	return nil
@@ -2704,11 +2651,9 @@ func awsRestjson1_serializeOpHttpBindingsStreamingTraitsInput(v *StreamingTraits
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Foo != nil {
+	if v.Foo != nil && len(*v.Foo) > 0 {
 		locationName := "X-Foo"
-		if len(*v.Foo) > 0 {
-			encoder.SetHeader(locationName).String(*v.Foo)
-		}
+		encoder.SetHeader(locationName).String(*v.Foo)
 	}
 
 	return nil
@@ -2776,11 +2721,9 @@ func awsRestjson1_serializeOpHttpBindingsStreamingTraitsRequireLengthInput(v *St
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Foo != nil {
+	if v.Foo != nil && len(*v.Foo) > 0 {
 		locationName := "X-Foo"
-		if len(*v.Foo) > 0 {
-			encoder.SetHeader(locationName).String(*v.Foo)
-		}
+		encoder.SetHeader(locationName).String(*v.Foo)
 	}
 
 	return nil
@@ -2848,11 +2791,9 @@ func awsRestjson1_serializeOpHttpBindingsStreamingTraitsWithMediaTypeInput(v *St
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Foo != nil {
+	if v.Foo != nil && len(*v.Foo) > 0 {
 		locationName := "X-Foo"
-		if len(*v.Foo) > 0 {
-			encoder.SetHeader(locationName).String(*v.Foo)
-		}
+		encoder.SetHeader(locationName).String(*v.Foo)
 	}
 
 	return nil
@@ -2952,17 +2893,14 @@ func awsRestjson1_serializeDocumentDocument(v smithy.Document, value smithyjson.
 	return nil
 }
 
-func awsRestjson1_serializeDocumentJsonMapsInputOutputMap(v map[string]*types.GreetingStruct, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentJsonMapsInputOutputMap(v map[string]types.GreetingStruct, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentGreetingStruct(v[key], om); err != nil {
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentGreetingStruct(&mapVar, om); err != nil {
 			return err
 		}
 	}
@@ -3008,7 +2946,7 @@ func awsRestjson1_serializeDocumentMyUnion(v types.MyUnion, value smithyjson.Val
 
 	case *types.MyUnionMemberStructureValue:
 		av := object.Key("structureValue")
-		if err := awsRestjson1_serializeDocumentGreetingStruct(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentGreetingStruct(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -3078,17 +3016,13 @@ func awsRestjson1_serializeDocumentRecursiveShapesInputOutputNested2(v *types.Re
 	return nil
 }
 
-func awsRestjson1_serializeDocumentStructureList(v []*types.StructureListMember, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentStructureList(v []types.StructureListMember, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentStructureListMember(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentStructureListMember(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3112,17 +3046,13 @@ func awsRestjson1_serializeDocumentStructureListMember(v *types.StructureListMem
 	return nil
 }
 
-func awsRestjson1_serializeDocumentBooleanList(v []*bool, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentBooleanList(v []bool, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.Boolean(*v[i])
+		av.Boolean(v[i])
 	}
 	return nil
 }
@@ -3172,29 +3102,24 @@ func awsRestjson1_serializeDocumentGreetingStruct(v *types.GreetingStruct, value
 	return nil
 }
 
-func awsRestjson1_serializeDocumentIntegerList(v []*int32, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentIntegerList(v []int32, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.Integer(*v[i])
+		av.Integer(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentNestedStringList(v [][]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentNestedStringList(v [][]string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
 		if vv := v[i]; vv == nil {
-			av.Null()
 			continue
 		}
 		if err := awsRestjson1_serializeDocumentStringList(v[i], av); err != nil {
@@ -3204,62 +3129,46 @@ func awsRestjson1_serializeDocumentNestedStringList(v [][]*string, value smithyj
 	return nil
 }
 
-func awsRestjson1_serializeDocumentStringList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentStringList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentStringMap(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentStringMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentStringSet(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentStringSet(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTimestampList(v []*time.Time, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTimestampList(v []time.Time, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.Double(smithytime.FormatEpochSeconds(*v[i]))
+		av.Double(smithytime.FormatEpochSeconds(v[i]))
 	}
 	return nil
 }

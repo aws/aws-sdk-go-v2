@@ -41,17 +41,17 @@ type DescribeDBLogFilesInput struct {
 
 	// Filters the available log files for files written since the specified date, in
 	// POSIX timestamp format with milliseconds.
-	FileLastWritten *int64
+	FileLastWritten int64
 
 	// Filters the available log files for files larger than the specified size.
-	FileSize *int64
+	FileSize int64
 
 	// Filters the available log files for log file names that contain the specified
 	// string.
 	FilenameContains *string
 
 	// This parameter isn't currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The pagination token provided in the previous request. If this parameter is
 	// specified the response includes only records beyond the marker, up to
@@ -68,7 +68,7 @@ type DescribeDBLogFilesInput struct {
 type DescribeDBLogFilesOutput struct {
 
 	// The DB log files returned.
-	DescribeDBLogFiles []*types.DescribeDBLogFilesDetails
+	DescribeDBLogFiles []types.DescribeDBLogFilesDetails
 
 	// A pagination token that can be used in a later DescribeDBLogFiles request.
 	Marker *string

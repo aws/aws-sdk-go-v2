@@ -44,7 +44,7 @@ type CreateVocabularyInput struct {
 	VocabularyName *string
 
 	// An array of strings that contains the vocabulary entries.
-	Phrases []*string
+	Phrases []string
 
 	// The S3 location of the text file that contains the definition of the custom
 	// vocabulary. The URI must be in the same region as the API endpoint that you are

@@ -49,7 +49,7 @@ type DescribeTrustsInput struct {
 	// information. If this member is null, all trust relationships that belong to the
 	// current account are returned. An empty list results in an
 	// InvalidParameterException being thrown.
-	TrustIds []*string
+	TrustIds []string
 }
 
 // The result of a DescribeTrust request.
@@ -64,7 +64,7 @@ type DescribeTrustsOutput struct {
 	// contains less than the number of items specified in the Limit member of the
 	// request. This occurs if there are less than the requested number of items left
 	// to retrieve, or if the limitations of the operation have been exceeded.
-	Trusts []*types.Trust
+	Trusts []types.Trust
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -35,7 +35,7 @@ type DescribeElasticsearchDomainsInput struct {
 	// The Elasticsearch domains for which you want information.
 	//
 	// This member is required.
-	DomainNames []*string
+	DomainNames []string
 }
 
 // The result of a DescribeElasticsearchDomains request. Contains the status of the
@@ -45,7 +45,7 @@ type DescribeElasticsearchDomainsOutput struct {
 	// The status of the domains requested in the DescribeElasticsearchDomains request.
 	//
 	// This member is required.
-	DomainStatusList []*types.ElasticsearchDomainStatus
+	DomainStatusList []types.ElasticsearchDomainStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -35,7 +35,7 @@ type DescribeJobDefinitionsInput struct {
 
 	// A list of up to 100 job definition names or full Amazon Resource Name (ARN)
 	// entries.
-	JobDefinitions []*string
+	JobDefinitions []string
 
 	// The maximum number of results returned by DescribeJobDefinitions in paginated
 	// output. When this parameter is used, DescribeJobDefinitions only returns
@@ -44,7 +44,7 @@ type DescribeJobDefinitionsInput struct {
 	// DescribeJobDefinitions request with the returned nextToken value. This value can
 	// be between 1 and 100. If this parameter is not used, then DescribeJobDefinitions
 	// returns up to 100 results and a nextToken value if applicable.
-	MaxResults *int32
+	MaxResults int32
 
 	// The nextToken value returned from a previous paginated DescribeJobDefinitions
 	// request where maxResults was used and the results exceeded the value of that
@@ -62,7 +62,7 @@ type DescribeJobDefinitionsInput struct {
 type DescribeJobDefinitionsOutput struct {
 
 	// The list of job definitions.
-	JobDefinitions []*types.JobDefinition
+	JobDefinitions []types.JobDefinition
 
 	// The nextToken value to include in a future DescribeJobDefinitions request. When
 	// the results of a DescribeJobDefinitions request exceed maxResults, this value

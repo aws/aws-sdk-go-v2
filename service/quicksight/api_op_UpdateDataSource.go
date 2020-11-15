@@ -74,7 +74,7 @@ type UpdateDataSourceOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// The update status of the data source's last update.
 	UpdateStatus types.ResourceStatus

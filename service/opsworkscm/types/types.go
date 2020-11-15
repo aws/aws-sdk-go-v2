@@ -87,7 +87,7 @@ type Backup struct {
 
 	// The security group IDs that are obtained from the server when the backup is
 	// created.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The name of the server from which the backup was made.
 	ServerName *string
@@ -103,7 +103,7 @@ type Backup struct {
 	StatusDescription *string
 
 	// The subnet IDs that are obtained from the server when the backup is created.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The version of AWS OpsWorks CM-specific tools that is obtained from the server
 	// when the backup is created.
@@ -183,7 +183,7 @@ type Server struct {
 	//
 	// * PUPPET_ADMIN_PASSWORD: An administrator password that you can use
 	// to sign in to the Puppet Enterprise console after the server is online.
-	EngineAttributes []*EngineAttribute
+	EngineAttributes []EngineAttribute
 
 	// The engine model of the server. Valid values in this release include Monolithic
 	// for Puppet and Single for Chef.
@@ -214,7 +214,7 @@ type Server struct {
 
 	// The security group IDs for the server, as specified in the CloudFormation stack.
 	// These might not be the same security groups that are shown in the EC2 console.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The ARN of the server.
 	ServerArn *string
@@ -236,7 +236,7 @@ type Server struct {
 	StatusReason *string
 
 	// The subnet IDs specified in a CreateServer request.
-	SubnetIds []*string
+	SubnetIds []string
 }
 
 // An event that is related to the server, such as the start of maintenance or

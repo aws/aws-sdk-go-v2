@@ -64,14 +64,14 @@ type ListRoleTagsOutput struct {
 	// the response contains an empty list.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can use the Marker request parameter to make a subsequent
 	// pagination request that retrieves more items. Note that IAM might return fewer
 	// than the MaxItems number of results even when more results are available. Check
 	// IsTruncated after every call to ensure that you receive all of your results.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.

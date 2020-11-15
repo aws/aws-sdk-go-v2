@@ -364,13 +364,13 @@ func validateInventoryFilter(v *types.InventoryFilter) error {
 	}
 }
 
-func validateInventoryFilterList(v []*types.InventoryFilter) error {
+func validateInventoryFilterList(v []types.InventoryFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InventoryFilterList"}
 	for i := range v {
-		if err := validateInventoryFilter(v[i]); err != nil {
+		if err := validateInventoryFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -396,13 +396,13 @@ func validateLicenseSpecification(v *types.LicenseSpecification) error {
 	}
 }
 
-func validateLicenseSpecifications(v []*types.LicenseSpecification) error {
+func validateLicenseSpecifications(v []types.LicenseSpecification) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LicenseSpecifications"}
 	for i := range v {
-		if err := validateLicenseSpecification(v[i]); err != nil {
+		if err := validateLicenseSpecification(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -418,9 +418,6 @@ func validateOrganizationConfiguration(v *types.OrganizationConfiguration) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OrganizationConfiguration"}
-	if v.EnableIntegration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EnableIntegration"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -471,13 +468,13 @@ func validateProductInformationFilter(v *types.ProductInformationFilter) error {
 	}
 }
 
-func validateProductInformationFilterList(v []*types.ProductInformationFilter) error {
+func validateProductInformationFilterList(v []types.ProductInformationFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProductInformationFilterList"}
 	for i := range v {
-		if err := validateProductInformationFilter(v[i]); err != nil {
+		if err := validateProductInformationFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -488,13 +485,13 @@ func validateProductInformationFilterList(v []*types.ProductInformationFilter) e
 	}
 }
 
-func validateProductInformationList(v []*types.ProductInformation) error {
+func validateProductInformationList(v []types.ProductInformation) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProductInformationList"}
 	for i := range v {
-		if err := validateProductInformation(v[i]); err != nil {
+		if err := validateProductInformation(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

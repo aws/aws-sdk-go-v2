@@ -35,7 +35,7 @@ type DeleteAttributesInput struct {
 	// you must also specify the target type.
 	//
 	// This member is required.
-	Attributes []*types.Attribute
+	Attributes []types.Attribute
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster that contains
 	// the resource to delete attributes. If you do not specify a cluster, the default
@@ -46,7 +46,7 @@ type DeleteAttributesInput struct {
 type DeleteAttributesOutput struct {
 
 	// A list of attribute objects that were successfully deleted from your resource.
-	Attributes []*types.Attribute
+	Attributes []types.Attribute
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

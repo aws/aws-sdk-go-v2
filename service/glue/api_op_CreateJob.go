@@ -50,7 +50,7 @@ type CreateJobInput struct {
 	// that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
 	// information, see the AWS Glue pricing page
 	// (https://aws.amazon.com/glue/pricing/).
-	AllocatedCapacity *int32
+	AllocatedCapacity int32
 
 	// The connections used for this job.
 	Connections *types.ConnectionsList
@@ -64,7 +64,7 @@ type CreateJobInput struct {
 	// Glue consumes to set up your job, see the Special Parameters Used by AWS Glue
 	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
-	DefaultArguments map[string]*string
+	DefaultArguments map[string]string
 
 	// Description of the job being defined.
 	Description *string
@@ -104,10 +104,10 @@ type CreateJobInput struct {
 	MaxCapacity *float64
 
 	// The maximum number of times to retry this job if it fails.
-	MaxRetries *int32
+	MaxRetries int32
 
 	// Non-overridable arguments for this job, specified as name-value pairs.
-	NonOverridableArguments map[string]*string
+	NonOverridableArguments map[string]string
 
 	// Specifies configuration properties of a job notification.
 	NotificationProperty *types.NotificationProperty
@@ -124,7 +124,7 @@ type CreateJobInput struct {
 	// more information about tags in AWS Glue, see AWS Tags in AWS Glue
 	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the developer
 	// guide.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The job timeout in minutes. This is the maximum time that a job run can consume
 	// resources before it is terminated and enters TIMEOUT status. The default is

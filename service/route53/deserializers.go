@@ -1706,7 +1706,7 @@ func awsRestxml_deserializeOpDocumentCreateVPCAssociationAuthorizationOutput(v *
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.HostedZoneId = &xtv
+				sv.HostedZoneId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("VPC", t.Name.Local):
@@ -2596,7 +2596,7 @@ func awsRestxml_deserializeOpDocumentGetAccountLimitOutput(v **GetAccountLimitOu
 				if err != nil {
 					return err
 				}
-				sv.Count = &i64
+				sv.Count = i64
 			}
 
 		case strings.EqualFold("Limit", t.Name.Local):
@@ -3284,7 +3284,7 @@ func awsRestxml_deserializeOpDocumentGetHealthCheckCountOutput(v **GetHealthChec
 				if err != nil {
 					return err
 				}
-				sv.HealthCheckCount = &i64
+				sv.HealthCheckCount = ptr.Int64(i64)
 			}
 
 		default:
@@ -3848,7 +3848,7 @@ func awsRestxml_deserializeOpDocumentGetHostedZoneCountOutput(v **GetHostedZoneC
 				if err != nil {
 					return err
 				}
-				sv.HostedZoneCount = &i64
+				sv.HostedZoneCount = ptr.Int64(i64)
 			}
 
 		default:
@@ -3998,7 +3998,7 @@ func awsRestxml_deserializeOpDocumentGetHostedZoneLimitOutput(v **GetHostedZoneL
 				if err != nil {
 					return err
 				}
-				sv.Count = &i64
+				sv.Count = i64
 			}
 
 		case strings.EqualFold("Limit", t.Name.Local):
@@ -4426,7 +4426,7 @@ func awsRestxml_deserializeOpDocumentGetReusableDelegationSetLimitOutput(v **Get
 				if err != nil {
 					return err
 				}
-				sv.Count = &i64
+				sv.Count = i64
 			}
 
 		case strings.EqualFold("Limit", t.Name.Local):
@@ -4994,7 +4994,7 @@ func awsRestxml_deserializeOpDocumentListGeoLocationsOutput(v **ListGeoLocations
 				if err != nil {
 					return fmt.Errorf("expected PageTruncated to be of type *bool, got %T instead", val)
 				}
-				sv.IsTruncated = &xtv
+				sv.IsTruncated = xtv
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
@@ -5010,7 +5010,7 @@ func awsRestxml_deserializeOpDocumentListGeoLocationsOutput(v **ListGeoLocations
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MaxItems = &xtv
+				sv.MaxItems = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("NextContinentCode", t.Name.Local):
@@ -5026,7 +5026,7 @@ func awsRestxml_deserializeOpDocumentListGeoLocationsOutput(v **ListGeoLocations
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.NextContinentCode = &xtv
+				sv.NextContinentCode = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("NextCountryCode", t.Name.Local):
@@ -5042,7 +5042,7 @@ func awsRestxml_deserializeOpDocumentListGeoLocationsOutput(v **ListGeoLocations
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.NextCountryCode = &xtv
+				sv.NextCountryCode = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("NextSubdivisionCode", t.Name.Local):
@@ -5058,7 +5058,7 @@ func awsRestxml_deserializeOpDocumentListGeoLocationsOutput(v **ListGeoLocations
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.NextSubdivisionCode = &xtv
+				sv.NextSubdivisionCode = ptr.String(xtv)
 			}
 
 		default:
@@ -5210,7 +5210,7 @@ func awsRestxml_deserializeOpDocumentListHealthChecksOutput(v **ListHealthChecks
 				if err != nil {
 					return fmt.Errorf("expected PageTruncated to be of type *bool, got %T instead", val)
 				}
-				sv.IsTruncated = &xtv
+				sv.IsTruncated = xtv
 			}
 
 		case strings.EqualFold("Marker", t.Name.Local):
@@ -5226,7 +5226,7 @@ func awsRestxml_deserializeOpDocumentListHealthChecksOutput(v **ListHealthChecks
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Marker = &xtv
+				sv.Marker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
@@ -5242,7 +5242,7 @@ func awsRestxml_deserializeOpDocumentListHealthChecksOutput(v **ListHealthChecks
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MaxItems = &xtv
+				sv.MaxItems = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("NextMarker", t.Name.Local):
@@ -5258,7 +5258,7 @@ func awsRestxml_deserializeOpDocumentListHealthChecksOutput(v **ListHealthChecks
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.NextMarker = &xtv
+				sv.NextMarker = ptr.String(xtv)
 			}
 
 		default:
@@ -5413,7 +5413,7 @@ func awsRestxml_deserializeOpDocumentListHostedZonesOutput(v **ListHostedZonesOu
 				if err != nil {
 					return fmt.Errorf("expected PageTruncated to be of type *bool, got %T instead", val)
 				}
-				sv.IsTruncated = &xtv
+				sv.IsTruncated = xtv
 			}
 
 		case strings.EqualFold("Marker", t.Name.Local):
@@ -5429,7 +5429,7 @@ func awsRestxml_deserializeOpDocumentListHostedZonesOutput(v **ListHostedZonesOu
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Marker = &xtv
+				sv.Marker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
@@ -5445,7 +5445,7 @@ func awsRestxml_deserializeOpDocumentListHostedZonesOutput(v **ListHostedZonesOu
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MaxItems = &xtv
+				sv.MaxItems = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("NextMarker", t.Name.Local):
@@ -5461,7 +5461,7 @@ func awsRestxml_deserializeOpDocumentListHostedZonesOutput(v **ListHostedZonesOu
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.NextMarker = &xtv
+				sv.NextMarker = ptr.String(xtv)
 			}
 
 		default:
@@ -5607,7 +5607,7 @@ func awsRestxml_deserializeOpDocumentListHostedZonesByNameOutput(v **ListHostedZ
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.DNSName = &xtv
+				sv.DNSName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("HostedZoneId", t.Name.Local):
@@ -5623,7 +5623,7 @@ func awsRestxml_deserializeOpDocumentListHostedZonesByNameOutput(v **ListHostedZ
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.HostedZoneId = &xtv
+				sv.HostedZoneId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("HostedZones", t.Name.Local):
@@ -5645,7 +5645,7 @@ func awsRestxml_deserializeOpDocumentListHostedZonesByNameOutput(v **ListHostedZ
 				if err != nil {
 					return fmt.Errorf("expected PageTruncated to be of type *bool, got %T instead", val)
 				}
-				sv.IsTruncated = &xtv
+				sv.IsTruncated = xtv
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
@@ -5661,7 +5661,7 @@ func awsRestxml_deserializeOpDocumentListHostedZonesByNameOutput(v **ListHostedZ
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MaxItems = &xtv
+				sv.MaxItems = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("NextDNSName", t.Name.Local):
@@ -5677,7 +5677,7 @@ func awsRestxml_deserializeOpDocumentListHostedZonesByNameOutput(v **ListHostedZ
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.NextDNSName = &xtv
+				sv.NextDNSName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("NextHostedZoneId", t.Name.Local):
@@ -5693,7 +5693,7 @@ func awsRestxml_deserializeOpDocumentListHostedZonesByNameOutput(v **ListHostedZ
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.NextHostedZoneId = &xtv
+				sv.NextHostedZoneId = ptr.String(xtv)
 			}
 
 		default:
@@ -5845,7 +5845,7 @@ func awsRestxml_deserializeOpDocumentListHostedZonesByVPCOutput(v **ListHostedZo
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MaxItems = &xtv
+				sv.MaxItems = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("NextToken", t.Name.Local):
@@ -5861,7 +5861,7 @@ func awsRestxml_deserializeOpDocumentListHostedZonesByVPCOutput(v **ListHostedZo
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.NextToken = &xtv
+				sv.NextToken = ptr.String(xtv)
 			}
 
 		default:
@@ -6010,7 +6010,7 @@ func awsRestxml_deserializeOpDocumentListQueryLoggingConfigsOutput(v **ListQuery
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.NextToken = &xtv
+				sv.NextToken = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("QueryLoggingConfigs", t.Name.Local):
@@ -6162,7 +6162,7 @@ func awsRestxml_deserializeOpDocumentListResourceRecordSetsOutput(v **ListResour
 				if err != nil {
 					return fmt.Errorf("expected PageTruncated to be of type *bool, got %T instead", val)
 				}
-				sv.IsTruncated = &xtv
+				sv.IsTruncated = xtv
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
@@ -6178,7 +6178,7 @@ func awsRestxml_deserializeOpDocumentListResourceRecordSetsOutput(v **ListResour
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MaxItems = &xtv
+				sv.MaxItems = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("NextRecordIdentifier", t.Name.Local):
@@ -6194,7 +6194,7 @@ func awsRestxml_deserializeOpDocumentListResourceRecordSetsOutput(v **ListResour
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.NextRecordIdentifier = &xtv
+				sv.NextRecordIdentifier = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("NextRecordName", t.Name.Local):
@@ -6210,7 +6210,7 @@ func awsRestxml_deserializeOpDocumentListResourceRecordSetsOutput(v **ListResour
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.NextRecordName = &xtv
+				sv.NextRecordName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("NextRecordType", t.Name.Local):
@@ -6378,7 +6378,7 @@ func awsRestxml_deserializeOpDocumentListReusableDelegationSetsOutput(v **ListRe
 				if err != nil {
 					return fmt.Errorf("expected PageTruncated to be of type *bool, got %T instead", val)
 				}
-				sv.IsTruncated = &xtv
+				sv.IsTruncated = xtv
 			}
 
 		case strings.EqualFold("Marker", t.Name.Local):
@@ -6394,7 +6394,7 @@ func awsRestxml_deserializeOpDocumentListReusableDelegationSetsOutput(v **ListRe
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Marker = &xtv
+				sv.Marker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
@@ -6410,7 +6410,7 @@ func awsRestxml_deserializeOpDocumentListReusableDelegationSetsOutput(v **ListRe
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MaxItems = &xtv
+				sv.MaxItems = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("NextMarker", t.Name.Local):
@@ -6426,7 +6426,7 @@ func awsRestxml_deserializeOpDocumentListReusableDelegationSetsOutput(v **ListRe
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.NextMarker = &xtv
+				sv.NextMarker = ptr.String(xtv)
 			}
 
 		default:
@@ -6859,7 +6859,7 @@ func awsRestxml_deserializeOpDocumentListTrafficPoliciesOutput(v **ListTrafficPo
 				if err != nil {
 					return fmt.Errorf("expected PageTruncated to be of type *bool, got %T instead", val)
 				}
-				sv.IsTruncated = &xtv
+				sv.IsTruncated = xtv
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
@@ -6875,7 +6875,7 @@ func awsRestxml_deserializeOpDocumentListTrafficPoliciesOutput(v **ListTrafficPo
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MaxItems = &xtv
+				sv.MaxItems = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TrafficPolicyIdMarker", t.Name.Local):
@@ -6891,7 +6891,7 @@ func awsRestxml_deserializeOpDocumentListTrafficPoliciesOutput(v **ListTrafficPo
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TrafficPolicyIdMarker = &xtv
+				sv.TrafficPolicyIdMarker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TrafficPolicySummaries", t.Name.Local):
@@ -7043,7 +7043,7 @@ func awsRestxml_deserializeOpDocumentListTrafficPolicyInstancesOutput(v **ListTr
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.HostedZoneIdMarker = &xtv
+				sv.HostedZoneIdMarker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("IsTruncated", t.Name.Local):
@@ -7059,7 +7059,7 @@ func awsRestxml_deserializeOpDocumentListTrafficPolicyInstancesOutput(v **ListTr
 				if err != nil {
 					return fmt.Errorf("expected PageTruncated to be of type *bool, got %T instead", val)
 				}
-				sv.IsTruncated = &xtv
+				sv.IsTruncated = xtv
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
@@ -7075,7 +7075,7 @@ func awsRestxml_deserializeOpDocumentListTrafficPolicyInstancesOutput(v **ListTr
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MaxItems = &xtv
+				sv.MaxItems = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TrafficPolicyInstanceNameMarker", t.Name.Local):
@@ -7091,7 +7091,7 @@ func awsRestxml_deserializeOpDocumentListTrafficPolicyInstancesOutput(v **ListTr
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TrafficPolicyInstanceNameMarker = &xtv
+				sv.TrafficPolicyInstanceNameMarker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TrafficPolicyInstances", t.Name.Local):
@@ -7259,7 +7259,7 @@ func awsRestxml_deserializeOpDocumentListTrafficPolicyInstancesByHostedZoneOutpu
 				if err != nil {
 					return fmt.Errorf("expected PageTruncated to be of type *bool, got %T instead", val)
 				}
-				sv.IsTruncated = &xtv
+				sv.IsTruncated = xtv
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
@@ -7275,7 +7275,7 @@ func awsRestxml_deserializeOpDocumentListTrafficPolicyInstancesByHostedZoneOutpu
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MaxItems = &xtv
+				sv.MaxItems = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TrafficPolicyInstanceNameMarker", t.Name.Local):
@@ -7291,7 +7291,7 @@ func awsRestxml_deserializeOpDocumentListTrafficPolicyInstancesByHostedZoneOutpu
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TrafficPolicyInstanceNameMarker = &xtv
+				sv.TrafficPolicyInstanceNameMarker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TrafficPolicyInstances", t.Name.Local):
@@ -7459,7 +7459,7 @@ func awsRestxml_deserializeOpDocumentListTrafficPolicyInstancesByPolicyOutput(v 
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.HostedZoneIdMarker = &xtv
+				sv.HostedZoneIdMarker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("IsTruncated", t.Name.Local):
@@ -7475,7 +7475,7 @@ func awsRestxml_deserializeOpDocumentListTrafficPolicyInstancesByPolicyOutput(v 
 				if err != nil {
 					return fmt.Errorf("expected PageTruncated to be of type *bool, got %T instead", val)
 				}
-				sv.IsTruncated = &xtv
+				sv.IsTruncated = xtv
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
@@ -7491,7 +7491,7 @@ func awsRestxml_deserializeOpDocumentListTrafficPolicyInstancesByPolicyOutput(v 
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MaxItems = &xtv
+				sv.MaxItems = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TrafficPolicyInstanceNameMarker", t.Name.Local):
@@ -7507,7 +7507,7 @@ func awsRestxml_deserializeOpDocumentListTrafficPolicyInstancesByPolicyOutput(v 
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TrafficPolicyInstanceNameMarker = &xtv
+				sv.TrafficPolicyInstanceNameMarker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TrafficPolicyInstances", t.Name.Local):
@@ -7672,7 +7672,7 @@ func awsRestxml_deserializeOpDocumentListTrafficPolicyVersionsOutput(v **ListTra
 				if err != nil {
 					return fmt.Errorf("expected PageTruncated to be of type *bool, got %T instead", val)
 				}
-				sv.IsTruncated = &xtv
+				sv.IsTruncated = xtv
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
@@ -7688,7 +7688,7 @@ func awsRestxml_deserializeOpDocumentListTrafficPolicyVersionsOutput(v **ListTra
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MaxItems = &xtv
+				sv.MaxItems = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TrafficPolicies", t.Name.Local):
@@ -7710,7 +7710,7 @@ func awsRestxml_deserializeOpDocumentListTrafficPolicyVersionsOutput(v **ListTra
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TrafficPolicyVersionMarker = &xtv
+				sv.TrafficPolicyVersionMarker = ptr.String(xtv)
 			}
 
 		default:
@@ -7859,7 +7859,7 @@ func awsRestxml_deserializeOpDocumentListVPCAssociationAuthorizationsOutput(v **
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.HostedZoneId = &xtv
+				sv.HostedZoneId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("NextToken", t.Name.Local):
@@ -7875,7 +7875,7 @@ func awsRestxml_deserializeOpDocumentListVPCAssociationAuthorizationsOutput(v **
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.NextToken = &xtv
+				sv.NextToken = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("VPCs", t.Name.Local):
@@ -8027,7 +8027,7 @@ func awsRestxml_deserializeOpDocumentTestDNSAnswerOutput(v **TestDNSAnswerOutput
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Nameserver = &xtv
+				sv.Nameserver = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Protocol", t.Name.Local):
@@ -8043,7 +8043,7 @@ func awsRestxml_deserializeOpDocumentTestDNSAnswerOutput(v **TestDNSAnswerOutput
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Protocol = &xtv
+				sv.Protocol = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("RecordData", t.Name.Local):
@@ -8065,7 +8065,7 @@ func awsRestxml_deserializeOpDocumentTestDNSAnswerOutput(v **TestDNSAnswerOutput
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.RecordName = &xtv
+				sv.RecordName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("RecordType", t.Name.Local):
@@ -8094,7 +8094,7 @@ func awsRestxml_deserializeOpDocumentTestDNSAnswerOutput(v **TestDNSAnswerOutput
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.ResponseCode = &xtv
+				sv.ResponseCode = ptr.String(xtv)
 			}
 
 		default:
@@ -10398,7 +10398,7 @@ func awsRestxml_deserializeDocumentAccountLimit(v **types.AccountLimit, decoder 
 				if err != nil {
 					return err
 				}
-				sv.Value = &i64
+				sv.Value = i64
 			}
 
 		default:
@@ -10446,7 +10446,7 @@ func awsRestxml_deserializeDocumentAlarmIdentifier(v **types.AlarmIdentifier, de
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Region", t.Name.Local):
@@ -10507,7 +10507,7 @@ func awsRestxml_deserializeDocumentAliasTarget(v **types.AliasTarget, decoder sm
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.DNSName = &xtv
+				sv.DNSName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("EvaluateTargetHealth", t.Name.Local):
@@ -10523,7 +10523,7 @@ func awsRestxml_deserializeDocumentAliasTarget(v **types.AliasTarget, decoder sm
 				if err != nil {
 					return fmt.Errorf("expected AliasHealthEnabled to be of type *bool, got %T instead", val)
 				}
-				sv.EvaluateTargetHealth = &xtv
+				sv.EvaluateTargetHealth = xtv
 			}
 
 		case strings.EqualFold("HostedZoneId", t.Name.Local):
@@ -10539,7 +10539,7 @@ func awsRestxml_deserializeDocumentAliasTarget(v **types.AliasTarget, decoder sm
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.HostedZoneId = &xtv
+				sv.HostedZoneId = ptr.String(xtv)
 			}
 
 		default:
@@ -10587,7 +10587,7 @@ func awsRestxml_deserializeDocumentChangeInfo(v **types.ChangeInfo, decoder smit
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Comment = &xtv
+				sv.Comment = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
@@ -10603,7 +10603,7 @@ func awsRestxml_deserializeDocumentChangeInfo(v **types.ChangeInfo, decoder smit
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Id = &xtv
+				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):
@@ -10633,7 +10633,7 @@ func awsRestxml_deserializeDocumentChangeInfo(v **types.ChangeInfo, decoder smit
 				if err != nil {
 					return err
 				}
-				sv.SubmittedAt = &t
+				sv.SubmittedAt = ptr.Time(t)
 			}
 
 		default:
@@ -10646,13 +10646,13 @@ func awsRestxml_deserializeDocumentChangeInfo(v **types.ChangeInfo, decoder smit
 	return nil
 }
 
-func awsRestxml_deserializeDocumentCheckerIpRanges(v *[]*string, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentCheckerIpRanges(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*string
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
@@ -10670,20 +10670,17 @@ func awsRestxml_deserializeDocumentCheckerIpRanges(v *[]*string, decoder smithyx
 		decoder = memberDecoder
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *string
+				var col string
 				val, done, err := decoder.Value()
 				if err != nil {
 					return err
 				}
 				if done {
-					if val == nil {
-						col = ptr.String("")
-					}
 					break
 				}
 				if val != nil {
 					xtv := string(val)
-					col = &xtv
+					col = xtv
 				}
 				sv = append(sv, col)
 			} else {
@@ -10696,17 +10693,17 @@ func awsRestxml_deserializeDocumentCheckerIpRanges(v *[]*string, decoder smithyx
 	return nil
 }
 
-func awsRestxml_deserializeDocumentCheckerIpRangesUnwrapped(v *[]*string, decoder smithyxml.NodeDecoder) error {
-	var sv []*string
+func awsRestxml_deserializeDocumentCheckerIpRangesUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *string
+		var mv string
 		t := decoder.StartEl
 		_ = t
 		val, done, err := decoder.Value()
@@ -10714,27 +10711,24 @@ func awsRestxml_deserializeDocumentCheckerIpRangesUnwrapped(v *[]*string, decode
 			return err
 		}
 		if done {
-			if val == nil {
-				mv = ptr.String("")
-			}
 			break
 		}
 		if val != nil {
 			xtv := string(val)
-			mv = &xtv
+			mv = xtv
 		}
 		sv = append(sv, mv)
 	}
 	*v = sv
 	return nil
 }
-func awsRestxml_deserializeDocumentChildHealthCheckList(v *[]*string, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentChildHealthCheckList(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*string
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
@@ -10752,20 +10746,17 @@ func awsRestxml_deserializeDocumentChildHealthCheckList(v *[]*string, decoder sm
 		decoder = memberDecoder
 		for {
 			if strings.EqualFold("ChildHealthCheck", t.Name.Local) {
-				var col *string
+				var col string
 				val, done, err := decoder.Value()
 				if err != nil {
 					return err
 				}
 				if done {
-					if val == nil {
-						col = ptr.String("")
-					}
 					break
 				}
 				if val != nil {
 					xtv := string(val)
-					col = &xtv
+					col = xtv
 				}
 				sv = append(sv, col)
 			} else {
@@ -10778,17 +10769,17 @@ func awsRestxml_deserializeDocumentChildHealthCheckList(v *[]*string, decoder sm
 	return nil
 }
 
-func awsRestxml_deserializeDocumentChildHealthCheckListUnwrapped(v *[]*string, decoder smithyxml.NodeDecoder) error {
-	var sv []*string
+func awsRestxml_deserializeDocumentChildHealthCheckListUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *string
+		var mv string
 		t := decoder.StartEl
 		_ = t
 		val, done, err := decoder.Value()
@@ -10796,14 +10787,11 @@ func awsRestxml_deserializeDocumentChildHealthCheckListUnwrapped(v *[]*string, d
 			return err
 		}
 		if done {
-			if val == nil {
-				mv = ptr.String("")
-			}
 			break
 		}
 		if val != nil {
 			xtv := string(val)
-			mv = &xtv
+			mv = xtv
 		}
 		sv = append(sv, mv)
 	}
@@ -10881,7 +10869,7 @@ func awsRestxml_deserializeDocumentCloudWatchAlarmConfiguration(v **types.CloudW
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MetricName = &xtv
+				sv.MetricName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Namespace", t.Name.Local):
@@ -10897,7 +10885,7 @@ func awsRestxml_deserializeDocumentCloudWatchAlarmConfiguration(v **types.CloudW
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Namespace = &xtv
+				sv.Namespace = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Period", t.Name.Local):
@@ -10944,7 +10932,7 @@ func awsRestxml_deserializeDocumentCloudWatchAlarmConfiguration(v **types.CloudW
 				if err != nil {
 					return err
 				}
-				sv.Threshold = &f64
+				sv.Threshold = ptr.Float64(f64)
 			}
 
 		default:
@@ -10992,7 +10980,7 @@ func awsRestxml_deserializeDocumentConcurrentModification(v **types.ConcurrentMo
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -11040,7 +11028,7 @@ func awsRestxml_deserializeDocumentConflictingDomainExists(v **types.Conflicting
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -11088,7 +11076,7 @@ func awsRestxml_deserializeDocumentConflictingTypes(v **types.ConflictingTypes, 
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -11136,7 +11124,7 @@ func awsRestxml_deserializeDocumentDelegationSet(v **types.DelegationSet, decode
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.CallerReference = &xtv
+				sv.CallerReference = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
@@ -11152,7 +11140,7 @@ func awsRestxml_deserializeDocumentDelegationSet(v **types.DelegationSet, decode
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Id = &xtv
+				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("NameServers", t.Name.Local):
@@ -11206,7 +11194,7 @@ func awsRestxml_deserializeDocumentDelegationSetAlreadyCreated(v **types.Delegat
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -11254,7 +11242,7 @@ func awsRestxml_deserializeDocumentDelegationSetAlreadyReusable(v **types.Delega
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -11302,7 +11290,7 @@ func awsRestxml_deserializeDocumentDelegationSetInUse(v **types.DelegationSetInU
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -11315,13 +11303,13 @@ func awsRestxml_deserializeDocumentDelegationSetInUse(v **types.DelegationSetInU
 	return nil
 }
 
-func awsRestxml_deserializeDocumentDelegationSetNameServers(v *[]*string, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentDelegationSetNameServers(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*string
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
@@ -11339,20 +11327,17 @@ func awsRestxml_deserializeDocumentDelegationSetNameServers(v *[]*string, decode
 		decoder = memberDecoder
 		for {
 			if strings.EqualFold("NameServer", t.Name.Local) {
-				var col *string
+				var col string
 				val, done, err := decoder.Value()
 				if err != nil {
 					return err
 				}
 				if done {
-					if val == nil {
-						col = ptr.String("")
-					}
 					break
 				}
 				if val != nil {
 					xtv := string(val)
-					col = &xtv
+					col = xtv
 				}
 				sv = append(sv, col)
 			} else {
@@ -11365,17 +11350,17 @@ func awsRestxml_deserializeDocumentDelegationSetNameServers(v *[]*string, decode
 	return nil
 }
 
-func awsRestxml_deserializeDocumentDelegationSetNameServersUnwrapped(v *[]*string, decoder smithyxml.NodeDecoder) error {
-	var sv []*string
+func awsRestxml_deserializeDocumentDelegationSetNameServersUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *string
+		var mv string
 		t := decoder.StartEl
 		_ = t
 		val, done, err := decoder.Value()
@@ -11383,14 +11368,11 @@ func awsRestxml_deserializeDocumentDelegationSetNameServersUnwrapped(v *[]*strin
 			return err
 		}
 		if done {
-			if val == nil {
-				mv = ptr.String("")
-			}
 			break
 		}
 		if val != nil {
 			xtv := string(val)
-			mv = &xtv
+			mv = xtv
 		}
 		sv = append(sv, mv)
 	}
@@ -11432,7 +11414,7 @@ func awsRestxml_deserializeDocumentDelegationSetNotAvailable(v **types.Delegatio
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -11480,7 +11462,7 @@ func awsRestxml_deserializeDocumentDelegationSetNotReusable(v **types.Delegation
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -11493,13 +11475,13 @@ func awsRestxml_deserializeDocumentDelegationSetNotReusable(v **types.Delegation
 	return nil
 }
 
-func awsRestxml_deserializeDocumentDelegationSets(v *[]*types.DelegationSet, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentDelegationSets(v *[]types.DelegationSet, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.DelegationSet
+	var sv []types.DelegationSet
 	if *v == nil {
-		sv = make([]*types.DelegationSet, 0)
+		sv = make([]types.DelegationSet, 0)
 	} else {
 		sv = *v
 	}
@@ -11515,11 +11497,13 @@ func awsRestxml_deserializeDocumentDelegationSets(v *[]*types.DelegationSet, dec
 		}
 		for {
 			if strings.EqualFold("DelegationSet", t.Name.Local) {
-				var col *types.DelegationSet
+				var col types.DelegationSet
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsRestxml_deserializeDocumentDelegationSet(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsRestxml_deserializeDocumentDelegationSet(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -11532,23 +11516,25 @@ func awsRestxml_deserializeDocumentDelegationSets(v *[]*types.DelegationSet, dec
 	return nil
 }
 
-func awsRestxml_deserializeDocumentDelegationSetsUnwrapped(v *[]*types.DelegationSet, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.DelegationSet
+func awsRestxml_deserializeDocumentDelegationSetsUnwrapped(v *[]types.DelegationSet, decoder smithyxml.NodeDecoder) error {
+	var sv []types.DelegationSet
 	if *v == nil {
-		sv = make([]*types.DelegationSet, 0)
+		sv = make([]types.DelegationSet, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.DelegationSet
+		var mv types.DelegationSet
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsRestxml_deserializeDocumentDelegationSet(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentDelegationSet(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -11589,7 +11575,7 @@ func awsRestxml_deserializeDocumentDimension(v **types.Dimension, decoder smithy
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Value", t.Name.Local):
@@ -11605,7 +11591,7 @@ func awsRestxml_deserializeDocumentDimension(v **types.Dimension, decoder smithy
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Value = &xtv
+				sv.Value = ptr.String(xtv)
 			}
 
 		default:
@@ -11618,13 +11604,13 @@ func awsRestxml_deserializeDocumentDimension(v **types.Dimension, decoder smithy
 	return nil
 }
 
-func awsRestxml_deserializeDocumentDimensionList(v *[]*types.Dimension, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentDimensionList(v *[]types.Dimension, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.Dimension
+	var sv []types.Dimension
 	if *v == nil {
-		sv = make([]*types.Dimension, 0)
+		sv = make([]types.Dimension, 0)
 	} else {
 		sv = *v
 	}
@@ -11640,11 +11626,13 @@ func awsRestxml_deserializeDocumentDimensionList(v *[]*types.Dimension, decoder 
 		}
 		for {
 			if strings.EqualFold("Dimension", t.Name.Local) {
-				var col *types.Dimension
+				var col types.Dimension
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsRestxml_deserializeDocumentDimension(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsRestxml_deserializeDocumentDimension(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -11657,35 +11645,37 @@ func awsRestxml_deserializeDocumentDimensionList(v *[]*types.Dimension, decoder 
 	return nil
 }
 
-func awsRestxml_deserializeDocumentDimensionListUnwrapped(v *[]*types.Dimension, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.Dimension
+func awsRestxml_deserializeDocumentDimensionListUnwrapped(v *[]types.Dimension, decoder smithyxml.NodeDecoder) error {
+	var sv []types.Dimension
 	if *v == nil {
-		sv = make([]*types.Dimension, 0)
+		sv = make([]types.Dimension, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.Dimension
+		var mv types.Dimension
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsRestxml_deserializeDocumentDimension(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentDimension(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
 	return nil
 }
-func awsRestxml_deserializeDocumentErrorMessages(v *[]*string, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentErrorMessages(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*string
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
@@ -11703,20 +11693,17 @@ func awsRestxml_deserializeDocumentErrorMessages(v *[]*string, decoder smithyxml
 		decoder = memberDecoder
 		for {
 			if strings.EqualFold("Message", t.Name.Local) {
-				var col *string
+				var col string
 				val, done, err := decoder.Value()
 				if err != nil {
 					return err
 				}
 				if done {
-					if val == nil {
-						col = ptr.String("")
-					}
 					break
 				}
 				if val != nil {
 					xtv := string(val)
-					col = &xtv
+					col = xtv
 				}
 				sv = append(sv, col)
 			} else {
@@ -11729,17 +11716,17 @@ func awsRestxml_deserializeDocumentErrorMessages(v *[]*string, decoder smithyxml
 	return nil
 }
 
-func awsRestxml_deserializeDocumentErrorMessagesUnwrapped(v *[]*string, decoder smithyxml.NodeDecoder) error {
-	var sv []*string
+func awsRestxml_deserializeDocumentErrorMessagesUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *string
+		var mv string
 		t := decoder.StartEl
 		_ = t
 		val, done, err := decoder.Value()
@@ -11747,14 +11734,11 @@ func awsRestxml_deserializeDocumentErrorMessagesUnwrapped(v *[]*string, decoder 
 			return err
 		}
 		if done {
-			if val == nil {
-				mv = ptr.String("")
-			}
 			break
 		}
 		if val != nil {
 			xtv := string(val)
-			mv = &xtv
+			mv = xtv
 		}
 		sv = append(sv, mv)
 	}
@@ -11796,7 +11780,7 @@ func awsRestxml_deserializeDocumentGeoLocation(v **types.GeoLocation, decoder sm
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.ContinentCode = &xtv
+				sv.ContinentCode = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("CountryCode", t.Name.Local):
@@ -11812,7 +11796,7 @@ func awsRestxml_deserializeDocumentGeoLocation(v **types.GeoLocation, decoder sm
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.CountryCode = &xtv
+				sv.CountryCode = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SubdivisionCode", t.Name.Local):
@@ -11828,7 +11812,7 @@ func awsRestxml_deserializeDocumentGeoLocation(v **types.GeoLocation, decoder sm
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.SubdivisionCode = &xtv
+				sv.SubdivisionCode = ptr.String(xtv)
 			}
 
 		default:
@@ -11876,7 +11860,7 @@ func awsRestxml_deserializeDocumentGeoLocationDetails(v **types.GeoLocationDetai
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.ContinentCode = &xtv
+				sv.ContinentCode = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("ContinentName", t.Name.Local):
@@ -11892,7 +11876,7 @@ func awsRestxml_deserializeDocumentGeoLocationDetails(v **types.GeoLocationDetai
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.ContinentName = &xtv
+				sv.ContinentName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("CountryCode", t.Name.Local):
@@ -11908,7 +11892,7 @@ func awsRestxml_deserializeDocumentGeoLocationDetails(v **types.GeoLocationDetai
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.CountryCode = &xtv
+				sv.CountryCode = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("CountryName", t.Name.Local):
@@ -11924,7 +11908,7 @@ func awsRestxml_deserializeDocumentGeoLocationDetails(v **types.GeoLocationDetai
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.CountryName = &xtv
+				sv.CountryName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SubdivisionCode", t.Name.Local):
@@ -11940,7 +11924,7 @@ func awsRestxml_deserializeDocumentGeoLocationDetails(v **types.GeoLocationDetai
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.SubdivisionCode = &xtv
+				sv.SubdivisionCode = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SubdivisionName", t.Name.Local):
@@ -11956,7 +11940,7 @@ func awsRestxml_deserializeDocumentGeoLocationDetails(v **types.GeoLocationDetai
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.SubdivisionName = &xtv
+				sv.SubdivisionName = ptr.String(xtv)
 			}
 
 		default:
@@ -11969,13 +11953,13 @@ func awsRestxml_deserializeDocumentGeoLocationDetails(v **types.GeoLocationDetai
 	return nil
 }
 
-func awsRestxml_deserializeDocumentGeoLocationDetailsList(v *[]*types.GeoLocationDetails, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentGeoLocationDetailsList(v *[]types.GeoLocationDetails, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.GeoLocationDetails
+	var sv []types.GeoLocationDetails
 	if *v == nil {
-		sv = make([]*types.GeoLocationDetails, 0)
+		sv = make([]types.GeoLocationDetails, 0)
 	} else {
 		sv = *v
 	}
@@ -11991,11 +11975,13 @@ func awsRestxml_deserializeDocumentGeoLocationDetailsList(v *[]*types.GeoLocatio
 		}
 		for {
 			if strings.EqualFold("GeoLocationDetails", t.Name.Local) {
-				var col *types.GeoLocationDetails
+				var col types.GeoLocationDetails
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsRestxml_deserializeDocumentGeoLocationDetails(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsRestxml_deserializeDocumentGeoLocationDetails(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -12008,23 +11994,25 @@ func awsRestxml_deserializeDocumentGeoLocationDetailsList(v *[]*types.GeoLocatio
 	return nil
 }
 
-func awsRestxml_deserializeDocumentGeoLocationDetailsListUnwrapped(v *[]*types.GeoLocationDetails, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.GeoLocationDetails
+func awsRestxml_deserializeDocumentGeoLocationDetailsListUnwrapped(v *[]types.GeoLocationDetails, decoder smithyxml.NodeDecoder) error {
+	var sv []types.GeoLocationDetails
 	if *v == nil {
-		sv = make([]*types.GeoLocationDetails, 0)
+		sv = make([]types.GeoLocationDetails, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.GeoLocationDetails
+		var mv types.GeoLocationDetails
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsRestxml_deserializeDocumentGeoLocationDetails(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentGeoLocationDetails(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -12065,7 +12053,7 @@ func awsRestxml_deserializeDocumentHealthCheck(v **types.HealthCheck, decoder sm
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.CallerReference = &xtv
+				sv.CallerReference = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("CloudWatchAlarmConfiguration", t.Name.Local):
@@ -12094,7 +12082,7 @@ func awsRestxml_deserializeDocumentHealthCheck(v **types.HealthCheck, decoder sm
 				if err != nil {
 					return err
 				}
-				sv.HealthCheckVersion = &i64
+				sv.HealthCheckVersion = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
@@ -12110,7 +12098,7 @@ func awsRestxml_deserializeDocumentHealthCheck(v **types.HealthCheck, decoder sm
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Id = &xtv
+				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("LinkedService", t.Name.Local):
@@ -12164,7 +12152,7 @@ func awsRestxml_deserializeDocumentHealthCheckAlreadyExists(v **types.HealthChec
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -12224,7 +12212,7 @@ func awsRestxml_deserializeDocumentHealthCheckConfig(v **types.HealthCheckConfig
 				if err != nil {
 					return fmt.Errorf("expected Disabled to be of type *bool, got %T instead", val)
 				}
-				sv.Disabled = &xtv
+				sv.Disabled = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("EnableSNI", t.Name.Local):
@@ -12240,7 +12228,7 @@ func awsRestxml_deserializeDocumentHealthCheckConfig(v **types.HealthCheckConfig
 				if err != nil {
 					return fmt.Errorf("expected EnableSNI to be of type *bool, got %T instead", val)
 				}
-				sv.EnableSNI = &xtv
+				sv.EnableSNI = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("FailureThreshold", t.Name.Local):
@@ -12273,7 +12261,7 @@ func awsRestxml_deserializeDocumentHealthCheckConfig(v **types.HealthCheckConfig
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.FullyQualifiedDomainName = &xtv
+				sv.FullyQualifiedDomainName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("HealthThreshold", t.Name.Local):
@@ -12319,7 +12307,7 @@ func awsRestxml_deserializeDocumentHealthCheckConfig(v **types.HealthCheckConfig
 				if err != nil {
 					return fmt.Errorf("expected Inverted to be of type *bool, got %T instead", val)
 				}
-				sv.Inverted = &xtv
+				sv.Inverted = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("IPAddress", t.Name.Local):
@@ -12335,7 +12323,7 @@ func awsRestxml_deserializeDocumentHealthCheckConfig(v **types.HealthCheckConfig
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.IPAddress = &xtv
+				sv.IPAddress = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MeasureLatency", t.Name.Local):
@@ -12351,7 +12339,7 @@ func awsRestxml_deserializeDocumentHealthCheckConfig(v **types.HealthCheckConfig
 				if err != nil {
 					return fmt.Errorf("expected MeasureLatency to be of type *bool, got %T instead", val)
 				}
-				sv.MeasureLatency = &xtv
+				sv.MeasureLatency = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("Port", t.Name.Local):
@@ -12407,7 +12395,7 @@ func awsRestxml_deserializeDocumentHealthCheckConfig(v **types.HealthCheckConfig
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.ResourcePath = &xtv
+				sv.ResourcePath = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SearchString", t.Name.Local):
@@ -12423,7 +12411,7 @@ func awsRestxml_deserializeDocumentHealthCheckConfig(v **types.HealthCheckConfig
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.SearchString = &xtv
+				sv.SearchString = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Type", t.Name.Local):
@@ -12484,7 +12472,7 @@ func awsRestxml_deserializeDocumentHealthCheckInUse(v **types.HealthCheckInUse, 
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -12532,7 +12520,7 @@ func awsRestxml_deserializeDocumentHealthCheckObservation(v **types.HealthCheckO
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.IPAddress = &xtv
+				sv.IPAddress = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Region", t.Name.Local):
@@ -12564,13 +12552,13 @@ func awsRestxml_deserializeDocumentHealthCheckObservation(v **types.HealthCheckO
 	return nil
 }
 
-func awsRestxml_deserializeDocumentHealthCheckObservations(v *[]*types.HealthCheckObservation, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentHealthCheckObservations(v *[]types.HealthCheckObservation, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.HealthCheckObservation
+	var sv []types.HealthCheckObservation
 	if *v == nil {
-		sv = make([]*types.HealthCheckObservation, 0)
+		sv = make([]types.HealthCheckObservation, 0)
 	} else {
 		sv = *v
 	}
@@ -12586,11 +12574,13 @@ func awsRestxml_deserializeDocumentHealthCheckObservations(v *[]*types.HealthChe
 		}
 		for {
 			if strings.EqualFold("HealthCheckObservation", t.Name.Local) {
-				var col *types.HealthCheckObservation
+				var col types.HealthCheckObservation
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsRestxml_deserializeDocumentHealthCheckObservation(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsRestxml_deserializeDocumentHealthCheckObservation(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -12603,23 +12593,25 @@ func awsRestxml_deserializeDocumentHealthCheckObservations(v *[]*types.HealthChe
 	return nil
 }
 
-func awsRestxml_deserializeDocumentHealthCheckObservationsUnwrapped(v *[]*types.HealthCheckObservation, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.HealthCheckObservation
+func awsRestxml_deserializeDocumentHealthCheckObservationsUnwrapped(v *[]types.HealthCheckObservation, decoder smithyxml.NodeDecoder) error {
+	var sv []types.HealthCheckObservation
 	if *v == nil {
-		sv = make([]*types.HealthCheckObservation, 0)
+		sv = make([]types.HealthCheckObservation, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.HealthCheckObservation
+		var mv types.HealthCheckObservation
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsRestxml_deserializeDocumentHealthCheckObservation(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentHealthCheckObservation(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -12701,13 +12693,13 @@ func awsRestxml_deserializeDocumentHealthCheckRegionListUnwrapped(v *[]types.Hea
 	*v = sv
 	return nil
 }
-func awsRestxml_deserializeDocumentHealthChecks(v *[]*types.HealthCheck, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentHealthChecks(v *[]types.HealthCheck, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.HealthCheck
+	var sv []types.HealthCheck
 	if *v == nil {
-		sv = make([]*types.HealthCheck, 0)
+		sv = make([]types.HealthCheck, 0)
 	} else {
 		sv = *v
 	}
@@ -12723,11 +12715,13 @@ func awsRestxml_deserializeDocumentHealthChecks(v *[]*types.HealthCheck, decoder
 		}
 		for {
 			if strings.EqualFold("HealthCheck", t.Name.Local) {
-				var col *types.HealthCheck
+				var col types.HealthCheck
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsRestxml_deserializeDocumentHealthCheck(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsRestxml_deserializeDocumentHealthCheck(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -12740,23 +12734,25 @@ func awsRestxml_deserializeDocumentHealthChecks(v *[]*types.HealthCheck, decoder
 	return nil
 }
 
-func awsRestxml_deserializeDocumentHealthChecksUnwrapped(v *[]*types.HealthCheck, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.HealthCheck
+func awsRestxml_deserializeDocumentHealthChecksUnwrapped(v *[]types.HealthCheck, decoder smithyxml.NodeDecoder) error {
+	var sv []types.HealthCheck
 	if *v == nil {
-		sv = make([]*types.HealthCheck, 0)
+		sv = make([]types.HealthCheck, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.HealthCheck
+		var mv types.HealthCheck
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsRestxml_deserializeDocumentHealthCheck(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentHealthCheck(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -12797,7 +12793,7 @@ func awsRestxml_deserializeDocumentHealthCheckVersionMismatch(v **types.HealthCh
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -12845,7 +12841,7 @@ func awsRestxml_deserializeDocumentHostedZone(v **types.HostedZone, decoder smit
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.CallerReference = &xtv
+				sv.CallerReference = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Config", t.Name.Local):
@@ -12867,7 +12863,7 @@ func awsRestxml_deserializeDocumentHostedZone(v **types.HostedZone, decoder smit
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Id = &xtv
+				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("LinkedService", t.Name.Local):
@@ -12889,7 +12885,7 @@ func awsRestxml_deserializeDocumentHostedZone(v **types.HostedZone, decoder smit
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("ResourceRecordSetCount", t.Name.Local):
@@ -12906,7 +12902,7 @@ func awsRestxml_deserializeDocumentHostedZone(v **types.HostedZone, decoder smit
 				if err != nil {
 					return err
 				}
-				sv.ResourceRecordSetCount = &i64
+				sv.ResourceRecordSetCount = ptr.Int64(i64)
 			}
 
 		default:
@@ -12954,7 +12950,7 @@ func awsRestxml_deserializeDocumentHostedZoneAlreadyExists(v **types.HostedZoneA
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -13002,7 +12998,7 @@ func awsRestxml_deserializeDocumentHostedZoneConfig(v **types.HostedZoneConfig, 
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Comment = &xtv
+				sv.Comment = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("PrivateZone", t.Name.Local):
@@ -13018,7 +13014,7 @@ func awsRestxml_deserializeDocumentHostedZoneConfig(v **types.HostedZoneConfig, 
 				if err != nil {
 					return fmt.Errorf("expected IsPrivateZone to be of type *bool, got %T instead", val)
 				}
-				sv.PrivateZone = &xtv
+				sv.PrivateZone = xtv
 			}
 
 		default:
@@ -13080,7 +13076,7 @@ func awsRestxml_deserializeDocumentHostedZoneLimit(v **types.HostedZoneLimit, de
 				if err != nil {
 					return err
 				}
-				sv.Value = &i64
+				sv.Value = i64
 			}
 
 		default:
@@ -13128,7 +13124,7 @@ func awsRestxml_deserializeDocumentHostedZoneNotEmpty(v **types.HostedZoneNotEmp
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -13176,7 +13172,7 @@ func awsRestxml_deserializeDocumentHostedZoneNotFound(v **types.HostedZoneNotFou
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -13224,7 +13220,7 @@ func awsRestxml_deserializeDocumentHostedZoneNotPrivate(v **types.HostedZoneNotP
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -13272,7 +13268,7 @@ func awsRestxml_deserializeDocumentHostedZoneOwner(v **types.HostedZoneOwner, de
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.OwningAccount = &xtv
+				sv.OwningAccount = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("OwningService", t.Name.Local):
@@ -13288,7 +13284,7 @@ func awsRestxml_deserializeDocumentHostedZoneOwner(v **types.HostedZoneOwner, de
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.OwningService = &xtv
+				sv.OwningService = ptr.String(xtv)
 			}
 
 		default:
@@ -13301,13 +13297,13 @@ func awsRestxml_deserializeDocumentHostedZoneOwner(v **types.HostedZoneOwner, de
 	return nil
 }
 
-func awsRestxml_deserializeDocumentHostedZones(v *[]*types.HostedZone, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentHostedZones(v *[]types.HostedZone, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.HostedZone
+	var sv []types.HostedZone
 	if *v == nil {
-		sv = make([]*types.HostedZone, 0)
+		sv = make([]types.HostedZone, 0)
 	} else {
 		sv = *v
 	}
@@ -13323,11 +13319,13 @@ func awsRestxml_deserializeDocumentHostedZones(v *[]*types.HostedZone, decoder s
 		}
 		for {
 			if strings.EqualFold("HostedZone", t.Name.Local) {
-				var col *types.HostedZone
+				var col types.HostedZone
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsRestxml_deserializeDocumentHostedZone(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsRestxml_deserializeDocumentHostedZone(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -13340,35 +13338,37 @@ func awsRestxml_deserializeDocumentHostedZones(v *[]*types.HostedZone, decoder s
 	return nil
 }
 
-func awsRestxml_deserializeDocumentHostedZonesUnwrapped(v *[]*types.HostedZone, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.HostedZone
+func awsRestxml_deserializeDocumentHostedZonesUnwrapped(v *[]types.HostedZone, decoder smithyxml.NodeDecoder) error {
+	var sv []types.HostedZone
 	if *v == nil {
-		sv = make([]*types.HostedZone, 0)
+		sv = make([]types.HostedZone, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.HostedZone
+		var mv types.HostedZone
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsRestxml_deserializeDocumentHostedZone(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentHostedZone(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
 	return nil
 }
-func awsRestxml_deserializeDocumentHostedZoneSummaries(v *[]*types.HostedZoneSummary, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentHostedZoneSummaries(v *[]types.HostedZoneSummary, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.HostedZoneSummary
+	var sv []types.HostedZoneSummary
 	if *v == nil {
-		sv = make([]*types.HostedZoneSummary, 0)
+		sv = make([]types.HostedZoneSummary, 0)
 	} else {
 		sv = *v
 	}
@@ -13384,11 +13384,13 @@ func awsRestxml_deserializeDocumentHostedZoneSummaries(v *[]*types.HostedZoneSum
 		}
 		for {
 			if strings.EqualFold("HostedZoneSummary", t.Name.Local) {
-				var col *types.HostedZoneSummary
+				var col types.HostedZoneSummary
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsRestxml_deserializeDocumentHostedZoneSummary(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsRestxml_deserializeDocumentHostedZoneSummary(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -13401,23 +13403,25 @@ func awsRestxml_deserializeDocumentHostedZoneSummaries(v *[]*types.HostedZoneSum
 	return nil
 }
 
-func awsRestxml_deserializeDocumentHostedZoneSummariesUnwrapped(v *[]*types.HostedZoneSummary, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.HostedZoneSummary
+func awsRestxml_deserializeDocumentHostedZoneSummariesUnwrapped(v *[]types.HostedZoneSummary, decoder smithyxml.NodeDecoder) error {
+	var sv []types.HostedZoneSummary
 	if *v == nil {
-		sv = make([]*types.HostedZoneSummary, 0)
+		sv = make([]types.HostedZoneSummary, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.HostedZoneSummary
+		var mv types.HostedZoneSummary
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsRestxml_deserializeDocumentHostedZoneSummary(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentHostedZoneSummary(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -13458,7 +13462,7 @@ func awsRestxml_deserializeDocumentHostedZoneSummary(v **types.HostedZoneSummary
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.HostedZoneId = &xtv
+				sv.HostedZoneId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
@@ -13474,7 +13478,7 @@ func awsRestxml_deserializeDocumentHostedZoneSummary(v **types.HostedZoneSummary
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Owner", t.Name.Local):
@@ -13528,7 +13532,7 @@ func awsRestxml_deserializeDocumentIncompatibleVersion(v **types.IncompatibleVer
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -13576,7 +13580,7 @@ func awsRestxml_deserializeDocumentInsufficientCloudWatchLogsResourcePolicy(v **
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -13624,7 +13628,7 @@ func awsRestxml_deserializeDocumentInvalidArgument(v **types.InvalidArgument, de
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -13672,7 +13676,7 @@ func awsRestxml_deserializeDocumentInvalidChangeBatch(v **types.InvalidChangeBat
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("messages", t.Name.Local):
@@ -13726,7 +13730,7 @@ func awsRestxml_deserializeDocumentInvalidDomainName(v **types.InvalidDomainName
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -13774,7 +13778,7 @@ func awsRestxml_deserializeDocumentInvalidInput(v **types.InvalidInput, decoder 
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -13822,7 +13826,7 @@ func awsRestxml_deserializeDocumentInvalidPaginationToken(v **types.InvalidPagin
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -13870,7 +13874,7 @@ func awsRestxml_deserializeDocumentInvalidTrafficPolicyDocument(v **types.Invali
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -13918,7 +13922,7 @@ func awsRestxml_deserializeDocumentInvalidVPCId(v **types.InvalidVPCId, decoder 
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -13966,7 +13970,7 @@ func awsRestxml_deserializeDocumentLastVPCAssociation(v **types.LastVPCAssociati
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -14014,7 +14018,7 @@ func awsRestxml_deserializeDocumentLimitsExceeded(v **types.LimitsExceeded, deco
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -14062,7 +14066,7 @@ func awsRestxml_deserializeDocumentLinkedService(v **types.LinkedService, decode
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Description = &xtv
+				sv.Description = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("ServicePrincipal", t.Name.Local):
@@ -14078,7 +14082,7 @@ func awsRestxml_deserializeDocumentLinkedService(v **types.LinkedService, decode
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.ServicePrincipal = &xtv
+				sv.ServicePrincipal = ptr.String(xtv)
 			}
 
 		default:
@@ -14126,7 +14130,7 @@ func awsRestxml_deserializeDocumentNoSuchChange(v **types.NoSuchChange, decoder 
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -14174,7 +14178,7 @@ func awsRestxml_deserializeDocumentNoSuchCloudWatchLogsLogGroup(v **types.NoSuch
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -14222,7 +14226,7 @@ func awsRestxml_deserializeDocumentNoSuchDelegationSet(v **types.NoSuchDelegatio
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -14270,7 +14274,7 @@ func awsRestxml_deserializeDocumentNoSuchGeoLocation(v **types.NoSuchGeoLocation
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -14318,7 +14322,7 @@ func awsRestxml_deserializeDocumentNoSuchHealthCheck(v **types.NoSuchHealthCheck
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -14366,7 +14370,7 @@ func awsRestxml_deserializeDocumentNoSuchHostedZone(v **types.NoSuchHostedZone, 
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -14414,7 +14418,7 @@ func awsRestxml_deserializeDocumentNoSuchQueryLoggingConfig(v **types.NoSuchQuer
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -14462,7 +14466,7 @@ func awsRestxml_deserializeDocumentNoSuchTrafficPolicy(v **types.NoSuchTrafficPo
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -14510,7 +14514,7 @@ func awsRestxml_deserializeDocumentNoSuchTrafficPolicyInstance(v **types.NoSuchT
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -14558,7 +14562,7 @@ func awsRestxml_deserializeDocumentNotAuthorizedException(v **types.NotAuthorize
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -14606,7 +14610,7 @@ func awsRestxml_deserializeDocumentPriorRequestNotComplete(v **types.PriorReques
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -14654,7 +14658,7 @@ func awsRestxml_deserializeDocumentPublicZoneVPCAssociation(v **types.PublicZone
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -14702,7 +14706,7 @@ func awsRestxml_deserializeDocumentQueryLoggingConfig(v **types.QueryLoggingConf
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.CloudWatchLogsLogGroupArn = &xtv
+				sv.CloudWatchLogsLogGroupArn = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("HostedZoneId", t.Name.Local):
@@ -14718,7 +14722,7 @@ func awsRestxml_deserializeDocumentQueryLoggingConfig(v **types.QueryLoggingConf
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.HostedZoneId = &xtv
+				sv.HostedZoneId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
@@ -14734,7 +14738,7 @@ func awsRestxml_deserializeDocumentQueryLoggingConfig(v **types.QueryLoggingConf
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Id = &xtv
+				sv.Id = ptr.String(xtv)
 			}
 
 		default:
@@ -14782,7 +14786,7 @@ func awsRestxml_deserializeDocumentQueryLoggingConfigAlreadyExists(v **types.Que
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -14795,13 +14799,13 @@ func awsRestxml_deserializeDocumentQueryLoggingConfigAlreadyExists(v **types.Que
 	return nil
 }
 
-func awsRestxml_deserializeDocumentQueryLoggingConfigs(v *[]*types.QueryLoggingConfig, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentQueryLoggingConfigs(v *[]types.QueryLoggingConfig, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.QueryLoggingConfig
+	var sv []types.QueryLoggingConfig
 	if *v == nil {
-		sv = make([]*types.QueryLoggingConfig, 0)
+		sv = make([]types.QueryLoggingConfig, 0)
 	} else {
 		sv = *v
 	}
@@ -14817,11 +14821,13 @@ func awsRestxml_deserializeDocumentQueryLoggingConfigs(v *[]*types.QueryLoggingC
 		}
 		for {
 			if strings.EqualFold("QueryLoggingConfig", t.Name.Local) {
-				var col *types.QueryLoggingConfig
+				var col types.QueryLoggingConfig
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsRestxml_deserializeDocumentQueryLoggingConfig(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsRestxml_deserializeDocumentQueryLoggingConfig(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -14834,35 +14840,37 @@ func awsRestxml_deserializeDocumentQueryLoggingConfigs(v *[]*types.QueryLoggingC
 	return nil
 }
 
-func awsRestxml_deserializeDocumentQueryLoggingConfigsUnwrapped(v *[]*types.QueryLoggingConfig, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.QueryLoggingConfig
+func awsRestxml_deserializeDocumentQueryLoggingConfigsUnwrapped(v *[]types.QueryLoggingConfig, decoder smithyxml.NodeDecoder) error {
+	var sv []types.QueryLoggingConfig
 	if *v == nil {
-		sv = make([]*types.QueryLoggingConfig, 0)
+		sv = make([]types.QueryLoggingConfig, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.QueryLoggingConfig
+		var mv types.QueryLoggingConfig
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsRestxml_deserializeDocumentQueryLoggingConfig(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentQueryLoggingConfig(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
 	return nil
 }
-func awsRestxml_deserializeDocumentRecordData(v *[]*string, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentRecordData(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*string
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
@@ -14880,20 +14888,17 @@ func awsRestxml_deserializeDocumentRecordData(v *[]*string, decoder smithyxml.No
 		decoder = memberDecoder
 		for {
 			if strings.EqualFold("RecordDataEntry", t.Name.Local) {
-				var col *string
+				var col string
 				val, done, err := decoder.Value()
 				if err != nil {
 					return err
 				}
 				if done {
-					if val == nil {
-						col = ptr.String("")
-					}
 					break
 				}
 				if val != nil {
 					xtv := string(val)
-					col = &xtv
+					col = xtv
 				}
 				sv = append(sv, col)
 			} else {
@@ -14906,17 +14911,17 @@ func awsRestxml_deserializeDocumentRecordData(v *[]*string, decoder smithyxml.No
 	return nil
 }
 
-func awsRestxml_deserializeDocumentRecordDataUnwrapped(v *[]*string, decoder smithyxml.NodeDecoder) error {
-	var sv []*string
+func awsRestxml_deserializeDocumentRecordDataUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *string
+		var mv string
 		t := decoder.StartEl
 		_ = t
 		val, done, err := decoder.Value()
@@ -14924,14 +14929,11 @@ func awsRestxml_deserializeDocumentRecordDataUnwrapped(v *[]*string, decoder smi
 			return err
 		}
 		if done {
-			if val == nil {
-				mv = ptr.String("")
-			}
 			break
 		}
 		if val != nil {
 			xtv := string(val)
-			mv = &xtv
+			mv = xtv
 		}
 		sv = append(sv, mv)
 	}
@@ -14973,7 +14975,7 @@ func awsRestxml_deserializeDocumentResourceRecord(v **types.ResourceRecord, deco
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Value = &xtv
+				sv.Value = ptr.String(xtv)
 			}
 
 		default:
@@ -14986,13 +14988,13 @@ func awsRestxml_deserializeDocumentResourceRecord(v **types.ResourceRecord, deco
 	return nil
 }
 
-func awsRestxml_deserializeDocumentResourceRecords(v *[]*types.ResourceRecord, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentResourceRecords(v *[]types.ResourceRecord, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.ResourceRecord
+	var sv []types.ResourceRecord
 	if *v == nil {
-		sv = make([]*types.ResourceRecord, 0)
+		sv = make([]types.ResourceRecord, 0)
 	} else {
 		sv = *v
 	}
@@ -15008,11 +15010,13 @@ func awsRestxml_deserializeDocumentResourceRecords(v *[]*types.ResourceRecord, d
 		}
 		for {
 			if strings.EqualFold("ResourceRecord", t.Name.Local) {
-				var col *types.ResourceRecord
+				var col types.ResourceRecord
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsRestxml_deserializeDocumentResourceRecord(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsRestxml_deserializeDocumentResourceRecord(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -15025,23 +15029,25 @@ func awsRestxml_deserializeDocumentResourceRecords(v *[]*types.ResourceRecord, d
 	return nil
 }
 
-func awsRestxml_deserializeDocumentResourceRecordsUnwrapped(v *[]*types.ResourceRecord, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.ResourceRecord
+func awsRestxml_deserializeDocumentResourceRecordsUnwrapped(v *[]types.ResourceRecord, decoder smithyxml.NodeDecoder) error {
+	var sv []types.ResourceRecord
 	if *v == nil {
-		sv = make([]*types.ResourceRecord, 0)
+		sv = make([]types.ResourceRecord, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.ResourceRecord
+		var mv types.ResourceRecord
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsRestxml_deserializeDocumentResourceRecord(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentResourceRecord(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -15107,7 +15113,7 @@ func awsRestxml_deserializeDocumentResourceRecordSet(v **types.ResourceRecordSet
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.HealthCheckId = &xtv
+				sv.HealthCheckId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MultiValueAnswer", t.Name.Local):
@@ -15123,7 +15129,7 @@ func awsRestxml_deserializeDocumentResourceRecordSet(v **types.ResourceRecordSet
 				if err != nil {
 					return fmt.Errorf("expected ResourceRecordSetMultiValueAnswer to be of type *bool, got %T instead", val)
 				}
-				sv.MultiValueAnswer = &xtv
+				sv.MultiValueAnswer = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
@@ -15139,7 +15145,7 @@ func awsRestxml_deserializeDocumentResourceRecordSet(v **types.ResourceRecordSet
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Region", t.Name.Local):
@@ -15174,7 +15180,7 @@ func awsRestxml_deserializeDocumentResourceRecordSet(v **types.ResourceRecordSet
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.SetIdentifier = &xtv
+				sv.SetIdentifier = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TrafficPolicyInstanceId", t.Name.Local):
@@ -15190,7 +15196,7 @@ func awsRestxml_deserializeDocumentResourceRecordSet(v **types.ResourceRecordSet
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TrafficPolicyInstanceId = &xtv
+				sv.TrafficPolicyInstanceId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TTL", t.Name.Local):
@@ -15207,7 +15213,7 @@ func awsRestxml_deserializeDocumentResourceRecordSet(v **types.ResourceRecordSet
 				if err != nil {
 					return err
 				}
-				sv.TTL = &i64
+				sv.TTL = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("Type", t.Name.Local):
@@ -15237,7 +15243,7 @@ func awsRestxml_deserializeDocumentResourceRecordSet(v **types.ResourceRecordSet
 				if err != nil {
 					return err
 				}
-				sv.Weight = &i64
+				sv.Weight = ptr.Int64(i64)
 			}
 
 		default:
@@ -15250,13 +15256,13 @@ func awsRestxml_deserializeDocumentResourceRecordSet(v **types.ResourceRecordSet
 	return nil
 }
 
-func awsRestxml_deserializeDocumentResourceRecordSets(v *[]*types.ResourceRecordSet, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentResourceRecordSets(v *[]types.ResourceRecordSet, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.ResourceRecordSet
+	var sv []types.ResourceRecordSet
 	if *v == nil {
-		sv = make([]*types.ResourceRecordSet, 0)
+		sv = make([]types.ResourceRecordSet, 0)
 	} else {
 		sv = *v
 	}
@@ -15272,11 +15278,13 @@ func awsRestxml_deserializeDocumentResourceRecordSets(v *[]*types.ResourceRecord
 		}
 		for {
 			if strings.EqualFold("ResourceRecordSet", t.Name.Local) {
-				var col *types.ResourceRecordSet
+				var col types.ResourceRecordSet
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsRestxml_deserializeDocumentResourceRecordSet(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsRestxml_deserializeDocumentResourceRecordSet(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -15289,23 +15297,25 @@ func awsRestxml_deserializeDocumentResourceRecordSets(v *[]*types.ResourceRecord
 	return nil
 }
 
-func awsRestxml_deserializeDocumentResourceRecordSetsUnwrapped(v *[]*types.ResourceRecordSet, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.ResourceRecordSet
+func awsRestxml_deserializeDocumentResourceRecordSetsUnwrapped(v *[]types.ResourceRecordSet, decoder smithyxml.NodeDecoder) error {
+	var sv []types.ResourceRecordSet
 	if *v == nil {
-		sv = make([]*types.ResourceRecordSet, 0)
+		sv = make([]types.ResourceRecordSet, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.ResourceRecordSet
+		var mv types.ResourceRecordSet
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsRestxml_deserializeDocumentResourceRecordSet(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentResourceRecordSet(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -15346,7 +15356,7 @@ func awsRestxml_deserializeDocumentResourceTagSet(v **types.ResourceTagSet, deco
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.ResourceId = &xtv
+				sv.ResourceId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("ResourceType", t.Name.Local):
@@ -15378,13 +15388,13 @@ func awsRestxml_deserializeDocumentResourceTagSet(v **types.ResourceTagSet, deco
 	return nil
 }
 
-func awsRestxml_deserializeDocumentResourceTagSetList(v *[]*types.ResourceTagSet, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentResourceTagSetList(v *[]types.ResourceTagSet, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.ResourceTagSet
+	var sv []types.ResourceTagSet
 	if *v == nil {
-		sv = make([]*types.ResourceTagSet, 0)
+		sv = make([]types.ResourceTagSet, 0)
 	} else {
 		sv = *v
 	}
@@ -15400,11 +15410,13 @@ func awsRestxml_deserializeDocumentResourceTagSetList(v *[]*types.ResourceTagSet
 		}
 		for {
 			if strings.EqualFold("ResourceTagSet", t.Name.Local) {
-				var col *types.ResourceTagSet
+				var col types.ResourceTagSet
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsRestxml_deserializeDocumentResourceTagSet(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsRestxml_deserializeDocumentResourceTagSet(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -15417,23 +15429,25 @@ func awsRestxml_deserializeDocumentResourceTagSetList(v *[]*types.ResourceTagSet
 	return nil
 }
 
-func awsRestxml_deserializeDocumentResourceTagSetListUnwrapped(v *[]*types.ResourceTagSet, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.ResourceTagSet
+func awsRestxml_deserializeDocumentResourceTagSetListUnwrapped(v *[]types.ResourceTagSet, decoder smithyxml.NodeDecoder) error {
+	var sv []types.ResourceTagSet
 	if *v == nil {
-		sv = make([]*types.ResourceTagSet, 0)
+		sv = make([]types.ResourceTagSet, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.ResourceTagSet
+		var mv types.ResourceTagSet
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsRestxml_deserializeDocumentResourceTagSet(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentResourceTagSet(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -15488,7 +15502,7 @@ func awsRestxml_deserializeDocumentReusableDelegationSetLimit(v **types.Reusable
 				if err != nil {
 					return err
 				}
-				sv.Value = &i64
+				sv.Value = i64
 			}
 
 		default:
@@ -15537,7 +15551,7 @@ func awsRestxml_deserializeDocumentStatusReport(v **types.StatusReport, decoder 
 				if err != nil {
 					return err
 				}
-				sv.CheckedTime = &t
+				sv.CheckedTime = ptr.Time(t)
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):
@@ -15553,7 +15567,7 @@ func awsRestxml_deserializeDocumentStatusReport(v **types.StatusReport, decoder 
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Status = &xtv
+				sv.Status = ptr.String(xtv)
 			}
 
 		default:
@@ -15601,7 +15615,7 @@ func awsRestxml_deserializeDocumentTag(v **types.Tag, decoder smithyxml.NodeDeco
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Key = &xtv
+				sv.Key = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Value", t.Name.Local):
@@ -15617,7 +15631,7 @@ func awsRestxml_deserializeDocumentTag(v **types.Tag, decoder smithyxml.NodeDeco
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Value = &xtv
+				sv.Value = ptr.String(xtv)
 			}
 
 		default:
@@ -15630,13 +15644,13 @@ func awsRestxml_deserializeDocumentTag(v **types.Tag, decoder smithyxml.NodeDeco
 	return nil
 }
 
-func awsRestxml_deserializeDocumentTagList(v *[]*types.Tag, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentTagList(v *[]types.Tag, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.Tag
+	var sv []types.Tag
 	if *v == nil {
-		sv = make([]*types.Tag, 0)
+		sv = make([]types.Tag, 0)
 	} else {
 		sv = *v
 	}
@@ -15652,11 +15666,13 @@ func awsRestxml_deserializeDocumentTagList(v *[]*types.Tag, decoder smithyxml.No
 		}
 		for {
 			if strings.EqualFold("Tag", t.Name.Local) {
-				var col *types.Tag
+				var col types.Tag
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsRestxml_deserializeDocumentTag(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsRestxml_deserializeDocumentTag(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -15669,23 +15685,25 @@ func awsRestxml_deserializeDocumentTagList(v *[]*types.Tag, decoder smithyxml.No
 	return nil
 }
 
-func awsRestxml_deserializeDocumentTagListUnwrapped(v *[]*types.Tag, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.Tag
+func awsRestxml_deserializeDocumentTagListUnwrapped(v *[]types.Tag, decoder smithyxml.NodeDecoder) error {
+	var sv []types.Tag
 	if *v == nil {
-		sv = make([]*types.Tag, 0)
+		sv = make([]types.Tag, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.Tag
+		var mv types.Tag
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsRestxml_deserializeDocumentTag(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentTag(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -15726,7 +15744,7 @@ func awsRestxml_deserializeDocumentThrottlingException(v **types.ThrottlingExcep
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -15774,7 +15792,7 @@ func awsRestxml_deserializeDocumentTooManyHealthChecks(v **types.TooManyHealthCh
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -15822,7 +15840,7 @@ func awsRestxml_deserializeDocumentTooManyHostedZones(v **types.TooManyHostedZon
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -15870,7 +15888,7 @@ func awsRestxml_deserializeDocumentTooManyTrafficPolicies(v **types.TooManyTraff
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -15918,7 +15936,7 @@ func awsRestxml_deserializeDocumentTooManyTrafficPolicyInstances(v **types.TooMa
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -15966,7 +15984,7 @@ func awsRestxml_deserializeDocumentTooManyTrafficPolicyVersionsForCurrentPolicy(
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -16014,7 +16032,7 @@ func awsRestxml_deserializeDocumentTooManyVPCAssociationAuthorizations(v **types
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -16027,13 +16045,13 @@ func awsRestxml_deserializeDocumentTooManyVPCAssociationAuthorizations(v **types
 	return nil
 }
 
-func awsRestxml_deserializeDocumentTrafficPolicies(v *[]*types.TrafficPolicy, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentTrafficPolicies(v *[]types.TrafficPolicy, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.TrafficPolicy
+	var sv []types.TrafficPolicy
 	if *v == nil {
-		sv = make([]*types.TrafficPolicy, 0)
+		sv = make([]types.TrafficPolicy, 0)
 	} else {
 		sv = *v
 	}
@@ -16049,11 +16067,13 @@ func awsRestxml_deserializeDocumentTrafficPolicies(v *[]*types.TrafficPolicy, de
 		}
 		for {
 			if strings.EqualFold("TrafficPolicy", t.Name.Local) {
-				var col *types.TrafficPolicy
+				var col types.TrafficPolicy
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsRestxml_deserializeDocumentTrafficPolicy(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsRestxml_deserializeDocumentTrafficPolicy(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -16066,23 +16086,25 @@ func awsRestxml_deserializeDocumentTrafficPolicies(v *[]*types.TrafficPolicy, de
 	return nil
 }
 
-func awsRestxml_deserializeDocumentTrafficPoliciesUnwrapped(v *[]*types.TrafficPolicy, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.TrafficPolicy
+func awsRestxml_deserializeDocumentTrafficPoliciesUnwrapped(v *[]types.TrafficPolicy, decoder smithyxml.NodeDecoder) error {
+	var sv []types.TrafficPolicy
 	if *v == nil {
-		sv = make([]*types.TrafficPolicy, 0)
+		sv = make([]types.TrafficPolicy, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.TrafficPolicy
+		var mv types.TrafficPolicy
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsRestxml_deserializeDocumentTrafficPolicy(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentTrafficPolicy(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -16123,7 +16145,7 @@ func awsRestxml_deserializeDocumentTrafficPolicy(v **types.TrafficPolicy, decode
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Comment = &xtv
+				sv.Comment = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Document", t.Name.Local):
@@ -16139,7 +16161,7 @@ func awsRestxml_deserializeDocumentTrafficPolicy(v **types.TrafficPolicy, decode
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Document = &xtv
+				sv.Document = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
@@ -16155,7 +16177,7 @@ func awsRestxml_deserializeDocumentTrafficPolicy(v **types.TrafficPolicy, decode
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Id = &xtv
+				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
@@ -16171,7 +16193,7 @@ func awsRestxml_deserializeDocumentTrafficPolicy(v **types.TrafficPolicy, decode
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Type", t.Name.Local):
@@ -16249,7 +16271,7 @@ func awsRestxml_deserializeDocumentTrafficPolicyAlreadyExists(v **types.TrafficP
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -16297,7 +16319,7 @@ func awsRestxml_deserializeDocumentTrafficPolicyInstance(v **types.TrafficPolicy
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.HostedZoneId = &xtv
+				sv.HostedZoneId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
@@ -16313,7 +16335,7 @@ func awsRestxml_deserializeDocumentTrafficPolicyInstance(v **types.TrafficPolicy
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Id = &xtv
+				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Message", t.Name.Local):
@@ -16329,7 +16351,7 @@ func awsRestxml_deserializeDocumentTrafficPolicyInstance(v **types.TrafficPolicy
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
@@ -16345,7 +16367,7 @@ func awsRestxml_deserializeDocumentTrafficPolicyInstance(v **types.TrafficPolicy
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("State", t.Name.Local):
@@ -16361,7 +16383,7 @@ func awsRestxml_deserializeDocumentTrafficPolicyInstance(v **types.TrafficPolicy
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.State = &xtv
+				sv.State = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TrafficPolicyId", t.Name.Local):
@@ -16377,7 +16399,7 @@ func awsRestxml_deserializeDocumentTrafficPolicyInstance(v **types.TrafficPolicy
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TrafficPolicyId = &xtv
+				sv.TrafficPolicyId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TrafficPolicyType", t.Name.Local):
@@ -16424,7 +16446,7 @@ func awsRestxml_deserializeDocumentTrafficPolicyInstance(v **types.TrafficPolicy
 				if err != nil {
 					return err
 				}
-				sv.TTL = &i64
+				sv.TTL = ptr.Int64(i64)
 			}
 
 		default:
@@ -16472,7 +16494,7 @@ func awsRestxml_deserializeDocumentTrafficPolicyInstanceAlreadyExists(v **types.
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -16485,13 +16507,13 @@ func awsRestxml_deserializeDocumentTrafficPolicyInstanceAlreadyExists(v **types.
 	return nil
 }
 
-func awsRestxml_deserializeDocumentTrafficPolicyInstances(v *[]*types.TrafficPolicyInstance, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentTrafficPolicyInstances(v *[]types.TrafficPolicyInstance, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.TrafficPolicyInstance
+	var sv []types.TrafficPolicyInstance
 	if *v == nil {
-		sv = make([]*types.TrafficPolicyInstance, 0)
+		sv = make([]types.TrafficPolicyInstance, 0)
 	} else {
 		sv = *v
 	}
@@ -16507,11 +16529,13 @@ func awsRestxml_deserializeDocumentTrafficPolicyInstances(v *[]*types.TrafficPol
 		}
 		for {
 			if strings.EqualFold("TrafficPolicyInstance", t.Name.Local) {
-				var col *types.TrafficPolicyInstance
+				var col types.TrafficPolicyInstance
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsRestxml_deserializeDocumentTrafficPolicyInstance(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsRestxml_deserializeDocumentTrafficPolicyInstance(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -16524,23 +16548,25 @@ func awsRestxml_deserializeDocumentTrafficPolicyInstances(v *[]*types.TrafficPol
 	return nil
 }
 
-func awsRestxml_deserializeDocumentTrafficPolicyInstancesUnwrapped(v *[]*types.TrafficPolicyInstance, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.TrafficPolicyInstance
+func awsRestxml_deserializeDocumentTrafficPolicyInstancesUnwrapped(v *[]types.TrafficPolicyInstance, decoder smithyxml.NodeDecoder) error {
+	var sv []types.TrafficPolicyInstance
 	if *v == nil {
-		sv = make([]*types.TrafficPolicyInstance, 0)
+		sv = make([]types.TrafficPolicyInstance, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.TrafficPolicyInstance
+		var mv types.TrafficPolicyInstance
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsRestxml_deserializeDocumentTrafficPolicyInstance(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentTrafficPolicyInstance(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -16581,7 +16607,7 @@ func awsRestxml_deserializeDocumentTrafficPolicyInUse(v **types.TrafficPolicyInU
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -16594,13 +16620,13 @@ func awsRestxml_deserializeDocumentTrafficPolicyInUse(v **types.TrafficPolicyInU
 	return nil
 }
 
-func awsRestxml_deserializeDocumentTrafficPolicySummaries(v *[]*types.TrafficPolicySummary, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentTrafficPolicySummaries(v *[]types.TrafficPolicySummary, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.TrafficPolicySummary
+	var sv []types.TrafficPolicySummary
 	if *v == nil {
-		sv = make([]*types.TrafficPolicySummary, 0)
+		sv = make([]types.TrafficPolicySummary, 0)
 	} else {
 		sv = *v
 	}
@@ -16616,11 +16642,13 @@ func awsRestxml_deserializeDocumentTrafficPolicySummaries(v *[]*types.TrafficPol
 		}
 		for {
 			if strings.EqualFold("TrafficPolicySummary", t.Name.Local) {
-				var col *types.TrafficPolicySummary
+				var col types.TrafficPolicySummary
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsRestxml_deserializeDocumentTrafficPolicySummary(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsRestxml_deserializeDocumentTrafficPolicySummary(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -16633,23 +16661,25 @@ func awsRestxml_deserializeDocumentTrafficPolicySummaries(v *[]*types.TrafficPol
 	return nil
 }
 
-func awsRestxml_deserializeDocumentTrafficPolicySummariesUnwrapped(v *[]*types.TrafficPolicySummary, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.TrafficPolicySummary
+func awsRestxml_deserializeDocumentTrafficPolicySummariesUnwrapped(v *[]types.TrafficPolicySummary, decoder smithyxml.NodeDecoder) error {
+	var sv []types.TrafficPolicySummary
 	if *v == nil {
-		sv = make([]*types.TrafficPolicySummary, 0)
+		sv = make([]types.TrafficPolicySummary, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.TrafficPolicySummary
+		var mv types.TrafficPolicySummary
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsRestxml_deserializeDocumentTrafficPolicySummary(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentTrafficPolicySummary(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -16690,7 +16720,7 @@ func awsRestxml_deserializeDocumentTrafficPolicySummary(v **types.TrafficPolicyS
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Id = &xtv
+				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("LatestVersion", t.Name.Local):
@@ -16723,7 +16753,7 @@ func awsRestxml_deserializeDocumentTrafficPolicySummary(v **types.TrafficPolicyS
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TrafficPolicyCount", t.Name.Local):
@@ -16801,7 +16831,7 @@ func awsRestxml_deserializeDocumentVPC(v **types.VPC, decoder smithyxml.NodeDeco
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.VPCId = &xtv
+				sv.VPCId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("VPCRegion", t.Name.Local):
@@ -16862,7 +16892,7 @@ func awsRestxml_deserializeDocumentVPCAssociationAuthorizationNotFound(v **types
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -16910,7 +16940,7 @@ func awsRestxml_deserializeDocumentVPCAssociationNotFound(v **types.VPCAssociati
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -16923,13 +16953,13 @@ func awsRestxml_deserializeDocumentVPCAssociationNotFound(v **types.VPCAssociati
 	return nil
 }
 
-func awsRestxml_deserializeDocumentVPCs(v *[]*types.VPC, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentVPCs(v *[]types.VPC, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.VPC
+	var sv []types.VPC
 	if *v == nil {
-		sv = make([]*types.VPC, 0)
+		sv = make([]types.VPC, 0)
 	} else {
 		sv = *v
 	}
@@ -16945,11 +16975,13 @@ func awsRestxml_deserializeDocumentVPCs(v *[]*types.VPC, decoder smithyxml.NodeD
 		}
 		for {
 			if strings.EqualFold("VPC", t.Name.Local) {
-				var col *types.VPC
+				var col types.VPC
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsRestxml_deserializeDocumentVPC(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsRestxml_deserializeDocumentVPC(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -16962,23 +16994,25 @@ func awsRestxml_deserializeDocumentVPCs(v *[]*types.VPC, decoder smithyxml.NodeD
 	return nil
 }
 
-func awsRestxml_deserializeDocumentVPCsUnwrapped(v *[]*types.VPC, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.VPC
+func awsRestxml_deserializeDocumentVPCsUnwrapped(v *[]types.VPC, decoder smithyxml.NodeDecoder) error {
+	var sv []types.VPC
 	if *v == nil {
-		sv = make([]*types.VPC, 0)
+		sv = make([]types.VPC, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.VPC
+		var mv types.VPC
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsRestxml_deserializeDocumentVPC(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentVPC(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv

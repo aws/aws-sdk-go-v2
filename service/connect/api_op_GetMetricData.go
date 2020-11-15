@@ -76,7 +76,7 @@ type GetMetricDataInput struct {
 	// 25, 30, 45, 60, 90, 120, 180, 240, 300, 600
 	//
 	// This member is required.
-	HistoricalMetrics []*types.HistoricalMetric
+	HistoricalMetrics []types.HistoricalMetric
 
 	// The identifier of the Amazon Connect instance.
 	//
@@ -100,7 +100,7 @@ type GetMetricDataInput struct {
 	Groupings []types.Grouping
 
 	// The maximimum number of results to return per page.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
@@ -111,7 +111,7 @@ type GetMetricDataOutput struct {
 
 	// Information about the historical metrics. If no grouping is specified, a summary
 	// of metric data is returned.
-	MetricResults []*types.HistoricalMetricResult
+	MetricResults []types.HistoricalMetricResult
 
 	// If there are additional results, this is the token for the next set of results.
 	// The token expires after 5 minutes from the time it is created. Subsequent

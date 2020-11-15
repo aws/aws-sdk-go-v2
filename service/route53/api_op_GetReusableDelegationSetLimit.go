@@ -54,7 +54,7 @@ type GetReusableDelegationSetLimitOutput struct {
 	// reusable delegation set.
 	//
 	// This member is required.
-	Count *int64
+	Count int64
 
 	// The current setting for the limit on hosted zones that you can associate with
 	// the specified reusable delegation set.

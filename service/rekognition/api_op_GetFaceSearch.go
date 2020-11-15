@@ -89,7 +89,7 @@ type GetFaceSearchOutput struct {
 	// call to StartFaceSearch. Each Persons element includes a time the person was
 	// matched, face match details (FaceMatches) for matching faces in the collection,
 	// and person information (Person) for the matched person.
-	Persons []*types.PersonMatch
+	Persons []types.PersonMatch
 
 	// If the job fails, StatusMessage provides a descriptive error message.
 	StatusMessage *string

@@ -43,7 +43,7 @@ type DescribeAddressesInput struct {
 type DescribeAddressesOutput struct {
 
 	// The Snow device shipping addresses that were created for this account.
-	Addresses []*types.Address
+	Addresses []types.Address
 
 	// HTTP requests are stateless. If you use the automatically generated NextToken
 	// value in your next DescribeAddresses call, your list of returned addresses will

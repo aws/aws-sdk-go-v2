@@ -47,13 +47,13 @@ type GetPipelineDefinitionInput struct {
 type GetPipelineDefinitionOutput struct {
 
 	// The parameter objects used in the pipeline definition.
-	ParameterObjects []*types.ParameterObject
+	ParameterObjects []types.ParameterObject
 
 	// The parameter values used in the pipeline definition.
-	ParameterValues []*types.ParameterValue
+	ParameterValues []types.ParameterValue
 
 	// The objects defined in the pipeline.
-	PipelineObjects []*types.PipelineObject
+	PipelineObjects []types.PipelineObject
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

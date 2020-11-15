@@ -57,10 +57,10 @@ type DescribeFleetOutput struct {
 	Name *string
 
 	// A list of robots.
-	Robots []*types.Robot
+	Robots []types.Robot
 
 	// The list of all tags added to the specified fleet.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

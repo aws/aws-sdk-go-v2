@@ -61,7 +61,7 @@ type GetCommentsForPullRequestInput struct {
 type GetCommentsForPullRequestOutput struct {
 
 	// An array of comment objects on the pull request.
-	CommentsForPullRequestData []*types.CommentsForPullRequest
+	CommentsForPullRequestData []types.CommentsForPullRequest
 
 	// An enumeration token that can be used in a request to return the next batch of
 	// the results.

@@ -31,7 +31,7 @@ type ListResourcesInput struct {
 
 	// Any applicable row-level and/or column-level filtering conditions for the
 	// resources.
-	FilterConditionList []*types.FilterCondition
+	FilterConditionList []types.FilterCondition
 
 	// The maximum number of resource results.
 	MaxResults *int32
@@ -46,7 +46,7 @@ type ListResourcesOutput struct {
 	NextToken *string
 
 	// A summary of the data lake resources.
-	ResourceInfoList []*types.ResourceInfo
+	ResourceInfoList []types.ResourceInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

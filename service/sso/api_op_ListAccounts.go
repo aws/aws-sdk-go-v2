@@ -51,7 +51,7 @@ type ListAccountsOutput struct {
 
 	// A paginated response with the list of account information and the next token if
 	// more results are available.
-	AccountList []*types.AccountInfo
+	AccountList []types.AccountInfo
 
 	// The page token client that is used to retrieve the list of accounts.
 	NextToken *string

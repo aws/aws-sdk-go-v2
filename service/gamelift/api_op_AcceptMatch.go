@@ -71,7 +71,7 @@ type AcceptMatchInput struct {
 	// include one or multiple player IDs.
 	//
 	// This member is required.
-	PlayerIds []*string
+	PlayerIds []string
 
 	// A unique identifier for a matchmaking ticket. The ticket must be in status
 	// REQUIRES_ACCEPTANCE; otherwise this request will fail.

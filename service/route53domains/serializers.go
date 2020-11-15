@@ -1398,34 +1398,26 @@ func awsAwsjson11_serializeDocumentExtraParam(v *types.ExtraParam, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentExtraParamList(v []*types.ExtraParam, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentExtraParamList(v []types.ExtraParam, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentExtraParam(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentExtraParam(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGlueIpList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentGlueIpList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1449,17 +1441,13 @@ func awsAwsjson11_serializeDocumentNameserver(v *types.Nameserver, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentNameserverList(v []*types.Nameserver, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentNameserverList(v []types.Nameserver, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentNameserver(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentNameserver(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1483,32 +1471,24 @@ func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagKeyList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1683,9 +1663,9 @@ func awsAwsjson11_serializeOpDocumentGetDomainSuggestionsInput(v *GetDomainSugge
 		ok.Boolean(*v.OnlyAvailable)
 	}
 
-	if v.SuggestionCount != nil {
+	if v.SuggestionCount != 0 {
 		ok := object.Key("SuggestionCount")
-		ok.Integer(*v.SuggestionCount)
+		ok.Integer(v.SuggestionCount)
 	}
 
 	return nil
@@ -1833,9 +1813,9 @@ func awsAwsjson11_serializeOpDocumentRenewDomainInput(v *RenewDomainInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.CurrentExpiryYear != nil {
+	if v.CurrentExpiryYear != 0 {
 		ok := object.Key("CurrentExpiryYear")
-		ok.Integer(*v.CurrentExpiryYear)
+		ok.Integer(v.CurrentExpiryYear)
 	}
 
 	if v.DomainName != nil {

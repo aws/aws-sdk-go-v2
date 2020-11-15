@@ -63,7 +63,7 @@ type GetWorkflowExecutionHistoryInput struct {
 
 	// The maximum number of results that are returned per call. Use nextPageToken to
 	// obtain further pages of results.
-	MaximumPageSize *int32
+	MaximumPageSize int32
 
 	// If NextPageToken is returned there are more results available. The value of
 	// NextPageToken is a unique pagination token for each page. Make the call again
@@ -76,7 +76,7 @@ type GetWorkflowExecutionHistoryInput struct {
 
 	// When set to true, returns the events in reverse order. By default the results
 	// are returned in ascending order of the eventTimeStamp of the events.
-	ReverseOrder *bool
+	ReverseOrder bool
 }
 
 // Paginated representation of a workflow history for a workflow execution. This is
@@ -87,7 +87,7 @@ type GetWorkflowExecutionHistoryOutput struct {
 	// The list of history events.
 	//
 	// This member is required.
-	Events []*types.HistoryEvent
+	Events []types.HistoryEvent
 
 	// If a NextPageToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the

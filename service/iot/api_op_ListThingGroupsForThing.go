@@ -48,7 +48,7 @@ type ListThingGroupsForThingOutput struct {
 	NextToken *string
 
 	// The thing groups.
-	ThingGroups []*types.GroupNameAndArn
+	ThingGroups []types.GroupNameAndArn
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

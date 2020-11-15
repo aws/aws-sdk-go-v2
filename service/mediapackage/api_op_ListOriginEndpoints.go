@@ -34,7 +34,7 @@ type ListOriginEndpointsInput struct {
 	ChannelId *string
 
 	// The upper bound on the number of records to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token used to resume pagination from the end of a previous request.
 	NextToken *string
@@ -46,7 +46,7 @@ type ListOriginEndpointsOutput struct {
 	NextToken *string
 
 	// A list of OriginEndpoint records.
-	OriginEndpoints []*types.OriginEndpoint
+	OriginEndpoints []types.OriginEndpoint
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

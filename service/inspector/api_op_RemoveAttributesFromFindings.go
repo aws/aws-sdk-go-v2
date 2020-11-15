@@ -34,12 +34,12 @@ type RemoveAttributesFromFindingsInput struct {
 	// The array of attribute keys that you want to remove from specified findings.
 	//
 	// This member is required.
-	AttributeKeys []*string
+	AttributeKeys []string
 
 	// The ARNs that specify the findings that you want to remove attributes from.
 	//
 	// This member is required.
-	FindingArns []*string
+	FindingArns []string
 }
 
 type RemoveAttributesFromFindingsOutput struct {
@@ -48,7 +48,7 @@ type RemoveAttributesFromFindingsOutput struct {
 	// failed item.
 	//
 	// This member is required.
-	FailedItems map[string]*types.FailedItemDetails
+	FailedItems map[string]types.FailedItemDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

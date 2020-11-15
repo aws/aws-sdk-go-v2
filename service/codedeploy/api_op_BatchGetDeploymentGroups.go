@@ -39,14 +39,14 @@ type BatchGetDeploymentGroupsInput struct {
 	// The names of the deployment groups.
 	//
 	// This member is required.
-	DeploymentGroupNames []*string
+	DeploymentGroupNames []string
 }
 
 // Represents the output of a BatchGetDeploymentGroups operation.
 type BatchGetDeploymentGroupsOutput struct {
 
 	// Information about the deployment groups.
-	DeploymentGroupsInfo []*types.DeploymentGroupInfo
+	DeploymentGroupsInfo []types.DeploymentGroupInfo
 
 	// Information about errors that might have occurred during the API call.
 	ErrorMessage *string

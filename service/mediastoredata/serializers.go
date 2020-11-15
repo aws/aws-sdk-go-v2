@@ -62,13 +62,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteObjectInput(v *DeleteObjectInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Path == nil {
+	if v.Path == nil || len(*v.Path) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Path must not be empty")}
 	}
 	if v.Path != nil {
-		if len(*v.Path) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Path must not be empty")}
-		}
 		if err := encoder.SetURI("Path").String(*v.Path); err != nil {
 			return err
 		}
@@ -128,13 +125,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeObjectInput(v *DescribeObjectIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Path == nil {
+	if v.Path == nil || len(*v.Path) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Path must not be empty")}
 	}
 	if v.Path != nil {
-		if len(*v.Path) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Path must not be empty")}
-		}
 		if err := encoder.SetURI("Path").String(*v.Path); err != nil {
 			return err
 		}
@@ -194,23 +188,18 @@ func awsRestjson1_serializeOpHttpBindingsGetObjectInput(v *GetObjectInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Path == nil {
+	if v.Path == nil || len(*v.Path) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Path must not be empty")}
 	}
 	if v.Path != nil {
-		if len(*v.Path) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Path must not be empty")}
-		}
 		if err := encoder.SetURI("Path").String(*v.Path); err != nil {
 			return err
 		}
 	}
 
-	if v.Range != nil {
+	if v.Range != nil && len(*v.Range) > 0 {
 		locationName := "Range"
-		if len(*v.Range) > 0 {
-			encoder.SetHeader(locationName).String(*v.Range)
-		}
+		encoder.SetHeader(locationName).String(*v.Range)
 	}
 
 	return nil
@@ -344,27 +333,20 @@ func awsRestjson1_serializeOpHttpBindingsPutObjectInput(v *PutObjectInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.CacheControl != nil {
+	if v.CacheControl != nil && len(*v.CacheControl) > 0 {
 		locationName := "Cache-Control"
-		if len(*v.CacheControl) > 0 {
-			encoder.SetHeader(locationName).String(*v.CacheControl)
-		}
+		encoder.SetHeader(locationName).String(*v.CacheControl)
 	}
 
-	if v.ContentType != nil {
+	if v.ContentType != nil && len(*v.ContentType) > 0 {
 		locationName := "Content-Type"
-		if len(*v.ContentType) > 0 {
-			encoder.SetHeader(locationName).String(*v.ContentType)
-		}
+		encoder.SetHeader(locationName).String(*v.ContentType)
 	}
 
-	if v.Path == nil {
+	if v.Path == nil || len(*v.Path) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Path must not be empty")}
 	}
 	if v.Path != nil {
-		if len(*v.Path) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Path must not be empty")}
-		}
 		if err := encoder.SetURI("Path").String(*v.Path); err != nil {
 			return err
 		}

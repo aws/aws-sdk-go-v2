@@ -71,7 +71,7 @@ type CreateDBClusterInput struct {
 	// Regions and Availability Zones
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html)
 	// in the Amazon Aurora User Guide.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// The target backtrack window, in seconds. To disable backtracking, set this value
 	// to 0. Currently, Backtrack is only supported for Aurora MySQL DB clusters.
@@ -136,7 +136,7 @@ type CreateDBClusterInput struct {
 	// in the Amazon Aurora User Guide. Aurora MySQL Possible values are audit, error,
 	// general, and slowquery. Aurora PostgreSQL Possible values are postgresql and
 	// upgrade.
-	EnableCloudwatchLogsExports []*string
+	EnableCloudwatchLogsExports []string
 
 	// A value that indicates whether to enable write operations to be forwarded from
 	// this cluster to the primary cluster in an Aurora global database. The resulting
@@ -339,10 +339,10 @@ type CreateDBClusterInput struct {
 	StorageEncrypted *bool
 
 	// Tags to assign to the DB cluster.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A list of EC2 VPC security groups to associate with this DB cluster.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 
 	// Used by the SDK's PresignURL autofill customization to specify the region the of
 	// the client's request.

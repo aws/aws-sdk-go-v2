@@ -27,11 +27,11 @@ func (c *Client) JsonMaps(ctx context.Context, params *JsonMapsInput, optFns ...
 }
 
 type JsonMapsInput struct {
-	MyMap map[string]*types.GreetingStruct
+	MyMap map[string]types.GreetingStruct
 }
 
 type JsonMapsOutput struct {
-	MyMap map[string]*types.GreetingStruct
+	MyMap map[string]types.GreetingStruct
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

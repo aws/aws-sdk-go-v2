@@ -57,7 +57,7 @@ type DescribeTagsOutput struct {
 	// Returns tags associated with the file system as an array of Tag objects.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// If the request included a Marker, the response returns that value in this field.
 	Marker *string

@@ -40,7 +40,7 @@ type GetDataSourceInput struct {
 
 	// Specifies whether the GetDataSource operation should return DataSourceSchema. If
 	// true, DataSourceSchema is returned. If false, DataSourceSchema is not returned.
-	Verbose *bool
+	Verbose bool
 }
 
 // Represents the output of a GetDataSource operation and describes a DataSource.
@@ -48,7 +48,7 @@ type GetDataSourceOutput struct {
 
 	// The parameter is true if statistics need to be generated from the observation
 	// data.
-	ComputeStatistics *bool
+	ComputeStatistics bool
 
 	// The approximate CPU time in milliseconds that Amazon Machine Learning spent
 	// processing the DataSource, normalized and scaled on computation resources.

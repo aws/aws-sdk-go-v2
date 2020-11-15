@@ -36,7 +36,7 @@ type ListLocationsInput struct {
 	// You can use API filters to narrow down the list of resources returned by
 	// ListLocations. For example, to retrieve all tasks on a specific source location,
 	// you can use ListLocations with filter name LocationType S3 and Operator Equals.
-	Filters []*types.LocationFilter
+	Filters []types.LocationFilter
 
 	// The maximum number of locations to return.
 	MaxResults *int32
@@ -50,7 +50,7 @@ type ListLocationsInput struct {
 type ListLocationsOutput struct {
 
 	// An array that contains a list of locations.
-	Locations []*types.LocationListEntry
+	Locations []types.LocationListEntry
 
 	// An opaque string that indicates the position at which to begin returning the
 	// next list of locations.

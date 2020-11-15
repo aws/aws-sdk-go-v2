@@ -41,7 +41,7 @@ type UntagResourceInput struct {
 	// The tag keys to delete from the specified resource.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 
 	// The Amazon Resource Name (ARN) of the resource from which you want to remove a
 	// tag.
@@ -53,7 +53,7 @@ type UntagResourceOutput struct {
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.
-	Operations []*types.Operation
+	Operations []types.Operation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

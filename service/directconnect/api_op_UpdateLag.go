@@ -53,14 +53,14 @@ type UpdateLagInput struct {
 
 	// The minimum number of physical connections that must be operational for the LAG
 	// itself to be operational.
-	MinimumLinks *int32
+	MinimumLinks int32
 }
 
 // Information about a link aggregation group (LAG).
 type UpdateLagOutput struct {
 
 	// Indicates whether the LAG can host other connections.
-	AllowsHostedConnections *bool
+	AllowsHostedConnections bool
 
 	// The AWS Direct Connect endpoint that hosts the LAG.
 	AwsDevice *string
@@ -69,7 +69,7 @@ type UpdateLagOutput struct {
 	AwsDeviceV2 *string
 
 	// The connections bundled by the LAG.
-	Connections []*types.Connection
+	Connections []types.Connection
 
 	// The individual bandwidth of the physical connections bundled by the LAG. The
 	// possible values are 1Gbps and 10Gbps.
@@ -116,11 +116,11 @@ type UpdateLagOutput struct {
 
 	// The minimum number of physical dedicated connections that must be operational
 	// for the LAG itself to be operational.
-	MinimumLinks *int32
+	MinimumLinks int32
 
 	// The number of physical dedicated connections bundled by the LAG, up to a maximum
 	// of 10.
-	NumberOfConnections *int32
+	NumberOfConnections int32
 
 	// The ID of the AWS account that owns the LAG.
 	OwnerAccount *string
@@ -132,7 +132,7 @@ type UpdateLagOutput struct {
 	Region *string
 
 	// The tags associated with the LAG.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

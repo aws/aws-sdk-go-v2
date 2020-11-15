@@ -39,7 +39,7 @@ type CreatePackagingGroupInput struct {
 	Authorization *types.Authorization
 
 	// A collection of tags associated with a resource
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreatePackagingGroupOutput struct {
@@ -57,7 +57,7 @@ type CreatePackagingGroupOutput struct {
 	Id *string
 
 	// A collection of tags associated with a resource
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -64,7 +64,7 @@ type CreateClusterSnapshotInput struct {
 	ManualSnapshotRetentionPeriod *int32
 
 	// A list of tag instances.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateClusterSnapshotOutput struct {

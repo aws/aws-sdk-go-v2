@@ -1483,13 +1483,13 @@ func validateBouncedRecipientInfo(v *types.BouncedRecipientInfo) error {
 	}
 }
 
-func validateBouncedRecipientInfoList(v []*types.BouncedRecipientInfo) error {
+func validateBouncedRecipientInfoList(v []types.BouncedRecipientInfo) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BouncedRecipientInfoList"}
 	for i := range v {
-		if err := validateBouncedRecipientInfo(v[i]); err != nil {
+		if err := validateBouncedRecipientInfo(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1520,13 +1520,13 @@ func validateBulkEmailDestination(v *types.BulkEmailDestination) error {
 	}
 }
 
-func validateBulkEmailDestinationList(v []*types.BulkEmailDestination) error {
+func validateBulkEmailDestinationList(v []types.BulkEmailDestination) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BulkEmailDestinationList"}
 	for i := range v {
-		if err := validateBulkEmailDestination(v[i]); err != nil {
+		if err := validateBulkEmailDestination(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1577,13 +1577,13 @@ func validateCloudWatchDimensionConfiguration(v *types.CloudWatchDimensionConfig
 	}
 }
 
-func validateCloudWatchDimensionConfigurations(v []*types.CloudWatchDimensionConfiguration) error {
+func validateCloudWatchDimensionConfigurations(v []types.CloudWatchDimensionConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchDimensionConfigurations"}
 	for i := range v {
-		if err := validateCloudWatchDimensionConfiguration(v[i]); err != nil {
+		if err := validateCloudWatchDimensionConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1675,13 +1675,13 @@ func validateExtensionField(v *types.ExtensionField) error {
 	}
 }
 
-func validateExtensionFieldList(v []*types.ExtensionField) error {
+func validateExtensionFieldList(v []types.ExtensionField) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExtensionFieldList"}
 	for i := range v {
-		if err := validateExtensionField(v[i]); err != nil {
+		if err := validateExtensionField(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1789,13 +1789,13 @@ func validateMessageTag(v *types.MessageTag) error {
 	}
 }
 
-func validateMessageTagList(v []*types.MessageTag) error {
+func validateMessageTagList(v []types.MessageTag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MessageTagList"}
 	for i := range v {
-		if err := validateMessageTag(v[i]); err != nil {
+		if err := validateMessageTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1868,13 +1868,13 @@ func validateReceiptAction(v *types.ReceiptAction) error {
 	}
 }
 
-func validateReceiptActionsList(v []*types.ReceiptAction) error {
+func validateReceiptActionsList(v []types.ReceiptAction) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReceiptActionsList"}
 	for i := range v {
-		if err := validateReceiptAction(v[i]); err != nil {
+		if err := validateReceiptAction(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2808,9 +2808,6 @@ func validateOpSetIdentityDkimEnabledInput(v *SetIdentityDkimEnabledInput) error
 	if v.Identity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identity"))
 	}
-	if v.DkimEnabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DkimEnabled"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2823,9 +2820,6 @@ func validateOpSetIdentityFeedbackForwardingEnabledInput(v *SetIdentityFeedbackF
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetIdentityFeedbackForwardingEnabledInput"}
-	if v.ForwardingEnabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ForwardingEnabled"))
-	}
 	if v.Identity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identity"))
 	}
@@ -2846,9 +2840,6 @@ func validateOpSetIdentityHeadersInNotificationsEnabledInput(v *SetIdentityHeade
 	}
 	if len(v.NotificationType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("NotificationType"))
-	}
-	if v.Enabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2953,9 +2944,6 @@ func validateOpUpdateConfigurationSetReputationMetricsEnabledInput(v *UpdateConf
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateConfigurationSetReputationMetricsEnabledInput"}
-	if v.Enabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
-	}
 	if v.ConfigurationSetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationSetName"))
 	}
@@ -2971,9 +2959,6 @@ func validateOpUpdateConfigurationSetSendingEnabledInput(v *UpdateConfigurationS
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateConfigurationSetSendingEnabledInput"}
-	if v.Enabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
-	}
 	if v.ConfigurationSetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationSetName"))
 	}

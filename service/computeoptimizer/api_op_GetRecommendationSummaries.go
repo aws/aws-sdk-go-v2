@@ -36,7 +36,7 @@ type GetRecommendationSummariesInput struct {
 	// your account is the master account of an organization, use this parameter to
 	// specify the member accounts for which you want to return recommendation
 	// summaries. Only one account ID can be specified per request.
-	AccountIds []*string
+	AccountIds []string
 
 	// The maximum number of recommendation summaries to return with a single request.
 	// To retrieve the remaining results, make another request with the returned
@@ -55,7 +55,7 @@ type GetRecommendationSummariesOutput struct {
 	NextToken *string
 
 	// An array of objects that summarize a recommendation.
-	RecommendationSummaries []*types.RecommendationSummary
+	RecommendationSummaries []types.RecommendationSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

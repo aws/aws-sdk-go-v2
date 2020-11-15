@@ -37,7 +37,7 @@ type ModifyVpcEndpointConnectionNotificationInput struct {
 
 	// One or more events for the endpoint. Valid values are Accept, Connect, Delete,
 	// and Reject.
-	ConnectionEvents []*string
+	ConnectionEvents []string
 
 	// The ARN for the SNS topic for the notification.
 	ConnectionNotificationArn *string
@@ -46,13 +46,13 @@ type ModifyVpcEndpointConnectionNotificationInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 }
 
 type ModifyVpcEndpointConnectionNotificationOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.
-	ReturnValue *bool
+	ReturnValue bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

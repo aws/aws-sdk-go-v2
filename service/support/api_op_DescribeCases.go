@@ -63,7 +63,7 @@ type DescribeCasesInput struct {
 
 	// A list of ID numbers of the support cases you want returned. The maximum number
 	// of cases is 100.
-	CaseIdList []*string
+	CaseIdList []string
 
 	// The ID displayed for a case in the AWS Support Center user interface.
 	DisplayId *string
@@ -74,7 +74,7 @@ type DescribeCasesInput struct {
 
 	// Specifies whether to include resolved support cases in the DescribeCases
 	// response. By default, resolved cases aren't included.
-	IncludeResolvedCases *bool
+	IncludeResolvedCases bool
 
 	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
 	// currently supports English ("en") and Japanese ("ja"). Language parameters must
@@ -94,7 +94,7 @@ type DescribeCasesInput struct {
 type DescribeCasesOutput struct {
 
 	// The details for the cases that match the request.
-	Cases []*types.CaseDetails
+	Cases []types.CaseDetails
 
 	// A resumption point for pagination.
 	NextToken *string

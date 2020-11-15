@@ -77,7 +77,7 @@ type CreateHITTypeInput struct {
 	// must be met in order for a Worker to accept the HIT. Additionally, other actions
 	// can be restricted using the ActionsGuarded field on each
 	// QualificationRequirement structure.
-	QualificationRequirements []*types.QualificationRequirement
+	QualificationRequirements []types.QualificationRequirement
 }
 
 type CreateHITTypeOutput struct {

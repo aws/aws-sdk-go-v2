@@ -64,10 +64,10 @@ type CreateInstancesInput struct {
 	// ["MyFirstInstance","MySecondInstance"]
 	//
 	// This member is required.
-	InstanceNames []*string
+	InstanceNames []string
 
 	// An array of objects representing the add-ons to enable for the new instance.
-	AddOns []*types.AddOnRequest
+	AddOns []types.AddOnRequest
 
 	// (Deprecated) The name for your custom image. In releases prior to June 12, 2017,
 	// this parameter was ignored by the API. It is now deprecated.
@@ -78,7 +78,7 @@ type CreateInstancesInput struct {
 
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A launch script you can create that configures a server with additional user
 	// data. For example, you might want to run apt-get -y update. Depending on the
@@ -94,7 +94,7 @@ type CreateInstancesOutput struct {
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.
-	Operations []*types.Operation
+	Operations []types.Operation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

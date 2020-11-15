@@ -42,7 +42,7 @@ type GetCognitoEventsInput struct {
 type GetCognitoEventsOutput struct {
 
 	// The Cognito Events returned from the GetCognitoEvents request
-	Events map[string]*string
+	Events map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

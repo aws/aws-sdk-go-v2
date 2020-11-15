@@ -162,7 +162,7 @@ type DescribeLabelingJobOutput struct {
 	// Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 	// in the AWS Billing and Cost Management User Guide.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

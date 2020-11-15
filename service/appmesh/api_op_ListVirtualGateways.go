@@ -61,7 +61,7 @@ type ListVirtualGatewaysOutput struct {
 	// The list of existing virtual gateways for the specified service mesh.
 	//
 	// This member is required.
-	VirtualGateways []*types.VirtualGatewayRef
+	VirtualGateways []types.VirtualGatewayRef
 
 	// The nextToken value to include in a future ListVirtualGateways request. When the
 	// results of a ListVirtualGateways request exceed limit, you can use this value to

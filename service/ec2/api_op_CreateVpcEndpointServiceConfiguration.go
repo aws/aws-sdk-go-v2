@@ -43,11 +43,11 @@ type CreateVpcEndpointServiceConfigurationInput struct {
 	// service.
 	//
 	// This member is required.
-	NetworkLoadBalancerArns []*string
+	NetworkLoadBalancerArns []string
 
 	// Indicates whether requests from service consumers to create an endpoint to your
 	// service must be accepted. To accept a request, use AcceptVpcEndpointConnections.
-	AcceptanceRequired *bool
+	AcceptanceRequired bool
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see How to Ensure Idempotency
@@ -58,13 +58,13 @@ type CreateVpcEndpointServiceConfigurationInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The private DNS name to assign to the VPC endpoint service.
 	PrivateDnsName *string
 
 	// The tags to associate with the service.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 }
 
 type CreateVpcEndpointServiceConfigurationOutput struct {

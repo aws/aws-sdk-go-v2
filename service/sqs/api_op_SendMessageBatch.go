@@ -51,7 +51,7 @@ type SendMessageBatchInput struct {
 	// A list of SendMessageBatchRequestEntry items.
 	//
 	// This member is required.
-	Entries []*types.SendMessageBatchRequestEntry
+	Entries []types.SendMessageBatchRequestEntry
 
 	// The URL of the Amazon SQS queue to which batched messages are sent. Queue URLs
 	// and names are case-sensitive.
@@ -69,12 +69,12 @@ type SendMessageBatchOutput struct {
 	// can't be enqueued.
 	//
 	// This member is required.
-	Failed []*types.BatchResultErrorEntry
+	Failed []types.BatchResultErrorEntry
 
 	// A list of SendMessageBatchResultEntry items.
 	//
 	// This member is required.
-	Successful []*types.SendMessageBatchResultEntry
+	Successful []types.SendMessageBatchResultEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

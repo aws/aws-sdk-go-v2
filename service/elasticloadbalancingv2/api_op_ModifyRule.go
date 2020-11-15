@@ -39,16 +39,16 @@ type ModifyRuleInput struct {
 	RuleArn *string
 
 	// The actions.
-	Actions []*types.Action
+	Actions []types.Action
 
 	// The conditions.
-	Conditions []*types.RuleCondition
+	Conditions []types.RuleCondition
 }
 
 type ModifyRuleOutput struct {
 
 	// Information about the modified rule.
-	Rules []*types.Rule
+	Rules []types.Rule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

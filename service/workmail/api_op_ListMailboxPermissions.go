@@ -57,7 +57,7 @@ type ListMailboxPermissionsOutput struct {
 	NextToken *string
 
 	// One page of the user, group, or resource mailbox permissions.
-	Permissions []*types.Permission
+	Permissions []types.Permission
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -73,7 +73,7 @@ type UpdateContainerInstancesStateInput struct {
 	// A list of container instance IDs or full ARN entries.
 	//
 	// This member is required.
-	ContainerInstances []*string
+	ContainerInstances []string
 
 	// The container instance state with which to update the container instance. The
 	// only valid values for this action are ACTIVE and DRAINING. A container instance
@@ -94,10 +94,10 @@ type UpdateContainerInstancesStateInput struct {
 type UpdateContainerInstancesStateOutput struct {
 
 	// The list of container instances.
-	ContainerInstances []*types.ContainerInstance
+	ContainerInstances []types.ContainerInstance
 
 	// Any failures associated with the call.
-	Failures []*types.Failure
+	Failures []types.Failure
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

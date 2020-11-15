@@ -32,7 +32,7 @@ type UpdateDatasetInput struct {
 	// A list of "DatasetAction" objects.
 	//
 	// This member is required.
-	Actions []*types.DatasetAction
+	Actions []types.DatasetAction
 
 	// The name of the data set to update.
 	//
@@ -41,14 +41,14 @@ type UpdateDatasetInput struct {
 
 	// When data set contents are created they are delivered to destinations specified
 	// here.
-	ContentDeliveryRules []*types.DatasetContentDeliveryRule
+	ContentDeliveryRules []types.DatasetContentDeliveryRule
 
 	// How long, in days, data set contents are kept for the data set.
 	RetentionPeriod *types.RetentionPeriod
 
 	// A list of "DatasetTrigger" objects. The list can be empty or can contain up to
 	// five DataSetTrigger objects.
-	Triggers []*types.DatasetTrigger
+	Triggers []types.DatasetTrigger
 
 	// [Optional] How many versions of data set contents are kept. If not specified or
 	// set to null, only the latest version plus the latest succeeded version (if they

@@ -50,13 +50,13 @@ type UpdateRealtimeLogConfigInput struct {
 
 	// Contains information about the Amazon Kinesis data stream where you are sending
 	// real-time log data.
-	EndPoints []*types.EndPoint
+	EndPoints []types.EndPoint
 
 	// A list of fields to include in each real-time log record. For more information
 	// about fields, see Real-time log configuration fields
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields)
 	// in the Amazon CloudFront Developer Guide.
-	Fields []*string
+	Fields []string
 
 	// The name for this real-time log configuration.
 	Name *string

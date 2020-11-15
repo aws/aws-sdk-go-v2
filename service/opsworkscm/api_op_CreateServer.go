@@ -175,7 +175,7 @@ type CreateServerInput struct {
 	// * PUPPET_R10K_PRIVATE_KEY: If you are using a private Git
 	// repository, add PUPPET_R10K_PRIVATE_KEY to specify a PEM-encoded private SSH
 	// key.
-	EngineAttributes []*types.EngineAttribute
+	EngineAttributes []types.EngineAttribute
 
 	// The engine model of the server. Valid values in this release include Monolithic
 	// for Puppet and Single for Chef.
@@ -221,7 +221,7 @@ type CreateServerInput struct {
 	// specified by SubnetIds. If you do not specify this parameter, AWS OpsWorks CM
 	// creates one new security group that uses TCP ports 22 and 443, open to 0.0.0.0/0
 	// (everyone).
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The IDs of subnets in which to launch the server EC2 instance. Amazon
 	// EC2-Classic customers: This field is required. All servers must run within a
@@ -231,7 +231,7 @@ type CreateServerInput struct {
 	// subnet IDs, the VPC must have "Auto Assign Public IP" enabled. For more
 	// information about supported Amazon EC2 platforms, see Supported Platforms
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html).
-	SubnetIds []*string
+	SubnetIds []string
 
 	// A map that contains tag keys and tag values to attach to an AWS OpsWorks for
 	// Chef Automate or AWS OpsWorks for Puppet Enterprise server.
@@ -252,7 +252,7 @@ type CreateServerInput struct {
 	//
 	// * A maximum of 50 user-applied tags is allowed for any AWS
 	// OpsWorks-CM server.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateServerOutput struct {

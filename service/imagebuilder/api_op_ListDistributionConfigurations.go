@@ -32,10 +32,10 @@ type ListDistributionConfigurationsInput struct {
 	// The filters.
 	//
 	// * name - The name of this distribution configuration.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum items to return in a request.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
@@ -45,7 +45,7 @@ type ListDistributionConfigurationsInput struct {
 type ListDistributionConfigurationsOutput struct {
 
 	// The list of distributions.
-	DistributionConfigurationSummaryList []*types.DistributionConfigurationSummary
+	DistributionConfigurationSummaryList []types.DistributionConfigurationSummary
 
 	// The next token used for paginated responses. When this is not empty, there are
 	// additional elements that the service has not included in this request. Use this

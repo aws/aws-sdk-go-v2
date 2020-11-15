@@ -58,7 +58,7 @@ type GetApiKeyOutput struct {
 	Description *string
 
 	// Specifies whether the API Key can be used by callers.
-	Enabled *bool
+	Enabled bool
 
 	// The identifier of the API Key.
 	Id *string
@@ -70,10 +70,10 @@ type GetApiKeyOutput struct {
 	Name *string
 
 	// A list of Stage resources that are associated with the ApiKey resource.
-	StageKeys []*string
+	StageKeys []string
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The value of the API Key.
 	Value *string

@@ -58,7 +58,7 @@ type ListMembersOutput struct {
 
 	// An array of MemberSummary objects. Each object contains details about a network
 	// member.
-	Members []*types.MemberSummary
+	Members []types.MemberSummary
 
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string

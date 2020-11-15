@@ -10,16 +10,16 @@ import (
 type AutoScalingGroupConfiguration struct {
 
 	// The desired capacity, or number of instances, for the Auto Scaling group.
-	DesiredCapacity *int32
+	DesiredCapacity int32
 
 	// The instance type for the Auto Scaling group.
 	InstanceType *string
 
 	// The maximum size, or maximum number of instances, for the Auto Scaling group.
-	MaxSize *int32
+	MaxSize int32
 
 	// The minimum size, or minimum number of instances, for the Auto Scaling group.
-	MinSize *int32
+	MinSize int32
 }
 
 // Describes an Auto Scaling group recommendation.
@@ -60,15 +60,15 @@ type AutoScalingGroupRecommendation struct {
 
 	// The number of days for which utilization metrics were analyzed for the Auto
 	// Scaling group.
-	LookBackPeriodInDays *float64
+	LookBackPeriodInDays float64
 
 	// An array of objects that describe the recommendation options for the Auto
 	// Scaling group.
-	RecommendationOptions []*AutoScalingGroupRecommendationOption
+	RecommendationOptions []AutoScalingGroupRecommendationOption
 
 	// An array of objects that describe the utilization metrics of the Auto Scaling
 	// group.
-	UtilizationMetrics []*UtilizationMetric
+	UtilizationMetrics []UtilizationMetric
 }
 
 // Describes a recommendation option for an Auto Scaling group.
@@ -81,7 +81,7 @@ type AutoScalingGroupRecommendationOption struct {
 	// Performance risk is the likelihood of the recommended instance type not meeting
 	// the performance requirement of your workload. The lowest performance risk is
 	// categorized as 0, and the highest as 5.
-	PerformanceRisk *float64
+	PerformanceRisk float64
 
 	// An array of objects that describe the projected utilization metrics of the Auto
 	// Scaling group recommendation option. The Cpu and Memory metrics are the only
@@ -90,11 +90,11 @@ type AutoScalingGroupRecommendationOption struct {
 	// them. For more information, see Enabling Memory Utilization with the CloudWatch
 	// Agent
 	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
-	ProjectedUtilizationMetrics []*UtilizationMetric
+	ProjectedUtilizationMetrics []UtilizationMetric
 
 	// The rank of the Auto Scaling group recommendation option. The top recommendation
 	// option is ranked as 1.
-	Rank *int32
+	Rank int32
 }
 
 // Describes the destination of the recommendations export and metadata files.
@@ -122,7 +122,7 @@ type Filter struct {
 	// Scaling group, then the valid values are Optimized, or NotOptimized. If you
 	// specify the name parameter as RecommendationSourceType, then the valid values
 	// are Ec2Instance, or AutoScalingGroup.
-	Values []*string
+	Values []string
 }
 
 // Describes an error experienced when getting recommendations. For example, an
@@ -186,16 +186,16 @@ type InstanceRecommendation struct {
 	LastRefreshTimestamp *time.Time
 
 	// The number of days for which utilization metrics were analyzed for the instance.
-	LookBackPeriodInDays *float64
+	LookBackPeriodInDays float64
 
 	// An array of objects that describe the recommendation options for the instance.
-	RecommendationOptions []*InstanceRecommendationOption
+	RecommendationOptions []InstanceRecommendationOption
 
 	// An array of objects that describe the source resource of the recommendation.
-	RecommendationSources []*RecommendationSource
+	RecommendationSources []RecommendationSource
 
 	// An array of objects that describe the utilization metrics of the instance.
-	UtilizationMetrics []*UtilizationMetric
+	UtilizationMetrics []UtilizationMetric
 }
 
 // Describes a recommendation option for an Amazon EC2 instance.
@@ -208,7 +208,7 @@ type InstanceRecommendationOption struct {
 	// the likelihood of the recommended instance type not meeting the performance
 	// requirement of your workload. The lowest performance risk is categorized as 0,
 	// and the highest as 5.
-	PerformanceRisk *float64
+	PerformanceRisk float64
 
 	// An array of objects that describe the projected utilization metrics of the
 	// instance recommendation option. The Cpu and Memory metrics are the only
@@ -217,11 +217,11 @@ type InstanceRecommendationOption struct {
 	// them. For more information, see Enabling Memory Utilization with the CloudWatch
 	// Agent
 	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
-	ProjectedUtilizationMetrics []*UtilizationMetric
+	ProjectedUtilizationMetrics []UtilizationMetric
 
 	// The rank of the instance recommendation option. The top recommendation option is
 	// ranked as 1.
-	Rank *int32
+	Rank int32
 }
 
 // Describes a filter that returns a more specific list of recommendation export
@@ -237,7 +237,7 @@ type JobFilter struct {
 	// valid values are Ec2Instance or AutoScalingGroup. If you specify the name
 	// parameter as JobStatus, the valid values are Queued, InProgress, Complete, or
 	// Failed.
-	Values []*string
+	Values []string
 }
 
 // Describes a projected utilization metric of a recommendation option, such as an
@@ -254,10 +254,10 @@ type ProjectedMetric struct {
 	Name MetricName
 
 	// The time stamps of the projected utilization metric.
-	Timestamps []*time.Time
+	Timestamps []time.Time
 
 	// The values of the projected utilization metrics.
-	Values []*float64
+	Values []float64
 }
 
 // Describes a recommendation export job. Use the DescribeRecommendationExportJobs
@@ -309,7 +309,7 @@ type RecommendationSummary struct {
 	RecommendationResourceType RecommendationSourceType
 
 	// An array of objects that describe a recommendation summary.
-	Summaries []*Summary
+	Summaries []Summary
 }
 
 // Describes a projected utilization metric of a recommendation option. The Cpu and
@@ -322,14 +322,14 @@ type RecommendationSummary struct {
 type RecommendedOptionProjectedMetric struct {
 
 	// An array of objects that describe a projected utilization metric.
-	ProjectedMetrics []*ProjectedMetric
+	ProjectedMetrics []ProjectedMetric
 
 	// The rank of the recommendation option projected metric. The top recommendation
 	// option is ranked as 1. The projected metric rank correlates to the
 	// recommendation option rank. For example, the projected metric ranked as 1 is
 	// related to the recommendation option that is also ranked as 1 in the same
 	// response.
-	Rank *int32
+	Rank int32
 
 	// The recommended instance type.
 	RecommendedInstanceType *string
@@ -379,7 +379,7 @@ type Summary struct {
 	Name Finding
 
 	// The value of the recommendation summary.
-	Value *float64
+	Value float64
 }
 
 // Describes a utilization metric of a resource, such as an Amazon EC2 instance.
@@ -395,5 +395,5 @@ type UtilizationMetric struct {
 	Statistic MetricStatistic
 
 	// The value of the utilization metric.
-	Value *float64
+	Value float64
 }

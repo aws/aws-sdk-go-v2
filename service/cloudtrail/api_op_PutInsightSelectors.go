@@ -36,7 +36,7 @@ type PutInsightSelectorsInput struct {
 	// this release, only ApiCallRateInsight is supported as an insight type.
 	//
 	// This member is required.
-	InsightSelectors []*types.InsightSelector
+	InsightSelectors []types.InsightSelector
 
 	// The name of the CloudTrail trail for which you want to change or add Insights
 	// selectors.
@@ -49,7 +49,7 @@ type PutInsightSelectorsOutput struct {
 
 	// A JSON string that contains the insight types you want to log on a trail. In
 	// this release, only ApiCallRateInsight is supported as an insight type.
-	InsightSelectors []*types.InsightSelector
+	InsightSelectors []types.InsightSelector
 
 	// The Amazon Resource Name (ARN) of a trail for which you want to change or add
 	// Insights selectors.

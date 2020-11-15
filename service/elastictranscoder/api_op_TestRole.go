@@ -56,7 +56,7 @@ type TestRoleInput struct {
 	// that you want the action to send a test notification to.
 	//
 	// This member is required.
-	Topics []*string
+	Topics []string
 }
 
 // The TestRoleResponse structure.
@@ -64,7 +64,7 @@ type TestRoleOutput struct {
 
 	// If the Success element contains false, this value is an array of one or more
 	// error messages that were generated during the test process.
-	Messages []*string
+	Messages []string
 
 	// If the operation is successful, this value is true; otherwise, the value is
 	// false.

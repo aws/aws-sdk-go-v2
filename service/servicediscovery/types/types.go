@@ -14,7 +14,7 @@ type DnsConfig struct {
 	// you want AWS Cloud Map to create when you register an instance.
 	//
 	// This member is required.
-	DnsRecords []*DnsRecord
+	DnsRecords []DnsRecord
 
 	// The ID of the namespace to use for DNS configuration.
 	NamespaceId *string
@@ -59,7 +59,7 @@ type DnsConfigChange struct {
 	// want AWS Cloud Map to create when you register an instance.
 	//
 	// This member is required.
-	DnsRecords []*DnsRecord
+	DnsRecords []DnsRecord
 }
 
 // A complex type that contains the ID for the Route 53 hosted zone that AWS Cloud
@@ -330,7 +330,7 @@ type HttpInstanceSummary struct {
 
 	// If you included any attributes when you registered the instance, the values of
 	// those attributes.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// If you configured health checking in the service, the current health status of
 	// the service instance.
@@ -439,7 +439,7 @@ type Instance struct {
 	// want Route 53 to send requests to. This value is required if you specified
 	// settings for an SRV record or a Route 53 health check when you created the
 	// service.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// A unique string that identifies the request and that allows failed
 	// RegisterInstance requests to be retried without the risk of executing the
@@ -489,7 +489,7 @@ type InstanceSummary struct {
 	// record, the value that Route 53 returns for the port. In addition, if the
 	// service includes HealthCheckConfig, the port on the endpoint that Route 53 sends
 	// requests to.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// The ID for an instance that you created by using a specified service.
 	Id *string
@@ -556,7 +556,7 @@ type NamespaceFilter struct {
 	// you specify IN for Condition, you can specify DNS_PUBLIC, DNS_PRIVATE, or both.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 
 	// The operator that you want to use to determine whether ListNamespaces returns a
 	// namespace. Valid values for condition include:
@@ -674,7 +674,7 @@ type Operation struct {
 	//
 	// * INSTANCE: The instance
 	// ID is returned in the ResourceId property.
-	Targets map[string]*string
+	Targets map[string]string
 
 	// The name of the operation that is associated with the specified ID.
 	Type OperationType
@@ -728,7 +728,7 @@ type OperationFilter struct {
 	// Coordinated Universal Time (UTC). The start date must be the first value.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 
 	// The operator that you want to use to determine whether an operation matches the
 	// specified value. Valid values for condition include:
@@ -893,7 +893,7 @@ type ServiceFilter struct {
 	// filter the list of services.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 
 	// The operator that you want to use to determine whether a service is returned by
 	// ListServices. Valid values for Condition include the following:

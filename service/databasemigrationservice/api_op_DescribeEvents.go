@@ -42,10 +42,10 @@ type DescribeEventsInput struct {
 	EndTime *time.Time
 
 	// A list of event categories for the source type that you've chosen.
-	EventCategories []*string
+	EventCategories []string
 
 	// Filters applied to events.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
@@ -73,7 +73,7 @@ type DescribeEventsInput struct {
 type DescribeEventsOutput struct {
 
 	// The events described.
-	Events []*types.Event
+	Events []types.Event
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the

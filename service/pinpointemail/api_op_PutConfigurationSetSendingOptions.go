@@ -39,7 +39,7 @@ type PutConfigurationSetSendingOptionsInput struct {
 
 	// If true, email sending is enabled for the configuration set. If false, email
 	// sending is disabled for the configuration set.
-	SendingEnabled *bool
+	SendingEnabled bool
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request

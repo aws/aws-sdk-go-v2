@@ -63,7 +63,7 @@ type DeleteDBClusterInput struct {
 	// before the DB cluster is deleted. By default, skip isn't specified, and the DB
 	// cluster snapshot is created. By default, this parameter is disabled. You must
 	// specify a FinalDBSnapshotIdentifier parameter if SkipFinalSnapshot is disabled.
-	SkipFinalSnapshot *bool
+	SkipFinalSnapshot bool
 }
 
 type DeleteDBClusterOutput struct {

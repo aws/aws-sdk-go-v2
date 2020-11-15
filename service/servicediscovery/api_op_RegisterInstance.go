@@ -134,7 +134,7 @@ type RegisterInstanceInput struct {
 	// values) must not exceed 5,000 characters.
 	//
 	// This member is required.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// An identifier that you want to associate with the instance. Note the
 	// following:

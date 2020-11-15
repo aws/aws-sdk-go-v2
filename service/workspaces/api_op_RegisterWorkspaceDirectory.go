@@ -59,10 +59,10 @@ type RegisterWorkspaceDirectoryInput struct {
 	// that the subnets are in supported Availability Zones. The subnets must also be
 	// in separate Availability Zones. If these conditions are not met, you will
 	// receive an OperationNotSupportedException error.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The tags associated with the directory.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Indicates whether your WorkSpace directory is dedicated or shared. To use Bring
 	// Your Own License (BYOL) images, this value must be set to DEDICATED and your AWS

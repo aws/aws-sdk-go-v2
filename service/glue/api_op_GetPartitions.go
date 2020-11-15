@@ -107,7 +107,7 @@ type GetPartitionsOutput struct {
 	NextToken *string
 
 	// A list of requested partitions.
-	Partitions []*types.Partition
+	Partitions []types.Partition
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

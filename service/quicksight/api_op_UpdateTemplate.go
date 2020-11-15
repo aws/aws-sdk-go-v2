@@ -75,7 +75,7 @@ type UpdateTemplateOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// The ID for the template.
 	TemplateId *string

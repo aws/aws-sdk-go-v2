@@ -32,16 +32,16 @@ type BatchDescribeSimulationJobInput struct {
 	// A list of Amazon Resource Names (ARNs) of simulation jobs to describe.
 	//
 	// This member is required.
-	Jobs []*string
+	Jobs []string
 }
 
 type BatchDescribeSimulationJobOutput struct {
 
 	// A list of simulation jobs.
-	Jobs []*types.SimulationJob
+	Jobs []types.SimulationJob
 
 	// A list of unprocessed simulation job Amazon Resource Names (ARNs).
-	UnprocessedJobs []*string
+	UnprocessedJobs []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

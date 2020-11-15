@@ -82,7 +82,7 @@ type PutRecordBatchInput struct {
 	// One or more records.
 	//
 	// This member is required.
-	Records []*types.Record
+	Records []types.Record
 }
 
 type PutRecordBatchOutput struct {
@@ -98,7 +98,7 @@ type PutRecordBatchOutput struct {
 	// same as the index used in the request array.
 	//
 	// This member is required.
-	RequestResponses []*types.PutRecordBatchResponseEntry
+	RequestResponses []types.PutRecordBatchResponseEntry
 
 	// Indicates whether server-side encryption (SSE) was enabled during this
 	// operation.

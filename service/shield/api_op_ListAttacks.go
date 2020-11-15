@@ -51,7 +51,7 @@ type ListAttacksInput struct {
 
 	// The ARN (Amazon Resource Name) of the resource that was attacked. If this is
 	// left blank, all applicable resources for this account will be included.
-	ResourceArns []*string
+	ResourceArns []string
 
 	// The start of the time period for the attacks. This is a timestamp type. The
 	// sample request above indicates a number type because the default used by WAF is
@@ -64,7 +64,7 @@ type ListAttacksInput struct {
 type ListAttacksOutput struct {
 
 	// The attack information for the specified time range.
-	AttackSummaries []*types.AttackSummary
+	AttackSummaries []types.AttackSummary
 
 	// The token returned by a previous call to indicate that there is more data
 	// available. If not null, more results are available. Pass this value for the

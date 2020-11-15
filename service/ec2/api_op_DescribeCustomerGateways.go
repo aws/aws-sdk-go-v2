@@ -34,13 +34,13 @@ func (c *Client) DescribeCustomerGateways(ctx context.Context, params *DescribeC
 type DescribeCustomerGatewaysInput struct {
 
 	// One or more customer gateway IDs. Default: Describes all your customer gateways.
-	CustomerGatewayIds []*string
+	CustomerGatewayIds []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
@@ -68,14 +68,14 @@ type DescribeCustomerGatewaysInput struct {
 	// * tag-key - The
 	// key of a tag assigned to the resource. Use this filter to find all resources
 	// assigned a tag with a specific key, regardless of the tag value.
-	Filters []*types.Filter
+	Filters []types.Filter
 }
 
 // Contains the output of DescribeCustomerGateways.
 type DescribeCustomerGatewaysOutput struct {
 
 	// Information about one or more customer gateways.
-	CustomerGateways []*types.CustomerGateway
+	CustomerGateways []types.CustomerGateway
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

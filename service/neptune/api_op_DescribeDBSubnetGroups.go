@@ -36,7 +36,7 @@ type DescribeDBSubnetGroupsInput struct {
 	DBSubnetGroupName *string
 
 	// This parameter is not currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeDBSubnetGroups
 	// request. If this parameter is specified, the response includes only records
@@ -53,7 +53,7 @@ type DescribeDBSubnetGroupsInput struct {
 type DescribeDBSubnetGroupsOutput struct {
 
 	// A list of DBSubnetGroup instances.
-	DBSubnetGroups []*types.DBSubnetGroup
+	DBSubnetGroups []types.DBSubnetGroup
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the

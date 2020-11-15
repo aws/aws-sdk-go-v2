@@ -484,13 +484,13 @@ func validateChangeMessageVisibilityBatchRequestEntry(v *types.ChangeMessageVisi
 	}
 }
 
-func validateChangeMessageVisibilityBatchRequestEntryList(v []*types.ChangeMessageVisibilityBatchRequestEntry) error {
+func validateChangeMessageVisibilityBatchRequestEntryList(v []types.ChangeMessageVisibilityBatchRequestEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ChangeMessageVisibilityBatchRequestEntryList"}
 	for i := range v {
-		if err := validateChangeMessageVisibilityBatchRequestEntry(v[i]); err != nil {
+		if err := validateChangeMessageVisibilityBatchRequestEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -519,13 +519,13 @@ func validateDeleteMessageBatchRequestEntry(v *types.DeleteMessageBatchRequestEn
 	}
 }
 
-func validateDeleteMessageBatchRequestEntryList(v []*types.DeleteMessageBatchRequestEntry) error {
+func validateDeleteMessageBatchRequestEntryList(v []types.DeleteMessageBatchRequestEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteMessageBatchRequestEntryList"}
 	for i := range v {
-		if err := validateDeleteMessageBatchRequestEntry(v[i]); err != nil {
+		if err := validateDeleteMessageBatchRequestEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -551,13 +551,14 @@ func validateMessageAttributeValue(v *types.MessageAttributeValue) error {
 	}
 }
 
-func validateMessageBodyAttributeMap(v map[string]*types.MessageAttributeValue) error {
+func validateMessageBodyAttributeMap(v map[string]types.MessageAttributeValue) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MessageBodyAttributeMap"}
 	for key := range v {
-		if err := validateMessageAttributeValue(v[key]); err != nil {
+		value := v[key]
+		if err := validateMessageAttributeValue(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -568,13 +569,14 @@ func validateMessageBodyAttributeMap(v map[string]*types.MessageAttributeValue) 
 	}
 }
 
-func validateMessageBodySystemAttributeMap(v map[string]*types.MessageSystemAttributeValue) error {
+func validateMessageBodySystemAttributeMap(v map[string]types.MessageSystemAttributeValue) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MessageBodySystemAttributeMap"}
 	for key := range v {
-		if err := validateMessageSystemAttributeValue(v[key]); err != nil {
+		value := v[key]
+		if err := validateMessageSystemAttributeValue(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -628,13 +630,13 @@ func validateSendMessageBatchRequestEntry(v *types.SendMessageBatchRequestEntry)
 	}
 }
 
-func validateSendMessageBatchRequestEntryList(v []*types.SendMessageBatchRequestEntry) error {
+func validateSendMessageBatchRequestEntryList(v []types.SendMessageBatchRequestEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SendMessageBatchRequestEntryList"}
 	for i := range v {
-		if err := validateSendMessageBatchRequestEntry(v[i]); err != nil {
+		if err := validateSendMessageBatchRequestEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -698,9 +700,6 @@ func validateOpChangeMessageVisibilityInput(v *ChangeMessageVisibilityInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "ChangeMessageVisibilityInput"}
 	if v.QueueUrl == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueueUrl"))
-	}
-	if v.VisibilityTimeout == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VisibilityTimeout"))
 	}
 	if v.ReceiptHandle == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReceiptHandle"))

@@ -32,13 +32,13 @@ type BatchGetStreamKeyInput struct {
 	// Array of ARNs, one per channel.
 	//
 	// This member is required.
-	Arns []*string
+	Arns []string
 }
 
 type BatchGetStreamKeyOutput struct {
-	Errors []*types.BatchError
+	Errors []types.BatchError
 
-	StreamKeys []*types.StreamKey
+	StreamKeys []types.StreamKey
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -239,7 +239,7 @@ type CrlConfiguration struct {
 	// action.
 	//
 	// This member is required.
-	Enabled *bool
+	Enabled bool
 
 	// Name inserted into the certificate CRL Distribution Points extension that
 	// enables the use of an alias for the CRL distribution point. Use this value if

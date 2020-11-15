@@ -45,7 +45,7 @@ type CreateChannelInput struct {
 	RetentionPeriod *types.RetentionPeriod
 
 	// Metadata which can be used to manage the channel.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateChannelOutput struct {

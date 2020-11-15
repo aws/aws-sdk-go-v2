@@ -71,7 +71,7 @@ type InvokeScreenAutomationInput struct {
 	// variable as defined on the screen. The value is an object which currently has
 	// only one property, rawValue, which holds the value of the variable to be passed
 	// to the screen.
-	Variables map[string]*types.VariableValue
+	Variables map[string]types.VariableValue
 }
 
 type InvokeScreenAutomationOutput struct {
@@ -79,7 +79,7 @@ type InvokeScreenAutomationOutput struct {
 	// The updated workbook cursor after performing the automation action.
 	//
 	// This member is required.
-	WorkbookCursor *int64
+	WorkbookCursor int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

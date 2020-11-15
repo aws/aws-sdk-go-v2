@@ -40,7 +40,7 @@ type UpdateClusterSettingsInput struct {
 	// PutAccountSettingDefault.
 	//
 	// This member is required.
-	Settings []*types.ClusterSetting
+	Settings []types.ClusterSetting
 }
 
 type UpdateClusterSettingsOutput struct {

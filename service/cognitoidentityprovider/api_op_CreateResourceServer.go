@@ -47,7 +47,7 @@ type CreateResourceServerInput struct {
 	UserPoolId *string
 
 	// A list of scopes. Each scope is map, where the keys are name and description.
-	Scopes []*types.ResourceServerScopeType
+	Scopes []types.ResourceServerScopeType
 }
 
 type CreateResourceServerOutput struct {

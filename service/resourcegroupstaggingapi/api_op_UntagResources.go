@@ -48,19 +48,19 @@ type UntagResourcesInput struct {
 	// the AWS General Reference.
 	//
 	// This member is required.
-	ResourceARNList []*string
+	ResourceARNList []string
 
 	// A list of the tag keys that you want to remove from the specified resources.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagResourcesOutput struct {
 
 	// Details of resources that could not be untagged. An error code, status code, and
 	// error message are returned for each failed item.
-	FailedResourcesMap map[string]*types.FailureInfo
+	FailedResourcesMap map[string]types.FailureInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

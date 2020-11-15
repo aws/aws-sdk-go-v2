@@ -62,7 +62,7 @@ type GetJobTaggingInput struct {
 type GetJobTaggingOutput struct {
 
 	// The set of tags associated with the S3 Batch Operations job.
-	Tags []*types.S3Tag
+	Tags []types.S3Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

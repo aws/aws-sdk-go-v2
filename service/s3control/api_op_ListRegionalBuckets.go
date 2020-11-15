@@ -45,7 +45,7 @@ type ListRegionalBucketsInput struct {
 	AccountId *string
 
 	//
-	MaxResults *int32
+	MaxResults int32
 
 	//
 	NextToken *string
@@ -62,7 +62,7 @@ type ListRegionalBucketsOutput struct {
 	NextToken *string
 
 	//
-	RegionalBucketList []*types.RegionalBucket
+	RegionalBucketList []types.RegionalBucket
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

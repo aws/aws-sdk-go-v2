@@ -43,7 +43,7 @@ type DescribeLoadBalancerAttributesInput struct {
 type DescribeLoadBalancerAttributesOutput struct {
 
 	// Information about the load balancer attributes.
-	Attributes []*types.LoadBalancerAttribute
+	Attributes []types.LoadBalancerAttribute
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

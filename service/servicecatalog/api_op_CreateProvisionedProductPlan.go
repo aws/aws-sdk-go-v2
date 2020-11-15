@@ -80,7 +80,7 @@ type CreateProvisionedProductPlanInput struct {
 
 	// Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related
 	// events.
-	NotificationArns []*string
+	NotificationArns []string
 
 	// The path identifier of the product. This value is optional if the product has a
 	// default path, and required if the product has more than one path. To list the
@@ -89,12 +89,12 @@ type CreateProvisionedProductPlanInput struct {
 
 	// Parameters specified by the administrator that are required for provisioning the
 	// product.
-	ProvisioningParameters []*types.UpdateProvisioningParameter
+	ProvisioningParameters []types.UpdateProvisioningParameter
 
 	// One or more tags. If the plan is for an existing provisioned product, the
 	// product must have a RESOURCE_UPDATE constraint with
 	// TagUpdatesOnProvisionedProduct set to ALLOWED to allow tag updates.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateProvisionedProductPlanOutput struct {

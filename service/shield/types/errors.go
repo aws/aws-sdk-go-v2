@@ -146,7 +146,7 @@ func (e *InvalidResourceException) ErrorFault() smithy.ErrorFault { return smith
 type LimitsExceededException struct {
 	Message *string
 
-	Limit *int64
+	Limit int64
 	Type  *string
 }
 

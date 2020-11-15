@@ -47,7 +47,7 @@ type ListDetectorsInput struct {
 type ListDetectorsOutput struct {
 
 	// A list of summary information about the detectors (instances).
-	DetectorSummaries []*types.DetectorSummary
+	DetectorSummaries []types.DetectorSummary
 
 	// A token to retrieve the next set of results, or null if there are no additional
 	// results.

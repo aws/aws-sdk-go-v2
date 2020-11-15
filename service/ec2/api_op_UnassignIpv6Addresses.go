@@ -31,7 +31,7 @@ type UnassignIpv6AddressesInput struct {
 	// The IPv6 addresses to unassign from the network interface.
 	//
 	// This member is required.
-	Ipv6Addresses []*string
+	Ipv6Addresses []string
 
 	// The ID of the network interface.
 	//
@@ -45,7 +45,7 @@ type UnassignIpv6AddressesOutput struct {
 	NetworkInterfaceId *string
 
 	// The IPv6 addresses that have been unassigned from the network interface.
-	UnassignedIpv6Addresses []*string
+	UnassignedIpv6Addresses []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

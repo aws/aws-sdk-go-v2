@@ -46,7 +46,7 @@ type ListEventBusesInput struct {
 type ListEventBusesOutput struct {
 
 	// This list of event buses.
-	EventBuses []*types.EventBus
+	EventBuses []types.EventBus
 
 	// A token you can use in a subsequent operation to retrieve the next set of
 	// results.

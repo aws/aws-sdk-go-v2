@@ -61,7 +61,7 @@ type CreateTaskInput struct {
 	// list should contain a single filter string that consists of the patterns to
 	// exclude. The patterns are delimited by "|" (that is, a pipe), for example,
 	// "/folder1|/folder2"
-	Excludes []*types.FilterRule
+	Excludes []types.FilterRule
 
 	// The name of a task. This value is a text reference that is used to identify the
 	// task in the console.
@@ -82,7 +82,7 @@ type CreateTaskInput struct {
 
 	// The key-value pair that represents the tag that you want to add to the resource.
 	// The value can be an empty string.
-	Tags []*types.TagListEntry
+	Tags []types.TagListEntry
 }
 
 // CreateTaskResponse

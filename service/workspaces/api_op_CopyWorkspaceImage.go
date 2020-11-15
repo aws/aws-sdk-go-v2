@@ -57,7 +57,7 @@ type CopyWorkspaceImageInput struct {
 	Description *string
 
 	// The tags for the image.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CopyWorkspaceImageOutput struct {

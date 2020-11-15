@@ -41,7 +41,7 @@ type TagResourceInput struct {
 	// for the maximum number of tags allowed per resource.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourceOutput struct {

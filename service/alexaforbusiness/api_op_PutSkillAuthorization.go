@@ -34,7 +34,7 @@ type PutSkillAuthorizationInput struct {
 	// populated in the AuthorizationResult map to establish the authorization.
 	//
 	// This member is required.
-	AuthorizationResult map[string]*string
+	AuthorizationResult map[string]string
 
 	// The unique identifier of a skill.
 	//

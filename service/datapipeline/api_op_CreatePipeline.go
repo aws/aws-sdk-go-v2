@@ -61,7 +61,7 @@ type CreatePipelineInput struct {
 	// Pipelines
 	// (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
 	// in the AWS Data Pipeline Developer Guide.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Contains the output of CreatePipeline.

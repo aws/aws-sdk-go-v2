@@ -38,7 +38,7 @@ type GetMappingInput struct {
 	Location *types.Location
 
 	// A list of target tables.
-	Sinks []*types.CatalogEntry
+	Sinks []types.CatalogEntry
 }
 
 type GetMappingOutput struct {
@@ -46,7 +46,7 @@ type GetMappingOutput struct {
 	// A list of mappings to the specified targets.
 	//
 	// This member is required.
-	Mapping []*types.MappingEntry
+	Mapping []types.MappingEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

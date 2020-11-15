@@ -31,17 +31,17 @@ type DeleteParametersInput struct {
 	// The names of the parameters to delete.
 	//
 	// This member is required.
-	Names []*string
+	Names []string
 }
 
 type DeleteParametersOutput struct {
 
 	// The names of the deleted parameters.
-	DeletedParameters []*string
+	DeletedParameters []string
 
 	// The names of parameters that weren't deleted because the parameters are not
 	// valid.
-	InvalidParameters []*string
+	InvalidParameters []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

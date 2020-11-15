@@ -64,10 +64,10 @@ type DescribeSimulationApplicationOutput struct {
 	SimulationSoftwareSuite *types.SimulationSoftwareSuite
 
 	// The sources of the simulation application.
-	Sources []*types.Source
+	Sources []types.Source
 
 	// The list of all tags added to the specified simulation application.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The version of the simulation application.
 	Version *string

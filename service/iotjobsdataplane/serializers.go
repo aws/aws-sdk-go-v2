@@ -72,25 +72,19 @@ func awsRestjson1_serializeOpHttpBindingsDescribeJobExecutionInput(v *DescribeJo
 		encoder.SetQuery("includeJobDocument").Boolean(*v.IncludeJobDocument)
 	}
 
-	if v.JobId == nil {
+	if v.JobId == nil || len(*v.JobId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member jobId must not be empty")}
 	}
 	if v.JobId != nil {
-		if len(*v.JobId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member jobId must not be empty")}
-		}
 		if err := encoder.SetURI("jobId").String(*v.JobId); err != nil {
 			return err
 		}
 	}
 
-	if v.ThingName == nil {
+	if v.ThingName == nil || len(*v.ThingName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member thingName must not be empty")}
 	}
 	if v.ThingName != nil {
-		if len(*v.ThingName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member thingName must not be empty")}
-		}
 		if err := encoder.SetURI("thingName").String(*v.ThingName); err != nil {
 			return err
 		}
@@ -150,13 +144,10 @@ func awsRestjson1_serializeOpHttpBindingsGetPendingJobExecutionsInput(v *GetPend
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ThingName == nil {
+	if v.ThingName == nil || len(*v.ThingName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member thingName must not be empty")}
 	}
 	if v.ThingName != nil {
-		if len(*v.ThingName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member thingName must not be empty")}
-		}
 		if err := encoder.SetURI("thingName").String(*v.ThingName); err != nil {
 			return err
 		}
@@ -227,13 +218,10 @@ func awsRestjson1_serializeOpHttpBindingsStartNextPendingJobExecutionInput(v *St
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ThingName == nil {
+	if v.ThingName == nil || len(*v.ThingName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member thingName must not be empty")}
 	}
 	if v.ThingName != nil {
-		if len(*v.ThingName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member thingName must not be empty")}
-		}
 		if err := encoder.SetURI("thingName").String(*v.ThingName); err != nil {
 			return err
 		}
@@ -323,25 +311,19 @@ func awsRestjson1_serializeOpHttpBindingsUpdateJobExecutionInput(v *UpdateJobExe
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.JobId == nil {
+	if v.JobId == nil || len(*v.JobId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member jobId must not be empty")}
 	}
 	if v.JobId != nil {
-		if len(*v.JobId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member jobId must not be empty")}
-		}
 		if err := encoder.SetURI("jobId").String(*v.JobId); err != nil {
 			return err
 		}
 	}
 
-	if v.ThingName == nil {
+	if v.ThingName == nil || len(*v.ThingName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member thingName must not be empty")}
 	}
 	if v.ThingName != nil {
-		if len(*v.ThingName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member thingName must not be empty")}
-		}
 		if err := encoder.SetURI("thingName").String(*v.ThingName); err != nil {
 			return err
 		}
@@ -394,17 +376,13 @@ func awsRestjson1_serializeOpDocumentUpdateJobExecutionInput(v *UpdateJobExecuti
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDetailsMap(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentDetailsMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }

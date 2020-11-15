@@ -31,7 +31,7 @@ func (c *Client) ListInputDevices(ctx context.Context, params *ListInputDevicesI
 type ListInputDevicesInput struct {
 
 	// Placeholder documentation for MaxResults
-	MaxResults *int32
+	MaxResults int32
 
 	// Placeholder documentation for __string
 	NextToken *string
@@ -41,7 +41,7 @@ type ListInputDevicesInput struct {
 type ListInputDevicesOutput struct {
 
 	// The list of input devices.
-	InputDevices []*types.InputDeviceSummary
+	InputDevices []types.InputDeviceSummary
 
 	// A token to get additional list results.
 	NextToken *string

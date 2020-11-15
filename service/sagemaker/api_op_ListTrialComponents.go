@@ -79,7 +79,7 @@ type ListTrialComponentsOutput struct {
 	NextToken *string
 
 	// A list of the summaries of your trial components.
-	TrialComponentSummaries []*types.TrialComponentSummary
+	TrialComponentSummaries []types.TrialComponentSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

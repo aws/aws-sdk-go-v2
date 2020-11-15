@@ -11,7 +11,7 @@ import (
 type BadRequestException struct {
 	Message *string
 
-	ErrorDetails []*ErrorDetail
+	ErrorDetails []ErrorDetail
 }
 
 func (e *BadRequestException) Error() string {
@@ -30,7 +30,7 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type InternalServerErrorException struct {
 	Message *string
 
-	ErrorDetails []*ErrorDetail
+	ErrorDetails []ErrorDetail
 }
 
 func (e *InternalServerErrorException) Error() string {

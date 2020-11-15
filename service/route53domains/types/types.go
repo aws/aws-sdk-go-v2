@@ -28,7 +28,7 @@ type BillingRecord struct {
 
 	// The price that you were charged for the operation, in US dollars. Example value:
 	// 12.0
-	Price *float64
+	Price float64
 }
 
 // ContactDetail includes the following elements.
@@ -67,7 +67,7 @@ type ContactDetail struct {
 	Email *string
 
 	// A list of name-value pairs for parameters required by certain top-level domains.
-	ExtraParams []*ExtraParam
+	ExtraParams []ExtraParam
 
 	// Fax number of the contact. Constraints: Phone number must be specified in the
 	// format "+[country dialing code].[number including any area code]". For example,
@@ -564,7 +564,7 @@ type Nameserver struct {
 	// domain is example.com and the name server for the domain is ns.example.com, you
 	// need to specify the IP address for ns.example.com. Constraints: The list can
 	// contain only one IPv4 and one IPv6 address.
-	GlueIps []*string
+	GlueIps []string
 }
 
 // OperationSummary includes the following elements.

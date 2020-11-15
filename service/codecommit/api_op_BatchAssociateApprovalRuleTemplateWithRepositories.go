@@ -40,7 +40,7 @@ type BatchAssociateApprovalRuleTemplateWithRepositoriesInput struct {
 	// empty.
 	//
 	// This member is required.
-	RepositoryNames []*string
+	RepositoryNames []string
 }
 
 type BatchAssociateApprovalRuleTemplateWithRepositoriesOutput struct {
@@ -48,13 +48,13 @@ type BatchAssociateApprovalRuleTemplateWithRepositoriesOutput struct {
 	// A list of names of the repositories that have been associated with the template.
 	//
 	// This member is required.
-	AssociatedRepositoryNames []*string
+	AssociatedRepositoryNames []string
 
 	// A list of any errors that might have occurred while attempting to create the
 	// association between the template and the repositories.
 	//
 	// This member is required.
-	Errors []*types.BatchAssociateApprovalRuleTemplateWithRepositoriesError
+	Errors []types.BatchAssociateApprovalRuleTemplateWithRepositoriesError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

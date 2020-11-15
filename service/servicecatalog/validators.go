@@ -1570,13 +1570,13 @@ func addOpUpdateTagOptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTagOption{}, middleware.After)
 }
 
-func validateAddTags(v []*types.Tag) error {
+func validateAddTags(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddTags"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1623,13 +1623,13 @@ func validateServiceActionAssociation(v *types.ServiceActionAssociation) error {
 	}
 }
 
-func validateServiceActionAssociations(v []*types.ServiceActionAssociation) error {
+func validateServiceActionAssociations(v []types.ServiceActionAssociation) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ServiceActionAssociations"}
 	for i := range v {
-		if err := validateServiceActionAssociation(v[i]); err != nil {
+		if err := validateServiceActionAssociation(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1658,13 +1658,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTags(v []*types.Tag) error {
+func validateTags(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tags"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

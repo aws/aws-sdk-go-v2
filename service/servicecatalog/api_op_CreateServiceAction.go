@@ -43,7 +43,7 @@ type CreateServiceActionInput struct {
 	// [{\"Name\":\"InstanceId\",\"Type\":\"TEXT_VALUE\"}].
 	//
 	// This member is required.
-	Definition map[string]*string
+	Definition map[string]string
 
 	// The service action definition type. For example, SSM_AUTOMATION.
 	//

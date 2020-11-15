@@ -59,7 +59,7 @@ type Computer struct {
 
 	// An array of Attribute objects containing the LDAP attributes that belong to the
 	// computer account.
-	ComputerAttributes []*Attribute
+	ComputerAttributes []Attribute
 
 	// The identifier of the computer.
 	ComputerId *string
@@ -75,7 +75,7 @@ type ConditionalForwarder struct {
 
 	// The IP addresses of the remote DNS server associated with RemoteDomainName. This
 	// is the IP address of the DNS server that your conditional forwarder points to.
-	DnsIpAddrs []*string
+	DnsIpAddrs []string
 
 	// The fully qualified domain name (FQDN) of the remote domains pointed to by the
 	// conditional forwarder.
@@ -95,7 +95,7 @@ type DirectoryConnectSettings struct {
 	// on-premises directory.
 	//
 	// This member is required.
-	CustomerDnsIps []*string
+	CustomerDnsIps []string
 
 	// The user name of an account in the on-premises directory that is used to connect
 	// to the directory. This account must have the following permissions:
@@ -113,7 +113,7 @@ type DirectoryConnectSettings struct {
 	// A list of subnet identifiers in the VPC in which the AD Connector is created.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The identifier of the VPC in which the AD Connector is created.
 	//
@@ -125,10 +125,10 @@ type DirectoryConnectSettings struct {
 type DirectoryConnectSettingsDescription struct {
 
 	// A list of the Availability Zones that the directory is in.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// The IP addresses of the AD Connector servers.
-	ConnectIps []*string
+	ConnectIps []string
 
 	// The user name of the service account in the on-premises directory.
 	CustomerUserName *string
@@ -137,7 +137,7 @@ type DirectoryConnectSettingsDescription struct {
 	SecurityGroupId *string
 
 	// A list of subnet identifiers in the VPC that the AD Connector is in.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The identifier of the VPC that the AD Connector is in.
 	VpcId *string
@@ -165,7 +165,7 @@ type DirectoryDescription struct {
 
 	// The desired number of domain controllers in the directory if the directory is
 	// Microsoft AD.
-	DesiredNumberOfDomainControllers *int32
+	DesiredNumberOfDomainControllers int32
 
 	// The directory identifier.
 	DirectoryId *string
@@ -175,7 +175,7 @@ type DirectoryDescription struct {
 	// AD directory servers. For an AD Connector directory, these are the IP addresses
 	// of the DNS servers or domain controllers in the on-premises directory to which
 	// the AD Connector is connected.
-	DnsIpAddrs []*string
+	DnsIpAddrs []string
 
 	// The edition associated with this directory.
 	Edition DirectoryEdition
@@ -217,7 +217,7 @@ type DirectoryDescription struct {
 
 	// Indicates if single sign-on is enabled for the directory. For more information,
 	// see EnableSso and DisableSso.
-	SsoEnabled *bool
+	SsoEnabled bool
 
 	// The current stage of the directory.
 	Stage DirectoryStage
@@ -247,7 +247,7 @@ type DirectoryLimits struct {
 	CloudOnlyDirectoriesLimit *int32
 
 	// Indicates if the cloud directory limit has been reached.
-	CloudOnlyDirectoriesLimitReached *bool
+	CloudOnlyDirectoriesLimitReached bool
 
 	// The current number of AWS Managed Microsoft AD directories in the region.
 	CloudOnlyMicrosoftADCurrentCount *int32
@@ -257,7 +257,7 @@ type DirectoryLimits struct {
 	CloudOnlyMicrosoftADLimit *int32
 
 	// Indicates if the AWS Managed Microsoft AD directory limit has been reached.
-	CloudOnlyMicrosoftADLimitReached *bool
+	CloudOnlyMicrosoftADLimitReached bool
 
 	// The current number of connected directories in the Region.
 	ConnectedDirectoriesCurrentCount *int32
@@ -266,7 +266,7 @@ type DirectoryLimits struct {
 	ConnectedDirectoriesLimit *int32
 
 	// Indicates if the connected directory limit has been reached.
-	ConnectedDirectoriesLimitReached *bool
+	ConnectedDirectoriesLimitReached bool
 }
 
 // Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
@@ -277,7 +277,7 @@ type DirectoryVpcSettings struct {
 	// server and a DNS server in each of these subnets.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The identifier of the VPC in which to create the directory.
 	//
@@ -289,13 +289,13 @@ type DirectoryVpcSettings struct {
 type DirectoryVpcSettingsDescription struct {
 
 	// The list of Availability Zones that the directory is in.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// The domain controller security group identifier for the directory.
 	SecurityGroupId *string
 
 	// The identifiers of the subnets for the directory servers.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The identifier of the VPC that the directory is in.
 	VpcId *string
@@ -430,7 +430,7 @@ type OwnerDirectoryDescription struct {
 	DirectoryId *string
 
 	// IP address of the directory’s domain controllers.
-	DnsIpAddrs []*string
+	DnsIpAddrs []string
 
 	// A RadiusSettings object that contains information about the RADIUS server.
 	RadiusSettings *RadiusSettings
@@ -455,24 +455,24 @@ type RadiusSettings struct {
 	// The port that your RADIUS server is using for communications. Your on-premises
 	// network must allow inbound traffic over this port from the AWS Directory Service
 	// servers.
-	RadiusPort *int32
+	RadiusPort int32
 
 	// The maximum number of times that communication with the RADIUS server is
 	// attempted.
-	RadiusRetries *int32
+	RadiusRetries int32
 
 	// An array of strings that contains the IP addresses of the RADIUS server
 	// endpoints, or the IP addresses of your RADIUS server load balancer.
-	RadiusServers []*string
+	RadiusServers []string
 
 	// The amount of time, in seconds, to wait for the RADIUS server to respond.
-	RadiusTimeout *int32
+	RadiusTimeout int32
 
 	// Required for enabling RADIUS on the directory.
 	SharedSecret *string
 
 	// Not currently used.
-	UseSameUsername *bool
+	UseSameUsername bool
 }
 
 // Information about a schema extension.
@@ -586,7 +586,7 @@ type SnapshotLimits struct {
 	ManualSnapshotsLimit *int32
 
 	// Indicates if the manual snapshot limit has been reached.
-	ManualSnapshotsLimitReached *bool
+	ManualSnapshotsLimitReached bool
 }
 
 // Metadata assigned to a directory consisting of a key-value pair.

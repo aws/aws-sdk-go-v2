@@ -56,7 +56,7 @@ type ReserveContactInput struct {
 	StartTime *time.Time
 
 	// Tags assigned to a contact.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 //

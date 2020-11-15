@@ -54,7 +54,7 @@ type ListReceiptRuleSetsOutput struct {
 
 	// The metadata for the currently active receipt rule set. The metadata consists of
 	// the rule set name and the timestamp of when the rule set was created.
-	RuleSets []*types.ReceiptRuleSetMetadata
+	RuleSets []types.ReceiptRuleSetMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

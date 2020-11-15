@@ -29,7 +29,7 @@ type HttpPrefixHeadersResponseInput struct {
 }
 
 type HttpPrefixHeadersResponseOutput struct {
-	PrefixHeaders map[string]*string
+	PrefixHeaders map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

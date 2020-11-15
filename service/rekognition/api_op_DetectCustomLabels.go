@@ -91,7 +91,7 @@ type DetectCustomLabelsInput struct {
 type DetectCustomLabelsOutput struct {
 
 	// An array of custom labels detected in the input image.
-	CustomLabels []*types.CustomLabel
+	CustomLabels []types.CustomLabel
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

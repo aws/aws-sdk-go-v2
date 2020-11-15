@@ -330,7 +330,7 @@ func awsRestjson1_deserializeDocumentInternalFailure(v **types.InternalFailure, 
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -370,7 +370,7 @@ func awsRestjson1_deserializeDocumentModelError(v **types.ModelError, value inte
 				if !ok {
 					return fmt.Errorf("expected LogStreamArn to be of type string, got %T instead", value)
 				}
-				sv.LogStreamArn = &jtv
+				sv.LogStreamArn = ptr.String(jtv)
 			}
 
 		case "Message":
@@ -379,7 +379,7 @@ func awsRestjson1_deserializeDocumentModelError(v **types.ModelError, value inte
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		case "OriginalMessage":
@@ -388,7 +388,7 @@ func awsRestjson1_deserializeDocumentModelError(v **types.ModelError, value inte
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.OriginalMessage = &jtv
+				sv.OriginalMessage = ptr.String(jtv)
 			}
 
 		case "OriginalStatusCode":
@@ -441,7 +441,7 @@ func awsRestjson1_deserializeDocumentServiceUnavailable(v **types.ServiceUnavail
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -481,7 +481,7 @@ func awsRestjson1_deserializeDocumentValidationError(v **types.ValidationError, 
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

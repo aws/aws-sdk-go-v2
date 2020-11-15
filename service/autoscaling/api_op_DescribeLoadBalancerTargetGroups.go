@@ -46,7 +46,7 @@ type DescribeLoadBalancerTargetGroupsInput struct {
 type DescribeLoadBalancerTargetGroupsOutput struct {
 
 	// Information about the target groups.
-	LoadBalancerTargetGroups []*types.LoadBalancerTargetGroupState
+	LoadBalancerTargetGroups []types.LoadBalancerTargetGroupState
 
 	// A string that indicates that the response contains more items than can be
 	// returned in a single response. To receive additional items, specify this string

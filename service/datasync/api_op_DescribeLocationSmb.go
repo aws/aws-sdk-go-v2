@@ -42,7 +42,7 @@ type DescribeLocationSmbOutput struct {
 
 	// The Amazon Resource Name (ARN) of the source SMB file system location that is
 	// created.
-	AgentArns []*string
+	AgentArns []string
 
 	// The time that the SMB location was created.
 	CreationTime *time.Time

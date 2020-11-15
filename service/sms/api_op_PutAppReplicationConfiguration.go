@@ -34,7 +34,7 @@ type PutAppReplicationConfigurationInput struct {
 
 	// Information about the replication configurations for server groups in the
 	// application.
-	ServerGroupReplicationConfigurations []*types.ServerGroupReplicationConfiguration
+	ServerGroupReplicationConfigurations []types.ServerGroupReplicationConfiguration
 }
 
 type PutAppReplicationConfigurationOutput struct {

@@ -39,16 +39,16 @@ type BatchGetNamedQueryInput struct {
 	// An array of query IDs.
 	//
 	// This member is required.
-	NamedQueryIds []*string
+	NamedQueryIds []string
 }
 
 type BatchGetNamedQueryOutput struct {
 
 	// Information about the named query IDs submitted.
-	NamedQueries []*types.NamedQuery
+	NamedQueries []types.NamedQuery
 
 	// Information about provided query IDs.
-	UnprocessedNamedQueryIds []*types.UnprocessedNamedQueryId
+	UnprocessedNamedQueryIds []types.UnprocessedNamedQueryId
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

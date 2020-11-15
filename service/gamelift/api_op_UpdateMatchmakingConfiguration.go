@@ -97,7 +97,7 @@ type UpdateMatchmakingConfigurationInput struct {
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	// This information is added to the new GameSession object that is created for a
 	// successful match.
-	GameProperties []*types.GameProperty
+	GameProperties []types.GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.
 	// This data is passed to a game server process in the GameSession object with a
@@ -113,7 +113,7 @@ type UpdateMatchmakingConfigurationInput struct {
 	// identifies it. ARNs are unique across all Regions. These queues are used when
 	// placing game sessions for matches that are created with this matchmaking
 	// configuration. Queues can be located in any Region.
-	GameSessionQueueArns []*string
+	GameSessionQueueArns []string
 
 	// An SNS topic ARN that is set up to receive matchmaking notifications. See
 	// Setting up Notifications for Matchmaking

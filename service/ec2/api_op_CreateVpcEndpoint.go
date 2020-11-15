@@ -63,7 +63,7 @@ type CreateVpcEndpointInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// A policy to attach to the endpoint that controls access to the service. The
 	// policy must be in valid JSON format. If this parameter is not specified, we
@@ -80,21 +80,21 @@ type CreateVpcEndpointInput struct {
 	// zone, you must set the following VPC attributes to true: enableDnsHostnames and
 	// enableDnsSupport. Use ModifyVpcAttribute to set the VPC attributes. Default:
 	// true
-	PrivateDnsEnabled *bool
+	PrivateDnsEnabled bool
 
 	// (Gateway endpoint) One or more route table IDs.
-	RouteTableIds []*string
+	RouteTableIds []string
 
 	// (Interface endpoint) The ID of one or more security groups to associate with the
 	// endpoint network interface.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// (Interface endpoint) The ID of one or more subnets in which to create an
 	// endpoint network interface.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The tags to associate with the endpoint.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 
 	// The type of endpoint. Default: Gateway
 	VpcEndpointType types.VpcEndpointType

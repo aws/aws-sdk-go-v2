@@ -42,7 +42,7 @@ type ListBillingGroupsInput struct {
 type ListBillingGroupsOutput struct {
 
 	// The list of billing groups.
-	BillingGroups []*types.GroupNameAndArn
+	BillingGroups []types.GroupNameAndArn
 
 	// The token used to get the next set of results, or null if there are no
 	// additional results.

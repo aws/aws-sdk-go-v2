@@ -68,7 +68,7 @@ type DescribeInstancesInput struct {
 type DescribeInstancesOutput struct {
 
 	// A collection of objects containing properties for each instance returned.
-	Instances []*types.Instance
+	Instances []types.Instance
 
 	// Token that indicates where to resume retrieving results on the next call to this
 	// operation. If no token is returned, these results represent the end of the list.

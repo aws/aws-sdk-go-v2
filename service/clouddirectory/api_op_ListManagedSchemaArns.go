@@ -47,7 +47,7 @@ type ListManagedSchemaArnsOutput struct {
 	NextToken *string
 
 	// The ARNs for all AWS managed schemas.
-	SchemaArns []*string
+	SchemaArns []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

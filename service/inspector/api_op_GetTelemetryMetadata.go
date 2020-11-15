@@ -41,7 +41,7 @@ type GetTelemetryMetadataOutput struct {
 	// Telemetry details.
 	//
 	// This member is required.
-	TelemetryMetadata []*types.TelemetryMetadata
+	TelemetryMetadata []types.TelemetryMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

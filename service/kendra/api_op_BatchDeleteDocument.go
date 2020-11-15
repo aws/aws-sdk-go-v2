@@ -35,7 +35,7 @@ type BatchDeleteDocumentInput struct {
 	// One or more identifiers for documents to delete from the index.
 	//
 	// This member is required.
-	DocumentIdList []*string
+	DocumentIdList []string
 
 	// The identifier of the index that contains the documents to delete.
 	//
@@ -51,7 +51,7 @@ type BatchDeleteDocumentOutput struct {
 	// A list of documents that could not be removed from the index. Each entry
 	// contains an error message that indicates why the document couldn't be removed
 	// from the index.
-	FailedDocuments []*types.BatchDeleteDocumentResponseFailedDocument
+	FailedDocuments []types.BatchDeleteDocumentResponseFailedDocument
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

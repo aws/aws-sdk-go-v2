@@ -64,20 +64,20 @@ type CreatePlayerSessionsInput struct {
 	// List of unique identifiers for the players to be added.
 	//
 	// This member is required.
-	PlayerIds []*string
+	PlayerIds []string
 
 	// Map of string pairs, each specifying a player ID and a set of developer-defined
 	// information related to the player. Amazon GameLift does not use this data, so it
 	// can be formatted as needed for use in the game. Player data strings for player
 	// IDs not included in the PlayerIds parameter are ignored.
-	PlayerDataMap map[string]*string
+	PlayerDataMap map[string]string
 }
 
 // Represents the returned data in response to a request operation.
 type CreatePlayerSessionsOutput struct {
 
 	// A collection of player session objects created for the added players.
-	PlayerSessions []*types.PlayerSession
+	PlayerSessions []types.PlayerSession
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

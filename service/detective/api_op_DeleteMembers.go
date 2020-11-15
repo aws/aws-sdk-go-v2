@@ -36,7 +36,7 @@ type DeleteMembersInput struct {
 	// behavior graph.
 	//
 	// This member is required.
-	AccountIds []*string
+	AccountIds []string
 
 	// The ARN of the behavior graph to delete members from.
 	//
@@ -48,12 +48,12 @@ type DeleteMembersOutput struct {
 
 	// The list of AWS account identifiers for the member accounts that Detective
 	// successfully deleted from the behavior graph.
-	AccountIds []*string
+	AccountIds []string
 
 	// The list of member accounts that Detective was not able to delete from the
 	// behavior graph. For each member account, provides the reason that the deletion
 	// could not be processed.
-	UnprocessedAccounts []*types.UnprocessedAccount
+	UnprocessedAccounts []types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

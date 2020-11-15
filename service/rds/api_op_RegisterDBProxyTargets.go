@@ -35,10 +35,10 @@ type RegisterDBProxyTargetsInput struct {
 	DBProxyName *string
 
 	// One or more DB cluster identifiers.
-	DBClusterIdentifiers []*string
+	DBClusterIdentifiers []string
 
 	// One or more DB instance identifiers.
-	DBInstanceIdentifiers []*string
+	DBInstanceIdentifiers []string
 
 	// The identifier of the DBProxyTargetGroup.
 	TargetGroupName *string
@@ -48,7 +48,7 @@ type RegisterDBProxyTargetsOutput struct {
 
 	// One or more DBProxyTarget objects that are created when you register targets
 	// with a target group.
-	DBProxyTargets []*types.DBProxyTarget
+	DBProxyTargets []types.DBProxyTarget
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

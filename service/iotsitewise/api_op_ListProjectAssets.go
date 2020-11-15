@@ -47,7 +47,7 @@ type ListProjectAssetsOutput struct {
 	// A list that contains the IDs of each asset associated with the project.
 	//
 	// This member is required.
-	AssetIds []*string
+	AssetIds []string
 
 	// The token for the next set of results, or null if there are no additional
 	// results.

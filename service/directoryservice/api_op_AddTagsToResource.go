@@ -39,7 +39,7 @@ type AddTagsToResourceInput struct {
 	// The tags to be assigned to the directory.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type AddTagsToResourceOutput struct {

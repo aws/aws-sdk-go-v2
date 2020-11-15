@@ -33,7 +33,7 @@ type DescribeTrafficMirrorFiltersInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters. The possible values are:
 	//
@@ -42,17 +42,17 @@ type DescribeTrafficMirrorFiltersInput struct {
 	//
 	// * traffic-mirror-filter-id: The ID of the Traffic Mirror
 	// filter.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next page of results.
 	NextToken *string
 
 	// The ID of the Traffic Mirror filter.
-	TrafficMirrorFilterIds []*string
+	TrafficMirrorFilterIds []string
 }
 
 type DescribeTrafficMirrorFiltersOutput struct {
@@ -62,7 +62,7 @@ type DescribeTrafficMirrorFiltersOutput struct {
 	NextToken *string
 
 	// Information about one or more Traffic Mirror filters.
-	TrafficMirrorFilters []*types.TrafficMirrorFilter
+	TrafficMirrorFilters []types.TrafficMirrorFilter
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -110,7 +110,7 @@ type DescribeScalingPoliciesOutput struct {
 	NextToken *string
 
 	// A collection of objects containing the scaling policies matching the request.
-	ScalingPolicies []*types.ScalingPolicy
+	ScalingPolicies []types.ScalingPolicy
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

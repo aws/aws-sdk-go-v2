@@ -46,7 +46,7 @@ type ListSatellitesOutput struct {
 	NextToken *string
 
 	// List of satellites.
-	Satellites []*types.SatelliteListItem
+	Satellites []types.SatelliteListItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

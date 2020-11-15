@@ -39,7 +39,7 @@ type UpdateLayerInput struct {
 	LayerId *string
 
 	// One or more user-defined key/value pairs to be added to the stack attributes.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// Whether to automatically assign an Elastic IP address
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
@@ -72,7 +72,7 @@ type UpdateLayerInput struct {
 	CustomRecipes *types.Recipes
 
 	// An array containing the layer's custom security group IDs.
-	CustomSecurityGroupIds []*string
+	CustomSecurityGroupIds []string
 
 	// Whether to disable auto healing for the layer.
 	EnableAutoHealing *bool
@@ -93,7 +93,7 @@ type UpdateLayerInput struct {
 	Name *string
 
 	// An array of Package objects that describe the layer's packages.
-	Packages []*string
+	Packages []string
 
 	// For custom layers only, use this parameter to specify the layer's short name,
 	// which is used internally by AWS OpsWorks Stacks and by Chef. The short name is
@@ -108,7 +108,7 @@ type UpdateLayerInput struct {
 	UseEbsOptimizedInstances *bool
 
 	// A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
-	VolumeConfigurations []*types.VolumeConfiguration
+	VolumeConfigurations []types.VolumeConfiguration
 }
 
 type UpdateLayerOutput struct {

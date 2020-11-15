@@ -88,7 +88,7 @@ type SearchDevicesFilter struct {
 	// The values to use to filter results.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // A filter to use to search for tasks.
@@ -107,5 +107,5 @@ type SearchQuantumTasksFilter struct {
 	// The values to use for the filter.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }

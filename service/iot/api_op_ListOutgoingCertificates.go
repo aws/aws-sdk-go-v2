@@ -32,7 +32,7 @@ type ListOutgoingCertificatesInput struct {
 
 	// Specifies the order for results. If True, the results are returned in ascending
 	// order, based on the creation date.
-	AscendingOrder *bool
+	AscendingOrder bool
 
 	// The marker for the next set of results.
 	Marker *string
@@ -48,7 +48,7 @@ type ListOutgoingCertificatesOutput struct {
 	NextMarker *string
 
 	// The certificates that are being transferred but not yet accepted.
-	OutgoingCertificates []*types.OutgoingCertificate
+	OutgoingCertificates []types.OutgoingCertificate
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

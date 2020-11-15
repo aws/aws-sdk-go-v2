@@ -68,12 +68,12 @@ type DetectorState struct {
 	// The current state of the detector's timers.
 	//
 	// This member is required.
-	Timers []*Timer
+	Timers []Timer
 
 	// The current values of the detector's variables.
 	//
 	// This member is required.
-	Variables []*Variable
+	Variables []Variable
 }
 
 // The new state, variable values, and timer settings of the detector (instance).
@@ -88,13 +88,13 @@ type DetectorStateDefinition struct {
 	// is cleared, and its timeout event won't occur.
 	//
 	// This member is required.
-	Timers []*TimerDefinition
+	Timers []TimerDefinition
 
 	// The new values of the detector's variables. Any variable whose value isn't
 	// specified is cleared.
 	//
 	// This member is required.
-	Variables []*VariableDefinition
+	Variables []VariableDefinition
 }
 
 // Information about the detector state.

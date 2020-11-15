@@ -34,7 +34,7 @@ type AttachTypedLinkInput struct {
 	// A set of attributes that are associated with the typed link.
 	//
 	// This member is required.
-	Attributes []*types.AttributeNameAndValue
+	Attributes []types.AttributeNameAndValue
 
 	// The Amazon Resource Name (ARN) of the directory where you want to attach the
 	// typed link.

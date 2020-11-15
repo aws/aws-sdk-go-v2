@@ -52,7 +52,7 @@ type ListMembersOutput struct {
 	// accounts that did not pass verification and member accounts that have not yet
 	// accepted the invitation to the behavior graph. The results do not include member
 	// accounts that were removed from the behavior graph.
-	MemberDetails []*types.MemberDetail
+	MemberDetails []types.MemberDetail
 
 	// If there are more member accounts remaining in the results, then this is the
 	// pagination token to use to request the next page of member accounts.

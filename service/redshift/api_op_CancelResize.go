@@ -59,15 +59,15 @@ type CancelResizeOutput struct {
 
 	// The names of tables that have been completely imported . Valid Values: List of
 	// table names.
-	ImportTablesCompleted []*string
+	ImportTablesCompleted []string
 
 	// The names of tables that are being currently imported. Valid Values: List of
 	// table names.
-	ImportTablesInProgress []*string
+	ImportTablesInProgress []string
 
 	// The names of tables that have not been yet imported. Valid Values: List of table
 	// names
-	ImportTablesNotStarted []*string
+	ImportTablesNotStarted []string
 
 	// An optional string to provide additional details about the resize action.
 	Message *string

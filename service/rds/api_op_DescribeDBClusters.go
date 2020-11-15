@@ -48,11 +48,11 @@ type DescribeDBClustersInput struct {
 	// * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
 	// Resource Names (ARNs). The results list will only include information about the
 	// DB clusters identified by these ARNs.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// Optional Boolean parameter that specifies whether the output includes
 	// information about clusters shared from other AWS accounts.
-	IncludeShared *bool
+	IncludeShared bool
 
 	// An optional pagination token provided by a previous DescribeDBClusters request.
 	// If this parameter is specified, the response includes only records beyond the
@@ -70,7 +70,7 @@ type DescribeDBClustersInput struct {
 type DescribeDBClustersOutput struct {
 
 	// Contains a list of DB clusters for the user.
-	DBClusters []*types.DBCluster
+	DBClusters []types.DBCluster
 
 	// A pagination token that can be used in a later DescribeDBClusters request.
 	Marker *string

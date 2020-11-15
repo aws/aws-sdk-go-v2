@@ -33,7 +33,7 @@ func (c *Client) EstimateTemplateCost(ctx context.Context, params *EstimateTempl
 type EstimateTemplateCostInput struct {
 
 	// A list of Parameter structures that specify input parameters.
-	Parameters []*types.Parameter
+	Parameters []types.Parameter
 
 	// Structure containing the template body with a minimum length of 1 byte and a
 	// maximum length of 51,200 bytes. (For more information, go to Template Anatomy

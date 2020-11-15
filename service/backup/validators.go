@@ -967,13 +967,13 @@ func validateBackupRuleInput(v *types.BackupRuleInput) error {
 	}
 }
 
-func validateBackupRulesInput(v []*types.BackupRuleInput) error {
+func validateBackupRulesInput(v []types.BackupRuleInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BackupRulesInput"}
 	for i := range v {
-		if err := validateBackupRuleInput(v[i]); err != nil {
+		if err := validateBackupRuleInput(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1043,13 +1043,13 @@ func validateCopyAction(v *types.CopyAction) error {
 	}
 }
 
-func validateCopyActions(v []*types.CopyAction) error {
+func validateCopyActions(v []types.CopyAction) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CopyActions"}
 	for i := range v {
-		if err := validateCopyAction(v[i]); err != nil {
+		if err := validateCopyAction(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1060,13 +1060,13 @@ func validateCopyActions(v []*types.CopyAction) error {
 	}
 }
 
-func validateListOfTags(v []*types.Condition) error {
+func validateListOfTags(v []types.Condition) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfTags"}
 	for i := range v {
-		if err := validateCondition(v[i]); err != nil {
+		if err := validateCondition(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

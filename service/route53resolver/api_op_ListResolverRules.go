@@ -34,7 +34,7 @@ type ListResolverRulesInput struct {
 	// submit a second or subsequent ListResolverRules request and specify the
 	// NextToken parameter, you must use the same values for Filters, if any, as in the
 	// previous request.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of Resolver rules that you want to return in the response to
 	// a ListResolverRules request. If you don't specify a value for MaxResults,
@@ -60,7 +60,7 @@ type ListResolverRulesOutput struct {
 
 	// The Resolver rules that were created using the current AWS account and that
 	// match the specified filters, if any.
-	ResolverRules []*types.ResolverRule
+	ResolverRules []types.ResolverRule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

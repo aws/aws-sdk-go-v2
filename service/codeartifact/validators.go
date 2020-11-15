@@ -796,13 +796,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -828,13 +828,13 @@ func validateUpstreamRepository(v *types.UpstreamRepository) error {
 	}
 }
 
-func validateUpstreamRepositoryList(v []*types.UpstreamRepository) error {
+func validateUpstreamRepositoryList(v []types.UpstreamRepository) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpstreamRepositoryList"}
 	for i := range v {
-		if err := validateUpstreamRepository(v[i]); err != nil {
+		if err := validateUpstreamRepository(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

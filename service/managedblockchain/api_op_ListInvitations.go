@@ -39,7 +39,7 @@ type ListInvitationsInput struct {
 type ListInvitationsOutput struct {
 
 	// The invitations for the network.
-	Invitations []*types.Invitation
+	Invitations []types.Invitation
 
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string

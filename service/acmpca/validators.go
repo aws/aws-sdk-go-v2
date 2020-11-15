@@ -564,9 +564,6 @@ func validateCrlConfiguration(v *types.CrlConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CrlConfiguration"}
-	if v.Enabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -606,13 +603,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

@@ -40,7 +40,7 @@ type GetConformancePackComplianceDetailsInput struct {
 
 	// The maximum number of evaluation results returned on each page. If you do no
 	// specify a number, AWS Config uses the default. The default is 100.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned in a previous request that you use to request the
 	// next page of results in a paginated response.
@@ -55,7 +55,7 @@ type GetConformancePackComplianceDetailsOutput struct {
 	ConformancePackName *string
 
 	// Returns a list of ConformancePackEvaluationResult objects.
-	ConformancePackRuleEvaluationResults []*types.ConformancePackEvaluationResult
+	ConformancePackRuleEvaluationResults []types.ConformancePackEvaluationResult
 
 	// The nextToken string returned in a previous request that you use to request the
 	// next page of results in a paginated response.

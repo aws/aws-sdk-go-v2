@@ -45,7 +45,7 @@ type DescribeDeploymentJobOutput struct {
 	CreatedAt *time.Time
 
 	// The deployment application configuration.
-	DeploymentApplicationConfigs []*types.DeploymentApplicationConfig
+	DeploymentApplicationConfigs []types.DeploymentApplicationConfig
 
 	// The deployment configuration.
 	DeploymentConfig *types.DeploymentConfig
@@ -60,13 +60,13 @@ type DescribeDeploymentJobOutput struct {
 	Fleet *string
 
 	// A list of robot deployment summaries.
-	RobotDeploymentSummary []*types.RobotDeployment
+	RobotDeploymentSummary []types.RobotDeployment
 
 	// The status of the deployment job.
 	Status types.DeploymentStatus
 
 	// The list of all tags added to the specified deployment job.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

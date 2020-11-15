@@ -64,7 +64,7 @@ type ListTagsOutput struct {
 	NextToken *string
 
 	// The tags associated with your private CA.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

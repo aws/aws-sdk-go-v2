@@ -3441,7 +3441,7 @@ func awsAwsjson11_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -3481,7 +3481,7 @@ func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictExcepti
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -3570,7 +3570,7 @@ func awsAwsjson11_deserializeDocumentInputDataConfig(v **types.InputDataConfig, 
 				if !ok {
 					return fmt.Errorf("expected DataAccessRoleArn to be of type string, got %T instead", value)
 				}
-				sv.DataAccessRoleArn = &jtv
+				sv.DataAccessRoleArn = ptr.String(jtv)
 			}
 
 		case "S3Uri":
@@ -3579,7 +3579,7 @@ func awsAwsjson11_deserializeDocumentInputDataConfig(v **types.InputDataConfig, 
 				if !ok {
 					return fmt.Errorf("expected Uri to be of type string, got %T instead", value)
 				}
-				sv.S3Uri = &jtv
+				sv.S3Uri = ptr.String(jtv)
 			}
 
 		case "TuningDataS3Uri":
@@ -3588,7 +3588,7 @@ func awsAwsjson11_deserializeDocumentInputDataConfig(v **types.InputDataConfig, 
 				if !ok {
 					return fmt.Errorf("expected Uri to be of type string, got %T instead", value)
 				}
-				sv.TuningDataS3Uri = &jtv
+				sv.TuningDataS3Uri = ptr.String(jtv)
 			}
 
 		default:
@@ -3628,7 +3628,7 @@ func awsAwsjson11_deserializeDocumentInternalFailureException(v **types.Internal
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -3668,7 +3668,7 @@ func awsAwsjson11_deserializeDocumentJobExecutionSettings(v **types.JobExecution
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AllowDeferredExecution = &jtv
+				sv.AllowDeferredExecution = ptr.Bool(jtv)
 			}
 
 		case "DataAccessRoleArn":
@@ -3677,7 +3677,7 @@ func awsAwsjson11_deserializeDocumentJobExecutionSettings(v **types.JobExecution
 				if !ok {
 					return fmt.Errorf("expected DataAccessRoleArn to be of type string, got %T instead", value)
 				}
-				sv.DataAccessRoleArn = &jtv
+				sv.DataAccessRoleArn = ptr.String(jtv)
 			}
 
 		default:
@@ -3739,7 +3739,7 @@ func awsAwsjson11_deserializeDocumentLanguageModel(v **types.LanguageModel, valu
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.FailureReason = &jtv
+				sv.FailureReason = ptr.String(jtv)
 			}
 
 		case "InputDataConfig":
@@ -3775,7 +3775,7 @@ func awsAwsjson11_deserializeDocumentLanguageModel(v **types.LanguageModel, valu
 				if !ok {
 					return fmt.Errorf("expected ModelName to be of type string, got %T instead", value)
 				}
-				sv.ModelName = &jtv
+				sv.ModelName = ptr.String(jtv)
 			}
 
 		case "ModelStatus":
@@ -3793,7 +3793,7 @@ func awsAwsjson11_deserializeDocumentLanguageModel(v **types.LanguageModel, valu
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.UpgradeAvailability = &jtv
+				sv.UpgradeAvailability = ptr.Bool(jtv)
 			}
 
 		default:
@@ -3869,7 +3869,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -3909,7 +3909,7 @@ func awsAwsjson11_deserializeDocumentMedia(v **types.Media, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected Uri to be of type string, got %T instead", value)
 				}
-				sv.MediaFileUri = &jtv
+				sv.MediaFileUri = ptr.String(jtv)
 			}
 
 		default:
@@ -3949,7 +3949,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscript(v **types.MedicalTranscri
 				if !ok {
 					return fmt.Errorf("expected Uri to be of type string, got %T instead", value)
 				}
-				sv.TranscriptFileUri = &jtv
+				sv.TranscriptFileUri = ptr.String(jtv)
 			}
 
 		default:
@@ -4015,7 +4015,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJob(v **types.MedicalTr
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.FailureReason = &jtv
+				sv.FailureReason = ptr.String(jtv)
 			}
 
 		case "LanguageCode":
@@ -4060,7 +4060,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJob(v **types.MedicalTr
 				if !ok {
 					return fmt.Errorf("expected TranscriptionJobName to be of type string, got %T instead", value)
 				}
-				sv.MedicalTranscriptionJobName = &jtv
+				sv.MedicalTranscriptionJobName = ptr.String(jtv)
 			}
 
 		case "Settings":
@@ -4122,7 +4122,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJob(v **types.MedicalTr
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummaries(v *[]*types.MedicalTranscriptionJobSummary, value interface{}) error {
+func awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummaries(v *[]types.MedicalTranscriptionJobSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4135,18 +4135,20 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummaries(v *[]*type
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.MedicalTranscriptionJobSummary
+	var cv []types.MedicalTranscriptionJobSummary
 	if *v == nil {
-		cv = []*types.MedicalTranscriptionJobSummary{}
+		cv = []types.MedicalTranscriptionJobSummary{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.MedicalTranscriptionJobSummary
-		if err := awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummary(&col, value); err != nil {
+		var col types.MedicalTranscriptionJobSummary
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummary(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4208,7 +4210,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummary(v **types.Me
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.FailureReason = &jtv
+				sv.FailureReason = ptr.String(jtv)
 			}
 
 		case "LanguageCode":
@@ -4226,7 +4228,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummary(v **types.Me
 				if !ok {
 					return fmt.Errorf("expected TranscriptionJobName to be of type string, got %T instead", value)
 				}
-				sv.MedicalTranscriptionJobName = &jtv
+				sv.MedicalTranscriptionJobName = ptr.String(jtv)
 			}
 
 		case "OutputLocationType":
@@ -4315,7 +4317,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionSetting(v **types.Medic
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ChannelIdentification = &jtv
+				sv.ChannelIdentification = ptr.Bool(jtv)
 			}
 
 		case "MaxAlternatives":
@@ -4350,7 +4352,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionSetting(v **types.Medic
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ShowAlternatives = &jtv
+				sv.ShowAlternatives = ptr.Bool(jtv)
 			}
 
 		case "ShowSpeakerLabels":
@@ -4359,7 +4361,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionSetting(v **types.Medic
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ShowSpeakerLabels = &jtv
+				sv.ShowSpeakerLabels = ptr.Bool(jtv)
 			}
 
 		case "VocabularyName":
@@ -4368,7 +4370,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionSetting(v **types.Medic
 				if !ok {
 					return fmt.Errorf("expected VocabularyName to be of type string, got %T instead", value)
 				}
-				sv.VocabularyName = &jtv
+				sv.VocabularyName = ptr.String(jtv)
 			}
 
 		default:
@@ -4380,7 +4382,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionSetting(v **types.Medic
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentModels(v *[]*types.LanguageModel, value interface{}) error {
+func awsAwsjson11_deserializeDocumentModels(v *[]types.LanguageModel, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4393,18 +4395,20 @@ func awsAwsjson11_deserializeDocumentModels(v *[]*types.LanguageModel, value int
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.LanguageModel
+	var cv []types.LanguageModel
 	if *v == nil {
-		cv = []*types.LanguageModel{}
+		cv = []types.LanguageModel{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.LanguageModel
-		if err := awsAwsjson11_deserializeDocumentLanguageModel(&col, value); err != nil {
+		var col types.LanguageModel
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentLanguageModel(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4440,7 +4444,7 @@ func awsAwsjson11_deserializeDocumentModelSettings(v **types.ModelSettings, valu
 				if !ok {
 					return fmt.Errorf("expected ModelName to be of type string, got %T instead", value)
 				}
-				sv.LanguageModelName = &jtv
+				sv.LanguageModelName = ptr.String(jtv)
 			}
 
 		default:
@@ -4480,7 +4484,7 @@ func awsAwsjson11_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -4520,7 +4524,7 @@ func awsAwsjson11_deserializeDocumentSettings(v **types.Settings, value interfac
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ChannelIdentification = &jtv
+				sv.ChannelIdentification = ptr.Bool(jtv)
 			}
 
 		case "MaxAlternatives":
@@ -4555,7 +4559,7 @@ func awsAwsjson11_deserializeDocumentSettings(v **types.Settings, value interfac
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ShowAlternatives = &jtv
+				sv.ShowAlternatives = ptr.Bool(jtv)
 			}
 
 		case "ShowSpeakerLabels":
@@ -4564,7 +4568,7 @@ func awsAwsjson11_deserializeDocumentSettings(v **types.Settings, value interfac
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ShowSpeakerLabels = &jtv
+				sv.ShowSpeakerLabels = ptr.Bool(jtv)
 			}
 
 		case "VocabularyFilterMethod":
@@ -4582,7 +4586,7 @@ func awsAwsjson11_deserializeDocumentSettings(v **types.Settings, value interfac
 				if !ok {
 					return fmt.Errorf("expected VocabularyFilterName to be of type string, got %T instead", value)
 				}
-				sv.VocabularyFilterName = &jtv
+				sv.VocabularyFilterName = ptr.String(jtv)
 			}
 
 		case "VocabularyName":
@@ -4591,7 +4595,7 @@ func awsAwsjson11_deserializeDocumentSettings(v **types.Settings, value interfac
 				if !ok {
 					return fmt.Errorf("expected VocabularyName to be of type string, got %T instead", value)
 				}
-				sv.VocabularyName = &jtv
+				sv.VocabularyName = ptr.String(jtv)
 			}
 
 		default:
@@ -4631,7 +4635,7 @@ func awsAwsjson11_deserializeDocumentTranscript(v **types.Transcript, value inte
 				if !ok {
 					return fmt.Errorf("expected Uri to be of type string, got %T instead", value)
 				}
-				sv.RedactedTranscriptFileUri = &jtv
+				sv.RedactedTranscriptFileUri = ptr.String(jtv)
 			}
 
 		case "TranscriptFileUri":
@@ -4640,7 +4644,7 @@ func awsAwsjson11_deserializeDocumentTranscript(v **types.Transcript, value inte
 				if !ok {
 					return fmt.Errorf("expected Uri to be of type string, got %T instead", value)
 				}
-				sv.TranscriptFileUri = &jtv
+				sv.TranscriptFileUri = ptr.String(jtv)
 			}
 
 		default:
@@ -4711,7 +4715,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.FailureReason = &jtv
+				sv.FailureReason = ptr.String(jtv)
 			}
 
 		case "IdentifiedLanguageScore":
@@ -4733,7 +4737,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IdentifyLanguage = &jtv
+				sv.IdentifyLanguage = ptr.Bool(jtv)
 			}
 
 		case "JobExecutionSettings":
@@ -4816,7 +4820,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 				if !ok {
 					return fmt.Errorf("expected TranscriptionJobName to be of type string, got %T instead", value)
 				}
-				sv.TranscriptionJobName = &jtv
+				sv.TranscriptionJobName = ptr.String(jtv)
 			}
 
 		case "TranscriptionJobStatus":
@@ -4837,7 +4841,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTranscriptionJobSummaries(v *[]*types.TranscriptionJobSummary, value interface{}) error {
+func awsAwsjson11_deserializeDocumentTranscriptionJobSummaries(v *[]types.TranscriptionJobSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4850,18 +4854,20 @@ func awsAwsjson11_deserializeDocumentTranscriptionJobSummaries(v *[]*types.Trans
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.TranscriptionJobSummary
+	var cv []types.TranscriptionJobSummary
 	if *v == nil {
-		cv = []*types.TranscriptionJobSummary{}
+		cv = []types.TranscriptionJobSummary{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.TranscriptionJobSummary
-		if err := awsAwsjson11_deserializeDocumentTranscriptionJobSummary(&col, value); err != nil {
+		var col types.TranscriptionJobSummary
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentTranscriptionJobSummary(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4928,7 +4934,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJobSummary(v **types.Transcrip
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.FailureReason = &jtv
+				sv.FailureReason = ptr.String(jtv)
 			}
 
 		case "IdentifiedLanguageScore":
@@ -4950,7 +4956,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJobSummary(v **types.Transcrip
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IdentifyLanguage = &jtv
+				sv.IdentifyLanguage = ptr.Bool(jtv)
 			}
 
 		case "LanguageCode":
@@ -4995,7 +5001,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJobSummary(v **types.Transcrip
 				if !ok {
 					return fmt.Errorf("expected TranscriptionJobName to be of type string, got %T instead", value)
 				}
-				sv.TranscriptionJobName = &jtv
+				sv.TranscriptionJobName = ptr.String(jtv)
 			}
 
 		case "TranscriptionJobStatus":
@@ -5016,7 +5022,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJobSummary(v **types.Transcrip
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentVocabularies(v *[]*types.VocabularyInfo, value interface{}) error {
+func awsAwsjson11_deserializeDocumentVocabularies(v *[]types.VocabularyInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5029,18 +5035,20 @@ func awsAwsjson11_deserializeDocumentVocabularies(v *[]*types.VocabularyInfo, va
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.VocabularyInfo
+	var cv []types.VocabularyInfo
 	if *v == nil {
-		cv = []*types.VocabularyInfo{}
+		cv = []types.VocabularyInfo{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.VocabularyInfo
-		if err := awsAwsjson11_deserializeDocumentVocabularyInfo(&col, value); err != nil {
+		var col types.VocabularyInfo
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentVocabularyInfo(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -5098,7 +5106,7 @@ func awsAwsjson11_deserializeDocumentVocabularyFilterInfo(v **types.VocabularyFi
 				if !ok {
 					return fmt.Errorf("expected VocabularyFilterName to be of type string, got %T instead", value)
 				}
-				sv.VocabularyFilterName = &jtv
+				sv.VocabularyFilterName = ptr.String(jtv)
 			}
 
 		default:
@@ -5110,7 +5118,7 @@ func awsAwsjson11_deserializeDocumentVocabularyFilterInfo(v **types.VocabularyFi
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentVocabularyFilters(v *[]*types.VocabularyFilterInfo, value interface{}) error {
+func awsAwsjson11_deserializeDocumentVocabularyFilters(v *[]types.VocabularyFilterInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5123,18 +5131,20 @@ func awsAwsjson11_deserializeDocumentVocabularyFilters(v *[]*types.VocabularyFil
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.VocabularyFilterInfo
+	var cv []types.VocabularyFilterInfo
 	if *v == nil {
-		cv = []*types.VocabularyFilterInfo{}
+		cv = []types.VocabularyFilterInfo{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.VocabularyFilterInfo
-		if err := awsAwsjson11_deserializeDocumentVocabularyFilterInfo(&col, value); err != nil {
+		var col types.VocabularyFilterInfo
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentVocabularyFilterInfo(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -5192,7 +5202,7 @@ func awsAwsjson11_deserializeDocumentVocabularyInfo(v **types.VocabularyInfo, va
 				if !ok {
 					return fmt.Errorf("expected VocabularyName to be of type string, got %T instead", value)
 				}
-				sv.VocabularyName = &jtv
+				sv.VocabularyName = ptr.String(jtv)
 			}
 
 		case "VocabularyState":
@@ -5264,7 +5274,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLanguageModelOutput(v **CreateLangu
 				if !ok {
 					return fmt.Errorf("expected ModelName to be of type string, got %T instead", value)
 				}
-				sv.ModelName = &jtv
+				sv.ModelName = ptr.String(jtv)
 			}
 
 		case "ModelStatus":
@@ -5313,7 +5323,7 @@ func awsAwsjson11_deserializeOpDocumentCreateMedicalVocabularyOutput(v **CreateM
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.FailureReason = &jtv
+				sv.FailureReason = ptr.String(jtv)
 			}
 
 		case "LanguageCode":
@@ -5344,7 +5354,7 @@ func awsAwsjson11_deserializeOpDocumentCreateMedicalVocabularyOutput(v **CreateM
 				if !ok {
 					return fmt.Errorf("expected VocabularyName to be of type string, got %T instead", value)
 				}
-				sv.VocabularyName = &jtv
+				sv.VocabularyName = ptr.String(jtv)
 			}
 
 		case "VocabularyState":
@@ -5415,7 +5425,7 @@ func awsAwsjson11_deserializeOpDocumentCreateVocabularyFilterOutput(v **CreateVo
 				if !ok {
 					return fmt.Errorf("expected VocabularyFilterName to be of type string, got %T instead", value)
 				}
-				sv.VocabularyFilterName = &jtv
+				sv.VocabularyFilterName = ptr.String(jtv)
 			}
 
 		default:
@@ -5455,7 +5465,7 @@ func awsAwsjson11_deserializeOpDocumentCreateVocabularyOutput(v **CreateVocabula
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.FailureReason = &jtv
+				sv.FailureReason = ptr.String(jtv)
 			}
 
 		case "LanguageCode":
@@ -5486,7 +5496,7 @@ func awsAwsjson11_deserializeOpDocumentCreateVocabularyOutput(v **CreateVocabula
 				if !ok {
 					return fmt.Errorf("expected VocabularyName to be of type string, got %T instead", value)
 				}
-				sv.VocabularyName = &jtv
+				sv.VocabularyName = ptr.String(jtv)
 			}
 
 		case "VocabularyState":
@@ -5793,7 +5803,7 @@ func awsAwsjson11_deserializeOpDocumentGetMedicalVocabularyOutput(v **GetMedical
 				if !ok {
 					return fmt.Errorf("expected Uri to be of type string, got %T instead", value)
 				}
-				sv.DownloadUri = &jtv
+				sv.DownloadUri = ptr.String(jtv)
 			}
 
 		case "FailureReason":
@@ -5802,7 +5812,7 @@ func awsAwsjson11_deserializeOpDocumentGetMedicalVocabularyOutput(v **GetMedical
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.FailureReason = &jtv
+				sv.FailureReason = ptr.String(jtv)
 			}
 
 		case "LanguageCode":
@@ -5833,7 +5843,7 @@ func awsAwsjson11_deserializeOpDocumentGetMedicalVocabularyOutput(v **GetMedical
 				if !ok {
 					return fmt.Errorf("expected VocabularyName to be of type string, got %T instead", value)
 				}
-				sv.VocabularyName = &jtv
+				sv.VocabularyName = ptr.String(jtv)
 			}
 
 		case "VocabularyState":
@@ -5918,7 +5928,7 @@ func awsAwsjson11_deserializeOpDocumentGetVocabularyFilterOutput(v **GetVocabula
 				if !ok {
 					return fmt.Errorf("expected Uri to be of type string, got %T instead", value)
 				}
-				sv.DownloadUri = &jtv
+				sv.DownloadUri = ptr.String(jtv)
 			}
 
 		case "LanguageCode":
@@ -5949,7 +5959,7 @@ func awsAwsjson11_deserializeOpDocumentGetVocabularyFilterOutput(v **GetVocabula
 				if !ok {
 					return fmt.Errorf("expected VocabularyFilterName to be of type string, got %T instead", value)
 				}
-				sv.VocabularyFilterName = &jtv
+				sv.VocabularyFilterName = ptr.String(jtv)
 			}
 
 		default:
@@ -5989,7 +5999,7 @@ func awsAwsjson11_deserializeOpDocumentGetVocabularyOutput(v **GetVocabularyOutp
 				if !ok {
 					return fmt.Errorf("expected Uri to be of type string, got %T instead", value)
 				}
-				sv.DownloadUri = &jtv
+				sv.DownloadUri = ptr.String(jtv)
 			}
 
 		case "FailureReason":
@@ -5998,7 +6008,7 @@ func awsAwsjson11_deserializeOpDocumentGetVocabularyOutput(v **GetVocabularyOutp
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.FailureReason = &jtv
+				sv.FailureReason = ptr.String(jtv)
 			}
 
 		case "LanguageCode":
@@ -6029,7 +6039,7 @@ func awsAwsjson11_deserializeOpDocumentGetVocabularyOutput(v **GetVocabularyOutp
 				if !ok {
 					return fmt.Errorf("expected VocabularyName to be of type string, got %T instead", value)
 				}
-				sv.VocabularyName = &jtv
+				sv.VocabularyName = ptr.String(jtv)
 			}
 
 		case "VocabularyState":
@@ -6083,7 +6093,7 @@ func awsAwsjson11_deserializeOpDocumentListLanguageModelsOutput(v **ListLanguage
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -6128,7 +6138,7 @@ func awsAwsjson11_deserializeOpDocumentListMedicalTranscriptionJobsOutput(v **Li
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -6177,7 +6187,7 @@ func awsAwsjson11_deserializeOpDocumentListMedicalVocabulariesOutput(v **ListMed
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -6231,7 +6241,7 @@ func awsAwsjson11_deserializeOpDocumentListTranscriptionJobsOutput(v **ListTrans
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -6285,7 +6295,7 @@ func awsAwsjson11_deserializeOpDocumentListVocabulariesOutput(v **ListVocabulari
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -6339,7 +6349,7 @@ func awsAwsjson11_deserializeOpDocumentListVocabularyFiltersOutput(v **ListVocab
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "VocabularyFilters":
@@ -6478,7 +6488,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateMedicalVocabularyOutput(v **UpdateM
 				if !ok {
 					return fmt.Errorf("expected VocabularyName to be of type string, got %T instead", value)
 				}
-				sv.VocabularyName = &jtv
+				sv.VocabularyName = ptr.String(jtv)
 			}
 
 		case "VocabularyState":
@@ -6549,7 +6559,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVocabularyFilterOutput(v **UpdateVo
 				if !ok {
 					return fmt.Errorf("expected VocabularyFilterName to be of type string, got %T instead", value)
 				}
-				sv.VocabularyFilterName = &jtv
+				sv.VocabularyFilterName = ptr.String(jtv)
 			}
 
 		default:
@@ -6611,7 +6621,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVocabularyOutput(v **UpdateVocabula
 				if !ok {
 					return fmt.Errorf("expected VocabularyName to be of type string, got %T instead", value)
 				}
-				sv.VocabularyName = &jtv
+				sv.VocabularyName = ptr.String(jtv)
 			}
 
 		case "VocabularyState":

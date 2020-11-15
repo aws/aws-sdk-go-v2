@@ -41,7 +41,7 @@ type GetConnectionsInput struct {
 	// and does not display the password. Set this parameter when the caller might not
 	// have permission to use the AWS KMS key to decrypt the password, but it does have
 	// permission to access the rest of the connection properties.
-	HidePassword *bool
+	HidePassword bool
 
 	// The maximum number of connections to return in one response.
 	MaxResults *int32
@@ -53,7 +53,7 @@ type GetConnectionsInput struct {
 type GetConnectionsOutput struct {
 
 	// A list of requested connection definitions.
-	ConnectionList []*types.Connection
+	ConnectionList []types.Connection
 
 	// A continuation token, if the list of connections returned does not include the
 	// last of the filtered connections.

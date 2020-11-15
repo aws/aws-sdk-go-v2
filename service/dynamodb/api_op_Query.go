@@ -75,7 +75,7 @@ type QueryInput struct {
 	// information, see AttributesToGet
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html)
 	// in the Amazon DynamoDB Developer Guide.
-	AttributesToGet []*string
+	AttributesToGet []string
 
 	// This is a legacy parameter. Use FilterExpression instead. For more information,
 	// see ConditionalOperator
@@ -94,7 +94,7 @@ type QueryInput struct {
 	// value that was returned for LastEvaluatedKey in the previous operation. The data
 	// type for ExclusiveStartKey must be String, Number, or Binary. No set data types
 	// are allowed.
-	ExclusiveStartKey map[string]*types.AttributeValue
+	ExclusiveStartKey map[string]types.AttributeValue
 
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
@@ -135,7 +135,7 @@ type QueryInput struct {
 	// expression attribute names, see Specifying Item Attributes
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeNames map[string]*string
+	ExpressionAttributeNames map[string]string
 
 	// One or more values that can be substituted in an expression. Use the : (colon)
 	// character in an expression to dereference an attribute value. For example,
@@ -148,7 +148,7 @@ type QueryInput struct {
 	// expression attribute values, see Specifying Conditions
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeValues map[string]*types.AttributeValue
+	ExpressionAttributeValues map[string]types.AttributeValue
 
 	// A string that contains conditions that DynamoDB applies after the Query
 	// operation, but before the data is returned to you. Items that do not satisfy the
@@ -246,7 +246,7 @@ type QueryInput struct {
 	// information, see KeyConditions
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.KeyConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
-	KeyConditions map[string]*types.Condition
+	KeyConditions map[string]types.Condition
 
 	// The maximum number of items to evaluate (not necessarily the number of matching
 	// items). If DynamoDB processes the number of items up to the limit while
@@ -275,7 +275,7 @@ type QueryInput struct {
 	// see QueryFilter
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.QueryFilter.html)
 	// in the Amazon DynamoDB Developer Guide.
-	QueryFilter map[string]*types.Condition
+	QueryFilter map[string]types.Condition
 
 	// Determines the level of detail about provisioned throughput consumption that is
 	// returned in the response:
@@ -365,11 +365,11 @@ type QueryOutput struct {
 	// ScannedCount is the number of matching items before the filter was applied. If
 	// you did not use a filter in the request, then Count and ScannedCount are the
 	// same.
-	Count *int32
+	Count int32
 
 	// An array of item attributes that match the query criteria. Each element in this
 	// array consists of an attribute name and the value for that attribute.
-	Items []map[string]*types.AttributeValue
+	Items []map[string]types.AttributeValue
 
 	// The primary key of the item where the operation stopped, inclusive of the
 	// previous result set. Use this value to start a new operation, excluding this
@@ -378,7 +378,7 @@ type QueryOutput struct {
 	// LastEvaluatedKey is not empty, it does not necessarily mean that there is more
 	// data in the result set. The only way to know when you have reached the end of
 	// the result set is when LastEvaluatedKey is empty.
-	LastEvaluatedKey map[string]*types.AttributeValue
+	LastEvaluatedKey map[string]types.AttributeValue
 
 	// The number of items evaluated, before any QueryFilter is applied. A high
 	// ScannedCount value with few, or no, Count results indicates an inefficient Query
@@ -386,7 +386,7 @@ type QueryOutput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Count)
 	// in the Amazon DynamoDB Developer Guide. If you did not use a filter in the
 	// request, then ScannedCount is the same as Count.
-	ScannedCount *int32
+	ScannedCount int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

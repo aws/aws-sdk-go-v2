@@ -52,7 +52,7 @@ type ListRuleNamesByTargetOutput struct {
 	NextToken *string
 
 	// The names of the rules that can invoke the given target.
-	RuleNames []*string
+	RuleNames []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

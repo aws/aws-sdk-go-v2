@@ -37,7 +37,7 @@ type UntagResourceInput struct {
 	Arn *string
 
 	// The keys of the tags that you want to remove from the resource.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagResourceOutput struct {

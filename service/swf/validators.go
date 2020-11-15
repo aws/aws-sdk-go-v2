@@ -1028,13 +1028,13 @@ func validateDecision(v *types.Decision) error {
 	}
 }
 
-func validateDecisionList(v []*types.Decision) error {
+func validateDecisionList(v []types.Decision) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DecisionList"}
 	for i := range v {
-		if err := validateDecision(v[i]); err != nil {
+		if err := validateDecision(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1120,13 +1120,13 @@ func validateResourceTag(v *types.ResourceTag) error {
 	}
 }
 
-func validateResourceTagList(v []*types.ResourceTag) error {
+func validateResourceTagList(v []types.ResourceTag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceTagList"}
 	for i := range v {
-		if err := validateResourceTag(v[i]); err != nil {
+		if err := validateResourceTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

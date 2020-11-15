@@ -36,7 +36,7 @@ type UntagMeetingInput struct {
 	// The tag keys.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagMeetingOutput struct {

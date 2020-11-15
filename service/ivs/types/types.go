@@ -26,7 +26,7 @@ type Channel struct {
 	Arn *string
 
 	// Whether the channel is authorized.
-	Authorized *bool
+	Authorized bool
 
 	// Channel ingest endpoint, part of the definition of an ingest server, used when
 	// you set up streaming software.
@@ -42,7 +42,7 @@ type Channel struct {
 	PlaybackUrl *string
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Channel type, which determines the allowable resolution and bitrate. If you
 	// exceed the allowable resolution or bitrate, the stream probably will disconnect
@@ -69,7 +69,7 @@ type ChannelSummary struct {
 	Arn *string
 
 	// Whether the channel is authorized.
-	Authorized *bool
+	Authorized bool
 
 	// Channel latency mode. Default: LOW.
 	LatencyMode ChannelLatencyMode
@@ -78,7 +78,7 @@ type ChannelSummary struct {
 	Name *string
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // A key pair used to sign and validate a playback authorization token.
@@ -94,7 +94,7 @@ type PlaybackKeyPair struct {
 	Name *string
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Summary information about a playback key pair.
@@ -107,7 +107,7 @@ type PlaybackKeyPairSummary struct {
 	Name *string
 
 	// Array of 1-50 maps, each of the form string:string (key:value)
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Specifies a live video stream that has been ingested and distributed.
@@ -130,7 +130,7 @@ type Stream struct {
 	State StreamState
 
 	// Number of current viewers of the stream.
-	ViewerCount *int64
+	ViewerCount int64
 }
 
 // Object specifying a stream key.
@@ -143,7 +143,7 @@ type StreamKey struct {
 	ChannelArn *string
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Stream-key value.
 	Value *string
@@ -159,7 +159,7 @@ type StreamKeySummary struct {
 	ChannelArn *string
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Summary information about a stream.
@@ -178,5 +178,5 @@ type StreamSummary struct {
 	State StreamState
 
 	// Number of current viewers of the stream.
-	ViewerCount *int64
+	ViewerCount int64
 }

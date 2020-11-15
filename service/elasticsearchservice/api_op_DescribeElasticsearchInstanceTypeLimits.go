@@ -65,7 +65,7 @@ type DescribeElasticsearchInstanceTypeLimitsOutput struct {
 	//
 	// * ultra_warm: If the given InstanceType is used as warm
 	// node
-	LimitsByRole map[string]*types.Limits
+	LimitsByRole map[string]types.Limits
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

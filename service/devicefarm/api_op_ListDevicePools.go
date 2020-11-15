@@ -53,7 +53,7 @@ type ListDevicePoolsInput struct {
 type ListDevicePoolsOutput struct {
 
 	// Information about the device pools.
-	DevicePools []*types.DevicePool
+	DevicePools []types.DevicePool
 
 	// If the number of items that are returned is significantly large, this is an
 	// identifier that is also returned. It can be used in a subsequent call to this

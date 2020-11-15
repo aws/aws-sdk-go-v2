@@ -82,7 +82,7 @@ type LookupEventsInput struct {
 
 	// Contains a list of lookup attributes. Currently the list can contain only one
 	// item.
-	LookupAttributes []*types.LookupAttribute
+	LookupAttributes []types.LookupAttribute
 
 	// The number of events to return. Possible values are 1 through 50. The default is
 	// 50.
@@ -107,7 +107,7 @@ type LookupEventsOutput struct {
 	// A list of events returned based on the lookup attributes specified and the
 	// CloudTrail event. The events list is sorted by time. The most recent event is
 	// listed first.
-	Events []*types.Event
+	Events []types.Event
 
 	// The token to use to get the next page of results after a previous API call. If
 	// the token does not appear, there are no more results to return. The token must

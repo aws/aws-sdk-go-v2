@@ -2650,13 +2650,13 @@ func addOpUpdateVoiceConnectorValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpUpdateVoiceConnector{}, middleware.After)
 }
 
-func validateAttendeeTagList(v []*types.Tag) error {
+func validateAttendeeTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttendeeTagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2687,13 +2687,13 @@ func validateCreateAttendeeRequestItem(v *types.CreateAttendeeRequestItem) error
 	}
 }
 
-func validateCreateAttendeeRequestItemList(v []*types.CreateAttendeeRequestItem) error {
+func validateCreateAttendeeRequestItemList(v []types.CreateAttendeeRequestItem) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAttendeeRequestItemList"}
 	for i := range v {
-		if err := validateCreateAttendeeRequestItem(v[i]); err != nil {
+		if err := validateCreateAttendeeRequestItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2704,13 +2704,13 @@ func validateCreateAttendeeRequestItemList(v []*types.CreateAttendeeRequestItem)
 	}
 }
 
-func validateCreateMeetingWithAttendeesRequestItemList(v []*types.CreateAttendeeRequestItem) error {
+func validateCreateMeetingWithAttendeesRequestItemList(v []types.CreateAttendeeRequestItem) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateMeetingWithAttendeesRequestItemList"}
 	for i := range v {
-		if err := validateCreateAttendeeRequestItem(v[i]); err != nil {
+		if err := validateCreateAttendeeRequestItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2739,13 +2739,13 @@ func validateDNISEmergencyCallingConfiguration(v *types.DNISEmergencyCallingConf
 	}
 }
 
-func validateDNISEmergencyCallingConfigurationList(v []*types.DNISEmergencyCallingConfiguration) error {
+func validateDNISEmergencyCallingConfigurationList(v []types.DNISEmergencyCallingConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DNISEmergencyCallingConfigurationList"}
 	for i := range v {
-		if err := validateDNISEmergencyCallingConfiguration(v[i]); err != nil {
+		if err := validateDNISEmergencyCallingConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2791,13 +2791,13 @@ func validateGeoMatchParams(v *types.GeoMatchParams) error {
 	}
 }
 
-func validateMeetingTagList(v []*types.Tag) error {
+func validateMeetingTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MeetingTagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2843,13 +2843,13 @@ func validateStreamingNotificationTarget(v *types.StreamingNotificationTarget) e
 	}
 }
 
-func validateStreamingNotificationTargetList(v []*types.StreamingNotificationTarget) error {
+func validateStreamingNotificationTargetList(v []types.StreamingNotificationTarget) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StreamingNotificationTargetList"}
 	for i := range v {
-		if err := validateStreamingNotificationTarget(v[i]); err != nil {
+		if err := validateStreamingNotificationTarget(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2878,13 +2878,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2931,13 +2931,13 @@ func validateUpdatePhoneNumberRequestItem(v *types.UpdatePhoneNumberRequestItem)
 	}
 }
 
-func validateUpdatePhoneNumberRequestItemList(v []*types.UpdatePhoneNumberRequestItem) error {
+func validateUpdatePhoneNumberRequestItemList(v []types.UpdatePhoneNumberRequestItem) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePhoneNumberRequestItemList"}
 	for i := range v {
-		if err := validateUpdatePhoneNumberRequestItem(v[i]); err != nil {
+		if err := validateUpdatePhoneNumberRequestItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2963,13 +2963,13 @@ func validateUpdateUserRequestItem(v *types.UpdateUserRequestItem) error {
 	}
 }
 
-func validateUpdateUserRequestItemList(v []*types.UpdateUserRequestItem) error {
+func validateUpdateUserRequestItemList(v []types.UpdateUserRequestItem) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserRequestItemList"}
 	for i := range v {
-		if err := validateUpdateUserRequestItem(v[i]); err != nil {
+		if err := validateUpdateUserRequestItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3017,13 +3017,13 @@ func validateVoiceConnectorItem(v *types.VoiceConnectorItem) error {
 	}
 }
 
-func validateVoiceConnectorItemList(v []*types.VoiceConnectorItem) error {
+func validateVoiceConnectorItemList(v []types.VoiceConnectorItem) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VoiceConnectorItemList"}
 	for i := range v {
-		if err := validateVoiceConnectorItem(v[i]); err != nil {
+		if err := validateVoiceConnectorItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

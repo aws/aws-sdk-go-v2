@@ -67,7 +67,7 @@ type StartQueryInput struct {
 	// The list of log groups to be queried. You can include up to 20 log groups. A
 	// StartQuery operation must include a logGroupNames or a logGroupName parameter,
 	// but not both.
-	LogGroupNames []*string
+	LogGroupNames []string
 }
 
 type StartQueryOutput struct {

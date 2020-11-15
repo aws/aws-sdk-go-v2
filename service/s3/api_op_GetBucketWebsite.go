@@ -67,7 +67,7 @@ type GetBucketWebsiteOutput struct {
 	RedirectAllRequestsTo *types.RedirectAllRequestsTo
 
 	// Rules that define when a redirect is applied and the redirect behavior.
-	RoutingRules []*types.RoutingRule
+	RoutingRules []types.RoutingRule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

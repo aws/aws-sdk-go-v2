@@ -51,7 +51,7 @@ type CreateConfigurationInput struct {
 	Name *string
 
 	// Create tags when creating the configuration.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateConfigurationOutput struct {

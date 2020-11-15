@@ -149,7 +149,7 @@ type GrantConstraints struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
 	// request. The grant allows the operation only when the encryption context in the
 	// request is the same as the encryption context specified in this constraint.
-	EncryptionContextEquals map[string]*string
+	EncryptionContextEquals map[string]string
 
 	// A list of key-value pairs that must be included in the encryption context of the
 	// cryptographic operation
@@ -157,7 +157,7 @@ type GrantConstraints struct {
 	// request. The grant allows the cryptographic operation only when the encryption
 	// context in the request includes the key-value pairs specified in this
 	// constraint, although it can include additional key-value pairs.
-	EncryptionContextSubset map[string]*string
+	EncryptionContextSubset map[string]string
 }
 
 // Contains information about a grant.
@@ -256,7 +256,7 @@ type KeyMetadata struct {
 
 	// Specifies whether the CMK is enabled. When KeyState is Enabled this value is
 	// true, otherwise it is false.
-	Enabled *bool
+	Enabled bool
 
 	// The encryption algorithms that the CMK supports. You cannot use the CMK with
 	// other encryption algorithms within AWS KMS. This field appears only when the

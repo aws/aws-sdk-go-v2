@@ -32,14 +32,14 @@ type DeleteInvitationsInput struct {
 	// The list of the account IDs that sent the invitations to delete.
 	//
 	// This member is required.
-	AccountIds []*string
+	AccountIds []string
 }
 
 type DeleteInvitationsOutput struct {
 
 	// The list of AWS accounts for which the invitations were not deleted. For each
 	// account, the list includes the account ID and the email address.
-	UnprocessedAccounts []*types.Result
+	UnprocessedAccounts []types.Result
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

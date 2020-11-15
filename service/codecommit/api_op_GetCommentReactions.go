@@ -53,7 +53,7 @@ type GetCommentReactionsOutput struct {
 	// An array of reactions to the specified comment.
 	//
 	// This member is required.
-	ReactionsForComment []*types.ReactionForComment
+	ReactionsForComment []types.ReactionForComment
 
 	// An enumeration token that can be used in a request to return the next batch of
 	// the results.

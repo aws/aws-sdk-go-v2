@@ -55,7 +55,7 @@ type GetComplianceDetailsByResourceInput struct {
 type GetComplianceDetailsByResourceOutput struct {
 
 	// Indicates whether the specified AWS resource complies each AWS Config rule.
-	EvaluationResults []*types.EvaluationResult
+	EvaluationResults []types.EvaluationResult
 
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.

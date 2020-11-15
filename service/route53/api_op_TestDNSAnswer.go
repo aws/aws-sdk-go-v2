@@ -93,7 +93,7 @@ type TestDNSAnswerOutput struct {
 	// record set.
 	//
 	// This member is required.
-	RecordData []*string
+	RecordData []string
 
 	// The name of the resource record set that you submitted a request for.
 	//

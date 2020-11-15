@@ -31,7 +31,7 @@ func (c *Client) ListMembers(ctx context.Context, params *ListMembersInput, optF
 type ListMembersInput struct {
 
 	// The maximum number of items to include in each page of a paginated response.
-	MaxResults *int32
+	MaxResults int32
 
 	// The nextToken string that specifies which page of results to return in a
 	// paginated response.
@@ -49,7 +49,7 @@ type ListMembersOutput struct {
 	// An array of objects, one for each account that's associated with the master
 	// account and meets the criteria specified by the onlyAssociated request
 	// parameter.
-	Members []*types.Member
+	Members []types.Member
 
 	// The string to use in a subsequent request to get the next page of results in a
 	// paginated response. This value is null if there are no additional pages.

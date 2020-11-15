@@ -57,7 +57,7 @@ type UpdateTableInput struct {
 	// An array of attributes that describe the key schema for the table and indexes.
 	// If you are adding a new global secondary index to the table,
 	// AttributeDefinitions must include the key element(s) of the new index.
-	AttributeDefinitions []*types.AttributeDefinition
+	AttributeDefinitions []types.AttributeDefinition
 
 	// Controls how you are charged for read and write throughput and how you manage
 	// capacity. When switching from pay-per-request to provisioned capacity, initial
@@ -93,7 +93,7 @@ type UpdateTableInput struct {
 	// Indexes
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html)
 	// in the Amazon DynamoDB Developer Guide.
-	GlobalSecondaryIndexUpdates []*types.GlobalSecondaryIndexUpdate
+	GlobalSecondaryIndexUpdates []types.GlobalSecondaryIndexUpdate
 
 	// The new provisioned throughput settings for the specified table or index.
 	ProvisionedThroughput *types.ProvisionedThroughput
@@ -102,7 +102,7 @@ type UpdateTableInput struct {
 	// property only applies to Version 2019.11.21
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
 	// of global tables.
-	ReplicaUpdates []*types.ReplicationGroupUpdate
+	ReplicaUpdates []types.ReplicationGroupUpdate
 
 	// The new server-side encryption settings for the specified table.
 	SSESpecification *types.SSESpecification

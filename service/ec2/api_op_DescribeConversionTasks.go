@@ -34,19 +34,19 @@ func (c *Client) DescribeConversionTasks(ctx context.Context, params *DescribeCo
 type DescribeConversionTasksInput struct {
 
 	// The conversion task IDs.
-	ConversionTaskIds []*string
+	ConversionTaskIds []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 }
 
 type DescribeConversionTasksOutput struct {
 
 	// Information about the conversion tasks.
-	ConversionTasks []*types.ConversionTask
+	ConversionTasks []types.ConversionTask
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

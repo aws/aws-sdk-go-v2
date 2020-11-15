@@ -39,7 +39,7 @@ type ListSubscribedRuleGroupsInput struct {
 	// for this request. If you have more objects than the number you specify for
 	// Limit, the response includes a NextMarker value that you can use to get another
 	// batch of objects.
-	Limit *int32
+	Limit int32
 
 	// If you specify a value for Limit and you have more ByteMatchSetssubscribed rule
 	// groups than the value of Limit, AWS WAF returns a NextMarker value in the
@@ -59,7 +59,7 @@ type ListSubscribedRuleGroupsOutput struct {
 	NextMarker *string
 
 	// An array of RuleGroup objects.
-	RuleGroups []*types.SubscribedRuleGroupSummary
+	RuleGroups []types.SubscribedRuleGroupSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -42,7 +42,7 @@ type GetSecurityConfigurationsOutput struct {
 	NextToken *string
 
 	// A list of security configurations.
-	SecurityConfigurations []*types.SecurityConfiguration
+	SecurityConfigurations []types.SecurityConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -42,7 +42,7 @@ type CreateBackupPlanInput struct {
 	// To help organize your resources, you can assign your own metadata to the
 	// resources that you create. Each tag is a key-value pair. The specified tags are
 	// assigned to all backups created with this plan.
-	BackupPlanTags map[string]*string
+	BackupPlanTags map[string]string
 
 	// Identifies the request and allows failed requests to be retried without the risk
 	// of running the operation twice. If the request includes a CreatorRequestId that
@@ -55,7 +55,7 @@ type CreateBackupPlanOutput struct {
 
 	// A list of BackupOptions settings for a resource type. This option is only
 	// available for Windows VSS backup jobs.
-	AdvancedBackupSettings []*types.AdvancedBackupSetting
+	AdvancedBackupSettings []types.AdvancedBackupSetting
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for
 	// example,

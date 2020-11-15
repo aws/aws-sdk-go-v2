@@ -35,7 +35,7 @@ type ColumnInfo struct {
 	Type *string
 
 	// Indicates whether values in the column are case-sensitive.
-	CaseSensitive *bool
+	CaseSensitive bool
 
 	// The catalog to which the query results belong.
 	CatalogName *string
@@ -48,11 +48,11 @@ type ColumnInfo struct {
 
 	// For DECIMAL data types, specifies the total number of digits, up to 38. For
 	// performance reasons, we recommend up to 18 digits.
-	Precision *int32
+	Precision int32
 
 	// For DECIMAL data types, specifies the total number of digits in the fractional
 	// part of the value. Defaults to 0.
-	Scale *int32
+	Scale int32
 
 	// The schema name (database name) to which the query results belong.
 	SchemaName *string
@@ -73,7 +73,7 @@ type Database struct {
 	Description *string
 
 	// A set of custom key/value pairs.
-	Parameters map[string]*string
+	Parameters map[string]string
 }
 
 // Contains information about a data catalog in an AWS account.
@@ -117,7 +117,7 @@ type DataCatalog struct {
 	//
 	// * The
 	// GLUE type has no parameters.
-	Parameters map[string]*string
+	Parameters map[string]string
 }
 
 // The summary information for the data catalog, which includes its name and type.
@@ -371,7 +371,7 @@ type ResultSet struct {
 	ResultSetMetadata *ResultSetMetadata
 
 	// The rows in the table.
-	Rows []*Row
+	Rows []Row
 }
 
 // The metadata that describes the column structure and data types of a table of
@@ -379,14 +379,14 @@ type ResultSet struct {
 type ResultSetMetadata struct {
 
 	// Information about the columns returned in a query result metadata.
-	ColumnInfo []*ColumnInfo
+	ColumnInfo []ColumnInfo
 }
 
 // The rows that comprise a query result table.
 type Row struct {
 
 	// The data that populates a row in a query result table.
-	Data []*Datum
+	Data []Datum
 }
 
 // Contains metadata for a table.
@@ -398,7 +398,7 @@ type TableMetadata struct {
 	Name *string
 
 	// A list of the columns in the table.
-	Columns []*Column
+	Columns []Column
 
 	// The time that the table was created.
 	CreateTime *time.Time
@@ -407,10 +407,10 @@ type TableMetadata struct {
 	LastAccessTime *time.Time
 
 	// A set of custom key/value pairs for table properties.
-	Parameters map[string]*string
+	Parameters map[string]string
 
 	// A list of the partition keys in the table.
-	PartitionKeys []*Column
+	PartitionKeys []Column
 
 	// The type of table. In Athena, only EXTERNAL_TABLE is supported.
 	TableType *string

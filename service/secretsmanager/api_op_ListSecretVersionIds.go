@@ -69,7 +69,7 @@ type ListSecretVersionIdsInput struct {
 	// (Optional) Specifies that you want the results to include versions that do not
 	// have any staging labels attached to them. Such versions are considered
 	// deprecated and are subject to deletion by Secrets Manager as needed.
-	IncludeDeprecated *bool
+	IncludeDeprecated bool
 
 	// (Optional) Limits the number of results you want to include in the response. If
 	// you don't include this parameter, it defaults to a value that's specific to the
@@ -80,7 +80,7 @@ type ListSecretVersionIdsInput struct {
 	// results than the maximum even when there are more results available. You should
 	// check NextToken after every operation to ensure that you receive all of the
 	// results.
-	MaxResults *int32
+	MaxResults int32
 
 	// (Optional) Use this parameter in a request if you receive a NextToken response
 	// in a previous request indicating there's more output available. In a subsequent
@@ -112,7 +112,7 @@ type ListSecretVersionIdsOutput struct {
 	NextToken *string
 
 	// The list of the currently available versions of the specified secret.
-	Versions []*types.SecretVersionsListEntry
+	Versions []types.SecretVersionsListEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

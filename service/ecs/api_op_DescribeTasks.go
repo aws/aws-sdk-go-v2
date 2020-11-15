@@ -32,7 +32,7 @@ type DescribeTasksInput struct {
 	// A list of up to 100 task IDs or full ARN entries.
 	//
 	// This member is required.
-	Tasks []*string
+	Tasks []string
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
 	// task or tasks to describe. If you do not specify a cluster, the default cluster
@@ -49,10 +49,10 @@ type DescribeTasksInput struct {
 type DescribeTasksOutput struct {
 
 	// Any failures associated with the call.
-	Failures []*types.Failure
+	Failures []types.Failure
 
 	// The list of tasks.
-	Tasks []*types.Task
+	Tasks []types.Task
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

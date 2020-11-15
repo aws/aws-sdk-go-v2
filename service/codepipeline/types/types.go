@@ -10,7 +10,7 @@ import (
 type ActionConfiguration struct {
 
 	// The configuration data for the action.
-	Configuration map[string]*string
+	Configuration map[string]string
 }
 
 // Represents information about an action configuration property.
@@ -19,7 +19,7 @@ type ActionConfigurationProperty struct {
 	// Whether the configuration property is a key.
 	//
 	// This member is required.
-	Key *bool
+	Key bool
 
 	// The name of the action configuration property.
 	//
@@ -29,7 +29,7 @@ type ActionConfigurationProperty struct {
 	// Whether the configuration property is a required value.
 	//
 	// This member is required.
-	Required *bool
+	Required bool
 
 	// Whether the configuration property is secret. Secrets are hidden from all calls
 	// except for GetJobDetails, GetThirdPartyJobDetails, PollForJobs, and
@@ -38,7 +38,7 @@ type ActionConfigurationProperty struct {
 	// secret.
 	//
 	// This member is required.
-	Secret *bool
+	Secret bool
 
 	// The description of the action configuration property that is displayed to users.
 	Description *string
@@ -50,7 +50,7 @@ type ActionConfigurationProperty struct {
 	// value for that configuration property is subject to other restrictions. The
 	// value must be less than or equal to twenty (20) characters. The value can
 	// contain only alphanumeric characters, underscores, and hyphens.
-	Queryable *bool
+	Queryable bool
 
 	// The type of the configuration property.
 	Type ActionConfigurationPropertyType
@@ -92,11 +92,11 @@ type ActionDeclaration struct {
 	// in the AWS CloudFormation User Guide. The values can be represented in either
 	// JSON or YAML format. For example, the JSON configuration item format is as
 	// follows: JSON: "Configuration" : { Key : Value },
-	Configuration map[string]*string
+	Configuration map[string]string
 
 	// The name or ID of the artifact consumed by the action, such as a test or build
 	// artifact.
-	InputArtifacts []*InputArtifact
+	InputArtifacts []InputArtifact
 
 	// The variable namespace associated with the action. All variables produced as
 	// output by this action fall under this namespace.
@@ -104,7 +104,7 @@ type ActionDeclaration struct {
 
 	// The name or ID of the result of the action declaration, such as a test or build
 	// artifact.
-	OutputArtifacts []*OutputArtifact
+	OutputArtifacts []OutputArtifact
 
 	// The action declaration's AWS Region, such as us-east-1.
 	Region *string
@@ -204,11 +204,11 @@ type ActionExecutionInput struct {
 	ActionTypeId *ActionTypeId
 
 	// Configuration data for an action execution.
-	Configuration map[string]*string
+	Configuration map[string]string
 
 	// Details of input artifacts of the action that correspond to the action
 	// execution.
-	InputArtifacts []*ArtifactDetail
+	InputArtifacts []ArtifactDetail
 
 	// The variable namespace associated with the action. All variables produced as
 	// output by this action fall under this namespace.
@@ -219,7 +219,7 @@ type ActionExecutionInput struct {
 
 	// Configuration data for an action execution with all variable references replaced
 	// with their real values for the execution.
-	ResolvedConfiguration map[string]*string
+	ResolvedConfiguration map[string]string
 
 	// The ARN of the IAM service role that performs the declared action. This is
 	// assumed through the roleArn for the pipeline.
@@ -236,11 +236,11 @@ type ActionExecutionOutput struct {
 
 	// Details of output artifacts of the action that correspond to the action
 	// execution.
-	OutputArtifacts []*ArtifactDetail
+	OutputArtifacts []ArtifactDetail
 
 	// The outputVariables field shows the key-value pairs that were output as part of
 	// that execution.
-	OutputVariables map[string]*string
+	OutputVariables map[string]string
 }
 
 // Execution result information, such as the external execution ID.
@@ -319,7 +319,7 @@ type ActionType struct {
 	OutputArtifactDetails *ArtifactDetails
 
 	// The configuration properties for the action type.
-	ActionConfigurationProperties []*ActionConfigurationProperty
+	ActionConfigurationProperties []ActionConfigurationProperty
 
 	// The settings for the action type.
 	Settings *ActionTypeSettings
@@ -426,12 +426,12 @@ type ArtifactDetails struct {
 	// The maximum number of artifacts allowed for the action type.
 	//
 	// This member is required.
-	MaximumCount *int32
+	MaximumCount int32
 
 	// The minimum number of artifacts allowed for the action type.
 	//
 	// This member is required.
-	MinimumCount *int32
+	MinimumCount int32
 }
 
 // Represents information about the location of an artifact.
@@ -689,10 +689,10 @@ type JobData struct {
 	EncryptionKey *EncryptionKey
 
 	// The artifact supplied to the job.
-	InputArtifacts []*Artifact
+	InputArtifacts []Artifact
 
 	// The output of the job.
-	OutputArtifacts []*Artifact
+	OutputArtifacts []Artifact
 
 	// Represents information about a pipeline to a job worker. Includes pipelineArn
 	// and pipelineExecutionId for custom jobs.
@@ -745,7 +745,7 @@ type ListWebhookItem struct {
 	LastTriggered *time.Time
 
 	// Specifies the tags applied to the webhook.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Represents information about the output of an action.
@@ -803,7 +803,7 @@ type PipelineDeclaration struct {
 	// The stage in which to perform the action.
 	//
 	// This member is required.
-	Stages []*StageDeclaration
+	Stages []StageDeclaration
 
 	// Represents information about the S3 bucket where artifacts are stored for the
 	// pipeline. You must include either artifactStore or artifactStores in your
@@ -816,7 +816,7 @@ type PipelineDeclaration struct {
 	// action in the pipeline. You must include either artifactStore or artifactStores
 	// in your pipeline, but you cannot use both. If you create a cross-region action
 	// in your pipeline, you must use artifactStores.
-	ArtifactStores map[string]*ArtifactStore
+	ArtifactStores map[string]ArtifactStore
 
 	// The version number of the pipeline. A new pipeline always has a version number
 	// of 1. This number is incremented when a pipeline is updated.
@@ -827,7 +827,7 @@ type PipelineDeclaration struct {
 type PipelineExecution struct {
 
 	// A list of ArtifactRevision objects included in a pipeline execution.
-	ArtifactRevisions []*ArtifactRevision
+	ArtifactRevisions []ArtifactRevision
 
 	// The ID of the pipeline execution.
 	PipelineExecutionId *string
@@ -878,7 +878,7 @@ type PipelineExecutionSummary struct {
 	PipelineExecutionId *string
 
 	// A list of the source artifact revisions that initiated a pipeline execution.
-	SourceRevisions []*SourceRevision
+	SourceRevisions []SourceRevision
 
 	// The date and time when the pipeline execution began, in timestamp format.
 	StartTime *time.Time
@@ -1010,7 +1010,7 @@ type StageDeclaration struct {
 	// The actions included in a stage.
 	//
 	// This member is required.
-	Actions []*ActionDeclaration
+	Actions []ActionDeclaration
 
 	// The name of the stage.
 	//
@@ -1018,7 +1018,7 @@ type StageDeclaration struct {
 	Name *string
 
 	// Reserved for future use.
-	Blockers []*BlockerDeclaration
+	Blockers []BlockerDeclaration
 }
 
 // Represents information about the run of a stage.
@@ -1039,7 +1039,7 @@ type StageExecution struct {
 type StageState struct {
 
 	// The state of the stage.
-	ActionStates []*ActionState
+	ActionStates []ActionState
 
 	// The state of the inbound transition, which is either enabled or disabled.
 	InboundTransitionState *TransitionState
@@ -1114,12 +1114,12 @@ type ThirdPartyJobData struct {
 	// when the action is created. The input artifact name must match the name of an
 	// output artifact generated by an action in an earlier action or stage of the
 	// pipeline.
-	InputArtifacts []*Artifact
+	InputArtifacts []Artifact
 
 	// The name of the artifact that is the result of the action, if any. This name
 	// might be system-generated, such as "MyBuiltApp", or it might be defined by the
 	// user when the action is created.
-	OutputArtifacts []*Artifact
+	OutputArtifacts []Artifact
 
 	// Represents information about a pipeline to a job worker. Does not include
 	// pipelineArn and pipelineExecutionId for ThirdParty jobs.
@@ -1150,7 +1150,7 @@ type TransitionState struct {
 	DisabledReason *string
 
 	// Whether the transition between stages is enabled (true) or disabled (false).
-	Enabled *bool
+	Enabled bool
 
 	// The timestamp when the transition state was last changed.
 	LastChangedAt *time.Time
@@ -1206,7 +1206,7 @@ type WebhookDefinition struct {
 	// pipeline started.
 	//
 	// This member is required.
-	Filters []*WebhookFilterRule
+	Filters []WebhookFilterRule
 
 	// The name of the webhook.
 	//

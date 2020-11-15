@@ -38,7 +38,7 @@ type UntagResourceInput struct {
 	// The list of tag keys to remove from the specified topic.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagResourceOutput struct {

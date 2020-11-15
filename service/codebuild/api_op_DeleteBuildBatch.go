@@ -39,11 +39,11 @@ type DeleteBuildBatchOutput struct {
 
 	// An array of strings that contain the identifiers of the builds that were
 	// deleted.
-	BuildsDeleted []*string
+	BuildsDeleted []string
 
 	// An array of BuildNotDeleted objects that specify the builds that could not be
 	// deleted.
-	BuildsNotDeleted []*types.BuildNotDeleted
+	BuildsNotDeleted []types.BuildNotDeleted
 
 	// The status code.
 	StatusCode *string

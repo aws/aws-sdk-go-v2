@@ -1962,49 +1962,37 @@ func awsAwsjson11_serializeDocumentInputLogEvent(v *types.InputLogEvent, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentInputLogEvents(v []*types.InputLogEvent, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentInputLogEvents(v []types.InputLogEvent, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentInputLogEvent(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentInputLogEvent(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentInputLogStreamNames(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentInputLogStreamNames(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentLogGroupNames(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentLogGroupNames(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2036,64 +2024,48 @@ func awsAwsjson11_serializeDocumentMetricTransformation(v *types.MetricTransform
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentMetricTransformations(v []*types.MetricTransformation, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentMetricTransformations(v []types.MetricTransformation, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentMetricTransformation(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentMetricTransformation(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTags(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTags(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTestEventMessages(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTestEventMessages(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }

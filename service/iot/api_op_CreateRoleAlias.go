@@ -47,7 +47,7 @@ type CreateRoleAliasInput struct {
 	// use format: ...key1=value1&key2=value2... For the CLI command-line parameter use
 	// format: &&tags "key1=value1&key2=value2..." For the cli-input-json file use
 	// format: "tags": "key1=value1&key2=value2..."
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateRoleAliasOutput struct {

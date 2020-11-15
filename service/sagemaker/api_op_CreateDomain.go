@@ -74,7 +74,7 @@ type CreateDomainInput struct {
 	// The VPC subnets that Studio uses for communication.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for
 	// communication.
@@ -99,7 +99,7 @@ type CreateDomainInput struct {
 	// Tags to associated with the Domain. Each tag consists of a key and an optional
 	// value. Tag keys must be unique per resource. Tags are searchable using the
 	// Search API.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDomainOutput struct {

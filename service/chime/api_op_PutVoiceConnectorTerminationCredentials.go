@@ -35,7 +35,7 @@ type PutVoiceConnectorTerminationCredentialsInput struct {
 	VoiceConnectorId *string
 
 	// The termination SIP credentials.
-	Credentials []*types.Credential
+	Credentials []types.Credential
 }
 
 type PutVoiceConnectorTerminationCredentialsOutput struct {

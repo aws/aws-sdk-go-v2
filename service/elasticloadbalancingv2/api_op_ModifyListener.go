@@ -59,15 +59,15 @@ type ModifyListenerInput struct {
 	// For more information, see ALPN Policies
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies)
 	// in the Network Load Balancers Guide.
-	AlpnPolicy []*string
+	AlpnPolicy []string
 
 	// [HTTPS and TLS listeners] The default certificate for the listener. You must
 	// provide exactly one certificate. Set CertificateArn to the certificate ARN but
 	// do not set IsDefault. To create a certificate list, use AddListenerCertificates.
-	Certificates []*types.Certificate
+	Certificates []types.Certificate
 
 	// The actions for the default rule.
-	DefaultActions []*types.Action
+	DefaultActions []types.Action
 
 	// The port for connections from clients to the load balancer.
 	Port *int32
@@ -115,7 +115,7 @@ type ModifyListenerInput struct {
 type ModifyListenerOutput struct {
 
 	// Information about the modified listener.
-	Listeners []*types.Listener
+	Listeners []types.Listener
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

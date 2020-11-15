@@ -48,7 +48,7 @@ type SendBounceInput struct {
 	// specify at least one BouncedRecipientInfo in the list.
 	//
 	// This member is required.
-	BouncedRecipientInfoList []*types.BouncedRecipientInfo
+	BouncedRecipientInfoList []types.BouncedRecipientInfo
 
 	// The message ID of the message to be bounced.
 	//

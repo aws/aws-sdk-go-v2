@@ -50,13 +50,13 @@ type EnterStandbyInput struct {
 	ShouldDecrementDesiredCapacity *bool
 
 	// The IDs of the instances. You can specify up to 20 instances.
-	InstanceIds []*string
+	InstanceIds []string
 }
 
 type EnterStandbyOutput struct {
 
 	// The activities related to moving instances into Standby mode.
-	Activities []*types.Activity
+	Activities []types.Activity
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

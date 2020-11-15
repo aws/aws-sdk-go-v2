@@ -2722,13 +2722,13 @@ func addOpUpdateWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWorkflow{}, middleware.After)
 }
 
-func validateBatchDeletePartitionValueList(v []*types.PartitionValueList) error {
+func validateBatchDeletePartitionValueList(v []types.PartitionValueList) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchDeletePartitionValueList"}
 	for i := range v {
-		if err := validatePartitionValueList(v[i]); err != nil {
+		if err := validatePartitionValueList(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2739,13 +2739,13 @@ func validateBatchDeletePartitionValueList(v []*types.PartitionValueList) error 
 	}
 }
 
-func validateBatchGetPartitionValueList(v []*types.PartitionValueList) error {
+func validateBatchGetPartitionValueList(v []types.PartitionValueList) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetPartitionValueList"}
 	for i := range v {
-		if err := validatePartitionValueList(v[i]); err != nil {
+		if err := validatePartitionValueList(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2778,13 +2778,13 @@ func validateBatchUpdatePartitionRequestEntry(v *types.BatchUpdatePartitionReque
 	}
 }
 
-func validateBatchUpdatePartitionRequestEntryList(v []*types.BatchUpdatePartitionRequestEntry) error {
+func validateBatchUpdatePartitionRequestEntryList(v []types.BatchUpdatePartitionRequestEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdatePartitionRequestEntryList"}
 	for i := range v {
-		if err := validateBatchUpdatePartitionRequestEntry(v[i]); err != nil {
+		if err := validateBatchUpdatePartitionRequestEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2800,15 +2800,6 @@ func validateBinaryColumnStatisticsData(v *types.BinaryColumnStatisticsData) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BinaryColumnStatisticsData"}
-	if v.AverageLength == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AverageLength"))
-	}
-	if v.NumberOfNulls == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NumberOfNulls"))
-	}
-	if v.MaximumLength == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaximumLength"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2821,15 +2812,6 @@ func validateBooleanColumnStatisticsData(v *types.BooleanColumnStatisticsData) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BooleanColumnStatisticsData"}
-	if v.NumberOfFalses == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NumberOfFalses"))
-	}
-	if v.NumberOfTrues == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NumberOfTrues"))
-	}
-	if v.NumberOfNulls == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NumberOfNulls"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2837,13 +2819,13 @@ func validateBooleanColumnStatisticsData(v *types.BooleanColumnStatisticsData) e
 	}
 }
 
-func validateCatalogEntries(v []*types.CatalogEntry) error {
+func validateCatalogEntries(v []types.CatalogEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CatalogEntries"}
 	for i := range v {
-		if err := validateCatalogEntry(v[i]); err != nil {
+		if err := validateCatalogEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2890,13 +2872,13 @@ func validateCatalogTarget(v *types.CatalogTarget) error {
 	}
 }
 
-func validateCatalogTargetList(v []*types.CatalogTarget) error {
+func validateCatalogTargetList(v []types.CatalogTarget) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CatalogTargetList"}
 	for i := range v {
-		if err := validateCatalogTarget(v[i]); err != nil {
+		if err := validateCatalogTarget(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2968,13 +2950,13 @@ func validateCodeGenNodeArg(v *types.CodeGenNodeArg) error {
 	}
 }
 
-func validateCodeGenNodeArgs(v []*types.CodeGenNodeArg) error {
+func validateCodeGenNodeArgs(v []types.CodeGenNodeArg) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CodeGenNodeArgs"}
 	for i := range v {
-		if err := validateCodeGenNodeArg(v[i]); err != nil {
+		if err := validateCodeGenNodeArg(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3000,13 +2982,13 @@ func validateColumn(v *types.Column) error {
 	}
 }
 
-func validateColumnList(v []*types.Column) error {
+func validateColumnList(v []types.Column) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ColumnList"}
 	for i := range v {
-		if err := validateColumn(v[i]); err != nil {
+		if err := validateColumn(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3121,9 +3103,6 @@ func validateConnectionPasswordEncryption(v *types.ConnectionPasswordEncryption)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ConnectionPasswordEncryption"}
-	if v.ReturnConnectionPasswordEncrypted == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReturnConnectionPasswordEncrypted"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3220,13 +3199,13 @@ func validateCreateXMLClassifierRequest(v *types.CreateXMLClassifierRequest) err
 	}
 }
 
-func validateDagEdges(v []*types.CodeGenEdge) error {
+func validateDagEdges(v []types.CodeGenEdge) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DagEdges"}
 	for i := range v {
-		if err := validateCodeGenEdge(v[i]); err != nil {
+		if err := validateCodeGenEdge(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3237,13 +3216,13 @@ func validateDagEdges(v []*types.CodeGenEdge) error {
 	}
 }
 
-func validateDagNodes(v []*types.CodeGenNode) error {
+func validateDagNodes(v []types.CodeGenNode) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DagNodes"}
 	for i := range v {
-		if err := validateCodeGenNode(v[i]); err != nil {
+		if err := validateCodeGenNode(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3296,12 +3275,6 @@ func validateDateColumnStatisticsData(v *types.DateColumnStatisticsData) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DateColumnStatisticsData"}
-	if v.NumberOfDistinctValues == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NumberOfDistinctValues"))
-	}
-	if v.NumberOfNulls == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NumberOfNulls"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3324,12 +3297,6 @@ func validateDecimalColumnStatisticsData(v *types.DecimalColumnStatisticsData) e
 			invalidParams.AddNested("MinimumValue", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.NumberOfNulls == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NumberOfNulls"))
-	}
-	if v.NumberOfDistinctValues == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NumberOfDistinctValues"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3345,9 +3312,6 @@ func validateDecimalNumber(v *types.DecimalNumber) error {
 	if v.UnscaledValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UnscaledValue"))
 	}
-	if v.Scale == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Scale"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3360,12 +3324,6 @@ func validateDoubleColumnStatisticsData(v *types.DoubleColumnStatisticsData) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DoubleColumnStatisticsData"}
-	if v.NumberOfDistinctValues == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NumberOfDistinctValues"))
-	}
-	if v.NumberOfNulls == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NumberOfNulls"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3406,13 +3364,13 @@ func validateGlueTable(v *types.GlueTable) error {
 	}
 }
 
-func validateGlueTables(v []*types.GlueTable) error {
+func validateGlueTables(v []types.GlueTable) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GlueTables"}
 	for i := range v {
-		if err := validateGlueTable(v[i]); err != nil {
+		if err := validateGlueTable(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3455,12 +3413,6 @@ func validateLongColumnStatisticsData(v *types.LongColumnStatisticsData) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LongColumnStatisticsData"}
-	if v.NumberOfDistinctValues == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NumberOfDistinctValues"))
-	}
-	if v.NumberOfNulls == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NumberOfNulls"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3488,9 +3440,6 @@ func validateOrder(v *types.Order) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Order"}
-	if v.SortOrder == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SortOrder"))
-	}
 	if v.Column == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Column"))
 	}
@@ -3501,13 +3450,13 @@ func validateOrder(v *types.Order) error {
 	}
 }
 
-func validateOrderList(v []*types.Order) error {
+func validateOrderList(v []types.Order) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OrderList"}
 	for i := range v {
-		if err := validateOrder(v[i]); err != nil {
+		if err := validateOrder(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3536,13 +3485,13 @@ func validatePartitionIndex(v *types.PartitionIndex) error {
 	}
 }
 
-func validatePartitionIndexList(v []*types.PartitionIndex) error {
+func validatePartitionIndexList(v []types.PartitionIndex) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PartitionIndexList"}
 	for i := range v {
-		if err := validatePartitionIndex(v[i]); err != nil {
+		if err := validatePartitionIndex(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3570,13 +3519,13 @@ func validatePartitionInput(v *types.PartitionInput) error {
 	}
 }
 
-func validatePartitionInputList(v []*types.PartitionInput) error {
+func validatePartitionInputList(v []types.PartitionInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PartitionInputList"}
 	for i := range v {
-		if err := validatePartitionInput(v[i]); err != nil {
+		if err := validatePartitionInput(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3607,12 +3556,6 @@ func validateSegment(v *types.Segment) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Segment"}
-	if v.SegmentNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SegmentNumber"))
-	}
-	if v.TotalSegments == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TotalSegments"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3647,18 +3590,6 @@ func validateStringColumnStatisticsData(v *types.StringColumnStatisticsData) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StringColumnStatisticsData"}
-	if v.NumberOfDistinctValues == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NumberOfDistinctValues"))
-	}
-	if v.MaximumLength == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaximumLength"))
-	}
-	if v.AverageLength == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AverageLength"))
-	}
-	if v.NumberOfNulls == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NumberOfNulls"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3759,13 +3690,13 @@ func validateTransformSortCriteria(v *types.TransformSortCriteria) error {
 	}
 }
 
-func validateUpdateColumnStatisticsList(v []*types.ColumnStatistics) error {
+func validateUpdateColumnStatisticsList(v []types.ColumnStatistics) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateColumnStatisticsList"}
 	for i := range v {
-		if err := validateColumnStatistics(v[i]); err != nil {
+		if err := validateColumnStatistics(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

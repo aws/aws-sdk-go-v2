@@ -41,7 +41,7 @@ type ListDashboardVersionsInput struct {
 	DashboardId *string
 
 	// The maximum number of results to be returned per request.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
@@ -50,7 +50,7 @@ type ListDashboardVersionsInput struct {
 type ListDashboardVersionsOutput struct {
 
 	// A structure that contains information about each version of the dashboard.
-	DashboardVersionSummaryList []*types.DashboardVersionSummary
+	DashboardVersionSummaryList []types.DashboardVersionSummary
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
@@ -59,7 +59,7 @@ type ListDashboardVersionsOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

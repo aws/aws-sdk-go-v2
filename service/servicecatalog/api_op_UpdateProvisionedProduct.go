@@ -78,7 +78,7 @@ type UpdateProvisionedProductInput struct {
 	ProvisioningArtifactName *string
 
 	// The new parameters.
-	ProvisioningParameters []*types.UpdateProvisioningParameter
+	ProvisioningParameters []types.UpdateProvisioningParameter
 
 	// An object that contains information about the provisioning preferences for a
 	// stack set.
@@ -86,7 +86,7 @@ type UpdateProvisionedProductInput struct {
 
 	// One or more tags. Requires the product to have RESOURCE_UPDATE constraint with
 	// TagUpdatesOnProvisionedProduct set to ALLOWED to allow tag updates.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type UpdateProvisionedProductOutput struct {

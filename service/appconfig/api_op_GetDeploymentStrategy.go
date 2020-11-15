@@ -42,18 +42,18 @@ type GetDeploymentStrategyInput struct {
 type GetDeploymentStrategyOutput struct {
 
 	// Total amount of time the deployment lasted.
-	DeploymentDurationInMinutes *int32
+	DeploymentDurationInMinutes int32
 
 	// The description of the deployment strategy.
 	Description *string
 
 	// The amount of time AppConfig monitored for alarms before considering the
 	// deployment to be complete and no longer eligible for automatic roll back.
-	FinalBakeTimeInMinutes *int32
+	FinalBakeTimeInMinutes int32
 
 	// The percentage of targets that received a deployed configuration during each
 	// interval.
-	GrowthFactor *float32
+	GrowthFactor float32
 
 	// The algorithm used to define how percentage grew over time.
 	GrowthType types.GrowthType

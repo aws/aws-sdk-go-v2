@@ -49,7 +49,7 @@ type ListFacetAttributesInput struct {
 type ListFacetAttributesOutput struct {
 
 	// The attributes attached to the facet.
-	Attributes []*types.FacetAttribute
+	Attributes []types.FacetAttribute
 
 	// The pagination token.
 	NextToken *string

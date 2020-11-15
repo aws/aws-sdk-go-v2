@@ -38,10 +38,10 @@ type DeleteLabelsInput struct {
 	AuthenticationToken *string
 
 	// Flag to request removal of all labels from the specified resource.
-	DeleteAll *bool
+	DeleteAll bool
 
 	// List of labels to delete from the resource.
-	Labels []*string
+	Labels []string
 }
 
 type DeleteLabelsOutput struct {

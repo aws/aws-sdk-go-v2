@@ -38,7 +38,7 @@ type UpdateVpcLinkInput struct {
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
-	PatchOperations []*types.PatchOperation
+	PatchOperations []types.PatchOperation
 }
 
 // An API Gateway VPC link for a RestApi to access resources in an Amazon Virtual
@@ -70,11 +70,11 @@ type UpdateVpcLinkOutput struct {
 	StatusMessage *string
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The ARN of the network load balancer of the VPC targeted by the VPC link. The
 	// network load balancer must be owned by the same AWS account of the API owner.
-	TargetArns []*string
+	TargetArns []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

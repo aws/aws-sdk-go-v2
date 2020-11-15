@@ -56,7 +56,7 @@ type Beard struct {
 	Confidence *float32
 
 	// Boolean value that indicates whether the face has beard or not.
-	Value *bool
+	Value bool
 }
 
 // Identifies the bounding box around the label, face, text or personal protective
@@ -109,7 +109,7 @@ type Celebrity struct {
 
 	// An array of URLs pointing to additional information about the celebrity. If
 	// there is no additional information about the celebrity, this list is empty.
-	Urls []*string
+	Urls []string
 }
 
 // Information about a recognized celebrity.
@@ -132,7 +132,7 @@ type CelebrityDetail struct {
 	Name *string
 
 	// An array of URLs pointing to additional celebrity information.
-	Urls []*string
+	Urls []string
 }
 
 // Information about a detected celebrity and the time the celebrity was detected
@@ -145,7 +145,7 @@ type CelebrityRecognition struct {
 
 	// The time, in milliseconds from the start of the video, that the celebrity was
 	// recognized.
-	Timestamp *int64
+	Timestamp int64
 }
 
 // Provides face metadata for target image faces that are analyzed by CompareFaces
@@ -159,7 +159,7 @@ type ComparedFace struct {
 	Confidence *float32
 
 	// An array of facial landmarks.
-	Landmarks []*Landmark
+	Landmarks []Landmark
 
 	// Indicates the pose of the face as determined by its pitch, roll, and yaw.
 	Pose *Pose
@@ -203,7 +203,7 @@ type ContentModerationDetection struct {
 
 	// Time, in milliseconds from the beginning of the video, that the unsafe content
 	// label was detected.
-	Timestamp *int64
+	Timestamp int64
 }
 
 // Information about an item of Personal Protective Equipment covering a
@@ -214,7 +214,7 @@ type CoversBodyPart struct {
 	Confidence *float32
 
 	// True if the PPE covers the corresponding body part, otherwise false.
-	Value *bool
+	Value bool
 }
 
 // A custom label detected in an image by a call to DetectCustomLabels.
@@ -261,7 +261,7 @@ type DetectTextFilters struct {
 
 	// A Filter focusing on a certain area of the image. Uses a BoundingBox object to
 	// set the region of the image.
-	RegionsOfInterest []*RegionOfInterest
+	RegionsOfInterest []RegionOfInterest
 
 	// A set of parameters that allow you to filter out certain results from your
 	// returned results.
@@ -321,7 +321,7 @@ type Eyeglasses struct {
 	Confidence *float32
 
 	// Boolean value that indicates whether the face is wearing eye glasses or not.
-	Value *bool
+	Value bool
 }
 
 // Indicates whether or not the eyes on the face are open, and the confidence level
@@ -332,7 +332,7 @@ type EyeOpen struct {
 	Confidence *float32
 
 	// Boolean value that indicates whether the eyes on the face are open.
-	Value *bool
+	Value bool
 }
 
 // Describes the face properties such as the bounding box, face ID, image ID of the
@@ -399,7 +399,7 @@ type FaceDetail struct {
 	// appearance of a person's face. It is not a determination of the person’s
 	// internal emotional state and should not be used in such a way. For example, a
 	// person pretending to have a sad face might not be sad emotionally.
-	Emotions []*Emotion
+	Emotions []Emotion
 
 	// Indicates whether or not the face is wearing eye glasses, and the confidence
 	// level in the determination.
@@ -413,7 +413,7 @@ type FaceDetail struct {
 	Gender *Gender
 
 	// Indicates the location of landmarks on the face. Default attribute.
-	Landmarks []*Landmark
+	Landmarks []Landmark
 
 	// Indicates whether or not the mouth on the face is open, and the confidence level
 	// in the determination.
@@ -447,7 +447,7 @@ type FaceDetection struct {
 	Face *FaceDetail
 
 	// Time, in milliseconds from the start of the video, that the face was detected.
-	Timestamp *int64
+	Timestamp int64
 }
 
 // Provides face metadata. In addition, it also provides the confidence in the
@@ -517,7 +517,7 @@ type Geometry struct {
 	BoundingBox *BoundingBox
 
 	// Within the bounding box, a fine-grained polygon around the detected item.
-	Polygon []*Point
+	Polygon []Point
 }
 
 // The S3 bucket that contains an Amazon Sagemaker Ground Truth format manifest
@@ -542,7 +542,7 @@ type HumanLoopActivationOutput struct {
 	HumanLoopActivationConditionsEvaluationResults *string
 
 	// Shows if and why human review was needed.
-	HumanLoopActivationReasons []*string
+	HumanLoopActivationReasons []string
 
 	// The Amazon Resource Name (ARN) of the HumanLoop created.
 	HumanLoopArn *string
@@ -655,13 +655,13 @@ type Label struct {
 	// If Label represents an object, Instances contains the bounding boxes for each
 	// instance of the detected object. Bounding boxes are returned for common object
 	// labels such as people, cars, furniture, apparel or pets.
-	Instances []*Instance
+	Instances []Instance
 
 	// The name (label) of the object or scene.
 	Name *string
 
 	// The parent labels for a label. The response includes all ancestor labels.
-	Parents []*Parent
+	Parents []Parent
 }
 
 // Information about a label detected in a video analysis request and the time the
@@ -672,7 +672,7 @@ type LabelDetection struct {
 	Label *Label
 
 	// Time, in milliseconds from the start of the video, that the label was detected.
-	Timestamp *int64
+	Timestamp int64
 }
 
 // Indicates the location of the landmark on the face.
@@ -722,7 +722,7 @@ type MouthOpen struct {
 	Confidence *float32
 
 	// Boolean value that indicates whether the mouth on the face is open or not.
-	Value *bool
+	Value bool
 }
 
 // Indicates whether or not the face has a mustache, and the confidence level in
@@ -733,7 +733,7 @@ type Mustache struct {
 	Confidence *float32
 
 	// Boolean value that indicates whether the face has mustache or not.
-	Value *bool
+	Value bool
 }
 
 // The Amazon Simple Notification Service topic to which Amazon Rekognition
@@ -782,7 +782,7 @@ type PersonDetail struct {
 	// Identifier for the person detected person within a video. Use to keep track of
 	// the person throughout the video. The identifier is not stored by Amazon
 	// Rekognition.
-	Index *int64
+	Index int64
 }
 
 // Details and path tracking information for a single time a person's path is
@@ -797,7 +797,7 @@ type PersonDetection struct {
 
 	// The time, in milliseconds from the start of the video, that the person's path
 	// was tracked.
-	Timestamp *int64
+	Timestamp int64
 }
 
 // Information about a person whose face matches a face(s) in an Amazon Rekognition
@@ -809,14 +809,14 @@ type PersonMatch struct {
 
 	// Information about the faces in the input collection that match the face of a
 	// person in the video.
-	FaceMatches []*FaceMatch
+	FaceMatches []FaceMatch
 
 	// Information about the matched person.
 	Person *PersonDetail
 
 	// The time, in milliseconds from the beginning of the video, that the person was
 	// matched in the video.
-	Timestamp *int64
+	Timestamp int64
 }
 
 // The X and Y coordinates of a point on an image. The X and Y values returned are
@@ -915,7 +915,7 @@ type ProtectiveEquipmentBodyPart struct {
 	Confidence *float32
 
 	// An array of Personal Protective Equipment items detected around a body part.
-	EquipmentDetections []*EquipmentDetection
+	EquipmentDetections []EquipmentDetection
 
 	// The detected body part.
 	Name BodyPart
@@ -928,7 +928,7 @@ type ProtectiveEquipmentPerson struct {
 
 	// An array of body parts detected on a person's body (including body parts without
 	// PPE).
-	BodyParts []*ProtectiveEquipmentBodyPart
+	BodyParts []ProtectiveEquipmentBodyPart
 
 	// A bounding box around the detected person.
 	BoundingBox *BoundingBox
@@ -993,16 +993,16 @@ type ProtectiveEquipmentSummary struct {
 
 	// An array of IDs for persons where it was not possible to determine if they are
 	// wearing personal protective equipment.
-	PersonsIndeterminate []*int32
+	PersonsIndeterminate []int32
 
 	// An array of IDs for persons who are wearing detected personal protective
 	// equipment.
-	PersonsWithRequiredEquipment []*int32
+	PersonsWithRequiredEquipment []int32
 
 	// An array of IDs for persons who are not wearing all of the types of PPE
 	// specified in the RequiredEquipmentTypes field of the detected personal
 	// protective equipment.
-	PersonsWithoutRequiredEquipment []*int32
+	PersonsWithoutRequiredEquipment []int32
 }
 
 // Specifies a location within the frame that Rekognition checks for text. Uses a
@@ -1051,7 +1051,7 @@ type SegmentDetection struct {
 
 	// The end time of the detected segment, in milliseconds, from the start of the
 	// video. This value is rounded down.
-	EndTimestampMillis *int64
+	EndTimestampMillis int64
 
 	// If the segment is a shot detection, contains information about the shot
 	// detection.
@@ -1065,7 +1065,7 @@ type SegmentDetection struct {
 	// The start time of the detected segment in milliseconds from the start of the
 	// video. This value is rounded down. For example, if the actual timestamp is
 	// 100.6667 milliseconds, Amazon Rekognition Video returns a value of 100 millis.
-	StartTimestampMillis *int64
+	StartTimestampMillis int64
 
 	// If the segment is a technical cue, contains information about the technical cue.
 	TechnicalCueSegment *TechnicalCueSegment
@@ -1106,7 +1106,7 @@ type Smile struct {
 	Confidence *float32
 
 	// Boolean value that indicates whether the face is smiling or not.
-	Value *bool
+	Value bool
 }
 
 // Filters applied to the technical cue or shot detection segments. For more
@@ -1156,7 +1156,7 @@ type StartTextDetectionFilters struct {
 
 	// Filter focusing on a certain area of the frame. Uses a BoundingBox object to set
 	// the region of the screen.
-	RegionsOfInterest []*RegionOfInterest
+	RegionsOfInterest []RegionOfInterest
 
 	// Filters focusing on qualities of the text, such as confidence or size.
 	WordFilter *DetectionFilter
@@ -1224,7 +1224,7 @@ type Sunglasses struct {
 	Confidence *float32
 
 	// Boolean value that indicates whether the face is wearing sunglasses or not.
-	Value *bool
+	Value bool
 }
 
 // Information about a technical cue segment. For more information, see
@@ -1245,11 +1245,11 @@ type TechnicalCueSegment struct {
 type TestingData struct {
 
 	// The assets used for testing.
-	Assets []*Asset
+	Assets []Asset
 
 	// If specified, Amazon Rekognition Custom Labels creates a testing dataset with an
 	// 80/20 split of the training dataset.
-	AutoCreate *bool
+	AutoCreate bool
 }
 
 // Sagemaker Groundtruth format manifest files for the input, output and validation
@@ -1311,7 +1311,7 @@ type TextDetectionResult struct {
 
 	// The time, in milliseconds from the start of the video, that the text was
 	// detected.
-	Timestamp *int64
+	Timestamp int64
 }
 
 // The dataset used for training.
@@ -1319,7 +1319,7 @@ type TrainingData struct {
 
 	// A Sagemaker GroundTruth manifest file that contains the training images
 	// (assets).
-	Assets []*Asset
+	Assets []Asset
 }
 
 // Sagemaker Groundtruth format manifest files for the input, output and validation
@@ -1382,7 +1382,7 @@ type UnindexedFace struct {
 type ValidationData struct {
 
 	// The assets that comprise the validation data.
-	Assets []*Asset
+	Assets []Asset
 }
 
 // Video file stored in an Amazon S3 bucket. Amazon Rekognition video start

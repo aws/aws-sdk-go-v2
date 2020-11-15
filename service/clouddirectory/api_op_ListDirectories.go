@@ -46,7 +46,7 @@ type ListDirectoriesOutput struct {
 	// fashion.
 	//
 	// This member is required.
-	Directories []*types.Directory
+	Directories []types.Directory
 
 	// The pagination token.
 	NextToken *string

@@ -47,7 +47,7 @@ type UpdateResourceServerInput struct {
 	UserPoolId *string
 
 	// The scope values to be set for the resource server.
-	Scopes []*types.ResourceServerScopeType
+	Scopes []types.ResourceServerScopeType
 }
 
 type UpdateResourceServerOutput struct {

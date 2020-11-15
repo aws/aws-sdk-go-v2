@@ -41,7 +41,7 @@ type GetDefaultRetentionPolicyOutput struct {
 	Description *string
 
 	// The retention policy folder configurations.
-	FolderConfigurations []*types.FolderConfiguration
+	FolderConfigurations []types.FolderConfiguration
 
 	// The retention policy ID.
 	Id *string

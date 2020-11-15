@@ -49,12 +49,12 @@ type CreatePlatformVersionInput struct {
 	EnvironmentName *string
 
 	// The configuration option settings to apply to the builder environment.
-	OptionSettings []*types.ConfigurationOptionSetting
+	OptionSettings []types.ConfigurationOptionSetting
 
 	// Specifies the tags applied to the new platform version. Elastic Beanstalk
 	// applies these tags only to the platform version. Environments that you create
 	// using the platform version don't inherit the tags.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreatePlatformVersionOutput struct {

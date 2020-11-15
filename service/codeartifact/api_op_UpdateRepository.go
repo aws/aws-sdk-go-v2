@@ -51,7 +51,7 @@ type UpdateRepositoryInput struct {
 	// CodeArtifact looks for a requested package version. For more information, see
 	// Working with upstream repositories
 	// (https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html).
-	Upstreams []*types.UpstreamRepository
+	Upstreams []types.UpstreamRepository
 }
 
 type UpdateRepositoryOutput struct {

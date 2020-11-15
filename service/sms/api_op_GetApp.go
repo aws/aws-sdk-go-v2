@@ -39,10 +39,10 @@ type GetAppOutput struct {
 	AppSummary *types.AppSummary
 
 	// The server groups that belong to the application.
-	ServerGroups []*types.ServerGroup
+	ServerGroups []types.ServerGroup
 
 	// The tags associated with the application.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

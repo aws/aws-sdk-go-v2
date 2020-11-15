@@ -81,7 +81,7 @@ type GetObjectTaggingOutput struct {
 	// Contains the tag set.
 	//
 	// This member is required.
-	TagSet []*types.Tag
+	TagSet []types.Tag
 
 	// The versionId of the object for which you got the tagging information.
 	VersionId *string

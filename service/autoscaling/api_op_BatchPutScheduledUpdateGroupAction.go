@@ -39,14 +39,14 @@ type BatchPutScheduledUpdateGroupActionInput struct {
 	// One or more scheduled actions. The maximum number allowed is 50.
 	//
 	// This member is required.
-	ScheduledUpdateGroupActions []*types.ScheduledUpdateGroupActionRequest
+	ScheduledUpdateGroupActions []types.ScheduledUpdateGroupActionRequest
 }
 
 type BatchPutScheduledUpdateGroupActionOutput struct {
 
 	// The names of the scheduled actions that could not be created or updated,
 	// including an error message.
-	FailedScheduledUpdateGroupActions []*types.FailedScheduledUpdateGroupActionRequest
+	FailedScheduledUpdateGroupActions []types.FailedScheduledUpdateGroupActionRequest
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

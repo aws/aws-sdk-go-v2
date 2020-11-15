@@ -33,7 +33,7 @@ type GetColumnStatisticsForPartitionInput struct {
 	// A list of the column names.
 	//
 	// This member is required.
-	ColumnNames []*string
+	ColumnNames []string
 
 	// The name of the catalog database where the partitions reside.
 	//
@@ -43,7 +43,7 @@ type GetColumnStatisticsForPartitionInput struct {
 	// A list of partition values identifying the partition.
 	//
 	// This member is required.
-	PartitionValues []*string
+	PartitionValues []string
 
 	// The name of the partitions' table.
 	//
@@ -58,10 +58,10 @@ type GetColumnStatisticsForPartitionInput struct {
 type GetColumnStatisticsForPartitionOutput struct {
 
 	// List of ColumnStatistics that failed to be retrieved.
-	ColumnStatisticsList []*types.ColumnStatistics
+	ColumnStatisticsList []types.ColumnStatistics
 
 	// Error occurred during retrieving column statistics data.
-	Errors []*types.ColumnError
+	Errors []types.ColumnError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

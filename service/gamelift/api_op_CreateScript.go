@@ -89,7 +89,7 @@ type CreateScriptInput struct {
 	// UntagResource, and ListTagsForResource to add, remove, and view tags. The
 	// maximum tag limit may be lower than stated. See the AWS General Reference for
 	// actual tagging limits.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The version that is associated with a build or script. Version strings do not
 	// need to be unique. You can use UpdateScript to change this value later.

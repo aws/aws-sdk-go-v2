@@ -55,7 +55,7 @@ type ListUsersOutput struct {
 	// specify.
 	//
 	// This member is required.
-	Users []*types.ListedUser
+	Users []types.ListedUser
 
 	// When you can get additional results from the ListUsers call, a NextToken
 	// parameter is returned in the output. You can then pass in a subsequent command

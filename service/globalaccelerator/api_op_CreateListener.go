@@ -48,7 +48,7 @@ type CreateListenerInput struct {
 	// accelerator.
 	//
 	// This member is required.
-	PortRanges []*types.PortRange
+	PortRanges []types.PortRange
 
 	// The protocol for connections from clients to your accelerator.
 	//

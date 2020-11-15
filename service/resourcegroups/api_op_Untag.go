@@ -37,7 +37,7 @@ type UntagInput struct {
 	// The keys of the tags to be removed.
 	//
 	// This member is required.
-	Keys []*string
+	Keys []string
 }
 
 type UntagOutput struct {
@@ -46,7 +46,7 @@ type UntagOutput struct {
 	Arn *string
 
 	// The keys of the tags that were removed.
-	Keys []*string
+	Keys []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -940,13 +940,13 @@ func validateAttachmentStateChange(v *types.AttachmentStateChange) error {
 	}
 }
 
-func validateAttachmentStateChanges(v []*types.AttachmentStateChange) error {
+func validateAttachmentStateChanges(v []types.AttachmentStateChange) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttachmentStateChanges"}
 	for i := range v {
-		if err := validateAttachmentStateChange(v[i]); err != nil {
+		if err := validateAttachmentStateChange(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -972,13 +972,13 @@ func validateAttribute(v *types.Attribute) error {
 	}
 }
 
-func validateAttributes(v []*types.Attribute) error {
+func validateAttributes(v []types.Attribute) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Attributes"}
 	for i := range v {
-		if err := validateAttribute(v[i]); err != nil {
+		if err := validateAttribute(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1019,13 +1019,13 @@ func validateAwsVpcConfiguration(v *types.AwsVpcConfiguration) error {
 	}
 }
 
-func validateCapacityProviderStrategy(v []*types.CapacityProviderStrategyItem) error {
+func validateCapacityProviderStrategy(v []types.CapacityProviderStrategyItem) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CapacityProviderStrategy"}
 	for i := range v {
-		if err := validateCapacityProviderStrategyItem(v[i]); err != nil {
+		if err := validateCapacityProviderStrategyItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1118,13 +1118,13 @@ func validateContainerDefinition(v *types.ContainerDefinition) error {
 	}
 }
 
-func validateContainerDefinitions(v []*types.ContainerDefinition) error {
+func validateContainerDefinitions(v []types.ContainerDefinition) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ContainerDefinitions"}
 	for i := range v {
-		if err := validateContainerDefinition(v[i]); err != nil {
+		if err := validateContainerDefinition(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1135,13 +1135,13 @@ func validateContainerDefinitions(v []*types.ContainerDefinition) error {
 	}
 }
 
-func validateContainerDependencies(v []*types.ContainerDependency) error {
+func validateContainerDependencies(v []types.ContainerDependency) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ContainerDependencies"}
 	for i := range v {
-		if err := validateContainerDependency(v[i]); err != nil {
+		if err := validateContainerDependency(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1192,13 +1192,13 @@ func validateContainerOverride(v *types.ContainerOverride) error {
 	}
 }
 
-func validateContainerOverrides(v []*types.ContainerOverride) error {
+func validateContainerOverrides(v []types.ContainerOverride) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ContainerOverrides"}
 	for i := range v {
-		if err := validateContainerOverride(v[i]); err != nil {
+		if err := validateContainerOverride(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1239,13 +1239,13 @@ func validateDevice(v *types.Device) error {
 	}
 }
 
-func validateDevicesList(v []*types.Device) error {
+func validateDevicesList(v []types.Device) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DevicesList"}
 	for i := range v {
-		if err := validateDevice(v[i]); err != nil {
+		if err := validateDevice(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1289,13 +1289,13 @@ func validateEnvironmentFile(v *types.EnvironmentFile) error {
 	}
 }
 
-func validateEnvironmentFiles(v []*types.EnvironmentFile) error {
+func validateEnvironmentFiles(v []types.EnvironmentFile) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EnvironmentFiles"}
 	for i := range v {
-		if err := validateEnvironmentFile(v[i]); err != nil {
+		if err := validateEnvironmentFile(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1354,13 +1354,13 @@ func validateHostEntry(v *types.HostEntry) error {
 	}
 }
 
-func validateHostEntryList(v []*types.HostEntry) error {
+func validateHostEntryList(v []types.HostEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HostEntryList"}
 	for i := range v {
-		if err := validateHostEntry(v[i]); err != nil {
+		if err := validateHostEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1389,13 +1389,13 @@ func validateInferenceAccelerator(v *types.InferenceAccelerator) error {
 	}
 }
 
-func validateInferenceAccelerators(v []*types.InferenceAccelerator) error {
+func validateInferenceAccelerators(v []types.InferenceAccelerator) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InferenceAccelerators"}
 	for i := range v {
-		if err := validateInferenceAccelerator(v[i]); err != nil {
+		if err := validateInferenceAccelerator(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1483,13 +1483,13 @@ func validatePlatformDevice(v *types.PlatformDevice) error {
 	}
 }
 
-func validatePlatformDevices(v []*types.PlatformDevice) error {
+func validatePlatformDevices(v []types.PlatformDevice) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PlatformDevices"}
 	for i := range v {
-		if err := validatePlatformDevice(v[i]); err != nil {
+		if err := validatePlatformDevice(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1548,13 +1548,13 @@ func validateResourceRequirement(v *types.ResourceRequirement) error {
 	}
 }
 
-func validateResourceRequirements(v []*types.ResourceRequirement) error {
+func validateResourceRequirements(v []types.ResourceRequirement) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceRequirements"}
 	for i := range v {
-		if err := validateResourceRequirement(v[i]); err != nil {
+		if err := validateResourceRequirement(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1583,13 +1583,13 @@ func validateSecret(v *types.Secret) error {
 	}
 }
 
-func validateSecretList(v []*types.Secret) error {
+func validateSecretList(v []types.Secret) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SecretList"}
 	for i := range v {
-		if err := validateSecret(v[i]); err != nil {
+		if err := validateSecret(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1622,9 +1622,6 @@ func validateTmpfs(v *types.Tmpfs) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tmpfs"}
-	if v.Size == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Size"))
-	}
 	if v.ContainerPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContainerPath"))
 	}
@@ -1635,13 +1632,13 @@ func validateTmpfs(v *types.Tmpfs) error {
 	}
 }
 
-func validateTmpfsList(v []*types.Tmpfs) error {
+func validateTmpfsList(v []types.Tmpfs) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TmpfsList"}
 	for i := range v {
-		if err := validateTmpfs(v[i]); err != nil {
+		if err := validateTmpfs(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1657,14 +1654,8 @@ func validateUlimit(v *types.Ulimit) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Ulimit"}
-	if v.HardLimit == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HardLimit"))
-	}
 	if len(v.Name) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.SoftLimit == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SoftLimit"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1673,13 +1664,13 @@ func validateUlimit(v *types.Ulimit) error {
 	}
 }
 
-func validateUlimitList(v []*types.Ulimit) error {
+func validateUlimitList(v []types.Ulimit) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UlimitList"}
 	for i := range v {
-		if err := validateUlimit(v[i]); err != nil {
+		if err := validateUlimit(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1707,13 +1698,13 @@ func validateVolume(v *types.Volume) error {
 	}
 }
 
-func validateVolumeList(v []*types.Volume) error {
+func validateVolumeList(v []types.Volume) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VolumeList"}
 	for i := range v {
-		if err := validateVolume(v[i]); err != nil {
+		if err := validateVolume(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

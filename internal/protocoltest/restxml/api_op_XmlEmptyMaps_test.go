@@ -38,7 +38,7 @@ func TestClient_XmlEmptyMaps_awsRestxmlSerialize(t *testing.T) {
 		// Serializes Empty XML maps
 		"XmlEmptyMaps": {
 			Params: &XmlEmptyMapsInput{
-				MyMap: map[string]*types.GreetingStruct{},
+				MyMap: map[string]types.GreetingStruct{},
 			},
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/XmlEmptyMaps",
@@ -141,7 +141,7 @@ func TestClient_XmlEmptyMaps_awsRestxmlDeserialize(t *testing.T) {
 			</XmlMapsInputOutput>
 			`),
 			ExpectResult: &XmlEmptyMapsOutput{
-				MyMap: map[string]*types.GreetingStruct{},
+				MyMap: map[string]types.GreetingStruct{},
 			},
 		},
 		// Deserializes Empty Self-closed XML maps
@@ -156,7 +156,7 @@ func TestClient_XmlEmptyMaps_awsRestxmlDeserialize(t *testing.T) {
 			</XmlMapsInputOutput>
 			`),
 			ExpectResult: &XmlEmptyMapsOutput{
-				MyMap: map[string]*types.GreetingStruct{},
+				MyMap: map[string]types.GreetingStruct{},
 			},
 		},
 	}

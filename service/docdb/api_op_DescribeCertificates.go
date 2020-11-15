@@ -39,7 +39,7 @@ type DescribeCertificatesInput struct {
 	CertificateIdentifier *string
 
 	// This parameter is not currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeCertificates
 	// request. If this parameter is specified, the response includes only records
@@ -60,7 +60,7 @@ type DescribeCertificatesInput struct {
 type DescribeCertificatesOutput struct {
 
 	// A list of certificates for this AWS account.
-	Certificates []*types.Certificate
+	Certificates []types.Certificate
 
 	// An optional pagination token provided if the number of records retrieved is
 	// greater than MaxRecords. If this parameter is specified, the marker specifies

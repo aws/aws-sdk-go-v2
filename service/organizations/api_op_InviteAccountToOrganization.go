@@ -82,7 +82,7 @@ type InviteAccountToOrganizationInput struct {
 	// then that tags could potentially be non-compliant. If any one of the tags is
 	// invalid or if you exceed the allowed number of tags for an account, then the
 	// entire request fails and invitations are not sent.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type InviteAccountToOrganizationOutput struct {

@@ -13,7 +13,7 @@ type Filter struct {
 	Key FilterNameStringType
 
 	// Filters your list of secrets by a specific value.
-	Values []*string
+	Values []string
 }
 
 // A structure that defines the rotation configuration for the secret.
@@ -26,7 +26,7 @@ type RotationRulesType struct {
 	// the hour within that 24-hour date window randomly. The minute is also chosen
 	// somewhat randomly, but weighted towards the top of the hour and influenced by a
 	// variety of factors that help distribute load.
-	AutomaticallyAfterDays *int64
+	AutomaticallyAfterDays int64
 }
 
 // A structure that contains the details about a secret. It does not include the
@@ -78,7 +78,7 @@ type SecretListEntry struct {
 	OwningService *string
 
 	// Indicates whether automatic, scheduled rotation is enabled for this secret.
-	RotationEnabled *bool
+	RotationEnabled bool
 
 	// The ARN of an AWS Lambda function invoked by Secrets Manager to rotate and
 	// expire the secret either automatically per the schedule or manually by a call to
@@ -93,11 +93,11 @@ type SecretListEntry struct {
 	// of the different versions during the rotation process. A version that does not
 	// have any SecretVersionStage is considered deprecated and subject to deletion.
 	// Such versions are not included in this list.
-	SecretVersionsToStages map[string][]*string
+	SecretVersionsToStages map[string][]string
 
 	// The list of user-defined tags associated with the secret. To add tags to a
 	// secret, use TagResource. To remove tags, use UntagResource.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // A structure that contains information about one version of a secret.
@@ -115,7 +115,7 @@ type SecretVersionsListEntry struct {
 
 	// An array of staging labels that are currently associated with this version of
 	// the secret.
-	VersionStages []*string
+	VersionStages []string
 }
 
 // A structure that contains information about a tag.

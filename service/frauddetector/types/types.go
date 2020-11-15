@@ -6,7 +6,7 @@ package types
 type BatchCreateVariableError struct {
 
 	// The error code.
-	Code *int32
+	Code int32
 
 	// The error message.
 	Message *string
@@ -19,7 +19,7 @@ type BatchCreateVariableError struct {
 type BatchGetVariableError struct {
 
 	// The error code.
-	Code *int32
+	Code int32
 
 	// The error message.
 	Message *string
@@ -32,10 +32,10 @@ type BatchGetVariableError struct {
 type DataValidationMetrics struct {
 
 	// The field-specific model training validation messages.
-	FieldLevelMessages []*FieldValidationMessage
+	FieldLevelMessages []FieldValidationMessage
 
 	// The file-specific model training validation messages.
-	FileLevelMessages []*FileValidationMessage
+	FileLevelMessages []FileValidationMessage
 }
 
 // The detector.
@@ -123,13 +123,13 @@ type EventType struct {
 	Description *string
 
 	// The event type entity types.
-	EntityTypes []*string
+	EntityTypes []string
 
 	// The event type event variables.
-	EventVariables []*string
+	EventVariables []string
 
 	// The event type labels.
-	Labels []*string
+	Labels []string
 
 	// Timestamp of when the event type was last updated.
 	LastUpdatedTime *string
@@ -254,7 +254,7 @@ type LabelSchema struct {
 	// variants from your event type for a single Amazon Fraud Detector label.
 	//
 	// This member is required.
-	LabelMapper map[string][]*string
+	LabelMapper map[string][]string
 }
 
 // Model performance metrics data points.
@@ -351,11 +351,11 @@ type ModelOutputConfiguration struct {
 
 	// A map of CSV index values in the SageMaker response to the Amazon Fraud Detector
 	// variables.
-	CsvIndexToVariableMap map[string]*string
+	CsvIndexToVariableMap map[string]string
 
 	// A map of JSON keys in response from SageMaker to the Amazon Fraud Detector
 	// variables.
-	JsonKeyToVariableMap map[string]*string
+	JsonKeyToVariableMap map[string]string
 }
 
 // The fraud prediction scores.
@@ -365,7 +365,7 @@ type ModelScores struct {
 	ModelVersion *ModelVersion
 
 	// The model's fraud prediction scores.
-	Scores map[string]*float32
+	Scores map[string]float32
 }
 
 // The model version.
@@ -490,7 +490,7 @@ type RuleDetail struct {
 	LastUpdatedTime *string
 
 	// The rule outcomes.
-	Outcomes []*string
+	Outcomes []string
 
 	// The rule ID.
 	RuleId *string
@@ -503,7 +503,7 @@ type RuleDetail struct {
 type RuleResult struct {
 
 	// The outcomes of the matched rule, based on the rule execution mode.
-	Outcomes []*string
+	Outcomes []string
 
 	// The rule ID that was matched, based on the rule execution mode.
 	RuleId *string
@@ -534,7 +534,7 @@ type TrainingDataSchema struct {
 	// The training data schema variables.
 	//
 	// This member is required.
-	ModelVariables []*string
+	ModelVariables []string
 }
 
 // The training metric details.
@@ -546,7 +546,7 @@ type TrainingMetrics struct {
 	Auc *float32
 
 	// The data points details.
-	MetricDataPoints []*MetricDataPoint
+	MetricDataPoints []MetricDataPoint
 }
 
 // The training result details.

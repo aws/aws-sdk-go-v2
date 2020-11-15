@@ -39,7 +39,7 @@ type DeregisterTargetsInput struct {
 	// must specify both the target ID and the port when you deregister it.
 	//
 	// This member is required.
-	Targets []*types.TargetDescription
+	Targets []types.TargetDescription
 }
 
 type DeregisterTargetsOutput struct {

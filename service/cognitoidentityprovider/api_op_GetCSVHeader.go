@@ -42,7 +42,7 @@ type GetCSVHeaderInput struct {
 type GetCSVHeaderOutput struct {
 
 	// The header information for the .csv file for the user import job.
-	CSVHeader []*string
+	CSVHeader []string
 
 	// The user pool ID for the user pool that the users are to be imported into.
 	UserPoolId *string

@@ -38,7 +38,7 @@ type ListTagsForResourceInput struct {
 type ListTagsForResourceOutput struct {
 
 	// The list of tags.
-	TagList []*types.Tag
+	TagList []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

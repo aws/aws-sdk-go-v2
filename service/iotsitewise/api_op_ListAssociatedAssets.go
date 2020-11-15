@@ -76,7 +76,7 @@ type ListAssociatedAssetsOutput struct {
 	// A list that summarizes the associated assets.
 	//
 	// This member is required.
-	AssetSummaries []*types.AssociatedAssetsSummary
+	AssetSummaries []types.AssociatedAssetsSummary
 
 	// The token for the next set of results, or null if there are no additional
 	// results.

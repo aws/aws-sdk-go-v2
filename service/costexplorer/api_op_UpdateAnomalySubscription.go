@@ -39,10 +39,10 @@ type UpdateAnomalySubscriptionInput struct {
 	Frequency types.AnomalySubscriptionFrequency
 
 	// A list of cost anomaly subscription ARNs.
-	MonitorArnList []*string
+	MonitorArnList []string
 
 	// The update to the subscriber list.
-	Subscribers []*types.Subscriber
+	Subscribers []types.Subscriber
 
 	// The subscription's new name.
 	SubscriptionName *string

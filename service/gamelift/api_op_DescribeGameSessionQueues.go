@@ -51,7 +51,7 @@ type DescribeGameSessionQueuesInput struct {
 
 	// A list of queue names to retrieve information for. You can use either the queue
 	// ID or ARN value. To request settings for all queues, leave this parameter empty.
-	Names []*string
+	Names []string
 
 	// A token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this operation. To start at the
@@ -63,7 +63,7 @@ type DescribeGameSessionQueuesInput struct {
 type DescribeGameSessionQueuesOutput struct {
 
 	// A collection of objects that describe the requested game session queues.
-	GameSessionQueues []*types.GameSessionQueue
+	GameSessionQueues []types.GameSessionQueue
 
 	// A token that indicates where to resume retrieving results on the next call to
 	// this operation. If no token is returned, these results represent the end of the

@@ -943,13 +943,13 @@ func validateSharePrincipal(v *types.SharePrincipal) error {
 	}
 }
 
-func validateSharePrincipalList(v []*types.SharePrincipal) error {
+func validateSharePrincipalList(v []types.SharePrincipal) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SharePrincipalList"}
 	for i := range v {
-		if err := validateSharePrincipal(v[i]); err != nil {
+		if err := validateSharePrincipal(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

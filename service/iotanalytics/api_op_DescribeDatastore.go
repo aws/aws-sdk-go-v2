@@ -37,7 +37,7 @@ type DescribeDatastoreInput struct {
 	// If true, additional statistical information about the data store is included in
 	// the response. This feature cannot be used with a data store whose S3 storage is
 	// customer-managed.
-	IncludeStatistics *bool
+	IncludeStatistics bool
 }
 
 type DescribeDatastoreOutput struct {

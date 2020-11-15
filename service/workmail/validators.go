@@ -1180,13 +1180,13 @@ func validateFolderConfiguration(v *types.FolderConfiguration) error {
 	}
 }
 
-func validateFolderConfigurations(v []*types.FolderConfiguration) error {
+func validateFolderConfigurations(v []types.FolderConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FolderConfigurations"}
 	for i := range v {
-		if err := validateFolderConfiguration(v[i]); err != nil {
+		if err := validateFolderConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1215,13 +1215,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1477,9 +1477,6 @@ func validateOpDeleteOrganizationInput(v *DeleteOrganizationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteOrganizationInput"}
-	if v.DeleteDirectory == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeleteDirectory"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}

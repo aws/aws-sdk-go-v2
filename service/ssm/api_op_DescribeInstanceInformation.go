@@ -40,17 +40,17 @@ type DescribeInstanceInformationInput struct {
 	// One or more filters. Use a filter to return a more specific list of instances.
 	// You can filter based on tags applied to EC2 instances. Use this Filters data
 	// type instead of InstanceInformationFilterList, which is deprecated.
-	Filters []*types.InstanceInformationStringFilter
+	Filters []types.InstanceInformationStringFilter
 
 	// This is a legacy method. We recommend that you don't use this method. Instead,
 	// use the Filters data type. Filters enables you to return instance information by
 	// filtering based on tags applied to managed instances. Attempting to use
 	// InstanceInformationFilterList and Filters leads to an exception error.
-	InstanceInformationFilterList []*types.InstanceInformationFilter
+	InstanceInformationFilterList []types.InstanceInformationFilter
 
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
@@ -60,7 +60,7 @@ type DescribeInstanceInformationInput struct {
 type DescribeInstanceInformationOutput struct {
 
 	// The instance information list.
-	InstanceInformationList []*types.InstanceInformation
+	InstanceInformationList []types.InstanceInformation
 
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.

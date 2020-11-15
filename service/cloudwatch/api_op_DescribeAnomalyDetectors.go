@@ -34,7 +34,7 @@ type DescribeAnomalyDetectorsInput struct {
 	// Limits the results to only the anomaly detection models that are associated with
 	// the specified metric dimensions. If there are multiple metrics that have these
 	// dimensions and have anomaly detection models associated, they're all returned.
-	Dimensions []*types.Dimension
+	Dimensions []types.Dimension
 
 	// The maximum number of results to return in one operation. The maximum value that
 	// you can specify is 100. To retrieve the remaining results, make another call
@@ -58,7 +58,7 @@ type DescribeAnomalyDetectorsInput struct {
 type DescribeAnomalyDetectorsOutput struct {
 
 	// The list of anomaly detection models returned by the operation.
-	AnomalyDetectors []*types.AnomalyDetector
+	AnomalyDetectors []types.AnomalyDetector
 
 	// A token that you can use in a subsequent operation to retrieve the next set of
 	// results.

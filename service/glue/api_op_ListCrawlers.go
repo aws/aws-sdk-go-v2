@@ -40,14 +40,14 @@ type ListCrawlersInput struct {
 	NextToken *string
 
 	// Specifies to return only these tagged resources.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type ListCrawlersOutput struct {
 
 	// The names of all crawlers in the account, or the crawlers with the specified
 	// tags.
-	CrawlerNames []*string
+	CrawlerNames []string
 
 	// A continuation token, if the returned list does not contain the last metric
 	// available.

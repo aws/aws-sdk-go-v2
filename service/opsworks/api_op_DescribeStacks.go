@@ -35,14 +35,14 @@ type DescribeStacksInput struct {
 
 	// An array of stack IDs that specify the stacks to be described. If you omit this
 	// parameter, DescribeStacks returns a description of every stack.
-	StackIds []*string
+	StackIds []string
 }
 
 // Contains the response to a DescribeStacks request.
 type DescribeStacksOutput struct {
 
 	// An array of Stack objects that describe the stacks.
-	Stacks []*types.Stack
+	Stacks []types.Stack
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

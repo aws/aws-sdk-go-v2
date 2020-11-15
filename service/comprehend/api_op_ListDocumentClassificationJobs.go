@@ -44,7 +44,7 @@ type ListDocumentClassificationJobsInput struct {
 type ListDocumentClassificationJobsOutput struct {
 
 	// A list containing the properties of each job returned.
-	DocumentClassificationJobPropertiesList []*types.DocumentClassificationJobProperties
+	DocumentClassificationJobPropertiesList []types.DocumentClassificationJobProperties
 
 	// Identifies the next page of results to return.
 	NextToken *string

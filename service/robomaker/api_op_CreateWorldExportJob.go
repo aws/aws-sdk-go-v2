@@ -45,7 +45,7 @@ type CreateWorldExportJobInput struct {
 	// A list of Amazon Resource Names (arns) that correspond to worlds to export.
 	//
 	// This member is required.
-	Worlds []*string
+	Worlds []string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
@@ -53,7 +53,7 @@ type CreateWorldExportJobInput struct {
 
 	// A map that contains tag keys and tag values that are attached to the world
 	// export job.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateWorldExportJobOutput struct {
@@ -93,7 +93,7 @@ type CreateWorldExportJobOutput struct {
 
 	// A map that contains tag keys and tag values that are attached to the world
 	// export job.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

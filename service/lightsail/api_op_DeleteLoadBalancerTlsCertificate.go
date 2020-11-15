@@ -55,7 +55,7 @@ type DeleteLoadBalancerTlsCertificateOutput struct {
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.
-	Operations []*types.Operation
+	Operations []types.Operation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

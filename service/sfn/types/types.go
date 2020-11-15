@@ -59,7 +59,7 @@ type ActivityScheduledEventDetails struct {
 	Resource *string
 
 	// The maximum allowed duration between two heartbeats for the activity task.
-	HeartbeatInSeconds *int64
+	HeartbeatInSeconds int64
 
 	// The JSON data input to the activity task. Length constraints apply to the
 	// payload size, and are expressed as bytes in UTF-8 encoding.
@@ -69,7 +69,7 @@ type ActivityScheduledEventDetails struct {
 	InputDetails *HistoryEventExecutionDataDetails
 
 	// The maximum allowed duration of the activity task.
-	TimeoutInSeconds *int64
+	TimeoutInSeconds int64
 }
 
 // Contains details about an activity schedule failure that occurred during an
@@ -118,7 +118,7 @@ type CloudWatchEventsExecutionDataDetails struct {
 
 	// Indicates whether input or output was included in the response. Always true for
 	// API calls.
-	Included *bool
+	Included bool
 }
 
 //
@@ -238,7 +238,7 @@ type HistoryEvent struct {
 	// The id of the event. Events are numbered sequentially, starting at one.
 	//
 	// This member is required.
-	Id *int64
+	Id int64
 
 	// The date and time the event occurred.
 	//
@@ -323,7 +323,7 @@ type HistoryEvent struct {
 	MapStateStartedEventDetails *MapStateStartedEventDetails
 
 	// The id of the previous event.
-	PreviousEventId *int64
+	PreviousEventId int64
 
 	// Contains details about a state entered during an execution.
 	StateEnteredEventDetails *StateEnteredEventDetails
@@ -361,7 +361,7 @@ type HistoryEventExecutionDataDetails struct {
 
 	// Indicates whether input or output was truncated in the response. Always false
 	// for API calls.
-	Truncated *bool
+	Truncated bool
 }
 
 // Contains details about a lambda function that failed during an execution.
@@ -390,7 +390,7 @@ type LambdaFunctionScheduledEventDetails struct {
 	InputDetails *HistoryEventExecutionDataDetails
 
 	// The maximum allowed duration of the lambda function.
-	TimeoutInSeconds *int64
+	TimeoutInSeconds int64
 }
 
 // Contains details about a failed lambda function schedule event that occurred
@@ -453,11 +453,11 @@ type LoggingConfiguration struct {
 
 	// An array of objects that describes where your execution history events will be
 	// logged. Limited to size 1. Required, if your log level is not set to OFF.
-	Destinations []*LogDestination
+	Destinations []LogDestination
 
 	// Determines whether execution data is included in your log. When set to false,
 	// data is excluded.
-	IncludeExecutionData *bool
+	IncludeExecutionData bool
 
 	// Defines which category of execution history events are logged.
 	Level LogLevel
@@ -467,7 +467,7 @@ type LoggingConfiguration struct {
 type MapIterationEventDetails struct {
 
 	// The index of the array belonging to the Map state iteration.
-	Index *int32
+	Index int32
 
 	// The name of the iteration’s parent Map state.
 	Name *string
@@ -477,7 +477,7 @@ type MapIterationEventDetails struct {
 type MapStateStartedEventDetails struct {
 
 	// The size of the array for Map state iterations.
-	Length *int32
+	Length int32
 }
 
 // Contains details about a state entered during an execution.
@@ -631,10 +631,10 @@ type TaskScheduledEventDetails struct {
 	ResourceType *string
 
 	// The maximum allowed duration between two heartbeats for the task.
-	HeartbeatInSeconds *int64
+	HeartbeatInSeconds int64
 
 	// The maximum allowed duration of the task.
-	TimeoutInSeconds *int64
+	TimeoutInSeconds int64
 }
 
 // Contains details about the start of a task during an execution.
@@ -759,5 +759,5 @@ type TaskTimedOutEventDetails struct {
 type TracingConfiguration struct {
 
 	// When set to true, AWS X-Ray tracing is enabled.
-	Enabled *bool
+	Enabled bool
 }

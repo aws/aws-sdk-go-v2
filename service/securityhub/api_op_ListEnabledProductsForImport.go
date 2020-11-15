@@ -30,7 +30,7 @@ func (c *Client) ListEnabledProductsForImport(ctx context.Context, params *ListE
 type ListEnabledProductsForImportInput struct {
 
 	// The maximum number of items to return in the response.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token that is required for pagination. On your first call to the
 	// ListEnabledProductsForImport operation, set the value of this parameter to NULL.
@@ -46,7 +46,7 @@ type ListEnabledProductsForImportOutput struct {
 
 	// The list of ARNs for the resources that represent your subscriptions to
 	// products.
-	ProductSubscriptions []*string
+	ProductSubscriptions []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

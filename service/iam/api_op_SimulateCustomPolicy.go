@@ -46,7 +46,7 @@ type SimulateCustomPolicyInput struct {
 	// wildcards (*) in an action name.
 	//
 	// This member is required.
-	ActionNames []*string
+	ActionNames []string
 
 	// A list of policy documents to include in the simulation. Each document is
 	// specified as a string containing the complete, valid JSON text of an IAM policy.
@@ -73,7 +73,7 @@ type SimulateCustomPolicyInput struct {
 	// (\u000A), and carriage return (\u000D)
 	//
 	// This member is required.
-	PolicyInputList []*string
+	PolicyInputList []string
 
 	// The ARN of the IAM user that you want to use as the simulated caller of the API
 	// operations. CallerArn is required if you include a ResourcePolicy so that the
@@ -85,7 +85,7 @@ type SimulateCustomPolicyInput struct {
 	// A list of context keys and corresponding values for the simulation to use.
 	// Whenever a context key is evaluated in one of the simulated IAM permissions
 	// policies, the corresponding value is supplied.
-	ContextEntries []*types.ContextEntry
+	ContextEntries []types.ContextEntry
 
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
@@ -122,7 +122,7 @@ type SimulateCustomPolicyInput struct {
 	//
 	// * The special characters tab
 	// (\u0009), line feed (\u000A), and carriage return (\u000D)
-	PermissionsBoundaryPolicyInputList []*string
+	PermissionsBoundaryPolicyInputList []string
 
 	// A list of ARNs of AWS resources to include in the simulation. If this parameter
 	// is not provided, then the value defaults to * (all resources). Each API in the
@@ -137,7 +137,7 @@ type SimulateCustomPolicyInput struct {
 	// (ARNs) and AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
-	ResourceArns []*string
+	ResourceArns []string
 
 	// Specifies the type of simulation to run. Different API operations that support
 	// resource-based policies require different combinations of resources. By
@@ -211,7 +211,7 @@ type SimulateCustomPolicyInput struct {
 type SimulateCustomPolicyOutput struct {
 
 	// The results of the simulation.
-	EvaluationResults []*types.EvaluationResult
+	EvaluationResults []types.EvaluationResult
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
@@ -219,7 +219,7 @@ type SimulateCustomPolicyOutput struct {
 	// the MaxItems number of results even when there are more results available. We
 	// recommend that you check IsTruncated after every call to ensure that you receive
 	// all your results.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.

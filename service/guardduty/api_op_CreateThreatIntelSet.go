@@ -36,7 +36,7 @@ type CreateThreatIntelSetInput struct {
 	// ThreatIntelSet.
 	//
 	// This member is required.
-	Activate *bool
+	Activate bool
 
 	// The unique ID of the detector of the GuardDuty account that you want to create a
 	// threatIntelSet for.
@@ -65,7 +65,7 @@ type CreateThreatIntelSetInput struct {
 	ClientToken *string
 
 	// The tags to be added to a new threat list resource.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateThreatIntelSetOutput struct {

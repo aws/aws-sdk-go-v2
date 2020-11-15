@@ -37,7 +37,7 @@ type BatchCheckLayerAvailabilityInput struct {
 	// The digests of the image layers to check.
 	//
 	// This member is required.
-	LayerDigests []*string
+	LayerDigests []string
 
 	// The name of the repository that is associated with the image layers to check.
 	//
@@ -52,11 +52,11 @@ type BatchCheckLayerAvailabilityInput struct {
 type BatchCheckLayerAvailabilityOutput struct {
 
 	// Any failures associated with the call.
-	Failures []*types.LayerFailure
+	Failures []types.LayerFailure
 
 	// A list of image layer objects corresponding to the image layer references in the
 	// request.
-	Layers []*types.Layer
+	Layers []types.Layer
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

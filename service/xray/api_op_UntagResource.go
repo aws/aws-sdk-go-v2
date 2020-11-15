@@ -38,7 +38,7 @@ type UntagResourceInput struct {
 	// sampling rule.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagResourceOutput struct {

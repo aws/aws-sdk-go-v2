@@ -49,7 +49,7 @@ type DescribeConnectorEntityOutput struct {
 	// entity, the fields would be account name, account ID, and so on.
 	//
 	// This member is required.
-	ConnectorEntityFields []*types.ConnectorEntityField
+	ConnectorEntityFields []types.ConnectorEntityField
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

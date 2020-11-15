@@ -34,7 +34,7 @@ type DescribeVpcEndpointServiceConfigurationsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
@@ -55,19 +55,19 @@ type DescribeVpcEndpointServiceConfigurationsInput struct {
 	// * tag-key - The key of a tag assigned to the
 	// resource. Use this filter to find all resources assigned a tag with a specific
 	// key, regardless of the tag value.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
 	// with the returned NextToken value. This value can be between 5 and 1,000; if
 	// MaxResults is given a value larger than 1,000, only 1,000 results are returned.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token to retrieve the next page of results.
 	NextToken *string
 
 	// The IDs of one or more services.
-	ServiceIds []*string
+	ServiceIds []string
 }
 
 type DescribeVpcEndpointServiceConfigurationsOutput struct {
@@ -77,7 +77,7 @@ type DescribeVpcEndpointServiceConfigurationsOutput struct {
 	NextToken *string
 
 	// Information about one or more services.
-	ServiceConfigurations []*types.ServiceConfiguration
+	ServiceConfigurations []types.ServiceConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

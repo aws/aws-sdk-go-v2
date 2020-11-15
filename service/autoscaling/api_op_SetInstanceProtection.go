@@ -40,7 +40,7 @@ type SetInstanceProtectionInput struct {
 	// One or more instance IDs.
 	//
 	// This member is required.
-	InstanceIds []*string
+	InstanceIds []string
 
 	// Indicates whether the instance is protected from termination by Amazon EC2 Auto
 	// Scaling when scaling in.

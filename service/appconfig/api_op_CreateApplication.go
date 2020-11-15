@@ -43,7 +43,7 @@ type CreateApplicationInput struct {
 	// Metadata to assign to the application. Tags help organize and categorize your
 	// AppConfig resources. Each tag consists of a key and an optional value, both of
 	// which you define.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateApplicationOutput struct {

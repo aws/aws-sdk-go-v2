@@ -36,7 +36,7 @@ type RevokeIpRulesInput struct {
 	// The rules to remove from the group.
 	//
 	// This member is required.
-	UserRules []*string
+	UserRules []string
 }
 
 type RevokeIpRulesOutput struct {

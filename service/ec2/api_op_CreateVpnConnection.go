@@ -56,13 +56,13 @@ type CreateVpnConnectionInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The options for the VPN connection.
 	Options *types.VpnConnectionOptionsSpecification
 
 	// The tags to apply to the VPN connection.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 
 	// The ID of the transit gateway. If you specify a transit gateway, you cannot
 	// specify a virtual private gateway.

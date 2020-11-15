@@ -35,13 +35,13 @@ type DeleteLaunchTemplateVersionsInput struct {
 	// The version numbers of one or more launch template versions to delete.
 	//
 	// This member is required.
-	Versions []*string
+	Versions []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The ID of the launch template. You must specify either the launch template ID or
 	// launch template name in the request.
@@ -55,10 +55,10 @@ type DeleteLaunchTemplateVersionsInput struct {
 type DeleteLaunchTemplateVersionsOutput struct {
 
 	// Information about the launch template versions that were successfully deleted.
-	SuccessfullyDeletedLaunchTemplateVersions []*types.DeleteLaunchTemplateVersionsResponseSuccessItem
+	SuccessfullyDeletedLaunchTemplateVersions []types.DeleteLaunchTemplateVersionsResponseSuccessItem
 
 	// Information about the launch template versions that could not be deleted.
-	UnsuccessfullyDeletedLaunchTemplateVersions []*types.DeleteLaunchTemplateVersionsResponseErrorItem
+	UnsuccessfullyDeletedLaunchTemplateVersions []types.DeleteLaunchTemplateVersionsResponseErrorItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

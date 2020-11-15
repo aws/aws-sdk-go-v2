@@ -67,7 +67,7 @@ type DescribeMatchmakingRuleSetsInput struct {
 	// A list of one or more matchmaking rule set names to retrieve details for. (Note:
 	// The rule set name is different from the optional "name" field in the rule set
 	// body.) You can use either the rule set name or ARN value.
-	Names []*string
+	Names []string
 
 	// A token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this operation. To start at the
@@ -81,7 +81,7 @@ type DescribeMatchmakingRuleSetsOutput struct {
 	// A collection of requested matchmaking rule set objects.
 	//
 	// This member is required.
-	RuleSets []*types.MatchmakingRuleSet
+	RuleSets []types.MatchmakingRuleSet
 
 	// A token that indicates where to resume retrieving results on the next call to
 	// this operation. If no token is returned, these results represent the end of the

@@ -37,10 +37,10 @@ type SearchAnalysesInput struct {
 	// The structure for the search filters that you want to apply to your search.
 	//
 	// This member is required.
-	Filters []*types.AnalysisSearchFilter
+	Filters []types.AnalysisSearchFilter
 
 	// The maximum number of results to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
@@ -49,7 +49,7 @@ type SearchAnalysesInput struct {
 type SearchAnalysesOutput struct {
 
 	// Metadata describing the analyses that you searched for.
-	AnalysisSummaryList []*types.AnalysisSummary
+	AnalysisSummaryList []types.AnalysisSummary
 
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
@@ -58,7 +58,7 @@ type SearchAnalysesOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

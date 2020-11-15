@@ -68,7 +68,7 @@ type DescribeClusterSecurityGroupsInput struct {
 	// environment. If you specify both of these tag keys in the request, Amazon
 	// Redshift returns a response with the security groups that have either or both of
 	// these tag keys associated with them.
-	TagKeys []*string
+	TagKeys []string
 
 	// A tag value or values for which you want to return all matching cluster security
 	// groups that are associated with the specified tag value or values. For example,
@@ -76,14 +76,14 @@ type DescribeClusterSecurityGroupsInput struct {
 	// and test. If you specify both of these tag values in the request, Amazon
 	// Redshift returns a response with the security groups that have either or both of
 	// these tag values associated with them.
-	TagValues []*string
+	TagValues []string
 }
 
 //
 type DescribeClusterSecurityGroupsOutput struct {
 
 	// A list of ClusterSecurityGroup instances.
-	ClusterSecurityGroups []*types.ClusterSecurityGroup
+	ClusterSecurityGroups []types.ClusterSecurityGroup
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve

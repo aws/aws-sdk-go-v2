@@ -74,14 +74,14 @@ type UpdateRecordsInput struct {
 	DeviceId *string
 
 	// A list of patch operations.
-	RecordPatches []*types.RecordPatch
+	RecordPatches []types.RecordPatch
 }
 
 // Returned for a successful UpdateRecordsRequest.
 type UpdateRecordsOutput struct {
 
 	// A list of records that have been updated.
-	Records []*types.Record
+	Records []types.Record
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

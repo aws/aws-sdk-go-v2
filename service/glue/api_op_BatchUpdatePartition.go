@@ -37,7 +37,7 @@ type BatchUpdatePartitionInput struct {
 	// A list of up to 100 BatchUpdatePartitionRequestEntry objects to update.
 	//
 	// This member is required.
-	Entries []*types.BatchUpdatePartitionRequestEntry
+	Entries []types.BatchUpdatePartitionRequestEntry
 
 	// The name of the metadata table in which the partition is to be updated.
 	//
@@ -53,7 +53,7 @@ type BatchUpdatePartitionOutput struct {
 
 	// The errors encountered when trying to update the requested partitions. A list of
 	// BatchUpdatePartitionFailureEntry objects.
-	Errors []*types.BatchUpdatePartitionFailureEntry
+	Errors []types.BatchUpdatePartitionFailureEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

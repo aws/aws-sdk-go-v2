@@ -72,7 +72,7 @@ type ListConfigurationHistoryInput struct {
 type ListConfigurationHistoryOutput struct {
 
 	// The list of configuration events and their corresponding details.
-	EventList []*types.ConfigurationEvent
+	EventList []types.ConfigurationEvent
 
 	// The NextToken value to include in a future ListConfigurationHistory request.
 	// When the results of a ListConfigurationHistory request exceed MaxResults, this

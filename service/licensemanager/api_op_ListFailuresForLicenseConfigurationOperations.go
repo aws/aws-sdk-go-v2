@@ -44,7 +44,7 @@ type ListFailuresForLicenseConfigurationOperationsInput struct {
 type ListFailuresForLicenseConfigurationOperationsOutput struct {
 
 	// License configuration operations that failed.
-	LicenseOperationFailureList []*types.LicenseOperationFailure
+	LicenseOperationFailureList []types.LicenseOperationFailure
 
 	// Token for the next set of results.
 	NextToken *string

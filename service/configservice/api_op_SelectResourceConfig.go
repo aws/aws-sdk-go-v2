@@ -40,7 +40,7 @@ type SelectResourceConfigInput struct {
 	Expression *string
 
 	// The maximum number of query results returned on each page.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned in a previous request that you use to request the
 	// next page of results in a paginated response.
@@ -57,7 +57,7 @@ type SelectResourceConfigOutput struct {
 	QueryInfo *types.QueryInfo
 
 	// Returns the results for the SQL query.
-	Results []*string
+	Results []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

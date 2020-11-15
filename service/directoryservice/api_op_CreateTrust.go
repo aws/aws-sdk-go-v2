@@ -67,7 +67,7 @@ type CreateTrustInput struct {
 	TrustPassword *string
 
 	// The IP addresses of the remote DNS server associated with RemoteDomainName.
-	ConditionalForwarderIpAddrs []*string
+	ConditionalForwarderIpAddrs []string
 
 	// Optional parameter to enable selective authentication for the trust.
 	SelectiveAuth types.SelectiveAuth

@@ -47,7 +47,7 @@ type GetEntityTypesInput struct {
 type GetEntityTypesOutput struct {
 
 	// An array of entity types.
-	EntityTypes []*types.EntityType
+	EntityTypes []types.EntityType
 
 	// The next page token.
 	NextToken *string

@@ -480,14 +480,8 @@ func validateGitHubCodeDestination(v *types.GitHubCodeDestination) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.PrivateRepository == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PrivateRepository"))
-	}
 	if v.Owner == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Owner"))
-	}
-	if v.IssuesEnabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IssuesEnabled"))
 	}
 	if v.Type == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
@@ -502,13 +496,13 @@ func validateGitHubCodeDestination(v *types.GitHubCodeDestination) error {
 	}
 }
 
-func validateSourceCode(v []*types.Code) error {
+func validateSourceCode(v []types.Code) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SourceCode"}
 	for i := range v {
-		if err := validateCode(v[i]); err != nil {
+		if err := validateCode(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

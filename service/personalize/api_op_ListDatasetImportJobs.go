@@ -49,7 +49,7 @@ type ListDatasetImportJobsInput struct {
 type ListDatasetImportJobsOutput struct {
 
 	// The list of dataset import jobs.
-	DatasetImportJobs []*types.DatasetImportJobSummary
+	DatasetImportJobs []types.DatasetImportJobSummary
 
 	// A token for getting the next set of dataset import jobs (if they exist).
 	NextToken *string

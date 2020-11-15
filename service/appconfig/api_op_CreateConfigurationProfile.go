@@ -77,10 +77,10 @@ type CreateConfigurationProfileInput struct {
 	// Metadata to assign to the configuration profile. Tags help organize and
 	// categorize your AppConfig resources. Each tag consists of a key and an optional
 	// value, both of which you define.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// A list of methods for validating the configuration.
-	Validators []*types.Validator
+	Validators []types.Validator
 }
 
 type CreateConfigurationProfileOutput struct {
@@ -105,7 +105,7 @@ type CreateConfigurationProfileOutput struct {
 	RetrievalRoleArn *string
 
 	// A list of methods for validating the configuration.
-	Validators []*types.Validator
+	Validators []types.Validator
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

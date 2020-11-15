@@ -44,7 +44,7 @@ type AttachInstancesInput struct {
 	AutoScalingGroupName *string
 
 	// The IDs of the instances. You can specify up to 20 instances.
-	InstanceIds []*string
+	InstanceIds []string
 }
 
 type AttachInstancesOutput struct {

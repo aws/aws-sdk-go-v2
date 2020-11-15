@@ -38,7 +38,7 @@ type AddFlowVpcInterfacesInput struct {
 	// A list of VPC interfaces that you want to add.
 	//
 	// This member is required.
-	VpcInterfaces []*types.VpcInterfaceRequest
+	VpcInterfaces []types.VpcInterfaceRequest
 }
 
 type AddFlowVpcInterfacesOutput struct {
@@ -47,7 +47,7 @@ type AddFlowVpcInterfacesOutput struct {
 	FlowArn *string
 
 	// The details of the newly added VPC interfaces.
-	VpcInterfaces []*types.VpcInterface
+	VpcInterfaces []types.VpcInterface
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

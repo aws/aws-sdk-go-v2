@@ -63,7 +63,7 @@ type GetBucketTaggingOutput struct {
 	// Contains the tag set.
 	//
 	// This member is required.
-	TagSet []*types.Tag
+	TagSet []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

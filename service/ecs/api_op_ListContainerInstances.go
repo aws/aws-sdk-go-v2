@@ -75,7 +75,7 @@ type ListContainerInstancesOutput struct {
 
 	// The list of container instances with full ARN entries for each container
 	// instance associated with the specified cluster.
-	ContainerInstanceArns []*string
+	ContainerInstanceArns []string
 
 	// The nextToken value to include in a future ListContainerInstances request. When
 	// the results of a ListContainerInstances request exceed maxResults, this value

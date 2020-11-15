@@ -63,7 +63,7 @@ type CreateJobInput struct {
 	// queue that you submit your job to. Specify an alternate queue and the maximum
 	// time that your job will wait in the initial queue before hopping. For more
 	// information about this feature, see the AWS Elemental MediaConvert User Guide.
-	HopDestinations []*types.HopDestination
+	HopDestinations []types.HopDestination
 
 	// Optional. When you create a job, you can either specify a job template or
 	// specify the transcoding settings individually.
@@ -74,7 +74,7 @@ type CreateJobInput struct {
 	// one job has the same priority, the service begins processing the job that you
 	// submitted first. If you don't specify a priority, the service uses the default
 	// value 0.
-	Priority *int32
+	Priority int32
 
 	// Optional. When you create a job, you can specify a queue to send it to. If you
 	// don't specify, the job will go to the default queue. For more about queues, see
@@ -97,11 +97,11 @@ type CreateJobInput struct {
 
 	// Optional. The tags that you want to add to the resource. You can tag resources
 	// with a key-value pair or with only a key.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Optional. User-defined metadata that you want to associate with an MediaConvert
 	// job. You specify metadata in key/value pairs.
-	UserMetadata map[string]*string
+	UserMetadata map[string]string
 }
 
 type CreateJobOutput struct {

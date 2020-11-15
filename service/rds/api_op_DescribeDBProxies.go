@@ -33,7 +33,7 @@ type DescribeDBProxiesInput struct {
 	DBProxyName *string
 
 	// This parameter is not currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
@@ -50,7 +50,7 @@ type DescribeDBProxiesInput struct {
 type DescribeDBProxiesOutput struct {
 
 	// A return value representing an arbitrary number of DBProxy data structures.
-	DBProxies []*types.DBProxy
+	DBProxies []types.DBProxy
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the

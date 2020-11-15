@@ -67,7 +67,7 @@ type ListPolicyVersionsOutput struct {
 	// the MaxItems number of results even when there are more results available. We
 	// recommend that you check IsTruncated after every call to ensure that you receive
 	// all your results.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
@@ -77,7 +77,7 @@ type ListPolicyVersionsOutput struct {
 	// see Versioning for Managed Policies
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 	// in the IAM User Guide.
-	Versions []*types.PolicyVersion
+	Versions []types.PolicyVersion
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

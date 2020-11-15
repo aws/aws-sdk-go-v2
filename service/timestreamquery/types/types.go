@@ -22,7 +22,7 @@ type ColumnInfo struct {
 type Datum struct {
 
 	// Indicates if the data point is an array.
-	ArrayValue []*Datum
+	ArrayValue []Datum
 
 	// Indicates if the data point is null.
 	NullValue *bool
@@ -35,7 +35,7 @@ type Datum struct {
 	ScalarValue *string
 
 	// Indicates if the data point is of timeseries data type.
-	TimeSeriesValue []*TimeSeriesDataPoint
+	TimeSeriesValue []TimeSeriesDataPoint
 }
 
 // Represents an available endpoint against which to make API calls agaisnt, as
@@ -50,7 +50,7 @@ type Endpoint struct {
 	// The TTL for the endpoint, in minutes.
 	//
 	// This member is required.
-	CachePeriodInMinutes *int64
+	CachePeriodInMinutes int64
 }
 
 // Represents a single row in the query results.
@@ -59,7 +59,7 @@ type Row struct {
 	// List of data points in a single row of the result set.
 	//
 	// This member is required.
-	Data []*Datum
+	Data []Datum
 }
 
 // The timeseries datatype represents the values of a measure over time. A time
@@ -89,7 +89,7 @@ type Type struct {
 	ArrayColumnInfo *ColumnInfo
 
 	// Indicates if the column is a row.
-	RowColumnInfo []*ColumnInfo
+	RowColumnInfo []ColumnInfo
 
 	// Indicates if the column is of type string, integer, boolean, double, timestamp,
 	// date, time.

@@ -39,7 +39,7 @@ type ListSkillsStoreCategoriesInput struct {
 type ListSkillsStoreCategoriesOutput struct {
 
 	// The list of categories.
-	CategoryList []*types.Category
+	CategoryList []types.Category
 
 	// The tokens used for pagination.
 	NextToken *string

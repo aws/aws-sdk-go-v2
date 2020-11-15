@@ -33,7 +33,7 @@ type DescribeNatGatewaysInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
@@ -57,14 +57,14 @@ type DescribeNatGatewaysInput struct {
 	//
 	// *
 	// vpc-id - The ID of the VPC in which the NAT gateway resides.
-	Filter []*types.Filter
+	Filter []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// One or more NAT gateway IDs.
-	NatGatewayIds []*string
+	NatGatewayIds []string
 
 	// The token for the next page of results.
 	NextToken *string
@@ -73,7 +73,7 @@ type DescribeNatGatewaysInput struct {
 type DescribeNatGatewaysOutput struct {
 
 	// Information about the NAT gateways.
-	NatGateways []*types.NatGateway
+	NatGateways []types.NatGateway
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

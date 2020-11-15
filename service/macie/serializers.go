@@ -434,51 +434,39 @@ func awsAwsjson11_serializeDocumentS3ResourceClassificationUpdate(v *types.S3Res
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentS3Resources(v []*types.S3Resource, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentS3Resources(v []types.S3Resource, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentS3Resource(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentS3Resource(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentS3ResourcesClassification(v []*types.S3ResourceClassification, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentS3ResourcesClassification(v []types.S3ResourceClassification, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentS3ResourceClassification(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentS3ResourceClassification(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentS3ResourcesClassificationUpdate(v []*types.S3ResourceClassificationUpdate, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentS3ResourcesClassificationUpdate(v []types.S3ResourceClassificationUpdate, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentS3ResourceClassificationUpdate(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentS3ResourceClassificationUpdate(&v[i], av); err != nil {
 			return err
 		}
 	}

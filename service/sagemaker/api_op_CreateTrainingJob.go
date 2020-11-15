@@ -141,7 +141,7 @@ type CreateTrainingJobInput struct {
 	DebugHookConfig *types.DebugHookConfig
 
 	// Configuration information for debugging rules.
-	DebugRuleConfigurations []*types.DebugRuleConfiguration
+	DebugRuleConfigurations []types.DebugRuleConfiguration
 
 	// To encrypt all communications between ML compute instances in distributed
 	// training, choose True. Encryption provides greater security for distributed
@@ -150,7 +150,7 @@ type CreateTrainingJobInput struct {
 	// learning algorithm in distributed training. For more information, see Protect
 	// Communications Between ML Compute Instances in a Distributed Training Job
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/train-encrypt.html).
-	EnableInterContainerTrafficEncryption *bool
+	EnableInterContainerTrafficEncryption bool
 
 	// To train models using managed spot training, choose True. Managed spot training
 	// provides a fully managed and scalable infrastructure for training machine
@@ -160,7 +160,7 @@ type CreateTrainingJobInput struct {
 	// as a starting point to train models incrementally. Amazon SageMaker provides
 	// metrics and logs in CloudWatch. They can be used to see when managed spot
 	// training jobs are running, interrupted, resumed, or completed.
-	EnableManagedSpotTraining *bool
+	EnableManagedSpotTraining bool
 
 	// Isolates the training container. No inbound or outbound network calls can be
 	// made, except for calls between peers within a training cluster for distributed
@@ -168,7 +168,7 @@ type CreateTrainingJobInput struct {
 	// to use a VPC, Amazon SageMaker downloads and uploads customer data and model
 	// artifacts through the specified VPC, but the training container does not have
 	// network access.
-	EnableNetworkIsolation *bool
+	EnableNetworkIsolation bool
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
@@ -188,7 +188,7 @@ type CreateTrainingJobInput struct {
 	// specify a maximum of 100 hyperparameters. Each hyperparameter is a key-value
 	// pair. Each key and value is limited to 256 characters, as specified by the
 	// Length Constraint.
-	HyperParameters map[string]*string
+	HyperParameters map[string]string
 
 	// An array of Channel objects. Each channel is a named input source.
 	// InputDataConfig describes the input data and its location. Algorithms can accept
@@ -202,13 +202,13 @@ type CreateTrainingJobInput struct {
 	// container, or makes it available as input streams. For example, if you specify
 	// an EFS location, input data files will be made available as input streams. They
 	// do not need to be downloaded.
-	InputDataConfig []*types.Channel
+	InputDataConfig []types.Channel
 
 	// An array of key-value pairs. For more information, see Using Cost Allocation
 	// Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 	// in the AWS Billing and Cost Management User Guide.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Configuration of storage locations for TensorBoard output.
 	TensorBoardOutputConfig *types.TensorBoardOutputConfig

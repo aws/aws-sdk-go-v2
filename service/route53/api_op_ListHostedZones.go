@@ -60,7 +60,7 @@ type ListHostedZonesOutput struct {
 	// A complex type that contains general information about the hosted zone.
 	//
 	// This member is required.
-	HostedZones []*types.HostedZone
+	HostedZones []types.HostedZone
 
 	// A flag indicating whether there are more hosted zones to be listed. If the
 	// response was truncated, you can get more hosted zones by submitting another
@@ -68,7 +68,7 @@ type ListHostedZonesOutput struct {
 	// parameter.
 	//
 	// This member is required.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// For the second and subsequent calls to ListHostedZones, Marker is the value that
 	// you specified for the marker parameter in the request that produced the current

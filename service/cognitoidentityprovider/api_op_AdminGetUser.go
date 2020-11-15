@@ -54,19 +54,19 @@ type AdminGetUserOutput struct {
 	Username *string
 
 	// Indicates that the status is enabled.
-	Enabled *bool
+	Enabled bool
 
 	// This response parameter is no longer supported. It provides information only
 	// about SMS MFA configurations. It doesn't provide information about TOTP software
 	// token MFA configurations. To look up information about either type of MFA
 	// configuration, use UserMFASettingList instead.
-	MFAOptions []*types.MFAOptionType
+	MFAOptions []types.MFAOptionType
 
 	// The user's preferred MFA setting.
 	PreferredMfaSetting *string
 
 	// An array of name-value pairs representing user attributes.
-	UserAttributes []*types.AttributeType
+	UserAttributes []types.AttributeType
 
 	// The date the user was created.
 	UserCreateDate *time.Time
@@ -76,7 +76,7 @@ type AdminGetUserOutput struct {
 
 	// The MFA options that are enabled for the user. The possible values in this list
 	// are SMS_MFA and SOFTWARE_TOKEN_MFA.
-	UserMFASettingList []*string
+	UserMFASettingList []string
 
 	// The user status. Can be one of the following:
 	//

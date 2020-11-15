@@ -1617,9 +1617,9 @@ func awsAwsquery_serializeDocumentAccessLog(v *types.AccessLog, value query.Valu
 		objectKey.Integer(*v.EmitInterval)
 	}
 
-	if v.Enabled != nil {
+	if v.Enabled {
 		objectKey := object.Key("Enabled")
-		objectKey.Boolean(*v.Enabled)
+		objectKey.Boolean(v.Enabled)
 	}
 
 	if v.S3BucketName != nil {
@@ -1652,36 +1652,30 @@ func awsAwsquery_serializeDocumentAdditionalAttribute(v *types.AdditionalAttribu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentAdditionalAttributes(v []*types.AdditionalAttribute, value query.Value) error {
+func awsAwsquery_serializeDocumentAdditionalAttributes(v []types.AdditionalAttribute, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentAdditionalAttribute(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentAdditionalAttribute(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentAvailabilityZones(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentAvailabilityZones(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1690,9 +1684,9 @@ func awsAwsquery_serializeDocumentConnectionDraining(v *types.ConnectionDraining
 	object := value.Object()
 	_ = object
 
-	if v.Enabled != nil {
+	if v.Enabled {
 		objectKey := object.Key("Enabled")
-		objectKey.Boolean(*v.Enabled)
+		objectKey.Boolean(v.Enabled)
 	}
 
 	if v.Timeout != nil {
@@ -1719,9 +1713,9 @@ func awsAwsquery_serializeDocumentCrossZoneLoadBalancing(v *types.CrossZoneLoadB
 	object := value.Object()
 	_ = object
 
-	if v.Enabled != nil {
+	if v.Enabled {
 		objectKey := object.Key("Enabled")
-		objectKey.Boolean(*v.Enabled)
+		objectKey.Boolean(v.Enabled)
 	}
 
 	return nil
@@ -1731,14 +1725,14 @@ func awsAwsquery_serializeDocumentHealthCheck(v *types.HealthCheck, value query.
 	object := value.Object()
 	_ = object
 
-	if v.HealthyThreshold != nil {
+	if v.HealthyThreshold != 0 {
 		objectKey := object.Key("HealthyThreshold")
-		objectKey.Integer(*v.HealthyThreshold)
+		objectKey.Integer(v.HealthyThreshold)
 	}
 
-	if v.Interval != nil {
+	if v.Interval != 0 {
 		objectKey := object.Key("Interval")
-		objectKey.Integer(*v.Interval)
+		objectKey.Integer(v.Interval)
 	}
 
 	if v.Target != nil {
@@ -1746,14 +1740,14 @@ func awsAwsquery_serializeDocumentHealthCheck(v *types.HealthCheck, value query.
 		objectKey.String(*v.Target)
 	}
 
-	if v.Timeout != nil {
+	if v.Timeout != 0 {
 		objectKey := object.Key("Timeout")
-		objectKey.Integer(*v.Timeout)
+		objectKey.Integer(v.Timeout)
 	}
 
-	if v.UnhealthyThreshold != nil {
+	if v.UnhealthyThreshold != 0 {
 		objectKey := object.Key("UnhealthyThreshold")
-		objectKey.Integer(*v.UnhealthyThreshold)
+		objectKey.Integer(v.UnhealthyThreshold)
 	}
 
 	return nil
@@ -1771,18 +1765,15 @@ func awsAwsquery_serializeDocumentInstance(v *types.Instance, value query.Value)
 	return nil
 }
 
-func awsAwsquery_serializeDocumentInstances(v []*types.Instance, value query.Value) error {
+func awsAwsquery_serializeDocumentInstances(v []types.Instance, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentInstance(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentInstance(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1793,9 +1784,9 @@ func awsAwsquery_serializeDocumentListener(v *types.Listener, value query.Value)
 	object := value.Object()
 	_ = object
 
-	if v.InstancePort != nil {
+	if v.InstancePort != 0 {
 		objectKey := object.Key("InstancePort")
-		objectKey.Integer(*v.InstancePort)
+		objectKey.Integer(v.InstancePort)
 	}
 
 	if v.InstanceProtocol != nil {
@@ -1803,9 +1794,9 @@ func awsAwsquery_serializeDocumentListener(v *types.Listener, value query.Value)
 		objectKey.String(*v.InstanceProtocol)
 	}
 
-	if v.LoadBalancerPort != nil {
+	if v.LoadBalancerPort != 0 {
 		objectKey := object.Key("LoadBalancerPort")
-		objectKey.Integer(*v.LoadBalancerPort)
+		objectKey.Integer(v.LoadBalancerPort)
 	}
 
 	if v.Protocol != nil {
@@ -1821,18 +1812,15 @@ func awsAwsquery_serializeDocumentListener(v *types.Listener, value query.Value)
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListeners(v []*types.Listener, value query.Value) error {
+func awsAwsquery_serializeDocumentListeners(v []types.Listener, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentListener(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentListener(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1881,34 +1869,28 @@ func awsAwsquery_serializeDocumentLoadBalancerAttributes(v *types.LoadBalancerAt
 	return nil
 }
 
-func awsAwsquery_serializeDocumentLoadBalancerNames(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentLoadBalancerNames(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentLoadBalancerNamesMax20(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentLoadBalancerNamesMax20(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1930,100 +1912,82 @@ func awsAwsquery_serializeDocumentPolicyAttribute(v *types.PolicyAttribute, valu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPolicyAttributes(v []*types.PolicyAttribute, value query.Value) error {
+func awsAwsquery_serializeDocumentPolicyAttributes(v []types.PolicyAttribute, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentPolicyAttribute(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentPolicyAttribute(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPolicyNames(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentPolicyNames(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPolicyTypeNames(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentPolicyTypeNames(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPorts(v []*int32, value query.Value) error {
+func awsAwsquery_serializeDocumentPorts(v []int32, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.Integer(*v[i])
+		av.Integer(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSecurityGroups(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentSecurityGroups(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSubnets(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentSubnets(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2045,18 +2009,15 @@ func awsAwsquery_serializeDocumentTag(v *types.Tag, value query.Value) error {
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTagKeyList(v []*types.TagKeyOnly, value query.Value) error {
+func awsAwsquery_serializeDocumentTagKeyList(v []types.TagKeyOnly, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentTagKeyOnly(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentTagKeyOnly(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2075,18 +2036,15 @@ func awsAwsquery_serializeDocumentTagKeyOnly(v *types.TagKeyOnly, value query.Va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTagList(v []*types.Tag, value query.Value) error {
+func awsAwsquery_serializeDocumentTagList(v []types.Tag, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2626,9 +2584,9 @@ func awsAwsquery_serializeOpDocumentSetLoadBalancerListenerSSLCertificateInput(v
 		objectKey.String(*v.LoadBalancerName)
 	}
 
-	if v.LoadBalancerPort != nil {
+	if v.LoadBalancerPort != 0 {
 		objectKey := object.Key("LoadBalancerPort")
-		objectKey.Integer(*v.LoadBalancerPort)
+		objectKey.Integer(v.LoadBalancerPort)
 	}
 
 	if v.SSLCertificateId != nil {
@@ -2672,9 +2630,9 @@ func awsAwsquery_serializeOpDocumentSetLoadBalancerPoliciesOfListenerInput(v *Se
 		objectKey.String(*v.LoadBalancerName)
 	}
 
-	if v.LoadBalancerPort != nil {
+	if v.LoadBalancerPort != 0 {
 		objectKey := object.Key("LoadBalancerPort")
-		objectKey.Integer(*v.LoadBalancerPort)
+		objectKey.Integer(v.LoadBalancerPort)
 	}
 
 	if v.PolicyNames != nil {

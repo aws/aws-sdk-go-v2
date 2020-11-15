@@ -286,10 +286,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 		// Serializes list shapes
 		"serializes_list_shapes": {
 			Params: &KitchenSinkOperationInput{
-				ListOfStrings: []*string{
-					ptr.String("abc"),
-					ptr.String("mno"),
-					ptr.String("xyz"),
+				ListOfStrings: []string{
+					"abc",
+					"mno",
+					"xyz",
 				},
 			},
 			ExpectMethod:  "POST",
@@ -309,7 +309,7 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 		// Serializes empty list shapes
 		"serializes_empty_list_shapes": {
 			Params: &KitchenSinkOperationInput{
-				ListOfStrings: []*string{},
+				ListOfStrings: []string{},
 			},
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
@@ -328,15 +328,15 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 		// Serializes list of map shapes
 		"serializes_list_of_map_shapes": {
 			Params: &KitchenSinkOperationInput{
-				ListOfMapsOfStrings: []map[string]*string{
+				ListOfMapsOfStrings: []map[string]string{
 					{
-						"foo": ptr.String("bar"),
+						"foo": "bar",
 					},
 					{
-						"abc": ptr.String("xyz"),
+						"abc": "xyz",
 					},
 					{
-						"red": ptr.String("blue"),
+						"red": "blue",
 					},
 				},
 			},
@@ -357,7 +357,7 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 		// Serializes list of structure shapes
 		"serializes_list_of_structure_shapes": {
 			Params: &KitchenSinkOperationInput{
-				ListOfStructs: []*types.SimpleStruct{
+				ListOfStructs: []types.SimpleStruct{
 					{
 						Value: ptr.String("abc"),
 					},
@@ -386,11 +386,11 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 		// Serializes list of recursive structure shapes
 		"serializes_list_of_recursive_structure_shapes": {
 			Params: &KitchenSinkOperationInput{
-				RecursiveList: []*types.KitchenSink{
+				RecursiveList: []types.KitchenSink{
 					{
-						RecursiveList: []*types.KitchenSink{
+						RecursiveList: []types.KitchenSink{
 							{
-								RecursiveList: []*types.KitchenSink{
+								RecursiveList: []types.KitchenSink{
 									{
 										Integer: ptr.Int32(123),
 									},
@@ -417,9 +417,9 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 		// Serializes map shapes
 		"serializes_map_shapes": {
 			Params: &KitchenSinkOperationInput{
-				MapOfStrings: map[string]*string{
-					"abc": ptr.String("xyz"),
-					"mno": ptr.String("hjk"),
+				MapOfStrings: map[string]string{
+					"abc": "xyz",
+					"mno": "hjk",
 				},
 			},
 			ExpectMethod:  "POST",
@@ -439,7 +439,7 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 		// Serializes empty map shapes
 		"serializes_empty_map_shapes": {
 			Params: &KitchenSinkOperationInput{
-				MapOfStrings: map[string]*string{},
+				MapOfStrings: map[string]string{},
 			},
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
@@ -458,14 +458,14 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 		// Serializes map of list shapes
 		"serializes_map_of_list_shapes": {
 			Params: &KitchenSinkOperationInput{
-				MapOfListsOfStrings: map[string][]*string{
+				MapOfListsOfStrings: map[string][]string{
 					"abc": {
-						ptr.String("abc"),
-						ptr.String("xyz"),
+						"abc",
+						"xyz",
 					},
 					"mno": {
-						ptr.String("xyz"),
-						ptr.String("abc"),
+						"xyz",
+						"abc",
 					},
 				},
 			},
@@ -486,7 +486,7 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 		// Serializes map of structure shapes
 		"serializes_map_of_structure_shapes": {
 			Params: &KitchenSinkOperationInput{
-				MapOfStructs: map[string]*types.SimpleStruct{
+				MapOfStructs: map[string]types.SimpleStruct{
 					"key1": {
 						Value: ptr.String("value-1"),
 					},
@@ -512,11 +512,11 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 		// Serializes map of recursive structure shapes
 		"serializes_map_of_recursive_structure_shapes": {
 			Params: &KitchenSinkOperationInput{
-				RecursiveMap: map[string]*types.KitchenSink{
+				RecursiveMap: map[string]types.KitchenSink{
 					"key1": {
-						RecursiveMap: map[string]*types.KitchenSink{
+						RecursiveMap: map[string]types.KitchenSink{
 							"key2": {
-								RecursiveMap: map[string]*types.KitchenSink{
+								RecursiveMap: map[string]types.KitchenSink{
 									"key3": {
 										Boolean: ptr.Bool(false),
 									},
@@ -628,15 +628,15 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 				RecursiveStruct: &types.KitchenSink{
 					String_: ptr.String("nested-value"),
 					Boolean: ptr.Bool(true),
-					RecursiveList: []*types.KitchenSink{
+					RecursiveList: []types.KitchenSink{
 						{
 							String_: ptr.String("string-only"),
 						},
 						{
 							RecursiveStruct: &types.KitchenSink{
-								MapOfStrings: map[string]*string{
-									"color": ptr.String("red"),
-									"size":  ptr.String("large"),
+								MapOfStrings: map[string]string{
+									"color": "red",
+									"size":  "large",
 								},
 							},
 						},
@@ -882,10 +882,10 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"ListOfStrings":["abc","mno","xyz"]}`),
 			ExpectResult: &KitchenSinkOperationOutput{
-				ListOfStrings: []*string{
-					ptr.String("abc"),
-					ptr.String("mno"),
-					ptr.String("xyz"),
+				ListOfStrings: []string{
+					"abc",
+					"mno",
+					"xyz",
 				},
 			},
 		},
@@ -898,12 +898,12 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"ListOfMapsOfStrings":[{"size":"large"},{"color":"red"}]}`),
 			ExpectResult: &KitchenSinkOperationOutput{
-				ListOfMapsOfStrings: []map[string]*string{
+				ListOfMapsOfStrings: []map[string]string{
 					{
-						"size": ptr.String("large"),
+						"size": "large",
 					},
 					{
-						"color": ptr.String("red"),
+						"color": "red",
 					},
 				},
 			},
@@ -917,16 +917,16 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"ListOfLists":[["abc","mno","xyz"],["hjk","qrs","tuv"]]}`),
 			ExpectResult: &KitchenSinkOperationOutput{
-				ListOfLists: [][]*string{
+				ListOfLists: [][]string{
 					{
-						ptr.String("abc"),
-						ptr.String("mno"),
-						ptr.String("xyz"),
+						"abc",
+						"mno",
+						"xyz",
 					},
 					{
-						ptr.String("hjk"),
-						ptr.String("qrs"),
-						ptr.String("tuv"),
+						"hjk",
+						"qrs",
+						"tuv",
 					},
 				},
 			},
@@ -940,7 +940,7 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"ListOfStructs":[{"Value":"value-1"},{"Value":"value-2"}]}`),
 			ExpectResult: &KitchenSinkOperationOutput{
-				ListOfStructs: []*types.SimpleStruct{
+				ListOfStructs: []types.SimpleStruct{
 					{
 						Value: ptr.String("value-1"),
 					},
@@ -959,11 +959,11 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"RecursiveList":[{"RecursiveList":[{"RecursiveList":[{"String":"value"}]}]}]}`),
 			ExpectResult: &KitchenSinkOperationOutput{
-				RecursiveList: []*types.KitchenSink{
+				RecursiveList: []types.KitchenSink{
 					{
-						RecursiveList: []*types.KitchenSink{
+						RecursiveList: []types.KitchenSink{
 							{
-								RecursiveList: []*types.KitchenSink{
+								RecursiveList: []types.KitchenSink{
 									{
 										String_: ptr.String("value"),
 									},
@@ -983,9 +983,9 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"MapOfStrings":{"size":"large","color":"red"}}`),
 			ExpectResult: &KitchenSinkOperationOutput{
-				MapOfStrings: map[string]*string{
-					"size":  ptr.String("large"),
-					"color": ptr.String("red"),
+				MapOfStrings: map[string]string{
+					"size":  "large",
+					"color": "red",
 				},
 			},
 		},
@@ -998,14 +998,14 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"MapOfListsOfStrings":{"sizes":["large","small"],"colors":["red","green"]}}`),
 			ExpectResult: &KitchenSinkOperationOutput{
-				MapOfListsOfStrings: map[string][]*string{
+				MapOfListsOfStrings: map[string][]string{
 					"sizes": {
-						ptr.String("large"),
-						ptr.String("small"),
+						"large",
+						"small",
 					},
 					"colors": {
-						ptr.String("red"),
-						ptr.String("green"),
+						"red",
+						"green",
 					},
 				},
 			},
@@ -1019,14 +1019,14 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"MapOfMaps":{"sizes":{"large":"L","medium":"M"},"colors":{"red":"R","blue":"B"}}}`),
 			ExpectResult: &KitchenSinkOperationOutput{
-				MapOfMaps: map[string]map[string]*string{
+				MapOfMaps: map[string]map[string]string{
 					"sizes": {
-						"large":  ptr.String("L"),
-						"medium": ptr.String("M"),
+						"large":  "L",
+						"medium": "M",
 					},
 					"colors": {
-						"red":  ptr.String("R"),
-						"blue": ptr.String("B"),
+						"red":  "R",
+						"blue": "B",
 					},
 				},
 			},
@@ -1040,7 +1040,7 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"MapOfStructs":{"size":{"Value":"small"},"color":{"Value":"red"}}}`),
 			ExpectResult: &KitchenSinkOperationOutput{
-				MapOfStructs: map[string]*types.SimpleStruct{
+				MapOfStructs: map[string]types.SimpleStruct{
 					"size": {
 						Value: ptr.String("small"),
 					},
@@ -1059,11 +1059,11 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			Body:          []byte(`{"RecursiveMap":{"key-1":{"RecursiveMap":{"key-2":{"RecursiveMap":{"key-3":{"String":"value"}}}}}}}`),
 			ExpectResult: &KitchenSinkOperationOutput{
-				RecursiveMap: map[string]*types.KitchenSink{
+				RecursiveMap: map[string]types.KitchenSink{
 					"key-1": {
-						RecursiveMap: map[string]*types.KitchenSink{
+						RecursiveMap: map[string]types.KitchenSink{
 							"key-2": {
-								RecursiveMap: map[string]*types.KitchenSink{
+								RecursiveMap: map[string]types.KitchenSink{
 									"key-3": {
 										String_: ptr.String("value"),
 									},

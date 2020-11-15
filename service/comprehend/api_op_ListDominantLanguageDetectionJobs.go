@@ -44,7 +44,7 @@ type ListDominantLanguageDetectionJobsInput struct {
 type ListDominantLanguageDetectionJobsOutput struct {
 
 	// A list containing the properties of each job that is returned.
-	DominantLanguageDetectionJobPropertiesList []*types.DominantLanguageDetectionJobProperties
+	DominantLanguageDetectionJobPropertiesList []types.DominantLanguageDetectionJobProperties
 
 	// Identifies the next page of results to return.
 	NextToken *string

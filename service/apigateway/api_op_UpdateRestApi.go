@@ -38,7 +38,7 @@ type UpdateRestApiInput struct {
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
-	PatchOperations []*types.PatchOperation
+	PatchOperations []types.PatchOperation
 }
 
 // Represents a REST API. Create an API
@@ -57,7 +57,7 @@ type UpdateRestApiOutput struct {
 
 	// The list of binary media types supported by the RestApi. By default, the RestApi
 	// supports only UTF-8-encoded text payloads.
-	BinaryMediaTypes []*string
+	BinaryMediaTypes []string
 
 	// The timestamp when the API was created.
 	CreatedDate *time.Time
@@ -70,7 +70,7 @@ type UpdateRestApiOutput struct {
 	// https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that
 	// clients use a custom domain name to invoke your API, disable the default
 	// endpoint.
-	DisableExecuteApiEndpoint *bool
+	DisableExecuteApiEndpoint bool
 
 	// The endpoint configuration of this RestApi showing the endpoint types of the
 	// API.
@@ -95,14 +95,14 @@ type UpdateRestApiOutput struct {
 	Policy *string
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// A version identifier for the API.
 	Version *string
 
 	// The warning messages reported when failonwarnings is turned on during API
 	// import.
-	Warnings []*string
+	Warnings []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -41,7 +41,7 @@ type TagResourceInput struct {
 	// maximum length of a tag value is 256 characters.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourceOutput struct {

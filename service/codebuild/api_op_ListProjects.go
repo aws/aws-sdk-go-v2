@@ -76,7 +76,7 @@ type ListProjectsOutput struct {
 
 	// The list of build project names, with each build project name representing a
 	// single build project.
-	Projects []*string
+	Projects []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

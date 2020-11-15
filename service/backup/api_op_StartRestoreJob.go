@@ -71,7 +71,7 @@ type StartRestoreJobInput struct {
 	// than the entire file system. This parameter is optional.
 	//
 	// This member is required.
-	Metadata map[string]*string
+	Metadata map[string]string
 
 	// An ARN that uniquely identifies a recovery point; for example,
 	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.

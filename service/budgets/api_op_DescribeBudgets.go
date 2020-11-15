@@ -51,7 +51,7 @@ type DescribeBudgetsInput struct {
 type DescribeBudgetsOutput struct {
 
 	// A list of budgets.
-	Budgets []*types.Budget
+	Budgets []types.Budget
 
 	// The pagination token in the service response that indicates the next set of
 	// results that you can retrieve.

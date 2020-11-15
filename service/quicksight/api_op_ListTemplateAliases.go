@@ -41,7 +41,7 @@ type ListTemplateAliasesInput struct {
 	TemplateId *string
 
 	// The maximum number of results to be returned per request.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
@@ -56,10 +56,10 @@ type ListTemplateAliasesOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// A structure containing the list of the template's aliases.
-	TemplateAliasList []*types.TemplateAlias
+	TemplateAliasList []types.TemplateAlias
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

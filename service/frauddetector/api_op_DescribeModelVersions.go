@@ -50,7 +50,7 @@ type DescribeModelVersionsInput struct {
 type DescribeModelVersionsOutput struct {
 
 	// The model version details.
-	ModelVersionDetails []*types.ModelVersionDetail
+	ModelVersionDetails []types.ModelVersionDetail
 
 	// The next token.
 	NextToken *string

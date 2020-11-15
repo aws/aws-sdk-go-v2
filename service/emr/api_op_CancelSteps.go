@@ -45,7 +45,7 @@ type CancelStepsInput struct {
 	// the specified cluster.
 	//
 	// This member is required.
-	StepIds []*string
+	StepIds []string
 
 	// The option to choose for cancelling RUNNING steps. By default, the value is
 	// SEND_INTERRUPT.
@@ -57,7 +57,7 @@ type CancelStepsOutput struct {
 
 	// A list of CancelStepsInfo, which shows the status of specified cancel requests
 	// for each StepID specified.
-	CancelStepsInfoList []*types.CancelStepsInfo
+	CancelStepsInfoList []types.CancelStepsInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

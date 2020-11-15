@@ -39,7 +39,7 @@ type CancelCommandInput struct {
 	// (Optional) A list of instance IDs on which you want to cancel the command. If
 	// not provided, the command is canceled on every instance on which it was
 	// requested.
-	InstanceIds []*string
+	InstanceIds []string
 }
 
 // Whether or not the command was successfully canceled. There is no guarantee that

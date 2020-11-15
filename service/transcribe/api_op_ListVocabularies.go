@@ -63,7 +63,7 @@ type ListVocabulariesOutput struct {
 
 	// A list of objects that describe the vocabularies that match the search criteria
 	// in the request.
-	Vocabularies []*types.VocabularyInfo
+	Vocabularies []types.VocabularyInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -46,7 +46,7 @@ type ListTargetsForPolicyOutput struct {
 	NextMarker *string
 
 	// The policy targets.
-	Targets []*string
+	Targets []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

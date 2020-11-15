@@ -30,7 +30,7 @@ type RegisterClientInput struct {
 
 	ClientType *string
 
-	Scopes []*string
+	Scopes []string
 }
 
 type RegisterClientOutput struct {
@@ -38,11 +38,11 @@ type RegisterClientOutput struct {
 
 	ClientId *string
 
-	ClientIdIssuedAt *int64
+	ClientIdIssuedAt int64
 
 	ClientSecret *string
 
-	ClientSecretExpiresAt *int64
+	ClientSecretExpiresAt int64
 
 	TokenEndpoint *string
 

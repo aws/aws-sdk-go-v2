@@ -65,7 +65,7 @@ type GetAccountAuthorizationDetailsInput struct {
 type GetAccountAuthorizationDetailsOutput struct {
 
 	// A list containing information about IAM groups.
-	GroupDetailList []*types.GroupDetail
+	GroupDetailList []types.GroupDetail
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
@@ -73,20 +73,20 @@ type GetAccountAuthorizationDetailsOutput struct {
 	// the MaxItems number of results even when there are more results available. We
 	// recommend that you check IsTruncated after every call to ensure that you receive
 	// all your results.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
 
 	// A list containing information about managed policies.
-	Policies []*types.ManagedPolicyDetail
+	Policies []types.ManagedPolicyDetail
 
 	// A list containing information about IAM roles.
-	RoleDetailList []*types.RoleDetail
+	RoleDetailList []types.RoleDetail
 
 	// A list containing information about IAM users.
-	UserDetailList []*types.UserDetail
+	UserDetailList []types.UserDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -33,17 +33,17 @@ type DescribeImportSnapshotTasksInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The filters.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// A list of import snapshot task IDs.
-	ImportTaskIds []*string
+	ImportTaskIds []string
 
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token that indicates the next page of results.
 	NextToken *string
@@ -53,7 +53,7 @@ type DescribeImportSnapshotTasksOutput struct {
 
 	// A list of zero or more import snapshot tasks that are currently active or were
 	// completed or canceled in the previous 7 days.
-	ImportSnapshotTasks []*types.ImportSnapshotTask
+	ImportSnapshotTasks []types.ImportSnapshotTask
 
 	// The token to use to get the next page of results. This value is null when there
 	// are no more results to return.

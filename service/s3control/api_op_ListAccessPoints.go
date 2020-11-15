@@ -73,7 +73,7 @@ type ListAccessPointsInput struct {
 	// specified bucket has more than this number of access points, then the response
 	// will include a continuation token in the NextToken field that you can use to
 	// retrieve the next page of access points.
-	MaxResults *int32
+	MaxResults int32
 
 	// A continuation token. If a previous call to ListAccessPoints returned a
 	// continuation token in the NextToken field, then providing that value here causes
@@ -85,7 +85,7 @@ type ListAccessPointsOutput struct {
 
 	// Contains identification and configuration information for one or more access
 	// points associated with the specified bucket.
-	AccessPointList []*types.AccessPoint
+	AccessPointList []types.AccessPoint
 
 	// If the specified bucket has more access points than can be returned in one call
 	// to this API, this field contains a continuation token that you can provide in

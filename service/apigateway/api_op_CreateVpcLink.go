@@ -41,7 +41,7 @@ type CreateVpcLinkInput struct {
 	// owner.
 	//
 	// This member is required.
-	TargetArns []*string
+	TargetArns []string
 
 	// The description of the VPC link.
 	Description *string
@@ -49,7 +49,7 @@ type CreateVpcLinkInput struct {
 	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
 	// tag key can be up to 128 characters and must not start with aws:. The tag value
 	// can be up to 256 characters.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // An API Gateway VPC link for a RestApi to access resources in an Amazon Virtual
@@ -81,11 +81,11 @@ type CreateVpcLinkOutput struct {
 	StatusMessage *string
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The ARN of the network load balancer of the VPC targeted by the VPC link. The
 	// network load balancer must be owned by the same AWS account of the API owner.
-	TargetArns []*string
+	TargetArns []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

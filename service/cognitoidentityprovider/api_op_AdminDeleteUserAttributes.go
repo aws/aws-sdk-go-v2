@@ -35,7 +35,7 @@ type AdminDeleteUserAttributesInput struct {
 	// name.
 	//
 	// This member is required.
-	UserAttributeNames []*string
+	UserAttributeNames []string
 
 	// The user pool ID for the user pool where you want to delete user attributes.
 	//

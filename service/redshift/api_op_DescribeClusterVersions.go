@@ -68,7 +68,7 @@ type DescribeClusterVersionsInput struct {
 type DescribeClusterVersionsOutput struct {
 
 	// A list of Version elements.
-	ClusterVersions []*types.ClusterVersion
+	ClusterVersions []types.ClusterVersion
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve

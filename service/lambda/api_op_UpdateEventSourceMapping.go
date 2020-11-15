@@ -166,7 +166,7 @@ type UpdateEventSourceMappingOutput struct {
 	StateTransitionReason *string
 
 	// (MSK) The name of the Kafka topic.
-	Topics []*string
+	Topics []string
 
 	// The identifier of the event source mapping.
 	UUID *string

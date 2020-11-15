@@ -22,19 +22,19 @@ type DescribedSecurityPolicy struct {
 
 	// Specifies the enabled Secure Shell (SSH) cipher encryption algorithms in the
 	// security policy that is attached to the server.
-	SshCiphers []*string
+	SshCiphers []string
 
 	// Specifies the enabled SSH key exchange (KEX) encryption algorithms in the
 	// security policy that is attached to the server.
-	SshKexs []*string
+	SshKexs []string
 
 	// Specifies the enabled SSH message authentication code (MAC) encryption
 	// algorithms in the security policy that is attached to the server.
-	SshMacs []*string
+	SshMacs []string
 
 	// Specifies the enabled Transport Layer Security (TLS) cipher encryption
 	// algorithms in the security policy that is attached to the server.
-	TlsCiphers []*string
+	TlsCiphers []string
 }
 
 // Describes the properties of a file transfer protocol-enabled server that was
@@ -110,7 +110,7 @@ type DescribedServer struct {
 
 	// Specifies the key-value pairs that you can use to search for and group servers
 	// that were assigned to the server that was described.
-	Tags []*Tag
+	Tags []Tag
 
 	// Specifies the number of users that are assigned to a server you specified with
 	// the ServerId.
@@ -141,7 +141,7 @@ type DescribedUser struct {
 	// policy to lock your user down to the designated home directory ("chroot"). To do
 	// this, you can set Entry to '/' and set Target to the HomeDirectory parameter
 	// value.
-	HomeDirectoryMappings []*HomeDirectoryMapEntry
+	HomeDirectoryMappings []HomeDirectoryMapEntry
 
 	// Specifies the type of landing directory (folder) you mapped for your users to
 	// see when they log into the file transfer protocol-enabled server. If you set it
@@ -164,11 +164,11 @@ type DescribedUser struct {
 
 	// Specifies the public key portion of the Secure Shell (SSH) keys stored for the
 	// described user.
-	SshPublicKeys []*SshPublicKey
+	SshPublicKeys []SshPublicKey
 
 	// Specifies the key-value pairs for the user requested. Tag can be used to search
 	// for and group users for a variety of purposes.
-	Tags []*Tag
+	Tags []Tag
 
 	// Specifies the name of the user that was requested to be described. User names
 	// are used for authentication purposes. This is the string that will be used by
@@ -186,17 +186,17 @@ type EndpointDetails struct {
 	// A list of address allocation IDs that are required to attach an Elastic IP
 	// address to your server's endpoint. This property can only be set when
 	// EndpointType is set to VPC and it is only valid in the UpdateServer API.
-	AddressAllocationIds []*string
+	AddressAllocationIds []string
 
 	// A list of security groups IDs that are available to attach to your server's
 	// endpoint. This property can only be set when EndpointType is set to VPC. You can
 	// only edit the SecurityGroupIds property in the UpdateServer API and only if you
 	// are changing the EndpointType from PUBLIC or VPC_ENDPOINT to VPC.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// A list of subnet IDs that are required to host your server endpoint in your VPC.
 	// This property can only be set when EndpointType is set to VPC.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The ID of the VPC endpoint. This property can only be set when EndpointType is
 	// set to VPC_ENDPOINT.

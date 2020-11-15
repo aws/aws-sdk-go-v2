@@ -63,7 +63,7 @@ type RecognizeCelebritiesOutput struct {
 
 	// Details about each celebrity found in the image. Amazon Rekognition can detect a
 	// maximum of 64 celebrities in an image.
-	CelebrityFaces []*types.Celebrity
+	CelebrityFaces []types.Celebrity
 
 	// The orientation of the input image (counterclockwise direction). If your
 	// application displays the image, you can use this value to correct the
@@ -78,7 +78,7 @@ type RecognizeCelebritiesOutput struct {
 	OrientationCorrection types.OrientationCorrection
 
 	// Details about each unrecognized face in the image.
-	UnrecognizedFaces []*types.ComparedFace
+	UnrecognizedFaces []types.ComparedFace
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

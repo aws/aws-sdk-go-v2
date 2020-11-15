@@ -99,7 +99,7 @@ type CreateDatasetImportJobInput struct {
 	// considers it to be a user tag and will count against the limit of 50 tags. Tags
 	// with only the key prefix of aws do not count against your tags per resource
 	// limit.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The format of timestamps in the dataset. The format that you specify depends on
 	// the DataFrequency specified when the dataset was created. The following formats

@@ -38,7 +38,7 @@ type ListCertificatesByCAInput struct {
 
 	// Specifies the order for results. If True, the results are returned in ascending
 	// order, based on the creation date.
-	AscendingOrder *bool
+	AscendingOrder bool
 
 	// The marker for the next set of results.
 	Marker *string
@@ -51,7 +51,7 @@ type ListCertificatesByCAInput struct {
 type ListCertificatesByCAOutput struct {
 
 	// The device certificates signed by the specified CA certificate.
-	Certificates []*types.Certificate
+	Certificates []types.Certificate
 
 	// The marker for the next set of results, or null if there are no additional
 	// results.

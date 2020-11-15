@@ -66,7 +66,7 @@ type GetFaceDetectionOutput struct {
 	// An array of faces detected in the video. Each element contains a detected face's
 	// details and the time, in milliseconds from the start of the video, the face was
 	// detected.
-	Faces []*types.FaceDetection
+	Faces []types.FaceDetection
 
 	// The current status of the face detection job.
 	JobStatus types.VideoJobStatus

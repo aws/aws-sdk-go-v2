@@ -61,7 +61,7 @@ type ListLoggingConfigurationsInput struct {
 type ListLoggingConfigurationsOutput struct {
 
 	//
-	LoggingConfigurations []*types.LoggingConfiguration
+	LoggingConfigurations []types.LoggingConfiguration
 
 	// When you request a list of objects with a Limit setting, if the number of
 	// objects that are still available for retrieval exceeds the limit, AWS WAF

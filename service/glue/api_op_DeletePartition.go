@@ -36,7 +36,7 @@ type DeletePartitionInput struct {
 	// The values that define the partition.
 	//
 	// This member is required.
-	PartitionValues []*string
+	PartitionValues []string
 
 	// The name of the table that contains the partition to be deleted.
 	//

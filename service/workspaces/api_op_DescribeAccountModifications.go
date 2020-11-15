@@ -38,7 +38,7 @@ type DescribeAccountModificationsInput struct {
 type DescribeAccountModificationsOutput struct {
 
 	// The list of modifications to the configuration of BYOL.
-	AccountModifications []*types.AccountModification
+	AccountModifications []types.AccountModification
 
 	// The token to use to retrieve the next set of results, or null if no more results
 	// are available.

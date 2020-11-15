@@ -35,7 +35,7 @@ type DescribeImageBuildersInput struct {
 	MaxResults *int32
 
 	// The names of the image builders to describe.
-	Names []*string
+	Names []string
 
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
@@ -45,7 +45,7 @@ type DescribeImageBuildersInput struct {
 type DescribeImageBuildersOutput struct {
 
 	// Information about the image builders.
-	ImageBuilders []*types.ImageBuilder
+	ImageBuilders []types.ImageBuilder
 
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.

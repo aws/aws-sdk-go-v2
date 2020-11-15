@@ -43,7 +43,7 @@ type DescribeAdjustmentTypesInput struct {
 type DescribeAdjustmentTypesOutput struct {
 
 	// The policy adjustment types.
-	AdjustmentTypes []*types.AdjustmentType
+	AdjustmentTypes []types.AdjustmentType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -41,7 +41,7 @@ type ListBusinessReportSchedulesInput struct {
 type ListBusinessReportSchedulesOutput struct {
 
 	// The schedule of the reports.
-	BusinessReportSchedules []*types.BusinessReportSchedule
+	BusinessReportSchedules []types.BusinessReportSchedule
 
 	// The token used to list the remaining schedules from the previous API call.
 	NextToken *string

@@ -49,7 +49,7 @@ type ListTaskExecutionsOutput struct {
 	NextToken *string
 
 	// A list of executed tasks.
-	TaskExecutions []*types.TaskExecutionListEntry
+	TaskExecutions []types.TaskExecutionListEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

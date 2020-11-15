@@ -60,7 +60,7 @@ type CreateMeetingInput struct {
 	NotificationsConfiguration *types.MeetingNotificationConfiguration
 
 	// The tag key-value pairs.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateMeetingOutput struct {

@@ -60,7 +60,7 @@ type ListNodegroupsOutput struct {
 	NextToken *string
 
 	// A list of all of the node groups associated with the specified cluster.
-	Nodegroups []*string
+	Nodegroups []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

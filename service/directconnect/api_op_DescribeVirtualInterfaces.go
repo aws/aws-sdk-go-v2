@@ -44,7 +44,7 @@ type DescribeVirtualInterfacesInput struct {
 type DescribeVirtualInterfacesOutput struct {
 
 	// The virtual interfaces
-	VirtualInterfaces []*types.VirtualInterface
+	VirtualInterfaces []types.VirtualInterface
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

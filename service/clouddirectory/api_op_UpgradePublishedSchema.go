@@ -49,7 +49,7 @@ type UpgradePublishedSchemaInput struct {
 	// compatible, or not, with the publish schema provided by the user to be upgraded.
 	// If schema compatibility fails, an exception would be thrown else the call would
 	// succeed. This parameter is optional and defaults to false.
-	DryRun *bool
+	DryRun bool
 }
 
 type UpgradePublishedSchemaOutput struct {

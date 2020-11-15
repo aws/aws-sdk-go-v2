@@ -38,10 +38,10 @@ type GetAppValidationConfigurationInput struct {
 type GetAppValidationConfigurationOutput struct {
 
 	// The configuration for application validation.
-	AppValidationConfigurations []*types.AppValidationConfiguration
+	AppValidationConfigurations []types.AppValidationConfiguration
 
 	// The configuration for instance validation.
-	ServerGroupValidationConfigurations []*types.ServerGroupValidationConfiguration
+	ServerGroupValidationConfigurations []types.ServerGroupValidationConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

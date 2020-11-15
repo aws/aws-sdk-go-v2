@@ -2645,34 +2645,26 @@ func awsAwsjson11_serializeDocumentAttribute(v *types.Attribute, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAttributes(v []*types.Attribute, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentAttributes(v []types.Attribute, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentAttribute(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentAttribute(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCidrIps(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentCidrIps(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2708,17 +2700,13 @@ func awsAwsjson11_serializeDocumentDirectoryConnectSettings(v *types.DirectoryCo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDirectoryIds(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentDirectoryIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2742,32 +2730,24 @@ func awsAwsjson11_serializeDocumentDirectoryVpcSettings(v *types.DirectoryVpcSet
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDnsIpAddrs(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentDnsIpAddrs(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDomainControllerIds(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentDomainControllerIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2789,17 +2769,13 @@ func awsAwsjson11_serializeDocumentIpRoute(v *types.IpRoute, value smithyjson.Va
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentIpRoutes(v []*types.IpRoute, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentIpRoutes(v []types.IpRoute, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentIpRoute(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentIpRoute(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2820,14 +2796,14 @@ func awsAwsjson11_serializeDocumentRadiusSettings(v *types.RadiusSettings, value
 		ok.String(*v.DisplayLabel)
 	}
 
-	if v.RadiusPort != nil {
+	if v.RadiusPort != 0 {
 		ok := object.Key("RadiusPort")
-		ok.Integer(*v.RadiusPort)
+		ok.Integer(v.RadiusPort)
 	}
 
-	if v.RadiusRetries != nil {
+	if v.RadiusRetries != 0 {
 		ok := object.Key("RadiusRetries")
-		ok.Integer(*v.RadiusRetries)
+		ok.Integer(v.RadiusRetries)
 	}
 
 	if v.RadiusServers != nil {
@@ -2837,9 +2813,9 @@ func awsAwsjson11_serializeDocumentRadiusSettings(v *types.RadiusSettings, value
 		}
 	}
 
-	if v.RadiusTimeout != nil {
+	if v.RadiusTimeout != 0 {
 		ok := object.Key("RadiusTimeout")
-		ok.Integer(*v.RadiusTimeout)
+		ok.Integer(v.RadiusTimeout)
 	}
 
 	if v.SharedSecret != nil {
@@ -2847,40 +2823,32 @@ func awsAwsjson11_serializeDocumentRadiusSettings(v *types.RadiusSettings, value
 		ok.String(*v.SharedSecret)
 	}
 
-	if v.UseSameUsername != nil {
+	if v.UseSameUsername {
 		ok := object.Key("UseSameUsername")
-		ok.Boolean(*v.UseSameUsername)
+		ok.Boolean(v.UseSameUsername)
 	}
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRemoteDomainNames(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentRemoteDomainNames(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentServers(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentServers(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2902,32 +2870,24 @@ func awsAwsjson11_serializeDocumentShareTarget(v *types.ShareTarget, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSnapshotIds(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentSnapshotIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSubnetIds(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentSubnetIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2949,64 +2909,48 @@ func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagKeys(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagKeys(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTags(v []*types.Tag, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTags(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTopicNames(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTopicNames(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTrustIds(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTrustIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -3056,9 +3000,9 @@ func awsAwsjson11_serializeOpDocumentAddIpRoutesInput(v *AddIpRoutesInput, value
 		}
 	}
 
-	if v.UpdateSecurityGroupForDirectoryControllers != nil {
+	if v.UpdateSecurityGroupForDirectoryControllers {
 		ok := object.Key("UpdateSecurityGroupForDirectoryControllers")
-		ok.Boolean(*v.UpdateSecurityGroupForDirectoryControllers)
+		ok.Boolean(v.UpdateSecurityGroupForDirectoryControllers)
 	}
 
 	return nil
@@ -3448,9 +3392,9 @@ func awsAwsjson11_serializeOpDocumentDeleteTrustInput(v *DeleteTrustInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.DeleteAssociatedConditionalForwarder != nil {
+	if v.DeleteAssociatedConditionalForwarder {
 		ok := object.Key("DeleteAssociatedConditionalForwarder")
-		ok.Boolean(*v.DeleteAssociatedConditionalForwarder)
+		ok.Boolean(v.DeleteAssociatedConditionalForwarder)
 	}
 
 	if v.TrustId != nil {
@@ -4106,9 +4050,9 @@ func awsAwsjson11_serializeOpDocumentStartSchemaExtensionInput(v *StartSchemaExt
 	object := value.Object()
 	defer object.Close()
 
-	if v.CreateSnapshotBeforeSchemaExtension != nil {
+	if v.CreateSnapshotBeforeSchemaExtension {
 		ok := object.Key("CreateSnapshotBeforeSchemaExtension")
-		ok.Boolean(*v.CreateSnapshotBeforeSchemaExtension)
+		ok.Boolean(v.CreateSnapshotBeforeSchemaExtension)
 	}
 
 	if v.Description != nil {
@@ -4176,9 +4120,9 @@ func awsAwsjson11_serializeOpDocumentUpdateNumberOfDomainControllersInput(v *Upd
 	object := value.Object()
 	defer object.Close()
 
-	if v.DesiredNumber != nil {
+	if v.DesiredNumber != 0 {
 		ok := object.Key("DesiredNumber")
-		ok.Integer(*v.DesiredNumber)
+		ok.Integer(v.DesiredNumber)
 	}
 
 	if v.DirectoryId != nil {

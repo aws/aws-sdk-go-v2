@@ -37,7 +37,7 @@ type DeleteOrganizationInput struct {
 	// organization.
 	//
 	// This member is required.
-	DeleteDirectory *bool
+	DeleteDirectory bool
 
 	// The organization ID.
 	//

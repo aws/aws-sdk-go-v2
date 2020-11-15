@@ -32,10 +32,10 @@ type DescribeConformancePacksInput struct {
 	// Comma-separated list of conformance pack names for which you want details. If
 	// you do not specify any names, AWS Config returns details for all your
 	// conformance packs.
-	ConformancePackNames []*string
+	ConformancePackNames []string
 
 	// The maximum number of conformance packs returned on each page.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned in a previous request that you use to request the
 	// next page of results in a paginated response.
@@ -45,7 +45,7 @@ type DescribeConformancePacksInput struct {
 type DescribeConformancePacksOutput struct {
 
 	// Returns a list of ConformancePackDetail objects.
-	ConformancePackDetails []*types.ConformancePackDetail
+	ConformancePackDetails []types.ConformancePackDetail
 
 	// The nextToken string returned in a previous request that you use to request the
 	// next page of results in a paginated response.

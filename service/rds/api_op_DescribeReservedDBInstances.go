@@ -41,7 +41,7 @@ type DescribeReservedDBInstancesInput struct {
 	Duration *string
 
 	// This parameter isn't currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The lease identifier filter value. Specify this parameter to show only the
 	// reservation that matches the specified lease ID. AWS Support might request the
@@ -91,7 +91,7 @@ type DescribeReservedDBInstancesOutput struct {
 	Marker *string
 
 	// A list of reserved DB instances.
-	ReservedDBInstances []*types.ReservedDBInstance
+	ReservedDBInstances []types.ReservedDBInstance
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

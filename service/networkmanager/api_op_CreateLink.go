@@ -52,7 +52,7 @@ type CreateLinkInput struct {
 	Provider *string
 
 	// The tags to apply to the resource during creation.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The type of the link. Constraints: Cannot include the following characters: | \
 	// ^ Length Constraints: Maximum length of 128 characters.

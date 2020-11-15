@@ -36,14 +36,14 @@ type DeleteInsightRulesInput struct {
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html).
 	//
 	// This member is required.
-	RuleNames []*string
+	RuleNames []string
 }
 
 type DeleteInsightRulesOutput struct {
 
 	// An array listing the rules that could not be deleted. You cannot delete built-in
 	// rules.
-	Failures []*types.PartialFailure
+	Failures []types.PartialFailure
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

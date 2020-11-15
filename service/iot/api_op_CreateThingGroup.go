@@ -40,7 +40,7 @@ type CreateThingGroupInput struct {
 	ParentGroupName *string
 
 	// Metadata which can be used to manage the thing group.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The thing group properties.
 	ThingGroupProperties *types.ThingGroupProperties

@@ -42,7 +42,7 @@ type CreateRevisionInput struct {
 	// create it. Each tag consists of a key and an optional value, both of which you
 	// define. When you use tagging, you can also use tag-based access control in IAM
 	// policies to control access to these data sets and revisions.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateRevisionOutput struct {
@@ -66,7 +66,7 @@ type CreateRevisionOutput struct {
 	// through the AWS Data Exchange console or the AWS Marketplace Catalog API, using
 	// the StartChangeSet AWS Marketplace Catalog API action. When using the API,
 	// revisions are uniquely identified by their ARN.
-	Finalized *bool
+	Finalized bool
 
 	// The unique identifier for the revision.
 	Id *string
@@ -77,7 +77,7 @@ type CreateRevisionOutput struct {
 	SourceId *string
 
 	// The tags for the revision.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The date and time that the revision was last updated, in ISO 8601 format.
 	UpdatedAt *time.Time

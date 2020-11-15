@@ -100,7 +100,7 @@ type ListShardsOutput struct {
 	// of the shard, the shard's parent, and the shard that's adjacent to the shard's
 	// parent. Each object also contains the starting and ending hash keys and the
 	// starting and ending sequence numbers for the shard.
-	Shards []*types.Shard
+	Shards []types.Shard
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

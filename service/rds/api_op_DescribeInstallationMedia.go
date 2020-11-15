@@ -41,7 +41,7 @@ type DescribeInstallationMediaInput struct {
 	// database engines. The results list includes information about only the database
 	// engines identified by these identifiers. For more information about the valid
 	// engines for installation media, see ImportInstallationMedia.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The installation medium ID.
 	InstallationMediaId *string
@@ -60,7 +60,7 @@ type DescribeInstallationMediaInput struct {
 type DescribeInstallationMediaOutput struct {
 
 	// The list of InstallationMedia objects for the AWS account.
-	InstallationMedia []*types.InstallationMedia
+	InstallationMedia []types.InstallationMedia
 
 	// An optional pagination token provided by a previous DescribeInstallationMedia
 	// request. If this parameter is specified, the response includes only records

@@ -50,11 +50,11 @@ type UpdateFunctionCodeInput struct {
 
 	// Set to true to validate the request parameters and access permissions without
 	// modifying the function code.
-	DryRun *bool
+	DryRun bool
 
 	// Set to true to publish a new version of the function after updating the code.
 	// This has the same effect as calling PublishVersion separately.
-	Publish *bool
+	Publish bool
 
 	// Only update the function if the revision ID matches the ID that's specified. Use
 	// this option to avoid modifying a function that has changed since you last read
@@ -83,7 +83,7 @@ type UpdateFunctionCodeOutput struct {
 	CodeSha256 *string
 
 	// The size of the function's deployment package, in bytes.
-	CodeSize *int64
+	CodeSize int64
 
 	// The function's dead letter queue.
 	DeadLetterConfig *types.DeadLetterConfig
@@ -95,7 +95,7 @@ type UpdateFunctionCodeOutput struct {
 	Environment *types.EnvironmentResponse
 
 	// Connection settings for an Amazon EFS file system.
-	FileSystemConfigs []*types.FileSystemConfig
+	FileSystemConfigs []types.FileSystemConfig
 
 	// The function's Amazon Resource Name (ARN).
 	FunctionArn *string
@@ -126,7 +126,7 @@ type UpdateFunctionCodeOutput struct {
 
 	// The function's  layers
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
-	Layers []*types.Layer
+	Layers []types.Layer
 
 	// For Lambda@Edge functions, the ARN of the master function.
 	MasterArn *string

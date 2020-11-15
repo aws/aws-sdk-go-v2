@@ -40,7 +40,7 @@ type GetEventPredictionInput struct {
 	// "UNKNOWN."
 	//
 	// This member is required.
-	Entities []*types.Entity
+	Entities []types.Entity
 
 	// The unique ID used to identify the event.
 	//
@@ -62,13 +62,13 @@ type GetEventPredictionInput struct {
 	// sending for evaluation.
 	//
 	// This member is required.
-	EventVariables map[string]*string
+	EventVariables map[string]string
 
 	// The detector version ID.
 	DetectorVersionId *string
 
 	// The Amazon SageMaker model endpoint input data blobs.
-	ExternalModelEndpointDataBlobs map[string]*types.ModelEndpointDataBlob
+	ExternalModelEndpointDataBlobs map[string]types.ModelEndpointDataBlob
 }
 
 type GetEventPredictionOutput struct {
@@ -78,10 +78,10 @@ type GetEventPredictionOutput struct {
 	// directly related to the false positive rate (FPR). For example, a score of 600
 	// corresponds to an estimated 10% false positive rate whereas a score of 900
 	// corresponds to an estimated 2% false positive rate.
-	ModelScores []*types.ModelScores
+	ModelScores []types.ModelScores
 
 	// The results.
-	RuleResults []*types.RuleResult
+	RuleResults []types.RuleResult
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -44,7 +44,7 @@ type ListPortalsOutput struct {
 	NextToken *string
 
 	// A list that summarizes each portal.
-	PortalSummaries []*types.PortalSummary
+	PortalSummaries []types.PortalSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

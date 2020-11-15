@@ -45,7 +45,7 @@ type ListOTAUpdatesOutput struct {
 	NextToken *string
 
 	// A list of OTA update jobs.
-	OtaUpdates []*types.OTAUpdateSummary
+	OtaUpdates []types.OTAUpdateSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

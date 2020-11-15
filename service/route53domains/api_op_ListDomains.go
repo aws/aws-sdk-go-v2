@@ -49,7 +49,7 @@ type ListDomainsOutput struct {
 	// A summary of domains.
 	//
 	// This member is required.
-	Domains []*types.DomainSummary
+	Domains []types.DomainSummary
 
 	// If there are more domains than you specified for MaxItems in the request, submit
 	// another request and include the value of NextPageMarker in the value of Marker.

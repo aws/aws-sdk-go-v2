@@ -59,14 +59,14 @@ type GetContactOutput struct {
 	LastUpdatedTimestamp *time.Time
 
 	// The default topic preferences applied to the contact.
-	TopicDefaultPreferences []*types.TopicPreference
+	TopicDefaultPreferences []types.TopicPreference
 
 	// The contact's preference for being opted-in to or opted-out of a topic.>
-	TopicPreferences []*types.TopicPreference
+	TopicPreferences []types.TopicPreference
 
 	// A boolean value status noting if the contact is unsubscribed from all contact
 	// list topics.
-	UnsubscribeAll *bool
+	UnsubscribeAll bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

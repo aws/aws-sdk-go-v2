@@ -1500,7 +1500,7 @@ func (e *OpsItemAlreadyExistsException) ErrorFault() smithy.ErrorFault { return 
 type OpsItemInvalidParameterException struct {
 	Message *string
 
-	ParameterNames []*string
+	ParameterNames []string
 }
 
 func (e *OpsItemInvalidParameterException) Error() string {
@@ -1524,8 +1524,8 @@ type OpsItemLimitExceededException struct {
 	Message *string
 
 	LimitType     *string
-	Limit         *int32
-	ResourceTypes []*string
+	Limit         int32
+	ResourceTypes []string
 }
 
 func (e *OpsItemLimitExceededException) Error() string {

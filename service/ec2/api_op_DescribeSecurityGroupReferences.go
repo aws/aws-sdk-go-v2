@@ -33,19 +33,19 @@ type DescribeSecurityGroupReferencesInput struct {
 	// The IDs of the security groups in your account.
 	//
 	// This member is required.
-	GroupId []*string
+	GroupId []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 }
 
 type DescribeSecurityGroupReferencesOutput struct {
 
 	// Information about the VPCs with the referencing security groups.
-	SecurityGroupReferenceSet []*types.SecurityGroupReference
+	SecurityGroupReferenceSet []types.SecurityGroupReference
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

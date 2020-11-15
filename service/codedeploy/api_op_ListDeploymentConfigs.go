@@ -39,7 +39,7 @@ type ListDeploymentConfigsOutput struct {
 
 	// A list of deployment configurations, including built-in configurations such as
 	// CodeDeployDefault.OneAtATime.
-	DeploymentConfigsList []*string
+	DeploymentConfigsList []string
 
 	// If a large amount of information is returned, an identifier is also returned. It
 	// can be used in a subsequent list deployment configurations call to return the

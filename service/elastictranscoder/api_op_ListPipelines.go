@@ -50,7 +50,7 @@ type ListPipelinesOutput struct {
 	NextPageToken *string
 
 	// An array of Pipeline objects.
-	Pipelines []*types.Pipeline
+	Pipelines []types.Pipeline
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

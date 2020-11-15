@@ -39,7 +39,7 @@ type TagResourceInput struct {
 	// your own metadata to the resources you create.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourceOutput struct {

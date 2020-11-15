@@ -45,7 +45,7 @@ type ListDevicesInput struct {
 type ListDevicesOutput struct {
 
 	// Information about the devices.
-	Devices []*types.DeviceSummary
+	Devices []types.DeviceSummary
 
 	// The pagination token used to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.

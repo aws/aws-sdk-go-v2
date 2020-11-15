@@ -55,7 +55,7 @@ type GetResourceShareAssociationsInput struct {
 	ResourceArn *string
 
 	// The Amazon Resource Names (ARN) of the resource shares.
-	ResourceShareArns []*string
+	ResourceShareArns []string
 }
 
 type GetResourceShareAssociationsOutput struct {
@@ -65,7 +65,7 @@ type GetResourceShareAssociationsOutput struct {
 	NextToken *string
 
 	// Information about the associations.
-	ResourceShareAssociations []*types.ResourceShareAssociation
+	ResourceShareAssociations []types.ResourceShareAssociation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

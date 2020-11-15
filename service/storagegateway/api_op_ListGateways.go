@@ -54,7 +54,7 @@ type ListGatewaysInput struct {
 type ListGatewaysOutput struct {
 
 	// An array of GatewayInfo objects.
-	Gateways []*types.GatewayInfo
+	Gateways []types.GatewayInfo
 
 	// Use the marker in your next request to fetch the next set of gateways in the
 	// list. If there are no more gateways to list, this field does not appear in the

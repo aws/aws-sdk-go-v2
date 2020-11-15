@@ -74,7 +74,7 @@ type ListStreamConsumersInput struct {
 type ListStreamConsumersOutput struct {
 
 	// An array of JSON objects. Each object represents one registered consumer.
-	Consumers []*types.Consumer
+	Consumers []types.Consumer
 
 	// When the number of consumers that are registered with the data stream is greater
 	// than the default value for the MaxResults parameter, or if you explicitly

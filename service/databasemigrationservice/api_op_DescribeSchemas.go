@@ -55,7 +55,7 @@ type DescribeSchemasOutput struct {
 	Marker *string
 
 	// The described schema.
-	Schemas []*string
+	Schemas []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

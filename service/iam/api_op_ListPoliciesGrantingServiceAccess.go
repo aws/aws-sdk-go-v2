@@ -79,7 +79,7 @@ type ListPoliciesGrantingServiceAccessInput struct {
 	// in the AWS General Reference.
 	//
 	// This member is required.
-	ServiceNamespaces []*string
+	ServiceNamespaces []string
 
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
@@ -94,13 +94,13 @@ type ListPoliciesGrantingServiceAccessOutput struct {
 	// permissions policies attached to the specified identity (user, group, or role).
 	//
 	// This member is required.
-	PoliciesGrantingServiceAccess []*types.ListPoliciesGrantingServiceAccessEntry
+	PoliciesGrantingServiceAccess []types.ListPoliciesGrantingServiceAccessEntry
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. We recommend that you check
 	// IsTruncated after every call to ensure that you receive all your results.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.

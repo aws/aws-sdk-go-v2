@@ -3552,7 +3552,7 @@ func awsAwsjson11_deserializeDocumentBillingRecord(v **types.BillingRecord, valu
 				if !ok {
 					return fmt.Errorf("expected DomainName to be of type string, got %T instead", value)
 				}
-				sv.DomainName = &jtv
+				sv.DomainName = ptr.String(jtv)
 			}
 
 		case "InvoiceId":
@@ -3561,7 +3561,7 @@ func awsAwsjson11_deserializeDocumentBillingRecord(v **types.BillingRecord, valu
 				if !ok {
 					return fmt.Errorf("expected InvoiceId to be of type string, got %T instead", value)
 				}
-				sv.InvoiceId = &jtv
+				sv.InvoiceId = ptr.String(jtv)
 			}
 
 		case "Operation":
@@ -3583,7 +3583,7 @@ func awsAwsjson11_deserializeDocumentBillingRecord(v **types.BillingRecord, valu
 				if err != nil {
 					return err
 				}
-				sv.Price = &f64
+				sv.Price = f64
 			}
 
 		default:
@@ -3595,7 +3595,7 @@ func awsAwsjson11_deserializeDocumentBillingRecord(v **types.BillingRecord, valu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentBillingRecords(v *[]*types.BillingRecord, value interface{}) error {
+func awsAwsjson11_deserializeDocumentBillingRecords(v *[]types.BillingRecord, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3608,18 +3608,20 @@ func awsAwsjson11_deserializeDocumentBillingRecords(v *[]*types.BillingRecord, v
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.BillingRecord
+	var cv []types.BillingRecord
 	if *v == nil {
-		cv = []*types.BillingRecord{}
+		cv = []types.BillingRecord{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.BillingRecord
-		if err := awsAwsjson11_deserializeDocumentBillingRecord(&col, value); err != nil {
+		var col types.BillingRecord
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentBillingRecord(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -3655,7 +3657,7 @@ func awsAwsjson11_deserializeDocumentContactDetail(v **types.ContactDetail, valu
 				if !ok {
 					return fmt.Errorf("expected AddressLine to be of type string, got %T instead", value)
 				}
-				sv.AddressLine1 = &jtv
+				sv.AddressLine1 = ptr.String(jtv)
 			}
 
 		case "AddressLine2":
@@ -3664,7 +3666,7 @@ func awsAwsjson11_deserializeDocumentContactDetail(v **types.ContactDetail, valu
 				if !ok {
 					return fmt.Errorf("expected AddressLine to be of type string, got %T instead", value)
 				}
-				sv.AddressLine2 = &jtv
+				sv.AddressLine2 = ptr.String(jtv)
 			}
 
 		case "City":
@@ -3673,7 +3675,7 @@ func awsAwsjson11_deserializeDocumentContactDetail(v **types.ContactDetail, valu
 				if !ok {
 					return fmt.Errorf("expected City to be of type string, got %T instead", value)
 				}
-				sv.City = &jtv
+				sv.City = ptr.String(jtv)
 			}
 
 		case "ContactType":
@@ -3700,7 +3702,7 @@ func awsAwsjson11_deserializeDocumentContactDetail(v **types.ContactDetail, valu
 				if !ok {
 					return fmt.Errorf("expected Email to be of type string, got %T instead", value)
 				}
-				sv.Email = &jtv
+				sv.Email = ptr.String(jtv)
 			}
 
 		case "ExtraParams":
@@ -3714,7 +3716,7 @@ func awsAwsjson11_deserializeDocumentContactDetail(v **types.ContactDetail, valu
 				if !ok {
 					return fmt.Errorf("expected ContactNumber to be of type string, got %T instead", value)
 				}
-				sv.Fax = &jtv
+				sv.Fax = ptr.String(jtv)
 			}
 
 		case "FirstName":
@@ -3723,7 +3725,7 @@ func awsAwsjson11_deserializeDocumentContactDetail(v **types.ContactDetail, valu
 				if !ok {
 					return fmt.Errorf("expected ContactName to be of type string, got %T instead", value)
 				}
-				sv.FirstName = &jtv
+				sv.FirstName = ptr.String(jtv)
 			}
 
 		case "LastName":
@@ -3732,7 +3734,7 @@ func awsAwsjson11_deserializeDocumentContactDetail(v **types.ContactDetail, valu
 				if !ok {
 					return fmt.Errorf("expected ContactName to be of type string, got %T instead", value)
 				}
-				sv.LastName = &jtv
+				sv.LastName = ptr.String(jtv)
 			}
 
 		case "OrganizationName":
@@ -3741,7 +3743,7 @@ func awsAwsjson11_deserializeDocumentContactDetail(v **types.ContactDetail, valu
 				if !ok {
 					return fmt.Errorf("expected ContactName to be of type string, got %T instead", value)
 				}
-				sv.OrganizationName = &jtv
+				sv.OrganizationName = ptr.String(jtv)
 			}
 
 		case "PhoneNumber":
@@ -3750,7 +3752,7 @@ func awsAwsjson11_deserializeDocumentContactDetail(v **types.ContactDetail, valu
 				if !ok {
 					return fmt.Errorf("expected ContactNumber to be of type string, got %T instead", value)
 				}
-				sv.PhoneNumber = &jtv
+				sv.PhoneNumber = ptr.String(jtv)
 			}
 
 		case "State":
@@ -3759,7 +3761,7 @@ func awsAwsjson11_deserializeDocumentContactDetail(v **types.ContactDetail, valu
 				if !ok {
 					return fmt.Errorf("expected State to be of type string, got %T instead", value)
 				}
-				sv.State = &jtv
+				sv.State = ptr.String(jtv)
 			}
 
 		case "ZipCode":
@@ -3768,7 +3770,7 @@ func awsAwsjson11_deserializeDocumentContactDetail(v **types.ContactDetail, valu
 				if !ok {
 					return fmt.Errorf("expected ZipCode to be of type string, got %T instead", value)
 				}
-				sv.ZipCode = &jtv
+				sv.ZipCode = ptr.String(jtv)
 			}
 
 		default:
@@ -3808,7 +3810,7 @@ func awsAwsjson11_deserializeDocumentDomainLimitExceeded(v **types.DomainLimitEx
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -3820,7 +3822,7 @@ func awsAwsjson11_deserializeDocumentDomainLimitExceeded(v **types.DomainLimitEx
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDomainStatusList(v *[]*string, value interface{}) error {
+func awsAwsjson11_deserializeDocumentDomainStatusList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3833,21 +3835,21 @@ func awsAwsjson11_deserializeDocumentDomainStatusList(v *[]*string, value interf
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected DomainStatus to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -3884,7 +3886,7 @@ func awsAwsjson11_deserializeDocumentDomainSuggestion(v **types.DomainSuggestion
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Availability = &jtv
+				sv.Availability = ptr.String(jtv)
 			}
 
 		case "DomainName":
@@ -3893,7 +3895,7 @@ func awsAwsjson11_deserializeDocumentDomainSuggestion(v **types.DomainSuggestion
 				if !ok {
 					return fmt.Errorf("expected DomainName to be of type string, got %T instead", value)
 				}
-				sv.DomainName = &jtv
+				sv.DomainName = ptr.String(jtv)
 			}
 
 		default:
@@ -3905,7 +3907,7 @@ func awsAwsjson11_deserializeDocumentDomainSuggestion(v **types.DomainSuggestion
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDomainSuggestionsList(v *[]*types.DomainSuggestion, value interface{}) error {
+func awsAwsjson11_deserializeDocumentDomainSuggestionsList(v *[]types.DomainSuggestion, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3918,18 +3920,20 @@ func awsAwsjson11_deserializeDocumentDomainSuggestionsList(v *[]*types.DomainSug
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.DomainSuggestion
+	var cv []types.DomainSuggestion
 	if *v == nil {
-		cv = []*types.DomainSuggestion{}
+		cv = []types.DomainSuggestion{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.DomainSuggestion
-		if err := awsAwsjson11_deserializeDocumentDomainSuggestion(&col, value); err != nil {
+		var col types.DomainSuggestion
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentDomainSuggestion(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -3965,7 +3969,7 @@ func awsAwsjson11_deserializeDocumentDomainSummary(v **types.DomainSummary, valu
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AutoRenew = &jtv
+				sv.AutoRenew = ptr.Bool(jtv)
 			}
 
 		case "DomainName":
@@ -3974,7 +3978,7 @@ func awsAwsjson11_deserializeDocumentDomainSummary(v **types.DomainSummary, valu
 				if !ok {
 					return fmt.Errorf("expected DomainName to be of type string, got %T instead", value)
 				}
-				sv.DomainName = &jtv
+				sv.DomainName = ptr.String(jtv)
 			}
 
 		case "Expiry":
@@ -3996,7 +4000,7 @@ func awsAwsjson11_deserializeDocumentDomainSummary(v **types.DomainSummary, valu
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.TransferLock = &jtv
+				sv.TransferLock = ptr.Bool(jtv)
 			}
 
 		default:
@@ -4008,7 +4012,7 @@ func awsAwsjson11_deserializeDocumentDomainSummary(v **types.DomainSummary, valu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDomainSummaryList(v *[]*types.DomainSummary, value interface{}) error {
+func awsAwsjson11_deserializeDocumentDomainSummaryList(v *[]types.DomainSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4021,18 +4025,20 @@ func awsAwsjson11_deserializeDocumentDomainSummaryList(v *[]*types.DomainSummary
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.DomainSummary
+	var cv []types.DomainSummary
 	if *v == nil {
-		cv = []*types.DomainSummary{}
+		cv = []types.DomainSummary{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.DomainSummary
-		if err := awsAwsjson11_deserializeDocumentDomainSummary(&col, value); err != nil {
+		var col types.DomainSummary
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentDomainSummary(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4108,7 +4114,7 @@ func awsAwsjson11_deserializeDocumentDuplicateRequest(v **types.DuplicateRequest
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -4157,7 +4163,7 @@ func awsAwsjson11_deserializeDocumentExtraParam(v **types.ExtraParam, value inte
 				if !ok {
 					return fmt.Errorf("expected ExtraParamValue to be of type string, got %T instead", value)
 				}
-				sv.Value = &jtv
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:
@@ -4169,7 +4175,7 @@ func awsAwsjson11_deserializeDocumentExtraParam(v **types.ExtraParam, value inte
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentExtraParamList(v *[]*types.ExtraParam, value interface{}) error {
+func awsAwsjson11_deserializeDocumentExtraParamList(v *[]types.ExtraParam, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4182,18 +4188,20 @@ func awsAwsjson11_deserializeDocumentExtraParamList(v *[]*types.ExtraParam, valu
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ExtraParam
+	var cv []types.ExtraParam
 	if *v == nil {
-		cv = []*types.ExtraParam{}
+		cv = []types.ExtraParam{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ExtraParam
-		if err := awsAwsjson11_deserializeDocumentExtraParam(&col, value); err != nil {
+		var col types.ExtraParam
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentExtraParam(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4201,7 +4209,7 @@ func awsAwsjson11_deserializeDocumentExtraParamList(v *[]*types.ExtraParam, valu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGlueIpList(v *[]*string, value interface{}) error {
+func awsAwsjson11_deserializeDocumentGlueIpList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4214,21 +4222,21 @@ func awsAwsjson11_deserializeDocumentGlueIpList(v *[]*string, value interface{})
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected GlueIp to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -4265,7 +4273,7 @@ func awsAwsjson11_deserializeDocumentInvalidInput(v **types.InvalidInput, value 
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -4310,7 +4318,7 @@ func awsAwsjson11_deserializeDocumentNameserver(v **types.Nameserver, value inte
 				if !ok {
 					return fmt.Errorf("expected HostName to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		default:
@@ -4322,7 +4330,7 @@ func awsAwsjson11_deserializeDocumentNameserver(v **types.Nameserver, value inte
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentNameserverList(v *[]*types.Nameserver, value interface{}) error {
+func awsAwsjson11_deserializeDocumentNameserverList(v *[]types.Nameserver, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4335,18 +4343,20 @@ func awsAwsjson11_deserializeDocumentNameserverList(v *[]*types.Nameserver, valu
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Nameserver
+	var cv []types.Nameserver
 	if *v == nil {
-		cv = []*types.Nameserver{}
+		cv = []types.Nameserver{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Nameserver
-		if err := awsAwsjson11_deserializeDocumentNameserver(&col, value); err != nil {
+		var col types.Nameserver
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentNameserver(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4382,7 +4392,7 @@ func awsAwsjson11_deserializeDocumentOperationLimitExceeded(v **types.OperationL
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -4422,7 +4432,7 @@ func awsAwsjson11_deserializeDocumentOperationSummary(v **types.OperationSummary
 				if !ok {
 					return fmt.Errorf("expected OperationId to be of type string, got %T instead", value)
 				}
-				sv.OperationId = &jtv
+				sv.OperationId = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -4465,7 +4475,7 @@ func awsAwsjson11_deserializeDocumentOperationSummary(v **types.OperationSummary
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentOperationSummaryList(v *[]*types.OperationSummary, value interface{}) error {
+func awsAwsjson11_deserializeDocumentOperationSummaryList(v *[]types.OperationSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4478,18 +4488,20 @@ func awsAwsjson11_deserializeDocumentOperationSummaryList(v *[]*types.OperationS
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.OperationSummary
+	var cv []types.OperationSummary
 	if *v == nil {
-		cv = []*types.OperationSummary{}
+		cv = []types.OperationSummary{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.OperationSummary
-		if err := awsAwsjson11_deserializeDocumentOperationSummary(&col, value); err != nil {
+		var col types.OperationSummary
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentOperationSummary(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4525,7 +4537,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected TagKey to be of type string, got %T instead", value)
 				}
-				sv.Key = &jtv
+				sv.Key = ptr.String(jtv)
 			}
 
 		case "Value":
@@ -4534,7 +4546,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
 				}
-				sv.Value = &jtv
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:
@@ -4546,7 +4558,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTagList(v *[]*types.Tag, value interface{}) error {
+func awsAwsjson11_deserializeDocumentTagList(v *[]types.Tag, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4559,18 +4571,20 @@ func awsAwsjson11_deserializeDocumentTagList(v *[]*types.Tag, value interface{})
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Tag
+	var cv []types.Tag
 	if *v == nil {
-		cv = []*types.Tag{}
+		cv = []types.Tag{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Tag
-		if err := awsAwsjson11_deserializeDocumentTag(&col, value); err != nil {
+		var col types.Tag
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentTag(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4606,7 +4620,7 @@ func awsAwsjson11_deserializeDocumentTLDRulesViolation(v **types.TLDRulesViolati
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -4646,7 +4660,7 @@ func awsAwsjson11_deserializeDocumentUnsupportedTLD(v **types.UnsupportedTLD, va
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -4686,7 +4700,7 @@ func awsAwsjson11_deserializeOpDocumentAcceptDomainTransferFromAnotherAwsAccount
 				if !ok {
 					return fmt.Errorf("expected OperationId to be of type string, got %T instead", value)
 				}
-				sv.OperationId = &jtv
+				sv.OperationId = ptr.String(jtv)
 			}
 
 		default:
@@ -4726,7 +4740,7 @@ func awsAwsjson11_deserializeOpDocumentCancelDomainTransferToAnotherAwsAccountOu
 				if !ok {
 					return fmt.Errorf("expected OperationId to be of type string, got %T instead", value)
 				}
-				sv.OperationId = &jtv
+				sv.OperationId = ptr.String(jtv)
 			}
 
 		default:
@@ -4904,7 +4918,7 @@ func awsAwsjson11_deserializeOpDocumentDisableDomainTransferLockOutput(v **Disab
 				if !ok {
 					return fmt.Errorf("expected OperationId to be of type string, got %T instead", value)
 				}
-				sv.OperationId = &jtv
+				sv.OperationId = ptr.String(jtv)
 			}
 
 		default:
@@ -4975,7 +4989,7 @@ func awsAwsjson11_deserializeOpDocumentEnableDomainTransferLockOutput(v **Enable
 				if !ok {
 					return fmt.Errorf("expected OperationId to be of type string, got %T instead", value)
 				}
-				sv.OperationId = &jtv
+				sv.OperationId = ptr.String(jtv)
 			}
 
 		default:
@@ -5015,7 +5029,7 @@ func awsAwsjson11_deserializeOpDocumentGetContactReachabilityStatusOutput(v **Ge
 				if !ok {
 					return fmt.Errorf("expected DomainName to be of type string, got %T instead", value)
 				}
-				sv.DomainName = &jtv
+				sv.DomainName = ptr.String(jtv)
 			}
 
 		case "status":
@@ -5064,7 +5078,7 @@ func awsAwsjson11_deserializeOpDocumentGetDomainDetailOutput(v **GetDomainDetail
 				if !ok {
 					return fmt.Errorf("expected Email to be of type string, got %T instead", value)
 				}
-				sv.AbuseContactEmail = &jtv
+				sv.AbuseContactEmail = ptr.String(jtv)
 			}
 
 		case "AbuseContactPhone":
@@ -5073,7 +5087,7 @@ func awsAwsjson11_deserializeOpDocumentGetDomainDetailOutput(v **GetDomainDetail
 				if !ok {
 					return fmt.Errorf("expected ContactNumber to be of type string, got %T instead", value)
 				}
-				sv.AbuseContactPhone = &jtv
+				sv.AbuseContactPhone = ptr.String(jtv)
 			}
 
 		case "AdminContact":
@@ -5087,7 +5101,7 @@ func awsAwsjson11_deserializeOpDocumentGetDomainDetailOutput(v **GetDomainDetail
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AdminPrivacy = &jtv
+				sv.AdminPrivacy = ptr.Bool(jtv)
 			}
 
 		case "AutoRenew":
@@ -5096,7 +5110,7 @@ func awsAwsjson11_deserializeOpDocumentGetDomainDetailOutput(v **GetDomainDetail
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AutoRenew = &jtv
+				sv.AutoRenew = ptr.Bool(jtv)
 			}
 
 		case "CreationDate":
@@ -5118,7 +5132,7 @@ func awsAwsjson11_deserializeOpDocumentGetDomainDetailOutput(v **GetDomainDetail
 				if !ok {
 					return fmt.Errorf("expected DNSSec to be of type string, got %T instead", value)
 				}
-				sv.DnsSec = &jtv
+				sv.DnsSec = ptr.String(jtv)
 			}
 
 		case "DomainName":
@@ -5127,7 +5141,7 @@ func awsAwsjson11_deserializeOpDocumentGetDomainDetailOutput(v **GetDomainDetail
 				if !ok {
 					return fmt.Errorf("expected DomainName to be of type string, got %T instead", value)
 				}
-				sv.DomainName = &jtv
+				sv.DomainName = ptr.String(jtv)
 			}
 
 		case "ExpirationDate":
@@ -5159,7 +5173,7 @@ func awsAwsjson11_deserializeOpDocumentGetDomainDetailOutput(v **GetDomainDetail
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.RegistrantPrivacy = &jtv
+				sv.RegistrantPrivacy = ptr.Bool(jtv)
 			}
 
 		case "RegistrarName":
@@ -5168,7 +5182,7 @@ func awsAwsjson11_deserializeOpDocumentGetDomainDetailOutput(v **GetDomainDetail
 				if !ok {
 					return fmt.Errorf("expected RegistrarName to be of type string, got %T instead", value)
 				}
-				sv.RegistrarName = &jtv
+				sv.RegistrarName = ptr.String(jtv)
 			}
 
 		case "RegistrarUrl":
@@ -5177,7 +5191,7 @@ func awsAwsjson11_deserializeOpDocumentGetDomainDetailOutput(v **GetDomainDetail
 				if !ok {
 					return fmt.Errorf("expected RegistrarUrl to be of type string, got %T instead", value)
 				}
-				sv.RegistrarUrl = &jtv
+				sv.RegistrarUrl = ptr.String(jtv)
 			}
 
 		case "RegistryDomainId":
@@ -5186,7 +5200,7 @@ func awsAwsjson11_deserializeOpDocumentGetDomainDetailOutput(v **GetDomainDetail
 				if !ok {
 					return fmt.Errorf("expected RegistryDomainId to be of type string, got %T instead", value)
 				}
-				sv.RegistryDomainId = &jtv
+				sv.RegistryDomainId = ptr.String(jtv)
 			}
 
 		case "Reseller":
@@ -5195,7 +5209,7 @@ func awsAwsjson11_deserializeOpDocumentGetDomainDetailOutput(v **GetDomainDetail
 				if !ok {
 					return fmt.Errorf("expected Reseller to be of type string, got %T instead", value)
 				}
-				sv.Reseller = &jtv
+				sv.Reseller = ptr.String(jtv)
 			}
 
 		case "StatusList":
@@ -5214,7 +5228,7 @@ func awsAwsjson11_deserializeOpDocumentGetDomainDetailOutput(v **GetDomainDetail
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.TechPrivacy = &jtv
+				sv.TechPrivacy = ptr.Bool(jtv)
 			}
 
 		case "UpdatedDate":
@@ -5236,7 +5250,7 @@ func awsAwsjson11_deserializeOpDocumentGetDomainDetailOutput(v **GetDomainDetail
 				if !ok {
 					return fmt.Errorf("expected RegistrarWhoIsServer to be of type string, got %T instead", value)
 				}
-				sv.WhoIsServer = &jtv
+				sv.WhoIsServer = ptr.String(jtv)
 			}
 
 		default:
@@ -5312,7 +5326,7 @@ func awsAwsjson11_deserializeOpDocumentGetOperationDetailOutput(v **GetOperation
 				if !ok {
 					return fmt.Errorf("expected DomainName to be of type string, got %T instead", value)
 				}
-				sv.DomainName = &jtv
+				sv.DomainName = ptr.String(jtv)
 			}
 
 		case "Message":
@@ -5321,7 +5335,7 @@ func awsAwsjson11_deserializeOpDocumentGetOperationDetailOutput(v **GetOperation
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		case "OperationId":
@@ -5330,7 +5344,7 @@ func awsAwsjson11_deserializeOpDocumentGetOperationDetailOutput(v **GetOperation
 				if !ok {
 					return fmt.Errorf("expected OperationId to be of type string, got %T instead", value)
 				}
-				sv.OperationId = &jtv
+				sv.OperationId = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -5406,7 +5420,7 @@ func awsAwsjson11_deserializeOpDocumentListDomainsOutput(v **ListDomainsOutput, 
 				if !ok {
 					return fmt.Errorf("expected PageMarker to be of type string, got %T instead", value)
 				}
-				sv.NextPageMarker = &jtv
+				sv.NextPageMarker = ptr.String(jtv)
 			}
 
 		default:
@@ -5446,7 +5460,7 @@ func awsAwsjson11_deserializeOpDocumentListOperationsOutput(v **ListOperationsOu
 				if !ok {
 					return fmt.Errorf("expected PageMarker to be of type string, got %T instead", value)
 				}
-				sv.NextPageMarker = &jtv
+				sv.NextPageMarker = ptr.String(jtv)
 			}
 
 		case "Operations":
@@ -5527,7 +5541,7 @@ func awsAwsjson11_deserializeOpDocumentRegisterDomainOutput(v **RegisterDomainOu
 				if !ok {
 					return fmt.Errorf("expected OperationId to be of type string, got %T instead", value)
 				}
-				sv.OperationId = &jtv
+				sv.OperationId = ptr.String(jtv)
 			}
 
 		default:
@@ -5567,7 +5581,7 @@ func awsAwsjson11_deserializeOpDocumentRejectDomainTransferFromAnotherAwsAccount
 				if !ok {
 					return fmt.Errorf("expected OperationId to be of type string, got %T instead", value)
 				}
-				sv.OperationId = &jtv
+				sv.OperationId = ptr.String(jtv)
 			}
 
 		default:
@@ -5607,7 +5621,7 @@ func awsAwsjson11_deserializeOpDocumentRenewDomainOutput(v **RenewDomainOutput, 
 				if !ok {
 					return fmt.Errorf("expected OperationId to be of type string, got %T instead", value)
 				}
-				sv.OperationId = &jtv
+				sv.OperationId = ptr.String(jtv)
 			}
 
 		default:
@@ -5647,7 +5661,7 @@ func awsAwsjson11_deserializeOpDocumentResendContactReachabilityEmailOutput(v **
 				if !ok {
 					return fmt.Errorf("expected DomainName to be of type string, got %T instead", value)
 				}
-				sv.DomainName = &jtv
+				sv.DomainName = ptr.String(jtv)
 			}
 
 		case "emailAddress":
@@ -5656,7 +5670,7 @@ func awsAwsjson11_deserializeOpDocumentResendContactReachabilityEmailOutput(v **
 				if !ok {
 					return fmt.Errorf("expected Email to be of type string, got %T instead", value)
 				}
-				sv.EmailAddress = &jtv
+				sv.EmailAddress = ptr.String(jtv)
 			}
 
 		case "isAlreadyVerified":
@@ -5665,7 +5679,7 @@ func awsAwsjson11_deserializeOpDocumentResendContactReachabilityEmailOutput(v **
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsAlreadyVerified = &jtv
+				sv.IsAlreadyVerified = ptr.Bool(jtv)
 			}
 
 		default:
@@ -5705,7 +5719,7 @@ func awsAwsjson11_deserializeOpDocumentRetrieveDomainAuthCodeOutput(v **Retrieve
 				if !ok {
 					return fmt.Errorf("expected DomainAuthCode to be of type string, got %T instead", value)
 				}
-				sv.AuthCode = &jtv
+				sv.AuthCode = ptr.String(jtv)
 			}
 
 		default:
@@ -5745,7 +5759,7 @@ func awsAwsjson11_deserializeOpDocumentTransferDomainOutput(v **TransferDomainOu
 				if !ok {
 					return fmt.Errorf("expected OperationId to be of type string, got %T instead", value)
 				}
-				sv.OperationId = &jtv
+				sv.OperationId = ptr.String(jtv)
 			}
 
 		default:
@@ -5785,7 +5799,7 @@ func awsAwsjson11_deserializeOpDocumentTransferDomainToAnotherAwsAccountOutput(v
 				if !ok {
 					return fmt.Errorf("expected OperationId to be of type string, got %T instead", value)
 				}
-				sv.OperationId = &jtv
+				sv.OperationId = ptr.String(jtv)
 			}
 
 		case "Password":
@@ -5794,7 +5808,7 @@ func awsAwsjson11_deserializeOpDocumentTransferDomainToAnotherAwsAccountOutput(v
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Password = &jtv
+				sv.Password = ptr.String(jtv)
 			}
 
 		default:
@@ -5834,7 +5848,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateDomainContactOutput(v **UpdateDomai
 				if !ok {
 					return fmt.Errorf("expected OperationId to be of type string, got %T instead", value)
 				}
-				sv.OperationId = &jtv
+				sv.OperationId = ptr.String(jtv)
 			}
 
 		default:
@@ -5874,7 +5888,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateDomainContactPrivacyOutput(v **Upda
 				if !ok {
 					return fmt.Errorf("expected OperationId to be of type string, got %T instead", value)
 				}
-				sv.OperationId = &jtv
+				sv.OperationId = ptr.String(jtv)
 			}
 
 		default:
@@ -5914,7 +5928,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateDomainNameserversOutput(v **UpdateD
 				if !ok {
 					return fmt.Errorf("expected OperationId to be of type string, got %T instead", value)
 				}
-				sv.OperationId = &jtv
+				sv.OperationId = ptr.String(jtv)
 			}
 
 		default:
@@ -5990,7 +6004,7 @@ func awsAwsjson11_deserializeOpDocumentViewBillingOutput(v **ViewBillingOutput, 
 				if !ok {
 					return fmt.Errorf("expected PageMarker to be of type string, got %T instead", value)
 				}
-				sv.NextPageMarker = &jtv
+				sv.NextPageMarker = ptr.String(jtv)
 			}
 
 		default:

@@ -44,7 +44,7 @@ type StartTaskExecutionInput struct {
 	// task. The pattern should contain a single filter string that consists of the
 	// patterns to include. The patterns are delimited by "|" (that is, a pipe). For
 	// example: "/folder1|/folder2"
-	Includes []*types.FilterRule
+	Includes []types.FilterRule
 
 	// Represents the options that are available to control the behavior of a
 	// StartTaskExecution operation. Behavior includes preserving metadata such as user

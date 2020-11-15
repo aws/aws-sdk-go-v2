@@ -71,7 +71,7 @@ type ListServiceQuotasOutput struct {
 
 	// The response information for a quota lists all attribute information for the
 	// quota.
-	Quotas []*types.ServiceQuota
+	Quotas []types.ServiceQuota
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

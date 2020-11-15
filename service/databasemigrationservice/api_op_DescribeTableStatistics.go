@@ -42,7 +42,7 @@ type DescribeTableStatisticsInput struct {
 	// Filters applied to table statistics. Valid filter names: schema-name |
 	// table-name | table-state A combination of filters creates an AND condition where
 	// each record matches all specified filters.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
@@ -68,7 +68,7 @@ type DescribeTableStatisticsOutput struct {
 	ReplicationTaskArn *string
 
 	// The table statistics.
-	TableStatistics []*types.TableStatistics
+	TableStatistics []types.TableStatistics
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

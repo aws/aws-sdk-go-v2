@@ -44,7 +44,7 @@ type ListTriggersInput struct {
 	NextToken *string
 
 	// Specifies to return only these tagged resources.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type ListTriggersOutput struct {
@@ -55,7 +55,7 @@ type ListTriggersOutput struct {
 
 	// The names of all triggers in the account, or the triggers with the specified
 	// tags.
-	TriggerNames []*string
+	TriggerNames []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

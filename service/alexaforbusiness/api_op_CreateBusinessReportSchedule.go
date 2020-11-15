@@ -60,7 +60,7 @@ type CreateBusinessReportScheduleInput struct {
 	ScheduleName *string
 
 	// The tags for the business report schedule.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateBusinessReportScheduleOutput struct {

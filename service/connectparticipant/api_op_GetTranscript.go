@@ -39,7 +39,7 @@ type GetTranscriptInput struct {
 	ContactId *string
 
 	// The maximum number of results to return in the page. Default: 10.
-	MaxResults *int32
+	MaxResults int32
 
 	// The pagination token. Use the value returned previously in the next subsequent
 	// request to retrieve the next set of results.
@@ -66,7 +66,7 @@ type GetTranscriptOutput struct {
 	NextToken *string
 
 	// The list of messages in the session.
-	Transcript []*types.Item
+	Transcript []types.Item
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

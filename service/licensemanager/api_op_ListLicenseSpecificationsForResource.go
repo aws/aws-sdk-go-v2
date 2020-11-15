@@ -45,7 +45,7 @@ type ListLicenseSpecificationsForResourceInput struct {
 type ListLicenseSpecificationsForResourceOutput struct {
 
 	// License configurations associated with a resource.
-	LicenseSpecifications []*types.LicenseSpecification
+	LicenseSpecifications []types.LicenseSpecification
 
 	// Token for the next set of results.
 	NextToken *string

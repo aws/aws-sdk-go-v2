@@ -42,7 +42,7 @@ type GetAutoSnapshotsOutput struct {
 
 	// An array of objects that describe the automatic snapshots that are available for
 	// the specified source instance or disk.
-	AutoSnapshots []*types.AutoSnapshotDetails
+	AutoSnapshots []types.AutoSnapshotDetails
 
 	// The name of the source instance or disk for the automatic snapshots.
 	ResourceName *string

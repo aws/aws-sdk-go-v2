@@ -103,7 +103,7 @@ type PutJobTaggingInput struct {
 	// The set of tags to associate with the S3 Batch Operations job.
 	//
 	// This member is required.
-	Tags []*types.S3Tag
+	Tags []types.S3Tag
 }
 
 type PutJobTaggingOutput struct {

@@ -35,7 +35,7 @@ type DescribeConnectorProfilesInput struct {
 
 	// The name of the connector profile. The name is unique for each ConnectorProfile
 	// in the AWS account.
-	ConnectorProfileNames []*string
+	ConnectorProfileNames []string
 
 	// The type of connector, such as Salesforce, Amplitude, and so on.
 	ConnectorType types.ConnectorType
@@ -51,7 +51,7 @@ type DescribeConnectorProfilesInput struct {
 type DescribeConnectorProfilesOutput struct {
 
 	// Returns information about the connector profiles associated with the flow.
-	ConnectorProfileDetails []*types.ConnectorProfile
+	ConnectorProfileDetails []types.ConnectorProfile
 
 	// The pagination token for the next page of data. If nextToken=null, this means
 	// that all records have been fetched.

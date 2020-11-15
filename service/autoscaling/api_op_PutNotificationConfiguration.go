@@ -44,7 +44,7 @@ type PutNotificationConfigurationInput struct {
 	// DescribeAutoScalingNotificationTypes API.
 	//
 	// This member is required.
-	NotificationTypes []*string
+	NotificationTypes []string
 
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon
 	// SNS) topic.

@@ -52,7 +52,7 @@ type ListDatasetImportJobsInput struct {
 	// example, to list all dataset import jobs whose status is ACTIVE, you specify the
 	// following filter: "Filters": [ { "Condition": "IS", "Key": "Status", "Value":
 	// "ACTIVE" } ]
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The number of items to return in the response.
 	MaxResults *int32
@@ -66,7 +66,7 @@ type ListDatasetImportJobsInput struct {
 type ListDatasetImportJobsOutput struct {
 
 	// An array of objects that summarize each dataset import job's properties.
-	DatasetImportJobs []*types.DatasetImportJobSummary
+	DatasetImportJobs []types.DatasetImportJobSummary
 
 	// If the response is truncated, Amazon Forecast returns this token. To retrieve
 	// the next set of results, use the token in the next request.

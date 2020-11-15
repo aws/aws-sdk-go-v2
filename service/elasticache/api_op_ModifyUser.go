@@ -44,7 +44,7 @@ type ModifyUserInput struct {
 	NoPasswordRequired *bool
 
 	// The passwords belonging to the user account. You are allowed up to two.
-	Passwords []*string
+	Passwords []string
 }
 
 type ModifyUserOutput struct {
@@ -65,7 +65,7 @@ type ModifyUserOutput struct {
 	Status *string
 
 	// Returns a list of the user group IDs the user belongs to.
-	UserGroupIds []*string
+	UserGroupIds []string
 
 	// The ID of the user.
 	UserId *string

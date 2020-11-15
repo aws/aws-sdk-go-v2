@@ -38,10 +38,10 @@ type GetPendingJobExecutionsInput struct {
 type GetPendingJobExecutionsOutput struct {
 
 	// A list of JobExecutionSummary objects with status IN_PROGRESS.
-	InProgressJobs []*types.JobExecutionSummary
+	InProgressJobs []types.JobExecutionSummary
 
 	// A list of JobExecutionSummary objects with status QUEUED.
-	QueuedJobs []*types.JobExecutionSummary
+	QueuedJobs []types.JobExecutionSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

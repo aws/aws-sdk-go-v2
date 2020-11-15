@@ -43,7 +43,7 @@ type UpdateConfigurationSetReputationMetricsEnabledInput struct {
 	// configuration set, such as bounce and complaint rates, to Amazon CloudWatch.
 	//
 	// This member is required.
-	Enabled *bool
+	Enabled bool
 }
 
 type UpdateConfigurationSetReputationMetricsEnabledOutput struct {

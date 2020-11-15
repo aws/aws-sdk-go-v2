@@ -37,7 +37,7 @@ type CreateStackInstancesInput struct {
 	// the specified AWS account(s).
 	//
 	// This member is required.
-	Regions []*string
+	Regions []string
 
 	// The name or unique ID of the stack set that you want to create stack instances
 	// from.
@@ -48,7 +48,7 @@ type CreateStackInstancesInput struct {
 	// [Self-managed permissions] The names of one or more AWS accounts that you want
 	// to create stack instances in the specified Region(s) for. You can specify
 	// Accounts or DeploymentTargets, but not both.
-	Accounts []*string
+	Accounts []string
 
 	// [Service-managed permissions] The AWS Organizations accounts for which to create
 	// stack instances in the specified Regions. You can specify Accounts or
@@ -99,7 +99,7 @@ type CreateStackInstancesInput struct {
 	// UpdateStackSet
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html)
 	// to update the stack set template.
-	ParameterOverrides []*types.Parameter
+	ParameterOverrides []types.Parameter
 }
 
 type CreateStackInstancesOutput struct {

@@ -56,7 +56,7 @@ type Canary struct {
 	SuccessRetentionPeriodInDays *int32
 
 	// The list of key-value pairs that are associated with the canary.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// A structure that contains information about when the canary was created,
 	// modified, and most recently run.
@@ -300,10 +300,10 @@ type RuntimeVersion struct {
 type VpcConfigInput struct {
 
 	// The IDs of the security groups for this canary.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The IDs of the subnets where this canary is to run.
-	SubnetIds []*string
+	SubnetIds []string
 }
 
 // If this canary is to test an endpoint in a VPC, this structure contains
@@ -313,10 +313,10 @@ type VpcConfigInput struct {
 type VpcConfigOutput struct {
 
 	// The IDs of the security groups for this canary.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The IDs of the subnets where this canary is to run.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The IDs of the VPC where this canary is to run.
 	VpcId *string

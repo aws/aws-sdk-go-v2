@@ -37,7 +37,7 @@ type GetSolutionMetricsInput struct {
 type GetSolutionMetricsOutput struct {
 
 	// The metrics for the solution version.
-	Metrics map[string]*float64
+	Metrics map[string]float64
 
 	// The same solution version ARN as specified in the request.
 	SolutionVersionArn *string

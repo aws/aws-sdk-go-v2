@@ -82,7 +82,7 @@ type GetFileOutput struct {
 	// The size of the contents of the file, in bytes.
 	//
 	// This member is required.
-	FileSize *int64
+	FileSize int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

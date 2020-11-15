@@ -63,7 +63,7 @@ type ListVirtualServicesOutput struct {
 	// The list of existing virtual services for the specified service mesh.
 	//
 	// This member is required.
-	VirtualServices []*types.VirtualServiceRef
+	VirtualServices []types.VirtualServiceRef
 
 	// The nextToken value to include in a future ListVirtualServices request. When the
 	// results of a ListVirtualServices request exceed limit, you can use this value to

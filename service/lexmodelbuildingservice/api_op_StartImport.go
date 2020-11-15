@@ -64,7 +64,7 @@ type StartImportInput struct {
 
 	// A list of tags to add to the imported bot. You can only add tags when you import
 	// a bot, you can't add tags to an intent or slot type.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type StartImportOutput struct {
@@ -89,7 +89,7 @@ type StartImportOutput struct {
 	ResourceType types.ResourceType
 
 	// A list of tags added to the imported bot.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

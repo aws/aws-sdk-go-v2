@@ -48,7 +48,7 @@ type ListTagsForResourceOutput struct {
 	NextToken *string
 
 	// A map of tag keys and values associated with the specified signaling channel.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

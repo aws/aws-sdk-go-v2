@@ -95,7 +95,7 @@ type CreateClusterInput struct {
 	ClientRequestToken *string
 
 	// The encryption configuration for the cluster.
-	EncryptionConfig []*types.EncryptionConfig
+	EncryptionConfig []types.EncryptionConfig
 
 	// The Kubernetes network configuration for the cluster.
 	KubernetesNetworkConfig *types.KubernetesNetworkConfigRequest
@@ -112,7 +112,7 @@ type CreateClusterInput struct {
 	// The metadata to apply to the cluster to assist with categorization and
 	// organization. Each tag consists of a key and an optional value, both of which
 	// you define.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The desired Kubernetes version for your cluster. If you don't specify a value
 	// here, the latest version available in Amazon EKS is used.

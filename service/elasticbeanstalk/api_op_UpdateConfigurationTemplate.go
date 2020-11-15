@@ -55,11 +55,11 @@ type UpdateConfigurationTemplateInput struct {
 
 	// A list of configuration option settings to update with the new specified option
 	// value.
-	OptionSettings []*types.ConfigurationOptionSetting
+	OptionSettings []types.ConfigurationOptionSetting
 
 	// A list of configuration options to remove from the configuration set.
 	// Constraint: You can remove only UserDefined configuration options.
-	OptionsToRemove []*types.OptionSpecification
+	OptionsToRemove []types.OptionSpecification
 }
 
 // Describes the settings for a configuration set.
@@ -99,7 +99,7 @@ type UpdateConfigurationTemplateOutput struct {
 	EnvironmentName *string
 
 	// A list of the configuration options and their values in this configuration set.
-	OptionSettings []*types.ConfigurationOptionSetting
+	OptionSettings []types.ConfigurationOptionSetting
 
 	// The ARN of the platform version.
 	PlatformArn *string

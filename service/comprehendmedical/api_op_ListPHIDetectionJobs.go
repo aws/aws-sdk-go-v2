@@ -45,7 +45,7 @@ type ListPHIDetectionJobsInput struct {
 type ListPHIDetectionJobsOutput struct {
 
 	// A list containing the properties of each job returned.
-	ComprehendMedicalAsyncJobPropertiesList []*types.ComprehendMedicalAsyncJobProperties
+	ComprehendMedicalAsyncJobPropertiesList []types.ComprehendMedicalAsyncJobProperties
 
 	// Identifies the next page of results to return.
 	NextToken *string

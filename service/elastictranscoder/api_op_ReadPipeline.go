@@ -46,7 +46,7 @@ type ReadPipelineOutput struct {
 	// not in the same region as the pipeline. Using resources in the same region, such
 	// as your Amazon S3 buckets, Amazon SNS notification topics, and AWS KMS key,
 	// reduces processing time and prevents cross-regional charges.
-	Warnings []*types.Warning
+	Warnings []types.Warning
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

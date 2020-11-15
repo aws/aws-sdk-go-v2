@@ -47,7 +47,7 @@ type CreateRuleInput struct {
 	// The outcome or outcomes returned when the rule expression matches.
 	//
 	// This member is required.
-	Outcomes []*string
+	Outcomes []string
 
 	// The rule ID.
 	//
@@ -58,7 +58,7 @@ type CreateRuleInput struct {
 	Description *string
 
 	// A collection of key and value pairs.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateRuleOutput struct {

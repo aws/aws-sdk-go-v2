@@ -36,7 +36,7 @@ type ListNamespacesInput struct {
 	AwsAccountId *string
 
 	// The maximum number of results to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
@@ -47,7 +47,7 @@ type ListNamespacesOutput struct {
 	// The information about the namespaces in this AWS account. The response includes
 	// the namespace ARN, name, AWS Region, notification email address, creation
 	// status, and identity store.
-	Namespaces []*types.NamespaceInfoV2
+	Namespaces []types.NamespaceInfoV2
 
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
@@ -56,7 +56,7 @@ type ListNamespacesOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

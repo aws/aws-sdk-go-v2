@@ -8,7 +8,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	elbv2 "github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2"
 
 	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
@@ -43,8 +42,8 @@ func TestInteg_01_DescribeLoadBalancers(t *testing.T) {
 
 	client := elbv2.NewFromConfig(cfg)
 	params := &elbv2.DescribeLoadBalancersInput{
-		LoadBalancerArns: []*string{
-			aws.String("fake_load_balancer"),
+		LoadBalancerArns: []string{
+			"fake_load_balancer",
 		},
 	}
 	_, err = client.DescribeLoadBalancers(ctx, params)

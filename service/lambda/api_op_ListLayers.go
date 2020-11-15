@@ -46,7 +46,7 @@ type ListLayersInput struct {
 type ListLayersOutput struct {
 
 	// A list of function layers.
-	Layers []*types.LayersListItem
+	Layers []types.LayersListItem
 
 	// A pagination token returned when the response doesn't contain all layers.
 	NextMarker *string

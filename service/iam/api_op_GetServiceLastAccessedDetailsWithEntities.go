@@ -92,7 +92,7 @@ type GetServiceLastAccessedDetailsWithEntitiesOutput struct {
 	// AWS service.
 	//
 	// This member is required.
-	EntityDetailsList []*types.EntityDetails
+	EntityDetailsList []types.EntityDetails
 
 	// The date and time, in ISO 8601 date-time format
 	// (http://www.iso.org/iso/iso8601), when the generated report job was completed or
@@ -122,7 +122,7 @@ type GetServiceLastAccessedDetailsWithEntitiesOutput struct {
 	// the MaxItems number of results even when there are more results available. We
 	// recommend that you check IsTruncated after every call to ensure that you receive
 	// all your results.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.

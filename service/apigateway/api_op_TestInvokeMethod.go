@@ -54,11 +54,11 @@ type TestInvokeMethodInput struct {
 	ClientCertificateId *string
 
 	// A key-value map of headers to simulate an incoming invocation request.
-	Headers map[string]*string
+	Headers map[string]string
 
 	// The headers as a map from string to list of values to simulate an incoming
 	// invocation request.
-	MultiValueHeaders map[string][]*string
+	MultiValueHeaders map[string][]string
 
 	// The URI path, including query string, of the simulated invocation request. Use
 	// this to specify path parameters and query string parameters.
@@ -66,7 +66,7 @@ type TestInvokeMethodInput struct {
 
 	// A key-value map of stage variables to simulate an invocation on a deployed
 	// Stage.
-	StageVariables map[string]*string
+	StageVariables map[string]string
 }
 
 // Represents the response of the test invoke request in the HTTP method. Test API
@@ -78,19 +78,19 @@ type TestInvokeMethodOutput struct {
 	Body *string
 
 	// The headers of the HTTP response.
-	Headers map[string]*string
+	Headers map[string]string
 
 	// The execution latency of the test invoke request.
-	Latency *int64
+	Latency int64
 
 	// The API Gateway execution log for the test invoke request.
 	Log *string
 
 	// The headers of the HTTP response as a map from string to list of values.
-	MultiValueHeaders map[string][]*string
+	MultiValueHeaders map[string][]string
 
 	// The HTTP status code.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

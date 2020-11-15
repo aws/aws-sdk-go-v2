@@ -32,7 +32,7 @@ type SearchLocalGatewayRoutesInput struct {
 	// One or more filters.
 	//
 	// This member is required.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The ID of the local gateway route table.
 	//
@@ -43,7 +43,7 @@ type SearchLocalGatewayRoutesInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
@@ -60,7 +60,7 @@ type SearchLocalGatewayRoutesOutput struct {
 	NextToken *string
 
 	// Information about the routes.
-	Routes []*types.LocalGatewayRoute
+	Routes []types.LocalGatewayRoute
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

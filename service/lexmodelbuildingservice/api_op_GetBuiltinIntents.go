@@ -53,7 +53,7 @@ type GetBuiltinIntentsInput struct {
 type GetBuiltinIntentsOutput struct {
 
 	// An array of builtinIntentMetadata objects, one for each intent in the response.
-	Intents []*types.BuiltinIntentMetadata
+	Intents []types.BuiltinIntentMetadata
 
 	// A pagination token that fetches the next page of intents. If the response to
 	// this API call is truncated, Amazon Lex returns a pagination token in the

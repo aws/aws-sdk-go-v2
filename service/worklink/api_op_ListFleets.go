@@ -40,7 +40,7 @@ type ListFleetsInput struct {
 type ListFleetsOutput struct {
 
 	// The summary list of the fleets.
-	FleetSummaryList []*types.FleetSummary
+	FleetSummaryList []types.FleetSummary
 
 	// The pagination token used to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.

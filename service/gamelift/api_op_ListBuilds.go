@@ -76,7 +76,7 @@ type ListBuildsInput struct {
 type ListBuildsOutput struct {
 
 	// A collection of build resources that match the request.
-	Builds []*types.Build
+	Builds []types.Build
 
 	// Token that indicates where to resume retrieving results on the next call to this
 	// operation. If no token is returned, these results represent the end of the list.

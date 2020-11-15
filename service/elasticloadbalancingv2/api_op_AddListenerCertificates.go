@@ -41,7 +41,7 @@ type AddListenerCertificatesInput struct {
 	// CertificateArn to the certificate ARN but do not set IsDefault.
 	//
 	// This member is required.
-	Certificates []*types.Certificate
+	Certificates []types.Certificate
 
 	// The Amazon Resource Name (ARN) of the listener.
 	//
@@ -52,7 +52,7 @@ type AddListenerCertificatesInput struct {
 type AddListenerCertificatesOutput struct {
 
 	// Information about the certificates in the certificate list.
-	Certificates []*types.Certificate
+	Certificates []types.Certificate
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -47,7 +47,7 @@ type AddIpRoutesInput struct {
 	// IP address block of the DNS server used for your on-premises domain.
 	//
 	// This member is required.
-	IpRoutes []*types.IpRoute
+	IpRoutes []types.IpRoute
 
 	// If set to true, updates the inbound and outbound rules of the security group
 	// that has the description: "AWS created security group for directory ID directory
@@ -110,7 +110,7 @@ type AddIpRoutesInput struct {
 	//
 	// These security rules impact an internal
 	// network interface that is not exposed publicly.
-	UpdateSecurityGroupForDirectoryControllers *bool
+	UpdateSecurityGroupForDirectoryControllers bool
 }
 
 type AddIpRoutesOutput struct {

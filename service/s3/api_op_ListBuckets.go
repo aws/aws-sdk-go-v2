@@ -33,7 +33,7 @@ type ListBucketsInput struct {
 type ListBucketsOutput struct {
 
 	// The list of buckets owned by the requestor.
-	Buckets []*types.Bucket
+	Buckets []types.Bucket
 
 	// The owner of the buckets listed.
 	Owner *types.Owner

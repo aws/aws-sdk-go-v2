@@ -46,20 +46,20 @@ type CreateCustomDataIdentifierInput struct {
 	// string in this array, Amazon Macie ignores it. The array can contain as many as
 	// 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words
 	// are case sensitive.
-	IgnoreWords []*string
+	IgnoreWords []string
 
 	// An array that lists specific character sequences (keywords), one of which must
 	// be within proximity (maximumMatchDistance) of the regular expression to match.
 	// The array can contain as many as 50 keywords. Each keyword can contain 4 - 90
 	// characters. Keywords aren't case sensitive.
-	Keywords []*string
+	Keywords []string
 
 	// The maximum number of characters that can exist between text that matches the
 	// regex pattern and the character sequences specified by the keywords array. Macie
 	// includes or excludes a result based on the proximity of a keyword to text that
 	// matches the regex pattern. The distance can be 1 - 300 characters. The default
 	// value is 50.
-	MaximumMatchDistance *int32
+	MaximumMatchDistance int32
 
 	// A custom name for the custom data identifier. The name can contain as many as
 	// 128 characters. We strongly recommend that you avoid including any sensitive
@@ -76,7 +76,7 @@ type CreateCustomDataIdentifierInput struct {
 	// data identifier. A custom data identifier can have a maximum of 50 tags. Each
 	// tag consists of a tag key and an associated tag value. The maximum length of a
 	// tag key is 128 characters. The maximum length of a tag value is 256 characters.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateCustomDataIdentifierOutput struct {

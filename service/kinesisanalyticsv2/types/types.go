@@ -69,7 +69,7 @@ type ApplicationConfiguration struct {
 	SqlApplicationConfiguration *SqlApplicationConfiguration
 
 	// The array of descriptions of VPC configurations available to the application.
-	VpcConfigurations []*VpcConfiguration
+	VpcConfigurations []VpcConfiguration
 }
 
 // Describes details about the application code and starting parameters for a
@@ -100,7 +100,7 @@ type ApplicationConfigurationDescription struct {
 	SqlApplicationConfigurationDescription *SqlApplicationConfigurationDescription
 
 	// The array of descriptions of VPC configurations available to the application.
-	VpcConfigurationDescriptions []*VpcConfigurationDescription
+	VpcConfigurationDescriptions []VpcConfigurationDescription
 }
 
 // Describes updates to an application's configuration.
@@ -128,7 +128,7 @@ type ApplicationConfigurationUpdate struct {
 
 	// Updates to the array of descriptions of VPC configurations available to the
 	// application.
-	VpcConfigurationUpdates []*VpcConfigurationUpdate
+	VpcConfigurationUpdates []VpcConfigurationUpdate
 }
 
 // Describes the application, including the application Amazon Resource Name (ARN),
@@ -169,7 +169,7 @@ type ApplicationDetail struct {
 	ApplicationDescription *string
 
 	// Describes the application Amazon CloudWatch logging options.
-	CloudWatchLoggingOptionDescriptions []*CloudWatchLoggingOptionDescription
+	CloudWatchLoggingOptionDescriptions []CloudWatchLoggingOptionDescription
 
 	// The current timestamp when the application was created.
 	CreateTimestamp *time.Time
@@ -511,7 +511,7 @@ type EnvironmentProperties struct {
 	// Describes the execution property groups.
 	//
 	// This member is required.
-	PropertyGroups []*PropertyGroup
+	PropertyGroups []PropertyGroup
 }
 
 // Describes the execution properties for a Flink-based Kinesis Data Analytics
@@ -519,7 +519,7 @@ type EnvironmentProperties struct {
 type EnvironmentPropertyDescriptions struct {
 
 	// Describes the execution property groups.
-	PropertyGroupDescriptions []*PropertyGroup
+	PropertyGroupDescriptions []PropertyGroup
 }
 
 // Describes updates to the execution property groups for a Flink-based Kinesis
@@ -529,7 +529,7 @@ type EnvironmentPropertyUpdates struct {
 	// Describes updates to the execution property groups.
 	//
 	// This member is required.
-	PropertyGroups []*PropertyGroup
+	PropertyGroups []PropertyGroup
 }
 
 // Describes configuration parameters for a Flink-based Kinesis Data Analytics
@@ -659,7 +659,7 @@ type Input struct {
 type InputDescription struct {
 
 	// Returns the in-application stream names that are mapped to the stream source.
-	InAppStreamNames []*string
+	InAppStreamNames []string
 
 	// The input ID that is associated with the application input. This is the ID that
 	// Kinesis Data Analytics assigns to each input configuration that you add to your
@@ -804,7 +804,7 @@ type InputSchemaUpdate struct {
 	// A list of RecordColumn objects. Each object describes the mapping of the
 	// streaming source element to the corresponding column in the in-application
 	// stream.
-	RecordColumnUpdates []*RecordColumn
+	RecordColumnUpdates []RecordColumn
 
 	// Specifies the encoding of the records in the streaming source; for example,
 	// UTF-8.
@@ -1343,7 +1343,7 @@ type PropertyGroup struct {
 	// Describes the value of an application execution property key-value pair.
 	//
 	// This member is required.
-	PropertyMap map[string]*string
+	PropertyMap map[string]string
 }
 
 // For a SQL-based Kinesis Data Analytics application, describes the mapping of
@@ -1477,7 +1477,7 @@ type RunConfiguration struct {
 
 	// Describes the starting parameters for a SQL-based Kinesis Data Analytics
 	// application application.
-	SqlRunConfigurations []*SqlRunConfiguration
+	SqlRunConfigurations []SqlRunConfiguration
 }
 
 // Describes the starting properties for a Kinesis Data Analytics application.
@@ -1650,7 +1650,7 @@ type SourceSchema struct {
 	// A list of RecordColumn objects.
 	//
 	// This member is required.
-	RecordColumns []*RecordColumn
+	RecordColumns []RecordColumn
 
 	// Specifies the format of the records on the streaming source.
 	//
@@ -1667,15 +1667,15 @@ type SourceSchema struct {
 type SqlApplicationConfiguration struct {
 
 	// The array of Input objects describing the input streams used by the application.
-	Inputs []*Input
+	Inputs []Input
 
 	// The array of Output objects describing the destination streams used by the
 	// application.
-	Outputs []*Output
+	Outputs []Output
 
 	// The array of ReferenceDataSource objects describing the reference data sources
 	// used by the application.
-	ReferenceDataSources []*ReferenceDataSource
+	ReferenceDataSources []ReferenceDataSource
 }
 
 // Describes the inputs, outputs, and reference data sources for a SQL-based
@@ -1684,15 +1684,15 @@ type SqlApplicationConfigurationDescription struct {
 
 	// The array of InputDescription objects describing the input streams used by the
 	// application.
-	InputDescriptions []*InputDescription
+	InputDescriptions []InputDescription
 
 	// The array of OutputDescription objects describing the destination streams used
 	// by the application.
-	OutputDescriptions []*OutputDescription
+	OutputDescriptions []OutputDescription
 
 	// The array of ReferenceDataSourceDescription objects describing the reference
 	// data sources used by the application.
-	ReferenceDataSourceDescriptions []*ReferenceDataSourceDescription
+	ReferenceDataSourceDescriptions []ReferenceDataSourceDescription
 }
 
 // Describes updates to the input streams, destination streams, and reference data
@@ -1701,15 +1701,15 @@ type SqlApplicationConfigurationUpdate struct {
 
 	// The array of InputUpdate objects describing the new input streams used by the
 	// application.
-	InputUpdates []*InputUpdate
+	InputUpdates []InputUpdate
 
 	// The array of OutputUpdate objects describing the new destination streams used by
 	// the application.
-	OutputUpdates []*OutputUpdate
+	OutputUpdates []OutputUpdate
 
 	// The array of ReferenceDataSourceUpdate objects describing the new reference data
 	// sources used by the application.
-	ReferenceDataSourceUpdates []*ReferenceDataSourceUpdate
+	ReferenceDataSourceUpdates []ReferenceDataSourceUpdate
 }
 
 // Describes the starting parameters for a SQL-based Kinesis Data Analytics
@@ -1754,14 +1754,14 @@ type VpcConfiguration struct {
 	// IDs used by the VPC configuration.
 	//
 	// This member is required.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The array of Subnet
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html) IDs
 	// used by the VPC configuration.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 }
 
 // Describes the parameters of a VPC used by the application.
@@ -1772,14 +1772,14 @@ type VpcConfigurationDescription struct {
 	// IDs used by the VPC configuration.
 	//
 	// This member is required.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The array of Subnet
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html) IDs
 	// used by the VPC configuration.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The ID of the VPC configuration.
 	//
@@ -1803,10 +1803,10 @@ type VpcConfigurationUpdate struct {
 	// Describes updates to the array of SecurityGroup
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html)
 	// IDs used by the VPC configuration.
-	SecurityGroupIdUpdates []*string
+	SecurityGroupIdUpdates []string
 
 	// Describes updates to the array of Subnet
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html) IDs
 	// used by the VPC configuration.
-	SubnetIdUpdates []*string
+	SubnetIdUpdates []string
 }

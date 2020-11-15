@@ -47,7 +47,7 @@ type ListProvisioningTemplateVersionsOutput struct {
 	NextToken *string
 
 	// The list of fleet provisioning template versions.
-	Versions []*types.ProvisioningTemplateVersionSummary
+	Versions []types.ProvisioningTemplateVersionSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -37,7 +37,7 @@ type DescribeEmergencyContactSettingsOutput struct {
 	// A list of email addresses and phone numbers that the DDoS Response Team (DRT)
 	// can use to contact you if you have proactive engagement enabled, for escalations
 	// to the DRT and to initiate proactive customer support.
-	EmergencyContactList []*types.EmergencyContact
+	EmergencyContactList []types.EmergencyContact
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

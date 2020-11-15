@@ -45,7 +45,7 @@ type GetSigningPlatformOutput struct {
 
 	// The maximum size (in MB) of the payload that can be signed by the target
 	// platform.
-	MaxSizeInMB *int32
+	MaxSizeInMB int32
 
 	// A list of partner entities that use the target signing platform.
 	Partner *string

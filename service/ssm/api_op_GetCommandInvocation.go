@@ -95,7 +95,7 @@ type GetCommandInvocationOutput struct {
 	// The error level response code for the plugin script. If the response code is -1,
 	// then the command has not started running on the instance, or it was not received
 	// by the instance.
-	ResponseCode *int32
+	ResponseCode int32
 
 	// The first 8,000 characters written by the plugin to stderr. If the command has
 	// not finished running, then this string is empty.

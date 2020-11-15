@@ -39,7 +39,7 @@ type TagStreamInput struct {
 	// pair (the value is optional).
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The Amazon Resource Name (ARN) of the resource that you want to add the tag or
 	// tags to.

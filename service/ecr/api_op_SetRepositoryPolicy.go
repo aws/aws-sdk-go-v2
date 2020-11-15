@@ -48,7 +48,7 @@ type SetRepositoryPolicyInput struct {
 	// from setting another policy in the future, you must force the
 	// SetRepositoryPolicy operation. This is intended to prevent accidental repository
 	// lock outs.
-	Force *bool
+	Force bool
 
 	// The AWS account ID associated with the registry that contains the repository. If
 	// you do not specify a registry, the default registry is assumed.

@@ -39,7 +39,7 @@ type TagResourceInput struct {
 	// One or more tags to be associated with the signing profile.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourceOutput struct {

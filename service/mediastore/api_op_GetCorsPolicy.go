@@ -43,7 +43,7 @@ type GetCorsPolicyOutput struct {
 	// The CORS policy assigned to the container.
 	//
 	// This member is required.
-	CorsPolicy []*types.CorsRule
+	CorsPolicy []types.CorsRule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

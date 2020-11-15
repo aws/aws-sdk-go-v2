@@ -33,27 +33,27 @@ type GetInventoryInput struct {
 	// if you aggregate by using an expression that uses the
 	// AWS:InstanceInformation.PlatformType type, you can see a count of how many
 	// Windows and Linux instances exist in your inventoried fleet.
-	Aggregators []*types.InventoryAggregator
+	Aggregators []types.InventoryAggregator
 
 	// One or more filters. Use a filter to return a more specific list of results.
-	Filters []*types.InventoryFilter
+	Filters []types.InventoryFilter
 
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
 
 	// The list of inventory item types to return.
-	ResultAttributes []*types.ResultAttribute
+	ResultAttributes []types.ResultAttribute
 }
 
 type GetInventoryOutput struct {
 
 	// Collection of inventory entities such as a collection of instance inventory.
-	Entities []*types.InventoryResultEntity
+	Entities []types.InventoryResultEntity
 
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.

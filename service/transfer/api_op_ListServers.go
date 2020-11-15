@@ -45,7 +45,7 @@ type ListServersOutput struct {
 	// An array of servers that were listed.
 	//
 	// This member is required.
-	Servers []*types.ListedServer
+	Servers []types.ListedServer
 
 	// When you can get additional results from the ListServers operation, a NextToken
 	// parameter is returned in the output. In a following command, you can pass in the

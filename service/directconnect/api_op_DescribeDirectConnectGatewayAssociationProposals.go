@@ -51,7 +51,7 @@ type DescribeDirectConnectGatewayAssociationProposalsInput struct {
 type DescribeDirectConnectGatewayAssociationProposalsOutput struct {
 
 	// Describes the Direct Connect gateway association proposals.
-	DirectConnectGatewayAssociationProposals []*types.DirectConnectGatewayAssociationProposal
+	DirectConnectGatewayAssociationProposals []types.DirectConnectGatewayAssociationProposal
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

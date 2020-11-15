@@ -52,7 +52,7 @@ type ListTagsOfResourceOutput struct {
 	NextToken *string
 
 	// The tags currently associated with the Amazon DynamoDB resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

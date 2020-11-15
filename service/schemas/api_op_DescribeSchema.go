@@ -64,7 +64,7 @@ type DescribeSchemaOutput struct {
 	SchemaVersion *string
 
 	// Tags associated with the resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The type of the schema.
 	Type *string

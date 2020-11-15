@@ -70,7 +70,7 @@ type DescribeDBInstanceAutomatedBackupsInput struct {
 	// Returns
 	// all resources by default. The status for each resource is specified in the
 	// response.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The pagination token provided in the previous request. If this parameter is
 	// specified the response includes only records beyond the marker, up to
@@ -88,7 +88,7 @@ type DescribeDBInstanceAutomatedBackupsInput struct {
 type DescribeDBInstanceAutomatedBackupsOutput struct {
 
 	// A list of DBInstanceAutomatedBackup instances.
-	DBInstanceAutomatedBackups []*types.DBInstanceAutomatedBackup
+	DBInstanceAutomatedBackups []types.DBInstanceAutomatedBackup
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the

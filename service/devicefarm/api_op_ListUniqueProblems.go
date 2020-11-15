@@ -68,7 +68,7 @@ type ListUniqueProblemsOutput struct {
 	// * ERRORED
 	//
 	// * STOPPED
-	UniqueProblems map[string][]*types.UniqueProblem
+	UniqueProblems map[string][]types.UniqueProblem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

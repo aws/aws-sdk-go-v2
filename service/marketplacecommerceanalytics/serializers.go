@@ -105,17 +105,13 @@ func (m *awsAwsjson11_serializeOpStartSupportDataExport) HandleSerialize(ctx con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsjson11_serializeDocumentCustomerDefinedValues(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentCustomerDefinedValues(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }

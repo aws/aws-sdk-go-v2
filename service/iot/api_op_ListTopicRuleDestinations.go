@@ -39,7 +39,7 @@ type ListTopicRuleDestinationsInput struct {
 type ListTopicRuleDestinationsOutput struct {
 
 	// Information about a topic rule destination.
-	DestinationSummaries []*types.TopicRuleDestinationSummary
+	DestinationSummaries []types.TopicRuleDestinationSummary
 
 	// The token to retrieve the next set of results.
 	NextToken *string

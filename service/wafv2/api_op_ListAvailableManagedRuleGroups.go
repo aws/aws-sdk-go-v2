@@ -65,7 +65,7 @@ type ListAvailableManagedRuleGroupsInput struct {
 type ListAvailableManagedRuleGroupsOutput struct {
 
 	//
-	ManagedRuleGroups []*types.ManagedRuleGroupSummary
+	ManagedRuleGroups []types.ManagedRuleGroupSummary
 
 	// When you request a list of objects with a Limit setting, if the number of
 	// objects that are still available for retrieval exceeds the limit, AWS WAF

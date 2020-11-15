@@ -1132,13 +1132,13 @@ func validateAugmentedManifestsListItem(v *types.AugmentedManifestsListItem) err
 	}
 }
 
-func validateDocumentClassifierAugmentedManifestsList(v []*types.AugmentedManifestsListItem) error {
+func validateDocumentClassifierAugmentedManifestsList(v []types.AugmentedManifestsListItem) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DocumentClassifierAugmentedManifestsList"}
 	for i := range v {
-		if err := validateAugmentedManifestsListItem(v[i]); err != nil {
+		if err := validateAugmentedManifestsListItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1181,13 +1181,13 @@ func validateEntityRecognizerAnnotations(v *types.EntityRecognizerAnnotations) e
 	}
 }
 
-func validateEntityRecognizerAugmentedManifestsList(v []*types.AugmentedManifestsListItem) error {
+func validateEntityRecognizerAugmentedManifestsList(v []types.AugmentedManifestsListItem) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EntityRecognizerAugmentedManifestsList"}
 	for i := range v {
-		if err := validateAugmentedManifestsListItem(v[i]); err != nil {
+		if err := validateAugmentedManifestsListItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1267,13 +1267,13 @@ func validateEntityRecognizerInputDataConfig(v *types.EntityRecognizerInputDataC
 	}
 }
 
-func validateEntityTypesList(v []*types.EntityTypesListItem) error {
+func validateEntityTypesList(v []types.EntityTypesListItem) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EntityTypesList"}
 	for i := range v {
-		if err := validateEntityTypesListItem(v[i]); err != nil {
+		if err := validateEntityTypesListItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1344,13 +1344,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

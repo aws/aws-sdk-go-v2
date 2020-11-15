@@ -46,7 +46,7 @@ type GetVpcLinksInput struct {
 type GetVpcLinksOutput struct {
 
 	// The current page of elements from this collection.
-	Items []*types.VpcLink
+	Items []types.VpcLink
 
 	// The current pagination position in the paged result set.
 	Position *string

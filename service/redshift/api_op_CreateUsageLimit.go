@@ -34,7 +34,7 @@ type CreateUsageLimitInput struct {
 	// amount is in terabytes (TB). The value must be a positive number.
 	//
 	// This member is required.
-	Amount *int64
+	Amount int64
 
 	// The identifier of the cluster that you want to limit usage.
 	//
@@ -63,7 +63,7 @@ type CreateUsageLimitInput struct {
 	Period types.UsageLimitPeriod
 
 	// A list of tag instances.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Describes a usage limit object for a cluster.
@@ -71,7 +71,7 @@ type CreateUsageLimitOutput struct {
 
 	// The limit amount. If time-based, this amount is in minutes. If data-based, this
 	// amount is in terabytes (TB).
-	Amount *int64
+	Amount int64
 
 	// The action that Amazon Redshift takes when the limit is reached. Possible values
 	// are:
@@ -100,7 +100,7 @@ type CreateUsageLimitOutput struct {
 	Period types.UsageLimitPeriod
 
 	// A list of tag instances.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The identifier of the usage limit.
 	UsageLimitId *string

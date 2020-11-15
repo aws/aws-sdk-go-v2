@@ -69,14 +69,14 @@ type GetDomainSuggestionsInput struct {
 	// value between 1 and 50.
 	//
 	// This member is required.
-	SuggestionCount *int32
+	SuggestionCount int32
 }
 
 type GetDomainSuggestionsOutput struct {
 
 	// A list of possible domain names. If you specified true for OnlyAvailable in the
 	// request, the list contains only domains that are available for registration.
-	SuggestionsList []*types.DomainSuggestion
+	SuggestionsList []types.DomainSuggestion
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

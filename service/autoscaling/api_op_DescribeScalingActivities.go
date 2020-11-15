@@ -33,7 +33,7 @@ type DescribeScalingActivitiesInput struct {
 	// IDs. If you omit this parameter, all activities for the past six weeks are
 	// described. If unknown activities are requested, they are ignored with no error.
 	// If you specify an Auto Scaling group, the results are limited to that group.
-	ActivityIds []*string
+	ActivityIds []string
 
 	// The name of the Auto Scaling group.
 	AutoScalingGroupName *string
@@ -53,7 +53,7 @@ type DescribeScalingActivitiesOutput struct {
 	// progress are described first.
 	//
 	// This member is required.
-	Activities []*types.Activity
+	Activities []types.Activity
 
 	// A string that indicates that the response contains more items than can be
 	// returned in a single response. To receive additional items, specify this string

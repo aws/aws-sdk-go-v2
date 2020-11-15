@@ -65,7 +65,7 @@ type CreateSimulationApplicationVersionOutput struct {
 	SimulationSoftwareSuite *types.SimulationSoftwareSuite
 
 	// The sources of the simulation application.
-	Sources []*types.Source
+	Sources []types.Source
 
 	// The version of the simulation application.
 	Version *string

@@ -38,7 +38,7 @@ type GetBucketStatisticsInput struct {
 type GetBucketStatisticsOutput struct {
 
 	// The total number of buckets.
-	BucketCount *int64
+	BucketCount int64
 
 	// The total number of buckets that are publicly accessible based on a combination
 	// of permissions settings for each bucket.
@@ -54,25 +54,25 @@ type GetBucketStatisticsOutput struct {
 	// The total number of objects that Amazon Macie can analyze in the buckets. These
 	// objects use a supported storage class and have a file name extension for a
 	// supported file or storage format.
-	ClassifiableObjectCount *int64
+	ClassifiableObjectCount int64
 
 	// The total storage size, in bytes, of all the objects that Amazon Macie can
 	// analyze in the buckets. These objects use a supported storage class and have a
 	// file name extension for a supported file or storage format.
-	ClassifiableSizeInBytes *int64
+	ClassifiableSizeInBytes int64
 
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most
 	// recently retrieved data about the buckets from Amazon S3.
 	LastUpdated *time.Time
 
 	// The total number of objects in the buckets.
-	ObjectCount *int64
+	ObjectCount int64
 
 	// The total storage size, in bytes, of the buckets.
-	SizeInBytes *int64
+	SizeInBytes int64
 
 	// The total compressed storage size, in bytes, of the buckets.
-	SizeInBytesCompressed *int64
+	SizeInBytesCompressed int64
 
 	// The total number of objects that Amazon Macie can't analyze in the buckets.
 	// These objects don't use a supported storage class or don't have a file name

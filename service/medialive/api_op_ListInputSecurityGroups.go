@@ -31,7 +31,7 @@ func (c *Client) ListInputSecurityGroups(ctx context.Context, params *ListInputS
 type ListInputSecurityGroupsInput struct {
 
 	// Placeholder documentation for MaxResults
-	MaxResults *int32
+	MaxResults int32
 
 	// Placeholder documentation for __string
 	NextToken *string
@@ -41,7 +41,7 @@ type ListInputSecurityGroupsInput struct {
 type ListInputSecurityGroupsOutput struct {
 
 	// List of input security groups
-	InputSecurityGroups []*types.InputSecurityGroup
+	InputSecurityGroups []types.InputSecurityGroup
 
 	// Placeholder documentation for __string
 	NextToken *string

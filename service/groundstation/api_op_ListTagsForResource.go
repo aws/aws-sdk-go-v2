@@ -39,7 +39,7 @@ type ListTagsForResourceInput struct {
 type ListTagsForResourceOutput struct {
 
 	// Tags assigned to a resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

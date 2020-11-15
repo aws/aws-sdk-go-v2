@@ -97,9 +97,9 @@ type GetRecordsOutput struct {
 	// The data records retrieved from the shard.
 	//
 	// This member is required.
-	Records []*types.Record
+	Records []types.Record
 
-	ChildShards []*types.ChildShard
+	ChildShards []types.ChildShard
 
 	// The number of milliseconds the GetRecords response is from the tip of the
 	// stream, indicating how far behind current time the consumer is. A value of zero

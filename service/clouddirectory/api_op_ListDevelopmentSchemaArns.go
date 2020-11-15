@@ -41,7 +41,7 @@ type ListDevelopmentSchemaArnsOutput struct {
 	NextToken *string
 
 	// The ARNs of retrieved development schemas.
-	SchemaArns []*string
+	SchemaArns []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

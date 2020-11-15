@@ -71,7 +71,7 @@ type GetDifferencesOutput struct {
 
 	// A data type object that contains information about the differences, including
 	// whether the difference is added, modified, or deleted (A, D, M).
-	Differences []*types.Difference
+	Differences []types.Difference
 
 	// An enumeration token that can be used in a request to return the next batch of
 	// the results.

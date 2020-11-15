@@ -48,7 +48,7 @@ type ListArchiveRulesOutput struct {
 	// A list of archive rules created for the specified analyzer.
 	//
 	// This member is required.
-	ArchiveRules []*types.ArchiveRuleSummary
+	ArchiveRules []types.ArchiveRuleSummary
 
 	// A token used for pagination of results returned.
 	NextToken *string

@@ -196,13 +196,13 @@ func validateCrossRegionCopyRule(v *types.CrossRegionCopyRule) error {
 	}
 }
 
-func validateCrossRegionCopyRules(v []*types.CrossRegionCopyRule) error {
+func validateCrossRegionCopyRules(v []types.CrossRegionCopyRule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CrossRegionCopyRules"}
 	for i := range v {
-		if err := validateCrossRegionCopyRule(v[i]); err != nil {
+		if err := validateCrossRegionCopyRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -282,13 +282,13 @@ func validateSchedule(v *types.Schedule) error {
 	}
 }
 
-func validateScheduleList(v []*types.Schedule) error {
+func validateScheduleList(v []types.Schedule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ScheduleList"}
 	for i := range v {
-		if err := validateSchedule(v[i]); err != nil {
+		if err := validateSchedule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -317,13 +317,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagsToAddList(v []*types.Tag) error {
+func validateTagsToAddList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagsToAddList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -334,13 +334,13 @@ func validateTagsToAddList(v []*types.Tag) error {
 	}
 }
 
-func validateTargetTagList(v []*types.Tag) error {
+func validateTargetTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TargetTagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -351,13 +351,13 @@ func validateTargetTagList(v []*types.Tag) error {
 	}
 }
 
-func validateVariableTagsList(v []*types.Tag) error {
+func validateVariableTagsList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VariableTagsList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

@@ -43,7 +43,7 @@ type GetDomainNamesInput struct {
 type GetDomainNamesOutput struct {
 
 	// The current page of elements from this collection.
-	Items []*types.DomainName
+	Items []types.DomainName
 
 	// The current pagination position in the paged result set.
 	Position *string

@@ -49,7 +49,7 @@ type DescribeQueryDefinitionsOutput struct {
 	NextToken *string
 
 	// The list of query definitions that match your request.
-	QueryDefinitions []*types.QueryDefinition
+	QueryDefinitions []types.QueryDefinition
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -31,14 +31,14 @@ type BatchDeleteWorldsInput struct {
 	// A list of Amazon Resource Names (arns) that correspond to worlds to delete.
 	//
 	// This member is required.
-	Worlds []*string
+	Worlds []string
 }
 
 type BatchDeleteWorldsOutput struct {
 
 	// A list of unprocessed worlds associated with the call. These worlds were not
 	// deleted.
-	UnprocessedWorlds []*string
+	UnprocessedWorlds []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

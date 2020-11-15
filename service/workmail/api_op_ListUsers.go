@@ -49,7 +49,7 @@ type ListUsersOutput struct {
 	NextToken *string
 
 	// The overview of users for an organization.
-	Users []*types.User
+	Users []types.User
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

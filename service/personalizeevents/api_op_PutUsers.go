@@ -39,7 +39,7 @@ type PutUsersInput struct {
 	// A list of user data.
 	//
 	// This member is required.
-	Users []*types.User
+	Users []types.User
 }
 
 type PutUsersOutput struct {

@@ -63,7 +63,7 @@ type DescribeChapCredentialsOutput struct {
 	// client).
 	//
 	// * TargetARN: The Amazon Resource Name (ARN) of the storage volume.
-	ChapCredentials []*types.ChapInfo
+	ChapCredentials []types.ChapInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -65,7 +65,7 @@ type ListAuditTasksOutput struct {
 	NextToken *string
 
 	// The audits that were performed during the specified time period.
-	Tasks []*types.AuditTaskMetadata
+	Tasks []types.AuditTaskMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

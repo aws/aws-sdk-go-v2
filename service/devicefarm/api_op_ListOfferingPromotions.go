@@ -45,7 +45,7 @@ type ListOfferingPromotionsOutput struct {
 	NextToken *string
 
 	// Information about the offering promotions.
-	OfferingPromotions []*types.OfferingPromotion
+	OfferingPromotions []types.OfferingPromotion
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

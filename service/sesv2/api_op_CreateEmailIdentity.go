@@ -64,7 +64,7 @@ type CreateEmailIdentityInput struct {
 
 	// An array of objects that define the tags (keys and values) that you want to
 	// associate with the email identity.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // If the email identity is a domain, this object contains information about the
@@ -82,7 +82,7 @@ type CreateEmailIdentityOutput struct {
 	// verified email addresses or domains. For more information about verifying
 	// identities, see the Amazon Pinpoint User Guide
 	// (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html).
-	VerifiedForSendingStatus *bool
+	VerifiedForSendingStatus bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

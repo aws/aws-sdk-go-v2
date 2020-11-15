@@ -52,10 +52,10 @@ type DeleteChannelOutput struct {
 	// A list of destinations of the channel. For UDP outputs, there is one destination
 	// per output. For other types (HLS, for example), there is one destination per
 	// packager.
-	Destinations []*types.OutputDestination
+	Destinations []types.OutputDestination
 
 	// The endpoints where outgoing connections initiate from
-	EgressEndpoints []*types.ChannelEgressEndpoint
+	EgressEndpoints []types.ChannelEgressEndpoint
 
 	// Encoder Settings
 	EncoderSettings *types.EncoderSettings
@@ -64,7 +64,7 @@ type DeleteChannelOutput struct {
 	Id *string
 
 	// List of input attachments for channel.
-	InputAttachments []*types.InputAttachment
+	InputAttachments []types.InputAttachment
 
 	// Specification of network and file inputs for this channel
 	InputSpecification *types.InputSpecification
@@ -76,10 +76,10 @@ type DeleteChannelOutput struct {
 	Name *string
 
 	// Runtime details for the pipelines of a running channel.
-	PipelineDetails []*types.PipelineDetail
+	PipelineDetails []types.PipelineDetail
 
 	// The number of currently healthy pipelines.
-	PipelinesRunningCount *int32
+	PipelinesRunningCount int32
 
 	// The Amazon Resource Name (ARN) of the role assumed when running the Channel.
 	RoleArn *string
@@ -88,7 +88,7 @@ type DeleteChannelOutput struct {
 	State types.ChannelState
 
 	// A collection of key-value pairs.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

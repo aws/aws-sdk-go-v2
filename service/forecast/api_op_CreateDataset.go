@@ -125,7 +125,7 @@ type CreateDatasetInput struct {
 	// has aws as its prefix but the key does not, then Forecast considers it to be a
 	// user tag and will count against the limit of 50 tags. Tags with only the key
 	// prefix of aws do not count against your tags per resource limit.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDatasetOutput struct {

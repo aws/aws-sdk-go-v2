@@ -44,7 +44,7 @@ type Attribute struct {
 	Text *string
 
 	// Contextual information for this attribute.
-	Traits []*Trait
+	Traits []Trait
 
 	// The type of attribute.
 	Type EntitySubType
@@ -130,7 +130,7 @@ type ComprehendMedicalAsyncJobProperties struct {
 type Entity struct {
 
 	// The extracted attributes that relate to this entity.
-	Attributes []*Attribute
+	Attributes []Attribute
 
 	// The 0-based character offset in the input text that shows where the entity
 	// begins. The offset returns the UTF-8 code point in the string.
@@ -155,7 +155,7 @@ type Entity struct {
 	Text *string
 
 	// Contextual information for the entity.
-	Traits []*Trait
+	Traits []Trait
 
 	// Describes the specific type of entity with category of entities.
 	Type EntitySubType
@@ -192,7 +192,7 @@ type ICD10CMAttribute struct {
 
 	// The contextual information for the attribute. The traits recognized by
 	// InferICD10CM are DIAGNOSIS, SIGN, SYMPTOM, and NEGATION.
-	Traits []*ICD10CMTrait
+	Traits []ICD10CMTrait
 
 	// The type of attribute. InferICD10CM detects entities of the type DX_NAME.
 	Type ICD10CMAttributeType
@@ -224,7 +224,7 @@ type ICD10CMEntity struct {
 	// The detected attributes that relate to the entity. An extracted segment of the
 	// text that is an attribute of an entity, or otherwise related to an entity, such
 	// as the nature of a medical condition.
-	Attributes []*ICD10CMAttribute
+	Attributes []ICD10CMAttribute
 
 	// The 0-based character offset in the input text that shows where the entity
 	// begins. The offset returns the UTF-8 code point in the string.
@@ -240,7 +240,7 @@ type ICD10CMEntity struct {
 
 	// The ICD-10-CM concepts that the entity could refer to, along with a score
 	// indicating the likelihood of the match.
-	ICD10CMConcepts []*ICD10CMConcept
+	ICD10CMConcepts []ICD10CMConcept
 
 	// The numeric identifier for the entity. This is a monotonically increasing id
 	// unique within this response rather than a global unique identifier.
@@ -255,7 +255,7 @@ type ICD10CMEntity struct {
 
 	// Provides Contextual information for the entity. The traits recognized by
 	// InferICD10CM are DIAGNOSIS, SIGN, SYMPTOM, and NEGATION.
-	Traits []*ICD10CMTrait
+	Traits []ICD10CMTrait
 
 	// Describes the specific type of entity with category of entities. InferICD10CM
 	// detects entities of the type DX_NAME.
@@ -338,7 +338,7 @@ type RxNormAttribute struct {
 	// Contextual information for the attribute. InferRxNorm recognizes the trait
 	// NEGATION for attributes, i.e. that the patient is not taking a specific dose or
 	// form of a medication.
-	Traits []*RxNormTrait
+	Traits []RxNormTrait
 
 	// The type of attribute. The types of attributes recognized by InferRxNorm are
 	// BRAND_NAME and GENERIC_NAME.
@@ -370,7 +370,7 @@ type RxNormEntity struct {
 	// The extracted attributes that relate to the entity. The attributes recognized by
 	// InferRxNorm are DOSAGE, DURATION, FORM, FREQUENCY, RATE, ROUTE_OR_MODE, and
 	// STRENGTH.
-	Attributes []*RxNormAttribute
+	Attributes []RxNormAttribute
 
 	// The 0-based character offset in the input text that shows where the entity
 	// begins. The offset returns the UTF-8 code point in the string.
@@ -389,7 +389,7 @@ type RxNormEntity struct {
 
 	// The RxNorm concepts that the entity could refer to, along with a score
 	// indicating the likelihood of the match.
-	RxNormConcepts []*RxNormConcept
+	RxNormConcepts []RxNormConcept
 
 	// The level of confidence that Amazon Comprehend Medical has in the accuracy of
 	// the detected entity.
@@ -399,7 +399,7 @@ type RxNormEntity struct {
 	Text *string
 
 	// Contextual information for the entity.
-	Traits []*RxNormTrait
+	Traits []RxNormTrait
 
 	// Describes the specific type of entity. For InferRxNorm, the recognized entity
 	// type is MEDICATION.

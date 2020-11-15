@@ -39,7 +39,7 @@ type ListRegexPatternSetsInput struct {
 	// for this request. If you have more RegexPatternSet objects than the number you
 	// specify for Limit, the response includes a NextMarker value that you can use to
 	// get another batch of RegexPatternSet objects.
-	Limit *int32
+	Limit int32
 
 	// If you specify a value for Limit and you have more RegexPatternSet objects than
 	// the value of Limit, AWS WAF returns a NextMarker value in the response that
@@ -60,7 +60,7 @@ type ListRegexPatternSetsOutput struct {
 	NextMarker *string
 
 	// An array of RegexPatternSetSummary objects.
-	RegexPatternSets []*types.RegexPatternSetSummary
+	RegexPatternSets []types.RegexPatternSetSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

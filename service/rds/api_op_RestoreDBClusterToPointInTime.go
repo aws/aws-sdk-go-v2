@@ -119,7 +119,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// see Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon Aurora User Guide.
-	EnableCloudwatchLogsExports []*string
+	EnableCloudwatchLogsExports []string
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
@@ -193,16 +193,16 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// A list of tags. For more information, see Tagging Amazon RDS Resources
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
 	// the Amazon RDS User Guide.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A value that indicates whether to restore the DB cluster to the latest
 	// restorable backup time. By default, the DB cluster isn't restored to the latest
 	// restorable backup time. Constraints: Can't be specified if RestoreToTime
 	// parameter is provided.
-	UseLatestRestorableTime *bool
+	UseLatestRestorableTime bool
 
 	// A list of VPC security groups that the new DB cluster belongs to.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 }
 
 type RestoreDBClusterToPointInTimeOutput struct {

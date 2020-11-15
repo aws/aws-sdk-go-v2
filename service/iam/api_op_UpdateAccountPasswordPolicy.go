@@ -48,7 +48,7 @@ type UpdateAccountPasswordPolicyInput struct {
 	// IAM User Guide. If you do not specify a value for this parameter, then the
 	// operation uses the default value of false. The result is that IAM users in the
 	// account do not automatically have permissions to change their own password.
-	AllowUsersToChangePassword *bool
+	AllowUsersToChangePassword bool
 
 	// Prevents IAM users from setting a new password after their password has expired.
 	// The IAM user cannot be accessed until an administrator resets the password. If
@@ -77,26 +77,26 @@ type UpdateAccountPasswordPolicyInput struct {
 	// character from the ISO basic Latin alphabet (a to z). If you do not specify a
 	// value for this parameter, then the operation uses the default value of false.
 	// The result is that passwords do not require at least one lowercase character.
-	RequireLowercaseCharacters *bool
+	RequireLowercaseCharacters bool
 
 	// Specifies whether IAM user passwords must contain at least one numeric character
 	// (0 to 9). If you do not specify a value for this parameter, then the operation
 	// uses the default value of false. The result is that passwords do not require at
 	// least one numeric character.
-	RequireNumbers *bool
+	RequireNumbers bool
 
 	// Specifies whether IAM user passwords must contain at least one of the following
 	// non-alphanumeric characters: ! @ # $ % ^ & * ( ) _ + - = [ ] { } | ' If you do
 	// not specify a value for this parameter, then the operation uses the default
 	// value of false. The result is that passwords do not require at least one symbol
 	// character.
-	RequireSymbols *bool
+	RequireSymbols bool
 
 	// Specifies whether IAM user passwords must contain at least one uppercase
 	// character from the ISO basic Latin alphabet (A to Z). If you do not specify a
 	// value for this parameter, then the operation uses the default value of false.
 	// The result is that passwords do not require at least one uppercase character.
-	RequireUppercaseCharacters *bool
+	RequireUppercaseCharacters bool
 }
 
 type UpdateAccountPasswordPolicyOutput struct {

@@ -41,7 +41,7 @@ type PutRestApiInput struct {
 
 	// A query parameter to indicate whether to rollback the API update (true) or not
 	// (false) when a warning is encountered. The default value is false.
-	FailOnWarnings *bool
+	FailOnWarnings bool
 
 	// The mode query parameter to specify the update mode. Valid values are "merge"
 	// and "overwrite". By default, the update mode is "merge".
@@ -52,7 +52,7 @@ type PutRestApiInput struct {
 	// parameters value, as in the AWS CLI command of aws apigateway import-rest-api
 	// --parameters ignore=documentation --body
 	// 'file:///path/to/imported-api-body.json'.
-	Parameters map[string]*string
+	Parameters map[string]string
 }
 
 // Represents a REST API. Create an API
@@ -71,7 +71,7 @@ type PutRestApiOutput struct {
 
 	// The list of binary media types supported by the RestApi. By default, the RestApi
 	// supports only UTF-8-encoded text payloads.
-	BinaryMediaTypes []*string
+	BinaryMediaTypes []string
 
 	// The timestamp when the API was created.
 	CreatedDate *time.Time
@@ -84,7 +84,7 @@ type PutRestApiOutput struct {
 	// https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that
 	// clients use a custom domain name to invoke your API, disable the default
 	// endpoint.
-	DisableExecuteApiEndpoint *bool
+	DisableExecuteApiEndpoint bool
 
 	// The endpoint configuration of this RestApi showing the endpoint types of the
 	// API.
@@ -109,14 +109,14 @@ type PutRestApiOutput struct {
 	Policy *string
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// A version identifier for the API.
 	Version *string
 
 	// The warning messages reported when failonwarnings is turned on during API
 	// import.
-	Warnings []*string
+	Warnings []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

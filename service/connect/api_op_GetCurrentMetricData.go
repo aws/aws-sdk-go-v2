@@ -71,7 +71,7 @@ type GetCurrentMetricDataInput struct {
 	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time)
 	//
 	// This member is required.
-	CurrentMetrics []*types.CurrentMetric
+	CurrentMetrics []types.CurrentMetric
 
 	// The queues, up to 100, or channels, to use to filter the metrics returned.
 	// Metric data is retrieved only for the resources associated with the queues or
@@ -94,7 +94,7 @@ type GetCurrentMetricDataInput struct {
 	Groupings []types.Grouping
 
 	// The maximimum number of results to return per page.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results. The token
@@ -110,7 +110,7 @@ type GetCurrentMetricDataOutput struct {
 	DataSnapshotTime *time.Time
 
 	// Information about the real-time metrics.
-	MetricResults []*types.CurrentMetricResult
+	MetricResults []types.CurrentMetricResult
 
 	// If there are additional results, this is the token for the next set of results.
 	// The token expires after 5 minutes from the time it is created. Subsequent

@@ -74,7 +74,7 @@ type CreateSMBFileShareInput struct {
 	// @group1, and @DOMAIN\group1. Use this option very carefully, because any user in
 	// this list can do anything they like on the file share, regardless of file
 	// permissions.
-	AdminUserList []*string
+	AdminUserList []string
 
 	// The Amazon Resource Name (ARN) of the storage used for the audit logs.
 	AuditDestinationARN *string
@@ -109,7 +109,7 @@ type CreateSMBFileShareInput struct {
 	// the file share. A group must be prefixed with the @ character. Acceptable
 	// formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be
 	// set if Authentication is set to ActiveDirectory.
-	InvalidUserList []*string
+	InvalidUserList []string
 
 	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
 	// or false to use a key managed by Amazon S3. Optional. Valid Values: true | false
@@ -154,13 +154,13 @@ type CreateSMBFileShareInput struct {
 	// numbers representable in UTF-8 format, and the following special characters: + -
 	// = . _ : / @. The maximum length of a tag's key is 128 characters, and the
 	// maximum length for a tag's value is 256.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A list of users or groups in the Active Directory that are allowed to access the
 	// file  share. A group must be prefixed with the @ character. Acceptable formats
 	// include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if
 	// Authentication is set to ActiveDirectory.
-	ValidUserList []*string
+	ValidUserList []string
 }
 
 // CreateSMBFileShareOutput

@@ -48,7 +48,7 @@ type CreateDatabaseInput struct {
 	KmsKeyId *string
 
 	// A list of key-value pairs to label the table.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDatabaseOutput struct {

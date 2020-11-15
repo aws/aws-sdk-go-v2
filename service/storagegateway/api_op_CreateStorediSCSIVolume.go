@@ -78,7 +78,7 @@ type CreateStorediSCSIVolumeInput struct {
 	// set to false to create an empty volume. Valid Values: true | false
 	//
 	// This member is required.
-	PreserveExistingData *bool
+	PreserveExistingData bool
 
 	// The name of the iSCSI target used by an initiator to connect to a volume and
 	// used as a suffix for the target ARN. For example, specifying TargetName as
@@ -113,7 +113,7 @@ type CreateStorediSCSIVolumeInput struct {
 	// numbers representable in UTF-8 format, and the following special characters: + -
 	// = . _ : / @. The maximum length of a tag's key is 128 characters, and the
 	// maximum length for a tag's value is 256.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // A JSON object containing the following fields:
@@ -127,7 +127,7 @@ type CreateStorediSCSIVolumeOutput struct {
 	VolumeARN *string
 
 	// The size of the volume in bytes.
-	VolumeSizeInBytes *int64
+	VolumeSizeInBytes int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

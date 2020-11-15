@@ -82,7 +82,7 @@ type CreateNodegroupInput struct {
 	// in the Amazon EKS User Guide.
 	//
 	// This member is required.
-	Subnets []*string
+	Subnets []string
 
 	// The AMI type for your node group. GPU instance types should use the
 	// AL2_x86_64_GPU AMI type. Non-GPU instances should use the AL2_x86_64 AMI type.
@@ -115,11 +115,11 @@ type CreateNodegroupInput struct {
 	// templates with Amazon EKS, see Launch template support
 	// (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html) in the
 	// Amazon EKS User Guide.
-	InstanceTypes []*string
+	InstanceTypes []string
 
 	// The Kubernetes labels to be applied to the nodes in the node group when they are
 	// created.
-	Labels map[string]*string
+	Labels map[string]string
 
 	// An object representing a node group's launch template specification. If
 	// specified, then do not specify instanceTypes, diskSize, or remoteAccess and make
@@ -156,7 +156,7 @@ type CreateNodegroupInput struct {
 	// organization. Each tag consists of a key and an optional value, both of which
 	// you define. Node group tags do not propagate to any other resources associated
 	// with the node group, such as the Amazon EC2 instances or subnets.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The Kubernetes version to use for your managed nodes. By default, the Kubernetes
 	// version of the cluster is used, and this is the only accepted specified value.

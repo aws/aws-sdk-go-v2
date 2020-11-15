@@ -87,7 +87,7 @@ type GetPersonTrackingOutput struct {
 	// An array of the persons detected in the video and the time(s) their path was
 	// tracked throughout the video. An array element will exist for each time a
 	// person's path is tracked.
-	Persons []*types.PersonDetection
+	Persons []types.PersonDetection
 
 	// If the job fails, StatusMessage provides a descriptive error message.
 	StatusMessage *string

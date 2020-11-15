@@ -33,7 +33,7 @@ type ListFindingsInput struct {
 	FindingCriteria *types.FindingCriteria
 
 	// The maximum number of items to include in each page of the response.
-	MaxResults *int32
+	MaxResults int32
 
 	// The nextToken string that specifies which page of results to return in a
 	// paginated response.
@@ -47,7 +47,7 @@ type ListFindingsOutput struct {
 
 	// An array of strings, where each string is the unique identifier for a finding
 	// that meets the filter criteria specified in the request.
-	FindingIds []*string
+	FindingIds []string
 
 	// The string to use in a subsequent request to get the next page of results in a
 	// paginated response. This value is null if there are no additional pages.

@@ -71,7 +71,7 @@ type CreateMicrosoftADInput struct {
 	ShortName *string
 
 	// The tags to be assigned to the AWS Managed Microsoft AD directory.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Result of a CreateMicrosoftAD request.

@@ -36,7 +36,7 @@ type Accelerator struct {
 	IpAddressType IpAddressType
 
 	// The static IP addresses that Global Accelerator associates with the accelerator.
-	IpSets []*IpSet
+	IpSets []IpSet
 
 	// The date and time that the accelerator was last modified.
 	LastModifiedTime *time.Time
@@ -129,7 +129,7 @@ type ByoipCidr struct {
 
 	// A history of status changes for an IP address range that you bring to AWS Global
 	// Accelerator through bring your own IP address (BYOIP).
-	Events []*ByoipCidrEvent
+	Events []ByoipCidrEvent
 
 	// The state of the address pool.
 	State ByoipCidrState
@@ -265,7 +265,7 @@ type EndpointDescription struct {
 type EndpointGroup struct {
 
 	// The list of endpoint objects.
-	EndpointDescriptions []*EndpointDescription
+	EndpointDescriptions []EndpointDescription
 
 	// The Amazon Resource Name (ARN) of the endpoint group.
 	EndpointGroupArn *string
@@ -296,7 +296,7 @@ type EndpointGroup struct {
 	// endpoint. Using a port override lets you to map a list of external destination
 	// ports (that your users send traffic to) to a list of internal destination ports
 	// that you want an application endpoint to receive traffic on.
-	PortOverrides []*PortOverride
+	PortOverrides []PortOverride
 
 	// The number of consecutive health checks required to set the state of a healthy
 	// endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default
@@ -316,7 +316,7 @@ type IpSet struct {
 
 	// The array of IP addresses in the IP address set. An IP address set can have a
 	// maximum of two IP addresses.
-	IpAddresses []*string
+	IpAddresses []string
 
 	// The types of IP addresses included in this IP set.
 	IpFamily *string
@@ -346,7 +346,7 @@ type Listener struct {
 	ListenerArn *string
 
 	// The list of port ranges for the connections from clients to the accelerator.
-	PortRanges []*PortRange
+	PortRanges []PortRange
 
 	// The protocol for the connections from clients to the accelerator.
 	Protocol Protocol

@@ -3623,7 +3623,7 @@ func awsAwsjson11_deserializeErrorInvalidRequestException(response *smithyhttp.R
 	return output
 }
 
-func awsAwsjson11_deserializeDocumentAgentArnList(v *[]*string, value interface{}) error {
+func awsAwsjson11_deserializeDocumentAgentArnList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3636,21 +3636,21 @@ func awsAwsjson11_deserializeDocumentAgentArnList(v *[]*string, value interface{
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected AgentArn to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -3659,7 +3659,7 @@ func awsAwsjson11_deserializeDocumentAgentArnList(v *[]*string, value interface{
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAgentList(v *[]*types.AgentListEntry, value interface{}) error {
+func awsAwsjson11_deserializeDocumentAgentList(v *[]types.AgentListEntry, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3672,18 +3672,20 @@ func awsAwsjson11_deserializeDocumentAgentList(v *[]*types.AgentListEntry, value
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.AgentListEntry
+	var cv []types.AgentListEntry
 	if *v == nil {
-		cv = []*types.AgentListEntry{}
+		cv = []types.AgentListEntry{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.AgentListEntry
-		if err := awsAwsjson11_deserializeDocumentAgentListEntry(&col, value); err != nil {
+		var col types.AgentListEntry
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAgentListEntry(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -3719,7 +3721,7 @@ func awsAwsjson11_deserializeDocumentAgentListEntry(v **types.AgentListEntry, va
 				if !ok {
 					return fmt.Errorf("expected AgentArn to be of type string, got %T instead", value)
 				}
-				sv.AgentArn = &jtv
+				sv.AgentArn = ptr.String(jtv)
 			}
 
 		case "Name":
@@ -3728,7 +3730,7 @@ func awsAwsjson11_deserializeDocumentAgentListEntry(v **types.AgentListEntry, va
 				if !ok {
 					return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -3749,7 +3751,7 @@ func awsAwsjson11_deserializeDocumentAgentListEntry(v **types.AgentListEntry, va
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDestinationNetworkInterfaceArns(v *[]*string, value interface{}) error {
+func awsAwsjson11_deserializeDocumentDestinationNetworkInterfaceArns(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3762,21 +3764,21 @@ func awsAwsjson11_deserializeDocumentDestinationNetworkInterfaceArns(v *[]*strin
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected NetworkInterfaceArn to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -3818,7 +3820,7 @@ func awsAwsjson11_deserializeDocumentEc2Config(v **types.Ec2Config, value interf
 				if !ok {
 					return fmt.Errorf("expected Ec2SubnetArn to be of type string, got %T instead", value)
 				}
-				sv.SubnetArn = &jtv
+				sv.SubnetArn = ptr.String(jtv)
 			}
 
 		default:
@@ -3830,7 +3832,7 @@ func awsAwsjson11_deserializeDocumentEc2Config(v **types.Ec2Config, value interf
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentEc2SecurityGroupArnList(v *[]*string, value interface{}) error {
+func awsAwsjson11_deserializeDocumentEc2SecurityGroupArnList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3843,21 +3845,21 @@ func awsAwsjson11_deserializeDocumentEc2SecurityGroupArnList(v *[]*string, value
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected Ec2SecurityGroupArn to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -3866,7 +3868,7 @@ func awsAwsjson11_deserializeDocumentEc2SecurityGroupArnList(v *[]*string, value
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentFilterList(v *[]*types.FilterRule, value interface{}) error {
+func awsAwsjson11_deserializeDocumentFilterList(v *[]types.FilterRule, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3879,18 +3881,20 @@ func awsAwsjson11_deserializeDocumentFilterList(v *[]*types.FilterRule, value in
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.FilterRule
+	var cv []types.FilterRule
 	if *v == nil {
-		cv = []*types.FilterRule{}
+		cv = []types.FilterRule{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.FilterRule
-		if err := awsAwsjson11_deserializeDocumentFilterRule(&col, value); err != nil {
+		var col types.FilterRule
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentFilterRule(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -3935,7 +3939,7 @@ func awsAwsjson11_deserializeDocumentFilterRule(v **types.FilterRule, value inte
 				if !ok {
 					return fmt.Errorf("expected FilterValue to be of type string, got %T instead", value)
 				}
-				sv.Value = &jtv
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:
@@ -3975,7 +3979,7 @@ func awsAwsjson11_deserializeDocumentInternalException(v **types.InternalExcepti
 				if !ok {
 					return fmt.Errorf("expected string to be of type string, got %T instead", value)
 				}
-				sv.ErrorCode_ = &jtv
+				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
 		case "message":
@@ -3984,7 +3988,7 @@ func awsAwsjson11_deserializeDocumentInternalException(v **types.InternalExcepti
 				if !ok {
 					return fmt.Errorf("expected string to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -4024,7 +4028,7 @@ func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				if !ok {
 					return fmt.Errorf("expected string to be of type string, got %T instead", value)
 				}
-				sv.ErrorCode_ = &jtv
+				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
 		case "message":
@@ -4033,7 +4037,7 @@ func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				if !ok {
 					return fmt.Errorf("expected string to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -4045,7 +4049,7 @@ func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentLocationList(v *[]*types.LocationListEntry, value interface{}) error {
+func awsAwsjson11_deserializeDocumentLocationList(v *[]types.LocationListEntry, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4058,18 +4062,20 @@ func awsAwsjson11_deserializeDocumentLocationList(v *[]*types.LocationListEntry,
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.LocationListEntry
+	var cv []types.LocationListEntry
 	if *v == nil {
-		cv = []*types.LocationListEntry{}
+		cv = []types.LocationListEntry{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.LocationListEntry
-		if err := awsAwsjson11_deserializeDocumentLocationListEntry(&col, value); err != nil {
+		var col types.LocationListEntry
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentLocationListEntry(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4105,7 +4111,7 @@ func awsAwsjson11_deserializeDocumentLocationListEntry(v **types.LocationListEnt
 				if !ok {
 					return fmt.Errorf("expected LocationArn to be of type string, got %T instead", value)
 				}
-				sv.LocationArn = &jtv
+				sv.LocationArn = ptr.String(jtv)
 			}
 
 		case "LocationUri":
@@ -4114,7 +4120,7 @@ func awsAwsjson11_deserializeDocumentLocationListEntry(v **types.LocationListEnt
 				if !ok {
 					return fmt.Errorf("expected LocationUri to be of type string, got %T instead", value)
 				}
-				sv.LocationUri = &jtv
+				sv.LocationUri = ptr.String(jtv)
 			}
 
 		default:
@@ -4243,7 +4249,7 @@ func awsAwsjson11_deserializeDocumentOptions(v **types.Options, value interface{
 				if err != nil {
 					return err
 				}
-				sv.BytesPerSecond = &i64
+				sv.BytesPerSecond = ptr.Int64(i64)
 			}
 
 		case "Gid":
@@ -4354,7 +4360,7 @@ func awsAwsjson11_deserializeDocumentOptions(v **types.Options, value interface{
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentOutputTagList(v *[]*types.TagListEntry, value interface{}) error {
+func awsAwsjson11_deserializeDocumentOutputTagList(v *[]types.TagListEntry, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4367,18 +4373,20 @@ func awsAwsjson11_deserializeDocumentOutputTagList(v *[]*types.TagListEntry, val
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.TagListEntry
+	var cv []types.TagListEntry
 	if *v == nil {
-		cv = []*types.TagListEntry{}
+		cv = []types.TagListEntry{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.TagListEntry
-		if err := awsAwsjson11_deserializeDocumentTagListEntry(&col, value); err != nil {
+		var col types.TagListEntry
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentTagListEntry(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4386,7 +4394,7 @@ func awsAwsjson11_deserializeDocumentOutputTagList(v *[]*types.TagListEntry, val
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentPLSecurityGroupArnList(v *[]*string, value interface{}) error {
+func awsAwsjson11_deserializeDocumentPLSecurityGroupArnList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4399,21 +4407,21 @@ func awsAwsjson11_deserializeDocumentPLSecurityGroupArnList(v *[]*string, value 
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected Ec2SecurityGroupArn to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -4422,7 +4430,7 @@ func awsAwsjson11_deserializeDocumentPLSecurityGroupArnList(v *[]*string, value 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentPLSubnetArnList(v *[]*string, value interface{}) error {
+func awsAwsjson11_deserializeDocumentPLSubnetArnList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4435,21 +4443,21 @@ func awsAwsjson11_deserializeDocumentPLSubnetArnList(v *[]*string, value interfa
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected Ec2SubnetArn to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -4486,7 +4494,7 @@ func awsAwsjson11_deserializeDocumentPrivateLinkConfig(v **types.PrivateLinkConf
 				if !ok {
 					return fmt.Errorf("expected Endpoint to be of type string, got %T instead", value)
 				}
-				sv.PrivateLinkEndpoint = &jtv
+				sv.PrivateLinkEndpoint = ptr.String(jtv)
 			}
 
 		case "SecurityGroupArns":
@@ -4505,7 +4513,7 @@ func awsAwsjson11_deserializeDocumentPrivateLinkConfig(v **types.PrivateLinkConf
 				if !ok {
 					return fmt.Errorf("expected VpcEndpointId to be of type string, got %T instead", value)
 				}
-				sv.VpcEndpointId = &jtv
+				sv.VpcEndpointId = ptr.String(jtv)
 			}
 
 		default:
@@ -4545,7 +4553,7 @@ func awsAwsjson11_deserializeDocumentS3Config(v **types.S3Config, value interfac
 				if !ok {
 					return fmt.Errorf("expected IamRoleArn to be of type string, got %T instead", value)
 				}
-				sv.BucketAccessRoleArn = &jtv
+				sv.BucketAccessRoleArn = ptr.String(jtv)
 			}
 
 		default:
@@ -4597,7 +4605,7 @@ func awsAwsjson11_deserializeDocumentSmbMountOptions(v **types.SmbMountOptions, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentSourceNetworkInterfaceArns(v *[]*string, value interface{}) error {
+func awsAwsjson11_deserializeDocumentSourceNetworkInterfaceArns(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4610,21 +4618,21 @@ func awsAwsjson11_deserializeDocumentSourceNetworkInterfaceArns(v *[]*string, va
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected NetworkInterfaceArn to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -4661,7 +4669,7 @@ func awsAwsjson11_deserializeDocumentTagListEntry(v **types.TagListEntry, value 
 				if !ok {
 					return fmt.Errorf("expected TagKey to be of type string, got %T instead", value)
 				}
-				sv.Key = &jtv
+				sv.Key = ptr.String(jtv)
 			}
 
 		case "Value":
@@ -4670,7 +4678,7 @@ func awsAwsjson11_deserializeDocumentTagListEntry(v **types.TagListEntry, value 
 				if !ok {
 					return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
 				}
-				sv.Value = &jtv
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:
@@ -4682,7 +4690,7 @@ func awsAwsjson11_deserializeDocumentTagListEntry(v **types.TagListEntry, value 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTaskExecutionList(v *[]*types.TaskExecutionListEntry, value interface{}) error {
+func awsAwsjson11_deserializeDocumentTaskExecutionList(v *[]types.TaskExecutionListEntry, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4695,18 +4703,20 @@ func awsAwsjson11_deserializeDocumentTaskExecutionList(v *[]*types.TaskExecution
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.TaskExecutionListEntry
+	var cv []types.TaskExecutionListEntry
 	if *v == nil {
-		cv = []*types.TaskExecutionListEntry{}
+		cv = []types.TaskExecutionListEntry{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.TaskExecutionListEntry
-		if err := awsAwsjson11_deserializeDocumentTaskExecutionListEntry(&col, value); err != nil {
+		var col types.TaskExecutionListEntry
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentTaskExecutionListEntry(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4751,7 +4761,7 @@ func awsAwsjson11_deserializeDocumentTaskExecutionListEntry(v **types.TaskExecut
 				if !ok {
 					return fmt.Errorf("expected TaskExecutionArn to be of type string, got %T instead", value)
 				}
-				sv.TaskExecutionArn = &jtv
+				sv.TaskExecutionArn = ptr.String(jtv)
 			}
 
 		default:
@@ -4791,7 +4801,7 @@ func awsAwsjson11_deserializeDocumentTaskExecutionResultDetail(v **types.TaskExe
 				if !ok {
 					return fmt.Errorf("expected string to be of type string, got %T instead", value)
 				}
-				sv.ErrorCode = &jtv
+				sv.ErrorCode = ptr.String(jtv)
 			}
 
 		case "ErrorDetail":
@@ -4800,7 +4810,7 @@ func awsAwsjson11_deserializeDocumentTaskExecutionResultDetail(v **types.TaskExe
 				if !ok {
 					return fmt.Errorf("expected string to be of type string, got %T instead", value)
 				}
-				sv.ErrorDetail = &jtv
+				sv.ErrorDetail = ptr.String(jtv)
 			}
 
 		case "PrepareDuration":
@@ -4813,7 +4823,7 @@ func awsAwsjson11_deserializeDocumentTaskExecutionResultDetail(v **types.TaskExe
 				if err != nil {
 					return err
 				}
-				sv.PrepareDuration = &i64
+				sv.PrepareDuration = ptr.Int64(i64)
 			}
 
 		case "PrepareStatus":
@@ -4835,7 +4845,7 @@ func awsAwsjson11_deserializeDocumentTaskExecutionResultDetail(v **types.TaskExe
 				if err != nil {
 					return err
 				}
-				sv.TotalDuration = &i64
+				sv.TotalDuration = ptr.Int64(i64)
 			}
 
 		case "TransferDuration":
@@ -4848,7 +4858,7 @@ func awsAwsjson11_deserializeDocumentTaskExecutionResultDetail(v **types.TaskExe
 				if err != nil {
 					return err
 				}
-				sv.TransferDuration = &i64
+				sv.TransferDuration = ptr.Int64(i64)
 			}
 
 		case "TransferStatus":
@@ -4870,7 +4880,7 @@ func awsAwsjson11_deserializeDocumentTaskExecutionResultDetail(v **types.TaskExe
 				if err != nil {
 					return err
 				}
-				sv.VerifyDuration = &i64
+				sv.VerifyDuration = ptr.Int64(i64)
 			}
 
 		case "VerifyStatus":
@@ -4891,7 +4901,7 @@ func awsAwsjson11_deserializeDocumentTaskExecutionResultDetail(v **types.TaskExe
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTaskList(v *[]*types.TaskListEntry, value interface{}) error {
+func awsAwsjson11_deserializeDocumentTaskList(v *[]types.TaskListEntry, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4904,18 +4914,20 @@ func awsAwsjson11_deserializeDocumentTaskList(v *[]*types.TaskListEntry, value i
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.TaskListEntry
+	var cv []types.TaskListEntry
 	if *v == nil {
-		cv = []*types.TaskListEntry{}
+		cv = []types.TaskListEntry{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.TaskListEntry
-		if err := awsAwsjson11_deserializeDocumentTaskListEntry(&col, value); err != nil {
+		var col types.TaskListEntry
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentTaskListEntry(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4951,7 +4963,7 @@ func awsAwsjson11_deserializeDocumentTaskListEntry(v **types.TaskListEntry, valu
 				if !ok {
 					return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -4969,7 +4981,7 @@ func awsAwsjson11_deserializeDocumentTaskListEntry(v **types.TaskListEntry, valu
 				if !ok {
 					return fmt.Errorf("expected TaskArn to be of type string, got %T instead", value)
 				}
-				sv.TaskArn = &jtv
+				sv.TaskArn = ptr.String(jtv)
 			}
 
 		default:
@@ -5009,7 +5021,7 @@ func awsAwsjson11_deserializeDocumentTaskSchedule(v **types.TaskSchedule, value 
 				if !ok {
 					return fmt.Errorf("expected ScheduleExpressionCron to be of type string, got %T instead", value)
 				}
-				sv.ScheduleExpression = &jtv
+				sv.ScheduleExpression = ptr.String(jtv)
 			}
 
 		default:
@@ -5080,7 +5092,7 @@ func awsAwsjson11_deserializeOpDocumentCreateAgentOutput(v **CreateAgentOutput, 
 				if !ok {
 					return fmt.Errorf("expected AgentArn to be of type string, got %T instead", value)
 				}
-				sv.AgentArn = &jtv
+				sv.AgentArn = ptr.String(jtv)
 			}
 
 		default:
@@ -5120,7 +5132,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLocationEfsOutput(v **CreateLocatio
 				if !ok {
 					return fmt.Errorf("expected LocationArn to be of type string, got %T instead", value)
 				}
-				sv.LocationArn = &jtv
+				sv.LocationArn = ptr.String(jtv)
 			}
 
 		default:
@@ -5160,7 +5172,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLocationFsxWindowsOutput(v **Create
 				if !ok {
 					return fmt.Errorf("expected LocationArn to be of type string, got %T instead", value)
 				}
-				sv.LocationArn = &jtv
+				sv.LocationArn = ptr.String(jtv)
 			}
 
 		default:
@@ -5200,7 +5212,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLocationNfsOutput(v **CreateLocatio
 				if !ok {
 					return fmt.Errorf("expected LocationArn to be of type string, got %T instead", value)
 				}
-				sv.LocationArn = &jtv
+				sv.LocationArn = ptr.String(jtv)
 			}
 
 		default:
@@ -5240,7 +5252,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLocationObjectStorageOutput(v **Cre
 				if !ok {
 					return fmt.Errorf("expected LocationArn to be of type string, got %T instead", value)
 				}
-				sv.LocationArn = &jtv
+				sv.LocationArn = ptr.String(jtv)
 			}
 
 		default:
@@ -5280,7 +5292,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLocationS3Output(v **CreateLocation
 				if !ok {
 					return fmt.Errorf("expected LocationArn to be of type string, got %T instead", value)
 				}
-				sv.LocationArn = &jtv
+				sv.LocationArn = ptr.String(jtv)
 			}
 
 		default:
@@ -5320,7 +5332,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLocationSmbOutput(v **CreateLocatio
 				if !ok {
 					return fmt.Errorf("expected LocationArn to be of type string, got %T instead", value)
 				}
-				sv.LocationArn = &jtv
+				sv.LocationArn = ptr.String(jtv)
 			}
 
 		default:
@@ -5360,7 +5372,7 @@ func awsAwsjson11_deserializeOpDocumentCreateTaskOutput(v **CreateTaskOutput, va
 				if !ok {
 					return fmt.Errorf("expected TaskArn to be of type string, got %T instead", value)
 				}
-				sv.TaskArn = &jtv
+				sv.TaskArn = ptr.String(jtv)
 			}
 
 		default:
@@ -5493,7 +5505,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeAgentOutput(v **DescribeAgentOutp
 				if !ok {
 					return fmt.Errorf("expected AgentArn to be of type string, got %T instead", value)
 				}
-				sv.AgentArn = &jtv
+				sv.AgentArn = ptr.String(jtv)
 			}
 
 		case "CreationTime":
@@ -5537,7 +5549,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeAgentOutput(v **DescribeAgentOutp
 				if !ok {
 					return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "PrivateLinkConfig":
@@ -5609,7 +5621,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationEfsOutput(v **DescribeLoc
 				if !ok {
 					return fmt.Errorf("expected LocationArn to be of type string, got %T instead", value)
 				}
-				sv.LocationArn = &jtv
+				sv.LocationArn = ptr.String(jtv)
 			}
 
 		case "LocationUri":
@@ -5618,7 +5630,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationEfsOutput(v **DescribeLoc
 				if !ok {
 					return fmt.Errorf("expected LocationUri to be of type string, got %T instead", value)
 				}
-				sv.LocationUri = &jtv
+				sv.LocationUri = ptr.String(jtv)
 			}
 
 		default:
@@ -5671,7 +5683,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationFsxWindowsOutput(v **Desc
 				if !ok {
 					return fmt.Errorf("expected SmbDomain to be of type string, got %T instead", value)
 				}
-				sv.Domain = &jtv
+				sv.Domain = ptr.String(jtv)
 			}
 
 		case "LocationArn":
@@ -5680,7 +5692,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationFsxWindowsOutput(v **Desc
 				if !ok {
 					return fmt.Errorf("expected LocationArn to be of type string, got %T instead", value)
 				}
-				sv.LocationArn = &jtv
+				sv.LocationArn = ptr.String(jtv)
 			}
 
 		case "LocationUri":
@@ -5689,7 +5701,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationFsxWindowsOutput(v **Desc
 				if !ok {
 					return fmt.Errorf("expected LocationUri to be of type string, got %T instead", value)
 				}
-				sv.LocationUri = &jtv
+				sv.LocationUri = ptr.String(jtv)
 			}
 
 		case "SecurityGroupArns":
@@ -5703,7 +5715,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationFsxWindowsOutput(v **Desc
 				if !ok {
 					return fmt.Errorf("expected SmbUser to be of type string, got %T instead", value)
 				}
-				sv.User = &jtv
+				sv.User = ptr.String(jtv)
 			}
 
 		default:
@@ -5756,7 +5768,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationNfsOutput(v **DescribeLoc
 				if !ok {
 					return fmt.Errorf("expected LocationArn to be of type string, got %T instead", value)
 				}
-				sv.LocationArn = &jtv
+				sv.LocationArn = ptr.String(jtv)
 			}
 
 		case "LocationUri":
@@ -5765,7 +5777,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationNfsOutput(v **DescribeLoc
 				if !ok {
 					return fmt.Errorf("expected LocationUri to be of type string, got %T instead", value)
 				}
-				sv.LocationUri = &jtv
+				sv.LocationUri = ptr.String(jtv)
 			}
 
 		case "MountOptions":
@@ -5815,7 +5827,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationObjectStorageOutput(v **D
 				if !ok {
 					return fmt.Errorf("expected ObjectStorageAccessKey to be of type string, got %T instead", value)
 				}
-				sv.AccessKey = &jtv
+				sv.AccessKey = ptr.String(jtv)
 			}
 
 		case "AgentArns":
@@ -5842,7 +5854,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationObjectStorageOutput(v **D
 				if !ok {
 					return fmt.Errorf("expected LocationArn to be of type string, got %T instead", value)
 				}
-				sv.LocationArn = &jtv
+				sv.LocationArn = ptr.String(jtv)
 			}
 
 		case "LocationUri":
@@ -5851,7 +5863,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationObjectStorageOutput(v **D
 				if !ok {
 					return fmt.Errorf("expected LocationUri to be of type string, got %T instead", value)
 				}
-				sv.LocationUri = &jtv
+				sv.LocationUri = ptr.String(jtv)
 			}
 
 		case "ServerPort":
@@ -5931,7 +5943,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationS3Output(v **DescribeLoca
 				if !ok {
 					return fmt.Errorf("expected LocationArn to be of type string, got %T instead", value)
 				}
-				sv.LocationArn = &jtv
+				sv.LocationArn = ptr.String(jtv)
 			}
 
 		case "LocationUri":
@@ -5940,7 +5952,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationS3Output(v **DescribeLoca
 				if !ok {
 					return fmt.Errorf("expected LocationUri to be of type string, got %T instead", value)
 				}
-				sv.LocationUri = &jtv
+				sv.LocationUri = ptr.String(jtv)
 			}
 
 		case "S3Config":
@@ -6012,7 +6024,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationSmbOutput(v **DescribeLoc
 				if !ok {
 					return fmt.Errorf("expected SmbDomain to be of type string, got %T instead", value)
 				}
-				sv.Domain = &jtv
+				sv.Domain = ptr.String(jtv)
 			}
 
 		case "LocationArn":
@@ -6021,7 +6033,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationSmbOutput(v **DescribeLoc
 				if !ok {
 					return fmt.Errorf("expected LocationArn to be of type string, got %T instead", value)
 				}
-				sv.LocationArn = &jtv
+				sv.LocationArn = ptr.String(jtv)
 			}
 
 		case "LocationUri":
@@ -6030,7 +6042,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationSmbOutput(v **DescribeLoc
 				if !ok {
 					return fmt.Errorf("expected LocationUri to be of type string, got %T instead", value)
 				}
-				sv.LocationUri = &jtv
+				sv.LocationUri = ptr.String(jtv)
 			}
 
 		case "MountOptions":
@@ -6044,7 +6056,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationSmbOutput(v **DescribeLoc
 				if !ok {
 					return fmt.Errorf("expected SmbUser to be of type string, got %T instead", value)
 				}
-				sv.User = &jtv
+				sv.User = ptr.String(jtv)
 			}
 
 		default:
@@ -6088,7 +6100,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskExecutionOutput(v **DescribeT
 				if err != nil {
 					return err
 				}
-				sv.BytesTransferred = &i64
+				sv.BytesTransferred = i64
 			}
 
 		case "BytesWritten":
@@ -6101,7 +6113,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskExecutionOutput(v **DescribeT
 				if err != nil {
 					return err
 				}
-				sv.BytesWritten = &i64
+				sv.BytesWritten = i64
 			}
 
 		case "EstimatedBytesToTransfer":
@@ -6114,7 +6126,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskExecutionOutput(v **DescribeT
 				if err != nil {
 					return err
 				}
-				sv.EstimatedBytesToTransfer = &i64
+				sv.EstimatedBytesToTransfer = i64
 			}
 
 		case "EstimatedFilesToTransfer":
@@ -6127,7 +6139,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskExecutionOutput(v **DescribeT
 				if err != nil {
 					return err
 				}
-				sv.EstimatedFilesToTransfer = &i64
+				sv.EstimatedFilesToTransfer = i64
 			}
 
 		case "Excludes":
@@ -6145,7 +6157,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskExecutionOutput(v **DescribeT
 				if err != nil {
 					return err
 				}
-				sv.FilesTransferred = &i64
+				sv.FilesTransferred = i64
 			}
 
 		case "Includes":
@@ -6191,7 +6203,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskExecutionOutput(v **DescribeT
 				if !ok {
 					return fmt.Errorf("expected TaskExecutionArn to be of type string, got %T instead", value)
 				}
-				sv.TaskExecutionArn = &jtv
+				sv.TaskExecutionArn = ptr.String(jtv)
 			}
 
 		default:
@@ -6231,7 +6243,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskOutput(v **DescribeTaskOutput
 				if !ok {
 					return fmt.Errorf("expected LogGroupArn to be of type string, got %T instead", value)
 				}
-				sv.CloudWatchLogGroupArn = &jtv
+				sv.CloudWatchLogGroupArn = ptr.String(jtv)
 			}
 
 		case "CreationTime":
@@ -6253,7 +6265,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskOutput(v **DescribeTaskOutput
 				if !ok {
 					return fmt.Errorf("expected TaskExecutionArn to be of type string, got %T instead", value)
 				}
-				sv.CurrentTaskExecutionArn = &jtv
+				sv.CurrentTaskExecutionArn = ptr.String(jtv)
 			}
 
 		case "DestinationLocationArn":
@@ -6262,7 +6274,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskOutput(v **DescribeTaskOutput
 				if !ok {
 					return fmt.Errorf("expected LocationArn to be of type string, got %T instead", value)
 				}
-				sv.DestinationLocationArn = &jtv
+				sv.DestinationLocationArn = ptr.String(jtv)
 			}
 
 		case "DestinationNetworkInterfaceArns":
@@ -6276,7 +6288,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskOutput(v **DescribeTaskOutput
 				if !ok {
 					return fmt.Errorf("expected string to be of type string, got %T instead", value)
 				}
-				sv.ErrorCode = &jtv
+				sv.ErrorCode = ptr.String(jtv)
 			}
 
 		case "ErrorDetail":
@@ -6285,7 +6297,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskOutput(v **DescribeTaskOutput
 				if !ok {
 					return fmt.Errorf("expected string to be of type string, got %T instead", value)
 				}
-				sv.ErrorDetail = &jtv
+				sv.ErrorDetail = ptr.String(jtv)
 			}
 
 		case "Excludes":
@@ -6299,7 +6311,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskOutput(v **DescribeTaskOutput
 				if !ok {
 					return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "Options":
@@ -6318,7 +6330,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskOutput(v **DescribeTaskOutput
 				if !ok {
 					return fmt.Errorf("expected LocationArn to be of type string, got %T instead", value)
 				}
-				sv.SourceLocationArn = &jtv
+				sv.SourceLocationArn = ptr.String(jtv)
 			}
 
 		case "SourceNetworkInterfaceArns":
@@ -6341,7 +6353,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskOutput(v **DescribeTaskOutput
 				if !ok {
 					return fmt.Errorf("expected TaskArn to be of type string, got %T instead", value)
 				}
-				sv.TaskArn = &jtv
+				sv.TaskArn = ptr.String(jtv)
 			}
 
 		default:
@@ -6386,7 +6398,7 @@ func awsAwsjson11_deserializeOpDocumentListAgentsOutput(v **ListAgentsOutput, va
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -6431,7 +6443,7 @@ func awsAwsjson11_deserializeOpDocumentListLocationsOutput(v **ListLocationsOutp
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -6471,7 +6483,7 @@ func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "Tags":
@@ -6516,7 +6528,7 @@ func awsAwsjson11_deserializeOpDocumentListTaskExecutionsOutput(v **ListTaskExec
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "TaskExecutions":
@@ -6561,7 +6573,7 @@ func awsAwsjson11_deserializeOpDocumentListTasksOutput(v **ListTasksOutput, valu
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "Tasks":
@@ -6606,7 +6618,7 @@ func awsAwsjson11_deserializeOpDocumentStartTaskExecutionOutput(v **StartTaskExe
 				if !ok {
 					return fmt.Errorf("expected TaskExecutionArn to be of type string, got %T instead", value)
 				}
-				sv.TaskExecutionArn = &jtv
+				sv.TaskExecutionArn = ptr.String(jtv)
 			}
 
 		default:

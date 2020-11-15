@@ -68,7 +68,7 @@ type ListImagesInput struct {
 type ListImagesOutput struct {
 
 	// The list of image IDs for the requested repository.
-	ImageIds []*types.ImageIdentifier
+	ImageIds []types.ImageIdentifier
 
 	// The nextToken value to include in a future ListImages request. When the results
 	// of a ListImages request exceed maxResults, this value can be used to retrieve

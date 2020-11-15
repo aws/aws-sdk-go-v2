@@ -160,13 +160,13 @@ func validateIntentSummary(v *types.IntentSummary) error {
 	}
 }
 
-func validateIntentSummaryList(v []*types.IntentSummary) error {
+func validateIntentSummaryList(v []types.IntentSummary) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IntentSummaryList"}
 	for i := range v {
-		if err := validateIntentSummary(v[i]); err != nil {
+		if err := validateIntentSummary(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

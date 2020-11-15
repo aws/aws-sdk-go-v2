@@ -67,7 +67,7 @@ type ConnectionAlias struct {
 	AliasId *string
 
 	// The association status of the connection alias.
-	Associations []*ConnectionAliasAssociation
+	Associations []ConnectionAliasAssociation
 
 	// The connection string specified for the connection alias. The connection string
 	// must be in the form of a fully qualified domain name (FQDN), such as
@@ -349,7 +349,7 @@ type Workspace struct {
 	IpAddress *string
 
 	// The modification states of the WorkSpace.
-	ModificationStates []*ModificationState
+	ModificationStates []ModificationState
 
 	// Indicates whether the data stored on the root volume is encrypted.
 	RootVolumeEncryptionEnabled *bool
@@ -541,14 +541,14 @@ type WorkspaceDirectory struct {
 	DirectoryType WorkspaceDirectoryType
 
 	// The IP addresses of the DNS servers for the directory.
-	DnsIpAddresses []*string
+	DnsIpAddresses []string
 
 	// The identifier of the IAM role. This is the role that allows Amazon WorkSpaces
 	// to make calls to other services, such as Amazon EC2, on your behalf.
 	IamRoleId *string
 
 	// The identifiers of the IP access control groups associated with the directory.
-	IpGroupIds []*string
+	IpGroupIds []string
 
 	// The registration code for the directory. This is the code that users enter in
 	// their Amazon WorkSpaces client application to connect to the directory.
@@ -568,7 +568,7 @@ type WorkspaceDirectory struct {
 	State WorkspaceDirectoryState
 
 	// The identifiers of the subnets used with the directory.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// Specifies whether the directory is dedicated or shared. To use Bring Your Own
 	// License (BYOL), this value must be set to DEDICATED. For more information, see
@@ -676,7 +676,7 @@ type WorkspaceRequest struct {
 	RootVolumeEncryptionEnabled *bool
 
 	// The tags for the WorkSpace.
-	Tags []*Tag
+	Tags []Tag
 
 	// Indicates whether the data stored on the user volume is encrypted.
 	UserVolumeEncryptionEnabled *bool
@@ -702,5 +702,5 @@ type WorkspacesIpGroup struct {
 	GroupName *string
 
 	// The rules.
-	UserRules []*IpRuleItem
+	UserRules []IpRuleItem
 }

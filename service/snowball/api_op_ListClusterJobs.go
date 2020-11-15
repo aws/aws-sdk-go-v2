@@ -50,7 +50,7 @@ type ListClusterJobsOutput struct {
 
 	// Each JobListEntry object contains a job's state, a job's ID, and a value that
 	// indicates whether the job is a job part, in the case of export jobs.
-	JobListEntries []*types.JobListEntry
+	JobListEntries []types.JobListEntry
 
 	// HTTP requests are stateless. If you use the automatically generated NextToken
 	// value in your next ListClusterJobsResult call, your list of returned jobs will

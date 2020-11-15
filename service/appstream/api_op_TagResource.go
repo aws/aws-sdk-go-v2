@@ -48,7 +48,7 @@ type TagResourceInput struct {
 	// following special characters: _ . : / = + \ - @
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourceOutput struct {

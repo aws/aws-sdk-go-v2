@@ -56,7 +56,7 @@ type ListPipelineExecutionsOutput struct {
 	NextToken *string
 
 	// A list of executions in the history of a pipeline.
-	PipelineExecutionSummaries []*types.PipelineExecutionSummary
+	PipelineExecutionSummaries []types.PipelineExecutionSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

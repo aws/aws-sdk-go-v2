@@ -38,7 +38,7 @@ type CreateLoggerDefinitionVersionInput struct {
 	AmznClientToken *string
 
 	// A list of loggers.
-	Loggers []*types.Logger
+	Loggers []types.Logger
 }
 
 type CreateLoggerDefinitionVersionOutput struct {

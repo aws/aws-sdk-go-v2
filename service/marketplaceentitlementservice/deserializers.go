@@ -269,7 +269,7 @@ func awsAwsjson11_deserializeDocumentEntitlement(v **types.Entitlement, value in
 				if !ok {
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
-				sv.CustomerIdentifier = &jtv
+				sv.CustomerIdentifier = ptr.String(jtv)
 			}
 
 		case "Dimension":
@@ -278,7 +278,7 @@ func awsAwsjson11_deserializeDocumentEntitlement(v **types.Entitlement, value in
 				if !ok {
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
-				sv.Dimension = &jtv
+				sv.Dimension = ptr.String(jtv)
 			}
 
 		case "ExpirationDate":
@@ -300,7 +300,7 @@ func awsAwsjson11_deserializeDocumentEntitlement(v **types.Entitlement, value in
 				if !ok {
 					return fmt.Errorf("expected ProductCode to be of type string, got %T instead", value)
 				}
-				sv.ProductCode = &jtv
+				sv.ProductCode = ptr.String(jtv)
 			}
 
 		case "Value":
@@ -317,7 +317,7 @@ func awsAwsjson11_deserializeDocumentEntitlement(v **types.Entitlement, value in
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentEntitlementList(v *[]*types.Entitlement, value interface{}) error {
+func awsAwsjson11_deserializeDocumentEntitlementList(v *[]types.Entitlement, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -330,18 +330,20 @@ func awsAwsjson11_deserializeDocumentEntitlementList(v *[]*types.Entitlement, va
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Entitlement
+	var cv []types.Entitlement
 	if *v == nil {
-		cv = []*types.Entitlement{}
+		cv = []types.Entitlement{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Entitlement
-		if err := awsAwsjson11_deserializeDocumentEntitlement(&col, value); err != nil {
+		var col types.Entitlement
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentEntitlement(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -377,7 +379,7 @@ func awsAwsjson11_deserializeDocumentEntitlementValue(v **types.EntitlementValue
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.BooleanValue = &jtv
+				sv.BooleanValue = ptr.Bool(jtv)
 			}
 
 		case "DoubleValue":
@@ -390,7 +392,7 @@ func awsAwsjson11_deserializeDocumentEntitlementValue(v **types.EntitlementValue
 				if err != nil {
 					return err
 				}
-				sv.DoubleValue = &f64
+				sv.DoubleValue = ptr.Float64(f64)
 			}
 
 		case "IntegerValue":
@@ -412,7 +414,7 @@ func awsAwsjson11_deserializeDocumentEntitlementValue(v **types.EntitlementValue
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.StringValue = &jtv
+				sv.StringValue = ptr.String(jtv)
 			}
 
 		default:
@@ -452,7 +454,7 @@ func awsAwsjson11_deserializeDocumentInternalServiceErrorException(v **types.Int
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -492,7 +494,7 @@ func awsAwsjson11_deserializeDocumentInvalidParameterException(v **types.Invalid
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -532,7 +534,7 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -577,7 +579,7 @@ func awsAwsjson11_deserializeOpDocumentGetEntitlementsOutput(v **GetEntitlements
 				if !ok {
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:

@@ -46,7 +46,7 @@ type ListIdentityProvidersOutput struct {
 	// A list of identity provider objects.
 	//
 	// This member is required.
-	Providers []*types.ProviderDescription
+	Providers []types.ProviderDescription
 
 	// A pagination token.
 	NextToken *string

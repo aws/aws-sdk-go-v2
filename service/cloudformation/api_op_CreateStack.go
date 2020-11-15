@@ -157,7 +157,7 @@ type CreateStackInput struct {
 	// The Simple Notification Service (SNS) topic ARNs to publish stack related
 	// events. You can find your SNS topic ARNs using the SNS console or your Command
 	// Line Interface (CLI).
-	NotificationARNs []*string
+	NotificationARNs []string
 
 	// Determines what action will be taken if stack creation fails. This must be one
 	// of: DO_NOTHING, ROLLBACK, or DELETE. You can specify either OnFailure or
@@ -168,7 +168,7 @@ type CreateStackInput struct {
 	// more information, see the Parameter
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
 	// data type.
-	Parameters []*types.Parameter
+	Parameters []types.Parameter
 
 	// The template resource types that you have permissions to work with for this
 	// create stack action, such as AWS::EC2::Instance, AWS::EC2::*, or
@@ -183,7 +183,7 @@ type CreateStackInput struct {
 	// AWS CloudFormation-specific condition keys in IAM policies. For more
 	// information, see Controlling Access with AWS Identity and Access Management
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html).
-	ResourceTypes []*string
+	ResourceTypes []string
 
 	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
 	// role that AWS CloudFormation assumes to create the stack. AWS CloudFormation
@@ -217,7 +217,7 @@ type CreateStackInput struct {
 	// Key-value pairs to associate with this stack. AWS CloudFormation also propagates
 	// these tags to the resources created in the stack. A maximum number of 50 tags
 	// can be specified.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Structure containing the template body with a minimum length of 1 byte and a
 	// maximum length of 51,200 bytes. For more information, go to Template Anatomy

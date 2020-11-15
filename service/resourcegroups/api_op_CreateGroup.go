@@ -43,7 +43,7 @@ type CreateGroupInput struct {
 	// how the service can interact with the resources in the group. A configuration is
 	// an array of GroupConfigurationItem elements. You can specify either a
 	// Configuration or a ResourceQuery in a group, but not both.
-	Configuration []*types.GroupConfigurationItem
+	Configuration []types.GroupConfigurationItem
 
 	// The description of the resource group. Descriptions can consist of letters,
 	// numbers, hyphens, underscores, periods, and spaces.
@@ -54,7 +54,7 @@ type CreateGroupInput struct {
 	ResourceQuery *types.ResourceQuery
 
 	// The tags to add to the group. A tag is key-value pair string.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateGroupOutput struct {
@@ -76,7 +76,7 @@ type CreateGroupOutput struct {
 	ResourceQuery *types.ResourceQuery
 
 	// The tags associated with the group.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

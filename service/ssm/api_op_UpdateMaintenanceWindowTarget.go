@@ -70,10 +70,10 @@ type UpdateMaintenanceWindowTargetInput struct {
 	// If True, then all fields that are required by the
 	// RegisterTargetWithMaintenanceWindow action are also required for this API
 	// request. Optional fields that are not specified are set to null.
-	Replace *bool
+	Replace bool
 
 	// The targets to add or replace.
-	Targets []*types.Target
+	Targets []types.Target
 }
 
 type UpdateMaintenanceWindowTargetOutput struct {
@@ -88,7 +88,7 @@ type UpdateMaintenanceWindowTargetOutput struct {
 	OwnerInformation *string
 
 	// The updated targets.
-	Targets []*types.Target
+	Targets []types.Target
 
 	// The maintenance window ID specified in the update request.
 	WindowId *string

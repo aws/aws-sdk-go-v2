@@ -37,12 +37,12 @@ func TestClient_QueryLists_awsEc2querySerialize(t *testing.T) {
 		// Serializes query lists. All EC2 lists are flattened.
 		"Ec2Lists": {
 			Params: &QueryListsInput{
-				ListArg: []*string{
-					ptr.String("foo"),
-					ptr.String("bar"),
-					ptr.String("baz"),
+				ListArg: []string{
+					"foo",
+					"bar",
+					"baz",
 				},
-				ComplexListArg: []*types.GreetingStruct{
+				ComplexListArg: []types.GreetingStruct{
 					{
 						Hi: ptr.String("hello"),
 					},
@@ -71,7 +71,7 @@ func TestClient_QueryLists_awsEc2querySerialize(t *testing.T) {
 		// Does not serialize empty query lists
 		"Ec2EmptyQueryLists": {
 			Params: &QueryListsInput{
-				ListArg: []*string{},
+				ListArg: []string{},
 			},
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
@@ -89,9 +89,9 @@ func TestClient_QueryLists_awsEc2querySerialize(t *testing.T) {
 		// serialization.
 		"Ec2ListArgWithXmlNameMember": {
 			Params: &QueryListsInput{
-				ListArgWithXmlNameMember: []*string{
-					ptr.String("A"),
-					ptr.String("B"),
+				ListArgWithXmlNameMember: []string{
+					"A",
+					"B",
 				},
 			},
 			ExpectMethod:  "POST",
@@ -111,9 +111,9 @@ func TestClient_QueryLists_awsEc2querySerialize(t *testing.T) {
 		// Changes the name of the list using the xmlName trait
 		"Ec2ListMemberWithXmlName": {
 			Params: &QueryListsInput{
-				ListArgWithXmlName: []*string{
-					ptr.String("A"),
-					ptr.String("B"),
+				ListArgWithXmlName: []string{
+					"A",
+					"B",
 				},
 			},
 			ExpectMethod:  "POST",

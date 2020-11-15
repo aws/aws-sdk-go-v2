@@ -47,13 +47,13 @@ type UpdateJobTemplateInput struct {
 	Description *string
 
 	// Optional list of hop destinations.
-	HopDestinations []*types.HopDestination
+	HopDestinations []types.HopDestination
 
 	// Specify the relative priority for this job. In any given queue, the service
 	// begins processing the job with the highest value first. When more than one job
 	// has the same priority, the service begins processing the job that you submitted
 	// first. If you don't specify a priority, the service uses the default value 0.
-	Priority *int32
+	Priority int32
 
 	// The new queue for the job template, if you are changing it.
 	Queue *string

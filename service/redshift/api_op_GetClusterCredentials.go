@@ -110,7 +110,7 @@ type GetClusterCredentialsInput struct {
 	// of reserved words can be found in Reserved Words
 	// (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the Amazon
 	// Redshift Database Developer Guide.
-	DbGroups []*string
+	DbGroups []string
 
 	// The name of a database that DbUser is authorized to log on to. If DbName is not
 	// specified, DbUser can log on to any existing database. Constraints:

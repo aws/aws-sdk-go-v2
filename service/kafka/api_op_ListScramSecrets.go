@@ -34,7 +34,7 @@ type ListScramSecretsInput struct {
 	ClusterArn *string
 
 	// The maxResults of the query.
-	MaxResults *int32
+	MaxResults int32
 
 	// The nextToken of the query.
 	NextToken *string
@@ -46,7 +46,7 @@ type ListScramSecretsOutput struct {
 	NextToken *string
 
 	// The list of scram secrets associated with the cluster.
-	SecretArnList []*string
+	SecretArnList []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

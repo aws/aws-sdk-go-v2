@@ -57,7 +57,7 @@ type CreateRepositoryInput struct {
 	// organize them. Each tag consists of a key and an optional value, both of which
 	// you define. Tag keys can have a maximum character length of 128 characters, and
 	// tag values can have a maximum length of 256 characters.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateRepositoryOutput struct {

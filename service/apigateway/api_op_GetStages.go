@@ -45,7 +45,7 @@ type GetStagesInput struct {
 type GetStagesOutput struct {
 
 	// The current page of elements from this collection.
-	Item []*types.Stage
+	Item []types.Stage
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

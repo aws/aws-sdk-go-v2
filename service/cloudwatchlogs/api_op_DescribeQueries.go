@@ -52,7 +52,7 @@ type DescribeQueriesOutput struct {
 	NextToken *string
 
 	// The list of queries that match the request.
-	Queries []*types.QueryInfo
+	Queries []types.QueryInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

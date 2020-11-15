@@ -68,7 +68,7 @@ type CreateInterconnectInput struct {
 	ProviderName *string
 
 	// The tags to associate with the interconnect.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Information about an interconnect.
@@ -136,7 +136,7 @@ type CreateInterconnectOutput struct {
 	Region *string
 
 	// The tags associated with the interconnect.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

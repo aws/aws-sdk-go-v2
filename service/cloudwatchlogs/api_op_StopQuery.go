@@ -39,7 +39,7 @@ type StopQueryInput struct {
 type StopQueryOutput struct {
 
 	// This is true if the query was stopped by the StopQuery operation.
-	Success *bool
+	Success bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

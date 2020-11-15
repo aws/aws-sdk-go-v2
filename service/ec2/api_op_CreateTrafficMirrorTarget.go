@@ -48,7 +48,7 @@ type CreateTrafficMirrorTargetInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The network interface ID that is associated with the target.
 	NetworkInterfaceId *string
@@ -58,7 +58,7 @@ type CreateTrafficMirrorTargetInput struct {
 	NetworkLoadBalancerArn *string
 
 	// The tags to assign to the Traffic Mirror target.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 }
 
 type CreateTrafficMirrorTargetOutput struct {

@@ -49,7 +49,7 @@ type ListTestsOutput struct {
 	NextToken *string
 
 	// Information about the tests.
-	Tests []*types.Test
+	Tests []types.Test
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

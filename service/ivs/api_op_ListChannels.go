@@ -35,7 +35,7 @@ type ListChannelsInput struct {
 	FilterByName *string
 
 	// Maximum number of channels to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// The first channel to retrieve. This is used for pagination; see the nextToken
 	// response field.
@@ -47,7 +47,7 @@ type ListChannelsOutput struct {
 	// List of the matching channels.
 	//
 	// This member is required.
-	Channels []*types.ChannelSummary
+	Channels []types.ChannelSummary
 
 	// If there are more channels than maxResults, use nextToken in the request to get
 	// the next set.

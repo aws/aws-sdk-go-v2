@@ -2305,13 +2305,13 @@ func validateAddOnRequest(v *types.AddOnRequest) error {
 	}
 }
 
-func validateAddOnRequestList(v []*types.AddOnRequest) error {
+func validateAddOnRequestList(v []types.AddOnRequest) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddOnRequestList"}
 	for i := range v {
-		if err := validateAddOnRequest(v[i]); err != nil {
+		if err := validateAddOnRequest(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2346,13 +2346,13 @@ func validateInstanceEntry(v *types.InstanceEntry) error {
 	}
 }
 
-func validateInstanceEntryList(v []*types.InstanceEntry) error {
+func validateInstanceEntryList(v []types.InstanceEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InstanceEntryList"}
 	for i := range v {
-		if err := validateInstanceEntry(v[i]); err != nil {
+		if err := validateInstanceEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2781,9 +2781,6 @@ func validateOpCreateLoadBalancerInput(v *CreateLoadBalancerInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLoadBalancerInput"}
 	if v.LoadBalancerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
-	}
-	if v.InstancePort == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstancePort"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3305,9 +3302,6 @@ func validateOpGetDistributionMetricDataInput(v *GetDistributionMetricDataInput)
 	if v.DistributionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DistributionName"))
 	}
-	if v.Period == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Period"))
-	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
 	}
@@ -3376,9 +3370,6 @@ func validateOpGetInstanceMetricDataInput(v *GetInstanceMetricDataInput) error {
 	}
 	if len(v.Unit) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
-	}
-	if v.Period == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Period"))
 	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
@@ -3487,9 +3478,6 @@ func validateOpGetLoadBalancerMetricDataInput(v *GetLoadBalancerMetricDataInput)
 	}
 	if len(v.Unit) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
-	}
-	if v.Period == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Period"))
 	}
 	if len(v.MetricName) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
@@ -3632,9 +3620,6 @@ func validateOpGetRelationalDatabaseMetricDataInput(v *GetRelationalDatabaseMetr
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetRelationalDatabaseMetricDataInput"}
-	if v.Period == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Period"))
-	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
 	}

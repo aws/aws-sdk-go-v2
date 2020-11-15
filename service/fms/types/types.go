@@ -33,7 +33,7 @@ type AppsListData struct {
 	// An array of applications in the AWS Firewall Manager applications list.
 	//
 	// This member is required.
-	AppsList []*App
+	AppsList []App
 
 	// The name of the AWS Firewall Manager applications list.
 	//
@@ -55,14 +55,14 @@ type AppsListData struct {
 	ListUpdateToken *string
 
 	// A map of previous version numbers to their corresponding App object arrays.
-	PreviousAppsList map[string][]*App
+	PreviousAppsList map[string][]App
 }
 
 // Details of the AWS Firewall Manager applications list.
 type AppsListDataSummary struct {
 
 	// An array of App objects in the AWS Firewall Manager applications list.
-	AppsList []*App
+	AppsList []App
 
 	// The Amazon Resource Name (ARN) of the applications list.
 	ListArn *string
@@ -78,7 +78,7 @@ type AppsListDataSummary struct {
 type AwsEc2InstanceViolation struct {
 
 	// Violations for network interfaces associated with the EC2 instance.
-	AwsEc2NetworkInterfaceViolations []*AwsEc2NetworkInterfaceViolation
+	AwsEc2NetworkInterfaceViolations []AwsEc2NetworkInterfaceViolation
 
 	// The resource ID of the EC2 instance.
 	ViolationTarget *string
@@ -89,7 +89,7 @@ type AwsEc2NetworkInterfaceViolation struct {
 
 	// List of security groups that violate the rules specified in the master security
 	// group of the AWS Firewall Manager policy.
-	ViolatingSecurityGroups []*string
+	ViolatingSecurityGroups []string
 
 	// The resource ID of the network interface.
 	ViolationTarget *string
@@ -101,10 +101,10 @@ type AwsVPCSecurityGroupViolation struct {
 
 	// List of rules specified in the security group of the AWS Firewall Manager policy
 	// that partially match the ViolationTarget rule.
-	PartialMatches []*PartialMatch
+	PartialMatches []PartialMatch
 
 	// Remediation options for the rule specified in the ViolationTarget.
-	PossibleSecurityGroupRemediationActions []*SecurityGroupRemediationAction
+	PossibleSecurityGroupRemediationActions []SecurityGroupRemediationAction
 
 	// The security group rule that is being evaluated.
 	ViolationTarget *string
@@ -140,14 +140,14 @@ type EvaluationResult struct {
 
 	// Indicates that over 100 resources are noncompliant with the AWS Firewall Manager
 	// policy.
-	EvaluationLimitExceeded *bool
+	EvaluationLimitExceeded bool
 
 	// The number of resources that are noncompliant with the specified policy. For AWS
 	// WAF and Shield Advanced policies, a resource is considered noncompliant if it is
 	// not associated with the policy. For security group policies, a resource is
 	// considered noncompliant if it doesn't comply with the rules of the policy and
 	// remediation is disabled or not possible.
-	ViolatorCount *int64
+	ViolatorCount int64
 }
 
 // The reference rule that partially matches the ViolationTarget rule and violation
@@ -159,7 +159,7 @@ type PartialMatch struct {
 	Reference *string
 
 	// The violation reason.
-	TargetViolationReasons []*string
+	TargetViolationReasons []string
 }
 
 // An AWS Firewall Manager policy.
@@ -170,7 +170,7 @@ type Policy struct {
 	// is not null, only resources with the specified tags are in scope of the policy.
 	//
 	// This member is required.
-	ExcludeResourceTags *bool
+	ExcludeResourceTags bool
 
 	// The name of the AWS Firewall Manager policy.
 	//
@@ -180,7 +180,7 @@ type Policy struct {
 	// Indicates if the policy should be automatically applied to new resources.
 	//
 	// This member is required.
-	RemediationEnabled *bool
+	RemediationEnabled bool
 
 	// The type of resource protected by or in scope of the policy. This is in the
 	// format shown in the AWS Resource Types Reference
@@ -222,7 +222,7 @@ type Policy struct {
 	// together in a single map, separated with a comma. For example, the following is
 	// a valid map: {“ACCOUNT” : [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”,
 	// “ouid112”]}.
-	ExcludeMap map[string][]*string
+	ExcludeMap map[string][]string
 
 	// Specifies the AWS account IDs and AWS Organizations organizational units (OUs)
 	// to include in the policy. Specifying an OU is the equivalent of specifying all
@@ -246,7 +246,7 @@ type Policy struct {
 	// together in a single map, separated with a comma. For example, the following is
 	// a valid map: {“ACCOUNT” : [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”,
 	// “ouid112”]}.
-	IncludeMap map[string][]*string
+	IncludeMap map[string][]string
 
 	// The ID of the AWS Firewall Manager policy.
 	PolicyId *string
@@ -258,10 +258,10 @@ type Policy struct {
 	PolicyUpdateToken *string
 
 	// An array of ResourceTag objects.
-	ResourceTags []*ResourceTag
+	ResourceTags []ResourceTag
 
 	// An array of ResourceType.
-	ResourceTypeList []*string
+	ResourceTypeList []string
 }
 
 // Describes the noncompliant resources in a member account for a specific AWS
@@ -271,7 +271,7 @@ type PolicyComplianceDetail struct {
 
 	// Indicates if over 100 resources are noncompliant with the AWS Firewall Manager
 	// policy.
-	EvaluationLimitExceeded *bool
+	EvaluationLimitExceeded bool
 
 	// A timestamp that indicates when the returned information should be considered
 	// out of date.
@@ -281,7 +281,7 @@ type PolicyComplianceDetail struct {
 	// that are causing a resource to be noncompliant. The details include the name of
 	// the dependent service and the error message received that indicates the problem
 	// with the service.
-	IssueInfoMap map[string]*string
+	IssueInfoMap map[string]string
 
 	// The AWS account ID.
 	MemberAccount *string
@@ -294,7 +294,7 @@ type PolicyComplianceDetail struct {
 
 	// An array of resources that aren't protected by the AWS WAF or Shield Advanced
 	// policy or that aren't in compliance with the security group policy.
-	Violators []*ComplianceViolator
+	Violators []ComplianceViolator
 }
 
 // Indicates whether the account is compliant with the specified policy. An account
@@ -304,13 +304,13 @@ type PolicyComplianceDetail struct {
 type PolicyComplianceStatus struct {
 
 	// An array of EvaluationResult objects.
-	EvaluationResults []*EvaluationResult
+	EvaluationResults []EvaluationResult
 
 	// Details about problems with dependent services, such as AWS WAF or AWS Config,
 	// that are causing a resource to be noncompliant. The details include the name of
 	// the dependent service and the error message received that indicates the problem
 	// with the service.
-	IssueInfoMap map[string]*string
+	IssueInfoMap map[string]string
 
 	// Timestamp of the last update to the EvaluationResult objects.
 	LastUpdated *time.Time
@@ -341,7 +341,7 @@ type PolicySummary struct {
 	PolicyName *string
 
 	// Indicates if the policy should be automatically applied to new resources.
-	RemediationEnabled *bool
+	RemediationEnabled bool
 
 	// The type of resource protected by or in scope of the policy. This is in the
 	// format shown in the AWS Resource Types Reference
@@ -371,7 +371,7 @@ type ProtocolsListData struct {
 	// An array of protocols in the AWS Firewall Manager protocols list.
 	//
 	// This member is required.
-	ProtocolsList []*string
+	ProtocolsList []string
 
 	// The time that the AWS Firewall Manager protocols list was created.
 	CreateTime *time.Time
@@ -388,7 +388,7 @@ type ProtocolsListData struct {
 	ListUpdateToken *string
 
 	// A map of previous version numbers to their corresponding protocol arrays.
-	PreviousProtocolsList map[string][]*string
+	PreviousProtocolsList map[string][]string
 }
 
 // Details of the AWS Firewall Manager protocols list.
@@ -404,7 +404,7 @@ type ProtocolsListDataSummary struct {
 	ListName *string
 
 	// An array of protocols in the AWS Firewall Manager protocols list.
-	ProtocolsList []*string
+	ProtocolsList []string
 }
 
 // The resource tags that AWS Firewall Manager uses to determine if a particular
@@ -446,7 +446,7 @@ type SecurityGroupRemediationAction struct {
 	Description *string
 
 	// Indicates if the current action is the default action.
-	IsDefaultAction *bool
+	IsDefaultAction bool
 
 	// The remediation action that will be performed.
 	RemediationActionType RemediationActionType
@@ -576,11 +576,11 @@ type ViolationDetail struct {
 	// List of violations for the requested resource.
 	//
 	// This member is required.
-	ResourceViolations []*ResourceViolation
+	ResourceViolations []ResourceViolation
 
 	// Brief description for the requested resource.
 	ResourceDescription *string
 
 	// The ResourceTag objects associated with the resource.
-	ResourceTags []*Tag
+	ResourceTags []Tag
 }

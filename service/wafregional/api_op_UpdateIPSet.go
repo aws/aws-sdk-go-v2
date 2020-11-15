@@ -112,7 +112,7 @@ type UpdateIPSetInput struct {
 	// You can insert a maximum of 1000 addresses in a single request.
 	//
 	// This member is required.
-	Updates []*types.IPSetUpdate
+	Updates []types.IPSetUpdate
 }
 
 type UpdateIPSetOutput struct {

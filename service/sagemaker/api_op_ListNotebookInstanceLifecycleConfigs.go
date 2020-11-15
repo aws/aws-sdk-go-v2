@@ -74,7 +74,7 @@ type ListNotebookInstanceLifecycleConfigsOutput struct {
 
 	// An array of NotebookInstanceLifecycleConfiguration objects, each listing a
 	// lifecycle configuration.
-	NotebookInstanceLifecycleConfigs []*types.NotebookInstanceLifecycleConfigSummary
+	NotebookInstanceLifecycleConfigs []types.NotebookInstanceLifecycleConfigSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

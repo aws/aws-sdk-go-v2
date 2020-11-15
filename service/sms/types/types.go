@@ -196,7 +196,7 @@ type ReplicationJob struct {
 	ReplicationJobId *string
 
 	// Information about the replication runs.
-	ReplicationRunList []*ReplicationRun
+	ReplicationRunList []ReplicationRun
 
 	// The name of the IAM role to be used by AWS SMS.
 	RoleName *string
@@ -323,7 +323,7 @@ type ServerGroup struct {
 	ServerGroupId *string
 
 	// The servers that belong to a server group.
-	ServerList []*Server
+	ServerList []Server
 }
 
 // Launch configuration for a server group.
@@ -336,7 +336,7 @@ type ServerGroupLaunchConfiguration struct {
 	ServerGroupId *string
 
 	// The launch configuration for servers in the server group.
-	ServerLaunchConfigurations []*ServerLaunchConfiguration
+	ServerLaunchConfigurations []ServerLaunchConfiguration
 }
 
 // Replication configuration for a server group.
@@ -347,7 +347,7 @@ type ServerGroupReplicationConfiguration struct {
 	ServerGroupId *string
 
 	// The replication configuration for servers in the server group.
-	ServerReplicationConfigurations []*ServerReplicationConfiguration
+	ServerReplicationConfigurations []ServerReplicationConfiguration
 }
 
 // Configuration for validating an instance.
@@ -357,7 +357,7 @@ type ServerGroupValidationConfiguration struct {
 	ServerGroupId *string
 
 	// The validation configuration.
-	ServerValidationConfigurations []*ServerValidationConfiguration
+	ServerValidationConfigurations []ServerValidationConfiguration
 }
 
 // Launch configuration for a server.
@@ -499,7 +499,7 @@ type SSMValidationParameters struct {
 	Command *string
 
 	// The timeout interval, in seconds.
-	ExecutionTimeoutSeconds *int32
+	ExecutionTimeoutSeconds int32
 
 	// The ID of the instance. The instance must have the following tag:
 	// UserForSMSApplicationValidation=true.

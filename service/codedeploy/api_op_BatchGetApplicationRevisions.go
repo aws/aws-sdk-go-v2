@@ -42,7 +42,7 @@ type BatchGetApplicationRevisionsInput struct {
 	// RevisionLocation objects you can specify is 25.
 	//
 	// This member is required.
-	Revisions []*types.RevisionLocation
+	Revisions []types.RevisionLocation
 }
 
 // Represents the output of a BatchGetApplicationRevisions operation.
@@ -55,7 +55,7 @@ type BatchGetApplicationRevisionsOutput struct {
 	ErrorMessage *string
 
 	// Additional information about the revisions, including the type and location.
-	Revisions []*types.RevisionInfo
+	Revisions []types.RevisionInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -36,7 +36,7 @@ type DescribeVpnConnectionsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
@@ -81,17 +81,17 @@ type DescribeVpnConnectionsInput struct {
 	//
 	// * transit-gateway-id - The ID of a
 	// transit gateway associated with the VPN connection.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// One or more VPN connection IDs. Default: Describes your VPN connections.
-	VpnConnectionIds []*string
+	VpnConnectionIds []string
 }
 
 // Contains the output of DescribeVpnConnections.
 type DescribeVpnConnectionsOutput struct {
 
 	// Information about one or more VPN connections.
-	VpnConnections []*types.VpnConnection
+	VpnConnections []types.VpnConnection
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

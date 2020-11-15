@@ -37,7 +37,7 @@ type TagResourceInput struct {
 	// The tags to add to the resource.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // The response to the request.

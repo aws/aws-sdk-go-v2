@@ -329,7 +329,7 @@ func awsRestjson1_deserializeOpDocumentBeginTransactionOutput(v **BeginTransacti
 				if !ok {
 					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
 				}
-				sv.TransactionId = &jtv
+				sv.TransactionId = ptr.String(jtv)
 			}
 
 		default:
@@ -495,7 +495,7 @@ func awsRestjson1_deserializeOpDocumentCommitTransactionOutput(v **CommitTransac
 				if !ok {
 					return fmt.Errorf("expected TransactionStatus to be of type string, got %T instead", value)
 				}
-				sv.TransactionStatus = &jtv
+				sv.TransactionStatus = ptr.String(jtv)
 			}
 
 		default:
@@ -828,7 +828,7 @@ func awsRestjson1_deserializeOpDocumentExecuteStatementOutput(v **ExecuteStateme
 				if err != nil {
 					return err
 				}
-				sv.NumberOfRecordsUpdated = &i64
+				sv.NumberOfRecordsUpdated = i64
 			}
 
 		case "records":
@@ -999,7 +999,7 @@ func awsRestjson1_deserializeOpDocumentRollbackTransactionOutput(v **RollbackTra
 				if !ok {
 					return fmt.Errorf("expected TransactionStatus to be of type string, got %T instead", value)
 				}
-				sv.TransactionStatus = &jtv
+				sv.TransactionStatus = ptr.String(jtv)
 			}
 
 		default:
@@ -1223,7 +1223,7 @@ loop:
 			break loop
 
 		case "booleanValues":
-			var mv []*bool
+			var mv []bool
 			if err := awsRestjson1_deserializeDocumentBooleanArray(&mv, value); err != nil {
 				return err
 			}
@@ -1231,7 +1231,7 @@ loop:
 			break loop
 
 		case "doubleValues":
-			var mv []*float64
+			var mv []float64
 			if err := awsRestjson1_deserializeDocumentDoubleArray(&mv, value); err != nil {
 				return err
 			}
@@ -1239,7 +1239,7 @@ loop:
 			break loop
 
 		case "longValues":
-			var mv []*int64
+			var mv []int64
 			if err := awsRestjson1_deserializeDocumentLongArray(&mv, value); err != nil {
 				return err
 			}
@@ -1247,7 +1247,7 @@ loop:
 			break loop
 
 		case "stringValues":
-			var mv []*string
+			var mv []string
 			if err := awsRestjson1_deserializeDocumentStringArray(&mv, value); err != nil {
 				return err
 			}
@@ -1326,7 +1326,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1338,7 +1338,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentBooleanArray(v *[]*bool, value interface{}) error {
+func awsRestjson1_deserializeDocumentBooleanArray(v *[]bool, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1351,21 +1351,21 @@ func awsRestjson1_deserializeDocumentBooleanArray(v *[]*bool, value interface{})
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*bool
+	var cv []bool
 	if *v == nil {
-		cv = []*bool{}
+		cv = []bool{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *bool
+		var col bool
 		if value != nil {
 			jtv, ok := value.(bool)
 			if !ok {
 				return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -1406,7 +1406,7 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				if err != nil {
 					return err
 				}
-				sv.ArrayBaseColumnType = ptr.Int32(int32(i64))
+				sv.ArrayBaseColumnType = int32(i64)
 			}
 
 		case "isAutoIncrement":
@@ -1415,7 +1415,7 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsAutoIncrement = &jtv
+				sv.IsAutoIncrement = jtv
 			}
 
 		case "isCaseSensitive":
@@ -1424,7 +1424,7 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsCaseSensitive = &jtv
+				sv.IsCaseSensitive = jtv
 			}
 
 		case "isCurrency":
@@ -1433,7 +1433,7 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsCurrency = &jtv
+				sv.IsCurrency = jtv
 			}
 
 		case "isSigned":
@@ -1442,7 +1442,7 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsSigned = &jtv
+				sv.IsSigned = jtv
 			}
 
 		case "label":
@@ -1451,7 +1451,7 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Label = &jtv
+				sv.Label = ptr.String(jtv)
 			}
 
 		case "name":
@@ -1460,7 +1460,7 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "nullable":
@@ -1473,7 +1473,7 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				if err != nil {
 					return err
 				}
-				sv.Nullable = ptr.Int32(int32(i64))
+				sv.Nullable = int32(i64)
 			}
 
 		case "precision":
@@ -1486,7 +1486,7 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				if err != nil {
 					return err
 				}
-				sv.Precision = ptr.Int32(int32(i64))
+				sv.Precision = int32(i64)
 			}
 
 		case "scale":
@@ -1499,7 +1499,7 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				if err != nil {
 					return err
 				}
-				sv.Scale = ptr.Int32(int32(i64))
+				sv.Scale = int32(i64)
 			}
 
 		case "schemaName":
@@ -1508,7 +1508,7 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.SchemaName = &jtv
+				sv.SchemaName = ptr.String(jtv)
 			}
 
 		case "tableName":
@@ -1517,7 +1517,7 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.TableName = &jtv
+				sv.TableName = ptr.String(jtv)
 			}
 
 		case "type":
@@ -1530,7 +1530,7 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				if err != nil {
 					return err
 				}
-				sv.Type = ptr.Int32(int32(i64))
+				sv.Type = int32(i64)
 			}
 
 		case "typeName":
@@ -1539,7 +1539,7 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.TypeName = &jtv
+				sv.TypeName = ptr.String(jtv)
 			}
 
 		default:
@@ -1551,7 +1551,7 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentDoubleArray(v *[]*float64, value interface{}) error {
+func awsRestjson1_deserializeDocumentDoubleArray(v *[]float64, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1564,15 +1564,15 @@ func awsRestjson1_deserializeDocumentDoubleArray(v *[]*float64, value interface{
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*float64
+	var cv []float64
 	if *v == nil {
-		cv = []*float64{}
+		cv = []float64{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *float64
+		var col float64
 		if value != nil {
 			jtv, ok := value.(json.Number)
 			if !ok {
@@ -1582,7 +1582,7 @@ func awsRestjson1_deserializeDocumentDoubleArray(v *[]*float64, value interface{
 			if err != nil {
 				return err
 			}
-			col = &f64
+			col = f64
 		}
 		cv = append(cv, col)
 
@@ -1633,19 +1633,19 @@ loop:
 			break loop
 
 		case "booleanValue":
-			var mv *bool
+			var mv bool
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
 					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
 				}
-				mv = &jtv
+				mv = jtv
 			}
-			uv = &types.FieldMemberBooleanValue{Value: *mv}
+			uv = &types.FieldMemberBooleanValue{Value: mv}
 			break loop
 
 		case "doubleValue":
-			var mv *float64
+			var mv float64
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
@@ -1655,25 +1655,25 @@ loop:
 				if err != nil {
 					return err
 				}
-				mv = &f64
+				mv = f64
 			}
-			uv = &types.FieldMemberDoubleValue{Value: *mv}
+			uv = &types.FieldMemberDoubleValue{Value: mv}
 			break loop
 
 		case "isNull":
-			var mv *bool
+			var mv bool
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
 					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
 				}
-				mv = &jtv
+				mv = jtv
 			}
-			uv = &types.FieldMemberIsNull{Value: *mv}
+			uv = &types.FieldMemberIsNull{Value: mv}
 			break loop
 
 		case "longValue":
-			var mv *int64
+			var mv int64
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
@@ -1683,21 +1683,21 @@ loop:
 				if err != nil {
 					return err
 				}
-				mv = &i64
+				mv = i64
 			}
-			uv = &types.FieldMemberLongValue{Value: *mv}
+			uv = &types.FieldMemberLongValue{Value: mv}
 			break loop
 
 		case "stringValue":
-			var mv *string
+			var mv string
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				mv = &jtv
+				mv = jtv
 			}
-			uv = &types.FieldMemberStringValue{Value: *mv}
+			uv = &types.FieldMemberStringValue{Value: mv}
 			break loop
 
 		default:
@@ -1772,7 +1772,7 @@ func awsRestjson1_deserializeDocumentForbiddenException(v **types.ForbiddenExcep
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1815,7 +1815,7 @@ func awsRestjson1_deserializeDocumentInternalServerErrorException(v **types.Inte
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentLongArray(v *[]*int64, value interface{}) error {
+func awsRestjson1_deserializeDocumentLongArray(v *[]int64, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1828,15 +1828,15 @@ func awsRestjson1_deserializeDocumentLongArray(v *[]*int64, value interface{}) e
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*int64
+	var cv []int64
 	if *v == nil {
-		cv = []*int64{}
+		cv = []int64{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *int64
+		var col int64
 		if value != nil {
 			jtv, ok := value.(json.Number)
 			if !ok {
@@ -1846,7 +1846,7 @@ func awsRestjson1_deserializeDocumentLongArray(v *[]*int64, value interface{}) e
 			if err != nil {
 				return err
 			}
-			col = &i64
+			col = i64
 		}
 		cv = append(cv, col)
 
@@ -1855,7 +1855,7 @@ func awsRestjson1_deserializeDocumentLongArray(v *[]*int64, value interface{}) e
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentMetadata(v *[]*types.ColumnMetadata, value interface{}) error {
+func awsRestjson1_deserializeDocumentMetadata(v *[]types.ColumnMetadata, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1868,18 +1868,20 @@ func awsRestjson1_deserializeDocumentMetadata(v *[]*types.ColumnMetadata, value 
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ColumnMetadata
+	var cv []types.ColumnMetadata
 	if *v == nil {
-		cv = []*types.ColumnMetadata{}
+		cv = []types.ColumnMetadata{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ColumnMetadata
-		if err := awsRestjson1_deserializeDocumentColumnMetadata(&col, value); err != nil {
+		var col types.ColumnMetadata
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentColumnMetadata(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1915,7 +1917,7 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1963,7 +1965,7 @@ func awsRestjson1_deserializeDocumentRecord(v **types.Record, value interface{})
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentRecords(v *[]*types.Record, value interface{}) error {
+func awsRestjson1_deserializeDocumentRecords(v *[]types.Record, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1976,18 +1978,20 @@ func awsRestjson1_deserializeDocumentRecords(v *[]*types.Record, value interface
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Record
+	var cv []types.Record
 	if *v == nil {
-		cv = []*types.Record{}
+		cv = []types.Record{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Record
-		if err := awsRestjson1_deserializeDocumentRecord(&col, value); err != nil {
+		var col types.Record
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRecord(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2068,7 +2072,7 @@ func awsRestjson1_deserializeDocumentResultSetMetadata(v **types.ResultSetMetada
 				if err != nil {
 					return err
 				}
-				sv.ColumnCount = &i64
+				sv.ColumnCount = i64
 			}
 
 		case "columnMetadata":
@@ -2212,7 +2216,7 @@ func awsRestjson1_deserializeDocumentSqlStatementResult(v **types.SqlStatementRe
 				if err != nil {
 					return err
 				}
-				sv.NumberOfRecordsUpdated = &i64
+				sv.NumberOfRecordsUpdated = i64
 			}
 
 		case "resultFrame":
@@ -2229,7 +2233,7 @@ func awsRestjson1_deserializeDocumentSqlStatementResult(v **types.SqlStatementRe
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentSqlStatementResults(v *[]*types.SqlStatementResult, value interface{}) error {
+func awsRestjson1_deserializeDocumentSqlStatementResults(v *[]types.SqlStatementResult, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2242,18 +2246,20 @@ func awsRestjson1_deserializeDocumentSqlStatementResults(v *[]*types.SqlStatemen
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.SqlStatementResult
+	var cv []types.SqlStatementResult
 	if *v == nil {
-		cv = []*types.SqlStatementResult{}
+		cv = []types.SqlStatementResult{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.SqlStatementResult
-		if err := awsRestjson1_deserializeDocumentSqlStatementResult(&col, value); err != nil {
+		var col types.SqlStatementResult
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSqlStatementResult(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2293,7 +2299,7 @@ func awsRestjson1_deserializeDocumentStatementTimeoutException(v **types.Stateme
 				if err != nil {
 					return err
 				}
-				sv.DbConnectionId = &i64
+				sv.DbConnectionId = i64
 			}
 
 		case "message":
@@ -2302,7 +2308,7 @@ func awsRestjson1_deserializeDocumentStatementTimeoutException(v **types.Stateme
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2314,7 +2320,7 @@ func awsRestjson1_deserializeDocumentStatementTimeoutException(v **types.Stateme
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentStringArray(v *[]*string, value interface{}) error {
+func awsRestjson1_deserializeDocumentStringArray(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2327,21 +2333,21 @@ func awsRestjson1_deserializeDocumentStringArray(v *[]*string, value interface{}
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected String to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -2422,7 +2428,7 @@ func awsRestjson1_deserializeDocumentUpdateResult(v **types.UpdateResult, value 
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentUpdateResults(v *[]*types.UpdateResult, value interface{}) error {
+func awsRestjson1_deserializeDocumentUpdateResults(v *[]types.UpdateResult, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2435,18 +2441,20 @@ func awsRestjson1_deserializeDocumentUpdateResults(v *[]*types.UpdateResult, val
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.UpdateResult
+	var cv []types.UpdateResult
 	if *v == nil {
-		cv = []*types.UpdateResult{}
+		cv = []types.UpdateResult{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.UpdateResult
-		if err := awsRestjson1_deserializeDocumentUpdateResult(&col, value); err != nil {
+		var col types.UpdateResult
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentUpdateResult(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2480,7 +2488,7 @@ loop:
 			break loop
 
 		case "bigIntValue":
-			var mv *int64
+			var mv int64
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
@@ -2490,21 +2498,21 @@ loop:
 				if err != nil {
 					return err
 				}
-				mv = &i64
+				mv = i64
 			}
-			uv = &types.ValueMemberBigIntValue{Value: *mv}
+			uv = &types.ValueMemberBigIntValue{Value: mv}
 			break loop
 
 		case "bitValue":
-			var mv *bool
+			var mv bool
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
 					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
 				}
-				mv = &jtv
+				mv = jtv
 			}
-			uv = &types.ValueMemberBitValue{Value: *mv}
+			uv = &types.ValueMemberBitValue{Value: mv}
 			break loop
 
 		case "blobValue":
@@ -2524,7 +2532,7 @@ loop:
 			break loop
 
 		case "doubleValue":
-			var mv *float64
+			var mv float64
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
@@ -2534,13 +2542,13 @@ loop:
 				if err != nil {
 					return err
 				}
-				mv = &f64
+				mv = f64
 			}
-			uv = &types.ValueMemberDoubleValue{Value: *mv}
+			uv = &types.ValueMemberDoubleValue{Value: mv}
 			break loop
 
 		case "intValue":
-			var mv *int32
+			var mv int32
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
@@ -2550,25 +2558,25 @@ loop:
 				if err != nil {
 					return err
 				}
-				mv = ptr.Int32(int32(i64))
+				mv = int32(i64)
 			}
-			uv = &types.ValueMemberIntValue{Value: *mv}
+			uv = &types.ValueMemberIntValue{Value: mv}
 			break loop
 
 		case "isNull":
-			var mv *bool
+			var mv bool
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
 					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
 				}
-				mv = &jtv
+				mv = jtv
 			}
-			uv = &types.ValueMemberIsNull{Value: *mv}
+			uv = &types.ValueMemberIsNull{Value: mv}
 			break loop
 
 		case "realValue":
-			var mv *float32
+			var mv float32
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
@@ -2578,28 +2586,30 @@ loop:
 				if err != nil {
 					return err
 				}
-				mv = ptr.Float32(float32(f64))
+				mv = float32(f64)
 			}
-			uv = &types.ValueMemberRealValue{Value: *mv}
+			uv = &types.ValueMemberRealValue{Value: mv}
 			break loop
 
 		case "stringValue":
-			var mv *string
+			var mv string
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				mv = &jtv
+				mv = jtv
 			}
-			uv = &types.ValueMemberStringValue{Value: *mv}
+			uv = &types.ValueMemberStringValue{Value: mv}
 			break loop
 
 		case "structValue":
-			var mv *types.StructValue
-			if err := awsRestjson1_deserializeDocumentStructValue(&mv, value); err != nil {
+			var mv types.StructValue
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentStructValue(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
 			uv = &types.ValueMemberStructValue{Value: mv}
 			break loop
 

@@ -50,7 +50,7 @@ type GetEC2RecommendationProjectedMetricsInput struct {
 	// The granularity, in seconds, of the projected metrics data points.
 	//
 	// This member is required.
-	Period *int32
+	Period int32
 
 	// The time stamp of the first projected metrics data point to return.
 	//
@@ -66,7 +66,7 @@ type GetEC2RecommendationProjectedMetricsInput struct {
 type GetEC2RecommendationProjectedMetricsOutput struct {
 
 	// An array of objects that describe a projected metrics.
-	RecommendedOptionProjectedMetrics []*types.RecommendedOptionProjectedMetric
+	RecommendedOptionProjectedMetrics []types.RecommendedOptionProjectedMetric
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

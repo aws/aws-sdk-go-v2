@@ -52,7 +52,7 @@ type ListManagedPoliciesInPermissionSetInput struct {
 type ListManagedPoliciesInPermissionSetOutput struct {
 
 	// The array of the AttachedManagedPolicy data type object.
-	AttachedManagedPolicies []*types.AttachedManagedPolicy
+	AttachedManagedPolicies []types.AttachedManagedPolicy
 
 	// The pagination token for the list API. Initially the value is null. Use the
 	// output of previous API calls to make subsequent calls.

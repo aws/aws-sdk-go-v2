@@ -46,7 +46,7 @@ type CatalogResource struct {
 type ColumnWildcard struct {
 
 	// Excludes column names. Any column with this name will be excluded.
-	ExcludedColumnNames []*string
+	ExcludedColumnNames []string
 }
 
 // A structure for the database object.
@@ -77,21 +77,21 @@ type DataLakeSettings struct {
 
 	// A structure representing a list of up to three principal permissions entries for
 	// default create database permissions.
-	CreateDatabaseDefaultPermissions []*PrincipalPermissions
+	CreateDatabaseDefaultPermissions []PrincipalPermissions
 
 	// A structure representing a list of up to three principal permissions entries for
 	// default create table permissions.
-	CreateTableDefaultPermissions []*PrincipalPermissions
+	CreateTableDefaultPermissions []PrincipalPermissions
 
 	// A list of AWS Lake Formation principals. Supported principals are IAM users or
 	// IAM roles.
-	DataLakeAdmins []*DataLakePrincipal
+	DataLakeAdmins []DataLakePrincipal
 
 	// A list of the resource-owning account IDs that the caller's account can use to
 	// share their user access details (user ARNs). The user ARNs can be logged in the
 	// resource owner's AWS CloudTrail log. You may want to specify this property when
 	// you are in a high-trust boundary, such as the same team or company.
-	TrustedResourceOwners []*string
+	TrustedResourceOwners []string
 }
 
 // A structure for a data location object where permissions are granted or revoked.
@@ -116,7 +116,7 @@ type DetailsMap struct {
 
 	// A share resource ARN for a catalog resource shared through AWS Resource Access
 	// Manager (AWS RAM).
-	ResourceShare []*string
+	ResourceShare []string
 }
 
 // Contains details about an error.
@@ -140,7 +140,7 @@ type FilterCondition struct {
 	Field FieldNameString
 
 	// A string with values used in evaluating the filter condition.
-	StringValueList []*string
+	StringValueList []string
 }
 
 // Permissions granted to a principal.
@@ -266,7 +266,7 @@ type TableWithColumnsResource struct {
 
 	// The list of column names for the table. At least one of ColumnNames or
 	// ColumnWildcard is required.
-	ColumnNames []*string
+	ColumnNames []string
 
 	// A wildcard specified by a ColumnWildcard object. At least one of ColumnNames or
 	// ColumnWildcard is required.

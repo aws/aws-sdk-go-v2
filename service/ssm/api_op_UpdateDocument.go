@@ -41,7 +41,7 @@ type UpdateDocumentInput struct {
 
 	// A list of key and value pairs that describe attachments to a version of a
 	// document.
-	Attachments []*types.AttachmentsSource
+	Attachments []types.AttachmentsSource
 
 	// Specify the document format for the new document version. Systems Manager
 	// supports JSON and YAML documents. JSON is the default format.

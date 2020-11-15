@@ -33,18 +33,18 @@ type GetInventorySchemaInput struct {
 	// Returns inventory schemas that support aggregation. For example, this call
 	// returns the AWS:InstanceInformation type, because it supports aggregation based
 	// on the PlatformName, PlatformType, and PlatformVersion attributes.
-	Aggregator *bool
+	Aggregator bool
 
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
 
 	// Returns the sub-type schema for a specified inventory type.
-	SubType *bool
+	SubType bool
 
 	// The type of inventory item to return.
 	TypeName *string
@@ -57,7 +57,7 @@ type GetInventorySchemaOutput struct {
 	NextToken *string
 
 	// Inventory schemas returned by the request.
-	Schemas []*types.InventoryItemSchema
+	Schemas []types.InventoryItemSchema
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

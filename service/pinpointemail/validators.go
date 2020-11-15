@@ -864,13 +864,13 @@ func validateCloudWatchDimensionConfiguration(v *types.CloudWatchDimensionConfig
 	}
 }
 
-func validateCloudWatchDimensionConfigurations(v []*types.CloudWatchDimensionConfiguration) error {
+func validateCloudWatchDimensionConfigurations(v []types.CloudWatchDimensionConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchDimensionConfigurations"}
 	for i := range v {
-		if err := validateCloudWatchDimensionConfiguration(v[i]); err != nil {
+		if err := validateCloudWatchDimensionConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1007,13 +1007,13 @@ func validateMessageTag(v *types.MessageTag) error {
 	}
 }
 
-func validateMessageTagList(v []*types.MessageTag) error {
+func validateMessageTagList(v []types.MessageTag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MessageTagList"}
 	for i := range v {
-		if err := validateMessageTag(v[i]); err != nil {
+		if err := validateMessageTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1072,13 +1072,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1547,9 +1547,6 @@ func validateOpPutDeliverabilityDashboardOptionInput(v *PutDeliverabilityDashboa
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutDeliverabilityDashboardOptionInput"}
-	if v.DashboardEnabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DashboardEnabled"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

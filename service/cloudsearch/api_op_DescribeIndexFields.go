@@ -51,7 +51,7 @@ type DescribeIndexFieldsInput struct {
 
 	// A list of the index fields you want to describe. If not specified, information
 	// is returned for all configured index fields.
-	FieldNames []*string
+	FieldNames []string
 }
 
 // The result of a DescribeIndexFields request. Contains the index fields
@@ -61,7 +61,7 @@ type DescribeIndexFieldsOutput struct {
 	// The index fields configured for the domain.
 	//
 	// This member is required.
-	IndexFields []*types.IndexFieldStatus
+	IndexFields []types.IndexFieldStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

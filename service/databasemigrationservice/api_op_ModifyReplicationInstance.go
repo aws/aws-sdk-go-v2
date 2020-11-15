@@ -46,11 +46,11 @@ type ModifyReplicationInstanceInput struct {
 	// possible. This parameter must be set to true when specifying a value for the
 	// EngineVersion parameter that is a different major version than the replication
 	// instance's current version.
-	AllowMajorVersionUpgrade *bool
+	AllowMajorVersionUpgrade bool
 
 	// Indicates whether the changes should be applied immediately or during the next
 	// maintenance window.
-	ApplyImmediately *bool
+	ApplyImmediately bool
 
 	// A value that indicates that minor version upgrades are applied automatically to
 	// the replication instance during the maintenance window. Changing this parameter
@@ -99,7 +99,7 @@ type ModifyReplicationInstanceInput struct {
 
 	// Specifies the VPC security group to be used with the replication instance. The
 	// VPC security group must work with the VPC containing the replication instance.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 }
 
 //

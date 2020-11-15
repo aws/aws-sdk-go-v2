@@ -79,7 +79,7 @@ type DescribeCustomKeyStoresInput struct {
 type DescribeCustomKeyStoresOutput struct {
 
 	// Contains metadata about each custom key store.
-	CustomKeyStores []*types.CustomKeyStoresListEntry
+	CustomKeyStores []types.CustomKeyStoresListEntry
 
 	// When Truncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent request.
@@ -89,7 +89,7 @@ type DescribeCustomKeyStoresOutput struct {
 	// is true, the list in this response is truncated. To get more items, pass the
 	// value of the NextMarker element in thisresponse to the Marker parameter in a
 	// subsequent request.
-	Truncated *bool
+	Truncated bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

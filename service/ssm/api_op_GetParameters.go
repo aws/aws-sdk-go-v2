@@ -33,21 +33,21 @@ type GetParametersInput struct {
 	// Names of the parameters for which you want to query information.
 	//
 	// This member is required.
-	Names []*string
+	Names []string
 
 	// Return decrypted secure string value. Return decrypted values for secure string
 	// parameters. This flag is ignored for String and StringList parameter types.
-	WithDecryption *bool
+	WithDecryption bool
 }
 
 type GetParametersOutput struct {
 
 	// A list of parameters that are not formatted correctly or do not run during an
 	// execution.
-	InvalidParameters []*string
+	InvalidParameters []string
 
 	// A list of details for a parameter.
-	Parameters []*types.Parameter
+	Parameters []types.Parameter
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -21,7 +21,7 @@ type DiscovererSummary struct {
 	State DiscovererState
 
 	// Tags associated with the resource.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type RegistrySummary struct {
@@ -33,7 +33,7 @@ type RegistrySummary struct {
 	RegistryName *string
 
 	// Tags associated with the registry.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // A summary of schema details.
@@ -49,10 +49,10 @@ type SchemaSummary struct {
 	SchemaName *string
 
 	// Tags associated with the schema.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The number of versions available for the schema.
-	VersionCount *int64
+	VersionCount int64
 }
 
 type SchemaVersionSummary struct {
@@ -82,7 +82,7 @@ type SearchSchemaSummary struct {
 	SchemaName *string
 
 	// An array of schema version summaries.
-	SchemaVersions []*SearchSchemaVersionSummary
+	SchemaVersions []SearchSchemaVersionSummary
 }
 
 type SearchSchemaVersionSummary struct {

@@ -37,16 +37,16 @@ type CreateDetectorVersionInput struct {
 	// The rules to include in the detector version.
 	//
 	// This member is required.
-	Rules []*types.Rule
+	Rules []types.Rule
 
 	// The description of the detector version.
 	Description *string
 
 	// The Amazon Sagemaker model endpoints to include in the detector version.
-	ExternalModelEndpoints []*string
+	ExternalModelEndpoints []string
 
 	// The model versions to include in the detector version.
-	ModelVersions []*types.ModelVersion
+	ModelVersions []types.ModelVersion
 
 	// The rule execution mode for the rules included in the detector version. You can
 	// define and edit the rule mode at the detector version level, when it is in draft
@@ -58,7 +58,7 @@ type CreateDetectorVersionInput struct {
 	RuleExecutionMode types.RuleExecutionMode
 
 	// A collection of key and value pairs.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDetectorVersionOutput struct {

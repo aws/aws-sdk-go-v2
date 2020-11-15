@@ -77,7 +77,7 @@ type ConfigTypeData interface {
 // Information about how AWS Ground Station should configure an antenna for
 // downlink during a contact.
 type ConfigTypeDataMemberAntennaDownlinkConfig struct {
-	Value *AntennaDownlinkConfig
+	Value AntennaDownlinkConfig
 }
 
 func (*ConfigTypeDataMemberAntennaDownlinkConfig) isConfigTypeData() {}
@@ -85,7 +85,7 @@ func (*ConfigTypeDataMemberAntennaDownlinkConfig) isConfigTypeData() {}
 // Information about how AWS Ground Station should conﬁgure an antenna for downlink
 // demod decode during a contact.
 type ConfigTypeDataMemberAntennaDownlinkDemodDecodeConfig struct {
-	Value *AntennaDownlinkDemodDecodeConfig
+	Value AntennaDownlinkDemodDecodeConfig
 }
 
 func (*ConfigTypeDataMemberAntennaDownlinkDemodDecodeConfig) isConfigTypeData() {}
@@ -93,14 +93,14 @@ func (*ConfigTypeDataMemberAntennaDownlinkDemodDecodeConfig) isConfigTypeData() 
 // Information about how AWS Ground Station should conﬁgure an antenna for uplink
 // during a contact.
 type ConfigTypeDataMemberAntennaUplinkConfig struct {
-	Value *AntennaUplinkConfig
+	Value AntennaUplinkConfig
 }
 
 func (*ConfigTypeDataMemberAntennaUplinkConfig) isConfigTypeData() {}
 
 // Information about the dataflow endpoint Config.
 type ConfigTypeDataMemberDataflowEndpointConfig struct {
-	Value *DataflowEndpointConfig
+	Value DataflowEndpointConfig
 }
 
 func (*ConfigTypeDataMemberDataflowEndpointConfig) isConfigTypeData() {}
@@ -108,7 +108,7 @@ func (*ConfigTypeDataMemberDataflowEndpointConfig) isConfigTypeData() {}
 // Object that determines whether tracking should be used during a contact executed
 // with this Config in the mission profile.
 type ConfigTypeDataMemberTrackingConfig struct {
-	Value *TrackingConfig
+	Value TrackingConfig
 }
 
 func (*ConfigTypeDataMemberTrackingConfig) isConfigTypeData() {}
@@ -117,7 +117,7 @@ func (*ConfigTypeDataMemberTrackingConfig) isConfigTypeData() {}
 // AntennaUplinkConfig, corresponding to the specified AntennaUplinkConfigArn, are
 // used when this UplinkEchoConfig is used in a contact.
 type ConfigTypeDataMemberUplinkEchoConfig struct {
-	Value *UplinkEchoConfig
+	Value UplinkEchoConfig
 }
 
 func (*ConfigTypeDataMemberUplinkEchoConfig) isConfigTypeData() {}
@@ -164,7 +164,7 @@ type ContactData struct {
 	StartTime *time.Time
 
 	// Tags assigned to a contact.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Information about a dataflow endpoint.
@@ -321,10 +321,10 @@ type MissionProfileListItem struct {
 type SatelliteListItem struct {
 
 	// A list of ground stations to which the satellite is on-boarded.
-	GroundStations []*string
+	GroundStations []string
 
 	// NORAD satellite ID number.
-	NoradSatelliteID *int32
+	NoradSatelliteID int32
 
 	// ARN of a satellite.
 	SatelliteArn *string
@@ -344,13 +344,13 @@ type SecurityDetails struct {
 	// The security groups to attach to the elastic network interfaces.
 	//
 	// This member is required.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// A list of subnets where AWS Ground Station places elastic network interfaces to
 	// send streams to your instances.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 }
 
 // Information about the socket address.

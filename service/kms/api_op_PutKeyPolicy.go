@@ -89,7 +89,7 @@ type PutKeyPolicyInput struct {
 	// section in the AWS Key Management Service Developer Guide. Use this parameter
 	// only when you intend to prevent the principal that is making the request from
 	// making a subsequent PutKeyPolicy request on the CMK. The default value is false.
-	BypassPolicyLockoutSafetyCheck *bool
+	BypassPolicyLockoutSafetyCheck bool
 }
 
 type PutKeyPolicyOutput struct {

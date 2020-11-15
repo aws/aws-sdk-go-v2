@@ -61,7 +61,7 @@ type DescribeAffectedAccountsForOrganizationInput struct {
 type DescribeAffectedAccountsForOrganizationOutput struct {
 
 	// A JSON set of elements of the affected accounts.
-	AffectedAccounts []*string
+	AffectedAccounts []string
 
 	// This parameter specifies if the AWS Health event is a public AWS service event
 	// or an account-specific event.

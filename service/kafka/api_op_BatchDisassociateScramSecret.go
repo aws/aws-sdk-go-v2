@@ -38,7 +38,7 @@ type BatchDisassociateScramSecretInput struct {
 	// List of AWS Secrets Manager secret ARNs.
 	//
 	// This member is required.
-	SecretArnList []*string
+	SecretArnList []string
 }
 
 type BatchDisassociateScramSecretOutput struct {
@@ -47,7 +47,7 @@ type BatchDisassociateScramSecretOutput struct {
 	ClusterArn *string
 
 	// List of errors when disassociating secrets to cluster.
-	UnprocessedScramSecrets []*types.UnprocessedScramSecret
+	UnprocessedScramSecrets []types.UnprocessedScramSecret
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

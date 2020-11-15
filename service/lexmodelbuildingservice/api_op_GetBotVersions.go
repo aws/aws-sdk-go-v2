@@ -54,7 +54,7 @@ type GetBotVersionsOutput struct {
 
 	// An array of BotMetadata objects, one for each numbered version of the bot plus
 	// one for the $LATEST version.
-	Bots []*types.BotMetadata
+	Bots []types.BotMetadata
 
 	// A pagination token for fetching the next page of bot versions. If the response
 	// to this call is truncated, Amazon Lex returns a pagination token in the

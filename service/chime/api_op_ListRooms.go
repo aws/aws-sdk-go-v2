@@ -52,7 +52,7 @@ type ListRoomsOutput struct {
 	NextToken *string
 
 	// The room details.
-	Rooms []*types.Room
+	Rooms []types.Room
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

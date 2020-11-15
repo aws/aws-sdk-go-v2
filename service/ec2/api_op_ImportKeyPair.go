@@ -51,10 +51,10 @@ type ImportKeyPairInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The tags to apply to the imported key pair.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 }
 
 type ImportKeyPairOutput struct {
@@ -69,7 +69,7 @@ type ImportKeyPairOutput struct {
 	KeyPairId *string
 
 	// The tags applied to the imported key pair.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

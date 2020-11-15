@@ -51,7 +51,7 @@ type CreateUserInput struct {
 	// The identifier of the security profile for the user.
 	//
 	// This member is required.
-	SecurityProfileIds []*string
+	SecurityProfileIds []string
 
 	// The user name for the account. For instances not using SAML for identity
 	// management, the user name can include up to 20 characters. If you are using SAML
@@ -84,7 +84,7 @@ type CreateUserInput struct {
 	Password *string
 
 	// One or more tags.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateUserOutput struct {

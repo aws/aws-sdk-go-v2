@@ -52,7 +52,7 @@ type GetUsageStatisticsInput struct {
 	UsageStatisticType types.UsageStatisticType
 
 	// The maximum number of results to return in the response.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token to use for paginating results that are returned in the response. Set the
 	// value of this parameter to null for the first request to a list action. For

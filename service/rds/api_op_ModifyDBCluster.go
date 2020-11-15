@@ -46,7 +46,7 @@ type ModifyDBClusterInput struct {
 	// You must allow major version upgrades when specifying a value for the
 	// EngineVersion parameter that is a different major version than the DB cluster's
 	// current version.
-	AllowMajorVersionUpgrade *bool
+	AllowMajorVersionUpgrade bool
 
 	// A value that indicates whether the modifications in this request and any pending
 	// modifications are asynchronously applied as soon as possible, regardless of the
@@ -59,7 +59,7 @@ type ModifyDBClusterInput struct {
 	// values are applied during the next maintenance window. All other changes are
 	// applied immediately, regardless of the value of the ApplyImmediately parameter.
 	// By default, this parameter is disabled.
-	ApplyImmediately *bool
+	ApplyImmediately bool
 
 	// The target backtrack window, in seconds. To disable backtracking, set this value
 	// to 0. Currently, Backtrack is only supported for Aurora MySQL DB clusters.
@@ -222,7 +222,7 @@ type ModifyDBClusterInput struct {
 	ScalingConfiguration *types.ScalingConfiguration
 
 	// A list of VPC security groups that the DB cluster will belong to.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 }
 
 type ModifyDBClusterOutput struct {

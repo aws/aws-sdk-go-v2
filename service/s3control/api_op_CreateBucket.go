@@ -111,7 +111,7 @@ type CreateBucketInput struct {
 
 	// Specifies whether you want S3 Object Lock to be enabled for the new bucket. This
 	// is not supported by Amazon S3 on Outposts buckets.
-	ObjectLockEnabledForBucket *bool
+	ObjectLockEnabledForBucket bool
 
 	// The ID of the Outposts where the bucket is being created. This is required by
 	// Amazon S3 on Outposts buckets.

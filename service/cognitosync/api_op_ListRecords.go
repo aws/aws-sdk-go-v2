@@ -57,7 +57,7 @@ type ListRecordsInput struct {
 	LastSyncCount *int64
 
 	// The maximum number of results to be returned.
-	MaxResults *int32
+	MaxResults int32
 
 	// A pagination token for obtaining the next page of results.
 	NextToken *string
@@ -70,13 +70,13 @@ type ListRecordsInput struct {
 type ListRecordsOutput struct {
 
 	// Total number of records.
-	Count *int32
+	Count int32
 
 	// A boolean value specifying whether to delete the dataset locally.
-	DatasetDeletedAfterRequestedSyncCount *bool
+	DatasetDeletedAfterRequestedSyncCount bool
 
 	// Indicates whether the dataset exists.
-	DatasetExists *bool
+	DatasetExists bool
 
 	// Server sync count for this dataset.
 	DatasetSyncCount *int64
@@ -85,13 +85,13 @@ type ListRecordsOutput struct {
 	LastModifiedBy *string
 
 	// Names of merged datasets.
-	MergedDatasetNames []*string
+	MergedDatasetNames []string
 
 	// A pagination token for obtaining the next page of results.
 	NextToken *string
 
 	// A list of all records.
-	Records []*types.Record
+	Records []types.Record
 
 	// A token containing a session ID, identity ID, and expiration.
 	SyncSessionToken *string

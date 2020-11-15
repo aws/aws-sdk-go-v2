@@ -59,7 +59,7 @@ type ExecuteStatementRequest struct {
 	TransactionId *string
 
 	// Specifies the parameters for the parameterized statement in the request.
-	Parameters []*ValueHolder
+	Parameters []ValueHolder
 }
 
 // Contains the details of the executed statement.
@@ -97,7 +97,7 @@ type Page struct {
 	NextPageToken *string
 
 	// A structure that contains values in multiple encoding formats.
-	Values []*ValueHolder
+	Values []ValueHolder
 }
 
 // Specifies a request to start a new session.

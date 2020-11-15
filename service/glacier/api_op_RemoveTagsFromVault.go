@@ -49,7 +49,7 @@ type RemoveTagsFromVaultInput struct {
 	VaultName *string
 
 	// A list of tag keys. Each corresponding tag is removed from the vault.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type RemoveTagsFromVaultOutput struct {

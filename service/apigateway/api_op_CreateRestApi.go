@@ -43,7 +43,7 @@ type CreateRestApiInput struct {
 
 	// The list of binary media types supported by the RestApi. By default, the RestApi
 	// supports only UTF-8-encoded text payloads.
-	BinaryMediaTypes []*string
+	BinaryMediaTypes []string
 
 	// The ID of the RestApi that you want to clone from.
 	CloneFrom *string
@@ -56,7 +56,7 @@ type CreateRestApiInput struct {
 	// https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that
 	// clients use a custom domain name to invoke your API, disable the default
 	// endpoint.
-	DisableExecuteApiEndpoint *bool
+	DisableExecuteApiEndpoint bool
 
 	// The endpoint configuration of this RestApi showing the endpoint types of the
 	// API.
@@ -76,7 +76,7 @@ type CreateRestApiInput struct {
 	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
 	// tag key can be up to 128 characters and must not start with aws:. The tag value
 	// can be up to 256 characters.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// A version identifier for the API.
 	Version *string
@@ -98,7 +98,7 @@ type CreateRestApiOutput struct {
 
 	// The list of binary media types supported by the RestApi. By default, the RestApi
 	// supports only UTF-8-encoded text payloads.
-	BinaryMediaTypes []*string
+	BinaryMediaTypes []string
 
 	// The timestamp when the API was created.
 	CreatedDate *time.Time
@@ -111,7 +111,7 @@ type CreateRestApiOutput struct {
 	// https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that
 	// clients use a custom domain name to invoke your API, disable the default
 	// endpoint.
-	DisableExecuteApiEndpoint *bool
+	DisableExecuteApiEndpoint bool
 
 	// The endpoint configuration of this RestApi showing the endpoint types of the
 	// API.
@@ -136,14 +136,14 @@ type CreateRestApiOutput struct {
 	Policy *string
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// A version identifier for the API.
 	Version *string
 
 	// The warning messages reported when failonwarnings is turned on during API
 	// import.
-	Warnings []*string
+	Warnings []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

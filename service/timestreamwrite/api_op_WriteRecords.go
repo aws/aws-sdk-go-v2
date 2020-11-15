@@ -51,7 +51,7 @@ type WriteRecordsInput struct {
 	// each time series data point.
 	//
 	// This member is required.
-	Records []*types.Record
+	Records []types.Record
 
 	// The name of the Timesream table.
 	//

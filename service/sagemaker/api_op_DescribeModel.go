@@ -59,11 +59,11 @@ type DescribeModelOutput struct {
 	ModelName *string
 
 	// The containers in the inference pipeline.
-	Containers []*types.ContainerDefinition
+	Containers []types.ContainerDefinition
 
 	// If True, no inbound or outbound network calls can be made to or from the model
 	// container.
-	EnableNetworkIsolation *bool
+	EnableNetworkIsolation bool
 
 	// The location of the primary inference code, associated artifacts, and custom
 	// environment map that the inference code uses when it is deployed in production.

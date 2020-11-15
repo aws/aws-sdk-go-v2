@@ -65,7 +65,7 @@ type DetectModerationLabelsOutput struct {
 
 	// Array of detected Moderation labels and the time, in milliseconds from the start
 	// of the video, they were detected.
-	ModerationLabels []*types.ModerationLabel
+	ModerationLabels []types.ModerationLabel
 
 	// Version number of the moderation detection model that was used to detect unsafe
 	// content.

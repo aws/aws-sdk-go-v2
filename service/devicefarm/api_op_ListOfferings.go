@@ -48,7 +48,7 @@ type ListOfferingsOutput struct {
 	NextToken *string
 
 	// A value that represents the list offering results.
-	Offerings []*types.Offering
+	Offerings []types.Offering
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

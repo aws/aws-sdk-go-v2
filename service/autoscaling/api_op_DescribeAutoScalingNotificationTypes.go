@@ -32,7 +32,7 @@ type DescribeAutoScalingNotificationTypesInput struct {
 type DescribeAutoScalingNotificationTypesOutput struct {
 
 	// The notification types.
-	AutoScalingNotificationTypes []*string
+	AutoScalingNotificationTypes []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

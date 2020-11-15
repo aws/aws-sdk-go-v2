@@ -52,7 +52,7 @@ type DescribeDBClustersInput struct {
 	//
 	// For example, to invoke this API from the AWS CLI and filter so that
 	// only Neptune DB clusters are returned, you could use the following command:
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeDBClusters request.
 	// If this parameter is specified, the response includes only records beyond the
@@ -69,7 +69,7 @@ type DescribeDBClustersInput struct {
 type DescribeDBClustersOutput struct {
 
 	// Contains a list of DB clusters for the user.
-	DBClusters []*types.DBCluster
+	DBClusters []types.DBCluster
 
 	// A pagination token that can be used in a subsequent DescribeDBClusters request.
 	Marker *string

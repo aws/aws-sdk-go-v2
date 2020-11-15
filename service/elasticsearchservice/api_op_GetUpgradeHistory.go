@@ -40,7 +40,7 @@ type GetUpgradeHistoryInput struct {
 	DomainName *string
 
 	// Set this value to limit the number of results returned.
-	MaxResults *int32
+	MaxResults int32
 
 	// Paginated APIs accepts NextToken input to returns next page results and provides
 	// a NextToken output in the response which can be used by the client to retrieve
@@ -58,7 +58,7 @@ type GetUpgradeHistoryOutput struct {
 	// A list of UpgradeHistory objects corresponding to each Upgrade or Upgrade
 	// Eligibility Check performed on a domain returned as part of
 	// GetUpgradeHistoryResponse object.
-	UpgradeHistories []*types.UpgradeHistory
+	UpgradeHistories []types.UpgradeHistory
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

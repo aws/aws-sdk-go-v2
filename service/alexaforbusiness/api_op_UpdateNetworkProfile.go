@@ -54,7 +54,7 @@ type UpdateNetworkProfileInput struct {
 	// The root certificate(s) of your authentication server that will be installed on
 	// your devices and used to trust your authentication server during EAP
 	// negotiation.
-	TrustAnchors []*string
+	TrustAnchors []string
 }
 
 type UpdateNetworkProfileOutput struct {

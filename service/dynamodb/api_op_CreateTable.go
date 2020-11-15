@@ -44,7 +44,7 @@ type CreateTableInput struct {
 	// An array of attributes that describe the key schema for the table and indexes.
 	//
 	// This member is required.
-	AttributeDefinitions []*types.AttributeDefinition
+	AttributeDefinitions []types.AttributeDefinition
 
 	// Specifies the attributes that make up the primary key for a table or an index.
 	// The attributes in KeySchema must also be defined in the AttributeDefinitions
@@ -78,7 +78,7 @@ type CreateTableInput struct {
 	// in the Amazon DynamoDB Developer Guide.
 	//
 	// This member is required.
-	KeySchema []*types.KeySchemaElement
+	KeySchema []types.KeySchemaElement
 
 	// The name of the table to create.
 	//
@@ -135,7 +135,7 @@ type CreateTableInput struct {
 	//
 	// * ProvisionedThroughput - The provisioned throughput settings for
 	// the global secondary index, consisting of read and write capacity units.
-	GlobalSecondaryIndexes []*types.GlobalSecondaryIndex
+	GlobalSecondaryIndexes []types.GlobalSecondaryIndex
 
 	// One or more local secondary indexes (the maximum is 5) to be created on the
 	// table. Each index is scoped to a given partition key value. There is a 10 GB
@@ -173,7 +173,7 @@ type CreateTableInput struct {
 	// secondary indexes, must not exceed 100. If you project the same attribute into
 	// two different indexes, this counts as two distinct attributes when determining
 	// the total.
-	LocalSecondaryIndexes []*types.LocalSecondaryIndex
+	LocalSecondaryIndexes []types.LocalSecondaryIndex
 
 	// Represents the provisioned throughput settings for a specified table or index.
 	// The settings can be modified using the UpdateTable operation. If you set
@@ -215,7 +215,7 @@ type CreateTableInput struct {
 	// A list of key-value pairs to label the table. For more information, see Tagging
 	// for DynamoDB
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html).
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Represents the output of a CreateTable operation.

@@ -59,7 +59,7 @@ type DescribeVpcPeeringConnectionsInput struct {
 type DescribeVpcPeeringConnectionsOutput struct {
 
 	// A collection of VPC peering connection records that match the request.
-	VpcPeeringConnections []*types.VpcPeeringConnection
+	VpcPeeringConnections []types.VpcPeeringConnection
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

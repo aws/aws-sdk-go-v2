@@ -48,7 +48,7 @@ type ListMemberAccountsInput struct {
 type ListMemberAccountsOutput struct {
 
 	// An array of account IDs.
-	MemberAccounts []*string
+	MemberAccounts []string
 
 	// If you have more member account IDs than the number that you specified for
 	// MaxResults in the request, the response includes a NextToken value. To list more

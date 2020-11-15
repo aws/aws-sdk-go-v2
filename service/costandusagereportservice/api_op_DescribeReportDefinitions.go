@@ -44,7 +44,7 @@ type DescribeReportDefinitionsOutput struct {
 	NextToken *string
 
 	// A list of AWS Cost and Usage reports owned by the account.
-	ReportDefinitions []*types.ReportDefinition
+	ReportDefinitions []types.ReportDefinition
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

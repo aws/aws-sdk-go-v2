@@ -40,48 +40,48 @@ func TestClient_AllQueryStringTypes_awsRestxmlSerialize(t *testing.T) {
 		"AllQueryStringTypes": {
 			Params: &AllQueryStringTypesInput{
 				QueryString: ptr.String("Hello there"),
-				QueryStringList: []*string{
-					ptr.String("a"),
-					ptr.String("b"),
-					ptr.String("c"),
+				QueryStringList: []string{
+					"a",
+					"b",
+					"c",
 				},
-				QueryStringSet: []*string{
-					ptr.String("a"),
-					ptr.String("b"),
-					ptr.String("c"),
+				QueryStringSet: []string{
+					"a",
+					"b",
+					"c",
 				},
 				QueryByte:    ptr.Int8(1),
 				QueryShort:   ptr.Int16(2),
 				QueryInteger: ptr.Int32(3),
-				QueryIntegerList: []*int32{
-					ptr.Int32(1),
-					ptr.Int32(2),
-					ptr.Int32(3),
+				QueryIntegerList: []int32{
+					1,
+					2,
+					3,
 				},
-				QueryIntegerSet: []*int32{
-					ptr.Int32(1),
-					ptr.Int32(2),
-					ptr.Int32(3),
+				QueryIntegerSet: []int32{
+					1,
+					2,
+					3,
 				},
 				QueryLong:   ptr.Int64(4),
 				QueryFloat:  ptr.Float32(1.1),
 				QueryDouble: ptr.Float64(1.1),
-				QueryDoubleList: []*float64{
-					ptr.Float64(1.1),
-					ptr.Float64(2.1),
-					ptr.Float64(3.1),
+				QueryDoubleList: []float64{
+					1.1,
+					2.1,
+					3.1,
 				},
 				QueryBoolean: ptr.Bool(true),
-				QueryBooleanList: []*bool{
-					ptr.Bool(true),
-					ptr.Bool(false),
-					ptr.Bool(true),
+				QueryBooleanList: []bool{
+					true,
+					false,
+					true,
 				},
 				QueryTimestamp: ptr.Time(smithytime.ParseEpochSeconds(1)),
-				QueryTimestampList: []*time.Time{
-					ptr.Time(smithytime.ParseEpochSeconds(1)),
-					ptr.Time(smithytime.ParseEpochSeconds(2)),
-					ptr.Time(smithytime.ParseEpochSeconds(3)),
+				QueryTimestampList: []time.Time{
+					smithytime.ParseEpochSeconds(1),
+					smithytime.ParseEpochSeconds(2),
+					smithytime.ParseEpochSeconds(3),
 				},
 				QueryEnum: types.FooEnum("Foo"),
 				QueryEnumList: []types.FooEnum{

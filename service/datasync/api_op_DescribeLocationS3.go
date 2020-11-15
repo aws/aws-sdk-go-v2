@@ -43,7 +43,7 @@ type DescribeLocationS3Output struct {
 	// If you are using DataSync on an Amazon Outpost, the Amazon Resource Name (ARNs)
 	// of the EC2 agents deployed on your AWS Outpost. For more information about
 	// launching a DataSync agent on an Amazon Outpost, see outposts-agent.
-	AgentArns []*string
+	AgentArns []string
 
 	// The time that the Amazon S3 bucket location was created.
 	CreationTime *time.Time

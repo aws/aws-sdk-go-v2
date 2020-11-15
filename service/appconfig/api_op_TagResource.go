@@ -40,7 +40,7 @@ type TagResourceInput struct {
 	// be up to 256 characters.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourceOutput struct {

@@ -75,7 +75,7 @@ type CreateActivityInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html). Tags
 	// may only contain Unicode letters, digits, white space, or these symbols: _ . : /
 	// = + - @.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateActivityOutput struct {

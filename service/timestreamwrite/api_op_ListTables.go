@@ -51,7 +51,7 @@ type ListTablesOutput struct {
 	NextToken *string
 
 	// A list of tables.
-	Tables []*types.Table
+	Tables []types.Table
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

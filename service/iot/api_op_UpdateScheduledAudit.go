@@ -55,7 +55,7 @@ type UpdateScheduledAuditInput struct {
 	// for your account. (Use DescribeAccountAuditConfiguration to see the list of all
 	// checks, including those that are enabled or use UpdateAccountAuditConfiguration
 	// to select which checks are enabled.)
-	TargetCheckNames []*string
+	TargetCheckNames []string
 }
 
 type UpdateScheduledAuditOutput struct {

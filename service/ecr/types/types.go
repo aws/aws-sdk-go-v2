@@ -134,7 +134,7 @@ type ImageDetail struct {
 	ImageSizeInBytes *int64
 
 	// The list of tags associated with this image.
-	ImageTags []*string
+	ImageTags []string
 
 	// The AWS account ID associated with the registry to which this image belongs.
 	RegistryId *string
@@ -170,7 +170,7 @@ type ImageIdentifier struct {
 type ImageScanFinding struct {
 
 	// A collection of attributes of the host from which the finding is generated.
-	Attributes []*Attribute
+	Attributes []Attribute
 
 	// The description of the finding.
 	Description *string
@@ -189,10 +189,10 @@ type ImageScanFinding struct {
 type ImageScanFindings struct {
 
 	// The image vulnerability counts, sorted by severity.
-	FindingSeverityCounts map[string]*int32
+	FindingSeverityCounts map[string]int32
 
 	// The findings from the image scan.
-	Findings []*ImageScanFinding
+	Findings []ImageScanFinding
 
 	// The time of the last completed image scan.
 	ImageScanCompletedAt *time.Time
@@ -205,7 +205,7 @@ type ImageScanFindings struct {
 type ImageScanFindingsSummary struct {
 
 	// The image vulnerability counts, sorted by severity.
-	FindingSeverityCounts map[string]*int32
+	FindingSeverityCounts map[string]int32
 
 	// The time of the last completed image scan.
 	ImageScanCompletedAt *time.Time
@@ -221,7 +221,7 @@ type ImageScanningConfiguration struct {
 	// repository. If set to true, images will be scanned after being pushed. If this
 	// parameter is not specified, it will default to false and images will not be
 	// scanned unless a scan is manually started with the StartImageScan API.
-	ScanOnPush *bool
+	ScanOnPush bool
 }
 
 // The current status of an image scan.
@@ -289,7 +289,7 @@ type LifecyclePolicyPreviewResult struct {
 	ImagePushedAt *time.Time
 
 	// The list of tags associated with this image.
-	ImageTags []*string
+	ImageTags []string
 }
 
 // The summary of the lifecycle policy preview request.

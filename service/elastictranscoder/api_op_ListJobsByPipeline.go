@@ -51,7 +51,7 @@ type ListJobsByPipelineInput struct {
 type ListJobsByPipelineOutput struct {
 
 	// An array of Job objects that are in the specified pipeline.
-	Jobs []*types.Job
+	Jobs []types.Job
 
 	// A value that you use to access the second and subsequent pages of results, if
 	// any. When the jobs in the specified pipeline fit on one page or when you've

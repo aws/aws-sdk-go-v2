@@ -32,7 +32,7 @@ type PutRetentionPolicyInput struct {
 	// The retention policy folder configurations.
 	//
 	// This member is required.
-	FolderConfigurations []*types.FolderConfiguration
+	FolderConfigurations []types.FolderConfiguration
 
 	// The retention policy name.
 	//

@@ -30,13 +30,13 @@ func (c *Client) DescribeClientVpnEndpoints(ctx context.Context, params *Describ
 type DescribeClientVpnEndpointsInput struct {
 
 	// The ID of the Client VPN endpoint.
-	ClientVpnEndpointIds []*string
+	ClientVpnEndpointIds []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters. Filter names and values are case-sensitive.
 	//
@@ -45,12 +45,12 @@ type DescribeClientVpnEndpointsInput struct {
 	//
 	// * transport-protocol - The transport
 	// protocol (tcp | udp).
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results can be seen by sending another request with the nextToken
 	// value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token to retrieve the next page of results.
 	NextToken *string
@@ -59,7 +59,7 @@ type DescribeClientVpnEndpointsInput struct {
 type DescribeClientVpnEndpointsOutput struct {
 
 	// Information about the Client VPN endpoints.
-	ClientVpnEndpoints []*types.ClientVpnEndpoint
+	ClientVpnEndpoints []types.ClientVpnEndpoint
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

@@ -44,7 +44,7 @@ type CreateDomainConfigurationInput struct {
 	// The ARNs of the certificates that AWS IoT passes to the device during the TLS
 	// handshake. Currently you can specify only one certificate ARN. This value is not
 	// required for AWS-managed domains.
-	ServerCertificateArns []*string
+	ServerCertificateArns []string
 
 	// The type of service delivered by the endpoint. AWS IoT Core currently supports
 	// only the DATA service type.
@@ -54,7 +54,7 @@ type CreateDomainConfigurationInput struct {
 	// parameters use format: ...key1=value1&key2=value2... For the CLI command-line
 	// parameter use format: &&tags "key1=value1&key2=value2..." For the cli-input-json
 	// file use format: "tags": "key1=value1&key2=value2..."
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The certificate used to validate the server certificate and prove domain name
 	// ownership. This certificate must be signed by a public certificate authority.

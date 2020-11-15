@@ -39,7 +39,7 @@ type BatchUpdateUserInput struct {
 	// The request containing the user IDs and details to update.
 	//
 	// This member is required.
-	UpdateUserRequestItems []*types.UpdateUserRequestItem
+	UpdateUserRequestItems []types.UpdateUserRequestItem
 }
 
 type BatchUpdateUserOutput struct {
@@ -47,7 +47,7 @@ type BatchUpdateUserOutput struct {
 	// If the BatchUpdateUser action fails for one or more of the user IDs in the
 	// request, a list of the user IDs is returned, along with error codes and error
 	// messages.
-	UserErrors []*types.UserError
+	UserErrors []types.UserError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

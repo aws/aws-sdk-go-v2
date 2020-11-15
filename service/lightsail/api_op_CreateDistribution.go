@@ -64,11 +64,11 @@ type CreateDistributionInput struct {
 
 	// An array of objects that describe the per-path cache behavior for the
 	// distribution.
-	CacheBehaviors []*types.CacheBehaviorPerPath
+	CacheBehaviors []types.CacheBehaviorPerPath
 
 	// The tag keys and optional values to add to the distribution during create. Use
 	// the TagResource action to tag a resource after it's created.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDistributionOutput struct {

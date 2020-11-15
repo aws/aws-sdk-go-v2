@@ -54,7 +54,7 @@ type DescribeClusterDbRevisionsInput struct {
 type DescribeClusterDbRevisionsOutput struct {
 
 	// A list of revisions.
-	ClusterDbRevisions []*types.ClusterDbRevision
+	ClusterDbRevisions []types.ClusterDbRevision
 
 	// A string representing the starting point for the next set of revisions. If a
 	// value is returned in a response, you can retrieve the next set of revisions by

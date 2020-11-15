@@ -142,12 +142,12 @@ type ReEncryptInput struct {
 	// recommended. For more information, see Encryption Context
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
 	// in the AWS Key Management Service Developer Guide.
-	DestinationEncryptionContext map[string]*string
+	DestinationEncryptionContext map[string]string
 
 	// A list of grant tokens. For more information, see Grant Tokens
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
-	GrantTokens []*string
+	GrantTokens []string
 
 	// Specifies the encryption algorithm that AWS KMS will use to decrypt the
 	// ciphertext before it is reencrypted. The default value, SYMMETRIC_DEFAULT,
@@ -166,7 +166,7 @@ type ReEncryptInput struct {
 	// CMK, but it is highly recommended. For more information, see Encryption Context
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
 	// in the AWS Key Management Service Developer Guide.
-	SourceEncryptionContext map[string]*string
+	SourceEncryptionContext map[string]string
 
 	// A unique identifier for the CMK that is used to decrypt the ciphertext before it
 	// reencrypts it using the destination CMK. This parameter is required only when

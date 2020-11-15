@@ -35,7 +35,7 @@ type ListVerifiedEmailAddressesInput struct {
 type ListVerifiedEmailAddressesOutput struct {
 
 	// A list of email addresses that have been verified.
-	VerifiedEmailAddresses []*string
+	VerifiedEmailAddresses []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

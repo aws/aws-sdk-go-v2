@@ -42,7 +42,7 @@ type CreateApiKeyInput struct {
 	// represented as seconds since the epoch, rounded down to the nearest hour. The
 	// default value for this parameter is 7 days from creation time. For more
 	// information, see .
-	Expires *int64
+	Expires int64
 }
 
 type CreateApiKeyOutput struct {

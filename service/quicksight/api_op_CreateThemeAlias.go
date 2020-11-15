@@ -58,7 +58,7 @@ type CreateThemeAliasOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Information about the theme alias.
 	ThemeAlias *types.ThemeAlias

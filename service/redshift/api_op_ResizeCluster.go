@@ -78,7 +78,7 @@ type ResizeClusterInput struct {
 
 	// The new number of nodes for the cluster. If not specified, the cluster's current
 	// number of nodes is used.
-	NumberOfNodes *int32
+	NumberOfNodes int32
 }
 
 type ResizeClusterOutput struct {

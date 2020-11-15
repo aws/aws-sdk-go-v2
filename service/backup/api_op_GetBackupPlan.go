@@ -45,7 +45,7 @@ type GetBackupPlanOutput struct {
 
 	// Contains a list of BackupOptions for each resource type. The list is populated
 	// only if the advanced option is set for the backup plan.
-	AdvancedBackupSettings []*types.AdvancedBackupSetting
+	AdvancedBackupSettings []types.AdvancedBackupSetting
 
 	// Specifies the body of a backup plan. Includes a BackupPlanName and one or more
 	// sets of Rules.

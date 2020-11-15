@@ -48,7 +48,7 @@ type RemoveTagsFromCertificateInput struct {
 	// The key-value pair that defines the tag to remove.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type RemoveTagsFromCertificateOutput struct {

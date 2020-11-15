@@ -37,7 +37,7 @@ type DescribeCommandsInput struct {
 	// An array of command IDs. If you include this parameter, DescribeCommands returns
 	// a description of the specified commands. Otherwise, it returns a description of
 	// every command.
-	CommandIds []*string
+	CommandIds []string
 
 	// The deployment ID. If you include this parameter, DescribeCommands returns a
 	// description of the commands associated with the specified deployment.
@@ -52,7 +52,7 @@ type DescribeCommandsInput struct {
 type DescribeCommandsOutput struct {
 
 	// An array of Command objects that describe each of the specified commands.
-	Commands []*types.Command
+	Commands []types.Command
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

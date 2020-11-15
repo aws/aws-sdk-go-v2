@@ -48,7 +48,7 @@ type CheckIfPhoneNumberIsOptedOutOutput struct {
 	//
 	// * false – The phone
 	// number is opted in, meaning you can publish SMS messages to it.
-	IsOptedOut *bool
+	IsOptedOut bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

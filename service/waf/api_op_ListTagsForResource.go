@@ -48,7 +48,7 @@ type ListTagsForResourceInput struct {
 	ResourceARN *string
 
 	//
-	Limit *int32
+	Limit int32
 
 	//
 	NextMarker *string

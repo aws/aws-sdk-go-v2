@@ -38,7 +38,7 @@ type ListTagsForResourceInput struct {
 type ListTagsForResourceOutput struct {
 
 	// An array of tags associated with the domain.
-	Tags []*types.ResourceTag
+	Tags []types.ResourceTag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

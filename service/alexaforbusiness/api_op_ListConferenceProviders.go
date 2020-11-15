@@ -39,7 +39,7 @@ type ListConferenceProvidersInput struct {
 type ListConferenceProvidersOutput struct {
 
 	// The conference providers.
-	ConferenceProviders []*types.ConferenceProvider
+	ConferenceProviders []types.ConferenceProvider
 
 	// The tokens used for pagination.
 	NextToken *string

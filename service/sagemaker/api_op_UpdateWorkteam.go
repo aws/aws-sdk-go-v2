@@ -56,7 +56,7 @@ type UpdateWorkteamInput struct {
 	// team must also be listed in Groups when you make this request to remain on the
 	// work team. If you do not include these user groups, they will no longer be
 	// associated with the work team you update.
-	MemberDefinitions []*types.MemberDefinition
+	MemberDefinitions []types.MemberDefinition
 
 	// Configures SNS topic notifications for available or expiring work items
 	NotificationConfiguration *types.NotificationConfiguration

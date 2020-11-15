@@ -39,7 +39,7 @@ type UntagResourceInput struct {
 	// EFS resource.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagResourceOutput struct {

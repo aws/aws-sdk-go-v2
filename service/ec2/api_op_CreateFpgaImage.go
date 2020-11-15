@@ -52,7 +52,7 @@ type CreateFpgaImageInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The location in Amazon S3 for the output logs.
 	LogsStorageLocation *types.StorageLocation
@@ -61,7 +61,7 @@ type CreateFpgaImageInput struct {
 	Name *string
 
 	// The tags to apply to the FPGA image during creation.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 }
 
 type CreateFpgaImageOutput struct {

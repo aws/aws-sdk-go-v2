@@ -35,14 +35,14 @@ type BatchDeletePhoneNumberInput struct {
 	// List of phone number IDs.
 	//
 	// This member is required.
-	PhoneNumberIds []*string
+	PhoneNumberIds []string
 }
 
 type BatchDeletePhoneNumberOutput struct {
 
 	// If the action fails for one or more of the phone numbers in the request, a list
 	// of the phone numbers is returned, along with error codes and error messages.
-	PhoneNumberErrors []*types.PhoneNumberError
+	PhoneNumberErrors []types.PhoneNumberError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

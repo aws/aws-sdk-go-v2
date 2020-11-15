@@ -37,28 +37,28 @@ type DeleteFleetsInput struct {
 	// The IDs of the EC2 Fleets.
 	//
 	// This member is required.
-	FleetIds []*string
+	FleetIds []string
 
 	// Indicates whether to terminate instances for an EC2 Fleet if it is deleted
 	// successfully.
 	//
 	// This member is required.
-	TerminateInstances *bool
+	TerminateInstances bool
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 }
 
 type DeleteFleetsOutput struct {
 
 	// Information about the EC2 Fleets that are successfully deleted.
-	SuccessfulFleetDeletions []*types.DeleteFleetSuccessItem
+	SuccessfulFleetDeletions []types.DeleteFleetSuccessItem
 
 	// Information about the EC2 Fleets that are not successfully deleted.
-	UnsuccessfulFleetDeletions []*types.DeleteFleetErrorItem
+	UnsuccessfulFleetDeletions []types.DeleteFleetErrorItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

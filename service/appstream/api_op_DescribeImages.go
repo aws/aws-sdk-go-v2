@@ -31,13 +31,13 @@ func (c *Client) DescribeImages(ctx context.Context, params *DescribeImagesInput
 type DescribeImagesInput struct {
 
 	// The ARNs of the public, private, and shared images to describe.
-	Arns []*string
+	Arns []string
 
 	// The maximum size of each page of results.
 	MaxResults *int32
 
 	// The names of the public or private images to describe.
-	Names []*string
+	Names []string
 
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
@@ -50,7 +50,7 @@ type DescribeImagesInput struct {
 type DescribeImagesOutput struct {
 
 	// Information about the images.
-	Images []*types.Image
+	Images []types.Image
 
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.

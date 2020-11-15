@@ -34,7 +34,7 @@ type ListIdentityPoolsInput struct {
 	// The maximum number of identities to return.
 	//
 	// This member is required.
-	MaxResults *int32
+	MaxResults int32
 
 	// A pagination token.
 	NextToken *string
@@ -44,7 +44,7 @@ type ListIdentityPoolsInput struct {
 type ListIdentityPoolsOutput struct {
 
 	// The identity pools returned by the ListIdentityPools action.
-	IdentityPools []*types.IdentityPoolShortDescription
+	IdentityPools []types.IdentityPoolShortDescription
 
 	// A pagination token.
 	NextToken *string

@@ -48,7 +48,7 @@ type GetAppLaunchConfigurationOutput struct {
 	RoleName *string
 
 	// The launch configurations for server groups in this application.
-	ServerGroupLaunchConfigurations []*types.ServerGroupLaunchConfiguration
+	ServerGroupLaunchConfigurations []types.ServerGroupLaunchConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -61,7 +61,7 @@ type CreateClassificationJobInput struct {
 	S3JobDefinition *types.S3JobDefinition
 
 	// The custom data identifiers to use for data analysis and classification.
-	CustomDataIdentifierIds []*string
+	CustomDataIdentifierIds []string
 
 	// A custom description of the job. The description can contain as many as 200
 	// characters.
@@ -69,14 +69,14 @@ type CreateClassificationJobInput struct {
 
 	// Specifies whether to analyze all existing, eligible objects immediately after
 	// the job is created.
-	InitialRun *bool
+	InitialRun bool
 
 	// The sampling depth, as a percentage, to apply when processing objects. This
 	// value determines the percentage of eligible objects that the job analyzes. If
 	// this value is less than 100, Amazon Macie selects the objects to analyze at
 	// random, up to the specified percentage, and analyzes all the data in those
 	// objects.
-	SamplingPercentage *int32
+	SamplingPercentage int32
 
 	// The recurrence pattern for running the job. To run the job only once, don't
 	// specify a value for this property and set the value for the jobType property to
@@ -87,7 +87,7 @@ type CreateClassificationJobInput struct {
 	// job can have a maximum of 50 tags. Each tag consists of a tag key and an
 	// associated tag value. The maximum length of a tag key is 128 characters. The
 	// maximum length of a tag value is 256 characters.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateClassificationJobOutput struct {

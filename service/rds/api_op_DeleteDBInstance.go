@@ -90,7 +90,7 @@ type DeleteDBInstanceInput struct {
 	// 'incompatible-restore', or 'incompatible-network', it can only be deleted when
 	// skip is specified. Specify skip when deleting a read replica. The
 	// FinalDBSnapshotIdentifier parameter must be specified if skip isn't specified.
-	SkipFinalSnapshot *bool
+	SkipFinalSnapshot bool
 }
 
 type DeleteDBInstanceOutput struct {

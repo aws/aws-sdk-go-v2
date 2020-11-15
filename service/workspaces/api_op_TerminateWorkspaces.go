@@ -43,13 +43,13 @@ type TerminateWorkspacesInput struct {
 	// The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
 	//
 	// This member is required.
-	TerminateWorkspaceRequests []*types.TerminateRequest
+	TerminateWorkspaceRequests []types.TerminateRequest
 }
 
 type TerminateWorkspacesOutput struct {
 
 	// Information about the WorkSpaces that could not be terminated.
-	FailedRequests []*types.FailedWorkspaceChangeRequest
+	FailedRequests []types.FailedWorkspaceChangeRequest
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

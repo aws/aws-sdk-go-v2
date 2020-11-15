@@ -39,7 +39,7 @@ type ListHITsInput struct {
 type ListHITsOutput struct {
 
 	// The list of HIT elements returned by the query.
-	HITs []*types.HIT
+	HITs []types.HIT
 
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Mechanical Turk returns a pagination token in the response.

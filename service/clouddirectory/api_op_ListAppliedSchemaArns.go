@@ -51,7 +51,7 @@ type ListAppliedSchemaArnsOutput struct {
 	NextToken *string
 
 	// The ARNs of schemas that are applied to the directory.
-	SchemaArns []*string
+	SchemaArns []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

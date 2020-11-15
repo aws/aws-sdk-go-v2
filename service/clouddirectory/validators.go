@@ -1541,13 +1541,13 @@ func validateAttributeKeyAndValue(v *types.AttributeKeyAndValue) error {
 	}
 }
 
-func validateAttributeKeyAndValueList(v []*types.AttributeKeyAndValue) error {
+func validateAttributeKeyAndValueList(v []types.AttributeKeyAndValue) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttributeKeyAndValueList"}
 	for i := range v {
-		if err := validateAttributeKeyAndValue(v[i]); err != nil {
+		if err := validateAttributeKeyAndValue(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1558,13 +1558,13 @@ func validateAttributeKeyAndValueList(v []*types.AttributeKeyAndValue) error {
 	}
 }
 
-func validateAttributeKeyList(v []*types.AttributeKey) error {
+func validateAttributeKeyList(v []types.AttributeKey) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttributeKeyList"}
 	for i := range v {
-		if err := validateAttributeKey(v[i]); err != nil {
+		if err := validateAttributeKey(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1593,13 +1593,13 @@ func validateAttributeNameAndValue(v *types.AttributeNameAndValue) error {
 	}
 }
 
-func validateAttributeNameAndValueList(v []*types.AttributeNameAndValue) error {
+func validateAttributeNameAndValueList(v []types.AttributeNameAndValue) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttributeNameAndValueList"}
 	for i := range v {
-		if err := validateAttributeNameAndValue(v[i]); err != nil {
+		if err := validateAttributeNameAndValue(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1735,9 +1735,6 @@ func validateBatchCreateIndex(v *types.BatchCreateIndex) error {
 		if err := validateAttributeKeyList(v.OrderedIndexedAttributeList); err != nil {
 			invalidParams.AddNested("OrderedIndexedAttributeList", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.IsUnique == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IsUnique"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2186,13 +2183,13 @@ func validateBatchReadOperation(v *types.BatchReadOperation) error {
 	}
 }
 
-func validateBatchReadOperationList(v []*types.BatchReadOperation) error {
+func validateBatchReadOperationList(v []types.BatchReadOperation) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchReadOperationList"}
 	for i := range v {
-		if err := validateBatchReadOperation(v[i]); err != nil {
+		if err := validateBatchReadOperation(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2356,13 +2353,13 @@ func validateBatchWriteOperation(v *types.BatchWriteOperation) error {
 	}
 }
 
-func validateBatchWriteOperationList(v []*types.BatchWriteOperation) error {
+func validateBatchWriteOperationList(v []types.BatchWriteOperation) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchWriteOperationList"}
 	for i := range v {
-		if err := validateBatchWriteOperation(v[i]); err != nil {
+		if err := validateBatchWriteOperation(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2413,13 +2410,13 @@ func validateFacetAttributeDefinition(v *types.FacetAttributeDefinition) error {
 	}
 }
 
-func validateFacetAttributeList(v []*types.FacetAttribute) error {
+func validateFacetAttributeList(v []types.FacetAttribute) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FacetAttributeList"}
 	for i := range v {
-		if err := validateFacetAttribute(v[i]); err != nil {
+		if err := validateFacetAttribute(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2465,13 +2462,13 @@ func validateFacetAttributeUpdate(v *types.FacetAttributeUpdate) error {
 	}
 }
 
-func validateFacetAttributeUpdateList(v []*types.FacetAttributeUpdate) error {
+func validateFacetAttributeUpdateList(v []types.FacetAttributeUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FacetAttributeUpdateList"}
 	for i := range v {
-		if err := validateFacetAttributeUpdate(v[i]); err != nil {
+		if err := validateFacetAttributeUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2499,13 +2496,13 @@ func validateLinkAttributeUpdate(v *types.LinkAttributeUpdate) error {
 	}
 }
 
-func validateLinkAttributeUpdateList(v []*types.LinkAttributeUpdate) error {
+func validateLinkAttributeUpdateList(v []types.LinkAttributeUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LinkAttributeUpdateList"}
 	for i := range v {
-		if err := validateLinkAttributeUpdate(v[i]); err != nil {
+		if err := validateLinkAttributeUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2538,13 +2535,13 @@ func validateObjectAttributeRange(v *types.ObjectAttributeRange) error {
 	}
 }
 
-func validateObjectAttributeRangeList(v []*types.ObjectAttributeRange) error {
+func validateObjectAttributeRangeList(v []types.ObjectAttributeRange) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ObjectAttributeRangeList"}
 	for i := range v {
-		if err := validateObjectAttributeRange(v[i]); err != nil {
+		if err := validateObjectAttributeRange(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2572,13 +2569,13 @@ func validateObjectAttributeUpdate(v *types.ObjectAttributeUpdate) error {
 	}
 }
 
-func validateObjectAttributeUpdateList(v []*types.ObjectAttributeUpdate) error {
+func validateObjectAttributeUpdateList(v []types.ObjectAttributeUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ObjectAttributeUpdateList"}
 	for i := range v {
-		if err := validateObjectAttributeUpdate(v[i]); err != nil {
+		if err := validateObjectAttributeUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2628,13 +2625,13 @@ func validateTypedLinkAttributeDefinition(v *types.TypedLinkAttributeDefinition)
 	}
 }
 
-func validateTypedLinkAttributeDefinitionList(v []*types.TypedLinkAttributeDefinition) error {
+func validateTypedLinkAttributeDefinitionList(v []types.TypedLinkAttributeDefinition) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TypedLinkAttributeDefinitionList"}
 	for i := range v {
-		if err := validateTypedLinkAttributeDefinition(v[i]); err != nil {
+		if err := validateTypedLinkAttributeDefinition(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2664,13 +2661,13 @@ func validateTypedLinkAttributeRange(v *types.TypedLinkAttributeRange) error {
 	}
 }
 
-func validateTypedLinkAttributeRangeList(v []*types.TypedLinkAttributeRange) error {
+func validateTypedLinkAttributeRangeList(v []types.TypedLinkAttributeRange) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TypedLinkAttributeRangeList"}
 	for i := range v {
-		if err := validateTypedLinkAttributeRange(v[i]); err != nil {
+		if err := validateTypedLinkAttributeRange(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2728,13 +2725,13 @@ func validateTypedLinkFacetAttributeUpdate(v *types.TypedLinkFacetAttributeUpdat
 	}
 }
 
-func validateTypedLinkFacetAttributeUpdateList(v []*types.TypedLinkFacetAttributeUpdate) error {
+func validateTypedLinkFacetAttributeUpdateList(v []types.TypedLinkFacetAttributeUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TypedLinkFacetAttributeUpdateList"}
 	for i := range v {
-		if err := validateTypedLinkFacetAttributeUpdate(v[i]); err != nil {
+		if err := validateTypedLinkFacetAttributeUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3030,9 +3027,6 @@ func validateOpCreateIndexInput(v *CreateIndexInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateIndexInput"}
-	if v.IsUnique == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IsUnique"))
-	}
 	if v.DirectoryArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
 	}

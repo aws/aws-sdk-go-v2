@@ -42,7 +42,7 @@ type UpdateDocumentationVersionInput struct {
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
-	PatchOperations []*types.PatchOperation
+	PatchOperations []types.PatchOperation
 }
 
 // A snapshot of the documentation of an API. Publishing API documentation involves

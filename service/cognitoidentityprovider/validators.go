@@ -2438,9 +2438,6 @@ func validateAccountTakeoverActionType(v *types.AccountTakeoverActionType) error
 	if len(v.EventAction) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("EventAction"))
 	}
-	if v.Notify == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Notify"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2472,13 +2469,13 @@ func validateAccountTakeoverRiskConfigurationType(v *types.AccountTakeoverRiskCo
 	}
 }
 
-func validateAttributeListType(v []*types.AttributeType) error {
+func validateAttributeListType(v []types.AttributeType) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttributeListType"}
 	for i := range v {
-		if err := validateAttributeType(v[i]); err != nil {
+		if err := validateAttributeType(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2622,13 +2619,13 @@ func validateNotifyEmailType(v *types.NotifyEmailType) error {
 	}
 }
 
-func validateRecoveryMechanismsType(v []*types.RecoveryOptionType) error {
+func validateRecoveryMechanismsType(v []types.RecoveryOptionType) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RecoveryMechanismsType"}
 	for i := range v {
-		if err := validateRecoveryOptionType(v[i]); err != nil {
+		if err := validateRecoveryOptionType(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2644,9 +2641,6 @@ func validateRecoveryOptionType(v *types.RecoveryOptionType) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RecoveryOptionType"}
-	if v.Priority == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
-	}
 	if len(v.Name) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -2657,13 +2651,13 @@ func validateRecoveryOptionType(v *types.RecoveryOptionType) error {
 	}
 }
 
-func validateResourceServerScopeListType(v []*types.ResourceServerScopeType) error {
+func validateResourceServerScopeListType(v []types.ResourceServerScopeType) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceServerScopeListType"}
 	for i := range v {
-		if err := validateResourceServerScopeType(v[i]); err != nil {
+		if err := validateResourceServerScopeType(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4103,9 +4097,6 @@ func validateOpListUserImportJobsInput(v *ListUserImportJobsInput) error {
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
-	if v.MaxResults == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4133,9 +4124,6 @@ func validateOpListUserPoolsInput(v *ListUserPoolsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListUserPoolsInput"}
-	if v.MaxResults == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

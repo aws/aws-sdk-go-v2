@@ -41,7 +41,7 @@ type CreateDedicatedIpPoolInput struct {
 
 	// An object that defines the tags (keys and values) that you want to associate
 	// with the pool.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request

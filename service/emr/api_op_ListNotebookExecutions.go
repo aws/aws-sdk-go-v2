@@ -90,7 +90,7 @@ type ListNotebookExecutionsOutput struct {
 	Marker *string
 
 	// A list of notebook executions.
-	NotebookExecutions []*types.NotebookExecutionSummary
+	NotebookExecutions []types.NotebookExecutionSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

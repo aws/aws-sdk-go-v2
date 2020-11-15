@@ -53,7 +53,7 @@ type SearchAvailablePhoneNumbersInput struct {
 type SearchAvailablePhoneNumbersOutput struct {
 
 	// List of phone numbers, in E.164 format.
-	E164PhoneNumbers []*string
+	E164PhoneNumbers []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

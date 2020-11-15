@@ -35,7 +35,7 @@ type CreateTagsInput struct {
 	ResourceArn *string
 
 	// The key-value pair for the resource tag.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateTagsOutput struct {

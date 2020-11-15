@@ -32,7 +32,7 @@ type DescribeReservedElasticsearchInstancesInput struct {
 
 	// Set this value to limit the number of results returned. If not specified,
 	// defaults to 100.
-	MaxResults *int32
+	MaxResults int32
 
 	// NextToken should be sent in case if earlier API call produced result containing
 	// NextToken. It is used for pagination.
@@ -50,7 +50,7 @@ type DescribeReservedElasticsearchInstancesOutput struct {
 	NextToken *string
 
 	// List of reserved Elasticsearch instances.
-	ReservedElasticsearchInstances []*types.ReservedElasticsearchInstance
+	ReservedElasticsearchInstances []types.ReservedElasticsearchInstance
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

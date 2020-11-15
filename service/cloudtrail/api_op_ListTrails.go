@@ -47,7 +47,7 @@ type ListTrailsOutput struct {
 	NextToken *string
 
 	// Returns the name, ARN, and home region of trails in the current account.
-	Trails []*types.TrailInfo
+	Trails []types.TrailInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

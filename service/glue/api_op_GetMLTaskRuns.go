@@ -58,7 +58,7 @@ type GetMLTaskRunsOutput struct {
 	NextToken *string
 
 	// A list of task runs that are associated with the transform.
-	TaskRuns []*types.TaskRun
+	TaskRuns []types.TaskRun
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

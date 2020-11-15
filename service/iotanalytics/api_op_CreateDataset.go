@@ -36,7 +36,7 @@ type CreateDatasetInput struct {
 	// A list of actions that create the data set contents.
 	//
 	// This member is required.
-	Actions []*types.DatasetAction
+	Actions []types.DatasetAction
 
 	// The name of the data set.
 	//
@@ -45,7 +45,7 @@ type CreateDatasetInput struct {
 
 	// When data set contents are created they are delivered to destinations specified
 	// here.
-	ContentDeliveryRules []*types.DatasetContentDeliveryRule
+	ContentDeliveryRules []types.DatasetContentDeliveryRule
 
 	// [Optional] How long, in days, versions of data set contents are kept for the
 	// data set. If not specified or set to null, versions of data set contents are
@@ -56,12 +56,12 @@ type CreateDatasetInput struct {
 	RetentionPeriod *types.RetentionPeriod
 
 	// Metadata which can be used to manage the data set.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A list of triggers. A trigger causes data set contents to be populated at a
 	// specified time interval or when another data set's contents are created. The
 	// list of triggers can be empty or contain up to five DataSetTrigger objects.
-	Triggers []*types.DatasetTrigger
+	Triggers []types.DatasetTrigger
 
 	// [Optional] How many versions of data set contents are kept. If not specified or
 	// set to null, only the latest version plus the latest succeeded version (if they

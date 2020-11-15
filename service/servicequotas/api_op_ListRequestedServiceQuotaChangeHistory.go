@@ -63,7 +63,7 @@ type ListRequestedServiceQuotaChangeHistoryOutput struct {
 	NextToken *string
 
 	// Returns a list of service quota requests.
-	RequestedQuotas []*types.RequestedServiceQuotaChange
+	RequestedQuotas []types.RequestedServiceQuotaChange
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

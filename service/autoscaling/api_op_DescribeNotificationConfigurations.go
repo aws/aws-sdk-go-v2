@@ -31,7 +31,7 @@ func (c *Client) DescribeNotificationConfigurations(ctx context.Context, params 
 type DescribeNotificationConfigurationsInput struct {
 
 	// The name of the Auto Scaling group.
-	AutoScalingGroupNames []*string
+	AutoScalingGroupNames []string
 
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100.
@@ -47,7 +47,7 @@ type DescribeNotificationConfigurationsOutput struct {
 	// The notification configurations.
 	//
 	// This member is required.
-	NotificationConfigurations []*types.NotificationConfiguration
+	NotificationConfigurations []types.NotificationConfiguration
 
 	// A string that indicates that the response contains more items than can be
 	// returned in a single response. To receive additional items, specify this string

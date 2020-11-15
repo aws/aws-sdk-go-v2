@@ -40,7 +40,7 @@ type UntagResourceInput struct {
 	// specify the key for the tag that you want to remove (priority).
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagResourceOutput struct {

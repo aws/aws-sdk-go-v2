@@ -42,7 +42,7 @@ type CreateMLTransformInput struct {
 	// A list of AWS Glue table definitions used by the transform.
 	//
 	// This member is required.
-	InputRecordTables []*types.GlueTable
+	InputRecordTables []types.GlueTable
 
 	// The unique name that you give the transform when you create it.
 	//
@@ -123,7 +123,7 @@ type CreateMLTransformInput struct {
 	// Glue, see AWS Tags in AWS Glue
 	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the developer
 	// guide.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The timeout of the task run for this transform in minutes. This is the maximum
 	// time that a task run for this transform can consume resources before it is

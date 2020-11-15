@@ -43,7 +43,7 @@ type DescribeTapeArchivesInput struct {
 
 	// Specifies one or more unique Amazon Resource Names (ARNs) that represent the
 	// virtual tapes you want to describe.
-	TapeARNs []*string
+	TapeARNs []string
 }
 
 // DescribeTapeArchivesOutput
@@ -61,7 +61,7 @@ type DescribeTapeArchivesOutput struct {
 	// information returned includes the Amazon Resource Names (ARNs) of the tapes,
 	// size of the tapes, status of the tapes, progress of the description, and tape
 	// barcode.
-	TapeArchives []*types.TapeArchive
+	TapeArchives []types.TapeArchive
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

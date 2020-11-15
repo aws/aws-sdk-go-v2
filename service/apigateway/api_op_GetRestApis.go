@@ -45,7 +45,7 @@ type GetRestApisInput struct {
 type GetRestApisOutput struct {
 
 	// The current page of elements from this collection.
-	Items []*types.RestApi
+	Items []types.RestApi
 
 	// The current pagination position in the paged result set.
 	Position *string

@@ -12,7 +12,7 @@ type AbortConfig struct {
 	// The list of criteria that determine when and how to abort the job.
 	//
 	// This member is required.
-	CriteriaList []*AbortCriteria
+	CriteriaList []AbortCriteria
 }
 
 // The criteria that determine when and how a job abort takes place.
@@ -147,11 +147,11 @@ type AddThingsToThingGroupParams struct {
 	// add a thing to more than one group in the same hierarchy.
 	//
 	// This member is required.
-	ThingGroupNames []*string
+	ThingGroupNames []string
 
 	// Specifies if this mitigation action can move the things that triggered the
 	// mitigation action even if they are part of one or more dynamic things groups.
-	OverrideDynamicGroups *bool
+	OverrideDynamicGroups bool
 }
 
 // A structure containing the alert target ARN and the role ARN.
@@ -173,7 +173,7 @@ type AlertTarget struct {
 type Allowed struct {
 
 	// A list of policies that allowed the authentication.
-	Policies []*Policy
+	Policies []Policy
 }
 
 // An asset property timestamp entry containing the following information.
@@ -232,20 +232,20 @@ type AttributePayload struct {
 
 	// A JSON string containing up to three key-value pair in JSON format. For example:
 	// {\"attributes\":{\"string1\":\"string2\"}}
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// Specifies whether the list of attributes provided in the AttributePayload is
 	// merged with the attributes stored in the registry, instead of overwriting them.
 	// To remove an attribute, call UpdateThing with an empty attribute value. The
 	// merge attribute is only valid when calling UpdateThing or UpdateThingGroup.
-	Merge *bool
+	Merge bool
 }
 
 // Which audit checks are enabled and disabled for this account.
 type AuditCheckConfiguration struct {
 
 	// True if this audit check is enabled for this account.
-	Enabled *bool
+	Enabled bool
 }
 
 // Information about the audit check.
@@ -304,7 +304,7 @@ type AuditFinding struct {
 	ReasonForNonComplianceCode *string
 
 	// The list of related resources.
-	RelatedResources []*RelatedResource
+	RelatedResources []RelatedResource
 
 	// The severity of the result (finding).
 	Severity AuditFindingSeverity
@@ -371,7 +371,7 @@ type AuditMitigationActionsTaskTarget struct {
 	// Specifies a filter in the form of an audit check and set of reason codes that
 	// identify the findings from the audit to which the audit mitigation actions task
 	// apply.
-	AuditCheckToReasonCodeFilter map[string][]*string
+	AuditCheckToReasonCodeFilter map[string][]string
 
 	// If the task will apply a mitigation action to findings from a specific audit,
 	// this value uniquely identifies the audit.
@@ -379,14 +379,14 @@ type AuditMitigationActionsTaskTarget struct {
 
 	// If the task will apply a mitigation action to one or more listed findings, this
 	// value uniquely identifies those findings.
-	FindingIds []*string
+	FindingIds []string
 }
 
 // Information about the targets to which audit notifications are sent.
 type AuditNotificationTarget struct {
 
 	// True if notifications to the target are enabled.
-	Enabled *bool
+	Enabled bool
 
 	// The ARN of the role that grants permission to send notifications to the target.
 	RoleArn *string
@@ -443,7 +443,7 @@ type AuthInfo struct {
 	// specified action.
 	//
 	// This member is required.
-	Resources []*string
+	Resources []string
 
 	// The type of action for which the principal is being authorized.
 	ActionType ActionType
@@ -454,7 +454,7 @@ type AuthorizerConfig struct {
 
 	// A Boolean that specifies whether the domain configuration's authorization
 	// service can be overridden.
-	AllowAuthorizerOverride *bool
+	AllowAuthorizerOverride bool
 
 	// The name of the authorization service for a domain configuration.
 	DefaultAuthorizerName *string
@@ -490,7 +490,7 @@ type AuthorizerDescription struct {
 
 	// The public keys used to validate the token signature returned by your custom
 	// authentication service.
-	TokenSigningPublicKeys map[string]*string
+	TokenSigningPublicKeys map[string]string
 }
 
 // The authorizer summary.
@@ -521,7 +521,7 @@ type AuthResult struct {
 	Denied *Denied
 
 	// Contains any missing context values found while evaluating policy.
-	MissingContextValues []*string
+	MissingContextValues []string
 }
 
 // The criteria that determine when and how a job abort takes place.
@@ -530,7 +530,7 @@ type AwsJobAbortConfig struct {
 	// The list of criteria that determine when and how to abort the job.
 	//
 	// This member is required.
-	AbortCriteriaList []*AwsJobAbortCriteria
+	AbortCriteriaList []AwsJobAbortCriteria
 }
 
 // The criteria that determine when and how a job abort takes place.
@@ -585,7 +585,7 @@ type AwsJobExponentialRolloutRate struct {
 	// multiplied by this factor.
 	//
 	// This member is required.
-	IncrementFactor *float64
+	IncrementFactor float64
 
 	// The criteria to initiate the increase in rate of rollout for a job. AWS IoT
 	// supports up to one digit after the decimal (for example, 1.5, but not 1.55).
@@ -938,7 +938,7 @@ type CodeSigningSignature struct {
 type Configuration struct {
 
 	// True to enable the configuration.
-	Enabled *bool
+	Enabled bool
 }
 
 // Describes a custom method used to code sign a file.
@@ -1143,7 +1143,7 @@ type ErrorInfo struct {
 type ExplicitDeny struct {
 
 	// The policies that denied the authorization.
-	Policies []*Policy
+	Policies []Policy
 }
 
 // Allows you to create an exponential rate of rollout for a job.
@@ -1160,7 +1160,7 @@ type ExponentialRolloutRate struct {
 	// supports up to one digit after the decimal (for example, 1.5, but not 1.55).
 	//
 	// This member is required.
-	IncrementFactor *float64
+	IncrementFactor float64
 
 	// The criteria to initiate the increase in rate of rollout for a job.
 	//
@@ -1239,7 +1239,7 @@ type HttpAction struct {
 	ConfirmationUrl *string
 
 	// The HTTP headers to send with the message data.
-	Headers []*HttpActionHeader
+	Headers []HttpActionHeader
 }
 
 // The HTTP action header.
@@ -1269,7 +1269,7 @@ type HttpAuthorization struct {
 type HttpContext struct {
 
 	// The header keys and values in an HTTP authorization request.
-	Headers map[string]*string
+	Headers map[string]string
 
 	// The query string keys and values in an HTTP authorization request.
 	QueryString *string
@@ -1306,7 +1306,7 @@ type ImplicitDeny struct {
 
 	// Policies that don't contain a matching allow or deny statement for the specified
 	// action on the specified resource.
-	Policies []*Policy
+	Policies []Policy
 }
 
 // Sends message data to an AWS IoT Analytics channel.
@@ -1350,7 +1350,7 @@ type IotSiteWiseAction struct {
 	// A list of asset property value entries.
 	//
 	// This member is required.
-	PutAssetPropertyValueEntries []*PutAssetPropertyValueEntry
+	PutAssetPropertyValueEntries []PutAssetPropertyValueEntry
 
 	// The ARN of the role that grants AWS IoT permission to send an asset property
 	// value to AWS IoTSiteWise. ("Action": "iotsitewise:BatchPutAssetPropertyValue").
@@ -1423,7 +1423,7 @@ type Job struct {
 	TargetSelection TargetSelection
 
 	// A list of IoT things and thing groups to which the job should be sent.
-	Targets []*string
+	Targets []string
 
 	// Specifies the amount of time each device has to finish its execution of the job.
 	// A timer is started when the job execution status is set to IN_PROGRESS. If the
@@ -1476,7 +1476,7 @@ type JobExecution struct {
 
 	// The version of the job execution. Job execution versions are incremented each
 	// time they are updated by a device.
-	VersionNumber *int64
+	VersionNumber int64
 }
 
 // Allows you to create a staged rollout of a job.
@@ -1495,7 +1495,7 @@ type JobExecutionsRolloutConfig struct {
 type JobExecutionStatusDetails struct {
 
 	// The job execution status.
-	DetailsMap map[string]*string
+	DetailsMap map[string]string
 }
 
 // The job execution summary.
@@ -1571,7 +1571,7 @@ type JobProcessDetails struct {
 	// The target devices to which the job execution is being rolled out. This value
 	// will be null after the job execution has finished rolling out to all the target
 	// devices.
-	ProcessingTargets []*string
+	ProcessingTargets []string
 }
 
 // The job summary.
@@ -1710,7 +1710,7 @@ type MetricValue struct {
 
 	// If the comparisonOperator calls for a set of CIDRs, use this to specify that set
 	// to be compared with the metric.
-	Cidrs []*string
+	Cidrs []string
 
 	// If the comparisonOperator calls for a numeric value, use this to specify that
 	// numeric value to be compared with the metric.
@@ -1718,7 +1718,7 @@ type MetricValue struct {
 
 	// If the comparisonOperator calls for a set of ports, use this to specify that set
 	// to be compared with the metric.
-	Ports []*int32
+	Ports []int32
 }
 
 // Describes which changes should be applied as part of a mitigation action.
@@ -1800,7 +1800,7 @@ type MqttContext struct {
 type NonCompliantResource struct {
 
 	// Other information about the noncompliant resource.
-	AdditionalInfo map[string]*string
+	AdditionalInfo map[string]string
 
 	// Information that identifies the noncompliant resource.
 	ResourceIdentifier *ResourceIdentifier
@@ -1813,7 +1813,7 @@ type NonCompliantResource struct {
 type OTAUpdateFile struct {
 
 	// A list of name/attribute pairs.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// The code signing method of the file.
 	CodeSigning *CodeSigning
@@ -1832,7 +1832,7 @@ type OTAUpdateFile struct {
 type OTAUpdateInfo struct {
 
 	// A collection of name/value pairs
-	AdditionalParameters map[string]*string
+	AdditionalParameters map[string]string
 
 	// The AWS IoT job ARN associated with the OTA update.
 	AwsIotJobArn *string
@@ -1863,7 +1863,7 @@ type OTAUpdateInfo struct {
 	OtaUpdateArn *string
 
 	// A list of files associated with the OTA update.
-	OtaUpdateFiles []*OTAUpdateFile
+	OtaUpdateFiles []OTAUpdateFile
 
 	// The OTA update ID.
 	OtaUpdateId *string
@@ -1885,7 +1885,7 @@ type OTAUpdateInfo struct {
 	TargetSelection TargetSelection
 
 	// The targets of the OTA update.
-	Targets []*string
+	Targets []string
 }
 
 // An OTA update summary.
@@ -1927,10 +1927,10 @@ type OutgoingCertificate struct {
 type PercentPair struct {
 
 	// The percentile.
-	Percent *float64
+	Percent float64
 
 	// The value of the percentile.
-	Value *float64
+	Value float64
 }
 
 // Describes an AWS IoT policy.
@@ -1950,7 +1950,7 @@ type PolicyVersion struct {
 	CreateDate *time.Time
 
 	// Specifies whether the policy version is the default.
-	IsDefaultVersion *bool
+	IsDefaultVersion bool
 
 	// The policy version ID.
 	VersionId *string
@@ -2004,7 +2004,7 @@ type ProvisioningTemplateSummary struct {
 	Description *string
 
 	// True if the fleet provision template is enabled, otherwise false.
-	Enabled *bool
+	Enabled bool
 
 	// The date when the fleet provisioning template summary was last modified.
 	LastModifiedDate *time.Time
@@ -2024,7 +2024,7 @@ type ProvisioningTemplateVersionSummary struct {
 
 	// True if the fleet provisioning template version is the default version,
 	// otherwise false.
-	IsDefaultVersion *bool
+	IsDefaultVersion bool
 
 	// The ID of the fleet privisioning template version.
 	VersionId *int32
@@ -2048,7 +2048,7 @@ type PutAssetPropertyValueEntry struct {
 	// value (TQV) information.
 	//
 	// This member is required.
-	PropertyValues []*AssetPropertyValue
+	PropertyValues []AssetPropertyValue
 
 	// The ID of the AWS IoT SiteWise asset. You must specify either a propertyAlias or
 	// both an aliasId and a propertyId. Accepts substitution templates.
@@ -2106,7 +2106,7 @@ type RegistrationConfig struct {
 type RelatedResource struct {
 
 	// Other information about the resource.
-	AdditionalInfo map[string]*string
+	AdditionalInfo map[string]string
 
 	// Information that identifies the resource.
 	ResourceIdentifier *ResourceIdentifier
@@ -2435,28 +2435,28 @@ type StatisticalThreshold struct {
 type Statistics struct {
 
 	// The average of the aggregated field values.
-	Average *float64
+	Average float64
 
 	// The count of things that match the query.
-	Count *int32
+	Count int32
 
 	// The maximum aggregated field value.
-	Maximum *float64
+	Maximum float64
 
 	// The minimum aggregated field value.
-	Minimum *float64
+	Minimum float64
 
 	// The standard deviation of the aggregated field values.
-	StdDeviation *float64
+	StdDeviation float64
 
 	// The sum of the aggregated field values.
-	Sum *float64
+	Sum float64
 
 	// The sum of the squares of the aggregated field values.
-	SumOfSquares *float64
+	SumOfSquares float64
 
 	// The variance of the aggregated field values.
-	Variance *float64
+	Variance float64
 }
 
 // Starts execution of a Step Functions state machine.
@@ -2509,7 +2509,7 @@ type StreamInfo struct {
 	Description *string
 
 	// The files to stream.
-	Files []*StreamFile
+	Files []StreamFile
 
 	// The date when the stream was last updated.
 	LastUpdatedAt *time.Time
@@ -2609,7 +2609,7 @@ type TaskStatisticsForAuditCheck struct {
 type ThingAttribute struct {
 
 	// A list of thing attributes which are name-value pairs.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// The thing ARN.
 	ThingArn *string
@@ -2621,7 +2621,7 @@ type ThingAttribute struct {
 	ThingTypeName *string
 
 	// The version of the thing record in the registry.
-	Version *int64
+	Version int64
 }
 
 // The connectivity status of the thing.
@@ -2629,7 +2629,7 @@ type ThingConnectivity struct {
 
 	// True if the thing is connected to the AWS IoT service; false if it is not
 	// connected.
-	Connected *bool
+	Connected bool
 
 	// The epoch time (in milliseconds) when the thing last connected or disconnected.
 	// If the thing has been disconnected for more than a few weeks, the time value
@@ -2641,7 +2641,7 @@ type ThingConnectivity struct {
 type ThingDocument struct {
 
 	// The attributes.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// Indicates whether the thing is connected to the AWS IoT service.
 	Connectivity *ThingConnectivity
@@ -2650,7 +2650,7 @@ type ThingDocument struct {
 	Shadow *string
 
 	// Thing group names.
-	ThingGroupNames []*string
+	ThingGroupNames []string
 
 	// The thing ID.
 	ThingId *string
@@ -2666,10 +2666,10 @@ type ThingDocument struct {
 type ThingGroupDocument struct {
 
 	// The thing group attributes.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// Parent group names.
-	ParentGroupNames []*string
+	ParentGroupNames []string
 
 	// The thing group description.
 	ThingGroupDescription *string
@@ -2692,11 +2692,11 @@ type ThingGroupIndexingConfiguration struct {
 	// A list of thing group fields to index. This list cannot contain any managed
 	// fields. Use the GetIndexingConfiguration API to get a list of managed fields.
 	// Contains custom field names and their data type.
-	CustomFields []*Field
+	CustomFields []Field
 
 	// Contains fields that are indexed and whose types are already known by the Fleet
 	// Indexing service.
-	ManagedFields []*Field
+	ManagedFields []Field
 }
 
 // Thing group metadata.
@@ -2709,7 +2709,7 @@ type ThingGroupMetadata struct {
 	ParentGroupName *string
 
 	// The root parent thing group.
-	RootToParentThingGroups []*GroupNameAndArn
+	RootToParentThingGroups []GroupNameAndArn
 }
 
 // Thing group properties.
@@ -2741,11 +2741,11 @@ type ThingIndexingConfiguration struct {
 	ThingIndexingMode ThingIndexingMode
 
 	// Contains custom field names and their data type.
-	CustomFields []*Field
+	CustomFields []Field
 
 	// Contains fields that are indexed and whose types are already known by the Fleet
 	// Indexing service.
-	ManagedFields []*Field
+	ManagedFields []Field
 
 	// Thing connectivity indexing mode. Valid values are:
 	//
@@ -2786,7 +2786,7 @@ type ThingTypeMetadata struct {
 
 	// Whether the thing type is deprecated. If true, no new things could be associated
 	// with this type.
-	Deprecated *bool
+	Deprecated bool
 
 	// The date and time when the thing type was deprecated.
 	DeprecationDate *time.Time
@@ -2797,7 +2797,7 @@ type ThingTypeMetadata struct {
 type ThingTypeProperties struct {
 
 	// A list of searchable thing attribute names.
-	SearchableAttributes []*string
+	SearchableAttributes []string
 
 	// The description of the thing type.
 	ThingTypeDescription *string
@@ -2832,7 +2832,7 @@ type TimestreamAction struct {
 	// Metadata attributes of the time series that are written in each measure record.
 	//
 	// This member is required.
-	Dimensions []*TimestreamDimension
+	Dimensions []TimestreamDimension
 
 	// The ARN of the role that grants permission to write to the Amazon Timestream
 	// database table.
@@ -2899,7 +2899,7 @@ type TlsContext struct {
 type TopicRule struct {
 
 	// The actions associated with the rule.
-	Actions []*Action
+	Actions []Action
 
 	// The version of the SQL rules engine to use when evaluating the rule.
 	AwsIotSqlVersion *string
@@ -3013,7 +3013,7 @@ type TopicRulePayload struct {
 	// The actions associated with the rule.
 	//
 	// This member is required.
-	Actions []*Action
+	Actions []Action
 
 	// The SQL statement used to query the topic. For more information, see AWS IoT SQL
 	// Reference

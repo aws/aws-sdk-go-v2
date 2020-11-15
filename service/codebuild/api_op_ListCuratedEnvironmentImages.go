@@ -34,7 +34,7 @@ type ListCuratedEnvironmentImagesOutput struct {
 
 	// Information about supported platforms for Docker images that are managed by AWS
 	// CodeBuild.
-	Platforms []*types.EnvironmentPlatform
+	Platforms []types.EnvironmentPlatform
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

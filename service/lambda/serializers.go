@@ -77,13 +77,10 @@ func awsRestjson1_serializeOpHttpBindingsAddLayerVersionPermissionInput(v *AddLa
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.LayerName == nil {
+	if v.LayerName == nil || len(*v.LayerName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member LayerName must not be empty")}
 	}
 	if v.LayerName != nil {
-		if len(*v.LayerName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member LayerName must not be empty")}
-		}
 		if err := encoder.SetURI("LayerName").String(*v.LayerName); err != nil {
 			return err
 		}
@@ -93,11 +90,11 @@ func awsRestjson1_serializeOpHttpBindingsAddLayerVersionPermissionInput(v *AddLa
 		encoder.SetQuery("RevisionId").String(*v.RevisionId)
 	}
 
-	if v.VersionNumber == nil {
+	if v.VersionNumber == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionNumber must not be empty")}
 	}
-	if v.VersionNumber != nil {
-		if err := encoder.SetURI("VersionNumber").Long(*v.VersionNumber); err != nil {
+	if v.VersionNumber != 0 {
+		if err := encoder.SetURI("VersionNumber").Long(v.VersionNumber); err != nil {
 			return err
 		}
 	}
@@ -194,13 +191,10 @@ func awsRestjson1_serializeOpHttpBindingsAddPermissionInput(v *AddPermissionInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -317,13 +311,10 @@ func awsRestjson1_serializeOpHttpBindingsCreateAliasInput(v *CreateAliasInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -623,9 +614,9 @@ func awsRestjson1_serializeOpDocumentCreateFunctionInput(v *CreateFunctionInput,
 		ok.Integer(*v.MemorySize)
 	}
 
-	if v.Publish != nil {
+	if v.Publish {
 		ok := object.Key("Publish")
-		ok.Boolean(*v.Publish)
+		ok.Boolean(v.Publish)
 	}
 
 	if v.Role != nil {
@@ -718,25 +709,19 @@ func awsRestjson1_serializeOpHttpBindingsDeleteAliasInput(v *DeleteAliasInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
 	}
 
-	if v.Name == nil {
+	if v.Name == nil || len(*v.Name) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
 	}
 	if v.Name != nil {
-		if len(*v.Name) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
-		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -796,13 +781,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteEventSourceMappingInput(v *Delete
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.UUID == nil {
+	if v.UUID == nil || len(*v.UUID) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member UUID must not be empty")}
 	}
 	if v.UUID != nil {
-		if len(*v.UUID) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member UUID must not be empty")}
-		}
 		if err := encoder.SetURI("UUID").String(*v.UUID); err != nil {
 			return err
 		}
@@ -862,13 +844,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteFunctionInput(v *DeleteFunctionIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -932,13 +911,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteFunctionConcurrencyInput(v *Delet
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -998,13 +974,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteFunctionEventInvokeConfigInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -1068,23 +1041,20 @@ func awsRestjson1_serializeOpHttpBindingsDeleteLayerVersionInput(v *DeleteLayerV
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.LayerName == nil {
+	if v.LayerName == nil || len(*v.LayerName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member LayerName must not be empty")}
 	}
 	if v.LayerName != nil {
-		if len(*v.LayerName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member LayerName must not be empty")}
-		}
 		if err := encoder.SetURI("LayerName").String(*v.LayerName); err != nil {
 			return err
 		}
 	}
 
-	if v.VersionNumber == nil {
+	if v.VersionNumber == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionNumber must not be empty")}
 	}
-	if v.VersionNumber != nil {
-		if err := encoder.SetURI("VersionNumber").Long(*v.VersionNumber); err != nil {
+	if v.VersionNumber != 0 {
+		if err := encoder.SetURI("VersionNumber").Long(v.VersionNumber); err != nil {
 			return err
 		}
 	}
@@ -1143,13 +1113,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteProvisionedConcurrencyConfigInput
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -1263,25 +1230,19 @@ func awsRestjson1_serializeOpHttpBindingsGetAliasInput(v *GetAliasInput, encoder
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
 	}
 
-	if v.Name == nil {
+	if v.Name == nil || len(*v.Name) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
 	}
 	if v.Name != nil {
-		if len(*v.Name) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
-		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -1341,13 +1302,10 @@ func awsRestjson1_serializeOpHttpBindingsGetEventSourceMappingInput(v *GetEventS
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.UUID == nil {
+	if v.UUID == nil || len(*v.UUID) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member UUID must not be empty")}
 	}
 	if v.UUID != nil {
-		if len(*v.UUID) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member UUID must not be empty")}
-		}
 		if err := encoder.SetURI("UUID").String(*v.UUID); err != nil {
 			return err
 		}
@@ -1407,13 +1365,10 @@ func awsRestjson1_serializeOpHttpBindingsGetFunctionInput(v *GetFunctionInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -1477,13 +1432,10 @@ func awsRestjson1_serializeOpHttpBindingsGetFunctionConcurrencyInput(v *GetFunct
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -1543,13 +1495,10 @@ func awsRestjson1_serializeOpHttpBindingsGetFunctionConfigurationInput(v *GetFun
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -1613,13 +1562,10 @@ func awsRestjson1_serializeOpHttpBindingsGetFunctionEventInvokeConfigInput(v *Ge
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -1683,23 +1629,20 @@ func awsRestjson1_serializeOpHttpBindingsGetLayerVersionInput(v *GetLayerVersion
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.LayerName == nil {
+	if v.LayerName == nil || len(*v.LayerName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member LayerName must not be empty")}
 	}
 	if v.LayerName != nil {
-		if len(*v.LayerName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member LayerName must not be empty")}
-		}
 		if err := encoder.SetURI("LayerName").String(*v.LayerName); err != nil {
 			return err
 		}
 	}
 
-	if v.VersionNumber == nil {
+	if v.VersionNumber == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionNumber must not be empty")}
 	}
-	if v.VersionNumber != nil {
-		if err := encoder.SetURI("VersionNumber").Long(*v.VersionNumber); err != nil {
+	if v.VersionNumber != 0 {
+		if err := encoder.SetURI("VersionNumber").Long(v.VersionNumber); err != nil {
 			return err
 		}
 	}
@@ -1816,23 +1759,20 @@ func awsRestjson1_serializeOpHttpBindingsGetLayerVersionPolicyInput(v *GetLayerV
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.LayerName == nil {
+	if v.LayerName == nil || len(*v.LayerName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member LayerName must not be empty")}
 	}
 	if v.LayerName != nil {
-		if len(*v.LayerName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member LayerName must not be empty")}
-		}
 		if err := encoder.SetURI("LayerName").String(*v.LayerName); err != nil {
 			return err
 		}
 	}
 
-	if v.VersionNumber == nil {
+	if v.VersionNumber == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionNumber must not be empty")}
 	}
-	if v.VersionNumber != nil {
-		if err := encoder.SetURI("VersionNumber").Long(*v.VersionNumber); err != nil {
+	if v.VersionNumber != 0 {
+		if err := encoder.SetURI("VersionNumber").Long(v.VersionNumber); err != nil {
 			return err
 		}
 	}
@@ -1891,13 +1831,10 @@ func awsRestjson1_serializeOpHttpBindingsGetPolicyInput(v *GetPolicyInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -1961,13 +1898,10 @@ func awsRestjson1_serializeOpHttpBindingsGetProvisionedConcurrencyConfigInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -2042,20 +1976,15 @@ func awsRestjson1_serializeOpHttpBindingsInvokeInput(v *InvokeInput, encoder *ht
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ClientContext != nil {
+	if v.ClientContext != nil && len(*v.ClientContext) > 0 {
 		locationName := "X-Amz-Client-Context"
-		if len(*v.ClientContext) > 0 {
-			encoder.SetHeader(locationName).String(*v.ClientContext)
-		}
+		encoder.SetHeader(locationName).String(*v.ClientContext)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -2140,13 +2069,10 @@ func awsRestjson1_serializeOpHttpBindingsInvokeAsyncInput(v *InvokeAsyncInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -2206,13 +2132,10 @@ func awsRestjson1_serializeOpHttpBindingsListAliasesInput(v *ListAliasesInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -2354,13 +2277,10 @@ func awsRestjson1_serializeOpHttpBindingsListFunctionEventInvokeConfigsInput(v *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -2568,13 +2488,10 @@ func awsRestjson1_serializeOpHttpBindingsListLayerVersionsInput(v *ListLayerVers
 		encoder.SetQuery("CompatibleRuntime").String(string(v.CompatibleRuntime))
 	}
 
-	if v.LayerName == nil {
+	if v.LayerName == nil || len(*v.LayerName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member LayerName must not be empty")}
 	}
 	if v.LayerName != nil {
-		if len(*v.LayerName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member LayerName must not be empty")}
-		}
 		if err := encoder.SetURI("LayerName").String(*v.LayerName); err != nil {
 			return err
 		}
@@ -2642,13 +2559,10 @@ func awsRestjson1_serializeOpHttpBindingsListProvisionedConcurrencyConfigsInput(
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -2716,13 +2630,10 @@ func awsRestjson1_serializeOpHttpBindingsListTagsInput(v *ListTagsInput, encoder
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Resource == nil {
+	if v.Resource == nil || len(*v.Resource) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Resource must not be empty")}
 	}
 	if v.Resource != nil {
-		if len(*v.Resource) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Resource must not be empty")}
-		}
 		if err := encoder.SetURI("Resource").String(*v.Resource); err != nil {
 			return err
 		}
@@ -2782,13 +2693,10 @@ func awsRestjson1_serializeOpHttpBindingsListVersionsByFunctionInput(v *ListVers
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -2867,13 +2775,10 @@ func awsRestjson1_serializeOpHttpBindingsPublishLayerVersionInput(v *PublishLaye
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.LayerName == nil {
+	if v.LayerName == nil || len(*v.LayerName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member LayerName must not be empty")}
 	}
 	if v.LayerName != nil {
-		if len(*v.LayerName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member LayerName must not be empty")}
-		}
 		if err := encoder.SetURI("LayerName").String(*v.LayerName); err != nil {
 			return err
 		}
@@ -2975,13 +2880,10 @@ func awsRestjson1_serializeOpHttpBindingsPublishVersionInput(v *PublishVersionIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -3074,13 +2976,10 @@ func awsRestjson1_serializeOpHttpBindingsPutFunctionConcurrencyInput(v *PutFunct
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -3163,13 +3062,10 @@ func awsRestjson1_serializeOpHttpBindingsPutFunctionEventInvokeConfigInput(v *Pu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -3268,13 +3164,10 @@ func awsRestjson1_serializeOpHttpBindingsPutProvisionedConcurrencyConfigInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -3350,13 +3243,10 @@ func awsRestjson1_serializeOpHttpBindingsRemoveLayerVersionPermissionInput(v *Re
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.LayerName == nil {
+	if v.LayerName == nil || len(*v.LayerName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member LayerName must not be empty")}
 	}
 	if v.LayerName != nil {
-		if len(*v.LayerName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member LayerName must not be empty")}
-		}
 		if err := encoder.SetURI("LayerName").String(*v.LayerName); err != nil {
 			return err
 		}
@@ -3366,23 +3256,20 @@ func awsRestjson1_serializeOpHttpBindingsRemoveLayerVersionPermissionInput(v *Re
 		encoder.SetQuery("RevisionId").String(*v.RevisionId)
 	}
 
-	if v.StatementId == nil {
+	if v.StatementId == nil || len(*v.StatementId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member StatementId must not be empty")}
 	}
 	if v.StatementId != nil {
-		if len(*v.StatementId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member StatementId must not be empty")}
-		}
 		if err := encoder.SetURI("StatementId").String(*v.StatementId); err != nil {
 			return err
 		}
 	}
 
-	if v.VersionNumber == nil {
+	if v.VersionNumber == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionNumber must not be empty")}
 	}
-	if v.VersionNumber != nil {
-		if err := encoder.SetURI("VersionNumber").Long(*v.VersionNumber); err != nil {
+	if v.VersionNumber != 0 {
+		if err := encoder.SetURI("VersionNumber").Long(v.VersionNumber); err != nil {
 			return err
 		}
 	}
@@ -3441,13 +3328,10 @@ func awsRestjson1_serializeOpHttpBindingsRemovePermissionInput(v *RemovePermissi
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -3461,13 +3345,10 @@ func awsRestjson1_serializeOpHttpBindingsRemovePermissionInput(v *RemovePermissi
 		encoder.SetQuery("RevisionId").String(*v.RevisionId)
 	}
 
-	if v.StatementId == nil {
+	if v.StatementId == nil || len(*v.StatementId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member StatementId must not be empty")}
 	}
 	if v.StatementId != nil {
-		if len(*v.StatementId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member StatementId must not be empty")}
-		}
 		if err := encoder.SetURI("StatementId").String(*v.StatementId); err != nil {
 			return err
 		}
@@ -3538,13 +3419,10 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Resource == nil {
+	if v.Resource == nil || len(*v.Resource) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Resource must not be empty")}
 	}
 	if v.Resource != nil {
-		if len(*v.Resource) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Resource must not be empty")}
-		}
 		if err := encoder.SetURI("Resource").String(*v.Resource); err != nil {
 			return err
 		}
@@ -3618,13 +3496,10 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Resource == nil {
+	if v.Resource == nil || len(*v.Resource) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Resource must not be empty")}
 	}
 	if v.Resource != nil {
-		if len(*v.Resource) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Resource must not be empty")}
-		}
 		if err := encoder.SetURI("Resource").String(*v.Resource); err != nil {
 			return err
 		}
@@ -3632,10 +3507,7 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 
 	if v.TagKeys != nil {
 		for i := range v.TagKeys {
-			if v.TagKeys[i] == nil {
-				continue
-			}
-			encoder.AddQuery("tagKeys").String(*v.TagKeys[i])
+			encoder.AddQuery("tagKeys").String(v.TagKeys[i])
 		}
 	}
 
@@ -3704,25 +3576,19 @@ func awsRestjson1_serializeOpHttpBindingsUpdateAliasInput(v *UpdateAliasInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
 	}
 
-	if v.Name == nil {
+	if v.Name == nil || len(*v.Name) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
 	}
 	if v.Name != nil {
-		if len(*v.Name) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
-		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -3822,13 +3688,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateEventSourceMappingInput(v *Update
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.UUID == nil {
+	if v.UUID == nil || len(*v.UUID) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member UUID must not be empty")}
 	}
 	if v.UUID != nil {
-		if len(*v.UUID) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member UUID must not be empty")}
-		}
 		if err := encoder.SetURI("UUID").String(*v.UUID); err != nil {
 			return err
 		}
@@ -3953,13 +3816,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateFunctionCodeInput(v *UpdateFuncti
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -3972,14 +3832,14 @@ func awsRestjson1_serializeOpDocumentUpdateFunctionCodeInput(v *UpdateFunctionCo
 	object := value.Object()
 	defer object.Close()
 
-	if v.DryRun != nil {
+	if v.DryRun {
 		ok := object.Key("DryRun")
-		ok.Boolean(*v.DryRun)
+		ok.Boolean(v.DryRun)
 	}
 
-	if v.Publish != nil {
+	if v.Publish {
 		ok := object.Key("Publish")
-		ok.Boolean(*v.Publish)
+		ok.Boolean(v.Publish)
 	}
 
 	if v.RevisionId != nil {
@@ -4072,13 +3932,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateFunctionConfigurationInput(v *Upd
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -4238,13 +4095,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateFunctionEventInvokeConfigInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FunctionName == nil {
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
 	}
 	if v.FunctionName != nil {
-		if len(*v.FunctionName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
-		}
 		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
 			return err
 		}
@@ -4281,17 +4135,13 @@ func awsRestjson1_serializeOpDocumentUpdateFunctionEventInvokeConfigInput(v *Upd
 	return nil
 }
 
-func awsRestjson1_serializeDocumentAdditionalVersionWeights(v map[string]*float64, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAdditionalVersionWeights(v map[string]float64, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.Double(*v[key])
+		om.Double(v[key])
 	}
 	return nil
 }
@@ -4368,17 +4218,13 @@ func awsRestjson1_serializeDocumentEnvironment(v *types.Environment, value smith
 	return nil
 }
 
-func awsRestjson1_serializeDocumentEnvironmentVariables(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentEnvironmentVariables(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -4400,17 +4246,13 @@ func awsRestjson1_serializeDocumentFileSystemConfig(v *types.FileSystemConfig, v
 	return nil
 }
 
-func awsRestjson1_serializeDocumentFileSystemConfigList(v []*types.FileSystemConfig, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentFileSystemConfigList(v []types.FileSystemConfig, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentFileSystemConfig(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentFileSystemConfig(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4444,17 +4286,13 @@ func awsRestjson1_serializeDocumentFunctionCode(v *types.FunctionCode, value smi
 	return nil
 }
 
-func awsRestjson1_serializeDocumentLayerList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentLayerList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -4510,62 +4348,46 @@ func awsRestjson1_serializeDocumentOnSuccess(v *types.OnSuccess, value smithyjso
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSecurityGroupIds(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSecurityGroupIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSubnetIds(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSubnetIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTags(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTags(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTopics(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTopics(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }

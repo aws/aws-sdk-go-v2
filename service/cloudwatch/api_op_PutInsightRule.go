@@ -60,7 +60,7 @@ type PutInsightRuleInput struct {
 	// Insights rule, any tags you specify in this parameter are ignored. To change the
 	// tags of an existing rule, use TagResource
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html).
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type PutInsightRuleOutput struct {

@@ -51,7 +51,7 @@ type CreateTableInput struct {
 	RetentionProperties *types.RetentionProperties
 
 	// A list of key-value pairs to label the table.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateTableOutput struct {

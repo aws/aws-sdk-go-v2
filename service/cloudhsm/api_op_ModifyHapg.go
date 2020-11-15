@@ -48,7 +48,7 @@ type ModifyHapgInput struct {
 
 	// The list of partition serial numbers to make members of the high-availability
 	// partition group.
-	PartitionSerialList []*string
+	PartitionSerialList []string
 }
 
 type ModifyHapgOutput struct {

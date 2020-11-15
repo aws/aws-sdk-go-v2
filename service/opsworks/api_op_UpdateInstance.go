@@ -96,7 +96,7 @@ type UpdateInstanceInput struct {
 	InstanceType *string
 
 	// The instance's layer IDs.
-	LayerIds []*string
+	LayerIds []string
 
 	// The instance's operating system, which must be set to one of the following. You
 	// cannot update an instance that is using a custom AMI.

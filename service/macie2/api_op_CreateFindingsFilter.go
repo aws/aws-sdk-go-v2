@@ -65,13 +65,13 @@ type CreateFindingsFilterInput struct {
 	// The position of the filter in the list of saved filters on the Amazon Macie
 	// console. This value also determines the order in which the filter is applied to
 	// findings, relative to other filters that are also applied to the findings.
-	Position *int32
+	Position int32
 
 	// A map of key-value pairs that specifies the tags to associate with the filter. A
 	// findings filter can have a maximum of 50 tags. Each tag consists of a tag key
 	// and an associated tag value. The maximum length of a tag key is 128 characters.
 	// The maximum length of a tag value is 256 characters.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateFindingsFilterOutput struct {

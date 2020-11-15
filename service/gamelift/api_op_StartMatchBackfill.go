@@ -98,7 +98,7 @@ type StartMatchBackfillInput struct {
 	// include latency values for any other Region.
 	//
 	// This member is required.
-	Players []*types.Player
+	Players []types.Player
 
 	// A unique identifier for a matchmaking ticket. If no ticket ID is specified here,
 	// Amazon GameLift will generate one in the form of a UUID. Use this identifier to

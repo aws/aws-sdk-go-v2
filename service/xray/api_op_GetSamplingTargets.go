@@ -34,7 +34,7 @@ type GetSamplingTargetsInput struct {
 	// Information about rules that the service is using to sample requests.
 	//
 	// This member is required.
-	SamplingStatisticsDocuments []*types.SamplingStatisticsDocument
+	SamplingStatisticsDocuments []types.SamplingStatisticsDocument
 }
 
 type GetSamplingTargetsOutput struct {
@@ -45,10 +45,10 @@ type GetSamplingTargetsOutput struct {
 	LastRuleModification *time.Time
 
 	// Updated rules that the service should use to sample requests.
-	SamplingTargetDocuments []*types.SamplingTargetDocument
+	SamplingTargetDocuments []types.SamplingTargetDocument
 
 	// Information about SamplingStatisticsDocument that X-Ray could not process.
-	UnprocessedStatistics []*types.UnprocessedStatistics
+	UnprocessedStatistics []types.UnprocessedStatistics
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

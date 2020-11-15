@@ -46,7 +46,7 @@ type DetectPHIOutput struct {
 	// confidence that Amazon Comprehend Medical has in its detection.
 	//
 	// This member is required.
-	Entities []*types.Entity
+	Entities []types.Entity
 
 	// The version of the model used to analyze the documents. The version number looks
 	// like X.X.X. You can use this information to track the model used for a

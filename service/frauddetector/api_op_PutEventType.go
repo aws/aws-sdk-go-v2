@@ -39,12 +39,12 @@ type PutEventTypeInput struct {
 	// account.
 	//
 	// This member is required.
-	EntityTypes []*string
+	EntityTypes []string
 
 	// The event type variables.
 	//
 	// This member is required.
-	EventVariables []*string
+	EventVariables []string
 
 	// The name.
 	//
@@ -55,10 +55,10 @@ type PutEventTypeInput struct {
 	Description *string
 
 	// The event type labels.
-	Labels []*string
+	Labels []string
 
 	// A collection of key and value pairs.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type PutEventTypeOutput struct {

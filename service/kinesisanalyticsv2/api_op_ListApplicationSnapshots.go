@@ -51,7 +51,7 @@ type ListApplicationSnapshotsOutput struct {
 	NextToken *string
 
 	// A collection of objects containing information about the application snapshots.
-	SnapshotSummaries []*types.SnapshotDetails
+	SnapshotSummaries []types.SnapshotDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

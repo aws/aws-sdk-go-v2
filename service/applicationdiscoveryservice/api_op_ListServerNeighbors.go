@@ -36,10 +36,10 @@ type ListServerNeighborsInput struct {
 	ConfigurationId *string
 
 	// Maximum number of results to return in a single page of output.
-	MaxResults *int32
+	MaxResults int32
 
 	// List of configuration IDs to test for one-hop-away.
-	NeighborConfigurationIds []*string
+	NeighborConfigurationIds []string
 
 	// Token to retrieve the next set of results. For example, if you previously
 	// specified 100 IDs for ListServerNeighborsRequest$neighborConfigurationIds but
@@ -50,7 +50,7 @@ type ListServerNeighborsInput struct {
 
 	// Flag to indicate if port and protocol information is needed as part of the
 	// response.
-	PortInformationNeeded *bool
+	PortInformationNeeded bool
 }
 
 type ListServerNeighborsOutput struct {
@@ -58,10 +58,10 @@ type ListServerNeighborsOutput struct {
 	// List of distinct servers that are one hop away from the given server.
 	//
 	// This member is required.
-	Neighbors []*types.NeighborConnectionDetail
+	Neighbors []types.NeighborConnectionDetail
 
 	// Count of distinct servers that are one hop away from the given server.
-	KnownDependencyCount *int64
+	KnownDependencyCount int64
 
 	// Token to retrieve the next set of results. For example, if you specified 100 IDs
 	// for ListServerNeighborsRequest$neighborConfigurationIds but set

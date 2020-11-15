@@ -40,7 +40,7 @@ type UntagResourceInput struct {
 	// The tag keys for the tags to disassociate.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagResourceOutput struct {

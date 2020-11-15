@@ -50,7 +50,7 @@ type ListSolutionsOutput struct {
 	NextToken *string
 
 	// A list of the current solutions.
-	Solutions []*types.SolutionSummary
+	Solutions []types.SolutionSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

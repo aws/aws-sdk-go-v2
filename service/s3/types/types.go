@@ -16,7 +16,7 @@ type AbortIncompleteMultipartUpload struct {
 
 	// Specifies the number of days after which Amazon S3 aborts an incomplete
 	// multipart upload.
-	DaysAfterInitiation *int32
+	DaysAfterInitiation int32
 }
 
 // Configures the transfer acceleration state for an Amazon S3 bucket. For more
@@ -33,7 +33,7 @@ type AccelerateConfiguration struct {
 type AccessControlPolicy struct {
 
 	// A list of grants.
-	Grants []*Grant
+	Grants []Grant
 
 	// Container for the bucket owner's display name and ID.
 	Owner *Owner
@@ -61,7 +61,7 @@ type AnalyticsAndOperator struct {
 	Prefix *string
 
 	// The list of tags to use when evaluating an AND predicate.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Specifies the configuration and any analyses for the analytics filter of an
@@ -153,7 +153,7 @@ type BucketLifecycleConfiguration struct {
 	// A lifecycle rule for individual objects in an Amazon S3 bucket.
 	//
 	// This member is required.
-	Rules []*LifecycleRule
+	Rules []LifecycleRule
 }
 
 // Container for logging status information.
@@ -181,7 +181,7 @@ type CommonPrefix struct {
 type CompletedMultipartUpload struct {
 
 	// Array of CompletedPart data types.
-	Parts []*CompletedPart
+	Parts []CompletedPart
 }
 
 // Details of the parts that were uploaded.
@@ -192,7 +192,7 @@ type CompletedPart struct {
 
 	// Part number that identifies the part. This is a positive integer between 1 and
 	// 10,000.
-	PartNumber *int32
+	PartNumber int32
 }
 
 // A container for describing a condition that must be met for the specified
@@ -250,7 +250,7 @@ type CORSConfiguration struct {
 	// can add up to 100 rules to the configuration.
 	//
 	// This member is required.
-	CORSRules []*CORSRule
+	CORSRules []CORSRule
 }
 
 // Specifies a cross-origin access rule for an Amazon S3 bucket.
@@ -260,25 +260,25 @@ type CORSRule struct {
 	// HEAD, POST, and DELETE.
 	//
 	// This member is required.
-	AllowedMethods []*string
+	AllowedMethods []string
 
 	// One or more origins you want customers to be able to access the bucket from.
 	//
 	// This member is required.
-	AllowedOrigins []*string
+	AllowedOrigins []string
 
 	// Headers that are specified in the Access-Control-Request-Headers header. These
 	// headers are allowed in a preflight OPTIONS request. In response to any preflight
 	// OPTIONS request, Amazon S3 returns any requested headers that are allowed.
-	AllowedHeaders []*string
+	AllowedHeaders []string
 
 	// One or more headers in the response that you want customers to be able to access
 	// from their applications (for example, from a JavaScript XMLHttpRequest object).
-	ExposeHeaders []*string
+	ExposeHeaders []string
 
 	// The time in seconds that your browser is to cache the preflight response for the
 	// specified resource.
-	MaxAgeSeconds *int32
+	MaxAgeSeconds int32
 }
 
 // The configuration information for the bucket.
@@ -296,7 +296,7 @@ type CSVInput struct {
 	// Specifies that CSV field values may contain quoted record delimiters and such
 	// records should be allowed. Default value is FALSE. Setting this value to TRUE
 	// may lower performance.
-	AllowQuotedRecordDelimiter *bool
+	AllowQuotedRecordDelimiter bool
 
 	// A single character used to indicate that a row should be ignored when the
 	// character is present at the start of that row. You can specify any character to
@@ -372,14 +372,14 @@ type CSVOutput struct {
 type DefaultRetention struct {
 
 	// The number of days that you want to specify for the default retention period.
-	Days *int32
+	Days int32
 
 	// The default Object Lock retention mode you want to apply to new objects placed
 	// in the specified bucket.
 	Mode ObjectLockRetentionMode
 
 	// The number of years that you want to specify for the default retention period.
-	Years *int32
+	Years int32
 }
 
 // Container for the objects to delete.
@@ -388,11 +388,11 @@ type Delete struct {
 	// The objects to delete.
 	//
 	// This member is required.
-	Objects []*ObjectIdentifier
+	Objects []ObjectIdentifier
 
 	// Element to enable quiet mode for the request. When you add this element, you
 	// must set its value to true.
-	Quiet *bool
+	Quiet bool
 }
 
 // Information about the deleted object.
@@ -401,7 +401,7 @@ type DeletedObject struct {
 	// Specifies whether the versioned object that was permanently deleted was (true)
 	// or was not (false) a delete marker. In a simple DELETE, this header indicates
 	// whether (true) or not (false) a delete marker was created.
-	DeleteMarker *bool
+	DeleteMarker bool
 
 	// The version ID of the delete marker created as a result of the DELETE operation.
 	// If you delete a specific object version, the value returned by this header is
@@ -420,7 +420,7 @@ type DeleteMarkerEntry struct {
 
 	// Specifies whether the object is (true) or is not (false) the latest version of
 	// an object.
-	IsLatest *bool
+	IsLatest bool
 
 	// The object key.
 	Key *string
@@ -1658,7 +1658,7 @@ type InventoryConfiguration struct {
 	// inventory list is generated. If set to False, no inventory list is generated.
 	//
 	// This member is required.
-	IsEnabled *bool
+	IsEnabled bool
 
 	// Specifies the schedule for generating inventory results.
 	//
@@ -1794,13 +1794,13 @@ type LifecycleExpiration struct {
 
 	// Indicates the lifetime, in days, of the objects that are subject to the rule.
 	// The value must be a non-zero positive integer.
-	Days *int32
+	Days int32
 
 	// Indicates whether Amazon S3 will remove a delete marker with no noncurrent
 	// versions. If set to true, the delete marker will be expired; if set to false the
 	// policy takes no action. This cannot be specified with Days or Date in a
 	// Lifecycle Expiration Policy.
-	ExpiredObjectDeleteMarker *bool
+	ExpiredObjectDeleteMarker bool
 }
 
 // A lifecycle rule for individual objects in an Amazon S3 bucket.
@@ -1843,14 +1843,14 @@ type LifecycleRule struct {
 	// versioning-enabled (or versioning is suspended), you can set this action to
 	// request that Amazon S3 transition noncurrent object versions to a specific
 	// storage class at a set period in the object's lifetime.
-	NoncurrentVersionTransitions []*NoncurrentVersionTransition
+	NoncurrentVersionTransitions []NoncurrentVersionTransition
 
 	// Prefix identifying one or more objects to which the rule applies. This is No
 	// longer used; use Filter instead.
 	Prefix *string
 
 	// Specifies when an Amazon S3 object transitions to a specified storage class.
-	Transitions []*Transition
+	Transitions []Transition
 }
 
 // This is used in a Lifecycle Rule Filter to apply a logical AND to two or more
@@ -1863,7 +1863,7 @@ type LifecycleRuleAndOperator struct {
 
 	// All of these tags must exist in the object's tag set in order for the rule to
 	// apply.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // The Filter is used to identify objects that a Lifecycle Rule applies to. A
@@ -1906,7 +1906,7 @@ type LoggingEnabled struct {
 	TargetPrefix *string
 
 	// Container for granting information.
-	TargetGrants []*TargetGrant
+	TargetGrants []TargetGrant
 }
 
 // A metadata key-value pair to store with an object.
@@ -1945,7 +1945,7 @@ type MetricsAndOperator struct {
 	Prefix *string
 
 	// The list of tags used when evaluating an AND predicate.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Specifies a metrics configuration for the CloudWatch request metrics (specified
@@ -2019,7 +2019,7 @@ type NoncurrentVersionExpiration struct {
 	// calculations, see How Amazon S3 Calculates When an Object Became Noncurrent
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations)
 	// in the Amazon Simple Storage Service Developer Guide.
-	NoncurrentDays *int32
+	NoncurrentDays int32
 }
 
 // Container for the transition rule that describes when noncurrent objects
@@ -2037,7 +2037,7 @@ type NoncurrentVersionTransition struct {
 	// Noncurrent
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations)
 	// in the Amazon Simple Storage Service Developer Guide.
-	NoncurrentDays *int32
+	NoncurrentDays int32
 
 	// The class of storage used to store the object.
 	StorageClass TransitionStorageClass
@@ -2049,15 +2049,15 @@ type NotificationConfiguration struct {
 
 	// Describes the AWS Lambda functions to invoke and the events for which to invoke
 	// them.
-	LambdaFunctionConfigurations []*LambdaFunctionConfiguration
+	LambdaFunctionConfigurations []LambdaFunctionConfiguration
 
 	// The Amazon Simple Queue Service queues to publish messages to and the events for
 	// which to publish messages.
-	QueueConfigurations []*QueueConfiguration
+	QueueConfigurations []QueueConfiguration
 
 	// The topic to which notifications are sent and the events for which notifications
 	// are generated.
-	TopicConfigurations []*TopicConfiguration
+	TopicConfigurations []TopicConfiguration
 }
 
 // Specifies object key name filtering rules. For information about key name
@@ -2103,7 +2103,7 @@ type Object struct {
 	Owner *Owner
 
 	// Size in bytes of the object
-	Size *int64
+	Size int64
 
 	// The class of storage used to store the object.
 	StorageClass ObjectStorageClass
@@ -2164,7 +2164,7 @@ type ObjectVersion struct {
 
 	// Specifies whether the object is (true) or is not (false) the latest version of
 	// an object.
-	IsLatest *bool
+	IsLatest bool
 
 	// The object key.
 	Key *string
@@ -2176,7 +2176,7 @@ type ObjectVersion struct {
 	Owner *Owner
 
 	// Size in bytes of the object.
-	Size *int64
+	Size int64
 
 	// The class of storage used to store the object.
 	StorageClass ObjectVersionStorageClass
@@ -2218,7 +2218,7 @@ type OwnershipControls struct {
 	// The container element for an ownership control rule.
 	//
 	// This member is required.
-	Rules []*OwnershipControlsRule
+	Rules []OwnershipControlsRule
 }
 
 // The container element for an ownership control rule.
@@ -2249,10 +2249,10 @@ type Part struct {
 
 	// Part number identifying the part. This is a positive integer between 1 and
 	// 10,000.
-	PartNumber *int32
+	PartNumber int32
 
 	// Size in bytes of the uploaded part data.
-	Size *int64
+	Size int64
 }
 
 // The container element for a bucket's policy status.
@@ -2260,7 +2260,7 @@ type PolicyStatus struct {
 
 	// The policy status for this bucket. TRUE indicates that this bucket is public.
 	// FALSE indicates that the bucket is not public.
-	IsPublic *bool
+	IsPublic bool
 }
 
 // The PublicAccessBlock configuration that you want to apply to this Amazon S3
@@ -2285,20 +2285,20 @@ type PublicAccessBlockConfiguration struct {
 	// ACL.
 	//
 	// Enabling this setting doesn't affect existing policies or ACLs.
-	BlockPublicAcls *bool
+	BlockPublicAcls bool
 
 	// Specifies whether Amazon S3 should block public bucket policies for this bucket.
 	// Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket
 	// policy if the specified bucket policy allows public access. Enabling this
 	// setting doesn't affect existing bucket policies.
-	BlockPublicPolicy *bool
+	BlockPublicPolicy bool
 
 	// Specifies whether Amazon S3 should ignore public ACLs for this bucket and
 	// objects in this bucket. Setting this element to TRUE causes Amazon S3 to ignore
 	// all public ACLs on this bucket and objects in this bucket. Enabling this setting
 	// doesn't affect the persistence of any existing ACLs and doesn't prevent new
 	// public ACLs from being set.
-	IgnorePublicAcls *bool
+	IgnorePublicAcls bool
 
 	// Specifies whether Amazon S3 should restrict public bucket policies for this
 	// bucket. Setting this element to TRUE restricts access to this bucket to only AWS
@@ -2306,7 +2306,7 @@ type PublicAccessBlockConfiguration struct {
 	// policy. Enabling this setting doesn't affect previously stored bucket policies,
 	// except that public and cross-account access within any public bucket policy,
 	// including non-public delegation to specific accounts, is blocked.
-	RestrictPublicBuckets *bool
+	RestrictPublicBuckets bool
 }
 
 // Specifies the configuration for publishing messages to an Amazon Simple Queue
@@ -2394,7 +2394,7 @@ type ReplicationConfiguration struct {
 	// have at least one rule and can contain a maximum of 1,000 rules.
 	//
 	// This member is required.
-	Rules []*ReplicationRule
+	Rules []ReplicationRule
 }
 
 // Specifies which Amazon S3 objects to replicate and where to store the replicas.
@@ -2455,7 +2455,7 @@ type ReplicationRule struct {
 	// For more information, see Replication
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html) in the Amazon
 	// Simple Storage Service Developer Guide.
-	Priority *int32
+	Priority int32
 
 	// A container that describes additional filters for identifying the source objects
 	// that you want to replicate. You can choose to enable or disable the replication
@@ -2481,7 +2481,7 @@ type ReplicationRuleAndOperator struct {
 	Prefix *string
 
 	// An array of tags containing key and value pairs.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // A filter that identifies the subset of objects to which the replication rule
@@ -2530,7 +2530,7 @@ type ReplicationTime struct {
 type ReplicationTimeValue struct {
 
 	// Contains an integer specifying time in minutes. Valid values: 15 minutes.
-	Minutes *int32
+	Minutes int32
 }
 
 // Container for Payer.
@@ -2547,7 +2547,7 @@ type RestoreRequest struct {
 
 	// Lifetime of the active copy in days. Do not use with restores that specify
 	// OutputLocation.
-	Days *int32
+	Days int32
 
 	// The optional description for the job.
 	Description *string
@@ -2594,7 +2594,7 @@ type S3KeyFilter struct {
 
 	// A list of containers for the key-value pair that defines the criteria for the
 	// filter rule.
-	FilterRules []*FilterRule
+	FilterRules []FilterRule
 }
 
 // Describes an Amazon S3 location that will receive the results of the restore
@@ -2612,7 +2612,7 @@ type S3Location struct {
 	Prefix *string
 
 	// A list of grants that control access to the staged results.
-	AccessControlList []*Grant
+	AccessControlList []Grant
 
 	// The canned ACL to apply to the restore results.
 	CannedACL ObjectCannedACL
@@ -2627,7 +2627,7 @@ type S3Location struct {
 	Tagging *Tagging
 
 	// A list of metadata to store with the restore results in S3.
-	UserMetadata []*MetadataEntry
+	UserMetadata []MetadataEntry
 }
 
 // Describes the parameters for Select job types.
@@ -2696,7 +2696,7 @@ type ServerSideEncryptionConfiguration struct {
 	// configuration rule.
 	//
 	// This member is required.
-	Rules []*ServerSideEncryptionRule
+	Rules []ServerSideEncryptionRule
 }
 
 // Specifies the default server-side encryption configuration.
@@ -2791,7 +2791,7 @@ type Tagging struct {
 	// A collection for a set of tags
 	//
 	// This member is required.
-	TagSet []*Tag
+	TagSet []Tag
 }
 
 // Container for granting information.
@@ -2847,7 +2847,7 @@ type Transition struct {
 
 	// Indicates the number of days after creation when objects are transitioned to the
 	// specified storage class. The value must be a positive integer.
-	Days *int32
+	Days int32
 
 	// The storage class to which you want the object to transition.
 	StorageClass TransitionStorageClass
@@ -2882,5 +2882,5 @@ type WebsiteConfiguration struct {
 	RedirectAllRequestsTo *RedirectAllRequestsTo
 
 	// Rules that define when a redirect is applied and the redirect behavior.
-	RoutingRules []*RoutingRule
+	RoutingRules []RoutingRule
 }

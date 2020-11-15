@@ -54,7 +54,7 @@ type GetPipelineStateOutput struct {
 
 	// A list of the pipeline stage output information, including stage name, state,
 	// most recent run details, whether the stage is disabled, and other data.
-	StageStates []*types.StageState
+	StageStates []types.StageState
 
 	// The date and time the pipeline was last updated, in timestamp format.
 	Updated *time.Time

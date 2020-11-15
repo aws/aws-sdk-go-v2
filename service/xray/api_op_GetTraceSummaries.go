@@ -82,7 +82,7 @@ type GetTraceSummariesOutput struct {
 
 	// Trace IDs and annotations for traces that were found in the specified time
 	// frame.
-	TraceSummaries []*types.TraceSummary
+	TraceSummaries []types.TraceSummary
 
 	// The total number of traces processed, including traces that did not match the
 	// specified filter expression.

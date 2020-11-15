@@ -35,7 +35,7 @@ type BatchCreateAttendeeInput struct {
 	// The request containing the attendees to create.
 	//
 	// This member is required.
-	Attendees []*types.CreateAttendeeRequestItem
+	Attendees []types.CreateAttendeeRequestItem
 
 	// The Amazon Chime SDK meeting ID.
 	//
@@ -46,11 +46,11 @@ type BatchCreateAttendeeInput struct {
 type BatchCreateAttendeeOutput struct {
 
 	// The attendee information, including attendees IDs and join tokens.
-	Attendees []*types.Attendee
+	Attendees []types.Attendee
 
 	// If the action fails for one or more of the attendees in the request, a list of
 	// the attendees is returned, along with error codes and error messages.
-	Errors []*types.CreateAttendeeError
+	Errors []types.CreateAttendeeError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

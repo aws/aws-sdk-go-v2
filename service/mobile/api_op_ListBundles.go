@@ -31,7 +31,7 @@ func (c *Client) ListBundles(ctx context.Context, params *ListBundlesInput, optF
 type ListBundlesInput struct {
 
 	// Maximum number of records to list in a single response.
-	MaxResults *int32
+	MaxResults int32
 
 	// Pagination token. Set to null to start listing bundles from start. If non-null
 	// pagination token is returned in a result, then pass its value in here in another
@@ -43,7 +43,7 @@ type ListBundlesInput struct {
 type ListBundlesOutput struct {
 
 	// A list of bundles.
-	BundleList []*types.BundleDetails
+	BundleList []types.BundleDetails
 
 	// Pagination token. If non-null pagination token is returned in a result, then
 	// pass its value in another request to fetch more entries.

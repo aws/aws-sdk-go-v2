@@ -35,7 +35,7 @@ type CreateLocationSmbInput struct {
 	// (SMB) location.
 	//
 	// This member is required.
-	AgentArns []*string
+	AgentArns []string
 
 	// The password of the user who can mount the share, has the permissions to access
 	// files and folders in the SMB share.
@@ -83,7 +83,7 @@ type CreateLocationSmbInput struct {
 	// The key-value pair that represents the tag that you want to add to the location.
 	// The value can be an empty string. We recommend using tags to name your
 	// resources.
-	Tags []*types.TagListEntry
+	Tags []types.TagListEntry
 }
 
 // CreateLocationSmbResponse

@@ -24,20 +24,20 @@ type DeviceDescription struct {
 
 	// An array of zero or more elements of DeviceAttribute objects providing user
 	// specified device attributes.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// The unique identifier of the device.
 	DeviceId *string
 
 	// A Boolean value indicating whether or not the device is enabled.
-	Enabled *bool
+	Enabled bool
 
 	// A value between 0 and 1 inclusive, representing the fraction of life remaining
 	// for the device.
-	RemainingLife *float64
+	RemainingLife float64
 
 	// The tags currently associated with the AWS IoT 1-Click device.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The type of the device, such as "button".
 	Type *string

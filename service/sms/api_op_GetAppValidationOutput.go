@@ -38,7 +38,7 @@ type GetAppValidationOutputInput struct {
 type GetAppValidationOutputOutput struct {
 
 	// The validation output.
-	ValidationOutputList []*types.ValidationOutput
+	ValidationOutputList []types.ValidationOutput
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

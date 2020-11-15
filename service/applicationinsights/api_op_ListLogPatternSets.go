@@ -44,7 +44,7 @@ type ListLogPatternSetsInput struct {
 type ListLogPatternSetsOutput struct {
 
 	// The list of log pattern sets.
-	LogPatternSets []*string
+	LogPatternSets []string
 
 	// The token used to retrieve the next page of results. This value is null when
 	// there are no more results to return.

@@ -35,10 +35,10 @@ type PutAppValidationConfigurationInput struct {
 	AppId *string
 
 	// The configuration for application validation.
-	AppValidationConfigurations []*types.AppValidationConfiguration
+	AppValidationConfigurations []types.AppValidationConfiguration
 
 	// The configuration for instance validation.
-	ServerGroupValidationConfigurations []*types.ServerGroupValidationConfiguration
+	ServerGroupValidationConfigurations []types.ServerGroupValidationConfiguration
 }
 
 type PutAppValidationConfigurationOutput struct {

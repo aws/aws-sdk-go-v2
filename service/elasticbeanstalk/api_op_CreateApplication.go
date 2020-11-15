@@ -46,7 +46,7 @@ type CreateApplicationInput struct {
 	// Specifies the tags applied to the application. Elastic Beanstalk applies these
 	// tags only to the application. Environments that you create in the application
 	// don't inherit the tags.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Result message containing a single description of an application.

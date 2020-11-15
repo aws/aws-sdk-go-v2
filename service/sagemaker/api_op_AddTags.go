@@ -53,13 +53,13 @@ type AddTagsInput struct {
 	// empty string.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type AddTagsOutput struct {
 
 	// A list of tags associated with the Amazon SageMaker resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -56,7 +56,7 @@ type DeleteStackInput struct {
 	// CloudFormation deletes the stack but does not delete the retained resources.
 	// Retaining resources is useful when you cannot delete a resource, such as a
 	// non-empty S3 bucket, but you want to delete the stack.
-	RetainResources []*string
+	RetainResources []string
 
 	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
 	// role that AWS CloudFormation assumes to delete the stack. AWS CloudFormation

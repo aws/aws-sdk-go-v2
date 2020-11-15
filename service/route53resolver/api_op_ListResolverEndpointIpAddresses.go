@@ -52,7 +52,7 @@ type ListResolverEndpointIpAddressesOutput struct {
 	// Information about the IP addresses in your VPC that DNS queries originate from
 	// (for outbound endpoints) or that you forward DNS queries to (for inbound
 	// endpoints).
-	IpAddresses []*types.IpAddressResponse
+	IpAddresses []types.IpAddressResponse
 
 	// The value that you specified for MaxResults in the request.
 	MaxResults *int32

@@ -44,7 +44,7 @@ type UpdateDeploymentInput struct {
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
-	PatchOperations []*types.PatchOperation
+	PatchOperations []types.PatchOperation
 }
 
 // An immutable representation of a RestApi resource that can be called by users
@@ -60,7 +60,7 @@ type UpdateDeploymentOutput struct {
 
 	// A summary of the RestApi at the date and time that the deployment resource was
 	// created.
-	ApiSummary map[string]map[string]*types.MethodSnapshot
+	ApiSummary map[string]map[string]types.MethodSnapshot
 
 	// The date and time that the deployment resource was created.
 	CreatedDate *time.Time

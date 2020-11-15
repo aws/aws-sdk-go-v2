@@ -39,13 +39,13 @@ type DecreaseReplicationFactorInput struct {
 	// The new number of nodes for the DAX cluster.
 	//
 	// This member is required.
-	NewReplicationFactor *int32
+	NewReplicationFactor int32
 
 	// The Availability Zone(s) from which to remove nodes.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// The unique identifiers of the nodes to be removed from the cluster.
-	NodeIdsToRemove []*string
+	NodeIdsToRemove []string
 }
 
 type DecreaseReplicationFactorOutput struct {

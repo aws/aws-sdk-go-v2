@@ -54,7 +54,7 @@ type DescribeCommentsInput struct {
 type DescribeCommentsOutput struct {
 
 	// The list of comments for the specified document version.
-	Comments []*types.Comment
+	Comments []types.Comment
 
 	// The marker for the next set of results. This marker was received from a previous
 	// call.

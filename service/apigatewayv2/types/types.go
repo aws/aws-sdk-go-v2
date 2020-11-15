@@ -46,7 +46,7 @@ type Api struct {
 	// Specifies whether an API is managed by API Gateway. You can't update or delete a
 	// managed API by using API Gateway. A managed API can be deleted only through the
 	// tooling or service that created it.
-	ApiGatewayManaged *bool
+	ApiGatewayManaged bool
 
 	// The API ID.
 	ApiId *string
@@ -70,26 +70,26 @@ type Api struct {
 	// https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that
 	// clients use a custom domain name to invoke your API, disable the default
 	// endpoint.
-	DisableExecuteApiEndpoint *bool
+	DisableExecuteApiEndpoint bool
 
 	// Avoid validating models when creating a deployment. Supported only for WebSocket
 	// APIs.
-	DisableSchemaValidation *bool
+	DisableSchemaValidation bool
 
 	// The validation information during API import. This may include particular
 	// properties of your OpenAPI definition which are ignored during import. Supported
 	// only for HTTP APIs.
-	ImportInfo []*string
+	ImportInfo []string
 
 	// A collection of tags associated with the API.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// A version identifier for the API.
 	Version *string
 
 	// The warning messages reported when failonwarnings is turned on during API
 	// import.
-	Warnings []*string
+	Warnings []string
 }
 
 // Represents an API mapping.
@@ -139,7 +139,7 @@ type Authorizer struct {
 	// 0, authorization caching is disabled. If it is greater than 0, API Gateway
 	// caches authorizer responses. The maximum value is 3600, or 1 hour. Supported
 	// only for HTTP API Lambda authorizers.
-	AuthorizerResultTtlInSeconds *int32
+	AuthorizerResultTtlInSeconds int32
 
 	// The authorizer type. Specify REQUEST for a Lambda function using incoming
 	// request parameters. Specify JWT to use JSON Web Tokens (supported only for HTTP
@@ -163,7 +163,7 @@ type Authorizer struct {
 	// policy. Supported only for HTTP APIs. To learn more, see Working with AWS Lambda
 	// authorizers for HTTP APIs
 	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
-	EnableSimpleResponses *bool
+	EnableSimpleResponses bool
 
 	// The identity source for which authorization is requested. For a REQUEST
 	// authorizer, this is optional. The value is a set of one or more mapping
@@ -185,7 +185,7 @@ type Authorizer struct {
 	// For JWT, a single entry that specifies where to extract the JSON Web Token (JWT)
 	// from inbound requests. Currently only header-based and query parameter-based
 	// selections are supported, for example $request.header.Authorization.
-	IdentitySource []*string
+	IdentitySource []string
 
 	// The validation expression does not apply to the REQUEST authorizer.
 	IdentityValidationExpression *string
@@ -203,23 +203,23 @@ type Cors struct {
 
 	// Specifies whether credentials are included in the CORS request. Supported only
 	// for HTTP APIs.
-	AllowCredentials *bool
+	AllowCredentials bool
 
 	// Represents a collection of allowed headers. Supported only for HTTP APIs.
-	AllowHeaders []*string
+	AllowHeaders []string
 
 	// Represents a collection of allowed HTTP methods. Supported only for HTTP APIs.
-	AllowMethods []*string
+	AllowMethods []string
 
 	// Represents a collection of allowed origins. Supported only for HTTP APIs.
-	AllowOrigins []*string
+	AllowOrigins []string
 
 	// Represents a collection of exposed headers. Supported only for HTTP APIs.
-	ExposeHeaders []*string
+	ExposeHeaders []string
 
 	// The number of seconds that the browser should cache preflight request results.
 	// Supported only for HTTP APIs.
-	MaxAge *int32
+	MaxAge int32
 }
 
 // An immutable representation of an API that can be called by users. A Deployment
@@ -227,7 +227,7 @@ type Cors struct {
 type Deployment struct {
 
 	// Specifies whether a deployment was automatically released.
-	AutoDeployed *bool
+	AutoDeployed bool
 
 	// The date and time when the Deployment resource was created.
 	CreatedDate *time.Time
@@ -257,13 +257,13 @@ type DomainName struct {
 	ApiMappingSelectionExpression *string
 
 	// The domain name configurations.
-	DomainNameConfigurations []*DomainNameConfiguration
+	DomainNameConfigurations []DomainNameConfiguration
 
 	// The mutual TLS authentication configuration for a custom domain name.
 	MutualTlsAuthentication *MutualTlsAuthentication
 
 	// The collection of tags associated with a domain name.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // The domain name configuration.
@@ -311,7 +311,7 @@ type Integration struct {
 	// Specifies whether an integration is managed by API Gateway. If you created an
 	// API using using quick create, the resulting integration is managed by API
 	// Gateway. You can update a managed integration, but you can't delete it.
-	ApiGatewayManaged *bool
+	ApiGatewayManaged bool
 
 	// The ID of the VPC link for a private integration. Supported only for HTTP APIs.
 	ConnectionId *string
@@ -416,13 +416,13 @@ type Integration struct {
 	// variables, or context variables that are evaluated at runtime. To learn more,
 	// see Working with AWS service integrations for HTTP APIs
 	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html).
-	RequestParameters map[string]*string
+	RequestParameters map[string]string
 
 	// Represents a map of Velocity templates that are applied on the request payload
 	// based on the value of the Content-Type header sent by the client. The content
 	// type value is the key in this map, and the template (as a String) is the value.
 	// Supported only for WebSocket APIs.
-	RequestTemplates map[string]*string
+	RequestTemplates map[string]string
 
 	// The template selection expression for the integration. Supported only for
 	// WebSocket APIs.
@@ -431,7 +431,7 @@ type Integration struct {
 	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between
 	// 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for
 	// WebSocket APIs and 30 seconds for HTTP APIs.
-	TimeoutInMillis *int32
+	TimeoutInMillis int32
 
 	// The TLS configuration for a private integration. If you specify a TLS
 	// configuration, private integration traffic uses the HTTPS protocol. Supported
@@ -471,12 +471,12 @@ type IntegrationResponse struct {
 	// integration.response.body.{JSON-expression}, where name is a valid and unique
 	// response header name and JSON-expression is a valid JSON expression without the
 	// $ prefix.
-	ResponseParameters map[string]*string
+	ResponseParameters map[string]string
 
 	// The collection of response templates for the integration response as a
 	// string-to-string map of key-value pairs. Response templates are represented as a
 	// key/value map, with a content-type as the key and a template as the value.
-	ResponseTemplates map[string]*string
+	ResponseTemplates map[string]string
 
 	// The template selection expressions for the integration response.
 	TemplateSelectionExpression *string
@@ -490,7 +490,7 @@ type JWTConfiguration struct {
 	// that matches at least one entry in this list. See RFC 7519
 	// (https://tools.ietf.org/html/rfc7519#section-4.1.3). Supported only for HTTP
 	// APIs.
-	Audience []*string
+	Audience []string
 
 	// The base domain of the identity provider that issues JSON Web Tokens. For
 	// example, an Amazon Cognito user pool has the following format:
@@ -541,7 +541,7 @@ type MutualTlsAuthentication struct {
 	// Invalid certificates produce warnings. Mutual TLS is still enabled, but some
 	// clients might not be able to access your API. To resolve warnings, upload a new
 	// truststore to S3, and then update you domain name to use the new version.
-	TruststoreWarnings []*string
+	TruststoreWarnings []string
 }
 
 type MutualTlsAuthenticationInput struct {
@@ -564,7 +564,7 @@ type MutualTlsAuthenticationInput struct {
 type ParameterConstraints struct {
 
 	// Whether or not the parameter is required.
-	Required *bool
+	Required bool
 }
 
 // Represents a route.
@@ -578,11 +578,11 @@ type Route struct {
 	// Specifies whether a route is managed by API Gateway. If you created an API using
 	// quick create, the $default route is managed by API Gateway. You can't modify the
 	// $default route key.
-	ApiGatewayManaged *bool
+	ApiGatewayManaged bool
 
 	// Specifies whether an API key is required for this route. Supported only for
 	// WebSocket APIs.
-	ApiKeyRequired *bool
+	ApiKeyRequired bool
 
 	// A list of authorization scopes configured on a route. The scopes are used with a
 	// JWT authorizer to authorize the method invocation. The authorization works by
@@ -591,7 +591,7 @@ type Route struct {
 	// a claimed scope in the access token. Otherwise, the invocation is not
 	// authorized. When the route scope is configured, the client must provide an
 	// access token instead of an identity token for authorization purposes.
-	AuthorizationScopes []*string
+	AuthorizationScopes []string
 
 	// The authorization type for the route. For WebSocket APIs, valid values are NONE
 	// for open access, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a
@@ -612,10 +612,10 @@ type Route struct {
 	OperationName *string
 
 	// The request models for the route. Supported only for WebSocket APIs.
-	RequestModels map[string]*string
+	RequestModels map[string]string
 
 	// The request parameters for the route. Supported only for WebSocket APIs.
-	RequestParameters map[string]*ParameterConstraints
+	RequestParameters map[string]ParameterConstraints
 
 	// The route ID.
 	RouteId *string
@@ -641,10 +641,10 @@ type RouteResponse struct {
 	ModelSelectionExpression *string
 
 	// Represents the response models of a route response.
-	ResponseModels map[string]*string
+	ResponseModels map[string]string
 
 	// Represents the response parameters of a route response.
-	ResponseParameters map[string]*ParameterConstraints
+	ResponseParameters map[string]ParameterConstraints
 
 	// Represents the identifier of a route response.
 	RouteResponseId *string
@@ -656,10 +656,10 @@ type RouteSettings struct {
 	// Specifies whether (true) or not (false) data trace logging is enabled for this
 	// route. This property affects the log entries pushed to Amazon CloudWatch Logs.
 	// Supported only for WebSocket APIs.
-	DataTraceEnabled *bool
+	DataTraceEnabled bool
 
 	// Specifies whether detailed metrics are enabled.
-	DetailedMetricsEnabled *bool
+	DetailedMetricsEnabled bool
 
 	// Specifies the logging level for this route: INFO, ERROR, or OFF. This property
 	// affects the log entries pushed to Amazon CloudWatch Logs. Supported only for
@@ -667,10 +667,10 @@ type RouteSettings struct {
 	LoggingLevel LoggingLevel
 
 	// Specifies the throttling burst limit.
-	ThrottlingBurstLimit *int32
+	ThrottlingBurstLimit int32
 
 	// Specifies the throttling rate limit.
-	ThrottlingRateLimit *float64
+	ThrottlingRateLimit float64
 }
 
 // Represents an API stage.
@@ -687,11 +687,11 @@ type Stage struct {
 	// Specifies whether a stage is managed by API Gateway. If you created an API using
 	// quick create, the $default stage is managed by API Gateway. You can't modify the
 	// $default stage.
-	ApiGatewayManaged *bool
+	ApiGatewayManaged bool
 
 	// Specifies whether updates to an API automatically trigger a new deployment. The
 	// default value is false.
-	AutoDeploy *bool
+	AutoDeploy bool
 
 	// The identifier of a client certificate for a Stage. Supported only for WebSocket
 	// APIs.
@@ -718,15 +718,15 @@ type Stage struct {
 	LastUpdatedDate *time.Time
 
 	// Route settings for the stage, by routeKey.
-	RouteSettings map[string]*RouteSettings
+	RouteSettings map[string]RouteSettings
 
 	// A map that defines the stage variables for a stage resource. Variable names can
 	// have alphanumeric and underscore characters, and the values must match
 	// [A-Za-z0-9-._~:/?#&=,]+.
-	StageVariables map[string]*string
+	StageVariables map[string]string
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // The TLS configuration for a private integration. If you specify a TLS
@@ -762,12 +762,12 @@ type VpcLink struct {
 	// A list of security group IDs for the VPC link.
 	//
 	// This member is required.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// A list of subnet IDs to include in the VPC link.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The ID of the VPC link.
 	//
@@ -778,7 +778,7 @@ type VpcLink struct {
 	CreatedDate *time.Time
 
 	// Tags for the VPC link.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The status of the VPC link.
 	VpcLinkStatus VpcLinkStatus

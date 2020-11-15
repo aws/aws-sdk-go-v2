@@ -35,7 +35,7 @@ func (c *Client) DescribeEventCategories(ctx context.Context, params *DescribeEv
 type DescribeEventCategoriesInput struct {
 
 	// Filters applied to the event categories.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The type of AWS DMS resource that generates events. Valid values:
 	// replication-instance | replication-task
@@ -46,7 +46,7 @@ type DescribeEventCategoriesInput struct {
 type DescribeEventCategoriesOutput struct {
 
 	// A list of event categories.
-	EventCategoryGroupList []*types.EventCategoryGroup
+	EventCategoryGroupList []types.EventCategoryGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

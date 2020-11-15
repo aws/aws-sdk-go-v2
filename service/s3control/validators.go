@@ -879,9 +879,6 @@ func validateJobReport(v *types.JobReport) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "JobReport"}
-	if v.Enabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -965,13 +962,13 @@ func validateLifecycleRuleFilter(v *types.LifecycleRuleFilter) error {
 	}
 }
 
-func validateLifecycleRules(v []*types.LifecycleRule) error {
+func validateLifecycleRules(v []types.LifecycleRule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LifecycleRules"}
 	for i := range v {
-		if err := validateLifecycleRule(v[i]); err != nil {
+		if err := validateLifecycleRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1132,13 +1129,13 @@ func validateS3Tag(v *types.S3Tag) error {
 	}
 }
 
-func validateS3TagSet(v []*types.S3Tag) error {
+func validateS3TagSet(v []types.S3Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "S3TagSet"}
 	for i := range v {
-		if err := validateS3Tag(v[i]); err != nil {
+		if err := validateS3Tag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1248,9 +1245,6 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 	}
 	if v.ClientRequestToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
-	}
-	if v.Priority == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
 	}
 	if v.Report == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Report"))
@@ -1780,9 +1774,6 @@ func validateOpUpdateJobPriorityInput(v *UpdateJobPriorityInput) error {
 	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
-	}
-	if v.Priority == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

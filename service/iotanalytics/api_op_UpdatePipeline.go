@@ -41,7 +41,7 @@ type UpdatePipelineInput struct {
 	// "lambda": { ... } }, ... ]
 	//
 	// This member is required.
-	PipelineActivities []*types.PipelineActivity
+	PipelineActivities []types.PipelineActivity
 
 	// The name of the pipeline to update.
 	//

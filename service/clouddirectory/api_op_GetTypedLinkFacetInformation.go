@@ -53,7 +53,7 @@ type GetTypedLinkFacetInformationOutput struct {
 	// not the order in which they are supplied to any API calls. For more information
 	// about identity attributes, see Typed Links
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
-	IdentityAttributeOrder []*string
+	IdentityAttributeOrder []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

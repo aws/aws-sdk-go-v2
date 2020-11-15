@@ -3989,13 +3989,13 @@ func validateAbortCriteria(v *types.AbortCriteria) error {
 	}
 }
 
-func validateAbortCriteriaList(v []*types.AbortCriteria) error {
+func validateAbortCriteriaList(v []types.AbortCriteria) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AbortCriteriaList"}
 	for i := range v {
-		if err := validateAbortCriteria(v[i]); err != nil {
+		if err := validateAbortCriteria(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4113,13 +4113,13 @@ func validateAction(v *types.Action) error {
 	}
 }
 
-func validateActionList(v []*types.Action) error {
+func validateActionList(v []types.Action) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ActionList"}
 	for i := range v {
-		if err := validateAction(v[i]); err != nil {
+		if err := validateAction(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4130,13 +4130,13 @@ func validateActionList(v []*types.Action) error {
 	}
 }
 
-func validateAdditionalMetricsToRetainV2List(v []*types.MetricToRetain) error {
+func validateAdditionalMetricsToRetainV2List(v []types.MetricToRetain) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdditionalMetricsToRetainV2List"}
 	for i := range v {
-		if err := validateMetricToRetain(v[i]); err != nil {
+		if err := validateMetricToRetain(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4180,13 +4180,14 @@ func validateAlertTarget(v *types.AlertTarget) error {
 	}
 }
 
-func validateAlertTargets(v map[string]*types.AlertTarget) error {
+func validateAlertTargets(v map[string]types.AlertTarget) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AlertTargets"}
 	for key := range v {
-		if err := validateAlertTarget(v[key]); err != nil {
+		value := v[key]
+		if err := validateAlertTarget(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4234,13 +4235,13 @@ func validateAssetPropertyValue(v *types.AssetPropertyValue) error {
 	}
 }
 
-func validateAssetPropertyValueList(v []*types.AssetPropertyValue) error {
+func validateAssetPropertyValueList(v []types.AssetPropertyValue) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssetPropertyValueList"}
 	for i := range v {
-		if err := validateAssetPropertyValue(v[i]); err != nil {
+		if err := validateAssetPropertyValue(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4266,13 +4267,13 @@ func validateAuthInfo(v *types.AuthInfo) error {
 	}
 }
 
-func validateAuthInfos(v []*types.AuthInfo) error {
+func validateAuthInfos(v []types.AuthInfo) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AuthInfos"}
 	for i := range v {
-		if err := validateAuthInfo(v[i]); err != nil {
+		if err := validateAuthInfo(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4326,13 +4327,13 @@ func validateAwsJobAbortCriteria(v *types.AwsJobAbortCriteria) error {
 	}
 }
 
-func validateAwsJobAbortCriteriaList(v []*types.AwsJobAbortCriteria) error {
+func validateAwsJobAbortCriteriaList(v []types.AwsJobAbortCriteria) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AwsJobAbortCriteriaList"}
 	for i := range v {
-		if err := validateAwsJobAbortCriteria(v[i]); err != nil {
+		if err := validateAwsJobAbortCriteria(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4368,9 +4369,6 @@ func validateAwsJobExponentialRolloutRate(v *types.AwsJobExponentialRolloutRate)
 	if v.BaseRatePerMinute == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BaseRatePerMinute"))
 	}
-	if v.IncrementFactor == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IncrementFactor"))
-	}
 	if v.RateIncreaseCriteria == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RateIncreaseCriteria"))
 	}
@@ -4401,13 +4399,13 @@ func validateBehavior(v *types.Behavior) error {
 	}
 }
 
-func validateBehaviors(v []*types.Behavior) error {
+func validateBehaviors(v []types.Behavior) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Behaviors"}
 	for i := range v {
-		if err := validateBehavior(v[i]); err != nil {
+		if err := validateBehavior(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4583,9 +4581,6 @@ func validateExponentialRolloutRate(v *types.ExponentialRolloutRate) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExponentialRolloutRate"}
-	if v.IncrementFactor == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IncrementFactor"))
-	}
 	if v.RateIncreaseCriteria == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RateIncreaseCriteria"))
 	}
@@ -4617,13 +4612,13 @@ func validateFirehoseAction(v *types.FirehoseAction) error {
 	}
 }
 
-func validateHeaderList(v []*types.HttpActionHeader) error {
+func validateHeaderList(v []types.HttpActionHeader) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HeaderList"}
 	for i := range v {
-		if err := validateHttpActionHeader(v[i]); err != nil {
+		if err := validateHttpActionHeader(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4955,13 +4950,13 @@ func validatePutAssetPropertyValueEntry(v *types.PutAssetPropertyValueEntry) err
 	}
 }
 
-func validatePutAssetPropertyValueEntryList(v []*types.PutAssetPropertyValueEntry) error {
+func validatePutAssetPropertyValueEntryList(v []types.PutAssetPropertyValueEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutAssetPropertyValueEntryList"}
 	for i := range v {
-		if err := validatePutAssetPropertyValueEntry(v[i]); err != nil {
+		if err := validatePutAssetPropertyValueEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -5149,13 +5144,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -5247,13 +5242,13 @@ func validateTimestreamDimension(v *types.TimestreamDimension) error {
 	}
 }
 
-func validateTimestreamDimensionList(v []*types.TimestreamDimension) error {
+func validateTimestreamDimensionList(v []types.TimestreamDimension) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TimestreamDimensionList"}
 	for i := range v {
-		if err := validateTimestreamDimension(v[i]); err != nil {
+		if err := validateTimestreamDimension(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

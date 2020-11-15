@@ -33,7 +33,7 @@ type DescribeAssessmentRunsInput struct {
 	// The ARN that specifies the assessment run that you want to describe.
 	//
 	// This member is required.
-	AssessmentRunArns []*string
+	AssessmentRunArns []string
 }
 
 type DescribeAssessmentRunsOutput struct {
@@ -41,13 +41,13 @@ type DescribeAssessmentRunsOutput struct {
 	// Information about the assessment run.
 	//
 	// This member is required.
-	AssessmentRuns []*types.AssessmentRun
+	AssessmentRuns []types.AssessmentRun
 
 	// Assessment run details that cannot be described. An error code is provided for
 	// each failed item.
 	//
 	// This member is required.
-	FailedItems map[string]*types.FailedItemDetails
+	FailedItems map[string]types.FailedItemDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

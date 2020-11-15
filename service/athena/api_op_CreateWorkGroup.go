@@ -47,7 +47,7 @@ type CreateWorkGroupInput struct {
 	Description *string
 
 	// A list of comma separated tags to add to the workgroup that is created.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateWorkGroupOutput struct {

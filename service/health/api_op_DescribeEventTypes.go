@@ -57,7 +57,7 @@ type DescribeEventTypesOutput struct {
 	// category (issue, accountNotification, or scheduledChange), a service (for
 	// example, EC2, RDS, DATAPIPELINE, BILLING), and a code (in the format
 	// AWS_SERVICE_DESCRIPTION ; for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT).
-	EventTypes []*types.EventType
+	EventTypes []types.EventType
 
 	// If the results of a search are large, only a portion of the results are
 	// returned, and a nextToken pagination token is returned in the response. To

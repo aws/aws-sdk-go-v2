@@ -55,7 +55,7 @@ type DetectStackDriftInput struct {
 	StackName *string
 
 	// The logical names of any resources you want to use as filters.
-	LogicalResourceIds []*string
+	LogicalResourceIds []string
 }
 
 type DetectStackDriftOutput struct {

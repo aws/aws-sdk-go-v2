@@ -48,7 +48,7 @@ type GetCustomDataIdentifierOutput struct {
 	// Specifies whether the custom data identifier was deleted. If you delete a custom
 	// data identifier, Amazon Macie doesn't delete it permanently. Instead, it soft
 	// deletes the identifier.
-	Deleted *bool
+	Deleted bool
 
 	// The custom description of the custom data identifier.
 	Description *string
@@ -59,18 +59,18 @@ type GetCustomDataIdentifierOutput struct {
 	// An array that lists specific character sequences (ignore words) to exclude from
 	// the results. If the text matched by the regular expression is the same as any
 	// string in this array, Amazon Macie ignores it. Ignore words are case sensitive.
-	IgnoreWords []*string
+	IgnoreWords []string
 
 	// An array that lists specific character sequences (keywords), one of which must
 	// be within proximity (maximumMatchDistance) of the regular expression to match.
 	// Keywords aren't case sensitive.
-	Keywords []*string
+	Keywords []string
 
 	// The maximum number of characters that can exist between text that matches the
 	// regex pattern and the character sequences specified by the keywords array. Macie
 	// includes or excludes a result based on the proximity of a keyword to text that
 	// matches the regex pattern.
-	MaximumMatchDistance *int32
+	MaximumMatchDistance int32
 
 	// The custom name of the custom data identifier.
 	Name *string
@@ -80,7 +80,7 @@ type GetCustomDataIdentifierOutput struct {
 
 	// A map of key-value pairs that identifies the tags (keys and values) that are
 	// associated with the custom data identifier.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

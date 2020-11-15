@@ -53,7 +53,7 @@ type SyncDeploymentJobOutput struct {
 	CreatedAt *time.Time
 
 	// Information about the deployment application configurations.
-	DeploymentApplicationConfigs []*types.DeploymentApplicationConfig
+	DeploymentApplicationConfigs []types.DeploymentApplicationConfig
 
 	// Information about the deployment configuration.
 	DeploymentConfig *types.DeploymentConfig

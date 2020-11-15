@@ -197,9 +197,9 @@ func awsRestjson1_serializeOpDocumentGetRecommendationsInput(v *GetRecommendatio
 		ok.String(*v.ItemId)
 	}
 
-	if v.NumResults != nil {
+	if v.NumResults != 0 {
 		ok := object.Key("numResults")
-		ok.Integer(*v.NumResults)
+		ok.Integer(v.NumResults)
 	}
 
 	if v.UserId != nil {
@@ -210,32 +210,24 @@ func awsRestjson1_serializeOpDocumentGetRecommendationsInput(v *GetRecommendatio
 	return nil
 }
 
-func awsRestjson1_serializeDocumentContext(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentContext(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentInputList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentInputList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }

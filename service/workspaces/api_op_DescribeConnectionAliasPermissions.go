@@ -51,7 +51,7 @@ type DescribeConnectionAliasPermissionsOutput struct {
 	AliasId *string
 
 	// The permissions associated with a connection alias.
-	ConnectionAliasPermissions []*types.ConnectionAliasPermission
+	ConnectionAliasPermissions []types.ConnectionAliasPermission
 
 	// The token to use to retrieve the next set of results, or null if no more results
 	// are available.

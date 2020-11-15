@@ -67,7 +67,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 
 	// A list of log types that must be enabled for exporting to Amazon CloudWatch
 	// Logs.
-	EnableCloudwatchLogsExports []*string
+	EnableCloudwatchLogsExports []string
 
 	// The AWS KMS key identifier to use when restoring an encrypted cluster from an
 	// encrypted cluster. The AWS KMS key identifier is the Amazon Resource Name (ARN)
@@ -114,15 +114,15 @@ type RestoreDBClusterToPointInTimeInput struct {
 	RestoreToTime *time.Time
 
 	// The tags to be assigned to the restored cluster.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A value that is set to true to restore the cluster to the latest restorable
 	// backup time, and false otherwise. Default: false Constraints: Cannot be
 	// specified if the RestoreToTime parameter is provided.
-	UseLatestRestorableTime *bool
+	UseLatestRestorableTime bool
 
 	// A list of VPC security groups that the new cluster belongs to.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 }
 
 type RestoreDBClusterToPointInTimeOutput struct {

@@ -65,20 +65,20 @@ type ModifyFleetInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// Indicates whether running instances should be terminated if the total target
 	// capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
 	ExcessCapacityTerminationPolicy types.FleetExcessCapacityTerminationPolicy
 
 	// The launch template and overrides.
-	LaunchTemplateConfigs []*types.FleetLaunchTemplateConfigRequest
+	LaunchTemplateConfigs []types.FleetLaunchTemplateConfigRequest
 }
 
 type ModifyFleetOutput struct {
 
 	// Is true if the request succeeds, and an error otherwise.
-	Return *bool
+	Return bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

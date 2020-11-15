@@ -186,7 +186,7 @@ type PutSecretValueInput struct {
 	// is automatically removed from the other version and attached to this version. If
 	// you do not specify a value for VersionStages then Secrets Manager automatically
 	// moves the staging label AWSCURRENT to this new version.
-	VersionStages []*string
+	VersionStages []string
 }
 
 type PutSecretValueOutput struct {
@@ -204,7 +204,7 @@ type PutSecretValueOutput struct {
 	// The list of staging labels that are currently attached to this version of the
 	// secret. Staging labels are used to track a version as it progresses through the
 	// secret rotation process.
-	VersionStages []*string
+	VersionStages []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

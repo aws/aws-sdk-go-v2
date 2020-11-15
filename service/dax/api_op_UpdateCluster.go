@@ -56,7 +56,7 @@ type UpdateClusterInput struct {
 	// A list of user-specified security group IDs to be assigned to each node in the
 	// DAX cluster. If this parameter is not specified, DAX assigns the default VPC
 	// security group to each node.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 }
 
 type UpdateClusterOutput struct {

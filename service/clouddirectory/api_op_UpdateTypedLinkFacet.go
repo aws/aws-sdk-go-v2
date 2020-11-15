@@ -33,7 +33,7 @@ type UpdateTypedLinkFacetInput struct {
 	// Attributes update structure.
 	//
 	// This member is required.
-	AttributeUpdates []*types.TypedLinkFacetAttributeUpdate
+	AttributeUpdates []types.TypedLinkFacetAttributeUpdate
 
 	// The order of identity attributes for the facet, from most significant to least
 	// significant. The ability to filter typed links considers the order that the
@@ -46,7 +46,7 @@ type UpdateTypedLinkFacetInput struct {
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	//
 	// This member is required.
-	IdentityAttributeOrder []*string
+	IdentityAttributeOrder []string
 
 	// The unique name of the typed link facet.
 	//

@@ -37,7 +37,7 @@ type ListFlowsInput struct {
 	// The service might return fewer results than the MaxResults value. If MaxResults
 	// is not included in the request, the service defaults to pagination with a
 	// maximum of 10 results per page.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token that identifies which batch of results that you want to see. For
 	// example, you submit a ListFlows request with MaxResults set at 5. The service
@@ -50,7 +50,7 @@ type ListFlowsInput struct {
 type ListFlowsOutput struct {
 
 	// A list of flow summaries.
-	Flows []*types.ListedFlow
+	Flows []types.ListedFlow
 
 	// The token that identifies which batch of results that you want to see. For
 	// example, you submit a ListFlows request with MaxResults set at 5. The service

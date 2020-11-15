@@ -54,7 +54,7 @@ type DescribeSubscriptionFiltersOutput struct {
 	NextToken *string
 
 	// The subscription filters.
-	SubscriptionFilters []*types.SubscriptionFilter
+	SubscriptionFilters []types.SubscriptionFilter
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -37,19 +37,19 @@ type BatchApplyUpdateActionInput struct {
 	ServiceUpdateName *string
 
 	// The cache cluster IDs
-	CacheClusterIds []*string
+	CacheClusterIds []string
 
 	// The replication group IDs
-	ReplicationGroupIds []*string
+	ReplicationGroupIds []string
 }
 
 type BatchApplyUpdateActionOutput struct {
 
 	// Update actions that have been processed successfully
-	ProcessedUpdateActions []*types.ProcessedUpdateAction
+	ProcessedUpdateActions []types.ProcessedUpdateAction
 
 	// Update actions that haven't been processed successfully
-	UnprocessedUpdateActions []*types.UnprocessedUpdateAction
+	UnprocessedUpdateActions []types.UnprocessedUpdateAction
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

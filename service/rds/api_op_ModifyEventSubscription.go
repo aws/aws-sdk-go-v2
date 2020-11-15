@@ -48,7 +48,7 @@ type ModifyEventSubscriptionInput struct {
 	// subscribe to. You can see a list of the categories for a given source type in
 	// Events (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html)
 	// in the Amazon RDS User Guide or by using the DescribeEventCategories operation.
-	EventCategories []*string
+	EventCategories []string
 
 	// The Amazon Resource Name (ARN) of the SNS topic created for event notification.
 	// The ARN is created by Amazon SNS when you create a topic and subscribe to it.

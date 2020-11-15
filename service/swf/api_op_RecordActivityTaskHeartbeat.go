@@ -84,7 +84,7 @@ type RecordActivityTaskHeartbeatOutput struct {
 	// Set to true if cancellation of the task is requested.
 	//
 	// This member is required.
-	CancelRequested *bool
+	CancelRequested bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

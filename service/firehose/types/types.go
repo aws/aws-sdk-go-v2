@@ -137,7 +137,7 @@ type DeliveryStreamDescription struct {
 	// The destinations.
 	//
 	// This member is required.
-	Destinations []*DestinationDescription
+	Destinations []DestinationDescription
 
 	// Indicates whether there are more destinations available to list.
 	//
@@ -723,7 +723,7 @@ type HiveJsonSerDe struct {
 	// You can also use the special value millis to parse timestamps in epoch
 	// milliseconds. If you don't specify a format, Kinesis Data Firehose uses
 	// java.sql.Timestamp::valueOf by default.
-	TimestampFormats []*string
+	TimestampFormats []string
 }
 
 // Describes the buffering options that can be applied before data is delivered to
@@ -921,7 +921,7 @@ type HttpEndpointDestinationUpdate struct {
 type HttpEndpointRequestConfiguration struct {
 
 	// Describes the metadata sent to the HTTP endpoint destination.
-	CommonAttributes []*HttpEndpointCommonAttribute
+	CommonAttributes []HttpEndpointCommonAttribute
 
 	// Kinesis Data Firehose uses the content encoding to compress the body of a
 	// request before sending the request to the destination. For more information, see
@@ -1019,7 +1019,7 @@ type OpenXJsonSerDe struct {
 	// is useful when the JSON contains keys that are Hive keywords. For example,
 	// timestamp is a Hive keyword. If you have a JSON key named timestamp, set this
 	// parameter to {"ts": "timestamp"} to map this key to a column named ts.
-	ColumnToJsonKeyMappings map[string]*string
+	ColumnToJsonKeyMappings map[string]string
 
 	// When set to true, specifies that the names of the keys include dots and that you
 	// want Kinesis Data Firehose to replace them with underscores. This is useful
@@ -1041,7 +1041,7 @@ type OrcSerDe struct {
 
 	// The column names for which you want Kinesis Data Firehose to create bloom
 	// filters. The default is null.
-	BloomFilterColumns []*string
+	BloomFilterColumns []string
 
 	// The Bloom filter false positive probability (FPP). The lower the FPP, the bigger
 	// the Bloom filter. The default value is 0.05, the minimum is 0, and the maximum
@@ -1137,7 +1137,7 @@ type ProcessingConfiguration struct {
 	Enabled *bool
 
 	// The data processors.
-	Processors []*Processor
+	Processors []Processor
 }
 
 // Describes a data processor.
@@ -1149,7 +1149,7 @@ type Processor struct {
 	Type ProcessorType
 
 	// The processor parameters.
-	Parameters []*ProcessorParameter
+	Parameters []ProcessorParameter
 }
 
 // Describes the processor parameter.
@@ -1762,7 +1762,7 @@ type VpcConfiguration struct {
 	// in the Amazon VPC documentation.
 	//
 	// This member is required.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The IDs of the subnets that you want Kinesis Data Firehose to use to create ENIs
 	// in the VPC of the Amazon ES destination. Make sure that the routing tables and
@@ -1780,7 +1780,7 @@ type VpcConfiguration struct {
 	// in the Amazon VPC Quotas topic.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 }
 
 // The details of the VPC of the Amazon ES destination.
@@ -1832,7 +1832,7 @@ type VpcConfigurationDescription struct {
 	// in the Amazon VPC documentation.
 	//
 	// This member is required.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The IDs of the subnets that Kinesis Data Firehose uses to create ENIs in the VPC
 	// of the Amazon ES destination. Make sure that the routing tables and inbound and
@@ -1850,7 +1850,7 @@ type VpcConfigurationDescription struct {
 	// in the Amazon VPC Quotas topic.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The ID of the Amazon ES destination's VPC.
 	//

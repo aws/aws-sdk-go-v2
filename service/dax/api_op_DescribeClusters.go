@@ -40,7 +40,7 @@ func (c *Client) DescribeClusters(ctx context.Context, params *DescribeClustersI
 type DescribeClustersInput struct {
 
 	// The names of the DAX clusters being described.
-	ClusterNames []*string
+	ClusterNames []string
 
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so that
@@ -58,7 +58,7 @@ type DescribeClustersOutput struct {
 
 	// The descriptions of your DAX clusters, in response to a DescribeClusters
 	// request.
-	Clusters []*types.Cluster
+	Clusters []types.Cluster
 
 	// Provides an identifier to allow retrieval of paginated results.
 	NextToken *string

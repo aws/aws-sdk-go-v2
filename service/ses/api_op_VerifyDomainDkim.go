@@ -83,7 +83,7 @@ type VerifyDomainDkimOutput struct {
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
 	//
 	// This member is required.
-	DkimTokens []*string
+	DkimTokens []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

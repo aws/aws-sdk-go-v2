@@ -55,7 +55,7 @@ type RenderUiTemplateOutput struct {
 	// rendering the template. If there were no errors, the list is empty.
 	//
 	// This member is required.
-	Errors []*types.RenderingError
+	Errors []types.RenderingError
 
 	// A Liquid template that renders the HTML for the worker UI.
 	//

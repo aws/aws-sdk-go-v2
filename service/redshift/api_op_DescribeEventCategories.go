@@ -43,7 +43,7 @@ type DescribeEventCategoriesInput struct {
 type DescribeEventCategoriesOutput struct {
 
 	// A list of event categories descriptions.
-	EventCategoriesMapList []*types.EventCategoriesMap
+	EventCategoriesMapList []types.EventCategoriesMap
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

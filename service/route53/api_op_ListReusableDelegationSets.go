@@ -55,13 +55,13 @@ type ListReusableDelegationSetsOutput struct {
 	// delegation set that was created by the current AWS account.
 	//
 	// This member is required.
-	DelegationSets []*types.DelegationSet
+	DelegationSets []types.DelegationSet
 
 	// A flag that indicates whether there are more reusable delegation sets to be
 	// listed.
 	//
 	// This member is required.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// For the second and subsequent calls to ListReusableDelegationSets, Marker is the
 	// value that you specified for the marker parameter in the request that produced

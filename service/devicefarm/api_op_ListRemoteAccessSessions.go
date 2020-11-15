@@ -51,7 +51,7 @@ type ListRemoteAccessSessionsOutput struct {
 
 	// A container that represents the metadata from the service about each remote
 	// access session you are requesting.
-	RemoteAccessSessions []*types.RemoteAccessSession
+	RemoteAccessSessions []types.RemoteAccessSession
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

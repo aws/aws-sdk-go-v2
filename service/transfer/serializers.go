@@ -933,17 +933,13 @@ func (m *awsAwsjson11_serializeOpUpdateUser) HandleSerialize(ctx context.Context
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsjson11_serializeDocumentAddressAllocationIds(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentAddressAllocationIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1003,17 +999,13 @@ func awsAwsjson11_serializeDocumentHomeDirectoryMapEntry(v *types.HomeDirectoryM
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentHomeDirectoryMappings(v []*types.HomeDirectoryMapEntry, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentHomeDirectoryMappings(v []types.HomeDirectoryMapEntry, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentHomeDirectoryMapEntry(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentHomeDirectoryMapEntry(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1048,32 +1040,24 @@ func awsAwsjson11_serializeDocumentProtocols(v []types.Protocol, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSecurityGroupIds(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentSecurityGroupIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSubnetIds(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentSubnetIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1095,32 +1079,24 @@ func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagKeys(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagKeys(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTags(v []*types.Tag, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTags(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}

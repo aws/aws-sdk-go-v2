@@ -31,7 +31,7 @@ func (c *Client) ListInputs(ctx context.Context, params *ListInputsInput, optFns
 type ListInputsInput struct {
 
 	// Placeholder documentation for MaxResults
-	MaxResults *int32
+	MaxResults int32
 
 	// Placeholder documentation for __string
 	NextToken *string
@@ -41,7 +41,7 @@ type ListInputsInput struct {
 type ListInputsOutput struct {
 
 	// Placeholder documentation for __listOfInput
-	Inputs []*types.Input
+	Inputs []types.Input
 
 	// Placeholder documentation for __string
 	NextToken *string

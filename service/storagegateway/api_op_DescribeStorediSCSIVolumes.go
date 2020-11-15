@@ -38,7 +38,7 @@ type DescribeStorediSCSIVolumesInput struct {
 	// gateway. Use ListVolumes to get volume ARNs for a gateway.
 	//
 	// This member is required.
-	VolumeARNs []*string
+	VolumeARNs []string
 }
 
 type DescribeStorediSCSIVolumesOutput struct {
@@ -99,7 +99,7 @@ type DescribeStorediSCSIVolumesOutput struct {
 	//
 	// * VolumeType: One of the enumeration values describing the type of the
 	// volume. Currently, only STORED volumes are supported.
-	StorediSCSIVolumes []*types.StorediSCSIVolume
+	StorediSCSIVolumes []types.StorediSCSIVolume
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

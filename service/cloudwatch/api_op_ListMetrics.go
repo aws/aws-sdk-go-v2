@@ -46,7 +46,7 @@ func (c *Client) ListMetrics(ctx context.Context, params *ListMetricsInput, optF
 type ListMetricsInput struct {
 
 	// The dimensions to filter against.
-	Dimensions []*types.DimensionFilter
+	Dimensions []types.DimensionFilter
 
 	// The name of the metric to filter against.
 	MetricName *string
@@ -70,7 +70,7 @@ type ListMetricsInput struct {
 type ListMetricsOutput struct {
 
 	// The metrics that match your request.
-	Metrics []*types.Metric
+	Metrics []types.Metric
 
 	// The token that marks the start of the next batch of returned results.
 	NextToken *string

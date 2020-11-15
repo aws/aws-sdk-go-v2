@@ -44,13 +44,13 @@ type DescribeReservationOutput struct {
 	Arn *string
 
 	// Number of reserved resources
-	Count *int32
+	Count int32
 
 	// Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. 'USD'
 	CurrencyCode *string
 
 	// Lease duration, e.g. '12'
-	Duration *int32
+	Duration int32
 
 	// Units for duration, e.g. 'MONTHS'
 	DurationUnits types.OfferingDurationUnits
@@ -59,7 +59,7 @@ type DescribeReservationOutput struct {
 	End *string
 
 	// One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering
-	FixedPrice *float64
+	FixedPrice float64
 
 	// User specified reservation name
 	Name *string
@@ -91,10 +91,10 @@ type DescribeReservationOutput struct {
 	State types.ReservationState
 
 	// A collection of key-value pairs
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Recurring usage charge for each reserved resource, e.g. '157.0'
-	UsagePrice *float64
+	UsagePrice float64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

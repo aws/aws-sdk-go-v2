@@ -59,7 +59,7 @@ type SearchFlowExecutionsOutput struct {
 
 	// An array of objects that contain summary information about each workflow
 	// execution in the result set.
-	Summaries []*types.FlowExecutionSummary
+	Summaries []types.FlowExecutionSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

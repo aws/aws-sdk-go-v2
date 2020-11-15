@@ -46,7 +46,7 @@ type SetIdentityHeadersInNotificationsEnabledInput struct {
 	// topic.
 	//
 	// This member is required.
-	Enabled *bool
+	Enabled bool
 
 	// The identity for which to enable or disable headers in notifications. Examples:
 	// user@example.com, example.com.

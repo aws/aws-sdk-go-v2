@@ -51,7 +51,7 @@ type ListAccountAssignmentDeletionStatusInput struct {
 type ListAccountAssignmentDeletionStatusOutput struct {
 
 	// The status object for the account assignment deletion operation.
-	AccountAssignmentsDeletionStatus []*types.AccountAssignmentOperationStatusMetadata
+	AccountAssignmentsDeletionStatus []types.AccountAssignmentOperationStatusMetadata
 
 	// The pagination token for the list API. Initially the value is null. Use the
 	// output of previous API calls to make subsequent calls.

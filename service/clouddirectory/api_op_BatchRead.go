@@ -38,7 +38,7 @@ type BatchReadInput struct {
 	// A list of operations that are part of the batch.
 	//
 	// This member is required.
-	Operations []*types.BatchReadOperation
+	Operations []types.BatchReadOperation
 
 	// Represents the manner and timing in which the successful write or update of an
 	// object is reflected in a subsequent read operation of that same object.
@@ -48,7 +48,7 @@ type BatchReadInput struct {
 type BatchReadOutput struct {
 
 	// A list of all the responses for each batch read.
-	Responses []*types.BatchReadOperationResponse
+	Responses []types.BatchReadOperationResponse
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

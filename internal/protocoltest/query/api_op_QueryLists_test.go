@@ -37,12 +37,12 @@ func TestClient_QueryLists_awsAwsquerySerialize(t *testing.T) {
 		// Serializes query lists
 		"QueryLists": {
 			Params: &QueryListsInput{
-				ListArg: []*string{
-					ptr.String("foo"),
-					ptr.String("bar"),
-					ptr.String("baz"),
+				ListArg: []string{
+					"foo",
+					"bar",
+					"baz",
 				},
-				ComplexListArg: []*types.GreetingStruct{
+				ComplexListArg: []types.GreetingStruct{
 					{
 						Hi: ptr.String("hello"),
 					},
@@ -71,7 +71,7 @@ func TestClient_QueryLists_awsAwsquerySerialize(t *testing.T) {
 		// Does not serialize empty query lists
 		"EmptyQueryLists": {
 			Params: &QueryListsInput{
-				ListArg: []*string{},
+				ListArg: []string{},
 			},
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
@@ -89,9 +89,9 @@ func TestClient_QueryLists_awsAwsquerySerialize(t *testing.T) {
 		// element
 		"FlattenedQueryLists": {
 			Params: &QueryListsInput{
-				FlattenedListArg: []*string{
-					ptr.String("A"),
-					ptr.String("B"),
+				FlattenedListArg: []string{
+					"A",
+					"B",
 				},
 			},
 			ExpectMethod:  "POST",
@@ -111,9 +111,9 @@ func TestClient_QueryLists_awsAwsquerySerialize(t *testing.T) {
 		// Changes the member of lists using xmlName trait
 		"QueryListArgWithXmlNameMember": {
 			Params: &QueryListsInput{
-				ListArgWithXmlNameMember: []*string{
-					ptr.String("A"),
-					ptr.String("B"),
+				ListArgWithXmlNameMember: []string{
+					"A",
+					"B",
 				},
 			},
 			ExpectMethod:  "POST",
@@ -133,9 +133,9 @@ func TestClient_QueryLists_awsAwsquerySerialize(t *testing.T) {
 		// Changes the name of flattened lists using xmlName trait on the structure member
 		"QueryFlattenedListArgWithXmlName": {
 			Params: &QueryListsInput{
-				FlattenedListArgWithXmlName: []*string{
-					ptr.String("A"),
-					ptr.String("B"),
+				FlattenedListArgWithXmlName: []string{
+					"A",
+					"B",
 				},
 			},
 			ExpectMethod:  "POST",

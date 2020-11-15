@@ -39,7 +39,7 @@ type DescribeAuditTaskInput struct {
 type DescribeAuditTaskOutput struct {
 
 	// Detailed information about each check performed during this audit.
-	AuditDetails map[string]*types.AuditCheckDetails
+	AuditDetails map[string]types.AuditCheckDetails
 
 	// The name of the scheduled audit (only if the audit was a scheduled audit).
 	ScheduledAuditName *string

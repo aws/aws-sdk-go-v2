@@ -66,7 +66,7 @@ type ListReportsForReportGroupOutput struct {
 	NextToken *string
 
 	// The list of report ARNs.
-	Reports []*string
+	Reports []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

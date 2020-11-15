@@ -101,11 +101,11 @@ type ListPartsInput struct {
 	ExpectedBucketOwner *string
 
 	// Sets the maximum number of parts to return.
-	MaxParts *int32
+	MaxParts int32
 
 	// Specifies the part after which listing should begin. Only parts with higher part
 	// numbers will be listed.
-	PartNumberMarker *int32
+	PartNumberMarker int32
 
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information
@@ -146,18 +146,18 @@ type ListPartsOutput struct {
 	// Indicates whether the returned list of parts is truncated. A true value
 	// indicates that the list was truncated. A list can be truncated if the number of
 	// parts exceeds the limit returned in the MaxParts element.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// Object key for which the multipart upload was initiated.
 	Key *string
 
 	// Maximum number of parts that were allowed in the response.
-	MaxParts *int32
+	MaxParts int32
 
 	// When a list is truncated, this element specifies the last part in the list, as
 	// well as the value to use for the part-number-marker request parameter in a
 	// subsequent request.
-	NextPartNumberMarker *int32
+	NextPartNumberMarker int32
 
 	// Container element that identifies the object owner, after the object is created.
 	// If multipart upload is initiated by an IAM user, this element provides the
@@ -167,11 +167,11 @@ type ListPartsOutput struct {
 	// When a list is truncated, this element specifies the last part in the list, as
 	// well as the value to use for the part-number-marker request parameter in a
 	// subsequent request.
-	PartNumberMarker *int32
+	PartNumberMarker int32
 
 	// Container for elements related to a particular part. A response can contain zero
 	// or more Part elements.
-	Parts []*types.Part
+	Parts []types.Part
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.

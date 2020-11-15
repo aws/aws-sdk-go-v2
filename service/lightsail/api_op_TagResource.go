@@ -45,7 +45,7 @@ type TagResourceInput struct {
 	// The tag key and optional value.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The Amazon Resource Name (ARN) of the resource to which you want to add a tag.
 	ResourceArn *string
@@ -56,7 +56,7 @@ type TagResourceOutput struct {
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.
-	Operations []*types.Operation
+	Operations []types.Operation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

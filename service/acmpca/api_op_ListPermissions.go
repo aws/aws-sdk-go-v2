@@ -82,7 +82,7 @@ type ListPermissionsOutput struct {
 
 	// Summary information about each permission assigned by the specified private CA,
 	// including the action enabled, the policy provided, and the time of creation.
-	Permissions []*types.Permission
+	Permissions []types.Permission
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

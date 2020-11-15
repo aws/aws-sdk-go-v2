@@ -84,7 +84,7 @@ type ListCodeRepositoriesOutput struct {
 	// that contains the credentials used to access the repository.
 	//
 	// This member is required.
-	CodeRepositorySummaryList []*types.CodeRepositorySummary
+	CodeRepositorySummaryList []types.CodeRepositorySummary
 
 	// If the result of a ListCodeRepositoriesOutput request was truncated, the
 	// response includes a NextToken. To get the next set of Git repositories, use the

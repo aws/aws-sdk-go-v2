@@ -72,7 +72,7 @@ type ListTargetsForPolicyOutput struct {
 
 	// A list of structures, each of which contains details about one of the entities
 	// to which the specified policy is attached.
-	Targets []*types.PolicyTargetSummary
+	Targets []types.PolicyTargetSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

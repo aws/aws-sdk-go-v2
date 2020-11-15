@@ -116,7 +116,7 @@ type PutScalingPolicyInput struct {
 	// A set of adjustments that enable you to scale based on the size of the alarm
 	// breach. Required if the policy type is StepScaling. (Not used with any other
 	// policy type.)
-	StepAdjustments []*types.StepAdjustment
+	StepAdjustments []types.StepAdjustment
 
 	// A target tracking scaling policy. Includes support for predefined or customized
 	// metrics. The following predefined metrics are available:
@@ -145,7 +145,7 @@ type PutScalingPolicyInput struct {
 type PutScalingPolicyOutput struct {
 
 	// The CloudWatch alarms created for the target tracking scaling policy.
-	Alarms []*types.Alarm
+	Alarms []types.Alarm
 
 	// The Amazon Resource Name (ARN) of the policy.
 	PolicyARN *string

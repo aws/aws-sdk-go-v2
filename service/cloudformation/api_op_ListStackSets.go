@@ -56,7 +56,7 @@ type ListStackSetsOutput struct {
 
 	// A list of StackSetSummary structures that contain information about the user's
 	// stack sets.
-	Summaries []*types.StackSetSummary
+	Summaries []types.StackSetSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

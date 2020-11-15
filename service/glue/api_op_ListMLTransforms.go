@@ -46,7 +46,7 @@ type ListMLTransformsInput struct {
 	Sort *types.TransformSortCriteria
 
 	// Specifies to return only these tagged resources.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type ListMLTransformsOutput struct {
@@ -55,7 +55,7 @@ type ListMLTransformsOutput struct {
 	// machine learning transforms with the specified tags.
 	//
 	// This member is required.
-	TransformIds []*string
+	TransformIds []string
 
 	// A continuation token, if the returned list does not contain the last metric
 	// available.

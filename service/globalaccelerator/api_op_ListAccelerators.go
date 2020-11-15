@@ -42,7 +42,7 @@ type ListAcceleratorsInput struct {
 type ListAcceleratorsOutput struct {
 
 	// The list of accelerators for a customer account.
-	Accelerators []*types.Accelerator
+	Accelerators []types.Accelerator
 
 	// The token for the next set of results. You receive this token from a previous
 	// call.

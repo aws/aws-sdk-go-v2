@@ -35,14 +35,14 @@ type BatchGetDeploymentsInput struct {
 	// IDs you can specify is 25.
 	//
 	// This member is required.
-	DeploymentIds []*string
+	DeploymentIds []string
 }
 
 // Represents the output of a BatchGetDeployments operation.
 type BatchGetDeploymentsOutput struct {
 
 	// Information about the deployments.
-	DeploymentsInfo []*types.DeploymentInfo
+	DeploymentsInfo []types.DeploymentInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

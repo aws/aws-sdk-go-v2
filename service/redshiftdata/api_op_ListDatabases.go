@@ -55,7 +55,7 @@ type ListDatabasesInput struct {
 	// The maximum number of databases to return in the response. If more databases
 	// exist than fit in one response, then NextToken is returned to page through the
 	// results.
-	MaxResults *int32
+	MaxResults int32
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
@@ -72,7 +72,7 @@ type ListDatabasesInput struct {
 type ListDatabasesOutput struct {
 
 	// The names of databases.
-	Databases []*string
+	Databases []string
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve

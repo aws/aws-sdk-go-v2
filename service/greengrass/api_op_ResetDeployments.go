@@ -38,7 +38,7 @@ type ResetDeploymentsInput struct {
 	AmznClientToken *string
 
 	// If true, performs a best-effort only core reset.
-	Force *bool
+	Force bool
 }
 
 type ResetDeploymentsOutput struct {

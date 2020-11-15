@@ -146,7 +146,7 @@ type CreateBucketInput struct {
 	GrantWriteACP *string
 
 	// Specifies whether you want S3 Object Lock to be enabled for the new bucket.
-	ObjectLockEnabledForBucket *bool
+	ObjectLockEnabledForBucket bool
 }
 
 type CreateBucketOutput struct {

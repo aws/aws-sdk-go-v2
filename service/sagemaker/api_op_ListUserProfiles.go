@@ -56,7 +56,7 @@ type ListUserProfilesOutput struct {
 	NextToken *string
 
 	// The list of user profiles.
-	UserProfiles []*types.UserProfileDetails
+	UserProfiles []types.UserProfileDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -40,7 +40,7 @@ type GetLifecyclePolicyPreviewInput struct {
 	Filter *types.LifecyclePolicyPreviewFilter
 
 	// The list of imageIDs to be included.
-	ImageIds []*types.ImageIdentifier
+	ImageIds []types.ImageIdentifier
 
 	// The maximum number of repository results returned by
 	// GetLifecyclePolicyPreviewRequest in  paginated output. When this parameter is
@@ -79,7 +79,7 @@ type GetLifecyclePolicyPreviewOutput struct {
 	NextToken *string
 
 	// The results of the lifecycle policy preview request.
-	PreviewResults []*types.LifecyclePolicyPreviewResult
+	PreviewResults []types.LifecyclePolicyPreviewResult
 
 	// The registry ID associated with the request.
 	RegistryId *string

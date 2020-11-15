@@ -63,7 +63,7 @@ type UpdateAssetModelInput struct {
 	// asset model. For more information, see Quotas
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html) in the
 	// AWS IoT SiteWise User Guide.
-	AssetModelHierarchies []*types.AssetModelHierarchy
+	AssetModelHierarchies []types.AssetModelHierarchy
 
 	// The updated property definitions of the asset model. For more information, see
 	// Asset properties
@@ -72,7 +72,7 @@ type UpdateAssetModelInput struct {
 	// asset model. For more information, see Quotas
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html) in the
 	// AWS IoT SiteWise User Guide.
-	AssetModelProperties []*types.AssetModelProperty
+	AssetModelProperties []types.AssetModelProperty
 
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent

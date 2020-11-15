@@ -51,7 +51,7 @@ type BatchPutDocumentInput struct {
 	// (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
 	//
 	// This member is required.
-	Documents []*types.Document
+	Documents []types.Document
 
 	// The identifier of the index to add the documents to. You need to create the
 	// index first using the CreateIndex operation.
@@ -73,7 +73,7 @@ type BatchPutDocumentOutput struct {
 	// document to an index the error is reported in your AWS CloudWatch log. For more
 	// information, see Monitoring Amazon Kendra with Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/kendra/latest/dg/cloudwatch-logs.html)
-	FailedDocuments []*types.BatchPutDocumentResponseFailedDocument
+	FailedDocuments []types.BatchPutDocumentResponseFailedDocument
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

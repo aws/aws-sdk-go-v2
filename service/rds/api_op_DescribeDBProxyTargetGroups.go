@@ -36,7 +36,7 @@ type DescribeDBProxyTargetGroupsInput struct {
 	DBProxyName *string
 
 	// This parameter is not currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
@@ -62,7 +62,7 @@ type DescribeDBProxyTargetGroupsOutput struct {
 
 	// An arbitrary number of DBProxyTargetGroup objects, containing details of the
 	// corresponding target groups.
-	TargetGroups []*types.DBProxyTargetGroup
+	TargetGroups []types.DBProxyTargetGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

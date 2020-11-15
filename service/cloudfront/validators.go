@@ -1582,13 +1582,13 @@ func validateCacheBehavior(v *types.CacheBehavior) error {
 	}
 }
 
-func validateCacheBehaviorList(v []*types.CacheBehavior) error {
+func validateCacheBehaviorList(v []types.CacheBehavior) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CacheBehaviorList"}
 	for i := range v {
-		if err := validateCacheBehavior(v[i]); err != nil {
+		if err := validateCacheBehavior(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1776,13 +1776,13 @@ func validateContentTypeProfileConfig(v *types.ContentTypeProfileConfig) error {
 	}
 }
 
-func validateContentTypeProfileList(v []*types.ContentTypeProfile) error {
+func validateContentTypeProfileList(v []types.ContentTypeProfile) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ContentTypeProfileList"}
 	for i := range v {
-		if err := validateContentTypeProfile(v[i]); err != nil {
+		if err := validateContentTypeProfile(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1863,13 +1863,13 @@ func validateCustomErrorResponse(v *types.CustomErrorResponse) error {
 	}
 }
 
-func validateCustomErrorResponseList(v []*types.CustomErrorResponse) error {
+func validateCustomErrorResponseList(v []types.CustomErrorResponse) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CustomErrorResponseList"}
 	for i := range v {
-		if err := validateCustomErrorResponse(v[i]); err != nil {
+		if err := validateCustomErrorResponse(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2125,13 +2125,13 @@ func validateEncryptionEntity(v *types.EncryptionEntity) error {
 	}
 }
 
-func validateEncryptionEntityList(v []*types.EncryptionEntity) error {
+func validateEncryptionEntityList(v []types.EncryptionEntity) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EncryptionEntityList"}
 	for i := range v {
-		if err := validateEncryptionEntity(v[i]); err != nil {
+		if err := validateEncryptionEntity(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2162,13 +2162,13 @@ func validateEndPoint(v *types.EndPoint) error {
 	}
 }
 
-func validateEndPointList(v []*types.EndPoint) error {
+func validateEndPointList(v []types.EndPoint) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EndPointList"}
 	for i := range v {
-		if err := validateEndPoint(v[i]); err != nil {
+		if err := validateEndPoint(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2385,13 +2385,13 @@ func validateLambdaFunctionAssociation(v *types.LambdaFunctionAssociation) error
 	}
 }
 
-func validateLambdaFunctionAssociationList(v []*types.LambdaFunctionAssociation) error {
+func validateLambdaFunctionAssociationList(v []types.LambdaFunctionAssociation) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LambdaFunctionAssociationList"}
 	for i := range v {
-		if err := validateLambdaFunctionAssociation(v[i]); err != nil {
+		if err := validateLambdaFunctionAssociation(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2519,13 +2519,13 @@ func validateOriginCustomHeader(v *types.OriginCustomHeader) error {
 	}
 }
 
-func validateOriginCustomHeadersList(v []*types.OriginCustomHeader) error {
+func validateOriginCustomHeadersList(v []types.OriginCustomHeader) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OriginCustomHeadersList"}
 	for i := range v {
-		if err := validateOriginCustomHeader(v[i]); err != nil {
+		if err := validateOriginCustomHeader(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2584,13 +2584,13 @@ func validateOriginGroupFailoverCriteria(v *types.OriginGroupFailoverCriteria) e
 	}
 }
 
-func validateOriginGroupList(v []*types.OriginGroup) error {
+func validateOriginGroupList(v []types.OriginGroup) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OriginGroupList"}
 	for i := range v {
-		if err := validateOriginGroup(v[i]); err != nil {
+		if err := validateOriginGroup(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2616,13 +2616,13 @@ func validateOriginGroupMember(v *types.OriginGroupMember) error {
 	}
 }
 
-func validateOriginGroupMemberList(v []*types.OriginGroupMember) error {
+func validateOriginGroupMemberList(v []types.OriginGroupMember) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OriginGroupMemberList"}
 	for i := range v {
-		if err := validateOriginGroupMember(v[i]); err != nil {
+		if err := validateOriginGroupMember(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2675,13 +2675,13 @@ func validateOriginGroups(v *types.OriginGroups) error {
 	}
 }
 
-func validateOriginList(v []*types.Origin) error {
+func validateOriginList(v []types.Origin) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OriginList"}
 	for i := range v {
-		if err := validateOrigin(v[i]); err != nil {
+		if err := validateOrigin(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2953,13 +2953,13 @@ func validateQueryArgProfileConfig(v *types.QueryArgProfileConfig) error {
 	}
 }
 
-func validateQueryArgProfileList(v []*types.QueryArgProfile) error {
+func validateQueryArgProfileList(v []types.QueryArgProfile) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "QueryArgProfileList"}
 	for i := range v {
-		if err := validateQueryArgProfile(v[i]); err != nil {
+		if err := validateQueryArgProfile(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3212,13 +3212,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

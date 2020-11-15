@@ -36,7 +36,7 @@ type DescribeClassicLinkInstancesInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
@@ -58,15 +58,15 @@ type DescribeClassicLinkInstancesInput struct {
 	// * vpc-id - The
 	// ID of the VPC to which the instance is linked. vpc-id - The ID of the VPC that
 	// the instance is linked to.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// One or more instance IDs. Must be instances linked to a VPC through ClassicLink.
-	InstanceIds []*string
+	InstanceIds []string
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	// Constraint: If the value is greater than 1000, we return only 1000 items.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next page of results.
 	NextToken *string
@@ -75,7 +75,7 @@ type DescribeClassicLinkInstancesInput struct {
 type DescribeClassicLinkInstancesOutput struct {
 
 	// Information about one or more linked EC2-Classic instances.
-	Instances []*types.ClassicLinkInstance
+	Instances []types.ClassicLinkInstance
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

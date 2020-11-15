@@ -80,7 +80,7 @@ type EnableMetricsCollectionInput struct {
 	//
 	// If you omit this parameter, all
 	// metrics are enabled.
-	Metrics []*string
+	Metrics []string
 }
 
 type EnableMetricsCollectionOutput struct {

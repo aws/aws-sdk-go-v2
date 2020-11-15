@@ -43,7 +43,7 @@ type ListAutoMLJobsInput struct {
 	LastModifiedTimeBefore *time.Time
 
 	// Request a list of jobs up to a specified limit.
-	MaxResults *int32
+	MaxResults int32
 
 	// Request a list of jobs, using a search filter for name.
 	NameContains *string
@@ -67,7 +67,7 @@ type ListAutoMLJobsOutput struct {
 	// Returns a summary list of jobs.
 	//
 	// This member is required.
-	AutoMLJobSummaries []*types.AutoMLJobSummary
+	AutoMLJobSummaries []types.AutoMLJobSummary
 
 	// If the previous response was truncated, you receive this token. Use it in your
 	// next request to receive the next set of results.

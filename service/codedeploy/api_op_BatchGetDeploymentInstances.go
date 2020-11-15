@@ -43,7 +43,7 @@ type BatchGetDeploymentInstancesInput struct {
 	// instance IDs you can specify is 25.
 	//
 	// This member is required.
-	InstanceIds []*string
+	InstanceIds []string
 }
 
 // Represents the output of a BatchGetDeploymentInstances operation.
@@ -53,7 +53,7 @@ type BatchGetDeploymentInstancesOutput struct {
 	ErrorMessage *string
 
 	// Information about the instance.
-	InstancesSummary []*types.InstanceSummary
+	InstancesSummary []types.InstanceSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

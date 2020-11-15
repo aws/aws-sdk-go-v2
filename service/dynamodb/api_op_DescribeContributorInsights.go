@@ -43,7 +43,7 @@ type DescribeContributorInsightsInput struct {
 type DescribeContributorInsightsOutput struct {
 
 	// List of names of the associated Alpine rules.
-	ContributorInsightsRuleList []*string
+	ContributorInsightsRuleList []string
 
 	// Current Status contributor insights.
 	ContributorInsightsStatus types.ContributorInsightsStatus

@@ -33,7 +33,7 @@ func (c *Client) ListCACertificates(ctx context.Context, params *ListCACertifica
 type ListCACertificatesInput struct {
 
 	// Determines the order of the results.
-	AscendingOrder *bool
+	AscendingOrder bool
 
 	// The marker for the next set of results.
 	Marker *string
@@ -46,7 +46,7 @@ type ListCACertificatesInput struct {
 type ListCACertificatesOutput struct {
 
 	// The CA certificates registered in your AWS account.
-	Certificates []*types.CACertificate
+	Certificates []types.CACertificate
 
 	// The current position within the list of CA certificates.
 	NextMarker *string

@@ -53,7 +53,7 @@ type ListTagsForResourceOutput struct {
 	NextToken *string
 
 	// An array of the tags for the specified EFS resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

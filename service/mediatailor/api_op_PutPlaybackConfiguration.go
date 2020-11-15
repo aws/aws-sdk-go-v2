@@ -62,7 +62,7 @@ type PutPlaybackConfigurationInput struct {
 	Name *string
 
 	// The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
-	PersonalizationThresholdSeconds *int32
+	PersonalizationThresholdSeconds int32
 
 	// The URL for a high-quality video asset to transcode and use to fill in time
 	// that's not used by ads. AWS Elemental MediaTailor shows the slate to fill in
@@ -73,7 +73,7 @@ type PutPlaybackConfigurationInput struct {
 	SlateAdUrl *string
 
 	// The tags to assign to the playback configuration.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The name that is used to associate this playback configuration with a custom
 	// transcode profile. This overrides the dynamic transcoding defaults of
@@ -124,7 +124,7 @@ type PutPlaybackConfigurationOutput struct {
 	Name *string
 
 	// The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
-	PersonalizationThresholdSeconds *int32
+	PersonalizationThresholdSeconds int32
 
 	// The Amazon Resource Name (ARN) for the playback configuration.
 	PlaybackConfigurationArn *string
@@ -146,7 +146,7 @@ type PutPlaybackConfigurationOutput struct {
 	SlateAdUrl *string
 
 	// The tags assigned to the playback configuration.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The name that is used to associate this playback configuration with a custom
 	// transcode profile. This overrides the dynamic transcoding defaults of

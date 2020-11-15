@@ -35,7 +35,7 @@ type ListTagsInput struct {
 
 	// Do not use. A validation exception occurs if you add a MaxResults parameter to a
 	// ListTagsRequest call.
-	MaxResults *int32
+	MaxResults int32
 
 	// Do not use. A validation exception occurs if you add a NextToken parameter to a
 	// ListTagsRequest call.
@@ -53,7 +53,7 @@ type ListTagsOutput struct {
 
 	// A set of key-value pairs that contain tag keys and tag values that are attached
 	// to a stack or layer.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

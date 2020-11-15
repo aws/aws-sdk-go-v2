@@ -56,7 +56,7 @@ type CreateForecastInput struct {
 	// (increments of .01 only) and mean. The mean forecast is different from the
 	// median (0.50) when the distribution is not symmetric (for example, Beta and
 	// Negative Binomial). The default value is ["0.1", "0.5", "0.9"].
-	ForecastTypes []*string
+	ForecastTypes []string
 
 	// The optional metadata that you apply to the forecast to help you categorize and
 	// organize them. Each tag consists of a key and an optional value, both of which
@@ -88,7 +88,7 @@ type CreateForecastInput struct {
 	// has aws as its prefix but the key does not, then Forecast considers it to be a
 	// user tag and will count against the limit of 50 tags. Tags with only the key
 	// prefix of aws do not count against your tags per resource limit.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateForecastOutput struct {

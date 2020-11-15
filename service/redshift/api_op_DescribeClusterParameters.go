@@ -77,7 +77,7 @@ type DescribeClusterParametersOutput struct {
 
 	// A list of Parameter instances. Each instance lists the parameters of one cluster
 	// parameter group.
-	Parameters []*types.Parameter
+	Parameters []types.Parameter
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

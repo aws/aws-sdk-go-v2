@@ -76,7 +76,7 @@ type AdminCreateUserInput struct {
 	//
 	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
 	// use it to provide sensitive information.
-	ClientMetadata map[string]*string
+	ClientMetadata map[string]string
 
 	// Specify "EMAIL" if email will be used to send the welcome message. Specify "SMS"
 	// if the phone number will be used. The default value is "SMS". More than one
@@ -91,7 +91,7 @@ type AdminCreateUserInput struct {
 	// user will no longer be able to log in using that alias. If this parameter is set
 	// to False, the API throws an AliasExistsException error if the alias already
 	// exists. The default value is False.
-	ForceAliasCreation *bool
+	ForceAliasCreation bool
 
 	// Set to "RESEND" to resend the invitation message to a user that already exists
 	// and reset the expiration limit on the user's account. Set to "SUPPRESS" to
@@ -134,7 +134,7 @@ type AdminCreateUserInput struct {
 	// code and username will be sent. Required if the phone_number_verified attribute
 	// is set to True, or if "SMS" is specified in the DesiredDeliveryMediums
 	// parameter.
-	UserAttributes []*types.AttributeType
+	UserAttributes []types.AttributeType
 
 	// The user's validation data. This is an array of name-value pairs that contain
 	// user attributes and attribute values that you can use for custom validation,
@@ -144,7 +144,7 @@ type AdminCreateUserInput struct {
 	// trigger for the user pool as described in the Amazon Cognito Developer Guide.
 	// The Lambda trigger receives the validation data and uses it in the validation
 	// process. The user's validation data is not persisted.
-	ValidationData []*types.AttributeType
+	ValidationData []types.AttributeType
 }
 
 // Represents the response from the server to the request to create the user.

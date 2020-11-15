@@ -54,7 +54,7 @@ type ModifyDBInstanceInput struct {
 	// as soon as possible. Constraints: Major version upgrades must be allowed when
 	// specifying a value for the EngineVersion parameter that is a different major
 	// version than the DB instance's current version.
-	AllowMajorVersionUpgrade *bool
+	AllowMajorVersionUpgrade bool
 
 	// A value that indicates whether the modifications in this request and any pending
 	// modifications are asynchronously applied as soon as possible, regardless of the
@@ -67,7 +67,7 @@ type ModifyDBInstanceInput struct {
 	// in the Amazon RDS User Guide. to see the impact of enabling or disabling
 	// ApplyImmediately for each modified parameter and to determine when the changes
 	// are applied.
-	ApplyImmediately *bool
+	ApplyImmediately bool
 
 	// A value that indicates whether minor version upgrades are applied automatically
 	// to the DB instance during the maintenance window. Changing this parameter
@@ -175,7 +175,7 @@ type ModifyDBInstanceInput struct {
 	//
 	// * If supplied, must match existing
 	// DBSecurityGroups.
-	DBSecurityGroups []*string
+	DBSecurityGroups []string
 
 	// The new DB subnet group for the DB instance. You can use this parameter to move
 	// your DB instance to a different VPC. If your DB instance isn't in a VPC, you can
@@ -376,7 +376,7 @@ type ModifyDBInstanceInput struct {
 
 	// The number of CPU cores and the number of threads per core for the DB instance
 	// class of the DB instance.
-	ProcessorFeatures []*types.ProcessorFeature
+	ProcessorFeatures []types.ProcessorFeature
 
 	// A value that specifies the order in which an Aurora Replica is promoted to the
 	// primary instance after a failure of the existing primary instance. For more
@@ -447,7 +447,7 @@ type ModifyDBInstanceInput struct {
 	//
 	// * If supplied, must match
 	// existing VpcSecurityGroupIds.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 }
 
 type ModifyDBInstanceOutput struct {

@@ -46,13 +46,13 @@ type ImportImageInput struct {
 	Description *string
 
 	// Information about the disk containers.
-	DiskContainers []*types.ImageDiskContainer
+	DiskContainers []types.ImageDiskContainer
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// Specifies whether the destination AMI of the imported image should be encrypted.
 	// The default CMK for EBS is used unless you specify a non-default AWS Key
@@ -60,7 +60,7 @@ type ImportImageInput struct {
 	// Amazon EBS Encryption
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the
 	// Amazon Elastic Compute Cloud User Guide.
-	Encrypted *bool
+	Encrypted bool
 
 	// The target hypervisor platform. Valid values: xen
 	Hypervisor *string
@@ -99,7 +99,7 @@ type ImportImageInput struct {
 	KmsKeyId *string
 
 	// The ARNs of the license configurations.
-	LicenseSpecifications []*types.ImportImageLicenseConfigurationRequest
+	LicenseSpecifications []types.ImportImageLicenseConfigurationRequest
 
 	// The license type to be used for the Amazon Machine Image (AMI) after importing.
 	// By default, we detect the source-system operating system (OS) and apply the
@@ -119,7 +119,7 @@ type ImportImageInput struct {
 	RoleName *string
 
 	// The tags to apply to the image being imported.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 }
 
 type ImportImageOutput struct {
@@ -131,7 +131,7 @@ type ImportImageOutput struct {
 	Description *string
 
 	// Indicates whether the AMI is encrypted.
-	Encrypted *bool
+	Encrypted bool
 
 	// The target hypervisor of the import task.
 	Hypervisor *string
@@ -147,7 +147,7 @@ type ImportImageOutput struct {
 	KmsKeyId *string
 
 	// The ARNs of the license configurations.
-	LicenseSpecifications []*types.ImportImageLicenseConfigurationResponse
+	LicenseSpecifications []types.ImportImageLicenseConfigurationResponse
 
 	// The license type of the virtual machine.
 	LicenseType *string
@@ -159,7 +159,7 @@ type ImportImageOutput struct {
 	Progress *string
 
 	// Information about the snapshots.
-	SnapshotDetails []*types.SnapshotDetail
+	SnapshotDetails []types.SnapshotDetail
 
 	// A brief status of the task.
 	Status *string
@@ -168,7 +168,7 @@ type ImportImageOutput struct {
 	StatusMessage *string
 
 	// Any tags assigned to the image being imported.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

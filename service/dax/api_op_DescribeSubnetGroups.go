@@ -42,7 +42,7 @@ type DescribeSubnetGroupsInput struct {
 	NextToken *string
 
 	// The name of the subnet group.
-	SubnetGroupNames []*string
+	SubnetGroupNames []string
 }
 
 type DescribeSubnetGroupsOutput struct {
@@ -52,7 +52,7 @@ type DescribeSubnetGroupsOutput struct {
 
 	// An array of subnet groups. Each element in the array represents a single subnet
 	// group.
-	SubnetGroups []*types.SubnetGroup
+	SubnetGroups []types.SubnetGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

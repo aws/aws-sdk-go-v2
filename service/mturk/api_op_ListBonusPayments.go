@@ -51,7 +51,7 @@ type ListBonusPaymentsOutput struct {
 
 	// A successful request to the ListBonusPayments operation returns a list of
 	// BonusPayment objects.
-	BonusPayments []*types.BonusPayment
+	BonusPayments []types.BonusPayment
 
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Mechanical Turk returns a pagination token in the response.

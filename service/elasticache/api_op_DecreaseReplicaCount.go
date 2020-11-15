@@ -36,7 +36,7 @@ type DecreaseReplicaCountInput struct {
 	// ApplyImmediately=False is not currently supported.
 	//
 	// This member is required.
-	ApplyImmediately *bool
+	ApplyImmediately bool
 
 	// The id of the replication group from which you want to remove replica nodes.
 	//
@@ -65,11 +65,11 @@ type DecreaseReplicaCountInput struct {
 	// A list of ConfigureShard objects that can be used to configure each shard in a
 	// Redis (cluster mode enabled) replication group. The ConfigureShard has three
 	// members: NewReplicaCount, NodeGroupId, and PreferredAvailabilityZones.
-	ReplicaConfiguration []*types.ConfigureShard
+	ReplicaConfiguration []types.ConfigureShard
 
 	// A list of the node ids to remove from the replication group or node group
 	// (shard).
-	ReplicasToRemove []*string
+	ReplicasToRemove []string
 }
 
 type DecreaseReplicaCountOutput struct {

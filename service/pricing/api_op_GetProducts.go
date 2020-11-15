@@ -31,13 +31,13 @@ type GetProductsInput struct {
 
 	// The list of filters that limit the returned products. only products that match
 	// all filters are returned.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The format version that you want the response to be in. Valid values are: aws_v1
 	FormatVersion *string
 
 	// The maximum number of results to return in the response.
-	MaxResults *int32
+	MaxResults int32
 
 	// The pagination token that indicates the next set of results that you want to
 	// retrieve.
@@ -57,7 +57,7 @@ type GetProductsOutput struct {
 
 	// The list of products that match your filters. The list contains both the product
 	// metadata and the price information.
-	PriceList []*string
+	PriceList []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -30,10 +30,10 @@ func (c *Client) ListImagePipelines(ctx context.Context, params *ListImagePipeli
 type ListImagePipelinesInput struct {
 
 	// The filters.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum items to return in a request.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
@@ -43,7 +43,7 @@ type ListImagePipelinesInput struct {
 type ListImagePipelinesOutput struct {
 
 	// The list of image pipelines.
-	ImagePipelineList []*types.ImagePipeline
+	ImagePipelineList []types.ImagePipeline
 
 	// The next token used for paginated responses. When this is not empty, there are
 	// additional elements that the service has not included in this request. Use this

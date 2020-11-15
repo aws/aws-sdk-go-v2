@@ -89,7 +89,7 @@ type UpdateGeoMatchSetInput struct {
 	// GeoMatchSetUpdate objects in your request.
 	//
 	// This member is required.
-	Updates []*types.GeoMatchSetUpdate
+	Updates []types.GeoMatchSetUpdate
 }
 
 type UpdateGeoMatchSetOutput struct {

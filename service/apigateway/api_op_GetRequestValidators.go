@@ -52,7 +52,7 @@ type GetRequestValidatorsInput struct {
 type GetRequestValidatorsOutput struct {
 
 	// The current page of elements from this collection.
-	Items []*types.RequestValidator
+	Items []types.RequestValidator
 
 	// The current pagination position in the paged result set.
 	Position *string

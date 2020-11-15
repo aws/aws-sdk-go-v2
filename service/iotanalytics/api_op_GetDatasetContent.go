@@ -45,7 +45,7 @@ type GetDatasetContentInput struct {
 type GetDatasetContentOutput struct {
 
 	// A list of "DatasetEntry" objects.
-	Entries []*types.DatasetEntry
+	Entries []types.DatasetEntry
 
 	// The status of the data set content.
 	Status *types.DatasetContentStatus

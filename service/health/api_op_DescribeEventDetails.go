@@ -43,7 +43,7 @@ type DescribeEventDetailsInput struct {
 	// "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"
 	//
 	// This member is required.
-	EventArns []*string
+	EventArns []string
 
 	// The locale (language) to return information in. English (en) is the default and
 	// the only supported value at this time.
@@ -53,10 +53,10 @@ type DescribeEventDetailsInput struct {
 type DescribeEventDetailsOutput struct {
 
 	// Error messages for any events that could not be retrieved.
-	FailedSet []*types.EventDetailsErrorItem
+	FailedSet []types.EventDetailsErrorItem
 
 	// Information about the events that could be retrieved.
-	SuccessfulSet []*types.EventDetails
+	SuccessfulSet []types.EventDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -56,7 +56,7 @@ type PutEmailIdentityFeedbackAttributesInput struct {
 	// up another mechanism for receiving bounce or complaint notifications, Amazon
 	// Pinpoint sends an email notification when these events occur (even if this
 	// setting is disabled).
-	EmailForwardingEnabled *bool
+	EmailForwardingEnabled bool
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request

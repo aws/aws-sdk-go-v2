@@ -56,13 +56,13 @@ type SendMessageInput struct {
 	// don't specify a value, the default value for the queue applies. When you set
 	// FifoQueue, you can't set DelaySeconds per message. You can set this parameter
 	// only on a queue level.
-	DelaySeconds *int32
+	DelaySeconds int32
 
 	// Each message attribute consists of a Name, Type, and Value. For more
 	// information, see Amazon SQS Message Attributes
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes)
 	// in the Amazon Simple Queue Service Developer Guide.
-	MessageAttributes map[string]*types.MessageAttributeValue
+	MessageAttributes map[string]types.MessageAttributeValue
 
 	// This parameter applies only to FIFO (first-in-first-out) queues. The token used
 	// for deduplication of sent messages. If a message with a particular
@@ -151,7 +151,7 @@ type SendMessageInput struct {
 	//
 	// * The size of a message
 	// system attribute doesn't count towards the total size of a message.
-	MessageSystemAttributes map[string]*types.MessageSystemAttributeValue
+	MessageSystemAttributes map[string]types.MessageSystemAttributeValue
 }
 
 // The MD5OfMessageBody and MessageId elements.

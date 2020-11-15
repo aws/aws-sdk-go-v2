@@ -50,7 +50,7 @@ type AcceptDirectConnectGatewayAssociationProposalInput struct {
 	// information about how to set the prefixes, see Allowed Prefixes
 	// (https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes)
 	// in the AWS Direct Connect User Guide.
-	OverrideAllowedPrefixesToDirectConnectGateway []*types.RouteFilterPrefix
+	OverrideAllowedPrefixesToDirectConnectGateway []types.RouteFilterPrefix
 }
 
 type AcceptDirectConnectGatewayAssociationProposalOutput struct {

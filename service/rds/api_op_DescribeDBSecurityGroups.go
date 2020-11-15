@@ -36,7 +36,7 @@ type DescribeDBSecurityGroupsInput struct {
 	DBSecurityGroupName *string
 
 	// This parameter isn't currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeDBSecurityGroups
 	// request. If this parameter is specified, the response includes only records
@@ -55,7 +55,7 @@ type DescribeDBSecurityGroupsInput struct {
 type DescribeDBSecurityGroupsOutput struct {
 
 	// A list of DBSecurityGroup instances.
-	DBSecurityGroups []*types.DBSecurityGroup
+	DBSecurityGroups []types.DBSecurityGroup
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the

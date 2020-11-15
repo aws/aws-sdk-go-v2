@@ -54,7 +54,7 @@ type ListTagsOutput struct {
 	// A list of tags.
 	//
 	// This member is required.
-	TagList []*types.Tag
+	TagList []types.Tag
 
 	// An opaque string that indicates that the response contains only a subset of
 	// tags. Use this value in a subsequent ListTags request to get more tags.

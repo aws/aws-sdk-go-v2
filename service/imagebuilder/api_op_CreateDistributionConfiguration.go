@@ -39,7 +39,7 @@ type CreateDistributionConfigurationInput struct {
 	// The distributions of the distribution configuration.
 	//
 	// This member is required.
-	Distributions []*types.Distribution
+	Distributions []types.Distribution
 
 	// The name of the distribution configuration.
 	//
@@ -50,7 +50,7 @@ type CreateDistributionConfigurationInput struct {
 	Description *string
 
 	// The tags of the distribution configuration.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateDistributionConfigurationOutput struct {

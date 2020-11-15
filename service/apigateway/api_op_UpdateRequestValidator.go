@@ -42,7 +42,7 @@ type UpdateRequestValidatorInput struct {
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
-	PatchOperations []*types.PatchOperation
+	PatchOperations []types.PatchOperation
 }
 
 // A set of validation rules for incoming Method requests. In OpenAPI, a
@@ -63,11 +63,11 @@ type UpdateRequestValidatorOutput struct {
 
 	// A Boolean flag to indicate whether to validate a request body according to the
 	// configured Model schema.
-	ValidateRequestBody *bool
+	ValidateRequestBody bool
 
 	// A Boolean flag to indicate whether to validate request parameters (true) or not
 	// (false).
-	ValidateRequestParameters *bool
+	ValidateRequestParameters bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

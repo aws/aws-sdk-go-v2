@@ -51,7 +51,7 @@ type DescribeLocationObjectStorageOutput struct {
 
 	// The Amazon Resource Name (ARN) of the agents associated with the self-managed
 	// object storage server location.
-	AgentArns []*string
+	AgentArns []string
 
 	// The time that the self-managed object storage server agent was created.
 	CreationTime *time.Time

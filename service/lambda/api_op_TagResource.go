@@ -37,7 +37,7 @@ type TagResourceInput struct {
 	// A list of tags to apply to the function.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourceOutput struct {

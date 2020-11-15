@@ -62,7 +62,7 @@ type UpdateDevicePoolInput struct {
 
 	// Represents the rules to modify for the device pool. Updating rules is optional.
 	// If you update rules for your request, the update replaces the existing rules.
-	Rules []*types.Rule
+	Rules []types.Rule
 }
 
 // Represents the result of an update device pool request.

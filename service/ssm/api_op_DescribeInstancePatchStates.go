@@ -32,10 +32,10 @@ type DescribeInstancePatchStatesInput struct {
 	// The ID of the instance whose patch state information should be retrieved.
 	//
 	// This member is required.
-	InstanceIds []*string
+	InstanceIds []string
 
 	// The maximum number of instances to return (per page).
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
@@ -45,7 +45,7 @@ type DescribeInstancePatchStatesInput struct {
 type DescribeInstancePatchStatesOutput struct {
 
 	// The high-level patch state for the requested instances.
-	InstancePatchStates []*types.InstancePatchState
+	InstancePatchStates []types.InstancePatchState
 
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.

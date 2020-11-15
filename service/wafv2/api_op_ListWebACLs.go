@@ -69,7 +69,7 @@ type ListWebACLsOutput struct {
 	NextMarker *string
 
 	//
-	WebACLs []*types.WebACLSummary
+	WebACLs []types.WebACLSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

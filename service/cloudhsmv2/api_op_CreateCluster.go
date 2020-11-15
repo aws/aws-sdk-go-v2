@@ -45,7 +45,7 @@ type CreateClusterInput struct {
 	// * You can specify only one subnet per Availability Zone.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The identifier (ID) of the cluster backup to restore. Use this value to restore
 	// the cluster from a backup instead of creating a new cluster. To find the backup
@@ -53,7 +53,7 @@ type CreateClusterInput struct {
 	SourceBackupId *string
 
 	// Tags to apply to the CloudHSM cluster during creation.
-	TagList []*types.Tag
+	TagList []types.Tag
 }
 
 type CreateClusterOutput struct {

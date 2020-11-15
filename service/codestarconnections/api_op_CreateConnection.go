@@ -47,7 +47,7 @@ type CreateConnectionInput struct {
 	ProviderType types.ProviderType
 
 	// The key-value pair to use when tagging the resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateConnectionOutput struct {
@@ -60,7 +60,7 @@ type CreateConnectionOutput struct {
 	ConnectionArn *string
 
 	// Specifies the tags applied to the resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

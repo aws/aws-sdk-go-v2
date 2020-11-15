@@ -40,13 +40,13 @@ type ListJobsInput struct {
 	NextToken *string
 
 	// Specifies to return only these tagged resources.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type ListJobsOutput struct {
 
 	// The names of all jobs in the account, or the jobs with the specified tags.
-	JobNames []*string
+	JobNames []string
 
 	// A continuation token, if the returned list does not contain the last metric
 	// available.

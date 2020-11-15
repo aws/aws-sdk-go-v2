@@ -33,7 +33,7 @@ type DescribeFastSnapshotRestoresInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The filters. The possible values are:
 	//
@@ -48,7 +48,7 @@ type DescribeFastSnapshotRestoresInput struct {
 	// *
 	// state: The state of fast snapshot restores for the snapshot (enabling |
 	// optimizing | enabled | disabling | disabled).
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
@@ -61,7 +61,7 @@ type DescribeFastSnapshotRestoresInput struct {
 type DescribeFastSnapshotRestoresOutput struct {
 
 	// Information about the state of fast snapshot restores.
-	FastSnapshotRestores []*types.DescribeFastSnapshotRestoreSuccessItem
+	FastSnapshotRestores []types.DescribeFastSnapshotRestoreSuccessItem
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

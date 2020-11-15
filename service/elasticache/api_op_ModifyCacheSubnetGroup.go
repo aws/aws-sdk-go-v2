@@ -41,7 +41,7 @@ type ModifyCacheSubnetGroupInput struct {
 	CacheSubnetGroupDescription *string
 
 	// The EC2 subnet IDs for the cache subnet group.
-	SubnetIds []*string
+	SubnetIds []string
 }
 
 type ModifyCacheSubnetGroupOutput struct {

@@ -618,13 +618,13 @@ func validateDnsRecord(v *types.DnsRecord) error {
 	}
 }
 
-func validateDnsRecordList(v []*types.DnsRecord) error {
+func validateDnsRecordList(v []types.DnsRecord) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DnsRecordList"}
 	for i := range v {
-		if err := validateDnsRecord(v[i]); err != nil {
+		if err := validateDnsRecord(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -668,13 +668,13 @@ func validateNamespaceFilter(v *types.NamespaceFilter) error {
 	}
 }
 
-func validateNamespaceFilters(v []*types.NamespaceFilter) error {
+func validateNamespaceFilters(v []types.NamespaceFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NamespaceFilters"}
 	for i := range v {
-		if err := validateNamespaceFilter(v[i]); err != nil {
+		if err := validateNamespaceFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -703,13 +703,13 @@ func validateOperationFilter(v *types.OperationFilter) error {
 	}
 }
 
-func validateOperationFilters(v []*types.OperationFilter) error {
+func validateOperationFilters(v []types.OperationFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OperationFilters"}
 	for i := range v {
-		if err := validateOperationFilter(v[i]); err != nil {
+		if err := validateOperationFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -760,13 +760,13 @@ func validateServiceFilter(v *types.ServiceFilter) error {
 	}
 }
 
-func validateServiceFilters(v []*types.ServiceFilter) error {
+func validateServiceFilters(v []types.ServiceFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ServiceFilters"}
 	for i := range v {
-		if err := validateServiceFilter(v[i]); err != nil {
+		if err := validateServiceFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -795,13 +795,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

@@ -75,7 +75,7 @@ type ListHyperParameterTuningJobsOutput struct {
 	// that the ListHyperParameterTuningJobs request returned.
 	//
 	// This member is required.
-	HyperParameterTuningJobSummaries []*types.HyperParameterTuningJobSummary
+	HyperParameterTuningJobSummaries []types.HyperParameterTuningJobSummary
 
 	// If the result of this ListHyperParameterTuningJobs request was truncated, the
 	// response includes a NextToken. To retrieve the next set of tuning jobs, use the

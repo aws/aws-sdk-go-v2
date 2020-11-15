@@ -47,7 +47,7 @@ type CreateClusterInput struct {
 	// The number of broker nodes in the cluster.
 	//
 	// This member is required.
-	NumberOfBrokerNodes *int32
+	NumberOfBrokerNodes int32
 
 	// Includes all client authentication related information.
 	ClientAuthentication *types.ClientAuthentication
@@ -69,7 +69,7 @@ type CreateClusterInput struct {
 	OpenMonitoring *types.OpenMonitoringInfo
 
 	// Create tags when creating the cluster.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateClusterOutput struct {

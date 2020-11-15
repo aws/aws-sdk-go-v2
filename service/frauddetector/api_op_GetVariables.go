@@ -50,7 +50,7 @@ type GetVariablesOutput struct {
 	NextToken *string
 
 	// The names of the variables returned.
-	Variables []*types.Variable
+	Variables []types.Variable
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

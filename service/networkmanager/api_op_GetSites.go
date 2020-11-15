@@ -41,7 +41,7 @@ type GetSitesInput struct {
 	NextToken *string
 
 	// One or more site IDs. The maximum is 10.
-	SiteIds []*string
+	SiteIds []string
 }
 
 type GetSitesOutput struct {
@@ -50,7 +50,7 @@ type GetSitesOutput struct {
 	NextToken *string
 
 	// The sites.
-	Sites []*types.Site
+	Sites []types.Site
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

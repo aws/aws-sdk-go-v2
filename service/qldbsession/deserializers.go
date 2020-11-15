@@ -13,6 +13,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -375,7 +376,7 @@ func awsAwsjson10_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				if !ok {
 					return fmt.Errorf("expected ErrorCode to be of type string, got %T instead", value)
 				}
-				sv.Code = &jtv
+				sv.Code = ptr.String(jtv)
 			}
 
 		case "Message":
@@ -384,7 +385,7 @@ func awsAwsjson10_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -437,7 +438,7 @@ func awsAwsjson10_deserializeDocumentCommitTransactionResult(v **types.CommitTra
 				if !ok {
 					return fmt.Errorf("expected TransactionId to be of type string, got %T instead", value)
 				}
-				sv.TransactionId = &jtv
+				sv.TransactionId = ptr.String(jtv)
 			}
 
 		default:
@@ -580,7 +581,7 @@ func awsAwsjson10_deserializeDocumentInvalidSessionException(v **types.InvalidSe
 				if !ok {
 					return fmt.Errorf("expected ErrorCode to be of type string, got %T instead", value)
 				}
-				sv.Code = &jtv
+				sv.Code = ptr.String(jtv)
 			}
 
 		case "Message":
@@ -589,7 +590,7 @@ func awsAwsjson10_deserializeDocumentInvalidSessionException(v **types.InvalidSe
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -629,7 +630,7 @@ func awsAwsjson10_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -669,7 +670,7 @@ func awsAwsjson10_deserializeDocumentOccConflictException(v **types.OccConflictE
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -709,7 +710,7 @@ func awsAwsjson10_deserializeDocumentPage(v **types.Page, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected PageToken to be of type string, got %T instead", value)
 				}
-				sv.NextPageToken = &jtv
+				sv.NextPageToken = ptr.String(jtv)
 			}
 
 		case "Values":
@@ -754,7 +755,7 @@ func awsAwsjson10_deserializeDocumentRateExceededException(v **types.RateExceede
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -794,7 +795,7 @@ func awsAwsjson10_deserializeDocumentStartSessionResult(v **types.StartSessionRe
 				if !ok {
 					return fmt.Errorf("expected SessionToken to be of type string, got %T instead", value)
 				}
-				sv.SessionToken = &jtv
+				sv.SessionToken = ptr.String(jtv)
 			}
 
 		default:
@@ -834,7 +835,7 @@ func awsAwsjson10_deserializeDocumentStartTransactionResult(v **types.StartTrans
 				if !ok {
 					return fmt.Errorf("expected TransactionId to be of type string, got %T instead", value)
 				}
-				sv.TransactionId = &jtv
+				sv.TransactionId = ptr.String(jtv)
 			}
 
 		default:
@@ -887,7 +888,7 @@ func awsAwsjson10_deserializeDocumentValueHolder(v **types.ValueHolder, value in
 				if !ok {
 					return fmt.Errorf("expected IonText to be of type string, got %T instead", value)
 				}
-				sv.IonText = &jtv
+				sv.IonText = ptr.String(jtv)
 			}
 
 		default:
@@ -899,7 +900,7 @@ func awsAwsjson10_deserializeDocumentValueHolder(v **types.ValueHolder, value in
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentValueHolders(v *[]*types.ValueHolder, value interface{}) error {
+func awsAwsjson10_deserializeDocumentValueHolders(v *[]types.ValueHolder, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -912,18 +913,20 @@ func awsAwsjson10_deserializeDocumentValueHolders(v *[]*types.ValueHolder, value
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ValueHolder
+	var cv []types.ValueHolder
 	if *v == nil {
-		cv = []*types.ValueHolder{}
+		cv = []types.ValueHolder{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ValueHolder
-		if err := awsAwsjson10_deserializeDocumentValueHolder(&col, value); err != nil {
+		var col types.ValueHolder
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentValueHolder(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}

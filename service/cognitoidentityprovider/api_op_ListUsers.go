@@ -38,7 +38,7 @@ type ListUsersInput struct {
 	// An array of strings, where each string is the name of a user attribute to be
 	// returned for each user in the search results. If the array is null, all
 	// attributes are returned.
-	AttributesToGet []*string
+	AttributesToGet []string
 
 	// A filter string of the form "AttributeName Filter-Type "AttributeValue"".
 	// Quotation marks within the filter string must be escaped using the backslash (\)
@@ -106,7 +106,7 @@ type ListUsersOutput struct {
 	PaginationToken *string
 
 	// The users returned in the request to list users.
-	Users []*types.UserType
+	Users []types.UserType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

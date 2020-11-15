@@ -39,7 +39,7 @@ type DescribeThingInput struct {
 type DescribeThingOutput struct {
 
 	// The thing attributes.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// The name of the billing group the thing belongs to.
 	BillingGroupName *string
@@ -68,7 +68,7 @@ type DescribeThingOutput struct {
 	// The current version of the thing record in the registry. To avoid unintentional
 	// changes to the information in the registry, you can pass the version information
 	// in the expectedVersion parameter of the UpdateThing and DeleteThing calls.
-	Version *int64
+	Version int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

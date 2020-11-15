@@ -53,7 +53,7 @@ type DeleteAnalysisInput struct {
 	// This option defaults to the value NoForceDeleteWithoutRecovery. To immediately
 	// delete the analysis, add the ForceDeleteWithoutRecovery option. You can't
 	// restore an analysis after it's deleted.
-	ForceDeleteWithoutRecovery *bool
+	ForceDeleteWithoutRecovery bool
 
 	// A value that specifies the number of days that QuickSight waits before it
 	// deletes the analysis. You can't use this parameter with the
@@ -76,7 +76,7 @@ type DeleteAnalysisOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

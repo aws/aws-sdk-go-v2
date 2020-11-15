@@ -63,7 +63,7 @@ type FleetSummary struct {
 	LastUpdatedTime *time.Time
 
 	// The tags attached to the resource. A tag is a key-value pair.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // The summary of the website authorization provider.

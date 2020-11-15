@@ -51,13 +51,13 @@ type CreateTransitGatewayInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The transit gateway options.
 	Options *types.TransitGatewayRequestOptions
 
 	// The tags to apply to the transit gateway.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 }
 
 type CreateTransitGatewayOutput struct {

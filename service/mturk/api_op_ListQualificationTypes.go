@@ -68,7 +68,7 @@ type ListQualificationTypesOutput struct {
 	NumResults *int32
 
 	// The list of QualificationType elements returned by the query.
-	QualificationTypes []*types.QualificationType
+	QualificationTypes []types.QualificationType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

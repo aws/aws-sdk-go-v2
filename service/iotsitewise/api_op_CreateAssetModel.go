@@ -52,7 +52,7 @@ type CreateAssetModelInput struct {
 	// asset model. For more information, see Quotas
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html) in the
 	// AWS IoT SiteWise User Guide.
-	AssetModelHierarchies []*types.AssetModelHierarchyDefinition
+	AssetModelHierarchies []types.AssetModelHierarchyDefinition
 
 	// The property definitions of the asset model. For more information, see Asset
 	// properties
@@ -61,7 +61,7 @@ type CreateAssetModelInput struct {
 	// asset model. For more information, see Quotas
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html) in the
 	// AWS IoT SiteWise User Guide.
-	AssetModelProperties []*types.AssetModelPropertyDefinition
+	AssetModelProperties []types.AssetModelPropertyDefinition
 
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
@@ -72,7 +72,7 @@ type CreateAssetModelInput struct {
 	// information, see Tagging your AWS IoT SiteWise resources
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
 	// in the AWS IoT SiteWise User Guide.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateAssetModelOutput struct {

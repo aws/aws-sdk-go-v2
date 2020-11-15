@@ -53,7 +53,7 @@ type PutObjectRetentionInput struct {
 	Key *string
 
 	// Indicates whether this operation should bypass Governance-mode restrictions.
-	BypassGovernanceRetention *bool
+	BypassGovernanceRetention bool
 
 	// The MD5 hash for the request body.
 	ContentMD5 *string

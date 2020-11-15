@@ -50,7 +50,7 @@ type ModifyDBClusterInput struct {
 	// to the NewDBClusterIdentifier and MasterUserPassword values are applied during
 	// the next maintenance window. All other changes are applied immediately,
 	// regardless of the value of the ApplyImmediately parameter. Default: false
-	ApplyImmediately *bool
+	ApplyImmediately bool
 
 	// The number of days for which automated backups are retained. You must specify a
 	// minimum value of 1. Default: 1 Constraints:
@@ -125,7 +125,7 @@ type ModifyDBClusterInput struct {
 
 	// A list of virtual private cloud (VPC) security groups that the cluster will
 	// belong to.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 }
 
 type ModifyDBClusterOutput struct {

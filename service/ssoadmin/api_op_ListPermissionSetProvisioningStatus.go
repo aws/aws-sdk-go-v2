@@ -55,7 +55,7 @@ type ListPermissionSetProvisioningStatusOutput struct {
 	NextToken *string
 
 	// The status object for the permission set provisioning operation.
-	PermissionSetsProvisioningStatus []*types.PermissionSetProvisioningStatusMetadata
+	PermissionSetsProvisioningStatus []types.PermissionSetProvisioningStatusMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

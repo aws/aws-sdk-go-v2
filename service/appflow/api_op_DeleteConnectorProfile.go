@@ -36,7 +36,7 @@ type DeleteConnectorProfileInput struct {
 
 	// Indicates whether Amazon AppFlow should delete the profile, even if it is
 	// currently in use in one or more flows.
-	ForceDelete *bool
+	ForceDelete bool
 }
 
 type DeleteConnectorProfileOutput struct {

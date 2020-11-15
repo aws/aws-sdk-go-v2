@@ -50,7 +50,7 @@ type DescribeListenerCertificatesInput struct {
 type DescribeListenerCertificatesOutput struct {
 
 	// Information about the certificates.
-	Certificates []*types.Certificate
+	Certificates []types.Certificate
 
 	// If there are additional results, this is the marker for the next set of results.
 	// Otherwise, this is null.

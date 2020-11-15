@@ -61,7 +61,7 @@ type DisassociateCreatedArtifactInput struct {
 
 	// Optional boolean flag to indicate whether any effect should take place. Used to
 	// test if the caller has permission to make the call.
-	DryRun *bool
+	DryRun bool
 }
 
 type DisassociateCreatedArtifactOutput struct {

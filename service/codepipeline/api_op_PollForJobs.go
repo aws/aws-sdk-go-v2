@@ -48,14 +48,14 @@ type PollForJobsInput struct {
 	// properties, this value must be null or an empty map. For an action type with a
 	// queryable property, you must supply that property as a key in the map. Only jobs
 	// whose action configuration matches the mapped value are returned.
-	QueryParam map[string]*string
+	QueryParam map[string]string
 }
 
 // Represents the output of a PollForJobs action.
 type PollForJobsOutput struct {
 
 	// Information about the jobs to take action on.
-	Jobs []*types.Job
+	Jobs []types.Job
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

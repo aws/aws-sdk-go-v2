@@ -42,7 +42,7 @@ type ListDataflowEndpointGroupsInput struct {
 type ListDataflowEndpointGroupsOutput struct {
 
 	// A list of dataflow endpoint groups.
-	DataflowEndpointGroupList []*types.DataflowEndpointListItem
+	DataflowEndpointGroupList []types.DataflowEndpointListItem
 
 	// Next token returned in the response of a previous ListDataflowEndpointGroups
 	// call. Used to get the next page of results.

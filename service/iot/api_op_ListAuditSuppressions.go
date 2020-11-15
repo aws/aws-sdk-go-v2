@@ -31,7 +31,7 @@ type ListAuditSuppressionsInput struct {
 
 	// Determines whether suppressions are listed in ascending order by expiration date
 	// or not. If parameter isn't provided, ascendingOrder=true.
-	AscendingOrder *bool
+	AscendingOrder bool
 
 	// An audit check name. Checks must be enabled for your account. (Use
 	// DescribeAccountAuditConfiguration to see the list of all checks, including those
@@ -56,7 +56,7 @@ type ListAuditSuppressionsOutput struct {
 	NextToken *string
 
 	// List of audit suppressions.
-	Suppressions []*types.AuditSuppression
+	Suppressions []types.AuditSuppression
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

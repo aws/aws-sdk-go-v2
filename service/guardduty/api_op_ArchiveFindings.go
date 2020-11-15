@@ -39,7 +39,7 @@ type ArchiveFindingsInput struct {
 	// The IDs of the findings that you want to archive.
 	//
 	// This member is required.
-	FindingIds []*string
+	FindingIds []string
 }
 
 type ArchiveFindingsOutput struct {

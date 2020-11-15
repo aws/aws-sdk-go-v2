@@ -65,7 +65,7 @@ type DescribeChangeSetOutput struct {
 
 	// A list of Change structures that describes the resources AWS CloudFormation
 	// changes if you execute the change set.
-	Changes []*types.Change
+	Changes []types.Change
 
 	// The start time when the change set was created, in UTC.
 	CreationTime *time.Time
@@ -85,13 +85,13 @@ type DescribeChangeSetOutput struct {
 
 	// The ARNs of the Amazon Simple Notification Service (Amazon SNS) topics that will
 	// be associated with the stack if you execute the change set.
-	NotificationARNs []*string
+	NotificationARNs []string
 
 	// A list of Parameter structures that describes the input parameters and their
 	// values used to create the change set. For more information, see the Parameter
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
 	// data type.
-	Parameters []*types.Parameter
+	Parameters []types.Parameter
 
 	// The rollback triggers for AWS CloudFormation to monitor during stack creation
 	// and updating operations, and for the specified monitoring period afterwards.
@@ -112,7 +112,7 @@ type DescribeChangeSetOutput struct {
 	StatusReason *string
 
 	// If you execute the change set, the tags that will be associated with the stack.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

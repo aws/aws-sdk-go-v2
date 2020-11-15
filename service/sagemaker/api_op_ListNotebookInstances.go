@@ -95,7 +95,7 @@ type ListNotebookInstancesOutput struct {
 	NextToken *string
 
 	// An array of NotebookInstanceSummary objects, one for each notebook instance.
-	NotebookInstances []*types.NotebookInstanceSummary
+	NotebookInstances []types.NotebookInstanceSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

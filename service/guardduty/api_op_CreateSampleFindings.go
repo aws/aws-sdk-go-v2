@@ -36,7 +36,7 @@ type CreateSampleFindingsInput struct {
 	DetectorId *string
 
 	// The types of sample findings to generate.
-	FindingTypes []*string
+	FindingTypes []string
 }
 
 type CreateSampleFindingsOutput struct {

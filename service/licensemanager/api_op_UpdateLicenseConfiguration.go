@@ -48,13 +48,13 @@ type UpdateLicenseConfigurationInput struct {
 
 	// New license rule. The only rule that you can add after you create a license
 	// configuration is licenseAffinityToHost.
-	LicenseRules []*string
+	LicenseRules []string
 
 	// New name of the license configuration.
 	Name *string
 
 	// New product information.
-	ProductInformationList []*types.ProductInformation
+	ProductInformationList []types.ProductInformation
 }
 
 type UpdateLicenseConfigurationOutput struct {

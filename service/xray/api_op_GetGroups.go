@@ -36,7 +36,7 @@ type GetGroupsInput struct {
 type GetGroupsOutput struct {
 
 	// The collection of all active groups.
-	Groups []*types.GroupSummary
+	Groups []types.GroupSummary
 
 	// Pagination token.
 	NextToken *string

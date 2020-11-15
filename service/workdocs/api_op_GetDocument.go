@@ -39,13 +39,13 @@ type GetDocumentInput struct {
 	AuthenticationToken *string
 
 	// Set this to TRUE to include custom metadata in the response.
-	IncludeCustomMetadata *bool
+	IncludeCustomMetadata bool
 }
 
 type GetDocumentOutput struct {
 
 	// The custom metadata on the document.
-	CustomMetadata map[string]*string
+	CustomMetadata map[string]string
 
 	// The metadata details of the document.
 	Metadata *types.DocumentMetadata

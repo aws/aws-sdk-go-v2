@@ -43,7 +43,7 @@ type ListScheduledAuditsOutput struct {
 	NextToken *string
 
 	// The list of scheduled audits.
-	ScheduledAudits []*types.ScheduledAuditMetadata
+	ScheduledAudits []types.ScheduledAuditMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

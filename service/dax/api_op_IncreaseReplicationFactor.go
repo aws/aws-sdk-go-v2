@@ -37,12 +37,12 @@ type IncreaseReplicationFactorInput struct {
 	// The new number of nodes for the DAX cluster.
 	//
 	// This member is required.
-	NewReplicationFactor *int32
+	NewReplicationFactor int32
 
 	// The Availability Zones (AZs) in which the cluster nodes will be created. All
 	// nodes belonging to the cluster are placed in these Availability Zones. Use this
 	// parameter if you want to distribute the nodes across multiple AZs.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 }
 
 type IncreaseReplicationFactorOutput struct {

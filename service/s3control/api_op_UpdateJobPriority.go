@@ -63,7 +63,7 @@ type UpdateJobPriorityInput struct {
 	// The priority you want to assign to this job.
 	//
 	// This member is required.
-	Priority *int32
+	Priority int32
 }
 
 type UpdateJobPriorityOutput struct {
@@ -76,7 +76,7 @@ type UpdateJobPriorityOutput struct {
 	// The new priority assigned to the specified job.
 	//
 	// This member is required.
-	Priority *int32
+	Priority int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

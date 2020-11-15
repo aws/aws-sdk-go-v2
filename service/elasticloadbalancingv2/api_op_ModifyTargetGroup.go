@@ -84,7 +84,7 @@ type ModifyTargetGroupInput struct {
 type ModifyTargetGroupOutput struct {
 
 	// Information about the modified target group.
-	TargetGroups []*types.TargetGroup
+	TargetGroups []types.TargetGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

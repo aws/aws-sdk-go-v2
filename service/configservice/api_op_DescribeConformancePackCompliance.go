@@ -40,7 +40,7 @@ type DescribeConformancePackComplianceInput struct {
 
 	// The maximum number of AWS Config rules within a conformance pack are returned on
 	// each page.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned in a previous request that you use to request the
 	// next page of results in a paginated response.
@@ -57,7 +57,7 @@ type DescribeConformancePackComplianceOutput struct {
 	// Returns a list of ConformancePackRuleCompliance objects.
 	//
 	// This member is required.
-	ConformancePackRuleComplianceList []*types.ConformancePackRuleCompliance
+	ConformancePackRuleComplianceList []types.ConformancePackRuleCompliance
 
 	// The nextToken string returned in a previous request that you use to request the
 	// next page of results in a paginated response.

@@ -32,7 +32,7 @@ func (c *Client) DescribeSourceRegions(ctx context.Context, params *DescribeSour
 type DescribeSourceRegionsInput struct {
 
 	// This parameter isn't currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeSourceRegions
 	// request. If this parameter is specified, the response includes only records
@@ -63,7 +63,7 @@ type DescribeSourceRegionsOutput struct {
 
 	// A list of SourceRegion instances that contains each source AWS Region that the
 	// current AWS Region can get a read replica or a DB snapshot from.
-	SourceRegions []*types.SourceRegion
+	SourceRegions []types.SourceRegion
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

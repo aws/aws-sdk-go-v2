@@ -49,7 +49,7 @@ type CreateProvisioningTemplateInput struct {
 	Description *string
 
 	// True to enable the fleet provisioning template, otherwise false.
-	Enabled *bool
+	Enabled bool
 
 	// Creates a pre-provisioning hook template.
 	PreProvisioningHook *types.ProvisioningHook
@@ -58,7 +58,7 @@ type CreateProvisioningTemplateInput struct {
 	// Request parameters use format: ...key1=value1&key2=value2... For the CLI
 	// command-line parameter use format: &&tags "key1=value1&key2=value2..." For the
 	// cli-input-json file use format: "tags": "key1=value1&key2=value2..."
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateProvisioningTemplateOutput struct {

@@ -78,7 +78,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 	DeletionProtection *bool
 
 	// The list of logs that the restored DB cluster is to export to CloudWatch Logs.
-	EnableCloudwatchLogsExports []*string
+	EnableCloudwatchLogsExports []string
 
 	// True to enable mapping of AWS Identity and Access Management (IAM) accounts to
 	// database accounts, and otherwise false. Default: false
@@ -145,15 +145,15 @@ type RestoreDBClusterToPointInTimeInput struct {
 	RestoreType *string
 
 	// The tags to be applied to the restored DB cluster.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A value that is set to true to restore the DB cluster to the latest restorable
 	// backup time, and false otherwise. Default: false Constraints: Cannot be
 	// specified if RestoreToTime parameter is provided.
-	UseLatestRestorableTime *bool
+	UseLatestRestorableTime bool
 
 	// A list of VPC security groups that the new DB cluster belongs to.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 }
 
 type RestoreDBClusterToPointInTimeOutput struct {

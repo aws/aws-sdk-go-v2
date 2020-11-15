@@ -38,13 +38,13 @@ type TagResourceInput struct {
 	// The tags to be assigned to the DAX resource.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagResourceOutput struct {
 
 	// The list of tags that are associated with the DAX resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

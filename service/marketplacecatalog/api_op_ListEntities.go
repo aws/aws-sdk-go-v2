@@ -41,7 +41,7 @@ type ListEntitiesInput struct {
 
 	// An array of filter objects. Each filter object contains two attributes,
 	// filterName and filterValues.
-	FilterList []*types.Filter
+	FilterList []types.Filter
 
 	// Specifies the upper limit of the elements on a single page. If a value isn't
 	// provided, the default value is 20.
@@ -57,7 +57,7 @@ type ListEntitiesInput struct {
 type ListEntitiesOutput struct {
 
 	// Array of EntitySummary object.
-	EntitySummaryList []*types.EntitySummary
+	EntitySummaryList []types.EntitySummary
 
 	// The value of the next token if it exists. Null if there is no more result.
 	NextToken *string

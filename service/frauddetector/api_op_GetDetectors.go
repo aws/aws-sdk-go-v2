@@ -47,7 +47,7 @@ type GetDetectorsInput struct {
 type GetDetectorsOutput struct {
 
 	// The detectors.
-	Detectors []*types.Detector
+	Detectors []types.Detector
 
 	// The next page token.
 	NextToken *string

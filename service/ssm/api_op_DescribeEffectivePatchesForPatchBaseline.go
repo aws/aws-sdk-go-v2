@@ -37,7 +37,7 @@ type DescribeEffectivePatchesForPatchBaselineInput struct {
 	BaselineId *string
 
 	// The maximum number of patches to return (per page).
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
@@ -47,7 +47,7 @@ type DescribeEffectivePatchesForPatchBaselineInput struct {
 type DescribeEffectivePatchesForPatchBaselineOutput struct {
 
 	// An array of patches and patch status.
-	EffectivePatches []*types.EffectivePatch
+	EffectivePatches []types.EffectivePatch
 
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.

@@ -43,7 +43,7 @@ type UntagQueueInput struct {
 	// The list of tags to be removed from the specified queue.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagQueueOutput struct {

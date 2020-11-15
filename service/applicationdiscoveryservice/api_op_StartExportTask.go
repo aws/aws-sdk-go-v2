@@ -52,7 +52,7 @@ type StartExportTaskInput struct {
 	// results of the DescribeAgents API or CLI. If no filter is present, startTime and
 	// endTime are ignored and exported data includes both Agentless Discovery
 	// Connector data and summary data from Application Discovery agents.
-	Filters []*types.ExportFilter
+	Filters []types.ExportFilter
 
 	// The start timestamp for exported data from the single Application Discovery
 	// Agent selected in the filters. If no value is specified, data is exported

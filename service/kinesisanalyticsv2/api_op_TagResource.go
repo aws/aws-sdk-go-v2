@@ -41,7 +41,7 @@ type TagResourceInput struct {
 	// The key-value tags to assign to the application.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagResourceOutput struct {

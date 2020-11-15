@@ -42,7 +42,7 @@ type DescribeBackupsInput struct {
 	// return only the backups for the specified clusters. Specify clusters by their
 	// cluster identifier (ID). Use the states filter to return only backups that match
 	// the specified state.
-	Filters map[string][]*string
+	Filters map[string][]string
 
 	// The maximum number of backups to return in the response. When there are more
 	// backups than the number you specify, the response contains a NextToken value.
@@ -60,7 +60,7 @@ type DescribeBackupsInput struct {
 type DescribeBackupsOutput struct {
 
 	// A list of backups.
-	Backups []*types.Backup
+	Backups []types.Backup
 
 	// An opaque string that indicates that the response contains only a subset of
 	// backups. Use this value in a subsequent DescribeBackups request to get more

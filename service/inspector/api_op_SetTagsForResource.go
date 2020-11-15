@@ -37,7 +37,7 @@ type SetTagsForResourceInput struct {
 
 	// A collection of key and value pairs that you want to set to the assessment
 	// template.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type SetTagsForResourceOutput struct {

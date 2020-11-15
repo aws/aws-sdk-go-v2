@@ -35,7 +35,7 @@ type ModifyGlobalReplicationGroupInput struct {
 	// PreferredMaintenceWindow.
 	//
 	// This member is required.
-	ApplyImmediately *bool
+	ApplyImmediately bool
 
 	// The name of the Global Datastore
 	//

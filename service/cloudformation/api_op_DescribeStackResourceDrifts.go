@@ -83,7 +83,7 @@ type DescribeStackResourceDriftsOutput struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
 	//
 	// This member is required.
-	StackResourceDrifts []*types.StackResourceDrift
+	StackResourceDrifts []types.StackResourceDrift
 
 	// If the request doesn't return all of the remaining results, NextToken is set to
 	// a token. To retrieve the next set of results, call DescribeStackResourceDrifts

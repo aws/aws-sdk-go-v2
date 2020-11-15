@@ -45,7 +45,7 @@ type DescribeSpotPriceHistoryInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The date and time, up to the current date, from which to stop retrieving the
 	// price history data, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
@@ -71,7 +71,7 @@ type DescribeSpotPriceHistoryInput struct {
 	// * timestamp - The time stamp of the Spot price history, in UTC
 	// format (for example, YYYY-MM-DDTHH:MM:SSZ). You can use wildcards (* and ?).
 	// Greater than or less than comparison is not supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// Filters the results by the specified instance types.
 	InstanceTypes []types.InstanceType
@@ -79,13 +79,13 @@ type DescribeSpotPriceHistoryInput struct {
 	// The maximum number of results to return in a single call. Specify a value
 	// between 1 and 1000. The default value is 1000. To retrieve the remaining
 	// results, make another call with the returned NextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of results.
 	NextToken *string
 
 	// Filters the results by the specified basic product descriptions.
-	ProductDescriptions []*string
+	ProductDescriptions []string
 
 	// The date and time, up to the past 90 days, from which to start retrieving the
 	// price history data, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
@@ -100,7 +100,7 @@ type DescribeSpotPriceHistoryOutput struct {
 	NextToken *string
 
 	// The historical Spot prices.
-	SpotPriceHistory []*types.SpotPrice
+	SpotPriceHistory []types.SpotPrice
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

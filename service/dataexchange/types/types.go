@@ -162,7 +162,7 @@ type Details struct {
 	ImportAssetFromSignedUrlJobErrorDetails *ImportAssetFromSignedUrlJobErrorDetails
 
 	// The list of sources for the assets.
-	ImportAssetsFromS3JobErrorDetails []*AssetSourceEntry
+	ImportAssetsFromS3JobErrorDetails []AssetSourceEntry
 }
 
 // Details of the operation to be performed by the job.
@@ -171,7 +171,7 @@ type ExportAssetsToS3RequestDetails struct {
 	// The destination for the asset.
 	//
 	// This member is required.
-	AssetDestinations []*AssetDestinationEntry
+	AssetDestinations []AssetDestinationEntry
 
 	// The unique identifier for the data set associated with this export job.
 	//
@@ -193,7 +193,7 @@ type ExportAssetsToS3ResponseDetails struct {
 	// The destination in Amazon S3 where the asset is exported.
 	//
 	// This member is required.
-	AssetDestinations []*AssetDestinationEntry
+	AssetDestinations []AssetDestinationEntry
 
 	// The unique identifier for the data set associated with this export job.
 	//
@@ -341,7 +341,7 @@ type ImportAssetsFromS3RequestDetails struct {
 	// Is a list of S3 bucket and object key pairs.
 	//
 	// This member is required.
-	AssetSources []*AssetSourceEntry
+	AssetSources []AssetSourceEntry
 
 	// The unique identifier for the data set associated with this import job.
 	//
@@ -360,7 +360,7 @@ type ImportAssetsFromS3ResponseDetails struct {
 	// Is a list of Amazon S3 bucket and object key pairs.
 	//
 	// This member is required.
-	AssetSources []*AssetSourceEntry
+	AssetSources []AssetSourceEntry
 
 	// The unique identifier for the data set associated with this import job.
 	//
@@ -416,7 +416,7 @@ type JobEntry struct {
 	UpdatedAt *time.Time
 
 	// Errors for jobs.
-	Errors []*JobError
+	Errors []JobError
 }
 
 // An error that occurred with the job request.
@@ -438,7 +438,7 @@ type JobError struct {
 	LimitName JobErrorLimitName
 
 	// The value of the exceeded limit.
-	LimitValue *float64
+	LimitValue float64
 
 	// The unique identifier for the resource related to the error.
 	ResourceId *string
@@ -521,7 +521,7 @@ type RevisionEntry struct {
 	// through the AWS Data Exchange console or the AWS Marketplace Catalog API, using
 	// the StartChangeSet AWS Marketplace Catalog API action. When using the API,
 	// revisions are uniquely identified by their ARN.
-	Finalized *bool
+	Finalized bool
 
 	// The revision ID of the owned revision corresponding to the entitled revision
 	// being viewed. This parameter is returned when a revision owner is viewing the
@@ -535,5 +535,5 @@ type S3SnapshotAsset struct {
 	// The size of the S3 object that is the object.
 	//
 	// This member is required.
-	Size *float64
+	Size float64
 }

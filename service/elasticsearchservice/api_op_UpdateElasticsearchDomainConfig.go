@@ -45,7 +45,7 @@ type UpdateElasticsearchDomainConfigInput struct {
 	// default, the value is true. See Configuration Advanced Options
 	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options)
 	// for more information.
-	AdvancedOptions map[string]*string
+	AdvancedOptions map[string]string
 
 	// Specifies advanced security options.
 	AdvancedSecurityOptions *types.AdvancedSecurityOptionsInput
@@ -67,7 +67,7 @@ type UpdateElasticsearchDomainConfigInput struct {
 
 	// Map of LogType and LogPublishingOption, each containing options to publish a
 	// given type of Elasticsearch log.
-	LogPublishingOptions map[string]*types.LogPublishingOption
+	LogPublishingOptions map[string]types.LogPublishingOption
 
 	// Option to set the time, in UTC format, for the daily automated snapshot. Default
 	// value is 0 hours.

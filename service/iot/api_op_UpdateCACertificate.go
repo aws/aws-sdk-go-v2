@@ -47,7 +47,7 @@ type UpdateCACertificateInput struct {
 	RegistrationConfig *types.RegistrationConfig
 
 	// If true, removes auto registration.
-	RemoveAutoRegistration *bool
+	RemoveAutoRegistration bool
 }
 
 type UpdateCACertificateOutput struct {

@@ -34,7 +34,7 @@ func (c *Client) CreateUsagePlan(ctx context.Context, params *CreateUsagePlanInp
 type CreateUsagePlanInput struct {
 
 	// The associated API stages of the usage plan.
-	ApiStages []*types.ApiStage
+	ApiStages []types.ApiStage
 
 	// The description of the usage plan.
 	Description *string
@@ -45,7 +45,7 @@ type CreateUsagePlanInput struct {
 	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
 	// tag key can be up to 128 characters and must not start with aws:. The tag value
 	// can be up to 256 characters.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The throttling limits of the usage plan.
 	Throttle *types.ThrottleSettings
@@ -59,7 +59,7 @@ type CreateUsagePlanInput struct {
 type CreateUsagePlanOutput struct {
 
 	// The associated API stages of a usage plan.
-	ApiStages []*types.ApiStage
+	ApiStages []types.ApiStage
 
 	// The description of a usage plan.
 	Description *string
@@ -78,7 +78,7 @@ type CreateUsagePlanOutput struct {
 	Quota *types.QuotaSettings
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The request throttle limits of a usage plan.
 	Throttle *types.ThrottleSettings

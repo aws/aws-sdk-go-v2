@@ -32,13 +32,13 @@ type DescribeEnvironmentsInput struct {
 	// The IDs of individual environments to get information about.
 	//
 	// This member is required.
-	EnvironmentIds []*string
+	EnvironmentIds []string
 }
 
 type DescribeEnvironmentsOutput struct {
 
 	// Information about the environments that are returned.
-	Environments []*types.Environment
+	Environments []types.Environment
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -46,7 +46,7 @@ type DescribeVolumeAttributeInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 }
 
 type DescribeVolumeAttributeOutput struct {
@@ -55,7 +55,7 @@ type DescribeVolumeAttributeOutput struct {
 	AutoEnableIO *types.AttributeBooleanValue
 
 	// A list of product codes.
-	ProductCodes []*types.ProductCode
+	ProductCodes []types.ProductCode
 
 	// The ID of the volume.
 	VolumeId *string

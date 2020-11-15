@@ -69,7 +69,7 @@ type PutLogEventsInput struct {
 	// The log events.
 	//
 	// This member is required.
-	LogEvents []*types.InputLogEvent
+	LogEvents []types.InputLogEvent
 
 	// The name of the log group.
 	//

@@ -97,7 +97,7 @@ type UpdateUserInput struct {
 	// from this user. Using this parameter resets the user to the state it was in
 	// before a custom permissions profile was applied. This parameter defaults to NULL
 	// and it doesn't accept any other value.
-	UnapplyCustomPermissions *bool
+	UnapplyCustomPermissions bool
 }
 
 type UpdateUserOutput struct {
@@ -106,7 +106,7 @@ type UpdateUserOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// The Amazon QuickSight user.
 	User *types.User

@@ -68,7 +68,7 @@ type ListServicesOutput struct {
 
 	// The list of full ARN entries for each service associated with the specified
 	// cluster.
-	ServiceArns []*string
+	ServiceArns []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

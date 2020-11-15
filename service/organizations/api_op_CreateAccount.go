@@ -156,7 +156,7 @@ type CreateAccountInput struct {
 	// in the AWS Organizations User Guide. If any one of the tags is invalid or if you
 	// exceed the allowed number of tags for an account, then the entire request fails
 	// and the account is not created.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateAccountOutput struct {

@@ -45,7 +45,7 @@ type GetRelationalDatabasesOutput struct {
 	NextPageToken *string
 
 	// An object describing the result of your get relational databases request.
-	RelationalDatabases []*types.RelationalDatabase
+	RelationalDatabases []types.RelationalDatabase
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -53,7 +53,7 @@ type CreateConfigurationSetInput struct {
 
 	// An array of objects that define the tags (keys and values) that you want to
 	// associate with the configuration set.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// An object that defines the open and click tracking options for emails that you
 	// send using the configuration set.

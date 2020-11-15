@@ -36,7 +36,7 @@ type ListFindingsInput struct {
 	AnalyzerArn *string
 
 	// A filter to match for the findings to return.
-	Filter map[string]*types.Criterion
+	Filter map[string]types.Criterion
 
 	// The maximum number of results to return in the response.
 	MaxResults *int32
@@ -55,7 +55,7 @@ type ListFindingsOutput struct {
 	// specified, if any.
 	//
 	// This member is required.
-	Findings []*types.FindingSummary
+	Findings []types.FindingSummary
 
 	// A token used for pagination of results returned.
 	NextToken *string

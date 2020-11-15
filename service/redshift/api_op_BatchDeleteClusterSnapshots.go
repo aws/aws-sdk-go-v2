@@ -32,16 +32,16 @@ type BatchDeleteClusterSnapshotsInput struct {
 	// A list of identifiers for the snapshots that you want to delete.
 	//
 	// This member is required.
-	Identifiers []*types.DeleteClusterSnapshotMessage
+	Identifiers []types.DeleteClusterSnapshotMessage
 }
 
 type BatchDeleteClusterSnapshotsOutput struct {
 
 	// A list of any errors returned.
-	Errors []*types.SnapshotErrorMessage
+	Errors []types.SnapshotErrorMessage
 
 	// A list of the snapshot identifiers that were deleted.
-	Resources []*string
+	Resources []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

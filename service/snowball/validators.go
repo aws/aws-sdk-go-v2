@@ -409,13 +409,13 @@ func validateEc2AmiResource(v *types.Ec2AmiResource) error {
 	}
 }
 
-func validateEc2AmiResourceList(v []*types.Ec2AmiResource) error {
+func validateEc2AmiResourceList(v []types.Ec2AmiResource) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Ec2AmiResourceList"}
 	for i := range v {
-		if err := validateEc2AmiResource(v[i]); err != nil {
+		if err := validateEc2AmiResource(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

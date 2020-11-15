@@ -37,7 +37,7 @@ type CompleteLayerUploadInput struct {
 	// The sha256 digest of the image layer.
 	//
 	// This member is required.
-	LayerDigests []*string
+	LayerDigests []string
 
 	// The name of the repository to associate with the image layer.
 	//

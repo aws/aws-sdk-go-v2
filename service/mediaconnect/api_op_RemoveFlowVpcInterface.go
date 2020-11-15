@@ -49,7 +49,7 @@ type RemoveFlowVpcInterfaceOutput struct {
 
 	// IDs of network interfaces associated with the removed VPC interface that Media
 	// Connect was unable to remove.
-	NonDeletedNetworkInterfaceIds []*string
+	NonDeletedNetworkInterfaceIds []string
 
 	// The name of the VPC interface that was removed.
 	VpcInterfaceName *string

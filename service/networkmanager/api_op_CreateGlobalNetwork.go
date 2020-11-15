@@ -34,7 +34,7 @@ type CreateGlobalNetworkInput struct {
 	Description *string
 
 	// The tags to apply to the resource during creation.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateGlobalNetworkOutput struct {

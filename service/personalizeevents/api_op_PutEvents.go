@@ -32,7 +32,7 @@ type PutEventsInput struct {
 	// A list of event data from the session.
 	//
 	// This member is required.
-	EventList []*types.Event
+	EventList []types.Event
 
 	// The session ID associated with the user's visit. Your application generates the
 	// sessionId when a user first visits your website or uses your application. Amazon

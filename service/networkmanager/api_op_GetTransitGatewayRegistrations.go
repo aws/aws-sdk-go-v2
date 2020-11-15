@@ -43,7 +43,7 @@ type GetTransitGatewayRegistrationsInput struct {
 
 	// The Amazon Resource Names (ARNs) of one or more transit gateways. The maximum is
 	// 10.
-	TransitGatewayArns []*string
+	TransitGatewayArns []string
 }
 
 type GetTransitGatewayRegistrationsOutput struct {
@@ -52,7 +52,7 @@ type GetTransitGatewayRegistrationsOutput struct {
 	NextToken *string
 
 	// The transit gateway registrations.
-	TransitGatewayRegistrations []*types.TransitGatewayRegistration
+	TransitGatewayRegistrations []types.TransitGatewayRegistration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -291,7 +291,7 @@ type CreateDBInstanceInput struct {
 
 	// A list of DB security groups to associate with this DB instance. Default: The
 	// default DB security group for the database engine.
-	DBSecurityGroups []*string
+	DBSecurityGroups []string
 
 	// A DB subnet group to associate with this DB instance. If there is no DB subnet
 	// group, then it is a non-VPC DB instance.
@@ -330,7 +330,7 @@ type CreateDBInstanceInput struct {
 	// Possible values are agent and error. MySQL Possible values are audit, error,
 	// general, and slowquery. Oracle Possible values are alert, audit, listener, and
 	// trace. PostgreSQL Possible values are postgresql and upgrade.
-	EnableCloudwatchLogsExports []*string
+	EnableCloudwatchLogsExports []string
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
@@ -573,7 +573,7 @@ type CreateDBInstanceInput struct {
 
 	// The number of CPU cores and the number of threads per core for the DB instance
 	// class of the DB instance.
-	ProcessorFeatures []*types.ProcessorFeature
+	ProcessorFeatures []types.ProcessorFeature
 
 	// A value that specifies the order in which an Aurora Replica is promoted to the
 	// primary instance after a failure of the existing primary instance. For more
@@ -623,7 +623,7 @@ type CreateDBInstanceInput struct {
 	StorageType *string
 
 	// Tags to assign to the DB instance.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The ARN from the key store with which to associate the instance for TDE
 	// encryption.
@@ -641,7 +641,7 @@ type CreateDBInstanceInput struct {
 	// Amazon Aurora Not applicable. The associated list of EC2 VPC security groups is
 	// managed by the DB cluster. Default: The default EC2 VPC security group for the
 	// DB subnet group's VPC.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 }
 
 type CreateDBInstanceOutput struct {

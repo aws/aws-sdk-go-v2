@@ -67,13 +67,13 @@ type ListResourceTagsOutput struct {
 	NextMarker *string
 
 	// A list of tags. Each tag consists of a tag key and a tag value.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A flag that indicates whether there are more items in the list. When this value
 	// is true, the list in this response is truncated. To get more items, pass the
 	// value of the NextMarker element in thisresponse to the Marker parameter in a
 	// subsequent request.
-	Truncated *bool
+	Truncated bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

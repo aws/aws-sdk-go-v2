@@ -42,18 +42,18 @@ type DescribeSecurityProfileOutput struct {
 	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors, but it is also retained for any
 	// metric specified here.
-	AdditionalMetricsToRetain []*string
+	AdditionalMetricsToRetain []string
 
 	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors, but it is also retained for any
 	// metric specified here.
-	AdditionalMetricsToRetainV2 []*types.MetricToRetain
+	AdditionalMetricsToRetainV2 []types.MetricToRetain
 
 	// Where the alerts are sent. (Alerts are always sent to the console.)
-	AlertTargets map[string]*types.AlertTarget
+	AlertTargets map[string]types.AlertTarget
 
 	// Specifies the behaviors that, when violated by a device (thing), cause an alert.
-	Behaviors []*types.Behavior
+	Behaviors []types.Behavior
 
 	// The time the security profile was created.
 	CreationDate *time.Time
@@ -73,7 +73,7 @@ type DescribeSecurityProfileOutput struct {
 
 	// The version of the security profile. A new version is generated whenever the
 	// security profile is updated.
-	Version *int64
+	Version int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

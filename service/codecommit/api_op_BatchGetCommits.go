@@ -33,7 +33,7 @@ type BatchGetCommitsInput struct {
 	// full SHA IDs of each commit. You cannot use shortened SHA IDs.
 	//
 	// This member is required.
-	CommitIds []*string
+	CommitIds []string
 
 	// The name of the repository that contains the commits.
 	//
@@ -45,12 +45,12 @@ type BatchGetCommitsOutput struct {
 
 	// An array of commit data type objects, each of which contains information about a
 	// specified commit.
-	Commits []*types.Commit
+	Commits []types.Commit
 
 	// Returns any commit IDs for which information could not be found. For example, if
 	// one of the commit IDs was a shortened SHA ID or that commit was not found in the
 	// specified repository, the ID returns an error object with more information.
-	Errors []*types.BatchGetCommitsError
+	Errors []types.BatchGetCommitsError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

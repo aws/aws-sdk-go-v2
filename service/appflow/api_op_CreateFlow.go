@@ -37,7 +37,7 @@ type CreateFlowInput struct {
 	// destination connector.
 	//
 	// This member is required.
-	DestinationFlowConfigList []*types.DestinationFlowConfig
+	DestinationFlowConfigList []types.DestinationFlowConfig
 
 	// The specified name of the flow. Spaces are not allowed. Use underscores (_) or
 	// hyphens (-) only.
@@ -55,7 +55,7 @@ type CreateFlowInput struct {
 	// flow run.
 	//
 	// This member is required.
-	Tasks []*types.Task
+	Tasks []types.Task
 
 	// The trigger settings that determine how and when the flow runs.
 	//
@@ -72,7 +72,7 @@ type CreateFlowInput struct {
 	KmsArn *string
 
 	// The tags used to organize, track, or control access for your flow.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateFlowOutput struct {

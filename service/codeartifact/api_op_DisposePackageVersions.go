@@ -69,7 +69,7 @@ type DisposePackageVersionsInput struct {
 	// The versions of the package you want to dispose.
 	//
 	// This member is required.
-	Versions []*string
+	Versions []string
 
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
@@ -103,7 +103,7 @@ type DisposePackageVersionsInput struct {
 	Namespace *string
 
 	// The revisions of the package versions you want to dispose.
-	VersionRevisions map[string]*string
+	VersionRevisions map[string]string
 }
 
 type DisposePackageVersionsOutput struct {
@@ -124,10 +124,10 @@ type DisposePackageVersionsOutput struct {
 	// NOT_FOUND
 	//
 	// * SKIPPED
-	FailedVersions map[string]*types.PackageVersionError
+	FailedVersions map[string]types.PackageVersionError
 
 	// A list of the package versions that were successfully disposed.
-	SuccessfulVersions map[string]*types.SuccessfulPackageVersionInfo
+	SuccessfulVersions map[string]types.SuccessfulPackageVersionInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

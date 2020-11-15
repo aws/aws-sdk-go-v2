@@ -73,7 +73,7 @@ type ListEventSourceMappingsInput struct {
 type ListEventSourceMappingsOutput struct {
 
 	// A list of event source mappings.
-	EventSourceMappings []*types.EventSourceMappingConfiguration
+	EventSourceMappings []types.EventSourceMappingConfiguration
 
 	// A pagination token that's returned when the response doesn't contain all event
 	// source mappings.

@@ -69,7 +69,7 @@ type UpdateThemeOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// The ID for the theme.
 	ThemeId *string

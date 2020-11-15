@@ -39,12 +39,12 @@ type DescribeSpotFleetInstancesInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The maximum number of results to return in a single call. Specify a value
 	// between 1 and 1000. The default value is 1000. To retrieve the remaining
 	// results, make another call with the returned NextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of results.
 	NextToken *string
@@ -55,7 +55,7 @@ type DescribeSpotFleetInstancesOutput struct {
 
 	// The running instances. This list is refreshed periodically and might be out of
 	// date.
-	ActiveInstances []*types.ActiveInstance
+	ActiveInstances []types.ActiveInstance
 
 	// The token required to retrieve the next set of results. This value is null when
 	// there are no more results to return.

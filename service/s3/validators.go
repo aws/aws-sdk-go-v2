@@ -2258,13 +2258,13 @@ func validateCORSRule(v *types.CORSRule) error {
 	}
 }
 
-func validateCORSRules(v []*types.CORSRule) error {
+func validateCORSRules(v []types.CORSRule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CORSRules"}
 	for i := range v {
-		if err := validateCORSRule(v[i]); err != nil {
+		if err := validateCORSRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2416,13 +2416,13 @@ func validateGrantee(v *types.Grantee) error {
 	}
 }
 
-func validateGrants(v []*types.Grant) error {
+func validateGrants(v []types.Grant) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Grants"}
 	for i := range v {
-		if err := validateGrant(v[i]); err != nil {
+		if err := validateGrant(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2455,9 +2455,6 @@ func validateInventoryConfiguration(v *types.InventoryConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "InventoryConfiguration"}
 	if len(v.IncludedObjectVersions) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("IncludedObjectVersions"))
-	}
-	if v.IsEnabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IsEnabled"))
 	}
 	if v.Schedule == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Schedule"))
@@ -2595,13 +2592,13 @@ func validateLambdaFunctionConfiguration(v *types.LambdaFunctionConfiguration) e
 	}
 }
 
-func validateLambdaFunctionConfigurationList(v []*types.LambdaFunctionConfiguration) error {
+func validateLambdaFunctionConfigurationList(v []types.LambdaFunctionConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LambdaFunctionConfigurationList"}
 	for i := range v {
-		if err := validateLambdaFunctionConfiguration(v[i]); err != nil {
+		if err := validateLambdaFunctionConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2671,13 +2668,13 @@ func validateLifecycleRuleFilter(v *types.LifecycleRuleFilter) error {
 	}
 }
 
-func validateLifecycleRules(v []*types.LifecycleRule) error {
+func validateLifecycleRules(v []types.LifecycleRule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LifecycleRules"}
 	for i := range v {
-		if err := validateLifecycleRule(v[i]); err != nil {
+		if err := validateLifecycleRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2830,13 +2827,13 @@ func validateObjectIdentifier(v *types.ObjectIdentifier) error {
 	}
 }
 
-func validateObjectIdentifierList(v []*types.ObjectIdentifier) error {
+func validateObjectIdentifierList(v []types.ObjectIdentifier) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ObjectIdentifierList"}
 	for i := range v {
-		if err := validateObjectIdentifier(v[i]); err != nil {
+		if err := validateObjectIdentifier(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2898,13 +2895,13 @@ func validateOwnershipControlsRule(v *types.OwnershipControlsRule) error {
 	}
 }
 
-func validateOwnershipControlsRules(v []*types.OwnershipControlsRule) error {
+func validateOwnershipControlsRules(v []types.OwnershipControlsRule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OwnershipControlsRules"}
 	for i := range v {
-		if err := validateOwnershipControlsRule(v[i]); err != nil {
+		if err := validateOwnershipControlsRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2933,13 +2930,13 @@ func validateQueueConfiguration(v *types.QueueConfiguration) error {
 	}
 }
 
-func validateQueueConfigurationList(v []*types.QueueConfiguration) error {
+func validateQueueConfigurationList(v []types.QueueConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "QueueConfigurationList"}
 	for i := range v {
-		if err := validateQueueConfiguration(v[i]); err != nil {
+		if err := validateQueueConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3063,13 +3060,13 @@ func validateReplicationRuleFilter(v *types.ReplicationRuleFilter) error {
 	}
 }
 
-func validateReplicationRules(v []*types.ReplicationRule) error {
+func validateReplicationRules(v []types.ReplicationRule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReplicationRules"}
 	for i := range v {
-		if err := validateReplicationRule(v[i]); err != nil {
+		if err := validateReplicationRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3155,13 +3152,13 @@ func validateRoutingRule(v *types.RoutingRule) error {
 	}
 }
 
-func validateRoutingRules(v []*types.RoutingRule) error {
+func validateRoutingRules(v []types.RoutingRule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RoutingRules"}
 	for i := range v {
-		if err := validateRoutingRule(v[i]); err != nil {
+		if err := validateRoutingRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3280,13 +3277,13 @@ func validateServerSideEncryptionRule(v *types.ServerSideEncryptionRule) error {
 	}
 }
 
-func validateServerSideEncryptionRules(v []*types.ServerSideEncryptionRule) error {
+func validateServerSideEncryptionRules(v []types.ServerSideEncryptionRule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ServerSideEncryptionRules"}
 	for i := range v {
-		if err := validateServerSideEncryptionRule(v[i]); err != nil {
+		if err := validateServerSideEncryptionRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3420,13 +3417,13 @@ func validateTagging(v *types.Tagging) error {
 	}
 }
 
-func validateTagSet(v []*types.Tag) error {
+func validateTagSet(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagSet"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3454,13 +3451,13 @@ func validateTargetGrant(v *types.TargetGrant) error {
 	}
 }
 
-func validateTargetGrants(v []*types.TargetGrant) error {
+func validateTargetGrants(v []types.TargetGrant) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TargetGrants"}
 	for i := range v {
-		if err := validateTargetGrant(v[i]); err != nil {
+		if err := validateTargetGrant(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3489,13 +3486,13 @@ func validateTopicConfiguration(v *types.TopicConfiguration) error {
 	}
 }
 
-func validateTopicConfigurationList(v []*types.TopicConfiguration) error {
+func validateTopicConfigurationList(v []types.TopicConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TopicConfigurationList"}
 	for i := range v {
-		if err := validateTopicConfiguration(v[i]); err != nil {
+		if err := validateTopicConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -5026,9 +5023,6 @@ func validateOpUploadPartCopyInput(v *UploadPartCopyInput) error {
 	if v.CopySource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CopySource"))
 	}
-	if v.PartNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PartNumber"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
@@ -5044,9 +5038,6 @@ func validateOpUploadPartInput(v *UploadPartInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UploadPartInput"}
-	if v.PartNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PartNumber"))
-	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}

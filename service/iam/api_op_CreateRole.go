@@ -104,7 +104,7 @@ type CreateRoleInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
 	// Guide. If any one of the tags is invalid or if you exceed the allowed number of
 	// tags per role, then the entire request fails and the role is not created.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Contains the response to a successful CreateRole request.

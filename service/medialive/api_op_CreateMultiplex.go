@@ -34,7 +34,7 @@ type CreateMultiplexInput struct {
 	// A list of availability zones for the multiplex. You must specify exactly two.
 	//
 	// This member is required.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// Configuration for a multiplex event.
 	//
@@ -52,7 +52,7 @@ type CreateMultiplexInput struct {
 	RequestId *string
 
 	// A collection of key-value pairs.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Placeholder documentation for CreateMultiplexResponse

@@ -41,7 +41,7 @@ type UntagResourceInput struct {
 	// example: /v2/email/tags?ResourceArn=ResourceArn&TagKeys=Key1&TagKeys=Key2
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagResourceOutput struct {

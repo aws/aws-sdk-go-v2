@@ -53,7 +53,7 @@ type ListProposalVotesOutput struct {
 	NextToken *string
 
 	// The listing of votes.
-	ProposalVotes []*types.VoteSummary
+	ProposalVotes []types.VoteSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

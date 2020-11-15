@@ -96,7 +96,7 @@ func (e *InvalidEndpointException) ErrorFault() smithy.ErrorFault { return smith
 type RejectedRecordsException struct {
 	Message *string
 
-	RejectedRecords []*RejectedRecord
+	RejectedRecords []RejectedRecord
 }
 
 func (e *RejectedRecordsException) Error() string {

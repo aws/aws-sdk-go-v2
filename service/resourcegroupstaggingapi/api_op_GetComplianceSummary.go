@@ -48,7 +48,7 @@ type GetComplianceSummaryInput struct {
 	// A list of Regions to limit the output by. If you use this parameter, the count
 	// of returned noncompliant resources includes only resources in the specified
 	// Regions.
-	RegionFilters []*string
+	RegionFilters []string
 
 	// The constraints on the resources that you want returned. The format of each
 	// resource type is service[:resourceType]. For example, specifying a resource type
@@ -74,17 +74,17 @@ type GetComplianceSummaryInput struct {
 	// can specify multiple resource types by using an array. The array can include up
 	// to 100 items. Note that the length constraint requirement applies to each
 	// resource type filter.
-	ResourceTypeFilters []*string
+	ResourceTypeFilters []string
 
 	// A list of tag keys to limit the output by. If you use this parameter, the count
 	// of returned noncompliant resources includes only resources that have the
 	// specified tag keys.
-	TagKeyFilters []*string
+	TagKeyFilters []string
 
 	// The target identifiers (usually, specific account IDs) to limit the output by.
 	// If you use this parameter, the count of returned noncompliant resources includes
 	// only resources with the specified target IDs.
-	TargetIdFilters []*string
+	TargetIdFilters []string
 }
 
 type GetComplianceSummaryOutput struct {
@@ -95,7 +95,7 @@ type GetComplianceSummaryOutput struct {
 	PaginationToken *string
 
 	// A table that shows counts of noncompliant resources.
-	SummaryList []*types.Summary
+	SummaryList []types.Summary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

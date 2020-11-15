@@ -45,7 +45,7 @@ type CreateNotificationRuleInput struct {
 	// allowed events, see EventTypeSummary.
 	//
 	// This member is required.
-	EventTypeIds []*string
+	EventTypeIds []string
 
 	// The name for the notification rule. Notifictaion rule names must be unique in
 	// your AWS account.
@@ -64,7 +64,7 @@ type CreateNotificationRuleInput struct {
 	// notification rule.
 	//
 	// This member is required.
-	Targets []*types.Target
+	Targets []types.Target
 
 	// A unique, client-generated idempotency token that, when provided in a request,
 	// ensures the request cannot be repeated with a changed parameter. If a request
@@ -80,7 +80,7 @@ type CreateNotificationRuleInput struct {
 
 	// A list of tags to apply to this notification rule. Key names cannot start with
 	// "aws".
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateNotificationRuleOutput struct {

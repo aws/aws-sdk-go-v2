@@ -47,7 +47,7 @@ type ListIAMPolicyAssignmentsForUserInput struct {
 	UserName *string
 
 	// The maximum number of results to be returned per request.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
@@ -56,7 +56,7 @@ type ListIAMPolicyAssignmentsForUserInput struct {
 type ListIAMPolicyAssignmentsForUserOutput struct {
 
 	// The active assignments for this user.
-	ActiveAssignments []*types.ActiveIAMPolicyAssignment
+	ActiveAssignments []types.ActiveIAMPolicyAssignment
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
@@ -65,7 +65,7 @@ type ListIAMPolicyAssignmentsForUserOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

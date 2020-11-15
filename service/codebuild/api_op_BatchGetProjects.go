@@ -34,16 +34,16 @@ type BatchGetProjectsInput struct {
 	// shared project using its name.
 	//
 	// This member is required.
-	Names []*string
+	Names []string
 }
 
 type BatchGetProjectsOutput struct {
 
 	// Information about the requested build projects.
-	Projects []*types.Project
+	Projects []types.Project
 
 	// The names of build projects for which information could not be found.
-	ProjectsNotFound []*string
+	ProjectsNotFound []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

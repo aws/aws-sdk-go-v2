@@ -52,8 +52,8 @@ func TestClient_NullOperation_awsAwsjson11Serialize(t *testing.T) {
 		// Serializes null values in maps
 		"AwsJson11MapsSerializeNullValues": {
 			Params: &NullOperationInput{
-				StringMap: map[string]*string{
-					"foo": nil,
+				StringMap: map[string]string{
+					"foo": func() (v string) { return v }(),
 				},
 			},
 			ExpectMethod:  "POST",
@@ -74,8 +74,8 @@ func TestClient_NullOperation_awsAwsjson11Serialize(t *testing.T) {
 		// Serializes null values in lists
 		"AwsJson11ListsSerializeNull": {
 			Params: &NullOperationInput{
-				StringList: []*string{
-					nil,
+				StringList: []string{
+					func() (v string) { return v }(),
 				},
 			},
 			ExpectMethod:  "POST",
@@ -96,6 +96,14 @@ func TestClient_NullOperation_awsAwsjson11Serialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "AwsJson11MapsSerializeNullValues" {
+				t.Skip("disabled test aws.protocoltests.json#JsonProtocol aws.protocoltests.json#NullOperation")
+			}
+
+			if name == "AwsJson11ListsSerializeNull" {
+				t.Skip("disabled test aws.protocoltests.json#JsonProtocol aws.protocoltests.json#NullOperation")
+			}
+
 			var actualReq *http.Request
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				actualReq = r.Clone(r.Context())
@@ -192,8 +200,8 @@ func TestClient_NullOperation_awsAwsjson11Deserialize(t *testing.T) {
 			    }
 			}`),
 			ExpectResult: &NullOperationOutput{
-				StringMap: map[string]*string{
-					"foo": nil,
+				StringMap: map[string]string{
+					"foo": func() (v string) { return v }(),
 				},
 			},
 		},
@@ -210,8 +218,8 @@ func TestClient_NullOperation_awsAwsjson11Deserialize(t *testing.T) {
 			    ]
 			}`),
 			ExpectResult: &NullOperationOutput{
-				StringList: []*string{
-					nil,
+				StringList: []string{
+					func() (v string) { return v }(),
 				},
 			},
 		},

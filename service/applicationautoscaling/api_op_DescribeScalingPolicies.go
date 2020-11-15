@@ -54,7 +54,7 @@ type DescribeScalingPoliciesInput struct {
 	NextToken *string
 
 	// The names of the scaling policies to describe.
-	PolicyNames []*string
+	PolicyNames []string
 
 	// The identifier of the resource associated with the scaling policy. This string
 	// consists of the resource type and unique identifier. If you specify a scalable
@@ -197,7 +197,7 @@ type DescribeScalingPoliciesOutput struct {
 	NextToken *string
 
 	// Information about the scaling policies.
-	ScalingPolicies []*types.ScalingPolicy
+	ScalingPolicies []types.ScalingPolicy
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

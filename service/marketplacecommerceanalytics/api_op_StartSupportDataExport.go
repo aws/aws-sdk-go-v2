@@ -85,7 +85,7 @@ type StartSupportDataExportInput struct {
 
 	// (Optional) Key-value pairs which will be returned, unmodified, in the Amazon SNS
 	// notification message and the data set metadata file.
-	CustomerDefinedValues map[string]*string
+	CustomerDefinedValues map[string]string
 
 	// (Optional) The desired S3 prefix for the published data set, similar to a
 	// directory path in standard file systems. For example, if given the bucket name

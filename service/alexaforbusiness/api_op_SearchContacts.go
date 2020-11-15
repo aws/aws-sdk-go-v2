@@ -32,7 +32,7 @@ type SearchContactsInput struct {
 
 	// The filters to use to list a specified set of address books. The supported
 	// filter keys are DisplayName, FirstName, LastName, and AddressBookArns.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so that
@@ -46,13 +46,13 @@ type SearchContactsInput struct {
 
 	// The sort order to use in listing the specified set of contacts. The supported
 	// sort keys are DisplayName, FirstName, and LastName.
-	SortCriteria []*types.Sort
+	SortCriteria []types.Sort
 }
 
 type SearchContactsOutput struct {
 
 	// The contacts that meet the specified set of filter criteria, in sort order.
-	Contacts []*types.ContactData
+	Contacts []types.ContactData
 
 	// The token returned to indicate that there is more data available.
 	NextToken *string

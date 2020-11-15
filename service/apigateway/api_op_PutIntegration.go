@@ -53,7 +53,7 @@ type PutIntegrationInput struct {
 	// A list of request parameters whose values API Gateway caches. To be valid values
 	// for cacheKeyParameters, these parameters must also be specified for
 	// MethodrequestParameters.
-	CacheKeyParameters []*string
+	CacheKeyParameters []string
 
 	// Specifies a group of related cached parameters. By default, API Gateway uses the
 	// resource ID as the cacheNamespace. You can specify the same cacheNamespace
@@ -121,12 +121,12 @@ type PutIntegrationInput struct {
 	// end. The method request parameter value must match the pattern of
 	// method.request.{location}.{name}, where location is querystring, path, or header
 	// and name must be a valid and unique method request parameter name.
-	RequestParameters map[string]*string
+	RequestParameters map[string]string
 
 	// Represents a map of Velocity templates that are applied on the request payload
 	// based on the value of the Content-Type header sent by the client. The content
 	// type value is the key in this map, and the template (as a String) is the value.
-	RequestTemplates map[string]*string
+	RequestTemplates map[string]string
 
 	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
 	// milliseconds or 29 seconds.
@@ -172,7 +172,7 @@ type PutIntegrationOutput struct {
 	// A list of request parameters whose values API Gateway caches. To be valid values
 	// for cacheKeyParameters, these parameters must also be specified for
 	// MethodrequestParameters.
-	CacheKeyParameters []*string
+	CacheKeyParameters []string
 
 	// Specifies a group of related cached parameters. By default, API Gateway uses the
 	// resource ID as the cacheNamespace. You can specify the same cacheNamespace
@@ -250,7 +250,7 @@ type PutIntegrationOutput struct {
 	// $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n"
 	// }, "statusCode": "200" }Creating an API
 	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
-	IntegrationResponses map[string]*types.IntegrationResponse
+	IntegrationResponses map[string]types.IntegrationResponse
 
 	// Specifies how the method request body of an unmapped content type will be passed
 	// through the integration request to the back end without transformation. A
@@ -284,16 +284,16 @@ type PutIntegrationOutput struct {
 	// end. The method request parameter value must match the pattern of
 	// method.request.{location}.{name}, where location is querystring, path, or header
 	// and name must be a valid and unique method request parameter name.
-	RequestParameters map[string]*string
+	RequestParameters map[string]string
 
 	// Represents a map of Velocity templates that are applied on the request payload
 	// based on the value of the Content-Type header sent by the client. The content
 	// type value is the key in this map, and the template (as a String) is the value.
-	RequestTemplates map[string]*string
+	RequestTemplates map[string]string
 
 	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
 	// milliseconds or 29 seconds.
-	TimeoutInMillis *int32
+	TimeoutInMillis int32
 
 	// Specifies the TLS configuration for an integration.
 	TlsConfig *types.TlsConfig

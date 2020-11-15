@@ -46,7 +46,7 @@ type DeleteInventoryInput struct {
 	// what will be deleted. Once you validate that the data to be deleted is what you
 	// intend to delete, you can run the same command without specifying the DryRun
 	// option.
-	DryRun *bool
+	DryRun bool
 
 	// Use the SchemaDeleteOption to delete a custom inventory type (schema). If you
 	// don't choose this option, the system only deletes existing inventory data

@@ -60,14 +60,14 @@ type DescribePredictorOutput struct {
 	AlgorithmArn *string
 
 	// When PerformAutoML is specified, the ARN of the chosen algorithm.
-	AutoMLAlgorithmArns []*string
+	AutoMLAlgorithmArns []string
 
 	// When the model training task was created.
 	CreationTime *time.Time
 
 	// An array of the ARNs of the dataset import jobs used to import training data for
 	// the predictor.
-	DatasetImportJobArns []*string
+	DatasetImportJobArns []string
 
 	// An AWS Key Management Service (KMS) key and the AWS Identity and Access
 	// Management (IAM) role that Amazon Forecast can assume to access the key.
@@ -140,7 +140,7 @@ type DescribePredictorOutput struct {
 	// using the AutoML algorithm or if HPO is turned on while using the DeepAR+
 	// algorithms, the optimized values for the chosen hyperparameters are returned.
 	// For more information, see aws-forecast-choosing-recipes.
-	TrainingParameters map[string]*string
+	TrainingParameters map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

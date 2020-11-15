@@ -70,7 +70,7 @@ type CreateAutoScalingGroupInput struct {
 	// specify one or more subnets for VPCZoneIdentifier. Conditional: If your account
 	// supports EC2-Classic and VPC, this parameter is required to launch instances
 	// into EC2-Classic.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// The amount of time, in seconds, after a scaling activity completes before
 	// another scaling activity can start. The default value is 300. This setting
@@ -136,7 +136,7 @@ type CreateAutoScalingGroupInput struct {
 	LaunchTemplate *types.LaunchTemplateSpecification
 
 	// One or more lifecycle hooks.
-	LifecycleHookSpecificationList []*types.LifecycleHookSpecification
+	LifecycleHookSpecificationList []types.LifecycleHookSpecification
 
 	// A list of Classic Load Balancers associated with this Auto Scaling group. For
 	// Application Load Balancers and Network Load Balancers, specify a list of target
@@ -144,7 +144,7 @@ type CreateAutoScalingGroupInput struct {
 	// Using a Load Balancer with an Auto Scaling Group
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
-	LoadBalancerNames []*string
+	LoadBalancerNames []string
 
 	// The maximum amount of time, in seconds, that an instance can be in service. The
 	// default is null. This parameter is optional, but if you specify a value for it,
@@ -206,7 +206,7 @@ type CreateAutoScalingGroupInput struct {
 	// Instances
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The Amazon Resource Names (ARN) of the target groups to associate with the Auto
 	// Scaling group. Instances are registered as targets in a target group, and
@@ -214,14 +214,14 @@ type CreateAutoScalingGroupInput struct {
 	// Balancer with an Auto Scaling Group
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
-	TargetGroupARNs []*string
+	TargetGroupARNs []string
 
 	// One or more termination policies used to select the instance to terminate. These
 	// policies are executed in the order that they are listed. For more information,
 	// see Controlling Which Instances Auto Scaling Terminates During Scale In
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
-	TerminationPolicies []*string
+	TerminationPolicies []string
 
 	// A comma-separated list of subnet IDs for your virtual private cloud (VPC). If
 	// you specify VPCZoneIdentifier with AvailabilityZones, the subnets that you

@@ -49,7 +49,7 @@ type ListCodeReviewsInput struct {
 
 	// List of repository names for filtering that needs to be applied before
 	// displaying the result.
-	RepositoryNames []*string
+	RepositoryNames []string
 
 	// List of states for filtering that needs to be applied before displaying the
 	// result. For example, states=[Pending] lists code reviews in the Pending state.
@@ -70,7 +70,7 @@ type ListCodeReviewsInput struct {
 type ListCodeReviewsOutput struct {
 
 	// A list of code reviews that meet the criteria of the request.
-	CodeReviewSummaries []*types.CodeReviewSummary
+	CodeReviewSummaries []types.CodeReviewSummary
 
 	// Pagination token.
 	NextToken *string

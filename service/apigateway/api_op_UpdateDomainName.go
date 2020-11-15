@@ -38,7 +38,7 @@ type UpdateDomainNameInput struct {
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
-	PatchOperations []*types.PatchOperation
+	PatchOperations []types.PatchOperation
 }
 
 // Represents a custom domain name as a user-friendly host name of an API
@@ -130,7 +130,7 @@ type UpdateDomainNameOutput struct {
 	SecurityPolicy types.SecurityPolicy
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

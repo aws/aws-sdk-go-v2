@@ -44,7 +44,7 @@ type UpdatePartitionInput struct {
 	// List of partition key values that define the partition to update.
 	//
 	// This member is required.
-	PartitionValueList []*string
+	PartitionValueList []string
 
 	// The name of the table in which the partition to be updated is located.
 	//

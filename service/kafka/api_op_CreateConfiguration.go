@@ -47,7 +47,7 @@ type CreateConfigurationInput struct {
 	Description *string
 
 	// The versions of Apache Kafka with which you can use this MSK configuration.
-	KafkaVersions []*string
+	KafkaVersions []string
 }
 
 type CreateConfigurationOutput struct {

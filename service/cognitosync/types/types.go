@@ -88,7 +88,7 @@ type IdentityUsage struct {
 	DataStorage *int64
 
 	// Number of datasets for the identity.
-	DatasetCount *int32
+	DatasetCount int32
 
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. GUID generation is unique within a region.
@@ -106,7 +106,7 @@ type IdentityUsage struct {
 type PushSync struct {
 
 	// List of SNS platform application ARNs that could be used by clients.
-	ApplicationArns []*string
+	ApplicationArns []string
 
 	// A role configured to allow Cognito to call SNS on behalf of the developer.
 	RoleArn *string

@@ -31,7 +31,7 @@ type DescribeClustersInput struct {
 
 	// A list of up to 100 cluster names or full cluster Amazon Resource Name (ARN)
 	// entries. If you do not specify a cluster, the default cluster is assumed.
-	Clusters []*string
+	Clusters []string
 
 	// Whether to include additional information about your clusters in the response.
 	// If this field is omitted, the attachments, statistics, and tags are not
@@ -68,10 +68,10 @@ type DescribeClustersInput struct {
 type DescribeClustersOutput struct {
 
 	// The list of clusters.
-	Clusters []*types.Cluster
+	Clusters []types.Cluster
 
 	// Any failures associated with the call.
-	Failures []*types.Failure
+	Failures []types.Failure
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

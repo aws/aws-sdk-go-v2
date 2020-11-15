@@ -37,10 +37,10 @@ type UpdateInputSecurityGroupInput struct {
 	InputSecurityGroupId *string
 
 	// A collection of key-value pairs.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// List of IPv4 CIDR addresses to whitelist
-	WhitelistRules []*types.InputWhitelistRuleCidr
+	WhitelistRules []types.InputWhitelistRuleCidr
 }
 
 // Placeholder documentation for UpdateInputSecurityGroupResponse

@@ -45,7 +45,7 @@ type DescribeBackupJobOutput struct {
 	BackupJobId *string
 
 	// Represents the options specified as part of backup plan or on-demand backup job.
-	BackupOptions map[string]*string
+	BackupOptions map[string]string
 
 	// The size, in bytes, of a backup.
 	BackupSizeInBytes *int64

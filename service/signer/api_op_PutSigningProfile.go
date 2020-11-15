@@ -55,10 +55,10 @@ type PutSigningProfileInput struct {
 
 	// Map of key-value pairs for signing. These can include any information that you
 	// want to use during signing.
-	SigningParameters map[string]*string
+	SigningParameters map[string]string
 
 	// Tags to be associated with the signing profile that is being created.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type PutSigningProfileOutput struct {

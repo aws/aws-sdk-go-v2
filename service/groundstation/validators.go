@@ -529,13 +529,13 @@ func validateEndpointDetails(v *types.EndpointDetails) error {
 	}
 }
 
-func validateEndpointDetailsList(v []*types.EndpointDetails) error {
+func validateEndpointDetailsList(v []types.EndpointDetails) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EndpointDetailsList"}
 	for i := range v {
-		if err := validateEndpointDetails(v[i]); err != nil {
+		if err := validateEndpointDetails(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -644,9 +644,6 @@ func validateOpCreateMissionProfileInput(v *CreateMissionProfileInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateMissionProfileInput"}
 	if v.DataflowEdges == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataflowEdges"))
-	}
-	if v.MinimumViableContactDurationSeconds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MinimumViableContactDurationSeconds"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))

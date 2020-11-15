@@ -146,7 +146,7 @@ type CreateStackSetInput struct {
 	ExecutionRoleName *string
 
 	// The input parameters for the stack set template.
-	Parameters []*types.Parameter
+	Parameters []types.Parameter
 
 	// Describes how the IAM roles required for stack set operations are created. By
 	// default, SELF-MANAGED is specified.
@@ -170,7 +170,7 @@ type CreateStackSetInput struct {
 	// see if you have the required IAM permission to tag resources. If you don't, the
 	// entire CreateStackSet action fails with an access denied error, and the stack
 	// set is not created.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The structure that contains the template body, with a minimum length of 1 byte
 	// and a maximum length of 51,200 bytes. For more information, see Template Anatomy

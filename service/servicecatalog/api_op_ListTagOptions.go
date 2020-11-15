@@ -34,7 +34,7 @@ type ListTagOptionsInput struct {
 	Filters *types.ListTagOptionsFilters
 
 	// The maximum number of items to return with this call.
-	PageSize *int32
+	PageSize int32
 
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
@@ -48,7 +48,7 @@ type ListTagOptionsOutput struct {
 	PageToken *string
 
 	// Information about the TagOptions.
-	TagOptionDetails []*types.TagOptionDetail
+	TagOptionDetails []types.TagOptionDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

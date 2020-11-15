@@ -42,10 +42,10 @@ type GetProvisionedProductOutputsInput struct {
 
 	// The list of keys that the API should return with their values. If none are
 	// provided, the API will return all outputs of the provisioned product.
-	OutputKeys []*string
+	OutputKeys []string
 
 	// The maximum number of items to return with this call.
-	PageSize *int32
+	PageSize int32
 
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
@@ -67,7 +67,7 @@ type GetProvisionedProductOutputsOutput struct {
 	// Information about the product created as the result of a request. For example,
 	// the output for a CloudFormation-backed product that creates an S3 bucket would
 	// include the S3 bucket URL.
-	Outputs []*types.RecordOutput
+	Outputs []types.RecordOutput
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

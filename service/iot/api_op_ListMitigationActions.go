@@ -43,7 +43,7 @@ type ListMitigationActionsInput struct {
 type ListMitigationActionsOutput struct {
 
 	// A set of actions that matched the specified filter criteria.
-	ActionIdentifiers []*types.MitigationActionIdentifier
+	ActionIdentifiers []types.MitigationActionIdentifier
 
 	// The token for the next set of results.
 	NextToken *string

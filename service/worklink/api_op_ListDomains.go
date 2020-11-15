@@ -45,7 +45,7 @@ type ListDomainsInput struct {
 type ListDomainsOutput struct {
 
 	// Information about the domains.
-	Domains []*types.DomainSummary
+	Domains []types.DomainSummary
 
 	// The pagination token used to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.

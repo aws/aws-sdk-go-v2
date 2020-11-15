@@ -52,7 +52,7 @@ type UpdateOpenIDConnectProviderThumbprintInput struct {
 	// OpenID Connect provider. For more information, see CreateOpenIDConnectProvider.
 	//
 	// This member is required.
-	ThumbprintList []*string
+	ThumbprintList []string
 }
 
 type UpdateOpenIDConnectProviderThumbprintOutput struct {

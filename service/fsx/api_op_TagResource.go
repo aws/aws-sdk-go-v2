@@ -39,7 +39,7 @@ type TagResourceInput struct {
 	// value is replaced by the one specified in this parameter.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // The response object for the TagResource operation.

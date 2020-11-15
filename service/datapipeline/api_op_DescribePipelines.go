@@ -40,7 +40,7 @@ type DescribePipelinesInput struct {
 	// a single call. To obtain pipeline IDs, call ListPipelines.
 	//
 	// This member is required.
-	PipelineIds []*string
+	PipelineIds []string
 }
 
 // Contains the output of DescribePipelines.
@@ -49,7 +49,7 @@ type DescribePipelinesOutput struct {
 	// An array of descriptions for the specified pipelines.
 	//
 	// This member is required.
-	PipelineDescriptionList []*types.PipelineDescription
+	PipelineDescriptionList []types.PipelineDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

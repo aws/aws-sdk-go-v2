@@ -78,7 +78,7 @@ type UpdateFileSystemOutput struct {
 	// information, see CreateMountTarget.
 	//
 	// This member is required.
-	NumberOfMountTargets *int32
+	NumberOfMountTargets int32
 
 	// The AWS account that created the file system. If the file system was created by
 	// an IAM user, the parent account to which the user belongs is the owner.
@@ -107,7 +107,7 @@ type UpdateFileSystemOutput struct {
 	// The tags associated with the file system, presented as an array of Tag objects.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A Boolean value that, if true, indicates that the file system is encrypted.
 	Encrypted *bool

@@ -68,7 +68,7 @@ type DescribeLogStreamsInput struct {
 type DescribeLogStreamsOutput struct {
 
 	// The log streams.
-	LogStreams []*types.LogStream
+	LogStreams []types.LogStream
 
 	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string

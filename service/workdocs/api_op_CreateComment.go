@@ -50,7 +50,7 @@ type CreateCommentInput struct {
 
 	// Set this parameter to TRUE to send an email out to the document collaborators
 	// after the comment is created.
-	NotifyCollaborators *bool
+	NotifyCollaborators bool
 
 	// The ID of the parent comment.
 	ParentId *string

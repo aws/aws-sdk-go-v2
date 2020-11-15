@@ -43,7 +43,7 @@ type CreateInputInput struct {
 	InputDescription *string
 
 	// Metadata that can be used to manage the input.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateInputOutput struct {

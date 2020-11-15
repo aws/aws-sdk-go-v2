@@ -34,7 +34,7 @@ type DescribeAcceleratorTypesInput struct {
 type DescribeAcceleratorTypesOutput struct {
 
 	// The available accelerator types.
-	AcceleratorTypes []*types.AcceleratorType
+	AcceleratorTypes []types.AcceleratorType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

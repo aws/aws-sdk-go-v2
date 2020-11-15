@@ -421,32 +421,24 @@ func (m *awsAwsjson10_serializeOpUpdateEnrollmentStatus) HandleSerialize(ctx con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsjson10_serializeDocumentAccountIds(v []*string, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentAccountIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentAutoScalingGroupArns(v []*string, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentAutoScalingGroupArns(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -492,49 +484,37 @@ func awsAwsjson10_serializeDocumentFilter(v *types.Filter, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentFilters(v []*types.Filter, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentFilters(v []types.Filter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson10_serializeDocumentFilter(v[i], av); err != nil {
+		if err := awsAwsjson10_serializeDocumentFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentFilterValues(v []*string, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentFilterValues(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentInstanceArns(v []*string, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentInstanceArns(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -558,34 +538,26 @@ func awsAwsjson10_serializeDocumentJobFilter(v *types.JobFilter, value smithyjso
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentJobFilters(v []*types.JobFilter, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentJobFilters(v []types.JobFilter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson10_serializeDocumentJobFilter(v[i], av); err != nil {
+		if err := awsAwsjson10_serializeDocumentJobFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentJobIds(v []*string, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentJobIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -668,9 +640,9 @@ func awsAwsjson10_serializeOpDocumentExportAutoScalingGroupRecommendationsInput(
 		}
 	}
 
-	if v.IncludeMemberAccounts != nil {
+	if v.IncludeMemberAccounts {
 		ok := object.Key("includeMemberAccounts")
-		ok.Boolean(*v.IncludeMemberAccounts)
+		ok.Boolean(v.IncludeMemberAccounts)
 	}
 
 	if v.S3DestinationConfig != nil {
@@ -713,9 +685,9 @@ func awsAwsjson10_serializeOpDocumentExportEC2InstanceRecommendationsInput(v *Ex
 		}
 	}
 
-	if v.IncludeMemberAccounts != nil {
+	if v.IncludeMemberAccounts {
 		ok := object.Key("includeMemberAccounts")
-		ok.Boolean(*v.IncludeMemberAccounts)
+		ok.Boolean(v.IncludeMemberAccounts)
 	}
 
 	if v.S3DestinationConfig != nil {
@@ -818,9 +790,9 @@ func awsAwsjson10_serializeOpDocumentGetEC2RecommendationProjectedMetricsInput(v
 		ok.String(*v.InstanceArn)
 	}
 
-	if v.Period != nil {
+	if v.Period != 0 {
 		ok := object.Key("period")
-		ok.Integer(*v.Period)
+		ok.Integer(v.Period)
 	}
 
 	if v.StartTime != nil {
@@ -871,9 +843,9 @@ func awsAwsjson10_serializeOpDocumentUpdateEnrollmentStatusInput(v *UpdateEnroll
 	object := value.Object()
 	defer object.Close()
 
-	if v.IncludeMemberAccounts != nil {
+	if v.IncludeMemberAccounts {
 		ok := object.Key("includeMemberAccounts")
-		ok.Boolean(*v.IncludeMemberAccounts)
+		ok.Boolean(v.IncludeMemberAccounts)
 	}
 
 	if len(v.Status) > 0 {

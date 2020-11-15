@@ -30,7 +30,7 @@ func (c *Client) UpdateEventConfigurations(ctx context.Context, params *UpdateEv
 type UpdateEventConfigurationsInput struct {
 
 	// The new event configuration values.
-	EventConfigurations map[string]*types.Configuration
+	EventConfigurations map[string]types.Configuration
 }
 
 type UpdateEventConfigurationsOutput struct {

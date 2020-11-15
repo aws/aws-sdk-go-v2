@@ -44,7 +44,7 @@ type DescribeInsightRulesInput struct {
 type DescribeInsightRulesOutput struct {
 
 	// The rules returned by the operation.
-	InsightRules []*types.InsightRule
+	InsightRules []types.InsightRule
 
 	// Reserved for future use.
 	NextToken *string

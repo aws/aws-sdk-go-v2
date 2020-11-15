@@ -86,7 +86,7 @@ type ActivatedRule struct {
 	// That is, the second Updates:Action should be INSERT,
 	// Updates:ActivatedRule:RuleId should be the rule group that you just removed, and
 	// ExcludedRules should contain the rules that you want to exclude.
-	ExcludedRules []*ExcludedRule
+	ExcludedRules []ExcludedRule
 
 	// Use the OverrideAction to test your RuleGroup. Any rule in a RuleGroup can
 	// potentially block a request. If you set the OverrideAction to None, the
@@ -140,7 +140,7 @@ type ByteMatchSet struct {
 	// that you want AWS WAF to search, and other settings.
 	//
 	// This member is required.
-	ByteMatchTuples []*ByteMatchTuple
+	ByteMatchTuples []ByteMatchTuple
 
 	// A friendly name or description of the ByteMatchSet. You can't change Name after
 	// you create a ByteMatchSet.
@@ -481,7 +481,7 @@ type GeoMatchSet struct {
 	// AWS WAF to search for.
 	//
 	// This member is required.
-	GeoMatchConstraints []*GeoMatchConstraint
+	GeoMatchConstraints []GeoMatchConstraint
 
 	// The GeoMatchSetId for an GeoMatchSet. You use GeoMatchSetId to get information
 	// about a GeoMatchSet (see GeoMatchSet), update a GeoMatchSet (see
@@ -593,7 +593,7 @@ type HTTPRequest struct {
 
 	// A complex type that contains two values for each header in the sampled web
 	// request: the name of the header and the value of the header.
-	Headers []*HTTPHeader
+	Headers []HTTPHeader
 
 	// The HTTP method specified in the sampled web request. CloudFront supports the
 	// following methods: DELETE, GET, HEAD, OPTIONS, PATCH, POST, and PUT.
@@ -628,7 +628,7 @@ type IPSet struct {
 	// the request, this is the value of the c-ip field in the CloudFront access logs.
 	//
 	// This member is required.
-	IPSetDescriptors []*IPSetDescriptor
+	IPSetDescriptors []IPSetDescriptor
 
 	// The IPSetId for an IPSet. You use IPSetId to get information about an IPSet (see
 	// GetIPSet), update an IPSet (see UpdateIPSet), insert an IPSet into a Rule or
@@ -745,7 +745,7 @@ type LoggingConfiguration struct {
 	// An array of Amazon Kinesis Data Firehose ARNs.
 	//
 	// This member is required.
-	LogDestinationConfigs []*string
+	LogDestinationConfigs []string
 
 	// The Amazon Resource Name (ARN) of the web ACL that you want to associate with
 	// LogDestinationConfigs.
@@ -755,7 +755,7 @@ type LoggingConfiguration struct {
 
 	// The parts of the request that you want redacted from the logs. For example, if
 	// you redact the cookie field, the cookie field in the firehose will be xxx.
-	RedactedFields []*FieldToMatch
+	RedactedFields []FieldToMatch
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -825,7 +825,7 @@ type RateBasedRule struct {
 	// RateBasedRule.
 	//
 	// This member is required.
-	MatchPredicates []*Predicate
+	MatchPredicates []Predicate
 
 	// The field that AWS WAF uses to determine if requests are likely arriving from
 	// single source and thus subject to rate monitoring. The only valid value for
@@ -841,7 +841,7 @@ type RateBasedRule struct {
 	// are also met, AWS WAF triggers the action that is specified for this rule.
 	//
 	// This member is required.
-	RateLimit *int64
+	RateLimit int64
 
 	// A unique identifier for a RateBasedRule. You use RuleId to get more information
 	// about a RateBasedRule (see GetRateBasedRule), update a RateBasedRule (see
@@ -904,7 +904,7 @@ type RegexMatchSet struct {
 	// * Whether to perform any conversions on the
 	// request, such as converting it to lowercase, before inspecting it for the
 	// specified string.
-	RegexMatchTuples []*RegexMatchTuple
+	RegexMatchTuples []RegexMatchTuple
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1091,7 +1091,7 @@ type RegexPatternSet struct {
 	// search for, such as B[a@]dB[o0]t.
 	//
 	// This member is required.
-	RegexPatternStrings []*string
+	RegexPatternStrings []string
 
 	// A friendly name or description of the RegexPatternSet. You can't change Name
 	// after you create a RegexPatternSet.
@@ -1173,7 +1173,7 @@ type Rule struct {
 	// IPSet, or SqlInjectionMatchSet object that you want to include in a Rule.
 	//
 	// This member is required.
-	Predicates []*Predicate
+	Predicates []Predicate
 
 	// A unique identifier for a Rule. You use RuleId to get more information about a
 	// Rule (see GetRule), update a Rule (see UpdateRule), insert a Rule into a WebACL
@@ -1354,7 +1354,7 @@ type SampledHTTPRequest struct {
 	// 1.
 	//
 	// This member is required.
-	Weight *int64
+	Weight int64
 
 	// The action for the Rule that the request matched: ALLOW, BLOCK, or COUNT.
 	Action *string
@@ -1410,7 +1410,7 @@ type SizeConstraint struct {
 	// character. For example, the URI /logo.jpg is nine characters long.
 	//
 	// This member is required.
-	Size *int64
+	Size int64
 
 	// Text transformations eliminate some of the unusual formatting that attackers use
 	// in web requests in an effort to bypass AWS WAF. If you specify a transformation,
@@ -1511,7 +1511,7 @@ type SizeConstraintSet struct {
 	// Specifies the parts of web requests that you want to inspect the size of.
 	//
 	// This member is required.
-	SizeConstraints []*SizeConstraint
+	SizeConstraints []SizeConstraint
 
 	// The name, if any, of the SizeConstraintSet.
 	Name *string
@@ -1598,7 +1598,7 @@ type SqlInjectionMatchSet struct {
 	// malicious SQL code.
 	//
 	// This member is required.
-	SqlInjectionMatchTuples []*SqlInjectionMatchTuple
+	SqlInjectionMatchTuples []SqlInjectionMatchTuple
 
 	// The name, if any, of the SqlInjectionMatchSet.
 	Name *string
@@ -1820,7 +1820,7 @@ type TagInfoForResource struct {
 	ResourceARN *string
 
 	//
-	TagList []*Tag
+	TagList []Tag
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1934,7 +1934,7 @@ type WebACL struct {
 	// Rule, and the ID of the Rule.
 	//
 	// This member is required.
-	Rules []*ActivatedRule
+	Rules []ActivatedRule
 
 	// A unique identifier for a WebACL. You use WebACLId to get information about a
 	// WebACL (see GetWebACL), update a WebACL (see UpdateWebACL), and delete a WebACL
@@ -2035,7 +2035,7 @@ type XssMatchSet struct {
 	// scripting attacks.
 	//
 	// This member is required.
-	XssMatchTuples []*XssMatchTuple
+	XssMatchTuples []XssMatchTuple
 
 	// The name, if any, of the XssMatchSet.
 	Name *string

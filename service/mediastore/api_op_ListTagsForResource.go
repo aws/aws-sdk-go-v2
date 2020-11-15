@@ -38,7 +38,7 @@ type ListTagsForResourceInput struct {
 type ListTagsForResourceOutput struct {
 
 	// An array of key:value pairs that are assigned to the container.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

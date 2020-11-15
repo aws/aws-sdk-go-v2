@@ -70,7 +70,7 @@ type ListHandshakesForOrganizationOutput struct {
 
 	// A list of Handshake objects with details about each of the handshakes that are
 	// associated with an organization.
-	Handshakes []*types.Handshake
+	Handshakes []types.Handshake
 
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a

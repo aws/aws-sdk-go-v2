@@ -51,7 +51,7 @@ type DescribeSuggestersInput struct {
 	Deployed *bool
 
 	// The suggesters you want to describe.
-	SuggesterNames []*string
+	SuggesterNames []string
 }
 
 // The result of a DescribeSuggesters request.
@@ -60,7 +60,7 @@ type DescribeSuggestersOutput struct {
 	// The suggesters configured for the domain specified in the request.
 	//
 	// This member is required.
-	Suggesters []*types.SuggesterStatus
+	Suggesters []types.SuggesterStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

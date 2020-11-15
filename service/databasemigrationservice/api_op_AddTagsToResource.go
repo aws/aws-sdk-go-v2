@@ -45,7 +45,7 @@ type AddTagsToResourceInput struct {
 	// One or more tags to be assigned to the resource.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 //

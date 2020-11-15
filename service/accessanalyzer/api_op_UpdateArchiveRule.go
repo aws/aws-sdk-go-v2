@@ -39,7 +39,7 @@ type UpdateArchiveRuleInput struct {
 	// updated.
 	//
 	// This member is required.
-	Filter map[string]*types.Criterion
+	Filter map[string]types.Criterion
 
 	// The name of the rule to update.
 	//

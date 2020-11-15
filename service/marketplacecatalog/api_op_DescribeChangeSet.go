@@ -44,7 +44,7 @@ type DescribeChangeSetInput struct {
 type DescribeChangeSetOutput struct {
 
 	// An array of ChangeSummary objects.
-	ChangeSet []*types.ChangeSummary
+	ChangeSet []types.ChangeSummary
 
 	// The ARN associated with the unique identifier for the change set referenced in
 	// this request.

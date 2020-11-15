@@ -59,7 +59,7 @@ type DescribeConfigurationSetOutput struct {
 	DeliveryOptions *types.DeliveryOptions
 
 	// A list of event destinations associated with the configuration set.
-	EventDestinations []*types.EventDestination
+	EventDestinations []types.EventDestination
 
 	// An object that represents the reputation settings for the configuration set.
 	ReputationOptions *types.ReputationOptions

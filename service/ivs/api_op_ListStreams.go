@@ -31,7 +31,7 @@ func (c *Client) ListStreams(ctx context.Context, params *ListStreamsInput, optF
 type ListStreamsInput struct {
 
 	// Maximum number of streams to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// The first stream to retrieve. This is used for pagination; see the nextToken
 	// response field.
@@ -43,7 +43,7 @@ type ListStreamsOutput struct {
 	// List of streams.
 	//
 	// This member is required.
-	Streams []*types.StreamSummary
+	Streams []types.StreamSummary
 
 	// If there are more streams than maxResults, use nextToken in the request to get
 	// the next set.

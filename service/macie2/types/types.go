@@ -12,11 +12,11 @@ type AccessControlList struct {
 
 	// Specifies whether the ACL grants the general public with read access permissions
 	// for the bucket.
-	AllowsPublicReadAccess *bool
+	AllowsPublicReadAccess bool
 
 	// Specifies whether the ACL grants the general public with write access
 	// permissions for the bucket.
-	AllowsPublicWriteAccess *bool
+	AllowsPublicWriteAccess bool
 }
 
 // Specifies details for an account to associate with an Amazon Macie master
@@ -132,7 +132,7 @@ type BatchGetCustomDataIdentifierSummary struct {
 	// Specifies whether the custom data identifier was deleted. If you delete a custom
 	// data identifier, Amazon Macie doesn't delete it permanently. Instead, it soft
 	// deletes the identifier.
-	Deleted *bool
+	Deleted bool
 
 	// The custom description of the custom data identifier.
 	Description *string
@@ -153,17 +153,17 @@ type BlockPublicAccess struct {
 
 	// Specifies whether Amazon S3 blocks public access control lists (ACLs) for the
 	// bucket and objects in the bucket.
-	BlockPublicAcls *bool
+	BlockPublicAcls bool
 
 	// Specifies whether Amazon S3 blocks public bucket policies for the bucket.
-	BlockPublicPolicy *bool
+	BlockPublicPolicy bool
 
 	// Specifies whether Amazon S3 ignores public ACLs for the bucket and objects in
 	// the bucket.
-	IgnorePublicAcls *bool
+	IgnorePublicAcls bool
 
 	// Specifies whether Amazon S3 restricts public bucket policies for the bucket.
-	RestrictPublicBuckets *bool
+	RestrictPublicBuckets bool
 }
 
 // Provides information about the number of S3 buckets that are publicly accessible
@@ -172,20 +172,20 @@ type BucketCountByEffectivePermission struct {
 
 	// The total number of buckets that allow the general public to have read or write
 	// access to the bucket.
-	PubliclyAccessible *int64
+	PubliclyAccessible int64
 
 	// The total number of buckets that allow the general public to have read access to
 	// the bucket.
-	PubliclyReadable *int64
+	PubliclyReadable int64
 
 	// The total number of buckets that allow the general public to have write access
 	// to the bucket.
-	PubliclyWritable *int64
+	PubliclyWritable int64
 
 	// The total number of buckets that Amazon Macie wasn't able to evaluate
 	// permissions settings for. Macie can't determine whether these buckets are
 	// publicly accessible.
-	Unknown *int64
+	Unknown int64
 }
 
 // Provides information about the number of S3 buckets that use certain types of
@@ -196,15 +196,15 @@ type BucketCountByEncryptionType struct {
 	// customer master key (CMK) to encrypt objects. These buckets use AWS KMS
 	// AWS-managed (AWS-KMS) encryption or AWS KMS customer-managed (SSE-KMS)
 	// encryption.
-	KmsManaged *int64
+	KmsManaged int64
 
 	// The total number of buckets that use an Amazon S3-managed key to encrypt
 	// objects. These buckets use Amazon S3-managed (SSE-S3) encryption.
-	S3Managed *int64
+	S3Managed int64
 
 	// The total number of buckets that don't encrypt objects by default. Default
 	// encryption is disabled for these buckets.
-	Unencrypted *int64
+	Unencrypted int64
 }
 
 // Provides information about the number of S3 buckets that are shared with other
@@ -213,19 +213,19 @@ type BucketCountBySharedAccessType struct {
 
 	// The total number of buckets that are shared with an AWS account that isn't part
 	// of the same Amazon Macie organization.
-	External *int64
+	External int64
 
 	// The total number of buckets that are shared with an AWS account that's part of
 	// the same Amazon Macie organization.
-	Internal *int64
+	Internal int64
 
 	// The total number of buckets that aren't shared with other AWS accounts.
-	NotShared *int64
+	NotShared int64
 
 	// The total number of buckets that Amazon Macie wasn't able to evaluate shared
 	// access settings for. Macie can't determine whether these buckets are shared with
 	// other AWS accounts.
-	Unknown *int64
+	Unknown int64
 }
 
 // Specifies the operator to use in an attribute-based condition that filters the
@@ -233,24 +233,24 @@ type BucketCountBySharedAccessType struct {
 type BucketCriteriaAdditionalProperties struct {
 
 	// An equal to condition to apply to a specified attribute value for buckets.
-	Eq []*string
+	Eq []string
 
 	// A greater than condition to apply to a specified attribute value for buckets.
-	Gt *int64
+	Gt int64
 
 	// A greater than or equal to condition to apply to a specified attribute value for
 	// buckets.
-	Gte *int64
+	Gte int64
 
 	// A less than condition to apply to a specified attribute value for buckets.
-	Lt *int64
+	Lt int64
 
 	// A less than or equal to condition to apply to a specified attribute value for
 	// buckets.
-	Lte *int64
+	Lte int64
 
 	// A not equal to condition to apply to a specified attribute value for buckets.
-	Neq []*string
+	Neq []string
 
 	// The prefix of the buckets to include in the results.
 	Prefix *string
@@ -291,19 +291,19 @@ type BucketMetadata struct {
 	// The total number of objects that Amazon Macie can analyze in the bucket. These
 	// objects use a supported storage class and have a file name extension for a
 	// supported file or storage format.
-	ClassifiableObjectCount *int64
+	ClassifiableObjectCount int64
 
 	// The total storage size, in bytes, of the objects that Amazon Macie can analyze
 	// in the bucket. These objects use a supported storage class and have a file name
 	// extension for a supported file or storage format.
-	ClassifiableSizeInBytes *int64
+	ClassifiableSizeInBytes int64
 
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most
 	// recently retrieved data about the bucket from Amazon S3.
 	LastUpdated *time.Time
 
 	// The total number of objects in the bucket.
-	ObjectCount *int64
+	ObjectCount int64
 
 	// The total number of objects that are in the bucket, grouped by server-side
 	// encryption type. This includes a grouping that reports the total number of
@@ -339,14 +339,14 @@ type BucketMetadata struct {
 	SharedAccess SharedAccess
 
 	// The total storage size, in bytes, of the bucket.
-	SizeInBytes *int64
+	SizeInBytes int64
 
 	// The total compressed storage size, in bytes, of the bucket.
-	SizeInBytesCompressed *int64
+	SizeInBytesCompressed int64
 
 	// An array that specifies the tags (keys and values) that are associated with the
 	// bucket.
-	Tags []*KeyValuePair
+	Tags []KeyValuePair
 
 	// The total number of objects that Amazon Macie can't analyze in the bucket. These
 	// objects don't use a supported storage class or don't have a file name extension
@@ -359,7 +359,7 @@ type BucketMetadata struct {
 	UnclassifiableObjectSizeInBytes *ObjectLevelStatistics
 
 	// Specifies whether versioning is enabled for the bucket.
-	Versioning *bool
+	Versioning bool
 }
 
 // Provides information about the account-level and bucket-level permissions
@@ -379,11 +379,11 @@ type BucketPolicy struct {
 
 	// Specifies whether the bucket policy allows the general public to have read
 	// access to the bucket.
-	AllowsPublicReadAccess *bool
+	AllowsPublicReadAccess bool
 
 	// Specifies whether the bucket policy allows the general public to have write
 	// access to the bucket.
-	AllowsPublicWriteAccess *bool
+	AllowsPublicWriteAccess bool
 }
 
 // Provides information about the permissions settings that determine whether an S3
@@ -434,13 +434,13 @@ type Cell struct {
 	// The column number of the column that contains the data. For a Microsoft Excel
 	// workbook, this value correlates to the alphabetical character(s) for a column
 	// identifier. For example, 1 for column A, 2 for column B, and so on.
-	Column *int64
+	Column int64
 
 	// The name of the column that contains the data, if available.
 	ColumnName *string
 
 	// The row number of the row that contains the data.
-	Row *int64
+	Row int64
 }
 
 // Provides information about a sensitive data finding, including the
@@ -484,7 +484,7 @@ type ClassificationResult struct {
 	// investigate additional occurrences of sensitive data in an object. You can do
 	// this by referring to the corresponding sensitive data discovery result for the
 	// finding (ClassificationDetails.detailedResultsLocation).
-	AdditionalOccurrences *bool
+	AdditionalOccurrences bool
 
 	// The custom data identifiers that detected the sensitive data and the number of
 	// occurrences of the data that they detected.
@@ -497,10 +497,10 @@ type ClassificationResult struct {
 
 	// The category, types, and number of occurrences of the sensitive data that
 	// produced the finding.
-	SensitiveData []*SensitiveDataItem
+	SensitiveData []SensitiveDataItem
 
 	// The total size, in bytes, of the data that the finding applies to.
-	SizeClassified *int64
+	SizeClassified int64
 
 	// The status of the finding.
 	Status *ClassificationResultStatus
@@ -535,7 +535,7 @@ type ClassificationResultStatus struct {
 type CriterionAdditionalProperties struct {
 
 	// An equal to condition to apply to a specified property value for findings.
-	Eq []*string
+	Eq []string
 
 	// A condition that requires an array field on a finding to exactly match the
 	// specified property values. You can use this operator with the following
@@ -560,24 +560,24 @@ type CriterionAdditionalProperties struct {
 	//
 	// *
 	// sensitiveData.detections.type
-	EqExactMatch []*string
+	EqExactMatch []string
 
 	// A greater than condition to apply to a specified property value for findings.
-	Gt *int64
+	Gt int64
 
 	// A greater than or equal to condition to apply to a specified property value for
 	// findings.
-	Gte *int64
+	Gte int64
 
 	// A less than condition to apply to a specified property value for findings.
-	Lt *int64
+	Lt int64
 
 	// A less than or equal to condition to apply to a specified property value for
 	// findings.
-	Lte *int64
+	Lte int64
 
 	// A not equal to condition to apply to a specified property value for findings.
-	Neq []*string
+	Neq []string
 }
 
 // Provides information about custom data identifiers that produced a sensitive
@@ -587,11 +587,11 @@ type CustomDataIdentifiers struct {
 
 	// The custom data identifiers that detected the data, and the number of
 	// occurrences of the data that each identifier detected.
-	Detections []*CustomDetection
+	Detections []CustomDetection
 
 	// The total number of occurrences of the data that was detected by the custom data
 	// identifiers and produced the finding.
-	TotalCount *int64
+	TotalCount int64
 }
 
 // Provides information about a custom data identifier.
@@ -623,7 +623,7 @@ type CustomDetection struct {
 
 	// The total number of occurrences of the sensitive data that the custom data
 	// identifier detected.
-	Count *int64
+	Count int64
 
 	// The name of the custom data identifier.
 	Name *string
@@ -644,7 +644,7 @@ type DailySchedule struct {
 type DefaultDetection struct {
 
 	// The total number of occurrences of the type of sensitive data that was detected.
-	Count *int64
+	Count int64
 
 	// The location of 1-15 occurrences of the sensitive data that was detected. A
 	// finding includes location data for a maximum of 15 occurrences of sensitive
@@ -697,7 +697,7 @@ type Finding struct {
 	AccountId *string
 
 	// Specifies whether the finding is archived.
-	Archived *bool
+	Archived bool
 
 	// The category of the finding. Possible values are: CLASSIFICATION, for a
 	// sensitive data finding; and, POLICY, for a policy finding.
@@ -708,7 +708,7 @@ type Finding struct {
 	ClassificationDetails *ClassificationDetails
 
 	// The total number of occurrences of the finding.
-	Count *int64
+	Count int64
 
 	// The date and time, in UTC and extended ISO 8601 format, when the finding was
 	// created.
@@ -736,7 +736,7 @@ type Finding struct {
 
 	// Specifies whether the finding is a sample finding. A sample finding is a finding
 	// that uses example data to demonstrate what a finding might contain.
-	Sample *bool
+	Sample bool
 
 	// The version of the schema that was used to define the data structures in the
 	// finding.
@@ -796,7 +796,7 @@ type FindingCriteria struct {
 
 	// A condition that specifies the property, operator, and value to use to filter
 	// the results.
-	Criterion map[string]*CriterionAdditionalProperties
+	Criterion map[string]CriterionAdditionalProperties
 }
 
 // Provides information about a findings filter.
@@ -818,7 +818,7 @@ type FindingsFilterListItem struct {
 
 	// A map of key-value pairs that identifies the tags (keys and values) that are
 	// associated with the filter.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Specifies criteria for sorting the results of a query that retrieves aggregated
@@ -841,7 +841,7 @@ type FindingStatisticsSortCriteria struct {
 type GroupCount struct {
 
 	// The total number of findings in the group of query results.
-	Count *int64
+	Count int64
 
 	// The name of the property that defines the group in the query results, as
 	// specified by the groupBy property in the query request.
@@ -931,10 +931,10 @@ type IpCountry struct {
 type IpGeoLocation struct {
 
 	// The latitude coordinate of the location, rounded to four decimal places.
-	Lat *float64
+	Lat float64
 
 	// The longitude coordinate of the location, rounded to four decimal places.
-	Lon *float64
+	Lon float64
 }
 
 // Provides information about the registered owner of an IP address.
@@ -989,7 +989,7 @@ type JobScopingBlock struct {
 
 	// An array of conditions, one for each condition that determines which objects to
 	// include or exclude from the job.
-	And []*JobScopeTerm
+	And []JobScopeTerm
 }
 
 // Provides information about a classification job, including the current status of
@@ -997,7 +997,7 @@ type JobScopingBlock struct {
 type JobSummary struct {
 
 	// The S3 buckets that the job is configured to analyze.
-	BucketDefinitions []*S3BucketDefinitionForJob
+	BucketDefinitions []S3BucketDefinitionForJob
 
 	// The date and time, in UTC and extended ISO 8601 format, when the job was
 	// created.
@@ -1068,11 +1068,11 @@ type ListJobsFilterCriteria struct {
 
 	// An array of objects, one for each condition that determines which jobs to
 	// exclude from the results.
-	Excludes []*ListJobsFilterTerm
+	Excludes []ListJobsFilterTerm
 
 	// An array of objects, one for each condition that determines which jobs to
 	// include in the results.
-	Includes []*ListJobsFilterTerm
+	Includes []ListJobsFilterTerm
 }
 
 // Specifies a condition that filters the results of a request for information
@@ -1087,7 +1087,7 @@ type ListJobsFilterTerm struct {
 	Key ListJobsFilterKey
 
 	// An array that lists one or more values to use to filter the results.
-	Values []*string
+	Values []string
 }
 
 // Specifies criteria for sorting the results of a request for information about
@@ -1130,7 +1130,7 @@ type Member struct {
 
 	// A map of key-value pairs that identifies the tags (keys and values) that are
 	// associated with the account in Amazon Macie.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The date and time, in UTC and extended ISO 8601 format, of the most recent
 	// change to the status of the relationship between the account and the master
@@ -1146,7 +1146,7 @@ type MonthlySchedule struct {
 	// certain month, Macie runs the job on the last day of that month. For example, if
 	// this value is 31 and a month has only 30 days, Macie runs the job on day 30 of
 	// that month.
-	DayOfMonth *int32
+	DayOfMonth int32
 }
 
 // Provides information about the number of objects that are in an S3 bucket and
@@ -1156,19 +1156,19 @@ type ObjectCountByEncryptionType struct {
 
 	// The total number of objects that are encrypted using a customer-managed key. The
 	// objects use customer-provided server-side (SSE-C) encryption.
-	CustomerManaged *int64
+	CustomerManaged int64
 
 	// The total number of objects that are encrypted using an AWS Key Management
 	// Service (AWS KMS) customer master key (CMK). The objects use AWS KMS AWS-managed
 	// (AWS-KMS) encryption or AWS KMS customer-managed (SSE-KMS) encryption.
-	KmsManaged *int64
+	KmsManaged int64
 
 	// The total number of objects that are encrypted using an Amazon S3-managed key.
 	// The objects use Amazon S3-managed (SSE-S3) encryption.
-	S3Managed *int64
+	S3Managed int64
 
 	// The total number of objects that aren't encrypted or use client-side encryption.
-	Unencrypted *int64
+	Unencrypted int64
 }
 
 // Provides information about the total storage size (in bytes) or number of
@@ -1181,16 +1181,16 @@ type ObjectLevelStatistics struct {
 	// The total storage size (in bytes) or number of objects that Amazon Macie can't
 	// analyze because the objects don't have a file name extension for a supported
 	// file or storage format.
-	FileType *int64
+	FileType int64
 
 	// The total storage size (in bytes) or number of objects that Amazon Macie can't
 	// analyze because the objects use an unsupported storage class.
-	StorageClass *int64
+	StorageClass int64
 
 	// The total storage size (in bytes) or number of objects that Amazon Macie can't
 	// analyze because the objects use an unsupported storage class or don't have a
 	// file name extension for a supported file or storage format.
-	Total *int64
+	Total int64
 }
 
 // Provides the location of 1-15 occurrences of sensitive data that was detected by
@@ -1201,7 +1201,7 @@ type Occurrences struct {
 	// An array of objects, one for each occurrence of sensitive data in a Microsoft
 	// Excel workbook, CSV file, or TSV file. Each object specifies the cell that
 	// contains the data. This value is null for all other types of files.
-	Cells []*Cell
+	Cells []Cell
 
 	// An array of objects, one for each occurrence of sensitive data in an Apache Avro
 	// object container, Microsoft Word document, or non-binary text file, such as an
@@ -1212,24 +1212,24 @@ type Occurrences struct {
 	// file, or TSV file; data in unstructured sections of an otherwise structured
 	// file, such as a comment in a file; and, data in a malformed file that Amazon
 	// Macie analyzes as plain text.
-	LineRanges []*Range
+	LineRanges []Range
 
 	// An array of objects, one for each occurrence of sensitive data in a binary text
 	// file. Each object specifies the position of the data relative to the beginning
 	// of the file. This value is typically null. For binary text files, Macie adds
 	// location data to a lineRanges.Range or Page object, depending on the file type.
-	OffsetRanges []*Range
+	OffsetRanges []Range
 
 	// An array of objects, one for each occurrence of sensitive data in an Adobe
 	// Portable Document Format file. Each object specifies the page that contains the
 	// data, and the position of the data on that page. This value is null for all
 	// other types of files.
-	Pages []*Page
+	Pages []Page
 
 	// An array of objects, one for each occurrence of sensitive data in an Apache
 	// Parquet file. Each object specifies the row that contains the data. This value
 	// is null for all other types of files.
-	Records []*Record
+	Records []Record
 }
 
 // Specifies the location of an occurrence of sensitive data in an Adobe Portable
@@ -1243,7 +1243,7 @@ type Page struct {
 	OffsetRange *Range
 
 	// The page number of the page that contains the data.
-	PageNumber *int64
+	PageNumber int64
 }
 
 // Provides the details of a policy finding.
@@ -1273,7 +1273,7 @@ type Range struct {
 	// * In a Page object, the number of
 	// lines (lineRange) or characters (offsetRange) from the beginning of the page to
 	// the end of the sensitive data.
-	End *int64
+	End int64
 
 	// Possible values are:
 	//
@@ -1287,11 +1287,11 @@ type Range struct {
 	// * In a Page object, the number
 	// of lines (lineRange) or characters (offsetRange) from the beginning of the page
 	// to the beginning of the sensitive data.
-	Start *int64
+	Start int64
 
 	// The column number for the column that contains the data, if the file contains
 	// structured data.
-	StartColumn *int64
+	StartColumn int64
 }
 
 // Specifies the location of an occurrence of sensitive data in an Apache Parquet
@@ -1299,7 +1299,7 @@ type Range struct {
 type Record struct {
 
 	// The row index, starting from 0, for the row that contains the data.
-	RecordIndex *int64
+	RecordIndex int64
 }
 
 // Provides information about settings that define whether one or more objects in
@@ -1309,15 +1309,15 @@ type ReplicationDetails struct {
 
 	// Specifies whether the bucket is configured to replicate one or more objects to
 	// any destination.
-	Replicated *bool
+	Replicated bool
 
 	// Specifies whether the bucket is configured to replicate one or more objects to
 	// an AWS account that isn't part of the same Amazon Macie organization.
-	ReplicatedExternally *bool
+	ReplicatedExternally bool
 
 	// An array of AWS account IDs, one for each AWS account that the bucket is
 	// configured to replicate one or more objects to.
-	ReplicationAccounts []*string
+	ReplicationAccounts []string
 }
 
 // Provides information about the resources that a finding applies to.
@@ -1357,7 +1357,7 @@ type S3Bucket struct {
 	PublicAccess *BucketPublicAccess
 
 	// The tags that are associated with the bucket.
-	Tags []*KeyValuePair
+	Tags []KeyValuePair
 }
 
 // Specifies which S3 buckets contain the objects that a classification job
@@ -1370,7 +1370,7 @@ type S3BucketDefinitionForJob struct {
 	AccountId *string
 
 	// An array that lists the names of the buckets.
-	Buckets []*string
+	Buckets []string
 }
 
 // Provides information about the user who owns an S3 bucket.
@@ -1409,7 +1409,7 @@ type S3Destination struct {
 type S3JobDefinition struct {
 
 	// An array of objects, one for each bucket that contains objects to analyze.
-	BucketDefinitions []*S3BucketDefinitionForJob
+	BucketDefinitions []S3BucketDefinitionForJob
 
 	// The property- and tag-based conditions that determine which objects to include
 	// or exclude from the analysis.
@@ -1443,19 +1443,19 @@ type S3Object struct {
 
 	// Specifies whether the object is publicly accessible due to the combination of
 	// permissions settings that apply to the object.
-	PublicAccess *bool
+	PublicAccess bool
 
 	// The type of server-side encryption that's used for the object.
 	ServerSideEncryption *ServerSideEncryption
 
 	// The total storage size, in bytes, of the object.
-	Size *int64
+	Size int64
 
 	// The storage class of the object.
 	StorageClass StorageClass
 
 	// The tags that are associated with the object.
-	Tags []*KeyValuePair
+	Tags []KeyValuePair
 
 	// The identifier for the affected version of the object.
 	VersionId *string
@@ -1490,10 +1490,10 @@ type SensitiveDataItem struct {
 	// An array of objects, one for each type of sensitive data that was detected. Each
 	// object reports the number of occurrences of a specific type of sensitive data
 	// that was detected, and the location of up to 15 of those occurrences.
-	Detections []*DefaultDetection
+	Detections []DefaultDetection
 
 	// The total number of occurrences of the sensitive data that was detected.
-	TotalCount *int64
+	TotalCount int64
 }
 
 // Provides information about the server-side encryption settings for an S3 bucket
@@ -1516,14 +1516,14 @@ type ServiceLimit struct {
 
 	// Specifies whether the account has met the quota that corresponds to the metric
 	// specified by the UsageByAccount.type field in the response.
-	IsServiceLimited *bool
+	IsServiceLimited bool
 
 	// The unit of measurement for the value specified by the value field.
 	Unit Unit
 
 	// The value for the metric specified by the UsageByAccount.type field in the
 	// response.
-	Value *int64
+	Value int64
 }
 
 // Provides information about a session that was created for an entity that
@@ -1547,7 +1547,7 @@ type SessionContextAttributes struct {
 
 	// Specifies whether the credentials were authenticated with a multi-factor
 	// authentication (MFA) device.
-	MfaAuthenticated *bool
+	MfaAuthenticated bool
 }
 
 // Provides information about the source and type of temporary security credentials
@@ -1584,7 +1584,7 @@ type Severity struct {
 
 	// The numerical representation of the finding's severity, ranging from 1 (least
 	// severe) to 3 (most severe).
-	Score *int64
+	Score int64
 }
 
 // Specifies a property-based condition that determines whether an object is
@@ -1628,7 +1628,7 @@ type SimpleScopeTerm struct {
 	// string that represents a tag key for an object. For advanced options, use a
 	// TagScopeTerm object, instead of a SimpleScopeTerm object, to define a tag-based
 	// condition for the job.
-	Values []*string
+	Values []string
 }
 
 // Specifies criteria for sorting the results of a request for findings.
@@ -1649,10 +1649,10 @@ type Statistics struct {
 
 	// The approximate number of objects that the job has yet to process during its
 	// current run.
-	ApproximateNumberOfObjectsToProcess *float64
+	ApproximateNumberOfObjectsToProcess float64
 
 	// The number of times that the job has run.
-	NumberOfRuns *float64
+	NumberOfRuns float64
 }
 
 // Specifies a tag-based condition that determines whether an object is included or
@@ -1667,7 +1667,7 @@ type TagScopeTerm struct {
 	Key *string
 
 	// The tag keys or tag key and value pairs to use in the condition.
-	TagValues []*TagValuePair
+	TagValues []TagValuePair
 
 	// The type of object to apply the condition to.
 	Target TagTarget
@@ -1735,7 +1735,7 @@ type UsageRecord struct {
 	// An array of objects that contains usage data and quotas for the account. Each
 	// object contains the data for a specific usage metric and the corresponding
 	// quota.
-	Usage []*UsageByAccount
+	Usage []UsageByAccount
 }
 
 // Specifies a condition for filtering the results of a query for account quotas
@@ -1767,7 +1767,7 @@ type UsageStatisticsFilter struct {
 	//
 	// * total - A string that
 	// represents the current, estimated month-to-date cost for an account.
-	Values []*string
+	Values []string
 }
 
 // Specifies criteria for sorting the results of a query for account quotas and

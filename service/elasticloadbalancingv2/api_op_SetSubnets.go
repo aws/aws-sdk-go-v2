@@ -46,18 +46,18 @@ type SetSubnetsInput struct {
 	// IP addresses for your internet-facing load balancer, you can specify one Elastic
 	// IP address per subnet. For internal load balancers, you can specify one private
 	// IP address per subnet from the IPv4 range of the subnet.
-	SubnetMappings []*types.SubnetMapping
+	SubnetMappings []types.SubnetMapping
 
 	// The IDs of the public subnets. You must specify subnets from at least two
 	// Availability Zones. You can specify only one subnet per Availability Zone. You
 	// must specify either subnets or subnet mappings.
-	Subnets []*string
+	Subnets []string
 }
 
 type SetSubnetsOutput struct {
 
 	// Information about the subnets.
-	AvailabilityZones []*types.AvailabilityZone
+	AvailabilityZones []types.AvailabilityZone
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

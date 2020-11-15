@@ -74,7 +74,7 @@ type GetEventSelectorsInput struct {
 type GetEventSelectorsOutput struct {
 
 	// The event selectors that are configured for the trail.
-	EventSelectors []*types.EventSelector
+	EventSelectors []types.EventSelector
 
 	// The specified trail ARN that has the event selectors.
 	TrailARN *string

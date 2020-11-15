@@ -49,7 +49,7 @@ type GetModelsInput struct {
 type GetModelsOutput struct {
 
 	// The current page of elements from this collection.
-	Items []*types.Model
+	Items []types.Model
 
 	// The current pagination position in the paged result set.
 	Position *string

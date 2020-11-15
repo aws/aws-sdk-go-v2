@@ -46,7 +46,7 @@ type ListAnalyzersOutput struct {
 	// The analyzers retrieved.
 	//
 	// This member is required.
-	Analyzers []*types.AnalyzerSummary
+	Analyzers []types.AnalyzerSummary
 
 	// A token used for pagination of results returned.
 	NextToken *string

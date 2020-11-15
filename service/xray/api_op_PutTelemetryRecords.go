@@ -32,7 +32,7 @@ type PutTelemetryRecordsInput struct {
 	//
 	//
 	// This member is required.
-	TelemetryRecords []*types.TelemetryRecord
+	TelemetryRecords []types.TelemetryRecord
 
 	//
 	EC2InstanceId *string

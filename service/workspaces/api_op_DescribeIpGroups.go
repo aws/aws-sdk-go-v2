@@ -30,7 +30,7 @@ func (c *Client) DescribeIpGroups(ctx context.Context, params *DescribeIpGroupsI
 type DescribeIpGroupsInput struct {
 
 	// The identifiers of one or more IP access control groups.
-	GroupIds []*string
+	GroupIds []string
 
 	// The maximum number of items to return.
 	MaxResults *int32
@@ -47,7 +47,7 @@ type DescribeIpGroupsOutput struct {
 	NextToken *string
 
 	// Information about the IP access control groups.
-	Result []*types.WorkspacesIpGroup
+	Result []types.WorkspacesIpGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

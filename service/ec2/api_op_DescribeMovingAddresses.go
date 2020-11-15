@@ -36,32 +36,32 @@ type DescribeMovingAddressesInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
 	// * moving-status - The status of the Elastic IP address
 	// (MovingToVpc | RestoringToClassic).
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
 	// with the returned NextToken value. This value can be between 5 and 1000; if
 	// MaxResults is given a value outside of this range, an error is returned.
 	// Default: If no value is provided, the default is 1000.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next page of results.
 	NextToken *string
 
 	// One or more Elastic IP addresses.
-	PublicIps []*string
+	PublicIps []string
 }
 
 type DescribeMovingAddressesOutput struct {
 
 	// The status for each Elastic IP address.
-	MovingAddressStatuses []*types.MovingAddressStatus
+	MovingAddressStatuses []types.MovingAddressStatus
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

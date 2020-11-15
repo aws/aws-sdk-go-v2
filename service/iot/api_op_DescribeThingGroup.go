@@ -65,7 +65,7 @@ type DescribeThingGroupOutput struct {
 	ThingGroupProperties *types.ThingGroupProperties
 
 	// The version of the thing group.
-	Version *int64
+	Version int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

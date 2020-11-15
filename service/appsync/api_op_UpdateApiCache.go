@@ -48,7 +48,7 @@ type UpdateApiCacheInput struct {
 	// TTL in seconds for cache entries. Valid values are between 1 and 3600 seconds.
 	//
 	// This member is required.
-	Ttl *int64
+	Ttl int64
 
 	// The cache instance type. Valid values are
 	//

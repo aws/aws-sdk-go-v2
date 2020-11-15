@@ -43,11 +43,11 @@ type CreateRobotApplicationInput struct {
 	// The sources of the robot application.
 	//
 	// This member is required.
-	Sources []*types.SourceConfig
+	Sources []types.SourceConfig
 
 	// A map that contains tag keys and tag values that are attached to the robot
 	// application.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateRobotApplicationOutput struct {
@@ -69,10 +69,10 @@ type CreateRobotApplicationOutput struct {
 	RobotSoftwareSuite *types.RobotSoftwareSuite
 
 	// The sources of the robot application.
-	Sources []*types.Source
+	Sources []types.Source
 
 	// The list of all tags added to the robot application.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The version of the robot application.
 	Version *string

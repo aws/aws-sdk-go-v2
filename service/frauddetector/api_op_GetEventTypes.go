@@ -47,7 +47,7 @@ type GetEventTypesInput struct {
 type GetEventTypesOutput struct {
 
 	// An array of event types.
-	EventTypes []*types.EventType
+	EventTypes []types.EventType
 
 	// The next page token.
 	NextToken *string

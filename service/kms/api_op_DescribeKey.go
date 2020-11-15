@@ -98,7 +98,7 @@ type DescribeKeyInput struct {
 	// A list of grant tokens. For more information, see Grant Tokens
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
-	GrantTokens []*string
+	GrantTokens []string
 }
 
 type DescribeKeyOutput struct {

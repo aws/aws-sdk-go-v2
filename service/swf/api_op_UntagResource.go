@@ -36,7 +36,7 @@ type UntagResourceInput struct {
 	// The list of tags to remove from the Amazon SWF domain.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagResourceOutput struct {

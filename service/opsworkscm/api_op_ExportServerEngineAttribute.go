@@ -67,7 +67,7 @@ type ExportServerEngineAttributeInput struct {
 	// the Chef engine (three numbers separated by dots, such as 13.8.5). If this
 	// attribute is empty, OpsWorks for Chef Automate uses the most current version. In
 	// Puppet, this parameter is ignored.
-	InputAttributes []*types.EngineAttribute
+	InputAttributes []types.EngineAttribute
 }
 
 type ExportServerEngineAttributeOutput struct {

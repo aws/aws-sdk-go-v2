@@ -59,7 +59,7 @@ type DescribePullRequestEventsOutput struct {
 	// Information about the pull request events.
 	//
 	// This member is required.
-	PullRequestEvents []*types.PullRequestEvent
+	PullRequestEvents []types.PullRequestEvent
 
 	// An enumeration token that can be used in a request to return the next batch of
 	// the results.

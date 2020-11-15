@@ -50,7 +50,7 @@ type ListWebsiteAuthorizationProvidersOutput struct {
 	NextToken *string
 
 	// The website authorization providers.
-	WebsiteAuthorizationProviders []*types.WebsiteAuthorizationProviderSummary
+	WebsiteAuthorizationProviders []types.WebsiteAuthorizationProviderSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

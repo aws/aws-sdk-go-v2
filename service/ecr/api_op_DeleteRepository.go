@@ -36,7 +36,7 @@ type DeleteRepositoryInput struct {
 	RepositoryName *string
 
 	// If a repository contains images, forces the deletion.
-	Force *bool
+	Force bool
 
 	// The AWS account ID associated with the registry that contains the repository to
 	// delete. If you do not specify a registry, the default registry is assumed.

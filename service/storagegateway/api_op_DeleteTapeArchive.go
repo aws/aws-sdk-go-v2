@@ -40,7 +40,7 @@ type DeleteTapeArchiveInput struct {
 	// retention lock. Only archived tapes with tape retention lock set to governance
 	// can be deleted. Archived tapes with tape retention lock set to compliance can't
 	// be deleted.
-	BypassGovernanceRetention *bool
+	BypassGovernanceRetention bool
 }
 
 // DeleteTapeArchiveOutput

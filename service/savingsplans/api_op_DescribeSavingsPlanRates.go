@@ -35,7 +35,7 @@ type DescribeSavingsPlanRatesInput struct {
 	SavingsPlanId *string
 
 	// The filters.
-	Filters []*types.SavingsPlanRateFilter
+	Filters []types.SavingsPlanRateFilter
 
 	// The maximum number of results to return with a single call. To retrieve
 	// additional results, make another call with the returned token value.
@@ -55,7 +55,7 @@ type DescribeSavingsPlanRatesOutput struct {
 	SavingsPlanId *string
 
 	// Information about the Savings Plans rates.
-	SearchResults []*types.SavingsPlanRate
+	SearchResults []types.SavingsPlanRate
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

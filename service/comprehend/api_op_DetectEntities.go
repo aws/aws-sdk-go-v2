@@ -61,7 +61,7 @@ type DetectEntitiesOutput struct {
 	// detects the entities that the model is trained to recognize. Otherwise, it
 	// detects the default entity types. For a list of default entity types, see
 	// how-entities.
-	Entities []*types.Entity
+	Entities []types.Entity
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

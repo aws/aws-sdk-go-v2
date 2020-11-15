@@ -676,13 +676,13 @@ func validateCategoricalParameterRange(v *types.CategoricalParameterRange) error
 	}
 }
 
-func validateCategoricalParameterRanges(v []*types.CategoricalParameterRange) error {
+func validateCategoricalParameterRanges(v []types.CategoricalParameterRange) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CategoricalParameterRanges"}
 	for i := range v {
-		if err := validateCategoricalParameterRange(v[i]); err != nil {
+		if err := validateCategoricalParameterRange(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -714,13 +714,13 @@ func validateContinuousParameterRange(v *types.ContinuousParameterRange) error {
 	}
 }
 
-func validateContinuousParameterRanges(v []*types.ContinuousParameterRange) error {
+func validateContinuousParameterRanges(v []types.ContinuousParameterRange) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ContinuousParameterRanges"}
 	for i := range v {
-		if err := validateContinuousParameterRange(v[i]); err != nil {
+		if err := validateContinuousParameterRange(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -842,13 +842,13 @@ func validateFeaturizationMethod(v *types.FeaturizationMethod) error {
 	}
 }
 
-func validateFeaturizationPipeline(v []*types.FeaturizationMethod) error {
+func validateFeaturizationPipeline(v []types.FeaturizationMethod) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FeaturizationPipeline"}
 	for i := range v {
-		if err := validateFeaturizationMethod(v[i]); err != nil {
+		if err := validateFeaturizationMethod(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -859,13 +859,13 @@ func validateFeaturizationPipeline(v []*types.FeaturizationMethod) error {
 	}
 }
 
-func validateFeaturizations(v []*types.Featurization) error {
+func validateFeaturizations(v []types.Featurization) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Featurizations"}
 	for i := range v {
-		if err := validateFeaturization(v[i]); err != nil {
+		if err := validateFeaturization(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -897,13 +897,13 @@ func validateFilter(v *types.Filter) error {
 	}
 }
 
-func validateFilters(v []*types.Filter) error {
+func validateFilters(v []types.Filter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Filters"}
 	for i := range v {
-		if err := validateFilter(v[i]); err != nil {
+		if err := validateFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -972,13 +972,13 @@ func validateIntegerParameterRange(v *types.IntegerParameterRange) error {
 	}
 }
 
-func validateIntegerParameterRanges(v []*types.IntegerParameterRange) error {
+func validateIntegerParameterRanges(v []types.IntegerParameterRange) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IntegerParameterRanges"}
 	for i := range v {
-		if err := validateIntegerParameterRange(v[i]); err != nil {
+		if err := validateIntegerParameterRange(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1052,13 +1052,13 @@ func validateSupplementaryFeature(v *types.SupplementaryFeature) error {
 	}
 }
 
-func validateSupplementaryFeatures(v []*types.SupplementaryFeature) error {
+func validateSupplementaryFeatures(v []types.SupplementaryFeature) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SupplementaryFeatures"}
 	for i := range v {
-		if err := validateSupplementaryFeature(v[i]); err != nil {
+		if err := validateSupplementaryFeature(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1087,13 +1087,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTags(v []*types.Tag) error {
+func validateTags(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tags"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

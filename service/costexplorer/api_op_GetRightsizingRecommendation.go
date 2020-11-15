@@ -86,7 +86,7 @@ type GetRightsizingRecommendationInput struct {
 
 	// The number of recommendations that you want returned in a single response
 	// object.
-	PageSize *int32
+	PageSize int32
 }
 
 type GetRightsizingRecommendationOutput struct {
@@ -105,7 +105,7 @@ type GetRightsizingRecommendationOutput struct {
 	NextPageToken *string
 
 	// Recommendations to rightsize resources.
-	RightsizingRecommendations []*types.RightsizingRecommendation
+	RightsizingRecommendations []types.RightsizingRecommendation
 
 	// Summary of this recommendation set.
 	Summary *types.RightsizingRecommendationSummary

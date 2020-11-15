@@ -54,7 +54,7 @@ type PutAnomalyDetectorInput struct {
 	Configuration *types.AnomalyDetectorConfiguration
 
 	// The metric dimensions to create the anomaly detection model for.
-	Dimensions []*types.Dimension
+	Dimensions []types.Dimension
 }
 
 type PutAnomalyDetectorOutput struct {

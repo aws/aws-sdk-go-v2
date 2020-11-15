@@ -120,7 +120,7 @@ type TransferDomainInput struct {
 	IdnLangCode *string
 
 	// Contains details for the host and glue IP addresses.
-	Nameservers []*types.Nameserver
+	Nameservers []types.Nameserver
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true, WHOIS ("who is") queries return contact information either for

@@ -49,14 +49,14 @@ type SetTerminationProtectionInput struct {
 	// DescribeJobFlows .
 	//
 	// This member is required.
-	JobFlowIds []*string
+	JobFlowIds []string
 
 	// A Boolean that indicates whether to protect the cluster and prevent the Amazon
 	// EC2 instances in the cluster from shutting down due to API calls, user
 	// intervention, or job-flow error.
 	//
 	// This member is required.
-	TerminationProtected *bool
+	TerminationProtected bool
 }
 
 type SetTerminationProtectionOutput struct {

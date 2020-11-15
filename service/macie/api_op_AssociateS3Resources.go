@@ -37,7 +37,7 @@ type AssociateS3ResourcesInput struct {
 	// monitoring and data classification.
 	//
 	// This member is required.
-	S3Resources []*types.S3ResourceClassification
+	S3Resources []types.S3ResourceClassification
 
 	// The ID of the Amazon Macie Classic member account whose resources you want to
 	// associate with Macie Classic.
@@ -48,7 +48,7 @@ type AssociateS3ResourcesOutput struct {
 
 	// S3 resources that couldn't be associated with Amazon Macie Classic. An error
 	// code and an error message are provided for each failed item.
-	FailedS3Resources []*types.FailedS3Resource
+	FailedS3Resources []types.FailedS3Resource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

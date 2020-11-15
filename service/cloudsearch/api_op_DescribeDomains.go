@@ -39,7 +39,7 @@ func (c *Client) DescribeDomains(ctx context.Context, params *DescribeDomainsInp
 type DescribeDomainsInput struct {
 
 	// The names of the domains you want to include in the response.
-	DomainNames []*string
+	DomainNames []string
 }
 
 // The result of a DescribeDomains request. Contains the status of the domains
@@ -49,7 +49,7 @@ type DescribeDomainsOutput struct {
 	// A list that contains the status of each requested domain.
 	//
 	// This member is required.
-	DomainStatusList []*types.DomainStatus
+	DomainStatusList []types.DomainStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

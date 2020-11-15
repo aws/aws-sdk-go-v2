@@ -34,7 +34,7 @@ type DescribeTransitGatewaysInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters. The possible values are:
 	//
@@ -75,17 +75,17 @@ type DescribeTransitGatewaysInput struct {
 	//
 	// * transit-gateway-id -
 	// The ID of the transit gateway.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next page of results.
 	NextToken *string
 
 	// The IDs of the transit gateways.
-	TransitGatewayIds []*string
+	TransitGatewayIds []string
 }
 
 type DescribeTransitGatewaysOutput struct {
@@ -95,7 +95,7 @@ type DescribeTransitGatewaysOutput struct {
 	NextToken *string
 
 	// Information about the transit gateways.
-	TransitGateways []*types.TransitGateway
+	TransitGateways []types.TransitGateway
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

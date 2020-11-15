@@ -51,13 +51,13 @@ type ListIndexInput struct {
 	NextToken *string
 
 	// Specifies the ranges of indexed values that you want to query.
-	RangesOnIndexedValues []*types.ObjectAttributeRange
+	RangesOnIndexedValues []types.ObjectAttributeRange
 }
 
 type ListIndexOutput struct {
 
 	// The objects and indexed values attached to the index.
-	IndexAttachments []*types.IndexAttachment
+	IndexAttachments []types.IndexAttachment
 
 	// The pagination token.
 	NextToken *string

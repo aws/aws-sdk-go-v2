@@ -47,7 +47,7 @@ type DescribeActiveReceiptRuleSetOutput struct {
 	Metadata *types.ReceiptRuleSetMetadata
 
 	// The receipt rules that belong to the active rule set.
-	Rules []*types.ReceiptRule
+	Rules []types.ReceiptRule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

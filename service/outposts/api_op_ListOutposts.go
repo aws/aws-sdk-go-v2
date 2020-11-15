@@ -42,7 +42,7 @@ type ListOutpostsOutput struct {
 	NextToken *string
 
 	// Information about the Outposts.
-	Outposts []*types.Outpost
+	Outposts []types.Outpost
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

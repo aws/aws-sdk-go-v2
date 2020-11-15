@@ -49,7 +49,7 @@ type ListLoggerDefinitionVersionsOutput struct {
 	NextToken *string
 
 	// Information about a version.
-	Versions []*types.VersionInformation
+	Versions []types.VersionInformation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -820,13 +820,13 @@ func validateHITLayoutParameter(v *types.HITLayoutParameter) error {
 	}
 }
 
-func validateHITLayoutParameterList(v []*types.HITLayoutParameter) error {
+func validateHITLayoutParameterList(v []types.HITLayoutParameter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HITLayoutParameterList"}
 	for i := range v {
-		if err := validateHITLayoutParameter(v[i]); err != nil {
+		if err := validateHITLayoutParameter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -852,13 +852,13 @@ func validateLocale(v *types.Locale) error {
 	}
 }
 
-func validateLocaleList(v []*types.Locale) error {
+func validateLocaleList(v []types.Locale) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LocaleList"}
 	for i := range v {
-		if err := validateLocale(v[i]); err != nil {
+		if err := validateLocale(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -916,13 +916,13 @@ func validateQualificationRequirement(v *types.QualificationRequirement) error {
 	}
 }
 
-func validateQualificationRequirementList(v []*types.QualificationRequirement) error {
+func validateQualificationRequirementList(v []types.QualificationRequirement) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "QualificationRequirementList"}
 	for i := range v {
-		if err := validateQualificationRequirement(v[i]); err != nil {
+		if err := validateQualificationRequirement(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

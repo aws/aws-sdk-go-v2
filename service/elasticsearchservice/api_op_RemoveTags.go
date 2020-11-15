@@ -40,7 +40,7 @@ type RemoveTagsInput struct {
 	// domain.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type RemoveTagsOutput struct {

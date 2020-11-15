@@ -125,7 +125,7 @@ type CreateGrantInput struct {
 	// A list of grant tokens. For more information, see Grant Tokens
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
-	GrantTokens []*string
+	GrantTokens []string
 
 	// A friendly name for identifying the grant. Use this value to prevent the
 	// unintended creation of duplicate grants when retrying this request. When this

@@ -37,7 +37,7 @@ type UpdateRoutingProfileQueuesInput struct {
 	// The queues to be updated for this routing profile.
 	//
 	// This member is required.
-	QueueConfigs []*types.RoutingProfileQueueConfig
+	QueueConfigs []types.RoutingProfileQueueConfig
 
 	// The identifier of the routing profile.
 	//

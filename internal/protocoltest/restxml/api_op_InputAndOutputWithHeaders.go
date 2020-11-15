@@ -29,7 +29,7 @@ func (c *Client) InputAndOutputWithHeaders(ctx context.Context, params *InputAnd
 }
 
 type InputAndOutputWithHeadersInput struct {
-	HeaderBooleanList []*bool
+	HeaderBooleanList []bool
 
 	HeaderByte *int8
 
@@ -45,7 +45,7 @@ type InputAndOutputWithHeadersInput struct {
 
 	HeaderInteger *int32
 
-	HeaderIntegerList []*int32
+	HeaderIntegerList []int32
 
 	HeaderLong *int64
 
@@ -53,17 +53,17 @@ type InputAndOutputWithHeadersInput struct {
 
 	HeaderString *string
 
-	HeaderStringList []*string
+	HeaderStringList []string
 
-	HeaderStringSet []*string
+	HeaderStringSet []string
 
-	HeaderTimestampList []*time.Time
+	HeaderTimestampList []time.Time
 
 	HeaderTrueBool *bool
 }
 
 type InputAndOutputWithHeadersOutput struct {
-	HeaderBooleanList []*bool
+	HeaderBooleanList []bool
 
 	HeaderByte *int8
 
@@ -79,7 +79,7 @@ type InputAndOutputWithHeadersOutput struct {
 
 	HeaderInteger *int32
 
-	HeaderIntegerList []*int32
+	HeaderIntegerList []int32
 
 	HeaderLong *int64
 
@@ -87,11 +87,11 @@ type InputAndOutputWithHeadersOutput struct {
 
 	HeaderString *string
 
-	HeaderStringList []*string
+	HeaderStringList []string
 
-	HeaderStringSet []*string
+	HeaderStringSet []string
 
-	HeaderTimestampList []*time.Time
+	HeaderTimestampList []time.Time
 
 	HeaderTrueBool *bool
 

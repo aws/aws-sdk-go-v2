@@ -658,13 +658,13 @@ func addOpUpdateResolverRuleValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpUpdateResolverRule{}, middleware.After)
 }
 
-func validateIpAddressesRequest(v []*types.IpAddressRequest) error {
+func validateIpAddressesRequest(v []types.IpAddressRequest) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IpAddressesRequest"}
 	for i := range v {
-		if err := validateIpAddressRequest(v[i]); err != nil {
+		if err := validateIpAddressRequest(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -725,13 +725,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -757,13 +757,13 @@ func validateTargetAddress(v *types.TargetAddress) error {
 	}
 }
 
-func validateTargetList(v []*types.TargetAddress) error {
+func validateTargetList(v []types.TargetAddress) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TargetList"}
 	for i := range v {
-		if err := validateTargetAddress(v[i]); err != nil {
+		if err := validateTargetAddress(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -659,7 +660,7 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				if !ok {
 					return fmt.Errorf("expected ServiceErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -699,7 +700,7 @@ func awsAwsjson10_deserializeDocumentColumnInfo(v **types.ColumnInfo, value inte
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "Type":
@@ -716,7 +717,7 @@ func awsAwsjson10_deserializeDocumentColumnInfo(v **types.ColumnInfo, value inte
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentColumnInfoList(v *[]*types.ColumnInfo, value interface{}) error {
+func awsAwsjson10_deserializeDocumentColumnInfoList(v *[]types.ColumnInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -729,18 +730,20 @@ func awsAwsjson10_deserializeDocumentColumnInfoList(v *[]*types.ColumnInfo, valu
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ColumnInfo
+	var cv []types.ColumnInfo
 	if *v == nil {
-		cv = []*types.ColumnInfo{}
+		cv = []types.ColumnInfo{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ColumnInfo
-		if err := awsAwsjson10_deserializeDocumentColumnInfo(&col, value); err != nil {
+		var col types.ColumnInfo
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentColumnInfo(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -776,7 +779,7 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -821,7 +824,7 @@ func awsAwsjson10_deserializeDocumentDatum(v **types.Datum, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.NullValue = &jtv
+				sv.NullValue = ptr.Bool(jtv)
 			}
 
 		case "RowValue":
@@ -835,7 +838,7 @@ func awsAwsjson10_deserializeDocumentDatum(v **types.Datum, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected ScalarValue to be of type string, got %T instead", value)
 				}
-				sv.ScalarValue = &jtv
+				sv.ScalarValue = ptr.String(jtv)
 			}
 
 		case "TimeSeriesValue":
@@ -852,7 +855,7 @@ func awsAwsjson10_deserializeDocumentDatum(v **types.Datum, value interface{}) e
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDatumList(v *[]*types.Datum, value interface{}) error {
+func awsAwsjson10_deserializeDocumentDatumList(v *[]types.Datum, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -865,18 +868,20 @@ func awsAwsjson10_deserializeDocumentDatumList(v *[]*types.Datum, value interfac
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Datum
+	var cv []types.Datum
 	if *v == nil {
-		cv = []*types.Datum{}
+		cv = []types.Datum{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Datum
-		if err := awsAwsjson10_deserializeDocumentDatum(&col, value); err != nil {
+		var col types.Datum
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentDatum(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -912,7 +917,7 @@ func awsAwsjson10_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Address = &jtv
+				sv.Address = ptr.String(jtv)
 			}
 
 		case "CachePeriodInMinutes":
@@ -925,7 +930,7 @@ func awsAwsjson10_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				if err != nil {
 					return err
 				}
-				sv.CachePeriodInMinutes = &i64
+				sv.CachePeriodInMinutes = i64
 			}
 
 		default:
@@ -937,7 +942,7 @@ func awsAwsjson10_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentEndpoints(v *[]*types.Endpoint, value interface{}) error {
+func awsAwsjson10_deserializeDocumentEndpoints(v *[]types.Endpoint, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -950,18 +955,20 @@ func awsAwsjson10_deserializeDocumentEndpoints(v *[]*types.Endpoint, value inter
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Endpoint
+	var cv []types.Endpoint
 	if *v == nil {
-		cv = []*types.Endpoint{}
+		cv = []types.Endpoint{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Endpoint
-		if err := awsAwsjson10_deserializeDocumentEndpoint(&col, value); err != nil {
+		var col types.Endpoint
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentEndpoint(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -997,7 +1004,7 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1037,7 +1044,7 @@ func awsAwsjson10_deserializeDocumentInvalidEndpointException(v **types.InvalidE
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1077,7 +1084,7 @@ func awsAwsjson10_deserializeDocumentQueryExecutionException(v **types.QueryExec
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1125,7 +1132,7 @@ func awsAwsjson10_deserializeDocumentRow(v **types.Row, value interface{}) error
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentRowList(v *[]*types.Row, value interface{}) error {
+func awsAwsjson10_deserializeDocumentRowList(v *[]types.Row, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1138,18 +1145,20 @@ func awsAwsjson10_deserializeDocumentRowList(v *[]*types.Row, value interface{})
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Row
+	var cv []types.Row
 	if *v == nil {
-		cv = []*types.Row{}
+		cv = []types.Row{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Row
-		if err := awsAwsjson10_deserializeDocumentRow(&col, value); err != nil {
+		var col types.Row
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentRow(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1185,7 +1194,7 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1225,7 +1234,7 @@ func awsAwsjson10_deserializeDocumentTimeSeriesDataPoint(v **types.TimeSeriesDat
 				if !ok {
 					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
 				}
-				sv.Time = &jtv
+				sv.Time = ptr.String(jtv)
 			}
 
 		case "Value":
@@ -1242,7 +1251,7 @@ func awsAwsjson10_deserializeDocumentTimeSeriesDataPoint(v **types.TimeSeriesDat
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentTimeSeriesDataPointList(v *[]*types.TimeSeriesDataPoint, value interface{}) error {
+func awsAwsjson10_deserializeDocumentTimeSeriesDataPointList(v *[]types.TimeSeriesDataPoint, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1255,18 +1264,20 @@ func awsAwsjson10_deserializeDocumentTimeSeriesDataPointList(v *[]*types.TimeSer
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.TimeSeriesDataPoint
+	var cv []types.TimeSeriesDataPoint
 	if *v == nil {
-		cv = []*types.TimeSeriesDataPoint{}
+		cv = []types.TimeSeriesDataPoint{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.TimeSeriesDataPoint
-		if err := awsAwsjson10_deserializeDocumentTimeSeriesDataPoint(&col, value); err != nil {
+		var col types.TimeSeriesDataPoint
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentTimeSeriesDataPoint(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1357,7 +1368,7 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1397,7 +1408,7 @@ func awsAwsjson10_deserializeOpDocumentCancelQueryOutput(v **CancelQueryOutput, 
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.CancellationMessage = &jtv
+				sv.CancellationMessage = ptr.String(jtv)
 			}
 
 		default:
@@ -1478,7 +1489,7 @@ func awsAwsjson10_deserializeOpDocumentQueryOutput(v **QueryOutput, value interf
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "QueryId":
@@ -1487,7 +1498,7 @@ func awsAwsjson10_deserializeOpDocumentQueryOutput(v **QueryOutput, value interf
 				if !ok {
 					return fmt.Errorf("expected QueryId to be of type string, got %T instead", value)
 				}
-				sv.QueryId = &jtv
+				sv.QueryId = ptr.String(jtv)
 			}
 
 		case "Rows":

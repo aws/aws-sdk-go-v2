@@ -156,13 +156,13 @@ func validateMessage(v *types.Message) error {
 	}
 }
 
-func validateMessages(v []*types.Message) error {
+func validateMessages(v []types.Message) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Messages"}
 	for i := range v {
-		if err := validateMessage(v[i]); err != nil {
+		if err := validateMessage(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -191,13 +191,13 @@ func validateTimerDefinition(v *types.TimerDefinition) error {
 	}
 }
 
-func validateTimerDefinitions(v []*types.TimerDefinition) error {
+func validateTimerDefinitions(v []types.TimerDefinition) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TimerDefinitions"}
 	for i := range v {
-		if err := validateTimerDefinition(v[i]); err != nil {
+		if err := validateTimerDefinition(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -233,13 +233,13 @@ func validateUpdateDetectorRequest(v *types.UpdateDetectorRequest) error {
 	}
 }
 
-func validateUpdateDetectorRequests(v []*types.UpdateDetectorRequest) error {
+func validateUpdateDetectorRequests(v []types.UpdateDetectorRequest) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDetectorRequests"}
 	for i := range v {
-		if err := validateUpdateDetectorRequest(v[i]); err != nil {
+		if err := validateUpdateDetectorRequest(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -268,13 +268,13 @@ func validateVariableDefinition(v *types.VariableDefinition) error {
 	}
 }
 
-func validateVariableDefinitions(v []*types.VariableDefinition) error {
+func validateVariableDefinitions(v []types.VariableDefinition) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VariableDefinitions"}
 	for i := range v {
-		if err := validateVariableDefinition(v[i]); err != nil {
+		if err := validateVariableDefinition(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

@@ -32,7 +32,7 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 type AgentsAlreadyRunningAssessmentException struct {
 	Message *string
 
-	Agents          []*AgentAlreadyRunningAssessment
+	Agents          []AgentAlreadyRunningAssessment
 	CanRetry        *bool
 	AgentsTruncated *bool
 }
@@ -59,7 +59,7 @@ type AssessmentRunInProgressException struct {
 	Message *string
 
 	CanRetry                   *bool
-	AssessmentRunArns          []*string
+	AssessmentRunArns          []string
 	AssessmentRunArnsTruncated *bool
 }
 

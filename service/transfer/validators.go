@@ -460,13 +460,13 @@ func validateHomeDirectoryMapEntry(v *types.HomeDirectoryMapEntry) error {
 	}
 }
 
-func validateHomeDirectoryMappings(v []*types.HomeDirectoryMapEntry) error {
+func validateHomeDirectoryMappings(v []types.HomeDirectoryMapEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HomeDirectoryMappings"}
 	for i := range v {
-		if err := validateHomeDirectoryMapEntry(v[i]); err != nil {
+		if err := validateHomeDirectoryMapEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -495,13 +495,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTags(v []*types.Tag) error {
+func validateTags(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tags"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

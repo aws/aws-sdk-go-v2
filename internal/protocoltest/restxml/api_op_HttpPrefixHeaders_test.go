@@ -39,9 +39,9 @@ func TestClient_HttpPrefixHeaders_awsRestxmlSerialize(t *testing.T) {
 		"HttpPrefixHeadersArePresent": {
 			Params: &HttpPrefixHeadersInput{
 				Foo: ptr.String("Foo"),
-				FooMap: map[string]*string{
-					"Abc": ptr.String("Abc value"),
-					"Def": ptr.String("Def value"),
+				FooMap: map[string]string{
+					"Abc": "Abc value",
+					"Def": "Def value",
 				},
 			},
 			ExpectMethod:  "GET",
@@ -60,7 +60,7 @@ func TestClient_HttpPrefixHeaders_awsRestxmlSerialize(t *testing.T) {
 		"HttpPrefixHeadersAreNotPresent": {
 			Params: &HttpPrefixHeadersInput{
 				Foo:    ptr.String("Foo"),
-				FooMap: map[string]*string{},
+				FooMap: map[string]string{},
 			},
 			ExpectMethod:  "GET",
 			ExpectURIPath: "/HttpPrefixHeaders",
@@ -158,9 +158,9 @@ func TestClient_HttpPrefixHeaders_awsRestxmlDeserialize(t *testing.T) {
 			Body: []byte(``),
 			ExpectResult: &HttpPrefixHeadersOutput{
 				Foo: ptr.String("Foo"),
-				FooMap: map[string]*string{
-					"Abc": ptr.String("Abc value"),
-					"Def": ptr.String("Def value"),
+				FooMap: map[string]string{
+					"Abc": "Abc value",
+					"Def": "Def value",
 				},
 			},
 		},
@@ -173,7 +173,7 @@ func TestClient_HttpPrefixHeaders_awsRestxmlDeserialize(t *testing.T) {
 			Body: []byte(``),
 			ExpectResult: &HttpPrefixHeadersOutput{
 				Foo:    ptr.String("Foo"),
-				FooMap: map[string]*string{},
+				FooMap: map[string]string{},
 			},
 		},
 	}

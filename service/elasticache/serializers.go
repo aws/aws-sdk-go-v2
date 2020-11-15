@@ -3589,66 +3589,54 @@ func (m *awsAwsquery_serializeOpTestFailover) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsquery_serializeDocumentAvailabilityZonesList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentAvailabilityZonesList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("AvailabilityZone")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCacheClusterIdList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentCacheClusterIdList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCacheNodeIdsList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentCacheNodeIdsList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("CacheNodeId")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCacheSecurityGroupNameList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentCacheSecurityGroupNameList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("CacheSecurityGroupName")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -3657,9 +3645,9 @@ func awsAwsquery_serializeDocumentConfigureShard(v *types.ConfigureShard, value 
 	object := value.Object()
 	_ = object
 
-	if v.NewReplicaCount != nil {
+	if v.NewReplicaCount != 0 {
 		objectKey := object.Key("NewReplicaCount")
-		objectKey.Integer(*v.NewReplicaCount)
+		objectKey.Integer(v.NewReplicaCount)
 	}
 
 	if v.NodeGroupId != nil {
@@ -3701,18 +3689,15 @@ func awsAwsquery_serializeDocumentCustomerNodeEndpoint(v *types.CustomerNodeEndp
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCustomerNodeEndpointList(v []*types.CustomerNodeEndpoint, value query.Value) error {
+func awsAwsquery_serializeDocumentCustomerNodeEndpointList(v []types.CustomerNodeEndpoint, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentCustomerNodeEndpoint(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentCustomerNodeEndpoint(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3738,68 +3723,56 @@ func awsAwsquery_serializeDocumentFilter(v *types.Filter, value query.Value) err
 	return nil
 }
 
-func awsAwsquery_serializeDocumentFilterList(v []*types.Filter, value query.Value) error {
+func awsAwsquery_serializeDocumentFilterList(v []types.Filter, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentFilter(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentFilterValueList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentFilterValueList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGlobalNodeGroupIdList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentGlobalNodeGroupIdList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("GlobalNodeGroupId")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentKeyList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentKeyList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -3850,68 +3823,56 @@ func awsAwsquery_serializeDocumentNodeGroupConfiguration(v *types.NodeGroupConfi
 	return nil
 }
 
-func awsAwsquery_serializeDocumentNodeGroupConfigurationList(v []*types.NodeGroupConfiguration, value query.Value) error {
+func awsAwsquery_serializeDocumentNodeGroupConfigurationList(v []types.NodeGroupConfiguration, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("NodeGroupConfiguration")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentNodeGroupConfiguration(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentNodeGroupConfiguration(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentNodeGroupsToRemoveList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentNodeGroupsToRemoveList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("NodeGroupToRemove")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentNodeGroupsToRetainList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentNodeGroupsToRetainList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("NodeGroupToRetain")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentOutpostArnsList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentOutpostArnsList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("OutpostArn")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -3933,68 +3894,56 @@ func awsAwsquery_serializeDocumentParameterNameValue(v *types.ParameterNameValue
 	return nil
 }
 
-func awsAwsquery_serializeDocumentParameterNameValueList(v []*types.ParameterNameValue, value query.Value) error {
+func awsAwsquery_serializeDocumentParameterNameValueList(v []types.ParameterNameValue, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("ParameterNameValue")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentParameterNameValue(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentParameterNameValue(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPasswordListInput(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentPasswordListInput(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPreferredAvailabilityZoneList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentPreferredAvailabilityZoneList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("PreferredAvailabilityZone")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPreferredOutpostArnList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentPreferredOutpostArnList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("PreferredOutpostArn")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -4023,70 +3972,58 @@ func awsAwsquery_serializeDocumentRegionalConfiguration(v *types.RegionalConfigu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentRegionalConfigurationList(v []*types.RegionalConfiguration, value query.Value) error {
+func awsAwsquery_serializeDocumentRegionalConfigurationList(v []types.RegionalConfiguration, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("RegionalConfiguration")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentRegionalConfiguration(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentRegionalConfiguration(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentRemoveReplicasList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentRemoveReplicasList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentReplicaConfigurationList(v []*types.ConfigureShard, value query.Value) error {
+func awsAwsquery_serializeDocumentReplicaConfigurationList(v []types.ConfigureShard, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("ConfigureShard")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentConfigureShard(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentConfigureShard(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentReplicationGroupIdList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentReplicationGroupIdList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -4110,36 +4047,30 @@ func awsAwsquery_serializeDocumentReshardingConfiguration(v *types.ReshardingCon
 	return nil
 }
 
-func awsAwsquery_serializeDocumentReshardingConfigurationList(v []*types.ReshardingConfiguration, value query.Value) error {
+func awsAwsquery_serializeDocumentReshardingConfigurationList(v []types.ReshardingConfiguration, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("ReshardingConfiguration")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentReshardingConfiguration(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentReshardingConfiguration(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSecurityGroupIdsList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentSecurityGroupIdsList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("SecurityGroupId")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -4157,34 +4088,28 @@ func awsAwsquery_serializeDocumentServiceUpdateStatusList(v []types.ServiceUpdat
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSnapshotArnsList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentSnapshotArnsList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("SnapshotArn")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSubnetIdentifierList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentSubnetIdentifierList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("SubnetIdentifier")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -4206,18 +4131,15 @@ func awsAwsquery_serializeDocumentTag(v *types.Tag, value query.Value) error {
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTagList(v []*types.Tag, value query.Value) error {
+func awsAwsquery_serializeDocumentTagList(v []types.Tag, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("Tag")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4254,50 +4176,41 @@ func awsAwsquery_serializeDocumentUpdateActionStatusList(v []types.UpdateActionS
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUserGroupIdList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentUserGroupIdList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUserGroupIdListInput(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentUserGroupIdListInput(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUserIdListInput(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentUserIdListInput(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -4399,9 +4312,9 @@ func awsAwsquery_serializeOpDocumentCompleteMigrationInput(v *CompleteMigrationI
 	object := value.Object()
 	_ = object
 
-	if v.Force != nil {
+	if v.Force {
 		objectKey := object.Key("Force")
-		objectKey.Boolean(*v.Force)
+		objectKey.Boolean(v.Force)
 	}
 
 	if v.ReplicationGroupId != nil {
@@ -4948,9 +4861,9 @@ func awsAwsquery_serializeOpDocumentDecreaseNodeGroupsInGlobalReplicationGroupIn
 	object := value.Object()
 	_ = object
 
-	if v.ApplyImmediately != nil {
+	if v.ApplyImmediately {
 		objectKey := object.Key("ApplyImmediately")
-		objectKey.Boolean(*v.ApplyImmediately)
+		objectKey.Boolean(v.ApplyImmediately)
 	}
 
 	if v.GlobalNodeGroupsToRemove != nil {
@@ -4972,9 +4885,9 @@ func awsAwsquery_serializeOpDocumentDecreaseNodeGroupsInGlobalReplicationGroupIn
 		objectKey.String(*v.GlobalReplicationGroupId)
 	}
 
-	if v.NodeGroupCount != nil {
+	if v.NodeGroupCount != 0 {
 		objectKey := object.Key("NodeGroupCount")
-		objectKey.Integer(*v.NodeGroupCount)
+		objectKey.Integer(v.NodeGroupCount)
 	}
 
 	return nil
@@ -4984,9 +4897,9 @@ func awsAwsquery_serializeOpDocumentDecreaseReplicaCountInput(v *DecreaseReplica
 	object := value.Object()
 	_ = object
 
-	if v.ApplyImmediately != nil {
+	if v.ApplyImmediately {
 		objectKey := object.Key("ApplyImmediately")
-		objectKey.Boolean(*v.ApplyImmediately)
+		objectKey.Boolean(v.ApplyImmediately)
 	}
 
 	if v.NewReplicaCount != nil {
@@ -5078,9 +4991,9 @@ func awsAwsquery_serializeOpDocumentDeleteGlobalReplicationGroupInput(v *DeleteG
 		objectKey.String(*v.GlobalReplicationGroupId)
 	}
 
-	if v.RetainPrimaryReplicationGroup != nil {
+	if v.RetainPrimaryReplicationGroup {
 		objectKey := object.Key("RetainPrimaryReplicationGroup")
-		objectKey.Boolean(*v.RetainPrimaryReplicationGroup)
+		objectKey.Boolean(v.RetainPrimaryReplicationGroup)
 	}
 
 	return nil
@@ -5185,9 +5098,9 @@ func awsAwsquery_serializeOpDocumentDescribeCacheEngineVersionsInput(v *Describe
 		objectKey.String(*v.CacheParameterGroupFamily)
 	}
 
-	if v.DefaultOnly != nil {
+	if v.DefaultOnly {
 		objectKey := object.Key("DefaultOnly")
-		objectKey.Boolean(*v.DefaultOnly)
+		objectKey.Boolean(v.DefaultOnly)
 	}
 
 	if v.Engine != nil {
@@ -5750,9 +5663,9 @@ func awsAwsquery_serializeOpDocumentIncreaseNodeGroupsInGlobalReplicationGroupIn
 	object := value.Object()
 	_ = object
 
-	if v.ApplyImmediately != nil {
+	if v.ApplyImmediately {
 		objectKey := object.Key("ApplyImmediately")
-		objectKey.Boolean(*v.ApplyImmediately)
+		objectKey.Boolean(v.ApplyImmediately)
 	}
 
 	if v.GlobalReplicationGroupId != nil {
@@ -5760,9 +5673,9 @@ func awsAwsquery_serializeOpDocumentIncreaseNodeGroupsInGlobalReplicationGroupIn
 		objectKey.String(*v.GlobalReplicationGroupId)
 	}
 
-	if v.NodeGroupCount != nil {
+	if v.NodeGroupCount != 0 {
 		objectKey := object.Key("NodeGroupCount")
-		objectKey.Integer(*v.NodeGroupCount)
+		objectKey.Integer(v.NodeGroupCount)
 	}
 
 	if v.RegionalConfigurations != nil {
@@ -5779,9 +5692,9 @@ func awsAwsquery_serializeOpDocumentIncreaseReplicaCountInput(v *IncreaseReplica
 	object := value.Object()
 	_ = object
 
-	if v.ApplyImmediately != nil {
+	if v.ApplyImmediately {
 		objectKey := object.Key("ApplyImmediately")
-		objectKey.Boolean(*v.ApplyImmediately)
+		objectKey.Boolean(v.ApplyImmediately)
 	}
 
 	if v.NewReplicaCount != nil {
@@ -5837,9 +5750,9 @@ func awsAwsquery_serializeOpDocumentModifyCacheClusterInput(v *ModifyCacheCluste
 	object := value.Object()
 	_ = object
 
-	if v.ApplyImmediately != nil {
+	if v.ApplyImmediately {
 		objectKey := object.Key("ApplyImmediately")
-		objectKey.Boolean(*v.ApplyImmediately)
+		objectKey.Boolean(v.ApplyImmediately)
 	}
 
 	if v.AuthToken != nil {
@@ -5990,9 +5903,9 @@ func awsAwsquery_serializeOpDocumentModifyGlobalReplicationGroupInput(v *ModifyG
 	object := value.Object()
 	_ = object
 
-	if v.ApplyImmediately != nil {
+	if v.ApplyImmediately {
 		objectKey := object.Key("ApplyImmediately")
-		objectKey.Boolean(*v.ApplyImmediately)
+		objectKey.Boolean(v.ApplyImmediately)
 	}
 
 	if v.AutomaticFailoverEnabled != nil {
@@ -6027,9 +5940,9 @@ func awsAwsquery_serializeOpDocumentModifyReplicationGroupInput(v *ModifyReplica
 	object := value.Object()
 	_ = object
 
-	if v.ApplyImmediately != nil {
+	if v.ApplyImmediately {
 		objectKey := object.Key("ApplyImmediately")
-		objectKey.Boolean(*v.ApplyImmediately)
+		objectKey.Boolean(v.ApplyImmediately)
 	}
 
 	if v.AuthToken != nil {
@@ -6162,14 +6075,14 @@ func awsAwsquery_serializeOpDocumentModifyReplicationGroupShardConfigurationInpu
 	object := value.Object()
 	_ = object
 
-	if v.ApplyImmediately != nil {
+	if v.ApplyImmediately {
 		objectKey := object.Key("ApplyImmediately")
-		objectKey.Boolean(*v.ApplyImmediately)
+		objectKey.Boolean(v.ApplyImmediately)
 	}
 
-	if v.NodeGroupCount != nil {
+	if v.NodeGroupCount != 0 {
 		objectKey := object.Key("NodeGroupCount")
-		objectKey.Integer(*v.NodeGroupCount)
+		objectKey.Integer(v.NodeGroupCount)
 	}
 
 	if v.NodeGroupsToRemove != nil {
@@ -6287,9 +6200,9 @@ func awsAwsquery_serializeOpDocumentRebalanceSlotsInGlobalReplicationGroupInput(
 	object := value.Object()
 	_ = object
 
-	if v.ApplyImmediately != nil {
+	if v.ApplyImmediately {
 		objectKey := object.Key("ApplyImmediately")
-		objectKey.Boolean(*v.ApplyImmediately)
+		objectKey.Boolean(v.ApplyImmediately)
 	}
 
 	if v.GlobalReplicationGroupId != nil {
@@ -6354,9 +6267,9 @@ func awsAwsquery_serializeOpDocumentResetCacheParameterGroupInput(v *ResetCacheP
 		}
 	}
 
-	if v.ResetAllParameters != nil {
+	if v.ResetAllParameters {
 		objectKey := object.Key("ResetAllParameters")
-		objectKey.Boolean(*v.ResetAllParameters)
+		objectKey.Boolean(v.ResetAllParameters)
 	}
 
 	return nil

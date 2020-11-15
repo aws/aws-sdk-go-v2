@@ -40,7 +40,7 @@ type ListXssMatchSetsInput struct {
 	// this request. If you have more XssMatchSet objects than the number you specify
 	// for Limit, the response includes a NextMarker value that you can use to get
 	// another batch of Rules.
-	Limit *int32
+	Limit int32
 
 	// If you specify a value for Limit and you have more XssMatchSet objects than the
 	// value of Limit, AWS WAF returns a NextMarker value in the response that allows
@@ -60,7 +60,7 @@ type ListXssMatchSetsOutput struct {
 	NextMarker *string
 
 	// An array of XssMatchSetSummary objects.
-	XssMatchSets []*types.XssMatchSetSummary
+	XssMatchSets []types.XssMatchSetSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

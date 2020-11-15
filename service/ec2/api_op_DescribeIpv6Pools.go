@@ -33,7 +33,7 @@ type DescribeIpv6PoolsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
@@ -46,23 +46,23 @@ type DescribeIpv6PoolsInput struct {
 	// * tag-key - The key of a tag assigned to the resource. Use this filter
 	// to find all resources assigned a tag with a specific key, regardless of the tag
 	// value.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next page of results.
 	NextToken *string
 
 	// The IDs of the IPv6 address pools.
-	PoolIds []*string
+	PoolIds []string
 }
 
 type DescribeIpv6PoolsOutput struct {
 
 	// Information about the IPv6 address pools.
-	Ipv6Pools []*types.Ipv6Pool
+	Ipv6Pools []types.Ipv6Pool
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

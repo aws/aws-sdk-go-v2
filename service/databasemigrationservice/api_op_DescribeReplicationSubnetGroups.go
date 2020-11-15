@@ -32,7 +32,7 @@ type DescribeReplicationSubnetGroupsInput struct {
 
 	// Filters applied to replication subnet groups. Valid filter names:
 	// replication-subnet-group-id
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
@@ -55,7 +55,7 @@ type DescribeReplicationSubnetGroupsOutput struct {
 	Marker *string
 
 	// A description of the replication subnet groups.
-	ReplicationSubnetGroups []*types.ReplicationSubnetGroup
+	ReplicationSubnetGroups []types.ReplicationSubnetGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -46,11 +46,11 @@ type DescribeOutboundCrossClusterSearchConnectionsInput struct {
 	//
 	// *
 	// source-domain-info.domain-name
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// Set this value to limit the number of results returned. If not specified,
 	// defaults to 100.
-	MaxResults *int32
+	MaxResults int32
 
 	// NextToken is sent in case the earlier API call results contain the NextToken. It
 	// is used for pagination.
@@ -63,7 +63,7 @@ type DescribeOutboundCrossClusterSearchConnectionsOutput struct {
 
 	// Consists of list of OutboundCrossClusterSearchConnection matching the specified
 	// filter criteria.
-	CrossClusterSearchConnections []*types.OutboundCrossClusterSearchConnection
+	CrossClusterSearchConnections []types.OutboundCrossClusterSearchConnection
 
 	// If more results are available and NextToken is present, make the next request to
 	// the same API with the received NextToken to paginate the remaining results.

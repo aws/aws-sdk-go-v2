@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"io/ioutil"
@@ -423,7 +424,7 @@ func awsRestjson1_deserializeOpDocumentListNamedShadowsForThingOutput(v **ListNa
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "results":
@@ -441,7 +442,7 @@ func awsRestjson1_deserializeOpDocumentListNamedShadowsForThingOutput(v **ListNa
 				if err != nil {
 					return err
 				}
-				sv.Timestamp = &i64
+				sv.Timestamp = i64
 			}
 
 		default:
@@ -1060,7 +1061,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				if !ok {
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1100,7 +1101,7 @@ func awsRestjson1_deserializeDocumentInternalFailureException(v **types.Internal
 				if !ok {
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1140,7 +1141,7 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				if !ok {
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1180,7 +1181,7 @@ func awsRestjson1_deserializeDocumentMethodNotAllowedException(v **types.MethodN
 				if !ok {
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1192,7 +1193,7 @@ func awsRestjson1_deserializeDocumentMethodNotAllowedException(v **types.MethodN
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentNamedShadowList(v *[]*string, value interface{}) error {
+func awsRestjson1_deserializeDocumentNamedShadowList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1205,21 +1206,21 @@ func awsRestjson1_deserializeDocumentNamedShadowList(v *[]*string, value interfa
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected ShadowName to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -1256,7 +1257,7 @@ func awsRestjson1_deserializeDocumentRequestEntityTooLargeException(v **types.Re
 				if !ok {
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1296,7 +1297,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				if !ok {
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1336,7 +1337,7 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 				if !ok {
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1376,7 +1377,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				if !ok {
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1416,7 +1417,7 @@ func awsRestjson1_deserializeDocumentUnauthorizedException(v **types.Unauthorize
 				if !ok {
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1456,7 +1457,7 @@ func awsRestjson1_deserializeDocumentUnsupportedDocumentEncodingException(v **ty
 				if !ok {
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

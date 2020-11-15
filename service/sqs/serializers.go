@@ -1114,18 +1114,15 @@ func (m *awsAwsquery_serializeOpUntagQueue) HandleSerialize(ctx context.Context,
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsquery_serializeDocumentActionNameList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentActionNameList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1143,18 +1140,15 @@ func awsAwsquery_serializeDocumentAttributeNameList(v []types.QueueAttributeName
 	return nil
 }
 
-func awsAwsquery_serializeDocumentAWSAccountIdList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentAWSAccountIdList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1189,26 +1183,23 @@ func awsAwsquery_serializeDocumentChangeMessageVisibilityBatchRequestEntry(v *ty
 		objectKey.String(*v.ReceiptHandle)
 	}
 
-	if v.VisibilityTimeout != nil {
+	if v.VisibilityTimeout != 0 {
 		objectKey := object.Key("VisibilityTimeout")
-		objectKey.Integer(*v.VisibilityTimeout)
+		objectKey.Integer(v.VisibilityTimeout)
 	}
 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentChangeMessageVisibilityBatchRequestEntryList(v []*types.ChangeMessageVisibilityBatchRequestEntry, value query.Value) error {
+func awsAwsquery_serializeDocumentChangeMessageVisibilityBatchRequestEntryList(v []types.ChangeMessageVisibilityBatchRequestEntry, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentChangeMessageVisibilityBatchRequestEntry(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentChangeMessageVisibilityBatchRequestEntry(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1232,36 +1223,30 @@ func awsAwsquery_serializeDocumentDeleteMessageBatchRequestEntry(v *types.Delete
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteMessageBatchRequestEntryList(v []*types.DeleteMessageBatchRequestEntry, value query.Value) error {
+func awsAwsquery_serializeDocumentDeleteMessageBatchRequestEntryList(v []types.DeleteMessageBatchRequestEntry, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentDeleteMessageBatchRequestEntry(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentDeleteMessageBatchRequestEntry(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentMessageAttributeNameList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentMessageAttributeNameList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1302,7 +1287,7 @@ func awsAwsquery_serializeDocumentMessageAttributeValue(v *types.MessageAttribut
 	return nil
 }
 
-func awsAwsquery_serializeDocumentMessageBodyAttributeMap(v map[string]*types.MessageAttributeValue, value query.Value) error {
+func awsAwsquery_serializeDocumentMessageBodyAttributeMap(v map[string]types.MessageAttributeValue, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
@@ -1315,18 +1300,16 @@ func awsAwsquery_serializeDocumentMessageBodyAttributeMap(v map[string]*types.Me
 	sort.Strings(keys)
 
 	for _, key := range keys {
-		if vv := v[key]; vv == nil {
-			continue
-		}
 		om := object.Key(key)
-		if err := awsAwsquery_serializeDocumentMessageAttributeValue(v[key], om); err != nil {
+		mapVar := v[key]
+		if err := awsAwsquery_serializeDocumentMessageAttributeValue(&mapVar, om); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentMessageBodySystemAttributeMap(v map[string]*types.MessageSystemAttributeValue, value query.Value) error {
+func awsAwsquery_serializeDocumentMessageBodySystemAttributeMap(v map[string]types.MessageSystemAttributeValue, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
@@ -1339,11 +1322,9 @@ func awsAwsquery_serializeDocumentMessageBodySystemAttributeMap(v map[string]*ty
 	sort.Strings(keys)
 
 	for _, key := range keys {
-		if vv := v[key]; vv == nil {
-			continue
-		}
 		om := object.Key(key)
-		if err := awsAwsquery_serializeDocumentMessageSystemAttributeValue(v[key], om); err != nil {
+		mapVar := v[key]
+		if err := awsAwsquery_serializeDocumentMessageSystemAttributeValue(&mapVar, om); err != nil {
 			return err
 		}
 	}
@@ -1386,7 +1367,7 @@ func awsAwsquery_serializeDocumentMessageSystemAttributeValue(v *types.MessageSy
 	return nil
 }
 
-func awsAwsquery_serializeDocumentQueueAttributeMap(v map[string]*string, value query.Value) error {
+func awsAwsquery_serializeDocumentQueueAttributeMap(v map[string]string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
@@ -1399,11 +1380,8 @@ func awsAwsquery_serializeDocumentQueueAttributeMap(v map[string]*string, value 
 	sort.Strings(keys)
 
 	for _, key := range keys {
-		if vv := v[key]; vv == nil {
-			continue
-		}
 		om := object.Key(key)
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -1412,9 +1390,9 @@ func awsAwsquery_serializeDocumentSendMessageBatchRequestEntry(v *types.SendMess
 	object := value.Object()
 	_ = object
 
-	if v.DelaySeconds != nil {
+	if v.DelaySeconds != 0 {
 		objectKey := object.Key("DelaySeconds")
-		objectKey.Integer(*v.DelaySeconds)
+		objectKey.Integer(v.DelaySeconds)
 	}
 
 	if v.Id != nil {
@@ -1454,57 +1432,48 @@ func awsAwsquery_serializeDocumentSendMessageBatchRequestEntry(v *types.SendMess
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSendMessageBatchRequestEntryList(v []*types.SendMessageBatchRequestEntry, value query.Value) error {
+func awsAwsquery_serializeDocumentSendMessageBatchRequestEntryList(v []types.SendMessageBatchRequestEntry, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentSendMessageBatchRequestEntry(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentSendMessageBatchRequestEntry(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentStringList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentStringList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("StringListValue")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTagKeyList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentTagKeyList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTagMap(v map[string]*string, value query.Value) error {
+func awsAwsquery_serializeDocumentTagMap(v map[string]string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
@@ -1517,11 +1486,8 @@ func awsAwsquery_serializeDocumentTagMap(v map[string]*string, value query.Value
 	sort.Strings(keys)
 
 	for _, key := range keys {
-		if vv := v[key]; vv == nil {
-			continue
-		}
 		om := object.Key(key)
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -1590,9 +1556,9 @@ func awsAwsquery_serializeOpDocumentChangeMessageVisibilityInput(v *ChangeMessag
 		objectKey.String(*v.ReceiptHandle)
 	}
 
-	if v.VisibilityTimeout != nil {
+	if v.VisibilityTimeout != 0 {
 		objectKey := object.Key("VisibilityTimeout")
-		objectKey.Integer(*v.VisibilityTimeout)
+		objectKey.Integer(v.VisibilityTimeout)
 	}
 
 	return nil
@@ -1787,9 +1753,9 @@ func awsAwsquery_serializeOpDocumentReceiveMessageInput(v *ReceiveMessageInput, 
 		}
 	}
 
-	if v.MaxNumberOfMessages != nil {
+	if v.MaxNumberOfMessages != 0 {
 		objectKey := object.Key("MaxNumberOfMessages")
-		objectKey.Integer(*v.MaxNumberOfMessages)
+		objectKey.Integer(v.MaxNumberOfMessages)
 	}
 
 	if v.MessageAttributeNames != nil {
@@ -1809,14 +1775,14 @@ func awsAwsquery_serializeOpDocumentReceiveMessageInput(v *ReceiveMessageInput, 
 		objectKey.String(*v.ReceiveRequestAttemptId)
 	}
 
-	if v.VisibilityTimeout != nil {
+	if v.VisibilityTimeout != 0 {
 		objectKey := object.Key("VisibilityTimeout")
-		objectKey.Integer(*v.VisibilityTimeout)
+		objectKey.Integer(v.VisibilityTimeout)
 	}
 
-	if v.WaitTimeSeconds != nil {
+	if v.WaitTimeSeconds != 0 {
 		objectKey := object.Key("WaitTimeSeconds")
-		objectKey.Integer(*v.WaitTimeSeconds)
+		objectKey.Integer(v.WaitTimeSeconds)
 	}
 
 	return nil
@@ -1862,9 +1828,9 @@ func awsAwsquery_serializeOpDocumentSendMessageInput(v *SendMessageInput, value 
 	object := value.Object()
 	_ = object
 
-	if v.DelaySeconds != nil {
+	if v.DelaySeconds != 0 {
 		objectKey := object.Key("DelaySeconds")
-		objectKey.Integer(*v.DelaySeconds)
+		objectKey.Integer(v.DelaySeconds)
 	}
 
 	if v.MessageAttributes != nil {

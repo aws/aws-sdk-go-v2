@@ -63,7 +63,7 @@ type DescribeIdentityIdFormatInput struct {
 type DescribeIdentityIdFormatOutput struct {
 
 	// Information about the ID format for the resources.
-	Statuses []*types.IdFormat
+	Statuses []types.IdFormat
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

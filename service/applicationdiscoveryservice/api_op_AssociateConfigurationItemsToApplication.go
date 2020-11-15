@@ -36,7 +36,7 @@ type AssociateConfigurationItemsToApplicationInput struct {
 	// The ID of each configuration item to be associated with an application.
 	//
 	// This member is required.
-	ConfigurationIds []*string
+	ConfigurationIds []string
 }
 
 type AssociateConfigurationItemsToApplicationOutput struct {

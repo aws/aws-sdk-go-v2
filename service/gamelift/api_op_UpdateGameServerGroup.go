@@ -107,7 +107,7 @@ type UpdateGameServerGroupInput struct {
 	// Instance Weighting for Amazon EC2 Auto Scaling
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
-	InstanceDefinitions []*types.InstanceDefinition
+	InstanceDefinitions []types.InstanceDefinition
 
 	// The Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM

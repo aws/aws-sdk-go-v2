@@ -1709,17 +1709,13 @@ func (m *awsAwsjson11_serializeOpUpdateAssessmentTarget) HandleSerialize(ctx con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsjson11_serializeDocumentAddRemoveAttributesFindingArnList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentAddRemoveAttributesFindingArnList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1767,17 +1763,13 @@ func awsAwsjson11_serializeDocumentAgentHealthList(v []types.AgentHealth, value 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAgentIdList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentAgentIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1885,17 +1877,13 @@ func awsAwsjson11_serializeDocumentAssessmentTemplateFilter(v *types.AssessmentT
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssessmentTemplateRulesPackageArnList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentAssessmentTemplateRulesPackageArnList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1917,64 +1905,48 @@ func awsAwsjson11_serializeDocumentAttribute(v *types.Attribute, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAttributeList(v []*types.Attribute, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentAttributeList(v []types.Attribute, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentAttribute(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentAttribute(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAutoScalingGroupList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentAutoScalingGroupList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchDescribeArnList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentBatchDescribeArnList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchDescribeExclusionsArnList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentBatchDescribeExclusionsArnList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1983,30 +1955,26 @@ func awsAwsjson11_serializeDocumentDurationRange(v *types.DurationRange, value s
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxSeconds != nil {
+	if v.MaxSeconds != 0 {
 		ok := object.Key("maxSeconds")
-		ok.Integer(*v.MaxSeconds)
+		ok.Integer(v.MaxSeconds)
 	}
 
-	if v.MinSeconds != nil {
+	if v.MinSeconds != 0 {
 		ok := object.Key("minSeconds")
-		ok.Integer(*v.MinSeconds)
+		ok.Integer(v.MinSeconds)
 	}
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentFilterRulesPackageArnList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentFilterRulesPackageArnList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2074,17 +2042,13 @@ func awsAwsjson11_serializeDocumentFindingFilter(v *types.FindingFilter, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListParentArnList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentListParentArnList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2106,34 +2070,26 @@ func awsAwsjson11_serializeDocumentResourceGroupTag(v *types.ResourceGroupTag, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResourceGroupTags(v []*types.ResourceGroupTag, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentResourceGroupTags(v []types.ResourceGroupTag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentResourceGroupTag(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentResourceGroupTag(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRuleNameList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentRuleNameList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2166,17 +2122,13 @@ func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2200,32 +2152,24 @@ func awsAwsjson11_serializeDocumentTimestampRange(v *types.TimestampRange, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUserAttributeKeyList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentUserAttributeKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUserAttributeList(v []*types.Attribute, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentUserAttributeList(v []types.Attribute, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentAttribute(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentAttribute(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2284,9 +2228,9 @@ func awsAwsjson11_serializeOpDocumentCreateAssessmentTemplateInput(v *CreateAsse
 		ok.String(*v.AssessmentTemplateName)
 	}
 
-	if v.DurationInSeconds != nil {
+	if v.DurationInSeconds != 0 {
 		ok := object.Key("durationInSeconds")
-		ok.Integer(*v.DurationInSeconds)
+		ok.Integer(v.DurationInSeconds)
 	}
 
 	if v.RulesPackageArns != nil {

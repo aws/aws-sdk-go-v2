@@ -70,7 +70,7 @@ type ListRuleGroupsOutput struct {
 	NextMarker *string
 
 	//
-	RuleGroups []*types.RuleGroupSummary
+	RuleGroups []types.RuleGroupSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

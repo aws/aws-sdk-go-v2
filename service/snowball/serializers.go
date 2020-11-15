@@ -1042,9 +1042,9 @@ func awsAwsjson11_serializeDocumentAddress(v *types.Address, value smithyjson.Va
 		ok.String(*v.Country)
 	}
 
-	if v.IsRestricted != nil {
+	if v.IsRestricted {
 		ok := object.Key("IsRestricted")
-		ok.Boolean(*v.IsRestricted)
+		ok.Boolean(v.IsRestricted)
 	}
 
 	if v.Landmark != nil {
@@ -1126,17 +1126,13 @@ func awsAwsjson11_serializeDocumentEc2AmiResource(v *types.Ec2AmiResource, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentEc2AmiResourceList(v []*types.Ec2AmiResource, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentEc2AmiResourceList(v []types.Ec2AmiResource, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentEc2AmiResource(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentEc2AmiResource(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1155,17 +1151,13 @@ func awsAwsjson11_serializeDocumentEventTriggerDefinition(v *types.EventTriggerD
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentEventTriggerDefinitionList(v []*types.EventTriggerDefinition, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentEventTriggerDefinitionList(v []types.EventTriggerDefinition, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentEventTriggerDefinition(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentEventTriggerDefinition(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1259,17 +1251,13 @@ func awsAwsjson11_serializeDocumentLambdaResource(v *types.LambdaResource, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentLambdaResourceList(v []*types.LambdaResource, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentLambdaResourceList(v []types.LambdaResource, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentLambdaResource(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentLambdaResource(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1287,9 +1275,9 @@ func awsAwsjson11_serializeDocumentNotification(v *types.Notification, value smi
 		}
 	}
 
-	if v.NotifyAll != nil {
+	if v.NotifyAll {
 		ok := object.Key("NotifyAll")
-		ok.Boolean(*v.NotifyAll)
+		ok.Boolean(v.NotifyAll)
 	}
 
 	if v.SnsTopicARN != nil {
@@ -1319,17 +1307,13 @@ func awsAwsjson11_serializeDocumentS3Resource(v *types.S3Resource, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentS3ResourceList(v []*types.S3Resource, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentS3ResourceList(v []types.S3Resource, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentS3Resource(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentS3Resource(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1368,9 +1352,9 @@ func awsAwsjson11_serializeDocumentWirelessConnection(v *types.WirelessConnectio
 	object := value.Object()
 	defer object.Close()
 
-	if v.IsWifiEnabled != nil {
+	if v.IsWifiEnabled {
 		ok := object.Key("IsWifiEnabled")
-		ok.Boolean(*v.IsWifiEnabled)
+		ok.Boolean(v.IsWifiEnabled)
 	}
 
 	return nil

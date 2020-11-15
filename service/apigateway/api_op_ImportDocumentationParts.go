@@ -36,7 +36,7 @@ type ImportDocumentationPartsInput struct {
 
 	// A query parameter to specify whether to rollback the documentation importation
 	// (true) or not (false) when a warning is encountered. The default value is false.
-	FailOnWarnings *bool
+	FailOnWarnings bool
 
 	// A query parameter to indicate whether to overwrite (OVERWRITE) any existing
 	// DocumentationParts definition or to merge (MERGE) the new definition into the
@@ -54,10 +54,10 @@ type ImportDocumentationPartsInput struct {
 type ImportDocumentationPartsOutput struct {
 
 	// A list of the returned documentation part identifiers.
-	Ids []*string
+	Ids []string
 
 	// A list of warning messages reported during import of documentation parts.
-	Warnings []*string
+	Warnings []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

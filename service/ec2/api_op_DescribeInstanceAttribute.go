@@ -48,14 +48,14 @@ type DescribeInstanceAttributeInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 }
 
 // Describes an instance attribute.
 type DescribeInstanceAttributeOutput struct {
 
 	// The block device mapping of the instance.
-	BlockDeviceMappings []*types.InstanceBlockDeviceMapping
+	BlockDeviceMappings []types.InstanceBlockDeviceMapping
 
 	// If the value is true, you can't terminate the instance through the Amazon EC2
 	// console, CLI, or API; otherwise, you can.
@@ -72,7 +72,7 @@ type DescribeInstanceAttributeOutput struct {
 	EnclaveOptions *types.EnclaveOptions
 
 	// The security groups associated with the instance.
-	Groups []*types.GroupIdentifier
+	Groups []types.GroupIdentifier
 
 	// The ID of the instance.
 	InstanceId *string
@@ -88,7 +88,7 @@ type DescribeInstanceAttributeOutput struct {
 	KernelId *types.AttributeValue
 
 	// A list of product codes.
-	ProductCodes []*types.ProductCode
+	ProductCodes []types.ProductCode
 
 	// The RAM disk ID.
 	RamdiskId *types.AttributeValue

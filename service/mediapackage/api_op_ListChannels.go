@@ -30,7 +30,7 @@ func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, op
 type ListChannelsInput struct {
 
 	// Upper bound on number of records to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token used to resume pagination from the end of a previous request.
 	NextToken *string
@@ -39,7 +39,7 @@ type ListChannelsInput struct {
 type ListChannelsOutput struct {
 
 	// A list of Channel records.
-	Channels []*types.Channel
+	Channels []types.Channel
 
 	// A token that can be used to resume pagination from the end of the collection.
 	NextToken *string

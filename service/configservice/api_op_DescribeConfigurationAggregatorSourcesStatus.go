@@ -39,7 +39,7 @@ type DescribeConfigurationAggregatorSourcesStatusInput struct {
 
 	// The maximum number of AggregatorSourceStatus returned on each page. The default
 	// is maximum. If you specify 0, AWS Config uses the default.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
@@ -60,7 +60,7 @@ type DescribeConfigurationAggregatorSourcesStatusInput struct {
 type DescribeConfigurationAggregatorSourcesStatusOutput struct {
 
 	// Returns an AggregatedSourceStatus object.
-	AggregatedSourceStatusList []*types.AggregatedSourceStatus
+	AggregatedSourceStatusList []types.AggregatedSourceStatus
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.

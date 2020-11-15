@@ -266,9 +266,9 @@ func awsRestjson1_serializeOpDocumentDeleteTargetInput(v *DeleteTargetInput, val
 	object := value.Object()
 	defer object.Close()
 
-	if v.ForceUnsubscribeAll != nil {
+	if v.ForceUnsubscribeAll {
 		ok := object.Key("ForceUnsubscribeAll")
-		ok.Boolean(*v.ForceUnsubscribeAll)
+		ok.Boolean(v.ForceUnsubscribeAll)
 	}
 
 	if v.TargetAddress != nil {
@@ -424,9 +424,9 @@ func awsRestjson1_serializeOpDocumentListEventTypesInput(v *ListEventTypesInput,
 		}
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -509,9 +509,9 @@ func awsRestjson1_serializeOpDocumentListNotificationRulesInput(v *ListNotificat
 		}
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -667,9 +667,9 @@ func awsRestjson1_serializeOpDocumentListTargetsInput(v *ListTargetsInput, value
 		}
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1105,17 +1105,13 @@ func awsRestjson1_serializeOpDocumentUpdateNotificationRuleInput(v *UpdateNotifi
 	return nil
 }
 
-func awsRestjson1_serializeDocumentEventTypeIds(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentEventTypeIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1137,17 +1133,13 @@ func awsRestjson1_serializeDocumentListEventTypesFilter(v *types.ListEventTypesF
 	return nil
 }
 
-func awsRestjson1_serializeDocumentListEventTypesFilters(v []*types.ListEventTypesFilter, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentListEventTypesFilters(v []types.ListEventTypesFilter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentListEventTypesFilter(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentListEventTypesFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1171,17 +1163,13 @@ func awsRestjson1_serializeDocumentListNotificationRulesFilter(v *types.ListNoti
 	return nil
 }
 
-func awsRestjson1_serializeDocumentListNotificationRulesFilters(v []*types.ListNotificationRulesFilter, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentListNotificationRulesFilters(v []types.ListNotificationRulesFilter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentListNotificationRulesFilter(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentListNotificationRulesFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1205,49 +1193,37 @@ func awsRestjson1_serializeDocumentListTargetsFilter(v *types.ListTargetsFilter,
 	return nil
 }
 
-func awsRestjson1_serializeDocumentListTargetsFilters(v []*types.ListTargetsFilter, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentListTargetsFilters(v []types.ListTargetsFilter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentListTargetsFilter(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentListTargetsFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTagKeys(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTagKeys(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTags(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTags(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -1269,17 +1245,13 @@ func awsRestjson1_serializeDocumentTarget(v *types.Target, value smithyjson.Valu
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTargets(v []*types.Target, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTargets(v []types.Target, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTarget(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentTarget(&v[i], av); err != nil {
 			return err
 		}
 	}

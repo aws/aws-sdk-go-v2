@@ -39,7 +39,7 @@ type ListSecurityProfilesInput struct {
 	InstanceId *string
 
 	// The maximimum number of results to return per page.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
@@ -52,7 +52,7 @@ type ListSecurityProfilesOutput struct {
 	NextToken *string
 
 	// Information about the security profiles.
-	SecurityProfileSummaryList []*types.SecurityProfileSummary
+	SecurityProfileSummaryList []types.SecurityProfileSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

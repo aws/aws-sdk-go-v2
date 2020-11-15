@@ -27,7 +27,7 @@ type Database struct {
 	LastUpdatedTime *time.Time
 
 	// The total number of tables found within a Timestream database.
-	TableCount *int64
+	TableCount int64
 }
 
 // Dimension represents the meta data attributes of the time series. For example,
@@ -65,7 +65,7 @@ type Endpoint struct {
 	// The TTL for the endpoint, in minutes.
 	//
 	// This member is required.
-	CachePeriodInMinutes *int64
+	CachePeriodInMinutes int64
 }
 
 // Record represents a time series data point being written into Timestream. Each
@@ -80,7 +80,7 @@ type Endpoint struct {
 type Record struct {
 
 	// Contains the list of dimensions for time series data points.
-	Dimensions []*Dimension
+	Dimensions []Dimension
 
 	// Measure represents the data attribute of the time series. For example, the CPU
 	// utilization of an EC2 instance or the RPM of a wind turbine are measures.
@@ -126,7 +126,7 @@ type RejectedRecord struct {
 
 	// The index of the record in the input request for WriteRecords. Indexes begin
 	// with 0.
-	RecordIndex *int32
+	RecordIndex int32
 }
 
 // Retention properties contain the duration for which your time series data must
@@ -136,12 +136,12 @@ type RetentionProperties struct {
 	// The duration for which data must be stored in the magnetic store.
 	//
 	// This member is required.
-	MagneticStoreRetentionPeriodInDays *int64
+	MagneticStoreRetentionPeriodInDays int64
 
 	// The duration for which data must be stored in the memory store.
 	//
 	// This member is required.
-	MemoryStoreRetentionPeriodInHours *int64
+	MemoryStoreRetentionPeriodInHours int64
 }
 
 // Table represents a database table in Timestream. Tables contain one or more

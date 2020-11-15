@@ -935,32 +935,24 @@ func awsRestjson1_serializeDocumentAccount(v *types.Account, value smithyjson.Va
 	return nil
 }
 
-func awsRestjson1_serializeDocumentAccountIdList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAccountIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentAccountList(v []*types.Account, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAccountList(v []types.Account, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentAccount(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentAccount(&v[i], av); err != nil {
 			return err
 		}
 	}

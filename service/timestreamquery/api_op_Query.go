@@ -70,7 +70,7 @@ type QueryOutput struct {
 	// The column data types of the returned result set.
 	//
 	// This member is required.
-	ColumnInfo []*types.ColumnInfo
+	ColumnInfo []types.ColumnInfo
 
 	// A unique ID for the given query.
 	//
@@ -80,7 +80,7 @@ type QueryOutput struct {
 	// The result set rows returned by the query.
 	//
 	// This member is required.
-	Rows []*types.Row
+	Rows []types.Row
 
 	// A pagination token that can be used again on a Query call to get the next set of
 	// results.

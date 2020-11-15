@@ -36,13 +36,13 @@ type LexiconAttributes struct {
 	LastModified *time.Time
 
 	// Number of lexemes in the lexicon.
-	LexemesCount *int32
+	LexemesCount int32
 
 	// Amazon Resource Name (ARN) of the lexicon.
 	LexiconArn *string
 
 	// Total size of the lexicon, in characters.
-	Size *int32
+	Size int32
 }
 
 // Describes the content of the lexicon.
@@ -79,7 +79,7 @@ type SynthesisTask struct {
 	// List of one or more pronunciation lexicon names you want the service to apply
 	// during synthesis. Lexicons are applied only if the language of the lexicon is
 	// the same as the language of the voice.
-	LexiconNames []*string
+	LexiconNames []string
 
 	// The format in which the returned output will be encoded. For audio stream, this
 	// will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json.
@@ -89,7 +89,7 @@ type SynthesisTask struct {
 	OutputUri *string
 
 	// Number of billable characters synthesized.
-	RequestCharacters *int32
+	RequestCharacters int32
 
 	// The audio frequency specified in Hz. The valid values for mp3 and ogg_vorbis are
 	// "8000", "16000", "22050", and "24000". The default value for standard voices is

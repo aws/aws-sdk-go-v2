@@ -57,7 +57,7 @@ type ListAssessmentRunAgentsOutput struct {
 	// A list of ARNs that specifies the agents returned by the action.
 	//
 	// This member is required.
-	AssessmentRunAgents []*types.AssessmentRunAgent
+	AssessmentRunAgents []types.AssessmentRunAgent
 
 	// When a response is generated, if there is more data to be listed, this parameter
 	// is present in the response and contains the value to use for the nextToken

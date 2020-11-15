@@ -41,11 +41,11 @@ type ModifyClusterIamRolesInput struct {
 	// Zero or more IAM roles to associate with the cluster. The roles must be in their
 	// Amazon Resource Name (ARN) format. You can associate up to 10 IAM roles with a
 	// single cluster in a single request.
-	AddIamRoles []*string
+	AddIamRoles []string
 
 	// Zero or more IAM roles in ARN format to disassociate from the cluster. You can
 	// disassociate up to 10 IAM roles from a single cluster in a single request.
-	RemoveIamRoles []*string
+	RemoveIamRoles []string
 }
 
 type ModifyClusterIamRolesOutput struct {

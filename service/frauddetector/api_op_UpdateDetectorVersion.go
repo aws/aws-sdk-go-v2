@@ -44,18 +44,18 @@ type UpdateDetectorVersionInput struct {
 	// The Amazon SageMaker model endpoints to include in the detector version.
 	//
 	// This member is required.
-	ExternalModelEndpoints []*string
+	ExternalModelEndpoints []string
 
 	// The rules to include in the detector version.
 	//
 	// This member is required.
-	Rules []*types.Rule
+	Rules []types.Rule
 
 	// The detector version description.
 	Description *string
 
 	// The model versions to include in the detector version.
-	ModelVersions []*types.ModelVersion
+	ModelVersions []types.ModelVersion
 
 	// The rule execution mode to add to the detector. If you specify FIRST_MATCHED,
 	// Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at

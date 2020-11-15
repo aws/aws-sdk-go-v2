@@ -37,7 +37,7 @@ type TagResourceInput struct {
 	// A label that consists of a customer-defined key and an optional value.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourceOutput struct {

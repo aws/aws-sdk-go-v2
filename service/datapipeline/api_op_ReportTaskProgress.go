@@ -44,7 +44,7 @@ type ReportTaskProgressInput struct {
 
 	// Key-value pairs that define the properties of the ReportTaskProgressInput
 	// object.
-	Fields []*types.Field
+	Fields []types.Field
 }
 
 // Contains the output of ReportTaskProgress.
@@ -54,7 +54,7 @@ type ReportTaskProgressOutput struct {
 	// runner does not need to call SetTaskStatus for canceled tasks.
 	//
 	// This member is required.
-	Canceled *bool
+	Canceled bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

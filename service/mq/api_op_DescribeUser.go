@@ -48,12 +48,12 @@ type DescribeUserOutput struct {
 	BrokerId *string
 
 	// Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
-	ConsoleAccess *bool
+	ConsoleAccess bool
 
 	// The list of groups (20 maximum) to which the ActiveMQ user belongs. This value
 	// can contain only alphanumeric characters, dashes, periods, underscores, and
 	// tildes (- . _ ~). This value must be 2-100 characters long.
-	Groups []*string
+	Groups []string
 
 	// The status of the changes pending for the ActiveMQ user.
 	Pending *types.UserPendingChanges

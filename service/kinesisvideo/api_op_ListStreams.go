@@ -51,7 +51,7 @@ type ListStreamsOutput struct {
 	NextToken *string
 
 	// An array of StreamInfo objects.
-	StreamInfoList []*types.StreamInfo
+	StreamInfoList []types.StreamInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

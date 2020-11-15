@@ -44,7 +44,7 @@ type DescribeTrustedAdvisorCheckSummariesInput struct {
 	// The IDs of the Trusted Advisor checks.
 	//
 	// This member is required.
-	CheckIds []*string
+	CheckIds []string
 }
 
 // The summaries of the Trusted Advisor checks returned by the
@@ -54,7 +54,7 @@ type DescribeTrustedAdvisorCheckSummariesOutput struct {
 	// The summary information for the requested Trusted Advisor checks.
 	//
 	// This member is required.
-	Summaries []*types.TrustedAdvisorCheckSummary
+	Summaries []types.TrustedAdvisorCheckSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -56,7 +56,7 @@ type GetEmailIdentityOutput struct {
 	// mechanism for receiving bounce or complaint notifications, Amazon Pinpoint sends
 	// an email notification when these events occur (even if this setting is
 	// disabled).
-	FeedbackForwardingStatus *bool
+	FeedbackForwardingStatus bool
 
 	// The email identity type.
 	IdentityType types.IdentityType
@@ -67,13 +67,13 @@ type GetEmailIdentityOutput struct {
 
 	// An array of objects that define the tags (keys and values) that are associated
 	// with the email identity.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Specifies whether or not the identity is verified. In Amazon Pinpoint, you can
 	// only send email from verified email addresses or domains. For more information
 	// about verifying identities, see the Amazon Pinpoint User Guide
 	// (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html).
-	VerifiedForSendingStatus *bool
+	VerifiedForSendingStatus bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

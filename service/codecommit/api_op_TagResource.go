@@ -40,7 +40,7 @@ type TagResourceInput struct {
 	// The key-value pair to use when tagging this repository.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourceOutput struct {

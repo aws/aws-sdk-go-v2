@@ -74,7 +74,7 @@ type CreateCachediSCSIVolumeInput struct {
 	// The size of the volume in bytes.
 	//
 	// This member is required.
-	VolumeSizeInBytes *int64
+	VolumeSizeInBytes int64
 
 	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
 	// or false to use a key managed by Amazon S3. Optional. Valid Values: true | false
@@ -104,7 +104,7 @@ type CreateCachediSCSIVolumeInput struct {
 	// numbers that you can represent in UTF-8 format, and the following special
 	// characters: + - = . _ : / @. The maximum length of a tag's key is 128
 	// characters, and the maximum length for a tag's value is 256 characters.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateCachediSCSIVolumeOutput struct {

@@ -76,7 +76,7 @@ type CloneStackInput struct {
 
 	// A list of stack attributes and values as key/value pairs to be added to the
 	// cloned stack.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// A ChefConfiguration object that specifies whether to enable Berkshelf and the
 	// Berkshelf version on Chef 11.10 stacks. For more information, see Create a New
@@ -85,7 +85,7 @@ type CloneStackInput struct {
 	ChefConfiguration *types.ChefConfiguration
 
 	// A list of source stack app IDs to be included in the cloned stack.
-	CloneAppIds []*string
+	CloneAppIds []string
 
 	// Whether to clone the source stack's permissions.
 	ClonePermissions *bool

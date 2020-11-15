@@ -43,7 +43,7 @@ type ListExportsInput struct {
 type ListExportsOutput struct {
 
 	// The output for the ListExports action.
-	Exports []*types.Export
+	Exports []types.Export
 
 	// If the output exceeds 100 exported output values, a string that identifies the
 	// next page of exports. If there is no additional page, this value is null.

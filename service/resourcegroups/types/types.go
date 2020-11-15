@@ -50,14 +50,14 @@ type Group struct {
 type GroupConfiguration struct {
 
 	// The configuration currently associated with the group and in effect.
-	Configuration []*GroupConfigurationItem
+	Configuration []GroupConfigurationItem
 
 	// If present, the reason why a request to update the group configuration failed.
 	FailureReason *string
 
 	// If present, the new configuration that is in the process of being applied to the
 	// group.
-	ProposedConfiguration []*GroupConfigurationItem
+	ProposedConfiguration []GroupConfigurationItem
 
 	// The current status of an attempt to update the group configuration.
 	Status GroupConfigurationStatus
@@ -83,7 +83,7 @@ type GroupConfigurationItem struct {
 	Type *string
 
 	// A collection of parameters for this group configuration item.
-	Parameters []*GroupConfigurationParameter
+	Parameters []GroupConfigurationParameter
 }
 
 // A parameter for a group configuration item.
@@ -117,7 +117,7 @@ type GroupConfigurationParameter struct {
 	// *
 	// For item type allowed-resource-types: the only supported parameter value is
 	// AWS::EC2::CapacityReservation.
-	Values []*string
+	Values []string
 }
 
 // A filter collection that you can use to restrict the results from a List
@@ -133,7 +133,7 @@ type GroupFilter struct {
 	// are case-sensitive.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // The unique identifiers for a resource group.
@@ -196,7 +196,7 @@ type ResourceFilter struct {
 	// and are case-sensitive.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // The ARN of a resource, and its resource type.

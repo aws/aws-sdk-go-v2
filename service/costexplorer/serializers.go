@@ -1373,9 +1373,9 @@ func awsAwsjson11_serializeDocumentAnomalyMonitor(v *types.AnomalyMonitor, value
 		ok.String(*v.CreationDate)
 	}
 
-	if v.DimensionalValueCount != nil {
+	if v.DimensionalValueCount != 0 {
 		ok := object.Key("DimensionalValueCount")
-		ok.Integer(*v.DimensionalValueCount)
+		ok.Integer(v.DimensionalValueCount)
 	}
 
 	if v.LastEvaluatedDate != nil {
@@ -1483,17 +1483,13 @@ func awsAwsjson11_serializeDocumentCostCategoryRule(v *types.CostCategoryRule, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCostCategoryRulesList(v []*types.CostCategoryRule, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentCostCategoryRulesList(v []types.CostCategoryRule, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentCostCategoryRule(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentCostCategoryRule(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1630,17 +1626,13 @@ func awsAwsjson11_serializeDocumentExpression(v *types.Expression, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentExpressions(v []*types.Expression, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentExpressions(v []types.Expression, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentExpression(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentExpression(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1664,17 +1656,13 @@ func awsAwsjson11_serializeDocumentGroupDefinition(v *types.GroupDefinition, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGroupDefinitions(v []*types.GroupDefinition, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentGroupDefinitions(v []types.GroupDefinition, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentGroupDefinition(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentGroupDefinition(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1692,17 +1680,13 @@ func awsAwsjson11_serializeDocumentMatchOptions(v []types.MatchOption, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentMetricNames(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentMetricNames(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1711,9 +1695,9 @@ func awsAwsjson11_serializeDocumentRightsizingRecommendationConfiguration(v *typ
 	object := value.Object()
 	defer object.Close()
 
-	if v.BenefitsConsidered != nil {
+	if v.BenefitsConsidered {
 		ok := object.Key("BenefitsConsidered")
-		ok.Boolean(*v.BenefitsConsidered)
+		ok.Boolean(v.BenefitsConsidered)
 	}
 
 	if len(v.RecommendationTarget) > 0 {
@@ -1760,17 +1744,13 @@ func awsAwsjson11_serializeDocumentSubscriber(v *types.Subscriber, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSubscribers(v []*types.Subscriber, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentSubscribers(v []types.Subscriber, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentSubscriber(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentSubscriber(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1807,9 +1787,9 @@ func awsAwsjson11_serializeDocumentTotalImpactFilter(v *types.TotalImpactFilter,
 	object := value.Object()
 	defer object.Close()
 
-	if v.EndValue != nil {
+	if v.EndValue != 0 {
 		ok := object.Key("EndValue")
-		ok.Double(*v.EndValue)
+		ok.Double(v.EndValue)
 	}
 
 	if len(v.NumericOperator) > 0 {
@@ -1817,25 +1797,21 @@ func awsAwsjson11_serializeDocumentTotalImpactFilter(v *types.TotalImpactFilter,
 		ok.String(string(v.NumericOperator))
 	}
 
-	if v.StartValue != nil {
+	if v.StartValue != 0 {
 		ok := object.Key("StartValue")
-		ok.Double(*v.StartValue)
+		ok.Double(v.StartValue)
 	}
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentValues(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentValues(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2268,9 +2244,9 @@ func awsAwsjson11_serializeOpDocumentGetReservationPurchaseRecommendationInput(v
 		ok.String(*v.NextPageToken)
 	}
 
-	if v.PageSize != nil {
+	if v.PageSize != 0 {
 		ok := object.Key("PageSize")
-		ok.Integer(*v.PageSize)
+		ok.Integer(v.PageSize)
 	}
 
 	if len(v.PaymentOption) > 0 {
@@ -2359,9 +2335,9 @@ func awsAwsjson11_serializeOpDocumentGetRightsizingRecommendationInput(v *GetRig
 		ok.String(*v.NextPageToken)
 	}
 
-	if v.PageSize != nil {
+	if v.PageSize != 0 {
 		ok := object.Key("PageSize")
-		ok.Integer(*v.PageSize)
+		ok.Integer(v.PageSize)
 	}
 
 	if v.Service != nil {
@@ -2395,9 +2371,9 @@ func awsAwsjson11_serializeOpDocumentGetSavingsPlansCoverageInput(v *GetSavingsP
 		}
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.Metrics != nil {
@@ -2448,9 +2424,9 @@ func awsAwsjson11_serializeOpDocumentGetSavingsPlansPurchaseRecommendationInput(
 		ok.String(*v.NextPageToken)
 	}
 
-	if v.PageSize != nil {
+	if v.PageSize != 0 {
 		ok := object.Key("PageSize")
-		ok.Integer(*v.PageSize)
+		ok.Integer(v.PageSize)
 	}
 
 	if len(v.PaymentOption) > 0 {
@@ -2482,9 +2458,9 @@ func awsAwsjson11_serializeOpDocumentGetSavingsPlansUtilizationDetailsInput(v *G
 		}
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2602,9 +2578,9 @@ func awsAwsjson11_serializeOpDocumentListCostCategoryDefinitionsInput(v *ListCos
 		ok.String(*v.EffectiveOn)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {

@@ -6,7 +6,7 @@ package types
 type Endpoint struct {
 
 	// Attributes for endpoint.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// EndpointArn for mobile app and device.
 	EndpointArn *string
@@ -47,7 +47,7 @@ type MessageAttributeValue struct {
 type PlatformApplication struct {
 
 	// Attributes for platform application object.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// PlatformApplicationArn for platform application object.
 	PlatformApplicationArn *string

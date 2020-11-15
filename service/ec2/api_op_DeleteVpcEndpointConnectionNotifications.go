@@ -32,19 +32,19 @@ type DeleteVpcEndpointConnectionNotificationsInput struct {
 	// One or more notification IDs.
 	//
 	// This member is required.
-	ConnectionNotificationIds []*string
+	ConnectionNotificationIds []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 }
 
 type DeleteVpcEndpointConnectionNotificationsOutput struct {
 
 	// Information about the notifications that could not be deleted successfully.
-	Unsuccessful []*types.UnsuccessfulItem
+	Unsuccessful []types.UnsuccessfulItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

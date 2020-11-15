@@ -36,7 +36,7 @@ type GetV2LoggingOptionsOutput struct {
 	DefaultLogLevel types.LogLevel
 
 	// Disables all logs.
-	DisableAllLogs *bool
+	DisableAllLogs bool
 
 	// The IAM role ARN AWS IoT uses to write to your CloudWatch logs.
 	RoleArn *string

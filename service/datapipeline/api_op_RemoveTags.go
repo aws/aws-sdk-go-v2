@@ -37,7 +37,7 @@ type RemoveTagsInput struct {
 	// The keys of the tags to remove.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 // Contains the output of RemoveTags.

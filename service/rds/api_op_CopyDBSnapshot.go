@@ -159,7 +159,7 @@ type CopyDBSnapshotInput struct {
 	// A list of tags. For more information, see Tagging Amazon RDS Resources
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
 	// the Amazon RDS User Guide.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Used by the SDK's PresignURL autofill customization to specify the region the of
 	// the client's request.

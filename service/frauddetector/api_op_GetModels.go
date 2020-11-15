@@ -52,7 +52,7 @@ type GetModelsInput struct {
 type GetModelsOutput struct {
 
 	// The array of models.
-	Models []*types.Model
+	Models []types.Model
 
 	// The next page token to be used in subsequent requests.
 	NextToken *string

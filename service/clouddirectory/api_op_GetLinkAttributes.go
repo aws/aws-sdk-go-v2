@@ -32,7 +32,7 @@ type GetLinkAttributesInput struct {
 	// A list of attribute names whose values will be retrieved.
 	//
 	// This member is required.
-	AttributeNames []*string
+	AttributeNames []string
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where the
 	// typed link resides. For more information, see arns or Typed Links
@@ -53,7 +53,7 @@ type GetLinkAttributesInput struct {
 type GetLinkAttributesOutput struct {
 
 	// The attributes that are associated with the typed link.
-	Attributes []*types.AttributeKeyAndValue
+	Attributes []types.AttributeKeyAndValue
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

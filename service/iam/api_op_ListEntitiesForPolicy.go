@@ -91,20 +91,20 @@ type ListEntitiesForPolicyOutput struct {
 	// the MaxItems number of results even when there are more results available. We
 	// recommend that you check IsTruncated after every call to ensure that you receive
 	// all your results.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
 
 	// A list of IAM groups that the policy is attached to.
-	PolicyGroups []*types.PolicyGroup
+	PolicyGroups []types.PolicyGroup
 
 	// A list of IAM roles that the policy is attached to.
-	PolicyRoles []*types.PolicyRole
+	PolicyRoles []types.PolicyRole
 
 	// A list of IAM users that the policy is attached to.
-	PolicyUsers []*types.PolicyUser
+	PolicyUsers []types.PolicyUser
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

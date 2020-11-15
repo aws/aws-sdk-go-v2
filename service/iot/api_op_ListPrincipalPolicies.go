@@ -42,7 +42,7 @@ type ListPrincipalPoliciesInput struct {
 
 	// Specifies the order for results. If true, results are returned in ascending
 	// creation order.
-	AscendingOrder *bool
+	AscendingOrder bool
 
 	// The marker for the next set of results.
 	Marker *string
@@ -59,7 +59,7 @@ type ListPrincipalPoliciesOutput struct {
 	NextMarker *string
 
 	// The policies.
-	Policies []*types.Policy
+	Policies []types.Policy
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

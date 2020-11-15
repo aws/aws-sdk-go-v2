@@ -57,7 +57,7 @@ type DescribeTrustedAdvisorChecksOutput struct {
 	// Information about all available Trusted Advisor checks.
 	//
 	// This member is required.
-	Checks []*types.TrustedAdvisorCheckDescription
+	Checks []types.TrustedAdvisorCheckDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

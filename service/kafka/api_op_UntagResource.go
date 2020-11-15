@@ -52,7 +52,7 @@ type UntagResourceInput struct {
 	// digits, white space, and the following special characters: _ . / = + - @.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagResourceOutput struct {

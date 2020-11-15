@@ -88,7 +88,7 @@ type ChangeMessageVisibilityInput struct {
 	// to 43200. Maximum: 12 hours.
 	//
 	// This member is required.
-	VisibilityTimeout *int32
+	VisibilityTimeout int32
 }
 
 type ChangeMessageVisibilityOutput struct {

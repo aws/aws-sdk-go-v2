@@ -49,7 +49,7 @@ type DescribeBackupsInput struct {
 type DescribeBackupsOutput struct {
 
 	// Contains the response to a DescribeBackups request.
-	Backups []*types.Backup
+	Backups []types.Backup
 
 	// This is not currently implemented for DescribeBackups requests.
 	NextToken *string

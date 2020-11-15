@@ -35,14 +35,14 @@ type EnableInsightRulesInput struct {
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html).
 	//
 	// This member is required.
-	RuleNames []*string
+	RuleNames []string
 }
 
 type EnableInsightRulesOutput struct {
 
 	// An array listing the rules that could not be enabled. You cannot disable or
 	// enable built-in rules.
-	Failures []*types.PartialFailure
+	Failures []types.PartialFailure
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

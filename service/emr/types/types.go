@@ -20,10 +20,10 @@ type Application struct {
 
 	// This option is for advanced users only. This is meta information about
 	// third-party applications that third-party vendors use for testing purposes.
-	AdditionalInfo map[string]*string
+	AdditionalInfo map[string]string
 
 	// Arguments for Amazon EMR to pass to the application.
-	Args []*string
+	Args []string
 
 	// The name of the application.
 	Name *string
@@ -48,7 +48,7 @@ type AutoScalingPolicy struct {
 	// The scale-in and scale-out rules that comprise the automatic scaling policy.
 	//
 	// This member is required.
-	Rules []*ScalingRule
+	Rules []ScalingRule
 }
 
 // An automatic scaling policy for a core instance group or task instance group in
@@ -63,7 +63,7 @@ type AutoScalingPolicyDescription struct {
 	Constraints *ScalingConstraints
 
 	// The scale-in and scale-out rules that comprise the automatic scaling policy.
-	Rules []*ScalingRule
+	Rules []ScalingRule
 
 	// The status of an automatic scaling policy.
 	Status *AutoScalingPolicyStatus
@@ -105,13 +105,13 @@ type BlockPublicAccessConfiguration struct {
 	// before July 2019. For accounts created after this, the default is true.
 	//
 	// This member is required.
-	BlockPublicSecurityGroupRules *bool
+	BlockPublicSecurityGroupRules bool
 
 	// The classification within a configuration.
 	Classification *string
 
 	// A list of additional configurations to apply within a configuration object.
-	Configurations []*Configuration
+	Configurations []Configuration
 
 	// Specifies ports and port ranges that are permitted to have security group rules
 	// that allow inbound traffic from all public sources. For example, if Port 23
@@ -120,10 +120,10 @@ type BlockPublicAccessConfiguration struct {
 	// rule that allows inbound traffic on Port 23 from IPv4 0.0.0.0/0 or IPv6 port
 	// ::/0 as the source. By default, Port 22, which is used for SSH access to the
 	// cluster EC2 instances, is in the list of PermittedPublicSecurityGroupRuleRanges.
-	PermittedPublicSecurityGroupRuleRanges []*PortRange
+	PermittedPublicSecurityGroupRuleRanges []PortRange
 
 	// A set of properties specified within a configuration classification.
-	Properties map[string]*string
+	Properties map[string]string
 }
 
 // Properties that describe the AWS principal that created the
@@ -209,7 +209,7 @@ type CloudWatchAlarmDefinition struct {
 	Threshold *float64
 
 	// A CloudWatch metric dimension.
-	Dimensions []*MetricDimension
+	Dimensions []MetricDimension
 
 	// The number of periods, in five-minute increments, during which the alarm
 	// condition must exist before the alarm triggers automatic scaling activity. The
@@ -233,7 +233,7 @@ type CloudWatchAlarmDefinition struct {
 type Cluster struct {
 
 	// The applications installed on this cluster.
-	Applications []*Application
+	Applications []Application
 
 	// An IAM role for automatic scaling policies. The default role is
 	// EMR_AutoScaling_DefaultRole. The IAM role provides permissions that the
@@ -242,14 +242,14 @@ type Cluster struct {
 	AutoScalingRole *string
 
 	// Specifies whether the cluster should terminate after completing all steps.
-	AutoTerminate *bool
+	AutoTerminate bool
 
 	// The Amazon Resource Name of the cluster.
 	ClusterArn *string
 
 	// Applies only to Amazon EMR releases 4.x and later. The list of Configurations
 	// supplied to the EMR cluster.
-	Configurations []*Configuration
+	Configurations []Configuration
 
 	// Available only in Amazon EMR version 5.7.0 and later. The ID of a custom Amazon
 	// EBS-backed Linux AMI if the cluster uses a custom AMI.
@@ -307,7 +307,7 @@ type Cluster struct {
 	OutpostArn *string
 
 	// Placement group configured for an Amazon EMR cluster.
-	PlacementGroups []*PlacementGroupConfig
+	PlacementGroups []PlacementGroupConfig
 
 	// The Amazon EMR release label, which determines the version of open-source
 	// application packages installed on the cluster. Release labels are in the form
@@ -359,12 +359,12 @@ type Cluster struct {
 	StepConcurrencyLevel *int32
 
 	// A list of tags associated with a cluster.
-	Tags []*Tag
+	Tags []Tag
 
 	// Indicates whether Amazon EMR will lock the cluster to prevent the EC2 instances
 	// from being terminated by an API call or user intervention, or in the event of a
 	// cluster error.
-	TerminationProtected *bool
+	TerminationProtected bool
 
 	// Indicates whether the cluster is visible to all IAM users of the AWS account
 	// associated with the cluster. The default value, true, indicates that all IAM
@@ -374,7 +374,7 @@ type Cluster struct {
 	// using the SetVisibleToAllUsers action. You can override the default value of
 	// true when you create a cluster by using the VisibleToAllUsers parameter of the
 	// RunJobFlow action.
-	VisibleToAllUsers *bool
+	VisibleToAllUsers bool
 }
 
 // The reason that the cluster changed to its current state.
@@ -445,7 +445,7 @@ type ClusterTimeline struct {
 type Command struct {
 
 	// Arguments for Amazon EMR to pass to the command for execution.
-	Args []*string
+	Args []string
 
 	// The name of the command.
 	Name *string
@@ -511,10 +511,10 @@ type Configuration struct {
 	Classification *string
 
 	// A list of additional configurations to apply within a configuration object.
-	Configurations []*Configuration
+	Configurations []Configuration
 
 	// A set of properties specified within a configuration classification.
-	Properties map[string]*string
+	Properties map[string]string
 }
 
 // Configuration of requested EBS block device associated with the instance group.
@@ -547,7 +547,7 @@ type EbsBlockDeviceConfig struct {
 type EbsConfiguration struct {
 
 	// An array of Amazon EBS volume specifications attached to a cluster instance.
-	EbsBlockDeviceConfigs []*EbsBlockDeviceConfig
+	EbsBlockDeviceConfigs []EbsBlockDeviceConfig
 
 	// Indicates whether an Amazon EBS volume is EBS-optimized.
 	EbsOptimized *bool
@@ -568,10 +568,10 @@ type EbsVolume struct {
 type Ec2InstanceAttributes struct {
 
 	// A list of additional Amazon EC2 security group IDs for the master node.
-	AdditionalMasterSecurityGroups []*string
+	AdditionalMasterSecurityGroups []string
 
 	// A list of additional Amazon EC2 security group IDs for the core and task nodes.
-	AdditionalSlaveSecurityGroups []*string
+	AdditionalSlaveSecurityGroups []string
 
 	// The Availability Zone in which the cluster will run.
 	Ec2AvailabilityZone *string
@@ -603,7 +603,7 @@ type Ec2InstanceAttributes struct {
 	// that Availability Zone. If you do not specify this value, Amazon EMR chooses the
 	// Availability Zone for you. RequestedEc2SubnetIDs and
 	// RequestedEc2AvailabilityZones cannot be specified together.
-	RequestedEc2AvailabilityZones []*string
+	RequestedEc2AvailabilityZones []string
 
 	// Applies to clusters configured with the instance fleets option. Specifies the
 	// unique identifier of one or more Amazon EC2 subnets in which to launch EC2
@@ -616,7 +616,7 @@ type Ec2InstanceAttributes struct {
 	// supported, and no Subnet is specified, Amazon EMR chooses the subnet for you.
 	// RequestedEc2SubnetIDs and RequestedEc2AvailabilityZones cannot be specified
 	// together.
-	RequestedEc2SubnetIds []*string
+	RequestedEc2SubnetIds []string
 
 	// The identifier of the Amazon EC2 security group for the Amazon EMR service to
 	// access clusters in VPC private subnets.
@@ -675,7 +675,7 @@ type HadoopJarStepConfig struct {
 
 	// A list of command line arguments passed to the JAR file's main function when
 	// executed.
-	Args []*string
+	Args []string
 
 	// The name of the main class in the specified Java file. If not specified, the JAR
 	// file should specify a Main-Class in its manifest file.
@@ -683,7 +683,7 @@ type HadoopJarStepConfig struct {
 
 	// A list of Java properties that are set when the step runs. You can use these
 	// properties to pass key value pairs to your main function.
-	Properties []*KeyValue
+	Properties []KeyValue
 }
 
 // A cluster step consisting of a JAR file whose main function will be executed.
@@ -693,7 +693,7 @@ type HadoopStepConfig struct {
 
 	// The list of command line arguments to pass to the JAR file's main function for
 	// execution.
-	Args []*string
+	Args []string
 
 	// The path to the JAR file that runs during the step.
 	Jar *string
@@ -704,14 +704,14 @@ type HadoopStepConfig struct {
 
 	// The list of Java properties that are set when the step runs. You can use these
 	// properties to pass key value pairs to your main function.
-	Properties map[string]*string
+	Properties map[string]string
 }
 
 // Represents an EC2 instance provisioned as part of cluster.
 type Instance struct {
 
 	// The list of EBS volumes that are attached to this instance.
-	EbsVolumes []*EbsVolume
+	EbsVolumes []EbsVolume
 
 	// The unique identifier of the instance in Amazon EC2.
 	Ec2InstanceId *string
@@ -764,7 +764,7 @@ type InstanceFleet struct {
 
 	// The specification for the instance types that comprise an instance fleet. Up to
 	// five unique instance specifications may be defined for each instance fleet.
-	InstanceTypeSpecifications []*InstanceTypeSpecification
+	InstanceTypeSpecifications []InstanceTypeSpecification
 
 	// Describes the launch specification for an instance fleet.
 	LaunchSpecifications *InstanceFleetProvisioningSpecifications
@@ -836,7 +836,7 @@ type InstanceFleetConfig struct {
 
 	// The instance type configurations that define the EC2 instances in the instance
 	// fleet.
-	InstanceTypeConfigs []*InstanceTypeConfig
+	InstanceTypeConfigs []InstanceTypeConfig
 
 	// The launch specification for the instance fleet.
 	LaunchSpecifications *InstanceFleetProvisioningSpecifications
@@ -1001,14 +1001,14 @@ type InstanceGroup struct {
 	// Amazon EMR releases 4.x or later. The list of configurations supplied for an EMR
 	// cluster instance group. You can specify a separate configuration for each
 	// instance group (master, core, and task).
-	Configurations []*Configuration
+	Configurations []Configuration
 
 	// The version number of the requested configuration specification for this
 	// instance group.
-	ConfigurationsVersion *int64
+	ConfigurationsVersion int64
 
 	// The EBS block devices that are mapped to this instance group.
-	EbsBlockDevices []*EbsBlockDevice
+	EbsBlockDevices []EbsBlockDevice
 
 	// If the instance group is EBS-optimized. An Amazon EBS-optimized instance uses an
 	// optimized configuration stack and provides additional, dedicated capacity for
@@ -1026,11 +1026,11 @@ type InstanceGroup struct {
 
 	// A list of configurations that were successfully applied for an instance group
 	// last time.
-	LastSuccessfullyAppliedConfigurations []*Configuration
+	LastSuccessfullyAppliedConfigurations []Configuration
 
 	// The version number of a configuration specification that was successfully
 	// applied for an instance group last time.
-	LastSuccessfullyAppliedConfigurationsVersion *int64
+	LastSuccessfullyAppliedConfigurationsVersion int64
 
 	// The marketplace to provision instances for this group. Valid values are
 	// ON_DEMAND or SPOT.
@@ -1084,7 +1084,7 @@ type InstanceGroupConfig struct {
 	// Amazon EMR releases 4.x or later. The list of configurations supplied for an EMR
 	// cluster instance group. You can specify a separate configuration for each
 	// instance group (master, core, and task).
-	Configurations []*Configuration
+	Configurations []Configuration
 
 	// EBS configurations that will be attached to each EC2 instance in the instance
 	// group.
@@ -1169,11 +1169,11 @@ type InstanceGroupModifyConfig struct {
 	InstanceGroupId *string
 
 	// A list of new or modified configurations to apply for an instance group.
-	Configurations []*Configuration
+	Configurations []Configuration
 
 	// The EC2 InstanceIds to terminate. After you terminate the instances, the
 	// instance group will not return to its original requested size.
-	EC2InstanceIdsToTerminate []*string
+	EC2InstanceIdsToTerminate []string
 
 	// Target size for the instance group.
 	InstanceCount *int32
@@ -1227,10 +1227,10 @@ type InstanceResizePolicy struct {
 	InstanceTerminationTimeout *int32
 
 	// Specific list of instances to be protected when shrinking an instance group.
-	InstancesToProtect []*string
+	InstancesToProtect []string
 
 	// Specific list of instances to be terminated when shrinking an instance group.
-	InstancesToTerminate []*string
+	InstancesToTerminate []string
 }
 
 // The details of the status change reason for the instance.
@@ -1295,7 +1295,7 @@ type InstanceTypeConfig struct {
 	// A configuration classification that applies when provisioning cluster instances,
 	// which can include configurations for applications and software that run on the
 	// cluster.
-	Configurations []*Configuration
+	Configurations []Configuration
 
 	// The configuration of Amazon Elastic Block Storage (EBS) attached to each
 	// instance as defined by InstanceType.
@@ -1324,11 +1324,11 @@ type InstanceTypeSpecification struct {
 	// A configuration classification that applies when provisioning cluster instances,
 	// which can include configurations for applications and software bundled with
 	// Amazon EMR.
-	Configurations []*Configuration
+	Configurations []Configuration
 
 	// The configuration of Amazon Elastic Block Storage (EBS) attached to each
 	// instance as defined by InstanceType.
-	EbsBlockDevices []*EbsBlockDevice
+	EbsBlockDevices []EbsBlockDevice
 
 	// Evaluates to TRUE when the specified InstanceType is EBS-optimized.
 	EbsOptimized *bool
@@ -1377,7 +1377,7 @@ type JobFlowDetail struct {
 	AutoScalingRole *string
 
 	// A list of the bootstrap actions run by the job flow.
-	BootstrapActions []*BootstrapActionDetail
+	BootstrapActions []BootstrapActionDetail
 
 	// The IAM role that was specified when the job flow was launched. The EC2
 	// instances of the job flow assume this role.
@@ -1411,12 +1411,12 @@ type JobFlowDetail struct {
 	ServiceRole *string
 
 	// A list of steps run by the job flow.
-	Steps []*StepDetail
+	Steps []StepDetail
 
 	// A list of strings set by third party software when the job flow is launched. If
 	// you are not using third party software to manage the job flow this value is
 	// empty.
-	SupportedProducts []*string
+	SupportedProducts []string
 
 	// Indicates whether the cluster is visible to all IAM users of the AWS account
 	// associated with the cluster. The default value, true, indicates that all IAM
@@ -1426,7 +1426,7 @@ type JobFlowDetail struct {
 	// using the SetVisibleToAllUsers action. You can override the default value of
 	// true when you create a cluster by using the VisibleToAllUsers parameter of the
 	// RunJobFlow action.
-	VisibleToAllUsers *bool
+	VisibleToAllUsers bool
 }
 
 // Describes the status of the cluster (job flow).
@@ -1465,10 +1465,10 @@ type JobFlowExecutionStatusDetail struct {
 type JobFlowInstancesConfig struct {
 
 	// A list of additional Amazon EC2 security group IDs for the master node.
-	AdditionalMasterSecurityGroups []*string
+	AdditionalMasterSecurityGroups []string
 
 	// A list of additional Amazon EC2 security group IDs for the core and task nodes.
-	AdditionalSlaveSecurityGroups []*string
+	AdditionalSlaveSecurityGroups []string
 
 	// The name of the EC2 key pair that can be used to ssh to the master node as the
 	// user called "hadoop."
@@ -1485,7 +1485,7 @@ type JobFlowInstancesConfig struct {
 	// subnet IDs are specified, Amazon EMR evaluates them and launches instances in
 	// the optimal subnet. The instance fleet configuration is available only in Amazon
 	// EMR versions 4.8.0 and later, excluding 5.0.x versions.
-	Ec2SubnetIds []*string
+	Ec2SubnetIds []string
 
 	// The identifier of the Amazon EC2 security group for the master node.
 	EmrManagedMasterSecurityGroup *string
@@ -1507,14 +1507,14 @@ type JobFlowInstancesConfig struct {
 	// The instance fleet configuration is available only in Amazon EMR versions 4.8.0
 	// and later, excluding 5.0.x versions. Describes the EC2 instances and instance
 	// configurations for clusters that use the instance fleet configuration.
-	InstanceFleets []*InstanceFleetConfig
+	InstanceFleets []InstanceFleetConfig
 
 	// Configuration for the instance groups in a cluster.
-	InstanceGroups []*InstanceGroupConfig
+	InstanceGroups []InstanceGroupConfig
 
 	// Specifies whether the cluster should remain available after completing all
 	// steps.
-	KeepJobFlowAliveWhenNoSteps *bool
+	KeepJobFlowAliveWhenNoSteps bool
 
 	// The EC2 instance type of the master node.
 	MasterInstanceType *string
@@ -1532,7 +1532,7 @@ type JobFlowInstancesConfig struct {
 	// Specifies whether to lock the cluster to prevent the Amazon EC2 instances from
 	// being terminated by API call, user intervention, or in the event of a job-flow
 	// error.
-	TerminationProtected *bool
+	TerminationProtected bool
 }
 
 // Specify the type of Amazon EC2 instances that the cluster (job flow) runs on.
@@ -1567,11 +1567,11 @@ type JobFlowInstancesDetail struct {
 	HadoopVersion *string
 
 	// Details about the instance groups in a cluster.
-	InstanceGroups []*InstanceGroupDetail
+	InstanceGroups []InstanceGroupDetail
 
 	// Specifies whether the cluster should remain available after completing all
 	// steps.
-	KeepJobFlowAliveWhenNoSteps *bool
+	KeepJobFlowAliveWhenNoSteps bool
 
 	// The Amazon EC2 instance identifier of the master node.
 	MasterInstanceId *string
@@ -1594,7 +1594,7 @@ type JobFlowInstancesDetail struct {
 	// Specifies whether the Amazon EC2 instances in the cluster are protected from
 	// termination by API calls, user intervention, or in the event of a job-flow
 	// error.
-	TerminationProtected *bool
+	TerminationProtected bool
 }
 
 // Attributes for Kerberos configuration when Kerberos authentication is enabled
@@ -1748,7 +1748,7 @@ type NotebookExecution struct {
 	// A list of tags associated with a notebook execution. Tags are user-defined key
 	// value pairs that consist of a required key string with a maximum of 128
 	// characters and an optional value string with a maximum of 256 characters.
-	Tags []*Tag
+	Tags []Tag
 }
 
 //
@@ -1850,7 +1850,7 @@ type PlacementType struct {
 	// for instance fleets, while AvailabilityZone (singular) is used for uniform
 	// instance groups. The instance fleet configuration is available only in Amazon
 	// EMR versions 4.8.0 and later, excluding 5.0.x versions.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 }
 
 // A list of port ranges that are permitted to allow inbound traffic from all
@@ -1949,7 +1949,7 @@ type ScriptBootstrapActionConfig struct {
 	Path *string
 
 	// A list of command line arguments to pass to the bootstrap action script.
-	Args []*string
+	Args []string
 }
 
 // The creation date and time, and name, of a security configuration.
@@ -2196,7 +2196,7 @@ type StepTimeline struct {
 type SupportedProductConfig struct {
 
 	// The list of user-supplied arguments.
-	Args []*string
+	Args []string
 
 	// The name of the product configuration.
 	Name *string

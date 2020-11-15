@@ -49,10 +49,10 @@ type DescribeSnapshotSchedulesInput struct {
 	ScheduleIdentifier *string
 
 	// The key value for a snapshot schedule tag.
-	TagKeys []*string
+	TagKeys []string
 
 	// The value corresponding to the key of the snapshot schedule tag.
-	TagValues []*string
+	TagValues []string
 }
 
 type DescribeSnapshotSchedulesOutput struct {
@@ -65,7 +65,7 @@ type DescribeSnapshotSchedulesOutput struct {
 	Marker *string
 
 	// A list of SnapshotSchedules.
-	SnapshotSchedules []*types.SnapshotSchedule
+	SnapshotSchedules []types.SnapshotSchedule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

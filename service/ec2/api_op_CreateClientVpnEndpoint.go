@@ -35,7 +35,7 @@ type CreateClientVpnEndpointInput struct {
 	// Information about the authentication method to be used to authenticate clients.
 	//
 	// This member is required.
-	AuthenticationOptions []*types.ClientVpnAuthenticationRequest
+	AuthenticationOptions []types.ClientVpnAuthenticationRequest
 
 	// The IPv4 address range, in CIDR notation, from which to assign client IP
 	// addresses. The address range cannot overlap with the local CIDR of the VPC in
@@ -81,17 +81,17 @@ type CreateClientVpnEndpointInput struct {
 	// Information about the DNS servers to be used for DNS resolution. A Client VPN
 	// endpoint can have up to two DNS servers. If no DNS server is specified, the DNS
 	// address configured on the device is used for the DNS server.
-	DnsServers []*string
+	DnsServers []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The IDs of one or more security groups to apply to the target network. You must
 	// also specify the ID of the VPC that contains the security groups.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// Specify whether to enable the self-service portal for the Client VPN endpoint.
 	// Default Value: enabled
@@ -102,10 +102,10 @@ type CreateClientVpnEndpointInput struct {
 	// split-tunnel VPN endpoints, see Split-Tunnel AWS Client VPN Endpoint
 	// (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html)
 	// in the AWS Client VPN Administrator Guide.
-	SplitTunnel *bool
+	SplitTunnel bool
 
 	// The tags to apply to the Client VPN endpoint during creation.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 
 	// The transport protocol to be used by the VPN session. Default value: udp
 	TransportProtocol types.TransportProtocol
@@ -117,7 +117,7 @@ type CreateClientVpnEndpointInput struct {
 
 	// The port number to assign to the Client VPN endpoint for TCP and UDP traffic.
 	// Valid Values: 443 | 1194 Default Value: 443
-	VpnPort *int32
+	VpnPort int32
 }
 
 type CreateClientVpnEndpointOutput struct {

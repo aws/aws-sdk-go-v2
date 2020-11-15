@@ -47,7 +47,7 @@ type GetSupportedResourceTypesOutput struct {
 	// Database Service
 	//
 	// * Storage Gateway for AWS Storage Gateway
-	ResourceTypes []*string
+	ResourceTypes []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

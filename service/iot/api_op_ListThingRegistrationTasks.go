@@ -46,7 +46,7 @@ type ListThingRegistrationTasksOutput struct {
 	NextToken *string
 
 	// A list of bulk thing provisioning task IDs.
-	TaskIds []*string
+	TaskIds []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -64,7 +64,7 @@ type ListQueuesOutput struct {
 
 	// A list of queue URLs, up to 1,000 entries, or the value of MaxResults that you
 	// sent in the request.
-	QueueUrls []*string
+	QueueUrls []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

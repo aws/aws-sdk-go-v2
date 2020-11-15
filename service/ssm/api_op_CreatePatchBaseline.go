@@ -45,7 +45,7 @@ type CreatePatchBaselineInput struct {
 	// package name formats for approved and rejected patch lists
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
 	// in the AWS Systems Manager User Guide.
-	ApprovedPatches []*string
+	ApprovedPatches []string
 
 	// Defines the compliance level for approved patches. This means that if an
 	// approved patch is reported as missing, this is the severity of the compliance
@@ -55,7 +55,7 @@ type CreatePatchBaselineInput struct {
 	// Indicates whether the list of approved patches includes non-security updates
 	// that should be applied to the instances. The default value is 'false'. Applies
 	// to Linux instances only.
-	ApprovedPatchesEnableNonSecurity *bool
+	ApprovedPatchesEnableNonSecurity bool
 
 	// User-provided idempotency token.
 	ClientToken *string
@@ -75,7 +75,7 @@ type CreatePatchBaselineInput struct {
 	// package name formats for approved and rejected patch lists
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
 	// in the AWS Systems Manager User Guide.
-	RejectedPatches []*string
+	RejectedPatches []string
 
 	// The action for Patch Manager to take on patches included in the RejectedPackages
 	// list.
@@ -94,7 +94,7 @@ type CreatePatchBaselineInput struct {
 
 	// Information about the patches to use to update the instances, including target
 	// operating systems and source repositories. Applies to Linux instances only.
-	Sources []*types.PatchSource
+	Sources []types.PatchSource
 
 	// Optional metadata that you assign to a resource. Tags enable you to categorize a
 	// resource in different ways, such as by purpose, owner, or environment. For
@@ -109,7 +109,7 @@ type CreatePatchBaselineInput struct {
 	//
 	// To add tags to an
 	// existing patch baseline, use the AddTagsToResource action.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreatePatchBaselineOutput struct {

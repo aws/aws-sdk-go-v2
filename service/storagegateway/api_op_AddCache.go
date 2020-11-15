@@ -38,7 +38,7 @@ type AddCacheInput struct {
 	// can get the disk IDs from the ListLocalDisks API.
 	//
 	// This member is required.
-	DiskIds []*string
+	DiskIds []string
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
 	// return a list of gateways for your account and AWS Region.

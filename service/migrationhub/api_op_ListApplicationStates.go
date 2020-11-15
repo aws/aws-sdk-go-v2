@@ -33,7 +33,7 @@ type ListApplicationStatesInput struct {
 
 	// The configurationIds from the Application Discovery Service that uniquely
 	// identifies your applications.
-	ApplicationIds []*string
+	ApplicationIds []string
 
 	// Maximum number of results to be returned per page.
 	MaxResults *int32
@@ -47,7 +47,7 @@ type ListApplicationStatesInput struct {
 type ListApplicationStatesOutput struct {
 
 	// A list of Applications that exist in Application Discovery Service.
-	ApplicationStateList []*types.ApplicationState
+	ApplicationStateList []types.ApplicationState
 
 	// If a NextToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the

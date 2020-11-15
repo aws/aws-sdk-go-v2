@@ -1625,13 +1625,13 @@ func validateByteMatchSetUpdate(v *types.ByteMatchSetUpdate) error {
 	}
 }
 
-func validateByteMatchSetUpdates(v []*types.ByteMatchSetUpdate) error {
+func validateByteMatchSetUpdates(v []types.ByteMatchSetUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ByteMatchSetUpdates"}
 	for i := range v {
-		if err := validateByteMatchSetUpdate(v[i]); err != nil {
+		if err := validateByteMatchSetUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1685,13 +1685,13 @@ func validateExcludedRule(v *types.ExcludedRule) error {
 	}
 }
 
-func validateExcludedRules(v []*types.ExcludedRule) error {
+func validateExcludedRules(v []types.ExcludedRule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExcludedRules"}
 	for i := range v {
-		if err := validateExcludedRule(v[i]); err != nil {
+		if err := validateExcludedRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1757,13 +1757,13 @@ func validateGeoMatchSetUpdate(v *types.GeoMatchSetUpdate) error {
 	}
 }
 
-func validateGeoMatchSetUpdates(v []*types.GeoMatchSetUpdate) error {
+func validateGeoMatchSetUpdates(v []types.GeoMatchSetUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GeoMatchSetUpdates"}
 	for i := range v {
-		if err := validateGeoMatchSetUpdate(v[i]); err != nil {
+		if err := validateGeoMatchSetUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1814,13 +1814,13 @@ func validateIPSetUpdate(v *types.IPSetUpdate) error {
 	}
 }
 
-func validateIPSetUpdates(v []*types.IPSetUpdate) error {
+func validateIPSetUpdates(v []types.IPSetUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IPSetUpdates"}
 	for i := range v {
-		if err := validateIPSetUpdate(v[i]); err != nil {
+		if err := validateIPSetUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1875,13 +1875,13 @@ func validatePredicate(v *types.Predicate) error {
 	}
 }
 
-func validateRedactedFields(v []*types.FieldToMatch) error {
+func validateRedactedFields(v []types.FieldToMatch) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RedactedFields"}
 	for i := range v {
-		if err := validateFieldToMatch(v[i]); err != nil {
+		if err := validateFieldToMatch(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1914,13 +1914,13 @@ func validateRegexMatchSetUpdate(v *types.RegexMatchSetUpdate) error {
 	}
 }
 
-func validateRegexMatchSetUpdates(v []*types.RegexMatchSetUpdate) error {
+func validateRegexMatchSetUpdates(v []types.RegexMatchSetUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegexMatchSetUpdates"}
 	for i := range v {
-		if err := validateRegexMatchSetUpdate(v[i]); err != nil {
+		if err := validateRegexMatchSetUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1974,13 +1974,13 @@ func validateRegexPatternSetUpdate(v *types.RegexPatternSetUpdate) error {
 	}
 }
 
-func validateRegexPatternSetUpdates(v []*types.RegexPatternSetUpdate) error {
+func validateRegexPatternSetUpdates(v []types.RegexPatternSetUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegexPatternSetUpdates"}
 	for i := range v {
-		if err := validateRegexPatternSetUpdate(v[i]); err != nil {
+		if err := validateRegexPatternSetUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2013,13 +2013,13 @@ func validateRuleGroupUpdate(v *types.RuleGroupUpdate) error {
 	}
 }
 
-func validateRuleGroupUpdates(v []*types.RuleGroupUpdate) error {
+func validateRuleGroupUpdates(v []types.RuleGroupUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RuleGroupUpdates"}
 	for i := range v {
-		if err := validateRuleGroupUpdate(v[i]); err != nil {
+		if err := validateRuleGroupUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2052,13 +2052,13 @@ func validateRuleUpdate(v *types.RuleUpdate) error {
 	}
 }
 
-func validateRuleUpdates(v []*types.RuleUpdate) error {
+func validateRuleUpdates(v []types.RuleUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RuleUpdates"}
 	for i := range v {
-		if err := validateRuleUpdate(v[i]); err != nil {
+		if err := validateRuleUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2074,9 +2074,6 @@ func validateSizeConstraint(v *types.SizeConstraint) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SizeConstraint"}
-	if v.Size == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Size"))
-	}
 	if len(v.TextTransformation) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("TextTransformation"))
 	}
@@ -2119,13 +2116,13 @@ func validateSizeConstraintSetUpdate(v *types.SizeConstraintSetUpdate) error {
 	}
 }
 
-func validateSizeConstraintSetUpdates(v []*types.SizeConstraintSetUpdate) error {
+func validateSizeConstraintSetUpdates(v []types.SizeConstraintSetUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SizeConstraintSetUpdates"}
 	for i := range v {
-		if err := validateSizeConstraintSetUpdate(v[i]); err != nil {
+		if err := validateSizeConstraintSetUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2158,13 +2155,13 @@ func validateSqlInjectionMatchSetUpdate(v *types.SqlInjectionMatchSetUpdate) err
 	}
 }
 
-func validateSqlInjectionMatchSetUpdates(v []*types.SqlInjectionMatchSetUpdate) error {
+func validateSqlInjectionMatchSetUpdates(v []types.SqlInjectionMatchSetUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SqlInjectionMatchSetUpdates"}
 	for i := range v {
-		if err := validateSqlInjectionMatchSetUpdate(v[i]); err != nil {
+		if err := validateSqlInjectionMatchSetUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2215,13 +2212,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2302,13 +2299,13 @@ func validateWebACLUpdate(v *types.WebACLUpdate) error {
 	}
 }
 
-func validateWebACLUpdates(v []*types.WebACLUpdate) error {
+func validateWebACLUpdates(v []types.WebACLUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "WebACLUpdates"}
 	for i := range v {
-		if err := validateWebACLUpdate(v[i]); err != nil {
+		if err := validateWebACLUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2341,13 +2338,13 @@ func validateXssMatchSetUpdate(v *types.XssMatchSetUpdate) error {
 	}
 }
 
-func validateXssMatchSetUpdates(v []*types.XssMatchSetUpdate) error {
+func validateXssMatchSetUpdates(v []types.XssMatchSetUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "XssMatchSetUpdates"}
 	for i := range v {
-		if err := validateXssMatchSetUpdate(v[i]); err != nil {
+		if err := validateXssMatchSetUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2462,9 +2459,6 @@ func validateOpCreateRateBasedRuleInput(v *CreateRateBasedRuleInput) error {
 	}
 	if v.ChangeToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
-	}
-	if v.RateLimit == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RateLimit"))
 	}
 	if v.MetricName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
@@ -3132,9 +3126,6 @@ func validateOpGetSampledRequestsInput(v *GetSampledRequestsInput) error {
 	if v.RuleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
 	}
-	if v.MaxItems == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxItems"))
-	}
 	if v.TimeWindow == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TimeWindow"))
 	} else if v.TimeWindow != nil {
@@ -3423,9 +3414,6 @@ func validateOpUpdateRateBasedRuleInput(v *UpdateRateBasedRuleInput) error {
 	}
 	if v.RuleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
-	}
-	if v.RateLimit == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RateLimit"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

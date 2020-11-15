@@ -56,7 +56,7 @@ type SetLoadBalancerPoliciesForBackendServerInput struct {
 	// removed from the EC2 instance.
 	//
 	// This member is required.
-	PolicyNames []*string
+	PolicyNames []string
 }
 
 // Contains the output of SetLoadBalancerPoliciesForBackendServer.

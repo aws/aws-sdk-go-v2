@@ -44,7 +44,7 @@ type UpdateDistributionInput struct {
 
 	// An array of objects that describe the per-path cache behavior for the
 	// distribution.
-	CacheBehaviors []*types.CacheBehaviorPerPath
+	CacheBehaviors []types.CacheBehaviorPerPath
 
 	// An object that describes the default cache behavior for the distribution.
 	DefaultCacheBehavior *types.CacheBehavior

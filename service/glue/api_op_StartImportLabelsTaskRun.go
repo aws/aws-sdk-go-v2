@@ -61,7 +61,7 @@ type StartImportLabelsTaskRunInput struct {
 	TransformId *string
 
 	// Indicates whether to overwrite your existing labels.
-	ReplaceAllLabels *bool
+	ReplaceAllLabels bool
 }
 
 type StartImportLabelsTaskRunOutput struct {

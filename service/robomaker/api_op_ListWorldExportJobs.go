@@ -30,7 +30,7 @@ func (c *Client) ListWorldExportJobs(ctx context.Context, params *ListWorldExpor
 type ListWorldExportJobsInput struct {
 
 	// Optional filters to limit results. You can use generationJobId and templateId.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// When this parameter is used, ListWorldExportJobs only returns maxResults results
 	// in a single page along with a nextToken response element. The remaining results
@@ -53,7 +53,7 @@ type ListWorldExportJobsOutput struct {
 	// Summary information for world export jobs.
 	//
 	// This member is required.
-	WorldExportJobSummaries []*types.WorldExportJobSummary
+	WorldExportJobSummaries []types.WorldExportJobSummary
 
 	// If the previous paginated request did not return all of the remaining results,
 	// the response object's nextToken parameter value is set to a token. To retrieve

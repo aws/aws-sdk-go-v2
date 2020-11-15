@@ -60,7 +60,7 @@ type ListObjectAttributesOutput struct {
 
 	// Attributes map that is associated with the object. AttributeArn is the key, and
 	// attribute value is the value.
-	Attributes []*types.AttributeKeyAndValue
+	Attributes []types.AttributeKeyAndValue
 
 	// The pagination token.
 	NextToken *string

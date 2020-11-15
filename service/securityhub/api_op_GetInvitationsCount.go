@@ -34,7 +34,7 @@ type GetInvitationsCountOutput struct {
 
 	// The number of all membership invitations sent to this Security Hub member
 	// account, not including the currently accepted invitation.
-	InvitationsCount *int32
+	InvitationsCount int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

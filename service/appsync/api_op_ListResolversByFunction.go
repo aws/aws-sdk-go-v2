@@ -40,7 +40,7 @@ type ListResolversByFunctionInput struct {
 	FunctionId *string
 
 	// The maximum number of results you want the request to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// An identifier that was returned from the previous call to this operation, which
 	// you can use to return the next set of items in the list.
@@ -53,7 +53,7 @@ type ListResolversByFunctionOutput struct {
 	NextToken *string
 
 	// The list of resolvers.
-	Resolvers []*types.Resolver
+	Resolvers []types.Resolver
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

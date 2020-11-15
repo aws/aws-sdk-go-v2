@@ -53,14 +53,14 @@ type DescribeServicesInput struct {
 	Language *string
 
 	// A JSON-formatted list of service codes available for AWS services.
-	ServiceCodeList []*string
+	ServiceCodeList []string
 }
 
 // The list of AWS services returned by the DescribeServices operation.
 type DescribeServicesOutput struct {
 
 	// A JSON-formatted list of AWS services.
-	Services []*types.Service
+	Services []types.Service
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

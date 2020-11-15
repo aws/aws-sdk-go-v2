@@ -36,7 +36,7 @@ type ListDataSetRevisionsInput struct {
 	DataSetId *string
 
 	// The maximum number of results returned by a single call.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token value retrieved from a previous call to access the next page of
 	// results.
@@ -50,7 +50,7 @@ type ListDataSetRevisionsOutput struct {
 	NextToken *string
 
 	// The asset objects listed by the request.
-	Revisions []*types.RevisionEntry
+	Revisions []types.RevisionEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

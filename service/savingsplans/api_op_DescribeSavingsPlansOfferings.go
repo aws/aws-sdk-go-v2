@@ -33,26 +33,26 @@ type DescribeSavingsPlansOfferingsInput struct {
 	Currencies []types.CurrencyCode
 
 	// The descriptions.
-	Descriptions []*string
+	Descriptions []string
 
 	// The durations, in seconds.
-	Durations []*int64
+	Durations []int64
 
 	// The filters.
-	Filters []*types.SavingsPlanOfferingFilterElement
+	Filters []types.SavingsPlanOfferingFilterElement
 
 	// The maximum number of results to return with a single call. To retrieve
 	// additional results, make another call with the returned token value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next page of results.
 	NextToken *string
 
 	// The IDs of the offerings.
-	OfferingIds []*string
+	OfferingIds []string
 
 	// The specific AWS operation for the line item in the billing report.
-	Operations []*string
+	Operations []string
 
 	// The payment options.
 	PaymentOptions []types.SavingsPlanPaymentOption
@@ -64,10 +64,10 @@ type DescribeSavingsPlansOfferingsInput struct {
 	ProductType types.SavingsPlanProductType
 
 	// The services.
-	ServiceCodes []*string
+	ServiceCodes []string
 
 	// The usage details of the line item in the billing report.
-	UsageTypes []*string
+	UsageTypes []string
 }
 
 type DescribeSavingsPlansOfferingsOutput struct {
@@ -77,7 +77,7 @@ type DescribeSavingsPlansOfferingsOutput struct {
 	NextToken *string
 
 	// Information about the Savings Plans offerings.
-	SearchResults []*types.SavingsPlanOffering
+	SearchResults []types.SavingsPlanOffering
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

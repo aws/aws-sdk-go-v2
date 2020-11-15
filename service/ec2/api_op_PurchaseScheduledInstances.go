@@ -40,7 +40,7 @@ type PurchaseScheduledInstancesInput struct {
 	// The purchase requests.
 	//
 	// This member is required.
-	PurchaseRequests []*types.PurchaseRequest
+	PurchaseRequests []types.PurchaseRequest
 
 	// Unique, case-sensitive identifier that ensures the idempotency of the request.
 	// For more information, see Ensuring Idempotency
@@ -51,14 +51,14 @@ type PurchaseScheduledInstancesInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 }
 
 // Contains the output of PurchaseScheduledInstances.
 type PurchaseScheduledInstancesOutput struct {
 
 	// Information about the Scheduled Instances.
-	ScheduledInstanceSet []*types.ScheduledInstance
+	ScheduledInstanceSet []types.ScheduledInstance
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

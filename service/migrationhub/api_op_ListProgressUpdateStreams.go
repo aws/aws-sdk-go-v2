@@ -46,7 +46,7 @@ type ListProgressUpdateStreamsOutput struct {
 
 	// List of progress update streams up to the max number of results passed in the
 	// input.
-	ProgressUpdateStreamSummaryList []*types.ProgressUpdateStreamSummary
+	ProgressUpdateStreamSummaryList []types.ProgressUpdateStreamSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

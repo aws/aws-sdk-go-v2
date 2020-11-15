@@ -36,11 +36,11 @@ type CreateRequestValidatorInput struct {
 
 	// A Boolean flag to indicate whether to validate request body according to the
 	// configured model schema for the method (true) or not (false).
-	ValidateRequestBody *bool
+	ValidateRequestBody bool
 
 	// A Boolean flag to indicate whether to validate request parameters, true, or not
 	// false.
-	ValidateRequestParameters *bool
+	ValidateRequestParameters bool
 }
 
 // A set of validation rules for incoming Method requests. In OpenAPI, a
@@ -61,11 +61,11 @@ type CreateRequestValidatorOutput struct {
 
 	// A Boolean flag to indicate whether to validate a request body according to the
 	// configured Model schema.
-	ValidateRequestBody *bool
+	ValidateRequestBody bool
 
 	// A Boolean flag to indicate whether to validate request parameters (true) or not
 	// (false).
-	ValidateRequestParameters *bool
+	ValidateRequestParameters bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -47,7 +47,7 @@ type ListProjectsOutput struct {
 	// A list that summarizes each project in the portal.
 	//
 	// This member is required.
-	ProjectSummaries []*types.ProjectSummary
+	ProjectSummaries []types.ProjectSummary
 
 	// The token for the next set of results, or null if there are no additional
 	// results.

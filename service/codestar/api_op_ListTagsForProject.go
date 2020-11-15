@@ -34,7 +34,7 @@ type ListTagsForProjectInput struct {
 	Id *string
 
 	// Reserved for future use.
-	MaxResults *int32
+	MaxResults int32
 
 	// Reserved for future use.
 	NextToken *string
@@ -46,7 +46,7 @@ type ListTagsForProjectOutput struct {
 	NextToken *string
 
 	// The tags for the project.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

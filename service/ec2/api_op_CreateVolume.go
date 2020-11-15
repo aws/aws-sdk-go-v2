@@ -55,7 +55,7 @@ type CreateVolumeInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// Specifies whether the volume should be encrypted. The effect of setting the
 	// encryption state to true depends on the volume origin (new or from a snapshot),
@@ -66,7 +66,7 @@ type CreateVolumeInput struct {
 	// must be attached to instances that support Amazon EBS encryption. For more
 	// information, see Supported instance types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances).
-	Encrypted *bool
+	Encrypted bool
 
 	// The number of I/O operations per second (IOPS) to provision for an io1 or io2
 	// volume, with a maximum ratio of 50 IOPS/GiB for io1, and 500 IOPS/GiB for io2.
@@ -78,7 +78,7 @@ type CreateVolumeInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
 	// Amazon Elastic Compute Cloud User Guide. This parameter is valid only for
 	// Provisioned IOPS SSD (io1 and io2) volumes.
-	Iops *int32
+	Iops int32
 
 	// The identifier of the AWS Key Management Service (AWS KMS) customer master key
 	// (CMK) to use for Amazon EBS encryption. If this parameter is not specified, your
@@ -110,7 +110,7 @@ type CreateVolumeInput struct {
 	// Multi-Attach
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html) in
 	// the Amazon Elastic Compute Cloud User Guide.
-	MultiAttachEnabled *bool
+	MultiAttachEnabled bool
 
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
@@ -121,14 +121,14 @@ type CreateVolumeInput struct {
 	// snapshot, the volume size must be equal to or larger than the snapshot size.
 	// Default: If you're creating the volume from a snapshot and don't specify a
 	// volume size, the default is the snapshot size.
-	Size *int32
+	Size int32
 
 	// The snapshot from which to create the volume. You must specify either a snapshot
 	// ID or a volume size.
 	SnapshotId *string
 
 	// The tags to apply to the volume during creation.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 
 	// The volume type. This can be gp2 for General Purpose SSD, io1 or io2 for
 	// Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or
@@ -140,7 +140,7 @@ type CreateVolumeInput struct {
 type CreateVolumeOutput struct {
 
 	// Information about the volume attachments.
-	Attachments []*types.VolumeAttachment
+	Attachments []types.VolumeAttachment
 
 	// The Availability Zone for the volume.
 	AvailabilityZone *string
@@ -149,10 +149,10 @@ type CreateVolumeOutput struct {
 	CreateTime *time.Time
 
 	// Indicates whether the volume is encrypted.
-	Encrypted *bool
+	Encrypted bool
 
 	// Indicates whether the volume was created using fast snapshot restore.
-	FastRestored *bool
+	FastRestored bool
 
 	// The number of I/O operations per second (IOPS) that the volume supports. For
 	// Provisioned IOPS SSD volumes, this represents the number of IOPS that are
@@ -168,7 +168,7 @@ type CreateVolumeOutput struct {
 	// Other instance families guarantee performance up to 32,000 IOPS. Condition: This
 	// parameter is required for requests to create io1 and io2 volumes; it is not used
 	// in requests to create gp2, st1, sc1, or standard volumes.
-	Iops *int32
+	Iops int32
 
 	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
 	// customer master key (CMK) that was used to protect the volume encryption key for
@@ -176,13 +176,13 @@ type CreateVolumeOutput struct {
 	KmsKeyId *string
 
 	// Indicates whether Amazon EBS Multi-Attach is enabled.
-	MultiAttachEnabled *bool
+	MultiAttachEnabled bool
 
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
 
 	// The size of the volume, in GiBs.
-	Size *int32
+	Size int32
 
 	// The snapshot from which the volume was created, if applicable.
 	SnapshotId *string
@@ -191,7 +191,7 @@ type CreateVolumeOutput struct {
 	State types.VolumeState
 
 	// Any tags assigned to the volume.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The ID of the volume.
 	VolumeId *string

@@ -42,7 +42,7 @@ type CreateSkillGroupInput struct {
 	Description *string
 
 	// The tags for the skill group.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateSkillGroupOutput struct {

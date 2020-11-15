@@ -33,7 +33,7 @@ type SearchDevicesInput struct {
 	// DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType,
 	// DeviceSerialNumber, UnassociatedOnly, ConnectionStatus (ONLINE and OFFLINE),
 	// NetworkProfileName, NetworkProfileArn, Feature, and FailureCode.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so that
@@ -49,13 +49,13 @@ type SearchDevicesInput struct {
 	// keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber,
 	// ConnectionStatus, NetworkProfileName, NetworkProfileArn, Feature, and
 	// FailureCode.
-	SortCriteria []*types.Sort
+	SortCriteria []types.Sort
 }
 
 type SearchDevicesOutput struct {
 
 	// The devices that meet the specified set of filter criteria, in sort order.
-	Devices []*types.DeviceData
+	Devices []types.DeviceData
 
 	// The token returned to indicate that there is more data available.
 	NextToken *string

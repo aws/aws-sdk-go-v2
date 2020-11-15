@@ -13,7 +13,7 @@ type AccountAttribute struct {
 	AttributeName *string
 
 	// The values for the account attribute.
-	AttributeValues []*AccountAttributeValue
+	AttributeValues []AccountAttributeValue
 }
 
 // Describes a value of an account attribute.
@@ -100,7 +100,7 @@ type Address struct {
 	PublicIpv4Pool *string
 
 	// Any tags assigned to the Elastic IP address.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes a principal.
@@ -163,7 +163,7 @@ type AssociationStatus struct {
 type AttributeBooleanValue struct {
 
 	// The attribute value. The valid values are true or false.
-	Value *bool
+	Value bool
 }
 
 // Describes a value for a resource attribute that is a String.
@@ -177,7 +177,7 @@ type AttributeValue struct {
 type AuthorizationRule struct {
 
 	// Indicates whether the authorization rule grants access to all clients.
-	AccessAll *bool
+	AccessAll bool
 
 	// The ID of the Client VPN endpoint with which the authorization rule is
 	// associated.
@@ -208,7 +208,7 @@ type AvailabilityZone struct {
 	GroupName *string
 
 	// Any messages about the Availability Zone, Local Zone, or Wavelength Zone.
-	Messages []*AvailabilityZoneMessage
+	Messages []AvailabilityZoneMessage
 
 	// The name of the network border group.
 	NetworkBorderGroup *string
@@ -258,10 +258,10 @@ type AvailableCapacity struct {
 	// on the host's available capacity. For Dedicated Hosts that support multiple
 	// instance types, this parameter represents the number of instances for each
 	// instance size that is supported on the host.
-	AvailableInstanceCapacity []*InstanceCapacity
+	AvailableInstanceCapacity []InstanceCapacity
 
 	// The number of vCPUs available for launching instances onto the Dedicated Host.
-	AvailableVCpus *int32
+	AvailableVCpus int32
 }
 
 type BlobAttributeValue struct {
@@ -404,7 +404,7 @@ type CapacityReservation struct {
 
 	// The remaining capacity. Indicates the number of instances that can be launched
 	// in the Capacity Reservation.
-	AvailableInstanceCount *int32
+	AvailableInstanceCount int32
 
 	// The Amazon Resource Name (ARN) of the Capacity Reservation.
 	CapacityReservationArn *string
@@ -420,7 +420,7 @@ type CapacityReservation struct {
 	// configuration stack to provide optimal I/O performance. This optimization isn't
 	// available with all instance types. Additional usage charges apply when using an
 	// EBS- optimized instance.
-	EbsOptimized *bool
+	EbsOptimized bool
 
 	// The date and time at which the Capacity Reservation expires. When a Capacity
 	// Reservation expires, the reserved capacity is released and you can no longer
@@ -440,7 +440,7 @@ type CapacityReservation struct {
 
 	// Indicates whether the Capacity Reservation supports instances with temporary,
 	// block-level storage.
-	EphemeralStorage *bool
+	EphemeralStorage bool
 
 	// Indicates the type of instance launches that the Capacity Reservation accepts.
 	// The options include:
@@ -491,7 +491,7 @@ type CapacityReservation struct {
 	State CapacityReservationState
 
 	// Any tags assigned to the Capacity Reservation.
-	Tags []*Tag
+	Tags []Tag
 
 	// Indicates the tenancy of the Capacity Reservation. A Capacity Reservation can
 	// have one of the following tenancy settings:
@@ -506,7 +506,7 @@ type CapacityReservation struct {
 
 	// The total number of instances for which the Capacity Reservation reserves
 	// capacity.
-	TotalInstanceCount *int32
+	TotalInstanceCount int32
 }
 
 // Describes a resource group to which a Capacity Reservation has been added.
@@ -650,7 +650,7 @@ type CarrierGateway struct {
 	State CarrierGatewayState
 
 	// The tags assigned to the carrier gateway.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the VPC associated with the carrier gateway.
 	VpcId *string
@@ -701,7 +701,7 @@ type CidrBlock struct {
 type ClassicLinkDnsSupport struct {
 
 	// Indicates whether ClassicLink DNS support is enabled for the VPC.
-	ClassicLinkDnsSupported *bool
+	ClassicLinkDnsSupported bool
 
 	// The ID of the VPC.
 	VpcId *string
@@ -711,13 +711,13 @@ type ClassicLinkDnsSupport struct {
 type ClassicLinkInstance struct {
 
 	// A list of security groups.
-	Groups []*GroupIdentifier
+	Groups []GroupIdentifier
 
 	// The ID of the instance.
 	InstanceId *string
 
 	// Any tags assigned to the instance.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the VPC.
 	VpcId *string
@@ -735,7 +735,7 @@ type ClassicLoadBalancer struct {
 type ClassicLoadBalancersConfig struct {
 
 	// One or more Classic Load Balancers.
-	ClassicLoadBalancers []*ClassicLoadBalancer
+	ClassicLoadBalancers []ClassicLoadBalancer
 }
 
 // Describes the state of a client certificate revocation list.
@@ -759,7 +759,7 @@ type ClientData struct {
 	UploadEnd *time.Time
 
 	// The size of the uploaded disk image, in GiB.
-	UploadSize *float64
+	UploadSize float64
 
 	// The time that the disk upload starts.
 	UploadStart *time.Time
@@ -876,10 +876,10 @@ type ClientVpnEndpoint struct {
 
 	// Information about the associated target networks. A target network is a subnet
 	// in a VPC.
-	AssociatedTargetNetworks []*AssociatedTargetNetwork
+	AssociatedTargetNetworks []AssociatedTargetNetwork
 
 	// Information about the authentication method used by the Client VPN endpoint.
-	AuthenticationOptions []*ClientVpnAuthentication
+	AuthenticationOptions []ClientVpnAuthentication
 
 	// The IPv4 address range, in CIDR notation, from which client IP addresses are
 	// assigned.
@@ -905,10 +905,10 @@ type ClientVpnEndpoint struct {
 	DnsName *string
 
 	// Information about the DNS servers to be used for DNS resolution.
-	DnsServers []*string
+	DnsServers []string
 
 	// The IDs of the security groups for the target network.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The URL of the self-service portal.
 	SelfServicePortalUrl *string
@@ -921,13 +921,13 @@ type ClientVpnEndpoint struct {
 	// Endpoint
 	// (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html)
 	// in the AWS Client VPN Administrator Guide.
-	SplitTunnel *bool
+	SplitTunnel bool
 
 	// The current state of the Client VPN endpoint.
 	Status *ClientVpnEndpointStatus
 
 	// Any tags assigned to the Client VPN endpoint.
-	Tags []*Tag
+	Tags []Tag
 
 	// The transport protocol used by the Client VPN endpoint.
 	TransportProtocol TransportProtocol
@@ -936,7 +936,7 @@ type ClientVpnEndpoint struct {
 	VpcId *string
 
 	// The port number for the Client VPN endpoint.
-	VpnPort *int32
+	VpnPort int32
 
 	// The protocol used by the VPN session.
 	VpnProtocol VpnProtocol
@@ -1031,13 +1031,13 @@ type CoipPool struct {
 	PoolArn *string
 
 	// The address ranges of the address pool.
-	PoolCidrs []*string
+	PoolCidrs []string
 
 	// The ID of the address pool.
 	PoolId *string
 
 	// The tags.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes the client connection logging options for the Client VPN endpoint.
@@ -1052,7 +1052,7 @@ type ConnectionLogOptions struct {
 	CloudwatchLogStream *string
 
 	// Indicates whether connection logging is enabled.
-	Enabled *bool
+	Enabled bool
 }
 
 // Information about the client connection logging options for a Client VPN
@@ -1069,7 +1069,7 @@ type ConnectionLogResponseOptions struct {
 
 	// Indicates whether client connection logging is enabled for the Client VPN
 	// endpoint.
-	Enabled *bool
+	Enabled bool
 }
 
 // Describes a connection notification for a VPC endpoint or VPC endpoint service.
@@ -1077,7 +1077,7 @@ type ConnectionNotification struct {
 
 	// The events for the notification. Valid values are Accept, Connect, Delete, and
 	// Reject.
-	ConnectionEvents []*string
+	ConnectionEvents []string
 
 	// The ARN of the SNS topic for the notification.
 	ConnectionNotificationArn *string
@@ -1123,17 +1123,17 @@ type ConversionTask struct {
 	StatusMessage *string
 
 	// Any tags assigned to the task.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // The CPU options for the instance.
 type CpuOptions struct {
 
 	// The number of CPU cores for the instance.
-	CoreCount *int32
+	CoreCount int32
 
 	// The number of threads per CPU core.
-	ThreadsPerCore *int32
+	ThreadsPerCore int32
 }
 
 // The CPU options for the instance. Both the core count and threads per core must
@@ -1141,11 +1141,11 @@ type CpuOptions struct {
 type CpuOptionsRequest struct {
 
 	// The number of CPU cores for the instance.
-	CoreCount *int32
+	CoreCount int32
 
 	// The number of threads per CPU core. To disable multithreading for the instance,
 	// specify a value of 1. Otherwise, specify the default value of 2.
-	ThreadsPerCore *int32
+	ThreadsPerCore int32
 }
 
 // Describes the instances that could not be launched by the fleet.
@@ -1175,7 +1175,7 @@ type CreateFleetError struct {
 type CreateFleetInstance struct {
 
 	// The IDs of the instances.
-	InstanceIds []*string
+	InstanceIds []string
 
 	// The instance type.
 	InstanceType InstanceType
@@ -1223,10 +1223,10 @@ type CreateVolumePermission struct {
 type CreateVolumePermissionModifications struct {
 
 	// Adds the specified AWS account ID or group to the list.
-	Add []*CreateVolumePermission
+	Add []CreateVolumePermission
 
 	// Removes the specified AWS account ID or group from the list.
-	Remove []*CreateVolumePermission
+	Remove []CreateVolumePermission
 }
 
 // Describes the credit option for CPU usage of a T2, T3, or T3a instance.
@@ -1271,7 +1271,7 @@ type CustomerGateway struct {
 	State *string
 
 	// Any tags assigned to the customer gateway.
-	Tags []*Tag
+	Tags []Tag
 
 	// The type of VPN connection the customer gateway supports (ipsec.1).
 	Type *string
@@ -1323,7 +1323,7 @@ type DeleteLaunchTemplateVersionsResponseErrorItem struct {
 	ResponseError *ResponseError
 
 	// The version number of the launch template.
-	VersionNumber *int64
+	VersionNumber int64
 }
 
 // Describes a launch template version that was successfully deleted.
@@ -1336,7 +1336,7 @@ type DeleteLaunchTemplateVersionsResponseSuccessItem struct {
 	LaunchTemplateName *string
 
 	// The version number of the launch template.
-	VersionNumber *int64
+	VersionNumber int64
 }
 
 // Describes the error for a Reserved Instance whose queued purchase could not be
@@ -1358,10 +1358,10 @@ type DeregisterInstanceTagAttributeRequest struct {
 
 	// Indicates whether to deregister all tag keys in the current Region. Specify
 	// false to deregister all tag keys.
-	IncludeAllTagsOfInstance *bool
+	IncludeAllTagsOfInstance bool
 
 	// Information about the tag keys to deregister.
-	InstanceTagKeys []*string
+	InstanceTagKeys []string
 }
 
 // Describes fast snapshot restores for a snapshot.
@@ -1436,7 +1436,7 @@ type DescribeFleetError struct {
 type DescribeFleetsInstances struct {
 
 	// The IDs of the instances.
-	InstanceIds []*string
+	InstanceIds []string
 
 	// The instance type.
 	InstanceType InstanceType
@@ -1461,14 +1461,14 @@ type DhcpConfiguration struct {
 	Key *string
 
 	// One or more values for the DHCP option.
-	Values []*AttributeValue
+	Values []AttributeValue
 }
 
 // Describes a set of DHCP options.
 type DhcpOptions struct {
 
 	// One or more DHCP options in the set.
-	DhcpConfigurations []*DhcpConfiguration
+	DhcpConfigurations []DhcpConfiguration
 
 	// The ID of the set of DHCP options.
 	DhcpOptionsId *string
@@ -1477,7 +1477,7 @@ type DhcpOptions struct {
 	OwnerId *string
 
 	// Any tags assigned to the DHCP options set.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes an Active Directory.
@@ -1499,7 +1499,7 @@ type DirectoryServiceAuthenticationRequest struct {
 type DisableFastSnapshotRestoreErrorItem struct {
 
 	// The errors.
-	FastSnapshotRestoreStateErrors []*DisableFastSnapshotRestoreStateErrorItem
+	FastSnapshotRestoreStateErrors []DisableFastSnapshotRestoreStateErrorItem
 
 	// The ID of the snapshot.
 	SnapshotId *string
@@ -1603,7 +1603,7 @@ type DiskImageDescription struct {
 	ImportManifestUrl *string
 
 	// The size of the disk image, in GiB.
-	Size *int64
+	Size int64
 }
 
 // Describes a disk image.
@@ -1612,7 +1612,7 @@ type DiskImageDetail struct {
 	// The size of the disk image, in GiB.
 	//
 	// This member is required.
-	Bytes *int64
+	Bytes int64
 
 	// The disk image format.
 	//
@@ -1639,7 +1639,7 @@ type DiskImageVolumeDescription struct {
 	Id *string
 
 	// The size of the volume, in GiB.
-	Size *int64
+	Size int64
 }
 
 // Describes the disk.
@@ -1671,11 +1671,11 @@ type DnsServersOptionsModifyStructure struct {
 	// The IPv4 address range, in CIDR notation, of the DNS servers to be used. You can
 	// specify up to two DNS servers. Ensure that the DNS servers can be reached by the
 	// clients. The specified values overwrite the existing values.
-	CustomDnsServers []*string
+	CustomDnsServers []string
 
 	// Indicates whether DNS servers should be used. Specify False to delete the
 	// existing DNS servers.
-	Enabled *bool
+	Enabled bool
 }
 
 // Describes a block device for an EBS volume.
@@ -1685,7 +1685,7 @@ type EbsBlockDevice struct {
 	// information, see Preserving Amazon EBS volumes on instance termination
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#preserving-volumes-on-termination)
 	// in the Amazon Elastic Compute Cloud User Guide.
-	DeleteOnTermination *bool
+	DeleteOnTermination bool
 
 	// Indicates whether the encryption state of an EBS volume is changed while being
 	// restored from a backing snapshot. The effect of setting the encryption state to
@@ -1699,7 +1699,7 @@ type EbsBlockDevice struct {
 	// Supported instance types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances).
 	// This parameter is not returned by .
-	Encrypted *bool
+	Encrypted bool
 
 	// The number of I/O operations per second (IOPS) that the volume supports. For io1
 	// and io2 volumes, this represents the number of IOPS that are provisioned for the
@@ -1717,7 +1717,7 @@ type EbsBlockDevice struct {
 	// Amazon Elastic Compute Cloud User Guide. Condition: This parameter is required
 	// for requests to create io1 and io2 volumes; it is not used in requests to create
 	// gp2, st1, sc1, or standard volumes.
-	Iops *int32
+	Iops int32
 
 	// Identifier (key ID, key alias, ID ARN, or alias ARN) for a customer managed CMK
 	// under which the EBS volume is encrypted. This parameter is only supported on
@@ -1738,7 +1738,7 @@ type EbsBlockDevice struct {
 	// SSD (io1 and io2), 500-16384 for Throughput Optimized HDD (st1), 500-16384 for
 	// Cold HDD (sc1), and 1-1024 for Magnetic (standard) volumes. If you specify a
 	// snapshot, the volume size must be equal to or larger than the snapshot size.
-	VolumeSize *int32
+	VolumeSize int32
 
 	// The volume type. If you set the type to io1 or io2, you must also specify the
 	// Iops parameter. If you set the type to gp2, st1, sc1, or standard, you must omit
@@ -1772,7 +1772,7 @@ type EbsInstanceBlockDevice struct {
 	AttachTime *time.Time
 
 	// Indicates whether the volume is deleted on instance termination.
-	DeleteOnTermination *bool
+	DeleteOnTermination bool
 
 	// The attachment state.
 	Status AttachmentStatus
@@ -1786,7 +1786,7 @@ type EbsInstanceBlockDevice struct {
 type EbsInstanceBlockDeviceSpecification struct {
 
 	// Indicates whether the volume is deleted on instance termination.
-	DeleteOnTermination *bool
+	DeleteOnTermination bool
 
 	// The ID of the EBS volume.
 	VolumeId *string
@@ -1820,13 +1820,13 @@ type EbsOptimizedInfo struct {
 type EgressOnlyInternetGateway struct {
 
 	// Information about the attachment of the egress-only internet gateway.
-	Attachments []*InternetGatewayAttachment
+	Attachments []InternetGatewayAttachment
 
 	// The ID of the egress-only internet gateway.
 	EgressOnlyInternetGatewayId *string
 
 	// The tags assigned to the egress-only internet gateway.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes the association between an instance and an Elastic Graphics
@@ -1876,7 +1876,7 @@ type ElasticGpus struct {
 	InstanceId *string
 
 	// The tags assigned to the Elastic Graphics accelerator.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // A specification for an Elastic Graphics accelerator.
@@ -1910,7 +1910,7 @@ type ElasticInferenceAccelerator struct {
 
 	// The number of elastic inference accelerators to attach to the instance. Default:
 	// 1
-	Count *int32
+	Count int32
 }
 
 // Describes the association between an instance and an elastic inference
@@ -1936,7 +1936,7 @@ type ElasticInferenceAcceleratorAssociation struct {
 type EnableFastSnapshotRestoreErrorItem struct {
 
 	// The errors.
-	FastSnapshotRestoreStateErrors []*EnableFastSnapshotRestoreStateErrorItem
+	FastSnapshotRestoreStateErrors []EnableFastSnapshotRestoreStateErrorItem
 
 	// The ID of the snapshot.
 	SnapshotId *string
@@ -2013,7 +2013,7 @@ type EnclaveOptions struct {
 
 	// If this parameter is set to true, the instance is enabled for AWS Nitro
 	// Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.
-	Enabled *bool
+	Enabled bool
 }
 
 // Indicates whether the instance is enabled for AWS Nitro Enclaves. For more
@@ -2023,7 +2023,7 @@ type EnclaveOptions struct {
 type EnclaveOptionsRequest struct {
 
 	// To enable the instance for AWS Nitro Enclaves, set this parameter to true.
-	Enabled *bool
+	Enabled bool
 }
 
 // Describes an EC2 Fleet or Spot Fleet event.
@@ -2138,7 +2138,7 @@ type ExportImageTask struct {
 	StatusMessage *string
 
 	// Any tags assigned to the image being exported.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes an instance export task.
@@ -2163,7 +2163,7 @@ type ExportTask struct {
 	StatusMessage *string
 
 	// The tags for the export task.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes the destination for an export image task.
@@ -2293,7 +2293,7 @@ type Filter struct {
 	Name *string
 
 	// The filter values. Filter values are case-sensitive.
-	Values []*string
+	Values []string
 }
 
 // Describes an EC2 Fleet.
@@ -2317,7 +2317,7 @@ type FleetData struct {
 
 	// Information about the instances that could not be launched by the fleet. Valid
 	// only when Type is set to instant.
-	Errors []*DescribeFleetError
+	Errors []DescribeFleetError
 
 	// Indicates whether running instances should be terminated if the target capacity
 	// of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
@@ -2331,30 +2331,30 @@ type FleetData struct {
 
 	// The number of units fulfilled by this request compared to the set target
 	// capacity.
-	FulfilledCapacity *float64
+	FulfilledCapacity float64
 
 	// The number of units fulfilled by this request compared to the set target
 	// On-Demand capacity.
-	FulfilledOnDemandCapacity *float64
+	FulfilledOnDemandCapacity float64
 
 	// Information about the instances that were launched by the fleet. Valid only when
 	// Type is set to instant.
-	Instances []*DescribeFleetsInstances
+	Instances []DescribeFleetsInstances
 
 	// The launch template and overrides.
-	LaunchTemplateConfigs []*FleetLaunchTemplateConfig
+	LaunchTemplateConfigs []FleetLaunchTemplateConfig
 
 	// The allocation strategy of On-Demand Instances in an EC2 Fleet.
 	OnDemandOptions *OnDemandOptions
 
 	// Indicates whether EC2 Fleet should replace unhealthy instances.
-	ReplaceUnhealthyInstances *bool
+	ReplaceUnhealthyInstances bool
 
 	// The configuration of Spot Instances in an EC2 Fleet.
 	SpotOptions *SpotOptions
 
 	// The tags for an EC2 Fleet resource.
-	Tags []*Tag
+	Tags []Tag
 
 	// The number of units to request. You can choose to set the target capacity in
 	// terms of instances or a performance characteristic that is important to your
@@ -2364,7 +2364,7 @@ type FleetData struct {
 
 	// Indicates whether running instances should be terminated when the EC2 Fleet
 	// expires.
-	TerminateInstancesWithExpiration *bool
+	TerminateInstancesWithExpiration bool
 
 	// The type of request. Indicates whether the EC2 Fleet only requests the target
 	// capacity, or also attempts to maintain it. If you request a certain target
@@ -2396,7 +2396,7 @@ type FleetLaunchTemplateConfig struct {
 
 	// Any parameters that you specify override the same parameters in the launch
 	// template.
-	Overrides []*FleetLaunchTemplateOverrides
+	Overrides []FleetLaunchTemplateOverrides
 }
 
 // Describes a launch template and overrides.
@@ -2408,7 +2408,7 @@ type FleetLaunchTemplateConfigRequest struct {
 
 	// Any parameters that you specify override the same parameters in the launch
 	// template.
-	Overrides []*FleetLaunchTemplateOverridesRequest
+	Overrides []FleetLaunchTemplateOverridesRequest
 }
 
 // Describes overrides for a launch template.
@@ -2431,13 +2431,13 @@ type FleetLaunchTemplateOverrides struct {
 	// to use first in fulfilling On-Demand capacity. The highest priority is launched
 	// first. Valid values are whole numbers starting at 0. The lower the number, the
 	// higher the priority. If no number is set, the override has the lowest priority.
-	Priority *float64
+	Priority float64
 
 	// The ID of the subnet in which to launch the instances.
 	SubnetId *string
 
 	// The number of units provided by the specified instance type.
-	WeightedCapacity *float64
+	WeightedCapacity float64
 }
 
 // Describes overrides for a launch template.
@@ -2461,7 +2461,7 @@ type FleetLaunchTemplateOverridesRequest struct {
 	// first. Valid values are whole numbers starting at 0. The lower the number, the
 	// higher the priority. If no number is set, the launch template override has the
 	// lowest priority.
-	Priority *float64
+	Priority float64
 
 	// The IDs of the subnets in which to launch the instances. Separate multiple
 	// subnet IDs using commas (for example, subnet-1234abcdeexample1,
@@ -2470,7 +2470,7 @@ type FleetLaunchTemplateOverridesRequest struct {
 	SubnetId *string
 
 	// The number of units provided by the specified instance type.
-	WeightedCapacity *float64
+	WeightedCapacity float64
 }
 
 // Describes the Amazon EC2 launch template and the launch template version that
@@ -2568,13 +2568,13 @@ type FlowLog struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances),
 	// the aggregation interval is always 60 seconds (1 minute) or less, regardless of
 	// the specified value. Valid Values: 60 | 600
-	MaxAggregationInterval *int32
+	MaxAggregationInterval int32
 
 	// The ID of the resource on which the flow log was created.
 	ResourceId *string
 
 	// The tags for the flow log.
-	Tags []*Tag
+	Tags []Tag
 
 	// The type of traffic captured for the flow log.
 	TrafficType TrafficType
@@ -2610,7 +2610,7 @@ type FpgaImage struct {
 	CreateTime *time.Time
 
 	// Indicates whether data retention support is enabled for the AFI.
-	DataRetentionSupport *bool
+	DataRetentionSupport bool
 
 	// The description of the AFI.
 	Description *string
@@ -2635,10 +2635,10 @@ type FpgaImage struct {
 	PciId *PciId
 
 	// The product codes for the AFI.
-	ProductCodes []*ProductCode
+	ProductCodes []ProductCode
 
 	// Indicates whether the AFI is public.
-	Public *bool
+	Public bool
 
 	// The version of the AWS Shell that was used to create the bitstream.
 	ShellVersion *string
@@ -2647,7 +2647,7 @@ type FpgaImage struct {
 	State *FpgaImageState
 
 	// Any tags assigned to the AFI.
-	Tags []*Tag
+	Tags []Tag
 
 	// The time of the most recent update to the AFI.
 	UpdateTime *time.Time
@@ -2663,13 +2663,13 @@ type FpgaImageAttribute struct {
 	FpgaImageId *string
 
 	// The load permissions.
-	LoadPermissions []*LoadPermission
+	LoadPermissions []LoadPermission
 
 	// The name of the AFI.
 	Name *string
 
 	// The product codes.
-	ProductCodes []*ProductCode
+	ProductCodes []ProductCode
 }
 
 // Describes the state of the bitstream generation process for an Amazon FPGA image
@@ -2698,7 +2698,7 @@ type FpgaImageState struct {
 type FpgaInfo struct {
 
 	// Describes the FPGAs for the instance type.
-	Fpgas []*FpgaDeviceInfo
+	Fpgas []FpgaDeviceInfo
 
 	// The total memory of all FPGA accelerators for the instance type.
 	TotalFpgaMemoryInMiB *int32
@@ -2731,7 +2731,7 @@ type GpuDeviceMemoryInfo struct {
 type GpuInfo struct {
 
 	// Describes the GPU accelerators for the instance type.
-	Gpus []*GpuDeviceInfo
+	Gpus []GpuDeviceInfo
 
 	// The total size of the memory for the GPU accelerators for the instance type.
 	TotalGpuMemoryInMiB *int32
@@ -2757,7 +2757,7 @@ type HibernationOptions struct {
 
 	// If this parameter is set to true, your instance is enabled for hibernation;
 	// otherwise, it is not enabled for hibernation.
-	Configured *bool
+	Configured bool
 }
 
 // Indicates whether your instance is configured for hibernation. This parameter is
@@ -2770,7 +2770,7 @@ type HibernationOptionsRequest struct {
 
 	// If you set this parameter to true, your instance is enabled for hibernation.
 	// Default: false
-	Configured *bool
+	Configured bool
 }
 
 // Describes an event in the history of the Spot Fleet request.
@@ -2855,12 +2855,12 @@ type Host struct {
 	HostReservationId *string
 
 	// The IDs and instance type that are currently running on the Dedicated Host.
-	Instances []*HostInstance
+	Instances []HostInstance
 
 	// Indicates whether the Dedicated Host is in a host resource group. If
 	// memberOfServiceLinkedResourceGroup is true, the host is in a host resource
 	// group; otherwise, it is not.
-	MemberOfServiceLinkedResourceGroup *bool
+	MemberOfServiceLinkedResourceGroup bool
 
 	// The ID of the AWS account that owns the Dedicated Host.
 	OwnerId *string
@@ -2872,7 +2872,7 @@ type Host struct {
 	State AllocationState
 
 	// Any tags assigned to the Dedicated Host.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes an instance running on a Dedicated Host.
@@ -2895,7 +2895,7 @@ type HostOffering struct {
 	CurrencyCode CurrencyCodeValues
 
 	// The duration of the offering (in seconds).
-	Duration *int32
+	Duration int32
 
 	// The hourly price of the offering.
 	HourlyPrice *string
@@ -2917,7 +2917,7 @@ type HostOffering struct {
 type HostProperties struct {
 
 	// The number of cores on the Dedicated Host.
-	Cores *int32
+	Cores int32
 
 	// The instance family supported by the Dedicated Host. For example, m5.
 	InstanceFamily *string
@@ -2927,17 +2927,17 @@ type HostProperties struct {
 	InstanceType *string
 
 	// The number of sockets on the Dedicated Host.
-	Sockets *int32
+	Sockets int32
 
 	// The total number of vCPUs on the Dedicated Host.
-	TotalVCpus *int32
+	TotalVCpus int32
 }
 
 // Details about the Dedicated Host Reservation and associated Dedicated Hosts.
 type HostReservation struct {
 
 	// The number of Dedicated Hosts the reservation is associated with.
-	Count *int32
+	Count int32
 
 	// The currency in which the upfrontPrice and hourlyPrice amounts are specified. At
 	// this time, the only supported currency is USD.
@@ -2945,13 +2945,13 @@ type HostReservation struct {
 
 	// The length of the reservation's term, specified in seconds. Can be 31536000 (1
 	// year) | 94608000 (3 years).
-	Duration *int32
+	Duration int32
 
 	// The date and time that the reservation ends.
 	End *time.Time
 
 	// The IDs of the Dedicated Hosts associated with the reservation.
-	HostIdSet []*string
+	HostIdSet []string
 
 	// The ID of the reservation that specifies the associated Dedicated Hosts.
 	HostReservationId *string
@@ -2978,7 +2978,7 @@ type HostReservation struct {
 	State ReservationState
 
 	// Any tags assigned to the Dedicated Host Reservation.
-	Tags []*Tag
+	Tags []Tag
 
 	// The upfront price of the reservation.
 	UpfrontPrice *string
@@ -3027,10 +3027,10 @@ type IamInstanceProfileSpecification struct {
 type IcmpTypeCode struct {
 
 	// The ICMP code. A value of -1 means all codes for the specified ICMP type.
-	Code *int32
+	Code int32
 
 	// The ICMP type. A value of -1 means all types.
-	Type *int32
+	Type int32
 }
 
 // Describes the ID format for a resource.
@@ -3045,7 +3045,7 @@ type IdFormat struct {
 	Resource *string
 
 	// Indicates whether longer IDs (17-character IDs) are enabled for the resource.
-	UseLongIds *bool
+	UseLongIds bool
 }
 
 // The internet key exchange (IKE) version permitted for the VPN tunnel.
@@ -3069,7 +3069,7 @@ type Image struct {
 	Architecture ArchitectureValues
 
 	// Any block device mapping entries.
-	BlockDeviceMappings []*BlockDeviceMapping
+	BlockDeviceMappings []BlockDeviceMapping
 
 	// The date and time the image was created.
 	CreationDate *string
@@ -3078,7 +3078,7 @@ type Image struct {
 	Description *string
 
 	// Specifies whether enhanced networking with ENA is enabled.
-	EnaSupport *bool
+	EnaSupport bool
 
 	// The hypervisor type of the image.
 	Hypervisor HypervisorType
@@ -3116,12 +3116,12 @@ type Image struct {
 	PlatformDetails *string
 
 	// Any product codes associated with the AMI.
-	ProductCodes []*ProductCode
+	ProductCodes []ProductCode
 
 	// Indicates whether the image has public launch permissions. The value is true if
 	// this image has public launch permissions or false if it has only implicit and
 	// explicit launch permissions.
-	Public *bool
+	Public bool
 
 	// The RAM disk associated with the image, if any. Only applicable for machine
 	// images.
@@ -3146,7 +3146,7 @@ type Image struct {
 	StateReason *StateReason
 
 	// Any tags assigned to the image.
-	Tags []*Tag
+	Tags []Tag
 
 	// The operation of the Amazon EC2 instance and the billing code that is associated
 	// with the AMI. usageOperation corresponds to the lineitem/Operation
@@ -3211,7 +3211,7 @@ type ImportImageTask struct {
 	Description *string
 
 	// Indicates whether the image is encrypted.
-	Encrypted *bool
+	Encrypted bool
 
 	// The target hypervisor for the import task. Valid values: xen
 	Hypervisor *string
@@ -3228,7 +3228,7 @@ type ImportImageTask struct {
 
 	// The ARNs of the license configurations that are associated with the import image
 	// task.
-	LicenseSpecifications []*ImportImageLicenseConfigurationResponse
+	LicenseSpecifications []ImportImageLicenseConfigurationResponse
 
 	// The license type of the virtual machine.
 	LicenseType *string
@@ -3240,7 +3240,7 @@ type ImportImageTask struct {
 	Progress *string
 
 	// Information about the snapshots.
-	SnapshotDetails []*SnapshotDetail
+	SnapshotDetails []SnapshotDetail
 
 	// A brief status for the import image task.
 	Status *string
@@ -3249,7 +3249,7 @@ type ImportImageTask struct {
 	StatusMessage *string
 
 	// The tags for the import image task.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes the launch specification for VM import.
@@ -3262,10 +3262,10 @@ type ImportInstanceLaunchSpecification struct {
 	Architecture ArchitectureValues
 
 	// The security group IDs.
-	GroupIds []*string
+	GroupIds []string
 
 	// The security group names.
-	GroupNames []*string
+	GroupNames []string
 
 	// Indicates whether an instance stops or terminates when you initiate shutdown
 	// from the instance (using the operating system command for system shutdown).
@@ -3278,7 +3278,7 @@ type ImportInstanceLaunchSpecification struct {
 	InstanceType InstanceType
 
 	// Indicates whether monitoring is enabled.
-	Monitoring *bool
+	Monitoring bool
 
 	// The placement information for the instance.
 	Placement *Placement
@@ -3306,7 +3306,7 @@ type ImportInstanceTaskDetails struct {
 	Platform PlatformValues
 
 	// The volumes.
-	Volumes []*ImportInstanceVolumeDetailItem
+	Volumes []ImportInstanceVolumeDetailItem
 }
 
 // Describes an import volume task.
@@ -3316,7 +3316,7 @@ type ImportInstanceVolumeDetailItem struct {
 	AvailabilityZone *string
 
 	// The number of bytes converted so far.
-	BytesConverted *int64
+	BytesConverted int64
 
 	// A description of the task.
 	Description *string
@@ -3347,7 +3347,7 @@ type ImportSnapshotTask struct {
 	SnapshotTaskDetail *SnapshotTaskDetail
 
 	// The tags for the import snapshot task.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes an import volume task.
@@ -3357,7 +3357,7 @@ type ImportVolumeTaskDetails struct {
 	AvailabilityZone *string
 
 	// The number of bytes converted so far.
-	BytesConverted *int64
+	BytesConverted int64
 
 	// The description you provided when starting the import volume task.
 	Description *string
@@ -3373,7 +3373,7 @@ type ImportVolumeTaskDetails struct {
 type InferenceAcceleratorInfo struct {
 
 	// Describes the Inference accelerators for the instance type.
-	Accelerators []*InferenceDeviceInfo
+	Accelerators []InferenceDeviceInfo
 }
 
 // Describes the Inference accelerators for the instance type.
@@ -3394,13 +3394,13 @@ type Instance struct {
 
 	// The AMI launch index, which can be used to find this instance in the launch
 	// group.
-	AmiLaunchIndex *int32
+	AmiLaunchIndex int32
 
 	// The architecture of the image.
 	Architecture ArchitectureValues
 
 	// Any block device mapping entries for the instance.
-	BlockDeviceMappings []*InstanceBlockDeviceMapping
+	BlockDeviceMappings []InstanceBlockDeviceMapping
 
 	// The ID of the Capacity Reservation.
 	CapacityReservationId *string
@@ -3420,16 +3420,16 @@ type Instance struct {
 	// configuration stack to provide optimal I/O performance. This optimization isn't
 	// available with all instance types. Additional usage charges apply when using an
 	// EBS Optimized instance.
-	EbsOptimized *bool
+	EbsOptimized bool
 
 	// The Elastic GPU associated with the instance.
-	ElasticGpuAssociations []*ElasticGpuAssociation
+	ElasticGpuAssociations []ElasticGpuAssociation
 
 	// The elastic inference accelerator associated with the instance.
-	ElasticInferenceAcceleratorAssociations []*ElasticInferenceAcceleratorAssociation
+	ElasticInferenceAcceleratorAssociations []ElasticInferenceAcceleratorAssociation
 
 	// Specifies whether enhanced networking with ENA is enabled.
-	EnaSupport *bool
+	EnaSupport bool
 
 	// Indicates whether the instance is enabled for AWS Nitro Enclaves.
 	EnclaveOptions *EnclaveOptions
@@ -3467,7 +3467,7 @@ type Instance struct {
 	LaunchTime *time.Time
 
 	// The license configurations.
-	Licenses []*LicenseConfiguration
+	Licenses []LicenseConfiguration
 
 	// The metadata options for the instance.
 	MetadataOptions *InstanceMetadataOptionsResponse
@@ -3476,7 +3476,7 @@ type Instance struct {
 	Monitoring *Monitoring
 
 	// [EC2-VPC] The network interfaces for the instance.
-	NetworkInterfaces []*InstanceNetworkInterface
+	NetworkInterfaces []InstanceNetworkInterface
 
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
@@ -3500,7 +3500,7 @@ type Instance struct {
 	PrivateIpAddress *string
 
 	// The product codes attached to this instance, if applicable.
-	ProductCodes []*ProductCode
+	ProductCodes []ProductCode
 
 	// (IPv4 only) The public DNS name assigned to the instance. This name is not
 	// available until the instance enters the running state. For EC2-VPC, this name is
@@ -3523,7 +3523,7 @@ type Instance struct {
 	RootDeviceType DeviceType
 
 	// The security groups for the instance.
-	SecurityGroups []*GroupIdentifier
+	SecurityGroups []GroupIdentifier
 
 	// Specifies whether to enable an instance launched in a VPC to perform NAT. This
 	// controls whether source/destination checking is enabled on the instance. A value
@@ -3532,7 +3532,7 @@ type Instance struct {
 	// information, see NAT Instances
 	// (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html)
 	// in the Amazon Virtual Private Cloud User Guide.
-	SourceDestCheck *bool
+	SourceDestCheck bool
 
 	// If the request is a Spot Instance request, the ID of the request.
 	SpotInstanceRequestId *string
@@ -3554,7 +3554,7 @@ type Instance struct {
 	SubnetId *string
 
 	// Any tags assigned to the instance.
-	Tags []*Tag
+	Tags []Tag
 
 	// The virtualization type of the instance.
 	VirtualizationType VirtualizationType
@@ -3597,21 +3597,21 @@ type InstanceCapacity struct {
 
 	// The number of instances that can be launched onto the Dedicated Host based on
 	// the host's available capacity.
-	AvailableCapacity *int32
+	AvailableCapacity int32
 
 	// The instance type supported by the Dedicated Host.
 	InstanceType *string
 
 	// The total number of instances that can be launched onto the Dedicated Host if
 	// there are no instances running on it.
-	TotalCapacity *int32
+	TotalCapacity int32
 }
 
 // Describes a Reserved Instance listing state.
 type InstanceCount struct {
 
 	// The number of listed Reserved Instances in the state specified by the state.
-	InstanceCount *int32
+	InstanceCount int32
 
 	// The states of the listed Reserved Instances.
 	State ListingState
@@ -3696,7 +3696,7 @@ type InstanceMetadataOptionsRequest struct {
 	// The desired HTTP PUT response hop limit for instance metadata requests. The
 	// larger the number, the further instance metadata requests can travel. Default: 1
 	// Possible values: Integers from 1 to 64
-	HttpPutResponseHopLimit *int32
+	HttpPutResponseHopLimit int32
 
 	// The state of token usage for your instance metadata requests. If the parameter
 	// is not specified in the request, the default state is optional. If the state is
@@ -3722,7 +3722,7 @@ type InstanceMetadataOptionsResponse struct {
 	// The desired HTTP PUT response hop limit for instance metadata requests. The
 	// larger the number, the further instance metadata requests can travel. Default: 1
 	// Possible values: Integers from 1 to 64
-	HttpPutResponseHopLimit *int32
+	HttpPutResponseHopLimit int32
 
 	// The state of token usage for your instance metadata requests. If the parameter
 	// is not specified in the request, the default state is optional. If the state is
@@ -3767,13 +3767,13 @@ type InstanceNetworkInterface struct {
 	Description *string
 
 	// One or more security groups.
-	Groups []*GroupIdentifier
+	Groups []GroupIdentifier
 
 	// Describes the type of network interface. Valid values: interface | efa
 	InterfaceType *string
 
 	// One or more IPv6 addresses associated with the network interface.
-	Ipv6Addresses []*InstanceIpv6Address
+	Ipv6Addresses []InstanceIpv6Address
 
 	// The MAC address.
 	MacAddress *string
@@ -3791,10 +3791,10 @@ type InstanceNetworkInterface struct {
 	PrivateIpAddress *string
 
 	// One or more private IPv4 addresses associated with the network interface.
-	PrivateIpAddresses []*InstancePrivateIpAddress
+	PrivateIpAddresses []InstancePrivateIpAddress
 
 	// Indicates whether to validate network traffic to or from this network interface.
-	SourceDestCheck *bool
+	SourceDestCheck bool
 
 	// The status of the network interface.
 	Status NetworkInterfaceStatus
@@ -3833,10 +3833,10 @@ type InstanceNetworkInterfaceAttachment struct {
 
 	// Indicates whether the network interface is deleted when the instance is
 	// terminated.
-	DeleteOnTermination *bool
+	DeleteOnTermination bool
 
 	// The index of the device on the instance for the network interface attachment.
-	DeviceIndex *int32
+	DeviceIndex int32
 
 	// The attachment state.
 	Status AttachmentStatus
@@ -3849,19 +3849,19 @@ type InstanceNetworkInterfaceSpecification struct {
 	// can only assign a carrier IP address to a network interface that is in a subnet
 	// in a Wavelength Zone. For more information about carrier IP addresses, see
 	// Carrier IP addresses in the AWS Wavelength Developer Guide.
-	AssociateCarrierIpAddress *bool
+	AssociateCarrierIpAddress bool
 
 	// Indicates whether to assign a public IPv4 address to an instance you launch in a
 	// VPC. The public IP address can only be assigned to a network interface for eth0,
 	// and can only be assigned to a new network interface, not an existing one. You
 	// cannot specify more than one network interface in the request. If launching into
 	// a default subnet, the default value is true.
-	AssociatePublicIpAddress *bool
+	AssociatePublicIpAddress bool
 
 	// If set to true, the interface is deleted when the instance is terminated. You
 	// can specify true only if creating a new network interface when launching an
 	// instance.
-	DeleteOnTermination *bool
+	DeleteOnTermination bool
 
 	// The description of the network interface. Applies only if creating a network
 	// interface when launching an instance.
@@ -3870,11 +3870,11 @@ type InstanceNetworkInterfaceSpecification struct {
 	// The position of the network interface in the attachment order. A primary network
 	// interface has a device index of 0. If you specify a network interface when
 	// launching an instance, you must specify the device index.
-	DeviceIndex *int32
+	DeviceIndex int32
 
 	// The IDs of the security groups for the network interface. Applies only if
 	// creating a network interface when launching an instance.
-	Groups []*string
+	Groups []string
 
 	// The type of network interface. To create an Elastic Fabric Adapter (EFA),
 	// specify efa. For more information, see Elastic Fabric Adapter
@@ -3888,13 +3888,13 @@ type InstanceNetworkInterfaceSpecification struct {
 	// option and the option to assign specific IPv6 addresses in the same request. You
 	// can specify this option if you've specified a minimum number of instances to
 	// launch.
-	Ipv6AddressCount *int32
+	Ipv6AddressCount int32
 
 	// One or more IPv6 addresses to assign to the network interface. You cannot
 	// specify this option and the option to assign a number of IPv6 addresses in the
 	// same request. You cannot specify this option if you've specified a minimum
 	// number of instances to launch.
-	Ipv6Addresses []*InstanceIpv6Address
+	Ipv6Addresses []InstanceIpv6Address
 
 	// The ID of the network interface. If you are creating a Spot Fleet, omit this
 	// parameter because you can’t specify a network interface ID in a launch
@@ -3913,7 +3913,7 @@ type InstanceNetworkInterfaceSpecification struct {
 	// option if you're launching more than one instance in a RunInstances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html)
 	// request.
-	PrivateIpAddresses []*PrivateIpAddressSpecification
+	PrivateIpAddresses []PrivateIpAddressSpecification
 
 	// The number of secondary private IPv4 addresses. You can't specify this option
 	// and specify more than one private IP address using the private IP addresses
@@ -3921,7 +3921,7 @@ type InstanceNetworkInterfaceSpecification struct {
 	// instance in a RunInstances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html)
 	// request.
-	SecondaryPrivateIpAddressCount *int32
+	SecondaryPrivateIpAddressCount int32
 
 	// The ID of the subnet associated with the network interface. Applies only if
 	// creating a network interface when launching an instance.
@@ -3936,7 +3936,7 @@ type InstancePrivateIpAddress struct {
 
 	// Indicates whether this IPv4 address is the primary private IP address of the
 	// network interface.
-	Primary *bool
+	Primary bool
 
 	// The private IPv4 DNS name.
 	PrivateDnsName *string
@@ -3949,7 +3949,7 @@ type InstancePrivateIpAddress struct {
 type InstanceSpecification struct {
 
 	// Excludes the root volume from being snapshotted.
-	ExcludeBootVolume *bool
+	ExcludeBootVolume bool
 
 	// The instance to specify which volumes should be snapshotted.
 	InstanceId *string
@@ -3981,7 +3981,7 @@ type InstanceState struct {
 	//
 	// You can ignore the high byte value by zeroing out all of the bits above
 	// 2^8 or 256 in decimal.
-	Code *int32
+	Code int32
 
 	// The current state of the instance.
 	Name InstanceStateName
@@ -4007,7 +4007,7 @@ type InstanceStatus struct {
 	AvailabilityZone *string
 
 	// Any scheduled events associated with the instance.
-	Events []*InstanceStatusEvent
+	Events []InstanceStatusEvent
 
 	// The ID of the instance.
 	InstanceId *string
@@ -4071,7 +4071,7 @@ type InstanceStatusEvent struct {
 type InstanceStatusSummary struct {
 
 	// The system instance health or application instance health.
-	Details []*InstanceStatusDetails
+	Details []InstanceStatusDetails
 
 	// The status.
 	Status SummaryStatus
@@ -4081,7 +4081,7 @@ type InstanceStatusSummary struct {
 type InstanceStorageInfo struct {
 
 	// Array describing the disks that are available for the instance type.
-	Disks []*DiskInfo
+	Disks []DiskInfo
 
 	// Indicates whether non-volatile memory express (NVMe) is supported for instance
 	// store.
@@ -4097,10 +4097,10 @@ type InstanceTagNotificationAttribute struct {
 	// Indicates wheter all tag keys in the current Region are registered to appear in
 	// scheduled event notifications. true indicates that all tag keys in the current
 	// Region are registered.
-	IncludeAllTagsOfInstance *bool
+	IncludeAllTagsOfInstance bool
 
 	// The registered tag keys.
-	InstanceTagKeys []*string
+	InstanceTagKeys []string
 }
 
 // Describes the instance type.
@@ -4203,14 +4203,14 @@ type InstanceUsage struct {
 
 	// The number of instances the AWS account currently has in the Capacity
 	// Reservation.
-	UsedInstanceCount *int32
+	UsedInstanceCount int32
 }
 
 // Describes an internet gateway.
 type InternetGateway struct {
 
 	// Any VPCs attached to the internet gateway.
-	Attachments []*InternetGatewayAttachment
+	Attachments []InternetGatewayAttachment
 
 	// The ID of the internet gateway.
 	InternetGatewayId *string
@@ -4219,7 +4219,7 @@ type InternetGateway struct {
 	OwnerId *string
 
 	// Any tags assigned to the internet gateway.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes the attachment of a VPC to an internet gateway or an egress-only
@@ -4240,7 +4240,7 @@ type IpPermission struct {
 	// The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type
 	// number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all
 	// ICMP/ICMPv6 types, you must specify all codes.
-	FromPort *int32
+	FromPort int32
 
 	// The IP protocol name (tcp, udp, icmp, icmpv6) or number (see Protocol Numbers
 	// (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)). [VPC
@@ -4252,21 +4252,21 @@ type IpPermission struct {
 	IpProtocol *string
 
 	// The IPv4 ranges.
-	IpRanges []*IpRange
+	IpRanges []IpRange
 
 	// [VPC only] The IPv6 ranges.
-	Ipv6Ranges []*Ipv6Range
+	Ipv6Ranges []Ipv6Range
 
 	// [VPC only] The prefix list IDs.
-	PrefixListIds []*PrefixListId
+	PrefixListIds []PrefixListId
 
 	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A
 	// value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
 	// types, you must specify all codes.
-	ToPort *int32
+	ToPort int32
 
 	// The security group and AWS account ID pairs.
-	UserIdGroupPairs []*UserIdGroupPair
+	UserIdGroupPairs []UserIdGroupPair
 }
 
 // Describes an IPv4 range.
@@ -4306,13 +4306,13 @@ type Ipv6Pool struct {
 	Description *string
 
 	// The CIDR blocks for the address pool.
-	PoolCidrBlocks []*PoolCidrBlock
+	PoolCidrBlocks []PoolCidrBlock
 
 	// The ID of the address pool.
 	PoolId *string
 
 	// Any tags for the address pool.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // [EC2-VPC only] Describes an IPv6 range.
@@ -4344,7 +4344,7 @@ type KeyPairInfo struct {
 	KeyPairId *string
 
 	// Any tags applied to the key pair.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // The last error that occurred for a VPC endpoint.
@@ -4371,10 +4371,10 @@ type LaunchPermission struct {
 type LaunchPermissionModifications struct {
 
 	// The AWS account ID to add to the list of launch permissions for the AMI.
-	Add []*LaunchPermission
+	Add []LaunchPermission
 
 	// The AWS account ID to remove from the list of launch permissions for the AMI.
-	Remove []*LaunchPermission
+	Remove []LaunchPermission
 }
 
 // Describes the launch specification for an instance.
@@ -4384,14 +4384,14 @@ type LaunchSpecification struct {
 	AddressingType *string
 
 	// One or more block device mapping entries.
-	BlockDeviceMappings []*BlockDeviceMapping
+	BlockDeviceMappings []BlockDeviceMapping
 
 	// Indicates whether the instance is optimized for EBS I/O. This optimization
 	// provides dedicated throughput to Amazon EBS and an optimized configuration stack
 	// to provide optimal EBS I/O performance. This optimization isn't available with
 	// all instance types. Additional usage charges apply when using an EBS Optimized
 	// instance. Default: false
-	EbsOptimized *bool
+	EbsOptimized bool
 
 	// The IAM instance profile.
 	IamInstanceProfile *IamInstanceProfileSpecification
@@ -4413,7 +4413,7 @@ type LaunchSpecification struct {
 
 	// One or more network interfaces. If you specify a network interface, you must
 	// specify subnet IDs and security group IDs using the network interface.
-	NetworkInterfaces []*InstanceNetworkInterfaceSpecification
+	NetworkInterfaces []InstanceNetworkInterfaceSpecification
 
 	// The placement information for the instance.
 	Placement *SpotPlacement
@@ -4424,7 +4424,7 @@ type LaunchSpecification struct {
 	// One or more security groups. When requesting instances in a VPC, you must
 	// specify the IDs of the security groups. When requesting instances in
 	// EC2-Classic, you can specify the names or the IDs of the security groups.
-	SecurityGroups []*GroupIdentifier
+	SecurityGroups []GroupIdentifier
 
 	// The ID of the subnet in which to launch the instance.
 	SubnetId *string
@@ -4443,10 +4443,10 @@ type LaunchTemplate struct {
 	CreatedBy *string
 
 	// The version number of the default version of the launch template.
-	DefaultVersionNumber *int64
+	DefaultVersionNumber int64
 
 	// The version number of the latest version of the launch template.
-	LatestVersionNumber *int64
+	LatestVersionNumber int64
 
 	// The ID of the launch template.
 	LaunchTemplateId *string
@@ -4455,7 +4455,7 @@ type LaunchTemplate struct {
 	LaunchTemplateName *string
 
 	// The tags for the launch template.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes a launch template and overrides.
@@ -4555,17 +4555,17 @@ type LaunchTemplateConfig struct {
 
 	// Any parameters that you specify override the same parameters in the launch
 	// template.
-	Overrides []*LaunchTemplateOverrides
+	Overrides []LaunchTemplateOverrides
 }
 
 // The CPU options for the instance.
 type LaunchTemplateCpuOptions struct {
 
 	// The number of CPU cores for the instance.
-	CoreCount *int32
+	CoreCount int32
 
 	// The number of threads per CPU core.
-	ThreadsPerCore *int32
+	ThreadsPerCore int32
 }
 
 // The CPU options for the instance. Both the core count and threads per core must
@@ -4573,24 +4573,24 @@ type LaunchTemplateCpuOptions struct {
 type LaunchTemplateCpuOptionsRequest struct {
 
 	// The number of CPU cores for the instance.
-	CoreCount *int32
+	CoreCount int32
 
 	// The number of threads per CPU core. To disable multithreading for the instance,
 	// specify a value of 1. Otherwise, specify the default value of 2.
-	ThreadsPerCore *int32
+	ThreadsPerCore int32
 }
 
 // Describes a block device for an EBS volume.
 type LaunchTemplateEbsBlockDevice struct {
 
 	// Indicates whether the EBS volume is deleted on instance termination.
-	DeleteOnTermination *bool
+	DeleteOnTermination bool
 
 	// Indicates whether the EBS volume is encrypted.
-	Encrypted *bool
+	Encrypted bool
 
 	// The number of I/O operations per second (IOPS) that the volume supports.
-	Iops *int32
+	Iops int32
 
 	// The ARN of the AWS Key Management Service (AWS KMS) CMK used for encryption.
 	KmsKeyId *string
@@ -4599,7 +4599,7 @@ type LaunchTemplateEbsBlockDevice struct {
 	SnapshotId *string
 
 	// The size of the volume, in GiB.
-	VolumeSize *int32
+	VolumeSize int32
 
 	// The volume type.
 	VolumeType VolumeType
@@ -4609,12 +4609,12 @@ type LaunchTemplateEbsBlockDevice struct {
 type LaunchTemplateEbsBlockDeviceRequest struct {
 
 	// Indicates whether the EBS volume is deleted on instance termination.
-	DeleteOnTermination *bool
+	DeleteOnTermination bool
 
 	// Indicates whether the EBS volume is encrypted. Encrypted volumes can only be
 	// attached to instances that support Amazon EBS encryption. If you are creating a
 	// volume from a snapshot, you can't specify an encryption value.
-	Encrypted *bool
+	Encrypted bool
 
 	// The number of I/O operations per second (IOPS) to provision for an io1 or io2
 	// volume, with a maximum ratio of 50 IOPS/GiB for io1, and 500 IOPS/GiB for io2.
@@ -4626,7 +4626,7 @@ type LaunchTemplateEbsBlockDeviceRequest struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
 	// Amazon Elastic Compute Cloud User Guide. This parameter is valid only for
 	// Provisioned IOPS SSD (io1 and io2) volumes.
-	Iops *int32
+	Iops int32
 
 	// The ARN of the symmetric AWS Key Management Service (AWS KMS) CMK used for
 	// encryption.
@@ -4637,7 +4637,7 @@ type LaunchTemplateEbsBlockDeviceRequest struct {
 
 	// The size of the volume, in GiB. Default: If you're creating the volume from a
 	// snapshot and don't specify a volume size, the default is the snapshot size.
-	VolumeSize *int32
+	VolumeSize int32
 
 	// The volume type.
 	VolumeType VolumeType
@@ -4654,7 +4654,7 @@ type LaunchTemplateElasticInferenceAccelerator struct {
 
 	// The number of elastic inference accelerators to attach to the instance. Default:
 	// 1
-	Count *int32
+	Count int32
 }
 
 // Describes an elastic inference accelerator.
@@ -4662,7 +4662,7 @@ type LaunchTemplateElasticInferenceAcceleratorResponse struct {
 
 	// The number of elastic inference accelerators to attach to the instance. Default:
 	// 1
-	Count *int32
+	Count int32
 
 	// The type of elastic inference accelerator. The possible values are eia1.medium,
 	// eia1.large, and eia1.xlarge.
@@ -4674,7 +4674,7 @@ type LaunchTemplateEnclaveOptions struct {
 
 	// If this parameter is set to true, the instance is enabled for AWS Nitro
 	// Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.
-	Enabled *bool
+	Enabled bool
 }
 
 // Indicates whether the instance is enabled for AWS Nitro Enclaves. For more
@@ -4684,7 +4684,7 @@ type LaunchTemplateEnclaveOptions struct {
 type LaunchTemplateEnclaveOptionsRequest struct {
 
 	// To enable the instance for AWS Nitro Enclaves, set this parameter to true.
-	Enabled *bool
+	Enabled bool
 }
 
 // Indicates whether an instance is configured for hibernation.
@@ -4692,7 +4692,7 @@ type LaunchTemplateHibernationOptions struct {
 
 	// If this parameter is set to true, the instance is enabled for hibernation;
 	// otherwise, it is not enabled for hibernation.
-	Configured *bool
+	Configured bool
 }
 
 // Indicates whether the instance is configured for hibernation. This parameter is
@@ -4702,7 +4702,7 @@ type LaunchTemplateHibernationOptionsRequest struct {
 
 	// If you set this parameter to true, the instance is enabled for hibernation.
 	// Default: false
-	Configured *bool
+	Configured bool
 }
 
 // Describes an IAM instance profile.
@@ -4759,7 +4759,7 @@ type LaunchTemplateInstanceMetadataOptions struct {
 	// The desired HTTP PUT response hop limit for instance metadata requests. The
 	// larger the number, the further instance metadata requests can travel. Default: 1
 	// Possible values: Integers from 1 to 64
-	HttpPutResponseHopLimit *int32
+	HttpPutResponseHopLimit int32
 
 	// The state of token usage for your instance metadata requests. If the parameter
 	// is not specified in the request, the default state is optional. If the state is
@@ -4794,7 +4794,7 @@ type LaunchTemplateInstanceMetadataOptionsRequest struct {
 	// The desired HTTP PUT response hop limit for instance metadata requests. The
 	// larger the number, the further instance metadata requests can travel. Default: 1
 	// Possible values: Integers from 1 to 64
-	HttpPutResponseHopLimit *int32
+	HttpPutResponseHopLimit int32
 
 	// The state of token usage for your instance metadata requests. If the parameter
 	// is not specified in the request, the default state is optional. If the state is
@@ -4818,33 +4818,33 @@ type LaunchTemplateInstanceNetworkInterfaceSpecification struct {
 	// information about Carrier IP addresses, see Carrier IP addresses
 	// (https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip)
 	// in the AWS Wavelength Developer Guide.
-	AssociateCarrierIpAddress *bool
+	AssociateCarrierIpAddress bool
 
 	// Indicates whether to associate a public IPv4 address with eth0 for a new network
 	// interface.
-	AssociatePublicIpAddress *bool
+	AssociatePublicIpAddress bool
 
 	// Indicates whether the network interface is deleted when the instance is
 	// terminated.
-	DeleteOnTermination *bool
+	DeleteOnTermination bool
 
 	// A description for the network interface.
 	Description *string
 
 	// The device index for the network interface attachment.
-	DeviceIndex *int32
+	DeviceIndex int32
 
 	// The IDs of one or more security groups.
-	Groups []*string
+	Groups []string
 
 	// The type of network interface.
 	InterfaceType *string
 
 	// The number of IPv6 addresses for the network interface.
-	Ipv6AddressCount *int32
+	Ipv6AddressCount int32
 
 	// The IPv6 addresses for the network interface.
-	Ipv6Addresses []*InstanceIpv6Address
+	Ipv6Addresses []InstanceIpv6Address
 
 	// The ID of the network interface.
 	NetworkInterfaceId *string
@@ -4853,10 +4853,10 @@ type LaunchTemplateInstanceNetworkInterfaceSpecification struct {
 	PrivateIpAddress *string
 
 	// One or more private IPv4 addresses.
-	PrivateIpAddresses []*PrivateIpAddressSpecification
+	PrivateIpAddresses []PrivateIpAddressSpecification
 
 	// The number of secondary private IPv4 addresses for the network interface.
-	SecondaryPrivateIpAddressCount *int32
+	SecondaryPrivateIpAddressCount int32
 
 	// The ID of the subnet for the network interface.
 	SubnetId *string
@@ -4871,23 +4871,23 @@ type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
 	// Carrier IP addresses, see Carrier IP addresses
 	// (https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip)
 	// in the AWS Wavelength Developer Guide.
-	AssociateCarrierIpAddress *bool
+	AssociateCarrierIpAddress bool
 
 	// Associates a public IPv4 address with eth0 for a new network interface.
-	AssociatePublicIpAddress *bool
+	AssociatePublicIpAddress bool
 
 	// Indicates whether the network interface is deleted when the instance is
 	// terminated.
-	DeleteOnTermination *bool
+	DeleteOnTermination bool
 
 	// A description for the network interface.
 	Description *string
 
 	// The device index for the network interface attachment.
-	DeviceIndex *int32
+	DeviceIndex int32
 
 	// The IDs of one or more security groups.
-	Groups []*string
+	Groups []string
 
 	// The type of network interface. To create an Elastic Fabric Adapter (EFA),
 	// specify efa. For more information, see Elastic Fabric Adapter
@@ -4899,12 +4899,12 @@ type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
 	// The number of IPv6 addresses to assign to a network interface. Amazon EC2
 	// automatically selects the IPv6 addresses from the subnet range. You can't use
 	// this option if specifying specific IPv6 addresses.
-	Ipv6AddressCount *int32
+	Ipv6AddressCount int32
 
 	// One or more specific IPv6 addresses from the IPv6 CIDR block range of your
 	// subnet. You can't use this option if you're specifying a number of IPv6
 	// addresses.
-	Ipv6Addresses []*InstanceIpv6AddressRequest
+	Ipv6Addresses []InstanceIpv6AddressRequest
 
 	// The ID of the network interface.
 	NetworkInterfaceId *string
@@ -4913,10 +4913,10 @@ type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
 	PrivateIpAddress *string
 
 	// One or more private IPv4 addresses.
-	PrivateIpAddresses []*PrivateIpAddressSpecification
+	PrivateIpAddresses []PrivateIpAddressSpecification
 
 	// The number of secondary private IPv4 addresses to assign to a network interface.
-	SecondaryPrivateIpAddressCount *int32
+	SecondaryPrivateIpAddressCount int32
 
 	// The ID of the subnet for the network interface.
 	SubnetId *string
@@ -4951,7 +4951,7 @@ type LaunchTemplateOverrides struct {
 	// launched first. Valid values are whole numbers starting at 0. The lower the
 	// number, the higher the priority. If no number is set, the launch template
 	// override has the lowest priority.
-	Priority *float64
+	Priority float64
 
 	// The maximum price per unit hour that you are willing to pay for a Spot Instance.
 	SpotPrice *string
@@ -4960,7 +4960,7 @@ type LaunchTemplateOverrides struct {
 	SubnetId *string
 
 	// The number of units provided by the specified instance type.
-	WeightedCapacity *float64
+	WeightedCapacity float64
 }
 
 // Describes the placement of an instance.
@@ -4983,7 +4983,7 @@ type LaunchTemplatePlacement struct {
 
 	// The number of the partition the instance should launch in. Valid only if the
 	// placement group strategy is set to partition.
-	PartitionNumber *int32
+	PartitionNumber int32
 
 	// Reserved for future use.
 	SpreadDomain *string
@@ -5014,7 +5014,7 @@ type LaunchTemplatePlacementRequest struct {
 
 	// The number of the partition the instance should launch in. Valid only if the
 	// placement group strategy is set to partition.
-	PartitionNumber *int32
+	PartitionNumber int32
 
 	// Reserved for future use.
 	SpreadDomain *string
@@ -5029,7 +5029,7 @@ type LaunchTemplatesMonitoring struct {
 
 	// Indicates whether detailed monitoring is enabled. Otherwise, basic monitoring is
 	// enabled.
-	Enabled *bool
+	Enabled bool
 }
 
 // Describes the monitoring for the instance.
@@ -5037,7 +5037,7 @@ type LaunchTemplatesMonitoringRequest struct {
 
 	// Specify true to enable detailed monitoring. Otherwise, basic monitoring is
 	// enabled.
-	Enabled *bool
+	Enabled bool
 }
 
 // The launch template to use. You must specify either the launch template ID or
@@ -5060,7 +5060,7 @@ type LaunchTemplateSpotMarketOptions struct {
 
 	// The required duration for the Spot Instances (also known as Spot blocks), in
 	// minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
-	BlockDurationMinutes *int32
+	BlockDurationMinutes int32
 
 	// The behavior when a Spot Instance is interrupted.
 	InstanceInterruptionBehavior InstanceInterruptionBehavior
@@ -5083,7 +5083,7 @@ type LaunchTemplateSpotMarketOptionsRequest struct {
 
 	// The required duration for the Spot Instances (also known as Spot blocks), in
 	// minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
-	BlockDurationMinutes *int32
+	BlockDurationMinutes int32
 
 	// The behavior when a Spot Instance is interrupted. The default is terminate.
 	InstanceInterruptionBehavior InstanceInterruptionBehavior
@@ -5108,7 +5108,7 @@ type LaunchTemplateTagSpecification struct {
 	ResourceType ResourceType
 
 	// The tags for the resource.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // The tags specification for the launch template.
@@ -5121,7 +5121,7 @@ type LaunchTemplateTagSpecificationRequest struct {
 	ResourceType ResourceType
 
 	// The tags to apply to the resource.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes a launch template version.
@@ -5134,7 +5134,7 @@ type LaunchTemplateVersion struct {
 	CreatedBy *string
 
 	// Indicates whether the version is the default version.
-	DefaultVersion *bool
+	DefaultVersion bool
 
 	// Information about the launch template.
 	LaunchTemplateData *ResponseLaunchTemplateData
@@ -5149,7 +5149,7 @@ type LaunchTemplateVersion struct {
 	VersionDescription *string
 
 	// The version number.
-	VersionNumber *int64
+	VersionNumber int64
 }
 
 // Describes a license configuration.
@@ -5191,10 +5191,10 @@ type LoadPermission struct {
 type LoadPermissionModifications struct {
 
 	// The load permissions to add.
-	Add []*LoadPermissionRequest
+	Add []LoadPermissionRequest
 
 	// The load permissions to remove.
-	Remove []*LoadPermissionRequest
+	Remove []LoadPermissionRequest
 }
 
 // Describes a load permission.
@@ -5223,7 +5223,7 @@ type LocalGateway struct {
 	State *string
 
 	// The tags assigned to the local gateway.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes a route for a local gateway route table.
@@ -5273,7 +5273,7 @@ type LocalGatewayRouteTable struct {
 	State *string
 
 	// The tags assigned to the local gateway route table.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes an association between a local gateway route table and a virtual
@@ -5304,7 +5304,7 @@ type LocalGatewayRouteTableVirtualInterfaceGroupAssociation struct {
 	State *string
 
 	// The tags assigned to the association.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes an association between a local gateway route table and a VPC.
@@ -5330,7 +5330,7 @@ type LocalGatewayRouteTableVpcAssociation struct {
 	State *string
 
 	// The tags assigned to the association.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the VPC.
 	VpcId *string
@@ -5344,7 +5344,7 @@ type LocalGatewayVirtualInterface struct {
 
 	// The Border Gateway Protocol (BGP) Autonomous System Number (ASN) of the local
 	// gateway.
-	LocalBgpAsn *int32
+	LocalBgpAsn int32
 
 	// The ID of the local gateway.
 	LocalGatewayId *string
@@ -5359,13 +5359,13 @@ type LocalGatewayVirtualInterface struct {
 	PeerAddress *string
 
 	// The peer BGP ASN.
-	PeerBgpAsn *int32
+	PeerBgpAsn int32
 
 	// The tags assigned to the virtual interface.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the VLAN.
-	Vlan *int32
+	Vlan int32
 }
 
 // Describes a local gateway virtual interface group.
@@ -5378,13 +5378,13 @@ type LocalGatewayVirtualInterfaceGroup struct {
 	LocalGatewayVirtualInterfaceGroupId *string
 
 	// The IDs of the virtual interfaces.
-	LocalGatewayVirtualInterfaceIds []*string
+	LocalGatewayVirtualInterfaceIds []string
 
 	// The AWS account ID that owns the local gateway virtual interface group.
 	OwnerId *string
 
 	// The tags assigned to the virtual interface group.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes a managed prefix list.
@@ -5394,7 +5394,7 @@ type ManagedPrefixList struct {
 	AddressFamily *string
 
 	// The maximum number of entries for the prefix list.
-	MaxEntries *int32
+	MaxEntries int32
 
 	// The ID of the owner of the prefix list.
 	OwnerId *string
@@ -5415,10 +5415,10 @@ type ManagedPrefixList struct {
 	StateMessage *string
 
 	// The tags for the prefix list.
-	Tags []*Tag
+	Tags []Tag
 
 	// The version of the prefix list.
-	Version *int64
+	Version int64
 }
 
 // Describes the memory for the instance type.
@@ -5480,48 +5480,48 @@ type ModifyVpnTunnelOptionsSpecification struct {
 
 	// The number of seconds after which a DPD timeout occurs. Constraints: A value
 	// between 0 and 30. Default: 30
-	DPDTimeoutSeconds *int32
+	DPDTimeoutSeconds int32
 
 	// The IKE versions that are permitted for the VPN tunnel. Valid values: ikev1 |
 	// ikev2
-	IKEVersions []*IKEVersionsRequestListValue
+	IKEVersions []IKEVersionsRequestListValue
 
 	// One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel
 	// for phase 1 IKE negotiations. Valid values: 2 | 14 | 15 | 16 | 17 | 18 | 19 | 20
 	// | 21 | 22 | 23 | 24
-	Phase1DHGroupNumbers []*Phase1DHGroupNumbersRequestListValue
+	Phase1DHGroupNumbers []Phase1DHGroupNumbersRequestListValue
 
 	// One or more encryption algorithms that are permitted for the VPN tunnel for
 	// phase 1 IKE negotiations. Valid values: AES128 | AES256 | AES128-GCM-16 |
 	// AES256-GCM-16
-	Phase1EncryptionAlgorithms []*Phase1EncryptionAlgorithmsRequestListValue
+	Phase1EncryptionAlgorithms []Phase1EncryptionAlgorithmsRequestListValue
 
 	// One or more integrity algorithms that are permitted for the VPN tunnel for phase
 	// 1 IKE negotiations. Valid values: SHA1 | SHA2-256 | SHA2-384 | SHA2-512
-	Phase1IntegrityAlgorithms []*Phase1IntegrityAlgorithmsRequestListValue
+	Phase1IntegrityAlgorithms []Phase1IntegrityAlgorithmsRequestListValue
 
 	// The lifetime for phase 1 of the IKE negotiation, in seconds. Constraints: A
 	// value between 900 and 28,800. Default: 28800
-	Phase1LifetimeSeconds *int32
+	Phase1LifetimeSeconds int32
 
 	// One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel
 	// for phase 2 IKE negotiations. Valid values: 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19
 	// | 20 | 21 | 22 | 23 | 24
-	Phase2DHGroupNumbers []*Phase2DHGroupNumbersRequestListValue
+	Phase2DHGroupNumbers []Phase2DHGroupNumbersRequestListValue
 
 	// One or more encryption algorithms that are permitted for the VPN tunnel for
 	// phase 2 IKE negotiations. Valid values: AES128 | AES256 | AES128-GCM-16 |
 	// AES256-GCM-16
-	Phase2EncryptionAlgorithms []*Phase2EncryptionAlgorithmsRequestListValue
+	Phase2EncryptionAlgorithms []Phase2EncryptionAlgorithmsRequestListValue
 
 	// One or more integrity algorithms that are permitted for the VPN tunnel for phase
 	// 2 IKE negotiations. Valid values: SHA1 | SHA2-256 | SHA2-384 | SHA2-512
-	Phase2IntegrityAlgorithms []*Phase2IntegrityAlgorithmsRequestListValue
+	Phase2IntegrityAlgorithms []Phase2IntegrityAlgorithmsRequestListValue
 
 	// The lifetime for phase 2 of the IKE negotiation, in seconds. Constraints: A
 	// value between 900 and 3,600. The value must be less than the value for
 	// Phase1LifetimeSeconds. Default: 3600
-	Phase2LifetimeSeconds *int32
+	Phase2LifetimeSeconds int32
 
 	// The pre-shared key (PSK) to establish initial authentication between the virtual
 	// private gateway and the customer gateway. Constraints: Allowed characters are
@@ -5532,17 +5532,17 @@ type ModifyVpnTunnelOptionsSpecification struct {
 	// The percentage of the rekey window (determined by RekeyMarginTimeSeconds) during
 	// which the rekey time is randomly selected. Constraints: A value between 0 and
 	// 100. Default: 100
-	RekeyFuzzPercentage *int32
+	RekeyFuzzPercentage int32
 
 	// The margin time, in seconds, before the phase 2 lifetime expires, during which
 	// the AWS side of the VPN connection performs an IKE rekey. The exact time of the
 	// rekey is randomly selected based on the value for RekeyFuzzPercentage.
 	// Constraints: A value between 60 and half of Phase2LifetimeSeconds. Default: 540
-	RekeyMarginTimeSeconds *int32
+	RekeyMarginTimeSeconds int32
 
 	// The number of packets in an IKE replay window. Constraints: A value between 64
 	// and 2048. Default: 1024
-	ReplayWindowSize *int32
+	ReplayWindowSize int32
 
 	// The action to take when the establishing the tunnel for the VPN connection. By
 	// default, your customer gateway device must initiate the IKE negotiation and
@@ -5639,7 +5639,7 @@ type NatGateway struct {
 
 	// Information about the IP addresses and network interface associated with the NAT
 	// gateway.
-	NatGatewayAddresses []*NatGatewayAddress
+	NatGatewayAddresses []NatGatewayAddress
 
 	// The ID of the NAT gateway.
 	NatGatewayId *string
@@ -5673,7 +5673,7 @@ type NatGateway struct {
 	SubnetId *string
 
 	// The tags for the NAT gateway.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the VPC in which the NAT gateway is located.
 	VpcId *string
@@ -5700,13 +5700,13 @@ type NatGatewayAddress struct {
 type NetworkAcl struct {
 
 	// Any associations between the network ACL and one or more subnets
-	Associations []*NetworkAclAssociation
+	Associations []NetworkAclAssociation
 
 	// One or more entries (rules) in the network ACL.
-	Entries []*NetworkAclEntry
+	Entries []NetworkAclEntry
 
 	// Indicates whether this is the default network ACL for the VPC.
-	IsDefault *bool
+	IsDefault bool
 
 	// The ID of the network ACL.
 	NetworkAclId *string
@@ -5715,7 +5715,7 @@ type NetworkAcl struct {
 	OwnerId *string
 
 	// Any tags assigned to the network ACL.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the VPC for the network ACL.
 	VpcId *string
@@ -5742,7 +5742,7 @@ type NetworkAclEntry struct {
 
 	// Indicates whether the rule is an egress rule (applied to traffic leaving the
 	// subnet).
-	Egress *bool
+	Egress bool
 
 	// ICMP protocol: The ICMP type and code.
 	IcmpTypeCode *IcmpTypeCode
@@ -5761,7 +5761,7 @@ type NetworkAclEntry struct {
 
 	// The rule number for the entry. ACL entries are processed in ascending order by
 	// rule number.
-	RuleNumber *int32
+	RuleNumber int32
 }
 
 // Describes the networking features of the instance type.
@@ -5806,13 +5806,13 @@ type NetworkInterface struct {
 	Description *string
 
 	// Any security groups for the network interface.
-	Groups []*GroupIdentifier
+	Groups []GroupIdentifier
 
 	// The type of network interface.
 	InterfaceType NetworkInterfaceType
 
 	// The IPv6 addresses associated with the network interface.
-	Ipv6Addresses []*NetworkInterfaceIpv6Address
+	Ipv6Addresses []NetworkInterfaceIpv6Address
 
 	// The MAC address.
 	MacAddress *string
@@ -5833,17 +5833,17 @@ type NetworkInterface struct {
 	PrivateIpAddress *string
 
 	// The private IPv4 addresses associated with the network interface.
-	PrivateIpAddresses []*NetworkInterfacePrivateIpAddress
+	PrivateIpAddresses []NetworkInterfacePrivateIpAddress
 
 	// The ID of the entity that launched the instance on your behalf (for example, AWS
 	// Management Console or Auto Scaling).
 	RequesterId *string
 
 	// Indicates whether the network interface is being managed by AWS.
-	RequesterManaged *bool
+	RequesterManaged bool
 
 	// Indicates whether traffic to or from the instance is validated.
-	SourceDestCheck *bool
+	SourceDestCheck bool
 
 	// The status of the network interface.
 	Status NetworkInterfaceStatus
@@ -5852,7 +5852,7 @@ type NetworkInterface struct {
 	SubnetId *string
 
 	// Any tags assigned to the network interface.
-	TagSet []*Tag
+	TagSet []Tag
 
 	// The ID of the VPC.
 	VpcId *string
@@ -5899,10 +5899,10 @@ type NetworkInterfaceAttachment struct {
 
 	// Indicates whether the network interface is deleted when the instance is
 	// terminated.
-	DeleteOnTermination *bool
+	DeleteOnTermination bool
 
 	// The device index of the network interface attachment on the instance.
-	DeviceIndex *int32
+	DeviceIndex int32
 
 	// The ID of the instance.
 	InstanceId *string
@@ -5922,7 +5922,7 @@ type NetworkInterfaceAttachmentChanges struct {
 
 	// Indicates whether the network interface is deleted when the instance is
 	// terminated.
-	DeleteOnTermination *bool
+	DeleteOnTermination bool
 }
 
 // Describes an IPv6 address associated with a network interface.
@@ -5973,7 +5973,7 @@ type NetworkInterfacePrivateIpAddress struct {
 
 	// Indicates whether this IPv4 address is the primary private IPv4 address of the
 	// network interface.
-	Primary *bool
+	Primary bool
 
 	// The private DNS name.
 	PrivateDnsName *string
@@ -5989,7 +5989,7 @@ type NewDhcpConfiguration struct {
 	Key *string
 
 	// One or more values for the DHCP option.
-	Values []*string
+	Values []string
 }
 
 // Describes the configuration of On-Demand Instances in an EC2 Fleet.
@@ -6012,15 +6012,15 @@ type OnDemandOptions struct {
 
 	// The minimum target capacity for On-Demand Instances in the fleet. If the minimum
 	// target capacity is not reached, the fleet launches no instances.
-	MinTargetCapacity *int32
+	MinTargetCapacity int32
 
 	// Indicates that the fleet launches all On-Demand Instances into a single
 	// Availability Zone. Supported only for fleets of type instant.
-	SingleAvailabilityZone *bool
+	SingleAvailabilityZone bool
 
 	// Indicates that the fleet uses a single instance type to launch all On-Demand
 	// Instances in the fleet. Supported only for fleets of type instant.
-	SingleInstanceType *bool
+	SingleInstanceType bool
 }
 
 // Describes the configuration of On-Demand Instances in an EC2 Fleet.
@@ -6043,15 +6043,15 @@ type OnDemandOptionsRequest struct {
 
 	// The minimum target capacity for On-Demand Instances in the fleet. If the minimum
 	// target capacity is not reached, the fleet launches no instances.
-	MinTargetCapacity *int32
+	MinTargetCapacity int32
 
 	// Indicates that the fleet launches all On-Demand Instances into a single
 	// Availability Zone. Supported only for fleets of type instant.
-	SingleAvailabilityZone *bool
+	SingleAvailabilityZone bool
 
 	// Indicates that the fleet uses a single instance type to launch all On-Demand
 	// Instances in the fleet. Supported only for fleets of type instant.
-	SingleInstanceType *bool
+	SingleInstanceType bool
 }
 
 // Describes the data that identifies an Amazon FPGA image (AFI) on the PCI bus.
@@ -6085,15 +6085,15 @@ type PeeringConnectionOptions struct {
 
 	// If true, the public DNS hostnames of instances in the specified VPC resolve to
 	// private IP addresses when queried from instances in the peer VPC.
-	AllowDnsResolutionFromRemoteVpc *bool
+	AllowDnsResolutionFromRemoteVpc bool
 
 	// If true, enables outbound communication from an EC2-Classic instance that's
 	// linked to a local VPC using ClassicLink to instances in a peer VPC.
-	AllowEgressFromLocalClassicLinkToRemoteVpc *bool
+	AllowEgressFromLocalClassicLinkToRemoteVpc bool
 
 	// If true, enables outbound communication from instances in a local VPC to an
 	// EC2-Classic instance that's linked to a peer VPC using ClassicLink.
-	AllowEgressFromLocalVpcToRemoteClassicLink *bool
+	AllowEgressFromLocalVpcToRemoteClassicLink bool
 }
 
 // The VPC peering connection options.
@@ -6101,15 +6101,15 @@ type PeeringConnectionOptionsRequest struct {
 
 	// If true, enables a local VPC to resolve public DNS hostnames to private IP
 	// addresses when queried from instances in the peer VPC.
-	AllowDnsResolutionFromRemoteVpc *bool
+	AllowDnsResolutionFromRemoteVpc bool
 
 	// If true, enables outbound communication from an EC2-Classic instance that's
 	// linked to a local VPC using ClassicLink to instances in a peer VPC.
-	AllowEgressFromLocalClassicLinkToRemoteVpc *bool
+	AllowEgressFromLocalClassicLinkToRemoteVpc bool
 
 	// If true, enables outbound communication from instances in a local VPC to an
 	// EC2-Classic instance that's linked to a peer VPC using ClassicLink.
-	AllowEgressFromLocalVpcToRemoteClassicLink *bool
+	AllowEgressFromLocalVpcToRemoteClassicLink bool
 }
 
 // Information about the transit gateway in the peering attachment.
@@ -6129,7 +6129,7 @@ type PeeringTgwInfo struct {
 type Phase1DHGroupNumbersListValue struct {
 
 	// The Diffie-Hellmann group number.
-	Value *int32
+	Value int32
 }
 
 // Specifies a Diffie-Hellman group number for the VPN tunnel for phase 1 IKE
@@ -6137,7 +6137,7 @@ type Phase1DHGroupNumbersListValue struct {
 type Phase1DHGroupNumbersRequestListValue struct {
 
 	// The Diffie-Hellmann group number.
-	Value *int32
+	Value int32
 }
 
 // The encryption algorithm for phase 1 IKE negotiations.
@@ -6174,7 +6174,7 @@ type Phase1IntegrityAlgorithmsRequestListValue struct {
 type Phase2DHGroupNumbersListValue struct {
 
 	// The Diffie-Hellmann group number.
-	Value *int32
+	Value int32
 }
 
 // Specifies a Diffie-Hellman group number for the VPN tunnel for phase 2 IKE
@@ -6182,7 +6182,7 @@ type Phase2DHGroupNumbersListValue struct {
 type Phase2DHGroupNumbersRequestListValue struct {
 
 	// The Diffie-Hellmann group number.
-	Value *int32
+	Value int32
 }
 
 // The encryption algorithm for phase 2 IKE negotiations.
@@ -6251,7 +6251,7 @@ type Placement struct {
 	// group strategy is set to partition. This parameter is not supported by
 	// CreateFleet
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet).
-	PartitionNumber *int32
+	PartitionNumber int32
 
 	// Reserved for future use. This parameter is not supported by CreateFleet
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet).
@@ -6276,7 +6276,7 @@ type PlacementGroup struct {
 	GroupName *string
 
 	// The number of partitions. Valid only if strategy is set to partition.
-	PartitionCount *int32
+	PartitionCount int32
 
 	// The state of the placement group.
 	State PlacementGroupState
@@ -6285,7 +6285,7 @@ type PlacementGroup struct {
 	Strategy PlacementStrategy
 
 	// Any tags applied to the placement group.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes the placement group support of the instance type.
@@ -6313,17 +6313,17 @@ type PoolCidrBlock struct {
 type PortRange struct {
 
 	// The first port in the range.
-	From *int32
+	From int32
 
 	// The last port in the range.
-	To *int32
+	To int32
 }
 
 // Describes prefixes for AWS services.
 type PrefixList struct {
 
 	// The IP address range of the AWS service.
-	Cidrs []*string
+	Cidrs []string
 
 	// The ID of the prefix.
 	PrefixListId *string
@@ -6375,18 +6375,18 @@ type PriceSchedule struct {
 	// covering the first three months of the remaining term, will be active during
 	// months 5, 4, and 3. Then schedule 2, covering the last two months of the term,
 	// will be active for months 2 and 1.
-	Active *bool
+	Active bool
 
 	// The currency for transacting the Reserved Instance resale. At this time, the
 	// only supported currency is USD.
 	CurrencyCode CurrencyCodeValues
 
 	// The fixed price for the term.
-	Price *float64
+	Price float64
 
 	// The number of months remaining in the reservation. For example, 2 is the second
 	// to the last month before the capacity reservation expires.
-	Term *int64
+	Term int64
 }
 
 // Describes the price for a Reserved Instance.
@@ -6397,21 +6397,21 @@ type PriceScheduleSpecification struct {
 	CurrencyCode CurrencyCodeValues
 
 	// The fixed price for the term.
-	Price *float64
+	Price float64
 
 	// The number of months remaining in the reservation. For example, 2 is the second
 	// to the last month before the capacity reservation expires.
-	Term *int64
+	Term int64
 }
 
 // Describes a Reserved Instance offering.
 type PricingDetail struct {
 
 	// The number of reservations available for the price.
-	Count *int32
+	Count int32
 
 	// The price per instance.
-	Price *float64
+	Price float64
 }
 
 // PrincipalIdFormat description
@@ -6421,7 +6421,7 @@ type PrincipalIdFormat struct {
 	Arn *string
 
 	// PrincipalIdFormatStatuses description
-	Statuses []*IdFormat
+	Statuses []IdFormat
 }
 
 // Information about the private DNS name for the service endpoint. For more
@@ -6452,7 +6452,7 @@ type PrivateIpAddressSpecification struct {
 
 	// Indicates whether the private IPv4 address is the primary private IPv4 address.
 	// Only one IPv4 address can be designated as primary.
-	Primary *bool
+	Primary bool
 
 	// The private IPv4 addresses.
 	PrivateIpAddress *string
@@ -6528,29 +6528,29 @@ type PublicIpv4Pool struct {
 	NetworkBorderGroup *string
 
 	// The address ranges.
-	PoolAddressRanges []*PublicIpv4PoolRange
+	PoolAddressRanges []PublicIpv4PoolRange
 
 	// The ID of the address pool.
 	PoolId *string
 
 	// Any tags for the address pool.
-	Tags []*Tag
+	Tags []Tag
 
 	// The total number of addresses.
-	TotalAddressCount *int32
+	TotalAddressCount int32
 
 	// The total number of available addresses.
-	TotalAvailableAddressCount *int32
+	TotalAvailableAddressCount int32
 }
 
 // Describes an address range of an IPv4 address pool.
 type PublicIpv4PoolRange struct {
 
 	// The number of addresses in the range.
-	AddressCount *int32
+	AddressCount int32
 
 	// The number of available addresses in the range.
-	AvailableAddressCount *int32
+	AvailableAddressCount int32
 
 	// The first IP address in the range.
 	FirstAddress *string
@@ -6567,10 +6567,10 @@ type Purchase struct {
 	CurrencyCode CurrencyCodeValues
 
 	// The duration of the reservation's term in seconds.
-	Duration *int32
+	Duration int32
 
 	// The IDs of the Dedicated Hosts associated with the reservation.
-	HostIdSet []*string
+	HostIdSet []string
 
 	// The ID of the reservation.
 	HostReservationId *string
@@ -6595,7 +6595,7 @@ type PurchaseRequest struct {
 	// The number of instances.
 	//
 	// This member is required.
-	InstanceCount *int32
+	InstanceCount int32
 
 	// The purchase token.
 	//
@@ -6607,7 +6607,7 @@ type PurchaseRequest struct {
 type RecurringCharge struct {
 
 	// The amount of the recurring charge.
-	Amount *float64
+	Amount float64
 
 	// The frequency of the recurring charge.
 	Frequency RecurringChargeFrequency
@@ -6635,10 +6635,10 @@ type RegisterInstanceTagAttributeRequest struct {
 
 	// Indicates whether to register all tag keys in the current Region. Specify true
 	// to register all tag keys.
-	IncludeAllTagsOfInstance *bool
+	IncludeAllTagsOfInstance bool
 
 	// The tag keys to register.
-	InstanceTagKeys []*string
+	InstanceTagKeys []string
 }
 
 // An entry for a prefix list.
@@ -6654,7 +6654,7 @@ type RemovePrefixListEntry struct {
 type RequestLaunchTemplateData struct {
 
 	// The block device mapping.
-	BlockDeviceMappings []*LaunchTemplateBlockDeviceMappingRequest
+	BlockDeviceMappings []LaunchTemplateBlockDeviceMappingRequest
 
 	// The Capacity Reservation targeting option. If you do not specify this parameter,
 	// the instance's Capacity Reservation preference defaults to open, which enables
@@ -6678,20 +6678,20 @@ type RequestLaunchTemplateData struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html).
 	// Alternatively, if you set InstanceInitiatedShutdownBehavior to terminate, you
 	// can terminate the instance by running the shutdown command from the instance.
-	DisableApiTermination *bool
+	DisableApiTermination bool
 
 	// Indicates whether the instance is optimized for Amazon EBS I/O. This
 	// optimization provides dedicated throughput to Amazon EBS and an optimized
 	// configuration stack to provide optimal Amazon EBS I/O performance. This
 	// optimization isn't available with all instance types. Additional usage charges
 	// apply when using an EBS-optimized instance.
-	EbsOptimized *bool
+	EbsOptimized bool
 
 	// An elastic GPU to associate with the instance.
-	ElasticGpuSpecifications []*ElasticGpuSpecification
+	ElasticGpuSpecifications []ElasticGpuSpecification
 
 	// The elastic inference accelerator for the instance.
-	ElasticInferenceAccelerators []*LaunchTemplateElasticInferenceAccelerator
+	ElasticInferenceAccelerators []LaunchTemplateElasticInferenceAccelerator
 
 	// Indicates whether the instance is enabled for AWS Nitro Enclaves. For more
 	// information, see  AWS Nitro Enclaves
@@ -6745,7 +6745,7 @@ type RequestLaunchTemplateData struct {
 	KeyName *string
 
 	// The license configurations.
-	LicenseSpecifications []*LaunchTemplateLicenseConfigurationRequest
+	LicenseSpecifications []LaunchTemplateLicenseConfigurationRequest
 
 	// The metadata options for the instance. For more information, see Instance
 	// Metadata and User Data
@@ -6758,7 +6758,7 @@ type RequestLaunchTemplateData struct {
 
 	// One or more network interfaces. If you specify a network interface, you must
 	// specify any security groups and subnets as part of the network interface.
-	NetworkInterfaces []*LaunchTemplateInstanceNetworkInterfaceSpecificationRequest
+	NetworkInterfaces []LaunchTemplateInstanceNetworkInterfaceSpecificationRequest
 
 	// The placement for the instance.
 	Placement *LaunchTemplatePlacementRequest
@@ -6774,19 +6774,19 @@ type RequestLaunchTemplateData struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html).
 	// You cannot specify both a security group ID and security name in the same
 	// request.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// [EC2-Classic, default VPC] One or more security group names. For a nondefault
 	// VPC, you must use security group IDs instead. You cannot specify both a security
 	// group ID and security name in the same request.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// The tags to apply to the resources during launch. You can only tag instances and
 	// volumes on launch. The specified tags are applied to all instances or volumes
 	// that are created during launch. To tag a resource after it has been created, see
 	// CreateTags
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
-	TagSpecifications []*LaunchTemplateTagSpecificationRequest
+	TagSpecifications []LaunchTemplateTagSpecificationRequest
 
 	// The Base64-encoded user data to make available to the instance. For more
 	// information, see Running Commands on Your Linux Instance at Launch
@@ -6807,14 +6807,14 @@ type RequestSpotLaunchSpecification struct {
 	// and an encryption value. This is because only blank volumes can be encrypted on
 	// creation. If a snapshot is the basis for a volume, it is not blank and its
 	// encryption status is used for the volume encryption status.
-	BlockDeviceMappings []*BlockDeviceMapping
+	BlockDeviceMappings []BlockDeviceMapping
 
 	// Indicates whether the instance is optimized for EBS I/O. This optimization
 	// provides dedicated throughput to Amazon EBS and an optimized configuration stack
 	// to provide optimal EBS I/O performance. This optimization isn't available with
 	// all instance types. Additional usage charges apply when using an EBS Optimized
 	// instance. Default: false
-	EbsOptimized *bool
+	EbsOptimized bool
 
 	// The IAM instance profile.
 	IamInstanceProfile *IamInstanceProfileSpecification
@@ -6837,7 +6837,7 @@ type RequestSpotLaunchSpecification struct {
 
 	// One or more network interfaces. If you specify a network interface, you must
 	// specify subnet IDs and security group IDs using the network interface.
-	NetworkInterfaces []*InstanceNetworkInterfaceSpecification
+	NetworkInterfaces []InstanceNetworkInterfaceSpecification
 
 	// The placement information for the instance.
 	Placement *SpotPlacement
@@ -6846,12 +6846,12 @@ type RequestSpotLaunchSpecification struct {
 	RamdiskId *string
 
 	// One or more security group IDs.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// One or more security groups. When requesting instances in a VPC, you must
 	// specify the IDs of the security groups. When requesting instances in
 	// EC2-Classic, you can specify the names or the IDs of the security groups.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// The IDs of the subnets in which to launch the instance. To specify multiple
 	// subnets, separate them using commas; for example, "subnet-1234abcdeexample1,
@@ -6868,10 +6868,10 @@ type RequestSpotLaunchSpecification struct {
 type Reservation struct {
 
 	// [EC2-Classic only] The security groups.
-	Groups []*GroupIdentifier
+	Groups []GroupIdentifier
 
 	// The instances.
-	Instances []*Instance
+	Instances []Instance
 
 	// The ID of the AWS account that owns the reservation.
 	OwnerId *string
@@ -6903,7 +6903,7 @@ type ReservedInstanceLimitPrice struct {
 
 	// Used for Reserved Instance Marketplace offerings. Specifies the limit price on
 	// the total order (instanceCount * price).
-	Amount *float64
+	Amount float64
 
 	// The currency in which the limitPrice amount is specified. At this time, the only
 	// supported currency is USD.
@@ -6931,16 +6931,16 @@ type ReservedInstances struct {
 	CurrencyCode CurrencyCodeValues
 
 	// The duration of the Reserved Instance, in seconds.
-	Duration *int64
+	Duration int64
 
 	// The time when the Reserved Instance expires.
 	End *time.Time
 
 	// The purchase price of the Reserved Instance.
-	FixedPrice *float32
+	FixedPrice float32
 
 	// The number of reservations purchased.
-	InstanceCount *int32
+	InstanceCount int32
 
 	// The tenancy of the instance.
 	InstanceTenancy Tenancy
@@ -6958,7 +6958,7 @@ type ReservedInstances struct {
 	ProductDescription RIProductDescription
 
 	// The recurring charge tag assigned to the resource.
-	RecurringCharges []*RecurringCharge
+	RecurringCharges []RecurringCharge
 
 	// The ID of the Reserved Instance.
 	ReservedInstancesId *string
@@ -6973,10 +6973,10 @@ type ReservedInstances struct {
 	State ReservedInstanceState
 
 	// Any tags assigned to the resource.
-	Tags []*Tag
+	Tags []Tag
 
 	// The usage price of the Reserved Instance, per hour.
-	UsagePrice *float32
+	UsagePrice float32
 }
 
 // Describes the configuration settings for the modified Reserved Instances.
@@ -6987,7 +6987,7 @@ type ReservedInstancesConfiguration struct {
 
 	// The number of modified Reserved Instances. This is a required field for a
 	// request.
-	InstanceCount *int32
+	InstanceCount int32
 
 	// The instance type for the modified Reserved Instances.
 	InstanceType InstanceType
@@ -7020,10 +7020,10 @@ type ReservedInstancesListing struct {
 	CreateDate *time.Time
 
 	// The number of instances in this state.
-	InstanceCounts []*InstanceCount
+	InstanceCounts []InstanceCount
 
 	// The price of the Reserved Instance listing.
-	PriceSchedules []*PriceSchedule
+	PriceSchedules []PriceSchedule
 
 	// The ID of the Reserved Instance.
 	ReservedInstancesId *string
@@ -7039,7 +7039,7 @@ type ReservedInstancesListing struct {
 	StatusMessage *string
 
 	// Any tags assigned to the resource.
-	Tags []*Tag
+	Tags []Tag
 
 	// The last modified timestamp of the listing.
 	UpdateDate *time.Time
@@ -7061,10 +7061,10 @@ type ReservedInstancesModification struct {
 
 	// Contains target configurations along with their corresponding new Reserved
 	// Instance IDs.
-	ModificationResults []*ReservedInstancesModificationResult
+	ModificationResults []ReservedInstancesModificationResult
 
 	// The IDs of one or more Reserved Instances.
-	ReservedInstancesIds []*ReservedInstancesId
+	ReservedInstancesIds []ReservedInstancesId
 
 	// A unique ID for the Reserved Instance modification.
 	ReservedInstancesModificationId *string
@@ -7103,10 +7103,10 @@ type ReservedInstancesOffering struct {
 	CurrencyCode CurrencyCodeValues
 
 	// The duration of the Reserved Instance, in seconds.
-	Duration *int64
+	Duration int64
 
 	// The purchase price of the Reserved Instance.
-	FixedPrice *float32
+	FixedPrice float32
 
 	// The tenancy of the instance.
 	InstanceTenancy Tenancy
@@ -7117,7 +7117,7 @@ type ReservedInstancesOffering struct {
 	// Indicates whether the offering is available through the Reserved Instance
 	// Marketplace (resale) or AWS. If it's a Reserved Instance Marketplace offering,
 	// this is true.
-	Marketplace *bool
+	Marketplace bool
 
 	// If convertible it can be exchanged for Reserved Instances of the same or higher
 	// monetary value, with different configurations. If standard, it is not possible
@@ -7128,13 +7128,13 @@ type ReservedInstancesOffering struct {
 	OfferingType OfferingTypeValues
 
 	// The pricing details of the Reserved Instance offering.
-	PricingDetails []*PricingDetail
+	PricingDetails []PricingDetail
 
 	// The Reserved Instance product platform description.
 	ProductDescription RIProductDescription
 
 	// The recurring charge tag assigned to the resource.
-	RecurringCharges []*RecurringCharge
+	RecurringCharges []RecurringCharge
 
 	// The ID of the Reserved Instance offering. This is the offering ID used in
 	// GetReservedInstancesExchangeQuote to confirm that an exchange can be made.
@@ -7145,7 +7145,7 @@ type ReservedInstancesOffering struct {
 	Scope Scope
 
 	// The usage price of the Reserved Instance, per hour.
-	UsagePrice *float32
+	UsagePrice float32
 }
 
 // Describes the error that's returned when you cannot delete a launch template
@@ -7163,7 +7163,7 @@ type ResponseError struct {
 type ResponseLaunchTemplateData struct {
 
 	// The block device mappings.
-	BlockDeviceMappings []*LaunchTemplateBlockDeviceMapping
+	BlockDeviceMappings []LaunchTemplateBlockDeviceMapping
 
 	// Information about the Capacity Reservation targeting option.
 	CapacityReservationSpecification *LaunchTemplateCapacityReservationSpecificationResponse
@@ -7179,16 +7179,16 @@ type ResponseLaunchTemplateData struct {
 
 	// If set to true, indicates that the instance cannot be terminated using the
 	// Amazon EC2 console, command line tool, or API.
-	DisableApiTermination *bool
+	DisableApiTermination bool
 
 	// Indicates whether the instance is optimized for Amazon EBS I/O.
-	EbsOptimized *bool
+	EbsOptimized bool
 
 	// The elastic GPU specification.
-	ElasticGpuSpecifications []*ElasticGpuSpecificationResponse
+	ElasticGpuSpecifications []ElasticGpuSpecificationResponse
 
 	// The elastic inference accelerator for the instance.
-	ElasticInferenceAccelerators []*LaunchTemplateElasticInferenceAcceleratorResponse
+	ElasticInferenceAccelerators []LaunchTemplateElasticInferenceAcceleratorResponse
 
 	// Indicates whether the instance is enabled for AWS Nitro Enclaves.
 	EnclaveOptions *LaunchTemplateEnclaveOptions
@@ -7222,7 +7222,7 @@ type ResponseLaunchTemplateData struct {
 	KeyName *string
 
 	// The license configurations.
-	LicenseSpecifications []*LaunchTemplateLicenseConfiguration
+	LicenseSpecifications []LaunchTemplateLicenseConfiguration
 
 	// The metadata options for the instance. For more information, see Instance
 	// Metadata and User Data
@@ -7234,7 +7234,7 @@ type ResponseLaunchTemplateData struct {
 	Monitoring *LaunchTemplatesMonitoring
 
 	// The network interfaces.
-	NetworkInterfaces []*LaunchTemplateInstanceNetworkInterfaceSpecification
+	NetworkInterfaces []LaunchTemplateInstanceNetworkInterfaceSpecification
 
 	// The placement of the instance.
 	Placement *LaunchTemplatePlacement
@@ -7243,13 +7243,13 @@ type ResponseLaunchTemplateData struct {
 	RamDiskId *string
 
 	// The security group IDs.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The security group names.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// The tags.
-	TagSpecifications []*LaunchTemplateTagSpecification
+	TagSpecifications []LaunchTemplateTagSpecification
 
 	// The user data for the instance.
 	UserData *string
@@ -7319,22 +7319,22 @@ type Route struct {
 type RouteTable struct {
 
 	// The associations between the route table and one or more subnets or a gateway.
-	Associations []*RouteTableAssociation
+	Associations []RouteTableAssociation
 
 	// The ID of the AWS account that owns the route table.
 	OwnerId *string
 
 	// Any virtual private gateway (VGW) propagating routes.
-	PropagatingVgws []*PropagatingVgw
+	PropagatingVgws []PropagatingVgw
 
 	// The ID of the route table.
 	RouteTableId *string
 
 	// The routes in the route table.
-	Routes []*Route
+	Routes []Route
 
 	// Any tags assigned to the route table.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the VPC.
 	VpcId *string
@@ -7350,7 +7350,7 @@ type RouteTableAssociation struct {
 	GatewayId *string
 
 	// Indicates whether this is the main route table.
-	Main *bool
+	Main bool
 
 	// The ID of the association.
 	RouteTableAssociationId *string
@@ -7380,7 +7380,7 @@ type RunInstancesMonitoringEnabled struct {
 	// enabled.
 	//
 	// This member is required.
-	Enabled *bool
+	Enabled bool
 }
 
 // Describes the storage parameters for S3 and S3 buckets for an instance
@@ -7422,7 +7422,7 @@ type ScheduledInstance struct {
 	HourlyPrice *string
 
 	// The number of instances.
-	InstanceCount *int32
+	InstanceCount int32
 
 	// The instance type.
 	InstanceType *string
@@ -7446,7 +7446,7 @@ type ScheduledInstance struct {
 	ScheduledInstanceId *string
 
 	// The number of hours in the schedule.
-	SlotDurationInHours *int32
+	SlotDurationInHours int32
 
 	// The end date for the Scheduled Instance.
 	TermEndDate *time.Time
@@ -7455,7 +7455,7 @@ type ScheduledInstance struct {
 	TermStartDate *time.Time
 
 	// The total number of hours for a single instance for the entire term.
-	TotalScheduledInstanceHours *int32
+	TotalScheduledInstanceHours int32
 }
 
 // Describes a schedule that is available for your Scheduled Instances.
@@ -7465,7 +7465,7 @@ type ScheduledInstanceAvailability struct {
 	AvailabilityZone *string
 
 	// The number of available instances.
-	AvailableInstanceCount *int32
+	AvailableInstanceCount int32
 
 	// The time period for the first schedule to start.
 	FirstSlotStartTime *time.Time
@@ -7477,10 +7477,10 @@ type ScheduledInstanceAvailability struct {
 	InstanceType *string
 
 	// The maximum term. The only possible value is 365 days.
-	MaxTermDurationInDays *int32
+	MaxTermDurationInDays int32
 
 	// The minimum term. The only possible value is 365 days.
-	MinTermDurationInDays *int32
+	MinTermDurationInDays int32
 
 	// The network platform (EC2-Classic or EC2-VPC).
 	NetworkPlatform *string
@@ -7495,10 +7495,10 @@ type ScheduledInstanceAvailability struct {
 	Recurrence *ScheduledInstanceRecurrence
 
 	// The number of hours in the schedule.
-	SlotDurationInHours *int32
+	SlotDurationInHours int32
 
 	// The total number of hours for a single instance for the entire term.
-	TotalScheduledInstanceHours *int32
+	TotalScheduledInstanceHours int32
 }
 
 // Describes the recurring schedule for a Scheduled Instance.
@@ -7509,16 +7509,16 @@ type ScheduledInstanceRecurrence struct {
 
 	// The interval quantity. The interval unit depends on the value of frequency. For
 	// example, every 2 weeks or every 2 months.
-	Interval *int32
+	Interval int32
 
 	// The days. For a monthly schedule, this is one or more days of the month (1-31).
 	// For a weekly schedule, this is one or more days of the week (1-7, where 1 is
 	// Sunday).
-	OccurrenceDaySet []*int32
+	OccurrenceDaySet []int32
 
 	// Indicates whether the occurrence is relative to the end of the specified week or
 	// month.
-	OccurrenceRelativeToEnd *bool
+	OccurrenceRelativeToEnd bool
 
 	// The unit for occurrenceDaySet (DayOfWeek or DayOfMonth).
 	OccurrenceUnit *string
@@ -7532,17 +7532,17 @@ type ScheduledInstanceRecurrenceRequest struct {
 
 	// The interval quantity. The interval unit depends on the value of Frequency. For
 	// example, every 2 weeks or every 2 months.
-	Interval *int32
+	Interval int32
 
 	// The days. For a monthly schedule, this is one or more days of the month (1-31).
 	// For a weekly schedule, this is one or more days of the week (1-7, where 1 is
 	// Sunday). You can't specify this value with a daily schedule. If the occurrence
 	// is relative to the end of the month, you can specify only a single day.
-	OccurrenceDays []*int32
+	OccurrenceDays []int32
 
 	// Indicates whether the occurrence is relative to the end of the specified week or
 	// month. You can't specify this value with a daily schedule.
-	OccurrenceRelativeToEnd *bool
+	OccurrenceRelativeToEnd bool
 
 	// The unit for OccurrenceDays (DayOfWeek or DayOfMonth). This value is required
 	// for a monthly schedule. You can't specify DayOfWeek with a weekly schedule. You
@@ -7578,11 +7578,11 @@ type ScheduledInstancesBlockDeviceMapping struct {
 type ScheduledInstancesEbs struct {
 
 	// Indicates whether the volume is deleted on instance termination.
-	DeleteOnTermination *bool
+	DeleteOnTermination bool
 
 	// Indicates whether the volume is encrypted. You can attached encrypted volumes
 	// only to instances that support them.
-	Encrypted *bool
+	Encrypted bool
 
 	// The number of I/O operations per second (IOPS) to provision for an io1 or io2
 	// volume, with a maximum ratio of 50 IOPS/GiB for io1, and 500 IOPS/GiB for io2.
@@ -7594,14 +7594,14 @@ type ScheduledInstancesEbs struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
 	// Amazon Elastic Compute Cloud User Guide. This parameter is valid only for
 	// Provisioned IOPS SSD (io1 and io2) volumes.
-	Iops *int32
+	Iops int32
 
 	// The ID of the snapshot.
 	SnapshotId *string
 
 	// The size of the volume, in GiB. Default: If you're creating the volume from a
 	// snapshot and don't specify a volume size, the default is the snapshot size.
-	VolumeSize *int32
+	VolumeSize int32
 
 	// The volume type. gp2 for General Purpose SSD, io1 or  io2 for Provisioned IOPS
 	// SSD, Throughput Optimized HDD for st1, Cold HDD for sc1, or standard for
@@ -7637,14 +7637,14 @@ type ScheduledInstancesLaunchSpecification struct {
 	ImageId *string
 
 	// The block device mapping entries.
-	BlockDeviceMappings []*ScheduledInstancesBlockDeviceMapping
+	BlockDeviceMappings []ScheduledInstancesBlockDeviceMapping
 
 	// Indicates whether the instances are optimized for EBS I/O. This optimization
 	// provides dedicated throughput to Amazon EBS and an optimized configuration stack
 	// to provide optimal EBS I/O performance. This optimization isn't available with
 	// all instance types. Additional usage charges apply when using an EBS-optimized
 	// instance. Default: false
-	EbsOptimized *bool
+	EbsOptimized bool
 
 	// The IAM instance profile.
 	IamInstanceProfile *ScheduledInstancesIamInstanceProfile
@@ -7662,7 +7662,7 @@ type ScheduledInstancesLaunchSpecification struct {
 	Monitoring *ScheduledInstancesMonitoring
 
 	// The network interfaces.
-	NetworkInterfaces []*ScheduledInstancesNetworkInterface
+	NetworkInterfaces []ScheduledInstancesNetworkInterface
 
 	// The placement information.
 	Placement *ScheduledInstancesPlacement
@@ -7671,7 +7671,7 @@ type ScheduledInstancesLaunchSpecification struct {
 	RamdiskId *string
 
 	// The IDs of the security groups.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The ID of the subnet in which to launch the instances.
 	SubnetId *string
@@ -7684,7 +7684,7 @@ type ScheduledInstancesLaunchSpecification struct {
 type ScheduledInstancesMonitoring struct {
 
 	// Indicates whether monitoring is enabled.
-	Enabled *bool
+	Enabled bool
 }
 
 // Describes a network interface for a Scheduled Instance.
@@ -7695,26 +7695,26 @@ type ScheduledInstancesNetworkInterface struct {
 	// eth0, and can only be assigned to a new network interface, not an existing one.
 	// You cannot specify more than one network interface in the request. If launching
 	// into a default subnet, the default value is true.
-	AssociatePublicIpAddress *bool
+	AssociatePublicIpAddress bool
 
 	// Indicates whether to delete the interface when the instance is terminated.
-	DeleteOnTermination *bool
+	DeleteOnTermination bool
 
 	// The description.
 	Description *string
 
 	// The index of the device for the network interface attachment.
-	DeviceIndex *int32
+	DeviceIndex int32
 
 	// The IDs of the security groups.
-	Groups []*string
+	Groups []string
 
 	// The number of IPv6 addresses to assign to the network interface. The IPv6
 	// addresses are automatically selected from the subnet range.
-	Ipv6AddressCount *int32
+	Ipv6AddressCount int32
 
 	// The specific IPv6 addresses from the subnet range.
-	Ipv6Addresses []*ScheduledInstancesIpv6Address
+	Ipv6Addresses []ScheduledInstancesIpv6Address
 
 	// The ID of the network interface.
 	NetworkInterfaceId *string
@@ -7723,10 +7723,10 @@ type ScheduledInstancesNetworkInterface struct {
 	PrivateIpAddress *string
 
 	// The private IPv4 addresses.
-	PrivateIpAddressConfigs []*ScheduledInstancesPrivateIpAddressConfig
+	PrivateIpAddressConfigs []ScheduledInstancesPrivateIpAddressConfig
 
 	// The number of secondary private IPv4 addresses.
-	SecondaryPrivateIpAddressCount *int32
+	SecondaryPrivateIpAddressCount int32
 
 	// The ID of the subnet.
 	SubnetId *string
@@ -7747,7 +7747,7 @@ type ScheduledInstancesPrivateIpAddressConfig struct {
 
 	// Indicates whether this is a primary IPv4 address. Otherwise, this is a secondary
 	// IPv4 address.
-	Primary *bool
+	Primary bool
 
 	// The IPv4 address.
 	PrivateIpAddress *string
@@ -7766,16 +7766,16 @@ type SecurityGroup struct {
 	GroupName *string
 
 	// The inbound rules associated with the security group.
-	IpPermissions []*IpPermission
+	IpPermissions []IpPermission
 
 	// [VPC only] The outbound rules associated with the security group.
-	IpPermissionsEgress []*IpPermission
+	IpPermissionsEgress []IpPermission
 
 	// The AWS account ID of the owner of the security group.
 	OwnerId *string
 
 	// Any tags assigned to the security group.
-	Tags []*Tag
+	Tags []Tag
 
 	// [VPC only] The ID of the VPC for the security group.
 	VpcId *string
@@ -7809,20 +7809,20 @@ type ServiceConfiguration struct {
 
 	// Indicates whether requests from other AWS accounts to create an endpoint to the
 	// service must first be accepted.
-	AcceptanceRequired *bool
+	AcceptanceRequired bool
 
 	// The Availability Zones in which the service is available.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// The DNS names for the service.
-	BaseEndpointDnsNames []*string
+	BaseEndpointDnsNames []string
 
 	// Indicates whether the service manages its VPC endpoints. Management of the
 	// service VPC endpoints using the VPC endpoint API is restricted.
-	ManagesVpcEndpoints *bool
+	ManagesVpcEndpoints bool
 
 	// The Amazon Resource Names (ARNs) of the Network Load Balancers for the service.
-	NetworkLoadBalancerArns []*string
+	NetworkLoadBalancerArns []string
 
 	// The private DNS name for the service.
 	PrivateDnsName *string
@@ -7840,10 +7840,10 @@ type ServiceConfiguration struct {
 	ServiceState ServiceState
 
 	// The type of service.
-	ServiceType []*ServiceTypeDetail
+	ServiceType []ServiceTypeDetail
 
 	// Any tags assigned to the service.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes a VPC endpoint service.
@@ -7851,17 +7851,17 @@ type ServiceDetail struct {
 
 	// Indicates whether VPC endpoint connection requests to the service must be
 	// accepted by the service owner.
-	AcceptanceRequired *bool
+	AcceptanceRequired bool
 
 	// The Availability Zones in which the service is available.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// The DNS names for the service.
-	BaseEndpointDnsNames []*string
+	BaseEndpointDnsNames []string
 
 	// Indicates whether the service manages its VPC endpoints. Management of the
 	// service VPC endpoints using the VPC endpoint API is restricted.
-	ManagesVpcEndpoints *bool
+	ManagesVpcEndpoints bool
 
 	// The AWS account ID of the service owner.
 	Owner *string
@@ -7880,13 +7880,13 @@ type ServiceDetail struct {
 	ServiceName *string
 
 	// The type of service.
-	ServiceType []*ServiceTypeDetail
+	ServiceType []ServiceTypeDetail
 
 	// Any tags assigned to the service.
-	Tags []*Tag
+	Tags []Tag
 
 	// Indicates whether the service supports endpoint policies.
-	VpcEndpointPolicySupported *bool
+	VpcEndpointPolicySupported bool
 }
 
 // Describes the type of service for a VPC endpoint.
@@ -7938,7 +7938,7 @@ type Snapshot struct {
 	Description *string
 
 	// Indicates whether the snapshot is encrypted.
-	Encrypted *bool
+	Encrypted bool
 
 	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
 	// customer master key (CMK) that was used to protect the volume encryption key for
@@ -7975,7 +7975,7 @@ type Snapshot struct {
 	StateMessage *string
 
 	// Any tags assigned to the snapshot.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the volume that was used to create the snapshot. Snapshots created by
 	// the CopySnapshot action have an arbitrary volume ID that should not be used for
@@ -7983,7 +7983,7 @@ type Snapshot struct {
 	VolumeId *string
 
 	// The size of the volume, in GiB.
-	VolumeSize *int32
+	VolumeSize int32
 }
 
 // Describes the snapshot created from the imported disk.
@@ -7996,7 +7996,7 @@ type SnapshotDetail struct {
 	DeviceName *string
 
 	// The size of the disk in the snapshot, in GiB.
-	DiskImageSize *float64
+	DiskImageSize float64
 
 	// The format of the disk image from which the snapshot is created.
 	Format *string
@@ -8045,7 +8045,7 @@ type SnapshotInfo struct {
 	Description *string
 
 	// Indicates whether the snapshot is encrypted.
-	Encrypted *bool
+	Encrypted bool
 
 	// Account id used when creating this snapshot.
 	OwnerId *string
@@ -8064,13 +8064,13 @@ type SnapshotInfo struct {
 	State SnapshotState
 
 	// Tags associated with this snapshot.
-	Tags []*Tag
+	Tags []Tag
 
 	// Source volume from which this snapshot was created.
 	VolumeId *string
 
 	// Size of the volume from which this snapshot was created.
-	VolumeSize *int32
+	VolumeSize int32
 }
 
 // Details about the import snapshot task.
@@ -8080,10 +8080,10 @@ type SnapshotTaskDetail struct {
 	Description *string
 
 	// The size of the disk in the snapshot, in GiB.
-	DiskImageSize *float64
+	DiskImageSize float64
 
 	// Indicates whether the snapshot is encrypted.
-	Encrypted *bool
+	Encrypted bool
 
 	// The format of the disk image from which the snapshot is created.
 	Format *string
@@ -8145,14 +8145,14 @@ type SpotFleetLaunchSpecification struct {
 	// volumes can be encrypted on creation. If a snapshot is the basis for a volume,
 	// it is not blank and its encryption status is used for the volume encryption
 	// status.
-	BlockDeviceMappings []*BlockDeviceMapping
+	BlockDeviceMappings []BlockDeviceMapping
 
 	// Indicates whether the instances are optimized for EBS I/O. This optimization
 	// provides dedicated throughput to Amazon EBS and an optimized configuration stack
 	// to provide optimal EBS I/O performance. This optimization isn't available with
 	// all instance types. Additional usage charges apply when using an EBS Optimized
 	// instance. Default: false
-	EbsOptimized *bool
+	EbsOptimized bool
 
 	// The IAM instance profile.
 	IamInstanceProfile *IamInstanceProfileSpecification
@@ -8177,7 +8177,7 @@ type SpotFleetLaunchSpecification struct {
 	// SpotFleetLaunchSpecification currently does not support Elastic Fabric Adapter
 	// (EFA). To specify an EFA, you must use LaunchTemplateConfig
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_LaunchTemplateConfig.html).
-	NetworkInterfaces []*InstanceNetworkInterfaceSpecification
+	NetworkInterfaces []InstanceNetworkInterfaceSpecification
 
 	// The placement information.
 	Placement *SpotPlacement
@@ -8191,7 +8191,7 @@ type SpotFleetLaunchSpecification struct {
 	// One or more security groups. When requesting instances in a VPC, you must
 	// specify the IDs of the security groups. When requesting instances in
 	// EC2-Classic, you can specify the names or the IDs of the security groups.
-	SecurityGroups []*GroupIdentifier
+	SecurityGroups []GroupIdentifier
 
 	// The maximum price per unit hour that you are willing to pay for a Spot Instance.
 	// If this value is not specified, the default is the Spot price specified for the
@@ -8205,7 +8205,7 @@ type SpotFleetLaunchSpecification struct {
 	SubnetId *string
 
 	// The tags to apply during creation.
-	TagSpecifications []*SpotFleetTagSpecification
+	TagSpecifications []SpotFleetTagSpecification
 
 	// The Base64-encoded user data that instances use when starting up.
 	UserData *string
@@ -8216,14 +8216,14 @@ type SpotFleetLaunchSpecification struct {
 	// divided by this value is not a whole number, Amazon EC2 rounds the number of
 	// instances to the next whole number. If this value is not specified, the default
 	// is 1.
-	WeightedCapacity *float64
+	WeightedCapacity float64
 }
 
 // Describes whether monitoring is enabled.
 type SpotFleetMonitoring struct {
 
 	// Enables monitoring for the instance. Default: false
-	Enabled *bool
+	Enabled bool
 }
 
 // Describes a Spot Fleet request.
@@ -8249,7 +8249,7 @@ type SpotFleetRequestConfig struct {
 	SpotFleetRequestState BatchState
 
 	// The tags for a Spot Fleet resource.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes the configuration of a Spot Fleet request.
@@ -8277,7 +8277,7 @@ type SpotFleetRequestConfigData struct {
 	// capacity later.
 	//
 	// This member is required.
-	TargetCapacity *int32
+	TargetCapacity int32
 
 	// Indicates how to allocate the target Spot Instance capacity across the Spot
 	// Instance pools specified by the Spot Fleet request. If the allocation strategy
@@ -8302,7 +8302,7 @@ type SpotFleetRequestConfigData struct {
 
 	// The number of units fulfilled by this request compared to the set target
 	// capacity. You cannot set this value.
-	FulfilledCapacity *float64
+	FulfilledCapacity float64
 
 	// The behavior when a Spot Instance is interrupted. The default is terminate.
 	InstanceInterruptionBehavior InstanceInterruptionBehavior
@@ -8311,17 +8311,17 @@ type SpotFleetRequestConfigData struct {
 	// Valid only when Spot AllocationStrategy is set to lowest-price. Spot Fleet
 	// selects the cheapest Spot pools and evenly allocates your target Spot capacity
 	// across the number of Spot pools that you specify.
-	InstancePoolsToUseCount *int32
+	InstancePoolsToUseCount int32
 
 	// The launch specifications for the Spot Fleet request. If you specify
 	// LaunchSpecifications, you can't specify LaunchTemplateConfigs. If you include
 	// On-Demand capacity in your request, you must use LaunchTemplateConfigs.
-	LaunchSpecifications []*SpotFleetLaunchSpecification
+	LaunchSpecifications []SpotFleetLaunchSpecification
 
 	// The launch template and overrides. If you specify LaunchTemplateConfigs, you
 	// can't specify LaunchSpecifications. If you include On-Demand capacity in your
 	// request, you must use LaunchTemplateConfigs.
-	LaunchTemplateConfigs []*LaunchTemplateConfig
+	LaunchTemplateConfigs []LaunchTemplateConfig
 
 	// One or more Classic Load Balancers and target groups to attach to the Spot Fleet
 	// request. Spot Fleet registers the running Spot Instances with the specified
@@ -8340,7 +8340,7 @@ type SpotFleetRequestConfigData struct {
 
 	// The number of On-Demand units fulfilled by this request compared to the set
 	// target On-Demand capacity.
-	OnDemandFulfilledCapacity *float64
+	OnDemandFulfilledCapacity float64
 
 	// The maximum amount per hour for On-Demand Instances that you're willing to pay.
 	// You can use the onDemandMaxTotalPrice parameter, the spotMaxTotalPrice
@@ -8356,10 +8356,10 @@ type SpotFleetRequestConfigData struct {
 	// capacity in terms of instances or a performance characteristic that is important
 	// to your application workload, such as vCPUs, memory, or I/O. If the request type
 	// is maintain, you can specify a target capacity of 0 and add capacity later.
-	OnDemandTargetCapacity *int32
+	OnDemandTargetCapacity int32
 
 	// Indicates whether Spot Fleet should replace unhealthy instances.
-	ReplaceUnhealthyInstances *bool
+	ReplaceUnhealthyInstances bool
 
 	// The maximum amount per hour for Spot Instances that you're willing to pay. You
 	// can use the spotdMaxTotalPrice parameter, the onDemandMaxTotalPrice parameter,
@@ -8385,11 +8385,11 @@ type SpotFleetRequestConfigData struct {
 	// (valid only if you use LaunchSpecifications). For information about tagging
 	// after launch, see Tagging Your Resources
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources).
-	TagSpecifications []*TagSpecification
+	TagSpecifications []TagSpecification
 
 	// Indicates whether running Spot Instances are terminated when the Spot Fleet
 	// request expires.
-	TerminateInstancesWithExpiration *bool
+	TerminateInstancesWithExpiration bool
 
 	// The type of request. Indicates whether the Spot Fleet only requests the target
 	// capacity or also attempts to maintain it. When this value is request, the Spot
@@ -8422,7 +8422,7 @@ type SpotFleetTagSpecification struct {
 	ResourceType ResourceType
 
 	// The tags.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes a Spot Instance request.
@@ -8438,7 +8438,7 @@ type SpotInstanceRequest struct {
 	AvailabilityZoneGroup *string
 
 	// The duration for the Spot Instance, in minutes.
-	BlockDurationMinutes *int32
+	BlockDurationMinutes int32
 
 	// The date and time when the Spot Instance request was created, in UTC format (for
 	// example, YYYY-MM-DDTHH:MM:SSZ).
@@ -8483,7 +8483,7 @@ type SpotInstanceRequest struct {
 	Status *SpotInstanceStatus
 
 	// Any tags assigned to the resource.
-	Tags []*Tag
+	Tags []Tag
 
 	// The Spot Instance request type.
 	Type SpotInstanceType
@@ -8543,7 +8543,7 @@ type SpotMarketOptions struct {
 	// Availability Zone group or a launch group if you specify a duration. New
 	// accounts or accounts with no previous billing history with AWS are not eligible
 	// for Spot Instances with a defined duration (also known as Spot blocks).
-	BlockDurationMinutes *int32
+	BlockDurationMinutes int32
 
 	// The behavior when a Spot Instance is interrupted. The default is terminate.
 	InstanceInterruptionBehavior InstanceInterruptionBehavior
@@ -8591,22 +8591,22 @@ type SpotOptions struct {
 	// Valid only when AllocationStrategy is set to lowest-price. EC2 Fleet selects the
 	// cheapest Spot pools and evenly allocates your target Spot capacity across the
 	// number of Spot pools that you specify.
-	InstancePoolsToUseCount *int32
+	InstancePoolsToUseCount int32
 
 	// The maximum amount per hour for Spot Instances that you're willing to pay.
 	MaxTotalPrice *string
 
 	// The minimum target capacity for Spot Instances in the fleet. If the minimum
 	// target capacity is not reached, the fleet launches no instances.
-	MinTargetCapacity *int32
+	MinTargetCapacity int32
 
 	// Indicates that the fleet launches all Spot Instances into a single Availability
 	// Zone. Supported only for fleets of type instant.
-	SingleAvailabilityZone *bool
+	SingleAvailabilityZone bool
 
 	// Indicates that the fleet uses a single instance type to launch all Spot
 	// Instances in the fleet. Supported only for fleets of type instant.
-	SingleInstanceType *bool
+	SingleInstanceType bool
 }
 
 // Describes the configuration of Spot Instances in an EC2 Fleet request.
@@ -8629,22 +8629,22 @@ type SpotOptionsRequest struct {
 	// Valid only when Spot AllocationStrategy is set to lowest-price. EC2 Fleet
 	// selects the cheapest Spot pools and evenly allocates your target Spot capacity
 	// across the number of Spot pools that you specify.
-	InstancePoolsToUseCount *int32
+	InstancePoolsToUseCount int32
 
 	// The maximum amount per hour for Spot Instances that you're willing to pay.
 	MaxTotalPrice *string
 
 	// The minimum target capacity for Spot Instances in the fleet. If the minimum
 	// target capacity is not reached, the fleet launches no instances.
-	MinTargetCapacity *int32
+	MinTargetCapacity int32
 
 	// Indicates that the fleet launches all Spot Instances into a single Availability
 	// Zone. Supported only for fleets of type instant.
-	SingleAvailabilityZone *bool
+	SingleAvailabilityZone bool
 
 	// Indicates that the fleet uses a single instance type to launch all Spot
 	// Instances in the fleet. Supported only for fleets of type instant.
-	SingleInstanceType *bool
+	SingleInstanceType bool
 }
 
 // Describes Spot Instance placement.
@@ -8689,25 +8689,25 @@ type StaleIpPermission struct {
 
 	// The start of the port range for the TCP and UDP protocols, or an ICMP type
 	// number. A value of -1 indicates all ICMP types.
-	FromPort *int32
+	FromPort int32
 
 	// The IP protocol name (for tcp, udp, and icmp) or number (see Protocol Numbers)
 	// (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml).
 	IpProtocol *string
 
 	// The IP ranges. Not applicable for stale security group rules.
-	IpRanges []*string
+	IpRanges []string
 
 	// The prefix list IDs. Not applicable for stale security group rules.
-	PrefixListIds []*string
+	PrefixListIds []string
 
 	// The end of the port range for the TCP and UDP protocols, or an ICMP type number.
 	// A value of -1 indicates all ICMP types.
-	ToPort *int32
+	ToPort int32
 
 	// The security group pairs. Returns the ID of the referenced security group and
 	// VPC, and the ID and status of the VPC peering connection.
-	UserIdGroupPairs []*UserIdGroupPair
+	UserIdGroupPairs []UserIdGroupPair
 }
 
 // Describes a stale security group (a security group that contains stale rules).
@@ -8723,10 +8723,10 @@ type StaleSecurityGroup struct {
 	GroupName *string
 
 	// Information about the stale inbound rules in the security group.
-	StaleIpPermissions []*StaleIpPermission
+	StaleIpPermissions []StaleIpPermission
 
 	// Information about the stale outbound rules in the security group.
-	StaleIpPermissionsEgress []*StaleIpPermission
+	StaleIpPermissionsEgress []StaleIpPermission
 
 	// The ID of the VPC for the security group.
 	VpcId *string
@@ -8807,7 +8807,7 @@ type Subnet struct {
 
 	// Indicates whether a network interface created in this subnet (including a
 	// network interface created by RunInstances) receives an IPv6 address.
-	AssignIpv6AddressOnCreation *bool
+	AssignIpv6AddressOnCreation bool
 
 	// The Availability Zone of the subnet.
 	AvailabilityZone *string
@@ -8817,7 +8817,7 @@ type Subnet struct {
 
 	// The number of unused private IPv4 addresses in the subnet. The IPv4 addresses
 	// for any stopped instances are considered unavailable.
-	AvailableIpAddressCount *int32
+	AvailableIpAddressCount int32
 
 	// The IPv4 CIDR block assigned to the subnet.
 	CidrBlock *string
@@ -8826,19 +8826,19 @@ type Subnet struct {
 	CustomerOwnedIpv4Pool *string
 
 	// Indicates whether this is the default subnet for the Availability Zone.
-	DefaultForAz *bool
+	DefaultForAz bool
 
 	// Information about the IPv6 CIDR blocks associated with the subnet.
-	Ipv6CidrBlockAssociationSet []*SubnetIpv6CidrBlockAssociation
+	Ipv6CidrBlockAssociationSet []SubnetIpv6CidrBlockAssociation
 
 	// Indicates whether a network interface created in this subnet (including a
 	// network interface created by RunInstances) receives a customer-owned IPv4
 	// address.
-	MapCustomerOwnedIpOnLaunch *bool
+	MapCustomerOwnedIpOnLaunch bool
 
 	// Indicates whether instances launched in this subnet receive a public IPv4
 	// address.
-	MapPublicIpOnLaunch *bool
+	MapPublicIpOnLaunch bool
 
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
@@ -8856,7 +8856,7 @@ type Subnet struct {
 	SubnetId *string
 
 	// Any tags assigned to the subnet.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the VPC the subnet is in.
 	VpcId *string
@@ -8958,7 +8958,7 @@ type TagSpecification struct {
 	ResourceType ResourceType
 
 	// The tags to apply to the resource.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // The number of units to request. You can choose to set the target capacity in
@@ -8983,14 +8983,14 @@ type TargetCapacitySpecification struct {
 
 	// The number of On-Demand units to request. If you specify a target capacity for
 	// Spot units, you cannot specify a target capacity for On-Demand units.
-	OnDemandTargetCapacity *int32
+	OnDemandTargetCapacity int32
 
 	// The maximum number of Spot units to launch. If you specify a target capacity for
 	// On-Demand units, you cannot specify a target capacity for Spot units.
-	SpotTargetCapacity *int32
+	SpotTargetCapacity int32
 
 	// The number of units to request, filled using DefaultTargetCapacityType.
-	TotalTargetCapacity *int32
+	TotalTargetCapacity int32
 }
 
 // The number of units to request. You can choose to set the target capacity as the
@@ -9013,16 +9013,16 @@ type TargetCapacitySpecificationRequest struct {
 	// The number of units to request, filled using DefaultTargetCapacityType.
 	//
 	// This member is required.
-	TotalTargetCapacity *int32
+	TotalTargetCapacity int32
 
 	// The default TotalTargetCapacity, which is either Spot or On-Demand.
 	DefaultTargetCapacityType DefaultTargetCapacityType
 
 	// The number of On-Demand units to request.
-	OnDemandTargetCapacity *int32
+	OnDemandTargetCapacity int32
 
 	// The number of Spot units to request.
-	SpotTargetCapacity *int32
+	SpotTargetCapacity int32
 }
 
 // Information about the Convertible Reserved Instance offering.
@@ -9030,7 +9030,7 @@ type TargetConfiguration struct {
 
 	// The number of instances the Convertible Reserved Instance offering can be
 	// applied to. This parameter is reserved and cannot be specified in a request
-	InstanceCount *int32
+	InstanceCount int32
 
 	// The ID of the Convertible Reserved Instance offering.
 	OfferingId *string
@@ -9046,7 +9046,7 @@ type TargetConfigurationRequest struct {
 
 	// The number of instances the Covertible Reserved Instance offering can be applied
 	// to. This parameter is reserved and cannot be specified in a request
-	InstanceCount *int32
+	InstanceCount int32
 }
 
 // Describes a load balancer target group.
@@ -9061,7 +9061,7 @@ type TargetGroup struct {
 type TargetGroupsConfig struct {
 
 	// One or more target groups.
-	TargetGroups []*TargetGroup
+	TargetGroups []TargetGroup
 }
 
 // Describes a target network associated with a Client VPN endpoint.
@@ -9074,7 +9074,7 @@ type TargetNetwork struct {
 	ClientVpnEndpointId *string
 
 	// The IDs of the security groups applied to the target network association.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// The current state of the target network association.
 	Status *AssociationStatus
@@ -9120,17 +9120,17 @@ type TrafficMirrorFilter struct {
 
 	// Information about the egress rules that are associated with the Traffic Mirror
 	// filter.
-	EgressFilterRules []*TrafficMirrorFilterRule
+	EgressFilterRules []TrafficMirrorFilterRule
 
 	// Information about the ingress rules that are associated with the Traffic Mirror
 	// filter.
-	IngressFilterRules []*TrafficMirrorFilterRule
+	IngressFilterRules []TrafficMirrorFilterRule
 
 	// The network service traffic that is associated with the Traffic Mirror filter.
 	NetworkServices []TrafficMirrorNetworkService
 
 	// The tags assigned to the Traffic Mirror filter.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the Traffic Mirror filter.
 	TrafficMirrorFilterId *string
@@ -9149,13 +9149,13 @@ type TrafficMirrorFilterRule struct {
 	DestinationPortRange *TrafficMirrorPortRange
 
 	// The protocol assigned to the Traffic Mirror rule.
-	Protocol *int32
+	Protocol int32
 
 	// The action assigned to the Traffic Mirror rule.
 	RuleAction TrafficMirrorRuleAction
 
 	// The rule number of the Traffic Mirror rule.
-	RuleNumber *int32
+	RuleNumber int32
 
 	// The source CIDR block assigned to the Traffic Mirror rule.
 	SourceCidrBlock *string
@@ -9178,11 +9178,11 @@ type TrafficMirrorPortRange struct {
 
 	// The start of the Traffic Mirror port range. This applies to the TCP and UDP
 	// protocols.
-	FromPort *int32
+	FromPort int32
 
 	// The end of the Traffic Mirror port range. This applies to the TCP and UDP
 	// protocols.
-	ToPort *int32
+	ToPort int32
 }
 
 // Information about the Traffic Mirror filter rule port range.
@@ -9190,11 +9190,11 @@ type TrafficMirrorPortRangeRequest struct {
 
 	// The first port in the Traffic Mirror port range. This applies to the TCP and UDP
 	// protocols.
-	FromPort *int32
+	FromPort int32
 
 	// The last port in the Traffic Mirror port range. This applies to the TCP and UDP
 	// protocols.
-	ToPort *int32
+	ToPort int32
 }
 
 // Describes a Traffic Mirror session.
@@ -9214,15 +9214,15 @@ type TrafficMirrorSession struct {
 	// For example, if you set this value to 100, then the first 100 bytes that meet
 	// the filter criteria are copied to the target. Do not specify this parameter when
 	// you want to mirror the entire packet
-	PacketLength *int32
+	PacketLength int32
 
 	// The session number determines the order in which sessions are evaluated when an
 	// interface is used by multiple sessions. The first session with a matching filter
 	// is the one that mirrors the packets. Valid values are 1-32766.
-	SessionNumber *int32
+	SessionNumber int32
 
 	// The tags assigned to the Traffic Mirror session.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the Traffic Mirror filter.
 	TrafficMirrorFilterId *string
@@ -9234,7 +9234,7 @@ type TrafficMirrorSession struct {
 	TrafficMirrorTargetId *string
 
 	// The virtual network ID associated with the Traffic Mirror session.
-	VirtualNetworkId *int32
+	VirtualNetworkId int32
 }
 
 // Describes a Traffic Mirror target.
@@ -9253,7 +9253,7 @@ type TrafficMirrorTarget struct {
 	OwnerId *string
 
 	// The tags assigned to the Traffic Mirror target.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the Traffic Mirror target.
 	TrafficMirrorTargetId *string
@@ -9281,7 +9281,7 @@ type TransitGateway struct {
 	State TransitGatewayState
 
 	// The tags for the transit gateway.
-	Tags []*Tag
+	Tags []Tag
 
 	// The Amazon Resource Name (ARN) of the transit gateway.
 	TransitGatewayArn *string
@@ -9332,7 +9332,7 @@ type TransitGatewayAttachment struct {
 	State TransitGatewayAttachmentState
 
 	// The tags for the attachment.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the attachment.
 	TransitGatewayAttachmentId *string
@@ -9368,7 +9368,7 @@ type TransitGatewayAttachmentPropagation struct {
 type TransitGatewayMulticastDeregisteredGroupMembers struct {
 
 	// The network interface IDs of the deregistered members.
-	DeregisteredNetworkInterfaceIds []*string
+	DeregisteredNetworkInterfaceIds []string
 
 	// The IP address assigned to the transit gateway multicast group.
 	GroupIpAddress *string
@@ -9381,7 +9381,7 @@ type TransitGatewayMulticastDeregisteredGroupMembers struct {
 type TransitGatewayMulticastDeregisteredGroupSources struct {
 
 	// The network interface IDs of the non-registered members.
-	DeregisteredNetworkInterfaceIds []*string
+	DeregisteredNetworkInterfaceIds []string
 
 	// The IP address assigned to the transit gateway multicast group.
 	GroupIpAddress *string
@@ -9400,7 +9400,7 @@ type TransitGatewayMulticastDomain struct {
 	State TransitGatewayMulticastDomainState
 
 	// The tags for the transit gateway multicast domain.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the transit gateway.
 	TransitGatewayId *string
@@ -9435,7 +9435,7 @@ type TransitGatewayMulticastDomainAssociations struct {
 	ResourceType TransitGatewayAttachmentResourceType
 
 	// The subnets associated with the multicast domain.
-	Subnets []*SubnetAssociation
+	Subnets []SubnetAssociation
 
 	// The ID of the transit gateway attachment.
 	TransitGatewayAttachmentId *string
@@ -9451,10 +9451,10 @@ type TransitGatewayMulticastGroup struct {
 	GroupIpAddress *string
 
 	// Indicates that the resource is a transit gateway multicast group member.
-	GroupMember *bool
+	GroupMember bool
 
 	// Indicates that the resource is a transit gateway multicast group member.
-	GroupSource *bool
+	GroupSource bool
 
 	// The member type (for example, static).
 	MemberType MembershipType
@@ -9485,7 +9485,7 @@ type TransitGatewayMulticastRegisteredGroupMembers struct {
 	GroupIpAddress *string
 
 	// The ID of the registered network interfaces.
-	RegisteredNetworkInterfaceIds []*string
+	RegisteredNetworkInterfaceIds []string
 
 	// The ID of the transit gateway multicast domain.
 	TransitGatewayMulticastDomainId *string
@@ -9499,7 +9499,7 @@ type TransitGatewayMulticastRegisteredGroupSources struct {
 
 	// The IDs of the network interfaces members registered with the transit gateway
 	// multicast group.
-	RegisteredNetworkInterfaceIds []*string
+	RegisteredNetworkInterfaceIds []string
 
 	// The ID of the transit gateway multicast domain.
 	TransitGatewayMulticastDomainId *string
@@ -9511,7 +9511,7 @@ type TransitGatewayOptions struct {
 	// A private Autonomous System Number (ASN) for the Amazon side of a BGP session.
 	// The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for
 	// 32-bit ASNs.
-	AmazonSideAsn *int64
+	AmazonSideAsn int64
 
 	// The ID of the default association route table.
 	AssociationDefaultRouteTableId *string
@@ -9560,7 +9560,7 @@ type TransitGatewayPeeringAttachment struct {
 	Status *PeeringAttachmentStatus
 
 	// The tags for the transit gateway peering attachment.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the transit gateway peering attachment.
 	TransitGatewayAttachmentId *string
@@ -9583,7 +9583,7 @@ type TransitGatewayPrefixListAttachment struct {
 type TransitGatewayPrefixListReference struct {
 
 	// Indicates whether traffic that matches this route is dropped.
-	Blackhole *bool
+	Blackhole bool
 
 	// The ID of the prefix list.
 	PrefixListId *string
@@ -9626,7 +9626,7 @@ type TransitGatewayRequestOptions struct {
 	// A private Autonomous System Number (ASN) for the Amazon side of a BGP session.
 	// The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for
 	// 32-bit ASNs. The default is 64512.
-	AmazonSideAsn *int64
+	AmazonSideAsn int64
 
 	// Enable or disable automatic acceptance of attachment requests. Disabled by
 	// default.
@@ -9663,7 +9663,7 @@ type TransitGatewayRoute struct {
 	State TransitGatewayRouteState
 
 	// The attachments.
-	TransitGatewayAttachments []*TransitGatewayRouteAttachment
+	TransitGatewayAttachments []TransitGatewayRouteAttachment
 
 	// The route type.
 	Type TransitGatewayRouteType
@@ -9690,17 +9690,17 @@ type TransitGatewayRouteTable struct {
 
 	// Indicates whether this is the default association route table for the transit
 	// gateway.
-	DefaultAssociationRouteTable *bool
+	DefaultAssociationRouteTable bool
 
 	// Indicates whether this is the default propagation route table for the transit
 	// gateway.
-	DefaultPropagationRouteTable *bool
+	DefaultPropagationRouteTable bool
 
 	// The state of the transit gateway route table.
 	State TransitGatewayRouteTableState
 
 	// Any tags assigned to the route table.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the transit gateway.
 	TransitGatewayId *string
@@ -9756,10 +9756,10 @@ type TransitGatewayVpcAttachment struct {
 	State TransitGatewayAttachmentState
 
 	// The IDs of the subnets.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The tags for the VPC attachment.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the attachment.
 	TransitGatewayAttachmentId *string
@@ -9794,43 +9794,43 @@ type TunnelOption struct {
 	DpdTimeoutAction *string
 
 	// The number of seconds after which a DPD timeout occurs.
-	DpdTimeoutSeconds *int32
+	DpdTimeoutSeconds int32
 
 	// The IKE versions that are permitted for the VPN tunnel.
-	IkeVersions []*IKEVersionsListValue
+	IkeVersions []IKEVersionsListValue
 
 	// The external IP address of the VPN tunnel.
 	OutsideIpAddress *string
 
 	// The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 1 IKE
 	// negotiations.
-	Phase1DHGroupNumbers []*Phase1DHGroupNumbersListValue
+	Phase1DHGroupNumbers []Phase1DHGroupNumbersListValue
 
 	// The permitted encryption algorithms for the VPN tunnel for phase 1 IKE
 	// negotiations.
-	Phase1EncryptionAlgorithms []*Phase1EncryptionAlgorithmsListValue
+	Phase1EncryptionAlgorithms []Phase1EncryptionAlgorithmsListValue
 
 	// The permitted integrity algorithms for the VPN tunnel for phase 1 IKE
 	// negotiations.
-	Phase1IntegrityAlgorithms []*Phase1IntegrityAlgorithmsListValue
+	Phase1IntegrityAlgorithms []Phase1IntegrityAlgorithmsListValue
 
 	// The lifetime for phase 1 of the IKE negotiation, in seconds.
-	Phase1LifetimeSeconds *int32
+	Phase1LifetimeSeconds int32
 
 	// The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 2 IKE
 	// negotiations.
-	Phase2DHGroupNumbers []*Phase2DHGroupNumbersListValue
+	Phase2DHGroupNumbers []Phase2DHGroupNumbersListValue
 
 	// The permitted encryption algorithms for the VPN tunnel for phase 2 IKE
 	// negotiations.
-	Phase2EncryptionAlgorithms []*Phase2EncryptionAlgorithmsListValue
+	Phase2EncryptionAlgorithms []Phase2EncryptionAlgorithmsListValue
 
 	// The permitted integrity algorithms for the VPN tunnel for phase 2 IKE
 	// negotiations.
-	Phase2IntegrityAlgorithms []*Phase2IntegrityAlgorithmsListValue
+	Phase2IntegrityAlgorithms []Phase2IntegrityAlgorithmsListValue
 
 	// The lifetime for phase 2 of the IKE negotiation, in seconds.
-	Phase2LifetimeSeconds *int32
+	Phase2LifetimeSeconds int32
 
 	// The pre-shared key (PSK) to establish initial authentication between the virtual
 	// private gateway and the customer gateway.
@@ -9838,14 +9838,14 @@ type TunnelOption struct {
 
 	// The percentage of the rekey window determined by RekeyMarginTimeSeconds during
 	// which the rekey time is randomly selected.
-	RekeyFuzzPercentage *int32
+	RekeyFuzzPercentage int32
 
 	// The margin time, in seconds, before the phase 2 lifetime expires, during which
 	// the AWS side of the VPN connection performs an IKE rekey.
-	RekeyMarginTimeSeconds *int32
+	RekeyMarginTimeSeconds int32
 
 	// The number of packets in an IKE replay window.
-	ReplayWindowSize *int32
+	ReplayWindowSize int32
 
 	// The action to take when the establishing the VPN tunnels for a VPN connection.
 	StartupAction *string
@@ -9987,7 +9987,7 @@ type ValidationError struct {
 type ValidationWarning struct {
 
 	// The error codes and error messages.
-	Errors []*ValidationError
+	Errors []ValidationError
 }
 
 // Describes the vCPU configurations for the instance type.
@@ -10003,18 +10003,18 @@ type VCpuInfo struct {
 	DefaultVCpus *int32
 
 	// List of the valid number of cores that can be configured for the instance type.
-	ValidCores []*int32
+	ValidCores []int32
 
 	// List of the valid number of threads per core that can be configured for the
 	// instance type.
-	ValidThreadsPerCore []*int32
+	ValidThreadsPerCore []int32
 }
 
 // Describes telemetry for a VPN tunnel.
 type VgwTelemetry struct {
 
 	// The number of accepted routes.
-	AcceptedRouteCount *int32
+	AcceptedRouteCount int32
 
 	// The Amazon Resource Name (ARN) of the VPN tunnel endpoint certificate.
 	CertificateArn *string
@@ -10037,7 +10037,7 @@ type VgwTelemetry struct {
 type Volume struct {
 
 	// Information about the volume attachments.
-	Attachments []*VolumeAttachment
+	Attachments []VolumeAttachment
 
 	// The Availability Zone for the volume.
 	AvailabilityZone *string
@@ -10046,10 +10046,10 @@ type Volume struct {
 	CreateTime *time.Time
 
 	// Indicates whether the volume is encrypted.
-	Encrypted *bool
+	Encrypted bool
 
 	// Indicates whether the volume was created using fast snapshot restore.
-	FastRestored *bool
+	FastRestored bool
 
 	// The number of I/O operations per second (IOPS) that the volume supports. For
 	// Provisioned IOPS SSD volumes, this represents the number of IOPS that are
@@ -10065,7 +10065,7 @@ type Volume struct {
 	// Other instance families guarantee performance up to 32,000 IOPS. Condition: This
 	// parameter is required for requests to create io1 and io2 volumes; it is not used
 	// in requests to create gp2, st1, sc1, or standard volumes.
-	Iops *int32
+	Iops int32
 
 	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
 	// customer master key (CMK) that was used to protect the volume encryption key for
@@ -10073,13 +10073,13 @@ type Volume struct {
 	KmsKeyId *string
 
 	// Indicates whether Amazon EBS Multi-Attach is enabled.
-	MultiAttachEnabled *bool
+	MultiAttachEnabled bool
 
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
 
 	// The size of the volume, in GiBs.
-	Size *int32
+	Size int32
 
 	// The snapshot from which the volume was created, if applicable.
 	SnapshotId *string
@@ -10088,7 +10088,7 @@ type Volume struct {
 	State VolumeState
 
 	// Any tags assigned to the volume.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the volume.
 	VolumeId *string
@@ -10106,7 +10106,7 @@ type VolumeAttachment struct {
 	AttachTime *time.Time
 
 	// Indicates whether the EBS volume is deleted on instance termination.
-	DeleteOnTermination *bool
+	DeleteOnTermination bool
 
 	// The device name.
 	Device *string
@@ -10127,7 +10127,7 @@ type VolumeDetail struct {
 	// The size of the volume, in GiB.
 	//
 	// This member is required.
-	Size *int64
+	Size int64
 }
 
 // Describes the modification status of an EBS volume. If the volume has never been
@@ -10142,16 +10142,16 @@ type VolumeModification struct {
 	ModificationState VolumeModificationState
 
 	// The original IOPS rate of the volume.
-	OriginalIops *int32
+	OriginalIops int32
 
 	// The original size of the volume, in GiB.
-	OriginalSize *int32
+	OriginalSize int32
 
 	// The original EBS volume type of the volume.
 	OriginalVolumeType VolumeType
 
 	// The modification progress, from 0 to 100 percent complete.
-	Progress *int64
+	Progress int64
 
 	// The modification start time.
 	StartTime *time.Time
@@ -10160,10 +10160,10 @@ type VolumeModification struct {
 	StatusMessage *string
 
 	// The target IOPS rate of the volume.
-	TargetIops *int32
+	TargetIops int32
 
 	// The target size of the volume, in GiB.
-	TargetSize *int32
+	TargetSize int32
 
 	// The target EBS volume type of the volume.
 	TargetVolumeType VolumeType
@@ -10234,7 +10234,7 @@ type VolumeStatusEvent struct {
 type VolumeStatusInfo struct {
 
 	// The details of the volume status.
-	Details []*VolumeStatusDetails
+	Details []VolumeStatusDetails
 
 	// The status of the volume.
 	Status VolumeStatusInfoStatus
@@ -10244,16 +10244,16 @@ type VolumeStatusInfo struct {
 type VolumeStatusItem struct {
 
 	// The details of the operation.
-	Actions []*VolumeStatusAction
+	Actions []VolumeStatusAction
 
 	// Information about the instances to which the volume is attached.
-	AttachmentStatuses []*VolumeStatusAttachmentStatus
+	AttachmentStatuses []VolumeStatusAttachmentStatus
 
 	// The Availability Zone of the volume.
 	AvailabilityZone *string
 
 	// A list of events associated with the volume.
-	Events []*VolumeStatusEvent
+	Events []VolumeStatusEvent
 
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
@@ -10272,7 +10272,7 @@ type Vpc struct {
 	CidrBlock *string
 
 	// Information about the IPv4 CIDR blocks associated with the VPC.
-	CidrBlockAssociationSet []*VpcCidrBlockAssociation
+	CidrBlockAssociationSet []VpcCidrBlockAssociation
 
 	// The ID of the set of DHCP options you've associated with the VPC.
 	DhcpOptionsId *string
@@ -10281,10 +10281,10 @@ type Vpc struct {
 	InstanceTenancy Tenancy
 
 	// Information about the IPv6 CIDR blocks associated with the VPC.
-	Ipv6CidrBlockAssociationSet []*VpcIpv6CidrBlockAssociation
+	Ipv6CidrBlockAssociationSet []VpcIpv6CidrBlockAssociation
 
 	// Indicates whether the VPC is the default VPC.
-	IsDefault *bool
+	IsDefault bool
 
 	// The ID of the AWS account that owns the VPC.
 	OwnerId *string
@@ -10293,7 +10293,7 @@ type Vpc struct {
 	State VpcState
 
 	// Any tags assigned to the VPC.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the VPC.
 	VpcId *string
@@ -10336,10 +10336,10 @@ type VpcCidrBlockState struct {
 type VpcClassicLink struct {
 
 	// Indicates whether the VPC is enabled for ClassicLink.
-	ClassicLinkEnabled *bool
+	ClassicLinkEnabled bool
 
 	// Any tags assigned to the VPC.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the VPC.
 	VpcId *string
@@ -10352,17 +10352,17 @@ type VpcEndpoint struct {
 	CreationTimestamp *time.Time
 
 	// (Interface endpoint) The DNS entries for the endpoint.
-	DnsEntries []*DnsEntry
+	DnsEntries []DnsEntry
 
 	// (Interface endpoint) Information about the security groups that are associated
 	// with the network interface.
-	Groups []*SecurityGroupIdentifier
+	Groups []SecurityGroupIdentifier
 
 	// The last error that occurred for VPC endpoint.
 	LastError *LastError
 
 	// (Interface endpoint) One or more network interfaces for the endpoint.
-	NetworkInterfaceIds []*string
+	NetworkInterfaceIds []string
 
 	// The ID of the AWS account that owns the VPC endpoint.
 	OwnerId *string
@@ -10372,13 +10372,13 @@ type VpcEndpoint struct {
 
 	// (Interface endpoint) Indicates whether the VPC is associated with a private
 	// hosted zone.
-	PrivateDnsEnabled *bool
+	PrivateDnsEnabled bool
 
 	// Indicates whether the VPC endpoint is being managed by its service.
-	RequesterManaged *bool
+	RequesterManaged bool
 
 	// (Gateway endpoint) One or more route tables associated with the endpoint.
-	RouteTableIds []*string
+	RouteTableIds []string
 
 	// The name of the service to which the endpoint is associated.
 	ServiceName *string
@@ -10387,10 +10387,10 @@ type VpcEndpoint struct {
 	State State
 
 	// (Interface endpoint) One or more subnets in which the endpoint is located.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// Any tags assigned to the VPC endpoint.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the VPC endpoint.
 	VpcEndpointId *string
@@ -10409,10 +10409,10 @@ type VpcEndpointConnection struct {
 	CreationTimestamp *time.Time
 
 	// The DNS entries for the VPC endpoint.
-	DnsEntries []*DnsEntry
+	DnsEntries []DnsEntry
 
 	// The Amazon Resource Names (ARNs) of the network load balancers for the service.
-	NetworkLoadBalancerArns []*string
+	NetworkLoadBalancerArns []string
 
 	// The ID of the service to which the endpoint is connected.
 	ServiceId *string
@@ -10466,7 +10466,7 @@ type VpcPeeringConnection struct {
 	Status *VpcPeeringConnectionStateReason
 
 	// Any tags assigned to the resource.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the VPC peering connection.
 	VpcPeeringConnectionId *string
@@ -10477,15 +10477,15 @@ type VpcPeeringConnectionOptionsDescription struct {
 
 	// Indicates whether a local VPC can resolve public DNS hostnames to private IP
 	// addresses when queried from instances in a peer VPC.
-	AllowDnsResolutionFromRemoteVpc *bool
+	AllowDnsResolutionFromRemoteVpc bool
 
 	// Indicates whether a local ClassicLink connection can communicate with the peer
 	// VPC over the VPC peering connection.
-	AllowEgressFromLocalClassicLinkToRemoteVpc *bool
+	AllowEgressFromLocalClassicLinkToRemoteVpc bool
 
 	// Indicates whether a local VPC can communicate with a ClassicLink connection in
 	// the peer VPC over the VPC peering connection.
-	AllowEgressFromLocalVpcToRemoteClassicLink *bool
+	AllowEgressFromLocalVpcToRemoteClassicLink bool
 }
 
 // Describes the status of a VPC peering connection.
@@ -10505,10 +10505,10 @@ type VpcPeeringConnectionVpcInfo struct {
 	CidrBlock *string
 
 	// Information about the IPv4 CIDR blocks for the VPC.
-	CidrBlockSet []*CidrBlock
+	CidrBlockSet []CidrBlock
 
 	// The IPv6 CIDR block for the VPC.
-	Ipv6CidrBlockSet []*Ipv6CidrBlock
+	Ipv6CidrBlockSet []Ipv6CidrBlock
 
 	// The AWS account ID of the VPC owner.
 	OwnerId *string
@@ -10544,13 +10544,13 @@ type VpnConnection struct {
 	Options *VpnConnectionOptions
 
 	// The static routes associated with the VPN connection.
-	Routes []*VpnStaticRoute
+	Routes []VpnStaticRoute
 
 	// The current state of the VPN connection.
 	State VpnState
 
 	// Any tags assigned to the VPN connection.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the transit gateway associated with the VPN connection.
 	TransitGatewayId *string
@@ -10559,7 +10559,7 @@ type VpnConnection struct {
 	Type GatewayType
 
 	// Information about the VPN tunnel.
-	VgwTelemetry []*VgwTelemetry
+	VgwTelemetry []VgwTelemetry
 
 	// The ID of the VPN connection.
 	VpnConnectionId *string
@@ -10572,7 +10572,7 @@ type VpnConnection struct {
 type VpnConnectionOptions struct {
 
 	// Indicates whether acceleration is enabled for the VPN connection.
-	EnableAcceleration *bool
+	EnableAcceleration bool
 
 	// The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.
 	LocalIpv4NetworkCidr *string
@@ -10588,20 +10588,20 @@ type VpnConnectionOptions struct {
 
 	// Indicates whether the VPN connection uses static routes only. Static routes must
 	// be used for devices that don't support BGP.
-	StaticRoutesOnly *bool
+	StaticRoutesOnly bool
 
 	// Indicates whether the VPN tunnels process IPv4 or IPv6 traffic.
 	TunnelInsideIpVersion TunnelInsideIpVersion
 
 	// Indicates the VPN tunnel options.
-	TunnelOptions []*TunnelOption
+	TunnelOptions []TunnelOption
 }
 
 // Describes VPN connection options.
 type VpnConnectionOptionsSpecification struct {
 
 	// Indicate whether to enable acceleration for the VPN connection. Default: false
-	EnableAcceleration *bool
+	EnableAcceleration bool
 
 	// The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.
 	// Default: 0.0.0.0/0
@@ -10620,20 +10620,20 @@ type VpnConnectionOptionsSpecification struct {
 	// Indicate whether the VPN connection uses static routes only. If you are creating
 	// a VPN connection for a device that does not support BGP, you must specify true.
 	// Use CreateVpnConnectionRoute to create a static route. Default: false
-	StaticRoutesOnly *bool
+	StaticRoutesOnly bool
 
 	// Indicate whether the VPN tunnels process IPv4 or IPv6 traffic. Default: ipv4
 	TunnelInsideIpVersion TunnelInsideIpVersion
 
 	// The tunnel options for the VPN connection.
-	TunnelOptions []*VpnTunnelOptionsSpecification
+	TunnelOptions []VpnTunnelOptionsSpecification
 }
 
 // Describes a virtual private gateway.
 type VpnGateway struct {
 
 	// The private Autonomous System Number (ASN) for the Amazon side of a BGP session.
-	AmazonSideAsn *int64
+	AmazonSideAsn int64
 
 	// The Availability Zone where the virtual private gateway was created, if
 	// applicable. This field may be empty or not returned.
@@ -10643,13 +10643,13 @@ type VpnGateway struct {
 	State VpnState
 
 	// Any tags assigned to the virtual private gateway.
-	Tags []*Tag
+	Tags []Tag
 
 	// The type of VPN connection the virtual private gateway supports.
 	Type GatewayType
 
 	// Any VPCs attached to the virtual private gateway.
-	VpcAttachments []*VpcAttachment
+	VpcAttachments []VpcAttachment
 
 	// The ID of the virtual private gateway.
 	VpnGatewayId *string
@@ -10678,48 +10678,48 @@ type VpnTunnelOptionsSpecification struct {
 
 	// The number of seconds after which a DPD timeout occurs. Constraints: A value
 	// between 0 and 30. Default: 30
-	DPDTimeoutSeconds *int32
+	DPDTimeoutSeconds int32
 
 	// The IKE versions that are permitted for the VPN tunnel. Valid values: ikev1 |
 	// ikev2
-	IKEVersions []*IKEVersionsRequestListValue
+	IKEVersions []IKEVersionsRequestListValue
 
 	// One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel
 	// for phase 1 IKE negotiations. Valid values: 2 | 14 | 15 | 16 | 17 | 18 | 19 | 20
 	// | 21 | 22 | 23 | 24
-	Phase1DHGroupNumbers []*Phase1DHGroupNumbersRequestListValue
+	Phase1DHGroupNumbers []Phase1DHGroupNumbersRequestListValue
 
 	// One or more encryption algorithms that are permitted for the VPN tunnel for
 	// phase 1 IKE negotiations. Valid values: AES128 | AES256 | AES128-GCM-16 |
 	// AES256-GCM-16
-	Phase1EncryptionAlgorithms []*Phase1EncryptionAlgorithmsRequestListValue
+	Phase1EncryptionAlgorithms []Phase1EncryptionAlgorithmsRequestListValue
 
 	// One or more integrity algorithms that are permitted for the VPN tunnel for phase
 	// 1 IKE negotiations. Valid values: SHA1 | SHA2-256 | SHA2-384 | SHA2-512
-	Phase1IntegrityAlgorithms []*Phase1IntegrityAlgorithmsRequestListValue
+	Phase1IntegrityAlgorithms []Phase1IntegrityAlgorithmsRequestListValue
 
 	// The lifetime for phase 1 of the IKE negotiation, in seconds. Constraints: A
 	// value between 900 and 28,800. Default: 28800
-	Phase1LifetimeSeconds *int32
+	Phase1LifetimeSeconds int32
 
 	// One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel
 	// for phase 2 IKE negotiations. Valid values: 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19
 	// | 20 | 21 | 22 | 23 | 24
-	Phase2DHGroupNumbers []*Phase2DHGroupNumbersRequestListValue
+	Phase2DHGroupNumbers []Phase2DHGroupNumbersRequestListValue
 
 	// One or more encryption algorithms that are permitted for the VPN tunnel for
 	// phase 2 IKE negotiations. Valid values: AES128 | AES256 | AES128-GCM-16 |
 	// AES256-GCM-16
-	Phase2EncryptionAlgorithms []*Phase2EncryptionAlgorithmsRequestListValue
+	Phase2EncryptionAlgorithms []Phase2EncryptionAlgorithmsRequestListValue
 
 	// One or more integrity algorithms that are permitted for the VPN tunnel for phase
 	// 2 IKE negotiations. Valid values: SHA1 | SHA2-256 | SHA2-384 | SHA2-512
-	Phase2IntegrityAlgorithms []*Phase2IntegrityAlgorithmsRequestListValue
+	Phase2IntegrityAlgorithms []Phase2IntegrityAlgorithmsRequestListValue
 
 	// The lifetime for phase 2 of the IKE negotiation, in seconds. Constraints: A
 	// value between 900 and 3,600. The value must be less than the value for
 	// Phase1LifetimeSeconds. Default: 3600
-	Phase2LifetimeSeconds *int32
+	Phase2LifetimeSeconds int32
 
 	// The pre-shared key (PSK) to establish initial authentication between the virtual
 	// private gateway and customer gateway. Constraints: Allowed characters are
@@ -10730,17 +10730,17 @@ type VpnTunnelOptionsSpecification struct {
 	// The percentage of the rekey window (determined by RekeyMarginTimeSeconds) during
 	// which the rekey time is randomly selected. Constraints: A value between 0 and
 	// 100. Default: 100
-	RekeyFuzzPercentage *int32
+	RekeyFuzzPercentage int32
 
 	// The margin time, in seconds, before the phase 2 lifetime expires, during which
 	// the AWS side of the VPN connection performs an IKE rekey. The exact time of the
 	// rekey is randomly selected based on the value for RekeyFuzzPercentage.
 	// Constraints: A value between 60 and half of Phase2LifetimeSeconds. Default: 540
-	RekeyMarginTimeSeconds *int32
+	RekeyMarginTimeSeconds int32
 
 	// The number of packets in an IKE replay window. Constraints: A value between 64
 	// and 2048. Default: 1024
-	ReplayWindowSize *int32
+	ReplayWindowSize int32
 
 	// The action to take when the establishing the tunnel for the VPN connection. By
 	// default, your customer gateway device must initiate the IKE negotiation and

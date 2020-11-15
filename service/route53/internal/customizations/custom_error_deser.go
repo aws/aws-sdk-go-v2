@@ -90,6 +90,6 @@ func route53CustomErrorDeser(metadata *middleware.Metadata, response *smithyhttp
 
 	return &types.InvalidChangeBatch{
 		Message:  ptr.String("ChangeBatch errors occurred"),
-		Messages: ptr.StringSlice(err.Messages),
+		Messages: err.Messages,
 	}
 }

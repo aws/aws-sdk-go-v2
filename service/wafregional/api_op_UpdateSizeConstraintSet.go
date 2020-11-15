@@ -105,7 +105,7 @@ type UpdateSizeConstraintSetInput struct {
 	// * FieldToMatch: Contains Data and Type
 	//
 	// This member is required.
-	Updates []*types.SizeConstraintSetUpdate
+	Updates []types.SizeConstraintSetUpdate
 }
 
 type UpdateSizeConstraintSetOutput struct {

@@ -52,7 +52,7 @@ type GetHostedZoneOutput struct {
 
 	// A complex type that contains information about the VPCs that are associated with
 	// the specified hosted zone.
-	VPCs []*types.VPC
+	VPCs []types.VPC
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

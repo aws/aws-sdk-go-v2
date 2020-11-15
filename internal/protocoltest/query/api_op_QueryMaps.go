@@ -27,19 +27,19 @@ func (c *Client) QueryMaps(ctx context.Context, params *QueryMapsInput, optFns .
 }
 
 type QueryMapsInput struct {
-	ComplexMapArg map[string]*types.GreetingStruct
+	ComplexMapArg map[string]types.GreetingStruct
 
-	FlattenedMap map[string]*string
+	FlattenedMap map[string]string
 
-	FlattenedMapWithXmlName map[string]*string
+	FlattenedMapWithXmlName map[string]string
 
-	MapArg map[string]*string
+	MapArg map[string]string
 
-	MapOfLists map[string][]*string
+	MapOfLists map[string][]string
 
-	MapWithXmlMemberName map[string]*string
+	MapWithXmlMemberName map[string]string
 
-	RenamedMapArg map[string]*string
+	RenamedMapArg map[string]string
 }
 
 type QueryMapsOutput struct {

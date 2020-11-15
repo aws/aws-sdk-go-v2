@@ -56,7 +56,7 @@ type ListExperimentsInput struct {
 type ListExperimentsOutput struct {
 
 	// A list of the summaries of your experiments.
-	ExperimentSummaries []*types.ExperimentSummary
+	ExperimentSummaries []types.ExperimentSummary
 
 	// A token for getting the next set of experiments, if there are any.
 	NextToken *string

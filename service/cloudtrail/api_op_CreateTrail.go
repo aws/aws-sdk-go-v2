@@ -123,7 +123,7 @@ type CreateTrailInput struct {
 	SnsTopicName *string
 
 	// A list of tags.
-	TagsList []*types.Tag
+	TagsList []types.Tag
 }
 
 // Returns the objects or data listed below if successful. Otherwise, returns an

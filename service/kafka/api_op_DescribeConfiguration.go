@@ -49,7 +49,7 @@ type DescribeConfigurationOutput struct {
 	Description *string
 
 	// The versions of Apache Kafka with which you can use this MSK configuration.
-	KafkaVersions []*string
+	KafkaVersions []string
 
 	// Latest revision of the configuration.
 	LatestRevision *types.ConfigurationRevision

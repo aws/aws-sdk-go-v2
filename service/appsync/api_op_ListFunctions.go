@@ -35,7 +35,7 @@ type ListFunctionsInput struct {
 	ApiId *string
 
 	// The maximum number of results you want the request to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
@@ -45,7 +45,7 @@ type ListFunctionsInput struct {
 type ListFunctionsOutput struct {
 
 	// A list of Function objects.
-	Functions []*types.FunctionConfiguration
+	Functions []types.FunctionConfiguration
 
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.

@@ -39,7 +39,7 @@ type PutConfigurationSetReputationOptionsInput struct {
 
 	// If true, tracking of reputation metrics is enabled for the configuration set. If
 	// false, tracking of reputation metrics is disabled for the configuration set.
-	ReputationMetricsEnabled *bool
+	ReputationMetricsEnabled bool
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request

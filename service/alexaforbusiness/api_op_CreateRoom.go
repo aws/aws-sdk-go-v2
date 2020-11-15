@@ -48,7 +48,7 @@ type CreateRoomInput struct {
 	ProviderCalendarId *string
 
 	// The tags for the room.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateRoomOutput struct {

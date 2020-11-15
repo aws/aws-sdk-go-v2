@@ -34,7 +34,7 @@ func (c *Client) DescribeEventSubscriptions(ctx context.Context, params *Describ
 type DescribeEventSubscriptionsInput struct {
 
 	// This parameter isn't currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous
 	// DescribeOrderableDBInstanceOptions request. If this parameter is specified, the
@@ -56,7 +56,7 @@ type DescribeEventSubscriptionsInput struct {
 type DescribeEventSubscriptionsOutput struct {
 
 	// A list of EventSubscriptions data types.
-	EventSubscriptionsList []*types.EventSubscription
+	EventSubscriptionsList []types.EventSubscription
 
 	// An optional pagination token provided by a previous
 	// DescribeOrderableDBInstanceOptions request. If this parameter is specified, the

@@ -31,7 +31,7 @@ type EnableAlarmActionsInput struct {
 	// The names of the alarms.
 	//
 	// This member is required.
-	AlarmNames []*string
+	AlarmNames []string
 }
 
 type EnableAlarmActionsOutput struct {

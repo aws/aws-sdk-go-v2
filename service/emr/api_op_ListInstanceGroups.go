@@ -43,7 +43,7 @@ type ListInstanceGroupsInput struct {
 type ListInstanceGroupsOutput struct {
 
 	// The list of instance groups for the cluster and given filters.
-	InstanceGroups []*types.InstanceGroup
+	InstanceGroups []types.InstanceGroup
 
 	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string

@@ -60,7 +60,7 @@ type ListTablesInput struct {
 	// The maximum number of tables to return in the response. If more tables exist
 	// than fit in one response, then NextToken is returned to page through the
 	// results.
-	MaxResults *int32
+	MaxResults int32
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
@@ -100,7 +100,7 @@ type ListTablesOutput struct {
 	NextToken *string
 
 	// The tables that match the request pattern.
-	Tables []*types.TableMember
+	Tables []types.TableMember
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

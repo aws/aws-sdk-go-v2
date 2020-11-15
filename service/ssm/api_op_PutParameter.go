@@ -116,7 +116,7 @@ type PutParameterInput struct {
 	KeyId *string
 
 	// Overwrite an existing parameter. If not specified, will default to "false".
-	Overwrite *bool
+	Overwrite bool
 
 	// One or more policies to apply to a parameter. This action takes a JSON array.
 	// Parameter Store supports the following policy types: Expiration: This policy
@@ -152,7 +152,7 @@ type PutParameterInput struct {
 	//
 	// To add tags to an existing Systems Manager
 	// parameter, use the AddTagsToResource action.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The parameter tier to assign to a parameter. Parameter Store offers a standard
 	// tier and an advanced tier for parameters. Standard parameters have a content
@@ -233,7 +233,7 @@ type PutParameterOutput struct {
 	// Manager documents (SSM documents). By default, if you don't specify a specific
 	// version, the system returns the latest parameter value when a parameter is
 	// called.
-	Version *int64
+	Version int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

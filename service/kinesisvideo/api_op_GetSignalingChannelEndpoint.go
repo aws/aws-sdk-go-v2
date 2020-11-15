@@ -52,7 +52,7 @@ type GetSignalingChannelEndpointInput struct {
 type GetSignalingChannelEndpointOutput struct {
 
 	// A list of endpoints for the specified signaling channel.
-	ResourceEndpointList []*types.ResourceEndpointListItem
+	ResourceEndpointList []types.ResourceEndpointListItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

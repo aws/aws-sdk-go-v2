@@ -51,7 +51,7 @@ type ListTagsForResourceOutput struct {
 	NextToken *string
 
 	// Array of resource tags.
-	Tags []*types.TagListEntry
+	Tags []types.TagListEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

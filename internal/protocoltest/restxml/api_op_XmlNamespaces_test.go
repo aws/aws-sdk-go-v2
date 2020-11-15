@@ -41,9 +41,9 @@ func TestClient_XmlNamespaces_awsRestxmlSerialize(t *testing.T) {
 			Params: &XmlNamespacesInput{
 				Nested: &types.XmlNamespaceNested{
 					Foo: ptr.String("Foo"),
-					Values: []*string{
-						ptr.String("Bar"),
-						ptr.String("Baz"),
+					Values: []string{
+						"Bar",
+						"Baz",
 					},
 				},
 			},
@@ -162,9 +162,9 @@ func TestClient_XmlNamespaces_awsRestxmlDeserialize(t *testing.T) {
 			ExpectResult: &XmlNamespacesOutput{
 				Nested: &types.XmlNamespaceNested{
 					Foo: ptr.String("Foo"),
-					Values: []*string{
-						ptr.String("Bar"),
-						ptr.String("Baz"),
+					Values: []string{
+						"Bar",
+						"Baz",
 					},
 				},
 			},

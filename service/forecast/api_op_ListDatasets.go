@@ -44,7 +44,7 @@ type ListDatasetsInput struct {
 type ListDatasetsOutput struct {
 
 	// An array of objects that summarize each dataset's properties.
-	Datasets []*types.DatasetSummary
+	Datasets []types.DatasetSummary
 
 	// If the response is truncated, Amazon Forecast returns this token. To retrieve
 	// the next set of results, use the token in the next request.

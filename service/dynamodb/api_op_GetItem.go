@@ -43,7 +43,7 @@ type GetItemInput struct {
 	// values for both the partition key and the sort key.
 	//
 	// This member is required.
-	Key map[string]*types.AttributeValue
+	Key map[string]types.AttributeValue
 
 	// The name of the table containing the requested item.
 	//
@@ -54,7 +54,7 @@ type GetItemInput struct {
 	// information, see AttributesToGet
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html)
 	// in the Amazon DynamoDB Developer Guide.
-	AttributesToGet []*string
+	AttributesToGet []string
 
 	// Determines the read consistency model: If set to true, then the operation uses
 	// strongly consistent reads; otherwise, the operation uses eventually consistent
@@ -100,7 +100,7 @@ type GetItemInput struct {
 	// expression attribute names, see Specifying Item Attributes
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeNames map[string]*string
+	ExpressionAttributeNames map[string]string
 
 	// A string that identifies one or more attributes to retrieve from the table.
 	// These attributes can include scalars, sets, or elements of a JSON document. The
@@ -144,7 +144,7 @@ type GetItemOutput struct {
 
 	// A map of attribute names to AttributeValue objects, as specified by
 	// ProjectionExpression.
-	Item map[string]*types.AttributeValue
+	Item map[string]types.AttributeValue
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

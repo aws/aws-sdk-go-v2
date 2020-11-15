@@ -51,7 +51,7 @@ type GetFindingStatisticsInput struct {
 	FindingCriteria *types.FindingCriteria
 
 	// The maximum number of items to include in each page of the response.
-	Size *int32
+	Size int32
 
 	// The criteria to use to sort the query results.
 	SortCriteria *types.FindingStatisticsSortCriteria
@@ -61,7 +61,7 @@ type GetFindingStatisticsOutput struct {
 
 	// An array of objects, one for each group of findings that meet the filter
 	// criteria specified in the request.
-	CountsByGroup []*types.GroupCount
+	CountsByGroup []types.GroupCount
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

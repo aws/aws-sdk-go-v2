@@ -44,7 +44,7 @@ type CloudWatchDestination struct {
 	// to Amazon CloudWatch.
 	//
 	// This member is required.
-	DimensionConfigurations []*CloudWatchDimensionConfiguration
+	DimensionConfigurations []CloudWatchDimensionConfiguration
 }
 
 // An object that defines the dimension configuration to use when you send Amazon
@@ -109,7 +109,7 @@ type DailyVolume struct {
 
 	// An object that contains inbox placement metrics for a specified day in the
 	// analysis period, broken out by the recipient's email provider.
-	DomainIspPlacements []*DomainIspPlacement
+	DomainIspPlacements []DomainIspPlacement
 
 	// The date that the DailyVolume metrics apply to, in Unix time.
 	StartDate *time.Time
@@ -198,14 +198,14 @@ type Destination struct {
 
 	// An array that contains the email addresses of the "BCC" (blind carbon copy)
 	// recipients for the email.
-	BccAddresses []*string
+	BccAddresses []string
 
 	// An array that contains the email addresses of the "CC" (carbon copy) recipients
 	// for the email.
-	CcAddresses []*string
+	CcAddresses []string
 
 	// An array that contains the email addresses of the "To" recipients for the email.
-	ToAddresses []*string
+	ToAddresses []string
 }
 
 // An object that contains information about the DKIM configuration for an email
@@ -215,7 +215,7 @@ type DkimAttributes struct {
 	// If the value is true, then the messages that Amazon Pinpoint sends from the
 	// identity are DKIM-signed. If the value is false, then the messages that Amazon
 	// Pinpoint sends from the identity aren't DKIM-signed.
-	SigningEnabled *bool
+	SigningEnabled bool
 
 	// Describes whether or not Amazon Pinpoint has successfully located the DKIM
 	// records in the DNS records for the domain. The status can be one of the
@@ -246,7 +246,7 @@ type DkimAttributes struct {
 	// records in the DNS configuration for your domain, the DKIM authentication
 	// process is complete. Amazon Pinpoint usually detects these records within about
 	// 72 hours of adding them to the DNS configuration for your domain.
-	Tokens []*string
+	Tokens []string
 }
 
 // An object that contains the deliverability data for a specific campaign. This
@@ -267,7 +267,7 @@ type DomainDeliverabilityCampaign struct {
 	DeleteRate *float64
 
 	// The major email providers who handled the email message.
-	Esps []*string
+	Esps []string
 
 	// The first time, in Unix time format, when the email message was delivered to any
 	// recipient's inbox. This value can help you determine how long it took for a
@@ -302,7 +302,7 @@ type DomainDeliverabilityCampaign struct {
 	ReadRate *float64
 
 	// The IP addresses that were used to send the email message.
-	SendingIps []*string
+	SendingIps []string
 
 	// The number of email messages that were delivered to recipients' spam or junk
 	// mail folders.
@@ -426,7 +426,7 @@ type EventDestination struct {
 	// EventDestinationDefinition. If false, the event destination is disabled. When
 	// the event destination is disabled, events aren't sent to the specified
 	// destinations.
-	Enabled *bool
+	Enabled bool
 
 	// An object that defines an Amazon Kinesis Data Firehose destination for email
 	// events. You can use Amazon Kinesis Data Firehose to stream data to other
@@ -459,7 +459,7 @@ type EventDestinationDefinition struct {
 	// EventDestinationDefinition. If false, the event destination is disabled. When
 	// the event destination is disabled, events aren't sent to the specified
 	// destinations.
-	Enabled *bool
+	Enabled bool
 
 	// An object that defines an Amazon Kinesis Data Firehose destination for email
 	// events. You can use Amazon Kinesis Data Firehose to stream data to other
@@ -502,7 +502,7 @@ type IdentityInfo struct {
 	// Before you can send email from an identity, you have to demostrate that you own
 	// the identity, and that you authorize Amazon Pinpoint to send email from that
 	// identity.
-	SendingEnabled *bool
+	SendingEnabled bool
 }
 
 // An object that contains information about the inbox placement data settings for
@@ -512,11 +512,11 @@ type IdentityInfo struct {
 type InboxPlacementTrackingOption struct {
 
 	// Specifies whether inbox placement data is being tracked for the domain.
-	Global *bool
+	Global bool
 
 	// An array of strings, one for each major email provider that the inbox placement
 	// data applies to.
-	TrackedIsps []*string
+	TrackedIsps []string
 }
 
 // An object that describes how email sent during the predictive inbox placement
@@ -639,7 +639,7 @@ type OverallVolume struct {
 
 	// An object that contains inbox and junk mail placement metrics for individual
 	// email providers.
-	DomainIspPlacements []*DomainIspPlacement
+	DomainIspPlacements []DomainIspPlacement
 
 	// The percentage of emails that were sent from the domain that were read by their
 	// recipients.
@@ -727,7 +727,7 @@ type ReputationOptions struct {
 
 	// If true, tracking of reputation metrics is enabled for the configuration set. If
 	// false, tracking of reputation metrics is disabled for the configuration set.
-	ReputationMetricsEnabled *bool
+	ReputationMetricsEnabled bool
 }
 
 // Used to enable or disable email sending for messages that use this configuration
@@ -736,7 +736,7 @@ type SendingOptions struct {
 
 	// If true, email sending is enabled for the configuration set. If false, email
 	// sending is disabled for the configuration set.
-	SendingEnabled *bool
+	SendingEnabled bool
 }
 
 // An object that contains information about the per-day and per-second sending
@@ -745,16 +745,16 @@ type SendQuota struct {
 
 	// The maximum number of emails that you can send in the current AWS Region over a
 	// 24-hour period. This value is also called your sending quota.
-	Max24HourSend *float64
+	Max24HourSend float64
 
 	// The maximum number of emails that you can send per second in the current AWS
 	// Region. This value is also called your maximum sending rate or your maximum TPS
 	// (transactions per second) rate.
-	MaxSendRate *float64
+	MaxSendRate float64
 
 	// The number of emails sent from your Amazon Pinpoint account in the current AWS
 	// Region over the past 24 hours.
-	SentLast24Hours *float64
+	SentLast24Hours float64
 }
 
 // An object that defines an Amazon SNS destination for email events. You can use

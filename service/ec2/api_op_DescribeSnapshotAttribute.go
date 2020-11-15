@@ -47,17 +47,17 @@ type DescribeSnapshotAttributeInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 }
 
 type DescribeSnapshotAttributeOutput struct {
 
 	// The users and groups that have the permissions for creating volumes from the
 	// snapshot.
-	CreateVolumePermissions []*types.CreateVolumePermission
+	CreateVolumePermissions []types.CreateVolumePermission
 
 	// The product codes.
-	ProductCodes []*types.ProductCode
+	ProductCodes []types.ProductCode
 
 	// The ID of the EBS snapshot.
 	SnapshotId *string

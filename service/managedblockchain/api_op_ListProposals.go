@@ -47,7 +47,7 @@ type ListProposalsOutput struct {
 	NextToken *string
 
 	// The summary of each proposal made on the network.
-	Proposals []*types.ProposalSummary
+	Proposals []types.ProposalSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

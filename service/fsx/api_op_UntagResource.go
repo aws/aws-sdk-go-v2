@@ -38,7 +38,7 @@ type UntagResourceInput struct {
 	// exist, the call will still succeed to be idempotent.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 // The response object for UntagResource action.

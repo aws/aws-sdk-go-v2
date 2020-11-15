@@ -113,6 +113,24 @@ final class AwsProtocolUtils {
                         .operation(ShapeId.from("aws.protocoltests.restjson#InlineDocumentAsPayload"))
                         .build(),
 
+                // Null lists/maps without sparse tag
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
+                        .operation(ShapeId.from("aws.protocoltests.restjson#JsonLists"))
+                        .addTestName("RestJsonListsSerializeNull")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
+                        .operation(ShapeId.from("aws.protocoltests.restjson#JsonMaps"))
+                        .addTestName("RestJsonSerializesNullMapValues")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.json#JsonProtocol"))
+                        .operation(ShapeId.from("aws.protocoltests.json#NullOperation"))
+                        .addTestName("AwsJson11MapsSerializeNullValues")
+                        .addTestName("AwsJson11ListsSerializeNull")
+                        .build(),
+
                 // JSON RPC Documents
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
                         .service(ShapeId.from("aws.protocoltests.json#JsonProtocol"))
@@ -125,7 +143,7 @@ final class AwsProtocolUtils {
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
                         .service(ShapeId.from("aws.protocoltests.restxml#RestXml"))
                         .operation(ShapeId.from("aws.protocoltests.restxml#HttpPrefixHeaders"))
-                        .testName("HttpPrefixHeadersAreNotPresent")
+                        .addTestName("HttpPrefixHeadersAreNotPresent")
                         .build()
         ));
 

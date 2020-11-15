@@ -58,7 +58,7 @@ type CreateContactFlowInput struct {
 	Description *string
 
 	// One or more tags.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateContactFlowOutput struct {

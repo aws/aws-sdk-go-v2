@@ -1282,17 +1282,13 @@ func awsAwsjson11_serializeDocumentPutRecordsRequestEntry(v *types.PutRecordsReq
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutRecordsRequestEntryList(v []*types.PutRecordsRequestEntry, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentPutRecordsRequestEntryList(v []types.PutRecordsRequestEntry, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentPutRecordsRequestEntry(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentPutRecordsRequestEntry(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1321,32 +1317,24 @@ func awsAwsjson11_serializeDocumentShardFilter(v *types.ShardFilter, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagKeyList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagMap(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }

@@ -39,7 +39,7 @@ func TestClient_XmlMapsXmlName_awsRestxmlSerialize(t *testing.T) {
 		// Serializes XML maps that have xmlName on members
 		"XmlMapsXmlName": {
 			Params: &XmlMapsXmlNameInput{
-				MyMap: map[string]*types.GreetingStruct{
+				MyMap: map[string]types.GreetingStruct{
 					"foo": {
 						Hi: ptr.String("there"),
 					},
@@ -175,7 +175,7 @@ func TestClient_XmlMapsXmlName_awsRestxmlDeserialize(t *testing.T) {
 			</XmlMapsXmlNameInputOutput>
 			`),
 			ExpectResult: &XmlMapsXmlNameOutput{
-				MyMap: map[string]*types.GreetingStruct{
+				MyMap: map[string]types.GreetingStruct{
 					"foo": {
 						Hi: ptr.String("there"),
 					},

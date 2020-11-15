@@ -29,7 +29,7 @@ func (c *Client) ListRoleAliases(ctx context.Context, params *ListRoleAliasesInp
 type ListRoleAliasesInput struct {
 
 	// Return the list of role aliases in ascending alphabetical order.
-	AscendingOrder *bool
+	AscendingOrder bool
 
 	// A marker used to get the next set of results.
 	Marker *string
@@ -44,7 +44,7 @@ type ListRoleAliasesOutput struct {
 	NextMarker *string
 
 	// The role aliases.
-	RoleAliases []*string
+	RoleAliases []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

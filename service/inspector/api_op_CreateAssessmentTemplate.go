@@ -51,19 +51,19 @@ type CreateAssessmentTemplateInput struct {
 	// The duration of the assessment run in seconds.
 	//
 	// This member is required.
-	DurationInSeconds *int32
+	DurationInSeconds int32
 
 	// The ARNs that specify the rules packages that you want to attach to the
 	// assessment template.
 	//
 	// This member is required.
-	RulesPackageArns []*string
+	RulesPackageArns []string
 
 	// The user-defined attributes that are assigned to every finding that is generated
 	// by the assessment run that uses this assessment template. An attribute is a key
 	// and value pair (an Attribute object). Within an assessment template, each key
 	// must be unique.
-	UserAttributesForFindings []*types.Attribute
+	UserAttributesForFindings []types.Attribute
 }
 
 type CreateAssessmentTemplateOutput struct {

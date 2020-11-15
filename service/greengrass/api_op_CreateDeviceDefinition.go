@@ -40,7 +40,7 @@ type CreateDeviceDefinitionInput struct {
 	Name *string
 
 	// Tag(s) to add to the new resource.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateDeviceDefinitionOutput struct {

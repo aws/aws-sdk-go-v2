@@ -40,7 +40,7 @@ type PutPermissionInput struct {
 	// not allowed).
 	//
 	// This member is required.
-	Principals []*string
+	Principals []string
 
 	// The name of the profiling group.
 	//

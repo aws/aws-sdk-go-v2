@@ -59,7 +59,7 @@ type DescribeReservedNodesOutput struct {
 	Marker *string
 
 	// The list of ReservedNode objects.
-	ReservedNodes []*types.ReservedNode
+	ReservedNodes []types.ReservedNode
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

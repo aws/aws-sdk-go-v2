@@ -35,7 +35,7 @@ type UpdateDeviceInstanceInput struct {
 	Arn *string
 
 	// An array of strings that you want to associate with the device instance.
-	Labels []*string
+	Labels []string
 
 	// The ARN of the profile that you want to associate with the device instance.
 	ProfileArn *string

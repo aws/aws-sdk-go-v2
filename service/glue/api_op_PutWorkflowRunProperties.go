@@ -43,7 +43,7 @@ type PutWorkflowRunPropertiesInput struct {
 	// The properties to put for the specified run.
 	//
 	// This member is required.
-	RunProperties map[string]*string
+	RunProperties map[string]string
 }
 
 type PutWorkflowRunPropertiesOutput struct {

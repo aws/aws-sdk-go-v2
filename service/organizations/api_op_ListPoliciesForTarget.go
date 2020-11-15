@@ -104,7 +104,7 @@ type ListPoliciesForTargetOutput struct {
 	NextToken *string
 
 	// The list of policies that match the criteria in the request.
-	Policies []*types.PolicySummary
+	Policies []types.PolicySummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

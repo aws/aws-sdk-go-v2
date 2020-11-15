@@ -76,7 +76,7 @@ type ModifyClusterInput struct {
 	//
 	// * Cannot end with a
 	// hyphen or contain two consecutive hyphens
-	ClusterSecurityGroups []*string
+	ClusterSecurityGroups []string
 
 	// The new cluster type. When you submit your cluster resize request, your existing
 	// cluster goes into a read-only mode. After Amazon Redshift provisions a new
@@ -220,7 +220,7 @@ type ModifyClusterInput struct {
 
 	// A list of virtual private cloud (VPC) security groups to be associated with the
 	// cluster. This change is asynchronously applied as soon as possible.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 }
 
 type ModifyClusterOutput struct {

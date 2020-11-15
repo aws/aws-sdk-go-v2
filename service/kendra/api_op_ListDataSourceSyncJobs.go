@@ -59,7 +59,7 @@ type ListDataSourceSyncJobsInput struct {
 type ListDataSourceSyncJobsOutput struct {
 
 	// A history of synchronization jobs for the data source.
-	History []*types.DataSourceSyncJob
+	History []types.DataSourceSyncJob
 
 	// The GetDataSourceSyncJobHistory operation returns a page of vocabularies at a
 	// time. The maximum size of the page is set by the MaxResults parameter. If there

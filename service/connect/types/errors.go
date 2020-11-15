@@ -98,7 +98,7 @@ func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smith
 type InvalidContactFlowException struct {
 	Message *string
 
-	Problems []*ProblemDetail
+	Problems []ProblemDetail
 }
 
 func (e *InvalidContactFlowException) Error() string {

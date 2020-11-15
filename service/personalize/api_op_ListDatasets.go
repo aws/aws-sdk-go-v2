@@ -46,7 +46,7 @@ type ListDatasetsInput struct {
 type ListDatasetsOutput struct {
 
 	// An array of Dataset objects. Each object provides metadata information.
-	Datasets []*types.DatasetSummary
+	Datasets []types.DatasetSummary
 
 	// A token for getting the next set of datasets (if they exist).
 	NextToken *string

@@ -36,14 +36,14 @@ type DescribeConfigurationRecorderStatusInput struct {
 	// The name(s) of the configuration recorder. If the name is not specified, the
 	// action returns the current status of all the configuration recorders associated
 	// with the account.
-	ConfigurationRecorderNames []*string
+	ConfigurationRecorderNames []string
 }
 
 // The output for the DescribeConfigurationRecorderStatus action, in JSON format.
 type DescribeConfigurationRecorderStatusOutput struct {
 
 	// A list that contains status of the specified recorders.
-	ConfigurationRecordersStatus []*types.ConfigurationRecorderStatus
+	ConfigurationRecordersStatus []types.ConfigurationRecorderStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

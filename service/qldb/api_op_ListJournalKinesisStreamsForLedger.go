@@ -62,7 +62,7 @@ type ListJournalKinesisStreamsForLedgerOutput struct {
 
 	// The array of QLDB journal stream descriptors that are associated with the given
 	// ledger.
-	Streams []*types.JournalKinesisStreamDescription
+	Streams []types.JournalKinesisStreamDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

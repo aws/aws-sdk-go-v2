@@ -37,7 +37,7 @@ type ListEntitlementsInput struct {
 	// results.) The service might return fewer results than the MaxResults value. If
 	// MaxResults is not included in the request, the service defaults to pagination
 	// with a maximum of 20 results per page.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token that identifies which batch of results that you want to see. For
 	// example, you submit a ListEntitlements request with MaxResults set at 5. The
@@ -50,7 +50,7 @@ type ListEntitlementsInput struct {
 type ListEntitlementsOutput struct {
 
 	// A list of entitlements that have been granted to you from other AWS accounts.
-	Entitlements []*types.ListedEntitlement
+	Entitlements []types.ListedEntitlement
 
 	// The token that identifies which batch of results that you want to see. For
 	// example, you submit a ListEntitlements request with MaxResults set at 5. The

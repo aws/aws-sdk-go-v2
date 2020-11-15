@@ -43,7 +43,7 @@ type ListTestGridProjectsOutput struct {
 	NextToken *string
 
 	// The list of TestGridProjects, based on a ListTestGridProjectsRequest.
-	TestGridProjects []*types.TestGridProject
+	TestGridProjects []types.TestGridProject
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

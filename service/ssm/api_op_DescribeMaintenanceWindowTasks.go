@@ -36,11 +36,11 @@ type DescribeMaintenanceWindowTasksInput struct {
 
 	// Optional filters used to narrow down the scope of the returned tasks. The
 	// supported filter keys are WindowTaskId, TaskArn, Priority, and TaskType.
-	Filters []*types.MaintenanceWindowFilter
+	Filters []types.MaintenanceWindowFilter
 
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
@@ -54,7 +54,7 @@ type DescribeMaintenanceWindowTasksOutput struct {
 	NextToken *string
 
 	// Information about the tasks in the maintenance window.
-	Tasks []*types.MaintenanceWindowTask
+	Tasks []types.MaintenanceWindowTask
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

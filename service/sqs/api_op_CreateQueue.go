@@ -213,7 +213,7 @@ type CreateQueueInput struct {
 	// MessageDeduplicationId that is the same as the one generated for the first
 	// MessageDeduplicationId, the two messages are treated as duplicates and only one
 	// copy of the message is delivered.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// Add cost allocation tags to the specified Amazon SQS queue. For an overview, see
 	// Tagging Your Amazon SQS Queues
@@ -241,7 +241,7 @@ type CreateQueueInput struct {
 	// Grant Cross-Account Permissions to a Role and a User Name
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
 	// in the Amazon Simple Queue Service Developer Guide.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Returns the QueueUrl attribute of the created queue.

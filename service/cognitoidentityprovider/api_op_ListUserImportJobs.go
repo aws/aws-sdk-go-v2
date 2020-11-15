@@ -33,7 +33,7 @@ type ListUserImportJobsInput struct {
 	// The maximum number of import jobs you want the request to return.
 	//
 	// This member is required.
-	MaxResults *int32
+	MaxResults int32
 
 	// The user pool ID for the user pool that the users are being imported into.
 	//
@@ -54,7 +54,7 @@ type ListUserImportJobsOutput struct {
 	PaginationToken *string
 
 	// The user import jobs.
-	UserImportJobs []*types.UserImportJobType
+	UserImportJobs []types.UserImportJobType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

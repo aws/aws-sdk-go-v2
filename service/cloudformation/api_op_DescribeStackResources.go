@@ -74,7 +74,7 @@ type DescribeStackResourcesInput struct {
 type DescribeStackResourcesOutput struct {
 
 	// A list of StackResource structures.
-	StackResources []*types.StackResource
+	StackResources []types.StackResource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

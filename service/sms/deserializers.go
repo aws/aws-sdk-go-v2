@@ -4735,7 +4735,7 @@ func awsAwsjson11_deserializeErrorUnauthorizedOperationException(response *smith
 	return output
 }
 
-func awsAwsjson11_deserializeDocumentApps(v *[]*types.AppSummary, value interface{}) error {
+func awsAwsjson11_deserializeDocumentApps(v *[]types.AppSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4748,18 +4748,20 @@ func awsAwsjson11_deserializeDocumentApps(v *[]*types.AppSummary, value interfac
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.AppSummary
+	var cv []types.AppSummary
 	if *v == nil {
-		cv = []*types.AppSummary{}
+		cv = []types.AppSummary{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.AppSummary
-		if err := awsAwsjson11_deserializeDocumentAppSummary(&col, value); err != nil {
+		var col types.AppSummary
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAppSummary(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4795,7 +4797,7 @@ func awsAwsjson11_deserializeDocumentAppSummary(v **types.AppSummary, value inte
 				if !ok {
 					return fmt.Errorf("expected AppId to be of type string, got %T instead", value)
 				}
-				sv.AppId = &jtv
+				sv.AppId = ptr.String(jtv)
 			}
 
 		case "creationTime":
@@ -4817,7 +4819,7 @@ func awsAwsjson11_deserializeDocumentAppSummary(v **types.AppSummary, value inte
 				if !ok {
 					return fmt.Errorf("expected AppDescription to be of type string, got %T instead", value)
 				}
-				sv.Description = &jtv
+				sv.Description = ptr.String(jtv)
 			}
 
 		case "importedAppId":
@@ -4826,7 +4828,7 @@ func awsAwsjson11_deserializeDocumentAppSummary(v **types.AppSummary, value inte
 				if !ok {
 					return fmt.Errorf("expected ImportedAppId to be of type string, got %T instead", value)
 				}
-				sv.ImportedAppId = &jtv
+				sv.ImportedAppId = ptr.String(jtv)
 			}
 
 		case "lastModified":
@@ -4884,7 +4886,7 @@ func awsAwsjson11_deserializeDocumentAppSummary(v **types.AppSummary, value inte
 				if !ok {
 					return fmt.Errorf("expected AppLaunchStatusMessage to be of type string, got %T instead", value)
 				}
-				sv.LaunchStatusMessage = &jtv
+				sv.LaunchStatusMessage = ptr.String(jtv)
 			}
 
 		case "name":
@@ -4893,7 +4895,7 @@ func awsAwsjson11_deserializeDocumentAppSummary(v **types.AppSummary, value inte
 				if !ok {
 					return fmt.Errorf("expected AppName to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "replicationConfigurationStatus":
@@ -4920,7 +4922,7 @@ func awsAwsjson11_deserializeDocumentAppSummary(v **types.AppSummary, value inte
 				if !ok {
 					return fmt.Errorf("expected AppReplicationStatusMessage to be of type string, got %T instead", value)
 				}
-				sv.ReplicationStatusMessage = &jtv
+				sv.ReplicationStatusMessage = ptr.String(jtv)
 			}
 
 		case "roleName":
@@ -4929,7 +4931,7 @@ func awsAwsjson11_deserializeDocumentAppSummary(v **types.AppSummary, value inte
 				if !ok {
 					return fmt.Errorf("expected RoleName to be of type string, got %T instead", value)
 				}
-				sv.RoleName = &jtv
+				sv.RoleName = ptr.String(jtv)
 			}
 
 		case "status":
@@ -4947,7 +4949,7 @@ func awsAwsjson11_deserializeDocumentAppSummary(v **types.AppSummary, value inte
 				if !ok {
 					return fmt.Errorf("expected AppStatusMessage to be of type string, got %T instead", value)
 				}
-				sv.StatusMessage = &jtv
+				sv.StatusMessage = ptr.String(jtv)
 			}
 
 		case "totalServerGroups":
@@ -5022,7 +5024,7 @@ func awsAwsjson11_deserializeDocumentAppValidationConfiguration(v **types.AppVal
 				if !ok {
 					return fmt.Errorf("expected NonEmptyStringWithMaxLen255 to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "ssmValidationParameters":
@@ -5036,7 +5038,7 @@ func awsAwsjson11_deserializeDocumentAppValidationConfiguration(v **types.AppVal
 				if !ok {
 					return fmt.Errorf("expected ValidationId to be of type string, got %T instead", value)
 				}
-				sv.ValidationId = &jtv
+				sv.ValidationId = ptr.String(jtv)
 			}
 
 		default:
@@ -5048,7 +5050,7 @@ func awsAwsjson11_deserializeDocumentAppValidationConfiguration(v **types.AppVal
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAppValidationConfigurations(v *[]*types.AppValidationConfiguration, value interface{}) error {
+func awsAwsjson11_deserializeDocumentAppValidationConfigurations(v *[]types.AppValidationConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5061,18 +5063,20 @@ func awsAwsjson11_deserializeDocumentAppValidationConfigurations(v *[]*types.App
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.AppValidationConfiguration
+	var cv []types.AppValidationConfiguration
 	if *v == nil {
-		cv = []*types.AppValidationConfiguration{}
+		cv = []types.AppValidationConfiguration{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.AppValidationConfiguration
-		if err := awsAwsjson11_deserializeDocumentAppValidationConfiguration(&col, value); err != nil {
+		var col types.AppValidationConfiguration
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAppValidationConfiguration(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -5162,7 +5166,7 @@ func awsAwsjson11_deserializeDocumentConnector(v **types.Connector, value interf
 				if !ok {
 					return fmt.Errorf("expected ConnectorId to be of type string, got %T instead", value)
 				}
-				sv.ConnectorId = &jtv
+				sv.ConnectorId = ptr.String(jtv)
 			}
 
 		case "ipAddress":
@@ -5171,7 +5175,7 @@ func awsAwsjson11_deserializeDocumentConnector(v **types.Connector, value interf
 				if !ok {
 					return fmt.Errorf("expected IpAddress to be of type string, got %T instead", value)
 				}
-				sv.IpAddress = &jtv
+				sv.IpAddress = ptr.String(jtv)
 			}
 
 		case "macAddress":
@@ -5180,7 +5184,7 @@ func awsAwsjson11_deserializeDocumentConnector(v **types.Connector, value interf
 				if !ok {
 					return fmt.Errorf("expected MacAddress to be of type string, got %T instead", value)
 				}
-				sv.MacAddress = &jtv
+				sv.MacAddress = ptr.String(jtv)
 			}
 
 		case "status":
@@ -5198,7 +5202,7 @@ func awsAwsjson11_deserializeDocumentConnector(v **types.Connector, value interf
 				if !ok {
 					return fmt.Errorf("expected ConnectorVersion to be of type string, got %T instead", value)
 				}
-				sv.Version = &jtv
+				sv.Version = ptr.String(jtv)
 			}
 
 		case "vmManagerId":
@@ -5207,7 +5211,7 @@ func awsAwsjson11_deserializeDocumentConnector(v **types.Connector, value interf
 				if !ok {
 					return fmt.Errorf("expected VmManagerId to be of type string, got %T instead", value)
 				}
-				sv.VmManagerId = &jtv
+				sv.VmManagerId = ptr.String(jtv)
 			}
 
 		case "vmManagerName":
@@ -5216,7 +5220,7 @@ func awsAwsjson11_deserializeDocumentConnector(v **types.Connector, value interf
 				if !ok {
 					return fmt.Errorf("expected VmManagerName to be of type string, got %T instead", value)
 				}
-				sv.VmManagerName = &jtv
+				sv.VmManagerName = ptr.String(jtv)
 			}
 
 		case "vmManagerType":
@@ -5273,7 +5277,7 @@ func awsAwsjson11_deserializeDocumentConnectorCapabilityList(v *[]types.Connecto
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentConnectorList(v *[]*types.Connector, value interface{}) error {
+func awsAwsjson11_deserializeDocumentConnectorList(v *[]types.Connector, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5286,18 +5290,20 @@ func awsAwsjson11_deserializeDocumentConnectorList(v *[]*types.Connector, value 
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Connector
+	var cv []types.Connector
 	if *v == nil {
-		cv = []*types.Connector{}
+		cv = []types.Connector{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Connector
-		if err := awsAwsjson11_deserializeDocumentConnector(&col, value); err != nil {
+		var col types.Connector
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentConnector(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -5333,7 +5339,7 @@ func awsAwsjson11_deserializeDocumentDryRunOperationException(v **types.DryRunOp
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -5373,7 +5379,7 @@ func awsAwsjson11_deserializeDocumentInternalError(v **types.InternalError, valu
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -5413,7 +5419,7 @@ func awsAwsjson11_deserializeDocumentInvalidParameterException(v **types.Invalid
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -5466,7 +5472,7 @@ func awsAwsjson11_deserializeDocumentLaunchDetails(v **types.LaunchDetails, valu
 				if !ok {
 					return fmt.Errorf("expected StackId to be of type string, got %T instead", value)
 				}
-				sv.StackId = &jtv
+				sv.StackId = ptr.String(jtv)
 			}
 
 		case "stackName":
@@ -5475,7 +5481,7 @@ func awsAwsjson11_deserializeDocumentLaunchDetails(v **types.LaunchDetails, valu
 				if !ok {
 					return fmt.Errorf("expected StackName to be of type string, got %T instead", value)
 				}
-				sv.StackName = &jtv
+				sv.StackName = ptr.String(jtv)
 			}
 
 		default:
@@ -5515,7 +5521,7 @@ func awsAwsjson11_deserializeDocumentMissingRequiredParameterException(v **types
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -5555,7 +5561,7 @@ func awsAwsjson11_deserializeDocumentNoConnectorsAvailableException(v **types.No
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -5595,7 +5601,7 @@ func awsAwsjson11_deserializeDocumentOperationNotPermittedException(v **types.Op
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -5635,7 +5641,7 @@ func awsAwsjson11_deserializeDocumentReplicationJob(v **types.ReplicationJob, va
 				if !ok {
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
-				sv.Description = &jtv
+				sv.Description = ptr.String(jtv)
 			}
 
 		case "encrypted":
@@ -5644,7 +5650,7 @@ func awsAwsjson11_deserializeDocumentReplicationJob(v **types.ReplicationJob, va
 				if !ok {
 					return fmt.Errorf("expected Encrypted to be of type *bool, got %T instead", value)
 				}
-				sv.Encrypted = &jtv
+				sv.Encrypted = ptr.Bool(jtv)
 			}
 
 		case "frequency":
@@ -5666,7 +5672,7 @@ func awsAwsjson11_deserializeDocumentReplicationJob(v **types.ReplicationJob, va
 				if !ok {
 					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
 				}
-				sv.KmsKeyId = &jtv
+				sv.KmsKeyId = ptr.String(jtv)
 			}
 
 		case "latestAmiId":
@@ -5675,7 +5681,7 @@ func awsAwsjson11_deserializeDocumentReplicationJob(v **types.ReplicationJob, va
 				if !ok {
 					return fmt.Errorf("expected AmiId to be of type string, got %T instead", value)
 				}
-				sv.LatestAmiId = &jtv
+				sv.LatestAmiId = ptr.String(jtv)
 			}
 
 		case "licenseType":
@@ -5719,7 +5725,7 @@ func awsAwsjson11_deserializeDocumentReplicationJob(v **types.ReplicationJob, va
 				if !ok {
 					return fmt.Errorf("expected ReplicationJobId to be of type string, got %T instead", value)
 				}
-				sv.ReplicationJobId = &jtv
+				sv.ReplicationJobId = ptr.String(jtv)
 			}
 
 		case "replicationRunList":
@@ -5733,7 +5739,7 @@ func awsAwsjson11_deserializeDocumentReplicationJob(v **types.ReplicationJob, va
 				if !ok {
 					return fmt.Errorf("expected RoleName to be of type string, got %T instead", value)
 				}
-				sv.RoleName = &jtv
+				sv.RoleName = ptr.String(jtv)
 			}
 
 		case "runOnce":
@@ -5742,7 +5748,7 @@ func awsAwsjson11_deserializeDocumentReplicationJob(v **types.ReplicationJob, va
 				if !ok {
 					return fmt.Errorf("expected RunOnce to be of type *bool, got %T instead", value)
 				}
-				sv.RunOnce = &jtv
+				sv.RunOnce = ptr.Bool(jtv)
 			}
 
 		case "seedReplicationTime":
@@ -5764,7 +5770,7 @@ func awsAwsjson11_deserializeDocumentReplicationJob(v **types.ReplicationJob, va
 				if !ok {
 					return fmt.Errorf("expected ServerId to be of type string, got %T instead", value)
 				}
-				sv.ServerId = &jtv
+				sv.ServerId = ptr.String(jtv)
 			}
 
 		case "serverType":
@@ -5791,7 +5797,7 @@ func awsAwsjson11_deserializeDocumentReplicationJob(v **types.ReplicationJob, va
 				if !ok {
 					return fmt.Errorf("expected ReplicationJobStatusMessage to be of type string, got %T instead", value)
 				}
-				sv.StatusMessage = &jtv
+				sv.StatusMessage = ptr.String(jtv)
 			}
 
 		case "vmServer":
@@ -5836,7 +5842,7 @@ func awsAwsjson11_deserializeDocumentReplicationJobAlreadyExistsException(v **ty
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -5848,7 +5854,7 @@ func awsAwsjson11_deserializeDocumentReplicationJobAlreadyExistsException(v **ty
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentReplicationJobList(v *[]*types.ReplicationJob, value interface{}) error {
+func awsAwsjson11_deserializeDocumentReplicationJobList(v *[]types.ReplicationJob, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5861,18 +5867,20 @@ func awsAwsjson11_deserializeDocumentReplicationJobList(v *[]*types.ReplicationJ
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ReplicationJob
+	var cv []types.ReplicationJob
 	if *v == nil {
-		cv = []*types.ReplicationJob{}
+		cv = []types.ReplicationJob{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ReplicationJob
-		if err := awsAwsjson11_deserializeDocumentReplicationJob(&col, value); err != nil {
+		var col types.ReplicationJob
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentReplicationJob(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -5908,7 +5916,7 @@ func awsAwsjson11_deserializeDocumentReplicationJobNotFoundException(v **types.R
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -5948,7 +5956,7 @@ func awsAwsjson11_deserializeDocumentReplicationRun(v **types.ReplicationRun, va
 				if !ok {
 					return fmt.Errorf("expected AmiId to be of type string, got %T instead", value)
 				}
-				sv.AmiId = &jtv
+				sv.AmiId = ptr.String(jtv)
 			}
 
 		case "completedTime":
@@ -5970,7 +5978,7 @@ func awsAwsjson11_deserializeDocumentReplicationRun(v **types.ReplicationRun, va
 				if !ok {
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
-				sv.Description = &jtv
+				sv.Description = ptr.String(jtv)
 			}
 
 		case "encrypted":
@@ -5979,7 +5987,7 @@ func awsAwsjson11_deserializeDocumentReplicationRun(v **types.ReplicationRun, va
 				if !ok {
 					return fmt.Errorf("expected Encrypted to be of type *bool, got %T instead", value)
 				}
-				sv.Encrypted = &jtv
+				sv.Encrypted = ptr.Bool(jtv)
 			}
 
 		case "kmsKeyId":
@@ -5988,7 +5996,7 @@ func awsAwsjson11_deserializeDocumentReplicationRun(v **types.ReplicationRun, va
 				if !ok {
 					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
 				}
-				sv.KmsKeyId = &jtv
+				sv.KmsKeyId = ptr.String(jtv)
 			}
 
 		case "replicationRunId":
@@ -5997,7 +6005,7 @@ func awsAwsjson11_deserializeDocumentReplicationRun(v **types.ReplicationRun, va
 				if !ok {
 					return fmt.Errorf("expected ReplicationRunId to be of type string, got %T instead", value)
 				}
-				sv.ReplicationRunId = &jtv
+				sv.ReplicationRunId = ptr.String(jtv)
 			}
 
 		case "scheduledStartTime":
@@ -6033,7 +6041,7 @@ func awsAwsjson11_deserializeDocumentReplicationRun(v **types.ReplicationRun, va
 				if !ok {
 					return fmt.Errorf("expected ReplicationRunStatusMessage to be of type string, got %T instead", value)
 				}
-				sv.StatusMessage = &jtv
+				sv.StatusMessage = ptr.String(jtv)
 			}
 
 		case "type":
@@ -6082,7 +6090,7 @@ func awsAwsjson11_deserializeDocumentReplicationRunLimitExceededException(v **ty
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -6094,7 +6102,7 @@ func awsAwsjson11_deserializeDocumentReplicationRunLimitExceededException(v **ty
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentReplicationRunList(v *[]*types.ReplicationRun, value interface{}) error {
+func awsAwsjson11_deserializeDocumentReplicationRunList(v *[]types.ReplicationRun, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6107,18 +6115,20 @@ func awsAwsjson11_deserializeDocumentReplicationRunList(v *[]*types.ReplicationR
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ReplicationRun
+	var cv []types.ReplicationRun
 	if *v == nil {
-		cv = []*types.ReplicationRun{}
+		cv = []types.ReplicationRun{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ReplicationRun
-		if err := awsAwsjson11_deserializeDocumentReplicationRun(&col, value); err != nil {
+		var col types.ReplicationRun
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentReplicationRun(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -6154,7 +6164,7 @@ func awsAwsjson11_deserializeDocumentReplicationRunStageDetails(v **types.Replic
 				if !ok {
 					return fmt.Errorf("expected ReplicationRunStage to be of type string, got %T instead", value)
 				}
-				sv.Stage = &jtv
+				sv.Stage = ptr.String(jtv)
 			}
 
 		case "stageProgress":
@@ -6163,7 +6173,7 @@ func awsAwsjson11_deserializeDocumentReplicationRunStageDetails(v **types.Replic
 				if !ok {
 					return fmt.Errorf("expected ReplicationRunStageProgress to be of type string, got %T instead", value)
 				}
-				sv.StageProgress = &jtv
+				sv.StageProgress = ptr.String(jtv)
 			}
 
 		default:
@@ -6203,7 +6213,7 @@ func awsAwsjson11_deserializeDocumentS3Location(v **types.S3Location, value inte
 				if !ok {
 					return fmt.Errorf("expected S3BucketName to be of type string, got %T instead", value)
 				}
-				sv.Bucket = &jtv
+				sv.Bucket = ptr.String(jtv)
 			}
 
 		case "key":
@@ -6212,7 +6222,7 @@ func awsAwsjson11_deserializeDocumentS3Location(v **types.S3Location, value inte
 				if !ok {
 					return fmt.Errorf("expected S3KeyName to be of type string, got %T instead", value)
 				}
-				sv.Key = &jtv
+				sv.Key = ptr.String(jtv)
 			}
 
 		default:
@@ -6252,7 +6262,7 @@ func awsAwsjson11_deserializeDocumentServer(v **types.Server, value interface{})
 				if !ok {
 					return fmt.Errorf("expected ReplicationJobId to be of type string, got %T instead", value)
 				}
-				sv.ReplicationJobId = &jtv
+				sv.ReplicationJobId = ptr.String(jtv)
 			}
 
 		case "replicationJobTerminated":
@@ -6261,7 +6271,7 @@ func awsAwsjson11_deserializeDocumentServer(v **types.Server, value interface{})
 				if !ok {
 					return fmt.Errorf("expected ReplicationJobTerminated to be of type *bool, got %T instead", value)
 				}
-				sv.ReplicationJobTerminated = &jtv
+				sv.ReplicationJobTerminated = ptr.Bool(jtv)
 			}
 
 		case "serverId":
@@ -6270,7 +6280,7 @@ func awsAwsjson11_deserializeDocumentServer(v **types.Server, value interface{})
 				if !ok {
 					return fmt.Errorf("expected ServerId to be of type string, got %T instead", value)
 				}
-				sv.ServerId = &jtv
+				sv.ServerId = ptr.String(jtv)
 			}
 
 		case "serverType":
@@ -6324,7 +6334,7 @@ func awsAwsjson11_deserializeDocumentServerCannotBeReplicatedException(v **types
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -6364,7 +6374,7 @@ func awsAwsjson11_deserializeDocumentServerGroup(v **types.ServerGroup, value in
 				if !ok {
 					return fmt.Errorf("expected ServerGroupName to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "serverGroupId":
@@ -6373,7 +6383,7 @@ func awsAwsjson11_deserializeDocumentServerGroup(v **types.ServerGroup, value in
 				if !ok {
 					return fmt.Errorf("expected ServerGroupId to be of type string, got %T instead", value)
 				}
-				sv.ServerGroupId = &jtv
+				sv.ServerGroupId = ptr.String(jtv)
 			}
 
 		case "serverList":
@@ -6431,7 +6441,7 @@ func awsAwsjson11_deserializeDocumentServerGroupLaunchConfiguration(v **types.Se
 				if !ok {
 					return fmt.Errorf("expected ServerGroupId to be of type string, got %T instead", value)
 				}
-				sv.ServerGroupId = &jtv
+				sv.ServerGroupId = ptr.String(jtv)
 			}
 
 		case "serverLaunchConfigurations":
@@ -6448,7 +6458,7 @@ func awsAwsjson11_deserializeDocumentServerGroupLaunchConfiguration(v **types.Se
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentServerGroupLaunchConfigurations(v *[]*types.ServerGroupLaunchConfiguration, value interface{}) error {
+func awsAwsjson11_deserializeDocumentServerGroupLaunchConfigurations(v *[]types.ServerGroupLaunchConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6461,18 +6471,20 @@ func awsAwsjson11_deserializeDocumentServerGroupLaunchConfigurations(v *[]*types
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ServerGroupLaunchConfiguration
+	var cv []types.ServerGroupLaunchConfiguration
 	if *v == nil {
-		cv = []*types.ServerGroupLaunchConfiguration{}
+		cv = []types.ServerGroupLaunchConfiguration{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ServerGroupLaunchConfiguration
-		if err := awsAwsjson11_deserializeDocumentServerGroupLaunchConfiguration(&col, value); err != nil {
+		var col types.ServerGroupLaunchConfiguration
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentServerGroupLaunchConfiguration(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -6508,7 +6520,7 @@ func awsAwsjson11_deserializeDocumentServerGroupReplicationConfiguration(v **typ
 				if !ok {
 					return fmt.Errorf("expected ServerGroupId to be of type string, got %T instead", value)
 				}
-				sv.ServerGroupId = &jtv
+				sv.ServerGroupId = ptr.String(jtv)
 			}
 
 		case "serverReplicationConfigurations":
@@ -6525,7 +6537,7 @@ func awsAwsjson11_deserializeDocumentServerGroupReplicationConfiguration(v **typ
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentServerGroupReplicationConfigurations(v *[]*types.ServerGroupReplicationConfiguration, value interface{}) error {
+func awsAwsjson11_deserializeDocumentServerGroupReplicationConfigurations(v *[]types.ServerGroupReplicationConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6538,18 +6550,20 @@ func awsAwsjson11_deserializeDocumentServerGroupReplicationConfigurations(v *[]*
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ServerGroupReplicationConfiguration
+	var cv []types.ServerGroupReplicationConfiguration
 	if *v == nil {
-		cv = []*types.ServerGroupReplicationConfiguration{}
+		cv = []types.ServerGroupReplicationConfiguration{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ServerGroupReplicationConfiguration
-		if err := awsAwsjson11_deserializeDocumentServerGroupReplicationConfiguration(&col, value); err != nil {
+		var col types.ServerGroupReplicationConfiguration
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentServerGroupReplicationConfiguration(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -6557,7 +6571,7 @@ func awsAwsjson11_deserializeDocumentServerGroupReplicationConfigurations(v *[]*
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentServerGroups(v *[]*types.ServerGroup, value interface{}) error {
+func awsAwsjson11_deserializeDocumentServerGroups(v *[]types.ServerGroup, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6570,18 +6584,20 @@ func awsAwsjson11_deserializeDocumentServerGroups(v *[]*types.ServerGroup, value
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ServerGroup
+	var cv []types.ServerGroup
 	if *v == nil {
-		cv = []*types.ServerGroup{}
+		cv = []types.ServerGroup{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ServerGroup
-		if err := awsAwsjson11_deserializeDocumentServerGroup(&col, value); err != nil {
+		var col types.ServerGroup
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentServerGroup(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -6617,7 +6633,7 @@ func awsAwsjson11_deserializeDocumentServerGroupValidationConfiguration(v **type
 				if !ok {
 					return fmt.Errorf("expected ServerGroupId to be of type string, got %T instead", value)
 				}
-				sv.ServerGroupId = &jtv
+				sv.ServerGroupId = ptr.String(jtv)
 			}
 
 		case "serverValidationConfigurations":
@@ -6634,7 +6650,7 @@ func awsAwsjson11_deserializeDocumentServerGroupValidationConfiguration(v **type
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentServerGroupValidationConfigurations(v *[]*types.ServerGroupValidationConfiguration, value interface{}) error {
+func awsAwsjson11_deserializeDocumentServerGroupValidationConfigurations(v *[]types.ServerGroupValidationConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6647,18 +6663,20 @@ func awsAwsjson11_deserializeDocumentServerGroupValidationConfigurations(v *[]*t
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ServerGroupValidationConfiguration
+	var cv []types.ServerGroupValidationConfiguration
 	if *v == nil {
-		cv = []*types.ServerGroupValidationConfiguration{}
+		cv = []types.ServerGroupValidationConfiguration{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ServerGroupValidationConfiguration
-		if err := awsAwsjson11_deserializeDocumentServerGroupValidationConfiguration(&col, value); err != nil {
+		var col types.ServerGroupValidationConfiguration
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentServerGroupValidationConfiguration(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -6694,7 +6712,7 @@ func awsAwsjson11_deserializeDocumentServerLaunchConfiguration(v **types.ServerL
 				if !ok {
 					return fmt.Errorf("expected AssociatePublicIpAddress to be of type *bool, got %T instead", value)
 				}
-				sv.AssociatePublicIpAddress = &jtv
+				sv.AssociatePublicIpAddress = ptr.Bool(jtv)
 			}
 
 		case "configureScript":
@@ -6717,7 +6735,7 @@ func awsAwsjson11_deserializeDocumentServerLaunchConfiguration(v **types.ServerL
 				if !ok {
 					return fmt.Errorf("expected EC2KeyName to be of type string, got %T instead", value)
 				}
-				sv.Ec2KeyName = &jtv
+				sv.Ec2KeyName = ptr.String(jtv)
 			}
 
 		case "iamInstanceProfileName":
@@ -6726,7 +6744,7 @@ func awsAwsjson11_deserializeDocumentServerLaunchConfiguration(v **types.ServerL
 				if !ok {
 					return fmt.Errorf("expected RoleName to be of type string, got %T instead", value)
 				}
-				sv.IamInstanceProfileName = &jtv
+				sv.IamInstanceProfileName = ptr.String(jtv)
 			}
 
 		case "instanceType":
@@ -6735,7 +6753,7 @@ func awsAwsjson11_deserializeDocumentServerLaunchConfiguration(v **types.ServerL
 				if !ok {
 					return fmt.Errorf("expected InstanceType to be of type string, got %T instead", value)
 				}
-				sv.InstanceType = &jtv
+				sv.InstanceType = ptr.String(jtv)
 			}
 
 		case "logicalId":
@@ -6744,7 +6762,7 @@ func awsAwsjson11_deserializeDocumentServerLaunchConfiguration(v **types.ServerL
 				if !ok {
 					return fmt.Errorf("expected LogicalId to be of type string, got %T instead", value)
 				}
-				sv.LogicalId = &jtv
+				sv.LogicalId = ptr.String(jtv)
 			}
 
 		case "securityGroup":
@@ -6753,7 +6771,7 @@ func awsAwsjson11_deserializeDocumentServerLaunchConfiguration(v **types.ServerL
 				if !ok {
 					return fmt.Errorf("expected SecurityGroup to be of type string, got %T instead", value)
 				}
-				sv.SecurityGroup = &jtv
+				sv.SecurityGroup = ptr.String(jtv)
 			}
 
 		case "server":
@@ -6767,7 +6785,7 @@ func awsAwsjson11_deserializeDocumentServerLaunchConfiguration(v **types.ServerL
 				if !ok {
 					return fmt.Errorf("expected Subnet to be of type string, got %T instead", value)
 				}
-				sv.Subnet = &jtv
+				sv.Subnet = ptr.String(jtv)
 			}
 
 		case "userData":
@@ -6781,7 +6799,7 @@ func awsAwsjson11_deserializeDocumentServerLaunchConfiguration(v **types.ServerL
 				if !ok {
 					return fmt.Errorf("expected VPC to be of type string, got %T instead", value)
 				}
-				sv.Vpc = &jtv
+				sv.Vpc = ptr.String(jtv)
 			}
 
 		default:
@@ -6793,7 +6811,7 @@ func awsAwsjson11_deserializeDocumentServerLaunchConfiguration(v **types.ServerL
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentServerLaunchConfigurations(v *[]*types.ServerLaunchConfiguration, value interface{}) error {
+func awsAwsjson11_deserializeDocumentServerLaunchConfigurations(v *[]types.ServerLaunchConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6806,18 +6824,20 @@ func awsAwsjson11_deserializeDocumentServerLaunchConfigurations(v *[]*types.Serv
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ServerLaunchConfiguration
+	var cv []types.ServerLaunchConfiguration
 	if *v == nil {
-		cv = []*types.ServerLaunchConfiguration{}
+		cv = []types.ServerLaunchConfiguration{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ServerLaunchConfiguration
-		if err := awsAwsjson11_deserializeDocumentServerLaunchConfiguration(&col, value); err != nil {
+		var col types.ServerLaunchConfiguration
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentServerLaunchConfiguration(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -6825,7 +6845,7 @@ func awsAwsjson11_deserializeDocumentServerLaunchConfigurations(v *[]*types.Serv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentServerList(v *[]*types.Server, value interface{}) error {
+func awsAwsjson11_deserializeDocumentServerList(v *[]types.Server, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6838,18 +6858,20 @@ func awsAwsjson11_deserializeDocumentServerList(v *[]*types.Server, value interf
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Server
+	var cv []types.Server
 	if *v == nil {
-		cv = []*types.Server{}
+		cv = []types.Server{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Server
-		if err := awsAwsjson11_deserializeDocumentServer(&col, value); err != nil {
+		var col types.Server
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentServer(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -6898,7 +6920,7 @@ func awsAwsjson11_deserializeDocumentServerReplicationConfiguration(v **types.Se
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentServerReplicationConfigurations(v *[]*types.ServerReplicationConfiguration, value interface{}) error {
+func awsAwsjson11_deserializeDocumentServerReplicationConfigurations(v *[]types.ServerReplicationConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6911,18 +6933,20 @@ func awsAwsjson11_deserializeDocumentServerReplicationConfigurations(v *[]*types
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ServerReplicationConfiguration
+	var cv []types.ServerReplicationConfiguration
 	if *v == nil {
-		cv = []*types.ServerReplicationConfiguration{}
+		cv = []types.ServerReplicationConfiguration{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ServerReplicationConfiguration
-		if err := awsAwsjson11_deserializeDocumentServerReplicationConfiguration(&col, value); err != nil {
+		var col types.ServerReplicationConfiguration
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentServerReplicationConfiguration(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -6958,7 +6982,7 @@ func awsAwsjson11_deserializeDocumentServerReplicationParameters(v **types.Serve
 				if !ok {
 					return fmt.Errorf("expected Encrypted to be of type *bool, got %T instead", value)
 				}
-				sv.Encrypted = &jtv
+				sv.Encrypted = ptr.Bool(jtv)
 			}
 
 		case "frequency":
@@ -6980,7 +7004,7 @@ func awsAwsjson11_deserializeDocumentServerReplicationParameters(v **types.Serve
 				if !ok {
 					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
 				}
-				sv.KmsKeyId = &jtv
+				sv.KmsKeyId = ptr.String(jtv)
 			}
 
 		case "licenseType":
@@ -7011,7 +7035,7 @@ func awsAwsjson11_deserializeDocumentServerReplicationParameters(v **types.Serve
 				if !ok {
 					return fmt.Errorf("expected RunOnce to be of type *bool, got %T instead", value)
 				}
-				sv.RunOnce = &jtv
+				sv.RunOnce = ptr.Bool(jtv)
 			}
 
 		case "seedTime":
@@ -7064,7 +7088,7 @@ func awsAwsjson11_deserializeDocumentServerValidationConfiguration(v **types.Ser
 				if !ok {
 					return fmt.Errorf("expected NonEmptyStringWithMaxLen255 to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "server":
@@ -7092,7 +7116,7 @@ func awsAwsjson11_deserializeDocumentServerValidationConfiguration(v **types.Ser
 				if !ok {
 					return fmt.Errorf("expected ValidationId to be of type string, got %T instead", value)
 				}
-				sv.ValidationId = &jtv
+				sv.ValidationId = ptr.String(jtv)
 			}
 
 		default:
@@ -7104,7 +7128,7 @@ func awsAwsjson11_deserializeDocumentServerValidationConfiguration(v **types.Ser
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentServerValidationConfigurations(v *[]*types.ServerValidationConfiguration, value interface{}) error {
+func awsAwsjson11_deserializeDocumentServerValidationConfigurations(v *[]types.ServerValidationConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7117,18 +7141,20 @@ func awsAwsjson11_deserializeDocumentServerValidationConfigurations(v *[]*types.
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ServerValidationConfiguration
+	var cv []types.ServerValidationConfiguration
 	if *v == nil {
-		cv = []*types.ServerValidationConfiguration{}
+		cv = []types.ServerValidationConfiguration{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ServerValidationConfiguration
-		if err := awsAwsjson11_deserializeDocumentServerValidationConfiguration(&col, value); err != nil {
+		var col types.ServerValidationConfiguration
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentServerValidationConfiguration(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -7272,7 +7298,7 @@ func awsAwsjson11_deserializeDocumentSSMValidationParameters(v **types.SSMValida
 				if !ok {
 					return fmt.Errorf("expected Command to be of type string, got %T instead", value)
 				}
-				sv.Command = &jtv
+				sv.Command = ptr.String(jtv)
 			}
 
 		case "executionTimeoutSeconds":
@@ -7285,7 +7311,7 @@ func awsAwsjson11_deserializeDocumentSSMValidationParameters(v **types.SSMValida
 				if err != nil {
 					return err
 				}
-				sv.ExecutionTimeoutSeconds = ptr.Int32(int32(i64))
+				sv.ExecutionTimeoutSeconds = int32(i64)
 			}
 
 		case "instanceId":
@@ -7294,7 +7320,7 @@ func awsAwsjson11_deserializeDocumentSSMValidationParameters(v **types.SSMValida
 				if !ok {
 					return fmt.Errorf("expected InstanceId to be of type string, got %T instead", value)
 				}
-				sv.InstanceId = &jtv
+				sv.InstanceId = ptr.String(jtv)
 			}
 
 		case "outputS3BucketName":
@@ -7303,7 +7329,7 @@ func awsAwsjson11_deserializeDocumentSSMValidationParameters(v **types.SSMValida
 				if !ok {
 					return fmt.Errorf("expected BucketName to be of type string, got %T instead", value)
 				}
-				sv.OutputS3BucketName = &jtv
+				sv.OutputS3BucketName = ptr.String(jtv)
 			}
 
 		case "scriptType":
@@ -7357,7 +7383,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected TagKey to be of type string, got %T instead", value)
 				}
-				sv.Key = &jtv
+				sv.Key = ptr.String(jtv)
 			}
 
 		case "value":
@@ -7366,7 +7392,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
 				}
-				sv.Value = &jtv
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:
@@ -7378,7 +7404,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTags(v *[]*types.Tag, value interface{}) error {
+func awsAwsjson11_deserializeDocumentTags(v *[]types.Tag, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7391,18 +7417,20 @@ func awsAwsjson11_deserializeDocumentTags(v *[]*types.Tag, value interface{}) er
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Tag
+	var cv []types.Tag
 	if *v == nil {
-		cv = []*types.Tag{}
+		cv = []types.Tag{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Tag
-		if err := awsAwsjson11_deserializeDocumentTag(&col, value); err != nil {
+		var col types.Tag
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentTag(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -7469,7 +7497,7 @@ func awsAwsjson11_deserializeDocumentUnauthorizedOperationException(v **types.Un
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -7608,7 +7636,7 @@ func awsAwsjson11_deserializeDocumentValidationOutput(v **types.ValidationOutput
 				if !ok {
 					return fmt.Errorf("expected NonEmptyStringWithMaxLen255 to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "serverValidationOutput":
@@ -7631,7 +7659,7 @@ func awsAwsjson11_deserializeDocumentValidationOutput(v **types.ValidationOutput
 				if !ok {
 					return fmt.Errorf("expected ValidationStatusMessage to be of type string, got %T instead", value)
 				}
-				sv.StatusMessage = &jtv
+				sv.StatusMessage = ptr.String(jtv)
 			}
 
 		case "validationId":
@@ -7640,7 +7668,7 @@ func awsAwsjson11_deserializeDocumentValidationOutput(v **types.ValidationOutput
 				if !ok {
 					return fmt.Errorf("expected ValidationId to be of type string, got %T instead", value)
 				}
-				sv.ValidationId = &jtv
+				sv.ValidationId = ptr.String(jtv)
 			}
 
 		default:
@@ -7652,7 +7680,7 @@ func awsAwsjson11_deserializeDocumentValidationOutput(v **types.ValidationOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentValidationOutputList(v *[]*types.ValidationOutput, value interface{}) error {
+func awsAwsjson11_deserializeDocumentValidationOutputList(v *[]types.ValidationOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7665,18 +7693,20 @@ func awsAwsjson11_deserializeDocumentValidationOutputList(v *[]*types.Validation
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ValidationOutput
+	var cv []types.ValidationOutput
 	if *v == nil {
-		cv = []*types.ValidationOutput{}
+		cv = []types.ValidationOutput{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ValidationOutput
-		if err := awsAwsjson11_deserializeDocumentValidationOutput(&col, value); err != nil {
+		var col types.ValidationOutput
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentValidationOutput(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -7712,7 +7742,7 @@ func awsAwsjson11_deserializeDocumentVmServer(v **types.VmServer, value interfac
 				if !ok {
 					return fmt.Errorf("expected VmManagerName to be of type string, got %T instead", value)
 				}
-				sv.VmManagerName = &jtv
+				sv.VmManagerName = ptr.String(jtv)
 			}
 
 		case "vmManagerType":
@@ -7730,7 +7760,7 @@ func awsAwsjson11_deserializeDocumentVmServer(v **types.VmServer, value interfac
 				if !ok {
 					return fmt.Errorf("expected VmName to be of type string, got %T instead", value)
 				}
-				sv.VmName = &jtv
+				sv.VmName = ptr.String(jtv)
 			}
 
 		case "vmPath":
@@ -7739,7 +7769,7 @@ func awsAwsjson11_deserializeDocumentVmServer(v **types.VmServer, value interfac
 				if !ok {
 					return fmt.Errorf("expected VmPath to be of type string, got %T instead", value)
 				}
-				sv.VmPath = &jtv
+				sv.VmPath = ptr.String(jtv)
 			}
 
 		case "vmServerAddress":
@@ -7784,7 +7814,7 @@ func awsAwsjson11_deserializeDocumentVmServerAddress(v **types.VmServerAddress, 
 				if !ok {
 					return fmt.Errorf("expected VmId to be of type string, got %T instead", value)
 				}
-				sv.VmId = &jtv
+				sv.VmId = ptr.String(jtv)
 			}
 
 		case "vmManagerId":
@@ -7793,7 +7823,7 @@ func awsAwsjson11_deserializeDocumentVmServerAddress(v **types.VmServerAddress, 
 				if !ok {
 					return fmt.Errorf("expected VmManagerId to be of type string, got %T instead", value)
 				}
-				sv.VmManagerId = &jtv
+				sv.VmManagerId = ptr.String(jtv)
 			}
 
 		default:
@@ -7879,7 +7909,7 @@ func awsAwsjson11_deserializeOpDocumentCreateReplicationJobOutput(v **CreateRepl
 				if !ok {
 					return fmt.Errorf("expected ReplicationJobId to be of type string, got %T instead", value)
 				}
-				sv.ReplicationJobId = &jtv
+				sv.ReplicationJobId = ptr.String(jtv)
 			}
 
 		default:
@@ -8208,7 +8238,7 @@ func awsAwsjson11_deserializeOpDocumentGetAppLaunchConfigurationOutput(v **GetAp
 				if !ok {
 					return fmt.Errorf("expected AppId to be of type string, got %T instead", value)
 				}
-				sv.AppId = &jtv
+				sv.AppId = ptr.String(jtv)
 			}
 
 		case "autoLaunch":
@@ -8217,7 +8247,7 @@ func awsAwsjson11_deserializeOpDocumentGetAppLaunchConfigurationOutput(v **GetAp
 				if !ok {
 					return fmt.Errorf("expected AutoLaunch to be of type *bool, got %T instead", value)
 				}
-				sv.AutoLaunch = &jtv
+				sv.AutoLaunch = ptr.Bool(jtv)
 			}
 
 		case "roleName":
@@ -8226,7 +8256,7 @@ func awsAwsjson11_deserializeOpDocumentGetAppLaunchConfigurationOutput(v **GetAp
 				if !ok {
 					return fmt.Errorf("expected RoleName to be of type string, got %T instead", value)
 				}
-				sv.RoleName = &jtv
+				sv.RoleName = ptr.String(jtv)
 			}
 
 		case "serverGroupLaunchConfigurations":
@@ -8435,7 +8465,7 @@ func awsAwsjson11_deserializeOpDocumentGetConnectorsOutput(v **GetConnectorsOutp
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -8475,7 +8505,7 @@ func awsAwsjson11_deserializeOpDocumentGetReplicationJobsOutput(v **GetReplicati
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "replicationJobList":
@@ -8520,7 +8550,7 @@ func awsAwsjson11_deserializeOpDocumentGetReplicationRunsOutput(v **GetReplicati
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "replicationJob":
@@ -8583,7 +8613,7 @@ func awsAwsjson11_deserializeOpDocumentGetServersOutput(v **GetServersOutput, va
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "serverCatalogStatus":
@@ -8735,7 +8765,7 @@ func awsAwsjson11_deserializeOpDocumentListAppsOutput(v **ListAppsOutput, value 
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -8961,7 +8991,7 @@ func awsAwsjson11_deserializeOpDocumentStartOnDemandReplicationRunOutput(v **Sta
 				if !ok {
 					return fmt.Errorf("expected ReplicationRunId to be of type string, got %T instead", value)
 				}
-				sv.ReplicationRunId = &jtv
+				sv.ReplicationRunId = ptr.String(jtv)
 			}
 
 		default:

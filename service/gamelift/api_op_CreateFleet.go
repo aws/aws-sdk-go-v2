@@ -132,7 +132,7 @@ type CreateFleetInput struct {
 	// accept connections. For Realtime Servers fleets, Amazon GameLift automatically
 	// sets TCP and UDP ranges for use by the Realtime servers. You can specify
 	// multiple permission settings or add more by updating the fleet.
-	EC2InboundPermissions []*types.IpPermission
+	EC2InboundPermissions []types.IpPermission
 
 	// Indicates whether to use On-Demand instances or Spot instances for this fleet.
 	// If empty, the default is ON_DEMAND. Both categories of instances use identical
@@ -156,13 +156,13 @@ type CreateFleetInput struct {
 	// server API ProcessReady() and specify one or more directory paths in
 	// logParameters. See more information in the Server API Reference
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api-ref.html#gamelift-sdk-server-api-ref-dataypes-process).
-	LogPaths []*string
+	LogPaths []string
 
 	// The name of an Amazon CloudWatch metric group to add this fleet to. A metric
 	// group aggregates the metrics for all fleets in the group. Specify an existing
 	// metric group name, or provide a new name to create a new metric group. A fleet
 	// can only be included in one metric group at a time.
-	MetricGroups []*string
+	MetricGroups []string
 
 	// A game session protection policy to apply to all instances in this fleet. If
 	// this parameter is not set, instances in this fleet default to no protection. You
@@ -233,7 +233,7 @@ type CreateFleetInput struct {
 	// TagResource, UntagResource, and ListTagsForResource to add, remove, and view
 	// tags. The maximum tag limit may be lower than stated. See the AWS General
 	// Reference for actual tagging limits.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Represents the returned data in response to a request operation.

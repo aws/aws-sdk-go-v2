@@ -43,7 +43,7 @@ type GetPersonalizedRankingInput struct {
 	// 500.
 	//
 	// This member is required.
-	InputList []*string
+	InputList []string
 
 	// The user for which you want the campaign to provide a personalized ranking.
 	//
@@ -53,7 +53,7 @@ type GetPersonalizedRankingInput struct {
 	// The contextual metadata to use when getting recommendations. Contextual metadata
 	// includes any interaction information that might be relevant when getting a
 	// user's recommendations, such as the user's current location or device type.
-	Context map[string]*string
+	Context map[string]string
 
 	// The Amazon Resource Name (ARN) of a filter you created to include or exclude
 	// items from recommendations for a given user.
@@ -64,7 +64,7 @@ type GetPersonalizedRankingOutput struct {
 
 	// A list of items in order of most likely interest to the user. The maximum is
 	// 500.
-	PersonalizedRanking []*types.PredictedItem
+	PersonalizedRanking []types.PredictedItem
 
 	// The ID of the recommendation.
 	RecommendationId *string

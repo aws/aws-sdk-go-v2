@@ -38,15 +38,15 @@ type GetEC2InstanceRecommendationsInput struct {
 	// your account is the master account of an organization, use this parameter to
 	// specify the member accounts for which you want to return instance
 	// recommendations. Only one account ID can be specified per request.
-	AccountIds []*string
+	AccountIds []string
 
 	// An array of objects that describe a filter that returns a more specific list of
 	// instance recommendations.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The Amazon Resource Name (ARN) of the instances for which to return
 	// recommendations.
-	InstanceArns []*string
+	InstanceArns []string
 
 	// The maximum number of instance recommendations to return with a single request.
 	// To retrieve the remaining results, make another request with the returned
@@ -62,10 +62,10 @@ type GetEC2InstanceRecommendationsOutput struct {
 	// An array of objects that describe errors of the request. For example, an error
 	// is returned if you request recommendations for an instance of an unsupported
 	// instance family.
-	Errors []*types.GetRecommendationError
+	Errors []types.GetRecommendationError
 
 	// An array of objects that describe instance recommendations.
-	InstanceRecommendations []*types.InstanceRecommendation
+	InstanceRecommendations []types.InstanceRecommendation
 
 	// The token to use to advance to the next page of instance recommendations. This
 	// value is null when there are no more pages of instance recommendations to

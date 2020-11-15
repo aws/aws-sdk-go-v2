@@ -60,7 +60,7 @@ type UpdateFlowEntitlementInput struct {
 	// The AWS account IDs that you want to share your content with. The receiving
 	// accounts (subscribers) will be allowed to create their own flow using your
 	// content as the source.
-	Subscribers []*string
+	Subscribers []string
 }
 
 type UpdateFlowEntitlementOutput struct {

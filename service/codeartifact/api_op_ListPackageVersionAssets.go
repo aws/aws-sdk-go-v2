@@ -97,7 +97,7 @@ type ListPackageVersionAssetsOutput struct {
 	// The returned list of AssetSummary
 	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html)
 	// objects.
-	Assets []*types.AssetSummary
+	Assets []types.AssetSummary
 
 	// The format of the package that contains the returned package version assets.
 	Format types.PackageFormat

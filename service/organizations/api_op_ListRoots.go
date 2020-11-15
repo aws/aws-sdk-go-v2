@@ -67,7 +67,7 @@ type ListRootsOutput struct {
 	NextToken *string
 
 	// A list of roots that are defined in an organization.
-	Roots []*types.Root
+	Roots []types.Root
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

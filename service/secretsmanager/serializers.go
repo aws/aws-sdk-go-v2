@@ -906,34 +906,26 @@ func awsAwsjson11_serializeDocumentFilter(v *types.Filter, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentFiltersListType(v []*types.Filter, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentFiltersListType(v []types.Filter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentFilter(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentFilterValuesStringList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentFilterValuesStringList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -942,25 +934,21 @@ func awsAwsjson11_serializeDocumentRotationRulesType(v *types.RotationRulesType,
 	object := value.Object()
 	defer object.Close()
 
-	if v.AutomaticallyAfterDays != nil {
+	if v.AutomaticallyAfterDays != 0 {
 		ok := object.Key("AutomaticallyAfterDays")
-		ok.Long(*v.AutomaticallyAfterDays)
+		ok.Long(v.AutomaticallyAfterDays)
 	}
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSecretVersionStagesType(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentSecretVersionStagesType(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -982,32 +970,24 @@ func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagKeyListType(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagKeyListType(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagListType(v []*types.Tag, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagListType(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1086,14 +1066,14 @@ func awsAwsjson11_serializeOpDocumentDeleteSecretInput(v *DeleteSecretInput, val
 	object := value.Object()
 	defer object.Close()
 
-	if v.ForceDeleteWithoutRecovery != nil {
+	if v.ForceDeleteWithoutRecovery {
 		ok := object.Key("ForceDeleteWithoutRecovery")
-		ok.Boolean(*v.ForceDeleteWithoutRecovery)
+		ok.Boolean(v.ForceDeleteWithoutRecovery)
 	}
 
-	if v.RecoveryWindowInDays != nil {
+	if v.RecoveryWindowInDays != 0 {
 		ok := object.Key("RecoveryWindowInDays")
-		ok.Long(*v.RecoveryWindowInDays)
+		ok.Long(v.RecoveryWindowInDays)
 	}
 
 	if v.SecretId != nil {
@@ -1125,39 +1105,39 @@ func awsAwsjson11_serializeOpDocumentGetRandomPasswordInput(v *GetRandomPassword
 		ok.String(*v.ExcludeCharacters)
 	}
 
-	if v.ExcludeLowercase != nil {
+	if v.ExcludeLowercase {
 		ok := object.Key("ExcludeLowercase")
-		ok.Boolean(*v.ExcludeLowercase)
+		ok.Boolean(v.ExcludeLowercase)
 	}
 
-	if v.ExcludeNumbers != nil {
+	if v.ExcludeNumbers {
 		ok := object.Key("ExcludeNumbers")
-		ok.Boolean(*v.ExcludeNumbers)
+		ok.Boolean(v.ExcludeNumbers)
 	}
 
-	if v.ExcludePunctuation != nil {
+	if v.ExcludePunctuation {
 		ok := object.Key("ExcludePunctuation")
-		ok.Boolean(*v.ExcludePunctuation)
+		ok.Boolean(v.ExcludePunctuation)
 	}
 
-	if v.ExcludeUppercase != nil {
+	if v.ExcludeUppercase {
 		ok := object.Key("ExcludeUppercase")
-		ok.Boolean(*v.ExcludeUppercase)
+		ok.Boolean(v.ExcludeUppercase)
 	}
 
-	if v.IncludeSpace != nil {
+	if v.IncludeSpace {
 		ok := object.Key("IncludeSpace")
-		ok.Boolean(*v.IncludeSpace)
+		ok.Boolean(v.IncludeSpace)
 	}
 
-	if v.PasswordLength != nil {
+	if v.PasswordLength != 0 {
 		ok := object.Key("PasswordLength")
-		ok.Long(*v.PasswordLength)
+		ok.Long(v.PasswordLength)
 	}
 
-	if v.RequireEachIncludedType != nil {
+	if v.RequireEachIncludedType {
 		ok := object.Key("RequireEachIncludedType")
-		ok.Boolean(*v.RequireEachIncludedType)
+		ok.Boolean(v.RequireEachIncludedType)
 	}
 
 	return nil
@@ -1208,9 +1188,9 @@ func awsAwsjson11_serializeOpDocumentListSecretsInput(v *ListSecretsInput, value
 		}
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1230,14 +1210,14 @@ func awsAwsjson11_serializeOpDocumentListSecretVersionIdsInput(v *ListSecretVers
 	object := value.Object()
 	defer object.Close()
 
-	if v.IncludeDeprecated != nil {
+	if v.IncludeDeprecated {
 		ok := object.Key("IncludeDeprecated")
-		ok.Boolean(*v.IncludeDeprecated)
+		ok.Boolean(v.IncludeDeprecated)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1257,9 +1237,9 @@ func awsAwsjson11_serializeOpDocumentPutResourcePolicyInput(v *PutResourcePolicy
 	object := value.Object()
 	defer object.Close()
 
-	if v.BlockPublicPolicy != nil {
+	if v.BlockPublicPolicy {
 		ok := object.Key("BlockPublicPolicy")
-		ok.Boolean(*v.BlockPublicPolicy)
+		ok.Boolean(v.BlockPublicPolicy)
 	}
 
 	if v.ResourcePolicy != nil {

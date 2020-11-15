@@ -40,7 +40,7 @@ type GetJobRunInput struct {
 	RunId *string
 
 	// True if a list of predecessor runs should be returned.
-	PredecessorsIncluded *bool
+	PredecessorsIncluded bool
 }
 
 type GetJobRunOutput struct {

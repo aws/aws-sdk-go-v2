@@ -35,7 +35,7 @@ type DeleteIdentitiesInput struct {
 	// A list of 1-60 identities that you want to delete.
 	//
 	// This member is required.
-	IdentityIdsToDelete []*string
+	IdentityIdsToDelete []string
 }
 
 // Returned in response to a successful DeleteIdentities operation.
@@ -43,7 +43,7 @@ type DeleteIdentitiesOutput struct {
 
 	// An array of UnprocessedIdentityId objects, each of which contains an ErrorCode
 	// and IdentityId.
-	UnprocessedIdentityIds []*types.UnprocessedIdentityId
+	UnprocessedIdentityIds []types.UnprocessedIdentityId
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

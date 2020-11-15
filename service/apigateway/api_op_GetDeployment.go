@@ -50,7 +50,7 @@ type GetDeploymentInput struct {
 	// way. Hence, the parameter value must be a single-valued list containing only the
 	// "apisummary" string. For example, GET
 	// /restapis/{restapi_id}/deployments/{deployment_id}?embed=apisummary.
-	Embed []*string
+	Embed []string
 }
 
 // An immutable representation of a RestApi resource that can be called by users
@@ -66,7 +66,7 @@ type GetDeploymentOutput struct {
 
 	// A summary of the RestApi at the date and time that the deployment resource was
 	// created.
-	ApiSummary map[string]map[string]*types.MethodSnapshot
+	ApiSummary map[string]map[string]types.MethodSnapshot
 
 	// The date and time that the deployment resource was created.
 	CreatedDate *time.Time

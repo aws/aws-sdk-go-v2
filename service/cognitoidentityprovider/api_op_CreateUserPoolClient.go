@@ -56,13 +56,13 @@ type CreateUserPoolClientInput struct {
 
 	// Set to true if the client is allowed to follow the OAuth protocol when
 	// interacting with Cognito user pools.
-	AllowedOAuthFlowsUserPoolClient *bool
+	AllowedOAuthFlowsUserPoolClient bool
 
 	// The allowed OAuth scopes. Possible values provided by OAuth are: phone, email,
 	// openid, and profile. Possible values provided by AWS are:
 	// aws.cognito.signin.user.admin. Custom scopes created in Resource Servers are
 	// also supported.
-	AllowedOAuthScopes []*string
+	AllowedOAuthScopes []string
 
 	// The Amazon Pinpoint analytics configuration for collecting metrics for this user
 	// pool. In regions where Pinpoint is not available, Cognito User Pools only
@@ -85,7 +85,7 @@ type CreateUserPoolClientInput struct {
 	// Redirection Endpoint (https://tools.ietf.org/html/rfc6749#section-3.1.2). Amazon
 	// Cognito requires HTTPS over HTTP except for http://localhost for testing
 	// purposes only. App callback URLs such as myapp://example are also supported.
-	CallbackURLs []*string
+	CallbackURLs []string
 
 	// The default redirect URI. Must be in the CallbackURLs list. A redirect URI
 	// must:
@@ -130,7 +130,7 @@ type CreateUserPoolClientInput struct {
 
 	// Boolean to specify whether you want to generate a secret for the user pool
 	// client being created.
-	GenerateSecret *bool
+	GenerateSecret bool
 
 	// The time limit, between 5 minutes and 1 day, after which the ID token is no
 	// longer valid and cannot be used. This value will be overridden if you have
@@ -138,7 +138,7 @@ type CreateUserPoolClientInput struct {
 	IdTokenValidity *int32
 
 	// A list of allowed logout URLs for the identity providers.
-	LogoutURLs []*string
+	LogoutURLs []string
 
 	// Use this setting to choose which errors and responses are returned by Cognito
 	// APIs during authentication, account confirmation, and password recovery when the
@@ -162,16 +162,16 @@ type CreateUserPoolClientInput struct {
 	PreventUserExistenceErrors types.PreventUserExistenceErrorTypes
 
 	// The read attributes.
-	ReadAttributes []*string
+	ReadAttributes []string
 
 	// The time limit, in days, after which the refresh token is no longer valid and
 	// cannot be used.
-	RefreshTokenValidity *int32
+	RefreshTokenValidity int32
 
 	// A list of provider names for the identity providers that are supported on this
 	// client. The following are supported: COGNITO, Facebook, Google and
 	// LoginWithAmazon.
-	SupportedIdentityProviders []*string
+	SupportedIdentityProviders []string
 
 	// The units in which the validity times are represented in. Default for
 	// RefreshToken is days, and default for ID and access tokens are hours.
@@ -186,7 +186,7 @@ type CreateUserPoolClientInput struct {
 	// more information, see Specifying Identity Provider Attribute Mappings for Your
 	// User Pool
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html).
-	WriteAttributes []*string
+	WriteAttributes []string
 }
 
 // Represents the response from the server to create a user pool client.

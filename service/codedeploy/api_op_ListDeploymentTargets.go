@@ -43,7 +43,7 @@ type ListDeploymentTargetsInput struct {
 	//
 	// * ServerInstanceLabel - A
 	// ServerInstanceLabel filter string can be Blue or Green.
-	TargetFilters map[string][]*string
+	TargetFilters map[string][]string
 }
 
 type ListDeploymentTargetsOutput struct {
@@ -54,7 +54,7 @@ type ListDeploymentTargetsOutput struct {
 	NextToken *string
 
 	// The unique IDs of deployment targets.
-	TargetIds []*string
+	TargetIds []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

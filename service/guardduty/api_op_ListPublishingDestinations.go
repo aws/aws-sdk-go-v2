@@ -36,7 +36,7 @@ type ListPublishingDestinationsInput struct {
 	DetectorId *string
 
 	// The maximum number of results to return in the response.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token to use for paginating results that are returned in the response. Set the
 	// value of this parameter to null for the first request to a list action. For
@@ -51,7 +51,7 @@ type ListPublishingDestinationsOutput struct {
 	// destination returned.
 	//
 	// This member is required.
-	Destinations []*types.Destination
+	Destinations []types.Destination
 
 	// A token to use for paginating results that are returned in the response. Set the
 	// value of this parameter to null for the first request to a list action. For

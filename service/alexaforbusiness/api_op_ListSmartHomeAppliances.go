@@ -47,7 +47,7 @@ type ListSmartHomeAppliancesOutput struct {
 	NextToken *string
 
 	// The smart home appliances.
-	SmartHomeAppliances []*types.SmartHomeAppliance
+	SmartHomeAppliances []types.SmartHomeAppliance
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

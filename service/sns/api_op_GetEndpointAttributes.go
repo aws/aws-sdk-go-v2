@@ -57,7 +57,7 @@ type GetEndpointAttributesOutput struct {
 	// from the notification service when an app and mobile device are registered with
 	// the notification service. The device token for the iOS platform is returned in
 	// lowercase.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

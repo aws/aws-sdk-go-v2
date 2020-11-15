@@ -44,7 +44,7 @@ type ListTestGridSessionActionsInput struct {
 type ListTestGridSessionActionsOutput struct {
 
 	// The action taken by the session.
-	Actions []*types.TestGridSessionAction
+	Actions []types.TestGridSessionAction
 
 	// Pagination token.
 	NextToken *string

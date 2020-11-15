@@ -54,7 +54,7 @@ type ListQueryExecutionsOutput struct {
 	NextToken *string
 
 	// The unique IDs of each query execution as an array of strings.
-	QueryExecutionIds []*string
+	QueryExecutionIds []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

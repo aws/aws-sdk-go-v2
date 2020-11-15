@@ -40,7 +40,7 @@ type ListChannelsInput struct {
 type ListChannelsOutput struct {
 
 	// A list of "ChannelSummary" objects.
-	ChannelSummaries []*types.ChannelSummary
+	ChannelSummaries []types.ChannelSummary
 
 	// The token to retrieve the next set of results, or null if there are no more
 	// results.

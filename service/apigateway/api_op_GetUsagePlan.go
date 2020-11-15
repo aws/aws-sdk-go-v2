@@ -44,7 +44,7 @@ type GetUsagePlanInput struct {
 type GetUsagePlanOutput struct {
 
 	// The associated API stages of a usage plan.
-	ApiStages []*types.ApiStage
+	ApiStages []types.ApiStage
 
 	// The description of a usage plan.
 	Description *string
@@ -63,7 +63,7 @@ type GetUsagePlanOutput struct {
 	Quota *types.QuotaSettings
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The request throttle limits of a usage plan.
 	Throttle *types.ThrottleSettings

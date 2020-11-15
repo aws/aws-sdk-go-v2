@@ -67,7 +67,7 @@ type CreateLogGroupInput struct {
 	KmsKeyId *string
 
 	// The key-value pairs to use for the tags.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateLogGroupOutput struct {

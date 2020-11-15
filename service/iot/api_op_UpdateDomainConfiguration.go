@@ -43,7 +43,7 @@ type UpdateDomainConfigurationInput struct {
 	DomainConfigurationStatus types.DomainConfigurationStatus
 
 	// Removes the authorization configuration from a domain.
-	RemoveAuthorizerConfig *bool
+	RemoveAuthorizerConfig bool
 }
 
 type UpdateDomainConfigurationOutput struct {

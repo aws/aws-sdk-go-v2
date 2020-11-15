@@ -52,7 +52,7 @@ type UntagResourceInput struct {
 	// One or more tag keys. Specify only the tag keys, not the tag values.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagResourceOutput struct {

@@ -96,7 +96,7 @@ type PutRuleInput struct {
 	State types.RuleState
 
 	// The list of key-value pairs to associate with the rule.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type PutRuleOutput struct {

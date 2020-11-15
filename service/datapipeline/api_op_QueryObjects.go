@@ -64,10 +64,10 @@ type QueryObjectsOutput struct {
 
 	// Indicates whether there are more results that can be obtained by a subsequent
 	// call.
-	HasMoreResults *bool
+	HasMoreResults bool
 
 	// The identifiers that match the query selectors.
-	Ids []*string
+	Ids []string
 
 	// The starting point for the next page of results. To view the next page of
 	// results, call QueryObjects again with this marker value. If the value is null,

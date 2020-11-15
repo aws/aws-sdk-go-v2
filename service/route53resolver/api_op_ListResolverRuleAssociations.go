@@ -35,7 +35,7 @@ type ListResolverRuleAssociationsInput struct {
 	// subsequent ListResolverRuleAssociations request and specify the NextToken
 	// parameter, you must use the same values for Filters, if any, as in the previous
 	// request.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of rule associations that you want to return in the response
 	// to a ListResolverRuleAssociations request. If you don't specify a value for
@@ -62,7 +62,7 @@ type ListResolverRuleAssociationsOutput struct {
 
 	// The associations that were created between Resolver rules and VPCs using the
 	// current AWS account, and that match the specified filters, if any.
-	ResolverRuleAssociations []*types.ResolverRuleAssociation
+	ResolverRuleAssociations []types.ResolverRuleAssociation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

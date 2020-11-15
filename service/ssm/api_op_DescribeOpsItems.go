@@ -84,7 +84,7 @@ type DescribeOpsItemsInput struct {
 	// *If you filter the response by using the OperationalData operator,
 	// specify a key-value pair by using the following JSON format:
 	// {"key":"key_name","value":"a_value"}
-	OpsItemFilters []*types.OpsItemFilter
+	OpsItemFilters []types.OpsItemFilter
 }
 
 type DescribeOpsItemsOutput struct {
@@ -94,7 +94,7 @@ type DescribeOpsItemsOutput struct {
 	NextToken *string
 
 	// A list of OpsItems.
-	OpsItemSummaries []*types.OpsItemSummary
+	OpsItemSummaries []types.OpsItemSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

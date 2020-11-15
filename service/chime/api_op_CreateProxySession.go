@@ -38,7 +38,7 @@ type CreateProxySessionInput struct {
 	// The participant phone numbers.
 	//
 	// This member is required.
-	ParticipantPhoneNumbers []*string
+	ParticipantPhoneNumbers []string
 
 	// The Amazon Chime voice connector ID.
 	//

@@ -52,7 +52,7 @@ type ListTypedLinkFacetAttributesInput struct {
 type ListTypedLinkFacetAttributesOutput struct {
 
 	// An ordered set of attributes associate with the typed link.
-	Attributes []*types.TypedLinkAttributeDefinition
+	Attributes []types.TypedLinkAttributeDefinition
 
 	// The pagination token.
 	NextToken *string

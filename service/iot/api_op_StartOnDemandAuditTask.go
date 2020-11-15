@@ -35,7 +35,7 @@ type StartOnDemandAuditTaskInput struct {
 	// enabled.
 	//
 	// This member is required.
-	TargetCheckNames []*string
+	TargetCheckNames []string
 }
 
 type StartOnDemandAuditTaskOutput struct {

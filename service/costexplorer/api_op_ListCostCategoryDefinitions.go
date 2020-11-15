@@ -39,7 +39,7 @@ type ListCostCategoryDefinitionsInput struct {
 	EffectiveOn *string
 
 	// The number of entries a paginated response contains.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the
 	// token when the response from a previous call has more results than the maximum
@@ -51,7 +51,7 @@ type ListCostCategoryDefinitionsOutput struct {
 
 	// A reference to a Cost Category containing enough information to identify the
 	// Cost Category.
-	CostCategoryReferences []*types.CostCategoryReference
+	CostCategoryReferences []types.CostCategoryReference
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the
 	// token when the response from a previous call has more results than the maximum

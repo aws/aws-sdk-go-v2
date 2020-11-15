@@ -39,7 +39,7 @@ type UpdateTagsForDomainInput struct {
 
 	// A list of the tag keys and values that you want to add or update. If you specify
 	// a key that already exists, the corresponding value will be replaced.
-	TagsToUpdate []*types.Tag
+	TagsToUpdate []types.Tag
 }
 
 type UpdateTagsForDomainOutput struct {

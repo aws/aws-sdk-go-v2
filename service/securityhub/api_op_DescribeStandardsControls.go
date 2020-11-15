@@ -37,7 +37,7 @@ type DescribeStandardsControlsInput struct {
 	StandardsSubscriptionArn *string
 
 	// The maximum number of security standard controls to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token that is required for pagination. On your first call to the
 	// DescribeStandardsControls operation, set the value of this parameter to NULL.
@@ -49,7 +49,7 @@ type DescribeStandardsControlsInput struct {
 type DescribeStandardsControlsOutput struct {
 
 	// A list of security standards controls.
-	Controls []*types.StandardsControl
+	Controls []types.StandardsControl
 
 	// The pagination token to use to request the next page of results.
 	NextToken *string

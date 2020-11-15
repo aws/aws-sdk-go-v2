@@ -37,7 +37,7 @@ type GetLinksInput struct {
 	GlobalNetworkId *string
 
 	// One or more link IDs. The maximum is 10.
-	LinkIds []*string
+	LinkIds []string
 
 	// The maximum number of results to return.
 	MaxResults *int32
@@ -58,7 +58,7 @@ type GetLinksInput struct {
 type GetLinksOutput struct {
 
 	// The links.
-	Links []*types.Link
+	Links []types.Link
 
 	// The token for the next page of results.
 	NextToken *string

@@ -198,13 +198,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteCanaryInput(v *DeleteCanaryInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Name == nil {
+	if v.Name == nil || len(*v.Name) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
 	}
 	if v.Name != nil {
-		if len(*v.Name) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
-		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -498,13 +495,10 @@ func awsRestjson1_serializeOpHttpBindingsGetCanaryInput(v *GetCanaryInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Name == nil {
+	if v.Name == nil || len(*v.Name) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
 	}
 	if v.Name != nil {
-		if len(*v.Name) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
-		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -575,13 +569,10 @@ func awsRestjson1_serializeOpHttpBindingsGetCanaryRunsInput(v *GetCanaryRunsInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Name == nil {
+	if v.Name == nil || len(*v.Name) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
 	}
 	if v.Name != nil {
-		if len(*v.Name) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
-		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -658,13 +649,10 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceArn == nil {
+	if v.ResourceArn == nil || len(*v.ResourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
 	}
 	if v.ResourceArn != nil {
-		if len(*v.ResourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -724,13 +712,10 @@ func awsRestjson1_serializeOpHttpBindingsStartCanaryInput(v *StartCanaryInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Name == nil {
+	if v.Name == nil || len(*v.Name) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
 	}
 	if v.Name != nil {
-		if len(*v.Name) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
-		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -790,13 +775,10 @@ func awsRestjson1_serializeOpHttpBindingsStopCanaryInput(v *StopCanaryInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Name == nil {
+	if v.Name == nil || len(*v.Name) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
 	}
 	if v.Name != nil {
-		if len(*v.Name) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
-		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -867,13 +849,10 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceArn == nil {
+	if v.ResourceArn == nil || len(*v.ResourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
 	}
 	if v.ResourceArn != nil {
-		if len(*v.ResourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -947,13 +926,10 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceArn == nil {
+	if v.ResourceArn == nil || len(*v.ResourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
 	}
 	if v.ResourceArn != nil {
-		if len(*v.ResourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -961,10 +937,7 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 
 	if v.TagKeys != nil {
 		for i := range v.TagKeys {
-			if v.TagKeys[i] == nil {
-				continue
-			}
-			encoder.AddQuery("tagKeys").String(*v.TagKeys[i])
+			encoder.AddQuery("tagKeys").String(v.TagKeys[i])
 		}
 	}
 
@@ -1033,13 +1006,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateCanaryInput(v *UpdateCanaryInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Name == nil {
+	if v.Name == nil || len(*v.Name) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
 	}
 	if v.Name != nil {
-		if len(*v.Name) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
-		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -1174,47 +1144,35 @@ func awsRestjson1_serializeDocumentCanaryScheduleInput(v *types.CanaryScheduleIn
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSecurityGroupIds(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSecurityGroupIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSubnetIds(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSubnetIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTagMap(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }

@@ -105,7 +105,7 @@ type PutMetricAlarmInput struct {
 	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0 |
 	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0 |
 	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0
-	AlarmActions []*string
+	AlarmActions []string
 
 	// The description for the alarm.
 	AlarmDescription *string
@@ -118,7 +118,7 @@ type PutMetricAlarmInput struct {
 	DatapointsToAlarm *int32
 
 	// The dimensions for the metric specified in MetricName.
-	Dimensions []*types.Dimension
+	Dimensions []types.Dimension
 
 	// Used only for alarms based on percentiles. If you specify ignore, the alarm
 	// state does not change during periods with too few data points to be
@@ -146,7 +146,7 @@ type PutMetricAlarmInput struct {
 	// >arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0 |
 	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0 |
 	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0
-	InsufficientDataActions []*string
+	InsufficientDataActions []string
 
 	// The name for the metric associated with the alarm. For each PutMetricAlarm
 	// operation, you must specify either MetricName or a Metrics array. If you are
@@ -167,7 +167,7 @@ type PutMetricAlarmInput struct {
 	// Period, Namespace, Statistic, or ExtendedStatistic parameters of PutMetricAlarm
 	// in the same operation. Instead, you retrieve the metrics you are using in your
 	// math expression as part of the Metrics array.
-	Metrics []*types.MetricDataQuery
+	Metrics []types.MetricDataQuery
 
 	// The namespace for the metric associated specified in MetricName.
 	Namespace *string
@@ -182,7 +182,7 @@ type PutMetricAlarmInput struct {
 	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0 |
 	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0 |
 	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0
-	OKActions []*string
+	OKActions []string
 
 	// The length, in seconds, used each time the metric specified in MetricName is
 	// evaluated. Valid values are 10, 30, and any multiple of 60. Period is required
@@ -212,7 +212,7 @@ type PutMetricAlarmInput struct {
 	// as 50 tags with an alarm. Tags can help you organize and categorize your
 	// resources. You can also use them to scope user permissions by granting a user
 	// permission to access or change only resources with certain tag values.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The value against which the specified statistic is compared. This parameter is
 	// required for alarms based on static thresholds, but should not be used for

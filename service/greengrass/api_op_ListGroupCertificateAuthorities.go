@@ -38,7 +38,7 @@ type ListGroupCertificateAuthoritiesInput struct {
 type ListGroupCertificateAuthoritiesOutput struct {
 
 	// A list of certificate authorities associated with the group.
-	GroupCertificateAuthorities []*types.GroupCertificateAuthorityProperties
+	GroupCertificateAuthorities []types.GroupCertificateAuthorityProperties
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

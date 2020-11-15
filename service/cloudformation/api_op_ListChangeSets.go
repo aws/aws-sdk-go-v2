@@ -52,7 +52,7 @@ type ListChangeSetsOutput struct {
 
 	// A list of ChangeSetSummary structures that provides the ID and status of each
 	// change set for the specified stack.
-	Summaries []*types.ChangeSetSummary
+	Summaries []types.ChangeSetSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

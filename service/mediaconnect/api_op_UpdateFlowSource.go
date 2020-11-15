@@ -53,14 +53,14 @@ type UpdateFlowSourceInput struct {
 	EntitlementArn *string
 
 	// The port that the flow will be listening on for incoming content.
-	IngestPort *int32
+	IngestPort int32
 
 	// The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
-	MaxBitrate *int32
+	MaxBitrate int32
 
 	// The maximum latency in milliseconds. This parameter applies only to RIST-based
 	// and Zixi-based streams.
-	MaxLatency *int32
+	MaxLatency int32
 
 	// The protocol that is used by the source.
 	Protocol types.Protocol

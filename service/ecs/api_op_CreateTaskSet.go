@@ -67,7 +67,7 @@ type CreateTaskSetInput struct {
 	// with a cluster to be used. The PutClusterCapacityProviders API operation is used
 	// to update the list of available capacity providers for a cluster after the
 	// cluster is created.
-	CapacityProviderStrategy []*types.CapacityProviderStrategyItem
+	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. Up to 32 ASCII characters are allowed.
@@ -89,7 +89,7 @@ type CreateTaskSetInput struct {
 	// A load balancer object representing the load balancer to use with the task set.
 	// The supported load balancer types are either an Application Load Balancer or a
 	// Network Load Balancer.
-	LoadBalancers []*types.LoadBalancer
+	LoadBalancers []types.LoadBalancer
 
 	// An object representing the network configuration for a task or service.
 	NetworkConfiguration *types.NetworkConfiguration
@@ -106,7 +106,7 @@ type CreateTaskSetInput struct {
 	// The details of the service discovery registries to assign to this task set. For
 	// more information, see Service Discovery
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
-	ServiceRegistries []*types.ServiceRegistry
+	ServiceRegistries []types.ServiceRegistry
 
 	// The metadata that you apply to the task set to help you categorize and organize
 	// them. Each tag consists of a key and an optional value, both of which you
@@ -137,7 +137,7 @@ type CreateTaskSetInput struct {
 	// values as it is reserved for AWS use. You cannot edit or delete tag keys or
 	// values with this prefix. Tags with this prefix do not count against your tags
 	// per resource limit.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateTaskSetOutput struct {

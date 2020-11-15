@@ -58,7 +58,7 @@ type InvokeAsyncInput struct {
 type InvokeAsyncOutput struct {
 
 	// The status code.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

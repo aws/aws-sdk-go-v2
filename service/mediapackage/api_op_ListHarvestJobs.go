@@ -37,7 +37,7 @@ type ListHarvestJobsInput struct {
 	IncludeStatus *string
 
 	// The upper bound on the number of records to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token used to resume pagination from the end of a previous request.
 	NextToken *string
@@ -46,7 +46,7 @@ type ListHarvestJobsInput struct {
 type ListHarvestJobsOutput struct {
 
 	// A list of HarvestJob records.
-	HarvestJobs []*types.HarvestJob
+	HarvestJobs []types.HarvestJob
 
 	// A token that can be used to resume pagination from the end of the collection.
 	NextToken *string

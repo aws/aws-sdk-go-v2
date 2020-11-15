@@ -40,7 +40,7 @@ type TagResourceInput struct {
 	// The list of tags to add to the given AWS Cloud9 development environment.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagResourceOutput struct {

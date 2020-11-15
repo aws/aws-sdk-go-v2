@@ -32,7 +32,7 @@ type SearchQuantumTasksInput struct {
 	// Array of SearchQuantumTasksFilter objects.
 	//
 	// This member is required.
-	Filters []*types.SearchQuantumTasksFilter
+	Filters []types.SearchQuantumTasksFilter
 
 	// Maximum number of results to return in the response.
 	MaxResults *int32
@@ -49,7 +49,7 @@ type SearchQuantumTasksOutput struct {
 	// filters.
 	//
 	// This member is required.
-	QuantumTasks []*types.QuantumTaskSummary
+	QuantumTasks []types.QuantumTaskSummary
 
 	// A token used for pagination of results, or null if there are no additional
 	// results. Use the token value in a subsequent request to continue results where

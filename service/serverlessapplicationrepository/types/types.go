@@ -24,17 +24,17 @@ type ApplicationPolicyStatement struct {
 	// (https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions).
 	//
 	// This member is required.
-	Actions []*string
+	Actions []string
 
 	// An array of AWS account IDs, or * to make the application public.
 	//
 	// This member is required.
-	Principals []*string
+	Principals []string
 
 	// An array of PrinciplalOrgIDs, which corresponds to AWS IAM aws:PrincipalOrgID
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#principal-org-id)
 	// global condition key.
-	PrincipalOrgIDs []*string
+	PrincipalOrgIDs []string
 
 	// A unique ID for the statement.
 	StatementId *string
@@ -74,7 +74,7 @@ type ApplicationSummary struct {
 
 	// Labels to improve discovery of apps in search results.Minimum length=1. Maximum
 	// length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
-	Labels []*string
+	Labels []string
 
 	// A valid identifier from https://spdx.org/licenses/ (https://spdx.org/licenses/).
 	SpdxLicenseId *string
@@ -91,13 +91,13 @@ type ParameterDefinition struct {
 	// A list of AWS SAM resources that use this parameter.
 	//
 	// This member is required.
-	ReferencedByResources []*string
+	ReferencedByResources []string
 
 	// A regular expression that represents the patterns to allow for String types.
 	AllowedPattern *string
 
 	// An array containing the list of values allowed for the parameter.
-	AllowedValues []*string
+	AllowedValues []string
 
 	// A string that explains a constraint when the constraint is violated. For
 	// example, without a constraint description, a parameter that has an allowed
@@ -119,24 +119,24 @@ type ParameterDefinition struct {
 
 	// An integer value that determines the largest number of characters that you want
 	// to allow for String types.
-	MaxLength *int32
+	MaxLength int32
 
 	// A numeric value that determines the largest numeric value that you want to allow
 	// for Number types.
-	MaxValue *int32
+	MaxValue int32
 
 	// An integer value that determines the smallest number of characters that you want
 	// to allow for String types.
-	MinLength *int32
+	MinLength int32
 
 	// A numeric value that determines the smallest numeric value that you want to
 	// allow for Number types.
-	MinValue *int32
+	MinValue int32
 
 	// Whether to mask the parameter value whenever anyone makes a call that describes
 	// the stack. If you set the value to true, the parameter value is masked with
 	// asterisks (*****).
-	NoEcho *bool
+	NoEcho bool
 
 	// The type of the parameter.Valid values: String | Number | List<Number> |
 	// CommaDelimitedList String: A literal string.For example, users can specify
@@ -181,13 +181,13 @@ type RollbackConfiguration struct {
 	// CloudFormation RollbackConfiguration
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration)
 	// Data Type.
-	MonitoringTimeInMinutes *int32
+	MonitoringTimeInMinutes int32
 
 	// This property corresponds to the content of the same name for the AWS
 	// CloudFormation RollbackConfiguration
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration)
 	// Data Type.
-	RollbackTriggers []*RollbackTrigger
+	RollbackTriggers []RollbackTrigger
 }
 
 // This property corresponds to the AWS CloudFormation RollbackTrigger
@@ -250,7 +250,7 @@ type Version struct {
 	// An array of parameter types supported by the application.
 	//
 	// This member is required.
-	ParameterDefinitions []*ParameterDefinition
+	ParameterDefinitions []ParameterDefinition
 
 	// A list of values that you must specify before you can deploy certain
 	// applications. Some applications might include resources that can affect
@@ -295,7 +295,7 @@ type Version struct {
 	// the region in which it is being retrieved.
 	//
 	// This member is required.
-	ResourcesSupported *bool
+	ResourcesSupported bool
 
 	// The semantic version of the application: https://semver.org/
 	// (https://semver.org/)

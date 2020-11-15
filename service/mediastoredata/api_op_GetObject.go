@@ -62,7 +62,7 @@ type GetObjectOutput struct {
 	// occurred.
 	//
 	// This member is required.
-	StatusCode *int32
+	StatusCode int32
 
 	// The bytes of the object.
 	Body io.ReadCloser

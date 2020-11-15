@@ -67,7 +67,7 @@ type ListHandshakesForAccountOutput struct {
 
 	// A list of Handshake objects with details about each of the handshakes that is
 	// associated with the specified account.
-	Handshakes []*types.Handshake
+	Handshakes []types.Handshake
 
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a

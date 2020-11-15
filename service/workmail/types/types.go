@@ -11,7 +11,7 @@ type AccessControlRule struct {
 
 	// Access protocol actions to include in the rule. Valid values include ActiveSync,
 	// AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
-	Actions []*string
+	Actions []string
 
 	// The date that the rule was created.
 	DateCreated *time.Time
@@ -26,23 +26,23 @@ type AccessControlRule struct {
 	Effect AccessControlRuleEffect
 
 	// IPv4 CIDR ranges to include in the rule.
-	IpRanges []*string
+	IpRanges []string
 
 	// The rule name.
 	Name *string
 
 	// Access protocol actions to exclude from the rule. Valid values include
 	// ActiveSync, AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
-	NotActions []*string
+	NotActions []string
 
 	// IPv4 CIDR ranges to exclude from the rule.
-	NotIpRanges []*string
+	NotIpRanges []string
 
 	// User IDs to exclude from the rule.
-	NotUserIds []*string
+	NotUserIds []string
 
 	// User IDs to include in the rule.
-	UserIds []*string
+	UserIds []string
 }
 
 // At least one delegate must be associated to the resource to disable automatic
@@ -51,13 +51,13 @@ type BookingOptions struct {
 
 	// The resource's ability to automatically reply to requests. If disabled,
 	// delegates must be associated to the resource.
-	AutoAcceptRequests *bool
+	AutoAcceptRequests bool
 
 	// The resource's ability to automatically decline any conflicting requests.
-	AutoDeclineConflictingRequests *bool
+	AutoDeclineConflictingRequests bool
 
 	// The resource's ability to automatically decline any recurring requests.
-	AutoDeclineRecurringRequests *bool
+	AutoDeclineRecurringRequests bool
 }
 
 // The name of the attribute, which is one of the values defined in the
@@ -145,7 +145,7 @@ type MailboxExportJob struct {
 	EntityId *string
 
 	// The estimated progress of the mailbox export job, in percentage points.
-	EstimatedProgress *int32
+	EstimatedProgress int32
 
 	// The identifier of the mailbox export job.
 	JobId *string

@@ -61,7 +61,7 @@ type ResumeProcessesInput struct {
 	//
 	// If you omit this
 	// parameter, all processes are specified.
-	ScalingProcesses []*string
+	ScalingProcesses []string
 }
 
 type ResumeProcessesOutput struct {

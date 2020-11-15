@@ -34,15 +34,15 @@ type DescribeAgentsInput struct {
 	// The agent or the Connector IDs for which you want information. If you specify no
 	// IDs, the system returns information about all agents/Connectors associated with
 	// your AWS user account.
-	AgentIds []*string
+	AgentIds []string
 
 	// You can filter the request using various logical operators and a key-value
 	// format. For example: {"key": "collectionStatus", "value": "STARTED"}
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The total number of agents/Connectors to return in a single page of output. The
 	// maximum value is 100.
-	MaxResults *int32
+	MaxResults int32
 
 	// Token to retrieve the next set of results. For example, if you previously
 	// specified 100 IDs for DescribeAgentsRequest$agentIds but set
@@ -58,7 +58,7 @@ type DescribeAgentsOutput struct {
 	// includes agent/Connector IDs, IP addresses, media access control (MAC)
 	// addresses, agent/Connector health, host name where the agent/Connector resides,
 	// and the version number of each agent/Connector.
-	AgentsInfo []*types.AgentInfo
+	AgentsInfo []types.AgentInfo
 
 	// Token to retrieve the next set of results. For example, if you specified 100 IDs
 	// for DescribeAgentsRequest$agentIds but set DescribeAgentsRequest$maxResults to

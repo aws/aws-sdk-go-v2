@@ -33,7 +33,7 @@ type ListNamespacesInput struct {
 	// A complex type that contains specifications for the namespaces that you want to
 	// list. If you specify more than one filter, a namespace must match all filters to
 	// be returned by ListNamespaces.
-	Filters []*types.NamespaceFilter
+	Filters []types.NamespaceFilter
 
 	// The maximum number of namespaces that you want AWS Cloud Map to return in the
 	// response to a ListNamespaces request. If you don't specify a value for
@@ -54,7 +54,7 @@ type ListNamespacesOutput struct {
 
 	// An array that contains one NamespaceSummary object for each namespace that
 	// matches the specified filter criteria.
-	Namespaces []*types.NamespaceSummary
+	Namespaces []types.NamespaceSummary
 
 	// If the response contains NextToken, submit another ListNamespaces request to get
 	// the next group of results. Specify the value of NextToken from the previous

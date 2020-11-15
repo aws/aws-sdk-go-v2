@@ -41,7 +41,7 @@ type ListSqlInjectionMatchSetsInput struct {
 	// return for this request. If you have more SqlInjectionMatchSet objects than the
 	// number you specify for Limit, the response includes a NextMarker value that you
 	// can use to get another batch of Rules.
-	Limit *int32
+	Limit int32
 
 	// If you specify a value for Limit and you have more SqlInjectionMatchSet objects
 	// than the value of Limit, AWS WAF returns a NextMarker value in the response that
@@ -63,7 +63,7 @@ type ListSqlInjectionMatchSetsOutput struct {
 	NextMarker *string
 
 	// An array of SqlInjectionMatchSetSummary objects.
-	SqlInjectionMatchSets []*types.SqlInjectionMatchSetSummary
+	SqlInjectionMatchSets []types.SqlInjectionMatchSetSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

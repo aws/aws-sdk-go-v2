@@ -48,13 +48,13 @@ type GetDocumentVersionInput struct {
 	Fields *string
 
 	// Set this to TRUE to include custom metadata in the response.
-	IncludeCustomMetadata *bool
+	IncludeCustomMetadata bool
 }
 
 type GetDocumentVersionOutput struct {
 
 	// The custom metadata on the document version.
-	CustomMetadata map[string]*string
+	CustomMetadata map[string]string
 
 	// The version metadata.
 	Metadata *types.DocumentVersionMetadata

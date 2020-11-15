@@ -44,7 +44,7 @@ type DeleteDocumentInput struct {
 	// delete the document. For example, you must specify a Force flag to delete a
 	// document of type ApplicationConfigurationSchema. You can restrict access to the
 	// Force flag in an AWS Identity and Access Management (IAM) policy.
-	Force *bool
+	Force bool
 
 	// The version name of the document that you want to delete. If not provided, all
 	// versions of the document are deleted.

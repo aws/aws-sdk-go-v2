@@ -54,7 +54,7 @@ type GetMLTaskRunOutput struct {
 	ErrorString *string
 
 	// The amount of time (in seconds) that the task run consumed resources.
-	ExecutionTime *int32
+	ExecutionTime int32
 
 	// The date and time when this task run was last modified.
 	LastModifiedOn *time.Time

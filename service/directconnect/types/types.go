@@ -34,7 +34,7 @@ type BGPPeer struct {
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
 	// configuration.
-	Asn *int32
+	Asn int32
 
 	// The authentication key for BGP configuration. This string has a minimum length
 	// of 6 characters and and a maximun lenth of 80 characters.
@@ -161,10 +161,10 @@ type Connection struct {
 	Region *string
 
 	// The tags associated with the connection.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the VLAN.
-	Vlan *int32
+	Vlan int32
 }
 
 // Information about a Direct Connect gateway, which enables you to connect virtual
@@ -208,7 +208,7 @@ type DirectConnectGateway struct {
 type DirectConnectGatewayAssociation struct {
 
 	// The Amazon VPC prefixes to advertise to the Direct Connect gateway.
-	AllowedPrefixesToDirectConnectGateway []*RouteFilterPrefix
+	AllowedPrefixesToDirectConnectGateway []RouteFilterPrefix
 
 	// Information about the associated gateway.
 	AssociatedGateway *AssociatedGateway
@@ -269,7 +269,7 @@ type DirectConnectGatewayAssociationProposal struct {
 	DirectConnectGatewayOwnerAccount *string
 
 	// The existing Amazon VPC prefixes advertised to the Direct Connect gateway.
-	ExistingAllowedPrefixesToDirectConnectGateway []*RouteFilterPrefix
+	ExistingAllowedPrefixesToDirectConnectGateway []RouteFilterPrefix
 
 	// The ID of the association proposal.
 	ProposalId *string
@@ -289,7 +289,7 @@ type DirectConnectGatewayAssociationProposal struct {
 	ProposalState DirectConnectGatewayAssociationProposalState
 
 	// The Amazon VPC prefixes to advertise to the Direct Connect gateway.
-	RequestedAllowedPrefixesToDirectConnectGateway []*RouteFilterPrefix
+	RequestedAllowedPrefixesToDirectConnectGateway []RouteFilterPrefix
 }
 
 // Information about an attachment between a Direct Connect gateway and a virtual
@@ -397,14 +397,14 @@ type Interconnect struct {
 	Region *string
 
 	// The tags associated with the interconnect.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Information about a link aggregation group (LAG).
 type Lag struct {
 
 	// Indicates whether the LAG can host other connections.
-	AllowsHostedConnections *bool
+	AllowsHostedConnections bool
 
 	// The AWS Direct Connect endpoint that hosts the LAG.
 	AwsDevice *string
@@ -413,7 +413,7 @@ type Lag struct {
 	AwsDeviceV2 *string
 
 	// The connections bundled by the LAG.
-	Connections []*Connection
+	Connections []Connection
 
 	// The individual bandwidth of the physical connections bundled by the LAG. The
 	// possible values are 1Gbps and 10Gbps.
@@ -460,11 +460,11 @@ type Lag struct {
 
 	// The minimum number of physical dedicated connections that must be operational
 	// for the LAG itself to be operational.
-	MinimumLinks *int32
+	MinimumLinks int32
 
 	// The number of physical dedicated connections bundled by the LAG, up to a maximum
 	// of 10.
-	NumberOfConnections *int32
+	NumberOfConnections int32
 
 	// The ID of the AWS account that owns the LAG.
 	OwnerAccount *string
@@ -476,7 +476,7 @@ type Lag struct {
 	Region *string
 
 	// The tags associated with the LAG.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Information about a Letter of Authorization - Connecting Facility Assignment
@@ -495,10 +495,10 @@ type Loa struct {
 type Location struct {
 
 	// The available port speeds for the location.
-	AvailablePortSpeeds []*string
+	AvailablePortSpeeds []string
 
 	// The name of the service provider for the location.
-	AvailableProviders []*string
+	AvailableProviders []string
 
 	// The code for the location.
 	LocationCode *string
@@ -522,7 +522,7 @@ type NewBGPPeer struct {
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
 	// configuration.
-	Asn *int32
+	Asn int32
 
 	// The authentication key for BGP configuration. This string has a minimum length
 	// of 6 characters and and a maximun lenth of 80 characters.
@@ -539,7 +539,7 @@ type NewPrivateVirtualInterface struct {
 	// configuration. The valid values are 1-2147483647.
 	//
 	// This member is required.
-	Asn *int32
+	Asn int32
 
 	// The name of the virtual interface assigned by the customer network. The name has
 	// a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a
@@ -551,7 +551,7 @@ type NewPrivateVirtualInterface struct {
 	// The ID of the VLAN.
 	//
 	// This member is required.
-	Vlan *int32
+	Vlan int32
 
 	// The address family for the BGP peer.
 	AddressFamily AddressFamily
@@ -574,7 +574,7 @@ type NewPrivateVirtualInterface struct {
 	Mtu *int32
 
 	// The tags associated with the private virtual interface.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the virtual private gateway.
 	VirtualGatewayId *string
@@ -587,7 +587,7 @@ type NewPrivateVirtualInterfaceAllocation struct {
 	// configuration. The valid values are 1-2147483647.
 	//
 	// This member is required.
-	Asn *int32
+	Asn int32
 
 	// The name of the virtual interface assigned by the customer network. The name has
 	// a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a
@@ -599,7 +599,7 @@ type NewPrivateVirtualInterfaceAllocation struct {
 	// The ID of the VLAN.
 	//
 	// This member is required.
-	Vlan *int32
+	Vlan int32
 
 	// The address family for the BGP peer.
 	AddressFamily AddressFamily
@@ -619,7 +619,7 @@ type NewPrivateVirtualInterfaceAllocation struct {
 	Mtu *int32
 
 	// The tags associated with the private virtual interface.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Information about a public virtual interface.
@@ -629,7 +629,7 @@ type NewPublicVirtualInterface struct {
 	// configuration. The valid values are 1-2147483647.
 	//
 	// This member is required.
-	Asn *int32
+	Asn int32
 
 	// The name of the virtual interface assigned by the customer network. The name has
 	// a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a
@@ -641,7 +641,7 @@ type NewPublicVirtualInterface struct {
 	// The ID of the VLAN.
 	//
 	// This member is required.
-	Vlan *int32
+	Vlan int32
 
 	// The address family for the BGP peer.
 	AddressFamily AddressFamily
@@ -658,10 +658,10 @@ type NewPublicVirtualInterface struct {
 
 	// The routes to be advertised to the AWS network in this Region. Applies to public
 	// virtual interfaces.
-	RouteFilterPrefixes []*RouteFilterPrefix
+	RouteFilterPrefixes []RouteFilterPrefix
 
 	// The tags associated with the public virtual interface.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Information about a public virtual interface to be provisioned on a connection.
@@ -671,7 +671,7 @@ type NewPublicVirtualInterfaceAllocation struct {
 	// configuration. The valid values are 1-2147483647.
 	//
 	// This member is required.
-	Asn *int32
+	Asn int32
 
 	// The name of the virtual interface assigned by the customer network. The name has
 	// a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a
@@ -683,7 +683,7 @@ type NewPublicVirtualInterfaceAllocation struct {
 	// The ID of the VLAN.
 	//
 	// This member is required.
-	Vlan *int32
+	Vlan int32
 
 	// The address family for the BGP peer.
 	AddressFamily AddressFamily
@@ -700,10 +700,10 @@ type NewPublicVirtualInterfaceAllocation struct {
 
 	// The routes to be advertised to the AWS network in this Region. Applies to public
 	// virtual interfaces.
-	RouteFilterPrefixes []*RouteFilterPrefix
+	RouteFilterPrefixes []RouteFilterPrefix
 
 	// The tags associated with the public virtual interface.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Information about a transit virtual interface.
@@ -717,7 +717,7 @@ type NewTransitVirtualInterface struct {
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
 	// configuration. The valid values are 1-2147483647.
-	Asn *int32
+	Asn int32
 
 	// The authentication key for BGP configuration. This string has a minimum length
 	// of 6 characters and and a maximun lenth of 80 characters.
@@ -734,7 +734,7 @@ type NewTransitVirtualInterface struct {
 	Mtu *int32
 
 	// The tags associated with the transitive virtual interface.
-	Tags []*Tag
+	Tags []Tag
 
 	// The name of the virtual interface assigned by the customer network. The name has
 	// a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a
@@ -742,7 +742,7 @@ type NewTransitVirtualInterface struct {
 	VirtualInterfaceName *string
 
 	// The ID of the VLAN.
-	Vlan *int32
+	Vlan int32
 }
 
 // Information about a transit virtual interface to be provisioned on a connection.
@@ -756,7 +756,7 @@ type NewTransitVirtualInterfaceAllocation struct {
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
 	// configuration. The valid values are 1-2147483647.
-	Asn *int32
+	Asn int32
 
 	// The authentication key for BGP configuration. This string has a minimum length
 	// of 6 characters and and a maximun lenth of 80 characters.
@@ -770,7 +770,7 @@ type NewTransitVirtualInterfaceAllocation struct {
 	Mtu *int32
 
 	// The tags associated with the transitive virtual interface.
-	Tags []*Tag
+	Tags []Tag
 
 	// The name of the virtual interface assigned by the customer network. The name has
 	// a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a
@@ -778,7 +778,7 @@ type NewTransitVirtualInterfaceAllocation struct {
 	VirtualInterfaceName *string
 
 	// The ID of the VLAN.
-	Vlan *int32
+	Vlan int32
 }
 
 // Information about a tag associated with an AWS Direct Connect resource.
@@ -788,7 +788,7 @@ type ResourceTag struct {
 	ResourceArn *string
 
 	// The tags.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Information about a route filter prefix that a customer can advertise through
@@ -849,7 +849,7 @@ type VirtualInterface struct {
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
 	// configuration. The valid values are 1-2147483647.
-	Asn *int32
+	Asn int32
 
 	// The authentication key for BGP configuration. This string has a minimum length
 	// of 6 characters and and a maximun lenth of 80 characters.
@@ -859,7 +859,7 @@ type VirtualInterface struct {
 	AwsDeviceV2 *string
 
 	// The BGP peers configured on this virtual interface.
-	BgpPeers []*BGPPeer
+	BgpPeers []BGPPeer
 
 	// The ID of the connection.
 	ConnectionId *string
@@ -891,10 +891,10 @@ type VirtualInterface struct {
 
 	// The routes to be advertised to the AWS network in this Region. Applies to public
 	// virtual interfaces.
-	RouteFilterPrefixes []*RouteFilterPrefix
+	RouteFilterPrefixes []RouteFilterPrefix
 
 	// The tags associated with the virtual interface.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the virtual private gateway. Applies only to private virtual
 	// interfaces.
@@ -949,7 +949,7 @@ type VirtualInterface struct {
 	VirtualInterfaceType *string
 
 	// The ID of the VLAN.
-	Vlan *int32
+	Vlan int32
 }
 
 // Information about the virtual interface failover test.
@@ -957,7 +957,7 @@ type VirtualInterfaceTestHistory struct {
 
 	// The BGP peers that were put in the DOWN state as part of the virtual interface
 	// failover test.
-	BgpPeers []*string
+	BgpPeers []string
 
 	// The time that the virtual interface moves out of the DOWN state.
 	EndTime *time.Time

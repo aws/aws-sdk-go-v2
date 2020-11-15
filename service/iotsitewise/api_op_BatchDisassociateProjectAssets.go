@@ -34,7 +34,7 @@ type BatchDisassociateProjectAssetsInput struct {
 	// The IDs of the assets to be disassociated from the project.
 	//
 	// This member is required.
-	AssetIds []*string
+	AssetIds []string
 
 	// The ID of the project from which to disassociate the assets.
 	//
@@ -50,7 +50,7 @@ type BatchDisassociateProjectAssetsInput struct {
 type BatchDisassociateProjectAssetsOutput struct {
 
 	// A list of associated error information, if any.
-	Errors []*types.AssetErrorDetails
+	Errors []types.AssetErrorDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

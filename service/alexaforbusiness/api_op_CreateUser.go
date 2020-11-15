@@ -48,7 +48,7 @@ type CreateUserInput struct {
 	LastName *string
 
 	// The tags for the user.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateUserOutput struct {

@@ -31,7 +31,7 @@ func (c *Client) ListMultiplexes(ctx context.Context, params *ListMultiplexesInp
 type ListMultiplexesInput struct {
 
 	// The maximum number of items to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token to retrieve the next page of results.
 	NextToken *string
@@ -41,7 +41,7 @@ type ListMultiplexesInput struct {
 type ListMultiplexesOutput struct {
 
 	// List of multiplexes.
-	Multiplexes []*types.MultiplexSummary
+	Multiplexes []types.MultiplexSummary
 
 	// Token for the next ListMultiplexes request.
 	NextToken *string

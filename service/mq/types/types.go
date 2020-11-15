@@ -20,7 +20,7 @@ type BrokerEngineType struct {
 	EngineType EngineType
 
 	// The list of engine versions.
-	EngineVersions []*EngineVersion
+	EngineVersions []EngineVersion
 }
 
 // Returns information about all brokers.
@@ -30,7 +30,7 @@ type BrokerInstance struct {
 	ConsoleURL *string
 
 	// The broker's wire-level protocol endpoints.
-	Endpoints []*string
+	Endpoints []string
 
 	// The IP address of the Elastic Network Interface (ENI) attached to the broker.
 	IpAddress *string
@@ -40,7 +40,7 @@ type BrokerInstance struct {
 type BrokerInstanceOption struct {
 
 	// The list of available az.
-	AvailabilityZones []*AvailabilityZone
+	AvailabilityZones []AvailabilityZone
 
 	// The type of broker engine.
 	EngineType EngineType
@@ -55,7 +55,7 @@ type BrokerInstanceOption struct {
 	SupportedDeploymentModes []DeploymentMode
 
 	// The list of supported engine versions.
-	SupportedEngineVersions []*string
+	SupportedEngineVersions []string
 }
 
 // The Amazon Resource Name (ARN) of the broker.
@@ -122,7 +122,7 @@ type Configuration struct {
 	Name *string
 
 	// The list of all tags associated with this configuration.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // A list of information about the configuration.
@@ -132,7 +132,7 @@ type ConfigurationId struct {
 	Id *string
 
 	// The revision number of the configuration.
-	Revision *int32
+	Revision int32
 }
 
 // Returns information about the specified configuration revision.
@@ -145,7 +145,7 @@ type ConfigurationRevision struct {
 	Description *string
 
 	// Required. The revision number of the configuration.
-	Revision *int32
+	Revision int32
 }
 
 // Broker configuration information
@@ -155,7 +155,7 @@ type Configurations struct {
 	Current *ConfigurationId
 
 	// The history of configurations applied to the broker.
-	History []*ConfigurationId
+	History []ConfigurationId
 
 	// The pending configuration of the broker.
 	Pending *ConfigurationId
@@ -167,7 +167,7 @@ type EncryptionOptions struct {
 	// Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
 	//
 	// This member is required.
-	UseAwsOwnedKey *bool
+	UseAwsOwnedKey bool
 
 	// The symmetric customer master key (CMK) to use for the AWS Key Management
 	// Service (KMS). This key is used to encrypt your data at rest. If not provided,
@@ -187,7 +187,7 @@ type EngineVersion struct {
 type LdapServerMetadataInput struct {
 
 	// Fully qualified domain name of the LDAP server. Optional failover server.
-	Hosts []*string
+	Hosts []string
 
 	// Fully qualified name of the directory to search for a user’s groups.
 	RoleBase *string
@@ -201,7 +201,7 @@ type LdapServerMetadataInput struct {
 
 	// The directory search scope for the role. If set to true, scope is to search the
 	// entire sub-tree.
-	RoleSearchSubtree *bool
+	RoleSearchSubtree bool
 
 	// Service account password.
 	ServiceAccountPassword *string
@@ -220,7 +220,7 @@ type LdapServerMetadataInput struct {
 
 	// The directory search scope for the user. If set to true, scope is to search the
 	// entire sub-tree.
-	UserSearchSubtree *bool
+	UserSearchSubtree bool
 }
 
 // The metadata of the LDAP server used to authenticate and authorize connections
@@ -228,7 +228,7 @@ type LdapServerMetadataInput struct {
 type LdapServerMetadataOutput struct {
 
 	// Fully qualified domain name of the LDAP server. Optional failover server.
-	Hosts []*string
+	Hosts []string
 
 	// Fully qualified name of the directory to search for a user’s groups.
 	RoleBase *string
@@ -242,7 +242,7 @@ type LdapServerMetadataOutput struct {
 
 	// The directory search scope for the role. If set to true, scope is to search the
 	// entire sub-tree.
-	RoleSearchSubtree *bool
+	RoleSearchSubtree bool
 
 	// Service account username.
 	ServiceAccountUsername *string
@@ -258,7 +258,7 @@ type LdapServerMetadataOutput struct {
 
 	// The directory search scope for the user. If set to true, scope is to search the
 	// entire sub-tree.
-	UserSearchSubtree *bool
+	UserSearchSubtree bool
 }
 
 // The list of information about logs to be enabled for the specified broker.
@@ -266,10 +266,10 @@ type Logs struct {
 
 	// Enables audit logging. Every user management action made using JMX or the
 	// ActiveMQ Web Console is logged.
-	Audit *bool
+	Audit bool
 
 	// Enables general logging.
-	General *bool
+	General bool
 }
 
 // The list of information about logs currently enabled and pending to be deployed
@@ -278,13 +278,13 @@ type LogsSummary struct {
 
 	// Enables audit logging. Every user management action made using JMX or the
 	// ActiveMQ Web Console is logged.
-	Audit *bool
+	Audit bool
 
 	// The location of the CloudWatch Logs log group where audit logs are sent.
 	AuditLogGroup *string
 
 	// Enables general logging.
-	General *bool
+	General bool
 
 	// The location of the CloudWatch Logs log group where general logs are sent.
 	GeneralLogGroup *string
@@ -299,10 +299,10 @@ type PendingLogs struct {
 
 	// Enables audit logging. Every user management action made using JMX or the
 	// ActiveMQ Web Console is logged.
-	Audit *bool
+	Audit bool
 
 	// Enables general logging.
-	General *bool
+	General bool
 }
 
 // Returns information about the XML element or attribute that was sanitized in the
@@ -323,12 +323,12 @@ type SanitizationWarning struct {
 type User struct {
 
 	// Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
-	ConsoleAccess *bool
+	ConsoleAccess bool
 
 	// The list of groups (20 maximum) to which the ActiveMQ user belongs. This value
 	// can contain only alphanumeric characters, dashes, periods, underscores, and
 	// tildes (- . _ ~). This value must be 2-100 characters long.
-	Groups []*string
+	Groups []string
 
 	// Required. The password of the ActiveMQ user. This value must be at least 12
 	// characters long, must contain at least 4 unique characters, and must not contain
@@ -346,12 +346,12 @@ type User struct {
 type UserPendingChanges struct {
 
 	// Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
-	ConsoleAccess *bool
+	ConsoleAccess bool
 
 	// The list of groups (20 maximum) to which the ActiveMQ user belongs. This value
 	// can contain only alphanumeric characters, dashes, periods, underscores, and
 	// tildes (- . _ ~). This value must be 2-100 characters long.
-	Groups []*string
+	Groups []string
 
 	// Required. The type of change pending for the ActiveMQ user.
 	PendingChange ChangeType

@@ -33,7 +33,7 @@ type DescribeAutoScalingGroupsInput struct {
 	// characters. By default, you can only specify up to 50 names. You can optionally
 	// increase this limit using the MaxRecords parameter. If you omit this parameter,
 	// all Auto Scaling groups are described.
-	AutoScalingGroupNames []*string
+	AutoScalingGroupNames []string
 
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100.
@@ -49,7 +49,7 @@ type DescribeAutoScalingGroupsOutput struct {
 	// The groups.
 	//
 	// This member is required.
-	AutoScalingGroups []*types.AutoScalingGroup
+	AutoScalingGroups []types.AutoScalingGroup
 
 	// A string that indicates that the response contains more items than can be
 	// returned in a single response. To receive additional items, specify this string

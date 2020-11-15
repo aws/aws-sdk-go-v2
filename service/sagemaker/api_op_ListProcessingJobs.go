@@ -69,7 +69,7 @@ type ListProcessingJobsOutput struct {
 	// An array of ProcessingJobSummary objects, each listing a processing job.
 	//
 	// This member is required.
-	ProcessingJobSummaries []*types.ProcessingJobSummary
+	ProcessingJobSummaries []types.ProcessingJobSummary
 
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
 	// the next set of processing jobs, use it in the subsequent request.

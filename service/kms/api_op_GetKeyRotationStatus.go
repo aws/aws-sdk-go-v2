@@ -71,7 +71,7 @@ type GetKeyRotationStatusInput struct {
 type GetKeyRotationStatusOutput struct {
 
 	// A Boolean value that specifies whether key rotation is enabled.
-	KeyRotationEnabled *bool
+	KeyRotationEnabled bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

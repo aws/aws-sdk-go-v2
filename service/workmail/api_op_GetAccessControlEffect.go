@@ -58,7 +58,7 @@ type GetAccessControlEffectOutput struct {
 	Effect types.AccessControlRuleEffect
 
 	// The rules that match the given parameters, resulting in an effect.
-	MatchedRules []*string
+	MatchedRules []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

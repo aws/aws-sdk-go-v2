@@ -51,7 +51,7 @@ type ListSchemaExtensionsOutput struct {
 	NextToken *string
 
 	// Information about the schema extensions applied to the directory.
-	SchemaExtensionsInfo []*types.SchemaExtensionInfo
+	SchemaExtensionsInfo []types.SchemaExtensionInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

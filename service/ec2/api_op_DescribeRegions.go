@@ -36,13 +36,13 @@ type DescribeRegionsInput struct {
 
 	// Indicates whether to display all Regions, including Regions that are disabled
 	// for your account.
-	AllRegions *bool
+	AllRegions bool
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The filters.
 	//
@@ -54,17 +54,17 @@ type DescribeRegionsInput struct {
 	//
 	// * region-name - The name of
 	// the Region (for example, us-east-1).
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The names of the Regions. You can specify any Regions, whether they are enabled
 	// and disabled for your account.
-	RegionNames []*string
+	RegionNames []string
 }
 
 type DescribeRegionsOutput struct {
 
 	// Information about the Regions.
-	Regions []*types.Region
+	Regions []types.Region
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

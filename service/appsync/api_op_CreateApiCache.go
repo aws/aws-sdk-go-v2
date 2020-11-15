@@ -48,7 +48,7 @@ type CreateApiCacheInput struct {
 	// TTL in seconds for cache entries. Valid values are between 1 and 3600 seconds.
 	//
 	// This member is required.
-	Ttl *int64
+	Ttl int64
 
 	// The cache instance type. Valid values are
 	//
@@ -97,11 +97,11 @@ type CreateApiCacheInput struct {
 
 	// At rest encryption flag for cache. This setting cannot be updated after
 	// creation.
-	AtRestEncryptionEnabled *bool
+	AtRestEncryptionEnabled bool
 
 	// Transit encryption flag when connecting to cache. This setting cannot be updated
 	// after creation.
-	TransitEncryptionEnabled *bool
+	TransitEncryptionEnabled bool
 }
 
 // Represents the output of a CreateApiCache operation.

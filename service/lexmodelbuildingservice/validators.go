@@ -881,13 +881,13 @@ func validateEnumerationValue(v *types.EnumerationValue) error {
 	}
 }
 
-func validateEnumerationValues(v []*types.EnumerationValue) error {
+func validateEnumerationValues(v []types.EnumerationValue) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EnumerationValues"}
 	for i := range v {
-		if err := validateEnumerationValue(v[i]); err != nil {
+		if err := validateEnumerationValue(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -962,13 +962,13 @@ func validateIntent(v *types.Intent) error {
 	}
 }
 
-func validateIntentList(v []*types.Intent) error {
+func validateIntentList(v []types.Intent) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IntentList"}
 	for i := range v {
-		if err := validateIntent(v[i]); err != nil {
+		if err := validateIntent(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1018,13 +1018,13 @@ func validateLogSettingsRequest(v *types.LogSettingsRequest) error {
 	}
 }
 
-func validateLogSettingsRequestList(v []*types.LogSettingsRequest) error {
+func validateLogSettingsRequestList(v []types.LogSettingsRequest) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LogSettingsRequestList"}
 	for i := range v {
-		if err := validateLogSettingsRequest(v[i]); err != nil {
+		if err := validateLogSettingsRequest(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1053,13 +1053,13 @@ func validateMessage(v *types.Message) error {
 	}
 }
 
-func validateMessageList(v []*types.Message) error {
+func validateMessageList(v []types.Message) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MessageList"}
 	for i := range v {
-		if err := validateMessage(v[i]); err != nil {
+		if err := validateMessage(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1115,13 +1115,13 @@ func validateSlot(v *types.Slot) error {
 	}
 }
 
-func validateSlotList(v []*types.Slot) error {
+func validateSlotList(v []types.Slot) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SlotList"}
 	for i := range v {
-		if err := validateSlot(v[i]); err != nil {
+		if err := validateSlot(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1149,13 +1149,13 @@ func validateSlotTypeConfiguration(v *types.SlotTypeConfiguration) error {
 	}
 }
 
-func validateSlotTypeConfigurations(v []*types.SlotTypeConfiguration) error {
+func validateSlotTypeConfigurations(v []types.SlotTypeConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SlotTypeConfigurations"}
 	for i := range v {
-		if err := validateSlotTypeConfiguration(v[i]); err != nil {
+		if err := validateSlotTypeConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1218,13 +1218,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

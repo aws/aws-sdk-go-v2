@@ -41,7 +41,7 @@ type ModifyClusterSubnetGroupInput struct {
 	// request.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// A text description of the subnet group to be modified.
 	Description *string

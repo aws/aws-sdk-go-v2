@@ -35,7 +35,7 @@ type ListApplicationVersionsInput struct {
 	ApplicationId *string
 
 	// The total number of items to return.
-	MaxItems *int32
+	MaxItems int32
 
 	// A token to specify where to start paginating.
 	NextToken *string
@@ -47,7 +47,7 @@ type ListApplicationVersionsOutput struct {
 	NextToken *string
 
 	// An array of version summaries for the application.
-	Versions []*types.VersionSummary
+	Versions []types.VersionSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -33,11 +33,11 @@ type DescribeOrganizationConfigurationOutput struct {
 
 	// Specifies whether Amazon Macie is enabled automatically for accounts that are
 	// added to the AWS organization.
-	AutoEnable *bool
+	AutoEnable bool
 
 	// Specifies whether the maximum number of Amazon Macie member accounts are part of
 	// the AWS organization.
-	MaxAccountLimitReached *bool
+	MaxAccountLimitReached bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

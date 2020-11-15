@@ -940,13 +940,13 @@ func validateLoggingConfig(v *types.LoggingConfig) error {
 	}
 }
 
-func validateResourcesToImport(v []*types.ResourceToImport) error {
+func validateResourcesToImport(v []types.ResourceToImport) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourcesToImport"}
 	for i := range v {
-		if err := validateResourceToImport(v[i]); err != nil {
+		if err := validateResourceToImport(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1013,13 +1013,13 @@ func validateRollbackTrigger(v *types.RollbackTrigger) error {
 	}
 }
 
-func validateRollbackTriggers(v []*types.RollbackTrigger) error {
+func validateRollbackTriggers(v []types.RollbackTrigger) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RollbackTriggers"}
 	for i := range v {
-		if err := validateRollbackTrigger(v[i]); err != nil {
+		if err := validateRollbackTrigger(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1048,13 +1048,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTags(v []*types.Tag) error {
+func validateTags(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tags"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1226,9 +1226,6 @@ func validateOpDeleteStackInstancesInput(v *DeleteStackInstancesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteStackInstancesInput"}
-	if v.RetainStacks == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RetainStacks"))
-	}
 	if v.Regions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Regions"))
 	}

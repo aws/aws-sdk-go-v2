@@ -85,7 +85,7 @@ type GetRelationalDatabaseMetricDataInput struct {
 	// database metric data is available in 1-minute (60 seconds) granularity.
 	//
 	// This member is required.
-	Period *int32
+	Period int32
 
 	// The name of your database from which to get metric data.
 	//
@@ -141,7 +141,7 @@ type GetRelationalDatabaseMetricDataInput struct {
 type GetRelationalDatabaseMetricDataOutput struct {
 
 	// An array of objects that describe the metric data returned.
-	MetricData []*types.MetricDatapoint
+	MetricData []types.MetricDatapoint
 
 	// The name of the metric returned.
 	MetricName types.RelationalDatabaseMetricName

@@ -55,7 +55,7 @@ type GetRelationalDatabaseParametersOutput struct {
 
 	// An object describing the result of your get relational database parameters
 	// request.
-	Parameters []*types.RelationalDatabaseParameter
+	Parameters []types.RelationalDatabaseParameter
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

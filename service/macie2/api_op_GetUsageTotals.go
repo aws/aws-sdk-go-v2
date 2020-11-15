@@ -34,7 +34,7 @@ type GetUsageTotalsOutput struct {
 
 	// An array of objects that contains the results of the query. Each object contains
 	// the data for a specific usage metric.
-	UsageTotals []*types.UsageTotal
+	UsageTotals []types.UsageTotal
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

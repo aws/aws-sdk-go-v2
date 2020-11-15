@@ -54,7 +54,7 @@ type DescribeJobFlowsInput struct {
 	CreatedBefore *time.Time
 
 	// Return only job flows whose job flow ID is contained in this list.
-	JobFlowIds []*string
+	JobFlowIds []string
 
 	// Return only job flows whose state is contained in this list.
 	JobFlowStates []types.JobFlowExecutionState
@@ -64,7 +64,7 @@ type DescribeJobFlowsInput struct {
 type DescribeJobFlowsOutput struct {
 
 	// A list of job flows matching the parameters supplied.
-	JobFlows []*types.JobFlowDetail
+	JobFlows []types.JobFlowDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

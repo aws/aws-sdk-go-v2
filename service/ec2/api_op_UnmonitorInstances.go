@@ -35,19 +35,19 @@ type UnmonitorInstancesInput struct {
 	// The IDs of the instances.
 	//
 	// This member is required.
-	InstanceIds []*string
+	InstanceIds []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 }
 
 type UnmonitorInstancesOutput struct {
 
 	// The monitoring information.
-	InstanceMonitorings []*types.InstanceMonitoring
+	InstanceMonitorings []types.InstanceMonitoring
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

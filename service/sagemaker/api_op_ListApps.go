@@ -52,7 +52,7 @@ type ListAppsInput struct {
 type ListAppsOutput struct {
 
 	// The list of apps.
-	Apps []*types.AppDetails
+	Apps []types.AppDetails
 
 	// If the previous response was truncated, you will receive this token. Use it in
 	// your next request to receive the next set of results.

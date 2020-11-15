@@ -143,11 +143,11 @@ type GetReservationCoverageInput struct {
 	// * REGION
 	//
 	// * TENANCY
-	GroupBy []*types.GroupDefinition
+	GroupBy []types.GroupDefinition
 
 	// The measurement that you want your reservation coverage reported in. Valid
 	// values are Hour, Unit, and Cost. You can use multiple values in a request.
-	Metrics []*string
+	Metrics []string
 
 	// The token to retrieve the next set of results. AWS provides the token when the
 	// response from a previous call has more results than the maximum page size.
@@ -159,7 +159,7 @@ type GetReservationCoverageOutput struct {
 	// The amount of time that your reservations covered.
 	//
 	// This member is required.
-	CoveragesByTime []*types.CoverageByTime
+	CoveragesByTime []types.CoverageByTime
 
 	// The token for the next set of retrievable results. AWS provides the token when
 	// the response from a previous call has more results than the maximum page size.

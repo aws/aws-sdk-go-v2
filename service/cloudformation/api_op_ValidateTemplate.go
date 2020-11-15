@@ -66,13 +66,13 @@ type ValidateTemplateOutput struct {
 	CapabilitiesReason *string
 
 	// A list of the transforms that are declared in the template.
-	DeclaredTransforms []*string
+	DeclaredTransforms []string
 
 	// The description found within the template.
 	Description *string
 
 	// A list of TemplateParameter structures.
-	Parameters []*types.TemplateParameter
+	Parameters []types.TemplateParameter
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

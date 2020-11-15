@@ -249,9 +249,9 @@ func awsRestjson1_serializeOpDocumentCreateClassificationJobInput(v *CreateClass
 		ok.String(*v.Description)
 	}
 
-	if v.InitialRun != nil {
+	if v.InitialRun {
 		ok := object.Key("initialRun")
-		ok.Boolean(*v.InitialRun)
+		ok.Boolean(v.InitialRun)
 	}
 
 	if len(v.JobType) > 0 {
@@ -271,9 +271,9 @@ func awsRestjson1_serializeOpDocumentCreateClassificationJobInput(v *CreateClass
 		}
 	}
 
-	if v.SamplingPercentage != nil {
+	if v.SamplingPercentage != 0 {
 		ok := object.Key("samplingPercentage")
-		ok.Integer(*v.SamplingPercentage)
+		ok.Integer(v.SamplingPercentage)
 	}
 
 	if v.ScheduleFrequency != nil {
@@ -382,9 +382,9 @@ func awsRestjson1_serializeOpDocumentCreateCustomDataIdentifierInput(v *CreateCu
 		}
 	}
 
-	if v.MaximumMatchDistance != nil {
+	if v.MaximumMatchDistance != 0 {
 		ok := object.Key("maximumMatchDistance")
-		ok.Integer(*v.MaximumMatchDistance)
+		ok.Integer(v.MaximumMatchDistance)
 	}
 
 	if v.Name != nil {
@@ -499,9 +499,9 @@ func awsRestjson1_serializeOpDocumentCreateFindingsFilterInput(v *CreateFindings
 		ok.String(*v.Name)
 	}
 
-	if v.Position != nil {
+	if v.Position != 0 {
 		ok := object.Key("position")
-		ok.Integer(*v.Position)
+		ok.Integer(v.Position)
 	}
 
 	if v.Tags != nil {
@@ -586,9 +586,9 @@ func awsRestjson1_serializeOpDocumentCreateInvitationsInput(v *CreateInvitations
 		}
 	}
 
-	if v.DisableEmailNotification != nil {
+	if v.DisableEmailNotification {
 		ok := object.Key("disableEmailNotification")
-		ok.Boolean(*v.DisableEmailNotification)
+		ok.Boolean(v.DisableEmailNotification)
 	}
 
 	if v.Message != nil {
@@ -882,13 +882,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteCustomDataIdentifierInput(v *Dele
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil {
+	if v.Id == nil || len(*v.Id) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
 	}
 	if v.Id != nil {
-		if len(*v.Id) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
-		}
 		if err := encoder.SetURI("id").String(*v.Id); err != nil {
 			return err
 		}
@@ -948,13 +945,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteFindingsFilterInput(v *DeleteFind
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil {
+	if v.Id == nil || len(*v.Id) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
 	}
 	if v.Id != nil {
-		if len(*v.Id) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
-		}
 		if err := encoder.SetURI("id").String(*v.Id); err != nil {
 			return err
 		}
@@ -1089,13 +1083,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteMemberInput(v *DeleteMemberInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil {
+	if v.Id == nil || len(*v.Id) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
 	}
 	if v.Id != nil {
-		if len(*v.Id) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
-		}
 		if err := encoder.SetURI("id").String(*v.Id); err != nil {
 			return err
 		}
@@ -1176,9 +1167,9 @@ func awsRestjson1_serializeOpDocumentDescribeBucketsInput(v *DescribeBucketsInpu
 		}
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1247,13 +1238,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeClassificationJobInput(v *Descr
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.JobId == nil {
+	if v.JobId == nil || len(*v.JobId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member jobId must not be empty")}
 	}
 	if v.JobId != nil {
-		if len(*v.JobId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member jobId must not be empty")}
-		}
 		if err := encoder.SetURI("jobId").String(*v.JobId); err != nil {
 			return err
 		}
@@ -1521,13 +1509,10 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateMemberInput(v *Disassociate
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil {
+	if v.Id == nil || len(*v.Id) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
 	}
 	if v.Id != nil {
-		if len(*v.Id) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
-		}
 		if err := encoder.SetURI("id").String(*v.Id); err != nil {
 			return err
 		}
@@ -1871,13 +1856,10 @@ func awsRestjson1_serializeOpHttpBindingsGetCustomDataIdentifierInput(v *GetCust
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil {
+	if v.Id == nil || len(*v.Id) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
 	}
 	if v.Id != nil {
-		if len(*v.Id) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
-		}
 		if err := encoder.SetURI("id").String(*v.Id); err != nil {
 			return err
 		}
@@ -2019,13 +2001,10 @@ func awsRestjson1_serializeOpHttpBindingsGetFindingsFilterInput(v *GetFindingsFi
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil {
+	if v.Id == nil || len(*v.Id) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
 	}
 	if v.Id != nil {
-		if len(*v.Id) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
-		}
 		if err := encoder.SetURI("id").String(*v.Id); err != nil {
 			return err
 		}
@@ -2111,9 +2090,9 @@ func awsRestjson1_serializeOpDocumentGetFindingStatisticsInput(v *GetFindingStat
 		ok.String(string(v.GroupBy))
 	}
 
-	if v.Size != nil {
+	if v.Size != 0 {
 		ok := object.Key("size")
-		ok.Integer(*v.Size)
+		ok.Integer(v.Size)
 	}
 
 	if v.SortCriteria != nil {
@@ -2327,13 +2306,10 @@ func awsRestjson1_serializeOpHttpBindingsGetMemberInput(v *GetMemberInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil {
+	if v.Id == nil || len(*v.Id) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
 	}
 	if v.Id != nil {
-		if len(*v.Id) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
-		}
 		if err := encoder.SetURI("id").String(*v.Id); err != nil {
 			return err
 		}
@@ -2414,9 +2390,9 @@ func awsRestjson1_serializeOpDocumentGetUsageStatisticsInput(v *GetUsageStatisti
 		}
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2556,9 +2532,9 @@ func awsRestjson1_serializeOpDocumentListClassificationJobsInput(v *ListClassifi
 		}
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2641,9 +2617,9 @@ func awsRestjson1_serializeOpDocumentListCustomDataIdentifiersInput(v *ListCusto
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2726,9 +2702,9 @@ func awsRestjson1_serializeOpDocumentListFindingsInput(v *ListFindingsInput, val
 		}
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2797,8 +2773,8 @@ func awsRestjson1_serializeOpHttpBindingsListFindingsFiltersInput(v *ListFinding
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != nil {
-		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2859,8 +2835,8 @@ func awsRestjson1_serializeOpHttpBindingsListInvitationsInput(v *ListInvitations
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != nil {
-		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2921,8 +2897,8 @@ func awsRestjson1_serializeOpHttpBindingsListMembersInput(v *ListMembersInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != nil {
-		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2987,8 +2963,8 @@ func awsRestjson1_serializeOpHttpBindingsListOrganizationAdminAccountsInput(v *L
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != nil {
-		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3049,13 +3025,10 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceArn == nil {
+	if v.ResourceArn == nil || len(*v.ResourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
 	}
 	if v.ResourceArn != nil {
-		if len(*v.ResourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -3201,13 +3174,10 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceArn == nil {
+	if v.ResourceArn == nil || len(*v.ResourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
 	}
 	if v.ResourceArn != nil {
-		if len(*v.ResourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -3309,9 +3279,9 @@ func awsRestjson1_serializeOpDocumentTestCustomDataIdentifierInput(v *TestCustom
 		}
 	}
 
-	if v.MaximumMatchDistance != nil {
+	if v.MaximumMatchDistance != 0 {
 		ok := object.Key("maximumMatchDistance")
-		ok.Integer(*v.MaximumMatchDistance)
+		ok.Integer(v.MaximumMatchDistance)
 	}
 
 	if v.Regex != nil {
@@ -3378,13 +3348,10 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceArn == nil {
+	if v.ResourceArn == nil || len(*v.ResourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
 	}
 	if v.ResourceArn != nil {
-		if len(*v.ResourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -3392,10 +3359,7 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 
 	if v.TagKeys != nil {
 		for i := range v.TagKeys {
-			if v.TagKeys[i] == nil {
-				continue
-			}
-			encoder.AddQuery("tagKeys").String(*v.TagKeys[i])
+			encoder.AddQuery("tagKeys").String(v.TagKeys[i])
 		}
 	}
 
@@ -3464,13 +3428,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateClassificationJobInput(v *UpdateC
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.JobId == nil {
+	if v.JobId == nil || len(*v.JobId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member jobId must not be empty")}
 	}
 	if v.JobId != nil {
-		if len(*v.JobId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member jobId must not be empty")}
-		}
 		if err := encoder.SetURI("jobId").String(*v.JobId); err != nil {
 			return err
 		}
@@ -3553,13 +3514,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateFindingsFilterInput(v *UpdateFind
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil {
+	if v.Id == nil || len(*v.Id) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
 	}
 	if v.Id != nil {
-		if len(*v.Id) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
-		}
 		if err := encoder.SetURI("id").String(*v.Id); err != nil {
 			return err
 		}
@@ -3594,9 +3552,9 @@ func awsRestjson1_serializeOpDocumentUpdateFindingsFilterInput(v *UpdateFindings
 		ok.String(*v.Name)
 	}
 
-	if v.Position != nil {
+	if v.Position != 0 {
 		ok := object.Key("position")
-		ok.Integer(*v.Position)
+		ok.Integer(v.Position)
 	}
 
 	return nil
@@ -3742,13 +3700,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateMemberSessionInput(v *UpdateMembe
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil {
+	if v.Id == nil || len(*v.Id) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
 	}
 	if v.Id != nil {
-		if len(*v.Id) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
-		}
 		if err := encoder.SetURI("id").String(*v.Id); err != nil {
 			return err
 		}
@@ -3834,25 +3789,21 @@ func awsRestjson1_serializeOpDocumentUpdateOrganizationConfigurationInput(v *Upd
 	object := value.Object()
 	defer object.Close()
 
-	if v.AutoEnable != nil {
+	if v.AutoEnable {
 		ok := object.Key("autoEnable")
-		ok.Boolean(*v.AutoEnable)
+		ok.Boolean(v.AutoEnable)
 	}
 
 	return nil
 }
 
-func awsRestjson1_serializeDocument__listOf__string(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocument__listOf__string(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -3868,85 +3819,65 @@ func awsRestjson1_serializeDocument__listOfFindingType(v []types.FindingType, va
 	return nil
 }
 
-func awsRestjson1_serializeDocument__listOfJobScopeTerm(v []*types.JobScopeTerm, value smithyjson.Value) error {
+func awsRestjson1_serializeDocument__listOfJobScopeTerm(v []types.JobScopeTerm, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentJobScopeTerm(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentJobScopeTerm(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocument__listOfListJobsFilterTerm(v []*types.ListJobsFilterTerm, value smithyjson.Value) error {
+func awsRestjson1_serializeDocument__listOfListJobsFilterTerm(v []types.ListJobsFilterTerm, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentListJobsFilterTerm(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentListJobsFilterTerm(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocument__listOfS3BucketDefinitionForJob(v []*types.S3BucketDefinitionForJob, value smithyjson.Value) error {
+func awsRestjson1_serializeDocument__listOfS3BucketDefinitionForJob(v []types.S3BucketDefinitionForJob, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentS3BucketDefinitionForJob(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentS3BucketDefinitionForJob(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocument__listOfTagValuePair(v []*types.TagValuePair, value smithyjson.Value) error {
+func awsRestjson1_serializeDocument__listOfTagValuePair(v []types.TagValuePair, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTagValuePair(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentTagValuePair(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocument__listOfUsageStatisticsFilter(v []*types.UsageStatisticsFilter, value smithyjson.Value) error {
+func awsRestjson1_serializeDocument__listOfUsageStatisticsFilter(v []types.UsageStatisticsFilter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentUsageStatisticsFilter(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentUsageStatisticsFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3970,17 +3901,14 @@ func awsRestjson1_serializeDocumentAccountDetail(v *types.AccountDetail, value s
 	return nil
 }
 
-func awsRestjson1_serializeDocumentBucketCriteria(v map[string]*types.BucketCriteriaAdditionalProperties, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentBucketCriteria(v map[string]types.BucketCriteriaAdditionalProperties, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentBucketCriteriaAdditionalProperties(v[key], om); err != nil {
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentBucketCriteriaAdditionalProperties(&mapVar, om); err != nil {
 			return err
 		}
 	}
@@ -3998,24 +3926,24 @@ func awsRestjson1_serializeDocumentBucketCriteriaAdditionalProperties(v *types.B
 		}
 	}
 
-	if v.Gt != nil {
+	if v.Gt != 0 {
 		ok := object.Key("gt")
-		ok.Long(*v.Gt)
+		ok.Long(v.Gt)
 	}
 
-	if v.Gte != nil {
+	if v.Gte != 0 {
 		ok := object.Key("gte")
-		ok.Long(*v.Gte)
+		ok.Long(v.Gte)
 	}
 
-	if v.Lt != nil {
+	if v.Lt != 0 {
 		ok := object.Key("lt")
-		ok.Long(*v.Lt)
+		ok.Long(v.Lt)
 	}
 
-	if v.Lte != nil {
+	if v.Lte != 0 {
 		ok := object.Key("lte")
-		ok.Long(*v.Lte)
+		ok.Long(v.Lte)
 	}
 
 	if v.Neq != nil {
@@ -4064,17 +3992,14 @@ func awsRestjson1_serializeDocumentClassificationExportConfiguration(v *types.Cl
 	return nil
 }
 
-func awsRestjson1_serializeDocumentCriterion(v map[string]*types.CriterionAdditionalProperties, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentCriterion(v map[string]types.CriterionAdditionalProperties, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentCriterionAdditionalProperties(v[key], om); err != nil {
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentCriterionAdditionalProperties(&mapVar, om); err != nil {
 			return err
 		}
 	}
@@ -4099,24 +4024,24 @@ func awsRestjson1_serializeDocumentCriterionAdditionalProperties(v *types.Criter
 		}
 	}
 
-	if v.Gt != nil {
+	if v.Gt != 0 {
 		ok := object.Key("gt")
-		ok.Long(*v.Gt)
+		ok.Long(v.Gt)
 	}
 
-	if v.Gte != nil {
+	if v.Gte != 0 {
 		ok := object.Key("gte")
-		ok.Long(*v.Gte)
+		ok.Long(v.Gte)
 	}
 
-	if v.Lt != nil {
+	if v.Lt != 0 {
 		ok := object.Key("lt")
-		ok.Long(*v.Lt)
+		ok.Long(v.Lt)
 	}
 
-	if v.Lte != nil {
+	if v.Lte != 0 {
 		ok := object.Key("lte")
-		ok.Long(*v.Lte)
+		ok.Long(v.Lte)
 	}
 
 	if v.Neq != nil {
@@ -4296,9 +4221,9 @@ func awsRestjson1_serializeDocumentMonthlySchedule(v *types.MonthlySchedule, val
 	object := value.Object()
 	defer object.Close()
 
-	if v.DayOfMonth != nil {
+	if v.DayOfMonth != 0 {
 		ok := object.Key("dayOfMonth")
-		ok.Integer(*v.DayOfMonth)
+		ok.Integer(v.DayOfMonth)
 	}
 
 	return nil
@@ -4428,17 +4353,13 @@ func awsRestjson1_serializeDocumentSortCriteria(v *types.SortCriteria, value smi
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTagMap(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }

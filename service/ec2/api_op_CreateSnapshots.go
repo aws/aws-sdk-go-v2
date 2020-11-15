@@ -47,16 +47,16 @@ type CreateSnapshotsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// Tags to apply to every snapshot specified by the instance.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 }
 
 type CreateSnapshotsOutput struct {
 
 	// List of snapshots.
-	Snapshots []*types.SnapshotInfo
+	Snapshots []types.SnapshotInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

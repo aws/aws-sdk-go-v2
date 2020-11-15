@@ -39,7 +39,7 @@ type RemoveTagsFromResourceInput struct {
 	// composed of a key-value pair.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 // RemoveTagsFromResourceOutput

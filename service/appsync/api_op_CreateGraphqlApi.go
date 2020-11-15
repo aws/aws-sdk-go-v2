@@ -40,7 +40,7 @@ type CreateGraphqlApiInput struct {
 	Name *string
 
 	// A list of additional authentication providers for the GraphqlApi API.
-	AdditionalAuthenticationProviders []*types.AdditionalAuthenticationProvider
+	AdditionalAuthenticationProviders []types.AdditionalAuthenticationProvider
 
 	// The Amazon CloudWatch Logs configuration.
 	LogConfig *types.LogConfig
@@ -49,13 +49,13 @@ type CreateGraphqlApiInput struct {
 	OpenIDConnectConfig *types.OpenIDConnectConfig
 
 	// A TagMap object.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The Amazon Cognito user pool configuration.
 	UserPoolConfig *types.UserPoolConfig
 
 	// A flag indicating whether to enable X-Ray tracing for the GraphqlApi.
-	XrayEnabled *bool
+	XrayEnabled bool
 }
 
 type CreateGraphqlApiOutput struct {

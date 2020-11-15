@@ -46,7 +46,7 @@ type ModifyDBInstanceInput struct {
 	// false, changes to the instance are applied during the next maintenance window.
 	// Some parameter changes can cause an outage and are applied on the next reboot.
 	// Default: false
-	ApplyImmediately *bool
+	ApplyImmediately bool
 
 	// Indicates that minor version upgrades are applied automatically to the instance
 	// during the maintenance window. Changing this parameter doesn't result in an

@@ -47,7 +47,7 @@ type ListEventSourcesInput struct {
 type ListEventSourcesOutput struct {
 
 	// The list of event sources.
-	EventSources []*types.EventSource
+	EventSources []types.EventSource
 
 	// A token you can use in a subsequent operation to retrieve the next set of
 	// results.

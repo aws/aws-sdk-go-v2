@@ -43,23 +43,23 @@ type UpdateTrialComponentInput struct {
 	EndTime *time.Time
 
 	// Replaces all of the component's input artifacts with the specified artifacts.
-	InputArtifacts map[string]*types.TrialComponentArtifact
+	InputArtifacts map[string]types.TrialComponentArtifact
 
 	// The input artifacts to remove from the component.
-	InputArtifactsToRemove []*string
+	InputArtifactsToRemove []string
 
 	// Replaces all of the component's output artifacts with the specified artifacts.
-	OutputArtifacts map[string]*types.TrialComponentArtifact
+	OutputArtifacts map[string]types.TrialComponentArtifact
 
 	// The output artifacts to remove from the component.
-	OutputArtifactsToRemove []*string
+	OutputArtifactsToRemove []string
 
 	// Replaces all of the component's hyperparameters with the specified
 	// hyperparameters.
-	Parameters map[string]*types.TrialComponentParameterValue
+	Parameters map[string]types.TrialComponentParameterValue
 
 	// The hyperparameters to remove from the component.
-	ParametersToRemove []*string
+	ParametersToRemove []string
 
 	// When the component started.
 	StartTime *time.Time

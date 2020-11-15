@@ -56,7 +56,7 @@ type GetBotsInput struct {
 type GetBotsOutput struct {
 
 	// An array of botMetadata objects, with one entry for each bot.
-	Bots []*types.BotMetadata
+	Bots []types.BotMetadata
 
 	// If the response is truncated, it includes a pagination token that you can
 	// specify in your next request to fetch the next page of bots.

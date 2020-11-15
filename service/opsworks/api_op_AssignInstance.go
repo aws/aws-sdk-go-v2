@@ -53,7 +53,7 @@ type AssignInstanceInput struct {
 	// registered instance to a built-in layer.
 	//
 	// This member is required.
-	LayerIds []*string
+	LayerIds []string
 }
 
 type AssignInstanceOutput struct {

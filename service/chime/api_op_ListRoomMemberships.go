@@ -53,7 +53,7 @@ type ListRoomMembershipsOutput struct {
 	NextToken *string
 
 	// The room membership details.
-	RoomMemberships []*types.RoomMembership
+	RoomMemberships []types.RoomMembership
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

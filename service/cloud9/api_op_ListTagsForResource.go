@@ -39,7 +39,7 @@ type ListTagsForResourceInput struct {
 type ListTagsForResourceOutput struct {
 
 	// The list of tags associated with the AWS Cloud9 development environment.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

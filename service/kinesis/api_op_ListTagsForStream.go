@@ -59,7 +59,7 @@ type ListTagsForStreamOutput struct {
 	// ExclusiveStartTagKey and up to the specified Limit.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

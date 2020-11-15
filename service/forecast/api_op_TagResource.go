@@ -70,7 +70,7 @@ type TagResourceInput struct {
 	// prefix of aws do not count against your tags per resource limit.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagResourceOutput struct {

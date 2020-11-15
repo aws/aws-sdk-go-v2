@@ -157,7 +157,7 @@ type SendRawEmailInput struct {
 
 	// A list of destinations for the message, consisting of To:, CC:, and BCC:
 	// addresses.
-	Destinations []*string
+	Destinations []string
 
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
@@ -224,7 +224,7 @@ type SendRawEmailInput struct {
 	// A list of tags, in the form of name/value pairs, to apply to an email that you
 	// send using SendRawEmail. Tags correspond to characteristics of the email that
 	// you define, so that you can publish email sending events.
-	Tags []*types.MessageTag
+	Tags []types.MessageTag
 }
 
 // Represents a unique message ID.

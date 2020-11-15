@@ -104,7 +104,7 @@ type DescribeHyperParameterTuningJobOutput struct {
 
 	// A list of the HyperParameterTrainingJobDefinition objects launched for this
 	// tuning job.
-	TrainingJobDefinitions []*types.HyperParameterTrainingJobDefinition
+	TrainingJobDefinitions []types.HyperParameterTrainingJobDefinition
 
 	// The configuration for starting the hyperparameter parameter tuning job using one
 	// or more previous tuning jobs as a starting point. The results of previous tuning

@@ -60,10 +60,10 @@ type CreateClusterSubnetGroupInput struct {
 	// request.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// A list of tag instances.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateClusterSubnetGroupOutput struct {

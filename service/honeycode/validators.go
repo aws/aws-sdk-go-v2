@@ -73,13 +73,14 @@ func validateVariableValue(v *types.VariableValue) error {
 	}
 }
 
-func validateVariableValueMap(v map[string]*types.VariableValue) error {
+func validateVariableValueMap(v map[string]types.VariableValue) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VariableValueMap"}
 	for key := range v {
-		if err := validateVariableValue(v[key]); err != nil {
+		value := v[key]
+		if err := validateVariableValue(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}

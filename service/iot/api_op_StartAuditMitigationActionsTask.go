@@ -34,7 +34,7 @@ type StartAuditMitigationActionsTaskInput struct {
 	// must be defined in your AWS account.
 	//
 	// This member is required.
-	AuditCheckToActionsMapping map[string][]*string
+	AuditCheckToActionsMapping map[string][]string
 
 	// Each audit mitigation task must have a unique client request token. If you try
 	// to start a new task with the same token as a task that already exists, an

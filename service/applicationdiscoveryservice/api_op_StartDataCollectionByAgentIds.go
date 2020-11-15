@@ -38,7 +38,7 @@ type StartDataCollectionByAgentIdsInput struct {
 	// system shows Failed in the Description field.
 	//
 	// This member is required.
-	AgentIds []*string
+	AgentIds []string
 }
 
 type StartDataCollectionByAgentIdsOutput struct {
@@ -47,7 +47,7 @@ type StartDataCollectionByAgentIdsOutput struct {
 	// collecting data. Information includes the agent/connector ID, a description of
 	// the operation performed, and whether the agent/connector configuration was
 	// updated.
-	AgentsConfigurationStatus []*types.AgentConfigurationStatus
+	AgentsConfigurationStatus []types.AgentConfigurationStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

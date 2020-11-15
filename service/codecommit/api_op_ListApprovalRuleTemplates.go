@@ -42,7 +42,7 @@ type ListApprovalRuleTemplatesOutput struct {
 
 	// The names of all the approval rule templates found in the AWS Region for your
 	// AWS account.
-	ApprovalRuleTemplateNames []*string
+	ApprovalRuleTemplateNames []string
 
 	// An enumeration token that allows the operation to batch the next results of the
 	// operation.

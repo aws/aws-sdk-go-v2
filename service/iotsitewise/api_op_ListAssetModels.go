@@ -42,7 +42,7 @@ type ListAssetModelsOutput struct {
 	// A list that summarizes each asset model.
 	//
 	// This member is required.
-	AssetModelSummaries []*types.AssetModelSummary
+	AssetModelSummaries []types.AssetModelSummary
 
 	// The token for the next set of results, or null if there are no additional
 	// results.

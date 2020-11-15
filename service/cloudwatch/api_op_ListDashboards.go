@@ -47,7 +47,7 @@ type ListDashboardsInput struct {
 type ListDashboardsOutput struct {
 
 	// The list of matching dashboards.
-	DashboardEntries []*types.DashboardEntry
+	DashboardEntries []types.DashboardEntry
 
 	// The token that marks the start of the next batch of returned results.
 	NextToken *string

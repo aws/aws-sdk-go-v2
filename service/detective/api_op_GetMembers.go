@@ -35,7 +35,7 @@ type GetMembersInput struct {
 	// accounts that were removed from the behavior graph.
 	//
 	// This member is required.
-	AccountIds []*string
+	AccountIds []string
 
 	// The ARN of the behavior graph for which to request the member details.
 	//
@@ -47,12 +47,12 @@ type GetMembersOutput struct {
 
 	// The member account details that Detective is returning in response to the
 	// request.
-	MemberDetails []*types.MemberDetail
+	MemberDetails []types.MemberDetail
 
 	// The requested member accounts for which Detective was unable to return member
 	// details. For each account, provides the reason why the request could not be
 	// processed.
-	UnprocessedAccounts []*types.UnprocessedAccount
+	UnprocessedAccounts []types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -35,7 +35,7 @@ type ListTeamMembersInput struct {
 	ProjectId *string
 
 	// The maximum number of team members you want returned in a response.
-	MaxResults *int32
+	MaxResults int32
 
 	// The continuation token for the next set of results, if the results cannot be
 	// returned in one response.
@@ -47,7 +47,7 @@ type ListTeamMembersOutput struct {
 	// A list of team member objects for the project.
 	//
 	// This member is required.
-	TeamMembers []*types.TeamMember
+	TeamMembers []types.TeamMember
 
 	// The continuation token to use when requesting the next set of results, if there
 	// are more results to be returned.

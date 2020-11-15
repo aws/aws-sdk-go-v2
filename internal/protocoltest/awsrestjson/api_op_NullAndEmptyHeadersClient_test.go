@@ -38,7 +38,7 @@ func TestClient_NullAndEmptyHeadersClient_awsRestjson1Serialize(t *testing.T) {
 			Params: &NullAndEmptyHeadersClientInput{
 				A: nil,
 				B: ptr.String(""),
-				C: []*string{},
+				C: []string{},
 			},
 			ExpectMethod:  "GET",
 			ExpectURIPath: "/NullAndEmptyHeadersClient",

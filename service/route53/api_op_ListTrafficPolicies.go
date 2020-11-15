@@ -60,7 +60,7 @@ type ListTrafficPoliciesOutput struct {
 	// TrafficPolicyIdMarker in the TrafficPolicyIdMarker request parameter.
 	//
 	// This member is required.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// The value that you specified for the MaxItems parameter in the
 	// ListTrafficPolicies request that produced the current response.
@@ -78,7 +78,7 @@ type ListTrafficPoliciesOutput struct {
 	// that was created by the current AWS account.
 	//
 	// This member is required.
-	TrafficPolicySummaries []*types.TrafficPolicySummary
+	TrafficPolicySummaries []types.TrafficPolicySummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

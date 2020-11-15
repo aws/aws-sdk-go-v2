@@ -44,7 +44,7 @@ type ListRxNormInferenceJobsInput struct {
 type ListRxNormInferenceJobsOutput struct {
 
 	// The maximum number of results to return in each page. The default is 100.
-	ComprehendMedicalAsyncJobPropertiesList []*types.ComprehendMedicalAsyncJobProperties
+	ComprehendMedicalAsyncJobPropertiesList []types.ComprehendMedicalAsyncJobProperties
 
 	// Identifies the next page of results to return.
 	NextToken *string

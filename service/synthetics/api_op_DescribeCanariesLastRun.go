@@ -43,7 +43,7 @@ type DescribeCanariesLastRunInput struct {
 type DescribeCanariesLastRunOutput struct {
 
 	// An array that contains the information from the most recent run of each canary.
-	CanariesLastRun []*types.CanaryLastRun
+	CanariesLastRun []types.CanaryLastRun
 
 	// A token that indicates that there is more data available. You can use this token
 	// in a subsequent DescribeCanariesLastRun operation to retrieve the next set of

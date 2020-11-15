@@ -38,7 +38,7 @@ type Account struct {
 	DefaultLicense License
 
 	// The sign-in delegate groups associated with the account.
-	SigninDelegateGroups []*SigninDelegateGroup
+	SigninDelegateGroups []SigninDelegateGroup
 
 	// Supported licenses for the Amazon Chime account.
 	SupportedLicenses []License
@@ -168,7 +168,7 @@ type CreateAttendeeRequestItem struct {
 	ExternalUserId *string
 
 	// The tag key-value pairs.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // The SIP credentials used to authenticate requests to your Amazon Chime Voice
@@ -210,7 +210,7 @@ type EmergencyCallingConfiguration struct {
 
 	// The Dialed Number Identification Service (DNIS) emergency calling configuration
 	// details.
-	DNIS []*DNISEmergencyCallingConfiguration
+	DNIS []DNISEmergencyCallingConfiguration
 }
 
 // The configuration that allows a bot to receive outgoing events. Can be either an
@@ -386,7 +386,7 @@ type Origination struct {
 
 	// The call distribution properties defined for your SIP hosts. Valid range:
 	// Minimum value of 1. Maximum value of 20.
-	Routes []*OriginationRoute
+	Routes []OriginationRoute
 }
 
 // Origination routes define call distribution properties for your SIP hosts to
@@ -429,7 +429,7 @@ type Participant struct {
 type PhoneNumber struct {
 
 	// The phone number associations.
-	Associations []*PhoneNumberAssociation
+	Associations []PhoneNumberAssociation
 
 	// The outbound calling name associated with the phone number.
 	CallingName *string
@@ -527,7 +527,7 @@ type PhoneNumberOrder struct {
 
 	// The ordered phone number details, such as the phone number in E.164 format and
 	// the phone number status.
-	OrderedPhoneNumbers []*OrderedPhoneNumber
+	OrderedPhoneNumbers []OrderedPhoneNumber
 
 	// The phone number order ID.
 	PhoneNumberOrderId *string
@@ -556,7 +556,7 @@ type Proxy struct {
 	FallBackPhoneNumber *string
 
 	// The countries for proxy phone numbers to be selected from.
-	PhoneNumberCountries []*string
+	PhoneNumberCountries []string
 }
 
 // The proxy session for an Amazon Chime Voice Connector.
@@ -589,7 +589,7 @@ type ProxySession struct {
 	NumberSelectionBehavior NumberSelectionBehavior
 
 	// The proxy session participants.
-	Participants []*Participant
+	Participants []Participant
 
 	// The proxy session ID.
 	ProxySessionId *string
@@ -686,7 +686,7 @@ type StreamingConfiguration struct {
 	Disabled *bool
 
 	// The streaming notification targets.
-	StreamingNotificationTargets []*StreamingNotificationTarget
+	StreamingNotificationTargets []StreamingNotificationTarget
 }
 
 // The targeted recipient for a streaming configuration notification.
@@ -738,10 +738,10 @@ type Termination struct {
 
 	// The countries to which calls are allowed, in ISO 3166-1 alpha-2 format.
 	// Required.
-	CallingRegions []*string
+	CallingRegions []string
 
 	// The IP addresses allowed to make calls, in CIDR format. Required.
-	CidrAllowedList []*string
+	CidrAllowedList []string
 
 	// The limit on calls per second. Max value based on account service quota. Default
 	// value of 1.
@@ -916,7 +916,7 @@ type VoiceConnectorGroup struct {
 	VoiceConnectorGroupId *string
 
 	// The Amazon Chime Voice Connectors to which to route inbound calls.
-	VoiceConnectorItems []*VoiceConnectorItem
+	VoiceConnectorItems []VoiceConnectorItem
 }
 
 // For Amazon Chime Voice Connector groups, the Amazon Chime Voice Connectors to

@@ -37,7 +37,7 @@ type UpdateUsagePlanInput struct {
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
-	PatchOperations []*types.PatchOperation
+	PatchOperations []types.PatchOperation
 }
 
 // Represents a usage plan than can specify who can assess associated API stages
@@ -48,7 +48,7 @@ type UpdateUsagePlanInput struct {
 type UpdateUsagePlanOutput struct {
 
 	// The associated API stages of a usage plan.
-	ApiStages []*types.ApiStage
+	ApiStages []types.ApiStage
 
 	// The description of a usage plan.
 	Description *string
@@ -67,7 +67,7 @@ type UpdateUsagePlanOutput struct {
 	Quota *types.QuotaSettings
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The request throttle limits of a usage plan.
 	Throttle *types.ThrottleSettings

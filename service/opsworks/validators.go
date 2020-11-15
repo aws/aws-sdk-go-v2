@@ -1387,13 +1387,13 @@ func validateEnvironmentVariable(v *types.EnvironmentVariable) error {
 	}
 }
 
-func validateEnvironmentVariables(v []*types.EnvironmentVariable) error {
+func validateEnvironmentVariables(v []types.EnvironmentVariable) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EnvironmentVariables"}
 	for i := range v {
-		if err := validateEnvironmentVariable(v[i]); err != nil {
+		if err := validateEnvironmentVariable(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1443,13 +1443,13 @@ func validateVolumeConfiguration(v *types.VolumeConfiguration) error {
 	}
 }
 
-func validateVolumeConfigurations(v []*types.VolumeConfiguration) error {
+func validateVolumeConfigurations(v []types.VolumeConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VolumeConfigurations"}
 	for i := range v {
-		if err := validateVolumeConfiguration(v[i]); err != nil {
+		if err := validateVolumeConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

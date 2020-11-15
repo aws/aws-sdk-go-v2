@@ -52,7 +52,7 @@ type ListForecastsInput struct {
 	// For example, to list all forecasts whose status is
 	// not ACTIVE, you would specify: "Filters": [ { "Condition": "IS_NOT", "Key":
 	// "Status", "Value": "ACTIVE" } ]
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The number of items to return in the response.
 	MaxResults *int32
@@ -66,7 +66,7 @@ type ListForecastsInput struct {
 type ListForecastsOutput struct {
 
 	// An array of objects that summarize each forecast's properties.
-	Forecasts []*types.ForecastSummary
+	Forecasts []types.ForecastSummary
 
 	// If the response is truncated, Amazon Forecast returns this token. To retrieve
 	// the next set of results, use the token in the next request.

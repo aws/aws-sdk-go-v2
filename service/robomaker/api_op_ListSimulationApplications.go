@@ -33,7 +33,7 @@ type ListSimulationApplicationsInput struct {
 	// Optional list of filters to limit results. The filter name name is supported.
 	// When filtering, you must use the complete value of the filtered item. You can
 	// use up to three filters.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// When this parameter is used, ListSimulationApplications only returns maxResults
 	// results in a single page along with a nextToken response element. The remaining
@@ -66,7 +66,7 @@ type ListSimulationApplicationsOutput struct {
 
 	// A list of simulation application summaries that meet the criteria of the
 	// request.
-	SimulationApplicationSummaries []*types.SimulationApplicationSummary
+	SimulationApplicationSummaries []types.SimulationApplicationSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

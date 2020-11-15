@@ -68,7 +68,7 @@ type GetUserAttributeVerificationCodeInput struct {
 	//
 	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
 	// use it to provide sensitive information.
-	ClientMetadata map[string]*string
+	ClientMetadata map[string]string
 }
 
 // The verification code response returned by the server response to get the user

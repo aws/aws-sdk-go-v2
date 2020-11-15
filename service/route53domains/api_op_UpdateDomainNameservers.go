@@ -48,7 +48,7 @@ type UpdateDomainNameserversInput struct {
 	// A list of new name servers for the domain.
 	//
 	// This member is required.
-	Nameservers []*types.Nameserver
+	Nameservers []types.Nameserver
 
 	// The authorization key for .fi domains
 	FIAuthKey *string

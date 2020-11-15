@@ -61,7 +61,7 @@ type DescribeAffectedEntitiesInput struct {
 type DescribeAffectedEntitiesOutput struct {
 
 	// The entities that match the filter criteria.
-	Entities []*types.AffectedEntity
+	Entities []types.AffectedEntity
 
 	// If the results of a search are large, only a portion of the results are
 	// returned, and a nextToken pagination token is returned in the response. To

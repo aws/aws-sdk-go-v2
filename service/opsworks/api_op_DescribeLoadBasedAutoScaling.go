@@ -37,7 +37,7 @@ type DescribeLoadBasedAutoScalingInput struct {
 	// An array of layer IDs.
 	//
 	// This member is required.
-	LayerIds []*string
+	LayerIds []string
 }
 
 // Contains the response to a DescribeLoadBasedAutoScaling request.
@@ -45,7 +45,7 @@ type DescribeLoadBasedAutoScalingOutput struct {
 
 	// An array of LoadBasedAutoScalingConfiguration objects that describe each layer's
 	// configuration.
-	LoadBasedAutoScalingConfigurations []*types.LoadBasedAutoScalingConfiguration
+	LoadBasedAutoScalingConfigurations []types.LoadBasedAutoScalingConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

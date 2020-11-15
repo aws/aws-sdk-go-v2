@@ -36,7 +36,7 @@ type DeleteTargetInput struct {
 	// A Boolean value that can be used to delete all associations with this SNS topic.
 	// The default value is FALSE. If set to TRUE, all associations between that target
 	// and every notification rule in your AWS account are deleted.
-	ForceUnsubscribeAll *bool
+	ForceUnsubscribeAll bool
 }
 
 type DeleteTargetOutput struct {

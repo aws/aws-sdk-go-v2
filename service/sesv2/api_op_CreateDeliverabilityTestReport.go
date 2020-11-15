@@ -61,7 +61,7 @@ type CreateDeliverabilityTestReportInput struct {
 
 	// An array of objects that define the tags (keys and values) that you want to
 	// associate with the predictive inbox placement test.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Information about the predictive inbox placement test that you created.

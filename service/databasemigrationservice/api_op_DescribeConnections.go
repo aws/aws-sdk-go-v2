@@ -34,7 +34,7 @@ type DescribeConnectionsInput struct {
 
 	// The filters applied to the connection. Valid filter names: endpoint-arn |
 	// replication-instance-arn
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
@@ -52,7 +52,7 @@ type DescribeConnectionsInput struct {
 type DescribeConnectionsOutput struct {
 
 	// A description of the connections.
-	Connections []*types.Connection
+	Connections []types.Connection
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the

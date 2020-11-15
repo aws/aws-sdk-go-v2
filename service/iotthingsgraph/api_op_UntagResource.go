@@ -42,7 +42,7 @@ type UntagResourceInput struct {
 	// in the AWS CLI User Guide.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagResourceOutput struct {

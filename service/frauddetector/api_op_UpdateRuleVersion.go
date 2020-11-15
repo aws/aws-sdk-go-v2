@@ -43,7 +43,7 @@ type UpdateRuleVersionInput struct {
 	// The outcomes.
 	//
 	// This member is required.
-	Outcomes []*string
+	Outcomes []string
 
 	// The rule to update.
 	//
@@ -54,7 +54,7 @@ type UpdateRuleVersionInput struct {
 	Description *string
 
 	// The tags to assign to the rule version.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type UpdateRuleVersionOutput struct {

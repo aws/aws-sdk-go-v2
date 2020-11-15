@@ -33,7 +33,7 @@ type ListJobsInput struct {
 	DataSetId *string
 
 	// The maximum number of results returned by a single call.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token value retrieved from a previous call to access the next page of
 	// results.
@@ -46,7 +46,7 @@ type ListJobsInput struct {
 type ListJobsOutput struct {
 
 	// The jobs listed by the request.
-	Jobs []*types.JobEntry
+	Jobs []types.JobEntry
 
 	// The token value retrieved from a previous call to access the next page of
 	// results.

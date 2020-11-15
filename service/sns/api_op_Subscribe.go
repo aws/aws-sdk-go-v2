@@ -90,7 +90,7 @@ type SubscribeInput struct {
 	// errors (for example, when the service that powers the subscribed endpoint
 	// becomes unavailable) are held in the dead-letter queue for further analysis or
 	// reprocessing.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// The endpoint that you want to receive notifications. Endpoints vary by
 	// protocol:
@@ -127,7 +127,7 @@ type SubscribeInput struct {
 	// aren't yet confirmed. A subscription becomes confirmed when the subscriber calls
 	// the ConfirmSubscription action with a confirmation token. The default value is
 	// false.
-	ReturnSubscriptionArn *bool
+	ReturnSubscriptionArn bool
 }
 
 // Response for Subscribe action.

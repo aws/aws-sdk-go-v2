@@ -31,7 +31,7 @@ type SearchFlowTemplatesInput struct {
 
 	// An array of objects that limit the result set. The only valid filter is
 	// DEVICE_MODEL_ID.
-	Filters []*types.FlowTemplateFilter
+	Filters []types.FlowTemplateFilter
 
 	// The maximum number of results to return in the response.
 	MaxResults *int32
@@ -48,7 +48,7 @@ type SearchFlowTemplatesOutput struct {
 
 	// An array of objects that contain summary information about each workflow in the
 	// result set.
-	Summaries []*types.FlowTemplateSummary
+	Summaries []types.FlowTemplateSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

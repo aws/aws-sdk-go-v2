@@ -47,7 +47,7 @@ type ListAttendeesInput struct {
 type ListAttendeesOutput struct {
 
 	// The Amazon Chime SDK attendee information.
-	Attendees []*types.Attendee
+	Attendees []types.Attendee
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string

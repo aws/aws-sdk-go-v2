@@ -87,7 +87,7 @@ type GetAccountOutput struct {
 
 	// A list of features supported for the account. When usage plans are enabled, the
 	// features list will include an entry of "UsagePlans".
-	Features []*string
+	Features []string
 
 	// Specifies the API request limits configured for the current Account.
 	ThrottleSettings *types.ThrottleSettings

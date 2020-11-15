@@ -44,7 +44,7 @@ type ListJobsInput struct {
 type ListJobsOutput struct {
 
 	// Information about the jobs.
-	Jobs []*types.Job
+	Jobs []types.Job
 
 	// If the number of items that are returned is significantly large, this is an
 	// identifier that is also returned. It can be used in a subsequent call to this

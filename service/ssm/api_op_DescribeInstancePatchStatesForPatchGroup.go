@@ -39,10 +39,10 @@ type DescribeInstancePatchStatesForPatchGroupInput struct {
 	// Each entry in the array is a structure containing: Key (string between 1 and 200
 	// characters) Values (array containing a single string) Type (string "Equal",
 	// "NotEqual", "LessThan", "GreaterThan")
-	Filters []*types.InstancePatchStateFilter
+	Filters []types.InstancePatchStateFilter
 
 	// The maximum number of patches to return (per page).
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
@@ -52,7 +52,7 @@ type DescribeInstancePatchStatesForPatchGroupInput struct {
 type DescribeInstancePatchStatesForPatchGroupOutput struct {
 
 	// The high-level patch state for the requested instances.
-	InstancePatchStates []*types.InstancePatchState
+	InstancePatchStates []types.InstancePatchState
 
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.

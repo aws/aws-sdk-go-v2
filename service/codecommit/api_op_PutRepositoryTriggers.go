@@ -38,7 +38,7 @@ type PutRepositoryTriggersInput struct {
 	// The JSON block of configuration information for each trigger.
 	//
 	// This member is required.
-	Triggers []*types.RepositoryTrigger
+	Triggers []types.RepositoryTrigger
 }
 
 // Represents the output of a put repository triggers operation.

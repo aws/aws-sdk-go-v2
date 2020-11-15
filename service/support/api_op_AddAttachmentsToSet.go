@@ -49,7 +49,7 @@ type AddAttachmentsToSetInput struct {
 	// attachment, such as troubleshoot-screenshot.png.
 	//
 	// This member is required.
-	Attachments []*types.Attachment
+	Attachments []types.Attachment
 
 	// The ID of the attachment set. If an attachmentSetId is not specified, a new
 	// attachment set is created, and the ID of the set is returned in the response. If

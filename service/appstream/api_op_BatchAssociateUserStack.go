@@ -34,13 +34,13 @@ type BatchAssociateUserStackInput struct {
 	// The list of UserStackAssociation objects.
 	//
 	// This member is required.
-	UserStackAssociations []*types.UserStackAssociation
+	UserStackAssociations []types.UserStackAssociation
 }
 
 type BatchAssociateUserStackOutput struct {
 
 	// The list of UserStackAssociationError objects.
-	Errors []*types.UserStackAssociationError
+	Errors []types.UserStackAssociationError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

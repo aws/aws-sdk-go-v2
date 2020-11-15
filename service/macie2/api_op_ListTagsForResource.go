@@ -40,7 +40,7 @@ type ListTagsForResourceOutput struct {
 
 	// A map of key-value pairs that identifies the tags (keys and values) that are
 	// associated with the resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

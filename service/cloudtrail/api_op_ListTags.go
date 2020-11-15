@@ -35,7 +35,7 @@ type ListTagsInput struct {
 	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 	//
 	// This member is required.
-	ResourceIdList []*string
+	ResourceIdList []string
 
 	// Reserved for future use.
 	NextToken *string
@@ -49,7 +49,7 @@ type ListTagsOutput struct {
 	NextToken *string
 
 	// A list of resource tags.
-	ResourceTagList []*types.ResourceTag
+	ResourceTagList []types.ResourceTag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

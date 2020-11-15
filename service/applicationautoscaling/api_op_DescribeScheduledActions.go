@@ -185,7 +185,7 @@ type DescribeScheduledActionsInput struct {
 	ScalableDimension types.ScalableDimension
 
 	// The names of the scheduled actions to describe.
-	ScheduledActionNames []*string
+	ScheduledActionNames []string
 }
 
 type DescribeScheduledActionsOutput struct {
@@ -195,7 +195,7 @@ type DescribeScheduledActionsOutput struct {
 	NextToken *string
 
 	// Information about the scheduled actions.
-	ScheduledActions []*types.ScheduledAction
+	ScheduledActions []types.ScheduledAction
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

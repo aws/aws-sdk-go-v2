@@ -41,7 +41,7 @@ type ListInstanceProfilesInput struct {
 type ListInstanceProfilesOutput struct {
 
 	// An object that contains information about your instance profiles.
-	InstanceProfiles []*types.InstanceProfile
+	InstanceProfiles []types.InstanceProfile
 
 	// An identifier that can be used in the next call to this operation to return the
 	// next set of items in the list.

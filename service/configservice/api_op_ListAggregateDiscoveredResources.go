@@ -53,7 +53,7 @@ type ListAggregateDiscoveredResourcesInput struct {
 	// The maximum number of resource identifiers returned on each page. The default is
 	// 100. You cannot specify a number greater than 100. If you specify 0, AWS Config
 	// uses the default.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
@@ -67,7 +67,7 @@ type ListAggregateDiscoveredResourcesOutput struct {
 	NextToken *string
 
 	// Returns a list of ResourceIdentifiers objects.
-	ResourceIdentifiers []*types.AggregateResourceIdentifier
+	ResourceIdentifiers []types.AggregateResourceIdentifier
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

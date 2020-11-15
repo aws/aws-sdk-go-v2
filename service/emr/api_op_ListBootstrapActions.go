@@ -43,7 +43,7 @@ type ListBootstrapActionsInput struct {
 type ListBootstrapActionsOutput struct {
 
 	// The bootstrap actions associated with the cluster.
-	BootstrapActions []*types.Command
+	BootstrapActions []types.Command
 
 	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string

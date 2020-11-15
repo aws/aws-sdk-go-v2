@@ -50,7 +50,7 @@ type GetQueryResultsOutput struct {
 	// ran. The results value is an array of arrays. Each log event is one object in
 	// the top-level array. Each of these log event objects is an array of field/value
 	// pairs.
-	Results [][]*types.ResultField
+	Results [][]types.ResultField
 
 	// Includes the number of log events scanned by the query, the number of log events
 	// that matched the query criteria, and the total number of bytes in the log events

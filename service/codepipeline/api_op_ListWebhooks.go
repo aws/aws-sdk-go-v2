@@ -49,7 +49,7 @@ type ListWebhooksOutput struct {
 
 	// The JSON detail returned for each webhook in the list output for the
 	// ListWebhooks call.
-	Webhooks []*types.ListWebhookItem
+	Webhooks []types.ListWebhookItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

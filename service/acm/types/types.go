@@ -32,12 +32,12 @@ type CertificateDetail struct {
 	// Contains information about the initial validation of each domain name that
 	// occurs as a result of the RequestCertificate request. This field exists only
 	// when the certificate type is AMAZON_ISSUED.
-	DomainValidationOptions []*DomainValidation
+	DomainValidationOptions []DomainValidation
 
 	// Contains a list of Extended Key Usage X.509 v3 extension objects. Each object
 	// specifies a purpose for which the certificate public key can be used and
 	// consists of a name and an object identifier (OID).
-	ExtendedKeyUsages []*ExtendedKeyUsage
+	ExtendedKeyUsages []ExtendedKeyUsage
 
 	// The reason the certificate request failed. This value exists only when the
 	// certificate status is FAILED. For more information, see Certificate Request
@@ -52,7 +52,7 @@ type CertificateDetail struct {
 
 	// A list of ARNs for the AWS resources that are using the certificate. A
 	// certificate can be used by multiple AWS resources.
-	InUseBy []*string
+	InUseBy []string
 
 	// The time at which the certificate was issued. This value exists only when the
 	// certificate type is AMAZON_ISSUED.
@@ -68,7 +68,7 @@ type CertificateDetail struct {
 	// that identifies the purpose of the public key contained in the certificate.
 	// Possible extension values include DIGITAL_SIGNATURE, KEY_ENCHIPHERMENT,
 	// NON_REPUDIATION, and more.
-	KeyUsages []*KeyUsage
+	KeyUsages []KeyUsage
 
 	// The time after which the certificate is not valid.
 	NotAfter *time.Time
@@ -118,7 +118,7 @@ type CertificateDetail struct {
 	// key that is contained in the certificate. The subject alternative names include
 	// the canonical domain name (CN) of the certificate and additional domain names
 	// that can be used to connect to the website.
-	SubjectAlternativeNames []*string
+	SubjectAlternativeNames []string
 
 	// The source of the certificate. For certificates provided by ACM, this value is
 	// AMAZON_ISSUED. For certificates that you imported with ImportCertificate, this
@@ -185,7 +185,7 @@ type DomainValidation struct {
 	ValidationDomain *string
 
 	// A list of email addresses that ACM used to send domain validation emails.
-	ValidationEmails []*string
+	ValidationEmails []string
 
 	// Specifies the domain validation method.
 	ValidationMethod ValidationMethod
@@ -309,7 +309,7 @@ type RenewalSummary struct {
 	// AMAZON_ISSUED.
 	//
 	// This member is required.
-	DomainValidationOptions []*DomainValidation
+	DomainValidationOptions []DomainValidation
 
 	// The status of ACM's managed renewal
 	// (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html) of the

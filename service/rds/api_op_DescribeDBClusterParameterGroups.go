@@ -43,7 +43,7 @@ type DescribeDBClusterParameterGroupsInput struct {
 	DBClusterParameterGroupName *string
 
 	// This parameter isn't currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous
 	// DescribeDBClusterParameterGroups request. If this parameter is specified, the
@@ -62,7 +62,7 @@ type DescribeDBClusterParameterGroupsInput struct {
 type DescribeDBClusterParameterGroupsOutput struct {
 
 	// A list of DB cluster parameter groups.
-	DBClusterParameterGroups []*types.DBClusterParameterGroup
+	DBClusterParameterGroups []types.DBClusterParameterGroup
 
 	// An optional pagination token provided by a previous
 	// DescribeDBClusterParameterGroups request. If this parameter is specified, the

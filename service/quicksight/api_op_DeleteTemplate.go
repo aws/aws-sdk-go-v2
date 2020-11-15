@@ -52,7 +52,7 @@ type DeleteTemplateOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// An ID for the template.
 	TemplateId *string

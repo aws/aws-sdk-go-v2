@@ -10,13 +10,13 @@ import (
 type AttackDetail struct {
 
 	// List of counters that describe the attack for the specified time period.
-	AttackCounters []*SummarizedCounter
+	AttackCounters []SummarizedCounter
 
 	// The unique identifier (ID) of the attack.
 	AttackId *string
 
 	// The array of AttackProperty objects.
-	AttackProperties []*AttackProperty
+	AttackProperties []AttackProperty
 
 	// The time the attack ended, in Unix time in seconds. For more information see
 	// timestamp
@@ -24,7 +24,7 @@ type AttackDetail struct {
 	EndTime *time.Time
 
 	// List of mitigation actions taken for the attack.
-	Mitigations []*Mitigation
+	Mitigations []Mitigation
 
 	// The ARN (Amazon Resource Name) of the resource that was attacked.
 	ResourceArn *string
@@ -36,7 +36,7 @@ type AttackDetail struct {
 
 	// If applicable, additional detail about the resource being attacked, for example,
 	// IP address or URL.
-	SubResources []*SubResourceSummary
+	SubResources []SubResourceSummary
 }
 
 // Details of the described attack.
@@ -54,11 +54,11 @@ type AttackProperty struct {
 
 	// The array of Contributor objects that includes the top five contributors to an
 	// attack.
-	TopContributors []*Contributor
+	TopContributors []Contributor
 
 	// The total contributions made to this attack by all contributors, not just the
 	// five listed in the TopContributors list.
-	Total *int64
+	Total int64
 
 	// The unit of the Value of the contributions.
 	Unit Unit
@@ -71,7 +71,7 @@ type AttackSummary struct {
 	AttackId *string
 
 	// The list of attacks for a specified time period.
-	AttackVectors []*AttackVectorDescription
+	AttackVectors []AttackVectorDescription
 
 	// The end time of the attack, in Unix time in seconds. For more information see
 	// timestamp
@@ -147,7 +147,7 @@ type Contributor struct {
 
 	// The contribution of this contributor expressed in Protection units. For example
 	// 10,000.
-	Value *int64
+	Value int64
 }
 
 // Contact information that the DRT can use to contact you if you have proactive
@@ -171,7 +171,7 @@ type EmergencyContact struct {
 type Limit struct {
 
 	// The maximum number of protections that can be created for the specified Type.
-	Max *int64
+	Max int64
 
 	// The type of protection.
 	Type *string
@@ -189,7 +189,7 @@ type Protection struct {
 
 	// The unique identifier (ID) for the Route 53 health check that's associated with
 	// the protection.
-	HealthCheckIds []*string
+	HealthCheckIds []string
 
 	// The unique identifier (ID) of the protection.
 	Id *string
@@ -205,10 +205,10 @@ type Protection struct {
 type SubResourceSummary struct {
 
 	// The list of attack types and associated counters.
-	AttackVectors []*SummarizedAttackVector
+	AttackVectors []SummarizedAttackVector
 
 	// The counters that describe the details of the attack.
-	Counters []*SummarizedCounter
+	Counters []SummarizedCounter
 
 	// The unique identifier (ID) of the SubResource.
 	Id *string
@@ -231,7 +231,7 @@ type Subscription struct {
 	EndTime *time.Time
 
 	// Specifies how many protections of a given type you can create.
-	Limits []*Limit
+	Limits []Limit
 
 	// If ENABLED, the DDoS Response Team (DRT) will use email and phone to notify
 	// contacts about escalations to the DRT and to initiate proactive customer
@@ -247,7 +247,7 @@ type Subscription struct {
 	StartTime *time.Time
 
 	// The length, in seconds, of the AWS Shield Advanced subscription for the account.
-	TimeCommitmentInSeconds *int64
+	TimeCommitmentInSeconds int64
 }
 
 // A summary of information about the attack.
@@ -259,26 +259,26 @@ type SummarizedAttackVector struct {
 	VectorType *string
 
 	// The list of counters that describe the details of the attack.
-	VectorCounters []*SummarizedCounter
+	VectorCounters []SummarizedCounter
 }
 
 // The counter that describes a DDoS attack.
 type SummarizedCounter struct {
 
 	// The average value of the counter for a specified time period.
-	Average *float64
+	Average float64
 
 	// The maximum value of the counter for a specified time period.
-	Max *float64
+	Max float64
 
 	// The number of counters for a specified time period.
-	N *int32
+	N int32
 
 	// The counter name.
 	Name *string
 
 	// The total of counter values for a specified time period.
-	Sum *float64
+	Sum float64
 
 	// The unit of the counters.
 	Unit *string

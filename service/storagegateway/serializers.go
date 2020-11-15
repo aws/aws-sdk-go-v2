@@ -3809,25 +3809,21 @@ func awsAwsjson11_serializeDocumentAutomaticTapeCreationRule(v *types.AutomaticT
 		ok.Long(*v.TapeSizeInBytes)
 	}
 
-	if v.Worm != nil {
+	if v.Worm {
 		ok := object.Key("Worm")
-		ok.Boolean(*v.Worm)
+		ok.Boolean(v.Worm)
 	}
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAutomaticTapeCreationRules(v []*types.AutomaticTapeCreationRule, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentAutomaticTapeCreationRules(v []types.AutomaticTapeCreationRule, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentAutomaticTapeCreationRule(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentAutomaticTapeCreationRule(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3846,92 +3842,68 @@ func awsAwsjson11_serializeDocumentCacheAttributes(v *types.CacheAttributes, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDiskIds(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentDiskIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentFileShareARNList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentFileShareARNList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentFileShareClientList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentFileShareClientList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentFileShareUserList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentFileShareUserList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentFolderList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentFolderList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentHosts(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentHosts(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -3963,17 +3935,13 @@ func awsAwsjson11_serializeDocumentNFSFileShareDefaults(v *types.NFSFileShareDef
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPoolARNs(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentPoolARNs(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -3995,79 +3963,59 @@ func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagKeys(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagKeys(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTags(v []*types.Tag, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTags(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTapeARNs(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTapeARNs(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentVolumeARNs(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentVolumeARNs(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentVTLDeviceARNs(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentVTLDeviceARNs(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -4201,9 +4149,9 @@ func awsAwsjson11_serializeOpDocumentAssignTapePoolInput(v *AssignTapePoolInput,
 	object := value.Object()
 	defer object.Close()
 
-	if v.BypassGovernanceRetention != nil {
+	if v.BypassGovernanceRetention {
 		ok := object.Key("BypassGovernanceRetention")
-		ok.Boolean(*v.BypassGovernanceRetention)
+		ok.Boolean(v.BypassGovernanceRetention)
 	}
 
 	if v.PoolId != nil {
@@ -4336,9 +4284,9 @@ func awsAwsjson11_serializeOpDocumentCreateCachediSCSIVolumeInput(v *CreateCache
 		ok.String(*v.TargetName)
 	}
 
-	if v.VolumeSizeInBytes != nil {
+	if v.VolumeSizeInBytes != 0 {
 		ok := object.Key("VolumeSizeInBytes")
-		ok.Long(*v.VolumeSizeInBytes)
+		ok.Long(v.VolumeSizeInBytes)
 	}
 
 	return nil
@@ -4658,9 +4606,9 @@ func awsAwsjson11_serializeOpDocumentCreateStorediSCSIVolumeInput(v *CreateStore
 		ok.String(*v.NetworkInterfaceId)
 	}
 
-	if v.PreserveExistingData != nil {
+	if v.PreserveExistingData {
 		ok := object.Key("PreserveExistingData")
-		ok.Boolean(*v.PreserveExistingData)
+		ok.Boolean(v.PreserveExistingData)
 	}
 
 	if v.SnapshotId != nil {
@@ -4768,9 +4716,9 @@ func awsAwsjson11_serializeOpDocumentCreateTapesInput(v *CreateTapesInput, value
 		ok.Long(*v.TapeSizeInBytes)
 	}
 
-	if v.Worm != nil {
+	if v.Worm {
 		ok := object.Key("Worm")
-		ok.Boolean(*v.Worm)
+		ok.Boolean(v.Worm)
 	}
 
 	return nil
@@ -4817,9 +4765,9 @@ func awsAwsjson11_serializeOpDocumentCreateTapeWithBarcodeInput(v *CreateTapeWit
 		ok.Long(*v.TapeSizeInBytes)
 	}
 
-	if v.Worm != nil {
+	if v.Worm {
 		ok := object.Key("Worm")
-		ok.Boolean(*v.Worm)
+		ok.Boolean(v.Worm)
 	}
 
 	return nil
@@ -4880,9 +4828,9 @@ func awsAwsjson11_serializeOpDocumentDeleteFileShareInput(v *DeleteFileShareInpu
 		ok.String(*v.FileShareARN)
 	}
 
-	if v.ForceDelete != nil {
+	if v.ForceDelete {
 		ok := object.Key("ForceDelete")
-		ok.Boolean(*v.ForceDelete)
+		ok.Boolean(v.ForceDelete)
 	}
 
 	return nil
@@ -4916,9 +4864,9 @@ func awsAwsjson11_serializeOpDocumentDeleteTapeArchiveInput(v *DeleteTapeArchive
 	object := value.Object()
 	defer object.Close()
 
-	if v.BypassGovernanceRetention != nil {
+	if v.BypassGovernanceRetention {
 		ok := object.Key("BypassGovernanceRetention")
-		ok.Boolean(*v.BypassGovernanceRetention)
+		ok.Boolean(v.BypassGovernanceRetention)
 	}
 
 	if v.TapeARN != nil {
@@ -4933,9 +4881,9 @@ func awsAwsjson11_serializeOpDocumentDeleteTapeInput(v *DeleteTapeInput, value s
 	object := value.Object()
 	defer object.Close()
 
-	if v.BypassGovernanceRetention != nil {
+	if v.BypassGovernanceRetention {
 		ok := object.Key("BypassGovernanceRetention")
-		ok.Boolean(*v.BypassGovernanceRetention)
+		ok.Boolean(v.BypassGovernanceRetention)
 	}
 
 	if v.GatewayARN != nil {

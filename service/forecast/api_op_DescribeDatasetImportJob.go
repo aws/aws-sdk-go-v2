@@ -77,7 +77,7 @@ type DescribeDatasetImportJobOutput struct {
 	DatasetImportJobName *string
 
 	// Statistical information about each field in the input data.
-	FieldStatistics map[string]*types.Statistics
+	FieldStatistics map[string]types.Statistics
 
 	// The last time that the dataset was modified. The time depends on the status of
 	// the job, as follows:

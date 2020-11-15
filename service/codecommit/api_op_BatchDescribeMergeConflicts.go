@@ -66,7 +66,7 @@ type BatchDescribeMergeConflictsInput struct {
 
 	// The path of the target files used to describe the conflicts. If not specified,
 	// the default is all conflict files.
-	FilePaths []*string
+	FilePaths []string
 
 	// The maximum number of files to include in the output.
 	MaxConflictFiles *int32
@@ -85,7 +85,7 @@ type BatchDescribeMergeConflictsOutput struct {
 	// of the differences between the files.
 	//
 	// This member is required.
-	Conflicts []*types.Conflict
+	Conflicts []types.Conflict
 
 	// The commit ID of the destination commit specifier that was used in the merge
 	// evaluation.
@@ -104,7 +104,7 @@ type BatchDescribeMergeConflictsOutput struct {
 
 	// A list of any errors returned while describing the merge conflicts for each
 	// file.
-	Errors []*types.BatchDescribeMergeConflictsError
+	Errors []types.BatchDescribeMergeConflictsError
 
 	// An enumeration token that can be used in a request to return the next batch of
 	// the results.

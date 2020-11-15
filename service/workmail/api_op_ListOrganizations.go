@@ -45,7 +45,7 @@ type ListOrganizationsOutput struct {
 
 	// The overview of owned organizations presented as a list of organization
 	// summaries.
-	OrganizationSummaries []*types.OrganizationSummary
+	OrganizationSummaries []types.OrganizationSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

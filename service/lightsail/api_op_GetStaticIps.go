@@ -46,7 +46,7 @@ type GetStaticIpsOutput struct {
 
 	// An array of key-value pairs containing information about your get static IPs
 	// request.
-	StaticIps []*types.StaticIp
+	StaticIps []types.StaticIp
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

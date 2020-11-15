@@ -52,7 +52,7 @@ type CreateAssetInput struct {
 	// information, see Tagging your AWS IoT SiteWise resources
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
 	// in the AWS IoT SiteWise User Guide.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateAssetOutput struct {

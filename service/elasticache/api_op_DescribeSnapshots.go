@@ -79,7 +79,7 @@ type DescribeSnapshotsOutput struct {
 
 	// A list of snapshots. Each item in the list contains detailed information about
 	// one snapshot.
-	Snapshots []*types.Snapshot
+	Snapshots []types.Snapshot
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

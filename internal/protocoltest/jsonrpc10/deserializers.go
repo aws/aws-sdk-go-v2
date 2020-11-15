@@ -708,7 +708,7 @@ func awsAwsjson10_deserializeDocumentComplexError(v **types.ComplexError, value 
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.TopLevel = &jtv
+				sv.TopLevel = ptr.String(jtv)
 			}
 
 		default:
@@ -748,7 +748,7 @@ func awsAwsjson10_deserializeDocumentComplexNestedErrorData(v **types.ComplexNes
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Foo = &jtv
+				sv.Foo = ptr.String(jtv)
 			}
 
 		default:
@@ -819,7 +819,7 @@ func awsAwsjson10_deserializeDocumentInvalidGreeting(v **types.InvalidGreeting, 
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -865,15 +865,15 @@ loop:
 			break loop
 
 		case "booleanValue":
-			var mv *bool
+			var mv bool
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				mv = &jtv
+				mv = jtv
 			}
-			uv = &types.MyUnionMemberBooleanValue{Value: *mv}
+			uv = &types.MyUnionMemberBooleanValue{Value: mv}
 			break loop
 
 		case "enumValue":
@@ -889,7 +889,7 @@ loop:
 			break loop
 
 		case "listValue":
-			var mv []*string
+			var mv []string
 			if err := awsAwsjson10_deserializeDocumentStringList(&mv, value); err != nil {
 				return err
 			}
@@ -897,7 +897,7 @@ loop:
 			break loop
 
 		case "mapValue":
-			var mv map[string]*string
+			var mv map[string]string
 			if err := awsAwsjson10_deserializeDocumentStringMap(&mv, value); err != nil {
 				return err
 			}
@@ -905,7 +905,7 @@ loop:
 			break loop
 
 		case "numberValue":
-			var mv *int32
+			var mv int32
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
@@ -915,33 +915,35 @@ loop:
 				if err != nil {
 					return err
 				}
-				mv = ptr.Int32(int32(i64))
+				mv = int32(i64)
 			}
-			uv = &types.MyUnionMemberNumberValue{Value: *mv}
+			uv = &types.MyUnionMemberNumberValue{Value: mv}
 			break loop
 
 		case "stringValue":
-			var mv *string
+			var mv string
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				mv = &jtv
+				mv = jtv
 			}
-			uv = &types.MyUnionMemberStringValue{Value: *mv}
+			uv = &types.MyUnionMemberStringValue{Value: mv}
 			break loop
 
 		case "structureValue":
-			var mv *types.GreetingStruct
-			if err := awsAwsjson10_deserializeDocumentGreetingStruct(&mv, value); err != nil {
+			var mv types.GreetingStruct
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentGreetingStruct(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
 			uv = &types.MyUnionMemberStructureValue{Value: mv}
 			break loop
 
 		case "timestampValue":
-			var mv *time.Time
+			var mv time.Time
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
@@ -951,9 +953,9 @@ loop:
 				if err != nil {
 					return err
 				}
-				mv = ptr.Time(smithytime.ParseEpochSeconds(f64))
+				mv = smithytime.ParseEpochSeconds(f64)
 			}
-			uv = &types.MyUnionMemberTimestampValue{Value: *mv}
+			uv = &types.MyUnionMemberTimestampValue{Value: mv}
 			break loop
 
 		default:
@@ -996,7 +998,7 @@ func awsAwsjson10_deserializeDocumentGreetingStruct(v **types.GreetingStruct, va
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Hi = &jtv
+				sv.Hi = ptr.String(jtv)
 			}
 
 		default:
@@ -1008,7 +1010,7 @@ func awsAwsjson10_deserializeDocumentGreetingStruct(v **types.GreetingStruct, va
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentStringList(v *[]*string, value interface{}) error {
+func awsAwsjson10_deserializeDocumentStringList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1021,21 +1023,21 @@ func awsAwsjson10_deserializeDocumentStringList(v *[]*string, value interface{})
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected String to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -1044,7 +1046,7 @@ func awsAwsjson10_deserializeDocumentStringList(v *[]*string, value interface{})
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentStringMap(v *map[string]*string, value interface{}) error {
+func awsAwsjson10_deserializeDocumentStringMap(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1057,21 +1059,21 @@ func awsAwsjson10_deserializeDocumentStringMap(v *map[string]*string, value inte
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var mv map[string]*string
+	var mv map[string]string
 	if *v == nil {
-		mv = map[string]*string{}
+		mv = map[string]string{}
 	} else {
 		mv = *v
 	}
 
 	for key, value := range shape {
-		var parsedVal *string
+		var parsedVal string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected String to be of type string, got %T instead", value)
 			}
-			parsedVal = &jtv
+			parsedVal = jtv
 		}
 		mv[key] = parsedVal
 
@@ -1139,7 +1141,7 @@ func awsAwsjson10_deserializeOpDocumentGreetingWithErrorsOutput(v **GreetingWith
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Greeting = &jtv
+				sv.Greeting = ptr.String(jtv)
 			}
 
 		default:

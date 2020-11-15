@@ -38,41 +38,41 @@ func (c *Client) JsonLists(ctx context.Context, params *JsonListsInput, optFns .
 }
 
 type JsonListsInput struct {
-	BooleanList []*bool
+	BooleanList []bool
 
 	EnumList []types.FooEnum
 
-	IntegerList []*int32
+	IntegerList []int32
 
 	// A list of lists of strings.
-	NestedStringList [][]*string
+	NestedStringList [][]string
 
-	StringList []*string
+	StringList []string
 
-	StringSet []*string
+	StringSet []string
 
-	StructureList []*types.StructureListMember
+	StructureList []types.StructureListMember
 
-	TimestampList []*time.Time
+	TimestampList []time.Time
 }
 
 type JsonListsOutput struct {
-	BooleanList []*bool
+	BooleanList []bool
 
 	EnumList []types.FooEnum
 
-	IntegerList []*int32
+	IntegerList []int32
 
 	// A list of lists of strings.
-	NestedStringList [][]*string
+	NestedStringList [][]string
 
-	StringList []*string
+	StringList []string
 
-	StringSet []*string
+	StringSet []string
 
-	StructureList []*types.StructureListMember
+	StructureList []types.StructureListMember
 
-	TimestampList []*time.Time
+	TimestampList []time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

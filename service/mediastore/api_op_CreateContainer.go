@@ -45,7 +45,7 @@ type CreateContainerInput struct {
 	// container. For more information about tagging, including naming and usage
 	// conventions, see Tagging Resources in MediaStore
 	// (https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html).
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateContainerOutput struct {

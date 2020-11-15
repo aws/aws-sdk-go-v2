@@ -39,23 +39,23 @@ type GetMaintenanceWindowOutput struct {
 
 	// Whether targets must be registered with the maintenance window before tasks can
 	// be defined for those targets.
-	AllowUnassociatedTargets *bool
+	AllowUnassociatedTargets bool
 
 	// The date the maintenance window was created.
 	CreatedDate *time.Time
 
 	// The number of hours before the end of the maintenance window that Systems
 	// Manager stops scheduling new tasks for execution.
-	Cutoff *int32
+	Cutoff int32
 
 	// The description of the maintenance window.
 	Description *string
 
 	// The duration of the maintenance window in hours.
-	Duration *int32
+	Duration int32
 
 	// Indicates whether the maintenance window is enabled.
-	Enabled *bool
+	Enabled bool
 
 	// The date and time, in ISO-8601 Extended format, for when the maintenance window
 	// is scheduled to become inactive. The maintenance window will not run after this
@@ -77,7 +77,7 @@ type GetMaintenanceWindowOutput struct {
 
 	// The number of days to wait to run a maintenance window after the scheduled CRON
 	// expression date and time.
-	ScheduleOffset *int32
+	ScheduleOffset int32
 
 	// The time zone that the scheduled maintenance window executions are based on, in
 	// Internet Assigned Numbers Authority (IANA) format. For example:

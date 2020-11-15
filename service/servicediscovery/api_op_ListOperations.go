@@ -33,7 +33,7 @@ type ListOperationsInput struct {
 	// list, for example, operations that you started between a specified start date
 	// and end date. If you specify more than one filter, an operation must match all
 	// filters to be returned by ListOperations.
-	Filters []*types.OperationFilter
+	Filters []types.OperationFilter
 
 	// The maximum number of items that you want AWS Cloud Map to return in the
 	// response to a ListOperations request. If you don't specify a value for
@@ -62,7 +62,7 @@ type ListOperationsOutput struct {
 	NextToken *string
 
 	// Summary information about the operations that match the specified criteria.
-	Operations []*types.OperationSummary
+	Operations []types.OperationSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

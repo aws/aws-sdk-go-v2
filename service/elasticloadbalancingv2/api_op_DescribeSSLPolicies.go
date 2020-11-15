@@ -37,7 +37,7 @@ type DescribeSSLPoliciesInput struct {
 	Marker *string
 
 	// The names of the policies.
-	Names []*string
+	Names []string
 
 	// The maximum number of results to return with this call.
 	PageSize *int32
@@ -50,7 +50,7 @@ type DescribeSSLPoliciesOutput struct {
 	NextMarker *string
 
 	// Information about the security policies.
-	SslPolicies []*types.SslPolicy
+	SslPolicies []types.SslPolicy
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

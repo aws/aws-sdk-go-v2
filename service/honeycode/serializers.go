@@ -176,49 +176,37 @@ func awsRestjson1_serializeOpHttpBindingsInvokeScreenAutomationInput(v *InvokeSc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AppId == nil {
+	if v.AppId == nil || len(*v.AppId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member appId must not be empty")}
 	}
 	if v.AppId != nil {
-		if len(*v.AppId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member appId must not be empty")}
-		}
 		if err := encoder.SetURI("appId").String(*v.AppId); err != nil {
 			return err
 		}
 	}
 
-	if v.ScreenAutomationId == nil {
+	if v.ScreenAutomationId == nil || len(*v.ScreenAutomationId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member screenAutomationId must not be empty")}
 	}
 	if v.ScreenAutomationId != nil {
-		if len(*v.ScreenAutomationId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member screenAutomationId must not be empty")}
-		}
 		if err := encoder.SetURI("screenAutomationId").String(*v.ScreenAutomationId); err != nil {
 			return err
 		}
 	}
 
-	if v.ScreenId == nil {
+	if v.ScreenId == nil || len(*v.ScreenId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member screenId must not be empty")}
 	}
 	if v.ScreenId != nil {
-		if len(*v.ScreenId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member screenId must not be empty")}
-		}
 		if err := encoder.SetURI("screenId").String(*v.ScreenId); err != nil {
 			return err
 		}
 	}
 
-	if v.WorkbookId == nil {
+	if v.WorkbookId == nil || len(*v.WorkbookId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member workbookId must not be empty")}
 	}
 	if v.WorkbookId != nil {
-		if len(*v.WorkbookId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member workbookId must not be empty")}
-		}
 		if err := encoder.SetURI("workbookId").String(*v.WorkbookId); err != nil {
 			return err
 		}
@@ -263,17 +251,14 @@ func awsRestjson1_serializeDocumentVariableValue(v *types.VariableValue, value s
 	return nil
 }
 
-func awsRestjson1_serializeDocumentVariableValueMap(v map[string]*types.VariableValue, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentVariableValueMap(v map[string]types.VariableValue, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentVariableValue(v[key], om); err != nil {
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentVariableValue(&mapVar, om); err != nil {
 			return err
 		}
 	}

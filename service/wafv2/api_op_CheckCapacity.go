@@ -44,7 +44,7 @@ type CheckCapacityInput struct {
 	// An array of Rule that you're configuring to use in a rule group or web ACL.
 	//
 	// This member is required.
-	Rules []*types.Rule
+	Rules []types.Rule
 
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
 	// application. A regional application can be an Application Load Balancer (ALB),
@@ -65,7 +65,7 @@ type CheckCapacityInput struct {
 type CheckCapacityOutput struct {
 
 	// The capacity required by the rules and scope.
-	Capacity *int64
+	Capacity int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

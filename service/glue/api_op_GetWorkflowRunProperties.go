@@ -42,7 +42,7 @@ type GetWorkflowRunPropertiesInput struct {
 type GetWorkflowRunPropertiesOutput struct {
 
 	// The workflow run properties which were set during the specified run.
-	RunProperties map[string]*string
+	RunProperties map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

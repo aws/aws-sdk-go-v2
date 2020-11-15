@@ -56,7 +56,7 @@ type ListDeviceEventsInput struct {
 type ListDeviceEventsOutput struct {
 
 	// The device events requested for the device ARN.
-	DeviceEvents []*types.DeviceEvent
+	DeviceEvents []types.DeviceEvent
 
 	// The token returned to indicate that there is more data available.
 	NextToken *string

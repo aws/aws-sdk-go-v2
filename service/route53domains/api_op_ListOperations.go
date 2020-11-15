@@ -55,7 +55,7 @@ type ListOperationsOutput struct {
 	// Lists summaries of the operations.
 	//
 	// This member is required.
-	Operations []*types.OperationSummary
+	Operations []types.OperationSummary
 
 	// If there are more operations than you specified for MaxItems in the request,
 	// submit another request and include the value of NextPageMarker in the value of

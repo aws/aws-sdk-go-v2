@@ -60,7 +60,7 @@ type DeleteApplicationCloudWatchLoggingOptionOutput struct {
 
 	// The descriptions of the remaining CloudWatch logging options for the
 	// application.
-	CloudWatchLoggingOptionDescriptions []*types.CloudWatchLoggingOptionDescription
+	CloudWatchLoggingOptionDescriptions []types.CloudWatchLoggingOptionDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

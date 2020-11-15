@@ -59,7 +59,7 @@ type AddTagsToResourceInput struct {
 	// characters, and the maximum length for a tag's value is 256.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // AddTagsToResourceOutput

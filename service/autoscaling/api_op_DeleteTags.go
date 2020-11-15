@@ -32,7 +32,7 @@ type DeleteTagsInput struct {
 	// One or more tags.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type DeleteTagsOutput struct {

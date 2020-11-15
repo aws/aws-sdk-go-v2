@@ -70,7 +70,7 @@ type CreateFaqInput struct {
 
 	// A list of key-value pairs that identify the FAQ. You can use the tags to
 	// identify and organize your resources and to control access to resources.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateFaqOutput struct {

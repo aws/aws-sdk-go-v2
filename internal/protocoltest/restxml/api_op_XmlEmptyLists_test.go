@@ -37,8 +37,8 @@ func TestClient_XmlEmptyLists_awsRestxmlSerialize(t *testing.T) {
 		// Serializes Empty XML lists
 		"XmlEmptyLists": {
 			Params: &XmlEmptyListsInput{
-				StringList: []*string{},
-				StringSet:  []*string{},
+				StringList: []string{},
+				StringSet:  []string{},
 			},
 			ExpectMethod:  "PUT",
 			ExpectURIPath: "/XmlEmptyLists",
@@ -143,8 +143,8 @@ func TestClient_XmlEmptyLists_awsRestxmlDeserialize(t *testing.T) {
 			</XmlListsInputOutput>
 			`),
 			ExpectResult: &XmlEmptyListsOutput{
-				StringList: []*string{},
-				StringSet:  []*string{},
+				StringList: []string{},
+				StringSet:  []string{},
 			},
 		},
 	}

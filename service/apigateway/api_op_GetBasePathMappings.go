@@ -48,7 +48,7 @@ type GetBasePathMappingsInput struct {
 type GetBasePathMappingsOutput struct {
 
 	// The current page of elements from this collection.
-	Items []*types.BasePathMapping
+	Items []types.BasePathMapping
 
 	// The current pagination position in the paged result set.
 	Position *string

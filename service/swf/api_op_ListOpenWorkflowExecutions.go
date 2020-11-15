@@ -79,7 +79,7 @@ type ListOpenWorkflowExecutionsInput struct {
 
 	// The maximum number of results that are returned per call. Use nextPageToken to
 	// obtain further pages of results.
-	MaximumPageSize *int32
+	MaximumPageSize int32
 
 	// If NextPageToken is returned there are more results available. The value of
 	// NextPageToken is a unique pagination token for each page. Make the call again
@@ -92,7 +92,7 @@ type ListOpenWorkflowExecutionsInput struct {
 
 	// When set to true, returns the results in reverse order. By default the results
 	// are returned in descending order of the start time of the executions.
-	ReverseOrder *bool
+	ReverseOrder bool
 
 	// If specified, only executions that have the matching tag are listed.
 	// executionFilter, typeFilter and tagFilter are mutually exclusive. You can
@@ -111,7 +111,7 @@ type ListOpenWorkflowExecutionsOutput struct {
 	// The list of workflow information structures.
 	//
 	// This member is required.
-	ExecutionInfos []*types.WorkflowExecutionInfo
+	ExecutionInfos []types.WorkflowExecutionInfo
 
 	// If a NextPageToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the

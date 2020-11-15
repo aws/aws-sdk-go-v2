@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -418,7 +419,7 @@ func awsRestjson1_deserializeOpDocumentGetTranscriptOutput(v **GetTranscriptOutp
 				if !ok {
 					return fmt.Errorf("expected ContactId to be of type string, got %T instead", value)
 				}
-				sv.InitialContactId = &jtv
+				sv.InitialContactId = ptr.String(jtv)
 			}
 
 		case "NextToken":
@@ -427,7 +428,7 @@ func awsRestjson1_deserializeOpDocumentGetTranscriptOutput(v **GetTranscriptOutp
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "Transcript":
@@ -592,7 +593,7 @@ func awsRestjson1_deserializeOpDocumentSendEventOutput(v **SendEventOutput, valu
 				if !ok {
 					return fmt.Errorf("expected Instant to be of type string, got %T instead", value)
 				}
-				sv.AbsoluteTime = &jtv
+				sv.AbsoluteTime = ptr.String(jtv)
 			}
 
 		case "Id":
@@ -601,7 +602,7 @@ func awsRestjson1_deserializeOpDocumentSendEventOutput(v **SendEventOutput, valu
 				if !ok {
 					return fmt.Errorf("expected ChatItemId to be of type string, got %T instead", value)
 				}
-				sv.Id = &jtv
+				sv.Id = ptr.String(jtv)
 			}
 
 		default:
@@ -761,7 +762,7 @@ func awsRestjson1_deserializeOpDocumentSendMessageOutput(v **SendMessageOutput, 
 				if !ok {
 					return fmt.Errorf("expected Instant to be of type string, got %T instead", value)
 				}
-				sv.AbsoluteTime = &jtv
+				sv.AbsoluteTime = ptr.String(jtv)
 			}
 
 		case "Id":
@@ -770,7 +771,7 @@ func awsRestjson1_deserializeOpDocumentSendMessageOutput(v **SendMessageOutput, 
 				if !ok {
 					return fmt.Errorf("expected ChatItemId to be of type string, got %T instead", value)
 				}
-				sv.Id = &jtv
+				sv.Id = ptr.String(jtv)
 			}
 
 		default:
@@ -954,7 +955,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -994,7 +995,7 @@ func awsRestjson1_deserializeDocumentConnectionCredentials(v **types.ConnectionC
 				if !ok {
 					return fmt.Errorf("expected ParticipantToken to be of type string, got %T instead", value)
 				}
-				sv.ConnectionToken = &jtv
+				sv.ConnectionToken = ptr.String(jtv)
 			}
 
 		case "Expiry":
@@ -1003,7 +1004,7 @@ func awsRestjson1_deserializeDocumentConnectionCredentials(v **types.ConnectionC
 				if !ok {
 					return fmt.Errorf("expected ISO8601Datetime to be of type string, got %T instead", value)
 				}
-				sv.Expiry = &jtv
+				sv.Expiry = ptr.String(jtv)
 			}
 
 		default:
@@ -1043,7 +1044,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1083,7 +1084,7 @@ func awsRestjson1_deserializeDocumentItem(v **types.Item, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected Instant to be of type string, got %T instead", value)
 				}
-				sv.AbsoluteTime = &jtv
+				sv.AbsoluteTime = ptr.String(jtv)
 			}
 
 		case "Content":
@@ -1092,7 +1093,7 @@ func awsRestjson1_deserializeDocumentItem(v **types.Item, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected ChatContent to be of type string, got %T instead", value)
 				}
-				sv.Content = &jtv
+				sv.Content = ptr.String(jtv)
 			}
 
 		case "ContentType":
@@ -1101,7 +1102,7 @@ func awsRestjson1_deserializeDocumentItem(v **types.Item, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected ChatContentType to be of type string, got %T instead", value)
 				}
-				sv.ContentType = &jtv
+				sv.ContentType = ptr.String(jtv)
 			}
 
 		case "DisplayName":
@@ -1110,7 +1111,7 @@ func awsRestjson1_deserializeDocumentItem(v **types.Item, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected DisplayName to be of type string, got %T instead", value)
 				}
-				sv.DisplayName = &jtv
+				sv.DisplayName = ptr.String(jtv)
 			}
 
 		case "Id":
@@ -1119,7 +1120,7 @@ func awsRestjson1_deserializeDocumentItem(v **types.Item, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected ChatItemId to be of type string, got %T instead", value)
 				}
-				sv.Id = &jtv
+				sv.Id = ptr.String(jtv)
 			}
 
 		case "ParticipantId":
@@ -1128,7 +1129,7 @@ func awsRestjson1_deserializeDocumentItem(v **types.Item, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected ParticipantId to be of type string, got %T instead", value)
 				}
-				sv.ParticipantId = &jtv
+				sv.ParticipantId = ptr.String(jtv)
 			}
 
 		case "ParticipantRole":
@@ -1186,7 +1187,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1198,7 +1199,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentTranscript(v *[]*types.Item, value interface{}) error {
+func awsRestjson1_deserializeDocumentTranscript(v *[]types.Item, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1211,18 +1212,20 @@ func awsRestjson1_deserializeDocumentTranscript(v *[]*types.Item, value interfac
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Item
+	var cv []types.Item
 	if *v == nil {
-		cv = []*types.Item{}
+		cv = []types.Item{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Item
-		if err := awsRestjson1_deserializeDocumentItem(&col, value); err != nil {
+		var col types.Item
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentItem(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1258,7 +1261,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				if !ok {
 					return fmt.Errorf("expected Reason to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1298,7 +1301,7 @@ func awsRestjson1_deserializeDocumentWebsocket(v **types.Websocket, value interf
 				if !ok {
 					return fmt.Errorf("expected ISO8601Datetime to be of type string, got %T instead", value)
 				}
-				sv.ConnectionExpiry = &jtv
+				sv.ConnectionExpiry = ptr.String(jtv)
 			}
 
 		case "Url":
@@ -1307,7 +1310,7 @@ func awsRestjson1_deserializeDocumentWebsocket(v **types.Websocket, value interf
 				if !ok {
 					return fmt.Errorf("expected PreSignedConnectionUrl to be of type string, got %T instead", value)
 				}
-				sv.Url = &jtv
+				sv.Url = ptr.String(jtv)
 			}
 
 		default:

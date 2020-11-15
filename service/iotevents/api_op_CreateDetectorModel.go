@@ -60,7 +60,7 @@ type CreateDetectorModelInput struct {
 	Key *string
 
 	// Metadata that can be used to manage the detector model.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDetectorModelOutput struct {

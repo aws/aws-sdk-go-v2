@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -1380,7 +1381,7 @@ func awsAwsjson10_deserializeDocumentConnection(v **types.Connection, value inte
 				if !ok {
 					return fmt.Errorf("expected ConnectionArn to be of type string, got %T instead", value)
 				}
-				sv.ConnectionArn = &jtv
+				sv.ConnectionArn = ptr.String(jtv)
 			}
 
 		case "ConnectionName":
@@ -1389,7 +1390,7 @@ func awsAwsjson10_deserializeDocumentConnection(v **types.Connection, value inte
 				if !ok {
 					return fmt.Errorf("expected ConnectionName to be of type string, got %T instead", value)
 				}
-				sv.ConnectionName = &jtv
+				sv.ConnectionName = ptr.String(jtv)
 			}
 
 		case "ConnectionStatus":
@@ -1407,7 +1408,7 @@ func awsAwsjson10_deserializeDocumentConnection(v **types.Connection, value inte
 				if !ok {
 					return fmt.Errorf("expected HostArn to be of type string, got %T instead", value)
 				}
-				sv.HostArn = &jtv
+				sv.HostArn = ptr.String(jtv)
 			}
 
 		case "OwnerAccountId":
@@ -1416,7 +1417,7 @@ func awsAwsjson10_deserializeDocumentConnection(v **types.Connection, value inte
 				if !ok {
 					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccountId = &jtv
+				sv.OwnerAccountId = ptr.String(jtv)
 			}
 
 		case "ProviderType":
@@ -1437,7 +1438,7 @@ func awsAwsjson10_deserializeDocumentConnection(v **types.Connection, value inte
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentConnectionList(v *[]*types.Connection, value interface{}) error {
+func awsAwsjson10_deserializeDocumentConnectionList(v *[]types.Connection, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1450,18 +1451,20 @@ func awsAwsjson10_deserializeDocumentConnectionList(v *[]*types.Connection, valu
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Connection
+	var cv []types.Connection
 	if *v == nil {
-		cv = []*types.Connection{}
+		cv = []types.Connection{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Connection
-		if err := awsAwsjson10_deserializeDocumentConnection(&col, value); err != nil {
+		var col types.Connection
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentConnection(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1497,7 +1500,7 @@ func awsAwsjson10_deserializeDocumentHost(v **types.Host, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected HostArn to be of type string, got %T instead", value)
 				}
-				sv.HostArn = &jtv
+				sv.HostArn = ptr.String(jtv)
 			}
 
 		case "Name":
@@ -1506,7 +1509,7 @@ func awsAwsjson10_deserializeDocumentHost(v **types.Host, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected HostName to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "ProviderEndpoint":
@@ -1515,7 +1518,7 @@ func awsAwsjson10_deserializeDocumentHost(v **types.Host, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
 				}
-				sv.ProviderEndpoint = &jtv
+				sv.ProviderEndpoint = ptr.String(jtv)
 			}
 
 		case "ProviderType":
@@ -1533,7 +1536,7 @@ func awsAwsjson10_deserializeDocumentHost(v **types.Host, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected HostStatus to be of type string, got %T instead", value)
 				}
-				sv.Status = &jtv
+				sv.Status = ptr.String(jtv)
 			}
 
 		case "StatusMessage":
@@ -1542,7 +1545,7 @@ func awsAwsjson10_deserializeDocumentHost(v **types.Host, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected HostStatusMessage to be of type string, got %T instead", value)
 				}
-				sv.StatusMessage = &jtv
+				sv.StatusMessage = ptr.String(jtv)
 			}
 
 		case "VpcConfiguration":
@@ -1559,7 +1562,7 @@ func awsAwsjson10_deserializeDocumentHost(v **types.Host, value interface{}) err
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentHostList(v *[]*types.Host, value interface{}) error {
+func awsAwsjson10_deserializeDocumentHostList(v *[]types.Host, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1572,18 +1575,20 @@ func awsAwsjson10_deserializeDocumentHostList(v *[]*types.Host, value interface{
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Host
+	var cv []types.Host
 	if *v == nil {
-		cv = []*types.Host{}
+		cv = []types.Host{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Host
-		if err := awsAwsjson10_deserializeDocumentHost(&col, value); err != nil {
+		var col types.Host
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentHost(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1619,7 +1624,7 @@ func awsAwsjson10_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1659,7 +1664,7 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1699,7 +1704,7 @@ func awsAwsjson10_deserializeDocumentResourceUnavailableException(v **types.Reso
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1711,7 +1716,7 @@ func awsAwsjson10_deserializeDocumentResourceUnavailableException(v **types.Reso
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentSecurityGroupIds(v *[]*string, value interface{}) error {
+func awsAwsjson10_deserializeDocumentSecurityGroupIds(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1724,21 +1729,21 @@ func awsAwsjson10_deserializeDocumentSecurityGroupIds(v *[]*string, value interf
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected SecurityGroupId to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -1747,7 +1752,7 @@ func awsAwsjson10_deserializeDocumentSecurityGroupIds(v *[]*string, value interf
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentSubnetIds(v *[]*string, value interface{}) error {
+func awsAwsjson10_deserializeDocumentSubnetIds(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1760,21 +1765,21 @@ func awsAwsjson10_deserializeDocumentSubnetIds(v *[]*string, value interface{}) 
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected SubnetId to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -1811,7 +1816,7 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected TagKey to be of type string, got %T instead", value)
 				}
-				sv.Key = &jtv
+				sv.Key = ptr.String(jtv)
 			}
 
 		case "Value":
@@ -1820,7 +1825,7 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
 				}
-				sv.Value = &jtv
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:
@@ -1832,7 +1837,7 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentTagList(v *[]*types.Tag, value interface{}) error {
+func awsAwsjson10_deserializeDocumentTagList(v *[]types.Tag, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1845,18 +1850,20 @@ func awsAwsjson10_deserializeDocumentTagList(v *[]*types.Tag, value interface{})
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Tag
+	var cv []types.Tag
 	if *v == nil {
-		cv = []*types.Tag{}
+		cv = []types.Tag{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Tag
-		if err := awsAwsjson10_deserializeDocumentTag(&col, value); err != nil {
+		var col types.Tag
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentTag(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1902,7 +1909,7 @@ func awsAwsjson10_deserializeDocumentVpcConfiguration(v **types.VpcConfiguration
 				if !ok {
 					return fmt.Errorf("expected TlsCertificate to be of type string, got %T instead", value)
 				}
-				sv.TlsCertificate = &jtv
+				sv.TlsCertificate = ptr.String(jtv)
 			}
 
 		case "VpcId":
@@ -1911,7 +1918,7 @@ func awsAwsjson10_deserializeDocumentVpcConfiguration(v **types.VpcConfiguration
 				if !ok {
 					return fmt.Errorf("expected VpcId to be of type string, got %T instead", value)
 				}
-				sv.VpcId = &jtv
+				sv.VpcId = ptr.String(jtv)
 			}
 
 		default:
@@ -1951,7 +1958,7 @@ func awsAwsjson10_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				if !ok {
 					return fmt.Errorf("expected ConnectionArn to be of type string, got %T instead", value)
 				}
-				sv.ConnectionArn = &jtv
+				sv.ConnectionArn = ptr.String(jtv)
 			}
 
 		case "Tags":
@@ -1996,7 +2003,7 @@ func awsAwsjson10_deserializeOpDocumentCreateHostOutput(v **CreateHostOutput, va
 				if !ok {
 					return fmt.Errorf("expected HostArn to be of type string, got %T instead", value)
 				}
-				sv.HostArn = &jtv
+				sv.HostArn = ptr.String(jtv)
 			}
 
 		default:
@@ -2134,7 +2141,7 @@ func awsAwsjson10_deserializeOpDocumentGetHostOutput(v **GetHostOutput, value in
 				if !ok {
 					return fmt.Errorf("expected HostName to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "ProviderEndpoint":
@@ -2143,7 +2150,7 @@ func awsAwsjson10_deserializeOpDocumentGetHostOutput(v **GetHostOutput, value in
 				if !ok {
 					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
 				}
-				sv.ProviderEndpoint = &jtv
+				sv.ProviderEndpoint = ptr.String(jtv)
 			}
 
 		case "ProviderType":
@@ -2161,7 +2168,7 @@ func awsAwsjson10_deserializeOpDocumentGetHostOutput(v **GetHostOutput, value in
 				if !ok {
 					return fmt.Errorf("expected HostStatus to be of type string, got %T instead", value)
 				}
-				sv.Status = &jtv
+				sv.Status = ptr.String(jtv)
 			}
 
 		case "VpcConfiguration":
@@ -2211,7 +2218,7 @@ func awsAwsjson10_deserializeOpDocumentListConnectionsOutput(v **ListConnections
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -2256,7 +2263,7 @@ func awsAwsjson10_deserializeOpDocumentListHostsOutput(v **ListHostsOutput, valu
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:

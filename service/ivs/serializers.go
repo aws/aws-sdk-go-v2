@@ -228,9 +228,9 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 	object := value.Object()
 	defer object.Close()
 
-	if v.Authorized != nil {
+	if v.Authorized {
 		ok := object.Key("authorized")
-		ok.Boolean(*v.Authorized)
+		ok.Boolean(v.Authorized)
 	}
 
 	if len(v.LatencyMode) > 0 {
@@ -1004,9 +1004,9 @@ func awsRestjson1_serializeOpDocumentListChannelsInput(v *ListChannelsInput, val
 		ok.String(*v.FilterByName)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1082,9 +1082,9 @@ func awsRestjson1_serializeOpDocumentListPlaybackKeyPairsInput(v *ListPlaybackKe
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1165,9 +1165,9 @@ func awsRestjson1_serializeOpDocumentListStreamKeysInput(v *ListStreamKeysInput,
 		ok.String(*v.ChannelArn)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1243,9 +1243,9 @@ func awsRestjson1_serializeOpDocumentListStreamsInput(v *ListStreamsInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1318,13 +1318,10 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceArn == nil {
+	if v.ResourceArn == nil || len(*v.ResourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
 	}
 	if v.ResourceArn != nil {
-		if len(*v.ResourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1337,9 +1334,9 @@ func awsRestjson1_serializeOpDocumentListTagsForResourceInput(v *ListTagsForReso
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1563,13 +1560,10 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceArn == nil {
+	if v.ResourceArn == nil || len(*v.ResourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
 	}
 	if v.ResourceArn != nil {
-		if len(*v.ResourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1643,13 +1637,10 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceArn == nil {
+	if v.ResourceArn == nil || len(*v.ResourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
 	}
 	if v.ResourceArn != nil {
-		if len(*v.ResourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1657,10 +1648,7 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 
 	if v.TagKeys != nil {
 		for i := range v.TagKeys {
-			if v.TagKeys[i] == nil {
-				continue
-			}
-			encoder.AddQuery("tagKeys").String(*v.TagKeys[i])
+			encoder.AddQuery("tagKeys").String(v.TagKeys[i])
 		}
 	}
 
@@ -1737,9 +1725,9 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 		ok.String(*v.Arn)
 	}
 
-	if v.Authorized != nil {
+	if v.Authorized {
 		ok := object.Key("authorized")
-		ok.Boolean(*v.Authorized)
+		ok.Boolean(v.Authorized)
 	}
 
 	if len(v.LatencyMode) > 0 {
@@ -1760,47 +1748,35 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 	return nil
 }
 
-func awsRestjson1_serializeDocumentChannelArnList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentChannelArnList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentStreamKeyArnList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentStreamKeyArnList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTags(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTags(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }

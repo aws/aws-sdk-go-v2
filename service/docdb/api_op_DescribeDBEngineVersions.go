@@ -38,7 +38,7 @@ type DescribeDBEngineVersionsInput struct {
 
 	// Indicates that only the default version of the specified engine or engine and
 	// major version combination is returned.
-	DefaultOnly *bool
+	DefaultOnly bool
 
 	// The database engine to return.
 	Engine *string
@@ -47,7 +47,7 @@ type DescribeDBEngineVersionsInput struct {
 	EngineVersion *string
 
 	// This parameter is not currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// If this parameter is specified and the requested engine supports the
 	// CharacterSetName parameter for CreateDBInstance, the response includes a list of
@@ -75,7 +75,7 @@ type DescribeDBEngineVersionsInput struct {
 type DescribeDBEngineVersionsOutput struct {
 
 	// Detailed information about one or more engine versions.
-	DBEngineVersions []*types.DBEngineVersion
+	DBEngineVersions []types.DBEngineVersion
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the

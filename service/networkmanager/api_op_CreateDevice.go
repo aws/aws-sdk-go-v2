@@ -54,7 +54,7 @@ type CreateDeviceInput struct {
 	SiteId *string
 
 	// The tags to apply to the resource during creation.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The type of the device.
 	Type *string

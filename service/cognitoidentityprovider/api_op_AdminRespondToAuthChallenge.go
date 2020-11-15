@@ -74,7 +74,7 @@ type AdminRespondToAuthChallengeInput struct {
 	// easier, the AdminInitiateAuth response includes the actual username value in the
 	// USERNAMEUSER_ID_FOR_SRP attribute, even if you specified an alias in your call
 	// to AdminInitiateAuth.
-	ChallengeResponses map[string]*string
+	ChallengeResponses map[string]string
 
 	// A map of custom key-value pairs that you can provide as input for any custom
 	// workflows that this action triggers. You create custom workflows by assigning
@@ -105,7 +105,7 @@ type AdminRespondToAuthChallengeInput struct {
 	//
 	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
 	// use it to provide sensitive information.
-	ClientMetadata map[string]*string
+	ClientMetadata map[string]string
 
 	// Contextual data such as the user's device fingerprint, IP address, or location
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
@@ -132,7 +132,7 @@ type AdminRespondToAuthChallengeOutput struct {
 
 	// The challenge parameters. For more information, see AdminInitiateAuth
 	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminInitiateAuth.html).
-	ChallengeParameters map[string]*string
+	ChallengeParameters map[string]string
 
 	// The session which should be passed both ways in challenge-response calls to the
 	// service. If the caller needs to go through another challenge, they return a

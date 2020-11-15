@@ -641,13 +641,13 @@ func validateImportAssetsFromS3RequestDetails(v *types.ImportAssetsFromS3Request
 	}
 }
 
-func validateListOfAssetDestinationEntry(v []*types.AssetDestinationEntry) error {
+func validateListOfAssetDestinationEntry(v []types.AssetDestinationEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfAssetDestinationEntry"}
 	for i := range v {
-		if err := validateAssetDestinationEntry(v[i]); err != nil {
+		if err := validateAssetDestinationEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -658,13 +658,13 @@ func validateListOfAssetDestinationEntry(v []*types.AssetDestinationEntry) error
 	}
 }
 
-func validateListOfAssetSourceEntry(v []*types.AssetSourceEntry) error {
+func validateListOfAssetSourceEntry(v []types.AssetSourceEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfAssetSourceEntry"}
 	for i := range v {
-		if err := validateAssetSourceEntry(v[i]); err != nil {
+		if err := validateAssetSourceEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

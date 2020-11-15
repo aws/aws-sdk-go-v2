@@ -85,7 +85,7 @@ type GetBucketTaggingOutput struct {
 	// The tags set of the Outposts bucket.
 	//
 	// This member is required.
-	TagSet []*types.S3Tag
+	TagSet []types.S3Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

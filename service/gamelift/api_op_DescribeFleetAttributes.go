@@ -77,7 +77,7 @@ type DescribeFleetAttributesInput struct {
 	// do not include this parameter. If the list of fleet identifiers includes fleets
 	// that don't currently exist, the request succeeds but no attributes for that
 	// fleet are returned.
-	FleetIds []*string
+	FleetIds []string
 
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages. This parameter is ignored when the
@@ -96,7 +96,7 @@ type DescribeFleetAttributesOutput struct {
 
 	// A collection of objects containing attribute metadata for each requested fleet
 	// ID. Attribute objects are returned only for fleets that currently exist.
-	FleetAttributes []*types.FleetAttributes
+	FleetAttributes []types.FleetAttributes
 
 	// Token that indicates where to resume retrieving results on the next call to this
 	// operation. If no token is returned, these results represent the end of the list.

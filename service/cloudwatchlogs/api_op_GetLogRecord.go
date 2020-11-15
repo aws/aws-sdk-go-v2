@@ -43,7 +43,7 @@ type GetLogRecordInput struct {
 type GetLogRecordOutput struct {
 
 	// The requested log event, as a JSON string.
-	LogRecord map[string]*string
+	LogRecord map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

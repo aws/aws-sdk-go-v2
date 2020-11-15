@@ -39,7 +39,7 @@ type GetCustomerGatewayAssociationsInput struct {
 	// see Resources Defined by Amazon EC2
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies).
 	// The maximum is 10.
-	CustomerGatewayArns []*string
+	CustomerGatewayArns []string
 
 	// The maximum number of results to return.
 	MaxResults *int32
@@ -51,7 +51,7 @@ type GetCustomerGatewayAssociationsInput struct {
 type GetCustomerGatewayAssociationsOutput struct {
 
 	// The customer gateway associations.
-	CustomerGatewayAssociations []*types.CustomerGatewayAssociation
+	CustomerGatewayAssociations []types.CustomerGatewayAssociation
 
 	// The token for the next page of results.
 	NextToken *string

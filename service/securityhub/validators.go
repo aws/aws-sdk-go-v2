@@ -662,13 +662,13 @@ func validateAwsSecurityFindingIdentifier(v *types.AwsSecurityFindingIdentifier)
 	}
 }
 
-func validateAwsSecurityFindingIdentifierList(v []*types.AwsSecurityFindingIdentifier) error {
+func validateAwsSecurityFindingIdentifierList(v []types.AwsSecurityFindingIdentifier) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AwsSecurityFindingIdentifierList"}
 	for i := range v {
-		if err := validateAwsSecurityFindingIdentifier(v[i]); err != nil {
+		if err := validateAwsSecurityFindingIdentifier(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -679,13 +679,13 @@ func validateAwsSecurityFindingIdentifierList(v []*types.AwsSecurityFindingIdent
 	}
 }
 
-func validateAwsSecurityFindingList(v []*types.AwsSecurityFinding) error {
+func validateAwsSecurityFindingList(v []types.AwsSecurityFinding) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AwsSecurityFindingList"}
 	for i := range v {
-		if err := validateAwsSecurityFinding(v[i]); err != nil {
+		if err := validateAwsSecurityFinding(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -728,13 +728,13 @@ func validateMalware(v *types.Malware) error {
 	}
 }
 
-func validateMalwareList(v []*types.Malware) error {
+func validateMalwareList(v []types.Malware) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MalwareList"}
 	for i := range v {
-		if err := validateMalware(v[i]); err != nil {
+		if err := validateMalware(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -817,13 +817,13 @@ func validateRelatedFinding(v *types.RelatedFinding) error {
 	}
 }
 
-func validateRelatedFindingList(v []*types.RelatedFinding) error {
+func validateRelatedFindingList(v []types.RelatedFinding) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RelatedFindingList"}
 	for i := range v {
-		if err := validateRelatedFinding(v[i]); err != nil {
+		if err := validateRelatedFinding(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -852,13 +852,13 @@ func validateResource(v *types.Resource) error {
 	}
 }
 
-func validateResourceList(v []*types.Resource) error {
+func validateResourceList(v []types.Resource) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceList"}
 	for i := range v {
-		if err := validateResource(v[i]); err != nil {
+		if err := validateResource(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -884,13 +884,13 @@ func validateStandardsSubscriptionRequest(v *types.StandardsSubscriptionRequest)
 	}
 }
 
-func validateStandardsSubscriptionRequests(v []*types.StandardsSubscriptionRequest) error {
+func validateStandardsSubscriptionRequests(v []types.StandardsSubscriptionRequest) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StandardsSubscriptionRequests"}
 	for i := range v {
-		if err := validateStandardsSubscriptionRequest(v[i]); err != nil {
+		if err := validateStandardsSubscriptionRequest(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -916,13 +916,13 @@ func validateStatusReason(v *types.StatusReason) error {
 	}
 }
 
-func validateStatusReasonsList(v []*types.StatusReason) error {
+func validateStatusReasonsList(v []types.StatusReason) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StatusReasonsList"}
 	for i := range v {
-		if err := validateStatusReason(v[i]); err != nil {
+		if err := validateStatusReason(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -953,13 +953,13 @@ func validateVulnerability(v *types.Vulnerability) error {
 	}
 }
 
-func validateVulnerabilityList(v []*types.Vulnerability) error {
+func validateVulnerabilityList(v []types.Vulnerability) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VulnerabilityList"}
 	for i := range v {
-		if err := validateVulnerability(v[i]); err != nil {
+		if err := validateVulnerability(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

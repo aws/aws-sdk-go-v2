@@ -39,12 +39,12 @@ type UnlinkIdentityInput struct {
 	// A set of optional name-value pairs that map provider names to provider tokens.
 	//
 	// This member is required.
-	Logins map[string]*string
+	Logins map[string]string
 
 	// Provider names to unlink from this identity.
 	//
 	// This member is required.
-	LoginsToRemove []*string
+	LoginsToRemove []string
 }
 
 type UnlinkIdentityOutput struct {

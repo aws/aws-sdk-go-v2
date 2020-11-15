@@ -53,7 +53,7 @@ type UpdateVocabularyFilterInput struct {
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets).
 	// If you provide a list of words in the Words parameter, you can't use the
 	// VocabularyFilterFileUri parameter.
-	Words []*string
+	Words []string
 }
 
 type UpdateVocabularyFilterOutput struct {

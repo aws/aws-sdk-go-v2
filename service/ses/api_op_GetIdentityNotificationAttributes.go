@@ -43,7 +43,7 @@ type GetIdentityNotificationAttributesInput struct {
 	// example.com, arn:aws:ses:us-east-1:123456789012:identity/example.com.
 	//
 	// This member is required.
-	Identities []*string
+	Identities []string
 }
 
 // Represents the notification attributes for a list of identities.
@@ -52,7 +52,7 @@ type GetIdentityNotificationAttributesOutput struct {
 	// A map of Identity to IdentityNotificationAttributes.
 	//
 	// This member is required.
-	NotificationAttributes map[string]*types.IdentityNotificationAttributes
+	NotificationAttributes map[string]types.IdentityNotificationAttributes
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

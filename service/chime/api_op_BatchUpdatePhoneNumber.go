@@ -40,14 +40,14 @@ type BatchUpdatePhoneNumberInput struct {
 	// to update.
 	//
 	// This member is required.
-	UpdatePhoneNumberRequestItems []*types.UpdatePhoneNumberRequestItem
+	UpdatePhoneNumberRequestItems []types.UpdatePhoneNumberRequestItem
 }
 
 type BatchUpdatePhoneNumberOutput struct {
 
 	// If the action fails for one or more of the phone numbers in the request, a list
 	// of the phone numbers is returned, along with error codes and error messages.
-	PhoneNumberErrors []*types.PhoneNumberError
+	PhoneNumberErrors []types.PhoneNumberError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

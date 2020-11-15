@@ -40,7 +40,7 @@ type GetDomainsOutput struct {
 
 	// An array of key-value pairs containing information about each of the domain
 	// entries in the user's account.
-	Domains []*types.Domain
+	Domains []types.Domain
 
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next

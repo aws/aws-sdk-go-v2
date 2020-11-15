@@ -44,7 +44,7 @@ type ListAttachedPoliciesInput struct {
 	PageSize *int32
 
 	// When true, recursively list attached policies.
-	Recursive *bool
+	Recursive bool
 }
 
 type ListAttachedPoliciesOutput struct {
@@ -54,7 +54,7 @@ type ListAttachedPoliciesOutput struct {
 	NextMarker *string
 
 	// The policies.
-	Policies []*types.Policy
+	Policies []types.Policy
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -55,7 +55,7 @@ type ListEmailIdentitiesOutput struct {
 
 	// An array that includes all of the identities associated with your Amazon
 	// Pinpoint account.
-	EmailIdentities []*types.IdentityInfo
+	EmailIdentities []types.IdentityInfo
 
 	// A token that indicates that there are additional configuration sets to list. To
 	// view additional configuration sets, issue another request to

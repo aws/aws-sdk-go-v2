@@ -724,13 +724,13 @@ func validateEc2Config(v *types.Ec2Config) error {
 	}
 }
 
-func validateInputTagList(v []*types.TagListEntry) error {
+func validateInputTagList(v []types.TagListEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InputTagList"}
 	for i := range v {
-		if err := validateTagListEntry(v[i]); err != nil {
+		if err := validateTagListEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -762,13 +762,13 @@ func validateLocationFilter(v *types.LocationFilter) error {
 	}
 }
 
-func validateLocationFilters(v []*types.LocationFilter) error {
+func validateLocationFilters(v []types.LocationFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LocationFilters"}
 	for i := range v {
-		if err := validateLocationFilter(v[i]); err != nil {
+		if err := validateLocationFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -845,13 +845,13 @@ func validateTaskFilter(v *types.TaskFilter) error {
 	}
 }
 
-func validateTaskFilters(v []*types.TaskFilter) error {
+func validateTaskFilters(v []types.TaskFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TaskFilters"}
 	for i := range v {
-		if err := validateTaskFilter(v[i]); err != nil {
+		if err := validateTaskFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

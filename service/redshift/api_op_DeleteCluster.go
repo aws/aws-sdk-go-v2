@@ -83,7 +83,7 @@ type DeleteClusterInput struct {
 	// If false, a final cluster snapshot is created before the cluster is deleted. The
 	// FinalClusterSnapshotIdentifier parameter must be specified if
 	// SkipFinalClusterSnapshot is false. Default: false
-	SkipFinalClusterSnapshot *bool
+	SkipFinalClusterSnapshot bool
 }
 
 type DeleteClusterOutput struct {

@@ -54,7 +54,7 @@ type AddTagsToResourceInput struct {
 	// key-value pair. A tag key must be accompanied by a tag value.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Represents the output from the AddTagsToResource, ListTagsForResource, and
@@ -62,7 +62,7 @@ type AddTagsToResourceInput struct {
 type AddTagsToResourceOutput struct {
 
 	// A list of cost allocation tags as key-value pairs.
-	TagList []*types.Tag
+	TagList []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

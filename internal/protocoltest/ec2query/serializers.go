@@ -978,18 +978,15 @@ func (m *awsEc2query_serializeOpXmlTimestamps) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsEc2query_serializeDocumentListWithXmlName(v []*string, value query.Value) error {
+func awsEc2query_serializeDocumentListWithXmlName(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("Item")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1018,18 +1015,15 @@ func awsEc2query_serializeDocumentStructArg(v *types.StructArg, value query.Valu
 	return nil
 }
 
-func awsEc2query_serializeDocumentGreetingList(v []*types.GreetingStruct, value query.Value) error {
+func awsEc2query_serializeDocumentGreetingList(v []types.GreetingStruct, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("Member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsEc2query_serializeDocumentGreetingStruct(v[i], av); err != nil {
+		if err := awsEc2query_serializeDocumentGreetingStruct(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1048,18 +1042,15 @@ func awsEc2query_serializeDocumentGreetingStruct(v *types.GreetingStruct, value 
 	return nil
 }
 
-func awsEc2query_serializeDocumentStringList(v []*string, value query.Value) error {
+func awsEc2query_serializeDocumentStringList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("Member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }

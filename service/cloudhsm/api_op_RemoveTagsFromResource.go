@@ -49,7 +49,7 @@ type RemoveTagsFromResourceInput struct {
 	// value). To overwrite the value for an existing tag, use AddTagsToResource.
 	//
 	// This member is required.
-	TagKeyList []*string
+	TagKeyList []string
 }
 
 type RemoveTagsFromResourceOutput struct {

@@ -46,7 +46,7 @@ type DescribeFlowExecutionRecordsInput struct {
 type DescribeFlowExecutionRecordsOutput struct {
 
 	// Returns a list of all instances when this flow was run.
-	FlowExecutions []*types.ExecutionRecord
+	FlowExecutions []types.ExecutionRecord
 
 	// The pagination token for the next page of data.
 	NextToken *string

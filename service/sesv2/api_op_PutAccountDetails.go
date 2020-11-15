@@ -48,7 +48,7 @@ type PutAccountDetailsInput struct {
 
 	// Additional email addresses that you would like to be notified regarding Amazon
 	// SES matters.
-	AdditionalContactEmailAddresses []*string
+	AdditionalContactEmailAddresses []string
 
 	// The language you would prefer to be contacted with.
 	ContactLanguage types.ContactLanguage

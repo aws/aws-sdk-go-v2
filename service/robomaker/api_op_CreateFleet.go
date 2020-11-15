@@ -35,7 +35,7 @@ type CreateFleetInput struct {
 	Name *string
 
 	// A map that contains tag keys and tag values that are attached to the fleet.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateFleetOutput struct {
@@ -50,7 +50,7 @@ type CreateFleetOutput struct {
 	Name *string
 
 	// The list of all tags added to the fleet.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

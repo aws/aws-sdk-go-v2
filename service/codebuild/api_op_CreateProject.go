@@ -81,7 +81,7 @@ type CreateProjectInput struct {
 	// ProjectFileSystemLocation object specifies the identifier, location,
 	// mountOptions, mountPoint, and type of a file system created using Amazon Elastic
 	// File System.
-	FileSystemLocations []*types.ProjectFileSystemLocation
+	FileSystemLocations []types.ProjectFileSystemLocation
 
 	// Information about logs for the build project. These can be logs in Amazon
 	// CloudWatch Logs, logs uploaded to a specified S3 bucket, or both.
@@ -91,15 +91,15 @@ type CreateProjectInput struct {
 	QueuedTimeoutInMinutes *int32
 
 	// An array of ProjectArtifacts objects.
-	SecondaryArtifacts []*types.ProjectArtifacts
+	SecondaryArtifacts []types.ProjectArtifacts
 
 	// An array of ProjectSourceVersion objects. If secondarySourceVersions is
 	// specified at the build level, then they take precedence over these
 	// secondarySourceVersions (at the project level).
-	SecondarySourceVersions []*types.ProjectSourceVersion
+	SecondarySourceVersions []types.ProjectSourceVersion
 
 	// An array of ProjectSource objects.
-	SecondarySources []*types.ProjectSource
+	SecondarySources []types.ProjectSource
 
 	// A version of the build input to be built for this project. If not specified, the
 	// latest version is used. If specified, it must be one of:
@@ -133,7 +133,7 @@ type CreateProjectInput struct {
 	// A list of tag key and value pairs associated with this build project. These tags
 	// are available for use by AWS services that support AWS CodeBuild build project
 	// tags.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before
 	// it times out any build that has not been marked as completed. The default is 60

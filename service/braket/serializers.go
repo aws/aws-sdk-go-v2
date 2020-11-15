@@ -76,13 +76,10 @@ func awsRestjson1_serializeOpHttpBindingsCancelQuantumTaskInput(v *CancelQuantum
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.QuantumTaskArn == nil {
+	if v.QuantumTaskArn == nil || len(*v.QuantumTaskArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member quantumTaskArn must not be empty")}
 	}
 	if v.QuantumTaskArn != nil {
-		if len(*v.QuantumTaskArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member quantumTaskArn must not be empty")}
-		}
 		if err := encoder.SetURI("quantumTaskArn").String(*v.QuantumTaskArn); err != nil {
 			return err
 		}
@@ -257,13 +254,10 @@ func awsRestjson1_serializeOpHttpBindingsGetDeviceInput(v *GetDeviceInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DeviceArn == nil {
+	if v.DeviceArn == nil || len(*v.DeviceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member deviceArn must not be empty")}
 	}
 	if v.DeviceArn != nil {
-		if len(*v.DeviceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member deviceArn must not be empty")}
-		}
 		if err := encoder.SetURI("deviceArn").String(*v.DeviceArn); err != nil {
 			return err
 		}
@@ -323,13 +317,10 @@ func awsRestjson1_serializeOpHttpBindingsGetQuantumTaskInput(v *GetQuantumTaskIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.QuantumTaskArn == nil {
+	if v.QuantumTaskArn == nil || len(*v.QuantumTaskArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member quantumTaskArn must not be empty")}
 	}
 	if v.QuantumTaskArn != nil {
-		if len(*v.QuantumTaskArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member quantumTaskArn must not be empty")}
-		}
 		if err := encoder.SetURI("quantumTaskArn").String(*v.QuantumTaskArn); err != nil {
 			return err
 		}
@@ -527,17 +518,13 @@ func awsRestjson1_serializeDocumentSearchDevicesFilter(v *types.SearchDevicesFil
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSearchDevicesFilterList(v []*types.SearchDevicesFilter, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSearchDevicesFilterList(v []types.SearchDevicesFilter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentSearchDevicesFilter(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentSearchDevicesFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -568,34 +555,26 @@ func awsRestjson1_serializeDocumentSearchQuantumTasksFilter(v *types.SearchQuant
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSearchQuantumTasksFilterList(v []*types.SearchQuantumTasksFilter, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSearchQuantumTasksFilterList(v []types.SearchQuantumTasksFilter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentSearchQuantumTasksFilter(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentSearchQuantumTasksFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentString256List(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentString256List(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }

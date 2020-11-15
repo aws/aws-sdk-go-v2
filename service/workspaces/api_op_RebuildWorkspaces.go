@@ -38,13 +38,13 @@ type RebuildWorkspacesInput struct {
 	// The WorkSpace to rebuild. You can specify a single WorkSpace.
 	//
 	// This member is required.
-	RebuildWorkspaceRequests []*types.RebuildRequest
+	RebuildWorkspaceRequests []types.RebuildRequest
 }
 
 type RebuildWorkspacesOutput struct {
 
 	// Information about the WorkSpace that could not be rebuilt.
-	FailedRequests []*types.FailedWorkspaceChangeRequest
+	FailedRequests []types.FailedWorkspaceChangeRequest
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

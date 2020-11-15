@@ -52,7 +52,7 @@ type TransactGetItemsInput struct {
 	// Get structure.
 	//
 	// This member is required.
-	TransactItems []*types.TransactGetItem
+	TransactItems []types.TransactGetItem
 
 	// A value of TOTAL causes consumed capacity information to be returned, and a
 	// value of NONE prevents that information from being returned. No other value is
@@ -66,7 +66,7 @@ type TransactGetItemsOutput struct {
 	// ConsumedCapacity objects, one for each table addressed by TransactGetItem
 	// objects in the TransactItems parameter. These ConsumedCapacity objects report
 	// the read-capacity units consumed by the TransactGetItems call in that table.
-	ConsumedCapacity []*types.ConsumedCapacity
+	ConsumedCapacity []types.ConsumedCapacity
 
 	// An ordered array of up to 25 ItemResponse objects, each of which corresponds to
 	// the TransactGetItem object in the same position in the TransactItems array. Each
@@ -75,7 +75,7 @@ type TransactGetItemsOutput struct {
 	// retrieved, the corresponding ItemResponse object is Null, or if the requested
 	// item has no projected attributes, the corresponding ItemResponse object is an
 	// empty Map.
-	Responses []*types.ItemResponse
+	Responses []types.ItemResponse
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

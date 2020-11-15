@@ -68,7 +68,7 @@ type ListSuppressedDestinationsOutput struct {
 
 	// A list of summaries, each containing a summary for a suppressed email
 	// destination.
-	SuppressedDestinationSummaries []*types.SuppressedDestinationSummary
+	SuppressedDestinationSummaries []types.SuppressedDestinationSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

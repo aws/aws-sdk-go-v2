@@ -15,7 +15,7 @@ type AwsVpcConfiguration struct {
 	// same VPC. You can specify as many as 16 subnets.
 	//
 	// This member is required.
-	Subnets []*string
+	Subnets []string
 
 	// Specifies whether the task's elastic network interface receives a public IP
 	// address. You can specify ENABLED only when LaunchType in EcsParameters is set to
@@ -26,7 +26,7 @@ type AwsVpcConfiguration struct {
 	// must all be in the same VPC. You can specify as many as five security groups. If
 	// you do not specify a security group, the default security group for the VPC is
 	// used.
-	SecurityGroups []*string
+	SecurityGroups []string
 }
 
 // The array properties for the submitted job, such as the size of the array. The
@@ -37,7 +37,7 @@ type BatchArrayProperties struct {
 
 	// The size of the array, if this is an array batch job. Valid values are integers
 	// between 2 and 10,000.
-	Size *int32
+	Size int32
 }
 
 // The custom parameters to be used when the target is an AWS Batch job.
@@ -75,7 +75,7 @@ type BatchRetryStrategy struct {
 
 	// The number of times to attempt to retry, if the job fails. Valid values are
 	// 1–10.
-	Attempts *int32
+	Attempts int32
 }
 
 // A JSON string which you can use to limit the event bus permissions you are
@@ -207,15 +207,15 @@ type HttpParameters struct {
 
 	// The headers that need to be sent as part of request invoking the API Gateway
 	// REST API.
-	HeaderParameters map[string]*string
+	HeaderParameters map[string]string
 
 	// The path parameter values to be used to populate API Gateway REST API path
 	// wildcards ("*").
-	PathParameterValues []*string
+	PathParameterValues []string
 
 	// The query string keys/values that need to be sent as part of request invoking
 	// the API Gateway REST API.
-	QueryStringParameters map[string]*string
+	QueryStringParameters map[string]string
 }
 
 // Contains the parameters needed for you to provide custom input to a target based
@@ -264,7 +264,7 @@ type InputTransformer struct {
 	// target. InputPathsMap is an array key-value pairs, where each value is a valid
 	// JSON path. You can have as many as 10 key-value pairs. You must use JSON dot
 	// notation, not bracket notation. The keys cannot start with "AWS."
-	InputPathsMap map[string]*string
+	InputPathsMap map[string]string
 }
 
 // This object enables you to specify a JSON path to extract from the event and use
@@ -340,7 +340,7 @@ type PutEventsRequestEntry struct {
 
 	// AWS resources, identified by Amazon Resource Name (ARN), which the event
 	// primarily concerns. Any number, including zero, may be present.
-	Resources []*string
+	Resources []string
 
 	// The source of the event.
 	Source *string
@@ -376,7 +376,7 @@ type PutPartnerEventsRequestEntry struct {
 
 	// AWS resources, identified by Amazon Resource Name (ARN), which the event
 	// primarily concerns. Any number, including zero, may be present.
-	Resources []*string
+	Resources []string
 
 	// The event source that is generating the evntry.
 	Source *string
@@ -441,7 +441,7 @@ type RedshiftDataParameters struct {
 
 	// Indicates whether to send an event back to EventBridge after the SQL statement
 	// runs.
-	WithEvent *bool
+	WithEvent bool
 }
 
 // Represents a target that failed to be removed from a rule.
@@ -513,7 +513,7 @@ type RunCommandParameters struct {
 	// either an array of InstanceIds or a tag.
 	//
 	// This member is required.
-	RunCommandTargets []*RunCommandTarget
+	RunCommandTargets []RunCommandTarget
 }
 
 // Information about the EC2 instances that are to be sent the command, specified
@@ -530,7 +530,7 @@ type RunCommandTarget struct {
 	// Values is a list of Amazon EC2 instance IDs.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // This structure includes the custom parameter to be used when the target is an

@@ -66,7 +66,7 @@ type ListPlatformBranchesInput struct {
 	//
 	// Array size: limited to 10 SearchFilter
 	// objects. Within each SearchFilter item, the Values array is limited to 10 items.
-	Filters []*types.SearchFilter
+	Filters []types.SearchFilter
 
 	// The maximum number of platform branch values returned in one call.
 	MaxRecords *int32
@@ -85,7 +85,7 @@ type ListPlatformBranchesOutput struct {
 	NextToken *string
 
 	// Summary information about the platform branches.
-	PlatformBranchSummaryList []*types.PlatformBranchSummary
+	PlatformBranchSummaryList []types.PlatformBranchSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

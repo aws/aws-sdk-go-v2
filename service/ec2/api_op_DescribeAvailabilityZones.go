@@ -38,13 +38,13 @@ type DescribeAvailabilityZonesInput struct {
 	// Include all Availability Zones, Local Zones, and Wavelength Zones regardless of
 	// your opt-in status. If you do not use this parameter, the results include only
 	// the zones for the Regions where you have chosen the option to opt in.
-	AllAvailabilityZones *bool
+	AllAvailabilityZones bool
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The filters.
 	//
@@ -87,19 +87,19 @@ type DescribeAvailabilityZonesInput struct {
 	//
 	// * zone-type - The type of zone,
 	// for example, local-zone.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The IDs of the Availability Zones, Local Zones, and Wavelength Zones.
-	ZoneIds []*string
+	ZoneIds []string
 
 	// The names of the Availability Zones, Local Zones, and Wavelength Zones.
-	ZoneNames []*string
+	ZoneNames []string
 }
 
 type DescribeAvailabilityZonesOutput struct {
 
 	// Information about the Availability Zones, Local Zones, and Wavelength Zones.
-	AvailabilityZones []*types.AvailabilityZone
+	AvailabilityZones []types.AvailabilityZone
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

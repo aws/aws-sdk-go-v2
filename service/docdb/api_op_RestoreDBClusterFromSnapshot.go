@@ -69,7 +69,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 
 	// Provides the list of Amazon EC2 Availability Zones that instances in the
 	// restored DB cluster can be created in.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// The name of the subnet group to use for the new cluster. Constraints: If
 	// provided, must match the name of an existing DBSubnetGroup. Example:
@@ -83,7 +83,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 
 	// A list of log types that must be enabled for exporting to Amazon CloudWatch
 	// Logs.
-	EnableCloudwatchLogsExports []*string
+	EnableCloudwatchLogsExports []string
 
 	// The version of the database engine to use for the new cluster.
 	EngineVersion *string
@@ -110,11 +110,11 @@ type RestoreDBClusterFromSnapshotInput struct {
 	Port *int32
 
 	// The tags to be assigned to the restored cluster.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A list of virtual private cloud (VPC) security groups that the new cluster will
 	// belong to.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 }
 
 type RestoreDBClusterFromSnapshotOutput struct {

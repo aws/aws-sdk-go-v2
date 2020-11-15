@@ -1516,13 +1516,13 @@ func validateFilter(v *types.Filter) error {
 	}
 }
 
-func validateFilterList(v []*types.Filter) error {
+func validateFilterList(v []types.Filter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FilterList"}
 	for i := range v {
-		if err := validateFilter(v[i]); err != nil {
+		if err := validateFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

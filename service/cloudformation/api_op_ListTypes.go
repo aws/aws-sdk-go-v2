@@ -93,7 +93,7 @@ type ListTypesOutput struct {
 
 	// A list of TypeSummary structures that contain information about the specified
 	// types.
-	TypeSummaries []*types.TypeSummary
+	TypeSummaries []types.TypeSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

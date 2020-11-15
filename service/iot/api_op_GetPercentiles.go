@@ -49,7 +49,7 @@ type GetPercentilesInput struct {
 	IndexName *string
 
 	// The percentile groups returned.
-	Percents []*float64
+	Percents []float64
 
 	// The query version.
 	QueryVersion *string
@@ -58,7 +58,7 @@ type GetPercentilesInput struct {
 type GetPercentilesOutput struct {
 
 	// The percentile values of the aggregated fields.
-	Percentiles []*types.PercentPair
+	Percentiles []types.PercentPair
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

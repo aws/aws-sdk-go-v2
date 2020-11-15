@@ -64,7 +64,7 @@ type DescribeConfigurationSettingsInput struct {
 type DescribeConfigurationSettingsOutput struct {
 
 	// A list of ConfigurationSettingsDescription.
-	ConfigurationSettings []*types.ConfigurationSettingsDescription
+	ConfigurationSettings []types.ConfigurationSettingsDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

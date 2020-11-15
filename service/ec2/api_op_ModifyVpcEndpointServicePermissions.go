@@ -42,23 +42,23 @@ type ModifyVpcEndpointServicePermissionsInput struct {
 	// The Amazon Resource Names (ARN) of one or more principals. Permissions are
 	// granted to the principals in this list. To grant permissions to all principals,
 	// specify an asterisk (*).
-	AddAllowedPrincipals []*string
+	AddAllowedPrincipals []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The Amazon Resource Names (ARN) of one or more principals. Permissions are
 	// revoked for principals in this list.
-	RemoveAllowedPrincipals []*string
+	RemoveAllowedPrincipals []string
 }
 
 type ModifyVpcEndpointServicePermissionsOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.
-	ReturnValue *bool
+	ReturnValue bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

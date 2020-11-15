@@ -36,7 +36,7 @@ type DescribeOptionGroupOptionsInput struct {
 	EngineName *string
 
 	// This parameter isn't currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// If specified, filters the results to include only options for the specified
 	// major engine version.
@@ -63,7 +63,7 @@ type DescribeOptionGroupOptionsOutput struct {
 	Marker *string
 
 	// List of available option group options.
-	OptionGroupOptions []*types.OptionGroupOption
+	OptionGroupOptions []types.OptionGroupOption
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

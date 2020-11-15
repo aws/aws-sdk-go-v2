@@ -32,22 +32,22 @@ type DeleteQueuedReservedInstancesInput struct {
 	// The IDs of the Reserved Instances.
 	//
 	// This member is required.
-	ReservedInstancesIds []*string
+	ReservedInstancesIds []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 }
 
 type DeleteQueuedReservedInstancesOutput struct {
 
 	// Information about the queued purchases that could not be deleted.
-	FailedQueuedPurchaseDeletions []*types.FailedQueuedPurchaseDeletion
+	FailedQueuedPurchaseDeletions []types.FailedQueuedPurchaseDeletion
 
 	// Information about the queued purchases that were successfully deleted.
-	SuccessfulQueuedPurchaseDeletions []*types.SuccessfulQueuedPurchaseDeletion
+	SuccessfulQueuedPurchaseDeletions []types.SuccessfulQueuedPurchaseDeletion
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

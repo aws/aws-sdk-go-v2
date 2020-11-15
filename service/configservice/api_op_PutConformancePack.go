@@ -42,7 +42,7 @@ type PutConformancePackInput struct {
 	ConformancePackName *string
 
 	// A list of ConformancePackInputParameter objects.
-	ConformancePackInputParameters []*types.ConformancePackInputParameter
+	ConformancePackInputParameters []types.ConformancePackInputParameter
 
 	// AWS Config stores intermediate files while processing conformance pack template.
 	DeliveryS3Bucket *string

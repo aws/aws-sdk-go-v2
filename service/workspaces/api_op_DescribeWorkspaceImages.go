@@ -31,7 +31,7 @@ func (c *Client) DescribeWorkspaceImages(ctx context.Context, params *DescribeWo
 type DescribeWorkspaceImagesInput struct {
 
 	// The identifier of the image.
-	ImageIds []*string
+	ImageIds []string
 
 	// The type (owned or shared) of the image.
 	ImageType types.ImageType
@@ -47,7 +47,7 @@ type DescribeWorkspaceImagesInput struct {
 type DescribeWorkspaceImagesOutput struct {
 
 	// Information about the images.
-	Images []*types.WorkspaceImage
+	Images []types.WorkspaceImage
 
 	// The token to use to retrieve the next set of results, or null if no more results
 	// are available.

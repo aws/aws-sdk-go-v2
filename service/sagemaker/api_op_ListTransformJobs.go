@@ -70,7 +70,7 @@ type ListTransformJobsOutput struct {
 	// An array of TransformJobSummary objects.
 	//
 	// This member is required.
-	TransformJobSummaries []*types.TransformJobSummary
+	TransformJobSummaries []types.TransformJobSummary
 
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
 	// the next set of transform jobs, use it in the next request.

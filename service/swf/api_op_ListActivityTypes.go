@@ -64,7 +64,7 @@ type ListActivityTypesInput struct {
 
 	// The maximum number of results that are returned per call. Use nextPageToken to
 	// obtain further pages of results.
-	MaximumPageSize *int32
+	MaximumPageSize int32
 
 	// If specified, only lists the activity types that have this name.
 	Name *string
@@ -80,7 +80,7 @@ type ListActivityTypesInput struct {
 
 	// When set to true, returns the results in reverse order. By default, the results
 	// are returned in ascending alphabetical order by name of the activity types.
-	ReverseOrder *bool
+	ReverseOrder bool
 }
 
 // Contains a paginated list of activity type information structures.
@@ -89,7 +89,7 @@ type ListActivityTypesOutput struct {
 	// List of activity type information.
 	//
 	// This member is required.
-	TypeInfos []*types.ActivityTypeInfo
+	TypeInfos []types.ActivityTypeInfo
 
 	// If a NextPageToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the

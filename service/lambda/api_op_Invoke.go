@@ -131,7 +131,7 @@ type InvokeOutput struct {
 	// RequestResponse invocation type, this status code is 200. For the Event
 	// invocation type, this status code is 202. For the DryRun invocation type, the
 	// status code is 204.
-	StatusCode *int32
+	StatusCode int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

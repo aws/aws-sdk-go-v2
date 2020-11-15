@@ -48,7 +48,7 @@ type GetHealthCheckStatusOutput struct {
 	// health checker that is reporting a status about the health check endpoint.
 	//
 	// This member is required.
-	HealthCheckObservations []*types.HealthCheckObservation
+	HealthCheckObservations []types.HealthCheckObservation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

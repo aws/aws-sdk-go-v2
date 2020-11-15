@@ -36,13 +36,13 @@ type CreateDeploymentStrategyInput struct {
 	// Total amount of time for a deployment to last.
 	//
 	// This member is required.
-	DeploymentDurationInMinutes *int32
+	DeploymentDurationInMinutes int32
 
 	// The percentage of targets to receive a deployed configuration during each
 	// interval.
 	//
 	// This member is required.
-	GrowthFactor *float32
+	GrowthFactor float32
 
 	// A name for the deployment strategy.
 	//
@@ -59,7 +59,7 @@ type CreateDeploymentStrategyInput struct {
 
 	// The amount of time AppConfig monitors for alarms before considering the
 	// deployment to be complete and no longer eligible for automatic roll back.
-	FinalBakeTimeInMinutes *int32
+	FinalBakeTimeInMinutes int32
 
 	// The algorithm used to define how percentage grows over time. AWS AppConfig
 	// supports the following growth types: Linear: For this type, AppConfig processes
@@ -84,24 +84,24 @@ type CreateDeploymentStrategyInput struct {
 	// Metadata to assign to the deployment strategy. Tags help organize and categorize
 	// your AppConfig resources. Each tag consists of a key and an optional value, both
 	// of which you define.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateDeploymentStrategyOutput struct {
 
 	// Total amount of time the deployment lasted.
-	DeploymentDurationInMinutes *int32
+	DeploymentDurationInMinutes int32
 
 	// The description of the deployment strategy.
 	Description *string
 
 	// The amount of time AppConfig monitored for alarms before considering the
 	// deployment to be complete and no longer eligible for automatic roll back.
-	FinalBakeTimeInMinutes *int32
+	FinalBakeTimeInMinutes int32
 
 	// The percentage of targets that received a deployed configuration during each
 	// interval.
-	GrowthFactor *float32
+	GrowthFactor float32
 
 	// The algorithm used to define how percentage grew over time.
 	GrowthType types.GrowthType

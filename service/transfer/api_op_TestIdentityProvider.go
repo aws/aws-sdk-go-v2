@@ -68,7 +68,7 @@ type TestIdentityProviderOutput struct {
 	// The HTTP status code that is the response from your API Gateway.
 	//
 	// This member is required.
-	StatusCode *int32
+	StatusCode int32
 
 	// The endpoint of the service used to authenticate a user.
 	//

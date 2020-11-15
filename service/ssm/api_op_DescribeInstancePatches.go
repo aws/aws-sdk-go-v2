@@ -38,10 +38,10 @@ type DescribeInstancePatchesInput struct {
 	// An array of structures. Each entry in the array is a structure containing a Key,
 	// Value combination. Valid values for Key are Classification | KBId | Severity |
 	// State.
-	Filters []*types.PatchOrchestratorFilter
+	Filters []types.PatchOrchestratorFilter
 
 	// The maximum number of patches to return (per page).
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
@@ -57,7 +57,7 @@ type DescribeInstancePatchesOutput struct {
 	// Each entry in the array is a structure containing: Title (string) KBId (string)
 	// Classification (string) Severity (string) State (string, such as "INSTALLED" or
 	// "FAILED") InstalledTime (DateTime) InstalledBy (string)
-	Patches []*types.PatchComplianceData
+	Patches []types.PatchComplianceData
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

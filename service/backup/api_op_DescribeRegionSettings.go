@@ -36,7 +36,7 @@ type DescribeRegionSettingsInput struct {
 type DescribeRegionSettingsOutput struct {
 
 	// Returns a list of all services along with the opt-in preferences in the Region.
-	ResourceTypeOptInPreference map[string]*bool
+	ResourceTypeOptInPreference map[string]bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

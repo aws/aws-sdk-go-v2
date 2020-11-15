@@ -46,11 +46,11 @@ type ListPipelinesOutput struct {
 	// GetPipelineDefinition.
 	//
 	// This member is required.
-	PipelineIdList []*types.PipelineIdName
+	PipelineIdList []types.PipelineIdName
 
 	// Indicates whether there are more results that can be obtained by a subsequent
 	// call.
-	HasMoreResults *bool
+	HasMoreResults bool
 
 	// The starting point for the next page of results. To view the next page of
 	// results, call ListPipelinesOutput again with this marker value. If the value is

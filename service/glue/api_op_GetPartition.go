@@ -37,7 +37,7 @@ type GetPartitionInput struct {
 	// The values that define the partition.
 	//
 	// This member is required.
-	PartitionValues []*string
+	PartitionValues []string
 
 	// The name of the partition's table.
 	//

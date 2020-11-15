@@ -41,7 +41,7 @@ type CreateConnectionAliasInput struct {
 	ConnectionString *string
 
 	// The tags to associate with the connection alias.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateConnectionAliasOutput struct {

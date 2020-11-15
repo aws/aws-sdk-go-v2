@@ -90,7 +90,7 @@ type DescribeJobOutput struct {
 
 	// The job status. When a job is completed, you get the job's output using Get Job
 	// Output (GET output).
-	Completed *bool
+	Completed bool
 
 	// The UTC time that the job request completed. While the job is in progress, the
 	// value is null.

@@ -74,51 +74,38 @@ func awsRestjson1_serializeOpHttpBindingsInvokeEndpointInput(v *InvokeEndpointIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Accept != nil {
+	if v.Accept != nil && len(*v.Accept) > 0 {
 		locationName := "Accept"
-		if len(*v.Accept) > 0 {
-			encoder.SetHeader(locationName).String(*v.Accept)
-		}
+		encoder.SetHeader(locationName).String(*v.Accept)
 	}
 
-	if v.ContentType != nil {
+	if v.ContentType != nil && len(*v.ContentType) > 0 {
 		locationName := "Content-Type"
-		if len(*v.ContentType) > 0 {
-			encoder.SetHeader(locationName).String(*v.ContentType)
-		}
+		encoder.SetHeader(locationName).String(*v.ContentType)
 	}
 
-	if v.CustomAttributes != nil {
+	if v.CustomAttributes != nil && len(*v.CustomAttributes) > 0 {
 		locationName := "X-Amzn-Sagemaker-Custom-Attributes"
-		if len(*v.CustomAttributes) > 0 {
-			encoder.SetHeader(locationName).String(*v.CustomAttributes)
-		}
+		encoder.SetHeader(locationName).String(*v.CustomAttributes)
 	}
 
-	if v.EndpointName == nil {
+	if v.EndpointName == nil || len(*v.EndpointName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EndpointName must not be empty")}
 	}
 	if v.EndpointName != nil {
-		if len(*v.EndpointName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EndpointName must not be empty")}
-		}
 		if err := encoder.SetURI("EndpointName").String(*v.EndpointName); err != nil {
 			return err
 		}
 	}
 
-	if v.TargetModel != nil {
+	if v.TargetModel != nil && len(*v.TargetModel) > 0 {
 		locationName := "X-Amzn-Sagemaker-Target-Model"
-		if len(*v.TargetModel) > 0 {
-			encoder.SetHeader(locationName).String(*v.TargetModel)
-		}
+		encoder.SetHeader(locationName).String(*v.TargetModel)
 	}
 
-	if v.TargetVariant != nil {
+	if v.TargetVariant != nil && len(*v.TargetVariant) > 0 {
 		locationName := "X-Amzn-Sagemaker-Target-Variant"
-		if len(*v.TargetVariant) > 0 {
-			encoder.SetHeader(locationName).String(*v.TargetVariant)
-		}
+		encoder.SetHeader(locationName).String(*v.TargetVariant)
 	}
 
 	return nil

@@ -13,7 +13,7 @@ type AddOutputRequest struct {
 	// The range of IP addresses that should be allowed to initiate output requests to
 	// this flow. These IP addresses should be in the form of a Classless Inter-Domain
 	// Routing (CIDR) block; for example, 10.0.0.0/16.
-	CidrAllowList []*string
+	CidrAllowList []string
 
 	// A description of the output. This description appears only on the AWS Elemental
 	// MediaConnect console and will not be seen by the end user.
@@ -27,19 +27,19 @@ type AddOutputRequest struct {
 	Encryption *Encryption
 
 	// The maximum latency in milliseconds for Zixi-based streams.
-	MaxLatency *int32
+	MaxLatency int32
 
 	// The name of the output. This value must be unique within the current flow.
 	Name *string
 
 	// The port to use when content is distributed to this output.
-	Port *int32
+	Port int32
 
 	// The remote ID for the Zixi-pull output stream.
 	RemoteId *string
 
 	// The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
-	SmoothingLatency *int32
+	SmoothingLatency int32
 
 	// The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi-based streams.
@@ -118,10 +118,10 @@ type Entitlement struct {
 	// content as the source.
 	//
 	// This member is required.
-	Subscribers []*string
+	Subscribers []string
 
 	// Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
-	DataTransferSubscriberFeePercent *int32
+	DataTransferSubscriberFeePercent int32
 
 	// A description of the entitlement.
 	Description *string
@@ -138,7 +138,7 @@ type Entitlement struct {
 type FailoverConfig struct {
 
 	// Search window time to look for dash-7 packets
-	RecoveryWindow *int32
+	RecoveryWindow int32
 
 	State State
 }
@@ -155,7 +155,7 @@ type Flow struct {
 	// The entitlements in this flow.
 	//
 	// This member is required.
-	Entitlements []*Entitlement
+	Entitlements []Entitlement
 
 	// The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the
 	// flow.
@@ -171,7 +171,7 @@ type Flow struct {
 	// The outputs in this flow.
 	//
 	// This member is required.
-	Outputs []*Output
+	Outputs []Output
 
 	// The settings for the source of the flow.
 	//
@@ -193,10 +193,10 @@ type Flow struct {
 	// The settings for source failover
 	SourceFailoverConfig *FailoverConfig
 
-	Sources []*Source
+	Sources []Source
 
 	// The VPC Interfaces for this flow.
-	VpcInterfaces []*VpcInterface
+	VpcInterfaces []VpcInterface
 }
 
 // The entitlements that you want to grant on a flow.
@@ -207,10 +207,10 @@ type GrantEntitlementRequest struct {
 	// content as the source.
 	//
 	// This member is required.
-	Subscribers []*string
+	Subscribers []string
 
 	// Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
-	DataTransferSubscriberFeePercent *int32
+	DataTransferSubscriberFeePercent int32
 
 	// A description of the entitlement. This description appears only on the AWS
 	// Elemental MediaConnect console and will not be seen by the subscriber or end
@@ -244,7 +244,7 @@ type ListedEntitlement struct {
 	EntitlementName *string
 
 	// Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
-	DataTransferSubscriberFeePercent *int32
+	DataTransferSubscriberFeePercent int32
 }
 
 // Provides a summary of a flow, including its ARN, Availability Zone, and source
@@ -290,7 +290,7 @@ type Messages struct {
 	// A list of errors that might have been generated from processes on this flow.
 	//
 	// This member is required.
-	Errors []*string
+	Errors []string
 }
 
 // A savings plan that reserves a certain amount of outbound bandwidth usage at a
@@ -306,7 +306,7 @@ type Offering struct {
 	// The length of time that your reservation would be active.
 	//
 	// This member is required.
-	Duration *int32
+	Duration int32
 
 	// The unit of measurement for the duration of the offering.
 	//
@@ -356,7 +356,7 @@ type Output struct {
 	OutputArn *string
 
 	// Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
-	DataTransferSubscriberFeePercent *int32
+	DataTransferSubscriberFeePercent int32
 
 	// A description of the output.
 	Description *string
@@ -377,7 +377,7 @@ type Output struct {
 	MediaLiveInputArn *string
 
 	// The port to use when content is distributed to this output.
-	Port *int32
+	Port int32
 
 	// Attributes related to the transport stream that are used in the output.
 	Transport *Transport
@@ -404,7 +404,7 @@ type Reservation struct {
 	// value in the offering.
 	//
 	// This member is required.
-	Duration *int32
+	Duration int32
 
 	// The unit of measurement for the duration of the reservation. MediaConnect
 	// defines this value in the offering.
@@ -480,7 +480,7 @@ type ResourceSpecification struct {
 	ResourceType ResourceType
 
 	// The amount of outbound bandwidth that is discounted in the offering.
-	ReservedBitrate *int32
+	ReservedBitrate int32
 }
 
 // The settings for the source of the flow.
@@ -499,14 +499,14 @@ type SetSourceRequest struct {
 	EntitlementArn *string
 
 	// The port that the flow will be listening on for incoming content.
-	IngestPort *int32
+	IngestPort int32
 
 	// The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
-	MaxBitrate *int32
+	MaxBitrate int32
 
 	// The maximum latency in milliseconds. This parameter applies only to RIST-based
 	// and Zixi-based streams.
-	MaxLatency *int32
+	MaxLatency int32
 
 	// The name of the source.
 	Name *string
@@ -541,7 +541,7 @@ type Source struct {
 	SourceArn *string
 
 	// Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
-	DataTransferSubscriberFeePercent *int32
+	DataTransferSubscriberFeePercent int32
 
 	// The type of encryption that is used on the content ingested from this source.
 	Decryption *Encryption
@@ -559,7 +559,7 @@ type Source struct {
 	IngestIp *string
 
 	// The port that the flow will be listening on for incoming content.
-	IngestPort *int32
+	IngestPort int32
 
 	// Attributes related to the transport stream that are used in the source.
 	Transport *Transport
@@ -584,20 +584,20 @@ type Transport struct {
 	// The range of IP addresses that should be allowed to initiate output requests to
 	// this flow. These IP addresses should be in the form of a Classless Inter-Domain
 	// Routing (CIDR) block; for example, 10.0.0.0/16.
-	CidrAllowList []*string
+	CidrAllowList []string
 
 	// The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
-	MaxBitrate *int32
+	MaxBitrate int32
 
 	// The maximum latency in milliseconds. This parameter applies only to RIST-based
 	// and Zixi-based streams.
-	MaxLatency *int32
+	MaxLatency int32
 
 	// The remote ID for the Zixi-pull stream.
 	RemoteId *string
 
 	// The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
-	SmoothingLatency *int32
+	SmoothingLatency int32
 
 	// The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi-based streams.
@@ -655,7 +655,7 @@ type UpdateEncryption struct {
 type UpdateFailoverConfig struct {
 
 	// Recovery window time to look for dash-7 packets
-	RecoveryWindow *int32
+	RecoveryWindow int32
 
 	State State
 }
@@ -671,7 +671,7 @@ type VpcInterface struct {
 	// IDs of the network interfaces created in customer's account by MediaConnect.
 	//
 	// This member is required.
-	NetworkInterfaceIds []*string
+	NetworkInterfaceIds []string
 
 	// Role Arn MediaConnect can assumes to create ENIs in customer's account
 	//
@@ -681,7 +681,7 @@ type VpcInterface struct {
 	// Security Group IDs to be used on ENI.
 	//
 	// This member is required.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// Subnet must be in the AZ of the Flow
 	//
@@ -713,7 +713,7 @@ type VpcInterfaceRequest struct {
 	// Security Group IDs to be used on ENI.
 	//
 	// This member is required.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// Subnet must be in the AZ of the Flow
 	//

@@ -88,7 +88,7 @@ type UpdateRegexMatchSetInput struct {
 	// from a RegexMatchSet. For more information, see RegexMatchTuple.
 	//
 	// This member is required.
-	Updates []*types.RegexMatchSetUpdate
+	Updates []types.RegexMatchSetUpdate
 }
 
 type UpdateRegexMatchSetOutput struct {

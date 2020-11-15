@@ -34,7 +34,7 @@ type DescribeComputeEnvironmentsInput struct {
 
 	// A list of up to 100 compute environment names or full Amazon Resource Name (ARN)
 	// entries.
-	ComputeEnvironments []*string
+	ComputeEnvironments []string
 
 	// The maximum number of cluster results returned by DescribeComputeEnvironments in
 	// paginated output. When this parameter is used, DescribeComputeEnvironments only
@@ -44,7 +44,7 @@ type DescribeComputeEnvironmentsInput struct {
 	// This value can be between 1 and 100. If this parameter is not used, then
 	// DescribeComputeEnvironments returns up to 100 results and a nextToken value if
 	// applicable.
-	MaxResults *int32
+	MaxResults int32
 
 	// The nextToken value returned from a previous paginated
 	// DescribeComputeEnvironments request where maxResults was used and the results
@@ -59,7 +59,7 @@ type DescribeComputeEnvironmentsInput struct {
 type DescribeComputeEnvironmentsOutput struct {
 
 	// The list of compute environments.
-	ComputeEnvironments []*types.ComputeEnvironmentDetail
+	ComputeEnvironments []types.ComputeEnvironmentDetail
 
 	// The nextToken value to include in a future DescribeComputeEnvironments request.
 	// When the results of a DescribeJobDefinitions request exceed maxResults, this

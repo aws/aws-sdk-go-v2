@@ -63,7 +63,7 @@ type CreateDeploymentInput struct {
 	// A map that defines the stage variables for the Stage resource that is associated
 	// with the new deployment. Variable names can have alphanumeric and underscore
 	// characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.
-	Variables map[string]*string
+	Variables map[string]string
 }
 
 // An immutable representation of a RestApi resource that can be called by users
@@ -79,7 +79,7 @@ type CreateDeploymentOutput struct {
 
 	// A summary of the RestApi at the date and time that the deployment resource was
 	// created.
-	ApiSummary map[string]map[string]*types.MethodSnapshot
+	ApiSummary map[string]map[string]types.MethodSnapshot
 
 	// The date and time that the deployment resource was created.
 	CreatedDate *time.Time

@@ -37,7 +37,7 @@ type CreateStackInput struct {
 
 	// The list of interface VPC endpoint (interface endpoint) objects. Users of the
 	// stack can connect to AppStream 2.0 only through the specified endpoints.
-	AccessEndpoints []*types.AccessEndpoint
+	AccessEndpoints []types.AccessEndpoint
 
 	// The persistent application settings for users of a stack. When these settings
 	// are enabled, changes that users make to applications and Windows settings are
@@ -53,7 +53,7 @@ type CreateStackInput struct {
 	// The domains where AppStream 2.0 streaming sessions can be embedded in an iframe.
 	// You must approve the domains that you want to host embedded AppStream 2.0
 	// streaming sessions.
-	EmbedHostDomains []*string
+	EmbedHostDomains []string
 
 	// The URL that users are redirected to after they click the Send Feedback link. If
 	// no URL is specified, no Send Feedback link is displayed.
@@ -63,7 +63,7 @@ type CreateStackInput struct {
 	RedirectURL *string
 
 	// The storage connectors to enable.
-	StorageConnectors []*types.StorageConnector
+	StorageConnectors []types.StorageConnector
 
 	// The tags to associate with the stack. A tag is a key-value pair, and the value
 	// is optional. For example, Environment=Test. If you do not specify a value,
@@ -73,11 +73,11 @@ type CreateStackInput struct {
 	// For more information about tags, see Tagging Your Resources
 	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
 	// in the Amazon AppStream 2.0 Administration Guide.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The actions that are enabled or disabled for users during their streaming
 	// sessions. By default, these actions are enabled.
-	UserSettings []*types.UserSetting
+	UserSettings []types.UserSetting
 }
 
 type CreateStackOutput struct {

@@ -83,7 +83,7 @@ type CreateBackupInput struct {
 	// CopyTagsToBackups to true, and you specify one or more tags using the
 	// CreateBackup action, no existing file system tags are copied from the file
 	// system to the backup.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // The response object for the CreateBackup operation.

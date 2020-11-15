@@ -32,7 +32,7 @@ func (c *Client) DescribeContinuousExports(ctx context.Context, params *Describe
 type DescribeContinuousExportsInput struct {
 
 	// The unique IDs assigned to the exports.
-	ExportIds []*string
+	ExportIds []string
 
 	// A number between 1 and 100 specifying the maximum number of continuous export
 	// descriptions returned.
@@ -45,7 +45,7 @@ type DescribeContinuousExportsInput struct {
 type DescribeContinuousExportsOutput struct {
 
 	// A list of continuous export descriptions.
-	Descriptions []*types.ContinuousExportDescription
+	Descriptions []types.ContinuousExportDescription
 
 	// The token from the previous call to DescribeExportTasks.
 	NextToken *string

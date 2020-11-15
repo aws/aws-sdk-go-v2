@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -343,7 +344,7 @@ func awsAwsjson11_deserializeDocumentAuthException(v **types.AuthException, valu
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -383,7 +384,7 @@ func awsAwsjson11_deserializeDocumentEC2InstanceNotFoundException(v **types.EC2I
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -423,7 +424,7 @@ func awsAwsjson11_deserializeDocumentInvalidArgsException(v **types.InvalidArgsE
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -463,7 +464,7 @@ func awsAwsjson11_deserializeDocumentServiceException(v **types.ServiceException
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -503,7 +504,7 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -543,7 +544,7 @@ func awsAwsjson11_deserializeOpDocumentSendSSHPublicKeyOutput(v **SendSSHPublicK
 				if !ok {
 					return fmt.Errorf("expected RequestId to be of type string, got %T instead", value)
 				}
-				sv.RequestId = &jtv
+				sv.RequestId = ptr.String(jtv)
 			}
 
 		case "Success":
@@ -552,7 +553,7 @@ func awsAwsjson11_deserializeOpDocumentSendSSHPublicKeyOutput(v **SendSSHPublicK
 				if !ok {
 					return fmt.Errorf("expected Success to be of type *bool, got %T instead", value)
 				}
-				sv.Success = &jtv
+				sv.Success = jtv
 			}
 
 		default:

@@ -36,7 +36,7 @@ type ModifyInstanceCreditSpecificationInput struct {
 	// Information about the credit option for CPU usage.
 	//
 	// This member is required.
-	InstanceCreditSpecifications []*types.InstanceCreditSpecificationRequest
+	InstanceCreditSpecifications []types.InstanceCreditSpecificationRequest
 
 	// A unique, case-sensitive token that you provide to ensure idempotency of your
 	// modification request. For more information, see Ensuring Idempotency
@@ -47,18 +47,18 @@ type ModifyInstanceCreditSpecificationInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 }
 
 type ModifyInstanceCreditSpecificationOutput struct {
 
 	// Information about the instances whose credit option for CPU usage was
 	// successfully modified.
-	SuccessfulInstanceCreditSpecifications []*types.SuccessfulInstanceCreditSpecificationItem
+	SuccessfulInstanceCreditSpecifications []types.SuccessfulInstanceCreditSpecificationItem
 
 	// Information about the instances whose credit option for CPU usage was not
 	// modified.
-	UnsuccessfulInstanceCreditSpecifications []*types.UnsuccessfulInstanceCreditSpecificationItem
+	UnsuccessfulInstanceCreditSpecifications []types.UnsuccessfulInstanceCreditSpecificationItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

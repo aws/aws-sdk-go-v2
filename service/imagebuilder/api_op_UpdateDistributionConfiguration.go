@@ -45,7 +45,7 @@ type UpdateDistributionConfigurationInput struct {
 	// The distributions of the distribution configuration.
 	//
 	// This member is required.
-	Distributions []*types.Distribution
+	Distributions []types.Distribution
 
 	// The description of the distribution configuration.
 	Description *string

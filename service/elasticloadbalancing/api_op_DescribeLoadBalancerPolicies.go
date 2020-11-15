@@ -40,14 +40,14 @@ type DescribeLoadBalancerPoliciesInput struct {
 	LoadBalancerName *string
 
 	// The names of the policies.
-	PolicyNames []*string
+	PolicyNames []string
 }
 
 // Contains the output of DescribeLoadBalancerPolicies.
 type DescribeLoadBalancerPoliciesOutput struct {
 
 	// Information about the policies.
-	PolicyDescriptions []*types.PolicyDescription
+	PolicyDescriptions []types.PolicyDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

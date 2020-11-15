@@ -38,7 +38,7 @@ type AdminUpdateUserAttributesInput struct {
 	// attributes, you must prepend the custom: prefix to the attribute name.
 	//
 	// This member is required.
-	UserAttributes []*types.AttributeType
+	UserAttributes []types.AttributeType
 
 	// The user pool ID for the user pool where you want to update user attributes.
 	//
@@ -76,7 +76,7 @@ type AdminUpdateUserAttributesInput struct {
 	//
 	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
 	// use it to provide sensitive information.
-	ClientMetadata map[string]*string
+	ClientMetadata map[string]string
 }
 
 // Represents the response from the server for the request to update user

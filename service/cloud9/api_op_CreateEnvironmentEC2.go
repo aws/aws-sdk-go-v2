@@ -69,7 +69,7 @@ type CreateEnvironmentEC2Input struct {
 
 	// An array of key-value pairs that will be associated with the new AWS Cloud9
 	// development environment.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateEnvironmentEC2Output struct {

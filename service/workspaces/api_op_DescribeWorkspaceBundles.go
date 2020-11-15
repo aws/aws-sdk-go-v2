@@ -32,7 +32,7 @@ type DescribeWorkspaceBundlesInput struct {
 
 	// The identifiers of the bundles. You cannot combine this parameter with any other
 	// filter.
-	BundleIds []*string
+	BundleIds []string
 
 	// The token for the next set of results. (You received this token from a previous
 	// call.)
@@ -47,7 +47,7 @@ type DescribeWorkspaceBundlesInput struct {
 type DescribeWorkspaceBundlesOutput struct {
 
 	// Information about the bundles.
-	Bundles []*types.WorkspaceBundle
+	Bundles []types.WorkspaceBundle
 
 	// The token to use to retrieve the next set of results, or null if there are no
 	// more results available. This token is valid for one day and must be used within

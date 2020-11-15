@@ -70,7 +70,7 @@ type ListAssetsOutput struct {
 	// A list that summarizes each asset.
 	//
 	// This member is required.
-	AssetSummaries []*types.AssetSummary
+	AssetSummaries []types.AssetSummary
 
 	// The token for the next set of results, or null if there are no additional
 	// results.

@@ -57,7 +57,7 @@ type DescribeTrailsInput struct {
 	// only if the names match the names of trails belonging only to the current
 	// region. To return information about a trail in another region, you must specify
 	// its trail ARN.
-	TrailNameList []*string
+	TrailNameList []string
 }
 
 // Returns the objects or data listed below if successful. Otherwise, returns an
@@ -69,7 +69,7 @@ type DescribeTrailsOutput struct {
 	// SNSTopicName and SNSTopicARN are only returned in results if a trail is
 	// configured to send SNS notifications. Similarly, KMSKeyId only appears in
 	// results if a trail's log files are encrypted with AWS KMS-managed keys.
-	TrailList []*types.Trail
+	TrailList []types.Trail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

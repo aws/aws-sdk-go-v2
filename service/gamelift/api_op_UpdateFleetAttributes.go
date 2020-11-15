@@ -71,7 +71,7 @@ type UpdateFleetAttributesInput struct {
 	// metric group is to aggregate metrics from multiple fleets. Use an existing
 	// metric group name to add this fleet to the group. Or use a new name to create a
 	// new metric group. A fleet can only be included in one metric group at a time.
-	MetricGroups []*string
+	MetricGroups []string
 
 	// A descriptive label that is associated with a fleet. Fleet names do not need to
 	// be unique.

@@ -54,7 +54,7 @@ type UpdateListenerInput struct {
 
 	// The updated list of port ranges for the connections from clients to the
 	// accelerator.
-	PortRanges []*types.PortRange
+	PortRanges []types.PortRange
 
 	// The updated protocol for the connections from clients to the accelerator.
 	Protocol types.Protocol

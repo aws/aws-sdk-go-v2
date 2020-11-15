@@ -56,7 +56,7 @@ type DescribeResourcePermissionsOutput struct {
 	Marker *string
 
 	// The principals.
-	Principals []*types.Principal
+	Principals []types.Principal
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

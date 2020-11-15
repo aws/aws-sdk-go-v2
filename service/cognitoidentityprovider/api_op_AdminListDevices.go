@@ -52,7 +52,7 @@ type AdminListDevicesInput struct {
 type AdminListDevicesOutput struct {
 
 	// The devices in the list of devices response.
-	Devices []*types.DeviceType
+	Devices []types.DeviceType
 
 	// The pagination token.
 	PaginationToken *string

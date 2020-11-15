@@ -67,7 +67,7 @@ type PutDashboardOutput struct {
 	// messages, then the input was valid enough for the dashboard to be created or
 	// modified, but some elements of the dashboard might not render. If this result
 	// includes error messages, the input was not valid and the operation failed.
-	DashboardValidationMessages []*types.DashboardValidationMessage
+	DashboardValidationMessages []types.DashboardValidationMessage
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

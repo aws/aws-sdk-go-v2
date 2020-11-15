@@ -50,7 +50,7 @@ type ResolveRoomOutput struct {
 	RoomName *string
 
 	// Response to get the room profile request. Required.
-	RoomSkillParameters []*types.RoomSkillParameter
+	RoomSkillParameters []types.RoomSkillParameter
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

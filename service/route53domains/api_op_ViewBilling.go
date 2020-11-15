@@ -60,7 +60,7 @@ type ViewBillingInput struct {
 type ViewBillingOutput struct {
 
 	// A summary of billing records.
-	BillingRecords []*types.BillingRecord
+	BillingRecords []types.BillingRecord
 
 	// If there are more billing records than you specified for MaxItems in the
 	// request, submit another request and include the value of NextPageMarker in the

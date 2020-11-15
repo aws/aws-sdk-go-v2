@@ -50,7 +50,7 @@ type ListExclusionsOutput struct {
 	// A list of exclusions' ARNs returned by the action.
 	//
 	// This member is required.
-	ExclusionArns []*string
+	ExclusionArns []string
 
 	// When a response is generated, if there is more data to be listed, this
 	// parameters is present in the response and contains the value to use for the

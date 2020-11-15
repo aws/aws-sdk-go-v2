@@ -55,12 +55,12 @@ type CancelJobExecutionInput struct {
 	// "IN_PROGRESS", will cause the device to be unable to update the job execution
 	// status. Use caution and ensure that the device is able to recover to a valid
 	// state.
-	Force *bool
+	Force bool
 
 	// A collection of name/value pairs that describe the status of the job execution.
 	// If not specified, the statusDetails are unchanged. You can specify at most 10
 	// name/value pairs.
-	StatusDetails map[string]*string
+	StatusDetails map[string]string
 }
 
 type CancelJobExecutionOutput struct {

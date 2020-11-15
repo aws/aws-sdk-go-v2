@@ -124,7 +124,7 @@ type DescribeBatchPredictionsOutput struct {
 	NextToken *string
 
 	// A list of BatchPrediction objects that meet the search criteria.
-	Results []*types.BatchPrediction
+	Results []types.BatchPrediction
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

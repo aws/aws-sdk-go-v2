@@ -34,17 +34,17 @@ type DescribeImportImageTasksInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// Filter tasks using the task-state filter and one of the following values:
 	// active, completed, deleting, or deleted.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The IDs of the import image tasks.
-	ImportTaskIds []*string
+	ImportTaskIds []string
 
 	// The maximum number of results to return in a single call.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token that indicates the next page of results.
 	NextToken *string
@@ -54,7 +54,7 @@ type DescribeImportImageTasksOutput struct {
 
 	// A list of zero or more import image tasks that are currently active or were
 	// completed or canceled in the previous 7 days.
-	ImportImageTasks []*types.ImportImageTask
+	ImportImageTasks []types.ImportImageTask
 
 	// The token to use to get the next page of results. This value is null when there
 	// are no more results to return.

@@ -42,33 +42,33 @@ type ModifyVpcEndpointServiceConfigurationInput struct {
 
 	// Indicates whether requests to create an endpoint to your service must be
 	// accepted.
-	AcceptanceRequired *bool
+	AcceptanceRequired bool
 
 	// The Amazon Resource Names (ARNs) of Network Load Balancers to add to your
 	// service configuration.
-	AddNetworkLoadBalancerArns []*string
+	AddNetworkLoadBalancerArns []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The private DNS name to assign to the endpoint service.
 	PrivateDnsName *string
 
 	// The Amazon Resource Names (ARNs) of Network Load Balancers to remove from your
 	// service configuration.
-	RemoveNetworkLoadBalancerArns []*string
+	RemoveNetworkLoadBalancerArns []string
 
 	// Removes the private DNS name of the endpoint service.
-	RemovePrivateDnsName *bool
+	RemovePrivateDnsName bool
 }
 
 type ModifyVpcEndpointServiceConfigurationOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.
-	Return *bool
+	Return bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

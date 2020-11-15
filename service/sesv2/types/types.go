@@ -11,7 +11,7 @@ type AccountDetails struct {
 
 	// Additional email addresses where updates are sent about your account review
 	// process.
-	AdditionalContactEmailAddresses []*string
+	AdditionalContactEmailAddresses []string
 
 	// The language you would prefer for the case. The contact language can be one of
 	// ENGLISH or JAPANESE.
@@ -97,7 +97,7 @@ type BulkEmailEntry struct {
 	// send using the SendBulkTemplatedEmail operation. Tags correspond to
 	// characteristics of the email that you define, so that you can publish email
 	// sending events.
-	ReplacementTags []*MessageTag
+	ReplacementTags []MessageTag
 }
 
 // The result of the SendBulkEmail operation of each specified BulkEmailEntry.
@@ -176,7 +176,7 @@ type CloudWatchDestination struct {
 	// to Amazon CloudWatch.
 	//
 	// This member is required.
-	DimensionConfigurations []*CloudWatchDimensionConfiguration
+	DimensionConfigurations []CloudWatchDimensionConfiguration
 }
 
 // An object that defines the dimension configuration to use when you send email
@@ -228,14 +228,14 @@ type Contact struct {
 	LastUpdatedTimestamp *time.Time
 
 	// The default topic preferences applied to the contact.
-	TopicDefaultPreferences []*TopicPreference
+	TopicDefaultPreferences []TopicPreference
 
 	// The contact's preference for being opted-in to or opted-out of a topic.
-	TopicPreferences []*TopicPreference
+	TopicPreferences []TopicPreference
 
 	// A boolean value status noting if the contact is unsubscribed from all contact
 	// list topics.
-	UnsubscribeAll *bool
+	UnsubscribeAll bool
 }
 
 // A list that contains contacts that have subscribed to a particular topic or
@@ -313,7 +313,7 @@ type DailyVolume struct {
 
 	// An object that contains inbox placement metrics for a specified day in the
 	// analysis period, broken out by the recipient's email provider.
-	DomainIspPlacements []*DomainIspPlacement
+	DomainIspPlacements []DomainIspPlacement
 
 	// The date that the DailyVolume metrics apply to, in Unix time.
 	StartDate *time.Time
@@ -405,14 +405,14 @@ type Destination struct {
 
 	// An array that contains the email addresses of the "BCC" (blind carbon copy)
 	// recipients for the email.
-	BccAddresses []*string
+	BccAddresses []string
 
 	// An array that contains the email addresses of the "CC" (carbon copy) recipients
 	// for the email.
-	CcAddresses []*string
+	CcAddresses []string
 
 	// An array that contains the email addresses of the "To" recipients for the email.
-	ToAddresses []*string
+	ToAddresses []string
 }
 
 // An object that contains information about the DKIM authentication status for an
@@ -442,7 +442,7 @@ type DkimAttributes struct {
 	// If the value is true, then the messages that you send from the identity are
 	// signed using DKIM. If the value is false, then the messages that you send from
 	// the identity aren't DKIM-signed.
-	SigningEnabled *bool
+	SigningEnabled bool
 
 	// Describes whether or not Amazon SES has successfully located the DKIM records in
 	// the DNS records for the domain. The status can be one of the following:
@@ -477,7 +477,7 @@ type DkimAttributes struct {
 	// key. Regardless of the DKIM authentication method you use, Amazon SES searches
 	// for the appropriate records in the DNS configuration of the domain for up to 72
 	// hours.
-	Tokens []*string
+	Tokens []string
 }
 
 // An object that contains information about the tokens used for setting up Bring
@@ -513,7 +513,7 @@ type DomainDeliverabilityCampaign struct {
 	DeleteRate *float64
 
 	// The major email providers who handled the email message.
-	Esps []*string
+	Esps []string
 
 	// The first time, in Unix time format, when the email message was delivered to any
 	// recipient's inbox. This value can help you determine how long it took for a
@@ -548,7 +548,7 @@ type DomainDeliverabilityCampaign struct {
 	ReadRate *float64
 
 	// The IP addresses that were used to send the email message.
-	SendingIps []*string
+	SendingIps []string
 
 	// The number of email messages that were delivered to recipients' spam or junk
 	// mail folders.
@@ -696,7 +696,7 @@ type EventDestination struct {
 	// EventDestinationDefinition. If false, the event destination is disabled. When
 	// the event destination is disabled, events aren't sent to the specified
 	// destinations.
-	Enabled *bool
+	Enabled bool
 
 	// An object that defines an Amazon Kinesis Data Firehose destination for email
 	// events. You can use Amazon Kinesis Data Firehose to stream data to other
@@ -732,7 +732,7 @@ type EventDestinationDefinition struct {
 	// EventDestinationDefinition. If false, the event destination is disabled. When
 	// the event destination is disabled, events aren't sent to the specified
 	// destinations.
-	Enabled *bool
+	Enabled bool
 
 	// An object that defines an Amazon Kinesis Data Firehose destination for email
 	// events. You can use Amazon Kinesis Data Firehose to stream data to other
@@ -788,7 +788,7 @@ type IdentityInfo struct {
 	// email address or domain that you send email from. Before you can send email from
 	// an identity, you have to demostrate that you own the identity, and that you
 	// authorize Amazon SES to send email from that identity.
-	SendingEnabled *bool
+	SendingEnabled bool
 }
 
 // An object that contains details about the data source of the import job.
@@ -839,11 +839,11 @@ type ImportJobSummary struct {
 type InboxPlacementTrackingOption struct {
 
 	// Specifies whether inbox placement data is being tracked for the domain.
-	Global *bool
+	Global bool
 
 	// An array of strings, one for each major email provider that the inbox placement
 	// data applies to.
-	TrackedIsps []*string
+	TrackedIsps []string
 }
 
 // An object that describes how email sent during the predictive inbox placement
@@ -988,7 +988,7 @@ type OverallVolume struct {
 
 	// An object that contains inbox and junk mail placement metrics for individual
 	// email providers.
-	DomainIspPlacements []*DomainIspPlacement
+	DomainIspPlacements []DomainIspPlacement
 
 	// The percentage of emails that were sent from the domain that were read by their
 	// recipients.
@@ -1097,7 +1097,7 @@ type ReputationOptions struct {
 
 	// If true, tracking of reputation metrics is enabled for the configuration set. If
 	// false, tracking of reputation metrics is disabled for the configuration set.
-	ReputationMetricsEnabled *bool
+	ReputationMetricsEnabled bool
 }
 
 // An object that contains information about your account details review.
@@ -1129,7 +1129,7 @@ type SendingOptions struct {
 
 	// If true, email sending is enabled for the configuration set. If false, email
 	// sending is disabled for the configuration set.
-	SendingEnabled *bool
+	SendingEnabled bool
 }
 
 // An object that contains information about the per-day and per-second sending
@@ -1138,16 +1138,16 @@ type SendQuota struct {
 
 	// The maximum number of emails that you can send in the current AWS Region over a
 	// 24-hour period. This value is also called your sending quota.
-	Max24HourSend *float64
+	Max24HourSend float64
 
 	// The maximum number of emails that you can send per second in the current AWS
 	// Region. This value is also called your maximum sending rate or your maximum TPS
 	// (transactions per second) rate.
-	MaxSendRate *float64
+	MaxSendRate float64
 
 	// The number of emails sent from your Amazon SES account in the current AWS Region
 	// over the past 24 hours.
-	SentLast24Hours *float64
+	SentLast24Hours float64
 }
 
 // An object that defines an Amazon SNS destination for email events. You can use
@@ -1370,7 +1370,7 @@ type TopicFilter struct {
 
 	// Notes that the default subscription status should be applied to a contact
 	// because the contact has not noted their preference for subscribing to a topic.
-	UseDefaultIfPreferenceUnavailable *bool
+	UseDefaultIfPreferenceUnavailable bool
 }
 
 // The contact's preference for being opted-in to or opted-out of a topic.

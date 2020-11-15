@@ -67,7 +67,7 @@ type DescribeClustersInput struct {
 	// clusters that are tagged with keys called owner and environment. If you specify
 	// both of these tag keys in the request, Amazon Redshift returns a response with
 	// the clusters that have either or both of these tag keys associated with them.
-	TagKeys []*string
+	TagKeys []string
 
 	// A tag value or values for which you want to return all matching clusters that
 	// are associated with the specified tag value or values. For example, suppose that
@@ -75,14 +75,14 @@ type DescribeClustersInput struct {
 	// specify both of these tag values in the request, Amazon Redshift returns a
 	// response with the clusters that have either or both of these tag values
 	// associated with them.
-	TagValues []*string
+	TagValues []string
 }
 
 // Contains the output from the DescribeClusters action.
 type DescribeClustersOutput struct {
 
 	// A list of Cluster objects, where each object describes one cluster.
-	Clusters []*types.Cluster
+	Clusters []types.Cluster
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve

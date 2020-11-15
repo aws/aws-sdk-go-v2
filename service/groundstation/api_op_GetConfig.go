@@ -68,7 +68,7 @@ type GetConfigOutput struct {
 	ConfigType types.ConfigCapabilityType
 
 	// Tags assigned to a Config.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

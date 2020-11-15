@@ -41,7 +41,7 @@ type PutEntityTypeInput struct {
 	Description *string
 
 	// A collection of key and value pairs.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type PutEntityTypeOutput struct {

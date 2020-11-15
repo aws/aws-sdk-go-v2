@@ -55,7 +55,7 @@ type ListTagsForResourceOutput struct {
 
 	// The tags that are associated with the resource that you specified in the
 	// ListTagsForResource request.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -39,7 +39,7 @@ type ListInputsInput struct {
 type ListInputsOutput struct {
 
 	// Summary information about the inputs.
-	InputSummaries []*types.InputSummary
+	InputSummaries []types.InputSummary
 
 	// A token to retrieve the next set of results, or null if there are no additional
 	// results.

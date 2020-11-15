@@ -42,7 +42,7 @@ type ListJobTemplatesInput struct {
 
 	// Optional. Number of job templates, up to twenty, that will be returned at one
 	// time.
-	MaxResults *int32
+	MaxResults int32
 
 	// Use this string, provided with the response to a previous request, to request
 	// the next batch of job templates.
@@ -56,7 +56,7 @@ type ListJobTemplatesInput struct {
 type ListJobTemplatesOutput struct {
 
 	// List of Job templates.
-	JobTemplates []*types.JobTemplate
+	JobTemplates []types.JobTemplate
 
 	// Use this string to request the next batch of job templates.
 	NextToken *string

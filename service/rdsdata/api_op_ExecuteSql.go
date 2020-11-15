@@ -62,7 +62,7 @@ type ExecuteSqlInput struct {
 type ExecuteSqlOutput struct {
 
 	// The results of the SQL statement or statements.
-	SqlStatementResults []*types.SqlStatementResult
+	SqlStatementResults []types.SqlStatementResult
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

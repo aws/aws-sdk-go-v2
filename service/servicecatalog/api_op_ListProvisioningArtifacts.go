@@ -52,7 +52,7 @@ type ListProvisioningArtifactsOutput struct {
 	NextPageToken *string
 
 	// Information about the provisioning artifacts.
-	ProvisioningArtifactDetails []*types.ProvisioningArtifactDetail
+	ProvisioningArtifactDetails []types.ProvisioningArtifactDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

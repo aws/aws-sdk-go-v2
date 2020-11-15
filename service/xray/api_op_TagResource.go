@@ -58,7 +58,7 @@ type TagResourceInput struct {
 	// or delete system tags.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagResourceOutput struct {

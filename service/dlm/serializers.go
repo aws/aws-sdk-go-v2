@@ -162,13 +162,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteLifecyclePolicyInput(v *DeleteLif
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.PolicyId == nil {
+	if v.PolicyId == nil || len(*v.PolicyId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member PolicyId must not be empty")}
 	}
 	if v.PolicyId != nil {
-		if len(*v.PolicyId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member PolicyId must not be empty")}
-		}
 		if err := encoder.SetURI("PolicyId").String(*v.PolicyId); err != nil {
 			return err
 		}
@@ -230,10 +227,7 @@ func awsRestjson1_serializeOpHttpBindingsGetLifecyclePoliciesInput(v *GetLifecyc
 
 	if v.PolicyIds != nil {
 		for i := range v.PolicyIds {
-			if v.PolicyIds[i] == nil {
-				continue
-			}
-			encoder.AddQuery("policyIds").String(*v.PolicyIds[i])
+			encoder.AddQuery("policyIds").String(v.PolicyIds[i])
 		}
 	}
 
@@ -249,19 +243,13 @@ func awsRestjson1_serializeOpHttpBindingsGetLifecyclePoliciesInput(v *GetLifecyc
 
 	if v.TagsToAdd != nil {
 		for i := range v.TagsToAdd {
-			if v.TagsToAdd[i] == nil {
-				continue
-			}
-			encoder.AddQuery("tagsToAdd").String(*v.TagsToAdd[i])
+			encoder.AddQuery("tagsToAdd").String(v.TagsToAdd[i])
 		}
 	}
 
 	if v.TargetTags != nil {
 		for i := range v.TargetTags {
-			if v.TargetTags[i] == nil {
-				continue
-			}
-			encoder.AddQuery("targetTags").String(*v.TargetTags[i])
+			encoder.AddQuery("targetTags").String(v.TargetTags[i])
 		}
 	}
 
@@ -319,13 +307,10 @@ func awsRestjson1_serializeOpHttpBindingsGetLifecyclePolicyInput(v *GetLifecycle
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.PolicyId == nil {
+	if v.PolicyId == nil || len(*v.PolicyId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member PolicyId must not be empty")}
 	}
 	if v.PolicyId != nil {
-		if len(*v.PolicyId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member PolicyId must not be empty")}
-		}
 		if err := encoder.SetURI("PolicyId").String(*v.PolicyId); err != nil {
 			return err
 		}
@@ -385,13 +370,10 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceArn == nil {
+	if v.ResourceArn == nil || len(*v.ResourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
 	}
 	if v.ResourceArn != nil {
-		if len(*v.ResourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -462,13 +444,10 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceArn == nil {
+	if v.ResourceArn == nil || len(*v.ResourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
 	}
 	if v.ResourceArn != nil {
-		if len(*v.ResourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -542,13 +521,10 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceArn == nil {
+	if v.ResourceArn == nil || len(*v.ResourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
 	}
 	if v.ResourceArn != nil {
-		if len(*v.ResourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -556,10 +532,7 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 
 	if v.TagKeys != nil {
 		for i := range v.TagKeys {
-			if v.TagKeys[i] == nil {
-				continue
-			}
-			encoder.AddQuery("tagKeys").String(*v.TagKeys[i])
+			encoder.AddQuery("tagKeys").String(v.TagKeys[i])
 		}
 	}
 
@@ -628,13 +601,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateLifecyclePolicyInput(v *UpdateLif
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.PolicyId == nil {
+	if v.PolicyId == nil || len(*v.PolicyId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member PolicyId must not be empty")}
 	}
 	if v.PolicyId != nil {
-		if len(*v.PolicyId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member PolicyId must not be empty")}
-		}
 		if err := encoder.SetURI("PolicyId").String(*v.PolicyId); err != nil {
 			return err
 		}
@@ -672,17 +642,13 @@ func awsRestjson1_serializeOpDocumentUpdateLifecyclePolicyInput(v *UpdateLifecyc
 	return nil
 }
 
-func awsRestjson1_serializeDocumentAvailabilityZoneList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAvailabilityZoneList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -696,9 +662,9 @@ func awsRestjson1_serializeDocumentCreateRule(v *types.CreateRule, value smithyj
 		ok.String(*v.CronExpression)
 	}
 
-	if v.Interval != nil {
+	if v.Interval != 0 {
 		ok := object.Key("Interval")
-		ok.Integer(*v.Interval)
+		ok.Integer(v.Interval)
 	}
 
 	if len(v.IntervalUnit) > 0 {
@@ -720,9 +686,9 @@ func awsRestjson1_serializeDocumentCrossRegionCopyRetainRule(v *types.CrossRegio
 	object := value.Object()
 	defer object.Close()
 
-	if v.Interval != nil {
+	if v.Interval != 0 {
 		ok := object.Key("Interval")
-		ok.Integer(*v.Interval)
+		ok.Integer(v.Interval)
 	}
 
 	if len(v.IntervalUnit) > 0 {
@@ -767,17 +733,13 @@ func awsRestjson1_serializeDocumentCrossRegionCopyRule(v *types.CrossRegionCopyR
 	return nil
 }
 
-func awsRestjson1_serializeDocumentCrossRegionCopyRules(v []*types.CrossRegionCopyRule, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentCrossRegionCopyRules(v []types.CrossRegionCopyRule, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentCrossRegionCopyRule(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentCrossRegionCopyRule(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -795,14 +757,14 @@ func awsRestjson1_serializeDocumentFastRestoreRule(v *types.FastRestoreRule, val
 		}
 	}
 
-	if v.Count != nil {
+	if v.Count != 0 {
 		ok := object.Key("Count")
-		ok.Integer(*v.Count)
+		ok.Integer(v.Count)
 	}
 
-	if v.Interval != nil {
+	if v.Interval != 0 {
 		ok := object.Key("Interval")
-		ok.Integer(*v.Interval)
+		ok.Integer(v.Interval)
 	}
 
 	if len(v.IntervalUnit) > 0 {
@@ -880,14 +842,14 @@ func awsRestjson1_serializeDocumentRetainRule(v *types.RetainRule, value smithyj
 	object := value.Object()
 	defer object.Close()
 
-	if v.Count != nil {
+	if v.Count != 0 {
 		ok := object.Key("Count")
-		ok.Integer(*v.Count)
+		ok.Integer(v.Count)
 	}
 
-	if v.Interval != nil {
+	if v.Interval != 0 {
 		ok := object.Key("Interval")
-		ok.Integer(*v.Interval)
+		ok.Integer(v.Interval)
 	}
 
 	if len(v.IntervalUnit) > 0 {
@@ -902,9 +864,9 @@ func awsRestjson1_serializeDocumentSchedule(v *types.Schedule, value smithyjson.
 	object := value.Object()
 	defer object.Close()
 
-	if v.CopyTags != nil {
+	if v.CopyTags {
 		ok := object.Key("CopyTags")
-		ok.Boolean(*v.CopyTags)
+		ok.Boolean(v.CopyTags)
 	}
 
 	if v.CreateRule != nil {
@@ -957,17 +919,13 @@ func awsRestjson1_serializeDocumentSchedule(v *types.Schedule, value smithyjson.
 	return nil
 }
 
-func awsRestjson1_serializeDocumentScheduleList(v []*types.Schedule, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentScheduleList(v []types.Schedule, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentSchedule(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentSchedule(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -991,81 +949,61 @@ func awsRestjson1_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTagMap(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTagsToAddList(v []*types.Tag, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTagsToAddList(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTargetTagList(v []*types.Tag, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTargetTagList(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTimesList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTimesList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentVariableTagsList(v []*types.Tag, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentVariableTagsList(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}

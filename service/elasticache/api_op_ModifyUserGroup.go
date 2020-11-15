@@ -35,10 +35,10 @@ type ModifyUserGroupInput struct {
 	UserGroupId *string
 
 	// The list of user IDs to add to the user group.
-	UserIdsToAdd []*string
+	UserIdsToAdd []string
 
 	// The list of user IDs to remove from the user group.
-	UserIdsToRemove []*string
+	UserIdsToRemove []string
 }
 
 type ModifyUserGroupOutput struct {
@@ -53,7 +53,7 @@ type ModifyUserGroupOutput struct {
 	PendingChanges *types.UserGroupPendingChanges
 
 	// A list of replication groups that the user group can access.
-	ReplicationGroups []*string
+	ReplicationGroups []string
 
 	// Indicates user group status. Can be "creating", "active", "modifying",
 	// "deleting".
@@ -63,7 +63,7 @@ type ModifyUserGroupOutput struct {
 	UserGroupId *string
 
 	// The list of user IDs that belong to the user group.
-	UserIds []*string
+	UserIds []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

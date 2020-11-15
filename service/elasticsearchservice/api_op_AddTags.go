@@ -42,7 +42,7 @@ type AddTagsInput struct {
 	// List of Tag that need to be added for the Elasticsearch domain.
 	//
 	// This member is required.
-	TagList []*types.Tag
+	TagList []types.Tag
 }
 
 type AddTagsOutput struct {

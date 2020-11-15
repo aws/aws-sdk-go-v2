@@ -31,7 +31,7 @@ type DescribePendingAggregationRequestsInput struct {
 
 	// The maximum number of evaluation results returned on each page. The default is
 	// maximum. If you specify 0, AWS Config uses the default.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
@@ -45,7 +45,7 @@ type DescribePendingAggregationRequestsOutput struct {
 	NextToken *string
 
 	// Returns a PendingAggregationRequests object.
-	PendingAggregationRequests []*types.PendingAggregationRequest
+	PendingAggregationRequests []types.PendingAggregationRequest
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

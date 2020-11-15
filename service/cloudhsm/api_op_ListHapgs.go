@@ -51,7 +51,7 @@ type ListHapgsOutput struct {
 	// The list of high-availability partition groups.
 	//
 	// This member is required.
-	HapgList []*string
+	HapgList []string
 
 	// If not null, more results are available. Pass this value to ListHapgs to
 	// retrieve the next set of items.

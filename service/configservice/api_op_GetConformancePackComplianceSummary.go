@@ -33,10 +33,10 @@ type GetConformancePackComplianceSummaryInput struct {
 	// Names of conformance packs.
 	//
 	// This member is required.
-	ConformancePackNames []*string
+	ConformancePackNames []string
 
 	// The maximum number of conformance packs returned on each page.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
@@ -46,7 +46,7 @@ type GetConformancePackComplianceSummaryInput struct {
 type GetConformancePackComplianceSummaryOutput struct {
 
 	// A list of ConformancePackComplianceSummary objects.
-	ConformancePackComplianceSummaryList []*types.ConformancePackComplianceSummary
+	ConformancePackComplianceSummaryList []types.ConformancePackComplianceSummary
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.

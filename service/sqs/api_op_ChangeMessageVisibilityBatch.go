@@ -44,7 +44,7 @@ type ChangeMessageVisibilityBatchInput struct {
 	// be changed.
 	//
 	// This member is required.
-	Entries []*types.ChangeMessageVisibilityBatchRequestEntry
+	Entries []types.ChangeMessageVisibilityBatchRequestEntry
 
 	// The URL of the Amazon SQS queue whose messages' visibility is changed. Queue
 	// URLs and names are case-sensitive.
@@ -61,12 +61,12 @@ type ChangeMessageVisibilityBatchOutput struct {
 	// A list of BatchResultErrorEntry items.
 	//
 	// This member is required.
-	Failed []*types.BatchResultErrorEntry
+	Failed []types.BatchResultErrorEntry
 
 	// A list of ChangeMessageVisibilityBatchResultEntry items.
 	//
 	// This member is required.
-	Successful []*types.ChangeMessageVisibilityBatchResultEntry
+	Successful []types.ChangeMessageVisibilityBatchResultEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -37,7 +37,7 @@ type DetachLoadBalancerTargetGroupsInput struct {
 	// target groups.
 	//
 	// This member is required.
-	TargetGroupARNs []*string
+	TargetGroupARNs []string
 }
 
 type DetachLoadBalancerTargetGroupsOutput struct {

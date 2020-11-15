@@ -469,9 +469,9 @@ func awsAwsjson11_serializeOpDocumentDescribeTableInput(v *DescribeTableInput, v
 		ok.String(*v.DbUser)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -575,9 +575,9 @@ func awsAwsjson11_serializeOpDocumentListDatabasesInput(v *ListDatabasesInput, v
 		ok.String(*v.DbUser)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -612,9 +612,9 @@ func awsAwsjson11_serializeOpDocumentListSchemasInput(v *ListSchemasInput, value
 		ok.String(*v.DbUser)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -639,9 +639,9 @@ func awsAwsjson11_serializeOpDocumentListStatementsInput(v *ListStatementsInput,
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -681,9 +681,9 @@ func awsAwsjson11_serializeOpDocumentListTablesInput(v *ListTablesInput, value s
 		ok.String(*v.DbUser)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {

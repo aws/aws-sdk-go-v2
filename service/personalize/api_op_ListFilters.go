@@ -43,7 +43,7 @@ type ListFiltersInput struct {
 type ListFiltersOutput struct {
 
 	// A list of returned filters.
-	Filters []*types.FilterSummary
+	Filters []types.FilterSummary
 
 	// A token for getting the next set of filters (if they exist).
 	NextToken *string

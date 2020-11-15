@@ -30,7 +30,7 @@ func (c *Client) ListStreams(ctx context.Context, params *ListStreamsInput, optF
 type ListStreamsInput struct {
 
 	// Set to true to return the list of streams in ascending order.
-	AscendingOrder *bool
+	AscendingOrder bool
 
 	// The maximum number of results to return at a time.
 	MaxResults *int32
@@ -45,7 +45,7 @@ type ListStreamsOutput struct {
 	NextToken *string
 
 	// A list of streams.
-	Streams []*types.StreamSummary
+	Streams []types.StreamSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

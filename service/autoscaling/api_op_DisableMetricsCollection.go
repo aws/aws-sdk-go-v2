@@ -67,7 +67,7 @@ type DisableMetricsCollectionInput struct {
 	//
 	// If you
 	// omit this parameter, all metrics are disabled.
-	Metrics []*string
+	Metrics []string
 }
 
 type DisableMetricsCollectionOutput struct {

@@ -44,7 +44,7 @@ type CreateDeploymentInput struct {
 	// md5 hash as the value. If this argument is provided, the service will generate a
 	// unique upload URL per file. Otherwise, the service will only generate a single
 	// upload URL for the zipped files.
-	FileMap map[string]*string
+	FileMap map[string]string
 }
 
 // The result structure for the create a new deployment request.
@@ -54,7 +54,7 @@ type CreateDeploymentOutput struct {
 	// contain a map of file names to upload URLs.
 	//
 	// This member is required.
-	FileUploadUrls map[string]*string
+	FileUploadUrls map[string]string
 
 	// When the fileMap argument is not provided in the request, this zipUploadUrl is
 	// returned.

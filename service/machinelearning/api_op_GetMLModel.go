@@ -39,7 +39,7 @@ type GetMLModelInput struct {
 
 	// Specifies whether the GetMLModel operation should return Recipe. If true, Recipe
 	// is returned. If false, Recipe is not returned.
-	Verbose *bool
+	Verbose bool
 }
 
 // Represents the output of a GetMLModel operation, and provides detailed
@@ -183,7 +183,7 @@ type GetMLModelOutput struct {
 	// specifying a small value, such as 1.0E-08. The value is a double that ranges
 	// from 0 to MAX_DOUBLE. The default is to not use L2 normalization. This parameter
 	// can't be used when L1 is specified. Use this parameter sparingly.
-	TrainingParameters map[string]*string
+	TrainingParameters map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

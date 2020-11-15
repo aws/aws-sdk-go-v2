@@ -49,7 +49,7 @@ type CreateLocationS3Input struct {
 	// If you are using DataSync on an AWS Outpost, specify the Amazon Resource Names
 	// (ARNs) of the DataSync agents deployed on your AWS Outpost. For more information
 	// about launching a DataSync agent on an Amazon Outpost, see outposts-agent.
-	AgentArns []*string
+	AgentArns []string
 
 	// The Amazon S3 storage class that you want to store your files in when this
 	// location is used as a task destination. For buckets in AWS Regions, the storage
@@ -68,7 +68,7 @@ type CreateLocationS3Input struct {
 	// The key-value pair that represents the tag that you want to add to the location.
 	// The value can be an empty string. We recommend using tags to name your
 	// resources.
-	Tags []*types.TagListEntry
+	Tags []types.TagListEntry
 }
 
 // CreateLocationS3Response

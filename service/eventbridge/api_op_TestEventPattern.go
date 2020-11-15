@@ -48,7 +48,7 @@ type TestEventPatternInput struct {
 type TestEventPatternOutput struct {
 
 	// Indicates whether the event matches the event pattern.
-	Result *bool
+	Result bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -378,9 +378,6 @@ func validateComputeEnvironmentOrder(v *types.ComputeEnvironmentOrder) error {
 	if v.ComputeEnvironment == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputeEnvironment"))
 	}
-	if v.Order == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Order"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -388,13 +385,13 @@ func validateComputeEnvironmentOrder(v *types.ComputeEnvironmentOrder) error {
 	}
 }
 
-func validateComputeEnvironmentOrders(v []*types.ComputeEnvironmentOrder) error {
+func validateComputeEnvironmentOrders(v []types.ComputeEnvironmentOrder) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ComputeEnvironmentOrders"}
 	for i := range v {
-		if err := validateComputeEnvironmentOrder(v[i]); err != nil {
+		if err := validateComputeEnvironmentOrder(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -419,14 +416,8 @@ func validateComputeResource(v *types.ComputeResource) error {
 	if v.InstanceTypes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceTypes"))
 	}
-	if v.MinvCpus == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MinvCpus"))
-	}
 	if v.Subnets == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
-	}
-	if v.MaxvCpus == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxvCpus"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -504,13 +495,13 @@ func validateDevice(v *types.Device) error {
 	}
 }
 
-func validateDevicesList(v []*types.Device) error {
+func validateDevicesList(v []types.Device) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DevicesList"}
 	for i := range v {
-		if err := validateDevice(v[i]); err != nil {
+		if err := validateDevice(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -536,13 +527,13 @@ func validateEvaluateOnExit(v *types.EvaluateOnExit) error {
 	}
 }
 
-func validateEvaluateOnExitList(v []*types.EvaluateOnExit) error {
+func validateEvaluateOnExitList(v []types.EvaluateOnExit) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EvaluateOnExitList"}
 	for i := range v {
-		if err := validateEvaluateOnExit(v[i]); err != nil {
+		if err := validateEvaluateOnExit(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -624,12 +615,6 @@ func validateNodeProperties(v *types.NodeProperties) error {
 			invalidParams.AddNested("NodeRangeProperties", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.NumNodes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NumNodes"))
-	}
-	if v.MainNode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MainNode"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -657,13 +642,13 @@ func validateNodePropertyOverride(v *types.NodePropertyOverride) error {
 	}
 }
 
-func validateNodePropertyOverrides(v []*types.NodePropertyOverride) error {
+func validateNodePropertyOverrides(v []types.NodePropertyOverride) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NodePropertyOverrides"}
 	for i := range v {
-		if err := validateNodePropertyOverride(v[i]); err != nil {
+		if err := validateNodePropertyOverride(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -674,13 +659,13 @@ func validateNodePropertyOverrides(v []*types.NodePropertyOverride) error {
 	}
 }
 
-func validateNodeRangeProperties(v []*types.NodeRangeProperty) error {
+func validateNodeRangeProperties(v []types.NodeRangeProperty) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NodeRangeProperties"}
 	for i := range v {
-		if err := validateNodeRangeProperty(v[i]); err != nil {
+		if err := validateNodeRangeProperty(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -729,13 +714,13 @@ func validateResourceRequirement(v *types.ResourceRequirement) error {
 	}
 }
 
-func validateResourceRequirements(v []*types.ResourceRequirement) error {
+func validateResourceRequirements(v []types.ResourceRequirement) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceRequirements"}
 	for i := range v {
-		if err := validateResourceRequirement(v[i]); err != nil {
+		if err := validateResourceRequirement(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -781,13 +766,13 @@ func validateSecret(v *types.Secret) error {
 	}
 }
 
-func validateSecretList(v []*types.Secret) error {
+func validateSecretList(v []types.Secret) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SecretList"}
 	for i := range v {
-		if err := validateSecret(v[i]); err != nil {
+		if err := validateSecret(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -803,9 +788,6 @@ func validateTmpfs(v *types.Tmpfs) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tmpfs"}
-	if v.Size == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Size"))
-	}
 	if v.ContainerPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContainerPath"))
 	}
@@ -816,13 +798,13 @@ func validateTmpfs(v *types.Tmpfs) error {
 	}
 }
 
-func validateTmpfsList(v []*types.Tmpfs) error {
+func validateTmpfsList(v []types.Tmpfs) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TmpfsList"}
 	for i := range v {
-		if err := validateTmpfs(v[i]); err != nil {
+		if err := validateTmpfs(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -838,14 +820,8 @@ func validateUlimit(v *types.Ulimit) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Ulimit"}
-	if v.SoftLimit == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SoftLimit"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.HardLimit == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HardLimit"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -854,13 +830,13 @@ func validateUlimit(v *types.Ulimit) error {
 	}
 }
 
-func validateUlimits(v []*types.Ulimit) error {
+func validateUlimits(v []types.Ulimit) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Ulimits"}
 	for i := range v {
-		if err := validateUlimit(v[i]); err != nil {
+		if err := validateUlimit(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -920,9 +896,6 @@ func validateOpCreateJobQueueInput(v *CreateJobQueueInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateJobQueueInput"}
-	if v.Priority == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
-	}
 	if v.JobQueueName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobQueueName"))
 	}

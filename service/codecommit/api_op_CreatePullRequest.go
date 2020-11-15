@@ -36,7 +36,7 @@ type CreatePullRequestInput struct {
 	// destination branch).
 	//
 	// This member is required.
-	Targets []*types.Target
+	Targets []types.Target
 
 	// The title of the pull request. This title is used to identify the pull request
 	// to other users in the repository.

@@ -72,7 +72,7 @@ type ListAttributesInput struct {
 type ListAttributesOutput struct {
 
 	// A list of attribute objects that meet the criteria of the request.
-	Attributes []*types.Attribute
+	Attributes []types.Attribute
 
 	// The nextToken value to include in a future ListAttributes request. When the
 	// results of a ListAttributes request exceed maxResults, this value can be used to

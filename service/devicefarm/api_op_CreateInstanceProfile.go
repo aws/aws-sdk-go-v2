@@ -41,7 +41,7 @@ type CreateInstanceProfileInput struct {
 	// An array of strings that specifies the list of app packages that should not be
 	// cleaned up from the device after a test run. The list of packages is considered
 	// only if you set packageCleanup to true.
-	ExcludeAppPackagesFromCleanup []*string
+	ExcludeAppPackagesFromCleanup []string
 
 	// When set to true, Device Farm removes app packages after a test run. The default
 	// value is false for private devices.

@@ -77,7 +77,7 @@ type CreateCloudFormationChangeSetInput struct {
 	// resources, we recommend that you review all permissions associated with the
 	// application before deploying. If you don't specify this parameter for an
 	// application that requires capabilities, the call will fail.
-	Capabilities []*string
+	Capabilities []string
 
 	// This property corresponds to the parameter of the same name for the AWS
 	// CloudFormation CreateChangeSet
@@ -101,16 +101,16 @@ type CreateCloudFormationChangeSetInput struct {
 	// CloudFormation CreateChangeSet
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
-	NotificationArns []*string
+	NotificationArns []string
 
 	// A list of parameter values for the parameters of the application.
-	ParameterOverrides []*types.ParameterValue
+	ParameterOverrides []types.ParameterValue
 
 	// This property corresponds to the parameter of the same name for the AWS
 	// CloudFormation CreateChangeSet
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
-	ResourceTypes []*string
+	ResourceTypes []string
 
 	// This property corresponds to the parameter of the same name for the AWS
 	// CloudFormation CreateChangeSet
@@ -126,7 +126,7 @@ type CreateCloudFormationChangeSetInput struct {
 	// CloudFormation CreateChangeSet
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The UUID returned by CreateCloudFormationTemplate.Pattern:
 	// [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}

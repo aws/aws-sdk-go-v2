@@ -60,7 +60,7 @@ type ListDomainsInput struct {
 
 	// The maximum number of results that are returned per call. Use nextPageToken to
 	// obtain further pages of results.
-	MaximumPageSize *int32
+	MaximumPageSize int32
 
 	// If NextPageToken is returned there are more results available. The value of
 	// NextPageToken is a unique pagination token for each page. Make the call again
@@ -73,7 +73,7 @@ type ListDomainsInput struct {
 
 	// When set to true, returns the results in reverse order. By default, the results
 	// are returned in ascending alphabetical order by name of the domains.
-	ReverseOrder *bool
+	ReverseOrder bool
 }
 
 // Contains a paginated collection of DomainInfo structures.
@@ -82,7 +82,7 @@ type ListDomainsOutput struct {
 	// A list of DomainInfo structures.
 	//
 	// This member is required.
-	DomainInfos []*types.DomainInfo
+	DomainInfos []types.DomainInfo
 
 	// If a NextPageToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the

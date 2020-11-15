@@ -37,7 +37,7 @@ type UntagResourceInput struct {
 	// The tag keys to use to untag a resource.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 // The response for the untag resource request.

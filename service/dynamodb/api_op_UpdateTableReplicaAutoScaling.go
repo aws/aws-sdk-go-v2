@@ -39,7 +39,7 @@ type UpdateTableReplicaAutoScalingInput struct {
 
 	// Represents the auto scaling settings of the global secondary indexes of the
 	// replica to be updated.
-	GlobalSecondaryIndexUpdates []*types.GlobalSecondaryIndexAutoScalingUpdate
+	GlobalSecondaryIndexUpdates []types.GlobalSecondaryIndexAutoScalingUpdate
 
 	// Represents the auto scaling settings to be modified for a global table or global
 	// secondary index.
@@ -47,7 +47,7 @@ type UpdateTableReplicaAutoScalingInput struct {
 
 	// Represents the auto scaling settings of replicas of the table that will be
 	// modified.
-	ReplicaUpdates []*types.ReplicaAutoScalingUpdate
+	ReplicaUpdates []types.ReplicaAutoScalingUpdate
 }
 
 type UpdateTableReplicaAutoScalingOutput struct {

@@ -55,7 +55,7 @@ type StartBulkDeploymentInput struct {
 	AmznClientToken *string
 
 	// Tag(s) to add to the new resource.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type StartBulkDeploymentOutput struct {

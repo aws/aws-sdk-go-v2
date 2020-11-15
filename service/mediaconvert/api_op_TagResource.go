@@ -40,7 +40,7 @@ type TagResourceInput struct {
 	// key-value pair or with only a key.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourceOutput struct {

@@ -51,7 +51,7 @@ type CreateEndpointGroupInput struct {
 	ListenerArn *string
 
 	// The list of endpoint objects.
-	EndpointConfigurations []*types.EndpointConfiguration
+	EndpointConfigurations []types.EndpointConfiguration
 
 	// The time—10 seconds or 30 seconds—between each health check for an endpoint. The
 	// default value is 30.
@@ -78,7 +78,7 @@ type CreateEndpointGroupInput struct {
 	// endpoints. For more information, see  Port overrides
 	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html)
 	// in the AWS Global Accelerator Developer Guide.
-	PortOverrides []*types.PortOverride
+	PortOverrides []types.PortOverride
 
 	// The number of consecutive health checks required to set the state of a healthy
 	// endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default

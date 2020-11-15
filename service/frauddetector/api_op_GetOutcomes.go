@@ -49,7 +49,7 @@ type GetOutcomesOutput struct {
 	NextToken *string
 
 	// The outcomes.
-	Outcomes []*types.Outcome
+	Outcomes []types.Outcome
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

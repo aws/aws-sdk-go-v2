@@ -57,7 +57,7 @@ type GetDetectorOutput struct {
 	FindingPublishingFrequency types.FindingPublishingFrequency
 
 	// The tags of the detector resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The last-updated timestamp for the detector.
 	UpdatedAt *string

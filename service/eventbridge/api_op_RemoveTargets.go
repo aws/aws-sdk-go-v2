@@ -38,7 +38,7 @@ type RemoveTargetsInput struct {
 	// The IDs of the targets to remove from the rule.
 	//
 	// This member is required.
-	Ids []*string
+	Ids []string
 
 	// The name of the rule.
 	//
@@ -53,16 +53,16 @@ type RemoveTargetsInput struct {
 	// that are not managed rules. You can check whether a rule is a managed rule by
 	// using DescribeRule or ListRules and checking the ManagedBy field of the
 	// response.
-	Force *bool
+	Force bool
 }
 
 type RemoveTargetsOutput struct {
 
 	// The failed target entries.
-	FailedEntries []*types.RemoveTargetsResultEntry
+	FailedEntries []types.RemoveTargetsResultEntry
 
 	// The number of failed entries.
-	FailedEntryCount *int32
+	FailedEntryCount int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

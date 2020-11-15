@@ -34,7 +34,7 @@ type ListTagsForResourceInput struct {
 	ResourceArn *string
 
 	// Maximum number of tags to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// The first tag to retrieve. This is used for pagination; see the nextToken
 	// response field.
@@ -42,7 +42,7 @@ type ListTagsForResourceInput struct {
 }
 
 type ListTagsForResourceOutput struct {
-	Tags map[string]*string
+	Tags map[string]string
 
 	// If there are more tags than maxResults, use nextToken in the request to get the
 	// next set.

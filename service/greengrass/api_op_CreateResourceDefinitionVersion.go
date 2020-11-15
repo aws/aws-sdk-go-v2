@@ -38,7 +38,7 @@ type CreateResourceDefinitionVersionInput struct {
 	AmznClientToken *string
 
 	// A list of resources.
-	Resources []*types.Resource
+	Resources []types.Resource
 }
 
 type CreateResourceDefinitionVersionOutput struct {

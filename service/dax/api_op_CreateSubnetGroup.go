@@ -37,7 +37,7 @@ type CreateSubnetGroupInput struct {
 	// A list of VPC subnet IDs for the subnet group.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// A description for the subnet group
 	Description *string

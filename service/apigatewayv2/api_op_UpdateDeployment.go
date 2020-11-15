@@ -48,7 +48,7 @@ type UpdateDeploymentInput struct {
 type UpdateDeploymentOutput struct {
 
 	// Specifies whether a deployment was automatically released.
-	AutoDeployed *bool
+	AutoDeployed bool
 
 	// The date and time when the Deployment resource was created.
 	CreatedDate *time.Time

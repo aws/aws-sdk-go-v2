@@ -74,7 +74,7 @@ type CreateResolverQueryLogConfigInput struct {
 
 	// A list of the tag keys and values that you want to associate with the query
 	// logging configuration.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateResolverQueryLogConfigOutput struct {

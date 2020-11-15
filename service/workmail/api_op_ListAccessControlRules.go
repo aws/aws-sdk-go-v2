@@ -38,7 +38,7 @@ type ListAccessControlRulesInput struct {
 type ListAccessControlRulesOutput struct {
 
 	// The access control rules.
-	Rules []*types.AccessControlRule
+	Rules []types.AccessControlRule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

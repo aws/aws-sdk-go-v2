@@ -50,7 +50,7 @@ type ListTemplatesOutput struct {
 
 	// An array the contains the name and creation time stamp for each template in your
 	// Amazon SES account.
-	TemplatesMetadata []*types.TemplateMetadata
+	TemplatesMetadata []types.TemplateMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

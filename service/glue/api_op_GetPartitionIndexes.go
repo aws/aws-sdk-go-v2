@@ -54,7 +54,7 @@ type GetPartitionIndexesOutput struct {
 	NextToken *string
 
 	// A list of index descriptors.
-	PartitionIndexDescriptorList []*types.PartitionIndexDescriptor
+	PartitionIndexDescriptorList []types.PartitionIndexDescriptor
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -87,7 +87,7 @@ type Alarm struct {
 	NotificationTriggers []AlarmState
 
 	// The period, in seconds, over which the statistic is applied.
-	Period *int32
+	Period int32
 
 	// The Lightsail resource type (e.g., Alarm).
 	ResourceType ResourceType
@@ -227,7 +227,7 @@ type AutoSnapshotDetails struct {
 
 	// An array of objects that describe the block storage disks attached to the
 	// instance when the automatic snapshot was created.
-	FromAttachedDisks []*AttachedDisk
+	FromAttachedDisks []AttachedDisk
 
 	// The status of the automatic snapshot.
 	Status AutoSnapshotStatus
@@ -488,13 +488,13 @@ type Certificate struct {
 
 	// An array of objects that describe the domain validation records of the
 	// certificate.
-	DomainValidationRecords []*DomainValidationRecord
+	DomainValidationRecords []DomainValidationRecord
 
 	// The renewal eligibility of the certificate.
 	EligibleToRenew *string
 
 	// The number of Lightsail resources that the certificate is attached to.
-	InUseResourceCount *int32
+	InUseResourceCount int32
 
 	// The timestamp when the certificate was issued.
 	IssuedAt *time.Time
@@ -580,7 +580,7 @@ type Certificate struct {
 
 	// An array of strings that specify the alternate domains (e.g., example2.com) and
 	// subdomains (e.g., blog.example.com) of the certificate.
-	SubjectAlternativeNames []*string
+	SubjectAlternativeNames []string
 
 	// The support code. Include this code in your email to support when you have
 	// questions about your Lightsail certificate. This code enables our support team
@@ -590,7 +590,7 @@ type Certificate struct {
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes an Amazon Lightsail SSL/TLS certificate.
@@ -611,7 +611,7 @@ type CertificateSummary struct {
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes a CloudFormation stack record created as a result of the create cloud
@@ -643,7 +643,7 @@ type CloudFormationStackRecord struct {
 	ResourceType ResourceType
 
 	// A list of objects describing the source of the CloudFormation stack record.
-	SourceInfo []*CloudFormationStackRecordSourceInfo
+	SourceInfo []CloudFormationStackRecordSourceInfo
 
 	// The current state of the CloudFormation stack record.
 	State RecordState
@@ -716,7 +716,7 @@ type ContactMethod struct {
 type CookieObject struct {
 
 	// The specific cookies to forward to your distribution's origin.
-	CookiesAllowList []*string
+	CookiesAllowList []string
 
 	// Specifies which cookies to forward to the distribution's origin for a cache
 	// behavior: all, none, or allow-list to forward only the cookies specified in the
@@ -738,7 +738,7 @@ type DestinationInfo struct {
 type Disk struct {
 
 	// An array of objects representing the add-ons enabled on the disk.
-	AddOns []*AddOn
+	AddOns []AddOn
 
 	// The Amazon Resource Name (ARN) of the disk.
 	Arn *string
@@ -795,7 +795,7 @@ type Disk struct {
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes a disk.
@@ -879,7 +879,7 @@ type DiskSnapshot struct {
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes a disk snapshot.
@@ -920,7 +920,7 @@ type Domain struct {
 	CreatedAt *time.Time
 
 	// An array of key-value pairs containing information about the domain entries.
-	DomainEntries []*DomainEntry
+	DomainEntries []DomainEntry
 
 	// The AWS Region and Availability Zones where the domain recordset was created.
 	Location *ResourceLocation
@@ -939,7 +939,7 @@ type Domain struct {
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes a domain recordset entry.
@@ -958,7 +958,7 @@ type DomainEntry struct {
 
 	// (Deprecated) The options for the domain entry. In releases prior to November 29,
 	// 2017, this parameter was not included in the API response. It is now deprecated.
-	Options map[string]*string
+	Options map[string]string
 
 	// The target AWS name server (e.g., ns-111.awsdns-22.com.). For Lightsail load
 	// balancers, the value looks like
@@ -1149,7 +1149,7 @@ type InputOrigin struct {
 type Instance struct {
 
 	// An array of objects representing the add-ons enabled on the instance.
-	AddOns []*AddOn
+	AddOns []AddOn
 
 	// The Amazon Resource Name (ARN) of the instance (e.g.,
 	// arn:aws:lightsail:us-east-2:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE).
@@ -1211,7 +1211,7 @@ type Instance struct {
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
-	Tags []*Tag
+	Tags []Tag
 
 	// The user name for connecting to the instance (e.g., ec2-user).
 	Username *string
@@ -1230,7 +1230,7 @@ type InstanceAccessDetails struct {
 	ExpiresAt *time.Time
 
 	// Describes the public SSH host keys or the RDP certificate.
-	HostKeys []*HostKeyAttributes
+	HostKeys []HostKeyAttributes
 
 	// The name of this Amazon Lightsail instance.
 	InstanceName *string
@@ -1326,7 +1326,7 @@ type InstanceHardware struct {
 	CpuCount *int32
 
 	// The disks attached to the instance.
-	Disks []*Disk
+	Disks []Disk
 
 	// The amount of RAM in GB on the instance (e.g., 1.0).
 	RamSizeInGb *float32
@@ -1405,7 +1405,7 @@ type InstanceNetworking struct {
 
 	// An array of key-value pairs containing information about the ports on the
 	// instance.
-	Ports []*InstancePortInfo
+	Ports []InstancePortInfo
 }
 
 // Describes information about ports for an Amazon Lightsail instance.
@@ -1426,7 +1426,7 @@ type InstancePortInfo struct {
 	// alias currently supported is lightsail-connect, which allows IP addresses of the
 	// browser-based RDP/SSH client in the Lightsail console to connect to your
 	// instance.
-	CidrListAliases []*string
+	CidrListAliases []string
 
 	// The IP address, or range of IP addresses in CIDR notation, that are allowed to
 	// connect to an instance through the ports, and the protocol. Lightsail supports
@@ -1434,7 +1434,7 @@ type InstancePortInfo struct {
 	// Inter-Domain Routing
 	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) on
 	// Wikipedia.
-	Cidrs []*string
+	Cidrs []string
 
 	// The common name of the port information.
 	CommonName *string
@@ -1449,7 +1449,7 @@ type InstancePortInfo struct {
 	// more information, see Control Messages
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
-	FromPort *int32
+	FromPort int32
 
 	// The IP protocol name. The name can be one of the following:
 	//
@@ -1489,7 +1489,7 @@ type InstancePortInfo struct {
 	// information, see Control Messages
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
-	ToPort *int32
+	ToPort int32
 }
 
 // Describes open ports on an instance, the IP addresses allowed to connect to the
@@ -1500,7 +1500,7 @@ type InstancePortState struct {
 	// alias currently supported is lightsail-connect, which allows IP addresses of the
 	// browser-based RDP/SSH client in the Lightsail console to connect to your
 	// instance.
-	CidrListAliases []*string
+	CidrListAliases []string
 
 	// The IP address, or range of IP addresses in CIDR notation, that are allowed to
 	// connect to an instance through the ports, and the protocol. Lightsail supports
@@ -1508,7 +1508,7 @@ type InstancePortState struct {
 	// Inter-Domain Routing
 	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) on
 	// Wikipedia.
-	Cidrs []*string
+	Cidrs []string
 
 	// The first port in a range of open ports on an instance. Allowed ports:
 	//
@@ -1520,7 +1520,7 @@ type InstancePortState struct {
 	// more information, see Control Messages
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
-	FromPort *int32
+	FromPort int32
 
 	// The IP protocol name. The name can be one of the following:
 	//
@@ -1564,7 +1564,7 @@ type InstancePortState struct {
 	// information, see Control Messages
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
-	ToPort *int32
+	ToPort int32
 }
 
 // Describes an instance snapshot.
@@ -1578,7 +1578,7 @@ type InstanceSnapshot struct {
 	CreatedAt *time.Time
 
 	// An array of disk objects containing information about all block storage disks.
-	FromAttachedDisks []*Disk
+	FromAttachedDisks []Disk
 
 	// The blueprint ID from which you created the snapshot (e.g., os_debian_8_3). A
 	// blueprint is a virtual private server (or instance) image used to create
@@ -1626,7 +1626,7 @@ type InstanceSnapshot struct {
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes an instance snapshot.
@@ -1640,7 +1640,7 @@ type InstanceSnapshotInfo struct {
 
 	// A list of objects describing the disks that were attached to the source
 	// instance.
-	FromDiskInfo []*DiskInfo
+	FromDiskInfo []DiskInfo
 }
 
 // Describes the virtual private server (or instance) status.
@@ -1683,7 +1683,7 @@ type KeyPair struct {
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes an Amazon Lightsail content delivery network (CDN) distribution.
@@ -1696,7 +1696,7 @@ type LightsailDistribution struct {
 	AbleToUpdateBundle *bool
 
 	// The alternate domain names of the distribution.
-	AlternativeDomainNames []*string
+	AlternativeDomainNames []string
 
 	// The Amazon Resource Name (ARN) of the distribution.
 	Arn *string
@@ -1709,7 +1709,7 @@ type LightsailDistribution struct {
 
 	// An array of objects that describe the per-path cache behavior of the
 	// distribution.
-	CacheBehaviors []*CacheBehaviorPerPath
+	CacheBehaviors []CacheBehaviorPerPath
 
 	// The name of the SSL/TLS certificate attached to the distribution, if any.
 	CertificateName *string
@@ -1757,7 +1757,7 @@ type LightsailDistribution struct {
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes the Lightsail load balancer.
@@ -1768,7 +1768,7 @@ type LoadBalancer struct {
 
 	// A string to string map of the configuration options for your load balancer.
 	// Valid values are listed below.
-	ConfigurationOptions map[string]*string
+	ConfigurationOptions map[string]string
 
 	// The date when your load balancer was created.
 	CreatedAt *time.Time
@@ -1782,7 +1782,7 @@ type LoadBalancer struct {
 
 	// An array of InstanceHealthSummary objects describing the health of the load
 	// balancer.
-	InstanceHealthSummary []*InstanceHealthSummary
+	InstanceHealthSummary []InstanceHealthSummary
 
 	// The port where the load balancer will direct traffic to your Lightsail
 	// instances. For HTTP traffic, it's port 80. For HTTPS traffic, it's port 443.
@@ -1801,7 +1801,7 @@ type LoadBalancer struct {
 
 	// An array of public port settings for your load balancer. For HTTP, use port 80.
 	// For HTTPS, use port 443.
-	PublicPorts []*int32
+	PublicPorts []int32
 
 	// The resource type (e.g., LoadBalancer.
 	ResourceType ResourceType
@@ -1817,12 +1817,12 @@ type LoadBalancer struct {
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
-	Tags []*Tag
+	Tags []Tag
 
 	// An array of LoadBalancerTlsCertificateSummary objects that provide additional
 	// information about the SSL/TLS certificates. For example, if true, the
 	// certificate is attached to the load balancer.
-	TlsCertificateSummaries []*LoadBalancerTlsCertificateSummary
+	TlsCertificateSummaries []LoadBalancerTlsCertificateSummary
 }
 
 // Describes a load balancer SSL/TLS certificate. TLS is just an updated, more
@@ -1840,7 +1840,7 @@ type LoadBalancerTlsCertificate struct {
 
 	// An array of LoadBalancerTlsCertificateDomainValidationRecord objects describing
 	// the records.
-	DomainValidationRecords []*LoadBalancerTlsCertificateDomainValidationRecord
+	DomainValidationRecords []LoadBalancerTlsCertificateDomainValidationRecord
 
 	// The validation failure reason, if any, of the certificate. The following failure
 	// reasons are possible:
@@ -1970,7 +1970,7 @@ type LoadBalancerTlsCertificate struct {
 
 	// An array of strings that specify the alternate domains (e.g., example2.com) and
 	// subdomains (e.g., blog.example.com) for the certificate.
-	SubjectAlternativeNames []*string
+	SubjectAlternativeNames []string
 
 	// The support code. Include this code in your email to support when you have
 	// questions about your Lightsail load balancer or SSL/TLS certificate. This code
@@ -1980,7 +1980,7 @@ type LoadBalancerTlsCertificate struct {
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Contains information about the domain names on an SSL/TLS certificate that you
@@ -2040,7 +2040,7 @@ type LoadBalancerTlsCertificateRenewalSummary struct {
 	// certificate, as it pertains to Lightsail's managed renewal. This is different
 	// from the initial validation that occurs as a result of the RequestCertificate
 	// request.
-	DomainValidationOptions []*LoadBalancerTlsCertificateDomainValidationOption
+	DomainValidationOptions []LoadBalancerTlsCertificateDomainValidationOption
 
 	// The renewal status of the certificate. The following renewal status are
 	// possible:
@@ -2254,7 +2254,7 @@ type PortInfo struct {
 	// alias currently supported is lightsail-connect, which allows IP addresses of the
 	// browser-based RDP/SSH client in the Lightsail console to connect to your
 	// instance.
-	CidrListAliases []*string
+	CidrListAliases []string
 
 	// The IP address, or range of IP addresses in CIDR notation, that are allowed to
 	// connect to an instance through the ports, and the protocol. Lightsail supports
@@ -2270,7 +2270,7 @@ type PortInfo struct {
 	// notation, see Classless Inter-Domain Routing
 	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) on
 	// Wikipedia.
-	Cidrs []*string
+	Cidrs []string
 
 	// The first port in a range of open ports on an instance. Allowed ports:
 	//
@@ -2282,7 +2282,7 @@ type PortInfo struct {
 	// more information, see Control Messages
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
-	FromPort *int32
+	FromPort int32
 
 	// The IP protocol name. The name can be one of the following:
 	//
@@ -2322,7 +2322,7 @@ type PortInfo struct {
 	// information, see Control Messages
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
-	ToPort *int32
+	ToPort int32
 }
 
 // Describes the query string parameters that an Amazon Lightsail content delivery
@@ -2338,14 +2338,14 @@ type QueryStringObject struct {
 	// distribution will cache content based on the specified query strings. If the
 	// option parameter is true, then your distribution forwards all query strings,
 	// regardless of what you specify using the queryStringsAllowList parameter.
-	QueryStringsAllowList []*string
+	QueryStringsAllowList []string
 }
 
 // Describes the AWS Region.
 type Region struct {
 
 	// The Availability Zones. Follows the format us-east-2a (case-sensitive).
-	AvailabilityZones []*AvailabilityZone
+	AvailabilityZones []AvailabilityZone
 
 	// The continent code (e.g., NA, meaning North America).
 	ContinentCode *string
@@ -2362,7 +2362,7 @@ type Region struct {
 
 	// The Availability Zones for databases. Follows the format us-east-2a
 	// (case-sensitive).
-	RelationalDatabaseAvailabilityZones []*AvailabilityZone
+	RelationalDatabaseAvailabilityZones []AvailabilityZone
 }
 
 // Describes a database.
@@ -2414,7 +2414,7 @@ type RelationalDatabase struct {
 	ParameterApplyStatus *string
 
 	// Describes the pending maintenance actions for the database.
-	PendingMaintenanceActions []*PendingMaintenanceAction
+	PendingMaintenanceActions []PendingMaintenanceAction
 
 	// Describes pending database value modifications.
 	PendingModifiedValues *PendingModifiedRelationalDatabaseValues
@@ -2456,7 +2456,7 @@ type RelationalDatabase struct {
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes a database image, or blueprint. A blueprint describes the major engine
@@ -2532,7 +2532,7 @@ type RelationalDatabaseEvent struct {
 	CreatedAt *time.Time
 
 	// The category that the database event belongs to.
-	EventCategories []*string
+	EventCategories []string
 
 	// The message of the database event.
 	Message *string
@@ -2635,7 +2635,7 @@ type RelationalDatabaseSnapshot struct {
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes the status of a SSL/TLS certificate renewal managed by Amazon
@@ -2644,7 +2644,7 @@ type RenewalSummary struct {
 
 	// An array of objects that describe the domain validation records of the
 	// certificate.
-	DomainValidationRecords []*DomainValidationRecord
+	DomainValidationRecords []DomainValidationRecord
 
 	// The renewal status of the certificate. The following renewal status are
 	// possible:

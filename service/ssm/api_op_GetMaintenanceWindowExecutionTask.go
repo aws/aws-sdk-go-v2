@@ -56,7 +56,7 @@ type GetMaintenanceWindowExecutionTaskOutput struct {
 	MaxErrors *string
 
 	// The priority of the task.
-	Priority *int32
+	Priority int32
 
 	// The role that was assumed when running the task.
 	ServiceRole *string
@@ -84,7 +84,7 @@ type GetMaintenanceWindowExecutionTaskOutput struct {
 	// window task types, see MaintenanceWindowTaskInvocationParameters. The map has
 	// the following format: Key: string, between 1 and 255 characters Value: an array
 	// of strings, each string is between 1 and 255 characters
-	TaskParameters []map[string]*types.MaintenanceWindowTaskParameterValueExpression
+	TaskParameters []map[string]types.MaintenanceWindowTaskParameterValueExpression
 
 	// The type of task that was run.
 	Type types.MaintenanceWindowTaskType

@@ -44,10 +44,10 @@ type DescribeInputOutput struct {
 
 	// A list of channel IDs that that input is attached to (currently an input can
 	// only be attached to one channel).
-	AttachedChannels []*string
+	AttachedChannels []string
 
 	// A list of the destinations of the input (PUSH-type).
-	Destinations []*types.InputDestination
+	Destinations []types.InputDestination
 
 	// The generated ID of the input (unique for user account, immutable).
 	Id *string
@@ -62,7 +62,7 @@ type DescribeInputOutput struct {
 	InputClass types.InputClass
 
 	// Settings for the input devices.
-	InputDevices []*types.InputDeviceSettings
+	InputDevices []types.InputDeviceSettings
 
 	// Certain pull input sources can be dynamic, meaning that they can have their
 	// URL's dynamically changes during input switch actions. Presently, this
@@ -70,7 +70,7 @@ type DescribeInputOutput struct {
 	InputSourceType types.InputSourceType
 
 	// A list of MediaConnect Flows for this input.
-	MediaConnectFlows []*types.MediaConnectFlow
+	MediaConnectFlows []types.MediaConnectFlow
 
 	// The user-assigned name (This is a mutable value).
 	Name *string
@@ -80,16 +80,16 @@ type DescribeInputOutput struct {
 	RoleArn *string
 
 	// A list of IDs for all the Input Security Groups attached to the input.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// A list of the sources of the input (PULL-type).
-	Sources []*types.InputSource
+	Sources []types.InputSource
 
 	// Placeholder documentation for InputState
 	State types.InputState
 
 	// A collection of key-value pairs.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Placeholder documentation for InputType
 	Type types.InputType

@@ -45,7 +45,7 @@ type ListGraphsInput struct {
 type ListGraphsOutput struct {
 
 	// A list of behavior graphs that the account is a master for.
-	GraphList []*types.Graph
+	GraphList []types.Graph
 
 	// If there are more behavior graphs remaining in the results, then this is the
 	// pagination token to use to request the next page of behavior graphs.

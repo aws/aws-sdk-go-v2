@@ -33,7 +33,7 @@ type GrantFlowEntitlementsInput struct {
 	// The list of entitlements that you want to grant.
 	//
 	// This member is required.
-	Entitlements []*types.GrantEntitlementRequest
+	Entitlements []types.GrantEntitlementRequest
 
 	// The flow that you want to grant entitlements on.
 	//
@@ -44,7 +44,7 @@ type GrantFlowEntitlementsInput struct {
 type GrantFlowEntitlementsOutput struct {
 
 	// The entitlements that were just granted.
-	Entitlements []*types.Entitlement
+	Entitlements []types.Entitlement
 
 	// The ARN of the flow that these entitlements were granted to.
 	FlowArn *string

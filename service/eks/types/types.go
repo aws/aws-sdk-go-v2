@@ -40,7 +40,7 @@ type Cluster struct {
 	CreatedAt *time.Time
 
 	// The encryption configuration for the cluster.
-	EncryptionConfig []*EncryptionConfig
+	EncryptionConfig []EncryptionConfig
 
 	// The endpoint for your Kubernetes API server.
 	Endpoint *string
@@ -83,7 +83,7 @@ type Cluster struct {
 	// organization. Each tag consists of a key and an optional value, both of which
 	// you define. Cluster tags do not propagate to any other resources associated with
 	// the cluster.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The Kubernetes server version for the cluster.
 	Version *string
@@ -97,7 +97,7 @@ type EncryptionConfig struct {
 	Provider *Provider
 
 	// Specifies the resources to be encrypted. The only supported value is "secrets".
-	Resources []*string
+	Resources []string
 }
 
 // An object representing an error when an asynchronous operation fails.
@@ -132,7 +132,7 @@ type ErrorDetail struct {
 	ErrorMessage *string
 
 	// An optional field that contains the resource IDs associated with the error.
-	ResourceIds []*string
+	ResourceIds []string
 }
 
 // An object representing an AWS Fargate profile.
@@ -158,20 +158,20 @@ type FargateProfile struct {
 	PodExecutionRoleArn *string
 
 	// The selectors to match for pods to use this Fargate profile.
-	Selectors []*FargateProfileSelector
+	Selectors []FargateProfileSelector
 
 	// The current status of the Fargate profile.
 	Status FargateProfileStatus
 
 	// The IDs of subnets to launch pods into.
-	Subnets []*string
+	Subnets []string
 
 	// The metadata applied to the Fargate profile to assist with categorization and
 	// organization. Each tag consists of a key and an optional value, both of which
 	// you define. Fargate profile tags do not propagate to any other resources
 	// associated with the Fargate profile, such as the pods that are scheduled with
 	// it.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // An object representing an AWS Fargate profile selector.
@@ -179,7 +179,7 @@ type FargateProfileSelector struct {
 
 	// The Kubernetes labels that the selector should match. A pod must contain all of
 	// the labels that are specified in the selector for it to be considered a match.
-	Labels map[string]*string
+	Labels map[string]string
 
 	// The Kubernetes namespace that the selector should match.
 	Namespace *string
@@ -267,7 +267,7 @@ type Issue struct {
 	Message *string
 
 	// The AWS resources that are afflicted by this issue.
-	ResourceIds []*string
+	ResourceIds []string
 }
 
 // The Kubernetes network configuration for the cluster.
@@ -339,7 +339,7 @@ type LaunchTemplateSpecification struct {
 type Logging struct {
 
 	// The cluster control plane logging configuration for your cluster.
-	ClusterLogging []*LogSetup
+	ClusterLogging []LogSetup
 }
 
 // An object representing the enabled or disabled Kubernetes control plane logs for
@@ -382,12 +382,12 @@ type Nodegroup struct {
 	// If the node group wasn't deployed with a launch template, then this is the
 	// instance type that is associated with the node group. If the node group was
 	// deployed with a launch template, then this is null.
-	InstanceTypes []*string
+	InstanceTypes []string
 
 	// The Kubernetes labels applied to the nodes in the node group. Only labels that
 	// are applied with the Amazon EKS API are shown here. There may be other
 	// Kubernetes labels applied to the nodes in this group.
-	Labels map[string]*string
+	Labels map[string]string
 
 	// If a launch template was used to create the node group, then this is the launch
 	// template that was used.
@@ -432,13 +432,13 @@ type Nodegroup struct {
 
 	// The subnets that were specified for the Auto Scaling group that is associated
 	// with your node group.
-	Subnets []*string
+	Subnets []string
 
 	// The metadata applied to the node group to assist with categorization and
 	// organization. Each tag consists of a key and an optional value, both of which
 	// you define. Node group tags do not propagate to any other resources associated
 	// with the node group, such as the Amazon EC2 instances or subnets.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The Kubernetes version of the managed node group.
 	Version *string
@@ -448,7 +448,7 @@ type Nodegroup struct {
 type NodegroupHealth struct {
 
 	// Any issues that are associated with the node group.
-	Issues []*Issue
+	Issues []Issue
 }
 
 // An object representing the resources associated with the node group, such as
@@ -456,7 +456,7 @@ type NodegroupHealth struct {
 type NodegroupResources struct {
 
 	// The Auto Scaling groups associated with the node group.
-	AutoScalingGroups []*AutoScalingGroup
+	AutoScalingGroups []AutoScalingGroup
 
 	// The remote access security group associated with the node group. This security
 	// group controls SSH access to the worker nodes.
@@ -517,7 +517,7 @@ type RemoteAccessConfig struct {
 	// to the internet (0.0.0.0/0). For more information, see Security Groups for Your
 	// VPC (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html)
 	// in the Amazon Virtual Private Cloud User Guide.
-	SourceSecurityGroups []*string
+	SourceSecurityGroups []string
 }
 
 // An object representing an asynchronous update.
@@ -527,13 +527,13 @@ type Update struct {
 	CreatedAt *time.Time
 
 	// Any errors associated with a Failed update.
-	Errors []*ErrorDetail
+	Errors []ErrorDetail
 
 	// A UUID that is used to track the update.
 	Id *string
 
 	// A key-value map that contains the parameters associated with the update.
-	Params []*UpdateParam
+	Params []UpdateParam
 
 	// The current status of the update.
 	Status UpdateStatus
@@ -546,10 +546,10 @@ type Update struct {
 type UpdateLabelsPayload struct {
 
 	// Kubernetes labels to be added or updated.
-	AddOrUpdateLabels map[string]*string
+	AddOrUpdateLabels map[string]string
 
 	// Kubernetes labels to be removed.
-	RemoveLabels []*string
+	RemoveLabels []string
 }
 
 // An object representing the details of an update request.
@@ -594,18 +594,18 @@ type VpcConfigRequest struct {
 	// more information, see Amazon EKS Cluster Endpoint Access Control
 	// (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html) in the
 	// Amazon EKS User Guide .
-	PublicAccessCidrs []*string
+	PublicAccessCidrs []string
 
 	// Specify one or more security groups for the cross-account elastic network
 	// interfaces that Amazon EKS creates to use to allow communication between your
 	// worker nodes and the Kubernetes control plane. If you don't specify a security
 	// group, the default security group for your VPC is used.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates
 	// cross-account elastic network interfaces in these subnets to allow communication
 	// between your worker nodes and the Kubernetes control plane.
-	SubnetIds []*string
+	SubnetIds []string
 }
 
 // An object representing an Amazon EKS cluster VPC configuration response.
@@ -626,13 +626,13 @@ type VpcConfigResponse struct {
 	// Endpoint Access Control
 	// (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html) in the
 	// Amazon EKS User Guide .
-	EndpointPrivateAccess *bool
+	EndpointPrivateAccess bool
 
 	// This parameter indicates whether the Amazon EKS public API server endpoint is
 	// enabled. If the Amazon EKS public API server endpoint is disabled, your
 	// cluster's Kubernetes API server can only receive requests that originate from
 	// within the cluster VPC.
-	EndpointPublicAccess *bool
+	EndpointPublicAccess bool
 
 	// The CIDR blocks that are allowed access to your cluster's public Kubernetes API
 	// server endpoint. Communication to the endpoint from addresses outside of the
@@ -642,15 +642,15 @@ type VpcConfigResponse struct {
 	// information, see Amazon EKS Cluster Endpoint Access Control
 	// (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html) in the
 	// Amazon EKS User Guide .
-	PublicAccessCidrs []*string
+	PublicAccessCidrs []string
 
 	// The security groups associated with the cross-account elastic network interfaces
 	// that are used to allow communication between your worker nodes and the
 	// Kubernetes control plane.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The subnets associated with your cluster.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The VPC associated with your cluster.
 	VpcId *string

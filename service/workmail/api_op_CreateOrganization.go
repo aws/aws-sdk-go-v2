@@ -59,12 +59,12 @@ type CreateOrganizationInput struct {
 	DirectoryId *string
 
 	// The email domains to associate with the organization.
-	Domains []*types.Domain
+	Domains []types.Domain
 
 	// When true, allows organization interoperability between Amazon WorkMail and
 	// Microsoft Exchange. Can only be set to true if an AD Connector directory ID is
 	// included in the request.
-	EnableInteroperability *bool
+	EnableInteroperability bool
 
 	// The Amazon Resource Name (ARN) of a customer managed master key from AWS KMS.
 	KmsKeyArn *string

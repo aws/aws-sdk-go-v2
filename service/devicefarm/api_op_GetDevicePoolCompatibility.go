@@ -95,10 +95,10 @@ type GetDevicePoolCompatibilityInput struct {
 type GetDevicePoolCompatibilityOutput struct {
 
 	// Information about compatible devices.
-	CompatibleDevices []*types.DevicePoolCompatibilityResult
+	CompatibleDevices []types.DevicePoolCompatibilityResult
 
 	// Information about incompatible devices.
-	IncompatibleDevices []*types.DevicePoolCompatibilityResult
+	IncompatibleDevices []types.DevicePoolCompatibilityResult
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

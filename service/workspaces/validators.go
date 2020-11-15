@@ -1003,13 +1003,13 @@ func validateRebootRequest(v *types.RebootRequest) error {
 	}
 }
 
-func validateRebootWorkspaceRequests(v []*types.RebootRequest) error {
+func validateRebootWorkspaceRequests(v []types.RebootRequest) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RebootWorkspaceRequests"}
 	for i := range v {
-		if err := validateRebootRequest(v[i]); err != nil {
+		if err := validateRebootRequest(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1035,13 +1035,13 @@ func validateRebuildRequest(v *types.RebuildRequest) error {
 	}
 }
 
-func validateRebuildWorkspaceRequests(v []*types.RebuildRequest) error {
+func validateRebuildWorkspaceRequests(v []types.RebuildRequest) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RebuildWorkspaceRequests"}
 	for i := range v {
-		if err := validateRebuildRequest(v[i]); err != nil {
+		if err := validateRebuildRequest(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1067,13 +1067,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1099,13 +1099,13 @@ func validateTerminateRequest(v *types.TerminateRequest) error {
 	}
 }
 
-func validateTerminateWorkspaceRequests(v []*types.TerminateRequest) error {
+func validateTerminateWorkspaceRequests(v []types.TerminateRequest) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TerminateWorkspaceRequests"}
 	for i := range v {
-		if err := validateTerminateRequest(v[i]); err != nil {
+		if err := validateTerminateRequest(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1142,13 +1142,13 @@ func validateWorkspaceRequest(v *types.WorkspaceRequest) error {
 	}
 }
 
-func validateWorkspaceRequestList(v []*types.WorkspaceRequest) error {
+func validateWorkspaceRequestList(v []types.WorkspaceRequest) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "WorkspaceRequestList"}
 	for i := range v {
-		if err := validateWorkspaceRequest(v[i]); err != nil {
+		if err := validateWorkspaceRequest(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

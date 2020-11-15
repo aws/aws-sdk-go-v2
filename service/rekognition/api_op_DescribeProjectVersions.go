@@ -54,7 +54,7 @@ type DescribeProjectVersionsInput struct {
 	// ARN. For example, my-model.2020-01-21T09.10.15 is the version name in the
 	// following ARN.
 	// arn:aws:rekognition:us-east-1:123456789012:project/getting-started/version/my-model.2020-01-21T09.10.15/1234567890123.
-	VersionNames []*string
+	VersionNames []string
 }
 
 type DescribeProjectVersionsOutput struct {
@@ -66,7 +66,7 @@ type DescribeProjectVersionsOutput struct {
 
 	// A list of model descriptions. The list is sorted by the creation date and time
 	// of the model versions, latest to earliest.
-	ProjectVersionDescriptions []*types.ProjectVersionDescription
+	ProjectVersionDescriptions []types.ProjectVersionDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

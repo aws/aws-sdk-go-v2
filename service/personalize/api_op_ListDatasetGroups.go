@@ -42,7 +42,7 @@ type ListDatasetGroupsInput struct {
 type ListDatasetGroupsOutput struct {
 
 	// The list of your dataset groups.
-	DatasetGroups []*types.DatasetGroupSummary
+	DatasetGroups []types.DatasetGroupSummary
 
 	// A token for getting the next set of dataset groups (if they exist).
 	NextToken *string

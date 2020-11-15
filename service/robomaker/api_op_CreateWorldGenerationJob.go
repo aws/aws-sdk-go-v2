@@ -48,7 +48,7 @@ type CreateWorldGenerationJobInput struct {
 
 	// A map that contains tag keys and tag values that are attached to the world
 	// generator job.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateWorldGenerationJobOutput struct {
@@ -82,7 +82,7 @@ type CreateWorldGenerationJobOutput struct {
 
 	// A map that contains tag keys and tag values that are attached to the world
 	// generator job.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The Amazon Resource Name (arn) of the world template.
 	Template *string

@@ -66,7 +66,7 @@ type DescribeAlarmHistoryInput struct {
 type DescribeAlarmHistoryOutput struct {
 
 	// The alarm histories, in JSON format.
-	AlarmHistoryItems []*types.AlarmHistoryItem
+	AlarmHistoryItems []types.AlarmHistoryItem
 
 	// The token that marks the start of the next batch of returned results.
 	NextToken *string

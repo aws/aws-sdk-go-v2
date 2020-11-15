@@ -61,7 +61,7 @@ type RefreshCacheInput struct {
 	// default is ["/"]. The default refreshes objects and folders at the root of the
 	// Amazon S3 bucket. If Recursive is set to true, the entire S3 bucket that the
 	// file share has access to is refreshed.
-	FolderList []*string
+	FolderList []string
 
 	// A value that specifies whether to recursively refresh folders in the cache. The
 	// refresh includes folders that were in the cache the last time the gateway listed

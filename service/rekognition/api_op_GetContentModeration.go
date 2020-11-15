@@ -82,7 +82,7 @@ type GetContentModerationOutput struct {
 	JobStatus types.VideoJobStatus
 
 	// The detected unsafe content labels and the time(s) they were detected.
-	ModerationLabels []*types.ContentModerationDetection
+	ModerationLabels []types.ContentModerationDetection
 
 	// Version number of the moderation detection model that was used to detect unsafe
 	// content.

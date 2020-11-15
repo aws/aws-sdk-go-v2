@@ -36,7 +36,7 @@ type IncreaseReplicaCountInput struct {
 	// ApplyImmediately=False is not currently supported.
 	//
 	// This member is required.
-	ApplyImmediately *bool
+	ApplyImmediately bool
 
 	// The id of the replication group to which you want to add replica nodes.
 	//
@@ -53,7 +53,7 @@ type IncreaseReplicaCountInput struct {
 	// A list of ConfigureShard objects that can be used to configure each shard in a
 	// Redis (cluster mode enabled) replication group. The ConfigureShard has three
 	// members: NewReplicaCount, NodeGroupId, and PreferredAvailabilityZones.
-	ReplicaConfiguration []*types.ConfigureShard
+	ReplicaConfiguration []types.ConfigureShard
 }
 
 type IncreaseReplicaCountOutput struct {

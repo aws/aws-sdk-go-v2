@@ -48,7 +48,7 @@ type GetReplicationJobsOutput struct {
 	NextToken *string
 
 	// Information about the replication jobs.
-	ReplicationJobList []*types.ReplicationJob
+	ReplicationJobList []types.ReplicationJob
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -47,10 +47,10 @@ type SearchProvisionedProductsInput struct {
 	// provisioningArtifact, type, status, tags, userArn, userArnSession,
 	// lastProvisioningRecordId, lastSuccessfulProvisioningRecordId, productName, and
 	// provisioningArtifactName. Example: "SearchQuery":["status:AVAILABLE"]
-	Filters map[string][]*string
+	Filters map[string][]string
 
 	// The maximum number of items to return with this call.
-	PageSize *int32
+	PageSize int32
 
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
@@ -71,10 +71,10 @@ type SearchProvisionedProductsOutput struct {
 	NextPageToken *string
 
 	// Information about the provisioned products.
-	ProvisionedProducts []*types.ProvisionedProductAttribute
+	ProvisionedProducts []types.ProvisionedProductAttribute
 
 	// The number of provisioned products found.
-	TotalResultsCount *int32
+	TotalResultsCount int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

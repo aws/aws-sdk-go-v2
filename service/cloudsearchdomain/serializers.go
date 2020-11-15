@@ -82,8 +82,8 @@ func awsRestjson1_serializeOpHttpBindingsSearchInput(v *SearchInput, encoder *ht
 		encoder.SetQuery("highlight").String(*v.Highlight)
 	}
 
-	if v.Partial != nil {
-		encoder.SetQuery("partial").Boolean(*v.Partial)
+	if v.Partial {
+		encoder.SetQuery("partial").Boolean(v.Partial)
 	}
 
 	if v.Query != nil {
@@ -102,16 +102,16 @@ func awsRestjson1_serializeOpHttpBindingsSearchInput(v *SearchInput, encoder *ht
 		encoder.SetQuery("return").String(*v.Return)
 	}
 
-	if v.Size != nil {
-		encoder.SetQuery("size").Long(*v.Size)
+	if v.Size != 0 {
+		encoder.SetQuery("size").Long(v.Size)
 	}
 
 	if v.Sort != nil {
 		encoder.SetQuery("sort").String(*v.Sort)
 	}
 
-	if v.Start != nil {
-		encoder.SetQuery("start").Long(*v.Start)
+	if v.Start != 0 {
+		encoder.SetQuery("start").Long(v.Start)
 	}
 
 	if v.Stats != nil {
@@ -176,8 +176,8 @@ func awsRestjson1_serializeOpHttpBindingsSuggestInput(v *SuggestInput, encoder *
 		encoder.SetQuery("q").String(*v.Query)
 	}
 
-	if v.Size != nil {
-		encoder.SetQuery("size").Long(*v.Size)
+	if v.Size != 0 {
+		encoder.SetQuery("size").Long(v.Size)
 	}
 
 	if v.Suggester != nil {

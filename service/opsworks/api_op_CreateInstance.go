@@ -50,7 +50,7 @@ type CreateInstanceInput struct {
 	// An array that contains the instance's layer IDs.
 	//
 	// This member is required.
-	LayerIds []*string
+	LayerIds []string
 
 	// The stack ID.
 	//
@@ -99,7 +99,7 @@ type CreateInstanceInput struct {
 	// devices. For more information, see Block Device Mapping
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html).
 	// Note that block device mappings are not supported for custom AMIs.
-	BlockDeviceMappings []*types.BlockDeviceMapping
+	BlockDeviceMappings []types.BlockDeviceMapping
 
 	// Whether to create an Amazon EBS-optimized instance.
 	EbsOptimized *bool

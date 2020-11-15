@@ -144,7 +144,7 @@ type CreateMountTargetInput struct {
 
 	// Up to five VPC security group IDs, of the form sg-xxxxxxxx. These must be for
 	// the same VPC as subnet specified.
-	SecurityGroups []*string
+	SecurityGroups []string
 }
 
 // Provides a description of a mount target.

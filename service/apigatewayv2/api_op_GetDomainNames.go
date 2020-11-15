@@ -40,7 +40,7 @@ type GetDomainNamesInput struct {
 type GetDomainNamesOutput struct {
 
 	// The elements from this collection.
-	Items []*types.DomainName
+	Items []types.DomainName
 
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.

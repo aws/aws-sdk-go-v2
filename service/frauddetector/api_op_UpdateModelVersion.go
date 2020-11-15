@@ -52,7 +52,7 @@ type UpdateModelVersionInput struct {
 	ExternalEventsDetail *types.ExternalEventsDetail
 
 	// A collection of key and value pairs.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type UpdateModelVersionOutput struct {

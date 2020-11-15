@@ -847,13 +847,13 @@ func validateDatasetAction(v *types.DatasetAction) error {
 	}
 }
 
-func validateDatasetActions(v []*types.DatasetAction) error {
+func validateDatasetActions(v []types.DatasetAction) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DatasetActions"}
 	for i := range v {
-		if err := validateDatasetAction(v[i]); err != nil {
+		if err := validateDatasetAction(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -905,13 +905,13 @@ func validateDatasetContentDeliveryRule(v *types.DatasetContentDeliveryRule) err
 	}
 }
 
-func validateDatasetContentDeliveryRules(v []*types.DatasetContentDeliveryRule) error {
+func validateDatasetContentDeliveryRules(v []types.DatasetContentDeliveryRule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DatasetContentDeliveryRules"}
 	for i := range v {
-		if err := validateDatasetContentDeliveryRule(v[i]); err != nil {
+		if err := validateDatasetContentDeliveryRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -954,13 +954,13 @@ func validateDatasetTrigger(v *types.DatasetTrigger) error {
 	}
 }
 
-func validateDatasetTriggers(v []*types.DatasetTrigger) error {
+func validateDatasetTriggers(v []types.DatasetTrigger) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DatasetTriggers"}
 	for i := range v {
-		if err := validateDatasetTrigger(v[i]); err != nil {
+		if err := validateDatasetTrigger(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1155,9 +1155,6 @@ func validateLoggingOptions(v *types.LoggingOptions) error {
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
-	if v.Enabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
-	}
 	if len(v.Level) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Level"))
 	}
@@ -1207,13 +1204,13 @@ func validateMessage(v *types.Message) error {
 	}
 }
 
-func validateMessages(v []*types.Message) error {
+func validateMessages(v []types.Message) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Messages"}
 	for i := range v {
-		if err := validateMessage(v[i]); err != nil {
+		if err := validateMessage(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1239,13 +1236,13 @@ func validateOutputFileUriValue(v *types.OutputFileUriValue) error {
 	}
 }
 
-func validatePipelineActivities(v []*types.PipelineActivity) error {
+func validatePipelineActivities(v []types.PipelineActivity) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PipelineActivities"}
 	for i := range v {
-		if err := validatePipelineActivity(v[i]); err != nil {
+		if err := validatePipelineActivity(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1335,13 +1332,13 @@ func validateQueryFilter(v *types.QueryFilter) error {
 	}
 }
 
-func validateQueryFilters(v []*types.QueryFilter) error {
+func validateQueryFilters(v []types.QueryFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "QueryFilters"}
 	for i := range v {
-		if err := validateQueryFilter(v[i]); err != nil {
+		if err := validateQueryFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1377,9 +1374,6 @@ func validateResourceConfiguration(v *types.ResourceConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceConfiguration"}
 	if len(v.ComputeType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputeType"))
-	}
-	if v.VolumeSizeInGB == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VolumeSizeInGB"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1470,13 +1464,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1527,13 +1521,13 @@ func validateVariable(v *types.Variable) error {
 	}
 }
 
-func validateVariables(v []*types.Variable) error {
+func validateVariables(v []types.Variable) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Variables"}
 	for i := range v {
-		if err := validateVariable(v[i]); err != nil {
+		if err := validateVariable(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

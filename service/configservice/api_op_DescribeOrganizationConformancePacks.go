@@ -37,14 +37,14 @@ type DescribeOrganizationConformancePacksInput struct {
 
 	// The maximum number of organization config packs returned on each page. If you do
 	// no specify a number, AWS Config uses the default. The default is 100.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
 
 	// The name that you assign to an organization conformance pack.
-	OrganizationConformancePackNames []*string
+	OrganizationConformancePackNames []string
 }
 
 type DescribeOrganizationConformancePacksOutput struct {
@@ -54,7 +54,7 @@ type DescribeOrganizationConformancePacksOutput struct {
 	NextToken *string
 
 	// Returns a list of OrganizationConformancePacks objects.
-	OrganizationConformancePacks []*types.OrganizationConformancePack
+	OrganizationConformancePacks []types.OrganizationConformancePack
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

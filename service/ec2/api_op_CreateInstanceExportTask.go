@@ -47,7 +47,7 @@ type CreateInstanceExportTaskInput struct {
 	ExportToS3Task *types.ExportToS3TaskSpecification
 
 	// The tags to apply to the instance export task during creation.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 
 	// The target virtualization environment.
 	TargetEnvironment types.ExportEnvironment

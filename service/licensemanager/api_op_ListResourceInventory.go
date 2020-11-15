@@ -48,7 +48,7 @@ type ListResourceInventoryInput struct {
 	//
 	// * resource_id - The ID of the resource.
 	// Logical operators are EQUALS | NOT_EQUALS.
-	Filters []*types.InventoryFilter
+	Filters []types.InventoryFilter
 
 	// Maximum number of results to return in a single call.
 	MaxResults *int32
@@ -63,7 +63,7 @@ type ListResourceInventoryOutput struct {
 	NextToken *string
 
 	// Information about the resources.
-	ResourceInventoryList []*types.ResourceInventory
+	ResourceInventoryList []types.ResourceInventory
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

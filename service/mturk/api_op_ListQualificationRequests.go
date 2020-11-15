@@ -57,7 +57,7 @@ type ListQualificationRequestsOutput struct {
 
 	// The Qualification request. The response includes one QualificationRequest
 	// element for each Qualification request returned by the query.
-	QualificationRequests []*types.QualificationRequest
+	QualificationRequests []types.QualificationRequest
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

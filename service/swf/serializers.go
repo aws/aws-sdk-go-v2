@@ -1940,17 +1940,13 @@ func awsAwsjson10_serializeDocumentDecision(v *types.Decision, value smithyjson.
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDecisionList(v []*types.Decision, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentDecisionList(v []types.Decision, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson10_serializeDocumentDecision(v[i], av); err != nil {
+		if err := awsAwsjson10_serializeDocumentDecision(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2059,32 +2055,24 @@ func awsAwsjson10_serializeDocumentResourceTag(v *types.ResourceTag, value smith
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentResourceTagKeyList(v []*string, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentResourceTagKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentResourceTagList(v []*types.ResourceTag, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentResourceTagList(v []types.ResourceTag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson10_serializeDocumentResourceTag(v[i], av); err != nil {
+		if err := awsAwsjson10_serializeDocumentResourceTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2318,17 +2306,13 @@ func awsAwsjson10_serializeDocumentTagFilter(v *types.TagFilter, value smithyjso
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentTagList(v []*string, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentTagList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2675,9 +2659,9 @@ func awsAwsjson10_serializeOpDocumentGetWorkflowExecutionHistoryInput(v *GetWork
 		}
 	}
 
-	if v.MaximumPageSize != nil {
+	if v.MaximumPageSize != 0 {
 		ok := object.Key("maximumPageSize")
-		ok.Integer(*v.MaximumPageSize)
+		ok.Integer(v.MaximumPageSize)
 	}
 
 	if v.NextPageToken != nil {
@@ -2685,9 +2669,9 @@ func awsAwsjson10_serializeOpDocumentGetWorkflowExecutionHistoryInput(v *GetWork
 		ok.String(*v.NextPageToken)
 	}
 
-	if v.ReverseOrder != nil {
+	if v.ReverseOrder {
 		ok := object.Key("reverseOrder")
-		ok.Boolean(*v.ReverseOrder)
+		ok.Boolean(v.ReverseOrder)
 	}
 
 	return nil
@@ -2702,9 +2686,9 @@ func awsAwsjson10_serializeOpDocumentListActivityTypesInput(v *ListActivityTypes
 		ok.String(*v.Domain)
 	}
 
-	if v.MaximumPageSize != nil {
+	if v.MaximumPageSize != 0 {
 		ok := object.Key("maximumPageSize")
-		ok.Integer(*v.MaximumPageSize)
+		ok.Integer(v.MaximumPageSize)
 	}
 
 	if v.Name != nil {
@@ -2722,9 +2706,9 @@ func awsAwsjson10_serializeOpDocumentListActivityTypesInput(v *ListActivityTypes
 		ok.String(string(v.RegistrationStatus))
 	}
 
-	if v.ReverseOrder != nil {
+	if v.ReverseOrder {
 		ok := object.Key("reverseOrder")
-		ok.Boolean(*v.ReverseOrder)
+		ok.Boolean(v.ReverseOrder)
 	}
 
 	return nil
@@ -2760,9 +2744,9 @@ func awsAwsjson10_serializeOpDocumentListClosedWorkflowExecutionsInput(v *ListCl
 		}
 	}
 
-	if v.MaximumPageSize != nil {
+	if v.MaximumPageSize != 0 {
 		ok := object.Key("maximumPageSize")
-		ok.Integer(*v.MaximumPageSize)
+		ok.Integer(v.MaximumPageSize)
 	}
 
 	if v.NextPageToken != nil {
@@ -2770,9 +2754,9 @@ func awsAwsjson10_serializeOpDocumentListClosedWorkflowExecutionsInput(v *ListCl
 		ok.String(*v.NextPageToken)
 	}
 
-	if v.ReverseOrder != nil {
+	if v.ReverseOrder {
 		ok := object.Key("reverseOrder")
-		ok.Boolean(*v.ReverseOrder)
+		ok.Boolean(v.ReverseOrder)
 	}
 
 	if v.StartTimeFilter != nil {
@@ -2803,9 +2787,9 @@ func awsAwsjson10_serializeOpDocumentListDomainsInput(v *ListDomainsInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaximumPageSize != nil {
+	if v.MaximumPageSize != 0 {
 		ok := object.Key("maximumPageSize")
-		ok.Integer(*v.MaximumPageSize)
+		ok.Integer(v.MaximumPageSize)
 	}
 
 	if v.NextPageToken != nil {
@@ -2818,9 +2802,9 @@ func awsAwsjson10_serializeOpDocumentListDomainsInput(v *ListDomainsInput, value
 		ok.String(string(v.RegistrationStatus))
 	}
 
-	if v.ReverseOrder != nil {
+	if v.ReverseOrder {
 		ok := object.Key("reverseOrder")
-		ok.Boolean(*v.ReverseOrder)
+		ok.Boolean(v.ReverseOrder)
 	}
 
 	return nil
@@ -2842,9 +2826,9 @@ func awsAwsjson10_serializeOpDocumentListOpenWorkflowExecutionsInput(v *ListOpen
 		}
 	}
 
-	if v.MaximumPageSize != nil {
+	if v.MaximumPageSize != 0 {
 		ok := object.Key("maximumPageSize")
-		ok.Integer(*v.MaximumPageSize)
+		ok.Integer(v.MaximumPageSize)
 	}
 
 	if v.NextPageToken != nil {
@@ -2852,9 +2836,9 @@ func awsAwsjson10_serializeOpDocumentListOpenWorkflowExecutionsInput(v *ListOpen
 		ok.String(*v.NextPageToken)
 	}
 
-	if v.ReverseOrder != nil {
+	if v.ReverseOrder {
 		ok := object.Key("reverseOrder")
-		ok.Boolean(*v.ReverseOrder)
+		ok.Boolean(v.ReverseOrder)
 	}
 
 	if v.StartTimeFilter != nil {
@@ -2902,9 +2886,9 @@ func awsAwsjson10_serializeOpDocumentListWorkflowTypesInput(v *ListWorkflowTypes
 		ok.String(*v.Domain)
 	}
 
-	if v.MaximumPageSize != nil {
+	if v.MaximumPageSize != 0 {
 		ok := object.Key("maximumPageSize")
-		ok.Integer(*v.MaximumPageSize)
+		ok.Integer(v.MaximumPageSize)
 	}
 
 	if v.Name != nil {
@@ -2922,9 +2906,9 @@ func awsAwsjson10_serializeOpDocumentListWorkflowTypesInput(v *ListWorkflowTypes
 		ok.String(string(v.RegistrationStatus))
 	}
 
-	if v.ReverseOrder != nil {
+	if v.ReverseOrder {
 		ok := object.Key("reverseOrder")
-		ok.Boolean(*v.ReverseOrder)
+		ok.Boolean(v.ReverseOrder)
 	}
 
 	return nil
@@ -2968,9 +2952,9 @@ func awsAwsjson10_serializeOpDocumentPollForDecisionTaskInput(v *PollForDecision
 		ok.String(*v.Identity)
 	}
 
-	if v.MaximumPageSize != nil {
+	if v.MaximumPageSize != 0 {
 		ok := object.Key("maximumPageSize")
-		ok.Integer(*v.MaximumPageSize)
+		ok.Integer(v.MaximumPageSize)
 	}
 
 	if v.NextPageToken != nil {
@@ -2978,9 +2962,9 @@ func awsAwsjson10_serializeOpDocumentPollForDecisionTaskInput(v *PollForDecision
 		ok.String(*v.NextPageToken)
 	}
 
-	if v.ReverseOrder != nil {
+	if v.ReverseOrder {
 		ok := object.Key("reverseOrder")
-		ok.Boolean(*v.ReverseOrder)
+		ok.Boolean(v.ReverseOrder)
 	}
 
 	if v.TaskList != nil {

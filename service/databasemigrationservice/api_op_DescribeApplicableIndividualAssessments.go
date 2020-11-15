@@ -87,7 +87,7 @@ type DescribeApplicableIndividualAssessmentsOutput struct {
 	// premigration assessment runs
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html)
 	// in the AWS Database Migration Service User Guide.
-	IndividualAssessmentNames []*string
+	IndividualAssessmentNames []string
 
 	// Pagination token returned for you to pass to a subsequent request. If you pass
 	// this token as the Marker value in a subsequent request, the response includes

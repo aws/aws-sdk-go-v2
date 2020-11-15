@@ -53,7 +53,7 @@ type DescribeLocationFsxWindowsOutput struct {
 
 	// The Amazon Resource Names (ARNs) of the security groups that are configured for
 	// the FSx for Windows file system.
-	SecurityGroupArns []*string
+	SecurityGroupArns []string
 
 	// The user who has the permissions to access files and folders in the FSx for
 	// Windows file system.

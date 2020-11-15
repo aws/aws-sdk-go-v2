@@ -103,7 +103,7 @@ type GetTopicAttributesOutput struct {
 	// attributes of the message). (Optional) To override the generated value, you can
 	// specify a value for the the MessageDeduplicationId parameter for the Publish
 	// action.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

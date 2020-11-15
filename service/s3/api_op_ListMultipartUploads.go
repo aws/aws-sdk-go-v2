@@ -120,7 +120,7 @@ type ListMultipartUploadsInput struct {
 	// Sets the maximum number of multipart uploads, from 1 to 1,000, to return in the
 	// response body. 1,000 is the maximum number of uploads that can be returned in a
 	// response.
-	MaxUploads *int32
+	MaxUploads int32
 
 	// Lists in-progress uploads only for those keys that begin with the specified
 	// prefix. You can use prefixes to separate a bucket into different grouping of
@@ -144,7 +144,7 @@ type ListMultipartUploadsOutput struct {
 	// If you specify a delimiter in the request, then the result returns each distinct
 	// key prefix containing the delimiter in a CommonPrefixes element. The distinct
 	// key prefixes are returned in the Prefix child element.
-	CommonPrefixes []*types.CommonPrefix
+	CommonPrefixes []types.CommonPrefix
 
 	// Contains the delimiter you specified in the request. If you don't specify a
 	// delimiter in your request, this element is absent from the response.
@@ -160,14 +160,14 @@ type ListMultipartUploadsOutput struct {
 	// of true indicates that the list was truncated. The list can be truncated if the
 	// number of multipart uploads exceeds the limit allowed or specified by max
 	// uploads.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// The key at or after which the listing began.
 	KeyMarker *string
 
 	// Maximum number of multipart uploads that could have been included in the
 	// response.
-	MaxUploads *int32
+	MaxUploads int32
 
 	// When a list is truncated, this element specifies the value that should be used
 	// for the key-marker request parameter in a subsequent request.
@@ -186,7 +186,7 @@ type ListMultipartUploadsOutput struct {
 
 	// Container for elements related to a particular multipart upload. A response can
 	// contain zero or more Upload elements.
-	Uploads []*types.MultipartUpload
+	Uploads []types.MultipartUpload
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

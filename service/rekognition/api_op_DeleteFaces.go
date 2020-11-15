@@ -38,13 +38,13 @@ type DeleteFacesInput struct {
 	// An array of face IDs to delete.
 	//
 	// This member is required.
-	FaceIds []*string
+	FaceIds []string
 }
 
 type DeleteFacesOutput struct {
 
 	// An array of strings (face IDs) of the faces that were deleted.
-	DeletedFaces []*string
+	DeletedFaces []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

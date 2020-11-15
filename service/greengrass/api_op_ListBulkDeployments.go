@@ -40,7 +40,7 @@ type ListBulkDeploymentsInput struct {
 type ListBulkDeploymentsOutput struct {
 
 	// A list of bulk deployments.
-	BulkDeployments []*types.BulkDeployment
+	BulkDeployments []types.BulkDeployment
 
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.

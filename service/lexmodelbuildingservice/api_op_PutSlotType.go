@@ -77,7 +77,7 @@ type PutSlotTypeInput struct {
 	// passed to the function. If you are not using a Lambda function you can choose to
 	// return the value that the user entered or the first value in the resolution list
 	// as the slot value. The valueSelectionStrategy field indicates the option to use.
-	EnumerationValues []*types.EnumerationValue
+	EnumerationValues []types.EnumerationValue
 
 	// The built-in slot type used as the parent of the slot type. When you define a
 	// parent slot type, the new slot type has all of the same configuration as the
@@ -86,7 +86,7 @@ type PutSlotTypeInput struct {
 
 	// Configuration information that extends the parent built-in slot type. The
 	// configuration is added to the settings for the parent slot type.
-	SlotTypeConfigurations []*types.SlotTypeConfiguration
+	SlotTypeConfigurations []types.SlotTypeConfiguration
 
 	// Determines the slot resolution strategy that Amazon Lex uses to return slot type
 	// values. The field can be set to one of the following values:
@@ -122,7 +122,7 @@ type PutSlotTypeOutput struct {
 
 	// A list of EnumerationValue objects that defines the values that the slot type
 	// can take.
-	EnumerationValues []*types.EnumerationValue
+	EnumerationValues []types.EnumerationValue
 
 	// The date that the slot type was updated. When you create a slot type, the
 	// creation date and last update date are the same.
@@ -135,7 +135,7 @@ type PutSlotTypeOutput struct {
 	ParentSlotTypeSignature *string
 
 	// Configuration information that extends the parent built-in slot type.
-	SlotTypeConfigurations []*types.SlotTypeConfiguration
+	SlotTypeConfigurations []types.SlotTypeConfiguration
 
 	// The slot resolution strategy that Amazon Lex uses to determine the value of the
 	// slot. For more information, see PutSlotType.

@@ -37,7 +37,7 @@ type ResultRow struct {
 	// List of all the data cells in a row.
 	//
 	// This member is required.
-	DataItems []*DataItem
+	DataItems []DataItem
 
 	// The ID for a particular row.
 	RowId *string
@@ -60,14 +60,14 @@ type ResultSet struct {
 	// assigned person will still be in the third element.
 	//
 	// This member is required.
-	Headers []*ColumnMetadata
+	Headers []ColumnMetadata
 
 	// List of rows returned by the request. Each row has a row Id and a list of data
 	// cells in that row. The data cells will be present in the same order as they are
 	// defined in the header.
 	//
 	// This member is required.
-	Rows []*ResultRow
+	Rows []ResultRow
 }
 
 // The input variables to the app to be used by the InvokeScreenAutomation action

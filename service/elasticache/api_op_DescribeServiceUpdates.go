@@ -54,7 +54,7 @@ type DescribeServiceUpdatesOutput struct {
 	Marker *string
 
 	// A list of service updates
-	ServiceUpdates []*types.ServiceUpdate
+	ServiceUpdates []types.ServiceUpdate
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -52,19 +52,19 @@ type MyUnionMemberEnumValue struct {
 func (*MyUnionMemberEnumValue) isMyUnion() {}
 
 type MyUnionMemberListValue struct {
-	Value []*string
+	Value []string
 }
 
 func (*MyUnionMemberListValue) isMyUnion() {}
 
 type MyUnionMemberMapValue struct {
-	Value map[string]*string
+	Value map[string]string
 }
 
 func (*MyUnionMemberMapValue) isMyUnion() {}
 
 type MyUnionMemberStructureValue struct {
-	Value *GreetingStruct
+	Value GreetingStruct
 }
 
 func (*MyUnionMemberStructureValue) isMyUnion() {}

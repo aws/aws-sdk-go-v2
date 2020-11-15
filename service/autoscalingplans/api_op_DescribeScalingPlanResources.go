@@ -54,7 +54,7 @@ type DescribeScalingPlanResourcesOutput struct {
 	NextToken *string
 
 	// Information about the scalable resources.
-	ScalingPlanResources []*types.ScalingPlanResource
+	ScalingPlanResources []types.ScalingPlanResource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

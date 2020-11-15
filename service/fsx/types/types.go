@@ -144,7 +144,7 @@ type Backup struct {
 	ResourceARN *string
 
 	// Tags associated with a particular file system.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // If backup creation fails, this structure contains the details of that failure.
@@ -536,7 +536,7 @@ type DataRepositoryTask struct {
 	// task, the paths specify which data to export to the linked data repository.
 	// (Default) If Paths is not specified, Amazon FSx uses the file system root
 	// directory.
-	Paths []*string
+	Paths []string
 
 	// Provides a report detailing the data repository task results of the files
 	// processed that match the criteria specified in the report Scope parameter. FSx
@@ -561,7 +561,7 @@ type DataRepositoryTask struct {
 	Status *DataRepositoryTaskStatus
 
 	// A list of Tag values, with a maximum of 50 elements.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Provides information about why a data repository task failed. Only populated
@@ -592,7 +592,7 @@ type DataRepositoryTaskFilter struct {
 
 	// Use Values to include the specific file system IDs and task lifecycle states for
 	// the filters you are using.
-	Values []*string
+	Values []string
 }
 
 // Provides the task status showing a running total of the total number of files to
@@ -623,7 +623,7 @@ type DeleteFileSystemLustreConfiguration struct {
 	// to the final backup. If you have set the file system property CopyTagsToBackups
 	// to true, and you specify one or more FinalBackupTags when deleting a file
 	// system, Amazon FSx will not copy any existing file system tags to the backup.
-	FinalBackupTags []*Tag
+	FinalBackupTags []Tag
 
 	// Set SkipFinalBackup to false if you want to take a final backup of the file
 	// system you are deleting. By default, Amazon FSx will not take a final backup on
@@ -639,7 +639,7 @@ type DeleteFileSystemLustreResponse struct {
 	FinalBackupId *string
 
 	// The set of tags applied to the final backup.
-	FinalBackupTags []*Tag
+	FinalBackupTags []Tag
 }
 
 // The configuration object for the Microsoft Windows file system used in the
@@ -647,7 +647,7 @@ type DeleteFileSystemLustreResponse struct {
 type DeleteFileSystemWindowsConfiguration struct {
 
 	// A set of tags for your final backup.
-	FinalBackupTags []*Tag
+	FinalBackupTags []Tag
 
 	// By default, Amazon FSx for Windows takes a final backup on your behalf when the
 	// DeleteFileSystem operation is invoked. Doing this helps protect you from data
@@ -664,7 +664,7 @@ type DeleteFileSystemWindowsResponse struct {
 	FinalBackupId *string
 
 	// The set of tags applied to the final backup.
-	FinalBackupTags []*Tag
+	FinalBackupTags []Tag
 }
 
 // A description of a specific Amazon FSx file system.
@@ -673,7 +673,7 @@ type FileSystem struct {
 	// A list of administrative actions for the file system that are in process or
 	// waiting to be processed. Administrative actions describe changes to the Windows
 	// file system that you have initiated using the UpdateFileSystem action.
-	AdministrativeActions []*AdministrativeAction
+	AdministrativeActions []AdministrativeAction
 
 	// The time that the file system was created, in seconds (since
 	// 1970-01-01T00:00:00Z), also known as Unix time.
@@ -736,7 +736,7 @@ type FileSystem struct {
 	// Amazon EC2 User Guide. For an Amazon FSx for Windows File Server file system,
 	// you can have one network interface ID. For an Amazon FSx for Lustre file system,
 	// you can have more than one.
-	NetworkInterfaceIds []*string
+	NetworkInterfaceIds []string
 
 	// The AWS account that created the file system. If the file system was created by
 	// an AWS Identity and Access Management (IAM) user, the AWS account to which the
@@ -762,13 +762,13 @@ type FileSystem struct {
 	// file systems, this is the ID of the subnet that contains the endpoint for the
 	// file system. For MULTI_AZ_1 Windows file systems, the endpoint for the file
 	// system is available in the PreferredSubnetID.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The tags to associate with the file system. For more information, see Tagging
 	// Your Amazon EC2 Resources
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the
 	// Amazon EC2 User Guide.
-	Tags []*Tag
+	Tags []Tag
 
 	// The ID of the primary VPC for the file system.
 	VpcId *string
@@ -794,7 +794,7 @@ type Filter struct {
 
 	// The values of the filter. These are all the values for any of the applied
 	// filters.
-	Values []*string
+	Values []string
 }
 
 // The configuration for the Amazon FSx for Lustre file system.
@@ -866,7 +866,7 @@ type SelfManagedActiveDirectoryAttributes struct {
 
 	// A list of up to two IP addresses of DNS servers or domain controllers in the
 	// self-managed AD directory.
-	DnsIps []*string
+	DnsIps []string
 
 	// The fully qualified domain name of the self-managed AD directory.
 	DomainName *string
@@ -904,7 +904,7 @@ type SelfManagedActiveDirectoryConfiguration struct {
 	// 192.168.255.255 (192.168/16 prefix)
 	//
 	// This member is required.
-	DnsIps []*string
+	DnsIps []string
 
 	// The fully qualified domain name of the self-managed AD directory, such as
 	// corp.example.com.
@@ -952,7 +952,7 @@ type SelfManagedActiveDirectoryConfigurationUpdates struct {
 
 	// A list of up to two IP addresses of DNS servers or domain controllers in the
 	// self-managed AD directory.
-	DnsIps []*string
+	DnsIps []string
 
 	// The password for the service account on your self-managed AD domain that Amazon
 	// FSx will use to join to your AD domain.

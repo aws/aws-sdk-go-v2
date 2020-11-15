@@ -52,7 +52,7 @@ type ListNetworksOutput struct {
 
 	// An array of NetworkSummary objects that contain configuration properties for
 	// each network.
-	Networks []*types.NetworkSummary
+	Networks []types.NetworkSummary
 
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string

@@ -40,7 +40,7 @@ type ListThingsInThingGroupInput struct {
 	NextToken *string
 
 	// When true, list things in this thing group and in all child groups as well.
-	Recursive *bool
+	Recursive bool
 }
 
 type ListThingsInThingGroupOutput struct {
@@ -50,7 +50,7 @@ type ListThingsInThingGroupOutput struct {
 	NextToken *string
 
 	// The things in the specified thing group.
-	Things []*string
+	Things []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

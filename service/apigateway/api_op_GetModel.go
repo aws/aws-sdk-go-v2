@@ -42,7 +42,7 @@ type GetModelInput struct {
 	// A query parameter of a Boolean value to resolve (true) all external model
 	// references and returns a flattened model schema or not (false) The default is
 	// false.
-	Flatten *bool
+	Flatten bool
 }
 
 // Represents the data structure of a method's request or response payload. A

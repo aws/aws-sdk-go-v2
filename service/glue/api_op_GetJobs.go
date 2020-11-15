@@ -39,7 +39,7 @@ type GetJobsInput struct {
 type GetJobsOutput struct {
 
 	// A list of job definitions.
-	Jobs []*types.Job
+	Jobs []types.Job
 
 	// A continuation token, if not all job definitions have yet been returned.
 	NextToken *string

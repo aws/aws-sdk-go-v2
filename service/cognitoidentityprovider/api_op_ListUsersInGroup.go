@@ -55,7 +55,7 @@ type ListUsersInGroupOutput struct {
 	NextToken *string
 
 	// The users returned in the request to list users.
-	Users []*types.UserType
+	Users []types.UserType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -79,7 +79,7 @@ type ListTypeVersionsOutput struct {
 
 	// A list of TypeVersionSummary structures that contain information about the
 	// specified type's versions.
-	TypeVersionSummaries []*types.TypeVersionSummary
+	TypeVersionSummaries []types.TypeVersionSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -71,7 +71,7 @@ type GetDataSetOutput struct {
 	SourceId *string
 
 	// The tags for the data set.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The date and time that the data set was last updated, in ISO 8601 format.
 	UpdatedAt *time.Time

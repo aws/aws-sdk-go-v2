@@ -53,7 +53,7 @@ type ListPartnerEventSourceAccountsOutput struct {
 	NextToken *string
 
 	// The list of partner event sources returned by the operation.
-	PartnerEventSourceAccounts []*types.PartnerEventSourceAccount
+	PartnerEventSourceAccounts []types.PartnerEventSourceAccount
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

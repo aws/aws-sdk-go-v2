@@ -48,7 +48,7 @@ type DescribeExportTasksInput struct {
 	//
 	// * status -
 	// The status of the export task. Must be lowercase, for example, complete.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeExportTasks request.
 	// If you specify this parameter, the response includes only records beyond the
@@ -69,7 +69,7 @@ type DescribeExportTasksInput struct {
 type DescribeExportTasksOutput struct {
 
 	// Information about an export of a snapshot to Amazon S3.
-	ExportTasks []*types.ExportTask
+	ExportTasks []types.ExportTask
 
 	// A pagination token that can be used in a later DescribeExportTasks request. A
 	// marker is used for pagination to identify the location to begin output for the

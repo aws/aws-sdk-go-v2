@@ -40,11 +40,11 @@ type ListInventoryEntriesInput struct {
 	TypeName *string
 
 	// One or more filters. Use a filter to return a more specific list of results.
-	Filters []*types.InventoryFilter
+	Filters []types.InventoryFilter
 
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
@@ -57,7 +57,7 @@ type ListInventoryEntriesOutput struct {
 	CaptureTime *string
 
 	// A list of inventory items on the instance(s).
-	Entries []map[string]*string
+	Entries []map[string]string
 
 	// The instance ID targeted by the request to query inventory information.
 	InstanceId *string

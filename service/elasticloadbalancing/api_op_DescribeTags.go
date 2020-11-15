@@ -33,14 +33,14 @@ type DescribeTagsInput struct {
 	// The names of the load balancers.
 	//
 	// This member is required.
-	LoadBalancerNames []*string
+	LoadBalancerNames []string
 }
 
 // Contains the output for DescribeTags.
 type DescribeTagsOutput struct {
 
 	// Information about the tags.
-	TagDescriptions []*types.TagDescription
+	TagDescriptions []types.TagDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

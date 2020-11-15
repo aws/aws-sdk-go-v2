@@ -45,7 +45,7 @@ type DetectDominantLanguageOutput struct {
 	// confidence that Amazon Comprehend has in the accuracy of its inference. For more
 	// information about RFC 5646, see Tags for Identifying Languages
 	// (https://tools.ietf.org/html/rfc5646) on the IETF Tools web site.
-	Languages []*types.DominantLanguage
+	Languages []types.DominantLanguage
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -61,7 +61,7 @@ type DescribeVolumeStatusInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The filters.
 	//
@@ -101,7 +101,7 @@ type DescribeVolumeStatusInput struct {
 	//
 	// * volume-status.status - The
 	// status of the volume (ok | impaired | warning | insufficient-data).
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of volume results returned by DescribeVolumeStatus in
 	// paginated output. When this parameter is used, the request only returns
@@ -111,7 +111,7 @@ type DescribeVolumeStatusInput struct {
 	// MaxResults is given a value larger than 1000, only 1000 results are returned. If
 	// this parameter is not used, then DescribeVolumeStatus returns all results. You
 	// cannot specify this parameter and the volume IDs parameter in the same request.
-	MaxResults *int32
+	MaxResults int32
 
 	// The NextToken value to include in a future DescribeVolumeStatus request. When
 	// the results of the request exceed MaxResults, this value can be used to retrieve
@@ -120,7 +120,7 @@ type DescribeVolumeStatusInput struct {
 	NextToken *string
 
 	// The IDs of the volumes. Default: Describes all your volumes.
-	VolumeIds []*string
+	VolumeIds []string
 }
 
 type DescribeVolumeStatusOutput struct {
@@ -130,7 +130,7 @@ type DescribeVolumeStatusOutput struct {
 	NextToken *string
 
 	// Information about the status of the volumes.
-	VolumeStatuses []*types.VolumeStatusItem
+	VolumeStatuses []types.VolumeStatusItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

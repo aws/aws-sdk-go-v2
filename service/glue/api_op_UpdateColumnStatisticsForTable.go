@@ -33,7 +33,7 @@ type UpdateColumnStatisticsForTableInput struct {
 	// A list of the column statistics.
 	//
 	// This member is required.
-	ColumnStatisticsList []*types.ColumnStatistics
+	ColumnStatisticsList []types.ColumnStatistics
 
 	// The name of the catalog database where the partitions reside.
 	//
@@ -53,7 +53,7 @@ type UpdateColumnStatisticsForTableInput struct {
 type UpdateColumnStatisticsForTableOutput struct {
 
 	// List of ColumnStatisticsErrors.
-	Errors []*types.ColumnStatisticsError
+	Errors []types.ColumnStatisticsError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

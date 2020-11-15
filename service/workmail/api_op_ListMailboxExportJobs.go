@@ -45,7 +45,7 @@ type ListMailboxExportJobsInput struct {
 type ListMailboxExportJobsOutput struct {
 
 	// The mailbox export job details.
-	Jobs []*types.MailboxExportJob
+	Jobs []types.MailboxExportJob
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string

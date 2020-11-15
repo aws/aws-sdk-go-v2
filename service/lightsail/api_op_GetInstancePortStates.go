@@ -41,7 +41,7 @@ type GetInstancePortStatesOutput struct {
 
 	// An array of objects that describe the firewall port states for the specified
 	// instance.
-	PortStates []*types.InstancePortState
+	PortStates []types.InstancePortState
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

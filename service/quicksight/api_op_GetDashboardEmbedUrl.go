@@ -66,7 +66,7 @@ type GetDashboardEmbedUrlInput struct {
 
 	// Remove the reset button on the embedded dashboard. The default is FALSE, which
 	// enables the reset button.
-	ResetDisabled *bool
+	ResetDisabled bool
 
 	// How many minutes the session is valid. The session lifetime must be 15-600
 	// minutes.
@@ -74,7 +74,7 @@ type GetDashboardEmbedUrlInput struct {
 
 	// Remove the undo/redo button on the embedded dashboard. The default is FALSE,
 	// which enables the undo/redo button.
-	UndoRedoDisabled *bool
+	UndoRedoDisabled bool
 
 	// The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT
 	// identity type. You can use this for any Amazon QuickSight users in your account
@@ -106,7 +106,7 @@ type GetDashboardEmbedUrlOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

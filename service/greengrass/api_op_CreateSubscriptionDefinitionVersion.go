@@ -38,7 +38,7 @@ type CreateSubscriptionDefinitionVersionInput struct {
 	AmznClientToken *string
 
 	// A list of subscriptions.
-	Subscriptions []*types.Subscription
+	Subscriptions []types.Subscription
 }
 
 type CreateSubscriptionDefinitionVersionOutput struct {

@@ -48,7 +48,7 @@ type ListTagsOutput struct {
 	NextToken *string
 
 	// A list of tags currently associated with the DAX cluster.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

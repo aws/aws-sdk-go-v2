@@ -61,10 +61,10 @@ type GetMLTransformOutput struct {
 	GlueVersion *string
 
 	// A list of AWS Glue table definitions used by the transform.
-	InputRecordTables []*types.GlueTable
+	InputRecordTables []types.GlueTable
 
 	// The number of labels available for this transform.
-	LabelCount *int32
+	LabelCount int32
 
 	// The date and time when the transform was last modified.
 	LastModifiedOn *time.Time
@@ -98,7 +98,7 @@ type GetMLTransformOutput struct {
 
 	// The Map object that represents the schema that this transform accepts. Has an
 	// upper bound of 100 columns.
-	Schema []*types.SchemaColumn
+	Schema []types.SchemaColumn
 
 	// The last known status of the transform (to indicate whether it can be used or
 	// not). One of "NOT_READY", "READY", or "DELETING".

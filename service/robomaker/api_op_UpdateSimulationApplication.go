@@ -48,7 +48,7 @@ type UpdateSimulationApplicationInput struct {
 	// The sources of the simulation application.
 	//
 	// This member is required.
-	Sources []*types.SourceConfig
+	Sources []types.SourceConfig
 
 	// The revision id for the robot application.
 	CurrentRevisionId *string
@@ -82,7 +82,7 @@ type UpdateSimulationApplicationOutput struct {
 	SimulationSoftwareSuite *types.SimulationSoftwareSuite
 
 	// The sources of the simulation application.
-	Sources []*types.Source
+	Sources []types.Source
 
 	// The version of the robot application.
 	Version *string

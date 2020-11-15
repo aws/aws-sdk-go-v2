@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -343,7 +344,7 @@ func awsAwsjson11_deserializeDocumentDataPoint(v **types.DataPoint, value interf
 				if !ok {
 					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
 				}
-				sv.Timestamp = &jtv
+				sv.Timestamp = ptr.String(jtv)
 			}
 
 		case "Value":
@@ -356,7 +357,7 @@ func awsAwsjson11_deserializeDocumentDataPoint(v **types.DataPoint, value interf
 				if err != nil {
 					return err
 				}
-				sv.Value = &f64
+				sv.Value = ptr.Float64(f64)
 			}
 
 		default:
@@ -432,7 +433,7 @@ func awsAwsjson11_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -472,7 +473,7 @@ func awsAwsjson11_deserializeDocumentInvalidNextTokenException(v **types.Invalid
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -512,7 +513,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -524,7 +525,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentPredictions(v *map[string][]*types.DataPoint, value interface{}) error {
+func awsAwsjson11_deserializeDocumentPredictions(v *map[string][]types.DataPoint, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -537,18 +538,20 @@ func awsAwsjson11_deserializeDocumentPredictions(v *map[string][]*types.DataPoin
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var mv map[string][]*types.DataPoint
+	var mv map[string][]types.DataPoint
 	if *v == nil {
-		mv = map[string][]*types.DataPoint{}
+		mv = map[string][]types.DataPoint{}
 	} else {
 		mv = *v
 	}
 
 	for key, value := range shape {
-		var parsedVal []*types.DataPoint
-		if err := awsAwsjson11_deserializeDocumentTimeSeries(&parsedVal, value); err != nil {
+		var parsedVal []types.DataPoint
+		mapVar := parsedVal
+		if err := awsAwsjson11_deserializeDocumentTimeSeries(&mapVar, value); err != nil {
 			return err
 		}
+		parsedVal = mapVar
 		mv[key] = parsedVal
 
 	}
@@ -584,7 +587,7 @@ func awsAwsjson11_deserializeDocumentResourceInUseException(v **types.ResourceIn
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -624,7 +627,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -636,7 +639,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTimeSeries(v *[]*types.DataPoint, value interface{}) error {
+func awsAwsjson11_deserializeDocumentTimeSeries(v *[]types.DataPoint, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -649,18 +652,20 @@ func awsAwsjson11_deserializeDocumentTimeSeries(v *[]*types.DataPoint, value int
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.DataPoint
+	var cv []types.DataPoint
 	if *v == nil {
-		cv = []*types.DataPoint{}
+		cv = []types.DataPoint{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.DataPoint
-		if err := awsAwsjson11_deserializeDocumentDataPoint(&col, value); err != nil {
+		var col types.DataPoint
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentDataPoint(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}

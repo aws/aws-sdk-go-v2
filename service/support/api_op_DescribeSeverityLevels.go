@@ -51,7 +51,7 @@ type DescribeSeverityLevelsOutput struct {
 
 	// The available severity levels for the support case. Available severity levels
 	// are defined by your service level agreement with AWS.
-	SeverityLevels []*types.SeverityLevel
+	SeverityLevels []types.SeverityLevel
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

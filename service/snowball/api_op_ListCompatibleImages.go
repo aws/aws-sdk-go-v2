@@ -47,7 +47,7 @@ type ListCompatibleImagesOutput struct {
 
 	// A JSON-formatted object that describes a compatible AMI, including the ID and
 	// name for a Snow device AMI.
-	CompatibleImages []*types.CompatibleImage
+	CompatibleImages []types.CompatibleImage
 
 	// Because HTTP requests are stateless, this is the starting point for your next
 	// list of returned images.

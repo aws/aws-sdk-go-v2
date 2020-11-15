@@ -28,7 +28,7 @@ type ApiCache struct {
 
 	// At rest encryption flag for cache. This setting cannot be updated after
 	// creation.
-	AtRestEncryptionEnabled *bool
+	AtRestEncryptionEnabled bool
 
 	// The cache instance status.
 	//
@@ -48,10 +48,10 @@ type ApiCache struct {
 
 	// Transit encryption flag when connecting to cache. This setting cannot be updated
 	// after creation.
-	TransitEncryptionEnabled *bool
+	TransitEncryptionEnabled bool
 
 	// TTL in seconds for cache entries. Valid values are between 1 and 3600 seconds.
-	Ttl *int64
+	Ttl int64
 
 	// The cache instance type. Valid values are
 	//
@@ -148,14 +148,14 @@ type ApiKey struct {
 
 	// The time after which the API key is deleted. The date is represented as seconds
 	// since the epoch, rounded down to the nearest hour.
-	Deletes *int64
+	Deletes int64
 
 	// A description of the purpose of the API key.
 	Description *string
 
 	// The time after which the API key expires. The date is represented as seconds
 	// since the epoch, rounded down to the nearest hour.
-	Expires *int64
+	Expires int64
 
 	// The API key ID.
 	Id *string
@@ -192,11 +192,11 @@ type CachingConfig struct {
 	// The caching keys for a resolver that has caching enabled. Valid values are
 	// entries from the $context.arguments, $context.source, and $context.identity
 	// maps.
-	CachingKeys []*string
+	CachingKeys []string
 
 	// The TTL in seconds for a resolver that has caching enabled. Valid values are
 	// between 1 and 3600 seconds.
-	Ttl *int64
+	Ttl int64
 }
 
 // Describes an Amazon Cognito user pool configuration.
@@ -275,13 +275,13 @@ type DataSource struct {
 type DeltaSyncConfig struct {
 
 	// The number of minutes an Item is stored in the datasource.
-	BaseTableTTL *int64
+	BaseTableTTL int64
 
 	// The Delta Sync table name.
 	DeltaSyncTableName *string
 
 	// The number of minutes a Delta Sync log entry is stored in the Delta Sync table.
-	DeltaSyncTableTTL *int64
+	DeltaSyncTableTTL int64
 }
 
 // Describes an Amazon DynamoDB data source configuration.
@@ -301,10 +301,10 @@ type DynamodbDataSourceConfig struct {
 	DeltaSyncConfig *DeltaSyncConfig
 
 	// Set to TRUE to use Amazon Cognito credentials with this data source.
-	UseCallerCredentials *bool
+	UseCallerCredentials bool
 
 	// Set to TRUE to use Conflict Detection and Resolution with this data source.
-	Versioned *bool
+	Versioned bool
 }
 
 // Describes an Elasticsearch data source configuration.
@@ -356,7 +356,7 @@ type FunctionConfiguration struct {
 type GraphqlApi struct {
 
 	// A list of additional authentication providers for the GraphqlApi API.
-	AdditionalAuthenticationProviders []*AdditionalAuthenticationProvider
+	AdditionalAuthenticationProviders []AdditionalAuthenticationProvider
 
 	// The API ID.
 	ApiId *string
@@ -377,10 +377,10 @@ type GraphqlApi struct {
 	OpenIDConnectConfig *OpenIDConnectConfig
 
 	// The tags.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The URIs.
-	Uris map[string]*string
+	Uris map[string]string
 
 	// The Amazon Cognito user pool configuration.
 	UserPoolConfig *UserPoolConfig
@@ -390,7 +390,7 @@ type GraphqlApi struct {
 	WafWebAclArn *string
 
 	// A flag representing whether X-Ray tracing is enabled for this GraphqlApi.
-	XrayEnabled *bool
+	XrayEnabled bool
 }
 
 // Describes an HTTP data source configuration.
@@ -461,7 +461,7 @@ type LogConfig struct {
 
 	// Set to TRUE to exclude sections that contain information such as headers,
 	// context, and evaluated mapping templates, regardless of logging level.
-	ExcludeVerboseContent *bool
+	ExcludeVerboseContent bool
 }
 
 // Describes an OpenID Connect configuration.
@@ -474,7 +474,7 @@ type OpenIDConnectConfig struct {
 	Issuer *string
 
 	// The number of milliseconds a token is valid after being authenticated.
-	AuthTTL *int64
+	AuthTTL int64
 
 	// The client identifier of the Relying party at the OpenID identity provider. This
 	// identifier is typically obtained when the Relying party is registered with the
@@ -483,14 +483,14 @@ type OpenIDConnectConfig struct {
 	ClientId *string
 
 	// The number of milliseconds a token is valid after being issued to a user.
-	IatTTL *int64
+	IatTTL int64
 }
 
 // The pipeline configuration for a resolver of kind PIPELINE.
 type PipelineConfig struct {
 
 	// A list of Function objects.
-	Functions []*string
+	Functions []string
 }
 
 // The Amazon RDS HTTP endpoint configuration.

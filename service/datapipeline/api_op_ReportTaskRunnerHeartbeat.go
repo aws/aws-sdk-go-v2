@@ -57,7 +57,7 @@ type ReportTaskRunnerHeartbeatOutput struct {
 	// Indicates whether the calling task runner should terminate.
 	//
 	// This member is required.
-	Terminate *bool
+	Terminate bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

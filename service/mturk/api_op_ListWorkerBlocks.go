@@ -48,7 +48,7 @@ type ListWorkerBlocksOutput struct {
 
 	// The list of WorkerBlocks, containing the collection of Worker IDs and reasons
 	// for blocking.
-	WorkerBlocks []*types.WorkerBlock
+	WorkerBlocks []types.WorkerBlock
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

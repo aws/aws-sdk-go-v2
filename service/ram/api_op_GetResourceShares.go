@@ -46,13 +46,13 @@ type GetResourceSharesInput struct {
 	NextToken *string
 
 	// The Amazon Resource Names (ARN) of the resource shares.
-	ResourceShareArns []*string
+	ResourceShareArns []string
 
 	// The status of the resource share.
 	ResourceShareStatus types.ResourceShareStatus
 
 	// One or more tag filters.
-	TagFilters []*types.TagFilter
+	TagFilters []types.TagFilter
 }
 
 type GetResourceSharesOutput struct {
@@ -62,7 +62,7 @@ type GetResourceSharesOutput struct {
 	NextToken *string
 
 	// Information about the resource shares.
-	ResourceShares []*types.ResourceShare
+	ResourceShares []types.ResourceShare
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

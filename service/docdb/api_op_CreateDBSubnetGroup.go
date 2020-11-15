@@ -46,10 +46,10 @@ type CreateDBSubnetGroupInput struct {
 	// The Amazon EC2 subnet IDs for the subnet group.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The tags to be assigned to the subnet group.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDBSubnetGroupOutput struct {

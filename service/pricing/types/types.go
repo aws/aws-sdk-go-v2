@@ -45,7 +45,7 @@ type Filter struct {
 type Service struct {
 
 	// The attributes that are available for this service.
-	AttributeNames []*string
+	AttributeNames []string
 
 	// The code for the AWS service.
 	ServiceCode *string

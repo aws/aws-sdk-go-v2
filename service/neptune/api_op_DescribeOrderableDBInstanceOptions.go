@@ -43,7 +43,7 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	EngineVersion *string
 
 	// This parameter is not currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The license model filter value. Specify this parameter to show only the
 	// available offerings matching the specified license model.
@@ -75,7 +75,7 @@ type DescribeOrderableDBInstanceOptionsOutput struct {
 
 	// An OrderableDBInstanceOption structure containing information about orderable
 	// options for the DB instance.
-	OrderableDBInstanceOptions []*types.OrderableDBInstanceOption
+	OrderableDBInstanceOptions []types.OrderableDBInstanceOption
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

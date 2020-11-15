@@ -22,7 +22,7 @@ type CognitoIdentityProvider struct {
 	// user has not been globally signed out or deleted before the identity pool
 	// provides an OIDC token or AWS credentials for the user. If the user is signed
 	// out or deleted, the identity pool will return a 400 Not Authorized error.
-	ServerSideTokenCheck *bool
+	ServerSideTokenCheck bool
 }
 
 // Credentials for the provided identity ID.
@@ -54,7 +54,7 @@ type IdentityDescription struct {
 	LastModifiedDate *time.Time
 
 	// The provider names.
-	Logins []*string
+	Logins []string
 }
 
 // A description of the identity pool.
@@ -121,7 +121,7 @@ type RulesConfigurationType struct {
 	// are evaluated in order. The first one to match specifies the role.
 	//
 	// This member is required.
-	Rules []*MappingRule
+	Rules []MappingRule
 }
 
 // An array of UnprocessedIdentityId objects, each of which contains an ErrorCode

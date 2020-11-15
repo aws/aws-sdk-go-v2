@@ -46,7 +46,7 @@ type CreateMonitoringScheduleInput struct {
 	// Allocation Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
 	// in the AWS Billing and Cost Management User Guide.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateMonitoringScheduleOutput struct {

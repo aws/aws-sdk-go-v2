@@ -51,13 +51,13 @@ type DescribeDataSourcePermissionsOutput struct {
 	DataSourceId *string
 
 	// A list of resource permissions on the data source.
-	Permissions []*types.ResourcePermission
+	Permissions []types.ResourcePermission
 
 	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

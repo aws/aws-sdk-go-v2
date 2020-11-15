@@ -6898,13 +6898,13 @@ func addOpWithdrawByoipCidrValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpWithdrawByoipCidr{}, middleware.After)
 }
 
-func validateAddPrefixListEntries(v []*types.AddPrefixListEntry) error {
+func validateAddPrefixListEntries(v []types.AddPrefixListEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddPrefixListEntries"}
 	for i := range v {
-		if err := validateAddPrefixListEntry(v[i]); err != nil {
+		if err := validateAddPrefixListEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -6996,9 +6996,6 @@ func validateDiskImageDetail(v *types.DiskImageDetail) error {
 	if v.ImportManifestUrl == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ImportManifestUrl"))
 	}
-	if v.Bytes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bytes"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -7006,13 +7003,13 @@ func validateDiskImageDetail(v *types.DiskImageDetail) error {
 	}
 }
 
-func validateDiskImageList(v []*types.DiskImage) error {
+func validateDiskImageList(v []types.DiskImage) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DiskImageList"}
 	for i := range v {
-		if err := validateDiskImage(v[i]); err != nil {
+		if err := validateDiskImage(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -7038,13 +7035,13 @@ func validateElasticGpuSpecification(v *types.ElasticGpuSpecification) error {
 	}
 }
 
-func validateElasticGpuSpecificationList(v []*types.ElasticGpuSpecification) error {
+func validateElasticGpuSpecificationList(v []types.ElasticGpuSpecification) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ElasticGpuSpecificationList"}
 	for i := range v {
-		if err := validateElasticGpuSpecification(v[i]); err != nil {
+		if err := validateElasticGpuSpecification(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -7055,13 +7052,13 @@ func validateElasticGpuSpecificationList(v []*types.ElasticGpuSpecification) err
 	}
 }
 
-func validateElasticGpuSpecifications(v []*types.ElasticGpuSpecification) error {
+func validateElasticGpuSpecifications(v []types.ElasticGpuSpecification) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ElasticGpuSpecifications"}
 	for i := range v {
-		if err := validateElasticGpuSpecification(v[i]); err != nil {
+		if err := validateElasticGpuSpecification(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -7087,13 +7084,13 @@ func validateElasticInferenceAccelerator(v *types.ElasticInferenceAccelerator) e
 	}
 }
 
-func validateElasticInferenceAccelerators(v []*types.ElasticInferenceAccelerator) error {
+func validateElasticInferenceAccelerators(v []types.ElasticInferenceAccelerator) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ElasticInferenceAccelerators"}
 	for i := range v {
-		if err := validateElasticInferenceAccelerator(v[i]); err != nil {
+		if err := validateElasticInferenceAccelerator(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -7134,13 +7131,13 @@ func validateLaunchTemplateElasticInferenceAccelerator(v *types.LaunchTemplateEl
 	}
 }
 
-func validateLaunchTemplateElasticInferenceAcceleratorList(v []*types.LaunchTemplateElasticInferenceAccelerator) error {
+func validateLaunchTemplateElasticInferenceAcceleratorList(v []types.LaunchTemplateElasticInferenceAccelerator) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LaunchTemplateElasticInferenceAcceleratorList"}
 	for i := range v {
-		if err := validateLaunchTemplateElasticInferenceAccelerator(v[i]); err != nil {
+		if err := validateLaunchTemplateElasticInferenceAccelerator(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -7159,9 +7156,6 @@ func validatePurchaseRequest(v *types.PurchaseRequest) error {
 	if v.PurchaseToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PurchaseToken"))
 	}
-	if v.InstanceCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceCount"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -7169,13 +7163,13 @@ func validatePurchaseRequest(v *types.PurchaseRequest) error {
 	}
 }
 
-func validatePurchaseRequestSet(v []*types.PurchaseRequest) error {
+func validatePurchaseRequestSet(v []types.PurchaseRequest) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PurchaseRequestSet"}
 	for i := range v {
-		if err := validatePurchaseRequest(v[i]); err != nil {
+		if err := validatePurchaseRequest(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -7186,13 +7180,13 @@ func validatePurchaseRequestSet(v []*types.PurchaseRequest) error {
 	}
 }
 
-func validateRemovePrefixListEntries(v []*types.RemovePrefixListEntry) error {
+func validateRemovePrefixListEntries(v []types.RemovePrefixListEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemovePrefixListEntries"}
 	for i := range v {
-		if err := validateRemovePrefixListEntry(v[i]); err != nil {
+		if err := validateRemovePrefixListEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -7267,9 +7261,6 @@ func validateRunInstancesMonitoringEnabled(v *types.RunInstancesMonitoringEnable
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RunInstancesMonitoringEnabled"}
-	if v.Enabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -7315,9 +7306,6 @@ func validateSpotFleetRequestConfigData(v *types.SpotFleetRequestConfigData) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SpotFleetRequestConfigData"}
-	if v.TargetCapacity == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetCapacity"))
-	}
 	if v.IamFleetRole == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IamFleetRole"))
 	}
@@ -7333,9 +7321,6 @@ func validateTargetCapacitySpecificationRequest(v *types.TargetCapacitySpecifica
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TargetCapacitySpecificationRequest"}
-	if v.TotalTargetCapacity == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TotalTargetCapacity"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -7358,13 +7343,13 @@ func validateTargetConfigurationRequest(v *types.TargetConfigurationRequest) err
 	}
 }
 
-func validateTargetConfigurationRequestSet(v []*types.TargetConfigurationRequest) error {
+func validateTargetConfigurationRequestSet(v []types.TargetConfigurationRequest) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TargetConfigurationRequestSet"}
 	for i := range v {
-		if err := validateTargetConfigurationRequest(v[i]); err != nil {
+		if err := validateTargetConfigurationRequest(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -7380,9 +7365,6 @@ func validateVolumeDetail(v *types.VolumeDetail) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VolumeDetail"}
-	if v.Size == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Size"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -7480,9 +7462,6 @@ func validateOpAllocateHostsInput(v *AllocateHostsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AllocateHostsInput"}
 	if v.AvailabilityZone == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
-	}
-	if v.Quantity == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Quantity"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7709,9 +7688,6 @@ func validateOpAttachNetworkInterfaceInput(v *AttachNetworkInterfaceInput) error
 	if v.NetworkInterfaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkInterfaceId"))
 	}
-	if v.DeviceIndex == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeviceIndex"))
-	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
@@ -7892,9 +7868,6 @@ func validateOpCancelSpotFleetRequestsInput(v *CancelSpotFleetRequestsInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CancelSpotFleetRequestsInput"}
-	if v.TerminateInstances == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TerminateInstances"))
-	}
 	if v.SpotFleetRequestIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SpotFleetRequestIds"))
 	}
@@ -8003,9 +7976,6 @@ func validateOpCreateCapacityReservationInput(v *CreateCapacityReservationInput)
 	if v.InstanceType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
 	}
-	if v.InstanceCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceCount"))
-	}
 	if len(v.InstancePlatform) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("InstancePlatform"))
 	}
@@ -8083,9 +8053,6 @@ func validateOpCreateCustomerGatewayInput(v *CreateCustomerGatewayInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomerGatewayInput"}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
-	if v.BgpAsn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BgpAsn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8338,9 +8305,6 @@ func validateOpCreateManagedPrefixListInput(v *CreateManagedPrefixListInput) err
 	if v.PrefixListName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PrefixListName"))
 	}
-	if v.MaxEntries == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxEntries"))
-	}
 	if v.AddressFamily == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AddressFamily"))
 	}
@@ -8380,14 +8344,8 @@ func validateOpCreateNetworkAclEntryInput(v *CreateNetworkAclEntryInput) error {
 	if len(v.RuleAction) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleAction"))
 	}
-	if v.RuleNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RuleNumber"))
-	}
 	if v.NetworkAclId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkAclId"))
-	}
-	if v.Egress == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Egress"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8449,9 +8407,6 @@ func validateOpCreateReservedInstancesListingInput(v *CreateReservedInstancesLis
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateReservedInstancesListingInput"}
-	if v.InstanceCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceCount"))
-	}
 	if v.ReservedInstancesId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReservedInstancesId"))
 	}
@@ -8614,9 +8569,6 @@ func validateOpCreateTrafficMirrorFilterRuleInput(v *CreateTrafficMirrorFilterRu
 	if v.SourceCidrBlock == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceCidrBlock"))
 	}
-	if v.RuleNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RuleNumber"))
-	}
 	if v.DestinationCidrBlock == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationCidrBlock"))
 	}
@@ -8640,9 +8592,6 @@ func validateOpCreateTrafficMirrorSessionInput(v *CreateTrafficMirrorSessionInpu
 	}
 	if v.TrafficMirrorFilterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrafficMirrorFilterId"))
-	}
-	if v.SessionNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SessionNumber"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8995,9 +8944,6 @@ func validateOpDeleteFleetsInput(v *DeleteFleetsInput) error {
 	if v.FleetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FleetIds"))
 	}
-	if v.TerminateInstances == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TerminateInstances"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -9135,12 +9081,6 @@ func validateOpDeleteNetworkAclEntryInput(v *DeleteNetworkAclEntryInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteNetworkAclEntryInput"}
 	if v.NetworkAclId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkAclId"))
-	}
-	if v.Egress == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Egress"))
-	}
-	if v.RuleNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RuleNumber"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9643,9 +9583,6 @@ func validateOpDescribeByoipCidrsInput(v *DescribeByoipCidrsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeByoipCidrsInput"}
-	if v.MaxResults == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -10876,9 +10813,6 @@ func validateOpModifyIdentityIdFormatInput(v *ModifyIdentityIdFormatInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyIdentityIdFormatInput"}
-	if v.UseLongIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UseLongIds"))
-	}
 	if v.PrincipalArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PrincipalArn"))
 	}
@@ -10897,9 +10831,6 @@ func validateOpModifyIdFormatInput(v *ModifyIdFormatInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyIdFormatInput"}
-	if v.UseLongIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UseLongIds"))
-	}
 	if v.Resource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
 	}
@@ -11503,9 +11434,6 @@ func validateOpPurchaseReservedInstancesOfferingInput(v *PurchaseReservedInstanc
 	if v.ReservedInstancesOfferingId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReservedInstancesOfferingId"))
 	}
-	if v.InstanceCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceCount"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -11683,12 +11611,6 @@ func validateOpReplaceNetworkAclEntryInput(v *ReplaceNetworkAclEntryInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "ReplaceNetworkAclEntryInput"}
 	if v.NetworkAclId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkAclId"))
-	}
-	if v.RuleNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RuleNumber"))
-	}
-	if v.Egress == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Egress"))
 	}
 	if v.Protocol == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
@@ -11915,14 +11837,8 @@ func validateOpRestoreManagedPrefixListVersionInput(v *RestoreManagedPrefixListV
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RestoreManagedPrefixListVersionInput"}
-	if v.CurrentVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
-	}
 	if v.PrefixListId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PrefixListId"))
-	}
-	if v.PreviousVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PreviousVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11988,12 +11904,6 @@ func validateOpRunInstancesInput(v *RunInstancesInput) error {
 		if err := validateElasticInferenceAccelerators(v.ElasticInferenceAccelerators); err != nil {
 			invalidParams.AddNested("ElasticInferenceAccelerators", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.MaxCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxCount"))
-	}
-	if v.MinCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MinCount"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

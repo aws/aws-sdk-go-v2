@@ -42,7 +42,7 @@ type TagResourceInput struct {
 	// in the AWS IoT SiteWise User Guide.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourceOutput struct {

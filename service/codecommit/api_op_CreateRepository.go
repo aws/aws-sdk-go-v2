@@ -49,7 +49,7 @@ type CreateRepositoryInput struct {
 	RepositoryDescription *string
 
 	// One or more tag key-value pairs to use when tagging this repository.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Represents the output of a create repository operation.

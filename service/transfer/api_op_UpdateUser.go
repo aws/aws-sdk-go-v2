@@ -69,7 +69,7 @@ type UpdateUserInput struct {
 	// so you can use the put-object operation. For example, you use the following: aws
 	// s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the
 	// end of the key name ends in a / for it to be considered a folder.
-	HomeDirectoryMappings []*types.HomeDirectoryMapEntry
+	HomeDirectoryMappings []types.HomeDirectoryMapEntry
 
 	// The type of landing directory (folder) you want your users' home directory to be
 	// when they log into the server. If you set it to PATH, the user will see the

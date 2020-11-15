@@ -57,7 +57,7 @@ type DescribeTableInput struct {
 	// The maximum number of tables to return in the response. If more tables exist
 	// than fit in one response, then NextToken is returned to page through the
 	// results.
-	MaxResults *int32
+	MaxResults int32
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
@@ -83,7 +83,7 @@ type DescribeTableInput struct {
 type DescribeTableOutput struct {
 
 	// A list of columns in the table.
-	ColumnList []*types.ColumnMetadata
+	ColumnList []types.ColumnMetadata
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve

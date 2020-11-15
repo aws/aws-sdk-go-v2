@@ -95,7 +95,7 @@ type SearchFacesByImageOutput struct {
 
 	// An array of faces that match the input face, along with the confidence in the
 	// match.
-	FaceMatches []*types.FaceMatch
+	FaceMatches []types.FaceMatch
 
 	// Version number of the face detection model associated with the input collection
 	// (CollectionId).

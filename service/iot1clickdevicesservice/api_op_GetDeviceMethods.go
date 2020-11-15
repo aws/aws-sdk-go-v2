@@ -38,7 +38,7 @@ type GetDeviceMethodsInput struct {
 type GetDeviceMethodsOutput struct {
 
 	// List of available device APIs.
-	DeviceMethods []*types.DeviceMethod
+	DeviceMethods []types.DeviceMethod
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

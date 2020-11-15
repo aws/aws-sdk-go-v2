@@ -47,10 +47,10 @@ type CreateIpGroupInput struct {
 	GroupDesc *string
 
 	// The tags. Each WorkSpaces resource can have a maximum of 50 tags.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The rules to add to the group.
-	UserRules []*types.IpRuleItem
+	UserRules []types.IpRuleItem
 }
 
 type CreateIpGroupOutput struct {

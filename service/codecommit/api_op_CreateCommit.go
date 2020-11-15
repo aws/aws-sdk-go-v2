@@ -48,7 +48,7 @@ type CreateCommitInput struct {
 	CommitMessage *string
 
 	// The files to delete in this commit. These files still exist in earlier commits.
-	DeleteFiles []*types.DeleteFileEntry
+	DeleteFiles []types.DeleteFileEntry
 
 	// The email address of the person who created the commit.
 	Email *string
@@ -56,17 +56,17 @@ type CreateCommitInput struct {
 	// If the commit contains deletions, whether to keep a folder or folder structure
 	// if the changes leave the folders empty. If true, a ..gitkeep file is created for
 	// empty folders. The default is false.
-	KeepEmptyFolders *bool
+	KeepEmptyFolders bool
 
 	// The ID of the commit that is the parent of the commit you create. Not required
 	// if this is an empty repository.
 	ParentCommitId *string
 
 	// The files to add or update in this commit.
-	PutFiles []*types.PutFileEntry
+	PutFiles []types.PutFileEntry
 
 	// The file modes to update for files in this commit.
-	SetFileModes []*types.SetFileModeEntry
+	SetFileModes []types.SetFileModeEntry
 }
 
 type CreateCommitOutput struct {
@@ -75,13 +75,13 @@ type CreateCommitOutput struct {
 	CommitId *string
 
 	// The files added as part of the committed file changes.
-	FilesAdded []*types.FileMetadata
+	FilesAdded []types.FileMetadata
 
 	// The files deleted as part of the committed file changes.
-	FilesDeleted []*types.FileMetadata
+	FilesDeleted []types.FileMetadata
 
 	// The files updated as part of the commited file changes.
-	FilesUpdated []*types.FileMetadata
+	FilesUpdated []types.FileMetadata
 
 	// The full SHA-1 pointer of the tree information for the commit that contains the
 	// commited file changes.

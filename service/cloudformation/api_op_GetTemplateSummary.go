@@ -83,7 +83,7 @@ type GetTemplateSummaryOutput struct {
 	CapabilitiesReason *string
 
 	// A list of the transforms that are declared in the template.
-	DeclaredTransforms []*string
+	DeclaredTransforms []string
 
 	// The value that is defined in the Description property of the template.
 	Description *string
@@ -93,17 +93,17 @@ type GetTemplateSummaryOutput struct {
 
 	// A list of parameter declarations that describe various properties for each
 	// parameter.
-	Parameters []*types.ParameterDeclaration
+	Parameters []types.ParameterDeclaration
 
 	// A list of resource identifier summaries that describe the target resources of an
 	// import operation and the properties you can provide during the import to
 	// identify the target resources. For example, BucketName is a possible identifier
 	// property for an AWS::S3::Bucket resource.
-	ResourceIdentifierSummaries []*types.ResourceIdentifierSummary
+	ResourceIdentifierSummaries []types.ResourceIdentifierSummary
 
 	// A list of all the template resource types that are defined in the template, such
 	// as AWS::EC2::Instance, AWS::Dynamo::Table, and Custom::MyCustomInstance.
-	ResourceTypes []*string
+	ResourceTypes []string
 
 	// The AWS template format version, which identifies the capabilities of the
 	// template.

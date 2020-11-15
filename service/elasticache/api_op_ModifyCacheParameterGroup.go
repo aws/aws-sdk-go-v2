@@ -42,7 +42,7 @@ type ModifyCacheParameterGroupInput struct {
 	// maximum of 20 parameters may be modified per request.
 	//
 	// This member is required.
-	ParameterNameValues []*types.ParameterNameValue
+	ParameterNameValues []types.ParameterNameValue
 }
 
 // Represents the output of one of the following operations:

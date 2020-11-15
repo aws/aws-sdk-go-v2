@@ -51,7 +51,7 @@ type UpdateApplicationInput struct {
 	// Describes application Amazon CloudWatch logging option updates. You can only
 	// update existing CloudWatch logging options with this action. To add a new
 	// CloudWatch logging option, use AddApplicationCloudWatchLoggingOption.
-	CloudWatchLoggingOptionUpdates []*types.CloudWatchLoggingOptionUpdate
+	CloudWatchLoggingOptionUpdates []types.CloudWatchLoggingOptionUpdate
 
 	// Describes updates to the application's starting parameters.
 	RunConfigurationUpdate *types.RunConfigurationUpdate

@@ -30,7 +30,7 @@ func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, 
 type CreateChannelInput struct {
 
 	// Whether the channel is authorized. Default: false.
-	Authorized *bool
+	Authorized bool
 
 	// Channel latency mode. Default: LOW.
 	LatencyMode types.ChannelLatencyMode
@@ -39,7 +39,7 @@ type CreateChannelInput struct {
 	Name *string
 
 	// See Channel$tags.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Channel type, which determines the allowable resolution and bitrate. If you
 	// exceed the allowable resolution or bitrate, the stream probably will disconnect

@@ -37,7 +37,7 @@ type ListIPSetsInput struct {
 
 	// You can use this parameter to indicate the maximum number of items you want in
 	// the response. The default value is 50. The maximum value is 50.
-	MaxResults *int32
+	MaxResults int32
 
 	// You can use this parameter when paginating results. Set the value of this
 	// parameter to null on your first call to the list action. For subsequent calls to
@@ -51,7 +51,7 @@ type ListIPSetsOutput struct {
 	// The IDs of the IPSet resources.
 	//
 	// This member is required.
-	IpSetIds []*string
+	IpSetIds []string
 
 	// The pagination parameter to be used on the next list operation to retrieve more
 	// items.

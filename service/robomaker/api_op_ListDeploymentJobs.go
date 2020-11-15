@@ -35,7 +35,7 @@ type ListDeploymentJobsInput struct {
 	// You can use up to three filters, but they must be for the same named item. For
 	// example, if you are looking for items with the status InProgress or the status
 	// Pending.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// When this parameter is used, ListDeploymentJobs only returns maxResults results
 	// in a single page along with a nextToken response element. The remaining results
@@ -56,7 +56,7 @@ type ListDeploymentJobsInput struct {
 type ListDeploymentJobsOutput struct {
 
 	// A list of deployment jobs that meet the criteria of the request.
-	DeploymentJobs []*types.DeploymentJob
+	DeploymentJobs []types.DeploymentJob
 
 	// If the previous paginated request did not return all of the remaining results,
 	// the response object's nextToken parameter value is set to a token. To retrieve

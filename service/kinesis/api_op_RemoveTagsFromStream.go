@@ -40,7 +40,7 @@ type RemoveTagsFromStreamInput struct {
 	// A list of tag keys. Each corresponding tag is removed from the stream.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type RemoveTagsFromStreamOutput struct {

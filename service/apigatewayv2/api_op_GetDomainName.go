@@ -44,13 +44,13 @@ type GetDomainNameOutput struct {
 	DomainName *string
 
 	// The domain name configurations.
-	DomainNameConfigurations []*types.DomainNameConfiguration
+	DomainNameConfigurations []types.DomainNameConfiguration
 
 	// The mutual TLS authentication configuration for a custom domain name.
 	MutualTlsAuthentication *types.MutualTlsAuthentication
 
 	// The collection of tags associated with a domain name.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

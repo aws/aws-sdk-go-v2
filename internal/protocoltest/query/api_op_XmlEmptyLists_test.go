@@ -39,8 +39,8 @@ func TestClient_XmlEmptyLists_awsAwsqueryDeserialize(t *testing.T) {
 			</XmlListsResponse>
 			`),
 			ExpectResult: &XmlEmptyListsOutput{
-				StringList: []*string{},
-				StringSet:  []*string{},
+				StringList: []string{},
+				StringSet:  []string{},
 			},
 		},
 	}

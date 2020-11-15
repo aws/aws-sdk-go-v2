@@ -30,7 +30,7 @@ func (c *Client) DescribeCertificates(ctx context.Context, params *DescribeCerti
 type DescribeCertificatesInput struct {
 
 	// Filters applied to the certificates described in the form of key-value pairs.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
@@ -48,7 +48,7 @@ type DescribeCertificatesOutput struct {
 
 	// The Secure Sockets Layer (SSL) certificates associated with the replication
 	// instance.
-	Certificates []*types.Certificate
+	Certificates []types.Certificate
 
 	// The pagination token.
 	Marker *string

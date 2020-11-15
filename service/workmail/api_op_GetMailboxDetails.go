@@ -46,7 +46,7 @@ type GetMailboxDetailsOutput struct {
 	MailboxQuota *int32
 
 	// The current mailbox size, in MB, for the specified user.
-	MailboxSize *float64
+	MailboxSize float64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

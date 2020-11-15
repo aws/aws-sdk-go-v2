@@ -61,7 +61,7 @@ type CopyProductInput struct {
 
 	// The identifiers of the provisioning artifacts (also known as versions) of the
 	// product to copy. By default, all provisioning artifacts are copied.
-	SourceProvisioningArtifactIdentifiers []map[string]*string
+	SourceProvisioningArtifactIdentifiers []map[string]string
 
 	// The identifier of the target product. By default, a new product is created.
 	TargetProductId *string

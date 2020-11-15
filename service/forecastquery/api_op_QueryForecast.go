@@ -46,7 +46,7 @@ type QueryForecastInput struct {
 	// operation.
 	//
 	// This member is required.
-	Filters map[string]*string
+	Filters map[string]string
 
 	// The Amazon Resource Name (ARN) of the forecast to query.
 	//

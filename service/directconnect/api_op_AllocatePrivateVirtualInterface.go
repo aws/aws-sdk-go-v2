@@ -62,7 +62,7 @@ type AllocatePrivateVirtualInterfaceOutput struct {
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
 	// configuration. The valid values are 1-2147483647.
-	Asn *int32
+	Asn int32
 
 	// The authentication key for BGP configuration. This string has a minimum length
 	// of 6 characters and and a maximun lenth of 80 characters.
@@ -72,7 +72,7 @@ type AllocatePrivateVirtualInterfaceOutput struct {
 	AwsDeviceV2 *string
 
 	// The BGP peers configured on this virtual interface.
-	BgpPeers []*types.BGPPeer
+	BgpPeers []types.BGPPeer
 
 	// The ID of the connection.
 	ConnectionId *string
@@ -104,10 +104,10 @@ type AllocatePrivateVirtualInterfaceOutput struct {
 
 	// The routes to be advertised to the AWS network in this Region. Applies to public
 	// virtual interfaces.
-	RouteFilterPrefixes []*types.RouteFilterPrefix
+	RouteFilterPrefixes []types.RouteFilterPrefix
 
 	// The tags associated with the virtual interface.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The ID of the virtual private gateway. Applies only to private virtual
 	// interfaces.
@@ -162,7 +162,7 @@ type AllocatePrivateVirtualInterfaceOutput struct {
 	VirtualInterfaceType *string
 
 	// The ID of the VLAN.
-	Vlan *int32
+	Vlan int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

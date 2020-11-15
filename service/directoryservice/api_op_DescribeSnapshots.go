@@ -48,7 +48,7 @@ type DescribeSnapshotsInput struct {
 	// A list of identifiers of the snapshots to obtain the information for. If this
 	// member is null or empty, all snapshots are returned using the Limit and
 	// NextToken members.
-	SnapshotIds []*string
+	SnapshotIds []string
 }
 
 // Contains the results of the DescribeSnapshots operation.
@@ -62,7 +62,7 @@ type DescribeSnapshotsOutput struct {
 	// contains less than the number of items specified in the Limit member of the
 	// request. This occurs if there are less than the requested number of items left
 	// to retrieve, or if the limitations of the operation have been exceeded.
-	Snapshots []*types.Snapshot
+	Snapshots []types.Snapshot
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

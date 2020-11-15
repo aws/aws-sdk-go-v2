@@ -52,7 +52,7 @@ type ListStacksOutput struct {
 
 	// A list of StackSummary structures containing information about the specified
 	// stacks.
-	StackSummaries []*types.StackSummary
+	StackSummaries []types.StackSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -73,7 +73,7 @@ type ListBackupsInput struct {
 type ListBackupsOutput struct {
 
 	// List of BackupSummary objects.
-	BackupSummaries []*types.BackupSummary
+	BackupSummaries []types.BackupSummary
 
 	// The ARN of the backup last evaluated when the current page of results was
 	// returned, inclusive of the current page of results. This value may be specified

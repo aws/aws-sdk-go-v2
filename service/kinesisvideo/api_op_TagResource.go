@@ -44,7 +44,7 @@ type TagResourceInput struct {
 	// key-value pair.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagResourceOutput struct {

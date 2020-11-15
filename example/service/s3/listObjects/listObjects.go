@@ -141,7 +141,7 @@ func (p *S3ListObjectsV2Paginator) NextPage(ctx context.Context) (
 
 	params := p.params
 	if v := p.options.Limit; v != 0 {
-		params.MaxKeys = &v
+		params.MaxKeys = v
 	}
 	result, err := p.client.ListObjectsV2(ctx, &params)
 	if err != nil {
@@ -149,7 +149,7 @@ func (p *S3ListObjectsV2Paginator) NextPage(ctx context.Context) (
 	}
 
 	p.firstPage = false
-	if result.IsTruncated != nil && *result.IsTruncated == false {
+	if !result.IsTruncated {
 		p.nextToken = nil
 	} else {
 		p.nextToken = result.NextContinuationToken

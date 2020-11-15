@@ -56,7 +56,7 @@ type AttachLoadBalancerTlsCertificateOutput struct {
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request. These SSL/TLS certificates are only usable by Lightsail load balancers.
 	// You can't get the certificate and use it for another purpose.
-	Operations []*types.Operation
+	Operations []types.Operation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

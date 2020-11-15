@@ -128,12 +128,12 @@ type PostTextInput struct {
 	// request attributes with the prefix x-amz-lex:. For more information, see Setting
 	// Request Attributes
 	// (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs).
-	RequestAttributes map[string]*string
+	RequestAttributes map[string]string
 
 	// Application-specific information passed between Amazon Lex and a client
 	// application. For more information, see Setting Session Attributes
 	// (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs).
-	SessionAttributes map[string]*string
+	SessionAttributes map[string]string
 }
 
 type PostTextOutput struct {
@@ -142,7 +142,7 @@ type PostTextOutput struct {
 	// Each alternative includes a score that indicates how confident Amazon Lex is
 	// that the intent matches the user's intent. The intents are sorted by the
 	// confidence score.
-	AlternativeIntents []*types.PredictedIntent
+	AlternativeIntents []types.PredictedIntent
 
 	// The version of the bot that responded to the conversation. You can use this
 	// information to help determine if one version of a bot is performing better than
@@ -245,7 +245,7 @@ type PostTextOutput struct {
 	SentimentResponse *types.SentimentResponse
 
 	// A map of key-value pairs representing the session-specific context information.
-	SessionAttributes map[string]*string
+	SessionAttributes map[string]string
 
 	// A unique identifier for the session.
 	SessionId *string
@@ -263,7 +263,7 @@ type PostTextOutput struct {
 	// TOP_RESOLUTION Amazon Lex returns the first value in the resolution list or, if
 	// there is no resolution list, null. If you don't specify a
 	// valueSelectionStrategy, the default is ORIGINAL_VALUE.
-	Slots map[string]*string
+	Slots map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

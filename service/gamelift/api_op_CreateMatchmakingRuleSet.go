@@ -94,7 +94,7 @@ type CreateMatchmakingRuleSetInput struct {
 	// UntagResource, and ListTagsForResource to add, remove, and view tags. The
 	// maximum tag limit may be lower than stated. See the AWS General Reference for
 	// actual tagging limits.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Represents the returned data in response to a request operation.

@@ -75,7 +75,7 @@ type UpdateBranchInput struct {
 	EnablePullRequestPreview *bool
 
 	// The environment variables for the branch.
-	EnvironmentVariables map[string]*string
+	EnvironmentVariables map[string]string
 
 	// The framework for the branch.
 	Framework *string

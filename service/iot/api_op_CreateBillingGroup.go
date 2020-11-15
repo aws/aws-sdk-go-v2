@@ -38,7 +38,7 @@ type CreateBillingGroupInput struct {
 	BillingGroupProperties *types.BillingGroupProperties
 
 	// Metadata which can be used to manage the billing group.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateBillingGroupOutput struct {

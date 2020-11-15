@@ -44,7 +44,7 @@ type BatchDeleteTableVersionInput struct {
 	// representation of an integer. Each version is incremented by 1.
 	//
 	// This member is required.
-	VersionIds []*string
+	VersionIds []string
 
 	// The ID of the Data Catalog where the tables reside. If none is provided, the AWS
 	// account ID is used by default.
@@ -55,7 +55,7 @@ type BatchDeleteTableVersionOutput struct {
 
 	// A list of errors encountered while trying to delete the specified table
 	// versions.
-	Errors []*types.TableVersionError
+	Errors []types.TableVersionError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

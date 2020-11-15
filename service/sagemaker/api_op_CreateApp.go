@@ -59,7 +59,7 @@ type CreateAppInput struct {
 
 	// Each tag consists of a key and an optional value. Tag keys must be unique per
 	// resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateAppOutput struct {

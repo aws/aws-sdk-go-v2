@@ -60,7 +60,7 @@ type ExportImageInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The name of the role that grants VM Import/Export permission to export images to
 	// your Amazon S3 bucket. If this parameter is not specified, the default role is
@@ -68,7 +68,7 @@ type ExportImageInput struct {
 	RoleName *string
 
 	// The tags to apply to the image being exported.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 }
 
 type ExportImageOutput struct {
@@ -103,7 +103,7 @@ type ExportImageOutput struct {
 	StatusMessage *string
 
 	// Any tags assigned to the image being exported.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

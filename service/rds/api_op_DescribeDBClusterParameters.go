@@ -43,7 +43,7 @@ type DescribeDBClusterParametersInput struct {
 	DBClusterParameterGroupName *string
 
 	// This parameter isn't currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeDBClusterParameters
 	// request. If this parameter is specified, the response includes only records
@@ -71,7 +71,7 @@ type DescribeDBClusterParametersOutput struct {
 	Marker *string
 
 	// Provides a list of parameters for the DB cluster parameter group.
-	Parameters []*types.Parameter
+	Parameters []types.Parameter
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

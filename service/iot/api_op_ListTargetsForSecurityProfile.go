@@ -49,7 +49,7 @@ type ListTargetsForSecurityProfileOutput struct {
 	NextToken *string
 
 	// The thing groups to which the security profile is attached.
-	SecurityProfileTargets []*types.SecurityProfileTarget
+	SecurityProfileTargets []types.SecurityProfileTarget
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -51,7 +51,7 @@ type DescribeExpressionsInput struct {
 
 	// Limits the DescribeExpressions response to the specified expressions. If not
 	// specified, all expressions are shown.
-	ExpressionNames []*string
+	ExpressionNames []string
 }
 
 // The result of a DescribeExpressions request. Contains the expressions configured
@@ -61,7 +61,7 @@ type DescribeExpressionsOutput struct {
 	// The expressions configured for the domain.
 	//
 	// This member is required.
-	Expressions []*types.ExpressionStatus
+	Expressions []types.ExpressionStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

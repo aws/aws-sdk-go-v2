@@ -40,7 +40,7 @@ type PublishInput struct {
 	Payload []byte
 
 	// The Quality of Service (QoS) level.
-	Qos *int32
+	Qos int32
 }
 
 type PublishOutput struct {

@@ -36,7 +36,7 @@ type DescribePlacementGroupsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The filters.
 	//
@@ -58,20 +58,20 @@ type DescribePlacementGroupsInput struct {
 	// * tag-key - The key of a tag assigned to the resource. Use this filter
 	// to find all resources that have a tag with a specific key, regardless of the tag
 	// value.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The IDs of the placement groups.
-	GroupIds []*string
+	GroupIds []string
 
 	// The names of the placement groups. Default: Describes all your placement groups,
 	// or only those otherwise specified.
-	GroupNames []*string
+	GroupNames []string
 }
 
 type DescribePlacementGroupsOutput struct {
 
 	// Information about the placement groups.
-	PlacementGroups []*types.PlacementGroup
+	PlacementGroups []types.PlacementGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

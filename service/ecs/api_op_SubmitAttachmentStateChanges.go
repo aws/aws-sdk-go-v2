@@ -33,7 +33,7 @@ type SubmitAttachmentStateChangesInput struct {
 	// Any attachments associated with the state change request.
 	//
 	// This member is required.
-	Attachments []*types.AttachmentStateChange
+	Attachments []types.AttachmentStateChange
 
 	// The short name or full ARN of the cluster that hosts the container instance the
 	// attachment belongs to.

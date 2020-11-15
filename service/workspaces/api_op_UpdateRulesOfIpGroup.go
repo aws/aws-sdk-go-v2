@@ -38,7 +38,7 @@ type UpdateRulesOfIpGroupInput struct {
 	// One or more rules.
 	//
 	// This member is required.
-	UserRules []*types.IpRuleItem
+	UserRules []types.IpRuleItem
 }
 
 type UpdateRulesOfIpGroupOutput struct {

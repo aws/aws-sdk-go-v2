@@ -58,7 +58,7 @@ type UpdateRegexPatternSetInput struct {
 	//
 	//
 	// This member is required.
-	RegularExpressionList []*types.Regex
+	RegularExpressionList []types.Regex
 
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
 	// application. A regional application can be an Application Load Balancer (ALB),

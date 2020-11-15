@@ -58,7 +58,7 @@ type DescribeReplicationGroupsOutput struct {
 
 	// A list of replication groups. Each item in the list contains detailed
 	// information about one replication group.
-	ReplicationGroups []*types.ReplicationGroup
+	ReplicationGroups []types.ReplicationGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

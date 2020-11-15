@@ -50,13 +50,13 @@ type DescribeDashboardPermissionsOutput struct {
 	DashboardId *string
 
 	// A structure that contains the permissions for the dashboard.
-	Permissions []*types.ResourcePermission
+	Permissions []types.ResourcePermission
 
 	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

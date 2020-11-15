@@ -38,7 +38,7 @@ type GetFindingsInput struct {
 	// The IDs of the findings that you want to retrieve.
 	//
 	// This member is required.
-	FindingIds []*string
+	FindingIds []string
 
 	// Represents the criteria used for sorting findings.
 	SortCriteria *types.SortCriteria
@@ -49,7 +49,7 @@ type GetFindingsOutput struct {
 	// A list of findings.
 	//
 	// This member is required.
-	Findings []*types.Finding
+	Findings []types.Finding
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -67,7 +67,7 @@ type SendCommandInput struct {
 	// see Using targets and rate controls to send commands to a fleet
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
 	// in the AWS Systems Manager User Guide.
-	InstanceIds []*string
+	InstanceIds []string
 
 	// (Optional) The maximum number of instances that are allowed to run the command
 	// at the same time. You can specify a number such as 10 or a percentage such as
@@ -101,7 +101,7 @@ type SendCommandInput struct {
 	OutputS3Region *string
 
 	// The required and optional parameters specified in the document being run.
-	Parameters map[string][]*string
+	Parameters map[string][]string
 
 	// The ARN of the IAM service role to use to publish Amazon Simple Notification
 	// Service (Amazon SNS) notifications for Run Command commands.
@@ -116,11 +116,11 @@ type SendCommandInput struct {
 	// about how to use targets, see Sending commands to a fleet
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
 	// in the AWS Systems Manager User Guide.
-	Targets []*types.Target
+	Targets []types.Target
 
 	// If this time is reached and the command has not already started running, it will
 	// not run.
-	TimeoutSeconds *int32
+	TimeoutSeconds int32
 }
 
 type SendCommandOutput struct {

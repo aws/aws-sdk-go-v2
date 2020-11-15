@@ -40,7 +40,7 @@ func TestClient_XmlEmptyMaps_awsAwsqueryDeserialize(t *testing.T) {
 			</XmlMapsResponse>
 			`),
 			ExpectResult: &XmlEmptyMapsOutput{
-				MyMap: map[string]*types.GreetingStruct{},
+				MyMap: map[string]types.GreetingStruct{},
 			},
 		},
 		// Deserializes Self-Closed XML maps
@@ -57,7 +57,7 @@ func TestClient_XmlEmptyMaps_awsAwsqueryDeserialize(t *testing.T) {
 			</XmlMapsResponse>
 			`),
 			ExpectResult: &XmlEmptyMapsOutput{
-				MyMap: map[string]*types.GreetingStruct{},
+				MyMap: map[string]types.GreetingStruct{},
 			},
 		},
 	}

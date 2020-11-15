@@ -456,9 +456,9 @@ func awsRestjson1_serializeOpDocumentDescribeSavingsPlansOfferingRatesInput(v *D
 		}
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -611,9 +611,9 @@ func awsRestjson1_serializeOpDocumentDescribeSavingsPlansOfferingsInput(v *Descr
 		}
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -915,77 +915,57 @@ func awsRestjson1_serializeDocumentCurrencyList(v []types.CurrencyCode, value sm
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDurationsList(v []*int64, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentDurationsList(v []int64, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.Long(*v[i])
+		av.Long(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentFilterValuesList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentFilterValuesList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentListOfStrings(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentListOfStrings(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSavingsPlanArnList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSavingsPlanArnList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSavingsPlanDescriptionsList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSavingsPlanDescriptionsList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1009,34 +989,26 @@ func awsRestjson1_serializeDocumentSavingsPlanFilter(v *types.SavingsPlanFilter,
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSavingsPlanFilterList(v []*types.SavingsPlanFilter, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSavingsPlanFilterList(v []types.SavingsPlanFilter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentSavingsPlanFilter(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentSavingsPlanFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSavingsPlanIdList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSavingsPlanIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1060,17 +1032,13 @@ func awsRestjson1_serializeDocumentSavingsPlanOfferingFilterElement(v *types.Sav
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSavingsPlanOfferingFiltersList(v []*types.SavingsPlanOfferingFilterElement, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSavingsPlanOfferingFiltersList(v []types.SavingsPlanOfferingFilterElement, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentSavingsPlanOfferingFilterElement(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentSavingsPlanOfferingFilterElement(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1096,34 +1064,26 @@ func awsRestjson1_serializeDocumentSavingsPlanOfferingRateFilterElement(v *types
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSavingsPlanOfferingRateFiltersList(v []*types.SavingsPlanOfferingRateFilterElement, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSavingsPlanOfferingRateFiltersList(v []types.SavingsPlanOfferingRateFilterElement, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentSavingsPlanOfferingRateFilterElement(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentSavingsPlanOfferingRateFilterElement(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSavingsPlanOperationList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSavingsPlanOperationList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1169,34 +1129,26 @@ func awsRestjson1_serializeDocumentSavingsPlanRateFilter(v *types.SavingsPlanRat
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSavingsPlanRateFilterList(v []*types.SavingsPlanRateFilter, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSavingsPlanRateFilterList(v []types.SavingsPlanRateFilter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentSavingsPlanRateFilter(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentSavingsPlanRateFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSavingsPlanRateOperationList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSavingsPlanRateOperationList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1212,32 +1164,24 @@ func awsRestjson1_serializeDocumentSavingsPlanRateServiceCodeList(v []types.Savi
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSavingsPlanRateUsageTypeList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSavingsPlanRateUsageTypeList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSavingsPlanServiceCodeList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSavingsPlanServiceCodeList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1264,62 +1208,46 @@ func awsRestjson1_serializeDocumentSavingsPlanTypeList(v []types.SavingsPlanType
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSavingsPlanUsageTypeList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSavingsPlanUsageTypeList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTagKeyList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTagKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTagMap(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentUUIDs(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentUUIDs(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }

@@ -36,7 +36,7 @@ func (c *Client) ListSigningProfiles(ctx context.Context, params *ListSigningPro
 type ListSigningProfilesInput struct {
 
 	// Designates whether to include profiles with the status of CANCELED.
-	IncludeCanceled *bool
+	IncludeCanceled bool
 
 	// The maximum number of profiles to be returned.
 	MaxResults *int32
@@ -55,7 +55,7 @@ type ListSigningProfilesOutput struct {
 
 	// A list of profiles that are available in the AWS account. This includes profiles
 	// with the status of CANCELED if the includeCanceled parameter is set to true.
-	Profiles []*types.SigningProfile
+	Profiles []types.SigningProfile
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

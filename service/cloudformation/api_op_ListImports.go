@@ -48,7 +48,7 @@ type ListImportsInput struct {
 type ListImportsOutput struct {
 
 	// A list of stack names that are importing the specified exported output value.
-	Imports []*string
+	Imports []string
 
 	// A string that identifies the next page of exports. If there is no additional
 	// page, this value is null.

@@ -42,7 +42,7 @@ type CreateUserGroupInput struct {
 	UserGroupId *string
 
 	// The list of user IDs that belong to the user group.
-	UserIds []*string
+	UserIds []string
 }
 
 type CreateUserGroupOutput struct {
@@ -57,7 +57,7 @@ type CreateUserGroupOutput struct {
 	PendingChanges *types.UserGroupPendingChanges
 
 	// A list of replication groups that the user group can access.
-	ReplicationGroups []*string
+	ReplicationGroups []string
 
 	// Indicates user group status. Can be "creating", "active", "modifying",
 	// "deleting".
@@ -67,7 +67,7 @@ type CreateUserGroupOutput struct {
 	UserGroupId *string
 
 	// The list of user IDs that belong to the user group.
-	UserIds []*string
+	UserIds []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

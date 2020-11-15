@@ -11,7 +11,7 @@ import (
 type BadRequestException struct {
 	Message *string
 
-	Code      *int32
+	Code      int32
 	ClassName *string
 }
 
@@ -31,7 +31,7 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type ConcurrentAccessException struct {
 	Message *string
 
-	Code      *int32
+	Code      int32
 	ClassName *string
 }
 
@@ -52,7 +52,7 @@ type ConflictException struct {
 	Message *string
 
 	ClassName *string
-	Code      *int32
+	Code      int32
 }
 
 func (e *ConflictException) Error() string {
@@ -72,7 +72,7 @@ type ForbiddenException struct {
 	Message *string
 
 	ClassName *string
-	Code      *int32
+	Code      int32
 }
 
 func (e *ForbiddenException) Error() string {
@@ -91,7 +91,7 @@ func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.Faul
 type InternalServerErrorException struct {
 	Message *string
 
-	Code      *int32
+	Code      int32
 	ClassName *string
 }
 
@@ -112,7 +112,7 @@ type LimitExceededException struct {
 	Message *string
 
 	ClassName *string
-	Code      *int32
+	Code      int32
 }
 
 func (e *LimitExceededException) Error() string {
@@ -131,7 +131,7 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 type NotFoundException struct {
 	Message *string
 
-	Code      *int32
+	Code      int32
 	ClassName *string
 }
 
@@ -152,7 +152,7 @@ type TooManyRequestsException struct {
 	Message *string
 
 	ClassName *string
-	Code      *int32
+	Code      int32
 }
 
 func (e *TooManyRequestsException) Error() string {

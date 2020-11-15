@@ -36,7 +36,7 @@ type DescribeObjectsInput struct {
 	// You can pass as many as 25 identifiers in a single call to DescribeObjects.
 	//
 	// This member is required.
-	ObjectIds []*string
+	ObjectIds []string
 
 	// The ID of the pipeline that contains the object definitions.
 	//
@@ -45,7 +45,7 @@ type DescribeObjectsInput struct {
 
 	// Indicates whether any expressions in the object should be evaluated when the
 	// object descriptions are returned.
-	EvaluateExpressions *bool
+	EvaluateExpressions bool
 
 	// The starting point for the results to be returned. For the first call, this
 	// value should be empty. As long as there are more results, continue to call
@@ -60,10 +60,10 @@ type DescribeObjectsOutput struct {
 	// An array of object definitions.
 	//
 	// This member is required.
-	PipelineObjects []*types.PipelineObject
+	PipelineObjects []types.PipelineObject
 
 	// Indicates whether there are more results to return.
-	HasMoreResults *bool
+	HasMoreResults bool
 
 	// The starting point for the next page of results. To view the next page of
 	// results, call DescribeObjects again with this marker value. If the value is

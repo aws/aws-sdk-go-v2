@@ -42,7 +42,7 @@ type DescribeSharedDirectoriesInput struct {
 	NextToken *string
 
 	// A list of identifiers of all shared directories in your account.
-	SharedDirectoryIds []*string
+	SharedDirectoryIds []string
 }
 
 type DescribeSharedDirectoriesOutput struct {
@@ -53,7 +53,7 @@ type DescribeSharedDirectoriesOutput struct {
 	NextToken *string
 
 	// A list of all shared directories in your account.
-	SharedDirectories []*types.SharedDirectory
+	SharedDirectories []types.SharedDirectory
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

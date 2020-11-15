@@ -38,7 +38,7 @@ type UntagResourceInput struct {
 	// does not exist on the resource, it is ignored.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagResourceOutput struct {

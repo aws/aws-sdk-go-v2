@@ -39,29 +39,29 @@ type CancelSpotFleetRequestsInput struct {
 	// The IDs of the Spot Fleet requests.
 	//
 	// This member is required.
-	SpotFleetRequestIds []*string
+	SpotFleetRequestIds []string
 
 	// Indicates whether to terminate instances for a Spot Fleet request if it is
 	// canceled successfully.
 	//
 	// This member is required.
-	TerminateInstances *bool
+	TerminateInstances bool
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 }
 
 // Contains the output of CancelSpotFleetRequests.
 type CancelSpotFleetRequestsOutput struct {
 
 	// Information about the Spot Fleet requests that are successfully canceled.
-	SuccessfulFleetRequests []*types.CancelSpotFleetRequestsSuccessItem
+	SuccessfulFleetRequests []types.CancelSpotFleetRequestsSuccessItem
 
 	// Information about the Spot Fleet requests that are not successfully canceled.
-	UnsuccessfulFleetRequests []*types.CancelSpotFleetRequestsErrorItem
+	UnsuccessfulFleetRequests []types.CancelSpotFleetRequestsErrorItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

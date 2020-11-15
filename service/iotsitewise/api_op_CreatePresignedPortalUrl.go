@@ -40,7 +40,7 @@ type CreatePresignedPortalUrlInput struct {
 
 	// The duration (in seconds) for which the session at the URL is valid. Default:
 	// 900 seconds (15 minutes)
-	SessionDurationSeconds *int32
+	SessionDurationSeconds int32
 }
 
 type CreatePresignedPortalUrlOutput struct {

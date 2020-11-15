@@ -55,7 +55,7 @@ type ListWorkteamsOutput struct {
 	// An array of Workteam objects, each describing a work team.
 	//
 	// This member is required.
-	Workteams []*types.Workteam
+	Workteams []types.Workteam
 
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
 	// the next set of work teams, use it in the subsequent request.

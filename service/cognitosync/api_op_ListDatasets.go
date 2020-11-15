@@ -58,10 +58,10 @@ type ListDatasetsInput struct {
 type ListDatasetsOutput struct {
 
 	// Number of datasets returned.
-	Count *int32
+	Count int32
 
 	// A set of datasets.
-	Datasets []*types.Dataset
+	Datasets []types.Dataset
 
 	// A pagination token for obtaining the next page of results.
 	NextToken *string

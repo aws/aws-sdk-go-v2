@@ -40,7 +40,7 @@ type DescribeReservedDBInstancesOfferingsInput struct {
 	Duration *string
 
 	// This parameter isn't currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
@@ -83,7 +83,7 @@ type DescribeReservedDBInstancesOfferingsOutput struct {
 	Marker *string
 
 	// A list of reserved DB instance offerings.
-	ReservedDBInstancesOfferings []*types.ReservedDBInstancesOffering
+	ReservedDBInstancesOfferings []types.ReservedDBInstancesOffering
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

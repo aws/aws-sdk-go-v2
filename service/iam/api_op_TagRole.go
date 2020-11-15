@@ -75,7 +75,7 @@ type TagRoleInput struct {
 	// name and an associated value. You can specify this with a JSON string.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagRoleOutput struct {

@@ -39,7 +39,7 @@ type BatchCreateRoomMembershipInput struct {
 	// The list of membership items.
 	//
 	// This member is required.
-	MembershipItemList []*types.MembershipItem
+	MembershipItemList []types.MembershipItem
 
 	// The room ID.
 	//
@@ -51,7 +51,7 @@ type BatchCreateRoomMembershipOutput struct {
 
 	// If the action fails for one or more of the member IDs in the request, a list of
 	// the member IDs is returned, along with error codes and error messages.
-	Errors []*types.MemberError
+	Errors []types.MemberError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

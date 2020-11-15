@@ -59,7 +59,7 @@ type AddApplicationCloudWatchLoggingOptionOutput struct {
 
 	// The descriptions of the current CloudWatch logging options for the Kinesis Data
 	// Analytics application.
-	CloudWatchLoggingOptionDescriptions []*types.CloudWatchLoggingOptionDescription
+	CloudWatchLoggingOptionDescriptions []types.CloudWatchLoggingOptionDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

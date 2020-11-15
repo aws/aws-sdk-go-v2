@@ -59,7 +59,7 @@ type DescribeComplianceByResourceInput struct {
 	// The maximum number of evaluation results returned on each page. The default is
 	// 10. You cannot specify a number greater than 100. If you specify 0, AWS Config
 	// uses the default.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
@@ -81,7 +81,7 @@ type DescribeComplianceByResourceOutput struct {
 
 	// Indicates whether the specified AWS resource complies with all of the AWS Config
 	// rules that evaluate it.
-	ComplianceByResources []*types.ComplianceByResource
+	ComplianceByResources []types.ComplianceByResource
 
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.

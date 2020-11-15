@@ -52,7 +52,7 @@ type DescribeHomeRegionControlsInput struct {
 type DescribeHomeRegionControlsOutput struct {
 
 	// An array that contains your HomeRegionControl objects.
-	HomeRegionControls []*types.HomeRegionControl
+	HomeRegionControls []types.HomeRegionControl
 
 	// If a NextToken was returned by a previous call, more results are available. To
 	// retrieve the next page of results, make the call again using the returned token

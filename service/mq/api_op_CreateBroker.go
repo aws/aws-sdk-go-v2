@@ -37,7 +37,7 @@ type CreateBrokerInput struct {
 	// Required. Enables automatic upgrades to new minor versions for brokers, as
 	// Apache releases the versions. The automatic upgrades occur during the
 	// maintenance window of the broker or after a manual broker reboot.
-	AutoMinorVersionUpgrade *bool
+	AutoMinorVersionUpgrade bool
 
 	// Required. The name of the broker. This value must be unique in your AWS account,
 	// 1-50 characters long, must contain only letters, numbers, dashes, and
@@ -84,11 +84,11 @@ type CreateBrokerInput struct {
 
 	// Required. Enables connections from applications outside of the VPC that hosts
 	// the broker's subnets.
-	PubliclyAccessible *bool
+	PubliclyAccessible bool
 
 	// The list of security groups (1 minimum, 5 maximum) that authorizes connections
 	// to brokers.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// The broker's storage type.
 	StorageType types.BrokerStorageType
@@ -97,16 +97,16 @@ type CreateBrokerInput struct {
 	// broker can use from different Availability Zones. A SINGLE_INSTANCE deployment
 	// requires one subnet (for example, the default subnet). An
 	// ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// Create tags when creating the broker.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Required. The list of ActiveMQ users (persons or applications) who can access
 	// queues and topics. This value can contain only alphanumeric characters, dashes,
 	// periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters
 	// long.
-	Users []*types.User
+	Users []types.User
 }
 
 type CreateBrokerOutput struct {

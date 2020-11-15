@@ -34,13 +34,13 @@ func (c *Client) DescribeBundleTasks(ctx context.Context, params *DescribeBundle
 type DescribeBundleTasksInput struct {
 
 	// The bundle task IDs. Default: Describes all your bundle tasks.
-	BundleIds []*string
+	BundleIds []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The filters.
 	//
@@ -71,13 +71,13 @@ type DescribeBundleTasksInput struct {
 	//
 	// *
 	// update-time - The time of the most recent update for the task.
-	Filters []*types.Filter
+	Filters []types.Filter
 }
 
 type DescribeBundleTasksOutput struct {
 
 	// Information about the bundle tasks.
-	BundleTasks []*types.BundleTask
+	BundleTasks []types.BundleTask
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

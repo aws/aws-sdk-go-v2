@@ -84,7 +84,7 @@ func TestCustomErrorDeserialization(t *testing.T) {
 			})
 			resp, err := svc.ChangeResourceRecordSets(context.Background(), &route53.ChangeResourceRecordSetsInput{
 				ChangeBatch: &types.ChangeBatch{
-					Changes: []*types.Change{},
+					Changes: []types.Change{},
 					Comment: aws.String("mock"),
 				},
 				HostedZoneId: aws.String("zone"),

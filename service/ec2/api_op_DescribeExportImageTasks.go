@@ -33,17 +33,17 @@ type DescribeExportImageTasksInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The IDs of the export image tasks.
-	ExportImageTaskIds []*string
+	ExportImageTaskIds []string
 
 	// Filter tasks using the task-state filter and one of the following values:
 	// active, completed, deleting, or deleted.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return in a single call.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token that indicates the next page of results.
 	NextToken *string
@@ -52,7 +52,7 @@ type DescribeExportImageTasksInput struct {
 type DescribeExportImageTasksOutput struct {
 
 	// Information about the export image tasks.
-	ExportImageTasks []*types.ExportImageTask
+	ExportImageTasks []types.ExportImageTask
 
 	// The token to use to get the next page of results. This value is null when there
 	// are no more results to return.

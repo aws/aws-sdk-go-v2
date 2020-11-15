@@ -51,7 +51,7 @@ type ListLunaClientsOutput struct {
 	// The list of clients.
 	//
 	// This member is required.
-	ClientList []*string
+	ClientList []string
 
 	// If not null, more results are available. Pass this to ListLunaClients to
 	// retrieve the next set of items.

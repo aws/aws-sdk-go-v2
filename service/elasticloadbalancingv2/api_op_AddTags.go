@@ -37,12 +37,12 @@ type AddTagsInput struct {
 	// The Amazon Resource Name (ARN) of the resource.
 	//
 	// This member is required.
-	ResourceArns []*string
+	ResourceArns []string
 
 	// The tags.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type AddTagsOutput struct {

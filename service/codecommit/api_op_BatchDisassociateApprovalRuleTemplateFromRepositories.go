@@ -41,7 +41,7 @@ type BatchDisassociateApprovalRuleTemplateFromRepositoriesInput struct {
 	// itself can be empty.
 	//
 	// This member is required.
-	RepositoryNames []*string
+	RepositoryNames []string
 }
 
 type BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput struct {
@@ -50,13 +50,13 @@ type BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput struct {
 	// removed.
 	//
 	// This member is required.
-	DisassociatedRepositoryNames []*string
+	DisassociatedRepositoryNames []string
 
 	// A list of any errors that might have occurred while attempting to remove the
 	// association between the template and the repositories.
 	//
 	// This member is required.
-	Errors []*types.BatchDisassociateApprovalRuleTemplateFromRepositoriesError
+	Errors []types.BatchDisassociateApprovalRuleTemplateFromRepositoriesError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

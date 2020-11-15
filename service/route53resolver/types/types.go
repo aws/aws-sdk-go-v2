@@ -192,7 +192,7 @@ type Filter struct {
 	// parameter that you want to use to filter objects. For example, to list only
 	// inbound Resolver endpoints, specify Direction for Name and specify INBOUND for
 	// Values.
-	Values []*string
+	Values []string
 }
 
 // In a CreateResolverEndpoint
@@ -319,7 +319,7 @@ type ResolverEndpoint struct {
 	// outbound rules (for outbound endpoints). Inbound and outbound rules must allow
 	// TCP and UDP access. For inbound access, open port 53. For outbound access, open
 	// the port that you're using for DNS queries on your network.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// A code that specifies the current status of the Resolver endpoint. Valid values
 	// include the following:
@@ -381,7 +381,7 @@ type ResolverQueryLogConfig struct {
 	Arn *string
 
 	// The number of VPCs that are associated with the query logging configuration.
-	AssociationCount *int32
+	AssociationCount int32
 
 	// The date and time that the query logging configuration was created, in Unix time
 	// format and Coordinated Universal Time (UTC).
@@ -570,7 +570,7 @@ type ResolverRule struct {
 	// An array that contains the IP addresses and ports that an outbound endpoint
 	// forwards DNS queries to. Typically, these are the IP addresses of DNS resolvers
 	// on your network. Specify IPv4 addresses. IPv6 is not supported.
-	TargetIps []*TargetAddress
+	TargetIps []TargetAddress
 }
 
 // In the response to an AssociateResolverRule
@@ -624,7 +624,7 @@ type ResolverRuleConfig struct {
 
 	// For DNS queries that originate in your VPC, the new IP addresses that you want
 	// to route outbound DNS queries to.
-	TargetIps []*TargetAddress
+	TargetIps []TargetAddress
 }
 
 // One tag that you want to add to the specified resource. A tag consists of a Key

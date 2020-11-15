@@ -96,7 +96,7 @@ type GetAssetPropertyAggregatesOutput struct {
 	// The requested aggregated values.
 	//
 	// This member is required.
-	AggregatedValues []*types.AggregatedValue
+	AggregatedValues []types.AggregatedValue
 
 	// The token for the next set of results, or null if there are no additional
 	// results.

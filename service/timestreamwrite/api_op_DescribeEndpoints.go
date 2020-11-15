@@ -49,7 +49,7 @@ type DescribeEndpointsOutput struct {
 	// An Endpoints object is returned when a DescribeEndpoints request is made.
 	//
 	// This member is required.
-	Endpoints []*types.Endpoint
+	Endpoints []types.Endpoint
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

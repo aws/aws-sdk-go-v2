@@ -36,7 +36,7 @@ type DescribeElasticLoadBalancersInput struct {
 
 	// A list of layer IDs. The action describes the Elastic Load Balancing instances
 	// for the specified layers.
-	LayerIds []*string
+	LayerIds []string
 
 	// A stack ID. The action describes the stack's Elastic Load Balancing instances.
 	StackId *string
@@ -47,7 +47,7 @@ type DescribeElasticLoadBalancersOutput struct {
 
 	// A list of ElasticLoadBalancer objects that describe the specified Elastic Load
 	// Balancing instances.
-	ElasticLoadBalancers []*types.ElasticLoadBalancer
+	ElasticLoadBalancers []types.ElasticLoadBalancer
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

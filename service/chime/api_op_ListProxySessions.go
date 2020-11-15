@@ -50,7 +50,7 @@ type ListProxySessionsOutput struct {
 	NextToken *string
 
 	// The proxy session details.
-	ProxySessions []*types.ProxySession
+	ProxySessions []types.ProxySession
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

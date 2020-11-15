@@ -796,17 +796,13 @@ func (m *awsAwsjson11_serializeOpPutResourceAttributes) HandleSerialize(ctx cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsjson11_serializeDocumentApplicationIds(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentApplicationIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -862,17 +858,13 @@ func awsAwsjson11_serializeDocumentResourceAttribute(v *types.ResourceAttribute,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResourceAttributeList(v []*types.ResourceAttribute, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentResourceAttributeList(v []types.ResourceAttribute, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentResourceAttribute(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentResourceAttribute(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -912,9 +904,9 @@ func awsAwsjson11_serializeOpDocumentAssociateCreatedArtifactInput(v *AssociateC
 		}
 	}
 
-	if v.DryRun != nil {
+	if v.DryRun {
 		ok := object.Key("DryRun")
-		ok.Boolean(*v.DryRun)
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.MigrationTaskName != nil {
@@ -941,9 +933,9 @@ func awsAwsjson11_serializeOpDocumentAssociateDiscoveredResourceInput(v *Associa
 		}
 	}
 
-	if v.DryRun != nil {
+	if v.DryRun {
 		ok := object.Key("DryRun")
-		ok.Boolean(*v.DryRun)
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.MigrationTaskName != nil {
@@ -963,9 +955,9 @@ func awsAwsjson11_serializeOpDocumentCreateProgressUpdateStreamInput(v *CreatePr
 	object := value.Object()
 	defer object.Close()
 
-	if v.DryRun != nil {
+	if v.DryRun {
 		ok := object.Key("DryRun")
-		ok.Boolean(*v.DryRun)
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.ProgressUpdateStreamName != nil {
@@ -980,9 +972,9 @@ func awsAwsjson11_serializeOpDocumentDeleteProgressUpdateStreamInput(v *DeletePr
 	object := value.Object()
 	defer object.Close()
 
-	if v.DryRun != nil {
+	if v.DryRun {
 		ok := object.Key("DryRun")
-		ok.Boolean(*v.DryRun)
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.ProgressUpdateStreamName != nil {
@@ -1031,9 +1023,9 @@ func awsAwsjson11_serializeOpDocumentDisassociateCreatedArtifactInput(v *Disasso
 		ok.String(*v.CreatedArtifactName)
 	}
 
-	if v.DryRun != nil {
+	if v.DryRun {
 		ok := object.Key("DryRun")
-		ok.Boolean(*v.DryRun)
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.MigrationTaskName != nil {
@@ -1058,9 +1050,9 @@ func awsAwsjson11_serializeOpDocumentDisassociateDiscoveredResourceInput(v *Disa
 		ok.String(*v.ConfigurationId)
 	}
 
-	if v.DryRun != nil {
+	if v.DryRun {
 		ok := object.Key("DryRun")
-		ok.Boolean(*v.DryRun)
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.MigrationTaskName != nil {
@@ -1080,9 +1072,9 @@ func awsAwsjson11_serializeOpDocumentImportMigrationTaskInput(v *ImportMigration
 	object := value.Object()
 	defer object.Close()
 
-	if v.DryRun != nil {
+	if v.DryRun {
 		ok := object.Key("DryRun")
-		ok.Boolean(*v.DryRun)
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.MigrationTaskName != nil {
@@ -1224,9 +1216,9 @@ func awsAwsjson11_serializeOpDocumentNotifyApplicationStateInput(v *NotifyApplic
 		ok.String(*v.ApplicationId)
 	}
 
-	if v.DryRun != nil {
+	if v.DryRun {
 		ok := object.Key("DryRun")
-		ok.Boolean(*v.DryRun)
+		ok.Boolean(v.DryRun)
 	}
 
 	if len(v.Status) > 0 {
@@ -1246,9 +1238,9 @@ func awsAwsjson11_serializeOpDocumentNotifyMigrationTaskStateInput(v *NotifyMigr
 	object := value.Object()
 	defer object.Close()
 
-	if v.DryRun != nil {
+	if v.DryRun {
 		ok := object.Key("DryRun")
-		ok.Boolean(*v.DryRun)
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.MigrationTaskName != nil {
@@ -1256,9 +1248,9 @@ func awsAwsjson11_serializeOpDocumentNotifyMigrationTaskStateInput(v *NotifyMigr
 		ok.String(*v.MigrationTaskName)
 	}
 
-	if v.NextUpdateSeconds != nil {
+	if v.NextUpdateSeconds != 0 {
 		ok := object.Key("NextUpdateSeconds")
-		ok.Integer(*v.NextUpdateSeconds)
+		ok.Integer(v.NextUpdateSeconds)
 	}
 
 	if v.ProgressUpdateStream != nil {
@@ -1285,9 +1277,9 @@ func awsAwsjson11_serializeOpDocumentPutResourceAttributesInput(v *PutResourceAt
 	object := value.Object()
 	defer object.Close()
 
-	if v.DryRun != nil {
+	if v.DryRun {
 		ok := object.Key("DryRun")
-		ok.Boolean(*v.DryRun)
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.MigrationTaskName != nil {

@@ -33,7 +33,7 @@ type GetFindingsInput struct {
 	// retrieve.
 	//
 	// This member is required.
-	FindingIds []*string
+	FindingIds []string
 
 	// The criteria for sorting the results of the request.
 	SortCriteria *types.SortCriteria
@@ -43,7 +43,7 @@ type GetFindingsOutput struct {
 
 	// An array of objects, one for each finding that meets the criteria specified in
 	// the request.
-	Findings []*types.Finding
+	Findings []types.Finding
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

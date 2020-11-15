@@ -60,7 +60,7 @@ type ModifyDBParameterGroupInput struct {
 	// changes are applied when you reboot the DB instance without failover.
 	//
 	// This member is required.
-	Parameters []*types.Parameter
+	Parameters []types.Parameter
 }
 
 type ModifyDBParameterGroupOutput struct {

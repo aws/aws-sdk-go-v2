@@ -51,10 +51,10 @@ type CreateProjectInput struct {
 
 	// A list of the Code objects submitted with the project request. If this parameter
 	// is specified, the request must also include the toolchain parameter.
-	SourceCode []*types.Code
+	SourceCode []types.Code
 
 	// The tags created for the project.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The name of the toolchain template file submitted with the project request. If
 	// this parameter is specified, the request must also include the sourceCode

@@ -49,7 +49,7 @@ type ListRunsOutput struct {
 	NextToken *string
 
 	// Information about the runs.
-	Runs []*types.Run
+	Runs []types.Run
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

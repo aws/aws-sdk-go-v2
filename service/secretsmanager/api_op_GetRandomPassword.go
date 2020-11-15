@@ -42,11 +42,11 @@ type GetRandomPasswordInput struct {
 	// Specifies that the generated password should not include lowercase letters. The
 	// default if you do not include this switch parameter is that lowercase letters
 	// can be included.
-	ExcludeLowercase *bool
+	ExcludeLowercase bool
 
 	// Specifies that the generated password should not include digits. The default if
 	// you do not include this switch parameter is that digits can be included.
-	ExcludeNumbers *bool
+	ExcludeNumbers bool
 
 	// Specifies that the generated password should not include punctuation characters.
 	// The default if you do not include this switch parameter is that punctuation
@@ -54,26 +54,26 @@ type GetRandomPasswordInput struct {
 	// can be included in the generated password if you don't explicitly exclude them
 	// with ExcludeCharacters or ExcludePunctuation: ! " # $ % & ' ( ) * + , - . / : ;
 	// < = > ? @ [ \ ] ^ _ ` { | } ~
-	ExcludePunctuation *bool
+	ExcludePunctuation bool
 
 	// Specifies that the generated password should not include uppercase letters. The
 	// default if you do not include this switch parameter is that uppercase letters
 	// can be included.
-	ExcludeUppercase *bool
+	ExcludeUppercase bool
 
 	// Specifies that the generated password can include the space character. The
 	// default if you do not include this switch parameter is that the space character
 	// is not included.
-	IncludeSpace *bool
+	IncludeSpace bool
 
 	// The desired length of the generated password. The default value if you do not
 	// include this parameter is 32 characters.
-	PasswordLength *int64
+	PasswordLength int64
 
 	// A boolean value that specifies whether the generated password must include at
 	// least one of every allowed character type. The default value is True and the
 	// operation requires at least one of every character type.
-	RequireEachIncludedType *bool
+	RequireEachIncludedType bool
 }
 
 type GetRandomPasswordOutput struct {

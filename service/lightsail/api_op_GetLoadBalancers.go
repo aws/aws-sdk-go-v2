@@ -39,7 +39,7 @@ type GetLoadBalancersInput struct {
 type GetLoadBalancersOutput struct {
 
 	// An array of LoadBalancer objects describing your load balancers.
-	LoadBalancers []*types.LoadBalancer
+	LoadBalancers []types.LoadBalancer
 
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next

@@ -38,7 +38,7 @@ type AssociateSigninDelegateGroupsWithAccountInput struct {
 	// The sign-in delegate groups.
 	//
 	// This member is required.
-	SigninDelegateGroups []*types.SigninDelegateGroup
+	SigninDelegateGroups []types.SigninDelegateGroup
 }
 
 type AssociateSigninDelegateGroupsWithAccountOutput struct {

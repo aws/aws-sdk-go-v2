@@ -47,7 +47,7 @@ type ListNetworkProfilesInput struct {
 type ListNetworkProfilesOutput struct {
 
 	// A list of the available network profiles.
-	NetworkProfiles []*types.NetworkProfile
+	NetworkProfiles []types.NetworkProfile
 
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.

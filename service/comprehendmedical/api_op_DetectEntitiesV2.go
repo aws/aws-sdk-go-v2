@@ -53,7 +53,7 @@ type DetectEntitiesV2Output struct {
 	// are also returned.
 	//
 	// This member is required.
-	Entities []*types.Entity
+	Entities []types.Entity
 
 	// The version of the model used to analyze the documents. The version number looks
 	// like X.X.X. You can use this information to track the model used for a
@@ -67,7 +67,7 @@ type DetectEntitiesV2Output struct {
 	PaginationToken *string
 
 	// Attributes extracted from the input text that couldn't be related to an entity.
-	UnmappedAttributes []*types.UnmappedAttribute
+	UnmappedAttributes []types.UnmappedAttribute
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

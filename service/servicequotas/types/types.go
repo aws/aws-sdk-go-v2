@@ -31,7 +31,7 @@ type MetricInfo struct {
 	// dimensions as categories for those characteristics. These dimensions are part of
 	// the CloudWatch Metric Identity that measures usage against a particular service
 	// quota.
-	MetricDimensions map[string]*string
+	MetricDimensions map[string]string
 
 	// The name of the CloudWatch metric that measures usage of a service quota. This
 	// is a required field.
@@ -71,7 +71,7 @@ type RequestedServiceQuotaChange struct {
 	DesiredValue *float64
 
 	// Identifies if the quota is global.
-	GlobalQuota *bool
+	GlobalQuota bool
 
 	// The unique identifier of a requested service quota change.
 	Id *string
@@ -121,13 +121,13 @@ type ServiceInfo struct {
 type ServiceQuota struct {
 
 	// Specifies if the quota value can be increased.
-	Adjustable *bool
+	Adjustable bool
 
 	// Specifies the ErrorCode and ErrorMessage when success isn't achieved.
 	ErrorReason *ErrorReason
 
 	// Specifies if the quota is global.
-	GlobalQuota *bool
+	GlobalQuota bool
 
 	// Identifies the unit and value of how time is measured.
 	Period *QuotaPeriod
@@ -168,7 +168,7 @@ type ServiceQuotaIncreaseRequestInTemplate struct {
 	DesiredValue *float64
 
 	// Specifies if the quota is a global quota.
-	GlobalQuota *bool
+	GlobalQuota bool
 
 	// The code identifier for the service quota specified in the increase request.
 	QuotaCode *string

@@ -39,7 +39,7 @@ type ListGeoMatchSetsInput struct {
 	// this request. If you have more GeoMatchSet objects than the number you specify
 	// for Limit, the response includes a NextMarker value that you can use to get
 	// another batch of GeoMatchSet objects.
-	Limit *int32
+	Limit int32
 
 	// If you specify a value for Limit and you have more GeoMatchSets than the value
 	// of Limit, AWS WAF returns a NextMarker value in the response that allows you to
@@ -52,7 +52,7 @@ type ListGeoMatchSetsInput struct {
 type ListGeoMatchSetsOutput struct {
 
 	// An array of GeoMatchSetSummary objects.
-	GeoMatchSets []*types.GeoMatchSetSummary
+	GeoMatchSets []types.GeoMatchSetSummary
 
 	// If you have more GeoMatchSet objects than the number that you specified for
 	// Limit in the request, the response includes a NextMarker value. To list more

@@ -36,7 +36,7 @@ type BatchGetWorkflowsInput struct {
 	// operation.
 	//
 	// This member is required.
-	Names []*string
+	Names []string
 
 	// Specifies whether to include a graph when returning the workflow resource
 	// metadata.
@@ -46,10 +46,10 @@ type BatchGetWorkflowsInput struct {
 type BatchGetWorkflowsOutput struct {
 
 	// A list of names of workflows not found.
-	MissingWorkflows []*string
+	MissingWorkflows []string
 
 	// A list of workflow resource metadata.
-	Workflows []*types.Workflow
+	Workflows []types.Workflow
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

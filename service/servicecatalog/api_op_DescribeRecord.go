@@ -52,7 +52,7 @@ type DescribeRecordInput struct {
 	AcceptLanguage *string
 
 	// The maximum number of items to return with this call.
-	PageSize *int32
+	PageSize int32
 
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
@@ -71,7 +71,7 @@ type DescribeRecordOutput struct {
 	// Information about the product created as the result of a request. For example,
 	// the output for a CloudFormation-backed product that creates an S3 bucket would
 	// include the S3 bucket URL.
-	RecordOutputs []*types.RecordOutput
+	RecordOutputs []types.RecordOutput
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

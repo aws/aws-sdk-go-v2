@@ -184,7 +184,7 @@ type GetFederationTokenInput struct {
 	// limit even if your plain text meets the other requirements. The PackedPolicySize
 	// response element indicates by percentage how close the policies and tags for
 	// your request are to the upper size limit.
-	PolicyArns []*types.PolicyDescriptorType
+	PolicyArns []types.PolicyDescriptorType
 
 	// A list of session tags. Each session tag consists of a key name and an
 	// associated value. For more information about session tags, see Passing Session
@@ -208,7 +208,7 @@ type GetFederationTokenInput struct {
 	// department=engineering session tag. Department and department are not saved as
 	// separate tags, and the session tag passed in the request takes precedence over
 	// the role tag.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Contains the response to a successful GetFederationToken request, including

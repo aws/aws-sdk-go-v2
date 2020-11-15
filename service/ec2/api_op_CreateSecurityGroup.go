@@ -67,10 +67,10 @@ type CreateSecurityGroupInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The tags to assign to the security group.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 
 	// [EC2-VPC] The ID of the VPC. Required for EC2-VPC.
 	VpcId *string
@@ -82,7 +82,7 @@ type CreateSecurityGroupOutput struct {
 	GroupId *string
 
 	// The tags assigned to the security group.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

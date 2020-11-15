@@ -40,14 +40,14 @@ type GetAuthorizationTokenInput struct {
 	// A list of AWS account IDs that are associated with the registries for which to
 	// get AuthorizationData objects. If you do not specify a registry, the default
 	// registry is assumed.
-	RegistryIds []*string
+	RegistryIds []string
 }
 
 type GetAuthorizationTokenOutput struct {
 
 	// A list of authorization token data objects that correspond to the registryIds
 	// values in the request.
-	AuthorizationData []*types.AuthorizationData
+	AuthorizationData []types.AuthorizationData
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

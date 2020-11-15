@@ -53,7 +53,7 @@ type ListItemsInput struct {
 type ListItemsOutput struct {
 
 	// The metadata entries for the folders and objects at the requested path.
-	Items []*types.Item
+	Items []types.Item
 
 	// The token that can be used in a request to view the next set of results. For
 	// example, you submit a ListItems request that matches 2,000 items with MaxResults

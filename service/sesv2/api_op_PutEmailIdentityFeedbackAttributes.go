@@ -52,7 +52,7 @@ type PutEmailIdentityFeedbackAttributesInput struct {
 	// receiving bounce or complaint notifications (for example, by setting up an event
 	// destination), you receive an email notification when these events occur (even if
 	// this setting is disabled).
-	EmailForwardingEnabled *bool
+	EmailForwardingEnabled bool
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request

@@ -111,13 +111,13 @@ type StartGameSessionPlacementInput struct {
 	PlacementId *string
 
 	// Set of information on each player to create a player session for.
-	DesiredPlayerSessions []*types.DesiredPlayerSession
+	DesiredPlayerSessions []types.DesiredPlayerSession
 
 	// Set of custom properties for a game session, formatted as key:value pairs. These
 	// properties are passed to a game server process in the GameSession object with a
 	// request to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	GameProperties []*types.GameProperty
+	GameProperties []types.GameProperty
 
 	// Set of custom game session properties, formatted as a single string value. This
 	// data is passed to a game server process in the GameSession object with a request
@@ -133,7 +133,7 @@ type StartGameSessionPlacementInput struct {
 	// a player experiences when connected to AWS Regions. This information is used to
 	// try to place the new game session where it can offer the best possible gameplay
 	// experience for the players.
-	PlayerLatencies []*types.PlayerLatency
+	PlayerLatencies []types.PlayerLatency
 }
 
 // Represents the returned data in response to a request operation.

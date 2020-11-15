@@ -60,14 +60,14 @@ type DescribeMatchmakingInput struct {
 	// values.
 	//
 	// This member is required.
-	TicketIds []*string
+	TicketIds []string
 }
 
 // Represents the returned data in response to a request operation.
 type DescribeMatchmakingOutput struct {
 
 	// A collection of existing matchmaking ticket objects matching the request.
-	TicketList []*types.MatchmakingTicket
+	TicketList []types.MatchmakingTicket
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

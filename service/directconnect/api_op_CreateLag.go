@@ -67,10 +67,10 @@ type CreateLagInput struct {
 	// by the LAG.
 	//
 	// This member is required.
-	NumberOfConnections *int32
+	NumberOfConnections int32
 
 	// The tags to associate with the automtically created LAGs.
-	ChildConnectionTags []*types.Tag
+	ChildConnectionTags []types.Tag
 
 	// The ID of an existing dedicated connection to migrate to the LAG.
 	ConnectionId *string
@@ -79,14 +79,14 @@ type CreateLagInput struct {
 	ProviderName *string
 
 	// The tags to associate with the LAG.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Information about a link aggregation group (LAG).
 type CreateLagOutput struct {
 
 	// Indicates whether the LAG can host other connections.
-	AllowsHostedConnections *bool
+	AllowsHostedConnections bool
 
 	// The AWS Direct Connect endpoint that hosts the LAG.
 	AwsDevice *string
@@ -95,7 +95,7 @@ type CreateLagOutput struct {
 	AwsDeviceV2 *string
 
 	// The connections bundled by the LAG.
-	Connections []*types.Connection
+	Connections []types.Connection
 
 	// The individual bandwidth of the physical connections bundled by the LAG. The
 	// possible values are 1Gbps and 10Gbps.
@@ -142,11 +142,11 @@ type CreateLagOutput struct {
 
 	// The minimum number of physical dedicated connections that must be operational
 	// for the LAG itself to be operational.
-	MinimumLinks *int32
+	MinimumLinks int32
 
 	// The number of physical dedicated connections bundled by the LAG, up to a maximum
 	// of 10.
-	NumberOfConnections *int32
+	NumberOfConnections int32
 
 	// The ID of the AWS account that owns the LAG.
 	OwnerAccount *string
@@ -158,7 +158,7 @@ type CreateLagOutput struct {
 	Region *string
 
 	// The tags associated with the LAG.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -39,7 +39,7 @@ type ListActivatedRulesInRuleGroupInput struct {
 	// request. If you have more ActivatedRules than the number that you specify for
 	// Limit, the response includes a NextMarker value that you can use to get another
 	// batch of ActivatedRules.
-	Limit *int32
+	Limit int32
 
 	// If you specify a value for Limit and you have more ActivatedRules than the value
 	// of Limit, AWS WAF returns a NextMarker value in the response that allows you to
@@ -56,7 +56,7 @@ type ListActivatedRulesInRuleGroupInput struct {
 type ListActivatedRulesInRuleGroupOutput struct {
 
 	// An array of ActivatedRules objects.
-	ActivatedRules []*types.ActivatedRule
+	ActivatedRules []types.ActivatedRule
 
 	// If you have more ActivatedRules than the number that you specified for Limit in
 	// the request, the response includes a NextMarker value. To list more

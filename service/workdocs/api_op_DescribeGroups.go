@@ -53,7 +53,7 @@ type DescribeGroupsInput struct {
 type DescribeGroupsOutput struct {
 
 	// The list of groups.
-	Groups []*types.GroupMetadata
+	Groups []types.GroupMetadata
 
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.

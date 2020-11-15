@@ -51,7 +51,7 @@ type GetPolicyVersionOutput struct {
 	GenerationId *string
 
 	// Specifies whether the policy version is the default.
-	IsDefaultVersion *bool
+	IsDefaultVersion bool
 
 	// The date the policy was last modified.
 	LastModifiedDate *time.Time

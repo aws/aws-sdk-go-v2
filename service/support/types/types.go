@@ -93,7 +93,7 @@ type CaseDetails struct {
 	CategoryCode *string
 
 	// The email addresses that receive copies of communication about the case.
-	CcEmailAddresses []*string
+	CcEmailAddresses []string
 
 	// The ID displayed for the case in the AWS Support Center. This is a numeric
 	// string.
@@ -160,7 +160,7 @@ type Category struct {
 type Communication struct {
 
 	// Information about the attachments to the case communication.
-	AttachmentSet []*AttachmentDetails
+	AttachmentSet []AttachmentDetails
 
 	// The text of the communication between the customer and AWS Support.
 	Body *string
@@ -184,7 +184,7 @@ type Communication struct {
 type RecentCaseCommunications struct {
 
 	// The five most recent communications associated with the case.
-	Communications []*Communication
+	Communications []Communication
 
 	// A resumption point for pagination.
 	NextToken *string
@@ -196,7 +196,7 @@ type Service struct {
 	// A list of categories that describe the type of support issue a case describes.
 	// Categories consist of a category name and a category code. Category names and
 	// codes are passed to AWS Support when you call CreateCase.
-	Categories []*Category
+	Categories []Category
 
 	// The code for an AWS service returned by the DescribeServices response. The name
 	// element contains the corresponding friendly name.
@@ -277,7 +277,7 @@ type TrustedAdvisorCheckDescription struct {
 	// shows just summary data.
 	//
 	// This member is required.
-	Metadata []*string
+	Metadata []string
 
 	// The display name for the Trusted Advisor check.
 	//
@@ -297,7 +297,7 @@ type TrustedAdvisorCheckRefreshStatus struct {
 	// for refresh.
 	//
 	// This member is required.
-	MillisUntilNextRefreshable *int64
+	MillisUntilNextRefreshable int64
 
 	// The status of the Trusted Advisor check for which a refresh has been
 	// requested:
@@ -338,7 +338,7 @@ type TrustedAdvisorCheckResult struct {
 	// The details about each resource listed in the check result.
 	//
 	// This member is required.
-	FlaggedResources []*TrustedAdvisorResourceDetail
+	FlaggedResources []TrustedAdvisorResourceDetail
 
 	// Details about AWS resources that were analyzed in a call to Trusted Advisor
 	// DescribeTrustedAdvisorCheckSummaries.
@@ -391,7 +391,7 @@ type TrustedAdvisorCheckSummary struct {
 	Timestamp *string
 
 	// Specifies whether the Trusted Advisor check has flagged resources.
-	HasFlaggedResources *bool
+	HasFlaggedResources bool
 }
 
 // The estimated cost savings that might be realized if the recommended operations
@@ -402,13 +402,13 @@ type TrustedAdvisorCostOptimizingSummary struct {
 	// operations are taken.
 	//
 	// This member is required.
-	EstimatedMonthlySavings *float64
+	EstimatedMonthlySavings float64
 
 	// The estimated percentage of savings that might be realized if the recommended
 	// operations are taken.
 	//
 	// This member is required.
-	EstimatedPercentMonthlySavings *float64
+	EstimatedPercentMonthlySavings float64
 }
 
 // Contains information about a resource identified by a Trusted Advisor check.
@@ -421,7 +421,7 @@ type TrustedAdvisorResourceDetail struct {
 	// just summary data.
 	//
 	// This member is required.
-	Metadata []*string
+	Metadata []string
 
 	// The unique identifier for the identified resource.
 	//
@@ -435,7 +435,7 @@ type TrustedAdvisorResourceDetail struct {
 
 	// Specifies whether the AWS resource was ignored by Trusted Advisor because it was
 	// marked as suppressed by the user.
-	IsSuppressed *bool
+	IsSuppressed bool
 
 	// The AWS region in which the identified resource is located.
 	Region *string
@@ -449,22 +449,22 @@ type TrustedAdvisorResourcesSummary struct {
 	// check.
 	//
 	// This member is required.
-	ResourcesFlagged *int64
+	ResourcesFlagged int64
 
 	// The number of AWS resources ignored by Trusted Advisor because information was
 	// unavailable.
 	//
 	// This member is required.
-	ResourcesIgnored *int64
+	ResourcesIgnored int64
 
 	// The number of AWS resources that were analyzed by the Trusted Advisor check.
 	//
 	// This member is required.
-	ResourcesProcessed *int64
+	ResourcesProcessed int64
 
 	// The number of AWS resources ignored by Trusted Advisor because they were marked
 	// as suppressed by the user.
 	//
 	// This member is required.
-	ResourcesSuppressed *int64
+	ResourcesSuppressed int64
 }

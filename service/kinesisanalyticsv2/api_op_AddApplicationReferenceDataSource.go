@@ -67,7 +67,7 @@ type AddApplicationReferenceDataSourceOutput struct {
 	ApplicationVersionId *int64
 
 	// Describes reference data sources configured for the application.
-	ReferenceDataSourceDescriptions []*types.ReferenceDataSourceDescription
+	ReferenceDataSourceDescriptions []types.ReferenceDataSourceDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -101,7 +101,7 @@ type ListHostedZonesByNameOutput struct {
 	// A complex type that contains general information about the hosted zone.
 	//
 	// This member is required.
-	HostedZones []*types.HostedZone
+	HostedZones []types.HostedZone
 
 	// A flag that indicates whether there are more hosted zones to be listed. If the
 	// response was truncated, you can get the next group of maxitems hosted zones by
@@ -109,7 +109,7 @@ type ListHostedZonesByNameOutput struct {
 	// NextHostedZoneId elements in the dnsname and hostedzoneid parameters.
 	//
 	// This member is required.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// The value that you specified for the maxitems parameter in the call to
 	// ListHostedZonesByName that produced the current response.

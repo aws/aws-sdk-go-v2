@@ -48,7 +48,7 @@ type GetPullRequestOverrideStateOutput struct {
 
 	// A Boolean value that indicates whether a pull request has had its rules set
 	// aside (TRUE) or whether all approval rules still apply (FALSE).
-	Overridden *bool
+	Overridden bool
 
 	// The Amazon Resource Name (ARN) of the user or identity that overrode the rules
 	// and their requirements for the pull request.

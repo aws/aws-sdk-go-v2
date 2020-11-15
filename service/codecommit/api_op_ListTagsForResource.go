@@ -50,7 +50,7 @@ type ListTagsForResourceOutput struct {
 	NextToken *string
 
 	// A list of tag key and value pairs associated with the specified resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

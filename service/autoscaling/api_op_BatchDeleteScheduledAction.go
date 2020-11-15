@@ -37,14 +37,14 @@ type BatchDeleteScheduledActionInput struct {
 	// The names of the scheduled actions to delete. The maximum number allowed is 50.
 	//
 	// This member is required.
-	ScheduledActionNames []*string
+	ScheduledActionNames []string
 }
 
 type BatchDeleteScheduledActionOutput struct {
 
 	// The names of the scheduled actions that could not be deleted, including an error
 	// message.
-	FailedScheduledActions []*types.FailedScheduledUpdateGroupActionRequest
+	FailedScheduledActions []types.FailedScheduledUpdateGroupActionRequest
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

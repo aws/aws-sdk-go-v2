@@ -415,13 +415,13 @@ func validateRecordPatch(v *types.RecordPatch) error {
 	}
 }
 
-func validateRecordPatchList(v []*types.RecordPatch) error {
+func validateRecordPatchList(v []types.RecordPatch) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RecordPatchList"}
 	for i := range v {
-		if err := validateRecordPatch(v[i]); err != nil {
+		if err := validateRecordPatch(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

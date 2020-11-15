@@ -74,7 +74,7 @@ type GetUsageForecastOutput struct {
 
 	// The forecasts for your query, in order. For DAILY forecasts, this is a list of
 	// days. For MONTHLY forecasts, this is a list of months.
-	ForecastResultsByTime []*types.ForecastResult
+	ForecastResultsByTime []types.ForecastResult
 
 	// How much you're forecasted to use over the forecast period.
 	Total *types.MetricValue

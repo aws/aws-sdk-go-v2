@@ -51,7 +51,7 @@ func (c *Client) DescribeFileSystems(ctx context.Context, params *DescribeFileSy
 type DescribeFileSystemsInput struct {
 
 	// IDs of the file systems whose descriptions you want to retrieve (String).
-	FileSystemIds []*string
+	FileSystemIds []string
 
 	// Maximum number of file systems to return in the response (integer). This
 	// parameter value must be greater than 0. The number of items that Amazon FSx
@@ -69,7 +69,7 @@ type DescribeFileSystemsInput struct {
 type DescribeFileSystemsOutput struct {
 
 	// An array of file system descriptions.
-	FileSystems []*types.FileSystem
+	FileSystems []types.FileSystem
 
 	// Present if there are more file systems than returned in the response (String).
 	// You can use the NextToken value in the later request to fetch the descriptions.

@@ -65,7 +65,7 @@ type DescribeEventsOutput struct {
 	NextToken *string
 
 	// Contains the response to a DescribeEvents request.
-	ServerEvents []*types.ServerEvent
+	ServerEvents []types.ServerEvent
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

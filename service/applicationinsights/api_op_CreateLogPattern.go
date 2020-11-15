@@ -47,7 +47,7 @@ type CreateLogPatternInput struct {
 	// Rank of the log pattern.
 	//
 	// This member is required.
-	Rank *int32
+	Rank int32
 
 	// The name of the resource group.
 	//

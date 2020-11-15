@@ -27,7 +27,7 @@ type DestinationConfig struct {
 	// connect to the destination application.
 	//
 	// This member is required.
-	Services []*string
+	Services []string
 
 	// The name of the IoT thing to which you want to connect.
 	//
@@ -56,7 +56,7 @@ type TimeoutConfig struct {
 	// The maximum amount of time (in minutes) a tunnel can remain open. If not
 	// specified, maxLifetimeTimeoutMinutes defaults to 720 minutes. Valid values are
 	// from 1 minute to 12 hours (720 minutes)
-	MaxLifetimeTimeoutMinutes *int32
+	MaxLifetimeTimeoutMinutes int32
 }
 
 // A connection between a source computer and a destination device.
@@ -86,7 +86,7 @@ type Tunnel struct {
 	Status TunnelStatus
 
 	// A list of tag metadata associated with the secure tunnel.
-	Tags []*Tag
+	Tags []Tag
 
 	// Timeout configuration for the tunnel.
 	TimeoutConfig *TimeoutConfig

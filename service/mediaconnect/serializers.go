@@ -76,13 +76,10 @@ func awsRestjson1_serializeOpHttpBindingsAddFlowOutputsInput(v *AddFlowOutputsIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FlowArn == nil {
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
 	}
 	if v.FlowArn != nil {
-		if len(*v.FlowArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
-		}
 		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
 			return err
 		}
@@ -167,13 +164,10 @@ func awsRestjson1_serializeOpHttpBindingsAddFlowSourcesInput(v *AddFlowSourcesIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FlowArn == nil {
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
 	}
 	if v.FlowArn != nil {
-		if len(*v.FlowArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
-		}
 		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
 			return err
 		}
@@ -258,13 +252,10 @@ func awsRestjson1_serializeOpHttpBindingsAddFlowVpcInterfacesInput(v *AddFlowVpc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FlowArn == nil {
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
 	}
 	if v.FlowArn != nil {
-		if len(*v.FlowArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
-		}
 		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
 			return err
 		}
@@ -458,13 +449,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteFlowInput(v *DeleteFlowInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FlowArn == nil {
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
 	}
 	if v.FlowArn != nil {
-		if len(*v.FlowArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
-		}
 		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
 			return err
 		}
@@ -524,13 +512,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeFlowInput(v *DescribeFlowInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FlowArn == nil {
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
 	}
 	if v.FlowArn != nil {
-		if len(*v.FlowArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
-		}
 		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
 			return err
 		}
@@ -590,13 +575,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeOfferingInput(v *DescribeOfferi
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.OfferingArn == nil {
+	if v.OfferingArn == nil || len(*v.OfferingArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member OfferingArn must not be empty")}
 	}
 	if v.OfferingArn != nil {
-		if len(*v.OfferingArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member OfferingArn must not be empty")}
-		}
 		if err := encoder.SetURI("OfferingArn").String(*v.OfferingArn); err != nil {
 			return err
 		}
@@ -656,13 +638,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeReservationInput(v *DescribeRes
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ReservationArn == nil {
+	if v.ReservationArn == nil || len(*v.ReservationArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ReservationArn must not be empty")}
 	}
 	if v.ReservationArn != nil {
-		if len(*v.ReservationArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ReservationArn must not be empty")}
-		}
 		if err := encoder.SetURI("ReservationArn").String(*v.ReservationArn); err != nil {
 			return err
 		}
@@ -733,13 +712,10 @@ func awsRestjson1_serializeOpHttpBindingsGrantFlowEntitlementsInput(v *GrantFlow
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FlowArn == nil {
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
 	}
 	if v.FlowArn != nil {
-		if len(*v.FlowArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
-		}
 		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
 			return err
 		}
@@ -813,8 +789,8 @@ func awsRestjson1_serializeOpHttpBindingsListEntitlementsInput(v *ListEntitlemen
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != nil {
-		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -875,8 +851,8 @@ func awsRestjson1_serializeOpHttpBindingsListFlowsInput(v *ListFlowsInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != nil {
-		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -937,8 +913,8 @@ func awsRestjson1_serializeOpHttpBindingsListOfferingsInput(v *ListOfferingsInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != nil {
-		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -999,8 +975,8 @@ func awsRestjson1_serializeOpHttpBindingsListReservationsInput(v *ListReservatio
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != nil {
-		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1061,13 +1037,10 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceArn == nil {
+	if v.ResourceArn == nil || len(*v.ResourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
 	}
 	if v.ResourceArn != nil {
-		if len(*v.ResourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1138,13 +1111,10 @@ func awsRestjson1_serializeOpHttpBindingsPurchaseOfferingInput(v *PurchaseOfferi
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.OfferingArn == nil {
+	if v.OfferingArn == nil || len(*v.OfferingArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member OfferingArn must not be empty")}
 	}
 	if v.OfferingArn != nil {
-		if len(*v.OfferingArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member OfferingArn must not be empty")}
-		}
 		if err := encoder.SetURI("OfferingArn").String(*v.OfferingArn); err != nil {
 			return err
 		}
@@ -1221,25 +1191,19 @@ func awsRestjson1_serializeOpHttpBindingsRemoveFlowOutputInput(v *RemoveFlowOutp
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FlowArn == nil {
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
 	}
 	if v.FlowArn != nil {
-		if len(*v.FlowArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
-		}
 		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
 			return err
 		}
 	}
 
-	if v.OutputArn == nil {
+	if v.OutputArn == nil || len(*v.OutputArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member OutputArn must not be empty")}
 	}
 	if v.OutputArn != nil {
-		if len(*v.OutputArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member OutputArn must not be empty")}
-		}
 		if err := encoder.SetURI("OutputArn").String(*v.OutputArn); err != nil {
 			return err
 		}
@@ -1299,25 +1263,19 @@ func awsRestjson1_serializeOpHttpBindingsRemoveFlowSourceInput(v *RemoveFlowSour
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FlowArn == nil {
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
 	}
 	if v.FlowArn != nil {
-		if len(*v.FlowArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
-		}
 		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
 			return err
 		}
 	}
 
-	if v.SourceArn == nil {
+	if v.SourceArn == nil || len(*v.SourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member SourceArn must not be empty")}
 	}
 	if v.SourceArn != nil {
-		if len(*v.SourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member SourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("SourceArn").String(*v.SourceArn); err != nil {
 			return err
 		}
@@ -1377,25 +1335,19 @@ func awsRestjson1_serializeOpHttpBindingsRemoveFlowVpcInterfaceInput(v *RemoveFl
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FlowArn == nil {
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
 	}
 	if v.FlowArn != nil {
-		if len(*v.FlowArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
-		}
 		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
 			return err
 		}
 	}
 
-	if v.VpcInterfaceName == nil {
+	if v.VpcInterfaceName == nil || len(*v.VpcInterfaceName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member VpcInterfaceName must not be empty")}
 	}
 	if v.VpcInterfaceName != nil {
-		if len(*v.VpcInterfaceName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member VpcInterfaceName must not be empty")}
-		}
 		if err := encoder.SetURI("VpcInterfaceName").String(*v.VpcInterfaceName); err != nil {
 			return err
 		}
@@ -1455,25 +1407,19 @@ func awsRestjson1_serializeOpHttpBindingsRevokeFlowEntitlementInput(v *RevokeFlo
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.EntitlementArn == nil {
+	if v.EntitlementArn == nil || len(*v.EntitlementArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EntitlementArn must not be empty")}
 	}
 	if v.EntitlementArn != nil {
-		if len(*v.EntitlementArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EntitlementArn must not be empty")}
-		}
 		if err := encoder.SetURI("EntitlementArn").String(*v.EntitlementArn); err != nil {
 			return err
 		}
 	}
 
-	if v.FlowArn == nil {
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
 	}
 	if v.FlowArn != nil {
-		if len(*v.FlowArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
-		}
 		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
 			return err
 		}
@@ -1533,13 +1479,10 @@ func awsRestjson1_serializeOpHttpBindingsStartFlowInput(v *StartFlowInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FlowArn == nil {
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
 	}
 	if v.FlowArn != nil {
-		if len(*v.FlowArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
-		}
 		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
 			return err
 		}
@@ -1599,13 +1542,10 @@ func awsRestjson1_serializeOpHttpBindingsStopFlowInput(v *StopFlowInput, encoder
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FlowArn == nil {
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
 	}
 	if v.FlowArn != nil {
-		if len(*v.FlowArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
-		}
 		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
 			return err
 		}
@@ -1676,13 +1616,10 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceArn == nil {
+	if v.ResourceArn == nil || len(*v.ResourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
 	}
 	if v.ResourceArn != nil {
-		if len(*v.ResourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1756,13 +1693,10 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceArn == nil {
+	if v.ResourceArn == nil || len(*v.ResourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
 	}
 	if v.ResourceArn != nil {
-		if len(*v.ResourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1770,10 +1704,7 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 
 	if v.TagKeys != nil {
 		for i := range v.TagKeys {
-			if v.TagKeys[i] == nil {
-				continue
-			}
-			encoder.AddQuery("tagKeys").String(*v.TagKeys[i])
+			encoder.AddQuery("tagKeys").String(v.TagKeys[i])
 		}
 	}
 
@@ -1842,13 +1773,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateFlowInput(v *UpdateFlowInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FlowArn == nil {
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
 	}
 	if v.FlowArn != nil {
-		if len(*v.FlowArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
-		}
 		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
 			return err
 		}
@@ -1933,25 +1861,19 @@ func awsRestjson1_serializeOpHttpBindingsUpdateFlowEntitlementInput(v *UpdateFlo
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.EntitlementArn == nil {
+	if v.EntitlementArn == nil || len(*v.EntitlementArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EntitlementArn must not be empty")}
 	}
 	if v.EntitlementArn != nil {
-		if len(*v.EntitlementArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EntitlementArn must not be empty")}
-		}
 		if err := encoder.SetURI("EntitlementArn").String(*v.EntitlementArn); err != nil {
 			return err
 		}
 	}
 
-	if v.FlowArn == nil {
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
 	}
 	if v.FlowArn != nil {
-		if len(*v.FlowArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
-		}
 		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
 			return err
 		}
@@ -2053,25 +1975,19 @@ func awsRestjson1_serializeOpHttpBindingsUpdateFlowOutputInput(v *UpdateFlowOutp
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FlowArn == nil {
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
 	}
 	if v.FlowArn != nil {
-		if len(*v.FlowArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
-		}
 		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
 			return err
 		}
 	}
 
-	if v.OutputArn == nil {
+	if v.OutputArn == nil || len(*v.OutputArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member OutputArn must not be empty")}
 	}
 	if v.OutputArn != nil {
-		if len(*v.OutputArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member OutputArn must not be empty")}
-		}
 		if err := encoder.SetURI("OutputArn").String(*v.OutputArn); err != nil {
 			return err
 		}
@@ -2108,14 +2024,14 @@ func awsRestjson1_serializeOpDocumentUpdateFlowOutputInput(v *UpdateFlowOutputIn
 		}
 	}
 
-	if v.MaxLatency != nil {
+	if v.MaxLatency != 0 {
 		ok := object.Key("maxLatency")
-		ok.Integer(*v.MaxLatency)
+		ok.Integer(v.MaxLatency)
 	}
 
-	if v.Port != nil {
+	if v.Port != 0 {
 		ok := object.Key("port")
-		ok.Integer(*v.Port)
+		ok.Integer(v.Port)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -2128,9 +2044,9 @@ func awsRestjson1_serializeOpDocumentUpdateFlowOutputInput(v *UpdateFlowOutputIn
 		ok.String(*v.RemoteId)
 	}
 
-	if v.SmoothingLatency != nil {
+	if v.SmoothingLatency != 0 {
 		ok := object.Key("smoothingLatency")
-		ok.Integer(*v.SmoothingLatency)
+		ok.Integer(v.SmoothingLatency)
 	}
 
 	if v.StreamId != nil {
@@ -2210,25 +2126,19 @@ func awsRestjson1_serializeOpHttpBindingsUpdateFlowSourceInput(v *UpdateFlowSour
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FlowArn == nil {
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
 	}
 	if v.FlowArn != nil {
-		if len(*v.FlowArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
-		}
 		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
 			return err
 		}
 	}
 
-	if v.SourceArn == nil {
+	if v.SourceArn == nil || len(*v.SourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member SourceArn must not be empty")}
 	}
 	if v.SourceArn != nil {
-		if len(*v.SourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member SourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("SourceArn").String(*v.SourceArn); err != nil {
 			return err
 		}
@@ -2258,19 +2168,19 @@ func awsRestjson1_serializeOpDocumentUpdateFlowSourceInput(v *UpdateFlowSourceIn
 		ok.String(*v.EntitlementArn)
 	}
 
-	if v.IngestPort != nil {
+	if v.IngestPort != 0 {
 		ok := object.Key("ingestPort")
-		ok.Integer(*v.IngestPort)
+		ok.Integer(v.IngestPort)
 	}
 
-	if v.MaxBitrate != nil {
+	if v.MaxBitrate != 0 {
 		ok := object.Key("maxBitrate")
-		ok.Integer(*v.MaxBitrate)
+		ok.Integer(v.MaxBitrate)
 	}
 
-	if v.MaxLatency != nil {
+	if v.MaxLatency != 0 {
 		ok := object.Key("maxLatency")
-		ok.Integer(*v.MaxLatency)
+		ok.Integer(v.MaxLatency)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -2296,100 +2206,76 @@ func awsRestjson1_serializeOpDocumentUpdateFlowSourceInput(v *UpdateFlowSourceIn
 	return nil
 }
 
-func awsRestjson1_serializeDocument__listOf__string(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocument__listOf__string(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocument__listOfAddOutputRequest(v []*types.AddOutputRequest, value smithyjson.Value) error {
+func awsRestjson1_serializeDocument__listOfAddOutputRequest(v []types.AddOutputRequest, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentAddOutputRequest(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentAddOutputRequest(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocument__listOfGrantEntitlementRequest(v []*types.GrantEntitlementRequest, value smithyjson.Value) error {
+func awsRestjson1_serializeDocument__listOfGrantEntitlementRequest(v []types.GrantEntitlementRequest, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentGrantEntitlementRequest(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentGrantEntitlementRequest(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocument__listOfSetSourceRequest(v []*types.SetSourceRequest, value smithyjson.Value) error {
+func awsRestjson1_serializeDocument__listOfSetSourceRequest(v []types.SetSourceRequest, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentSetSourceRequest(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentSetSourceRequest(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocument__listOfVpcInterfaceRequest(v []*types.VpcInterfaceRequest, value smithyjson.Value) error {
+func awsRestjson1_serializeDocument__listOfVpcInterfaceRequest(v []types.VpcInterfaceRequest, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentVpcInterfaceRequest(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentVpcInterfaceRequest(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocument__mapOf__string(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocument__mapOf__string(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -2422,9 +2308,9 @@ func awsRestjson1_serializeDocumentAddOutputRequest(v *types.AddOutputRequest, v
 		}
 	}
 
-	if v.MaxLatency != nil {
+	if v.MaxLatency != 0 {
 		ok := object.Key("maxLatency")
-		ok.Integer(*v.MaxLatency)
+		ok.Integer(v.MaxLatency)
 	}
 
 	if v.Name != nil {
@@ -2432,9 +2318,9 @@ func awsRestjson1_serializeDocumentAddOutputRequest(v *types.AddOutputRequest, v
 		ok.String(*v.Name)
 	}
 
-	if v.Port != nil {
+	if v.Port != 0 {
 		ok := object.Key("port")
-		ok.Integer(*v.Port)
+		ok.Integer(v.Port)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -2447,9 +2333,9 @@ func awsRestjson1_serializeDocumentAddOutputRequest(v *types.AddOutputRequest, v
 		ok.String(*v.RemoteId)
 	}
 
-	if v.SmoothingLatency != nil {
+	if v.SmoothingLatency != 0 {
 		ok := object.Key("smoothingLatency")
-		ok.Integer(*v.SmoothingLatency)
+		ok.Integer(v.SmoothingLatency)
 	}
 
 	if v.StreamId != nil {
@@ -2523,9 +2409,9 @@ func awsRestjson1_serializeDocumentFailoverConfig(v *types.FailoverConfig, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.RecoveryWindow != nil {
+	if v.RecoveryWindow != 0 {
 		ok := object.Key("recoveryWindow")
-		ok.Integer(*v.RecoveryWindow)
+		ok.Integer(v.RecoveryWindow)
 	}
 
 	if len(v.State) > 0 {
@@ -2540,9 +2426,9 @@ func awsRestjson1_serializeDocumentGrantEntitlementRequest(v *types.GrantEntitle
 	object := value.Object()
 	defer object.Close()
 
-	if v.DataTransferSubscriberFeePercent != nil {
+	if v.DataTransferSubscriberFeePercent != 0 {
 		ok := object.Key("dataTransferSubscriberFeePercent")
-		ok.Integer(*v.DataTransferSubscriberFeePercent)
+		ok.Integer(v.DataTransferSubscriberFeePercent)
 	}
 
 	if v.Description != nil {
@@ -2598,19 +2484,19 @@ func awsRestjson1_serializeDocumentSetSourceRequest(v *types.SetSourceRequest, v
 		ok.String(*v.EntitlementArn)
 	}
 
-	if v.IngestPort != nil {
+	if v.IngestPort != 0 {
 		ok := object.Key("ingestPort")
-		ok.Integer(*v.IngestPort)
+		ok.Integer(v.IngestPort)
 	}
 
-	if v.MaxBitrate != nil {
+	if v.MaxBitrate != 0 {
 		ok := object.Key("maxBitrate")
-		ok.Integer(*v.MaxBitrate)
+		ok.Integer(v.MaxBitrate)
 	}
 
-	if v.MaxLatency != nil {
+	if v.MaxLatency != 0 {
 		ok := object.Key("maxLatency")
-		ok.Integer(*v.MaxLatency)
+		ok.Integer(v.MaxLatency)
 	}
 
 	if v.Name != nil {
@@ -2697,9 +2583,9 @@ func awsRestjson1_serializeDocumentUpdateFailoverConfig(v *types.UpdateFailoverC
 	object := value.Object()
 	defer object.Close()
 
-	if v.RecoveryWindow != nil {
+	if v.RecoveryWindow != 0 {
 		ok := object.Key("recoveryWindow")
-		ok.Integer(*v.RecoveryWindow)
+		ok.Integer(v.RecoveryWindow)
 	}
 
 	if len(v.State) > 0 {

@@ -40,14 +40,14 @@ type DetachLoadBalancerFromSubnetsInput struct {
 	// The IDs of the subnets.
 	//
 	// This member is required.
-	Subnets []*string
+	Subnets []string
 }
 
 // Contains the output of DetachLoadBalancerFromSubnets.
 type DetachLoadBalancerFromSubnetsOutput struct {
 
 	// The IDs of the remaining subnets for the load balancer.
-	Subnets []*string
+	Subnets []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

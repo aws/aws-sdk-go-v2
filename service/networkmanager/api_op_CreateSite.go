@@ -51,7 +51,7 @@ type CreateSiteInput struct {
 	Location *types.Location
 
 	// The tags to apply to the resource during creation.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateSiteOutput struct {

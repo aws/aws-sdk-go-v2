@@ -54,7 +54,7 @@ type DescribeAccessPointsInput struct {
 type DescribeAccessPointsOutput struct {
 
 	// An array of access point descriptions.
-	AccessPoints []*types.AccessPointDescription
+	AccessPoints []types.AccessPointDescription
 
 	// Present if there are more access points than returned in the response. You can
 	// use the NextMarker in the subsequent request to fetch the additional

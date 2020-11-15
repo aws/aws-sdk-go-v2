@@ -62,11 +62,11 @@ type CreateAnalysisInput struct {
 	// providing a list of AWS Identity and Access Management (IAM) action information
 	// for each principal listed by Amazon Resource Name (ARN). To specify no
 	// permissions, omit Permissions.
-	Permissions []*types.ResourcePermission
+	Permissions []types.ResourcePermission
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned to
 	// the analysis.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The ARN for the theme to apply to the analysis that you're creating. To see the
 	// theme in the QuickSight console, make sure that you have access to it.
@@ -88,7 +88,7 @@ type CreateAnalysisOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -55,7 +55,7 @@ type ListPhoneNumbersOutput struct {
 	NextToken *string
 
 	// The phone number details.
-	PhoneNumbers []*types.PhoneNumber
+	PhoneNumbers []types.PhoneNumber
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

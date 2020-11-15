@@ -45,7 +45,7 @@ type UpdatePortfolioInput struct {
 	AcceptLanguage *string
 
 	// The tags to add.
-	AddTags []*types.Tag
+	AddTags []types.Tag
 
 	// The updated description of the portfolio.
 	Description *string
@@ -57,7 +57,7 @@ type UpdatePortfolioInput struct {
 	ProviderName *string
 
 	// The tags to remove.
-	RemoveTags []*string
+	RemoveTags []string
 }
 
 type UpdatePortfolioOutput struct {
@@ -66,7 +66,7 @@ type UpdatePortfolioOutput struct {
 	PortfolioDetail *types.PortfolioDetail
 
 	// Information about the tags associated with the portfolio.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

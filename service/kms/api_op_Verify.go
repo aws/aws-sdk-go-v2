@@ -101,7 +101,7 @@ type VerifyInput struct {
 	// A list of grant tokens. For more information, see Grant Tokens
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
-	GrantTokens []*string
+	GrantTokens []string
 
 	// Tells AWS KMS whether the value of the Message parameter is a message or message
 	// digest. The default value, RAW, indicates a message. To indicate a message
@@ -122,7 +122,7 @@ type VerifyOutput struct {
 	// True indicates that the Signature was produced by signing the Message with the
 	// specified KeyID and SigningAlgorithm. If the signature is not verified, the
 	// Verify operation fails with a KMSInvalidSignatureException exception.
-	SignatureValid *bool
+	SignatureValid bool
 
 	// The signing algorithm that was used to verify the signature.
 	SigningAlgorithm types.SigningAlgorithmSpec

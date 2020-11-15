@@ -115,7 +115,7 @@ type CreateComputeEnvironmentInput struct {
 	// UntagResource
 	// (https://docs.aws.amazon.com/batch/latest/APIReference/API_UntagResource.html)
 	// API operations. These tags do not propagate to the underlying compute resources.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateComputeEnvironmentOutput struct {

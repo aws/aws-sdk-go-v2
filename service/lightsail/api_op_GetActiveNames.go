@@ -38,7 +38,7 @@ type GetActiveNamesInput struct {
 type GetActiveNamesOutput struct {
 
 	// The list of active names returned by the get active names request.
-	ActiveNames []*string
+	ActiveNames []string
 
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next

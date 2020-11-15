@@ -40,10 +40,10 @@ type UpdateAccountAuditConfigurationInput struct {
 	// delete the scheduled audit itself. On the first call to
 	// UpdateAccountAuditConfiguration, this parameter is required and must specify at
 	// least one enabled check.
-	AuditCheckConfigurations map[string]*types.AuditCheckConfiguration
+	AuditCheckConfigurations map[string]types.AuditCheckConfiguration
 
 	// Information about the targets to which audit notifications are sent.
-	AuditNotificationTargetConfigurations map[string]*types.AuditNotificationTarget
+	AuditNotificationTargetConfigurations map[string]types.AuditNotificationTarget
 
 	// The ARN of the role that grants permission to AWS IoT to access information
 	// about your devices, policies, certificates and other items as required when

@@ -42,7 +42,7 @@ type ValidateConfigurationSettingsInput struct {
 	// A list of the options and desired values to evaluate.
 	//
 	// This member is required.
-	OptionSettings []*types.ConfigurationOptionSetting
+	OptionSettings []types.ConfigurationOptionSetting
 
 	// The name of the environment to validate the settings against. Condition: You
 	// cannot specify both this and a configuration template name.
@@ -57,7 +57,7 @@ type ValidateConfigurationSettingsInput struct {
 type ValidateConfigurationSettingsOutput struct {
 
 	// A list of ValidationMessage.
-	Messages []*types.ValidationMessage
+	Messages []types.ValidationMessage
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

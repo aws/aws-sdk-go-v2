@@ -66,7 +66,7 @@ type ListAuditMitigationActionsTasksOutput struct {
 	NextToken *string
 
 	// The collection of audit mitigation tasks that matched the filter criteria.
-	Tasks []*types.AuditMitigationActionsTaskMetadata
+	Tasks []types.AuditMitigationActionsTaskMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -2076,17 +2076,13 @@ func (m *awsAwsjson11_serializeOpUpdateVariable) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsjson11_serializeDocumentCsvIndexToVariableMap(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentCsvIndexToVariableMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -2108,17 +2104,13 @@ func awsAwsjson11_serializeDocumentEntity(v *types.Entity, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentEventVariableMap(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentEventVariableMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -2140,46 +2132,38 @@ func awsAwsjson11_serializeDocumentExternalEventsDetail(v *types.ExternalEventsD
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentExternalModelEndpointDataBlobMap(v map[string]*types.ModelEndpointDataBlob, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentExternalModelEndpointDataBlobMap(v map[string]types.ModelEndpointDataBlob, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentModelEndpointDataBlob(v[key], om); err != nil {
+		mapVar := v[key]
+		if err := awsAwsjson11_serializeDocumentModelEndpointDataBlob(&mapVar, om); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentJsonKeyToVariableMap(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentJsonKeyToVariableMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentLabelMapper(v map[string][]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentLabelMapper(v map[string][]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
 		if vv := v[key]; vv == nil {
-			om.Null()
 			continue
 		}
 		if err := awsAwsjson11_serializeDocumentListOfStrings(v[key], om); err != nil {
@@ -2203,51 +2187,39 @@ func awsAwsjson11_serializeDocumentLabelSchema(v *types.LabelSchema, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListOfEntities(v []*types.Entity, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentListOfEntities(v []types.Entity, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentEntity(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentEntity(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListOfModelVersions(v []*types.ModelVersion, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentListOfModelVersions(v []types.ModelVersion, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentModelVersion(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentModelVersion(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListOfStrings(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentListOfStrings(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2354,32 +2326,24 @@ func awsAwsjson11_serializeDocumentModelVersion(v *types.ModelVersion, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentNameList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentNameList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentNonEmptyListOfStrings(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentNonEmptyListOfStrings(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2406,17 +2370,13 @@ func awsAwsjson11_serializeDocumentRule(v *types.Rule, value smithyjson.Value) e
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRuleList(v []*types.Rule, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentRuleList(v []types.Rule, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentRule(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentRule(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2440,32 +2400,24 @@ func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagKeyList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2530,17 +2482,13 @@ func awsAwsjson11_serializeDocumentVariableEntry(v *types.VariableEntry, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentVariableEntryList(v []*types.VariableEntry, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentVariableEntryList(v []types.VariableEntry, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentVariableEntry(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentVariableEntry(&v[i], av); err != nil {
 			return err
 		}
 	}

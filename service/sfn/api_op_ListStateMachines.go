@@ -40,7 +40,7 @@ type ListStateMachinesInput struct {
 	// page size is 1000. A value of 0 uses the default. This is only an upper limit.
 	// The actual number of results returned per call might be fewer than the specified
 	// maximum.
-	MaxResults *int32
+	MaxResults int32
 
 	// If nextToken is returned, there are more results available. The value of
 	// nextToken is a unique pagination token for each page. Make the call again using
@@ -51,7 +51,7 @@ type ListStateMachinesInput struct {
 }
 
 type ListStateMachinesOutput struct {
-	StateMachines []*types.StateMachineListItem
+	StateMachines []types.StateMachineListItem
 
 	// If nextToken is returned, there are more results available. The value of
 	// nextToken is a unique pagination token for each page. Make the call again using

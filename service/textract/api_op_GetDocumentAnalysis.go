@@ -89,7 +89,7 @@ type GetDocumentAnalysisOutput struct {
 	AnalyzeDocumentModelVersion *string
 
 	// The results of the text-analysis operation.
-	Blocks []*types.Block
+	Blocks []types.Block
 
 	// Information about a document that Amazon Textract processed. DocumentMetadata is
 	// returned in every page of paginated responses from an Amazon Textract video
@@ -109,7 +109,7 @@ type GetDocumentAnalysisOutput struct {
 	StatusMessage *string
 
 	// A list of warnings that occurred during the document-analysis operation.
-	Warnings []*types.Warning
+	Warnings []types.Warning
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

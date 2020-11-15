@@ -316,13 +316,13 @@ func validateDomainValidationOption(v *types.DomainValidationOption) error {
 	}
 }
 
-func validateDomainValidationOptionList(v []*types.DomainValidationOption) error {
+func validateDomainValidationOptionList(v []types.DomainValidationOption) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DomainValidationOptionList"}
 	for i := range v {
-		if err := validateDomainValidationOption(v[i]); err != nil {
+		if err := validateDomainValidationOption(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -348,13 +348,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

@@ -120,7 +120,7 @@ type PutCompositeAlarmInput struct {
 	// The actions to execute when this alarm transitions to the ALARM state from any
 	// other state. Each action is specified as an Amazon Resource Name (ARN). Valid
 	// Values: arn:aws:sns:region:account-id:sns-topic-name
-	AlarmActions []*string
+	AlarmActions []string
 
 	// The description for the composite alarm.
 	AlarmDescription *string
@@ -128,19 +128,19 @@ type PutCompositeAlarmInput struct {
 	// The actions to execute when this alarm transitions to the INSUFFICIENT_DATA
 	// state from any other state. Each action is specified as an Amazon Resource Name
 	// (ARN). Valid Values: arn:aws:sns:region:account-id:sns-topic-name
-	InsufficientDataActions []*string
+	InsufficientDataActions []string
 
 	// The actions to execute when this alarm transitions to an OK state from any other
 	// state. Each action is specified as an Amazon Resource Name (ARN). Valid Values:
 	// arn:aws:sns:region:account-id:sns-topic-name
-	OKActions []*string
+	OKActions []string
 
 	// A list of key-value pairs to associate with the composite alarm. You can
 	// associate as many as 50 tags with an alarm. Tags can help you organize and
 	// categorize your resources. You can also use them to scope user permissions, by
 	// granting a user permission to access or change only resources with certain tag
 	// values.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type PutCompositeAlarmOutput struct {

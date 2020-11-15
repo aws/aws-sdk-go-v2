@@ -77,7 +77,7 @@ type DetectProtectiveEquipmentInput struct {
 type DetectProtectiveEquipmentOutput struct {
 
 	// An array of persons detected in the image (including persons not wearing PPE).
-	Persons []*types.ProtectiveEquipmentPerson
+	Persons []types.ProtectiveEquipmentPerson
 
 	// The version number of the PPE detection model used to detect PPE in the image.
 	ProtectiveEquipmentModelVersion *string

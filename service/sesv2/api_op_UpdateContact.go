@@ -45,11 +45,11 @@ type UpdateContactInput struct {
 	AttributesData *string
 
 	// The contact's preference for being opted-in to or opted-out of a topic.
-	TopicPreferences []*types.TopicPreference
+	TopicPreferences []types.TopicPreference
 
 	// A boolean value status noting if the contact is unsubscribed from all contact
 	// list topics.
-	UnsubscribeAll *bool
+	UnsubscribeAll bool
 }
 
 type UpdateContactOutput struct {

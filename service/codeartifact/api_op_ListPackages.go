@@ -91,7 +91,7 @@ type ListPackagesOutput struct {
 	// The list of returned PackageSummary
 	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html)
 	// objects.
-	Packages []*types.PackageSummary
+	Packages []types.PackageSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

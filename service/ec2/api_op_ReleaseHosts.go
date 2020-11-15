@@ -40,17 +40,17 @@ type ReleaseHostsInput struct {
 	// The IDs of the Dedicated Hosts to release.
 	//
 	// This member is required.
-	HostIds []*string
+	HostIds []string
 }
 
 type ReleaseHostsOutput struct {
 
 	// The IDs of the Dedicated Hosts that were successfully released.
-	Successful []*string
+	Successful []string
 
 	// The IDs of the Dedicated Hosts that could not be released, including an error
 	// message.
-	Unsuccessful []*types.UnsuccessfulItem
+	Unsuccessful []types.UnsuccessfulItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

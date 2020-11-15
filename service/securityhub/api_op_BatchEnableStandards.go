@@ -36,13 +36,13 @@ type BatchEnableStandardsInput struct {
 	// The list of standards checks to enable.
 	//
 	// This member is required.
-	StandardsSubscriptionRequests []*types.StandardsSubscriptionRequest
+	StandardsSubscriptionRequests []types.StandardsSubscriptionRequest
 }
 
 type BatchEnableStandardsOutput struct {
 
 	// The details of the standards subscriptions that were enabled.
-	StandardsSubscriptions []*types.StandardsSubscription
+	StandardsSubscriptions []types.StandardsSubscription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

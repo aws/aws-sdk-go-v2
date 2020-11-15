@@ -57,7 +57,7 @@ type TagResourceInput struct {
 	// and an optional value.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagResourceOutput struct {

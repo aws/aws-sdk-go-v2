@@ -36,7 +36,7 @@ type RemoveListenerCertificatesInput struct {
 	// CertificateArn to the certificate ARN but do not set IsDefault.
 	//
 	// This member is required.
-	Certificates []*types.Certificate
+	Certificates []types.Certificate
 
 	// The Amazon Resource Name (ARN) of the listener.
 	//

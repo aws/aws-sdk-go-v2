@@ -39,7 +39,7 @@ type Anomaly struct {
 	Feedback AnomalyFeedbackType
 
 	// The list of identified root causes for the anomaly.
-	RootCauses []*RootCause
+	RootCauses []RootCause
 }
 
 // The time period for an anomaly.
@@ -73,7 +73,7 @@ type AnomalyMonitor struct {
 	CreationDate *string
 
 	// The value for evaluated dimensions.
-	DimensionalValueCount *int32
+	DimensionalValueCount int32
 
 	// The date when the monitor last evaluated for anomalies.
 	LastEvaluatedDate *string
@@ -126,12 +126,12 @@ type AnomalyScore struct {
 	// The last observed score.
 	//
 	// This member is required.
-	CurrentScore *float64
+	CurrentScore float64
 
 	// The maximum score observed during the AnomalyDateInterval.
 	//
 	// This member is required.
-	MaxScore *float64
+	MaxScore float64
 }
 
 // The association between a monitor, threshold, and list of subscribers used to
@@ -148,12 +148,12 @@ type AnomalySubscription struct {
 	// A list of cost anomaly monitors.
 	//
 	// This member is required.
-	MonitorArnList []*string
+	MonitorArnList []string
 
 	// A list of subscribers to notify.
 	//
 	// This member is required.
-	Subscribers []*Subscriber
+	Subscribers []Subscriber
 
 	// The name for the subscription.
 	//
@@ -201,14 +201,14 @@ type CostCategory struct {
 	// value.
 	//
 	// This member is required.
-	Rules []*CostCategoryRule
+	Rules []CostCategoryRule
 
 	// The Cost Category's effective end date.
 	EffectiveEnd *string
 
 	// The list of processing statuses for Cost Management products for a specific cost
 	// category.
-	ProcessingStatus []*CostCategoryProcessingStatus
+	ProcessingStatus []CostCategoryProcessingStatus
 }
 
 // The list of processing statuses for Cost Management products for a specific cost
@@ -240,14 +240,14 @@ type CostCategoryReference struct {
 	Name *string
 
 	// The number of rules associated with a specific Cost Category.
-	NumberOfRules *int32
+	NumberOfRules int32
 
 	// The list of processing statuses for Cost Management products for a specific cost
 	// category.
-	ProcessingStatus []*CostCategoryProcessingStatus
+	ProcessingStatus []CostCategoryProcessingStatus
 
 	// A list of unique cost category values in a specific cost category.
-	Values []*string
+	Values []string
 }
 
 // Rules are processed in order. If there are multiple rules that match the line
@@ -289,7 +289,7 @@ type CostCategoryValues struct {
 	MatchOptions []MatchOption
 
 	// The specific value of the Cost Category.
-	Values []*string
+	Values []string
 }
 
 // The amount of instance usage that a reservation covered.
@@ -309,7 +309,7 @@ type Coverage struct {
 type CoverageByTime struct {
 
 	// The groups of instances that the reservation covered.
-	Groups []*ReservationCoverageGroup
+	Groups []ReservationCoverageGroup
 
 	// The period that this coverage was used over.
 	TimePeriod *DateInterval
@@ -399,7 +399,7 @@ type CurrentInstance struct {
 	SavingsPlansCoveredHoursInLookbackPeriod *string
 
 	// Cost allocation resource tags applied to the instance.
-	Tags []*TagValues
+	Tags []TagValues
 
 	// The total number of hours the instance ran during the lookback period.
 	TotalRunningHoursInLookbackPeriod *string
@@ -438,7 +438,7 @@ type DimensionValues struct {
 
 	// The metadata values that you can use to filter and group your results. You can
 	// use GetDimensionValues to find specific values.
-	Values []*string
+	Values []string
 }
 
 // The metadata of a specific type that you can use to filter and group your
@@ -446,7 +446,7 @@ type DimensionValues struct {
 type DimensionValuesWithAttributes struct {
 
 	// The attribute that applies to a specific Dimension.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// The value of a dimension with a specific attribute.
 	Value *string
@@ -476,7 +476,7 @@ type EC2InstanceDetails struct {
 	AvailabilityZone *string
 
 	// Whether the recommendation is for a current-generation instance.
-	CurrentGeneration *bool
+	CurrentGeneration bool
 
 	// The instance family of the recommended reservation.
 	Family *string
@@ -492,7 +492,7 @@ type EC2InstanceDetails struct {
 	Region *string
 
 	// Whether the recommended reservation is size flexible.
-	SizeFlexEligible *bool
+	SizeFlexEligible bool
 
 	// Whether the recommended reservation is dedicated or shared.
 	Tenancy *string
@@ -561,7 +561,7 @@ type EC2Specification struct {
 type ElastiCacheInstanceDetails struct {
 
 	// Whether the recommendation is for a current generation instance.
-	CurrentGeneration *bool
+	CurrentGeneration bool
 
 	// The instance family of the recommended reservation.
 	Family *string
@@ -576,14 +576,14 @@ type ElastiCacheInstanceDetails struct {
 	Region *string
 
 	// Whether the recommended reservation is size flexible.
-	SizeFlexEligible *bool
+	SizeFlexEligible bool
 }
 
 // Details about the Amazon ES instances that AWS recommends that you purchase.
 type ESInstanceDetails struct {
 
 	// Whether the recommendation is for a current-generation instance.
-	CurrentGeneration *bool
+	CurrentGeneration bool
 
 	// The class of instance that AWS recommends.
 	InstanceClass *string
@@ -595,7 +595,7 @@ type ESInstanceDetails struct {
 	Region *string
 
 	// Whether the recommended reservation is size flexible.
-	SizeFlexEligible *bool
+	SizeFlexEligible bool
 }
 
 // Use Expression to filter by cost or by usage. There are two patterns:
@@ -631,7 +631,7 @@ type ESInstanceDetails struct {
 type Expression struct {
 
 	// Return results that match both Dimension objects.
-	And []*Expression
+	And []Expression
 
 	// The filter based on CostCategory values.
 	CostCategories *CostCategoryValues
@@ -643,7 +643,7 @@ type Expression struct {
 	Not *Expression
 
 	// Return results that match either Dimension object.
-	Or []*Expression
+	Or []Expression
 
 	// The specific Tag to use for Expression.
 	Tags *TagValues
@@ -669,10 +669,10 @@ type ForecastResult struct {
 type Group struct {
 
 	// The keys that are included in this group.
-	Keys []*string
+	Keys []string
 
 	// The metrics that are included in this group.
-	Metrics map[string]*MetricValue
+	Metrics map[string]MetricValue
 }
 
 // Represents a group when you specify a group by criteria or in the response to a
@@ -692,10 +692,10 @@ type Impact struct {
 	// The maximum dollar value observed for an anomaly.
 	//
 	// This member is required.
-	MaxImpact *float64
+	MaxImpact float64
 
 	// The cumulative dollar value observed for an anomaly.
-	TotalImpact *float64
+	TotalImpact float64
 }
 
 // Details about the instances that AWS recommends that you purchase.
@@ -731,14 +731,14 @@ type MetricValue struct {
 type ModifyRecommendationDetail struct {
 
 	// Identifies whether this instance type is the AWS default recommendation.
-	TargetInstances []*TargetInstance
+	TargetInstances []TargetInstance
 }
 
 // Details about the Amazon RDS instances that AWS recommends that you purchase.
 type RDSInstanceDetails struct {
 
 	// Whether the recommendation is for a current-generation instance.
-	CurrentGeneration *bool
+	CurrentGeneration bool
 
 	// The database edition that the recommended reservation supports.
 	DatabaseEdition *string
@@ -763,7 +763,7 @@ type RDSInstanceDetails struct {
 	Region *string
 
 	// Whether the recommended reservation is size flexible.
-	SizeFlexEligible *bool
+	SizeFlexEligible bool
 }
 
 // Details about the Amazon Redshift instances that AWS recommends that you
@@ -771,7 +771,7 @@ type RDSInstanceDetails struct {
 type RedshiftInstanceDetails struct {
 
 	// Whether the recommendation is for a current-generation instance.
-	CurrentGeneration *bool
+	CurrentGeneration bool
 
 	// The instance family of the recommended reservation.
 	Family *string
@@ -783,7 +783,7 @@ type RedshiftInstanceDetails struct {
 	Region *string
 
 	// Whether the recommended reservation is size flexible.
-	SizeFlexEligible *bool
+	SizeFlexEligible bool
 }
 
 // The aggregated numbers for your reservation usage.
@@ -845,7 +845,7 @@ type ReservationAggregates struct {
 type ReservationCoverageGroup struct {
 
 	// The attributes for this group of reservations.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// How much instance usage this group of reservations covered.
 	Coverage *Coverage
@@ -867,7 +867,7 @@ type ReservationPurchaseRecommendation struct {
 	PaymentOption PaymentOption
 
 	// Details about the recommended purchases.
-	RecommendationDetails []*ReservationPurchaseRecommendationDetail
+	RecommendationDetails []ReservationPurchaseRecommendationDetail
 
 	// A summary about the recommended purchase.
 	RecommendationSummary *ReservationPurchaseRecommendationSummary
@@ -986,7 +986,7 @@ type ReservationPurchaseRecommendationSummary struct {
 type ReservationUtilizationGroup struct {
 
 	// The attributes for this group of reservations.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// The key for a specific reservation attribute.
 	Key *string
@@ -1016,16 +1016,16 @@ type ResourceUtilization struct {
 type ResultByTime struct {
 
 	// Whether the result is estimated.
-	Estimated *bool
+	Estimated bool
 
 	// The groups that this time period includes.
-	Groups []*Group
+	Groups []Group
 
 	// The time period that the result covers.
 	TimePeriod *DateInterval
 
 	// The total amount of cost or usage accrued during the time period.
-	Total map[string]*MetricValue
+	Total map[string]MetricValue
 }
 
 // Recommendations to rightsize resources.
@@ -1058,7 +1058,7 @@ type RightsizingRecommendationConfiguration struct {
 	// calculation. The default value is TRUE.
 	//
 	// This member is required.
-	BenefitsConsidered *bool
+	BenefitsConsidered bool
 
 	// The option to see recommendations within the same instance family, or
 	// recommendations for instances across other families. The default value is
@@ -1138,7 +1138,7 @@ type SavingsPlansAmortizedCommitment struct {
 type SavingsPlansCoverage struct {
 
 	// The attribute that applies to a specific Dimension.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// The amount of Savings Plans eligible usage that the Savings Plans covered.
 	Coverage *SavingsPlansCoverageData
@@ -1197,7 +1197,7 @@ type SavingsPlansPurchaseRecommendation struct {
 
 	// Details for the Savings Plans we recommend that you purchase to cover existing
 	// Savings Plans eligible workloads.
-	SavingsPlansPurchaseRecommendationDetails []*SavingsPlansPurchaseRecommendationDetail
+	SavingsPlansPurchaseRecommendationDetails []SavingsPlansPurchaseRecommendationDetail
 
 	// Summary metrics for your Savings Plans Recommendations.
 	SavingsPlansPurchaseRecommendationSummary *SavingsPlansPurchaseRecommendationSummary
@@ -1418,7 +1418,7 @@ type SavingsPlansUtilizationDetail struct {
 	AmortizedCommitment *SavingsPlansAmortizedCommitment
 
 	// The attribute that applies to a specific Dimension.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// The amount saved by using existing Savings Plans. Savings returns both net
 	// savings from savings plans as well as the onDemandCostEquivalent of the Savings
@@ -1466,7 +1466,7 @@ type TagValues struct {
 	MatchOptions []MatchOption
 
 	// The specific value of the tag.
-	Values []*string
+	Values []string
 }
 
 // Details on recommended instance.
@@ -1476,7 +1476,7 @@ type TargetInstance struct {
 	CurrencyCode *string
 
 	// Indicates whether this recommendation is the defaulted AWS recommendation.
-	DefaultTargetInstance *bool
+	DefaultTargetInstance bool
 
 	// Expected cost to operate this instance type on a monthly basis.
 	EstimatedMonthlyCost *string
@@ -1512,17 +1512,17 @@ type TotalImpactFilter struct {
 	// The lower bound dollar value used in the filter.
 	//
 	// This member is required.
-	StartValue *float64
+	StartValue float64
 
 	// The upper bound dollar value used in the filter.
-	EndValue *float64
+	EndValue float64
 }
 
 // The amount of utilization, in hours.
 type UtilizationByTime struct {
 
 	// The groups that this utilization result uses.
-	Groups []*ReservationUtilizationGroup
+	Groups []ReservationUtilizationGroup
 
 	// The period of time that this utilization was used for.
 	TimePeriod *DateInterval

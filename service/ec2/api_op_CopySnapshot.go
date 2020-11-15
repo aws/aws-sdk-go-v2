@@ -63,7 +63,7 @@ type CopySnapshotInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// To encrypt a copy of an unencrypted snapshot if encryption by default is not
 	// enabled, enable encryption using this parameter. Otherwise, omit this parameter.
@@ -72,7 +72,7 @@ type CopySnapshotInput struct {
 	// For more information, see Amazon EBS Encryption
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the
 	// Amazon Elastic Compute Cloud User Guide.
-	Encrypted *bool
+	Encrypted bool
 
 	// The identifier of the AWS Key Management Service (AWS KMS) customer master key
 	// (CMK) to use for Amazon EBS encryption. If this parameter is not specified, your
@@ -114,7 +114,7 @@ type CopySnapshotInput struct {
 	PresignedUrl *string
 
 	// The tags to apply to the new snapshot.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 
 	// Used by the SDK's PresignURL autofill customization to specify the region the of
 	// the client's request.
@@ -127,7 +127,7 @@ type CopySnapshotOutput struct {
 	SnapshotId *string
 
 	// Any tags applied to the new snapshot.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

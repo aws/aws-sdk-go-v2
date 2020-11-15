@@ -37,7 +37,7 @@ type BatchDetectDominantLanguageInput struct {
 	// must contain fewer than 5,000 bytes of UTF-8 encoded characters.
 	//
 	// This member is required.
-	TextList []*string
+	TextList []string
 }
 
 type BatchDetectDominantLanguageOutput struct {
@@ -48,7 +48,7 @@ type BatchDetectDominantLanguageOutput struct {
 	// ErrorList is empty.
 	//
 	// This member is required.
-	ErrorList []*types.BatchItemError
+	ErrorList []types.BatchItemError
 
 	// A list of objects containing the results of the operation. The results are
 	// sorted in ascending order by the Index field and match the order of the
@@ -56,7 +56,7 @@ type BatchDetectDominantLanguageOutput struct {
 	// ResultList is empty.
 	//
 	// This member is required.
-	ResultList []*types.BatchDetectDominantLanguageItemResult
+	ResultList []types.BatchDetectDominantLanguageItemResult
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

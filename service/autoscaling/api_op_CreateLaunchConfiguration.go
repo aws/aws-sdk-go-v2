@@ -62,7 +62,7 @@ type CreateLaunchConfigurationInput struct {
 	// Device Mapping
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html)
 	// in the Amazon EC2 User Guide for Linux Instances.
-	BlockDeviceMappings []*types.BlockDeviceMapping
+	BlockDeviceMappings []types.BlockDeviceMapping
 
 	// The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to. For
 	// more information, see ClassicLink
@@ -82,7 +82,7 @@ type CreateLaunchConfigurationInput struct {
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink)
 	// in the Amazon EC2 Auto Scaling User Guide. If you specify the ClassicLinkVPCId
 	// parameter, you must specify this parameter.
-	ClassicLinkVPCSecurityGroups []*string
+	ClassicLinkVPCSecurityGroups []string
 
 	// Specifies whether the launch configuration is optimized for EBS I/O (true) or
 	// not (false). The optimization provides dedicated throughput to Amazon EBS and an
@@ -175,7 +175,7 @@ type CreateLaunchConfigurationInput struct {
 	// EC2 Security Groups
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html)
 	// in the Amazon EC2 User Guide for Linux Instances.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// The maximum hourly price to be paid for any Spot Instance launched to fulfill
 	// the request. Spot Instances are launched when the price you specify exceeds the

@@ -66,7 +66,7 @@ type StartAutomationExecutionInput struct {
 
 	// A key-value map of execution parameters, which match the declared parameters in
 	// the Automation document.
-	Parameters map[string][]*string
+	Parameters map[string][]string
 
 	// Optional metadata that you assign to a resource. You can specify a maximum of
 	// five tags for an automation. Tags enable you to categorize a resource in
@@ -81,7 +81,7 @@ type StartAutomationExecutionInput struct {
 	//
 	// To add tags to an existing
 	// patch baseline, use the AddTagsToResource action.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A location is a combination of AWS Regions and/or AWS accounts where you want to
 	// run the Automation. Use this action to start an Automation in multiple Regions
@@ -89,11 +89,11 @@ type StartAutomationExecutionInput struct {
 	// multiple AWS Regions and accounts
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html)
 	// in the AWS Systems Manager User Guide.
-	TargetLocations []*types.TargetLocation
+	TargetLocations []types.TargetLocation
 
 	// A key-value mapping of document parameters to target resources. Both Targets and
 	// TargetMaps cannot be specified together.
-	TargetMaps []map[string][]*string
+	TargetMaps []map[string][]string
 
 	// The name of the parameter used as the target resource for the rate-controlled
 	// execution. Required if you specify targets.
@@ -101,7 +101,7 @@ type StartAutomationExecutionInput struct {
 
 	// A key-value mapping to target resources. Required if you specify
 	// TargetParameterName.
-	Targets []*types.Target
+	Targets []types.Target
 }
 
 type StartAutomationExecutionOutput struct {

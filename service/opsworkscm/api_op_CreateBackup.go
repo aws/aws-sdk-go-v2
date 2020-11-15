@@ -63,7 +63,7 @@ type CreateBackupInput struct {
 	//
 	// * A maximum of 50 user-applied tags is
 	// allowed for tag-supported AWS OpsWorks-CM resources.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateBackupOutput struct {

@@ -39,7 +39,7 @@ type DescribeTagsInput struct {
 
 	// One or more filters to scope the tags to return. The maximum number of filters
 	// per filter type (for example, auto-scaling-group) is 1000.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100.
@@ -59,7 +59,7 @@ type DescribeTagsOutput struct {
 	NextToken *string
 
 	// One or more tags.
-	Tags []*types.TagDescription
+	Tags []types.TagDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

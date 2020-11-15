@@ -820,13 +820,13 @@ func validateInputLogEvent(v *types.InputLogEvent) error {
 	}
 }
 
-func validateInputLogEvents(v []*types.InputLogEvent) error {
+func validateInputLogEvents(v []types.InputLogEvent) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InputLogEvents"}
 	for i := range v {
-		if err := validateInputLogEvent(v[i]); err != nil {
+		if err := validateInputLogEvent(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -858,13 +858,13 @@ func validateMetricTransformation(v *types.MetricTransformation) error {
 	}
 }
 
-func validateMetricTransformations(v []*types.MetricTransformation) error {
+func validateMetricTransformations(v []types.MetricTransformation) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricTransformations"}
 	for i := range v {
-		if err := validateMetricTransformation(v[i]); err != nil {
+		if err := validateMetricTransformation(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

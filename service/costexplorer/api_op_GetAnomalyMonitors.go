@@ -34,7 +34,7 @@ type GetAnomalyMonitorsInput struct {
 	MaxResults *int32
 
 	// A list of cost anomaly monitor ARNs.
-	MonitorArnList []*string
+	MonitorArnList []string
 
 	// The token to retrieve the next set of results. AWS provides the token when the
 	// response from a previous call has more results than the maximum page size.
@@ -47,7 +47,7 @@ type GetAnomalyMonitorsOutput struct {
 	// monitor.
 	//
 	// This member is required.
-	AnomalyMonitors []*types.AnomalyMonitor
+	AnomalyMonitors []types.AnomalyMonitor
 
 	// The token to retrieve the next set of results. AWS provides the token when the
 	// response from a previous call has more results than the maximum page size.

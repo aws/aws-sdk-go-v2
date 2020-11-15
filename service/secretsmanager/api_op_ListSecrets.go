@@ -47,7 +47,7 @@ func (c *Client) ListSecrets(ctx context.Context, params *ListSecretsInput, optF
 type ListSecretsInput struct {
 
 	// Lists the secret request filters.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// (Optional) Limits the number of results you want to include in the response. If
 	// you don't include this parameter, it defaults to a value that's specific to the
@@ -58,7 +58,7 @@ type ListSecretsInput struct {
 	// results than the maximum even when there are more results available. You should
 	// check NextToken after every operation to ensure that you receive all of the
 	// results.
-	MaxResults *int32
+	MaxResults int32
 
 	// (Optional) Use this parameter in a request if you receive a NextToken response
 	// in a previous request indicating there's more output available. In a subsequent
@@ -82,7 +82,7 @@ type ListSecretsOutput struct {
 	NextToken *string
 
 	// A list of the secrets in the account.
-	SecretList []*types.SecretListEntry
+	SecretList []types.SecretListEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

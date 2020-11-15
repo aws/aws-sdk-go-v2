@@ -62,7 +62,7 @@ type DescribeAssetModelOutput struct {
 	// relationships for an asset model.
 	//
 	// This member is required.
-	AssetModelHierarchies []*types.AssetModelHierarchy
+	AssetModelHierarchies []types.AssetModelHierarchy
 
 	// The ID of the asset model.
 	//
@@ -82,7 +82,7 @@ type DescribeAssetModelOutput struct {
 	// The list of asset properties for the asset model.
 	//
 	// This member is required.
-	AssetModelProperties []*types.AssetModelProperty
+	AssetModelProperties []types.AssetModelProperty
 
 	// The current status of the asset model, which contains a state and any error
 	// message.

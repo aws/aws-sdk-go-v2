@@ -44,7 +44,7 @@ type ListTagsInput struct {
 type ListTagsOutput struct {
 
 	// List of Tag for the requested Elasticsearch domain.
-	TagList []*types.Tag
+	TagList []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

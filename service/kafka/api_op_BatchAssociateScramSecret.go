@@ -38,7 +38,7 @@ type BatchAssociateScramSecretInput struct {
 	// List of AWS Secrets Manager secret ARNs.
 	//
 	// This member is required.
-	SecretArnList []*string
+	SecretArnList []string
 }
 
 type BatchAssociateScramSecretOutput struct {
@@ -47,7 +47,7 @@ type BatchAssociateScramSecretOutput struct {
 	ClusterArn *string
 
 	// List of errors when associating secrets to cluster.
-	UnprocessedScramSecrets []*types.UnprocessedScramSecret
+	UnprocessedScramSecrets []types.UnprocessedScramSecret
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

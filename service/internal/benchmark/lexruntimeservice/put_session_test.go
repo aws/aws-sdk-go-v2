@@ -118,13 +118,13 @@ func benchPutSessionSmithy(b *testing.B) {
 			Message:          ptr.String("fooMessage"),
 			MessageFormat:    types.MessageFormatTypePlainText,
 			SlotToElicit:     ptr.String("fooSlot"),
-			Slots: map[string]*string{
-				"fooSlot": ptr.String("fooValue"),
-				"barSlot": ptr.String("barValue"),
+			Slots: map[string]string{
+				"fooSlot": "fooValue",
+				"barSlot": "barValue",
 			},
 			Type: types.DialogActionTypeElicitSlot,
 		},
-		RecentIntentSummaryView: []*types.IntentSummary{
+		RecentIntentSummaryView: []types.IntentSummary{
 			{
 				CheckpointLabel:    ptr.String("fooLabel"),
 				ConfirmationStatus: types.ConfirmationStatusConfirmed,
@@ -132,14 +132,14 @@ func benchPutSessionSmithy(b *testing.B) {
 				FulfillmentState:   types.FulfillmentStateFulfilled,
 				IntentName:         ptr.String("fooIntent"),
 				SlotToElicit:       ptr.String("fooSlot"),
-				Slots: map[string]*string{
-					"fooSlot": ptr.String("fooValue"),
-					"barSlot": ptr.String("barValue"),
+				Slots: map[string]string{
+					"fooSlot": "fooValue",
+					"barSlot": "barValue",
 				},
 			},
 		},
-		SessionAttributes: map[string]*string{
-			"fooAttr": ptr.String("fooValue"),
+		SessionAttributes: map[string]string{
+			"fooAttr": "fooValue",
 		},
 		UserId: ptr.String("fooUser"),
 	}

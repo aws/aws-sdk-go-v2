@@ -157,11 +157,11 @@ type DeploymentTargets struct {
 
 	// The names of one or more AWS accounts for which you want to deploy stack set
 	// updates.
-	Accounts []*string
+	Accounts []string
 
 	// The organization root ID or organizational unit (OU) IDs to which StackSets
 	// deploys.
-	OrganizationalUnitIds []*string
+	OrganizationalUnitIds []string
 }
 
 // The Export structure describes the exported output values for a stack.
@@ -241,7 +241,7 @@ type Parameter struct {
 type ParameterConstraints struct {
 
 	// A list of values that are permitted for a parameter.
-	AllowedValues []*string
+	AllowedValues []string
 }
 
 // The ParameterDeclaration data type.
@@ -335,7 +335,7 @@ type ResourceChange struct {
 
 	// For the Modify action, a list of ResourceChangeDetail structures that describes
 	// the changes that AWS CloudFormation will make to the resource.
-	Details []*ResourceChangeDetail
+	Details []ResourceChangeDetail
 
 	// The resource's logical ID, which is defined in the stack's template.
 	LogicalResourceId *string
@@ -429,12 +429,12 @@ type ResourceIdentifierSummary struct {
 
 	// The logical IDs of the target resources of the specified ResourceType, as
 	// defined in the import template.
-	LogicalResourceIds []*string
+	LogicalResourceIds []string
 
 	// The resource properties you can provide during the import to identify your
 	// target resources. For example, BucketName is a possible identifier property for
 	// AWS::S3::Bucket resources.
-	ResourceIdentifiers []*string
+	ResourceIdentifiers []string
 
 	// The template resource type of the target resources, such as AWS::S3::Bucket.
 	ResourceType *string
@@ -474,7 +474,7 @@ type ResourceToImport struct {
 	// is the actual property value (for example, MyS3Bucket).
 	//
 	// This member is required.
-	ResourceIdentifier map[string]*string
+	ResourceIdentifier map[string]string
 
 	// The type of resource to import into your stack, such as AWS::S3::Bucket. For a
 	// list of supported resource types, see Resources that support import operations
@@ -532,7 +532,7 @@ type RollbackConfiguration struct {
 	// If a
 	// specified trigger is missing, the entire stack operation fails and is rolled
 	// back.
-	RollbackTriggers []*RollbackTrigger
+	RollbackTriggers []RollbackTrigger
 }
 
 // A rollback trigger AWS CloudFormation monitors during creation and updating of
@@ -614,13 +614,13 @@ type Stack struct {
 	LastUpdatedTime *time.Time
 
 	// SNS topic ARNs to which stack related events are published.
-	NotificationARNs []*string
+	NotificationARNs []string
 
 	// A list of output structures.
-	Outputs []*Output
+	Outputs []Output
 
 	// A list of Parameter structures.
-	Parameters []*Parameter
+	Parameters []Parameter
 
 	// For nested stacks--stacks created as resources for another stack--the stack ID
 	// of the direct parent of this stack. For the first level of nested stacks, the
@@ -653,7 +653,7 @@ type Stack struct {
 	StackStatusReason *string
 
 	// A list of Tags that specify information about the stack.
-	Tags []*Tag
+	Tags []Tag
 
 	// The amount of time within which stack creation should complete.
 	TimeoutInMinutes *int32
@@ -821,7 +821,7 @@ type StackInstance struct {
 
 	// A list of parameters from the stack set template whose values have been
 	// overridden in this stack instance.
-	ParameterOverrides []*Parameter
+	ParameterOverrides []Parameter
 
 	// The name of the AWS Region that the stack instance is associated with.
 	Region *string
@@ -1159,12 +1159,12 @@ type StackResourceDrift struct {
 	// resource's logical and physical IDs are not enough to uniquely identify that
 	// resource. Each context key-value pair specifies a unique resource that contains
 	// the targeted resource.
-	PhysicalResourceIdContext []*PhysicalResourceIdContextKeyValuePair
+	PhysicalResourceIdContext []PhysicalResourceIdContextKeyValuePair
 
 	// A collection of the resource properties whose actual values differ from their
 	// expected values. These will be present only for resources whose
 	// StackResourceDriftStatus is MODIFIED.
-	PropertyDifferences []*PropertyDifference
+	PropertyDifferences []PropertyDifference
 }
 
 // Contains information about whether the resource's actual configuration differs,
@@ -1313,10 +1313,10 @@ type StackSet struct {
 	// [Service-managed permissions] The organization root ID or organizational unit
 	// (OU) IDs that you specified for DeploymentTargets
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html).
-	OrganizationalUnitIds []*string
+	OrganizationalUnitIds []string
 
 	// A list of input parameters for a stack set.
-	Parameters []*Parameter
+	Parameters []Parameter
 
 	// Describes how the IAM roles required for stack set operations are created.
 	//
@@ -1353,7 +1353,7 @@ type StackSet struct {
 
 	// A list of tags that specify information about the stack set. A maximum number of
 	// 50 tags can be specified.
-	Tags []*Tag
+	Tags []Tag
 
 	// The structure that contains the body of the template that was used to create or
 	// update the stack set.
@@ -1411,17 +1411,17 @@ type StackSetDriftDetectionDetails struct {
 	// parameter configuration of the stack set. A stack instance is considered to have
 	// drifted if one or more of the resources in the associated stack do not match
 	// their expected configuration.
-	DriftedStackInstancesCount *int32
+	DriftedStackInstancesCount int32
 
 	// The number of stack instances for which the drift detection operation failed.
-	FailedStackInstancesCount *int32
+	FailedStackInstancesCount int32
 
 	// The number of stack instances that are currently being checked for drift.
-	InProgressStackInstancesCount *int32
+	InProgressStackInstancesCount int32
 
 	// The number of stack instances which match the expected template and parameter
 	// configuration of the stack set.
-	InSyncStackInstancesCount *int32
+	InSyncStackInstancesCount int32
 
 	// Most recent time when CloudFormation performed a drift detection operation on
 	// the stack set. This value will be NULL for any stack set on which drift
@@ -1441,7 +1441,7 @@ type StackSetDriftDetectionDetails struct {
 	// has failed.
 	//
 	// * Stack instances currently being checked for drift.
-	TotalStackInstancesCount *int32
+	TotalStackInstancesCount int32
 }
 
 // The structure that contains information about a stack set operation.
@@ -1580,7 +1580,7 @@ type StackSetOperationPreferences struct {
 	MaxConcurrentPercentage *int32
 
 	// The order of the Regions in where you want to perform the stack operation.
-	RegionOrder []*string
+	RegionOrder []string
 }
 
 // The structure that contains information about a specified operation's results

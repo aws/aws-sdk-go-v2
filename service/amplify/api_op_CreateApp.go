@@ -44,7 +44,7 @@ type CreateAppInput struct {
 	AutoBranchCreationConfig *types.AutoBranchCreationConfig
 
 	// The automated branch creation glob patterns for the Amplify app.
-	AutoBranchCreationPatterns []*string
+	AutoBranchCreationPatterns []string
 
 	// The credentials for basic authorization for an Amplify app.
 	BasicAuthCredentials *string
@@ -53,7 +53,7 @@ type CreateAppInput struct {
 	BuildSpec *string
 
 	// The custom rewrite and redirect rules for an Amplify app.
-	CustomRules []*types.CustomRule
+	CustomRules []types.CustomRule
 
 	// The description for an Amplify app.
 	Description *string
@@ -73,7 +73,7 @@ type CreateAppInput struct {
 	EnableBranchAutoDeletion *bool
 
 	// The environment variables map for an Amplify app.
-	EnvironmentVariables map[string]*string
+	EnvironmentVariables map[string]string
 
 	// The AWS Identity and Access Management (IAM) service role for an Amplify app.
 	IamServiceRoleArn *string
@@ -90,7 +90,7 @@ type CreateAppInput struct {
 	Repository *string
 
 	// The tag for an Amplify app.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateAppOutput struct {

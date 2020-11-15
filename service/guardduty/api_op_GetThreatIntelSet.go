@@ -65,7 +65,7 @@ type GetThreatIntelSetOutput struct {
 	Status types.ThreatIntelSetStatus
 
 	// The tags of the threat list resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

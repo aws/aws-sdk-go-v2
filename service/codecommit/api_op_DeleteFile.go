@@ -69,7 +69,7 @@ type DeleteFileInput struct {
 	// structure. For example, if the path to a file is dir1/dir2/dir3/dir4, and dir2
 	// and dir3 are empty, deleting the last file in dir4 also deletes the empty
 	// folders dir4, dir3, and dir2.
-	KeepEmptyFolders *bool
+	KeepEmptyFolders bool
 
 	// The name of the author of the commit that deletes the file. If no name is
 	// specified, the user's ARN is used as the author name and committer name.

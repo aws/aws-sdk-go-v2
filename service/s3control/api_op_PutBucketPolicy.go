@@ -86,7 +86,7 @@ type PutBucketPolicyInput struct {
 	// Set this parameter to true to confirm that you want to remove your permissions
 	// to change this bucket policy in the future. This is not supported by Amazon S3
 	// on Outposts buckets.
-	ConfirmRemoveSelfBucketAccess *bool
+	ConfirmRemoveSelfBucketAccess bool
 }
 
 type PutBucketPolicyOutput struct {

@@ -43,13 +43,13 @@ type ListPrincipalsInput struct {
 	NextToken *string
 
 	// The principals.
-	Principals []*string
+	Principals []string
 
 	// The Amazon Resource Name (ARN) of the resource.
 	ResourceArn *string
 
 	// The Amazon Resource Names (ARN) of the resource shares.
-	ResourceShareArns []*string
+	ResourceShareArns []string
 
 	// The resource type. Valid values: codebuild:Project | codebuild:ReportGroup |
 	// ec2:CapacityReservation | ec2:DedicatedHost | ec2:Subnet |
@@ -67,7 +67,7 @@ type ListPrincipalsOutput struct {
 	NextToken *string
 
 	// The principals.
-	Principals []*types.Principal
+	Principals []types.Principal
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -74,7 +74,7 @@ type CreateClusterParameterGroupInput struct {
 	ParameterGroupName *string
 
 	// A list of tag instances.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateClusterParameterGroupOutput struct {

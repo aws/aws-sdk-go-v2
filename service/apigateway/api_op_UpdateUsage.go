@@ -45,7 +45,7 @@ type UpdateUsageInput struct {
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
-	PatchOperations []*types.PatchOperation
+	PatchOperations []types.PatchOperation
 }
 
 // Represents the usage data of a usage plan. Create and Use Usage Plans
@@ -62,7 +62,7 @@ type UpdateUsageOutput struct {
 	// "values" : { "{api_key}" : [ [0, 100], [10, 90], [100, 10]]}, where {api_key}
 	// stands for an API key value and the daily log entry is of the format [used
 	// quota, remaining quota].
-	Items map[string][][]*int64
+	Items map[string][][]int64
 
 	// The current pagination position in the paged result set.
 	Position *string

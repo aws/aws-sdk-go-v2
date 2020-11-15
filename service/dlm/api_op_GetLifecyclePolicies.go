@@ -31,7 +31,7 @@ func (c *Client) GetLifecyclePolicies(ctx context.Context, params *GetLifecycleP
 type GetLifecyclePoliciesInput struct {
 
 	// The identifiers of the data lifecycle policies.
-	PolicyIds []*string
+	PolicyIds []string
 
 	// The resource type.
 	ResourceTypes []types.ResourceTypeValues
@@ -42,16 +42,16 @@ type GetLifecyclePoliciesInput struct {
 	// The tags to add to objects created by the policy. Tags are strings in the format
 	// key=value. These user-defined tags are added in addition to the AWS-added
 	// lifecycle tags.
-	TagsToAdd []*string
+	TagsToAdd []string
 
 	// The target tag for a policy. Tags are strings in the format key=value.
-	TargetTags []*string
+	TargetTags []string
 }
 
 type GetLifecyclePoliciesOutput struct {
 
 	// Summary information about the lifecycle policies.
-	Policies []*types.LifecyclePolicySummary
+	Policies []types.LifecyclePolicySummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

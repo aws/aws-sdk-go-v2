@@ -73,7 +73,7 @@ type ListAWSDefaultServiceQuotasOutput struct {
 	NextToken *string
 
 	// A list of the quotas in the account with the AWS default values.
-	Quotas []*types.ServiceQuota
+	Quotas []types.ServiceQuota
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -53,7 +53,7 @@ type UpdateGlobalTableInput struct {
 	// A list of Regions that should be added or removed from the global table.
 	//
 	// This member is required.
-	ReplicaUpdates []*types.ReplicaUpdate
+	ReplicaUpdates []types.ReplicaUpdate
 }
 
 type UpdateGlobalTableOutput struct {

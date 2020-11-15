@@ -36,7 +36,7 @@ type SetCognitoEventsInput struct {
 	// The events to configure
 	//
 	// This member is required.
-	Events map[string]*string
+	Events map[string]string
 
 	// The Cognito Identity Pool to use when configuring Cognito Events
 	//

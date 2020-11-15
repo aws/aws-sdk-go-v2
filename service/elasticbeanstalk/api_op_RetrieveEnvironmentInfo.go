@@ -55,7 +55,7 @@ type RetrieveEnvironmentInfoInput struct {
 type RetrieveEnvironmentInfoOutput struct {
 
 	// The EnvironmentInfoDescription of the environment.
-	EnvironmentInfo []*types.EnvironmentInfoDescription
+	EnvironmentInfo []types.EnvironmentInfoDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

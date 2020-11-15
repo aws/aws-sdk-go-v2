@@ -41,7 +41,7 @@ type DeleteCertificateInput struct {
 
 	// Forces the deletion of a certificate if it is inactive and is not attached to an
 	// IoT thing.
-	ForceDelete *bool
+	ForceDelete bool
 }
 
 type DeleteCertificateOutput struct {

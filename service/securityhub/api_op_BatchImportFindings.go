@@ -61,7 +61,7 @@ type BatchImportFindingsInput struct {
 	// Maximum of 100 findings per request.
 	//
 	// This member is required.
-	Findings []*types.AwsSecurityFinding
+	Findings []types.AwsSecurityFinding
 }
 
 type BatchImportFindingsOutput struct {
@@ -69,15 +69,15 @@ type BatchImportFindingsOutput struct {
 	// The number of findings that failed to import.
 	//
 	// This member is required.
-	FailedCount *int32
+	FailedCount int32
 
 	// The number of findings that were successfully imported.
 	//
 	// This member is required.
-	SuccessCount *int32
+	SuccessCount int32
 
 	// The list of findings that failed to import.
-	FailedFindings []*types.ImportFindingsError
+	FailedFindings []types.ImportFindingsError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -39,7 +39,7 @@ type GetRelationalDatabaseLogStreamsOutput struct {
 
 	// An object describing the result of your get relational database log streams
 	// request.
-	LogStreams []*string
+	LogStreams []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

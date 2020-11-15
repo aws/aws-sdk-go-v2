@@ -53,7 +53,7 @@ type GetCredentialsForIdentityInput struct {
 	// Identity Providers
 	// (http://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html)
 	// section of the Amazon Cognito Developer Guide.
-	Logins map[string]*string
+	Logins map[string]string
 }
 
 // Returned in response to a successful GetCredentialsForIdentity operation.

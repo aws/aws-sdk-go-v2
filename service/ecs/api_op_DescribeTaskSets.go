@@ -51,16 +51,16 @@ type DescribeTaskSetsInput struct {
 	Include []types.TaskSetField
 
 	// The ID or full Amazon Resource Name (ARN) of task sets to describe.
-	TaskSets []*string
+	TaskSets []string
 }
 
 type DescribeTaskSetsOutput struct {
 
 	// Any failures associated with the call.
-	Failures []*types.Failure
+	Failures []types.Failure
 
 	// The list of task sets described.
-	TaskSets []*types.TaskSet
+	TaskSets []types.TaskSet
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

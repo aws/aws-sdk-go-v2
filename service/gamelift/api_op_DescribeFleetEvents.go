@@ -98,7 +98,7 @@ type DescribeFleetEventsInput struct {
 type DescribeFleetEventsOutput struct {
 
 	// A collection of objects containing event log entries for the specified fleet.
-	Events []*types.Event
+	Events []types.Event
 
 	// Token that indicates where to resume retrieving results on the next call to this
 	// operation. If no token is returned, these results represent the end of the list.

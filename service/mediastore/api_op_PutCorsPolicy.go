@@ -48,7 +48,7 @@ type PutCorsPolicyInput struct {
 	// The CORS policy to apply to the container.
 	//
 	// This member is required.
-	CorsPolicy []*types.CorsRule
+	CorsPolicy []types.CorsRule
 }
 
 type PutCorsPolicyOutput struct {

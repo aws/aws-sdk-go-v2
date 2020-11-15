@@ -47,7 +47,7 @@ type DescribeAnalysisSchemesInput struct {
 	DomainName *string
 
 	// The analysis schemes you want to describe.
-	AnalysisSchemeNames []*string
+	AnalysisSchemeNames []string
 
 	// Whether to display the deployed configuration (true) or include any pending
 	// changes (false). Defaults to false.
@@ -61,7 +61,7 @@ type DescribeAnalysisSchemesOutput struct {
 	// The analysis scheme descriptions.
 	//
 	// This member is required.
-	AnalysisSchemes []*types.AnalysisSchemeStatus
+	AnalysisSchemes []types.AnalysisSchemeStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

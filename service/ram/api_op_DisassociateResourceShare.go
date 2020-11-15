@@ -40,10 +40,10 @@ type DisassociateResourceShareInput struct {
 	ClientToken *string
 
 	// The principals.
-	Principals []*string
+	Principals []string
 
 	// The Amazon Resource Names (ARNs) of the resources.
-	ResourceArns []*string
+	ResourceArns []string
 }
 
 type DisassociateResourceShareOutput struct {
@@ -53,7 +53,7 @@ type DisassociateResourceShareOutput struct {
 	ClientToken *string
 
 	// Information about the associations.
-	ResourceShareAssociations []*types.ResourceShareAssociation
+	ResourceShareAssociations []types.ResourceShareAssociation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

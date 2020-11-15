@@ -62,7 +62,7 @@ type ListTagsForResourceOutput struct {
 	NextToken *string
 
 	// Tags that have been applied to the resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

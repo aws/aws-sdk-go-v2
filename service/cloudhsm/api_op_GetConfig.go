@@ -54,7 +54,7 @@ type GetConfigInput struct {
 	// associated with the client.
 	//
 	// This member is required.
-	HapgList []*string
+	HapgList []string
 }
 
 type GetConfigOutput struct {

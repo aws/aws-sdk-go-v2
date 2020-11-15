@@ -56,7 +56,7 @@ type DeleteUserOutput struct {
 	Status *string
 
 	// Returns a list of the user group IDs the user belongs to.
-	UserGroupIds []*string
+	UserGroupIds []string
 
 	// The ID of the user.
 	UserId *string

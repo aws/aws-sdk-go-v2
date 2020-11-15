@@ -46,7 +46,7 @@ type DescribeProvisioningTemplateVersionOutput struct {
 	CreationDate *time.Time
 
 	// True if the fleet provisioning template version is the default version.
-	IsDefaultVersion *bool
+	IsDefaultVersion bool
 
 	// The JSON formatted contents of the fleet provisioning template version.
 	TemplateBody *string

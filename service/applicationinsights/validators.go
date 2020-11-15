@@ -604,13 +604,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -672,9 +672,6 @@ func validateOpCreateLogPatternInput(v *CreateLogPatternInput) error {
 	}
 	if v.PatternSetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PatternSetName"))
-	}
-	if v.Rank == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Rank"))
 	}
 	if v.PatternName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PatternName"))

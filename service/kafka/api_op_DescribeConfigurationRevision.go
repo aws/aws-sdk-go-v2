@@ -38,7 +38,7 @@ type DescribeConfigurationRevisionInput struct {
 	// A string that uniquely identifies a revision of an MSK configuration.
 	//
 	// This member is required.
-	Revision *int64
+	Revision int64
 }
 
 type DescribeConfigurationRevisionOutput struct {
@@ -53,7 +53,7 @@ type DescribeConfigurationRevisionOutput struct {
 	Description *string
 
 	// The revision number.
-	Revision *int64
+	Revision int64
 
 	// Contents of the server.properties file. When using the API, you must ensure that
 	// the contents of the file are base64 encoded. When using the AWS Management

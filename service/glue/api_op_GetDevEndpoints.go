@@ -43,7 +43,7 @@ type GetDevEndpointsInput struct {
 type GetDevEndpointsOutput struct {
 
 	// A list of DevEndpoint definitions.
-	DevEndpoints []*types.DevEndpoint
+	DevEndpoints []types.DevEndpoint
 
 	// A continuation token, if not all DevEndpoint definitions have yet been returned.
 	NextToken *string

@@ -41,10 +41,10 @@ type SearchDashboardsInput struct {
 	// } ]
 	//
 	// This member is required.
-	Filters []*types.DashboardSearchFilter
+	Filters []types.DashboardSearchFilter
 
 	// The maximum number of results to be returned per request.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
@@ -53,7 +53,7 @@ type SearchDashboardsInput struct {
 type SearchDashboardsOutput struct {
 
 	// The list of dashboards owned by the user specified in Filters in your request.
-	DashboardSummaryList []*types.DashboardSummary
+	DashboardSummaryList []types.DashboardSummary
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
@@ -62,7 +62,7 @@ type SearchDashboardsOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

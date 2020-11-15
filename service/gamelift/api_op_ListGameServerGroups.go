@@ -65,7 +65,7 @@ type ListGameServerGroupsInput struct {
 type ListGameServerGroupsOutput struct {
 
 	// A collection of game server group objects that match the request.
-	GameServerGroups []*types.GameServerGroup
+	GameServerGroups []types.GameServerGroup
 
 	// A token that indicates where to resume retrieving results on the next call to
 	// this operation. If no token is returned, these results represent the end of the

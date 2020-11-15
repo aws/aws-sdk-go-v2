@@ -31,7 +31,7 @@ func (c *Client) ListInvitations(ctx context.Context, params *ListInvitationsInp
 type ListInvitationsInput struct {
 
 	// The maximum number of items to return in the response.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token that is required for pagination. On your first call to the
 	// ListInvitations operation, set the value of this parameter to NULL. For
@@ -43,7 +43,7 @@ type ListInvitationsInput struct {
 type ListInvitationsOutput struct {
 
 	// The details of the invitations returned by the operation.
-	Invitations []*types.Invitation
+	Invitations []types.Invitation
 
 	// The pagination token to use to request the next page of results.
 	NextToken *string

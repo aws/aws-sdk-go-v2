@@ -83,12 +83,12 @@ type GetIntegrationResponseOutput struct {
 	// integration.response.body.{JSON-expression}, where name is a valid and unique
 	// response header name and JSON-expression is a valid JSON expression without the
 	// $ prefix.
-	ResponseParameters map[string]*string
+	ResponseParameters map[string]string
 
 	// Specifies the templates used to transform the integration response body.
 	// Response templates are represented as a key/value map, with a content-type as
 	// the key and a template as the value.
-	ResponseTemplates map[string]*string
+	ResponseTemplates map[string]string
 
 	// Specifies the regular expression (regex) pattern used to choose an integration
 	// response based on the response from the back end. For example, if the success

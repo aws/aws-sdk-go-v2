@@ -37,7 +37,7 @@ type RemoveTagsInput struct {
 	ResourceId *string
 
 	// Specifies a list of tags to be removed.
-	TagsList []*types.Tag
+	TagsList []types.Tag
 }
 
 // Returns the objects or data listed below if successful. Otherwise, returns an

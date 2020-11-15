@@ -57,7 +57,7 @@ type ListSchemasInput struct {
 	// The maximum number of schemas to return in the response. If more schemas exist
 	// than fit in one response, then NextToken is returned to page through the
 	// results.
-	MaxResults *int32
+	MaxResults int32
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
@@ -86,7 +86,7 @@ type ListSchemasOutput struct {
 	NextToken *string
 
 	// The schemas that match the request pattern.
-	Schemas []*string
+	Schemas []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

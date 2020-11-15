@@ -65,7 +65,7 @@ type PutResolverRulePolicyInput struct {
 type PutResolverRulePolicyOutput struct {
 
 	// Whether the PutResolverRulePolicy request was successful.
-	ReturnValue *bool
+	ReturnValue bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -50,7 +50,7 @@ type ListResourcesOutput struct {
 	NextToken *string
 
 	// One page of the organization's resource representation.
-	Resources []*types.Resource
+	Resources []types.Resource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -4678,7 +4678,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskCanceledEventAttributes(v **typ
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Details = &jtv
+				sv.Details = ptr.String(jtv)
 			}
 
 		case "latestCancelRequestedEventId":
@@ -4691,7 +4691,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskCanceledEventAttributes(v **typ
 				if err != nil {
 					return err
 				}
-				sv.LatestCancelRequestedEventId = &i64
+				sv.LatestCancelRequestedEventId = i64
 			}
 
 		case "scheduledEventId":
@@ -4704,7 +4704,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskCanceledEventAttributes(v **typ
 				if err != nil {
 					return err
 				}
-				sv.ScheduledEventId = &i64
+				sv.ScheduledEventId = i64
 			}
 
 		case "startedEventId":
@@ -4717,7 +4717,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskCanceledEventAttributes(v **typ
 				if err != nil {
 					return err
 				}
-				sv.StartedEventId = &i64
+				sv.StartedEventId = i64
 			}
 
 		default:
@@ -4757,7 +4757,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskCancelRequestedEventAttributes(
 				if !ok {
 					return fmt.Errorf("expected ActivityId to be of type string, got %T instead", value)
 				}
-				sv.ActivityId = &jtv
+				sv.ActivityId = ptr.String(jtv)
 			}
 
 		case "decisionTaskCompletedEventId":
@@ -4770,7 +4770,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskCancelRequestedEventAttributes(
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		default:
@@ -4810,7 +4810,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskCompletedEventAttributes(v **ty
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Result = &jtv
+				sv.Result = ptr.String(jtv)
 			}
 
 		case "scheduledEventId":
@@ -4823,7 +4823,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskCompletedEventAttributes(v **ty
 				if err != nil {
 					return err
 				}
-				sv.ScheduledEventId = &i64
+				sv.ScheduledEventId = i64
 			}
 
 		case "startedEventId":
@@ -4836,7 +4836,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskCompletedEventAttributes(v **ty
 				if err != nil {
 					return err
 				}
-				sv.StartedEventId = &i64
+				sv.StartedEventId = i64
 			}
 
 		default:
@@ -4876,7 +4876,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskFailedEventAttributes(v **types
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Details = &jtv
+				sv.Details = ptr.String(jtv)
 			}
 
 		case "reason":
@@ -4885,7 +4885,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskFailedEventAttributes(v **types
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.Reason = &jtv
+				sv.Reason = ptr.String(jtv)
 			}
 
 		case "scheduledEventId":
@@ -4898,7 +4898,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskFailedEventAttributes(v **types
 				if err != nil {
 					return err
 				}
-				sv.ScheduledEventId = &i64
+				sv.ScheduledEventId = i64
 			}
 
 		case "startedEventId":
@@ -4911,7 +4911,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskFailedEventAttributes(v **types
 				if err != nil {
 					return err
 				}
-				sv.StartedEventId = &i64
+				sv.StartedEventId = i64
 			}
 
 		default:
@@ -4951,7 +4951,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskScheduledEventAttributes(v **ty
 				if !ok {
 					return fmt.Errorf("expected ActivityId to be of type string, got %T instead", value)
 				}
-				sv.ActivityId = &jtv
+				sv.ActivityId = ptr.String(jtv)
 			}
 
 		case "activityType":
@@ -4965,7 +4965,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskScheduledEventAttributes(v **ty
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Control = &jtv
+				sv.Control = ptr.String(jtv)
 			}
 
 		case "decisionTaskCompletedEventId":
@@ -4978,7 +4978,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskScheduledEventAttributes(v **ty
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		case "heartbeatTimeout":
@@ -4987,7 +4987,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskScheduledEventAttributes(v **ty
 				if !ok {
 					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
 				}
-				sv.HeartbeatTimeout = &jtv
+				sv.HeartbeatTimeout = ptr.String(jtv)
 			}
 
 		case "input":
@@ -4996,7 +4996,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskScheduledEventAttributes(v **ty
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Input = &jtv
+				sv.Input = ptr.String(jtv)
 			}
 
 		case "scheduleToCloseTimeout":
@@ -5005,7 +5005,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskScheduledEventAttributes(v **ty
 				if !ok {
 					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
 				}
-				sv.ScheduleToCloseTimeout = &jtv
+				sv.ScheduleToCloseTimeout = ptr.String(jtv)
 			}
 
 		case "scheduleToStartTimeout":
@@ -5014,7 +5014,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskScheduledEventAttributes(v **ty
 				if !ok {
 					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
 				}
-				sv.ScheduleToStartTimeout = &jtv
+				sv.ScheduleToStartTimeout = ptr.String(jtv)
 			}
 
 		case "startToCloseTimeout":
@@ -5023,7 +5023,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskScheduledEventAttributes(v **ty
 				if !ok {
 					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
 				}
-				sv.StartToCloseTimeout = &jtv
+				sv.StartToCloseTimeout = ptr.String(jtv)
 			}
 
 		case "taskList":
@@ -5037,7 +5037,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskScheduledEventAttributes(v **ty
 				if !ok {
 					return fmt.Errorf("expected TaskPriority to be of type string, got %T instead", value)
 				}
-				sv.TaskPriority = &jtv
+				sv.TaskPriority = ptr.String(jtv)
 			}
 
 		default:
@@ -5077,7 +5077,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskStartedEventAttributes(v **type
 				if !ok {
 					return fmt.Errorf("expected Identity to be of type string, got %T instead", value)
 				}
-				sv.Identity = &jtv
+				sv.Identity = ptr.String(jtv)
 			}
 
 		case "scheduledEventId":
@@ -5090,7 +5090,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskStartedEventAttributes(v **type
 				if err != nil {
 					return err
 				}
-				sv.ScheduledEventId = &i64
+				sv.ScheduledEventId = i64
 			}
 
 		default:
@@ -5130,7 +5130,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskTimedOutEventAttributes(v **typ
 				if !ok {
 					return fmt.Errorf("expected LimitedData to be of type string, got %T instead", value)
 				}
-				sv.Details = &jtv
+				sv.Details = ptr.String(jtv)
 			}
 
 		case "scheduledEventId":
@@ -5143,7 +5143,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskTimedOutEventAttributes(v **typ
 				if err != nil {
 					return err
 				}
-				sv.ScheduledEventId = &i64
+				sv.ScheduledEventId = i64
 			}
 
 		case "startedEventId":
@@ -5156,7 +5156,7 @@ func awsAwsjson10_deserializeDocumentActivityTaskTimedOutEventAttributes(v **typ
 				if err != nil {
 					return err
 				}
-				sv.StartedEventId = &i64
+				sv.StartedEventId = i64
 			}
 
 		case "timeoutType":
@@ -5205,7 +5205,7 @@ func awsAwsjson10_deserializeDocumentActivityType(v **types.ActivityType, value 
 				if !ok {
 					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "version":
@@ -5214,7 +5214,7 @@ func awsAwsjson10_deserializeDocumentActivityType(v **types.ActivityType, value 
 				if !ok {
 					return fmt.Errorf("expected Version to be of type string, got %T instead", value)
 				}
-				sv.Version = &jtv
+				sv.Version = ptr.String(jtv)
 			}
 
 		default:
@@ -5254,7 +5254,7 @@ func awsAwsjson10_deserializeDocumentActivityTypeConfiguration(v **types.Activit
 				if !ok {
 					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
 				}
-				sv.DefaultTaskHeartbeatTimeout = &jtv
+				sv.DefaultTaskHeartbeatTimeout = ptr.String(jtv)
 			}
 
 		case "defaultTaskList":
@@ -5268,7 +5268,7 @@ func awsAwsjson10_deserializeDocumentActivityTypeConfiguration(v **types.Activit
 				if !ok {
 					return fmt.Errorf("expected TaskPriority to be of type string, got %T instead", value)
 				}
-				sv.DefaultTaskPriority = &jtv
+				sv.DefaultTaskPriority = ptr.String(jtv)
 			}
 
 		case "defaultTaskScheduleToCloseTimeout":
@@ -5277,7 +5277,7 @@ func awsAwsjson10_deserializeDocumentActivityTypeConfiguration(v **types.Activit
 				if !ok {
 					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
 				}
-				sv.DefaultTaskScheduleToCloseTimeout = &jtv
+				sv.DefaultTaskScheduleToCloseTimeout = ptr.String(jtv)
 			}
 
 		case "defaultTaskScheduleToStartTimeout":
@@ -5286,7 +5286,7 @@ func awsAwsjson10_deserializeDocumentActivityTypeConfiguration(v **types.Activit
 				if !ok {
 					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
 				}
-				sv.DefaultTaskScheduleToStartTimeout = &jtv
+				sv.DefaultTaskScheduleToStartTimeout = ptr.String(jtv)
 			}
 
 		case "defaultTaskStartToCloseTimeout":
@@ -5295,7 +5295,7 @@ func awsAwsjson10_deserializeDocumentActivityTypeConfiguration(v **types.Activit
 				if !ok {
 					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
 				}
-				sv.DefaultTaskStartToCloseTimeout = &jtv
+				sv.DefaultTaskStartToCloseTimeout = ptr.String(jtv)
 			}
 
 		default:
@@ -5366,7 +5366,7 @@ func awsAwsjson10_deserializeDocumentActivityTypeInfo(v **types.ActivityTypeInfo
 				if !ok {
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
-				sv.Description = &jtv
+				sv.Description = ptr.String(jtv)
 			}
 
 		case "status":
@@ -5387,7 +5387,7 @@ func awsAwsjson10_deserializeDocumentActivityTypeInfo(v **types.ActivityTypeInfo
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentActivityTypeInfoList(v *[]*types.ActivityTypeInfo, value interface{}) error {
+func awsAwsjson10_deserializeDocumentActivityTypeInfoList(v *[]types.ActivityTypeInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5400,18 +5400,20 @@ func awsAwsjson10_deserializeDocumentActivityTypeInfoList(v *[]*types.ActivityTy
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ActivityTypeInfo
+	var cv []types.ActivityTypeInfo
 	if *v == nil {
-		cv = []*types.ActivityTypeInfo{}
+		cv = []types.ActivityTypeInfo{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ActivityTypeInfo
-		if err := awsAwsjson10_deserializeDocumentActivityTypeInfo(&col, value); err != nil {
+		var col types.ActivityTypeInfo
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentActivityTypeInfo(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -5460,7 +5462,7 @@ func awsAwsjson10_deserializeDocumentCancelTimerFailedEventAttributes(v **types.
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		case "timerId":
@@ -5469,7 +5471,7 @@ func awsAwsjson10_deserializeDocumentCancelTimerFailedEventAttributes(v **types.
 				if !ok {
 					return fmt.Errorf("expected TimerId to be of type string, got %T instead", value)
 				}
-				sv.TimerId = &jtv
+				sv.TimerId = ptr.String(jtv)
 			}
 
 		default:
@@ -5522,7 +5524,7 @@ func awsAwsjson10_deserializeDocumentCancelWorkflowExecutionFailedEventAttribute
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		default:
@@ -5562,7 +5564,7 @@ func awsAwsjson10_deserializeDocumentChildWorkflowExecutionCanceledEventAttribut
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Details = &jtv
+				sv.Details = ptr.String(jtv)
 			}
 
 		case "initiatedEventId":
@@ -5575,7 +5577,7 @@ func awsAwsjson10_deserializeDocumentChildWorkflowExecutionCanceledEventAttribut
 				if err != nil {
 					return err
 				}
-				sv.InitiatedEventId = &i64
+				sv.InitiatedEventId = i64
 			}
 
 		case "startedEventId":
@@ -5588,7 +5590,7 @@ func awsAwsjson10_deserializeDocumentChildWorkflowExecutionCanceledEventAttribut
 				if err != nil {
 					return err
 				}
-				sv.StartedEventId = &i64
+				sv.StartedEventId = i64
 			}
 
 		case "workflowExecution":
@@ -5642,7 +5644,7 @@ func awsAwsjson10_deserializeDocumentChildWorkflowExecutionCompletedEventAttribu
 				if err != nil {
 					return err
 				}
-				sv.InitiatedEventId = &i64
+				sv.InitiatedEventId = i64
 			}
 
 		case "result":
@@ -5651,7 +5653,7 @@ func awsAwsjson10_deserializeDocumentChildWorkflowExecutionCompletedEventAttribu
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Result = &jtv
+				sv.Result = ptr.String(jtv)
 			}
 
 		case "startedEventId":
@@ -5664,7 +5666,7 @@ func awsAwsjson10_deserializeDocumentChildWorkflowExecutionCompletedEventAttribu
 				if err != nil {
 					return err
 				}
-				sv.StartedEventId = &i64
+				sv.StartedEventId = i64
 			}
 
 		case "workflowExecution":
@@ -5714,7 +5716,7 @@ func awsAwsjson10_deserializeDocumentChildWorkflowExecutionFailedEventAttributes
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Details = &jtv
+				sv.Details = ptr.String(jtv)
 			}
 
 		case "initiatedEventId":
@@ -5727,7 +5729,7 @@ func awsAwsjson10_deserializeDocumentChildWorkflowExecutionFailedEventAttributes
 				if err != nil {
 					return err
 				}
-				sv.InitiatedEventId = &i64
+				sv.InitiatedEventId = i64
 			}
 
 		case "reason":
@@ -5736,7 +5738,7 @@ func awsAwsjson10_deserializeDocumentChildWorkflowExecutionFailedEventAttributes
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.Reason = &jtv
+				sv.Reason = ptr.String(jtv)
 			}
 
 		case "startedEventId":
@@ -5749,7 +5751,7 @@ func awsAwsjson10_deserializeDocumentChildWorkflowExecutionFailedEventAttributes
 				if err != nil {
 					return err
 				}
-				sv.StartedEventId = &i64
+				sv.StartedEventId = i64
 			}
 
 		case "workflowExecution":
@@ -5803,7 +5805,7 @@ func awsAwsjson10_deserializeDocumentChildWorkflowExecutionStartedEventAttribute
 				if err != nil {
 					return err
 				}
-				sv.InitiatedEventId = &i64
+				sv.InitiatedEventId = i64
 			}
 
 		case "workflowExecution":
@@ -5857,7 +5859,7 @@ func awsAwsjson10_deserializeDocumentChildWorkflowExecutionTerminatedEventAttrib
 				if err != nil {
 					return err
 				}
-				sv.InitiatedEventId = &i64
+				sv.InitiatedEventId = i64
 			}
 
 		case "startedEventId":
@@ -5870,7 +5872,7 @@ func awsAwsjson10_deserializeDocumentChildWorkflowExecutionTerminatedEventAttrib
 				if err != nil {
 					return err
 				}
-				sv.StartedEventId = &i64
+				sv.StartedEventId = i64
 			}
 
 		case "workflowExecution":
@@ -5924,7 +5926,7 @@ func awsAwsjson10_deserializeDocumentChildWorkflowExecutionTimedOutEventAttribut
 				if err != nil {
 					return err
 				}
-				sv.InitiatedEventId = &i64
+				sv.InitiatedEventId = i64
 			}
 
 		case "startedEventId":
@@ -5937,7 +5939,7 @@ func awsAwsjson10_deserializeDocumentChildWorkflowExecutionTimedOutEventAttribut
 				if err != nil {
 					return err
 				}
-				sv.StartedEventId = &i64
+				sv.StartedEventId = i64
 			}
 
 		case "timeoutType":
@@ -6009,7 +6011,7 @@ func awsAwsjson10_deserializeDocumentCompleteWorkflowExecutionFailedEventAttribu
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		default:
@@ -6062,7 +6064,7 @@ func awsAwsjson10_deserializeDocumentContinueAsNewWorkflowExecutionFailedEventAt
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		default:
@@ -6102,7 +6104,7 @@ func awsAwsjson10_deserializeDocumentDecisionTaskCompletedEventAttributes(v **ty
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.ExecutionContext = &jtv
+				sv.ExecutionContext = ptr.String(jtv)
 			}
 
 		case "scheduledEventId":
@@ -6115,7 +6117,7 @@ func awsAwsjson10_deserializeDocumentDecisionTaskCompletedEventAttributes(v **ty
 				if err != nil {
 					return err
 				}
-				sv.ScheduledEventId = &i64
+				sv.ScheduledEventId = i64
 			}
 
 		case "startedEventId":
@@ -6128,7 +6130,7 @@ func awsAwsjson10_deserializeDocumentDecisionTaskCompletedEventAttributes(v **ty
 				if err != nil {
 					return err
 				}
-				sv.StartedEventId = &i64
+				sv.StartedEventId = i64
 			}
 
 		default:
@@ -6168,7 +6170,7 @@ func awsAwsjson10_deserializeDocumentDecisionTaskScheduledEventAttributes(v **ty
 				if !ok {
 					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
 				}
-				sv.StartToCloseTimeout = &jtv
+				sv.StartToCloseTimeout = ptr.String(jtv)
 			}
 
 		case "taskList":
@@ -6182,7 +6184,7 @@ func awsAwsjson10_deserializeDocumentDecisionTaskScheduledEventAttributes(v **ty
 				if !ok {
 					return fmt.Errorf("expected TaskPriority to be of type string, got %T instead", value)
 				}
-				sv.TaskPriority = &jtv
+				sv.TaskPriority = ptr.String(jtv)
 			}
 
 		default:
@@ -6222,7 +6224,7 @@ func awsAwsjson10_deserializeDocumentDecisionTaskStartedEventAttributes(v **type
 				if !ok {
 					return fmt.Errorf("expected Identity to be of type string, got %T instead", value)
 				}
-				sv.Identity = &jtv
+				sv.Identity = ptr.String(jtv)
 			}
 
 		case "scheduledEventId":
@@ -6235,7 +6237,7 @@ func awsAwsjson10_deserializeDocumentDecisionTaskStartedEventAttributes(v **type
 				if err != nil {
 					return err
 				}
-				sv.ScheduledEventId = &i64
+				sv.ScheduledEventId = i64
 			}
 
 		default:
@@ -6279,7 +6281,7 @@ func awsAwsjson10_deserializeDocumentDecisionTaskTimedOutEventAttributes(v **typ
 				if err != nil {
 					return err
 				}
-				sv.ScheduledEventId = &i64
+				sv.ScheduledEventId = i64
 			}
 
 		case "startedEventId":
@@ -6292,7 +6294,7 @@ func awsAwsjson10_deserializeDocumentDecisionTaskTimedOutEventAttributes(v **typ
 				if err != nil {
 					return err
 				}
-				sv.StartedEventId = &i64
+				sv.StartedEventId = i64
 			}
 
 		case "timeoutType":
@@ -6341,7 +6343,7 @@ func awsAwsjson10_deserializeDocumentDefaultUndefinedFault(v **types.DefaultUnde
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -6381,7 +6383,7 @@ func awsAwsjson10_deserializeDocumentDomainAlreadyExistsFault(v **types.DomainAl
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -6421,7 +6423,7 @@ func awsAwsjson10_deserializeDocumentDomainConfiguration(v **types.DomainConfigu
 				if !ok {
 					return fmt.Errorf("expected DurationInDays to be of type string, got %T instead", value)
 				}
-				sv.WorkflowExecutionRetentionPeriodInDays = &jtv
+				sv.WorkflowExecutionRetentionPeriodInDays = ptr.String(jtv)
 			}
 
 		default:
@@ -6461,7 +6463,7 @@ func awsAwsjson10_deserializeDocumentDomainDeprecatedFault(v **types.DomainDepre
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -6501,7 +6503,7 @@ func awsAwsjson10_deserializeDocumentDomainInfo(v **types.DomainInfo, value inte
 				if !ok {
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
-				sv.Arn = &jtv
+				sv.Arn = ptr.String(jtv)
 			}
 
 		case "description":
@@ -6510,7 +6512,7 @@ func awsAwsjson10_deserializeDocumentDomainInfo(v **types.DomainInfo, value inte
 				if !ok {
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
-				sv.Description = &jtv
+				sv.Description = ptr.String(jtv)
 			}
 
 		case "name":
@@ -6519,7 +6521,7 @@ func awsAwsjson10_deserializeDocumentDomainInfo(v **types.DomainInfo, value inte
 				if !ok {
 					return fmt.Errorf("expected DomainName to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "status":
@@ -6540,7 +6542,7 @@ func awsAwsjson10_deserializeDocumentDomainInfo(v **types.DomainInfo, value inte
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDomainInfoList(v *[]*types.DomainInfo, value interface{}) error {
+func awsAwsjson10_deserializeDocumentDomainInfoList(v *[]types.DomainInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6553,18 +6555,20 @@ func awsAwsjson10_deserializeDocumentDomainInfoList(v *[]*types.DomainInfo, valu
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.DomainInfo
+	var cv []types.DomainInfo
 	if *v == nil {
-		cv = []*types.DomainInfo{}
+		cv = []types.DomainInfo{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.DomainInfo
-		if err := awsAwsjson10_deserializeDocumentDomainInfo(&col, value); err != nil {
+		var col types.DomainInfo
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentDomainInfo(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -6604,7 +6608,7 @@ func awsAwsjson10_deserializeDocumentExternalWorkflowExecutionCancelRequestedEve
 				if err != nil {
 					return err
 				}
-				sv.InitiatedEventId = &i64
+				sv.InitiatedEventId = i64
 			}
 
 		case "workflowExecution":
@@ -6653,7 +6657,7 @@ func awsAwsjson10_deserializeDocumentExternalWorkflowExecutionSignaledEventAttri
 				if err != nil {
 					return err
 				}
-				sv.InitiatedEventId = &i64
+				sv.InitiatedEventId = i64
 			}
 
 		case "workflowExecution":
@@ -6711,7 +6715,7 @@ func awsAwsjson10_deserializeDocumentFailWorkflowExecutionFailedEventAttributes(
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		default:
@@ -6860,7 +6864,7 @@ func awsAwsjson10_deserializeDocumentHistoryEvent(v **types.HistoryEvent, value 
 				if err != nil {
 					return err
 				}
-				sv.EventId = &i64
+				sv.EventId = i64
 			}
 
 		case "eventTimestamp":
@@ -7059,7 +7063,7 @@ func awsAwsjson10_deserializeDocumentHistoryEvent(v **types.HistoryEvent, value 
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentHistoryEventList(v *[]*types.HistoryEvent, value interface{}) error {
+func awsAwsjson10_deserializeDocumentHistoryEventList(v *[]types.HistoryEvent, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7072,18 +7076,20 @@ func awsAwsjson10_deserializeDocumentHistoryEventList(v *[]*types.HistoryEvent, 
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.HistoryEvent
+	var cv []types.HistoryEvent
 	if *v == nil {
-		cv = []*types.HistoryEvent{}
+		cv = []types.HistoryEvent{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.HistoryEvent
-		if err := awsAwsjson10_deserializeDocumentHistoryEvent(&col, value); err != nil {
+		var col types.HistoryEvent
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentHistoryEvent(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -7119,7 +7125,7 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionCompletedEventAttributes(v **
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Result = &jtv
+				sv.Result = ptr.String(jtv)
 			}
 
 		case "scheduledEventId":
@@ -7132,7 +7138,7 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionCompletedEventAttributes(v **
 				if err != nil {
 					return err
 				}
-				sv.ScheduledEventId = &i64
+				sv.ScheduledEventId = i64
 			}
 
 		case "startedEventId":
@@ -7145,7 +7151,7 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionCompletedEventAttributes(v **
 				if err != nil {
 					return err
 				}
-				sv.StartedEventId = &i64
+				sv.StartedEventId = i64
 			}
 
 		default:
@@ -7185,7 +7191,7 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionFailedEventAttributes(v **typ
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Details = &jtv
+				sv.Details = ptr.String(jtv)
 			}
 
 		case "reason":
@@ -7194,7 +7200,7 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionFailedEventAttributes(v **typ
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.Reason = &jtv
+				sv.Reason = ptr.String(jtv)
 			}
 
 		case "scheduledEventId":
@@ -7207,7 +7213,7 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionFailedEventAttributes(v **typ
 				if err != nil {
 					return err
 				}
-				sv.ScheduledEventId = &i64
+				sv.ScheduledEventId = i64
 			}
 
 		case "startedEventId":
@@ -7220,7 +7226,7 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionFailedEventAttributes(v **typ
 				if err != nil {
 					return err
 				}
-				sv.StartedEventId = &i64
+				sv.StartedEventId = i64
 			}
 
 		default:
@@ -7260,7 +7266,7 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionScheduledEventAttributes(v **
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Control = &jtv
+				sv.Control = ptr.String(jtv)
 			}
 
 		case "decisionTaskCompletedEventId":
@@ -7273,7 +7279,7 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionScheduledEventAttributes(v **
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		case "id":
@@ -7282,7 +7288,7 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionScheduledEventAttributes(v **
 				if !ok {
 					return fmt.Errorf("expected FunctionId to be of type string, got %T instead", value)
 				}
-				sv.Id = &jtv
+				sv.Id = ptr.String(jtv)
 			}
 
 		case "input":
@@ -7291,7 +7297,7 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionScheduledEventAttributes(v **
 				if !ok {
 					return fmt.Errorf("expected FunctionInput to be of type string, got %T instead", value)
 				}
-				sv.Input = &jtv
+				sv.Input = ptr.String(jtv)
 			}
 
 		case "name":
@@ -7300,7 +7306,7 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionScheduledEventAttributes(v **
 				if !ok {
 					return fmt.Errorf("expected FunctionName to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "startToCloseTimeout":
@@ -7309,7 +7315,7 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionScheduledEventAttributes(v **
 				if !ok {
 					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
 				}
-				sv.StartToCloseTimeout = &jtv
+				sv.StartToCloseTimeout = ptr.String(jtv)
 			}
 
 		default:
@@ -7353,7 +7359,7 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionStartedEventAttributes(v **ty
 				if err != nil {
 					return err
 				}
-				sv.ScheduledEventId = &i64
+				sv.ScheduledEventId = i64
 			}
 
 		default:
@@ -7397,7 +7403,7 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionTimedOutEventAttributes(v **t
 				if err != nil {
 					return err
 				}
-				sv.ScheduledEventId = &i64
+				sv.ScheduledEventId = i64
 			}
 
 		case "startedEventId":
@@ -7410,7 +7416,7 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionTimedOutEventAttributes(v **t
 				if err != nil {
 					return err
 				}
-				sv.StartedEventId = &i64
+				sv.StartedEventId = i64
 			}
 
 		case "timeoutType":
@@ -7459,7 +7465,7 @@ func awsAwsjson10_deserializeDocumentLimitExceededFault(v **types.LimitExceededF
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -7503,7 +7509,7 @@ func awsAwsjson10_deserializeDocumentMarkerRecordedEventAttributes(v **types.Mar
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		case "details":
@@ -7512,7 +7518,7 @@ func awsAwsjson10_deserializeDocumentMarkerRecordedEventAttributes(v **types.Mar
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Details = &jtv
+				sv.Details = ptr.String(jtv)
 			}
 
 		case "markerName":
@@ -7521,7 +7527,7 @@ func awsAwsjson10_deserializeDocumentMarkerRecordedEventAttributes(v **types.Mar
 				if !ok {
 					return fmt.Errorf("expected MarkerName to be of type string, got %T instead", value)
 				}
-				sv.MarkerName = &jtv
+				sv.MarkerName = ptr.String(jtv)
 			}
 
 		default:
@@ -7561,7 +7567,7 @@ func awsAwsjson10_deserializeDocumentOperationNotPermittedFault(v **types.Operat
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -7614,7 +7620,7 @@ func awsAwsjson10_deserializeDocumentRecordMarkerFailedEventAttributes(v **types
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		case "markerName":
@@ -7623,7 +7629,7 @@ func awsAwsjson10_deserializeDocumentRecordMarkerFailedEventAttributes(v **types
 				if !ok {
 					return fmt.Errorf("expected MarkerName to be of type string, got %T instead", value)
 				}
-				sv.MarkerName = &jtv
+				sv.MarkerName = ptr.String(jtv)
 			}
 
 		default:
@@ -7663,7 +7669,7 @@ func awsAwsjson10_deserializeDocumentRequestCancelActivityTaskFailedEventAttribu
 				if !ok {
 					return fmt.Errorf("expected ActivityId to be of type string, got %T instead", value)
 				}
-				sv.ActivityId = &jtv
+				sv.ActivityId = ptr.String(jtv)
 			}
 
 		case "cause":
@@ -7685,7 +7691,7 @@ func awsAwsjson10_deserializeDocumentRequestCancelActivityTaskFailedEventAttribu
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		default:
@@ -7734,7 +7740,7 @@ func awsAwsjson10_deserializeDocumentRequestCancelExternalWorkflowExecutionFaile
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Control = &jtv
+				sv.Control = ptr.String(jtv)
 			}
 
 		case "decisionTaskCompletedEventId":
@@ -7747,7 +7753,7 @@ func awsAwsjson10_deserializeDocumentRequestCancelExternalWorkflowExecutionFaile
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		case "initiatedEventId":
@@ -7760,7 +7766,7 @@ func awsAwsjson10_deserializeDocumentRequestCancelExternalWorkflowExecutionFaile
 				if err != nil {
 					return err
 				}
-				sv.InitiatedEventId = &i64
+				sv.InitiatedEventId = i64
 			}
 
 		case "runId":
@@ -7769,7 +7775,7 @@ func awsAwsjson10_deserializeDocumentRequestCancelExternalWorkflowExecutionFaile
 				if !ok {
 					return fmt.Errorf("expected WorkflowRunIdOptional to be of type string, got %T instead", value)
 				}
-				sv.RunId = &jtv
+				sv.RunId = ptr.String(jtv)
 			}
 
 		case "workflowId":
@@ -7778,7 +7784,7 @@ func awsAwsjson10_deserializeDocumentRequestCancelExternalWorkflowExecutionFaile
 				if !ok {
 					return fmt.Errorf("expected WorkflowId to be of type string, got %T instead", value)
 				}
-				sv.WorkflowId = &jtv
+				sv.WorkflowId = ptr.String(jtv)
 			}
 
 		default:
@@ -7818,7 +7824,7 @@ func awsAwsjson10_deserializeDocumentRequestCancelExternalWorkflowExecutionIniti
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Control = &jtv
+				sv.Control = ptr.String(jtv)
 			}
 
 		case "decisionTaskCompletedEventId":
@@ -7831,7 +7837,7 @@ func awsAwsjson10_deserializeDocumentRequestCancelExternalWorkflowExecutionIniti
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		case "runId":
@@ -7840,7 +7846,7 @@ func awsAwsjson10_deserializeDocumentRequestCancelExternalWorkflowExecutionIniti
 				if !ok {
 					return fmt.Errorf("expected WorkflowRunIdOptional to be of type string, got %T instead", value)
 				}
-				sv.RunId = &jtv
+				sv.RunId = ptr.String(jtv)
 			}
 
 		case "workflowId":
@@ -7849,7 +7855,7 @@ func awsAwsjson10_deserializeDocumentRequestCancelExternalWorkflowExecutionIniti
 				if !ok {
 					return fmt.Errorf("expected WorkflowId to be of type string, got %T instead", value)
 				}
-				sv.WorkflowId = &jtv
+				sv.WorkflowId = ptr.String(jtv)
 			}
 
 		default:
@@ -7889,7 +7895,7 @@ func awsAwsjson10_deserializeDocumentResourceTag(v **types.ResourceTag, value in
 				if !ok {
 					return fmt.Errorf("expected ResourceTagKey to be of type string, got %T instead", value)
 				}
-				sv.Key = &jtv
+				sv.Key = ptr.String(jtv)
 			}
 
 		case "value":
@@ -7898,7 +7904,7 @@ func awsAwsjson10_deserializeDocumentResourceTag(v **types.ResourceTag, value in
 				if !ok {
 					return fmt.Errorf("expected ResourceTagValue to be of type string, got %T instead", value)
 				}
-				sv.Value = &jtv
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:
@@ -7910,7 +7916,7 @@ func awsAwsjson10_deserializeDocumentResourceTag(v **types.ResourceTag, value in
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentResourceTagList(v *[]*types.ResourceTag, value interface{}) error {
+func awsAwsjson10_deserializeDocumentResourceTagList(v *[]types.ResourceTag, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7923,18 +7929,20 @@ func awsAwsjson10_deserializeDocumentResourceTagList(v *[]*types.ResourceTag, va
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ResourceTag
+	var cv []types.ResourceTag
 	if *v == nil {
-		cv = []*types.ResourceTag{}
+		cv = []types.ResourceTag{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ResourceTag
-		if err := awsAwsjson10_deserializeDocumentResourceTag(&col, value); err != nil {
+		var col types.ResourceTag
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentResourceTag(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -7970,7 +7978,7 @@ func awsAwsjson10_deserializeDocumentScheduleActivityTaskFailedEventAttributes(v
 				if !ok {
 					return fmt.Errorf("expected ActivityId to be of type string, got %T instead", value)
 				}
-				sv.ActivityId = &jtv
+				sv.ActivityId = ptr.String(jtv)
 			}
 
 		case "activityType":
@@ -7997,7 +8005,7 @@ func awsAwsjson10_deserializeDocumentScheduleActivityTaskFailedEventAttributes(v
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		default:
@@ -8050,7 +8058,7 @@ func awsAwsjson10_deserializeDocumentScheduleLambdaFunctionFailedEventAttributes
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		case "id":
@@ -8059,7 +8067,7 @@ func awsAwsjson10_deserializeDocumentScheduleLambdaFunctionFailedEventAttributes
 				if !ok {
 					return fmt.Errorf("expected FunctionId to be of type string, got %T instead", value)
 				}
-				sv.Id = &jtv
+				sv.Id = ptr.String(jtv)
 			}
 
 		case "name":
@@ -8068,7 +8076,7 @@ func awsAwsjson10_deserializeDocumentScheduleLambdaFunctionFailedEventAttributes
 				if !ok {
 					return fmt.Errorf("expected FunctionName to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		default:
@@ -8117,7 +8125,7 @@ func awsAwsjson10_deserializeDocumentSignalExternalWorkflowExecutionFailedEventA
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Control = &jtv
+				sv.Control = ptr.String(jtv)
 			}
 
 		case "decisionTaskCompletedEventId":
@@ -8130,7 +8138,7 @@ func awsAwsjson10_deserializeDocumentSignalExternalWorkflowExecutionFailedEventA
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		case "initiatedEventId":
@@ -8143,7 +8151,7 @@ func awsAwsjson10_deserializeDocumentSignalExternalWorkflowExecutionFailedEventA
 				if err != nil {
 					return err
 				}
-				sv.InitiatedEventId = &i64
+				sv.InitiatedEventId = i64
 			}
 
 		case "runId":
@@ -8152,7 +8160,7 @@ func awsAwsjson10_deserializeDocumentSignalExternalWorkflowExecutionFailedEventA
 				if !ok {
 					return fmt.Errorf("expected WorkflowRunIdOptional to be of type string, got %T instead", value)
 				}
-				sv.RunId = &jtv
+				sv.RunId = ptr.String(jtv)
 			}
 
 		case "workflowId":
@@ -8161,7 +8169,7 @@ func awsAwsjson10_deserializeDocumentSignalExternalWorkflowExecutionFailedEventA
 				if !ok {
 					return fmt.Errorf("expected WorkflowId to be of type string, got %T instead", value)
 				}
-				sv.WorkflowId = &jtv
+				sv.WorkflowId = ptr.String(jtv)
 			}
 
 		default:
@@ -8201,7 +8209,7 @@ func awsAwsjson10_deserializeDocumentSignalExternalWorkflowExecutionInitiatedEve
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Control = &jtv
+				sv.Control = ptr.String(jtv)
 			}
 
 		case "decisionTaskCompletedEventId":
@@ -8214,7 +8222,7 @@ func awsAwsjson10_deserializeDocumentSignalExternalWorkflowExecutionInitiatedEve
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		case "input":
@@ -8223,7 +8231,7 @@ func awsAwsjson10_deserializeDocumentSignalExternalWorkflowExecutionInitiatedEve
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Input = &jtv
+				sv.Input = ptr.String(jtv)
 			}
 
 		case "runId":
@@ -8232,7 +8240,7 @@ func awsAwsjson10_deserializeDocumentSignalExternalWorkflowExecutionInitiatedEve
 				if !ok {
 					return fmt.Errorf("expected WorkflowRunIdOptional to be of type string, got %T instead", value)
 				}
-				sv.RunId = &jtv
+				sv.RunId = ptr.String(jtv)
 			}
 
 		case "signalName":
@@ -8241,7 +8249,7 @@ func awsAwsjson10_deserializeDocumentSignalExternalWorkflowExecutionInitiatedEve
 				if !ok {
 					return fmt.Errorf("expected SignalName to be of type string, got %T instead", value)
 				}
-				sv.SignalName = &jtv
+				sv.SignalName = ptr.String(jtv)
 			}
 
 		case "workflowId":
@@ -8250,7 +8258,7 @@ func awsAwsjson10_deserializeDocumentSignalExternalWorkflowExecutionInitiatedEve
 				if !ok {
 					return fmt.Errorf("expected WorkflowId to be of type string, got %T instead", value)
 				}
-				sv.WorkflowId = &jtv
+				sv.WorkflowId = ptr.String(jtv)
 			}
 
 		default:
@@ -8299,7 +8307,7 @@ func awsAwsjson10_deserializeDocumentStartChildWorkflowExecutionFailedEventAttri
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Control = &jtv
+				sv.Control = ptr.String(jtv)
 			}
 
 		case "decisionTaskCompletedEventId":
@@ -8312,7 +8320,7 @@ func awsAwsjson10_deserializeDocumentStartChildWorkflowExecutionFailedEventAttri
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		case "initiatedEventId":
@@ -8325,7 +8333,7 @@ func awsAwsjson10_deserializeDocumentStartChildWorkflowExecutionFailedEventAttri
 				if err != nil {
 					return err
 				}
-				sv.InitiatedEventId = &i64
+				sv.InitiatedEventId = i64
 			}
 
 		case "workflowId":
@@ -8334,7 +8342,7 @@ func awsAwsjson10_deserializeDocumentStartChildWorkflowExecutionFailedEventAttri
 				if !ok {
 					return fmt.Errorf("expected WorkflowId to be of type string, got %T instead", value)
 				}
-				sv.WorkflowId = &jtv
+				sv.WorkflowId = ptr.String(jtv)
 			}
 
 		case "workflowType":
@@ -8388,7 +8396,7 @@ func awsAwsjson10_deserializeDocumentStartChildWorkflowExecutionInitiatedEventAt
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Control = &jtv
+				sv.Control = ptr.String(jtv)
 			}
 
 		case "decisionTaskCompletedEventId":
@@ -8401,7 +8409,7 @@ func awsAwsjson10_deserializeDocumentStartChildWorkflowExecutionInitiatedEventAt
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		case "executionStartToCloseTimeout":
@@ -8410,7 +8418,7 @@ func awsAwsjson10_deserializeDocumentStartChildWorkflowExecutionInitiatedEventAt
 				if !ok {
 					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
 				}
-				sv.ExecutionStartToCloseTimeout = &jtv
+				sv.ExecutionStartToCloseTimeout = ptr.String(jtv)
 			}
 
 		case "input":
@@ -8419,7 +8427,7 @@ func awsAwsjson10_deserializeDocumentStartChildWorkflowExecutionInitiatedEventAt
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Input = &jtv
+				sv.Input = ptr.String(jtv)
 			}
 
 		case "lambdaRole":
@@ -8428,7 +8436,7 @@ func awsAwsjson10_deserializeDocumentStartChildWorkflowExecutionInitiatedEventAt
 				if !ok {
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
-				sv.LambdaRole = &jtv
+				sv.LambdaRole = ptr.String(jtv)
 			}
 
 		case "tagList":
@@ -8447,7 +8455,7 @@ func awsAwsjson10_deserializeDocumentStartChildWorkflowExecutionInitiatedEventAt
 				if !ok {
 					return fmt.Errorf("expected TaskPriority to be of type string, got %T instead", value)
 				}
-				sv.TaskPriority = &jtv
+				sv.TaskPriority = ptr.String(jtv)
 			}
 
 		case "taskStartToCloseTimeout":
@@ -8456,7 +8464,7 @@ func awsAwsjson10_deserializeDocumentStartChildWorkflowExecutionInitiatedEventAt
 				if !ok {
 					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
 				}
-				sv.TaskStartToCloseTimeout = &jtv
+				sv.TaskStartToCloseTimeout = ptr.String(jtv)
 			}
 
 		case "workflowId":
@@ -8465,7 +8473,7 @@ func awsAwsjson10_deserializeDocumentStartChildWorkflowExecutionInitiatedEventAt
 				if !ok {
 					return fmt.Errorf("expected WorkflowId to be of type string, got %T instead", value)
 				}
-				sv.WorkflowId = &jtv
+				sv.WorkflowId = ptr.String(jtv)
 			}
 
 		case "workflowType":
@@ -8519,7 +8527,7 @@ func awsAwsjson10_deserializeDocumentStartLambdaFunctionFailedEventAttributes(v 
 				if !ok {
 					return fmt.Errorf("expected CauseMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		case "scheduledEventId":
@@ -8532,7 +8540,7 @@ func awsAwsjson10_deserializeDocumentStartLambdaFunctionFailedEventAttributes(v 
 				if err != nil {
 					return err
 				}
-				sv.ScheduledEventId = &i64
+				sv.ScheduledEventId = i64
 			}
 
 		default:
@@ -8585,7 +8593,7 @@ func awsAwsjson10_deserializeDocumentStartTimerFailedEventAttributes(v **types.S
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		case "timerId":
@@ -8594,7 +8602,7 @@ func awsAwsjson10_deserializeDocumentStartTimerFailedEventAttributes(v **types.S
 				if !ok {
 					return fmt.Errorf("expected TimerId to be of type string, got %T instead", value)
 				}
-				sv.TimerId = &jtv
+				sv.TimerId = ptr.String(jtv)
 			}
 
 		default:
@@ -8606,7 +8614,7 @@ func awsAwsjson10_deserializeDocumentStartTimerFailedEventAttributes(v **types.S
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentTagList(v *[]*string, value interface{}) error {
+func awsAwsjson10_deserializeDocumentTagList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8619,21 +8627,21 @@ func awsAwsjson10_deserializeDocumentTagList(v *[]*string, value interface{}) er
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected Tag to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -8670,7 +8678,7 @@ func awsAwsjson10_deserializeDocumentTaskList(v **types.TaskList, value interfac
 				if !ok {
 					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		default:
@@ -8714,7 +8722,7 @@ func awsAwsjson10_deserializeDocumentTimerCanceledEventAttributes(v **types.Time
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		case "startedEventId":
@@ -8727,7 +8735,7 @@ func awsAwsjson10_deserializeDocumentTimerCanceledEventAttributes(v **types.Time
 				if err != nil {
 					return err
 				}
-				sv.StartedEventId = &i64
+				sv.StartedEventId = i64
 			}
 
 		case "timerId":
@@ -8736,7 +8744,7 @@ func awsAwsjson10_deserializeDocumentTimerCanceledEventAttributes(v **types.Time
 				if !ok {
 					return fmt.Errorf("expected TimerId to be of type string, got %T instead", value)
 				}
-				sv.TimerId = &jtv
+				sv.TimerId = ptr.String(jtv)
 			}
 
 		default:
@@ -8780,7 +8788,7 @@ func awsAwsjson10_deserializeDocumentTimerFiredEventAttributes(v **types.TimerFi
 				if err != nil {
 					return err
 				}
-				sv.StartedEventId = &i64
+				sv.StartedEventId = i64
 			}
 
 		case "timerId":
@@ -8789,7 +8797,7 @@ func awsAwsjson10_deserializeDocumentTimerFiredEventAttributes(v **types.TimerFi
 				if !ok {
 					return fmt.Errorf("expected TimerId to be of type string, got %T instead", value)
 				}
-				sv.TimerId = &jtv
+				sv.TimerId = ptr.String(jtv)
 			}
 
 		default:
@@ -8829,7 +8837,7 @@ func awsAwsjson10_deserializeDocumentTimerStartedEventAttributes(v **types.Timer
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Control = &jtv
+				sv.Control = ptr.String(jtv)
 			}
 
 		case "decisionTaskCompletedEventId":
@@ -8842,7 +8850,7 @@ func awsAwsjson10_deserializeDocumentTimerStartedEventAttributes(v **types.Timer
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		case "startToFireTimeout":
@@ -8851,7 +8859,7 @@ func awsAwsjson10_deserializeDocumentTimerStartedEventAttributes(v **types.Timer
 				if !ok {
 					return fmt.Errorf("expected DurationInSeconds to be of type string, got %T instead", value)
 				}
-				sv.StartToFireTimeout = &jtv
+				sv.StartToFireTimeout = ptr.String(jtv)
 			}
 
 		case "timerId":
@@ -8860,7 +8868,7 @@ func awsAwsjson10_deserializeDocumentTimerStartedEventAttributes(v **types.Timer
 				if !ok {
 					return fmt.Errorf("expected TimerId to be of type string, got %T instead", value)
 				}
-				sv.TimerId = &jtv
+				sv.TimerId = ptr.String(jtv)
 			}
 
 		default:
@@ -8900,7 +8908,7 @@ func awsAwsjson10_deserializeDocumentTooManyTagsFault(v **types.TooManyTagsFault
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -8940,7 +8948,7 @@ func awsAwsjson10_deserializeDocumentTypeAlreadyExistsFault(v **types.TypeAlread
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -8980,7 +8988,7 @@ func awsAwsjson10_deserializeDocumentTypeDeprecatedFault(v **types.TypeDeprecate
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -9020,7 +9028,7 @@ func awsAwsjson10_deserializeDocumentUnknownResourceFault(v **types.UnknownResou
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -9060,7 +9068,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecution(v **types.WorkflowExecuti
 				if !ok {
 					return fmt.Errorf("expected WorkflowRunId to be of type string, got %T instead", value)
 				}
-				sv.RunId = &jtv
+				sv.RunId = ptr.String(jtv)
 			}
 
 		case "workflowId":
@@ -9069,7 +9077,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecution(v **types.WorkflowExecuti
 				if !ok {
 					return fmt.Errorf("expected WorkflowId to be of type string, got %T instead", value)
 				}
-				sv.WorkflowId = &jtv
+				sv.WorkflowId = ptr.String(jtv)
 			}
 
 		default:
@@ -9109,7 +9117,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionAlreadyStartedFault(v **ty
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -9153,7 +9161,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionCanceledEventAttributes(v 
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		case "details":
@@ -9162,7 +9170,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionCanceledEventAttributes(v 
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Details = &jtv
+				sv.Details = ptr.String(jtv)
 			}
 
 		default:
@@ -9215,7 +9223,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionCancelRequestedEventAttrib
 				if err != nil {
 					return err
 				}
-				sv.ExternalInitiatedEventId = &i64
+				sv.ExternalInitiatedEventId = i64
 			}
 
 		case "externalWorkflowExecution":
@@ -9264,7 +9272,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionCompletedEventAttributes(v
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		case "result":
@@ -9273,7 +9281,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionCompletedEventAttributes(v
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Result = &jtv
+				sv.Result = ptr.String(jtv)
 			}
 
 		default:
@@ -9322,7 +9330,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionConfiguration(v **types.Wo
 				if !ok {
 					return fmt.Errorf("expected DurationInSeconds to be of type string, got %T instead", value)
 				}
-				sv.ExecutionStartToCloseTimeout = &jtv
+				sv.ExecutionStartToCloseTimeout = ptr.String(jtv)
 			}
 
 		case "lambdaRole":
@@ -9331,7 +9339,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionConfiguration(v **types.Wo
 				if !ok {
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
-				sv.LambdaRole = &jtv
+				sv.LambdaRole = ptr.String(jtv)
 			}
 
 		case "taskList":
@@ -9345,7 +9353,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionConfiguration(v **types.Wo
 				if !ok {
 					return fmt.Errorf("expected TaskPriority to be of type string, got %T instead", value)
 				}
-				sv.TaskPriority = &jtv
+				sv.TaskPriority = ptr.String(jtv)
 			}
 
 		case "taskStartToCloseTimeout":
@@ -9354,7 +9362,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionConfiguration(v **types.Wo
 				if !ok {
 					return fmt.Errorf("expected DurationInSeconds to be of type string, got %T instead", value)
 				}
-				sv.TaskStartToCloseTimeout = &jtv
+				sv.TaskStartToCloseTimeout = ptr.String(jtv)
 			}
 
 		default:
@@ -9407,7 +9415,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionContinuedAsNewEventAttribu
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		case "executionStartToCloseTimeout":
@@ -9416,7 +9424,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionContinuedAsNewEventAttribu
 				if !ok {
 					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
 				}
-				sv.ExecutionStartToCloseTimeout = &jtv
+				sv.ExecutionStartToCloseTimeout = ptr.String(jtv)
 			}
 
 		case "input":
@@ -9425,7 +9433,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionContinuedAsNewEventAttribu
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Input = &jtv
+				sv.Input = ptr.String(jtv)
 			}
 
 		case "lambdaRole":
@@ -9434,7 +9442,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionContinuedAsNewEventAttribu
 				if !ok {
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
-				sv.LambdaRole = &jtv
+				sv.LambdaRole = ptr.String(jtv)
 			}
 
 		case "newExecutionRunId":
@@ -9443,7 +9451,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionContinuedAsNewEventAttribu
 				if !ok {
 					return fmt.Errorf("expected WorkflowRunId to be of type string, got %T instead", value)
 				}
-				sv.NewExecutionRunId = &jtv
+				sv.NewExecutionRunId = ptr.String(jtv)
 			}
 
 		case "tagList":
@@ -9462,7 +9470,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionContinuedAsNewEventAttribu
 				if !ok {
 					return fmt.Errorf("expected TaskPriority to be of type string, got %T instead", value)
 				}
-				sv.TaskPriority = &jtv
+				sv.TaskPriority = ptr.String(jtv)
 			}
 
 		case "taskStartToCloseTimeout":
@@ -9471,7 +9479,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionContinuedAsNewEventAttribu
 				if !ok {
 					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
 				}
-				sv.TaskStartToCloseTimeout = &jtv
+				sv.TaskStartToCloseTimeout = ptr.String(jtv)
 			}
 
 		case "workflowType":
@@ -9520,7 +9528,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionFailedEventAttributes(v **
 				if err != nil {
 					return err
 				}
-				sv.DecisionTaskCompletedEventId = &i64
+				sv.DecisionTaskCompletedEventId = i64
 			}
 
 		case "details":
@@ -9529,7 +9537,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionFailedEventAttributes(v **
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Details = &jtv
+				sv.Details = ptr.String(jtv)
 			}
 
 		case "reason":
@@ -9538,7 +9546,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionFailedEventAttributes(v **
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.Reason = &jtv
+				sv.Reason = ptr.String(jtv)
 			}
 
 		default:
@@ -9578,7 +9586,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionInfo(v **types.WorkflowExe
 				if !ok {
 					return fmt.Errorf("expected Canceled to be of type *bool, got %T instead", value)
 				}
-				sv.CancelRequested = &jtv
+				sv.CancelRequested = jtv
 			}
 
 		case "closeStatus":
@@ -9654,7 +9662,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionInfo(v **types.WorkflowExe
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentWorkflowExecutionInfoList(v *[]*types.WorkflowExecutionInfo, value interface{}) error {
+func awsAwsjson10_deserializeDocumentWorkflowExecutionInfoList(v *[]types.WorkflowExecutionInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9667,18 +9675,20 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionInfoList(v *[]*types.Workf
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.WorkflowExecutionInfo
+	var cv []types.WorkflowExecutionInfo
 	if *v == nil {
-		cv = []*types.WorkflowExecutionInfo{}
+		cv = []types.WorkflowExecutionInfo{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.WorkflowExecutionInfo
-		if err := awsAwsjson10_deserializeDocumentWorkflowExecutionInfo(&col, value); err != nil {
+		var col types.WorkflowExecutionInfo
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentWorkflowExecutionInfo(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -9718,7 +9728,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionOpenCounts(v **types.Workf
 				if err != nil {
 					return err
 				}
-				sv.OpenActivityTasks = ptr.Int32(int32(i64))
+				sv.OpenActivityTasks = int32(i64)
 			}
 
 		case "openChildWorkflowExecutions":
@@ -9731,7 +9741,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionOpenCounts(v **types.Workf
 				if err != nil {
 					return err
 				}
-				sv.OpenChildWorkflowExecutions = ptr.Int32(int32(i64))
+				sv.OpenChildWorkflowExecutions = int32(i64)
 			}
 
 		case "openDecisionTasks":
@@ -9744,7 +9754,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionOpenCounts(v **types.Workf
 				if err != nil {
 					return err
 				}
-				sv.OpenDecisionTasks = ptr.Int32(int32(i64))
+				sv.OpenDecisionTasks = int32(i64)
 			}
 
 		case "openLambdaFunctions":
@@ -9757,7 +9767,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionOpenCounts(v **types.Workf
 				if err != nil {
 					return err
 				}
-				sv.OpenLambdaFunctions = ptr.Int32(int32(i64))
+				sv.OpenLambdaFunctions = int32(i64)
 			}
 
 		case "openTimers":
@@ -9770,7 +9780,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionOpenCounts(v **types.Workf
 				if err != nil {
 					return err
 				}
-				sv.OpenTimers = ptr.Int32(int32(i64))
+				sv.OpenTimers = int32(i64)
 			}
 
 		default:
@@ -9814,7 +9824,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionSignaledEventAttributes(v 
 				if err != nil {
 					return err
 				}
-				sv.ExternalInitiatedEventId = &i64
+				sv.ExternalInitiatedEventId = i64
 			}
 
 		case "externalWorkflowExecution":
@@ -9828,7 +9838,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionSignaledEventAttributes(v 
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Input = &jtv
+				sv.Input = ptr.String(jtv)
 			}
 
 		case "signalName":
@@ -9837,7 +9847,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionSignaledEventAttributes(v 
 				if !ok {
 					return fmt.Errorf("expected SignalName to be of type string, got %T instead", value)
 				}
-				sv.SignalName = &jtv
+				sv.SignalName = ptr.String(jtv)
 			}
 
 		default:
@@ -9886,7 +9896,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionStartedEventAttributes(v *
 				if !ok {
 					return fmt.Errorf("expected WorkflowRunIdOptional to be of type string, got %T instead", value)
 				}
-				sv.ContinuedExecutionRunId = &jtv
+				sv.ContinuedExecutionRunId = ptr.String(jtv)
 			}
 
 		case "executionStartToCloseTimeout":
@@ -9895,7 +9905,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionStartedEventAttributes(v *
 				if !ok {
 					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
 				}
-				sv.ExecutionStartToCloseTimeout = &jtv
+				sv.ExecutionStartToCloseTimeout = ptr.String(jtv)
 			}
 
 		case "input":
@@ -9904,7 +9914,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionStartedEventAttributes(v *
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Input = &jtv
+				sv.Input = ptr.String(jtv)
 			}
 
 		case "lambdaRole":
@@ -9913,7 +9923,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionStartedEventAttributes(v *
 				if !ok {
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
-				sv.LambdaRole = &jtv
+				sv.LambdaRole = ptr.String(jtv)
 			}
 
 		case "parentInitiatedEventId":
@@ -9926,7 +9936,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionStartedEventAttributes(v *
 				if err != nil {
 					return err
 				}
-				sv.ParentInitiatedEventId = &i64
+				sv.ParentInitiatedEventId = i64
 			}
 
 		case "parentWorkflowExecution":
@@ -9950,7 +9960,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionStartedEventAttributes(v *
 				if !ok {
 					return fmt.Errorf("expected TaskPriority to be of type string, got %T instead", value)
 				}
-				sv.TaskPriority = &jtv
+				sv.TaskPriority = ptr.String(jtv)
 			}
 
 		case "taskStartToCloseTimeout":
@@ -9959,7 +9969,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionStartedEventAttributes(v *
 				if !ok {
 					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
 				}
-				sv.TaskStartToCloseTimeout = &jtv
+				sv.TaskStartToCloseTimeout = ptr.String(jtv)
 			}
 
 		case "workflowType":
@@ -10022,7 +10032,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionTerminatedEventAttributes(
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Details = &jtv
+				sv.Details = ptr.String(jtv)
 			}
 
 		case "reason":
@@ -10031,7 +10041,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionTerminatedEventAttributes(
 				if !ok {
 					return fmt.Errorf("expected TerminateReason to be of type string, got %T instead", value)
 				}
-				sv.Reason = &jtv
+				sv.Reason = ptr.String(jtv)
 			}
 
 		default:
@@ -10120,7 +10130,7 @@ func awsAwsjson10_deserializeDocumentWorkflowType(v **types.WorkflowType, value 
 				if !ok {
 					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "version":
@@ -10129,7 +10139,7 @@ func awsAwsjson10_deserializeDocumentWorkflowType(v **types.WorkflowType, value 
 				if !ok {
 					return fmt.Errorf("expected Version to be of type string, got %T instead", value)
 				}
-				sv.Version = &jtv
+				sv.Version = ptr.String(jtv)
 			}
 
 		default:
@@ -10178,7 +10188,7 @@ func awsAwsjson10_deserializeDocumentWorkflowTypeConfiguration(v **types.Workflo
 				if !ok {
 					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
 				}
-				sv.DefaultExecutionStartToCloseTimeout = &jtv
+				sv.DefaultExecutionStartToCloseTimeout = ptr.String(jtv)
 			}
 
 		case "defaultLambdaRole":
@@ -10187,7 +10197,7 @@ func awsAwsjson10_deserializeDocumentWorkflowTypeConfiguration(v **types.Workflo
 				if !ok {
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
-				sv.DefaultLambdaRole = &jtv
+				sv.DefaultLambdaRole = ptr.String(jtv)
 			}
 
 		case "defaultTaskList":
@@ -10201,7 +10211,7 @@ func awsAwsjson10_deserializeDocumentWorkflowTypeConfiguration(v **types.Workflo
 				if !ok {
 					return fmt.Errorf("expected TaskPriority to be of type string, got %T instead", value)
 				}
-				sv.DefaultTaskPriority = &jtv
+				sv.DefaultTaskPriority = ptr.String(jtv)
 			}
 
 		case "defaultTaskStartToCloseTimeout":
@@ -10210,7 +10220,7 @@ func awsAwsjson10_deserializeDocumentWorkflowTypeConfiguration(v **types.Workflo
 				if !ok {
 					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
 				}
-				sv.DefaultTaskStartToCloseTimeout = &jtv
+				sv.DefaultTaskStartToCloseTimeout = ptr.String(jtv)
 			}
 
 		default:
@@ -10276,7 +10286,7 @@ func awsAwsjson10_deserializeDocumentWorkflowTypeInfo(v **types.WorkflowTypeInfo
 				if !ok {
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
-				sv.Description = &jtv
+				sv.Description = ptr.String(jtv)
 			}
 
 		case "status":
@@ -10302,7 +10312,7 @@ func awsAwsjson10_deserializeDocumentWorkflowTypeInfo(v **types.WorkflowTypeInfo
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentWorkflowTypeInfoList(v *[]*types.WorkflowTypeInfo, value interface{}) error {
+func awsAwsjson10_deserializeDocumentWorkflowTypeInfoList(v *[]types.WorkflowTypeInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10315,18 +10325,20 @@ func awsAwsjson10_deserializeDocumentWorkflowTypeInfoList(v *[]*types.WorkflowTy
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.WorkflowTypeInfo
+	var cv []types.WorkflowTypeInfo
 	if *v == nil {
-		cv = []*types.WorkflowTypeInfo{}
+		cv = []types.WorkflowTypeInfo{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.WorkflowTypeInfo
-		if err := awsAwsjson10_deserializeDocumentWorkflowTypeInfo(&col, value); err != nil {
+		var col types.WorkflowTypeInfo
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentWorkflowTypeInfo(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -10366,7 +10378,7 @@ func awsAwsjson10_deserializeOpDocumentCountClosedWorkflowExecutionsOutput(v **C
 				if err != nil {
 					return err
 				}
-				sv.Count = ptr.Int32(int32(i64))
+				sv.Count = int32(i64)
 			}
 
 		case "truncated":
@@ -10375,7 +10387,7 @@ func awsAwsjson10_deserializeOpDocumentCountClosedWorkflowExecutionsOutput(v **C
 				if !ok {
 					return fmt.Errorf("expected Truncated to be of type *bool, got %T instead", value)
 				}
-				sv.Truncated = &jtv
+				sv.Truncated = jtv
 			}
 
 		default:
@@ -10419,7 +10431,7 @@ func awsAwsjson10_deserializeOpDocumentCountOpenWorkflowExecutionsOutput(v **Cou
 				if err != nil {
 					return err
 				}
-				sv.Count = ptr.Int32(int32(i64))
+				sv.Count = int32(i64)
 			}
 
 		case "truncated":
@@ -10428,7 +10440,7 @@ func awsAwsjson10_deserializeOpDocumentCountOpenWorkflowExecutionsOutput(v **Cou
 				if !ok {
 					return fmt.Errorf("expected Truncated to be of type *bool, got %T instead", value)
 				}
-				sv.Truncated = &jtv
+				sv.Truncated = jtv
 			}
 
 		default:
@@ -10472,7 +10484,7 @@ func awsAwsjson10_deserializeOpDocumentCountPendingActivityTasksOutput(v **Count
 				if err != nil {
 					return err
 				}
-				sv.Count = ptr.Int32(int32(i64))
+				sv.Count = int32(i64)
 			}
 
 		case "truncated":
@@ -10481,7 +10493,7 @@ func awsAwsjson10_deserializeOpDocumentCountPendingActivityTasksOutput(v **Count
 				if !ok {
 					return fmt.Errorf("expected Truncated to be of type *bool, got %T instead", value)
 				}
-				sv.Truncated = &jtv
+				sv.Truncated = jtv
 			}
 
 		default:
@@ -10525,7 +10537,7 @@ func awsAwsjson10_deserializeOpDocumentCountPendingDecisionTasksOutput(v **Count
 				if err != nil {
 					return err
 				}
-				sv.Count = ptr.Int32(int32(i64))
+				sv.Count = int32(i64)
 			}
 
 		case "truncated":
@@ -10534,7 +10546,7 @@ func awsAwsjson10_deserializeOpDocumentCountPendingDecisionTasksOutput(v **Count
 				if !ok {
 					return fmt.Errorf("expected Truncated to be of type *bool, got %T instead", value)
 				}
-				sv.Truncated = &jtv
+				sv.Truncated = jtv
 			}
 
 		default:
@@ -10772,7 +10784,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeWorkflowExecutionOutput(v **Descr
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.LatestExecutionContext = &jtv
+				sv.LatestExecutionContext = ptr.String(jtv)
 			}
 
 		case "openCounts":
@@ -10863,7 +10875,7 @@ func awsAwsjson10_deserializeOpDocumentGetWorkflowExecutionHistoryOutput(v **Get
 				if !ok {
 					return fmt.Errorf("expected PageToken to be of type string, got %T instead", value)
 				}
-				sv.NextPageToken = &jtv
+				sv.NextPageToken = ptr.String(jtv)
 			}
 
 		default:
@@ -10903,7 +10915,7 @@ func awsAwsjson10_deserializeOpDocumentListActivityTypesOutput(v **ListActivityT
 				if !ok {
 					return fmt.Errorf("expected PageToken to be of type string, got %T instead", value)
 				}
-				sv.NextPageToken = &jtv
+				sv.NextPageToken = ptr.String(jtv)
 			}
 
 		case "typeInfos":
@@ -10953,7 +10965,7 @@ func awsAwsjson10_deserializeOpDocumentListClosedWorkflowExecutionsOutput(v **Li
 				if !ok {
 					return fmt.Errorf("expected PageToken to be of type string, got %T instead", value)
 				}
-				sv.NextPageToken = &jtv
+				sv.NextPageToken = ptr.String(jtv)
 			}
 
 		default:
@@ -10998,7 +11010,7 @@ func awsAwsjson10_deserializeOpDocumentListDomainsOutput(v **ListDomainsOutput, 
 				if !ok {
 					return fmt.Errorf("expected PageToken to be of type string, got %T instead", value)
 				}
-				sv.NextPageToken = &jtv
+				sv.NextPageToken = ptr.String(jtv)
 			}
 
 		default:
@@ -11043,7 +11055,7 @@ func awsAwsjson10_deserializeOpDocumentListOpenWorkflowExecutionsOutput(v **List
 				if !ok {
 					return fmt.Errorf("expected PageToken to be of type string, got %T instead", value)
 				}
-				sv.NextPageToken = &jtv
+				sv.NextPageToken = ptr.String(jtv)
 			}
 
 		default:
@@ -11119,7 +11131,7 @@ func awsAwsjson10_deserializeOpDocumentListWorkflowTypesOutput(v **ListWorkflowT
 				if !ok {
 					return fmt.Errorf("expected PageToken to be of type string, got %T instead", value)
 				}
-				sv.NextPageToken = &jtv
+				sv.NextPageToken = ptr.String(jtv)
 			}
 
 		case "typeInfos":
@@ -11164,7 +11176,7 @@ func awsAwsjson10_deserializeOpDocumentPollForActivityTaskOutput(v **PollForActi
 				if !ok {
 					return fmt.Errorf("expected ActivityId to be of type string, got %T instead", value)
 				}
-				sv.ActivityId = &jtv
+				sv.ActivityId = ptr.String(jtv)
 			}
 
 		case "activityType":
@@ -11178,7 +11190,7 @@ func awsAwsjson10_deserializeOpDocumentPollForActivityTaskOutput(v **PollForActi
 				if !ok {
 					return fmt.Errorf("expected Data to be of type string, got %T instead", value)
 				}
-				sv.Input = &jtv
+				sv.Input = ptr.String(jtv)
 			}
 
 		case "startedEventId":
@@ -11191,7 +11203,7 @@ func awsAwsjson10_deserializeOpDocumentPollForActivityTaskOutput(v **PollForActi
 				if err != nil {
 					return err
 				}
-				sv.StartedEventId = &i64
+				sv.StartedEventId = i64
 			}
 
 		case "taskToken":
@@ -11200,7 +11212,7 @@ func awsAwsjson10_deserializeOpDocumentPollForActivityTaskOutput(v **PollForActi
 				if !ok {
 					return fmt.Errorf("expected TaskToken to be of type string, got %T instead", value)
 				}
-				sv.TaskToken = &jtv
+				sv.TaskToken = ptr.String(jtv)
 			}
 
 		case "workflowExecution":
@@ -11250,7 +11262,7 @@ func awsAwsjson10_deserializeOpDocumentPollForDecisionTaskOutput(v **PollForDeci
 				if !ok {
 					return fmt.Errorf("expected PageToken to be of type string, got %T instead", value)
 				}
-				sv.NextPageToken = &jtv
+				sv.NextPageToken = ptr.String(jtv)
 			}
 
 		case "previousStartedEventId":
@@ -11263,7 +11275,7 @@ func awsAwsjson10_deserializeOpDocumentPollForDecisionTaskOutput(v **PollForDeci
 				if err != nil {
 					return err
 				}
-				sv.PreviousStartedEventId = &i64
+				sv.PreviousStartedEventId = i64
 			}
 
 		case "startedEventId":
@@ -11276,7 +11288,7 @@ func awsAwsjson10_deserializeOpDocumentPollForDecisionTaskOutput(v **PollForDeci
 				if err != nil {
 					return err
 				}
-				sv.StartedEventId = &i64
+				sv.StartedEventId = i64
 			}
 
 		case "taskToken":
@@ -11285,7 +11297,7 @@ func awsAwsjson10_deserializeOpDocumentPollForDecisionTaskOutput(v **PollForDeci
 				if !ok {
 					return fmt.Errorf("expected TaskToken to be of type string, got %T instead", value)
 				}
-				sv.TaskToken = &jtv
+				sv.TaskToken = ptr.String(jtv)
 			}
 
 		case "workflowExecution":
@@ -11335,7 +11347,7 @@ func awsAwsjson10_deserializeOpDocumentRecordActivityTaskHeartbeatOutput(v **Rec
 				if !ok {
 					return fmt.Errorf("expected Canceled to be of type *bool, got %T instead", value)
 				}
-				sv.CancelRequested = &jtv
+				sv.CancelRequested = jtv
 			}
 
 		default:
@@ -11654,7 +11666,7 @@ func awsAwsjson10_deserializeOpDocumentStartWorkflowExecutionOutput(v **StartWor
 				if !ok {
 					return fmt.Errorf("expected WorkflowRunId to be of type string, got %T instead", value)
 				}
-				sv.RunId = &jtv
+				sv.RunId = ptr.String(jtv)
 			}
 
 		default:

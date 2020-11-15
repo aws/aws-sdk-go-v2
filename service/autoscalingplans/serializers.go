@@ -309,17 +309,13 @@ func awsAwsjson11_serializeDocumentApplicationSource(v *types.ApplicationSource,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentApplicationSources(v []*types.ApplicationSource, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentApplicationSources(v []types.ApplicationSource, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentApplicationSource(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentApplicationSource(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -411,17 +407,13 @@ func awsAwsjson11_serializeDocumentMetricDimension(v *types.MetricDimension, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentMetricDimensions(v []*types.MetricDimension, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentMetricDimensions(v []types.MetricDimension, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentMetricDimension(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentMetricDimension(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -545,34 +537,26 @@ func awsAwsjson11_serializeDocumentScalingInstruction(v *types.ScalingInstructio
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentScalingInstructions(v []*types.ScalingInstruction, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentScalingInstructions(v []types.ScalingInstruction, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentScalingInstruction(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentScalingInstruction(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentScalingPlanNames(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentScalingPlanNames(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -596,34 +580,26 @@ func awsAwsjson11_serializeDocumentTagFilter(v *types.TagFilter, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagFilters(v []*types.TagFilter, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagFilters(v []types.TagFilter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentTagFilter(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentTagFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagValues(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagValues(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -674,17 +650,13 @@ func awsAwsjson11_serializeDocumentTargetTrackingConfiguration(v *types.TargetTr
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTargetTrackingConfigurations(v []*types.TargetTrackingConfiguration, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTargetTrackingConfigurations(v []types.TargetTrackingConfiguration, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentTargetTrackingConfiguration(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentTargetTrackingConfiguration(&v[i], av); err != nil {
 			return err
 		}
 	}

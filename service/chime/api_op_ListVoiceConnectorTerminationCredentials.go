@@ -37,7 +37,7 @@ type ListVoiceConnectorTerminationCredentialsInput struct {
 type ListVoiceConnectorTerminationCredentialsOutput struct {
 
 	// A list of user names.
-	Usernames []*string
+	Usernames []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -13,7 +13,7 @@ type ApplicationSource struct {
 	CloudFormationStackARN *string
 
 	// A set of tags (up to 50).
-	TagFilters []*TagFilter
+	TagFilters []TagFilter
 }
 
 // Represents a CloudWatch metric of your choosing that can be used for predictive
@@ -53,7 +53,7 @@ type CustomizedLoadMetricSpecification struct {
 	// The dimensions of the metric. Conditional: If you published your metric with
 	// dimensions, you must specify the same dimensions in your customized load metric
 	// specification.
-	Dimensions []*MetricDimension
+	Dimensions []MetricDimension
 
 	// The unit of the metric.
 	Unit *string
@@ -98,7 +98,7 @@ type CustomizedScalingMetricSpecification struct {
 	// The dimensions of the metric. Conditional: If you published your metric with
 	// dimensions, you must specify the same dimensions in your customized scaling
 	// metric specification.
-	Dimensions []*MetricDimension
+	Dimensions []MetricDimension
 
 	// The unit of the metric.
 	Unit *string
@@ -282,7 +282,7 @@ type ScalingInstruction struct {
 	// configurations.
 	//
 	// This member is required.
-	TargetTrackingConfigurations []*TargetTrackingConfiguration
+	TargetTrackingConfigurations []TargetTrackingConfiguration
 
 	// The customized load metric to use for predictive scaling. This parameter or a
 	// PredefinedLoadMetricSpecification is required when configuring predictive
@@ -371,7 +371,7 @@ type ScalingPlan struct {
 	// The scaling instructions.
 	//
 	// This member is required.
-	ScalingInstructions []*ScalingInstruction
+	ScalingInstructions []ScalingInstruction
 
 	// The name of the scaling plan.
 	//
@@ -520,7 +520,7 @@ type ScalingPlanResource struct {
 	ServiceNamespace ServiceNamespace
 
 	// The scaling policies.
-	ScalingPolicies []*ScalingPolicy
+	ScalingPolicies []ScalingPolicy
 
 	// A simple message about the current scaling status of the resource.
 	ScalingStatusMessage *string
@@ -551,7 +551,7 @@ type TagFilter struct {
 	Key *string
 
 	// The tag values (0 to 20).
-	Values []*string
+	Values []string
 }
 
 // Describes a target tracking configuration to use with AWS Auto Scaling. Used

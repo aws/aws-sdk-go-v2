@@ -66,7 +66,7 @@ type QueryInput struct {
 	// An array of documents attributes. Amazon Kendra returns a count for each
 	// attribute key specified. You can use this information to help narrow the search
 	// for your user.
-	Facets []*types.Facet
+	Facets []types.Facet
 
 	// Query results are returned in pages the size of the PageSize parameter. By
 	// default, Amazon Kendra returns the first page of results. Use this parameter to
@@ -84,7 +84,7 @@ type QueryInput struct {
 	// An array of document attributes to include in the response. No other document
 	// attributes are included in the response. By default all document attributes are
 	// included in the response.
-	RequestedDocumentAttributes []*string
+	RequestedDocumentAttributes []string
 
 	// Provides information that determines how the results of the query are sorted.
 	// You can set the field that Amazon Kendra should sort the results on, and specify
@@ -99,14 +99,14 @@ type QueryOutput struct {
 
 	// Contains the facet results. A FacetResult contains the counts for each attribute
 	// key that was specified in the Facets input parameter.
-	FacetResults []*types.FacetResult
+	FacetResults []types.FacetResult
 
 	// The unique identifier for the search. You use QueryId to identify the search
 	// when using the feedback API.
 	QueryId *string
 
 	// The results of the search.
-	ResultItems []*types.QueryResultItem
+	ResultItems []types.QueryResultItem
 
 	// The total number of items found by the search; however, you can only retrieve up
 	// to 100 items. For example, if the search found 192 items, you can only retrieve

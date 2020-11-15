@@ -34,7 +34,7 @@ type DescribeInstanceTypesInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters. Filter names and values are case-sensitive.
 	//
@@ -180,7 +180,7 @@ type DescribeInstanceTypesInput struct {
 	// *
 	// vcpu-info.valid-threads-per-core - The number of threads per core that can be
 	// configured for the instance type. For example, "1" or "1,2".
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The instance types. For more information, see Instance Types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the
@@ -201,7 +201,7 @@ type DescribeInstanceTypesOutput struct {
 	// The instance type. For more information, see Instance Types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the
 	// Amazon Elastic Compute Cloud User Guide.
-	InstanceTypes []*types.InstanceTypeInfo
+	InstanceTypes []types.InstanceTypeInfo
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

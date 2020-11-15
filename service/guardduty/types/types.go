@@ -11,11 +11,11 @@ type AccessControlList struct {
 
 	// A value that indicates whether public read access for the bucket is enabled
 	// through an Access Control List (ACL).
-	AllowsPublicReadAccess *bool
+	AllowsPublicReadAccess bool
 
 	// A value that indicates whether public write access for the bucket is enabled
 	// through an Access Control List (ACL).
-	AllowsPublicWriteAccess *bool
+	AllowsPublicWriteAccess bool
 }
 
 // Contains information about the access keys.
@@ -114,16 +114,16 @@ type AwsApiCallAction struct {
 type BlockPublicAccess struct {
 
 	// Indicates if S3 Block Public Access is set to BlockPublicAcls.
-	BlockPublicAcls *bool
+	BlockPublicAcls bool
 
 	// Indicates if S3 Block Public Access is set to BlockPublicPolicy.
-	BlockPublicPolicy *bool
+	BlockPublicPolicy bool
 
 	// Indicates if S3 Block Public Access is set to IgnorePublicAcls.
-	IgnorePublicAcls *bool
+	IgnorePublicAcls bool
 
 	// Indicates if S3 Block Public Access is set to RestrictPublicBuckets.
-	RestrictPublicBuckets *bool
+	RestrictPublicBuckets bool
 }
 
 // Contains information about the bucket level permissions for the S3 bucket.
@@ -145,11 +145,11 @@ type BucketPolicy struct {
 
 	// A value that indicates whether public read access for the bucket is enabled
 	// through a bucket policy.
-	AllowsPublicReadAccess *bool
+	AllowsPublicReadAccess bool
 
 	// A value that indicates whether public write access for the bucket is enabled
 	// through a bucket policy.
-	AllowsPublicWriteAccess *bool
+	AllowsPublicWriteAccess bool
 }
 
 // Contains information about the city associated with the IP address.
@@ -174,51 +174,51 @@ type Condition struct {
 
 	// Represents the equal condition to be applied to a single field when querying for
 	// findings.
-	Eq []*string
+	Eq []string
 
 	// Represents an equal condition to be applied to a single field when querying for
 	// findings.
-	Equals []*string
+	Equals []string
 
 	// Represents a greater than condition to be applied to a single field when
 	// querying for findings.
-	GreaterThan *int64
+	GreaterThan int64
 
 	// Represents a greater than or equal condition to be applied to a single field
 	// when querying for findings.
-	GreaterThanOrEqual *int64
+	GreaterThanOrEqual int64
 
 	// Represents a greater than condition to be applied to a single field when
 	// querying for findings.
-	Gt *int32
+	Gt int32
 
 	// Represents a greater than or equal condition to be applied to a single field
 	// when querying for findings.
-	Gte *int32
+	Gte int32
 
 	// Represents a less than condition to be applied to a single field when querying
 	// for findings.
-	LessThan *int64
+	LessThan int64
 
 	// Represents a less than or equal condition to be applied to a single field when
 	// querying for findings.
-	LessThanOrEqual *int64
+	LessThanOrEqual int64
 
 	// Represents a less than condition to be applied to a single field when querying
 	// for findings.
-	Lt *int32
+	Lt int32
 
 	// Represents a less than or equal condition to be applied to a single field when
 	// querying for findings.
-	Lte *int32
+	Lte int32
 
 	// Represents the not equal condition to be applied to a single field when querying
 	// for findings.
-	Neq []*string
+	Neq []string
 
 	// Represents a not equal condition to be applied to a single field when querying
 	// for findings.
-	NotEquals []*string
+	NotEquals []string
 }
 
 // Contains information about the country where the remote IP address is located.
@@ -338,7 +338,7 @@ type DomainDetails struct {
 type Evidence struct {
 
 	// A list of threat intelligence details related to the evidence.
-	ThreatIntelligenceDetails []*ThreatIntelligenceDetail
+	ThreatIntelligenceDetails []ThreatIntelligenceDetail
 }
 
 // Contains information about the finding, which is generated when abnormal or
@@ -384,7 +384,7 @@ type Finding struct {
 	// The severity of the finding.
 	//
 	// This member is required.
-	Severity *float64
+	Severity float64
 
 	// The type of finding.
 	//
@@ -397,7 +397,7 @@ type Finding struct {
 	UpdatedAt *string
 
 	// The confidence score for the finding.
-	Confidence *float64
+	Confidence float64
 
 	// The description of the finding.
 	Description *string
@@ -417,14 +417,14 @@ type FindingCriteria struct {
 
 	// Represents a map of finding properties that match specified conditions and
 	// values when querying findings.
-	Criterion map[string]*Condition
+	Criterion map[string]Condition
 }
 
 // Contains information about finding statistics.
 type FindingStatistics struct {
 
 	// Represents a map of severity to count statistics for a set of findings.
-	CountBySeverity map[string]*int32
+	CountBySeverity map[string]int32
 }
 
 // Contains information on the status of VPC flow logs as a data source.
@@ -440,10 +440,10 @@ type FlowLogsConfigurationResult struct {
 type GeoLocation struct {
 
 	// The latitude information of the remote IP address.
-	Lat *float64
+	Lat float64
 
 	// The longitude information of the remote IP address.
-	Lon *float64
+	Lon float64
 }
 
 // Contains information about the EC2 instance profile.
@@ -484,7 +484,7 @@ type InstanceDetails struct {
 	LaunchTime *string
 
 	// The elastic network interface information of the EC2 instance.
-	NetworkInterfaces []*NetworkInterface
+	NetworkInterfaces []NetworkInterface
 
 	// The Amazon Resource Name (ARN) of the AWS Outpost. Only applicable to AWS
 	// Outposts instances.
@@ -494,10 +494,10 @@ type InstanceDetails struct {
 	Platform *string
 
 	// The product code of the EC2 instance.
-	ProductCodes []*ProductCode
+	ProductCodes []ProductCode
 
 	// The tags of the EC2 instance.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Contains information about the invitation to become a member account.
@@ -528,7 +528,7 @@ type LocalIpDetails struct {
 type LocalPortDetails struct {
 
 	// The port number of the local connection.
-	Port *int32
+	Port int32
 
 	// The port name of the local connection.
 	PortName *string
@@ -604,7 +604,7 @@ type MemberDataSourceConfiguration struct {
 type NetworkConnectionAction struct {
 
 	// Indicates whether EC2 blocked the network connection to your instance.
-	Blocked *bool
+	Blocked bool
 
 	// The network connection direction.
 	ConnectionDirection *string
@@ -629,7 +629,7 @@ type NetworkConnectionAction struct {
 type NetworkInterface struct {
 
 	// A list of IPv6 addresses for the EC2 instance.
-	Ipv6Addresses []*string
+	Ipv6Addresses []string
 
 	// The ID of the network interface.
 	NetworkInterfaceId *string
@@ -641,7 +641,7 @@ type NetworkInterface struct {
 	PrivateIpAddress *string
 
 	// Other private IP address information of the EC2 instance.
-	PrivateIpAddresses []*PrivateIpAddressDetails
+	PrivateIpAddresses []PrivateIpAddressDetails
 
 	// The public DNS name of the EC2 instance.
 	PublicDnsName *string
@@ -650,7 +650,7 @@ type NetworkInterface struct {
 	PublicIp *string
 
 	// The security groups associated with the EC2 instance.
-	SecurityGroups []*SecurityGroup
+	SecurityGroups []SecurityGroup
 
 	// The subnet ID of the EC2 instance.
 	SubnetId *string
@@ -703,7 +703,7 @@ type OrganizationS3LogsConfiguration struct {
 	// automatically as a data source for the organization.
 	//
 	// This member is required.
-	AutoEnable *bool
+	AutoEnable bool
 }
 
 // The current configuration of S3 data event logs as a data source for the
@@ -714,7 +714,7 @@ type OrganizationS3LogsConfigurationResult struct {
 	// new members of the organization.
 	//
 	// This member is required.
-	AutoEnable *bool
+	AutoEnable bool
 }
 
 // Contains information on the owner of the bucket.
@@ -741,10 +741,10 @@ type PortProbeAction struct {
 
 	// Indicates whether EC2 blocked the port probe to the instance, such as with an
 	// ACL.
-	Blocked *bool
+	Blocked bool
 
 	// A list of objects related to port probe details.
-	PortProbeDetails []*PortProbeDetail
+	PortProbeDetails []PortProbeDetail
 }
 
 // Contains information about the port probe details.
@@ -814,7 +814,7 @@ type RemoteIpDetails struct {
 type RemotePortDetails struct {
 
 	// The port number of the remote connection.
-	Port *int32
+	Port int32
 
 	// The port name of the remote connection.
 	PortName *string
@@ -836,7 +836,7 @@ type Resource struct {
 	ResourceType *string
 
 	// Contains information on the S3 bucket.
-	S3BucketDetails []*S3BucketDetail
+	S3BucketDetails []S3BucketDetail
 }
 
 // Contains information on the S3 bucket.
@@ -861,7 +861,7 @@ type S3BucketDetail struct {
 	PublicAccess *PublicAccess
 
 	// All tags attached to the S3 bucket
-	Tags []*Tag
+	Tags []Tag
 
 	// Describes whether the bucket is a source or destination bucket.
 	Type *string
@@ -873,7 +873,7 @@ type S3LogsConfiguration struct {
 	// The status of S3 data event logs as a data source.
 	//
 	// This member is required.
-	Enable *bool
+	Enable bool
 }
 
 // Describes whether S3 data event logs will be enabled as a data source.
@@ -903,10 +903,10 @@ type Service struct {
 	Action *Action
 
 	// Indicates whether this finding is archived.
-	Archived *bool
+	Archived bool
 
 	// The total count of the occurrences of this finding type.
-	Count *int32
+	Count int32
 
 	// The detector ID for the GuardDuty service.
 	DetectorId *string
@@ -961,7 +961,7 @@ type ThreatIntelligenceDetail struct {
 
 	// A list of names of the threats in the threat intelligence list that triggered
 	// the finding.
-	ThreatNames []*string
+	ThreatNames []string
 }
 
 // Contains the total usage with the corresponding currency unit for that value.
@@ -1007,11 +1007,11 @@ type UsageCriteria struct {
 	DataSources []DataSource
 
 	// The account IDs to aggregate usage statistics from.
-	AccountIds []*string
+	AccountIds []string
 
 	// The resources to aggregate usage statistics from. Only accepts exact resource
 	// names.
-	Resources []*string
+	Resources []string
 }
 
 // Contains information on the result of usage based on data source type.
@@ -1039,15 +1039,15 @@ type UsageResourceResult struct {
 type UsageStatistics struct {
 
 	// The usage statistic sum organized by account ID.
-	SumByAccount []*UsageAccountResult
+	SumByAccount []UsageAccountResult
 
 	// The usage statistic sum organized by on data source.
-	SumByDataSource []*UsageDataSourceResult
+	SumByDataSource []UsageDataSourceResult
 
 	// The usage statistic sum organized by resource.
-	SumByResource []*UsageResourceResult
+	SumByResource []UsageResourceResult
 
 	// Lists the top 50 resources that have generated the most GuardDuty usage, in
 	// order from most to least expensive.
-	TopResources []*UsageResourceResult
+	TopResources []UsageResourceResult
 }

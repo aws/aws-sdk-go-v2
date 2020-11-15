@@ -45,7 +45,7 @@ type DescribeImagePermissionsInput struct {
 
 	// The 12-digit identifier of one or more AWS accounts with which the image is
 	// shared.
-	SharedAwsAccountIds []*string
+	SharedAwsAccountIds []string
 }
 
 type DescribeImagePermissionsOutput struct {
@@ -58,7 +58,7 @@ type DescribeImagePermissionsOutput struct {
 	NextToken *string
 
 	// The permissions for a private image that you own.
-	SharedImagePermissionsList []*types.SharedImagePermissions
+	SharedImagePermissionsList []types.SharedImagePermissions
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

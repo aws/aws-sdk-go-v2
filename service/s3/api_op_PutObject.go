@@ -145,7 +145,7 @@ type PutObjectInput struct {
 	// cannot be determined automatically. For more information, see
 	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13
 	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13).
-	ContentLength *int64
+	ContentLength int64
 
 	// The base64-encoded 128-bit MD5 digest of the message (without the headers)
 	// according to RFC 1864. This header can be used as a message integrity check to
@@ -187,7 +187,7 @@ type PutObjectInput struct {
 	GrantWriteACP *string
 
 	// A map of metadata to store with the object in S3.
-	Metadata map[string]*string
+	Metadata map[string]string
 
 	// Specifies whether a legal hold will be applied to this object. For more
 	// information about S3 Object Lock, see Object Lock

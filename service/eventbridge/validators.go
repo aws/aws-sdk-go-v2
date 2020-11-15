@@ -834,13 +834,13 @@ func validateRunCommandTarget(v *types.RunCommandTarget) error {
 	}
 }
 
-func validateRunCommandTargets(v []*types.RunCommandTarget) error {
+func validateRunCommandTargets(v []types.RunCommandTarget) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RunCommandTargets"}
 	for i := range v {
-		if err := validateRunCommandTarget(v[i]); err != nil {
+		if err := validateRunCommandTarget(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -869,13 +869,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -934,13 +934,13 @@ func validateTarget(v *types.Target) error {
 	}
 }
 
-func validateTargetList(v []*types.Target) error {
+func validateTargetList(v []types.Target) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TargetList"}
 	for i := range v {
-		if err := validateTarget(v[i]); err != nil {
+		if err := validateTarget(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

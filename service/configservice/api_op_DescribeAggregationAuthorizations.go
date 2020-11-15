@@ -32,7 +32,7 @@ type DescribeAggregationAuthorizationsInput struct {
 
 	// The maximum number of AggregationAuthorizations returned on each page. The
 	// default is maximum. If you specify 0, AWS Config uses the default.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
@@ -43,7 +43,7 @@ type DescribeAggregationAuthorizationsOutput struct {
 
 	// Returns a list of authorizations granted to various aggregator accounts and
 	// regions.
-	AggregationAuthorizations []*types.AggregationAuthorization
+	AggregationAuthorizations []types.AggregationAuthorization
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.

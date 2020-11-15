@@ -32,7 +32,7 @@ type ModifyTargetGroupAttributesInput struct {
 	// The attributes.
 	//
 	// This member is required.
-	Attributes []*types.TargetGroupAttribute
+	Attributes []types.TargetGroupAttribute
 
 	// The Amazon Resource Name (ARN) of the target group.
 	//
@@ -43,7 +43,7 @@ type ModifyTargetGroupAttributesInput struct {
 type ModifyTargetGroupAttributesOutput struct {
 
 	// Information about the attributes.
-	Attributes []*types.TargetGroupAttribute
+	Attributes []types.TargetGroupAttribute
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -71,7 +71,7 @@ type DescribeUsageLimitsInput struct {
 	// environment. If you specify both of these tag keys in the request, Amazon
 	// Redshift returns a response with the usage limit objects have either or both of
 	// these tag keys associated with them.
-	TagKeys []*string
+	TagKeys []string
 
 	// A tag value or values for which you want to return all matching usage limit
 	// objects that are associated with the specified tag value or values. For example,
@@ -79,7 +79,7 @@ type DescribeUsageLimitsInput struct {
 	// and test. If you specify both of these tag values in the request, Amazon
 	// Redshift returns a response with the usage limit objects that have either or
 	// both of these tag values associated with them.
-	TagValues []*string
+	TagValues []string
 
 	// The identifier of the usage limit to describe.
 	UsageLimitId *string
@@ -95,7 +95,7 @@ type DescribeUsageLimitsOutput struct {
 	Marker *string
 
 	// Contains the output from the DescribeUsageLimits action.
-	UsageLimits []*types.UsageLimit
+	UsageLimits []types.UsageLimit
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

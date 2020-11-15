@@ -42,7 +42,7 @@ type ListGatewaysOutput struct {
 	// A list that summarizes each gateway.
 	//
 	// This member is required.
-	GatewaySummaries []*types.GatewaySummary
+	GatewaySummaries []types.GatewaySummary
 
 	// The token for the next set of results, or null if there are no additional
 	// results.

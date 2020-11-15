@@ -60,7 +60,7 @@ type DescribeInstanceRefreshesInput struct {
 	AutoScalingGroupName *string
 
 	// One or more instance refresh IDs.
-	InstanceRefreshIds []*string
+	InstanceRefreshIds []string
 
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100.
@@ -74,7 +74,7 @@ type DescribeInstanceRefreshesInput struct {
 type DescribeInstanceRefreshesOutput struct {
 
 	// The instance refreshes for the specified group.
-	InstanceRefreshes []*types.InstanceRefresh
+	InstanceRefreshes []types.InstanceRefresh
 
 	// A string that indicates that the response contains more items than can be
 	// returned in a single response. To receive additional items, specify this string

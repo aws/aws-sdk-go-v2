@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -712,7 +713,7 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		case "RequestId":
@@ -721,7 +722,7 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				if !ok {
 					return fmt.Errorf("expected RequestId to be of type string, got %T instead", value)
 				}
-				sv.RequestId = &jtv
+				sv.RequestId = ptr.String(jtv)
 			}
 
 		default:
@@ -761,7 +762,7 @@ func awsAwsjson11_deserializeDocumentGroup(v **types.Group, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected GroupDisplayName to be of type string, got %T instead", value)
 				}
-				sv.DisplayName = &jtv
+				sv.DisplayName = ptr.String(jtv)
 			}
 
 		case "GroupId":
@@ -770,7 +771,7 @@ func awsAwsjson11_deserializeDocumentGroup(v **types.Group, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
 				}
-				sv.GroupId = &jtv
+				sv.GroupId = ptr.String(jtv)
 			}
 
 		default:
@@ -782,7 +783,7 @@ func awsAwsjson11_deserializeDocumentGroup(v **types.Group, value interface{}) e
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGroups(v *[]*types.Group, value interface{}) error {
+func awsAwsjson11_deserializeDocumentGroups(v *[]types.Group, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -795,18 +796,20 @@ func awsAwsjson11_deserializeDocumentGroups(v *[]*types.Group, value interface{}
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Group
+	var cv []types.Group
 	if *v == nil {
-		cv = []*types.Group{}
+		cv = []types.Group{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Group
-		if err := awsAwsjson11_deserializeDocumentGroup(&col, value); err != nil {
+		var col types.Group
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentGroup(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -842,7 +845,7 @@ func awsAwsjson11_deserializeDocumentInternalServerException(v **types.InternalS
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		case "RequestId":
@@ -851,7 +854,7 @@ func awsAwsjson11_deserializeDocumentInternalServerException(v **types.InternalS
 				if !ok {
 					return fmt.Errorf("expected RequestId to be of type string, got %T instead", value)
 				}
-				sv.RequestId = &jtv
+				sv.RequestId = ptr.String(jtv)
 			}
 
 		default:
@@ -891,7 +894,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		case "RequestId":
@@ -900,7 +903,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				if !ok {
 					return fmt.Errorf("expected RequestId to be of type string, got %T instead", value)
 				}
-				sv.RequestId = &jtv
+				sv.RequestId = ptr.String(jtv)
 			}
 
 		case "ResourceId":
@@ -909,7 +912,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				if !ok {
 					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
 				}
-				sv.ResourceId = &jtv
+				sv.ResourceId = ptr.String(jtv)
 			}
 
 		case "ResourceType":
@@ -958,7 +961,7 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		case "RequestId":
@@ -967,7 +970,7 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				if !ok {
 					return fmt.Errorf("expected RequestId to be of type string, got %T instead", value)
 				}
-				sv.RequestId = &jtv
+				sv.RequestId = ptr.String(jtv)
 			}
 
 		default:
@@ -1007,7 +1010,7 @@ func awsAwsjson11_deserializeDocumentUser(v **types.User, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
 				}
-				sv.UserId = &jtv
+				sv.UserId = ptr.String(jtv)
 			}
 
 		case "UserName":
@@ -1016,7 +1019,7 @@ func awsAwsjson11_deserializeDocumentUser(v **types.User, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected UserName to be of type string, got %T instead", value)
 				}
-				sv.UserName = &jtv
+				sv.UserName = ptr.String(jtv)
 			}
 
 		default:
@@ -1028,7 +1031,7 @@ func awsAwsjson11_deserializeDocumentUser(v **types.User, value interface{}) err
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUsers(v *[]*types.User, value interface{}) error {
+func awsAwsjson11_deserializeDocumentUsers(v *[]types.User, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1041,18 +1044,20 @@ func awsAwsjson11_deserializeDocumentUsers(v *[]*types.User, value interface{}) 
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.User
+	var cv []types.User
 	if *v == nil {
-		cv = []*types.User{}
+		cv = []types.User{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.User
-		if err := awsAwsjson11_deserializeDocumentUser(&col, value); err != nil {
+		var col types.User
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentUser(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1088,7 +1093,7 @@ func awsAwsjson11_deserializeDocumentValidationException(v **types.ValidationExc
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		case "RequestId":
@@ -1097,7 +1102,7 @@ func awsAwsjson11_deserializeDocumentValidationException(v **types.ValidationExc
 				if !ok {
 					return fmt.Errorf("expected RequestId to be of type string, got %T instead", value)
 				}
-				sv.RequestId = &jtv
+				sv.RequestId = ptr.String(jtv)
 			}
 
 		default:
@@ -1137,7 +1142,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeGroupOutput(v **DescribeGroupOutp
 				if !ok {
 					return fmt.Errorf("expected GroupDisplayName to be of type string, got %T instead", value)
 				}
-				sv.DisplayName = &jtv
+				sv.DisplayName = ptr.String(jtv)
 			}
 
 		case "GroupId":
@@ -1146,7 +1151,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeGroupOutput(v **DescribeGroupOutp
 				if !ok {
 					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
 				}
-				sv.GroupId = &jtv
+				sv.GroupId = ptr.String(jtv)
 			}
 
 		default:
@@ -1186,7 +1191,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeUserOutput(v **DescribeUserOutput
 				if !ok {
 					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
 				}
-				sv.UserId = &jtv
+				sv.UserId = ptr.String(jtv)
 			}
 
 		case "UserName":
@@ -1195,7 +1200,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeUserOutput(v **DescribeUserOutput
 				if !ok {
 					return fmt.Errorf("expected UserName to be of type string, got %T instead", value)
 				}
-				sv.UserName = &jtv
+				sv.UserName = ptr.String(jtv)
 			}
 
 		default:
@@ -1240,7 +1245,7 @@ func awsAwsjson11_deserializeOpDocumentListGroupsOutput(v **ListGroupsOutput, va
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -1280,7 +1285,7 @@ func awsAwsjson11_deserializeOpDocumentListUsersOutput(v **ListUsersOutput, valu
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "Users":

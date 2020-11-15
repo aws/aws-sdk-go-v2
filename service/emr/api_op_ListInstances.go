@@ -62,7 +62,7 @@ type ListInstancesInput struct {
 type ListInstancesOutput struct {
 
 	// The list of instances for the cluster and given filters.
-	Instances []*types.Instance
+	Instances []types.Instance
 
 	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string

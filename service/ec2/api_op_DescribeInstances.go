@@ -46,7 +46,7 @@ type DescribeInstancesInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The filters.
 	//
@@ -351,16 +351,16 @@ type DescribeInstancesInput struct {
 	//
 	// * vpc-id - The ID of the VPC that the
 	// instance is running in.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The instance IDs. Default: Describes all your instances.
-	InstanceIds []*string
+	InstanceIds []string
 
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value. This
 	// value can be between 5 and 1000. You cannot specify this parameter and the
 	// instance IDs parameter in the same call.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token to request the next page of results.
 	NextToken *string
@@ -373,7 +373,7 @@ type DescribeInstancesOutput struct {
 	NextToken *string
 
 	// Information about the reservations.
-	Reservations []*types.Reservation
+	Reservations []types.Reservation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

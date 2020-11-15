@@ -43,7 +43,7 @@ type ListVolumeInitiatorsOutput struct {
 
 	// The host names and port numbers of all iSCSI initiators that are connected to
 	// the gateway.
-	Initiators []*string
+	Initiators []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -40,7 +40,7 @@ type AccessPointDescription struct {
 	RootDirectory *RootDirectory
 
 	// The tags associated with the access point, presented as an array of Tag objects.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // The backup policy for the file system, showing the curent status. If ENABLED,
@@ -121,7 +121,7 @@ type FileSystemDescription struct {
 	// information, see CreateMountTarget.
 	//
 	// This member is required.
-	NumberOfMountTargets *int32
+	NumberOfMountTargets int32
 
 	// The AWS account that created the file system. If the file system was created by
 	// an IAM user, the parent account to which the user belongs is the owner.
@@ -150,7 +150,7 @@ type FileSystemDescription struct {
 	// The tags associated with the file system, presented as an array of Tag objects.
 	//
 	// This member is required.
-	Tags []*Tag
+	Tags []Tag
 
 	// A Boolean value that, if true, indicates that the file system is encrypted.
 	Encrypted *bool
@@ -199,7 +199,7 @@ type FileSystemSize struct {
 	// The latest known metered size (in bytes) of data stored in the file system.
 	//
 	// This member is required.
-	Value *int64
+	Value int64
 
 	// The time at which the size of data, returned in the Value field, was determined.
 	// The value is the integer number of seconds since 1970-01-01T00:00:00Z.
@@ -289,7 +289,7 @@ type PosixUser struct {
 
 	// Secondary POSIX group IDs used for all file system operations using this access
 	// point.
-	SecondaryGids []*int64
+	SecondaryGids []int64
 }
 
 // Specifies the directory on the Amazon EFS file system that the access point

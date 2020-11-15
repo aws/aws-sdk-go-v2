@@ -15,7 +15,7 @@ type AssetSummary struct {
 	Name *string
 
 	// The hashes of the asset.
-	Hashes map[string]*string
+	Hashes map[string]string
 
 	// The size of the asset.
 	Size *int64
@@ -29,7 +29,7 @@ type DomainDescription struct {
 	Arn *string
 
 	// The total size of all assets in the domain.
-	AssetSizeBytes *int64
+	AssetSizeBytes int64
 
 	// A timestamp that represents the date and time the domain was created.
 	CreatedTime *time.Time
@@ -44,7 +44,7 @@ type DomainDescription struct {
 	Owner *string
 
 	// The number of repositories in the domain.
-	RepositoryCount *int32
+	RepositoryCount int32
 
 	// The Amazon Resource Name (ARN) of the Amazon S3 bucket that is used to store
 	// package assets in the domain.
@@ -185,7 +185,7 @@ type PackageVersionDescription struct {
 	HomePage *string
 
 	// Information about licenses associated with the package version.
-	Licenses []*LicenseInfo
+	Licenses []LicenseInfo
 
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
@@ -316,7 +316,7 @@ type RepositoryDescription struct {
 	DomainOwner *string
 
 	// An array of external connections associated with the repository.
-	ExternalConnections []*RepositoryExternalConnectionInfo
+	ExternalConnections []RepositoryExternalConnectionInfo
 
 	// The name of the repository.
 	Name *string
@@ -326,7 +326,7 @@ type RepositoryDescription struct {
 	// CodeArtifact looks for a requested package version. For more information, see
 	// Working with upstream repositories
 	// (https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html).
-	Upstreams []*UpstreamRepositoryInfo
+	Upstreams []UpstreamRepositoryInfo
 }
 
 // Contains information about the external connection of a repository.

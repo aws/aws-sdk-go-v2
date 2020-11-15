@@ -56,7 +56,7 @@ type ListProblemsOutput struct {
 	NextToken *string
 
 	// The list of problems.
-	ProblemList []*types.Problem
+	ProblemList []types.Problem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

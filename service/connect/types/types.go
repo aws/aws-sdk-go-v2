@@ -39,7 +39,7 @@ type ContactFlow struct {
 	Name *string
 
 	// One or more tags.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The type of the contact flow. For descriptions of the available types, see
 	// Choose a Contact Flow Type
@@ -110,7 +110,7 @@ type CurrentMetricData struct {
 type CurrentMetricResult struct {
 
 	// The set of metrics.
-	Collections []*CurrentMetricData
+	Collections []CurrentMetricData
 
 	// The dimensions for the metrics.
 	Dimensions *Dimensions
@@ -134,7 +134,7 @@ type Filters struct {
 
 	// The queues to use to filter the metrics. You can specify up to 100 queues per
 	// request.
-	Queues []*string
+	Queues []string
 }
 
 // Contains information about a hierarchy group.
@@ -253,7 +253,7 @@ type HistoricalMetricData struct {
 type HistoricalMetricResult struct {
 
 	// The set of metrics.
-	Collections []*HistoricalMetricData
+	Collections []HistoricalMetricData
 
 	// The dimension for the metrics.
 	Dimensions *Dimensions
@@ -284,7 +284,7 @@ type MediaConcurrency struct {
 	// The number of contacts an agent can have on a channel simultaneously.
 	//
 	// This member is required.
-	Concurrency *int32
+	Concurrency int32
 }
 
 // The customer's details.
@@ -375,7 +375,7 @@ type RoutingProfile struct {
 
 	// The channels agents can handle in the Contact Control Panel (CCP) for this
 	// routing profile.
-	MediaConcurrencies []*MediaConcurrency
+	MediaConcurrencies []MediaConcurrency
 
 	// The name of the routing profile.
 	Name *string
@@ -387,7 +387,7 @@ type RoutingProfile struct {
 	RoutingProfileId *string
 
 	// One or more tags.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Contains information about the queue and channel for which priority and delay
@@ -400,14 +400,14 @@ type RoutingProfileQueueConfig struct {
 	// in the Amazon Connect Administrator Guide.
 	//
 	// This member is required.
-	Delay *int32
+	Delay int32
 
 	// The order in which contacts are to be handled for the queue. For more
 	// information, see Queues: priority and delay
 	// (https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html).
 	//
 	// This member is required.
-	Priority *int32
+	Priority int32
 
 	// Contains information about a queue resource.
 	//
@@ -430,14 +430,14 @@ type RoutingProfileQueueConfigSummary struct {
 	// in the Amazon Connect Administrator Guide.
 	//
 	// This member is required.
-	Delay *int32
+	Delay int32
 
 	// The order in which contacts are to be handled for the queue. For more
 	// information, see Queues: priority and delay
 	// (https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html).
 	//
 	// This member is required.
-	Priority *int32
+	Priority int32
 
 	// The Amazon Resource Name (ARN) of the queue.
 	//
@@ -532,10 +532,10 @@ type User struct {
 	RoutingProfileId *string
 
 	// The identifiers of the security profiles for the user.
-	SecurityProfileIds []*string
+	SecurityProfileIds []string
 
 	// The tags.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The user name assigned to the user account.
 	Username *string
@@ -566,10 +566,10 @@ type UserPhoneConfig struct {
 	PhoneType PhoneType
 
 	// The After Call Work (ACW) timeout setting, in seconds.
-	AfterContactWorkTimeLimit *int32
+	AfterContactWorkTimeLimit int32
 
 	// The Auto accept setting.
-	AutoAccept *bool
+	AutoAccept bool
 
 	// The phone number for the user's desk phone.
 	DeskPhoneNumber *string

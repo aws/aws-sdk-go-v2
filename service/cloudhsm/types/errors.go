@@ -11,7 +11,7 @@ import (
 type CloudHsmInternalException struct {
 	Message *string
 
-	Retryable *bool
+	Retryable bool
 }
 
 func (e *CloudHsmInternalException) Error() string {
@@ -30,7 +30,7 @@ func (e *CloudHsmInternalException) ErrorFault() smithy.ErrorFault { return smit
 type CloudHsmServiceException struct {
 	Message *string
 
-	Retryable *bool
+	Retryable bool
 }
 
 func (e *CloudHsmServiceException) Error() string {
@@ -49,7 +49,7 @@ func (e *CloudHsmServiceException) ErrorFault() smithy.ErrorFault { return smith
 type InvalidRequestException struct {
 	Message *string
 
-	Retryable *bool
+	Retryable bool
 }
 
 func (e *InvalidRequestException) Error() string {

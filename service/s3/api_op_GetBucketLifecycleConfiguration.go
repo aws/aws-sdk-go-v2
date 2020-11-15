@@ -86,7 +86,7 @@ type GetBucketLifecycleConfigurationInput struct {
 type GetBucketLifecycleConfigurationOutput struct {
 
 	// Container for a lifecycle rule.
-	Rules []*types.LifecycleRule
+	Rules []types.LifecycleRule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

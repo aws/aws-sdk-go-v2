@@ -47,7 +47,7 @@ type ListSentimentDetectionJobsOutput struct {
 	NextToken *string
 
 	// A list containing the properties of each job that is returned.
-	SentimentDetectionJobPropertiesList []*types.SentimentDetectionJobProperties
+	SentimentDetectionJobPropertiesList []types.SentimentDetectionJobProperties
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

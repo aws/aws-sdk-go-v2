@@ -39,7 +39,7 @@ type DeleteFileShareInput struct {
 	// aborts all data uploads to AWS. Otherwise, the file share is not deleted until
 	// all data is uploaded to AWS. This process aborts the data upload process, and
 	// the file share enters the FORCE_DELETING status. Valid Values: true | false
-	ForceDelete *bool
+	ForceDelete bool
 }
 
 // DeleteFileShareOutput

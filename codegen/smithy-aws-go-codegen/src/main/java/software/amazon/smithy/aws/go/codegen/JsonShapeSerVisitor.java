@@ -15,8 +15,6 @@
 
 package software.amazon.smithy.aws.go.codegen;
 
-import static software.amazon.smithy.go.codegen.integration.ProtocolUtils.writeSafeMemberAccessor;
-
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
@@ -26,12 +24,16 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
+import software.amazon.smithy.go.codegen.GoValueAccessUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.DocumentShapeSerVisitor;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
+import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
+import software.amazon.smithy.go.codegen.knowledge.GoPointableIndex;
 import software.amazon.smithy.go.codegen.trait.NoSerializeTrait;
+import software.amazon.smithy.model.knowledge.NullableIndex;
 import software.amazon.smithy.model.shapes.CollectionShape;
 import software.amazon.smithy.model.shapes.DocumentShape;
 import software.amazon.smithy.model.shapes.MapShape;
@@ -59,6 +61,8 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
     private static final Logger LOGGER = Logger.getLogger(JsonShapeSerVisitor.class.getName());
 
     private final Predicate<MemberShape> memberFilter;
+    private final GoPointableIndex pointableIndex;
+    private final NullableIndex nullableIndex;
 
     /**
      * @param context The generation context.
@@ -75,6 +79,8 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
     public JsonShapeSerVisitor(GenerationContext context, Predicate<MemberShape> memberFilter) {
         super(context);
         this.memberFilter = NoSerializeTrait.excludeNoSerializeMembers().and(memberFilter);
+        this.pointableIndex = GoPointableIndex.of(context.getModel());
+        this.nullableIndex = NullableIndex.of(context.getModel());
     }
 
     private DocumentMemberSerVisitor getMemberSerVisitor(MemberShape member, String source, String dest) {
@@ -103,9 +109,11 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
 
             // Null values in lists should be serialized as such. Enums can't be null, so we don't bother
             // putting this in for their case.
-            if (!target.hasTrait(EnumTrait.class)) {
+            if (pointableIndex.isNillable(shape.getMember())) {
                 writer.openBlock("if vv := v[i]; vv == nil {", "}", () -> {
-                    writer.write("av.Null()");
+                    if (nullableIndex.isNullable(shape.getMember())) {
+                        writer.write("av.Null()");
+                    }
                     writer.write("continue");
                 });
             }
@@ -139,9 +147,11 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
 
             // Null values in maps should be serialized as such. Enums can't be null, so we don't bother
             // putting this in for their case.
-            if (!target.hasTrait(EnumTrait.class)) {
+            if (pointableIndex.isNillable(shape.getValue())) {
                 writer.openBlock("if vv := v[key]; vv == nil {", "}", () -> {
-                    writer.write("om.Null()");
+                    if (nullableIndex.isNullable(shape.getValue())) {
+                        writer.write("om.Null()");
+                    }
                     writer.write("continue");
                 });
             }
@@ -169,7 +179,8 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
             }
             Shape target = context.getModel().expectShape(member.getTarget());
             String serializedMemberName = getSerializedMemberName(member);
-            writeSafeMemberAccessor(context, member, "v", (operand) -> {
+
+            GoValueAccessUtils.writeIfNonZeroValueMember(context, writer, member, "v", (operand) -> {
                 writer.write("ok := object.Key($S)", serializedMemberName);
                 target.accept(getMemberSerVisitor(member, operand, "ok"));
             });

@@ -38,7 +38,7 @@ type GetSendStatisticsInput struct {
 type GetSendStatisticsOutput struct {
 
 	// A list of data points, each of which represents 15 minutes of activity.
-	SendDataPoints []*types.SendDataPoint
+	SendDataPoints []types.SendDataPoint
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

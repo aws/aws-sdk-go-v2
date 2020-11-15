@@ -31,20 +31,20 @@ type GetOpsSummaryInput struct {
 
 	// Optional aggregators that return counts of OpsItems based on one or more
 	// expressions.
-	Aggregators []*types.OpsAggregator
+	Aggregators []types.OpsAggregator
 
 	// Optional filters used to scope down the returned OpsItems.
-	Filters []*types.OpsFilter
+	Filters []types.OpsFilter
 
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
 
 	// The OpsItem data type to return.
-	ResultAttributes []*types.OpsResultAttribute
+	ResultAttributes []types.OpsResultAttribute
 
 	// Specify the name of a resource data sync to get.
 	SyncName *string
@@ -53,7 +53,7 @@ type GetOpsSummaryInput struct {
 type GetOpsSummaryOutput struct {
 
 	// The list of aggregated and filtered OpsItems.
-	Entities []*types.OpsEntity
+	Entities []types.OpsEntity
 
 	// The token for the next set of items to return. Use this token to get the next
 	// set of results.

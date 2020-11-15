@@ -41,7 +41,7 @@ type GetSdkTypesInput struct {
 type GetSdkTypesOutput struct {
 
 	// The current page of elements from this collection.
-	Items []*types.SdkType
+	Items []types.SdkType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

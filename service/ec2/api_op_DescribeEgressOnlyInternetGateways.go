@@ -33,10 +33,10 @@ type DescribeEgressOnlyInternetGatewaysInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more egress-only internet gateway IDs.
-	EgressOnlyInternetGatewayIds []*string
+	EgressOnlyInternetGatewayIds []string
 
 	// One or more filters.
 	//
@@ -49,11 +49,11 @@ type DescribeEgressOnlyInternetGatewaysInput struct {
 	// * tag-key - The key of a tag assigned to the resource. Use this filter
 	// to find all resources assigned a tag with a specific key, regardless of the tag
 	// value.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next page of results.
 	NextToken *string
@@ -62,7 +62,7 @@ type DescribeEgressOnlyInternetGatewaysInput struct {
 type DescribeEgressOnlyInternetGatewaysOutput struct {
 
 	// Information about the egress-only internet gateways.
-	EgressOnlyInternetGateways []*types.EgressOnlyInternetGateway
+	EgressOnlyInternetGateways []types.EgressOnlyInternetGateway
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

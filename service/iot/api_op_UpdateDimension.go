@@ -42,7 +42,7 @@ type UpdateDimensionInput struct {
 	// "admin/#").
 	//
 	// This member is required.
-	StringValues []*string
+	StringValues []string
 }
 
 type UpdateDimensionOutput struct {
@@ -63,7 +63,7 @@ type UpdateDimensionOutput struct {
 
 	// The value or list of values used to scope the dimension. For example, for topic
 	// filters, this is the pattern used to match the MQTT topic name.
-	StringValues []*string
+	StringValues []string
 
 	// The type of the dimension.
 	Type types.DimensionType

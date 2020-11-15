@@ -39,7 +39,7 @@ type CreateImageRecipeInput struct {
 	// The components of the image recipe.
 	//
 	// This member is required.
-	Components []*types.ComponentConfiguration
+	Components []types.ComponentConfiguration
 
 	// The name of the image recipe.
 	//
@@ -63,13 +63,13 @@ type CreateImageRecipeInput struct {
 	SemanticVersion *string
 
 	// The block device mappings of the image recipe.
-	BlockDeviceMappings []*types.InstanceBlockDeviceMapping
+	BlockDeviceMappings []types.InstanceBlockDeviceMapping
 
 	// The description of the image recipe.
 	Description *string
 
 	// The tags of the image recipe.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The working directory to be used during build and test workflows.
 	WorkingDirectory *string

@@ -194,10 +194,10 @@ type Contact struct {
 	PhoneNumber *string
 
 	// The list of phone numbers for the contact.
-	PhoneNumbers []*PhoneNumber
+	PhoneNumbers []PhoneNumber
 
 	// The list of SIP addresses for the contact.
-	SipAddresses []*SipAddress
+	SipAddresses []SipAddress
 }
 
 // Information related to a contact.
@@ -221,10 +221,10 @@ type ContactData struct {
 	PhoneNumber *string
 
 	// The list of phone numbers for the contact.
-	PhoneNumbers []*PhoneNumber
+	PhoneNumbers []PhoneNumber
 
 	// The list of SIP addresses for the contact.
-	SipAddresses []*SipAddress
+	SipAddresses []SipAddress
 }
 
 // The content definition. This can contain only one text, SSML, or audio list
@@ -232,13 +232,13 @@ type ContactData struct {
 type Content struct {
 
 	// The list of audio messages.
-	AudioList []*Audio
+	AudioList []Audio
 
 	// The list of SSML messages.
-	SsmlList []*Ssml
+	SsmlList []Ssml
 
 	// The list of text messages.
-	TextList []*Text
+	TextList []Text
 }
 
 // Creates settings for the end of meeting reminder feature that are applied to a
@@ -254,7 +254,7 @@ type CreateEndOfMeetingReminder struct {
 	// A range of 3 to 15 minutes that determines when the reminder begins.
 	//
 	// This member is required.
-	ReminderAtMinutes []*int32
+	ReminderAtMinutes []int32
 
 	// The type of sound that users hear during the end of meeting reminder.
 	//
@@ -458,7 +458,7 @@ type DeviceStatusInfo struct {
 	ConnectionStatusUpdatedTime *time.Time
 
 	// One or more device status detail descriptions.
-	DeviceStatusDetails []*DeviceStatusDetail
+	DeviceStatusDetails []DeviceStatusDetail
 }
 
 // Settings for the end of meeting reminder feature that are applied to a room
@@ -470,7 +470,7 @@ type EndOfMeetingReminder struct {
 	Enabled *bool
 
 	// A range of 3 to 15 minutes that determines when the reminder begins.
-	ReminderAtMinutes []*int32
+	ReminderAtMinutes []int32
 
 	// The type of sound that users hear during the end of meeting reminder.
 	ReminderType EndOfMeetingReminderType
@@ -488,7 +488,7 @@ type Filter struct {
 	// The values of a filter.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // The details of the gateway.
@@ -662,7 +662,7 @@ type NetworkProfile struct {
 
 	// The root certificates of your authentication server, which is installed on your
 	// devices and used to trust your authentication server during EAP negotiation.
-	TrustAnchors []*string
+	TrustAnchors []string
 }
 
 // The data associated with a network profile.
@@ -902,7 +902,7 @@ type SipAddress struct {
 type SkillDetails struct {
 
 	// The details about what the skill supports organized as bullet points.
-	BulletPoints []*string
+	BulletPoints []string
 
 	// The details about the developer that published the skill.
 	DeveloperInfo *DeveloperInfo
@@ -911,13 +911,13 @@ type SkillDetails struct {
 	EndUserLicenseAgreement *string
 
 	// The generic keywords associated with the skill that can be used to find a skill.
-	GenericKeywords []*string
+	GenericKeywords []string
 
 	// The phrase used to trigger the skill.
 	InvocationPhrase *string
 
 	// The updates added in bullet points.
-	NewInThisVersionBulletPoints []*string
+	NewInThisVersionBulletPoints []string
 
 	// The description of the product.
 	ProductDescription *string
@@ -927,10 +927,10 @@ type SkillDetails struct {
 
 	// This member has been deprecated. The list of reviews for the skill, including
 	// Key and Value pair.
-	Reviews map[string]*string
+	Reviews map[string]string
 
 	// The types of skills.
-	SkillTypes []*string
+	SkillTypes []string
 }
 
 // A skill group with attributes.
@@ -966,7 +966,7 @@ type SkillsStoreSkill struct {
 	IconUrl *string
 
 	// Sample utterances that interact with the skill.
-	SampleUtterances []*string
+	SampleUtterances []string
 
 	// Short description about the skill.
 	ShortDescription *string
@@ -981,7 +981,7 @@ type SkillsStoreSkill struct {
 	SkillName *string
 
 	// Linking support for a skill.
-	SupportsLinking *bool
+	SupportsLinking bool
 }
 
 // The summary of skills.
@@ -1001,7 +1001,7 @@ type SkillSummary struct {
 	SkillType SkillType
 
 	// Linking support for a skill.
-	SupportsLinking *bool
+	SupportsLinking bool
 }
 
 // A smart home appliance that can connect to a central system. Any domestic device
@@ -1087,7 +1087,7 @@ type UpdateEndOfMeetingReminder struct {
 	// Updates settings for the end of meeting reminder feature that are applied to a
 	// room profile. The end of meeting reminder enables Alexa to remind users when a
 	// meeting is ending.
-	ReminderAtMinutes []*int32
+	ReminderAtMinutes []int32
 
 	// The type of sound that users hear during the end of meeting reminder.
 	ReminderType EndOfMeetingReminderType

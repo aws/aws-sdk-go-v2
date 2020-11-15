@@ -74,7 +74,7 @@ type ListGeoLocationsOutput struct {
 	// that Amazon Route 53 supports for geolocation.
 	//
 	// This member is required.
-	GeoLocationDetailsList []*types.GeoLocationDetails
+	GeoLocationDetailsList []types.GeoLocationDetails
 
 	// A value that indicates whether more locations remain to be listed after the last
 	// location in this response. If so, the value of IsTruncated is true. To get more
@@ -83,7 +83,7 @@ type ListGeoLocationsOutput struct {
 	// startcountrycode, and startsubdivisioncode, as applicable.
 	//
 	// This member is required.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// The value that you specified for MaxItems in the request.
 	//

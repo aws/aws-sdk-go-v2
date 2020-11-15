@@ -32,14 +32,14 @@ func (c *Client) SubmitTaskStateChange(ctx context.Context, params *SubmitTaskSt
 type SubmitTaskStateChangeInput struct {
 
 	// Any attachments associated with the state change request.
-	Attachments []*types.AttachmentStateChange
+	Attachments []types.AttachmentStateChange
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
 	// task.
 	Cluster *string
 
 	// Any containers associated with the state change request.
-	Containers []*types.ContainerStateChange
+	Containers []types.ContainerStateChange
 
 	// The Unix timestamp for when the task execution stopped.
 	ExecutionStoppedAt *time.Time

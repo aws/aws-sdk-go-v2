@@ -74,7 +74,7 @@ type ListRecoveryPointsByBackupVaultOutput struct {
 
 	// An array of objects that contain detailed information about recovery points
 	// saved in a backup vault.
-	RecoveryPoints []*types.RecoveryPointByBackupVault
+	RecoveryPoints []types.RecoveryPointByBackupVault
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

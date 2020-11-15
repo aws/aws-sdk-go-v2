@@ -47,9 +47,9 @@ func TestClient_XmlNamespaces_awsEc2queryDeserialize(t *testing.T) {
 			ExpectResult: &XmlNamespacesOutput{
 				Nested: &types.XmlNamespaceNested{
 					Foo: ptr.String("Foo"),
-					Values: []*string{
-						ptr.String("Bar"),
-						ptr.String("Baz"),
+					Values: []string{
+						"Bar",
+						"Baz",
 					},
 				},
 			},

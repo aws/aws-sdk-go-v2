@@ -37,7 +37,7 @@ type CreateResourceGroupInput struct {
 	// For example,'[{"key":"Name","values":["TestEC2Instance"]}]'.
 	//
 	// This member is required.
-	ResourceGroupTags []*types.ResourceGroupTag
+	ResourceGroupTags []types.ResourceGroupTag
 }
 
 type CreateResourceGroupOutput struct {

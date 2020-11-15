@@ -44,7 +44,7 @@ type CacheCluster struct {
 	AuthTokenLastModifiedDate *time.Time
 
 	// This parameter is currently disabled.
-	AutoMinorVersionUpgrade *bool
+	AutoMinorVersionUpgrade bool
 
 	// The date and time when the cluster was created.
 	CacheClusterCreateTime *time.Time
@@ -125,14 +125,14 @@ type CacheCluster struct {
 	CacheNodeType *string
 
 	// A list of cache nodes that are members of the cluster.
-	CacheNodes []*CacheNode
+	CacheNodes []CacheNode
 
 	// Status of the cache parameter group.
 	CacheParameterGroup *CacheParameterGroupStatus
 
 	// A list of cache security group elements, composed of name and status
 	// sub-elements.
-	CacheSecurityGroups []*CacheSecurityGroupMembership
+	CacheSecurityGroups []CacheSecurityGroupMembership
 
 	// The name of the cache subnet group associated with the cluster.
 	CacheSubnetGroupName *string
@@ -201,7 +201,7 @@ type CacheCluster struct {
 	ReplicationGroupId *string
 
 	// A list of VPC Security Groups associated with the cluster.
-	SecurityGroups []*SecurityGroupMembership
+	SecurityGroups []SecurityGroupMembership
 
 	// The number of days for which ElastiCache retains automatic cluster snapshots
 	// before deleting them. For example, if you set SnapshotRetentionLimit to 5, a
@@ -347,7 +347,7 @@ type CacheNodeTypeSpecificParameter struct {
 	AllowedValues *string
 
 	// A list of cache node types and their corresponding values for this parameter.
-	CacheNodeTypeSpecificValues []*CacheNodeTypeSpecificValue
+	CacheNodeTypeSpecificValues []CacheNodeTypeSpecificValue
 
 	// Indicates whether a change to the parameter is applied immediately or requires a
 	// reboot for the change to be applied. You can force a reboot or wait until the
@@ -364,7 +364,7 @@ type CacheNodeTypeSpecificParameter struct {
 	// Indicates whether (true) or not (false) the parameter can be modified. Some
 	// parameters have security or operational implications that prevent them from
 	// being changed.
-	IsModifiable *bool
+	IsModifiable bool
 
 	// The earliest cache engine version to which the parameter can apply.
 	MinimumEngineVersion *string
@@ -433,7 +433,7 @@ type CacheParameterGroup struct {
 	Description *string
 
 	// Indicates whether the parameter group is associated with a Global Datastore
-	IsGlobal *bool
+	IsGlobal bool
 }
 
 // Status of the cache parameter group.
@@ -441,7 +441,7 @@ type CacheParameterGroupStatus struct {
 
 	// A list of the cache node IDs which need to be rebooted for parameter changes to
 	// be applied. A node ID is a numeric identifier (0001, 0002, etc.).
-	CacheNodeIdsToReboot []*string
+	CacheNodeIdsToReboot []string
 
 	// The name of the cache parameter group.
 	CacheParameterGroupName *string
@@ -472,7 +472,7 @@ type CacheSecurityGroup struct {
 
 	// A list of Amazon EC2 security groups that are associated with this cache
 	// security group.
-	EC2SecurityGroups []*EC2SecurityGroup
+	EC2SecurityGroups []EC2SecurityGroup
 
 	// The AWS account ID of the cache security group owner.
 	OwnerId *string
@@ -508,7 +508,7 @@ type CacheSubnetGroup struct {
 	CacheSubnetGroupName *string
 
 	// A list of subnets associated with the cache subnet group.
-	Subnets []*Subnet
+	Subnets []Subnet
 
 	// The Amazon Virtual Private Cloud identifier (VPC ID) of the cache subnet group.
 	VpcId *string
@@ -535,7 +535,7 @@ type ConfigureShard struct {
 	// will not be able to failover to a replica if your primary node fails)
 	//
 	// This member is required.
-	NewReplicaCount *int32
+	NewReplicaCount int32
 
 	// The 4-digit id for the node group you are configuring. For Redis (cluster mode
 	// disabled) replication groups, the node group id is always 0001. To find a Redis
@@ -551,10 +551,10 @@ type ConfigureShard struct {
 	// to account for the primary node. If this member of ReplicaConfiguration is
 	// omitted, ElastiCache for Redis selects the availability zone for each of the
 	// replicas.
-	PreferredAvailabilityZones []*string
+	PreferredAvailabilityZones []string
 
 	// The outpost ARNs in which the cache cluster is created.
-	PreferredOutpostArns []*string
+	PreferredOutpostArns []string
 }
 
 // The endpoint from which data should be migrated.
@@ -588,7 +588,7 @@ type Endpoint struct {
 	Address *string
 
 	// The port number that the cache engine is listening on.
-	Port *int32
+	Port int32
 }
 
 // Represents the output of a DescribeEngineDefaultParameters operation.
@@ -596,7 +596,7 @@ type EngineDefaults struct {
 
 	// A list of parameters specific to a particular cache node type. Each element in
 	// the list contains detailed information about one parameter.
-	CacheNodeTypeSpecificParameters []*CacheNodeTypeSpecificParameter
+	CacheNodeTypeSpecificParameters []CacheNodeTypeSpecificParameter
 
 	// Specifies the name of the cache parameter group family to which the engine
 	// default parameters apply. Valid values are: memcached1.4 | memcached1.5 |
@@ -607,7 +607,7 @@ type EngineDefaults struct {
 	Marker *string
 
 	// Contains a list of engine default parameters.
-	Parameters []*Parameter
+	Parameters []Parameter
 }
 
 // Represents a single occurrence of something interesting within the system. Some
@@ -641,7 +641,7 @@ type Filter struct {
 	// The property values to filter on. For example, "user-123".
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // Indicates the slot configuration and global identifier for a slice group.
@@ -691,7 +691,7 @@ type GlobalReplicationGroup struct {
 	EngineVersion *string
 
 	// Indicates the slot configuration and global identifier for each slice group.
-	GlobalNodeGroups []*GlobalNodeGroup
+	GlobalNodeGroups []GlobalNodeGroup
 
 	// The optional description of the Global Datastore
 	GlobalReplicationGroupDescription *string
@@ -700,7 +700,7 @@ type GlobalReplicationGroup struct {
 	GlobalReplicationGroupId *string
 
 	// The replication groups that comprise the Global Datastore.
-	Members []*GlobalReplicationGroupMember
+	Members []GlobalReplicationGroupMember
 
 	// The status of the Global Datastore
 	Status *string
@@ -758,7 +758,7 @@ type NodeGroup struct {
 
 	// A list containing information about individual nodes within the node group
 	// (shard).
-	NodeGroupMembers []*NodeGroupMember
+	NodeGroupMembers []NodeGroupMember
 
 	// The endpoint of the primary node in this node group (shard).
 	PrimaryEndpoint *Endpoint
@@ -793,13 +793,13 @@ type NodeGroupConfiguration struct {
 	// A list of Availability Zones to be used for the read replicas. The number of
 	// Availability Zones in this list must match the value of ReplicaCount or
 	// ReplicasPerNodeGroup if not specified.
-	ReplicaAvailabilityZones []*string
+	ReplicaAvailabilityZones []string
 
 	// The number of read replica nodes in this node group (shard).
 	ReplicaCount *int32
 
 	// The outpost ARN of the node replicas.
-	ReplicaOutpostArns []*string
+	ReplicaOutpostArns []string
 
 	// A string that specifies the keyspace for a particular node group. Keyspaces
 	// range from 0 to 16,383. The string is in the format startkey-endkey. Example:
@@ -872,7 +872,7 @@ type NodeGroupUpdateStatus struct {
 	NodeGroupId *string
 
 	// The status of the service update on the node group member
-	NodeGroupMemberUpdateStatus []*NodeGroupMemberUpdateStatus
+	NodeGroupMemberUpdateStatus []NodeGroupMemberUpdateStatus
 }
 
 // Represents an individual cache node in a snapshot of a cluster.
@@ -935,7 +935,7 @@ type Parameter struct {
 	// Indicates whether (true) or not (false) the parameter can be modified. Some
 	// parameters have security or operational implications that prevent them from
 	// being changed.
-	IsModifiable *bool
+	IsModifiable bool
 
 	// The earliest cache engine version to which the parameter can apply.
 	MinimumEngineVersion *string
@@ -969,7 +969,7 @@ type PendingModifiedValues struct {
 
 	// A list of cache node IDs that are being removed (or will be removed) from the
 	// cluster. A node ID is a 4-digit numeric identifier (0001, 0002, etc.).
-	CacheNodeIdsToRemove []*string
+	CacheNodeIdsToRemove []string
 
 	// The cache node type that this cluster or replication group is scaled to.
 	CacheNodeType *string
@@ -1004,7 +1004,7 @@ type ProcessedUpdateAction struct {
 type RecurringCharge struct {
 
 	// The monetary amount of the recurring charge.
-	RecurringChargeAmount *float64
+	RecurringChargeAmount float64
 
 	// The frequency of the recurring charge.
 	RecurringChargeFrequency *string
@@ -1027,7 +1027,7 @@ type RegionalConfiguration struct {
 	// a node group in the resharded cluster.
 	//
 	// This member is required.
-	ReshardingConfiguration []*ReshardingConfiguration
+	ReshardingConfiguration []ReshardingConfiguration
 }
 
 // Contains all of the attributes of a specific Redis replication group.
@@ -1077,10 +1077,10 @@ type ReplicationGroup struct {
 	KmsKeyId *string
 
 	// The names of all the cache clusters that are part of this replication group.
-	MemberClusters []*string
+	MemberClusters []string
 
 	// The outpost ARNs of the replication group's member clusters.
-	MemberClustersOutpostArns []*string
+	MemberClustersOutpostArns []string
 
 	// A flag indicating if you have Multi-AZ enabled to enhance fault tolerance. For
 	// more information, see Minimizing Downtime: Multi-AZ
@@ -1091,7 +1091,7 @@ type ReplicationGroup struct {
 	// disabled) replication groups, this is a single-element list. For Redis (cluster
 	// mode enabled) replication groups, the list contains an entry for each node group
 	// (shard).
-	NodeGroups []*NodeGroup
+	NodeGroups []NodeGroup
 
 	// A group of settings to be applied to the replication group, either immediately
 	// or during the next maintenance window.
@@ -1128,7 +1128,7 @@ type ReplicationGroup struct {
 	TransitEncryptionEnabled *bool
 
 	// The list of user group IDs that have access to the replication group.
-	UserGroupIds []*string
+	UserGroupIds []string
 }
 
 // The settings to be applied to the Redis replication group, either immediately or
@@ -1156,7 +1156,7 @@ type ReplicationGroupPendingModifiedValues struct {
 type ReservedCacheNode struct {
 
 	// The number of cache nodes that have been reserved.
-	CacheNodeCount *int32
+	CacheNodeCount int32
 
 	// The cache node type for the reserved cache nodes. The following node types are
 	// supported by ElastiCache. Generally speaking, the current generation types
@@ -1225,10 +1225,10 @@ type ReservedCacheNode struct {
 	CacheNodeType *string
 
 	// The duration of the reservation in seconds.
-	Duration *int32
+	Duration int32
 
 	// The fixed price charged for this reserved cache node.
-	FixedPrice *float64
+	FixedPrice float64
 
 	// The offering type of this reserved cache node.
 	OfferingType *string
@@ -1237,7 +1237,7 @@ type ReservedCacheNode struct {
 	ProductDescription *string
 
 	// The recurring price charged to run this reserved cache node.
-	RecurringCharges []*RecurringCharge
+	RecurringCharges []RecurringCharge
 
 	// The Amazon Resource Name (ARN) of the reserved cache node. Example:
 	// arn:aws:elasticache:us-east-1:123456789012:reserved-instance:ri-2017-03-27-08-33-25-582
@@ -1256,7 +1256,7 @@ type ReservedCacheNode struct {
 	State *string
 
 	// The hourly price charged for this reserved cache node.
-	UsagePrice *float64
+	UsagePrice float64
 }
 
 // Describes all of the attributes of a reserved cache node offering.
@@ -1329,10 +1329,10 @@ type ReservedCacheNodesOffering struct {
 	CacheNodeType *string
 
 	// The duration of the offering. in seconds.
-	Duration *int32
+	Duration int32
 
 	// The fixed price charged for this offering.
-	FixedPrice *float64
+	FixedPrice float64
 
 	// The offering type.
 	OfferingType *string
@@ -1341,13 +1341,13 @@ type ReservedCacheNodesOffering struct {
 	ProductDescription *string
 
 	// The recurring price charged to run this reserved cache node.
-	RecurringCharges []*RecurringCharge
+	RecurringCharges []RecurringCharge
 
 	// A unique identifier for the reserved cache node offering.
 	ReservedCacheNodesOfferingId *string
 
 	// The hourly price charged for this offering.
-	UsagePrice *float64
+	UsagePrice float64
 }
 
 // A list of PreferredAvailabilityZones objects that specifies the configuration of
@@ -1359,7 +1359,7 @@ type ReshardingConfiguration struct {
 	NodeGroupId *string
 
 	// A list of preferred availability zones for the nodes in this cluster.
-	PreferredAvailabilityZones []*string
+	PreferredAvailabilityZones []string
 }
 
 // The status of an online resharding operation.
@@ -1429,7 +1429,7 @@ type ServiceUpdate struct {
 type SlotMigration struct {
 
 	// The percentage of the slot migration that is complete.
-	ProgressPercentage *float64
+	ProgressPercentage float64
 }
 
 // Represents a copy of an entire Redis cluster as of the time when the snapshot
@@ -1440,7 +1440,7 @@ type Snapshot struct {
 	ARN *string
 
 	// This parameter is currently disabled.
-	AutoMinorVersionUpgrade *bool
+	AutoMinorVersionUpgrade bool
 
 	// Indicates the status of automatic failover for the source Redis replication
 	// group.
@@ -1534,7 +1534,7 @@ type Snapshot struct {
 	KmsKeyId *string
 
 	// A list of the cache nodes in the source cluster.
-	NodeSnapshots []*NodeSnapshot
+	NodeSnapshots []NodeSnapshot
 
 	// The number of cache nodes in the source cluster. For clusters running Redis,
 	// this value must be 1. For clusters running Memcached, this value must be between
@@ -1689,7 +1689,7 @@ type UpdateAction struct {
 	CacheClusterId *string
 
 	// The status of the service update on the cache node
-	CacheNodeUpdateStatus []*CacheNodeUpdateStatus
+	CacheNodeUpdateStatus []CacheNodeUpdateStatus
 
 	// The Elasticache engine to which the update applies. Either Redis or Memcached
 	Engine *string
@@ -1698,7 +1698,7 @@ type UpdateAction struct {
 	EstimatedUpdateTime *string
 
 	// The status of the service update on the node group
-	NodeGroupUpdateStatus []*NodeGroupUpdateStatus
+	NodeGroupUpdateStatus []NodeGroupUpdateStatus
 
 	// The progress of the service update on the replication group
 	NodesUpdated *string
@@ -1760,7 +1760,7 @@ type User struct {
 	Status *string
 
 	// Returns a list of the user group IDs the user belongs to.
-	UserGroupIds []*string
+	UserGroupIds []string
 
 	// The ID of the user.
 	UserId *string
@@ -1781,7 +1781,7 @@ type UserGroup struct {
 	PendingChanges *UserGroupPendingChanges
 
 	// A list of replication groups that the user group can access.
-	ReplicationGroups []*string
+	ReplicationGroups []string
 
 	// Indicates user group status. Can be "creating", "active", "modifying",
 	// "deleting".
@@ -1791,25 +1791,25 @@ type UserGroup struct {
 	UserGroupId *string
 
 	// The list of user IDs that belong to the user group.
-	UserIds []*string
+	UserIds []string
 }
 
 // Returns the updates being applied to the user group.
 type UserGroupPendingChanges struct {
 
 	// The list of user IDs to add.
-	UserIdsToAdd []*string
+	UserIdsToAdd []string
 
 	// The list of user group IDs ro remove.
-	UserIdsToRemove []*string
+	UserIdsToRemove []string
 }
 
 // The status of the user group update.
 type UserGroupsUpdateStatus struct {
 
 	// The list of user group IDs to add.
-	UserGroupIdsToAdd []*string
+	UserGroupIdsToAdd []string
 
 	// The list of user group IDs to remove.
-	UserGroupIdsToRemove []*string
+	UserGroupIdsToRemove []string
 }

@@ -56,7 +56,7 @@ type CreateLoginProfileInput struct {
 	UserName *string
 
 	// Specifies whether the user is required to set a new password on next sign-in.
-	PasswordResetRequired *bool
+	PasswordResetRequired bool
 }
 
 // Contains the response to a successful CreateLoginProfile request.

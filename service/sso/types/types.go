@@ -26,7 +26,7 @@ type RoleCredentials struct {
 	AccessKeyId *string
 
 	// The date on which temporary security credentials expire.
-	Expiration *int64
+	Expiration int64
 
 	// The key that is used to sign the request. For more information, see Using
 	// Temporary Security Credentials to Request Access to AWS Resources

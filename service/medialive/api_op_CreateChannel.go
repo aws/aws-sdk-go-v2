@@ -39,13 +39,13 @@ type CreateChannelInput struct {
 	ChannelClass types.ChannelClass
 
 	// Placeholder documentation for __listOfOutputDestination
-	Destinations []*types.OutputDestination
+	Destinations []types.OutputDestination
 
 	// Encoder Settings
 	EncoderSettings *types.EncoderSettings
 
 	// List of input attachments for channel.
-	InputAttachments []*types.InputAttachment
+	InputAttachments []types.InputAttachment
 
 	// Specification of network and file inputs for this channel
 	InputSpecification *types.InputSpecification
@@ -68,7 +68,7 @@ type CreateChannelInput struct {
 	RoleArn *string
 
 	// A collection of key-value pairs.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Placeholder documentation for CreateChannelResponse

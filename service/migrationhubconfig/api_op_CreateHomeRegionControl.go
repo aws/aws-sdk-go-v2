@@ -42,7 +42,7 @@ type CreateHomeRegionControlInput struct {
 
 	// Optional Boolean flag to indicate whether any effect should take place. It tests
 	// whether the caller has permission to make the call.
-	DryRun *bool
+	DryRun bool
 }
 
 type CreateHomeRegionControlOutput struct {

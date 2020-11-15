@@ -81,7 +81,7 @@ type ListParentsOutput struct {
 	NextToken *string
 
 	// A list of parents for the specified child account or OU.
-	Parents []*types.Parent
+	Parents []types.Parent
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

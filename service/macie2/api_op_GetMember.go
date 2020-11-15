@@ -63,7 +63,7 @@ type GetMemberOutput struct {
 
 	// A map of key-value pairs that identifies the tags (keys and values) that are
 	// associated with the member account in Amazon Macie.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The date and time, in UTC and extended ISO 8601 format, of the most recent
 	// change to the status of the relationship between the account and the master

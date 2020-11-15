@@ -31,7 +31,7 @@ func (c *Client) DescribePendingMaintenanceActions(ctx context.Context, params *
 type DescribePendingMaintenanceActionsInput struct {
 
 	//
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
@@ -57,7 +57,7 @@ type DescribePendingMaintenanceActionsOutput struct {
 	Marker *string
 
 	// The pending maintenance action.
-	PendingMaintenanceActions []*types.ResourcePendingMaintenanceActions
+	PendingMaintenanceActions []types.ResourcePendingMaintenanceActions
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -37,7 +37,7 @@ type BatchDeletePartitionInput struct {
 	// A list of PartitionInput structures that define the partitions to be deleted.
 	//
 	// This member is required.
-	PartitionsToDelete []*types.PartitionValueList
+	PartitionsToDelete []types.PartitionValueList
 
 	// The name of the table that contains the partitions to be deleted.
 	//
@@ -52,7 +52,7 @@ type BatchDeletePartitionInput struct {
 type BatchDeletePartitionOutput struct {
 
 	// The errors encountered when trying to delete the requested partitions.
-	Errors []*types.PartitionError
+	Errors []types.PartitionError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

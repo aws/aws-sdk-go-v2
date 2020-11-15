@@ -39,7 +39,7 @@ type UpdateContactListInput struct {
 
 	// An interest group, theme, or label within a list. A contact list can have
 	// multiple topics.
-	Topics []*types.Topic
+	Topics []types.Topic
 }
 
 type UpdateContactListOutput struct {

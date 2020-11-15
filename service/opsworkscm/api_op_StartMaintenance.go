@@ -49,7 +49,7 @@ type StartMaintenanceInput struct {
 	// value to true to upgrade the server to Chef Automate 2. For more information,
 	// see Upgrade an AWS OpsWorks for Chef Automate Server to Chef Automate 2
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/opscm-a2upgrade.html).
-	EngineAttributes []*types.EngineAttribute
+	EngineAttributes []types.EngineAttribute
 }
 
 type StartMaintenanceOutput struct {

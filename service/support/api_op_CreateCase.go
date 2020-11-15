@@ -84,7 +84,7 @@ type CreateCaseInput struct {
 	// Support identifies the account that creates the case when you specify your AWS
 	// credentials in an HTTP POST method or use the AWS SDKs
 	// (http://aws.amazon.com/tools/).
-	CcEmailAddresses []*string
+	CcEmailAddresses []string
 
 	// The type of issue for the case. You can specify customer-service or technical.
 	// If you don't specify a value, the default is technical.

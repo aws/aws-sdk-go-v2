@@ -294,13 +294,13 @@ func validateMetricDimension(v *types.MetricDimension) error {
 	}
 }
 
-func validateMetricDimensions(v []*types.MetricDimension) error {
+func validateMetricDimensions(v []types.MetricDimension) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricDimensions"}
 	for i := range v {
-		if err := validateMetricDimension(v[i]); err != nil {
+		if err := validateMetricDimension(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -341,13 +341,13 @@ func validateStepAdjustment(v *types.StepAdjustment) error {
 	}
 }
 
-func validateStepAdjustments(v []*types.StepAdjustment) error {
+func validateStepAdjustments(v []types.StepAdjustment) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StepAdjustments"}
 	for i := range v {
-		if err := validateStepAdjustment(v[i]); err != nil {
+		if err := validateStepAdjustment(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

@@ -48,7 +48,7 @@ type DescribeTrustedAdvisorCheckRefreshStatusesInput struct {
 	// InvalidParameterValue error.
 	//
 	// This member is required.
-	CheckIds []*string
+	CheckIds []string
 }
 
 // The statuses of the Trusted Advisor checks returned by the
@@ -58,7 +58,7 @@ type DescribeTrustedAdvisorCheckRefreshStatusesOutput struct {
 	// The refresh status of the specified Trusted Advisor checks.
 	//
 	// This member is required.
-	Statuses []*types.TrustedAdvisorCheckRefreshStatus
+	Statuses []types.TrustedAdvisorCheckRefreshStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

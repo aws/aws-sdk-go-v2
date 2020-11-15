@@ -45,7 +45,7 @@ type TagResourceInput struct {
 	// digits, white space, or these symbols: _ . : / = + - @.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagResourceOutput struct {

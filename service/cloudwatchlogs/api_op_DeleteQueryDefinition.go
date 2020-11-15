@@ -44,7 +44,7 @@ type DeleteQueryDefinitionOutput struct {
 
 	// A value of TRUE indicates that the operation succeeded. FALSE indicates that the
 	// operation failed.
-	Success *bool
+	Success bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

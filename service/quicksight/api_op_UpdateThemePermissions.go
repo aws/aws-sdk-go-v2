@@ -88,22 +88,22 @@ type UpdateThemePermissionsInput struct {
 	ThemeId *string
 
 	// A list of resource permissions to be granted for the theme.
-	GrantPermissions []*types.ResourcePermission
+	GrantPermissions []types.ResourcePermission
 
 	// A list of resource permissions to be revoked from the theme.
-	RevokePermissions []*types.ResourcePermission
+	RevokePermissions []types.ResourcePermission
 }
 
 type UpdateThemePermissionsOutput struct {
 
 	// The resulting list of resource permissions for the theme.
-	Permissions []*types.ResourcePermission
+	Permissions []types.ResourcePermission
 
 	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// The Amazon Resource Name (ARN) of the theme.
 	ThemeArn *string

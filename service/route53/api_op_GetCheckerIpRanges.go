@@ -41,7 +41,7 @@ type GetCheckerIpRangesOutput struct {
 	// Route 53 health checkers.
 	//
 	// This member is required.
-	CheckerIpRanges []*string
+	CheckerIpRanges []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

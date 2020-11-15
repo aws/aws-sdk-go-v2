@@ -79,7 +79,7 @@ type GetSavingsPlansUtilizationOutput struct {
 
 	// The amount of cost/commitment you used your Savings Plans. This allows you to
 	// specify date ranges.
-	SavingsPlansUtilizationsByTime []*types.SavingsPlansUtilizationByTime
+	SavingsPlansUtilizationsByTime []types.SavingsPlansUtilizationByTime
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -44,18 +44,18 @@ type CreateMaintenanceWindowInput struct {
 	// window.
 	//
 	// This member is required.
-	AllowUnassociatedTargets *bool
+	AllowUnassociatedTargets bool
 
 	// The number of hours before the end of the maintenance window that Systems
 	// Manager stops scheduling new tasks for execution.
 	//
 	// This member is required.
-	Cutoff *int32
+	Cutoff int32
 
 	// The duration of the maintenance window in hours.
 	//
 	// This member is required.
-	Duration *int32
+	Duration int32
 
 	// The name of the maintenance window.
 	//
@@ -84,7 +84,7 @@ type CreateMaintenanceWindowInput struct {
 	// cron expression schedules a maintenance window to run on the third Tuesday of
 	// every month at 11:30 PM. cron(0 30 23 ? * TUE#3 *) If the schedule offset is 2,
 	// the maintenance window won't run until two days later.
-	ScheduleOffset *int32
+	ScheduleOffset int32
 
 	// The time zone that the scheduled maintenance window executions are based on, in
 	// Internet Assigned Numbers Authority (IANA) format. For example:
@@ -113,7 +113,7 @@ type CreateMaintenanceWindowInput struct {
 	//
 	// To add tags to an existing maintenance window,
 	// use the AddTagsToResource action.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateMaintenanceWindowOutput struct {

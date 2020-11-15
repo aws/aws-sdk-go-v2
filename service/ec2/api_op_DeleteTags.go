@@ -37,13 +37,13 @@ type DeleteTagsInput struct {
 	// IDs. We recommend breaking up this request into smaller batches.
 	//
 	// This member is required.
-	Resources []*string
+	Resources []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The tags to delete. Specify a tag key and an optional tag value to delete
 	// specific tags. If you specify a tag key without a tag value, we delete any tag
@@ -51,7 +51,7 @@ type DeleteTagsInput struct {
 	// string as the tag value, we delete the tag only if its value is an empty string.
 	// If you omit this parameter, we delete all user-defined tags for the specified
 	// resources. We do not delete AWS-generated tags (tags that have the aws: prefix).
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type DeleteTagsOutput struct {

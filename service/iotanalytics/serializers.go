@@ -146,25 +146,19 @@ func awsRestjson1_serializeOpHttpBindingsCancelPipelineReprocessingInput(v *Canc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.PipelineName == nil {
+	if v.PipelineName == nil || len(*v.PipelineName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
 	}
 	if v.PipelineName != nil {
-		if len(*v.PipelineName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
-		}
 		if err := encoder.SetURI("pipelineName").String(*v.PipelineName); err != nil {
 			return err
 		}
 	}
 
-	if v.ReprocessingId == nil {
+	if v.ReprocessingId == nil || len(*v.ReprocessingId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member reprocessingId must not be empty")}
 	}
 	if v.ReprocessingId != nil {
-		if len(*v.ReprocessingId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member reprocessingId must not be empty")}
-		}
 		if err := encoder.SetURI("reprocessingId").String(*v.ReprocessingId); err != nil {
 			return err
 		}
@@ -433,13 +427,10 @@ func awsRestjson1_serializeOpHttpBindingsCreateDatasetContentInput(v *CreateData
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DatasetName == nil {
+	if v.DatasetName == nil || len(*v.DatasetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
 	}
 	if v.DatasetName != nil {
-		if len(*v.DatasetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
-		}
 		if err := encoder.SetURI("datasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
@@ -680,13 +671,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteChannelInput(v *DeleteChannelInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ChannelName == nil {
+	if v.ChannelName == nil || len(*v.ChannelName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member channelName must not be empty")}
 	}
 	if v.ChannelName != nil {
-		if len(*v.ChannelName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member channelName must not be empty")}
-		}
 		if err := encoder.SetURI("channelName").String(*v.ChannelName); err != nil {
 			return err
 		}
@@ -746,13 +734,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDatasetInput(v *DeleteDatasetInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DatasetName == nil {
+	if v.DatasetName == nil || len(*v.DatasetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
 	}
 	if v.DatasetName != nil {
-		if len(*v.DatasetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
-		}
 		if err := encoder.SetURI("datasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
@@ -812,13 +797,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDatasetContentInput(v *DeleteData
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DatasetName == nil {
+	if v.DatasetName == nil || len(*v.DatasetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
 	}
 	if v.DatasetName != nil {
-		if len(*v.DatasetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
-		}
 		if err := encoder.SetURI("datasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
@@ -882,13 +864,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDatastoreInput(v *DeleteDatastore
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DatastoreName == nil {
+	if v.DatastoreName == nil || len(*v.DatastoreName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member datastoreName must not be empty")}
 	}
 	if v.DatastoreName != nil {
-		if len(*v.DatastoreName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member datastoreName must not be empty")}
-		}
 		if err := encoder.SetURI("datastoreName").String(*v.DatastoreName); err != nil {
 			return err
 		}
@@ -948,13 +927,10 @@ func awsRestjson1_serializeOpHttpBindingsDeletePipelineInput(v *DeletePipelineIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.PipelineName == nil {
+	if v.PipelineName == nil || len(*v.PipelineName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
 	}
 	if v.PipelineName != nil {
-		if len(*v.PipelineName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
-		}
 		if err := encoder.SetURI("pipelineName").String(*v.PipelineName); err != nil {
 			return err
 		}
@@ -1014,20 +990,17 @@ func awsRestjson1_serializeOpHttpBindingsDescribeChannelInput(v *DescribeChannel
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ChannelName == nil {
+	if v.ChannelName == nil || len(*v.ChannelName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member channelName must not be empty")}
 	}
 	if v.ChannelName != nil {
-		if len(*v.ChannelName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member channelName must not be empty")}
-		}
 		if err := encoder.SetURI("channelName").String(*v.ChannelName); err != nil {
 			return err
 		}
 	}
 
-	if v.IncludeStatistics != nil {
-		encoder.SetQuery("includeStatistics").Boolean(*v.IncludeStatistics)
+	if v.IncludeStatistics {
+		encoder.SetQuery("includeStatistics").Boolean(v.IncludeStatistics)
 	}
 
 	return nil
@@ -1084,13 +1057,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeDatasetInput(v *DescribeDataset
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DatasetName == nil {
+	if v.DatasetName == nil || len(*v.DatasetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
 	}
 	if v.DatasetName != nil {
-		if len(*v.DatasetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
-		}
 		if err := encoder.SetURI("datasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
@@ -1150,20 +1120,17 @@ func awsRestjson1_serializeOpHttpBindingsDescribeDatastoreInput(v *DescribeDatas
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DatastoreName == nil {
+	if v.DatastoreName == nil || len(*v.DatastoreName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member datastoreName must not be empty")}
 	}
 	if v.DatastoreName != nil {
-		if len(*v.DatastoreName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member datastoreName must not be empty")}
-		}
 		if err := encoder.SetURI("datastoreName").String(*v.DatastoreName); err != nil {
 			return err
 		}
 	}
 
-	if v.IncludeStatistics != nil {
-		encoder.SetQuery("includeStatistics").Boolean(*v.IncludeStatistics)
+	if v.IncludeStatistics {
+		encoder.SetQuery("includeStatistics").Boolean(v.IncludeStatistics)
 	}
 
 	return nil
@@ -1270,13 +1237,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribePipelineInput(v *DescribePipeli
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.PipelineName == nil {
+	if v.PipelineName == nil || len(*v.PipelineName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
 	}
 	if v.PipelineName != nil {
-		if len(*v.PipelineName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
-		}
 		if err := encoder.SetURI("pipelineName").String(*v.PipelineName); err != nil {
 			return err
 		}
@@ -1336,13 +1300,10 @@ func awsRestjson1_serializeOpHttpBindingsGetDatasetContentInput(v *GetDatasetCon
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DatasetName == nil {
+	if v.DatasetName == nil || len(*v.DatasetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
 	}
 	if v.DatasetName != nil {
-		if len(*v.DatasetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
-		}
 		if err := encoder.SetURI("datasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
@@ -1468,13 +1429,10 @@ func awsRestjson1_serializeOpHttpBindingsListDatasetContentsInput(v *ListDataset
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DatasetName == nil {
+	if v.DatasetName == nil || len(*v.DatasetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
 	}
 	if v.DatasetName != nil {
-		if len(*v.DatasetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
-		}
 		if err := encoder.SetURI("datasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
@@ -1951,13 +1909,10 @@ func awsRestjson1_serializeOpHttpBindingsSampleChannelDataInput(v *SampleChannel
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ChannelName == nil {
+	if v.ChannelName == nil || len(*v.ChannelName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member channelName must not be empty")}
 	}
 	if v.ChannelName != nil {
-		if len(*v.ChannelName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member channelName must not be empty")}
-		}
 		if err := encoder.SetURI("channelName").String(*v.ChannelName); err != nil {
 			return err
 		}
@@ -2040,13 +1995,10 @@ func awsRestjson1_serializeOpHttpBindingsStartPipelineReprocessingInput(v *Start
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.PipelineName == nil {
+	if v.PipelineName == nil || len(*v.PipelineName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
 	}
 	if v.PipelineName != nil {
-		if len(*v.PipelineName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
-		}
 		if err := encoder.SetURI("pipelineName").String(*v.PipelineName); err != nil {
 			return err
 		}
@@ -2212,10 +2164,7 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 
 	if v.TagKeys != nil {
 		for i := range v.TagKeys {
-			if v.TagKeys[i] == nil {
-				continue
-			}
-			encoder.AddQuery("tagKeys").String(*v.TagKeys[i])
+			encoder.AddQuery("tagKeys").String(v.TagKeys[i])
 		}
 	}
 
@@ -2284,13 +2233,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateChannelInput(v *UpdateChannelInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ChannelName == nil {
+	if v.ChannelName == nil || len(*v.ChannelName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member channelName must not be empty")}
 	}
 	if v.ChannelName != nil {
-		if len(*v.ChannelName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member channelName must not be empty")}
-		}
 		if err := encoder.SetURI("channelName").String(*v.ChannelName); err != nil {
 			return err
 		}
@@ -2382,13 +2328,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateDatasetInput(v *UpdateDatasetInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DatasetName == nil {
+	if v.DatasetName == nil || len(*v.DatasetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
 	}
 	if v.DatasetName != nil {
-		if len(*v.DatasetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
-		}
 		if err := encoder.SetURI("datasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
@@ -2501,13 +2444,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateDatastoreInput(v *UpdateDatastore
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DatastoreName == nil {
+	if v.DatastoreName == nil || len(*v.DatastoreName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member datastoreName must not be empty")}
 	}
 	if v.DatastoreName != nil {
-		if len(*v.DatastoreName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member datastoreName must not be empty")}
-		}
 		if err := encoder.SetURI("datastoreName").String(*v.DatastoreName); err != nil {
 			return err
 		}
@@ -2599,13 +2539,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdatePipelineInput(v *UpdatePipelineIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.PipelineName == nil {
+	if v.PipelineName == nil || len(*v.PipelineName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
 	}
 	if v.PipelineName != nil {
-		if len(*v.PipelineName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
-		}
 		if err := encoder.SetURI("pipelineName").String(*v.PipelineName); err != nil {
 			return err
 		}
@@ -2652,32 +2589,24 @@ func awsRestjson1_serializeDocumentAddAttributesActivity(v *types.AddAttributesA
 	return nil
 }
 
-func awsRestjson1_serializeDocumentAttributeNameMapping(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAttributeNameMapping(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentAttributeNames(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAttributeNames(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2826,17 +2755,13 @@ func awsRestjson1_serializeDocumentDatasetAction(v *types.DatasetAction, value s
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDatasetActions(v []*types.DatasetAction, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentDatasetActions(v []types.DatasetAction, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentDatasetAction(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentDatasetAction(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2883,17 +2808,13 @@ func awsRestjson1_serializeDocumentDatasetContentDeliveryRule(v *types.DatasetCo
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDatasetContentDeliveryRules(v []*types.DatasetContentDeliveryRule, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentDatasetContentDeliveryRules(v []types.DatasetContentDeliveryRule, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentDatasetContentDeliveryRule(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentDatasetContentDeliveryRule(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2933,17 +2854,13 @@ func awsRestjson1_serializeDocumentDatasetTrigger(v *types.DatasetTrigger, value
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDatasetTriggers(v []*types.DatasetTrigger, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentDatasetTriggers(v []types.DatasetTrigger, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentDatasetTrigger(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentDatasetTrigger(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3156,9 +3073,9 @@ func awsRestjson1_serializeDocumentLoggingOptions(v *types.LoggingOptions, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.Enabled != nil {
+	if v.Enabled {
 		ok := object.Key("enabled")
-		ok.Boolean(*v.Enabled)
+		ok.Boolean(v.Enabled)
 	}
 
 	if len(v.Level) > 0 {
@@ -3225,7 +3142,6 @@ func awsRestjson1_serializeDocumentMessagePayloads(v [][]byte, value smithyjson.
 	for i := range v {
 		av := array.Value()
 		if vv := v[i]; vv == nil {
-			av.Null()
 			continue
 		}
 		av.Base64EncodeBytes(v[i])
@@ -3233,17 +3149,13 @@ func awsRestjson1_serializeDocumentMessagePayloads(v [][]byte, value smithyjson.
 	return nil
 }
 
-func awsRestjson1_serializeDocumentMessages(v []*types.Message, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentMessages(v []types.Message, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentMessage(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentMessage(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3262,17 +3174,13 @@ func awsRestjson1_serializeDocumentOutputFileUriValue(v *types.OutputFileUriValu
 	return nil
 }
 
-func awsRestjson1_serializeDocumentPipelineActivities(v []*types.PipelineActivity, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentPipelineActivities(v []types.PipelineActivity, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentPipelineActivity(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentPipelineActivity(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3370,17 +3278,13 @@ func awsRestjson1_serializeDocumentQueryFilter(v *types.QueryFilter, value smith
 	return nil
 }
 
-func awsRestjson1_serializeDocumentQueryFilters(v []*types.QueryFilter, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentQueryFilters(v []types.QueryFilter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentQueryFilter(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentQueryFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3420,9 +3324,9 @@ func awsRestjson1_serializeDocumentResourceConfiguration(v *types.ResourceConfig
 		ok.String(string(v.ComputeType))
 	}
 
-	if v.VolumeSizeInGB != nil {
+	if v.VolumeSizeInGB != 0 {
 		ok := object.Key("volumeSizeInGB")
-		ok.Integer(*v.VolumeSizeInGB)
+		ok.Integer(v.VolumeSizeInGB)
 	}
 
 	return nil
@@ -3437,9 +3341,9 @@ func awsRestjson1_serializeDocumentRetentionPeriod(v *types.RetentionPeriod, val
 		ok.Integer(*v.NumberOfDays)
 	}
 
-	if v.Unlimited != nil {
+	if v.Unlimited {
 		ok := object.Key("unlimited")
-		ok.Boolean(*v.Unlimited)
+		ok.Boolean(v.Unlimited)
 	}
 
 	return nil
@@ -3560,17 +3464,13 @@ func awsRestjson1_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTagList(v []*types.Tag, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTagList(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3600,9 +3500,9 @@ func awsRestjson1_serializeDocumentVariable(v *types.Variable, value smithyjson.
 		}
 	}
 
-	if v.DoubleValue != nil {
+	if v.DoubleValue != 0 {
 		ok := object.Key("doubleValue")
-		ok.Double(*v.DoubleValue)
+		ok.Double(v.DoubleValue)
 	}
 
 	if v.Name != nil {
@@ -3625,17 +3525,13 @@ func awsRestjson1_serializeDocumentVariable(v *types.Variable, value smithyjson.
 	return nil
 }
 
-func awsRestjson1_serializeDocumentVariables(v []*types.Variable, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentVariables(v []types.Variable, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentVariable(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentVariable(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3651,9 +3547,9 @@ func awsRestjson1_serializeDocumentVersioningConfiguration(v *types.VersioningCo
 		ok.Integer(*v.MaxVersions)
 	}
 
-	if v.Unlimited != nil {
+	if v.Unlimited {
 		ok := object.Key("unlimited")
-		ok.Boolean(*v.Unlimited)
+		ok.Boolean(v.Unlimited)
 	}
 
 	return nil

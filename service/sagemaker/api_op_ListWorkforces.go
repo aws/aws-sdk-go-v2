@@ -51,7 +51,7 @@ type ListWorkforcesOutput struct {
 	// A list containing information about your workforce.
 	//
 	// This member is required.
-	Workforces []*types.Workforce
+	Workforces []types.Workforce
 
 	// A token to resume pagination.
 	NextToken *string

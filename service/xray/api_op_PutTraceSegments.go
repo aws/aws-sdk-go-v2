@@ -79,13 +79,13 @@ type PutTraceSegmentsInput struct {
 	// subsegments.
 	//
 	// This member is required.
-	TraceSegmentDocuments []*string
+	TraceSegmentDocuments []string
 }
 
 type PutTraceSegmentsOutput struct {
 
 	// Segments that failed processing.
-	UnprocessedTraceSegments []*types.UnprocessedTraceSegment
+	UnprocessedTraceSegments []types.UnprocessedTraceSegment
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

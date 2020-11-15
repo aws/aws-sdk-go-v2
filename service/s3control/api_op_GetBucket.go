@@ -71,7 +71,7 @@ type GetBucketOutput struct {
 	CreationDate *time.Time
 
 	//
-	PublicAccessBlockEnabled *bool
+	PublicAccessBlockEnabled bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

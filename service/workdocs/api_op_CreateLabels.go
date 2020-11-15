@@ -31,7 +31,7 @@ type CreateLabelsInput struct {
 	// List of labels to add to the resource.
 	//
 	// This member is required.
-	Labels []*string
+	Labels []string
 
 	// The ID of the resource.
 	//

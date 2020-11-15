@@ -38,7 +38,7 @@ type PutVoiceConnectorProxyInput struct {
 	// The countries for proxy phone numbers to be selected from.
 	//
 	// This member is required.
-	PhoneNumberPoolCountries []*string
+	PhoneNumberPoolCountries []string
 
 	// The Amazon Chime voice connector ID.
 	//

@@ -46,7 +46,7 @@ type BuildSuggestersInput struct {
 type BuildSuggestersOutput struct {
 
 	// A list of field names.
-	FieldNames []*string
+	FieldNames []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

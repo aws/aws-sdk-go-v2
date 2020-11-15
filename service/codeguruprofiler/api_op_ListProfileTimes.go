@@ -79,7 +79,7 @@ type ListProfileTimesOutput struct {
 	// the specified time range.
 	//
 	// This member is required.
-	ProfileTimes []*types.ProfileTime
+	ProfileTimes []types.ProfileTime
 
 	// The nextToken value to include in a future ListProfileTimes request. When the
 	// results of a ListProfileTimes request exceed maxResults, this value can be used

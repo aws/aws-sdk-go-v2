@@ -37,7 +37,7 @@ type DisassociateRoutingProfileQueuesInput struct {
 	// The queues to disassociate from this routing profile.
 	//
 	// This member is required.
-	QueueReferences []*types.RoutingProfileQueueReference
+	QueueReferences []types.RoutingProfileQueueReference
 
 	// The identifier of the routing profile.
 	//

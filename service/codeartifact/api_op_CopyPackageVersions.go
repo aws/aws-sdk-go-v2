@@ -98,11 +98,11 @@ type CopyPackageVersionsInput struct {
 	// specified versions in the source repository match the specified package version
 	// revision. You must specify versions or versionRevisions. You cannot specify
 	// both.
-	VersionRevisions map[string]*string
+	VersionRevisions map[string]string
 
 	// The versions of the package to copy. You must specify versions or
 	// versionRevisions. You cannot specify both.
-	Versions []*string
+	Versions []string
 }
 
 type CopyPackageVersionsOutput struct {
@@ -123,10 +123,10 @@ type CopyPackageVersionsOutput struct {
 	// NOT_FOUND
 	//
 	// * SKIPPED
-	FailedVersions map[string]*types.PackageVersionError
+	FailedVersions map[string]types.PackageVersionError
 
 	// A list of the package versions that were successfully copied to your repository.
-	SuccessfulVersions map[string]*types.SuccessfulPackageVersionInfo
+	SuccessfulVersions map[string]types.SuccessfulPackageVersionInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

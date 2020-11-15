@@ -33,7 +33,7 @@ func (c *Client) DescribeConnectionAliases(ctx context.Context, params *Describe
 type DescribeConnectionAliasesInput struct {
 
 	// The identifiers of the connection aliases to describe.
-	AliasIds []*string
+	AliasIds []string
 
 	// The maximum number of connection aliases to return.
 	Limit *int32
@@ -49,7 +49,7 @@ type DescribeConnectionAliasesInput struct {
 type DescribeConnectionAliasesOutput struct {
 
 	// Information about the specified connection aliases.
-	ConnectionAliases []*types.ConnectionAlias
+	ConnectionAliases []types.ConnectionAlias
 
 	// The token to use to retrieve the next set of results, or null if no more results
 	// are available.

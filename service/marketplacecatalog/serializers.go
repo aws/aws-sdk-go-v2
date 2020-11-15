@@ -549,34 +549,26 @@ func awsRestjson1_serializeDocumentFilter(v *types.Filter, value smithyjson.Valu
 	return nil
 }
 
-func awsRestjson1_serializeDocumentFilterList(v []*types.Filter, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentFilterList(v []types.Filter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentFilter(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentRequestedChangeList(v []*types.Change, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentRequestedChangeList(v []types.Change, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentChange(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentChange(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -600,17 +592,13 @@ func awsRestjson1_serializeDocumentSort(v *types.Sort, value smithyjson.Value) e
 	return nil
 }
 
-func awsRestjson1_serializeDocumentValueList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentValueList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }

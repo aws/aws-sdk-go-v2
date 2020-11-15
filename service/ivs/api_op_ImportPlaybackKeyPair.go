@@ -41,7 +41,7 @@ type ImportPlaybackKeyPairInput struct {
 	Name *string
 
 	// Any tags provided with the request are added to the playback key pair tags.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type ImportPlaybackKeyPairOutput struct {

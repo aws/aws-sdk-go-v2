@@ -47,7 +47,7 @@ type ListPlacementsOutput struct {
 	// An object listing the requested placements.
 	//
 	// This member is required.
-	Placements []*types.PlacementSummary
+	Placements []types.PlacementSummary
 
 	// The token used to retrieve the next set of results - will be effectively empty
 	// if there are no further results.

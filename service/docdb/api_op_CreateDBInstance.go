@@ -84,7 +84,7 @@ type CreateDBInstanceInput struct {
 
 	// The tags to be assigned to the instance. You can assign up to 10 tags to an
 	// instance.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDBInstanceOutput struct {

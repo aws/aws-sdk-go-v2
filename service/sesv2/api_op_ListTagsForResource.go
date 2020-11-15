@@ -46,7 +46,7 @@ type ListTagsForResourceOutput struct {
 	// consists of a required tag key (Key) and an associated tag value (Value)
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

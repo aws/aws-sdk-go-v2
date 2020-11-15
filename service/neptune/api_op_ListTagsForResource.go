@@ -38,13 +38,13 @@ type ListTagsForResourceInput struct {
 	ResourceName *string
 
 	// This parameter is not currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 }
 
 type ListTagsForResourceOutput struct {
 
 	// List of tags returned by the ListTagsForResource operation.
-	TagList []*types.Tag
+	TagList []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

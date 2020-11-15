@@ -37,7 +37,7 @@ type ListClusterOperationsInput struct {
 
 	// The maximum number of results to return in the response. If there are more
 	// results, the response includes a NextToken parameter.
-	MaxResults *int32
+	MaxResults int32
 
 	// The paginated results marker. When the result of the operation is truncated, the
 	// call returns NextToken in the response. To get the next batch, provide this
@@ -48,7 +48,7 @@ type ListClusterOperationsInput struct {
 type ListClusterOperationsOutput struct {
 
 	// An array of cluster operation information objects.
-	ClusterOperationInfoList []*types.ClusterOperationInfo
+	ClusterOperationInfoList []types.ClusterOperationInfo
 
 	// If the response of ListClusterOperations is truncated, it returns a NextToken in
 	// the response. This Nexttoken should be sent in the subsequent request to

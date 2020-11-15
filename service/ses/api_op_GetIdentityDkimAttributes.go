@@ -59,7 +59,7 @@ type GetIdentityDkimAttributesInput struct {
 	// A list of one or more verified identities - email addresses, domains, or both.
 	//
 	// This member is required.
-	Identities []*string
+	Identities []string
 }
 
 // Represents the status of Amazon SES Easy DKIM signing for an identity. For
@@ -71,7 +71,7 @@ type GetIdentityDkimAttributesOutput struct {
 	// The DKIM attributes for an email address or a domain.
 	//
 	// This member is required.
-	DkimAttributes map[string]*types.IdentityDkimAttributes
+	DkimAttributes map[string]types.IdentityDkimAttributes
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

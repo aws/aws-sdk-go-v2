@@ -47,7 +47,7 @@ type GetOpenIDConnectProviderOutput struct {
 	// A list of client IDs (also known as audiences) that are associated with the
 	// specified IAM OIDC provider resource object. For more information, see
 	// CreateOpenIDConnectProvider.
-	ClientIDList []*string
+	ClientIDList []string
 
 	// The date and time when the IAM OIDC provider resource object was created in the
 	// AWS account.
@@ -56,7 +56,7 @@ type GetOpenIDConnectProviderOutput struct {
 	// A list of certificate thumbprints that are associated with the specified IAM
 	// OIDC provider resource object. For more information, see
 	// CreateOpenIDConnectProvider.
-	ThumbprintList []*string
+	ThumbprintList []string
 
 	// The URL that the IAM OIDC provider resource object is associated with. For more
 	// information, see CreateOpenIDConnectProvider.

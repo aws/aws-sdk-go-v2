@@ -75,7 +75,7 @@ type ListDomainDeliverabilityCampaignsOutput struct {
 	// during the specified time range.
 	//
 	// This member is required.
-	DomainDeliverabilityCampaigns []*types.DomainDeliverabilityCampaign
+	DomainDeliverabilityCampaigns []types.DomainDeliverabilityCampaign
 
 	// A token that’s returned from a previous call to the
 	// ListDomainDeliverabilityCampaigns operation. This token indicates the position

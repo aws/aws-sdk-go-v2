@@ -60,7 +60,7 @@ type AllocateConnectionOnInterconnectInput struct {
 	// The dedicated VLAN provisioned to the connection.
 	//
 	// This member is required.
-	Vlan *int32
+	Vlan int32
 }
 
 // Information about an AWS Direct Connect connection.
@@ -143,10 +143,10 @@ type AllocateConnectionOnInterconnectOutput struct {
 	Region *string
 
 	// The tags associated with the connection.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The ID of the VLAN.
-	Vlan *int32
+	Vlan int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

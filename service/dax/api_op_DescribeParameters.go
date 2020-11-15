@@ -57,7 +57,7 @@ type DescribeParametersOutput struct {
 
 	// A list of parameters within a parameter group. Each element in the list
 	// represents one parameter.
-	Parameters []*types.Parameter
+	Parameters []types.Parameter
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

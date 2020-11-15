@@ -81,7 +81,7 @@ type DescribeFleetPortSettingsInput struct {
 type DescribeFleetPortSettingsOutput struct {
 
 	// The port settings for the requested fleet ID.
-	InboundPermissions []*types.IpPermission
+	InboundPermissions []types.IpPermission
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

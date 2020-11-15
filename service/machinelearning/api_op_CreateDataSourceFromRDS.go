@@ -109,7 +109,7 @@ type CreateDataSourceFromRDSInput struct {
 	// observation data referenced by a DataSource. Amazon ML uses the statistics
 	// internally during MLModel training. This parameter must be set to true if the
 	// DataSource needs to be used for MLModel training.
-	ComputeStatistics *bool
+	ComputeStatistics bool
 
 	// A user-supplied name or description of the DataSource.
 	DataSourceName *string

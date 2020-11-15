@@ -172,13 +172,13 @@ func validateSearchDevicesFilter(v *types.SearchDevicesFilter) error {
 	}
 }
 
-func validateSearchDevicesFilterList(v []*types.SearchDevicesFilter) error {
+func validateSearchDevicesFilterList(v []types.SearchDevicesFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SearchDevicesFilterList"}
 	for i := range v {
-		if err := validateSearchDevicesFilter(v[i]); err != nil {
+		if err := validateSearchDevicesFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -210,13 +210,13 @@ func validateSearchQuantumTasksFilter(v *types.SearchQuantumTasksFilter) error {
 	}
 }
 
-func validateSearchQuantumTasksFilterList(v []*types.SearchQuantumTasksFilter) error {
+func validateSearchQuantumTasksFilterList(v []types.SearchQuantumTasksFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SearchQuantumTasksFilterList"}
 	for i := range v {
-		if err := validateSearchQuantumTasksFilter(v[i]); err != nil {
+		if err := validateSearchQuantumTasksFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

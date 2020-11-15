@@ -82,7 +82,7 @@ type ListObjectVersionsInput struct {
 	// never contain more. If additional keys satisfy the search criteria, but were not
 	// returned because max-keys was exceeded, the response contains true. To return
 	// the additional keys, see key-marker and version-id-marker.
-	MaxKeys *int32
+	MaxKeys int32
 
 	// Use this parameter to select only those keys that begin with the specified
 	// prefix. You can use prefixes to separate a bucket into different groupings of
@@ -99,10 +99,10 @@ type ListObjectVersionsOutput struct {
 
 	// All of the keys rolled up into a common prefix count as a single return when
 	// calculating the number of returns.
-	CommonPrefixes []*types.CommonPrefix
+	CommonPrefixes []types.CommonPrefix
 
 	// Container for an object that is a delete marker.
-	DeleteMarkers []*types.DeleteMarkerEntry
+	DeleteMarkers []types.DeleteMarkerEntry
 
 	// The delimiter grouping the included keys. A delimiter is a character that you
 	// specify to group keys. All keys that contain the same string between the prefix
@@ -122,13 +122,13 @@ type ListObjectVersionsOutput struct {
 	// follow-up paginated request using the NextKeyMarker and NextVersionIdMarker
 	// response parameters as a starting place in another request to return the rest of
 	// the results.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// Marks the last key returned in a truncated response.
 	KeyMarker *string
 
 	// Specifies the maximum number of objects to return.
-	MaxKeys *int32
+	MaxKeys int32
 
 	// The bucket name.
 	Name *string
@@ -151,7 +151,7 @@ type ListObjectVersionsOutput struct {
 	VersionIdMarker *string
 
 	// Container for version information.
-	Versions []*types.ObjectVersion
+	Versions []types.ObjectVersion
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

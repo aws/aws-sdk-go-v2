@@ -104,7 +104,7 @@ type DescribeEventsInput struct {
 type DescribeEventsOutput struct {
 
 	// A list of Event instances.
-	Events []*types.Event
+	Events []types.Event
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve

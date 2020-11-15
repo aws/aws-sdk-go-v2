@@ -17,7 +17,7 @@ type AdvancedBackupSetting struct {
 	// you get an InvalidParameterValueException exception. For more information about
 	// Windows VSS backups, see Creating a VSS-Enabled Windows Backup
 	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html).
-	BackupOptions map[string]*string
+	BackupOptions map[string]string
 
 	// The type of AWS resource to be backed up. For VSS Windows backups, the only
 	// supported resource type is Amazon EC2. Valid values: EC2.
@@ -39,7 +39,7 @@ type BackupJob struct {
 	// Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. If
 	// you specify an invalid option, you get an InvalidParameterValueException
 	// exception.
-	BackupOptions map[string]*string
+	BackupOptions map[string]string
 
 	// The size, in bytes, of a backup.
 	BackupSizeInBytes *int64
@@ -136,10 +136,10 @@ type BackupPlan struct {
 	// used to back up a selection of resources.
 	//
 	// This member is required.
-	Rules []*BackupRule
+	Rules []BackupRule
 
 	// Contains a list of BackupOptions for each resource type.
-	AdvancedBackupSettings []*AdvancedBackupSetting
+	AdvancedBackupSettings []AdvancedBackupSetting
 }
 
 // Contains an optional backup plan display name and an array of BackupRule
@@ -156,18 +156,18 @@ type BackupPlanInput struct {
 	// used to back up a selection of resources.
 	//
 	// This member is required.
-	Rules []*BackupRuleInput
+	Rules []BackupRuleInput
 
 	// Specifies a list of BackupOptions for each resource type. These settings are
 	// only available for Windows VSS backup jobs.
-	AdvancedBackupSettings []*AdvancedBackupSetting
+	AdvancedBackupSettings []AdvancedBackupSetting
 }
 
 // Contains metadata about a backup plan.
 type BackupPlansListMember struct {
 
 	// Contains a list of BackupOptions for a resource type.
-	AdvancedBackupSettings []*AdvancedBackupSetting
+	AdvancedBackupSettings []AdvancedBackupSetting
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for
 	// example,
@@ -239,7 +239,7 @@ type BackupRule struct {
 
 	// An array of CopyAction objects, which contains the details of the copy
 	// operation.
-	CopyActions []*CopyAction
+	CopyActions []CopyAction
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage
 	// and when it expires. AWS Backup transitions and expires backups automatically
@@ -252,7 +252,7 @@ type BackupRule struct {
 
 	// An array of key-value pair strings that are assigned to resources that are
 	// associated with this rule when restored from backup.
-	RecoveryPointTags map[string]*string
+	RecoveryPointTags map[string]string
 
 	// Uniquely identifies a rule that is used to schedule the backup of a selection of
 	// resources.
@@ -293,7 +293,7 @@ type BackupRuleInput struct {
 
 	// An array of CopyAction objects, which contains the details of the copy
 	// operation.
-	CopyActions []*CopyAction
+	CopyActions []CopyAction
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage
 	// and when it expires. AWS Backup will transition and expire backups automatically
@@ -306,7 +306,7 @@ type BackupRuleInput struct {
 
 	// To help organize your resources, you can assign your own metadata to the
 	// resources that you create. Each tag is a key-value pair.
-	RecoveryPointTags map[string]*string
+	RecoveryPointTags map[string]string
 
 	// A CRON expression specifying when AWS Backup initiates a backup job.
 	ScheduleExpression *string
@@ -332,11 +332,11 @@ type BackupSelection struct {
 
 	// An array of conditions used to specify a set of resources to assign to a backup
 	// plan; for example, "StringEquals": {"ec2:ResourceTag/Department": "accounting".
-	ListOfTags []*Condition
+	ListOfTags []Condition
 
 	// An array of strings that contain Amazon Resource Names (ARNs) of resources to
 	// assign to a backup plan.
-	Resources []*string
+	Resources []string
 }
 
 // Contains metadata about a BackupSelection object.
@@ -395,7 +395,7 @@ type BackupVaultListMember struct {
 	EncryptionKeyArn *string
 
 	// The number of recovery points that are stored in a backup vault.
-	NumberOfRecoveryPoints *int64
+	NumberOfRecoveryPoints int64
 }
 
 // Contains DeleteAt and MoveToColdStorageAt timestamps, which are used to specify
@@ -611,7 +611,7 @@ type RecoveryPointByBackupVault struct {
 
 	// A Boolean value that is returned as TRUE if the specified recovery point is
 	// encrypted, or FALSE if the recovery point is not encrypted.
-	IsEncrypted *bool
+	IsEncrypted bool
 
 	// The date and time a recovery point was last restored, in Unix format and
 	// Coordinated Universal Time (UTC). The value of LastRestoreTime is accurate to

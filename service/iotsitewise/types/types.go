@@ -354,7 +354,7 @@ type AssetSummary struct {
 	// specifies allowed parent/child asset relationships.
 	//
 	// This member is required.
-	Hierarchies []*AssetHierarchy
+	Hierarchies []AssetHierarchy
 
 	// The ID of the asset.
 	//
@@ -402,7 +402,7 @@ type AssociatedAssetsSummary struct {
 	// specifies allowed parent/child asset relationships.
 	//
 	// This member is required.
-	Hierarchies []*AssetHierarchy
+	Hierarchies []AssetHierarchy
 
 	// The ID of the asset.
 	//
@@ -455,7 +455,7 @@ type BatchPutAssetPropertyError struct {
 	// A list of timestamps for each error, if any.
 	//
 	// This member is required.
-	Timestamps []*TimeInNanos
+	Timestamps []TimeInNanos
 }
 
 // Contains error information for asset property value entries that are associated
@@ -472,7 +472,7 @@ type BatchPutAssetPropertyErrorEntry struct {
 	// The list of update property value errors.
 	//
 	// This member is required.
-	Errors []*BatchPutAssetPropertyError
+	Errors []BatchPutAssetPropertyError
 }
 
 // Contains a dashboard summary.
@@ -590,7 +590,7 @@ type GatewaySummary struct {
 	// capability configuration's definition, use
 	// DescribeGatewayCapabilityConfiguration
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGatewayCapabilityConfiguration.html).
-	GatewayCapabilitySummaries []*GatewayCapabilitySummary
+	GatewayCapabilitySummaries []GatewayCapabilitySummary
 }
 
 // Contains details for a gateway that runs on AWS IoT Greengrass. To create a
@@ -741,7 +741,7 @@ type Metric struct {
 	// The list of variables used in the expression.
 	//
 	// This member is required.
-	Variables []*ExpressionVariable
+	Variables []ExpressionVariable
 
 	// The window (time interval) over which AWS IoT SiteWise computes the metric's
 	// aggregation expression. AWS IoT SiteWise computes one data point per window.
@@ -967,7 +967,7 @@ type PutAssetPropertyValueEntry struct {
 	// array elements.
 	//
 	// This member is required.
-	PropertyValues []*AssetPropertyValue
+	PropertyValues []AssetPropertyValue
 
 	// The ID of the asset to update.
 	AssetId *string
@@ -1028,7 +1028,7 @@ type Transform struct {
 	// The list of variables used in the expression.
 	//
 	// This member is required.
-	Variables []*ExpressionVariable
+	Variables []ExpressionVariable
 }
 
 // Contains a tumbling window, which is a repeating fixed-sized, non-overlapping,

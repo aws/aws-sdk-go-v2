@@ -66,7 +66,7 @@ type DescribeRobotOutput struct {
 	Status types.RobotStatus
 
 	// The list of all tags added to the specified robot.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

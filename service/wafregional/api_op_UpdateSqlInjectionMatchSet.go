@@ -99,7 +99,7 @@ type UpdateSqlInjectionMatchSetInput struct {
 	// * FieldToMatch: Contains Data and Type
 	//
 	// This member is required.
-	Updates []*types.SqlInjectionMatchSetUpdate
+	Updates []types.SqlInjectionMatchSetUpdate
 }
 
 // The response to an UpdateSqlInjectionMatchSets request.

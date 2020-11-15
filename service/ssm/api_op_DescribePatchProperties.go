@@ -53,7 +53,7 @@ type DescribePatchPropertiesInput struct {
 
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
@@ -71,7 +71,7 @@ type DescribePatchPropertiesOutput struct {
 	NextToken *string
 
 	// A list of the properties for patches matching the filter request parameters.
-	Properties []map[string]*string
+	Properties []map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

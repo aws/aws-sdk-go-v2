@@ -32,19 +32,19 @@ type DeleteFlowLogsInput struct {
 	// One or more flow log IDs. Constraint: Maximum of 1000 flow log IDs.
 	//
 	// This member is required.
-	FlowLogIds []*string
+	FlowLogIds []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 }
 
 type DeleteFlowLogsOutput struct {
 
 	// Information about the flow logs that could not be deleted successfully.
-	Unsuccessful []*types.UnsuccessfulItem
+	Unsuccessful []types.UnsuccessfulItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

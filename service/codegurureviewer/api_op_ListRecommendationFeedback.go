@@ -49,7 +49,7 @@ type ListRecommendationFeedbackInput struct {
 	NextToken *string
 
 	// Used to query the recommendation feedback for a given recommendation.
-	RecommendationIds []*string
+	RecommendationIds []string
 
 	// An AWS user's account ID or Amazon Resource Name (ARN). Use this ID to query the
 	// recommendation feedback for a code review from that user. The UserId is an IAM
@@ -57,7 +57,7 @@ type ListRecommendationFeedbackInput struct {
 	// (ARN). For more information, see  Specifying a Principal
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
 	// in the AWS Identity and Access Management User Guide.
-	UserIds []*string
+	UserIds []string
 }
 
 type ListRecommendationFeedbackOutput struct {
@@ -69,7 +69,7 @@ type ListRecommendationFeedbackOutput struct {
 	NextToken *string
 
 	// Recommendation feedback summaries corresponding to the code review ARN.
-	RecommendationFeedbackSummaries []*types.RecommendationFeedbackSummary
+	RecommendationFeedbackSummaries []types.RecommendationFeedbackSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

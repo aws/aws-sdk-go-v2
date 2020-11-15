@@ -48,7 +48,7 @@ type ExportTransitGatewayRoutesInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters. The possible values are:
 	//
@@ -80,7 +80,7 @@ type ExportTransitGatewayRoutesInput struct {
 	// The CIDR range.
 	//
 	// * type - The type of route (propagated | static).
-	Filters []*types.Filter
+	Filters []types.Filter
 }
 
 type ExportTransitGatewayRoutesOutput struct {

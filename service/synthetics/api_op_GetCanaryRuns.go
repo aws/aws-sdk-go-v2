@@ -47,7 +47,7 @@ type GetCanaryRunsOutput struct {
 
 	// An array of structures. Each structure contains the details of one of the
 	// retrieved canary runs.
-	CanaryRuns []*types.CanaryRun
+	CanaryRuns []types.CanaryRun
 
 	// A token that indicates that there is more data available. You can use this token
 	// in a subsequent GetCanaryRuns operation to retrieve the next set of results.

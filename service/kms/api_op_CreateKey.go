@@ -91,7 +91,7 @@ type CreateKeyInput struct {
 	// only when you include a policy in the request and you intend to prevent the
 	// principal that is making the request from making a subsequent PutKeyPolicy
 	// request on the CMK. The default value is false.
-	BypassPolicyLockoutSafetyCheck *bool
+	BypassPolicyLockoutSafetyCheck bool
 
 	// Creates the CMK in the specified custom key store
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
@@ -236,7 +236,7 @@ type CreateKeyInput struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html). Use
 	// this parameter to tag the CMK when it is created. To add tags to an existing
 	// CMK, use the TagResource operation.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateKeyOutput struct {

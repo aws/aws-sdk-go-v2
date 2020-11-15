@@ -39,7 +39,7 @@ type ApplySecurityGroupsToClientVpnTargetNetworkInput struct {
 	// 5 security groups can be applied to an associated target network.
 	//
 	// This member is required.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The ID of the VPC in which the associated target network is located.
 	//
@@ -50,13 +50,13 @@ type ApplySecurityGroupsToClientVpnTargetNetworkInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 }
 
 type ApplySecurityGroupsToClientVpnTargetNetworkOutput struct {
 
 	// The IDs of the applied security groups.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -36,7 +36,7 @@ type ListDomainNamesInput struct {
 type ListDomainNamesOutput struct {
 
 	// List of Elasticsearch domain names.
-	DomainNames []*types.DomainInfo
+	DomainNames []types.DomainInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -46,7 +46,7 @@ type DescribeActivitiesInput struct {
 	// activity performed on a parent resource. For example, sharing a parent folder
 	// (the direct activity) shares all of the subfolders and documents within the
 	// parent folder (the indirect activity).
-	IncludeIndirectActivities *bool
+	IncludeIndirectActivities bool
 
 	// The maximum number of items to return.
 	Limit *int32
@@ -77,7 +77,7 @@ type DescribeActivitiesOutput struct {
 	Marker *string
 
 	// The list of activities for the specified user and time period.
-	UserActivities []*types.Activity
+	UserActivities []types.Activity
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

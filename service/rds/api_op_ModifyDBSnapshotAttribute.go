@@ -62,7 +62,7 @@ type ModifyDBSnapshotAttributeInput struct {
 	// the manual DB snapshot restorable by any AWS account. Do not add the all value
 	// for any manual DB snapshots that contain private information that you don't want
 	// available to all AWS accounts.
-	ValuesToAdd []*string
+	ValuesToAdd []string
 
 	// A list of DB snapshot attributes to remove from the attribute specified by
 	// AttributeName. To remove authorization for other AWS accounts to copy or restore
@@ -70,7 +70,7 @@ type ModifyDBSnapshotAttributeInput struct {
 	// or all to remove authorization for any AWS account to copy or restore the DB
 	// snapshot. If you specify all, an AWS account whose account ID is explicitly
 	// added to the restore attribute can still copy or restore the manual DB snapshot.
-	ValuesToRemove []*string
+	ValuesToRemove []string
 }
 
 type ModifyDBSnapshotAttributeOutput struct {

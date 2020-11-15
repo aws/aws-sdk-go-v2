@@ -114,7 +114,7 @@ type CreateTargetGroupInput struct {
 	ProtocolVersion *string
 
 	// The tags to assign to the target group.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The type of target that you must specify when registering targets with this
 	// target group. You can't specify targets for a target group using more than one
@@ -147,7 +147,7 @@ type CreateTargetGroupInput struct {
 type CreateTargetGroupOutput struct {
 
 	// Information about the target group.
-	TargetGroups []*types.TargetGroup
+	TargetGroups []types.TargetGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

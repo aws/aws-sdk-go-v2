@@ -43,14 +43,14 @@ type ApplySecurityGroupsToLoadBalancerInput struct {
 	// you cannot specify the name of the security group.
 	//
 	// This member is required.
-	SecurityGroups []*string
+	SecurityGroups []string
 }
 
 // Contains the output of ApplySecurityGroupsToLoadBalancer.
 type ApplySecurityGroupsToLoadBalancerOutput struct {
 
 	// The IDs of the security groups associated with the load balancer.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

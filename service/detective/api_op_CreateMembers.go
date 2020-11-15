@@ -48,7 +48,7 @@ type CreateMembersInput struct {
 	// identifier and the AWS account root user email address.
 	//
 	// This member is required.
-	Accounts []*types.Account
+	Accounts []types.Account
 
 	// The ARN of the behavior graph to invite the member accounts to contribute their
 	// data to.
@@ -66,13 +66,13 @@ type CreateMembersOutput struct {
 	// The set of member account invitation requests that Detective was able to
 	// process. This includes accounts that are being verified, that failed
 	// verification, and that passed verification and are being sent an invitation.
-	Members []*types.MemberDetail
+	Members []types.MemberDetail
 
 	// The list of accounts for which Detective was unable to process the invitation
 	// request. For each account, the list provides the reason why the request could
 	// not be processed. The list includes accounts that are already member accounts in
 	// the behavior graph.
-	UnprocessedAccounts []*types.UnprocessedAccount
+	UnprocessedAccounts []types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

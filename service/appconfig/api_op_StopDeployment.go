@@ -39,7 +39,7 @@ type StopDeploymentInput struct {
 	// The sequence number of the deployment.
 	//
 	// This member is required.
-	DeploymentNumber *int32
+	DeploymentNumber int32
 
 	// The environment ID.
 	//
@@ -68,10 +68,10 @@ type StopDeploymentOutput struct {
 	ConfigurationVersion *string
 
 	// Total amount of time the deployment lasted.
-	DeploymentDurationInMinutes *int32
+	DeploymentDurationInMinutes int32
 
 	// The sequence number of the deployment.
-	DeploymentNumber *int32
+	DeploymentNumber int32
 
 	// The ID of the deployment strategy that was deployed.
 	DeploymentStrategyId *string
@@ -84,21 +84,21 @@ type StopDeploymentOutput struct {
 
 	// A list containing all events related to a deployment. The most recent events are
 	// displayed first.
-	EventLog []*types.DeploymentEvent
+	EventLog []types.DeploymentEvent
 
 	// The amount of time AppConfig monitored for alarms before considering the
 	// deployment to be complete and no longer eligible for automatic roll back.
-	FinalBakeTimeInMinutes *int32
+	FinalBakeTimeInMinutes int32
 
 	// The percentage of targets to receive a deployed configuration during each
 	// interval.
-	GrowthFactor *float32
+	GrowthFactor float32
 
 	// The algorithm used to define how percentage grew over time.
 	GrowthType types.GrowthType
 
 	// The percentage of targets for which the deployment is available.
-	PercentageComplete *float32
+	PercentageComplete float32
 
 	// The time the deployment started.
 	StartedAt *time.Time

@@ -50,7 +50,7 @@ type ListDeviceEventsInput struct {
 
 	// The maximum number of results to return per request. If not set, a default value
 	// of 100 is used.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token to retrieve the next set of results.
 	NextToken *string
@@ -60,7 +60,7 @@ type ListDeviceEventsOutput struct {
 
 	// An array of zero or more elements describing the event(s) associated with the
 	// device.
-	Events []*types.DeviceEvent
+	Events []types.DeviceEvent
 
 	// The token to retrieve the next set of results.
 	NextToken *string

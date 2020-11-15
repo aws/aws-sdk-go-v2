@@ -68,7 +68,7 @@ type ListRoutesOutput struct {
 	// The list of existing routes for the specified service mesh and virtual router.
 	//
 	// This member is required.
-	Routes []*types.RouteRef
+	Routes []types.RouteRef
 
 	// The nextToken value to include in a future ListRoutes request. When the results
 	// of a ListRoutes request exceed limit, you can use this value to retrieve the

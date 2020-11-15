@@ -35,7 +35,7 @@ type ListSimulationJobsInput struct {
 	// filtering, you must use the complete value of the filtered item. You can use up
 	// to three filters, but they must be for the same named item. For example, if you
 	// are looking for items with the status Preparing or the status Running.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// When this parameter is used, ListSimulationJobs only returns maxResults results
 	// in a single page along with a nextToken response element. The remaining results
@@ -58,7 +58,7 @@ type ListSimulationJobsOutput struct {
 	// A list of simulation job summaries that meet the criteria of the request.
 	//
 	// This member is required.
-	SimulationJobSummaries []*types.SimulationJobSummary
+	SimulationJobSummaries []types.SimulationJobSummary
 
 	// If the previous paginated request did not return all of the remaining results,
 	// the response object's nextToken parameter value is set to a token. To retrieve

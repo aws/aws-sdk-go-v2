@@ -31,7 +31,7 @@ func (c *Client) ListProjects(ctx context.Context, params *ListProjectsInput, op
 type ListProjectsInput struct {
 
 	// Maximum number of records to list in a single response.
-	MaxResults *int32
+	MaxResults int32
 
 	// Pagination token. Set to null to start listing projects from start. If non-null
 	// pagination token is returned in a result, then pass its value in here in another
@@ -48,7 +48,7 @@ type ListProjectsOutput struct {
 	NextToken *string
 
 	// List of projects.
-	Projects []*types.ProjectSummary
+	Projects []types.ProjectSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

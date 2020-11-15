@@ -77,7 +77,7 @@ type CreateLoadBalancerInput struct {
 
 	// [Application Load Balancers] The IDs of the security groups for the load
 	// balancer.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// The IDs of the public subnets. You can specify only one subnet per Availability
 	// Zone. You must specify either subnets or subnet mappings. [Application Load
@@ -90,7 +90,7 @@ type CreateLoadBalancerInput struct {
 	// addresses for your internet-facing load balancer. For internal load balancers,
 	// you can specify one private IP address per subnet from the IPv4 range of the
 	// subnet.
-	SubnetMappings []*types.SubnetMapping
+	SubnetMappings []types.SubnetMapping
 
 	// The IDs of the public subnets. You can specify only one subnet per Availability
 	// Zone. You must specify either subnets or subnet mappings. [Application Load
@@ -99,10 +99,10 @@ type CreateLoadBalancerInput struct {
 	// [Application Load Balancers on Local Zones] You can specify subnets from one or
 	// more Local Zones. [Network Load Balancers] You can specify subnets from one or
 	// more Availability Zones.
-	Subnets []*string
+	Subnets []string
 
 	// The tags to assign to the load balancer.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The type of load balancer. The default is application.
 	Type types.LoadBalancerTypeEnum
@@ -111,7 +111,7 @@ type CreateLoadBalancerInput struct {
 type CreateLoadBalancerOutput struct {
 
 	// Information about the load balancer.
-	LoadBalancers []*types.LoadBalancer
+	LoadBalancers []types.LoadBalancer
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

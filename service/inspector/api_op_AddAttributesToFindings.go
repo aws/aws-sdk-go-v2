@@ -33,12 +33,12 @@ type AddAttributesToFindingsInput struct {
 	// The array of attributes that you want to assign to specified findings.
 	//
 	// This member is required.
-	Attributes []*types.Attribute
+	Attributes []types.Attribute
 
 	// The ARNs that specify the findings that you want to assign attributes to.
 	//
 	// This member is required.
-	FindingArns []*string
+	FindingArns []string
 }
 
 type AddAttributesToFindingsOutput struct {
@@ -47,7 +47,7 @@ type AddAttributesToFindingsOutput struct {
 	// failed item.
 	//
 	// This member is required.
-	FailedItems map[string]*types.FailedItemDetails
+	FailedItems map[string]types.FailedItemDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

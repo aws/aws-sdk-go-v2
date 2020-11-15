@@ -55,7 +55,7 @@ type SuggestInput struct {
 	Suggester *string
 
 	// Specifies the maximum number of suggestions to return.
-	Size *int64
+	Size int64
 }
 
 // Contains the response to a Suggest request.

@@ -41,7 +41,7 @@ type TagResourceInput struct {
 	// maximum length of 256 characters.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagResourceOutput struct {

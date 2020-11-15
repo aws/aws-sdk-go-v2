@@ -35,7 +35,7 @@ type UntagUserInput struct {
 	// are removed from the specified user.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 
 	// The name of the IAM user from which you want to remove tags. This parameter
 	// accepts (through its regex pattern (http://wikipedia.org/wiki/regex)) a string

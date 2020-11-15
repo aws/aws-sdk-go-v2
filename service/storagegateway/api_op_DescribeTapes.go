@@ -52,7 +52,7 @@ type DescribeTapesInput struct {
 	// virtual tapes you want to describe. If this parameter is not specified, Tape
 	// gateway returns a description of all virtual tapes associated with the specified
 	// gateway.
-	TapeARNs []*string
+	TapeARNs []string
 }
 
 // DescribeTapesOutput
@@ -64,7 +64,7 @@ type DescribeTapesOutput struct {
 	Marker *string
 
 	// An array of virtual tape descriptions.
-	Tapes []*types.Tape
+	Tapes []types.Tape
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

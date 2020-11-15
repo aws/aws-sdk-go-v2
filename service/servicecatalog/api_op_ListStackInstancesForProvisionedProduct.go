@@ -46,7 +46,7 @@ type ListStackInstancesForProvisionedProductInput struct {
 	AcceptLanguage *string
 
 	// The maximum number of items to return with this call.
-	PageSize *int32
+	PageSize int32
 
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
@@ -60,7 +60,7 @@ type ListStackInstancesForProvisionedProductOutput struct {
 	NextPageToken *string
 
 	// List of stack instances.
-	StackInstances []*types.StackInstance
+	StackInstances []types.StackInstance
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

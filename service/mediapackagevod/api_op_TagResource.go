@@ -37,7 +37,7 @@ type TagResourceInput struct {
 	// A collection of tags associated with a resource
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourceOutput struct {

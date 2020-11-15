@@ -60,7 +60,7 @@ type CreatePlatformApplicationInput struct {
 	// (https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html)
 	//
 	// This member is required.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// Application names must be made up of only uppercase and lowercase ASCII letters,
 	// numbers, underscores, hyphens, and periods, and must be between 1 and 256

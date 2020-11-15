@@ -51,7 +51,7 @@ type ListGroupResourcesInput struct {
 	// This validation doesn't occur when the group query specifies AWS::AllSupported,
 	// because a group based on such a query can contain any of the allowed resource
 	// types for the query type (tag-based or AWS CloudFormation stack-based queries).
-	Filters []*types.ResourceFilter
+	Filters []types.ResourceFilter
 
 	// The name or the ARN of the resource group
 	Group *string
@@ -88,11 +88,11 @@ type ListGroupResourcesOutput struct {
 	// A list of QueryError objects. Each error is an object that contains ErrorCode
 	// and Message structures. Possible values for ErrorCode are
 	// CLOUDFORMATION_STACK_INACTIVE and CLOUDFORMATION_STACK_NOT_EXISTING.
-	QueryErrors []*types.QueryError
+	QueryErrors []types.QueryError
 
 	// The ARNs and resource types of resources that are members of the group that you
 	// specified.
-	ResourceIdentifiers []*types.ResourceIdentifier
+	ResourceIdentifiers []types.ResourceIdentifier
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

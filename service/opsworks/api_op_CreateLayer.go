@@ -70,7 +70,7 @@ type CreateLayerInput struct {
 
 	// One or more user-defined key-value pairs to be added to the stack attributes. To
 	// create a cluster layer, set the EcsClusterArn attribute to the cluster's ARN.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// Whether to automatically assign an Elastic IP address
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
@@ -104,7 +104,7 @@ type CreateLayerInput struct {
 	CustomRecipes *types.Recipes
 
 	// An array containing the layer custom security group IDs.
-	CustomSecurityGroupIds []*string
+	CustomSecurityGroupIds []string
 
 	// Whether to disable auto healing for the layer.
 	EnableAutoHealing *bool
@@ -124,13 +124,13 @@ type CreateLayerInput struct {
 	LifecycleEventConfiguration *types.LifecycleEventConfiguration
 
 	// An array of Package objects that describes the layer packages.
-	Packages []*string
+	Packages []string
 
 	// Whether to use Amazon EBS-optimized instances.
 	UseEbsOptimizedInstances *bool
 
 	// A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
-	VolumeConfigurations []*types.VolumeConfiguration
+	VolumeConfigurations []types.VolumeConfiguration
 }
 
 // Contains the response to a CreateLayer request.

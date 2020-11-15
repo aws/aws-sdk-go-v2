@@ -83,7 +83,7 @@ type GetLabelDetectionOutput struct {
 	// An array of labels detected in the video. Each element contains the detected
 	// label and the time, in milliseconds from the start of the video, that the label
 	// was detected.
-	Labels []*types.LabelDetection
+	Labels []types.LabelDetection
 
 	// If the response is truncated, Amazon Rekognition Video returns this token that
 	// you can use in the subsequent request to retrieve the next set of labels.

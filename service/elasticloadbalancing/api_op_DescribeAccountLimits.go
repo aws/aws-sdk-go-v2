@@ -43,7 +43,7 @@ type DescribeAccountLimitsInput struct {
 type DescribeAccountLimitsOutput struct {
 
 	// Information about the limits.
-	Limits []*types.Limit
+	Limits []types.Limit
 
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.

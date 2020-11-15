@@ -45,7 +45,7 @@ type AttachLoadBalancersInput struct {
 	// The names of the load balancers. You can specify up to 10 load balancers.
 	//
 	// This member is required.
-	LoadBalancerNames []*string
+	LoadBalancerNames []string
 }
 
 type AttachLoadBalancersOutput struct {

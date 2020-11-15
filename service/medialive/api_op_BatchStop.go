@@ -31,20 +31,20 @@ func (c *Client) BatchStop(ctx context.Context, params *BatchStopInput, optFns .
 type BatchStopInput struct {
 
 	// List of channel IDs
-	ChannelIds []*string
+	ChannelIds []string
 
 	// List of multiplex IDs
-	MultiplexIds []*string
+	MultiplexIds []string
 }
 
 // Placeholder documentation for BatchStopResponse
 type BatchStopOutput struct {
 
 	// List of failed operations
-	Failed []*types.BatchFailedResultModel
+	Failed []types.BatchFailedResultModel
 
 	// List of successful operations
-	Successful []*types.BatchSuccessfulResultModel
+	Successful []types.BatchSuccessfulResultModel
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

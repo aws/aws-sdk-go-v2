@@ -148,7 +148,7 @@ type CreateCacheClusterInput struct {
 	// A list of security group names to associate with this cluster. Use this
 	// parameter only when you are creating a cluster outside of an Amazon Virtual
 	// Private Cloud (Amazon VPC).
-	CacheSecurityGroupNames []*string
+	CacheSecurityGroupNames []string
 
 	// The name of the subnet group to be used for the cluster. Use this parameter only
 	// when you are creating a cluster in an Amazon Virtual Private Cloud (Amazon VPC).
@@ -206,7 +206,7 @@ type CreateCacheClusterInput struct {
 	// the value of NumCacheNodes. If you want all the nodes in the same Availability
 	// Zone, use PreferredAvailabilityZone instead, or repeat the Availability Zone
 	// multiple times in the list. Default: System chosen Availability Zones.
-	PreferredAvailabilityZones []*string
+	PreferredAvailabilityZones []string
 
 	// Specifies the weekly time range during which maintenance on the cluster is
 	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
@@ -238,7 +238,7 @@ type CreateCacheClusterInput struct {
 	PreferredOutpostArn *string
 
 	// The outpost ARNs in which the cache cluster is created.
-	PreferredOutpostArns []*string
+	PreferredOutpostArns []string
 
 	// The ID of the replication group to which this cluster should belong. If this
 	// parameter is specified, the cluster is added to the specified replication group
@@ -253,7 +253,7 @@ type CreateCacheClusterInput struct {
 	// One or more VPC security groups associated with the cluster. Use this parameter
 	// only when you are creating a cluster in an Amazon Virtual Private Cloud (Amazon
 	// VPC).
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// A single-element string list containing an Amazon Resource Name (ARN) that
 	// uniquely identifies a Redis RDB snapshot file stored in Amazon S3. The snapshot
@@ -261,7 +261,7 @@ type CreateCacheClusterInput struct {
 	// the ARN cannot contain any commas. This parameter is only valid if the Engine
 	// parameter is redis. Example of an Amazon S3 ARN:
 	// arn:aws:s3:::my_bucket/snapshot1.rdb
-	SnapshotArns []*string
+	SnapshotArns []string
 
 	// The name of a Redis snapshot from which to restore data into the new node group
 	// (shard). The snapshot status changes to restoring while the new node group
@@ -283,7 +283,7 @@ type CreateCacheClusterInput struct {
 	SnapshotWindow *string
 
 	// A list of cost allocation tags to be added to this resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateCacheClusterOutput struct {

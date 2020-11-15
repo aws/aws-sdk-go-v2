@@ -53,7 +53,7 @@ type ListPoliciesOutput struct {
 	NextToken *string
 
 	// An array of PolicySummary objects.
-	PolicyList []*types.PolicySummary
+	PolicyList []types.PolicySummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -49,7 +49,7 @@ type ListSubscribedWorkteamsOutput struct {
 	// An array of Workteam objects, each describing a work team.
 	//
 	// This member is required.
-	SubscribedWorkteams []*types.SubscribedWorkteam
+	SubscribedWorkteams []types.SubscribedWorkteam
 
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
 	// the next set of work teams, use it in the subsequent request.

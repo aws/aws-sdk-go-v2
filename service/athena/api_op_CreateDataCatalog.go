@@ -68,10 +68,10 @@ type CreateDataCatalogInput struct {
 	// Lambda function. function=lambda_arn
 	//
 	// * The GLUE type has no parameters.
-	Parameters map[string]*string
+	Parameters map[string]string
 
 	// A list of comma separated tags to add to the data catalog that is created.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDataCatalogOutput struct {

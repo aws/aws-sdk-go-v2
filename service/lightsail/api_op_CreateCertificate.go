@@ -50,11 +50,11 @@ type CreateCertificateInput struct {
 	// subdomains (e.g., blog.example.com) for the certificate. You can specify a
 	// maximum of nine alternate domains (in addition to the primary domain name).
 	// Wildcard domain entries (e.g., *.example.com) are not supported.
-	SubjectAlternativeNames []*string
+	SubjectAlternativeNames []string
 
 	// The tag keys and optional values to add to the certificate during create. Use
 	// the TagResource action to tag a resource after it's created.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateCertificateOutput struct {
@@ -65,7 +65,7 @@ type CreateCertificateOutput struct {
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.
-	Operations []*types.Operation
+	Operations []types.Operation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

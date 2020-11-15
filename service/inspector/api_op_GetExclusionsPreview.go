@@ -65,7 +65,7 @@ type GetExclusionsPreviewOutput struct {
 	PreviewStatus types.PreviewStatus
 
 	// Information about the exclusions included in the preview.
-	ExclusionPreviews []*types.ExclusionPreview
+	ExclusionPreviews []types.ExclusionPreview
 
 	// When a response is generated, if there is more data to be listed, this
 	// parameters is present in the response and contains the value to use for the

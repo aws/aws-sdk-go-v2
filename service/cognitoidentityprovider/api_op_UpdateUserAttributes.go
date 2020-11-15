@@ -38,7 +38,7 @@ type UpdateUserAttributesInput struct {
 	// attributes, you must prepend the custom: prefix to the attribute name.
 	//
 	// This member is required.
-	UserAttributes []*types.AttributeType
+	UserAttributes []types.AttributeType
 
 	// A map of custom key-value pairs that you can provide as input for any custom
 	// workflows that this action triggers. You create custom workflows by assigning
@@ -66,7 +66,7 @@ type UpdateUserAttributesInput struct {
 	//
 	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
 	// use it to provide sensitive information.
-	ClientMetadata map[string]*string
+	ClientMetadata map[string]string
 }
 
 // Represents the response from the server for the request to update user
@@ -75,7 +75,7 @@ type UpdateUserAttributesOutput struct {
 
 	// The code delivery details list from the server for the request to update user
 	// attributes.
-	CodeDeliveryDetailsList []*types.CodeDeliveryDetailsType
+	CodeDeliveryDetailsList []types.CodeDeliveryDetailsType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

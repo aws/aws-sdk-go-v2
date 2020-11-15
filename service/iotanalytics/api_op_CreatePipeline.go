@@ -42,7 +42,7 @@ type CreatePipelineInput struct {
 	// "lambda": { ... } }, ... ]
 	//
 	// This member is required.
-	PipelineActivities []*types.PipelineActivity
+	PipelineActivities []types.PipelineActivity
 
 	// The name of the pipeline.
 	//
@@ -50,7 +50,7 @@ type CreatePipelineInput struct {
 	PipelineName *string
 
 	// Metadata which can be used to manage the pipeline.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreatePipelineOutput struct {

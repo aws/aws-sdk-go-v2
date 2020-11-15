@@ -36,7 +36,7 @@ type GetCompatibleKafkaVersionsInput struct {
 type GetCompatibleKafkaVersionsOutput struct {
 
 	// A list of CompatibleKafkaVersion objects.
-	CompatibleKafkaVersions []*types.CompatibleKafkaVersion
+	CompatibleKafkaVersions []types.CompatibleKafkaVersion
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

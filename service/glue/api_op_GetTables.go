@@ -56,7 +56,7 @@ type GetTablesOutput struct {
 	NextToken *string
 
 	// A list of the requested Table objects.
-	TableList []*types.Table
+	TableList []types.Table
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -50,7 +50,7 @@ type CreateDynamicThingGroupInput struct {
 	QueryVersion *string
 
 	// Metadata which can be used to manage the dynamic thing group.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The dynamic thing group properties.
 	ThingGroupProperties *types.ThingGroupProperties

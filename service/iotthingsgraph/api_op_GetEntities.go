@@ -57,7 +57,7 @@ type GetEntitiesInput struct {
 	// urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME
 	//
 	// This member is required.
-	Ids []*string
+	Ids []string
 
 	// The version of the user's namespace. Defaults to the latest version of the
 	// user's namespace.
@@ -67,7 +67,7 @@ type GetEntitiesInput struct {
 type GetEntitiesOutput struct {
 
 	// An array of descriptions for the specified entities.
-	Descriptions []*types.EntityDescription
+	Descriptions []types.EntityDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

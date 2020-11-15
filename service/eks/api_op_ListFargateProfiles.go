@@ -54,7 +54,7 @@ type ListFargateProfilesInput struct {
 type ListFargateProfilesOutput struct {
 
 	// A list of all of the Fargate profiles associated with the specified cluster.
-	FargateProfileNames []*string
+	FargateProfileNames []string
 
 	// The nextToken value to include in a future ListFargateProfiles request. When the
 	// results of a ListFargateProfiles request exceed maxResults, you can use this

@@ -46,7 +46,7 @@ type GetCelebrityInfoOutput struct {
 	Name *string
 
 	// An array of URLs pointing to additional celebrity information.
-	Urls []*string
+	Urls []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

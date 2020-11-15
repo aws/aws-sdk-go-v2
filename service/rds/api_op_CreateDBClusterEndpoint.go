@@ -50,13 +50,13 @@ type CreateDBClusterEndpointInput struct {
 	// List of DB instance identifiers that aren't part of the custom endpoint group.
 	// All other eligible instances are reachable through the custom endpoint. Only
 	// relevant if the list of static members is empty.
-	ExcludedMembers []*string
+	ExcludedMembers []string
 
 	// List of DB instance identifiers that are part of the custom endpoint group.
-	StaticMembers []*string
+	StaticMembers []string
 
 	// The tags to be assigned to the Amazon RDS resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // This data type represents the information you need to connect to an Amazon
@@ -103,10 +103,10 @@ type CreateDBClusterEndpointOutput struct {
 	// List of DB instance identifiers that aren't part of the custom endpoint group.
 	// All other eligible instances are reachable through the custom endpoint. Only
 	// relevant if the list of static members is empty.
-	ExcludedMembers []*string
+	ExcludedMembers []string
 
 	// List of DB instance identifiers that are part of the custom endpoint group.
-	StaticMembers []*string
+	StaticMembers []string
 
 	// The current status of the endpoint. One of: creating, available, deleting,
 	// inactive, modifying. The inactive state applies to an endpoint that can't be

@@ -33,7 +33,7 @@ type ListDiscoverersInput struct {
 	// the specified prefix.
 	DiscovererIdPrefix *string
 
-	Limit *int32
+	Limit int32
 
 	// The token that specifies the next page of results to return. To request the
 	// first page, leave NextToken empty. The token will expire in 24 hours, and cannot
@@ -48,7 +48,7 @@ type ListDiscoverersInput struct {
 type ListDiscoverersOutput struct {
 
 	// An array of DiscovererSummary information.
-	Discoverers []*types.DiscovererSummary
+	Discoverers []types.DiscovererSummary
 
 	// The token that specifies the next page of results to return. To request the
 	// first page, leave NextToken empty. The token will expire in 24 hours, and cannot

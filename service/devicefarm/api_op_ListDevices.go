@@ -106,7 +106,7 @@ type ListDevicesInput struct {
 	//
 	// * In a request, the AVAILABILITY attribute takes the following values:
 	// AVAILABLE, HIGHLY_AVAILABLE, BUSY, or TEMPORARY_NOT_AVAILABLE.
-	Filters []*types.DeviceFilter
+	Filters []types.DeviceFilter
 
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
@@ -117,7 +117,7 @@ type ListDevicesInput struct {
 type ListDevicesOutput struct {
 
 	// Information about the devices.
-	Devices []*types.Device
+	Devices []types.Device
 
 	// If the number of items that are returned is significantly large, this is an
 	// identifier that is also returned. It can be used in a subsequent call to this

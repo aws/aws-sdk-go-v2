@@ -46,7 +46,7 @@ type ListLaunchPathsInput struct {
 	AcceptLanguage *string
 
 	// The maximum number of items to return with this call.
-	PageSize *int32
+	PageSize int32
 
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
@@ -56,7 +56,7 @@ type ListLaunchPathsInput struct {
 type ListLaunchPathsOutput struct {
 
 	// Information about the launch path.
-	LaunchPathSummaries []*types.LaunchPathSummary
+	LaunchPathSummaries []types.LaunchPathSummary
 
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.

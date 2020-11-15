@@ -44,7 +44,7 @@ type UpdateServiceActionInput struct {
 	AcceptLanguage *string
 
 	// A map that defines the self-service action.
-	Definition map[string]*string
+	Definition map[string]string
 
 	// The self-service action description.
 	Description *string

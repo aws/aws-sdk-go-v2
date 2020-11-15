@@ -66,7 +66,7 @@ type StartReplicationTaskAssessmentRunInput struct {
 	// individual assessments that AWS DMS supports for the associated migration task,
 	// run the DescribeApplicableIndividualAssessments operation using its own
 	// ReplicationTaskArn request parameter.
-	Exclude []*string
+	Exclude []string
 
 	// Space-separated list of names for specific individual assessments that you want
 	// to include. These names come from the default list of individual assessments
@@ -76,7 +76,7 @@ type StartReplicationTaskAssessmentRunInput struct {
 	// individual assessments that AWS DMS supports for the associated migration task,
 	// run the DescribeApplicableIndividualAssessments operation using its own
 	// ReplicationTaskArn request parameter.
-	IncludeOnly []*string
+	IncludeOnly []string
 
 	// Encryption mode that you can specify to encrypt the results of this assessment
 	// run. If you don't specify this request parameter, AWS DMS stores the assessment

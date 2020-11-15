@@ -35,7 +35,7 @@ type ModifyLoadBalancerAttributesInput struct {
 	// The load balancer attributes.
 	//
 	// This member is required.
-	Attributes []*types.LoadBalancerAttribute
+	Attributes []types.LoadBalancerAttribute
 
 	// The Amazon Resource Name (ARN) of the load balancer.
 	//
@@ -46,7 +46,7 @@ type ModifyLoadBalancerAttributesInput struct {
 type ModifyLoadBalancerAttributesOutput struct {
 
 	// Information about the load balancer attributes.
-	Attributes []*types.LoadBalancerAttribute
+	Attributes []types.LoadBalancerAttribute
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

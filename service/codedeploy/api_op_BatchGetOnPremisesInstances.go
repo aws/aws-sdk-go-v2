@@ -35,14 +35,14 @@ type BatchGetOnPremisesInstancesInput struct {
 	// maximum number of instance names you can specify is 25.
 	//
 	// This member is required.
-	InstanceNames []*string
+	InstanceNames []string
 }
 
 // Represents the output of a BatchGetOnPremisesInstances operation.
 type BatchGetOnPremisesInstancesOutput struct {
 
 	// Information about the on-premises instances.
-	InstanceInfos []*types.InstanceInfo
+	InstanceInfos []types.InstanceInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -99,11 +99,11 @@ type CreateIntentVersionOutput struct {
 	RejectionStatement *types.Statement
 
 	// An array of sample utterances configured for the intent.
-	SampleUtterances []*string
+	SampleUtterances []string
 
 	// An array of slot types that defines the information required to fulfill the
 	// intent.
-	Slots []*types.Slot
+	Slots []types.Slot
 
 	// The version number assigned to the new version of the intent.
 	Version *string

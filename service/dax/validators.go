@@ -425,9 +425,6 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 			invalidParams.AddNested("SSESpecification", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ReplicationFactor == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicationFactor"))
-	}
 	if v.IamRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
 	}
@@ -476,9 +473,6 @@ func validateOpDecreaseReplicationFactorInput(v *DecreaseReplicationFactorInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DecreaseReplicationFactorInput"}
-	if v.NewReplicationFactor == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NewReplicationFactor"))
-	}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
 	}
@@ -556,9 +550,6 @@ func validateOpIncreaseReplicationFactorInput(v *IncreaseReplicationFactorInput)
 	invalidParams := smithy.InvalidParamsError{Context: "IncreaseReplicationFactorInput"}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
-	}
-	if v.NewReplicationFactor == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NewReplicationFactor"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

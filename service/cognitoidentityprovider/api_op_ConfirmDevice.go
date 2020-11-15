@@ -53,7 +53,7 @@ type ConfirmDeviceOutput struct {
 
 	// Indicates whether the user confirmation is necessary to confirm the device
 	// response.
-	UserConfirmationNecessary *bool
+	UserConfirmationNecessary bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

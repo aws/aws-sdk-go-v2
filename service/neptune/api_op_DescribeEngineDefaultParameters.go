@@ -36,7 +36,7 @@ type DescribeEngineDefaultParametersInput struct {
 	DBParameterGroupFamily *string
 
 	// Not currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous
 	// DescribeEngineDefaultParameters request. If this parameter is specified, the

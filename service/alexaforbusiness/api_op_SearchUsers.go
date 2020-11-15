@@ -31,7 +31,7 @@ type SearchUsersInput struct {
 
 	// The filters to use for listing a specific set of users. Required. Supported
 	// filter keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so that
@@ -46,7 +46,7 @@ type SearchUsersInput struct {
 
 	// The sort order to use in listing the filtered set of users. Required. Supported
 	// sort keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.
-	SortCriteria []*types.Sort
+	SortCriteria []types.Sort
 }
 
 type SearchUsersOutput struct {
@@ -58,7 +58,7 @@ type SearchUsersOutput struct {
 	TotalCount *int32
 
 	// The users that meet the specified set of filter criteria, in sort order.
-	Users []*types.UserData
+	Users []types.UserData
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

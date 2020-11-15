@@ -48,7 +48,7 @@ type GetRecommendationsInput struct {
 	// The contextual metadata to use when getting recommendations. Contextual metadata
 	// includes any interaction information that might be relevant when getting a
 	// user's recommendations, such as the user's current location or device type.
-	Context map[string]*string
+	Context map[string]string
 
 	// The ARN of the filter to apply to the returned recommendations. For more
 	// information, see Using Filters with Amazon Personalize
@@ -61,7 +61,7 @@ type GetRecommendationsInput struct {
 	ItemId *string
 
 	// The number of results to return. The default is 25. The maximum is 500.
-	NumResults *int32
+	NumResults int32
 
 	// The user ID to provide recommendations for. Required for USER_PERSONALIZATION
 	// recipe type.
@@ -72,7 +72,7 @@ type GetRecommendationsOutput struct {
 
 	// A list of recommendations sorted in ascending order by prediction score. There
 	// can be a maximum of 500 items in the list.
-	ItemList []*types.PredictedItem
+	ItemList []types.PredictedItem
 
 	// The ID of the recommendation.
 	RecommendationId *string

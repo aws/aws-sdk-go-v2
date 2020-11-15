@@ -35,7 +35,7 @@ type CreateTagsInput struct {
 	ResourceArn *string
 
 	// Placeholder documentation for Tags
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateTagsOutput struct {

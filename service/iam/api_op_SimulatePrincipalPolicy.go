@@ -53,7 +53,7 @@ type SimulatePrincipalPolicyInput struct {
 	// identifier, such as iam:CreateUser.
 	//
 	// This member is required.
-	ActionNames []*string
+	ActionNames []string
 
 	// The Amazon Resource Name (ARN) of a user, group, or role whose policies you want
 	// to include in the simulation. If you specify a user, group, or role, the
@@ -87,7 +87,7 @@ type SimulatePrincipalPolicyInput struct {
 	// A list of context keys and corresponding values for the simulation to use.
 	// Whenever a context key is evaluated in one of the simulated IAM permissions
 	// policies, the corresponding value is supplied.
-	ContextEntries []*types.ContextEntry
+	ContextEntries []types.ContextEntry
 
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
@@ -127,7 +127,7 @@ type SimulatePrincipalPolicyInput struct {
 	//
 	// * The special characters tab (\u0009), line feed
 	// (\u000A), and carriage return (\u000D)
-	PermissionsBoundaryPolicyInputList []*string
+	PermissionsBoundaryPolicyInputList []string
 
 	// An optional list of additional policy documents to include in the simulation.
 	// Each document is specified as a string containing the complete, valid JSON text
@@ -144,7 +144,7 @@ type SimulatePrincipalPolicyInput struct {
 	//
 	// * The special characters tab (\u0009), line feed (\u000A), and carriage
 	// return (\u000D)
-	PolicyInputList []*string
+	PolicyInputList []string
 
 	// A list of ARNs of AWS resources to include in the simulation. If this parameter
 	// is not provided, then the value defaults to * (all resources). Each API in the
@@ -157,7 +157,7 @@ type SimulatePrincipalPolicyInput struct {
 	// Names (ARNs) and AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
-	ResourceArns []*string
+	ResourceArns []string
 
 	// Specifies the type of simulation to run. Different API operations that support
 	// resource-based policies require different combinations of resources. By
@@ -228,7 +228,7 @@ type SimulatePrincipalPolicyInput struct {
 type SimulatePrincipalPolicyOutput struct {
 
 	// The results of the simulation.
-	EvaluationResults []*types.EvaluationResult
+	EvaluationResults []types.EvaluationResult
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
@@ -236,7 +236,7 @@ type SimulatePrincipalPolicyOutput struct {
 	// the MaxItems number of results even when there are more results available. We
 	// recommend that you check IsTruncated after every call to ensure that you receive
 	// all your results.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.

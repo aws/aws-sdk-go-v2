@@ -32,10 +32,10 @@ type GetInsightsInput struct {
 	// The ARNs of the insights to describe. If you do not provide any insight ARNs,
 	// then GetInsights returns all of your custom insights. It does not return any
 	// managed insights.
-	InsightArns []*string
+	InsightArns []string
 
 	// The maximum number of items to return in the response.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token that is required for pagination. On your first call to the GetInsights
 	// operation, set the value of this parameter to NULL. For subsequent calls to the
@@ -49,7 +49,7 @@ type GetInsightsOutput struct {
 	// The insights returned by the operation.
 	//
 	// This member is required.
-	Insights []*types.Insight
+	Insights []types.Insight
 
 	// The pagination token to use to request the next page of results.
 	NextToken *string

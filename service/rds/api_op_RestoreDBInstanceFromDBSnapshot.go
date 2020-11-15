@@ -145,7 +145,7 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// see Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon RDS User Guide.
-	EnableCloudwatchLogsExports []*string
+	EnableCloudwatchLogsExports []string
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
@@ -219,7 +219,7 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 
 	// The number of CPU cores and the number of threads per core for the DB instance
 	// class of the DB instance.
-	ProcessorFeatures []*types.ProcessorFeature
+	ProcessorFeatures []types.ProcessorFeature
 
 	// A value that indicates whether the DB instance is publicly accessible. When the
 	// DB instance is publicly accessible, its DNS endpoint resolves to the private IP
@@ -240,7 +240,7 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// A list of tags. For more information, see Tagging Amazon RDS Resources
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
 	// the Amazon RDS User Guide.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The ARN from the key store with which to associate the instance for TDE
 	// encryption.
@@ -255,7 +255,7 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 
 	// A list of EC2 VPC security groups to associate with this DB instance. Default:
 	// The default EC2 VPC security group for the DB subnet group's VPC.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 }
 
 type RestoreDBInstanceFromDBSnapshotOutput struct {

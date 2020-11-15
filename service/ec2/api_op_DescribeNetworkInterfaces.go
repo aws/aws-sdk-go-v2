@@ -34,7 +34,7 @@ type DescribeNetworkInterfacesInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
@@ -154,17 +154,17 @@ type DescribeNetworkInterfacesInput struct {
 	// value.
 	//
 	// * vpc-id - The ID of the VPC for the network interface.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of items to return for this request. The request returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	// You cannot specify this parameter and the network interface IDs parameter in the
 	// same request.
-	MaxResults *int32
+	MaxResults int32
 
 	// One or more network interface IDs. Default: Describes all your network
 	// interfaces.
-	NetworkInterfaceIds []*string
+	NetworkInterfaceIds []string
 
 	// The token to retrieve the next page of results.
 	NextToken *string
@@ -174,7 +174,7 @@ type DescribeNetworkInterfacesInput struct {
 type DescribeNetworkInterfacesOutput struct {
 
 	// Information about one or more network interfaces.
-	NetworkInterfaces []*types.NetworkInterface
+	NetworkInterfaces []types.NetworkInterface
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

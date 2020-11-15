@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -164,7 +165,7 @@ func awsRestjson1_deserializeOpDocumentGetPersonalizedRankingOutput(v **GetPerso
 				if !ok {
 					return fmt.Errorf("expected RecommendationID to be of type string, got %T instead", value)
 				}
-				sv.RecommendationId = &jtv
+				sv.RecommendationId = ptr.String(jtv)
 			}
 
 		default:
@@ -323,7 +324,7 @@ func awsRestjson1_deserializeOpDocumentGetRecommendationsOutput(v **GetRecommend
 				if !ok {
 					return fmt.Errorf("expected RecommendationID to be of type string, got %T instead", value)
 				}
-				sv.RecommendationId = &jtv
+				sv.RecommendationId = ptr.String(jtv)
 			}
 
 		default:
@@ -435,7 +436,7 @@ func awsRestjson1_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -447,7 +448,7 @@ func awsRestjson1_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentItemList(v *[]*types.PredictedItem, value interface{}) error {
+func awsRestjson1_deserializeDocumentItemList(v *[]types.PredictedItem, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -460,18 +461,20 @@ func awsRestjson1_deserializeDocumentItemList(v *[]*types.PredictedItem, value i
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.PredictedItem
+	var cv []types.PredictedItem
 	if *v == nil {
-		cv = []*types.PredictedItem{}
+		cv = []types.PredictedItem{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.PredictedItem
-		if err := awsRestjson1_deserializeDocumentPredictedItem(&col, value); err != nil {
+		var col types.PredictedItem
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentPredictedItem(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -507,7 +510,7 @@ func awsRestjson1_deserializeDocumentPredictedItem(v **types.PredictedItem, valu
 				if !ok {
 					return fmt.Errorf("expected ItemID to be of type string, got %T instead", value)
 				}
-				sv.ItemId = &jtv
+				sv.ItemId = ptr.String(jtv)
 			}
 
 		case "score":
@@ -520,7 +523,7 @@ func awsRestjson1_deserializeDocumentPredictedItem(v **types.PredictedItem, valu
 				if err != nil {
 					return err
 				}
-				sv.Score = &f64
+				sv.Score = ptr.Float64(f64)
 			}
 
 		default:
@@ -560,7 +563,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

@@ -37,7 +37,7 @@ type GetFindingsInput struct {
 	Filters *types.AwsSecurityFindingFilters
 
 	// The maximum number of findings to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token that is required for pagination. On your first call to the GetFindings
 	// operation, set the value of this parameter to NULL. For subsequent calls to the
@@ -46,7 +46,7 @@ type GetFindingsInput struct {
 	NextToken *string
 
 	// The finding attributes used to sort the list of returned findings.
-	SortCriteria []*types.SortCriterion
+	SortCriteria []types.SortCriterion
 }
 
 type GetFindingsOutput struct {
@@ -54,7 +54,7 @@ type GetFindingsOutput struct {
 	// The findings that matched the filters specified in the request.
 	//
 	// This member is required.
-	Findings []*types.AwsSecurityFinding
+	Findings []types.AwsSecurityFinding
 
 	// The pagination token to use to request the next page of results.
 	NextToken *string

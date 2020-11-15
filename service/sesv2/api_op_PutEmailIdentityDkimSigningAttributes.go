@@ -114,7 +114,7 @@ type PutEmailIdentityDkimSigningAttributesOutput struct {
 	// associated with your public key. Regardless of the DKIM authentication method
 	// you use, Amazon SES searches for the appropriate records in the DNS
 	// configuration of the domain for up to 72 hours.
-	DkimTokens []*string
+	DkimTokens []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

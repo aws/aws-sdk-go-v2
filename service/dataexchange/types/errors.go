@@ -86,7 +86,7 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 type ServiceLimitExceededException struct {
 	Message *string
 
-	LimitValue *float64
+	LimitValue float64
 	LimitName  LimitName
 }
 

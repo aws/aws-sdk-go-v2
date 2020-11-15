@@ -3555,32 +3555,24 @@ func (m *awsAwsjson11_serializeOpUpdateRepositoryName) HandleSerialize(ctx conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsjson11_serializeDocumentBranchNameList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentBranchNameList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCommitIdsInputList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentCommitIdsInputList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -3613,17 +3605,13 @@ func awsAwsjson11_serializeDocumentConflictResolution(v *types.ConflictResolutio
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteFileEntries(v []*types.DeleteFileEntry, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentDeleteFileEntries(v []types.DeleteFileEntry, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentDeleteFileEntry(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentDeleteFileEntry(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3642,17 +3630,13 @@ func awsAwsjson11_serializeDocumentDeleteFileEntry(v *types.DeleteFileEntry, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentFilePaths(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentFilePaths(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -3679,17 +3663,13 @@ func awsAwsjson11_serializeDocumentLocation(v *types.Location, value smithyjson.
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutFileEntries(v []*types.PutFileEntry, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentPutFileEntries(v []types.PutFileEntry, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentPutFileEntry(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentPutFileEntry(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3725,17 +3705,13 @@ func awsAwsjson11_serializeDocumentPutFileEntry(v *types.PutFileEntry, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentReplaceContentEntries(v []*types.ReplaceContentEntry, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentReplaceContentEntries(v []types.ReplaceContentEntry, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentReplaceContentEntry(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentReplaceContentEntry(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3769,17 +3745,13 @@ func awsAwsjson11_serializeDocumentReplaceContentEntry(v *types.ReplaceContentEn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRepositoryNameList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentRepositoryNameList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -3831,34 +3803,26 @@ func awsAwsjson11_serializeDocumentRepositoryTriggerEventList(v []types.Reposito
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRepositoryTriggersList(v []*types.RepositoryTrigger, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentRepositoryTriggersList(v []types.RepositoryTrigger, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentRepositoryTrigger(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentRepositoryTrigger(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSetFileModeEntries(v []*types.SetFileModeEntry, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentSetFileModeEntries(v []types.SetFileModeEntry, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentSetFileModeEntry(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentSetFileModeEntry(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3891,40 +3855,32 @@ func awsAwsjson11_serializeDocumentSourceFileSpecifier(v *types.SourceFileSpecif
 		ok.String(*v.FilePath)
 	}
 
-	if v.IsMove != nil {
+	if v.IsMove {
 		ok := object.Key("isMove")
-		ok.Boolean(*v.IsMove)
+		ok.Boolean(v.IsMove)
 	}
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagKeysList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagKeysList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagsMap(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagsMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -3951,17 +3907,13 @@ func awsAwsjson11_serializeDocumentTarget(v *types.Target, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTargetList(v []*types.Target, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTargetList(v []types.Target, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentTarget(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentTarget(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4190,9 +4142,9 @@ func awsAwsjson11_serializeOpDocumentCreateCommitInput(v *CreateCommitInput, val
 		ok.String(*v.Email)
 	}
 
-	if v.KeepEmptyFolders != nil {
+	if v.KeepEmptyFolders {
 		ok := object.Key("keepEmptyFolders")
-		ok.Boolean(*v.KeepEmptyFolders)
+		ok.Boolean(v.KeepEmptyFolders)
 	}
 
 	if v.ParentCommitId != nil {
@@ -4338,9 +4290,9 @@ func awsAwsjson11_serializeOpDocumentCreateUnreferencedMergeCommitInput(v *Creat
 		ok.String(*v.Email)
 	}
 
-	if v.KeepEmptyFolders != nil {
+	if v.KeepEmptyFolders {
 		ok := object.Key("keepEmptyFolders")
-		ok.Boolean(*v.KeepEmptyFolders)
+		ok.Boolean(v.KeepEmptyFolders)
 	}
 
 	if len(v.MergeOption) > 0 {
@@ -4426,9 +4378,9 @@ func awsAwsjson11_serializeOpDocumentDeleteFileInput(v *DeleteFileInput, value s
 		ok.String(*v.FilePath)
 	}
 
-	if v.KeepEmptyFolders != nil {
+	if v.KeepEmptyFolders {
 		ok := object.Key("keepEmptyFolders")
-		ok.Boolean(*v.KeepEmptyFolders)
+		ok.Boolean(v.KeepEmptyFolders)
 	}
 
 	if v.Name != nil {
@@ -5251,9 +5203,9 @@ func awsAwsjson11_serializeOpDocumentMergeBranchesBySquashInput(v *MergeBranches
 		ok.String(*v.Email)
 	}
 
-	if v.KeepEmptyFolders != nil {
+	if v.KeepEmptyFolders {
 		ok := object.Key("keepEmptyFolders")
-		ok.Boolean(*v.KeepEmptyFolders)
+		ok.Boolean(v.KeepEmptyFolders)
 	}
 
 	if v.RepositoryName != nil {
@@ -5315,9 +5267,9 @@ func awsAwsjson11_serializeOpDocumentMergeBranchesByThreeWayInput(v *MergeBranch
 		ok.String(*v.Email)
 	}
 
-	if v.KeepEmptyFolders != nil {
+	if v.KeepEmptyFolders {
 		ok := object.Key("keepEmptyFolders")
-		ok.Boolean(*v.KeepEmptyFolders)
+		ok.Boolean(v.KeepEmptyFolders)
 	}
 
 	if v.RepositoryName != nil {
@@ -5396,9 +5348,9 @@ func awsAwsjson11_serializeOpDocumentMergePullRequestBySquashInput(v *MergePullR
 		ok.String(*v.Email)
 	}
 
-	if v.KeepEmptyFolders != nil {
+	if v.KeepEmptyFolders {
 		ok := object.Key("keepEmptyFolders")
-		ok.Boolean(*v.KeepEmptyFolders)
+		ok.Boolean(v.KeepEmptyFolders)
 	}
 
 	if v.PullRequestId != nil {
@@ -5455,9 +5407,9 @@ func awsAwsjson11_serializeOpDocumentMergePullRequestByThreeWayInput(v *MergePul
 		ok.String(*v.Email)
 	}
 
-	if v.KeepEmptyFolders != nil {
+	if v.KeepEmptyFolders {
 		ok := object.Key("keepEmptyFolders")
-		ok.Boolean(*v.KeepEmptyFolders)
+		ok.Boolean(v.KeepEmptyFolders)
 	}
 
 	if v.PullRequestId != nil {

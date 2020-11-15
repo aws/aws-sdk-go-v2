@@ -39,7 +39,7 @@ type TagResourceInput struct {
 	// The tags to add to the resource.
 	//
 	// This member is required.
-	TagList []*types.Tag
+	TagList []types.Tag
 }
 
 type TagResourceOutput struct {

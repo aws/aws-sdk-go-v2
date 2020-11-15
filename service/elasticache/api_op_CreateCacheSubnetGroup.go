@@ -46,7 +46,7 @@ type CreateCacheSubnetGroupInput struct {
 	// A list of VPC subnet IDs for the cache subnet group.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 }
 
 type CreateCacheSubnetGroupOutput struct {

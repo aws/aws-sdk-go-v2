@@ -45,7 +45,7 @@ type ListSecurityPoliciesOutput struct {
 	// An array of security policies that were listed.
 	//
 	// This member is required.
-	SecurityPolicyNames []*string
+	SecurityPolicyNames []string
 
 	// When you can get additional results from the ListSecurityPolicies operation, a
 	// NextToken parameter is returned in the output. In a following command, you can

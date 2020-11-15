@@ -96,7 +96,7 @@ func (e *ServiceUnavailableError) ErrorFault() smithy.ErrorFault { return smithy
 type StatementTimeoutException struct {
 	Message *string
 
-	DbConnectionId *int64
+	DbConnectionId int64
 }
 
 func (e *StatementTimeoutException) Error() string {

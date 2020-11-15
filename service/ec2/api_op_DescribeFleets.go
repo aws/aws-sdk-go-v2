@@ -33,7 +33,7 @@ type DescribeFleetsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The filters.
 	//
@@ -54,15 +54,15 @@ type DescribeFleetsInput struct {
 	//
 	// * type - The type of request (instant |
 	// request | maintain).
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The ID of the EC2 Fleets.
-	FleetIds []*string
+	FleetIds []string
 
 	// The maximum number of results to return in a single call. Specify a value
 	// between 1 and 1000. The default value is 1000. To retrieve the remaining
 	// results, make another call with the returned NextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of results.
 	NextToken *string
@@ -71,7 +71,7 @@ type DescribeFleetsInput struct {
 type DescribeFleetsOutput struct {
 
 	// Information about the EC2 Fleets.
-	Fleets []*types.FleetData
+	Fleets []types.FleetData
 
 	// The token for the next set of results.
 	NextToken *string

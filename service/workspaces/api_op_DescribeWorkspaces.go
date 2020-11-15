@@ -55,7 +55,7 @@ type DescribeWorkspacesInput struct {
 	// other filter. Because the CreateWorkspaces operation is asynchronous, the
 	// identifier it returns is not immediately available. If you immediately call
 	// DescribeWorkspaces with this identifier, no information is returned.
-	WorkspaceIds []*string
+	WorkspaceIds []string
 }
 
 type DescribeWorkspacesOutput struct {
@@ -66,7 +66,7 @@ type DescribeWorkspacesOutput struct {
 
 	// Information about the WorkSpaces. Because CreateWorkspaces is an asynchronous
 	// operation, some of the returned information could be incomplete.
-	Workspaces []*types.Workspace
+	Workspaces []types.Workspace
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

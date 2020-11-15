@@ -51,7 +51,7 @@ type GetDocumentOutput struct {
 
 	// A description of the document attachments, including names, locations, sizes,
 	// and so on.
-	AttachmentsContent []*types.AttachmentContent
+	AttachmentsContent []types.AttachmentContent
 
 	// The contents of the Systems Manager document.
 	Content *string
@@ -71,7 +71,7 @@ type GetDocumentOutput struct {
 	// A list of SSM documents required by a document. For example, an
 	// ApplicationConfiguration document requires an ApplicationConfigurationSchema
 	// document.
-	Requires []*types.DocumentRequires
+	Requires []types.DocumentRequires
 
 	// The status of the Systems Manager document, such as Creating, Active, Updating,
 	// Failed, and Deleting.

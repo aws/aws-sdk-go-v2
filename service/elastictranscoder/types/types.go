@@ -342,11 +342,11 @@ type Captions struct {
 
 	// The array of file formats for the output captions. If you leave this value
 	// blank, Elastic Transcoder returns an error.
-	CaptionFormats []*CaptionFormat
+	CaptionFormats []CaptionFormat
 
 	// Source files for the input sidecar captions used during the transcoding process.
 	// To omit all sidecar captions, leave CaptionSources blank.
-	CaptionSources []*CaptionSource
+	CaptionSources []CaptionSource
 
 	// A policy that determines how Elastic Transcoder handles the existence of
 	// multiple captions.
@@ -464,7 +464,7 @@ type CreateJobOutput struct {
 	// The Composition object contains settings for the clips that make up an output
 	// file. For the current release, you can only specify settings for a single clip
 	// per output file. The Composition object cannot be null.
-	Composition []*Clip
+	Composition []Clip
 
 	// You can specify encryption settings for any output files that you want to use
 	// for a transcoding job. This includes the output file and any watermarks,
@@ -541,7 +541,7 @@ type CreateJobOutput struct {
 	// video during transcoding. You can specify up to four watermarks for each output.
 	// Settings for each watermark must be defined in the preset for the current
 	// output.
-	Watermarks []*JobWatermark
+	Watermarks []JobWatermark
 }
 
 // Information about the master playlist.
@@ -593,7 +593,7 @@ type CreateJobPlaylist struct {
 	// settings must be the same for all outputs in the playlist. For Smooth playlists,
 	// the Audio:Profile, Video:Profile, and Video:FrameRate to Video:KeyframesMaxDist
 	// ratio must be the same for all outputs.
-	OutputKeys []*string
+	OutputKeys []string
 
 	// The DRM settings, if any, that you want Elastic Transcoder to apply to the
 	// output files associated with this playlist.
@@ -734,7 +734,7 @@ type InputCaptions struct {
 
 	// Source files for the input sidecar captions used during the transcoding process.
 	// To omit all sidecar captions, leave CaptionSources blank.
-	CaptionSources []*CaptionSource
+	CaptionSources []CaptionSource
 
 	// A policy that determines how Elastic Transcoder handles the existence of
 	// multiple captions.
@@ -777,7 +777,7 @@ type Job struct {
 	// Information about the files that you're transcoding. If you specified multiple
 	// files for this job, Elastic Transcoder stitches the files together to make one
 	// output.
-	Inputs []*JobInput
+	Inputs []JobInput
 
 	// If you specified one output for a job, information about that output. If you
 	// specified multiple outputs for a job, the Output object lists information about
@@ -799,7 +799,7 @@ type Job struct {
 	// request. You can create a maximum of 30 outputs per job. If you specify more
 	// than one output for a job, Elastic Transcoder creates the files for each output
 	// in the order in which you specify them in the job.
-	Outputs []*JobOutput
+	Outputs []JobOutput
 
 	// The Id of the pipeline that you want Elastic Transcoder to use for transcoding.
 	// The pipeline determines several settings, including the Amazon S3 bucket from
@@ -812,7 +812,7 @@ type Job struct {
 	// (MPEG-TS), Playlists contains information about the master playlists that you
 	// want Elastic Transcoder to create. The maximum number of master playlists in a
 	// job is 30.
-	Playlists []*Playlist
+	Playlists []Playlist
 
 	// The status of the job: Submitted, Progressing, Complete, Canceled, or Error.
 	Status *string
@@ -834,7 +834,7 @@ type Job struct {
 	//
 	// *
 	// The following symbols: _.:/=+-%@
-	UserMetadata map[string]*string
+	UserMetadata map[string]string
 }
 
 // The .jpg or .png file associated with an audio file.
@@ -842,7 +842,7 @@ type JobAlbumArt struct {
 
 	// The file to be used as album art. There can be multiple artworks associated with
 	// an audio file, to a maximum of 20. Valid formats are .jpg and .png
-	Artwork []*Artwork
+	Artwork []Artwork
 
 	// A policy that determines how Elastic Transcoder handles the existence of
 	// multiple album artwork files.
@@ -1003,7 +1003,7 @@ type JobOutput struct {
 	// The Composition object contains settings for the clips that make up an output
 	// file. For the current release, you can only specify settings for a single clip
 	// per output file. The Composition object cannot be null.
-	Composition []*Clip
+	Composition []Clip
 
 	// Duration of the output file, in seconds.
 	Duration *int64
@@ -1136,7 +1136,7 @@ type JobOutput struct {
 	// Transcoder to place all watermarks in the same location, the second watermark
 	// that you add covers the first one, the third one covers the second, and the
 	// fourth one covers the third.
-	Watermarks []*JobWatermark
+	Watermarks []JobWatermark
 
 	// Specifies the width of the output file in pixels.
 	Width *int32
@@ -1206,7 +1206,7 @@ type Permission struct {
 	// *
 	// FULL_CONTROL: The grantee has READ, READ_ACP, and WRITE_ACP permissions for the
 	// thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
-	Access []*string
+	Access []string
 
 	// The AWS user or group that you want to have access to transcoded files and
 	// playlists. To identify the user or group, you can specify the canonical user ID
@@ -1433,7 +1433,7 @@ type PipelineOutputConfig struct {
 	// omit Permissions, Elastic Transcoder grants full control over the transcoded
 	// files and playlists to the owner of the role specified by Role, and grants no
 	// other permissions to any other user or group.
-	Permissions []*Permission
+	Permissions []Permission
 
 	// The Amazon S3 storage class, Standard or ReducedRedundancy, that you want
 	// Elastic Transcoder to assign to the video files and playlists that it stores in
@@ -1496,7 +1496,7 @@ type Playlist struct {
 	// caption settings must be the same for all outputs in the playlist. For Smooth
 	// playlists, the Audio:Profile, Video:Profile, and Video:FrameRate to
 	// Video:KeyframesMaxDist ratio must be the same for all outputs.
-	OutputKeys []*string
+	OutputKeys []string
 
 	// The DRM settings, if any, that you want Elastic Transcoder to apply to the
 	// output files associated with this playlist.
@@ -2030,7 +2030,7 @@ type VideoParameters struct {
 	// information of every horizontal line and every other vertical line. LoopCount
 	// (Gif Only) The number of times you want the output gif to loop. Valid values
 	// include Infinite and integers between 0 and 100, inclusive.
-	CodecOptions map[string]*string
+	CodecOptions map[string]string
 
 	// The value that Elastic Transcoder adds to the metadata in the output file.
 	DisplayAspectRatio *string
@@ -2245,7 +2245,7 @@ type VideoParameters struct {
 	// videos. You can specify fewer graphics in the job than you specify watermark
 	// settings in the preset, which allows you to use the same preset for up to four
 	// watermarks that have different dimensions.
-	Watermarks []*PresetWatermark
+	Watermarks []PresetWatermark
 }
 
 // Elastic Transcoder returns a warning if the resources used by your pipeline are

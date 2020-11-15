@@ -41,7 +41,7 @@ type DescribeAlarmsInput struct {
 	AlarmNamePrefix *string
 
 	// The names of the alarms to retrieve information about.
-	AlarmNames []*string
+	AlarmNames []string
 
 	// Use this parameter to specify whether you want the operation to return metric
 	// alarms or composite alarms. If you omit this parameter, only metric alarms are
@@ -90,10 +90,10 @@ type DescribeAlarmsInput struct {
 type DescribeAlarmsOutput struct {
 
 	// The information about any composite alarms returned by the operation.
-	CompositeAlarms []*types.CompositeAlarm
+	CompositeAlarms []types.CompositeAlarm
 
 	// The information about any metric alarms returned by the operation.
-	MetricAlarms []*types.MetricAlarm
+	MetricAlarms []types.MetricAlarm
 
 	// The token that marks the start of the next batch of returned results.
 	NextToken *string

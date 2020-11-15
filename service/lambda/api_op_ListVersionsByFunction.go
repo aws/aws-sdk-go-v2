@@ -63,7 +63,7 @@ type ListVersionsByFunctionOutput struct {
 	NextMarker *string
 
 	// A list of Lambda function versions.
-	Versions []*types.FunctionConfiguration
+	Versions []types.FunctionConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

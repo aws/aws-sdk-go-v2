@@ -36,7 +36,7 @@ func (c *Client) CreateModelPackage(ctx context.Context, params *CreateModelPack
 type CreateModelPackageInput struct {
 
 	// Whether to certify the model package for listing on AWS Marketplace.
-	CertifyForMarketplace *bool
+	CertifyForMarketplace bool
 
 	// Specifies details about inference jobs that can be run with models based on this
 	// model package, including the following:

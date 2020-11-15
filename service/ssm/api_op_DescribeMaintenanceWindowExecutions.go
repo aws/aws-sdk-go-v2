@@ -40,11 +40,11 @@ type DescribeMaintenanceWindowExecutionsInput struct {
 	// 128 characters) Values (array of strings, each string is between 1 and 256
 	// characters) The supported Keys are ExecutedBefore and ExecutedAfter with the
 	// value being a date/time string such as 2016-11-04T05:00:00Z.
-	Filters []*types.MaintenanceWindowFilter
+	Filters []types.MaintenanceWindowFilter
 
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
@@ -58,7 +58,7 @@ type DescribeMaintenanceWindowExecutionsOutput struct {
 	NextToken *string
 
 	// Information about the maintenance window executions.
-	WindowExecutions []*types.MaintenanceWindowExecution
+	WindowExecutions []types.MaintenanceWindowExecution
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

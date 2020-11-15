@@ -57,7 +57,7 @@ type ListS3ResourcesOutput struct {
 	NextToken *string
 
 	// A list of the associated S3 resources returned by the action.
-	S3Resources []*types.S3ResourceClassification
+	S3Resources []types.S3ResourceClassification
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

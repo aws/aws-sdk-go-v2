@@ -55,7 +55,7 @@ type ListSkillsOutput struct {
 	NextToken *string
 
 	// The list of enabled skills requested. Required.
-	SkillSummaries []*types.SkillSummary
+	SkillSummaries []types.SkillSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

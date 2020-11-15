@@ -41,13 +41,13 @@ type PutConfigurationAggregatorInput struct {
 	ConfigurationAggregatorName *string
 
 	// A list of AccountAggregationSource object.
-	AccountAggregationSources []*types.AccountAggregationSource
+	AccountAggregationSources []types.AccountAggregationSource
 
 	// An OrganizationAggregationSource object.
 	OrganizationAggregationSource *types.OrganizationAggregationSource
 
 	// An array of tag object.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type PutConfigurationAggregatorOutput struct {

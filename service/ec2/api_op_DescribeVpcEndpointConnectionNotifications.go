@@ -37,7 +37,7 @@ type DescribeVpcEndpointConnectionNotificationsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
@@ -57,11 +57,11 @@ type DescribeVpcEndpointConnectionNotificationsInput struct {
 	//
 	// * vpc-endpoint-id -
 	// The ID of the VPC endpoint.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another request with the returned NextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token to request the next page of results.
 	NextToken *string
@@ -70,7 +70,7 @@ type DescribeVpcEndpointConnectionNotificationsInput struct {
 type DescribeVpcEndpointConnectionNotificationsOutput struct {
 
 	// One or more notifications.
-	ConnectionNotificationSet []*types.ConnectionNotification
+	ConnectionNotificationSet []types.ConnectionNotification
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

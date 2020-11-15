@@ -61,7 +61,7 @@ type PutConfigRuleInput struct {
 	ConfigRule *types.ConfigRule
 
 	// An array of tag object.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type PutConfigRuleOutput struct {

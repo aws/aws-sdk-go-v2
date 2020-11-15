@@ -45,7 +45,7 @@ type ListSchemasOutput struct {
 	NextToken *string
 
 	// A list of schemas.
-	Schemas []*types.DatasetSchemaSummary
+	Schemas []types.DatasetSchemaSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

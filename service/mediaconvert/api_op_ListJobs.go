@@ -33,7 +33,7 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 type ListJobsInput struct {
 
 	// Optional. Number of jobs, up to twenty, that will be returned at one time.
-	MaxResults *int32
+	MaxResults int32
 
 	// Optional. Use this string, provided with the response to a previous request, to
 	// request the next batch of jobs.
@@ -54,7 +54,7 @@ type ListJobsInput struct {
 type ListJobsOutput struct {
 
 	// List of jobs
-	Jobs []*types.Job
+	Jobs []types.Job
 
 	// Use this string to request the next batch of jobs.
 	NextToken *string

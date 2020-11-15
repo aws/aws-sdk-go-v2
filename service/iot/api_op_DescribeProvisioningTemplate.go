@@ -48,7 +48,7 @@ type DescribeProvisioningTemplateOutput struct {
 	Description *string
 
 	// True if the fleet provisioning template is enabled, otherwise false.
-	Enabled *bool
+	Enabled bool
 
 	// The date when the fleet provisioning template was last modified.
 	LastModifiedDate *time.Time

@@ -35,7 +35,7 @@ type GetDevicesInput struct {
 	GlobalNetworkId *string
 
 	// One or more device IDs. The maximum is 10.
-	DeviceIds []*string
+	DeviceIds []string
 
 	// The maximum number of results to return.
 	MaxResults *int32
@@ -50,7 +50,7 @@ type GetDevicesInput struct {
 type GetDevicesOutput struct {
 
 	// The devices.
-	Devices []*types.Device
+	Devices []types.Device
 
 	// The token for the next page of results.
 	NextToken *string

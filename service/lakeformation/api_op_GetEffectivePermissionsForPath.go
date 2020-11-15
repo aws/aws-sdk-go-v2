@@ -57,7 +57,7 @@ type GetEffectivePermissionsForPathOutput struct {
 
 	// A list of the permissions for the specified table or database resource located
 	// at the path in Amazon S3.
-	Permissions []*types.PrincipalResourcePermissions
+	Permissions []types.PrincipalResourcePermissions
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

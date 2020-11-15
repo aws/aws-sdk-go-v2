@@ -46,7 +46,7 @@ type UpdateReportGroupInput struct {
 	// An updated list of tag key and value pairs associated with this report group.
 	// These tags are available for use by AWS services that support AWS CodeBuild
 	// report group tags.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type UpdateReportGroupOutput struct {

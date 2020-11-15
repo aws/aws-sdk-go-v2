@@ -67,11 +67,11 @@ type CreateModelInput struct {
 	ModelName *string
 
 	// Specifies the containers in the inference pipeline.
-	Containers []*types.ContainerDefinition
+	Containers []types.ContainerDefinition
 
 	// Isolates the model container. No inbound or outbound network calls can be made
 	// to or from the model container.
-	EnableNetworkIsolation *bool
+	EnableNetworkIsolation bool
 
 	// The location of the primary docker image containing inference code, associated
 	// artifacts, and custom environment map that the inference code uses when the
@@ -82,7 +82,7 @@ type CreateModelInput struct {
 	// Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 	// in the AWS Billing and Cost Management User Guide.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A VpcConfig object that specifies the VPC that you want your model to connect
 	// to. Control access to and from your model container by configuring the VPC.

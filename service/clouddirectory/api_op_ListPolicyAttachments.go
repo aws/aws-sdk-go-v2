@@ -58,7 +58,7 @@ type ListPolicyAttachmentsOutput struct {
 	NextToken *string
 
 	// A list of ObjectIdentifiers to which the policy is attached.
-	ObjectIdentifiers []*string
+	ObjectIdentifiers []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

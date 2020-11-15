@@ -66,7 +66,7 @@ type DeletePackageVersionsInput struct {
 	// An array of strings that specify the versions of the package to delete.
 	//
 	// This member is required.
-	Versions []*string
+	Versions []string
 
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
@@ -117,10 +117,10 @@ type DeletePackageVersionsOutput struct {
 	// * NOT_FOUND
 	//
 	// * SKIPPED
-	FailedVersions map[string]*types.PackageVersionError
+	FailedVersions map[string]types.PackageVersionError
 
 	// A list of the package versions that were successfully deleted.
-	SuccessfulVersions map[string]*types.SuccessfulPackageVersionInfo
+	SuccessfulVersions map[string]types.SuccessfulPackageVersionInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
