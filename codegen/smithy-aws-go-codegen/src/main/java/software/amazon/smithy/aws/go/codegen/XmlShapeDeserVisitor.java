@@ -84,8 +84,6 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
         Symbol shapeSymbol = context.getSymbolProvider().toSymbol(shape);
 
         writer.write("var sv $P", shapeSymbol);
-        // TODO [denseListMap] need to reference if pointable type. Assumes containers are always double pointers.
-        // TODO this probably isn't true for union types.
         writer.openBlock("if *v == nil {", "", () -> {
             if (shape.isStructureShape()) {
                 writer.write("sv = &$T{}", shapeSymbol);
