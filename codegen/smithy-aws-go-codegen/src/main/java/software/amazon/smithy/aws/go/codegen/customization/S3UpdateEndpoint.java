@@ -295,9 +295,10 @@ public class S3UpdateEndpoint implements GoIntegration {
                             UPDATE_ENDPOINT_INTERNAL_ADDER), () -> {
                         writer.write("return $T(stack, $T{ \n"
                                         + "Accessor : $T{\n "
-                                        + "GetBucketFromInput: $L,\n SupportsAccelerate: $L,\n }, \n"
+                                        + "GetBucketFromInput: $L,\n}, \n"
                                         + "UsePathStyle: options.$L,\n "
                                         + "UseAccelerate: options.$L,\n "
+                                        + "SupportsAccelerate: $L,\n "
                                         + "EndpointResolver: options.EndpointResolver,\n "
                                         + "EndpointResolverOptions: options.EndpointOptions,\n"
                                         + "UseDualstack: options.$L, \n UseARNRegion: options.$L, \n })",
@@ -309,9 +310,9 @@ public class S3UpdateEndpoint implements GoIntegration {
                                         AwsCustomGoDependency.S3_CUSTOMIZATION).build(),
                                 SUPPORT_BUCKET_AS_INPUT.contains(operationName) ?
                                         getBucketAccessorFuncName(operationName) : NOP_BUCKET_ACCESSOR,
-                                !NOT_SUPPORT_ACCELERATE.contains(operationName),
                                 USE_PATH_STYLE_OPTION,
                                 USE_ACCELERATE_OPTION,
+                                !NOT_SUPPORT_ACCELERATE.contains(operationName),
                                 USE_DUALSTACK_OPTION,
                                 USE_ARNREGION_OPTION
                         );

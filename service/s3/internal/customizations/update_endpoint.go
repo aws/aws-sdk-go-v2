@@ -32,9 +32,6 @@ type UpdateEndpointParameterAccessor struct {
 	// return a string pointer to value of string, and bool if
 	// input has no bucket member.
 	GetBucketFromInput func(interface{}) (*string, bool)
-
-	// indicates if an operation supports s3 transfer acceleration.
-	SupportsAccelerate bool
 }
 
 // UpdateEndpointOptions provides the options for the UpdateEndpoint middleware setup.
@@ -48,6 +45,9 @@ type UpdateEndpointOptions struct {
 
 	// use transfer acceleration
 	UseAccelerate bool
+
+	// indicates if an operation supports s3 transfer acceleration.
+	SupportsAccelerate bool
 
 	// use dualstack
 	UseDualstack bool
@@ -104,7 +104,7 @@ func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err
 		usePathStyle:       options.UsePathStyle,
 		getBucketFromInput: options.Accessor.GetBucketFromInput,
 		useAccelerate:      options.UseAccelerate,
-		supportsAccelerate: options.Accessor.SupportsAccelerate,
+		supportsAccelerate: options.SupportsAccelerate,
 	}, (*s3shared.EnableDualstack)(nil).ID(), middleware.After)
 	if err != nil {
 		return err
