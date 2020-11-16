@@ -13,7 +13,9 @@ import (
 // AddExpiresOnPresignedURL  represents a build middleware used to assign
 // expiration on a presigned URL
 type AddExpiresOnPresignedURL struct {
-	// Expires is time.Duration within which presigned url should be expired
+
+	// Expires is time.Duration within which presigned url should be expired.
+	// This should be the duration in seconds the presigned URL should be considered valid for.
 	Expires time.Duration
 }
 

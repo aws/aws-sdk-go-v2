@@ -146,7 +146,7 @@ func presignURL(ctx context.Context, client interface{}, srcRegion string, param
 
 	return &v4.PresignedHTTPRequest{
 		URL:          "https://example." + srcRegion + ".amazonaws.com/?DestinationRegion=" + in.DestinationRegion,
-		Method:       "POST",
+		Method:       "GET",
 		SignedHeader: http.Header{},
 	}, nil
 }
