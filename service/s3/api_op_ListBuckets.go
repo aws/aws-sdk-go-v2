@@ -122,10 +122,10 @@ func addListBucketsUpdateEndpoint(stack *middleware.Stack, options Options) erro
 	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
 		Accessor: s3cust.UpdateEndpointParameterAccessor{
 			GetBucketFromInput: nopGetBucketAccessor,
-			SupportsAccelerate: false,
 		},
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
+		SupportsAccelerate:      false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

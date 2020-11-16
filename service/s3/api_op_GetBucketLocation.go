@@ -156,10 +156,10 @@ func addGetBucketLocationUpdateEndpoint(stack *middleware.Stack, options Options
 	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
 		Accessor: s3cust.UpdateEndpointParameterAccessor{
 			GetBucketFromInput: getGetBucketLocationBucketMember,
-			SupportsAccelerate: true,
 		},
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
+		SupportsAccelerate:      true,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

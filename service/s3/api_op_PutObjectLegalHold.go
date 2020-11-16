@@ -180,10 +180,10 @@ func addPutObjectLegalHoldUpdateEndpoint(stack *middleware.Stack, options Option
 	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
 		Accessor: s3cust.UpdateEndpointParameterAccessor{
 			GetBucketFromInput: getPutObjectLegalHoldBucketMember,
-			SupportsAccelerate: true,
 		},
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
+		SupportsAccelerate:      true,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

@@ -145,10 +145,10 @@ func addDeleteBucketUpdateEndpoint(stack *middleware.Stack, options Options) err
 	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
 		Accessor: s3cust.UpdateEndpointParameterAccessor{
 			GetBucketFromInput: getDeleteBucketBucketMember,
-			SupportsAccelerate: false,
 		},
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
+		SupportsAccelerate:      false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,
