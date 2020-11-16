@@ -53,7 +53,10 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
     private final boolean isFlattened;
 
     public XmlMemberDeserVisitor(
-            GenerationContext context, MemberShape member, String dataDest, Format timestampFormat,
+            GenerationContext context,
+            MemberShape member,
+            String dataDest,
+            Format timestampFormat,
             boolean isXmlAttributeMember
     ) {
         this.context = context;
