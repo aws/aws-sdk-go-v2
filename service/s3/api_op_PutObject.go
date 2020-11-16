@@ -426,6 +426,8 @@ func addPutObjectUpdateEndpoint(stack *middleware.Stack, options Options) error 
 	})
 }
 
+// PresignPutObject is used to generate a presigned HTTP Request which contains
+// presigned URL, signed headers and HTTP method used.
 func (c *PresignClient) PresignPutObject(ctx context.Context, params *PutObjectInput, optFns ...func(*PresignOptions)) (req *v4.PresignedHTTPRequest, err error) {
 	if params == nil {
 		params = &PutObjectInput{}

@@ -320,6 +320,8 @@ func newServiceMetadataMiddleware_opCopyDBSnapshot(region string) *awsmiddleware
 	}
 }
 
+// PresignCopyDBSnapshot is used to generate a presigned HTTP Request which
+// contains presigned URL, signed headers and HTTP method used.
 func (c *PresignClient) PresignCopyDBSnapshot(ctx context.Context, params *CopyDBSnapshotInput, optFns ...func(*PresignOptions)) (req *v4.PresignedHTTPRequest, err error) {
 	if params == nil {
 		params = &CopyDBSnapshotInput{}

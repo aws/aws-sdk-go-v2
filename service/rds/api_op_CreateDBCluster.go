@@ -504,6 +504,8 @@ func newServiceMetadataMiddleware_opCreateDBCluster(region string) *awsmiddlewar
 	}
 }
 
+// PresignCreateDBCluster is used to generate a presigned HTTP Request which
+// contains presigned URL, signed headers and HTTP method used.
 func (c *PresignClient) PresignCreateDBCluster(ctx context.Context, params *CreateDBClusterInput, optFns ...func(*PresignOptions)) (req *v4.PresignedHTTPRequest, err error) {
 	if params == nil {
 		params = &CreateDBClusterInput{}

@@ -514,6 +514,8 @@ func newServiceMetadataMiddleware_opCreateDBInstanceReadReplica(region string) *
 	}
 }
 
+// PresignCreateDBInstanceReadReplica is used to generate a presigned HTTP Request
+// which contains presigned URL, signed headers and HTTP method used.
 func (c *PresignClient) PresignCreateDBInstanceReadReplica(ctx context.Context, params *CreateDBInstanceReadReplicaInput, optFns ...func(*PresignOptions)) (req *v4.PresignedHTTPRequest, err error) {
 	if params == nil {
 		params = &CreateDBInstanceReadReplicaInput{}

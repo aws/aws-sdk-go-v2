@@ -277,6 +277,8 @@ func newServiceMetadataMiddleware_opCopySnapshot(region string) *awsmiddleware.R
 	}
 }
 
+// PresignCopySnapshot is used to generate a presigned HTTP Request which contains
+// presigned URL, signed headers and HTTP method used.
 func (c *PresignClient) PresignCopySnapshot(ctx context.Context, params *CopySnapshotInput, optFns ...func(*PresignOptions)) (req *v4.PresignedHTTPRequest, err error) {
 	if params == nil {
 		params = &CopySnapshotInput{}

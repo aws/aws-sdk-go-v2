@@ -259,14 +259,26 @@ func addRequestResponseLogging(stack *middleware.Stack, o Options) error {
 	}, middleware.After)
 }
 
+// HTTPPresignerV4 represents presigner interface used by presign url client
+type HTTPPresignerV4 interface {
+	PresignHTTP(
+		ctx context.Context, credentials aws.Credentials, r *http.Request,
+		payloadHash string, service string, region string, signingTime time.Time,
+	) (url string, signedHeader http.Header, err error)
+}
+
 // PresignOptions represents the presign client options
 type PresignOptions struct {
+
 	// ClientOptions are list of functional options to mutate client options used by
 	// presign client
 	ClientOptions []func(*Options)
+
 	// Presigner is the presigner used by the presign url client
-	Presigner v4.HTTPPresigner
-	// Expires sets the expiration duration for the generated presign url
+	Presigner HTTPPresignerV4
+
+	// Expires sets the expiration duration for the generated presign url. This should
+	// be the duration in seconds the presigned URL should be considered valid for.
 	Expires time.Duration
 }
 
@@ -297,8 +309,19 @@ func (w withPresignExpires) options(o *PresignOptions) {
 // PresignClient represents the presign url client
 type PresignClient struct {
 	client    *Client
-	presigner v4.HTTPPresigner
+	presigner HTTPPresignerV4
 	expires   time.Duration
+}
+
+func newPresignClient(client *Client, options PresignOptions) *PresignClient {
+	if options.Presigner == nil {
+		options.Presigner = v4.NewSigner()
+	}
+	return &PresignClient{
+		client:    client,
+		presigner: options.Presigner,
+		expires:   options.Expires,
+	}
 }
 
 // NewPresignClient generates a presign client using provided Client options and
@@ -309,16 +332,7 @@ func NewPresignClient(options Options, optFns ...func(*PresignOptions)) *Presign
 		fn(&presignOptions)
 	}
 	client := New(options, presignOptions.ClientOptions...)
-	var presigner v4.HTTPPresigner
-	if presignOptions.Presigner != nil {
-		presigner = presignOptions.Presigner
-	} else {
-		presigner = v4.NewSigner()
-	}
-	return &PresignClient{
-		client: client, presigner: presigner,
-		expires: presignOptions.Expires,
-	}
+	return newPresignClient(client, presignOptions)
 }
 
 // NewPresignClientWrapper generates a presign client using provided API Client and
@@ -329,16 +343,7 @@ func NewPresignClientWrapper(c *Client, optFns ...func(*PresignOptions)) *Presig
 		fn(&presignOptions)
 	}
 	client := copyAPIClient(c, presignOptions.ClientOptions...)
-	var presigner v4.HTTPPresigner
-	if presignOptions.Presigner != nil {
-		presigner = presignOptions.Presigner
-	} else {
-		presigner = v4.NewSigner()
-	}
-	return &PresignClient{
-		client: client, presigner: presigner,
-		expires: presignOptions.Expires,
-	}
+	return newPresignClient(client, presignOptions)
 }
 
 // NewPresignClientFromConfig generates a presign client using provided AWS config
@@ -349,20 +354,13 @@ func NewPresignClientFromConfig(cfg aws.Config, optFns ...func(*PresignOptions))
 		fn(&presignOptions)
 	}
 	client := NewFromConfig(cfg, presignOptions.ClientOptions...)
-	var presigner v4.HTTPPresigner
-	if presignOptions.Presigner != nil {
-		presigner = presignOptions.Presigner
-	} else {
-		presigner = v4.NewSigner()
-	}
-	return &PresignClient{
-		client: client, presigner: presigner,
-		expires: presignOptions.Expires,
-	}
+	return newPresignClient(client, presignOptions)
 }
+
 func copyAPIClient(c *Client, optFns ...func(*Options)) *Client {
 	return New(c.options, optFns...)
 }
+
 func (c *PresignClient) convertToPresignMiddleware(stack *middleware.Stack, options Options) (err error) {
 	stack.Finalize.Clear()
 	stack.Deserialize.Clear()

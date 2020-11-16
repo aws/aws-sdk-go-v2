@@ -367,6 +367,8 @@ func newServiceMetadataMiddleware_opCopyDBClusterSnapshot(region string) *awsmid
 	}
 }
 
+// PresignCopyDBClusterSnapshot is used to generate a presigned HTTP Request which
+// contains presigned URL, signed headers and HTTP method used.
 func (c *PresignClient) PresignCopyDBClusterSnapshot(ctx context.Context, params *CopyDBClusterSnapshotInput, optFns ...func(*PresignOptions)) (req *v4.PresignedHTTPRequest, err error) {
 	if params == nil {
 		params = &CopyDBClusterSnapshotInput{}
