@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -285,7 +286,7 @@ func addOperationUploadPartMiddlewares(stack *middleware.Stack, options Options)
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdateEndpointMiddleware(stack, options); err != nil {
+	if err = addUploadPartUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -310,4 +311,28 @@ func newServiceMetadataMiddleware_opUploadPart(region string) *awsmiddleware.Reg
 		SigningName:   "s3",
 		OperationName: "UploadPart",
 	}
+}
+
+// getUploadPartBucketMember returns a pointer to string denoting a provided bucket
+// member valueand a boolean indicating if the input has a modeled bucket name,
+func getUploadPartBucketMember(input interface{}) (*string, bool) {
+	in := input.(*UploadPartInput)
+	if in.Bucket == nil {
+		return nil, false
+	}
+	return in.Bucket, true
+}
+func addUploadPartUpdateEndpoint(stack *middleware.Stack, options Options) error {
+	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
+		Accessor: s3cust.UpdateEndpointParameterAccessor{
+			GetBucketFromInput: getUploadPartBucketMember,
+		},
+		UsePathStyle:            options.UsePathStyle,
+		UseAccelerate:           options.UseAccelerate,
+		SupportsAccelerate:      true,
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
+	})
 }

@@ -28,3 +28,4 @@ software.amazon.smithy.aws.go.codegen.customization.S3HeadObjectCustomizations
 software.amazon.smithy.aws.go.codegen.customization.PresignURLAutoFill
 software.amazon.smithy.aws.go.codegen.FilterStreamingOperations
 software.amazon.smithy.aws.go.codegen.RequestResponseLogging
+software.amazon.smithy.aws.go.codegen.customization.S3ControlEndpointResolver

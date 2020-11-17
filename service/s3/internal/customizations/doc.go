@@ -3,7 +3,11 @@ Package customizations provides customizations for the Amazon S3 API client.
 
 This package provides support for following S3 customizations
 
+    ProcessARN Middleware: processes an ARN if provided as input and updates the endpoint as per the arn type
+
     UpdateEndpoint Middleware: resolves a custom endpoint as per s3 config options
+
+    RemoveBucket Middleware: removes a serialized bucket name from request url path
 
     processResponseWith200Error Middleware: Deserializing response error with 200 status code
 
@@ -29,23 +33,39 @@ acceleration only works with Virtual Host style addressing, and thus `UsePathSty
 option if set is ignored. Transfer acceleration is not supported for S3 operations
 DeleteBucket, ListBuckets, and CreateBucket.
 
+
 Dualstack support
 
 By default dualstack support for s3 client is disabled. By enabling `UseDualstack`
 option on s3 client, you can enable dualstack endpoint support.
 
 
-UpdateEndpoint middleware handler for modifying resolved endpoint needs to be
-executed after request serialization.
+Endpoint customizations
+
+
+Customizations to lookup ARN, process ARN needs to happen before request serialization.
+UpdateEndpoint middleware which mutates resources based on Options such as
+UseDualstack, UseAccelerate for modifying resolved endpoint are executed after
+request serialization. Remove bucket middleware is executed after
+an request is serialized, and removes the serialized bucket name from request path
 
  Middleware layering:
 
- HTTP Request -> operation serializer -> Update-Endpoint customization -> next middleware
+
+ Initialize : HTTP Request -> ARN Lookup -> Input-Validation -> Serialize step
+
+ Serialize : HTTP Request -> Process ARN -> operation serializer -> Update-Endpoint customization -> Remove-Bucket -> next middleware
+
 
 Customization options:
+ UseARNRegion (Disabled by Default)
+
  UsePathStyle (Disabled by Default)
+
  UseAccelerate (Disabled by Default)
+
  UseDualstack (Disabled by Default)
+
 
 Handle Error response with 200 status code
 

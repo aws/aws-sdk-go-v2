@@ -1,6 +1,7 @@
 package arn
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws/arn"
@@ -18,20 +19,16 @@ type Resource interface {
 type ResourceParser func(arn.ARN) (Resource, error)
 
 // ParseResource parses an AWS ARN into a typed resource for the S3 API.
-func ParseResource(s string, resParser ResourceParser) (resARN Resource, err error) {
-	a, err := arn.Parse(s)
-	if err != nil {
-		return nil, err
+func ParseResource(a arn.ARN, resParser ResourceParser) (resARN Resource, err error) {
+	if len(a.Partition) == 0 {
+		return nil, InvalidARNError{ARN: a, Reason: "partition not set"}
 	}
 
-	if len(a.Partition) == 0 {
-		return nil, InvalidARNError{a, "partition not set"}
-	}
-	if a.Service != "s3" {
-		return nil, InvalidARNError{a, "service is not S3"}
+	if a.Service != "s3" && a.Service != "s3-outposts" {
+		return nil, InvalidARNError{ARN: a, Reason: "service is not supported"}
 	}
 	if len(a.Resource) == 0 {
-		return nil, InvalidARNError{a, "resource not set"}
+		return nil, InvalidARNError{ARN: a, Reason: "resource not set"}
 	}
 
 	return resParser(a)
@@ -66,6 +63,7 @@ type InvalidARNError struct {
 	Reason string
 }
 
+// Error returns a string denoting the occurred InvalidARNError
 func (e InvalidARNError) Error() string {
-	return "invalid Amazon S3 ARN, " + e.Reason + ", " + e.ARN.String()
+	return fmt.Sprintf("invalid Amazon %s ARN, %s, %s", e.ARN.Service, e.Reason, e.ARN.String())
 }

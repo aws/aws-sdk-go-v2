@@ -25,7 +25,7 @@ func (s RegisterServiceMetadata) HandleInitialize(
 	ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler,
 ) (out middleware.InitializeOutput, metadata middleware.Metadata, err error) {
 	if len(s.ServiceID) > 0 {
-		ctx = setServiceID(ctx, s.ServiceID)
+		ctx = SetServiceID(ctx, s.ServiceID)
 	}
 	if len(s.SigningName) > 0 {
 		ctx = SetSigningName(ctx, s.SigningName)
@@ -46,6 +46,7 @@ type (
 	signingRegionKey struct{}
 	regionKey        struct{}
 	operationNameKey struct{}
+	partitionIDKey   struct{}
 )
 
 // GetServiceID retrieves the service id from the context.
@@ -78,6 +79,12 @@ func GetOperationName(ctx context.Context) (v string) {
 	return v
 }
 
+// GetPartitionID retrieves the endpoint partition id from the context.
+func GetPartitionID(ctx context.Context) string {
+	v, _ := ctx.Value(partitionIDKey{}).(string)
+	return v
+}
+
 // SetSigningName set or modifies the signing name on the context.
 func SetSigningName(ctx context.Context, value string) context.Context {
 	return context.WithValue(ctx, signingNameKey{}, value)
@@ -88,8 +95,8 @@ func SetSigningRegion(ctx context.Context, value string) context.Context {
 	return context.WithValue(ctx, signingRegionKey{}, value)
 }
 
-// setServiceID sets the service id on the context.
-func setServiceID(ctx context.Context, value string) context.Context {
+// SetServiceID sets the service id on the context.
+func SetServiceID(ctx context.Context, value string) context.Context {
 	return context.WithValue(ctx, serviceIDKey{}, value)
 }
 
@@ -101,4 +108,9 @@ func setRegion(ctx context.Context, value string) context.Context {
 // setOperationName sets the service operation on the context.
 func setOperationName(ctx context.Context, value string) context.Context {
 	return context.WithValue(ctx, operationNameKey{}, value)
+}
+
+// SetPartitionID sets the partition id of a resolved region on the context
+func SetPartitionID(ctx context.Context, value string) context.Context {
+	return context.WithValue(ctx, partitionIDKey{}, value)
 }

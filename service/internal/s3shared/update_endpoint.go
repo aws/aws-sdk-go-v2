@@ -7,6 +7,8 @@ import (
 
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+
+	awsmiddle "github.com/aws/aws-sdk-go-v2/aws/middleware"
 )
 
 // EnableDualstack represents middleware struct for enabling dualstack support
@@ -14,9 +16,9 @@ type EnableDualstack struct {
 	// UseDualstack indicates if dualstack endpoint resolving is to be enabled
 	UseDualstack bool
 
-	// ServiceID is the service id prefix used in endpoint resolving
+	// DefaultServiceID is the service id prefix used in endpoint resolving
 	// by default service-id is 's3' and 's3-control' for service s3, s3control.
-	ServiceID string
+	DefaultServiceID string
 }
 
 // ID returns the middleware ID.
@@ -30,8 +32,22 @@ func (u *EnableDualstack) HandleSerialize(
 ) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+
+	// check for host name immutable property
 	if smithyhttp.GetHostnameImmutable(ctx) {
 		return next.HandleSerialize(ctx, in)
+	}
+
+	serviceID := awsmiddle.GetServiceID(ctx)
+
+	// s3-control may be represented as `S3 Control` as in model
+	if serviceID == "S3 Control" {
+		serviceID = "s3-control"
+	}
+
+	if len(serviceID) == 0 {
+		// default service id
+		serviceID = u.DefaultServiceID
 	}
 
 	req, ok := in.Request.(*smithyhttp.Request)
@@ -46,7 +62,7 @@ func (u *EnableDualstack) HandleSerialize(
 		}
 
 		for i := 0; i+1 < len(parts); i++ {
-			if strings.EqualFold(parts[i], u.ServiceID) {
+			if strings.EqualFold(parts[i], serviceID) {
 				parts[i] = parts[i] + ".dualstack"
 				break
 			}

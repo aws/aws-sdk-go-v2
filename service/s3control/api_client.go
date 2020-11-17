@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
-	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/logging"
 	"github.com/awslabs/smithy-go/middleware"
@@ -92,6 +91,9 @@ type Options struct {
 	// Retryer guides how HTTP requests should be retried in case of recoverable
 	// failures. When nil the API client will use a default retryer.
 	Retryer retry.Retryer
+
+	// Allows you to enable arn region support for the service.
+	UseARNRegion bool
 
 	// Allows you to enable Dualstack endpoint support for the service.
 	UseDualstack bool
@@ -238,8 +240,29 @@ func addMetadataRetrieverMiddleware(stack *middleware.Stack) error {
 	return s3shared.AddMetadataRetrieverMiddleware(stack)
 }
 
-func addUpdateEndpointMiddleware(stack *middleware.Stack, options Options) error {
-	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{UseDualstack: options.UseDualstack})
+// nopGetOutpostIDFromInput provides a nop accessor function to be used when
+// endpoint customization behavior is not based on presence of outpost id member if
+// any
+func nopGetOutpostIDFromInput(input interface{}) (*string, bool) {
+	return nil, false
+}
+
+// nopGetARNAccessor provides a nop get accessor function to be used when a certain
+// operation does not support ARNs
+func nopGetARNAccessor(input interface{}) (*string, bool) {
+	return nil, false
+}
+
+// nopSetARNAccessor provides a nop set accessor function to be used when a certain
+// operation does not support ARNs
+func nopSetARNAccessor(input interface{}, v string) error {
+	return nil
+}
+
+// nopBackfillAccountIDAccessor provides a nop accessor function to be used when a
+// certain operation does not need to validate and backfill account id
+func nopBackfillAccountIDAccessor(input interface{}, v string) error {
+	return nil
 }
 
 func addResponseErrorMiddleware(stack *middleware.Stack) error {

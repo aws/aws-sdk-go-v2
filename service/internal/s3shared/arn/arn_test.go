@@ -1,5 +1,3 @@
-// +build go1.7
-
 package arn
 
 import (
@@ -27,7 +25,7 @@ func TestParseResource(t *testing.T) {
 		},
 		"Not S3 ARN": {
 			Input:     "arn:aws:sqs:us-west-2:012345678901:accesspoint",
-			ExpectErr: "service is not S3",
+			ExpectErr: "service is not supported",
 		},
 		"No Resource": {
 			Input:     "arn:aws:s3:us-west-2:012345678901:",
@@ -94,7 +92,11 @@ func TestParseResource(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			parsed, err := ParseResource(c.Input, mappedResourceParser(c.MappedResources))
+			var parsed Resource
+			arn, err := arn.Parse(c.Input)
+			if err == nil {
+				parsed, err = ParseResource(arn, mappedResourceParser(c.MappedResources))
+			}
 
 			if len(c.ExpectErr) == 0 && err != nil {
 				t.Fatalf("expect no error but got %v", err)
@@ -120,7 +122,7 @@ func mappedResourceParser(kinds map[string]func(arn.ARN, []string) (Resource, er
 
 		fn, ok := kinds[parts[0]]
 		if !ok {
-			return nil, InvalidARNError{a, "unknown resource type"}
+			return nil, InvalidARNError{ARN: a, Reason: "unknown resource type"}
 		}
 		return fn(a, parts[1:])
 	}
