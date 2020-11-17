@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
@@ -104,6 +105,93 @@ func addOperationListScheduledAuditsMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// ListScheduledAuditsAPIClient is a client that implements the ListScheduledAudits
+// operation.
+type ListScheduledAuditsAPIClient interface {
+	ListScheduledAudits(context.Context, *ListScheduledAuditsInput, ...func(*Options)) (*ListScheduledAuditsOutput, error)
+}
+
+var _ ListScheduledAuditsAPIClient = (*Client)(nil)
+
+// ListScheduledAuditsPaginatorOptions is the paginator options for
+// ListScheduledAudits
+type ListScheduledAuditsPaginatorOptions struct {
+	// The maximum number of results to return at one time. The default is 25.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListScheduledAuditsPaginator is a paginator for ListScheduledAudits
+type ListScheduledAuditsPaginator struct {
+	options   ListScheduledAuditsPaginatorOptions
+	client    ListScheduledAuditsAPIClient
+	params    *ListScheduledAuditsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListScheduledAuditsPaginator returns a new ListScheduledAuditsPaginator
+func NewListScheduledAuditsPaginator(client ListScheduledAuditsAPIClient, params *ListScheduledAuditsInput, optFns ...func(*ListScheduledAuditsPaginatorOptions)) *ListScheduledAuditsPaginator {
+	options := ListScheduledAuditsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListScheduledAuditsInput{}
+	}
+
+	return &ListScheduledAuditsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListScheduledAuditsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListScheduledAudits page.
+func (p *ListScheduledAuditsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListScheduledAuditsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListScheduledAudits(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListScheduledAudits(region string) *awsmiddleware.RegisterServiceMetadata {

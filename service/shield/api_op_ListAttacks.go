@@ -4,6 +4,7 @@ package shield
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/shield/types"
@@ -133,6 +134,96 @@ func addOperationListAttacksMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+// ListAttacksAPIClient is a client that implements the ListAttacks operation.
+type ListAttacksAPIClient interface {
+	ListAttacks(context.Context, *ListAttacksInput, ...func(*Options)) (*ListAttacksOutput, error)
+}
+
+var _ ListAttacksAPIClient = (*Client)(nil)
+
+// ListAttacksPaginatorOptions is the paginator options for ListAttacks
+type ListAttacksPaginatorOptions struct {
+	// The maximum number of AttackSummary objects to be returned. If this is left
+	// blank, the first 20 results will be returned. This is a maximum value; it is
+	// possible that AWS WAF will return the results in smaller batches. That is, the
+	// number of AttackSummary objects returned could be less than MaxResults, even if
+	// there are still more AttackSummary objects yet to return. If there are more
+	// AttackSummary objects to return, AWS WAF will always also return a NextToken.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAttacksPaginator is a paginator for ListAttacks
+type ListAttacksPaginator struct {
+	options   ListAttacksPaginatorOptions
+	client    ListAttacksAPIClient
+	params    *ListAttacksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAttacksPaginator returns a new ListAttacksPaginator
+func NewListAttacksPaginator(client ListAttacksAPIClient, params *ListAttacksInput, optFns ...func(*ListAttacksPaginatorOptions)) *ListAttacksPaginator {
+	options := ListAttacksPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAttacksInput{}
+	}
+
+	return &ListAttacksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAttacksPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAttacks page.
+func (p *ListAttacksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAttacksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListAttacks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAttacks(region string) *awsmiddleware.RegisterServiceMetadata {

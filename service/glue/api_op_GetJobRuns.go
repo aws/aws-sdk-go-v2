@@ -4,6 +4,7 @@ package glue
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
@@ -111,6 +112,91 @@ func addOperationGetJobRunsMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+// GetJobRunsAPIClient is a client that implements the GetJobRuns operation.
+type GetJobRunsAPIClient interface {
+	GetJobRuns(context.Context, *GetJobRunsInput, ...func(*Options)) (*GetJobRunsOutput, error)
+}
+
+var _ GetJobRunsAPIClient = (*Client)(nil)
+
+// GetJobRunsPaginatorOptions is the paginator options for GetJobRuns
+type GetJobRunsPaginatorOptions struct {
+	// The maximum size of the response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetJobRunsPaginator is a paginator for GetJobRuns
+type GetJobRunsPaginator struct {
+	options   GetJobRunsPaginatorOptions
+	client    GetJobRunsAPIClient
+	params    *GetJobRunsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetJobRunsPaginator returns a new GetJobRunsPaginator
+func NewGetJobRunsPaginator(client GetJobRunsAPIClient, params *GetJobRunsInput, optFns ...func(*GetJobRunsPaginatorOptions)) *GetJobRunsPaginator {
+	options := GetJobRunsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetJobRunsInput{}
+	}
+
+	return &GetJobRunsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetJobRunsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetJobRuns page.
+func (p *GetJobRunsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetJobRunsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetJobRuns(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetJobRuns(region string) *awsmiddleware.RegisterServiceMetadata {

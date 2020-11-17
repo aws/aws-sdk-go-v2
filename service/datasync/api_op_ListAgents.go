@@ -4,6 +4,7 @@ package datasync
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
@@ -114,6 +115,91 @@ func addOperationListAgentsMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+// ListAgentsAPIClient is a client that implements the ListAgents operation.
+type ListAgentsAPIClient interface {
+	ListAgents(context.Context, *ListAgentsInput, ...func(*Options)) (*ListAgentsOutput, error)
+}
+
+var _ ListAgentsAPIClient = (*Client)(nil)
+
+// ListAgentsPaginatorOptions is the paginator options for ListAgents
+type ListAgentsPaginatorOptions struct {
+	// The maximum number of agents to list.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAgentsPaginator is a paginator for ListAgents
+type ListAgentsPaginator struct {
+	options   ListAgentsPaginatorOptions
+	client    ListAgentsAPIClient
+	params    *ListAgentsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAgentsPaginator returns a new ListAgentsPaginator
+func NewListAgentsPaginator(client ListAgentsAPIClient, params *ListAgentsInput, optFns ...func(*ListAgentsPaginatorOptions)) *ListAgentsPaginator {
+	options := ListAgentsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAgentsInput{}
+	}
+
+	return &ListAgentsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAgentsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAgents page.
+func (p *ListAgentsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAgentsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListAgents(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAgents(region string) *awsmiddleware.RegisterServiceMetadata {

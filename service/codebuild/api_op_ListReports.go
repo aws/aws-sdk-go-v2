@@ -4,6 +4,7 @@ package codebuild
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
@@ -127,6 +128,92 @@ func addOperationListReportsMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+// ListReportsAPIClient is a client that implements the ListReports operation.
+type ListReportsAPIClient interface {
+	ListReports(context.Context, *ListReportsInput, ...func(*Options)) (*ListReportsOutput, error)
+}
+
+var _ ListReportsAPIClient = (*Client)(nil)
+
+// ListReportsPaginatorOptions is the paginator options for ListReports
+type ListReportsPaginatorOptions struct {
+	// The maximum number of paginated reports returned per response. Use nextToken to
+	// iterate pages in the list of returned Report objects. The default value is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListReportsPaginator is a paginator for ListReports
+type ListReportsPaginator struct {
+	options   ListReportsPaginatorOptions
+	client    ListReportsAPIClient
+	params    *ListReportsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListReportsPaginator returns a new ListReportsPaginator
+func NewListReportsPaginator(client ListReportsAPIClient, params *ListReportsInput, optFns ...func(*ListReportsPaginatorOptions)) *ListReportsPaginator {
+	options := ListReportsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListReportsInput{}
+	}
+
+	return &ListReportsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListReportsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListReports page.
+func (p *ListReportsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListReportsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListReports(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListReports(region string) *awsmiddleware.RegisterServiceMetadata {

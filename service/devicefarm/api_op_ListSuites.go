@@ -4,6 +4,7 @@ package devicefarm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
@@ -113,6 +114,79 @@ func addOperationListSuitesMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+// ListSuitesAPIClient is a client that implements the ListSuites operation.
+type ListSuitesAPIClient interface {
+	ListSuites(context.Context, *ListSuitesInput, ...func(*Options)) (*ListSuitesOutput, error)
+}
+
+var _ ListSuitesAPIClient = (*Client)(nil)
+
+// ListSuitesPaginatorOptions is the paginator options for ListSuites
+type ListSuitesPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListSuitesPaginator is a paginator for ListSuites
+type ListSuitesPaginator struct {
+	options   ListSuitesPaginatorOptions
+	client    ListSuitesAPIClient
+	params    *ListSuitesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListSuitesPaginator returns a new ListSuitesPaginator
+func NewListSuitesPaginator(client ListSuitesAPIClient, params *ListSuitesInput, optFns ...func(*ListSuitesPaginatorOptions)) *ListSuitesPaginator {
+	options := ListSuitesPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListSuitesInput{}
+	}
+
+	return &ListSuitesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListSuitesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListSuites page.
+func (p *ListSuitesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSuitesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListSuites(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListSuites(region string) *awsmiddleware.RegisterServiceMetadata {

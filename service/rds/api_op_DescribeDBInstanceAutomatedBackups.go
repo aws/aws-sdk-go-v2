@@ -4,6 +4,7 @@ package rds
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
@@ -157,6 +158,97 @@ func addOperationDescribeDBInstanceAutomatedBackupsMiddlewares(stack *middleware
 		return err
 	}
 	return nil
+}
+
+// DescribeDBInstanceAutomatedBackupsAPIClient is a client that implements the
+// DescribeDBInstanceAutomatedBackups operation.
+type DescribeDBInstanceAutomatedBackupsAPIClient interface {
+	DescribeDBInstanceAutomatedBackups(context.Context, *DescribeDBInstanceAutomatedBackupsInput, ...func(*Options)) (*DescribeDBInstanceAutomatedBackupsOutput, error)
+}
+
+var _ DescribeDBInstanceAutomatedBackupsAPIClient = (*Client)(nil)
+
+// DescribeDBInstanceAutomatedBackupsPaginatorOptions is the paginator options for
+// DescribeDBInstanceAutomatedBackups
+type DescribeDBInstanceAutomatedBackupsPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeDBInstanceAutomatedBackupsPaginator is a paginator for
+// DescribeDBInstanceAutomatedBackups
+type DescribeDBInstanceAutomatedBackupsPaginator struct {
+	options   DescribeDBInstanceAutomatedBackupsPaginatorOptions
+	client    DescribeDBInstanceAutomatedBackupsAPIClient
+	params    *DescribeDBInstanceAutomatedBackupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeDBInstanceAutomatedBackupsPaginator returns a new
+// DescribeDBInstanceAutomatedBackupsPaginator
+func NewDescribeDBInstanceAutomatedBackupsPaginator(client DescribeDBInstanceAutomatedBackupsAPIClient, params *DescribeDBInstanceAutomatedBackupsInput, optFns ...func(*DescribeDBInstanceAutomatedBackupsPaginatorOptions)) *DescribeDBInstanceAutomatedBackupsPaginator {
+	options := DescribeDBInstanceAutomatedBackupsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeDBInstanceAutomatedBackupsInput{}
+	}
+
+	return &DescribeDBInstanceAutomatedBackupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeDBInstanceAutomatedBackupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeDBInstanceAutomatedBackups page.
+func (p *DescribeDBInstanceAutomatedBackupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDBInstanceAutomatedBackupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeDBInstanceAutomatedBackups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeDBInstanceAutomatedBackups(region string) *awsmiddleware.RegisterServiceMetadata {

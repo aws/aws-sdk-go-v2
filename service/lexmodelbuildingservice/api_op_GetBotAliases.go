@@ -4,6 +4,7 @@ package lexmodelbuildingservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
@@ -123,6 +124,91 @@ func addOperationGetBotAliasesMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	return nil
+}
+
+// GetBotAliasesAPIClient is a client that implements the GetBotAliases operation.
+type GetBotAliasesAPIClient interface {
+	GetBotAliases(context.Context, *GetBotAliasesInput, ...func(*Options)) (*GetBotAliasesOutput, error)
+}
+
+var _ GetBotAliasesAPIClient = (*Client)(nil)
+
+// GetBotAliasesPaginatorOptions is the paginator options for GetBotAliases
+type GetBotAliasesPaginatorOptions struct {
+	// The maximum number of aliases to return in the response. The default is 50. .
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetBotAliasesPaginator is a paginator for GetBotAliases
+type GetBotAliasesPaginator struct {
+	options   GetBotAliasesPaginatorOptions
+	client    GetBotAliasesAPIClient
+	params    *GetBotAliasesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetBotAliasesPaginator returns a new GetBotAliasesPaginator
+func NewGetBotAliasesPaginator(client GetBotAliasesAPIClient, params *GetBotAliasesInput, optFns ...func(*GetBotAliasesPaginatorOptions)) *GetBotAliasesPaginator {
+	options := GetBotAliasesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetBotAliasesInput{}
+	}
+
+	return &GetBotAliasesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetBotAliasesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetBotAliases page.
+func (p *GetBotAliasesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetBotAliasesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetBotAliases(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetBotAliases(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package servicecatalog
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
@@ -114,6 +115,88 @@ func addOperationListPortfoliosMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListPortfoliosAPIClient is a client that implements the ListPortfolios
+// operation.
+type ListPortfoliosAPIClient interface {
+	ListPortfolios(context.Context, *ListPortfoliosInput, ...func(*Options)) (*ListPortfoliosOutput, error)
+}
+
+var _ ListPortfoliosAPIClient = (*Client)(nil)
+
+// ListPortfoliosPaginatorOptions is the paginator options for ListPortfolios
+type ListPortfoliosPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPortfoliosPaginator is a paginator for ListPortfolios
+type ListPortfoliosPaginator struct {
+	options   ListPortfoliosPaginatorOptions
+	client    ListPortfoliosAPIClient
+	params    *ListPortfoliosInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPortfoliosPaginator returns a new ListPortfoliosPaginator
+func NewListPortfoliosPaginator(client ListPortfoliosAPIClient, params *ListPortfoliosInput, optFns ...func(*ListPortfoliosPaginatorOptions)) *ListPortfoliosPaginator {
+	options := ListPortfoliosPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListPortfoliosInput{}
+	}
+
+	return &ListPortfoliosPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPortfoliosPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListPortfolios page.
+func (p *ListPortfoliosPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPortfoliosOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	result, err := p.client.ListPortfolios(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListPortfolios(region string) *awsmiddleware.RegisterServiceMetadata {

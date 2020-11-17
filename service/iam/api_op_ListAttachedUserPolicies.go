@@ -4,6 +4,7 @@ package iam
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
@@ -152,6 +153,100 @@ func addOperationListAttachedUserPoliciesMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// ListAttachedUserPoliciesAPIClient is a client that implements the
+// ListAttachedUserPolicies operation.
+type ListAttachedUserPoliciesAPIClient interface {
+	ListAttachedUserPolicies(context.Context, *ListAttachedUserPoliciesInput, ...func(*Options)) (*ListAttachedUserPoliciesOutput, error)
+}
+
+var _ ListAttachedUserPoliciesAPIClient = (*Client)(nil)
+
+// ListAttachedUserPoliciesPaginatorOptions is the paginator options for
+// ListAttachedUserPolicies
+type ListAttachedUserPoliciesPaginatorOptions struct {
+	// Use this only when paginating results to indicate the maximum number of items
+	// you want in the response. If additional items exist beyond the maximum you
+	// specify, the IsTruncated response element is true. If you do not include this
+	// parameter, the number of items defaults to 100. Note that IAM might return fewer
+	// results, even when there are more results available. In that case, the
+	// IsTruncated response element returns true, and Marker contains a value to
+	// include in the subsequent call that tells the service where to continue from.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAttachedUserPoliciesPaginator is a paginator for ListAttachedUserPolicies
+type ListAttachedUserPoliciesPaginator struct {
+	options   ListAttachedUserPoliciesPaginatorOptions
+	client    ListAttachedUserPoliciesAPIClient
+	params    *ListAttachedUserPoliciesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAttachedUserPoliciesPaginator returns a new
+// ListAttachedUserPoliciesPaginator
+func NewListAttachedUserPoliciesPaginator(client ListAttachedUserPoliciesAPIClient, params *ListAttachedUserPoliciesInput, optFns ...func(*ListAttachedUserPoliciesPaginatorOptions)) *ListAttachedUserPoliciesPaginator {
+	options := ListAttachedUserPoliciesPaginatorOptions{}
+	if params.MaxItems != nil {
+		options.Limit = *params.MaxItems
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAttachedUserPoliciesInput{}
+	}
+
+	return &ListAttachedUserPoliciesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAttachedUserPoliciesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAttachedUserPolicies page.
+func (p *ListAttachedUserPoliciesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAttachedUserPoliciesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxItems = limit
+
+	result, err := p.client.ListAttachedUserPolicies(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAttachedUserPolicies(region string) *awsmiddleware.RegisterServiceMetadata {

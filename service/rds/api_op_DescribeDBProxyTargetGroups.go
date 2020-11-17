@@ -4,6 +4,7 @@ package rds
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
@@ -126,6 +127,98 @@ func addOperationDescribeDBProxyTargetGroupsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	return nil
+}
+
+// DescribeDBProxyTargetGroupsAPIClient is a client that implements the
+// DescribeDBProxyTargetGroups operation.
+type DescribeDBProxyTargetGroupsAPIClient interface {
+	DescribeDBProxyTargetGroups(context.Context, *DescribeDBProxyTargetGroupsInput, ...func(*Options)) (*DescribeDBProxyTargetGroupsOutput, error)
+}
+
+var _ DescribeDBProxyTargetGroupsAPIClient = (*Client)(nil)
+
+// DescribeDBProxyTargetGroupsPaginatorOptions is the paginator options for
+// DescribeDBProxyTargetGroups
+type DescribeDBProxyTargetGroupsPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that the remaining results can be retrieved.
+	// Default: 100 Constraints: Minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeDBProxyTargetGroupsPaginator is a paginator for
+// DescribeDBProxyTargetGroups
+type DescribeDBProxyTargetGroupsPaginator struct {
+	options   DescribeDBProxyTargetGroupsPaginatorOptions
+	client    DescribeDBProxyTargetGroupsAPIClient
+	params    *DescribeDBProxyTargetGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeDBProxyTargetGroupsPaginator returns a new
+// DescribeDBProxyTargetGroupsPaginator
+func NewDescribeDBProxyTargetGroupsPaginator(client DescribeDBProxyTargetGroupsAPIClient, params *DescribeDBProxyTargetGroupsInput, optFns ...func(*DescribeDBProxyTargetGroupsPaginatorOptions)) *DescribeDBProxyTargetGroupsPaginator {
+	options := DescribeDBProxyTargetGroupsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeDBProxyTargetGroupsInput{}
+	}
+
+	return &DescribeDBProxyTargetGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeDBProxyTargetGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeDBProxyTargetGroups page.
+func (p *DescribeDBProxyTargetGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDBProxyTargetGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeDBProxyTargetGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeDBProxyTargetGroups(region string) *awsmiddleware.RegisterServiceMetadata {

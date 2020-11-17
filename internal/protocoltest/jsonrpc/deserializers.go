@@ -2341,6 +2341,78 @@ func awsAwsjson11_deserializeDocumentGreetingStruct(v **types.GreetingStruct, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentSparseStringList(v *[]*string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*string
+	if *v == nil {
+		cv = []*string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = ptr.String(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSparseStringMap(v *map[string]*string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]*string
+	if *v == nil {
+		mv = map[string]*string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal *string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			parsedVal = ptr.String(jtv)
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentStringList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2860,6 +2932,16 @@ func awsAwsjson11_deserializeOpDocumentNullOperationOutput(v **NullOperationOutp
 
 	for key, value := range shape {
 		switch key {
+		case "sparseStringList":
+			if err := awsAwsjson11_deserializeDocumentSparseStringList(&sv.SparseStringList, value); err != nil {
+				return err
+			}
+
+		case "sparseStringMap":
+			if err := awsAwsjson11_deserializeDocumentSparseStringMap(&sv.SparseStringMap, value); err != nil {
+				return err
+			}
+
 		case "string":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2867,16 +2949,6 @@ func awsAwsjson11_deserializeOpDocumentNullOperationOutput(v **NullOperationOutp
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.String_ = ptr.String(jtv)
-			}
-
-		case "stringList":
-			if err := awsAwsjson11_deserializeDocumentStringList(&sv.StringList, value); err != nil {
-				return err
-			}
-
-		case "stringMap":
-			if err := awsAwsjson11_deserializeDocumentStringMap(&sv.StringMap, value); err != nil {
-				return err
 			}
 
 		default:

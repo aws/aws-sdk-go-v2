@@ -4,6 +4,7 @@ package codecommit
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -109,6 +110,79 @@ func addOperationListBranchesMiddlewares(stack *middleware.Stack, options Option
 		return err
 	}
 	return nil
+}
+
+// ListBranchesAPIClient is a client that implements the ListBranches operation.
+type ListBranchesAPIClient interface {
+	ListBranches(context.Context, *ListBranchesInput, ...func(*Options)) (*ListBranchesOutput, error)
+}
+
+var _ ListBranchesAPIClient = (*Client)(nil)
+
+// ListBranchesPaginatorOptions is the paginator options for ListBranches
+type ListBranchesPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListBranchesPaginator is a paginator for ListBranches
+type ListBranchesPaginator struct {
+	options   ListBranchesPaginatorOptions
+	client    ListBranchesAPIClient
+	params    *ListBranchesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListBranchesPaginator returns a new ListBranchesPaginator
+func NewListBranchesPaginator(client ListBranchesAPIClient, params *ListBranchesInput, optFns ...func(*ListBranchesPaginatorOptions)) *ListBranchesPaginator {
+	options := ListBranchesPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListBranchesInput{}
+	}
+
+	return &ListBranchesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListBranchesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListBranches page.
+func (p *ListBranchesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListBranchesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListBranches(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListBranches(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package mediaconvert
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
@@ -113,6 +114,89 @@ func addOperationDescribeEndpointsMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// DescribeEndpointsAPIClient is a client that implements the DescribeEndpoints
+// operation.
+type DescribeEndpointsAPIClient interface {
+	DescribeEndpoints(context.Context, *DescribeEndpointsInput, ...func(*Options)) (*DescribeEndpointsOutput, error)
+}
+
+var _ DescribeEndpointsAPIClient = (*Client)(nil)
+
+// DescribeEndpointsPaginatorOptions is the paginator options for DescribeEndpoints
+type DescribeEndpointsPaginatorOptions struct {
+	// Optional. Max number of endpoints, up to twenty, that will be returned at one
+	// time.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeEndpointsPaginator is a paginator for DescribeEndpoints
+type DescribeEndpointsPaginator struct {
+	options   DescribeEndpointsPaginatorOptions
+	client    DescribeEndpointsAPIClient
+	params    *DescribeEndpointsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeEndpointsPaginator returns a new DescribeEndpointsPaginator
+func NewDescribeEndpointsPaginator(client DescribeEndpointsAPIClient, params *DescribeEndpointsInput, optFns ...func(*DescribeEndpointsPaginatorOptions)) *DescribeEndpointsPaginator {
+	options := DescribeEndpointsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeEndpointsInput{}
+	}
+
+	return &DescribeEndpointsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeEndpointsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeEndpoints page.
+func (p *DescribeEndpointsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeEndpointsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeEndpoints(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeEndpoints(region string) *awsmiddleware.RegisterServiceMetadata {

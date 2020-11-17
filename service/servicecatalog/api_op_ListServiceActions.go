@@ -4,6 +4,7 @@ package servicecatalog
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
@@ -115,6 +116,89 @@ func addOperationListServiceActionsMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// ListServiceActionsAPIClient is a client that implements the ListServiceActions
+// operation.
+type ListServiceActionsAPIClient interface {
+	ListServiceActions(context.Context, *ListServiceActionsInput, ...func(*Options)) (*ListServiceActionsOutput, error)
+}
+
+var _ ListServiceActionsAPIClient = (*Client)(nil)
+
+// ListServiceActionsPaginatorOptions is the paginator options for
+// ListServiceActions
+type ListServiceActionsPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListServiceActionsPaginator is a paginator for ListServiceActions
+type ListServiceActionsPaginator struct {
+	options   ListServiceActionsPaginatorOptions
+	client    ListServiceActionsAPIClient
+	params    *ListServiceActionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListServiceActionsPaginator returns a new ListServiceActionsPaginator
+func NewListServiceActionsPaginator(client ListServiceActionsAPIClient, params *ListServiceActionsInput, optFns ...func(*ListServiceActionsPaginatorOptions)) *ListServiceActionsPaginator {
+	options := ListServiceActionsPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListServiceActionsInput{}
+	}
+
+	return &ListServiceActionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListServiceActionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListServiceActions page.
+func (p *ListServiceActionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListServiceActionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	result, err := p.client.ListServiceActions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListServiceActions(region string) *awsmiddleware.RegisterServiceMetadata {

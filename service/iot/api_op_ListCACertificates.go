@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
@@ -110,6 +111,93 @@ func addOperationListCACertificatesMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// ListCACertificatesAPIClient is a client that implements the ListCACertificates
+// operation.
+type ListCACertificatesAPIClient interface {
+	ListCACertificates(context.Context, *ListCACertificatesInput, ...func(*Options)) (*ListCACertificatesOutput, error)
+}
+
+var _ ListCACertificatesAPIClient = (*Client)(nil)
+
+// ListCACertificatesPaginatorOptions is the paginator options for
+// ListCACertificates
+type ListCACertificatesPaginatorOptions struct {
+	// The result page size.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListCACertificatesPaginator is a paginator for ListCACertificates
+type ListCACertificatesPaginator struct {
+	options   ListCACertificatesPaginatorOptions
+	client    ListCACertificatesAPIClient
+	params    *ListCACertificatesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListCACertificatesPaginator returns a new ListCACertificatesPaginator
+func NewListCACertificatesPaginator(client ListCACertificatesAPIClient, params *ListCACertificatesInput, optFns ...func(*ListCACertificatesPaginatorOptions)) *ListCACertificatesPaginator {
+	options := ListCACertificatesPaginatorOptions{}
+	if params.PageSize != nil {
+		options.Limit = *params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListCACertificatesInput{}
+	}
+
+	return &ListCACertificatesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListCACertificatesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListCACertificates page.
+func (p *ListCACertificatesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListCACertificatesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.PageSize = limit
+
+	result, err := p.client.ListCACertificates(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListCACertificates(region string) *awsmiddleware.RegisterServiceMetadata {

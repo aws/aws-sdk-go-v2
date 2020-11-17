@@ -4,6 +4,7 @@ package storagegateway
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
@@ -136,6 +137,91 @@ func addOperationListTapesMiddlewares(stack *middleware.Stack, options Options) 
 		return err
 	}
 	return nil
+}
+
+// ListTapesAPIClient is a client that implements the ListTapes operation.
+type ListTapesAPIClient interface {
+	ListTapes(context.Context, *ListTapesInput, ...func(*Options)) (*ListTapesOutput, error)
+}
+
+var _ ListTapesAPIClient = (*Client)(nil)
+
+// ListTapesPaginatorOptions is the paginator options for ListTapes
+type ListTapesPaginatorOptions struct {
+	// An optional number limit for the tapes in the list returned by this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTapesPaginator is a paginator for ListTapes
+type ListTapesPaginator struct {
+	options   ListTapesPaginatorOptions
+	client    ListTapesAPIClient
+	params    *ListTapesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTapesPaginator returns a new ListTapesPaginator
+func NewListTapesPaginator(client ListTapesAPIClient, params *ListTapesInput, optFns ...func(*ListTapesPaginatorOptions)) *ListTapesPaginator {
+	options := ListTapesPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTapesInput{}
+	}
+
+	return &ListTapesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTapesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTapes page.
+func (p *ListTapesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTapesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.ListTapes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTapes(region string) *awsmiddleware.RegisterServiceMetadata {

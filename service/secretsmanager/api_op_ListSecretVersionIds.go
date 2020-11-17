@@ -4,6 +4,7 @@ package secretsmanager
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
@@ -176,6 +177,97 @@ func addOperationListSecretVersionIdsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// ListSecretVersionIdsAPIClient is a client that implements the
+// ListSecretVersionIds operation.
+type ListSecretVersionIdsAPIClient interface {
+	ListSecretVersionIds(context.Context, *ListSecretVersionIdsInput, ...func(*Options)) (*ListSecretVersionIdsOutput, error)
+}
+
+var _ ListSecretVersionIdsAPIClient = (*Client)(nil)
+
+// ListSecretVersionIdsPaginatorOptions is the paginator options for
+// ListSecretVersionIds
+type ListSecretVersionIdsPaginatorOptions struct {
+	// (Optional) Limits the number of results you want to include in the response. If
+	// you don't include this parameter, it defaults to a value that's specific to the
+	// operation. If additional items exist beyond the maximum you specify, the
+	// NextToken response element is present and has a value (isn't null). Include that
+	// value as the NextToken request parameter in the next call to the operation to
+	// get the next part of the results. Note that Secrets Manager might return fewer
+	// results than the maximum even when there are more results available. You should
+	// check NextToken after every operation to ensure that you receive all of the
+	// results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListSecretVersionIdsPaginator is a paginator for ListSecretVersionIds
+type ListSecretVersionIdsPaginator struct {
+	options   ListSecretVersionIdsPaginatorOptions
+	client    ListSecretVersionIdsAPIClient
+	params    *ListSecretVersionIdsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListSecretVersionIdsPaginator returns a new ListSecretVersionIdsPaginator
+func NewListSecretVersionIdsPaginator(client ListSecretVersionIdsAPIClient, params *ListSecretVersionIdsInput, optFns ...func(*ListSecretVersionIdsPaginatorOptions)) *ListSecretVersionIdsPaginator {
+	options := ListSecretVersionIdsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListSecretVersionIdsInput{}
+	}
+
+	return &ListSecretVersionIdsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListSecretVersionIdsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListSecretVersionIds page.
+func (p *ListSecretVersionIdsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSecretVersionIdsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListSecretVersionIds(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListSecretVersionIds(region string) *awsmiddleware.RegisterServiceMetadata {

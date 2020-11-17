@@ -4,6 +4,7 @@ package codecommit
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -114,6 +115,96 @@ func addOperationListAssociatedApprovalRuleTemplatesForRepositoryMiddlewares(sta
 		return err
 	}
 	return nil
+}
+
+// ListAssociatedApprovalRuleTemplatesForRepositoryAPIClient is a client that
+// implements the ListAssociatedApprovalRuleTemplatesForRepository operation.
+type ListAssociatedApprovalRuleTemplatesForRepositoryAPIClient interface {
+	ListAssociatedApprovalRuleTemplatesForRepository(context.Context, *ListAssociatedApprovalRuleTemplatesForRepositoryInput, ...func(*Options)) (*ListAssociatedApprovalRuleTemplatesForRepositoryOutput, error)
+}
+
+var _ ListAssociatedApprovalRuleTemplatesForRepositoryAPIClient = (*Client)(nil)
+
+// ListAssociatedApprovalRuleTemplatesForRepositoryPaginatorOptions is the
+// paginator options for ListAssociatedApprovalRuleTemplatesForRepository
+type ListAssociatedApprovalRuleTemplatesForRepositoryPaginatorOptions struct {
+	// A non-zero, non-negative integer used to limit the number of returned results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAssociatedApprovalRuleTemplatesForRepositoryPaginator is a paginator for
+// ListAssociatedApprovalRuleTemplatesForRepository
+type ListAssociatedApprovalRuleTemplatesForRepositoryPaginator struct {
+	options   ListAssociatedApprovalRuleTemplatesForRepositoryPaginatorOptions
+	client    ListAssociatedApprovalRuleTemplatesForRepositoryAPIClient
+	params    *ListAssociatedApprovalRuleTemplatesForRepositoryInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAssociatedApprovalRuleTemplatesForRepositoryPaginator returns a new
+// ListAssociatedApprovalRuleTemplatesForRepositoryPaginator
+func NewListAssociatedApprovalRuleTemplatesForRepositoryPaginator(client ListAssociatedApprovalRuleTemplatesForRepositoryAPIClient, params *ListAssociatedApprovalRuleTemplatesForRepositoryInput, optFns ...func(*ListAssociatedApprovalRuleTemplatesForRepositoryPaginatorOptions)) *ListAssociatedApprovalRuleTemplatesForRepositoryPaginator {
+	options := ListAssociatedApprovalRuleTemplatesForRepositoryPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAssociatedApprovalRuleTemplatesForRepositoryInput{}
+	}
+
+	return &ListAssociatedApprovalRuleTemplatesForRepositoryPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAssociatedApprovalRuleTemplatesForRepositoryPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAssociatedApprovalRuleTemplatesForRepository
+// page.
+func (p *ListAssociatedApprovalRuleTemplatesForRepositoryPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAssociatedApprovalRuleTemplatesForRepositoryOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListAssociatedApprovalRuleTemplatesForRepository(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAssociatedApprovalRuleTemplatesForRepository(region string) *awsmiddleware.RegisterServiceMetadata {

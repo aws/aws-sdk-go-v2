@@ -4,6 +4,7 @@ package medialive
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
@@ -105,6 +106,87 @@ func addOperationListInputsMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+// ListInputsAPIClient is a client that implements the ListInputs operation.
+type ListInputsAPIClient interface {
+	ListInputs(context.Context, *ListInputsInput, ...func(*Options)) (*ListInputsOutput, error)
+}
+
+var _ ListInputsAPIClient = (*Client)(nil)
+
+// ListInputsPaginatorOptions is the paginator options for ListInputs
+type ListInputsPaginatorOptions struct {
+	// Placeholder documentation for MaxResults
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListInputsPaginator is a paginator for ListInputs
+type ListInputsPaginator struct {
+	options   ListInputsPaginatorOptions
+	client    ListInputsAPIClient
+	params    *ListInputsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListInputsPaginator returns a new ListInputsPaginator
+func NewListInputsPaginator(client ListInputsAPIClient, params *ListInputsInput, optFns ...func(*ListInputsPaginatorOptions)) *ListInputsPaginator {
+	options := ListInputsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListInputsInput{}
+	}
+
+	return &ListInputsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListInputsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListInputs page.
+func (p *ListInputsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListInputsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListInputs(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListInputs(region string) *awsmiddleware.RegisterServiceMetadata {

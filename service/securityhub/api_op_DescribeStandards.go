@@ -4,6 +4,7 @@ package securityhub
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
@@ -107,6 +108,88 @@ func addOperationDescribeStandardsMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// DescribeStandardsAPIClient is a client that implements the DescribeStandards
+// operation.
+type DescribeStandardsAPIClient interface {
+	DescribeStandards(context.Context, *DescribeStandardsInput, ...func(*Options)) (*DescribeStandardsOutput, error)
+}
+
+var _ DescribeStandardsAPIClient = (*Client)(nil)
+
+// DescribeStandardsPaginatorOptions is the paginator options for DescribeStandards
+type DescribeStandardsPaginatorOptions struct {
+	// The maximum number of standards to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeStandardsPaginator is a paginator for DescribeStandards
+type DescribeStandardsPaginator struct {
+	options   DescribeStandardsPaginatorOptions
+	client    DescribeStandardsAPIClient
+	params    *DescribeStandardsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeStandardsPaginator returns a new DescribeStandardsPaginator
+func NewDescribeStandardsPaginator(client DescribeStandardsAPIClient, params *DescribeStandardsInput, optFns ...func(*DescribeStandardsPaginatorOptions)) *DescribeStandardsPaginator {
+	options := DescribeStandardsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeStandardsInput{}
+	}
+
+	return &DescribeStandardsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeStandardsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeStandards page.
+func (p *DescribeStandardsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeStandardsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeStandards(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeStandards(region string) *awsmiddleware.RegisterServiceMetadata {

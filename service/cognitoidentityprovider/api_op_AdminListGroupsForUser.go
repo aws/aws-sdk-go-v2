@@ -4,6 +4,7 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
@@ -119,6 +120,93 @@ func addOperationAdminListGroupsForUserMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	return nil
+}
+
+// AdminListGroupsForUserAPIClient is a client that implements the
+// AdminListGroupsForUser operation.
+type AdminListGroupsForUserAPIClient interface {
+	AdminListGroupsForUser(context.Context, *AdminListGroupsForUserInput, ...func(*Options)) (*AdminListGroupsForUserOutput, error)
+}
+
+var _ AdminListGroupsForUserAPIClient = (*Client)(nil)
+
+// AdminListGroupsForUserPaginatorOptions is the paginator options for
+// AdminListGroupsForUser
+type AdminListGroupsForUserPaginatorOptions struct {
+	// The limit of the request to list groups.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// AdminListGroupsForUserPaginator is a paginator for AdminListGroupsForUser
+type AdminListGroupsForUserPaginator struct {
+	options   AdminListGroupsForUserPaginatorOptions
+	client    AdminListGroupsForUserAPIClient
+	params    *AdminListGroupsForUserInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewAdminListGroupsForUserPaginator returns a new AdminListGroupsForUserPaginator
+func NewAdminListGroupsForUserPaginator(client AdminListGroupsForUserAPIClient, params *AdminListGroupsForUserInput, optFns ...func(*AdminListGroupsForUserPaginatorOptions)) *AdminListGroupsForUserPaginator {
+	options := AdminListGroupsForUserPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &AdminListGroupsForUserInput{}
+	}
+
+	return &AdminListGroupsForUserPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *AdminListGroupsForUserPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next AdminListGroupsForUser page.
+func (p *AdminListGroupsForUserPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*AdminListGroupsForUserOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.AdminListGroupsForUser(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opAdminListGroupsForUser(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package datasync
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
@@ -110,6 +111,93 @@ func addOperationListTaskExecutionsMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// ListTaskExecutionsAPIClient is a client that implements the ListTaskExecutions
+// operation.
+type ListTaskExecutionsAPIClient interface {
+	ListTaskExecutions(context.Context, *ListTaskExecutionsInput, ...func(*Options)) (*ListTaskExecutionsOutput, error)
+}
+
+var _ ListTaskExecutionsAPIClient = (*Client)(nil)
+
+// ListTaskExecutionsPaginatorOptions is the paginator options for
+// ListTaskExecutions
+type ListTaskExecutionsPaginatorOptions struct {
+	// The maximum number of executed tasks to list.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTaskExecutionsPaginator is a paginator for ListTaskExecutions
+type ListTaskExecutionsPaginator struct {
+	options   ListTaskExecutionsPaginatorOptions
+	client    ListTaskExecutionsAPIClient
+	params    *ListTaskExecutionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTaskExecutionsPaginator returns a new ListTaskExecutionsPaginator
+func NewListTaskExecutionsPaginator(client ListTaskExecutionsAPIClient, params *ListTaskExecutionsInput, optFns ...func(*ListTaskExecutionsPaginatorOptions)) *ListTaskExecutionsPaginator {
+	options := ListTaskExecutionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTaskExecutionsInput{}
+	}
+
+	return &ListTaskExecutionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTaskExecutionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTaskExecutions page.
+func (p *ListTaskExecutionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTaskExecutionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListTaskExecutions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTaskExecutions(region string) *awsmiddleware.RegisterServiceMetadata {

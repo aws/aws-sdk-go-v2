@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -126,6 +127,92 @@ func addOperationDescribeLocalGatewayVirtualInterfaceGroupsMiddlewares(stack *mi
 		return err
 	}
 	return nil
+}
+
+// DescribeLocalGatewayVirtualInterfaceGroupsAPIClient is a client that implements
+// the DescribeLocalGatewayVirtualInterfaceGroups operation.
+type DescribeLocalGatewayVirtualInterfaceGroupsAPIClient interface {
+	DescribeLocalGatewayVirtualInterfaceGroups(context.Context, *DescribeLocalGatewayVirtualInterfaceGroupsInput, ...func(*Options)) (*DescribeLocalGatewayVirtualInterfaceGroupsOutput, error)
+}
+
+var _ DescribeLocalGatewayVirtualInterfaceGroupsAPIClient = (*Client)(nil)
+
+// DescribeLocalGatewayVirtualInterfaceGroupsPaginatorOptions is the paginator
+// options for DescribeLocalGatewayVirtualInterfaceGroups
+type DescribeLocalGatewayVirtualInterfaceGroupsPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeLocalGatewayVirtualInterfaceGroupsPaginator is a paginator for
+// DescribeLocalGatewayVirtualInterfaceGroups
+type DescribeLocalGatewayVirtualInterfaceGroupsPaginator struct {
+	options   DescribeLocalGatewayVirtualInterfaceGroupsPaginatorOptions
+	client    DescribeLocalGatewayVirtualInterfaceGroupsAPIClient
+	params    *DescribeLocalGatewayVirtualInterfaceGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeLocalGatewayVirtualInterfaceGroupsPaginator returns a new
+// DescribeLocalGatewayVirtualInterfaceGroupsPaginator
+func NewDescribeLocalGatewayVirtualInterfaceGroupsPaginator(client DescribeLocalGatewayVirtualInterfaceGroupsAPIClient, params *DescribeLocalGatewayVirtualInterfaceGroupsInput, optFns ...func(*DescribeLocalGatewayVirtualInterfaceGroupsPaginatorOptions)) *DescribeLocalGatewayVirtualInterfaceGroupsPaginator {
+	options := DescribeLocalGatewayVirtualInterfaceGroupsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeLocalGatewayVirtualInterfaceGroupsInput{}
+	}
+
+	return &DescribeLocalGatewayVirtualInterfaceGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeLocalGatewayVirtualInterfaceGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeLocalGatewayVirtualInterfaceGroups page.
+func (p *DescribeLocalGatewayVirtualInterfaceGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeLocalGatewayVirtualInterfaceGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeLocalGatewayVirtualInterfaceGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeLocalGatewayVirtualInterfaceGroups(region string) *awsmiddleware.RegisterServiceMetadata {

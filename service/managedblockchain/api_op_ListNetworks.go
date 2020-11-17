@@ -4,6 +4,7 @@ package managedblockchain
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
@@ -116,6 +117,91 @@ func addOperationListNetworksMiddlewares(stack *middleware.Stack, options Option
 		return err
 	}
 	return nil
+}
+
+// ListNetworksAPIClient is a client that implements the ListNetworks operation.
+type ListNetworksAPIClient interface {
+	ListNetworks(context.Context, *ListNetworksInput, ...func(*Options)) (*ListNetworksOutput, error)
+}
+
+var _ ListNetworksAPIClient = (*Client)(nil)
+
+// ListNetworksPaginatorOptions is the paginator options for ListNetworks
+type ListNetworksPaginatorOptions struct {
+	// The maximum number of networks to list.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListNetworksPaginator is a paginator for ListNetworks
+type ListNetworksPaginator struct {
+	options   ListNetworksPaginatorOptions
+	client    ListNetworksAPIClient
+	params    *ListNetworksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListNetworksPaginator returns a new ListNetworksPaginator
+func NewListNetworksPaginator(client ListNetworksAPIClient, params *ListNetworksInput, optFns ...func(*ListNetworksPaginatorOptions)) *ListNetworksPaginator {
+	options := ListNetworksPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListNetworksInput{}
+	}
+
+	return &ListNetworksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListNetworksPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListNetworks page.
+func (p *ListNetworksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListNetworksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListNetworks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListNetworks(region string) *awsmiddleware.RegisterServiceMetadata {

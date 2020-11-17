@@ -4,6 +4,7 @@ package ssm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
@@ -113,6 +114,91 @@ func addOperationDescribeInstancePatchStatesMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	return nil
+}
+
+// DescribeInstancePatchStatesAPIClient is a client that implements the
+// DescribeInstancePatchStates operation.
+type DescribeInstancePatchStatesAPIClient interface {
+	DescribeInstancePatchStates(context.Context, *DescribeInstancePatchStatesInput, ...func(*Options)) (*DescribeInstancePatchStatesOutput, error)
+}
+
+var _ DescribeInstancePatchStatesAPIClient = (*Client)(nil)
+
+// DescribeInstancePatchStatesPaginatorOptions is the paginator options for
+// DescribeInstancePatchStates
+type DescribeInstancePatchStatesPaginatorOptions struct {
+	// The maximum number of instances to return (per page).
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeInstancePatchStatesPaginator is a paginator for
+// DescribeInstancePatchStates
+type DescribeInstancePatchStatesPaginator struct {
+	options   DescribeInstancePatchStatesPaginatorOptions
+	client    DescribeInstancePatchStatesAPIClient
+	params    *DescribeInstancePatchStatesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeInstancePatchStatesPaginator returns a new
+// DescribeInstancePatchStatesPaginator
+func NewDescribeInstancePatchStatesPaginator(client DescribeInstancePatchStatesAPIClient, params *DescribeInstancePatchStatesInput, optFns ...func(*DescribeInstancePatchStatesPaginatorOptions)) *DescribeInstancePatchStatesPaginator {
+	options := DescribeInstancePatchStatesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeInstancePatchStatesInput{}
+	}
+
+	return &DescribeInstancePatchStatesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeInstancePatchStatesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeInstancePatchStates page.
+func (p *DescribeInstancePatchStatesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeInstancePatchStatesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeInstancePatchStates(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeInstancePatchStates(region string) *awsmiddleware.RegisterServiceMetadata {

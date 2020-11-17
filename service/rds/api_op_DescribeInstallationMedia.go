@@ -4,6 +4,7 @@ package rds
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
@@ -129,6 +130,96 @@ func addOperationDescribeInstallationMediaMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+// DescribeInstallationMediaAPIClient is a client that implements the
+// DescribeInstallationMedia operation.
+type DescribeInstallationMediaAPIClient interface {
+	DescribeInstallationMedia(context.Context, *DescribeInstallationMediaInput, ...func(*Options)) (*DescribeInstallationMediaOutput, error)
+}
+
+var _ DescribeInstallationMediaAPIClient = (*Client)(nil)
+
+// DescribeInstallationMediaPaginatorOptions is the paginator options for
+// DescribeInstallationMedia
+type DescribeInstallationMediaPaginatorOptions struct {
+	// An optional pagination token provided by a previous DescribeInstallationMedia
+	// request. If this parameter is specified, the response includes only records
+	// beyond the marker, up to the value specified by MaxRecords.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeInstallationMediaPaginator is a paginator for DescribeInstallationMedia
+type DescribeInstallationMediaPaginator struct {
+	options   DescribeInstallationMediaPaginatorOptions
+	client    DescribeInstallationMediaAPIClient
+	params    *DescribeInstallationMediaInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeInstallationMediaPaginator returns a new
+// DescribeInstallationMediaPaginator
+func NewDescribeInstallationMediaPaginator(client DescribeInstallationMediaAPIClient, params *DescribeInstallationMediaInput, optFns ...func(*DescribeInstallationMediaPaginatorOptions)) *DescribeInstallationMediaPaginator {
+	options := DescribeInstallationMediaPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeInstallationMediaInput{}
+	}
+
+	return &DescribeInstallationMediaPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeInstallationMediaPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeInstallationMedia page.
+func (p *DescribeInstallationMediaPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeInstallationMediaOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeInstallationMedia(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeInstallationMedia(region string) *awsmiddleware.RegisterServiceMetadata {

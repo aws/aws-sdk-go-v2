@@ -4,6 +4,7 @@ package connect
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
@@ -113,6 +114,87 @@ func addOperationListPromptsMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+// ListPromptsAPIClient is a client that implements the ListPrompts operation.
+type ListPromptsAPIClient interface {
+	ListPrompts(context.Context, *ListPromptsInput, ...func(*Options)) (*ListPromptsOutput, error)
+}
+
+var _ ListPromptsAPIClient = (*Client)(nil)
+
+// ListPromptsPaginatorOptions is the paginator options for ListPrompts
+type ListPromptsPaginatorOptions struct {
+	// The maximum number of results to return per page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPromptsPaginator is a paginator for ListPrompts
+type ListPromptsPaginator struct {
+	options   ListPromptsPaginatorOptions
+	client    ListPromptsAPIClient
+	params    *ListPromptsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPromptsPaginator returns a new ListPromptsPaginator
+func NewListPromptsPaginator(client ListPromptsAPIClient, params *ListPromptsInput, optFns ...func(*ListPromptsPaginatorOptions)) *ListPromptsPaginator {
+	options := ListPromptsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListPromptsInput{}
+	}
+
+	return &ListPromptsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPromptsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListPrompts page.
+func (p *ListPromptsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPromptsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListPrompts(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListPrompts(region string) *awsmiddleware.RegisterServiceMetadata {

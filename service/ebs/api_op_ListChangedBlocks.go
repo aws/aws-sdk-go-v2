@@ -4,6 +4,7 @@ package ebs
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ebs/types"
@@ -134,6 +135,92 @@ func addOperationListChangedBlocksMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// ListChangedBlocksAPIClient is a client that implements the ListChangedBlocks
+// operation.
+type ListChangedBlocksAPIClient interface {
+	ListChangedBlocks(context.Context, *ListChangedBlocksInput, ...func(*Options)) (*ListChangedBlocksOutput, error)
+}
+
+var _ ListChangedBlocksAPIClient = (*Client)(nil)
+
+// ListChangedBlocksPaginatorOptions is the paginator options for ListChangedBlocks
+type ListChangedBlocksPaginatorOptions struct {
+	// The number of results to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListChangedBlocksPaginator is a paginator for ListChangedBlocks
+type ListChangedBlocksPaginator struct {
+	options   ListChangedBlocksPaginatorOptions
+	client    ListChangedBlocksAPIClient
+	params    *ListChangedBlocksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListChangedBlocksPaginator returns a new ListChangedBlocksPaginator
+func NewListChangedBlocksPaginator(client ListChangedBlocksAPIClient, params *ListChangedBlocksInput, optFns ...func(*ListChangedBlocksPaginatorOptions)) *ListChangedBlocksPaginator {
+	options := ListChangedBlocksPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListChangedBlocksInput{}
+	}
+
+	return &ListChangedBlocksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListChangedBlocksPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListChangedBlocks page.
+func (p *ListChangedBlocksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListChangedBlocksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListChangedBlocks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListChangedBlocks(region string) *awsmiddleware.RegisterServiceMetadata {

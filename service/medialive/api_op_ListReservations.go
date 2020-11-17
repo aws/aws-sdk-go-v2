@@ -4,6 +4,7 @@ package medialive
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
@@ -129,6 +130,88 @@ func addOperationListReservationsMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// ListReservationsAPIClient is a client that implements the ListReservations
+// operation.
+type ListReservationsAPIClient interface {
+	ListReservations(context.Context, *ListReservationsInput, ...func(*Options)) (*ListReservationsOutput, error)
+}
+
+var _ ListReservationsAPIClient = (*Client)(nil)
+
+// ListReservationsPaginatorOptions is the paginator options for ListReservations
+type ListReservationsPaginatorOptions struct {
+	// Placeholder documentation for MaxResults
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListReservationsPaginator is a paginator for ListReservations
+type ListReservationsPaginator struct {
+	options   ListReservationsPaginatorOptions
+	client    ListReservationsAPIClient
+	params    *ListReservationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListReservationsPaginator returns a new ListReservationsPaginator
+func NewListReservationsPaginator(client ListReservationsAPIClient, params *ListReservationsInput, optFns ...func(*ListReservationsPaginatorOptions)) *ListReservationsPaginator {
+	options := ListReservationsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListReservationsInput{}
+	}
+
+	return &ListReservationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListReservationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListReservations page.
+func (p *ListReservationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListReservationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListReservations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListReservations(region string) *awsmiddleware.RegisterServiceMetadata {

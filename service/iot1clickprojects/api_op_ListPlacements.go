@@ -4,6 +4,7 @@ package iot1clickprojects
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot1clickprojects/types"
@@ -115,6 +116,93 @@ func addOperationListPlacementsMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListPlacementsAPIClient is a client that implements the ListPlacements
+// operation.
+type ListPlacementsAPIClient interface {
+	ListPlacements(context.Context, *ListPlacementsInput, ...func(*Options)) (*ListPlacementsOutput, error)
+}
+
+var _ ListPlacementsAPIClient = (*Client)(nil)
+
+// ListPlacementsPaginatorOptions is the paginator options for ListPlacements
+type ListPlacementsPaginatorOptions struct {
+	// The maximum number of results to return per request. If not set, a default value
+	// of 100 is used.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPlacementsPaginator is a paginator for ListPlacements
+type ListPlacementsPaginator struct {
+	options   ListPlacementsPaginatorOptions
+	client    ListPlacementsAPIClient
+	params    *ListPlacementsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPlacementsPaginator returns a new ListPlacementsPaginator
+func NewListPlacementsPaginator(client ListPlacementsAPIClient, params *ListPlacementsInput, optFns ...func(*ListPlacementsPaginatorOptions)) *ListPlacementsPaginator {
+	options := ListPlacementsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListPlacementsInput{}
+	}
+
+	return &ListPlacementsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPlacementsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListPlacements page.
+func (p *ListPlacementsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPlacementsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListPlacements(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListPlacements(region string) *awsmiddleware.RegisterServiceMetadata {

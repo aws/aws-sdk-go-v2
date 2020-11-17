@@ -4,6 +4,7 @@ package sms
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sms/types"
@@ -117,6 +118,93 @@ func addOperationGetServersMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+// GetServersAPIClient is a client that implements the GetServers operation.
+type GetServersAPIClient interface {
+	GetServers(context.Context, *GetServersInput, ...func(*Options)) (*GetServersOutput, error)
+}
+
+var _ GetServersAPIClient = (*Client)(nil)
+
+// GetServersPaginatorOptions is the paginator options for GetServers
+type GetServersPaginatorOptions struct {
+	// The maximum number of results to return in a single call. The default value is
+	// 50. To retrieve the remaining results, make another call with the returned
+	// NextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetServersPaginator is a paginator for GetServers
+type GetServersPaginator struct {
+	options   GetServersPaginatorOptions
+	client    GetServersAPIClient
+	params    *GetServersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetServersPaginator returns a new GetServersPaginator
+func NewGetServersPaginator(client GetServersAPIClient, params *GetServersInput, optFns ...func(*GetServersPaginatorOptions)) *GetServersPaginator {
+	options := GetServersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetServersInput{}
+	}
+
+	return &GetServersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetServersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetServers page.
+func (p *GetServersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetServersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetServers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetServers(region string) *awsmiddleware.RegisterServiceMetadata {

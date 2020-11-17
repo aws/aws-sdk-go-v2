@@ -4,6 +4,7 @@ package workspaces
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
@@ -109,6 +110,83 @@ func addOperationDescribeWorkspaceDirectoriesMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+// DescribeWorkspaceDirectoriesAPIClient is a client that implements the
+// DescribeWorkspaceDirectories operation.
+type DescribeWorkspaceDirectoriesAPIClient interface {
+	DescribeWorkspaceDirectories(context.Context, *DescribeWorkspaceDirectoriesInput, ...func(*Options)) (*DescribeWorkspaceDirectoriesOutput, error)
+}
+
+var _ DescribeWorkspaceDirectoriesAPIClient = (*Client)(nil)
+
+// DescribeWorkspaceDirectoriesPaginatorOptions is the paginator options for
+// DescribeWorkspaceDirectories
+type DescribeWorkspaceDirectoriesPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeWorkspaceDirectoriesPaginator is a paginator for
+// DescribeWorkspaceDirectories
+type DescribeWorkspaceDirectoriesPaginator struct {
+	options   DescribeWorkspaceDirectoriesPaginatorOptions
+	client    DescribeWorkspaceDirectoriesAPIClient
+	params    *DescribeWorkspaceDirectoriesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeWorkspaceDirectoriesPaginator returns a new
+// DescribeWorkspaceDirectoriesPaginator
+func NewDescribeWorkspaceDirectoriesPaginator(client DescribeWorkspaceDirectoriesAPIClient, params *DescribeWorkspaceDirectoriesInput, optFns ...func(*DescribeWorkspaceDirectoriesPaginatorOptions)) *DescribeWorkspaceDirectoriesPaginator {
+	options := DescribeWorkspaceDirectoriesPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeWorkspaceDirectoriesInput{}
+	}
+
+	return &DescribeWorkspaceDirectoriesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeWorkspaceDirectoriesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeWorkspaceDirectories page.
+func (p *DescribeWorkspaceDirectoriesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeWorkspaceDirectoriesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.DescribeWorkspaceDirectories(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeWorkspaceDirectories(region string) *awsmiddleware.RegisterServiceMetadata {

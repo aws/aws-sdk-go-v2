@@ -4,6 +4,7 @@ package xray
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
@@ -100,6 +101,83 @@ func addOperationGetSamplingStatisticSummariesMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+// GetSamplingStatisticSummariesAPIClient is a client that implements the
+// GetSamplingStatisticSummaries operation.
+type GetSamplingStatisticSummariesAPIClient interface {
+	GetSamplingStatisticSummaries(context.Context, *GetSamplingStatisticSummariesInput, ...func(*Options)) (*GetSamplingStatisticSummariesOutput, error)
+}
+
+var _ GetSamplingStatisticSummariesAPIClient = (*Client)(nil)
+
+// GetSamplingStatisticSummariesPaginatorOptions is the paginator options for
+// GetSamplingStatisticSummaries
+type GetSamplingStatisticSummariesPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetSamplingStatisticSummariesPaginator is a paginator for
+// GetSamplingStatisticSummaries
+type GetSamplingStatisticSummariesPaginator struct {
+	options   GetSamplingStatisticSummariesPaginatorOptions
+	client    GetSamplingStatisticSummariesAPIClient
+	params    *GetSamplingStatisticSummariesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetSamplingStatisticSummariesPaginator returns a new
+// GetSamplingStatisticSummariesPaginator
+func NewGetSamplingStatisticSummariesPaginator(client GetSamplingStatisticSummariesAPIClient, params *GetSamplingStatisticSummariesInput, optFns ...func(*GetSamplingStatisticSummariesPaginatorOptions)) *GetSamplingStatisticSummariesPaginator {
+	options := GetSamplingStatisticSummariesPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetSamplingStatisticSummariesInput{}
+	}
+
+	return &GetSamplingStatisticSummariesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetSamplingStatisticSummariesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetSamplingStatisticSummaries page.
+func (p *GetSamplingStatisticSummariesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetSamplingStatisticSummariesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.GetSamplingStatisticSummaries(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetSamplingStatisticSummaries(region string) *awsmiddleware.RegisterServiceMetadata {

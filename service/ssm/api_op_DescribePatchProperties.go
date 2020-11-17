@@ -4,6 +4,7 @@ package ssm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
@@ -135,6 +136,91 @@ func addOperationDescribePatchPropertiesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// DescribePatchPropertiesAPIClient is a client that implements the
+// DescribePatchProperties operation.
+type DescribePatchPropertiesAPIClient interface {
+	DescribePatchProperties(context.Context, *DescribePatchPropertiesInput, ...func(*Options)) (*DescribePatchPropertiesOutput, error)
+}
+
+var _ DescribePatchPropertiesAPIClient = (*Client)(nil)
+
+// DescribePatchPropertiesPaginatorOptions is the paginator options for
+// DescribePatchProperties
+type DescribePatchPropertiesPaginatorOptions struct {
+	// The maximum number of items to return for this call. The call also returns a
+	// token that you can specify in a subsequent call to get the next set of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribePatchPropertiesPaginator is a paginator for DescribePatchProperties
+type DescribePatchPropertiesPaginator struct {
+	options   DescribePatchPropertiesPaginatorOptions
+	client    DescribePatchPropertiesAPIClient
+	params    *DescribePatchPropertiesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribePatchPropertiesPaginator returns a new
+// DescribePatchPropertiesPaginator
+func NewDescribePatchPropertiesPaginator(client DescribePatchPropertiesAPIClient, params *DescribePatchPropertiesInput, optFns ...func(*DescribePatchPropertiesPaginatorOptions)) *DescribePatchPropertiesPaginator {
+	options := DescribePatchPropertiesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribePatchPropertiesInput{}
+	}
+
+	return &DescribePatchPropertiesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribePatchPropertiesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribePatchProperties page.
+func (p *DescribePatchPropertiesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribePatchPropertiesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribePatchProperties(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribePatchProperties(region string) *awsmiddleware.RegisterServiceMetadata {

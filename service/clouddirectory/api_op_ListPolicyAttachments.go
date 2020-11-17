@@ -4,6 +4,7 @@ package clouddirectory
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
@@ -122,6 +123,94 @@ func addOperationListPolicyAttachmentsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// ListPolicyAttachmentsAPIClient is a client that implements the
+// ListPolicyAttachments operation.
+type ListPolicyAttachmentsAPIClient interface {
+	ListPolicyAttachments(context.Context, *ListPolicyAttachmentsInput, ...func(*Options)) (*ListPolicyAttachmentsOutput, error)
+}
+
+var _ ListPolicyAttachmentsAPIClient = (*Client)(nil)
+
+// ListPolicyAttachmentsPaginatorOptions is the paginator options for
+// ListPolicyAttachments
+type ListPolicyAttachmentsPaginatorOptions struct {
+	// The maximum number of items to be retrieved in a single call. This is an
+	// approximate number.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPolicyAttachmentsPaginator is a paginator for ListPolicyAttachments
+type ListPolicyAttachmentsPaginator struct {
+	options   ListPolicyAttachmentsPaginatorOptions
+	client    ListPolicyAttachmentsAPIClient
+	params    *ListPolicyAttachmentsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPolicyAttachmentsPaginator returns a new ListPolicyAttachmentsPaginator
+func NewListPolicyAttachmentsPaginator(client ListPolicyAttachmentsAPIClient, params *ListPolicyAttachmentsInput, optFns ...func(*ListPolicyAttachmentsPaginatorOptions)) *ListPolicyAttachmentsPaginator {
+	options := ListPolicyAttachmentsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListPolicyAttachmentsInput{}
+	}
+
+	return &ListPolicyAttachmentsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPolicyAttachmentsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListPolicyAttachments page.
+func (p *ListPolicyAttachmentsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPolicyAttachmentsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListPolicyAttachments(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListPolicyAttachments(region string) *awsmiddleware.RegisterServiceMetadata {

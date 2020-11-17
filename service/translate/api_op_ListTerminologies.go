@@ -4,6 +4,7 @@ package translate
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
@@ -105,6 +106,92 @@ func addOperationListTerminologiesMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// ListTerminologiesAPIClient is a client that implements the ListTerminologies
+// operation.
+type ListTerminologiesAPIClient interface {
+	ListTerminologies(context.Context, *ListTerminologiesInput, ...func(*Options)) (*ListTerminologiesOutput, error)
+}
+
+var _ ListTerminologiesAPIClient = (*Client)(nil)
+
+// ListTerminologiesPaginatorOptions is the paginator options for ListTerminologies
+type ListTerminologiesPaginatorOptions struct {
+	// The maximum number of custom terminologies returned per list request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTerminologiesPaginator is a paginator for ListTerminologies
+type ListTerminologiesPaginator struct {
+	options   ListTerminologiesPaginatorOptions
+	client    ListTerminologiesAPIClient
+	params    *ListTerminologiesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTerminologiesPaginator returns a new ListTerminologiesPaginator
+func NewListTerminologiesPaginator(client ListTerminologiesAPIClient, params *ListTerminologiesInput, optFns ...func(*ListTerminologiesPaginatorOptions)) *ListTerminologiesPaginator {
+	options := ListTerminologiesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTerminologiesInput{}
+	}
+
+	return &ListTerminologiesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTerminologiesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTerminologies page.
+func (p *ListTerminologiesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTerminologiesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListTerminologies(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTerminologies(region string) *awsmiddleware.RegisterServiceMetadata {

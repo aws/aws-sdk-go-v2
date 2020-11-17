@@ -4,6 +4,7 @@ package machinelearning
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
@@ -185,6 +186,95 @@ func addOperationDescribeBatchPredictionsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// DescribeBatchPredictionsAPIClient is a client that implements the
+// DescribeBatchPredictions operation.
+type DescribeBatchPredictionsAPIClient interface {
+	DescribeBatchPredictions(context.Context, *DescribeBatchPredictionsInput, ...func(*Options)) (*DescribeBatchPredictionsOutput, error)
+}
+
+var _ DescribeBatchPredictionsAPIClient = (*Client)(nil)
+
+// DescribeBatchPredictionsPaginatorOptions is the paginator options for
+// DescribeBatchPredictions
+type DescribeBatchPredictionsPaginatorOptions struct {
+	// The number of pages of information to include in the result. The range of
+	// acceptable values is 1 through 100. The default value is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeBatchPredictionsPaginator is a paginator for DescribeBatchPredictions
+type DescribeBatchPredictionsPaginator struct {
+	options   DescribeBatchPredictionsPaginatorOptions
+	client    DescribeBatchPredictionsAPIClient
+	params    *DescribeBatchPredictionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeBatchPredictionsPaginator returns a new
+// DescribeBatchPredictionsPaginator
+func NewDescribeBatchPredictionsPaginator(client DescribeBatchPredictionsAPIClient, params *DescribeBatchPredictionsInput, optFns ...func(*DescribeBatchPredictionsPaginatorOptions)) *DescribeBatchPredictionsPaginator {
+	options := DescribeBatchPredictionsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeBatchPredictionsInput{}
+	}
+
+	return &DescribeBatchPredictionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeBatchPredictionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeBatchPredictions page.
+func (p *DescribeBatchPredictionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeBatchPredictionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeBatchPredictions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeBatchPredictions(region string) *awsmiddleware.RegisterServiceMetadata {

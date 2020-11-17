@@ -4,6 +4,7 @@ package transcribe
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
@@ -121,6 +122,94 @@ func addOperationListLanguageModelsMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// ListLanguageModelsAPIClient is a client that implements the ListLanguageModels
+// operation.
+type ListLanguageModelsAPIClient interface {
+	ListLanguageModels(context.Context, *ListLanguageModelsInput, ...func(*Options)) (*ListLanguageModelsOutput, error)
+}
+
+var _ ListLanguageModelsAPIClient = (*Client)(nil)
+
+// ListLanguageModelsPaginatorOptions is the paginator options for
+// ListLanguageModels
+type ListLanguageModelsPaginatorOptions struct {
+	// The maximum number of language models to return in the response. If there are
+	// fewer results in the list, the response contains only the actual results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListLanguageModelsPaginator is a paginator for ListLanguageModels
+type ListLanguageModelsPaginator struct {
+	options   ListLanguageModelsPaginatorOptions
+	client    ListLanguageModelsAPIClient
+	params    *ListLanguageModelsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListLanguageModelsPaginator returns a new ListLanguageModelsPaginator
+func NewListLanguageModelsPaginator(client ListLanguageModelsAPIClient, params *ListLanguageModelsInput, optFns ...func(*ListLanguageModelsPaginatorOptions)) *ListLanguageModelsPaginator {
+	options := ListLanguageModelsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListLanguageModelsInput{}
+	}
+
+	return &ListLanguageModelsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListLanguageModelsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListLanguageModels page.
+func (p *ListLanguageModelsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListLanguageModelsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListLanguageModels(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListLanguageModels(region string) *awsmiddleware.RegisterServiceMetadata {

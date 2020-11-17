@@ -4,6 +4,7 @@ package redshift
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
@@ -152,6 +153,99 @@ func addOperationDescribeClusterParameterGroupsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+// DescribeClusterParameterGroupsAPIClient is a client that implements the
+// DescribeClusterParameterGroups operation.
+type DescribeClusterParameterGroupsAPIClient interface {
+	DescribeClusterParameterGroups(context.Context, *DescribeClusterParameterGroupsInput, ...func(*Options)) (*DescribeClusterParameterGroupsOutput, error)
+}
+
+var _ DescribeClusterParameterGroupsAPIClient = (*Client)(nil)
+
+// DescribeClusterParameterGroupsPaginatorOptions is the paginator options for
+// DescribeClusterParameterGroups
+type DescribeClusterParameterGroupsPaginatorOptions struct {
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value. Default: 100
+	// Constraints: minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeClusterParameterGroupsPaginator is a paginator for
+// DescribeClusterParameterGroups
+type DescribeClusterParameterGroupsPaginator struct {
+	options   DescribeClusterParameterGroupsPaginatorOptions
+	client    DescribeClusterParameterGroupsAPIClient
+	params    *DescribeClusterParameterGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeClusterParameterGroupsPaginator returns a new
+// DescribeClusterParameterGroupsPaginator
+func NewDescribeClusterParameterGroupsPaginator(client DescribeClusterParameterGroupsAPIClient, params *DescribeClusterParameterGroupsInput, optFns ...func(*DescribeClusterParameterGroupsPaginatorOptions)) *DescribeClusterParameterGroupsPaginator {
+	options := DescribeClusterParameterGroupsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeClusterParameterGroupsInput{}
+	}
+
+	return &DescribeClusterParameterGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeClusterParameterGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeClusterParameterGroups page.
+func (p *DescribeClusterParameterGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeClusterParameterGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeClusterParameterGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeClusterParameterGroups(region string) *awsmiddleware.RegisterServiceMetadata {

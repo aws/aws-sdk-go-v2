@@ -4,6 +4,7 @@ package codebuild
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
@@ -127,6 +128,81 @@ func addOperationListBuildsForProjectMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// ListBuildsForProjectAPIClient is a client that implements the
+// ListBuildsForProject operation.
+type ListBuildsForProjectAPIClient interface {
+	ListBuildsForProject(context.Context, *ListBuildsForProjectInput, ...func(*Options)) (*ListBuildsForProjectOutput, error)
+}
+
+var _ ListBuildsForProjectAPIClient = (*Client)(nil)
+
+// ListBuildsForProjectPaginatorOptions is the paginator options for
+// ListBuildsForProject
+type ListBuildsForProjectPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListBuildsForProjectPaginator is a paginator for ListBuildsForProject
+type ListBuildsForProjectPaginator struct {
+	options   ListBuildsForProjectPaginatorOptions
+	client    ListBuildsForProjectAPIClient
+	params    *ListBuildsForProjectInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListBuildsForProjectPaginator returns a new ListBuildsForProjectPaginator
+func NewListBuildsForProjectPaginator(client ListBuildsForProjectAPIClient, params *ListBuildsForProjectInput, optFns ...func(*ListBuildsForProjectPaginatorOptions)) *ListBuildsForProjectPaginator {
+	options := ListBuildsForProjectPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListBuildsForProjectInput{}
+	}
+
+	return &ListBuildsForProjectPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListBuildsForProjectPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListBuildsForProject page.
+func (p *ListBuildsForProjectPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListBuildsForProjectOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListBuildsForProject(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListBuildsForProject(region string) *awsmiddleware.RegisterServiceMetadata {

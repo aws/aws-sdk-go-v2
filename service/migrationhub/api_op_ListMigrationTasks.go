@@ -4,6 +4,7 @@ package migrationhub
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
@@ -121,6 +122,93 @@ func addOperationListMigrationTasksMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// ListMigrationTasksAPIClient is a client that implements the ListMigrationTasks
+// operation.
+type ListMigrationTasksAPIClient interface {
+	ListMigrationTasks(context.Context, *ListMigrationTasksInput, ...func(*Options)) (*ListMigrationTasksOutput, error)
+}
+
+var _ ListMigrationTasksAPIClient = (*Client)(nil)
+
+// ListMigrationTasksPaginatorOptions is the paginator options for
+// ListMigrationTasks
+type ListMigrationTasksPaginatorOptions struct {
+	// Value to specify how many results are returned per page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListMigrationTasksPaginator is a paginator for ListMigrationTasks
+type ListMigrationTasksPaginator struct {
+	options   ListMigrationTasksPaginatorOptions
+	client    ListMigrationTasksAPIClient
+	params    *ListMigrationTasksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListMigrationTasksPaginator returns a new ListMigrationTasksPaginator
+func NewListMigrationTasksPaginator(client ListMigrationTasksAPIClient, params *ListMigrationTasksInput, optFns ...func(*ListMigrationTasksPaginatorOptions)) *ListMigrationTasksPaginator {
+	options := ListMigrationTasksPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListMigrationTasksInput{}
+	}
+
+	return &ListMigrationTasksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListMigrationTasksPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListMigrationTasks page.
+func (p *ListMigrationTasksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListMigrationTasksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListMigrationTasks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListMigrationTasks(region string) *awsmiddleware.RegisterServiceMetadata {

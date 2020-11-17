@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -139,6 +140,94 @@ func addOperationDescribeInstanceCreditSpecificationsMiddlewares(stack *middlewa
 		return err
 	}
 	return nil
+}
+
+// DescribeInstanceCreditSpecificationsAPIClient is a client that implements the
+// DescribeInstanceCreditSpecifications operation.
+type DescribeInstanceCreditSpecificationsAPIClient interface {
+	DescribeInstanceCreditSpecifications(context.Context, *DescribeInstanceCreditSpecificationsInput, ...func(*Options)) (*DescribeInstanceCreditSpecificationsOutput, error)
+}
+
+var _ DescribeInstanceCreditSpecificationsAPIClient = (*Client)(nil)
+
+// DescribeInstanceCreditSpecificationsPaginatorOptions is the paginator options
+// for DescribeInstanceCreditSpecifications
+type DescribeInstanceCreditSpecificationsPaginatorOptions struct {
+	// The maximum number of results to return in a single call. To retrieve the
+	// remaining results, make another call with the returned NextToken value. This
+	// value can be between 5 and 1000. You cannot specify this parameter and the
+	// instance IDs parameter in the same call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeInstanceCreditSpecificationsPaginator is a paginator for
+// DescribeInstanceCreditSpecifications
+type DescribeInstanceCreditSpecificationsPaginator struct {
+	options   DescribeInstanceCreditSpecificationsPaginatorOptions
+	client    DescribeInstanceCreditSpecificationsAPIClient
+	params    *DescribeInstanceCreditSpecificationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeInstanceCreditSpecificationsPaginator returns a new
+// DescribeInstanceCreditSpecificationsPaginator
+func NewDescribeInstanceCreditSpecificationsPaginator(client DescribeInstanceCreditSpecificationsAPIClient, params *DescribeInstanceCreditSpecificationsInput, optFns ...func(*DescribeInstanceCreditSpecificationsPaginatorOptions)) *DescribeInstanceCreditSpecificationsPaginator {
+	options := DescribeInstanceCreditSpecificationsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeInstanceCreditSpecificationsInput{}
+	}
+
+	return &DescribeInstanceCreditSpecificationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeInstanceCreditSpecificationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeInstanceCreditSpecifications page.
+func (p *DescribeInstanceCreditSpecificationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeInstanceCreditSpecificationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeInstanceCreditSpecifications(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeInstanceCreditSpecifications(region string) *awsmiddleware.RegisterServiceMetadata {

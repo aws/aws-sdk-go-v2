@@ -4,6 +4,7 @@ package ssm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
@@ -114,6 +115,92 @@ func addOperationDescribeEffectiveInstanceAssociationsMiddlewares(stack *middlew
 		return err
 	}
 	return nil
+}
+
+// DescribeEffectiveInstanceAssociationsAPIClient is a client that implements the
+// DescribeEffectiveInstanceAssociations operation.
+type DescribeEffectiveInstanceAssociationsAPIClient interface {
+	DescribeEffectiveInstanceAssociations(context.Context, *DescribeEffectiveInstanceAssociationsInput, ...func(*Options)) (*DescribeEffectiveInstanceAssociationsOutput, error)
+}
+
+var _ DescribeEffectiveInstanceAssociationsAPIClient = (*Client)(nil)
+
+// DescribeEffectiveInstanceAssociationsPaginatorOptions is the paginator options
+// for DescribeEffectiveInstanceAssociations
+type DescribeEffectiveInstanceAssociationsPaginatorOptions struct {
+	// The maximum number of items to return for this call. The call also returns a
+	// token that you can specify in a subsequent call to get the next set of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeEffectiveInstanceAssociationsPaginator is a paginator for
+// DescribeEffectiveInstanceAssociations
+type DescribeEffectiveInstanceAssociationsPaginator struct {
+	options   DescribeEffectiveInstanceAssociationsPaginatorOptions
+	client    DescribeEffectiveInstanceAssociationsAPIClient
+	params    *DescribeEffectiveInstanceAssociationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeEffectiveInstanceAssociationsPaginator returns a new
+// DescribeEffectiveInstanceAssociationsPaginator
+func NewDescribeEffectiveInstanceAssociationsPaginator(client DescribeEffectiveInstanceAssociationsAPIClient, params *DescribeEffectiveInstanceAssociationsInput, optFns ...func(*DescribeEffectiveInstanceAssociationsPaginatorOptions)) *DescribeEffectiveInstanceAssociationsPaginator {
+	options := DescribeEffectiveInstanceAssociationsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeEffectiveInstanceAssociationsInput{}
+	}
+
+	return &DescribeEffectiveInstanceAssociationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeEffectiveInstanceAssociationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeEffectiveInstanceAssociations page.
+func (p *DescribeEffectiveInstanceAssociationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeEffectiveInstanceAssociationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeEffectiveInstanceAssociations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeEffectiveInstanceAssociations(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package fsx
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
@@ -138,6 +139,95 @@ func addOperationDescribeBackupsMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	return nil
+}
+
+// DescribeBackupsAPIClient is a client that implements the DescribeBackups
+// operation.
+type DescribeBackupsAPIClient interface {
+	DescribeBackups(context.Context, *DescribeBackupsInput, ...func(*Options)) (*DescribeBackupsOutput, error)
+}
+
+var _ DescribeBackupsAPIClient = (*Client)(nil)
+
+// DescribeBackupsPaginatorOptions is the paginator options for DescribeBackups
+type DescribeBackupsPaginatorOptions struct {
+	// Maximum number of backups to return in the response (integer). This parameter
+	// value must be greater than 0. The number of items that Amazon FSx returns is the
+	// minimum of the MaxResults parameter specified in the request and the service's
+	// internal maximum number of items per page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeBackupsPaginator is a paginator for DescribeBackups
+type DescribeBackupsPaginator struct {
+	options   DescribeBackupsPaginatorOptions
+	client    DescribeBackupsAPIClient
+	params    *DescribeBackupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeBackupsPaginator returns a new DescribeBackupsPaginator
+func NewDescribeBackupsPaginator(client DescribeBackupsAPIClient, params *DescribeBackupsInput, optFns ...func(*DescribeBackupsPaginatorOptions)) *DescribeBackupsPaginator {
+	options := DescribeBackupsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeBackupsInput{}
+	}
+
+	return &DescribeBackupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeBackupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeBackups page.
+func (p *DescribeBackupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeBackupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeBackups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeBackups(region string) *awsmiddleware.RegisterServiceMetadata {

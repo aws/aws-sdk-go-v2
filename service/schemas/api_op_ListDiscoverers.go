@@ -4,6 +4,7 @@ package schemas
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
@@ -114,6 +115,87 @@ func addOperationListDiscoverersMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	return nil
+}
+
+// ListDiscoverersAPIClient is a client that implements the ListDiscoverers
+// operation.
+type ListDiscoverersAPIClient interface {
+	ListDiscoverers(context.Context, *ListDiscoverersInput, ...func(*Options)) (*ListDiscoverersOutput, error)
+}
+
+var _ ListDiscoverersAPIClient = (*Client)(nil)
+
+// ListDiscoverersPaginatorOptions is the paginator options for ListDiscoverers
+type ListDiscoverersPaginatorOptions struct {
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDiscoverersPaginator is a paginator for ListDiscoverers
+type ListDiscoverersPaginator struct {
+	options   ListDiscoverersPaginatorOptions
+	client    ListDiscoverersAPIClient
+	params    *ListDiscoverersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDiscoverersPaginator returns a new ListDiscoverersPaginator
+func NewListDiscoverersPaginator(client ListDiscoverersAPIClient, params *ListDiscoverersInput, optFns ...func(*ListDiscoverersPaginatorOptions)) *ListDiscoverersPaginator {
+	options := ListDiscoverersPaginatorOptions{}
+	if params.Limit != 0 {
+		options.Limit = params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListDiscoverersInput{}
+	}
+
+	return &ListDiscoverersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDiscoverersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDiscoverers page.
+func (p *ListDiscoverersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDiscoverersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.Limit = p.options.Limit
+
+	result, err := p.client.ListDiscoverers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDiscoverers(region string) *awsmiddleware.RegisterServiceMetadata {

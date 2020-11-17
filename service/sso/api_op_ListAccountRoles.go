@@ -4,6 +4,7 @@ package sso
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/sso/types"
 	"github.com/awslabs/smithy-go/middleware"
@@ -114,6 +115,92 @@ func addOperationListAccountRolesMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// ListAccountRolesAPIClient is a client that implements the ListAccountRoles
+// operation.
+type ListAccountRolesAPIClient interface {
+	ListAccountRoles(context.Context, *ListAccountRolesInput, ...func(*Options)) (*ListAccountRolesOutput, error)
+}
+
+var _ ListAccountRolesAPIClient = (*Client)(nil)
+
+// ListAccountRolesPaginatorOptions is the paginator options for ListAccountRoles
+type ListAccountRolesPaginatorOptions struct {
+	// The number of items that clients can request per page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAccountRolesPaginator is a paginator for ListAccountRoles
+type ListAccountRolesPaginator struct {
+	options   ListAccountRolesPaginatorOptions
+	client    ListAccountRolesAPIClient
+	params    *ListAccountRolesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAccountRolesPaginator returns a new ListAccountRolesPaginator
+func NewListAccountRolesPaginator(client ListAccountRolesAPIClient, params *ListAccountRolesInput, optFns ...func(*ListAccountRolesPaginatorOptions)) *ListAccountRolesPaginator {
+	options := ListAccountRolesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAccountRolesInput{}
+	}
+
+	return &ListAccountRolesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAccountRolesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAccountRoles page.
+func (p *ListAccountRolesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAccountRolesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListAccountRoles(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAccountRoles(region string) *awsmiddleware.RegisterServiceMetadata {

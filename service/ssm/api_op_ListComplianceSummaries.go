@@ -4,6 +4,7 @@ package ssm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
@@ -115,6 +116,92 @@ func addOperationListComplianceSummariesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// ListComplianceSummariesAPIClient is a client that implements the
+// ListComplianceSummaries operation.
+type ListComplianceSummariesAPIClient interface {
+	ListComplianceSummaries(context.Context, *ListComplianceSummariesInput, ...func(*Options)) (*ListComplianceSummariesOutput, error)
+}
+
+var _ ListComplianceSummariesAPIClient = (*Client)(nil)
+
+// ListComplianceSummariesPaginatorOptions is the paginator options for
+// ListComplianceSummaries
+type ListComplianceSummariesPaginatorOptions struct {
+	// The maximum number of items to return for this call. Currently, you can specify
+	// null or 50. The call also returns a token that you can specify in a subsequent
+	// call to get the next set of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListComplianceSummariesPaginator is a paginator for ListComplianceSummaries
+type ListComplianceSummariesPaginator struct {
+	options   ListComplianceSummariesPaginatorOptions
+	client    ListComplianceSummariesAPIClient
+	params    *ListComplianceSummariesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListComplianceSummariesPaginator returns a new
+// ListComplianceSummariesPaginator
+func NewListComplianceSummariesPaginator(client ListComplianceSummariesAPIClient, params *ListComplianceSummariesInput, optFns ...func(*ListComplianceSummariesPaginatorOptions)) *ListComplianceSummariesPaginator {
+	options := ListComplianceSummariesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListComplianceSummariesInput{}
+	}
+
+	return &ListComplianceSummariesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListComplianceSummariesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListComplianceSummaries page.
+func (p *ListComplianceSummariesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListComplianceSummariesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListComplianceSummaries(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListComplianceSummaries(region string) *awsmiddleware.RegisterServiceMetadata {

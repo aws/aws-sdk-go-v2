@@ -4,6 +4,7 @@ package elastictranscoder
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
@@ -120,6 +121,81 @@ func addOperationListJobsByPipelineMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// ListJobsByPipelineAPIClient is a client that implements the ListJobsByPipeline
+// operation.
+type ListJobsByPipelineAPIClient interface {
+	ListJobsByPipeline(context.Context, *ListJobsByPipelineInput, ...func(*Options)) (*ListJobsByPipelineOutput, error)
+}
+
+var _ ListJobsByPipelineAPIClient = (*Client)(nil)
+
+// ListJobsByPipelinePaginatorOptions is the paginator options for
+// ListJobsByPipeline
+type ListJobsByPipelinePaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListJobsByPipelinePaginator is a paginator for ListJobsByPipeline
+type ListJobsByPipelinePaginator struct {
+	options   ListJobsByPipelinePaginatorOptions
+	client    ListJobsByPipelineAPIClient
+	params    *ListJobsByPipelineInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListJobsByPipelinePaginator returns a new ListJobsByPipelinePaginator
+func NewListJobsByPipelinePaginator(client ListJobsByPipelineAPIClient, params *ListJobsByPipelineInput, optFns ...func(*ListJobsByPipelinePaginatorOptions)) *ListJobsByPipelinePaginator {
+	options := ListJobsByPipelinePaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListJobsByPipelineInput{}
+	}
+
+	return &ListJobsByPipelinePaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListJobsByPipelinePaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListJobsByPipeline page.
+func (p *ListJobsByPipelinePaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListJobsByPipelineOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PageToken = p.nextToken
+
+	result, err := p.client.ListJobsByPipeline(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListJobsByPipeline(region string) *awsmiddleware.RegisterServiceMetadata {

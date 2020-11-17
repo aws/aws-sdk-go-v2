@@ -4,6 +4,7 @@ package servicecatalog
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
@@ -109,6 +110,88 @@ func addOperationListTagOptionsMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListTagOptionsAPIClient is a client that implements the ListTagOptions
+// operation.
+type ListTagOptionsAPIClient interface {
+	ListTagOptions(context.Context, *ListTagOptionsInput, ...func(*Options)) (*ListTagOptionsOutput, error)
+}
+
+var _ ListTagOptionsAPIClient = (*Client)(nil)
+
+// ListTagOptionsPaginatorOptions is the paginator options for ListTagOptions
+type ListTagOptionsPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTagOptionsPaginator is a paginator for ListTagOptions
+type ListTagOptionsPaginator struct {
+	options   ListTagOptionsPaginatorOptions
+	client    ListTagOptionsAPIClient
+	params    *ListTagOptionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTagOptionsPaginator returns a new ListTagOptionsPaginator
+func NewListTagOptionsPaginator(client ListTagOptionsAPIClient, params *ListTagOptionsInput, optFns ...func(*ListTagOptionsPaginatorOptions)) *ListTagOptionsPaginator {
+	options := ListTagOptionsPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTagOptionsInput{}
+	}
+
+	return &ListTagOptionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTagOptionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTagOptions page.
+func (p *ListTagOptionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTagOptionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	result, err := p.client.ListTagOptions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.PageToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTagOptions(region string) *awsmiddleware.RegisterServiceMetadata {

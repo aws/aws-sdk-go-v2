@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
@@ -120,6 +121,93 @@ func addOperationListExperimentsMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	return nil
+}
+
+// ListExperimentsAPIClient is a client that implements the ListExperiments
+// operation.
+type ListExperimentsAPIClient interface {
+	ListExperiments(context.Context, *ListExperimentsInput, ...func(*Options)) (*ListExperimentsOutput, error)
+}
+
+var _ ListExperimentsAPIClient = (*Client)(nil)
+
+// ListExperimentsPaginatorOptions is the paginator options for ListExperiments
+type ListExperimentsPaginatorOptions struct {
+	// The maximum number of experiments to return in the response. The default value
+	// is 10.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListExperimentsPaginator is a paginator for ListExperiments
+type ListExperimentsPaginator struct {
+	options   ListExperimentsPaginatorOptions
+	client    ListExperimentsAPIClient
+	params    *ListExperimentsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListExperimentsPaginator returns a new ListExperimentsPaginator
+func NewListExperimentsPaginator(client ListExperimentsAPIClient, params *ListExperimentsInput, optFns ...func(*ListExperimentsPaginatorOptions)) *ListExperimentsPaginator {
+	options := ListExperimentsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListExperimentsInput{}
+	}
+
+	return &ListExperimentsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListExperimentsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListExperiments page.
+func (p *ListExperimentsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListExperimentsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListExperiments(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListExperiments(region string) *awsmiddleware.RegisterServiceMetadata {

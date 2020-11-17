@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -120,6 +121,92 @@ func addOperationGetManagedPrefixListAssociationsMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+// GetManagedPrefixListAssociationsAPIClient is a client that implements the
+// GetManagedPrefixListAssociations operation.
+type GetManagedPrefixListAssociationsAPIClient interface {
+	GetManagedPrefixListAssociations(context.Context, *GetManagedPrefixListAssociationsInput, ...func(*Options)) (*GetManagedPrefixListAssociationsOutput, error)
+}
+
+var _ GetManagedPrefixListAssociationsAPIClient = (*Client)(nil)
+
+// GetManagedPrefixListAssociationsPaginatorOptions is the paginator options for
+// GetManagedPrefixListAssociations
+type GetManagedPrefixListAssociationsPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetManagedPrefixListAssociationsPaginator is a paginator for
+// GetManagedPrefixListAssociations
+type GetManagedPrefixListAssociationsPaginator struct {
+	options   GetManagedPrefixListAssociationsPaginatorOptions
+	client    GetManagedPrefixListAssociationsAPIClient
+	params    *GetManagedPrefixListAssociationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetManagedPrefixListAssociationsPaginator returns a new
+// GetManagedPrefixListAssociationsPaginator
+func NewGetManagedPrefixListAssociationsPaginator(client GetManagedPrefixListAssociationsAPIClient, params *GetManagedPrefixListAssociationsInput, optFns ...func(*GetManagedPrefixListAssociationsPaginatorOptions)) *GetManagedPrefixListAssociationsPaginator {
+	options := GetManagedPrefixListAssociationsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetManagedPrefixListAssociationsInput{}
+	}
+
+	return &GetManagedPrefixListAssociationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetManagedPrefixListAssociationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetManagedPrefixListAssociations page.
+func (p *GetManagedPrefixListAssociationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetManagedPrefixListAssociationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.GetManagedPrefixListAssociations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetManagedPrefixListAssociations(region string) *awsmiddleware.RegisterServiceMetadata {

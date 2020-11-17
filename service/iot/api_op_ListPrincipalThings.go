@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -115,6 +116,93 @@ func addOperationListPrincipalThingsMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// ListPrincipalThingsAPIClient is a client that implements the ListPrincipalThings
+// operation.
+type ListPrincipalThingsAPIClient interface {
+	ListPrincipalThings(context.Context, *ListPrincipalThingsInput, ...func(*Options)) (*ListPrincipalThingsOutput, error)
+}
+
+var _ ListPrincipalThingsAPIClient = (*Client)(nil)
+
+// ListPrincipalThingsPaginatorOptions is the paginator options for
+// ListPrincipalThings
+type ListPrincipalThingsPaginatorOptions struct {
+	// The maximum number of results to return in this operation.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPrincipalThingsPaginator is a paginator for ListPrincipalThings
+type ListPrincipalThingsPaginator struct {
+	options   ListPrincipalThingsPaginatorOptions
+	client    ListPrincipalThingsAPIClient
+	params    *ListPrincipalThingsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPrincipalThingsPaginator returns a new ListPrincipalThingsPaginator
+func NewListPrincipalThingsPaginator(client ListPrincipalThingsAPIClient, params *ListPrincipalThingsInput, optFns ...func(*ListPrincipalThingsPaginatorOptions)) *ListPrincipalThingsPaginator {
+	options := ListPrincipalThingsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListPrincipalThingsInput{}
+	}
+
+	return &ListPrincipalThingsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPrincipalThingsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListPrincipalThings page.
+func (p *ListPrincipalThingsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPrincipalThingsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListPrincipalThings(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListPrincipalThings(region string) *awsmiddleware.RegisterServiceMetadata {

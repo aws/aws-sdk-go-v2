@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -136,6 +137,92 @@ func addOperationDescribeLaunchTemplatesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// DescribeLaunchTemplatesAPIClient is a client that implements the
+// DescribeLaunchTemplates operation.
+type DescribeLaunchTemplatesAPIClient interface {
+	DescribeLaunchTemplates(context.Context, *DescribeLaunchTemplatesInput, ...func(*Options)) (*DescribeLaunchTemplatesOutput, error)
+}
+
+var _ DescribeLaunchTemplatesAPIClient = (*Client)(nil)
+
+// DescribeLaunchTemplatesPaginatorOptions is the paginator options for
+// DescribeLaunchTemplates
+type DescribeLaunchTemplatesPaginatorOptions struct {
+	// The maximum number of results to return in a single call. To retrieve the
+	// remaining results, make another call with the returned NextToken value. This
+	// value can be between 1 and 200.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeLaunchTemplatesPaginator is a paginator for DescribeLaunchTemplates
+type DescribeLaunchTemplatesPaginator struct {
+	options   DescribeLaunchTemplatesPaginatorOptions
+	client    DescribeLaunchTemplatesAPIClient
+	params    *DescribeLaunchTemplatesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeLaunchTemplatesPaginator returns a new
+// DescribeLaunchTemplatesPaginator
+func NewDescribeLaunchTemplatesPaginator(client DescribeLaunchTemplatesAPIClient, params *DescribeLaunchTemplatesInput, optFns ...func(*DescribeLaunchTemplatesPaginatorOptions)) *DescribeLaunchTemplatesPaginator {
+	options := DescribeLaunchTemplatesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeLaunchTemplatesInput{}
+	}
+
+	return &DescribeLaunchTemplatesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeLaunchTemplatesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeLaunchTemplates page.
+func (p *DescribeLaunchTemplatesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeLaunchTemplatesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeLaunchTemplates(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeLaunchTemplates(region string) *awsmiddleware.RegisterServiceMetadata {

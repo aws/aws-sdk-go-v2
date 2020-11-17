@@ -4,6 +4,7 @@ package cloud9
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
@@ -135,6 +136,95 @@ func addOperationDescribeEnvironmentMembershipsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+// DescribeEnvironmentMembershipsAPIClient is a client that implements the
+// DescribeEnvironmentMemberships operation.
+type DescribeEnvironmentMembershipsAPIClient interface {
+	DescribeEnvironmentMemberships(context.Context, *DescribeEnvironmentMembershipsInput, ...func(*Options)) (*DescribeEnvironmentMembershipsOutput, error)
+}
+
+var _ DescribeEnvironmentMembershipsAPIClient = (*Client)(nil)
+
+// DescribeEnvironmentMembershipsPaginatorOptions is the paginator options for
+// DescribeEnvironmentMemberships
+type DescribeEnvironmentMembershipsPaginatorOptions struct {
+	// The maximum number of environment members to get information about.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeEnvironmentMembershipsPaginator is a paginator for
+// DescribeEnvironmentMemberships
+type DescribeEnvironmentMembershipsPaginator struct {
+	options   DescribeEnvironmentMembershipsPaginatorOptions
+	client    DescribeEnvironmentMembershipsAPIClient
+	params    *DescribeEnvironmentMembershipsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeEnvironmentMembershipsPaginator returns a new
+// DescribeEnvironmentMembershipsPaginator
+func NewDescribeEnvironmentMembershipsPaginator(client DescribeEnvironmentMembershipsAPIClient, params *DescribeEnvironmentMembershipsInput, optFns ...func(*DescribeEnvironmentMembershipsPaginatorOptions)) *DescribeEnvironmentMembershipsPaginator {
+	options := DescribeEnvironmentMembershipsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeEnvironmentMembershipsInput{}
+	}
+
+	return &DescribeEnvironmentMembershipsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeEnvironmentMembershipsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeEnvironmentMemberships page.
+func (p *DescribeEnvironmentMembershipsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeEnvironmentMembershipsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeEnvironmentMemberships(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeEnvironmentMemberships(region string) *awsmiddleware.RegisterServiceMetadata {

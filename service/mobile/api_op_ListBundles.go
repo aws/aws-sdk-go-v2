@@ -4,6 +4,7 @@ package mobile
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mobile/types"
@@ -108,6 +109,87 @@ func addOperationListBundlesMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+// ListBundlesAPIClient is a client that implements the ListBundles operation.
+type ListBundlesAPIClient interface {
+	ListBundles(context.Context, *ListBundlesInput, ...func(*Options)) (*ListBundlesOutput, error)
+}
+
+var _ ListBundlesAPIClient = (*Client)(nil)
+
+// ListBundlesPaginatorOptions is the paginator options for ListBundles
+type ListBundlesPaginatorOptions struct {
+	// Maximum number of records to list in a single response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListBundlesPaginator is a paginator for ListBundles
+type ListBundlesPaginator struct {
+	options   ListBundlesPaginatorOptions
+	client    ListBundlesAPIClient
+	params    *ListBundlesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListBundlesPaginator returns a new ListBundlesPaginator
+func NewListBundlesPaginator(client ListBundlesAPIClient, params *ListBundlesInput, optFns ...func(*ListBundlesPaginatorOptions)) *ListBundlesPaginator {
+	options := ListBundlesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListBundlesInput{}
+	}
+
+	return &ListBundlesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListBundlesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListBundles page.
+func (p *ListBundlesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListBundlesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListBundles(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListBundles(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package iam
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
@@ -147,6 +148,101 @@ func addOperationGetAccountAuthorizationDetailsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+// GetAccountAuthorizationDetailsAPIClient is a client that implements the
+// GetAccountAuthorizationDetails operation.
+type GetAccountAuthorizationDetailsAPIClient interface {
+	GetAccountAuthorizationDetails(context.Context, *GetAccountAuthorizationDetailsInput, ...func(*Options)) (*GetAccountAuthorizationDetailsOutput, error)
+}
+
+var _ GetAccountAuthorizationDetailsAPIClient = (*Client)(nil)
+
+// GetAccountAuthorizationDetailsPaginatorOptions is the paginator options for
+// GetAccountAuthorizationDetails
+type GetAccountAuthorizationDetailsPaginatorOptions struct {
+	// Use this only when paginating results to indicate the maximum number of items
+	// you want in the response. If additional items exist beyond the maximum you
+	// specify, the IsTruncated response element is true. If you do not include this
+	// parameter, the number of items defaults to 100. Note that IAM might return fewer
+	// results, even when there are more results available. In that case, the
+	// IsTruncated response element returns true, and Marker contains a value to
+	// include in the subsequent call that tells the service where to continue from.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetAccountAuthorizationDetailsPaginator is a paginator for
+// GetAccountAuthorizationDetails
+type GetAccountAuthorizationDetailsPaginator struct {
+	options   GetAccountAuthorizationDetailsPaginatorOptions
+	client    GetAccountAuthorizationDetailsAPIClient
+	params    *GetAccountAuthorizationDetailsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetAccountAuthorizationDetailsPaginator returns a new
+// GetAccountAuthorizationDetailsPaginator
+func NewGetAccountAuthorizationDetailsPaginator(client GetAccountAuthorizationDetailsAPIClient, params *GetAccountAuthorizationDetailsInput, optFns ...func(*GetAccountAuthorizationDetailsPaginatorOptions)) *GetAccountAuthorizationDetailsPaginator {
+	options := GetAccountAuthorizationDetailsPaginatorOptions{}
+	if params.MaxItems != nil {
+		options.Limit = *params.MaxItems
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetAccountAuthorizationDetailsInput{}
+	}
+
+	return &GetAccountAuthorizationDetailsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetAccountAuthorizationDetailsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetAccountAuthorizationDetails page.
+func (p *GetAccountAuthorizationDetailsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetAccountAuthorizationDetailsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxItems = limit
+
+	result, err := p.client.GetAccountAuthorizationDetails(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetAccountAuthorizationDetails(region string) *awsmiddleware.RegisterServiceMetadata {

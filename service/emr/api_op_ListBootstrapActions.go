@@ -4,6 +4,7 @@ package emr
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
@@ -110,6 +111,81 @@ func addOperationListBootstrapActionsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// ListBootstrapActionsAPIClient is a client that implements the
+// ListBootstrapActions operation.
+type ListBootstrapActionsAPIClient interface {
+	ListBootstrapActions(context.Context, *ListBootstrapActionsInput, ...func(*Options)) (*ListBootstrapActionsOutput, error)
+}
+
+var _ ListBootstrapActionsAPIClient = (*Client)(nil)
+
+// ListBootstrapActionsPaginatorOptions is the paginator options for
+// ListBootstrapActions
+type ListBootstrapActionsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListBootstrapActionsPaginator is a paginator for ListBootstrapActions
+type ListBootstrapActionsPaginator struct {
+	options   ListBootstrapActionsPaginatorOptions
+	client    ListBootstrapActionsAPIClient
+	params    *ListBootstrapActionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListBootstrapActionsPaginator returns a new ListBootstrapActionsPaginator
+func NewListBootstrapActionsPaginator(client ListBootstrapActionsAPIClient, params *ListBootstrapActionsInput, optFns ...func(*ListBootstrapActionsPaginatorOptions)) *ListBootstrapActionsPaginator {
+	options := ListBootstrapActionsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListBootstrapActionsInput{}
+	}
+
+	return &ListBootstrapActionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListBootstrapActionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListBootstrapActions page.
+func (p *ListBootstrapActionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListBootstrapActionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	result, err := p.client.ListBootstrapActions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListBootstrapActions(region string) *awsmiddleware.RegisterServiceMetadata {

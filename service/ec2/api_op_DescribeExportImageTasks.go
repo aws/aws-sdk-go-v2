@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -117,6 +118,90 @@ func addOperationDescribeExportImageTasksMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// DescribeExportImageTasksAPIClient is a client that implements the
+// DescribeExportImageTasks operation.
+type DescribeExportImageTasksAPIClient interface {
+	DescribeExportImageTasks(context.Context, *DescribeExportImageTasksInput, ...func(*Options)) (*DescribeExportImageTasksOutput, error)
+}
+
+var _ DescribeExportImageTasksAPIClient = (*Client)(nil)
+
+// DescribeExportImageTasksPaginatorOptions is the paginator options for
+// DescribeExportImageTasks
+type DescribeExportImageTasksPaginatorOptions struct {
+	// The maximum number of results to return in a single call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeExportImageTasksPaginator is a paginator for DescribeExportImageTasks
+type DescribeExportImageTasksPaginator struct {
+	options   DescribeExportImageTasksPaginatorOptions
+	client    DescribeExportImageTasksAPIClient
+	params    *DescribeExportImageTasksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeExportImageTasksPaginator returns a new
+// DescribeExportImageTasksPaginator
+func NewDescribeExportImageTasksPaginator(client DescribeExportImageTasksAPIClient, params *DescribeExportImageTasksInput, optFns ...func(*DescribeExportImageTasksPaginatorOptions)) *DescribeExportImageTasksPaginator {
+	options := DescribeExportImageTasksPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeExportImageTasksInput{}
+	}
+
+	return &DescribeExportImageTasksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeExportImageTasksPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeExportImageTasks page.
+func (p *DescribeExportImageTasksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeExportImageTasksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeExportImageTasks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeExportImageTasks(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package sesv2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
@@ -121,6 +122,97 @@ func addOperationListEmailIdentitiesMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// ListEmailIdentitiesAPIClient is a client that implements the ListEmailIdentities
+// operation.
+type ListEmailIdentitiesAPIClient interface {
+	ListEmailIdentities(context.Context, *ListEmailIdentitiesInput, ...func(*Options)) (*ListEmailIdentitiesOutput, error)
+}
+
+var _ ListEmailIdentitiesAPIClient = (*Client)(nil)
+
+// ListEmailIdentitiesPaginatorOptions is the paginator options for
+// ListEmailIdentities
+type ListEmailIdentitiesPaginatorOptions struct {
+	// The number of results to show in a single call to ListEmailIdentities. If the
+	// number of results is larger than the number you specified in this parameter,
+	// then the response includes a NextToken element, which you can use to obtain
+	// additional results. The value you specify has to be at least 0, and can be no
+	// more than 1000.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListEmailIdentitiesPaginator is a paginator for ListEmailIdentities
+type ListEmailIdentitiesPaginator struct {
+	options   ListEmailIdentitiesPaginatorOptions
+	client    ListEmailIdentitiesAPIClient
+	params    *ListEmailIdentitiesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListEmailIdentitiesPaginator returns a new ListEmailIdentitiesPaginator
+func NewListEmailIdentitiesPaginator(client ListEmailIdentitiesAPIClient, params *ListEmailIdentitiesInput, optFns ...func(*ListEmailIdentitiesPaginatorOptions)) *ListEmailIdentitiesPaginator {
+	options := ListEmailIdentitiesPaginatorOptions{}
+	if params.PageSize != nil {
+		options.Limit = *params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListEmailIdentitiesInput{}
+	}
+
+	return &ListEmailIdentitiesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListEmailIdentitiesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListEmailIdentities page.
+func (p *ListEmailIdentitiesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListEmailIdentitiesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.PageSize = limit
+
+	result, err := p.client.ListEmailIdentities(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListEmailIdentities(region string) *awsmiddleware.RegisterServiceMetadata {

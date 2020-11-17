@@ -4,6 +4,7 @@ package backup
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
@@ -113,6 +114,93 @@ func addOperationListProtectedResourcesMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	return nil
+}
+
+// ListProtectedResourcesAPIClient is a client that implements the
+// ListProtectedResources operation.
+type ListProtectedResourcesAPIClient interface {
+	ListProtectedResources(context.Context, *ListProtectedResourcesInput, ...func(*Options)) (*ListProtectedResourcesOutput, error)
+}
+
+var _ ListProtectedResourcesAPIClient = (*Client)(nil)
+
+// ListProtectedResourcesPaginatorOptions is the paginator options for
+// ListProtectedResources
+type ListProtectedResourcesPaginatorOptions struct {
+	// The maximum number of items to be returned.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListProtectedResourcesPaginator is a paginator for ListProtectedResources
+type ListProtectedResourcesPaginator struct {
+	options   ListProtectedResourcesPaginatorOptions
+	client    ListProtectedResourcesAPIClient
+	params    *ListProtectedResourcesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListProtectedResourcesPaginator returns a new ListProtectedResourcesPaginator
+func NewListProtectedResourcesPaginator(client ListProtectedResourcesAPIClient, params *ListProtectedResourcesInput, optFns ...func(*ListProtectedResourcesPaginatorOptions)) *ListProtectedResourcesPaginator {
+	options := ListProtectedResourcesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListProtectedResourcesInput{}
+	}
+
+	return &ListProtectedResourcesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListProtectedResourcesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListProtectedResources page.
+func (p *ListProtectedResourcesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListProtectedResourcesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListProtectedResources(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListProtectedResources(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -163,8 +163,9 @@ func TestClient_JsonLists_awsRestjson1Serialize(t *testing.T) {
 		// Serializes null values in lists
 		"RestJsonListsSerializeNull": {
 			Params: &JsonListsInput{
-				StringList: []string{
-					func() (v string) { return v }(),
+				SparseStringList: []*string{
+					nil,
+					ptr.String("hi"),
 				},
 			},
 			ExpectMethod:  "PUT",
@@ -176,8 +177,9 @@ func TestClient_JsonLists_awsRestjson1Serialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
-			    "stringList": [
-			        null
+			    "sparseStringList": [
+			        null,
+			        "hi"
 			    ]
 			}`))
 			},
@@ -375,7 +377,7 @@ func TestClient_JsonLists_awsRestjson1Deserialize(t *testing.T) {
 				StringList: []string{},
 			},
 		},
-		// Serializes null values in lists
+		// Serializes null values in sparse lists
 		"RestJsonListsSerializeNull": {
 			StatusCode: 200,
 			Header: http.Header{
@@ -383,13 +385,15 @@ func TestClient_JsonLists_awsRestjson1Deserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "stringList": [
-			        null
+			    "sparseStringList": [
+			        null,
+			        "hi"
 			    ]
 			}`),
 			ExpectResult: &JsonListsOutput{
-				StringList: []string{
-					func() (v string) { return v }(),
+				SparseStringList: []*string{
+					nil,
+					ptr.String("hi"),
 				},
 			},
 		},

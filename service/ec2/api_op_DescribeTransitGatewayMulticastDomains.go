@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -127,6 +128,92 @@ func addOperationDescribeTransitGatewayMulticastDomainsMiddlewares(stack *middle
 		return err
 	}
 	return nil
+}
+
+// DescribeTransitGatewayMulticastDomainsAPIClient is a client that implements the
+// DescribeTransitGatewayMulticastDomains operation.
+type DescribeTransitGatewayMulticastDomainsAPIClient interface {
+	DescribeTransitGatewayMulticastDomains(context.Context, *DescribeTransitGatewayMulticastDomainsInput, ...func(*Options)) (*DescribeTransitGatewayMulticastDomainsOutput, error)
+}
+
+var _ DescribeTransitGatewayMulticastDomainsAPIClient = (*Client)(nil)
+
+// DescribeTransitGatewayMulticastDomainsPaginatorOptions is the paginator options
+// for DescribeTransitGatewayMulticastDomains
+type DescribeTransitGatewayMulticastDomainsPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeTransitGatewayMulticastDomainsPaginator is a paginator for
+// DescribeTransitGatewayMulticastDomains
+type DescribeTransitGatewayMulticastDomainsPaginator struct {
+	options   DescribeTransitGatewayMulticastDomainsPaginatorOptions
+	client    DescribeTransitGatewayMulticastDomainsAPIClient
+	params    *DescribeTransitGatewayMulticastDomainsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeTransitGatewayMulticastDomainsPaginator returns a new
+// DescribeTransitGatewayMulticastDomainsPaginator
+func NewDescribeTransitGatewayMulticastDomainsPaginator(client DescribeTransitGatewayMulticastDomainsAPIClient, params *DescribeTransitGatewayMulticastDomainsInput, optFns ...func(*DescribeTransitGatewayMulticastDomainsPaginatorOptions)) *DescribeTransitGatewayMulticastDomainsPaginator {
+	options := DescribeTransitGatewayMulticastDomainsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeTransitGatewayMulticastDomainsInput{}
+	}
+
+	return &DescribeTransitGatewayMulticastDomainsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeTransitGatewayMulticastDomainsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeTransitGatewayMulticastDomains page.
+func (p *DescribeTransitGatewayMulticastDomainsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeTransitGatewayMulticastDomainsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeTransitGatewayMulticastDomains(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeTransitGatewayMulticastDomains(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package outposts
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
@@ -103,6 +104,91 @@ func addOperationListOutpostsMiddlewares(stack *middleware.Stack, options Option
 		return err
 	}
 	return nil
+}
+
+// ListOutpostsAPIClient is a client that implements the ListOutposts operation.
+type ListOutpostsAPIClient interface {
+	ListOutposts(context.Context, *ListOutpostsInput, ...func(*Options)) (*ListOutpostsOutput, error)
+}
+
+var _ ListOutpostsAPIClient = (*Client)(nil)
+
+// ListOutpostsPaginatorOptions is the paginator options for ListOutposts
+type ListOutpostsPaginatorOptions struct {
+	// The maximum page size.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListOutpostsPaginator is a paginator for ListOutposts
+type ListOutpostsPaginator struct {
+	options   ListOutpostsPaginatorOptions
+	client    ListOutpostsAPIClient
+	params    *ListOutpostsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListOutpostsPaginator returns a new ListOutpostsPaginator
+func NewListOutpostsPaginator(client ListOutpostsAPIClient, params *ListOutpostsInput, optFns ...func(*ListOutpostsPaginatorOptions)) *ListOutpostsPaginator {
+	options := ListOutpostsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListOutpostsInput{}
+	}
+
+	return &ListOutpostsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListOutpostsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListOutposts page.
+func (p *ListOutpostsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListOutpostsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListOutposts(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListOutposts(region string) *awsmiddleware.RegisterServiceMetadata {

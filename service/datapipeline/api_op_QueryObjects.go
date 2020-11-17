@@ -4,6 +4,7 @@ package datapipeline
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
@@ -136,6 +137,92 @@ func addOperationQueryObjectsMiddlewares(stack *middleware.Stack, options Option
 		return err
 	}
 	return nil
+}
+
+// QueryObjectsAPIClient is a client that implements the QueryObjects operation.
+type QueryObjectsAPIClient interface {
+	QueryObjects(context.Context, *QueryObjectsInput, ...func(*Options)) (*QueryObjectsOutput, error)
+}
+
+var _ QueryObjectsAPIClient = (*Client)(nil)
+
+// QueryObjectsPaginatorOptions is the paginator options for QueryObjects
+type QueryObjectsPaginatorOptions struct {
+	// The maximum number of object names that QueryObjects will return in a single
+	// call. The default value is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// QueryObjectsPaginator is a paginator for QueryObjects
+type QueryObjectsPaginator struct {
+	options   QueryObjectsPaginatorOptions
+	client    QueryObjectsAPIClient
+	params    *QueryObjectsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewQueryObjectsPaginator returns a new QueryObjectsPaginator
+func NewQueryObjectsPaginator(client QueryObjectsAPIClient, params *QueryObjectsInput, optFns ...func(*QueryObjectsPaginatorOptions)) *QueryObjectsPaginator {
+	options := QueryObjectsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &QueryObjectsInput{}
+	}
+
+	return &QueryObjectsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *QueryObjectsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next QueryObjects page.
+func (p *QueryObjectsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*QueryObjectsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.QueryObjects(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opQueryObjects(region string) *awsmiddleware.RegisterServiceMetadata {

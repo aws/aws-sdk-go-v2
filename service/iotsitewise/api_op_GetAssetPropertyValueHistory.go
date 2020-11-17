@@ -179,6 +179,95 @@ func addEndpointPrefix_opGetAssetPropertyValueHistoryMiddleware(stack *middlewar
 	return stack.Serialize.Insert(&endpointPrefix_opGetAssetPropertyValueHistoryMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
+// GetAssetPropertyValueHistoryAPIClient is a client that implements the
+// GetAssetPropertyValueHistory operation.
+type GetAssetPropertyValueHistoryAPIClient interface {
+	GetAssetPropertyValueHistory(context.Context, *GetAssetPropertyValueHistoryInput, ...func(*Options)) (*GetAssetPropertyValueHistoryOutput, error)
+}
+
+var _ GetAssetPropertyValueHistoryAPIClient = (*Client)(nil)
+
+// GetAssetPropertyValueHistoryPaginatorOptions is the paginator options for
+// GetAssetPropertyValueHistory
+type GetAssetPropertyValueHistoryPaginatorOptions struct {
+	// The maximum number of results to be returned per paginated request. Default: 100
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetAssetPropertyValueHistoryPaginator is a paginator for
+// GetAssetPropertyValueHistory
+type GetAssetPropertyValueHistoryPaginator struct {
+	options   GetAssetPropertyValueHistoryPaginatorOptions
+	client    GetAssetPropertyValueHistoryAPIClient
+	params    *GetAssetPropertyValueHistoryInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetAssetPropertyValueHistoryPaginator returns a new
+// GetAssetPropertyValueHistoryPaginator
+func NewGetAssetPropertyValueHistoryPaginator(client GetAssetPropertyValueHistoryAPIClient, params *GetAssetPropertyValueHistoryInput, optFns ...func(*GetAssetPropertyValueHistoryPaginatorOptions)) *GetAssetPropertyValueHistoryPaginator {
+	options := GetAssetPropertyValueHistoryPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetAssetPropertyValueHistoryInput{}
+	}
+
+	return &GetAssetPropertyValueHistoryPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetAssetPropertyValueHistoryPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetAssetPropertyValueHistory page.
+func (p *GetAssetPropertyValueHistoryPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetAssetPropertyValueHistoryOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetAssetPropertyValueHistory(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opGetAssetPropertyValueHistory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

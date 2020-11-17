@@ -4,6 +4,7 @@ package eks
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -126,6 +127,97 @@ func addOperationListUpdatesMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+// ListUpdatesAPIClient is a client that implements the ListUpdates operation.
+type ListUpdatesAPIClient interface {
+	ListUpdates(context.Context, *ListUpdatesInput, ...func(*Options)) (*ListUpdatesOutput, error)
+}
+
+var _ ListUpdatesAPIClient = (*Client)(nil)
+
+// ListUpdatesPaginatorOptions is the paginator options for ListUpdates
+type ListUpdatesPaginatorOptions struct {
+	// The maximum number of update results returned by ListUpdates in paginated
+	// output. When you use this parameter, ListUpdates returns only maxResults results
+	// in a single page along with a nextToken response element. You can see the
+	// remaining results of the initial request by sending another ListUpdates request
+	// with the returned nextToken value. This value can be between 1 and 100. If you
+	// don't use this parameter, ListUpdates returns up to 100 results and a nextToken
+	// value if applicable.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListUpdatesPaginator is a paginator for ListUpdates
+type ListUpdatesPaginator struct {
+	options   ListUpdatesPaginatorOptions
+	client    ListUpdatesAPIClient
+	params    *ListUpdatesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListUpdatesPaginator returns a new ListUpdatesPaginator
+func NewListUpdatesPaginator(client ListUpdatesAPIClient, params *ListUpdatesInput, optFns ...func(*ListUpdatesPaginatorOptions)) *ListUpdatesPaginator {
+	options := ListUpdatesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListUpdatesInput{}
+	}
+
+	return &ListUpdatesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListUpdatesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListUpdates page.
+func (p *ListUpdatesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListUpdatesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListUpdates(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListUpdates(region string) *awsmiddleware.RegisterServiceMetadata {

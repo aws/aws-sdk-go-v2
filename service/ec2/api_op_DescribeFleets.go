@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -135,6 +136,90 @@ func addOperationDescribeFleetsMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// DescribeFleetsAPIClient is a client that implements the DescribeFleets
+// operation.
+type DescribeFleetsAPIClient interface {
+	DescribeFleets(context.Context, *DescribeFleetsInput, ...func(*Options)) (*DescribeFleetsOutput, error)
+}
+
+var _ DescribeFleetsAPIClient = (*Client)(nil)
+
+// DescribeFleetsPaginatorOptions is the paginator options for DescribeFleets
+type DescribeFleetsPaginatorOptions struct {
+	// The maximum number of results to return in a single call. Specify a value
+	// between 1 and 1000. The default value is 1000. To retrieve the remaining
+	// results, make another call with the returned NextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeFleetsPaginator is a paginator for DescribeFleets
+type DescribeFleetsPaginator struct {
+	options   DescribeFleetsPaginatorOptions
+	client    DescribeFleetsAPIClient
+	params    *DescribeFleetsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeFleetsPaginator returns a new DescribeFleetsPaginator
+func NewDescribeFleetsPaginator(client DescribeFleetsAPIClient, params *DescribeFleetsInput, optFns ...func(*DescribeFleetsPaginatorOptions)) *DescribeFleetsPaginator {
+	options := DescribeFleetsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeFleetsInput{}
+	}
+
+	return &DescribeFleetsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeFleetsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeFleets page.
+func (p *DescribeFleetsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeFleetsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeFleets(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeFleets(region string) *awsmiddleware.RegisterServiceMetadata {

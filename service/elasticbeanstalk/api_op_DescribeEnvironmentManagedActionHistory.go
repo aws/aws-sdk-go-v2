@@ -4,6 +4,7 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
@@ -112,6 +113,91 @@ func addOperationDescribeEnvironmentManagedActionHistoryMiddlewares(stack *middl
 		return err
 	}
 	return nil
+}
+
+// DescribeEnvironmentManagedActionHistoryAPIClient is a client that implements the
+// DescribeEnvironmentManagedActionHistory operation.
+type DescribeEnvironmentManagedActionHistoryAPIClient interface {
+	DescribeEnvironmentManagedActionHistory(context.Context, *DescribeEnvironmentManagedActionHistoryInput, ...func(*Options)) (*DescribeEnvironmentManagedActionHistoryOutput, error)
+}
+
+var _ DescribeEnvironmentManagedActionHistoryAPIClient = (*Client)(nil)
+
+// DescribeEnvironmentManagedActionHistoryPaginatorOptions is the paginator options
+// for DescribeEnvironmentManagedActionHistory
+type DescribeEnvironmentManagedActionHistoryPaginatorOptions struct {
+	// The maximum number of items to return for a single request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeEnvironmentManagedActionHistoryPaginator is a paginator for
+// DescribeEnvironmentManagedActionHistory
+type DescribeEnvironmentManagedActionHistoryPaginator struct {
+	options   DescribeEnvironmentManagedActionHistoryPaginatorOptions
+	client    DescribeEnvironmentManagedActionHistoryAPIClient
+	params    *DescribeEnvironmentManagedActionHistoryInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeEnvironmentManagedActionHistoryPaginator returns a new
+// DescribeEnvironmentManagedActionHistoryPaginator
+func NewDescribeEnvironmentManagedActionHistoryPaginator(client DescribeEnvironmentManagedActionHistoryAPIClient, params *DescribeEnvironmentManagedActionHistoryInput, optFns ...func(*DescribeEnvironmentManagedActionHistoryPaginatorOptions)) *DescribeEnvironmentManagedActionHistoryPaginator {
+	options := DescribeEnvironmentManagedActionHistoryPaginatorOptions{}
+	if params.MaxItems != 0 {
+		options.Limit = params.MaxItems
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeEnvironmentManagedActionHistoryInput{}
+	}
+
+	return &DescribeEnvironmentManagedActionHistoryPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeEnvironmentManagedActionHistoryPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeEnvironmentManagedActionHistory page.
+func (p *DescribeEnvironmentManagedActionHistoryPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeEnvironmentManagedActionHistoryOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxItems = p.options.Limit
+
+	result, err := p.client.DescribeEnvironmentManagedActionHistory(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeEnvironmentManagedActionHistory(region string) *awsmiddleware.RegisterServiceMetadata {

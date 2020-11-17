@@ -4,6 +4,7 @@ package codecommit
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
@@ -139,6 +140,92 @@ func addOperationGetDifferencesMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// GetDifferencesAPIClient is a client that implements the GetDifferences
+// operation.
+type GetDifferencesAPIClient interface {
+	GetDifferences(context.Context, *GetDifferencesInput, ...func(*Options)) (*GetDifferencesOutput, error)
+}
+
+var _ GetDifferencesAPIClient = (*Client)(nil)
+
+// GetDifferencesPaginatorOptions is the paginator options for GetDifferences
+type GetDifferencesPaginatorOptions struct {
+	// A non-zero, non-negative integer used to limit the number of returned results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetDifferencesPaginator is a paginator for GetDifferences
+type GetDifferencesPaginator struct {
+	options   GetDifferencesPaginatorOptions
+	client    GetDifferencesAPIClient
+	params    *GetDifferencesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetDifferencesPaginator returns a new GetDifferencesPaginator
+func NewGetDifferencesPaginator(client GetDifferencesAPIClient, params *GetDifferencesInput, optFns ...func(*GetDifferencesPaginatorOptions)) *GetDifferencesPaginator {
+	options := GetDifferencesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetDifferencesInput{}
+	}
+
+	return &GetDifferencesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetDifferencesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetDifferences page.
+func (p *GetDifferencesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetDifferencesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetDifferences(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetDifferences(region string) *awsmiddleware.RegisterServiceMetadata {

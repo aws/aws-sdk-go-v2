@@ -4,6 +4,7 @@ package athena
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -115,6 +116,93 @@ func addOperationListQueryExecutionsMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// ListQueryExecutionsAPIClient is a client that implements the ListQueryExecutions
+// operation.
+type ListQueryExecutionsAPIClient interface {
+	ListQueryExecutions(context.Context, *ListQueryExecutionsInput, ...func(*Options)) (*ListQueryExecutionsOutput, error)
+}
+
+var _ ListQueryExecutionsAPIClient = (*Client)(nil)
+
+// ListQueryExecutionsPaginatorOptions is the paginator options for
+// ListQueryExecutions
+type ListQueryExecutionsPaginatorOptions struct {
+	// The maximum number of query executions to return in this request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListQueryExecutionsPaginator is a paginator for ListQueryExecutions
+type ListQueryExecutionsPaginator struct {
+	options   ListQueryExecutionsPaginatorOptions
+	client    ListQueryExecutionsAPIClient
+	params    *ListQueryExecutionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListQueryExecutionsPaginator returns a new ListQueryExecutionsPaginator
+func NewListQueryExecutionsPaginator(client ListQueryExecutionsAPIClient, params *ListQueryExecutionsInput, optFns ...func(*ListQueryExecutionsPaginatorOptions)) *ListQueryExecutionsPaginator {
+	options := ListQueryExecutionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListQueryExecutionsInput{}
+	}
+
+	return &ListQueryExecutionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListQueryExecutionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListQueryExecutions page.
+func (p *ListQueryExecutionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListQueryExecutionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListQueryExecutions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListQueryExecutions(region string) *awsmiddleware.RegisterServiceMetadata {

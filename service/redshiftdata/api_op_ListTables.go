@@ -4,6 +4,7 @@ package redshiftdata
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
@@ -164,6 +165,89 @@ func addOperationListTablesMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+// ListTablesAPIClient is a client that implements the ListTables operation.
+type ListTablesAPIClient interface {
+	ListTables(context.Context, *ListTablesInput, ...func(*Options)) (*ListTablesOutput, error)
+}
+
+var _ ListTablesAPIClient = (*Client)(nil)
+
+// ListTablesPaginatorOptions is the paginator options for ListTables
+type ListTablesPaginatorOptions struct {
+	// The maximum number of tables to return in the response. If more tables exist
+	// than fit in one response, then NextToken is returned to page through the
+	// results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTablesPaginator is a paginator for ListTables
+type ListTablesPaginator struct {
+	options   ListTablesPaginatorOptions
+	client    ListTablesAPIClient
+	params    *ListTablesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTablesPaginator returns a new ListTablesPaginator
+func NewListTablesPaginator(client ListTablesAPIClient, params *ListTablesInput, optFns ...func(*ListTablesPaginatorOptions)) *ListTablesPaginator {
+	options := ListTablesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTablesInput{}
+	}
+
+	return &ListTablesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTablesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTables page.
+func (p *ListTablesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTablesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListTables(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTables(region string) *awsmiddleware.RegisterServiceMetadata {

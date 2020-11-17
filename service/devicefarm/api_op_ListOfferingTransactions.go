@@ -4,6 +4,7 @@ package devicefarm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
@@ -110,6 +111,82 @@ func addOperationListOfferingTransactionsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// ListOfferingTransactionsAPIClient is a client that implements the
+// ListOfferingTransactions operation.
+type ListOfferingTransactionsAPIClient interface {
+	ListOfferingTransactions(context.Context, *ListOfferingTransactionsInput, ...func(*Options)) (*ListOfferingTransactionsOutput, error)
+}
+
+var _ ListOfferingTransactionsAPIClient = (*Client)(nil)
+
+// ListOfferingTransactionsPaginatorOptions is the paginator options for
+// ListOfferingTransactions
+type ListOfferingTransactionsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListOfferingTransactionsPaginator is a paginator for ListOfferingTransactions
+type ListOfferingTransactionsPaginator struct {
+	options   ListOfferingTransactionsPaginatorOptions
+	client    ListOfferingTransactionsAPIClient
+	params    *ListOfferingTransactionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListOfferingTransactionsPaginator returns a new
+// ListOfferingTransactionsPaginator
+func NewListOfferingTransactionsPaginator(client ListOfferingTransactionsAPIClient, params *ListOfferingTransactionsInput, optFns ...func(*ListOfferingTransactionsPaginatorOptions)) *ListOfferingTransactionsPaginator {
+	options := ListOfferingTransactionsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListOfferingTransactionsInput{}
+	}
+
+	return &ListOfferingTransactionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListOfferingTransactionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListOfferingTransactions page.
+func (p *ListOfferingTransactionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListOfferingTransactionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListOfferingTransactions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListOfferingTransactions(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package mq
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mq/types"
@@ -106,6 +107,88 @@ func addOperationListBrokersMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+// ListBrokersAPIClient is a client that implements the ListBrokers operation.
+type ListBrokersAPIClient interface {
+	ListBrokers(context.Context, *ListBrokersInput, ...func(*Options)) (*ListBrokersOutput, error)
+}
+
+var _ ListBrokersAPIClient = (*Client)(nil)
+
+// ListBrokersPaginatorOptions is the paginator options for ListBrokers
+type ListBrokersPaginatorOptions struct {
+	// The maximum number of brokers that Amazon MQ can return per page (20 by
+	// default). This value must be an integer from 5 to 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListBrokersPaginator is a paginator for ListBrokers
+type ListBrokersPaginator struct {
+	options   ListBrokersPaginatorOptions
+	client    ListBrokersAPIClient
+	params    *ListBrokersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListBrokersPaginator returns a new ListBrokersPaginator
+func NewListBrokersPaginator(client ListBrokersAPIClient, params *ListBrokersInput, optFns ...func(*ListBrokersPaginatorOptions)) *ListBrokersPaginator {
+	options := ListBrokersPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListBrokersInput{}
+	}
+
+	return &ListBrokersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListBrokersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListBrokers page.
+func (p *ListBrokersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListBrokersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListBrokers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListBrokers(region string) *awsmiddleware.RegisterServiceMetadata {

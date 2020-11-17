@@ -4,6 +4,7 @@ package inspector
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
@@ -124,6 +125,94 @@ func addOperationListAssessmentRunsMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// ListAssessmentRunsAPIClient is a client that implements the ListAssessmentRuns
+// operation.
+type ListAssessmentRunsAPIClient interface {
+	ListAssessmentRuns(context.Context, *ListAssessmentRunsInput, ...func(*Options)) (*ListAssessmentRunsOutput, error)
+}
+
+var _ ListAssessmentRunsAPIClient = (*Client)(nil)
+
+// ListAssessmentRunsPaginatorOptions is the paginator options for
+// ListAssessmentRuns
+type ListAssessmentRunsPaginatorOptions struct {
+	// You can use this parameter to indicate the maximum number of items that you want
+	// in the response. The default value is 10. The maximum value is 500.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAssessmentRunsPaginator is a paginator for ListAssessmentRuns
+type ListAssessmentRunsPaginator struct {
+	options   ListAssessmentRunsPaginatorOptions
+	client    ListAssessmentRunsAPIClient
+	params    *ListAssessmentRunsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAssessmentRunsPaginator returns a new ListAssessmentRunsPaginator
+func NewListAssessmentRunsPaginator(client ListAssessmentRunsAPIClient, params *ListAssessmentRunsInput, optFns ...func(*ListAssessmentRunsPaginatorOptions)) *ListAssessmentRunsPaginator {
+	options := ListAssessmentRunsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAssessmentRunsInput{}
+	}
+
+	return &ListAssessmentRunsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAssessmentRunsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAssessmentRuns page.
+func (p *ListAssessmentRunsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAssessmentRunsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListAssessmentRuns(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAssessmentRuns(region string) *awsmiddleware.RegisterServiceMetadata {

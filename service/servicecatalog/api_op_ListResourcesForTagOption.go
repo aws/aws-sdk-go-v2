@@ -4,6 +4,7 @@ package servicecatalog
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
@@ -120,6 +121,90 @@ func addOperationListResourcesForTagOptionMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+// ListResourcesForTagOptionAPIClient is a client that implements the
+// ListResourcesForTagOption operation.
+type ListResourcesForTagOptionAPIClient interface {
+	ListResourcesForTagOption(context.Context, *ListResourcesForTagOptionInput, ...func(*Options)) (*ListResourcesForTagOptionOutput, error)
+}
+
+var _ ListResourcesForTagOptionAPIClient = (*Client)(nil)
+
+// ListResourcesForTagOptionPaginatorOptions is the paginator options for
+// ListResourcesForTagOption
+type ListResourcesForTagOptionPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListResourcesForTagOptionPaginator is a paginator for ListResourcesForTagOption
+type ListResourcesForTagOptionPaginator struct {
+	options   ListResourcesForTagOptionPaginatorOptions
+	client    ListResourcesForTagOptionAPIClient
+	params    *ListResourcesForTagOptionInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListResourcesForTagOptionPaginator returns a new
+// ListResourcesForTagOptionPaginator
+func NewListResourcesForTagOptionPaginator(client ListResourcesForTagOptionAPIClient, params *ListResourcesForTagOptionInput, optFns ...func(*ListResourcesForTagOptionPaginatorOptions)) *ListResourcesForTagOptionPaginator {
+	options := ListResourcesForTagOptionPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListResourcesForTagOptionInput{}
+	}
+
+	return &ListResourcesForTagOptionPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListResourcesForTagOptionPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListResourcesForTagOption page.
+func (p *ListResourcesForTagOptionPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListResourcesForTagOptionOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	result, err := p.client.ListResourcesForTagOption(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.PageToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListResourcesForTagOption(region string) *awsmiddleware.RegisterServiceMetadata {

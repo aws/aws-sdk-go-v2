@@ -4,6 +4,7 @@ package clouddirectory
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
@@ -126,6 +127,92 @@ func addOperationLookupPolicyMiddlewares(stack *middleware.Stack, options Option
 		return err
 	}
 	return nil
+}
+
+// LookupPolicyAPIClient is a client that implements the LookupPolicy operation.
+type LookupPolicyAPIClient interface {
+	LookupPolicy(context.Context, *LookupPolicyInput, ...func(*Options)) (*LookupPolicyOutput, error)
+}
+
+var _ LookupPolicyAPIClient = (*Client)(nil)
+
+// LookupPolicyPaginatorOptions is the paginator options for LookupPolicy
+type LookupPolicyPaginatorOptions struct {
+	// The maximum number of items to be retrieved in a single call. This is an
+	// approximate number.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// LookupPolicyPaginator is a paginator for LookupPolicy
+type LookupPolicyPaginator struct {
+	options   LookupPolicyPaginatorOptions
+	client    LookupPolicyAPIClient
+	params    *LookupPolicyInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewLookupPolicyPaginator returns a new LookupPolicyPaginator
+func NewLookupPolicyPaginator(client LookupPolicyAPIClient, params *LookupPolicyInput, optFns ...func(*LookupPolicyPaginatorOptions)) *LookupPolicyPaginator {
+	options := LookupPolicyPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &LookupPolicyInput{}
+	}
+
+	return &LookupPolicyPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *LookupPolicyPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next LookupPolicy page.
+func (p *LookupPolicyPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*LookupPolicyOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.LookupPolicy(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opLookupPolicy(region string) *awsmiddleware.RegisterServiceMetadata {

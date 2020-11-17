@@ -808,6 +808,36 @@ func awsAwsjson11_serializeDocumentGreetingStruct(v *types.GreetingStruct, value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSparseStringList(v []*string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		av.String(*v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSparseStringMap(v map[string]*string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			om.Null()
+			continue
+		}
+		om.String(*v[key])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentStringList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1070,23 +1100,23 @@ func awsAwsjson11_serializeOpDocumentNullOperationInput(v *NullOperationInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.SparseStringList != nil {
+		ok := object.Key("sparseStringList")
+		if err := awsAwsjson11_serializeDocumentSparseStringList(v.SparseStringList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SparseStringMap != nil {
+		ok := object.Key("sparseStringMap")
+		if err := awsAwsjson11_serializeDocumentSparseStringMap(v.SparseStringMap, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.String_ != nil {
 		ok := object.Key("string")
 		ok.String(*v.String_)
-	}
-
-	if v.StringList != nil {
-		ok := object.Key("stringList")
-		if err := awsAwsjson11_serializeDocumentStringList(v.StringList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.StringMap != nil {
-		ok := object.Key("stringMap")
-		if err := awsAwsjson11_serializeDocumentStringMap(v.StringMap, ok); err != nil {
-			return err
-		}
 	}
 
 	return nil

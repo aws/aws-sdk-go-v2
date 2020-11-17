@@ -4,6 +4,7 @@ package servicecatalog
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
@@ -130,6 +131,89 @@ func addOperationSearchProductsAsAdminMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// SearchProductsAsAdminAPIClient is a client that implements the
+// SearchProductsAsAdmin operation.
+type SearchProductsAsAdminAPIClient interface {
+	SearchProductsAsAdmin(context.Context, *SearchProductsAsAdminInput, ...func(*Options)) (*SearchProductsAsAdminOutput, error)
+}
+
+var _ SearchProductsAsAdminAPIClient = (*Client)(nil)
+
+// SearchProductsAsAdminPaginatorOptions is the paginator options for
+// SearchProductsAsAdmin
+type SearchProductsAsAdminPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// SearchProductsAsAdminPaginator is a paginator for SearchProductsAsAdmin
+type SearchProductsAsAdminPaginator struct {
+	options   SearchProductsAsAdminPaginatorOptions
+	client    SearchProductsAsAdminAPIClient
+	params    *SearchProductsAsAdminInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewSearchProductsAsAdminPaginator returns a new SearchProductsAsAdminPaginator
+func NewSearchProductsAsAdminPaginator(client SearchProductsAsAdminAPIClient, params *SearchProductsAsAdminInput, optFns ...func(*SearchProductsAsAdminPaginatorOptions)) *SearchProductsAsAdminPaginator {
+	options := SearchProductsAsAdminPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &SearchProductsAsAdminInput{}
+	}
+
+	return &SearchProductsAsAdminPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *SearchProductsAsAdminPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next SearchProductsAsAdmin page.
+func (p *SearchProductsAsAdminPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*SearchProductsAsAdminOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	result, err := p.client.SearchProductsAsAdmin(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opSearchProductsAsAdmin(region string) *awsmiddleware.RegisterServiceMetadata {

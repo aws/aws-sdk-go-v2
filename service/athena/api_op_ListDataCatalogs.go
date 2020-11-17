@@ -4,6 +4,7 @@ package athena
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
@@ -107,6 +108,92 @@ func addOperationListDataCatalogsMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// ListDataCatalogsAPIClient is a client that implements the ListDataCatalogs
+// operation.
+type ListDataCatalogsAPIClient interface {
+	ListDataCatalogs(context.Context, *ListDataCatalogsInput, ...func(*Options)) (*ListDataCatalogsOutput, error)
+}
+
+var _ ListDataCatalogsAPIClient = (*Client)(nil)
+
+// ListDataCatalogsPaginatorOptions is the paginator options for ListDataCatalogs
+type ListDataCatalogsPaginatorOptions struct {
+	// Specifies the maximum number of data catalogs to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDataCatalogsPaginator is a paginator for ListDataCatalogs
+type ListDataCatalogsPaginator struct {
+	options   ListDataCatalogsPaginatorOptions
+	client    ListDataCatalogsAPIClient
+	params    *ListDataCatalogsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDataCatalogsPaginator returns a new ListDataCatalogsPaginator
+func NewListDataCatalogsPaginator(client ListDataCatalogsAPIClient, params *ListDataCatalogsInput, optFns ...func(*ListDataCatalogsPaginatorOptions)) *ListDataCatalogsPaginator {
+	options := ListDataCatalogsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListDataCatalogsInput{}
+	}
+
+	return &ListDataCatalogsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDataCatalogsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDataCatalogs page.
+func (p *ListDataCatalogsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDataCatalogsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListDataCatalogs(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDataCatalogs(region string) *awsmiddleware.RegisterServiceMetadata {

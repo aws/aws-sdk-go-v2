@@ -4,6 +4,7 @@ package codebuild
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
@@ -126,6 +127,94 @@ func addOperationDescribeTestCasesMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// DescribeTestCasesAPIClient is a client that implements the DescribeTestCases
+// operation.
+type DescribeTestCasesAPIClient interface {
+	DescribeTestCases(context.Context, *DescribeTestCasesInput, ...func(*Options)) (*DescribeTestCasesOutput, error)
+}
+
+var _ DescribeTestCasesAPIClient = (*Client)(nil)
+
+// DescribeTestCasesPaginatorOptions is the paginator options for DescribeTestCases
+type DescribeTestCasesPaginatorOptions struct {
+	// The maximum number of paginated test cases returned per response. Use nextToken
+	// to iterate pages in the list of returned TestCase objects. The default value is
+	// 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeTestCasesPaginator is a paginator for DescribeTestCases
+type DescribeTestCasesPaginator struct {
+	options   DescribeTestCasesPaginatorOptions
+	client    DescribeTestCasesAPIClient
+	params    *DescribeTestCasesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeTestCasesPaginator returns a new DescribeTestCasesPaginator
+func NewDescribeTestCasesPaginator(client DescribeTestCasesAPIClient, params *DescribeTestCasesInput, optFns ...func(*DescribeTestCasesPaginatorOptions)) *DescribeTestCasesPaginator {
+	options := DescribeTestCasesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeTestCasesInput{}
+	}
+
+	return &DescribeTestCasesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeTestCasesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeTestCases page.
+func (p *DescribeTestCasesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeTestCasesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeTestCases(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeTestCases(region string) *awsmiddleware.RegisterServiceMetadata {

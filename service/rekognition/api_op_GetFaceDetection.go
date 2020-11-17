@@ -4,6 +4,7 @@ package rekognition
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
@@ -145,6 +146,94 @@ func addOperationGetFaceDetectionMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// GetFaceDetectionAPIClient is a client that implements the GetFaceDetection
+// operation.
+type GetFaceDetectionAPIClient interface {
+	GetFaceDetection(context.Context, *GetFaceDetectionInput, ...func(*Options)) (*GetFaceDetectionOutput, error)
+}
+
+var _ GetFaceDetectionAPIClient = (*Client)(nil)
+
+// GetFaceDetectionPaginatorOptions is the paginator options for GetFaceDetection
+type GetFaceDetectionPaginatorOptions struct {
+	// Maximum number of results to return per paginated call. The largest value you
+	// can specify is 1000. If you specify a value greater than 1000, a maximum of 1000
+	// results is returned. The default value is 1000.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetFaceDetectionPaginator is a paginator for GetFaceDetection
+type GetFaceDetectionPaginator struct {
+	options   GetFaceDetectionPaginatorOptions
+	client    GetFaceDetectionAPIClient
+	params    *GetFaceDetectionInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetFaceDetectionPaginator returns a new GetFaceDetectionPaginator
+func NewGetFaceDetectionPaginator(client GetFaceDetectionAPIClient, params *GetFaceDetectionInput, optFns ...func(*GetFaceDetectionPaginatorOptions)) *GetFaceDetectionPaginator {
+	options := GetFaceDetectionPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetFaceDetectionInput{}
+	}
+
+	return &GetFaceDetectionPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetFaceDetectionPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetFaceDetection page.
+func (p *GetFaceDetectionPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetFaceDetectionOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetFaceDetection(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetFaceDetection(region string) *awsmiddleware.RegisterServiceMetadata {

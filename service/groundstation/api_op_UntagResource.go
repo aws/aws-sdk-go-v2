@@ -110,7 +110,7 @@ func newServiceMetadataMiddleware_opUntagResource(region string) *awsmiddleware.
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "",
+		SigningName:   "groundstation",
 		OperationName: "UntagResource",
 	}
 }

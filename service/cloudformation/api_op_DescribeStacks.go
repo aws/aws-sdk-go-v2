@@ -4,6 +4,7 @@ package cloudformation
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
@@ -117,6 +118,80 @@ func addOperationDescribeStacksMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// DescribeStacksAPIClient is a client that implements the DescribeStacks
+// operation.
+type DescribeStacksAPIClient interface {
+	DescribeStacks(context.Context, *DescribeStacksInput, ...func(*Options)) (*DescribeStacksOutput, error)
+}
+
+var _ DescribeStacksAPIClient = (*Client)(nil)
+
+// DescribeStacksPaginatorOptions is the paginator options for DescribeStacks
+type DescribeStacksPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeStacksPaginator is a paginator for DescribeStacks
+type DescribeStacksPaginator struct {
+	options   DescribeStacksPaginatorOptions
+	client    DescribeStacksAPIClient
+	params    *DescribeStacksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeStacksPaginator returns a new DescribeStacksPaginator
+func NewDescribeStacksPaginator(client DescribeStacksAPIClient, params *DescribeStacksInput, optFns ...func(*DescribeStacksPaginatorOptions)) *DescribeStacksPaginator {
+	options := DescribeStacksPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeStacksInput{}
+	}
+
+	return &DescribeStacksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeStacksPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeStacks page.
+func (p *DescribeStacksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeStacksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.DescribeStacks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeStacks(region string) *awsmiddleware.RegisterServiceMetadata {

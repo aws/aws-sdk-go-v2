@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -139,6 +140,91 @@ func addOperationDescribeInternetGatewaysMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// DescribeInternetGatewaysAPIClient is a client that implements the
+// DescribeInternetGateways operation.
+type DescribeInternetGatewaysAPIClient interface {
+	DescribeInternetGateways(context.Context, *DescribeInternetGatewaysInput, ...func(*Options)) (*DescribeInternetGatewaysOutput, error)
+}
+
+var _ DescribeInternetGatewaysAPIClient = (*Client)(nil)
+
+// DescribeInternetGatewaysPaginatorOptions is the paginator options for
+// DescribeInternetGateways
+type DescribeInternetGatewaysPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeInternetGatewaysPaginator is a paginator for DescribeInternetGateways
+type DescribeInternetGatewaysPaginator struct {
+	options   DescribeInternetGatewaysPaginatorOptions
+	client    DescribeInternetGatewaysAPIClient
+	params    *DescribeInternetGatewaysInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeInternetGatewaysPaginator returns a new
+// DescribeInternetGatewaysPaginator
+func NewDescribeInternetGatewaysPaginator(client DescribeInternetGatewaysAPIClient, params *DescribeInternetGatewaysInput, optFns ...func(*DescribeInternetGatewaysPaginatorOptions)) *DescribeInternetGatewaysPaginator {
+	options := DescribeInternetGatewaysPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeInternetGatewaysInput{}
+	}
+
+	return &DescribeInternetGatewaysPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeInternetGatewaysPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeInternetGateways page.
+func (p *DescribeInternetGatewaysPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeInternetGatewaysOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeInternetGateways(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeInternetGateways(region string) *awsmiddleware.RegisterServiceMetadata {

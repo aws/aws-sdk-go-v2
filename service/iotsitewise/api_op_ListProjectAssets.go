@@ -147,6 +147,92 @@ func addEndpointPrefix_opListProjectAssetsMiddleware(stack *middleware.Stack) er
 	return stack.Serialize.Insert(&endpointPrefix_opListProjectAssetsMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
+// ListProjectAssetsAPIClient is a client that implements the ListProjectAssets
+// operation.
+type ListProjectAssetsAPIClient interface {
+	ListProjectAssets(context.Context, *ListProjectAssetsInput, ...func(*Options)) (*ListProjectAssetsOutput, error)
+}
+
+var _ ListProjectAssetsAPIClient = (*Client)(nil)
+
+// ListProjectAssetsPaginatorOptions is the paginator options for ListProjectAssets
+type ListProjectAssetsPaginatorOptions struct {
+	// The maximum number of results to be returned per paginated request. Default: 50
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListProjectAssetsPaginator is a paginator for ListProjectAssets
+type ListProjectAssetsPaginator struct {
+	options   ListProjectAssetsPaginatorOptions
+	client    ListProjectAssetsAPIClient
+	params    *ListProjectAssetsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListProjectAssetsPaginator returns a new ListProjectAssetsPaginator
+func NewListProjectAssetsPaginator(client ListProjectAssetsAPIClient, params *ListProjectAssetsInput, optFns ...func(*ListProjectAssetsPaginatorOptions)) *ListProjectAssetsPaginator {
+	options := ListProjectAssetsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListProjectAssetsInput{}
+	}
+
+	return &ListProjectAssetsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListProjectAssetsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListProjectAssets page.
+func (p *ListProjectAssetsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListProjectAssetsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListProjectAssets(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opListProjectAssets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

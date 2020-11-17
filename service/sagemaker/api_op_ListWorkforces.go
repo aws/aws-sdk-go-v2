@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
@@ -115,6 +116,92 @@ func addOperationListWorkforcesMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListWorkforcesAPIClient is a client that implements the ListWorkforces
+// operation.
+type ListWorkforcesAPIClient interface {
+	ListWorkforces(context.Context, *ListWorkforcesInput, ...func(*Options)) (*ListWorkforcesOutput, error)
+}
+
+var _ ListWorkforcesAPIClient = (*Client)(nil)
+
+// ListWorkforcesPaginatorOptions is the paginator options for ListWorkforces
+type ListWorkforcesPaginatorOptions struct {
+	// The maximum number of workforces returned in the response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListWorkforcesPaginator is a paginator for ListWorkforces
+type ListWorkforcesPaginator struct {
+	options   ListWorkforcesPaginatorOptions
+	client    ListWorkforcesAPIClient
+	params    *ListWorkforcesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListWorkforcesPaginator returns a new ListWorkforcesPaginator
+func NewListWorkforcesPaginator(client ListWorkforcesAPIClient, params *ListWorkforcesInput, optFns ...func(*ListWorkforcesPaginatorOptions)) *ListWorkforcesPaginator {
+	options := ListWorkforcesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListWorkforcesInput{}
+	}
+
+	return &ListWorkforcesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListWorkforcesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListWorkforces page.
+func (p *ListWorkforcesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListWorkforcesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListWorkforces(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListWorkforces(region string) *awsmiddleware.RegisterServiceMetadata {

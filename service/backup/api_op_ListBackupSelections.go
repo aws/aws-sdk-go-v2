@@ -4,6 +4,7 @@ package backup
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
@@ -119,6 +120,93 @@ func addOperationListBackupSelectionsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// ListBackupSelectionsAPIClient is a client that implements the
+// ListBackupSelections operation.
+type ListBackupSelectionsAPIClient interface {
+	ListBackupSelections(context.Context, *ListBackupSelectionsInput, ...func(*Options)) (*ListBackupSelectionsOutput, error)
+}
+
+var _ ListBackupSelectionsAPIClient = (*Client)(nil)
+
+// ListBackupSelectionsPaginatorOptions is the paginator options for
+// ListBackupSelections
+type ListBackupSelectionsPaginatorOptions struct {
+	// The maximum number of items to be returned.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListBackupSelectionsPaginator is a paginator for ListBackupSelections
+type ListBackupSelectionsPaginator struct {
+	options   ListBackupSelectionsPaginatorOptions
+	client    ListBackupSelectionsAPIClient
+	params    *ListBackupSelectionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListBackupSelectionsPaginator returns a new ListBackupSelectionsPaginator
+func NewListBackupSelectionsPaginator(client ListBackupSelectionsAPIClient, params *ListBackupSelectionsInput, optFns ...func(*ListBackupSelectionsPaginatorOptions)) *ListBackupSelectionsPaginator {
+	options := ListBackupSelectionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListBackupSelectionsInput{}
+	}
+
+	return &ListBackupSelectionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListBackupSelectionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListBackupSelections page.
+func (p *ListBackupSelectionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListBackupSelectionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListBackupSelections(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListBackupSelections(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package mediaconvert
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
@@ -120,6 +121,89 @@ func addOperationListJobTemplatesMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// ListJobTemplatesAPIClient is a client that implements the ListJobTemplates
+// operation.
+type ListJobTemplatesAPIClient interface {
+	ListJobTemplates(context.Context, *ListJobTemplatesInput, ...func(*Options)) (*ListJobTemplatesOutput, error)
+}
+
+var _ ListJobTemplatesAPIClient = (*Client)(nil)
+
+// ListJobTemplatesPaginatorOptions is the paginator options for ListJobTemplates
+type ListJobTemplatesPaginatorOptions struct {
+	// Optional. Number of job templates, up to twenty, that will be returned at one
+	// time.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListJobTemplatesPaginator is a paginator for ListJobTemplates
+type ListJobTemplatesPaginator struct {
+	options   ListJobTemplatesPaginatorOptions
+	client    ListJobTemplatesAPIClient
+	params    *ListJobTemplatesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListJobTemplatesPaginator returns a new ListJobTemplatesPaginator
+func NewListJobTemplatesPaginator(client ListJobTemplatesAPIClient, params *ListJobTemplatesInput, optFns ...func(*ListJobTemplatesPaginatorOptions)) *ListJobTemplatesPaginator {
+	options := ListJobTemplatesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListJobTemplatesInput{}
+	}
+
+	return &ListJobTemplatesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListJobTemplatesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListJobTemplates page.
+func (p *ListJobTemplatesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListJobTemplatesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListJobTemplates(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListJobTemplates(region string) *awsmiddleware.RegisterServiceMetadata {

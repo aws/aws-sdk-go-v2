@@ -4,6 +4,7 @@ package xray
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
@@ -133,6 +134,83 @@ func addOperationGetTimeSeriesServiceStatisticsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+// GetTimeSeriesServiceStatisticsAPIClient is a client that implements the
+// GetTimeSeriesServiceStatistics operation.
+type GetTimeSeriesServiceStatisticsAPIClient interface {
+	GetTimeSeriesServiceStatistics(context.Context, *GetTimeSeriesServiceStatisticsInput, ...func(*Options)) (*GetTimeSeriesServiceStatisticsOutput, error)
+}
+
+var _ GetTimeSeriesServiceStatisticsAPIClient = (*Client)(nil)
+
+// GetTimeSeriesServiceStatisticsPaginatorOptions is the paginator options for
+// GetTimeSeriesServiceStatistics
+type GetTimeSeriesServiceStatisticsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetTimeSeriesServiceStatisticsPaginator is a paginator for
+// GetTimeSeriesServiceStatistics
+type GetTimeSeriesServiceStatisticsPaginator struct {
+	options   GetTimeSeriesServiceStatisticsPaginatorOptions
+	client    GetTimeSeriesServiceStatisticsAPIClient
+	params    *GetTimeSeriesServiceStatisticsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetTimeSeriesServiceStatisticsPaginator returns a new
+// GetTimeSeriesServiceStatisticsPaginator
+func NewGetTimeSeriesServiceStatisticsPaginator(client GetTimeSeriesServiceStatisticsAPIClient, params *GetTimeSeriesServiceStatisticsInput, optFns ...func(*GetTimeSeriesServiceStatisticsPaginatorOptions)) *GetTimeSeriesServiceStatisticsPaginator {
+	options := GetTimeSeriesServiceStatisticsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetTimeSeriesServiceStatisticsInput{}
+	}
+
+	return &GetTimeSeriesServiceStatisticsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetTimeSeriesServiceStatisticsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetTimeSeriesServiceStatistics page.
+func (p *GetTimeSeriesServiceStatisticsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetTimeSeriesServiceStatisticsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.GetTimeSeriesServiceStatistics(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetTimeSeriesServiceStatistics(region string) *awsmiddleware.RegisterServiceMetadata {

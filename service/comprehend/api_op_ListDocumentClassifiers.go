@@ -4,6 +4,7 @@ package comprehend
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
@@ -108,6 +109,94 @@ func addOperationListDocumentClassifiersMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// ListDocumentClassifiersAPIClient is a client that implements the
+// ListDocumentClassifiers operation.
+type ListDocumentClassifiersAPIClient interface {
+	ListDocumentClassifiers(context.Context, *ListDocumentClassifiersInput, ...func(*Options)) (*ListDocumentClassifiersOutput, error)
+}
+
+var _ ListDocumentClassifiersAPIClient = (*Client)(nil)
+
+// ListDocumentClassifiersPaginatorOptions is the paginator options for
+// ListDocumentClassifiers
+type ListDocumentClassifiersPaginatorOptions struct {
+	// The maximum number of results to return in each page. The default is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDocumentClassifiersPaginator is a paginator for ListDocumentClassifiers
+type ListDocumentClassifiersPaginator struct {
+	options   ListDocumentClassifiersPaginatorOptions
+	client    ListDocumentClassifiersAPIClient
+	params    *ListDocumentClassifiersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDocumentClassifiersPaginator returns a new
+// ListDocumentClassifiersPaginator
+func NewListDocumentClassifiersPaginator(client ListDocumentClassifiersAPIClient, params *ListDocumentClassifiersInput, optFns ...func(*ListDocumentClassifiersPaginatorOptions)) *ListDocumentClassifiersPaginator {
+	options := ListDocumentClassifiersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListDocumentClassifiersInput{}
+	}
+
+	return &ListDocumentClassifiersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDocumentClassifiersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDocumentClassifiers page.
+func (p *ListDocumentClassifiersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDocumentClassifiersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListDocumentClassifiers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDocumentClassifiers(region string) *awsmiddleware.RegisterServiceMetadata {

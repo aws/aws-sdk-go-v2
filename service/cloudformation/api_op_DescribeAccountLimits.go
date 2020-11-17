@@ -4,6 +4,7 @@ package cloudformation
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
@@ -108,6 +109,81 @@ func addOperationDescribeAccountLimitsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// DescribeAccountLimitsAPIClient is a client that implements the
+// DescribeAccountLimits operation.
+type DescribeAccountLimitsAPIClient interface {
+	DescribeAccountLimits(context.Context, *DescribeAccountLimitsInput, ...func(*Options)) (*DescribeAccountLimitsOutput, error)
+}
+
+var _ DescribeAccountLimitsAPIClient = (*Client)(nil)
+
+// DescribeAccountLimitsPaginatorOptions is the paginator options for
+// DescribeAccountLimits
+type DescribeAccountLimitsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeAccountLimitsPaginator is a paginator for DescribeAccountLimits
+type DescribeAccountLimitsPaginator struct {
+	options   DescribeAccountLimitsPaginatorOptions
+	client    DescribeAccountLimitsAPIClient
+	params    *DescribeAccountLimitsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeAccountLimitsPaginator returns a new DescribeAccountLimitsPaginator
+func NewDescribeAccountLimitsPaginator(client DescribeAccountLimitsAPIClient, params *DescribeAccountLimitsInput, optFns ...func(*DescribeAccountLimitsPaginatorOptions)) *DescribeAccountLimitsPaginator {
+	options := DescribeAccountLimitsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeAccountLimitsInput{}
+	}
+
+	return &DescribeAccountLimitsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeAccountLimitsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeAccountLimits page.
+func (p *DescribeAccountLimitsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeAccountLimitsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.DescribeAccountLimits(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeAccountLimits(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -135,6 +136,93 @@ func addOperationDescribeClientVpnTargetNetworksMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+// DescribeClientVpnTargetNetworksAPIClient is a client that implements the
+// DescribeClientVpnTargetNetworks operation.
+type DescribeClientVpnTargetNetworksAPIClient interface {
+	DescribeClientVpnTargetNetworks(context.Context, *DescribeClientVpnTargetNetworksInput, ...func(*Options)) (*DescribeClientVpnTargetNetworksOutput, error)
+}
+
+var _ DescribeClientVpnTargetNetworksAPIClient = (*Client)(nil)
+
+// DescribeClientVpnTargetNetworksPaginatorOptions is the paginator options for
+// DescribeClientVpnTargetNetworks
+type DescribeClientVpnTargetNetworksPaginatorOptions struct {
+	// The maximum number of results to return for the request in a single page. The
+	// remaining results can be seen by sending another request with the nextToken
+	// value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeClientVpnTargetNetworksPaginator is a paginator for
+// DescribeClientVpnTargetNetworks
+type DescribeClientVpnTargetNetworksPaginator struct {
+	options   DescribeClientVpnTargetNetworksPaginatorOptions
+	client    DescribeClientVpnTargetNetworksAPIClient
+	params    *DescribeClientVpnTargetNetworksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeClientVpnTargetNetworksPaginator returns a new
+// DescribeClientVpnTargetNetworksPaginator
+func NewDescribeClientVpnTargetNetworksPaginator(client DescribeClientVpnTargetNetworksAPIClient, params *DescribeClientVpnTargetNetworksInput, optFns ...func(*DescribeClientVpnTargetNetworksPaginatorOptions)) *DescribeClientVpnTargetNetworksPaginator {
+	options := DescribeClientVpnTargetNetworksPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeClientVpnTargetNetworksInput{}
+	}
+
+	return &DescribeClientVpnTargetNetworksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeClientVpnTargetNetworksPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeClientVpnTargetNetworks page.
+func (p *DescribeClientVpnTargetNetworksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeClientVpnTargetNetworksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeClientVpnTargetNetworks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeClientVpnTargetNetworks(region string) *awsmiddleware.RegisterServiceMetadata {

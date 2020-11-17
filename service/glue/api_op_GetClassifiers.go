@@ -4,6 +4,7 @@ package glue
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
@@ -103,6 +104,92 @@ func addOperationGetClassifiersMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// GetClassifiersAPIClient is a client that implements the GetClassifiers
+// operation.
+type GetClassifiersAPIClient interface {
+	GetClassifiers(context.Context, *GetClassifiersInput, ...func(*Options)) (*GetClassifiersOutput, error)
+}
+
+var _ GetClassifiersAPIClient = (*Client)(nil)
+
+// GetClassifiersPaginatorOptions is the paginator options for GetClassifiers
+type GetClassifiersPaginatorOptions struct {
+	// The size of the list to return (optional).
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetClassifiersPaginator is a paginator for GetClassifiers
+type GetClassifiersPaginator struct {
+	options   GetClassifiersPaginatorOptions
+	client    GetClassifiersAPIClient
+	params    *GetClassifiersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetClassifiersPaginator returns a new GetClassifiersPaginator
+func NewGetClassifiersPaginator(client GetClassifiersAPIClient, params *GetClassifiersInput, optFns ...func(*GetClassifiersPaginatorOptions)) *GetClassifiersPaginator {
+	options := GetClassifiersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetClassifiersInput{}
+	}
+
+	return &GetClassifiersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetClassifiersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetClassifiers page.
+func (p *GetClassifiersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetClassifiersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetClassifiers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetClassifiers(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package sns
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
@@ -115,6 +116,82 @@ func addOperationListSubscriptionsByTopicMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// ListSubscriptionsByTopicAPIClient is a client that implements the
+// ListSubscriptionsByTopic operation.
+type ListSubscriptionsByTopicAPIClient interface {
+	ListSubscriptionsByTopic(context.Context, *ListSubscriptionsByTopicInput, ...func(*Options)) (*ListSubscriptionsByTopicOutput, error)
+}
+
+var _ ListSubscriptionsByTopicAPIClient = (*Client)(nil)
+
+// ListSubscriptionsByTopicPaginatorOptions is the paginator options for
+// ListSubscriptionsByTopic
+type ListSubscriptionsByTopicPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListSubscriptionsByTopicPaginator is a paginator for ListSubscriptionsByTopic
+type ListSubscriptionsByTopicPaginator struct {
+	options   ListSubscriptionsByTopicPaginatorOptions
+	client    ListSubscriptionsByTopicAPIClient
+	params    *ListSubscriptionsByTopicInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListSubscriptionsByTopicPaginator returns a new
+// ListSubscriptionsByTopicPaginator
+func NewListSubscriptionsByTopicPaginator(client ListSubscriptionsByTopicAPIClient, params *ListSubscriptionsByTopicInput, optFns ...func(*ListSubscriptionsByTopicPaginatorOptions)) *ListSubscriptionsByTopicPaginator {
+	options := ListSubscriptionsByTopicPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListSubscriptionsByTopicInput{}
+	}
+
+	return &ListSubscriptionsByTopicPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListSubscriptionsByTopicPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListSubscriptionsByTopic page.
+func (p *ListSubscriptionsByTopicPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSubscriptionsByTopicOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListSubscriptionsByTopic(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListSubscriptionsByTopic(region string) *awsmiddleware.RegisterServiceMetadata {

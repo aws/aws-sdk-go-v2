@@ -4,6 +4,7 @@ package inspector
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
@@ -123,6 +124,95 @@ func addOperationListAssessmentTemplatesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// ListAssessmentTemplatesAPIClient is a client that implements the
+// ListAssessmentTemplates operation.
+type ListAssessmentTemplatesAPIClient interface {
+	ListAssessmentTemplates(context.Context, *ListAssessmentTemplatesInput, ...func(*Options)) (*ListAssessmentTemplatesOutput, error)
+}
+
+var _ ListAssessmentTemplatesAPIClient = (*Client)(nil)
+
+// ListAssessmentTemplatesPaginatorOptions is the paginator options for
+// ListAssessmentTemplates
+type ListAssessmentTemplatesPaginatorOptions struct {
+	// You can use this parameter to indicate the maximum number of items you want in
+	// the response. The default value is 10. The maximum value is 500.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAssessmentTemplatesPaginator is a paginator for ListAssessmentTemplates
+type ListAssessmentTemplatesPaginator struct {
+	options   ListAssessmentTemplatesPaginatorOptions
+	client    ListAssessmentTemplatesAPIClient
+	params    *ListAssessmentTemplatesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAssessmentTemplatesPaginator returns a new
+// ListAssessmentTemplatesPaginator
+func NewListAssessmentTemplatesPaginator(client ListAssessmentTemplatesAPIClient, params *ListAssessmentTemplatesInput, optFns ...func(*ListAssessmentTemplatesPaginatorOptions)) *ListAssessmentTemplatesPaginator {
+	options := ListAssessmentTemplatesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAssessmentTemplatesInput{}
+	}
+
+	return &ListAssessmentTemplatesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAssessmentTemplatesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAssessmentTemplates page.
+func (p *ListAssessmentTemplatesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAssessmentTemplatesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListAssessmentTemplates(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAssessmentTemplates(region string) *awsmiddleware.RegisterServiceMetadata {

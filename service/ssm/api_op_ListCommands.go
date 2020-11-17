@@ -4,6 +4,7 @@ package ssm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
@@ -122,6 +123,89 @@ func addOperationListCommandsMiddlewares(stack *middleware.Stack, options Option
 		return err
 	}
 	return nil
+}
+
+// ListCommandsAPIClient is a client that implements the ListCommands operation.
+type ListCommandsAPIClient interface {
+	ListCommands(context.Context, *ListCommandsInput, ...func(*Options)) (*ListCommandsOutput, error)
+}
+
+var _ ListCommandsAPIClient = (*Client)(nil)
+
+// ListCommandsPaginatorOptions is the paginator options for ListCommands
+type ListCommandsPaginatorOptions struct {
+	// (Optional) The maximum number of items to return for this call. The call also
+	// returns a token that you can specify in a subsequent call to get the next set of
+	// results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListCommandsPaginator is a paginator for ListCommands
+type ListCommandsPaginator struct {
+	options   ListCommandsPaginatorOptions
+	client    ListCommandsAPIClient
+	params    *ListCommandsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListCommandsPaginator returns a new ListCommandsPaginator
+func NewListCommandsPaginator(client ListCommandsAPIClient, params *ListCommandsInput, optFns ...func(*ListCommandsPaginatorOptions)) *ListCommandsPaginator {
+	options := ListCommandsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListCommandsInput{}
+	}
+
+	return &ListCommandsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListCommandsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListCommands page.
+func (p *ListCommandsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListCommandsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListCommands(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListCommands(region string) *awsmiddleware.RegisterServiceMetadata {

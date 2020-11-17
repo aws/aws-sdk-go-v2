@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -141,6 +142,94 @@ func addOperationDescribeHostReservationOfferingsMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+// DescribeHostReservationOfferingsAPIClient is a client that implements the
+// DescribeHostReservationOfferings operation.
+type DescribeHostReservationOfferingsAPIClient interface {
+	DescribeHostReservationOfferings(context.Context, *DescribeHostReservationOfferingsInput, ...func(*Options)) (*DescribeHostReservationOfferingsOutput, error)
+}
+
+var _ DescribeHostReservationOfferingsAPIClient = (*Client)(nil)
+
+// DescribeHostReservationOfferingsPaginatorOptions is the paginator options for
+// DescribeHostReservationOfferings
+type DescribeHostReservationOfferingsPaginatorOptions struct {
+	// The maximum number of results to return for the request in a single page. The
+	// remaining results can be seen by sending another request with the returned
+	// nextToken value. This value can be between 5 and 500. If maxResults is given a
+	// larger value than 500, you receive an error.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeHostReservationOfferingsPaginator is a paginator for
+// DescribeHostReservationOfferings
+type DescribeHostReservationOfferingsPaginator struct {
+	options   DescribeHostReservationOfferingsPaginatorOptions
+	client    DescribeHostReservationOfferingsAPIClient
+	params    *DescribeHostReservationOfferingsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeHostReservationOfferingsPaginator returns a new
+// DescribeHostReservationOfferingsPaginator
+func NewDescribeHostReservationOfferingsPaginator(client DescribeHostReservationOfferingsAPIClient, params *DescribeHostReservationOfferingsInput, optFns ...func(*DescribeHostReservationOfferingsPaginatorOptions)) *DescribeHostReservationOfferingsPaginator {
+	options := DescribeHostReservationOfferingsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeHostReservationOfferingsInput{}
+	}
+
+	return &DescribeHostReservationOfferingsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeHostReservationOfferingsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeHostReservationOfferings page.
+func (p *DescribeHostReservationOfferingsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeHostReservationOfferingsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeHostReservationOfferings(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeHostReservationOfferings(region string) *awsmiddleware.RegisterServiceMetadata {

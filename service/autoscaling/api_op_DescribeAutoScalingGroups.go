@@ -4,6 +4,7 @@ package autoscaling
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
@@ -116,6 +117,95 @@ func addOperationDescribeAutoScalingGroupsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+// DescribeAutoScalingGroupsAPIClient is a client that implements the
+// DescribeAutoScalingGroups operation.
+type DescribeAutoScalingGroupsAPIClient interface {
+	DescribeAutoScalingGroups(context.Context, *DescribeAutoScalingGroupsInput, ...func(*Options)) (*DescribeAutoScalingGroupsOutput, error)
+}
+
+var _ DescribeAutoScalingGroupsAPIClient = (*Client)(nil)
+
+// DescribeAutoScalingGroupsPaginatorOptions is the paginator options for
+// DescribeAutoScalingGroups
+type DescribeAutoScalingGroupsPaginatorOptions struct {
+	// The maximum number of items to return with this call. The default value is 50
+	// and the maximum value is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeAutoScalingGroupsPaginator is a paginator for DescribeAutoScalingGroups
+type DescribeAutoScalingGroupsPaginator struct {
+	options   DescribeAutoScalingGroupsPaginatorOptions
+	client    DescribeAutoScalingGroupsAPIClient
+	params    *DescribeAutoScalingGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeAutoScalingGroupsPaginator returns a new
+// DescribeAutoScalingGroupsPaginator
+func NewDescribeAutoScalingGroupsPaginator(client DescribeAutoScalingGroupsAPIClient, params *DescribeAutoScalingGroupsInput, optFns ...func(*DescribeAutoScalingGroupsPaginatorOptions)) *DescribeAutoScalingGroupsPaginator {
+	options := DescribeAutoScalingGroupsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeAutoScalingGroupsInput{}
+	}
+
+	return &DescribeAutoScalingGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeAutoScalingGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeAutoScalingGroups page.
+func (p *DescribeAutoScalingGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeAutoScalingGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeAutoScalingGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeAutoScalingGroups(region string) *awsmiddleware.RegisterServiceMetadata {

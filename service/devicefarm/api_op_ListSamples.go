@@ -4,6 +4,7 @@ package devicefarm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
@@ -113,6 +114,79 @@ func addOperationListSamplesMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+// ListSamplesAPIClient is a client that implements the ListSamples operation.
+type ListSamplesAPIClient interface {
+	ListSamples(context.Context, *ListSamplesInput, ...func(*Options)) (*ListSamplesOutput, error)
+}
+
+var _ ListSamplesAPIClient = (*Client)(nil)
+
+// ListSamplesPaginatorOptions is the paginator options for ListSamples
+type ListSamplesPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListSamplesPaginator is a paginator for ListSamples
+type ListSamplesPaginator struct {
+	options   ListSamplesPaginatorOptions
+	client    ListSamplesAPIClient
+	params    *ListSamplesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListSamplesPaginator returns a new ListSamplesPaginator
+func NewListSamplesPaginator(client ListSamplesAPIClient, params *ListSamplesInput, optFns ...func(*ListSamplesPaginatorOptions)) *ListSamplesPaginator {
+	options := ListSamplesPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListSamplesInput{}
+	}
+
+	return &ListSamplesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListSamplesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListSamples page.
+func (p *ListSamplesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSamplesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListSamples(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListSamples(region string) *awsmiddleware.RegisterServiceMetadata {

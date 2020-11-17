@@ -4,6 +4,7 @@ package codedeploy
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -117,6 +118,81 @@ func addOperationListDeploymentGroupsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// ListDeploymentGroupsAPIClient is a client that implements the
+// ListDeploymentGroups operation.
+type ListDeploymentGroupsAPIClient interface {
+	ListDeploymentGroups(context.Context, *ListDeploymentGroupsInput, ...func(*Options)) (*ListDeploymentGroupsOutput, error)
+}
+
+var _ ListDeploymentGroupsAPIClient = (*Client)(nil)
+
+// ListDeploymentGroupsPaginatorOptions is the paginator options for
+// ListDeploymentGroups
+type ListDeploymentGroupsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDeploymentGroupsPaginator is a paginator for ListDeploymentGroups
+type ListDeploymentGroupsPaginator struct {
+	options   ListDeploymentGroupsPaginatorOptions
+	client    ListDeploymentGroupsAPIClient
+	params    *ListDeploymentGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDeploymentGroupsPaginator returns a new ListDeploymentGroupsPaginator
+func NewListDeploymentGroupsPaginator(client ListDeploymentGroupsAPIClient, params *ListDeploymentGroupsInput, optFns ...func(*ListDeploymentGroupsPaginatorOptions)) *ListDeploymentGroupsPaginator {
+	options := ListDeploymentGroupsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListDeploymentGroupsInput{}
+	}
+
+	return &ListDeploymentGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDeploymentGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDeploymentGroups page.
+func (p *ListDeploymentGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDeploymentGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListDeploymentGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDeploymentGroups(region string) *awsmiddleware.RegisterServiceMetadata {

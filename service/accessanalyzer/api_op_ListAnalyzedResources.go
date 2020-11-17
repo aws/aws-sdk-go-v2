@@ -4,6 +4,7 @@ package accessanalyzer
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
@@ -119,6 +120,93 @@ func addOperationListAnalyzedResourcesMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// ListAnalyzedResourcesAPIClient is a client that implements the
+// ListAnalyzedResources operation.
+type ListAnalyzedResourcesAPIClient interface {
+	ListAnalyzedResources(context.Context, *ListAnalyzedResourcesInput, ...func(*Options)) (*ListAnalyzedResourcesOutput, error)
+}
+
+var _ ListAnalyzedResourcesAPIClient = (*Client)(nil)
+
+// ListAnalyzedResourcesPaginatorOptions is the paginator options for
+// ListAnalyzedResources
+type ListAnalyzedResourcesPaginatorOptions struct {
+	// The maximum number of results to return in the response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAnalyzedResourcesPaginator is a paginator for ListAnalyzedResources
+type ListAnalyzedResourcesPaginator struct {
+	options   ListAnalyzedResourcesPaginatorOptions
+	client    ListAnalyzedResourcesAPIClient
+	params    *ListAnalyzedResourcesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAnalyzedResourcesPaginator returns a new ListAnalyzedResourcesPaginator
+func NewListAnalyzedResourcesPaginator(client ListAnalyzedResourcesAPIClient, params *ListAnalyzedResourcesInput, optFns ...func(*ListAnalyzedResourcesPaginatorOptions)) *ListAnalyzedResourcesPaginator {
+	options := ListAnalyzedResourcesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAnalyzedResourcesInput{}
+	}
+
+	return &ListAnalyzedResourcesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAnalyzedResourcesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAnalyzedResources page.
+func (p *ListAnalyzedResourcesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAnalyzedResourcesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListAnalyzedResources(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAnalyzedResources(region string) *awsmiddleware.RegisterServiceMetadata {

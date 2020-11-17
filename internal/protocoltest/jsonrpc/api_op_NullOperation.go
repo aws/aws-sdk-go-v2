@@ -26,17 +26,17 @@ func (c *Client) NullOperation(ctx context.Context, params *NullOperationInput, 
 }
 
 type NullOperationInput struct {
-	StringList []string
+	SparseStringList []*string
 
-	StringMap map[string]string
+	SparseStringMap map[string]*string
 
 	String_ *string
 }
 
 type NullOperationOutput struct {
-	StringList []string
+	SparseStringList []*string
 
-	StringMap map[string]string
+	SparseStringMap map[string]*string
 
 	String_ *string
 

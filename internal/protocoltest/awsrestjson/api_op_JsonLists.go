@@ -47,6 +47,8 @@ type JsonListsInput struct {
 	// A list of lists of strings.
 	NestedStringList [][]string
 
+	SparseStringList []*string
+
 	StringList []string
 
 	StringSet []string
@@ -65,6 +67,8 @@ type JsonListsOutput struct {
 
 	// A list of lists of strings.
 	NestedStringList [][]string
+
+	SparseStringList []*string
 
 	StringList []string
 

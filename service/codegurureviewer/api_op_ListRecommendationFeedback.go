@@ -4,6 +4,7 @@ package codegurureviewer
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
@@ -133,6 +134,95 @@ func addOperationListRecommendationFeedbackMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+// ListRecommendationFeedbackAPIClient is a client that implements the
+// ListRecommendationFeedback operation.
+type ListRecommendationFeedbackAPIClient interface {
+	ListRecommendationFeedback(context.Context, *ListRecommendationFeedbackInput, ...func(*Options)) (*ListRecommendationFeedbackOutput, error)
+}
+
+var _ ListRecommendationFeedbackAPIClient = (*Client)(nil)
+
+// ListRecommendationFeedbackPaginatorOptions is the paginator options for
+// ListRecommendationFeedback
+type ListRecommendationFeedbackPaginatorOptions struct {
+	// The maximum number of results that are returned per call. The default is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListRecommendationFeedbackPaginator is a paginator for
+// ListRecommendationFeedback
+type ListRecommendationFeedbackPaginator struct {
+	options   ListRecommendationFeedbackPaginatorOptions
+	client    ListRecommendationFeedbackAPIClient
+	params    *ListRecommendationFeedbackInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListRecommendationFeedbackPaginator returns a new
+// ListRecommendationFeedbackPaginator
+func NewListRecommendationFeedbackPaginator(client ListRecommendationFeedbackAPIClient, params *ListRecommendationFeedbackInput, optFns ...func(*ListRecommendationFeedbackPaginatorOptions)) *ListRecommendationFeedbackPaginator {
+	options := ListRecommendationFeedbackPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListRecommendationFeedbackInput{}
+	}
+
+	return &ListRecommendationFeedbackPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListRecommendationFeedbackPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListRecommendationFeedback page.
+func (p *ListRecommendationFeedbackPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListRecommendationFeedbackOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListRecommendationFeedback(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListRecommendationFeedback(region string) *awsmiddleware.RegisterServiceMetadata {

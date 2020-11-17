@@ -4,6 +4,7 @@ package codecommit
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
@@ -121,6 +122,94 @@ func addOperationGetCommentReactionsMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// GetCommentReactionsAPIClient is a client that implements the GetCommentReactions
+// operation.
+type GetCommentReactionsAPIClient interface {
+	GetCommentReactions(context.Context, *GetCommentReactionsInput, ...func(*Options)) (*GetCommentReactionsOutput, error)
+}
+
+var _ GetCommentReactionsAPIClient = (*Client)(nil)
+
+// GetCommentReactionsPaginatorOptions is the paginator options for
+// GetCommentReactions
+type GetCommentReactionsPaginatorOptions struct {
+	// A non-zero, non-negative integer used to limit the number of returned results.
+	// The default is the same as the allowed maximum, 1,000.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetCommentReactionsPaginator is a paginator for GetCommentReactions
+type GetCommentReactionsPaginator struct {
+	options   GetCommentReactionsPaginatorOptions
+	client    GetCommentReactionsAPIClient
+	params    *GetCommentReactionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetCommentReactionsPaginator returns a new GetCommentReactionsPaginator
+func NewGetCommentReactionsPaginator(client GetCommentReactionsAPIClient, params *GetCommentReactionsInput, optFns ...func(*GetCommentReactionsPaginatorOptions)) *GetCommentReactionsPaginator {
+	options := GetCommentReactionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetCommentReactionsInput{}
+	}
+
+	return &GetCommentReactionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetCommentReactionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetCommentReactions page.
+func (p *GetCommentReactionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetCommentReactionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetCommentReactions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetCommentReactions(region string) *awsmiddleware.RegisterServiceMetadata {

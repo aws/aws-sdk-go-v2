@@ -4,6 +4,7 @@ package transfer
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -111,6 +112,94 @@ func addOperationListSecurityPoliciesMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// ListSecurityPoliciesAPIClient is a client that implements the
+// ListSecurityPolicies operation.
+type ListSecurityPoliciesAPIClient interface {
+	ListSecurityPolicies(context.Context, *ListSecurityPoliciesInput, ...func(*Options)) (*ListSecurityPoliciesOutput, error)
+}
+
+var _ ListSecurityPoliciesAPIClient = (*Client)(nil)
+
+// ListSecurityPoliciesPaginatorOptions is the paginator options for
+// ListSecurityPolicies
+type ListSecurityPoliciesPaginatorOptions struct {
+	// Specifies the number of security policies to return as a response to the
+	// ListSecurityPolicies query.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListSecurityPoliciesPaginator is a paginator for ListSecurityPolicies
+type ListSecurityPoliciesPaginator struct {
+	options   ListSecurityPoliciesPaginatorOptions
+	client    ListSecurityPoliciesAPIClient
+	params    *ListSecurityPoliciesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListSecurityPoliciesPaginator returns a new ListSecurityPoliciesPaginator
+func NewListSecurityPoliciesPaginator(client ListSecurityPoliciesAPIClient, params *ListSecurityPoliciesInput, optFns ...func(*ListSecurityPoliciesPaginatorOptions)) *ListSecurityPoliciesPaginator {
+	options := ListSecurityPoliciesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListSecurityPoliciesInput{}
+	}
+
+	return &ListSecurityPoliciesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListSecurityPoliciesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListSecurityPolicies page.
+func (p *ListSecurityPoliciesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSecurityPoliciesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListSecurityPolicies(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListSecurityPolicies(region string) *awsmiddleware.RegisterServiceMetadata {

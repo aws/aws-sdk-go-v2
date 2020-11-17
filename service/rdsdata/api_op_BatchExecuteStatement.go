@@ -152,7 +152,7 @@ func newServiceMetadataMiddleware_opBatchExecuteStatement(region string) *awsmid
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "",
+		SigningName:   "rds-data",
 		OperationName: "BatchExecuteStatement",
 	}
 }

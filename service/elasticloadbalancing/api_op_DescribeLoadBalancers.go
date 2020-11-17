@@ -4,6 +4,7 @@ package elasticloadbalancing
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
@@ -112,6 +113,81 @@ func addOperationDescribeLoadBalancersMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// DescribeLoadBalancersAPIClient is a client that implements the
+// DescribeLoadBalancers operation.
+type DescribeLoadBalancersAPIClient interface {
+	DescribeLoadBalancers(context.Context, *DescribeLoadBalancersInput, ...func(*Options)) (*DescribeLoadBalancersOutput, error)
+}
+
+var _ DescribeLoadBalancersAPIClient = (*Client)(nil)
+
+// DescribeLoadBalancersPaginatorOptions is the paginator options for
+// DescribeLoadBalancers
+type DescribeLoadBalancersPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeLoadBalancersPaginator is a paginator for DescribeLoadBalancers
+type DescribeLoadBalancersPaginator struct {
+	options   DescribeLoadBalancersPaginatorOptions
+	client    DescribeLoadBalancersAPIClient
+	params    *DescribeLoadBalancersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeLoadBalancersPaginator returns a new DescribeLoadBalancersPaginator
+func NewDescribeLoadBalancersPaginator(client DescribeLoadBalancersAPIClient, params *DescribeLoadBalancersInput, optFns ...func(*DescribeLoadBalancersPaginatorOptions)) *DescribeLoadBalancersPaginator {
+	options := DescribeLoadBalancersPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeLoadBalancersInput{}
+	}
+
+	return &DescribeLoadBalancersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeLoadBalancersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeLoadBalancers page.
+func (p *DescribeLoadBalancersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeLoadBalancersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	result, err := p.client.DescribeLoadBalancers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeLoadBalancers(region string) *awsmiddleware.RegisterServiceMetadata {

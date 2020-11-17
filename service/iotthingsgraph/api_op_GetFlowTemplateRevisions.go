@@ -4,6 +4,7 @@ package iotthingsgraph
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
@@ -116,6 +117,94 @@ func addOperationGetFlowTemplateRevisionsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// GetFlowTemplateRevisionsAPIClient is a client that implements the
+// GetFlowTemplateRevisions operation.
+type GetFlowTemplateRevisionsAPIClient interface {
+	GetFlowTemplateRevisions(context.Context, *GetFlowTemplateRevisionsInput, ...func(*Options)) (*GetFlowTemplateRevisionsOutput, error)
+}
+
+var _ GetFlowTemplateRevisionsAPIClient = (*Client)(nil)
+
+// GetFlowTemplateRevisionsPaginatorOptions is the paginator options for
+// GetFlowTemplateRevisions
+type GetFlowTemplateRevisionsPaginatorOptions struct {
+	// The maximum number of results to return in the response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetFlowTemplateRevisionsPaginator is a paginator for GetFlowTemplateRevisions
+type GetFlowTemplateRevisionsPaginator struct {
+	options   GetFlowTemplateRevisionsPaginatorOptions
+	client    GetFlowTemplateRevisionsAPIClient
+	params    *GetFlowTemplateRevisionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetFlowTemplateRevisionsPaginator returns a new
+// GetFlowTemplateRevisionsPaginator
+func NewGetFlowTemplateRevisionsPaginator(client GetFlowTemplateRevisionsAPIClient, params *GetFlowTemplateRevisionsInput, optFns ...func(*GetFlowTemplateRevisionsPaginatorOptions)) *GetFlowTemplateRevisionsPaginator {
+	options := GetFlowTemplateRevisionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetFlowTemplateRevisionsInput{}
+	}
+
+	return &GetFlowTemplateRevisionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetFlowTemplateRevisionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetFlowTemplateRevisions page.
+func (p *GetFlowTemplateRevisionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetFlowTemplateRevisionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetFlowTemplateRevisions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetFlowTemplateRevisions(region string) *awsmiddleware.RegisterServiceMetadata {

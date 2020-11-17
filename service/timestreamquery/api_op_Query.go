@@ -153,6 +153,94 @@ func addOperationQueryMiddlewares(stack *middleware.Stack, options Options) (err
 	return nil
 }
 
+// QueryAPIClient is a client that implements the Query operation.
+type QueryAPIClient interface {
+	Query(context.Context, *QueryInput, ...func(*Options)) (*QueryOutput, error)
+}
+
+var _ QueryAPIClient = (*Client)(nil)
+
+// QueryPaginatorOptions is the paginator options for Query
+type QueryPaginatorOptions struct {
+	// The total number of rows to return in the output. If the total number of rows
+	// available is more than the value specified, a NextToken is provided in the
+	// command's output. To resume pagination, provide the NextToken value in the
+	// starting-token argument of a subsequent command.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// QueryPaginator is a paginator for Query
+type QueryPaginator struct {
+	options   QueryPaginatorOptions
+	client    QueryAPIClient
+	params    *QueryInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewQueryPaginator returns a new QueryPaginator
+func NewQueryPaginator(client QueryAPIClient, params *QueryInput, optFns ...func(*QueryPaginatorOptions)) *QueryPaginator {
+	options := QueryPaginatorOptions{}
+	if params.MaxRows != nil {
+		options.Limit = *params.MaxRows
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &QueryInput{}
+	}
+
+	return &QueryPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *QueryPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next Query page.
+func (p *QueryPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*QueryOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRows = limit
+
+	result, err := p.client.Query(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 type idempotencyToken_initializeOpQuery struct {
 	tokenProvider IdempotencyTokenProvider
 }

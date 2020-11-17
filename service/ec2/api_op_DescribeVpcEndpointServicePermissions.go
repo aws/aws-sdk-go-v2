@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -130,6 +131,94 @@ func addOperationDescribeVpcEndpointServicePermissionsMiddlewares(stack *middlew
 		return err
 	}
 	return nil
+}
+
+// DescribeVpcEndpointServicePermissionsAPIClient is a client that implements the
+// DescribeVpcEndpointServicePermissions operation.
+type DescribeVpcEndpointServicePermissionsAPIClient interface {
+	DescribeVpcEndpointServicePermissions(context.Context, *DescribeVpcEndpointServicePermissionsInput, ...func(*Options)) (*DescribeVpcEndpointServicePermissionsOutput, error)
+}
+
+var _ DescribeVpcEndpointServicePermissionsAPIClient = (*Client)(nil)
+
+// DescribeVpcEndpointServicePermissionsPaginatorOptions is the paginator options
+// for DescribeVpcEndpointServicePermissions
+type DescribeVpcEndpointServicePermissionsPaginatorOptions struct {
+	// The maximum number of results to return for the request in a single page. The
+	// remaining results of the initial request can be seen by sending another request
+	// with the returned NextToken value. This value can be between 5 and 1,000; if
+	// MaxResults is given a value larger than 1,000, only 1,000 results are returned.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeVpcEndpointServicePermissionsPaginator is a paginator for
+// DescribeVpcEndpointServicePermissions
+type DescribeVpcEndpointServicePermissionsPaginator struct {
+	options   DescribeVpcEndpointServicePermissionsPaginatorOptions
+	client    DescribeVpcEndpointServicePermissionsAPIClient
+	params    *DescribeVpcEndpointServicePermissionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeVpcEndpointServicePermissionsPaginator returns a new
+// DescribeVpcEndpointServicePermissionsPaginator
+func NewDescribeVpcEndpointServicePermissionsPaginator(client DescribeVpcEndpointServicePermissionsAPIClient, params *DescribeVpcEndpointServicePermissionsInput, optFns ...func(*DescribeVpcEndpointServicePermissionsPaginatorOptions)) *DescribeVpcEndpointServicePermissionsPaginator {
+	options := DescribeVpcEndpointServicePermissionsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeVpcEndpointServicePermissionsInput{}
+	}
+
+	return &DescribeVpcEndpointServicePermissionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeVpcEndpointServicePermissionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeVpcEndpointServicePermissions page.
+func (p *DescribeVpcEndpointServicePermissionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeVpcEndpointServicePermissionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeVpcEndpointServicePermissions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeVpcEndpointServicePermissions(region string) *awsmiddleware.RegisterServiceMetadata {

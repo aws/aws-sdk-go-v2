@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
@@ -139,6 +140,94 @@ func addOperationListMonitoringSchedulesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// ListMonitoringSchedulesAPIClient is a client that implements the
+// ListMonitoringSchedules operation.
+type ListMonitoringSchedulesAPIClient interface {
+	ListMonitoringSchedules(context.Context, *ListMonitoringSchedulesInput, ...func(*Options)) (*ListMonitoringSchedulesOutput, error)
+}
+
+var _ ListMonitoringSchedulesAPIClient = (*Client)(nil)
+
+// ListMonitoringSchedulesPaginatorOptions is the paginator options for
+// ListMonitoringSchedules
+type ListMonitoringSchedulesPaginatorOptions struct {
+	// The maximum number of jobs to return in the response. The default value is 10.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListMonitoringSchedulesPaginator is a paginator for ListMonitoringSchedules
+type ListMonitoringSchedulesPaginator struct {
+	options   ListMonitoringSchedulesPaginatorOptions
+	client    ListMonitoringSchedulesAPIClient
+	params    *ListMonitoringSchedulesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListMonitoringSchedulesPaginator returns a new
+// ListMonitoringSchedulesPaginator
+func NewListMonitoringSchedulesPaginator(client ListMonitoringSchedulesAPIClient, params *ListMonitoringSchedulesInput, optFns ...func(*ListMonitoringSchedulesPaginatorOptions)) *ListMonitoringSchedulesPaginator {
+	options := ListMonitoringSchedulesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListMonitoringSchedulesInput{}
+	}
+
+	return &ListMonitoringSchedulesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListMonitoringSchedulesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListMonitoringSchedules page.
+func (p *ListMonitoringSchedulesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListMonitoringSchedulesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListMonitoringSchedules(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListMonitoringSchedules(region string) *awsmiddleware.RegisterServiceMetadata {

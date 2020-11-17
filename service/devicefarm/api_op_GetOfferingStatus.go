@@ -4,6 +4,7 @@ package devicefarm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
@@ -113,6 +114,80 @@ func addOperationGetOfferingStatusMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// GetOfferingStatusAPIClient is a client that implements the GetOfferingStatus
+// operation.
+type GetOfferingStatusAPIClient interface {
+	GetOfferingStatus(context.Context, *GetOfferingStatusInput, ...func(*Options)) (*GetOfferingStatusOutput, error)
+}
+
+var _ GetOfferingStatusAPIClient = (*Client)(nil)
+
+// GetOfferingStatusPaginatorOptions is the paginator options for GetOfferingStatus
+type GetOfferingStatusPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetOfferingStatusPaginator is a paginator for GetOfferingStatus
+type GetOfferingStatusPaginator struct {
+	options   GetOfferingStatusPaginatorOptions
+	client    GetOfferingStatusAPIClient
+	params    *GetOfferingStatusInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetOfferingStatusPaginator returns a new GetOfferingStatusPaginator
+func NewGetOfferingStatusPaginator(client GetOfferingStatusAPIClient, params *GetOfferingStatusInput, optFns ...func(*GetOfferingStatusPaginatorOptions)) *GetOfferingStatusPaginator {
+	options := GetOfferingStatusPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetOfferingStatusInput{}
+	}
+
+	return &GetOfferingStatusPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetOfferingStatusPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetOfferingStatus page.
+func (p *GetOfferingStatusPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetOfferingStatusOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.GetOfferingStatus(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetOfferingStatus(region string) *awsmiddleware.RegisterServiceMetadata {

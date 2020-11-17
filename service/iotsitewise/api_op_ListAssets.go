@@ -167,6 +167,91 @@ func addEndpointPrefix_opListAssetsMiddleware(stack *middleware.Stack) error {
 	return stack.Serialize.Insert(&endpointPrefix_opListAssetsMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
+// ListAssetsAPIClient is a client that implements the ListAssets operation.
+type ListAssetsAPIClient interface {
+	ListAssets(context.Context, *ListAssetsInput, ...func(*Options)) (*ListAssetsOutput, error)
+}
+
+var _ ListAssetsAPIClient = (*Client)(nil)
+
+// ListAssetsPaginatorOptions is the paginator options for ListAssets
+type ListAssetsPaginatorOptions struct {
+	// The maximum number of results to be returned per paginated request. Default: 50
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAssetsPaginator is a paginator for ListAssets
+type ListAssetsPaginator struct {
+	options   ListAssetsPaginatorOptions
+	client    ListAssetsAPIClient
+	params    *ListAssetsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAssetsPaginator returns a new ListAssetsPaginator
+func NewListAssetsPaginator(client ListAssetsAPIClient, params *ListAssetsInput, optFns ...func(*ListAssetsPaginatorOptions)) *ListAssetsPaginator {
+	options := ListAssetsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAssetsInput{}
+	}
+
+	return &ListAssetsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAssetsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAssets page.
+func (p *ListAssetsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAssetsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListAssets(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opListAssets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

@@ -4,6 +4,7 @@ package medialive
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
@@ -115,6 +116,90 @@ func addOperationListInputDeviceTransfersMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// ListInputDeviceTransfersAPIClient is a client that implements the
+// ListInputDeviceTransfers operation.
+type ListInputDeviceTransfersAPIClient interface {
+	ListInputDeviceTransfers(context.Context, *ListInputDeviceTransfersInput, ...func(*Options)) (*ListInputDeviceTransfersOutput, error)
+}
+
+var _ ListInputDeviceTransfersAPIClient = (*Client)(nil)
+
+// ListInputDeviceTransfersPaginatorOptions is the paginator options for
+// ListInputDeviceTransfers
+type ListInputDeviceTransfersPaginatorOptions struct {
+	// Placeholder documentation for MaxResults
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListInputDeviceTransfersPaginator is a paginator for ListInputDeviceTransfers
+type ListInputDeviceTransfersPaginator struct {
+	options   ListInputDeviceTransfersPaginatorOptions
+	client    ListInputDeviceTransfersAPIClient
+	params    *ListInputDeviceTransfersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListInputDeviceTransfersPaginator returns a new
+// ListInputDeviceTransfersPaginator
+func NewListInputDeviceTransfersPaginator(client ListInputDeviceTransfersAPIClient, params *ListInputDeviceTransfersInput, optFns ...func(*ListInputDeviceTransfersPaginatorOptions)) *ListInputDeviceTransfersPaginator {
+	options := ListInputDeviceTransfersPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListInputDeviceTransfersInput{}
+	}
+
+	return &ListInputDeviceTransfersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListInputDeviceTransfersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListInputDeviceTransfers page.
+func (p *ListInputDeviceTransfersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListInputDeviceTransfersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListInputDeviceTransfers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListInputDeviceTransfers(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -157,6 +158,92 @@ func addOperationDescribeVolumesModificationsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+// DescribeVolumesModificationsAPIClient is a client that implements the
+// DescribeVolumesModifications operation.
+type DescribeVolumesModificationsAPIClient interface {
+	DescribeVolumesModifications(context.Context, *DescribeVolumesModificationsInput, ...func(*Options)) (*DescribeVolumesModificationsOutput, error)
+}
+
+var _ DescribeVolumesModificationsAPIClient = (*Client)(nil)
+
+// DescribeVolumesModificationsPaginatorOptions is the paginator options for
+// DescribeVolumesModifications
+type DescribeVolumesModificationsPaginatorOptions struct {
+	// The maximum number of results (up to a limit of 500) to be returned in a
+	// paginated request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeVolumesModificationsPaginator is a paginator for
+// DescribeVolumesModifications
+type DescribeVolumesModificationsPaginator struct {
+	options   DescribeVolumesModificationsPaginatorOptions
+	client    DescribeVolumesModificationsAPIClient
+	params    *DescribeVolumesModificationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeVolumesModificationsPaginator returns a new
+// DescribeVolumesModificationsPaginator
+func NewDescribeVolumesModificationsPaginator(client DescribeVolumesModificationsAPIClient, params *DescribeVolumesModificationsInput, optFns ...func(*DescribeVolumesModificationsPaginatorOptions)) *DescribeVolumesModificationsPaginator {
+	options := DescribeVolumesModificationsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeVolumesModificationsInput{}
+	}
+
+	return &DescribeVolumesModificationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeVolumesModificationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeVolumesModifications page.
+func (p *DescribeVolumesModificationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeVolumesModificationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeVolumesModifications(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeVolumesModifications(region string) *awsmiddleware.RegisterServiceMetadata {

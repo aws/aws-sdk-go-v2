@@ -4,6 +4,7 @@ package synthetics
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/synthetics/types"
@@ -115,6 +116,92 @@ func addOperationGetCanaryRunsMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	return nil
+}
+
+// GetCanaryRunsAPIClient is a client that implements the GetCanaryRuns operation.
+type GetCanaryRunsAPIClient interface {
+	GetCanaryRuns(context.Context, *GetCanaryRunsInput, ...func(*Options)) (*GetCanaryRunsOutput, error)
+}
+
+var _ GetCanaryRunsAPIClient = (*Client)(nil)
+
+// GetCanaryRunsPaginatorOptions is the paginator options for GetCanaryRuns
+type GetCanaryRunsPaginatorOptions struct {
+	// Specify this parameter to limit how many runs are returned each time you use the
+	// GetCanaryRuns operation. If you omit this parameter, the default of 100 is used.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetCanaryRunsPaginator is a paginator for GetCanaryRuns
+type GetCanaryRunsPaginator struct {
+	options   GetCanaryRunsPaginatorOptions
+	client    GetCanaryRunsAPIClient
+	params    *GetCanaryRunsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetCanaryRunsPaginator returns a new GetCanaryRunsPaginator
+func NewGetCanaryRunsPaginator(client GetCanaryRunsAPIClient, params *GetCanaryRunsInput, optFns ...func(*GetCanaryRunsPaginatorOptions)) *GetCanaryRunsPaginator {
+	options := GetCanaryRunsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetCanaryRunsInput{}
+	}
+
+	return &GetCanaryRunsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetCanaryRunsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetCanaryRuns page.
+func (p *GetCanaryRunsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetCanaryRunsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetCanaryRuns(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetCanaryRuns(region string) *awsmiddleware.RegisterServiceMetadata {

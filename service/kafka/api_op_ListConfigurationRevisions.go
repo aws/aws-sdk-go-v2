@@ -4,6 +4,7 @@ package kafka
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
@@ -115,6 +116,92 @@ func addOperationListConfigurationRevisionsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+// ListConfigurationRevisionsAPIClient is a client that implements the
+// ListConfigurationRevisions operation.
+type ListConfigurationRevisionsAPIClient interface {
+	ListConfigurationRevisions(context.Context, *ListConfigurationRevisionsInput, ...func(*Options)) (*ListConfigurationRevisionsOutput, error)
+}
+
+var _ ListConfigurationRevisionsAPIClient = (*Client)(nil)
+
+// ListConfigurationRevisionsPaginatorOptions is the paginator options for
+// ListConfigurationRevisions
+type ListConfigurationRevisionsPaginatorOptions struct {
+	// The maximum number of results to return in the response. If there are more
+	// results, the response includes a NextToken parameter.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListConfigurationRevisionsPaginator is a paginator for
+// ListConfigurationRevisions
+type ListConfigurationRevisionsPaginator struct {
+	options   ListConfigurationRevisionsPaginatorOptions
+	client    ListConfigurationRevisionsAPIClient
+	params    *ListConfigurationRevisionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListConfigurationRevisionsPaginator returns a new
+// ListConfigurationRevisionsPaginator
+func NewListConfigurationRevisionsPaginator(client ListConfigurationRevisionsAPIClient, params *ListConfigurationRevisionsInput, optFns ...func(*ListConfigurationRevisionsPaginatorOptions)) *ListConfigurationRevisionsPaginator {
+	options := ListConfigurationRevisionsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListConfigurationRevisionsInput{}
+	}
+
+	return &ListConfigurationRevisionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListConfigurationRevisionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListConfigurationRevisions page.
+func (p *ListConfigurationRevisionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListConfigurationRevisionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListConfigurationRevisions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListConfigurationRevisions(region string) *awsmiddleware.RegisterServiceMetadata {

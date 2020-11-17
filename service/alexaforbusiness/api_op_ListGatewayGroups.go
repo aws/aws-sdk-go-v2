@@ -4,6 +4,7 @@ package alexaforbusiness
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
@@ -104,6 +105,92 @@ func addOperationListGatewayGroupsMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// ListGatewayGroupsAPIClient is a client that implements the ListGatewayGroups
+// operation.
+type ListGatewayGroupsAPIClient interface {
+	ListGatewayGroups(context.Context, *ListGatewayGroupsInput, ...func(*Options)) (*ListGatewayGroupsOutput, error)
+}
+
+var _ ListGatewayGroupsAPIClient = (*Client)(nil)
+
+// ListGatewayGroupsPaginatorOptions is the paginator options for ListGatewayGroups
+type ListGatewayGroupsPaginatorOptions struct {
+	// The maximum number of gateway group summaries to return. The default is 50.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListGatewayGroupsPaginator is a paginator for ListGatewayGroups
+type ListGatewayGroupsPaginator struct {
+	options   ListGatewayGroupsPaginatorOptions
+	client    ListGatewayGroupsAPIClient
+	params    *ListGatewayGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListGatewayGroupsPaginator returns a new ListGatewayGroupsPaginator
+func NewListGatewayGroupsPaginator(client ListGatewayGroupsAPIClient, params *ListGatewayGroupsInput, optFns ...func(*ListGatewayGroupsPaginatorOptions)) *ListGatewayGroupsPaginator {
+	options := ListGatewayGroupsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListGatewayGroupsInput{}
+	}
+
+	return &ListGatewayGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListGatewayGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListGatewayGroups page.
+func (p *ListGatewayGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListGatewayGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListGatewayGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListGatewayGroups(region string) *awsmiddleware.RegisterServiceMetadata {

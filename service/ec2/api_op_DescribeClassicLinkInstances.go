@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -140,6 +141,93 @@ func addOperationDescribeClassicLinkInstancesMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+// DescribeClassicLinkInstancesAPIClient is a client that implements the
+// DescribeClassicLinkInstances operation.
+type DescribeClassicLinkInstancesAPIClient interface {
+	DescribeClassicLinkInstances(context.Context, *DescribeClassicLinkInstancesInput, ...func(*Options)) (*DescribeClassicLinkInstancesOutput, error)
+}
+
+var _ DescribeClassicLinkInstancesAPIClient = (*Client)(nil)
+
+// DescribeClassicLinkInstancesPaginatorOptions is the paginator options for
+// DescribeClassicLinkInstances
+type DescribeClassicLinkInstancesPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	// Constraint: If the value is greater than 1000, we return only 1000 items.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeClassicLinkInstancesPaginator is a paginator for
+// DescribeClassicLinkInstances
+type DescribeClassicLinkInstancesPaginator struct {
+	options   DescribeClassicLinkInstancesPaginatorOptions
+	client    DescribeClassicLinkInstancesAPIClient
+	params    *DescribeClassicLinkInstancesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeClassicLinkInstancesPaginator returns a new
+// DescribeClassicLinkInstancesPaginator
+func NewDescribeClassicLinkInstancesPaginator(client DescribeClassicLinkInstancesAPIClient, params *DescribeClassicLinkInstancesInput, optFns ...func(*DescribeClassicLinkInstancesPaginatorOptions)) *DescribeClassicLinkInstancesPaginator {
+	options := DescribeClassicLinkInstancesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeClassicLinkInstancesInput{}
+	}
+
+	return &DescribeClassicLinkInstancesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeClassicLinkInstancesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeClassicLinkInstances page.
+func (p *DescribeClassicLinkInstancesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeClassicLinkInstancesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeClassicLinkInstances(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeClassicLinkInstances(region string) *awsmiddleware.RegisterServiceMetadata {

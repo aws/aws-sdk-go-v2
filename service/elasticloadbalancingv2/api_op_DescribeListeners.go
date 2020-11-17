@@ -4,6 +4,7 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
@@ -115,6 +116,80 @@ func addOperationDescribeListenersMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// DescribeListenersAPIClient is a client that implements the DescribeListeners
+// operation.
+type DescribeListenersAPIClient interface {
+	DescribeListeners(context.Context, *DescribeListenersInput, ...func(*Options)) (*DescribeListenersOutput, error)
+}
+
+var _ DescribeListenersAPIClient = (*Client)(nil)
+
+// DescribeListenersPaginatorOptions is the paginator options for DescribeListeners
+type DescribeListenersPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeListenersPaginator is a paginator for DescribeListeners
+type DescribeListenersPaginator struct {
+	options   DescribeListenersPaginatorOptions
+	client    DescribeListenersAPIClient
+	params    *DescribeListenersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeListenersPaginator returns a new DescribeListenersPaginator
+func NewDescribeListenersPaginator(client DescribeListenersAPIClient, params *DescribeListenersInput, optFns ...func(*DescribeListenersPaginatorOptions)) *DescribeListenersPaginator {
+	options := DescribeListenersPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeListenersInput{}
+	}
+
+	return &DescribeListenersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeListenersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeListeners page.
+func (p *DescribeListenersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeListenersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	result, err := p.client.DescribeListeners(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeListeners(region string) *awsmiddleware.RegisterServiceMetadata {

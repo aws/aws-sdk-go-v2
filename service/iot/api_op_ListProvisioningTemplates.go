@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
@@ -103,6 +104,94 @@ func addOperationListProvisioningTemplatesMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+// ListProvisioningTemplatesAPIClient is a client that implements the
+// ListProvisioningTemplates operation.
+type ListProvisioningTemplatesAPIClient interface {
+	ListProvisioningTemplates(context.Context, *ListProvisioningTemplatesInput, ...func(*Options)) (*ListProvisioningTemplatesOutput, error)
+}
+
+var _ ListProvisioningTemplatesAPIClient = (*Client)(nil)
+
+// ListProvisioningTemplatesPaginatorOptions is the paginator options for
+// ListProvisioningTemplates
+type ListProvisioningTemplatesPaginatorOptions struct {
+	// The maximum number of results to return at one time.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListProvisioningTemplatesPaginator is a paginator for ListProvisioningTemplates
+type ListProvisioningTemplatesPaginator struct {
+	options   ListProvisioningTemplatesPaginatorOptions
+	client    ListProvisioningTemplatesAPIClient
+	params    *ListProvisioningTemplatesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListProvisioningTemplatesPaginator returns a new
+// ListProvisioningTemplatesPaginator
+func NewListProvisioningTemplatesPaginator(client ListProvisioningTemplatesAPIClient, params *ListProvisioningTemplatesInput, optFns ...func(*ListProvisioningTemplatesPaginatorOptions)) *ListProvisioningTemplatesPaginator {
+	options := ListProvisioningTemplatesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListProvisioningTemplatesInput{}
+	}
+
+	return &ListProvisioningTemplatesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListProvisioningTemplatesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListProvisioningTemplates page.
+func (p *ListProvisioningTemplatesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListProvisioningTemplatesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListProvisioningTemplates(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListProvisioningTemplates(region string) *awsmiddleware.RegisterServiceMetadata {

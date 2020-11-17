@@ -4,6 +4,7 @@ package servicecatalog
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
@@ -124,6 +125,88 @@ func addOperationListLaunchPathsMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	return nil
+}
+
+// ListLaunchPathsAPIClient is a client that implements the ListLaunchPaths
+// operation.
+type ListLaunchPathsAPIClient interface {
+	ListLaunchPaths(context.Context, *ListLaunchPathsInput, ...func(*Options)) (*ListLaunchPathsOutput, error)
+}
+
+var _ ListLaunchPathsAPIClient = (*Client)(nil)
+
+// ListLaunchPathsPaginatorOptions is the paginator options for ListLaunchPaths
+type ListLaunchPathsPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListLaunchPathsPaginator is a paginator for ListLaunchPaths
+type ListLaunchPathsPaginator struct {
+	options   ListLaunchPathsPaginatorOptions
+	client    ListLaunchPathsAPIClient
+	params    *ListLaunchPathsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListLaunchPathsPaginator returns a new ListLaunchPathsPaginator
+func NewListLaunchPathsPaginator(client ListLaunchPathsAPIClient, params *ListLaunchPathsInput, optFns ...func(*ListLaunchPathsPaginatorOptions)) *ListLaunchPathsPaginator {
+	options := ListLaunchPathsPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListLaunchPathsInput{}
+	}
+
+	return &ListLaunchPathsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListLaunchPathsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListLaunchPaths page.
+func (p *ListLaunchPathsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListLaunchPathsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	result, err := p.client.ListLaunchPaths(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListLaunchPaths(region string) *awsmiddleware.RegisterServiceMetadata {

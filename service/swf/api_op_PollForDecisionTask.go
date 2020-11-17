@@ -4,6 +4,7 @@ package swf
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
@@ -212,6 +213,91 @@ func addOperationPollForDecisionTaskMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// PollForDecisionTaskAPIClient is a client that implements the PollForDecisionTask
+// operation.
+type PollForDecisionTaskAPIClient interface {
+	PollForDecisionTask(context.Context, *PollForDecisionTaskInput, ...func(*Options)) (*PollForDecisionTaskOutput, error)
+}
+
+var _ PollForDecisionTaskAPIClient = (*Client)(nil)
+
+// PollForDecisionTaskPaginatorOptions is the paginator options for
+// PollForDecisionTask
+type PollForDecisionTaskPaginatorOptions struct {
+	// The maximum number of results that are returned per call. Use nextPageToken to
+	// obtain further pages of results. This is an upper limit only; the actual number
+	// of results returned per call may be fewer than the specified maximum.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// PollForDecisionTaskPaginator is a paginator for PollForDecisionTask
+type PollForDecisionTaskPaginator struct {
+	options   PollForDecisionTaskPaginatorOptions
+	client    PollForDecisionTaskAPIClient
+	params    *PollForDecisionTaskInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewPollForDecisionTaskPaginator returns a new PollForDecisionTaskPaginator
+func NewPollForDecisionTaskPaginator(client PollForDecisionTaskAPIClient, params *PollForDecisionTaskInput, optFns ...func(*PollForDecisionTaskPaginatorOptions)) *PollForDecisionTaskPaginator {
+	options := PollForDecisionTaskPaginatorOptions{}
+	if params.MaximumPageSize != 0 {
+		options.Limit = params.MaximumPageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &PollForDecisionTaskInput{}
+	}
+
+	return &PollForDecisionTaskPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *PollForDecisionTaskPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next PollForDecisionTask page.
+func (p *PollForDecisionTaskPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*PollForDecisionTaskOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextPageToken = p.nextToken
+
+	params.MaximumPageSize = p.options.Limit
+
+	result, err := p.client.PollForDecisionTask(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opPollForDecisionTask(region string) *awsmiddleware.RegisterServiceMetadata {

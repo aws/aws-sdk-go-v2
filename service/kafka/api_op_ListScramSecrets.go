@@ -4,6 +4,7 @@ package kafka
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -110,6 +111,88 @@ func addOperationListScramSecretsMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// ListScramSecretsAPIClient is a client that implements the ListScramSecrets
+// operation.
+type ListScramSecretsAPIClient interface {
+	ListScramSecrets(context.Context, *ListScramSecretsInput, ...func(*Options)) (*ListScramSecretsOutput, error)
+}
+
+var _ ListScramSecretsAPIClient = (*Client)(nil)
+
+// ListScramSecretsPaginatorOptions is the paginator options for ListScramSecrets
+type ListScramSecretsPaginatorOptions struct {
+	// The maxResults of the query.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListScramSecretsPaginator is a paginator for ListScramSecrets
+type ListScramSecretsPaginator struct {
+	options   ListScramSecretsPaginatorOptions
+	client    ListScramSecretsAPIClient
+	params    *ListScramSecretsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListScramSecretsPaginator returns a new ListScramSecretsPaginator
+func NewListScramSecretsPaginator(client ListScramSecretsAPIClient, params *ListScramSecretsInput, optFns ...func(*ListScramSecretsPaginatorOptions)) *ListScramSecretsPaginator {
+	options := ListScramSecretsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListScramSecretsInput{}
+	}
+
+	return &ListScramSecretsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListScramSecretsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListScramSecrets page.
+func (p *ListScramSecretsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListScramSecretsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListScramSecrets(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListScramSecrets(region string) *awsmiddleware.RegisterServiceMetadata {

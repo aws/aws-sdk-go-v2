@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -121,6 +122,91 @@ func addOperationDescribePublicIpv4PoolsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// DescribePublicIpv4PoolsAPIClient is a client that implements the
+// DescribePublicIpv4Pools operation.
+type DescribePublicIpv4PoolsAPIClient interface {
+	DescribePublicIpv4Pools(context.Context, *DescribePublicIpv4PoolsInput, ...func(*Options)) (*DescribePublicIpv4PoolsOutput, error)
+}
+
+var _ DescribePublicIpv4PoolsAPIClient = (*Client)(nil)
+
+// DescribePublicIpv4PoolsPaginatorOptions is the paginator options for
+// DescribePublicIpv4Pools
+type DescribePublicIpv4PoolsPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribePublicIpv4PoolsPaginator is a paginator for DescribePublicIpv4Pools
+type DescribePublicIpv4PoolsPaginator struct {
+	options   DescribePublicIpv4PoolsPaginatorOptions
+	client    DescribePublicIpv4PoolsAPIClient
+	params    *DescribePublicIpv4PoolsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribePublicIpv4PoolsPaginator returns a new
+// DescribePublicIpv4PoolsPaginator
+func NewDescribePublicIpv4PoolsPaginator(client DescribePublicIpv4PoolsAPIClient, params *DescribePublicIpv4PoolsInput, optFns ...func(*DescribePublicIpv4PoolsPaginatorOptions)) *DescribePublicIpv4PoolsPaginator {
+	options := DescribePublicIpv4PoolsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribePublicIpv4PoolsInput{}
+	}
+
+	return &DescribePublicIpv4PoolsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribePublicIpv4PoolsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribePublicIpv4Pools page.
+func (p *DescribePublicIpv4PoolsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribePublicIpv4PoolsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribePublicIpv4Pools(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribePublicIpv4Pools(region string) *awsmiddleware.RegisterServiceMetadata {

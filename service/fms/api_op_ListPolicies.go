@@ -4,6 +4,7 @@ package fms
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
@@ -114,6 +115,94 @@ func addOperationListPoliciesMiddlewares(stack *middleware.Stack, options Option
 		return err
 	}
 	return nil
+}
+
+// ListPoliciesAPIClient is a client that implements the ListPolicies operation.
+type ListPoliciesAPIClient interface {
+	ListPolicies(context.Context, *ListPoliciesInput, ...func(*Options)) (*ListPoliciesOutput, error)
+}
+
+var _ ListPoliciesAPIClient = (*Client)(nil)
+
+// ListPoliciesPaginatorOptions is the paginator options for ListPolicies
+type ListPoliciesPaginatorOptions struct {
+	// Specifies the number of PolicySummary objects that you want AWS Firewall Manager
+	// to return for this request. If you have more PolicySummary objects than the
+	// number that you specify for MaxResults, the response includes a NextToken value
+	// that you can use to get another batch of PolicySummary objects.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPoliciesPaginator is a paginator for ListPolicies
+type ListPoliciesPaginator struct {
+	options   ListPoliciesPaginatorOptions
+	client    ListPoliciesAPIClient
+	params    *ListPoliciesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPoliciesPaginator returns a new ListPoliciesPaginator
+func NewListPoliciesPaginator(client ListPoliciesAPIClient, params *ListPoliciesInput, optFns ...func(*ListPoliciesPaginatorOptions)) *ListPoliciesPaginator {
+	options := ListPoliciesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListPoliciesInput{}
+	}
+
+	return &ListPoliciesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPoliciesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListPolicies page.
+func (p *ListPoliciesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPoliciesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListPolicies(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListPolicies(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package sesv2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
@@ -117,6 +118,97 @@ func addOperationListEmailTemplatesMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// ListEmailTemplatesAPIClient is a client that implements the ListEmailTemplates
+// operation.
+type ListEmailTemplatesAPIClient interface {
+	ListEmailTemplates(context.Context, *ListEmailTemplatesInput, ...func(*Options)) (*ListEmailTemplatesOutput, error)
+}
+
+var _ ListEmailTemplatesAPIClient = (*Client)(nil)
+
+// ListEmailTemplatesPaginatorOptions is the paginator options for
+// ListEmailTemplates
+type ListEmailTemplatesPaginatorOptions struct {
+	// The number of results to show in a single call to ListEmailTemplates. If the
+	// number of results is larger than the number you specified in this parameter,
+	// then the response includes a NextToken element, which you can use to obtain
+	// additional results. The value you specify has to be at least 1, and can be no
+	// more than 10.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListEmailTemplatesPaginator is a paginator for ListEmailTemplates
+type ListEmailTemplatesPaginator struct {
+	options   ListEmailTemplatesPaginatorOptions
+	client    ListEmailTemplatesAPIClient
+	params    *ListEmailTemplatesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListEmailTemplatesPaginator returns a new ListEmailTemplatesPaginator
+func NewListEmailTemplatesPaginator(client ListEmailTemplatesAPIClient, params *ListEmailTemplatesInput, optFns ...func(*ListEmailTemplatesPaginatorOptions)) *ListEmailTemplatesPaginator {
+	options := ListEmailTemplatesPaginatorOptions{}
+	if params.PageSize != nil {
+		options.Limit = *params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListEmailTemplatesInput{}
+	}
+
+	return &ListEmailTemplatesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListEmailTemplatesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListEmailTemplates page.
+func (p *ListEmailTemplatesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListEmailTemplatesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.PageSize = limit
+
+	result, err := p.client.ListEmailTemplates(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListEmailTemplates(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package xray
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
@@ -113,6 +114,80 @@ func addOperationBatchGetTracesMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// BatchGetTracesAPIClient is a client that implements the BatchGetTraces
+// operation.
+type BatchGetTracesAPIClient interface {
+	BatchGetTraces(context.Context, *BatchGetTracesInput, ...func(*Options)) (*BatchGetTracesOutput, error)
+}
+
+var _ BatchGetTracesAPIClient = (*Client)(nil)
+
+// BatchGetTracesPaginatorOptions is the paginator options for BatchGetTraces
+type BatchGetTracesPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// BatchGetTracesPaginator is a paginator for BatchGetTraces
+type BatchGetTracesPaginator struct {
+	options   BatchGetTracesPaginatorOptions
+	client    BatchGetTracesAPIClient
+	params    *BatchGetTracesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewBatchGetTracesPaginator returns a new BatchGetTracesPaginator
+func NewBatchGetTracesPaginator(client BatchGetTracesAPIClient, params *BatchGetTracesInput, optFns ...func(*BatchGetTracesPaginatorOptions)) *BatchGetTracesPaginator {
+	options := BatchGetTracesPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &BatchGetTracesInput{}
+	}
+
+	return &BatchGetTracesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *BatchGetTracesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next BatchGetTraces page.
+func (p *BatchGetTracesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*BatchGetTracesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.BatchGetTraces(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opBatchGetTraces(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package applicationinsights
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
@@ -139,6 +140,99 @@ func addOperationListConfigurationHistoryMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// ListConfigurationHistoryAPIClient is a client that implements the
+// ListConfigurationHistory operation.
+type ListConfigurationHistoryAPIClient interface {
+	ListConfigurationHistory(context.Context, *ListConfigurationHistoryInput, ...func(*Options)) (*ListConfigurationHistoryOutput, error)
+}
+
+var _ ListConfigurationHistoryAPIClient = (*Client)(nil)
+
+// ListConfigurationHistoryPaginatorOptions is the paginator options for
+// ListConfigurationHistory
+type ListConfigurationHistoryPaginatorOptions struct {
+	// The maximum number of results returned by ListConfigurationHistory in paginated
+	// output. When this parameter is used, ListConfigurationHistory returns only
+	// MaxResults in a single page along with a NextToken response element. The
+	// remaining results of the initial request can be seen by sending another
+	// ListConfigurationHistory request with the returned NextToken value. If this
+	// parameter is not used, then ListConfigurationHistory returns all results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListConfigurationHistoryPaginator is a paginator for ListConfigurationHistory
+type ListConfigurationHistoryPaginator struct {
+	options   ListConfigurationHistoryPaginatorOptions
+	client    ListConfigurationHistoryAPIClient
+	params    *ListConfigurationHistoryInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListConfigurationHistoryPaginator returns a new
+// ListConfigurationHistoryPaginator
+func NewListConfigurationHistoryPaginator(client ListConfigurationHistoryAPIClient, params *ListConfigurationHistoryInput, optFns ...func(*ListConfigurationHistoryPaginatorOptions)) *ListConfigurationHistoryPaginator {
+	options := ListConfigurationHistoryPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListConfigurationHistoryInput{}
+	}
+
+	return &ListConfigurationHistoryPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListConfigurationHistoryPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListConfigurationHistory page.
+func (p *ListConfigurationHistoryPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListConfigurationHistoryOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListConfigurationHistory(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListConfigurationHistory(region string) *awsmiddleware.RegisterServiceMetadata {

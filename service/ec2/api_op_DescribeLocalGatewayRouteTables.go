@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -129,6 +130,92 @@ func addOperationDescribeLocalGatewayRouteTablesMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+// DescribeLocalGatewayRouteTablesAPIClient is a client that implements the
+// DescribeLocalGatewayRouteTables operation.
+type DescribeLocalGatewayRouteTablesAPIClient interface {
+	DescribeLocalGatewayRouteTables(context.Context, *DescribeLocalGatewayRouteTablesInput, ...func(*Options)) (*DescribeLocalGatewayRouteTablesOutput, error)
+}
+
+var _ DescribeLocalGatewayRouteTablesAPIClient = (*Client)(nil)
+
+// DescribeLocalGatewayRouteTablesPaginatorOptions is the paginator options for
+// DescribeLocalGatewayRouteTables
+type DescribeLocalGatewayRouteTablesPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeLocalGatewayRouteTablesPaginator is a paginator for
+// DescribeLocalGatewayRouteTables
+type DescribeLocalGatewayRouteTablesPaginator struct {
+	options   DescribeLocalGatewayRouteTablesPaginatorOptions
+	client    DescribeLocalGatewayRouteTablesAPIClient
+	params    *DescribeLocalGatewayRouteTablesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeLocalGatewayRouteTablesPaginator returns a new
+// DescribeLocalGatewayRouteTablesPaginator
+func NewDescribeLocalGatewayRouteTablesPaginator(client DescribeLocalGatewayRouteTablesAPIClient, params *DescribeLocalGatewayRouteTablesInput, optFns ...func(*DescribeLocalGatewayRouteTablesPaginatorOptions)) *DescribeLocalGatewayRouteTablesPaginator {
+	options := DescribeLocalGatewayRouteTablesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeLocalGatewayRouteTablesInput{}
+	}
+
+	return &DescribeLocalGatewayRouteTablesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeLocalGatewayRouteTablesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeLocalGatewayRouteTables page.
+func (p *DescribeLocalGatewayRouteTablesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeLocalGatewayRouteTablesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeLocalGatewayRouteTables(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeLocalGatewayRouteTables(region string) *awsmiddleware.RegisterServiceMetadata {

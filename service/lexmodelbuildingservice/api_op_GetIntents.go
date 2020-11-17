@@ -4,6 +4,7 @@ package lexmodelbuildingservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
@@ -122,6 +123,91 @@ func addOperationGetIntentsMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+// GetIntentsAPIClient is a client that implements the GetIntents operation.
+type GetIntentsAPIClient interface {
+	GetIntents(context.Context, *GetIntentsInput, ...func(*Options)) (*GetIntentsOutput, error)
+}
+
+var _ GetIntentsAPIClient = (*Client)(nil)
+
+// GetIntentsPaginatorOptions is the paginator options for GetIntents
+type GetIntentsPaginatorOptions struct {
+	// The maximum number of intents to return in the response. The default is 10.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetIntentsPaginator is a paginator for GetIntents
+type GetIntentsPaginator struct {
+	options   GetIntentsPaginatorOptions
+	client    GetIntentsAPIClient
+	params    *GetIntentsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetIntentsPaginator returns a new GetIntentsPaginator
+func NewGetIntentsPaginator(client GetIntentsAPIClient, params *GetIntentsInput, optFns ...func(*GetIntentsPaginatorOptions)) *GetIntentsPaginator {
+	options := GetIntentsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetIntentsInput{}
+	}
+
+	return &GetIntentsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetIntentsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetIntents page.
+func (p *GetIntentsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetIntentsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetIntents(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetIntents(region string) *awsmiddleware.RegisterServiceMetadata {

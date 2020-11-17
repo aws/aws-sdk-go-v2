@@ -4,6 +4,7 @@ package pinpointemail
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
@@ -121,6 +122,99 @@ func addOperationListDeliverabilityTestReportsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+// ListDeliverabilityTestReportsAPIClient is a client that implements the
+// ListDeliverabilityTestReports operation.
+type ListDeliverabilityTestReportsAPIClient interface {
+	ListDeliverabilityTestReports(context.Context, *ListDeliverabilityTestReportsInput, ...func(*Options)) (*ListDeliverabilityTestReportsOutput, error)
+}
+
+var _ ListDeliverabilityTestReportsAPIClient = (*Client)(nil)
+
+// ListDeliverabilityTestReportsPaginatorOptions is the paginator options for
+// ListDeliverabilityTestReports
+type ListDeliverabilityTestReportsPaginatorOptions struct {
+	// The number of results to show in a single call to ListDeliverabilityTestReports.
+	// If the number of results is larger than the number you specified in this
+	// parameter, then the response includes a NextToken element, which you can use to
+	// obtain additional results. The value you specify has to be at least 0, and can
+	// be no more than 1000.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDeliverabilityTestReportsPaginator is a paginator for
+// ListDeliverabilityTestReports
+type ListDeliverabilityTestReportsPaginator struct {
+	options   ListDeliverabilityTestReportsPaginatorOptions
+	client    ListDeliverabilityTestReportsAPIClient
+	params    *ListDeliverabilityTestReportsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDeliverabilityTestReportsPaginator returns a new
+// ListDeliverabilityTestReportsPaginator
+func NewListDeliverabilityTestReportsPaginator(client ListDeliverabilityTestReportsAPIClient, params *ListDeliverabilityTestReportsInput, optFns ...func(*ListDeliverabilityTestReportsPaginatorOptions)) *ListDeliverabilityTestReportsPaginator {
+	options := ListDeliverabilityTestReportsPaginatorOptions{}
+	if params.PageSize != nil {
+		options.Limit = *params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListDeliverabilityTestReportsInput{}
+	}
+
+	return &ListDeliverabilityTestReportsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDeliverabilityTestReportsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDeliverabilityTestReports page.
+func (p *ListDeliverabilityTestReportsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDeliverabilityTestReportsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.PageSize = limit
+
+	result, err := p.client.ListDeliverabilityTestReports(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDeliverabilityTestReports(region string) *awsmiddleware.RegisterServiceMetadata {

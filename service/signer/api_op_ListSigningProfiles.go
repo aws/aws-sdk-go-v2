@@ -4,6 +4,7 @@ package signer
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/signer/types"
@@ -116,6 +117,93 @@ func addOperationListSigningProfilesMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// ListSigningProfilesAPIClient is a client that implements the ListSigningProfiles
+// operation.
+type ListSigningProfilesAPIClient interface {
+	ListSigningProfiles(context.Context, *ListSigningProfilesInput, ...func(*Options)) (*ListSigningProfilesOutput, error)
+}
+
+var _ ListSigningProfilesAPIClient = (*Client)(nil)
+
+// ListSigningProfilesPaginatorOptions is the paginator options for
+// ListSigningProfiles
+type ListSigningProfilesPaginatorOptions struct {
+	// The maximum number of profiles to be returned.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListSigningProfilesPaginator is a paginator for ListSigningProfiles
+type ListSigningProfilesPaginator struct {
+	options   ListSigningProfilesPaginatorOptions
+	client    ListSigningProfilesAPIClient
+	params    *ListSigningProfilesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListSigningProfilesPaginator returns a new ListSigningProfilesPaginator
+func NewListSigningProfilesPaginator(client ListSigningProfilesAPIClient, params *ListSigningProfilesInput, optFns ...func(*ListSigningProfilesPaginatorOptions)) *ListSigningProfilesPaginator {
+	options := ListSigningProfilesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListSigningProfilesInput{}
+	}
+
+	return &ListSigningProfilesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListSigningProfilesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListSigningProfiles page.
+func (p *ListSigningProfilesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSigningProfilesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListSigningProfiles(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListSigningProfiles(region string) *awsmiddleware.RegisterServiceMetadata {

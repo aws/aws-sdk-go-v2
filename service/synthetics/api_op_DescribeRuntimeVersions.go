@@ -4,6 +4,7 @@ package synthetics
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/synthetics/types"
@@ -112,6 +113,96 @@ func addOperationDescribeRuntimeVersionsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// DescribeRuntimeVersionsAPIClient is a client that implements the
+// DescribeRuntimeVersions operation.
+type DescribeRuntimeVersionsAPIClient interface {
+	DescribeRuntimeVersions(context.Context, *DescribeRuntimeVersionsInput, ...func(*Options)) (*DescribeRuntimeVersionsOutput, error)
+}
+
+var _ DescribeRuntimeVersionsAPIClient = (*Client)(nil)
+
+// DescribeRuntimeVersionsPaginatorOptions is the paginator options for
+// DescribeRuntimeVersions
+type DescribeRuntimeVersionsPaginatorOptions struct {
+	// Specify this parameter to limit how many runs are returned each time you use the
+	// DescribeRuntimeVersions operation. If you omit this parameter, the default of
+	// 100 is used.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeRuntimeVersionsPaginator is a paginator for DescribeRuntimeVersions
+type DescribeRuntimeVersionsPaginator struct {
+	options   DescribeRuntimeVersionsPaginatorOptions
+	client    DescribeRuntimeVersionsAPIClient
+	params    *DescribeRuntimeVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeRuntimeVersionsPaginator returns a new
+// DescribeRuntimeVersionsPaginator
+func NewDescribeRuntimeVersionsPaginator(client DescribeRuntimeVersionsAPIClient, params *DescribeRuntimeVersionsInput, optFns ...func(*DescribeRuntimeVersionsPaginatorOptions)) *DescribeRuntimeVersionsPaginator {
+	options := DescribeRuntimeVersionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeRuntimeVersionsInput{}
+	}
+
+	return &DescribeRuntimeVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeRuntimeVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeRuntimeVersions page.
+func (p *DescribeRuntimeVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeRuntimeVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeRuntimeVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeRuntimeVersions(region string) *awsmiddleware.RegisterServiceMetadata {

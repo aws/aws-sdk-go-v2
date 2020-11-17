@@ -4,6 +4,7 @@ package frauddetector
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
@@ -110,6 +111,91 @@ func addOperationGetOutcomesMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+// GetOutcomesAPIClient is a client that implements the GetOutcomes operation.
+type GetOutcomesAPIClient interface {
+	GetOutcomes(context.Context, *GetOutcomesInput, ...func(*Options)) (*GetOutcomesOutput, error)
+}
+
+var _ GetOutcomesAPIClient = (*Client)(nil)
+
+// GetOutcomesPaginatorOptions is the paginator options for GetOutcomes
+type GetOutcomesPaginatorOptions struct {
+	// The maximum number of objects to return for the request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetOutcomesPaginator is a paginator for GetOutcomes
+type GetOutcomesPaginator struct {
+	options   GetOutcomesPaginatorOptions
+	client    GetOutcomesAPIClient
+	params    *GetOutcomesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetOutcomesPaginator returns a new GetOutcomesPaginator
+func NewGetOutcomesPaginator(client GetOutcomesAPIClient, params *GetOutcomesInput, optFns ...func(*GetOutcomesPaginatorOptions)) *GetOutcomesPaginator {
+	options := GetOutcomesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetOutcomesInput{}
+	}
+
+	return &GetOutcomesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetOutcomesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetOutcomes page.
+func (p *GetOutcomesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetOutcomesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetOutcomes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetOutcomes(region string) *awsmiddleware.RegisterServiceMetadata {

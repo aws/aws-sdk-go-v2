@@ -4,6 +4,7 @@ package servicecatalog
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
@@ -140,6 +141,91 @@ func addOperationListOrganizationPortfolioAccessMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+// ListOrganizationPortfolioAccessAPIClient is a client that implements the
+// ListOrganizationPortfolioAccess operation.
+type ListOrganizationPortfolioAccessAPIClient interface {
+	ListOrganizationPortfolioAccess(context.Context, *ListOrganizationPortfolioAccessInput, ...func(*Options)) (*ListOrganizationPortfolioAccessOutput, error)
+}
+
+var _ ListOrganizationPortfolioAccessAPIClient = (*Client)(nil)
+
+// ListOrganizationPortfolioAccessPaginatorOptions is the paginator options for
+// ListOrganizationPortfolioAccess
+type ListOrganizationPortfolioAccessPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListOrganizationPortfolioAccessPaginator is a paginator for
+// ListOrganizationPortfolioAccess
+type ListOrganizationPortfolioAccessPaginator struct {
+	options   ListOrganizationPortfolioAccessPaginatorOptions
+	client    ListOrganizationPortfolioAccessAPIClient
+	params    *ListOrganizationPortfolioAccessInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListOrganizationPortfolioAccessPaginator returns a new
+// ListOrganizationPortfolioAccessPaginator
+func NewListOrganizationPortfolioAccessPaginator(client ListOrganizationPortfolioAccessAPIClient, params *ListOrganizationPortfolioAccessInput, optFns ...func(*ListOrganizationPortfolioAccessPaginatorOptions)) *ListOrganizationPortfolioAccessPaginator {
+	options := ListOrganizationPortfolioAccessPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListOrganizationPortfolioAccessInput{}
+	}
+
+	return &ListOrganizationPortfolioAccessPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListOrganizationPortfolioAccessPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListOrganizationPortfolioAccess page.
+func (p *ListOrganizationPortfolioAccessPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListOrganizationPortfolioAccessOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	result, err := p.client.ListOrganizationPortfolioAccess(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListOrganizationPortfolioAccess(region string) *awsmiddleware.RegisterServiceMetadata {

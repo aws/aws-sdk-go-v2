@@ -4,6 +4,7 @@ package alexaforbusiness
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
@@ -116,6 +117,93 @@ func addOperationListSkillsMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+// ListSkillsAPIClient is a client that implements the ListSkills operation.
+type ListSkillsAPIClient interface {
+	ListSkills(context.Context, *ListSkillsInput, ...func(*Options)) (*ListSkillsOutput, error)
+}
+
+var _ ListSkillsAPIClient = (*Client)(nil)
+
+// ListSkillsPaginatorOptions is the paginator options for ListSkills
+type ListSkillsPaginatorOptions struct {
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so that
+	// the remaining results can be retrieved.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListSkillsPaginator is a paginator for ListSkills
+type ListSkillsPaginator struct {
+	options   ListSkillsPaginatorOptions
+	client    ListSkillsAPIClient
+	params    *ListSkillsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListSkillsPaginator returns a new ListSkillsPaginator
+func NewListSkillsPaginator(client ListSkillsAPIClient, params *ListSkillsInput, optFns ...func(*ListSkillsPaginatorOptions)) *ListSkillsPaginator {
+	options := ListSkillsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListSkillsInput{}
+	}
+
+	return &ListSkillsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListSkillsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListSkills page.
+func (p *ListSkillsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSkillsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListSkills(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListSkills(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package health
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
@@ -149,6 +150,96 @@ func addOperationDescribeAffectedAccountsForOrganizationMiddlewares(stack *middl
 		return err
 	}
 	return nil
+}
+
+// DescribeAffectedAccountsForOrganizationAPIClient is a client that implements the
+// DescribeAffectedAccountsForOrganization operation.
+type DescribeAffectedAccountsForOrganizationAPIClient interface {
+	DescribeAffectedAccountsForOrganization(context.Context, *DescribeAffectedAccountsForOrganizationInput, ...func(*Options)) (*DescribeAffectedAccountsForOrganizationOutput, error)
+}
+
+var _ DescribeAffectedAccountsForOrganizationAPIClient = (*Client)(nil)
+
+// DescribeAffectedAccountsForOrganizationPaginatorOptions is the paginator options
+// for DescribeAffectedAccountsForOrganization
+type DescribeAffectedAccountsForOrganizationPaginatorOptions struct {
+	// The maximum number of items to return in one batch, between 10 and 100,
+	// inclusive.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeAffectedAccountsForOrganizationPaginator is a paginator for
+// DescribeAffectedAccountsForOrganization
+type DescribeAffectedAccountsForOrganizationPaginator struct {
+	options   DescribeAffectedAccountsForOrganizationPaginatorOptions
+	client    DescribeAffectedAccountsForOrganizationAPIClient
+	params    *DescribeAffectedAccountsForOrganizationInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeAffectedAccountsForOrganizationPaginator returns a new
+// DescribeAffectedAccountsForOrganizationPaginator
+func NewDescribeAffectedAccountsForOrganizationPaginator(client DescribeAffectedAccountsForOrganizationAPIClient, params *DescribeAffectedAccountsForOrganizationInput, optFns ...func(*DescribeAffectedAccountsForOrganizationPaginatorOptions)) *DescribeAffectedAccountsForOrganizationPaginator {
+	options := DescribeAffectedAccountsForOrganizationPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeAffectedAccountsForOrganizationInput{}
+	}
+
+	return &DescribeAffectedAccountsForOrganizationPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeAffectedAccountsForOrganizationPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeAffectedAccountsForOrganization page.
+func (p *DescribeAffectedAccountsForOrganizationPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeAffectedAccountsForOrganizationOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeAffectedAccountsForOrganization(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeAffectedAccountsForOrganization(region string) *awsmiddleware.RegisterServiceMetadata {

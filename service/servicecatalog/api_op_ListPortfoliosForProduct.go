@@ -4,6 +4,7 @@ package servicecatalog
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
@@ -122,6 +123,90 @@ func addOperationListPortfoliosForProductMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// ListPortfoliosForProductAPIClient is a client that implements the
+// ListPortfoliosForProduct operation.
+type ListPortfoliosForProductAPIClient interface {
+	ListPortfoliosForProduct(context.Context, *ListPortfoliosForProductInput, ...func(*Options)) (*ListPortfoliosForProductOutput, error)
+}
+
+var _ ListPortfoliosForProductAPIClient = (*Client)(nil)
+
+// ListPortfoliosForProductPaginatorOptions is the paginator options for
+// ListPortfoliosForProduct
+type ListPortfoliosForProductPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPortfoliosForProductPaginator is a paginator for ListPortfoliosForProduct
+type ListPortfoliosForProductPaginator struct {
+	options   ListPortfoliosForProductPaginatorOptions
+	client    ListPortfoliosForProductAPIClient
+	params    *ListPortfoliosForProductInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPortfoliosForProductPaginator returns a new
+// ListPortfoliosForProductPaginator
+func NewListPortfoliosForProductPaginator(client ListPortfoliosForProductAPIClient, params *ListPortfoliosForProductInput, optFns ...func(*ListPortfoliosForProductPaginatorOptions)) *ListPortfoliosForProductPaginator {
+	options := ListPortfoliosForProductPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListPortfoliosForProductInput{}
+	}
+
+	return &ListPortfoliosForProductPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPortfoliosForProductPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListPortfoliosForProduct page.
+func (p *ListPortfoliosForProductPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPortfoliosForProductOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	result, err := p.client.ListPortfoliosForProduct(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListPortfoliosForProduct(region string) *awsmiddleware.RegisterServiceMetadata {

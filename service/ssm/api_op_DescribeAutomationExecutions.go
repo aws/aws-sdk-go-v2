@@ -4,6 +4,7 @@ package ssm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
@@ -113,6 +114,92 @@ func addOperationDescribeAutomationExecutionsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+// DescribeAutomationExecutionsAPIClient is a client that implements the
+// DescribeAutomationExecutions operation.
+type DescribeAutomationExecutionsAPIClient interface {
+	DescribeAutomationExecutions(context.Context, *DescribeAutomationExecutionsInput, ...func(*Options)) (*DescribeAutomationExecutionsOutput, error)
+}
+
+var _ DescribeAutomationExecutionsAPIClient = (*Client)(nil)
+
+// DescribeAutomationExecutionsPaginatorOptions is the paginator options for
+// DescribeAutomationExecutions
+type DescribeAutomationExecutionsPaginatorOptions struct {
+	// The maximum number of items to return for this call. The call also returns a
+	// token that you can specify in a subsequent call to get the next set of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeAutomationExecutionsPaginator is a paginator for
+// DescribeAutomationExecutions
+type DescribeAutomationExecutionsPaginator struct {
+	options   DescribeAutomationExecutionsPaginatorOptions
+	client    DescribeAutomationExecutionsAPIClient
+	params    *DescribeAutomationExecutionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeAutomationExecutionsPaginator returns a new
+// DescribeAutomationExecutionsPaginator
+func NewDescribeAutomationExecutionsPaginator(client DescribeAutomationExecutionsAPIClient, params *DescribeAutomationExecutionsInput, optFns ...func(*DescribeAutomationExecutionsPaginatorOptions)) *DescribeAutomationExecutionsPaginator {
+	options := DescribeAutomationExecutionsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeAutomationExecutionsInput{}
+	}
+
+	return &DescribeAutomationExecutionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeAutomationExecutionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeAutomationExecutions page.
+func (p *DescribeAutomationExecutionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeAutomationExecutionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeAutomationExecutions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeAutomationExecutions(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package rds
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
@@ -146,6 +147,98 @@ func addOperationDescribeOrderableDBInstanceOptionsMiddlewares(stack *middleware
 		return err
 	}
 	return nil
+}
+
+// DescribeOrderableDBInstanceOptionsAPIClient is a client that implements the
+// DescribeOrderableDBInstanceOptions operation.
+type DescribeOrderableDBInstanceOptionsAPIClient interface {
+	DescribeOrderableDBInstanceOptions(context.Context, *DescribeOrderableDBInstanceOptionsInput, ...func(*Options)) (*DescribeOrderableDBInstanceOptionsOutput, error)
+}
+
+var _ DescribeOrderableDBInstanceOptionsAPIClient = (*Client)(nil)
+
+// DescribeOrderableDBInstanceOptionsPaginatorOptions is the paginator options for
+// DescribeOrderableDBInstanceOptions
+type DescribeOrderableDBInstanceOptionsPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
+	// Default: 100 Constraints: Minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeOrderableDBInstanceOptionsPaginator is a paginator for
+// DescribeOrderableDBInstanceOptions
+type DescribeOrderableDBInstanceOptionsPaginator struct {
+	options   DescribeOrderableDBInstanceOptionsPaginatorOptions
+	client    DescribeOrderableDBInstanceOptionsAPIClient
+	params    *DescribeOrderableDBInstanceOptionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeOrderableDBInstanceOptionsPaginator returns a new
+// DescribeOrderableDBInstanceOptionsPaginator
+func NewDescribeOrderableDBInstanceOptionsPaginator(client DescribeOrderableDBInstanceOptionsAPIClient, params *DescribeOrderableDBInstanceOptionsInput, optFns ...func(*DescribeOrderableDBInstanceOptionsPaginatorOptions)) *DescribeOrderableDBInstanceOptionsPaginator {
+	options := DescribeOrderableDBInstanceOptionsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeOrderableDBInstanceOptionsInput{}
+	}
+
+	return &DescribeOrderableDBInstanceOptionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeOrderableDBInstanceOptionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeOrderableDBInstanceOptions page.
+func (p *DescribeOrderableDBInstanceOptionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeOrderableDBInstanceOptionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeOrderableDBInstanceOptions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeOrderableDBInstanceOptions(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package rds
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
@@ -127,6 +128,96 @@ func addOperationDescribeSourceRegionsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// DescribeSourceRegionsAPIClient is a client that implements the
+// DescribeSourceRegions operation.
+type DescribeSourceRegionsAPIClient interface {
+	DescribeSourceRegions(context.Context, *DescribeSourceRegionsInput, ...func(*Options)) (*DescribeSourceRegionsOutput, error)
+}
+
+var _ DescribeSourceRegionsAPIClient = (*Client)(nil)
+
+// DescribeSourceRegionsPaginatorOptions is the paginator options for
+// DescribeSourceRegions
+type DescribeSourceRegionsPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so you can retrieve the remaining results. Default: 100
+	// Constraints: Minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeSourceRegionsPaginator is a paginator for DescribeSourceRegions
+type DescribeSourceRegionsPaginator struct {
+	options   DescribeSourceRegionsPaginatorOptions
+	client    DescribeSourceRegionsAPIClient
+	params    *DescribeSourceRegionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeSourceRegionsPaginator returns a new DescribeSourceRegionsPaginator
+func NewDescribeSourceRegionsPaginator(client DescribeSourceRegionsAPIClient, params *DescribeSourceRegionsInput, optFns ...func(*DescribeSourceRegionsPaginatorOptions)) *DescribeSourceRegionsPaginator {
+	options := DescribeSourceRegionsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeSourceRegionsInput{}
+	}
+
+	return &DescribeSourceRegionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeSourceRegionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeSourceRegions page.
+func (p *DescribeSourceRegionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeSourceRegionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeSourceRegions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeSourceRegions(region string) *awsmiddleware.RegisterServiceMetadata {

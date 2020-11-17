@@ -4,6 +4,7 @@ package personalize
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
@@ -106,6 +107,92 @@ func addOperationListDatasetGroupsMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// ListDatasetGroupsAPIClient is a client that implements the ListDatasetGroups
+// operation.
+type ListDatasetGroupsAPIClient interface {
+	ListDatasetGroups(context.Context, *ListDatasetGroupsInput, ...func(*Options)) (*ListDatasetGroupsOutput, error)
+}
+
+var _ ListDatasetGroupsAPIClient = (*Client)(nil)
+
+// ListDatasetGroupsPaginatorOptions is the paginator options for ListDatasetGroups
+type ListDatasetGroupsPaginatorOptions struct {
+	// The maximum number of dataset groups to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDatasetGroupsPaginator is a paginator for ListDatasetGroups
+type ListDatasetGroupsPaginator struct {
+	options   ListDatasetGroupsPaginatorOptions
+	client    ListDatasetGroupsAPIClient
+	params    *ListDatasetGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDatasetGroupsPaginator returns a new ListDatasetGroupsPaginator
+func NewListDatasetGroupsPaginator(client ListDatasetGroupsAPIClient, params *ListDatasetGroupsInput, optFns ...func(*ListDatasetGroupsPaginatorOptions)) *ListDatasetGroupsPaginator {
+	options := ListDatasetGroupsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListDatasetGroupsInput{}
+	}
+
+	return &ListDatasetGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDatasetGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDatasetGroups page.
+func (p *ListDatasetGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDatasetGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListDatasetGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDatasetGroups(region string) *awsmiddleware.RegisterServiceMetadata {

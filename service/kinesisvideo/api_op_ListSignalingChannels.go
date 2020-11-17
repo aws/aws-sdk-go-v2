@@ -4,6 +4,7 @@ package kinesisvideo
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
@@ -111,6 +112,93 @@ func addOperationListSignalingChannelsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// ListSignalingChannelsAPIClient is a client that implements the
+// ListSignalingChannels operation.
+type ListSignalingChannelsAPIClient interface {
+	ListSignalingChannels(context.Context, *ListSignalingChannelsInput, ...func(*Options)) (*ListSignalingChannelsOutput, error)
+}
+
+var _ ListSignalingChannelsAPIClient = (*Client)(nil)
+
+// ListSignalingChannelsPaginatorOptions is the paginator options for
+// ListSignalingChannels
+type ListSignalingChannelsPaginatorOptions struct {
+	// The maximum number of channels to return in the response. The default is 500.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListSignalingChannelsPaginator is a paginator for ListSignalingChannels
+type ListSignalingChannelsPaginator struct {
+	options   ListSignalingChannelsPaginatorOptions
+	client    ListSignalingChannelsAPIClient
+	params    *ListSignalingChannelsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListSignalingChannelsPaginator returns a new ListSignalingChannelsPaginator
+func NewListSignalingChannelsPaginator(client ListSignalingChannelsAPIClient, params *ListSignalingChannelsInput, optFns ...func(*ListSignalingChannelsPaginatorOptions)) *ListSignalingChannelsPaginator {
+	options := ListSignalingChannelsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListSignalingChannelsInput{}
+	}
+
+	return &ListSignalingChannelsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListSignalingChannelsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListSignalingChannels page.
+func (p *ListSignalingChannelsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSignalingChannelsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListSignalingChannels(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListSignalingChannels(region string) *awsmiddleware.RegisterServiceMetadata {

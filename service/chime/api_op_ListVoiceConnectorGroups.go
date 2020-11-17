@@ -4,6 +4,7 @@ package chime
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
@@ -104,6 +105,94 @@ func addOperationListVoiceConnectorGroupsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// ListVoiceConnectorGroupsAPIClient is a client that implements the
+// ListVoiceConnectorGroups operation.
+type ListVoiceConnectorGroupsAPIClient interface {
+	ListVoiceConnectorGroups(context.Context, *ListVoiceConnectorGroupsInput, ...func(*Options)) (*ListVoiceConnectorGroupsOutput, error)
+}
+
+var _ ListVoiceConnectorGroupsAPIClient = (*Client)(nil)
+
+// ListVoiceConnectorGroupsPaginatorOptions is the paginator options for
+// ListVoiceConnectorGroups
+type ListVoiceConnectorGroupsPaginatorOptions struct {
+	// The maximum number of results to return in a single call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListVoiceConnectorGroupsPaginator is a paginator for ListVoiceConnectorGroups
+type ListVoiceConnectorGroupsPaginator struct {
+	options   ListVoiceConnectorGroupsPaginatorOptions
+	client    ListVoiceConnectorGroupsAPIClient
+	params    *ListVoiceConnectorGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListVoiceConnectorGroupsPaginator returns a new
+// ListVoiceConnectorGroupsPaginator
+func NewListVoiceConnectorGroupsPaginator(client ListVoiceConnectorGroupsAPIClient, params *ListVoiceConnectorGroupsInput, optFns ...func(*ListVoiceConnectorGroupsPaginatorOptions)) *ListVoiceConnectorGroupsPaginator {
+	options := ListVoiceConnectorGroupsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListVoiceConnectorGroupsInput{}
+	}
+
+	return &ListVoiceConnectorGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListVoiceConnectorGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListVoiceConnectorGroups page.
+func (p *ListVoiceConnectorGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListVoiceConnectorGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListVoiceConnectorGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListVoiceConnectorGroups(region string) *awsmiddleware.RegisterServiceMetadata {

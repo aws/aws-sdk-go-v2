@@ -4,6 +4,7 @@ package sms
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sms/types"
@@ -106,6 +107,93 @@ func addOperationGetConnectorsMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	return nil
+}
+
+// GetConnectorsAPIClient is a client that implements the GetConnectors operation.
+type GetConnectorsAPIClient interface {
+	GetConnectors(context.Context, *GetConnectorsInput, ...func(*Options)) (*GetConnectorsOutput, error)
+}
+
+var _ GetConnectorsAPIClient = (*Client)(nil)
+
+// GetConnectorsPaginatorOptions is the paginator options for GetConnectors
+type GetConnectorsPaginatorOptions struct {
+	// The maximum number of results to return in a single call. The default value is
+	// 50. To retrieve the remaining results, make another call with the returned
+	// NextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetConnectorsPaginator is a paginator for GetConnectors
+type GetConnectorsPaginator struct {
+	options   GetConnectorsPaginatorOptions
+	client    GetConnectorsAPIClient
+	params    *GetConnectorsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetConnectorsPaginator returns a new GetConnectorsPaginator
+func NewGetConnectorsPaginator(client GetConnectorsAPIClient, params *GetConnectorsInput, optFns ...func(*GetConnectorsPaginatorOptions)) *GetConnectorsPaginator {
+	options := GetConnectorsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetConnectorsInput{}
+	}
+
+	return &GetConnectorsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetConnectorsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetConnectors page.
+func (p *GetConnectorsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetConnectorsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetConnectors(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetConnectors(region string) *awsmiddleware.RegisterServiceMetadata {

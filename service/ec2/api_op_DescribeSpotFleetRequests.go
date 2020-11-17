@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -118,6 +119,92 @@ func addOperationDescribeSpotFleetRequestsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+// DescribeSpotFleetRequestsAPIClient is a client that implements the
+// DescribeSpotFleetRequests operation.
+type DescribeSpotFleetRequestsAPIClient interface {
+	DescribeSpotFleetRequests(context.Context, *DescribeSpotFleetRequestsInput, ...func(*Options)) (*DescribeSpotFleetRequestsOutput, error)
+}
+
+var _ DescribeSpotFleetRequestsAPIClient = (*Client)(nil)
+
+// DescribeSpotFleetRequestsPaginatorOptions is the paginator options for
+// DescribeSpotFleetRequests
+type DescribeSpotFleetRequestsPaginatorOptions struct {
+	// The maximum number of results to return in a single call. Specify a value
+	// between 1 and 1000. The default value is 1000. To retrieve the remaining
+	// results, make another call with the returned NextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeSpotFleetRequestsPaginator is a paginator for DescribeSpotFleetRequests
+type DescribeSpotFleetRequestsPaginator struct {
+	options   DescribeSpotFleetRequestsPaginatorOptions
+	client    DescribeSpotFleetRequestsAPIClient
+	params    *DescribeSpotFleetRequestsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeSpotFleetRequestsPaginator returns a new
+// DescribeSpotFleetRequestsPaginator
+func NewDescribeSpotFleetRequestsPaginator(client DescribeSpotFleetRequestsAPIClient, params *DescribeSpotFleetRequestsInput, optFns ...func(*DescribeSpotFleetRequestsPaginatorOptions)) *DescribeSpotFleetRequestsPaginator {
+	options := DescribeSpotFleetRequestsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeSpotFleetRequestsInput{}
+	}
+
+	return &DescribeSpotFleetRequestsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeSpotFleetRequestsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeSpotFleetRequests page.
+func (p *DescribeSpotFleetRequestsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeSpotFleetRequestsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeSpotFleetRequests(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeSpotFleetRequests(region string) *awsmiddleware.RegisterServiceMetadata {

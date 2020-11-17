@@ -4,6 +4,7 @@ package redshift
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
@@ -130,6 +131,99 @@ func addOperationDescribeReservedNodeOfferingsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+// DescribeReservedNodeOfferingsAPIClient is a client that implements the
+// DescribeReservedNodeOfferings operation.
+type DescribeReservedNodeOfferingsAPIClient interface {
+	DescribeReservedNodeOfferings(context.Context, *DescribeReservedNodeOfferingsInput, ...func(*Options)) (*DescribeReservedNodeOfferingsOutput, error)
+}
+
+var _ DescribeReservedNodeOfferingsAPIClient = (*Client)(nil)
+
+// DescribeReservedNodeOfferingsPaginatorOptions is the paginator options for
+// DescribeReservedNodeOfferings
+type DescribeReservedNodeOfferingsPaginatorOptions struct {
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value. Default: 100
+	// Constraints: minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeReservedNodeOfferingsPaginator is a paginator for
+// DescribeReservedNodeOfferings
+type DescribeReservedNodeOfferingsPaginator struct {
+	options   DescribeReservedNodeOfferingsPaginatorOptions
+	client    DescribeReservedNodeOfferingsAPIClient
+	params    *DescribeReservedNodeOfferingsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeReservedNodeOfferingsPaginator returns a new
+// DescribeReservedNodeOfferingsPaginator
+func NewDescribeReservedNodeOfferingsPaginator(client DescribeReservedNodeOfferingsAPIClient, params *DescribeReservedNodeOfferingsInput, optFns ...func(*DescribeReservedNodeOfferingsPaginatorOptions)) *DescribeReservedNodeOfferingsPaginator {
+	options := DescribeReservedNodeOfferingsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeReservedNodeOfferingsInput{}
+	}
+
+	return &DescribeReservedNodeOfferingsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeReservedNodeOfferingsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeReservedNodeOfferings page.
+func (p *DescribeReservedNodeOfferingsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeReservedNodeOfferingsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeReservedNodeOfferings(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeReservedNodeOfferings(region string) *awsmiddleware.RegisterServiceMetadata {

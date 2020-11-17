@@ -4,6 +4,7 @@ package directoryservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
@@ -119,6 +120,94 @@ func addOperationDescribeDomainControllersMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+// DescribeDomainControllersAPIClient is a client that implements the
+// DescribeDomainControllers operation.
+type DescribeDomainControllersAPIClient interface {
+	DescribeDomainControllers(context.Context, *DescribeDomainControllersInput, ...func(*Options)) (*DescribeDomainControllersOutput, error)
+}
+
+var _ DescribeDomainControllersAPIClient = (*Client)(nil)
+
+// DescribeDomainControllersPaginatorOptions is the paginator options for
+// DescribeDomainControllers
+type DescribeDomainControllersPaginatorOptions struct {
+	// The maximum number of items to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeDomainControllersPaginator is a paginator for DescribeDomainControllers
+type DescribeDomainControllersPaginator struct {
+	options   DescribeDomainControllersPaginatorOptions
+	client    DescribeDomainControllersAPIClient
+	params    *DescribeDomainControllersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeDomainControllersPaginator returns a new
+// DescribeDomainControllersPaginator
+func NewDescribeDomainControllersPaginator(client DescribeDomainControllersAPIClient, params *DescribeDomainControllersInput, optFns ...func(*DescribeDomainControllersPaginatorOptions)) *DescribeDomainControllersPaginator {
+	options := DescribeDomainControllersPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeDomainControllersInput{}
+	}
+
+	return &DescribeDomainControllersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeDomainControllersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeDomainControllers page.
+func (p *DescribeDomainControllersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDomainControllersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeDomainControllers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeDomainControllers(region string) *awsmiddleware.RegisterServiceMetadata {

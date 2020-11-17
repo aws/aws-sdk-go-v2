@@ -4,6 +4,7 @@ package worklink
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
@@ -113,6 +114,91 @@ func addOperationListDevicesMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+// ListDevicesAPIClient is a client that implements the ListDevices operation.
+type ListDevicesAPIClient interface {
+	ListDevices(context.Context, *ListDevicesInput, ...func(*Options)) (*ListDevicesOutput, error)
+}
+
+var _ ListDevicesAPIClient = (*Client)(nil)
+
+// ListDevicesPaginatorOptions is the paginator options for ListDevices
+type ListDevicesPaginatorOptions struct {
+	// The maximum number of results to be included in the next page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDevicesPaginator is a paginator for ListDevices
+type ListDevicesPaginator struct {
+	options   ListDevicesPaginatorOptions
+	client    ListDevicesAPIClient
+	params    *ListDevicesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDevicesPaginator returns a new ListDevicesPaginator
+func NewListDevicesPaginator(client ListDevicesAPIClient, params *ListDevicesInput, optFns ...func(*ListDevicesPaginatorOptions)) *ListDevicesPaginator {
+	options := ListDevicesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListDevicesInput{}
+	}
+
+	return &ListDevicesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDevicesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDevices page.
+func (p *ListDevicesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDevicesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListDevices(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDevices(region string) *awsmiddleware.RegisterServiceMetadata {

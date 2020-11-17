@@ -4,6 +4,7 @@ package swf
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
@@ -157,6 +158,89 @@ func addOperationListWorkflowTypesMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// ListWorkflowTypesAPIClient is a client that implements the ListWorkflowTypes
+// operation.
+type ListWorkflowTypesAPIClient interface {
+	ListWorkflowTypes(context.Context, *ListWorkflowTypesInput, ...func(*Options)) (*ListWorkflowTypesOutput, error)
+}
+
+var _ ListWorkflowTypesAPIClient = (*Client)(nil)
+
+// ListWorkflowTypesPaginatorOptions is the paginator options for ListWorkflowTypes
+type ListWorkflowTypesPaginatorOptions struct {
+	// The maximum number of results that are returned per call. Use nextPageToken to
+	// obtain further pages of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListWorkflowTypesPaginator is a paginator for ListWorkflowTypes
+type ListWorkflowTypesPaginator struct {
+	options   ListWorkflowTypesPaginatorOptions
+	client    ListWorkflowTypesAPIClient
+	params    *ListWorkflowTypesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListWorkflowTypesPaginator returns a new ListWorkflowTypesPaginator
+func NewListWorkflowTypesPaginator(client ListWorkflowTypesAPIClient, params *ListWorkflowTypesInput, optFns ...func(*ListWorkflowTypesPaginatorOptions)) *ListWorkflowTypesPaginator {
+	options := ListWorkflowTypesPaginatorOptions{}
+	if params.MaximumPageSize != 0 {
+		options.Limit = params.MaximumPageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListWorkflowTypesInput{}
+	}
+
+	return &ListWorkflowTypesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListWorkflowTypesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListWorkflowTypes page.
+func (p *ListWorkflowTypesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListWorkflowTypesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextPageToken = p.nextToken
+
+	params.MaximumPageSize = p.options.Limit
+
+	result, err := p.client.ListWorkflowTypes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListWorkflowTypes(region string) *awsmiddleware.RegisterServiceMetadata {

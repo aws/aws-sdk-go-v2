@@ -196,6 +196,95 @@ func addEndpointPrefix_opGetAssetPropertyAggregatesMiddleware(stack *middleware.
 	return stack.Serialize.Insert(&endpointPrefix_opGetAssetPropertyAggregatesMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
+// GetAssetPropertyAggregatesAPIClient is a client that implements the
+// GetAssetPropertyAggregates operation.
+type GetAssetPropertyAggregatesAPIClient interface {
+	GetAssetPropertyAggregates(context.Context, *GetAssetPropertyAggregatesInput, ...func(*Options)) (*GetAssetPropertyAggregatesOutput, error)
+}
+
+var _ GetAssetPropertyAggregatesAPIClient = (*Client)(nil)
+
+// GetAssetPropertyAggregatesPaginatorOptions is the paginator options for
+// GetAssetPropertyAggregates
+type GetAssetPropertyAggregatesPaginatorOptions struct {
+	// The maximum number of results to be returned per paginated request. Default: 100
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetAssetPropertyAggregatesPaginator is a paginator for
+// GetAssetPropertyAggregates
+type GetAssetPropertyAggregatesPaginator struct {
+	options   GetAssetPropertyAggregatesPaginatorOptions
+	client    GetAssetPropertyAggregatesAPIClient
+	params    *GetAssetPropertyAggregatesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetAssetPropertyAggregatesPaginator returns a new
+// GetAssetPropertyAggregatesPaginator
+func NewGetAssetPropertyAggregatesPaginator(client GetAssetPropertyAggregatesAPIClient, params *GetAssetPropertyAggregatesInput, optFns ...func(*GetAssetPropertyAggregatesPaginatorOptions)) *GetAssetPropertyAggregatesPaginator {
+	options := GetAssetPropertyAggregatesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetAssetPropertyAggregatesInput{}
+	}
+
+	return &GetAssetPropertyAggregatesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetAssetPropertyAggregatesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetAssetPropertyAggregates page.
+func (p *GetAssetPropertyAggregatesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetAssetPropertyAggregatesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetAssetPropertyAggregates(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opGetAssetPropertyAggregates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

@@ -4,6 +4,7 @@ package devicefarm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
@@ -124,6 +125,79 @@ func addOperationListArtifactsMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	return nil
+}
+
+// ListArtifactsAPIClient is a client that implements the ListArtifacts operation.
+type ListArtifactsAPIClient interface {
+	ListArtifacts(context.Context, *ListArtifactsInput, ...func(*Options)) (*ListArtifactsOutput, error)
+}
+
+var _ ListArtifactsAPIClient = (*Client)(nil)
+
+// ListArtifactsPaginatorOptions is the paginator options for ListArtifacts
+type ListArtifactsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListArtifactsPaginator is a paginator for ListArtifacts
+type ListArtifactsPaginator struct {
+	options   ListArtifactsPaginatorOptions
+	client    ListArtifactsAPIClient
+	params    *ListArtifactsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListArtifactsPaginator returns a new ListArtifactsPaginator
+func NewListArtifactsPaginator(client ListArtifactsAPIClient, params *ListArtifactsInput, optFns ...func(*ListArtifactsPaginatorOptions)) *ListArtifactsPaginator {
+	options := ListArtifactsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListArtifactsInput{}
+	}
+
+	return &ListArtifactsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListArtifactsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListArtifacts page.
+func (p *ListArtifactsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListArtifactsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListArtifacts(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListArtifacts(region string) *awsmiddleware.RegisterServiceMetadata {

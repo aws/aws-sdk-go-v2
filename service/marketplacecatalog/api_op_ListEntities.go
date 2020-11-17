@@ -4,6 +4,7 @@ package marketplacecatalog
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/types"
@@ -124,6 +125,92 @@ func addOperationListEntitiesMiddlewares(stack *middleware.Stack, options Option
 		return err
 	}
 	return nil
+}
+
+// ListEntitiesAPIClient is a client that implements the ListEntities operation.
+type ListEntitiesAPIClient interface {
+	ListEntities(context.Context, *ListEntitiesInput, ...func(*Options)) (*ListEntitiesOutput, error)
+}
+
+var _ ListEntitiesAPIClient = (*Client)(nil)
+
+// ListEntitiesPaginatorOptions is the paginator options for ListEntities
+type ListEntitiesPaginatorOptions struct {
+	// Specifies the upper limit of the elements on a single page. If a value isn't
+	// provided, the default value is 20.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListEntitiesPaginator is a paginator for ListEntities
+type ListEntitiesPaginator struct {
+	options   ListEntitiesPaginatorOptions
+	client    ListEntitiesAPIClient
+	params    *ListEntitiesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListEntitiesPaginator returns a new ListEntitiesPaginator
+func NewListEntitiesPaginator(client ListEntitiesAPIClient, params *ListEntitiesInput, optFns ...func(*ListEntitiesPaginatorOptions)) *ListEntitiesPaginator {
+	options := ListEntitiesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListEntitiesInput{}
+	}
+
+	return &ListEntitiesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListEntitiesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListEntities page.
+func (p *ListEntitiesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListEntitiesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListEntities(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListEntities(region string) *awsmiddleware.RegisterServiceMetadata {

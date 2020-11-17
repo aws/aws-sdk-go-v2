@@ -198,6 +198,90 @@ func addEndpointPrefix_opListJobsMiddleware(stack *middleware.Stack) error {
 	return stack.Serialize.Insert(&endpointPrefix_opListJobsMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
+// ListJobsAPIClient is a client that implements the ListJobs operation.
+type ListJobsAPIClient interface {
+	ListJobs(context.Context, *ListJobsInput, ...func(*Options)) (*ListJobsOutput, error)
+}
+
+var _ ListJobsAPIClient = (*Client)(nil)
+
+// ListJobsPaginatorOptions is the paginator options for ListJobs
+type ListJobsPaginatorOptions struct {
+	// The maximum number of jobs that Amazon S3 will include in the List Jobs
+	// response. If there are more jobs than this number, the response will include a
+	// pagination token in the NextToken field to enable you to retrieve the next page
+	// of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListJobsPaginator is a paginator for ListJobs
+type ListJobsPaginator struct {
+	options   ListJobsPaginatorOptions
+	client    ListJobsAPIClient
+	params    *ListJobsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListJobsPaginator returns a new ListJobsPaginator
+func NewListJobsPaginator(client ListJobsAPIClient, params *ListJobsInput, optFns ...func(*ListJobsPaginatorOptions)) *ListJobsPaginator {
+	options := ListJobsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListJobsInput{}
+	}
+
+	return &ListJobsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListJobsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListJobs page.
+func (p *ListJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListJobsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListJobs(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opListJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

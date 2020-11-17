@@ -4,6 +4,7 @@ package storagegateway
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
@@ -122,6 +123,94 @@ func addOperationDescribeTapeArchivesMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// DescribeTapeArchivesAPIClient is a client that implements the
+// DescribeTapeArchives operation.
+type DescribeTapeArchivesAPIClient interface {
+	DescribeTapeArchives(context.Context, *DescribeTapeArchivesInput, ...func(*Options)) (*DescribeTapeArchivesOutput, error)
+}
+
+var _ DescribeTapeArchivesAPIClient = (*Client)(nil)
+
+// DescribeTapeArchivesPaginatorOptions is the paginator options for
+// DescribeTapeArchives
+type DescribeTapeArchivesPaginatorOptions struct {
+	// Specifies that the number of virtual tapes described be limited to the specified
+	// number.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeTapeArchivesPaginator is a paginator for DescribeTapeArchives
+type DescribeTapeArchivesPaginator struct {
+	options   DescribeTapeArchivesPaginatorOptions
+	client    DescribeTapeArchivesAPIClient
+	params    *DescribeTapeArchivesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeTapeArchivesPaginator returns a new DescribeTapeArchivesPaginator
+func NewDescribeTapeArchivesPaginator(client DescribeTapeArchivesAPIClient, params *DescribeTapeArchivesInput, optFns ...func(*DescribeTapeArchivesPaginatorOptions)) *DescribeTapeArchivesPaginator {
+	options := DescribeTapeArchivesPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeTapeArchivesInput{}
+	}
+
+	return &DescribeTapeArchivesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeTapeArchivesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeTapeArchives page.
+func (p *DescribeTapeArchivesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeTapeArchivesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeTapeArchives(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeTapeArchives(region string) *awsmiddleware.RegisterServiceMetadata {

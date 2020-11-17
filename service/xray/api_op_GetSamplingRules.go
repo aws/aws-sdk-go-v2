@@ -4,6 +4,7 @@ package xray
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
@@ -100,6 +101,80 @@ func addOperationGetSamplingRulesMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// GetSamplingRulesAPIClient is a client that implements the GetSamplingRules
+// operation.
+type GetSamplingRulesAPIClient interface {
+	GetSamplingRules(context.Context, *GetSamplingRulesInput, ...func(*Options)) (*GetSamplingRulesOutput, error)
+}
+
+var _ GetSamplingRulesAPIClient = (*Client)(nil)
+
+// GetSamplingRulesPaginatorOptions is the paginator options for GetSamplingRules
+type GetSamplingRulesPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetSamplingRulesPaginator is a paginator for GetSamplingRules
+type GetSamplingRulesPaginator struct {
+	options   GetSamplingRulesPaginatorOptions
+	client    GetSamplingRulesAPIClient
+	params    *GetSamplingRulesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetSamplingRulesPaginator returns a new GetSamplingRulesPaginator
+func NewGetSamplingRulesPaginator(client GetSamplingRulesAPIClient, params *GetSamplingRulesInput, optFns ...func(*GetSamplingRulesPaginatorOptions)) *GetSamplingRulesPaginator {
+	options := GetSamplingRulesPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetSamplingRulesInput{}
+	}
+
+	return &GetSamplingRulesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetSamplingRulesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetSamplingRules page.
+func (p *GetSamplingRulesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetSamplingRulesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.GetSamplingRules(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetSamplingRules(region string) *awsmiddleware.RegisterServiceMetadata {

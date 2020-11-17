@@ -4,6 +4,7 @@ package xray
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
@@ -138,6 +139,80 @@ func addOperationGetServiceGraphMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	return nil
+}
+
+// GetServiceGraphAPIClient is a client that implements the GetServiceGraph
+// operation.
+type GetServiceGraphAPIClient interface {
+	GetServiceGraph(context.Context, *GetServiceGraphInput, ...func(*Options)) (*GetServiceGraphOutput, error)
+}
+
+var _ GetServiceGraphAPIClient = (*Client)(nil)
+
+// GetServiceGraphPaginatorOptions is the paginator options for GetServiceGraph
+type GetServiceGraphPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetServiceGraphPaginator is a paginator for GetServiceGraph
+type GetServiceGraphPaginator struct {
+	options   GetServiceGraphPaginatorOptions
+	client    GetServiceGraphAPIClient
+	params    *GetServiceGraphInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetServiceGraphPaginator returns a new GetServiceGraphPaginator
+func NewGetServiceGraphPaginator(client GetServiceGraphAPIClient, params *GetServiceGraphInput, optFns ...func(*GetServiceGraphPaginatorOptions)) *GetServiceGraphPaginator {
+	options := GetServiceGraphPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetServiceGraphInput{}
+	}
+
+	return &GetServiceGraphPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetServiceGraphPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetServiceGraph page.
+func (p *GetServiceGraphPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetServiceGraphOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.GetServiceGraph(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetServiceGraph(region string) *awsmiddleware.RegisterServiceMetadata {

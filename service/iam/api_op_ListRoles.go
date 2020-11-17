@@ -4,6 +4,7 @@ package iam
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
@@ -139,6 +140,97 @@ func addOperationListRolesMiddlewares(stack *middleware.Stack, options Options) 
 		return err
 	}
 	return nil
+}
+
+// ListRolesAPIClient is a client that implements the ListRoles operation.
+type ListRolesAPIClient interface {
+	ListRoles(context.Context, *ListRolesInput, ...func(*Options)) (*ListRolesOutput, error)
+}
+
+var _ ListRolesAPIClient = (*Client)(nil)
+
+// ListRolesPaginatorOptions is the paginator options for ListRoles
+type ListRolesPaginatorOptions struct {
+	// Use this only when paginating results to indicate the maximum number of items
+	// you want in the response. If additional items exist beyond the maximum you
+	// specify, the IsTruncated response element is true. If you do not include this
+	// parameter, the number of items defaults to 100. Note that IAM might return fewer
+	// results, even when there are more results available. In that case, the
+	// IsTruncated response element returns true, and Marker contains a value to
+	// include in the subsequent call that tells the service where to continue from.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListRolesPaginator is a paginator for ListRoles
+type ListRolesPaginator struct {
+	options   ListRolesPaginatorOptions
+	client    ListRolesAPIClient
+	params    *ListRolesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListRolesPaginator returns a new ListRolesPaginator
+func NewListRolesPaginator(client ListRolesAPIClient, params *ListRolesInput, optFns ...func(*ListRolesPaginatorOptions)) *ListRolesPaginator {
+	options := ListRolesPaginatorOptions{}
+	if params.MaxItems != nil {
+		options.Limit = *params.MaxItems
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListRolesInput{}
+	}
+
+	return &ListRolesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListRolesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListRoles page.
+func (p *ListRolesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListRolesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxItems = limit
+
+	result, err := p.client.ListRoles(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListRoles(region string) *awsmiddleware.RegisterServiceMetadata {

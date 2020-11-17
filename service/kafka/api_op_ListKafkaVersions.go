@@ -4,6 +4,7 @@ package kafka
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
@@ -103,6 +104,89 @@ func addOperationListKafkaVersionsMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// ListKafkaVersionsAPIClient is a client that implements the ListKafkaVersions
+// operation.
+type ListKafkaVersionsAPIClient interface {
+	ListKafkaVersions(context.Context, *ListKafkaVersionsInput, ...func(*Options)) (*ListKafkaVersionsOutput, error)
+}
+
+var _ ListKafkaVersionsAPIClient = (*Client)(nil)
+
+// ListKafkaVersionsPaginatorOptions is the paginator options for ListKafkaVersions
+type ListKafkaVersionsPaginatorOptions struct {
+	// The maximum number of results to return in the response. If there are more
+	// results, the response includes a NextToken parameter.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListKafkaVersionsPaginator is a paginator for ListKafkaVersions
+type ListKafkaVersionsPaginator struct {
+	options   ListKafkaVersionsPaginatorOptions
+	client    ListKafkaVersionsAPIClient
+	params    *ListKafkaVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListKafkaVersionsPaginator returns a new ListKafkaVersionsPaginator
+func NewListKafkaVersionsPaginator(client ListKafkaVersionsAPIClient, params *ListKafkaVersionsInput, optFns ...func(*ListKafkaVersionsPaginatorOptions)) *ListKafkaVersionsPaginator {
+	options := ListKafkaVersionsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListKafkaVersionsInput{}
+	}
+
+	return &ListKafkaVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListKafkaVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListKafkaVersions page.
+func (p *ListKafkaVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListKafkaVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListKafkaVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListKafkaVersions(region string) *awsmiddleware.RegisterServiceMetadata {

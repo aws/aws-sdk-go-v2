@@ -4,6 +4,7 @@ package inspector
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
@@ -121,6 +122,92 @@ func addOperationPreviewAgentsMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	return nil
+}
+
+// PreviewAgentsAPIClient is a client that implements the PreviewAgents operation.
+type PreviewAgentsAPIClient interface {
+	PreviewAgents(context.Context, *PreviewAgentsInput, ...func(*Options)) (*PreviewAgentsOutput, error)
+}
+
+var _ PreviewAgentsAPIClient = (*Client)(nil)
+
+// PreviewAgentsPaginatorOptions is the paginator options for PreviewAgents
+type PreviewAgentsPaginatorOptions struct {
+	// You can use this parameter to indicate the maximum number of items you want in
+	// the response. The default value is 10. The maximum value is 500.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// PreviewAgentsPaginator is a paginator for PreviewAgents
+type PreviewAgentsPaginator struct {
+	options   PreviewAgentsPaginatorOptions
+	client    PreviewAgentsAPIClient
+	params    *PreviewAgentsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewPreviewAgentsPaginator returns a new PreviewAgentsPaginator
+func NewPreviewAgentsPaginator(client PreviewAgentsAPIClient, params *PreviewAgentsInput, optFns ...func(*PreviewAgentsPaginatorOptions)) *PreviewAgentsPaginator {
+	options := PreviewAgentsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &PreviewAgentsInput{}
+	}
+
+	return &PreviewAgentsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *PreviewAgentsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next PreviewAgents page.
+func (p *PreviewAgentsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*PreviewAgentsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.PreviewAgents(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opPreviewAgents(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package quicksight
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
@@ -117,6 +118,87 @@ func addOperationListTemplatesMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	return nil
+}
+
+// ListTemplatesAPIClient is a client that implements the ListTemplates operation.
+type ListTemplatesAPIClient interface {
+	ListTemplates(context.Context, *ListTemplatesInput, ...func(*Options)) (*ListTemplatesOutput, error)
+}
+
+var _ ListTemplatesAPIClient = (*Client)(nil)
+
+// ListTemplatesPaginatorOptions is the paginator options for ListTemplates
+type ListTemplatesPaginatorOptions struct {
+	// The maximum number of results to be returned per request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTemplatesPaginator is a paginator for ListTemplates
+type ListTemplatesPaginator struct {
+	options   ListTemplatesPaginatorOptions
+	client    ListTemplatesAPIClient
+	params    *ListTemplatesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTemplatesPaginator returns a new ListTemplatesPaginator
+func NewListTemplatesPaginator(client ListTemplatesAPIClient, params *ListTemplatesInput, optFns ...func(*ListTemplatesPaginatorOptions)) *ListTemplatesPaginator {
+	options := ListTemplatesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTemplatesInput{}
+	}
+
+	return &ListTemplatesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTemplatesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTemplates page.
+func (p *ListTemplatesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTemplatesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListTemplates(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTemplates(region string) *awsmiddleware.RegisterServiceMetadata {

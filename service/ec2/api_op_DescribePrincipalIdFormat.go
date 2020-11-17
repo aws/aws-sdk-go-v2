@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -133,6 +134,91 @@ func addOperationDescribePrincipalIdFormatMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+// DescribePrincipalIdFormatAPIClient is a client that implements the
+// DescribePrincipalIdFormat operation.
+type DescribePrincipalIdFormatAPIClient interface {
+	DescribePrincipalIdFormat(context.Context, *DescribePrincipalIdFormatInput, ...func(*Options)) (*DescribePrincipalIdFormatOutput, error)
+}
+
+var _ DescribePrincipalIdFormatAPIClient = (*Client)(nil)
+
+// DescribePrincipalIdFormatPaginatorOptions is the paginator options for
+// DescribePrincipalIdFormat
+type DescribePrincipalIdFormatPaginatorOptions struct {
+	// The maximum number of results to return in a single call. To retrieve the
+	// remaining results, make another call with the returned NextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribePrincipalIdFormatPaginator is a paginator for DescribePrincipalIdFormat
+type DescribePrincipalIdFormatPaginator struct {
+	options   DescribePrincipalIdFormatPaginatorOptions
+	client    DescribePrincipalIdFormatAPIClient
+	params    *DescribePrincipalIdFormatInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribePrincipalIdFormatPaginator returns a new
+// DescribePrincipalIdFormatPaginator
+func NewDescribePrincipalIdFormatPaginator(client DescribePrincipalIdFormatAPIClient, params *DescribePrincipalIdFormatInput, optFns ...func(*DescribePrincipalIdFormatPaginatorOptions)) *DescribePrincipalIdFormatPaginator {
+	options := DescribePrincipalIdFormatPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribePrincipalIdFormatInput{}
+	}
+
+	return &DescribePrincipalIdFormatPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribePrincipalIdFormatPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribePrincipalIdFormat page.
+func (p *DescribePrincipalIdFormatPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribePrincipalIdFormatOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribePrincipalIdFormat(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribePrincipalIdFormat(region string) *awsmiddleware.RegisterServiceMetadata {

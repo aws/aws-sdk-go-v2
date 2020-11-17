@@ -4,6 +4,7 @@ package servicecatalog
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
@@ -125,6 +126,91 @@ func addOperationListConstraintsForPortfolioMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	return nil
+}
+
+// ListConstraintsForPortfolioAPIClient is a client that implements the
+// ListConstraintsForPortfolio operation.
+type ListConstraintsForPortfolioAPIClient interface {
+	ListConstraintsForPortfolio(context.Context, *ListConstraintsForPortfolioInput, ...func(*Options)) (*ListConstraintsForPortfolioOutput, error)
+}
+
+var _ ListConstraintsForPortfolioAPIClient = (*Client)(nil)
+
+// ListConstraintsForPortfolioPaginatorOptions is the paginator options for
+// ListConstraintsForPortfolio
+type ListConstraintsForPortfolioPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListConstraintsForPortfolioPaginator is a paginator for
+// ListConstraintsForPortfolio
+type ListConstraintsForPortfolioPaginator struct {
+	options   ListConstraintsForPortfolioPaginatorOptions
+	client    ListConstraintsForPortfolioAPIClient
+	params    *ListConstraintsForPortfolioInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListConstraintsForPortfolioPaginator returns a new
+// ListConstraintsForPortfolioPaginator
+func NewListConstraintsForPortfolioPaginator(client ListConstraintsForPortfolioAPIClient, params *ListConstraintsForPortfolioInput, optFns ...func(*ListConstraintsForPortfolioPaginatorOptions)) *ListConstraintsForPortfolioPaginator {
+	options := ListConstraintsForPortfolioPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListConstraintsForPortfolioInput{}
+	}
+
+	return &ListConstraintsForPortfolioPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListConstraintsForPortfolioPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListConstraintsForPortfolio page.
+func (p *ListConstraintsForPortfolioPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListConstraintsForPortfolioOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	result, err := p.client.ListConstraintsForPortfolio(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListConstraintsForPortfolio(region string) *awsmiddleware.RegisterServiceMetadata {

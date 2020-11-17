@@ -4,6 +4,7 @@ package rekognition
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
@@ -167,6 +168,94 @@ func addOperationGetSegmentDetectionMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// GetSegmentDetectionAPIClient is a client that implements the GetSegmentDetection
+// operation.
+type GetSegmentDetectionAPIClient interface {
+	GetSegmentDetection(context.Context, *GetSegmentDetectionInput, ...func(*Options)) (*GetSegmentDetectionOutput, error)
+}
+
+var _ GetSegmentDetectionAPIClient = (*Client)(nil)
+
+// GetSegmentDetectionPaginatorOptions is the paginator options for
+// GetSegmentDetection
+type GetSegmentDetectionPaginatorOptions struct {
+	// Maximum number of results to return per paginated call. The largest value you
+	// can specify is 1000.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetSegmentDetectionPaginator is a paginator for GetSegmentDetection
+type GetSegmentDetectionPaginator struct {
+	options   GetSegmentDetectionPaginatorOptions
+	client    GetSegmentDetectionAPIClient
+	params    *GetSegmentDetectionInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetSegmentDetectionPaginator returns a new GetSegmentDetectionPaginator
+func NewGetSegmentDetectionPaginator(client GetSegmentDetectionAPIClient, params *GetSegmentDetectionInput, optFns ...func(*GetSegmentDetectionPaginatorOptions)) *GetSegmentDetectionPaginator {
+	options := GetSegmentDetectionPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetSegmentDetectionInput{}
+	}
+
+	return &GetSegmentDetectionPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetSegmentDetectionPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetSegmentDetection page.
+func (p *GetSegmentDetectionPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetSegmentDetectionOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetSegmentDetection(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetSegmentDetection(region string) *awsmiddleware.RegisterServiceMetadata {

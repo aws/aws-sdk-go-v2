@@ -4,6 +4,7 @@ package servicecatalog
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
@@ -128,6 +129,91 @@ func addOperationGetProvisionedProductOutputsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+// GetProvisionedProductOutputsAPIClient is a client that implements the
+// GetProvisionedProductOutputs operation.
+type GetProvisionedProductOutputsAPIClient interface {
+	GetProvisionedProductOutputs(context.Context, *GetProvisionedProductOutputsInput, ...func(*Options)) (*GetProvisionedProductOutputsOutput, error)
+}
+
+var _ GetProvisionedProductOutputsAPIClient = (*Client)(nil)
+
+// GetProvisionedProductOutputsPaginatorOptions is the paginator options for
+// GetProvisionedProductOutputs
+type GetProvisionedProductOutputsPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetProvisionedProductOutputsPaginator is a paginator for
+// GetProvisionedProductOutputs
+type GetProvisionedProductOutputsPaginator struct {
+	options   GetProvisionedProductOutputsPaginatorOptions
+	client    GetProvisionedProductOutputsAPIClient
+	params    *GetProvisionedProductOutputsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetProvisionedProductOutputsPaginator returns a new
+// GetProvisionedProductOutputsPaginator
+func NewGetProvisionedProductOutputsPaginator(client GetProvisionedProductOutputsAPIClient, params *GetProvisionedProductOutputsInput, optFns ...func(*GetProvisionedProductOutputsPaginatorOptions)) *GetProvisionedProductOutputsPaginator {
+	options := GetProvisionedProductOutputsPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetProvisionedProductOutputsInput{}
+	}
+
+	return &GetProvisionedProductOutputsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetProvisionedProductOutputsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetProvisionedProductOutputs page.
+func (p *GetProvisionedProductOutputsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetProvisionedProductOutputsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	result, err := p.client.GetProvisionedProductOutputs(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetProvisionedProductOutputs(region string) *awsmiddleware.RegisterServiceMetadata {

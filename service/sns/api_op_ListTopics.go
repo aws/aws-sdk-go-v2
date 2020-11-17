@@ -4,6 +4,7 @@ package sns
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
@@ -105,6 +106,79 @@ func addOperationListTopicsMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+// ListTopicsAPIClient is a client that implements the ListTopics operation.
+type ListTopicsAPIClient interface {
+	ListTopics(context.Context, *ListTopicsInput, ...func(*Options)) (*ListTopicsOutput, error)
+}
+
+var _ ListTopicsAPIClient = (*Client)(nil)
+
+// ListTopicsPaginatorOptions is the paginator options for ListTopics
+type ListTopicsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTopicsPaginator is a paginator for ListTopics
+type ListTopicsPaginator struct {
+	options   ListTopicsPaginatorOptions
+	client    ListTopicsAPIClient
+	params    *ListTopicsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTopicsPaginator returns a new ListTopicsPaginator
+func NewListTopicsPaginator(client ListTopicsAPIClient, params *ListTopicsInput, optFns ...func(*ListTopicsPaginatorOptions)) *ListTopicsPaginator {
+	options := ListTopicsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTopicsInput{}
+	}
+
+	return &ListTopicsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTopicsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTopics page.
+func (p *ListTopicsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTopicsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListTopics(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTopics(region string) *awsmiddleware.RegisterServiceMetadata {

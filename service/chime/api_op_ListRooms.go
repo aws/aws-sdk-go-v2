@@ -4,6 +4,7 @@ package chime
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
@@ -116,6 +117,91 @@ func addOperationListRoomsMiddlewares(stack *middleware.Stack, options Options) 
 		return err
 	}
 	return nil
+}
+
+// ListRoomsAPIClient is a client that implements the ListRooms operation.
+type ListRoomsAPIClient interface {
+	ListRooms(context.Context, *ListRoomsInput, ...func(*Options)) (*ListRoomsOutput, error)
+}
+
+var _ ListRoomsAPIClient = (*Client)(nil)
+
+// ListRoomsPaginatorOptions is the paginator options for ListRooms
+type ListRoomsPaginatorOptions struct {
+	// The maximum number of results to return in a single call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListRoomsPaginator is a paginator for ListRooms
+type ListRoomsPaginator struct {
+	options   ListRoomsPaginatorOptions
+	client    ListRoomsAPIClient
+	params    *ListRoomsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListRoomsPaginator returns a new ListRoomsPaginator
+func NewListRoomsPaginator(client ListRoomsAPIClient, params *ListRoomsInput, optFns ...func(*ListRoomsPaginatorOptions)) *ListRoomsPaginator {
+	options := ListRoomsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListRoomsInput{}
+	}
+
+	return &ListRoomsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListRoomsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListRooms page.
+func (p *ListRoomsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListRoomsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListRooms(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListRooms(region string) *awsmiddleware.RegisterServiceMetadata {

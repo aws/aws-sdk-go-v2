@@ -4,6 +4,7 @@ package codestarconnections
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/types"
@@ -108,6 +109,88 @@ func addOperationListHostsMiddlewares(stack *middleware.Stack, options Options) 
 		return err
 	}
 	return nil
+}
+
+// ListHostsAPIClient is a client that implements the ListHosts operation.
+type ListHostsAPIClient interface {
+	ListHosts(context.Context, *ListHostsInput, ...func(*Options)) (*ListHostsOutput, error)
+}
+
+var _ ListHostsAPIClient = (*Client)(nil)
+
+// ListHostsPaginatorOptions is the paginator options for ListHosts
+type ListHostsPaginatorOptions struct {
+	// The maximum number of results to return in a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListHostsPaginator is a paginator for ListHosts
+type ListHostsPaginator struct {
+	options   ListHostsPaginatorOptions
+	client    ListHostsAPIClient
+	params    *ListHostsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListHostsPaginator returns a new ListHostsPaginator
+func NewListHostsPaginator(client ListHostsAPIClient, params *ListHostsInput, optFns ...func(*ListHostsPaginatorOptions)) *ListHostsPaginator {
+	options := ListHostsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListHostsInput{}
+	}
+
+	return &ListHostsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListHostsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListHosts page.
+func (p *ListHostsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListHostsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListHosts(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListHosts(region string) *awsmiddleware.RegisterServiceMetadata {

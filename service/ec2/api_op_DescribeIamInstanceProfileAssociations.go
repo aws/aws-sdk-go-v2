@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -116,6 +117,92 @@ func addOperationDescribeIamInstanceProfileAssociationsMiddlewares(stack *middle
 		return err
 	}
 	return nil
+}
+
+// DescribeIamInstanceProfileAssociationsAPIClient is a client that implements the
+// DescribeIamInstanceProfileAssociations operation.
+type DescribeIamInstanceProfileAssociationsAPIClient interface {
+	DescribeIamInstanceProfileAssociations(context.Context, *DescribeIamInstanceProfileAssociationsInput, ...func(*Options)) (*DescribeIamInstanceProfileAssociationsOutput, error)
+}
+
+var _ DescribeIamInstanceProfileAssociationsAPIClient = (*Client)(nil)
+
+// DescribeIamInstanceProfileAssociationsPaginatorOptions is the paginator options
+// for DescribeIamInstanceProfileAssociations
+type DescribeIamInstanceProfileAssociationsPaginatorOptions struct {
+	// The maximum number of results to return in a single call. To retrieve the
+	// remaining results, make another call with the returned NextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeIamInstanceProfileAssociationsPaginator is a paginator for
+// DescribeIamInstanceProfileAssociations
+type DescribeIamInstanceProfileAssociationsPaginator struct {
+	options   DescribeIamInstanceProfileAssociationsPaginatorOptions
+	client    DescribeIamInstanceProfileAssociationsAPIClient
+	params    *DescribeIamInstanceProfileAssociationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeIamInstanceProfileAssociationsPaginator returns a new
+// DescribeIamInstanceProfileAssociationsPaginator
+func NewDescribeIamInstanceProfileAssociationsPaginator(client DescribeIamInstanceProfileAssociationsAPIClient, params *DescribeIamInstanceProfileAssociationsInput, optFns ...func(*DescribeIamInstanceProfileAssociationsPaginatorOptions)) *DescribeIamInstanceProfileAssociationsPaginator {
+	options := DescribeIamInstanceProfileAssociationsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeIamInstanceProfileAssociationsInput{}
+	}
+
+	return &DescribeIamInstanceProfileAssociationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeIamInstanceProfileAssociationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeIamInstanceProfileAssociations page.
+func (p *DescribeIamInstanceProfileAssociationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeIamInstanceProfileAssociationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeIamInstanceProfileAssociations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeIamInstanceProfileAssociations(region string) *awsmiddleware.RegisterServiceMetadata {

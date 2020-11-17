@@ -4,6 +4,7 @@ package sagemakera2iruntime
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime/types"
@@ -129,6 +130,90 @@ func addOperationListHumanLoopsMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListHumanLoopsAPIClient is a client that implements the ListHumanLoops
+// operation.
+type ListHumanLoopsAPIClient interface {
+	ListHumanLoops(context.Context, *ListHumanLoopsInput, ...func(*Options)) (*ListHumanLoopsOutput, error)
+}
+
+var _ ListHumanLoopsAPIClient = (*Client)(nil)
+
+// ListHumanLoopsPaginatorOptions is the paginator options for ListHumanLoops
+type ListHumanLoopsPaginatorOptions struct {
+	// The total number of items to return. If the total number of available items is
+	// more than the value specified in MaxResults, then a NextToken is returned in the
+	// output. You can use this token to display the next page of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListHumanLoopsPaginator is a paginator for ListHumanLoops
+type ListHumanLoopsPaginator struct {
+	options   ListHumanLoopsPaginatorOptions
+	client    ListHumanLoopsAPIClient
+	params    *ListHumanLoopsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListHumanLoopsPaginator returns a new ListHumanLoopsPaginator
+func NewListHumanLoopsPaginator(client ListHumanLoopsAPIClient, params *ListHumanLoopsInput, optFns ...func(*ListHumanLoopsPaginatorOptions)) *ListHumanLoopsPaginator {
+	options := ListHumanLoopsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListHumanLoopsInput{}
+	}
+
+	return &ListHumanLoopsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListHumanLoopsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListHumanLoops page.
+func (p *ListHumanLoopsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListHumanLoopsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListHumanLoops(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListHumanLoops(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package codestarnotifications
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/types"
@@ -115,6 +116,88 @@ func addOperationListTargetsMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+// ListTargetsAPIClient is a client that implements the ListTargets operation.
+type ListTargetsAPIClient interface {
+	ListTargets(context.Context, *ListTargetsInput, ...func(*Options)) (*ListTargetsOutput, error)
+}
+
+var _ ListTargetsAPIClient = (*Client)(nil)
+
+// ListTargetsPaginatorOptions is the paginator options for ListTargets
+type ListTargetsPaginatorOptions struct {
+	// A non-negative integer used to limit the number of returned results. The maximum
+	// number of results that can be returned is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTargetsPaginator is a paginator for ListTargets
+type ListTargetsPaginator struct {
+	options   ListTargetsPaginatorOptions
+	client    ListTargetsAPIClient
+	params    *ListTargetsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTargetsPaginator returns a new ListTargetsPaginator
+func NewListTargetsPaginator(client ListTargetsAPIClient, params *ListTargetsInput, optFns ...func(*ListTargetsPaginatorOptions)) *ListTargetsPaginator {
+	options := ListTargetsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTargetsInput{}
+	}
+
+	return &ListTargetsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTargetsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTargets page.
+func (p *ListTargetsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTargetsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListTargets(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTargets(region string) *awsmiddleware.RegisterServiceMetadata {

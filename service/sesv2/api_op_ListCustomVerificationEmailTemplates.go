@@ -4,6 +4,7 @@ package sesv2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
@@ -119,6 +120,99 @@ func addOperationListCustomVerificationEmailTemplatesMiddlewares(stack *middlewa
 		return err
 	}
 	return nil
+}
+
+// ListCustomVerificationEmailTemplatesAPIClient is a client that implements the
+// ListCustomVerificationEmailTemplates operation.
+type ListCustomVerificationEmailTemplatesAPIClient interface {
+	ListCustomVerificationEmailTemplates(context.Context, *ListCustomVerificationEmailTemplatesInput, ...func(*Options)) (*ListCustomVerificationEmailTemplatesOutput, error)
+}
+
+var _ ListCustomVerificationEmailTemplatesAPIClient = (*Client)(nil)
+
+// ListCustomVerificationEmailTemplatesPaginatorOptions is the paginator options
+// for ListCustomVerificationEmailTemplates
+type ListCustomVerificationEmailTemplatesPaginatorOptions struct {
+	// The number of results to show in a single call to
+	// ListCustomVerificationEmailTemplates. If the number of results is larger than
+	// the number you specified in this parameter, then the response includes a
+	// NextToken element, which you can use to obtain additional results. The value you
+	// specify has to be at least 1, and can be no more than 50.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListCustomVerificationEmailTemplatesPaginator is a paginator for
+// ListCustomVerificationEmailTemplates
+type ListCustomVerificationEmailTemplatesPaginator struct {
+	options   ListCustomVerificationEmailTemplatesPaginatorOptions
+	client    ListCustomVerificationEmailTemplatesAPIClient
+	params    *ListCustomVerificationEmailTemplatesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListCustomVerificationEmailTemplatesPaginator returns a new
+// ListCustomVerificationEmailTemplatesPaginator
+func NewListCustomVerificationEmailTemplatesPaginator(client ListCustomVerificationEmailTemplatesAPIClient, params *ListCustomVerificationEmailTemplatesInput, optFns ...func(*ListCustomVerificationEmailTemplatesPaginatorOptions)) *ListCustomVerificationEmailTemplatesPaginator {
+	options := ListCustomVerificationEmailTemplatesPaginatorOptions{}
+	if params.PageSize != nil {
+		options.Limit = *params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListCustomVerificationEmailTemplatesInput{}
+	}
+
+	return &ListCustomVerificationEmailTemplatesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListCustomVerificationEmailTemplatesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListCustomVerificationEmailTemplates page.
+func (p *ListCustomVerificationEmailTemplatesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListCustomVerificationEmailTemplatesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.PageSize = limit
+
+	result, err := p.client.ListCustomVerificationEmailTemplates(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListCustomVerificationEmailTemplates(region string) *awsmiddleware.RegisterServiceMetadata {

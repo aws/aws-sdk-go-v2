@@ -4,6 +4,7 @@ package timestreamwrite
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/types"
@@ -110,6 +111,94 @@ func addOperationListDatabasesMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	return nil
+}
+
+// ListDatabasesAPIClient is a client that implements the ListDatabases operation.
+type ListDatabasesAPIClient interface {
+	ListDatabases(context.Context, *ListDatabasesInput, ...func(*Options)) (*ListDatabasesOutput, error)
+}
+
+var _ ListDatabasesAPIClient = (*Client)(nil)
+
+// ListDatabasesPaginatorOptions is the paginator options for ListDatabases
+type ListDatabasesPaginatorOptions struct {
+	// The total number of items to return in the output. If the total number of items
+	// available is more than the value specified, a NextToken is provided in the
+	// output. To resume pagination, provide the NextToken value as argument of a
+	// subsequent API invocation.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDatabasesPaginator is a paginator for ListDatabases
+type ListDatabasesPaginator struct {
+	options   ListDatabasesPaginatorOptions
+	client    ListDatabasesAPIClient
+	params    *ListDatabasesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDatabasesPaginator returns a new ListDatabasesPaginator
+func NewListDatabasesPaginator(client ListDatabasesAPIClient, params *ListDatabasesInput, optFns ...func(*ListDatabasesPaginatorOptions)) *ListDatabasesPaginator {
+	options := ListDatabasesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListDatabasesInput{}
+	}
+
+	return &ListDatabasesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDatabasesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDatabases page.
+func (p *ListDatabasesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDatabasesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListDatabases(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDatabases(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package schemas
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
@@ -119,6 +120,88 @@ func addOperationListSchemaVersionsMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// ListSchemaVersionsAPIClient is a client that implements the ListSchemaVersions
+// operation.
+type ListSchemaVersionsAPIClient interface {
+	ListSchemaVersions(context.Context, *ListSchemaVersionsInput, ...func(*Options)) (*ListSchemaVersionsOutput, error)
+}
+
+var _ ListSchemaVersionsAPIClient = (*Client)(nil)
+
+// ListSchemaVersionsPaginatorOptions is the paginator options for
+// ListSchemaVersions
+type ListSchemaVersionsPaginatorOptions struct {
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListSchemaVersionsPaginator is a paginator for ListSchemaVersions
+type ListSchemaVersionsPaginator struct {
+	options   ListSchemaVersionsPaginatorOptions
+	client    ListSchemaVersionsAPIClient
+	params    *ListSchemaVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListSchemaVersionsPaginator returns a new ListSchemaVersionsPaginator
+func NewListSchemaVersionsPaginator(client ListSchemaVersionsAPIClient, params *ListSchemaVersionsInput, optFns ...func(*ListSchemaVersionsPaginatorOptions)) *ListSchemaVersionsPaginator {
+	options := ListSchemaVersionsPaginatorOptions{}
+	if params.Limit != 0 {
+		options.Limit = params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListSchemaVersionsInput{}
+	}
+
+	return &ListSchemaVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListSchemaVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListSchemaVersions page.
+func (p *ListSchemaVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSchemaVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.Limit = p.options.Limit
+
+	result, err := p.client.ListSchemaVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListSchemaVersions(region string) *awsmiddleware.RegisterServiceMetadata {

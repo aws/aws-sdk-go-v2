@@ -4,6 +4,7 @@ package iotanalytics
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
@@ -105,6 +106,92 @@ func addOperationListDatasetsMiddlewares(stack *middleware.Stack, options Option
 		return err
 	}
 	return nil
+}
+
+// ListDatasetsAPIClient is a client that implements the ListDatasets operation.
+type ListDatasetsAPIClient interface {
+	ListDatasets(context.Context, *ListDatasetsInput, ...func(*Options)) (*ListDatasetsOutput, error)
+}
+
+var _ ListDatasetsAPIClient = (*Client)(nil)
+
+// ListDatasetsPaginatorOptions is the paginator options for ListDatasets
+type ListDatasetsPaginatorOptions struct {
+	// The maximum number of results to return in this request. The default value is
+	// 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDatasetsPaginator is a paginator for ListDatasets
+type ListDatasetsPaginator struct {
+	options   ListDatasetsPaginatorOptions
+	client    ListDatasetsAPIClient
+	params    *ListDatasetsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDatasetsPaginator returns a new ListDatasetsPaginator
+func NewListDatasetsPaginator(client ListDatasetsAPIClient, params *ListDatasetsInput, optFns ...func(*ListDatasetsPaginatorOptions)) *ListDatasetsPaginator {
+	options := ListDatasetsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListDatasetsInput{}
+	}
+
+	return &ListDatasetsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDatasetsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDatasets page.
+func (p *ListDatasetsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDatasetsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListDatasets(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDatasets(region string) *awsmiddleware.RegisterServiceMetadata {

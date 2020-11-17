@@ -4,6 +4,7 @@ package connect
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
@@ -118,6 +119,89 @@ func addOperationListRoutingProfilesMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// ListRoutingProfilesAPIClient is a client that implements the ListRoutingProfiles
+// operation.
+type ListRoutingProfilesAPIClient interface {
+	ListRoutingProfiles(context.Context, *ListRoutingProfilesInput, ...func(*Options)) (*ListRoutingProfilesOutput, error)
+}
+
+var _ ListRoutingProfilesAPIClient = (*Client)(nil)
+
+// ListRoutingProfilesPaginatorOptions is the paginator options for
+// ListRoutingProfiles
+type ListRoutingProfilesPaginatorOptions struct {
+	// The maximimum number of results to return per page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListRoutingProfilesPaginator is a paginator for ListRoutingProfiles
+type ListRoutingProfilesPaginator struct {
+	options   ListRoutingProfilesPaginatorOptions
+	client    ListRoutingProfilesAPIClient
+	params    *ListRoutingProfilesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListRoutingProfilesPaginator returns a new ListRoutingProfilesPaginator
+func NewListRoutingProfilesPaginator(client ListRoutingProfilesAPIClient, params *ListRoutingProfilesInput, optFns ...func(*ListRoutingProfilesPaginatorOptions)) *ListRoutingProfilesPaginator {
+	options := ListRoutingProfilesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListRoutingProfilesInput{}
+	}
+
+	return &ListRoutingProfilesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListRoutingProfilesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListRoutingProfiles page.
+func (p *ListRoutingProfilesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListRoutingProfilesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListRoutingProfiles(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListRoutingProfiles(region string) *awsmiddleware.RegisterServiceMetadata {

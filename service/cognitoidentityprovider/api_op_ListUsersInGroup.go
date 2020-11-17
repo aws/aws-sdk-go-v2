@@ -4,6 +4,7 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
@@ -119,6 +120,92 @@ func addOperationListUsersInGroupMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// ListUsersInGroupAPIClient is a client that implements the ListUsersInGroup
+// operation.
+type ListUsersInGroupAPIClient interface {
+	ListUsersInGroup(context.Context, *ListUsersInGroupInput, ...func(*Options)) (*ListUsersInGroupOutput, error)
+}
+
+var _ ListUsersInGroupAPIClient = (*Client)(nil)
+
+// ListUsersInGroupPaginatorOptions is the paginator options for ListUsersInGroup
+type ListUsersInGroupPaginatorOptions struct {
+	// The limit of the request to list users.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListUsersInGroupPaginator is a paginator for ListUsersInGroup
+type ListUsersInGroupPaginator struct {
+	options   ListUsersInGroupPaginatorOptions
+	client    ListUsersInGroupAPIClient
+	params    *ListUsersInGroupInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListUsersInGroupPaginator returns a new ListUsersInGroupPaginator
+func NewListUsersInGroupPaginator(client ListUsersInGroupAPIClient, params *ListUsersInGroupInput, optFns ...func(*ListUsersInGroupPaginatorOptions)) *ListUsersInGroupPaginator {
+	options := ListUsersInGroupPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListUsersInGroupInput{}
+	}
+
+	return &ListUsersInGroupPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListUsersInGroupPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListUsersInGroup page.
+func (p *ListUsersInGroupPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListUsersInGroupOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.ListUsersInGroup(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListUsersInGroup(region string) *awsmiddleware.RegisterServiceMetadata {

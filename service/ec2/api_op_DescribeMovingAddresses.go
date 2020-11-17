@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -126,6 +127,94 @@ func addOperationDescribeMovingAddressesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// DescribeMovingAddressesAPIClient is a client that implements the
+// DescribeMovingAddresses operation.
+type DescribeMovingAddressesAPIClient interface {
+	DescribeMovingAddresses(context.Context, *DescribeMovingAddressesInput, ...func(*Options)) (*DescribeMovingAddressesOutput, error)
+}
+
+var _ DescribeMovingAddressesAPIClient = (*Client)(nil)
+
+// DescribeMovingAddressesPaginatorOptions is the paginator options for
+// DescribeMovingAddresses
+type DescribeMovingAddressesPaginatorOptions struct {
+	// The maximum number of results to return for the request in a single page. The
+	// remaining results of the initial request can be seen by sending another request
+	// with the returned NextToken value. This value can be between 5 and 1000; if
+	// MaxResults is given a value outside of this range, an error is returned.
+	// Default: If no value is provided, the default is 1000.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeMovingAddressesPaginator is a paginator for DescribeMovingAddresses
+type DescribeMovingAddressesPaginator struct {
+	options   DescribeMovingAddressesPaginatorOptions
+	client    DescribeMovingAddressesAPIClient
+	params    *DescribeMovingAddressesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeMovingAddressesPaginator returns a new
+// DescribeMovingAddressesPaginator
+func NewDescribeMovingAddressesPaginator(client DescribeMovingAddressesAPIClient, params *DescribeMovingAddressesInput, optFns ...func(*DescribeMovingAddressesPaginatorOptions)) *DescribeMovingAddressesPaginator {
+	options := DescribeMovingAddressesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeMovingAddressesInput{}
+	}
+
+	return &DescribeMovingAddressesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeMovingAddressesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeMovingAddresses page.
+func (p *DescribeMovingAddressesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeMovingAddressesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeMovingAddresses(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeMovingAddresses(region string) *awsmiddleware.RegisterServiceMetadata {

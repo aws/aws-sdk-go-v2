@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
@@ -109,6 +110,94 @@ func addOperationListDomainConfigurationsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// ListDomainConfigurationsAPIClient is a client that implements the
+// ListDomainConfigurations operation.
+type ListDomainConfigurationsAPIClient interface {
+	ListDomainConfigurations(context.Context, *ListDomainConfigurationsInput, ...func(*Options)) (*ListDomainConfigurationsOutput, error)
+}
+
+var _ ListDomainConfigurationsAPIClient = (*Client)(nil)
+
+// ListDomainConfigurationsPaginatorOptions is the paginator options for
+// ListDomainConfigurations
+type ListDomainConfigurationsPaginatorOptions struct {
+	// The result page size.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDomainConfigurationsPaginator is a paginator for ListDomainConfigurations
+type ListDomainConfigurationsPaginator struct {
+	options   ListDomainConfigurationsPaginatorOptions
+	client    ListDomainConfigurationsAPIClient
+	params    *ListDomainConfigurationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDomainConfigurationsPaginator returns a new
+// ListDomainConfigurationsPaginator
+func NewListDomainConfigurationsPaginator(client ListDomainConfigurationsAPIClient, params *ListDomainConfigurationsInput, optFns ...func(*ListDomainConfigurationsPaginatorOptions)) *ListDomainConfigurationsPaginator {
+	options := ListDomainConfigurationsPaginatorOptions{}
+	if params.PageSize != nil {
+		options.Limit = *params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListDomainConfigurationsInput{}
+	}
+
+	return &ListDomainConfigurationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDomainConfigurationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDomainConfigurations page.
+func (p *ListDomainConfigurationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDomainConfigurationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.PageSize = limit
+
+	result, err := p.client.ListDomainConfigurations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDomainConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {

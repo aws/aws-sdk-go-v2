@@ -4,6 +4,7 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
@@ -146,6 +147,93 @@ func addOperationListPlatformBranchesMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// ListPlatformBranchesAPIClient is a client that implements the
+// ListPlatformBranches operation.
+type ListPlatformBranchesAPIClient interface {
+	ListPlatformBranches(context.Context, *ListPlatformBranchesInput, ...func(*Options)) (*ListPlatformBranchesOutput, error)
+}
+
+var _ ListPlatformBranchesAPIClient = (*Client)(nil)
+
+// ListPlatformBranchesPaginatorOptions is the paginator options for
+// ListPlatformBranches
+type ListPlatformBranchesPaginatorOptions struct {
+	// The maximum number of platform branch values returned in one call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPlatformBranchesPaginator is a paginator for ListPlatformBranches
+type ListPlatformBranchesPaginator struct {
+	options   ListPlatformBranchesPaginatorOptions
+	client    ListPlatformBranchesAPIClient
+	params    *ListPlatformBranchesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPlatformBranchesPaginator returns a new ListPlatformBranchesPaginator
+func NewListPlatformBranchesPaginator(client ListPlatformBranchesAPIClient, params *ListPlatformBranchesInput, optFns ...func(*ListPlatformBranchesPaginatorOptions)) *ListPlatformBranchesPaginator {
+	options := ListPlatformBranchesPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListPlatformBranchesInput{}
+	}
+
+	return &ListPlatformBranchesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPlatformBranchesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListPlatformBranches page.
+func (p *ListPlatformBranchesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPlatformBranchesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.ListPlatformBranches(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListPlatformBranches(region string) *awsmiddleware.RegisterServiceMetadata {

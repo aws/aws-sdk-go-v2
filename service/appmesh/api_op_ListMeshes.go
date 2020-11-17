@@ -4,6 +4,7 @@ package appmesh
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
@@ -117,4 +118,95 @@ func addOperationListMeshesMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+// ListMeshesAPIClient is a client that implements the ListMeshes operation.
+type ListMeshesAPIClient interface {
+	ListMeshes(context.Context, *ListMeshesInput, ...func(*Options)) (*ListMeshesOutput, error)
+}
+
+var _ ListMeshesAPIClient = (*Client)(nil)
+
+// ListMeshesPaginatorOptions is the paginator options for ListMeshes
+type ListMeshesPaginatorOptions struct {
+	// The maximum number of results returned by ListMeshes in paginated output. When
+	// you use this parameter, ListMeshes returns only limit results in a single page
+	// along with a nextToken response element. You can see the remaining results of
+	// the initial request by sending another ListMeshes request with the returned
+	// nextToken value. This value can be between 1 and 100. If you don't use this
+	// parameter, ListMeshes returns up to 100 results and a nextToken value if
+	// applicable.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListMeshesPaginator is a paginator for ListMeshes
+type ListMeshesPaginator struct {
+	options   ListMeshesPaginatorOptions
+	client    ListMeshesAPIClient
+	params    *ListMeshesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListMeshesPaginator returns a new ListMeshesPaginator
+func NewListMeshesPaginator(client ListMeshesAPIClient, params *ListMeshesInput, optFns ...func(*ListMeshesPaginatorOptions)) *ListMeshesPaginator {
+	options := ListMeshesPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListMeshesInput{}
+	}
+
+	return &ListMeshesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListMeshesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListMeshes page.
+func (p *ListMeshesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListMeshesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.ListMeshes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }

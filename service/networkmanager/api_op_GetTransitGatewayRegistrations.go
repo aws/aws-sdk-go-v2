@@ -4,6 +4,7 @@ package networkmanager
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
@@ -116,6 +117,95 @@ func addOperationGetTransitGatewayRegistrationsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+// GetTransitGatewayRegistrationsAPIClient is a client that implements the
+// GetTransitGatewayRegistrations operation.
+type GetTransitGatewayRegistrationsAPIClient interface {
+	GetTransitGatewayRegistrations(context.Context, *GetTransitGatewayRegistrationsInput, ...func(*Options)) (*GetTransitGatewayRegistrationsOutput, error)
+}
+
+var _ GetTransitGatewayRegistrationsAPIClient = (*Client)(nil)
+
+// GetTransitGatewayRegistrationsPaginatorOptions is the paginator options for
+// GetTransitGatewayRegistrations
+type GetTransitGatewayRegistrationsPaginatorOptions struct {
+	// The maximum number of results to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetTransitGatewayRegistrationsPaginator is a paginator for
+// GetTransitGatewayRegistrations
+type GetTransitGatewayRegistrationsPaginator struct {
+	options   GetTransitGatewayRegistrationsPaginatorOptions
+	client    GetTransitGatewayRegistrationsAPIClient
+	params    *GetTransitGatewayRegistrationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetTransitGatewayRegistrationsPaginator returns a new
+// GetTransitGatewayRegistrationsPaginator
+func NewGetTransitGatewayRegistrationsPaginator(client GetTransitGatewayRegistrationsAPIClient, params *GetTransitGatewayRegistrationsInput, optFns ...func(*GetTransitGatewayRegistrationsPaginatorOptions)) *GetTransitGatewayRegistrationsPaginator {
+	options := GetTransitGatewayRegistrationsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetTransitGatewayRegistrationsInput{}
+	}
+
+	return &GetTransitGatewayRegistrationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetTransitGatewayRegistrationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetTransitGatewayRegistrations page.
+func (p *GetTransitGatewayRegistrationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetTransitGatewayRegistrationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetTransitGatewayRegistrations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetTransitGatewayRegistrations(region string) *awsmiddleware.RegisterServiceMetadata {

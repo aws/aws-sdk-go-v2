@@ -4,6 +4,7 @@ package servicequotas
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
@@ -137,6 +138,101 @@ func addOperationListRequestedServiceQuotaChangeHistoryByQuotaMiddlewares(stack 
 		return err
 	}
 	return nil
+}
+
+// ListRequestedServiceQuotaChangeHistoryByQuotaAPIClient is a client that
+// implements the ListRequestedServiceQuotaChangeHistoryByQuota operation.
+type ListRequestedServiceQuotaChangeHistoryByQuotaAPIClient interface {
+	ListRequestedServiceQuotaChangeHistoryByQuota(context.Context, *ListRequestedServiceQuotaChangeHistoryByQuotaInput, ...func(*Options)) (*ListRequestedServiceQuotaChangeHistoryByQuotaOutput, error)
+}
+
+var _ ListRequestedServiceQuotaChangeHistoryByQuotaAPIClient = (*Client)(nil)
+
+// ListRequestedServiceQuotaChangeHistoryByQuotaPaginatorOptions is the paginator
+// options for ListRequestedServiceQuotaChangeHistoryByQuota
+type ListRequestedServiceQuotaChangeHistoryByQuotaPaginatorOptions struct {
+	// (Optional) Limits the number of results that you want to include in the
+	// response. If you don't include this parameter, the response defaults to a value
+	// that's specific to the operation. If additional items exist beyond the specified
+	// maximum, the NextToken element is present and has a value (isn't null). Include
+	// that value as the NextToken request parameter in the call to the operation to
+	// get the next part of the results. You should check NextToken after every
+	// operation to ensure that you receive all of the results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListRequestedServiceQuotaChangeHistoryByQuotaPaginator is a paginator for
+// ListRequestedServiceQuotaChangeHistoryByQuota
+type ListRequestedServiceQuotaChangeHistoryByQuotaPaginator struct {
+	options   ListRequestedServiceQuotaChangeHistoryByQuotaPaginatorOptions
+	client    ListRequestedServiceQuotaChangeHistoryByQuotaAPIClient
+	params    *ListRequestedServiceQuotaChangeHistoryByQuotaInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListRequestedServiceQuotaChangeHistoryByQuotaPaginator returns a new
+// ListRequestedServiceQuotaChangeHistoryByQuotaPaginator
+func NewListRequestedServiceQuotaChangeHistoryByQuotaPaginator(client ListRequestedServiceQuotaChangeHistoryByQuotaAPIClient, params *ListRequestedServiceQuotaChangeHistoryByQuotaInput, optFns ...func(*ListRequestedServiceQuotaChangeHistoryByQuotaPaginatorOptions)) *ListRequestedServiceQuotaChangeHistoryByQuotaPaginator {
+	options := ListRequestedServiceQuotaChangeHistoryByQuotaPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListRequestedServiceQuotaChangeHistoryByQuotaInput{}
+	}
+
+	return &ListRequestedServiceQuotaChangeHistoryByQuotaPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListRequestedServiceQuotaChangeHistoryByQuotaPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListRequestedServiceQuotaChangeHistoryByQuota page.
+func (p *ListRequestedServiceQuotaChangeHistoryByQuotaPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListRequestedServiceQuotaChangeHistoryByQuotaOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListRequestedServiceQuotaChangeHistoryByQuota(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListRequestedServiceQuotaChangeHistoryByQuota(region string) *awsmiddleware.RegisterServiceMetadata {

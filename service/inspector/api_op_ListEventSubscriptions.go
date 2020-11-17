@@ -4,6 +4,7 @@ package inspector
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
@@ -118,6 +119,94 @@ func addOperationListEventSubscriptionsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	return nil
+}
+
+// ListEventSubscriptionsAPIClient is a client that implements the
+// ListEventSubscriptions operation.
+type ListEventSubscriptionsAPIClient interface {
+	ListEventSubscriptions(context.Context, *ListEventSubscriptionsInput, ...func(*Options)) (*ListEventSubscriptionsOutput, error)
+}
+
+var _ ListEventSubscriptionsAPIClient = (*Client)(nil)
+
+// ListEventSubscriptionsPaginatorOptions is the paginator options for
+// ListEventSubscriptions
+type ListEventSubscriptionsPaginatorOptions struct {
+	// You can use this parameter to indicate the maximum number of items you want in
+	// the response. The default value is 10. The maximum value is 500.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListEventSubscriptionsPaginator is a paginator for ListEventSubscriptions
+type ListEventSubscriptionsPaginator struct {
+	options   ListEventSubscriptionsPaginatorOptions
+	client    ListEventSubscriptionsAPIClient
+	params    *ListEventSubscriptionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListEventSubscriptionsPaginator returns a new ListEventSubscriptionsPaginator
+func NewListEventSubscriptionsPaginator(client ListEventSubscriptionsAPIClient, params *ListEventSubscriptionsInput, optFns ...func(*ListEventSubscriptionsPaginatorOptions)) *ListEventSubscriptionsPaginator {
+	options := ListEventSubscriptionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListEventSubscriptionsInput{}
+	}
+
+	return &ListEventSubscriptionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListEventSubscriptionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListEventSubscriptions page.
+func (p *ListEventSubscriptionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListEventSubscriptionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListEventSubscriptions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListEventSubscriptions(region string) *awsmiddleware.RegisterServiceMetadata {

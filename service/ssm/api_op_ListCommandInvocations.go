@@ -4,6 +4,7 @@ package ssm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
@@ -128,6 +129,91 @@ func addOperationListCommandInvocationsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	return nil
+}
+
+// ListCommandInvocationsAPIClient is a client that implements the
+// ListCommandInvocations operation.
+type ListCommandInvocationsAPIClient interface {
+	ListCommandInvocations(context.Context, *ListCommandInvocationsInput, ...func(*Options)) (*ListCommandInvocationsOutput, error)
+}
+
+var _ ListCommandInvocationsAPIClient = (*Client)(nil)
+
+// ListCommandInvocationsPaginatorOptions is the paginator options for
+// ListCommandInvocations
+type ListCommandInvocationsPaginatorOptions struct {
+	// (Optional) The maximum number of items to return for this call. The call also
+	// returns a token that you can specify in a subsequent call to get the next set of
+	// results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListCommandInvocationsPaginator is a paginator for ListCommandInvocations
+type ListCommandInvocationsPaginator struct {
+	options   ListCommandInvocationsPaginatorOptions
+	client    ListCommandInvocationsAPIClient
+	params    *ListCommandInvocationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListCommandInvocationsPaginator returns a new ListCommandInvocationsPaginator
+func NewListCommandInvocationsPaginator(client ListCommandInvocationsAPIClient, params *ListCommandInvocationsInput, optFns ...func(*ListCommandInvocationsPaginatorOptions)) *ListCommandInvocationsPaginator {
+	options := ListCommandInvocationsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListCommandInvocationsInput{}
+	}
+
+	return &ListCommandInvocationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListCommandInvocationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListCommandInvocations page.
+func (p *ListCommandInvocationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListCommandInvocationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListCommandInvocations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListCommandInvocations(region string) *awsmiddleware.RegisterServiceMetadata {

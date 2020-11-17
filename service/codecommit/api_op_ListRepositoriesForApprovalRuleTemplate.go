@@ -4,6 +4,7 @@ package codecommit
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -114,6 +115,95 @@ func addOperationListRepositoriesForApprovalRuleTemplateMiddlewares(stack *middl
 		return err
 	}
 	return nil
+}
+
+// ListRepositoriesForApprovalRuleTemplateAPIClient is a client that implements the
+// ListRepositoriesForApprovalRuleTemplate operation.
+type ListRepositoriesForApprovalRuleTemplateAPIClient interface {
+	ListRepositoriesForApprovalRuleTemplate(context.Context, *ListRepositoriesForApprovalRuleTemplateInput, ...func(*Options)) (*ListRepositoriesForApprovalRuleTemplateOutput, error)
+}
+
+var _ ListRepositoriesForApprovalRuleTemplateAPIClient = (*Client)(nil)
+
+// ListRepositoriesForApprovalRuleTemplatePaginatorOptions is the paginator options
+// for ListRepositoriesForApprovalRuleTemplate
+type ListRepositoriesForApprovalRuleTemplatePaginatorOptions struct {
+	// A non-zero, non-negative integer used to limit the number of returned results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListRepositoriesForApprovalRuleTemplatePaginator is a paginator for
+// ListRepositoriesForApprovalRuleTemplate
+type ListRepositoriesForApprovalRuleTemplatePaginator struct {
+	options   ListRepositoriesForApprovalRuleTemplatePaginatorOptions
+	client    ListRepositoriesForApprovalRuleTemplateAPIClient
+	params    *ListRepositoriesForApprovalRuleTemplateInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListRepositoriesForApprovalRuleTemplatePaginator returns a new
+// ListRepositoriesForApprovalRuleTemplatePaginator
+func NewListRepositoriesForApprovalRuleTemplatePaginator(client ListRepositoriesForApprovalRuleTemplateAPIClient, params *ListRepositoriesForApprovalRuleTemplateInput, optFns ...func(*ListRepositoriesForApprovalRuleTemplatePaginatorOptions)) *ListRepositoriesForApprovalRuleTemplatePaginator {
+	options := ListRepositoriesForApprovalRuleTemplatePaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListRepositoriesForApprovalRuleTemplateInput{}
+	}
+
+	return &ListRepositoriesForApprovalRuleTemplatePaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListRepositoriesForApprovalRuleTemplatePaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListRepositoriesForApprovalRuleTemplate page.
+func (p *ListRepositoriesForApprovalRuleTemplatePaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListRepositoriesForApprovalRuleTemplateOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListRepositoriesForApprovalRuleTemplate(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListRepositoriesForApprovalRuleTemplate(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package elasticsearchservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
@@ -126,6 +127,92 @@ func addOperationListElasticsearchInstanceTypesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+// ListElasticsearchInstanceTypesAPIClient is a client that implements the
+// ListElasticsearchInstanceTypes operation.
+type ListElasticsearchInstanceTypesAPIClient interface {
+	ListElasticsearchInstanceTypes(context.Context, *ListElasticsearchInstanceTypesInput, ...func(*Options)) (*ListElasticsearchInstanceTypesOutput, error)
+}
+
+var _ ListElasticsearchInstanceTypesAPIClient = (*Client)(nil)
+
+// ListElasticsearchInstanceTypesPaginatorOptions is the paginator options for
+// ListElasticsearchInstanceTypes
+type ListElasticsearchInstanceTypesPaginatorOptions struct {
+	// Set this value to limit the number of results returned. Value provided must be
+	// greater than 30 else it wont be honored.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListElasticsearchInstanceTypesPaginator is a paginator for
+// ListElasticsearchInstanceTypes
+type ListElasticsearchInstanceTypesPaginator struct {
+	options   ListElasticsearchInstanceTypesPaginatorOptions
+	client    ListElasticsearchInstanceTypesAPIClient
+	params    *ListElasticsearchInstanceTypesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListElasticsearchInstanceTypesPaginator returns a new
+// ListElasticsearchInstanceTypesPaginator
+func NewListElasticsearchInstanceTypesPaginator(client ListElasticsearchInstanceTypesAPIClient, params *ListElasticsearchInstanceTypesInput, optFns ...func(*ListElasticsearchInstanceTypesPaginatorOptions)) *ListElasticsearchInstanceTypesPaginator {
+	options := ListElasticsearchInstanceTypesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListElasticsearchInstanceTypesInput{}
+	}
+
+	return &ListElasticsearchInstanceTypesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListElasticsearchInstanceTypesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListElasticsearchInstanceTypes page.
+func (p *ListElasticsearchInstanceTypesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListElasticsearchInstanceTypesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListElasticsearchInstanceTypes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListElasticsearchInstanceTypes(region string) *awsmiddleware.RegisterServiceMetadata {

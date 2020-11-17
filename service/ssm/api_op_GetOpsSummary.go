@@ -4,6 +4,7 @@ package ssm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
@@ -121,6 +122,88 @@ func addOperationGetOpsSummaryMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	return nil
+}
+
+// GetOpsSummaryAPIClient is a client that implements the GetOpsSummary operation.
+type GetOpsSummaryAPIClient interface {
+	GetOpsSummary(context.Context, *GetOpsSummaryInput, ...func(*Options)) (*GetOpsSummaryOutput, error)
+}
+
+var _ GetOpsSummaryAPIClient = (*Client)(nil)
+
+// GetOpsSummaryPaginatorOptions is the paginator options for GetOpsSummary
+type GetOpsSummaryPaginatorOptions struct {
+	// The maximum number of items to return for this call. The call also returns a
+	// token that you can specify in a subsequent call to get the next set of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetOpsSummaryPaginator is a paginator for GetOpsSummary
+type GetOpsSummaryPaginator struct {
+	options   GetOpsSummaryPaginatorOptions
+	client    GetOpsSummaryAPIClient
+	params    *GetOpsSummaryInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetOpsSummaryPaginator returns a new GetOpsSummaryPaginator
+func NewGetOpsSummaryPaginator(client GetOpsSummaryAPIClient, params *GetOpsSummaryInput, optFns ...func(*GetOpsSummaryPaginatorOptions)) *GetOpsSummaryPaginator {
+	options := GetOpsSummaryPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetOpsSummaryInput{}
+	}
+
+	return &GetOpsSummaryPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetOpsSummaryPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetOpsSummary page.
+func (p *GetOpsSummaryPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetOpsSummaryOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.GetOpsSummary(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetOpsSummary(region string) *awsmiddleware.RegisterServiceMetadata {

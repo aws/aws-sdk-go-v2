@@ -4,6 +4,7 @@ package gamelift
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
@@ -157,6 +158,94 @@ func addOperationDescribeGameSessionsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// DescribeGameSessionsAPIClient is a client that implements the
+// DescribeGameSessions operation.
+type DescribeGameSessionsAPIClient interface {
+	DescribeGameSessions(context.Context, *DescribeGameSessionsInput, ...func(*Options)) (*DescribeGameSessionsOutput, error)
+}
+
+var _ DescribeGameSessionsAPIClient = (*Client)(nil)
+
+// DescribeGameSessionsPaginatorOptions is the paginator options for
+// DescribeGameSessions
+type DescribeGameSessionsPaginatorOptions struct {
+	// The maximum number of results to return. Use this parameter with NextToken to
+	// get results as a set of sequential pages.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeGameSessionsPaginator is a paginator for DescribeGameSessions
+type DescribeGameSessionsPaginator struct {
+	options   DescribeGameSessionsPaginatorOptions
+	client    DescribeGameSessionsAPIClient
+	params    *DescribeGameSessionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeGameSessionsPaginator returns a new DescribeGameSessionsPaginator
+func NewDescribeGameSessionsPaginator(client DescribeGameSessionsAPIClient, params *DescribeGameSessionsInput, optFns ...func(*DescribeGameSessionsPaginatorOptions)) *DescribeGameSessionsPaginator {
+	options := DescribeGameSessionsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeGameSessionsInput{}
+	}
+
+	return &DescribeGameSessionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeGameSessionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeGameSessions page.
+func (p *DescribeGameSessionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeGameSessionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeGameSessions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeGameSessions(region string) *awsmiddleware.RegisterServiceMetadata {

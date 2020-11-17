@@ -4,6 +4,7 @@ package gamelift
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
@@ -161,6 +162,96 @@ func addOperationDescribeFleetAttributesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// DescribeFleetAttributesAPIClient is a client that implements the
+// DescribeFleetAttributes operation.
+type DescribeFleetAttributesAPIClient interface {
+	DescribeFleetAttributes(context.Context, *DescribeFleetAttributesInput, ...func(*Options)) (*DescribeFleetAttributesOutput, error)
+}
+
+var _ DescribeFleetAttributesAPIClient = (*Client)(nil)
+
+// DescribeFleetAttributesPaginatorOptions is the paginator options for
+// DescribeFleetAttributes
+type DescribeFleetAttributesPaginatorOptions struct {
+	// The maximum number of results to return. Use this parameter with NextToken to
+	// get results as a set of sequential pages. This parameter is ignored when the
+	// request specifies one or a list of fleet IDs.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeFleetAttributesPaginator is a paginator for DescribeFleetAttributes
+type DescribeFleetAttributesPaginator struct {
+	options   DescribeFleetAttributesPaginatorOptions
+	client    DescribeFleetAttributesAPIClient
+	params    *DescribeFleetAttributesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeFleetAttributesPaginator returns a new
+// DescribeFleetAttributesPaginator
+func NewDescribeFleetAttributesPaginator(client DescribeFleetAttributesAPIClient, params *DescribeFleetAttributesInput, optFns ...func(*DescribeFleetAttributesPaginatorOptions)) *DescribeFleetAttributesPaginator {
+	options := DescribeFleetAttributesPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeFleetAttributesInput{}
+	}
+
+	return &DescribeFleetAttributesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeFleetAttributesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeFleetAttributes page.
+func (p *DescribeFleetAttributesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeFleetAttributesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeFleetAttributes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeFleetAttributes(region string) *awsmiddleware.RegisterServiceMetadata {

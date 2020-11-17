@@ -4,6 +4,7 @@ package appflow
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
@@ -116,6 +117,95 @@ func addOperationDescribeConnectorProfilesMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+// DescribeConnectorProfilesAPIClient is a client that implements the
+// DescribeConnectorProfiles operation.
+type DescribeConnectorProfilesAPIClient interface {
+	DescribeConnectorProfiles(context.Context, *DescribeConnectorProfilesInput, ...func(*Options)) (*DescribeConnectorProfilesOutput, error)
+}
+
+var _ DescribeConnectorProfilesAPIClient = (*Client)(nil)
+
+// DescribeConnectorProfilesPaginatorOptions is the paginator options for
+// DescribeConnectorProfiles
+type DescribeConnectorProfilesPaginatorOptions struct {
+	// Specifies the maximum number of items that should be returned in the result set.
+	// The default for maxResults is 20 (for all paginated API operations).
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeConnectorProfilesPaginator is a paginator for DescribeConnectorProfiles
+type DescribeConnectorProfilesPaginator struct {
+	options   DescribeConnectorProfilesPaginatorOptions
+	client    DescribeConnectorProfilesAPIClient
+	params    *DescribeConnectorProfilesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeConnectorProfilesPaginator returns a new
+// DescribeConnectorProfilesPaginator
+func NewDescribeConnectorProfilesPaginator(client DescribeConnectorProfilesAPIClient, params *DescribeConnectorProfilesInput, optFns ...func(*DescribeConnectorProfilesPaginatorOptions)) *DescribeConnectorProfilesPaginator {
+	options := DescribeConnectorProfilesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeConnectorProfilesInput{}
+	}
+
+	return &DescribeConnectorProfilesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeConnectorProfilesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeConnectorProfiles page.
+func (p *DescribeConnectorProfilesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeConnectorProfilesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeConnectorProfiles(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeConnectorProfiles(region string) *awsmiddleware.RegisterServiceMetadata {

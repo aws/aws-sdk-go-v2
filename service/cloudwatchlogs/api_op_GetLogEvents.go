@@ -4,6 +4,7 @@ package cloudwatchlogs
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
@@ -149,6 +150,93 @@ func addOperationGetLogEventsMiddlewares(stack *middleware.Stack, options Option
 		return err
 	}
 	return nil
+}
+
+// GetLogEventsAPIClient is a client that implements the GetLogEvents operation.
+type GetLogEventsAPIClient interface {
+	GetLogEvents(context.Context, *GetLogEventsInput, ...func(*Options)) (*GetLogEventsOutput, error)
+}
+
+var _ GetLogEventsAPIClient = (*Client)(nil)
+
+// GetLogEventsPaginatorOptions is the paginator options for GetLogEvents
+type GetLogEventsPaginatorOptions struct {
+	// The maximum number of log events returned. If you don't specify a value, the
+	// maximum is as many log events as can fit in a response size of 1 MB, up to
+	// 10,000 log events.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetLogEventsPaginator is a paginator for GetLogEvents
+type GetLogEventsPaginator struct {
+	options   GetLogEventsPaginatorOptions
+	client    GetLogEventsAPIClient
+	params    *GetLogEventsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetLogEventsPaginator returns a new GetLogEventsPaginator
+func NewGetLogEventsPaginator(client GetLogEventsAPIClient, params *GetLogEventsInput, optFns ...func(*GetLogEventsPaginatorOptions)) *GetLogEventsPaginator {
+	options := GetLogEventsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetLogEventsInput{}
+	}
+
+	return &GetLogEventsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetLogEventsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetLogEvents page.
+func (p *GetLogEventsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetLogEventsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.GetLogEvents(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextForwardToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetLogEvents(region string) *awsmiddleware.RegisterServiceMetadata {

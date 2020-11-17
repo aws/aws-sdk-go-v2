@@ -4,6 +4,7 @@ package servicequotas
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
@@ -137,6 +138,101 @@ func addOperationListAWSDefaultServiceQuotasMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	return nil
+}
+
+// ListAWSDefaultServiceQuotasAPIClient is a client that implements the
+// ListAWSDefaultServiceQuotas operation.
+type ListAWSDefaultServiceQuotasAPIClient interface {
+	ListAWSDefaultServiceQuotas(context.Context, *ListAWSDefaultServiceQuotasInput, ...func(*Options)) (*ListAWSDefaultServiceQuotasOutput, error)
+}
+
+var _ ListAWSDefaultServiceQuotasAPIClient = (*Client)(nil)
+
+// ListAWSDefaultServiceQuotasPaginatorOptions is the paginator options for
+// ListAWSDefaultServiceQuotas
+type ListAWSDefaultServiceQuotasPaginatorOptions struct {
+	// (Optional) Limits the number of results that you want to include in the
+	// response. If you don't include this parameter, the response defaults to a value
+	// that's specific to the operation. If additional items exist beyond the specified
+	// maximum, the NextToken element is present and has a value (isn't null). Include
+	// that value as the NextToken request parameter in the call to the operation to
+	// get the next part of the results. You should check NextToken after every
+	// operation to ensure that you receive all of the results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAWSDefaultServiceQuotasPaginator is a paginator for
+// ListAWSDefaultServiceQuotas
+type ListAWSDefaultServiceQuotasPaginator struct {
+	options   ListAWSDefaultServiceQuotasPaginatorOptions
+	client    ListAWSDefaultServiceQuotasAPIClient
+	params    *ListAWSDefaultServiceQuotasInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAWSDefaultServiceQuotasPaginator returns a new
+// ListAWSDefaultServiceQuotasPaginator
+func NewListAWSDefaultServiceQuotasPaginator(client ListAWSDefaultServiceQuotasAPIClient, params *ListAWSDefaultServiceQuotasInput, optFns ...func(*ListAWSDefaultServiceQuotasPaginatorOptions)) *ListAWSDefaultServiceQuotasPaginator {
+	options := ListAWSDefaultServiceQuotasPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAWSDefaultServiceQuotasInput{}
+	}
+
+	return &ListAWSDefaultServiceQuotasPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAWSDefaultServiceQuotasPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAWSDefaultServiceQuotas page.
+func (p *ListAWSDefaultServiceQuotasPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAWSDefaultServiceQuotasOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListAWSDefaultServiceQuotas(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAWSDefaultServiceQuotas(region string) *awsmiddleware.RegisterServiceMetadata {

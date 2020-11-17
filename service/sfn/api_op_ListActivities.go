@@ -4,6 +4,7 @@ package sfn
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
@@ -123,6 +124,92 @@ func addOperationListActivitiesMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListActivitiesAPIClient is a client that implements the ListActivities
+// operation.
+type ListActivitiesAPIClient interface {
+	ListActivities(context.Context, *ListActivitiesInput, ...func(*Options)) (*ListActivitiesOutput, error)
+}
+
+var _ ListActivitiesAPIClient = (*Client)(nil)
+
+// ListActivitiesPaginatorOptions is the paginator options for ListActivities
+type ListActivitiesPaginatorOptions struct {
+	// The maximum number of results that are returned per call. You can use nextToken
+	// to obtain further pages of results. The default is 100 and the maximum allowed
+	// page size is 1000. A value of 0 uses the default. This is only an upper limit.
+	// The actual number of results returned per call might be fewer than the specified
+	// maximum.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListActivitiesPaginator is a paginator for ListActivities
+type ListActivitiesPaginator struct {
+	options   ListActivitiesPaginatorOptions
+	client    ListActivitiesAPIClient
+	params    *ListActivitiesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListActivitiesPaginator returns a new ListActivitiesPaginator
+func NewListActivitiesPaginator(client ListActivitiesAPIClient, params *ListActivitiesInput, optFns ...func(*ListActivitiesPaginatorOptions)) *ListActivitiesPaginator {
+	options := ListActivitiesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListActivitiesInput{}
+	}
+
+	return &ListActivitiesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListActivitiesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListActivities page.
+func (p *ListActivitiesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListActivitiesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListActivities(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListActivities(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package storagegateway
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
@@ -120,6 +121,93 @@ func addOperationListFileSharesMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListFileSharesAPIClient is a client that implements the ListFileShares
+// operation.
+type ListFileSharesAPIClient interface {
+	ListFileShares(context.Context, *ListFileSharesInput, ...func(*Options)) (*ListFileSharesOutput, error)
+}
+
+var _ ListFileSharesAPIClient = (*Client)(nil)
+
+// ListFileSharesPaginatorOptions is the paginator options for ListFileShares
+type ListFileSharesPaginatorOptions struct {
+	// The maximum number of file shares to return in the response. The value must be
+	// an integer with a value greater than zero. Optional.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListFileSharesPaginator is a paginator for ListFileShares
+type ListFileSharesPaginator struct {
+	options   ListFileSharesPaginatorOptions
+	client    ListFileSharesAPIClient
+	params    *ListFileSharesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListFileSharesPaginator returns a new ListFileSharesPaginator
+func NewListFileSharesPaginator(client ListFileSharesAPIClient, params *ListFileSharesInput, optFns ...func(*ListFileSharesPaginatorOptions)) *ListFileSharesPaginator {
+	options := ListFileSharesPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListFileSharesInput{}
+	}
+
+	return &ListFileSharesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListFileSharesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListFileShares page.
+func (p *ListFileSharesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListFileSharesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.ListFileShares(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListFileShares(region string) *awsmiddleware.RegisterServiceMetadata {

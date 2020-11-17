@@ -4,6 +4,7 @@ package workdocs
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
@@ -136,6 +137,93 @@ func addOperationDescribeFolderContentsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	return nil
+}
+
+// DescribeFolderContentsAPIClient is a client that implements the
+// DescribeFolderContents operation.
+type DescribeFolderContentsAPIClient interface {
+	DescribeFolderContents(context.Context, *DescribeFolderContentsInput, ...func(*Options)) (*DescribeFolderContentsOutput, error)
+}
+
+var _ DescribeFolderContentsAPIClient = (*Client)(nil)
+
+// DescribeFolderContentsPaginatorOptions is the paginator options for
+// DescribeFolderContents
+type DescribeFolderContentsPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeFolderContentsPaginator is a paginator for DescribeFolderContents
+type DescribeFolderContentsPaginator struct {
+	options   DescribeFolderContentsPaginatorOptions
+	client    DescribeFolderContentsAPIClient
+	params    *DescribeFolderContentsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeFolderContentsPaginator returns a new DescribeFolderContentsPaginator
+func NewDescribeFolderContentsPaginator(client DescribeFolderContentsAPIClient, params *DescribeFolderContentsInput, optFns ...func(*DescribeFolderContentsPaginatorOptions)) *DescribeFolderContentsPaginator {
+	options := DescribeFolderContentsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeFolderContentsInput{}
+	}
+
+	return &DescribeFolderContentsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeFolderContentsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeFolderContents page.
+func (p *DescribeFolderContentsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeFolderContentsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeFolderContents(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeFolderContents(region string) *awsmiddleware.RegisterServiceMetadata {

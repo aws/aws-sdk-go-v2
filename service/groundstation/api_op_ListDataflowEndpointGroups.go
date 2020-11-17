@@ -4,6 +4,7 @@ package groundstation
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
@@ -104,4 +105,93 @@ func addOperationListDataflowEndpointGroupsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+// ListDataflowEndpointGroupsAPIClient is a client that implements the
+// ListDataflowEndpointGroups operation.
+type ListDataflowEndpointGroupsAPIClient interface {
+	ListDataflowEndpointGroups(context.Context, *ListDataflowEndpointGroupsInput, ...func(*Options)) (*ListDataflowEndpointGroupsOutput, error)
+}
+
+var _ ListDataflowEndpointGroupsAPIClient = (*Client)(nil)
+
+// ListDataflowEndpointGroupsPaginatorOptions is the paginator options for
+// ListDataflowEndpointGroups
+type ListDataflowEndpointGroupsPaginatorOptions struct {
+	// Maximum number of dataflow endpoint groups returned.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDataflowEndpointGroupsPaginator is a paginator for
+// ListDataflowEndpointGroups
+type ListDataflowEndpointGroupsPaginator struct {
+	options   ListDataflowEndpointGroupsPaginatorOptions
+	client    ListDataflowEndpointGroupsAPIClient
+	params    *ListDataflowEndpointGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDataflowEndpointGroupsPaginator returns a new
+// ListDataflowEndpointGroupsPaginator
+func NewListDataflowEndpointGroupsPaginator(client ListDataflowEndpointGroupsAPIClient, params *ListDataflowEndpointGroupsInput, optFns ...func(*ListDataflowEndpointGroupsPaginatorOptions)) *ListDataflowEndpointGroupsPaginator {
+	options := ListDataflowEndpointGroupsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListDataflowEndpointGroupsInput{}
+	}
+
+	return &ListDataflowEndpointGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDataflowEndpointGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDataflowEndpointGroups page.
+func (p *ListDataflowEndpointGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDataflowEndpointGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListDataflowEndpointGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }

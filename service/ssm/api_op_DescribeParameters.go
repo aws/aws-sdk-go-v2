@@ -4,6 +4,7 @@ package ssm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
@@ -120,6 +121,90 @@ func addOperationDescribeParametersMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// DescribeParametersAPIClient is a client that implements the DescribeParameters
+// operation.
+type DescribeParametersAPIClient interface {
+	DescribeParameters(context.Context, *DescribeParametersInput, ...func(*Options)) (*DescribeParametersOutput, error)
+}
+
+var _ DescribeParametersAPIClient = (*Client)(nil)
+
+// DescribeParametersPaginatorOptions is the paginator options for
+// DescribeParameters
+type DescribeParametersPaginatorOptions struct {
+	// The maximum number of items to return for this call. The call also returns a
+	// token that you can specify in a subsequent call to get the next set of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeParametersPaginator is a paginator for DescribeParameters
+type DescribeParametersPaginator struct {
+	options   DescribeParametersPaginatorOptions
+	client    DescribeParametersAPIClient
+	params    *DescribeParametersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeParametersPaginator returns a new DescribeParametersPaginator
+func NewDescribeParametersPaginator(client DescribeParametersAPIClient, params *DescribeParametersInput, optFns ...func(*DescribeParametersPaginatorOptions)) *DescribeParametersPaginator {
+	options := DescribeParametersPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeParametersInput{}
+	}
+
+	return &DescribeParametersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeParametersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeParameters page.
+func (p *DescribeParametersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeParametersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeParameters(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeParameters(region string) *awsmiddleware.RegisterServiceMetadata {

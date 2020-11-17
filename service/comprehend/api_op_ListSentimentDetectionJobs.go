@@ -4,6 +4,7 @@ package comprehend
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
@@ -108,6 +109,95 @@ func addOperationListSentimentDetectionJobsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+// ListSentimentDetectionJobsAPIClient is a client that implements the
+// ListSentimentDetectionJobs operation.
+type ListSentimentDetectionJobsAPIClient interface {
+	ListSentimentDetectionJobs(context.Context, *ListSentimentDetectionJobsInput, ...func(*Options)) (*ListSentimentDetectionJobsOutput, error)
+}
+
+var _ ListSentimentDetectionJobsAPIClient = (*Client)(nil)
+
+// ListSentimentDetectionJobsPaginatorOptions is the paginator options for
+// ListSentimentDetectionJobs
+type ListSentimentDetectionJobsPaginatorOptions struct {
+	// The maximum number of results to return in each page. The default is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListSentimentDetectionJobsPaginator is a paginator for
+// ListSentimentDetectionJobs
+type ListSentimentDetectionJobsPaginator struct {
+	options   ListSentimentDetectionJobsPaginatorOptions
+	client    ListSentimentDetectionJobsAPIClient
+	params    *ListSentimentDetectionJobsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListSentimentDetectionJobsPaginator returns a new
+// ListSentimentDetectionJobsPaginator
+func NewListSentimentDetectionJobsPaginator(client ListSentimentDetectionJobsAPIClient, params *ListSentimentDetectionJobsInput, optFns ...func(*ListSentimentDetectionJobsPaginatorOptions)) *ListSentimentDetectionJobsPaginator {
+	options := ListSentimentDetectionJobsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListSentimentDetectionJobsInput{}
+	}
+
+	return &ListSentimentDetectionJobsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListSentimentDetectionJobsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListSentimentDetectionJobs page.
+func (p *ListSentimentDetectionJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSentimentDetectionJobsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListSentimentDetectionJobs(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListSentimentDetectionJobs(region string) *awsmiddleware.RegisterServiceMetadata {

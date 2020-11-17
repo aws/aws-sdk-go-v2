@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
@@ -111,6 +112,92 @@ func addOperationListTopicRulesMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListTopicRulesAPIClient is a client that implements the ListTopicRules
+// operation.
+type ListTopicRulesAPIClient interface {
+	ListTopicRules(context.Context, *ListTopicRulesInput, ...func(*Options)) (*ListTopicRulesOutput, error)
+}
+
+var _ ListTopicRulesAPIClient = (*Client)(nil)
+
+// ListTopicRulesPaginatorOptions is the paginator options for ListTopicRules
+type ListTopicRulesPaginatorOptions struct {
+	// The maximum number of results to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTopicRulesPaginator is a paginator for ListTopicRules
+type ListTopicRulesPaginator struct {
+	options   ListTopicRulesPaginatorOptions
+	client    ListTopicRulesAPIClient
+	params    *ListTopicRulesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTopicRulesPaginator returns a new ListTopicRulesPaginator
+func NewListTopicRulesPaginator(client ListTopicRulesAPIClient, params *ListTopicRulesInput, optFns ...func(*ListTopicRulesPaginatorOptions)) *ListTopicRulesPaginator {
+	options := ListTopicRulesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTopicRulesInput{}
+	}
+
+	return &ListTopicRulesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTopicRulesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTopicRules page.
+func (p *ListTopicRulesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTopicRulesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListTopicRules(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTopicRules(region string) *awsmiddleware.RegisterServiceMetadata {

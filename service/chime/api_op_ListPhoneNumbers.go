@@ -4,6 +4,7 @@ package chime
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
@@ -116,6 +117,92 @@ func addOperationListPhoneNumbersMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// ListPhoneNumbersAPIClient is a client that implements the ListPhoneNumbers
+// operation.
+type ListPhoneNumbersAPIClient interface {
+	ListPhoneNumbers(context.Context, *ListPhoneNumbersInput, ...func(*Options)) (*ListPhoneNumbersOutput, error)
+}
+
+var _ ListPhoneNumbersAPIClient = (*Client)(nil)
+
+// ListPhoneNumbersPaginatorOptions is the paginator options for ListPhoneNumbers
+type ListPhoneNumbersPaginatorOptions struct {
+	// The maximum number of results to return in a single call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPhoneNumbersPaginator is a paginator for ListPhoneNumbers
+type ListPhoneNumbersPaginator struct {
+	options   ListPhoneNumbersPaginatorOptions
+	client    ListPhoneNumbersAPIClient
+	params    *ListPhoneNumbersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPhoneNumbersPaginator returns a new ListPhoneNumbersPaginator
+func NewListPhoneNumbersPaginator(client ListPhoneNumbersAPIClient, params *ListPhoneNumbersInput, optFns ...func(*ListPhoneNumbersPaginatorOptions)) *ListPhoneNumbersPaginator {
+	options := ListPhoneNumbersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListPhoneNumbersInput{}
+	}
+
+	return &ListPhoneNumbersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPhoneNumbersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListPhoneNumbers page.
+func (p *ListPhoneNumbersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPhoneNumbersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListPhoneNumbers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListPhoneNumbers(region string) *awsmiddleware.RegisterServiceMetadata {

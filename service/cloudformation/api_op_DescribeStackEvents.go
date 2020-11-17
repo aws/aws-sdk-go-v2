@@ -4,6 +4,7 @@ package cloudformation
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
@@ -120,6 +121,81 @@ func addOperationDescribeStackEventsMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// DescribeStackEventsAPIClient is a client that implements the DescribeStackEvents
+// operation.
+type DescribeStackEventsAPIClient interface {
+	DescribeStackEvents(context.Context, *DescribeStackEventsInput, ...func(*Options)) (*DescribeStackEventsOutput, error)
+}
+
+var _ DescribeStackEventsAPIClient = (*Client)(nil)
+
+// DescribeStackEventsPaginatorOptions is the paginator options for
+// DescribeStackEvents
+type DescribeStackEventsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeStackEventsPaginator is a paginator for DescribeStackEvents
+type DescribeStackEventsPaginator struct {
+	options   DescribeStackEventsPaginatorOptions
+	client    DescribeStackEventsAPIClient
+	params    *DescribeStackEventsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeStackEventsPaginator returns a new DescribeStackEventsPaginator
+func NewDescribeStackEventsPaginator(client DescribeStackEventsAPIClient, params *DescribeStackEventsInput, optFns ...func(*DescribeStackEventsPaginatorOptions)) *DescribeStackEventsPaginator {
+	options := DescribeStackEventsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeStackEventsInput{}
+	}
+
+	return &DescribeStackEventsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeStackEventsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeStackEvents page.
+func (p *DescribeStackEventsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeStackEventsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.DescribeStackEvents(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeStackEvents(region string) *awsmiddleware.RegisterServiceMetadata {

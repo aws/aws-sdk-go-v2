@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
@@ -118,6 +119,93 @@ func addOperationListAttachedPoliciesMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// ListAttachedPoliciesAPIClient is a client that implements the
+// ListAttachedPolicies operation.
+type ListAttachedPoliciesAPIClient interface {
+	ListAttachedPolicies(context.Context, *ListAttachedPoliciesInput, ...func(*Options)) (*ListAttachedPoliciesOutput, error)
+}
+
+var _ ListAttachedPoliciesAPIClient = (*Client)(nil)
+
+// ListAttachedPoliciesPaginatorOptions is the paginator options for
+// ListAttachedPolicies
+type ListAttachedPoliciesPaginatorOptions struct {
+	// The maximum number of results to be returned per request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAttachedPoliciesPaginator is a paginator for ListAttachedPolicies
+type ListAttachedPoliciesPaginator struct {
+	options   ListAttachedPoliciesPaginatorOptions
+	client    ListAttachedPoliciesAPIClient
+	params    *ListAttachedPoliciesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAttachedPoliciesPaginator returns a new ListAttachedPoliciesPaginator
+func NewListAttachedPoliciesPaginator(client ListAttachedPoliciesAPIClient, params *ListAttachedPoliciesInput, optFns ...func(*ListAttachedPoliciesPaginatorOptions)) *ListAttachedPoliciesPaginator {
+	options := ListAttachedPoliciesPaginatorOptions{}
+	if params.PageSize != nil {
+		options.Limit = *params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAttachedPoliciesInput{}
+	}
+
+	return &ListAttachedPoliciesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAttachedPoliciesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAttachedPolicies page.
+func (p *ListAttachedPoliciesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAttachedPoliciesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.PageSize = limit
+
+	result, err := p.client.ListAttachedPolicies(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAttachedPolicies(region string) *awsmiddleware.RegisterServiceMetadata {

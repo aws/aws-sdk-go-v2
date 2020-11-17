@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -218,6 +219,96 @@ func addOperationDescribeSnapshotsMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// DescribeSnapshotsAPIClient is a client that implements the DescribeSnapshots
+// operation.
+type DescribeSnapshotsAPIClient interface {
+	DescribeSnapshots(context.Context, *DescribeSnapshotsInput, ...func(*Options)) (*DescribeSnapshotsOutput, error)
+}
+
+var _ DescribeSnapshotsAPIClient = (*Client)(nil)
+
+// DescribeSnapshotsPaginatorOptions is the paginator options for DescribeSnapshots
+type DescribeSnapshotsPaginatorOptions struct {
+	// The maximum number of snapshot results returned by DescribeSnapshots in
+	// paginated output. When this parameter is used, DescribeSnapshots only returns
+	// MaxResults results in a single page along with a NextToken response element. The
+	// remaining results of the initial request can be seen by sending another
+	// DescribeSnapshots request with the returned NextToken value. This value can be
+	// between 5 and 1000; if MaxResults is given a value larger than 1000, only 1000
+	// results are returned. If this parameter is not used, then DescribeSnapshots
+	// returns all results. You cannot specify this parameter and the snapshot IDs
+	// parameter in the same request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeSnapshotsPaginator is a paginator for DescribeSnapshots
+type DescribeSnapshotsPaginator struct {
+	options   DescribeSnapshotsPaginatorOptions
+	client    DescribeSnapshotsAPIClient
+	params    *DescribeSnapshotsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeSnapshotsPaginator returns a new DescribeSnapshotsPaginator
+func NewDescribeSnapshotsPaginator(client DescribeSnapshotsAPIClient, params *DescribeSnapshotsInput, optFns ...func(*DescribeSnapshotsPaginatorOptions)) *DescribeSnapshotsPaginator {
+	options := DescribeSnapshotsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeSnapshotsInput{}
+	}
+
+	return &DescribeSnapshotsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeSnapshotsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeSnapshots page.
+func (p *DescribeSnapshotsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeSnapshotsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeSnapshots(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeSnapshots(region string) *awsmiddleware.RegisterServiceMetadata {

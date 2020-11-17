@@ -4,6 +4,7 @@ package codecommit
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
@@ -114,6 +115,80 @@ func addOperationListRepositoriesMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// ListRepositoriesAPIClient is a client that implements the ListRepositories
+// operation.
+type ListRepositoriesAPIClient interface {
+	ListRepositories(context.Context, *ListRepositoriesInput, ...func(*Options)) (*ListRepositoriesOutput, error)
+}
+
+var _ ListRepositoriesAPIClient = (*Client)(nil)
+
+// ListRepositoriesPaginatorOptions is the paginator options for ListRepositories
+type ListRepositoriesPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListRepositoriesPaginator is a paginator for ListRepositories
+type ListRepositoriesPaginator struct {
+	options   ListRepositoriesPaginatorOptions
+	client    ListRepositoriesAPIClient
+	params    *ListRepositoriesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListRepositoriesPaginator returns a new ListRepositoriesPaginator
+func NewListRepositoriesPaginator(client ListRepositoriesAPIClient, params *ListRepositoriesInput, optFns ...func(*ListRepositoriesPaginatorOptions)) *ListRepositoriesPaginator {
+	options := ListRepositoriesPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListRepositoriesInput{}
+	}
+
+	return &ListRepositoriesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListRepositoriesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListRepositories page.
+func (p *ListRepositoriesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListRepositoriesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListRepositories(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListRepositories(region string) *awsmiddleware.RegisterServiceMetadata {

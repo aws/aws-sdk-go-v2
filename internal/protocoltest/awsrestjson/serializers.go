@@ -1697,6 +1697,13 @@ func awsRestjson1_serializeOpDocumentJsonListsInput(v *JsonListsInput, value smi
 		}
 	}
 
+	if v.SparseStringList != nil {
+		ok := object.Key("sparseStringList")
+		if err := awsRestjson1_serializeDocumentSparseStringList(v.SparseStringList, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.StringList != nil {
 		ok := object.Key("stringList")
 		if err := awsRestjson1_serializeDocumentStringList(v.StringList, ok); err != nil {
@@ -1793,9 +1800,58 @@ func awsRestjson1_serializeOpDocumentJsonMapsInput(v *JsonMapsInput, value smith
 	object := value.Object()
 	defer object.Close()
 
-	if v.MyMap != nil {
-		ok := object.Key("myMap")
-		if err := awsRestjson1_serializeDocumentJsonMapsInputOutputMap(v.MyMap, ok); err != nil {
+	if v.DenseBooleanMap != nil {
+		ok := object.Key("denseBooleanMap")
+		if err := awsRestjson1_serializeDocumentDenseBooleanMap(v.DenseBooleanMap, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DenseNumberMap != nil {
+		ok := object.Key("denseNumberMap")
+		if err := awsRestjson1_serializeDocumentDenseNumberMap(v.DenseNumberMap, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DenseStringMap != nil {
+		ok := object.Key("denseStringMap")
+		if err := awsRestjson1_serializeDocumentDenseStringMap(v.DenseStringMap, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DenseStructMap != nil {
+		ok := object.Key("denseStructMap")
+		if err := awsRestjson1_serializeDocumentDenseStructMap(v.DenseStructMap, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SparseBooleanMap != nil {
+		ok := object.Key("sparseBooleanMap")
+		if err := awsRestjson1_serializeDocumentSparseBooleanMap(v.SparseBooleanMap, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SparseNumberMap != nil {
+		ok := object.Key("sparseNumberMap")
+		if err := awsRestjson1_serializeDocumentSparseNumberMap(v.SparseNumberMap, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SparseStringMap != nil {
+		ok := object.Key("sparseStringMap")
+		if err := awsRestjson1_serializeDocumentSparseStringMap(v.SparseStringMap, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SparseStructMap != nil {
+		ok := object.Key("sparseStructMap")
+		if err := awsRestjson1_serializeDocumentSparseStructMap(v.SparseStructMap, ok); err != nil {
 			return err
 		}
 	}
@@ -2888,12 +2944,40 @@ func awsRestjson1_serializeOpHttpBindingsTimestampFormatHeadersInput(v *Timestam
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDocument(v smithy.Document, value smithyjson.Value) error {
-	// TODO: implement document serialization.
+func awsRestjson1_serializeDocumentDenseBooleanMap(v map[string]bool, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.Boolean(v[key])
+	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentJsonMapsInputOutputMap(v map[string]types.GreetingStruct, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentDenseNumberMap(v map[string]int32, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.Integer(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDenseStringMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDenseStructMap(v map[string]types.GreetingStruct, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2904,6 +2988,11 @@ func awsRestjson1_serializeDocumentJsonMapsInputOutputMap(v map[string]types.Gre
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDocument(v smithy.Document, value smithyjson.Value) error {
+	// TODO: implement document serialization.
 	return nil
 }
 
@@ -3016,6 +3105,53 @@ func awsRestjson1_serializeDocumentRecursiveShapesInputOutputNested2(v *types.Re
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSparseBooleanMap(v map[string]*bool, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			om.Null()
+			continue
+		}
+		om.Boolean(*v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSparseNumberMap(v map[string]*int32, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			om.Null()
+			continue
+		}
+		om.Integer(*v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSparseStructMap(v map[string]*types.GreetingStruct, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			om.Null()
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentGreetingStruct(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentStructureList(v []types.StructureListMember, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3125,6 +3261,36 @@ func awsRestjson1_serializeDocumentNestedStringList(v [][]string, value smithyjs
 		if err := awsRestjson1_serializeDocumentStringList(v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSparseStringList(v []*string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		av.String(*v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSparseStringMap(v map[string]*string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			om.Null()
+			continue
+		}
+		om.String(*v[key])
 	}
 	return nil
 }

@@ -4,6 +4,7 @@ package migrationhubconfig
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubconfig/types"
@@ -121,6 +122,95 @@ func addOperationDescribeHomeRegionControlsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+// DescribeHomeRegionControlsAPIClient is a client that implements the
+// DescribeHomeRegionControls operation.
+type DescribeHomeRegionControlsAPIClient interface {
+	DescribeHomeRegionControls(context.Context, *DescribeHomeRegionControlsInput, ...func(*Options)) (*DescribeHomeRegionControlsOutput, error)
+}
+
+var _ DescribeHomeRegionControlsAPIClient = (*Client)(nil)
+
+// DescribeHomeRegionControlsPaginatorOptions is the paginator options for
+// DescribeHomeRegionControls
+type DescribeHomeRegionControlsPaginatorOptions struct {
+	// The maximum number of filtering results to display per page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeHomeRegionControlsPaginator is a paginator for
+// DescribeHomeRegionControls
+type DescribeHomeRegionControlsPaginator struct {
+	options   DescribeHomeRegionControlsPaginatorOptions
+	client    DescribeHomeRegionControlsAPIClient
+	params    *DescribeHomeRegionControlsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeHomeRegionControlsPaginator returns a new
+// DescribeHomeRegionControlsPaginator
+func NewDescribeHomeRegionControlsPaginator(client DescribeHomeRegionControlsAPIClient, params *DescribeHomeRegionControlsInput, optFns ...func(*DescribeHomeRegionControlsPaginatorOptions)) *DescribeHomeRegionControlsPaginator {
+	options := DescribeHomeRegionControlsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeHomeRegionControlsInput{}
+	}
+
+	return &DescribeHomeRegionControlsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeHomeRegionControlsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeHomeRegionControls page.
+func (p *DescribeHomeRegionControlsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeHomeRegionControlsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeHomeRegionControls(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeHomeRegionControls(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package apigateway
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
@@ -114,6 +115,92 @@ func addOperationGetUsagePlansMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	return nil
+}
+
+// GetUsagePlansAPIClient is a client that implements the GetUsagePlans operation.
+type GetUsagePlansAPIClient interface {
+	GetUsagePlans(context.Context, *GetUsagePlansInput, ...func(*Options)) (*GetUsagePlansOutput, error)
+}
+
+var _ GetUsagePlansAPIClient = (*Client)(nil)
+
+// GetUsagePlansPaginatorOptions is the paginator options for GetUsagePlans
+type GetUsagePlansPaginatorOptions struct {
+	// The maximum number of returned results per page. The default value is 25 and the
+	// maximum value is 500.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetUsagePlansPaginator is a paginator for GetUsagePlans
+type GetUsagePlansPaginator struct {
+	options   GetUsagePlansPaginatorOptions
+	client    GetUsagePlansAPIClient
+	params    *GetUsagePlansInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetUsagePlansPaginator returns a new GetUsagePlansPaginator
+func NewGetUsagePlansPaginator(client GetUsagePlansAPIClient, params *GetUsagePlansInput, optFns ...func(*GetUsagePlansPaginatorOptions)) *GetUsagePlansPaginator {
+	options := GetUsagePlansPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetUsagePlansInput{}
+	}
+
+	return &GetUsagePlansPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetUsagePlansPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetUsagePlans page.
+func (p *GetUsagePlansPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetUsagePlansOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Position = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.GetUsagePlans(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Position
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetUsagePlans(region string) *awsmiddleware.RegisterServiceMetadata {

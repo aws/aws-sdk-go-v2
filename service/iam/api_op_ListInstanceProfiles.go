@@ -4,6 +4,7 @@ package iam
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
@@ -139,6 +140,99 @@ func addOperationListInstanceProfilesMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// ListInstanceProfilesAPIClient is a client that implements the
+// ListInstanceProfiles operation.
+type ListInstanceProfilesAPIClient interface {
+	ListInstanceProfiles(context.Context, *ListInstanceProfilesInput, ...func(*Options)) (*ListInstanceProfilesOutput, error)
+}
+
+var _ ListInstanceProfilesAPIClient = (*Client)(nil)
+
+// ListInstanceProfilesPaginatorOptions is the paginator options for
+// ListInstanceProfiles
+type ListInstanceProfilesPaginatorOptions struct {
+	// Use this only when paginating results to indicate the maximum number of items
+	// you want in the response. If additional items exist beyond the maximum you
+	// specify, the IsTruncated response element is true. If you do not include this
+	// parameter, the number of items defaults to 100. Note that IAM might return fewer
+	// results, even when there are more results available. In that case, the
+	// IsTruncated response element returns true, and Marker contains a value to
+	// include in the subsequent call that tells the service where to continue from.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListInstanceProfilesPaginator is a paginator for ListInstanceProfiles
+type ListInstanceProfilesPaginator struct {
+	options   ListInstanceProfilesPaginatorOptions
+	client    ListInstanceProfilesAPIClient
+	params    *ListInstanceProfilesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListInstanceProfilesPaginator returns a new ListInstanceProfilesPaginator
+func NewListInstanceProfilesPaginator(client ListInstanceProfilesAPIClient, params *ListInstanceProfilesInput, optFns ...func(*ListInstanceProfilesPaginatorOptions)) *ListInstanceProfilesPaginator {
+	options := ListInstanceProfilesPaginatorOptions{}
+	if params.MaxItems != nil {
+		options.Limit = *params.MaxItems
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListInstanceProfilesInput{}
+	}
+
+	return &ListInstanceProfilesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListInstanceProfilesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListInstanceProfiles page.
+func (p *ListInstanceProfilesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListInstanceProfilesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxItems = limit
+
+	result, err := p.client.ListInstanceProfiles(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListInstanceProfiles(region string) *awsmiddleware.RegisterServiceMetadata {

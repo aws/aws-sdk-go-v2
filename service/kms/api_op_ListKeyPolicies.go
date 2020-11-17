@@ -4,6 +4,7 @@ package kms
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -136,6 +137,96 @@ func addOperationListKeyPoliciesMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	return nil
+}
+
+// ListKeyPoliciesAPIClient is a client that implements the ListKeyPolicies
+// operation.
+type ListKeyPoliciesAPIClient interface {
+	ListKeyPolicies(context.Context, *ListKeyPoliciesInput, ...func(*Options)) (*ListKeyPoliciesOutput, error)
+}
+
+var _ ListKeyPoliciesAPIClient = (*Client)(nil)
+
+// ListKeyPoliciesPaginatorOptions is the paginator options for ListKeyPolicies
+type ListKeyPoliciesPaginatorOptions struct {
+	// Use this parameter to specify the maximum number of items to return. When this
+	// value is present, AWS KMS does not return more than the specified number of
+	// items, but it might return fewer. This value is optional. If you include a
+	// value, it must be between 1 and 1000, inclusive. If you do not include a value,
+	// it defaults to 100. Only one policy can be attached to a key.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListKeyPoliciesPaginator is a paginator for ListKeyPolicies
+type ListKeyPoliciesPaginator struct {
+	options   ListKeyPoliciesPaginatorOptions
+	client    ListKeyPoliciesAPIClient
+	params    *ListKeyPoliciesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListKeyPoliciesPaginator returns a new ListKeyPoliciesPaginator
+func NewListKeyPoliciesPaginator(client ListKeyPoliciesAPIClient, params *ListKeyPoliciesInput, optFns ...func(*ListKeyPoliciesPaginatorOptions)) *ListKeyPoliciesPaginator {
+	options := ListKeyPoliciesPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListKeyPoliciesInput{}
+	}
+
+	return &ListKeyPoliciesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListKeyPoliciesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListKeyPolicies page.
+func (p *ListKeyPoliciesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListKeyPoliciesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.ListKeyPolicies(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListKeyPolicies(region string) *awsmiddleware.RegisterServiceMetadata {

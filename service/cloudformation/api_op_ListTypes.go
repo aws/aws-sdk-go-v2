@@ -4,6 +4,7 @@ package cloudformation
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
@@ -154,6 +155,94 @@ func addOperationListTypesMiddlewares(stack *middleware.Stack, options Options) 
 		return err
 	}
 	return nil
+}
+
+// ListTypesAPIClient is a client that implements the ListTypes operation.
+type ListTypesAPIClient interface {
+	ListTypes(context.Context, *ListTypesInput, ...func(*Options)) (*ListTypesOutput, error)
+}
+
+var _ ListTypesAPIClient = (*Client)(nil)
+
+// ListTypesPaginatorOptions is the paginator options for ListTypes
+type ListTypesPaginatorOptions struct {
+	// The maximum number of results to be returned with a single call. If the number
+	// of available results exceeds this maximum, the response includes a NextToken
+	// value that you can assign to the NextToken request parameter to get the next set
+	// of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTypesPaginator is a paginator for ListTypes
+type ListTypesPaginator struct {
+	options   ListTypesPaginatorOptions
+	client    ListTypesAPIClient
+	params    *ListTypesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTypesPaginator returns a new ListTypesPaginator
+func NewListTypesPaginator(client ListTypesAPIClient, params *ListTypesInput, optFns ...func(*ListTypesPaginatorOptions)) *ListTypesPaginator {
+	options := ListTypesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTypesInput{}
+	}
+
+	return &ListTypesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTypesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTypes page.
+func (p *ListTypesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTypesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListTypes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTypes(region string) *awsmiddleware.RegisterServiceMetadata {

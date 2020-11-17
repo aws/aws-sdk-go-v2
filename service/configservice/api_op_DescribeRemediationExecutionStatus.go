@@ -4,6 +4,7 @@ package configservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
@@ -121,6 +122,92 @@ func addOperationDescribeRemediationExecutionStatusMiddlewares(stack *middleware
 		return err
 	}
 	return nil
+}
+
+// DescribeRemediationExecutionStatusAPIClient is a client that implements the
+// DescribeRemediationExecutionStatus operation.
+type DescribeRemediationExecutionStatusAPIClient interface {
+	DescribeRemediationExecutionStatus(context.Context, *DescribeRemediationExecutionStatusInput, ...func(*Options)) (*DescribeRemediationExecutionStatusOutput, error)
+}
+
+var _ DescribeRemediationExecutionStatusAPIClient = (*Client)(nil)
+
+// DescribeRemediationExecutionStatusPaginatorOptions is the paginator options for
+// DescribeRemediationExecutionStatus
+type DescribeRemediationExecutionStatusPaginatorOptions struct {
+	// The maximum number of RemediationExecutionStatuses returned on each page. The
+	// default is maximum. If you specify 0, AWS Config uses the default.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeRemediationExecutionStatusPaginator is a paginator for
+// DescribeRemediationExecutionStatus
+type DescribeRemediationExecutionStatusPaginator struct {
+	options   DescribeRemediationExecutionStatusPaginatorOptions
+	client    DescribeRemediationExecutionStatusAPIClient
+	params    *DescribeRemediationExecutionStatusInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeRemediationExecutionStatusPaginator returns a new
+// DescribeRemediationExecutionStatusPaginator
+func NewDescribeRemediationExecutionStatusPaginator(client DescribeRemediationExecutionStatusAPIClient, params *DescribeRemediationExecutionStatusInput, optFns ...func(*DescribeRemediationExecutionStatusPaginatorOptions)) *DescribeRemediationExecutionStatusPaginator {
+	options := DescribeRemediationExecutionStatusPaginatorOptions{}
+	if params.Limit != 0 {
+		options.Limit = params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeRemediationExecutionStatusInput{}
+	}
+
+	return &DescribeRemediationExecutionStatusPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeRemediationExecutionStatusPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeRemediationExecutionStatus page.
+func (p *DescribeRemediationExecutionStatusPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeRemediationExecutionStatusOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.Limit = p.options.Limit
+
+	result, err := p.client.DescribeRemediationExecutionStatus(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeRemediationExecutionStatus(region string) *awsmiddleware.RegisterServiceMetadata {

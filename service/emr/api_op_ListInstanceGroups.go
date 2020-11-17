@@ -4,6 +4,7 @@ package emr
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
@@ -110,6 +111,81 @@ func addOperationListInstanceGroupsMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// ListInstanceGroupsAPIClient is a client that implements the ListInstanceGroups
+// operation.
+type ListInstanceGroupsAPIClient interface {
+	ListInstanceGroups(context.Context, *ListInstanceGroupsInput, ...func(*Options)) (*ListInstanceGroupsOutput, error)
+}
+
+var _ ListInstanceGroupsAPIClient = (*Client)(nil)
+
+// ListInstanceGroupsPaginatorOptions is the paginator options for
+// ListInstanceGroups
+type ListInstanceGroupsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListInstanceGroupsPaginator is a paginator for ListInstanceGroups
+type ListInstanceGroupsPaginator struct {
+	options   ListInstanceGroupsPaginatorOptions
+	client    ListInstanceGroupsAPIClient
+	params    *ListInstanceGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListInstanceGroupsPaginator returns a new ListInstanceGroupsPaginator
+func NewListInstanceGroupsPaginator(client ListInstanceGroupsAPIClient, params *ListInstanceGroupsInput, optFns ...func(*ListInstanceGroupsPaginatorOptions)) *ListInstanceGroupsPaginator {
+	options := ListInstanceGroupsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListInstanceGroupsInput{}
+	}
+
+	return &ListInstanceGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListInstanceGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListInstanceGroups page.
+func (p *ListInstanceGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListInstanceGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	result, err := p.client.ListInstanceGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListInstanceGroups(region string) *awsmiddleware.RegisterServiceMetadata {

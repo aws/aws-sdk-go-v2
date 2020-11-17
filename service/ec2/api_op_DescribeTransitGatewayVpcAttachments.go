@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -131,6 +132,92 @@ func addOperationDescribeTransitGatewayVpcAttachmentsMiddlewares(stack *middlewa
 		return err
 	}
 	return nil
+}
+
+// DescribeTransitGatewayVpcAttachmentsAPIClient is a client that implements the
+// DescribeTransitGatewayVpcAttachments operation.
+type DescribeTransitGatewayVpcAttachmentsAPIClient interface {
+	DescribeTransitGatewayVpcAttachments(context.Context, *DescribeTransitGatewayVpcAttachmentsInput, ...func(*Options)) (*DescribeTransitGatewayVpcAttachmentsOutput, error)
+}
+
+var _ DescribeTransitGatewayVpcAttachmentsAPIClient = (*Client)(nil)
+
+// DescribeTransitGatewayVpcAttachmentsPaginatorOptions is the paginator options
+// for DescribeTransitGatewayVpcAttachments
+type DescribeTransitGatewayVpcAttachmentsPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeTransitGatewayVpcAttachmentsPaginator is a paginator for
+// DescribeTransitGatewayVpcAttachments
+type DescribeTransitGatewayVpcAttachmentsPaginator struct {
+	options   DescribeTransitGatewayVpcAttachmentsPaginatorOptions
+	client    DescribeTransitGatewayVpcAttachmentsAPIClient
+	params    *DescribeTransitGatewayVpcAttachmentsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeTransitGatewayVpcAttachmentsPaginator returns a new
+// DescribeTransitGatewayVpcAttachmentsPaginator
+func NewDescribeTransitGatewayVpcAttachmentsPaginator(client DescribeTransitGatewayVpcAttachmentsAPIClient, params *DescribeTransitGatewayVpcAttachmentsInput, optFns ...func(*DescribeTransitGatewayVpcAttachmentsPaginatorOptions)) *DescribeTransitGatewayVpcAttachmentsPaginator {
+	options := DescribeTransitGatewayVpcAttachmentsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeTransitGatewayVpcAttachmentsInput{}
+	}
+
+	return &DescribeTransitGatewayVpcAttachmentsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeTransitGatewayVpcAttachmentsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeTransitGatewayVpcAttachments page.
+func (p *DescribeTransitGatewayVpcAttachmentsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeTransitGatewayVpcAttachmentsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeTransitGatewayVpcAttachments(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeTransitGatewayVpcAttachments(region string) *awsmiddleware.RegisterServiceMetadata {

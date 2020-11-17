@@ -4,6 +4,7 @@ package dataexchange
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/dataexchange/types"
@@ -119,6 +120,89 @@ func addOperationListRevisionAssetsMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// ListRevisionAssetsAPIClient is a client that implements the ListRevisionAssets
+// operation.
+type ListRevisionAssetsAPIClient interface {
+	ListRevisionAssets(context.Context, *ListRevisionAssetsInput, ...func(*Options)) (*ListRevisionAssetsOutput, error)
+}
+
+var _ ListRevisionAssetsAPIClient = (*Client)(nil)
+
+// ListRevisionAssetsPaginatorOptions is the paginator options for
+// ListRevisionAssets
+type ListRevisionAssetsPaginatorOptions struct {
+	// The maximum number of results returned by a single call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListRevisionAssetsPaginator is a paginator for ListRevisionAssets
+type ListRevisionAssetsPaginator struct {
+	options   ListRevisionAssetsPaginatorOptions
+	client    ListRevisionAssetsAPIClient
+	params    *ListRevisionAssetsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListRevisionAssetsPaginator returns a new ListRevisionAssetsPaginator
+func NewListRevisionAssetsPaginator(client ListRevisionAssetsAPIClient, params *ListRevisionAssetsInput, optFns ...func(*ListRevisionAssetsPaginatorOptions)) *ListRevisionAssetsPaginator {
+	options := ListRevisionAssetsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListRevisionAssetsInput{}
+	}
+
+	return &ListRevisionAssetsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListRevisionAssetsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListRevisionAssets page.
+func (p *ListRevisionAssetsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListRevisionAssetsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListRevisionAssets(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListRevisionAssets(region string) *awsmiddleware.RegisterServiceMetadata {

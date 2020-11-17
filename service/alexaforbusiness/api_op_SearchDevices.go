@@ -4,6 +4,7 @@ package alexaforbusiness
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
@@ -125,6 +126,93 @@ func addOperationSearchDevicesMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	return nil
+}
+
+// SearchDevicesAPIClient is a client that implements the SearchDevices operation.
+type SearchDevicesAPIClient interface {
+	SearchDevices(context.Context, *SearchDevicesInput, ...func(*Options)) (*SearchDevicesOutput, error)
+}
+
+var _ SearchDevicesAPIClient = (*Client)(nil)
+
+// SearchDevicesPaginatorOptions is the paginator options for SearchDevices
+type SearchDevicesPaginatorOptions struct {
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so that
+	// the remaining results can be retrieved.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// SearchDevicesPaginator is a paginator for SearchDevices
+type SearchDevicesPaginator struct {
+	options   SearchDevicesPaginatorOptions
+	client    SearchDevicesAPIClient
+	params    *SearchDevicesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewSearchDevicesPaginator returns a new SearchDevicesPaginator
+func NewSearchDevicesPaginator(client SearchDevicesAPIClient, params *SearchDevicesInput, optFns ...func(*SearchDevicesPaginatorOptions)) *SearchDevicesPaginator {
+	options := SearchDevicesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &SearchDevicesInput{}
+	}
+
+	return &SearchDevicesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *SearchDevicesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next SearchDevices page.
+func (p *SearchDevicesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*SearchDevicesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.SearchDevices(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opSearchDevices(region string) *awsmiddleware.RegisterServiceMetadata {

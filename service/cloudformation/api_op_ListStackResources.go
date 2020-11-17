@@ -4,6 +4,7 @@ package cloudformation
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
@@ -123,6 +124,81 @@ func addOperationListStackResourcesMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// ListStackResourcesAPIClient is a client that implements the ListStackResources
+// operation.
+type ListStackResourcesAPIClient interface {
+	ListStackResources(context.Context, *ListStackResourcesInput, ...func(*Options)) (*ListStackResourcesOutput, error)
+}
+
+var _ ListStackResourcesAPIClient = (*Client)(nil)
+
+// ListStackResourcesPaginatorOptions is the paginator options for
+// ListStackResources
+type ListStackResourcesPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListStackResourcesPaginator is a paginator for ListStackResources
+type ListStackResourcesPaginator struct {
+	options   ListStackResourcesPaginatorOptions
+	client    ListStackResourcesAPIClient
+	params    *ListStackResourcesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListStackResourcesPaginator returns a new ListStackResourcesPaginator
+func NewListStackResourcesPaginator(client ListStackResourcesAPIClient, params *ListStackResourcesInput, optFns ...func(*ListStackResourcesPaginatorOptions)) *ListStackResourcesPaginator {
+	options := ListStackResourcesPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListStackResourcesInput{}
+	}
+
+	return &ListStackResourcesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListStackResourcesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListStackResources page.
+func (p *ListStackResourcesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListStackResourcesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListStackResources(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListStackResources(region string) *awsmiddleware.RegisterServiceMetadata {
