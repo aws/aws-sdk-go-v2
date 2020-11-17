@@ -125,9 +125,8 @@ func getURLPresignMiddlewareOptions() Options {
 				c.(*mockURLPresignInput).PresignedURL = v
 				return nil
 			},
-			PresignOperation: presignURL,
 		},
-		PresignClient: mockURLPresigner{},
+		Presigner: &mockURLPresigner{},
 	}
 }
 
@@ -139,7 +138,7 @@ type mockURLPresignInput struct {
 
 type mockURLPresigner struct{}
 
-func presignURL(ctx context.Context, client interface{}, srcRegion string, params interface{}) (
+func (*mockURLPresigner) PresignURL(ctx context.Context, srcRegion string, params interface{}) (
 	req *v4.PresignedHTTPRequest, err error,
 ) {
 	in := params.(*mockURLPresignInput)
