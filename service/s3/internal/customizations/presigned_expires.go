@@ -11,11 +11,12 @@ import (
 )
 
 // AddExpiresOnPresignedURL  represents a build middleware used to assign
-// expiration on a presigned URL
+// expiration on a presigned URL.
 type AddExpiresOnPresignedURL struct {
 
 	// Expires is time.Duration within which presigned url should be expired.
 	// This should be the duration in seconds the presigned URL should be considered valid for.
+	// By default the S3 presigned url expires in 15 minutes ie. 900 seconds.
 	Expires time.Duration
 }
 
@@ -30,7 +31,8 @@ func (m *AddExpiresOnPresignedURL) HandleBuild(ctx context.Context, in middlewar
 ) {
 	// if expiration is unset skip this middleware
 	if m.Expires == 0 {
-		return next.HandleBuild(ctx, in)
+		// default to 15 * time.Minutes
+		m.Expires = 15 * time.Minute
 	}
 
 	req, ok := in.Request.(*smithyhttp.Request)

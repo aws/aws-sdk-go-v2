@@ -52,9 +52,17 @@ import software.amazon.smithy.utils.IoUtils;
 import software.amazon.smithy.utils.MapUtils;
 import software.amazon.smithy.utils.SetUtils;
 
+/**
+ * PresignURLAutoFill represents a runtime plugin integration class
+ * used generate customization to autofill a presign url as
+ * an unexported serialized input member
+ */
 public class PresignURLAutoFill implements GoIntegration {
-    private static final Logger LOGGER = Logger.getLogger(PresignURLAutoFill.class.getName());
-    private static final Map<ShapeId, Set<ShapeId>> SERVICE_TO_OPERATION_MAP = MapUtils.of(
+    /**
+     * Map of service shape to Set of operation shapes that need to have this
+     * presigned url auto fill customization.
+     */
+    public static final Map<ShapeId, Set<ShapeId>> SERVICE_TO_OPERATION_MAP = MapUtils.of(
             ShapeId.from("com.amazonaws.rds#AmazonRDSv19"), SetUtils.of(
                     ShapeId.from("com.amazonaws.rds#CopyDBSnapshot"),
                     ShapeId.from("com.amazonaws.rds#CreateDBInstanceReadReplica"),
@@ -66,6 +74,7 @@ public class PresignURLAutoFill implements GoIntegration {
 
             // TODO other services
     );
+    private static final Logger LOGGER = Logger.getLogger(PresignURLAutoFill.class.getName());
     private final List<RuntimeClientPlugin> runtimeClientPlugins = new ArrayList<>();
 
     private static void writeMemberSetter(
@@ -118,51 +127,6 @@ public class PresignURLAutoFill implements GoIntegration {
                 });
     }
 
-    private static void writePresignOperationAccessor(
-            GoWriter writer,
-            SymbolProvider symbolprovider,
-            OperationShape operation,
-            StructureShape input
-    ) {
-        Symbol operationSymbol = symbolprovider.toSymbol(operation);
-        Symbol inputSymbol = symbolprovider.toSymbol(input);
-
-        Symbol removeMiddleware = SymbolUtils.createValueSymbolBuilder("RemoveMiddleware",
-                AwsCustomGoDependency.PRESIGNEDURL_CUSTOMIZATION).build();
-
-        writer.openBlock(
-                "func $L(ctx context.Context, client interface{}, region string, params interface{}) "
-                        + "(req *v4.PresignedHTTPRequest, err error) {", "}",
-                presignFuncName(operationSymbol.getName(), false),
-                () -> {
-                    writer.addUseImports(SmithyGoDependency.FMT);
-                    // check input
-                    writer.write("input, ok := params.($P)", inputSymbol);
-                    writer.openBlock("if !ok {", "}", () -> {
-                        writer.write("return req, fmt.Errorf(\"expect $P type, got %T\", params)", inputSymbol);
-                    });
-
-                    // check client
-                    writer.write("c, ok := client.(*PresignClient)");
-                    writer.openBlock("if !ok {", "}", () -> {
-                        writer.write("return req, fmt.Errorf(\"expect *PresignClient type, got %T\", client)");
-                    });
-
-                    // generate client options
-                    writer.openBlock("optFn := func(o *Options) {", "}", () -> {
-                        writer.write("o.Region = region");
-                        writer.write("o.APIOptions = append(o.APIOptions, $T)", removeMiddleware);
-                    });
-
-                    // getPresignAPIOptions
-                    writer.write("presignOptFn := WithPresignClientFromClientOptions(optFn)");
-
-                    // call the exported function
-                    writer.write("return c.$L(ctx, input, presignOptFn)",
-                            presignFuncName(operationSymbol.getName(), true));
-                });
-    }
-
     private static String addPresignMiddlewareFuncName(String operationName) {
         return String.format("add%sPresignURLMiddleware", operationName);
     }
@@ -179,8 +143,12 @@ public class PresignURLAutoFill implements GoIntegration {
         return String.format("copy%sForPresign", inputName);
     }
 
-    private static String presignFuncName(String operationName, boolean exported) {
-        return exported ? String.format("Presign%s", operationName) : String.format("presign%s", operationName);
+    private static String presignFuncName(String operationName) {
+        return String.format("Presign%s", operationName);
+    }
+
+    private static String autofillPresignClient(String operationName) {
+        return String.format("presignAutoFill%sClient", operationName);
     }
 
     /**
@@ -272,10 +240,12 @@ public class PresignURLAutoFill implements GoIntegration {
 
                 // Members used by the customization need abstract getter and setters
                 writeMemberAccessor(writer, symbolProvider, operation, input);
-                writePresignOperationAccessor(writer, symbolProvider, operation, input);
 
                 // Generate the presign client
                 writePresignClientCustomization(writer, settings, model, symbolProvider, operation, input);
+
+                // Generate the autofill presign client and its PresignURL method
+                writeAutofillPresignClient(writer, symbolProvider, operation, input);
             });
 
             goDelegator.useShapeTestWriter(operation, (writer) -> {
@@ -395,22 +365,69 @@ public class PresignURLAutoFill implements GoIntegration {
                 () -> {
                     writer.openBlock("return $T(stack, $T{", "})", addMiddleware, addMiddlewareOptions, () -> {
                         writer.openBlock("Accessor: $T{", "},", parameterAccessor, () -> {
-                            writer.write("GetPresignedURL: $L,",
+                            writer.write("GetPresignedURL: $L, \n",
                                     getterFuncName(operationSymbol.getName(), presignURLMember));
-                            writer.write("GetSourceRegion: $L,",
+                            writer.write("GetSourceRegion: $L, \n",
                                     getterFuncName(operationSymbol.getName(), srcRegionMember));
-                            writer.write("CopyInput: $L,", copyInputFuncName(inputSymbol.getName()));
-                            writer.write("SetDestinationRegion: $L,",
+                            writer.write("CopyInput: $L, \n", copyInputFuncName(inputSymbol.getName()));
+                            writer.write("SetDestinationRegion: $L,\n",
                                     setterFuncName(operationSymbol.getName(), dstRegionMember));
-                            writer.write("SetPresignedURL: $L,",
+                            writer.write("SetPresignedURL: $L, \n",
                                     setterFuncName(operationSymbol.getName(), presignURLMember));
-                            writer.write("PresignOperation: $L,",
-                                    presignFuncName(operationSymbol.getName(), false));
                         });
-                        // Replace with type wrapping presigner for generic signature
-                        writer.write("PresignClient: NewPresignClient(options),");
+                        writer.write("Presigner: &$L{ client: NewPresignClient(New(options))}, \n",
+                                autofillPresignClient(operationSymbol.getName()));
                     });
                 });
+    }
+
+
+    private void writeAutofillPresignClient(
+            GoWriter writer,
+            SymbolProvider symbolprovider,
+            OperationShape operation,
+            StructureShape input
+    ) {
+        Symbol operationSymbol = symbolprovider.toSymbol(operation);
+        Symbol inputSymbol = symbolprovider.toSymbol(input);
+        Symbol removeMiddleware = SymbolUtils.createValueSymbolBuilder("RemoveMiddleware",
+                AwsCustomGoDependency.PRESIGNEDURL_CUSTOMIZATION).build();
+
+        // generate autofill presign client
+        writer.openBlock("type $L struct {", "}",
+                autofillPresignClient(operationSymbol.getName()), () -> {
+                    writer.write("client *PresignClient");
+                });
+
+        writer.write("");
+
+        // generate PresignURL method that satisfies URLPresigner interface of middleware
+        writer.writeDocs("PresignURL is a middleware accessor that satisfies URLPresigner interface.");
+        writer.openBlock("func (c *$L) PresignURL(ctx context.Context, srcRegion string, params interface{}) "
+                        + "(*v4.PresignedHTTPRequest, error) {", "}",
+
+                autofillPresignClient(operationSymbol.getName()), () -> {
+                    writer.addUseImports(SmithyGoDependency.FMT);
+                    // check input
+                    writer.write("input, ok := params.($P)", inputSymbol);
+                    writer.openBlock("if !ok {", "}", () -> {
+                        writer.write("return nil, fmt.Errorf(\"expect $P type, got %T\", params)", inputSymbol);
+                    });
+
+                    // generate client options
+                    writer.openBlock("optFn := func(o *Options) {", "}", () -> {
+                        writer.write("o.Region = srcRegion");
+                        writer.write("o.APIOptions = append(o.APIOptions, $T)", removeMiddleware);
+                    });
+
+                    // getPresignAPIOptions
+                    writer.write("presignOptFn := WithPresignClientFromClientOptions(optFn)");
+
+                    // call the exported function
+                    writer.write("return c.client.$L(ctx, input, presignOptFn)",
+                            presignFuncName(operationSymbol.getName()));
+                });
+        writer.write("");
     }
 
     private void writePresignClientCustomizationTest(
@@ -450,4 +467,5 @@ public class PresignURLAutoFill implements GoIntegration {
 
         writer.write(template);
     }
+
 }
