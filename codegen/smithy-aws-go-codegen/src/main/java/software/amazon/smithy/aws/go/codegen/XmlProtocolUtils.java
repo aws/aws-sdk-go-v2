@@ -56,13 +56,14 @@ final class XmlProtocolUtils {
         // Traverse member shapes to get attributes
         shape.members().stream().forEach(memberShape -> {
             if (memberShape.hasTrait(XmlAttributeTrait.class)) {
-                GoValueAccessUtils.writeIfNonZeroValueMember(context, writer, memberShape, inputSrc, (operand) -> {
-                    // xml attributes should always be string
-                    String dest = "av";
-                    formatXmlAttributeValueAsString(context, memberShape, operand, dest);
-                    writer.write("$L = append($L, smithyxml.NewAttribute($S, $L))",
-                            attrName, attrName, getSerializedXMLMemberName(memberShape), dest);
-                });
+                GoValueAccessUtils.writeIfNonZeroValueMember(context.getModel(), context.getSymbolProvider(),
+                        writer, memberShape, inputSrc, (operand) -> {
+                            // xml attributes should always be string
+                            String dest = "av";
+                            formatXmlAttributeValueAsString(context, memberShape, operand, dest);
+                            writer.write("$L = append($L, smithyxml.NewAttribute($S, $L))",
+                                    attrName, attrName, getSerializedXMLMemberName(memberShape), dest);
+                        });
             }
         });
 
@@ -225,7 +226,9 @@ final class XmlProtocolUtils {
      * @param returnExtras the extra variables to be returned with the wrapped error check statement
      * @param returnOnEOF  the variable to return in case an EOF error occurs while initializing xml decoder
      */
-    public static void initializeXmlDecoder(GoWriter writer, String bodyLocation, String returnExtras, String returnOnEOF) {
+    public static void initializeXmlDecoder(
+            GoWriter writer, String bodyLocation, String returnExtras, String returnOnEOF
+    ) {
         // Use a ring buffer and tee reader to help in pinpointing any deserialization errors.
         writer.addUseImports(SmithyGoDependency.SMITHY_IO);
         writer.write("var buff [1024]byte");
@@ -293,12 +296,12 @@ final class XmlProtocolUtils {
                     AwsCustomGoDependency.S3_SHARED_CUSTOMIZATION
             ).build();
 
-            if (isS3Service(service)){
+            if (isS3Service(service)) {
                 // s3 service
                 writer.openBlock("errorComponents, err := $T(errorBody, $T{",
                         "})", getErrorComponentFunction, errorOptions, () -> {
-                    writer.write("UseStatusCode : true, StatusCode : response.StatusCode,");
-                });
+                            writer.write("UseStatusCode : true, StatusCode : response.StatusCode,");
+                        });
             } else {
                 // s3 control
                 writer.openBlock("errorComponents, err := $T(errorBody, $T{",
@@ -322,7 +325,7 @@ final class XmlProtocolUtils {
 
         writer.addUseImports(AwsGoDependency.AWS_MIDDLEWARE);
         writer.openBlock("if reqID := errorComponents.RequestID; len(reqID)!=0 {", "}", () -> {
-                    writer.write("awsmiddleware.SetRequestIDMetadata(metadata, reqID)");
+            writer.write("awsmiddleware.SetRequestIDMetadata(metadata, reqID)");
         });
         writer.insertTrailingNewline();
 
@@ -336,12 +339,12 @@ final class XmlProtocolUtils {
 
     // returns true if service is either s3 or s3 control and needs s3 customization
     private static boolean requiresS3Customization(ServiceShape service) {
-        String serviceId= service.expectTrait(ServiceTrait.class).getSdkId();
+        String serviceId = service.expectTrait(ServiceTrait.class).getSdkId();
         return serviceId.equalsIgnoreCase("S3") || serviceId.equalsIgnoreCase("S3 Control");
     }
 
     private static boolean isS3Service(ServiceShape service) {
-        String serviceId= service.expectTrait(ServiceTrait.class).getSdkId();
+        String serviceId = service.expectTrait(ServiceTrait.class).getSdkId();
         return serviceId.equalsIgnoreCase("S3");
     }
 }

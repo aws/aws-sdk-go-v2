@@ -74,7 +74,7 @@ final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
 
         writer.openBlock("for i := range v {", "}", () -> {
             // Serialize zero members as empty values.
-            GoValueAccessUtils.writeIfZeroValue(context, writer, member, "v[i]", () -> {
+            GoValueAccessUtils.writeIfZeroValue(context.getModel(), writer, member, "v[i]", () -> {
                 writer.write("am := array.Member()");
                 writer.write("am.Close()");
                 writer.write("continue");
@@ -105,7 +105,7 @@ final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
             writer.insertTrailingNewline();
 
             // Serialize zero values as empty values.
-            GoValueAccessUtils.writeIfZeroValue(context, writer, shape.getValue(), "v[i]", () -> {
+            GoValueAccessUtils.writeIfZeroValue(context.getModel(), writer, shape.getValue(), "v[i]", () -> {
                 writer.write("entry.Close()");
                 writer.write("continue");
             });
@@ -149,17 +149,18 @@ final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
 
             writer.addUseImports(SmithyGoDependency.SMITHY_XML);
 
-            GoValueAccessUtils.writeIfNonZeroValueMember(context, writer, member, "v", (operand) -> {
-                XmlProtocolUtils.generateXMLStartElement(context, member, "root", "v");
+            GoValueAccessUtils.writeIfNonZeroValueMember(context.getModel(), context.getSymbolProvider(), writer,
+                    member, "v", (operand) -> {
+                        XmlProtocolUtils.generateXMLStartElement(context, member, "root", "v");
 
-                // check if member shape has flattened trait
-                if (member.hasTrait(XmlFlattenedTrait.class)) {
-                    writer.write("el := value.FlattenedElement($L)", "root");
-                } else {
-                    writer.write("el := value.MemberElement($L)", "root");
-                }
-                target.accept(getMemberSerVisitor(member, operand, "el"));
-            });
+                        // check if member shape has flattened trait
+                        if (member.hasTrait(XmlFlattenedTrait.class)) {
+                            writer.write("el := value.FlattenedElement($L)", "root");
+                        } else {
+                            writer.write("el := value.MemberElement($L)", "root");
+                        }
+                        target.accept(getMemberSerVisitor(member, operand, "el"));
+                    });
 
             writer.insertTrailingNewline();
         }
