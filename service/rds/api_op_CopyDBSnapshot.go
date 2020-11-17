@@ -281,34 +281,39 @@ func setCopyDBSnapshotdestinationRegion(params interface{}, value string) error 
 	input.destinationRegion = &value
 	return nil
 }
-func presignCopyDBSnapshot(ctx context.Context, client interface{}, region string, params interface{}) (req *v4.PresignedHTTPRequest, err error) {
-	input, ok := params.(*CopyDBSnapshotInput)
-	if !ok {
-		return req, fmt.Errorf("expect *CopyDBSnapshotInput type, got %T", params)
-	}
-	c, ok := client.(*PresignClient)
-	if !ok {
-		return req, fmt.Errorf("expect *PresignClient type, got %T", client)
-	}
-	optFn := func(o *Options) {
-		o.Region = region
-		o.APIOptions = append(o.APIOptions, presignedurlcust.RemoveMiddleware)
-	}
-	presignOptFn := WithPresignClientFromClientOptions(optFn)
-	return c.PresignCopyDBSnapshot(ctx, input, presignOptFn)
-}
 func addCopyDBSnapshotPresignURLMiddleware(stack *middleware.Stack, options Options) error {
 	return presignedurlcust.AddMiddleware(stack, presignedurlcust.Options{
 		Accessor: presignedurlcust.ParameterAccessor{
-			GetPresignedURL:      getCopyDBSnapshotPreSignedUrl,
-			GetSourceRegion:      getCopyDBSnapshotSourceRegion,
-			CopyInput:            copyCopyDBSnapshotInputForPresign,
+			GetPresignedURL: getCopyDBSnapshotPreSignedUrl,
+
+			GetSourceRegion: getCopyDBSnapshotSourceRegion,
+
+			CopyInput: copyCopyDBSnapshotInputForPresign,
+
 			SetDestinationRegion: setCopyDBSnapshotdestinationRegion,
-			SetPresignedURL:      setCopyDBSnapshotPreSignedUrl,
-			PresignOperation:     presignCopyDBSnapshot,
+
+			SetPresignedURL: setCopyDBSnapshotPreSignedUrl,
 		},
-		PresignClient: NewPresignClient(options),
+		Presigner: &presignAutoFillCopyDBSnapshotClient{client: NewPresignClient(New(options))},
 	})
+}
+
+type presignAutoFillCopyDBSnapshotClient struct {
+	client *PresignClient
+}
+
+// PresignURL is a middleware accessor that satisfies URLPresigner interface.
+func (c *presignAutoFillCopyDBSnapshotClient) PresignURL(ctx context.Context, srcRegion string, params interface{}) (*v4.PresignedHTTPRequest, error) {
+	input, ok := params.(*CopyDBSnapshotInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *CopyDBSnapshotInput type, got %T", params)
+	}
+	optFn := func(o *Options) {
+		o.Region = srcRegion
+		o.APIOptions = append(o.APIOptions, presignedurlcust.RemoveMiddleware)
+	}
+	presignOptFn := WithPresignClientFromClientOptions(optFn)
+	return c.client.PresignCopyDBSnapshot(ctx, input, presignOptFn)
 }
 
 func newServiceMetadataMiddleware_opCopyDBSnapshot(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -322,7 +327,7 @@ func newServiceMetadataMiddleware_opCopyDBSnapshot(region string) *awsmiddleware
 
 // PresignCopyDBSnapshot is used to generate a presigned HTTP Request which
 // contains presigned URL, signed headers and HTTP method used.
-func (c *PresignClient) PresignCopyDBSnapshot(ctx context.Context, params *CopyDBSnapshotInput, optFns ...func(*PresignOptions)) (req *v4.PresignedHTTPRequest, err error) {
+func (c *PresignClient) PresignCopyDBSnapshot(ctx context.Context, params *CopyDBSnapshotInput, optFns ...func(*PresignOptions)) (*v4.PresignedHTTPRequest, error) {
 	if params == nil {
 		params = &CopyDBSnapshotInput{}
 	}
@@ -330,21 +335,24 @@ func (c *PresignClient) PresignCopyDBSnapshot(ctx context.Context, params *CopyD
 	for _, fn := range optFns {
 		fn(&presignOptions)
 	}
-	if presignOptions.Presigner != nil {
-		c = NewPresignClientWrapper(c.client, func(o *PresignOptions) { o.Presigner = presignOptions.Presigner })
+	if len(optFns) != 0 {
+		c = NewPresignClient(c.client, optFns...)
 	}
-	clientOptFns := presignOptions.ClientOptions
+
+	clientOptFns := make([]func(o *Options), 0)
 	clientOptFns = append(clientOptFns, func(o *Options) {
 		o.HTTPClient = &smithyhttp.NopClient{}
 	})
+
 	ctx = presignedurlcust.WithIsPresigning(ctx)
 	result, _, err := c.client.invokeOperation(ctx, "CopyDBSnapshot", params, clientOptFns,
 		addOperationCopyDBSnapshotMiddlewares,
 		c.convertToPresignMiddleware,
 	)
 	if err != nil {
-		return req, err
+		return nil, err
 	}
+
 	out := result.(*v4.PresignedHTTPRequest)
 	return out, nil
 }

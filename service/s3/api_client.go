@@ -278,7 +278,8 @@ type PresignOptions struct {
 	Presigner HTTPPresignerV4
 
 	// Expires sets the expiration duration for the generated presign url. This should
-	// be the duration in seconds the presigned URL should be considered valid for.
+	// be the duration in seconds the presigned URL should be considered valid for. If
+	// not set or set to zero, presign url would default to expire after 900 seconds.
 	Expires time.Duration
 }
 
@@ -313,48 +314,23 @@ type PresignClient struct {
 	expires   time.Duration
 }
 
-func newPresignClient(client *Client, options PresignOptions) *PresignClient {
-	if options.Presigner == nil {
-		options.Presigner = v4.NewSigner()
-	}
-	return &PresignClient{
-		client:    client,
-		presigner: options.Presigner,
-		expires:   options.Expires,
-	}
-}
-
-// NewPresignClient generates a presign client using provided Client options and
+// NewPresignClient generates a presign client using provided API Client and
 // presign options
-func NewPresignClient(options Options, optFns ...func(*PresignOptions)) *PresignClient {
-	var presignOptions PresignOptions
-	for _, fn := range optFns {
-		fn(&presignOptions)
-	}
-	client := New(options, presignOptions.ClientOptions...)
-	return newPresignClient(client, presignOptions)
-}
-
-// NewPresignClientWrapper generates a presign client using provided API Client and
-// presign options
-func NewPresignClientWrapper(c *Client, optFns ...func(*PresignOptions)) *PresignClient {
+func NewPresignClient(c *Client, optFns ...func(*PresignOptions)) *PresignClient {
 	var presignOptions PresignOptions
 	for _, fn := range optFns {
 		fn(&presignOptions)
 	}
 	client := copyAPIClient(c, presignOptions.ClientOptions...)
-	return newPresignClient(client, presignOptions)
-}
-
-// NewPresignClientFromConfig generates a presign client using provided AWS config
-// and presign options
-func NewPresignClientFromConfig(cfg aws.Config, optFns ...func(*PresignOptions)) *PresignClient {
-	var presignOptions PresignOptions
-	for _, fn := range optFns {
-		fn(&presignOptions)
+	if presignOptions.Presigner == nil {
+		presignOptions.Presigner = v4.NewSigner()
 	}
-	client := NewFromConfig(cfg, presignOptions.ClientOptions...)
-	return newPresignClient(client, presignOptions)
+
+	return &PresignClient{
+		client:    client,
+		presigner: presignOptions.Presigner,
+		expires:   presignOptions.Expires,
+	}
 }
 
 func copyAPIClient(c *Client, optFns ...func(*Options)) *Client {
@@ -369,12 +345,11 @@ func (c *PresignClient) convertToPresignMiddleware(stack *middleware.Stack, opti
 	if err != nil {
 		return err
 	}
-	if c.expires != 0 {
-		// add middleware to set expiration for s3 presigned url
-		err = stack.Build.Add(&s3cust.AddExpiresOnPresignedURL{Expires: c.expires}, middleware.After)
-		if err != nil {
-			return err
-		}
+	// add middleware to set expiration for s3 presigned url, if expiration is set to
+	// 0, this middleware sets a default expiration of 900 seconds
+	err = stack.Build.Add(&s3cust.AddExpiresOnPresignedURL{Expires: c.expires}, middleware.After)
+	if err != nil {
+		return err
 	}
 	return nil
 }

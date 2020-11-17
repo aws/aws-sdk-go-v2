@@ -238,34 +238,39 @@ func setCopySnapshotdestinationRegion(params interface{}, value string) error {
 	input.destinationRegion = &value
 	return nil
 }
-func presignCopySnapshot(ctx context.Context, client interface{}, region string, params interface{}) (req *v4.PresignedHTTPRequest, err error) {
-	input, ok := params.(*CopySnapshotInput)
-	if !ok {
-		return req, fmt.Errorf("expect *CopySnapshotInput type, got %T", params)
-	}
-	c, ok := client.(*PresignClient)
-	if !ok {
-		return req, fmt.Errorf("expect *PresignClient type, got %T", client)
-	}
-	optFn := func(o *Options) {
-		o.Region = region
-		o.APIOptions = append(o.APIOptions, presignedurlcust.RemoveMiddleware)
-	}
-	presignOptFn := WithPresignClientFromClientOptions(optFn)
-	return c.PresignCopySnapshot(ctx, input, presignOptFn)
-}
 func addCopySnapshotPresignURLMiddleware(stack *middleware.Stack, options Options) error {
 	return presignedurlcust.AddMiddleware(stack, presignedurlcust.Options{
 		Accessor: presignedurlcust.ParameterAccessor{
-			GetPresignedURL:      getCopySnapshotPresignedUrl,
-			GetSourceRegion:      getCopySnapshotSourceRegion,
-			CopyInput:            copyCopySnapshotInputForPresign,
+			GetPresignedURL: getCopySnapshotPresignedUrl,
+
+			GetSourceRegion: getCopySnapshotSourceRegion,
+
+			CopyInput: copyCopySnapshotInputForPresign,
+
 			SetDestinationRegion: setCopySnapshotdestinationRegion,
-			SetPresignedURL:      setCopySnapshotPresignedUrl,
-			PresignOperation:     presignCopySnapshot,
+
+			SetPresignedURL: setCopySnapshotPresignedUrl,
 		},
-		PresignClient: NewPresignClient(options),
+		Presigner: &presignAutoFillCopySnapshotClient{client: NewPresignClient(New(options))},
 	})
+}
+
+type presignAutoFillCopySnapshotClient struct {
+	client *PresignClient
+}
+
+// PresignURL is a middleware accessor that satisfies URLPresigner interface.
+func (c *presignAutoFillCopySnapshotClient) PresignURL(ctx context.Context, srcRegion string, params interface{}) (*v4.PresignedHTTPRequest, error) {
+	input, ok := params.(*CopySnapshotInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *CopySnapshotInput type, got %T", params)
+	}
+	optFn := func(o *Options) {
+		o.Region = srcRegion
+		o.APIOptions = append(o.APIOptions, presignedurlcust.RemoveMiddleware)
+	}
+	presignOptFn := WithPresignClientFromClientOptions(optFn)
+	return c.client.PresignCopySnapshot(ctx, input, presignOptFn)
 }
 
 func newServiceMetadataMiddleware_opCopySnapshot(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -279,7 +284,7 @@ func newServiceMetadataMiddleware_opCopySnapshot(region string) *awsmiddleware.R
 
 // PresignCopySnapshot is used to generate a presigned HTTP Request which contains
 // presigned URL, signed headers and HTTP method used.
-func (c *PresignClient) PresignCopySnapshot(ctx context.Context, params *CopySnapshotInput, optFns ...func(*PresignOptions)) (req *v4.PresignedHTTPRequest, err error) {
+func (c *PresignClient) PresignCopySnapshot(ctx context.Context, params *CopySnapshotInput, optFns ...func(*PresignOptions)) (*v4.PresignedHTTPRequest, error) {
 	if params == nil {
 		params = &CopySnapshotInput{}
 	}
@@ -287,21 +292,24 @@ func (c *PresignClient) PresignCopySnapshot(ctx context.Context, params *CopySna
 	for _, fn := range optFns {
 		fn(&presignOptions)
 	}
-	if presignOptions.Presigner != nil {
-		c = NewPresignClientWrapper(c.client, func(o *PresignOptions) { o.Presigner = presignOptions.Presigner })
+	if len(optFns) != 0 {
+		c = NewPresignClient(c.client, optFns...)
 	}
-	clientOptFns := presignOptions.ClientOptions
+
+	clientOptFns := make([]func(o *Options), 0)
 	clientOptFns = append(clientOptFns, func(o *Options) {
 		o.HTTPClient = &smithyhttp.NopClient{}
 	})
+
 	ctx = presignedurlcust.WithIsPresigning(ctx)
 	result, _, err := c.client.invokeOperation(ctx, "CopySnapshot", params, clientOptFns,
 		addOperationCopySnapshotMiddlewares,
 		c.convertToPresignMiddleware,
 	)
 	if err != nil {
-		return req, err
+		return nil, err
 	}
+
 	out := result.(*v4.PresignedHTTPRequest)
 	return out, nil
 }

@@ -428,7 +428,7 @@ func addPutObjectUpdateEndpoint(stack *middleware.Stack, options Options) error 
 
 // PresignPutObject is used to generate a presigned HTTP Request which contains
 // presigned URL, signed headers and HTTP method used.
-func (c *PresignClient) PresignPutObject(ctx context.Context, params *PutObjectInput, optFns ...func(*PresignOptions)) (req *v4.PresignedHTTPRequest, err error) {
+func (c *PresignClient) PresignPutObject(ctx context.Context, params *PutObjectInput, optFns ...func(*PresignOptions)) (*v4.PresignedHTTPRequest, error) {
 	if params == nil {
 		params = &PutObjectInput{}
 	}
@@ -436,21 +436,29 @@ func (c *PresignClient) PresignPutObject(ctx context.Context, params *PutObjectI
 	for _, fn := range optFns {
 		fn(&presignOptions)
 	}
-	if presignOptions.Presigner != nil {
-		c = NewPresignClientWrapper(c.client, func(o *PresignOptions) { o.Presigner = presignOptions.Presigner })
+	if len(optFns) != 0 {
+		c = NewPresignClient(c.client, optFns...)
 	}
-	clientOptFns := presignOptions.ClientOptions
+
+	clientOptFns := make([]func(o *Options), 0)
 	clientOptFns = append(clientOptFns, func(o *Options) {
 		o.HTTPClient = &smithyhttp.NopClient{}
 	})
+
 	ctx = presignedurlcust.WithIsPresigning(ctx)
 	result, _, err := c.client.invokeOperation(ctx, "PutObject", params, clientOptFns,
 		addOperationPutObjectMiddlewares,
 		c.convertToPresignMiddleware,
+		addPutObjectPayloadAsUnsigned,
 	)
 	if err != nil {
-		return req, err
+		return nil, err
 	}
+
 	out := result.(*v4.PresignedHTTPRequest)
 	return out, nil
+}
+
+func addPutObjectPayloadAsUnsigned(stack *middleware.Stack, options Options) error {
+	return v4.AddUnsignedPayloadMiddleware(stack)
 }

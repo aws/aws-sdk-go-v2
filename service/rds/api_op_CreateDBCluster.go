@@ -465,34 +465,39 @@ func setCreateDBClusterdestinationRegion(params interface{}, value string) error
 	input.destinationRegion = &value
 	return nil
 }
-func presignCreateDBCluster(ctx context.Context, client interface{}, region string, params interface{}) (req *v4.PresignedHTTPRequest, err error) {
-	input, ok := params.(*CreateDBClusterInput)
-	if !ok {
-		return req, fmt.Errorf("expect *CreateDBClusterInput type, got %T", params)
-	}
-	c, ok := client.(*PresignClient)
-	if !ok {
-		return req, fmt.Errorf("expect *PresignClient type, got %T", client)
-	}
-	optFn := func(o *Options) {
-		o.Region = region
-		o.APIOptions = append(o.APIOptions, presignedurlcust.RemoveMiddleware)
-	}
-	presignOptFn := WithPresignClientFromClientOptions(optFn)
-	return c.PresignCreateDBCluster(ctx, input, presignOptFn)
-}
 func addCreateDBClusterPresignURLMiddleware(stack *middleware.Stack, options Options) error {
 	return presignedurlcust.AddMiddleware(stack, presignedurlcust.Options{
 		Accessor: presignedurlcust.ParameterAccessor{
-			GetPresignedURL:      getCreateDBClusterPreSignedUrl,
-			GetSourceRegion:      getCreateDBClusterSourceRegion,
-			CopyInput:            copyCreateDBClusterInputForPresign,
+			GetPresignedURL: getCreateDBClusterPreSignedUrl,
+
+			GetSourceRegion: getCreateDBClusterSourceRegion,
+
+			CopyInput: copyCreateDBClusterInputForPresign,
+
 			SetDestinationRegion: setCreateDBClusterdestinationRegion,
-			SetPresignedURL:      setCreateDBClusterPreSignedUrl,
-			PresignOperation:     presignCreateDBCluster,
+
+			SetPresignedURL: setCreateDBClusterPreSignedUrl,
 		},
-		PresignClient: NewPresignClient(options),
+		Presigner: &presignAutoFillCreateDBClusterClient{client: NewPresignClient(New(options))},
 	})
+}
+
+type presignAutoFillCreateDBClusterClient struct {
+	client *PresignClient
+}
+
+// PresignURL is a middleware accessor that satisfies URLPresigner interface.
+func (c *presignAutoFillCreateDBClusterClient) PresignURL(ctx context.Context, srcRegion string, params interface{}) (*v4.PresignedHTTPRequest, error) {
+	input, ok := params.(*CreateDBClusterInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *CreateDBClusterInput type, got %T", params)
+	}
+	optFn := func(o *Options) {
+		o.Region = srcRegion
+		o.APIOptions = append(o.APIOptions, presignedurlcust.RemoveMiddleware)
+	}
+	presignOptFn := WithPresignClientFromClientOptions(optFn)
+	return c.client.PresignCreateDBCluster(ctx, input, presignOptFn)
 }
 
 func newServiceMetadataMiddleware_opCreateDBCluster(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -506,7 +511,7 @@ func newServiceMetadataMiddleware_opCreateDBCluster(region string) *awsmiddlewar
 
 // PresignCreateDBCluster is used to generate a presigned HTTP Request which
 // contains presigned URL, signed headers and HTTP method used.
-func (c *PresignClient) PresignCreateDBCluster(ctx context.Context, params *CreateDBClusterInput, optFns ...func(*PresignOptions)) (req *v4.PresignedHTTPRequest, err error) {
+func (c *PresignClient) PresignCreateDBCluster(ctx context.Context, params *CreateDBClusterInput, optFns ...func(*PresignOptions)) (*v4.PresignedHTTPRequest, error) {
 	if params == nil {
 		params = &CreateDBClusterInput{}
 	}
@@ -514,21 +519,24 @@ func (c *PresignClient) PresignCreateDBCluster(ctx context.Context, params *Crea
 	for _, fn := range optFns {
 		fn(&presignOptions)
 	}
-	if presignOptions.Presigner != nil {
-		c = NewPresignClientWrapper(c.client, func(o *PresignOptions) { o.Presigner = presignOptions.Presigner })
+	if len(optFns) != 0 {
+		c = NewPresignClient(c.client, optFns...)
 	}
-	clientOptFns := presignOptions.ClientOptions
+
+	clientOptFns := make([]func(o *Options), 0)
 	clientOptFns = append(clientOptFns, func(o *Options) {
 		o.HTTPClient = &smithyhttp.NopClient{}
 	})
+
 	ctx = presignedurlcust.WithIsPresigning(ctx)
 	result, _, err := c.client.invokeOperation(ctx, "CreateDBCluster", params, clientOptFns,
 		addOperationCreateDBClusterMiddlewares,
 		c.convertToPresignMiddleware,
 	)
 	if err != nil {
-		return req, err
+		return nil, err
 	}
+
 	out := result.(*v4.PresignedHTTPRequest)
 	return out, nil
 }

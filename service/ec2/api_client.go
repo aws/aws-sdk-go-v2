@@ -285,47 +285,22 @@ type PresignClient struct {
 	presigner HTTPPresignerV4
 }
 
-func newPresignClient(client *Client, options PresignOptions) *PresignClient {
-	if options.Presigner == nil {
-		options.Presigner = v4.NewSigner()
-	}
-	return &PresignClient{
-		client:    client,
-		presigner: options.Presigner,
-	}
-}
-
-// NewPresignClient generates a presign client using provided Client options and
+// NewPresignClient generates a presign client using provided API Client and
 // presign options
-func NewPresignClient(options Options, optFns ...func(*PresignOptions)) *PresignClient {
-	var presignOptions PresignOptions
-	for _, fn := range optFns {
-		fn(&presignOptions)
-	}
-	client := New(options, presignOptions.ClientOptions...)
-	return newPresignClient(client, presignOptions)
-}
-
-// NewPresignClientWrapper generates a presign client using provided API Client and
-// presign options
-func NewPresignClientWrapper(c *Client, optFns ...func(*PresignOptions)) *PresignClient {
+func NewPresignClient(c *Client, optFns ...func(*PresignOptions)) *PresignClient {
 	var presignOptions PresignOptions
 	for _, fn := range optFns {
 		fn(&presignOptions)
 	}
 	client := copyAPIClient(c, presignOptions.ClientOptions...)
-	return newPresignClient(client, presignOptions)
-}
-
-// NewPresignClientFromConfig generates a presign client using provided AWS config
-// and presign options
-func NewPresignClientFromConfig(cfg aws.Config, optFns ...func(*PresignOptions)) *PresignClient {
-	var presignOptions PresignOptions
-	for _, fn := range optFns {
-		fn(&presignOptions)
+	if presignOptions.Presigner == nil {
+		presignOptions.Presigner = v4.NewSigner()
 	}
-	client := NewFromConfig(cfg, presignOptions.ClientOptions...)
-	return newPresignClient(client, presignOptions)
+
+	return &PresignClient{
+		client:    client,
+		presigner: presignOptions.Presigner,
+	}
 }
 
 func copyAPIClient(c *Client, optFns ...func(*Options)) *Client {
