@@ -297,6 +297,10 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                 addAsUnsignedPayloadName(operationSymbol.getName()),
                 SymbolUtils.createPointableSymbolBuilder("Stack", SmithyGoDependency.SMITHY_MIDDLEWARE).build(),
                 () -> {
+                    writer.addUseImports(AwsGoDependency.AWS_SIGNER_V4);
+                    writer.write("v4.RemoveContentSHA256HeaderMiddleware(stack)");
+                    writer.write("v4.RemoveComputePayloadSHA256Middleware(stack)");
+
                     writer.write("return $T(stack)", SymbolUtils.createValueSymbolBuilder(
                             "AddUnsignedPayloadMiddleware", AwsGoDependency.AWS_SIGNER_V4).build());
         });
