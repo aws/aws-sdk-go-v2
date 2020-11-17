@@ -57,7 +57,7 @@ If you set a Region using all of these techniques, the SDK uses the Region you e
 
 ###### Linux, macOS, or Unix
 
-```bash
+```
 export AWS_REGION=us-west-2
 ```
 
@@ -208,11 +208,12 @@ By default, the SDK checks the `AWS_PROFILE` environment variable to
 determine which profile to use. If no `AWS_PROFILE` variable is set,
 the SDK uses the default profile.
 
-If you have an application named `myapp` that uses the SDK, you can
-run it with the test credentials by setting the variable to
-`test-account myapp`, as shown in the following command.
+Sometimes, you may to want to use a different profile with your application.
+For example let's say you want to use the `test-account` credentials with
+your `myapp` application. You can your application and use this profile by using
+the following command:
 
-```bash
+```
 $ AWS_PROFILE=test-account myapp
 ```
 
@@ -244,7 +245,7 @@ The SDK looks for credentials in the following environment variables:
 The following examples show how you configure the environment variables.
 
 #### Linux, OS X, or Unix
-```bash
+```
 $ export AWS_ACCESS_KEY_ID=YOUR_AKID
 $ export AWS_SECRET_ACCESS_KEY=YOUR_SECRET_KEY
 $ export AWS_SESSION_TOKEN=TOKEN

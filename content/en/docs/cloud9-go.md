@@ -44,18 +44,18 @@ sdk-go %}} in your environment, as follows.
 1. Set your GOPATH environment variable. To do this, add the following code to the end of your shell profile file (for
    example, :file:`~/.bashrc` in Amazon Linux, assuming you chose the option to **Create a new instance for
    environment (EC2)**, earlier in this topic), and then save the file.
-   ```bash
+   ```
    GOPATH=~/environment/go
    export GOPATH
    ```
    After you save the file, source the :file:`~/.bashrc` file to finish setting your GOPATH environment variable. To do
    this, run the following command. (This command assumes you chose the option to **Create a new instance for
    environment (EC2)**, earlier in this topic.)
-   ```bash
+   ```
    . ~/.bashrc
    ```
 1. Run the following command to install the {{% alias sdk-go %}}.
-   ```bash
+   ```
    go get -u github.com/aws/aws-sdk-go/...
    ```
 
@@ -64,7 +64,7 @@ you chose the option to **Create a new instance for environment (EC2)**, earlier
 assume the latest stable version of Go at the time this topic was written; for more information,
 see [Downloads](https://golang.org/dl/) on The Go Programming Language website.)
 
-```bash
+```
 wget https://storage.googleapis.com/golang/go1.9.3.linux-amd64.tar.gz # Download the Go installer.
 sudo tar -C /usr/local -xzf ./go1.9.3.linux-amd64.tar.gz              # Install Go.
 rm ./go1.9.3.linux-amd64.tar.gz                                       # Delete the Go installer, as you no longer need it.
@@ -74,7 +74,7 @@ After you install Go, add the path to the Go binary to your :code:`PATH` environ
 following code to the end of your shell profile file (for example, `~/.bashrc` in Amazon Linux, assuming you chose the
 option to **Create a new instance for environment (EC2)**, earlier in this topic), and then save the file.
 
-```bash
+```
  PATH=$PATH:/usr/local/go/bin
 ```
 
@@ -82,7 +82,7 @@ After you save the file, source the `~/.bashrc` file so that the terminal can no
 referenced. To do this, run the following command. (This command assumes you chose the option to **Create a new instance
 for environment (EC2)**, earlier in this topic.)
 
-```bash
+```
 . ~/.bashrc
 ```
 
@@ -94,7 +94,7 @@ alias service=AC9 %}} development environment.
 To do this, run the following command. This command downloads a copy of all of the code examples used in the official
 AWS SDK documentation into your environment's root directory.
 
-```bash
+```
 git clone https://github.com/awsdocs/aws-doc-sdk-examples.git
 ```
 
