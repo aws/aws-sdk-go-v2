@@ -70,17 +70,17 @@ alive.
 
 See <https://golang.org/pkg/net/#Dialer.KeepAlive>
 
-We'll call this ``ConnKeepAlive`` as **time.Duration**.
+Set `KeepAlive` as **time.Duration**.
 
 #### Dialer.Timeout
 
-This setting represents the maximum amount of time a dial to wait for a connection to be created.
+This setting represents the maximum amount of time a dial will wait for a connection to be created.
 
 Default is 30 seconds.
 
 See <https://golang.org/pkg/net/#Dialer.Timeout>
 
-We'll call this ``Connect`` as **time.Duration**.
+Set `Timeout` as **time.Duration**.
 
 ## Transport
 
@@ -91,7 +91,7 @@ The `BuildableHTTPClient` provides a builder mechanics for constructing clients 
 
 If you cannot directly connect to the internet, you can use Go-supported
 environment variables (`HTTP_PROXY` / `HTTPS_PROXY`) or create a custom HTTP client to
-configure your proxy. The following example will configure the client to use `PROXY_URL` as the proxy
+configure your proxy. The following example configures the client to use `PROXY_URL` as the proxy
 endpoint:
 
 ```go
@@ -111,9 +111,9 @@ httpClient := awshttp.NewBuildableClient().WithTransportOptions(func(tr *http.Tr
 
 ### Other Settings
 
-Below are a few other `Transport` settings that can be modified to tune the HTTP client. These settings can be applied
-as shown in the example below: Additional settings not described here can be found in the
-[Transport](https://golang.org/pkg/net/http/#Transport) type documentation.
+Below are a few other `Transport` settings that can be modified to tune the HTTP client. Any additional settings not
+described here can be found in the [Transport](https://golang.org/pkg/net/http/#Transport) type documentation.
+These settings can be applied as shown in the following example:
 
 ```go
 import awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
@@ -129,8 +129,8 @@ httpClient := awshttp.NewBuildableClient().WithTransportOptions(func(tr *http.Tr
 
 #### Transport.ExpectContinueTimeout
 
-This setting represents the maximum amount of time to wait for a server's first response headers after fully writing the
-request headers, if the request has an "Expect: 100-continue" header. This time does not include the time to send the
+Ff the request has an "Expect: 100-continue" header, this setting represents the maximum amount of time to wait for a
+server's first response headers after fully writing the request headers, This time does not include the time to send the
 request header. The HTTP client sends its payload after this timeout is exhausted.
 
 Default 1 second.
@@ -140,7 +140,7 @@ proxies or third party services that take a session similar to the use of Amazon
 
 See <https://golang.org/pkg/net/http/#Transport.ExpectContinueTimeout>
 
-We'll call this ``ExpectContinue`` as **time.Duration**.
+Set `ExpectContinue` as **time.Duration**.
 
 #### Transport.IdleConnTimeout
 
@@ -150,7 +150,7 @@ Set to **0** for no limit.
 
 See <https://golang.org/pkg/net/http/#Transport.IdleConnTimeout>
 
-We'll call this ``IdleConn`` as **time.Duration**.
+Set `IdleConnTimeout` as **time.Duration**.
 
 #### Transport.MaxIdleConns
 
@@ -161,7 +161,7 @@ increasing this value is when you are seeing many connections in a short period 
 
 See <https://golang.org/pkg/net/http/#Transport.MaxIdleConns>
 
-We'll call this ``MaxAllIdleConns`` as **int**.
+Set`MaxIdleConns` as **int**.
 
 #### Transport.MaxIdleConnsPerHost
 
@@ -174,7 +174,7 @@ Set to **0** to use DefaultMaxIdleConnsPerHost (2).
 
 See <https://golang.org/pkg/net/http/#Transport.MaxIdleConnsPerHost>
 
-We'll call this ``MaxHostIdleConns`` as **int**.
+Set `MaxIdleConnsPerHost` as **int**.
 
 #### Transport.ResponseHeaderTimeout
 
@@ -190,7 +190,7 @@ Default is no timeout; wait forever.
 
 See <https://golang.org/pkg/net/http/#Transport.ResponseHeaderTimeout>
 
-We'll call this ``ResponseHeader`` as **time.Duration**.
+Set `ResponseHeaderTimeout` as **time.Duration**.
 
 #### Transport.TLSHandshakeTimeout
 
@@ -202,4 +202,4 @@ Zero means no timeout.
 
 See <https://golang.org/pkg/net/http/#Transport.TLSHandshakeTimeout>
 
-We'll call this ``TLSHandshake`` as **time.Duration**.
+Set `TLSHandshakeTimeout` as **time.Duration**.

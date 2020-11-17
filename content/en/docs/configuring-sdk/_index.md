@@ -81,8 +81,8 @@ several locations, depending on your particular use case. For
 information about obtaining credentials, see [Getting Started]({{% relref "getting-started.md" %}}).
 
 When you initialize an `aws.Config` instance using `config.LoadDefaultConfig`,
-the SDK will use its default credential chain to find AWS credentials. This
-default credential chain will look for credentials in the following order:
+the SDK uses its default credential chain to find AWS credentials. This
+default credential chain looks for credentials in the following order:
 
 1. Environment variables.
    1. Static Credentials (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`)
@@ -271,13 +271,12 @@ like so:
 cfg, err := config.LoadDefaultConfig(config.WithCredentialsProvider(customProvider))
 ```
 
-A credential provider passed in this manner will be exclusivly be used by the SDK, and no other credentials will be 
-loaded from other sources.
+If you explicitly provide credentials, as in this example, the SDK uses only those credentials.
 
 {{% pageinfo color="info" %}}
 All credential providers passed to or returned by `LoadDefaultConfig` will be wrapped in a
 [CredentialsCache]({{< apiref "aws#CredentialsCache" >}}) automatically. This allows for caching and concurrency safe 
-credential access. If you explicitly configure a provider on `aws.Config` directly you will need to wrap the provider
+credential access. If you explicitly configure a provider on `aws.Config` directly you must wrap the provider
 with this type explicitly.
 {{% /pageinfo %}}
 
@@ -312,6 +311,6 @@ alias service=STSlong %}} or credentials from encrypted storage.
   endpoint.
 
 * [processcreds]({{< apiref "credentials/processcreds" >}}) &ndash; Retrieve Credentials from an external process that
-  will be invoked via the host environments shell.
+  will be invoked by the host environment's shell.
   
 * [stscreds]({{< apiref "credentials/stscreds" >}}) &ndash; Retrieve Credentials from {{% alias service=STS %}}
