@@ -1,13 +1,14 @@
 ---
 title: "Using Sessions to Configure Service Clients in the AWS SDK for Go"
 linkTitle: "Using Sessions"
+date: "2020-11-12"
 description: "Use sessions to define configurations for service clients."
 ---
 
 In the {{% alias sdk-go %}}, a session is an object that contains configuration information for [service-clients]().
 which you use to interact with AWS services. For example, sessions can include information about the region where
 requests will be sent, which credentials to use, or additional request handlers. Whenever you create a service client,
-you must specify a session. For more information about sessions, see the {{% apiref config %}}session{{% /apiref %}}
+you must specify a session. For more information about sessions, see the [config]({{% apiref config %}})
 package in the {{% alias sdk-api %}}.
 
 Sessions can be shared across all service clients that share the same base configuration. The session is built from the
@@ -50,8 +51,8 @@ sess, err := session.NewSession()
 
 The SDK provides a default configuration that all sessions use, unless you override a field. For example, you can
 specify an AWS Region when you create a session by using the
-``aws.Config`` struct. For more information about the fields you can specify, see the {{% apiref "aws/#Config"
-%}}aws.Config{{% /apiref %}} in the {{% alias sdk-api %}}.
+``aws.Config`` struct. For more information about the fields you can specify, see the [aws.Config]({{< apiref "aws/#Config"
+>}}) in the {{% alias sdk-api %}}.
 
 ```go
 sess, err := session.NewSession(&aws.Config{ Region: aws.String("us-east-2")})

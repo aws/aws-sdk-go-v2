@@ -1,6 +1,7 @@
 ---
 title: "Resilience for this AWS Product or Service"
 linkTitle: "Resilience"
+date: "2020-11-12"
 ---
 
 The Amazon Web Services (AWS) global infrastructure is built around AWS Regions and Availability Zones.

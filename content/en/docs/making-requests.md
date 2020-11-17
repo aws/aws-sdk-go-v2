@@ -1,6 +1,7 @@
 ---
 title: "Using the AWS SDK for Go V2 with AWS Services"
 linkTitle: "Using AWS Services"
+date: "2020-11-12"
 description: "Construct service clients and make operation calls to send requests to AWS services."
 ---
 
@@ -15,7 +16,7 @@ can use. For example, after you successfully call an {{% alias service=S3 %}} cr
 action, the action returns an output struct with the bucket's location.
 
 For the list of service clients, including their methods and parameters,
-see the {{% apiref %}}{{% alias sdk-api %}}{{% /apiref %}}.
+see the [{{% alias sdk-api %}}]({{< apiref >}})
 
 ## Constructing a Service
 
@@ -152,7 +153,7 @@ and the response is received. If an error occurs during the operation,
 it will be returned. The output or resulting structure won't be valid.
 
 For example, to call the {{% alias service=S3 %}} GET Object API, use the {{% alias service=S3 %}}
-service client instance and call its {{% apiref "service/s3/#Client.GetObject" %}}GetObject{{% /apiref %}}
+service client instance and call its [GetObject]({{< apiref "service/s3/#Client.GetObject" >}})
 method:
 
 ```go

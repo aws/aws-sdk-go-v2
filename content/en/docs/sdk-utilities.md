@@ -1,6 +1,7 @@
 ---
 title: "Using the AWS SDK for Go Utilities"
 linkTitle: "SDK Utilities"
+date: "2020-11-12"
 description: "Use the AWS SDK for Go V utilities to help use AWS services."
 ---
 
@@ -81,7 +82,7 @@ fmt.Println("Item put to dynamodb", result, err)
 ```
 
 For more information about the converter utility, see the
-{{< apiref "feature/dynamodb/attribute" />}} package in the {{% alias sdk-api %}}.
+[attribute]({{< apiref "feature/dynamodb/attribute" >}}) package in the {{% alias sdk-api %}}.
 
 ## {{% alias service="EC2long" %}} Metadata
 
@@ -123,7 +124,7 @@ if err != nil {
 }
 ```
 
-For more information about the EC2 metadata utility, see the {{< apiref ec2imds />}}
+For more information about the EC2 metadata utility, see the [ec2imds]({{< apiref ec2imds >}})
 package in the {{% alias sdk-api %}}.
 
 
@@ -422,7 +423,7 @@ the optimal configuration. For example, systems with high-bandwidth
 connections can receive bigger parts and more downloads in parallel.
 
 For more information about `Downloader` and its configurations, see
-{{< apiref "feature/s3/manager/#Downloader" />}} in the {{% alias sdk-api %}}.
+[manager.Downloader]({{< apiref "feature/s3/manager/#Downloader" >}}) in the {{% alias sdk-api %}}.
 
 #### Example: Download All Objects in a Bucket
 

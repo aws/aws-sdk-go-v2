@@ -1,12 +1,13 @@
 ---
 title: "Getting Started with the AWS SDK for Go V2"
 linkTitle: "Getting Started"
+date: "2020-11-12"
 weight: 2
 ---
 
 The AWS SDK for Go requires Go 1.15 or later. You can view your current version of Go by running the following command.
 
-```bash
+```
 go version
 ```
 
@@ -23,7 +24,7 @@ for details.
 The AWS SDK for Go V2 uses Go Modules, which was a feature introduced in Go 1.11. To get started initialize your local
 project by running the following Go command.
 
-```bash
+```
 go mod init example
 ```
 
@@ -33,7 +34,7 @@ command.
 
 The following commands show how to retrieve the standard set of SDK modules that you will use in your application.
 
-```bash
+```
 go get github.com/aws/aws-sdk-go-v2
 go get github.com/aws/aws-sdk-go-v2/config
 ```
@@ -47,7 +48,7 @@ found
 following command to retrieve the module and record the dependency in your `go.mod` file. In this example we retrieve
 the Amazon S3 API client.
 
-```bash
+```
 go get github.com/aws/aws-sdk-go-v2/service/s3
 ```
 

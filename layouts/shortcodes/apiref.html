@@ -1,7 +1,6 @@
-<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/{{ .Get 0 }}" target="_blank">
-    {{- if gt (len .Inner) 0 -}}
-        {{ .Inner }}
-    {{- else -}}
-        {{ .Get 0 }}
-    {{- end -}}
-</a>
+{{- $pkgGoDev := "https://pkg.go.dev/" -}}
+{{- if (.Get 0) -}}
+    {{- print $pkgGoDev "github.com/aws/aws-sdk-go-v2/" (.Get 0) -}}
+{{- else if (.Get "smithy") -}}
+    {{- print $pkgGoDev "github.com/awslabs/smithy-go/" (.Get "smithy") -}}
+{{- end -}}
