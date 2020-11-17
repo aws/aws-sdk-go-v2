@@ -460,5 +460,7 @@ func (c *PresignClient) PresignPutObject(ctx context.Context, params *PutObjectI
 }
 
 func addPutObjectPayloadAsUnsigned(stack *middleware.Stack, options Options) error {
+	v4.RemoveContentSHA256HeaderMiddleware(stack)
+	v4.RemoveComputePayloadSHA256Middleware(stack)
 	return v4.AddUnsignedPayloadMiddleware(stack)
 }
