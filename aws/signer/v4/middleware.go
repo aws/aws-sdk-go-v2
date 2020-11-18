@@ -166,7 +166,8 @@ func AddContentSHA256HeaderMiddleware(stack *middleware.Stack) error {
 	return stack.Build.Insert(&contentSHA256Header{}, computePayloadHashMiddlewareID, middleware.After)
 }
 
-// Removes ContentSHA256HeaderMiddleware from operation middleware stack
+// RemoveContentSHA256HeaderMiddleware removes contentSHA256Header middleware
+// from the operation middleware stack
 func RemoveContentSHA256HeaderMiddleware(stack *middleware.Stack) error {
 	_, err := stack.Build.Remove((*contentSHA256Header)(nil).ID())
 	return err
