@@ -29,7 +29,7 @@ value to trigger fallback resolution to the service clients default resolution l
 override one or more endpoints seamlessly without having to handle fallback logic.
 
 If your endpoint resolver implementation returns an error other than `EndpointNotFoundError`, endpoint resolution will
-stop and the service operation will return an error to your application.
+stop and the service operation returns an error to your application.
 
 ## Examples
 

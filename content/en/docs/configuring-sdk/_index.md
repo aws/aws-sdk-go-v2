@@ -31,9 +31,9 @@ if err != nil {
 ```
 
 `config.LoadDefaultConfig()` will construct an [aws.Config]({{< apiref "aws#Config" >}})
-using the AWS shared configuration sources. This includes configuring a credential provider. configuring the region, and
-loading service specific configuration. Service clients can be constructed using the loaded `aws.Config`, providing a
-consistent pattern for constructing clients in a uniform manner.
+using the AWS shared configuration sources. This includes configuring a credential provider. configuring the AWS Region,
+and loading service specific configuration. Service clients can be constructed using the loaded `aws.Config`, providing
+a consistent pattern for constructing clients.
 
 For more information about AWS Shared Configuration see the
 [AWS Tools and SDKs Shared Configuration and Credentials Reference Guide ](https://docs.aws.amazon.com/credref/latest/refdocs/overview.html)
@@ -227,7 +227,7 @@ cfg, err := config.LoadDefaultConfig(config.WithSharedConfigProfile("test-accoun
 
 {{% pageinfo color="info" %}}
 If you specify credentials in environment variables, the SDK
-will always use those credentials, no matter which profile you specify.
+always uses those credentials, no matter which profile you specify.
 {{% /pageinfo %}}
 
 ### Environment Variables
@@ -274,10 +274,10 @@ cfg, err := config.LoadDefaultConfig(config.WithCredentialsProvider(customProvid
 If you explicitly provide credentials, as in this example, the SDK uses only those credentials.
 
 {{% pageinfo color="info" %}}
-All credential providers passed to or returned by `LoadDefaultConfig` will be wrapped in a
-[CredentialsCache]({{< apiref "aws#CredentialsCache" >}}) automatically. This allows for caching and concurrency safe 
-credential access. If you explicitly configure a provider on `aws.Config` directly you must wrap the provider
-with this type explicitly.
+All credential providers passed to or returned by `LoadDefaultConfig` are wrapped in a
+[CredentialsCache]({{< apiref "aws#CredentialsCache" >}}) automatically. This enables caching and concurrency safe 
+credential access. If you explicitly configure a provider on `aws.Config` directly you must explicitly wrap the provider
+with this type.
 {{% /pageinfo %}}
 
 #### Static Credentials

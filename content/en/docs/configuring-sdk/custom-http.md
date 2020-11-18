@@ -74,7 +74,7 @@ Set `KeepAlive` as **time.Duration**.
 
 #### Dialer.Timeout
 
-This setting represents the maximum amount of time a dial will wait for a connection to be created.
+This setting represents the maximum amount of time a dial waits for a connection to be created.
 
 Default is 30 seconds.
 
@@ -129,7 +129,7 @@ httpClient := awshttp.NewBuildableClient().WithTransportOptions(func(tr *http.Tr
 
 #### Transport.ExpectContinueTimeout
 
-Ff the request has an "Expect: 100-continue" header, this setting represents the maximum amount of time to wait for a
+If the request has an "Expect: 100-continue" header, this setting represents the maximum amount of time to wait for a
 server's first response headers after fully writing the request headers, This time does not include the time to send the
 request header. The HTTP client sends its payload after this timeout is exhausted.
 
