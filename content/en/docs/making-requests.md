@@ -97,7 +97,7 @@ client := s3.New(s3.Options{
 #### Overriding Configuration
 
 `New` can take one or more functional arguments that can mutate a client's configuration `Options` struct.
-This allows you to make specific overrides such a changing the Region or modifying service specific options
+This allows you to make specific overrides such as changing the Region or modifying service specific options
 such as {{% alias service=S3 %}} `UseAccelerate` option. For example:
 
 ```go
@@ -140,9 +140,9 @@ the service operation's response struct.
 
 ### Passing Parameters to a Service Operation
 
-Each service operation method takes a [context.Context](https://golang.org/pkg/context/#Context) values that can be
+Each service operation method takes a [context.Context](https://golang.org/pkg/context/#Context) value that can be
 used for setting request deadlines that will be honored by the SDK. In addition, each service operation will take a
-`<OperationName>Input` struct is found in the service's respective Go package. You pass in API input parameters using
+`<OperationName>Input` struct found in the service's respective Go package. You pass in API input parameters using
 the operation input struct.
 
 Operation input structures can have input parameters such as the standard Go numerics, boolean, string, map, and list
@@ -214,8 +214,8 @@ resp, err := client.GetObject(context.Background(), params, func(o *Options) {
 Each service operation has an associated output struct that contains the service's operation response members.
 The output struct follows the following naming pattern `<OperationName>Output`. Some operations may have no members
 defined for their operation output. After calling a service operation, the return `error` argument type should always
-be checked to determine if an error occurred while invoking the service operations. Errors returned can range from
-client-side input validation errors to service-side error responses returned to the client. The operations output
+be checked to determine if an error occurred while invoking the service operation. Errors returned can range from
+client-side input validation errors to service-side error responses returned to the client. The operation's output
 struct should not be accessed in the event that a non-nil error is returned by the client.
 
 For example to log an operation error and prematurely return from the calling function:
@@ -233,7 +233,7 @@ For more information on error handling, including how to inspect for specific er
 #### Responses with io.ReadCloser
 
 Some API operations return a response struct that contain an output member that is an `io.ReadCloser`. If you're making
-requests with these operations, always be sure to call `io.ReadCloser` members `Close` method after you've completed
+requests with these operations, always be sure to call `io.ReadCloser` member's `Close` method after you've completed
 reading the content.
 
 For example {{% alias service=S3 %}} `GetObject` operation returns a response
@@ -323,15 +323,15 @@ for result := range results {
 
 ## Using Operation Paginators
 
-Typically, when you retrieve a list of items, you might need to check
-the output for a token or marker to confirm whether an AWS returned all results from your request.
-If present, you use the token or marker to request the next page of results. Instead of managing these tokens or
-markers, you can use the service package's available paginator types.
+Typically, when you retrieve a list of items, you may need to check the output struct for a token or marker to confirm
+whether the AWS service returned all results from your request. If present, you use the token or marker to request the 
+next page of results. Instead of managing these tokens or markers, you can use the service package's available paginator
+types.
 
-Paginator helpers are available for support service operations. Constructing an operation paginator is using operations
-respective `New<OperationName>Paginator` found service's Go package. Paginator construct functions take the service
-`Client`, the operation's `<OperationName>Input` input parameters, and an optional set of functional arguments allowing
-for you to configure the optional pagiantor settings.
+Paginator helpers are available for supported service operations, and can be found in the service client's Go package.
+To construct a paginator for a supported operation, use the `New<OperationName>Paginator` function. Paginator construct
+functions take the service `Client`, the operation's `<OperationName>Input` input parameters, and an optional set of
+functional arguments allowing you to configure other optional paginator settings.
 
 The returned operation paginator type provides a convenient way to iterate over a paginated operation until you have
 reached the last page, or you have found the item(s) that your application was searching for. A paginator type has
