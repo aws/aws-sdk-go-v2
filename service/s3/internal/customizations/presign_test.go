@@ -1,4 +1,4 @@
-package unit_test
+package customizations_test
 
 import (
 	"bytes"
