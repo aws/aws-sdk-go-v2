@@ -254,7 +254,39 @@ if err := decoder.Decode(&myStruct); err != nil {
     return
 }
 ```
-    
+
+#### Response Metadata
+
+All service operation output structs include a `ResultMetadata` member of type 
+[middleware.Metadata]({{< apiref smithy="middleware#Metadata" >}}). `middleware.Metadata` is used by the SDK middleware
+to provide additional information from a service response that is not modeled by the service. This includes metadata
+like the `RequestID`. For example to retrieve the `RequestID` associated with a service response to assit AWS Support in
+troubleshooting a request:
+
+```go
+import "fmt"
+import "log"
+import "github.com/aws/aws-sdk-go-v2/aws/middleware"
+import "github.com/aws/aws-sdk-go-v2/service/s3"
+
+// ..
+
+resp, err := client.GetObject(context.Background(), &s3.GetObjectInput{
+	// ...
+})
+if err != nil {
+	log.Printf("error: %v", err)
+	return
+}
+
+requestID, ok := middleware.GetRequestIDMetadata(resp.ResultMetadata)
+if !ok {
+	fmt.Println("RequestID not included with request")
+}
+
+fmt.Printf("RequestID: %s\n", requestID)
+```
+
 ## Concurrently Using Service Clients
 
 You can create goroutines that concurrently use the same service client to send multiple requests. You can use a service
