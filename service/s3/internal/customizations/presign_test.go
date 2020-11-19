@@ -16,13 +16,13 @@ import (
 
 func TestPutObject_PresignURL(t *testing.T) {
 	cases := map[string]struct {
-		input                   s3.PutObjectInput
-		options                 s3.PresignOptions
-		expectPresignedURLHost  string
-		expectedRequestURILabel []string
-		expectSignedHeader      http.Header
-		expectMethod            string
-		expectError             string
+		input                  s3.PutObjectInput
+		options                s3.PresignOptions
+		expectPresignedURLHost string
+		expectRequestURIQuery  []string
+		expectSignedHeader     http.Header
+		expectMethod           string
+		expectError            string
 	}{
 		"standard case": {
 			input: s3.PutObjectInput{
@@ -31,7 +31,7 @@ func TestPutObject_PresignURL(t *testing.T) {
 				Body:   strings.NewReader("hello-world"),
 			},
 			expectPresignedURLHost: "https://mock-bucket.s3.us-west-2.amazonaws.com/mockkey?",
-			expectedRequestURILabel: []string{
+			expectRequestURIQuery: []string{
 				"X-Amz-Expires=900",
 				"X-Amz-Credential",
 				"X-Amz-Date",
@@ -52,7 +52,7 @@ func TestPutObject_PresignURL(t *testing.T) {
 				Body:   bytes.NewReader([]byte("hello-world")),
 			},
 			expectPresignedURLHost: "https://mock-bucket.s3.us-west-2.amazonaws.com/mockkey?",
-			expectedRequestURILabel: []string{
+			expectRequestURIQuery: []string{
 				"X-Amz-Expires=900",
 				"X-Amz-Credential",
 				"X-Amz-Date",
@@ -74,7 +74,7 @@ func TestPutObject_PresignURL(t *testing.T) {
 				Body:   bytes.NewBuffer([]byte(`hello-world`)),
 			},
 			expectPresignedURLHost: "https://mock-bucket.s3.us-west-2.amazonaws.com/mockkey?",
-			expectedRequestURILabel: []string{
+			expectRequestURIQuery: []string{
 				"X-Amz-Expires=900",
 				"X-Amz-Credential",
 				"X-Amz-Date",
@@ -95,7 +95,7 @@ func TestPutObject_PresignURL(t *testing.T) {
 				Body:   bytes.NewReader([]byte(``)),
 			},
 			expectPresignedURLHost: "https://mock-bucket.s3.us-west-2.amazonaws.com/mockkey?",
-			expectedRequestURILabel: []string{
+			expectRequestURIQuery: []string{
 				"X-Amz-Expires=900",
 				"X-Amz-Credential",
 				"X-Amz-Date",
@@ -114,7 +114,7 @@ func TestPutObject_PresignURL(t *testing.T) {
 				Key:    aws.String("mockkey"),
 			},
 			expectPresignedURLHost: "https://mock-bucket.s3.us-west-2.amazonaws.com/mockkey?",
-			expectedRequestURILabel: []string{
+			expectRequestURIQuery: []string{
 				"X-Amz-Expires=900",
 				"X-Amz-Credential",
 				"X-Amz-Date",
@@ -159,8 +159,8 @@ func TestPutObject_PresignURL(t *testing.T) {
 				t.Fatalf("expected presigned url to contain host %s, got %s", e, a)
 			}
 
-			if len(c.expectedRequestURILabel) != 0 {
-				for _, label := range c.expectedRequestURILabel {
+			if len(c.expectRequestURIQuery) != 0 {
+				for _, label := range c.expectRequestURIQuery {
 					if e, a := label, req.URL; !strings.Contains(a, e) {
 						t.Fatalf("expected presigned url to contain %v label in url: %v", label, req.URL)
 					}
