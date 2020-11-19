@@ -13,7 +13,7 @@ providing access to the underlying error or chain of errors. The `Unwrap` method
 handle unpacking wrapped error chains.
 
 It is important that your application check whether an error occurred after invoking a function or method that
-can return an `error` interface type. The most basic form of error handling will look similar to the following example:
+can return an `error` interface type. The most basic form of error handling looks similar to the following example:
 
 ```go
 if err != nil {
@@ -24,7 +24,7 @@ if err != nil {
 
 ## Logging Errors
 
-The simplet form of error handling is traditionally to log or print the error message before returning or exiting from
+The simplest form of error handling is traditionally to log or print the error message before returning or exiting from
 the application. For example:
 
 ```go
@@ -40,11 +40,12 @@ if err != nil {
 
 ## Service Client Errors
 
-All errors returned by service clients will be wrapped by
-[smithy.OperationError]({{% apiref smithy="#OperationError" %}}) the error interface. `OperationError` type wraps
-client errors with contextual information about the service name and operation that is associated with the underlying
-error. This information can be useful for applications that perform batches of operations to one or more services, with
-a centralized error handling mechanism. Your application can use `errors.As` to access the `OperationError` metadata.
+The SDK wraps All errors returned by service clients with the
+[smithy.OperationError]({{% apiref smithy="#OperationError" %}}) error type. `OperationError` provides contextual
+information about the service name and operation that is associated with an underlying error. This information can be
+useful for applications that perform batches of operations to one or more services, with a centralized error handling
+mechanism. Your application can use `errors.As` to access this `OperationError` metadata.
+
 For example:
 
 ```go
@@ -109,7 +110,7 @@ if err != nil {
 
 ## Retrieving Request Identifiers
 
-When working with AWS Support, you may be asked to provide request identifier that identifiers your request that you
+When working with AWS Support, you may be asked to provide the request identifier that identifiers the request you
 are attempting to troubleshoot. You can use [http.ResponseError]({{< apiref "aws/transport/http#ResponseError" >}})
 and use the `ServiceRequestID()` method to retrieve the request identifier associated with error response.
 
@@ -130,10 +131,11 @@ if err != nil {
 }
 ```
 
-### S3 Request Identifiers
+### {{% alias service=S3 %}} Request Identifiers
 
-S3 requests contain additional identifiers that can be used to assist AWS Support with troubleshooting your request.
-S3 requests can contain a `RequestId` and `HostId` pair that can be retrieved from S3 operation errors if available.
+{{% alias service=S3 %}} requests contain additional identifiers that can be used to assist AWS Support with
+troubleshooting your request. {{% alias service=S3 %}} requests can contain a `RequestId` and `HostId` pair that can be
+retrieved from {{% alias service=S3 %}} operation errors if available.
 
 For example:
 

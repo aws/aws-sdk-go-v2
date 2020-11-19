@@ -9,6 +9,6 @@ of TLS 1.2 or greater. When using the [http.BuildableClient]({{< apiref "aws/tra
 customize the SDK HTTP client, the minimum TLS value is configured as TLS 1.2.
 
 {{% pageinfo color="warning" %}}
-If your application constructs an HTTP client using a method other than the provided `BuildableClient`, you will need
-to configure your client to set the minimum TLS version to 1.2.
+If your application constructs an HTTP client using a method other than the provided `BuildableClient`, you must
+configure your client to set the minimum TLS version to 1.2.
 {{% /pageinfo %}}
