@@ -46,7 +46,7 @@ client := s3.NewFromConfig(cfg)
 
 #### Overriding Configuration
 `NewFromConfig` can take one or more functional arguments that can mutate a client's configuration `Options` struct.
-This allows you to make specific overrides such a changing the Region or modifying service specific options such as
+This allows you to make specific overrides such as changing the Region, or modifying service specific options such as
 {{% alias service=S3 %}} `UseAccelerate` option. For example:
 
 ```go
