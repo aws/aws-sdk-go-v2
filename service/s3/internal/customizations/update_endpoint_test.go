@@ -22,6 +22,7 @@ import (
 
 type s3BucketTest struct {
 	bucket string
+	key    string
 	url    string
 	err    string
 }
@@ -39,61 +40,63 @@ func TestUpdateEndpointBuild(t *testing.T) {
 			"PathStyleBucket": {
 				usePathStyle: true,
 				tests: []s3BucketTest{
-					{"abc", "https://s3.mock-region.amazonaws.com/abc", ""},
-					{"a$b$c", "https://s3.mock-region.amazonaws.com/a%24b%24c", ""},
-					{"a.b.c", "https://s3.mock-region.amazonaws.com/a.b.c", ""},
-					{"a..bc", "https://s3.mock-region.amazonaws.com/a..bc", ""},
+					{"abc", "key", "https://s3.mock-region.amazonaws.com/abc/key?x-id=GetObject", ""},
+					{"a$b$c", "key", "https://s3.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
+					{"a.b.c", "key", "https://s3.mock-region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
+					{"a..bc", "key", "https://s3.mock-region.amazonaws.com/a..bc/key?x-id=GetObject", ""},
+					{"abc", "k:e,y", "https://s3.mock-region.amazonaws.com/abc/k%3Ae%2Cy?x-id=GetObject", ""},
 				},
 			},
 			"VirtualHostStyleBucket": {
 				tests: []s3BucketTest{
-					{"abc", "https://abc.s3.mock-region.amazonaws.com/", ""},
-					{"a$b$c", "https://s3.mock-region.amazonaws.com/a%24b%24c", ""},
-					{"a.b.c", "https://s3.mock-region.amazonaws.com/a.b.c", ""},
-					{"a..bc", "https://s3.mock-region.amazonaws.com/a..bc", ""},
+					{"abc", "key", "https://abc.s3.mock-region.amazonaws.com/key?x-id=GetObject", ""},
+					{"a$b$c", "key", "https://s3.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
+					{"a.b.c", "key", "https://s3.mock-region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
+					{"a..bc", "key", "https://s3.mock-region.amazonaws.com/a..bc/key?x-id=GetObject", ""},
+					{"abc", "k:e,y", "https://abc.s3.mock-region.amazonaws.com/k%3Ae%2Cy?x-id=GetObject", ""},
 				},
 			},
 			"Accelerate": {
 				useAccelerate: true,
 				tests: []s3BucketTest{
-					{"abc", "https://abc.s3-accelerate.amazonaws.com/", ""},
-					{"a.b.c", "https://s3.mock-region.amazonaws.com/a.b.c", "not compatible"},
-					{"a$b$c", "https://s3.mock-region.amazonaws.com/a%24b%24c", "not compatible"},
+					{"abc", "key", "https://abc.s3-accelerate.amazonaws.com/key?x-id=GetObject", ""},
+					{"a.b.c", "key", "https://s3.mock-region.amazonaws.com/a.b.c/key?x-id=GetObject", "not compatible"},
+					{"a$b$c", "key", "https://s3.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", "not compatible"},
 				},
 			},
 			"AccelerateNoSSLTests": {
 				useAccelerate: true,
 				disableHTTPS:  true,
 				tests: []s3BucketTest{
-					{"abc", "http://abc.s3-accelerate.amazonaws.com/", ""},
-					{"a.b.c", "http://a.b.c.s3-accelerate.amazonaws.com/", ""},
-					{"a$b$c", "http://s3.mock-region.amazonaws.com/a%24b%24c", "not compatible"},
+					{"abc", "key", "http://abc.s3-accelerate.amazonaws.com/key?x-id=GetObject", ""},
+					{"a.b.c", "key", "http://a.b.c.s3-accelerate.amazonaws.com/key?x-id=GetObject", ""},
+					{"a$b$c", "key", "http://s3.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", "not compatible"},
 				},
 			},
 			"DualStack": {
 				useDualstack: true,
 				tests: []s3BucketTest{
-					{"abc", "https://abc.s3.dualstack.mock-region.amazonaws.com/", ""},
-					{"a.b.c", "https://s3.dualstack.mock-region.amazonaws.com/a.b.c", ""},
-					{"a$b$c", "https://s3.dualstack.mock-region.amazonaws.com/a%24b%24c", ""},
+					{"abc", "key", "https://abc.s3.dualstack.mock-region.amazonaws.com/key?x-id=GetObject", ""},
+					{"a.b.c", "key", "https://s3.dualstack.mock-region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
+					{"a$b$c", "key", "https://s3.dualstack.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
 				},
 			},
 			"DualStackWithPathStyle": {
 				useDualstack: true,
 				usePathStyle: true,
 				tests: []s3BucketTest{
-					{"abc", "https://s3.dualstack.mock-region.amazonaws.com/abc", ""},
-					{"a.b.c", "https://s3.dualstack.mock-region.amazonaws.com/a.b.c", ""},
-					{"a$b$c", "https://s3.dualstack.mock-region.amazonaws.com/a%24b%24c", ""},
+					{"abc", "key", "https://s3.dualstack.mock-region.amazonaws.com/abc/key?x-id=GetObject", ""},
+					{"a.b.c", "key", "https://s3.dualstack.mock-region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
+					{"a$b$c", "key", "https://s3.dualstack.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
 				},
 			},
 			"AccelerateWithDualStack": {
 				useAccelerate: true,
 				useDualstack:  true,
 				tests: []s3BucketTest{
-					{"abc", "https://abc.s3-accelerate.dualstack.amazonaws.com/", ""},
-					{"a.b.c", "https://s3.dualstack.mock-region.amazonaws.com/a.b.c", "not compatible"},
-					{"a$b$c", "https://s3.dualstack.mock-region.amazonaws.com/a%24b%24c", "not compatible"},
+					{"abc", "key", "https://abc.s3-accelerate.dualstack.amazonaws.com/key?x-id=GetObject", ""},
+					{"a.b.c", "key", "https://s3.dualstack.mock-region.amazonaws.com/a.b.c/key?x-id=GetObject", "not compatible"},
+					{"a$b$c", "key", "https://s3.dualstack.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", "not compatible"},
 				},
 			},
 		},
@@ -106,10 +109,11 @@ func TestUpdateEndpointBuild(t *testing.T) {
 					HostnameImmutable: true,
 				},
 				tests: []s3BucketTest{
-					{"abc", "https://example.region.amazonaws.com/abc", ""},
-					{"a$b$c", "https://example.region.amazonaws.com/a%24b%24c", ""},
-					{"a.b.c", "https://example.region.amazonaws.com/a.b.c", ""},
-					{"a..bc", "https://example.region.amazonaws.com/a..bc", ""},
+					{"abc", "key", "https://example.region.amazonaws.com/abc/key?x-id=GetObject", ""},
+					{"a$b$c", "key", "https://example.region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
+					{"a.b.c", "key", "https://example.region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
+					{"a..bc", "key", "https://example.region.amazonaws.com/a..bc/key?x-id=GetObject", ""},
+					{"abc", "k:e,y", "https://example.region.amazonaws.com/abc/k%3Ae%2Cy?x-id=GetObject", ""},
 				},
 			},
 			"VirtualHostStyleBucket": {
@@ -118,10 +122,12 @@ func TestUpdateEndpointBuild(t *testing.T) {
 					HostnameImmutable: true,
 				},
 				tests: []s3BucketTest{
-					{"abc", "https://example.region.amazonaws.com/abc", ""},
-					{"a$b$c", "https://example.region.amazonaws.com/a%24b%24c", ""},
-					{"a.b.c", "https://example.region.amazonaws.com/a.b.c", ""},
-					{"a..bc", "https://example.region.amazonaws.com/a..bc", ""},
+					{"abc", "key", "https://example.region.amazonaws.com/abc/key?x-id=GetObject", ""},
+					{"a$b$c", "key", "https://example.region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
+					{"a.b.c", "key", "https://example.region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
+					{"a..bc", "key", "https://example.region.amazonaws.com/a..bc/key?x-id=GetObject", ""},
+					{"abc", "k:e,y", "https://example.region.amazonaws.com/abc/k%3Ae%2Cy?x-id=GetObject", ""},
+
 				},
 			},
 			"Accelerate": {
@@ -131,10 +137,10 @@ func TestUpdateEndpointBuild(t *testing.T) {
 					HostnameImmutable: true,
 				},
 				tests: []s3BucketTest{
-					{"abc", "https://example.region.amazonaws.com/abc", ""},
-					{"a$b$c", "https://example.region.amazonaws.com/a%24b%24c", ""},
-					{"a.b.c", "https://example.region.amazonaws.com/a.b.c", ""},
-					{"a..bc", "https://example.region.amazonaws.com/a..bc", ""},
+					{"abc", "key", "https://example.region.amazonaws.com/abc/key?x-id=GetObject", ""},
+					{"a$b$c", "key", "https://example.region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
+					{"a.b.c", "key", "https://example.region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
+					{"a..bc", "key", "https://example.region.amazonaws.com/a..bc/key?x-id=GetObject", ""},
 				},
 			},
 			"AccelerateNoSSLTests": {
@@ -145,9 +151,9 @@ func TestUpdateEndpointBuild(t *testing.T) {
 					HostnameImmutable: true,
 				},
 				tests: []s3BucketTest{
-					{"abc", "https://example.region.amazonaws.com/abc", ""},
-					{"a.b.c", "https://example.region.amazonaws.com/a.b.c", ""},
-					{"a$b$c", "https://example.region.amazonaws.com/a%24b%24c", ""},
+					{"abc", "key", "https://example.region.amazonaws.com/abc/key?x-id=GetObject", ""},
+					{"a.b.c", "key", "https://example.region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
+					{"a$b$c", "key", "https://example.region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
 				},
 			},
 			"DualStack": {
@@ -157,9 +163,9 @@ func TestUpdateEndpointBuild(t *testing.T) {
 					HostnameImmutable: true,
 				},
 				tests: []s3BucketTest{
-					{"abc", "https://example.region.amazonaws.com/abc", ""},
-					{"a.b.c", "https://example.region.amazonaws.com/a.b.c", ""},
-					{"a$b$c", "https://example.region.amazonaws.com/a%24b%24c", ""},
+					{"abc", "key", "https://example.region.amazonaws.com/abc/key?x-id=GetObject", ""},
+					{"a.b.c", "key", "https://example.region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
+					{"a$b$c", "key", "https://example.region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
 				},
 			},
 		},
@@ -196,8 +202,8 @@ func TestUpdateEndpointBuild(t *testing.T) {
 					for i, test := range c.tests {
 						t.Run(strconv.Itoa(i), func(t *testing.T) {
 							fm := requestRetrieverMiddleware{}
-							_, err := svc.ListObjects(context.Background(),
-								&s3.ListObjectsInput{Bucket: &test.bucket},
+							_, err := svc.GetObject(context.Background(),
+								&s3.GetObjectInput{Bucket: &test.bucket, Key: &test.key},
 								func(options *s3.Options) {
 									options.APIOptions = append(options.APIOptions,
 										func(stack *middleware.Stack) error {
