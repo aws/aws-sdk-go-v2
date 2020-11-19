@@ -17,19 +17,46 @@ var defaultLoaders = []loader{
 //
 // This will setup the AWS configuration's Region,
 var defaultAWSConfigResolvers = []awsConfigResolver{
+	// Resolves the default configuration the SDK's aws.Config will be
+	// initialized with.
 	resolveDefaultAWSConfig,
+
+	// Sets the logger to be used. Could be user provided logger, and client
+	// logging mode.
 	resolveLogger,
 	resolveClientLogMode,
+
+	// Sets the HTTP client and configuration to use for making requests using
+	// the HTTP transport.
 	resolveHTTPClient,
 	resolveCustomCABundle,
+
+	// Sets the endpoint resolving behavior the API Clients will use for making
+	// requests to. Clients default to their own clients this allows overrides
+	// to be specified.
 	resolveEndpointResolver,
-	resolveAPIOptions,
+
+	// Sets the retry behavior API clients will use within their retry attempt
+	// middleware. Defaults to unset, allowing API clients to define their own
+	// retry behavior.
 	resolveRetryer,
 
+	// Sets the region the API Clients should use for making requests to.
 	resolveRegion,
 	// TODO: Add back EC2 Region Resolver Support
 	resolveDefaultRegion,
 
+	// Sets the additional set of middleware stack mutators that will custom
+	// API client request pipeline middleware.
+	resolveAPIOptions,
+
+	// Sets the resolved credentials the API clients will use for
+	// authentication. Provides the SDK's default credential chain.
+	//
+	// Should probably be the last step in the resolve chain to ensure that all
+	// other configurations are resolved first in case downstream credentials
+	// implementations depend on or can be configured with earlier resolved
+	// configuration options.
 	resolveCredentials,
 }
 
