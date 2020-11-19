@@ -80,7 +80,10 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
 
     // constant map with service to list of operation for which presignedURL client and operation must be generated.
     private static final Map<ShapeId, Set<ShapeId>> presignedClientMap = MapUtils.of(
-            ShapeId.from("com.amazonaws.s3#AmazonS3"), SetUtils.of(ShapeId.from("com.amazonaws.s3#PutObject"))
+            ShapeId.from("com.amazonaws.s3#AmazonS3"), SetUtils.of(
+                    ShapeId.from("com.amazonaws.s3#GetObject"),
+                    ShapeId.from("com.amazonaws.s3#PutObject")
+            )
     );
 
     private static final String addAsUnsignedPayloadName(String operationName) {
