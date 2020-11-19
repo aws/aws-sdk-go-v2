@@ -42,6 +42,10 @@ func resolveCustomCABundle(cfg *aws.Config, cfgs configs) error {
 		return nil
 	}
 
+	if cfg.HTTPClient == nil {
+		cfg.HTTPClient = awshttp.NewBuildableClient()
+	}
+
 	trOpts, ok := cfg.HTTPClient.(*awshttp.BuildableClient)
 	if !ok {
 		return fmt.Errorf("unable to add custom RootCAs HTTPClient, "+
