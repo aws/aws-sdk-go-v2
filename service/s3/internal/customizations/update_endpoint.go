@@ -229,9 +229,16 @@ func moveBucketNameToHost(u *url.URL, bucket string) {
 
 // remove bucket from url
 func removeBucketFromPath(u *url.URL, bucket string) {
+	// modify url path
 	u.Path = strings.Replace(u.Path, "/"+bucket, "", -1)
 	if u.Path == "" {
 		u.Path = "/"
+	}
+
+	// modify url raw path
+	u.RawPath = strings.Replace(u.RawPath, "/"+bucket, "", -1)
+	if u.RawPath == "" {
+		u.RawPath = "/"
 	}
 }
 
