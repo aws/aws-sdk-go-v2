@@ -36,13 +36,12 @@ func TestInteg_PresignURL(t *testing.T) {
 		"nil-body": {
 			expectedSignedHeader: http.Header{},
 		},
-		// TODO: fix PutObject with an empty body returning 501
-		// "empty-body": {
-		// 	body: bytes.NewReader([]byte("")),
-		// 	expectedSignedHeader: http.Header{
-		// 		"content-type": {"application/octet-stream"},
-		// 	},
-		// },
+		"empty-body": {
+			body: bytes.NewReader([]byte("")),
+			expectedSignedHeader: http.Header{
+				"content-type": {"application/octet-stream"},
+			},
+		},
 	}
 
 	for name, c := range cases {
@@ -72,7 +71,7 @@ func TestInteg_PresignURL(t *testing.T) {
 
 			presignRequest, err := presignerClient.PresignPutObject(ctx, putObjectInput)
 			if err != nil {
-				t.Errorf("expect no error, got %v", err)
+				t.Fatalf("expect no error, got %v", err)
 			}
 
 			for k, v := range c.expectedSignedHeader {
@@ -146,6 +145,9 @@ func sendHTTPRequest(presignRequest *v4.PresignedHTTPRequest, body io.Reader) (*
 	// assign the request body if not nil
 	if body != nil {
 		req.Body = ioutil.NopCloser(body)
+		if req.ContentLength == 0 {
+			req.Body = nil
+		}
 	}
 
 	// Upload the object to S3.
