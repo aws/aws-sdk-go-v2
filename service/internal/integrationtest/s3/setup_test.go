@@ -12,6 +12,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"strings"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -301,23 +302,40 @@ func putTestContent(t *testing.T, reader io.ReadSeeker, key string, opts func(op
 	}
 }
 
-func testWriteToObject(t *testing.T, bucket string, opts func(options *s3.Options)) {
-	key := integrationtest.UniqueID()
+type writeToObjectTestData struct {
+	Body        io.Reader
+	ExpectBody  []byte
+	ExpectError string
+}
 
-	if opts == nil {
-		opts = func(options *s3.Options) {
-		}
-	}
+func testWriteToObject(t *testing.T, bucket string, testData writeToObjectTestData, opts ...func(options *s3.Options)) {
+	key := integrationtest.UniqueID()
 
 	// put object
 	_, err := s3client.PutObject(context.Background(),
 		&s3.PutObjectInput{
 			Bucket: &bucket,
 			Key:    &key,
-			Body:   bytes.NewReader([]byte(`hello world`)),
-		})
+			Body:   testData.Body,
+		}, opts...)
 	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
+		if len(testData.ExpectError) == 0 {
+			t.Fatalf("expect no error, got %v", err)
+		}
+
+		if e, a := testData.ExpectError, err.Error(); !strings.Contains(a, e) {
+			t.Fatalf("expect error to contain %v, got %v", e, a)
+		}
+
+	} else {
+		if len(testData.ExpectError) != 0 {
+			t.Fatalf("expected error: %v, got none", err)
+		}
+	}
+
+	// stop if expected error writing object
+	if len(testData.ExpectError) != 0 {
+		return
 	}
 
 	// get object
@@ -325,13 +343,13 @@ func testWriteToObject(t *testing.T, bucket string, opts func(options *s3.Option
 		&s3.GetObjectInput{
 			Bucket: &bucket,
 			Key:    &key,
-		})
+		}, opts...)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	if e, a := []byte("hello world"), b; !bytes.EqualFold(e, a) {
+	if e, a := testData.ExpectBody, b; !bytes.EqualFold(e, a) {
 		t.Errorf("expect %s, got %s", e, a)
 	}
 }
