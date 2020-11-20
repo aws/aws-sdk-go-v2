@@ -11,6 +11,7 @@ import (
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	acceptencodingcust "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding"
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
+	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/logging"
 	"github.com/awslabs/smithy-go/middleware"
@@ -257,4 +258,99 @@ func addRequestResponseLogging(stack *middleware.Stack, o Options) error {
 		LogResponse:         o.ClientLogMode.IsResponse(),
 		LogResponseWithBody: o.ClientLogMode.IsResponseWithBody(),
 	}, middleware.After)
+}
+
+// HTTPPresignerV4 represents presigner interface used by presign url client
+type HTTPPresignerV4 interface {
+	PresignHTTP(
+		ctx context.Context, credentials aws.Credentials, r *http.Request,
+		payloadHash string, service string, region string, signingTime time.Time,
+	) (url string, signedHeader http.Header, err error)
+}
+
+// PresignOptions represents the presign client options
+type PresignOptions struct {
+
+	// ClientOptions are list of functional options to mutate client options used by
+	// presign client
+	ClientOptions []func(*Options)
+
+	// Presigner is the presigner used by the presign url client
+	Presigner HTTPPresignerV4
+
+	// Expires sets the expiration duration for the generated presign url. This should
+	// be the duration in seconds the presigned URL should be considered valid for. If
+	// not set or set to zero, presign url would default to expire after 900 seconds.
+	Expires time.Duration
+}
+
+// WithPresignClientFromClientOptions is a helper utility to retrieve a function
+// that takes PresignOption as input
+func WithPresignClientFromClientOptions(optFns ...func(*Options)) func(*PresignOptions) {
+	return withPresignClientFromClientOptions(optFns).options
+}
+
+type withPresignClientFromClientOptions []func(*Options)
+
+func (w withPresignClientFromClientOptions) options(o *PresignOptions) {
+	o.ClientOptions = append(o.ClientOptions, w...)
+}
+
+// WithPresignExpires is a helper utility to append Expires value on presign
+// options optional function
+func WithPresignExpires(dur time.Duration) func(*PresignOptions) {
+	return withPresignExpires(dur).options
+}
+
+type withPresignExpires time.Duration
+
+func (w withPresignExpires) options(o *PresignOptions) {
+	o.Expires = time.Duration(w)
+}
+
+// PresignClient represents the presign url client
+type PresignClient struct {
+	client    *Client
+	presigner HTTPPresignerV4
+	expires   time.Duration
+}
+
+// NewPresignClient generates a presign client using provided API Client and
+// presign options
+func NewPresignClient(c *Client, optFns ...func(*PresignOptions)) *PresignClient {
+	var presignOptions PresignOptions
+	for _, fn := range optFns {
+		fn(&presignOptions)
+	}
+	client := copyAPIClient(c, presignOptions.ClientOptions...)
+	if presignOptions.Presigner == nil {
+		presignOptions.Presigner = v4.NewSigner()
+	}
+
+	return &PresignClient{
+		client:    client,
+		presigner: presignOptions.Presigner,
+		expires:   presignOptions.Expires,
+	}
+}
+
+func copyAPIClient(c *Client, optFns ...func(*Options)) *Client {
+	return New(c.options, optFns...)
+}
+
+func (c *PresignClient) convertToPresignMiddleware(stack *middleware.Stack, options Options) (err error) {
+	stack.Finalize.Clear()
+	stack.Deserialize.Clear()
+	stack.Build.Remove((*awsmiddleware.ClientRequestID)(nil).ID())
+	err = stack.Finalize.Add(v4.NewPresignHTTPRequestMiddleware(options.Credentials, c.presigner), middleware.After)
+	if err != nil {
+		return err
+	}
+	// add middleware to set expiration for s3 presigned url, if expiration is set to
+	// 0, this middleware sets a default expiration of 900 seconds
+	err = stack.Build.Add(&s3cust.AddExpiresOnPresignedURL{Expires: c.expires}, middleware.After)
+	if err != nil {
+		return err
+	}
+	return nil
 }

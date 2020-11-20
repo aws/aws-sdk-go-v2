@@ -6,13 +6,11 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/query"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
-	"net/http"
 )
 
 // Creates a new DB instance that acts as a read replica for an existing source DB
@@ -477,80 +475,39 @@ func setCreateDBInstanceReadReplicadestinationRegion(params interface{}, value s
 	input.destinationRegion = &value
 	return nil
 }
-
-type createDBInstanceReadReplicaHTTPPresignURLClient struct {
-	client    *Client
-	presigner *v4.Signer
-}
-
-func newCreateDBInstanceReadReplicaHTTPPresignURLClient(options Options, optFns ...func(*Options)) *createDBInstanceReadReplicaHTTPPresignURLClient {
-	return &createDBInstanceReadReplicaHTTPPresignURLClient{
-		client:    New(options, optFns...),
-		presigner: v4.NewSigner(),
-	}
-}
-func (c *createDBInstanceReadReplicaHTTPPresignURLClient) PresignCreateDBInstanceReadReplica(ctx context.Context, params *CreateDBInstanceReadReplicaInput, optFns ...func(*Options)) (string, http.Header, error) {
-	if params == nil {
-		params = &CreateDBInstanceReadReplicaInput{}
-	}
-
-	optFns = append(optFns, func(o *Options) {
-		o.HTTPClient = &smithyhttp.NopClient{}
-	})
-
-	ctx = presignedurlcust.WithIsPresigning(ctx)
-	result, _, err := c.client.invokeOperation(ctx, "CreateDBInstanceReadReplica", params, optFns,
-		addOperationCreateDBInstanceReadReplicaMiddlewares,
-		c.convertToPresignMiddleware,
-	)
-	if err != nil {
-		return ``, nil, err
-	}
-
-	out := result.(*v4.PresignedHTTPRequest)
-	return out.URL, out.SignedHeader, nil
-}
-func (c *createDBInstanceReadReplicaHTTPPresignURLClient) convertToPresignMiddleware(stack *middleware.Stack, options Options) (err error) {
-	stack.Finalize.Clear()
-	stack.Deserialize.Clear()
-	stack.Build.Remove((*awsmiddleware.ClientRequestID)(nil).ID())
-	err = stack.Finalize.Add(v4.NewPresignHTTPRequestMiddleware(options.Credentials, c.presigner), middleware.After)
-	if err != nil {
-		return err
-	}
-	err = query.AddAsGetRequestMiddleware(stack)
-	if err != nil {
-		return err
-	}
-	return nil
-}
 func addCreateDBInstanceReadReplicaPresignURLMiddleware(stack *middleware.Stack, options Options) error {
 	return presignedurlcust.AddMiddleware(stack, presignedurlcust.Options{
 		Accessor: presignedurlcust.ParameterAccessor{
-			GetPresignedURL:      getCreateDBInstanceReadReplicaPreSignedUrl,
-			GetSourceRegion:      getCreateDBInstanceReadReplicaSourceRegion,
-			CopyInput:            copyCreateDBInstanceReadReplicaInputForPresign,
+			GetPresignedURL: getCreateDBInstanceReadReplicaPreSignedUrl,
+
+			GetSourceRegion: getCreateDBInstanceReadReplicaSourceRegion,
+
+			CopyInput: copyCreateDBInstanceReadReplicaInputForPresign,
+
 			SetDestinationRegion: setCreateDBInstanceReadReplicadestinationRegion,
-			SetPresignedURL:      setCreateDBInstanceReadReplicaPreSignedUrl,
+
+			SetPresignedURL: setCreateDBInstanceReadReplicaPreSignedUrl,
 		},
-		Presigner: &presignAutoFillCreateDBInstanceReadReplicaClient{client: newCreateDBInstanceReadReplicaHTTPPresignURLClient(options)},
+		Presigner: &presignAutoFillCreateDBInstanceReadReplicaClient{client: NewPresignClient(New(options))},
 	})
 }
 
 type presignAutoFillCreateDBInstanceReadReplicaClient struct {
-	client *createDBInstanceReadReplicaHTTPPresignURLClient
+	client *PresignClient
 }
 
-func (c *presignAutoFillCreateDBInstanceReadReplicaClient) PresignURL(ctx context.Context, region string, params interface{}) (string, http.Header, error) {
+// PresignURL is a middleware accessor that satisfies URLPresigner interface.
+func (c *presignAutoFillCreateDBInstanceReadReplicaClient) PresignURL(ctx context.Context, srcRegion string, params interface{}) (*v4.PresignedHTTPRequest, error) {
 	input, ok := params.(*CreateDBInstanceReadReplicaInput)
 	if !ok {
-		return ``, nil, fmt.Errorf("expect *CreateDBInstanceReadReplicaInput type, got %T", params)
+		return nil, fmt.Errorf("expect *CreateDBInstanceReadReplicaInput type, got %T", params)
 	}
 	optFn := func(o *Options) {
-		o.Region = region
+		o.Region = srcRegion
 		o.APIOptions = append(o.APIOptions, presignedurlcust.RemoveMiddleware)
 	}
-	return c.client.PresignCreateDBInstanceReadReplica(ctx, input, optFn)
+	presignOptFn := WithPresignClientFromClientOptions(optFn)
+	return c.client.PresignCreateDBInstanceReadReplica(ctx, input, presignOptFn)
 }
 
 func newServiceMetadataMiddleware_opCreateDBInstanceReadReplica(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -560,4 +517,36 @@ func newServiceMetadataMiddleware_opCreateDBInstanceReadReplica(region string) *
 		SigningName:   "rds",
 		OperationName: "CreateDBInstanceReadReplica",
 	}
+}
+
+// PresignCreateDBInstanceReadReplica is used to generate a presigned HTTP Request
+// which contains presigned URL, signed headers and HTTP method used.
+func (c *PresignClient) PresignCreateDBInstanceReadReplica(ctx context.Context, params *CreateDBInstanceReadReplicaInput, optFns ...func(*PresignOptions)) (*v4.PresignedHTTPRequest, error) {
+	if params == nil {
+		params = &CreateDBInstanceReadReplicaInput{}
+	}
+	var presignOptions PresignOptions
+	for _, fn := range optFns {
+		fn(&presignOptions)
+	}
+	if len(optFns) != 0 {
+		c = NewPresignClient(c.client, optFns...)
+	}
+
+	clientOptFns := make([]func(o *Options), 0)
+	clientOptFns = append(clientOptFns, func(o *Options) {
+		o.HTTPClient = &smithyhttp.NopClient{}
+	})
+
+	ctx = presignedurlcust.WithIsPresigning(ctx)
+	result, _, err := c.client.invokeOperation(ctx, "CreateDBInstanceReadReplica", params, clientOptFns,
+		addOperationCreateDBInstanceReadReplicaMiddlewares,
+		c.convertToPresignMiddleware,
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	out := result.(*v4.PresignedHTTPRequest)
+	return out, nil
 }

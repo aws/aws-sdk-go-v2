@@ -102,6 +102,13 @@ func AddComputePayloadSHA256Middleware(stack *middleware.Stack) error {
 	return stack.Build.Add(&computePayloadSHA256{}, middleware.After)
 }
 
+// RemoveComputePayloadSHA256Middleware removes computePayloadSHA256 from the
+// operation middleware stack
+func RemoveComputePayloadSHA256Middleware(stack *middleware.Stack) error {
+	_, err := stack.Build.Remove(computePayloadHashMiddlewareID)
+	return err
+}
+
 // ID is the middleware name
 func (m *computePayloadSHA256) ID() string {
 	return computePayloadHashMiddlewareID
@@ -157,6 +164,13 @@ type contentSHA256Header struct{}
 // operation middleware stack
 func AddContentSHA256HeaderMiddleware(stack *middleware.Stack) error {
 	return stack.Build.Insert(&contentSHA256Header{}, computePayloadHashMiddlewareID, middleware.After)
+}
+
+// RemoveContentSHA256HeaderMiddleware removes contentSHA256Header middleware
+// from the operation middleware stack
+func RemoveContentSHA256HeaderMiddleware(stack *middleware.Stack) error {
+	_, err := stack.Build.Remove((*contentSHA256Header)(nil).ID())
+	return err
 }
 
 // ID returns the ContentSHA256HeaderMiddleware identifier
