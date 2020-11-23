@@ -110,10 +110,10 @@ func WithDownloaderClientOptions(opts ...func(*s3.Options)) func(*Downloader) {
 //  s3.NewFromConfig(cfg)
 //
 //	// Create a downloader passing it the S3 client
-//	downloader := s3manager.NewDownloader(s3.NewFromConfig(cfg))
+//	downloader := manager.NewDownloader(s3.NewFromConfig(cfg))
 //
 //	// Create a downloader with the client and custom downloader options
-//	downloader := s3manager.NewDownloader(client, func(d *s3manager.Downloader) {
+//	downloader := manager.NewDownloader(client, func(d *manager.Downloader) {
 //		d.PartSize = 64 * 1024 * 1024 // 64MB per part
 //	})
 func NewDownloader(c DownloadAPIClient, options ...func(*Downloader)) *Downloader {

@@ -5,7 +5,7 @@ in a custom configuration for the HTTP client and SDK's Upload Manager behavior.
 
 ## Build
 ```sh
-go test -tags "integration perftest" -c -o uploader.test ./s3manager/internal/integration/performance/uploader
+go test -tags "integration perftest" -c -o uploader.test ./manager/internal/integration/performance/uploader
 ```
 
 ## Usage Example:

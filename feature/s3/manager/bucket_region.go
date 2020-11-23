@@ -25,15 +25,20 @@ const bucketRegionHeader = "X-Amz-Bucket-Region"
 // For example to get the region of a bucket which exists in "eu-central-1"
 // you could provide a region hint of "us-west-2".
 //
-//	cfg := config.LoadDefaultConfig()
+//	cfg, err := config.LoadDefaultConfig()
+//	if err != nil {
+//		log.Println("error:", err)
+//		return
+//	}
 //
 //	bucket := "my-bucket"
-//	region, err := s3manager.GetBucketRegion(ctx, s3.NewFromConfig(cfg), bucket)
+//	region, err := manager.GetBucketRegion(ctx, s3.NewFromConfig(cfg), bucket)
 //	if err != nil {
-//		var bnf BucketNotFound
+//		var bnf manager.BucketNotFound
 //		if errors.As(err, &bnf) {
 //			fmt.Fprintf(os.Stderr, "unable to find bucket %s's region\n", bucket)
 //		}
+//		return
 //	}
 //	fmt.Printf("Bucket %s is in %s region\n", bucket, region)
 //

@@ -13,7 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-// UploadLoggingClient is a mock client that can be used to record and stub responses for testing the s3manager.Uploader.
+// UploadLoggingClient is a mock client that can be used to record and stub responses for testing the manager.Uploader.
 type UploadLoggingClient struct {
 	Invocations []string
 	Params      []interface{}
