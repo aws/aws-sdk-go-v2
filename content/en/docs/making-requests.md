@@ -126,7 +126,7 @@ After you have a service client instance, you can use it to call a service's ope
 {{% alias service=S3 %}} `GetObject` operation:
 
 ```go
-response, err := client.GetObject(context.Background(), &s3.GetObjectInput{
+response, err := client.GetObject(context.TODO(), &s3.GetObjectInput{
 	Bucket: aws.String("my-bucket"),
 	Key:    aws.String("obj-key"),
 })
@@ -175,7 +175,7 @@ if err != nil {
 
 client := s3.NewFromConfig(cfg)
 
-resp, err := client.GetObject(context.Background(), &s3.GetObjectInput{
+resp, err := client.GetObject(context.TODO(), &s3.GetObjectInput{
     Bucket:       aws.String("my-bucket"),
     Key:          aws.String("keyName"),
     RequestPayer: types.RequestPayerRequester,
@@ -204,7 +204,7 @@ params := &s3.GetObjectInput{
 	// ...
 }
 
-resp, err := client.GetObject(context.Background(), params, func(o *Options) {
+resp, err := client.GetObject(context.TODO(), params, func(o *Options) {
 	o.Region = "us-east-1"
 })
 ```
@@ -220,7 +220,7 @@ struct should not be accessed in the event that a non-nil error is returned by t
 
 For example to log an operation error and prematurely return from the calling function:
 ```go
-response, err := client.GetObject(context.Background())
+response, err := client.GetObject(context.TODO())
 if err != nil {
 	log.Printf("GetObject error: %v", err)
 	return
@@ -240,7 +240,7 @@ For example {{% alias service=S3 %}} `GetObject` operation returns a response
 whose `Body` member is an `io.ReadCloser`:
 
 ```go
-resp, err := s3svc.GetObject(context.Background(), &s3.GetObjectInput{...})
+resp, err := s3svc.GetObject(context.TODO(), &s3.GetObjectInput{...})
 if err != nil {
     // handle error
     return
@@ -271,7 +271,7 @@ import "github.com/aws/aws-sdk-go-v2/service/s3"
 
 // ..
 
-resp, err := client.GetObject(context.Background(), &s3.GetObjectInput{
+resp, err := client.GetObject(context.TODO(), &s3.GetObjectInput{
 	// ...
 })
 if err != nil {
@@ -297,6 +297,7 @@ concurrently uploads two objects to an {{% alias service=S3 %}} bucket.
 
 ```go
 import "log"
+import "strings"
 import "github.com/aws/aws-sdk-go-v2/config"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
 
@@ -322,20 +323,20 @@ wg.Add(2)
 
 go func() {
 defer wg.Done()
-    output, err := client.PutObject(context.Background(), &s3.PutObjectInput{
+    output, err := client.PutObject(context.TODO(), &s3.PutObjectInput{
         Bucket: aws.String("my-bucket"),
         Key:    aws.String("foo"),
-        Body: bytes.NewReader([]byte("foo body content")),
+        Body:   strings.NewReader("foo body content"),
     })
     results <- result{Output: output, Err: err}
 }()
 
 go func() {
     defer wg.Done()
-    output, err := client.PutObject(context.Background(), &s3.PutObjectInput{
+    output, err := client.PutObject(context.TODO(), &s3.PutObjectInput{
         Bucket: aws.String("my-bucket"),
         Key:    aws.String("bar"),
-        Body: bytes.NewReader([]byte("bar body content")),
+        Body:   strings.NewReader("bar body content"),
     })
     results <- result{Output: output, Err: err}
 }()
@@ -398,12 +399,12 @@ params := &s3.ListObjectsV2Input{
 }
 
 pagiantor := s3.NewListObjectsV2Paginator(client, params, func(o *ListObjectsV2PaginatorOptions) {
-	o.Limit = aws.Int64(10)
+	o.Limit = 10
 })
 
 pageNum := 0
 for pagiantor.HasMorePages() && pageNum < 3 {
-    output, err := pagiantor.NextPage(context.Background())
+    output, err := pagiantor.NextPage(context.TODO())
     if err != nil {
     	log.Printf("error: %v", err)
     	return
