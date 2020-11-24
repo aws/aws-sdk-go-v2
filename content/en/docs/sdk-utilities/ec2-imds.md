@@ -33,7 +33,7 @@ if err != nil {
 client := ec2imds.NewFromConfig(cfg)
 ```
 
-Then use the service client to retrieve information from a metadata category like `local-ipv4`
+Then use the service client to retrieve information from a metadata category such as `local-ipv4`
 (the private IP address of the instance).
 
 ```go
@@ -54,9 +54,9 @@ in the {{% alias service="ec2" %}} User Guide.
 
 ### Retrieving an Instance's Region
 
-There's no instance metadata category that returns only the region of an
+There's no instance metadata category that returns only the Region of an
 instance. Instead, use the included `Region` method to easily return
-an instance's region.
+an instance's Region.
 
 ```go
 region, err := client.GetRegion(context.Background(), &ec2imds.GetRegionInput{})
