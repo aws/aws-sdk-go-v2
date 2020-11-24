@@ -9,8 +9,7 @@ The {{% alias sdk-go %}} returns errors that satisfy the Go `error` interface ty
 get a formatted string of the SDK error message without any special handling. Errors returned by the SDK may implement
 an `Unwrap` method. The `Unwrap` method is used by the SDK to provide additional contextual information to errors, while
 providing access to the underlying error or chain of errors. The `Unwrap` method should be used with the
-[errors.As](https://golang.org/pkg/errors#As) and [errors.Is](https://golang.org/pkg/errors#Is) functions which can
-handle unpacking wrapped error chains.
+[errors.As](https://golang.org/pkg/errors#As) to handle unwrapping error chains.
 
 It is important that your application check whether an error occurred after invoking a function or method that
 can return an `error` interface type. The most basic form of error handling looks similar to the following example:
@@ -82,7 +81,7 @@ import "github.com/aws/aws-sdk-go-v2/service/s3/types"
 if err != nil {
 	var bne *types.BucketAlreadyExists
 	if errors.As(err, &bne) {
-		log.Printf("error: %s", bne.Message())
+		log.Println("error:", bne)
     }
     return
 }
@@ -118,12 +117,12 @@ For example:
 
 ```go
 import "log"
-import "github.com/aws/transport/http"
+import awshttp "github.com/aws/transport/http"
 
 // ...
 
 if err != nil {
-	var re *http.ResponseError
+	var re *awshttp.ResponseError
 	if errors.As(err, &re) {
 		log.Printf("requestID: %s, error: %v", re.ServiceRequestID(), re.Unwrap());
     }
@@ -146,13 +145,13 @@ import "log"
 
 if err != nil {
 	var re interface {
-        ServiceHostID()    string
+		ServiceHostID()    string
 		ServiceRequestID() string
-    }
-    if errors.As(err, &re) {
-        log.Printf("requestID: %s, hostID: %s request failure", re.ServiceRequestID(), re.ServiceHostID());
-    }
-    return
+	}
+	if errors.As(err, &re) {
+		log.Printf("requestID: %s, hostID: %s request failure", re.ServiceRequestID(), re.ServiceHostID());
+	}
+	return
 }
 ```
 
