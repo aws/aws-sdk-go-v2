@@ -19,9 +19,22 @@
 ## Bug Fixes
 * `config`: Fix AWS_CA_BUNDLE usage while loading default config ([#912](https://github.com/aws/aws-sdk-go-v2/pull/))
     * Fixes the `LoadDefaultConfig`'s configuration provider order to correctly load a custom HTTP client prior to configuring the client for `AWS_CA_BUNDLE` environment variable.
+* `service/s3`: Fix signature mismatch error for s3 ([#913](https://github.com/aws/aws-sdk-go-v2/pull/913))
+    * Fixes ([#883](https://github.com/aws/aws-sdk-go-v2/issues/883))
+* `service/s3control`: 
+    * Fix HostPrefix addition behavior for s3control ([#882](https://github.com/aws/aws-sdk-go-v2/pull/882))
+        * Fixes ([#863](https://github.com/aws/aws-sdk-go-v2/issues/863))
+    * Fix s3control error deserializer ([#875](https://github.com/aws/aws-sdk-go-v2/pull/875))
+        * Fixes ([#864](https://github.com/aws/aws-sdk-go-v2/issues/864))
 
 ## Service Client Highlights
-
+* `service`: Add support for pre-signed URL clients for S3, RDS, EC2 service ([#888](https://github.com/aws/aws-sdk-go-v2/pull/888))
+    * `service/s3`: operations `PutObject` and `GetObject` are now supported with s3 pre-signed url client.
+    * `service/ec2`: operation `CopySnapshot` is now supported with ec2 pre-signed url client. 
+    * `service/rds`: operations `CopyDBSnapshot`, `CreateDBInstanceReadReplica`, `CopyDBClusterSnapshot`, `CreateDBCluster` are now supported with rds pre-signed url client.
+* `service/s3`: Add support for S3 access point and S3 on outposts access point ARNs ([#870](https://github.com/aws/aws-sdk-go-v2/pull/870))
+* `service/s3control`: Adds support for S3 on outposts access point and S3 on outposts bucket ARNs ([#870](https://github.com/aws/aws-sdk-go-v2/pull/870)) 
+ 
 ## Migrating from v2 preview SDK's v0.29.0 to v0.30.0
 
 ### aws.BuildableHTTPClient move
