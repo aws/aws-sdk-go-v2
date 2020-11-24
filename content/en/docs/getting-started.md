@@ -32,7 +32,7 @@ After initializing your Go Module project you will be able to retrieve the SDK, 
 the `go get` command. These dependencies will be recorded in the `go.mod` file which was created by the previous
 command.
 
-The following commands show how to retrieve the standard set of SDK modules that you will use in your application.
+The following commands show how to retrieve the standard set of SDK modules to use in your application.
 
 ```
 go get github.com/aws/aws-sdk-go-v2
