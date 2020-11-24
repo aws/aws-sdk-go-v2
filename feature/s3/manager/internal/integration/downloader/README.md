@@ -5,7 +5,7 @@ in a custom configuration for the HTTP client and SDK's Download Manager behavio
 
 ## Build
 ```sh
-go test -tags "integration perftest" -c -o download.test ./s3manager/internal/integration/download
+go test -tags "integration perftest" -c -o download.test ./manager/internal/integration/download
 ```
 
 ## Usage Example:

@@ -39,10 +39,10 @@ const DefaultUploadConcurrency = 5
 //
 // Example:
 //
-//	u := s3manager.NewUploader(client)
+//	u := manager.NewUploader(client)
 //	output, err := u.upload(context.Background(), input)
 //	if err != nil {
-//		var multierr s3manager.MultiUploadFailure
+//		var multierr manager.MultiUploadFailure
 //		if errors.As(err, &multierr) {
 //			fmt.Printf("upload failure UploadID=%s, %s\n", multierr.UploadID(), multierr.Error())
 //		} else {
@@ -182,10 +182,10 @@ type Uploader struct {
 //	client := s3.NewFromConfig(cfg)
 //
 //	// Create an uploader passing it the client
-//  uploader := s3manager.NewUploader(client)
+//  uploader := manager.NewUploader(client)
 //
 //	// Create an uploader with the client and custom options
-//	uploader := s3manager.NewUploader(client, func(u *s3manager.Uploader) {
+//	uploader := manager.NewUploader(client, func(u *manager.Uploader) {
 //		u.PartSize = 64 * 1024 * 1024 // 64MB per part
 //	})
 func NewUploader(client UploadAPIClient, options ...func(*Uploader)) *Uploader {
