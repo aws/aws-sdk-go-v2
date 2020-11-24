@@ -4,6 +4,7 @@ package transcribe
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
@@ -116,6 +117,94 @@ func addOperationListVocabularyFiltersMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// ListVocabularyFiltersAPIClient is a client that implements the
+// ListVocabularyFilters operation.
+type ListVocabularyFiltersAPIClient interface {
+	ListVocabularyFilters(context.Context, *ListVocabularyFiltersInput, ...func(*Options)) (*ListVocabularyFiltersOutput, error)
+}
+
+var _ ListVocabularyFiltersAPIClient = (*Client)(nil)
+
+// ListVocabularyFiltersPaginatorOptions is the paginator options for
+// ListVocabularyFilters
+type ListVocabularyFiltersPaginatorOptions struct {
+	// The maximum number of filters to return in the response. If there are fewer
+	// results in the list, this response contains only the actual results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListVocabularyFiltersPaginator is a paginator for ListVocabularyFilters
+type ListVocabularyFiltersPaginator struct {
+	options   ListVocabularyFiltersPaginatorOptions
+	client    ListVocabularyFiltersAPIClient
+	params    *ListVocabularyFiltersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListVocabularyFiltersPaginator returns a new ListVocabularyFiltersPaginator
+func NewListVocabularyFiltersPaginator(client ListVocabularyFiltersAPIClient, params *ListVocabularyFiltersInput, optFns ...func(*ListVocabularyFiltersPaginatorOptions)) *ListVocabularyFiltersPaginator {
+	options := ListVocabularyFiltersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListVocabularyFiltersInput{}
+	}
+
+	return &ListVocabularyFiltersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListVocabularyFiltersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListVocabularyFilters page.
+func (p *ListVocabularyFiltersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListVocabularyFiltersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListVocabularyFilters(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListVocabularyFilters(region string) *awsmiddleware.RegisterServiceMetadata {

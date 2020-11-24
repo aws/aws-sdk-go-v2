@@ -4,6 +4,7 @@ package securityhub
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
@@ -109,6 +110,88 @@ func addOperationDescribeProductsMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// DescribeProductsAPIClient is a client that implements the DescribeProducts
+// operation.
+type DescribeProductsAPIClient interface {
+	DescribeProducts(context.Context, *DescribeProductsInput, ...func(*Options)) (*DescribeProductsOutput, error)
+}
+
+var _ DescribeProductsAPIClient = (*Client)(nil)
+
+// DescribeProductsPaginatorOptions is the paginator options for DescribeProducts
+type DescribeProductsPaginatorOptions struct {
+	// The maximum number of results to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeProductsPaginator is a paginator for DescribeProducts
+type DescribeProductsPaginator struct {
+	options   DescribeProductsPaginatorOptions
+	client    DescribeProductsAPIClient
+	params    *DescribeProductsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeProductsPaginator returns a new DescribeProductsPaginator
+func NewDescribeProductsPaginator(client DescribeProductsAPIClient, params *DescribeProductsInput, optFns ...func(*DescribeProductsPaginatorOptions)) *DescribeProductsPaginator {
+	options := DescribeProductsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeProductsInput{}
+	}
+
+	return &DescribeProductsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeProductsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeProducts page.
+func (p *DescribeProductsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeProductsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeProducts(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeProducts(region string) *awsmiddleware.RegisterServiceMetadata {

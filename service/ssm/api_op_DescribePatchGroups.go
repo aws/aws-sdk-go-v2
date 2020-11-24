@@ -4,6 +4,7 @@ package ssm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
@@ -125,6 +126,89 @@ func addOperationDescribePatchGroupsMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// DescribePatchGroupsAPIClient is a client that implements the DescribePatchGroups
+// operation.
+type DescribePatchGroupsAPIClient interface {
+	DescribePatchGroups(context.Context, *DescribePatchGroupsInput, ...func(*Options)) (*DescribePatchGroupsOutput, error)
+}
+
+var _ DescribePatchGroupsAPIClient = (*Client)(nil)
+
+// DescribePatchGroupsPaginatorOptions is the paginator options for
+// DescribePatchGroups
+type DescribePatchGroupsPaginatorOptions struct {
+	// The maximum number of patch groups to return (per page).
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribePatchGroupsPaginator is a paginator for DescribePatchGroups
+type DescribePatchGroupsPaginator struct {
+	options   DescribePatchGroupsPaginatorOptions
+	client    DescribePatchGroupsAPIClient
+	params    *DescribePatchGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribePatchGroupsPaginator returns a new DescribePatchGroupsPaginator
+func NewDescribePatchGroupsPaginator(client DescribePatchGroupsAPIClient, params *DescribePatchGroupsInput, optFns ...func(*DescribePatchGroupsPaginatorOptions)) *DescribePatchGroupsPaginator {
+	options := DescribePatchGroupsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribePatchGroupsInput{}
+	}
+
+	return &DescribePatchGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribePatchGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribePatchGroups page.
+func (p *DescribePatchGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribePatchGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribePatchGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribePatchGroups(region string) *awsmiddleware.RegisterServiceMetadata {

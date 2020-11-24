@@ -4,6 +4,7 @@ package securityhub
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
@@ -110,6 +111,89 @@ func addOperationGetEnabledStandardsMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// GetEnabledStandardsAPIClient is a client that implements the GetEnabledStandards
+// operation.
+type GetEnabledStandardsAPIClient interface {
+	GetEnabledStandards(context.Context, *GetEnabledStandardsInput, ...func(*Options)) (*GetEnabledStandardsOutput, error)
+}
+
+var _ GetEnabledStandardsAPIClient = (*Client)(nil)
+
+// GetEnabledStandardsPaginatorOptions is the paginator options for
+// GetEnabledStandards
+type GetEnabledStandardsPaginatorOptions struct {
+	// The maximum number of results to return in the response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetEnabledStandardsPaginator is a paginator for GetEnabledStandards
+type GetEnabledStandardsPaginator struct {
+	options   GetEnabledStandardsPaginatorOptions
+	client    GetEnabledStandardsAPIClient
+	params    *GetEnabledStandardsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetEnabledStandardsPaginator returns a new GetEnabledStandardsPaginator
+func NewGetEnabledStandardsPaginator(client GetEnabledStandardsAPIClient, params *GetEnabledStandardsInput, optFns ...func(*GetEnabledStandardsPaginatorOptions)) *GetEnabledStandardsPaginator {
+	options := GetEnabledStandardsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetEnabledStandardsInput{}
+	}
+
+	return &GetEnabledStandardsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetEnabledStandardsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetEnabledStandards page.
+func (p *GetEnabledStandardsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetEnabledStandardsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.GetEnabledStandards(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetEnabledStandards(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
@@ -127,6 +128,91 @@ func addOperationListCandidatesForAutoMLJobMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+// ListCandidatesForAutoMLJobAPIClient is a client that implements the
+// ListCandidatesForAutoMLJob operation.
+type ListCandidatesForAutoMLJobAPIClient interface {
+	ListCandidatesForAutoMLJob(context.Context, *ListCandidatesForAutoMLJobInput, ...func(*Options)) (*ListCandidatesForAutoMLJobOutput, error)
+}
+
+var _ ListCandidatesForAutoMLJobAPIClient = (*Client)(nil)
+
+// ListCandidatesForAutoMLJobPaginatorOptions is the paginator options for
+// ListCandidatesForAutoMLJob
+type ListCandidatesForAutoMLJobPaginatorOptions struct {
+	// List the job's Candidates up to a specified limit.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListCandidatesForAutoMLJobPaginator is a paginator for
+// ListCandidatesForAutoMLJob
+type ListCandidatesForAutoMLJobPaginator struct {
+	options   ListCandidatesForAutoMLJobPaginatorOptions
+	client    ListCandidatesForAutoMLJobAPIClient
+	params    *ListCandidatesForAutoMLJobInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListCandidatesForAutoMLJobPaginator returns a new
+// ListCandidatesForAutoMLJobPaginator
+func NewListCandidatesForAutoMLJobPaginator(client ListCandidatesForAutoMLJobAPIClient, params *ListCandidatesForAutoMLJobInput, optFns ...func(*ListCandidatesForAutoMLJobPaginatorOptions)) *ListCandidatesForAutoMLJobPaginator {
+	options := ListCandidatesForAutoMLJobPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListCandidatesForAutoMLJobInput{}
+	}
+
+	return &ListCandidatesForAutoMLJobPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListCandidatesForAutoMLJobPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListCandidatesForAutoMLJob page.
+func (p *ListCandidatesForAutoMLJobPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListCandidatesForAutoMLJobOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListCandidatesForAutoMLJob(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListCandidatesForAutoMLJob(region string) *awsmiddleware.RegisterServiceMetadata {

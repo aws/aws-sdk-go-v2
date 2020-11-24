@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -126,6 +127,96 @@ func addOperationDescribeFastSnapshotRestoresMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+// DescribeFastSnapshotRestoresAPIClient is a client that implements the
+// DescribeFastSnapshotRestores operation.
+type DescribeFastSnapshotRestoresAPIClient interface {
+	DescribeFastSnapshotRestores(context.Context, *DescribeFastSnapshotRestoresInput, ...func(*Options)) (*DescribeFastSnapshotRestoresOutput, error)
+}
+
+var _ DescribeFastSnapshotRestoresAPIClient = (*Client)(nil)
+
+// DescribeFastSnapshotRestoresPaginatorOptions is the paginator options for
+// DescribeFastSnapshotRestores
+type DescribeFastSnapshotRestoresPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeFastSnapshotRestoresPaginator is a paginator for
+// DescribeFastSnapshotRestores
+type DescribeFastSnapshotRestoresPaginator struct {
+	options   DescribeFastSnapshotRestoresPaginatorOptions
+	client    DescribeFastSnapshotRestoresAPIClient
+	params    *DescribeFastSnapshotRestoresInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeFastSnapshotRestoresPaginator returns a new
+// DescribeFastSnapshotRestoresPaginator
+func NewDescribeFastSnapshotRestoresPaginator(client DescribeFastSnapshotRestoresAPIClient, params *DescribeFastSnapshotRestoresInput, optFns ...func(*DescribeFastSnapshotRestoresPaginatorOptions)) *DescribeFastSnapshotRestoresPaginator {
+	options := DescribeFastSnapshotRestoresPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeFastSnapshotRestoresInput{}
+	}
+
+	return &DescribeFastSnapshotRestoresPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeFastSnapshotRestoresPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeFastSnapshotRestores page.
+func (p *DescribeFastSnapshotRestoresPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeFastSnapshotRestoresOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeFastSnapshotRestores(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeFastSnapshotRestores(region string) *awsmiddleware.RegisterServiceMetadata {

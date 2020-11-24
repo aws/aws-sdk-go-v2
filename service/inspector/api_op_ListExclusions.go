@@ -4,6 +4,7 @@ package inspector
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -120,6 +121,93 @@ func addOperationListExclusionsMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListExclusionsAPIClient is a client that implements the ListExclusions
+// operation.
+type ListExclusionsAPIClient interface {
+	ListExclusions(context.Context, *ListExclusionsInput, ...func(*Options)) (*ListExclusionsOutput, error)
+}
+
+var _ ListExclusionsAPIClient = (*Client)(nil)
+
+// ListExclusionsPaginatorOptions is the paginator options for ListExclusions
+type ListExclusionsPaginatorOptions struct {
+	// You can use this parameter to indicate the maximum number of items you want in
+	// the response. The default value is 100. The maximum value is 500.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListExclusionsPaginator is a paginator for ListExclusions
+type ListExclusionsPaginator struct {
+	options   ListExclusionsPaginatorOptions
+	client    ListExclusionsAPIClient
+	params    *ListExclusionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListExclusionsPaginator returns a new ListExclusionsPaginator
+func NewListExclusionsPaginator(client ListExclusionsAPIClient, params *ListExclusionsInput, optFns ...func(*ListExclusionsPaginatorOptions)) *ListExclusionsPaginator {
+	options := ListExclusionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListExclusionsInput{}
+	}
+
+	return &ListExclusionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListExclusionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListExclusions page.
+func (p *ListExclusionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListExclusionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListExclusions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListExclusions(region string) *awsmiddleware.RegisterServiceMetadata {

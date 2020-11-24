@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -221,6 +222,92 @@ func addOperationDescribeSecurityGroupsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	return nil
+}
+
+// DescribeSecurityGroupsAPIClient is a client that implements the
+// DescribeSecurityGroups operation.
+type DescribeSecurityGroupsAPIClient interface {
+	DescribeSecurityGroups(context.Context, *DescribeSecurityGroupsInput, ...func(*Options)) (*DescribeSecurityGroupsOutput, error)
+}
+
+var _ DescribeSecurityGroupsAPIClient = (*Client)(nil)
+
+// DescribeSecurityGroupsPaginatorOptions is the paginator options for
+// DescribeSecurityGroups
+type DescribeSecurityGroupsPaginatorOptions struct {
+	// The maximum number of results to return in a single call. To retrieve the
+	// remaining results, make another request with the returned NextToken value. This
+	// value can be between 5 and 1000. If this parameter is not specified, then all
+	// results are returned.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeSecurityGroupsPaginator is a paginator for DescribeSecurityGroups
+type DescribeSecurityGroupsPaginator struct {
+	options   DescribeSecurityGroupsPaginatorOptions
+	client    DescribeSecurityGroupsAPIClient
+	params    *DescribeSecurityGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeSecurityGroupsPaginator returns a new DescribeSecurityGroupsPaginator
+func NewDescribeSecurityGroupsPaginator(client DescribeSecurityGroupsAPIClient, params *DescribeSecurityGroupsInput, optFns ...func(*DescribeSecurityGroupsPaginatorOptions)) *DescribeSecurityGroupsPaginator {
+	options := DescribeSecurityGroupsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeSecurityGroupsInput{}
+	}
+
+	return &DescribeSecurityGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeSecurityGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeSecurityGroups page.
+func (p *DescribeSecurityGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeSecurityGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeSecurityGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeSecurityGroups(region string) *awsmiddleware.RegisterServiceMetadata {

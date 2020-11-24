@@ -4,6 +4,7 @@ package applicationautoscaling
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/types"
@@ -259,6 +260,99 @@ func addOperationDescribeScheduledActionsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// DescribeScheduledActionsAPIClient is a client that implements the
+// DescribeScheduledActions operation.
+type DescribeScheduledActionsAPIClient interface {
+	DescribeScheduledActions(context.Context, *DescribeScheduledActionsInput, ...func(*Options)) (*DescribeScheduledActionsOutput, error)
+}
+
+var _ DescribeScheduledActionsAPIClient = (*Client)(nil)
+
+// DescribeScheduledActionsPaginatorOptions is the paginator options for
+// DescribeScheduledActions
+type DescribeScheduledActionsPaginatorOptions struct {
+	// The maximum number of scheduled action results. This value can be between 1 and
+	// 50. The default value is 50. If this parameter is used, the operation returns up
+	// to MaxResults results at a time, along with a NextToken value. To get the next
+	// set of results, include the NextToken value in a subsequent call. If this
+	// parameter is not used, the operation returns up to 50 results and a NextToken
+	// value, if applicable.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeScheduledActionsPaginator is a paginator for DescribeScheduledActions
+type DescribeScheduledActionsPaginator struct {
+	options   DescribeScheduledActionsPaginatorOptions
+	client    DescribeScheduledActionsAPIClient
+	params    *DescribeScheduledActionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeScheduledActionsPaginator returns a new
+// DescribeScheduledActionsPaginator
+func NewDescribeScheduledActionsPaginator(client DescribeScheduledActionsAPIClient, params *DescribeScheduledActionsInput, optFns ...func(*DescribeScheduledActionsPaginatorOptions)) *DescribeScheduledActionsPaginator {
+	options := DescribeScheduledActionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeScheduledActionsInput{}
+	}
+
+	return &DescribeScheduledActionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeScheduledActionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeScheduledActions page.
+func (p *DescribeScheduledActionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeScheduledActionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeScheduledActions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeScheduledActions(region string) *awsmiddleware.RegisterServiceMetadata {

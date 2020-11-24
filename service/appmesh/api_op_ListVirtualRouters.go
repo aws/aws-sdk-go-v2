@@ -4,6 +4,7 @@ package appmesh
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
@@ -130,4 +131,97 @@ func addOperationListVirtualRoutersMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// ListVirtualRoutersAPIClient is a client that implements the ListVirtualRouters
+// operation.
+type ListVirtualRoutersAPIClient interface {
+	ListVirtualRouters(context.Context, *ListVirtualRoutersInput, ...func(*Options)) (*ListVirtualRoutersOutput, error)
+}
+
+var _ ListVirtualRoutersAPIClient = (*Client)(nil)
+
+// ListVirtualRoutersPaginatorOptions is the paginator options for
+// ListVirtualRouters
+type ListVirtualRoutersPaginatorOptions struct {
+	// The maximum number of results returned by ListVirtualRouters in paginated
+	// output. When you use this parameter, ListVirtualRouters returns only limit
+	// results in a single page along with a nextToken response element. You can see
+	// the remaining results of the initial request by sending another
+	// ListVirtualRouters request with the returned nextToken value. This value can be
+	// between 1 and 100. If you don't use this parameter, ListVirtualRouters returns
+	// up to 100 results and a nextToken value if applicable.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListVirtualRoutersPaginator is a paginator for ListVirtualRouters
+type ListVirtualRoutersPaginator struct {
+	options   ListVirtualRoutersPaginatorOptions
+	client    ListVirtualRoutersAPIClient
+	params    *ListVirtualRoutersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListVirtualRoutersPaginator returns a new ListVirtualRoutersPaginator
+func NewListVirtualRoutersPaginator(client ListVirtualRoutersAPIClient, params *ListVirtualRoutersInput, optFns ...func(*ListVirtualRoutersPaginatorOptions)) *ListVirtualRoutersPaginator {
+	options := ListVirtualRoutersPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListVirtualRoutersInput{}
+	}
+
+	return &ListVirtualRoutersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListVirtualRoutersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListVirtualRouters page.
+func (p *ListVirtualRoutersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListVirtualRoutersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.ListVirtualRouters(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }

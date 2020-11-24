@@ -4,6 +4,7 @@ package workmail
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
@@ -112,6 +113,93 @@ func addOperationListMailboxExportJobsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// ListMailboxExportJobsAPIClient is a client that implements the
+// ListMailboxExportJobs operation.
+type ListMailboxExportJobsAPIClient interface {
+	ListMailboxExportJobs(context.Context, *ListMailboxExportJobsInput, ...func(*Options)) (*ListMailboxExportJobsOutput, error)
+}
+
+var _ ListMailboxExportJobsAPIClient = (*Client)(nil)
+
+// ListMailboxExportJobsPaginatorOptions is the paginator options for
+// ListMailboxExportJobs
+type ListMailboxExportJobsPaginatorOptions struct {
+	// The maximum number of results to return in a single call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListMailboxExportJobsPaginator is a paginator for ListMailboxExportJobs
+type ListMailboxExportJobsPaginator struct {
+	options   ListMailboxExportJobsPaginatorOptions
+	client    ListMailboxExportJobsAPIClient
+	params    *ListMailboxExportJobsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListMailboxExportJobsPaginator returns a new ListMailboxExportJobsPaginator
+func NewListMailboxExportJobsPaginator(client ListMailboxExportJobsAPIClient, params *ListMailboxExportJobsInput, optFns ...func(*ListMailboxExportJobsPaginatorOptions)) *ListMailboxExportJobsPaginator {
+	options := ListMailboxExportJobsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListMailboxExportJobsInput{}
+	}
+
+	return &ListMailboxExportJobsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListMailboxExportJobsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListMailboxExportJobs page.
+func (p *ListMailboxExportJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListMailboxExportJobsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListMailboxExportJobs(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListMailboxExportJobs(region string) *awsmiddleware.RegisterServiceMetadata {

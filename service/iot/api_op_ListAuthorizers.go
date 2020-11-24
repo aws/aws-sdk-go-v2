@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
@@ -109,6 +110,92 @@ func addOperationListAuthorizersMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	return nil
+}
+
+// ListAuthorizersAPIClient is a client that implements the ListAuthorizers
+// operation.
+type ListAuthorizersAPIClient interface {
+	ListAuthorizers(context.Context, *ListAuthorizersInput, ...func(*Options)) (*ListAuthorizersOutput, error)
+}
+
+var _ ListAuthorizersAPIClient = (*Client)(nil)
+
+// ListAuthorizersPaginatorOptions is the paginator options for ListAuthorizers
+type ListAuthorizersPaginatorOptions struct {
+	// The maximum number of results to return at one time.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAuthorizersPaginator is a paginator for ListAuthorizers
+type ListAuthorizersPaginator struct {
+	options   ListAuthorizersPaginatorOptions
+	client    ListAuthorizersAPIClient
+	params    *ListAuthorizersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAuthorizersPaginator returns a new ListAuthorizersPaginator
+func NewListAuthorizersPaginator(client ListAuthorizersAPIClient, params *ListAuthorizersInput, optFns ...func(*ListAuthorizersPaginatorOptions)) *ListAuthorizersPaginator {
+	options := ListAuthorizersPaginatorOptions{}
+	if params.PageSize != nil {
+		options.Limit = *params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAuthorizersInput{}
+	}
+
+	return &ListAuthorizersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAuthorizersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAuthorizers page.
+func (p *ListAuthorizersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAuthorizersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.PageSize = limit
+
+	result, err := p.client.ListAuthorizers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAuthorizers(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package transfer
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
@@ -111,6 +112,92 @@ func addOperationListServersMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+// ListServersAPIClient is a client that implements the ListServers operation.
+type ListServersAPIClient interface {
+	ListServers(context.Context, *ListServersInput, ...func(*Options)) (*ListServersOutput, error)
+}
+
+var _ ListServersAPIClient = (*Client)(nil)
+
+// ListServersPaginatorOptions is the paginator options for ListServers
+type ListServersPaginatorOptions struct {
+	// Specifies the number of servers to return as a response to the ListServers
+	// query.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListServersPaginator is a paginator for ListServers
+type ListServersPaginator struct {
+	options   ListServersPaginatorOptions
+	client    ListServersAPIClient
+	params    *ListServersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListServersPaginator returns a new ListServersPaginator
+func NewListServersPaginator(client ListServersAPIClient, params *ListServersInput, optFns ...func(*ListServersPaginatorOptions)) *ListServersPaginator {
+	options := ListServersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListServersInput{}
+	}
+
+	return &ListServersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListServersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListServers page.
+func (p *ListServersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListServersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListServers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListServers(region string) *awsmiddleware.RegisterServiceMetadata {

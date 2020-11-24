@@ -4,6 +4,7 @@ package codedeploy
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
@@ -141,6 +142,82 @@ func addOperationListDeploymentInstancesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// ListDeploymentInstancesAPIClient is a client that implements the
+// ListDeploymentInstances operation.
+type ListDeploymentInstancesAPIClient interface {
+	ListDeploymentInstances(context.Context, *ListDeploymentInstancesInput, ...func(*Options)) (*ListDeploymentInstancesOutput, error)
+}
+
+var _ ListDeploymentInstancesAPIClient = (*Client)(nil)
+
+// ListDeploymentInstancesPaginatorOptions is the paginator options for
+// ListDeploymentInstances
+type ListDeploymentInstancesPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDeploymentInstancesPaginator is a paginator for ListDeploymentInstances
+type ListDeploymentInstancesPaginator struct {
+	options   ListDeploymentInstancesPaginatorOptions
+	client    ListDeploymentInstancesAPIClient
+	params    *ListDeploymentInstancesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDeploymentInstancesPaginator returns a new
+// ListDeploymentInstancesPaginator
+func NewListDeploymentInstancesPaginator(client ListDeploymentInstancesAPIClient, params *ListDeploymentInstancesInput, optFns ...func(*ListDeploymentInstancesPaginatorOptions)) *ListDeploymentInstancesPaginator {
+	options := ListDeploymentInstancesPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListDeploymentInstancesInput{}
+	}
+
+	return &ListDeploymentInstancesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDeploymentInstancesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDeploymentInstances page.
+func (p *ListDeploymentInstancesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDeploymentInstancesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListDeploymentInstances(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDeploymentInstances(region string) *awsmiddleware.RegisterServiceMetadata {

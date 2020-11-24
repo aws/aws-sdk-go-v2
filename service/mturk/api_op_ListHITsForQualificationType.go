@@ -4,6 +4,7 @@ package mturk
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
@@ -120,6 +121,95 @@ func addOperationListHITsForQualificationTypeMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+// ListHITsForQualificationTypeAPIClient is a client that implements the
+// ListHITsForQualificationType operation.
+type ListHITsForQualificationTypeAPIClient interface {
+	ListHITsForQualificationType(context.Context, *ListHITsForQualificationTypeInput, ...func(*Options)) (*ListHITsForQualificationTypeOutput, error)
+}
+
+var _ ListHITsForQualificationTypeAPIClient = (*Client)(nil)
+
+// ListHITsForQualificationTypePaginatorOptions is the paginator options for
+// ListHITsForQualificationType
+type ListHITsForQualificationTypePaginatorOptions struct {
+	// Limit the number of results returned.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListHITsForQualificationTypePaginator is a paginator for
+// ListHITsForQualificationType
+type ListHITsForQualificationTypePaginator struct {
+	options   ListHITsForQualificationTypePaginatorOptions
+	client    ListHITsForQualificationTypeAPIClient
+	params    *ListHITsForQualificationTypeInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListHITsForQualificationTypePaginator returns a new
+// ListHITsForQualificationTypePaginator
+func NewListHITsForQualificationTypePaginator(client ListHITsForQualificationTypeAPIClient, params *ListHITsForQualificationTypeInput, optFns ...func(*ListHITsForQualificationTypePaginatorOptions)) *ListHITsForQualificationTypePaginator {
+	options := ListHITsForQualificationTypePaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListHITsForQualificationTypeInput{}
+	}
+
+	return &ListHITsForQualificationTypePaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListHITsForQualificationTypePaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListHITsForQualificationType page.
+func (p *ListHITsForQualificationTypePaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListHITsForQualificationTypeOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListHITsForQualificationType(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListHITsForQualificationType(region string) *awsmiddleware.RegisterServiceMetadata {

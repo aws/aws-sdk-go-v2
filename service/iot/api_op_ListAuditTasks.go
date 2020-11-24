@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
@@ -129,6 +130,92 @@ func addOperationListAuditTasksMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListAuditTasksAPIClient is a client that implements the ListAuditTasks
+// operation.
+type ListAuditTasksAPIClient interface {
+	ListAuditTasks(context.Context, *ListAuditTasksInput, ...func(*Options)) (*ListAuditTasksOutput, error)
+}
+
+var _ ListAuditTasksAPIClient = (*Client)(nil)
+
+// ListAuditTasksPaginatorOptions is the paginator options for ListAuditTasks
+type ListAuditTasksPaginatorOptions struct {
+	// The maximum number of results to return at one time. The default is 25.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAuditTasksPaginator is a paginator for ListAuditTasks
+type ListAuditTasksPaginator struct {
+	options   ListAuditTasksPaginatorOptions
+	client    ListAuditTasksAPIClient
+	params    *ListAuditTasksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAuditTasksPaginator returns a new ListAuditTasksPaginator
+func NewListAuditTasksPaginator(client ListAuditTasksAPIClient, params *ListAuditTasksInput, optFns ...func(*ListAuditTasksPaginatorOptions)) *ListAuditTasksPaginator {
+	options := ListAuditTasksPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAuditTasksInput{}
+	}
+
+	return &ListAuditTasksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAuditTasksPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAuditTasks page.
+func (p *ListAuditTasksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAuditTasksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListAuditTasks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAuditTasks(region string) *awsmiddleware.RegisterServiceMetadata {

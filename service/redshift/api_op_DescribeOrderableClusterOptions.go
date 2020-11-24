@@ -4,6 +4,7 @@ package redshift
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
@@ -136,6 +137,99 @@ func addOperationDescribeOrderableClusterOptionsMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+// DescribeOrderableClusterOptionsAPIClient is a client that implements the
+// DescribeOrderableClusterOptions operation.
+type DescribeOrderableClusterOptionsAPIClient interface {
+	DescribeOrderableClusterOptions(context.Context, *DescribeOrderableClusterOptionsInput, ...func(*Options)) (*DescribeOrderableClusterOptionsOutput, error)
+}
+
+var _ DescribeOrderableClusterOptionsAPIClient = (*Client)(nil)
+
+// DescribeOrderableClusterOptionsPaginatorOptions is the paginator options for
+// DescribeOrderableClusterOptions
+type DescribeOrderableClusterOptionsPaginatorOptions struct {
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value. Default: 100
+	// Constraints: minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeOrderableClusterOptionsPaginator is a paginator for
+// DescribeOrderableClusterOptions
+type DescribeOrderableClusterOptionsPaginator struct {
+	options   DescribeOrderableClusterOptionsPaginatorOptions
+	client    DescribeOrderableClusterOptionsAPIClient
+	params    *DescribeOrderableClusterOptionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeOrderableClusterOptionsPaginator returns a new
+// DescribeOrderableClusterOptionsPaginator
+func NewDescribeOrderableClusterOptionsPaginator(client DescribeOrderableClusterOptionsAPIClient, params *DescribeOrderableClusterOptionsInput, optFns ...func(*DescribeOrderableClusterOptionsPaginatorOptions)) *DescribeOrderableClusterOptionsPaginator {
+	options := DescribeOrderableClusterOptionsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeOrderableClusterOptionsInput{}
+	}
+
+	return &DescribeOrderableClusterOptionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeOrderableClusterOptionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeOrderableClusterOptions page.
+func (p *DescribeOrderableClusterOptionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeOrderableClusterOptionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeOrderableClusterOptions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeOrderableClusterOptions(region string) *awsmiddleware.RegisterServiceMetadata {

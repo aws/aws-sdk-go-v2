@@ -27,11 +27,39 @@ func (c *Client) JsonMaps(ctx context.Context, params *JsonMapsInput, optFns ...
 }
 
 type JsonMapsInput struct {
-	MyMap map[string]types.GreetingStruct
+	DenseBooleanMap map[string]bool
+
+	DenseNumberMap map[string]int32
+
+	DenseStringMap map[string]string
+
+	DenseStructMap map[string]types.GreetingStruct
+
+	SparseBooleanMap map[string]*bool
+
+	SparseNumberMap map[string]*int32
+
+	SparseStringMap map[string]*string
+
+	SparseStructMap map[string]*types.GreetingStruct
 }
 
 type JsonMapsOutput struct {
-	MyMap map[string]types.GreetingStruct
+	DenseBooleanMap map[string]bool
+
+	DenseNumberMap map[string]int32
+
+	DenseStringMap map[string]string
+
+	DenseStructMap map[string]types.GreetingStruct
+
+	SparseBooleanMap map[string]*bool
+
+	SparseNumberMap map[string]*int32
+
+	SparseStringMap map[string]*string
+
+	SparseStructMap map[string]*types.GreetingStruct
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

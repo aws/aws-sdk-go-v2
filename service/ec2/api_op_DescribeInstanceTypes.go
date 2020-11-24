@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -266,6 +267,95 @@ func addOperationDescribeInstanceTypesMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// DescribeInstanceTypesAPIClient is a client that implements the
+// DescribeInstanceTypes operation.
+type DescribeInstanceTypesAPIClient interface {
+	DescribeInstanceTypes(context.Context, *DescribeInstanceTypesInput, ...func(*Options)) (*DescribeInstanceTypesOutput, error)
+}
+
+var _ DescribeInstanceTypesAPIClient = (*Client)(nil)
+
+// DescribeInstanceTypesPaginatorOptions is the paginator options for
+// DescribeInstanceTypes
+type DescribeInstanceTypesPaginatorOptions struct {
+	// The maximum number of results to return for the request in a single page. The
+	// remaining results can be seen by sending another request with the next token
+	// value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeInstanceTypesPaginator is a paginator for DescribeInstanceTypes
+type DescribeInstanceTypesPaginator struct {
+	options   DescribeInstanceTypesPaginatorOptions
+	client    DescribeInstanceTypesAPIClient
+	params    *DescribeInstanceTypesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeInstanceTypesPaginator returns a new DescribeInstanceTypesPaginator
+func NewDescribeInstanceTypesPaginator(client DescribeInstanceTypesAPIClient, params *DescribeInstanceTypesInput, optFns ...func(*DescribeInstanceTypesPaginatorOptions)) *DescribeInstanceTypesPaginator {
+	options := DescribeInstanceTypesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeInstanceTypesInput{}
+	}
+
+	return &DescribeInstanceTypesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeInstanceTypesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeInstanceTypes page.
+func (p *DescribeInstanceTypesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeInstanceTypesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeInstanceTypes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeInstanceTypes(region string) *awsmiddleware.RegisterServiceMetadata {

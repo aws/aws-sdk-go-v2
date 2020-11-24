@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -142,6 +143,90 @@ func addOperationDescribeDhcpOptionsMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// DescribeDhcpOptionsAPIClient is a client that implements the DescribeDhcpOptions
+// operation.
+type DescribeDhcpOptionsAPIClient interface {
+	DescribeDhcpOptions(context.Context, *DescribeDhcpOptionsInput, ...func(*Options)) (*DescribeDhcpOptionsOutput, error)
+}
+
+var _ DescribeDhcpOptionsAPIClient = (*Client)(nil)
+
+// DescribeDhcpOptionsPaginatorOptions is the paginator options for
+// DescribeDhcpOptions
+type DescribeDhcpOptionsPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeDhcpOptionsPaginator is a paginator for DescribeDhcpOptions
+type DescribeDhcpOptionsPaginator struct {
+	options   DescribeDhcpOptionsPaginatorOptions
+	client    DescribeDhcpOptionsAPIClient
+	params    *DescribeDhcpOptionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeDhcpOptionsPaginator returns a new DescribeDhcpOptionsPaginator
+func NewDescribeDhcpOptionsPaginator(client DescribeDhcpOptionsAPIClient, params *DescribeDhcpOptionsInput, optFns ...func(*DescribeDhcpOptionsPaginatorOptions)) *DescribeDhcpOptionsPaginator {
+	options := DescribeDhcpOptionsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeDhcpOptionsInput{}
+	}
+
+	return &DescribeDhcpOptionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeDhcpOptionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeDhcpOptions page.
+func (p *DescribeDhcpOptionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDhcpOptionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeDhcpOptions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeDhcpOptions(region string) *awsmiddleware.RegisterServiceMetadata {

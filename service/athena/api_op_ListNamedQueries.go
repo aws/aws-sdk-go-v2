@@ -4,6 +4,7 @@ package athena
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -116,6 +117,92 @@ func addOperationListNamedQueriesMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// ListNamedQueriesAPIClient is a client that implements the ListNamedQueries
+// operation.
+type ListNamedQueriesAPIClient interface {
+	ListNamedQueries(context.Context, *ListNamedQueriesInput, ...func(*Options)) (*ListNamedQueriesOutput, error)
+}
+
+var _ ListNamedQueriesAPIClient = (*Client)(nil)
+
+// ListNamedQueriesPaginatorOptions is the paginator options for ListNamedQueries
+type ListNamedQueriesPaginatorOptions struct {
+	// The maximum number of queries to return in this request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListNamedQueriesPaginator is a paginator for ListNamedQueries
+type ListNamedQueriesPaginator struct {
+	options   ListNamedQueriesPaginatorOptions
+	client    ListNamedQueriesAPIClient
+	params    *ListNamedQueriesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListNamedQueriesPaginator returns a new ListNamedQueriesPaginator
+func NewListNamedQueriesPaginator(client ListNamedQueriesAPIClient, params *ListNamedQueriesInput, optFns ...func(*ListNamedQueriesPaginatorOptions)) *ListNamedQueriesPaginator {
+	options := ListNamedQueriesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListNamedQueriesInput{}
+	}
+
+	return &ListNamedQueriesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListNamedQueriesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListNamedQueries page.
+func (p *ListNamedQueriesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListNamedQueriesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListNamedQueries(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListNamedQueries(region string) *awsmiddleware.RegisterServiceMetadata {

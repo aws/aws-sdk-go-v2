@@ -4,6 +4,7 @@ package codestarnotifications
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/types"
@@ -116,6 +117,90 @@ func addOperationListNotificationRulesMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// ListNotificationRulesAPIClient is a client that implements the
+// ListNotificationRules operation.
+type ListNotificationRulesAPIClient interface {
+	ListNotificationRules(context.Context, *ListNotificationRulesInput, ...func(*Options)) (*ListNotificationRulesOutput, error)
+}
+
+var _ ListNotificationRulesAPIClient = (*Client)(nil)
+
+// ListNotificationRulesPaginatorOptions is the paginator options for
+// ListNotificationRules
+type ListNotificationRulesPaginatorOptions struct {
+	// A non-negative integer used to limit the number of returned results. The maximum
+	// number of results that can be returned is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListNotificationRulesPaginator is a paginator for ListNotificationRules
+type ListNotificationRulesPaginator struct {
+	options   ListNotificationRulesPaginatorOptions
+	client    ListNotificationRulesAPIClient
+	params    *ListNotificationRulesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListNotificationRulesPaginator returns a new ListNotificationRulesPaginator
+func NewListNotificationRulesPaginator(client ListNotificationRulesAPIClient, params *ListNotificationRulesInput, optFns ...func(*ListNotificationRulesPaginatorOptions)) *ListNotificationRulesPaginator {
+	options := ListNotificationRulesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListNotificationRulesInput{}
+	}
+
+	return &ListNotificationRulesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListNotificationRulesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListNotificationRules page.
+func (p *ListNotificationRulesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListNotificationRulesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListNotificationRules(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListNotificationRules(region string) *awsmiddleware.RegisterServiceMetadata {

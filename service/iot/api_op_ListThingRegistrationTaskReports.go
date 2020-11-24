@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
@@ -120,6 +121,95 @@ func addOperationListThingRegistrationTaskReportsMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+// ListThingRegistrationTaskReportsAPIClient is a client that implements the
+// ListThingRegistrationTaskReports operation.
+type ListThingRegistrationTaskReportsAPIClient interface {
+	ListThingRegistrationTaskReports(context.Context, *ListThingRegistrationTaskReportsInput, ...func(*Options)) (*ListThingRegistrationTaskReportsOutput, error)
+}
+
+var _ ListThingRegistrationTaskReportsAPIClient = (*Client)(nil)
+
+// ListThingRegistrationTaskReportsPaginatorOptions is the paginator options for
+// ListThingRegistrationTaskReports
+type ListThingRegistrationTaskReportsPaginatorOptions struct {
+	// The maximum number of results to return per request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListThingRegistrationTaskReportsPaginator is a paginator for
+// ListThingRegistrationTaskReports
+type ListThingRegistrationTaskReportsPaginator struct {
+	options   ListThingRegistrationTaskReportsPaginatorOptions
+	client    ListThingRegistrationTaskReportsAPIClient
+	params    *ListThingRegistrationTaskReportsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListThingRegistrationTaskReportsPaginator returns a new
+// ListThingRegistrationTaskReportsPaginator
+func NewListThingRegistrationTaskReportsPaginator(client ListThingRegistrationTaskReportsAPIClient, params *ListThingRegistrationTaskReportsInput, optFns ...func(*ListThingRegistrationTaskReportsPaginatorOptions)) *ListThingRegistrationTaskReportsPaginator {
+	options := ListThingRegistrationTaskReportsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListThingRegistrationTaskReportsInput{}
+	}
+
+	return &ListThingRegistrationTaskReportsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListThingRegistrationTaskReportsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListThingRegistrationTaskReports page.
+func (p *ListThingRegistrationTaskReportsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListThingRegistrationTaskReportsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListThingRegistrationTaskReports(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListThingRegistrationTaskReports(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package worklink
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
@@ -114,6 +115,95 @@ func addOperationListWebsiteAuthorizationProvidersMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
+}
+
+// ListWebsiteAuthorizationProvidersAPIClient is a client that implements the
+// ListWebsiteAuthorizationProviders operation.
+type ListWebsiteAuthorizationProvidersAPIClient interface {
+	ListWebsiteAuthorizationProviders(context.Context, *ListWebsiteAuthorizationProvidersInput, ...func(*Options)) (*ListWebsiteAuthorizationProvidersOutput, error)
+}
+
+var _ ListWebsiteAuthorizationProvidersAPIClient = (*Client)(nil)
+
+// ListWebsiteAuthorizationProvidersPaginatorOptions is the paginator options for
+// ListWebsiteAuthorizationProviders
+type ListWebsiteAuthorizationProvidersPaginatorOptions struct {
+	// The maximum number of results to be included in the next page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListWebsiteAuthorizationProvidersPaginator is a paginator for
+// ListWebsiteAuthorizationProviders
+type ListWebsiteAuthorizationProvidersPaginator struct {
+	options   ListWebsiteAuthorizationProvidersPaginatorOptions
+	client    ListWebsiteAuthorizationProvidersAPIClient
+	params    *ListWebsiteAuthorizationProvidersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListWebsiteAuthorizationProvidersPaginator returns a new
+// ListWebsiteAuthorizationProvidersPaginator
+func NewListWebsiteAuthorizationProvidersPaginator(client ListWebsiteAuthorizationProvidersAPIClient, params *ListWebsiteAuthorizationProvidersInput, optFns ...func(*ListWebsiteAuthorizationProvidersPaginatorOptions)) *ListWebsiteAuthorizationProvidersPaginator {
+	options := ListWebsiteAuthorizationProvidersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListWebsiteAuthorizationProvidersInput{}
+	}
+
+	return &ListWebsiteAuthorizationProvidersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListWebsiteAuthorizationProvidersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListWebsiteAuthorizationProviders page.
+func (p *ListWebsiteAuthorizationProvidersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListWebsiteAuthorizationProvidersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListWebsiteAuthorizationProviders(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListWebsiteAuthorizationProviders(region string) *awsmiddleware.RegisterServiceMetadata {

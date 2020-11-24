@@ -4,6 +4,7 @@ package resourcegroupstaggingapi
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -104,6 +105,79 @@ func addOperationGetTagKeysMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+// GetTagKeysAPIClient is a client that implements the GetTagKeys operation.
+type GetTagKeysAPIClient interface {
+	GetTagKeys(context.Context, *GetTagKeysInput, ...func(*Options)) (*GetTagKeysOutput, error)
+}
+
+var _ GetTagKeysAPIClient = (*Client)(nil)
+
+// GetTagKeysPaginatorOptions is the paginator options for GetTagKeys
+type GetTagKeysPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetTagKeysPaginator is a paginator for GetTagKeys
+type GetTagKeysPaginator struct {
+	options   GetTagKeysPaginatorOptions
+	client    GetTagKeysAPIClient
+	params    *GetTagKeysInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetTagKeysPaginator returns a new GetTagKeysPaginator
+func NewGetTagKeysPaginator(client GetTagKeysAPIClient, params *GetTagKeysInput, optFns ...func(*GetTagKeysPaginatorOptions)) *GetTagKeysPaginator {
+	options := GetTagKeysPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetTagKeysInput{}
+	}
+
+	return &GetTagKeysPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetTagKeysPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetTagKeys page.
+func (p *GetTagKeysPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetTagKeysOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PaginationToken = p.nextToken
+
+	result, err := p.client.GetTagKeys(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.PaginationToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetTagKeys(region string) *awsmiddleware.RegisterServiceMetadata {

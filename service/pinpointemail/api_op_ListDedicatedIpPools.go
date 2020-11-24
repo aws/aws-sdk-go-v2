@@ -4,6 +4,7 @@ package pinpointemail
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -112,6 +113,96 @@ func addOperationListDedicatedIpPoolsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// ListDedicatedIpPoolsAPIClient is a client that implements the
+// ListDedicatedIpPools operation.
+type ListDedicatedIpPoolsAPIClient interface {
+	ListDedicatedIpPools(context.Context, *ListDedicatedIpPoolsInput, ...func(*Options)) (*ListDedicatedIpPoolsOutput, error)
+}
+
+var _ ListDedicatedIpPoolsAPIClient = (*Client)(nil)
+
+// ListDedicatedIpPoolsPaginatorOptions is the paginator options for
+// ListDedicatedIpPools
+type ListDedicatedIpPoolsPaginatorOptions struct {
+	// The number of results to show in a single call to ListDedicatedIpPools. If the
+	// number of results is larger than the number you specified in this parameter,
+	// then the response includes a NextToken element, which you can use to obtain
+	// additional results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDedicatedIpPoolsPaginator is a paginator for ListDedicatedIpPools
+type ListDedicatedIpPoolsPaginator struct {
+	options   ListDedicatedIpPoolsPaginatorOptions
+	client    ListDedicatedIpPoolsAPIClient
+	params    *ListDedicatedIpPoolsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDedicatedIpPoolsPaginator returns a new ListDedicatedIpPoolsPaginator
+func NewListDedicatedIpPoolsPaginator(client ListDedicatedIpPoolsAPIClient, params *ListDedicatedIpPoolsInput, optFns ...func(*ListDedicatedIpPoolsPaginatorOptions)) *ListDedicatedIpPoolsPaginator {
+	options := ListDedicatedIpPoolsPaginatorOptions{}
+	if params.PageSize != nil {
+		options.Limit = *params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListDedicatedIpPoolsInput{}
+	}
+
+	return &ListDedicatedIpPoolsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDedicatedIpPoolsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDedicatedIpPools page.
+func (p *ListDedicatedIpPoolsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDedicatedIpPoolsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.PageSize = limit
+
+	result, err := p.client.ListDedicatedIpPools(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDedicatedIpPools(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package glue
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
@@ -118,6 +119,92 @@ func addOperationGetConnectionsMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// GetConnectionsAPIClient is a client that implements the GetConnections
+// operation.
+type GetConnectionsAPIClient interface {
+	GetConnections(context.Context, *GetConnectionsInput, ...func(*Options)) (*GetConnectionsOutput, error)
+}
+
+var _ GetConnectionsAPIClient = (*Client)(nil)
+
+// GetConnectionsPaginatorOptions is the paginator options for GetConnections
+type GetConnectionsPaginatorOptions struct {
+	// The maximum number of connections to return in one response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetConnectionsPaginator is a paginator for GetConnections
+type GetConnectionsPaginator struct {
+	options   GetConnectionsPaginatorOptions
+	client    GetConnectionsAPIClient
+	params    *GetConnectionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetConnectionsPaginator returns a new GetConnectionsPaginator
+func NewGetConnectionsPaginator(client GetConnectionsAPIClient, params *GetConnectionsInput, optFns ...func(*GetConnectionsPaginatorOptions)) *GetConnectionsPaginator {
+	options := GetConnectionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetConnectionsInput{}
+	}
+
+	return &GetConnectionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetConnectionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetConnections page.
+func (p *GetConnectionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetConnectionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetConnections(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetConnections(region string) *awsmiddleware.RegisterServiceMetadata {

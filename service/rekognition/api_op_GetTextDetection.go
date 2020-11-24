@@ -4,6 +4,7 @@ package rekognition
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
@@ -151,6 +152,93 @@ func addOperationGetTextDetectionMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// GetTextDetectionAPIClient is a client that implements the GetTextDetection
+// operation.
+type GetTextDetectionAPIClient interface {
+	GetTextDetection(context.Context, *GetTextDetectionInput, ...func(*Options)) (*GetTextDetectionOutput, error)
+}
+
+var _ GetTextDetectionAPIClient = (*Client)(nil)
+
+// GetTextDetectionPaginatorOptions is the paginator options for GetTextDetection
+type GetTextDetectionPaginatorOptions struct {
+	// Maximum number of results to return per paginated call. The largest value you
+	// can specify is 1000.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetTextDetectionPaginator is a paginator for GetTextDetection
+type GetTextDetectionPaginator struct {
+	options   GetTextDetectionPaginatorOptions
+	client    GetTextDetectionAPIClient
+	params    *GetTextDetectionInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetTextDetectionPaginator returns a new GetTextDetectionPaginator
+func NewGetTextDetectionPaginator(client GetTextDetectionAPIClient, params *GetTextDetectionInput, optFns ...func(*GetTextDetectionPaginatorOptions)) *GetTextDetectionPaginator {
+	options := GetTextDetectionPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetTextDetectionInput{}
+	}
+
+	return &GetTextDetectionPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetTextDetectionPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetTextDetection page.
+func (p *GetTextDetectionPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetTextDetectionOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetTextDetection(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetTextDetection(region string) *awsmiddleware.RegisterServiceMetadata {

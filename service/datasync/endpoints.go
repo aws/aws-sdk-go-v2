@@ -84,10 +84,9 @@ func (m *ResolveEndpoint) HandleSerialize(ctx context.Context, in middleware.Ser
 		}
 		ctx = awsmiddleware.SetSigningName(ctx, signingName)
 	}
-
-	ctx = awsmiddleware.SetSigningRegion(ctx, endpoint.SigningRegion)
 	ctx = smithyhttp.SetHostnameImmutable(ctx, endpoint.HostnameImmutable)
-
+	ctx = awsmiddleware.SetSigningRegion(ctx, endpoint.SigningRegion)
+	ctx = awsmiddleware.SetPartitionID(ctx, endpoint.PartitionID)
 	return next.HandleSerialize(ctx, in)
 }
 func addResolveEndpointMiddleware(stack *middleware.Stack, o Options) error {

@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
@@ -109,6 +110,94 @@ func addOperationListOutgoingCertificatesMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// ListOutgoingCertificatesAPIClient is a client that implements the
+// ListOutgoingCertificates operation.
+type ListOutgoingCertificatesAPIClient interface {
+	ListOutgoingCertificates(context.Context, *ListOutgoingCertificatesInput, ...func(*Options)) (*ListOutgoingCertificatesOutput, error)
+}
+
+var _ ListOutgoingCertificatesAPIClient = (*Client)(nil)
+
+// ListOutgoingCertificatesPaginatorOptions is the paginator options for
+// ListOutgoingCertificates
+type ListOutgoingCertificatesPaginatorOptions struct {
+	// The result page size.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListOutgoingCertificatesPaginator is a paginator for ListOutgoingCertificates
+type ListOutgoingCertificatesPaginator struct {
+	options   ListOutgoingCertificatesPaginatorOptions
+	client    ListOutgoingCertificatesAPIClient
+	params    *ListOutgoingCertificatesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListOutgoingCertificatesPaginator returns a new
+// ListOutgoingCertificatesPaginator
+func NewListOutgoingCertificatesPaginator(client ListOutgoingCertificatesAPIClient, params *ListOutgoingCertificatesInput, optFns ...func(*ListOutgoingCertificatesPaginatorOptions)) *ListOutgoingCertificatesPaginator {
+	options := ListOutgoingCertificatesPaginatorOptions{}
+	if params.PageSize != nil {
+		options.Limit = *params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListOutgoingCertificatesInput{}
+	}
+
+	return &ListOutgoingCertificatesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListOutgoingCertificatesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListOutgoingCertificates page.
+func (p *ListOutgoingCertificatesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListOutgoingCertificatesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.PageSize = limit
+
+	result, err := p.client.ListOutgoingCertificates(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListOutgoingCertificates(region string) *awsmiddleware.RegisterServiceMetadata {

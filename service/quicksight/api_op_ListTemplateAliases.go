@@ -4,6 +4,7 @@ package quicksight
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
@@ -123,6 +124,89 @@ func addOperationListTemplateAliasesMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// ListTemplateAliasesAPIClient is a client that implements the ListTemplateAliases
+// operation.
+type ListTemplateAliasesAPIClient interface {
+	ListTemplateAliases(context.Context, *ListTemplateAliasesInput, ...func(*Options)) (*ListTemplateAliasesOutput, error)
+}
+
+var _ ListTemplateAliasesAPIClient = (*Client)(nil)
+
+// ListTemplateAliasesPaginatorOptions is the paginator options for
+// ListTemplateAliases
+type ListTemplateAliasesPaginatorOptions struct {
+	// The maximum number of results to be returned per request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTemplateAliasesPaginator is a paginator for ListTemplateAliases
+type ListTemplateAliasesPaginator struct {
+	options   ListTemplateAliasesPaginatorOptions
+	client    ListTemplateAliasesAPIClient
+	params    *ListTemplateAliasesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTemplateAliasesPaginator returns a new ListTemplateAliasesPaginator
+func NewListTemplateAliasesPaginator(client ListTemplateAliasesAPIClient, params *ListTemplateAliasesInput, optFns ...func(*ListTemplateAliasesPaginatorOptions)) *ListTemplateAliasesPaginator {
+	options := ListTemplateAliasesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTemplateAliasesInput{}
+	}
+
+	return &ListTemplateAliasesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTemplateAliasesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTemplateAliases page.
+func (p *ListTemplateAliasesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTemplateAliasesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListTemplateAliases(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTemplateAliases(region string) *awsmiddleware.RegisterServiceMetadata {

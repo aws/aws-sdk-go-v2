@@ -4,6 +4,7 @@ package route53resolver
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
@@ -123,6 +124,97 @@ func addOperationListResolverRuleAssociationsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+// ListResolverRuleAssociationsAPIClient is a client that implements the
+// ListResolverRuleAssociations operation.
+type ListResolverRuleAssociationsAPIClient interface {
+	ListResolverRuleAssociations(context.Context, *ListResolverRuleAssociationsInput, ...func(*Options)) (*ListResolverRuleAssociationsOutput, error)
+}
+
+var _ ListResolverRuleAssociationsAPIClient = (*Client)(nil)
+
+// ListResolverRuleAssociationsPaginatorOptions is the paginator options for
+// ListResolverRuleAssociations
+type ListResolverRuleAssociationsPaginatorOptions struct {
+	// The maximum number of rule associations that you want to return in the response
+	// to a ListResolverRuleAssociations request. If you don't specify a value for
+	// MaxResults, Resolver returns up to 100 rule associations.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListResolverRuleAssociationsPaginator is a paginator for
+// ListResolverRuleAssociations
+type ListResolverRuleAssociationsPaginator struct {
+	options   ListResolverRuleAssociationsPaginatorOptions
+	client    ListResolverRuleAssociationsAPIClient
+	params    *ListResolverRuleAssociationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListResolverRuleAssociationsPaginator returns a new
+// ListResolverRuleAssociationsPaginator
+func NewListResolverRuleAssociationsPaginator(client ListResolverRuleAssociationsAPIClient, params *ListResolverRuleAssociationsInput, optFns ...func(*ListResolverRuleAssociationsPaginatorOptions)) *ListResolverRuleAssociationsPaginator {
+	options := ListResolverRuleAssociationsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListResolverRuleAssociationsInput{}
+	}
+
+	return &ListResolverRuleAssociationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListResolverRuleAssociationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListResolverRuleAssociations page.
+func (p *ListResolverRuleAssociationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListResolverRuleAssociationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListResolverRuleAssociations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListResolverRuleAssociations(region string) *awsmiddleware.RegisterServiceMetadata {

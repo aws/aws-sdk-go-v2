@@ -4,6 +4,7 @@ package codeartifact
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
@@ -212,6 +213,93 @@ func addOperationListPackageVersionsMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// ListPackageVersionsAPIClient is a client that implements the ListPackageVersions
+// operation.
+type ListPackageVersionsAPIClient interface {
+	ListPackageVersions(context.Context, *ListPackageVersionsInput, ...func(*Options)) (*ListPackageVersionsOutput, error)
+}
+
+var _ ListPackageVersionsAPIClient = (*Client)(nil)
+
+// ListPackageVersionsPaginatorOptions is the paginator options for
+// ListPackageVersions
+type ListPackageVersionsPaginatorOptions struct {
+	// The maximum number of results to return per page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPackageVersionsPaginator is a paginator for ListPackageVersions
+type ListPackageVersionsPaginator struct {
+	options   ListPackageVersionsPaginatorOptions
+	client    ListPackageVersionsAPIClient
+	params    *ListPackageVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPackageVersionsPaginator returns a new ListPackageVersionsPaginator
+func NewListPackageVersionsPaginator(client ListPackageVersionsAPIClient, params *ListPackageVersionsInput, optFns ...func(*ListPackageVersionsPaginatorOptions)) *ListPackageVersionsPaginator {
+	options := ListPackageVersionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListPackageVersionsInput{}
+	}
+
+	return &ListPackageVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPackageVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListPackageVersions page.
+func (p *ListPackageVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPackageVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListPackageVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListPackageVersions(region string) *awsmiddleware.RegisterServiceMetadata {

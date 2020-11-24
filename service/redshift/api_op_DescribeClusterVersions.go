@@ -4,6 +4,7 @@ package redshift
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
@@ -136,6 +137,98 @@ func addOperationDescribeClusterVersionsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// DescribeClusterVersionsAPIClient is a client that implements the
+// DescribeClusterVersions operation.
+type DescribeClusterVersionsAPIClient interface {
+	DescribeClusterVersions(context.Context, *DescribeClusterVersionsInput, ...func(*Options)) (*DescribeClusterVersionsOutput, error)
+}
+
+var _ DescribeClusterVersionsAPIClient = (*Client)(nil)
+
+// DescribeClusterVersionsPaginatorOptions is the paginator options for
+// DescribeClusterVersions
+type DescribeClusterVersionsPaginatorOptions struct {
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value. Default: 100
+	// Constraints: minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeClusterVersionsPaginator is a paginator for DescribeClusterVersions
+type DescribeClusterVersionsPaginator struct {
+	options   DescribeClusterVersionsPaginatorOptions
+	client    DescribeClusterVersionsAPIClient
+	params    *DescribeClusterVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeClusterVersionsPaginator returns a new
+// DescribeClusterVersionsPaginator
+func NewDescribeClusterVersionsPaginator(client DescribeClusterVersionsAPIClient, params *DescribeClusterVersionsInput, optFns ...func(*DescribeClusterVersionsPaginatorOptions)) *DescribeClusterVersionsPaginator {
+	options := DescribeClusterVersionsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeClusterVersionsInput{}
+	}
+
+	return &DescribeClusterVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeClusterVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeClusterVersions page.
+func (p *DescribeClusterVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeClusterVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeClusterVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeClusterVersions(region string) *awsmiddleware.RegisterServiceMetadata {

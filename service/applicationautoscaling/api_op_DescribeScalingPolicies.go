@@ -4,6 +4,7 @@ package applicationautoscaling
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/types"
@@ -261,6 +262,99 @@ func addOperationDescribeScalingPoliciesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// DescribeScalingPoliciesAPIClient is a client that implements the
+// DescribeScalingPolicies operation.
+type DescribeScalingPoliciesAPIClient interface {
+	DescribeScalingPolicies(context.Context, *DescribeScalingPoliciesInput, ...func(*Options)) (*DescribeScalingPoliciesOutput, error)
+}
+
+var _ DescribeScalingPoliciesAPIClient = (*Client)(nil)
+
+// DescribeScalingPoliciesPaginatorOptions is the paginator options for
+// DescribeScalingPolicies
+type DescribeScalingPoliciesPaginatorOptions struct {
+	// The maximum number of scalable targets. This value can be between 1 and 50. The
+	// default value is 50. If this parameter is used, the operation returns up to
+	// MaxResults results at a time, along with a NextToken value. To get the next set
+	// of results, include the NextToken value in a subsequent call. If this parameter
+	// is not used, the operation returns up to 50 results and a NextToken value, if
+	// applicable.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeScalingPoliciesPaginator is a paginator for DescribeScalingPolicies
+type DescribeScalingPoliciesPaginator struct {
+	options   DescribeScalingPoliciesPaginatorOptions
+	client    DescribeScalingPoliciesAPIClient
+	params    *DescribeScalingPoliciesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeScalingPoliciesPaginator returns a new
+// DescribeScalingPoliciesPaginator
+func NewDescribeScalingPoliciesPaginator(client DescribeScalingPoliciesAPIClient, params *DescribeScalingPoliciesInput, optFns ...func(*DescribeScalingPoliciesPaginatorOptions)) *DescribeScalingPoliciesPaginator {
+	options := DescribeScalingPoliciesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeScalingPoliciesInput{}
+	}
+
+	return &DescribeScalingPoliciesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeScalingPoliciesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeScalingPolicies page.
+func (p *DescribeScalingPoliciesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeScalingPoliciesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeScalingPolicies(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeScalingPolicies(region string) *awsmiddleware.RegisterServiceMetadata {

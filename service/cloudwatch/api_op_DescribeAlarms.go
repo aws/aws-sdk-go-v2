@@ -4,6 +4,7 @@ package cloudwatch
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
@@ -157,6 +158,92 @@ func addOperationDescribeAlarmsMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// DescribeAlarmsAPIClient is a client that implements the DescribeAlarms
+// operation.
+type DescribeAlarmsAPIClient interface {
+	DescribeAlarms(context.Context, *DescribeAlarmsInput, ...func(*Options)) (*DescribeAlarmsOutput, error)
+}
+
+var _ DescribeAlarmsAPIClient = (*Client)(nil)
+
+// DescribeAlarmsPaginatorOptions is the paginator options for DescribeAlarms
+type DescribeAlarmsPaginatorOptions struct {
+	// The maximum number of alarm descriptions to retrieve.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeAlarmsPaginator is a paginator for DescribeAlarms
+type DescribeAlarmsPaginator struct {
+	options   DescribeAlarmsPaginatorOptions
+	client    DescribeAlarmsAPIClient
+	params    *DescribeAlarmsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeAlarmsPaginator returns a new DescribeAlarmsPaginator
+func NewDescribeAlarmsPaginator(client DescribeAlarmsAPIClient, params *DescribeAlarmsInput, optFns ...func(*DescribeAlarmsPaginatorOptions)) *DescribeAlarmsPaginator {
+	options := DescribeAlarmsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeAlarmsInput{}
+	}
+
+	return &DescribeAlarmsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeAlarmsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeAlarms page.
+func (p *DescribeAlarmsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeAlarmsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeAlarms(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeAlarms(region string) *awsmiddleware.RegisterServiceMetadata {

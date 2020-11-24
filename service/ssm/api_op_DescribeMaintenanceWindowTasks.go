@@ -4,6 +4,7 @@ package ssm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
@@ -118,6 +119,92 @@ func addOperationDescribeMaintenanceWindowTasksMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+// DescribeMaintenanceWindowTasksAPIClient is a client that implements the
+// DescribeMaintenanceWindowTasks operation.
+type DescribeMaintenanceWindowTasksAPIClient interface {
+	DescribeMaintenanceWindowTasks(context.Context, *DescribeMaintenanceWindowTasksInput, ...func(*Options)) (*DescribeMaintenanceWindowTasksOutput, error)
+}
+
+var _ DescribeMaintenanceWindowTasksAPIClient = (*Client)(nil)
+
+// DescribeMaintenanceWindowTasksPaginatorOptions is the paginator options for
+// DescribeMaintenanceWindowTasks
+type DescribeMaintenanceWindowTasksPaginatorOptions struct {
+	// The maximum number of items to return for this call. The call also returns a
+	// token that you can specify in a subsequent call to get the next set of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeMaintenanceWindowTasksPaginator is a paginator for
+// DescribeMaintenanceWindowTasks
+type DescribeMaintenanceWindowTasksPaginator struct {
+	options   DescribeMaintenanceWindowTasksPaginatorOptions
+	client    DescribeMaintenanceWindowTasksAPIClient
+	params    *DescribeMaintenanceWindowTasksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeMaintenanceWindowTasksPaginator returns a new
+// DescribeMaintenanceWindowTasksPaginator
+func NewDescribeMaintenanceWindowTasksPaginator(client DescribeMaintenanceWindowTasksAPIClient, params *DescribeMaintenanceWindowTasksInput, optFns ...func(*DescribeMaintenanceWindowTasksPaginatorOptions)) *DescribeMaintenanceWindowTasksPaginator {
+	options := DescribeMaintenanceWindowTasksPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeMaintenanceWindowTasksInput{}
+	}
+
+	return &DescribeMaintenanceWindowTasksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeMaintenanceWindowTasksPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeMaintenanceWindowTasks page.
+func (p *DescribeMaintenanceWindowTasksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeMaintenanceWindowTasksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeMaintenanceWindowTasks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeMaintenanceWindowTasks(region string) *awsmiddleware.RegisterServiceMetadata {

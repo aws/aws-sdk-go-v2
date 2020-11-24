@@ -4,6 +4,7 @@ package detective
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/detective/types"
@@ -120,6 +121,93 @@ func addOperationListMembersMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+// ListMembersAPIClient is a client that implements the ListMembers operation.
+type ListMembersAPIClient interface {
+	ListMembers(context.Context, *ListMembersInput, ...func(*Options)) (*ListMembersOutput, error)
+}
+
+var _ ListMembersAPIClient = (*Client)(nil)
+
+// ListMembersPaginatorOptions is the paginator options for ListMembers
+type ListMembersPaginatorOptions struct {
+	// The maximum number of member accounts to include in the response. The total must
+	// be less than the overall limit on the number of results to return, which is
+	// currently 200.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListMembersPaginator is a paginator for ListMembers
+type ListMembersPaginator struct {
+	options   ListMembersPaginatorOptions
+	client    ListMembersAPIClient
+	params    *ListMembersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListMembersPaginator returns a new ListMembersPaginator
+func NewListMembersPaginator(client ListMembersAPIClient, params *ListMembersInput, optFns ...func(*ListMembersPaginatorOptions)) *ListMembersPaginator {
+	options := ListMembersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListMembersInput{}
+	}
+
+	return &ListMembersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListMembersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListMembers page.
+func (p *ListMembersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListMembersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListMembers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListMembers(region string) *awsmiddleware.RegisterServiceMetadata {

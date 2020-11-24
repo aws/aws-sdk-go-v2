@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -196,6 +197,90 @@ func addOperationDescribeRouteTablesMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// DescribeRouteTablesAPIClient is a client that implements the DescribeRouteTables
+// operation.
+type DescribeRouteTablesAPIClient interface {
+	DescribeRouteTables(context.Context, *DescribeRouteTablesInput, ...func(*Options)) (*DescribeRouteTablesOutput, error)
+}
+
+var _ DescribeRouteTablesAPIClient = (*Client)(nil)
+
+// DescribeRouteTablesPaginatorOptions is the paginator options for
+// DescribeRouteTables
+type DescribeRouteTablesPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeRouteTablesPaginator is a paginator for DescribeRouteTables
+type DescribeRouteTablesPaginator struct {
+	options   DescribeRouteTablesPaginatorOptions
+	client    DescribeRouteTablesAPIClient
+	params    *DescribeRouteTablesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeRouteTablesPaginator returns a new DescribeRouteTablesPaginator
+func NewDescribeRouteTablesPaginator(client DescribeRouteTablesAPIClient, params *DescribeRouteTablesInput, optFns ...func(*DescribeRouteTablesPaginatorOptions)) *DescribeRouteTablesPaginator {
+	options := DescribeRouteTablesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeRouteTablesInput{}
+	}
+
+	return &DescribeRouteTablesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeRouteTablesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeRouteTables page.
+func (p *DescribeRouteTablesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeRouteTablesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeRouteTables(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeRouteTables(region string) *awsmiddleware.RegisterServiceMetadata {

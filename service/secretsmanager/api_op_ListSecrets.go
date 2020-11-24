@@ -4,6 +4,7 @@ package secretsmanager
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
@@ -143,6 +144,95 @@ func addOperationListSecretsMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+// ListSecretsAPIClient is a client that implements the ListSecrets operation.
+type ListSecretsAPIClient interface {
+	ListSecrets(context.Context, *ListSecretsInput, ...func(*Options)) (*ListSecretsOutput, error)
+}
+
+var _ ListSecretsAPIClient = (*Client)(nil)
+
+// ListSecretsPaginatorOptions is the paginator options for ListSecrets
+type ListSecretsPaginatorOptions struct {
+	// (Optional) Limits the number of results you want to include in the response. If
+	// you don't include this parameter, it defaults to a value that's specific to the
+	// operation. If additional items exist beyond the maximum you specify, the
+	// NextToken response element is present and has a value (isn't null). Include that
+	// value as the NextToken request parameter in the next call to the operation to
+	// get the next part of the results. Note that Secrets Manager might return fewer
+	// results than the maximum even when there are more results available. You should
+	// check NextToken after every operation to ensure that you receive all of the
+	// results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListSecretsPaginator is a paginator for ListSecrets
+type ListSecretsPaginator struct {
+	options   ListSecretsPaginatorOptions
+	client    ListSecretsAPIClient
+	params    *ListSecretsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListSecretsPaginator returns a new ListSecretsPaginator
+func NewListSecretsPaginator(client ListSecretsAPIClient, params *ListSecretsInput, optFns ...func(*ListSecretsPaginatorOptions)) *ListSecretsPaginator {
+	options := ListSecretsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListSecretsInput{}
+	}
+
+	return &ListSecretsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListSecretsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListSecrets page.
+func (p *ListSecretsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSecretsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListSecrets(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListSecrets(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package pricing
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pricing/types"
@@ -125,6 +126,89 @@ func addOperationGetAttributeValuesMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// GetAttributeValuesAPIClient is a client that implements the GetAttributeValues
+// operation.
+type GetAttributeValuesAPIClient interface {
+	GetAttributeValues(context.Context, *GetAttributeValuesInput, ...func(*Options)) (*GetAttributeValuesOutput, error)
+}
+
+var _ GetAttributeValuesAPIClient = (*Client)(nil)
+
+// GetAttributeValuesPaginatorOptions is the paginator options for
+// GetAttributeValues
+type GetAttributeValuesPaginatorOptions struct {
+	// The maximum number of results to return in response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetAttributeValuesPaginator is a paginator for GetAttributeValues
+type GetAttributeValuesPaginator struct {
+	options   GetAttributeValuesPaginatorOptions
+	client    GetAttributeValuesAPIClient
+	params    *GetAttributeValuesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetAttributeValuesPaginator returns a new GetAttributeValuesPaginator
+func NewGetAttributeValuesPaginator(client GetAttributeValuesAPIClient, params *GetAttributeValuesInput, optFns ...func(*GetAttributeValuesPaginatorOptions)) *GetAttributeValuesPaginator {
+	options := GetAttributeValuesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetAttributeValuesInput{}
+	}
+
+	return &GetAttributeValuesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetAttributeValuesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetAttributeValues page.
+func (p *GetAttributeValuesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetAttributeValuesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.GetAttributeValues(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetAttributeValues(region string) *awsmiddleware.RegisterServiceMetadata {

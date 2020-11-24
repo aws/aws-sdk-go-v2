@@ -4,6 +4,7 @@ package ssm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
@@ -114,6 +115,91 @@ func addOperationListAssociationVersionsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// ListAssociationVersionsAPIClient is a client that implements the
+// ListAssociationVersions operation.
+type ListAssociationVersionsAPIClient interface {
+	ListAssociationVersions(context.Context, *ListAssociationVersionsInput, ...func(*Options)) (*ListAssociationVersionsOutput, error)
+}
+
+var _ ListAssociationVersionsAPIClient = (*Client)(nil)
+
+// ListAssociationVersionsPaginatorOptions is the paginator options for
+// ListAssociationVersions
+type ListAssociationVersionsPaginatorOptions struct {
+	// The maximum number of items to return for this call. The call also returns a
+	// token that you can specify in a subsequent call to get the next set of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAssociationVersionsPaginator is a paginator for ListAssociationVersions
+type ListAssociationVersionsPaginator struct {
+	options   ListAssociationVersionsPaginatorOptions
+	client    ListAssociationVersionsAPIClient
+	params    *ListAssociationVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAssociationVersionsPaginator returns a new
+// ListAssociationVersionsPaginator
+func NewListAssociationVersionsPaginator(client ListAssociationVersionsAPIClient, params *ListAssociationVersionsInput, optFns ...func(*ListAssociationVersionsPaginatorOptions)) *ListAssociationVersionsPaginator {
+	options := ListAssociationVersionsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAssociationVersionsInput{}
+	}
+
+	return &ListAssociationVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAssociationVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAssociationVersions page.
+func (p *ListAssociationVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAssociationVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListAssociationVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAssociationVersions(region string) *awsmiddleware.RegisterServiceMetadata {

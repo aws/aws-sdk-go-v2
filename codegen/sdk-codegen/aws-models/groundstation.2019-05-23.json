@@ -1920,7 +1920,7 @@
           "cloudTrailEventSource": "REPLACE_WITH_EVENT_SOURCE"
         },
         "aws.auth#sigv4": {
-          "name": ""
+          "name": "groundstation"
         },
         "aws.protocols#restJson1": {},
         "smithy.api#documentation": "<p>Welcome to the AWS Ground Station API Reference. AWS Ground Station is a fully managed service that\n      enables you to control satellite communications, downlink and process satellite data, and\n      scale your satellite operations efficiently and cost-effectively without having\n      to build or manage your own ground station infrastructure.</p>",

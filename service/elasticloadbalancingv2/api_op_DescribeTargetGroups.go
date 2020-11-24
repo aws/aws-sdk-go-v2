@@ -4,6 +4,7 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
@@ -119,6 +120,81 @@ func addOperationDescribeTargetGroupsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// DescribeTargetGroupsAPIClient is a client that implements the
+// DescribeTargetGroups operation.
+type DescribeTargetGroupsAPIClient interface {
+	DescribeTargetGroups(context.Context, *DescribeTargetGroupsInput, ...func(*Options)) (*DescribeTargetGroupsOutput, error)
+}
+
+var _ DescribeTargetGroupsAPIClient = (*Client)(nil)
+
+// DescribeTargetGroupsPaginatorOptions is the paginator options for
+// DescribeTargetGroups
+type DescribeTargetGroupsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeTargetGroupsPaginator is a paginator for DescribeTargetGroups
+type DescribeTargetGroupsPaginator struct {
+	options   DescribeTargetGroupsPaginatorOptions
+	client    DescribeTargetGroupsAPIClient
+	params    *DescribeTargetGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeTargetGroupsPaginator returns a new DescribeTargetGroupsPaginator
+func NewDescribeTargetGroupsPaginator(client DescribeTargetGroupsAPIClient, params *DescribeTargetGroupsInput, optFns ...func(*DescribeTargetGroupsPaginatorOptions)) *DescribeTargetGroupsPaginator {
+	options := DescribeTargetGroupsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeTargetGroupsInput{}
+	}
+
+	return &DescribeTargetGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeTargetGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeTargetGroups page.
+func (p *DescribeTargetGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeTargetGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	result, err := p.client.DescribeTargetGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeTargetGroups(region string) *awsmiddleware.RegisterServiceMetadata {

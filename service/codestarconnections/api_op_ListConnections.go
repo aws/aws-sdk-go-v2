@@ -4,6 +4,7 @@ package codestarconnections
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/types"
@@ -115,6 +116,89 @@ func addOperationListConnectionsMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	return nil
+}
+
+// ListConnectionsAPIClient is a client that implements the ListConnections
+// operation.
+type ListConnectionsAPIClient interface {
+	ListConnections(context.Context, *ListConnectionsInput, ...func(*Options)) (*ListConnectionsOutput, error)
+}
+
+var _ ListConnectionsAPIClient = (*Client)(nil)
+
+// ListConnectionsPaginatorOptions is the paginator options for ListConnections
+type ListConnectionsPaginatorOptions struct {
+	// The maximum number of results to return in a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListConnectionsPaginator is a paginator for ListConnections
+type ListConnectionsPaginator struct {
+	options   ListConnectionsPaginatorOptions
+	client    ListConnectionsAPIClient
+	params    *ListConnectionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListConnectionsPaginator returns a new ListConnectionsPaginator
+func NewListConnectionsPaginator(client ListConnectionsAPIClient, params *ListConnectionsInput, optFns ...func(*ListConnectionsPaginatorOptions)) *ListConnectionsPaginator {
+	options := ListConnectionsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListConnectionsInput{}
+	}
+
+	return &ListConnectionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListConnectionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListConnections page.
+func (p *ListConnectionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListConnectionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListConnections(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListConnections(region string) *awsmiddleware.RegisterServiceMetadata {

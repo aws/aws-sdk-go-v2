@@ -207,6 +207,91 @@ func addEndpointPrefix_opListAccessPointsMiddleware(stack *middleware.Stack) err
 	return stack.Serialize.Insert(&endpointPrefix_opListAccessPointsMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
+// ListAccessPointsAPIClient is a client that implements the ListAccessPoints
+// operation.
+type ListAccessPointsAPIClient interface {
+	ListAccessPoints(context.Context, *ListAccessPointsInput, ...func(*Options)) (*ListAccessPointsOutput, error)
+}
+
+var _ ListAccessPointsAPIClient = (*Client)(nil)
+
+// ListAccessPointsPaginatorOptions is the paginator options for ListAccessPoints
+type ListAccessPointsPaginatorOptions struct {
+	// The maximum number of access points that you want to include in the list. If the
+	// specified bucket has more than this number of access points, then the response
+	// will include a continuation token in the NextToken field that you can use to
+	// retrieve the next page of access points.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAccessPointsPaginator is a paginator for ListAccessPoints
+type ListAccessPointsPaginator struct {
+	options   ListAccessPointsPaginatorOptions
+	client    ListAccessPointsAPIClient
+	params    *ListAccessPointsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAccessPointsPaginator returns a new ListAccessPointsPaginator
+func NewListAccessPointsPaginator(client ListAccessPointsAPIClient, params *ListAccessPointsInput, optFns ...func(*ListAccessPointsPaginatorOptions)) *ListAccessPointsPaginator {
+	options := ListAccessPointsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAccessPointsInput{}
+	}
+
+	return &ListAccessPointsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAccessPointsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAccessPoints page.
+func (p *ListAccessPointsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAccessPointsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListAccessPoints(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opListAccessPoints(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

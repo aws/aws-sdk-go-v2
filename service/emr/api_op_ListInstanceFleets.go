@@ -4,6 +4,7 @@ package emr
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
@@ -110,6 +111,81 @@ func addOperationListInstanceFleetsMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// ListInstanceFleetsAPIClient is a client that implements the ListInstanceFleets
+// operation.
+type ListInstanceFleetsAPIClient interface {
+	ListInstanceFleets(context.Context, *ListInstanceFleetsInput, ...func(*Options)) (*ListInstanceFleetsOutput, error)
+}
+
+var _ ListInstanceFleetsAPIClient = (*Client)(nil)
+
+// ListInstanceFleetsPaginatorOptions is the paginator options for
+// ListInstanceFleets
+type ListInstanceFleetsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListInstanceFleetsPaginator is a paginator for ListInstanceFleets
+type ListInstanceFleetsPaginator struct {
+	options   ListInstanceFleetsPaginatorOptions
+	client    ListInstanceFleetsAPIClient
+	params    *ListInstanceFleetsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListInstanceFleetsPaginator returns a new ListInstanceFleetsPaginator
+func NewListInstanceFleetsPaginator(client ListInstanceFleetsAPIClient, params *ListInstanceFleetsInput, optFns ...func(*ListInstanceFleetsPaginatorOptions)) *ListInstanceFleetsPaginator {
+	options := ListInstanceFleetsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListInstanceFleetsInput{}
+	}
+
+	return &ListInstanceFleetsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListInstanceFleetsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListInstanceFleets page.
+func (p *ListInstanceFleetsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListInstanceFleetsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	result, err := p.client.ListInstanceFleets(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListInstanceFleets(region string) *awsmiddleware.RegisterServiceMetadata {

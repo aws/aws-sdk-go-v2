@@ -4,6 +4,7 @@ package gamelift
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
@@ -166,6 +167,94 @@ func addOperationDescribeFleetEventsMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// DescribeFleetEventsAPIClient is a client that implements the DescribeFleetEvents
+// operation.
+type DescribeFleetEventsAPIClient interface {
+	DescribeFleetEvents(context.Context, *DescribeFleetEventsInput, ...func(*Options)) (*DescribeFleetEventsOutput, error)
+}
+
+var _ DescribeFleetEventsAPIClient = (*Client)(nil)
+
+// DescribeFleetEventsPaginatorOptions is the paginator options for
+// DescribeFleetEvents
+type DescribeFleetEventsPaginatorOptions struct {
+	// The maximum number of results to return. Use this parameter with NextToken to
+	// get results as a set of sequential pages.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeFleetEventsPaginator is a paginator for DescribeFleetEvents
+type DescribeFleetEventsPaginator struct {
+	options   DescribeFleetEventsPaginatorOptions
+	client    DescribeFleetEventsAPIClient
+	params    *DescribeFleetEventsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeFleetEventsPaginator returns a new DescribeFleetEventsPaginator
+func NewDescribeFleetEventsPaginator(client DescribeFleetEventsAPIClient, params *DescribeFleetEventsInput, optFns ...func(*DescribeFleetEventsPaginatorOptions)) *DescribeFleetEventsPaginator {
+	options := DescribeFleetEventsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeFleetEventsInput{}
+	}
+
+	return &DescribeFleetEventsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeFleetEventsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeFleetEvents page.
+func (p *DescribeFleetEventsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeFleetEventsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeFleetEvents(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeFleetEvents(region string) *awsmiddleware.RegisterServiceMetadata {

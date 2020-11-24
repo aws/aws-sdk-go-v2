@@ -4,6 +4,7 @@ package cloudformation
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
@@ -116,6 +117,80 @@ func addOperationListChangeSetsMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListChangeSetsAPIClient is a client that implements the ListChangeSets
+// operation.
+type ListChangeSetsAPIClient interface {
+	ListChangeSets(context.Context, *ListChangeSetsInput, ...func(*Options)) (*ListChangeSetsOutput, error)
+}
+
+var _ ListChangeSetsAPIClient = (*Client)(nil)
+
+// ListChangeSetsPaginatorOptions is the paginator options for ListChangeSets
+type ListChangeSetsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListChangeSetsPaginator is a paginator for ListChangeSets
+type ListChangeSetsPaginator struct {
+	options   ListChangeSetsPaginatorOptions
+	client    ListChangeSetsAPIClient
+	params    *ListChangeSetsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListChangeSetsPaginator returns a new ListChangeSetsPaginator
+func NewListChangeSetsPaginator(client ListChangeSetsAPIClient, params *ListChangeSetsInput, optFns ...func(*ListChangeSetsPaginatorOptions)) *ListChangeSetsPaginator {
+	options := ListChangeSetsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListChangeSetsInput{}
+	}
+
+	return &ListChangeSetsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListChangeSetsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListChangeSets page.
+func (p *ListChangeSetsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListChangeSetsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListChangeSets(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListChangeSets(region string) *awsmiddleware.RegisterServiceMetadata {

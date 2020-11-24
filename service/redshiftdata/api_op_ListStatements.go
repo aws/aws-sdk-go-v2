@@ -4,6 +4,7 @@ package redshiftdata
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
@@ -146,6 +147,90 @@ func addOperationListStatementsMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListStatementsAPIClient is a client that implements the ListStatements
+// operation.
+type ListStatementsAPIClient interface {
+	ListStatements(context.Context, *ListStatementsInput, ...func(*Options)) (*ListStatementsOutput, error)
+}
+
+var _ ListStatementsAPIClient = (*Client)(nil)
+
+// ListStatementsPaginatorOptions is the paginator options for ListStatements
+type ListStatementsPaginatorOptions struct {
+	// The maximum number of SQL statements to return in the response. If more SQL
+	// statements exist than fit in one response, then NextToken is returned to page
+	// through the results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListStatementsPaginator is a paginator for ListStatements
+type ListStatementsPaginator struct {
+	options   ListStatementsPaginatorOptions
+	client    ListStatementsAPIClient
+	params    *ListStatementsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListStatementsPaginator returns a new ListStatementsPaginator
+func NewListStatementsPaginator(client ListStatementsAPIClient, params *ListStatementsInput, optFns ...func(*ListStatementsPaginatorOptions)) *ListStatementsPaginator {
+	options := ListStatementsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListStatementsInput{}
+	}
+
+	return &ListStatementsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListStatementsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListStatements page.
+func (p *ListStatementsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListStatementsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListStatements(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListStatements(region string) *awsmiddleware.RegisterServiceMetadata {

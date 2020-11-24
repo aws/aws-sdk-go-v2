@@ -39,7 +39,15 @@ func TestClient_JsonMaps_awsRestjson1Serialize(t *testing.T) {
 		// Serializes JSON maps
 		"RestJsonJsonMaps": {
 			Params: &JsonMapsInput{
-				MyMap: map[string]types.GreetingStruct{
+				DenseStructMap: map[string]types.GreetingStruct{
+					"foo": {
+						Hi: ptr.String("there"),
+					},
+					"baz": {
+						Hi: ptr.String("bye"),
+					},
+				},
+				SparseStructMap: map[string]*types.GreetingStruct{
 					"foo": {
 						Hi: ptr.String("there"),
 					},
@@ -57,7 +65,15 @@ func TestClient_JsonMaps_awsRestjson1Serialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
-			    "myMap": {
+			    "denseStructMap": {
+			        "foo": {
+			            "hi": "there"
+			        },
+			        "baz": {
+			            "hi": "bye"
+			        }
+			    },
+			    "sparseStructMap": {
 			        "foo": {
 			            "hi": "there"
 			        },
@@ -68,11 +84,20 @@ func TestClient_JsonMaps_awsRestjson1Serialize(t *testing.T) {
 			}`))
 			},
 		},
-		// Serializes null JSON map values
+		// Serializes JSON map values in sparse maps
 		"RestJsonSerializesNullMapValues": {
 			Params: &JsonMapsInput{
-				MyMap: map[string]types.GreetingStruct{
-					"foo": func() (v types.GreetingStruct) { return v }(),
+				SparseBooleanMap: map[string]*bool{
+					"x": nil,
+				},
+				SparseNumberMap: map[string]*int32{
+					"x": nil,
+				},
+				SparseStringMap: map[string]*string{
+					"x": nil,
+				},
+				SparseStructMap: map[string]*types.GreetingStruct{
+					"x": nil,
 				},
 			},
 			ExpectMethod:  "POST",
@@ -84,8 +109,57 @@ func TestClient_JsonMaps_awsRestjson1Serialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
-			    "myMap": {
-			        "foo": null
+			    "sparseBooleanMap": {
+			        "x": null
+			    },
+			    "sparseNumberMap": {
+			        "x": null
+			    },
+			    "sparseStringMap": {
+			        "x": null
+			    },
+			    "sparseStructMap": {
+			        "x": null
+			    }
+			}`))
+			},
+		},
+		// Ensure that 0 and false are sent over the wire in all maps and lists
+		"RestJsonSerializesZeroValuesInMaps": {
+			Params: &JsonMapsInput{
+				DenseNumberMap: map[string]int32{
+					"x": 0,
+				},
+				SparseNumberMap: map[string]*int32{
+					"x": ptr.Int32(0),
+				},
+				DenseBooleanMap: map[string]bool{
+					"x": false,
+				},
+				SparseBooleanMap: map[string]*bool{
+					"x": ptr.Bool(false),
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/JsonMaps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "denseNumberMap": {
+			        "x": 0
+			    },
+			    "sparseNumberMap": {
+			        "x": 0
+			    },
+			    "denseBooleanMap": {
+			        "x": false
+			    },
+			    "sparseBooleanMap": {
+			        "x": false
 			    }
 			}`))
 			},
@@ -177,17 +251,33 @@ func TestClient_JsonMaps_awsRestjson1Deserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "myMap": {
+			    "denseStructMap": {
 			        "foo": {
 			            "hi": "there"
 			        },
 			        "baz": {
 			            "hi": "bye"
 			        }
-			    }
+			    },
+			    "sparseStructMap": {
+			        "foo": {
+			            "hi": "there"
+			        },
+			        "baz": {
+			            "hi": "bye"
+			        }
+			   }
 			}`),
 			ExpectResult: &JsonMapsOutput{
-				MyMap: map[string]types.GreetingStruct{
+				DenseStructMap: map[string]types.GreetingStruct{
+					"foo": {
+						Hi: ptr.String("there"),
+					},
+					"baz": {
+						Hi: ptr.String("bye"),
+					},
+				},
+				SparseStructMap: map[string]*types.GreetingStruct{
 					"foo": {
 						Hi: ptr.String("there"),
 					},
@@ -205,13 +295,67 @@ func TestClient_JsonMaps_awsRestjson1Deserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "myMap": {
-			        "foo": null
+			    "sparseBooleanMap": {
+			        "x": null
+			    },
+			    "sparseNumberMap": {
+			        "x": null
+			    },
+			    "sparseStringMap": {
+			        "x": null
+			    },
+			    "sparseStructMap": {
+			        "x": null
 			    }
 			}`),
 			ExpectResult: &JsonMapsOutput{
-				MyMap: map[string]types.GreetingStruct{
-					"foo": func() (v types.GreetingStruct) { return v }(),
+				SparseBooleanMap: map[string]*bool{
+					"x": nil,
+				},
+				SparseNumberMap: map[string]*int32{
+					"x": nil,
+				},
+				SparseStringMap: map[string]*string{
+					"x": nil,
+				},
+				SparseStructMap: map[string]*types.GreetingStruct{
+					"x": nil,
+				},
+			},
+		},
+		// Ensure that 0 and false are sent over the wire in all maps and lists
+		"RestJsonDeserializesZeroValuesInMaps": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "denseNumberMap": {
+			        "x": 0
+			    },
+			    "sparseNumberMap": {
+			        "x": 0
+			    },
+			    "denseBooleanMap": {
+			        "x": false
+			    },
+			    "sparseBooleanMap": {
+			        "x": false
+			    }
+			}`),
+			ExpectResult: &JsonMapsOutput{
+				DenseNumberMap: map[string]int32{
+					"x": 0,
+				},
+				SparseNumberMap: map[string]*int32{
+					"x": ptr.Int32(0),
+				},
+				DenseBooleanMap: map[string]bool{
+					"x": false,
+				},
+				SparseBooleanMap: map[string]*bool{
+					"x": ptr.Bool(false),
 				},
 			},
 		},

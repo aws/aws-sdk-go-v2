@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
@@ -150,6 +151,93 @@ func addOperationListCodeRepositoriesMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// ListCodeRepositoriesAPIClient is a client that implements the
+// ListCodeRepositories operation.
+type ListCodeRepositoriesAPIClient interface {
+	ListCodeRepositories(context.Context, *ListCodeRepositoriesInput, ...func(*Options)) (*ListCodeRepositoriesOutput, error)
+}
+
+var _ ListCodeRepositoriesAPIClient = (*Client)(nil)
+
+// ListCodeRepositoriesPaginatorOptions is the paginator options for
+// ListCodeRepositories
+type ListCodeRepositoriesPaginatorOptions struct {
+	// The maximum number of Git repositories to return in the response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListCodeRepositoriesPaginator is a paginator for ListCodeRepositories
+type ListCodeRepositoriesPaginator struct {
+	options   ListCodeRepositoriesPaginatorOptions
+	client    ListCodeRepositoriesAPIClient
+	params    *ListCodeRepositoriesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListCodeRepositoriesPaginator returns a new ListCodeRepositoriesPaginator
+func NewListCodeRepositoriesPaginator(client ListCodeRepositoriesAPIClient, params *ListCodeRepositoriesInput, optFns ...func(*ListCodeRepositoriesPaginatorOptions)) *ListCodeRepositoriesPaginator {
+	options := ListCodeRepositoriesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListCodeRepositoriesInput{}
+	}
+
+	return &ListCodeRepositoriesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListCodeRepositoriesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListCodeRepositories page.
+func (p *ListCodeRepositoriesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListCodeRepositoriesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListCodeRepositories(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListCodeRepositories(region string) *awsmiddleware.RegisterServiceMetadata {

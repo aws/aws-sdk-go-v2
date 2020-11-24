@@ -4,6 +4,7 @@ package securityhub
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
@@ -118,6 +119,87 @@ func addOperationGetFindingsMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+// GetFindingsAPIClient is a client that implements the GetFindings operation.
+type GetFindingsAPIClient interface {
+	GetFindings(context.Context, *GetFindingsInput, ...func(*Options)) (*GetFindingsOutput, error)
+}
+
+var _ GetFindingsAPIClient = (*Client)(nil)
+
+// GetFindingsPaginatorOptions is the paginator options for GetFindings
+type GetFindingsPaginatorOptions struct {
+	// The maximum number of findings to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetFindingsPaginator is a paginator for GetFindings
+type GetFindingsPaginator struct {
+	options   GetFindingsPaginatorOptions
+	client    GetFindingsAPIClient
+	params    *GetFindingsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetFindingsPaginator returns a new GetFindingsPaginator
+func NewGetFindingsPaginator(client GetFindingsAPIClient, params *GetFindingsInput, optFns ...func(*GetFindingsPaginatorOptions)) *GetFindingsPaginator {
+	options := GetFindingsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetFindingsInput{}
+	}
+
+	return &GetFindingsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetFindingsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetFindings page.
+func (p *GetFindingsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetFindingsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.GetFindings(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetFindings(region string) *awsmiddleware.RegisterServiceMetadata {

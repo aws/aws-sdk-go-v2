@@ -4,6 +4,7 @@ package serverlessapplicationrepository
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types"
@@ -114,6 +115,91 @@ func addOperationListApplicationDependenciesMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	return nil
+}
+
+// ListApplicationDependenciesAPIClient is a client that implements the
+// ListApplicationDependencies operation.
+type ListApplicationDependenciesAPIClient interface {
+	ListApplicationDependencies(context.Context, *ListApplicationDependenciesInput, ...func(*Options)) (*ListApplicationDependenciesOutput, error)
+}
+
+var _ ListApplicationDependenciesAPIClient = (*Client)(nil)
+
+// ListApplicationDependenciesPaginatorOptions is the paginator options for
+// ListApplicationDependencies
+type ListApplicationDependenciesPaginatorOptions struct {
+	// The total number of items to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListApplicationDependenciesPaginator is a paginator for
+// ListApplicationDependencies
+type ListApplicationDependenciesPaginator struct {
+	options   ListApplicationDependenciesPaginatorOptions
+	client    ListApplicationDependenciesAPIClient
+	params    *ListApplicationDependenciesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListApplicationDependenciesPaginator returns a new
+// ListApplicationDependenciesPaginator
+func NewListApplicationDependenciesPaginator(client ListApplicationDependenciesAPIClient, params *ListApplicationDependenciesInput, optFns ...func(*ListApplicationDependenciesPaginatorOptions)) *ListApplicationDependenciesPaginator {
+	options := ListApplicationDependenciesPaginatorOptions{}
+	if params.MaxItems != 0 {
+		options.Limit = params.MaxItems
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListApplicationDependenciesInput{}
+	}
+
+	return &ListApplicationDependenciesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListApplicationDependenciesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListApplicationDependencies page.
+func (p *ListApplicationDependenciesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListApplicationDependenciesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxItems = p.options.Limit
+
+	result, err := p.client.ListApplicationDependencies(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListApplicationDependencies(region string) *awsmiddleware.RegisterServiceMetadata {

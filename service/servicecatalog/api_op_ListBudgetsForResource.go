@@ -4,6 +4,7 @@ package servicecatalog
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
@@ -122,6 +123,89 @@ func addOperationListBudgetsForResourceMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	return nil
+}
+
+// ListBudgetsForResourceAPIClient is a client that implements the
+// ListBudgetsForResource operation.
+type ListBudgetsForResourceAPIClient interface {
+	ListBudgetsForResource(context.Context, *ListBudgetsForResourceInput, ...func(*Options)) (*ListBudgetsForResourceOutput, error)
+}
+
+var _ ListBudgetsForResourceAPIClient = (*Client)(nil)
+
+// ListBudgetsForResourcePaginatorOptions is the paginator options for
+// ListBudgetsForResource
+type ListBudgetsForResourcePaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListBudgetsForResourcePaginator is a paginator for ListBudgetsForResource
+type ListBudgetsForResourcePaginator struct {
+	options   ListBudgetsForResourcePaginatorOptions
+	client    ListBudgetsForResourceAPIClient
+	params    *ListBudgetsForResourceInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListBudgetsForResourcePaginator returns a new ListBudgetsForResourcePaginator
+func NewListBudgetsForResourcePaginator(client ListBudgetsForResourceAPIClient, params *ListBudgetsForResourceInput, optFns ...func(*ListBudgetsForResourcePaginatorOptions)) *ListBudgetsForResourcePaginator {
+	options := ListBudgetsForResourcePaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListBudgetsForResourceInput{}
+	}
+
+	return &ListBudgetsForResourcePaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListBudgetsForResourcePaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListBudgetsForResource page.
+func (p *ListBudgetsForResourcePaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListBudgetsForResourceOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	result, err := p.client.ListBudgetsForResource(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListBudgetsForResource(region string) *awsmiddleware.RegisterServiceMetadata {

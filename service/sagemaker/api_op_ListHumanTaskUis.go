@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
@@ -120,6 +121,94 @@ func addOperationListHumanTaskUisMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// ListHumanTaskUisAPIClient is a client that implements the ListHumanTaskUis
+// operation.
+type ListHumanTaskUisAPIClient interface {
+	ListHumanTaskUis(context.Context, *ListHumanTaskUisInput, ...func(*Options)) (*ListHumanTaskUisOutput, error)
+}
+
+var _ ListHumanTaskUisAPIClient = (*Client)(nil)
+
+// ListHumanTaskUisPaginatorOptions is the paginator options for ListHumanTaskUis
+type ListHumanTaskUisPaginatorOptions struct {
+	// The total number of items to return. If the total number of available items is
+	// more than the value specified in MaxResults, then a NextToken will be provided
+	// in the output that you can use to resume pagination.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListHumanTaskUisPaginator is a paginator for ListHumanTaskUis
+type ListHumanTaskUisPaginator struct {
+	options   ListHumanTaskUisPaginatorOptions
+	client    ListHumanTaskUisAPIClient
+	params    *ListHumanTaskUisInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListHumanTaskUisPaginator returns a new ListHumanTaskUisPaginator
+func NewListHumanTaskUisPaginator(client ListHumanTaskUisAPIClient, params *ListHumanTaskUisInput, optFns ...func(*ListHumanTaskUisPaginatorOptions)) *ListHumanTaskUisPaginator {
+	options := ListHumanTaskUisPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListHumanTaskUisInput{}
+	}
+
+	return &ListHumanTaskUisPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListHumanTaskUisPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListHumanTaskUis page.
+func (p *ListHumanTaskUisPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListHumanTaskUisOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListHumanTaskUis(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListHumanTaskUis(region string) *awsmiddleware.RegisterServiceMetadata {

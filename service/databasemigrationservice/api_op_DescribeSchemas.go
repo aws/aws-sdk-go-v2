@@ -4,6 +4,7 @@ package databasemigrationservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -119,6 +120,95 @@ func addOperationDescribeSchemasMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	return nil
+}
+
+// DescribeSchemasAPIClient is a client that implements the DescribeSchemas
+// operation.
+type DescribeSchemasAPIClient interface {
+	DescribeSchemas(context.Context, *DescribeSchemasInput, ...func(*Options)) (*DescribeSchemasOutput, error)
+}
+
+var _ DescribeSchemasAPIClient = (*Client)(nil)
+
+// DescribeSchemasPaginatorOptions is the paginator options for DescribeSchemas
+type DescribeSchemasPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that the remaining results can be retrieved.
+	// Default: 100 Constraints: Minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeSchemasPaginator is a paginator for DescribeSchemas
+type DescribeSchemasPaginator struct {
+	options   DescribeSchemasPaginatorOptions
+	client    DescribeSchemasAPIClient
+	params    *DescribeSchemasInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeSchemasPaginator returns a new DescribeSchemasPaginator
+func NewDescribeSchemasPaginator(client DescribeSchemasAPIClient, params *DescribeSchemasInput, optFns ...func(*DescribeSchemasPaginatorOptions)) *DescribeSchemasPaginator {
+	options := DescribeSchemasPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeSchemasInput{}
+	}
+
+	return &DescribeSchemasPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeSchemasPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeSchemas page.
+func (p *DescribeSchemasPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeSchemasOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeSchemas(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeSchemas(region string) *awsmiddleware.RegisterServiceMetadata {

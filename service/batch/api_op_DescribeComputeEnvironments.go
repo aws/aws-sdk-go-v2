@@ -4,6 +4,7 @@ package batch
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
@@ -126,6 +127,98 @@ func addOperationDescribeComputeEnvironmentsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	return nil
+}
+
+// DescribeComputeEnvironmentsAPIClient is a client that implements the
+// DescribeComputeEnvironments operation.
+type DescribeComputeEnvironmentsAPIClient interface {
+	DescribeComputeEnvironments(context.Context, *DescribeComputeEnvironmentsInput, ...func(*Options)) (*DescribeComputeEnvironmentsOutput, error)
+}
+
+var _ DescribeComputeEnvironmentsAPIClient = (*Client)(nil)
+
+// DescribeComputeEnvironmentsPaginatorOptions is the paginator options for
+// DescribeComputeEnvironments
+type DescribeComputeEnvironmentsPaginatorOptions struct {
+	// The maximum number of cluster results returned by DescribeComputeEnvironments in
+	// paginated output. When this parameter is used, DescribeComputeEnvironments only
+	// returns maxResults results in a single page along with a nextToken response
+	// element. The remaining results of the initial request can be seen by sending
+	// another DescribeComputeEnvironments request with the returned nextToken value.
+	// This value can be between 1 and 100. If this parameter is not used, then
+	// DescribeComputeEnvironments returns up to 100 results and a nextToken value if
+	// applicable.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeComputeEnvironmentsPaginator is a paginator for
+// DescribeComputeEnvironments
+type DescribeComputeEnvironmentsPaginator struct {
+	options   DescribeComputeEnvironmentsPaginatorOptions
+	client    DescribeComputeEnvironmentsAPIClient
+	params    *DescribeComputeEnvironmentsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeComputeEnvironmentsPaginator returns a new
+// DescribeComputeEnvironmentsPaginator
+func NewDescribeComputeEnvironmentsPaginator(client DescribeComputeEnvironmentsAPIClient, params *DescribeComputeEnvironmentsInput, optFns ...func(*DescribeComputeEnvironmentsPaginatorOptions)) *DescribeComputeEnvironmentsPaginator {
+	options := DescribeComputeEnvironmentsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeComputeEnvironmentsInput{}
+	}
+
+	return &DescribeComputeEnvironmentsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeComputeEnvironmentsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeComputeEnvironments page.
+func (p *DescribeComputeEnvironmentsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeComputeEnvironmentsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeComputeEnvironments(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeComputeEnvironments(region string) *awsmiddleware.RegisterServiceMetadata {

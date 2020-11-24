@@ -4,6 +4,7 @@ package elasticsearchservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
@@ -128,6 +129,92 @@ func addOperationDescribeInboundCrossClusterSearchConnectionsMiddlewares(stack *
 		return err
 	}
 	return nil
+}
+
+// DescribeInboundCrossClusterSearchConnectionsAPIClient is a client that
+// implements the DescribeInboundCrossClusterSearchConnections operation.
+type DescribeInboundCrossClusterSearchConnectionsAPIClient interface {
+	DescribeInboundCrossClusterSearchConnections(context.Context, *DescribeInboundCrossClusterSearchConnectionsInput, ...func(*Options)) (*DescribeInboundCrossClusterSearchConnectionsOutput, error)
+}
+
+var _ DescribeInboundCrossClusterSearchConnectionsAPIClient = (*Client)(nil)
+
+// DescribeInboundCrossClusterSearchConnectionsPaginatorOptions is the paginator
+// options for DescribeInboundCrossClusterSearchConnections
+type DescribeInboundCrossClusterSearchConnectionsPaginatorOptions struct {
+	// Set this value to limit the number of results returned. If not specified,
+	// defaults to 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeInboundCrossClusterSearchConnectionsPaginator is a paginator for
+// DescribeInboundCrossClusterSearchConnections
+type DescribeInboundCrossClusterSearchConnectionsPaginator struct {
+	options   DescribeInboundCrossClusterSearchConnectionsPaginatorOptions
+	client    DescribeInboundCrossClusterSearchConnectionsAPIClient
+	params    *DescribeInboundCrossClusterSearchConnectionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeInboundCrossClusterSearchConnectionsPaginator returns a new
+// DescribeInboundCrossClusterSearchConnectionsPaginator
+func NewDescribeInboundCrossClusterSearchConnectionsPaginator(client DescribeInboundCrossClusterSearchConnectionsAPIClient, params *DescribeInboundCrossClusterSearchConnectionsInput, optFns ...func(*DescribeInboundCrossClusterSearchConnectionsPaginatorOptions)) *DescribeInboundCrossClusterSearchConnectionsPaginator {
+	options := DescribeInboundCrossClusterSearchConnectionsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeInboundCrossClusterSearchConnectionsInput{}
+	}
+
+	return &DescribeInboundCrossClusterSearchConnectionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeInboundCrossClusterSearchConnectionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeInboundCrossClusterSearchConnections page.
+func (p *DescribeInboundCrossClusterSearchConnectionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeInboundCrossClusterSearchConnectionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeInboundCrossClusterSearchConnections(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeInboundCrossClusterSearchConnections(region string) *awsmiddleware.RegisterServiceMetadata {

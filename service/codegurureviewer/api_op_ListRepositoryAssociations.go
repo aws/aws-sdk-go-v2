@@ -4,6 +4,7 @@ package codegurureviewer
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
@@ -166,6 +167,102 @@ func addOperationListRepositoryAssociationsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+// ListRepositoryAssociationsAPIClient is a client that implements the
+// ListRepositoryAssociations operation.
+type ListRepositoryAssociationsAPIClient interface {
+	ListRepositoryAssociations(context.Context, *ListRepositoryAssociationsInput, ...func(*Options)) (*ListRepositoryAssociationsOutput, error)
+}
+
+var _ ListRepositoryAssociationsAPIClient = (*Client)(nil)
+
+// ListRepositoryAssociationsPaginatorOptions is the paginator options for
+// ListRepositoryAssociations
+type ListRepositoryAssociationsPaginatorOptions struct {
+	// The maximum number of repository association results returned by
+	// ListRepositoryAssociations in paginated output. When this parameter is used,
+	// ListRepositoryAssociations only returns maxResults results in a single page with
+	// a nextToken response element. The remaining results of the initial request can
+	// be seen by sending another ListRepositoryAssociations request with the returned
+	// nextToken value. This value can be between 1 and 100. If this parameter is not
+	// used, ListRepositoryAssociations returns up to 100 results and a nextToken value
+	// if applicable.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListRepositoryAssociationsPaginator is a paginator for
+// ListRepositoryAssociations
+type ListRepositoryAssociationsPaginator struct {
+	options   ListRepositoryAssociationsPaginatorOptions
+	client    ListRepositoryAssociationsAPIClient
+	params    *ListRepositoryAssociationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListRepositoryAssociationsPaginator returns a new
+// ListRepositoryAssociationsPaginator
+func NewListRepositoryAssociationsPaginator(client ListRepositoryAssociationsAPIClient, params *ListRepositoryAssociationsInput, optFns ...func(*ListRepositoryAssociationsPaginatorOptions)) *ListRepositoryAssociationsPaginator {
+	options := ListRepositoryAssociationsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListRepositoryAssociationsInput{}
+	}
+
+	return &ListRepositoryAssociationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListRepositoryAssociationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListRepositoryAssociations page.
+func (p *ListRepositoryAssociationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListRepositoryAssociationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListRepositoryAssociations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListRepositoryAssociations(region string) *awsmiddleware.RegisterServiceMetadata {

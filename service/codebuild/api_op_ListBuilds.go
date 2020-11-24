@@ -4,6 +4,7 @@ package codebuild
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
@@ -117,6 +118,79 @@ func addOperationListBuildsMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+// ListBuildsAPIClient is a client that implements the ListBuilds operation.
+type ListBuildsAPIClient interface {
+	ListBuilds(context.Context, *ListBuildsInput, ...func(*Options)) (*ListBuildsOutput, error)
+}
+
+var _ ListBuildsAPIClient = (*Client)(nil)
+
+// ListBuildsPaginatorOptions is the paginator options for ListBuilds
+type ListBuildsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListBuildsPaginator is a paginator for ListBuilds
+type ListBuildsPaginator struct {
+	options   ListBuildsPaginatorOptions
+	client    ListBuildsAPIClient
+	params    *ListBuildsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListBuildsPaginator returns a new ListBuildsPaginator
+func NewListBuildsPaginator(client ListBuildsAPIClient, params *ListBuildsInput, optFns ...func(*ListBuildsPaginatorOptions)) *ListBuildsPaginator {
+	options := ListBuildsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListBuildsInput{}
+	}
+
+	return &ListBuildsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListBuildsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListBuilds page.
+func (p *ListBuildsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListBuildsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListBuilds(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListBuilds(region string) *awsmiddleware.RegisterServiceMetadata {

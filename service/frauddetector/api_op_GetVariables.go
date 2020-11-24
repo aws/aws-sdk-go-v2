@@ -4,6 +4,7 @@ package frauddetector
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
@@ -111,6 +112,91 @@ func addOperationGetVariablesMiddlewares(stack *middleware.Stack, options Option
 		return err
 	}
 	return nil
+}
+
+// GetVariablesAPIClient is a client that implements the GetVariables operation.
+type GetVariablesAPIClient interface {
+	GetVariables(context.Context, *GetVariablesInput, ...func(*Options)) (*GetVariablesOutput, error)
+}
+
+var _ GetVariablesAPIClient = (*Client)(nil)
+
+// GetVariablesPaginatorOptions is the paginator options for GetVariables
+type GetVariablesPaginatorOptions struct {
+	// The max size per page determined for the get variable request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetVariablesPaginator is a paginator for GetVariables
+type GetVariablesPaginator struct {
+	options   GetVariablesPaginatorOptions
+	client    GetVariablesAPIClient
+	params    *GetVariablesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetVariablesPaginator returns a new GetVariablesPaginator
+func NewGetVariablesPaginator(client GetVariablesAPIClient, params *GetVariablesInput, optFns ...func(*GetVariablesPaginatorOptions)) *GetVariablesPaginator {
+	options := GetVariablesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetVariablesInput{}
+	}
+
+	return &GetVariablesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetVariablesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetVariables page.
+func (p *GetVariablesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetVariablesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetVariables(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetVariables(region string) *awsmiddleware.RegisterServiceMetadata {

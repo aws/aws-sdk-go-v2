@@ -4,6 +4,7 @@ package connect
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
@@ -116,6 +117,90 @@ func addOperationListUserHierarchyGroupsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// ListUserHierarchyGroupsAPIClient is a client that implements the
+// ListUserHierarchyGroups operation.
+type ListUserHierarchyGroupsAPIClient interface {
+	ListUserHierarchyGroups(context.Context, *ListUserHierarchyGroupsInput, ...func(*Options)) (*ListUserHierarchyGroupsOutput, error)
+}
+
+var _ ListUserHierarchyGroupsAPIClient = (*Client)(nil)
+
+// ListUserHierarchyGroupsPaginatorOptions is the paginator options for
+// ListUserHierarchyGroups
+type ListUserHierarchyGroupsPaginatorOptions struct {
+	// The maximimum number of results to return per page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListUserHierarchyGroupsPaginator is a paginator for ListUserHierarchyGroups
+type ListUserHierarchyGroupsPaginator struct {
+	options   ListUserHierarchyGroupsPaginatorOptions
+	client    ListUserHierarchyGroupsAPIClient
+	params    *ListUserHierarchyGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListUserHierarchyGroupsPaginator returns a new
+// ListUserHierarchyGroupsPaginator
+func NewListUserHierarchyGroupsPaginator(client ListUserHierarchyGroupsAPIClient, params *ListUserHierarchyGroupsInput, optFns ...func(*ListUserHierarchyGroupsPaginatorOptions)) *ListUserHierarchyGroupsPaginator {
+	options := ListUserHierarchyGroupsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListUserHierarchyGroupsInput{}
+	}
+
+	return &ListUserHierarchyGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListUserHierarchyGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListUserHierarchyGroups page.
+func (p *ListUserHierarchyGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListUserHierarchyGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListUserHierarchyGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListUserHierarchyGroups(region string) *awsmiddleware.RegisterServiceMetadata {

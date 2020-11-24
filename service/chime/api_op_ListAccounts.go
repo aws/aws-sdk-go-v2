@@ -4,6 +4,7 @@ package chime
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
@@ -112,6 +113,91 @@ func addOperationListAccountsMiddlewares(stack *middleware.Stack, options Option
 		return err
 	}
 	return nil
+}
+
+// ListAccountsAPIClient is a client that implements the ListAccounts operation.
+type ListAccountsAPIClient interface {
+	ListAccounts(context.Context, *ListAccountsInput, ...func(*Options)) (*ListAccountsOutput, error)
+}
+
+var _ ListAccountsAPIClient = (*Client)(nil)
+
+// ListAccountsPaginatorOptions is the paginator options for ListAccounts
+type ListAccountsPaginatorOptions struct {
+	// The maximum number of results to return in a single call. Defaults to 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAccountsPaginator is a paginator for ListAccounts
+type ListAccountsPaginator struct {
+	options   ListAccountsPaginatorOptions
+	client    ListAccountsAPIClient
+	params    *ListAccountsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAccountsPaginator returns a new ListAccountsPaginator
+func NewListAccountsPaginator(client ListAccountsAPIClient, params *ListAccountsInput, optFns ...func(*ListAccountsPaginatorOptions)) *ListAccountsPaginator {
+	options := ListAccountsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAccountsInput{}
+	}
+
+	return &ListAccountsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAccountsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAccounts page.
+func (p *ListAccountsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAccountsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListAccounts(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAccounts(region string) *awsmiddleware.RegisterServiceMetadata {

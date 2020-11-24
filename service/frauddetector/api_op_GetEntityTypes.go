@@ -4,6 +4,7 @@ package frauddetector
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
@@ -111,6 +112,92 @@ func addOperationGetEntityTypesMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// GetEntityTypesAPIClient is a client that implements the GetEntityTypes
+// operation.
+type GetEntityTypesAPIClient interface {
+	GetEntityTypes(context.Context, *GetEntityTypesInput, ...func(*Options)) (*GetEntityTypesOutput, error)
+}
+
+var _ GetEntityTypesAPIClient = (*Client)(nil)
+
+// GetEntityTypesPaginatorOptions is the paginator options for GetEntityTypes
+type GetEntityTypesPaginatorOptions struct {
+	// The maximum number of objects to return for the request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetEntityTypesPaginator is a paginator for GetEntityTypes
+type GetEntityTypesPaginator struct {
+	options   GetEntityTypesPaginatorOptions
+	client    GetEntityTypesAPIClient
+	params    *GetEntityTypesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetEntityTypesPaginator returns a new GetEntityTypesPaginator
+func NewGetEntityTypesPaginator(client GetEntityTypesAPIClient, params *GetEntityTypesInput, optFns ...func(*GetEntityTypesPaginatorOptions)) *GetEntityTypesPaginator {
+	options := GetEntityTypesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetEntityTypesInput{}
+	}
+
+	return &GetEntityTypesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetEntityTypesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetEntityTypes page.
+func (p *GetEntityTypesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetEntityTypesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetEntityTypes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetEntityTypes(region string) *awsmiddleware.RegisterServiceMetadata {

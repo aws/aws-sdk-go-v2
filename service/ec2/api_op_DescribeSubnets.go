@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -172,6 +173,89 @@ func addOperationDescribeSubnetsMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	return nil
+}
+
+// DescribeSubnetsAPIClient is a client that implements the DescribeSubnets
+// operation.
+type DescribeSubnetsAPIClient interface {
+	DescribeSubnets(context.Context, *DescribeSubnetsInput, ...func(*Options)) (*DescribeSubnetsOutput, error)
+}
+
+var _ DescribeSubnetsAPIClient = (*Client)(nil)
+
+// DescribeSubnetsPaginatorOptions is the paginator options for DescribeSubnets
+type DescribeSubnetsPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeSubnetsPaginator is a paginator for DescribeSubnets
+type DescribeSubnetsPaginator struct {
+	options   DescribeSubnetsPaginatorOptions
+	client    DescribeSubnetsAPIClient
+	params    *DescribeSubnetsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeSubnetsPaginator returns a new DescribeSubnetsPaginator
+func NewDescribeSubnetsPaginator(client DescribeSubnetsAPIClient, params *DescribeSubnetsInput, optFns ...func(*DescribeSubnetsPaginatorOptions)) *DescribeSubnetsPaginator {
+	options := DescribeSubnetsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeSubnetsInput{}
+	}
+
+	return &DescribeSubnetsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeSubnetsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeSubnets page.
+func (p *DescribeSubnetsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeSubnetsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeSubnets(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeSubnets(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package organizations
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
@@ -126,6 +127,103 @@ func addOperationListDelegatedAdministratorsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	return nil
+}
+
+// ListDelegatedAdministratorsAPIClient is a client that implements the
+// ListDelegatedAdministrators operation.
+type ListDelegatedAdministratorsAPIClient interface {
+	ListDelegatedAdministrators(context.Context, *ListDelegatedAdministratorsInput, ...func(*Options)) (*ListDelegatedAdministratorsOutput, error)
+}
+
+var _ ListDelegatedAdministratorsAPIClient = (*Client)(nil)
+
+// ListDelegatedAdministratorsPaginatorOptions is the paginator options for
+// ListDelegatedAdministrators
+type ListDelegatedAdministratorsPaginatorOptions struct {
+	// The total number of results that you want included on each page of the response.
+	// If you do not include this parameter, it defaults to a value that is specific to
+	// the operation. If additional items exist beyond the maximum you specify, the
+	// NextToken response element is present and has a value (is not null). Include
+	// that value as the NextToken request parameter in the next call to the operation
+	// to get the next part of the results. Note that Organizations might return fewer
+	// results than the maximum even when there are more results available. You should
+	// check NextToken after every operation to ensure that you receive all of the
+	// results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDelegatedAdministratorsPaginator is a paginator for
+// ListDelegatedAdministrators
+type ListDelegatedAdministratorsPaginator struct {
+	options   ListDelegatedAdministratorsPaginatorOptions
+	client    ListDelegatedAdministratorsAPIClient
+	params    *ListDelegatedAdministratorsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDelegatedAdministratorsPaginator returns a new
+// ListDelegatedAdministratorsPaginator
+func NewListDelegatedAdministratorsPaginator(client ListDelegatedAdministratorsAPIClient, params *ListDelegatedAdministratorsInput, optFns ...func(*ListDelegatedAdministratorsPaginatorOptions)) *ListDelegatedAdministratorsPaginator {
+	options := ListDelegatedAdministratorsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListDelegatedAdministratorsInput{}
+	}
+
+	return &ListDelegatedAdministratorsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDelegatedAdministratorsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDelegatedAdministrators page.
+func (p *ListDelegatedAdministratorsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDelegatedAdministratorsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListDelegatedAdministrators(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDelegatedAdministrators(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package codestarnotifications
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/types"
@@ -114,6 +115,89 @@ func addOperationListEventTypesMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListEventTypesAPIClient is a client that implements the ListEventTypes
+// operation.
+type ListEventTypesAPIClient interface {
+	ListEventTypes(context.Context, *ListEventTypesInput, ...func(*Options)) (*ListEventTypesOutput, error)
+}
+
+var _ ListEventTypesAPIClient = (*Client)(nil)
+
+// ListEventTypesPaginatorOptions is the paginator options for ListEventTypes
+type ListEventTypesPaginatorOptions struct {
+	// A non-negative integer used to limit the number of returned results. The default
+	// number is 50. The maximum number of results that can be returned is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListEventTypesPaginator is a paginator for ListEventTypes
+type ListEventTypesPaginator struct {
+	options   ListEventTypesPaginatorOptions
+	client    ListEventTypesAPIClient
+	params    *ListEventTypesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListEventTypesPaginator returns a new ListEventTypesPaginator
+func NewListEventTypesPaginator(client ListEventTypesAPIClient, params *ListEventTypesInput, optFns ...func(*ListEventTypesPaginatorOptions)) *ListEventTypesPaginator {
+	options := ListEventTypesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListEventTypesInput{}
+	}
+
+	return &ListEventTypesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListEventTypesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListEventTypes page.
+func (p *ListEventTypesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListEventTypesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListEventTypes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListEventTypes(region string) *awsmiddleware.RegisterServiceMetadata {

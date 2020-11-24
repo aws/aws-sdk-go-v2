@@ -4,6 +4,7 @@ package cloudwatch
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
@@ -137,6 +138,79 @@ func addOperationListMetricsMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+// ListMetricsAPIClient is a client that implements the ListMetrics operation.
+type ListMetricsAPIClient interface {
+	ListMetrics(context.Context, *ListMetricsInput, ...func(*Options)) (*ListMetricsOutput, error)
+}
+
+var _ ListMetricsAPIClient = (*Client)(nil)
+
+// ListMetricsPaginatorOptions is the paginator options for ListMetrics
+type ListMetricsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListMetricsPaginator is a paginator for ListMetrics
+type ListMetricsPaginator struct {
+	options   ListMetricsPaginatorOptions
+	client    ListMetricsAPIClient
+	params    *ListMetricsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListMetricsPaginator returns a new ListMetricsPaginator
+func NewListMetricsPaginator(client ListMetricsAPIClient, params *ListMetricsInput, optFns ...func(*ListMetricsPaginatorOptions)) *ListMetricsPaginator {
+	options := ListMetricsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListMetricsInput{}
+	}
+
+	return &ListMetricsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListMetricsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListMetrics page.
+func (p *ListMetricsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListMetricsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListMetrics(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListMetrics(region string) *awsmiddleware.RegisterServiceMetadata {

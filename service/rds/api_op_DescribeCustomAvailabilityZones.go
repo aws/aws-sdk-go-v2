@@ -4,6 +4,7 @@ package rds
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
@@ -125,6 +126,98 @@ func addOperationDescribeCustomAvailabilityZonesMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+// DescribeCustomAvailabilityZonesAPIClient is a client that implements the
+// DescribeCustomAvailabilityZones operation.
+type DescribeCustomAvailabilityZonesAPIClient interface {
+	DescribeCustomAvailabilityZones(context.Context, *DescribeCustomAvailabilityZonesInput, ...func(*Options)) (*DescribeCustomAvailabilityZonesOutput, error)
+}
+
+var _ DescribeCustomAvailabilityZonesAPIClient = (*Client)(nil)
+
+// DescribeCustomAvailabilityZonesPaginatorOptions is the paginator options for
+// DescribeCustomAvailabilityZones
+type DescribeCustomAvailabilityZonesPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so you can retrieve the remaining results. Default: 100
+	// Constraints: Minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeCustomAvailabilityZonesPaginator is a paginator for
+// DescribeCustomAvailabilityZones
+type DescribeCustomAvailabilityZonesPaginator struct {
+	options   DescribeCustomAvailabilityZonesPaginatorOptions
+	client    DescribeCustomAvailabilityZonesAPIClient
+	params    *DescribeCustomAvailabilityZonesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeCustomAvailabilityZonesPaginator returns a new
+// DescribeCustomAvailabilityZonesPaginator
+func NewDescribeCustomAvailabilityZonesPaginator(client DescribeCustomAvailabilityZonesAPIClient, params *DescribeCustomAvailabilityZonesInput, optFns ...func(*DescribeCustomAvailabilityZonesPaginatorOptions)) *DescribeCustomAvailabilityZonesPaginator {
+	options := DescribeCustomAvailabilityZonesPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeCustomAvailabilityZonesInput{}
+	}
+
+	return &DescribeCustomAvailabilityZonesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeCustomAvailabilityZonesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeCustomAvailabilityZones page.
+func (p *DescribeCustomAvailabilityZonesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeCustomAvailabilityZonesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeCustomAvailabilityZones(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeCustomAvailabilityZones(region string) *awsmiddleware.RegisterServiceMetadata {

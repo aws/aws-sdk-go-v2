@@ -4,6 +4,7 @@ package imagebuilder
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
@@ -121,6 +122,90 @@ func addOperationListImagePipelineImagesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// ListImagePipelineImagesAPIClient is a client that implements the
+// ListImagePipelineImages operation.
+type ListImagePipelineImagesAPIClient interface {
+	ListImagePipelineImages(context.Context, *ListImagePipelineImagesInput, ...func(*Options)) (*ListImagePipelineImagesOutput, error)
+}
+
+var _ ListImagePipelineImagesAPIClient = (*Client)(nil)
+
+// ListImagePipelineImagesPaginatorOptions is the paginator options for
+// ListImagePipelineImages
+type ListImagePipelineImagesPaginatorOptions struct {
+	// The maximum items to return in a request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListImagePipelineImagesPaginator is a paginator for ListImagePipelineImages
+type ListImagePipelineImagesPaginator struct {
+	options   ListImagePipelineImagesPaginatorOptions
+	client    ListImagePipelineImagesAPIClient
+	params    *ListImagePipelineImagesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListImagePipelineImagesPaginator returns a new
+// ListImagePipelineImagesPaginator
+func NewListImagePipelineImagesPaginator(client ListImagePipelineImagesAPIClient, params *ListImagePipelineImagesInput, optFns ...func(*ListImagePipelineImagesPaginatorOptions)) *ListImagePipelineImagesPaginator {
+	options := ListImagePipelineImagesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListImagePipelineImagesInput{}
+	}
+
+	return &ListImagePipelineImagesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListImagePipelineImagesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListImagePipelineImages page.
+func (p *ListImagePipelineImagesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListImagePipelineImagesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListImagePipelineImages(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListImagePipelineImages(region string) *awsmiddleware.RegisterServiceMetadata {

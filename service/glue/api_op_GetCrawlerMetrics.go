@@ -4,6 +4,7 @@ package glue
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
@@ -107,6 +108,92 @@ func addOperationGetCrawlerMetricsMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// GetCrawlerMetricsAPIClient is a client that implements the GetCrawlerMetrics
+// operation.
+type GetCrawlerMetricsAPIClient interface {
+	GetCrawlerMetrics(context.Context, *GetCrawlerMetricsInput, ...func(*Options)) (*GetCrawlerMetricsOutput, error)
+}
+
+var _ GetCrawlerMetricsAPIClient = (*Client)(nil)
+
+// GetCrawlerMetricsPaginatorOptions is the paginator options for GetCrawlerMetrics
+type GetCrawlerMetricsPaginatorOptions struct {
+	// The maximum size of a list to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetCrawlerMetricsPaginator is a paginator for GetCrawlerMetrics
+type GetCrawlerMetricsPaginator struct {
+	options   GetCrawlerMetricsPaginatorOptions
+	client    GetCrawlerMetricsAPIClient
+	params    *GetCrawlerMetricsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetCrawlerMetricsPaginator returns a new GetCrawlerMetricsPaginator
+func NewGetCrawlerMetricsPaginator(client GetCrawlerMetricsAPIClient, params *GetCrawlerMetricsInput, optFns ...func(*GetCrawlerMetricsPaginatorOptions)) *GetCrawlerMetricsPaginator {
+	options := GetCrawlerMetricsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetCrawlerMetricsInput{}
+	}
+
+	return &GetCrawlerMetricsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetCrawlerMetricsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetCrawlerMetrics page.
+func (p *GetCrawlerMetricsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetCrawlerMetricsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetCrawlerMetrics(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetCrawlerMetrics(region string) *awsmiddleware.RegisterServiceMetadata {

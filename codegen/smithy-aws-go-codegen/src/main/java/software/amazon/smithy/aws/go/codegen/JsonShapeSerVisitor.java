@@ -180,10 +180,11 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
             Shape target = context.getModel().expectShape(member.getTarget());
             String serializedMemberName = getSerializedMemberName(member);
 
-            GoValueAccessUtils.writeIfNonZeroValueMember(context, writer, member, "v", (operand) -> {
-                writer.write("ok := object.Key($S)", serializedMemberName);
-                target.accept(getMemberSerVisitor(member, operand, "ok"));
-            });
+            GoValueAccessUtils.writeIfNonZeroValueMember(context.getModel(), context.getSymbolProvider(), writer,
+                    member, "v", (operand) -> {
+                        writer.write("ok := object.Key($S)", serializedMemberName);
+                        target.accept(getMemberSerVisitor(member, operand, "ok"));
+                    });
             writer.write("");
         }
 

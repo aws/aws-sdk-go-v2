@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
@@ -129,6 +130,93 @@ func addOperationListViolationEventsMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// ListViolationEventsAPIClient is a client that implements the ListViolationEvents
+// operation.
+type ListViolationEventsAPIClient interface {
+	ListViolationEvents(context.Context, *ListViolationEventsInput, ...func(*Options)) (*ListViolationEventsOutput, error)
+}
+
+var _ ListViolationEventsAPIClient = (*Client)(nil)
+
+// ListViolationEventsPaginatorOptions is the paginator options for
+// ListViolationEvents
+type ListViolationEventsPaginatorOptions struct {
+	// The maximum number of results to return at one time.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListViolationEventsPaginator is a paginator for ListViolationEvents
+type ListViolationEventsPaginator struct {
+	options   ListViolationEventsPaginatorOptions
+	client    ListViolationEventsAPIClient
+	params    *ListViolationEventsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListViolationEventsPaginator returns a new ListViolationEventsPaginator
+func NewListViolationEventsPaginator(client ListViolationEventsAPIClient, params *ListViolationEventsInput, optFns ...func(*ListViolationEventsPaginatorOptions)) *ListViolationEventsPaginator {
+	options := ListViolationEventsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListViolationEventsInput{}
+	}
+
+	return &ListViolationEventsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListViolationEventsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListViolationEvents page.
+func (p *ListViolationEventsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListViolationEventsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListViolationEvents(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListViolationEvents(region string) *awsmiddleware.RegisterServiceMetadata {

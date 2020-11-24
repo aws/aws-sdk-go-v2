@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -105,6 +106,92 @@ func addOperationListRoleAliasesMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	return nil
+}
+
+// ListRoleAliasesAPIClient is a client that implements the ListRoleAliases
+// operation.
+type ListRoleAliasesAPIClient interface {
+	ListRoleAliases(context.Context, *ListRoleAliasesInput, ...func(*Options)) (*ListRoleAliasesOutput, error)
+}
+
+var _ ListRoleAliasesAPIClient = (*Client)(nil)
+
+// ListRoleAliasesPaginatorOptions is the paginator options for ListRoleAliases
+type ListRoleAliasesPaginatorOptions struct {
+	// The maximum number of results to return at one time.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListRoleAliasesPaginator is a paginator for ListRoleAliases
+type ListRoleAliasesPaginator struct {
+	options   ListRoleAliasesPaginatorOptions
+	client    ListRoleAliasesAPIClient
+	params    *ListRoleAliasesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListRoleAliasesPaginator returns a new ListRoleAliasesPaginator
+func NewListRoleAliasesPaginator(client ListRoleAliasesAPIClient, params *ListRoleAliasesInput, optFns ...func(*ListRoleAliasesPaginatorOptions)) *ListRoleAliasesPaginator {
+	options := ListRoleAliasesPaginatorOptions{}
+	if params.PageSize != nil {
+		options.Limit = *params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListRoleAliasesInput{}
+	}
+
+	return &ListRoleAliasesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListRoleAliasesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListRoleAliases page.
+func (p *ListRoleAliasesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListRoleAliasesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.PageSize = limit
+
+	result, err := p.client.ListRoleAliases(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListRoleAliases(region string) *awsmiddleware.RegisterServiceMetadata {

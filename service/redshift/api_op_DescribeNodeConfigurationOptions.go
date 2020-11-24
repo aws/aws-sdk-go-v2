@@ -4,6 +4,7 @@ package redshift
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
@@ -142,6 +143,99 @@ func addOperationDescribeNodeConfigurationOptionsMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+// DescribeNodeConfigurationOptionsAPIClient is a client that implements the
+// DescribeNodeConfigurationOptions operation.
+type DescribeNodeConfigurationOptionsAPIClient interface {
+	DescribeNodeConfigurationOptions(context.Context, *DescribeNodeConfigurationOptionsInput, ...func(*Options)) (*DescribeNodeConfigurationOptionsOutput, error)
+}
+
+var _ DescribeNodeConfigurationOptionsAPIClient = (*Client)(nil)
+
+// DescribeNodeConfigurationOptionsPaginatorOptions is the paginator options for
+// DescribeNodeConfigurationOptions
+type DescribeNodeConfigurationOptionsPaginatorOptions struct {
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value. Default: 500
+	// Constraints: minimum 100, maximum 500.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeNodeConfigurationOptionsPaginator is a paginator for
+// DescribeNodeConfigurationOptions
+type DescribeNodeConfigurationOptionsPaginator struct {
+	options   DescribeNodeConfigurationOptionsPaginatorOptions
+	client    DescribeNodeConfigurationOptionsAPIClient
+	params    *DescribeNodeConfigurationOptionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeNodeConfigurationOptionsPaginator returns a new
+// DescribeNodeConfigurationOptionsPaginator
+func NewDescribeNodeConfigurationOptionsPaginator(client DescribeNodeConfigurationOptionsAPIClient, params *DescribeNodeConfigurationOptionsInput, optFns ...func(*DescribeNodeConfigurationOptionsPaginatorOptions)) *DescribeNodeConfigurationOptionsPaginator {
+	options := DescribeNodeConfigurationOptionsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeNodeConfigurationOptionsInput{}
+	}
+
+	return &DescribeNodeConfigurationOptionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeNodeConfigurationOptionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeNodeConfigurationOptions page.
+func (p *DescribeNodeConfigurationOptionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeNodeConfigurationOptionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeNodeConfigurationOptions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeNodeConfigurationOptions(region string) *awsmiddleware.RegisterServiceMetadata {

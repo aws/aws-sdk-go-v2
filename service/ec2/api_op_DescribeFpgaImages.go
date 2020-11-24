@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -157,6 +158,89 @@ func addOperationDescribeFpgaImagesMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// DescribeFpgaImagesAPIClient is a client that implements the DescribeFpgaImages
+// operation.
+type DescribeFpgaImagesAPIClient interface {
+	DescribeFpgaImages(context.Context, *DescribeFpgaImagesInput, ...func(*Options)) (*DescribeFpgaImagesOutput, error)
+}
+
+var _ DescribeFpgaImagesAPIClient = (*Client)(nil)
+
+// DescribeFpgaImagesPaginatorOptions is the paginator options for
+// DescribeFpgaImages
+type DescribeFpgaImagesPaginatorOptions struct {
+	// The maximum number of results to return in a single call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeFpgaImagesPaginator is a paginator for DescribeFpgaImages
+type DescribeFpgaImagesPaginator struct {
+	options   DescribeFpgaImagesPaginatorOptions
+	client    DescribeFpgaImagesAPIClient
+	params    *DescribeFpgaImagesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeFpgaImagesPaginator returns a new DescribeFpgaImagesPaginator
+func NewDescribeFpgaImagesPaginator(client DescribeFpgaImagesAPIClient, params *DescribeFpgaImagesInput, optFns ...func(*DescribeFpgaImagesPaginatorOptions)) *DescribeFpgaImagesPaginator {
+	options := DescribeFpgaImagesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeFpgaImagesInput{}
+	}
+
+	return &DescribeFpgaImagesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeFpgaImagesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeFpgaImages page.
+func (p *DescribeFpgaImagesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeFpgaImagesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeFpgaImages(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeFpgaImages(region string) *awsmiddleware.RegisterServiceMetadata {

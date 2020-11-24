@@ -4,6 +4,7 @@ package mturk
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
@@ -109,6 +110,90 @@ func addOperationListHITsMiddlewares(stack *middleware.Stack, options Options) (
 		return err
 	}
 	return nil
+}
+
+// ListHITsAPIClient is a client that implements the ListHITs operation.
+type ListHITsAPIClient interface {
+	ListHITs(context.Context, *ListHITsInput, ...func(*Options)) (*ListHITsOutput, error)
+}
+
+var _ ListHITsAPIClient = (*Client)(nil)
+
+// ListHITsPaginatorOptions is the paginator options for ListHITs
+type ListHITsPaginatorOptions struct {
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListHITsPaginator is a paginator for ListHITs
+type ListHITsPaginator struct {
+	options   ListHITsPaginatorOptions
+	client    ListHITsAPIClient
+	params    *ListHITsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListHITsPaginator returns a new ListHITsPaginator
+func NewListHITsPaginator(client ListHITsAPIClient, params *ListHITsInput, optFns ...func(*ListHITsPaginatorOptions)) *ListHITsPaginator {
+	options := ListHITsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListHITsInput{}
+	}
+
+	return &ListHITsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListHITsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListHITs page.
+func (p *ListHITsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListHITsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListHITs(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListHITs(region string) *awsmiddleware.RegisterServiceMetadata {

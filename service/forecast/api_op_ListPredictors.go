@@ -4,6 +4,7 @@ package forecast
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
@@ -134,6 +135,92 @@ func addOperationListPredictorsMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListPredictorsAPIClient is a client that implements the ListPredictors
+// operation.
+type ListPredictorsAPIClient interface {
+	ListPredictors(context.Context, *ListPredictorsInput, ...func(*Options)) (*ListPredictorsOutput, error)
+}
+
+var _ ListPredictorsAPIClient = (*Client)(nil)
+
+// ListPredictorsPaginatorOptions is the paginator options for ListPredictors
+type ListPredictorsPaginatorOptions struct {
+	// The number of items to return in the response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPredictorsPaginator is a paginator for ListPredictors
+type ListPredictorsPaginator struct {
+	options   ListPredictorsPaginatorOptions
+	client    ListPredictorsAPIClient
+	params    *ListPredictorsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPredictorsPaginator returns a new ListPredictorsPaginator
+func NewListPredictorsPaginator(client ListPredictorsAPIClient, params *ListPredictorsInput, optFns ...func(*ListPredictorsPaginatorOptions)) *ListPredictorsPaginator {
+	options := ListPredictorsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListPredictorsInput{}
+	}
+
+	return &ListPredictorsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPredictorsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListPredictors page.
+func (p *ListPredictorsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPredictorsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListPredictors(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListPredictors(region string) *awsmiddleware.RegisterServiceMetadata {

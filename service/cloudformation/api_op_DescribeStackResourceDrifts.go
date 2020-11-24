@@ -4,6 +4,7 @@ package cloudformation
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
@@ -153,6 +154,98 @@ func addOperationDescribeStackResourceDriftsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	return nil
+}
+
+// DescribeStackResourceDriftsAPIClient is a client that implements the
+// DescribeStackResourceDrifts operation.
+type DescribeStackResourceDriftsAPIClient interface {
+	DescribeStackResourceDrifts(context.Context, *DescribeStackResourceDriftsInput, ...func(*Options)) (*DescribeStackResourceDriftsOutput, error)
+}
+
+var _ DescribeStackResourceDriftsAPIClient = (*Client)(nil)
+
+// DescribeStackResourceDriftsPaginatorOptions is the paginator options for
+// DescribeStackResourceDrifts
+type DescribeStackResourceDriftsPaginatorOptions struct {
+	// The maximum number of results to be returned with a single call. If the number
+	// of available results exceeds this maximum, the response includes a NextToken
+	// value that you can assign to the NextToken request parameter to get the next set
+	// of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeStackResourceDriftsPaginator is a paginator for
+// DescribeStackResourceDrifts
+type DescribeStackResourceDriftsPaginator struct {
+	options   DescribeStackResourceDriftsPaginatorOptions
+	client    DescribeStackResourceDriftsAPIClient
+	params    *DescribeStackResourceDriftsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeStackResourceDriftsPaginator returns a new
+// DescribeStackResourceDriftsPaginator
+func NewDescribeStackResourceDriftsPaginator(client DescribeStackResourceDriftsAPIClient, params *DescribeStackResourceDriftsInput, optFns ...func(*DescribeStackResourceDriftsPaginatorOptions)) *DescribeStackResourceDriftsPaginator {
+	options := DescribeStackResourceDriftsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeStackResourceDriftsInput{}
+	}
+
+	return &DescribeStackResourceDriftsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeStackResourceDriftsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeStackResourceDrifts page.
+func (p *DescribeStackResourceDriftsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeStackResourceDriftsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeStackResourceDrifts(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeStackResourceDrifts(region string) *awsmiddleware.RegisterServiceMetadata {

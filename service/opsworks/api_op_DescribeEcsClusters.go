@@ -4,6 +4,7 @@ package opsworks
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
@@ -130,6 +131,96 @@ func addOperationDescribeEcsClustersMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// DescribeEcsClustersAPIClient is a client that implements the DescribeEcsClusters
+// operation.
+type DescribeEcsClustersAPIClient interface {
+	DescribeEcsClusters(context.Context, *DescribeEcsClustersInput, ...func(*Options)) (*DescribeEcsClustersOutput, error)
+}
+
+var _ DescribeEcsClustersAPIClient = (*Client)(nil)
+
+// DescribeEcsClustersPaginatorOptions is the paginator options for
+// DescribeEcsClusters
+type DescribeEcsClustersPaginatorOptions struct {
+	// To receive a paginated response, use this parameter to specify the maximum
+	// number of results to be returned with a single call. If the number of available
+	// results exceeds this maximum, the response includes a NextToken value that you
+	// can assign to the NextToken request parameter to get the next set of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeEcsClustersPaginator is a paginator for DescribeEcsClusters
+type DescribeEcsClustersPaginator struct {
+	options   DescribeEcsClustersPaginatorOptions
+	client    DescribeEcsClustersAPIClient
+	params    *DescribeEcsClustersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeEcsClustersPaginator returns a new DescribeEcsClustersPaginator
+func NewDescribeEcsClustersPaginator(client DescribeEcsClustersAPIClient, params *DescribeEcsClustersInput, optFns ...func(*DescribeEcsClustersPaginatorOptions)) *DescribeEcsClustersPaginator {
+	options := DescribeEcsClustersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeEcsClustersInput{}
+	}
+
+	return &DescribeEcsClustersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeEcsClustersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeEcsClusters page.
+func (p *DescribeEcsClustersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeEcsClustersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeEcsClusters(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeEcsClusters(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package accessanalyzer
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
@@ -107,4 +108,89 @@ func addOperationListAnalyzersMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	return nil
+}
+
+// ListAnalyzersAPIClient is a client that implements the ListAnalyzers operation.
+type ListAnalyzersAPIClient interface {
+	ListAnalyzers(context.Context, *ListAnalyzersInput, ...func(*Options)) (*ListAnalyzersOutput, error)
+}
+
+var _ ListAnalyzersAPIClient = (*Client)(nil)
+
+// ListAnalyzersPaginatorOptions is the paginator options for ListAnalyzers
+type ListAnalyzersPaginatorOptions struct {
+	// The maximum number of results to return in the response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAnalyzersPaginator is a paginator for ListAnalyzers
+type ListAnalyzersPaginator struct {
+	options   ListAnalyzersPaginatorOptions
+	client    ListAnalyzersAPIClient
+	params    *ListAnalyzersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAnalyzersPaginator returns a new ListAnalyzersPaginator
+func NewListAnalyzersPaginator(client ListAnalyzersAPIClient, params *ListAnalyzersInput, optFns ...func(*ListAnalyzersPaginatorOptions)) *ListAnalyzersPaginator {
+	options := ListAnalyzersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAnalyzersInput{}
+	}
+
+	return &ListAnalyzersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAnalyzersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAnalyzers page.
+func (p *ListAnalyzersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAnalyzersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListAnalyzers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }

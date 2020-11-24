@@ -4,6 +4,7 @@ package chime
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
@@ -117,6 +118,93 @@ func addOperationListRoomMembershipsMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// ListRoomMembershipsAPIClient is a client that implements the ListRoomMemberships
+// operation.
+type ListRoomMembershipsAPIClient interface {
+	ListRoomMemberships(context.Context, *ListRoomMembershipsInput, ...func(*Options)) (*ListRoomMembershipsOutput, error)
+}
+
+var _ ListRoomMembershipsAPIClient = (*Client)(nil)
+
+// ListRoomMembershipsPaginatorOptions is the paginator options for
+// ListRoomMemberships
+type ListRoomMembershipsPaginatorOptions struct {
+	// The maximum number of results to return in a single call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListRoomMembershipsPaginator is a paginator for ListRoomMemberships
+type ListRoomMembershipsPaginator struct {
+	options   ListRoomMembershipsPaginatorOptions
+	client    ListRoomMembershipsAPIClient
+	params    *ListRoomMembershipsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListRoomMembershipsPaginator returns a new ListRoomMembershipsPaginator
+func NewListRoomMembershipsPaginator(client ListRoomMembershipsAPIClient, params *ListRoomMembershipsInput, optFns ...func(*ListRoomMembershipsPaginatorOptions)) *ListRoomMembershipsPaginator {
+	options := ListRoomMembershipsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListRoomMembershipsInput{}
+	}
+
+	return &ListRoomMembershipsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListRoomMembershipsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListRoomMemberships page.
+func (p *ListRoomMembershipsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListRoomMembershipsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListRoomMemberships(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListRoomMemberships(region string) *awsmiddleware.RegisterServiceMetadata {

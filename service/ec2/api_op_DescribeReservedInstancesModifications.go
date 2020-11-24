@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -158,6 +159,83 @@ func addOperationDescribeReservedInstancesModificationsMiddlewares(stack *middle
 		return err
 	}
 	return nil
+}
+
+// DescribeReservedInstancesModificationsAPIClient is a client that implements the
+// DescribeReservedInstancesModifications operation.
+type DescribeReservedInstancesModificationsAPIClient interface {
+	DescribeReservedInstancesModifications(context.Context, *DescribeReservedInstancesModificationsInput, ...func(*Options)) (*DescribeReservedInstancesModificationsOutput, error)
+}
+
+var _ DescribeReservedInstancesModificationsAPIClient = (*Client)(nil)
+
+// DescribeReservedInstancesModificationsPaginatorOptions is the paginator options
+// for DescribeReservedInstancesModifications
+type DescribeReservedInstancesModificationsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeReservedInstancesModificationsPaginator is a paginator for
+// DescribeReservedInstancesModifications
+type DescribeReservedInstancesModificationsPaginator struct {
+	options   DescribeReservedInstancesModificationsPaginatorOptions
+	client    DescribeReservedInstancesModificationsAPIClient
+	params    *DescribeReservedInstancesModificationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeReservedInstancesModificationsPaginator returns a new
+// DescribeReservedInstancesModificationsPaginator
+func NewDescribeReservedInstancesModificationsPaginator(client DescribeReservedInstancesModificationsAPIClient, params *DescribeReservedInstancesModificationsInput, optFns ...func(*DescribeReservedInstancesModificationsPaginatorOptions)) *DescribeReservedInstancesModificationsPaginator {
+	options := DescribeReservedInstancesModificationsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeReservedInstancesModificationsInput{}
+	}
+
+	return &DescribeReservedInstancesModificationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeReservedInstancesModificationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeReservedInstancesModifications page.
+func (p *DescribeReservedInstancesModificationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeReservedInstancesModificationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.DescribeReservedInstancesModifications(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeReservedInstancesModifications(region string) *awsmiddleware.RegisterServiceMetadata {

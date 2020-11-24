@@ -4,6 +4,7 @@ package redshiftdata
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
@@ -157,6 +158,89 @@ func addOperationDescribeTableMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	return nil
+}
+
+// DescribeTableAPIClient is a client that implements the DescribeTable operation.
+type DescribeTableAPIClient interface {
+	DescribeTable(context.Context, *DescribeTableInput, ...func(*Options)) (*DescribeTableOutput, error)
+}
+
+var _ DescribeTableAPIClient = (*Client)(nil)
+
+// DescribeTablePaginatorOptions is the paginator options for DescribeTable
+type DescribeTablePaginatorOptions struct {
+	// The maximum number of tables to return in the response. If more tables exist
+	// than fit in one response, then NextToken is returned to page through the
+	// results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeTablePaginator is a paginator for DescribeTable
+type DescribeTablePaginator struct {
+	options   DescribeTablePaginatorOptions
+	client    DescribeTableAPIClient
+	params    *DescribeTableInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeTablePaginator returns a new DescribeTablePaginator
+func NewDescribeTablePaginator(client DescribeTableAPIClient, params *DescribeTableInput, optFns ...func(*DescribeTablePaginatorOptions)) *DescribeTablePaginator {
+	options := DescribeTablePaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeTableInput{}
+	}
+
+	return &DescribeTablePaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeTablePaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeTable page.
+func (p *DescribeTablePaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeTableOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeTable(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeTable(region string) *awsmiddleware.RegisterServiceMetadata {

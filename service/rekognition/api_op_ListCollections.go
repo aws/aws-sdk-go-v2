@@ -4,6 +4,7 @@ package rekognition
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -113,6 +114,92 @@ func addOperationListCollectionsMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	return nil
+}
+
+// ListCollectionsAPIClient is a client that implements the ListCollections
+// operation.
+type ListCollectionsAPIClient interface {
+	ListCollections(context.Context, *ListCollectionsInput, ...func(*Options)) (*ListCollectionsOutput, error)
+}
+
+var _ ListCollectionsAPIClient = (*Client)(nil)
+
+// ListCollectionsPaginatorOptions is the paginator options for ListCollections
+type ListCollectionsPaginatorOptions struct {
+	// Maximum number of collection IDs to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListCollectionsPaginator is a paginator for ListCollections
+type ListCollectionsPaginator struct {
+	options   ListCollectionsPaginatorOptions
+	client    ListCollectionsAPIClient
+	params    *ListCollectionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListCollectionsPaginator returns a new ListCollectionsPaginator
+func NewListCollectionsPaginator(client ListCollectionsAPIClient, params *ListCollectionsInput, optFns ...func(*ListCollectionsPaginatorOptions)) *ListCollectionsPaginator {
+	options := ListCollectionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListCollectionsInput{}
+	}
+
+	return &ListCollectionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListCollectionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListCollections page.
+func (p *ListCollectionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListCollectionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListCollections(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListCollections(region string) *awsmiddleware.RegisterServiceMetadata {

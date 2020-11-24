@@ -4,6 +4,7 @@ package ecr
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
@@ -155,6 +156,103 @@ func addOperationGetLifecyclePolicyPreviewMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+// GetLifecyclePolicyPreviewAPIClient is a client that implements the
+// GetLifecyclePolicyPreview operation.
+type GetLifecyclePolicyPreviewAPIClient interface {
+	GetLifecyclePolicyPreview(context.Context, *GetLifecyclePolicyPreviewInput, ...func(*Options)) (*GetLifecyclePolicyPreviewOutput, error)
+}
+
+var _ GetLifecyclePolicyPreviewAPIClient = (*Client)(nil)
+
+// GetLifecyclePolicyPreviewPaginatorOptions is the paginator options for
+// GetLifecyclePolicyPreview
+type GetLifecyclePolicyPreviewPaginatorOptions struct {
+	// The maximum number of repository results returned by
+	// GetLifecyclePolicyPreviewRequest in  paginated output. When this parameter is
+	// used, GetLifecyclePolicyPreviewRequest only returns  maxResults results in a
+	// single page along with a nextToken  response element. The remaining results of
+	// the initial request can be seen by sending  another
+	// GetLifecyclePolicyPreviewRequest request with the returned nextToken  value.
+	// This value can be between 1 and 1000. If this  parameter is not used, then
+	// GetLifecyclePolicyPreviewRequest returns up to  100 results and a nextToken
+	// value, if  applicable. This option cannot be used when you specify images with
+	// imageIds.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetLifecyclePolicyPreviewPaginator is a paginator for GetLifecyclePolicyPreview
+type GetLifecyclePolicyPreviewPaginator struct {
+	options   GetLifecyclePolicyPreviewPaginatorOptions
+	client    GetLifecyclePolicyPreviewAPIClient
+	params    *GetLifecyclePolicyPreviewInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetLifecyclePolicyPreviewPaginator returns a new
+// GetLifecyclePolicyPreviewPaginator
+func NewGetLifecyclePolicyPreviewPaginator(client GetLifecyclePolicyPreviewAPIClient, params *GetLifecyclePolicyPreviewInput, optFns ...func(*GetLifecyclePolicyPreviewPaginatorOptions)) *GetLifecyclePolicyPreviewPaginator {
+	options := GetLifecyclePolicyPreviewPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetLifecyclePolicyPreviewInput{}
+	}
+
+	return &GetLifecyclePolicyPreviewPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetLifecyclePolicyPreviewPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetLifecyclePolicyPreview page.
+func (p *GetLifecyclePolicyPreviewPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetLifecyclePolicyPreviewOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetLifecyclePolicyPreview(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetLifecyclePolicyPreview(region string) *awsmiddleware.RegisterServiceMetadata {

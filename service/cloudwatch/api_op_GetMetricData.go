@@ -4,6 +4,7 @@ package cloudwatch
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
@@ -213,6 +214,92 @@ func addOperationGetMetricDataMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	return nil
+}
+
+// GetMetricDataAPIClient is a client that implements the GetMetricData operation.
+type GetMetricDataAPIClient interface {
+	GetMetricData(context.Context, *GetMetricDataInput, ...func(*Options)) (*GetMetricDataOutput, error)
+}
+
+var _ GetMetricDataAPIClient = (*Client)(nil)
+
+// GetMetricDataPaginatorOptions is the paginator options for GetMetricData
+type GetMetricDataPaginatorOptions struct {
+	// The maximum number of data points the request should return before paginating.
+	// If you omit this, the default of 100,800 is used.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetMetricDataPaginator is a paginator for GetMetricData
+type GetMetricDataPaginator struct {
+	options   GetMetricDataPaginatorOptions
+	client    GetMetricDataAPIClient
+	params    *GetMetricDataInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetMetricDataPaginator returns a new GetMetricDataPaginator
+func NewGetMetricDataPaginator(client GetMetricDataAPIClient, params *GetMetricDataInput, optFns ...func(*GetMetricDataPaginatorOptions)) *GetMetricDataPaginator {
+	options := GetMetricDataPaginatorOptions{}
+	if params.MaxDatapoints != nil {
+		options.Limit = *params.MaxDatapoints
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetMetricDataInput{}
+	}
+
+	return &GetMetricDataPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetMetricDataPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetMetricData page.
+func (p *GetMetricDataPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetMetricDataOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxDatapoints = limit
+
+	result, err := p.client.GetMetricData(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetMetricData(region string) *awsmiddleware.RegisterServiceMetadata {

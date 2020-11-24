@@ -4,6 +4,7 @@ package acmpca
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
@@ -116,6 +117,98 @@ func addOperationListCertificateAuthoritiesMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+// ListCertificateAuthoritiesAPIClient is a client that implements the
+// ListCertificateAuthorities operation.
+type ListCertificateAuthoritiesAPIClient interface {
+	ListCertificateAuthorities(context.Context, *ListCertificateAuthoritiesInput, ...func(*Options)) (*ListCertificateAuthoritiesOutput, error)
+}
+
+var _ ListCertificateAuthoritiesAPIClient = (*Client)(nil)
+
+// ListCertificateAuthoritiesPaginatorOptions is the paginator options for
+// ListCertificateAuthorities
+type ListCertificateAuthoritiesPaginatorOptions struct {
+	// Use this parameter when paginating results to specify the maximum number of
+	// items to return in the response on each page. If additional items exist beyond
+	// the number you specify, the NextToken element is sent in the response. Use this
+	// NextToken value in a subsequent request to retrieve additional items.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListCertificateAuthoritiesPaginator is a paginator for
+// ListCertificateAuthorities
+type ListCertificateAuthoritiesPaginator struct {
+	options   ListCertificateAuthoritiesPaginatorOptions
+	client    ListCertificateAuthoritiesAPIClient
+	params    *ListCertificateAuthoritiesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListCertificateAuthoritiesPaginator returns a new
+// ListCertificateAuthoritiesPaginator
+func NewListCertificateAuthoritiesPaginator(client ListCertificateAuthoritiesAPIClient, params *ListCertificateAuthoritiesInput, optFns ...func(*ListCertificateAuthoritiesPaginatorOptions)) *ListCertificateAuthoritiesPaginator {
+	options := ListCertificateAuthoritiesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListCertificateAuthoritiesInput{}
+	}
+
+	return &ListCertificateAuthoritiesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListCertificateAuthoritiesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListCertificateAuthorities page.
+func (p *ListCertificateAuthoritiesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListCertificateAuthoritiesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListCertificateAuthorities(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListCertificateAuthorities(region string) *awsmiddleware.RegisterServiceMetadata {

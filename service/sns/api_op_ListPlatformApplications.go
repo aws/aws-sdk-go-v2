@@ -4,6 +4,7 @@ package sns
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
@@ -113,6 +114,82 @@ func addOperationListPlatformApplicationsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// ListPlatformApplicationsAPIClient is a client that implements the
+// ListPlatformApplications operation.
+type ListPlatformApplicationsAPIClient interface {
+	ListPlatformApplications(context.Context, *ListPlatformApplicationsInput, ...func(*Options)) (*ListPlatformApplicationsOutput, error)
+}
+
+var _ ListPlatformApplicationsAPIClient = (*Client)(nil)
+
+// ListPlatformApplicationsPaginatorOptions is the paginator options for
+// ListPlatformApplications
+type ListPlatformApplicationsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPlatformApplicationsPaginator is a paginator for ListPlatformApplications
+type ListPlatformApplicationsPaginator struct {
+	options   ListPlatformApplicationsPaginatorOptions
+	client    ListPlatformApplicationsAPIClient
+	params    *ListPlatformApplicationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPlatformApplicationsPaginator returns a new
+// ListPlatformApplicationsPaginator
+func NewListPlatformApplicationsPaginator(client ListPlatformApplicationsAPIClient, params *ListPlatformApplicationsInput, optFns ...func(*ListPlatformApplicationsPaginatorOptions)) *ListPlatformApplicationsPaginator {
+	options := ListPlatformApplicationsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListPlatformApplicationsInput{}
+	}
+
+	return &ListPlatformApplicationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPlatformApplicationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListPlatformApplications page.
+func (p *ListPlatformApplicationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPlatformApplicationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListPlatformApplications(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListPlatformApplications(region string) *awsmiddleware.RegisterServiceMetadata {

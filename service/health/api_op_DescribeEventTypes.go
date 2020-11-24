@@ -4,6 +4,7 @@ package health
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
@@ -125,6 +126,94 @@ func addOperationDescribeEventTypesMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// DescribeEventTypesAPIClient is a client that implements the DescribeEventTypes
+// operation.
+type DescribeEventTypesAPIClient interface {
+	DescribeEventTypes(context.Context, *DescribeEventTypesInput, ...func(*Options)) (*DescribeEventTypesOutput, error)
+}
+
+var _ DescribeEventTypesAPIClient = (*Client)(nil)
+
+// DescribeEventTypesPaginatorOptions is the paginator options for
+// DescribeEventTypes
+type DescribeEventTypesPaginatorOptions struct {
+	// The maximum number of items to return in one batch, between 10 and 100,
+	// inclusive.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeEventTypesPaginator is a paginator for DescribeEventTypes
+type DescribeEventTypesPaginator struct {
+	options   DescribeEventTypesPaginatorOptions
+	client    DescribeEventTypesAPIClient
+	params    *DescribeEventTypesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeEventTypesPaginator returns a new DescribeEventTypesPaginator
+func NewDescribeEventTypesPaginator(client DescribeEventTypesAPIClient, params *DescribeEventTypesInput, optFns ...func(*DescribeEventTypesPaginatorOptions)) *DescribeEventTypesPaginator {
+	options := DescribeEventTypesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeEventTypesInput{}
+	}
+
+	return &DescribeEventTypesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeEventTypesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeEventTypes page.
+func (p *DescribeEventTypesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeEventTypesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeEventTypes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeEventTypes(region string) *awsmiddleware.RegisterServiceMetadata {

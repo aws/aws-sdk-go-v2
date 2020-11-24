@@ -6,11 +6,11 @@ type FooEnum string
 
 // Enum values for FooEnum
 const (
-	FooEnumFoo FooEnum = "Foo"
-	FooEnumBaz FooEnum = "Baz"
-	FooEnumBar FooEnum = "Bar"
-	FooEnum1   FooEnum = "1"
-	FooEnum0   FooEnum = "0"
+	FooEnumFoo  FooEnum = "Foo"
+	FooEnumBaz  FooEnum = "Baz"
+	FooEnumBar  FooEnum = "Bar"
+	FooEnumOne  FooEnum = "1"
+	FooEnumZero FooEnum = "0"
 )
 
 // Values returns all known values for FooEnum. Note that this can be expanded in

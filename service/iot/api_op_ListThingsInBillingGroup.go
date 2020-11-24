@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -111,6 +112,94 @@ func addOperationListThingsInBillingGroupMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// ListThingsInBillingGroupAPIClient is a client that implements the
+// ListThingsInBillingGroup operation.
+type ListThingsInBillingGroupAPIClient interface {
+	ListThingsInBillingGroup(context.Context, *ListThingsInBillingGroupInput, ...func(*Options)) (*ListThingsInBillingGroupOutput, error)
+}
+
+var _ ListThingsInBillingGroupAPIClient = (*Client)(nil)
+
+// ListThingsInBillingGroupPaginatorOptions is the paginator options for
+// ListThingsInBillingGroup
+type ListThingsInBillingGroupPaginatorOptions struct {
+	// The maximum number of results to return per request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListThingsInBillingGroupPaginator is a paginator for ListThingsInBillingGroup
+type ListThingsInBillingGroupPaginator struct {
+	options   ListThingsInBillingGroupPaginatorOptions
+	client    ListThingsInBillingGroupAPIClient
+	params    *ListThingsInBillingGroupInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListThingsInBillingGroupPaginator returns a new
+// ListThingsInBillingGroupPaginator
+func NewListThingsInBillingGroupPaginator(client ListThingsInBillingGroupAPIClient, params *ListThingsInBillingGroupInput, optFns ...func(*ListThingsInBillingGroupPaginatorOptions)) *ListThingsInBillingGroupPaginator {
+	options := ListThingsInBillingGroupPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListThingsInBillingGroupInput{}
+	}
+
+	return &ListThingsInBillingGroupPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListThingsInBillingGroupPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListThingsInBillingGroup page.
+func (p *ListThingsInBillingGroupPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListThingsInBillingGroupOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListThingsInBillingGroup(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListThingsInBillingGroup(region string) *awsmiddleware.RegisterServiceMetadata {

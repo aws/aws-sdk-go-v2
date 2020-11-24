@@ -4,6 +4,7 @@ package appmesh
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
@@ -130,4 +131,96 @@ func addOperationListVirtualNodesMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// ListVirtualNodesAPIClient is a client that implements the ListVirtualNodes
+// operation.
+type ListVirtualNodesAPIClient interface {
+	ListVirtualNodes(context.Context, *ListVirtualNodesInput, ...func(*Options)) (*ListVirtualNodesOutput, error)
+}
+
+var _ ListVirtualNodesAPIClient = (*Client)(nil)
+
+// ListVirtualNodesPaginatorOptions is the paginator options for ListVirtualNodes
+type ListVirtualNodesPaginatorOptions struct {
+	// The maximum number of results returned by ListVirtualNodes in paginated output.
+	// When you use this parameter, ListVirtualNodes returns only limit results in a
+	// single page along with a nextToken response element. You can see the remaining
+	// results of the initial request by sending another ListVirtualNodes request with
+	// the returned nextToken value. This value can be between 1 and 100. If you don't
+	// use this parameter, ListVirtualNodes returns up to 100 results and a nextToken
+	// value if applicable.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListVirtualNodesPaginator is a paginator for ListVirtualNodes
+type ListVirtualNodesPaginator struct {
+	options   ListVirtualNodesPaginatorOptions
+	client    ListVirtualNodesAPIClient
+	params    *ListVirtualNodesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListVirtualNodesPaginator returns a new ListVirtualNodesPaginator
+func NewListVirtualNodesPaginator(client ListVirtualNodesAPIClient, params *ListVirtualNodesInput, optFns ...func(*ListVirtualNodesPaginatorOptions)) *ListVirtualNodesPaginator {
+	options := ListVirtualNodesPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListVirtualNodesInput{}
+	}
+
+	return &ListVirtualNodesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListVirtualNodesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListVirtualNodes page.
+func (p *ListVirtualNodesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListVirtualNodesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.ListVirtualNodes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }

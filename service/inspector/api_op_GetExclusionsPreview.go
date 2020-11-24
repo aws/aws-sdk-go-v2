@@ -4,6 +4,7 @@ package inspector
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
@@ -135,6 +136,94 @@ func addOperationGetExclusionsPreviewMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// GetExclusionsPreviewAPIClient is a client that implements the
+// GetExclusionsPreview operation.
+type GetExclusionsPreviewAPIClient interface {
+	GetExclusionsPreview(context.Context, *GetExclusionsPreviewInput, ...func(*Options)) (*GetExclusionsPreviewOutput, error)
+}
+
+var _ GetExclusionsPreviewAPIClient = (*Client)(nil)
+
+// GetExclusionsPreviewPaginatorOptions is the paginator options for
+// GetExclusionsPreview
+type GetExclusionsPreviewPaginatorOptions struct {
+	// You can use this parameter to indicate the maximum number of items you want in
+	// the response. The default value is 100. The maximum value is 500.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetExclusionsPreviewPaginator is a paginator for GetExclusionsPreview
+type GetExclusionsPreviewPaginator struct {
+	options   GetExclusionsPreviewPaginatorOptions
+	client    GetExclusionsPreviewAPIClient
+	params    *GetExclusionsPreviewInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetExclusionsPreviewPaginator returns a new GetExclusionsPreviewPaginator
+func NewGetExclusionsPreviewPaginator(client GetExclusionsPreviewAPIClient, params *GetExclusionsPreviewInput, optFns ...func(*GetExclusionsPreviewPaginatorOptions)) *GetExclusionsPreviewPaginator {
+	options := GetExclusionsPreviewPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetExclusionsPreviewInput{}
+	}
+
+	return &GetExclusionsPreviewPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetExclusionsPreviewPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetExclusionsPreview page.
+func (p *GetExclusionsPreviewPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetExclusionsPreviewOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetExclusionsPreview(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetExclusionsPreview(region string) *awsmiddleware.RegisterServiceMetadata {

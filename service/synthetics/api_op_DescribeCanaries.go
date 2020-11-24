@@ -4,6 +4,7 @@ package synthetics
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/synthetics/types"
@@ -112,6 +113,94 @@ func addOperationDescribeCanariesMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// DescribeCanariesAPIClient is a client that implements the DescribeCanaries
+// operation.
+type DescribeCanariesAPIClient interface {
+	DescribeCanaries(context.Context, *DescribeCanariesInput, ...func(*Options)) (*DescribeCanariesOutput, error)
+}
+
+var _ DescribeCanariesAPIClient = (*Client)(nil)
+
+// DescribeCanariesPaginatorOptions is the paginator options for DescribeCanaries
+type DescribeCanariesPaginatorOptions struct {
+	// Specify this parameter to limit how many canaries are returned each time you use
+	// the DescribeCanaries operation. If you omit this parameter, the default of 100
+	// is used.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeCanariesPaginator is a paginator for DescribeCanaries
+type DescribeCanariesPaginator struct {
+	options   DescribeCanariesPaginatorOptions
+	client    DescribeCanariesAPIClient
+	params    *DescribeCanariesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeCanariesPaginator returns a new DescribeCanariesPaginator
+func NewDescribeCanariesPaginator(client DescribeCanariesAPIClient, params *DescribeCanariesInput, optFns ...func(*DescribeCanariesPaginatorOptions)) *DescribeCanariesPaginator {
+	options := DescribeCanariesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeCanariesInput{}
+	}
+
+	return &DescribeCanariesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeCanariesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeCanaries page.
+func (p *DescribeCanariesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeCanariesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeCanaries(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeCanaries(region string) *awsmiddleware.RegisterServiceMetadata {

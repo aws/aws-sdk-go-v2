@@ -4,6 +4,7 @@ package sfn
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
@@ -140,6 +141,93 @@ func addOperationGetExecutionHistoryMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// GetExecutionHistoryAPIClient is a client that implements the GetExecutionHistory
+// operation.
+type GetExecutionHistoryAPIClient interface {
+	GetExecutionHistory(context.Context, *GetExecutionHistoryInput, ...func(*Options)) (*GetExecutionHistoryOutput, error)
+}
+
+var _ GetExecutionHistoryAPIClient = (*Client)(nil)
+
+// GetExecutionHistoryPaginatorOptions is the paginator options for
+// GetExecutionHistory
+type GetExecutionHistoryPaginatorOptions struct {
+	// The maximum number of results that are returned per call. You can use nextToken
+	// to obtain further pages of results. The default is 100 and the maximum allowed
+	// page size is 1000. A value of 0 uses the default. This is only an upper limit.
+	// The actual number of results returned per call might be fewer than the specified
+	// maximum.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetExecutionHistoryPaginator is a paginator for GetExecutionHistory
+type GetExecutionHistoryPaginator struct {
+	options   GetExecutionHistoryPaginatorOptions
+	client    GetExecutionHistoryAPIClient
+	params    *GetExecutionHistoryInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetExecutionHistoryPaginator returns a new GetExecutionHistoryPaginator
+func NewGetExecutionHistoryPaginator(client GetExecutionHistoryAPIClient, params *GetExecutionHistoryInput, optFns ...func(*GetExecutionHistoryPaginatorOptions)) *GetExecutionHistoryPaginator {
+	options := GetExecutionHistoryPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetExecutionHistoryInput{}
+	}
+
+	return &GetExecutionHistoryPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetExecutionHistoryPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetExecutionHistory page.
+func (p *GetExecutionHistoryPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetExecutionHistoryOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.GetExecutionHistory(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetExecutionHistory(region string) *awsmiddleware.RegisterServiceMetadata {

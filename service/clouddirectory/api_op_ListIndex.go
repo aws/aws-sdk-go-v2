@@ -4,6 +4,7 @@ package clouddirectory
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
@@ -124,6 +125,93 @@ func addOperationListIndexMiddlewares(stack *middleware.Stack, options Options) 
 		return err
 	}
 	return nil
+}
+
+// ListIndexAPIClient is a client that implements the ListIndex operation.
+type ListIndexAPIClient interface {
+	ListIndex(context.Context, *ListIndexInput, ...func(*Options)) (*ListIndexOutput, error)
+}
+
+var _ ListIndexAPIClient = (*Client)(nil)
+
+// ListIndexPaginatorOptions is the paginator options for ListIndex
+type ListIndexPaginatorOptions struct {
+	// The maximum number of objects in a single page to retrieve from the index during
+	// a request. For more information, see Amazon Cloud Directory Limits
+	// (http://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html).
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListIndexPaginator is a paginator for ListIndex
+type ListIndexPaginator struct {
+	options   ListIndexPaginatorOptions
+	client    ListIndexAPIClient
+	params    *ListIndexInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListIndexPaginator returns a new ListIndexPaginator
+func NewListIndexPaginator(client ListIndexAPIClient, params *ListIndexInput, optFns ...func(*ListIndexPaginatorOptions)) *ListIndexPaginator {
+	options := ListIndexPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListIndexInput{}
+	}
+
+	return &ListIndexPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListIndexPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListIndex page.
+func (p *ListIndexPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListIndexOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListIndex(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListIndex(region string) *awsmiddleware.RegisterServiceMetadata {

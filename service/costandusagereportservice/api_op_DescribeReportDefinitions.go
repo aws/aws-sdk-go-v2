@@ -4,6 +4,7 @@ package costandusagereportservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/types"
@@ -105,6 +106,94 @@ func addOperationDescribeReportDefinitionsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+// DescribeReportDefinitionsAPIClient is a client that implements the
+// DescribeReportDefinitions operation.
+type DescribeReportDefinitionsAPIClient interface {
+	DescribeReportDefinitions(context.Context, *DescribeReportDefinitionsInput, ...func(*Options)) (*DescribeReportDefinitionsOutput, error)
+}
+
+var _ DescribeReportDefinitionsAPIClient = (*Client)(nil)
+
+// DescribeReportDefinitionsPaginatorOptions is the paginator options for
+// DescribeReportDefinitions
+type DescribeReportDefinitionsPaginatorOptions struct {
+	// The maximum number of results that AWS returns for the operation.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeReportDefinitionsPaginator is a paginator for DescribeReportDefinitions
+type DescribeReportDefinitionsPaginator struct {
+	options   DescribeReportDefinitionsPaginatorOptions
+	client    DescribeReportDefinitionsAPIClient
+	params    *DescribeReportDefinitionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeReportDefinitionsPaginator returns a new
+// DescribeReportDefinitionsPaginator
+func NewDescribeReportDefinitionsPaginator(client DescribeReportDefinitionsAPIClient, params *DescribeReportDefinitionsInput, optFns ...func(*DescribeReportDefinitionsPaginatorOptions)) *DescribeReportDefinitionsPaginator {
+	options := DescribeReportDefinitionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeReportDefinitionsInput{}
+	}
+
+	return &DescribeReportDefinitionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeReportDefinitionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeReportDefinitions page.
+func (p *DescribeReportDefinitionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeReportDefinitionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeReportDefinitions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeReportDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {

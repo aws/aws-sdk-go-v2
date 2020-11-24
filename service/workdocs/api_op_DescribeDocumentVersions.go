@@ -4,6 +4,7 @@ package workdocs
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
@@ -126,6 +127,94 @@ func addOperationDescribeDocumentVersionsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// DescribeDocumentVersionsAPIClient is a client that implements the
+// DescribeDocumentVersions operation.
+type DescribeDocumentVersionsAPIClient interface {
+	DescribeDocumentVersions(context.Context, *DescribeDocumentVersionsInput, ...func(*Options)) (*DescribeDocumentVersionsOutput, error)
+}
+
+var _ DescribeDocumentVersionsAPIClient = (*Client)(nil)
+
+// DescribeDocumentVersionsPaginatorOptions is the paginator options for
+// DescribeDocumentVersions
+type DescribeDocumentVersionsPaginatorOptions struct {
+	// The maximum number of versions to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeDocumentVersionsPaginator is a paginator for DescribeDocumentVersions
+type DescribeDocumentVersionsPaginator struct {
+	options   DescribeDocumentVersionsPaginatorOptions
+	client    DescribeDocumentVersionsAPIClient
+	params    *DescribeDocumentVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeDocumentVersionsPaginator returns a new
+// DescribeDocumentVersionsPaginator
+func NewDescribeDocumentVersionsPaginator(client DescribeDocumentVersionsAPIClient, params *DescribeDocumentVersionsInput, optFns ...func(*DescribeDocumentVersionsPaginatorOptions)) *DescribeDocumentVersionsPaginator {
+	options := DescribeDocumentVersionsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeDocumentVersionsInput{}
+	}
+
+	return &DescribeDocumentVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeDocumentVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeDocumentVersions page.
+func (p *DescribeDocumentVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDocumentVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeDocumentVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeDocumentVersions(region string) *awsmiddleware.RegisterServiceMetadata {

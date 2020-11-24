@@ -4,6 +4,7 @@ package batch
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
@@ -129,6 +130,95 @@ func addOperationDescribeJobDefinitionsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	return nil
+}
+
+// DescribeJobDefinitionsAPIClient is a client that implements the
+// DescribeJobDefinitions operation.
+type DescribeJobDefinitionsAPIClient interface {
+	DescribeJobDefinitions(context.Context, *DescribeJobDefinitionsInput, ...func(*Options)) (*DescribeJobDefinitionsOutput, error)
+}
+
+var _ DescribeJobDefinitionsAPIClient = (*Client)(nil)
+
+// DescribeJobDefinitionsPaginatorOptions is the paginator options for
+// DescribeJobDefinitions
+type DescribeJobDefinitionsPaginatorOptions struct {
+	// The maximum number of results returned by DescribeJobDefinitions in paginated
+	// output. When this parameter is used, DescribeJobDefinitions only returns
+	// maxResults results in a single page along with a nextToken response element. The
+	// remaining results of the initial request can be seen by sending another
+	// DescribeJobDefinitions request with the returned nextToken value. This value can
+	// be between 1 and 100. If this parameter is not used, then DescribeJobDefinitions
+	// returns up to 100 results and a nextToken value if applicable.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeJobDefinitionsPaginator is a paginator for DescribeJobDefinitions
+type DescribeJobDefinitionsPaginator struct {
+	options   DescribeJobDefinitionsPaginatorOptions
+	client    DescribeJobDefinitionsAPIClient
+	params    *DescribeJobDefinitionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeJobDefinitionsPaginator returns a new DescribeJobDefinitionsPaginator
+func NewDescribeJobDefinitionsPaginator(client DescribeJobDefinitionsAPIClient, params *DescribeJobDefinitionsInput, optFns ...func(*DescribeJobDefinitionsPaginatorOptions)) *DescribeJobDefinitionsPaginator {
+	options := DescribeJobDefinitionsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeJobDefinitionsInput{}
+	}
+
+	return &DescribeJobDefinitionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeJobDefinitionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeJobDefinitions page.
+func (p *DescribeJobDefinitionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeJobDefinitionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeJobDefinitions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeJobDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {

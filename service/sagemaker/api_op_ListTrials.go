@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
@@ -128,6 +129,91 @@ func addOperationListTrialsMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+// ListTrialsAPIClient is a client that implements the ListTrials operation.
+type ListTrialsAPIClient interface {
+	ListTrials(context.Context, *ListTrialsInput, ...func(*Options)) (*ListTrialsOutput, error)
+}
+
+var _ ListTrialsAPIClient = (*Client)(nil)
+
+// ListTrialsPaginatorOptions is the paginator options for ListTrials
+type ListTrialsPaginatorOptions struct {
+	// The maximum number of trials to return in the response. The default value is 10.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTrialsPaginator is a paginator for ListTrials
+type ListTrialsPaginator struct {
+	options   ListTrialsPaginatorOptions
+	client    ListTrialsAPIClient
+	params    *ListTrialsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTrialsPaginator returns a new ListTrialsPaginator
+func NewListTrialsPaginator(client ListTrialsAPIClient, params *ListTrialsInput, optFns ...func(*ListTrialsPaginatorOptions)) *ListTrialsPaginator {
+	options := ListTrialsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTrialsInput{}
+	}
+
+	return &ListTrialsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTrialsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTrials page.
+func (p *ListTrialsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTrialsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListTrials(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTrials(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package elasticache
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
@@ -118,6 +119,97 @@ func addOperationDescribeGlobalReplicationGroupsMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+// DescribeGlobalReplicationGroupsAPIClient is a client that implements the
+// DescribeGlobalReplicationGroups operation.
+type DescribeGlobalReplicationGroupsAPIClient interface {
+	DescribeGlobalReplicationGroups(context.Context, *DescribeGlobalReplicationGroupsInput, ...func(*Options)) (*DescribeGlobalReplicationGroupsOutput, error)
+}
+
+var _ DescribeGlobalReplicationGroupsAPIClient = (*Client)(nil)
+
+// DescribeGlobalReplicationGroupsPaginatorOptions is the paginator options for
+// DescribeGlobalReplicationGroups
+type DescribeGlobalReplicationGroupsPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a marker is included in the response so
+	// that the remaining results can be retrieved.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeGlobalReplicationGroupsPaginator is a paginator for
+// DescribeGlobalReplicationGroups
+type DescribeGlobalReplicationGroupsPaginator struct {
+	options   DescribeGlobalReplicationGroupsPaginatorOptions
+	client    DescribeGlobalReplicationGroupsAPIClient
+	params    *DescribeGlobalReplicationGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeGlobalReplicationGroupsPaginator returns a new
+// DescribeGlobalReplicationGroupsPaginator
+func NewDescribeGlobalReplicationGroupsPaginator(client DescribeGlobalReplicationGroupsAPIClient, params *DescribeGlobalReplicationGroupsInput, optFns ...func(*DescribeGlobalReplicationGroupsPaginatorOptions)) *DescribeGlobalReplicationGroupsPaginator {
+	options := DescribeGlobalReplicationGroupsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeGlobalReplicationGroupsInput{}
+	}
+
+	return &DescribeGlobalReplicationGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeGlobalReplicationGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeGlobalReplicationGroups page.
+func (p *DescribeGlobalReplicationGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeGlobalReplicationGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeGlobalReplicationGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeGlobalReplicationGroups(region string) *awsmiddleware.RegisterServiceMetadata {

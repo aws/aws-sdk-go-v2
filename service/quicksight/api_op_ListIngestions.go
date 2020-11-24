@@ -4,6 +4,7 @@ package quicksight
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
@@ -122,6 +123,88 @@ func addOperationListIngestionsMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListIngestionsAPIClient is a client that implements the ListIngestions
+// operation.
+type ListIngestionsAPIClient interface {
+	ListIngestions(context.Context, *ListIngestionsInput, ...func(*Options)) (*ListIngestionsOutput, error)
+}
+
+var _ ListIngestionsAPIClient = (*Client)(nil)
+
+// ListIngestionsPaginatorOptions is the paginator options for ListIngestions
+type ListIngestionsPaginatorOptions struct {
+	// The maximum number of results to be returned per request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListIngestionsPaginator is a paginator for ListIngestions
+type ListIngestionsPaginator struct {
+	options   ListIngestionsPaginatorOptions
+	client    ListIngestionsAPIClient
+	params    *ListIngestionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListIngestionsPaginator returns a new ListIngestionsPaginator
+func NewListIngestionsPaginator(client ListIngestionsAPIClient, params *ListIngestionsInput, optFns ...func(*ListIngestionsPaginatorOptions)) *ListIngestionsPaginator {
+	options := ListIngestionsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListIngestionsInput{}
+	}
+
+	return &ListIngestionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListIngestionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListIngestions page.
+func (p *ListIngestionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListIngestionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListIngestions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListIngestions(region string) *awsmiddleware.RegisterServiceMetadata {

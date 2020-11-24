@@ -4,6 +4,7 @@ package cloudtrail
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
@@ -108,6 +109,79 @@ func addOperationListTrailsMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+// ListTrailsAPIClient is a client that implements the ListTrails operation.
+type ListTrailsAPIClient interface {
+	ListTrails(context.Context, *ListTrailsInput, ...func(*Options)) (*ListTrailsOutput, error)
+}
+
+var _ ListTrailsAPIClient = (*Client)(nil)
+
+// ListTrailsPaginatorOptions is the paginator options for ListTrails
+type ListTrailsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTrailsPaginator is a paginator for ListTrails
+type ListTrailsPaginator struct {
+	options   ListTrailsPaginatorOptions
+	client    ListTrailsAPIClient
+	params    *ListTrailsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTrailsPaginator returns a new ListTrailsPaginator
+func NewListTrailsPaginator(client ListTrailsAPIClient, params *ListTrailsInput, optFns ...func(*ListTrailsPaginatorOptions)) *ListTrailsPaginator {
+	options := ListTrailsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTrailsInput{}
+	}
+
+	return &ListTrailsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTrailsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTrails page.
+func (p *ListTrailsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTrailsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListTrails(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTrails(region string) *awsmiddleware.RegisterServiceMetadata {

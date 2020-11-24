@@ -4,6 +4,7 @@ package rds
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
@@ -192,6 +193,98 @@ func addOperationDescribeDBClusterSnapshotsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+// DescribeDBClusterSnapshotsAPIClient is a client that implements the
+// DescribeDBClusterSnapshots operation.
+type DescribeDBClusterSnapshotsAPIClient interface {
+	DescribeDBClusterSnapshots(context.Context, *DescribeDBClusterSnapshotsInput, ...func(*Options)) (*DescribeDBClusterSnapshotsOutput, error)
+}
+
+var _ DescribeDBClusterSnapshotsAPIClient = (*Client)(nil)
+
+// DescribeDBClusterSnapshotsPaginatorOptions is the paginator options for
+// DescribeDBClusterSnapshots
+type DescribeDBClusterSnapshotsPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so you can retrieve the remaining results. Default: 100
+	// Constraints: Minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeDBClusterSnapshotsPaginator is a paginator for
+// DescribeDBClusterSnapshots
+type DescribeDBClusterSnapshotsPaginator struct {
+	options   DescribeDBClusterSnapshotsPaginatorOptions
+	client    DescribeDBClusterSnapshotsAPIClient
+	params    *DescribeDBClusterSnapshotsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeDBClusterSnapshotsPaginator returns a new
+// DescribeDBClusterSnapshotsPaginator
+func NewDescribeDBClusterSnapshotsPaginator(client DescribeDBClusterSnapshotsAPIClient, params *DescribeDBClusterSnapshotsInput, optFns ...func(*DescribeDBClusterSnapshotsPaginatorOptions)) *DescribeDBClusterSnapshotsPaginator {
+	options := DescribeDBClusterSnapshotsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeDBClusterSnapshotsInput{}
+	}
+
+	return &DescribeDBClusterSnapshotsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeDBClusterSnapshotsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeDBClusterSnapshots page.
+func (p *DescribeDBClusterSnapshotsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDBClusterSnapshotsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeDBClusterSnapshots(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeDBClusterSnapshots(region string) *awsmiddleware.RegisterServiceMetadata {

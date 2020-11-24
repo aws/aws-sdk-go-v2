@@ -4,6 +4,7 @@ package ecs
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
@@ -142,6 +143,98 @@ func addOperationListAttributesMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListAttributesAPIClient is a client that implements the ListAttributes
+// operation.
+type ListAttributesAPIClient interface {
+	ListAttributes(context.Context, *ListAttributesInput, ...func(*Options)) (*ListAttributesOutput, error)
+}
+
+var _ ListAttributesAPIClient = (*Client)(nil)
+
+// ListAttributesPaginatorOptions is the paginator options for ListAttributes
+type ListAttributesPaginatorOptions struct {
+	// The maximum number of cluster results returned by ListAttributes in paginated
+	// output. When this parameter is used, ListAttributes only returns maxResults
+	// results in a single page along with a nextToken response element. The remaining
+	// results of the initial request can be seen by sending another ListAttributes
+	// request with the returned nextToken value. This value can be between 1 and 100.
+	// If this parameter is not used, then ListAttributes returns up to 100 results and
+	// a nextToken value if applicable.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAttributesPaginator is a paginator for ListAttributes
+type ListAttributesPaginator struct {
+	options   ListAttributesPaginatorOptions
+	client    ListAttributesAPIClient
+	params    *ListAttributesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAttributesPaginator returns a new ListAttributesPaginator
+func NewListAttributesPaginator(client ListAttributesAPIClient, params *ListAttributesInput, optFns ...func(*ListAttributesPaginatorOptions)) *ListAttributesPaginator {
+	options := ListAttributesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAttributesInput{}
+	}
+
+	return &ListAttributesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAttributesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAttributes page.
+func (p *ListAttributesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAttributesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListAttributes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAttributes(region string) *awsmiddleware.RegisterServiceMetadata {

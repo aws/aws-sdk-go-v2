@@ -4,6 +4,7 @@ package lexmodelbuildingservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
@@ -132,6 +133,94 @@ func addOperationGetBotChannelAssociationsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+// GetBotChannelAssociationsAPIClient is a client that implements the
+// GetBotChannelAssociations operation.
+type GetBotChannelAssociationsAPIClient interface {
+	GetBotChannelAssociations(context.Context, *GetBotChannelAssociationsInput, ...func(*Options)) (*GetBotChannelAssociationsOutput, error)
+}
+
+var _ GetBotChannelAssociationsAPIClient = (*Client)(nil)
+
+// GetBotChannelAssociationsPaginatorOptions is the paginator options for
+// GetBotChannelAssociations
+type GetBotChannelAssociationsPaginatorOptions struct {
+	// The maximum number of associations to return in the response. The default is 50.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetBotChannelAssociationsPaginator is a paginator for GetBotChannelAssociations
+type GetBotChannelAssociationsPaginator struct {
+	options   GetBotChannelAssociationsPaginatorOptions
+	client    GetBotChannelAssociationsAPIClient
+	params    *GetBotChannelAssociationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetBotChannelAssociationsPaginator returns a new
+// GetBotChannelAssociationsPaginator
+func NewGetBotChannelAssociationsPaginator(client GetBotChannelAssociationsAPIClient, params *GetBotChannelAssociationsInput, optFns ...func(*GetBotChannelAssociationsPaginatorOptions)) *GetBotChannelAssociationsPaginator {
+	options := GetBotChannelAssociationsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetBotChannelAssociationsInput{}
+	}
+
+	return &GetBotChannelAssociationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetBotChannelAssociationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetBotChannelAssociations page.
+func (p *GetBotChannelAssociationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetBotChannelAssociationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetBotChannelAssociations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetBotChannelAssociations(region string) *awsmiddleware.RegisterServiceMetadata {

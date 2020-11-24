@@ -4,6 +4,7 @@ package apigateway
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
@@ -126,6 +127,92 @@ func addOperationGetApiKeysMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+// GetApiKeysAPIClient is a client that implements the GetApiKeys operation.
+type GetApiKeysAPIClient interface {
+	GetApiKeys(context.Context, *GetApiKeysInput, ...func(*Options)) (*GetApiKeysOutput, error)
+}
+
+var _ GetApiKeysAPIClient = (*Client)(nil)
+
+// GetApiKeysPaginatorOptions is the paginator options for GetApiKeys
+type GetApiKeysPaginatorOptions struct {
+	// The maximum number of returned results per page. The default value is 25 and the
+	// maximum value is 500.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetApiKeysPaginator is a paginator for GetApiKeys
+type GetApiKeysPaginator struct {
+	options   GetApiKeysPaginatorOptions
+	client    GetApiKeysAPIClient
+	params    *GetApiKeysInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetApiKeysPaginator returns a new GetApiKeysPaginator
+func NewGetApiKeysPaginator(client GetApiKeysAPIClient, params *GetApiKeysInput, optFns ...func(*GetApiKeysPaginatorOptions)) *GetApiKeysPaginator {
+	options := GetApiKeysPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetApiKeysInput{}
+	}
+
+	return &GetApiKeysPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetApiKeysPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetApiKeys page.
+func (p *GetApiKeysPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetApiKeysOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Position = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.GetApiKeys(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Position
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetApiKeys(region string) *awsmiddleware.RegisterServiceMetadata {

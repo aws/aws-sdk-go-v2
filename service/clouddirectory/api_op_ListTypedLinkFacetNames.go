@@ -4,6 +4,7 @@ package clouddirectory
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -113,6 +114,94 @@ func addOperationListTypedLinkFacetNamesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// ListTypedLinkFacetNamesAPIClient is a client that implements the
+// ListTypedLinkFacetNames operation.
+type ListTypedLinkFacetNamesAPIClient interface {
+	ListTypedLinkFacetNames(context.Context, *ListTypedLinkFacetNamesInput, ...func(*Options)) (*ListTypedLinkFacetNamesOutput, error)
+}
+
+var _ ListTypedLinkFacetNamesAPIClient = (*Client)(nil)
+
+// ListTypedLinkFacetNamesPaginatorOptions is the paginator options for
+// ListTypedLinkFacetNames
+type ListTypedLinkFacetNamesPaginatorOptions struct {
+	// The maximum number of results to retrieve.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTypedLinkFacetNamesPaginator is a paginator for ListTypedLinkFacetNames
+type ListTypedLinkFacetNamesPaginator struct {
+	options   ListTypedLinkFacetNamesPaginatorOptions
+	client    ListTypedLinkFacetNamesAPIClient
+	params    *ListTypedLinkFacetNamesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTypedLinkFacetNamesPaginator returns a new
+// ListTypedLinkFacetNamesPaginator
+func NewListTypedLinkFacetNamesPaginator(client ListTypedLinkFacetNamesAPIClient, params *ListTypedLinkFacetNamesInput, optFns ...func(*ListTypedLinkFacetNamesPaginatorOptions)) *ListTypedLinkFacetNamesPaginator {
+	options := ListTypedLinkFacetNamesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTypedLinkFacetNamesInput{}
+	}
+
+	return &ListTypedLinkFacetNamesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTypedLinkFacetNamesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTypedLinkFacetNames page.
+func (p *ListTypedLinkFacetNamesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTypedLinkFacetNamesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListTypedLinkFacetNames(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTypedLinkFacetNames(region string) *awsmiddleware.RegisterServiceMetadata {

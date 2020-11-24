@@ -120,7 +120,7 @@ func newServiceMetadataMiddleware_opCommitTransaction(region string) *awsmiddlew
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "",
+		SigningName:   "rds-data",
 		OperationName: "CommitTransaction",
 	}
 }

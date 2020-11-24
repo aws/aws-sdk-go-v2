@@ -4,6 +4,7 @@ package lambda
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
@@ -110,6 +111,91 @@ func addOperationListLayersMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+// ListLayersAPIClient is a client that implements the ListLayers operation.
+type ListLayersAPIClient interface {
+	ListLayers(context.Context, *ListLayersInput, ...func(*Options)) (*ListLayersOutput, error)
+}
+
+var _ ListLayersAPIClient = (*Client)(nil)
+
+// ListLayersPaginatorOptions is the paginator options for ListLayers
+type ListLayersPaginatorOptions struct {
+	// The maximum number of layers to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListLayersPaginator is a paginator for ListLayers
+type ListLayersPaginator struct {
+	options   ListLayersPaginatorOptions
+	client    ListLayersAPIClient
+	params    *ListLayersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListLayersPaginator returns a new ListLayersPaginator
+func NewListLayersPaginator(client ListLayersAPIClient, params *ListLayersInput, optFns ...func(*ListLayersPaginatorOptions)) *ListLayersPaginator {
+	options := ListLayersPaginatorOptions{}
+	if params.MaxItems != nil {
+		options.Limit = *params.MaxItems
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListLayersInput{}
+	}
+
+	return &ListLayersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListLayersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListLayers page.
+func (p *ListLayersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListLayersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxItems = limit
+
+	result, err := p.client.ListLayers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListLayers(region string) *awsmiddleware.RegisterServiceMetadata {

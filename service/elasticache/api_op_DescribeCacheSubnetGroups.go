@@ -4,6 +4,7 @@ package elasticache
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
@@ -118,6 +119,97 @@ func addOperationDescribeCacheSubnetGroupsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+// DescribeCacheSubnetGroupsAPIClient is a client that implements the
+// DescribeCacheSubnetGroups operation.
+type DescribeCacheSubnetGroupsAPIClient interface {
+	DescribeCacheSubnetGroups(context.Context, *DescribeCacheSubnetGroupsInput, ...func(*Options)) (*DescribeCacheSubnetGroupsOutput, error)
+}
+
+var _ DescribeCacheSubnetGroupsAPIClient = (*Client)(nil)
+
+// DescribeCacheSubnetGroupsPaginatorOptions is the paginator options for
+// DescribeCacheSubnetGroups
+type DescribeCacheSubnetGroupsPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a marker is included in the response so
+	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
+	// 20; maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeCacheSubnetGroupsPaginator is a paginator for DescribeCacheSubnetGroups
+type DescribeCacheSubnetGroupsPaginator struct {
+	options   DescribeCacheSubnetGroupsPaginatorOptions
+	client    DescribeCacheSubnetGroupsAPIClient
+	params    *DescribeCacheSubnetGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeCacheSubnetGroupsPaginator returns a new
+// DescribeCacheSubnetGroupsPaginator
+func NewDescribeCacheSubnetGroupsPaginator(client DescribeCacheSubnetGroupsAPIClient, params *DescribeCacheSubnetGroupsInput, optFns ...func(*DescribeCacheSubnetGroupsPaginatorOptions)) *DescribeCacheSubnetGroupsPaginator {
+	options := DescribeCacheSubnetGroupsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeCacheSubnetGroupsInput{}
+	}
+
+	return &DescribeCacheSubnetGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeCacheSubnetGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeCacheSubnetGroups page.
+func (p *DescribeCacheSubnetGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeCacheSubnetGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeCacheSubnetGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeCacheSubnetGroups(region string) *awsmiddleware.RegisterServiceMetadata {

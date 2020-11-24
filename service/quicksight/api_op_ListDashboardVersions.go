@@ -4,6 +4,7 @@ package quicksight
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
@@ -123,6 +124,89 @@ func addOperationListDashboardVersionsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// ListDashboardVersionsAPIClient is a client that implements the
+// ListDashboardVersions operation.
+type ListDashboardVersionsAPIClient interface {
+	ListDashboardVersions(context.Context, *ListDashboardVersionsInput, ...func(*Options)) (*ListDashboardVersionsOutput, error)
+}
+
+var _ ListDashboardVersionsAPIClient = (*Client)(nil)
+
+// ListDashboardVersionsPaginatorOptions is the paginator options for
+// ListDashboardVersions
+type ListDashboardVersionsPaginatorOptions struct {
+	// The maximum number of results to be returned per request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDashboardVersionsPaginator is a paginator for ListDashboardVersions
+type ListDashboardVersionsPaginator struct {
+	options   ListDashboardVersionsPaginatorOptions
+	client    ListDashboardVersionsAPIClient
+	params    *ListDashboardVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDashboardVersionsPaginator returns a new ListDashboardVersionsPaginator
+func NewListDashboardVersionsPaginator(client ListDashboardVersionsAPIClient, params *ListDashboardVersionsInput, optFns ...func(*ListDashboardVersionsPaginatorOptions)) *ListDashboardVersionsPaginator {
+	options := ListDashboardVersionsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListDashboardVersionsInput{}
+	}
+
+	return &ListDashboardVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDashboardVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDashboardVersions page.
+func (p *ListDashboardVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDashboardVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListDashboardVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDashboardVersions(region string) *awsmiddleware.RegisterServiceMetadata {

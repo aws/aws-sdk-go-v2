@@ -4,6 +4,7 @@ package rds
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
@@ -138,6 +139,97 @@ func addOperationDescribeExportTasksMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// DescribeExportTasksAPIClient is a client that implements the DescribeExportTasks
+// operation.
+type DescribeExportTasksAPIClient interface {
+	DescribeExportTasks(context.Context, *DescribeExportTasksInput, ...func(*Options)) (*DescribeExportTasksOutput, error)
+}
+
+var _ DescribeExportTasksAPIClient = (*Client)(nil)
+
+// DescribeExportTasksPaginatorOptions is the paginator options for
+// DescribeExportTasks
+type DescribeExportTasksPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified value, a pagination token called a marker is included in the
+	// response. You can use the marker in a later DescribeExportTasks request to
+	// retrieve the remaining results. Default: 100 Constraints: Minimum 20, maximum
+	// 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeExportTasksPaginator is a paginator for DescribeExportTasks
+type DescribeExportTasksPaginator struct {
+	options   DescribeExportTasksPaginatorOptions
+	client    DescribeExportTasksAPIClient
+	params    *DescribeExportTasksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeExportTasksPaginator returns a new DescribeExportTasksPaginator
+func NewDescribeExportTasksPaginator(client DescribeExportTasksAPIClient, params *DescribeExportTasksInput, optFns ...func(*DescribeExportTasksPaginatorOptions)) *DescribeExportTasksPaginator {
+	options := DescribeExportTasksPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeExportTasksInput{}
+	}
+
+	return &DescribeExportTasksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeExportTasksPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeExportTasks page.
+func (p *DescribeExportTasksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeExportTasksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeExportTasks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeExportTasks(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -199,6 +200,94 @@ func addOperationDescribeCapacityReservationsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+// DescribeCapacityReservationsAPIClient is a client that implements the
+// DescribeCapacityReservations operation.
+type DescribeCapacityReservationsAPIClient interface {
+	DescribeCapacityReservations(context.Context, *DescribeCapacityReservationsInput, ...func(*Options)) (*DescribeCapacityReservationsOutput, error)
+}
+
+var _ DescribeCapacityReservationsAPIClient = (*Client)(nil)
+
+// DescribeCapacityReservationsPaginatorOptions is the paginator options for
+// DescribeCapacityReservations
+type DescribeCapacityReservationsPaginatorOptions struct {
+	// The maximum number of results to return for the request in a single page. The
+	// remaining results can be seen by sending another request with the returned
+	// nextToken value. This value can be between 5 and 500. If maxResults is given a
+	// larger value than 500, you receive an error.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeCapacityReservationsPaginator is a paginator for
+// DescribeCapacityReservations
+type DescribeCapacityReservationsPaginator struct {
+	options   DescribeCapacityReservationsPaginatorOptions
+	client    DescribeCapacityReservationsAPIClient
+	params    *DescribeCapacityReservationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeCapacityReservationsPaginator returns a new
+// DescribeCapacityReservationsPaginator
+func NewDescribeCapacityReservationsPaginator(client DescribeCapacityReservationsAPIClient, params *DescribeCapacityReservationsInput, optFns ...func(*DescribeCapacityReservationsPaginatorOptions)) *DescribeCapacityReservationsPaginator {
+	options := DescribeCapacityReservationsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeCapacityReservationsInput{}
+	}
+
+	return &DescribeCapacityReservationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeCapacityReservationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeCapacityReservations page.
+func (p *DescribeCapacityReservationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeCapacityReservationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeCapacityReservations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeCapacityReservations(region string) *awsmiddleware.RegisterServiceMetadata {

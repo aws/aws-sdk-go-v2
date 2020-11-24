@@ -4,6 +4,7 @@ package lexmodelbuildingservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
@@ -125,6 +126,93 @@ func addOperationGetIntentVersionsMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// GetIntentVersionsAPIClient is a client that implements the GetIntentVersions
+// operation.
+type GetIntentVersionsAPIClient interface {
+	GetIntentVersions(context.Context, *GetIntentVersionsInput, ...func(*Options)) (*GetIntentVersionsOutput, error)
+}
+
+var _ GetIntentVersionsAPIClient = (*Client)(nil)
+
+// GetIntentVersionsPaginatorOptions is the paginator options for GetIntentVersions
+type GetIntentVersionsPaginatorOptions struct {
+	// The maximum number of intent versions to return in the response. The default is
+	// 10.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetIntentVersionsPaginator is a paginator for GetIntentVersions
+type GetIntentVersionsPaginator struct {
+	options   GetIntentVersionsPaginatorOptions
+	client    GetIntentVersionsAPIClient
+	params    *GetIntentVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetIntentVersionsPaginator returns a new GetIntentVersionsPaginator
+func NewGetIntentVersionsPaginator(client GetIntentVersionsAPIClient, params *GetIntentVersionsInput, optFns ...func(*GetIntentVersionsPaginatorOptions)) *GetIntentVersionsPaginator {
+	options := GetIntentVersionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetIntentVersionsInput{}
+	}
+
+	return &GetIntentVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetIntentVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetIntentVersions page.
+func (p *GetIntentVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetIntentVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetIntentVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetIntentVersions(region string) *awsmiddleware.RegisterServiceMetadata {

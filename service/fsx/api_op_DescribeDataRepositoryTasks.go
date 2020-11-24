@@ -4,6 +4,7 @@ package fsx
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
@@ -126,6 +127,96 @@ func addOperationDescribeDataRepositoryTasksMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	return nil
+}
+
+// DescribeDataRepositoryTasksAPIClient is a client that implements the
+// DescribeDataRepositoryTasks operation.
+type DescribeDataRepositoryTasksAPIClient interface {
+	DescribeDataRepositoryTasks(context.Context, *DescribeDataRepositoryTasksInput, ...func(*Options)) (*DescribeDataRepositoryTasksOutput, error)
+}
+
+var _ DescribeDataRepositoryTasksAPIClient = (*Client)(nil)
+
+// DescribeDataRepositoryTasksPaginatorOptions is the paginator options for
+// DescribeDataRepositoryTasks
+type DescribeDataRepositoryTasksPaginatorOptions struct {
+	// The maximum number of resources to return in the response. This value must be an
+	// integer greater than zero.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeDataRepositoryTasksPaginator is a paginator for
+// DescribeDataRepositoryTasks
+type DescribeDataRepositoryTasksPaginator struct {
+	options   DescribeDataRepositoryTasksPaginatorOptions
+	client    DescribeDataRepositoryTasksAPIClient
+	params    *DescribeDataRepositoryTasksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeDataRepositoryTasksPaginator returns a new
+// DescribeDataRepositoryTasksPaginator
+func NewDescribeDataRepositoryTasksPaginator(client DescribeDataRepositoryTasksAPIClient, params *DescribeDataRepositoryTasksInput, optFns ...func(*DescribeDataRepositoryTasksPaginatorOptions)) *DescribeDataRepositoryTasksPaginator {
+	options := DescribeDataRepositoryTasksPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeDataRepositoryTasksInput{}
+	}
+
+	return &DescribeDataRepositoryTasksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeDataRepositoryTasksPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeDataRepositoryTasks page.
+func (p *DescribeDataRepositoryTasksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDataRepositoryTasksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeDataRepositoryTasks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeDataRepositoryTasks(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -179,6 +179,89 @@ func addEndpointPrefix_opListRegionalBucketsMiddleware(stack *middleware.Stack) 
 	return stack.Serialize.Insert(&endpointPrefix_opListRegionalBucketsMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
+// ListRegionalBucketsAPIClient is a client that implements the ListRegionalBuckets
+// operation.
+type ListRegionalBucketsAPIClient interface {
+	ListRegionalBuckets(context.Context, *ListRegionalBucketsInput, ...func(*Options)) (*ListRegionalBucketsOutput, error)
+}
+
+var _ ListRegionalBucketsAPIClient = (*Client)(nil)
+
+// ListRegionalBucketsPaginatorOptions is the paginator options for
+// ListRegionalBuckets
+type ListRegionalBucketsPaginatorOptions struct {
+	//
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListRegionalBucketsPaginator is a paginator for ListRegionalBuckets
+type ListRegionalBucketsPaginator struct {
+	options   ListRegionalBucketsPaginatorOptions
+	client    ListRegionalBucketsAPIClient
+	params    *ListRegionalBucketsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListRegionalBucketsPaginator returns a new ListRegionalBucketsPaginator
+func NewListRegionalBucketsPaginator(client ListRegionalBucketsAPIClient, params *ListRegionalBucketsInput, optFns ...func(*ListRegionalBucketsPaginatorOptions)) *ListRegionalBucketsPaginator {
+	options := ListRegionalBucketsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListRegionalBucketsInput{}
+	}
+
+	return &ListRegionalBucketsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListRegionalBucketsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListRegionalBuckets page.
+func (p *ListRegionalBucketsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListRegionalBucketsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListRegionalBuckets(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opListRegionalBuckets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

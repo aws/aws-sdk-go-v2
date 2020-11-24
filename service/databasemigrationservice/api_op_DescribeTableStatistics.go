@@ -4,6 +4,7 @@ package databasemigrationservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
@@ -132,6 +133,97 @@ func addOperationDescribeTableStatisticsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// DescribeTableStatisticsAPIClient is a client that implements the
+// DescribeTableStatistics operation.
+type DescribeTableStatisticsAPIClient interface {
+	DescribeTableStatistics(context.Context, *DescribeTableStatisticsInput, ...func(*Options)) (*DescribeTableStatisticsOutput, error)
+}
+
+var _ DescribeTableStatisticsAPIClient = (*Client)(nil)
+
+// DescribeTableStatisticsPaginatorOptions is the paginator options for
+// DescribeTableStatistics
+type DescribeTableStatisticsPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that the remaining results can be retrieved.
+	// Default: 100 Constraints: Minimum 20, maximum 500.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeTableStatisticsPaginator is a paginator for DescribeTableStatistics
+type DescribeTableStatisticsPaginator struct {
+	options   DescribeTableStatisticsPaginatorOptions
+	client    DescribeTableStatisticsAPIClient
+	params    *DescribeTableStatisticsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeTableStatisticsPaginator returns a new
+// DescribeTableStatisticsPaginator
+func NewDescribeTableStatisticsPaginator(client DescribeTableStatisticsAPIClient, params *DescribeTableStatisticsInput, optFns ...func(*DescribeTableStatisticsPaginatorOptions)) *DescribeTableStatisticsPaginator {
+	options := DescribeTableStatisticsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeTableStatisticsInput{}
+	}
+
+	return &DescribeTableStatisticsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeTableStatisticsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeTableStatistics page.
+func (p *DescribeTableStatisticsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeTableStatisticsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeTableStatistics(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeTableStatistics(region string) *awsmiddleware.RegisterServiceMetadata {

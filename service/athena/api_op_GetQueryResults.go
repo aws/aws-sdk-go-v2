@@ -4,6 +4,7 @@ package athena
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
@@ -129,6 +130,92 @@ func addOperationGetQueryResultsMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	return nil
+}
+
+// GetQueryResultsAPIClient is a client that implements the GetQueryResults
+// operation.
+type GetQueryResultsAPIClient interface {
+	GetQueryResults(context.Context, *GetQueryResultsInput, ...func(*Options)) (*GetQueryResultsOutput, error)
+}
+
+var _ GetQueryResultsAPIClient = (*Client)(nil)
+
+// GetQueryResultsPaginatorOptions is the paginator options for GetQueryResults
+type GetQueryResultsPaginatorOptions struct {
+	// The maximum number of results (rows) to return in this request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetQueryResultsPaginator is a paginator for GetQueryResults
+type GetQueryResultsPaginator struct {
+	options   GetQueryResultsPaginatorOptions
+	client    GetQueryResultsAPIClient
+	params    *GetQueryResultsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetQueryResultsPaginator returns a new GetQueryResultsPaginator
+func NewGetQueryResultsPaginator(client GetQueryResultsAPIClient, params *GetQueryResultsInput, optFns ...func(*GetQueryResultsPaginatorOptions)) *GetQueryResultsPaginator {
+	options := GetQueryResultsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetQueryResultsInput{}
+	}
+
+	return &GetQueryResultsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetQueryResultsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetQueryResults page.
+func (p *GetQueryResultsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetQueryResultsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetQueryResults(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetQueryResults(region string) *awsmiddleware.RegisterServiceMetadata {

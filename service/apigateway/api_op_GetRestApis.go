@@ -4,6 +4,7 @@ package apigateway
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
@@ -112,6 +113,92 @@ func addOperationGetRestApisMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+// GetRestApisAPIClient is a client that implements the GetRestApis operation.
+type GetRestApisAPIClient interface {
+	GetRestApis(context.Context, *GetRestApisInput, ...func(*Options)) (*GetRestApisOutput, error)
+}
+
+var _ GetRestApisAPIClient = (*Client)(nil)
+
+// GetRestApisPaginatorOptions is the paginator options for GetRestApis
+type GetRestApisPaginatorOptions struct {
+	// The maximum number of returned results per page. The default value is 25 and the
+	// maximum value is 500.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetRestApisPaginator is a paginator for GetRestApis
+type GetRestApisPaginator struct {
+	options   GetRestApisPaginatorOptions
+	client    GetRestApisAPIClient
+	params    *GetRestApisInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetRestApisPaginator returns a new GetRestApisPaginator
+func NewGetRestApisPaginator(client GetRestApisAPIClient, params *GetRestApisInput, optFns ...func(*GetRestApisPaginatorOptions)) *GetRestApisPaginator {
+	options := GetRestApisPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetRestApisInput{}
+	}
+
+	return &GetRestApisPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetRestApisPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetRestApis page.
+func (p *GetRestApisPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetRestApisOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Position = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.GetRestApis(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Position
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetRestApis(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package cloudformation
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
@@ -129,6 +130,98 @@ func addOperationListStackSetOperationResultsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+// ListStackSetOperationResultsAPIClient is a client that implements the
+// ListStackSetOperationResults operation.
+type ListStackSetOperationResultsAPIClient interface {
+	ListStackSetOperationResults(context.Context, *ListStackSetOperationResultsInput, ...func(*Options)) (*ListStackSetOperationResultsOutput, error)
+}
+
+var _ ListStackSetOperationResultsAPIClient = (*Client)(nil)
+
+// ListStackSetOperationResultsPaginatorOptions is the paginator options for
+// ListStackSetOperationResults
+type ListStackSetOperationResultsPaginatorOptions struct {
+	// The maximum number of results to be returned with a single call. If the number
+	// of available results exceeds this maximum, the response includes a NextToken
+	// value that you can assign to the NextToken request parameter to get the next set
+	// of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListStackSetOperationResultsPaginator is a paginator for
+// ListStackSetOperationResults
+type ListStackSetOperationResultsPaginator struct {
+	options   ListStackSetOperationResultsPaginatorOptions
+	client    ListStackSetOperationResultsAPIClient
+	params    *ListStackSetOperationResultsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListStackSetOperationResultsPaginator returns a new
+// ListStackSetOperationResultsPaginator
+func NewListStackSetOperationResultsPaginator(client ListStackSetOperationResultsAPIClient, params *ListStackSetOperationResultsInput, optFns ...func(*ListStackSetOperationResultsPaginatorOptions)) *ListStackSetOperationResultsPaginator {
+	options := ListStackSetOperationResultsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListStackSetOperationResultsInput{}
+	}
+
+	return &ListStackSetOperationResultsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListStackSetOperationResultsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListStackSetOperationResults page.
+func (p *ListStackSetOperationResultsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListStackSetOperationResultsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListStackSetOperationResults(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListStackSetOperationResults(region string) *awsmiddleware.RegisterServiceMetadata {

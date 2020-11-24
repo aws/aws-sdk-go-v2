@@ -4,6 +4,7 @@ package codecommit
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
@@ -167,6 +168,92 @@ func addOperationGetMergeConflictsMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// GetMergeConflictsAPIClient is a client that implements the GetMergeConflicts
+// operation.
+type GetMergeConflictsAPIClient interface {
+	GetMergeConflicts(context.Context, *GetMergeConflictsInput, ...func(*Options)) (*GetMergeConflictsOutput, error)
+}
+
+var _ GetMergeConflictsAPIClient = (*Client)(nil)
+
+// GetMergeConflictsPaginatorOptions is the paginator options for GetMergeConflicts
+type GetMergeConflictsPaginatorOptions struct {
+	// The maximum number of files to include in the output.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetMergeConflictsPaginator is a paginator for GetMergeConflicts
+type GetMergeConflictsPaginator struct {
+	options   GetMergeConflictsPaginatorOptions
+	client    GetMergeConflictsAPIClient
+	params    *GetMergeConflictsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetMergeConflictsPaginator returns a new GetMergeConflictsPaginator
+func NewGetMergeConflictsPaginator(client GetMergeConflictsAPIClient, params *GetMergeConflictsInput, optFns ...func(*GetMergeConflictsPaginatorOptions)) *GetMergeConflictsPaginator {
+	options := GetMergeConflictsPaginatorOptions{}
+	if params.MaxConflictFiles != nil {
+		options.Limit = *params.MaxConflictFiles
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetMergeConflictsInput{}
+	}
+
+	return &GetMergeConflictsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetMergeConflictsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetMergeConflicts page.
+func (p *GetMergeConflictsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetMergeConflictsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxConflictFiles = limit
+
+	result, err := p.client.GetMergeConflicts(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetMergeConflicts(region string) *awsmiddleware.RegisterServiceMetadata {

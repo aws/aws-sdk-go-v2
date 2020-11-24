@@ -4,6 +4,7 @@ package route53resolver
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
@@ -121,6 +122,95 @@ func addOperationListResolverEndpointsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// ListResolverEndpointsAPIClient is a client that implements the
+// ListResolverEndpoints operation.
+type ListResolverEndpointsAPIClient interface {
+	ListResolverEndpoints(context.Context, *ListResolverEndpointsInput, ...func(*Options)) (*ListResolverEndpointsOutput, error)
+}
+
+var _ ListResolverEndpointsAPIClient = (*Client)(nil)
+
+// ListResolverEndpointsPaginatorOptions is the paginator options for
+// ListResolverEndpoints
+type ListResolverEndpointsPaginatorOptions struct {
+	// The maximum number of Resolver endpoints that you want to return in the response
+	// to a ListResolverEndpoints request. If you don't specify a value for MaxResults,
+	// Resolver returns up to 100 Resolver endpoints.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListResolverEndpointsPaginator is a paginator for ListResolverEndpoints
+type ListResolverEndpointsPaginator struct {
+	options   ListResolverEndpointsPaginatorOptions
+	client    ListResolverEndpointsAPIClient
+	params    *ListResolverEndpointsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListResolverEndpointsPaginator returns a new ListResolverEndpointsPaginator
+func NewListResolverEndpointsPaginator(client ListResolverEndpointsAPIClient, params *ListResolverEndpointsInput, optFns ...func(*ListResolverEndpointsPaginatorOptions)) *ListResolverEndpointsPaginator {
+	options := ListResolverEndpointsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListResolverEndpointsInput{}
+	}
+
+	return &ListResolverEndpointsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListResolverEndpointsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListResolverEndpoints page.
+func (p *ListResolverEndpointsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListResolverEndpointsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListResolverEndpoints(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListResolverEndpoints(region string) *awsmiddleware.RegisterServiceMetadata {

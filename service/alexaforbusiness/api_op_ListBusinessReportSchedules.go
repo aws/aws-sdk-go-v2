@@ -4,6 +4,7 @@ package alexaforbusiness
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
@@ -105,6 +106,95 @@ func addOperationListBusinessReportSchedulesMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	return nil
+}
+
+// ListBusinessReportSchedulesAPIClient is a client that implements the
+// ListBusinessReportSchedules operation.
+type ListBusinessReportSchedulesAPIClient interface {
+	ListBusinessReportSchedules(context.Context, *ListBusinessReportSchedulesInput, ...func(*Options)) (*ListBusinessReportSchedulesOutput, error)
+}
+
+var _ ListBusinessReportSchedulesAPIClient = (*Client)(nil)
+
+// ListBusinessReportSchedulesPaginatorOptions is the paginator options for
+// ListBusinessReportSchedules
+type ListBusinessReportSchedulesPaginatorOptions struct {
+	// The maximum number of schedules listed in the call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListBusinessReportSchedulesPaginator is a paginator for
+// ListBusinessReportSchedules
+type ListBusinessReportSchedulesPaginator struct {
+	options   ListBusinessReportSchedulesPaginatorOptions
+	client    ListBusinessReportSchedulesAPIClient
+	params    *ListBusinessReportSchedulesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListBusinessReportSchedulesPaginator returns a new
+// ListBusinessReportSchedulesPaginator
+func NewListBusinessReportSchedulesPaginator(client ListBusinessReportSchedulesAPIClient, params *ListBusinessReportSchedulesInput, optFns ...func(*ListBusinessReportSchedulesPaginatorOptions)) *ListBusinessReportSchedulesPaginator {
+	options := ListBusinessReportSchedulesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListBusinessReportSchedulesInput{}
+	}
+
+	return &ListBusinessReportSchedulesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListBusinessReportSchedulesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListBusinessReportSchedules page.
+func (p *ListBusinessReportSchedulesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListBusinessReportSchedulesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListBusinessReportSchedules(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListBusinessReportSchedules(region string) *awsmiddleware.RegisterServiceMetadata {

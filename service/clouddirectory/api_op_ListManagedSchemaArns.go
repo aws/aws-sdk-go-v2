@@ -4,6 +4,7 @@ package clouddirectory
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -108,6 +109,93 @@ func addOperationListManagedSchemaArnsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// ListManagedSchemaArnsAPIClient is a client that implements the
+// ListManagedSchemaArns operation.
+type ListManagedSchemaArnsAPIClient interface {
+	ListManagedSchemaArns(context.Context, *ListManagedSchemaArnsInput, ...func(*Options)) (*ListManagedSchemaArnsOutput, error)
+}
+
+var _ ListManagedSchemaArnsAPIClient = (*Client)(nil)
+
+// ListManagedSchemaArnsPaginatorOptions is the paginator options for
+// ListManagedSchemaArns
+type ListManagedSchemaArnsPaginatorOptions struct {
+	// The maximum number of results to retrieve.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListManagedSchemaArnsPaginator is a paginator for ListManagedSchemaArns
+type ListManagedSchemaArnsPaginator struct {
+	options   ListManagedSchemaArnsPaginatorOptions
+	client    ListManagedSchemaArnsAPIClient
+	params    *ListManagedSchemaArnsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListManagedSchemaArnsPaginator returns a new ListManagedSchemaArnsPaginator
+func NewListManagedSchemaArnsPaginator(client ListManagedSchemaArnsAPIClient, params *ListManagedSchemaArnsInput, optFns ...func(*ListManagedSchemaArnsPaginatorOptions)) *ListManagedSchemaArnsPaginator {
+	options := ListManagedSchemaArnsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListManagedSchemaArnsInput{}
+	}
+
+	return &ListManagedSchemaArnsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListManagedSchemaArnsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListManagedSchemaArns page.
+func (p *ListManagedSchemaArnsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListManagedSchemaArnsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListManagedSchemaArns(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListManagedSchemaArns(region string) *awsmiddleware.RegisterServiceMetadata {

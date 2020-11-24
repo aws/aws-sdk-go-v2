@@ -4,6 +4,7 @@ package backup
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
@@ -120,6 +121,95 @@ func addOperationListRecoveryPointsByResourceMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+// ListRecoveryPointsByResourceAPIClient is a client that implements the
+// ListRecoveryPointsByResource operation.
+type ListRecoveryPointsByResourceAPIClient interface {
+	ListRecoveryPointsByResource(context.Context, *ListRecoveryPointsByResourceInput, ...func(*Options)) (*ListRecoveryPointsByResourceOutput, error)
+}
+
+var _ ListRecoveryPointsByResourceAPIClient = (*Client)(nil)
+
+// ListRecoveryPointsByResourcePaginatorOptions is the paginator options for
+// ListRecoveryPointsByResource
+type ListRecoveryPointsByResourcePaginatorOptions struct {
+	// The maximum number of items to be returned.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListRecoveryPointsByResourcePaginator is a paginator for
+// ListRecoveryPointsByResource
+type ListRecoveryPointsByResourcePaginator struct {
+	options   ListRecoveryPointsByResourcePaginatorOptions
+	client    ListRecoveryPointsByResourceAPIClient
+	params    *ListRecoveryPointsByResourceInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListRecoveryPointsByResourcePaginator returns a new
+// ListRecoveryPointsByResourcePaginator
+func NewListRecoveryPointsByResourcePaginator(client ListRecoveryPointsByResourceAPIClient, params *ListRecoveryPointsByResourceInput, optFns ...func(*ListRecoveryPointsByResourcePaginatorOptions)) *ListRecoveryPointsByResourcePaginator {
+	options := ListRecoveryPointsByResourcePaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListRecoveryPointsByResourceInput{}
+	}
+
+	return &ListRecoveryPointsByResourcePaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListRecoveryPointsByResourcePaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListRecoveryPointsByResource page.
+func (p *ListRecoveryPointsByResourcePaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListRecoveryPointsByResourceOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListRecoveryPointsByResource(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListRecoveryPointsByResource(region string) *awsmiddleware.RegisterServiceMetadata {

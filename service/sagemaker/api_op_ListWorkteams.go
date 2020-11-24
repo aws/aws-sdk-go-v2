@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
@@ -120,6 +121,91 @@ func addOperationListWorkteamsMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	return nil
+}
+
+// ListWorkteamsAPIClient is a client that implements the ListWorkteams operation.
+type ListWorkteamsAPIClient interface {
+	ListWorkteams(context.Context, *ListWorkteamsInput, ...func(*Options)) (*ListWorkteamsOutput, error)
+}
+
+var _ ListWorkteamsAPIClient = (*Client)(nil)
+
+// ListWorkteamsPaginatorOptions is the paginator options for ListWorkteams
+type ListWorkteamsPaginatorOptions struct {
+	// The maximum number of work teams to return in each page of the response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListWorkteamsPaginator is a paginator for ListWorkteams
+type ListWorkteamsPaginator struct {
+	options   ListWorkteamsPaginatorOptions
+	client    ListWorkteamsAPIClient
+	params    *ListWorkteamsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListWorkteamsPaginator returns a new ListWorkteamsPaginator
+func NewListWorkteamsPaginator(client ListWorkteamsAPIClient, params *ListWorkteamsInput, optFns ...func(*ListWorkteamsPaginatorOptions)) *ListWorkteamsPaginator {
+	options := ListWorkteamsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListWorkteamsInput{}
+	}
+
+	return &ListWorkteamsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListWorkteamsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListWorkteams page.
+func (p *ListWorkteamsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListWorkteamsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListWorkteams(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListWorkteams(region string) *awsmiddleware.RegisterServiceMetadata {

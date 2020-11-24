@@ -4,6 +4,7 @@ package ecs
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
@@ -135,6 +136,95 @@ func addOperationListAccountSettingsMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// ListAccountSettingsAPIClient is a client that implements the ListAccountSettings
+// operation.
+type ListAccountSettingsAPIClient interface {
+	ListAccountSettings(context.Context, *ListAccountSettingsInput, ...func(*Options)) (*ListAccountSettingsOutput, error)
+}
+
+var _ ListAccountSettingsAPIClient = (*Client)(nil)
+
+// ListAccountSettingsPaginatorOptions is the paginator options for
+// ListAccountSettings
+type ListAccountSettingsPaginatorOptions struct {
+	// The maximum number of account setting results returned by ListAccountSettings in
+	// paginated output. When this parameter is used, ListAccountSettings only returns
+	// maxResults results in a single page along with a nextToken response element. The
+	// remaining results of the initial request can be seen by sending another
+	// ListAccountSettings request with the returned nextToken value. This value can be
+	// between 1 and 10. If this parameter is not used, then ListAccountSettings
+	// returns up to 10 results and a nextToken value if applicable.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAccountSettingsPaginator is a paginator for ListAccountSettings
+type ListAccountSettingsPaginator struct {
+	options   ListAccountSettingsPaginatorOptions
+	client    ListAccountSettingsAPIClient
+	params    *ListAccountSettingsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAccountSettingsPaginator returns a new ListAccountSettingsPaginator
+func NewListAccountSettingsPaginator(client ListAccountSettingsAPIClient, params *ListAccountSettingsInput, optFns ...func(*ListAccountSettingsPaginatorOptions)) *ListAccountSettingsPaginator {
+	options := ListAccountSettingsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAccountSettingsInput{}
+	}
+
+	return &ListAccountSettingsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAccountSettingsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAccountSettings page.
+func (p *ListAccountSettingsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAccountSettingsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListAccountSettings(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAccountSettings(region string) *awsmiddleware.RegisterServiceMetadata {

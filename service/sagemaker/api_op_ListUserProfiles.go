@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
@@ -117,6 +118,92 @@ func addOperationListUserProfilesMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// ListUserProfilesAPIClient is a client that implements the ListUserProfiles
+// operation.
+type ListUserProfilesAPIClient interface {
+	ListUserProfiles(context.Context, *ListUserProfilesInput, ...func(*Options)) (*ListUserProfilesOutput, error)
+}
+
+var _ ListUserProfilesAPIClient = (*Client)(nil)
+
+// ListUserProfilesPaginatorOptions is the paginator options for ListUserProfiles
+type ListUserProfilesPaginatorOptions struct {
+	// Returns a list up to a specified limit.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListUserProfilesPaginator is a paginator for ListUserProfiles
+type ListUserProfilesPaginator struct {
+	options   ListUserProfilesPaginatorOptions
+	client    ListUserProfilesAPIClient
+	params    *ListUserProfilesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListUserProfilesPaginator returns a new ListUserProfilesPaginator
+func NewListUserProfilesPaginator(client ListUserProfilesAPIClient, params *ListUserProfilesInput, optFns ...func(*ListUserProfilesPaginatorOptions)) *ListUserProfilesPaginator {
+	options := ListUserProfilesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListUserProfilesInput{}
+	}
+
+	return &ListUserProfilesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListUserProfilesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListUserProfiles page.
+func (p *ListUserProfilesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListUserProfilesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListUserProfiles(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListUserProfiles(region string) *awsmiddleware.RegisterServiceMetadata {

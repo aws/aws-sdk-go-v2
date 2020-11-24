@@ -4,6 +4,7 @@ package rds
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
@@ -150,6 +151,97 @@ func addOperationDescribeDBEngineVersionsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// DescribeDBEngineVersionsAPIClient is a client that implements the
+// DescribeDBEngineVersions operation.
+type DescribeDBEngineVersionsAPIClient interface {
+	DescribeDBEngineVersions(context.Context, *DescribeDBEngineVersionsInput, ...func(*Options)) (*DescribeDBEngineVersionsOutput, error)
+}
+
+var _ DescribeDBEngineVersionsAPIClient = (*Client)(nil)
+
+// DescribeDBEngineVersionsPaginatorOptions is the paginator options for
+// DescribeDBEngineVersions
+type DescribeDBEngineVersionsPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more than the
+	// MaxRecords value is available, a pagination token called a marker is included in
+	// the response so you can retrieve the remaining results. Default: 100
+	// Constraints: Minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeDBEngineVersionsPaginator is a paginator for DescribeDBEngineVersions
+type DescribeDBEngineVersionsPaginator struct {
+	options   DescribeDBEngineVersionsPaginatorOptions
+	client    DescribeDBEngineVersionsAPIClient
+	params    *DescribeDBEngineVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeDBEngineVersionsPaginator returns a new
+// DescribeDBEngineVersionsPaginator
+func NewDescribeDBEngineVersionsPaginator(client DescribeDBEngineVersionsAPIClient, params *DescribeDBEngineVersionsInput, optFns ...func(*DescribeDBEngineVersionsPaginatorOptions)) *DescribeDBEngineVersionsPaginator {
+	options := DescribeDBEngineVersionsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeDBEngineVersionsInput{}
+	}
+
+	return &DescribeDBEngineVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeDBEngineVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeDBEngineVersions page.
+func (p *DescribeDBEngineVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDBEngineVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeDBEngineVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeDBEngineVersions(region string) *awsmiddleware.RegisterServiceMetadata {

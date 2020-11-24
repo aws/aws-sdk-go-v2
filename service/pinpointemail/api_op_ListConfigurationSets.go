@@ -4,6 +4,7 @@ package pinpointemail
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -118,6 +119,96 @@ func addOperationListConfigurationSetsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// ListConfigurationSetsAPIClient is a client that implements the
+// ListConfigurationSets operation.
+type ListConfigurationSetsAPIClient interface {
+	ListConfigurationSets(context.Context, *ListConfigurationSetsInput, ...func(*Options)) (*ListConfigurationSetsOutput, error)
+}
+
+var _ ListConfigurationSetsAPIClient = (*Client)(nil)
+
+// ListConfigurationSetsPaginatorOptions is the paginator options for
+// ListConfigurationSets
+type ListConfigurationSetsPaginatorOptions struct {
+	// The number of results to show in a single call to ListConfigurationSets. If the
+	// number of results is larger than the number you specified in this parameter,
+	// then the response includes a NextToken element, which you can use to obtain
+	// additional results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListConfigurationSetsPaginator is a paginator for ListConfigurationSets
+type ListConfigurationSetsPaginator struct {
+	options   ListConfigurationSetsPaginatorOptions
+	client    ListConfigurationSetsAPIClient
+	params    *ListConfigurationSetsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListConfigurationSetsPaginator returns a new ListConfigurationSetsPaginator
+func NewListConfigurationSetsPaginator(client ListConfigurationSetsAPIClient, params *ListConfigurationSetsInput, optFns ...func(*ListConfigurationSetsPaginatorOptions)) *ListConfigurationSetsPaginator {
+	options := ListConfigurationSetsPaginatorOptions{}
+	if params.PageSize != nil {
+		options.Limit = *params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListConfigurationSetsInput{}
+	}
+
+	return &ListConfigurationSetsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListConfigurationSetsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListConfigurationSets page.
+func (p *ListConfigurationSetsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListConfigurationSetsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.PageSize = limit
+
+	result, err := p.client.ListConfigurationSets(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListConfigurationSets(region string) *awsmiddleware.RegisterServiceMetadata {

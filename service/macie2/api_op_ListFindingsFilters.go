@@ -4,6 +4,7 @@ package macie2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
@@ -105,6 +106,89 @@ func addOperationListFindingsFiltersMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// ListFindingsFiltersAPIClient is a client that implements the ListFindingsFilters
+// operation.
+type ListFindingsFiltersAPIClient interface {
+	ListFindingsFilters(context.Context, *ListFindingsFiltersInput, ...func(*Options)) (*ListFindingsFiltersOutput, error)
+}
+
+var _ ListFindingsFiltersAPIClient = (*Client)(nil)
+
+// ListFindingsFiltersPaginatorOptions is the paginator options for
+// ListFindingsFilters
+type ListFindingsFiltersPaginatorOptions struct {
+	// The maximum number of items to include in each page of a paginated response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListFindingsFiltersPaginator is a paginator for ListFindingsFilters
+type ListFindingsFiltersPaginator struct {
+	options   ListFindingsFiltersPaginatorOptions
+	client    ListFindingsFiltersAPIClient
+	params    *ListFindingsFiltersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListFindingsFiltersPaginator returns a new ListFindingsFiltersPaginator
+func NewListFindingsFiltersPaginator(client ListFindingsFiltersAPIClient, params *ListFindingsFiltersInput, optFns ...func(*ListFindingsFiltersPaginatorOptions)) *ListFindingsFiltersPaginator {
+	options := ListFindingsFiltersPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListFindingsFiltersInput{}
+	}
+
+	return &ListFindingsFiltersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListFindingsFiltersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListFindingsFilters page.
+func (p *ListFindingsFiltersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListFindingsFiltersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListFindingsFilters(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListFindingsFilters(region string) *awsmiddleware.RegisterServiceMetadata {

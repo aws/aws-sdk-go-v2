@@ -4,6 +4,7 @@ package iotanalytics
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
@@ -105,6 +106,92 @@ func addOperationListPipelinesMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	return nil
+}
+
+// ListPipelinesAPIClient is a client that implements the ListPipelines operation.
+type ListPipelinesAPIClient interface {
+	ListPipelines(context.Context, *ListPipelinesInput, ...func(*Options)) (*ListPipelinesOutput, error)
+}
+
+var _ ListPipelinesAPIClient = (*Client)(nil)
+
+// ListPipelinesPaginatorOptions is the paginator options for ListPipelines
+type ListPipelinesPaginatorOptions struct {
+	// The maximum number of results to return in this request. The default value is
+	// 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPipelinesPaginator is a paginator for ListPipelines
+type ListPipelinesPaginator struct {
+	options   ListPipelinesPaginatorOptions
+	client    ListPipelinesAPIClient
+	params    *ListPipelinesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPipelinesPaginator returns a new ListPipelinesPaginator
+func NewListPipelinesPaginator(client ListPipelinesAPIClient, params *ListPipelinesInput, optFns ...func(*ListPipelinesPaginatorOptions)) *ListPipelinesPaginator {
+	options := ListPipelinesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListPipelinesInput{}
+	}
+
+	return &ListPipelinesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPipelinesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListPipelines page.
+func (p *ListPipelinesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPipelinesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListPipelines(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListPipelines(region string) *awsmiddleware.RegisterServiceMetadata {

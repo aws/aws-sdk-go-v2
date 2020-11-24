@@ -4,6 +4,7 @@ package ecs
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
@@ -155,6 +156,97 @@ func addOperationListTasksMiddlewares(stack *middleware.Stack, options Options) 
 		return err
 	}
 	return nil
+}
+
+// ListTasksAPIClient is a client that implements the ListTasks operation.
+type ListTasksAPIClient interface {
+	ListTasks(context.Context, *ListTasksInput, ...func(*Options)) (*ListTasksOutput, error)
+}
+
+var _ ListTasksAPIClient = (*Client)(nil)
+
+// ListTasksPaginatorOptions is the paginator options for ListTasks
+type ListTasksPaginatorOptions struct {
+	// The maximum number of task results returned by ListTasks in paginated output.
+	// When this parameter is used, ListTasks only returns maxResults results in a
+	// single page along with a nextToken response element. The remaining results of
+	// the initial request can be seen by sending another ListTasks request with the
+	// returned nextToken value. This value can be between 1 and 100. If this parameter
+	// is not used, then ListTasks returns up to 100 results and a nextToken value if
+	// applicable.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTasksPaginator is a paginator for ListTasks
+type ListTasksPaginator struct {
+	options   ListTasksPaginatorOptions
+	client    ListTasksAPIClient
+	params    *ListTasksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTasksPaginator returns a new ListTasksPaginator
+func NewListTasksPaginator(client ListTasksAPIClient, params *ListTasksInput, optFns ...func(*ListTasksPaginatorOptions)) *ListTasksPaginator {
+	options := ListTasksPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTasksInput{}
+	}
+
+	return &ListTasksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTasksPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTasks page.
+func (p *ListTasksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTasksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListTasks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTasks(region string) *awsmiddleware.RegisterServiceMetadata {

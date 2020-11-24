@@ -4,6 +4,7 @@ package alexaforbusiness
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
@@ -111,6 +112,94 @@ func addOperationListSmartHomeAppliancesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// ListSmartHomeAppliancesAPIClient is a client that implements the
+// ListSmartHomeAppliances operation.
+type ListSmartHomeAppliancesAPIClient interface {
+	ListSmartHomeAppliances(context.Context, *ListSmartHomeAppliancesInput, ...func(*Options)) (*ListSmartHomeAppliancesOutput, error)
+}
+
+var _ ListSmartHomeAppliancesAPIClient = (*Client)(nil)
+
+// ListSmartHomeAppliancesPaginatorOptions is the paginator options for
+// ListSmartHomeAppliances
+type ListSmartHomeAppliancesPaginatorOptions struct {
+	// The maximum number of appliances to be returned, per paginated calls.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListSmartHomeAppliancesPaginator is a paginator for ListSmartHomeAppliances
+type ListSmartHomeAppliancesPaginator struct {
+	options   ListSmartHomeAppliancesPaginatorOptions
+	client    ListSmartHomeAppliancesAPIClient
+	params    *ListSmartHomeAppliancesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListSmartHomeAppliancesPaginator returns a new
+// ListSmartHomeAppliancesPaginator
+func NewListSmartHomeAppliancesPaginator(client ListSmartHomeAppliancesAPIClient, params *ListSmartHomeAppliancesInput, optFns ...func(*ListSmartHomeAppliancesPaginatorOptions)) *ListSmartHomeAppliancesPaginator {
+	options := ListSmartHomeAppliancesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListSmartHomeAppliancesInput{}
+	}
+
+	return &ListSmartHomeAppliancesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListSmartHomeAppliancesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListSmartHomeAppliances page.
+func (p *ListSmartHomeAppliancesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSmartHomeAppliancesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListSmartHomeAppliances(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListSmartHomeAppliances(region string) *awsmiddleware.RegisterServiceMetadata {

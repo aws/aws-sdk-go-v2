@@ -137,6 +137,91 @@ func addEndpointPrefix_opListPortalsMiddleware(stack *middleware.Stack) error {
 	return stack.Serialize.Insert(&endpointPrefix_opListPortalsMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
+// ListPortalsAPIClient is a client that implements the ListPortals operation.
+type ListPortalsAPIClient interface {
+	ListPortals(context.Context, *ListPortalsInput, ...func(*Options)) (*ListPortalsOutput, error)
+}
+
+var _ ListPortalsAPIClient = (*Client)(nil)
+
+// ListPortalsPaginatorOptions is the paginator options for ListPortals
+type ListPortalsPaginatorOptions struct {
+	// The maximum number of results to be returned per paginated request. Default: 50
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPortalsPaginator is a paginator for ListPortals
+type ListPortalsPaginator struct {
+	options   ListPortalsPaginatorOptions
+	client    ListPortalsAPIClient
+	params    *ListPortalsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPortalsPaginator returns a new ListPortalsPaginator
+func NewListPortalsPaginator(client ListPortalsAPIClient, params *ListPortalsInput, optFns ...func(*ListPortalsPaginatorOptions)) *ListPortalsPaginator {
+	options := ListPortalsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListPortalsInput{}
+	}
+
+	return &ListPortalsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPortalsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListPortals page.
+func (p *ListPortalsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPortalsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListPortals(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opListPortals(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

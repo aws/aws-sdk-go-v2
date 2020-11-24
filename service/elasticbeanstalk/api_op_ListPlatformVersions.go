@@ -4,6 +4,7 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
@@ -116,6 +117,93 @@ func addOperationListPlatformVersionsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// ListPlatformVersionsAPIClient is a client that implements the
+// ListPlatformVersions operation.
+type ListPlatformVersionsAPIClient interface {
+	ListPlatformVersions(context.Context, *ListPlatformVersionsInput, ...func(*Options)) (*ListPlatformVersionsOutput, error)
+}
+
+var _ ListPlatformVersionsAPIClient = (*Client)(nil)
+
+// ListPlatformVersionsPaginatorOptions is the paginator options for
+// ListPlatformVersions
+type ListPlatformVersionsPaginatorOptions struct {
+	// The maximum number of platform version values returned in one call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPlatformVersionsPaginator is a paginator for ListPlatformVersions
+type ListPlatformVersionsPaginator struct {
+	options   ListPlatformVersionsPaginatorOptions
+	client    ListPlatformVersionsAPIClient
+	params    *ListPlatformVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPlatformVersionsPaginator returns a new ListPlatformVersionsPaginator
+func NewListPlatformVersionsPaginator(client ListPlatformVersionsAPIClient, params *ListPlatformVersionsInput, optFns ...func(*ListPlatformVersionsPaginatorOptions)) *ListPlatformVersionsPaginator {
+	options := ListPlatformVersionsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListPlatformVersionsInput{}
+	}
+
+	return &ListPlatformVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPlatformVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListPlatformVersions page.
+func (p *ListPlatformVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPlatformVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.ListPlatformVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListPlatformVersions(region string) *awsmiddleware.RegisterServiceMetadata {

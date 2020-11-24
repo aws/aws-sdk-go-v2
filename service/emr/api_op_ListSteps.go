@@ -4,6 +4,7 @@ package emr
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
@@ -121,6 +122,79 @@ func addOperationListStepsMiddlewares(stack *middleware.Stack, options Options) 
 		return err
 	}
 	return nil
+}
+
+// ListStepsAPIClient is a client that implements the ListSteps operation.
+type ListStepsAPIClient interface {
+	ListSteps(context.Context, *ListStepsInput, ...func(*Options)) (*ListStepsOutput, error)
+}
+
+var _ ListStepsAPIClient = (*Client)(nil)
+
+// ListStepsPaginatorOptions is the paginator options for ListSteps
+type ListStepsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListStepsPaginator is a paginator for ListSteps
+type ListStepsPaginator struct {
+	options   ListStepsPaginatorOptions
+	client    ListStepsAPIClient
+	params    *ListStepsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListStepsPaginator returns a new ListStepsPaginator
+func NewListStepsPaginator(client ListStepsAPIClient, params *ListStepsInput, optFns ...func(*ListStepsPaginatorOptions)) *ListStepsPaginator {
+	options := ListStepsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListStepsInput{}
+	}
+
+	return &ListStepsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListStepsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListSteps page.
+func (p *ListStepsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListStepsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	result, err := p.client.ListSteps(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListSteps(region string) *awsmiddleware.RegisterServiceMetadata {

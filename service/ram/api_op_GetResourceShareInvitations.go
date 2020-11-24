@@ -4,6 +4,7 @@ package ram
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
@@ -111,6 +112,96 @@ func addOperationGetResourceShareInvitationsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	return nil
+}
+
+// GetResourceShareInvitationsAPIClient is a client that implements the
+// GetResourceShareInvitations operation.
+type GetResourceShareInvitationsAPIClient interface {
+	GetResourceShareInvitations(context.Context, *GetResourceShareInvitationsInput, ...func(*Options)) (*GetResourceShareInvitationsOutput, error)
+}
+
+var _ GetResourceShareInvitationsAPIClient = (*Client)(nil)
+
+// GetResourceShareInvitationsPaginatorOptions is the paginator options for
+// GetResourceShareInvitations
+type GetResourceShareInvitationsPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetResourceShareInvitationsPaginator is a paginator for
+// GetResourceShareInvitations
+type GetResourceShareInvitationsPaginator struct {
+	options   GetResourceShareInvitationsPaginatorOptions
+	client    GetResourceShareInvitationsAPIClient
+	params    *GetResourceShareInvitationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetResourceShareInvitationsPaginator returns a new
+// GetResourceShareInvitationsPaginator
+func NewGetResourceShareInvitationsPaginator(client GetResourceShareInvitationsAPIClient, params *GetResourceShareInvitationsInput, optFns ...func(*GetResourceShareInvitationsPaginatorOptions)) *GetResourceShareInvitationsPaginator {
+	options := GetResourceShareInvitationsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetResourceShareInvitationsInput{}
+	}
+
+	return &GetResourceShareInvitationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetResourceShareInvitationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetResourceShareInvitations page.
+func (p *GetResourceShareInvitationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetResourceShareInvitationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetResourceShareInvitations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetResourceShareInvitations(region string) *awsmiddleware.RegisterServiceMetadata {

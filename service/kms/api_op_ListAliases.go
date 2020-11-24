@@ -4,6 +4,7 @@ package kms
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kms/types"
@@ -135,6 +136,95 @@ func addOperationListAliasesMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+// ListAliasesAPIClient is a client that implements the ListAliases operation.
+type ListAliasesAPIClient interface {
+	ListAliases(context.Context, *ListAliasesInput, ...func(*Options)) (*ListAliasesOutput, error)
+}
+
+var _ ListAliasesAPIClient = (*Client)(nil)
+
+// ListAliasesPaginatorOptions is the paginator options for ListAliases
+type ListAliasesPaginatorOptions struct {
+	// Use this parameter to specify the maximum number of items to return. When this
+	// value is present, AWS KMS does not return more than the specified number of
+	// items, but it might return fewer. This value is optional. If you include a
+	// value, it must be between 1 and 100, inclusive. If you do not include a value,
+	// it defaults to 50.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAliasesPaginator is a paginator for ListAliases
+type ListAliasesPaginator struct {
+	options   ListAliasesPaginatorOptions
+	client    ListAliasesAPIClient
+	params    *ListAliasesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAliasesPaginator returns a new ListAliasesPaginator
+func NewListAliasesPaginator(client ListAliasesAPIClient, params *ListAliasesInput, optFns ...func(*ListAliasesPaginatorOptions)) *ListAliasesPaginator {
+	options := ListAliasesPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAliasesInput{}
+	}
+
+	return &ListAliasesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAliasesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAliases page.
+func (p *ListAliasesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAliasesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.ListAliases(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAliases(region string) *awsmiddleware.RegisterServiceMetadata {

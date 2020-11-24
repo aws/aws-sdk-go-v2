@@ -4,6 +4,7 @@ package codeartifact
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
@@ -127,6 +128,94 @@ func addOperationListRepositoriesInDomainMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// ListRepositoriesInDomainAPIClient is a client that implements the
+// ListRepositoriesInDomain operation.
+type ListRepositoriesInDomainAPIClient interface {
+	ListRepositoriesInDomain(context.Context, *ListRepositoriesInDomainInput, ...func(*Options)) (*ListRepositoriesInDomainOutput, error)
+}
+
+var _ ListRepositoriesInDomainAPIClient = (*Client)(nil)
+
+// ListRepositoriesInDomainPaginatorOptions is the paginator options for
+// ListRepositoriesInDomain
+type ListRepositoriesInDomainPaginatorOptions struct {
+	// The maximum number of results to return per page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListRepositoriesInDomainPaginator is a paginator for ListRepositoriesInDomain
+type ListRepositoriesInDomainPaginator struct {
+	options   ListRepositoriesInDomainPaginatorOptions
+	client    ListRepositoriesInDomainAPIClient
+	params    *ListRepositoriesInDomainInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListRepositoriesInDomainPaginator returns a new
+// ListRepositoriesInDomainPaginator
+func NewListRepositoriesInDomainPaginator(client ListRepositoriesInDomainAPIClient, params *ListRepositoriesInDomainInput, optFns ...func(*ListRepositoriesInDomainPaginatorOptions)) *ListRepositoriesInDomainPaginator {
+	options := ListRepositoriesInDomainPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListRepositoriesInDomainInput{}
+	}
+
+	return &ListRepositoriesInDomainPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListRepositoriesInDomainPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListRepositoriesInDomain page.
+func (p *ListRepositoriesInDomainPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListRepositoriesInDomainOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListRepositoriesInDomain(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListRepositoriesInDomain(region string) *awsmiddleware.RegisterServiceMetadata {

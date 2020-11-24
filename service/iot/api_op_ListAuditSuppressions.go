@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
@@ -117,6 +118,93 @@ func addOperationListAuditSuppressionsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// ListAuditSuppressionsAPIClient is a client that implements the
+// ListAuditSuppressions operation.
+type ListAuditSuppressionsAPIClient interface {
+	ListAuditSuppressions(context.Context, *ListAuditSuppressionsInput, ...func(*Options)) (*ListAuditSuppressionsOutput, error)
+}
+
+var _ ListAuditSuppressionsAPIClient = (*Client)(nil)
+
+// ListAuditSuppressionsPaginatorOptions is the paginator options for
+// ListAuditSuppressions
+type ListAuditSuppressionsPaginatorOptions struct {
+	// The maximum number of results to return at one time. The default is 25.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAuditSuppressionsPaginator is a paginator for ListAuditSuppressions
+type ListAuditSuppressionsPaginator struct {
+	options   ListAuditSuppressionsPaginatorOptions
+	client    ListAuditSuppressionsAPIClient
+	params    *ListAuditSuppressionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAuditSuppressionsPaginator returns a new ListAuditSuppressionsPaginator
+func NewListAuditSuppressionsPaginator(client ListAuditSuppressionsAPIClient, params *ListAuditSuppressionsInput, optFns ...func(*ListAuditSuppressionsPaginatorOptions)) *ListAuditSuppressionsPaginator {
+	options := ListAuditSuppressionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAuditSuppressionsInput{}
+	}
+
+	return &ListAuditSuppressionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAuditSuppressionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAuditSuppressions page.
+func (p *ListAuditSuppressionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAuditSuppressionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListAuditSuppressions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAuditSuppressions(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
@@ -130,6 +131,95 @@ func addOperationListAuditMitigationActionsTasksMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+// ListAuditMitigationActionsTasksAPIClient is a client that implements the
+// ListAuditMitigationActionsTasks operation.
+type ListAuditMitigationActionsTasksAPIClient interface {
+	ListAuditMitigationActionsTasks(context.Context, *ListAuditMitigationActionsTasksInput, ...func(*Options)) (*ListAuditMitigationActionsTasksOutput, error)
+}
+
+var _ ListAuditMitigationActionsTasksAPIClient = (*Client)(nil)
+
+// ListAuditMitigationActionsTasksPaginatorOptions is the paginator options for
+// ListAuditMitigationActionsTasks
+type ListAuditMitigationActionsTasksPaginatorOptions struct {
+	// The maximum number of results to return at one time. The default is 25.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAuditMitigationActionsTasksPaginator is a paginator for
+// ListAuditMitigationActionsTasks
+type ListAuditMitigationActionsTasksPaginator struct {
+	options   ListAuditMitigationActionsTasksPaginatorOptions
+	client    ListAuditMitigationActionsTasksAPIClient
+	params    *ListAuditMitigationActionsTasksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAuditMitigationActionsTasksPaginator returns a new
+// ListAuditMitigationActionsTasksPaginator
+func NewListAuditMitigationActionsTasksPaginator(client ListAuditMitigationActionsTasksAPIClient, params *ListAuditMitigationActionsTasksInput, optFns ...func(*ListAuditMitigationActionsTasksPaginatorOptions)) *ListAuditMitigationActionsTasksPaginator {
+	options := ListAuditMitigationActionsTasksPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAuditMitigationActionsTasksInput{}
+	}
+
+	return &ListAuditMitigationActionsTasksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAuditMitigationActionsTasksPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAuditMitigationActionsTasks page.
+func (p *ListAuditMitigationActionsTasksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAuditMitigationActionsTasksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListAuditMitigationActionsTasks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAuditMitigationActionsTasks(region string) *awsmiddleware.RegisterServiceMetadata {

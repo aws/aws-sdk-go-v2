@@ -4,6 +4,7 @@ package swf
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
@@ -199,6 +200,92 @@ func addOperationListClosedWorkflowExecutionsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+// ListClosedWorkflowExecutionsAPIClient is a client that implements the
+// ListClosedWorkflowExecutions operation.
+type ListClosedWorkflowExecutionsAPIClient interface {
+	ListClosedWorkflowExecutions(context.Context, *ListClosedWorkflowExecutionsInput, ...func(*Options)) (*ListClosedWorkflowExecutionsOutput, error)
+}
+
+var _ ListClosedWorkflowExecutionsAPIClient = (*Client)(nil)
+
+// ListClosedWorkflowExecutionsPaginatorOptions is the paginator options for
+// ListClosedWorkflowExecutions
+type ListClosedWorkflowExecutionsPaginatorOptions struct {
+	// The maximum number of results that are returned per call. Use nextPageToken to
+	// obtain further pages of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListClosedWorkflowExecutionsPaginator is a paginator for
+// ListClosedWorkflowExecutions
+type ListClosedWorkflowExecutionsPaginator struct {
+	options   ListClosedWorkflowExecutionsPaginatorOptions
+	client    ListClosedWorkflowExecutionsAPIClient
+	params    *ListClosedWorkflowExecutionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListClosedWorkflowExecutionsPaginator returns a new
+// ListClosedWorkflowExecutionsPaginator
+func NewListClosedWorkflowExecutionsPaginator(client ListClosedWorkflowExecutionsAPIClient, params *ListClosedWorkflowExecutionsInput, optFns ...func(*ListClosedWorkflowExecutionsPaginatorOptions)) *ListClosedWorkflowExecutionsPaginator {
+	options := ListClosedWorkflowExecutionsPaginatorOptions{}
+	if params.MaximumPageSize != 0 {
+		options.Limit = params.MaximumPageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListClosedWorkflowExecutionsInput{}
+	}
+
+	return &ListClosedWorkflowExecutionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListClosedWorkflowExecutionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListClosedWorkflowExecutions page.
+func (p *ListClosedWorkflowExecutionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListClosedWorkflowExecutionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextPageToken = p.nextToken
+
+	params.MaximumPageSize = p.options.Limit
+
+	result, err := p.client.ListClosedWorkflowExecutions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListClosedWorkflowExecutions(region string) *awsmiddleware.RegisterServiceMetadata {

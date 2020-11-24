@@ -4,6 +4,7 @@ package mturk
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
@@ -121,6 +122,91 @@ func addOperationListBonusPaymentsMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// ListBonusPaymentsAPIClient is a client that implements the ListBonusPayments
+// operation.
+type ListBonusPaymentsAPIClient interface {
+	ListBonusPayments(context.Context, *ListBonusPaymentsInput, ...func(*Options)) (*ListBonusPaymentsOutput, error)
+}
+
+var _ ListBonusPaymentsAPIClient = (*Client)(nil)
+
+// ListBonusPaymentsPaginatorOptions is the paginator options for ListBonusPayments
+type ListBonusPaymentsPaginatorOptions struct {
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListBonusPaymentsPaginator is a paginator for ListBonusPayments
+type ListBonusPaymentsPaginator struct {
+	options   ListBonusPaymentsPaginatorOptions
+	client    ListBonusPaymentsAPIClient
+	params    *ListBonusPaymentsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListBonusPaymentsPaginator returns a new ListBonusPaymentsPaginator
+func NewListBonusPaymentsPaginator(client ListBonusPaymentsAPIClient, params *ListBonusPaymentsInput, optFns ...func(*ListBonusPaymentsPaginatorOptions)) *ListBonusPaymentsPaginator {
+	options := ListBonusPaymentsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListBonusPaymentsInput{}
+	}
+
+	return &ListBonusPaymentsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListBonusPaymentsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListBonusPayments page.
+func (p *ListBonusPaymentsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListBonusPaymentsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListBonusPayments(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListBonusPayments(region string) *awsmiddleware.RegisterServiceMetadata {

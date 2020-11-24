@@ -2585,6 +2585,11 @@ func awsRestjson1_deserializeOpDocumentJsonListsOutput(v **JsonListsOutput, valu
 				return err
 			}
 
+		case "sparseStringList":
+			if err := awsRestjson1_deserializeDocumentSparseStringList(&sv.SparseStringList, value); err != nil {
+				return err
+			}
+
 		case "stringList":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.StringList, value); err != nil {
 				return err
@@ -2744,8 +2749,43 @@ func awsRestjson1_deserializeOpDocumentJsonMapsOutput(v **JsonMapsOutput, value 
 
 	for key, value := range shape {
 		switch key {
-		case "myMap":
-			if err := awsRestjson1_deserializeDocumentJsonMapsInputOutputMap(&sv.MyMap, value); err != nil {
+		case "denseBooleanMap":
+			if err := awsRestjson1_deserializeDocumentDenseBooleanMap(&sv.DenseBooleanMap, value); err != nil {
+				return err
+			}
+
+		case "denseNumberMap":
+			if err := awsRestjson1_deserializeDocumentDenseNumberMap(&sv.DenseNumberMap, value); err != nil {
+				return err
+			}
+
+		case "denseStringMap":
+			if err := awsRestjson1_deserializeDocumentDenseStringMap(&sv.DenseStringMap, value); err != nil {
+				return err
+			}
+
+		case "denseStructMap":
+			if err := awsRestjson1_deserializeDocumentDenseStructMap(&sv.DenseStructMap, value); err != nil {
+				return err
+			}
+
+		case "sparseBooleanMap":
+			if err := awsRestjson1_deserializeDocumentSparseBooleanMap(&sv.SparseBooleanMap, value); err != nil {
+				return err
+			}
+
+		case "sparseNumberMap":
+			if err := awsRestjson1_deserializeDocumentSparseNumberMap(&sv.SparseNumberMap, value); err != nil {
+				return err
+			}
+
+		case "sparseStringMap":
+			if err := awsRestjson1_deserializeDocumentSparseStringMap(&sv.SparseStringMap, value); err != nil {
+				return err
+			}
+
+		case "sparseStructMap":
+			if err := awsRestjson1_deserializeDocumentSparseStructMap(&sv.SparseStructMap, value); err != nil {
 				return err
 			}
 
@@ -4835,6 +4875,153 @@ func awsRestjson1_deserializeDocumentComplexNestedErrorData(v **types.ComplexNes
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDenseBooleanMap(v *map[string]bool, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]bool
+	if *v == nil {
+		mv = map[string]bool{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal bool
+		if value != nil {
+			jtv, ok := value.(bool)
+			if !ok {
+				return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDenseNumberMap(v *map[string]int32, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]int32
+	if *v == nil {
+		mv = map[string]int32{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal int32
+		if value != nil {
+			jtv, ok := value.(json.Number)
+			if !ok {
+				return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+			}
+			i64, err := jtv.Int64()
+			if err != nil {
+				return err
+			}
+			parsedVal = int32(i64)
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDenseStringMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDenseStructMap(v *map[string]types.GreetingStruct, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.GreetingStruct
+	if *v == nil {
+		mv = map[string]types.GreetingStruct{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.GreetingStruct
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentGreetingStruct(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDocument(v *smithy.Document, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4911,41 +5098,6 @@ func awsRestjson1_deserializeDocumentInvalidGreeting(v **types.InvalidGreeting, 
 		}
 	}
 	*v = sv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentJsonMapsInputOutputMap(v *map[string]types.GreetingStruct, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var mv map[string]types.GreetingStruct
-	if *v == nil {
-		mv = map[string]types.GreetingStruct{}
-	} else {
-		mv = *v
-	}
-
-	for key, value := range shape {
-		var parsedVal types.GreetingStruct
-		mapVar := parsedVal
-		destAddr := &mapVar
-		if err := awsRestjson1_deserializeDocumentGreetingStruct(&destAddr, value); err != nil {
-			return err
-		}
-		parsedVal = *destAddr
-		mv[key] = parsedVal
-
-	}
-	*v = mv
 	return nil
 }
 
@@ -5224,6 +5376,116 @@ func awsRestjson1_deserializeDocumentRecursiveShapesInputOutputNested2(v **types
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSparseBooleanMap(v *map[string]*bool, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]*bool
+	if *v == nil {
+		mv = map[string]*bool{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal *bool
+		if value != nil {
+			jtv, ok := value.(bool)
+			if !ok {
+				return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+			}
+			parsedVal = ptr.Bool(jtv)
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSparseNumberMap(v *map[string]*int32, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]*int32
+	if *v == nil {
+		mv = map[string]*int32{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal *int32
+		if value != nil {
+			jtv, ok := value.(json.Number)
+			if !ok {
+				return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+			}
+			i64, err := jtv.Int64()
+			if err != nil {
+				return err
+			}
+			parsedVal = ptr.Int32(int32(i64))
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSparseStructMap(v *map[string]*types.GreetingStruct, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]*types.GreetingStruct
+	if *v == nil {
+		mv = map[string]*types.GreetingStruct{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal *types.GreetingStruct
+		mapVar := parsedVal
+		if err := awsRestjson1_deserializeDocumentGreetingStruct(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -5563,6 +5825,78 @@ func awsRestjson1_deserializeDocumentNestedStringList(v *[][]string, value inter
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSparseStringList(v *[]*string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*string
+	if *v == nil {
+		cv = []*string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = ptr.String(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSparseStringMap(v *map[string]*string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]*string
+	if *v == nil {
+		mv = map[string]*string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal *string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			parsedVal = ptr.String(jtv)
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 

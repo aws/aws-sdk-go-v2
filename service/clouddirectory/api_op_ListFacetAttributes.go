@@ -4,6 +4,7 @@ package clouddirectory
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
@@ -116,6 +117,93 @@ func addOperationListFacetAttributesMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// ListFacetAttributesAPIClient is a client that implements the ListFacetAttributes
+// operation.
+type ListFacetAttributesAPIClient interface {
+	ListFacetAttributes(context.Context, *ListFacetAttributesInput, ...func(*Options)) (*ListFacetAttributesOutput, error)
+}
+
+var _ ListFacetAttributesAPIClient = (*Client)(nil)
+
+// ListFacetAttributesPaginatorOptions is the paginator options for
+// ListFacetAttributes
+type ListFacetAttributesPaginatorOptions struct {
+	// The maximum number of results to retrieve.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListFacetAttributesPaginator is a paginator for ListFacetAttributes
+type ListFacetAttributesPaginator struct {
+	options   ListFacetAttributesPaginatorOptions
+	client    ListFacetAttributesAPIClient
+	params    *ListFacetAttributesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListFacetAttributesPaginator returns a new ListFacetAttributesPaginator
+func NewListFacetAttributesPaginator(client ListFacetAttributesAPIClient, params *ListFacetAttributesInput, optFns ...func(*ListFacetAttributesPaginatorOptions)) *ListFacetAttributesPaginator {
+	options := ListFacetAttributesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListFacetAttributesInput{}
+	}
+
+	return &ListFacetAttributesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListFacetAttributesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListFacetAttributes page.
+func (p *ListFacetAttributesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListFacetAttributesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListFacetAttributes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListFacetAttributes(region string) *awsmiddleware.RegisterServiceMetadata {

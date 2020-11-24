@@ -4,6 +4,7 @@ package glue
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -116,6 +117,91 @@ func addOperationListTriggersMiddlewares(stack *middleware.Stack, options Option
 		return err
 	}
 	return nil
+}
+
+// ListTriggersAPIClient is a client that implements the ListTriggers operation.
+type ListTriggersAPIClient interface {
+	ListTriggers(context.Context, *ListTriggersInput, ...func(*Options)) (*ListTriggersOutput, error)
+}
+
+var _ ListTriggersAPIClient = (*Client)(nil)
+
+// ListTriggersPaginatorOptions is the paginator options for ListTriggers
+type ListTriggersPaginatorOptions struct {
+	// The maximum size of a list to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTriggersPaginator is a paginator for ListTriggers
+type ListTriggersPaginator struct {
+	options   ListTriggersPaginatorOptions
+	client    ListTriggersAPIClient
+	params    *ListTriggersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTriggersPaginator returns a new ListTriggersPaginator
+func NewListTriggersPaginator(client ListTriggersAPIClient, params *ListTriggersInput, optFns ...func(*ListTriggersPaginatorOptions)) *ListTriggersPaginator {
+	options := ListTriggersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTriggersInput{}
+	}
+
+	return &ListTriggersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTriggersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTriggers page.
+func (p *ListTriggersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTriggersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListTriggers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTriggers(region string) *awsmiddleware.RegisterServiceMetadata {

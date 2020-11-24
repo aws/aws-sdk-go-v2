@@ -4,6 +4,7 @@ package rekognition
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
@@ -112,6 +113,94 @@ func addOperationDescribeProjectsMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// DescribeProjectsAPIClient is a client that implements the DescribeProjects
+// operation.
+type DescribeProjectsAPIClient interface {
+	DescribeProjects(context.Context, *DescribeProjectsInput, ...func(*Options)) (*DescribeProjectsOutput, error)
+}
+
+var _ DescribeProjectsAPIClient = (*Client)(nil)
+
+// DescribeProjectsPaginatorOptions is the paginator options for DescribeProjects
+type DescribeProjectsPaginatorOptions struct {
+	// The maximum number of results to return per paginated call. The largest value
+	// you can specify is 100. If you specify a value greater than 100, a
+	// ValidationException error occurs. The default value is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeProjectsPaginator is a paginator for DescribeProjects
+type DescribeProjectsPaginator struct {
+	options   DescribeProjectsPaginatorOptions
+	client    DescribeProjectsAPIClient
+	params    *DescribeProjectsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeProjectsPaginator returns a new DescribeProjectsPaginator
+func NewDescribeProjectsPaginator(client DescribeProjectsAPIClient, params *DescribeProjectsInput, optFns ...func(*DescribeProjectsPaginatorOptions)) *DescribeProjectsPaginator {
+	options := DescribeProjectsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeProjectsInput{}
+	}
+
+	return &DescribeProjectsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeProjectsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeProjects page.
+func (p *DescribeProjectsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeProjectsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeProjects(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeProjects(region string) *awsmiddleware.RegisterServiceMetadata {

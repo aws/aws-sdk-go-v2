@@ -4,6 +4,7 @@ package configservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
@@ -147,6 +148,92 @@ func addOperationGetResourceConfigHistoryMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// GetResourceConfigHistoryAPIClient is a client that implements the
+// GetResourceConfigHistory operation.
+type GetResourceConfigHistoryAPIClient interface {
+	GetResourceConfigHistory(context.Context, *GetResourceConfigHistoryInput, ...func(*Options)) (*GetResourceConfigHistoryOutput, error)
+}
+
+var _ GetResourceConfigHistoryAPIClient = (*Client)(nil)
+
+// GetResourceConfigHistoryPaginatorOptions is the paginator options for
+// GetResourceConfigHistory
+type GetResourceConfigHistoryPaginatorOptions struct {
+	// The maximum number of configuration items returned on each page. The default is
+	// 10. You cannot specify a number greater than 100. If you specify 0, AWS Config
+	// uses the default.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetResourceConfigHistoryPaginator is a paginator for GetResourceConfigHistory
+type GetResourceConfigHistoryPaginator struct {
+	options   GetResourceConfigHistoryPaginatorOptions
+	client    GetResourceConfigHistoryAPIClient
+	params    *GetResourceConfigHistoryInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetResourceConfigHistoryPaginator returns a new
+// GetResourceConfigHistoryPaginator
+func NewGetResourceConfigHistoryPaginator(client GetResourceConfigHistoryAPIClient, params *GetResourceConfigHistoryInput, optFns ...func(*GetResourceConfigHistoryPaginatorOptions)) *GetResourceConfigHistoryPaginator {
+	options := GetResourceConfigHistoryPaginatorOptions{}
+	if params.Limit != 0 {
+		options.Limit = params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetResourceConfigHistoryInput{}
+	}
+
+	return &GetResourceConfigHistoryPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetResourceConfigHistoryPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetResourceConfigHistory page.
+func (p *GetResourceConfigHistoryPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetResourceConfigHistoryOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.Limit = p.options.Limit
+
+	result, err := p.client.GetResourceConfigHistory(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetResourceConfigHistory(region string) *awsmiddleware.RegisterServiceMetadata {

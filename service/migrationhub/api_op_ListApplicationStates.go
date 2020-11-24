@@ -4,6 +4,7 @@ package migrationhub
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
@@ -113,6 +114,93 @@ func addOperationListApplicationStatesMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// ListApplicationStatesAPIClient is a client that implements the
+// ListApplicationStates operation.
+type ListApplicationStatesAPIClient interface {
+	ListApplicationStates(context.Context, *ListApplicationStatesInput, ...func(*Options)) (*ListApplicationStatesOutput, error)
+}
+
+var _ ListApplicationStatesAPIClient = (*Client)(nil)
+
+// ListApplicationStatesPaginatorOptions is the paginator options for
+// ListApplicationStates
+type ListApplicationStatesPaginatorOptions struct {
+	// Maximum number of results to be returned per page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListApplicationStatesPaginator is a paginator for ListApplicationStates
+type ListApplicationStatesPaginator struct {
+	options   ListApplicationStatesPaginatorOptions
+	client    ListApplicationStatesAPIClient
+	params    *ListApplicationStatesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListApplicationStatesPaginator returns a new ListApplicationStatesPaginator
+func NewListApplicationStatesPaginator(client ListApplicationStatesAPIClient, params *ListApplicationStatesInput, optFns ...func(*ListApplicationStatesPaginatorOptions)) *ListApplicationStatesPaginator {
+	options := ListApplicationStatesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListApplicationStatesInput{}
+	}
+
+	return &ListApplicationStatesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListApplicationStatesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListApplicationStates page.
+func (p *ListApplicationStatesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListApplicationStatesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListApplicationStates(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListApplicationStates(region string) *awsmiddleware.RegisterServiceMetadata {

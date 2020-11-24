@@ -4,6 +4,7 @@ package kinesis
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
@@ -151,6 +152,94 @@ func addOperationListStreamConsumersMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// ListStreamConsumersAPIClient is a client that implements the ListStreamConsumers
+// operation.
+type ListStreamConsumersAPIClient interface {
+	ListStreamConsumers(context.Context, *ListStreamConsumersInput, ...func(*Options)) (*ListStreamConsumersOutput, error)
+}
+
+var _ ListStreamConsumersAPIClient = (*Client)(nil)
+
+// ListStreamConsumersPaginatorOptions is the paginator options for
+// ListStreamConsumers
+type ListStreamConsumersPaginatorOptions struct {
+	// The maximum number of consumers that you want a single call of
+	// ListStreamConsumers to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListStreamConsumersPaginator is a paginator for ListStreamConsumers
+type ListStreamConsumersPaginator struct {
+	options   ListStreamConsumersPaginatorOptions
+	client    ListStreamConsumersAPIClient
+	params    *ListStreamConsumersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListStreamConsumersPaginator returns a new ListStreamConsumersPaginator
+func NewListStreamConsumersPaginator(client ListStreamConsumersAPIClient, params *ListStreamConsumersInput, optFns ...func(*ListStreamConsumersPaginatorOptions)) *ListStreamConsumersPaginator {
+	options := ListStreamConsumersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListStreamConsumersInput{}
+	}
+
+	return &ListStreamConsumersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListStreamConsumersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListStreamConsumers page.
+func (p *ListStreamConsumersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListStreamConsumersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListStreamConsumers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListStreamConsumers(region string) *awsmiddleware.RegisterServiceMetadata {

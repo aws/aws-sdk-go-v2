@@ -4,6 +4,7 @@ package devicefarm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
@@ -127,6 +128,93 @@ func addOperationListTestGridSessionsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// ListTestGridSessionsAPIClient is a client that implements the
+// ListTestGridSessions operation.
+type ListTestGridSessionsAPIClient interface {
+	ListTestGridSessions(context.Context, *ListTestGridSessionsInput, ...func(*Options)) (*ListTestGridSessionsOutput, error)
+}
+
+var _ ListTestGridSessionsAPIClient = (*Client)(nil)
+
+// ListTestGridSessionsPaginatorOptions is the paginator options for
+// ListTestGridSessions
+type ListTestGridSessionsPaginatorOptions struct {
+	// Return only this many results at a time.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTestGridSessionsPaginator is a paginator for ListTestGridSessions
+type ListTestGridSessionsPaginator struct {
+	options   ListTestGridSessionsPaginatorOptions
+	client    ListTestGridSessionsAPIClient
+	params    *ListTestGridSessionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTestGridSessionsPaginator returns a new ListTestGridSessionsPaginator
+func NewListTestGridSessionsPaginator(client ListTestGridSessionsAPIClient, params *ListTestGridSessionsInput, optFns ...func(*ListTestGridSessionsPaginatorOptions)) *ListTestGridSessionsPaginator {
+	options := ListTestGridSessionsPaginatorOptions{}
+	if params.MaxResult != nil {
+		options.Limit = *params.MaxResult
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTestGridSessionsInput{}
+	}
+
+	return &ListTestGridSessionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTestGridSessionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTestGridSessions page.
+func (p *ListTestGridSessionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTestGridSessionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResult = limit
+
+	result, err := p.client.ListTestGridSessions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTestGridSessions(region string) *awsmiddleware.RegisterServiceMetadata {

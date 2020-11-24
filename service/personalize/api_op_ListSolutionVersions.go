@@ -4,6 +4,7 @@ package personalize
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
@@ -111,6 +112,93 @@ func addOperationListSolutionVersionsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// ListSolutionVersionsAPIClient is a client that implements the
+// ListSolutionVersions operation.
+type ListSolutionVersionsAPIClient interface {
+	ListSolutionVersions(context.Context, *ListSolutionVersionsInput, ...func(*Options)) (*ListSolutionVersionsOutput, error)
+}
+
+var _ ListSolutionVersionsAPIClient = (*Client)(nil)
+
+// ListSolutionVersionsPaginatorOptions is the paginator options for
+// ListSolutionVersions
+type ListSolutionVersionsPaginatorOptions struct {
+	// The maximum number of solution versions to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListSolutionVersionsPaginator is a paginator for ListSolutionVersions
+type ListSolutionVersionsPaginator struct {
+	options   ListSolutionVersionsPaginatorOptions
+	client    ListSolutionVersionsAPIClient
+	params    *ListSolutionVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListSolutionVersionsPaginator returns a new ListSolutionVersionsPaginator
+func NewListSolutionVersionsPaginator(client ListSolutionVersionsAPIClient, params *ListSolutionVersionsInput, optFns ...func(*ListSolutionVersionsPaginatorOptions)) *ListSolutionVersionsPaginator {
+	options := ListSolutionVersionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListSolutionVersionsInput{}
+	}
+
+	return &ListSolutionVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListSolutionVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListSolutionVersions page.
+func (p *ListSolutionVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSolutionVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListSolutionVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListSolutionVersions(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package cloudwatchlogs
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
@@ -108,6 +109,94 @@ func addOperationDescribeDestinationsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// DescribeDestinationsAPIClient is a client that implements the
+// DescribeDestinations operation.
+type DescribeDestinationsAPIClient interface {
+	DescribeDestinations(context.Context, *DescribeDestinationsInput, ...func(*Options)) (*DescribeDestinationsOutput, error)
+}
+
+var _ DescribeDestinationsAPIClient = (*Client)(nil)
+
+// DescribeDestinationsPaginatorOptions is the paginator options for
+// DescribeDestinations
+type DescribeDestinationsPaginatorOptions struct {
+	// The maximum number of items returned. If you don't specify a value, the default
+	// is up to 50 items.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeDestinationsPaginator is a paginator for DescribeDestinations
+type DescribeDestinationsPaginator struct {
+	options   DescribeDestinationsPaginatorOptions
+	client    DescribeDestinationsAPIClient
+	params    *DescribeDestinationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeDestinationsPaginator returns a new DescribeDestinationsPaginator
+func NewDescribeDestinationsPaginator(client DescribeDestinationsAPIClient, params *DescribeDestinationsInput, optFns ...func(*DescribeDestinationsPaginatorOptions)) *DescribeDestinationsPaginator {
+	options := DescribeDestinationsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeDestinationsInput{}
+	}
+
+	return &DescribeDestinationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeDestinationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeDestinations page.
+func (p *DescribeDestinationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDestinationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeDestinations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeDestinations(region string) *awsmiddleware.RegisterServiceMetadata {

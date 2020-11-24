@@ -4,6 +4,7 @@ package dynamodb
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
@@ -113,6 +114,90 @@ func addOperationListContributorInsightsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// ListContributorInsightsAPIClient is a client that implements the
+// ListContributorInsights operation.
+type ListContributorInsightsAPIClient interface {
+	ListContributorInsights(context.Context, *ListContributorInsightsInput, ...func(*Options)) (*ListContributorInsightsOutput, error)
+}
+
+var _ ListContributorInsightsAPIClient = (*Client)(nil)
+
+// ListContributorInsightsPaginatorOptions is the paginator options for
+// ListContributorInsights
+type ListContributorInsightsPaginatorOptions struct {
+	// Maximum number of results to return per page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListContributorInsightsPaginator is a paginator for ListContributorInsights
+type ListContributorInsightsPaginator struct {
+	options   ListContributorInsightsPaginatorOptions
+	client    ListContributorInsightsAPIClient
+	params    *ListContributorInsightsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListContributorInsightsPaginator returns a new
+// ListContributorInsightsPaginator
+func NewListContributorInsightsPaginator(client ListContributorInsightsAPIClient, params *ListContributorInsightsInput, optFns ...func(*ListContributorInsightsPaginatorOptions)) *ListContributorInsightsPaginator {
+	options := ListContributorInsightsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListContributorInsightsInput{}
+	}
+
+	return &ListContributorInsightsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListContributorInsightsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListContributorInsights page.
+func (p *ListContributorInsightsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListContributorInsightsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListContributorInsights(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListContributorInsights(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -144,6 +145,92 @@ func addOperationGetTransitGatewayPrefixListReferencesMiddlewares(stack *middlew
 		return err
 	}
 	return nil
+}
+
+// GetTransitGatewayPrefixListReferencesAPIClient is a client that implements the
+// GetTransitGatewayPrefixListReferences operation.
+type GetTransitGatewayPrefixListReferencesAPIClient interface {
+	GetTransitGatewayPrefixListReferences(context.Context, *GetTransitGatewayPrefixListReferencesInput, ...func(*Options)) (*GetTransitGatewayPrefixListReferencesOutput, error)
+}
+
+var _ GetTransitGatewayPrefixListReferencesAPIClient = (*Client)(nil)
+
+// GetTransitGatewayPrefixListReferencesPaginatorOptions is the paginator options
+// for GetTransitGatewayPrefixListReferences
+type GetTransitGatewayPrefixListReferencesPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetTransitGatewayPrefixListReferencesPaginator is a paginator for
+// GetTransitGatewayPrefixListReferences
+type GetTransitGatewayPrefixListReferencesPaginator struct {
+	options   GetTransitGatewayPrefixListReferencesPaginatorOptions
+	client    GetTransitGatewayPrefixListReferencesAPIClient
+	params    *GetTransitGatewayPrefixListReferencesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetTransitGatewayPrefixListReferencesPaginator returns a new
+// GetTransitGatewayPrefixListReferencesPaginator
+func NewGetTransitGatewayPrefixListReferencesPaginator(client GetTransitGatewayPrefixListReferencesAPIClient, params *GetTransitGatewayPrefixListReferencesInput, optFns ...func(*GetTransitGatewayPrefixListReferencesPaginatorOptions)) *GetTransitGatewayPrefixListReferencesPaginator {
+	options := GetTransitGatewayPrefixListReferencesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetTransitGatewayPrefixListReferencesInput{}
+	}
+
+	return &GetTransitGatewayPrefixListReferencesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetTransitGatewayPrefixListReferencesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetTransitGatewayPrefixListReferences page.
+func (p *GetTransitGatewayPrefixListReferencesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetTransitGatewayPrefixListReferencesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.GetTransitGatewayPrefixListReferences(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetTransitGatewayPrefixListReferences(region string) *awsmiddleware.RegisterServiceMetadata {

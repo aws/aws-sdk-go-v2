@@ -167,7 +167,7 @@ func newServiceMetadataMiddleware_opExecuteStatement(region string) *awsmiddlewa
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "",
+		SigningName:   "rds-data",
 		OperationName: "ExecuteStatement",
 	}
 }

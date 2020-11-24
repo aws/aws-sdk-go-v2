@@ -4,6 +4,7 @@ package resourcegroupstaggingapi
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi/types"
@@ -219,6 +220,93 @@ func addOperationGetResourcesMiddlewares(stack *middleware.Stack, options Option
 		return err
 	}
 	return nil
+}
+
+// GetResourcesAPIClient is a client that implements the GetResources operation.
+type GetResourcesAPIClient interface {
+	GetResources(context.Context, *GetResourcesInput, ...func(*Options)) (*GetResourcesOutput, error)
+}
+
+var _ GetResourcesAPIClient = (*Client)(nil)
+
+// GetResourcesPaginatorOptions is the paginator options for GetResources
+type GetResourcesPaginatorOptions struct {
+	// A limit that restricts the number of resources returned by GetResources in
+	// paginated output. You can set ResourcesPerPage to a minimum of 1 item and the
+	// maximum of 100 items.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetResourcesPaginator is a paginator for GetResources
+type GetResourcesPaginator struct {
+	options   GetResourcesPaginatorOptions
+	client    GetResourcesAPIClient
+	params    *GetResourcesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetResourcesPaginator returns a new GetResourcesPaginator
+func NewGetResourcesPaginator(client GetResourcesAPIClient, params *GetResourcesInput, optFns ...func(*GetResourcesPaginatorOptions)) *GetResourcesPaginator {
+	options := GetResourcesPaginatorOptions{}
+	if params.ResourcesPerPage != nil {
+		options.Limit = *params.ResourcesPerPage
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetResourcesInput{}
+	}
+
+	return &GetResourcesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetResourcesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetResources page.
+func (p *GetResourcesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetResourcesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PaginationToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.ResourcesPerPage = limit
+
+	result, err := p.client.GetResources(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.PaginationToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetResources(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package qldb
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qldb/types"
@@ -128,6 +129,97 @@ func addOperationListJournalS3ExportsForLedgerMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+// ListJournalS3ExportsForLedgerAPIClient is a client that implements the
+// ListJournalS3ExportsForLedger operation.
+type ListJournalS3ExportsForLedgerAPIClient interface {
+	ListJournalS3ExportsForLedger(context.Context, *ListJournalS3ExportsForLedgerInput, ...func(*Options)) (*ListJournalS3ExportsForLedgerOutput, error)
+}
+
+var _ ListJournalS3ExportsForLedgerAPIClient = (*Client)(nil)
+
+// ListJournalS3ExportsForLedgerPaginatorOptions is the paginator options for
+// ListJournalS3ExportsForLedger
+type ListJournalS3ExportsForLedgerPaginatorOptions struct {
+	// The maximum number of results to return in a single
+	// ListJournalS3ExportsForLedger request. (The actual number of results returned
+	// might be fewer.)
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListJournalS3ExportsForLedgerPaginator is a paginator for
+// ListJournalS3ExportsForLedger
+type ListJournalS3ExportsForLedgerPaginator struct {
+	options   ListJournalS3ExportsForLedgerPaginatorOptions
+	client    ListJournalS3ExportsForLedgerAPIClient
+	params    *ListJournalS3ExportsForLedgerInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListJournalS3ExportsForLedgerPaginator returns a new
+// ListJournalS3ExportsForLedgerPaginator
+func NewListJournalS3ExportsForLedgerPaginator(client ListJournalS3ExportsForLedgerAPIClient, params *ListJournalS3ExportsForLedgerInput, optFns ...func(*ListJournalS3ExportsForLedgerPaginatorOptions)) *ListJournalS3ExportsForLedgerPaginator {
+	options := ListJournalS3ExportsForLedgerPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListJournalS3ExportsForLedgerInput{}
+	}
+
+	return &ListJournalS3ExportsForLedgerPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListJournalS3ExportsForLedgerPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListJournalS3ExportsForLedger page.
+func (p *ListJournalS3ExportsForLedgerPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListJournalS3ExportsForLedgerOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListJournalS3ExportsForLedger(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListJournalS3ExportsForLedger(region string) *awsmiddleware.RegisterServiceMetadata {

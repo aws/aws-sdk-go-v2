@@ -4,6 +4,7 @@ package costexplorer
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
@@ -168,6 +169,91 @@ func addOperationGetSavingsPlansCoverageMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// GetSavingsPlansCoverageAPIClient is a client that implements the
+// GetSavingsPlansCoverage operation.
+type GetSavingsPlansCoverageAPIClient interface {
+	GetSavingsPlansCoverage(context.Context, *GetSavingsPlansCoverageInput, ...func(*Options)) (*GetSavingsPlansCoverageOutput, error)
+}
+
+var _ GetSavingsPlansCoverageAPIClient = (*Client)(nil)
+
+// GetSavingsPlansCoveragePaginatorOptions is the paginator options for
+// GetSavingsPlansCoverage
+type GetSavingsPlansCoveragePaginatorOptions struct {
+	// The number of items to be returned in a response. The default is 20, with a
+	// minimum value of 1.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetSavingsPlansCoveragePaginator is a paginator for GetSavingsPlansCoverage
+type GetSavingsPlansCoveragePaginator struct {
+	options   GetSavingsPlansCoveragePaginatorOptions
+	client    GetSavingsPlansCoverageAPIClient
+	params    *GetSavingsPlansCoverageInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetSavingsPlansCoveragePaginator returns a new
+// GetSavingsPlansCoveragePaginator
+func NewGetSavingsPlansCoveragePaginator(client GetSavingsPlansCoverageAPIClient, params *GetSavingsPlansCoverageInput, optFns ...func(*GetSavingsPlansCoveragePaginatorOptions)) *GetSavingsPlansCoveragePaginator {
+	options := GetSavingsPlansCoveragePaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetSavingsPlansCoverageInput{}
+	}
+
+	return &GetSavingsPlansCoveragePaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetSavingsPlansCoveragePaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetSavingsPlansCoverage page.
+func (p *GetSavingsPlansCoveragePaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetSavingsPlansCoverageOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.GetSavingsPlansCoverage(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetSavingsPlansCoverage(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package ram
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
@@ -126,6 +127,93 @@ func addOperationGetResourceSharesMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// GetResourceSharesAPIClient is a client that implements the GetResourceShares
+// operation.
+type GetResourceSharesAPIClient interface {
+	GetResourceShares(context.Context, *GetResourceSharesInput, ...func(*Options)) (*GetResourceSharesOutput, error)
+}
+
+var _ GetResourceSharesAPIClient = (*Client)(nil)
+
+// GetResourceSharesPaginatorOptions is the paginator options for GetResourceShares
+type GetResourceSharesPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetResourceSharesPaginator is a paginator for GetResourceShares
+type GetResourceSharesPaginator struct {
+	options   GetResourceSharesPaginatorOptions
+	client    GetResourceSharesAPIClient
+	params    *GetResourceSharesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetResourceSharesPaginator returns a new GetResourceSharesPaginator
+func NewGetResourceSharesPaginator(client GetResourceSharesAPIClient, params *GetResourceSharesInput, optFns ...func(*GetResourceSharesPaginatorOptions)) *GetResourceSharesPaginator {
+	options := GetResourceSharesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetResourceSharesInput{}
+	}
+
+	return &GetResourceSharesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetResourceSharesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetResourceShares page.
+func (p *GetResourceSharesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetResourceSharesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetResourceShares(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetResourceShares(region string) *awsmiddleware.RegisterServiceMetadata {

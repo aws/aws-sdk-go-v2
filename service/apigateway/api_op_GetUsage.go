@@ -4,6 +4,7 @@ package apigateway
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -146,6 +147,92 @@ func addOperationGetUsageMiddlewares(stack *middleware.Stack, options Options) (
 		return err
 	}
 	return nil
+}
+
+// GetUsageAPIClient is a client that implements the GetUsage operation.
+type GetUsageAPIClient interface {
+	GetUsage(context.Context, *GetUsageInput, ...func(*Options)) (*GetUsageOutput, error)
+}
+
+var _ GetUsageAPIClient = (*Client)(nil)
+
+// GetUsagePaginatorOptions is the paginator options for GetUsage
+type GetUsagePaginatorOptions struct {
+	// The maximum number of returned results per page. The default value is 25 and the
+	// maximum value is 500.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetUsagePaginator is a paginator for GetUsage
+type GetUsagePaginator struct {
+	options   GetUsagePaginatorOptions
+	client    GetUsageAPIClient
+	params    *GetUsageInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetUsagePaginator returns a new GetUsagePaginator
+func NewGetUsagePaginator(client GetUsageAPIClient, params *GetUsageInput, optFns ...func(*GetUsagePaginatorOptions)) *GetUsagePaginator {
+	options := GetUsagePaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetUsageInput{}
+	}
+
+	return &GetUsagePaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetUsagePaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetUsage page.
+func (p *GetUsagePaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetUsageOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Position = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.GetUsage(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Position
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetUsage(region string) *awsmiddleware.RegisterServiceMetadata {

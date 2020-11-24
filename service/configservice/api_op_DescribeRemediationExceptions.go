@@ -4,6 +4,7 @@ package configservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
@@ -127,6 +128,92 @@ func addOperationDescribeRemediationExceptionsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+// DescribeRemediationExceptionsAPIClient is a client that implements the
+// DescribeRemediationExceptions operation.
+type DescribeRemediationExceptionsAPIClient interface {
+	DescribeRemediationExceptions(context.Context, *DescribeRemediationExceptionsInput, ...func(*Options)) (*DescribeRemediationExceptionsOutput, error)
+}
+
+var _ DescribeRemediationExceptionsAPIClient = (*Client)(nil)
+
+// DescribeRemediationExceptionsPaginatorOptions is the paginator options for
+// DescribeRemediationExceptions
+type DescribeRemediationExceptionsPaginatorOptions struct {
+	// The maximum number of RemediationExceptionResourceKey returned on each page. The
+	// default is 25. If you specify 0, AWS Config uses the default.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeRemediationExceptionsPaginator is a paginator for
+// DescribeRemediationExceptions
+type DescribeRemediationExceptionsPaginator struct {
+	options   DescribeRemediationExceptionsPaginatorOptions
+	client    DescribeRemediationExceptionsAPIClient
+	params    *DescribeRemediationExceptionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeRemediationExceptionsPaginator returns a new
+// DescribeRemediationExceptionsPaginator
+func NewDescribeRemediationExceptionsPaginator(client DescribeRemediationExceptionsAPIClient, params *DescribeRemediationExceptionsInput, optFns ...func(*DescribeRemediationExceptionsPaginatorOptions)) *DescribeRemediationExceptionsPaginator {
+	options := DescribeRemediationExceptionsPaginatorOptions{}
+	if params.Limit != 0 {
+		options.Limit = params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeRemediationExceptionsInput{}
+	}
+
+	return &DescribeRemediationExceptionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeRemediationExceptionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeRemediationExceptions page.
+func (p *DescribeRemediationExceptionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeRemediationExceptionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.Limit = p.options.Limit
+
+	result, err := p.client.DescribeRemediationExceptions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeRemediationExceptions(region string) *awsmiddleware.RegisterServiceMetadata {

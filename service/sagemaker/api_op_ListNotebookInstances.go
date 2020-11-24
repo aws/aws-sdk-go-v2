@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
@@ -156,6 +157,93 @@ func addOperationListNotebookInstancesMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// ListNotebookInstancesAPIClient is a client that implements the
+// ListNotebookInstances operation.
+type ListNotebookInstancesAPIClient interface {
+	ListNotebookInstances(context.Context, *ListNotebookInstancesInput, ...func(*Options)) (*ListNotebookInstancesOutput, error)
+}
+
+var _ ListNotebookInstancesAPIClient = (*Client)(nil)
+
+// ListNotebookInstancesPaginatorOptions is the paginator options for
+// ListNotebookInstances
+type ListNotebookInstancesPaginatorOptions struct {
+	// The maximum number of notebook instances to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListNotebookInstancesPaginator is a paginator for ListNotebookInstances
+type ListNotebookInstancesPaginator struct {
+	options   ListNotebookInstancesPaginatorOptions
+	client    ListNotebookInstancesAPIClient
+	params    *ListNotebookInstancesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListNotebookInstancesPaginator returns a new ListNotebookInstancesPaginator
+func NewListNotebookInstancesPaginator(client ListNotebookInstancesAPIClient, params *ListNotebookInstancesInput, optFns ...func(*ListNotebookInstancesPaginatorOptions)) *ListNotebookInstancesPaginator {
+	options := ListNotebookInstancesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListNotebookInstancesInput{}
+	}
+
+	return &ListNotebookInstancesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListNotebookInstancesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListNotebookInstances page.
+func (p *ListNotebookInstancesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListNotebookInstancesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListNotebookInstances(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListNotebookInstances(region string) *awsmiddleware.RegisterServiceMetadata {

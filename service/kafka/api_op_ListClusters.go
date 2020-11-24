@@ -4,6 +4,7 @@ package kafka
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
@@ -112,6 +113,88 @@ func addOperationListClustersMiddlewares(stack *middleware.Stack, options Option
 		return err
 	}
 	return nil
+}
+
+// ListClustersAPIClient is a client that implements the ListClusters operation.
+type ListClustersAPIClient interface {
+	ListClusters(context.Context, *ListClustersInput, ...func(*Options)) (*ListClustersOutput, error)
+}
+
+var _ ListClustersAPIClient = (*Client)(nil)
+
+// ListClustersPaginatorOptions is the paginator options for ListClusters
+type ListClustersPaginatorOptions struct {
+	// The maximum number of results to return in the response. If there are more
+	// results, the response includes a NextToken parameter.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListClustersPaginator is a paginator for ListClusters
+type ListClustersPaginator struct {
+	options   ListClustersPaginatorOptions
+	client    ListClustersAPIClient
+	params    *ListClustersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListClustersPaginator returns a new ListClustersPaginator
+func NewListClustersPaginator(client ListClustersAPIClient, params *ListClustersInput, optFns ...func(*ListClustersPaginatorOptions)) *ListClustersPaginator {
+	options := ListClustersPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListClustersInput{}
+	}
+
+	return &ListClustersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListClustersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListClusters page.
+func (p *ListClustersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListClustersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListClusters(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListClusters(region string) *awsmiddleware.RegisterServiceMetadata {

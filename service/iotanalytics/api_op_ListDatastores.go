@@ -4,6 +4,7 @@ package iotanalytics
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
@@ -105,6 +106,93 @@ func addOperationListDatastoresMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListDatastoresAPIClient is a client that implements the ListDatastores
+// operation.
+type ListDatastoresAPIClient interface {
+	ListDatastores(context.Context, *ListDatastoresInput, ...func(*Options)) (*ListDatastoresOutput, error)
+}
+
+var _ ListDatastoresAPIClient = (*Client)(nil)
+
+// ListDatastoresPaginatorOptions is the paginator options for ListDatastores
+type ListDatastoresPaginatorOptions struct {
+	// The maximum number of results to return in this request. The default value is
+	// 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDatastoresPaginator is a paginator for ListDatastores
+type ListDatastoresPaginator struct {
+	options   ListDatastoresPaginatorOptions
+	client    ListDatastoresAPIClient
+	params    *ListDatastoresInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDatastoresPaginator returns a new ListDatastoresPaginator
+func NewListDatastoresPaginator(client ListDatastoresAPIClient, params *ListDatastoresInput, optFns ...func(*ListDatastoresPaginatorOptions)) *ListDatastoresPaginator {
+	options := ListDatastoresPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListDatastoresInput{}
+	}
+
+	return &ListDatastoresPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDatastoresPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDatastores page.
+func (p *ListDatastoresPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDatastoresOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListDatastores(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDatastores(region string) *awsmiddleware.RegisterServiceMetadata {

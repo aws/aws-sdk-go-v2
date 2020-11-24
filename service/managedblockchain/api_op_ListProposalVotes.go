@@ -4,6 +4,7 @@ package managedblockchain
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
@@ -117,6 +118,92 @@ func addOperationListProposalVotesMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// ListProposalVotesAPIClient is a client that implements the ListProposalVotes
+// operation.
+type ListProposalVotesAPIClient interface {
+	ListProposalVotes(context.Context, *ListProposalVotesInput, ...func(*Options)) (*ListProposalVotesOutput, error)
+}
+
+var _ ListProposalVotesAPIClient = (*Client)(nil)
+
+// ListProposalVotesPaginatorOptions is the paginator options for ListProposalVotes
+type ListProposalVotesPaginatorOptions struct {
+	// The maximum number of votes to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListProposalVotesPaginator is a paginator for ListProposalVotes
+type ListProposalVotesPaginator struct {
+	options   ListProposalVotesPaginatorOptions
+	client    ListProposalVotesAPIClient
+	params    *ListProposalVotesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListProposalVotesPaginator returns a new ListProposalVotesPaginator
+func NewListProposalVotesPaginator(client ListProposalVotesAPIClient, params *ListProposalVotesInput, optFns ...func(*ListProposalVotesPaginatorOptions)) *ListProposalVotesPaginator {
+	options := ListProposalVotesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListProposalVotesInput{}
+	}
+
+	return &ListProposalVotesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListProposalVotesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListProposalVotes page.
+func (p *ListProposalVotesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListProposalVotesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListProposalVotes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListProposalVotes(region string) *awsmiddleware.RegisterServiceMetadata {

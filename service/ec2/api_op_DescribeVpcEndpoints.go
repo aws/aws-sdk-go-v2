@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -142,6 +143,91 @@ func addOperationDescribeVpcEndpointsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// DescribeVpcEndpointsAPIClient is a client that implements the
+// DescribeVpcEndpoints operation.
+type DescribeVpcEndpointsAPIClient interface {
+	DescribeVpcEndpoints(context.Context, *DescribeVpcEndpointsInput, ...func(*Options)) (*DescribeVpcEndpointsOutput, error)
+}
+
+var _ DescribeVpcEndpointsAPIClient = (*Client)(nil)
+
+// DescribeVpcEndpointsPaginatorOptions is the paginator options for
+// DescribeVpcEndpoints
+type DescribeVpcEndpointsPaginatorOptions struct {
+	// The maximum number of items to return for this request. The request returns a
+	// token that you can specify in a subsequent call to get the next set of results.
+	// Constraint: If the value is greater than 1,000, we return only 1,000 items.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeVpcEndpointsPaginator is a paginator for DescribeVpcEndpoints
+type DescribeVpcEndpointsPaginator struct {
+	options   DescribeVpcEndpointsPaginatorOptions
+	client    DescribeVpcEndpointsAPIClient
+	params    *DescribeVpcEndpointsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeVpcEndpointsPaginator returns a new DescribeVpcEndpointsPaginator
+func NewDescribeVpcEndpointsPaginator(client DescribeVpcEndpointsAPIClient, params *DescribeVpcEndpointsInput, optFns ...func(*DescribeVpcEndpointsPaginatorOptions)) *DescribeVpcEndpointsPaginator {
+	options := DescribeVpcEndpointsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeVpcEndpointsInput{}
+	}
+
+	return &DescribeVpcEndpointsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeVpcEndpointsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeVpcEndpoints page.
+func (p *DescribeVpcEndpointsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeVpcEndpointsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeVpcEndpoints(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeVpcEndpoints(region string) *awsmiddleware.RegisterServiceMetadata {

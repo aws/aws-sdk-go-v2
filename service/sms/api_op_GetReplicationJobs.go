@@ -4,6 +4,7 @@ package sms
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sms/types"
@@ -109,6 +110,95 @@ func addOperationGetReplicationJobsMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// GetReplicationJobsAPIClient is a client that implements the GetReplicationJobs
+// operation.
+type GetReplicationJobsAPIClient interface {
+	GetReplicationJobs(context.Context, *GetReplicationJobsInput, ...func(*Options)) (*GetReplicationJobsOutput, error)
+}
+
+var _ GetReplicationJobsAPIClient = (*Client)(nil)
+
+// GetReplicationJobsPaginatorOptions is the paginator options for
+// GetReplicationJobs
+type GetReplicationJobsPaginatorOptions struct {
+	// The maximum number of results to return in a single call. The default value is
+	// 50. To retrieve the remaining results, make another call with the returned
+	// NextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetReplicationJobsPaginator is a paginator for GetReplicationJobs
+type GetReplicationJobsPaginator struct {
+	options   GetReplicationJobsPaginatorOptions
+	client    GetReplicationJobsAPIClient
+	params    *GetReplicationJobsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetReplicationJobsPaginator returns a new GetReplicationJobsPaginator
+func NewGetReplicationJobsPaginator(client GetReplicationJobsAPIClient, params *GetReplicationJobsInput, optFns ...func(*GetReplicationJobsPaginatorOptions)) *GetReplicationJobsPaginator {
+	options := GetReplicationJobsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetReplicationJobsInput{}
+	}
+
+	return &GetReplicationJobsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetReplicationJobsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetReplicationJobs page.
+func (p *GetReplicationJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetReplicationJobsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetReplicationJobs(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetReplicationJobs(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package applicationautoscaling
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/types"
@@ -252,6 +253,99 @@ func addOperationDescribeScalableTargetsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// DescribeScalableTargetsAPIClient is a client that implements the
+// DescribeScalableTargets operation.
+type DescribeScalableTargetsAPIClient interface {
+	DescribeScalableTargets(context.Context, *DescribeScalableTargetsInput, ...func(*Options)) (*DescribeScalableTargetsOutput, error)
+}
+
+var _ DescribeScalableTargetsAPIClient = (*Client)(nil)
+
+// DescribeScalableTargetsPaginatorOptions is the paginator options for
+// DescribeScalableTargets
+type DescribeScalableTargetsPaginatorOptions struct {
+	// The maximum number of scalable targets. This value can be between 1 and 50. The
+	// default value is 50. If this parameter is used, the operation returns up to
+	// MaxResults results at a time, along with a NextToken value. To get the next set
+	// of results, include the NextToken value in a subsequent call. If this parameter
+	// is not used, the operation returns up to 50 results and a NextToken value, if
+	// applicable.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeScalableTargetsPaginator is a paginator for DescribeScalableTargets
+type DescribeScalableTargetsPaginator struct {
+	options   DescribeScalableTargetsPaginatorOptions
+	client    DescribeScalableTargetsAPIClient
+	params    *DescribeScalableTargetsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeScalableTargetsPaginator returns a new
+// DescribeScalableTargetsPaginator
+func NewDescribeScalableTargetsPaginator(client DescribeScalableTargetsAPIClient, params *DescribeScalableTargetsInput, optFns ...func(*DescribeScalableTargetsPaginatorOptions)) *DescribeScalableTargetsPaginator {
+	options := DescribeScalableTargetsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeScalableTargetsInput{}
+	}
+
+	return &DescribeScalableTargetsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeScalableTargetsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeScalableTargets page.
+func (p *DescribeScalableTargetsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeScalableTargetsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeScalableTargets(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeScalableTargets(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package servicecatalog
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
@@ -127,6 +128,88 @@ func addOperationSearchProductsMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// SearchProductsAPIClient is a client that implements the SearchProducts
+// operation.
+type SearchProductsAPIClient interface {
+	SearchProducts(context.Context, *SearchProductsInput, ...func(*Options)) (*SearchProductsOutput, error)
+}
+
+var _ SearchProductsAPIClient = (*Client)(nil)
+
+// SearchProductsPaginatorOptions is the paginator options for SearchProducts
+type SearchProductsPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// SearchProductsPaginator is a paginator for SearchProducts
+type SearchProductsPaginator struct {
+	options   SearchProductsPaginatorOptions
+	client    SearchProductsAPIClient
+	params    *SearchProductsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewSearchProductsPaginator returns a new SearchProductsPaginator
+func NewSearchProductsPaginator(client SearchProductsAPIClient, params *SearchProductsInput, optFns ...func(*SearchProductsPaginatorOptions)) *SearchProductsPaginator {
+	options := SearchProductsPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &SearchProductsInput{}
+	}
+
+	return &SearchProductsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *SearchProductsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next SearchProducts page.
+func (p *SearchProductsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*SearchProductsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	result, err := p.client.SearchProducts(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opSearchProducts(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package servicediscovery
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
@@ -126,6 +127,94 @@ func addOperationListOperationsMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListOperationsAPIClient is a client that implements the ListOperations
+// operation.
+type ListOperationsAPIClient interface {
+	ListOperations(context.Context, *ListOperationsInput, ...func(*Options)) (*ListOperationsOutput, error)
+}
+
+var _ ListOperationsAPIClient = (*Client)(nil)
+
+// ListOperationsPaginatorOptions is the paginator options for ListOperations
+type ListOperationsPaginatorOptions struct {
+	// The maximum number of items that you want AWS Cloud Map to return in the
+	// response to a ListOperations request. If you don't specify a value for
+	// MaxResults, AWS Cloud Map returns up to 100 operations.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListOperationsPaginator is a paginator for ListOperations
+type ListOperationsPaginator struct {
+	options   ListOperationsPaginatorOptions
+	client    ListOperationsAPIClient
+	params    *ListOperationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListOperationsPaginator returns a new ListOperationsPaginator
+func NewListOperationsPaginator(client ListOperationsAPIClient, params *ListOperationsInput, optFns ...func(*ListOperationsPaginatorOptions)) *ListOperationsPaginator {
+	options := ListOperationsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListOperationsInput{}
+	}
+
+	return &ListOperationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListOperationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListOperations page.
+func (p *ListOperationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListOperationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListOperations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListOperations(region string) *awsmiddleware.RegisterServiceMetadata {

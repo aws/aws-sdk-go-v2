@@ -4,6 +4,7 @@ package sesv2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
@@ -115,6 +116,95 @@ func addOperationGetDedicatedIpsMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	return nil
+}
+
+// GetDedicatedIpsAPIClient is a client that implements the GetDedicatedIps
+// operation.
+type GetDedicatedIpsAPIClient interface {
+	GetDedicatedIps(context.Context, *GetDedicatedIpsInput, ...func(*Options)) (*GetDedicatedIpsOutput, error)
+}
+
+var _ GetDedicatedIpsAPIClient = (*Client)(nil)
+
+// GetDedicatedIpsPaginatorOptions is the paginator options for GetDedicatedIps
+type GetDedicatedIpsPaginatorOptions struct {
+	// The number of results to show in a single call to GetDedicatedIpsRequest. If the
+	// number of results is larger than the number you specified in this parameter,
+	// then the response includes a NextToken element, which you can use to obtain
+	// additional results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetDedicatedIpsPaginator is a paginator for GetDedicatedIps
+type GetDedicatedIpsPaginator struct {
+	options   GetDedicatedIpsPaginatorOptions
+	client    GetDedicatedIpsAPIClient
+	params    *GetDedicatedIpsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetDedicatedIpsPaginator returns a new GetDedicatedIpsPaginator
+func NewGetDedicatedIpsPaginator(client GetDedicatedIpsAPIClient, params *GetDedicatedIpsInput, optFns ...func(*GetDedicatedIpsPaginatorOptions)) *GetDedicatedIpsPaginator {
+	options := GetDedicatedIpsPaginatorOptions{}
+	if params.PageSize != nil {
+		options.Limit = *params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetDedicatedIpsInput{}
+	}
+
+	return &GetDedicatedIpsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetDedicatedIpsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetDedicatedIps page.
+func (p *GetDedicatedIpsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetDedicatedIpsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.PageSize = limit
+
+	result, err := p.client.GetDedicatedIps(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetDedicatedIps(region string) *awsmiddleware.RegisterServiceMetadata {

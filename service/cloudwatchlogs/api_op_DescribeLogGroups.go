@@ -4,6 +4,7 @@ package cloudwatchlogs
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
@@ -110,6 +111,93 @@ func addOperationDescribeLogGroupsMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// DescribeLogGroupsAPIClient is a client that implements the DescribeLogGroups
+// operation.
+type DescribeLogGroupsAPIClient interface {
+	DescribeLogGroups(context.Context, *DescribeLogGroupsInput, ...func(*Options)) (*DescribeLogGroupsOutput, error)
+}
+
+var _ DescribeLogGroupsAPIClient = (*Client)(nil)
+
+// DescribeLogGroupsPaginatorOptions is the paginator options for DescribeLogGroups
+type DescribeLogGroupsPaginatorOptions struct {
+	// The maximum number of items returned. If you don't specify a value, the default
+	// is up to 50 items.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeLogGroupsPaginator is a paginator for DescribeLogGroups
+type DescribeLogGroupsPaginator struct {
+	options   DescribeLogGroupsPaginatorOptions
+	client    DescribeLogGroupsAPIClient
+	params    *DescribeLogGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeLogGroupsPaginator returns a new DescribeLogGroupsPaginator
+func NewDescribeLogGroupsPaginator(client DescribeLogGroupsAPIClient, params *DescribeLogGroupsInput, optFns ...func(*DescribeLogGroupsPaginatorOptions)) *DescribeLogGroupsPaginator {
+	options := DescribeLogGroupsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeLogGroupsInput{}
+	}
+
+	return &DescribeLogGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeLogGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeLogGroups page.
+func (p *DescribeLogGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeLogGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeLogGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeLogGroups(region string) *awsmiddleware.RegisterServiceMetadata {

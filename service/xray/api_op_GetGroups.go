@@ -4,6 +4,7 @@ package xray
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
@@ -100,6 +101,79 @@ func addOperationGetGroupsMiddlewares(stack *middleware.Stack, options Options) 
 		return err
 	}
 	return nil
+}
+
+// GetGroupsAPIClient is a client that implements the GetGroups operation.
+type GetGroupsAPIClient interface {
+	GetGroups(context.Context, *GetGroupsInput, ...func(*Options)) (*GetGroupsOutput, error)
+}
+
+var _ GetGroupsAPIClient = (*Client)(nil)
+
+// GetGroupsPaginatorOptions is the paginator options for GetGroups
+type GetGroupsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetGroupsPaginator is a paginator for GetGroups
+type GetGroupsPaginator struct {
+	options   GetGroupsPaginatorOptions
+	client    GetGroupsAPIClient
+	params    *GetGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetGroupsPaginator returns a new GetGroupsPaginator
+func NewGetGroupsPaginator(client GetGroupsAPIClient, params *GetGroupsInput, optFns ...func(*GetGroupsPaginatorOptions)) *GetGroupsPaginator {
+	options := GetGroupsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetGroupsInput{}
+	}
+
+	return &GetGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetGroups page.
+func (p *GetGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.GetGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetGroups(region string) *awsmiddleware.RegisterServiceMetadata {

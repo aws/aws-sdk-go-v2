@@ -4,6 +4,7 @@ package glue
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
@@ -118,6 +119,81 @@ func addOperationGetPartitionIndexesMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// GetPartitionIndexesAPIClient is a client that implements the GetPartitionIndexes
+// operation.
+type GetPartitionIndexesAPIClient interface {
+	GetPartitionIndexes(context.Context, *GetPartitionIndexesInput, ...func(*Options)) (*GetPartitionIndexesOutput, error)
+}
+
+var _ GetPartitionIndexesAPIClient = (*Client)(nil)
+
+// GetPartitionIndexesPaginatorOptions is the paginator options for
+// GetPartitionIndexes
+type GetPartitionIndexesPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetPartitionIndexesPaginator is a paginator for GetPartitionIndexes
+type GetPartitionIndexesPaginator struct {
+	options   GetPartitionIndexesPaginatorOptions
+	client    GetPartitionIndexesAPIClient
+	params    *GetPartitionIndexesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetPartitionIndexesPaginator returns a new GetPartitionIndexesPaginator
+func NewGetPartitionIndexesPaginator(client GetPartitionIndexesAPIClient, params *GetPartitionIndexesInput, optFns ...func(*GetPartitionIndexesPaginatorOptions)) *GetPartitionIndexesPaginator {
+	options := GetPartitionIndexesPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetPartitionIndexesInput{}
+	}
+
+	return &GetPartitionIndexesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetPartitionIndexesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetPartitionIndexes page.
+func (p *GetPartitionIndexesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetPartitionIndexesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.GetPartitionIndexes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetPartitionIndexes(region string) *awsmiddleware.RegisterServiceMetadata {

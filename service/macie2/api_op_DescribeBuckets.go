@@ -4,6 +4,7 @@ package macie2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
@@ -114,6 +115,89 @@ func addOperationDescribeBucketsMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	return nil
+}
+
+// DescribeBucketsAPIClient is a client that implements the DescribeBuckets
+// operation.
+type DescribeBucketsAPIClient interface {
+	DescribeBuckets(context.Context, *DescribeBucketsInput, ...func(*Options)) (*DescribeBucketsOutput, error)
+}
+
+var _ DescribeBucketsAPIClient = (*Client)(nil)
+
+// DescribeBucketsPaginatorOptions is the paginator options for DescribeBuckets
+type DescribeBucketsPaginatorOptions struct {
+	// The maximum number of items to include in each page of the response. The default
+	// value is 50.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeBucketsPaginator is a paginator for DescribeBuckets
+type DescribeBucketsPaginator struct {
+	options   DescribeBucketsPaginatorOptions
+	client    DescribeBucketsAPIClient
+	params    *DescribeBucketsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeBucketsPaginator returns a new DescribeBucketsPaginator
+func NewDescribeBucketsPaginator(client DescribeBucketsAPIClient, params *DescribeBucketsInput, optFns ...func(*DescribeBucketsPaginatorOptions)) *DescribeBucketsPaginator {
+	options := DescribeBucketsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeBucketsInput{}
+	}
+
+	return &DescribeBucketsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeBucketsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeBuckets page.
+func (p *DescribeBucketsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeBucketsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeBuckets(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeBuckets(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package medialive
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
@@ -113,6 +114,89 @@ func addOperationListMultiplexProgramsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// ListMultiplexProgramsAPIClient is a client that implements the
+// ListMultiplexPrograms operation.
+type ListMultiplexProgramsAPIClient interface {
+	ListMultiplexPrograms(context.Context, *ListMultiplexProgramsInput, ...func(*Options)) (*ListMultiplexProgramsOutput, error)
+}
+
+var _ ListMultiplexProgramsAPIClient = (*Client)(nil)
+
+// ListMultiplexProgramsPaginatorOptions is the paginator options for
+// ListMultiplexPrograms
+type ListMultiplexProgramsPaginatorOptions struct {
+	// The maximum number of items to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListMultiplexProgramsPaginator is a paginator for ListMultiplexPrograms
+type ListMultiplexProgramsPaginator struct {
+	options   ListMultiplexProgramsPaginatorOptions
+	client    ListMultiplexProgramsAPIClient
+	params    *ListMultiplexProgramsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListMultiplexProgramsPaginator returns a new ListMultiplexProgramsPaginator
+func NewListMultiplexProgramsPaginator(client ListMultiplexProgramsAPIClient, params *ListMultiplexProgramsInput, optFns ...func(*ListMultiplexProgramsPaginatorOptions)) *ListMultiplexProgramsPaginator {
+	options := ListMultiplexProgramsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListMultiplexProgramsInput{}
+	}
+
+	return &ListMultiplexProgramsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListMultiplexProgramsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListMultiplexPrograms page.
+func (p *ListMultiplexProgramsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListMultiplexProgramsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListMultiplexPrograms(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListMultiplexPrograms(region string) *awsmiddleware.RegisterServiceMetadata {

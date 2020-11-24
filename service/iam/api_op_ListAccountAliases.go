@@ -4,6 +4,7 @@ package iam
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -128,6 +129,99 @@ func addOperationListAccountAliasesMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// ListAccountAliasesAPIClient is a client that implements the ListAccountAliases
+// operation.
+type ListAccountAliasesAPIClient interface {
+	ListAccountAliases(context.Context, *ListAccountAliasesInput, ...func(*Options)) (*ListAccountAliasesOutput, error)
+}
+
+var _ ListAccountAliasesAPIClient = (*Client)(nil)
+
+// ListAccountAliasesPaginatorOptions is the paginator options for
+// ListAccountAliases
+type ListAccountAliasesPaginatorOptions struct {
+	// Use this only when paginating results to indicate the maximum number of items
+	// you want in the response. If additional items exist beyond the maximum you
+	// specify, the IsTruncated response element is true. If you do not include this
+	// parameter, the number of items defaults to 100. Note that IAM might return fewer
+	// results, even when there are more results available. In that case, the
+	// IsTruncated response element returns true, and Marker contains a value to
+	// include in the subsequent call that tells the service where to continue from.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAccountAliasesPaginator is a paginator for ListAccountAliases
+type ListAccountAliasesPaginator struct {
+	options   ListAccountAliasesPaginatorOptions
+	client    ListAccountAliasesAPIClient
+	params    *ListAccountAliasesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAccountAliasesPaginator returns a new ListAccountAliasesPaginator
+func NewListAccountAliasesPaginator(client ListAccountAliasesAPIClient, params *ListAccountAliasesInput, optFns ...func(*ListAccountAliasesPaginatorOptions)) *ListAccountAliasesPaginator {
+	options := ListAccountAliasesPaginatorOptions{}
+	if params.MaxItems != nil {
+		options.Limit = *params.MaxItems
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAccountAliasesInput{}
+	}
+
+	return &ListAccountAliasesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAccountAliasesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAccountAliases page.
+func (p *ListAccountAliasesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAccountAliasesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxItems = limit
+
+	result, err := p.client.ListAccountAliases(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAccountAliases(region string) *awsmiddleware.RegisterServiceMetadata {

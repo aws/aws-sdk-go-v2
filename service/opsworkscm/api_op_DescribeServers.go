@@ -4,6 +4,7 @@ package opsworkscm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opsworkscm/types"
@@ -118,6 +119,92 @@ func addOperationDescribeServersMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	return nil
+}
+
+// DescribeServersAPIClient is a client that implements the DescribeServers
+// operation.
+type DescribeServersAPIClient interface {
+	DescribeServers(context.Context, *DescribeServersInput, ...func(*Options)) (*DescribeServersOutput, error)
+}
+
+var _ DescribeServersAPIClient = (*Client)(nil)
+
+// DescribeServersPaginatorOptions is the paginator options for DescribeServers
+type DescribeServersPaginatorOptions struct {
+	// This is not currently implemented for DescribeServers requests.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeServersPaginator is a paginator for DescribeServers
+type DescribeServersPaginator struct {
+	options   DescribeServersPaginatorOptions
+	client    DescribeServersAPIClient
+	params    *DescribeServersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeServersPaginator returns a new DescribeServersPaginator
+func NewDescribeServersPaginator(client DescribeServersAPIClient, params *DescribeServersInput, optFns ...func(*DescribeServersPaginatorOptions)) *DescribeServersPaginator {
+	options := DescribeServersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeServersInput{}
+	}
+
+	return &DescribeServersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeServersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeServers page.
+func (p *DescribeServersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeServersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeServers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeServers(region string) *awsmiddleware.RegisterServiceMetadata {

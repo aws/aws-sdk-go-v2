@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -146,6 +147,89 @@ func addOperationDescribeFlowLogsMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// DescribeFlowLogsAPIClient is a client that implements the DescribeFlowLogs
+// operation.
+type DescribeFlowLogsAPIClient interface {
+	DescribeFlowLogs(context.Context, *DescribeFlowLogsInput, ...func(*Options)) (*DescribeFlowLogsOutput, error)
+}
+
+var _ DescribeFlowLogsAPIClient = (*Client)(nil)
+
+// DescribeFlowLogsPaginatorOptions is the paginator options for DescribeFlowLogs
+type DescribeFlowLogsPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeFlowLogsPaginator is a paginator for DescribeFlowLogs
+type DescribeFlowLogsPaginator struct {
+	options   DescribeFlowLogsPaginatorOptions
+	client    DescribeFlowLogsAPIClient
+	params    *DescribeFlowLogsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeFlowLogsPaginator returns a new DescribeFlowLogsPaginator
+func NewDescribeFlowLogsPaginator(client DescribeFlowLogsAPIClient, params *DescribeFlowLogsInput, optFns ...func(*DescribeFlowLogsPaginatorOptions)) *DescribeFlowLogsPaginator {
+	options := DescribeFlowLogsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeFlowLogsInput{}
+	}
+
+	return &DescribeFlowLogsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeFlowLogsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeFlowLogs page.
+func (p *DescribeFlowLogsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeFlowLogsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeFlowLogs(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeFlowLogs(region string) *awsmiddleware.RegisterServiceMetadata {

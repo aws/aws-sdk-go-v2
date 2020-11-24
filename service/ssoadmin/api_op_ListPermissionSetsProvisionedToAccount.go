@@ -4,6 +4,7 @@ package ssoadmin
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
@@ -123,6 +124,95 @@ func addOperationListPermissionSetsProvisionedToAccountMiddlewares(stack *middle
 		return err
 	}
 	return nil
+}
+
+// ListPermissionSetsProvisionedToAccountAPIClient is a client that implements the
+// ListPermissionSetsProvisionedToAccount operation.
+type ListPermissionSetsProvisionedToAccountAPIClient interface {
+	ListPermissionSetsProvisionedToAccount(context.Context, *ListPermissionSetsProvisionedToAccountInput, ...func(*Options)) (*ListPermissionSetsProvisionedToAccountOutput, error)
+}
+
+var _ ListPermissionSetsProvisionedToAccountAPIClient = (*Client)(nil)
+
+// ListPermissionSetsProvisionedToAccountPaginatorOptions is the paginator options
+// for ListPermissionSetsProvisionedToAccount
+type ListPermissionSetsProvisionedToAccountPaginatorOptions struct {
+	// The maximum number of results to display for the assignment.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPermissionSetsProvisionedToAccountPaginator is a paginator for
+// ListPermissionSetsProvisionedToAccount
+type ListPermissionSetsProvisionedToAccountPaginator struct {
+	options   ListPermissionSetsProvisionedToAccountPaginatorOptions
+	client    ListPermissionSetsProvisionedToAccountAPIClient
+	params    *ListPermissionSetsProvisionedToAccountInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPermissionSetsProvisionedToAccountPaginator returns a new
+// ListPermissionSetsProvisionedToAccountPaginator
+func NewListPermissionSetsProvisionedToAccountPaginator(client ListPermissionSetsProvisionedToAccountAPIClient, params *ListPermissionSetsProvisionedToAccountInput, optFns ...func(*ListPermissionSetsProvisionedToAccountPaginatorOptions)) *ListPermissionSetsProvisionedToAccountPaginator {
+	options := ListPermissionSetsProvisionedToAccountPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListPermissionSetsProvisionedToAccountInput{}
+	}
+
+	return &ListPermissionSetsProvisionedToAccountPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPermissionSetsProvisionedToAccountPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListPermissionSetsProvisionedToAccount page.
+func (p *ListPermissionSetsProvisionedToAccountPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPermissionSetsProvisionedToAccountOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListPermissionSetsProvisionedToAccount(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListPermissionSetsProvisionedToAccount(region string) *awsmiddleware.RegisterServiceMetadata {

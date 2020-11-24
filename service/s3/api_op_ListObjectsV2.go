@@ -4,6 +4,7 @@ package s3
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
@@ -264,6 +265,89 @@ func addOperationListObjectsV2Middlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	return nil
+}
+
+// ListObjectsV2APIClient is a client that implements the ListObjectsV2 operation.
+type ListObjectsV2APIClient interface {
+	ListObjectsV2(context.Context, *ListObjectsV2Input, ...func(*Options)) (*ListObjectsV2Output, error)
+}
+
+var _ ListObjectsV2APIClient = (*Client)(nil)
+
+// ListObjectsV2PaginatorOptions is the paginator options for ListObjectsV2
+type ListObjectsV2PaginatorOptions struct {
+	// Sets the maximum number of keys returned in the response. By default the API
+	// returns up to 1,000 key names. The response might contain fewer keys but will
+	// never contain more.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListObjectsV2Paginator is a paginator for ListObjectsV2
+type ListObjectsV2Paginator struct {
+	options   ListObjectsV2PaginatorOptions
+	client    ListObjectsV2APIClient
+	params    *ListObjectsV2Input
+	nextToken *string
+	firstPage bool
+}
+
+// NewListObjectsV2Paginator returns a new ListObjectsV2Paginator
+func NewListObjectsV2Paginator(client ListObjectsV2APIClient, params *ListObjectsV2Input, optFns ...func(*ListObjectsV2PaginatorOptions)) *ListObjectsV2Paginator {
+	options := ListObjectsV2PaginatorOptions{}
+	if params.MaxKeys != 0 {
+		options.Limit = params.MaxKeys
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListObjectsV2Input{}
+	}
+
+	return &ListObjectsV2Paginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListObjectsV2Paginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListObjectsV2 page.
+func (p *ListObjectsV2Paginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListObjectsV2Output, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.ContinuationToken = p.nextToken
+
+	params.MaxKeys = p.options.Limit
+
+	result, err := p.client.ListObjectsV2(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextContinuationToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListObjectsV2(region string) *awsmiddleware.RegisterServiceMetadata {

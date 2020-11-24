@@ -4,6 +4,7 @@ package appmesh
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
@@ -135,4 +136,96 @@ func addOperationListGatewayRoutesMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// ListGatewayRoutesAPIClient is a client that implements the ListGatewayRoutes
+// operation.
+type ListGatewayRoutesAPIClient interface {
+	ListGatewayRoutes(context.Context, *ListGatewayRoutesInput, ...func(*Options)) (*ListGatewayRoutesOutput, error)
+}
+
+var _ ListGatewayRoutesAPIClient = (*Client)(nil)
+
+// ListGatewayRoutesPaginatorOptions is the paginator options for ListGatewayRoutes
+type ListGatewayRoutesPaginatorOptions struct {
+	// The maximum number of results returned by ListGatewayRoutes in paginated output.
+	// When you use this parameter, ListGatewayRoutes returns only limit results in a
+	// single page along with a nextToken response element. You can see the remaining
+	// results of the initial request by sending another ListGatewayRoutes request with
+	// the returned nextToken value. This value can be between 1 and 100. If you don't
+	// use this parameter, ListGatewayRoutes returns up to 100 results and a nextToken
+	// value if applicable.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListGatewayRoutesPaginator is a paginator for ListGatewayRoutes
+type ListGatewayRoutesPaginator struct {
+	options   ListGatewayRoutesPaginatorOptions
+	client    ListGatewayRoutesAPIClient
+	params    *ListGatewayRoutesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListGatewayRoutesPaginator returns a new ListGatewayRoutesPaginator
+func NewListGatewayRoutesPaginator(client ListGatewayRoutesAPIClient, params *ListGatewayRoutesInput, optFns ...func(*ListGatewayRoutesPaginatorOptions)) *ListGatewayRoutesPaginator {
+	options := ListGatewayRoutesPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListGatewayRoutesInput{}
+	}
+
+	return &ListGatewayRoutesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListGatewayRoutesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListGatewayRoutes page.
+func (p *ListGatewayRoutesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListGatewayRoutesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.ListGatewayRoutes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }

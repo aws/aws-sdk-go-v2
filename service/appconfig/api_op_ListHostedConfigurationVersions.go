@@ -4,6 +4,7 @@ package appconfig
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appconfig/types"
@@ -119,6 +120,92 @@ func addOperationListHostedConfigurationVersionsMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+// ListHostedConfigurationVersionsAPIClient is a client that implements the
+// ListHostedConfigurationVersions operation.
+type ListHostedConfigurationVersionsAPIClient interface {
+	ListHostedConfigurationVersions(context.Context, *ListHostedConfigurationVersionsInput, ...func(*Options)) (*ListHostedConfigurationVersionsOutput, error)
+}
+
+var _ ListHostedConfigurationVersionsAPIClient = (*Client)(nil)
+
+// ListHostedConfigurationVersionsPaginatorOptions is the paginator options for
+// ListHostedConfigurationVersions
+type ListHostedConfigurationVersionsPaginatorOptions struct {
+	// The maximum number of items to return for this call. The call also returns a
+	// token that you can specify in a subsequent call to get the next set of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListHostedConfigurationVersionsPaginator is a paginator for
+// ListHostedConfigurationVersions
+type ListHostedConfigurationVersionsPaginator struct {
+	options   ListHostedConfigurationVersionsPaginatorOptions
+	client    ListHostedConfigurationVersionsAPIClient
+	params    *ListHostedConfigurationVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListHostedConfigurationVersionsPaginator returns a new
+// ListHostedConfigurationVersionsPaginator
+func NewListHostedConfigurationVersionsPaginator(client ListHostedConfigurationVersionsAPIClient, params *ListHostedConfigurationVersionsInput, optFns ...func(*ListHostedConfigurationVersionsPaginatorOptions)) *ListHostedConfigurationVersionsPaginator {
+	options := ListHostedConfigurationVersionsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListHostedConfigurationVersionsInput{}
+	}
+
+	return &ListHostedConfigurationVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListHostedConfigurationVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListHostedConfigurationVersions page.
+func (p *ListHostedConfigurationVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListHostedConfigurationVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListHostedConfigurationVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListHostedConfigurationVersions(region string) *awsmiddleware.RegisterServiceMetadata {

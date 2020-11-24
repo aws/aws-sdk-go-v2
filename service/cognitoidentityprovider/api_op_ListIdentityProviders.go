@@ -4,6 +4,7 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
@@ -113,6 +114,93 @@ func addOperationListIdentityProvidersMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// ListIdentityProvidersAPIClient is a client that implements the
+// ListIdentityProviders operation.
+type ListIdentityProvidersAPIClient interface {
+	ListIdentityProviders(context.Context, *ListIdentityProvidersInput, ...func(*Options)) (*ListIdentityProvidersOutput, error)
+}
+
+var _ ListIdentityProvidersAPIClient = (*Client)(nil)
+
+// ListIdentityProvidersPaginatorOptions is the paginator options for
+// ListIdentityProviders
+type ListIdentityProvidersPaginatorOptions struct {
+	// The maximum number of identity providers to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListIdentityProvidersPaginator is a paginator for ListIdentityProviders
+type ListIdentityProvidersPaginator struct {
+	options   ListIdentityProvidersPaginatorOptions
+	client    ListIdentityProvidersAPIClient
+	params    *ListIdentityProvidersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListIdentityProvidersPaginator returns a new ListIdentityProvidersPaginator
+func NewListIdentityProvidersPaginator(client ListIdentityProvidersAPIClient, params *ListIdentityProvidersInput, optFns ...func(*ListIdentityProvidersPaginatorOptions)) *ListIdentityProvidersPaginator {
+	options := ListIdentityProvidersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListIdentityProvidersInput{}
+	}
+
+	return &ListIdentityProvidersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListIdentityProvidersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListIdentityProviders page.
+func (p *ListIdentityProvidersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListIdentityProvidersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListIdentityProviders(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListIdentityProviders(region string) *awsmiddleware.RegisterServiceMetadata {

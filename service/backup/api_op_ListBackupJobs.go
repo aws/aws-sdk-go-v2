@@ -4,6 +4,7 @@ package backup
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
@@ -152,6 +153,92 @@ func addOperationListBackupJobsMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListBackupJobsAPIClient is a client that implements the ListBackupJobs
+// operation.
+type ListBackupJobsAPIClient interface {
+	ListBackupJobs(context.Context, *ListBackupJobsInput, ...func(*Options)) (*ListBackupJobsOutput, error)
+}
+
+var _ ListBackupJobsAPIClient = (*Client)(nil)
+
+// ListBackupJobsPaginatorOptions is the paginator options for ListBackupJobs
+type ListBackupJobsPaginatorOptions struct {
+	// The maximum number of items to be returned.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListBackupJobsPaginator is a paginator for ListBackupJobs
+type ListBackupJobsPaginator struct {
+	options   ListBackupJobsPaginatorOptions
+	client    ListBackupJobsAPIClient
+	params    *ListBackupJobsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListBackupJobsPaginator returns a new ListBackupJobsPaginator
+func NewListBackupJobsPaginator(client ListBackupJobsAPIClient, params *ListBackupJobsInput, optFns ...func(*ListBackupJobsPaginatorOptions)) *ListBackupJobsPaginator {
+	options := ListBackupJobsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListBackupJobsInput{}
+	}
+
+	return &ListBackupJobsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListBackupJobsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListBackupJobs page.
+func (p *ListBackupJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListBackupJobsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListBackupJobs(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListBackupJobs(region string) *awsmiddleware.RegisterServiceMetadata {

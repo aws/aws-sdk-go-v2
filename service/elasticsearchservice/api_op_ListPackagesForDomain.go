@@ -4,6 +4,7 @@ package elasticsearchservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
@@ -115,6 +116,89 @@ func addOperationListPackagesForDomainMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// ListPackagesForDomainAPIClient is a client that implements the
+// ListPackagesForDomain operation.
+type ListPackagesForDomainAPIClient interface {
+	ListPackagesForDomain(context.Context, *ListPackagesForDomainInput, ...func(*Options)) (*ListPackagesForDomainOutput, error)
+}
+
+var _ ListPackagesForDomainAPIClient = (*Client)(nil)
+
+// ListPackagesForDomainPaginatorOptions is the paginator options for
+// ListPackagesForDomain
+type ListPackagesForDomainPaginatorOptions struct {
+	// Limits results to a maximum number of packages.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPackagesForDomainPaginator is a paginator for ListPackagesForDomain
+type ListPackagesForDomainPaginator struct {
+	options   ListPackagesForDomainPaginatorOptions
+	client    ListPackagesForDomainAPIClient
+	params    *ListPackagesForDomainInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPackagesForDomainPaginator returns a new ListPackagesForDomainPaginator
+func NewListPackagesForDomainPaginator(client ListPackagesForDomainAPIClient, params *ListPackagesForDomainInput, optFns ...func(*ListPackagesForDomainPaginatorOptions)) *ListPackagesForDomainPaginator {
+	options := ListPackagesForDomainPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListPackagesForDomainInput{}
+	}
+
+	return &ListPackagesForDomainPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPackagesForDomainPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListPackagesForDomain page.
+func (p *ListPackagesForDomainPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPackagesForDomainOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListPackagesForDomain(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListPackagesForDomain(region string) *awsmiddleware.RegisterServiceMetadata {

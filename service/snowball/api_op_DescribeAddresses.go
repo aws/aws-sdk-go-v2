@@ -4,6 +4,7 @@ package snowball
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
@@ -109,6 +110,92 @@ func addOperationDescribeAddressesMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// DescribeAddressesAPIClient is a client that implements the DescribeAddresses
+// operation.
+type DescribeAddressesAPIClient interface {
+	DescribeAddresses(context.Context, *DescribeAddressesInput, ...func(*Options)) (*DescribeAddressesOutput, error)
+}
+
+var _ DescribeAddressesAPIClient = (*Client)(nil)
+
+// DescribeAddressesPaginatorOptions is the paginator options for DescribeAddresses
+type DescribeAddressesPaginatorOptions struct {
+	// The number of ADDRESS objects to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeAddressesPaginator is a paginator for DescribeAddresses
+type DescribeAddressesPaginator struct {
+	options   DescribeAddressesPaginatorOptions
+	client    DescribeAddressesAPIClient
+	params    *DescribeAddressesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeAddressesPaginator returns a new DescribeAddressesPaginator
+func NewDescribeAddressesPaginator(client DescribeAddressesAPIClient, params *DescribeAddressesInput, optFns ...func(*DescribeAddressesPaginatorOptions)) *DescribeAddressesPaginator {
+	options := DescribeAddressesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeAddressesInput{}
+	}
+
+	return &DescribeAddressesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeAddressesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeAddresses page.
+func (p *DescribeAddressesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeAddressesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeAddresses(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeAddresses(region string) *awsmiddleware.RegisterServiceMetadata {

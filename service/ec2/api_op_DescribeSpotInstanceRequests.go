@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -262,6 +263,93 @@ func addOperationDescribeSpotInstanceRequestsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+// DescribeSpotInstanceRequestsAPIClient is a client that implements the
+// DescribeSpotInstanceRequests operation.
+type DescribeSpotInstanceRequestsAPIClient interface {
+	DescribeSpotInstanceRequests(context.Context, *DescribeSpotInstanceRequestsInput, ...func(*Options)) (*DescribeSpotInstanceRequestsOutput, error)
+}
+
+var _ DescribeSpotInstanceRequestsAPIClient = (*Client)(nil)
+
+// DescribeSpotInstanceRequestsPaginatorOptions is the paginator options for
+// DescribeSpotInstanceRequests
+type DescribeSpotInstanceRequestsPaginatorOptions struct {
+	// The maximum number of results to return in a single call. Specify a value
+	// between 5 and 1000. To retrieve the remaining results, make another call with
+	// the returned NextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeSpotInstanceRequestsPaginator is a paginator for
+// DescribeSpotInstanceRequests
+type DescribeSpotInstanceRequestsPaginator struct {
+	options   DescribeSpotInstanceRequestsPaginatorOptions
+	client    DescribeSpotInstanceRequestsAPIClient
+	params    *DescribeSpotInstanceRequestsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeSpotInstanceRequestsPaginator returns a new
+// DescribeSpotInstanceRequestsPaginator
+func NewDescribeSpotInstanceRequestsPaginator(client DescribeSpotInstanceRequestsAPIClient, params *DescribeSpotInstanceRequestsInput, optFns ...func(*DescribeSpotInstanceRequestsPaginatorOptions)) *DescribeSpotInstanceRequestsPaginator {
+	options := DescribeSpotInstanceRequestsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeSpotInstanceRequestsInput{}
+	}
+
+	return &DescribeSpotInstanceRequestsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeSpotInstanceRequestsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeSpotInstanceRequests page.
+func (p *DescribeSpotInstanceRequestsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeSpotInstanceRequestsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeSpotInstanceRequests(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeSpotInstanceRequests(region string) *awsmiddleware.RegisterServiceMetadata {

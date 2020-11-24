@@ -4,6 +4,7 @@ package alexaforbusiness
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
@@ -111,6 +112,95 @@ func addOperationListSkillsStoreSkillsByCategoryMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+// ListSkillsStoreSkillsByCategoryAPIClient is a client that implements the
+// ListSkillsStoreSkillsByCategory operation.
+type ListSkillsStoreSkillsByCategoryAPIClient interface {
+	ListSkillsStoreSkillsByCategory(context.Context, *ListSkillsStoreSkillsByCategoryInput, ...func(*Options)) (*ListSkillsStoreSkillsByCategoryOutput, error)
+}
+
+var _ ListSkillsStoreSkillsByCategoryAPIClient = (*Client)(nil)
+
+// ListSkillsStoreSkillsByCategoryPaginatorOptions is the paginator options for
+// ListSkillsStoreSkillsByCategory
+type ListSkillsStoreSkillsByCategoryPaginatorOptions struct {
+	// The maximum number of skills returned per paginated calls.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListSkillsStoreSkillsByCategoryPaginator is a paginator for
+// ListSkillsStoreSkillsByCategory
+type ListSkillsStoreSkillsByCategoryPaginator struct {
+	options   ListSkillsStoreSkillsByCategoryPaginatorOptions
+	client    ListSkillsStoreSkillsByCategoryAPIClient
+	params    *ListSkillsStoreSkillsByCategoryInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListSkillsStoreSkillsByCategoryPaginator returns a new
+// ListSkillsStoreSkillsByCategoryPaginator
+func NewListSkillsStoreSkillsByCategoryPaginator(client ListSkillsStoreSkillsByCategoryAPIClient, params *ListSkillsStoreSkillsByCategoryInput, optFns ...func(*ListSkillsStoreSkillsByCategoryPaginatorOptions)) *ListSkillsStoreSkillsByCategoryPaginator {
+	options := ListSkillsStoreSkillsByCategoryPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListSkillsStoreSkillsByCategoryInput{}
+	}
+
+	return &ListSkillsStoreSkillsByCategoryPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListSkillsStoreSkillsByCategoryPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListSkillsStoreSkillsByCategory page.
+func (p *ListSkillsStoreSkillsByCategoryPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSkillsStoreSkillsByCategoryOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListSkillsStoreSkillsByCategory(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListSkillsStoreSkillsByCategory(region string) *awsmiddleware.RegisterServiceMetadata {

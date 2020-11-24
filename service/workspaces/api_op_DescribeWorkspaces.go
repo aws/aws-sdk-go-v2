@@ -4,6 +4,7 @@ package workspaces
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
@@ -127,6 +128,93 @@ func addOperationDescribeWorkspacesMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// DescribeWorkspacesAPIClient is a client that implements the DescribeWorkspaces
+// operation.
+type DescribeWorkspacesAPIClient interface {
+	DescribeWorkspaces(context.Context, *DescribeWorkspacesInput, ...func(*Options)) (*DescribeWorkspacesOutput, error)
+}
+
+var _ DescribeWorkspacesAPIClient = (*Client)(nil)
+
+// DescribeWorkspacesPaginatorOptions is the paginator options for
+// DescribeWorkspaces
+type DescribeWorkspacesPaginatorOptions struct {
+	// The maximum number of items to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeWorkspacesPaginator is a paginator for DescribeWorkspaces
+type DescribeWorkspacesPaginator struct {
+	options   DescribeWorkspacesPaginatorOptions
+	client    DescribeWorkspacesAPIClient
+	params    *DescribeWorkspacesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeWorkspacesPaginator returns a new DescribeWorkspacesPaginator
+func NewDescribeWorkspacesPaginator(client DescribeWorkspacesAPIClient, params *DescribeWorkspacesInput, optFns ...func(*DescribeWorkspacesPaginatorOptions)) *DescribeWorkspacesPaginator {
+	options := DescribeWorkspacesPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeWorkspacesInput{}
+	}
+
+	return &DescribeWorkspacesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeWorkspacesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeWorkspaces page.
+func (p *DescribeWorkspacesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeWorkspacesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeWorkspaces(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeWorkspaces(region string) *awsmiddleware.RegisterServiceMetadata {

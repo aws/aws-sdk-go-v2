@@ -4,6 +4,7 @@ package clouddirectory
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
@@ -119,6 +120,93 @@ func addOperationListAttachedIndicesMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// ListAttachedIndicesAPIClient is a client that implements the ListAttachedIndices
+// operation.
+type ListAttachedIndicesAPIClient interface {
+	ListAttachedIndices(context.Context, *ListAttachedIndicesInput, ...func(*Options)) (*ListAttachedIndicesOutput, error)
+}
+
+var _ ListAttachedIndicesAPIClient = (*Client)(nil)
+
+// ListAttachedIndicesPaginatorOptions is the paginator options for
+// ListAttachedIndices
+type ListAttachedIndicesPaginatorOptions struct {
+	// The maximum number of results to retrieve.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAttachedIndicesPaginator is a paginator for ListAttachedIndices
+type ListAttachedIndicesPaginator struct {
+	options   ListAttachedIndicesPaginatorOptions
+	client    ListAttachedIndicesAPIClient
+	params    *ListAttachedIndicesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAttachedIndicesPaginator returns a new ListAttachedIndicesPaginator
+func NewListAttachedIndicesPaginator(client ListAttachedIndicesAPIClient, params *ListAttachedIndicesInput, optFns ...func(*ListAttachedIndicesPaginatorOptions)) *ListAttachedIndicesPaginator {
+	options := ListAttachedIndicesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAttachedIndicesInput{}
+	}
+
+	return &ListAttachedIndicesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAttachedIndicesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAttachedIndices page.
+func (p *ListAttachedIndicesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAttachedIndicesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListAttachedIndices(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAttachedIndices(region string) *awsmiddleware.RegisterServiceMetadata {

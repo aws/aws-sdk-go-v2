@@ -4,6 +4,7 @@ package devicefarm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
@@ -122,6 +123,80 @@ func addOperationListDevicePoolsMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	return nil
+}
+
+// ListDevicePoolsAPIClient is a client that implements the ListDevicePools
+// operation.
+type ListDevicePoolsAPIClient interface {
+	ListDevicePools(context.Context, *ListDevicePoolsInput, ...func(*Options)) (*ListDevicePoolsOutput, error)
+}
+
+var _ ListDevicePoolsAPIClient = (*Client)(nil)
+
+// ListDevicePoolsPaginatorOptions is the paginator options for ListDevicePools
+type ListDevicePoolsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDevicePoolsPaginator is a paginator for ListDevicePools
+type ListDevicePoolsPaginator struct {
+	options   ListDevicePoolsPaginatorOptions
+	client    ListDevicePoolsAPIClient
+	params    *ListDevicePoolsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDevicePoolsPaginator returns a new ListDevicePoolsPaginator
+func NewListDevicePoolsPaginator(client ListDevicePoolsAPIClient, params *ListDevicePoolsInput, optFns ...func(*ListDevicePoolsPaginatorOptions)) *ListDevicePoolsPaginator {
+	options := ListDevicePoolsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListDevicePoolsInput{}
+	}
+
+	return &ListDevicePoolsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDevicePoolsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDevicePools page.
+func (p *ListDevicePoolsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDevicePoolsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListDevicePools(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDevicePools(region string) *awsmiddleware.RegisterServiceMetadata {

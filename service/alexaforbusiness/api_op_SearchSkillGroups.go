@@ -4,6 +4,7 @@ package alexaforbusiness
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
@@ -123,6 +124,94 @@ func addOperationSearchSkillGroupsMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// SearchSkillGroupsAPIClient is a client that implements the SearchSkillGroups
+// operation.
+type SearchSkillGroupsAPIClient interface {
+	SearchSkillGroups(context.Context, *SearchSkillGroupsInput, ...func(*Options)) (*SearchSkillGroupsOutput, error)
+}
+
+var _ SearchSkillGroupsAPIClient = (*Client)(nil)
+
+// SearchSkillGroupsPaginatorOptions is the paginator options for SearchSkillGroups
+type SearchSkillGroupsPaginatorOptions struct {
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so that
+	// the remaining results can be retrieved.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// SearchSkillGroupsPaginator is a paginator for SearchSkillGroups
+type SearchSkillGroupsPaginator struct {
+	options   SearchSkillGroupsPaginatorOptions
+	client    SearchSkillGroupsAPIClient
+	params    *SearchSkillGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewSearchSkillGroupsPaginator returns a new SearchSkillGroupsPaginator
+func NewSearchSkillGroupsPaginator(client SearchSkillGroupsAPIClient, params *SearchSkillGroupsInput, optFns ...func(*SearchSkillGroupsPaginatorOptions)) *SearchSkillGroupsPaginator {
+	options := SearchSkillGroupsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &SearchSkillGroupsInput{}
+	}
+
+	return &SearchSkillGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *SearchSkillGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next SearchSkillGroups page.
+func (p *SearchSkillGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*SearchSkillGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.SearchSkillGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opSearchSkillGroups(region string) *awsmiddleware.RegisterServiceMetadata {

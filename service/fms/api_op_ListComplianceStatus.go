@@ -4,6 +4,7 @@ package fms
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
@@ -126,6 +127,97 @@ func addOperationListComplianceStatusMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// ListComplianceStatusAPIClient is a client that implements the
+// ListComplianceStatus operation.
+type ListComplianceStatusAPIClient interface {
+	ListComplianceStatus(context.Context, *ListComplianceStatusInput, ...func(*Options)) (*ListComplianceStatusOutput, error)
+}
+
+var _ ListComplianceStatusAPIClient = (*Client)(nil)
+
+// ListComplianceStatusPaginatorOptions is the paginator options for
+// ListComplianceStatus
+type ListComplianceStatusPaginatorOptions struct {
+	// Specifies the number of PolicyComplianceStatus objects that you want AWS
+	// Firewall Manager to return for this request. If you have more
+	// PolicyComplianceStatus objects than the number that you specify for MaxResults,
+	// the response includes a NextToken value that you can use to get another batch of
+	// PolicyComplianceStatus objects.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListComplianceStatusPaginator is a paginator for ListComplianceStatus
+type ListComplianceStatusPaginator struct {
+	options   ListComplianceStatusPaginatorOptions
+	client    ListComplianceStatusAPIClient
+	params    *ListComplianceStatusInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListComplianceStatusPaginator returns a new ListComplianceStatusPaginator
+func NewListComplianceStatusPaginator(client ListComplianceStatusAPIClient, params *ListComplianceStatusInput, optFns ...func(*ListComplianceStatusPaginatorOptions)) *ListComplianceStatusPaginator {
+	options := ListComplianceStatusPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListComplianceStatusInput{}
+	}
+
+	return &ListComplianceStatusPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListComplianceStatusPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListComplianceStatus page.
+func (p *ListComplianceStatusPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListComplianceStatusOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListComplianceStatus(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListComplianceStatus(region string) *awsmiddleware.RegisterServiceMetadata {

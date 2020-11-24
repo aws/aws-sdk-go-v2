@@ -4,6 +4,7 @@ package databasemigrationservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
@@ -122,6 +123,97 @@ func addOperationDescribeReplicationTaskIndividualAssessmentsMiddlewares(stack *
 		return err
 	}
 	return nil
+}
+
+// DescribeReplicationTaskIndividualAssessmentsAPIClient is a client that
+// implements the DescribeReplicationTaskIndividualAssessments operation.
+type DescribeReplicationTaskIndividualAssessmentsAPIClient interface {
+	DescribeReplicationTaskIndividualAssessments(context.Context, *DescribeReplicationTaskIndividualAssessmentsInput, ...func(*Options)) (*DescribeReplicationTaskIndividualAssessmentsOutput, error)
+}
+
+var _ DescribeReplicationTaskIndividualAssessmentsAPIClient = (*Client)(nil)
+
+// DescribeReplicationTaskIndividualAssessmentsPaginatorOptions is the paginator
+// options for DescribeReplicationTaskIndividualAssessments
+type DescribeReplicationTaskIndividualAssessmentsPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that the remaining results can be retrieved.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeReplicationTaskIndividualAssessmentsPaginator is a paginator for
+// DescribeReplicationTaskIndividualAssessments
+type DescribeReplicationTaskIndividualAssessmentsPaginator struct {
+	options   DescribeReplicationTaskIndividualAssessmentsPaginatorOptions
+	client    DescribeReplicationTaskIndividualAssessmentsAPIClient
+	params    *DescribeReplicationTaskIndividualAssessmentsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeReplicationTaskIndividualAssessmentsPaginator returns a new
+// DescribeReplicationTaskIndividualAssessmentsPaginator
+func NewDescribeReplicationTaskIndividualAssessmentsPaginator(client DescribeReplicationTaskIndividualAssessmentsAPIClient, params *DescribeReplicationTaskIndividualAssessmentsInput, optFns ...func(*DescribeReplicationTaskIndividualAssessmentsPaginatorOptions)) *DescribeReplicationTaskIndividualAssessmentsPaginator {
+	options := DescribeReplicationTaskIndividualAssessmentsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeReplicationTaskIndividualAssessmentsInput{}
+	}
+
+	return &DescribeReplicationTaskIndividualAssessmentsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeReplicationTaskIndividualAssessmentsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeReplicationTaskIndividualAssessments page.
+func (p *DescribeReplicationTaskIndividualAssessmentsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeReplicationTaskIndividualAssessmentsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeReplicationTaskIndividualAssessments(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeReplicationTaskIndividualAssessments(region string) *awsmiddleware.RegisterServiceMetadata {

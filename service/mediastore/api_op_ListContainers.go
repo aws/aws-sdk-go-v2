@@ -4,6 +4,7 @@ package mediastore
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
@@ -118,6 +119,93 @@ func addOperationListContainersMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListContainersAPIClient is a client that implements the ListContainers
+// operation.
+type ListContainersAPIClient interface {
+	ListContainers(context.Context, *ListContainersInput, ...func(*Options)) (*ListContainersOutput, error)
+}
+
+var _ ListContainersAPIClient = (*Client)(nil)
+
+// ListContainersPaginatorOptions is the paginator options for ListContainers
+type ListContainersPaginatorOptions struct {
+	// Enter the maximum number of containers in the response. Use from 1 to 255
+	// characters.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListContainersPaginator is a paginator for ListContainers
+type ListContainersPaginator struct {
+	options   ListContainersPaginatorOptions
+	client    ListContainersAPIClient
+	params    *ListContainersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListContainersPaginator returns a new ListContainersPaginator
+func NewListContainersPaginator(client ListContainersAPIClient, params *ListContainersInput, optFns ...func(*ListContainersPaginatorOptions)) *ListContainersPaginator {
+	options := ListContainersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListContainersInput{}
+	}
+
+	return &ListContainersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListContainersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListContainers page.
+func (p *ListContainersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListContainersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListContainers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListContainers(region string) *awsmiddleware.RegisterServiceMetadata {

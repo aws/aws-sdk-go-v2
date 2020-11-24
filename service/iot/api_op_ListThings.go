@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
@@ -121,6 +122,91 @@ func addOperationListThingsMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+// ListThingsAPIClient is a client that implements the ListThings operation.
+type ListThingsAPIClient interface {
+	ListThings(context.Context, *ListThingsInput, ...func(*Options)) (*ListThingsOutput, error)
+}
+
+var _ ListThingsAPIClient = (*Client)(nil)
+
+// ListThingsPaginatorOptions is the paginator options for ListThings
+type ListThingsPaginatorOptions struct {
+	// The maximum number of results to return in this operation.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListThingsPaginator is a paginator for ListThings
+type ListThingsPaginator struct {
+	options   ListThingsPaginatorOptions
+	client    ListThingsAPIClient
+	params    *ListThingsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListThingsPaginator returns a new ListThingsPaginator
+func NewListThingsPaginator(client ListThingsAPIClient, params *ListThingsInput, optFns ...func(*ListThingsPaginatorOptions)) *ListThingsPaginator {
+	options := ListThingsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListThingsInput{}
+	}
+
+	return &ListThingsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListThingsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListThings page.
+func (p *ListThingsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListThingsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListThings(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListThings(region string) *awsmiddleware.RegisterServiceMetadata {

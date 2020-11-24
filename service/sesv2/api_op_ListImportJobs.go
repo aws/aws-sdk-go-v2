@@ -4,6 +4,7 @@ package sesv2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
@@ -118,6 +119,95 @@ func addOperationListImportJobsMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListImportJobsAPIClient is a client that implements the ListImportJobs
+// operation.
+type ListImportJobsAPIClient interface {
+	ListImportJobs(context.Context, *ListImportJobsInput, ...func(*Options)) (*ListImportJobsOutput, error)
+}
+
+var _ ListImportJobsAPIClient = (*Client)(nil)
+
+// ListImportJobsPaginatorOptions is the paginator options for ListImportJobs
+type ListImportJobsPaginatorOptions struct {
+	// Maximum number of import jobs to return at once. Use this parameter to paginate
+	// results. If additional import jobs exist beyond the specified limit, the
+	// NextToken element is sent in the response. Use the NextToken value in subsequent
+	// requests to retrieve additional addresses.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListImportJobsPaginator is a paginator for ListImportJobs
+type ListImportJobsPaginator struct {
+	options   ListImportJobsPaginatorOptions
+	client    ListImportJobsAPIClient
+	params    *ListImportJobsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListImportJobsPaginator returns a new ListImportJobsPaginator
+func NewListImportJobsPaginator(client ListImportJobsAPIClient, params *ListImportJobsInput, optFns ...func(*ListImportJobsPaginatorOptions)) *ListImportJobsPaginator {
+	options := ListImportJobsPaginatorOptions{}
+	if params.PageSize != nil {
+		options.Limit = *params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListImportJobsInput{}
+	}
+
+	return &ListImportJobsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListImportJobsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListImportJobs page.
+func (p *ListImportJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListImportJobsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.PageSize = limit
+
+	result, err := p.client.ListImportJobs(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListImportJobs(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -4,6 +4,7 @@ package appconfig
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appconfig/types"
@@ -113,6 +114,89 @@ func addOperationListEnvironmentsMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// ListEnvironmentsAPIClient is a client that implements the ListEnvironments
+// operation.
+type ListEnvironmentsAPIClient interface {
+	ListEnvironments(context.Context, *ListEnvironmentsInput, ...func(*Options)) (*ListEnvironmentsOutput, error)
+}
+
+var _ ListEnvironmentsAPIClient = (*Client)(nil)
+
+// ListEnvironmentsPaginatorOptions is the paginator options for ListEnvironments
+type ListEnvironmentsPaginatorOptions struct {
+	// The maximum number of items to return for this call. The call also returns a
+	// token that you can specify in a subsequent call to get the next set of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListEnvironmentsPaginator is a paginator for ListEnvironments
+type ListEnvironmentsPaginator struct {
+	options   ListEnvironmentsPaginatorOptions
+	client    ListEnvironmentsAPIClient
+	params    *ListEnvironmentsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListEnvironmentsPaginator returns a new ListEnvironmentsPaginator
+func NewListEnvironmentsPaginator(client ListEnvironmentsAPIClient, params *ListEnvironmentsInput, optFns ...func(*ListEnvironmentsPaginatorOptions)) *ListEnvironmentsPaginator {
+	options := ListEnvironmentsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListEnvironmentsInput{}
+	}
+
+	return &ListEnvironmentsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListEnvironmentsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListEnvironments page.
+func (p *ListEnvironmentsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListEnvironmentsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListEnvironments(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListEnvironments(region string) *awsmiddleware.RegisterServiceMetadata {

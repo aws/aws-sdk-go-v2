@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -110,6 +111,93 @@ func addOperationListTargetsForPolicyMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// ListTargetsForPolicyAPIClient is a client that implements the
+// ListTargetsForPolicy operation.
+type ListTargetsForPolicyAPIClient interface {
+	ListTargetsForPolicy(context.Context, *ListTargetsForPolicyInput, ...func(*Options)) (*ListTargetsForPolicyOutput, error)
+}
+
+var _ ListTargetsForPolicyAPIClient = (*Client)(nil)
+
+// ListTargetsForPolicyPaginatorOptions is the paginator options for
+// ListTargetsForPolicy
+type ListTargetsForPolicyPaginatorOptions struct {
+	// The maximum number of results to return at one time.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTargetsForPolicyPaginator is a paginator for ListTargetsForPolicy
+type ListTargetsForPolicyPaginator struct {
+	options   ListTargetsForPolicyPaginatorOptions
+	client    ListTargetsForPolicyAPIClient
+	params    *ListTargetsForPolicyInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTargetsForPolicyPaginator returns a new ListTargetsForPolicyPaginator
+func NewListTargetsForPolicyPaginator(client ListTargetsForPolicyAPIClient, params *ListTargetsForPolicyInput, optFns ...func(*ListTargetsForPolicyPaginatorOptions)) *ListTargetsForPolicyPaginator {
+	options := ListTargetsForPolicyPaginatorOptions{}
+	if params.PageSize != nil {
+		options.Limit = *params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTargetsForPolicyInput{}
+	}
+
+	return &ListTargetsForPolicyPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTargetsForPolicyPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTargetsForPolicy page.
+func (p *ListTargetsForPolicyPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTargetsForPolicyOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.PageSize = limit
+
+	result, err := p.client.ListTargetsForPolicy(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTargetsForPolicy(region string) *awsmiddleware.RegisterServiceMetadata {

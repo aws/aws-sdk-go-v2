@@ -4,6 +4,7 @@ package appstream
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
@@ -122,6 +123,94 @@ func addOperationDescribeImagePermissionsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// DescribeImagePermissionsAPIClient is a client that implements the
+// DescribeImagePermissions operation.
+type DescribeImagePermissionsAPIClient interface {
+	DescribeImagePermissions(context.Context, *DescribeImagePermissionsInput, ...func(*Options)) (*DescribeImagePermissionsOutput, error)
+}
+
+var _ DescribeImagePermissionsAPIClient = (*Client)(nil)
+
+// DescribeImagePermissionsPaginatorOptions is the paginator options for
+// DescribeImagePermissions
+type DescribeImagePermissionsPaginatorOptions struct {
+	// The maximum size of each page of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeImagePermissionsPaginator is a paginator for DescribeImagePermissions
+type DescribeImagePermissionsPaginator struct {
+	options   DescribeImagePermissionsPaginatorOptions
+	client    DescribeImagePermissionsAPIClient
+	params    *DescribeImagePermissionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeImagePermissionsPaginator returns a new
+// DescribeImagePermissionsPaginator
+func NewDescribeImagePermissionsPaginator(client DescribeImagePermissionsAPIClient, params *DescribeImagePermissionsInput, optFns ...func(*DescribeImagePermissionsPaginatorOptions)) *DescribeImagePermissionsPaginator {
+	options := DescribeImagePermissionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeImagePermissionsInput{}
+	}
+
+	return &DescribeImagePermissionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeImagePermissionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeImagePermissions page.
+func (p *DescribeImagePermissionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeImagePermissionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeImagePermissions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeImagePermissions(region string) *awsmiddleware.RegisterServiceMetadata {

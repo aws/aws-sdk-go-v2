@@ -4,6 +4,7 @@ package costexplorer
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
@@ -117,6 +118,91 @@ func addOperationListCostCategoryDefinitionsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	return nil
+}
+
+// ListCostCategoryDefinitionsAPIClient is a client that implements the
+// ListCostCategoryDefinitions operation.
+type ListCostCategoryDefinitionsAPIClient interface {
+	ListCostCategoryDefinitions(context.Context, *ListCostCategoryDefinitionsInput, ...func(*Options)) (*ListCostCategoryDefinitionsOutput, error)
+}
+
+var _ ListCostCategoryDefinitionsAPIClient = (*Client)(nil)
+
+// ListCostCategoryDefinitionsPaginatorOptions is the paginator options for
+// ListCostCategoryDefinitions
+type ListCostCategoryDefinitionsPaginatorOptions struct {
+	// The number of entries a paginated response contains.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListCostCategoryDefinitionsPaginator is a paginator for
+// ListCostCategoryDefinitions
+type ListCostCategoryDefinitionsPaginator struct {
+	options   ListCostCategoryDefinitionsPaginatorOptions
+	client    ListCostCategoryDefinitionsAPIClient
+	params    *ListCostCategoryDefinitionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListCostCategoryDefinitionsPaginator returns a new
+// ListCostCategoryDefinitionsPaginator
+func NewListCostCategoryDefinitionsPaginator(client ListCostCategoryDefinitionsAPIClient, params *ListCostCategoryDefinitionsInput, optFns ...func(*ListCostCategoryDefinitionsPaginatorOptions)) *ListCostCategoryDefinitionsPaginator {
+	options := ListCostCategoryDefinitionsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListCostCategoryDefinitionsInput{}
+	}
+
+	return &ListCostCategoryDefinitionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListCostCategoryDefinitionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListCostCategoryDefinitions page.
+func (p *ListCostCategoryDefinitionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListCostCategoryDefinitionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListCostCategoryDefinitions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListCostCategoryDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {

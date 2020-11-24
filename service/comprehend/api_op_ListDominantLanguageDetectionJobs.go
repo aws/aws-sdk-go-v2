@@ -4,6 +4,7 @@ package comprehend
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
@@ -108,6 +109,95 @@ func addOperationListDominantLanguageDetectionJobsMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
+}
+
+// ListDominantLanguageDetectionJobsAPIClient is a client that implements the
+// ListDominantLanguageDetectionJobs operation.
+type ListDominantLanguageDetectionJobsAPIClient interface {
+	ListDominantLanguageDetectionJobs(context.Context, *ListDominantLanguageDetectionJobsInput, ...func(*Options)) (*ListDominantLanguageDetectionJobsOutput, error)
+}
+
+var _ ListDominantLanguageDetectionJobsAPIClient = (*Client)(nil)
+
+// ListDominantLanguageDetectionJobsPaginatorOptions is the paginator options for
+// ListDominantLanguageDetectionJobs
+type ListDominantLanguageDetectionJobsPaginatorOptions struct {
+	// The maximum number of results to return in each page. The default is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDominantLanguageDetectionJobsPaginator is a paginator for
+// ListDominantLanguageDetectionJobs
+type ListDominantLanguageDetectionJobsPaginator struct {
+	options   ListDominantLanguageDetectionJobsPaginatorOptions
+	client    ListDominantLanguageDetectionJobsAPIClient
+	params    *ListDominantLanguageDetectionJobsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDominantLanguageDetectionJobsPaginator returns a new
+// ListDominantLanguageDetectionJobsPaginator
+func NewListDominantLanguageDetectionJobsPaginator(client ListDominantLanguageDetectionJobsAPIClient, params *ListDominantLanguageDetectionJobsInput, optFns ...func(*ListDominantLanguageDetectionJobsPaginatorOptions)) *ListDominantLanguageDetectionJobsPaginator {
+	options := ListDominantLanguageDetectionJobsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListDominantLanguageDetectionJobsInput{}
+	}
+
+	return &ListDominantLanguageDetectionJobsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDominantLanguageDetectionJobsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDominantLanguageDetectionJobs page.
+func (p *ListDominantLanguageDetectionJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDominantLanguageDetectionJobsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListDominantLanguageDetectionJobs(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDominantLanguageDetectionJobs(region string) *awsmiddleware.RegisterServiceMetadata {

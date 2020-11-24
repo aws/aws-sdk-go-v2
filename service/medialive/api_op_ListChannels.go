@@ -4,6 +4,7 @@ package medialive
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
@@ -105,6 +106,87 @@ func addOperationListChannelsMiddlewares(stack *middleware.Stack, options Option
 		return err
 	}
 	return nil
+}
+
+// ListChannelsAPIClient is a client that implements the ListChannels operation.
+type ListChannelsAPIClient interface {
+	ListChannels(context.Context, *ListChannelsInput, ...func(*Options)) (*ListChannelsOutput, error)
+}
+
+var _ ListChannelsAPIClient = (*Client)(nil)
+
+// ListChannelsPaginatorOptions is the paginator options for ListChannels
+type ListChannelsPaginatorOptions struct {
+	// Placeholder documentation for MaxResults
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListChannelsPaginator is a paginator for ListChannels
+type ListChannelsPaginator struct {
+	options   ListChannelsPaginatorOptions
+	client    ListChannelsAPIClient
+	params    *ListChannelsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListChannelsPaginator returns a new ListChannelsPaginator
+func NewListChannelsPaginator(client ListChannelsAPIClient, params *ListChannelsInput, optFns ...func(*ListChannelsPaginatorOptions)) *ListChannelsPaginator {
+	options := ListChannelsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListChannelsInput{}
+	}
+
+	return &ListChannelsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListChannelsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListChannels page.
+func (p *ListChannelsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListChannelsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListChannels(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListChannels(region string) *awsmiddleware.RegisterServiceMetadata {

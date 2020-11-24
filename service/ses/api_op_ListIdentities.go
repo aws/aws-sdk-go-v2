@@ -4,6 +4,7 @@ package ses
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
@@ -116,6 +117,92 @@ func addOperationListIdentitiesMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+// ListIdentitiesAPIClient is a client that implements the ListIdentities
+// operation.
+type ListIdentitiesAPIClient interface {
+	ListIdentities(context.Context, *ListIdentitiesInput, ...func(*Options)) (*ListIdentitiesOutput, error)
+}
+
+var _ ListIdentitiesAPIClient = (*Client)(nil)
+
+// ListIdentitiesPaginatorOptions is the paginator options for ListIdentities
+type ListIdentitiesPaginatorOptions struct {
+	// The maximum number of identities per page. Possible values are 1-1000 inclusive.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListIdentitiesPaginator is a paginator for ListIdentities
+type ListIdentitiesPaginator struct {
+	options   ListIdentitiesPaginatorOptions
+	client    ListIdentitiesAPIClient
+	params    *ListIdentitiesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListIdentitiesPaginator returns a new ListIdentitiesPaginator
+func NewListIdentitiesPaginator(client ListIdentitiesAPIClient, params *ListIdentitiesInput, optFns ...func(*ListIdentitiesPaginatorOptions)) *ListIdentitiesPaginator {
+	options := ListIdentitiesPaginatorOptions{}
+	if params.MaxItems != nil {
+		options.Limit = *params.MaxItems
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListIdentitiesInput{}
+	}
+
+	return &ListIdentitiesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListIdentitiesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListIdentities page.
+func (p *ListIdentitiesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListIdentitiesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxItems = limit
+
+	result, err := p.client.ListIdentities(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListIdentities(region string) *awsmiddleware.RegisterServiceMetadata {

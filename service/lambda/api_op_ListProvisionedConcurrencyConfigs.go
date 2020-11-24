@@ -4,6 +4,7 @@ package lambda
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
@@ -124,6 +125,95 @@ func addOperationListProvisionedConcurrencyConfigsMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
+}
+
+// ListProvisionedConcurrencyConfigsAPIClient is a client that implements the
+// ListProvisionedConcurrencyConfigs operation.
+type ListProvisionedConcurrencyConfigsAPIClient interface {
+	ListProvisionedConcurrencyConfigs(context.Context, *ListProvisionedConcurrencyConfigsInput, ...func(*Options)) (*ListProvisionedConcurrencyConfigsOutput, error)
+}
+
+var _ ListProvisionedConcurrencyConfigsAPIClient = (*Client)(nil)
+
+// ListProvisionedConcurrencyConfigsPaginatorOptions is the paginator options for
+// ListProvisionedConcurrencyConfigs
+type ListProvisionedConcurrencyConfigsPaginatorOptions struct {
+	// Specify a number to limit the number of configurations returned.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListProvisionedConcurrencyConfigsPaginator is a paginator for
+// ListProvisionedConcurrencyConfigs
+type ListProvisionedConcurrencyConfigsPaginator struct {
+	options   ListProvisionedConcurrencyConfigsPaginatorOptions
+	client    ListProvisionedConcurrencyConfigsAPIClient
+	params    *ListProvisionedConcurrencyConfigsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListProvisionedConcurrencyConfigsPaginator returns a new
+// ListProvisionedConcurrencyConfigsPaginator
+func NewListProvisionedConcurrencyConfigsPaginator(client ListProvisionedConcurrencyConfigsAPIClient, params *ListProvisionedConcurrencyConfigsInput, optFns ...func(*ListProvisionedConcurrencyConfigsPaginatorOptions)) *ListProvisionedConcurrencyConfigsPaginator {
+	options := ListProvisionedConcurrencyConfigsPaginatorOptions{}
+	if params.MaxItems != nil {
+		options.Limit = *params.MaxItems
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListProvisionedConcurrencyConfigsInput{}
+	}
+
+	return &ListProvisionedConcurrencyConfigsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListProvisionedConcurrencyConfigsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListProvisionedConcurrencyConfigs page.
+func (p *ListProvisionedConcurrencyConfigsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListProvisionedConcurrencyConfigsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxItems = limit
+
+	result, err := p.client.ListProvisionedConcurrencyConfigs(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListProvisionedConcurrencyConfigs(region string) *awsmiddleware.RegisterServiceMetadata {

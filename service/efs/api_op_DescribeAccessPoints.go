@@ -4,6 +4,7 @@ package efs
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/efs/types"
@@ -120,6 +121,95 @@ func addOperationDescribeAccessPointsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// DescribeAccessPointsAPIClient is a client that implements the
+// DescribeAccessPoints operation.
+type DescribeAccessPointsAPIClient interface {
+	DescribeAccessPoints(context.Context, *DescribeAccessPointsInput, ...func(*Options)) (*DescribeAccessPointsOutput, error)
+}
+
+var _ DescribeAccessPointsAPIClient = (*Client)(nil)
+
+// DescribeAccessPointsPaginatorOptions is the paginator options for
+// DescribeAccessPoints
+type DescribeAccessPointsPaginatorOptions struct {
+	// (Optional) When retrieving all access points for a file system, you can
+	// optionally specify the MaxItems parameter to limit the number of objects
+	// returned in a response. The default value is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeAccessPointsPaginator is a paginator for DescribeAccessPoints
+type DescribeAccessPointsPaginator struct {
+	options   DescribeAccessPointsPaginatorOptions
+	client    DescribeAccessPointsAPIClient
+	params    *DescribeAccessPointsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeAccessPointsPaginator returns a new DescribeAccessPointsPaginator
+func NewDescribeAccessPointsPaginator(client DescribeAccessPointsAPIClient, params *DescribeAccessPointsInput, optFns ...func(*DescribeAccessPointsPaginatorOptions)) *DescribeAccessPointsPaginator {
+	options := DescribeAccessPointsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeAccessPointsInput{}
+	}
+
+	return &DescribeAccessPointsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeAccessPointsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeAccessPoints page.
+func (p *DescribeAccessPointsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeAccessPointsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeAccessPoints(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeAccessPoints(region string) *awsmiddleware.RegisterServiceMetadata {

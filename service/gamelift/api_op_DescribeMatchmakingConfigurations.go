@@ -4,6 +4,7 @@ package gamelift
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
@@ -149,6 +150,96 @@ func addOperationDescribeMatchmakingConfigurationsMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
+}
+
+// DescribeMatchmakingConfigurationsAPIClient is a client that implements the
+// DescribeMatchmakingConfigurations operation.
+type DescribeMatchmakingConfigurationsAPIClient interface {
+	DescribeMatchmakingConfigurations(context.Context, *DescribeMatchmakingConfigurationsInput, ...func(*Options)) (*DescribeMatchmakingConfigurationsOutput, error)
+}
+
+var _ DescribeMatchmakingConfigurationsAPIClient = (*Client)(nil)
+
+// DescribeMatchmakingConfigurationsPaginatorOptions is the paginator options for
+// DescribeMatchmakingConfigurations
+type DescribeMatchmakingConfigurationsPaginatorOptions struct {
+	// The maximum number of results to return. Use this parameter with NextToken to
+	// get results as a set of sequential pages. This parameter is limited to 10.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeMatchmakingConfigurationsPaginator is a paginator for
+// DescribeMatchmakingConfigurations
+type DescribeMatchmakingConfigurationsPaginator struct {
+	options   DescribeMatchmakingConfigurationsPaginatorOptions
+	client    DescribeMatchmakingConfigurationsAPIClient
+	params    *DescribeMatchmakingConfigurationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeMatchmakingConfigurationsPaginator returns a new
+// DescribeMatchmakingConfigurationsPaginator
+func NewDescribeMatchmakingConfigurationsPaginator(client DescribeMatchmakingConfigurationsAPIClient, params *DescribeMatchmakingConfigurationsInput, optFns ...func(*DescribeMatchmakingConfigurationsPaginatorOptions)) *DescribeMatchmakingConfigurationsPaginator {
+	options := DescribeMatchmakingConfigurationsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeMatchmakingConfigurationsInput{}
+	}
+
+	return &DescribeMatchmakingConfigurationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeMatchmakingConfigurationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeMatchmakingConfigurations page.
+func (p *DescribeMatchmakingConfigurationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeMatchmakingConfigurationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeMatchmakingConfigurations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeMatchmakingConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {

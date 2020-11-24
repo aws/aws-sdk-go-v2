@@ -4,6 +4,7 @@ package qldb
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qldb/types"
@@ -117,6 +118,92 @@ func addOperationListLedgersMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+// ListLedgersAPIClient is a client that implements the ListLedgers operation.
+type ListLedgersAPIClient interface {
+	ListLedgers(context.Context, *ListLedgersInput, ...func(*Options)) (*ListLedgersOutput, error)
+}
+
+var _ ListLedgersAPIClient = (*Client)(nil)
+
+// ListLedgersPaginatorOptions is the paginator options for ListLedgers
+type ListLedgersPaginatorOptions struct {
+	// The maximum number of results to return in a single ListLedgers request. (The
+	// actual number of results returned might be fewer.)
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListLedgersPaginator is a paginator for ListLedgers
+type ListLedgersPaginator struct {
+	options   ListLedgersPaginatorOptions
+	client    ListLedgersAPIClient
+	params    *ListLedgersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListLedgersPaginator returns a new ListLedgersPaginator
+func NewListLedgersPaginator(client ListLedgersAPIClient, params *ListLedgersInput, optFns ...func(*ListLedgersPaginatorOptions)) *ListLedgersPaginator {
+	options := ListLedgersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListLedgersInput{}
+	}
+
+	return &ListLedgersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListLedgersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListLedgers page.
+func (p *ListLedgersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListLedgersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListLedgers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListLedgers(region string) *awsmiddleware.RegisterServiceMetadata {

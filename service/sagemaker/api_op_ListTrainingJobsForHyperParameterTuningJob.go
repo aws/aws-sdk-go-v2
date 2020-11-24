@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
@@ -130,6 +131,95 @@ func addOperationListTrainingJobsForHyperParameterTuningJobMiddlewares(stack *mi
 		return err
 	}
 	return nil
+}
+
+// ListTrainingJobsForHyperParameterTuningJobAPIClient is a client that implements
+// the ListTrainingJobsForHyperParameterTuningJob operation.
+type ListTrainingJobsForHyperParameterTuningJobAPIClient interface {
+	ListTrainingJobsForHyperParameterTuningJob(context.Context, *ListTrainingJobsForHyperParameterTuningJobInput, ...func(*Options)) (*ListTrainingJobsForHyperParameterTuningJobOutput, error)
+}
+
+var _ ListTrainingJobsForHyperParameterTuningJobAPIClient = (*Client)(nil)
+
+// ListTrainingJobsForHyperParameterTuningJobPaginatorOptions is the paginator
+// options for ListTrainingJobsForHyperParameterTuningJob
+type ListTrainingJobsForHyperParameterTuningJobPaginatorOptions struct {
+	// The maximum number of training jobs to return. The default value is 10.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTrainingJobsForHyperParameterTuningJobPaginator is a paginator for
+// ListTrainingJobsForHyperParameterTuningJob
+type ListTrainingJobsForHyperParameterTuningJobPaginator struct {
+	options   ListTrainingJobsForHyperParameterTuningJobPaginatorOptions
+	client    ListTrainingJobsForHyperParameterTuningJobAPIClient
+	params    *ListTrainingJobsForHyperParameterTuningJobInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTrainingJobsForHyperParameterTuningJobPaginator returns a new
+// ListTrainingJobsForHyperParameterTuningJobPaginator
+func NewListTrainingJobsForHyperParameterTuningJobPaginator(client ListTrainingJobsForHyperParameterTuningJobAPIClient, params *ListTrainingJobsForHyperParameterTuningJobInput, optFns ...func(*ListTrainingJobsForHyperParameterTuningJobPaginatorOptions)) *ListTrainingJobsForHyperParameterTuningJobPaginator {
+	options := ListTrainingJobsForHyperParameterTuningJobPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTrainingJobsForHyperParameterTuningJobInput{}
+	}
+
+	return &ListTrainingJobsForHyperParameterTuningJobPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTrainingJobsForHyperParameterTuningJobPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTrainingJobsForHyperParameterTuningJob page.
+func (p *ListTrainingJobsForHyperParameterTuningJobPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTrainingJobsForHyperParameterTuningJobOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListTrainingJobsForHyperParameterTuningJob(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTrainingJobsForHyperParameterTuningJob(region string) *awsmiddleware.RegisterServiceMetadata {

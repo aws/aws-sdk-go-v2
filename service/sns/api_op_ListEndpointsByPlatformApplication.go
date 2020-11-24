@@ -4,6 +4,7 @@ package sns
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
@@ -122,6 +123,83 @@ func addOperationListEndpointsByPlatformApplicationMiddlewares(stack *middleware
 		return err
 	}
 	return nil
+}
+
+// ListEndpointsByPlatformApplicationAPIClient is a client that implements the
+// ListEndpointsByPlatformApplication operation.
+type ListEndpointsByPlatformApplicationAPIClient interface {
+	ListEndpointsByPlatformApplication(context.Context, *ListEndpointsByPlatformApplicationInput, ...func(*Options)) (*ListEndpointsByPlatformApplicationOutput, error)
+}
+
+var _ ListEndpointsByPlatformApplicationAPIClient = (*Client)(nil)
+
+// ListEndpointsByPlatformApplicationPaginatorOptions is the paginator options for
+// ListEndpointsByPlatformApplication
+type ListEndpointsByPlatformApplicationPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListEndpointsByPlatformApplicationPaginator is a paginator for
+// ListEndpointsByPlatformApplication
+type ListEndpointsByPlatformApplicationPaginator struct {
+	options   ListEndpointsByPlatformApplicationPaginatorOptions
+	client    ListEndpointsByPlatformApplicationAPIClient
+	params    *ListEndpointsByPlatformApplicationInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListEndpointsByPlatformApplicationPaginator returns a new
+// ListEndpointsByPlatformApplicationPaginator
+func NewListEndpointsByPlatformApplicationPaginator(client ListEndpointsByPlatformApplicationAPIClient, params *ListEndpointsByPlatformApplicationInput, optFns ...func(*ListEndpointsByPlatformApplicationPaginatorOptions)) *ListEndpointsByPlatformApplicationPaginator {
+	options := ListEndpointsByPlatformApplicationPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListEndpointsByPlatformApplicationInput{}
+	}
+
+	return &ListEndpointsByPlatformApplicationPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListEndpointsByPlatformApplicationPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListEndpointsByPlatformApplication page.
+func (p *ListEndpointsByPlatformApplicationPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListEndpointsByPlatformApplicationOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListEndpointsByPlatformApplication(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListEndpointsByPlatformApplication(region string) *awsmiddleware.RegisterServiceMetadata {

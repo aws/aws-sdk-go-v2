@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
@@ -115,6 +116,94 @@ func addOperationListJobExecutionsForJobMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// ListJobExecutionsForJobAPIClient is a client that implements the
+// ListJobExecutionsForJob operation.
+type ListJobExecutionsForJobAPIClient interface {
+	ListJobExecutionsForJob(context.Context, *ListJobExecutionsForJobInput, ...func(*Options)) (*ListJobExecutionsForJobOutput, error)
+}
+
+var _ ListJobExecutionsForJobAPIClient = (*Client)(nil)
+
+// ListJobExecutionsForJobPaginatorOptions is the paginator options for
+// ListJobExecutionsForJob
+type ListJobExecutionsForJobPaginatorOptions struct {
+	// The maximum number of results to be returned per request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListJobExecutionsForJobPaginator is a paginator for ListJobExecutionsForJob
+type ListJobExecutionsForJobPaginator struct {
+	options   ListJobExecutionsForJobPaginatorOptions
+	client    ListJobExecutionsForJobAPIClient
+	params    *ListJobExecutionsForJobInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListJobExecutionsForJobPaginator returns a new
+// ListJobExecutionsForJobPaginator
+func NewListJobExecutionsForJobPaginator(client ListJobExecutionsForJobAPIClient, params *ListJobExecutionsForJobInput, optFns ...func(*ListJobExecutionsForJobPaginatorOptions)) *ListJobExecutionsForJobPaginator {
+	options := ListJobExecutionsForJobPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListJobExecutionsForJobInput{}
+	}
+
+	return &ListJobExecutionsForJobPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListJobExecutionsForJobPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListJobExecutionsForJob page.
+func (p *ListJobExecutionsForJobPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListJobExecutionsForJobOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListJobExecutionsForJob(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListJobExecutionsForJob(region string) *awsmiddleware.RegisterServiceMetadata {

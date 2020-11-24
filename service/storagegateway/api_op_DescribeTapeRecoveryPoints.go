@@ -4,6 +4,7 @@ package storagegateway
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
@@ -128,6 +129,96 @@ func addOperationDescribeTapeRecoveryPointsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+// DescribeTapeRecoveryPointsAPIClient is a client that implements the
+// DescribeTapeRecoveryPoints operation.
+type DescribeTapeRecoveryPointsAPIClient interface {
+	DescribeTapeRecoveryPoints(context.Context, *DescribeTapeRecoveryPointsInput, ...func(*Options)) (*DescribeTapeRecoveryPointsOutput, error)
+}
+
+var _ DescribeTapeRecoveryPointsAPIClient = (*Client)(nil)
+
+// DescribeTapeRecoveryPointsPaginatorOptions is the paginator options for
+// DescribeTapeRecoveryPoints
+type DescribeTapeRecoveryPointsPaginatorOptions struct {
+	// Specifies that the number of virtual tape recovery points that are described be
+	// limited to the specified number.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeTapeRecoveryPointsPaginator is a paginator for
+// DescribeTapeRecoveryPoints
+type DescribeTapeRecoveryPointsPaginator struct {
+	options   DescribeTapeRecoveryPointsPaginatorOptions
+	client    DescribeTapeRecoveryPointsAPIClient
+	params    *DescribeTapeRecoveryPointsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeTapeRecoveryPointsPaginator returns a new
+// DescribeTapeRecoveryPointsPaginator
+func NewDescribeTapeRecoveryPointsPaginator(client DescribeTapeRecoveryPointsAPIClient, params *DescribeTapeRecoveryPointsInput, optFns ...func(*DescribeTapeRecoveryPointsPaginatorOptions)) *DescribeTapeRecoveryPointsPaginator {
+	options := DescribeTapeRecoveryPointsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeTapeRecoveryPointsInput{}
+	}
+
+	return &DescribeTapeRecoveryPointsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeTapeRecoveryPointsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeTapeRecoveryPoints page.
+func (p *DescribeTapeRecoveryPointsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeTapeRecoveryPointsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeTapeRecoveryPoints(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeTapeRecoveryPoints(region string) *awsmiddleware.RegisterServiceMetadata {

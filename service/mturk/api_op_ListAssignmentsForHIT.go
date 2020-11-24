@@ -4,6 +4,7 @@ package mturk
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
@@ -132,6 +133,92 @@ func addOperationListAssignmentsForHITMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// ListAssignmentsForHITAPIClient is a client that implements the
+// ListAssignmentsForHIT operation.
+type ListAssignmentsForHITAPIClient interface {
+	ListAssignmentsForHIT(context.Context, *ListAssignmentsForHITInput, ...func(*Options)) (*ListAssignmentsForHITOutput, error)
+}
+
+var _ ListAssignmentsForHITAPIClient = (*Client)(nil)
+
+// ListAssignmentsForHITPaginatorOptions is the paginator options for
+// ListAssignmentsForHIT
+type ListAssignmentsForHITPaginatorOptions struct {
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAssignmentsForHITPaginator is a paginator for ListAssignmentsForHIT
+type ListAssignmentsForHITPaginator struct {
+	options   ListAssignmentsForHITPaginatorOptions
+	client    ListAssignmentsForHITAPIClient
+	params    *ListAssignmentsForHITInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAssignmentsForHITPaginator returns a new ListAssignmentsForHITPaginator
+func NewListAssignmentsForHITPaginator(client ListAssignmentsForHITAPIClient, params *ListAssignmentsForHITInput, optFns ...func(*ListAssignmentsForHITPaginatorOptions)) *ListAssignmentsForHITPaginator {
+	options := ListAssignmentsForHITPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAssignmentsForHITInput{}
+	}
+
+	return &ListAssignmentsForHITPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAssignmentsForHITPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAssignmentsForHIT page.
+func (p *ListAssignmentsForHITPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAssignmentsForHITOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListAssignmentsForHIT(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAssignmentsForHIT(region string) *awsmiddleware.RegisterServiceMetadata {

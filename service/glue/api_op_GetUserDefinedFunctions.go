@@ -4,6 +4,7 @@ package glue
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
@@ -121,6 +122,94 @@ func addOperationGetUserDefinedFunctionsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// GetUserDefinedFunctionsAPIClient is a client that implements the
+// GetUserDefinedFunctions operation.
+type GetUserDefinedFunctionsAPIClient interface {
+	GetUserDefinedFunctions(context.Context, *GetUserDefinedFunctionsInput, ...func(*Options)) (*GetUserDefinedFunctionsOutput, error)
+}
+
+var _ GetUserDefinedFunctionsAPIClient = (*Client)(nil)
+
+// GetUserDefinedFunctionsPaginatorOptions is the paginator options for
+// GetUserDefinedFunctions
+type GetUserDefinedFunctionsPaginatorOptions struct {
+	// The maximum number of functions to return in one response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetUserDefinedFunctionsPaginator is a paginator for GetUserDefinedFunctions
+type GetUserDefinedFunctionsPaginator struct {
+	options   GetUserDefinedFunctionsPaginatorOptions
+	client    GetUserDefinedFunctionsAPIClient
+	params    *GetUserDefinedFunctionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetUserDefinedFunctionsPaginator returns a new
+// GetUserDefinedFunctionsPaginator
+func NewGetUserDefinedFunctionsPaginator(client GetUserDefinedFunctionsAPIClient, params *GetUserDefinedFunctionsInput, optFns ...func(*GetUserDefinedFunctionsPaginatorOptions)) *GetUserDefinedFunctionsPaginator {
+	options := GetUserDefinedFunctionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetUserDefinedFunctionsInput{}
+	}
+
+	return &GetUserDefinedFunctionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetUserDefinedFunctionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetUserDefinedFunctions page.
+func (p *GetUserDefinedFunctionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetUserDefinedFunctionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetUserDefinedFunctions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetUserDefinedFunctions(region string) *awsmiddleware.RegisterServiceMetadata {

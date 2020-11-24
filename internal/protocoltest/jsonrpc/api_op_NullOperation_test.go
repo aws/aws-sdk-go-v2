@@ -52,8 +52,8 @@ func TestClient_NullOperation_awsAwsjson11Serialize(t *testing.T) {
 		// Serializes null values in maps
 		"AwsJson11MapsSerializeNullValues": {
 			Params: &NullOperationInput{
-				StringMap: map[string]string{
-					"foo": func() (v string) { return v }(),
+				SparseStringMap: map[string]*string{
+					"foo": nil,
 				},
 			},
 			ExpectMethod:  "POST",
@@ -65,7 +65,7 @@ func TestClient_NullOperation_awsAwsjson11Serialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
-			    "stringMap": {
+			    "sparseStringMap": {
 			        "foo": null
 			    }
 			}`))
@@ -74,8 +74,8 @@ func TestClient_NullOperation_awsAwsjson11Serialize(t *testing.T) {
 		// Serializes null values in lists
 		"AwsJson11ListsSerializeNull": {
 			Params: &NullOperationInput{
-				StringList: []string{
-					func() (v string) { return v }(),
+				SparseStringList: []*string{
+					nil,
 				},
 			},
 			ExpectMethod:  "POST",
@@ -87,7 +87,7 @@ func TestClient_NullOperation_awsAwsjson11Serialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
-			    "stringList": [
+			    "sparseStringList": [
 			        null
 			    ]
 			}`))
@@ -195,13 +195,13 @@ func TestClient_NullOperation_awsAwsjson11Deserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "stringMap": {
+			    "sparseStringMap": {
 			        "foo": null
 			    }
 			}`),
 			ExpectResult: &NullOperationOutput{
-				StringMap: map[string]string{
-					"foo": func() (v string) { return v }(),
+				SparseStringMap: map[string]*string{
+					"foo": nil,
 				},
 			},
 		},
@@ -213,13 +213,13 @@ func TestClient_NullOperation_awsAwsjson11Deserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "stringList": [
+			    "sparseStringList": [
 			        null
 			    ]
 			}`),
 			ExpectResult: &NullOperationOutput{
-				StringList: []string{
-					func() (v string) { return v }(),
+				SparseStringList: []*string{
+					nil,
 				},
 			},
 		},

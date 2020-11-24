@@ -4,6 +4,7 @@ package elasticsearchservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -114,6 +115,91 @@ func addOperationListElasticsearchVersionsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+// ListElasticsearchVersionsAPIClient is a client that implements the
+// ListElasticsearchVersions operation.
+type ListElasticsearchVersionsAPIClient interface {
+	ListElasticsearchVersions(context.Context, *ListElasticsearchVersionsInput, ...func(*Options)) (*ListElasticsearchVersionsOutput, error)
+}
+
+var _ ListElasticsearchVersionsAPIClient = (*Client)(nil)
+
+// ListElasticsearchVersionsPaginatorOptions is the paginator options for
+// ListElasticsearchVersions
+type ListElasticsearchVersionsPaginatorOptions struct {
+	// Set this value to limit the number of results returned. Value provided must be
+	// greater than 10 else it wont be honored.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListElasticsearchVersionsPaginator is a paginator for ListElasticsearchVersions
+type ListElasticsearchVersionsPaginator struct {
+	options   ListElasticsearchVersionsPaginatorOptions
+	client    ListElasticsearchVersionsAPIClient
+	params    *ListElasticsearchVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListElasticsearchVersionsPaginator returns a new
+// ListElasticsearchVersionsPaginator
+func NewListElasticsearchVersionsPaginator(client ListElasticsearchVersionsAPIClient, params *ListElasticsearchVersionsInput, optFns ...func(*ListElasticsearchVersionsPaginatorOptions)) *ListElasticsearchVersionsPaginator {
+	options := ListElasticsearchVersionsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListElasticsearchVersionsInput{}
+	}
+
+	return &ListElasticsearchVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListElasticsearchVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListElasticsearchVersions page.
+func (p *ListElasticsearchVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListElasticsearchVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListElasticsearchVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListElasticsearchVersions(region string) *awsmiddleware.RegisterServiceMetadata {

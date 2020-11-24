@@ -4,6 +4,7 @@ package clouddirectory
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
@@ -127,6 +128,94 @@ func addOperationListObjectParentPathsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// ListObjectParentPathsAPIClient is a client that implements the
+// ListObjectParentPaths operation.
+type ListObjectParentPathsAPIClient interface {
+	ListObjectParentPaths(context.Context, *ListObjectParentPathsInput, ...func(*Options)) (*ListObjectParentPathsOutput, error)
+}
+
+var _ ListObjectParentPathsAPIClient = (*Client)(nil)
+
+// ListObjectParentPathsPaginatorOptions is the paginator options for
+// ListObjectParentPaths
+type ListObjectParentPathsPaginatorOptions struct {
+	// The maximum number of items to be retrieved in a single call. This is an
+	// approximate number.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListObjectParentPathsPaginator is a paginator for ListObjectParentPaths
+type ListObjectParentPathsPaginator struct {
+	options   ListObjectParentPathsPaginatorOptions
+	client    ListObjectParentPathsAPIClient
+	params    *ListObjectParentPathsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListObjectParentPathsPaginator returns a new ListObjectParentPathsPaginator
+func NewListObjectParentPathsPaginator(client ListObjectParentPathsAPIClient, params *ListObjectParentPathsInput, optFns ...func(*ListObjectParentPathsPaginatorOptions)) *ListObjectParentPathsPaginator {
+	options := ListObjectParentPathsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListObjectParentPathsInput{}
+	}
+
+	return &ListObjectParentPathsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListObjectParentPathsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListObjectParentPaths page.
+func (p *ListObjectParentPathsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListObjectParentPathsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListObjectParentPaths(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListObjectParentPaths(region string) *awsmiddleware.RegisterServiceMetadata {

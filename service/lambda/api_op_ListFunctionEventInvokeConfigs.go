@@ -4,6 +4,7 @@ package lambda
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
@@ -126,6 +127,95 @@ func addOperationListFunctionEventInvokeConfigsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+// ListFunctionEventInvokeConfigsAPIClient is a client that implements the
+// ListFunctionEventInvokeConfigs operation.
+type ListFunctionEventInvokeConfigsAPIClient interface {
+	ListFunctionEventInvokeConfigs(context.Context, *ListFunctionEventInvokeConfigsInput, ...func(*Options)) (*ListFunctionEventInvokeConfigsOutput, error)
+}
+
+var _ ListFunctionEventInvokeConfigsAPIClient = (*Client)(nil)
+
+// ListFunctionEventInvokeConfigsPaginatorOptions is the paginator options for
+// ListFunctionEventInvokeConfigs
+type ListFunctionEventInvokeConfigsPaginatorOptions struct {
+	// The maximum number of configurations to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListFunctionEventInvokeConfigsPaginator is a paginator for
+// ListFunctionEventInvokeConfigs
+type ListFunctionEventInvokeConfigsPaginator struct {
+	options   ListFunctionEventInvokeConfigsPaginatorOptions
+	client    ListFunctionEventInvokeConfigsAPIClient
+	params    *ListFunctionEventInvokeConfigsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListFunctionEventInvokeConfigsPaginator returns a new
+// ListFunctionEventInvokeConfigsPaginator
+func NewListFunctionEventInvokeConfigsPaginator(client ListFunctionEventInvokeConfigsAPIClient, params *ListFunctionEventInvokeConfigsInput, optFns ...func(*ListFunctionEventInvokeConfigsPaginatorOptions)) *ListFunctionEventInvokeConfigsPaginator {
+	options := ListFunctionEventInvokeConfigsPaginatorOptions{}
+	if params.MaxItems != nil {
+		options.Limit = *params.MaxItems
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListFunctionEventInvokeConfigsInput{}
+	}
+
+	return &ListFunctionEventInvokeConfigsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListFunctionEventInvokeConfigsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListFunctionEventInvokeConfigs page.
+func (p *ListFunctionEventInvokeConfigsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListFunctionEventInvokeConfigsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxItems = limit
+
+	result, err := p.client.ListFunctionEventInvokeConfigs(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListFunctionEventInvokeConfigs(region string) *awsmiddleware.RegisterServiceMetadata {

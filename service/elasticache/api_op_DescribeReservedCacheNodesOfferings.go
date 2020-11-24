@@ -4,6 +4,7 @@ package elasticache
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
@@ -198,6 +199,98 @@ func addOperationDescribeReservedCacheNodesOfferingsMiddlewares(stack *middlewar
 		return err
 	}
 	return nil
+}
+
+// DescribeReservedCacheNodesOfferingsAPIClient is a client that implements the
+// DescribeReservedCacheNodesOfferings operation.
+type DescribeReservedCacheNodesOfferingsAPIClient interface {
+	DescribeReservedCacheNodesOfferings(context.Context, *DescribeReservedCacheNodesOfferingsInput, ...func(*Options)) (*DescribeReservedCacheNodesOfferingsOutput, error)
+}
+
+var _ DescribeReservedCacheNodesOfferingsAPIClient = (*Client)(nil)
+
+// DescribeReservedCacheNodesOfferingsPaginatorOptions is the paginator options for
+// DescribeReservedCacheNodesOfferings
+type DescribeReservedCacheNodesOfferingsPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a marker is included in the response so
+	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
+	// 20; maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeReservedCacheNodesOfferingsPaginator is a paginator for
+// DescribeReservedCacheNodesOfferings
+type DescribeReservedCacheNodesOfferingsPaginator struct {
+	options   DescribeReservedCacheNodesOfferingsPaginatorOptions
+	client    DescribeReservedCacheNodesOfferingsAPIClient
+	params    *DescribeReservedCacheNodesOfferingsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeReservedCacheNodesOfferingsPaginator returns a new
+// DescribeReservedCacheNodesOfferingsPaginator
+func NewDescribeReservedCacheNodesOfferingsPaginator(client DescribeReservedCacheNodesOfferingsAPIClient, params *DescribeReservedCacheNodesOfferingsInput, optFns ...func(*DescribeReservedCacheNodesOfferingsPaginatorOptions)) *DescribeReservedCacheNodesOfferingsPaginator {
+	options := DescribeReservedCacheNodesOfferingsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeReservedCacheNodesOfferingsInput{}
+	}
+
+	return &DescribeReservedCacheNodesOfferingsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeReservedCacheNodesOfferingsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeReservedCacheNodesOfferings page.
+func (p *DescribeReservedCacheNodesOfferingsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeReservedCacheNodesOfferingsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeReservedCacheNodesOfferings(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeReservedCacheNodesOfferings(region string) *awsmiddleware.RegisterServiceMetadata {

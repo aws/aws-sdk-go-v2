@@ -4,6 +4,7 @@ package servicecatalog
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
@@ -126,6 +127,91 @@ func addOperationListAcceptedPortfolioSharesMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	return nil
+}
+
+// ListAcceptedPortfolioSharesAPIClient is a client that implements the
+// ListAcceptedPortfolioShares operation.
+type ListAcceptedPortfolioSharesAPIClient interface {
+	ListAcceptedPortfolioShares(context.Context, *ListAcceptedPortfolioSharesInput, ...func(*Options)) (*ListAcceptedPortfolioSharesOutput, error)
+}
+
+var _ ListAcceptedPortfolioSharesAPIClient = (*Client)(nil)
+
+// ListAcceptedPortfolioSharesPaginatorOptions is the paginator options for
+// ListAcceptedPortfolioShares
+type ListAcceptedPortfolioSharesPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAcceptedPortfolioSharesPaginator is a paginator for
+// ListAcceptedPortfolioShares
+type ListAcceptedPortfolioSharesPaginator struct {
+	options   ListAcceptedPortfolioSharesPaginatorOptions
+	client    ListAcceptedPortfolioSharesAPIClient
+	params    *ListAcceptedPortfolioSharesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAcceptedPortfolioSharesPaginator returns a new
+// ListAcceptedPortfolioSharesPaginator
+func NewListAcceptedPortfolioSharesPaginator(client ListAcceptedPortfolioSharesAPIClient, params *ListAcceptedPortfolioSharesInput, optFns ...func(*ListAcceptedPortfolioSharesPaginatorOptions)) *ListAcceptedPortfolioSharesPaginator {
+	options := ListAcceptedPortfolioSharesPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAcceptedPortfolioSharesInput{}
+	}
+
+	return &ListAcceptedPortfolioSharesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAcceptedPortfolioSharesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAcceptedPortfolioShares page.
+func (p *ListAcceptedPortfolioSharesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAcceptedPortfolioSharesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	result, err := p.client.ListAcceptedPortfolioShares(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAcceptedPortfolioShares(region string) *awsmiddleware.RegisterServiceMetadata {

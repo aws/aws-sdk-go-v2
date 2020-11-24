@@ -4,6 +4,7 @@ package lambda
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
@@ -127,6 +128,93 @@ func addOperationListVersionsByFunctionMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	return nil
+}
+
+// ListVersionsByFunctionAPIClient is a client that implements the
+// ListVersionsByFunction operation.
+type ListVersionsByFunctionAPIClient interface {
+	ListVersionsByFunction(context.Context, *ListVersionsByFunctionInput, ...func(*Options)) (*ListVersionsByFunctionOutput, error)
+}
+
+var _ ListVersionsByFunctionAPIClient = (*Client)(nil)
+
+// ListVersionsByFunctionPaginatorOptions is the paginator options for
+// ListVersionsByFunction
+type ListVersionsByFunctionPaginatorOptions struct {
+	// The maximum number of versions to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListVersionsByFunctionPaginator is a paginator for ListVersionsByFunction
+type ListVersionsByFunctionPaginator struct {
+	options   ListVersionsByFunctionPaginatorOptions
+	client    ListVersionsByFunctionAPIClient
+	params    *ListVersionsByFunctionInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListVersionsByFunctionPaginator returns a new ListVersionsByFunctionPaginator
+func NewListVersionsByFunctionPaginator(client ListVersionsByFunctionAPIClient, params *ListVersionsByFunctionInput, optFns ...func(*ListVersionsByFunctionPaginatorOptions)) *ListVersionsByFunctionPaginator {
+	options := ListVersionsByFunctionPaginatorOptions{}
+	if params.MaxItems != nil {
+		options.Limit = *params.MaxItems
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListVersionsByFunctionInput{}
+	}
+
+	return &ListVersionsByFunctionPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListVersionsByFunctionPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListVersionsByFunction page.
+func (p *ListVersionsByFunctionPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListVersionsByFunctionOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxItems = limit
+
+	result, err := p.client.ListVersionsByFunction(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListVersionsByFunction(region string) *awsmiddleware.RegisterServiceMetadata {

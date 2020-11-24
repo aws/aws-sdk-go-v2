@@ -4,6 +4,7 @@ package iotthingsgraph
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
@@ -112,6 +113,93 @@ func addOperationSearchFlowTemplatesMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// SearchFlowTemplatesAPIClient is a client that implements the SearchFlowTemplates
+// operation.
+type SearchFlowTemplatesAPIClient interface {
+	SearchFlowTemplates(context.Context, *SearchFlowTemplatesInput, ...func(*Options)) (*SearchFlowTemplatesOutput, error)
+}
+
+var _ SearchFlowTemplatesAPIClient = (*Client)(nil)
+
+// SearchFlowTemplatesPaginatorOptions is the paginator options for
+// SearchFlowTemplates
+type SearchFlowTemplatesPaginatorOptions struct {
+	// The maximum number of results to return in the response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// SearchFlowTemplatesPaginator is a paginator for SearchFlowTemplates
+type SearchFlowTemplatesPaginator struct {
+	options   SearchFlowTemplatesPaginatorOptions
+	client    SearchFlowTemplatesAPIClient
+	params    *SearchFlowTemplatesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewSearchFlowTemplatesPaginator returns a new SearchFlowTemplatesPaginator
+func NewSearchFlowTemplatesPaginator(client SearchFlowTemplatesAPIClient, params *SearchFlowTemplatesInput, optFns ...func(*SearchFlowTemplatesPaginatorOptions)) *SearchFlowTemplatesPaginator {
+	options := SearchFlowTemplatesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &SearchFlowTemplatesInput{}
+	}
+
+	return &SearchFlowTemplatesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *SearchFlowTemplatesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next SearchFlowTemplates page.
+func (p *SearchFlowTemplatesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*SearchFlowTemplatesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.SearchFlowTemplates(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opSearchFlowTemplates(region string) *awsmiddleware.RegisterServiceMetadata {

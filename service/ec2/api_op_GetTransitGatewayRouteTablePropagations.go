@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -132,6 +133,92 @@ func addOperationGetTransitGatewayRouteTablePropagationsMiddlewares(stack *middl
 		return err
 	}
 	return nil
+}
+
+// GetTransitGatewayRouteTablePropagationsAPIClient is a client that implements the
+// GetTransitGatewayRouteTablePropagations operation.
+type GetTransitGatewayRouteTablePropagationsAPIClient interface {
+	GetTransitGatewayRouteTablePropagations(context.Context, *GetTransitGatewayRouteTablePropagationsInput, ...func(*Options)) (*GetTransitGatewayRouteTablePropagationsOutput, error)
+}
+
+var _ GetTransitGatewayRouteTablePropagationsAPIClient = (*Client)(nil)
+
+// GetTransitGatewayRouteTablePropagationsPaginatorOptions is the paginator options
+// for GetTransitGatewayRouteTablePropagations
+type GetTransitGatewayRouteTablePropagationsPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetTransitGatewayRouteTablePropagationsPaginator is a paginator for
+// GetTransitGatewayRouteTablePropagations
+type GetTransitGatewayRouteTablePropagationsPaginator struct {
+	options   GetTransitGatewayRouteTablePropagationsPaginatorOptions
+	client    GetTransitGatewayRouteTablePropagationsAPIClient
+	params    *GetTransitGatewayRouteTablePropagationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetTransitGatewayRouteTablePropagationsPaginator returns a new
+// GetTransitGatewayRouteTablePropagationsPaginator
+func NewGetTransitGatewayRouteTablePropagationsPaginator(client GetTransitGatewayRouteTablePropagationsAPIClient, params *GetTransitGatewayRouteTablePropagationsInput, optFns ...func(*GetTransitGatewayRouteTablePropagationsPaginatorOptions)) *GetTransitGatewayRouteTablePropagationsPaginator {
+	options := GetTransitGatewayRouteTablePropagationsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetTransitGatewayRouteTablePropagationsInput{}
+	}
+
+	return &GetTransitGatewayRouteTablePropagationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetTransitGatewayRouteTablePropagationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetTransitGatewayRouteTablePropagations page.
+func (p *GetTransitGatewayRouteTablePropagationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetTransitGatewayRouteTablePropagationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.GetTransitGatewayRouteTablePropagations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetTransitGatewayRouteTablePropagations(region string) *awsmiddleware.RegisterServiceMetadata {

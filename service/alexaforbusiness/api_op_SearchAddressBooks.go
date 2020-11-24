@@ -4,6 +4,7 @@ package alexaforbusiness
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
@@ -122,6 +123,95 @@ func addOperationSearchAddressBooksMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// SearchAddressBooksAPIClient is a client that implements the SearchAddressBooks
+// operation.
+type SearchAddressBooksAPIClient interface {
+	SearchAddressBooks(context.Context, *SearchAddressBooksInput, ...func(*Options)) (*SearchAddressBooksOutput, error)
+}
+
+var _ SearchAddressBooksAPIClient = (*Client)(nil)
+
+// SearchAddressBooksPaginatorOptions is the paginator options for
+// SearchAddressBooks
+type SearchAddressBooksPaginatorOptions struct {
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so that
+	// the remaining results can be retrieved.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// SearchAddressBooksPaginator is a paginator for SearchAddressBooks
+type SearchAddressBooksPaginator struct {
+	options   SearchAddressBooksPaginatorOptions
+	client    SearchAddressBooksAPIClient
+	params    *SearchAddressBooksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewSearchAddressBooksPaginator returns a new SearchAddressBooksPaginator
+func NewSearchAddressBooksPaginator(client SearchAddressBooksAPIClient, params *SearchAddressBooksInput, optFns ...func(*SearchAddressBooksPaginatorOptions)) *SearchAddressBooksPaginator {
+	options := SearchAddressBooksPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &SearchAddressBooksInput{}
+	}
+
+	return &SearchAddressBooksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *SearchAddressBooksPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next SearchAddressBooks page.
+func (p *SearchAddressBooksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*SearchAddressBooksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.SearchAddressBooks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opSearchAddressBooks(region string) *awsmiddleware.RegisterServiceMetadata {

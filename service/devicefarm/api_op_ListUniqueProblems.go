@@ -4,6 +4,7 @@ package devicefarm
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
@@ -132,6 +133,81 @@ func addOperationListUniqueProblemsMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+// ListUniqueProblemsAPIClient is a client that implements the ListUniqueProblems
+// operation.
+type ListUniqueProblemsAPIClient interface {
+	ListUniqueProblems(context.Context, *ListUniqueProblemsInput, ...func(*Options)) (*ListUniqueProblemsOutput, error)
+}
+
+var _ ListUniqueProblemsAPIClient = (*Client)(nil)
+
+// ListUniqueProblemsPaginatorOptions is the paginator options for
+// ListUniqueProblems
+type ListUniqueProblemsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListUniqueProblemsPaginator is a paginator for ListUniqueProblems
+type ListUniqueProblemsPaginator struct {
+	options   ListUniqueProblemsPaginatorOptions
+	client    ListUniqueProblemsAPIClient
+	params    *ListUniqueProblemsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListUniqueProblemsPaginator returns a new ListUniqueProblemsPaginator
+func NewListUniqueProblemsPaginator(client ListUniqueProblemsAPIClient, params *ListUniqueProblemsInput, optFns ...func(*ListUniqueProblemsPaginatorOptions)) *ListUniqueProblemsPaginator {
+	options := ListUniqueProblemsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListUniqueProblemsInput{}
+	}
+
+	return &ListUniqueProblemsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListUniqueProblemsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListUniqueProblems page.
+func (p *ListUniqueProblemsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListUniqueProblemsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListUniqueProblems(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListUniqueProblems(region string) *awsmiddleware.RegisterServiceMetadata {

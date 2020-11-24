@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -132,6 +133,92 @@ func addOperationDescribeTrafficMirrorTargetsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+// DescribeTrafficMirrorTargetsAPIClient is a client that implements the
+// DescribeTrafficMirrorTargets operation.
+type DescribeTrafficMirrorTargetsAPIClient interface {
+	DescribeTrafficMirrorTargets(context.Context, *DescribeTrafficMirrorTargetsInput, ...func(*Options)) (*DescribeTrafficMirrorTargetsOutput, error)
+}
+
+var _ DescribeTrafficMirrorTargetsAPIClient = (*Client)(nil)
+
+// DescribeTrafficMirrorTargetsPaginatorOptions is the paginator options for
+// DescribeTrafficMirrorTargets
+type DescribeTrafficMirrorTargetsPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeTrafficMirrorTargetsPaginator is a paginator for
+// DescribeTrafficMirrorTargets
+type DescribeTrafficMirrorTargetsPaginator struct {
+	options   DescribeTrafficMirrorTargetsPaginatorOptions
+	client    DescribeTrafficMirrorTargetsAPIClient
+	params    *DescribeTrafficMirrorTargetsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeTrafficMirrorTargetsPaginator returns a new
+// DescribeTrafficMirrorTargetsPaginator
+func NewDescribeTrafficMirrorTargetsPaginator(client DescribeTrafficMirrorTargetsAPIClient, params *DescribeTrafficMirrorTargetsInput, optFns ...func(*DescribeTrafficMirrorTargetsPaginatorOptions)) *DescribeTrafficMirrorTargetsPaginator {
+	options := DescribeTrafficMirrorTargetsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeTrafficMirrorTargetsInput{}
+	}
+
+	return &DescribeTrafficMirrorTargetsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeTrafficMirrorTargetsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeTrafficMirrorTargets page.
+func (p *DescribeTrafficMirrorTargetsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeTrafficMirrorTargetsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeTrafficMirrorTargets(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeTrafficMirrorTargets(region string) *awsmiddleware.RegisterServiceMetadata {
