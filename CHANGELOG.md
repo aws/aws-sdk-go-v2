@@ -22,6 +22,9 @@
 
 ## Service Client Highlights
 
+* Pagination support has been added to support APIs. See [Using Operation Paginators](https://aws.github.io/aws-sdk-go-v2/docs/making-requests/#using-operation-paginators) in the Developer Guide. ([#885](https://github.com/aws/aws-sdk-go-v2/pull/885))
+* Logging support has been added to service clients. See [Logging](https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/logging/) in the Developer Guide. ([#872](https://github.com/aws/aws-sdk-go-v2/pull/872))
+
 ## Migrating from v2 preview SDK's v0.29.0 to v0.30.0
 
 ### aws.BuildableHTTPClient move
