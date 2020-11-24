@@ -354,7 +354,7 @@ for result := range results {
 }
 ```
 
-## Using Operation Paginators
+## Using Operation Paginators {id="using-paginators"}
 
 Typically, when you retrieve a list of items, you may need to check the output struct for a token or marker to confirm
 whether the AWS service returned all results from your request. If present, you use the token or marker to request the 
