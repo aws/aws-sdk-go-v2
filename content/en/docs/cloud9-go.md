@@ -41,36 +41,54 @@ After {{% alias service=AC9 %}} opens the IDE for your development environment, 
 sdk-go %}} in your environment, as follows.
 
 1. If the terminal isn't already open in the IDE, open it. On the menu bar in the IDE, choose **Window, New Terminal**.
-1. Set your GOPATH environment variable. To do this, add the following code to the end of your shell profile file (for
-   example, :file:`~/.bashrc` in Amazon Linux, assuming you chose the option to **Create a new instance for
-   environment (EC2)**, earlier in this topic), and then save the file.
+   
+1. Validate the {{% alias service=AC9 %}} available Go version.
    ```
-   GOPATH=~/environment/go
-   export GOPATH
+   go version
    ```
-   After you save the file, source the :file:`~/.bashrc` file to finish setting your GOPATH environment variable. To do
-   this, run the following command. (This command assumes you chose the option to **Create a new instance for
-   environment (EC2)**, earlier in this topic.)
-   ```
-   . ~/.bashrc
-   ```
-1. Run the following command to install the {{% alias sdk-go %}}.
-   ```
-   go get -u github.com/aws/aws-sdk-go/...
-   ```
+   If the Go version reports a version less than `1.15`, or the IDE can't find the Go binary follow the guide
+   to [Install/Upgrade Go]({{% ref "#InstallUpgradeGo" %}}).
+   
+1. Follow the [Getting Started]({{% relref "getting-started.md" %}}) guide to set up a Go project under `~/environment`,
+   or follow the steps to [Download Example Code]({{% ref "#DownloadExample" %}})
 
-If the IDE can't find Go, run the following commands, one at a time in this order, to install it. (These commands assume
-you chose the option to **Create a new instance for environment (EC2)**, earlier in this topic. Also, these commands
-assume the latest stable version of Go at the time this topic was written; for more information,
-see [Downloads](https://golang.org/dl/) on The Go Programming Language website.)
+## Download Example Code {#DownloadExample}
+
+Use the terminal you opened in the previous step to download example code for the {{% alias sdk-go %}} into the {{%
+alias service=AC9 %}} development environment.
+
+To do this, run the following command. This command downloads a copy of all the code examples used in the official
+AWS SDK documentation into your environment's root directory.
 
 ```
-wget https://storage.googleapis.com/golang/go1.9.3.linux-amd64.tar.gz # Download the Go installer.
-sudo tar -C /usr/local -xzf ./go1.9.3.linux-amd64.tar.gz              # Install Go.
-rm ./go1.9.3.linux-amd64.tar.gz                                       # Delete the Go installer, as you no longer need it.
+git clone https://github.com/awsdocs/aws-doc-sdk-examples.git
 ```
 
-After you install Go, add the path to the Go binary to your :code:`PATH` environment variable. To do this, add the
+To find code examples for the {{% alias sdk-go %}}, use the **Environment** window to open the
+`ENVIRONMENT_NAME/aws-doc-sdk-examples/gov2` directory, where `ENVIRONMENT_NAME` is the name of your
+development environment.
+
+### Run Example Code
+
+To run code in your {{% alias service=AC9 %}} development environment, see
+[Run Your Code](https://docs.aws.amazon.com/cloud9/latest/user-guide/build-run-debug.html#build-run-debug-run) in the
+{{% alias service=AC9 %}} User Guide.
+
+## Installing/Upgrading {{% alias service=AC9 %}} Go Version {#InstallUpgradeGo}
+
+If the IDE can't find Go or version of Go does't meet the minimum require version, run the following commands, one at a
+time in this order, to install it. (These commands assume you chose the option to **Create a new instance for
+environment (EC2)**, earlier in this topic. Also, these commands assume the latest stable version of Go at the time this
+topic was written; for more information, see [Downloads](https://golang.org/dl/) on The Go Programming Language
+website.)
+
+```
+wget https://golang.org/dl/go1.15.5.linux-amd64.tar.gz    # Download the Go installer.
+sudo tar -C /usr/local -xzf ./go1.15.5.linux-amd64.tar.gz # Install Go.
+rm ./go1.15.5.linux-amd64.tar.gz                          # Delete the Go installer, as you no longer need it.
+```
+
+After you install Go, add the path to the Go binary to your `PATH` environment variable. To do this, add the
 following code to the end of your shell profile file (for example, `~/.bashrc` in Amazon Linux, assuming you chose the
 option to **Create a new instance for environment (EC2)**, earlier in this topic), and then save the file.
 
@@ -85,25 +103,3 @@ for environment (EC2)**, earlier in this topic.)
 ```
 . ~/.bashrc
 ```
-
-## Download Example Code
-
-Use the terminal you opened in the previous step to download example code for the {{% alias sdk-go %}} into the {{%
-alias service=AC9 %}} development environment.
-
-To do this, run the following command. This command downloads a copy of all of the code examples used in the official
-AWS SDK documentation into your environment's root directory.
-
-```
-git clone https://github.com/awsdocs/aws-doc-sdk-examples.git
-```
-
-To find code examples for the {{% alias sdk-go %}}, use the **Environment** window to open the
-`ENVIRONMENT_NAME/aws-doc-sdk-examples/go/example_code` directory, where `ENVIRONMENT_NAME` is the name of your
-development environment.
-
-## Run Example Code
-
-To run code in your {{% alias service=AC9 %}} development environment, see
-[Run Your Code](https://docs.aws.amazon.com/cloud9/latest/user-guide/build-run-debug.html#build-run-debug-run) in the
-{{% alias service=AC9 %}} User Guide.
