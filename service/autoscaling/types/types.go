@@ -119,6 +119,9 @@ type AutoScalingGroup struct {
 	// The Amazon Resource Name (ARN) of the Auto Scaling group.
 	AutoScalingGroupARN *string
 
+	// Indicates whether Capacity Rebalancing is enabled.
+	CapacityRebalance *bool
+
 	// The metrics enabled for the group.
 	EnabledMetrics []EnabledMetric
 
@@ -325,8 +328,8 @@ type Ebs struct {
 	// customer managed CMK, whether or not the snapshot was encrypted. For more
 	// information, see Using Encryption with EBS-Backed AMIs
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html) in the
-	// Amazon EC2 User Guide for Linux Instances and Required CMK Key Policy for Use
-	// with Encrypted Volumes
+	// Amazon EC2 User Guide for Linux Instances and Required CMK key policy for use
+	// with encrypted volumes
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/key-policy-requirements-EBS-encryption.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	Encrypted *bool
@@ -417,8 +420,8 @@ type FailedScheduledUpdateGroupActionRequest struct {
 }
 
 // Describes a filter that is used to return a more specific list of results when
-// describing tags. For more information, see Tagging Auto Scaling Groups and
-// Instances
+// describing tags. For more information, see Tagging Auto Scaling groups and
+// instances
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 type Filter struct {
@@ -477,10 +480,10 @@ type Instance struct {
 	WeightedCapacity *string
 }
 
-// The metadata options for the instances. For more information, see Instance
-// Metadata and User Data
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
-// in the Amazon EC2 User Guide for Linux Instances.
+// The metadata options for the instances. For more information, see Configuring
+// the Instance Metadata Options
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds)
+// in the Amazon EC2 Auto Scaling User Guide.
 type InstanceMetadataOptions struct {
 
 	// This parameter enables or disables the HTTP metadata endpoint on your instances.
@@ -569,7 +572,7 @@ type InstanceRefresh struct {
 // MixedInstancesPolicy. The instances distribution specifies the distribution of
 // On-Demand Instances and Spot Instances, the maximum price to pay for Spot
 // Instances, and how the Auto Scaling group allocates instance types to fulfill
-// On-Demand and Spot capacity. When you update SpotAllocationStrategy,
+// On-Demand and Spot capacities. When you update SpotAllocationStrategy,
 // SpotInstancePools, or SpotMaxPrice, this update action does not deploy any
 // changes across the running Amazon EC2 instances in the group. Your existing Spot
 // Instances continue to run as long as the maximum price for those instances is
@@ -581,32 +584,24 @@ type InstancesDistribution struct {
 
 	// Indicates how to allocate instance types to fulfill On-Demand capacity. The only
 	// valid value is prioritized, which is also the default value. This strategy uses
-	// the order of instance type overrides for the LaunchTemplate to define the launch
-	// priority of each instance type. The first instance type in the array is
-	// prioritized higher than the last. If all your On-Demand capacity cannot be
-	// fulfilled using your highest priority instance, then the Auto Scaling groups
-	// launches the remaining capacity using the second priority instance type, and so
-	// on.
+	// the order of instance types in the overrides to define the launch priority of
+	// each instance type. The first instance type in the array is prioritized higher
+	// than the last. If all your On-Demand capacity cannot be fulfilled using your
+	// highest priority instance, then the Auto Scaling groups launches the remaining
+	// capacity using the second priority instance type, and so on.
 	OnDemandAllocationStrategy *string
 
 	// The minimum amount of the Auto Scaling group's capacity that must be fulfilled
 	// by On-Demand Instances. This base portion is provisioned first as your group
-	// scales. Default if not set is 0. If you leave it set to 0, On-Demand Instances
-	// are launched as a percentage of the Auto Scaling group's desired capacity, per
-	// the OnDemandPercentageAboveBaseCapacity setting. An update to this setting means
-	// a gradual replacement of instances to maintain the specified number of On-Demand
-	// Instances for your base capacity. When replacing instances, Amazon EC2 Auto
-	// Scaling launches new instances before terminating the old ones.
+	// scales. Defaults to 0 if not specified. If you specify weights for the instance
+	// types in the overrides, set the value of OnDemandBaseCapacity in terms of the
+	// number of capacity units, and not the number of instances.
 	OnDemandBaseCapacity *int32
 
 	// Controls the percentages of On-Demand Instances and Spot Instances for your
-	// additional capacity beyond OnDemandBaseCapacity. Default if not set is 100. If
-	// you leave it set to 100, the percentages are 100% for On-Demand Instances and 0%
-	// for Spot Instances. An update to this setting means a gradual replacement of
-	// instances to maintain the percentage of On-Demand Instances for your additional
-	// capacity above the base capacity. When replacing instances, Amazon EC2 Auto
-	// Scaling launches new instances before terminating the old ones. Valid Range:
-	// Minimum value of 0. Maximum value of 100.
+	// additional capacity beyond OnDemandBaseCapacity. Expressed as a number (for
+	// example, 20 specifies 20% On-Demand Instances, 80% Spot Instances). Defaults to
+	// 100 if not specified. If set to 100, only On-Demand Instances are provisioned.
 	OnDemandPercentageAboveBaseCapacity *int32
 
 	// Indicates how to allocate instances across Spot Instance pools. If the
@@ -614,18 +609,14 @@ type InstancesDistribution struct {
 	// using the Spot pools with the lowest price, and evenly allocates your instances
 	// across the number of Spot pools that you specify. If the allocation strategy is
 	// capacity-optimized, the Auto Scaling group launches instances using Spot pools
-	// that are optimally chosen based on the available Spot capacity. The default Spot
-	// allocation strategy for calls that you make through the API, the AWS CLI, or the
-	// AWS SDKs is lowest-price. The default Spot allocation strategy for the AWS
-	// Management Console is capacity-optimized. Valid values: lowest-price |
-	// capacity-optimized
+	// that are optimally chosen based on the available Spot capacity. Defaults to
+	// lowest-price if not specified.
 	SpotAllocationStrategy *string
 
 	// The number of Spot Instance pools across which to allocate your Spot Instances.
-	// The Spot pools are determined from the different instance types in the Overrides
-	// array of LaunchTemplate. Default if not set is 2. Used only when the Spot
-	// allocation strategy is lowest-price. Valid Range: Minimum value of 1. Maximum
-	// value of 20.
+	// The Spot pools are determined from the different instance types in the
+	// overrides. Defaults to 2 if not specified. Valid only when the Spot allocation
+	// strategy is lowest-price. Valid Range: Minimum value of 1. Maximum value of 20.
 	SpotInstancePools *int32
 
 	// The maximum price per unit hour that you are willing to pay for a Spot Instance.
@@ -666,7 +657,7 @@ type LaunchConfiguration struct {
 
 	// For Auto Scaling groups that are running in a VPC, specifies whether to assign a
 	// public IP address to the group's instances. For more information, see Launching
-	// Auto Scaling Instances in a VPC
+	// Auto Scaling instances in a VPC
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html) in the
 	// Amazon EC2 Auto Scaling User Guide.
 	AssociatePublicIpAddress *bool
@@ -680,7 +671,7 @@ type LaunchConfiguration struct {
 	// The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to. For
 	// more information, see ClassicLink
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html) in
-	// the Amazon EC2 User Guide for Linux Instances and Linking EC2-Classic Instances
+	// the Amazon EC2 User Guide for Linux Instances and Linking EC2-Classic instances
 	// to a VPC
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink)
 	// in the Amazon EC2 Auto Scaling User Guide.
@@ -689,7 +680,7 @@ type LaunchConfiguration struct {
 	// The IDs of one or more security groups for the VPC specified in
 	// ClassicLinkVPCId. For more information, see ClassicLink
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html) in
-	// the Amazon EC2 User Guide for Linux Instances and Linking EC2-Classic Instances
+	// the Amazon EC2 User Guide for Linux Instances and Linking EC2-Classic instances
 	// to a VPC
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink)
 	// in the Amazon EC2 Auto Scaling User Guide.
@@ -703,8 +694,8 @@ type LaunchConfiguration struct {
 
 	// The name or the Amazon Resource Name (ARN) of the instance profile associated
 	// with the IAM role for the instance. The instance profile contains the IAM role.
-	// For more information, see IAM Role for Applications That Run on Amazon EC2
-	// Instances
+	// For more information, see IAM role for applications that run on Amazon EC2
+	// instances
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/us-iam-role.html) in the
 	// Amazon EC2 Auto Scaling User Guide.
 	IamInstanceProfile *string
@@ -712,7 +703,7 @@ type LaunchConfiguration struct {
 	// Controls whether instances in this group are launched with detailed (true) or
 	// basic (false) monitoring. For more information, see Configure Monitoring for
 	// Auto Scaling Instances
-	// (https://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html#enable-as-instance-metrics)
+	// (https://docs.aws.amazon.com/autoscaling/latest/userguide/enable-as-instance-metrics.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	InstanceMonitoring *InstanceMonitoring
 
@@ -727,16 +718,17 @@ type LaunchConfiguration struct {
 	// The Amazon Resource Name (ARN) of the launch configuration.
 	LaunchConfigurationARN *string
 
-	// The metadata options for the instances. For more information, see Instance
-	// Metadata and User Data
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
-	// in the Amazon EC2 User Guide for Linux Instances.
+	// The metadata options for the instances. For more information, see Configuring
+	// the Instance Metadata Options
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	MetadataOptions *InstanceMetadataOptions
 
 	// The tenancy of the instance, either default or dedicated. An instance with
 	// dedicated tenancy runs on isolated, single-tenant hardware and can only be
-	// launched into a VPC. For more information, see Instance Placement Tenancy
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-vpc-tenancy)
+	// launched into a VPC. For more information, see Configuring instance tenancy with
+	// Amazon EC2 Auto Scaling
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	PlacementTenancy *string
 
@@ -751,58 +743,68 @@ type LaunchConfiguration struct {
 
 	// The maximum hourly price to be paid for any Spot Instance launched to fulfill
 	// the request. Spot Instances are launched when the price you specify exceeds the
-	// current Spot price. For more information, see Launching Spot Instances in Your
-	// Auto Scaling Group
+	// current Spot price. For more information, see Requesting Spot Instances
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-spot-instances.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	SpotPrice *string
 
 	// The Base64-encoded user data to make available to the launched EC2 instances.
-	// For more information, see Instance Metadata and User Data
+	// For more information, see Instance metadata and user data
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
 	// in the Amazon EC2 User Guide for Linux Instances.
 	UserData *string
 }
 
-// Describes a launch template and overrides. The overrides are used to override
-// the instance type specified by the launch template with multiple instance types
-// that can be used to launch On-Demand Instances and Spot Instances. When you
-// update the launch template or overrides, existing Amazon EC2 instances continue
-// to run. When scale out occurs, Amazon EC2 Auto Scaling launches instances to
-// match the new settings. When scale in occurs, Amazon EC2 Auto Scaling terminates
-// instances according to the group's termination policies.
+// Describes a launch template and overrides. You specify these parameters as part
+// of a mixed instances policy. When you update the launch template or overrides,
+// existing Amazon EC2 instances continue to run. When scale out occurs, Amazon EC2
+// Auto Scaling launches instances to match the new settings. When scale in occurs,
+// Amazon EC2 Auto Scaling terminates instances according to the group's
+// termination policies.
 type LaunchTemplate struct {
 
-	// The launch template to use. You must specify either the launch template ID or
-	// launch template name in the request.
+	// The launch template to use.
 	LaunchTemplateSpecification *LaunchTemplateSpecification
 
 	// Any parameters that you specify override the same parameters in the launch
-	// template. Currently, the only supported override is instance type. You can
-	// specify between 1 and 20 instance types. If not provided, Amazon EC2 Auto
-	// Scaling will use the instance type specified in the launch template to launch
-	// instances.
+	// template. If not provided, Amazon EC2 Auto Scaling uses the instance type
+	// specified in the launch template when it launches an instance.
 	Overrides []LaunchTemplateOverrides
 }
 
-// Describes an override for a launch template. Currently, the only supported
-// override is instance type. The maximum number of instance type overrides that
-// can be associated with an Auto Scaling group is 20.
+// Describes an override for a launch template. The maximum number of instance
+// types that can be associated with an Auto Scaling group is 20. For more
+// information, see Configuring overrides
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-override-options.html)
+// in the Amazon EC2 Auto Scaling User Guide.
 type LaunchTemplateOverrides struct {
 
-	// The instance type. You must use an instance type that is supported in your
-	// requested Region and Availability Zones. For information about available
-	// instance types, see Available Instance Types
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// The instance type, such as m3.xlarge. You must use an instance type that is
+	// supported in your requested Region and Availability Zones. For more information,
+	// see Instance types
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the
+	// Amazon Elastic Compute Cloud User Guide.
 	InstanceType *string
 
-	// The number of capacity units, which gives the instance type a proportional
-	// weight to other instance types. For example, larger instance types are generally
-	// weighted more than smaller instance types. These are the same units that you
-	// chose to set the desired capacity in terms of instances, or a performance
-	// attribute such as vCPUs, memory, or I/O. For more information, see Instance
-	// Weighting for Amazon EC2 Auto Scaling
+	// Provides the launch template to be used when launching the instance type. For
+	// example, some instance types might require a launch template with a different
+	// AMI. If not provided, Amazon EC2 Auto Scaling uses the launch template that's
+	// defined for your mixed instances policy. For more information, see Specifying a
+	// different launch template for an instance type
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-template-overrides.html)
+	// in the Amazon EC2 Auto Scaling User Guide.
+	LaunchTemplateSpecification *LaunchTemplateSpecification
+
+	// The number of capacity units provided by the specified instance type in terms of
+	// virtual CPUs, memory, storage, throughput, or other relative performance
+	// characteristic. When a Spot or On-Demand Instance is provisioned, the capacity
+	// units count toward the desired capacity. Amazon EC2 Auto Scaling provisions
+	// instances until the desired capacity is totally fulfilled, even if this results
+	// in an overage. For example, if there are 2 units remaining to fulfill capacity,
+	// and Amazon EC2 Auto Scaling can only provision an instance with a
+	// WeightedCapacity of 5 units, the instance is provisioned, and the desired
+	// capacity is exceeded by 3 units. For more information, see Instance weighting
+	// for Amazon EC2 Auto Scaling
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html)
 	// in the Amazon EC2 Auto Scaling User Guide. Valid Range: Minimum value of 1.
 	// Maximum value of 999.
@@ -812,8 +814,8 @@ type LaunchTemplateOverrides struct {
 // Describes the Amazon EC2 launch template and the launch template version that
 // can be used by an Auto Scaling group to configure Amazon EC2 instances. The
 // launch template that is specified must be configured for use with an Auto
-// Scaling group. For more information, see Creating a Launch Template for an Auto
-// Scaling Group
+// Scaling group. For more information, see Creating a launch template for an Auto
+// Scaling group
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 type LaunchTemplateSpecification struct {
@@ -824,7 +826,7 @@ type LaunchTemplateSpecification struct {
 	// API operation. New launch templates can be created using the Amazon EC2
 	// CreateLaunchTemplate
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html)
-	// API. You must specify either a template ID or a template name.
+	// API. You must specify either a LaunchTemplateId or a LaunchTemplateName.
 	LaunchTemplateId *string
 
 	// The name of the launch template. To get the template name, use the Amazon EC2
@@ -833,7 +835,7 @@ type LaunchTemplateSpecification struct {
 	// API operation. New launch templates can be created using the Amazon EC2
 	// CreateLaunchTemplate
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html)
-	// API. You must specify either a template ID or a template name.
+	// API. You must specify either a LaunchTemplateId or a LaunchTemplateName.
 	LaunchTemplateName *string
 
 	// The version number, $Latest, or $Default. To get the version number, use the
@@ -923,7 +925,7 @@ type LifecycleHook struct {
 // timeout period ends, complete the lifecycle action.
 //
 // For more information, see
-// Amazon EC2 Auto Scaling Lifecycle Hooks
+// Amazon EC2 Auto Scaling lifecycle hooks
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html) in
 // the Amazon EC2 Auto Scaling User Guide.
 type LifecycleHookSpecification struct {
@@ -1099,22 +1101,22 @@ type MetricGranularityType struct {
 // Describes a mixed instances policy for an Auto Scaling group. With mixed
 // instances, your Auto Scaling group can provision a combination of On-Demand
 // Instances and Spot Instances across multiple instance types. For more
-// information, see Auto Scaling Groups with Multiple Instance Types and Purchase
-// Options
+// information, see Auto Scaling groups with multiple instance types and purchase
+// options
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
 // in the Amazon EC2 Auto Scaling User Guide. You can create a mixed instances
 // policy for a new Auto Scaling group, or you can create it for an existing group
 // by updating the group to specify MixedInstancesPolicy as the top-level parameter
-// instead of a launch configuration or launch template. For more information, see
-// CreateAutoScalingGroup and UpdateAutoScalingGroup.
+// instead of a launch configuration or launch template.
 type MixedInstancesPolicy struct {
 
-	// The instances distribution to use. If you leave this parameter unspecified, the
-	// value for each parameter in InstancesDistribution uses a default value.
+	// Specifies the instances distribution. If not provided, the value for each
+	// parameter in InstancesDistribution uses a default value.
 	InstancesDistribution *InstancesDistribution
 
-	// The launch template and instance types (overrides). Required when creating a
-	// mixed instances policy.
+	// Specifies the launch template to use and optionally the instance types
+	// (overrides) that are used to provision EC2 instances to fulfill On-Demand and
+	// Spot capacities. Required when creating a mixed instances policy.
 	LaunchTemplate *LaunchTemplate
 }
 
@@ -1170,20 +1172,20 @@ type PredefinedMetricSpecification struct {
 
 	// Identifies the resource associated with the metric type. You can't specify a
 	// resource label unless the metric type is ALBRequestCountPerTarget and there is a
-	// target group attached to the Auto Scaling group. Elastic Load Balancing sends
-	// data about your load balancers to Amazon CloudWatch. CloudWatch collects the
-	// data and specifies the format to use to access the data. The format is
-	// app/load-balancer-name/load-balancer-id/targetgroup/target-group-name/target-group-id
-	// , where
+	// target group attached to the Auto Scaling group. You create the resource label
+	// by appending the final portion of the load balancer ARN and the final portion of
+	// the target group ARN into a single value, separated by a forward slash (/). The
+	// format is app///targetgroup//, where:
 	//
-	// * app/load-balancer-name/load-balancer-id  is the final portion of the
-	// load balancer ARN, and
+	// * app// is the final portion of the load
+	// balancer ARN
 	//
-	// * targetgroup/target-group-name/target-group-id  is the
-	// final portion of the target group ARN.
+	// * targetgroup// is the final portion of the target group
+	// ARN.
 	//
-	// To find the ARN for an Application Load
-	// Balancer, use the DescribeLoadBalancers
+	// This is an example:
+	// app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
+	// To find the ARN for an Application Load Balancer, use the DescribeLoadBalancers
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
 	// API operation. To find the ARN for the target group, use the
 	// DescribeTargetGroups
@@ -1192,7 +1194,7 @@ type PredefinedMetricSpecification struct {
 	ResourceLabel *string
 }
 
-// Describes a process type. For more information, see Scaling Processes
+// Describes a process type. For more information, see Scaling processes
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html#process-types)
 // in the Amazon EC2 Auto Scaling User Guide.
 type ProcessType struct {
@@ -1289,10 +1291,10 @@ type ScalingPolicy struct {
 	// *
 	// SimpleScaling (default)
 	//
-	// For more information, see Target Tracking Scaling
-	// Policies
+	// For more information, see Target tracking scaling
+	// policies
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html)
-	// and Step and Simple Scaling Policies
+	// and Step and simple scaling policies
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	PolicyType *string
@@ -1419,7 +1421,7 @@ type ScheduledUpdateGroupActionRequest struct {
 // * The upper and lower bound can't be null in the same step
 // adjustment.
 //
-// For more information, see Step Adjustments
+// For more information, see Step adjustments
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html#as-scaling-steps)
 // in the Amazon EC2 Auto Scaling User Guide.
 type StepAdjustment struct {
@@ -1448,8 +1450,8 @@ type StepAdjustment struct {
 	MetricIntervalUpperBound *float64
 }
 
-// Describes an automatic scaling process that has been suspended. For more
-// information, see Scaling Processes
+// Describes an auto scaling process that has been suspended. For more information,
+// see Scaling processes
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html#process-types)
 // in the Amazon EC2 Auto Scaling User Guide.
 type SuspendedProcess struct {

@@ -301,7 +301,19 @@ type Limit struct {
 	// * application-load-balancers
 	//
 	// *
-	// listeners-per-application-load-balancer
+	// condition-values-per-alb-rule
+	//
+	// * condition-wildcards-per-alb-rule
+	//
+	// *
+	// gateway-load-balancers
+	//
+	// * gateway-load-balancers-per-vpc
+	//
+	// *
+	// geneve-target-groups
+	//
+	// * listeners-per-application-load-balancer
 	//
 	// *
 	// listeners-per-network-load-balancer
@@ -324,6 +336,9 @@ type Limit struct {
 	//
 	// *
 	// targets-per-application-load-balancer
+	//
+	// *
+	// targets-per-availability-zone-per-gateway-load-balancer
 	//
 	// *
 	// targets-per-availability-zone-per-network-load-balancer
@@ -423,6 +438,9 @@ type LoadBalancerAddress struct {
 	// internal-facing load balancer.
 	AllocationId *string
 
+	// [Network Load Balancers] The IPv6 address.
+	IPv6Address *string
+
 	// The static IP address.
 	IpAddress *string
 
@@ -433,27 +451,30 @@ type LoadBalancerAddress struct {
 // Information about a load balancer attribute.
 type LoadBalancerAttribute struct {
 
-	// The name of the attribute. The following attributes are supported by both
-	// Application Load Balancers and Network Load Balancers:
-	//
-	// * access_logs.s3.enabled
-	// - Indicates whether access logs are enabled. The value is true or false. The
-	// default is false.
-	//
-	// * access_logs.s3.bucket - The name of the S3 bucket for the
-	// access logs. This attribute is required if access logs are enabled. The bucket
-	// must exist in the same region as the load balancer and have a bucket policy that
-	// grants Elastic Load Balancing permissions to write to the bucket.
-	//
-	// *
-	// access_logs.s3.prefix - The prefix for the location in the S3 bucket for the
-	// access logs.
+	// The name of the attribute. The following attribute is supported by all load
+	// balancers:
 	//
 	// * deletion_protection.enabled - Indicates whether deletion
 	// protection is enabled. The value is true or false. The default is false.
 	//
 	// The
-	// following attributes are supported by only Application Load Balancers:
+	// following attributes are supported by both Application Load Balancers and
+	// Network Load Balancers:
+	//
+	// * access_logs.s3.enabled - Indicates whether access
+	// logs are enabled. The value is true or false. The default is false.
+	//
+	// *
+	// access_logs.s3.bucket - The name of the S3 bucket for the access logs. This
+	// attribute is required if access logs are enabled. The bucket must exist in the
+	// same region as the load balancer and have a bucket policy that grants Elastic
+	// Load Balancing permissions to write to the bucket.
+	//
+	// * access_logs.s3.prefix -
+	// The prefix for the location in the S3 bucket for the access logs.
+	//
+	// The following
+	// attributes are supported by only Application Load Balancers:
 	//
 	// *
 	// idle_timeout.timeout_seconds - The idle timeout value, in seconds. The valid
@@ -465,21 +486,28 @@ type LoadBalancerAttribute struct {
 	// values are monitor, defensive, and strictest. The default is defensive.
 	//
 	// *
-	// routing.http.drop_invalid_header_fields.enabled - Indicates whether HTTP headers
-	// with invalid header fields are removed by the load balancer (true) or routed to
-	// targets (false). The default is false.
+	// routing.http.drop_invalid_header_fields.enabled - Indicates whether HTTP
+	// headers
 	//
-	// * routing.http2.enabled - Indicates
-	// whether HTTP/2 is enabled. The value is true or false. The default is true.
-	// Elastic Load Balancing requires that message header names contain only
+	// with invalid header fields are removed by the load balancer (true) or
+	// routed to targets (false). The default is false.
+	//
+	// * routing.http2.enabled -
+	// Indicates whether HTTP/2 is enabled. The value is true or false. The default is
+	// true. Elastic Load Balancing requires that message header names contain only
 	// alphanumeric characters and hyphens.
 	//
-	// The following attributes are supported by
-	// only Network Load Balancers:
-	//
-	// * load_balancing.cross_zone.enabled - Indicates
-	// whether cross-zone load balancing is enabled. The value is true or false. The
+	// * waf.fail_open.enabled - Indicates
+	// whether to allow a WAF-enabled load balancer to route requests to targets if it
+	// is unable to forward the request to AWS WAF. The value is true or false. The
 	// default is false.
+	//
+	// The following attribute is supported by Network Load
+	// Balancers and Gateway Load Balancers:
+	//
+	// * load_balancing.cross_zone.enabled -
+	// Indicates whether cross-zone load balancing is enabled. The value is true or
+	// false. The default is false.
 	Key *string
 
 	// The value of the attribute.
@@ -510,7 +538,7 @@ type Matcher struct {
 	// For Application Load Balancers, you can specify values between 200 and 499, and
 	// the default value is 200. You can specify multiple values (for example,
 	// "200,202") or a range of values (for example, "200-299"). For Network Load
-	// Balancers, this is "200–399".
+	// Balancers and Gateway Load Balancers, this must be "200–399".
 	HttpCode *string
 }
 
@@ -752,6 +780,9 @@ type SubnetMapping struct {
 	// internet-facing load balancer.
 	AllocationId *string
 
+	// [Network Load Balancers] The IPv6 address.
+	IPv6Address *string
+
 	// [Network Load Balancers] The private IPv4 address for an internal load balancer.
 	PrivateIPv4Address *string
 
@@ -804,8 +835,8 @@ type TargetDescription struct {
 	// is all.
 	AvailabilityZone *string
 
-	// The port on which the target is listening. Not used if the target is a Lambda
-	// function.
+	// The port on which the target is listening. If the target group protocol is
+	// GENEVE, the supported port is 6081. Not used if the target is a Lambda function.
 	Port *int32
 }
 
@@ -825,7 +856,8 @@ type TargetGroup struct {
 	// The port to use to connect with the target.
 	HealthCheckPort *string
 
-	// The protocol to use to connect with the target.
+	// The protocol to use to connect with the target. The GENEVE, TLS, UDP, and
+	// TCP_UDP protocols are not supported for health checks.
 	HealthCheckProtocol ProtocolEnum
 
 	// The amount of time, in seconds, during which no response means a failed health
@@ -862,8 +894,9 @@ type TargetGroup struct {
 	TargetGroupName *string
 
 	// The type of target that you must specify when registering targets with this
-	// target group. The possible values are instance (targets are specified by
-	// instance ID) or ip (targets are specified by IP address).
+	// target group. The possible values are instance (register targets by instance
+	// ID), ip (register targets by IP address), or lambda (register a single Lambda
+	// function as a target).
 	TargetType TargetTypeEnum
 
 	// The number of consecutive health check failures required before considering the
@@ -877,28 +910,30 @@ type TargetGroup struct {
 // Information about a target group attribute.
 type TargetGroupAttribute struct {
 
-	// The name of the attribute. The following attributes are supported by both
-	// Application Load Balancers and Network Load Balancers:
+	// The name of the attribute. The following attribute is supported by all load
+	// balancers:
 	//
-	// *
-	// deregistration_delay.timeout_seconds - The amount of time, in seconds, for
-	// Elastic Load Balancing to wait before changing the state of a deregistering
-	// target from draining to unused. The range is 0-3600 seconds. The default value
-	// is 300 seconds. If the target is a Lambda function, this attribute is not
-	// supported.
+	// * deregistration_delay.timeout_seconds - The amount of time, in
+	// seconds, for Elastic Load Balancing to wait before changing the state of a
+	// deregistering target from draining to unused. The range is 0-3600 seconds. The
+	// default value is 300 seconds. If the target is a Lambda function, this attribute
+	// is not supported.
 	//
-	// * stickiness.enabled - Indicates whether sticky sessions are
-	// enabled. The value is true or false. The default is false.
+	// The following attributes are supported by both Application
+	// Load Balancers and Network Load Balancers:
 	//
-	// * stickiness.type -
-	// The type of sticky sessions. The possible values are
+	// * stickiness.enabled - Indicates
+	// whether sticky sessions are enabled. The value is true or false. The default is
+	// false.
 	//
-	// lb_cookie for Application
-	// Load Balancers or source_ip for Network Load Balancers.
+	// * stickiness.type - The type of sticky sessions. The possible values
+	// are
 	//
-	// The following
-	// attributes are supported only if the load balancer is an Application Load
-	// Balancer and the target is an instance or an IP address:
+	// lb_cookie for Application Load Balancers or source_ip for Network Load
+	// Balancers.
+	//
+	// The following attributes are supported only if the load balancer is
+	// an Application Load Balancer and the target is an instance or an IP address:
 	//
 	// *
 	// load_balancing.algorithm.type - The load balancing algorithm determines how the
@@ -929,11 +964,16 @@ type TargetGroupAttribute struct {
 	// header field name or query parameter key, the load balancer uses the last value
 	// sent by the client.
 	//
-	// The following attribute is supported only by Network Load
+	// The following attributes are supported only by Network Load
 	// Balancers:
 	//
-	// * proxy_protocol_v2.enabled - Indicates whether Proxy Protocol
-	// version 2 is enabled. The value is true or false. The default is false.
+	// * deregistration_delay.connection_termination.enabled - Indicates
+	// whether the load balancer terminates connections at the end of the
+	// deregistration timeout. The value is true or false. The default is false.
+	//
+	// *
+	// proxy_protocol_v2.enabled - Indicates whether Proxy Protocol version 2 is
+	// enabled. The value is true or false. The default is false.
 	Key *string
 
 	// The value of the attribute.
@@ -985,51 +1025,51 @@ type TargetHealth struct {
 	//
 	// * Target.ResponseCodeMismatch -
 	// The health checks did not return an expected HTTP code. Applies only to
-	// Application Load Balancers.
+	// Application Load Balancers and Gateway Load Balancers.
 	//
-	// * Target.Timeout - The health check requests timed
-	// out. Applies only to Application Load Balancers.
+	// * Target.Timeout - The
+	// health check requests timed out. Applies only to Application Load Balancers and
+	// Gateway Load Balancers.
 	//
-	// * Target.FailedHealthChecks -
-	// The load balancer received an error while establishing a connection to the
-	// target or the target response was malformed.
+	// * Target.FailedHealthChecks - The load balancer
+	// received an error while establishing a connection to the target or the target
+	// response was malformed.
 	//
-	// * Elb.InternalError - The health
-	// checks failed due to an internal error. Applies only to Application Load
-	// Balancers.
+	// * Elb.InternalError - The health checks failed due to
+	// an internal error. Applies only to Application Load Balancers.
 	//
-	// If the target state is unused, the reason code can be one of the
-	// following values:
-	//
-	// * Target.NotRegistered - The target is not registered with
-	// the target group.
-	//
-	// * Target.NotInUse - The target group is not used by any load
-	// balancer or the target is in an Availability Zone that is not enabled for its
-	// load balancer.
-	//
-	// * Target.InvalidState - The target is in the stopped or
-	// terminated state.
-	//
-	// * Target.IpUnusable - The target IP address is reserved for
-	// use by a load balancer.
-	//
-	// If the target state is draining, the reason code can be
-	// the following value:
-	//
-	// * Target.DeregistrationInProgress - The target is in the
-	// process of being deregistered and the deregistration delay period has not
-	// expired.
-	//
-	// If the target state is unavailable, the reason code can be the
-	// following value:
-	//
-	// * Target.HealthCheckDisabled - Health checks are disabled for
-	// the target group. Applies only to Application Load Balancers.
+	// If the target
+	// state is unused, the reason code can be one of the following values:
 	//
 	// *
-	// Elb.InternalError - Target health is unavailable due to an internal error.
-	// Applies only to Network Load Balancers.
+	// Target.NotRegistered - The target is not registered with the target group.
+	//
+	// *
+	// Target.NotInUse - The target group is not used by any load balancer or the
+	// target is in an Availability Zone that is not enabled for its load balancer.
+	//
+	// *
+	// Target.InvalidState - The target is in the stopped or terminated state.
+	//
+	// *
+	// Target.IpUnusable - The target IP address is reserved for use by a load
+	// balancer.
+	//
+	// If the target state is draining, the reason code can be the following
+	// value:
+	//
+	// * Target.DeregistrationInProgress - The target is in the process of
+	// being deregistered and the deregistration delay period has not expired.
+	//
+	// If the
+	// target state is unavailable, the reason code can be the following value:
+	//
+	// *
+	// Target.HealthCheckDisabled - Health checks are disabled for the target group.
+	// Applies only to Application Load Balancers.
+	//
+	// * Elb.InternalError - Target health
+	// is unavailable due to an internal error. Applies only to Network Load Balancers.
 	Reason TargetHealthReasonEnum
 
 	// The state of the target.

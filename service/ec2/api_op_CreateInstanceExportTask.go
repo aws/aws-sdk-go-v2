@@ -34,23 +34,27 @@ func (c *Client) CreateInstanceExportTask(ctx context.Context, params *CreateIns
 
 type CreateInstanceExportTaskInput struct {
 
+	// The format and location for an instance export task.
+	//
+	// This member is required.
+	ExportToS3Task *types.ExportToS3TaskSpecification
+
 	// The ID of the instance.
 	//
 	// This member is required.
 	InstanceId *string
 
+	// The target virtualization environment.
+	//
+	// This member is required.
+	TargetEnvironment types.ExportEnvironment
+
 	// A description for the conversion task or the resource being exported. The
 	// maximum length is 255 characters.
 	Description *string
 
-	// The format and location for an instance export task.
-	ExportToS3Task *types.ExportToS3TaskSpecification
-
 	// The tags to apply to the instance export task during creation.
 	TagSpecifications []types.TagSpecification
-
-	// The target virtualization environment.
-	TargetEnvironment types.ExportEnvironment
 }
 
 type CreateInstanceExportTaskOutput struct {

@@ -92,9 +92,13 @@ type CreateDomainInput struct {
 	// All Studio traffic is through the specified VPC and subnets
 	AppNetworkAccessType types.AppNetworkAccessType
 
-	// The AWS Key Management Service (KMS) encryption key ID. Encryption with a
-	// customer master key (CMK) is not supported.
+	// This member is deprecated and replaced with KmsKeyId.
 	HomeEfsFileSystemKmsKeyId *string
+
+	// SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain with an
+	// AWS managed customer master key (CMK) by default. For more control, specify a
+	// customer managed CMK.
+	KmsKeyId *string
 
 	// Tags to associated with the Domain. Each tag consists of a key and an optional
 	// value. Tag keys must be unique per resource. Tags are searchable using the

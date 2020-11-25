@@ -1473,7 +1473,7 @@ type ReplicationTask struct {
 	// a CDC operation that begins at that checkpoint.
 	RecoveryCheckpoint *string
 
-	// The Amazon Resource Name (ARN) of the replication instance.
+	// The ARN of the replication instance.
 	ReplicationInstanceArn *string
 
 	// The Amazon Resource Name (ARN) of the replication task.
@@ -1503,10 +1503,87 @@ type ReplicationTask struct {
 	// errors.
 	ReplicationTaskStats *ReplicationTaskStats
 
-	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+	// The Amazon Resource Name (ARN) that uniquely identifies the endpoint.
 	SourceEndpointArn *string
 
-	// The status of the replication task.
+	// The status of the replication task. This response parameter can return one of
+	// the following values:
+	//
+	// * "moving" – The task is being moved in response to
+	// running the MoveReplicationTask
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html)
+	// operation.
+	//
+	// * "creating" – The task is being created in response to running the
+	// CreateReplicationTask
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html)
+	// operation.
+	//
+	// * "deleting" – The task is being deleted in response to running the
+	// DeleteReplicationTask
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteReplicationTask.html)
+	// operation.
+	//
+	// * "failed" – The task failed to successfully complete the database
+	// migration in response to running the StartReplicationTask
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html)
+	// operation.
+	//
+	// * "failed-move" – The task failed to move in response to running the
+	// MoveReplicationTask
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html)
+	// operation.
+	//
+	// * "modifying" – The task definition is being modified in response to
+	// running the ModifyReplicationTask
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html)
+	// operation.
+	//
+	// * "ready" – The task is in a ready state where it can respond to
+	// other task operations, such as StartReplicationTask
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html)
+	// or DeleteReplicationTask
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteReplicationTask.html).
+	//
+	// *
+	// "running" – The task is performing a database migration in response to running
+	// the StartReplicationTask
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html)
+	// operation.
+	//
+	// * "starting" – The task is preparing to perform a database migration
+	// in response to running the StartReplicationTask
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html)
+	// operation.
+	//
+	// * "stopped" – The task has stopped in response to running the
+	// StopReplicationTask
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StopReplicationTask.html)
+	// operation.
+	//
+	// * "stopping" – The task is preparing to stop in response to running
+	// the StopReplicationTask
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StopReplicationTask.html)
+	// operation.
+	//
+	// * "testing" – The database migration specified for this task is
+	// being tested in response to running either the StartReplicationTaskAssessmentRun
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html)
+	// or the StartReplicationTaskAssessment
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessment.html)
+	// operation. StartReplicationTaskAssessmentRun
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html)
+	// is an improved premigration task assessment operation. The
+	// StartReplicationTaskAssessment
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessment.html)
+	// operation assesses data type compatibility only between the source and target
+	// database of a given migration task. In contrast,
+	// StartReplicationTaskAssessmentRun
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html)
+	// enables you to specify a variety of premigration task assessments in addition to
+	// data type compatibility. These assessments include ones for the validity of
+	// primary key definitions and likely issues with database migration performance,
+	// among others.
 	Status *string
 
 	// The reason the replication task was stopped. This response parameter can return
@@ -1519,7 +1596,7 @@ type ReplicationTask struct {
 	// capture (CDC) load completed.
 	//
 	// * "STOP_REASON_CACHED_CHANGES_NOT_APPLIED" – In a
-	// full-load and CDC migration, the full-load stopped as specified before starting
+	// full-load and CDC migration, the full load stopped as specified before starting
 	// the CDC migration.
 	//
 	// * "STOP_REASON_SERVER_TIME" – The migration stopped at the
@@ -1529,8 +1606,15 @@ type ReplicationTask struct {
 	// Table mappings specified in the task.
 	TableMappings *string
 
-	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+	// The ARN that uniquely identifies the endpoint.
 	TargetEndpointArn *string
+
+	// The ARN of the replication instance to which this task is moved in response to
+	// running the MoveReplicationTask
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html)
+	// operation. Otherwise, this response parameter isn't a member of the
+	// ReplicationTask object.
+	TargetReplicationInstanceArn *string
 
 	// Supplemental information that the task requires to migrate the data for certain
 	// source and target endpoints. For more information, see Specifying Supplemental

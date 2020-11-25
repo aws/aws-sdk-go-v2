@@ -34,8 +34,8 @@ func (c *Client) DescribeEventBus(ctx context.Context, params *DescribeEventBusI
 
 type DescribeEventBusInput struct {
 
-	// The name of the event bus to show details for. If you omit this, the default
-	// event bus is displayed.
+	// The name or ARN of the event bus to show details for. If you omit this, the
+	// default event bus is displayed.
 	Name *string
 }
 

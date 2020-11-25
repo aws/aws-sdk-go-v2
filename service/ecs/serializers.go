@@ -3161,6 +3161,47 @@ func awsAwsjson11_serializeDocumentFirelensConfigurationOptionsMap(v map[string]
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentFSxWindowsFileServerAuthorizationConfig(v *types.FSxWindowsFileServerAuthorizationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CredentialsParameter != nil {
+		ok := object.Key("credentialsParameter")
+		ok.String(*v.CredentialsParameter)
+	}
+
+	if v.Domain != nil {
+		ok := object.Key("domain")
+		ok.String(*v.Domain)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentFSxWindowsFileServerVolumeConfiguration(v *types.FSxWindowsFileServerVolumeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthorizationConfig != nil {
+		ok := object.Key("authorizationConfig")
+		if err := awsAwsjson11_serializeDocumentFSxWindowsFileServerAuthorizationConfig(v.AuthorizationConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FileSystemId != nil {
+		ok := object.Key("fileSystemId")
+		ok.String(*v.FileSystemId)
+	}
+
+	if v.RootDirectory != nil {
+		ok := object.Key("rootDirectory")
+		ok.String(*v.RootDirectory)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentHealthCheck(v *types.HealthCheck, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4235,6 +4276,13 @@ func awsAwsjson11_serializeDocumentVolume(v *types.Volume, value smithyjson.Valu
 	if v.EfsVolumeConfiguration != nil {
 		ok := object.Key("efsVolumeConfiguration")
 		if err := awsAwsjson11_serializeDocumentEFSVolumeConfiguration(v.EfsVolumeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FsxWindowsFileServerVolumeConfiguration != nil {
+		ok := object.Key("fsxWindowsFileServerVolumeConfiguration")
+		if err := awsAwsjson11_serializeDocumentFSxWindowsFileServerVolumeConfiguration(v.FsxWindowsFileServerVolumeConfiguration, ok); err != nil {
 			return err
 		}
 	}

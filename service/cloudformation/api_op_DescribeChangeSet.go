@@ -79,6 +79,9 @@ type DescribeChangeSetOutput struct {
 	// creating it or in an OBSOLETE state because the stack was already updated.
 	ExecutionStatus types.ExecutionStatus
 
+	// Verifies if IncludeNestedStacks is set to True.
+	IncludeNestedStacks *bool
+
 	// If the output exceeds 1 MB, a string that identifies the next page of changes.
 	// If there is no additional page, this value is null.
 	NextToken *string
@@ -93,9 +96,17 @@ type DescribeChangeSetOutput struct {
 	// data type.
 	Parameters []types.Parameter
 
+	// Specifies the change set ID of the parent change set in the current nested
+	// change set hierarchy.
+	ParentChangeSetId *string
+
 	// The rollback triggers for AWS CloudFormation to monitor during stack creation
 	// and updating operations, and for the specified monitoring period afterwards.
 	RollbackConfiguration *types.RollbackConfiguration
+
+	// Specifies the change set ID of the root change set in the current nested change
+	// set hierarchy.
+	RootChangeSetId *string
 
 	// The ARN of the stack that is associated with the change set.
 	StackId *string

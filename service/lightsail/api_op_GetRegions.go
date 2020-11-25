@@ -35,7 +35,7 @@ type GetRegionsInput struct {
 	// us-east-2a.
 	IncludeAvailabilityZones *bool
 
-	// >A Boolean value indicating whether to also include Availability Zones for
+	// A Boolean value indicating whether to also include Availability Zones for
 	// databases in your get regions request. Availability Zones are indicated with a
 	// letter (e.g., us-east-2a).
 	IncludeRelationalDatabaseAvailabilityZones *bool

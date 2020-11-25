@@ -570,6 +570,26 @@ func (m *validateOpUpdateAgent) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateTaskExecution struct {
+}
+
+func (*validateOpUpdateTaskExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateTaskExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateTaskExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateTaskExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTask struct {
 }
 
@@ -702,6 +722,10 @@ func addOpUpdateAgentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAgent{}, middleware.After)
 }
 
+func addOpUpdateTaskExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateTaskExecution{}, middleware.After)
+}
+
 func addOpUpdateTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTask{}, middleware.After)
 }
@@ -711,11 +735,11 @@ func validateEc2Config(v *types.Ec2Config) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Ec2Config"}
-	if v.SecurityGroupArns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupArns"))
-	}
 	if v.SubnetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetArn"))
+	}
+	if v.SecurityGroupArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupArns"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -746,14 +770,14 @@ func validateLocationFilter(v *types.LocationFilter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LocationFilter"}
-	if len(v.Operator) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.Values == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Values"))
 	}
-	if len(v.Name) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -829,14 +853,14 @@ func validateTaskFilter(v *types.TaskFilter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TaskFilter"}
-	if len(v.Operator) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.Values == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Values"))
 	}
-	if len(v.Name) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -917,10 +941,8 @@ func validateOpCreateLocationEfsInput(v *CreateLocationEfsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLocationEfsInput"}
-	if v.Tags != nil {
-		if err := validateInputTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
+	if v.EfsFilesystemArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EfsFilesystemArn"))
 	}
 	if v.Ec2Config == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Ec2Config"))
@@ -929,8 +951,10 @@ func validateOpCreateLocationEfsInput(v *CreateLocationEfsInput) error {
 			invalidParams.AddNested("Ec2Config", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.EfsFilesystemArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EfsFilesystemArn"))
+	if v.Tags != nil {
+		if err := validateInputTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -944,22 +968,22 @@ func validateOpCreateLocationFsxWindowsInput(v *CreateLocationFsxWindowsInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLocationFsxWindowsInput"}
+	if v.FsxFilesystemArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FsxFilesystemArn"))
+	}
 	if v.SecurityGroupArns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupArns"))
-	}
-	if v.Password == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Password"))
 	}
 	if v.Tags != nil {
 		if err := validateInputTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.FsxFilesystemArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FsxFilesystemArn"))
-	}
 	if v.User == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("User"))
+	}
+	if v.Password == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Password"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -973,11 +997,6 @@ func validateOpCreateLocationNfsInput(v *CreateLocationNfsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLocationNfsInput"}
-	if v.Tags != nil {
-		if err := validateInputTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Subdirectory == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Subdirectory"))
 	}
@@ -989,6 +1008,11 @@ func validateOpCreateLocationNfsInput(v *CreateLocationNfsInput) error {
 	} else if v.OnPremConfig != nil {
 		if err := validateOnPremConfig(v.OnPremConfig); err != nil {
 			invalidParams.AddNested("OnPremConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateInputTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1032,16 +1056,16 @@ func validateOpCreateLocationS3Input(v *CreateLocationS3Input) error {
 	if v.S3BucketArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3BucketArn"))
 	}
-	if v.Tags != nil {
-		if err := validateInputTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.S3Config == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Config"))
 	} else if v.S3Config != nil {
 		if err := validateS3Config(v.S3Config); err != nil {
 			invalidParams.AddNested("S3Config", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateInputTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1059,22 +1083,22 @@ func validateOpCreateLocationSmbInput(v *CreateLocationSmbInput) error {
 	if v.Subdirectory == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Subdirectory"))
 	}
+	if v.ServerHostname == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerHostname"))
+	}
 	if v.User == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("User"))
 	}
 	if v.Password == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Password"))
 	}
-	if v.ServerHostname == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServerHostname"))
+	if v.AgentArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentArns"))
 	}
 	if v.Tags != nil {
 		if err := validateInputTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.AgentArns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AgentArns"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1091,17 +1115,17 @@ func validateOpCreateTaskInput(v *CreateTaskInput) error {
 	if v.SourceLocationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceLocationArn"))
 	}
-	if v.Tags != nil {
-		if err := validateInputTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.DestinationLocationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationLocationArn"))
 	}
 	if v.Schedule != nil {
 		if err := validateTaskSchedule(v.Schedule); err != nil {
 			invalidParams.AddNested("Schedule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateInputTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1382,11 +1406,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.Keys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Keys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Keys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Keys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1402,6 +1426,24 @@ func validateOpUpdateAgentInput(v *UpdateAgentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgentInput"}
 	if v.AgentArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateTaskExecutionInput(v *UpdateTaskExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTaskExecutionInput"}
+	if v.TaskExecutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskExecutionArn"))
+	}
+	if v.Options == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Options"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

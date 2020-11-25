@@ -33,8 +33,8 @@ type ListV2LoggingLevelsInput struct {
 	// The maximum number of results to return at one time.
 	MaxResults *int32
 
-	// The token used to get the next set of results, or null if there are no
-	// additional results.
+	// To retrieve the next set of results, the nextToken value from a previous
+	// response; otherwise null to receive the first set of results.
 	NextToken *string
 
 	// The type of resource for which you are configuring logging. Must be THING_Group.
@@ -46,7 +46,7 @@ type ListV2LoggingLevelsOutput struct {
 	// The logging configuration for a target.
 	LogTargetConfigurations []types.LogTargetConfiguration
 
-	// The token used to get the next set of results, or null if there are no
+	// The token to use to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string
 

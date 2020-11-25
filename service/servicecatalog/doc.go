@@ -5,7 +5,7 @@
 //
 // AWS Service Catalog AWS Service Catalog (https://aws.amazon.com/servicecatalog/)
 // enables organizations to create and manage catalogs of IT services that are
-// approved for use on AWS. To get the most out of this documentation, you should
-// be familiar with the terminology discussed in AWS Service Catalog Concepts
+// approved for AWS. To get the most out of this documentation, you should be
+// familiar with the terminology discussed in AWS Service Catalog Concepts
 // (http://docs.aws.amazon.com/servicecatalog/latest/adminguide/what-is_concepts.html).
 package servicecatalog

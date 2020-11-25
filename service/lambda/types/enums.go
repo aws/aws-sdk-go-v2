@@ -205,6 +205,22 @@ func (Runtime) Values() []Runtime {
 	}
 }
 
+type SourceAccessType string
+
+// Enum values for SourceAccessType
+const (
+	SourceAccessTypeBasicAuth SourceAccessType = "BASIC_AUTH"
+)
+
+// Values returns all known values for SourceAccessType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SourceAccessType) Values() []SourceAccessType {
+	return []SourceAccessType{
+		"BASIC_AUTH",
+	}
+}
+
 type State string
 
 // Enum values for State

@@ -11,7 +11,8 @@ import (
 )
 
 // Enables group metrics for the specified Auto Scaling group. For more
-// information, see Monitoring Your Auto Scaling Groups and Instances
+// information, see Monitoring CloudWatch metrics for your Auto Scaling groups and
+// instances
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-monitoring.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) EnableMetricsCollection(ctx context.Context, params *EnableMetricsCollectionInput, optFns ...func(*Options)) (*EnableMetricsCollectionOutput, error) {

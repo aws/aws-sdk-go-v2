@@ -2628,6 +2628,11 @@ func awsAwsquery_serializeDocumentSubnetMapping(v *types.SubnetMapping, value qu
 		objectKey.String(*v.AllocationId)
 	}
 
+	if v.IPv6Address != nil {
+		objectKey := object.Key("IPv6Address")
+		objectKey.String(*v.IPv6Address)
+	}
+
 	if v.PrivateIPv4Address != nil {
 		objectKey := object.Key("PrivateIPv4Address")
 		objectKey.String(*v.PrivateIPv4Address)
@@ -3737,6 +3742,11 @@ func awsAwsquery_serializeOpDocumentSetSecurityGroupsInput(v *SetSecurityGroupsI
 func awsAwsquery_serializeOpDocumentSetSubnetsInput(v *SetSubnetsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if len(v.IpAddressType) > 0 {
+		objectKey := object.Key("IpAddressType")
+		objectKey.String(string(v.IpAddressType))
+	}
 
 	if v.LoadBalancerArn != nil {
 		objectKey := object.Key("LoadBalancerArn")

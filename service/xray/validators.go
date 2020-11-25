@@ -70,6 +70,86 @@ func (m *validateOpCreateSamplingRule) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetInsightEvents struct {
+}
+
+func (*validateOpGetInsightEvents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetInsightEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetInsightEventsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetInsightEventsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetInsightImpactGraph struct {
+}
+
+func (*validateOpGetInsightImpactGraph) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetInsightImpactGraph) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetInsightImpactGraphInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetInsightImpactGraphInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetInsight struct {
+}
+
+func (*validateOpGetInsight) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetInsight) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetInsightInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetInsightInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetInsightSummaries struct {
+}
+
+func (*validateOpGetInsightSummaries) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetInsightSummaries) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetInsightSummariesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetInsightSummariesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSamplingTargets struct {
 }
 
@@ -322,6 +402,22 @@ func addOpCreateSamplingRuleValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCreateSamplingRule{}, middleware.After)
 }
 
+func addOpGetInsightEventsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetInsightEvents{}, middleware.After)
+}
+
+func addOpGetInsightImpactGraphValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetInsightImpactGraph{}, middleware.After)
+}
+
+func addOpGetInsightValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetInsight{}, middleware.After)
+}
+
+func addOpGetInsightSummariesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetInsightSummaries{}, middleware.After)
+}
+
 func addOpGetSamplingTargetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSamplingTargets{}, middleware.After)
 }
@@ -375,23 +471,23 @@ func validateSamplingRule(v *types.SamplingRule) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SamplingRule"}
-	if v.URLPath == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("URLPath"))
-	}
-	if v.Host == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Host"))
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if v.ServiceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
 	}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
-	}
 	if v.ServiceType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
 	}
+	if v.Host == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Host"))
+	}
 	if v.HTTPMethod == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HTTPMethod"))
+	}
+	if v.URLPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("URLPath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -405,14 +501,14 @@ func validateSamplingStatisticsDocument(v *types.SamplingStatisticsDocument) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SamplingStatisticsDocument"}
+	if v.RuleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleName"))
+	}
 	if v.ClientID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientID"))
 	}
 	if v.Timestamp == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Timestamp"))
-	}
-	if v.RuleName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RuleName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -443,11 +539,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -564,6 +660,75 @@ func validateOpCreateSamplingRuleInput(v *CreateSamplingRuleInput) error {
 	}
 }
 
+func validateOpGetInsightEventsInput(v *GetInsightEventsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetInsightEventsInput"}
+	if v.InsightId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InsightId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetInsightImpactGraphInput(v *GetInsightImpactGraphInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetInsightImpactGraphInput"}
+	if v.InsightId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InsightId"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetInsightInput(v *GetInsightInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetInsightInput"}
+	if v.InsightId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InsightId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetInsightSummariesInput(v *GetInsightSummariesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetInsightSummariesInput"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSamplingTargetsInput(v *GetSamplingTargetsInput) error {
 	if v == nil {
 		return nil
@@ -588,11 +753,11 @@ func validateOpGetServiceGraphInput(v *GetServiceGraphInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetServiceGraphInput"}
-	if v.EndTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
-	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -606,11 +771,11 @@ func validateOpGetTimeSeriesServiceStatisticsInput(v *GetTimeSeriesServiceStatis
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetTimeSeriesServiceStatisticsInput"}
-	if v.EndTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
-	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -639,11 +804,11 @@ func validateOpGetTraceSummariesInput(v *GetTraceSummariesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetTraceSummariesInput"}
-	if v.EndTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
-	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -743,11 +908,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

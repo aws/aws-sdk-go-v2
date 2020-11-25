@@ -533,6 +533,11 @@ func awsRestjson1_deserializeOpDocumentCreateIntentVersionOutput(v **CreateInten
 				return err
 			}
 
+		case "inputContexts":
+			if err := awsRestjson1_deserializeDocumentInputContextList(&sv.InputContexts, value); err != nil {
+				return err
+			}
+
 		case "kendraConfiguration":
 			if err := awsRestjson1_deserializeDocumentKendraConfiguration(&sv.KendraConfiguration, value); err != nil {
 				return err
@@ -558,6 +563,11 @@ func awsRestjson1_deserializeOpDocumentCreateIntentVersionOutput(v **CreateInten
 					return fmt.Errorf("expected IntentName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "outputContexts":
+			if err := awsRestjson1_deserializeDocumentOutputContextList(&sv.OutputContexts, value); err != nil {
+				return err
 			}
 
 		case "parentIntentSignature":
@@ -2000,7 +2010,7 @@ func awsRestjson1_deserializeOpDocumentGetBotOutput(v **GetBotOutput, value inte
 				if err != nil {
 					return err
 				}
-				sv.NluIntentConfidenceThreshold = f64
+				sv.NluIntentConfidenceThreshold = ptr.Float64(f64)
 			}
 
 		case "status":
@@ -4272,6 +4282,11 @@ func awsRestjson1_deserializeOpDocumentGetIntentOutput(v **GetIntentOutput, valu
 				return err
 			}
 
+		case "inputContexts":
+			if err := awsRestjson1_deserializeDocumentInputContextList(&sv.InputContexts, value); err != nil {
+				return err
+			}
+
 		case "kendraConfiguration":
 			if err := awsRestjson1_deserializeDocumentKendraConfiguration(&sv.KendraConfiguration, value); err != nil {
 				return err
@@ -4297,6 +4312,11 @@ func awsRestjson1_deserializeOpDocumentGetIntentOutput(v **GetIntentOutput, valu
 					return fmt.Errorf("expected IntentName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "outputContexts":
+			if err := awsRestjson1_deserializeDocumentOutputContextList(&sv.OutputContexts, value); err != nil {
+				return err
 			}
 
 		case "parentIntentSignature":
@@ -5850,7 +5870,7 @@ func awsRestjson1_deserializeOpDocumentPutBotOutput(v **PutBotOutput, value inte
 				if err != nil {
 					return err
 				}
-				sv.NluIntentConfidenceThreshold = f64
+				sv.NluIntentConfidenceThreshold = ptr.Float64(f64)
 			}
 
 		case "status":
@@ -6339,6 +6359,11 @@ func awsRestjson1_deserializeOpDocumentPutIntentOutput(v **PutIntentOutput, valu
 				return err
 			}
 
+		case "inputContexts":
+			if err := awsRestjson1_deserializeDocumentInputContextList(&sv.InputContexts, value); err != nil {
+				return err
+			}
+
 		case "kendraConfiguration":
 			if err := awsRestjson1_deserializeDocumentKendraConfiguration(&sv.KendraConfiguration, value); err != nil {
 				return err
@@ -6364,6 +6389,11 @@ func awsRestjson1_deserializeOpDocumentPutIntentOutput(v **PutIntentOutput, valu
 					return fmt.Errorf("expected IntentName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "outputContexts":
+			if err := awsRestjson1_deserializeDocumentOutputContextList(&sv.OutputContexts, value); err != nil {
+				return err
 			}
 
 		case "parentIntentSignature":
@@ -8351,6 +8381,80 @@ func awsRestjson1_deserializeDocumentFulfillmentActivity(v **types.FulfillmentAc
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentInputContext(v **types.InputContext, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InputContext
+	if *v == nil {
+		sv = &types.InputContext{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputContextName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInputContextList(v *[]types.InputContext, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.InputContext
+	if *v == nil {
+		cv = []types.InputContext{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.InputContext
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentInputContext(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentIntent(v **types.Intent, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9085,6 +9189,106 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentOutputContext(v **types.OutputContext, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OutputContext
+	if *v == nil {
+		sv = &types.OutputContext{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OutputContextName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "timeToLiveInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ContextTimeToLiveInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimeToLiveInSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "turnsToLive":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ContextTurnsToLive to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TurnsToLive = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOutputContextList(v *[]types.OutputContext, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.OutputContext
+	if *v == nil {
+		cv = []types.OutputContext{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.OutputContext
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentOutputContext(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPreconditionFailedException(v **types.PreconditionFailedException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9299,6 +9503,11 @@ func awsRestjson1_deserializeDocumentSlot(v **types.Slot, value interface{}) err
 
 	for key, value := range shape {
 		switch key {
+		case "defaultValueSpec":
+			if err := awsRestjson1_deserializeDocumentSlotDefaultValueSpec(&sv.DefaultValueSpec, value); err != nil {
+				return err
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9382,6 +9591,116 @@ func awsRestjson1_deserializeDocumentSlot(v **types.Slot, value interface{}) err
 
 		case "valueElicitationPrompt":
 			if err := awsRestjson1_deserializeDocumentPrompt(&sv.ValueElicitationPrompt, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSlotDefaultValue(v **types.SlotDefaultValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SlotDefaultValue
+	if *v == nil {
+		sv = &types.SlotDefaultValue{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "defaultValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SlotDefaultValueString to be of type string, got %T instead", value)
+				}
+				sv.DefaultValue = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSlotDefaultValueList(v *[]types.SlotDefaultValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SlotDefaultValue
+	if *v == nil {
+		cv = []types.SlotDefaultValue{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SlotDefaultValue
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSlotDefaultValue(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSlotDefaultValueSpec(v **types.SlotDefaultValueSpec, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SlotDefaultValueSpec
+	if *v == nil {
+		sv = &types.SlotDefaultValueSpec{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "defaultValueList":
+			if err := awsRestjson1_deserializeDocumentSlotDefaultValueList(&sv.DefaultValueList, value); err != nil {
 				return err
 			}
 

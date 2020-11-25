@@ -32,8 +32,6 @@ func (c *Client) CreateCustomActionType(ctx context.Context, params *CreateCusto
 type CreateCustomActionTypeInput struct {
 
 	// The category of the custom action, such as a build action or a test action.
-	// Although Source and Approval are listed as valid values, they are not currently
-	// functional. These values are reserved for future use.
 	//
 	// This member is required.
 	Category types.ActionCategory

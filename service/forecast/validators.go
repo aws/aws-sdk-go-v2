@@ -701,11 +701,11 @@ func validateContinuousParameterRange(v *types.ContinuousParameterRange) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.MinValue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MinValue"))
-	}
 	if v.MaxValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MaxValue"))
+	}
+	if v.MinValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinValue"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -774,11 +774,11 @@ func validateEncryptionConfig(v *types.EncryptionConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EncryptionConfig"}
-	if v.KMSKeyArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KMSKeyArn"))
-	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.KMSKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KMSKeyArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -881,14 +881,14 @@ func validateFilter(v *types.Filter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Filter"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if len(v.Condition) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Condition"))
-	}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -956,11 +956,11 @@ func validateIntegerParameterRange(v *types.IntegerParameterRange) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IntegerParameterRange"}
-	if v.MaxValue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxValue"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.MaxValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxValue"))
 	}
 	if v.MinValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MinValue"))
@@ -999,14 +999,14 @@ func validateParameterRanges(v *types.ParameterRanges) error {
 			invalidParams.AddNested("CategoricalParameterRanges", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.IntegerParameterRanges != nil {
-		if err := validateIntegerParameterRanges(v.IntegerParameterRanges); err != nil {
-			invalidParams.AddNested("IntegerParameterRanges", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.ContinuousParameterRanges != nil {
 		if err := validateContinuousParameterRanges(v.ContinuousParameterRanges); err != nil {
 			invalidParams.AddNested("ContinuousParameterRanges", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IntegerParameterRanges != nil {
+		if err := validateIntegerParameterRanges(v.IntegerParameterRanges); err != nil {
+			invalidParams.AddNested("IntegerParameterRanges", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1039,11 +1039,11 @@ func validateSupplementaryFeature(v *types.SupplementaryFeature) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SupplementaryFeature"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1112,13 +1112,13 @@ func validateOpCreateDatasetGroupInput(v *CreateDatasetGroupInput) error {
 	if v.DatasetGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetGroupName"))
 	}
+	if len(v.Domain) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.Domain) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1138,16 +1138,16 @@ func validateOpCreateDatasetImportJobInput(v *CreateDatasetImportJobInput) error
 	if v.DatasetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetArn"))
 	}
-	if v.Tags != nil {
-		if err := validateTags(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.DataSource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSource"))
 	} else if v.DataSource != nil {
 		if err := validateDataSource(v.DataSource); err != nil {
 			invalidParams.AddNested("DataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1162,8 +1162,17 @@ func validateOpCreateDatasetInput(v *CreateDatasetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDatasetInput"}
+	if v.DatasetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
+	}
 	if len(v.Domain) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if len(v.DatasetType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetType"))
+	}
+	if v.Schema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Schema"))
 	}
 	if v.EncryptionConfig != nil {
 		if err := validateEncryptionConfig(v.EncryptionConfig); err != nil {
@@ -1174,15 +1183,6 @@ func validateOpCreateDatasetInput(v *CreateDatasetInput) error {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.DatasetType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("DatasetType"))
-	}
-	if v.Schema == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Schema"))
-	}
-	if v.DatasetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1199,6 +1199,9 @@ func validateOpCreateForecastExportJobInput(v *CreateForecastExportJobInput) err
 	if v.ForecastExportJobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ForecastExportJobName"))
 	}
+	if v.ForecastArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ForecastArn"))
+	}
 	if v.Destination == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
 	} else if v.Destination != nil {
@@ -1210,9 +1213,6 @@ func validateOpCreateForecastExportJobInput(v *CreateForecastExportJobInput) err
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ForecastArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ForecastArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1249,17 +1249,8 @@ func validateOpCreatePredictorInput(v *CreatePredictorInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePredictorInput"}
-	if v.InputDataConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputDataConfig"))
-	} else if v.InputDataConfig != nil {
-		if err := validateInputDataConfig(v.InputDataConfig); err != nil {
-			invalidParams.AddNested("InputDataConfig", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.EncryptionConfig != nil {
-		if err := validateEncryptionConfig(v.EncryptionConfig); err != nil {
-			invalidParams.AddNested("EncryptionConfig", err.(smithy.InvalidParamsError))
-		}
+	if v.PredictorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PredictorName"))
 	}
 	if v.ForecastHorizon == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ForecastHorizon"))
@@ -1269,12 +1260,11 @@ func validateOpCreatePredictorInput(v *CreatePredictorInput) error {
 			invalidParams.AddNested("HPOConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.PredictorName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PredictorName"))
-	}
-	if v.Tags != nil {
-		if err := validateTags(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+	if v.InputDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputDataConfig"))
+	} else if v.InputDataConfig != nil {
+		if err := validateInputDataConfig(v.InputDataConfig); err != nil {
+			invalidParams.AddNested("InputDataConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.FeaturizationConfig == nil {
@@ -1282,6 +1272,16 @@ func validateOpCreatePredictorInput(v *CreatePredictorInput) error {
 	} else if v.FeaturizationConfig != nil {
 		if err := validateFeaturizationConfig(v.FeaturizationConfig); err != nil {
 			invalidParams.AddNested("FeaturizationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionConfig != nil {
+		if err := validateEncryptionConfig(v.EncryptionConfig); err != nil {
+			invalidParams.AddNested("EncryptionConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1574,15 +1574,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1614,11 +1614,11 @@ func validateOpUpdateDatasetGroupInput(v *UpdateDatasetGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDatasetGroupInput"}
-	if v.DatasetArns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatasetArns"))
-	}
 	if v.DatasetGroupArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetGroupArn"))
+	}
+	if v.DatasetArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetArns"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

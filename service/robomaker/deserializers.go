@@ -3059,6 +3059,11 @@ func awsRestjson1_deserializeOpDocumentCreateWorldGenerationJobOutput(v **Create
 				return err
 			}
 
+		case "worldTags":
+			if err := awsRestjson1_deserializeDocumentTagMap(&sv.WorldTags, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6238,6 +6243,11 @@ func awsRestjson1_deserializeOpDocumentDescribeWorldGenerationJobOutput(v **Desc
 
 		case "worldCount":
 			if err := awsRestjson1_deserializeDocumentWorldCount(&sv.WorldCount, value); err != nil {
+				return err
+			}
+
+		case "worldTags":
+			if err := awsRestjson1_deserializeDocumentTagMap(&sv.WorldTags, value); err != nil {
 				return err
 			}
 

@@ -35,6 +35,9 @@ type ModifyClientVpnEndpointInput struct {
 	// This member is required.
 	ClientVpnEndpointId *string
 
+	// The options for managing connection authorization for new client connections.
+	ClientConnectOptions *types.ClientConnectOptions
+
 	// Information about the client connection logging options. If you enable client
 	// connection logging, data about client connections is sent to a Cloudwatch Logs
 	// log stream. The following information is logged:

@@ -190,6 +190,26 @@ func (m *validateOpDeleteDetectorVersion) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteEntityType struct {
+}
+
+func (*validateOpDeleteEntityType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEntityType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEntityTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEntityTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteEvent struct {
 }
 
@@ -210,6 +230,126 @@ func (m *validateOpDeleteEvent) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteEventType struct {
+}
+
+func (*validateOpDeleteEventType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEventType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEventTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEventTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteExternalModel struct {
+}
+
+func (*validateOpDeleteExternalModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteExternalModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteExternalModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteExternalModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLabel struct {
+}
+
+func (*validateOpDeleteLabel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLabel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLabelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLabelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteModel struct {
+}
+
+func (*validateOpDeleteModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteModelVersion struct {
+}
+
+func (*validateOpDeleteModelVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteModelVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteModelVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteModelVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteOutcome struct {
+}
+
+func (*validateOpDeleteOutcome) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteOutcome) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteOutcomeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteOutcomeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteRule struct {
 }
 
@@ -225,6 +365,26 @@ func (m *validateOpDeleteRule) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteVariable struct {
+}
+
+func (*validateOpDeleteVariable) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVariable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVariableInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVariableInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -746,12 +906,44 @@ func addOpDeleteDetectorVersionValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDeleteDetectorVersion{}, middleware.After)
 }
 
+func addOpDeleteEntityTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEntityType{}, middleware.After)
+}
+
 func addOpDeleteEventValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEvent{}, middleware.After)
 }
 
+func addOpDeleteEventTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEventType{}, middleware.After)
+}
+
+func addOpDeleteExternalModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteExternalModel{}, middleware.After)
+}
+
+func addOpDeleteLabelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLabel{}, middleware.After)
+}
+
+func addOpDeleteModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteModel{}, middleware.After)
+}
+
+func addOpDeleteModelVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteModelVersion{}, middleware.After)
+}
+
+func addOpDeleteOutcomeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteOutcome{}, middleware.After)
+}
+
 func addOpDeleteRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRule{}, middleware.After)
+}
+
+func addOpDeleteVariableValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVariable{}, middleware.After)
 }
 
 func addOpDescribeDetectorValidationMiddleware(stack *middleware.Stack) error {
@@ -970,14 +1162,14 @@ func validateModelVersion(v *types.ModelVersion) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModelVersion"}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
 	if len(v.ModelType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelType"))
 	}
 	if v.ModelVersionNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelVersionNumber"))
-	}
-	if v.ModelId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -991,14 +1183,14 @@ func validateRule(v *types.Rule) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Rule"}
-	if v.RuleVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RuleVersion"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}
 	if v.RuleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
+	}
+	if v.RuleVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1029,11 +1221,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1086,13 +1278,13 @@ func validateOpBatchCreateVariableInput(v *BatchCreateVariableInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchCreateVariableInput"}
+	if v.VariableEntries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VariableEntries"))
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.VariableEntries == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VariableEntries"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1121,6 +1313,16 @@ func validateOpCreateDetectorVersionInput(v *CreateDetectorVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDetectorVersionInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	} else if v.Rules != nil {
+		if err := validateRuleList(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ModelVersions != nil {
 		if err := validateListOfModelVersions(v.ModelVersions); err != nil {
 			invalidParams.AddNested("ModelVersions", err.(smithy.InvalidParamsError))
@@ -1130,16 +1332,6 @@ func validateOpCreateDetectorVersionInput(v *CreateDetectorVersionInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Rules == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
-	} else if v.Rules != nil {
-		if err := validateRuleList(v.Rules); err != nil {
-			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.DetectorId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1153,19 +1345,19 @@ func validateOpCreateModelInput(v *CreateModelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateModelInput"}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
 	if len(v.ModelType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelType"))
+	}
+	if v.EventTypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTypeName"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.EventTypeName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EventTypeName"))
-	}
-	if v.ModelId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1179,13 +1371,14 @@ func validateOpCreateModelVersionInput(v *CreateModelVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateModelVersionInput"}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.ModelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if len(v.ModelType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelType"))
+	}
+	if len(v.TrainingDataSource) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingDataSource"))
 	}
 	if v.TrainingDataSchema == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrainingDataSchema"))
@@ -1194,16 +1387,15 @@ func validateOpCreateModelVersionInput(v *CreateModelVersionInput) error {
 			invalidParams.AddNested("TrainingDataSchema", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.TrainingDataSource) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TrainingDataSource"))
-	}
 	if v.ExternalEventsDetail != nil {
 		if err := validateExternalEventsDetail(v.ExternalEventsDetail); err != nil {
 			invalidParams.AddNested("ExternalEventsDetail", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.ModelType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ModelType"))
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1217,25 +1409,25 @@ func validateOpCreateRuleInput(v *CreateRuleInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateRuleInput"}
-	if v.DetectorId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
-	}
-	if v.Outcomes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Outcomes"))
-	}
 	if v.RuleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
 	}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
 	if v.Expression == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	}
+	if len(v.Language) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Language"))
+	}
+	if v.Outcomes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Outcomes"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.Language) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Language"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1249,13 +1441,11 @@ func validateOpCreateVariableInput(v *CreateVariableInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateVariableInput"}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.DataType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DataType"))
 	}
 	if len(v.DataSource) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSource"))
@@ -1263,8 +1453,10 @@ func validateOpCreateVariableInput(v *CreateVariableInput) error {
 	if v.DefaultValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DefaultValue"))
 	}
-	if len(v.DataType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("DataType"))
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1293,11 +1485,26 @@ func validateOpDeleteDetectorVersionInput(v *DeleteDetectorVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDetectorVersionInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
 	if v.DetectorVersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorVersionId"))
 	}
-	if v.DetectorId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteEntityTypeInput(v *DeleteEntityTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEntityTypeInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1311,11 +1518,110 @@ func validateOpDeleteEventInput(v *DeleteEventInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteEventInput"}
+	if v.EventId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventId"))
+	}
 	if v.EventTypeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventTypeName"))
 	}
-	if v.EventId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EventId"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteEventTypeInput(v *DeleteEventTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEventTypeInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteExternalModelInput(v *DeleteExternalModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteExternalModelInput"}
+	if v.ModelEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelEndpoint"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLabelInput(v *DeleteLabelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLabelInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteModelInput(v *DeleteModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteModelInput"}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if len(v.ModelType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteModelVersionInput(v *DeleteModelVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteModelVersionInput"}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if len(v.ModelType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelType"))
+	}
+	if v.ModelVersionNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelVersionNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteOutcomeInput(v *DeleteOutcomeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteOutcomeInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1335,6 +1641,21 @@ func validateOpDeleteRuleInput(v *DeleteRuleInput) error {
 		if err := validateRule(v.Rule); err != nil {
 			invalidParams.AddNested("Rule", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteVariableInput(v *DeleteVariableInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVariableInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1363,11 +1684,11 @@ func validateOpGetDetectorVersionInput(v *GetDetectorVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDetectorVersionInput"}
-	if v.DetectorVersionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DetectorVersionId"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.DetectorVersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorVersionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1381,11 +1702,8 @@ func validateOpGetEventPredictionInput(v *GetEventPredictionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetEventPredictionInput"}
-	if v.EventTimestamp == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EventTimestamp"))
-	}
-	if v.EventVariables == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EventVariables"))
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}
 	if v.EventId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventId"))
@@ -1393,15 +1711,18 @@ func validateOpGetEventPredictionInput(v *GetEventPredictionInput) error {
 	if v.EventTypeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventTypeName"))
 	}
-	if v.DetectorId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
-	}
 	if v.Entities == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Entities"))
 	} else if v.Entities != nil {
 		if err := validateListOfEntities(v.Entities); err != nil {
 			invalidParams.AddNested("Entities", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.EventTimestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTimestamp"))
+	}
+	if v.EventVariables == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventVariables"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1415,14 +1736,14 @@ func validateOpGetModelVersionInput(v *GetModelVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetModelVersionInput"}
-	if v.ModelVersionNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ModelVersionNumber"))
-	}
 	if v.ModelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
 	}
 	if len(v.ModelType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelType"))
+	}
+	if v.ModelVersionNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelVersionNumber"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1466,11 +1787,11 @@ func validateOpPutDetectorInput(v *PutDetectorInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutDetectorInput"}
-	if v.EventTypeName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EventTypeName"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.EventTypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTypeName"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -1489,13 +1810,13 @@ func validateOpPutEntityTypeInput(v *PutEntityTypeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutEntityTypeInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1512,6 +1833,9 @@ func validateOpPutEventTypeInput(v *PutEventTypeInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.EventVariables == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventVariables"))
+	}
 	if v.EntityTypes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityTypes"))
 	}
@@ -1519,9 +1843,6 @@ func validateOpPutEventTypeInput(v *PutEventTypeInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.EventVariables == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EventVariables"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1535,10 +1856,14 @@ func validateOpPutExternalModelInput(v *PutExternalModelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutExternalModelInput"}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
+	if v.ModelEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelEndpoint"))
+	}
+	if len(v.ModelSource) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelSource"))
+	}
+	if v.InvokeModelEndpointRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvokeModelEndpointRoleArn"))
 	}
 	if v.InputConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputConfiguration"))
@@ -1547,15 +1872,6 @@ func validateOpPutExternalModelInput(v *PutExternalModelInput) error {
 			invalidParams.AddNested("InputConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ModelEndpoint == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ModelEndpoint"))
-	}
-	if v.InvokeModelEndpointRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InvokeModelEndpointRoleArn"))
-	}
-	if len(v.ModelEndpointStatus) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ModelEndpointStatus"))
-	}
 	if v.OutputConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputConfiguration"))
 	} else if v.OutputConfiguration != nil {
@@ -1563,8 +1879,13 @@ func validateOpPutExternalModelInput(v *PutExternalModelInput) error {
 			invalidParams.AddNested("OutputConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.ModelSource) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ModelSource"))
+	if len(v.ModelEndpointStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelEndpointStatus"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1593,13 +1914,13 @@ func validateOpPutLabelInput(v *PutLabelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutLabelInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1633,15 +1954,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1655,11 +1976,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1673,6 +1994,15 @@ func validateOpUpdateDetectorVersionInput(v *UpdateDetectorVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDetectorVersionInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.DetectorVersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorVersionId"))
+	}
+	if v.ExternalModelEndpoints == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExternalModelEndpoints"))
+	}
 	if v.Rules == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
 	} else if v.Rules != nil {
@@ -1680,19 +2010,10 @@ func validateOpUpdateDetectorVersionInput(v *UpdateDetectorVersionInput) error {
 			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.DetectorId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
-	}
-	if v.DetectorVersionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DetectorVersionId"))
-	}
 	if v.ModelVersions != nil {
 		if err := validateListOfModelVersions(v.ModelVersions); err != nil {
 			invalidParams.AddNested("ModelVersions", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ExternalModelEndpoints == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ExternalModelEndpoints"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1706,14 +2027,14 @@ func validateOpUpdateDetectorVersionMetadataInput(v *UpdateDetectorVersionMetada
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDetectorVersionMetadataInput"}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}
 	if v.DetectorVersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorVersionId"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1727,14 +2048,14 @@ func validateOpUpdateDetectorVersionStatusInput(v *UpdateDetectorVersionStatusIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDetectorVersionStatusInput"}
-	if len(v.Status) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Status"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}
 	if v.DetectorVersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorVersionId"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1748,11 +2069,11 @@ func validateOpUpdateModelInput(v *UpdateModelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateModelInput"}
-	if len(v.ModelType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ModelType"))
-	}
 	if v.ModelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if len(v.ModelType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1769,10 +2090,8 @@ func validateOpUpdateModelVersionInput(v *UpdateModelVersionInput) error {
 	if v.ModelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
 	}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
+	if len(v.ModelType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelType"))
 	}
 	if v.MajorVersionNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MajorVersionNumber"))
@@ -1782,8 +2101,10 @@ func validateOpUpdateModelVersionInput(v *UpdateModelVersionInput) error {
 			invalidParams.AddNested("ExternalEventsDetail", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.ModelType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ModelType"))
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1797,6 +2118,9 @@ func validateOpUpdateModelVersionStatusInput(v *UpdateModelVersionStatusInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateModelVersionStatusInput"}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
 	if len(v.ModelType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelType"))
 	}
@@ -1805,9 +2129,6 @@ func validateOpUpdateModelVersionStatusInput(v *UpdateModelVersionStatusInput) e
 	}
 	if len(v.Status) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Status"))
-	}
-	if v.ModelId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1821,15 +2142,15 @@ func validateOpUpdateRuleMetadataInput(v *UpdateRuleMetadataInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRuleMetadataInput"}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
-	}
 	if v.Rule == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Rule"))
 	} else if v.Rule != nil {
 		if err := validateRule(v.Rule); err != nil {
 			invalidParams.AddNested("Rule", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1843,17 +2164,6 @@ func validateOpUpdateRuleVersionInput(v *UpdateRuleVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRuleVersionInput"}
-	if v.Outcomes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Outcomes"))
-	}
-	if len(v.Language) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Language"))
-	}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Rule == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Rule"))
 	} else if v.Rule != nil {
@@ -1863,6 +2173,17 @@ func validateOpUpdateRuleVersionInput(v *UpdateRuleVersionInput) error {
 	}
 	if v.Expression == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	}
+	if len(v.Language) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Language"))
+	}
+	if v.Outcomes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Outcomes"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

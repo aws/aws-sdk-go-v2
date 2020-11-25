@@ -55,7 +55,7 @@ type CreateLocationNfsInput struct {
 	// source location or write data to the NFS destination. The NFS path should be a
 	// path that's exported by the NFS server, or a subdirectory of that path. The path
 	// should be such that it can be mounted by other NFS clients in your network. To
-	// see all the paths exported by your NFS server. run "showmount -e
+	// see all the paths exported by your NFS server, run "showmount -e
 	// nfs-server-name" from an NFS client that has access to your server. You can
 	// specify any directory that appears in the results, and any subdirectory of that
 	// directory. Ensure that the NFS export is accessible without Kerberos

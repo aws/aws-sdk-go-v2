@@ -221,17 +221,17 @@ func validateOpStartSpeechSynthesisTaskInput(v *StartSpeechSynthesisTaskInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartSpeechSynthesisTaskInput"}
+	if len(v.OutputFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputFormat"))
+	}
 	if v.OutputS3BucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputS3BucketName"))
-	}
-	if len(v.VoiceId) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("VoiceId"))
 	}
 	if v.Text == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Text"))
 	}
-	if len(v.OutputFormat) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("OutputFormat"))
+	if len(v.VoiceId) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -245,14 +245,14 @@ func validateOpSynthesizeSpeechInput(v *SynthesizeSpeechInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SynthesizeSpeechInput"}
-	if len(v.VoiceId) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("VoiceId"))
+	if len(v.OutputFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputFormat"))
 	}
 	if v.Text == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Text"))
 	}
-	if len(v.OutputFormat) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("OutputFormat"))
+	if len(v.VoiceId) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

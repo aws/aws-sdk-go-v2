@@ -242,6 +242,7 @@ const (
 	DataSourceTypeJira                DataSourceType = "JIRA"
 	DataSourceTypeMariadb             DataSourceType = "MARIADB"
 	DataSourceTypeMysql               DataSourceType = "MYSQL"
+	DataSourceTypeOracle              DataSourceType = "ORACLE"
 	DataSourceTypePostgresql          DataSourceType = "POSTGRESQL"
 	DataSourceTypePresto              DataSourceType = "PRESTO"
 	DataSourceTypeRedshift            DataSourceType = "REDSHIFT"
@@ -271,6 +272,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"JIRA",
 		"MARIADB",
 		"MYSQL",
+		"ORACLE",
 		"POSTGRESQL",
 		"PRESTO",
 		"REDSHIFT",

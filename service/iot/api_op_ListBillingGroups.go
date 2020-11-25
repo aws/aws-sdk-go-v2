@@ -36,7 +36,8 @@ type ListBillingGroupsInput struct {
 	// Limit the results to billing groups whose names have the given prefix.
 	NamePrefixFilter *string
 
-	// The token to retrieve the next set of results.
+	// To retrieve the next set of results, the nextToken value from a previous
+	// response; otherwise null to receive the first set of results.
 	NextToken *string
 }
 
@@ -45,7 +46,7 @@ type ListBillingGroupsOutput struct {
 	// The list of billing groups.
 	BillingGroups []types.GroupNameAndArn
 
-	// The token used to get the next set of results, or null if there are no
+	// The token to use to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string
 

@@ -189,6 +189,14 @@ type PostContentInput struct {
 	// (defaults to mpeg)
 	Accept *string
 
+	// A list of contexts active for the request. A context can be activated when a
+	// previous intent is fulfilled, or by including the context in the request, If you
+	// don't specify a list of contexts, Amazon Lex will use the current list of
+	// contexts for the session. If you specify an empty list, all contexts for the
+	// session are cleared.
+	// This value conforms to the media type: application/json
+	ActiveContexts *string
+
 	// You pass this value as the x-amz-lex-request-attributes HTTP header.
 	// Request-specific information passed between Amazon Lex and a client application.
 	// The value must be a JSON serialized and base64 encoded map with string keys and
@@ -213,6 +221,13 @@ type PostContentInput struct {
 
 type PostContentOutput struct {
 
+	// A list of active contexts for the session. A context can be set when an intent
+	// is fulfilled or by calling the PostContent, PostText, or PutSession operation.
+	// You can use a context to control the intents that can follow up an intent, or to
+	// modify the operation of your application.
+	// This value conforms to the media type: application/json
+	ActiveContexts *string
+
 	// One to four alternative intents that may be applicable to the user's intent.
 	// Each alternative includes a score that indicates how confident Amazon Lex is
 	// that the intent matches the user's intent. The intents are sorted by the
@@ -231,12 +246,7 @@ type PostContentOutput struct {
 
 	// The version of the bot that responded to the conversation. You can use this
 	// information to help determine if one version of a bot is performing better than
-	// another version. If you have enabled the new natural language understanding
-	// (NLU) model, you can use this to determine if the improvement is due to changes
-	// to the bot or changes to the NLU. For more information about enabling the new
-	// NLU, see the enableModelImprovements
-	// (https://docs.aws.amazon.com/lex/latest/dg/API_PutBot.html#lex-PutBot-request-enableModelImprovements)
-	// parameter of the PutBot operation.
+	// another version.
 	BotVersion *string
 
 	// Content type as specified in the Accept HTTP header in the request.
@@ -324,7 +334,7 @@ type PostContentOutput struct {
 	// Provides a score that indicates how confident Amazon Lex is that the returned
 	// intent is the one that matches the user's intent. The score is between 0.0 and
 	// 1.0. The score is a relative score, not an absolute score. The score may change
-	// based on improvements to the Amazon Lex NLU.
+	// based on improvements to Amazon Lex.
 	// This value conforms to the media type: application/json
 	NluIntentConfidence *string
 

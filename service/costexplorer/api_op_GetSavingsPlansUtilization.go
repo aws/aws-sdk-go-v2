@@ -12,8 +12,8 @@ import (
 )
 
 // Retrieves the Savings Plans utilization for your account across date ranges with
-// daily or monthly granularity. Master account in an organization have access to
-// member accounts. You can use GetDimensionValues in SAVINGS_PLANS to determine
+// daily or monthly granularity. Management account in an organization have access
+// to member accounts. You can use GetDimensionValues in SAVINGS_PLANS to determine
 // the possible dimension values. You cannot group by any dimension values for
 // GetSavingsPlansUtilization.
 func (c *Client) GetSavingsPlansUtilization(ctx context.Context, params *GetSavingsPlansUtilizationInput, optFns ...func(*Options)) (*GetSavingsPlansUtilizationOutput, error) {

@@ -86,9 +86,10 @@ type EnhancedMonitoring string
 
 // Enum values for EnhancedMonitoring
 const (
-	EnhancedMonitoringDefault           EnhancedMonitoring = "DEFAULT"
-	EnhancedMonitoringPerBroker         EnhancedMonitoring = "PER_BROKER"
-	EnhancedMonitoringPerTopicPerBroker EnhancedMonitoring = "PER_TOPIC_PER_BROKER"
+	EnhancedMonitoringDefault              EnhancedMonitoring = "DEFAULT"
+	EnhancedMonitoringPerBroker            EnhancedMonitoring = "PER_BROKER"
+	EnhancedMonitoringPerTopicPerBroker    EnhancedMonitoring = "PER_TOPIC_PER_BROKER"
+	EnhancedMonitoringPerTopicPerPartition EnhancedMonitoring = "PER_TOPIC_PER_PARTITION"
 )
 
 // Values returns all known values for EnhancedMonitoring. Note that this can be
@@ -99,6 +100,7 @@ func (EnhancedMonitoring) Values() []EnhancedMonitoring {
 		"DEFAULT",
 		"PER_BROKER",
 		"PER_TOPIC_PER_BROKER",
+		"PER_TOPIC_PER_PARTITION",
 	}
 }
 

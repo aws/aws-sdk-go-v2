@@ -223,8 +223,9 @@ type RegisterTaskDefinitionInput struct {
 	// later.
 	ProxyConfiguration *types.ProxyConfiguration
 
-	// The launch type required by the task. If no value is specified, it defaults to
-	// EC2.
+	// The task launch type that Amazon ECS should validate the task definition
+	// against. This ensures that the task definition parameters are compatible with
+	// the specified launch type. If no value is specified, it defaults to EC2.
 	RequiresCompatibilities []types.Compatibility
 
 	// The metadata that you apply to the task definition to help you categorize and

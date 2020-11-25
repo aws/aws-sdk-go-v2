@@ -225,8 +225,8 @@ func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 type ResourceNotFoundException struct {
 	Message *string
 
-	ResourceType *string
 	ResourceId   *string
+	ResourceType *string
 }
 
 func (e *ResourceNotFoundException) Error() string {

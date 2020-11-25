@@ -72,6 +72,7 @@ const (
 	RepositoryAssociationStateAssociating    RepositoryAssociationState = "Associating"
 	RepositoryAssociationStateFailed         RepositoryAssociationState = "Failed"
 	RepositoryAssociationStateDisassociating RepositoryAssociationState = "Disassociating"
+	RepositoryAssociationStateDisassociated  RepositoryAssociationState = "Disassociated"
 )
 
 // Values returns all known values for RepositoryAssociationState. Note that this
@@ -83,6 +84,7 @@ func (RepositoryAssociationState) Values() []RepositoryAssociationState {
 		"Associating",
 		"Failed",
 		"Disassociating",
+		"Disassociated",
 	}
 }
 

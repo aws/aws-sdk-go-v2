@@ -1246,6 +1246,16 @@ type ErrorDetail struct {
 	ErrorMessage *string
 }
 
+// An object containing error details.
+type ErrorDetails struct {
+
+	// The error code for an error.
+	ErrorCode *string
+
+	// The error message for an error.
+	ErrorMessage *string
+}
+
 // Evaluation metrics provide an estimate of the quality of your machine learning
 // transform.
 type EvaluationMetrics struct {
@@ -2013,6 +2023,26 @@ type MappingEntry struct {
 	TargetType *string
 }
 
+// A structure containing metadata information for a schema version.
+type MetadataInfo struct {
+
+	// The time at which the entry was created.
+	CreatedTime *string
+
+	// The metadata key’s corresponding value.
+	MetadataValue *string
+}
+
+// A structure containing a key value pair for metadata.
+type MetadataKeyValuePair struct {
+
+	// A metadata key.
+	MetadataKey *string
+
+	// A metadata key’s corresponding value.
+	MetadataValue *string
+}
+
 // A structure for a machine learning transform.
 type MLTransform struct {
 
@@ -2420,6 +2450,41 @@ type RecrawlPolicy struct {
 	RecrawlBehavior RecrawlBehavior
 }
 
+// A wrapper structure that may contain the registry name and Amazon Resource Name
+// (ARN).
+type RegistryId struct {
+
+	// Arn of the registry to be updated. One of RegistryArn or RegistryName has to be
+	// provided.
+	RegistryArn *string
+
+	// Name of the registry. Used only for lookup. One of RegistryArn or RegistryName
+	// has to be provided.
+	RegistryName *string
+}
+
+// A structure containing the details for a registry.
+type RegistryListItem struct {
+
+	// The data the registry was created.
+	CreatedTime *string
+
+	// A description of the registry.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of the registry.
+	RegistryArn *string
+
+	// The name of the registry.
+	RegistryName *string
+
+	// The status of the registry.
+	Status RegistryStatus
+
+	// The date the registry was updated.
+	UpdatedTime *string
+}
+
 // The URIs for function resources.
 type ResourceUri struct {
 
@@ -2491,6 +2556,89 @@ type SchemaColumn struct {
 
 	// The name of the column.
 	Name *string
+}
+
+type SchemaId struct {
+	RegistryName *string
+
+	SchemaArn *string
+
+	SchemaName *string
+}
+
+// An object that contains minimal details for a schema.
+type SchemaListItem struct {
+
+	// The date and time that a schema was created.
+	CreatedTime *string
+
+	// A description for the schema.
+	Description *string
+
+	// the name of the registry where the schema resides.
+	RegistryName *string
+
+	// The Amazon Resource Name (ARN) for the schema.
+	SchemaArn *string
+
+	// The name of the schema.
+	SchemaName *string
+
+	// The status of the schema.
+	SchemaStatus SchemaStatus
+
+	// The date and time that a schema was updated.
+	UpdatedTime *string
+}
+
+// An object that references a schema stored in the AWS Glue Schema Registry.
+type SchemaReference struct {
+
+	// A structure that contains schema identity fields. Either this or the
+	// SchemaVersionId has to be provided.
+	SchemaId *SchemaId
+
+	// The unique ID assigned to a version of the schema. Either this or the SchemaId
+	// has to be provided.
+	SchemaVersionId *string
+
+	// The version number of the schema.
+	SchemaVersionNumber int64
+}
+
+// An object that contains the error details for an operation on a schema version.
+type SchemaVersionErrorItem struct {
+
+	// The details of the error for the schema version.
+	ErrorDetails *ErrorDetails
+
+	// The version number of the schema.
+	VersionNumber int64
+}
+
+// An object containing the details about a schema version.
+type SchemaVersionListItem struct {
+
+	// The date and time the schema version was created.
+	CreatedTime *string
+
+	// The Amazon Resource Name (ARN) of the schema.
+	SchemaArn *string
+
+	// The unique identifier of the schema version.
+	SchemaVersionId *string
+
+	// The status of the schema version.
+	Status SchemaVersionStatus
+
+	// The version number of the schema.
+	VersionNumber int64
+}
+
+type SchemaVersionNumber struct {
+	LatestVersion bool
+
+	VersionNumber int64
 }
 
 // Specifies a security configuration.
@@ -2592,6 +2740,11 @@ type StorageDescriptor struct {
 
 	// The user-supplied properties in key-value form.
 	Parameters map[string]string
+
+	// An object that references a schema stored in the AWS Glue Schema Registry. When
+	// creating a table, you can pass an empty list of columns for the schema, and
+	// instead use a schema reference.
+	SchemaReference *SchemaReference
 
 	// The serialization/deserialization (SerDe) information.
 	SerdeInfo *SerDeInfo

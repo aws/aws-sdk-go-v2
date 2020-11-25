@@ -34,7 +34,7 @@ import (
 // * If you finish before the timeout period ends, complete the
 // lifecycle action.
 //
-// For more information, see Auto Scaling Lifecycle
+// For more information, see Auto Scaling lifecycle
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) RecordLifecycleActionHeartbeat(ctx context.Context, params *RecordLifecycleActionHeartbeatInput, optFns ...func(*Options)) (*RecordLifecycleActionHeartbeatOutput, error) {

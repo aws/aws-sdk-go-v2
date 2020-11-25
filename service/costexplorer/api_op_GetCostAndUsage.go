@@ -17,8 +17,11 @@ import (
 // dimensions, such as SERVICE or AZ, in a specific time range. For a complete list
 // of valid dimensions, see the GetDimensionValues
 // (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html)
-// operation. Master account in an organization in AWS Organizations have access to
-// all member accounts.
+// operation. Management account in an organization in AWS Organizations have
+// access to all member accounts. For information about filter limitations, see
+// Quotas and restrictions
+// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-limits.html)
+// in the Billing and Cost Management User Guide.
 func (c *Client) GetCostAndUsage(ctx context.Context, params *GetCostAndUsageInput, optFns ...func(*Options)) (*GetCostAndUsageOutput, error) {
 	if params == nil {
 		params = &GetCostAndUsageInput{}

@@ -33,7 +33,8 @@ type ListTopicRuleDestinationsInput struct {
 	// The maximum number of results to return at one time.
 	MaxResults *int32
 
-	// The token to retrieve the next set of results.
+	// To retrieve the next set of results, the nextToken value from a previous
+	// response; otherwise null to receive the first set of results.
 	NextToken *string
 }
 
@@ -42,7 +43,8 @@ type ListTopicRuleDestinationsOutput struct {
 	// Information about a topic rule destination.
 	DestinationSummaries []types.TopicRuleDestinationSummary
 
-	// The token to retrieve the next set of results.
+	// The token to use to get the next set of results, or null if there are no
+	// additional results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -6,6 +6,16 @@ import (
 	"time"
 )
 
+// A toggle for an individual feature at the instance level.
+type Attribute struct {
+
+	// The type of attribute.
+	AttributeType InstanceAttributeType
+
+	// The value of the attribute.
+	Value *string
+}
+
 // A chat message.
 type ChatMessage struct {
 
@@ -126,6 +136,20 @@ type Dimensions struct {
 	Queue *QueueReference
 }
 
+// The encryption configuration.
+type EncryptionConfig struct {
+
+	// The type of encryption.
+	//
+	// This member is required.
+	EncryptionType EncryptionType
+
+	// The identifier of the encryption key.
+	//
+	// This member is required.
+	KeyId *string
+}
+
 // Contains the filter to apply when retrieving metrics.
 type Filters struct {
 
@@ -182,6 +206,15 @@ type HierarchyLevel struct {
 	Name *string
 }
 
+// Contains information about the hierarchy level to update.
+type HierarchyLevelUpdate struct {
+
+	// The name of the user hierarchy level. Must not be more than 50 characters.
+	//
+	// This member is required.
+	Name *string
+}
+
 // Contains information about the levels of a hierarchy group.
 type HierarchyPath struct {
 
@@ -218,6 +251,25 @@ type HierarchyStructure struct {
 
 	// Information about level two.
 	LevelTwo *HierarchyLevel
+}
+
+// Contains information about the level hierarchy to update.
+type HierarchyStructureUpdate struct {
+
+	// The update for level five.
+	LevelFive *HierarchyLevelUpdate
+
+	// The update for level four.
+	LevelFour *HierarchyLevelUpdate
+
+	// The update for level one.
+	LevelOne *HierarchyLevelUpdate
+
+	// The update for level three.
+	LevelThree *HierarchyLevelUpdate
+
+	// The update for level two.
+	LevelTwo *HierarchyLevelUpdate
 }
 
 // Contains information about a historical metric. For a description of each
@@ -269,6 +321,152 @@ type HoursOfOperationSummary struct {
 	Id *string
 
 	// The name of the hours of operation.
+	Name *string
+}
+
+// The Amazon Connect instance.
+type Instance struct {
+
+	// The Amazon Resource Name (ARN) of the instance.
+	Arn *string
+
+	// When the instance was created.
+	CreatedTime *time.Time
+
+	// The identifier of the Amazon Connect instance.
+	Id *string
+
+	// The identity management type.
+	IdentityManagementType DirectoryType
+
+	// Whether inbound calls are enabled.
+	InboundCallsEnabled *bool
+
+	// The alias of instance.
+	InstanceAlias *string
+
+	// The state of the instance.
+	InstanceStatus InstanceStatus
+
+	// Whether outbound calls are enabled.
+	OutboundCallsEnabled *bool
+
+	// The service role of the instance.
+	ServiceRole *string
+
+	// Relevant details why the instance was not successfully created.
+	StatusReason *InstanceStatusReason
+}
+
+// Relevant details why the instance was not successfully created.
+type InstanceStatusReason struct {
+
+	// The message.
+	Message *string
+}
+
+// The storage configuration for the instance.
+type InstanceStorageConfig struct {
+
+	// A valid storage type.
+	//
+	// This member is required.
+	StorageType StorageType
+
+	// The existing association identifier that uniquely identifies the resource type
+	// and storage config for the given instance ID.
+	AssociationId *string
+
+	// The configuration of the Kinesis Firehose delivery stream.
+	KinesisFirehoseConfig *KinesisFirehoseConfig
+
+	// The configuration of the Kinesis data stream.
+	KinesisStreamConfig *KinesisStreamConfig
+
+	// The configuration of the Kinesis video stream.
+	KinesisVideoStreamConfig *KinesisVideoStreamConfig
+
+	// The S3 configuration.
+	S3Config *S3Config
+}
+
+// Information about the instance.
+type InstanceSummary struct {
+
+	// The Amazon Resource Name (ARN) of the instance.
+	Arn *string
+
+	// When the instance was created.
+	CreatedTime *time.Time
+
+	// The identifier of the instance.
+	Id *string
+
+	// The identity management type of the instance.
+	IdentityManagementType DirectoryType
+
+	// Whether inbound calls are enabled.
+	InboundCallsEnabled *bool
+
+	// The alias of the instance.
+	InstanceAlias *string
+
+	// The state of the instance.
+	InstanceStatus InstanceStatus
+
+	// Whether outbound calls are enabled.
+	OutboundCallsEnabled *bool
+
+	// The service role of the instance.
+	ServiceRole *string
+}
+
+// Configuration information of a Kinesis Firehose delivery stream.
+type KinesisFirehoseConfig struct {
+
+	// The Amazon Resource Name (ARN) of the delivery stream.
+	//
+	// This member is required.
+	FirehoseArn *string
+}
+
+// Configuration information of a Kinesis data stream.
+type KinesisStreamConfig struct {
+
+	// The Amazon Resource Name (ARN) of the data stream.
+	//
+	// This member is required.
+	StreamArn *string
+}
+
+// Configuration information of a Kinesis video stream.
+type KinesisVideoStreamConfig struct {
+
+	// The encryption configuration.
+	//
+	// This member is required.
+	EncryptionConfig *EncryptionConfig
+
+	// The prefix of the video stream.
+	//
+	// This member is required.
+	Prefix *string
+
+	// The number of hours data is retained in the stream. Kinesis Video Streams
+	// retains the data in a data store that is associated with the stream. The default
+	// value is 0, indicating that the stream does not persist data.
+	//
+	// This member is required.
+	RetentionPeriodHours int32
+}
+
+// Configuration information of an Amazon Lex bot.
+type LexBot struct {
+
+	// The Region the Amazon Lex bot was created in.
+	LexRegion *string
+
+	// The name of the Amazon Lex bot.
 	Name *string
 }
 
@@ -481,6 +679,37 @@ type RoutingProfileSummary struct {
 
 	// The name of the routing profile.
 	Name *string
+}
+
+// Information about the S3 storage type.
+type S3Config struct {
+
+	// The S3 bucket name.
+	//
+	// This member is required.
+	BucketName *string
+
+	// The S3 bucket prefix.
+	//
+	// This member is required.
+	BucketPrefix *string
+
+	// The S3 encryption configuration.
+	EncryptionConfig *EncryptionConfig
+}
+
+// Configuration information of the security key.
+type SecurityKey struct {
+
+	// The existing association identifier that uniquely identifies the resource type
+	// and storage config for the given instance ID.
+	AssociationId *string
+
+	// When the security key was created.
+	CreationTime *time.Time
+
+	// The key of the security key.
+	Key *string
 }
 
 // Contains information about a security profile.

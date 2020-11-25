@@ -132,6 +132,15 @@ type ChangeSetSummary struct {
 	// creating it or in an OBSOLETE state because the stack was already updated.
 	ExecutionStatus ExecutionStatus
 
+	// Specifies the current setting of IncludeNestedStacks for the change set.
+	IncludeNestedStacks *bool
+
+	// The parent change set ID.
+	ParentChangeSetId *string
+
+	// The root change set ID.
+	RootChangeSetId *string
+
 	// The ID of the stack with which the change set is associated.
 	StackId *string
 
@@ -330,8 +339,13 @@ type PropertyDifference struct {
 type ResourceChange struct {
 
 	// The action that AWS CloudFormation takes on the resource, such as Add (adds a
-	// new resource), Modify (changes a resource), or Remove (deletes a resource).
+	// new resource), Modify (changes a resource), Remove (deletes a resource), Import
+	// (imports a resource), or Dynamic (exact action for the resource cannot be
+	// determined).
 	Action ChangeAction
+
+	// The change set ID of the nested change set.
+	ChangeSetId *string
 
 	// For the Modify action, a list of ResourceChangeDetail structures that describes
 	// the changes that AWS CloudFormation will make to the resource.

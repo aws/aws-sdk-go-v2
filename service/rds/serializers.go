@@ -8083,6 +8083,11 @@ func awsAwsquery_serializeOpDocumentCopyDBSnapshotInput(v *CopyDBSnapshotInput, 
 		}
 	}
 
+	if v.TargetCustomAvailabilityZone != nil {
+		objectKey := object.Key("TargetCustomAvailabilityZone")
+		objectKey.String(*v.TargetCustomAvailabilityZone)
+	}
+
 	if v.TargetDBSnapshotIdentifier != nil {
 		objectKey := object.Key("TargetDBSnapshotIdentifier")
 		objectKey.String(*v.TargetDBSnapshotIdentifier)
@@ -8766,6 +8771,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceReadReplicaInput(v *CreateDB
 	if v.KmsKeyId != nil {
 		objectKey := object.Key("KmsKeyId")
 		objectKey.String(*v.KmsKeyId)
+	}
+
+	if v.MaxAllocatedStorage != nil {
+		objectKey := object.Key("MaxAllocatedStorage")
+		objectKey.Integer(*v.MaxAllocatedStorage)
 	}
 
 	if v.MonitoringInterval != nil {

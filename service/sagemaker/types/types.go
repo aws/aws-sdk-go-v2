@@ -396,19 +396,19 @@ type AppDetails struct {
 	UserProfileName *string
 }
 
-// The configuration for running an Amazon SageMaker image as a KernelGateway app.
+// The configuration for running a SageMaker image as a KernelGateway app.
 type AppImageConfigDetails struct {
 
 	// The Amazon Resource Name (ARN) of the AppImageConfig.
 	AppImageConfigArn *string
 
-	// The name of the AppImageConfig.
+	// The name of the AppImageConfig. Must be unique to your account.
 	AppImageConfigName *string
 
 	// When the AppImageConfig was created.
 	CreationTime *time.Time
 
-	// The KernelGateway app.
+	// The configuration for the file system and kernels in the SageMaker image.
 	KernelGatewayImageConfig *KernelGatewayImageConfig
 
 	// When the AppImageConfig was last modified.
@@ -1129,7 +1129,8 @@ type ContinuousParameterRangeSpecification struct {
 	MinValue *string
 }
 
-// A custom image.
+// A custom SageMaker image. For more information, see Bring your own SageMaker
+// image (https://docs.aws.amazon.com/sagemaker/latest/dg/studio-byoi.html).
 type CustomImage struct {
 
 	// The name of the AppImageConfig.
@@ -1591,13 +1592,14 @@ type ExperimentSummary struct {
 	LastModifiedTime *time.Time
 }
 
-// The Amazon Elastic File System (EFS) storage configuration for an image.
+// The Amazon Elastic File System (EFS) storage configuration for a SageMaker
+// image.
 type FileSystemConfig struct {
 
-	// The default POSIX group ID. If not specified, defaults to 100.
+	// The default POSIX group ID (GID). If not specified, defaults to 100.
 	DefaultGid int32
 
-	// The default POSIX user ID. If not specified, defaults to 1000.
+	// The default POSIX user ID (UID). If not specified, defaults to 1000.
 	DefaultUid int32
 
 	// The path within the image to mount the user's EFS home directory. The directory
@@ -3694,10 +3696,10 @@ type InputConfig struct {
 	// * If using the CLI, {\"input_1\": [1,3,224,224],
 	// \"input_2\":[1,3,224,224]}
 	//
-	// * MXNET/ONNX: You must specify the name and shape
-	// (NCHW format) of the expected data inputs in order using a dictionary format for
-	// your trained model. The dictionary formats required for the console and CLI are
-	// different.
+	// * MXNET/ONNX/DARKNET: You must specify the name and
+	// shape (NCHW format) of the expected data inputs in order using a dictionary
+	// format for your trained model. The dictionary formats required for the console
+	// and CLI are different.
 	//
 	// * Examples for one input:
 	//
@@ -3877,18 +3879,19 @@ type IntegerParameterRangeSpecification struct {
 	MinValue *string
 }
 
-// Jupyter server's app settings.
+// The JupyterServer app settings.
 type JupyterServerAppSettings struct {
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker
-	// image created on the instance.
+	// The default instance type and the Amazon Resource Name (ARN) of the default
+	// SageMaker image used by the JupyterServer app.
 	DefaultResourceSpec *ResourceSpec
 }
 
 // The KernelGateway app settings.
 type KernelGatewayAppSettings struct {
 
-	// A list of custom images that are configured to run as a KernelGateway app.
+	// A list of custom SageMaker images that are configured to run as a KernelGateway
+	// app.
 	CustomImages []CustomImage
 
 	// The default instance type and the Amazon Resource Name (ARN) of the default
@@ -3896,24 +3899,24 @@ type KernelGatewayAppSettings struct {
 	DefaultResourceSpec *ResourceSpec
 }
 
-// The configuration for an Amazon SageMaker KernelGateway app.
+// The configuration for the file system and kernels in a SageMaker image running
+// as a KernelGateway app.
 type KernelGatewayImageConfig struct {
 
-	// Defines how a kernel is started and the arguments, environment variables, and
-	// metadata that are available to the kernel.
+	// The specification of the Jupyter kernels in the image.
 	//
 	// This member is required.
 	KernelSpecs []KernelSpec
 
-	// The file system configuration.
+	// The Amazon Elastic File System (EFS) storage configuration for a SageMaker
+	// image.
 	FileSystemConfig *FileSystemConfig
 }
 
-// Defines how a kernel is started and the arguments, environment variables, and
-// metadata that are available to the kernel.
+// The specification of a Jupyter kernel.
 type KernelSpec struct {
 
-	// The name of the kernel. Must be unique to your account.
+	// The name of the kernel.
 	//
 	// This member is required.
 	Name *string

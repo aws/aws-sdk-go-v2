@@ -14294,6 +14294,22 @@ func awsAwsquery_deserializeDocumentCluster(v **types.Cluster, decoder smithyxml
 				sv.ClusterIdentifier = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("ClusterNamespaceArn", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.ClusterNamespaceArn = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.ClusterNamespaceArn = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("ClusterNodes", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentClusterNodesList(&sv.ClusterNodes, nodeDecoder); err != nil {

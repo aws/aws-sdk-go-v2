@@ -30,12 +30,13 @@ func (c *Client) ListProtections(ctx context.Context, params *ListProtectionsInp
 
 type ListProtectionsInput struct {
 
-	// The maximum number of Protection objects to be returned. If this is left blank
-	// the first 20 results will be returned. This is a maximum value; it is possible
-	// that AWS WAF will return the results in smaller batches. That is, the number of
-	// Protection objects returned could be less than MaxResults, even if there are
-	// still more Protection objects yet to return. If there are more Protection
-	// objects to return, AWS WAF will always also return a NextToken.
+	// The maximum number of Protection objects to return. If you leave this blank,
+	// Shield Advanced returns the first 20 results. This is a maximum value. Shield
+	// Advanced might return the results in smaller batches. That is, the number of
+	// objects returned could be less than MaxResults, even if there are still more
+	// objects yet to return. If there are more objects to return, Shield Advanced
+	// returns a value in NextToken that you can use in your next request, to get the
+	// next batch of objects.
 	MaxResults *int32
 
 	// The ListProtectionsRequest.NextToken value from a previous call to
@@ -49,10 +50,10 @@ type ListProtectionsOutput struct {
 	// value of MaxResults, AWS Shield Advanced returns a NextToken value in the
 	// response that allows you to list another group of Protections. For the second
 	// and subsequent ListProtections requests, specify the value of NextToken from the
-	// previous response to get information about another batch of Protections. AWS WAF
-	// might return the list of Protection objects in batches smaller than the number
-	// specified by MaxResults. If there are more Protection objects to return, AWS WAF
-	// will always also return a NextToken.
+	// previous response to get information about another batch of Protections. Shield
+	// Advanced might return the list of Protection objects in batches smaller than the
+	// number specified by MaxResults. If there are more Protection objects to return,
+	// Shield Advanced will always also return a NextToken.
 	NextToken *string
 
 	// The array of enabled Protection objects.
@@ -129,12 +130,13 @@ var _ ListProtectionsAPIClient = (*Client)(nil)
 
 // ListProtectionsPaginatorOptions is the paginator options for ListProtections
 type ListProtectionsPaginatorOptions struct {
-	// The maximum number of Protection objects to be returned. If this is left blank
-	// the first 20 results will be returned. This is a maximum value; it is possible
-	// that AWS WAF will return the results in smaller batches. That is, the number of
-	// Protection objects returned could be less than MaxResults, even if there are
-	// still more Protection objects yet to return. If there are more Protection
-	// objects to return, AWS WAF will always also return a NextToken.
+	// The maximum number of Protection objects to return. If you leave this blank,
+	// Shield Advanced returns the first 20 results. This is a maximum value. Shield
+	// Advanced might return the results in smaller batches. That is, the number of
+	// objects returned could be less than MaxResults, even if there are still more
+	// objects yet to return. If there are more objects to return, Shield Advanced
+	// returns a value in NextToken that you can use in your next request, to get the
+	// next batch of objects.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

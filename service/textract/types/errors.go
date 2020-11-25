@@ -48,8 +48,8 @@ func (e *BadDocumentException) ErrorCode() string             { return "BadDocum
 func (e *BadDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The document can't be processed because it's too large. The maximum document
-// size for synchronous operations 5 MB. The maximum document size for asynchronous
-// operations is 500 MB for PDF files.
+// size for synchronous operations 10 MB. The maximum document size for
+// asynchronous operations is 500 MB for PDF files.
 type DocumentTooLargeException struct {
 	Message *string
 
@@ -73,10 +73,10 @@ func (e *DocumentTooLargeException) ErrorFault() smithy.ErrorFault { return smit
 type HumanLoopQuotaExceededException struct {
 	Message *string
 
-	Code         *string
 	ResourceType *string
-	ServiceCode  *string
 	QuotaCode    *string
+	ServiceCode  *string
+	Code         *string
 }
 
 func (e *HumanLoopQuotaExceededException) Error() string {
@@ -156,6 +156,26 @@ func (e *InvalidJobIdException) ErrorMessage() string {
 }
 func (e *InvalidJobIdException) ErrorCode() string             { return "InvalidJobIdException" }
 func (e *InvalidJobIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Indicates you do not have decrypt permissions with the KMS key entered, or the
+// KMS key was entered incorrectly.
+type InvalidKMSKeyException struct {
+	Message *string
+
+	Code *string
+}
+
+func (e *InvalidKMSKeyException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidKMSKeyException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidKMSKeyException) ErrorCode() string             { return "InvalidKMSKeyException" }
+func (e *InvalidKMSKeyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An input parameter violated a constraint. For example, in synchronous
 // operations, an InvalidParameterException exception occurs when neither of the

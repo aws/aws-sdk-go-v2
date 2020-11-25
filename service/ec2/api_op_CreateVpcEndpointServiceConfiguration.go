@@ -12,9 +12,20 @@ import (
 )
 
 // Creates a VPC endpoint service configuration to which service consumers (AWS
-// accounts, IAM users, and IAM roles) can connect. Service consumers can create an
-// interface VPC endpoint to connect to your service. To create an endpoint service
-// configuration, you must first create a Network Load Balancer for your service.
+// accounts, IAM users, and IAM roles) can connect. To create an endpoint service
+// configuration, you must first create one of the following for your service:
+//
+// * A
+// Network Load Balancer
+// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html).
+// Service consumers connect to your service using an interface endpoint.
+//
+// * A
+// Gateway Load Balancer
+// (https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/introduction.html).
+// Service consumers connect to your service using a Gateway Load Balancer
+// endpoint.
+//
 // For more information, see VPC Endpoint Services
 // (https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html) in the
 // Amazon Virtual Private Cloud User Guide. If you set the private DNS name, you
@@ -39,12 +50,6 @@ func (c *Client) CreateVpcEndpointServiceConfiguration(ctx context.Context, para
 
 type CreateVpcEndpointServiceConfigurationInput struct {
 
-	// The Amazon Resource Names (ARNs) of one or more Network Load Balancers for your
-	// service.
-	//
-	// This member is required.
-	NetworkLoadBalancerArns []string
-
 	// Indicates whether requests from service consumers to create an endpoint to your
 	// service must be accepted. To accept a request, use AcceptVpcEndpointConnections.
 	AcceptanceRequired bool
@@ -60,7 +65,15 @@ type CreateVpcEndpointServiceConfigurationInput struct {
 	// UnauthorizedOperation.
 	DryRun bool
 
-	// The private DNS name to assign to the VPC endpoint service.
+	// The Amazon Resource Names (ARNs) of one or more Gateway Load Balancers.
+	GatewayLoadBalancerArns []string
+
+	// The Amazon Resource Names (ARNs) of one or more Network Load Balancers for your
+	// service.
+	NetworkLoadBalancerArns []string
+
+	// (Interface endpoint configuration) The private DNS name to assign to the VPC
+	// endpoint service.
 	PrivateDnsName *string
 
 	// The tags to associate with the service.
@@ -120,9 +133,6 @@ func addOperationCreateVpcEndpointServiceConfigurationMiddlewares(stack *middlew
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpCreateVpcEndpointServiceConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVpcEndpointServiceConfiguration(options.Region), middleware.Before); err != nil {

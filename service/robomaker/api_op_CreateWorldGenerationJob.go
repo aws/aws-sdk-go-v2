@@ -49,6 +49,10 @@ type CreateWorldGenerationJobInput struct {
 	// A map that contains tag keys and tag values that are attached to the world
 	// generator job.
 	Tags map[string]string
+
+	// A map that contains tag keys and tag values that are attached to the generated
+	// worlds.
+	WorldTags map[string]string
 }
 
 type CreateWorldGenerationJobOutput struct {
@@ -89,6 +93,10 @@ type CreateWorldGenerationJobOutput struct {
 
 	// Information about the world count.
 	WorldCount *types.WorldCount
+
+	// A map that contains tag keys and tag values that are attached to the generated
+	// worlds.
+	WorldTags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

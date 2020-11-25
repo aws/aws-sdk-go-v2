@@ -40,14 +40,15 @@ type ListPrincipalThingsInput struct {
 	// The maximum number of results to return in this operation.
 	MaxResults *int32
 
-	// The token to retrieve the next set of results.
+	// To retrieve the next set of results, the nextToken value from a previous
+	// response; otherwise null to receive the first set of results.
 	NextToken *string
 }
 
 // The output from the ListPrincipalThings operation.
 type ListPrincipalThingsOutput struct {
 
-	// The token used to get the next set of results, or null if there are no
+	// The token to use to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string
 

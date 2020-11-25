@@ -15,14 +15,14 @@ import (
 	"strings"
 )
 
-// Returns a list of all Outposts buckets in an Outposts that are owned by the
+// Returns a list of all Outposts buckets in an Outpost that are owned by the
 // authenticated sender of the request. For more information, see Using Amazon S3
 // on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html)
 // in the Amazon Simple Storage Service Developer Guide. For an example of the
 // request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint
-// hostname prefix and outpost-id in your API request, see the  Example
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_ListRegionalBuckets.html#API_control_ListRegionalBuckets_Examples)
-// section below.
+// hostname prefix and x-amz-outpost-id in your request, see the Examples
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListRegionalBuckets.html#API_control_ListRegionalBuckets_Examples)
+// section.
 func (c *Client) ListRegionalBuckets(ctx context.Context, params *ListRegionalBucketsInput, optFns ...func(*Options)) (*ListRegionalBucketsOutput, error) {
 	if params == nil {
 		params = &ListRegionalBucketsInput{}

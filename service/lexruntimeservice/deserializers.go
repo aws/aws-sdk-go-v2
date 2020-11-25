@@ -351,6 +351,11 @@ func awsRestjson1_deserializeOpDocumentGetSessionOutput(v **GetSessionOutput, va
 
 	for key, value := range shape {
 		switch key {
+		case "activeContexts":
+			if err := awsRestjson1_deserializeDocumentActiveContextsList(&sv.ActiveContexts, value); err != nil {
+				return err
+			}
+
 		case "dialogAction":
 			if err := awsRestjson1_deserializeDocumentDialogAction(&sv.DialogAction, value); err != nil {
 				return err
@@ -510,6 +515,15 @@ func awsRestjson1_deserializeOpErrorPostContent(response *smithyhttp.Response, m
 func awsRestjson1_deserializeOpHttpBindingsPostContentOutput(v *PostContentOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("x-amz-lex-active-contexts"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		b, err := base64.StdEncoding.DecodeString(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.ActiveContexts = ptr.String(string(b))
 	}
 
 	if headerValues := response.Header.Values("x-amz-lex-alternative-intents"); len(headerValues) != 0 {
@@ -763,6 +777,11 @@ func awsRestjson1_deserializeOpDocumentPostTextOutput(v **PostTextOutput, value 
 
 	for key, value := range shape {
 		switch key {
+		case "activeContexts":
+			if err := awsRestjson1_deserializeDocumentActiveContextsList(&sv.ActiveContexts, value); err != nil {
+				return err
+			}
+
 		case "alternativeIntents":
 			if err := awsRestjson1_deserializeDocumentIntentList(&sv.AlternativeIntents, value); err != nil {
 				return err
@@ -982,6 +1001,15 @@ func awsRestjson1_deserializeOpErrorPutSession(response *smithyhttp.Response, me
 func awsRestjson1_deserializeOpHttpBindingsPutSessionOutput(v *PutSessionOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("x-amz-lex-active-contexts"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		b, err := base64.StdEncoding.DecodeString(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.ActiveContexts = ptr.String(string(b))
 	}
 
 	if headerValues := response.Header.Values("Content-Type"); len(headerValues) != 0 {
@@ -1458,6 +1486,183 @@ func awsRestjson1_deserializeErrorUnsupportedMediaTypeException(response *smithy
 	errorBody.Seek(0, io.SeekStart)
 
 	return output
+}
+
+func awsRestjson1_deserializeDocumentActiveContext(v **types.ActiveContext, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ActiveContext
+	if *v == nil {
+		sv = &types.ActiveContext{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ActiveContextName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "parameters":
+			if err := awsRestjson1_deserializeDocumentActiveContextParametersMap(&sv.Parameters, value); err != nil {
+				return err
+			}
+
+		case "timeToLive":
+			if err := awsRestjson1_deserializeDocumentActiveContextTimeToLive(&sv.TimeToLive, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentActiveContextParametersMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Text to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentActiveContextsList(v *[]types.ActiveContext, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ActiveContext
+	if *v == nil {
+		cv = []types.ActiveContext{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ActiveContext
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentActiveContext(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentActiveContextTimeToLive(v **types.ActiveContextTimeToLive, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ActiveContextTimeToLive
+	if *v == nil {
+		sv = &types.ActiveContextTimeToLive{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "timeToLiveInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ActiveContextTimeToLiveInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimeToLiveInSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "turnsToLive":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ActiveContextTurnsToLive to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TurnsToLive = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
 }
 
 func awsRestjson1_deserializeDocumentBadGatewayException(v **types.BadGatewayException, value interface{}) error {

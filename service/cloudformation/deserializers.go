@@ -6933,6 +6933,54 @@ func awsAwsquery_deserializeDocumentChangeSetSummary(v **types.ChangeSetSummary,
 				sv.ExecutionStatus = types.ExecutionStatus(xtv)
 			}
 
+		case strings.EqualFold("IncludeNestedStacks", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected IncludeNestedStacks to be of type *bool, got %T instead", val)
+				}
+				sv.IncludeNestedStacks = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("ParentChangeSetId", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.ParentChangeSetId = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.ParentChangeSetId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("RootChangeSetId", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.RootChangeSetId = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.RootChangeSetId = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("StackId", t.Name.Local):
 			val, done, err := decoder.Value()
 			if err != nil {
@@ -9104,6 +9152,22 @@ func awsAwsquery_deserializeDocumentResourceChange(v **types.ResourceChange, dec
 			if val != nil {
 				xtv := string(val)
 				sv.Action = types.ChangeAction(xtv)
+			}
+
+		case strings.EqualFold("ChangeSetId", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.ChangeSetId = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.ChangeSetId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Details", t.Name.Local):
@@ -15414,6 +15478,22 @@ func awsAwsquery_deserializeOpDocumentDescribeChangeSetOutput(v **DescribeChange
 				sv.ExecutionStatus = types.ExecutionStatus(xtv)
 			}
 
+		case strings.EqualFold("IncludeNestedStacks", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected IncludeNestedStacks to be of type *bool, got %T instead", val)
+				}
+				sv.IncludeNestedStacks = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("NextToken", t.Name.Local):
 			val, done, err := decoder.Value()
 			if err != nil {
@@ -15442,10 +15522,42 @@ func awsAwsquery_deserializeOpDocumentDescribeChangeSetOutput(v **DescribeChange
 				return err
 			}
 
+		case strings.EqualFold("ParentChangeSetId", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.ParentChangeSetId = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.ParentChangeSetId = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("RollbackConfiguration", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentRollbackConfiguration(&sv.RollbackConfiguration, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("RootChangeSetId", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.RootChangeSetId = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.RootChangeSetId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("StackId", t.Name.Local):

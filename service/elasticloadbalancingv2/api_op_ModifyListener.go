@@ -56,57 +56,34 @@ type ModifyListenerInput struct {
 	// *
 	// None
 	//
-	// For more information, see ALPN Policies
+	// For more information, see ALPN policies
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies)
 	// in the Network Load Balancers Guide.
 	AlpnPolicy []string
 
 	// [HTTPS and TLS listeners] The default certificate for the listener. You must
 	// provide exactly one certificate. Set CertificateArn to the certificate ARN but
-	// do not set IsDefault. To create a certificate list, use AddListenerCertificates.
+	// do not set IsDefault.
 	Certificates []types.Certificate
 
 	// The actions for the default rule.
 	DefaultActions []types.Action
 
-	// The port for connections from clients to the load balancer.
+	// The port for connections from clients to the load balancer. You cannot specify a
+	// port for a Gateway Load Balancer.
 	Port *int32
 
 	// The protocol for connections from clients to the load balancer. Application Load
 	// Balancers support the HTTP and HTTPS protocols. Network Load Balancers support
-	// the TCP, TLS, UDP, and TCP_UDP protocols.
+	// the TCP, TLS, UDP, and TCP_UDP protocols. You can’t change the protocol to UDP
+	// or TCP_UDP if dual-stack mode is enabled. You cannot specify a protocol for a
+	// Gateway Load Balancer.
 	Protocol types.ProtocolEnum
 
 	// [HTTPS and TLS listeners] The security policy that defines which protocols and
-	// ciphers are supported. The following are the possible values:
-	//
-	// *
-	// ELBSecurityPolicy-2016-08
-	//
-	// * ELBSecurityPolicy-TLS-1-0-2015-04
-	//
-	// *
-	// ELBSecurityPolicy-TLS-1-1-2017-01
-	//
-	// * ELBSecurityPolicy-TLS-1-2-2017-01
-	//
-	// *
-	// ELBSecurityPolicy-TLS-1-2-Ext-2018-06
-	//
-	// * ELBSecurityPolicy-FS-2018-06
-	//
-	// *
-	// ELBSecurityPolicy-FS-1-1-2019-08
-	//
-	// * ELBSecurityPolicy-FS-1-2-2019-08
-	//
-	// *
-	// ELBSecurityPolicy-FS-1-2-Res-2019-08
-	//
-	// For more information, see Security
-	// Policies
+	// ciphers are supported. For more information, see Security policies
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies)
-	// in the Application Load Balancers Guide and Security Policies
+	// in the Application Load Balancers Guide or Security policies
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies)
 	// in the Network Load Balancers Guide.
 	SslPolicy *string

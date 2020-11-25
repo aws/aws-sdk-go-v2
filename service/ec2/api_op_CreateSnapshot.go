@@ -95,10 +95,8 @@ type CreateSnapshotOutput struct {
 	// the parent volume.
 	KmsKeyId *string
 
-	// The AWS owner alias, as maintained by Amazon. The possible values are: amazon |
-	// self | all | aws-marketplace | microsoft. This AWS owner alias is not to be
-	// confused with the user-configured AWS account alias, which is set from the IAM
-	// console.
+	// The AWS owner alias, from an Amazon-maintained list (amazon). This is not the
+	// user-configured AWS account alias set using the IAM console.
 	OwnerAlias *string
 
 	// The AWS account ID of the EBS snapshot owner.

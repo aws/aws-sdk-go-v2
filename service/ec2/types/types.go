@@ -134,7 +134,7 @@ type AssociatedRole struct {
 	// certificate_arn/role_arn.
 	CertificateS3ObjectKey *string
 
-	// The ID of the KMS key used to encrypt the private key.
+	// The ID of the KMS customer master key (CMK) used to encrypt the private key.
 	EncryptionKmsKeyId *string
 }
 
@@ -525,7 +525,7 @@ type CapacityReservationGroup struct {
 // Capacity Reservations
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html)
 // in the Amazon Elastic Compute Cloud User Guide. For examples of using Capacity
-// Reservations in an EC2 Fleet, see EC2 Fleet Example Configurations
+// Reservations in an EC2 Fleet, see EC2 Fleet example configurations
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-examples.html) in
 // the Amazon Elastic Compute Cloud User Guide.
 type CapacityReservationOptions struct {
@@ -549,7 +549,7 @@ type CapacityReservationOptions struct {
 // Capacity Reservations
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html)
 // in the Amazon Elastic Compute Cloud User Guide. For examples of using Capacity
-// Reservations in an EC2 Fleet, see EC2 Fleet Example Configurations
+// Reservations in an EC2 Fleet, see EC2 Fleet example configurations
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-examples.html) in
 // the Amazon Elastic Compute Cloud User Guide.
 type CapacityReservationOptionsRequest struct {
@@ -749,6 +749,32 @@ type ClientCertificateRevocationListStatus struct {
 	Message *string
 }
 
+// The options for managing connection authorization for new client connections.
+type ClientConnectOptions struct {
+
+	// Indicates whether client connect options are enabled. The default is false (not
+	// enabled).
+	Enabled bool
+
+	// The Amazon Resource Name (ARN) of the AWS Lambda function used for connection
+	// authorization.
+	LambdaFunctionArn *string
+}
+
+// The options for managing connection authorization for new client connections.
+type ClientConnectResponseOptions struct {
+
+	// Indicates whether client connect options are enabled.
+	Enabled bool
+
+	// The Amazon Resource Name (ARN) of the AWS Lambda function used for connection
+	// authorization.
+	LambdaFunctionArn *string
+
+	// The status of any updates to the client connect options.
+	Status *ClientVpnEndpointAttributeStatus
+}
+
 // Describes the client-specific data.
 type ClientData struct {
 
@@ -850,6 +876,10 @@ type ClientVpnConnection struct {
 	// The number of packets sent by the client.
 	IngressPackets *string
 
+	// The statuses returned by the client connect handler for posture compliance, if
+	// applicable.
+	PostureComplianceStatuses []string
+
 	// The current state of the client connection.
 	Status *ClientVpnConnectionStatus
 
@@ -884,6 +914,9 @@ type ClientVpnEndpoint struct {
 	// The IPv4 address range, in CIDR notation, from which client IP addresses are
 	// assigned.
 	ClientCidrBlock *string
+
+	// The options for managing connection authorization for new client connections.
+	ClientConnectOptions *ClientConnectResponseOptions
 
 	// The ID of the Client VPN endpoint.
 	ClientVpnEndpointId *string
@@ -940,6 +973,16 @@ type ClientVpnEndpoint struct {
 
 	// The protocol used by the VPN session.
 	VpnProtocol VpnProtocol
+}
+
+// Describes the status of the Client VPN endpoint attribute.
+type ClientVpnEndpointAttributeStatus struct {
+
+	// The status code.
+	Code ClientVpnEndpointAttributeStatusCode
+
+	// The status message.
+	Message *string
 }
 
 // Describes the state of a Client VPN endpoint.
@@ -1204,7 +1247,7 @@ type CreateTransitGatewayVpcAttachmentRequestOptions struct {
 	// Enable or disable DNS support. The default is enable.
 	DnsSupport DnsSupportValue
 
-	// Enable or disable IPv6 support. The default is enable.
+	// Enable or disable IPv6 support.
 	Ipv6Support Ipv6SupportValue
 }
 
@@ -1752,8 +1795,8 @@ type EbsInfo struct {
 	// Describes the optimized EBS performance for the instance type.
 	EbsOptimizedInfo *EbsOptimizedInfo
 
-	// Indicates that the instance type is Amazon EBS-optimized. For more information,
-	// see Amazon EBS-Optimized Instances
+	// Indicates whether the instance type is Amazon EBS-optimized. For more
+	// information, see Amazon EBS-Optimized Instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in
 	// Amazon EC2 User Guide for Linux Instances.
 	EbsOptimizedSupport EbsOptimizedSupport
@@ -1802,7 +1845,7 @@ type EbsOptimizedInfo struct {
 	// instance type.
 	BaselineIops *int32
 
-	// The baseline throughput performance for an EBS-optimized instance type, in MBps.
+	// The baseline throughput performance for an EBS-optimized instance type, in MB/s.
 	BaselineThroughputInMBps *float64
 
 	// The maximum bandwidth performance for an EBS-optimized instance type, in Mbps.
@@ -1812,7 +1855,7 @@ type EbsOptimizedInfo struct {
 	// instance type.
 	MaximumIops *int32
 
-	// The maximum throughput performance for an EBS-optimized instance type, in MBps.
+	// The maximum throughput performance for an EBS-optimized instance type, in MB/s.
 	MaximumThroughputInMBps *float64
 }
 
@@ -2017,9 +2060,9 @@ type EnclaveOptions struct {
 }
 
 // Indicates whether the instance is enabled for AWS Nitro Enclaves. For more
-// information, see  AWS Nitro Enclaves
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html) in the
-// Amazon Elastic Compute Cloud User Guide.
+// information, see  What is AWS Nitro Enclaves?
+// (https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html) in the AWS
+// Nitro Enclaves User Guide.
 type EnclaveOptionsRequest struct {
 
 	// To enable the instance for AWS Nitro Enclaves, set this parameter to true.
@@ -2518,6 +2561,54 @@ type FleetLaunchTemplateSpecificationRequest struct {
 	Version *string
 }
 
+// The strategy to use when Amazon EC2 emits a signal that your Spot Instance is at
+// an elevated risk of being interrupted.
+type FleetSpotCapacityRebalance struct {
+
+	// To allow EC2 Fleet to launch a replacement Spot Instance when an instance
+	// rebalance notification is emitted for an existing Spot Instance in the fleet,
+	// specify launch. Only available for fleets of type maintain. When a replacement
+	// instance is launched, the instance marked for rebalance is not automatically
+	// terminated. You can terminate it, or you can leave it running. You are charged
+	// for both instances while they are running.
+	ReplacementStrategy FleetReplacementStrategy
+}
+
+// The Spot Instance replacement strategy to use when Amazon EC2 emits a signal
+// that your Spot Instance is at an elevated risk of being interrupted. For more
+// information, see Capacity rebalancing
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-capacity-rebalance)
+// in the Amazon Elastic Compute Cloud User Guide.
+type FleetSpotCapacityRebalanceRequest struct {
+
+	// The replacement strategy to use. Only available for fleets of type maintain. To
+	// allow EC2 Fleet to launch a replacement Spot Instance when an instance rebalance
+	// notification is emitted for an existing Spot Instance in the fleet, specify
+	// launch. You must specify a value, otherwise you get an error. When a replacement
+	// instance is launched, the instance marked for rebalance is not automatically
+	// terminated. You can terminate it, or you can leave it running. You are charged
+	// for all instances while they are running.
+	ReplacementStrategy FleetReplacementStrategy
+}
+
+// The strategies for managing your Spot Instances that are at an elevated risk of
+// being interrupted.
+type FleetSpotMaintenanceStrategies struct {
+
+	// The strategy to use when Amazon EC2 emits a signal that your Spot Instance is at
+	// an elevated risk of being interrupted.
+	CapacityRebalance *FleetSpotCapacityRebalance
+}
+
+// The strategies for managing your Spot Instances that are at an elevated risk of
+// being interrupted.
+type FleetSpotMaintenanceStrategiesRequest struct {
+
+	// The strategy to use when Amazon EC2 emits a signal that your Spot Instance is at
+	// an elevated risk of being interrupted.
+	CapacityRebalance *FleetSpotCapacityRebalanceRequest
+}
+
 // Describes a flow log.
 type FlowLog struct {
 
@@ -2599,7 +2690,7 @@ type FpgaDeviceInfo struct {
 // Describes the memory for the FPGA accelerator for the instance type.
 type FpgaDeviceMemoryInfo struct {
 
-	// The size (in MiB) for the memory available to the FPGA accelerator.
+	// The size of the memory available to the FPGA accelerator, in MiB.
 	SizeInMiB *int32
 }
 
@@ -2723,7 +2814,7 @@ type GpuDeviceInfo struct {
 // Describes the memory available to the GPU accelerator.
 type GpuDeviceMemoryInfo struct {
 
-	// The size (in MiB) for the memory available to the GPU accelerator.
+	// The size of the memory available to the GPU accelerator, in MiB.
 	SizeInMiB *int32
 }
 
@@ -2733,7 +2824,8 @@ type GpuInfo struct {
 	// Describes the GPU accelerators for the instance type.
 	Gpus []GpuDeviceInfo
 
-	// The total size of the memory for the GPU accelerators for the instance type.
+	// The total size of the memory for the GPU accelerators for the instance type, in
+	// MiB.
 	TotalGpuMemoryInMiB *int32
 }
 
@@ -3838,6 +3930,9 @@ type InstanceNetworkInterfaceAttachment struct {
 	// The index of the device on the instance for the network interface attachment.
 	DeviceIndex int32
 
+	// The index of the network card.
+	NetworkCardIndex int32
+
 	// The attachment state.
 	Status AttachmentStatus
 }
@@ -3895,6 +3990,11 @@ type InstanceNetworkInterfaceSpecification struct {
 	// same request. You cannot specify this option if you've specified a minimum
 	// number of instances to launch.
 	Ipv6Addresses []InstanceIpv6Address
+
+	// The index of the network card. Some instance types support multiple network
+	// cards. The primary network interface must be assigned to network card index 0.
+	// The default is network card index 0.
+	NetworkCardIndex int32
 
 	// The ID of the network interface. If you are creating a Spot Fleet, omit this
 	// parameter because you can’t specify a network interface ID in a launch
@@ -4080,7 +4180,7 @@ type InstanceStatusSummary struct {
 // Describes the disks that are available for the instance type.
 type InstanceStorageInfo struct {
 
-	// Array describing the disks that are available for the instance type.
+	// Describes the disks that are available for the instance type.
 	Disks []DiskInfo
 
 	// Indicates whether non-volatile memory express (NVMe) is supported for instance
@@ -4109,13 +4209,13 @@ type InstanceTypeInfo struct {
 	// Indicates whether auto recovery is supported.
 	AutoRecoverySupported *bool
 
-	// Indicates whether the instance is bare metal.
+	// Indicates whether the instance is a bare metal instance type.
 	BareMetal *bool
 
 	// Indicates whether the instance type is a burstable performance instance type.
 	BurstablePerformanceSupported *bool
 
-	// Indicates whether the instance type is a current generation.
+	// Indicates whether the instance type is current generation.
 	CurrentGeneration *bool
 
 	// Indicates whether Dedicated Hosts are supported on the instance type.
@@ -4136,13 +4236,13 @@ type InstanceTypeInfo struct {
 	// Indicates whether On-Demand hibernation is supported.
 	HibernationSupported *bool
 
-	// Indicates the hypervisor used for the instance type.
+	// The hypervisor for the instance type.
 	Hypervisor InstanceTypeHypervisor
 
 	// Describes the Inference accelerator settings for the instance type.
 	InferenceAcceleratorInfo *InferenceAcceleratorInfo
 
-	// Describes the disks for the instance type.
+	// Describes the instance storage for the instance type.
 	InstanceStorageInfo *InstanceStorageInfo
 
 	// Indicates whether instance storage is supported.
@@ -4165,7 +4265,7 @@ type InstanceTypeInfo struct {
 	// Describes the processor.
 	ProcessorInfo *ProcessorInfo
 
-	// Indicates the supported root device types.
+	// The supported root device types.
 	SupportedRootDeviceTypes []RootDeviceType
 
 	// Indicates whether the instance type is offered for spot or On-Demand.
@@ -4678,9 +4778,9 @@ type LaunchTemplateEnclaveOptions struct {
 }
 
 // Indicates whether the instance is enabled for AWS Nitro Enclaves. For more
-// information, see  AWS Nitro Enclaves
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html) in the
-// Amazon Elastic Compute Cloud User Guide.
+// information, see  What is AWS Nitro Enclaves?
+// (https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html) in the AWS
+// Nitro Enclaves User Guide.
 type LaunchTemplateEnclaveOptionsRequest struct {
 
 	// To enable the instance for AWS Nitro Enclaves, set this parameter to true.
@@ -4846,6 +4946,9 @@ type LaunchTemplateInstanceNetworkInterfaceSpecification struct {
 	// The IPv6 addresses for the network interface.
 	Ipv6Addresses []InstanceIpv6Address
 
+	// The index of the network card.
+	NetworkCardIndex int32
+
 	// The ID of the network interface.
 	NetworkInterfaceId *string
 
@@ -4905,6 +5008,11 @@ type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
 	// subnet. You can't use this option if you're specifying a number of IPv6
 	// addresses.
 	Ipv6Addresses []InstanceIpv6AddressRequest
+
+	// The index of the network card. Some instance types support multiple network
+	// cards. The primary network interface must be assigned to network card index 0.
+	// The default is network card index 0.
+	NetworkCardIndex int32
 
 	// The ID of the network interface.
 	NetworkInterfaceId *string
@@ -5424,7 +5532,7 @@ type ManagedPrefixList struct {
 // Describes the memory for the instance type.
 type MemoryInfo struct {
 
-	// Size of the memory, in MiB.
+	// The size of the memory, in MiB.
 	SizeInMiB *int64
 }
 
@@ -5764,8 +5872,24 @@ type NetworkAclEntry struct {
 	RuleNumber int32
 }
 
+// Describes the network card support of the instance type.
+type NetworkCardInfo struct {
+
+	// The maximum number of network interfaces for the network card.
+	MaximumNetworkInterfaces *int32
+
+	// The index of the network card.
+	NetworkCardIndex *int32
+
+	// The network performance of the network card.
+	NetworkPerformance *string
+}
+
 // Describes the networking features of the instance type.
 type NetworkInfo struct {
+
+	// The index of the default network card, starting at 0.
+	DefaultNetworkCardIndex *int32
 
 	// Indicates whether Elastic Fabric Adapter (EFA) is supported.
 	EfaSupported *bool
@@ -5782,10 +5906,17 @@ type NetworkInfo struct {
 	// Indicates whether IPv6 is supported.
 	Ipv6Supported *bool
 
+	// The maximum number of physical network cards that can be allocated to the
+	// instance.
+	MaximumNetworkCards *int32
+
 	// The maximum number of network interfaces for the instance type.
 	MaximumNetworkInterfaces *int32
 
-	// Describes the network performance.
+	// Describes the network cards for the instance type.
+	NetworkCards []NetworkCardInfo
+
+	// The network performance.
 	NetworkPerformance *string
 }
 
@@ -5883,8 +6014,7 @@ type NetworkInterfaceAssociation struct {
 	// The public DNS name.
 	PublicDnsName *string
 
-	// The address of the Elastic IP address or Carrier IP address bound to the network
-	// interface.
+	// The address of the Elastic IP address bound to the network interface.
 	PublicIp *string
 }
 
@@ -5909,6 +6039,9 @@ type NetworkInterfaceAttachment struct {
 
 	// The AWS account ID of the owner of the instance.
 	InstanceOwnerId *string
+
+	// The index of the network card.
+	NetworkCardIndex int32
 
 	// The attachment state.
 	Status AttachmentStatus
@@ -6291,7 +6424,7 @@ type PlacementGroup struct {
 // Describes the placement group support of the instance type.
 type PlacementGroupInfo struct {
 
-	// A list of supported placement groups types.
+	// The supported placement group types.
 	SupportedStrategies []PlacementGroupStrategy
 }
 
@@ -6461,7 +6594,7 @@ type PrivateIpAddressSpecification struct {
 // Describes the processor used by the instance type.
 type ProcessorInfo struct {
 
-	// A list of architectures supported by the instance type.
+	// The architectures supported by the instance type.
 	SupportedArchitectures []ArchitectureType
 
 	// The speed of the processor, in GHz.
@@ -6694,13 +6827,10 @@ type RequestLaunchTemplateData struct {
 	ElasticInferenceAccelerators []LaunchTemplateElasticInferenceAccelerator
 
 	// Indicates whether the instance is enabled for AWS Nitro Enclaves. For more
-	// information, see  AWS Nitro Enclaves
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html) in the
-	// Amazon Elastic Compute Cloud User Guide. You can't enable AWS Nitro Enclaves and
-	// hibernation on the same instance. For more information about AWS Nitro Enclaves
-	// requirements, see  AWS Nitro Enclaves
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// information, see  What is AWS Nitro Enclaves?
+	// (https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html) in the AWS
+	// Nitro Enclaves User Guide. You can't enable AWS Nitro Enclaves and hibernation
+	// on the same instance.
 	EnclaveOptions *LaunchTemplateEnclaveOptionsRequest
 
 	// Indicates whether an instance is enabled for hibernation. This parameter is
@@ -7817,6 +7947,9 @@ type ServiceConfiguration struct {
 	// The DNS names for the service.
 	BaseEndpointDnsNames []string
 
+	// The Amazon Resource Names (ARNs) of the Gateway Load Balancers for the service.
+	GatewayLoadBalancerArns []string
+
 	// Indicates whether the service manages its VPC endpoints. Management of the
 	// service VPC endpoints using the VPC endpoint API is restricted.
 	ManagesVpcEndpoints bool
@@ -7945,10 +8078,8 @@ type Snapshot struct {
 	// the parent volume.
 	KmsKeyId *string
 
-	// The AWS owner alias, as maintained by Amazon. The possible values are: amazon |
-	// self | all | aws-marketplace | microsoft. This AWS owner alias is not to be
-	// confused with the user-configured AWS account alias, which is set from the IAM
-	// console.
+	// The AWS owner alias, from an Amazon-maintained list (amazon). This is not the
+	// user-configured AWS account alias set using the IAM console.
 	OwnerAlias *string
 
 	// The AWS account ID of the EBS snapshot owner.
@@ -8109,6 +8240,23 @@ type SnapshotTaskDetail struct {
 
 	// The Amazon S3 bucket for the disk image.
 	UserBucket *UserBucketDetails
+}
+
+// The Spot Instance replacement strategy to use when Amazon EC2 emits a signal
+// that your Spot Instance is at an elevated risk of being interrupted. For more
+// information, see Capacity rebalancing
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#spot-fleet-capacity-rebalance)
+// in the Amazon EC2 User Guide for Linux Instances.
+type SpotCapacityRebalance struct {
+
+	// The replacement strategy to use. Only available for fleets of type maintain. You
+	// must specify a value, otherwise you get an error. To allow Spot Fleet to launch
+	// a replacement Spot Instance when an instance rebalance notification is emitted
+	// for a Spot Instance in the fleet, specify launch. When a replacement instance is
+	// launched, the instance marked for rebalance is not automatically terminated. You
+	// can terminate it, or you can leave it running. You are charged for all instances
+	// while they are running.
+	ReplacementStrategy ReplacementStrategy
 }
 
 // Describes the data feed for a Spot Instance.
@@ -8361,6 +8509,10 @@ type SpotFleetRequestConfigData struct {
 	// Indicates whether Spot Fleet should replace unhealthy instances.
 	ReplaceUnhealthyInstances bool
 
+	// The strategies for managing your Spot Instances that are at an elevated risk of
+	// being interrupted.
+	SpotMaintenanceStrategies *SpotMaintenanceStrategies
+
 	// The maximum amount per hour for Spot Instances that you're willing to pay. You
 	// can use the spotdMaxTotalPrice parameter, the onDemandMaxTotalPrice parameter,
 	// or both parameters to ensure that your fleet cost does not exceed your budget.
@@ -8531,6 +8683,15 @@ type SpotInstanceStatus struct {
 	UpdateTime *time.Time
 }
 
+// The strategies for managing your Spot Instances that are at an elevated risk of
+// being interrupted.
+type SpotMaintenanceStrategies struct {
+
+	// The strategy to use when Amazon EC2 emits a signal that your Spot Instance is at
+	// an elevated risk of being interrupted.
+	CapacityRebalance *SpotCapacityRebalance
+}
+
 // The options for Spot Instances.
 type SpotMarketOptions struct {
 
@@ -8593,6 +8754,10 @@ type SpotOptions struct {
 	// number of Spot pools that you specify.
 	InstancePoolsToUseCount int32
 
+	// The strategies for managing your workloads on your Spot Instances that will be
+	// interrupted. Currently only the capacity rebalance strategy is available.
+	MaintenanceStrategies *FleetSpotMaintenanceStrategies
+
 	// The maximum amount per hour for Spot Instances that you're willing to pay.
 	MaxTotalPrice *string
 
@@ -8630,6 +8795,10 @@ type SpotOptionsRequest struct {
 	// selects the cheapest Spot pools and evenly allocates your target Spot capacity
 	// across the number of Spot pools that you specify.
 	InstancePoolsToUseCount int32
+
+	// The strategies for managing your Spot Instances that are at an elevated risk of
+	// being interrupted.
+	MaintenanceStrategies *FleetSpotMaintenanceStrategiesRequest
 
 	// The maximum amount per hour for Spot Instances that you're willing to pay.
 	MaxTotalPrice *string
@@ -8942,18 +9111,18 @@ type TagDescription struct {
 type TagSpecification struct {
 
 	// The type of resource to tag. Currently, the resource types that support tagging
-	// on creation are: capacity-reservation | client-vpn-endpoint | customer-gateway |
-	// dedicated-host | dhcp-options | export-image-task | export-instance-task | fleet
-	// | fpga-image | host-reservation | import-image-task | import-snapshot-task |
-	// instance | internet-gateway | ipv4pool-ec2 | ipv6pool-ec2 | key-pair |
-	// launch-template | placement-group | prefix-list | natgateway | network-acl |
-	// route-table | security-group | spot-fleet-request | spot-instances-request |
-	// snapshot | subnet | traffic-mirror-filter | traffic-mirror-session |
-	// traffic-mirror-target | transit-gateway | transit-gateway-attachment |
-	// transit-gateway-route-table | volume |vpc |  vpc-peering-connection |
-	// vpc-endpoint (for interface and gateway endpoints) | vpc-endpoint-service (for
-	// AWS PrivateLink) | vpc-flow-log | vpn-connection | vpn-gateway. To tag a
-	// resource after it has been created, see CreateTags
+	// on creation are: capacity-reservation | carrier-gateway | client-vpn-endpoint |
+	// customer-gateway | dedicated-host | dhcp-options | export-image-task |
+	// export-instance-task | fleet | fpga-image | host-reservation | import-image-task
+	// | import-snapshot-task | instance | internet-gateway | ipv4pool-ec2 |
+	// ipv6pool-ec2 | key-pair | launch-template | placement-group | prefix-list |
+	// natgateway | network-acl | route-table | security-group | spot-fleet-request |
+	// spot-instances-request | snapshot | subnet | traffic-mirror-filter |
+	// traffic-mirror-session | traffic-mirror-target | transit-gateway |
+	// transit-gateway-attachment | transit-gateway-route-table | volume |vpc |
+	// vpc-peering-connection | vpc-endpoint (for interface and gateway endpoints) |
+	// vpc-endpoint-service (for AWS PrivateLink) | vpc-flow-log | vpn-connection |
+	// vpn-gateway. To tag a resource after it has been created, see CreateTags
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
 	ResourceType ResourceType
 
@@ -10002,11 +10171,11 @@ type VCpuInfo struct {
 	// The default number of vCPUs for the instance type.
 	DefaultVCpus *int32
 
-	// List of the valid number of cores that can be configured for the instance type.
+	// The valid number of cores that can be configured for the instance type.
 	ValidCores []int32
 
-	// List of the valid number of threads per core that can be configured for the
-	// instance type.
+	// The valid number of threads per core that can be configured for the instance
+	// type.
 	ValidThreadsPerCore []int32
 }
 
@@ -10410,6 +10579,9 @@ type VpcEndpointConnection struct {
 
 	// The DNS entries for the VPC endpoint.
 	DnsEntries []DnsEntry
+
+	// The Amazon Resource Names (ARNs) of the Gateway Load Balancers for the service.
+	GatewayLoadBalancerArns []string
 
 	// The Amazon Resource Names (ARNs) of the network load balancers for the service.
 	NetworkLoadBalancerArns []string

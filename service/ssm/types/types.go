@@ -286,7 +286,7 @@ type AssociationExecutionTargetsFilter struct {
 // Describes a filter.
 type AssociationFilter struct {
 
-	// The name of the filter.
+	// The name of the filter. InstanceId has been deprecated.
 	//
 	// This member is required.
 	Key AssociationFilterKey
@@ -571,7 +571,7 @@ type AutomationExecutionFilter struct {
 
 	// One or more keys to limit the results. Valid filter keys include the following:
 	// DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId,
-	// CurrentAction, StartTimeBefore, StartTimeAfter.
+	// CurrentAction, StartTimeBefore, StartTimeAfter, TargetResourceGroup.
 	//
 	// This member is required.
 	Key AutomationExecutionFilterKey
@@ -3798,6 +3798,9 @@ type SessionFilter struct {
 	// * Terminating
 	//
 	// * Failed
+	//
+	// * SessionId:
+	// Specify a session ID to return details about the session.
 	//
 	// This member is required.
 	Value *string

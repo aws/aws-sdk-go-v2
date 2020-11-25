@@ -30,6 +30,46 @@ func (m *validateOpActivateEventSource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelReplay struct {
+}
+
+func (*validateOpCancelReplay) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelReplay) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelReplayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelReplayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateArchive struct {
+}
+
+func (*validateOpCreateArchive) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateArchive) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateArchiveInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateArchiveInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEventBus struct {
 }
 
@@ -85,6 +125,26 @@ func (m *validateOpDeactivateEventSource) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeactivateEventSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteArchive struct {
+}
+
+func (*validateOpDeleteArchive) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteArchive) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteArchiveInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteArchiveInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -150,6 +210,26 @@ func (m *validateOpDeleteRule) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeArchive struct {
+}
+
+func (*validateOpDescribeArchive) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeArchive) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeArchiveInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeArchiveInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeEventSource struct {
 }
 
@@ -185,6 +265,26 @@ func (m *validateOpDescribePartnerEventSource) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribePartnerEventSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeReplay struct {
+}
+
+func (*validateOpDescribeReplay) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeReplay) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeReplayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeReplayInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -450,26 +550,6 @@ func (m *validateOpPutTargets) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpRemovePermission struct {
-}
-
-func (*validateOpRemovePermission) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpRemovePermission) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*RemovePermissionInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpRemovePermissionInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpRemoveTargets struct {
 }
 
@@ -485,6 +565,26 @@ func (m *validateOpRemoveTargets) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRemoveTargetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartReplay struct {
+}
+
+func (*validateOpStartReplay) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartReplay) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartReplayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartReplayInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -550,8 +650,36 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateArchive struct {
+}
+
+func (*validateOpUpdateArchive) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateArchive) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateArchiveInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateArchiveInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpActivateEventSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpActivateEventSource{}, middleware.After)
+}
+
+func addOpCancelReplayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelReplay{}, middleware.After)
+}
+
+func addOpCreateArchiveValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateArchive{}, middleware.After)
 }
 
 func addOpCreateEventBusValidationMiddleware(stack *middleware.Stack) error {
@@ -566,6 +694,10 @@ func addOpDeactivateEventSourceValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDeactivateEventSource{}, middleware.After)
 }
 
+func addOpDeleteArchiveValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteArchive{}, middleware.After)
+}
+
 func addOpDeleteEventBusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEventBus{}, middleware.After)
 }
@@ -578,12 +710,20 @@ func addOpDeleteRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRule{}, middleware.After)
 }
 
+func addOpDescribeArchiveValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeArchive{}, middleware.After)
+}
+
 func addOpDescribeEventSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeEventSource{}, middleware.After)
 }
 
 func addOpDescribePartnerEventSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribePartnerEventSource{}, middleware.After)
+}
+
+func addOpDescribeReplayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeReplay{}, middleware.After)
 }
 
 func addOpDescribeRuleValidationMiddleware(stack *middleware.Stack) error {
@@ -638,12 +778,12 @@ func addOpPutTargetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutTargets{}, middleware.After)
 }
 
-func addOpRemovePermissionValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpRemovePermission{}, middleware.After)
-}
-
 func addOpRemoveTargetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRemoveTargets{}, middleware.After)
+}
+
+func addOpStartReplayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartReplay{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -656,6 +796,10 @@ func addOpTestEventPatternValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateArchiveValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateArchive{}, middleware.After)
 }
 
 func validateAwsVpcConfiguration(v *types.AwsVpcConfiguration) error {
@@ -678,11 +822,11 @@ func validateBatchParameters(v *types.BatchParameters) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchParameters"}
-	if v.JobName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
-	}
 	if v.JobDefinition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobDefinition"))
+	}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -696,14 +840,14 @@ func validateCondition(v *types.Condition) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Condition"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
-	if v.Type == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -717,13 +861,13 @@ func validateEcsParameters(v *types.EcsParameters) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EcsParameters"}
+	if v.TaskDefinitionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskDefinitionArn"))
+	}
 	if v.NetworkConfiguration != nil {
 		if err := validateNetworkConfiguration(v.NetworkConfiguration); err != nil {
 			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.TaskDefinitionArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TaskDefinitionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -784,11 +928,26 @@ func validateRedshiftDataParameters(v *types.RedshiftDataParameters) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RedshiftDataParameters"}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
 	if v.Sql == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Sql"))
 	}
-	if v.Database == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReplayDestination(v *types.ReplayDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReplayDestination"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -821,11 +980,11 @@ func validateRunCommandTarget(v *types.RunCommandTarget) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RunCommandTarget"}
-	if v.Values == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Values"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -891,10 +1050,11 @@ func validateTarget(v *types.Target) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Target"}
-	if v.BatchParameters != nil {
-		if err := validateBatchParameters(v.BatchParameters); err != nil {
-			invalidParams.AddNested("BatchParameters", err.(smithy.InvalidParamsError))
-		}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if v.InputTransformer != nil {
 		if err := validateInputTransformer(v.InputTransformer); err != nil {
@@ -906,26 +1066,25 @@ func validateTarget(v *types.Target) error {
 			invalidParams.AddNested("KinesisParameters", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RunCommandParameters != nil {
+		if err := validateRunCommandParameters(v.RunCommandParameters); err != nil {
+			invalidParams.AddNested("RunCommandParameters", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.EcsParameters != nil {
 		if err := validateEcsParameters(v.EcsParameters); err != nil {
 			invalidParams.AddNested("EcsParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BatchParameters != nil {
+		if err := validateBatchParameters(v.BatchParameters); err != nil {
+			invalidParams.AddNested("BatchParameters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.RedshiftDataParameters != nil {
 		if err := validateRedshiftDataParameters(v.RedshiftDataParameters); err != nil {
 			invalidParams.AddNested("RedshiftDataParameters", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.RunCommandParameters != nil {
-		if err := validateRunCommandParameters(v.RunCommandParameters); err != nil {
-			invalidParams.AddNested("RunCommandParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Arn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -966,18 +1125,51 @@ func validateOpActivateEventSourceInput(v *ActivateEventSourceInput) error {
 	}
 }
 
+func validateOpCancelReplayInput(v *CancelReplayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelReplayInput"}
+	if v.ReplayName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplayName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateArchiveInput(v *CreateArchiveInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateArchiveInput"}
+	if v.ArchiveName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ArchiveName"))
+	}
+	if v.EventSourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventSourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateEventBusInput(v *CreateEventBusInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateEventBusInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -991,11 +1183,11 @@ func validateOpCreatePartnerEventSourceInput(v *CreatePartnerEventSourceInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePartnerEventSourceInput"}
-	if v.Account == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Account"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Account == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Account"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1011,6 +1203,21 @@ func validateOpDeactivateEventSourceInput(v *DeactivateEventSourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeactivateEventSourceInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteArchiveInput(v *DeleteArchiveInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteArchiveInput"}
+	if v.ArchiveName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ArchiveName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1039,11 +1246,11 @@ func validateOpDeletePartnerEventSourceInput(v *DeletePartnerEventSourceInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeletePartnerEventSourceInput"}
-	if v.Account == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Account"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Account == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Account"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1059,6 +1266,21 @@ func validateOpDeleteRuleInput(v *DeleteRuleInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteRuleInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeArchiveInput(v *DescribeArchiveInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeArchiveInput"}
+	if v.ArchiveName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ArchiveName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1089,6 +1311,21 @@ func validateOpDescribePartnerEventSourceInput(v *DescribePartnerEventSourceInpu
 	invalidParams := smithy.InvalidParamsError{Context: "DescribePartnerEventSourceInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeReplayInput(v *DescribeReplayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeReplayInput"}
+	if v.ReplayName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplayName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1252,19 +1489,10 @@ func validateOpPutPermissionInput(v *PutPermissionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutPermissionInput"}
-	if v.Principal == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
-	}
-	if v.StatementId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StatementId"))
-	}
 	if v.Condition != nil {
 		if err := validateCondition(v.Condition); err != nil {
 			invalidParams.AddNested("Condition", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Action == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1278,13 +1506,13 @@ func validateOpPutRuleInput(v *PutRuleInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutRuleInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1315,13 +1543,16 @@ func validateOpPutTargetsInput(v *PutTargetsInput) error {
 	}
 }
 
-func validateOpRemovePermissionInput(v *RemovePermissionInput) error {
+func validateOpRemoveTargetsInput(v *RemoveTargetsInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "RemovePermissionInput"}
-	if v.StatementId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StatementId"))
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveTargetsInput"}
+	if v.Rule == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rule"))
+	}
+	if v.Ids == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Ids"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1330,16 +1561,29 @@ func validateOpRemovePermissionInput(v *RemovePermissionInput) error {
 	}
 }
 
-func validateOpRemoveTargetsInput(v *RemoveTargetsInput) error {
+func validateOpStartReplayInput(v *StartReplayInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "RemoveTargetsInput"}
-	if v.Ids == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Ids"))
+	invalidParams := smithy.InvalidParamsError{Context: "StartReplayInput"}
+	if v.ReplayName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplayName"))
 	}
-	if v.Rule == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Rule"))
+	if v.EventSourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventSourceArn"))
+	}
+	if v.EventStartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventStartTime"))
+	}
+	if v.EventEndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventEndTime"))
+	}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	} else if v.Destination != nil {
+		if err := validateReplayDestination(v.Destination); err != nil {
+			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1393,11 +1637,26 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateArchiveInput(v *UpdateArchiveInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateArchiveInput"}
+	if v.ArchiveName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ArchiveName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

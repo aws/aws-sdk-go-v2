@@ -190,6 +190,26 @@ func (m *validateOpListRecommendations) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTagsForResource struct {
+}
+
+func (*validateOpListTagsForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutRecommendationFeedback struct {
 }
 
@@ -205,6 +225,46 @@ func (m *validateOpPutRecommendationFeedback) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutRecommendationFeedbackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTagResource struct {
+}
+
+func (*validateOpTagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagResource struct {
+}
+
+func (*validateOpUntagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -246,8 +306,20 @@ func addOpListRecommendationsValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListRecommendations{}, middleware.After)
 }
 
+func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
 func addOpPutRecommendationFeedbackValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutRecommendationFeedback{}, middleware.After)
+}
+
+func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
 func validateCodeCommitRepository(v *types.CodeCommitRepository) error {
@@ -289,11 +361,6 @@ func validateRepository(v *types.Repository) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Repository"}
-	if v.GitHubEnterpriseServer != nil {
-		if err := validateThirdPartySourceRepository(v.GitHubEnterpriseServer); err != nil {
-			invalidParams.AddNested("GitHubEnterpriseServer", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.CodeCommit != nil {
 		if err := validateCodeCommitRepository(v.CodeCommit); err != nil {
 			invalidParams.AddNested("CodeCommit", err.(smithy.InvalidParamsError))
@@ -302,6 +369,11 @@ func validateRepository(v *types.Repository) error {
 	if v.Bitbucket != nil {
 		if err := validateThirdPartySourceRepository(v.Bitbucket); err != nil {
 			invalidParams.AddNested("Bitbucket", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GitHubEnterpriseServer != nil {
+		if err := validateThirdPartySourceRepository(v.GitHubEnterpriseServer); err != nil {
+			invalidParams.AddNested("GitHubEnterpriseServer", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -350,14 +422,14 @@ func validateThirdPartySourceRepository(v *types.ThirdPartySourceRepository) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ThirdPartySourceRepository"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.ConnectionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectionArn"))
 	}
 	if v.Owner == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Owner"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -390,11 +462,11 @@ func validateOpCreateCodeReviewInput(v *CreateCodeReviewInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCodeReviewInput"}
-	if v.RepositoryAssociationArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RepositoryAssociationArn"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RepositoryAssociationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryAssociationArn"))
 	}
 	if v.Type == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
@@ -430,11 +502,11 @@ func validateOpDescribeRecommendationFeedbackInput(v *DescribeRecommendationFeed
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeRecommendationFeedbackInput"}
-	if v.RecommendationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RecommendationId"))
-	}
 	if v.CodeReviewArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CodeReviewArn"))
+	}
+	if v.RecommendationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommendationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -518,19 +590,70 @@ func validateOpListRecommendationsInput(v *ListRecommendationsInput) error {
 	}
 }
 
+func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutRecommendationFeedbackInput(v *PutRecommendationFeedbackInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutRecommendationFeedbackInput"}
-	if v.RecommendationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RecommendationId"))
-	}
 	if v.CodeReviewArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CodeReviewArn"))
 	}
+	if v.RecommendationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommendationId"))
+	}
 	if v.Reactions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Reactions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagResourceInput(v *TagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagResourceInput(v *UntagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

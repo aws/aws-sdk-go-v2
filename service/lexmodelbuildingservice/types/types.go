@@ -251,6 +251,16 @@ type FulfillmentActivity struct {
 	CodeHook *CodeHook
 }
 
+// The name of a context that must be active for an intent to be selected by Amazon
+// Lex.
+type InputContext struct {
+
+	// The name of the context.
+	//
+	// This member is required.
+	Name *string
+}
+
 // Identifies the specific version of an intent.
 type Intent struct {
 
@@ -385,6 +395,29 @@ type Message struct {
 	GroupNumber *int32
 }
 
+// The specification of an output context that is set when an intent is fulfilled.
+type OutputContext struct {
+
+	// The name of the context.
+	//
+	// This member is required.
+	Name *string
+
+	// The number of seconds that the context should be active after it is first sent
+	// in a PostContent or PostText response. You can set the value between 5 and
+	// 86,400 seconds (24 hours).
+	//
+	// This member is required.
+	TimeToLiveInSeconds *int32
+
+	// The number of conversation turns that the context should be active. A
+	// conversation turn is one PostContent or PostText request and the corresponding
+	// response from Amazon Lex.
+	//
+	// This member is required.
+	TurnsToLive *int32
+}
+
 // Obtains information from the user. To define a prompt, provide one or more
 // messages and specify the number of attempts to get information from the user. If
 // you provide more than one message, Amazon Lex chooses one of the messages to use
@@ -435,6 +468,11 @@ type Slot struct {
 	// This member is required.
 	SlotConstraint SlotConstraint
 
+	// A list of default values for the slot. Default values are used when Amazon Lex
+	// hasn't determined a value for a slot. You can specify default values from
+	// context variables, session attributes, and defined values.
+	DefaultValueSpec *SlotDefaultValueSpec
+
 	// A description of the slot.
 	Description *string
 
@@ -470,6 +508,39 @@ type Slot struct {
 
 	// The prompt that Amazon Lex uses to elicit the slot value from the user.
 	ValueElicitationPrompt *Prompt
+}
+
+// A default value for a slot.
+type SlotDefaultValue struct {
+
+	// The default value for the slot. You can specify one of the following:
+	//
+	// *
+	// #context-name.slot-name - The slot value "slot-name" in the context
+	// "context-name."
+	//
+	// * {attribute} - The slot value of the session attribute
+	// "attribute."
+	//
+	// * 'value' - The discrete value "value."
+	//
+	// This member is required.
+	DefaultValue *string
+}
+
+// Contains the default values for a slot. Default values are used when Amazon Lex
+// hasn't determined a value for a slot.
+type SlotDefaultValueSpec struct {
+
+	// The default values for a slot. You can specify more than one default. For
+	// example, you can specify a default value to use from a matching context
+	// variable, a session attribute, or a fixed value. The default value chosen is
+	// selected based on the order that you specify them in the list. For example, if
+	// you specify a context variable and a fixed value in that order, Amazon Lex uses
+	// the context variable if it is available, else it uses the fixed value.
+	//
+	// This member is required.
+	DefaultValueList []SlotDefaultValue
 }
 
 // Provides configuration information for a slot type.

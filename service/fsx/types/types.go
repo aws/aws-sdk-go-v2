@@ -26,7 +26,7 @@ type AdministrativeAction struct {
 	//
 	// * FILE_SYSTEM_UPDATE -
 	// A file system update administrative action initiated by the user from the Amazon
-	// FSx console, API (UpdateFileSystem), or CLI (update-file-system). A
+	// FSx console, API (UpdateFileSystem), or CLI (update-file-system).
 	//
 	// *
 	// STORAGE_OPTIMIZATION - Once the FILE_SYSTEM_UPDATE task to increase a file
@@ -37,12 +37,21 @@ type AdministrativeAction struct {
 	// parent FILE_SYSTEM_UPDATE action status changes to COMPLETED. For more
 	// information, see Managing Storage Capacity
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html).
+	//
+	// *
+	// FILE_SYSTEM_ALIAS_ASSOCIATION - A file system update to associate a new DNS
+	// alias with the file system. For more information, see .
+	//
+	// *
+	// FILE_SYSTEM_ALIAS_DISASSOCIATION - A file system update to disassociate a DNS
+	// alias from the file system. For more information, see .
 	AdministrativeActionType AdministrativeActionType
 
 	// Provides information about a failed administrative action.
 	FailureDetails *AdministrativeActionFailureDetails
 
 	// Provides the percent complete of a STORAGE_OPTIMIZATION administrative action.
+	// Does not apply to any other administrative action type.
 	ProgressPercent *int32
 
 	// Time that the administrative action request was received.
@@ -70,7 +79,7 @@ type AdministrativeAction struct {
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html).
 	Status Status
 
-	// Describes the target StorageCapacity or ThroughputCapacity value provided in the
+	// Describes the target value for the administration action, provided in the
 	// UpdateFileSystem operation. Returned for FILE_SYSTEM_UPDATE administrative
 	// actions.
 	TargetFileSystemValues *FileSystem
@@ -79,8 +88,56 @@ type AdministrativeAction struct {
 // Provides information about a failed administrative action.
 type AdministrativeActionFailureDetails struct {
 
-	// Error message providing details about the failure.
+	// Error message providing details about the failed administrative action.
 	Message *string
+}
+
+// A DNS alias that is associated with the file system. You can use a DNS alias to
+// access a file system using user-defined DNS names, in addition to the default
+// DNS name that Amazon FSx assigns to the file system. For more information, see
+// DNS aliases
+// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html)
+// in the FSx for Windows File Server User Guide.
+type Alias struct {
+
+	// Describes the state of the DNS alias.
+	//
+	// * AVAILABLE - The DNS alias is associated
+	// with an Amazon FSx file system.
+	//
+	// * CREATING - Amazon FSx is creating the DNS
+	// alias and associating it with the file system.
+	//
+	// * CREATE_FAILED - Amazon FSx was
+	// unable to associate the DNS alias with the file system.
+	//
+	// * DELETING - Amazon FSx
+	// is disassociating the DNS alias from the file system and deleting it.
+	//
+	// *
+	// DELETE_FAILED - Amazon FSx was unable to disassocate the DNS alias from the file
+	// system.
+	Lifecycle AliasLifecycle
+
+	// The name of the DNS alias. The alias name has to meet the following
+	// requirements:
+	//
+	// * Formatted as a fully-qualified domain name (FQDN),
+	// hostname.domain, for example, accounting.example.com.
+	//
+	// * Can contain
+	// alphanumeric characters and the hyphen (-).
+	//
+	// * Cannot start or end with a
+	// hyphen.
+	//
+	// * Can start with a numeric.
+	//
+	// For DNS names, Amazon FSx stores
+	// alphabetic characters as lowercase letters (a-z), regardless of how you specify
+	// them: as uppercase letters, lowercase letters, or the corresponding letters in
+	// escape codes.
+	Name *string
 }
 
 // A backup of an Amazon FSx for file system.
@@ -326,6 +383,37 @@ type CreateFileSystemWindowsConfiguration struct {
 	// The ID for an existing AWS Managed Microsoft Active Directory (AD) instance that
 	// the file system should join when it's created.
 	ActiveDirectoryId *string
+
+	// An array of one or more DNS alias names that you want to associate with the
+	// Amazon FSx file system. Aliases allow you to use existing DNS names to access
+	// the data in your Amazon FSx file system. You can associate up to 50 aliases with
+	// a file system at any time. You can associate additional DNS aliases after you
+	// create the file system using the AssociateFileSystemAliases operation. You can
+	// remove DNS aliases from the file system after it is created using the
+	// DisassociateFileSystemAliases operation. You only need to specify the alias name
+	// in the request payload. For more information, see Working with DNS Aliases
+	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html)
+	// and Walkthrough 5: Using DNS aliases to access your file system
+	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html),
+	// including additional steps you must take to be able to access your file system
+	// using a DNS alias. An alias name has to meet the following requirements:
+	//
+	// *
+	// Formatted as a fully-qualified domain name (FQDN), hostname.domain, for example,
+	// accounting.example.com.
+	//
+	// * Can contain alphanumeric characters and the hyphen
+	// (-).
+	//
+	// * Cannot start or end with a hyphen.
+	//
+	// * Can start with a numeric.
+	//
+	// For DNS
+	// alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z),
+	// regardless of how you specify them: as uppercase letters, lowercase letters, or
+	// the corresponding letters in escape codes.
+	Aliases []string
 
 	// The number of days to retain automatic backups. The default is to retain backups
 	// for 7 days. Setting this value to 0 disables the creation of automatic backups.
@@ -1070,6 +1158,17 @@ type WindowsFileSystemConfiguration struct {
 	// The ID for an existing Microsoft Active Directory instance that the file system
 	// should join when it's created.
 	ActiveDirectoryId *string
+
+	// An array of one or more DNS aliases that are currently associated with the
+	// Amazon FSx file system. Aliases allow you to use existing DNS names to access
+	// the data in your Amazon FSx file system. You can associate up to 50 aliases with
+	// a file system at any time. You can associate additional DNS aliases after you
+	// create the file system using the AssociateFileSystemAliases operation. You can
+	// remove DNS aliases from the file system after it is created using the
+	// DisassociateFileSystemAliases operation. You only need to specify the alias name
+	// in the request payload. For more information, see DNS aliases
+	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html).
+	Aliases []Alias
 
 	// The number of days to retain automatic backups. Setting this to 0 disables
 	// automatic backups. You can retain automatic backups for a maximum of 90 days.

@@ -245,6 +245,52 @@ func (m *awsAwsjson11_serializeOpCreateProtection) HandleSerialize(ctx context.C
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateProtectionGroup struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateProtectionGroup) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateProtectionGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateProtectionGroupInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.CreateProtectionGroup")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateProtectionGroupInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateSubscription struct {
 }
 
@@ -315,6 +361,52 @@ func (m *awsAwsjson11_serializeOpDeleteProtection) HandleSerialize(ctx context.C
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDeleteProtectionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteProtectionGroup struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteProtectionGroup) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteProtectionGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteProtectionGroupInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.DeleteProtectionGroup")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteProtectionGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -406,6 +498,45 @@ func (m *awsAwsjson11_serializeOpDescribeAttack) HandleSerialize(ctx context.Con
 	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDescribeAttackStatistics struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeAttackStatistics) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeAttackStatistics) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeAttackStatisticsInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.DescribeAttackStatistics")
+
+	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -524,6 +655,52 @@ func (m *awsAwsjson11_serializeOpDescribeProtection) HandleSerialize(ctx context
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDescribeProtectionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDescribeProtectionGroup struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeProtectionGroup) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeProtectionGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeProtectionGroupInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.DescribeProtectionGroup")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeProtectionGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -872,6 +1049,52 @@ func (m *awsAwsjson11_serializeOpListAttacks) HandleSerialize(ctx context.Contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListProtectionGroups struct {
+}
+
+func (*awsAwsjson11_serializeOpListProtectionGroups) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListProtectionGroups) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListProtectionGroupsInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.ListProtectionGroups")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListProtectionGroupsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListProtections struct {
 }
 
@@ -918,6 +1141,52 @@ func (m *awsAwsjson11_serializeOpListProtections) HandleSerialize(ctx context.Co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListResourcesInProtectionGroup struct {
+}
+
+func (*awsAwsjson11_serializeOpListResourcesInProtectionGroup) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListResourcesInProtectionGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListResourcesInProtectionGroupInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.ListResourcesInProtectionGroup")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListResourcesInProtectionGroupInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateEmergencyContactSettings struct {
 }
 
@@ -949,6 +1218,52 @@ func (m *awsAwsjson11_serializeOpUpdateEmergencyContactSettings) HandleSerialize
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentUpdateEmergencyContactSettingsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpUpdateProtectionGroup struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateProtectionGroup) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateProtectionGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateProtectionGroupInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.UpdateProtectionGroup")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateProtectionGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1044,6 +1359,17 @@ func awsAwsjson11_serializeDocumentEmergencyContactList(v []types.EmergencyConta
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentProtectionGroupMembers(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentResourceArnFilterList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1127,6 +1453,40 @@ func awsAwsjson11_serializeOpDocumentAssociateProactiveEngagementDetailsInput(v 
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentCreateProtectionGroupInput(v *CreateProtectionGroupInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Aggregation) > 0 {
+		ok := object.Key("Aggregation")
+		ok.String(string(v.Aggregation))
+	}
+
+	if v.Members != nil {
+		ok := object.Key("Members")
+		if err := awsAwsjson11_serializeDocumentProtectionGroupMembers(v.Members, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Pattern) > 0 {
+		ok := object.Key("Pattern")
+		ok.String(string(v.Pattern))
+	}
+
+	if v.ProtectionGroupId != nil {
+		ok := object.Key("ProtectionGroupId")
+		ok.String(*v.ProtectionGroupId)
+	}
+
+	if len(v.ResourceType) > 0 {
+		ok := object.Key("ResourceType")
+		ok.String(string(v.ResourceType))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentCreateProtectionInput(v *CreateProtectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1147,6 +1507,18 @@ func awsAwsjson11_serializeOpDocumentCreateProtectionInput(v *CreateProtectionIn
 func awsAwsjson11_serializeOpDocumentCreateSubscriptionInput(v *CreateSubscriptionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteProtectionGroupInput(v *DeleteProtectionGroupInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ProtectionGroupId != nil {
+		ok := object.Key("ProtectionGroupId")
+		ok.String(*v.ProtectionGroupId)
+	}
 
 	return nil
 }
@@ -1182,6 +1554,13 @@ func awsAwsjson11_serializeOpDocumentDescribeAttackInput(v *DescribeAttackInput,
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDescribeAttackStatisticsInput(v *DescribeAttackStatisticsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDescribeDRTAccessInput(v *DescribeDRTAccessInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1192,6 +1571,18 @@ func awsAwsjson11_serializeOpDocumentDescribeDRTAccessInput(v *DescribeDRTAccess
 func awsAwsjson11_serializeOpDocumentDescribeEmergencyContactSettingsInput(v *DescribeEmergencyContactSettingsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDescribeProtectionGroupInput(v *DescribeProtectionGroupInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ProtectionGroupId != nil {
+		ok := object.Key("ProtectionGroupId")
+		ok.String(*v.ProtectionGroupId)
+	}
 
 	return nil
 }
@@ -1315,6 +1706,23 @@ func awsAwsjson11_serializeOpDocumentListAttacksInput(v *ListAttacksInput, value
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentListProtectionGroupsInput(v *ListProtectionGroupsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentListProtectionsInput(v *ListProtectionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1332,6 +1740,28 @@ func awsAwsjson11_serializeOpDocumentListProtectionsInput(v *ListProtectionsInpu
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentListResourcesInProtectionGroupInput(v *ListResourcesInProtectionGroupInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.ProtectionGroupId != nil {
+		ok := object.Key("ProtectionGroupId")
+		ok.String(*v.ProtectionGroupId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentUpdateEmergencyContactSettingsInput(v *UpdateEmergencyContactSettingsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1341,6 +1771,40 @@ func awsAwsjson11_serializeOpDocumentUpdateEmergencyContactSettingsInput(v *Upda
 		if err := awsAwsjson11_serializeDocumentEmergencyContactList(v.EmergencyContactList, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateProtectionGroupInput(v *UpdateProtectionGroupInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Aggregation) > 0 {
+		ok := object.Key("Aggregation")
+		ok.String(string(v.Aggregation))
+	}
+
+	if v.Members != nil {
+		ok := object.Key("Members")
+		if err := awsAwsjson11_serializeDocumentProtectionGroupMembers(v.Members, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Pattern) > 0 {
+		ok := object.Key("Pattern")
+		ok.String(string(v.Pattern))
+	}
+
+	if v.ProtectionGroupId != nil {
+		ok := object.Key("ProtectionGroupId")
+		ok.String(*v.ProtectionGroupId)
+	}
+
+	if len(v.ResourceType) > 0 {
+		ok := object.Key("ResourceType")
+		ok.String(string(v.ResourceType))
 	}
 
 	return nil

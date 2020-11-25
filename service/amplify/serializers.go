@@ -109,6 +109,11 @@ func awsRestjson1_serializeOpDocumentCreateAppInput(v *CreateAppInput, value smi
 		ok.String(*v.BuildSpec)
 	}
 
+	if v.CustomHeaders != nil {
+		ok := object.Key("customHeaders")
+		ok.String(*v.CustomHeaders)
+	}
+
 	if v.CustomRules != nil {
 		ok := object.Key("customRules")
 		if err := awsRestjson1_serializeDocumentCustomRules(v.CustomRules, ok); err != nil {
@@ -2897,6 +2902,11 @@ func awsRestjson1_serializeOpDocumentUpdateAppInput(v *UpdateAppInput, value smi
 	if v.BuildSpec != nil {
 		ok := object.Key("buildSpec")
 		ok.String(*v.BuildSpec)
+	}
+
+	if v.CustomHeaders != nil {
+		ok := object.Key("customHeaders")
+		ok.String(*v.CustomHeaders)
 	}
 
 	if v.CustomRules != nil {

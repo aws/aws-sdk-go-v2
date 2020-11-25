@@ -116,6 +116,7 @@ type DeploymentMode string
 const (
 	DeploymentModeSingleInstance       DeploymentMode = "SINGLE_INSTANCE"
 	DeploymentModeActiveStandbyMultiAz DeploymentMode = "ACTIVE_STANDBY_MULTI_AZ"
+	DeploymentModeClusterMultiAz       DeploymentMode = "CLUSTER_MULTI_AZ"
 )
 
 // Values returns all known values for DeploymentMode. Note that this can be
@@ -125,6 +126,7 @@ func (DeploymentMode) Values() []DeploymentMode {
 	return []DeploymentMode{
 		"SINGLE_INSTANCE",
 		"ACTIVE_STANDBY_MULTI_AZ",
+		"CLUSTER_MULTI_AZ",
 	}
 }
 
@@ -133,6 +135,7 @@ type EngineType string
 // Enum values for EngineType
 const (
 	EngineTypeActivemq EngineType = "ACTIVEMQ"
+	EngineTypeRabbitmq EngineType = "RABBITMQ"
 )
 
 // Values returns all known values for EngineType. Note that this can be expanded
@@ -141,6 +144,7 @@ const (
 func (EngineType) Values() []EngineType {
 	return []EngineType{
 		"ACTIVEMQ",
+		"RABBITMQ",
 	}
 }
 

@@ -1112,14 +1112,14 @@ func validateDataSourceConfig(v *types.DataSourceConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DataSourceConfig"}
-	if v.S3Keys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3Keys"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.S3Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.S3Keys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Keys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1150,11 +1150,11 @@ func validateDeploymentApplicationConfig(v *types.DeploymentApplicationConfig) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeploymentApplicationConfig"}
-	if v.ApplicationVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationVersion"))
-	}
 	if v.Application == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Application"))
+	}
+	if v.ApplicationVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationVersion"))
 	}
 	if v.LaunchConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LaunchConfig"))
@@ -1230,13 +1230,13 @@ func validateLaunchConfig(v *types.LaunchConfig) error {
 	if v.PackageName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PackageName"))
 	}
+	if v.LaunchFile == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LaunchFile"))
+	}
 	if v.PortForwardingConfig != nil {
 		if err := validatePortForwardingConfig(v.PortForwardingConfig); err != nil {
 			invalidParams.AddNested("PortForwardingConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.LaunchFile == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LaunchFile"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1368,15 +1368,15 @@ func validateSimulationApplicationConfig(v *types.SimulationApplicationConfig) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SimulationApplicationConfig"}
+	if v.Application == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Application"))
+	}
 	if v.LaunchConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LaunchConfig"))
 	} else if v.LaunchConfig != nil {
 		if err := validateLaunchConfig(v.LaunchConfig); err != nil {
 			invalidParams.AddNested("LaunchConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Application == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Application"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1412,14 +1412,9 @@ func validateSimulationJobRequest(v *types.SimulationJobRequest) error {
 			invalidParams.AddNested("LoggingConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.VpcConfig != nil {
-		if err := validateVPCConfig(v.VpcConfig); err != nil {
-			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.DataSources != nil {
-		if err := validateDataSourceConfigs(v.DataSources); err != nil {
-			invalidParams.AddNested("DataSources", err.(smithy.InvalidParamsError))
+	if v.RobotApplications != nil {
+		if err := validateRobotApplicationConfigs(v.RobotApplications); err != nil {
+			invalidParams.AddNested("RobotApplications", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.SimulationApplications != nil {
@@ -1427,9 +1422,14 @@ func validateSimulationJobRequest(v *types.SimulationJobRequest) error {
 			invalidParams.AddNested("SimulationApplications", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.RobotApplications != nil {
-		if err := validateRobotApplicationConfigs(v.RobotApplications); err != nil {
-			invalidParams.AddNested("RobotApplications", err.(smithy.InvalidParamsError))
+	if v.DataSources != nil {
+		if err := validateDataSourceConfigs(v.DataSources); err != nil {
+			invalidParams.AddNested("DataSources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcConfig != nil {
+		if err := validateVPCConfig(v.VpcConfig); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1587,11 +1587,11 @@ func validateOpCreateDeploymentJobInput(v *CreateDeploymentJobInput) error {
 			invalidParams.AddNested("DeploymentConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Fleet == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Fleet"))
-	}
 	if v.ClientRequestToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if v.Fleet == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fleet"))
 	}
 	if v.DeploymentApplicationConfigs == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeploymentApplicationConfigs"))
@@ -1627,14 +1627,14 @@ func validateOpCreateRobotApplicationInput(v *CreateRobotApplicationInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateRobotApplicationInput"}
-	if v.RobotSoftwareSuite == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RobotSoftwareSuite"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.Sources == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
+	}
+	if v.RobotSoftwareSuite == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RobotSoftwareSuite"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1663,11 +1663,11 @@ func validateOpCreateRobotInput(v *CreateRobotInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateRobotInput"}
-	if len(v.Architecture) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Architecture"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Architecture) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Architecture"))
 	}
 	if v.GreengrassGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GreengrassGroupId"))
@@ -1684,17 +1684,17 @@ func validateOpCreateSimulationApplicationInput(v *CreateSimulationApplicationIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSimulationApplicationInput"}
-	if v.RobotSoftwareSuite == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RobotSoftwareSuite"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Sources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
 	}
 	if v.SimulationSoftwareSuite == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SimulationSoftwareSuite"))
 	}
-	if v.Sources == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
+	if v.RobotSoftwareSuite == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RobotSoftwareSuite"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1723,21 +1723,6 @@ func validateOpCreateSimulationJobInput(v *CreateSimulationJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSimulationJobInput"}
-	if v.RobotApplications != nil {
-		if err := validateRobotApplicationConfigs(v.RobotApplications); err != nil {
-			invalidParams.AddNested("RobotApplications", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.DataSources != nil {
-		if err := validateDataSourceConfigs(v.DataSources); err != nil {
-			invalidParams.AddNested("DataSources", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.SimulationApplications != nil {
-		if err := validateSimulationApplicationConfigs(v.SimulationApplications); err != nil {
-			invalidParams.AddNested("SimulationApplications", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.LoggingConfig != nil {
 		if err := validateLoggingConfig(v.LoggingConfig); err != nil {
 			invalidParams.AddNested("LoggingConfig", err.(smithy.InvalidParamsError))
@@ -1745,6 +1730,21 @@ func validateOpCreateSimulationJobInput(v *CreateSimulationJobInput) error {
 	}
 	if v.IamRole == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IamRole"))
+	}
+	if v.RobotApplications != nil {
+		if err := validateRobotApplicationConfigs(v.RobotApplications); err != nil {
+			invalidParams.AddNested("RobotApplications", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SimulationApplications != nil {
+		if err := validateSimulationApplicationConfigs(v.SimulationApplications); err != nil {
+			invalidParams.AddNested("SimulationApplications", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataSources != nil {
+		if err := validateDataSourceConfigs(v.DataSources); err != nil {
+			invalidParams.AddNested("DataSources", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.VpcConfig != nil {
 		if err := validateVPCConfig(v.VpcConfig); err != nil {
@@ -1763,11 +1763,11 @@ func validateOpCreateWorldExportJobInput(v *CreateWorldExportJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateWorldExportJobInput"}
-	if v.OutputLocation == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OutputLocation"))
-	}
 	if v.Worlds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Worlds"))
+	}
+	if v.OutputLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputLocation"))
 	}
 	if v.IamRole == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IamRole"))
@@ -1894,11 +1894,11 @@ func validateOpDeregisterRobotInput(v *DeregisterRobotInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeregisterRobotInput"}
-	if v.Robot == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Robot"))
-	}
 	if v.Fleet == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Fleet"))
+	}
+	if v.Robot == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Robot"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2092,11 +2092,11 @@ func validateOpRegisterRobotInput(v *RegisterRobotInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterRobotInput"}
-	if v.Robot == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Robot"))
-	}
 	if v.Fleet == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Fleet"))
+	}
+	if v.Robot == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Robot"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2144,11 +2144,11 @@ func validateOpSyncDeploymentJobInput(v *SyncDeploymentJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SyncDeploymentJobInput"}
-	if v.Fleet == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Fleet"))
-	}
 	if v.ClientRequestToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if v.Fleet == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fleet"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2180,11 +2180,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2201,11 +2201,11 @@ func validateOpUpdateRobotApplicationInput(v *UpdateRobotApplicationInput) error
 	if v.Application == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Application"))
 	}
-	if v.RobotSoftwareSuite == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RobotSoftwareSuite"))
-	}
 	if v.Sources == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
+	}
+	if v.RobotSoftwareSuite == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RobotSoftwareSuite"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2219,17 +2219,17 @@ func validateOpUpdateSimulationApplicationInput(v *UpdateSimulationApplicationIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSimulationApplicationInput"}
-	if v.SimulationSoftwareSuite == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SimulationSoftwareSuite"))
-	}
-	if v.RobotSoftwareSuite == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RobotSoftwareSuite"))
-	}
 	if v.Application == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Application"))
 	}
 	if v.Sources == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
+	}
+	if v.SimulationSoftwareSuite == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SimulationSoftwareSuite"))
+	}
+	if v.RobotSoftwareSuite == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RobotSoftwareSuite"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

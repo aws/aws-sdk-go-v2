@@ -17,7 +17,8 @@ import (
 // deletes all other change sets associated with the stack because they aren't
 // valid for the updated stack. If a stack policy is associated with the stack, AWS
 // CloudFormation enforces the policy during the update. You can't specify a
-// temporary stack policy that overrides the current policy.
+// temporary stack policy that overrides the current policy. To create a change set
+// for the entire stack hierachy, IncludeNestedStacks must have been set to True.
 func (c *Client) ExecuteChangeSet(ctx context.Context, params *ExecuteChangeSetInput, optFns ...func(*Options)) (*ExecuteChangeSetOutput, error) {
 	if params == nil {
 		params = &ExecuteChangeSetInput{}

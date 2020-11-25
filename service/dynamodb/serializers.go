@@ -560,6 +560,52 @@ func (m *awsAwsjson10_serializeOpDescribeEndpoints) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpDescribeExport struct {
+}
+
+func (*awsAwsjson10_serializeOpDescribeExport) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDescribeExport) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeExportInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.DescribeExport")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDescribeExportInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpDescribeGlobalTable struct {
 }
 
@@ -829,6 +875,52 @@ func (m *awsAwsjson10_serializeOpDescribeTimeToLive) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpExportTableToPointInTime struct {
+}
+
+func (*awsAwsjson10_serializeOpExportTableToPointInTime) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpExportTableToPointInTime) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ExportTableToPointInTimeInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.ExportTableToPointInTime")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentExportTableToPointInTimeInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpGetItem struct {
 }
 
@@ -952,6 +1044,52 @@ func (m *awsAwsjson10_serializeOpListContributorInsights) HandleSerialize(ctx co
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentListContributorInsightsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpListExports struct {
+}
+
+func (*awsAwsjson10_serializeOpListExports) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpListExports) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListExportsInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.ListExports")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListExportsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3885,6 +4023,18 @@ func awsAwsjson10_serializeOpDocumentDescribeEndpointsInput(v *DescribeEndpoints
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentDescribeExportInput(v *DescribeExportInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExportArn != nil {
+		ok := object.Key("ExportArn")
+		ok.String(*v.ExportArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentDescribeGlobalTableInput(v *DescribeGlobalTableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3947,6 +4097,58 @@ func awsAwsjson10_serializeOpDocumentDescribeTimeToLiveInput(v *DescribeTimeToLi
 	if v.TableName != nil {
 		ok := object.Key("TableName")
 		ok.String(*v.TableName)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentExportTableToPointInTimeInput(v *ExportTableToPointInTimeInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if len(v.ExportFormat) > 0 {
+		ok := object.Key("ExportFormat")
+		ok.String(string(v.ExportFormat))
+	}
+
+	if v.ExportTime != nil {
+		ok := object.Key("ExportTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.ExportTime))
+	}
+
+	if v.S3Bucket != nil {
+		ok := object.Key("S3Bucket")
+		ok.String(*v.S3Bucket)
+	}
+
+	if v.S3BucketOwner != nil {
+		ok := object.Key("S3BucketOwner")
+		ok.String(*v.S3BucketOwner)
+	}
+
+	if v.S3Prefix != nil {
+		ok := object.Key("S3Prefix")
+		ok.String(*v.S3Prefix)
+	}
+
+	if len(v.S3SseAlgorithm) > 0 {
+		ok := object.Key("S3SseAlgorithm")
+		ok.String(string(v.S3SseAlgorithm))
+	}
+
+	if v.S3SseKmsKeyId != nil {
+		ok := object.Key("S3SseKmsKeyId")
+		ok.String(*v.S3SseKmsKeyId)
+	}
+
+	if v.TableArn != nil {
+		ok := object.Key("TableArn")
+		ok.String(*v.TableArn)
 	}
 
 	return nil
@@ -4054,6 +4256,28 @@ func awsAwsjson10_serializeOpDocumentListContributorInsightsInput(v *ListContrib
 	if v.TableName != nil {
 		ok := object.Key("TableName")
 		ok.String(*v.TableName)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentListExportsInput(v *ListExportsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.TableArn != nil {
+		ok := object.Key("TableArn")
+		ok.String(*v.TableArn)
 	}
 
 	return nil

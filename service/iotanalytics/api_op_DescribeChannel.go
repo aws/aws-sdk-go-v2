@@ -45,8 +45,8 @@ type DescribeChannelOutput struct {
 	// An object that contains information about the channel.
 	Channel *types.Channel
 
-	// Statistics about the channel. Included if the 'includeStatistics' parameter is
-	// set to true in the request.
+	// Statistics about the channel. Included if the includeStatistics parameter is set
+	// to true in the request.
 	Statistics *types.ChannelStatistics
 
 	// Metadata pertaining to the operation's result.

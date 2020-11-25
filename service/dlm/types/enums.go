@@ -43,6 +43,7 @@ type PolicyTypeValues string
 // Enum values for PolicyTypeValues
 const (
 	PolicyTypeValuesEbsSnapshotManagement PolicyTypeValues = "EBS_SNAPSHOT_MANAGEMENT"
+	PolicyTypeValuesImageManagement       PolicyTypeValues = "IMAGE_MANAGEMENT"
 )
 
 // Values returns all known values for PolicyTypeValues. Note that this can be
@@ -51,6 +52,7 @@ const (
 func (PolicyTypeValues) Values() []PolicyTypeValues {
 	return []PolicyTypeValues{
 		"EBS_SNAPSHOT_MANAGEMENT",
+		"IMAGE_MANAGEMENT",
 	}
 }
 

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Lists the tags (metadata) which you have assigned to the resource.
+// Lists the tags (metadata) that you have assigned to the resource.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -37,7 +37,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// The tags (metadata) which you have assigned to the resource.
+	// The tags (metadata) that you have assigned to the resource.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

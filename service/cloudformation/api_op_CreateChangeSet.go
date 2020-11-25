@@ -28,7 +28,8 @@ import (
 // the change set. To check the status of the change set or to review it, use the
 // DescribeChangeSet action. When you are satisfied with the changes the change set
 // will make, execute the change set by using the ExecuteChangeSet action. AWS
-// CloudFormation doesn't make changes until you execute the change set.
+// CloudFormation doesn't make changes until you execute the change set. To create
+// a change set for the entire stack hierachy, set IncludeNestedStacks to True.
 func (c *Client) CreateChangeSet(ctx context.Context, params *CreateChangeSetInput, optFns ...func(*Options)) (*CreateChangeSetOutput, error) {
 	if params == nil {
 		params = &CreateChangeSetInput{}
@@ -135,12 +136,11 @@ type CreateChangeSetInput struct {
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html)
 	// transforms, which are macros hosted by AWS CloudFormation. This capacity does
 	// not apply to creating change sets, and specifying it when creating change sets
-	// has no effect. Also, change sets do not currently support nested stacks. If you
-	// want to create a stack from a stack template that contains macros and nested
-	// stacks, you must create or update the stack directly from the template using the
-	// CreateStack or UpdateStack action, and specifying this capability. For more
-	// information on macros, see Using AWS CloudFormation Macros to Perform Custom
-	// Processing on Templates
+	// has no effect. If you want to create a stack from a stack template that contains
+	// macros and nested stacks, you must create or update the stack directly from the
+	// template using the CreateStack or UpdateStack action, and specifying this
+	// capability. For more information on macros, see Using AWS CloudFormation Macros
+	// to Perform Custom Processing on Templates
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html).
 	Capabilities []types.Capability
 
@@ -165,6 +165,11 @@ type CreateChangeSetInput struct {
 
 	// A description to help you identify this change set.
 	Description *string
+
+	// Creates a change set for the all nested stacks specified in the template. The
+	// default behavior of this action is set to False. To include nested sets in a
+	// change set, specify True.
+	IncludeNestedStacks *bool
 
 	// The Amazon Resource Names (ARNs) of Amazon Simple Notification Service (Amazon
 	// SNS) topics that AWS CloudFormation associates with the stack. To remove all

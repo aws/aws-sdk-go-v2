@@ -11,8 +11,8 @@ import (
 type ActiveDirectoryError struct {
 	Message *string
 
-	Type              ActiveDirectoryErrorType
 	ActiveDirectoryId *string
+	Type              ActiveDirectoryErrorType
 }
 
 func (e *ActiveDirectoryError) Error() string {

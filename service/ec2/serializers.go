@@ -23628,6 +23628,23 @@ func awsEc2query_serializeDocumentClassicLoadBalancersConfig(v *types.ClassicLoa
 	return nil
 }
 
+func awsEc2query_serializeDocumentClientConnectOptions(v *types.ClientConnectOptions, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Enabled {
+		objectKey := object.Key("Enabled")
+		objectKey.Boolean(v.Enabled)
+	}
+
+	if v.LambdaFunctionArn != nil {
+		objectKey := object.Key("LambdaFunctionArn")
+		objectKey.String(*v.LambdaFunctionArn)
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeDocumentClientData(v *types.ClientData, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -24503,6 +24520,32 @@ func awsEc2query_serializeDocumentFleetLaunchTemplateSpecificationRequest(v *typ
 	return nil
 }
 
+func awsEc2query_serializeDocumentFleetSpotCapacityRebalanceRequest(v *types.FleetSpotCapacityRebalanceRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.ReplacementStrategy) > 0 {
+		objectKey := object.Key("ReplacementStrategy")
+		objectKey.String(string(v.ReplacementStrategy))
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentFleetSpotMaintenanceStrategiesRequest(v *types.FleetSpotMaintenanceStrategiesRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CapacityRebalance != nil {
+		objectKey := object.Key("CapacityRebalance")
+		if err := awsEc2query_serializeDocumentFleetSpotCapacityRebalanceRequest(v.CapacityRebalance, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeDocumentFlowLogIdList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -25124,6 +25167,11 @@ func awsEc2query_serializeDocumentInstanceNetworkInterfaceSpecification(v *types
 		if err := awsEc2query_serializeDocumentInstanceIpv6AddressList(v.Ipv6Addresses, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if v.NetworkCardIndex != 0 {
+		objectKey := object.Key("NetworkCardIndex")
+		objectKey.Integer(v.NetworkCardIndex)
 	}
 
 	if v.NetworkInterfaceId != nil {
@@ -25812,6 +25860,11 @@ func awsEc2query_serializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecific
 		if err := awsEc2query_serializeDocumentInstanceIpv6AddressListRequest(v.Ipv6Addresses, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if v.NetworkCardIndex != 0 {
+		objectKey := object.Key("NetworkCardIndex")
+		objectKey.Integer(v.NetworkCardIndex)
 	}
 
 	if v.NetworkInterfaceId != nil {
@@ -28258,6 +28311,18 @@ func awsEc2query_serializeDocumentSnapshotIdStringList(v []string, value query.V
 	return nil
 }
 
+func awsEc2query_serializeDocumentSpotCapacityRebalance(v *types.SpotCapacityRebalance, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.ReplacementStrategy) > 0 {
+		objectKey := object.Key("ReplacementStrategy")
+		objectKey.String(string(v.ReplacementStrategy))
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeDocumentSpotFleetLaunchSpecification(v *types.SpotFleetLaunchSpecification, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -28466,6 +28531,13 @@ func awsEc2query_serializeDocumentSpotFleetRequestConfigData(v *types.SpotFleetR
 		objectKey.Boolean(v.ReplaceUnhealthyInstances)
 	}
 
+	if v.SpotMaintenanceStrategies != nil {
+		objectKey := object.Key("SpotMaintenanceStrategies")
+		if err := awsEc2query_serializeDocumentSpotMaintenanceStrategies(v.SpotMaintenanceStrategies, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.SpotMaxTotalPrice != nil {
 		objectKey := object.Key("SpotMaxTotalPrice")
 		objectKey.String(*v.SpotMaxTotalPrice)
@@ -28571,6 +28643,20 @@ func awsEc2query_serializeDocumentSpotInstanceRequestIdList(v []string, value qu
 	return nil
 }
 
+func awsEc2query_serializeDocumentSpotMaintenanceStrategies(v *types.SpotMaintenanceStrategies, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CapacityRebalance != nil {
+		objectKey := object.Key("CapacityRebalance")
+		if err := awsEc2query_serializeDocumentSpotCapacityRebalance(v.CapacityRebalance, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeDocumentSpotMarketOptions(v *types.SpotMarketOptions, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -28620,6 +28706,13 @@ func awsEc2query_serializeDocumentSpotOptionsRequest(v *types.SpotOptionsRequest
 	if v.InstancePoolsToUseCount != 0 {
 		objectKey := object.Key("InstancePoolsToUseCount")
 		objectKey.Integer(v.InstancePoolsToUseCount)
+	}
+
+	if v.MaintenanceStrategies != nil {
+		objectKey := object.Key("MaintenanceStrategies")
+		if err := awsEc2query_serializeDocumentFleetSpotMaintenanceStrategiesRequest(v.MaintenanceStrategies, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.MaxTotalPrice != nil {
@@ -30206,6 +30299,11 @@ func awsEc2query_serializeOpDocumentAttachNetworkInterfaceInput(v *AttachNetwork
 		objectKey.String(*v.InstanceId)
 	}
 
+	if v.NetworkCardIndex != 0 {
+		objectKey := object.Key("NetworkCardIndex")
+		objectKey.Integer(v.NetworkCardIndex)
+	}
+
 	if v.NetworkInterfaceId != nil {
 		objectKey := object.Key("NetworkInterfaceId")
 		objectKey.String(*v.NetworkInterfaceId)
@@ -30869,6 +30967,13 @@ func awsEc2query_serializeOpDocumentCreateClientVpnEndpointInput(v *CreateClient
 	if v.ClientCidrBlock != nil {
 		objectKey := object.Key("ClientCidrBlock")
 		objectKey.String(*v.ClientCidrBlock)
+	}
+
+	if v.ClientConnectOptions != nil {
+		objectKey := object.Key("ClientConnectOptions")
+		if err := awsEc2query_serializeDocumentClientConnectOptions(v.ClientConnectOptions, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.ClientToken != nil {
@@ -31971,6 +32076,11 @@ func awsEc2query_serializeOpDocumentCreateRouteInput(v *CreateRouteInput, value 
 		objectKey.String(*v.TransitGatewayId)
 	}
 
+	if v.VpcEndpointId != nil {
+		objectKey := object.Key("VpcEndpointId")
+		objectKey.String(*v.VpcEndpointId)
+	}
+
 	if v.VpcPeeringConnectionId != nil {
 		objectKey := object.Key("VpcPeeringConnectionId")
 		objectKey.String(*v.VpcPeeringConnectionId)
@@ -32812,6 +32922,13 @@ func awsEc2query_serializeOpDocumentCreateVpcEndpointServiceConfigurationInput(v
 	if v.DryRun {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
+	}
+
+	if v.GatewayLoadBalancerArns != nil {
+		objectKey := object.FlatKey("GatewayLoadBalancerArn")
+		if err := awsEc2query_serializeDocumentValueStringList(v.GatewayLoadBalancerArns, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.NetworkLoadBalancerArns != nil {
@@ -39406,6 +39523,13 @@ func awsEc2query_serializeOpDocumentModifyClientVpnEndpointInput(v *ModifyClient
 	object := value.Object()
 	_ = object
 
+	if v.ClientConnectOptions != nil {
+		objectKey := object.Key("ClientConnectOptions")
+		if err := awsEc2query_serializeDocumentClientConnectOptions(v.ClientConnectOptions, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientVpnEndpointId != nil {
 		objectKey := object.Key("ClientVpnEndpointId")
 		objectKey.String(*v.ClientVpnEndpointId)
@@ -40725,6 +40849,13 @@ func awsEc2query_serializeOpDocumentModifyVpcEndpointServiceConfigurationInput(v
 		objectKey.Boolean(v.AcceptanceRequired)
 	}
 
+	if v.AddGatewayLoadBalancerArns != nil {
+		objectKey := object.FlatKey("AddGatewayLoadBalancerArn")
+		if err := awsEc2query_serializeDocumentValueStringList(v.AddGatewayLoadBalancerArns, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.AddNetworkLoadBalancerArns != nil {
 		objectKey := object.FlatKey("AddNetworkLoadBalancerArn")
 		if err := awsEc2query_serializeDocumentValueStringList(v.AddNetworkLoadBalancerArns, objectKey); err != nil {
@@ -40740,6 +40871,13 @@ func awsEc2query_serializeOpDocumentModifyVpcEndpointServiceConfigurationInput(v
 	if v.PrivateDnsName != nil {
 		objectKey := object.Key("PrivateDnsName")
 		objectKey.String(*v.PrivateDnsName)
+	}
+
+	if v.RemoveGatewayLoadBalancerArns != nil {
+		objectKey := object.FlatKey("RemoveGatewayLoadBalancerArn")
+		if err := awsEc2query_serializeDocumentValueStringList(v.RemoveGatewayLoadBalancerArns, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.RemoveNetworkLoadBalancerArns != nil {
@@ -41604,6 +41742,11 @@ func awsEc2query_serializeOpDocumentReplaceRouteInput(v *ReplaceRouteInput, valu
 	if v.TransitGatewayId != nil {
 		objectKey := object.Key("TransitGatewayId")
 		objectKey.String(*v.TransitGatewayId)
+	}
+
+	if v.VpcEndpointId != nil {
+		objectKey := object.Key("VpcEndpointId")
+		objectKey.String(*v.VpcEndpointId)
 	}
 
 	if v.VpcPeeringConnectionId != nil {

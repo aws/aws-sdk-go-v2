@@ -62,6 +62,54 @@ type AutomaticTapeCreationRule struct {
 	Worm bool
 }
 
+// Describes a bandwidth rate limit interval for a gateway. A bandwidth rate limit
+// schedule consists of one or more bandwidth rate limit intervals. A bandwidth
+// rate limit interval defines a period of time on one or more days of the week,
+// during which bandwidth rate limits are specified for uploading, downloading, or
+// both.
+type BandwidthRateLimitInterval struct {
+
+	// The days of the week component of the bandwidth rate limit interval, represented
+	// as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 Saturday.
+	//
+	// This member is required.
+	DaysOfWeek []int32
+
+	// The hour of the day to end the bandwidth rate limit interval.
+	//
+	// This member is required.
+	EndHourOfDay *int32
+
+	// The minute of the hour to end the bandwidth rate limit interval. The bandwidth
+	// rate limit interval ends at the end of the minute. To end an interval at the end
+	// of an hour, use the value 59.
+	//
+	// This member is required.
+	EndMinuteOfHour *int32
+
+	// The hour of the day to start the bandwidth rate limit interval.
+	//
+	// This member is required.
+	StartHourOfDay *int32
+
+	// The minute of the hour to start the bandwidth rate limit interval. The interval
+	// begins at the start of that minute. To begin an interval exactly at the start of
+	// the hour, use the value 0.
+	//
+	// This member is required.
+	StartMinuteOfHour *int32
+
+	// The average download rate limit component of the bandwidth rate limit interval,
+	// in bits per second. This field does not appear in the response if the download
+	// rate limit is not set.
+	AverageDownloadRateLimitInBitsPerSec *int64
+
+	// The average upload rate limit component of the bandwidth rate limit interval, in
+	// bits per second. This field does not appear in the response if the upload rate
+	// limit is not set.
+	AverageUploadRateLimitInBitsPerSec *int64
+}
+
 // Lists refresh cache information.
 type CacheAttributes struct {
 

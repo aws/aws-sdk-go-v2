@@ -56,8 +56,17 @@ type SynthesizeSpeechInput struct {
 	VoiceId types.VoiceId
 
 	// Specifies the engine (standard or neural) for Amazon Polly to use when
-	// processing input text for speech synthesis. Using a voice that is not supported
-	// for the engine selected will result in an error.
+	// processing input text for speech synthesis. For information on Amazon Polly
+	// voices and which voices are available in standard-only, NTTS-only, and both
+	// standard and NTTS formats, see Available Voices
+	// (https://docs.aws.amazon.com/polly/latest/dg/voicelist.html). NTTS-only voices
+	// When using NTTS-only voices such as Kevin (en-US), this parameter is required
+	// and must be set to neural. If the engine is not specified, or is set to
+	// standard, this will result in an error. Type: String Valid Values: standard |
+	// neural Required: Yes Standard voices For standard voices, this is not required;
+	// the engine parameter defaults to standard. If the engine is not specified, or is
+	// set to standard and an NTTS-only voice is selected, this will result in an
+	// error.
 	Engine types.Engine
 
 	// Optional language code for the Synthesize Speech request. This is only necessary

@@ -46,7 +46,7 @@ type DescribeDatastoreOutput struct {
 	Datastore *types.Datastore
 
 	// Additional statistical information about the data store. Included if the
-	// 'includeStatistics' parameter is set to true in the request.
+	// includeStatistics parameter is set to true in the request.
 	Statistics *types.DatastoreStatistics
 
 	// Metadata pertaining to the operation's result.

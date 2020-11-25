@@ -46,13 +46,16 @@ func (c *Client) ListMetrics(ctx context.Context, params *ListMetricsInput, optF
 
 type ListMetricsInput struct {
 
-	// The dimensions to filter against.
+	// The dimensions to filter against. Only the dimensions that match exactly will be
+	// returned.
 	Dimensions []types.DimensionFilter
 
-	// The name of the metric to filter against.
+	// The name of the metric to filter against. Only the metrics with names that match
+	// exactly will be returned.
 	MetricName *string
 
-	// The namespace to filter against.
+	// The metric namespace to filter against. Only the namespace that matches exactly
+	// will be returned.
 	Namespace *string
 
 	// The token returned by a previous call to indicate that there is more data

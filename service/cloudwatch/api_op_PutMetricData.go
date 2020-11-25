@@ -31,8 +31,11 @@ import (
 // collects. Each dimension consists of a Name and Value pair. For more information
 // about specifying dimensions, see Publishing Metrics
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html)
-// in the Amazon CloudWatch User Guide. Data points with time stamps from 24 hours
-// ago or longer can take at least 48 hours to become available for GetMetricData
+// in the Amazon CloudWatch User Guide. You specify the time stamp to be associated
+// with each data point. You can specify time stamps that are as much as two weeks
+// before the current date, and as much as 2 hours after the current day and time.
+// Data points with time stamps from 24 hours ago or longer can take at least 48
+// hours to become available for GetMetricData
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html)
 // or GetMetricStatistics
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html)

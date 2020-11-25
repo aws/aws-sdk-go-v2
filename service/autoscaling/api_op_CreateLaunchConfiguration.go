@@ -14,10 +14,10 @@ import (
 // Creates a launch configuration. If you exceed your maximum limit of launch
 // configurations, the call fails. To query this limit, call the
 // DescribeAccountLimits API. For information about updating this limit, see Amazon
-// EC2 Auto Scaling Service Quotas
+// EC2 Auto Scaling service quotas
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html)
 // in the Amazon EC2 Auto Scaling User Guide. For more information, see Launch
-// Configurations
+// configurations
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchConfiguration.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) CreateLaunchConfiguration(ctx context.Context, params *CreateLaunchConfigurationInput, optFns ...func(*Options)) (*CreateLaunchConfigurationOutput, error) {
@@ -46,7 +46,7 @@ type CreateLaunchConfigurationInput struct {
 	// For Auto Scaling groups that are running in a virtual private cloud (VPC),
 	// specifies whether to assign a public IP address to the group's instances. If you
 	// specify true, each instance in the Auto Scaling group receives a unique public
-	// IP address. For more information, see Launching Auto Scaling Instances in a VPC
+	// IP address. For more information, see Launching Auto Scaling instances in a VPC
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html) in the
 	// Amazon EC2 Auto Scaling User Guide. If you specify this parameter, you must
 	// specify at least one subnet for VPCZoneIdentifier when you create your group. If
@@ -67,7 +67,7 @@ type CreateLaunchConfigurationInput struct {
 	// The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to. For
 	// more information, see ClassicLink
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html) in
-	// the Amazon EC2 User Guide for Linux Instances and Linking EC2-Classic Instances
+	// the Amazon EC2 User Guide for Linux Instances and Linking EC2-Classic instances
 	// to a VPC
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink)
 	// in the Amazon EC2 Auto Scaling User Guide. This parameter can only be used if
@@ -77,7 +77,7 @@ type CreateLaunchConfigurationInput struct {
 	// The IDs of one or more security groups for the specified ClassicLink-enabled
 	// VPC. For more information, see ClassicLink
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html) in
-	// the Amazon EC2 User Guide for Linux Instances and Linking EC2-Classic Instances
+	// the Amazon EC2 User Guide for Linux Instances and Linking EC2-Classic instances
 	// to a VPC
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink)
 	// in the Amazon EC2 Auto Scaling User Guide. If you specify the ClassicLinkVPCId
@@ -97,8 +97,8 @@ type CreateLaunchConfigurationInput struct {
 
 	// The name or the Amazon Resource Name (ARN) of the instance profile associated
 	// with the IAM role for the instance. The instance profile contains the IAM role.
-	// For more information, see IAM Role for Applications That Run on Amazon EC2
-	// Instances
+	// For more information, see IAM role for applications that run on Amazon EC2
+	// instances
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/us-iam-role.html) in the
 	// Amazon EC2 Auto Scaling User Guide.
 	IamInstanceProfile *string
@@ -114,8 +114,8 @@ type CreateLaunchConfigurationInput struct {
 	// configuration derives attributes from the instance, except for the block device
 	// mapping. To create a launch configuration with a block device mapping or
 	// override any other instance attributes, specify them as part of the same
-	// request. For more information, see Create a Launch Configuration Using an EC2
-	// Instance
+	// request. For more information, see Creating a launch configuration using an EC2
+	// instance
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-lc-with-instanceID.html)
 	// in the Amazon EC2 Auto Scaling User Guide. If you do not specify InstanceId, you
 	// must specify both ImageId and InstanceType.
@@ -127,7 +127,7 @@ type CreateLaunchConfigurationInput struct {
 	// account is charged a fee. When you disable detailed monitoring, CloudWatch
 	// generates metrics every 5 minutes. For more information, see Configure
 	// Monitoring for Auto Scaling Instances
-	// (https://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html#enable-as-instance-metrics)
+	// (https://docs.aws.amazon.com/autoscaling/latest/userguide/enable-as-instance-metrics.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	InstanceMonitoring *types.InstanceMonitoring
 
@@ -146,10 +146,10 @@ type CreateLaunchConfigurationInput struct {
 	// Amazon EC2 User Guide for Linux Instances.
 	KeyName *string
 
-	// The metadata options for the instances. For more information, see Instance
-	// Metadata and User Data
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
-	// in the Amazon EC2 User Guide for Linux Instances.
+	// The metadata options for the instances. For more information, see Configuring
+	// the Instance Metadata Options
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	MetadataOptions *types.InstanceMetadataOptions
 
 	// The tenancy of the instance. An instance with dedicated tenancy runs on
@@ -158,8 +158,8 @@ type CreateLaunchConfigurationInput struct {
 	// tenancy attribute set to default), you must set the value of this parameter to
 	// dedicated. If you specify PlacementTenancy, you must specify at least one subnet
 	// for VPCZoneIdentifier when you create your group. For more information, see
-	// Instance Placement Tenancy
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-vpc-tenancy)
+	// Configuring instance tenancy with Amazon EC2 Auto Scaling
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html)
 	// in the Amazon EC2 Auto Scaling User Guide. Valid Values: default | dedicated
 	PlacementTenancy *string
 
@@ -179,8 +179,7 @@ type CreateLaunchConfigurationInput struct {
 
 	// The maximum hourly price to be paid for any Spot Instance launched to fulfill
 	// the request. Spot Instances are launched when the price you specify exceeds the
-	// current Spot price. For more information, see Launching Spot Instances in Your
-	// Auto Scaling Group
+	// current Spot price. For more information, see Requesting Spot Instances
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-spot-instances.html)
 	// in the Amazon EC2 Auto Scaling User Guide. When you change your maximum price by
 	// creating a new launch configuration, running instances will continue to run as
@@ -189,7 +188,7 @@ type CreateLaunchConfigurationInput struct {
 	SpotPrice *string
 
 	// The Base64-encoded user data to make available to the launched EC2 instances.
-	// For more information, see Instance Metadata and User Data
+	// For more information, see Instance metadata and user data
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
 	// in the Amazon EC2 User Guide for Linux Instances.
 	UserData *string

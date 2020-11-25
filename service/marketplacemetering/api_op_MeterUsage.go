@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/types"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"time"
@@ -14,7 +15,9 @@ import (
 // API to emit metering records. For identical requests, the API is idempotent. It
 // simply returns the metering record ID. MeterUsage is authenticated on the
 // buyer's AWS account using credentials from the EC2 instance, ECS task, or EKS
-// pod.
+// pod. MeterUsage can optionally include multiple usage allocations, to provide
+// customers with usage data split into buckets by tags that you define (or allow
+// the customer to define).
 func (c *Client) MeterUsage(ctx context.Context, params *MeterUsageInput, optFns ...func(*Options)) (*MeterUsageOutput, error) {
 	if params == nil {
 		params = &MeterUsageInput{}
@@ -57,6 +60,11 @@ type MeterUsageInput struct {
 	// DryRunOperation; otherwise, it returns UnauthorizedException. Defaults to false
 	// if not specified.
 	DryRun *bool
+
+	// The set of UsageAllocations to submit. The sum of all UsageAllocation quantities
+	// must equal the UsageQuantity of the MeterUsage request, and each UsageAllocation
+	// must have a unique set of tags (include no tags).
+	UsageAllocations []types.UsageAllocation
 
 	// Consumption value for the hour. Defaults to 0 if not specified.
 	UsageQuantity *int32

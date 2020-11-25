@@ -37,14 +37,15 @@ type ListThingsInBillingGroupInput struct {
 	// The maximum number of results to return per request.
 	MaxResults *int32
 
-	// The token to retrieve the next set of results.
+	// To retrieve the next set of results, the nextToken value from a previous
+	// response; otherwise null to receive the first set of results.
 	NextToken *string
 }
 
 type ListThingsInBillingGroupOutput struct {
 
-	// The token used to get the next set of results. Will not be returned if operation
-	// has returned all results.
+	// The token to use to get the next set of results. Will not be returned if
+	// operation has returned all results.
 	NextToken *string
 
 	// A list of things in the billing group.

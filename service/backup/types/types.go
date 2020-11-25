@@ -11,8 +11,8 @@ type AdvancedBackupSetting struct {
 
 	// Specifies the backup option for a selected resource. This option is only
 	// available for Windows VSS backup jobs. Valid values: Set to
-	// "WindowsVSS”:“enabled" to enable WindowsVSS backup option and create a VSS
-	// Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. The
+	// "WindowsVSS":"enabled" to enable the WindowsVSS backup option and create a VSS
+	// Windows backup. Set to "WindowsVSS":"disabled" to create a regular backup. The
 	// WindowsVSS option is not enabled by default. If you specify an invalid option,
 	// you get an InvalidParameterValueException exception. For more information about
 	// Windows VSS backups, see Creating a VSS-Enabled Windows Backup
@@ -642,6 +642,10 @@ type RecoveryPointByBackupVault struct {
 	// (Amazon RDS) database. For VSS Windows backups, the only supported resource type
 	// is Amazon EC2.
 	ResourceType *string
+
+	// The backup vault where the recovery point was originally copied from. If the
+	// recovery point is restored to the same account this value will be null.
+	SourceBackupVaultArn *string
 
 	// A status code specifying the state of the recovery point.
 	Status RecoveryPointStatus

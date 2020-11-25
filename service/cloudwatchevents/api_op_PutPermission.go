@@ -47,27 +47,7 @@ type PutPermissionInput struct {
 
 	// The action that you are enabling the other account to perform. Currently, this
 	// must be events:PutEvents.
-	//
-	// This member is required.
 	Action *string
-
-	// The 12-digit AWS account ID that you are permitting to put events to your
-	// default event bus. Specify "*" to permit any account to put events to your
-	// default event bus. If you specify "*" without specifying Condition, avoid
-	// creating rules that may match undesirable events. To create more secure rules,
-	// make sure that the event pattern for each rule contains an account field with a
-	// specific account ID from which to receive events. Rules with an account field do
-	// not match any events sent from other accounts.
-	//
-	// This member is required.
-	Principal *string
-
-	// An identifier string for the external account that you are granting permissions
-	// to. If you later want to revoke the permission for this external account,
-	// specify this StatementId when you run RemovePermission.
-	//
-	// This member is required.
-	StatementId *string
 
 	// This parameter enables you to limit the permission to accounts that fulfill a
 	// certain condition, such as being a member of a certain AWS organization. For
@@ -79,9 +59,28 @@ type PutPermissionInput struct {
 	// JSON string which must contain Type, Key, and Value fields.
 	Condition *types.Condition
 
-	// The event bus associated with the rule. If you omit this, the default event bus
-	// is used.
+	// The name of the event bus associated with the rule. If you omit this, the
+	// default event bus is used.
 	EventBusName *string
+
+	// A JSON string that describes the permission policy statement. You can include a
+	// Policy parameter in the request instead of using the StatementId, Action,
+	// Principal, or Condition parameters.
+	Policy *string
+
+	// The 12-digit AWS account ID that you are permitting to put events to your
+	// default event bus. Specify "*" to permit any account to put events to your
+	// default event bus. If you specify "*" without specifying Condition, avoid
+	// creating rules that may match undesirable events. To create more secure rules,
+	// make sure that the event pattern for each rule contains an account field with a
+	// specific account ID from which to receive events. Rules with an account field do
+	// not match any events sent from other accounts.
+	Principal *string
+
+	// An identifier string for the external account that you are granting permissions
+	// to. If you later want to revoke the permission for this external account,
+	// specify this StatementId when you run RemovePermission.
+	StatementId *string
 }
 
 type PutPermissionOutput struct {

@@ -104,12 +104,25 @@ var defaultPartitions = endpoints.Partitions{
 		RegionRegex:    regexp.MustCompile("^us\\-gov\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
+			"dataplane-us-gov-east-1": endpoints.Endpoint{
+				Hostname: "greengrass-ats.iot.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+			},
 			"dataplane-us-gov-west-1": endpoints.Endpoint{
 				Hostname: "greengrass-ats.iot.us-gov-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",
 				},
 			},
+			"fips-us-gov-east-1": endpoints.Endpoint{
+				Hostname: "greengrass-fips.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+			},
+			"us-gov-east-1": endpoints.Endpoint{},
 			"us-gov-west-1": endpoints.Endpoint{
 				Hostname: "greengrass.us-gov-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{

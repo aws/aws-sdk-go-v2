@@ -50,7 +50,7 @@ var defaultPartitions = endpoints.Partitions{
 		PartitionEndpoint: "aws-global",
 		Endpoints: endpoints.Endpoints{
 			"aws-global": endpoints.Endpoint{
-				Hostname:  "service.chime.aws.amazon.com",
+				Hostname:  "chime.us-east-1.amazonaws.com",
 				Protocols: []string{"https"},
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-east-1",

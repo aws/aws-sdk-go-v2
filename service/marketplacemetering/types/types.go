@@ -6,6 +6,36 @@ import (
 	"time"
 )
 
+// Metadata assigned to an allocation. Each tag is made up of a key and a value.
+type Tag struct {
+
+	// One part of a key-value pair that makes up a tag. A key is a label that acts
+	// like a category for the specific tag values.
+	//
+	// This member is required.
+	Key *string
+
+	// One part of a key-value pair that makes up a tag. A value acts as a descriptor
+	// within a tag category (key). The value can be empty or null.
+	//
+	// This member is required.
+	Value *string
+}
+
+// Usage allocations allow you to split usage into buckets by tags. Each
+// UsageAllocation indicates the usage quantity for a specific set of tags.
+type UsageAllocation struct {
+
+	// The total quantity allocated to this bucket of usage.
+	//
+	// This member is required.
+	AllocatedUsageQuantity *int32
+
+	// The set of tags that define the bucket of usage. For the bucket of items with no
+	// tags, this parameter can be left out.
+	Tags []Tag
+}
+
 // A UsageRecord indicates a quantity of usage for a given product, customer,
 // dimension and time. Multiple requests with the same UsageRecords as input will
 // be deduplicated to prevent double charges.
@@ -34,6 +64,10 @@ type UsageRecord struct {
 	// The quantity of usage consumed by the customer for the given dimension and time.
 	// Defaults to 0 if not specified.
 	Quantity *int32
+
+	// The set of UsageAllocations to submit. The sum of all UsageAllocation quantities
+	// must equal the Quantity of the UsageRecord.
+	UsageAllocations []UsageAllocation
 }
 
 // A UsageRecordResult indicates the status of a given UsageRecord processed by

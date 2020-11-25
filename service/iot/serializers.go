@@ -11470,6 +11470,14 @@ func awsRestjson1_serializeOpHttpBindingsListThingPrincipalsInput(v *ListThingPr
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
 	if v.ThingName == nil || len(*v.ThingName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member thingName must not be empty")}
 	}
@@ -17608,6 +17616,11 @@ func awsRestjson1_serializeDocumentFirehoseAction(v *types.FirehoseAction, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.BatchMode != nil {
+		ok := object.Key("batchMode")
+		ok.Boolean(*v.BatchMode)
+	}
+
 	if v.DeliveryStreamName != nil {
 		ok := object.Key("deliveryStreamName")
 		ok.String(*v.DeliveryStreamName)
@@ -17747,6 +17760,11 @@ func awsRestjson1_serializeDocumentIotAnalyticsAction(v *types.IotAnalyticsActio
 	object := value.Object()
 	defer object.Close()
 
+	if v.BatchMode != nil {
+		ok := object.Key("batchMode")
+		ok.Boolean(*v.BatchMode)
+	}
+
 	if v.ChannelArn != nil {
 		ok := object.Key("channelArn")
 		ok.String(*v.ChannelArn)
@@ -17768,6 +17786,11 @@ func awsRestjson1_serializeDocumentIotAnalyticsAction(v *types.IotAnalyticsActio
 func awsRestjson1_serializeDocumentIotEventsAction(v *types.IotEventsAction, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BatchMode != nil {
+		ok := object.Key("batchMode")
+		ok.Boolean(*v.BatchMode)
+	}
 
 	if v.InputName != nil {
 		ok := object.Key("inputName")

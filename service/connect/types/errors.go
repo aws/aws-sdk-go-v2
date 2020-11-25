@@ -185,6 +185,43 @@ func (e *OutboundContactNotPermittedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// A resource already has that name.
+type ResourceConflictException struct {
+	Message *string
+}
+
+func (e *ResourceConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceConflictException) ErrorCode() string             { return "ResourceConflictException" }
+func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// That resource is already in use. Please try another.
+type ResourceInUseException struct {
+	Message *string
+
+	ResourceType ResourceType
+	ResourceId   *string
+}
+
+func (e *ResourceInUseException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceInUseException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
+func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified resource was not found.
 type ResourceNotFoundException struct {
 	Message *string
@@ -201,6 +238,23 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The service quota has been exceeded.
+type ServiceQuotaExceededException struct {
+	Message *string
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The throttling limit has been exceeded.
 type ThrottlingException struct {

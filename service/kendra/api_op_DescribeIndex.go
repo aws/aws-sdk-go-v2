@@ -87,6 +87,12 @@ type DescribeIndexOutput struct {
 	// The Unix datetime that the index was last updated.
 	UpdatedAt *time.Time
 
+	// The user context policy for the Amazon Kendra index.
+	UserContextPolicy types.UserContextPolicy
+
+	// The user token configuration for the Amazon Kendra index.
+	UserTokenConfigurations []types.UserTokenConfiguration
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }

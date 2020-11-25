@@ -1184,8 +1184,8 @@ type SavingsPlansDetails struct {
 type SavingsPlansPurchaseRecommendation struct {
 
 	// The account scope that you want your recommendations for. Amazon Web Services
-	// calculates recommendations including the master account and member accounts if
-	// the value is set to PAYER. If the value is LINKED, recommendations are
+	// calculates recommendations including the management account and member accounts
+	// if the value is set to PAYER. If the value is LINKED, recommendations are
 	// calculated for individual member accounts only.
 	AccountScope AccountScope
 
@@ -1276,6 +1276,9 @@ type SavingsPlansPurchaseRecommendationDetail struct {
 
 // Metadata about your Savings Plans Purchase Recommendations.
 type SavingsPlansPurchaseRecommendationMetadata struct {
+
+	// Additional metadata that may be applicable to the recommendation.
+	AdditionalMetadata *string
 
 	// The timestamp showing when the recommendations were generated.
 	GenerationTimestamp *string
@@ -1409,8 +1412,8 @@ type SavingsPlansUtilizationByTime struct {
 }
 
 // A single daily or monthly Savings Plans utilization rate, and details for your
-// account. A master account in an organization have access to member accounts. You
-// can use GetDimensionValues to determine the possible dimension values.
+// account. A management account in an organization have access to member accounts.
+// You can use GetDimensionValues to determine the possible dimension values.
 type SavingsPlansUtilizationDetail struct {
 
 	// The total amortized commitment for a Savings Plans. Includes the sum of the

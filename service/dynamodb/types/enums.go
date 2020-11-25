@@ -220,6 +220,44 @@ func (ContributorInsightsStatus) Values() []ContributorInsightsStatus {
 	}
 }
 
+type ExportFormat string
+
+// Enum values for ExportFormat
+const (
+	ExportFormatDynamodbJson ExportFormat = "DYNAMODB_JSON"
+	ExportFormatIon          ExportFormat = "ION"
+)
+
+// Values returns all known values for ExportFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ExportFormat) Values() []ExportFormat {
+	return []ExportFormat{
+		"DYNAMODB_JSON",
+		"ION",
+	}
+}
+
+type ExportStatus string
+
+// Enum values for ExportStatus
+const (
+	ExportStatusInProgress ExportStatus = "IN_PROGRESS"
+	ExportStatusCompleted  ExportStatus = "COMPLETED"
+	ExportStatusFailed     ExportStatus = "FAILED"
+)
+
+// Values returns all known values for ExportStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ExportStatus) Values() []ExportStatus {
+	return []ExportStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
 type GlobalTableStatus string
 
 // Enum values for GlobalTableStatus
@@ -324,12 +362,13 @@ type ReplicaStatus string
 
 // Enum values for ReplicaStatus
 const (
-	ReplicaStatusCreating       ReplicaStatus = "CREATING"
-	ReplicaStatusCreationFailed ReplicaStatus = "CREATION_FAILED"
-	ReplicaStatusUpdating       ReplicaStatus = "UPDATING"
-	ReplicaStatusDeleting       ReplicaStatus = "DELETING"
-	ReplicaStatusActive         ReplicaStatus = "ACTIVE"
-	ReplicaStatusRegionDisabled ReplicaStatus = "REGION_DISABLED"
+	ReplicaStatusCreating                          ReplicaStatus = "CREATING"
+	ReplicaStatusCreationFailed                    ReplicaStatus = "CREATION_FAILED"
+	ReplicaStatusUpdating                          ReplicaStatus = "UPDATING"
+	ReplicaStatusDeleting                          ReplicaStatus = "DELETING"
+	ReplicaStatusActive                            ReplicaStatus = "ACTIVE"
+	ReplicaStatusRegionDisabled                    ReplicaStatus = "REGION_DISABLED"
+	ReplicaStatusInaccessibleEncryptionCredentials ReplicaStatus = "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
 )
 
 // Values returns all known values for ReplicaStatus. Note that this can be
@@ -343,6 +382,7 @@ func (ReplicaStatus) Values() []ReplicaStatus {
 		"DELETING",
 		"ACTIVE",
 		"REGION_DISABLED",
+		"INACCESSIBLE_ENCRYPTION_CREDENTIALS",
 	}
 }
 
@@ -424,6 +464,24 @@ func (ReturnValuesOnConditionCheckFailure) Values() []ReturnValuesOnConditionChe
 	return []ReturnValuesOnConditionCheckFailure{
 		"ALL_OLD",
 		"NONE",
+	}
+}
+
+type S3SseAlgorithm string
+
+// Enum values for S3SseAlgorithm
+const (
+	S3SseAlgorithmAes256 S3SseAlgorithm = "AES256"
+	S3SseAlgorithmKms    S3SseAlgorithm = "KMS"
+)
+
+// Values returns all known values for S3SseAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (S3SseAlgorithm) Values() []S3SseAlgorithm {
+	return []S3SseAlgorithm{
+		"AES256",
+		"KMS",
 	}
 }
 

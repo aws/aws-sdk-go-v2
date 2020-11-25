@@ -21,7 +21,7 @@ import (
 // Zones. If you decrement the desired capacity, your Auto Scaling group can become
 // unbalanced between Availability Zones. Amazon EC2 Auto Scaling tries to
 // rebalance the group, and rebalancing might terminate instances in other zones.
-// For more information, see Rebalancing Activities
+// For more information, see Rebalancing activities
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-benefits.html#AutoScalingBehavior.InstanceUsage)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) TerminateInstanceInAutoScalingGroup(ctx context.Context, params *TerminateInstanceInAutoScalingGroupInput, optFns ...func(*Options)) (*TerminateInstanceInAutoScalingGroupOutput, error) {

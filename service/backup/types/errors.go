@@ -11,9 +11,9 @@ import (
 type AlreadyExistsException struct {
 	Message *string
 
+	Code             *string
 	CreatorRequestId *string
 	Arn              *string
-	Code             *string
 	Type             *string
 	Context          *string
 }
@@ -35,9 +35,9 @@ func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.
 type DependencyFailureException struct {
 	Message *string
 
+	Code    *string
 	Type    *string
 	Context *string
-	Code    *string
 }
 
 func (e *DependencyFailureException) Error() string {
@@ -58,8 +58,8 @@ type InvalidParameterValueException struct {
 	Message *string
 
 	Code    *string
-	Context *string
 	Type    *string
+	Context *string
 }
 
 func (e *InvalidParameterValueException) Error() string {
@@ -79,9 +79,9 @@ func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return
 type InvalidRequestException struct {
 	Message *string
 
+	Code    *string
 	Type    *string
 	Context *string
-	Code    *string
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -101,9 +101,9 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 type LimitExceededException struct {
 	Message *string
 
+	Code    *string
 	Type    *string
 	Context *string
-	Code    *string
 }
 
 func (e *LimitExceededException) Error() string {
@@ -122,9 +122,9 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 type MissingParameterValueException struct {
 	Message *string
 
-	Context *string
 	Code    *string
 	Type    *string
+	Context *string
 }
 
 func (e *MissingParameterValueException) Error() string {
@@ -143,9 +143,9 @@ func (e *MissingParameterValueException) ErrorFault() smithy.ErrorFault { return
 type ResourceNotFoundException struct {
 	Message *string
 
-	Context *string
-	Type    *string
 	Code    *string
+	Type    *string
+	Context *string
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -165,8 +165,8 @@ type ServiceUnavailableException struct {
 	Message *string
 
 	Code    *string
-	Context *string
 	Type    *string
+	Context *string
 }
 
 func (e *ServiceUnavailableException) Error() string {

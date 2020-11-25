@@ -4,6 +4,7 @@ package redshift
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
@@ -113,6 +114,93 @@ func addOperationDescribeClusterTracksMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// DescribeClusterTracksAPIClient is a client that implements the
+// DescribeClusterTracks operation.
+type DescribeClusterTracksAPIClient interface {
+	DescribeClusterTracks(context.Context, *DescribeClusterTracksInput, ...func(*Options)) (*DescribeClusterTracksOutput, error)
+}
+
+var _ DescribeClusterTracksAPIClient = (*Client)(nil)
+
+// DescribeClusterTracksPaginatorOptions is the paginator options for
+// DescribeClusterTracks
+type DescribeClusterTracksPaginatorOptions struct {
+	// An integer value for the maximum number of maintenance tracks to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeClusterTracksPaginator is a paginator for DescribeClusterTracks
+type DescribeClusterTracksPaginator struct {
+	options   DescribeClusterTracksPaginatorOptions
+	client    DescribeClusterTracksAPIClient
+	params    *DescribeClusterTracksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeClusterTracksPaginator returns a new DescribeClusterTracksPaginator
+func NewDescribeClusterTracksPaginator(client DescribeClusterTracksAPIClient, params *DescribeClusterTracksInput, optFns ...func(*DescribeClusterTracksPaginatorOptions)) *DescribeClusterTracksPaginator {
+	options := DescribeClusterTracksPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeClusterTracksInput{}
+	}
+
+	return &DescribeClusterTracksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeClusterTracksPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeClusterTracks page.
+func (p *DescribeClusterTracksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeClusterTracksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeClusterTracks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeClusterTracks(region string) *awsmiddleware.RegisterServiceMetadata {

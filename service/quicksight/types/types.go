@@ -297,6 +297,20 @@ type ColumnGroupSchema struct {
 	Name *string
 }
 
+// A rule defined to grant access on one or more restricted columns. Each dataset
+// can have multiple rules. To create a restricted column, you add it to one or
+// more rules. Each rule must contain at least one column and at least one user or
+// group. To be able to see a restricted column, a user or group needs to be added
+// to a rule for that column.
+type ColumnLevelPermissionRule struct {
+
+	// An array of column names.
+	ColumnNames []string
+
+	// An array of Amazon Resource Names (ARNs) for QuickSight users or groups.
+	Principals []string
+}
+
 // The column schema.
 type ColumnSchema struct {
 
@@ -576,6 +590,9 @@ type DataSet struct {
 	// Currently, only geospatial hierarchy is supported.
 	ColumnGroups []ColumnGroup
 
+	// A set of one or more definitions of a ColumnLevelPermissionRule.
+	ColumnLevelPermissionRules []ColumnLevelPermissionRule
+
 	// The amount of SPICE capacity used by this dataset. This is 0 if the dataset
 	// isn't imported into SPICE.
 	ConsumedSpiceCapacityInBytes int64
@@ -649,6 +666,9 @@ type DataSetSummary struct {
 
 	// The Amazon Resource Name (ARN) of the dataset.
 	Arn *string
+
+	// Indicates if the dataset has column level permission configured.
+	ColumnLevelPermissionRulesApplied bool
 
 	// The time that this dataset was created.
 	CreatedTime *time.Time
@@ -776,6 +796,9 @@ type DataSourceParameters struct {
 
 	// MySQL parameters.
 	MySqlParameters *MySqlParameters
+
+	// Oracle parameters.
+	OracleParameters *OracleParameters
 
 	// PostgreSQL parameters.
 	PostgreSqlParameters *PostgreSqlParameters
@@ -1180,6 +1203,25 @@ type NamespaceInfoV2 struct {
 	NamespaceError *NamespaceError
 }
 
+// Oracle parameters.
+type OracleParameters struct {
+
+	// Database.
+	//
+	// This member is required.
+	Database *string
+
+	// An Oracle host.
+	//
+	// This member is required.
+	Host *string
+
+	// Port.
+	//
+	// This member is required.
+	Port int32
+}
+
 // Output column.
 type OutputColumn struct {
 
@@ -1360,8 +1402,7 @@ type RenameColumnOperation struct {
 // Permission for the resource.
 type ResourcePermission struct {
 
-	// The IAM action to grant or revoke permissions on, for example
-	// "quicksight:DescribeDashboard".
+	// The IAM action to grant or revoke permissions on.
 	//
 	// This member is required.
 	Actions []string

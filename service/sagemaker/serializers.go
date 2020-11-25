@@ -11545,6 +11545,11 @@ func awsAwsjson11_serializeOpDocumentCreateDomainInput(v *CreateDomainInput, val
 		ok.String(*v.HomeEfsFileSystemKmsKeyId)
 	}
 
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
 	if v.SubnetIds != nil {
 		ok := object.Key("SubnetIds")
 		if err := awsAwsjson11_serializeDocumentSubnets(v.SubnetIds, ok); err != nil {

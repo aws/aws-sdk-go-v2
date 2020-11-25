@@ -110,16 +110,15 @@ type CreateStackInput struct {
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html)
 	// and AWS::Serverless
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html)
-	// transforms, which are macros hosted by AWS CloudFormation. Change sets do not
-	// currently support nested stacks. If you want to create a stack from a stack
-	// template that contains macros and nested stacks, you must create the stack
-	// directly from the template using this capability. You should only create stacks
-	// directly from a stack template that contains macros if you know what processing
-	// the macro performs. Each macro relies on an underlying Lambda service function
-	// for processing stack templates. Be aware that the Lambda function owner can
-	// update the function operation without AWS CloudFormation being notified. For
-	// more information, see Using AWS CloudFormation Macros to Perform Custom
-	// Processing on Templates
+	// transforms, which are macros hosted by AWS CloudFormation. If you want to create
+	// a stack from a stack template that contains macros and nested stacks, you must
+	// create the stack directly from the template using this capability. You should
+	// only create stacks directly from a stack template that contains macros if you
+	// know what processing the macro performs. Each macro relies on an underlying
+	// Lambda service function for processing stack templates. Be aware that the Lambda
+	// function owner can update the function operation without AWS CloudFormation
+	// being notified. For more information, see Using AWS CloudFormation Macros to
+	// Perform Custom Processing on Templates
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html).
 	Capabilities []types.Capability
 

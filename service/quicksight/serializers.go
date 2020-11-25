@@ -549,6 +549,13 @@ func awsRestjson1_serializeOpDocumentCreateDataSetInput(v *CreateDataSetInput, v
 		}
 	}
 
+	if v.ColumnLevelPermissionRules != nil {
+		ok := object.Key("ColumnLevelPermissionRules")
+		if err := awsRestjson1_serializeDocumentColumnLevelPermissionRuleList(v.ColumnLevelPermissionRules, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DataSetId != nil {
 		ok := object.Key("DataSetId")
 		ok.String(*v.DataSetId)
@@ -4504,6 +4511,10 @@ func awsRestjson1_serializeOpHttpBindingsGetDashboardEmbedUrlInput(v *GetDashboa
 		encoder.SetQuery("session-lifetime").Long(*v.SessionLifetimeInMinutes)
 	}
 
+	if v.StatePersistenceEnabled {
+		encoder.SetQuery("state-persistence-enabled").Boolean(v.StatePersistenceEnabled)
+	}
+
 	if v.UndoRedoDisabled {
 		encoder.SetQuery("undo-redo-disabled").Boolean(v.UndoRedoDisabled)
 	}
@@ -7520,6 +7531,13 @@ func awsRestjson1_serializeOpDocumentUpdateDataSetInput(v *UpdateDataSetInput, v
 		}
 	}
 
+	if v.ColumnLevelPermissionRules != nil {
+		ok := object.Key("ColumnLevelPermissionRules")
+		if err := awsRestjson1_serializeDocumentColumnLevelPermissionRuleList(v.ColumnLevelPermissionRules, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ImportMode) > 0 {
 		ok := object.Key("ImportMode")
 		ok.String(string(v.ImportMode))
@@ -9161,7 +9179,52 @@ func awsRestjson1_serializeDocumentColumnGroupList(v []types.ColumnGroup, value 
 	return nil
 }
 
+func awsRestjson1_serializeDocumentColumnLevelPermissionRule(v *types.ColumnLevelPermissionRule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ColumnNames != nil {
+		ok := object.Key("ColumnNames")
+		if err := awsRestjson1_serializeDocumentColumnNameList(v.ColumnNames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Principals != nil {
+		ok := object.Key("Principals")
+		if err := awsRestjson1_serializeDocumentPrincipalList(v.Principals, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentColumnLevelPermissionRuleList(v []types.ColumnLevelPermissionRule, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentColumnLevelPermissionRule(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentColumnList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentColumnNameList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -9498,6 +9561,13 @@ func awsRestjson1_serializeDocumentDataSourceParameters(v *types.DataSourceParam
 	if v.MySqlParameters != nil {
 		ok := object.Key("MySqlParameters")
 		if err := awsRestjson1_serializeDocumentMySqlParameters(v.MySqlParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OracleParameters != nil {
+		ok := object.Key("OracleParameters")
+		if err := awsRestjson1_serializeDocumentOracleParameters(v.OracleParameters, ok); err != nil {
 			return err
 		}
 	}
@@ -10001,6 +10071,28 @@ func awsRestjson1_serializeDocumentMySqlParameters(v *types.MySqlParameters, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentOracleParameters(v *types.OracleParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Database != nil {
+		ok := object.Key("Database")
+		ok.String(*v.Database)
+	}
+
+	if v.Host != nil {
+		ok := object.Key("Host")
+		ok.String(*v.Host)
+	}
+
+	if v.Port != 0 {
+		ok := object.Key("Port")
+		ok.Integer(v.Port)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentParameters(v *types.Parameters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10119,6 +10211,17 @@ func awsRestjson1_serializeDocumentPrestoParameters(v *types.PrestoParameters, v
 		ok.Integer(v.Port)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPrincipalList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

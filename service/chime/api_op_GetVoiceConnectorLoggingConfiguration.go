@@ -13,7 +13,7 @@ import (
 
 // Retrieves the logging configuration details for the specified Amazon Chime Voice
 // Connector. Shows whether SIP message logs are enabled for sending to Amazon
-// CloudWatch Logs.
+// CloudWatch.
 func (c *Client) GetVoiceConnectorLoggingConfiguration(ctx context.Context, params *GetVoiceConnectorLoggingConfigurationInput, optFns ...func(*Options)) (*GetVoiceConnectorLoggingConfigurationOutput, error) {
 	if params == nil {
 		params = &GetVoiceConnectorLoggingConfigurationInput{}

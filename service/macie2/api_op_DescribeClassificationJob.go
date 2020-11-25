@@ -65,26 +65,29 @@ type DescribeClassificationJobOutput struct {
 	// The current status of the job. Possible values are:
 	//
 	// * CANCELLED - You cancelled
-	// the job, or you paused the job and didn't resume it within 30 days of pausing
-	// it.
+	// the job, or you paused the job while it had a status of RUNNING and you didn't
+	// resume it within 30 days of pausing it.
 	//
-	// * COMPLETE - For a one-time job, Amazon Macie finished processing all the
-	// data specified for the job. This value doesn't apply to recurring jobs.
+	// * COMPLETE - For a one-time job, Amazon
+	// Macie finished processing the data specified for the job. This value doesn't
+	// apply to recurring jobs.
 	//
-	// * IDLE
-	// - For a recurring job, the previous scheduled run is complete and the next
-	// scheduled run is pending. This value doesn't apply to one-time jobs.
+	// * IDLE - For a recurring job, the previous scheduled
+	// run is complete and the next scheduled run is pending. This value doesn't apply
+	// to one-time jobs.
 	//
-	// * PAUSED -
-	// Amazon Macie started running the job but completion of the job would exceed one
-	// or more quotas for your account.
+	// * PAUSED - Amazon Macie started running the job but
+	// additional processing would exceed the monthly sensitive data discovery quota
+	// for your account or one or more member accounts that the job analyzes data
+	// for.
 	//
-	// * RUNNING - For a one-time job, the job is in
-	// progress. For a recurring job, a scheduled run is in progress.
+	// * RUNNING - For a one-time job, the job is in progress. For a recurring
+	// job, a scheduled run is in progress.
 	//
-	// * USER_PAUSED -
-	// You paused the job. If you don't resume the job within 30 days of pausing it,
-	// the job will expire and be cancelled.
+	// * USER_PAUSED - You paused the job. If you
+	// paused the job while it had a status of RUNNING and you don't resume the job
+	// within 30 days of pausing it, the job expires and is cancelled. To check the
+	// job's expiration date, refer to the UserPausedDetails.jobExpiresAt property.
 	JobStatus types.JobStatus
 
 	// The schedule for running the job. Possible values are:
@@ -97,7 +100,14 @@ type DescribeClassificationJobOutput struct {
 	// job.
 	JobType types.JobType
 
-	// The date and time, in UTC and extended ISO 8601 format, when the job last ran.
+	// Specifies whether any account- or bucket-level access errors occurred when the
+	// job ran. For a recurring job, this value indicates the error status of the job's
+	// most recent run.
+	LastRunErrorStatus *types.LastRunErrorStatus
+
+	// The date and time, in UTC and extended ISO 8601 format, when the job started. If
+	// the job is a recurring job, this value indicates when the most recent run
+	// started.
 	LastRunTime *time.Time
 
 	// The custom name of the job.

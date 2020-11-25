@@ -12,10 +12,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Returns a list of all the Contributor Insights rules in your account. All rules
-// in your account are returned with a single operation. For more information about
-// Contributor Insights, see Using Contributor Insights to Analyze High-Cardinality
-// Data
+// Returns a list of all the Contributor Insights rules in your account. For more
+// information about Contributor Insights, see Using Contributor Insights to
+// Analyze High-Cardinality Data
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html).
 func (c *Client) DescribeInsightRules(ctx context.Context, params *DescribeInsightRulesInput, optFns ...func(*Options)) (*DescribeInsightRulesOutput, error) {
 	if params == nil {
@@ -34,11 +33,12 @@ func (c *Client) DescribeInsightRules(ctx context.Context, params *DescribeInsig
 
 type DescribeInsightRulesInput struct {
 
-	// This parameter is not currently used. Reserved for future use. If it is used in
-	// the future, the maximum value might be different.
+	// The maximum number of results to return in one operation. If you omit this
+	// parameter, the default of 500 is used.
 	MaxResults *int32
 
-	// Reserved for future use.
+	// Include this value, if it was returned by the previous operation, to get the
+	// next set of rules.
 	NextToken *string
 }
 
@@ -47,7 +47,8 @@ type DescribeInsightRulesOutput struct {
 	// The rules returned by the operation.
 	InsightRules []types.InsightRule
 
-	// Reserved for future use.
+	// If this parameter is present, it is a token that marks the start of the next
+	// batch of returned results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -122,8 +123,8 @@ var _ DescribeInsightRulesAPIClient = (*Client)(nil)
 // DescribeInsightRulesPaginatorOptions is the paginator options for
 // DescribeInsightRules
 type DescribeInsightRulesPaginatorOptions struct {
-	// This parameter is not currently used. Reserved for future use. If it is used in
-	// the future, the maximum value might be different.
+	// The maximum number of results to return in one operation. If you omit this
+	// parameter, the default of 500 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

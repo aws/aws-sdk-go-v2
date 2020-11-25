@@ -7,7 +7,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 )
 
-// There is concurrent modification on a rule or target.
+// There is concurrent modification on a rule, target, archive, or replay.
 type ConcurrentModificationException struct {
 	Message *string
 }
@@ -25,6 +25,24 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return "ConcurrentModificationException"
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// An error occurred because a replay can be canceled only when the state is
+// Running or Starting.
+type IllegalStatusException struct {
+	Message *string
+}
+
+func (e *IllegalStatusException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IllegalStatusException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IllegalStatusException) ErrorCode() string             { return "IllegalStatusException" }
+func (e *IllegalStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception occurs due to unexpected causes.
 type InternalException struct {
@@ -77,7 +95,8 @@ func (e *InvalidStateException) ErrorMessage() string {
 func (e *InvalidStateException) ErrorCode() string             { return "InvalidStateException" }
 func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You tried to create more rules or add more targets to a rule than is allowed.
+// The request failed because it attempted to create resource beyond the allowed
+// service quota.
 type LimitExceededException struct {
 	Message *string
 }

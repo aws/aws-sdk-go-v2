@@ -11,11 +11,11 @@ import (
 )
 
 // Modifies the attributes of your VPC endpoint service configuration. You can
-// change the Network Load Balancers for your service, and you can specify whether
-// acceptance is required for requests to connect to your endpoint service through
-// an interface VPC endpoint. If you set or modify the private DNS name, you must
-// prove that you own the private DNS domain name. For more information, see VPC
-// Endpoint Service Private DNS Name Verification
+// change the Network Load Balancers or Gateway Load Balancers for your service,
+// and you can specify whether acceptance is required for requests to connect to
+// your endpoint service through an interface VPC endpoint. If you set or modify
+// the private DNS name, you must prove that you own the private DNS domain name.
+// For more information, see VPC Endpoint Service Private DNS Name Verification
 // (https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html)
 // in the Amazon Virtual Private Cloud User Guide.
 func (c *Client) ModifyVpcEndpointServiceConfiguration(ctx context.Context, params *ModifyVpcEndpointServiceConfigurationInput, optFns ...func(*Options)) (*ModifyVpcEndpointServiceConfigurationOutput, error) {
@@ -44,6 +44,10 @@ type ModifyVpcEndpointServiceConfigurationInput struct {
 	// accepted.
 	AcceptanceRequired bool
 
+	// The Amazon Resource Names (ARNs) of Gateway Load Balancers to add to your
+	// service configuration.
+	AddGatewayLoadBalancerArns []string
+
 	// The Amazon Resource Names (ARNs) of Network Load Balancers to add to your
 	// service configuration.
 	AddNetworkLoadBalancerArns []string
@@ -54,14 +58,20 @@ type ModifyVpcEndpointServiceConfigurationInput struct {
 	// UnauthorizedOperation.
 	DryRun bool
 
-	// The private DNS name to assign to the endpoint service.
+	// (Interface endpoint configuration) The private DNS name to assign to the
+	// endpoint service.
 	PrivateDnsName *string
+
+	// The Amazon Resource Names (ARNs) of Gateway Load Balancers to remove from your
+	// service configuration.
+	RemoveGatewayLoadBalancerArns []string
 
 	// The Amazon Resource Names (ARNs) of Network Load Balancers to remove from your
 	// service configuration.
 	RemoveNetworkLoadBalancerArns []string
 
-	// Removes the private DNS name of the endpoint service.
+	// (Interface endpoint configuration) Removes the private DNS name of the endpoint
+	// service.
 	RemovePrivateDnsName bool
 }
 

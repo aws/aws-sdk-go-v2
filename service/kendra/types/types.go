@@ -257,11 +257,11 @@ type ConfluenceConfiguration struct {
 	// must contain a JSON structure with the following keys:
 	//
 	// * username - The user
-	// name of a user with administrative privileges for the Confluence server.
+	// name or email address of a user with administrative privileges for the
+	// Confluence server.
 	//
-	// *
-	// password - The password associated with the user logging in to the Confluence
-	// server.
+	// * password - The password associated with the user logging
+	// in to the Confluence server.
 	//
 	// This member is required.
 	SecretArn *string
@@ -845,6 +845,47 @@ type IndexStatistics struct {
 	TextDocumentStatistics *TextDocumentStatistics
 }
 
+// Configuration information for the JSON token type.
+type JsonTokenTypeConfiguration struct {
+
+	// The group attribute field.
+	//
+	// This member is required.
+	GroupAttributeField *string
+
+	// The user name attribute field.
+	//
+	// This member is required.
+	UserNameAttributeField *string
+}
+
+// Configuration information for the JWT token type.
+type JwtTokenTypeConfiguration struct {
+
+	// The location of the key.
+	//
+	// This member is required.
+	KeyLocation KeyLocation
+
+	// The regular expression that identifies the claim.
+	ClaimRegex *string
+
+	// The group attribute field.
+	GroupAttributeField *string
+
+	// The issuer of the token.
+	Issuer *string
+
+	// The Amazon Resource Name (arn) of the secret.
+	SecretManagerArn *string
+
+	// The signing key URL.
+	URL *string
+
+	// The user name attribute field.
+	UserNameAttributeField *string
+}
+
 // Provides configuration information for data sources that connect to OneDrive.
 type OneDriveConfiguration struct {
 
@@ -865,6 +906,10 @@ type OneDriveConfiguration struct {
 	//
 	// This member is required.
 	TenantDomain *string
+
+	// A Boolean value that specifies whether local groups are disabled (True) or
+	// enabled (False).
+	DisableLocalGroups bool
 
 	// List of regular expressions applied to documents. Items that match the exclusion
 	// pattern are not indexed. If you provide both an inclusion pattern and an
@@ -1419,6 +1464,10 @@ type SharePointConfiguration struct {
 	// site in the index; otherwise, FALSE.
 	CrawlAttachments bool
 
+	// A Boolean value that specifies whether local groups are disabled (True) or
+	// enabled (False).
+	DisableLocalGroups bool
+
 	// The Microsoft SharePoint attribute field that contains the title of the
 	// document.
 	DocumentTitleFieldName *string
@@ -1563,4 +1612,21 @@ type TimeRange struct {
 
 	// The UNIX datetime of the beginning of the time range.
 	StartTime *time.Time
+}
+
+// Provides information about the user context for a Amazon Kendra index.
+type UserContext struct {
+
+	// The user context token. It must be a JWT or a JSON token.
+	Token *string
+}
+
+// Provides configuration information for a token configuration.
+type UserTokenConfiguration struct {
+
+	// Information about the JSON token type configuration.
+	JsonTokenTypeConfiguration *JsonTokenTypeConfiguration
+
+	// Information about the JWT token type configuration.
+	JwtTokenTypeConfiguration *JwtTokenTypeConfiguration
 }

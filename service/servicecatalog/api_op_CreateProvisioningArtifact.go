@@ -39,7 +39,8 @@ type CreateProvisioningArtifactInput struct {
 	// This member is required.
 	IdempotencyToken *string
 
-	// The configuration for the provisioning artifact.
+	// The configuration for the provisioning artifact. The info field accepts
+	// ImportFromPhysicalID.
 	//
 	// This member is required.
 	Parameters *types.ProvisioningArtifactProperties

@@ -34,8 +34,8 @@ type ListRuleNamesByTargetInput struct {
 	// This member is required.
 	TargetArn *string
 
-	// Limits the results to show only the rules associated with the specified event
-	// bus.
+	// The name or ARN of the event bus to list rules for. If you omit this, the
+	// default event bus is used.
 	EventBusName *string
 
 	// The maximum number of results to return.

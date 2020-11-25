@@ -112,6 +112,7 @@ const (
 	SecurityServiceTypeSecurityGroupsCommon       SecurityServiceType = "SECURITY_GROUPS_COMMON"
 	SecurityServiceTypeSecurityGroupsContentAudit SecurityServiceType = "SECURITY_GROUPS_CONTENT_AUDIT"
 	SecurityServiceTypeSecurityGroupsUsageAudit   SecurityServiceType = "SECURITY_GROUPS_USAGE_AUDIT"
+	SecurityServiceTypeNetworkFirewall            SecurityServiceType = "NETWORK_FIREWALL"
 )
 
 // Values returns all known values for SecurityServiceType. Note that this can be
@@ -125,6 +126,7 @@ func (SecurityServiceType) Values() []SecurityServiceType {
 		"SECURITY_GROUPS_COMMON",
 		"SECURITY_GROUPS_CONTENT_AUDIT",
 		"SECURITY_GROUPS_USAGE_AUDIT",
+		"NETWORK_FIREWALL",
 	}
 }
 
@@ -141,6 +143,10 @@ const (
 	ViolationReasonResourceviolatesauditsecuritygroup      ViolationReason = "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP"
 	ViolationReasonSecuritygroupunused                     ViolationReason = "SECURITY_GROUP_UNUSED"
 	ViolationReasonSecuritygroupredundant                  ViolationReason = "SECURITY_GROUP_REDUNDANT"
+	ViolationReasonMissingfirewall                         ViolationReason = "MISSING_FIREWALL"
+	ViolationReasonMissingfirewallsubnetinaz               ViolationReason = "MISSING_FIREWALL_SUBNET_IN_AZ"
+	ViolationReasonMissingexpectedroutetable               ViolationReason = "MISSING_EXPECTED_ROUTE_TABLE"
+	ViolationReasonNetworkfirewallpolicymodified           ViolationReason = "NETWORK_FIREWALL_POLICY_MODIFIED"
 )
 
 // Values returns all known values for ViolationReason. Note that this can be
@@ -157,5 +163,9 @@ func (ViolationReason) Values() []ViolationReason {
 		"RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP",
 		"SECURITY_GROUP_UNUSED",
 		"SECURITY_GROUP_REDUNDANT",
+		"MISSING_FIREWALL",
+		"MISSING_FIREWALL_SUBNET_IN_AZ",
+		"MISSING_EXPECTED_ROUTE_TABLE",
+		"NETWORK_FIREWALL_POLICY_MODIFIED",
 	}
 }

@@ -850,6 +850,26 @@ func (m *validateOpExecuteProvisionedProductServiceAction) HandleInitialize(ctx 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpImportAsProvisionedProduct struct {
+}
+
+func (*validateOpImportAsProvisionedProduct) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpImportAsProvisionedProduct) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ImportAsProvisionedProductInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpImportAsProvisionedProductInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListBudgetsForResource struct {
 }
 
@@ -1478,6 +1498,10 @@ func addOpExecuteProvisionedProductServiceActionValidationMiddleware(stack *midd
 	return stack.Initialize.Add(&validateOpExecuteProvisionedProductServiceAction{}, middleware.After)
 }
 
+func addOpImportAsProvisionedProductValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpImportAsProvisionedProduct{}, middleware.After)
+}
+
 func addOpListBudgetsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListBudgetsForResource{}, middleware.After)
 }
@@ -1607,14 +1631,14 @@ func validateServiceActionAssociation(v *types.ServiceActionAssociation) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ServiceActionAssociation"}
+	if v.ServiceActionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceActionId"))
+	}
 	if v.ProductId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
 	}
 	if v.ProvisioningArtifactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProvisioningArtifactId"))
-	}
-	if v.ServiceActionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceActionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1713,11 +1737,11 @@ func validateOpAssociatePrincipalWithPortfolioInput(v *AssociatePrincipalWithPor
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociatePrincipalWithPortfolioInput"}
-	if v.PrincipalARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PrincipalARN"))
-	}
 	if v.PortfolioId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PortfolioId"))
+	}
+	if v.PrincipalARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalARN"))
 	}
 	if len(v.PrincipalType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PrincipalType"))
@@ -1734,11 +1758,11 @@ func validateOpAssociateProductWithPortfolioInput(v *AssociateProductWithPortfol
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateProductWithPortfolioInput"}
-	if v.PortfolioId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PortfolioId"))
-	}
 	if v.ProductId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	}
+	if v.PortfolioId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortfolioId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1752,14 +1776,14 @@ func validateOpAssociateServiceActionWithProvisioningArtifactInput(v *AssociateS
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateServiceActionWithProvisioningArtifactInput"}
-	if v.ServiceActionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceActionId"))
+	if v.ProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
 	}
 	if v.ProvisioningArtifactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProvisioningArtifactId"))
 	}
-	if v.ProductId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	if v.ServiceActionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceActionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1829,11 +1853,11 @@ func validateOpCopyProductInput(v *CopyProductInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CopyProductInput"}
-	if v.IdempotencyToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
-	}
 	if v.SourceProductArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceProductArn"))
+	}
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1856,11 +1880,11 @@ func validateOpCreateConstraintInput(v *CreateConstraintInput) error {
 	if v.Parameters == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Parameters"))
 	}
-	if v.IdempotencyToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
-	}
 	if v.Type == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1877,16 +1901,16 @@ func validateOpCreatePortfolioInput(v *CreatePortfolioInput) error {
 	if v.DisplayName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
 	}
-	if v.IdempotencyToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
+	if v.ProviderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProviderName"))
 	}
 	if v.Tags != nil {
 		if err := validateAddTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ProviderName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProviderName"))
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1915,22 +1939,19 @@ func validateOpCreateProductInput(v *CreateProductInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateProductInput"}
-	if v.Tags != nil {
-		if err := validateAddTags(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.IdempotencyToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.Owner == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Owner"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if len(v.ProductType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductType"))
+	}
+	if v.Tags != nil {
+		if err := validateAddTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.ProvisioningArtifactParameters == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProvisioningArtifactParameters"))
@@ -1938,6 +1959,9 @@ func validateOpCreateProductInput(v *CreateProductInput) error {
 		if err := validateProvisioningArtifactProperties(v.ProvisioningArtifactParameters); err != nil {
 			invalidParams.AddNested("ProvisioningArtifactParameters", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1951,19 +1975,14 @@ func validateOpCreateProvisionedProductPlanInput(v *CreateProvisionedProductPlan
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateProvisionedProductPlanInput"}
-	if v.ProductId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
-	}
-	if v.Tags != nil {
-		if err := validateTags(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.IdempotencyToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
-	}
 	if v.PlanName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PlanName"))
+	}
+	if len(v.PlanType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PlanType"))
+	}
+	if v.ProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
 	}
 	if v.ProvisionedProductName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProvisionedProductName"))
@@ -1971,8 +1990,13 @@ func validateOpCreateProvisionedProductPlanInput(v *CreateProvisionedProductPlan
 	if v.ProvisioningArtifactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProvisioningArtifactId"))
 	}
-	if len(v.PlanType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("PlanType"))
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1986,9 +2010,6 @@ func validateOpCreateProvisioningArtifactInput(v *CreateProvisioningArtifactInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateProvisioningArtifactInput"}
-	if v.IdempotencyToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
-	}
 	if v.ProductId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
 	}
@@ -1998,6 +2019,9 @@ func validateOpCreateProvisioningArtifactInput(v *CreateProvisioningArtifactInpu
 		if err := validateProvisioningArtifactProperties(v.Parameters); err != nil {
 			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2011,17 +2035,17 @@ func validateOpCreateServiceActionInput(v *CreateServiceActionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateServiceActionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if len(v.DefinitionType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("DefinitionType"))
-	}
-	if v.IdempotencyToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
 	}
 	if v.Definition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2128,11 +2152,11 @@ func validateOpDeleteProvisioningArtifactInput(v *DeleteProvisioningArtifactInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteProvisioningArtifactInput"}
-	if v.ProvisioningArtifactId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProvisioningArtifactId"))
-	}
 	if v.ProductId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	}
+	if v.ProvisioningArtifactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProvisioningArtifactId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2347,11 +2371,11 @@ func validateOpDisassociatePrincipalFromPortfolioInput(v *DisassociatePrincipalF
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociatePrincipalFromPortfolioInput"}
-	if v.PrincipalARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PrincipalARN"))
-	}
 	if v.PortfolioId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PortfolioId"))
+	}
+	if v.PrincipalARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2383,14 +2407,14 @@ func validateOpDisassociateServiceActionFromProvisioningArtifactInput(v *Disasso
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateServiceActionFromProvisioningArtifactInput"}
+	if v.ProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	}
 	if v.ProvisioningArtifactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProvisioningArtifactId"))
 	}
 	if v.ServiceActionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceActionId"))
-	}
-	if v.ProductId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2456,6 +2480,33 @@ func validateOpExecuteProvisionedProductServiceActionInput(v *ExecuteProvisioned
 	}
 }
 
+func validateOpImportAsProvisionedProductInput(v *ImportAsProvisionedProductInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportAsProvisionedProductInput"}
+	if v.ProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	}
+	if v.ProvisioningArtifactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProvisioningArtifactId"))
+	}
+	if v.ProvisionedProductName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProvisionedProductName"))
+	}
+	if v.PhysicalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PhysicalId"))
+	}
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListBudgetsForResourceInput(v *ListBudgetsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -2506,11 +2557,11 @@ func validateOpListOrganizationPortfolioAccessInput(v *ListOrganizationPortfolio
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOrganizationPortfolioAccessInput"}
-	if len(v.OrganizationNodeType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationNodeType"))
-	}
 	if v.PortfolioId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PortfolioId"))
+	}
+	if len(v.OrganizationNodeType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationNodeType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2614,11 +2665,11 @@ func validateOpListServiceActionsForProvisioningArtifactInput(v *ListServiceActi
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListServiceActionsForProvisioningArtifactInput"}
-	if v.ProvisioningArtifactId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProvisioningArtifactId"))
-	}
 	if v.ProductId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	}
+	if v.ProvisioningArtifactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProvisioningArtifactId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2715,13 +2766,13 @@ func validateOpUpdatePortfolioInput(v *UpdatePortfolioInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePortfolioInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
 	if v.AddTags != nil {
 		if err := validateAddTags(v.AddTags); err != nil {
 			invalidParams.AddNested("AddTags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2775,14 +2826,14 @@ func validateOpUpdateProvisionedProductPropertiesInput(v *UpdateProvisionedProdu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateProvisionedProductPropertiesInput"}
-	if v.IdempotencyToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
-	}
 	if v.ProvisionedProductId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProvisionedProductId"))
 	}
 	if v.ProvisionedProductProperties == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProvisionedProductProperties"))
+	}
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2796,11 +2847,11 @@ func validateOpUpdateProvisioningArtifactInput(v *UpdateProvisioningArtifactInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateProvisioningArtifactInput"}
-	if v.ProvisioningArtifactId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProvisioningArtifactId"))
-	}
 	if v.ProductId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	}
+	if v.ProvisioningArtifactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProvisioningArtifactId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

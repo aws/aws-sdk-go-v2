@@ -11,8 +11,8 @@ import (
 )
 
 // Modifies attributes of a specified VPC endpoint. The attributes that you can
-// modify depend on the type of VPC endpoint (interface or gateway). For more
-// information, see VPC Endpoints
+// modify depend on the type of VPC endpoint (interface, gateway, or Gateway Load
+// Balancer). For more information, see VPC Endpoints
 // (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html) in the
 // Amazon Virtual Private Cloud User Guide.
 func (c *Client) ModifyVpcEndpoint(ctx context.Context, params *ModifyVpcEndpointInput, optFns ...func(*Options)) (*ModifyVpcEndpointOutput, error) {
@@ -45,7 +45,9 @@ type ModifyVpcEndpointInput struct {
 	// network interface.
 	AddSecurityGroupIds []string
 
-	// (Interface endpoint) One or more subnet IDs in which to serve the endpoint.
+	// (Interface and Gateway Load Balancer endpoints) One or more subnet IDs in which
+	// to serve the endpoint. For a Gateway Load Balancer endpoint, you can specify
+	// only one subnet.
 	AddSubnetIds []string
 
 	// Checks whether you have the required permissions for the action, without
@@ -54,8 +56,8 @@ type ModifyVpcEndpointInput struct {
 	// UnauthorizedOperation.
 	DryRun bool
 
-	// A policy to attach to the endpoint that controls access to the service. The
-	// policy must be in valid JSON format.
+	// (Interface and gateway endpoints) A policy to attach to the endpoint that
+	// controls access to the service. The policy must be in valid JSON format.
 	PolicyDocument *string
 
 	// (Interface endpoint) Indicates whether a private hosted zone is associated with

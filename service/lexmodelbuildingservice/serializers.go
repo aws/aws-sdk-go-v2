@@ -2452,9 +2452,9 @@ func awsRestjson1_serializeOpDocumentPutBotInput(v *PutBotInput, value smithyjso
 		ok.String(string(v.Locale))
 	}
 
-	if v.NluIntentConfidenceThreshold != 0 {
+	if v.NluIntentConfidenceThreshold != nil {
 		ok := object.Key("nluIntentConfidenceThreshold")
-		ok.Double(v.NluIntentConfidenceThreshold)
+		ok.Double(*v.NluIntentConfidenceThreshold)
 	}
 
 	if len(v.ProcessBehavior) > 0 {
@@ -2724,9 +2724,23 @@ func awsRestjson1_serializeOpDocumentPutIntentInput(v *PutIntentInput, value smi
 		}
 	}
 
+	if v.InputContexts != nil {
+		ok := object.Key("inputContexts")
+		if err := awsRestjson1_serializeDocumentInputContextList(v.InputContexts, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.KendraConfiguration != nil {
 		ok := object.Key("kendraConfiguration")
 		if err := awsRestjson1_serializeDocumentKendraConfiguration(v.KendraConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OutputContexts != nil {
+		ok := object.Key("outputContexts")
+		if err := awsRestjson1_serializeDocumentOutputContextList(v.OutputContexts, ok); err != nil {
 			return err
 		}
 	}
@@ -3235,6 +3249,31 @@ func awsRestjson1_serializeDocumentFulfillmentActivity(v *types.FulfillmentActiv
 	return nil
 }
 
+func awsRestjson1_serializeDocumentInputContext(v *types.InputContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInputContextList(v []types.InputContext, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentInputContext(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentIntent(v *types.Intent, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3373,6 +3412,41 @@ func awsRestjson1_serializeDocumentMessageList(v []types.Message, value smithyjs
 	return nil
 }
 
+func awsRestjson1_serializeDocumentOutputContext(v *types.OutputContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.TimeToLiveInSeconds != nil {
+		ok := object.Key("timeToLiveInSeconds")
+		ok.Integer(*v.TimeToLiveInSeconds)
+	}
+
+	if v.TurnsToLive != nil {
+		ok := object.Key("turnsToLive")
+		ok.Integer(*v.TurnsToLive)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOutputContextList(v []types.OutputContext, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentOutputContext(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPrompt(v *types.Prompt, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3400,6 +3474,13 @@ func awsRestjson1_serializeDocumentPrompt(v *types.Prompt, value smithyjson.Valu
 func awsRestjson1_serializeDocumentSlot(v *types.Slot, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DefaultValueSpec != nil {
+		ok := object.Key("defaultValueSpec")
+		if err := awsRestjson1_serializeDocumentSlotDefaultValueSpec(v.DefaultValueSpec, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Description != nil {
 		ok := object.Key("description")
@@ -3451,6 +3532,45 @@ func awsRestjson1_serializeDocumentSlot(v *types.Slot, value smithyjson.Value) e
 	if v.ValueElicitationPrompt != nil {
 		ok := object.Key("valueElicitationPrompt")
 		if err := awsRestjson1_serializeDocumentPrompt(v.ValueElicitationPrompt, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSlotDefaultValue(v *types.SlotDefaultValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultValue != nil {
+		ok := object.Key("defaultValue")
+		ok.String(*v.DefaultValue)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSlotDefaultValueList(v []types.SlotDefaultValue, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSlotDefaultValue(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSlotDefaultValueSpec(v *types.SlotDefaultValueSpec, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultValueList != nil {
+		ok := object.Key("defaultValueList")
+		if err := awsRestjson1_serializeDocumentSlotDefaultValueList(v.DefaultValueList, ok); err != nil {
 			return err
 		}
 	}

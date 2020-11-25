@@ -49,6 +49,11 @@ type AttachNetworkInterfaceInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun bool
+
+	// The index of the network card. Some instance types support multiple network
+	// cards. The primary network interface must be assigned to network card index 0.
+	// The default is network card index 0.
+	NetworkCardIndex int32
 }
 
 // Contains the output of AttachNetworkInterface.
@@ -56,6 +61,9 @@ type AttachNetworkInterfaceOutput struct {
 
 	// The ID of the network interface attachment.
 	AttachmentId *string
+
+	// The index of the network card.
+	NetworkCardIndex int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

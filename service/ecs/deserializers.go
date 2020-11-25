@@ -9874,6 +9874,109 @@ func awsAwsjson11_deserializeDocumentFirelensConfigurationOptionsMap(v *map[stri
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentFSxWindowsFileServerAuthorizationConfig(v **types.FSxWindowsFileServerAuthorizationConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FSxWindowsFileServerAuthorizationConfig
+	if *v == nil {
+		sv = &types.FSxWindowsFileServerAuthorizationConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "credentialsParameter":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CredentialsParameter = ptr.String(jtv)
+			}
+
+		case "domain":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Domain = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFSxWindowsFileServerVolumeConfiguration(v **types.FSxWindowsFileServerVolumeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FSxWindowsFileServerVolumeConfiguration
+	if *v == nil {
+		sv = &types.FSxWindowsFileServerVolumeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "authorizationConfig":
+			if err := awsAwsjson11_deserializeDocumentFSxWindowsFileServerAuthorizationConfig(&sv.AuthorizationConfig, value); err != nil {
+				return err
+			}
+
+		case "fileSystemId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FileSystemId = ptr.String(jtv)
+			}
+
+		case "rootDirectory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RootDirectory = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentGpuIds(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14570,6 +14673,11 @@ func awsAwsjson11_deserializeDocumentVolume(v **types.Volume, value interface{})
 
 		case "efsVolumeConfiguration":
 			if err := awsAwsjson11_deserializeDocumentEFSVolumeConfiguration(&sv.EfsVolumeConfiguration, value); err != nil {
+				return err
+			}
+
+		case "fsxWindowsFileServerVolumeConfiguration":
+			if err := awsAwsjson11_deserializeDocumentFSxWindowsFileServerVolumeConfiguration(&sv.FsxWindowsFileServerVolumeConfiguration, value); err != nil {
 				return err
 			}
 

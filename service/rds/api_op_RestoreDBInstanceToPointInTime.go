@@ -129,9 +129,8 @@ type RestoreDBInstanceToPointInTimeInput struct {
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
-	// For information about the supported DB engines, see CreateDBInstance. For more
-	// information about IAM database authentication, see  IAM Database Authentication
-	// for MySQL and PostgreSQL
+	// For more information about IAM database authentication, see  IAM Database
+	// Authentication for MySQL and PostgreSQL
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
 	// in the Amazon RDS User Guide.
 	EnableIAMDatabaseAuthentication *bool

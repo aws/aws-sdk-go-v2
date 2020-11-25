@@ -60,7 +60,7 @@ type CreateTaskInput struct {
 	// A list of filter rules that determines which files to exclude from a task. The
 	// list should contain a single filter string that consists of the patterns to
 	// exclude. The patterns are delimited by "|" (that is, a pipe), for example,
-	// "/folder1|/folder2"
+	// "/folder1|/folder2".
 	Excludes []types.FilterRule
 
 	// The name of a task. This value is a text reference that is used to identify the

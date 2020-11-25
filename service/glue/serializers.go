@@ -659,6 +659,52 @@ func (m *awsAwsjson11_serializeOpCancelMLTaskRun) HandleSerialize(ctx context.Co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCheckSchemaVersionValidity struct {
+}
+
+func (*awsAwsjson11_serializeOpCheckSchemaVersionValidity) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCheckSchemaVersionValidity) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CheckSchemaVersionValidityInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CheckSchemaVersionValidity")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCheckSchemaVersionValidityInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateClassifier struct {
 }
 
@@ -1012,6 +1058,98 @@ func (m *awsAwsjson11_serializeOpCreatePartition) HandleSerialize(ctx context.Co
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentCreatePartitionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpCreateRegistry struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateRegistry) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateRegistry) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateRegistryInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CreateRegistry")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateRegistryInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpCreateSchema struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateSchema) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateSchema) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateSchemaInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CreateSchema")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateSchemaInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1763,6 +1901,52 @@ func (m *awsAwsjson11_serializeOpDeletePartition) HandleSerialize(ctx context.Co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDeleteRegistry struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteRegistry) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteRegistry) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteRegistryInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteRegistry")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteRegistryInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDeleteResourcePolicy struct {
 }
 
@@ -1794,6 +1978,98 @@ func (m *awsAwsjson11_serializeOpDeleteResourcePolicy) HandleSerialize(ctx conte
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDeleteResourcePolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteSchema struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteSchema) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteSchema) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteSchemaInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteSchema")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteSchemaInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteSchemaVersions struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteSchemaVersions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteSchemaVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteSchemaVersionsInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteSchemaVersions")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteSchemaVersionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3465,6 +3741,52 @@ func (m *awsAwsjson11_serializeOpGetPlan) HandleSerialize(ctx context.Context, i
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetRegistry struct {
+}
+
+func (*awsAwsjson11_serializeOpGetRegistry) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetRegistry) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetRegistryInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetRegistry")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetRegistryInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetResourcePolicies struct {
 }
 
@@ -3542,6 +3864,190 @@ func (m *awsAwsjson11_serializeOpGetResourcePolicy) HandleSerialize(ctx context.
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentGetResourcePolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetSchema struct {
+}
+
+func (*awsAwsjson11_serializeOpGetSchema) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetSchema) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetSchemaInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetSchema")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetSchemaInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetSchemaByDefinition struct {
+}
+
+func (*awsAwsjson11_serializeOpGetSchemaByDefinition) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetSchemaByDefinition) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetSchemaByDefinitionInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetSchemaByDefinition")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetSchemaByDefinitionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetSchemaVersion struct {
+}
+
+func (*awsAwsjson11_serializeOpGetSchemaVersion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetSchemaVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetSchemaVersionInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetSchemaVersion")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetSchemaVersionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetSchemaVersionsDiff struct {
+}
+
+func (*awsAwsjson11_serializeOpGetSchemaVersionsDiff) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetSchemaVersionsDiff) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetSchemaVersionsDiffInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetSchemaVersionsDiff")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetSchemaVersionsDiffInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4477,6 +4983,144 @@ func (m *awsAwsjson11_serializeOpListMLTransforms) HandleSerialize(ctx context.C
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListRegistries struct {
+}
+
+func (*awsAwsjson11_serializeOpListRegistries) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListRegistries) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListRegistriesInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.ListRegistries")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListRegistriesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListSchemas struct {
+}
+
+func (*awsAwsjson11_serializeOpListSchemas) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListSchemas) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListSchemasInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.ListSchemas")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListSchemasInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListSchemaVersions struct {
+}
+
+func (*awsAwsjson11_serializeOpListSchemaVersions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListSchemaVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListSchemaVersionsInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.ListSchemaVersions")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListSchemaVersionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListTriggers struct {
 }
 
@@ -4661,6 +5305,52 @@ func (m *awsAwsjson11_serializeOpPutResourcePolicy) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpPutSchemaVersionMetadata struct {
+}
+
+func (*awsAwsjson11_serializeOpPutSchemaVersionMetadata) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpPutSchemaVersionMetadata) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutSchemaVersionMetadataInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.PutSchemaVersionMetadata")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentPutSchemaVersionMetadataInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpPutWorkflowRunProperties struct {
 }
 
@@ -4692,6 +5382,144 @@ func (m *awsAwsjson11_serializeOpPutWorkflowRunProperties) HandleSerialize(ctx c
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentPutWorkflowRunPropertiesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpQuerySchemaVersionMetadata struct {
+}
+
+func (*awsAwsjson11_serializeOpQuerySchemaVersionMetadata) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpQuerySchemaVersionMetadata) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*QuerySchemaVersionMetadataInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.QuerySchemaVersionMetadata")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentQuerySchemaVersionMetadataInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpRegisterSchemaVersion struct {
+}
+
+func (*awsAwsjson11_serializeOpRegisterSchemaVersion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpRegisterSchemaVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RegisterSchemaVersionInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.RegisterSchemaVersion")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentRegisterSchemaVersionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpRemoveSchemaVersionMetadata struct {
+}
+
+func (*awsAwsjson11_serializeOpRemoveSchemaVersionMetadata) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpRemoveSchemaVersionMetadata) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RemoveSchemaVersionMetadataInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.RemoveSchemaVersionMetadata")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentRemoveSchemaVersionMetadataInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -6026,6 +6854,98 @@ func (m *awsAwsjson11_serializeOpUpdatePartition) HandleSerialize(ctx context.Co
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentUpdatePartitionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpUpdateRegistry struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateRegistry) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateRegistry) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateRegistryInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.UpdateRegistry")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateRegistryInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpUpdateSchema struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateSchema) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateSchema) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateSchemaInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.UpdateSchema")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateSchemaInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -7871,6 +8791,36 @@ func awsAwsjson11_serializeDocumentMatchCriteria(v []string, value smithyjson.Va
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentMetadataKeyValuePair(v *types.MetadataKeyValuePair, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetadataKey != nil {
+		ok := object.Key("MetadataKey")
+		ok.String(*v.MetadataKey)
+	}
+
+	if v.MetadataValue != nil {
+		ok := object.Key("MetadataValue")
+		ok.String(*v.MetadataValue)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMetadataList(v []types.MetadataKeyValuePair, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentMetadataKeyValuePair(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentMLUserDataEncryption(v *types.MLUserDataEncryption, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8250,6 +9200,23 @@ func awsAwsjson11_serializeDocumentRecrawlPolicy(v *types.RecrawlPolicy, value s
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRegistryId(v *types.RegistryId, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RegistryArn != nil {
+		ok := object.Key("RegistryArn")
+		ok.String(*v.RegistryArn)
+	}
+
+	if v.RegistryName != nil {
+		ok := object.Key("RegistryName")
+		ok.String(*v.RegistryName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentResourceUri(v *types.ResourceUri, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8376,6 +9343,69 @@ func awsAwsjson11_serializeDocumentSchemaColumn(v *types.SchemaColumn, value smi
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSchemaId(v *types.SchemaId, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RegistryName != nil {
+		ok := object.Key("RegistryName")
+		ok.String(*v.RegistryName)
+	}
+
+	if v.SchemaArn != nil {
+		ok := object.Key("SchemaArn")
+		ok.String(*v.SchemaArn)
+	}
+
+	if v.SchemaName != nil {
+		ok := object.Key("SchemaName")
+		ok.String(*v.SchemaName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSchemaReference(v *types.SchemaReference, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SchemaId != nil {
+		ok := object.Key("SchemaId")
+		if err := awsAwsjson11_serializeDocumentSchemaId(v.SchemaId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SchemaVersionId != nil {
+		ok := object.Key("SchemaVersionId")
+		ok.String(*v.SchemaVersionId)
+	}
+
+	if v.SchemaVersionNumber != 0 {
+		ok := object.Key("SchemaVersionNumber")
+		ok.Long(v.SchemaVersionNumber)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSchemaVersionNumber(v *types.SchemaVersionNumber, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LatestVersion {
+		ok := object.Key("LatestVersion")
+		ok.Boolean(v.LatestVersion)
+	}
+
+	if v.VersionNumber != 0 {
+		ok := object.Key("VersionNumber")
+		ok.Long(v.VersionNumber)
 	}
 
 	return nil
@@ -8550,6 +9580,13 @@ func awsAwsjson11_serializeDocumentStorageDescriptor(v *types.StorageDescriptor,
 	if v.Parameters != nil {
 		ok := object.Key("Parameters")
 		if err := awsAwsjson11_serializeDocumentParametersMap(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SchemaReference != nil {
+		ok := object.Key("SchemaReference")
+		if err := awsAwsjson11_serializeDocumentSchemaReference(v.SchemaReference, ok); err != nil {
 			return err
 		}
 	}
@@ -9447,6 +10484,23 @@ func awsAwsjson11_serializeOpDocumentCancelMLTaskRunInput(v *CancelMLTaskRunInpu
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentCheckSchemaVersionValidityInput(v *CheckSchemaVersionValidityInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DataFormat) > 0 {
+		ok := object.Key("DataFormat")
+		ok.String(string(v.DataFormat))
+	}
+
+	if v.SchemaDefinition != nil {
+		ok := object.Key("SchemaDefinition")
+		ok.String(*v.SchemaDefinition)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentCreateClassifierInput(v *CreateClassifierInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9917,6 +10971,76 @@ func awsAwsjson11_serializeOpDocumentCreatePartitionInput(v *CreatePartitionInpu
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentCreateRegistryInput(v *CreateRegistryInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.RegistryName != nil {
+		ok := object.Key("RegistryName")
+		ok.String(*v.RegistryName)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateSchemaInput(v *CreateSchemaInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Compatibility) > 0 {
+		ok := object.Key("Compatibility")
+		ok.String(string(v.Compatibility))
+	}
+
+	if len(v.DataFormat) > 0 {
+		ok := object.Key("DataFormat")
+		ok.String(string(v.DataFormat))
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.RegistryId != nil {
+		ok := object.Key("RegistryId")
+		if err := awsAwsjson11_serializeDocumentRegistryId(v.RegistryId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SchemaDefinition != nil {
+		ok := object.Key("SchemaDefinition")
+		ok.String(*v.SchemaDefinition)
+	}
+
+	if v.SchemaName != nil {
+		ok := object.Key("SchemaName")
+		ok.String(*v.SchemaName)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentCreateScriptInput(v *CreateScriptInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10295,6 +11419,20 @@ func awsAwsjson11_serializeOpDocumentDeletePartitionInput(v *DeletePartitionInpu
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDeleteRegistryInput(v *DeleteRegistryInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RegistryId != nil {
+		ok := object.Key("RegistryId")
+		if err := awsAwsjson11_serializeDocumentRegistryId(v.RegistryId, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDeleteResourcePolicyInput(v *DeleteResourcePolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10307,6 +11445,39 @@ func awsAwsjson11_serializeOpDocumentDeleteResourcePolicyInput(v *DeleteResource
 	if v.ResourceArn != nil {
 		ok := object.Key("ResourceArn")
 		ok.String(*v.ResourceArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteSchemaInput(v *DeleteSchemaInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SchemaId != nil {
+		ok := object.Key("SchemaId")
+		if err := awsAwsjson11_serializeDocumentSchemaId(v.SchemaId, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteSchemaVersionsInput(v *DeleteSchemaVersionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SchemaId != nil {
+		ok := object.Key("SchemaId")
+		if err := awsAwsjson11_serializeDocumentSchemaId(v.SchemaId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Versions != nil {
+		ok := object.Key("Versions")
+		ok.String(*v.Versions)
 	}
 
 	return nil
@@ -11092,6 +12263,20 @@ func awsAwsjson11_serializeOpDocumentGetPlanInput(v *GetPlanInput, value smithyj
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentGetRegistryInput(v *GetRegistryInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RegistryId != nil {
+		ok := object.Key("RegistryId")
+		if err := awsAwsjson11_serializeDocumentRegistryId(v.RegistryId, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentGetResourcePoliciesInput(v *GetResourcePoliciesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -11116,6 +12301,98 @@ func awsAwsjson11_serializeOpDocumentGetResourcePolicyInput(v *GetResourcePolicy
 	if v.ResourceArn != nil {
 		ok := object.Key("ResourceArn")
 		ok.String(*v.ResourceArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetSchemaByDefinitionInput(v *GetSchemaByDefinitionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SchemaDefinition != nil {
+		ok := object.Key("SchemaDefinition")
+		ok.String(*v.SchemaDefinition)
+	}
+
+	if v.SchemaId != nil {
+		ok := object.Key("SchemaId")
+		if err := awsAwsjson11_serializeDocumentSchemaId(v.SchemaId, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetSchemaInput(v *GetSchemaInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SchemaId != nil {
+		ok := object.Key("SchemaId")
+		if err := awsAwsjson11_serializeDocumentSchemaId(v.SchemaId, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetSchemaVersionInput(v *GetSchemaVersionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SchemaId != nil {
+		ok := object.Key("SchemaId")
+		if err := awsAwsjson11_serializeDocumentSchemaId(v.SchemaId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SchemaVersionId != nil {
+		ok := object.Key("SchemaVersionId")
+		ok.String(*v.SchemaVersionId)
+	}
+
+	if v.SchemaVersionNumber != nil {
+		ok := object.Key("SchemaVersionNumber")
+		if err := awsAwsjson11_serializeDocumentSchemaVersionNumber(v.SchemaVersionNumber, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetSchemaVersionsDiffInput(v *GetSchemaVersionsDiffInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FirstSchemaVersionNumber != nil {
+		ok := object.Key("FirstSchemaVersionNumber")
+		if err := awsAwsjson11_serializeDocumentSchemaVersionNumber(v.FirstSchemaVersionNumber, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.SchemaDiffType) > 0 {
+		ok := object.Key("SchemaDiffType")
+		ok.String(string(v.SchemaDiffType))
+	}
+
+	if v.SchemaId != nil {
+		ok := object.Key("SchemaId")
+		if err := awsAwsjson11_serializeDocumentSchemaId(v.SchemaId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecondSchemaVersionNumber != nil {
+		ok := object.Key("SecondSchemaVersionNumber")
+		if err := awsAwsjson11_serializeDocumentSchemaVersionNumber(v.SecondSchemaVersionNumber, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -11568,6 +12845,71 @@ func awsAwsjson11_serializeOpDocumentListMLTransformsInput(v *ListMLTransformsIn
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentListRegistriesInput(v *ListRegistriesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListSchemasInput(v *ListSchemasInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.RegistryId != nil {
+		ok := object.Key("RegistryId")
+		if err := awsAwsjson11_serializeDocumentRegistryId(v.RegistryId, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListSchemaVersionsInput(v *ListSchemaVersionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.SchemaId != nil {
+		ok := object.Key("SchemaId")
+		if err := awsAwsjson11_serializeDocumentSchemaId(v.SchemaId, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentListTriggersInput(v *ListTriggersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -11665,6 +13007,39 @@ func awsAwsjson11_serializeOpDocumentPutResourcePolicyInput(v *PutResourcePolicy
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentPutSchemaVersionMetadataInput(v *PutSchemaVersionMetadataInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetadataKeyValue != nil {
+		ok := object.Key("MetadataKeyValue")
+		if err := awsAwsjson11_serializeDocumentMetadataKeyValuePair(v.MetadataKeyValue, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SchemaId != nil {
+		ok := object.Key("SchemaId")
+		if err := awsAwsjson11_serializeDocumentSchemaId(v.SchemaId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SchemaVersionId != nil {
+		ok := object.Key("SchemaVersionId")
+		ok.String(*v.SchemaVersionId)
+	}
+
+	if v.SchemaVersionNumber != nil {
+		ok := object.Key("SchemaVersionNumber")
+		if err := awsAwsjson11_serializeDocumentSchemaVersionNumber(v.SchemaVersionNumber, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentPutWorkflowRunPropertiesInput(v *PutWorkflowRunPropertiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -11682,6 +13057,101 @@ func awsAwsjson11_serializeOpDocumentPutWorkflowRunPropertiesInput(v *PutWorkflo
 	if v.RunProperties != nil {
 		ok := object.Key("RunProperties")
 		if err := awsAwsjson11_serializeDocumentWorkflowRunProperties(v.RunProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentQuerySchemaVersionMetadataInput(v *QuerySchemaVersionMetadataInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != 0 {
+		ok := object.Key("MaxResults")
+		ok.Integer(v.MaxResults)
+	}
+
+	if v.MetadataList != nil {
+		ok := object.Key("MetadataList")
+		if err := awsAwsjson11_serializeDocumentMetadataList(v.MetadataList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.SchemaId != nil {
+		ok := object.Key("SchemaId")
+		if err := awsAwsjson11_serializeDocumentSchemaId(v.SchemaId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SchemaVersionId != nil {
+		ok := object.Key("SchemaVersionId")
+		ok.String(*v.SchemaVersionId)
+	}
+
+	if v.SchemaVersionNumber != nil {
+		ok := object.Key("SchemaVersionNumber")
+		if err := awsAwsjson11_serializeDocumentSchemaVersionNumber(v.SchemaVersionNumber, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentRegisterSchemaVersionInput(v *RegisterSchemaVersionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SchemaDefinition != nil {
+		ok := object.Key("SchemaDefinition")
+		ok.String(*v.SchemaDefinition)
+	}
+
+	if v.SchemaId != nil {
+		ok := object.Key("SchemaId")
+		if err := awsAwsjson11_serializeDocumentSchemaId(v.SchemaId, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentRemoveSchemaVersionMetadataInput(v *RemoveSchemaVersionMetadataInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetadataKeyValue != nil {
+		ok := object.Key("MetadataKeyValue")
+		if err := awsAwsjson11_serializeDocumentMetadataKeyValuePair(v.MetadataKeyValue, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SchemaId != nil {
+		ok := object.Key("SchemaId")
+		if err := awsAwsjson11_serializeDocumentSchemaId(v.SchemaId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SchemaVersionId != nil {
+		ok := object.Key("SchemaVersionId")
+		ok.String(*v.SchemaVersionId)
+	}
+
+	if v.SchemaVersionNumber != nil {
+		ok := object.Key("SchemaVersionNumber")
+		if err := awsAwsjson11_serializeDocumentSchemaVersionNumber(v.SchemaVersionNumber, ok); err != nil {
 			return err
 		}
 	}
@@ -12455,6 +13925,56 @@ func awsAwsjson11_serializeOpDocumentUpdatePartitionInput(v *UpdatePartitionInpu
 	if v.TableName != nil {
 		ok := object.Key("TableName")
 		ok.String(*v.TableName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateRegistryInput(v *UpdateRegistryInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.RegistryId != nil {
+		ok := object.Key("RegistryId")
+		if err := awsAwsjson11_serializeDocumentRegistryId(v.RegistryId, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateSchemaInput(v *UpdateSchemaInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Compatibility) > 0 {
+		ok := object.Key("Compatibility")
+		ok.String(string(v.Compatibility))
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.SchemaId != nil {
+		ok := object.Key("SchemaId")
+		if err := awsAwsjson11_serializeDocumentSchemaId(v.SchemaId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SchemaVersionNumber != nil {
+		ok := object.Key("SchemaVersionNumber")
+		if err := awsAwsjson11_serializeDocumentSchemaVersionNumber(v.SchemaVersionNumber, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

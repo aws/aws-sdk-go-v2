@@ -21541,6 +21541,81 @@ func awsRestjson1_deserializeDocumentColumnGroupSchemaList(v *[]types.ColumnGrou
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentColumnLevelPermissionRule(v **types.ColumnLevelPermissionRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ColumnLevelPermissionRule
+	if *v == nil {
+		sv = &types.ColumnLevelPermissionRule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ColumnNames":
+			if err := awsRestjson1_deserializeDocumentColumnNameList(&sv.ColumnNames, value); err != nil {
+				return err
+			}
+
+		case "Principals":
+			if err := awsRestjson1_deserializeDocumentPrincipalList(&sv.Principals, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentColumnLevelPermissionRuleList(v *[]types.ColumnLevelPermissionRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ColumnLevelPermissionRule
+	if *v == nil {
+		cv = []types.ColumnLevelPermissionRule{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ColumnLevelPermissionRule
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentColumnLevelPermissionRule(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentColumnList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21567,6 +21642,42 @@ func awsRestjson1_deserializeDocumentColumnList(v *[]string, value interface{}) 
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected ColumnName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentColumnNameList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}
@@ -22604,6 +22715,11 @@ func awsRestjson1_deserializeDocumentDataSet(v **types.DataSet, value interface{
 				return err
 			}
 
+		case "ColumnLevelPermissionRules":
+			if err := awsRestjson1_deserializeDocumentColumnLevelPermissionRuleList(&sv.ColumnLevelPermissionRules, value); err != nil {
+				return err
+			}
+
 		case "ConsumedSpiceCapacityInBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -22884,6 +23000,15 @@ func awsRestjson1_deserializeDocumentDataSetSummary(v **types.DataSetSummary, va
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "ColumnLevelPermissionRulesApplied":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ColumnLevelPermissionRulesApplied = jtv
 			}
 
 		case "CreatedTime":
@@ -23256,6 +23381,11 @@ func awsRestjson1_deserializeDocumentDataSourceParameters(v **types.DataSourcePa
 
 		case "MySqlParameters":
 			if err := awsRestjson1_deserializeDocumentMySqlParameters(&sv.MySqlParameters, value); err != nil {
+				return err
+			}
+
+		case "OracleParameters":
+			if err := awsRestjson1_deserializeDocumentOracleParameters(&sv.OracleParameters, value); err != nil {
 				return err
 			}
 
@@ -25122,6 +25252,68 @@ func awsRestjson1_deserializeDocumentNamespaces(v *[]types.NamespaceInfoV2, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentOracleParameters(v **types.OracleParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OracleParameters
+	if *v == nil {
+		sv = &types.OracleParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Database":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Database to be of type string, got %T instead", value)
+				}
+				sv.Database = ptr.String(jtv)
+			}
+
+		case "Host":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Host to be of type string, got %T instead", value)
+				}
+				sv.Host = ptr.String(jtv)
+			}
+
+		case "Port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Port to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOutputColumn(v **types.OutputColumn, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -25465,6 +25657,42 @@ func awsRestjson1_deserializeDocumentPrestoParameters(v **types.PrestoParameters
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPrincipalList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

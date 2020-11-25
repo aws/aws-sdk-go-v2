@@ -43,13 +43,14 @@ type ListThingRegistrationTaskReportsInput struct {
 	// The maximum number of results to return per request.
 	MaxResults *int32
 
-	// The token to retrieve the next set of results.
+	// To retrieve the next set of results, the nextToken value from a previous
+	// response; otherwise null to receive the first set of results.
 	NextToken *string
 }
 
 type ListThingRegistrationTaskReportsOutput struct {
 
-	// The token used to get the next set of results, or null if there are no
+	// The token to use to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string
 

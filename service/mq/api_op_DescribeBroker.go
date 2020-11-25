@@ -79,8 +79,8 @@ type DescribeBrokerOutput struct {
 	// Encryption options for the broker.
 	EncryptionOptions *types.EncryptionOptions
 
-	// Required. The type of broker engine. Note: Currently, Amazon MQ supports only
-	// ACTIVEMQ.
+	// Required. The type of broker engine. Note: Currently, Amazon MQ supports
+	// ACTIVEMQ and RABBITMQ.
 	EngineType types.EngineType
 
 	// The version of the broker engine. For a list of supported engine versions, see
@@ -132,16 +132,18 @@ type DescribeBrokerOutput struct {
 	// The broker's storage type.
 	StorageType types.BrokerStorageType
 
-	// The list of groups (2 maximum) that define which subnets and IP ranges the
-	// broker can use from different Availability Zones. A SINGLE_INSTANCE deployment
-	// requires one subnet (for example, the default subnet). An
-	// ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.
+	// The list of groups that define which subnets and IP ranges the broker can use
+	// from different Availability Zones. A SINGLE_INSTANCE deployment requires one
+	// subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment
+	// (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ deployment (RABBITMQ) has no
+	// subnet requirements when deployed with public accessibility, deployment without
+	// public accessibility requires at least one subnet.
 	SubnetIds []string
 
 	// The list of all tags associated with this broker.
 	Tags map[string]string
 
-	// The list of all ActiveMQ usernames for the specified broker.
+	// The list of all broker usernames for the specified broker.
 	Users []types.UserSummary
 
 	// Metadata pertaining to the operation's result.

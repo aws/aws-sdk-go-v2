@@ -53,12 +53,14 @@ type RegisterTypeInput struct {
 	// For information on generating a schema handler package for the type you want to
 	// register, see submit
 	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html)
-	// in the CloudFormation CLI User Guide. As part of registering a resource provider
-	// type, CloudFormation must be able to access the S3 bucket which contains the
-	// schema handler package for that resource provider. For more information, see IAM
-	// Permissions for Registering a Resource Provider
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html#registry-register-permissions)
-	// in the AWS CloudFormation User Guide.
+	// in the CloudFormation CLI User Guide. The user registering the resource provider
+	// type must be able to access the the schema handler package in the S3 bucket.
+	// That is, the user needs to have GetObject
+	// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html) permissions
+	// for the schema handler package. For more information, see Actions, Resources,
+	// and Condition Keys for Amazon S3
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html) in the AWS
+	// Identity and Access Management User Guide.
 	//
 	// This member is required.
 	SchemaHandlerPackage *string

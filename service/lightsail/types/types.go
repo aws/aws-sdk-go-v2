@@ -392,14 +392,14 @@ type CacheBehaviorPerPath struct {
 	// var/www/html/index.html
 	//
 	// * Specify the following to cache only the .html files
-	// in the document root of an Apache web server. var/www/html/.html
+	// in the document root of an Apache web server. var/www/html/*.html
 	//
 	// * Specify the
 	// following to cache only the .jpg, .png, and .gif files in the images
 	// sub-directory of the document root of an Apache web server.
-	// var/www/html/images/.jpgvar/www/html/images/.pngvar/www/html/images/.gif Specify
-	// the following to cache all files in the images sub-directory of the document
-	// root of an Apache web server. var/www/html/images/
+	// var/www/html/images/*.jpgvar/www/html/images/*.pngvar/www/html/images/*.gif
+	// Specify the following to cache all files in the images sub-directory of the
+	// document root of an Apache web server. var/www/html/images/
 	Path *string
 }
 
@@ -709,6 +709,287 @@ type ContactMethod struct {
 	SupportCode *string
 }
 
+// Describes the settings of a container that will be launched, or that is
+// launched, to an Amazon Lightsail container service.
+type Container struct {
+
+	// The launch command for the container.
+	Command []string
+
+	// The environment variables of the container.
+	Environment map[string]string
+
+	// The name of the image used for the container. Container images sourced from your
+	// Lightsail container service, that are registered and stored on your service,
+	// start with a colon (:). For example, :container-service-1.mystaticwebsite.1.
+	// Container images sourced from a public registry like Docker Hub don't start with
+	// a colon. For example, nginx:latest or nginx.
+	Image *string
+
+	// The open firewall ports of the container.
+	Ports map[string]ContainerServiceProtocol
+}
+
+// Describes a container image that is registered to an Amazon Lightsail container
+// service.
+type ContainerImage struct {
+
+	// The timestamp when the container image was created.
+	CreatedAt *time.Time
+
+	// The digest of the container image.
+	Digest *string
+
+	// The name of the container image.
+	Image *string
+}
+
+// Describes an Amazon Lightsail container service.
+type ContainerService struct {
+
+	// The Amazon Resource Name (ARN) of the container service.
+	Arn *string
+
+	// The name of the container service.
+	ContainerServiceName *string
+
+	// The timestamp when the container service was created.
+	CreatedAt *time.Time
+
+	// An object that describes the current container deployment of the container
+	// service.
+	CurrentDeployment *ContainerServiceDeployment
+
+	// A Boolean value indicating whether the container service is disabled.
+	IsDisabled *bool
+
+	// An object that describes the location of the container service, such as the AWS
+	// Region and Availability Zone.
+	Location *ResourceLocation
+
+	// An object that describes the next deployment of the container service. This
+	// value is null when there is no deployment in a pending state.
+	NextDeployment *ContainerServiceDeployment
+
+	// The power specification of the container service. The power specifies the amount
+	// of RAM, the number of vCPUs, and the base price of the container service.
+	Power ContainerServicePowerName
+
+	// The ID of the power of the container service.
+	PowerId *string
+
+	// The principal ARN of the container service. The principal ARN can be used to
+	// create a trust relationship between your standard AWS account and your Lightsail
+	// container service. This allows you to give your service permission to access
+	// resources in your standard AWS account.
+	PrincipalArn *string
+
+	// The private domain name of the container service. The private domain name is
+	// accessible only by other resources within the default virtual private cloud
+	// (VPC) of your Lightsail account.
+	PrivateDomainName *string
+
+	// The public domain name of the container service, such as example.com and
+	// www.example.com. You can specify up to four public domain names for a container
+	// service. The domain names that you specify are used when you create a deployment
+	// with a container configured as the public endpoint of your container service. If
+	// you don't specify public domain names, then you can use the default domain of
+	// the container service. You must create and validate an SSL/TLS certificate
+	// before you can use public domain names with your container service. Use the
+	// CreateCertificate action to create a certificate for the public domain names you
+	// want to use with your container service. See CreateContainerService or
+	// UpdateContainerService for information about how to specify public domain names
+	// for your Lightsail container service.
+	PublicDomainNames map[string][]string
+
+	// The Lightsail resource type of the container service (i.e., ContainerService).
+	ResourceType ResourceType
+
+	// The scale specification of the container service. The scale specifies the
+	// allocated compute nodes of the container service.
+	Scale *int32
+
+	// The current state of the container service. The state can be:
+	//
+	// * Pending - The
+	// container service is being created.
+	//
+	// * Ready - The container service is created
+	// but does not have a container deployment.
+	//
+	// * Disabled - The container service is
+	// disabled.
+	//
+	// * Updating - The container service capacity or other setting is being
+	// updated.
+	//
+	// * Deploying - The container service is launching a container
+	// deployment.
+	//
+	// * Running - The container service is created and it has a container
+	// deployment.
+	State ContainerServiceState
+
+	// The tag keys and optional values for the resource. For more information about
+	// tags in Lightsail, see the Lightsail Dev Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	Tags []Tag
+
+	// The publicly accessible URL of the container service. If no public endpoint is
+	// specified in the currentDeployment, this URL returns a 404 response.
+	Url *string
+}
+
+// Describes a container deployment configuration of an Amazon Lightsail container
+// service. A deployment specifies the settings, such as the ports and launch
+// command, of containers that are deployed to your container service.
+type ContainerServiceDeployment struct {
+
+	// An object that describes the configuration for the containers of the deployment.
+	Containers map[string]Container
+
+	// The timestamp when the deployment was created.
+	CreatedAt *time.Time
+
+	// An object that describes the endpoint of the deployment.
+	PublicEndpoint *ContainerServiceEndpoint
+
+	// The state of the deployment. A deployment can be in one of the following
+	// states:
+	//
+	// * Activating - The deployment is being created.
+	//
+	// * Active - The
+	// deployment was successfully created, and it's currently running on the container
+	// service. The container service can have only one deployment in an active state
+	// at a time.
+	//
+	// * Inactive - The deployment was previously successfully created, but
+	// it is not currently running on the container service.
+	//
+	// * Failed - The deployment
+	// failed. Use the GetContainerLog action to view the log events for the containers
+	// in the deployment to try to determine the reason for the failure.
+	State ContainerServiceDeploymentState
+
+	// The version number of the deployment.
+	Version *int32
+}
+
+// Describes a container deployment configuration of an Amazon Lightsail container
+// service. A deployment specifies the settings, such as the ports and launch
+// command, of containers that are deployed to your container service.
+type ContainerServiceDeploymentRequest struct {
+
+	// An object that describes the configuration for the containers of the deployment.
+	Containers map[string]Container
+
+	// An object that describes the endpoint of the deployment.
+	PublicEndpoint *EndpointRequest
+}
+
+// Describes the public endpoint configuration of a deployment of an Amazon
+// Lightsail container service.
+type ContainerServiceEndpoint struct {
+
+	// The name of the container entry of the deployment that the endpoint
+	// configuration applies to.
+	ContainerName *string
+
+	// The port of the specified container to which traffic is forwarded to.
+	ContainerPort *int32
+
+	// An object that describes the health check configuration of the container.
+	HealthCheck *ContainerServiceHealthCheckConfig
+}
+
+// Describes the health check configuration of an Amazon Lightsail container
+// service.
+type ContainerServiceHealthCheckConfig struct {
+
+	// The number of consecutive health checks successes required before moving the
+	// container to the Healthy state.
+	HealthyThreshold *int32
+
+	// The approximate interval, in seconds, between health checks of an individual
+	// container. You may specify between 5 and 300 seconds.
+	IntervalSeconds *int32
+
+	// The path on the container on which to perform the health check.
+	Path *string
+
+	// The HTTP codes to use when checking for a successful response from a container.
+	// You can specify values between 200 and 499.
+	SuccessCodes *string
+
+	// The amount of time, in seconds, during which no response means a failed health
+	// check. You may specify between 2 and 60 seconds.
+	TimeoutSeconds *int32
+
+	// The number of consecutive health check failures required before moving the
+	// container to the Unhealthy state.
+	UnhealthyThreshold *int32
+}
+
+// Describes the log events of a container of an Amazon Lightsail container
+// service.
+type ContainerServiceLogEvent struct {
+
+	// The timestamp when the container service log event was created.
+	CreatedAt *time.Time
+
+	// The message of the container service log event.
+	Message *string
+}
+
+// Describes the powers that can be specified for an Amazon Lightsail container
+// service. The power specifies the amount of RAM, the number of vCPUs, and the
+// base price of the container service.
+type ContainerServicePower struct {
+
+	// The number of vCPUs included in the power.
+	CpuCount *float32
+
+	// A Boolean value indicating whether the power is active and can be specified for
+	// container services.
+	IsActive *bool
+
+	// The friendly name of the power (e.g., nano).
+	Name *string
+
+	// The ID of the power (e.g., nano-1).
+	PowerId *string
+
+	// The monthly price of the power in USD.
+	Price *float32
+
+	// The amount of RAM (in GB) of the power.
+	RamSizeInGb *float32
+}
+
+// Describes the login information for the container image registry of an Amazon
+// Lightsail account.
+type ContainerServiceRegistryLogin struct {
+
+	// The timestamp of when the container image registry username and password expire.
+	// The log in credentials expire 12 hours after they are created, at which point
+	// you will need to create a new set of log in credentials using the
+	// CreateContainerServiceRegistryLogin action.
+	ExpiresAt *time.Time
+
+	// The container service registry password to use to push container images to the
+	// container image registry of a Lightsail account
+	Password *string
+
+	// The address to use to push container images to the container image registry of a
+	// Lightsail account.
+	Registry *string
+
+	// The container service registry username to use to push container images to the
+	// container image registry of a Lightsail account.
+	Username *string
+}
+
 // Describes whether an Amazon Lightsail content delivery network (CDN)
 // distribution forwards cookies to the origin and, if so, which ones. For the
 // cookies that you specify, your distribution caches separate versions of the
@@ -950,7 +1231,7 @@ type DomainEntry struct {
 
 	// When true, specifies whether the domain entry is an alias used by the Lightsail
 	// load balancer. You can include an alias (A type) record in your request, which
-	// points to a load balancer DNS name and routes traffic to your load balancer
+	// points to a load balancer DNS name and routes traffic to your load balancer.
 	IsAlias *bool
 
 	// The name of the domain.
@@ -998,6 +1279,24 @@ type DomainValidationRecord struct {
 	// An object that describes the DNS records to add to your domain's DNS to validate
 	// it for the certificate.
 	ResourceRecord *ResourceRecord
+}
+
+// Describes the settings of a public endpoint for an Amazon Lightsail container
+// service.
+type EndpointRequest struct {
+
+	// The name of the container for the endpoint.
+	//
+	// This member is required.
+	ContainerName *string
+
+	// The port of the container to which traffic is forwarded to.
+	//
+	// This member is required.
+	ContainerPort *int32
+
+	// An object that describes the health check configuration of the container.
+	HealthCheck *ContainerServiceHealthCheckConfig
 }
 
 // Describes an export snapshot record.

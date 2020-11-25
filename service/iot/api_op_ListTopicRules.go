@@ -34,7 +34,8 @@ type ListTopicRulesInput struct {
 	// The maximum number of results to return.
 	MaxResults *int32
 
-	// A token used to retrieve the next value.
+	// To retrieve the next set of results, the nextToken value from a previous
+	// response; otherwise null to receive the first set of results.
 	NextToken *string
 
 	// Specifies whether the rule is disabled.
@@ -47,7 +48,8 @@ type ListTopicRulesInput struct {
 // The output from the ListTopicRules operation.
 type ListTopicRulesOutput struct {
 
-	// A token used to retrieve the next value.
+	// The token to use to get the next set of results, or null if there are no
+	// additional results.
 	NextToken *string
 
 	// The rules.

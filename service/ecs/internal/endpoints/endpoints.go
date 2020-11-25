@@ -130,6 +130,9 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    regexp.MustCompile("^us\\-isob\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"us-isob-east-1": endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-us-gov",

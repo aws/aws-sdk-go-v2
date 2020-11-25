@@ -51,8 +51,8 @@ type DescribeBackupJobOutput struct {
 	BackupSizeInBytes *int64
 
 	// Represents the actual backup type selected for a backup job. For example, if a
-	// successful WindowsVSS backup was taken, BackupType returns “WindowsVSS”. If
-	// BackupType is empty, then it is a regular backup.
+	// successful WindowsVSS backup was taken, BackupType returns "WindowsVSS". If
+	// BackupType is empty, then the backup type that was is a regular backup.
 	BackupType *string
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for

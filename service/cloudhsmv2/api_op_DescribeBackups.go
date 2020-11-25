@@ -42,7 +42,10 @@ type DescribeBackupsInput struct {
 	// returned by the CopyBackupToRegion operation. Use the clusterIds filter to
 	// return only the backups for the specified clusters. Specify clusters by their
 	// cluster identifier (ID). Use the states filter to return only backups that match
-	// the specified state.
+	// the specified state. Use the neverExpires filter to return backups filtered by
+	// the value in the neverExpires parameter. True returns all backups exempt from
+	// the backup retention policy. False returns all backups with a backup retention
+	// policy defined at the cluster.
 	Filters map[string][]string
 
 	// The maximum number of backups to return in the response. When there are more

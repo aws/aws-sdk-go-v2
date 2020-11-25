@@ -125,8 +125,8 @@ func (e *PreconditionFailedException) ErrorFault() smithy.ErrorFault { return sm
 type ResourceInUseException struct {
 	Message *string
 
-	ExampleReference *ResourceReference
 	ReferenceType    ReferenceType
+	ExampleReference *ResourceReference
 }
 
 func (e *ResourceInUseException) Error() string {

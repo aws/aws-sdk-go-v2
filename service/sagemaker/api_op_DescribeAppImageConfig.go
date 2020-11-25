@@ -47,7 +47,7 @@ type DescribeAppImageConfigOutput struct {
 	// When the AppImageConfig was created.
 	CreationTime *time.Time
 
-	// The KernelGateway app.
+	// The configuration of a KernelGateway app.
 	KernelGatewayImageConfig *types.KernelGatewayImageConfig
 
 	// When the AppImageConfig was last modified.

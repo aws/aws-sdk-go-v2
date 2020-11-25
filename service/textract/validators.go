@@ -213,13 +213,13 @@ func validateOpAnalyzeDocumentInput(v *AnalyzeDocumentInput) error {
 	if v.Document == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Document"))
 	}
+	if v.FeatureTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureTypes"))
+	}
 	if v.HumanLoopConfig != nil {
 		if err := validateHumanLoopConfig(v.HumanLoopConfig); err != nil {
 			invalidParams.AddNested("HumanLoopConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.FeatureTypes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FeatureTypes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -278,16 +278,16 @@ func validateOpStartDocumentAnalysisInput(v *StartDocumentAnalysisInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartDocumentAnalysisInput"}
-	if v.NotificationChannel != nil {
-		if err := validateNotificationChannel(v.NotificationChannel); err != nil {
-			invalidParams.AddNested("NotificationChannel", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.DocumentLocation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DocumentLocation"))
 	}
 	if v.FeatureTypes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FeatureTypes"))
+	}
+	if v.NotificationChannel != nil {
+		if err := validateNotificationChannel(v.NotificationChannel); err != nil {
+			invalidParams.AddNested("NotificationChannel", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.OutputConfig != nil {
 		if err := validateOutputConfig(v.OutputConfig); err != nil {
@@ -306,18 +306,18 @@ func validateOpStartDocumentTextDetectionInput(v *StartDocumentTextDetectionInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartDocumentTextDetectionInput"}
-	if v.OutputConfig != nil {
-		if err := validateOutputConfig(v.OutputConfig); err != nil {
-			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
-		}
+	if v.DocumentLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentLocation"))
 	}
 	if v.NotificationChannel != nil {
 		if err := validateNotificationChannel(v.NotificationChannel); err != nil {
 			invalidParams.AddNested("NotificationChannel", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.DocumentLocation == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DocumentLocation"))
+	if v.OutputConfig != nil {
+		if err := validateOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

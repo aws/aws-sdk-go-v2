@@ -43128,6 +43128,76 @@ func awsEc2query_deserializeDocumentClientCertificateRevocationListStatus(v **ty
 	return nil
 }
 
+func awsEc2query_deserializeDocumentClientConnectResponseOptions(v **types.ClientConnectResponseOptions, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ClientConnectResponseOptions
+	if *v == nil {
+		sv = &types.ClientConnectResponseOptions{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("enabled", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.Enabled = xtv
+			}
+
+		case strings.EqualFold("lambdaFunctionArn", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.LambdaFunctionArn = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.LambdaFunctionArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("status", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentClientVpnEndpointAttributeStatus(&sv.Status, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsEc2query_deserializeDocumentClientVpnAuthentication(v **types.ClientVpnAuthentication, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -43499,6 +43569,12 @@ func awsEc2query_deserializeDocumentClientVpnConnection(v **types.ClientVpnConne
 				sv.IngressPackets = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("postureComplianceStatusSet", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentValueStringList(&sv.PostureComplianceStatuses, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("status", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentClientVpnConnectionStatus(&sv.Status, nodeDecoder); err != nil {
@@ -43723,6 +43799,12 @@ func awsEc2query_deserializeDocumentClientVpnEndpoint(v **types.ClientVpnEndpoin
 				sv.ClientCidrBlock = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("clientConnectOptions", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentClientConnectResponseOptions(&sv.ClientConnectOptions, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("clientVpnEndpointId", t.Name.Local):
 			val, done, err := decoder.Value()
 			if err != nil {
@@ -43938,6 +44020,67 @@ func awsEc2query_deserializeDocumentClientVpnEndpoint(v **types.ClientVpnEndpoin
 			if val != nil {
 				xtv := string(val)
 				sv.VpnProtocol = types.VpnProtocol(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentClientVpnEndpointAttributeStatus(v **types.ClientVpnEndpointAttributeStatus, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ClientVpnEndpointAttributeStatus
+	if *v == nil {
+		sv = &types.ClientVpnEndpointAttributeStatus{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("code", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Code = types.ClientVpnEndpointAttributeStatusCode(xtv)
+			}
+
+		case strings.EqualFold("message", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -52100,6 +52243,89 @@ func awsEc2query_deserializeDocumentFleetSetUnwrapped(v *[]types.FleetData, deco
 	*v = sv
 	return nil
 }
+func awsEc2query_deserializeDocumentFleetSpotCapacityRebalance(v **types.FleetSpotCapacityRebalance, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.FleetSpotCapacityRebalance
+	if *v == nil {
+		sv = &types.FleetSpotCapacityRebalance{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("replacementStrategy", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.ReplacementStrategy = types.FleetReplacementStrategy(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentFleetSpotMaintenanceStrategies(v **types.FleetSpotMaintenanceStrategies, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.FleetSpotMaintenanceStrategies
+	if *v == nil {
+		sv = &types.FleetSpotMaintenanceStrategies{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("capacityRebalance", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentFleetSpotCapacityRebalance(&sv.CapacityRebalance, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsEc2query_deserializeDocumentFlowLog(v **types.FlowLog, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -59351,6 +59577,23 @@ func awsEc2query_deserializeDocumentInstanceNetworkInterfaceAttachment(v **types
 				sv.DeviceIndex = int32(i64)
 			}
 
+		case strings.EqualFold("networkCardIndex", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.NetworkCardIndex = int32(i64)
+			}
+
 		case strings.EqualFold("status", t.Name.Local):
 			val, done, err := decoder.Value()
 			if err != nil {
@@ -59585,6 +59828,23 @@ func awsEc2query_deserializeDocumentInstanceNetworkInterfaceSpecification(v **ty
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentInstanceIpv6AddressList(&sv.Ipv6Addresses, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("NetworkCardIndex", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.NetworkCardIndex = int32(i64)
 			}
 
 		case strings.EqualFold("networkInterfaceId", t.Name.Local):
@@ -64544,6 +64804,23 @@ func awsEc2query_deserializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecif
 				return err
 			}
 
+		case strings.EqualFold("networkCardIndex", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.NetworkCardIndex = int32(i64)
+			}
+
 		case strings.EqualFold("networkInterfaceId", t.Name.Local):
 			val, done, err := decoder.Value()
 			if err != nil {
@@ -68852,6 +69129,153 @@ func awsEc2query_deserializeDocumentNetworkAclListUnwrapped(v *[]types.NetworkAc
 	*v = sv
 	return nil
 }
+func awsEc2query_deserializeDocumentNetworkCardInfo(v **types.NetworkCardInfo, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.NetworkCardInfo
+	if *v == nil {
+		sv = &types.NetworkCardInfo{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("maximumNetworkInterfaces", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaximumNetworkInterfaces = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("networkCardIndex", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.NetworkCardIndex = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("networkPerformance", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.NetworkPerformance = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.NetworkPerformance = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentNetworkCardInfoList(v *[]types.NetworkCardInfo, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.NetworkCardInfo
+	if *v == nil {
+		sv = make([]types.NetworkCardInfo, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		for {
+			if strings.EqualFold("item", t.Name.Local) {
+				var col types.NetworkCardInfo
+				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+				destAddr := &col
+				if err := awsEc2query_deserializeDocumentNetworkCardInfo(&destAddr, nodeDecoder); err != nil {
+					return err
+				}
+				col = *destAddr
+				sv = append(sv, col)
+				break
+			} else {
+				break
+			}
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentNetworkCardInfoListUnwrapped(v *[]types.NetworkCardInfo, decoder smithyxml.NodeDecoder) error {
+	var sv []types.NetworkCardInfo
+	if *v == nil {
+		sv = make([]types.NetworkCardInfo, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.NetworkCardInfo
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsEc2query_deserializeDocumentNetworkCardInfo(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsEc2query_deserializeDocumentNetworkInfo(v **types.NetworkInfo, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -68874,6 +69298,23 @@ func awsEc2query_deserializeDocumentNetworkInfo(v **types.NetworkInfo, decoder s
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("defaultNetworkCardIndex", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.DefaultNetworkCardIndex = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("efaSupported", t.Name.Local):
 			val, done, err := decoder.Value()
 			if err != nil {
@@ -68953,6 +69394,23 @@ func awsEc2query_deserializeDocumentNetworkInfo(v **types.NetworkInfo, decoder s
 				sv.Ipv6Supported = ptr.Bool(xtv)
 			}
 
+		case strings.EqualFold("maximumNetworkCards", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaximumNetworkCards = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("maximumNetworkInterfaces", t.Name.Local):
 			val, done, err := decoder.Value()
 			if err != nil {
@@ -68968,6 +69426,12 @@ func awsEc2query_deserializeDocumentNetworkInfo(v **types.NetworkInfo, decoder s
 					return err
 				}
 				sv.MaximumNetworkInterfaces = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("networkCards", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentNetworkCardInfoList(&sv.NetworkCards, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("networkPerformance", t.Name.Local):
@@ -69560,6 +70024,23 @@ func awsEc2query_deserializeDocumentNetworkInterfaceAttachment(v **types.Network
 			if val != nil {
 				xtv := string(val)
 				sv.InstanceOwnerId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("networkCardIndex", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.NetworkCardIndex = int32(i64)
 			}
 
 		case strings.EqualFold("status", t.Name.Local):
@@ -79107,6 +79588,12 @@ func awsEc2query_deserializeDocumentServiceConfiguration(v **types.ServiceConfig
 				return err
 			}
 
+		case strings.EqualFold("gatewayLoadBalancerArnSet", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentValueStringList(&sv.GatewayLoadBalancerArns, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("managesVpcEndpoints", t.Name.Local):
 			val, done, err := decoder.Value()
 			if err != nil {
@@ -80642,6 +81129,51 @@ func awsEc2query_deserializeDocumentSnapshotTaskDetail(v **types.SnapshotTaskDet
 	return nil
 }
 
+func awsEc2query_deserializeDocumentSpotCapacityRebalance(v **types.SpotCapacityRebalance, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.SpotCapacityRebalance
+	if *v == nil {
+		sv = &types.SpotCapacityRebalance{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("replacementStrategy", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.ReplacementStrategy = types.ReplacementStrategy(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsEc2query_deserializeDocumentSpotDatafeedSubscription(v **types.SpotDatafeedSubscription, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -81362,6 +81894,12 @@ func awsEc2query_deserializeDocumentSpotFleetRequestConfigData(v **types.SpotFle
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				sv.ReplaceUnhealthyInstances = xtv
+			}
+
+		case strings.EqualFold("spotMaintenanceStrategies", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentSpotMaintenanceStrategies(&sv.SpotMaintenanceStrategies, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("spotMaxTotalPrice", t.Name.Local):
@@ -82171,6 +82709,44 @@ func awsEc2query_deserializeDocumentSpotInstanceStatus(v **types.SpotInstanceSta
 	return nil
 }
 
+func awsEc2query_deserializeDocumentSpotMaintenanceStrategies(v **types.SpotMaintenanceStrategies, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.SpotMaintenanceStrategies
+	if *v == nil {
+		sv = &types.SpotMaintenanceStrategies{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("capacityRebalance", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentSpotCapacityRebalance(&sv.CapacityRebalance, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsEc2query_deserializeDocumentSpotOptions(v **types.SpotOptions, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -82234,6 +82810,12 @@ func awsEc2query_deserializeDocumentSpotOptions(v **types.SpotOptions, decoder s
 					return err
 				}
 				sv.InstancePoolsToUseCount = int32(i64)
+			}
+
+		case strings.EqualFold("maintenanceStrategies", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentFleetSpotMaintenanceStrategies(&sv.MaintenanceStrategies, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("maxTotalPrice", t.Name.Local):
@@ -93768,6 +94350,12 @@ func awsEc2query_deserializeDocumentVpcEndpointConnection(v **types.VpcEndpointC
 				return err
 			}
 
+		case strings.EqualFold("gatewayLoadBalancerArnSet", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentValueStringList(&sv.GatewayLoadBalancerArns, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("networkLoadBalancerArnSet", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentValueStringList(&sv.NetworkLoadBalancerArns, nodeDecoder); err != nil {
@@ -96520,6 +97108,23 @@ func awsEc2query_deserializeOpDocumentAttachNetworkInterfaceOutput(v **AttachNet
 			if val != nil {
 				xtv := string(val)
 				sv.AttachmentId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("networkCardIndex", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.NetworkCardIndex = int32(i64)
 			}
 
 		default:

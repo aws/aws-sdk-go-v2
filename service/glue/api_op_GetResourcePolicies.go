@@ -4,6 +4,7 @@ package glue
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
@@ -109,6 +110,93 @@ func addOperationGetResourcePoliciesMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// GetResourcePoliciesAPIClient is a client that implements the GetResourcePolicies
+// operation.
+type GetResourcePoliciesAPIClient interface {
+	GetResourcePolicies(context.Context, *GetResourcePoliciesInput, ...func(*Options)) (*GetResourcePoliciesOutput, error)
+}
+
+var _ GetResourcePoliciesAPIClient = (*Client)(nil)
+
+// GetResourcePoliciesPaginatorOptions is the paginator options for
+// GetResourcePolicies
+type GetResourcePoliciesPaginatorOptions struct {
+	// The maximum size of a list to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetResourcePoliciesPaginator is a paginator for GetResourcePolicies
+type GetResourcePoliciesPaginator struct {
+	options   GetResourcePoliciesPaginatorOptions
+	client    GetResourcePoliciesAPIClient
+	params    *GetResourcePoliciesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetResourcePoliciesPaginator returns a new GetResourcePoliciesPaginator
+func NewGetResourcePoliciesPaginator(client GetResourcePoliciesAPIClient, params *GetResourcePoliciesInput, optFns ...func(*GetResourcePoliciesPaginatorOptions)) *GetResourcePoliciesPaginator {
+	options := GetResourcePoliciesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &GetResourcePoliciesInput{}
+	}
+
+	return &GetResourcePoliciesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetResourcePoliciesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetResourcePolicies page.
+func (p *GetResourcePoliciesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetResourcePoliciesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetResourcePolicies(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetResourcePolicies(region string) *awsmiddleware.RegisterServiceMetadata {

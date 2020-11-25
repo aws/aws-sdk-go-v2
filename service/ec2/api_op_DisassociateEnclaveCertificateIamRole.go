@@ -14,8 +14,9 @@ import (
 // Disassociating an IAM role from an ACM certificate removes the Amazon S3 object
 // that contains the certificate, certificate chain, and encrypted private key from
 // the Amazon S3 bucket. It also revokes the IAM role's permission to use the AWS
-// Key Management Service (KMS) key used to encrypt the private key. This
-// effectively revokes the role's permission to use the certificate.
+// Key Management Service (KMS) customer master key (CMK) used to encrypt the
+// private key. This effectively revokes the role's permission to use the
+// certificate.
 func (c *Client) DisassociateEnclaveCertificateIamRole(ctx context.Context, params *DisassociateEnclaveCertificateIamRoleInput, optFns ...func(*Options)) (*DisassociateEnclaveCertificateIamRoleOutput, error) {
 	if params == nil {
 		params = &DisassociateEnclaveCertificateIamRoleInput{}

@@ -11,26 +11,24 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates an Application Load Balancer or a Network Load Balancer. When you create
-// a load balancer, you can specify security groups, public subnets, IP address
-// type, and tags. Otherwise, you could do so later using SetSecurityGroups,
-// SetSubnets, SetIpAddressType, and AddTags. To create listeners for your load
-// balancer, use CreateListener. To describe your current load balancers, see
-// DescribeLoadBalancers. When you are finished with a load balancer, you can
-// delete it using DeleteLoadBalancer. For limit information, see Limits for Your
-// Application Load Balancer
-// (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html)
-// in the Application Load Balancers Guide and Limits for Your Network Load
-// Balancer
-// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html)
-// in the Network Load Balancers Guide. This operation is idempotent, which means
-// that it completes at most one time. If you attempt to create multiple load
-// balancers with the same settings, each call succeeds. For more information, see
-// Application Load Balancers
+// Creates an Application Load Balancer, Network Load Balancer, or Gateway Load
+// Balancer. For more information, see the following:
+//
+// * Application Load Balancers
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html)
-// in the Application Load Balancers Guide and Network Load Balancers
+//
+// *
+// Network Load Balancers
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html)
-// in the Network Load Balancers Guide.
+//
+// *
+// Gateway Load Balancers
+// (https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/gateway-load-balancers.html)
+//
+// This
+// operation is idempotent, which means that it completes at most one time. If you
+// attempt to create multiple load balancers with the same settings, each call
+// succeeds.
 func (c *Client) CreateLoadBalancer(ctx context.Context, params *CreateLoadBalancerInput, optFns ...func(*Options)) (*CreateLoadBalancerOutput, error) {
 	if params == nil {
 		params = &CreateLoadBalancerInput{}
@@ -60,9 +58,9 @@ type CreateLoadBalancerInput struct {
 	// pool (CoIP pool).
 	CustomerOwnedIpv4Pool *string
 
-	// [Application Load Balancers] The type of IP addresses used by the subnets for
-	// your load balancer. The possible values are ipv4 (for IPv4 addresses) and
-	// dualstack (for IPv4 and IPv6 addresses). Internal load balancers must use ipv4.
+	// The type of IP addresses used by the subnets for your load balancer. The
+	// possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6
+	// addresses). Internal load balancers must use ipv4.
 	IpAddressType types.IpAddressType
 
 	// The nodes of an Internet-facing load balancer have public IP addresses. The DNS
@@ -72,7 +70,8 @@ type CreateLoadBalancerInput struct {
 	// have only private IP addresses. The DNS name of an internal load balancer is
 	// publicly resolvable to the private IP addresses of the nodes. Therefore,
 	// internal load balancers can route requests only from clients with access to the
-	// VPC for the load balancer. The default is an Internet-facing load balancer.
+	// VPC for the load balancer. The default is an Internet-facing load balancer. You
+	// cannot specify a scheme for a Gateway Load Balancer.
 	Scheme types.LoadBalancerSchemeEnum
 
 	// [Application Load Balancers] The IDs of the security groups for the load
@@ -89,7 +88,9 @@ type CreateLoadBalancerInput struct {
 	// Zones. You can specify one Elastic IP address per subnet if you need static IP
 	// addresses for your internet-facing load balancer. For internal load balancers,
 	// you can specify one private IP address per subnet from the IPv4 range of the
-	// subnet.
+	// subnet. For internet-facing load balancer, you can specify one IPv6 address per
+	// subnet. [Gateway Load Balancers] You can specify subnets from one or more
+	// Availability Zones. You cannot specify Elastic IP addresses for your subnets.
 	SubnetMappings []types.SubnetMapping
 
 	// The IDs of the public subnets. You can specify only one subnet per Availability
@@ -98,7 +99,8 @@ type CreateLoadBalancerInput struct {
 	// [Application Load Balancers on Outposts] You must specify one Outpost subnet.
 	// [Application Load Balancers on Local Zones] You can specify subnets from one or
 	// more Local Zones. [Network Load Balancers] You can specify subnets from one or
-	// more Availability Zones.
+	// more Availability Zones. [Gateway Load Balancers] You can specify subnets from
+	// one or more Availability Zones.
 	Subnets []string
 
 	// The tags to assign to the load balancer.

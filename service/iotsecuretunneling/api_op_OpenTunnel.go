@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a new tunnel, and returns two client access tokens for clients to use to
-// connect to the AWS IoT Secure Tunneling proxy server. .
+// connect to the AWS IoT Secure Tunneling proxy server.
 func (c *Client) OpenTunnel(ctx context.Context, params *OpenTunnelInput, optFns ...func(*Options)) (*OpenTunnelOutput, error) {
 	if params == nil {
 		params = &OpenTunnelInput{}

@@ -159,6 +159,10 @@ type CopyDBSnapshotInput struct {
 	// the Amazon RDS User Guide.
 	Tags []types.Tag
 
+	// The external custom Availability Zone (CAZ) identifier for the target CAZ.
+	// Example: rds-caz-aiqhTgQv.
+	TargetCustomAvailabilityZone *string
+
 	// Used by the SDK's PresignURL autofill customization to specify the region the of
 	// the client's request.
 	destinationRegion *string

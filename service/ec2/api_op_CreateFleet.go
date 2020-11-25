@@ -72,7 +72,7 @@ type CreateFleetInput struct {
 	// ResourceType must be fleet, otherwise the fleet request fails. To tag instances
 	// at launch, specify the tags in the launch template
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template).
-	// For information about tagging after launch, see Tagging Your Resources
+	// For information about tagging after launch, see Tagging your resources
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources).
 	TagSpecifications []types.TagSpecification
 
@@ -80,13 +80,23 @@ type CreateFleetInput struct {
 	// expires.
 	TerminateInstancesWithExpiration bool
 
-	// The type of the request. By default, the EC2 Fleet places an asynchronous
-	// request for your desired capacity, and maintains it by replenishing interrupted
-	// Spot Instances (maintain). A value of instant places a synchronous one-time
-	// request, and returns errors for any instances that could not be launched. A
-	// value of request places an asynchronous one-time request without maintaining
-	// capacity or submitting requests in alternative capacity pools if capacity is
-	// unavailable. For more information, see EC2 Fleet Request Types
+	// The type of request. The default value is maintain.
+	//
+	// * maintain - The EC2 Fleet
+	// plaees an asynchronous request for your desired capacity, and continues to
+	// maintain your desired Spot capacity by replenishing interrupted Spot
+	// Instances.
+	//
+	// * request - The EC2 Fleet places an asynchronous one-time request
+	// for your desired capacity, but does submit Spot requests in alternative capacity
+	// pools if Spot capacity is unavailable, and does not maintain Spot capacity if
+	// Spot Instances are interrupted.
+	//
+	// * instant - The EC2 Fleet places a synchronous
+	// one-time request for your desired capacity, and returns errors for any instances
+	// that could not be launched.
+	//
+	// For more information, see EC2 Fleet request types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-request-type)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	Type types.FleetType

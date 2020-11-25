@@ -11,28 +11,28 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates an Amazon Forecast predictor. In the request, you provide a dataset
-// group and either specify an algorithm or let Amazon Forecast choose the
-// algorithm for you using AutoML. If you specify an algorithm, you also can
-// override algorithm-specific hyperparameters. Amazon Forecast uses the chosen
-// algorithm to train a model using the latest version of the datasets in the
-// specified dataset group. The result is called a predictor. You then generate a
-// forecast using the CreateForecast operation. After training a model, the
-// CreatePredictor operation also evaluates it. To see the evaluation metrics, use
-// the GetAccuracyMetrics operation. Always review the evaluation metrics before
-// deciding to use the predictor to generate a forecast. Optionally, you can
+// Creates an Amazon Forecast predictor. In the request, provide a dataset group
+// and either specify an algorithm or let Amazon Forecast choose an algorithm for
+// you using AutoML. If you specify an algorithm, you also can override
+// algorithm-specific hyperparameters. Amazon Forecast uses the algorithm to train
+// a predictor using the latest version of the datasets in the specified dataset
+// group. You can then generate a forecast using the CreateForecast operation. To
+// see the evaluation metrics, use the GetAccuracyMetrics operation. You can
 // specify a featurization configuration to fill and aggregate the data fields in
 // the TARGET_TIME_SERIES dataset to improve model training. For more information,
 // see FeaturizationConfig. For RELATED_TIME_SERIES datasets, CreatePredictor
 // verifies that the DataFrequency specified when the dataset was created matches
 // the ForecastFrequency. TARGET_TIME_SERIES datasets don't have this restriction.
 // Amazon Forecast also verifies the delimiter and timestamp format. For more
-// information, see howitworks-datasets-groups. AutoML If you want Amazon Forecast
-// to evaluate each algorithm and choose the one that minimizes the objective
-// function, set PerformAutoML to true. The objective function is defined as the
-// mean of the weighted p10, p50, and p90 quantile losses. For more information,
-// see EvaluationResult. When AutoML is enabled, the following properties are
-// disallowed:
+// information, see howitworks-datasets-groups. By default, predictors are trained
+// and evaluated at the 0.1 (P10), 0.5 (P50), and 0.9 (P90) quantiles. You can
+// choose custom forecast types to train and evaluate your predictor by setting the
+// ForecastTypes. AutoML If you want Amazon Forecast to evaluate each algorithm and
+// choose the one that minimizes the objective function, set PerformAutoML to true.
+// The objective function is defined as the mean of the weighted losses over the
+// forecast types. By default, these are the p10, p50, and p90 quantile losses. For
+// more information, see EvaluationResult. When AutoML is enabled, the following
+// properties are disallowed:
 //
 // * AlgorithmArn
 //
@@ -40,13 +40,13 @@ import (
 //
 // * PerformHPO
 //
-// * TrainingParameters
+// *
+// TrainingParameters
 //
-// To
-// get a list of all of your predictors, use the ListPredictors operation. Before
-// you can use the predictor to create a forecast, the Status of the predictor must
-// be ACTIVE, signifying that training has completed. To get the status, use the
-// DescribePredictor operation.
+// To get a list of all of your predictors, use the
+// ListPredictors operation. Before you can use the predictor to create a forecast,
+// the Status of the predictor must be ACTIVE, signifying that training has
+// completed. To get the status, use the DescribePredictor operation.
 func (c *Client) CreatePredictor(ctx context.Context, params *CreatePredictorInput, optFns ...func(*Options)) (*CreatePredictorOutput, error) {
 	if params == nil {
 		params = &CreatePredictorInput{}
@@ -96,16 +96,17 @@ type CreatePredictorInput struct {
 	// *
 	// arn:aws:forecast:::algorithm/ARIMA
 	//
-	// * arn:aws:forecast:::algorithm/Deep_AR_Plus
-	// Supports hyperparameter optimization (HPO)
+	// * arn:aws:forecast:::algorithm/CNN-QR
 	//
 	// *
-	// arn:aws:forecast:::algorithm/ETS
+	// arn:aws:forecast:::algorithm/Deep_AR_Plus
 	//
-	// * arn:aws:forecast:::algorithm/NPTS
+	// * arn:aws:forecast:::algorithm/ETS
 	//
 	// *
-	// arn:aws:forecast:::algorithm/Prophet
+	// arn:aws:forecast:::algorithm/NPTS
+	//
+	// * arn:aws:forecast:::algorithm/Prophet
 	AlgorithmArn *string
 
 	// An AWS Key Management Service (KMS) key and the AWS Identity and Access
@@ -117,6 +118,12 @@ type CreatePredictorInput struct {
 	// and testing data. The evaluation parameters define how to perform the split and
 	// the number of iterations.
 	EvaluationParameters *types.EvaluationParameters
+
+	// Specifies the forecast types used to train a predictor. You can specify up to
+	// five forecast types. Forecast types can be quantiles from 0.01 to 0.99, by
+	// increments of 0.01 or higher. You can also specify the mean forecast with mean.
+	// The default value is ["0.10", "0.50", "0.9"].
+	ForecastTypes []string
 
 	// Provides hyperparameter override values for the algorithm. If you don't provide
 	// this parameter, Amazon Forecast uses default values. The individual algorithms
@@ -142,10 +149,12 @@ type CreatePredictorInput struct {
 	// optionally, supply the HyperParameterTuningJobConfig object. The tuning job
 	// specifies a metric to optimize, which hyperparameters participate in tuning, and
 	// the valid range for each tunable hyperparameter. In this case, you are required
-	// to specify an algorithm and PerformAutoML must be false. The following algorithm
-	// supports HPO:
+	// to specify an algorithm and PerformAutoML must be false. The following
+	// algorithms support HPO:
 	//
 	// * DeepAR+
+	//
+	// * CNN-QR
 	PerformHPO *bool
 
 	// The optional metadata that you apply to the predictor to help you categorize and

@@ -105,9 +105,13 @@ func (e *InvalidPaginationTokenException) ErrorCode() string {
 }
 func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception that indicates that the parameters passed to the API are invalid.
+// Exception that indicates that the parameters passed to the API are invalid. If
+// available, this exception includes details in additional properties.
 type InvalidParameterException struct {
 	Message *string
+
+	Reason ValidationExceptionReason
+	Fields []ValidationExceptionField
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -146,8 +150,8 @@ func (e *InvalidResourceException) ErrorFault() smithy.ErrorFault { return smith
 type LimitsExceededException struct {
 	Message *string
 
-	Limit int64
 	Type  *string
+	Limit int64
 }
 
 func (e *LimitsExceededException) Error() string {
@@ -217,9 +221,12 @@ func (e *OptimisticLockException) ErrorMessage() string {
 func (e *OptimisticLockException) ErrorCode() string             { return "OptimisticLockException" }
 func (e *OptimisticLockException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception indicating the specified resource already exists.
+// Exception indicating the specified resource already exists. If available, this
+// exception includes details in additional properties.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	ResourceType *string
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -234,9 +241,12 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception indicating the specified resource does not exist.
+// Exception indicating the specified resource does not exist. If available, this
+// exception includes details in additional properties.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ResourceType *string
 }
 
 func (e *ResourceNotFoundException) Error() string {

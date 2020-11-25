@@ -106,6 +106,52 @@ func (m *awsAwsjson11_serializeOpAddIpRoutes) HandleSerialize(ctx context.Contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpAddRegion struct {
+}
+
+func (*awsAwsjson11_serializeOpAddRegion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpAddRegion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AddRegionInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("DirectoryService_20150416.AddRegion")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentAddRegionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpAddTagsToResource struct {
 }
 
@@ -1210,6 +1256,52 @@ func (m *awsAwsjson11_serializeOpDescribeLDAPSSettings) HandleSerialize(ctx cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDescribeRegions struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeRegions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeRegions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeRegionsInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("DirectoryService_20150416.DescribeRegions")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeRegionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDescribeSharedDirectories struct {
 }
 
@@ -2123,6 +2215,52 @@ func (m *awsAwsjson11_serializeOpRemoveIpRoutes) HandleSerialize(ctx context.Con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpRemoveRegion struct {
+}
+
+func (*awsAwsjson11_serializeOpRemoveRegion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpRemoveRegion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RemoveRegionInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("DirectoryService_20150416.RemoveRegion")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentRemoveRegionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpRemoveTagsFromResource struct {
 }
 
@@ -3008,6 +3146,30 @@ func awsAwsjson11_serializeOpDocumentAddIpRoutesInput(v *AddIpRoutesInput, value
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentAddRegionInput(v *AddRegionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DirectoryId != nil {
+		ok := object.Key("DirectoryId")
+		ok.String(*v.DirectoryId)
+	}
+
+	if v.RegionName != nil {
+		ok := object.Key("RegionName")
+		ok.String(*v.RegionName)
+	}
+
+	if v.VPCSettings != nil {
+		ok := object.Key("VPCSettings")
+		if err := awsAwsjson11_serializeDocumentDirectoryVpcSettings(v.VPCSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentAddTagsToResourceInput(v *AddTagsToResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3574,6 +3736,28 @@ func awsAwsjson11_serializeOpDocumentDescribeLDAPSSettingsInput(v *DescribeLDAPS
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDescribeRegionsInput(v *DescribeRegionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DirectoryId != nil {
+		ok := object.Key("DirectoryId")
+		ok.String(*v.DirectoryId)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.RegionName != nil {
+		ok := object.Key("RegionName")
+		ok.String(*v.RegionName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDescribeSharedDirectoriesInput(v *DescribeSharedDirectoriesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3955,6 +4139,18 @@ func awsAwsjson11_serializeOpDocumentRemoveIpRoutesInput(v *RemoveIpRoutesInput,
 			return err
 		}
 	}
+
+	if v.DirectoryId != nil {
+		ok := object.Key("DirectoryId")
+		ok.String(*v.DirectoryId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentRemoveRegionInput(v *RemoveRegionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	if v.DirectoryId != nil {
 		ok := object.Key("DirectoryId")

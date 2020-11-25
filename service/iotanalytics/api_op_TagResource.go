@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Adds to or modifies the tags of the given resource. Tags are metadata which can
+// Adds to or modifies the tags of the given resource. Tags are metadata that can
 // be used to manage a resource.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {

@@ -4,6 +4,7 @@ package redshift
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
@@ -121,6 +122,99 @@ func addOperationDescribeClusterDbRevisionsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+// DescribeClusterDbRevisionsAPIClient is a client that implements the
+// DescribeClusterDbRevisions operation.
+type DescribeClusterDbRevisionsAPIClient interface {
+	DescribeClusterDbRevisions(context.Context, *DescribeClusterDbRevisionsInput, ...func(*Options)) (*DescribeClusterDbRevisionsOutput, error)
+}
+
+var _ DescribeClusterDbRevisionsAPIClient = (*Client)(nil)
+
+// DescribeClusterDbRevisionsPaginatorOptions is the paginator options for
+// DescribeClusterDbRevisions
+type DescribeClusterDbRevisionsPaginatorOptions struct {
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in the marker field of the response. You can retrieve the next set of
+	// response records by providing the returned marker value in the marker parameter
+	// and retrying the request. Default: 100 Constraints: minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeClusterDbRevisionsPaginator is a paginator for
+// DescribeClusterDbRevisions
+type DescribeClusterDbRevisionsPaginator struct {
+	options   DescribeClusterDbRevisionsPaginatorOptions
+	client    DescribeClusterDbRevisionsAPIClient
+	params    *DescribeClusterDbRevisionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeClusterDbRevisionsPaginator returns a new
+// DescribeClusterDbRevisionsPaginator
+func NewDescribeClusterDbRevisionsPaginator(client DescribeClusterDbRevisionsAPIClient, params *DescribeClusterDbRevisionsInput, optFns ...func(*DescribeClusterDbRevisionsPaginatorOptions)) *DescribeClusterDbRevisionsPaginator {
+	options := DescribeClusterDbRevisionsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeClusterDbRevisionsInput{}
+	}
+
+	return &DescribeClusterDbRevisionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeClusterDbRevisionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeClusterDbRevisions page.
+func (p *DescribeClusterDbRevisionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeClusterDbRevisionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeClusterDbRevisions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeClusterDbRevisions(region string) *awsmiddleware.RegisterServiceMetadata {

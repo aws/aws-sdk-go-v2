@@ -44,6 +44,35 @@ type AccessPoint struct {
 	VpcConfiguration *VpcConfiguration
 }
 
+// A container for the account level Amazon S3 Storage Lens configuration.
+type AccountLevel struct {
+
+	// A container for the S3 Storage Lens bucket-level configuration.
+	//
+	// This member is required.
+	BucketLevel *BucketLevel
+
+	// A container for the S3 Storage Lens activity metrics.
+	ActivityMetrics *ActivityMetrics
+}
+
+// A container for the activity metrics.
+type ActivityMetrics struct {
+
+	// A container for whether the activity metrics are enabled.
+	IsEnabled bool
+}
+
+// A container for the bucket-level configuration.
+type BucketLevel struct {
+
+	// A container for the bucket-level activity metrics for Amazon S3 Storage Lens
+	ActivityMetrics *ActivityMetrics
+
+	// A container for the bucket-level prefix-level metrics for S3 Storage Lens
+	PrefixLevel *PrefixLevel
+}
+
 // The container for the bucket configuration. This is not supported by Amazon S3
 // on Outposts buckets.
 type CreateBucketConfiguration struct {
@@ -52,6 +81,26 @@ type CreateBucketConfiguration struct {
 	// bucket on the US East (N. Virginia) Region (us-east-1), you do not need to
 	// specify the location. This is not supported by Amazon S3 on Outposts buckets.
 	LocationConstraint BucketLocationConstraint
+}
+
+// A container for what Amazon S3 Storage Lens will exclude.
+type Exclude struct {
+
+	// A container for the S3 Storage Lens bucket excludes.
+	Buckets []string
+
+	// A container for the S3 Storage Lens Region excludes.
+	Regions []string
+}
+
+// A container for what Amazon S3 Storage Lens configuration includes.
+type Include struct {
+
+	// A container for the S3 Storage Lens bucket includes.
+	Buckets []string
+
+	// A container for the S3 Storage Lens Region includes.
+	Regions []string
 }
 
 // A container element for the job configuration and status information returned by
@@ -394,6 +443,32 @@ type LifecycleRuleFilter struct {
 	Tag *S3Tag
 }
 
+// Part of ListStorageLensConfigurationResult. Each entry includes the description
+// of the S3 Storage Lens configuration, its home Region, whether it is enabled,
+// its Amazon Resource Name (ARN), and config ID.
+type ListStorageLensConfigurationEntry struct {
+
+	// A container for the S3 Storage Lens home Region. Your metrics data is stored and
+	// retained in your designated S3 Storage Lens home Region.
+	//
+	// This member is required.
+	HomeRegion *string
+
+	// A container for the S3 Storage Lens configuration ID.
+	//
+	// This member is required.
+	Id *string
+
+	// The ARN of the S3 Storage Lens configuration. This property is read-only.
+	//
+	// This member is required.
+	StorageLensArn *string
+
+	// A container for whether the S3 Storage Lens configuration is enabled. This
+	// property is required.
+	IsEnabled bool
+}
+
 // The container of the noncurrent version expiration.
 type NoncurrentVersionExpiration struct {
 
@@ -431,8 +506,27 @@ type PolicyStatus struct {
 	IsPublic bool
 }
 
+// A container for the prefix-level configuration.
+type PrefixLevel struct {
+
+	// A container for the prefix-level storage metrics for S3 Storage Lens.
+	//
+	// This member is required.
+	StorageMetrics *PrefixLevelStorageMetrics
+}
+
+// A container for the prefix-level storage metrics for S3 Storage Lens.
+type PrefixLevelStorageMetrics struct {
+
+	// A container for whether prefix-level storage metrics are enabled.
+	IsEnabled bool
+
+	//
+	SelectionCriteria *SelectionCriteria
+}
+
 // The PublicAccessBlock configuration that you want to apply to this Amazon S3
-// bucket. You can enable the configuration options in any combination. For more
+// account. You can enable the configuration options in any combination. For more
 // information about when Amazon S3 considers a bucket or object public, see The
 // Meaning of "Public"
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
@@ -473,11 +567,11 @@ type PublicAccessBlockConfiguration struct {
 
 	// Specifies whether Amazon S3 should restrict public bucket policies for buckets
 	// in this account. Setting this element to TRUE restricts access to buckets with
-	// public policies to only AWS services and authorized users within this account.
-	// Enabling this setting doesn't affect previously stored bucket policies, except
-	// that public and cross-account access within any public bucket policy, including
-	// non-public delegation to specific accounts, is blocked. This is not supported
-	// for Amazon S3 on Outposts.
+	// public policies to only AWS service principals and authorized users within this
+	// account. Enabling this setting doesn't affect previously stored bucket policies,
+	// except that public and cross-account access within any public bucket policy,
+	// including non-public delegation to specific accounts, is blocked. This is not
+	// supported for Amazon S3 on Outposts.
 	RestrictPublicBuckets bool
 }
 
@@ -528,6 +622,39 @@ type S3AccessControlPolicy struct {
 	CannedAccessControlList S3CannedAccessControlList
 }
 
+// A container for the bucket where the Amazon S3 Storage Lens metrics export files
+// are located.
+type S3BucketDestination struct {
+
+	// The account ID of the owner of the S3 Storage Lens metrics export bucket.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The Amazon Resource Name (ARN) of the bucket. This property is read-only and
+	// follows the following format:
+	// arn:aws:s3:us-east-1:example-account-id:bucket/your-destination-bucket-name
+	//
+	// This member is required.
+	Arn *string
+
+	//
+	//
+	// This member is required.
+	Format Format
+
+	// The schema version of the export file.
+	//
+	// This member is required.
+	OutputSchemaVersion OutputSchemaVersion
+
+	// The container for the type encryption of the metrics exports in this bucket.
+	Encryption *StorageLensDataExportEncryption
+
+	// The prefix of the destination bucket where the metrics export will be delivered.
+	Prefix *string
+}
+
 // Contains the configuration parameters for a PUT Copy object operation. S3 Batch
 // Operations passes each value through to the underlying PUT Copy object API. For
 // more information about the parameters for this operation, see PUT Object - Copy
@@ -562,7 +689,9 @@ type S3CopyObjectOperation struct {
 	// in the Batch Operations job.
 	ObjectLockRetainUntilDate *time.Time
 
-	//
+	// Specifies an optional metadata property for website redirects,
+	// x-amz-website-redirect-location. Allows webpage redirects if the object is
+	// accessed through a website endpoint.
 	RedirectLocation *string
 
 	//
@@ -574,10 +703,14 @@ type S3CopyObjectOperation struct {
 	//
 	StorageClass S3StorageClass
 
-	//
+	// Specifies the folder prefix into which you would like the objects to be copied.
+	// For example, to copy objects into a folder named "Folder1" in the destination
+	// bucket, set the TargetKeyPrefix to "Folder1/".
 	TargetKeyPrefix *string
 
-	//
+	// Specifies the destination bucket ARN for the batch copy operation. For example,
+	// to copy objects to a bucket named "destinationBucket", set the TargetResource to
+	// "arn:aws:s3:::destinationBucket".
 	TargetResource *string
 
 	//
@@ -769,6 +902,121 @@ type S3Tag struct {
 }
 
 //
+type SelectionCriteria struct {
+
+	// A container for the delimiter of the selection criteria being used.
+	Delimiter *string
+
+	// The max depth of the selection criteria
+	MaxDepth int32
+
+	// The minimum number of storage bytes percentage whose metrics will be selected.
+	// You must choose a value greater than or equal to 1.0.
+	MinStorageBytesPercentage float64
+}
+
+//
+type SSEKMS struct {
+
+	// A container for the ARN of the SSE-KMS encryption. This property is read-only
+	// and follows the following format:
+	// arn:aws:kms:us-east-1:example-account-id:key/example-9a73-4afc-8d29-8f5900cef44e
+	//
+	// This member is required.
+	KeyId *string
+}
+
+//
+type SSES3 struct {
+}
+
+// The AWS organization for your S3 Storage Lens.
+type StorageLensAwsOrg struct {
+
+	// A container for the Amazon Resource Name (ARN) of the AWS organization. This
+	// property is read-only and follows the following format:
+	// arn:aws:organizations:us-east-1:example-account-id:organization/o-ex2l495dck
+	//
+	// This member is required.
+	Arn *string
+}
+
+// A container for the Amazon S3 Storage Lens configuration.
+type StorageLensConfiguration struct {
+
+	// A container for all the account-level configurations of your S3 Storage Lens
+	// configuration.
+	//
+	// This member is required.
+	AccountLevel *AccountLevel
+
+	// A container for the Amazon S3 Storage Lens configuration ID.
+	//
+	// This member is required.
+	Id *string
+
+	// A container for whether the S3 Storage Lens configuration is enabled.
+	//
+	// This member is required.
+	IsEnabled bool
+
+	// A container for the AWS organization for this S3 Storage Lens configuration.
+	AwsOrg *StorageLensAwsOrg
+
+	// A container to specify the properties of your S3 Storage Lens metrics export
+	// including, the destination, schema and format.
+	DataExport *StorageLensDataExport
+
+	// A container for what is excluded in this configuration. This container can only
+	// be valid if there is no Include container submitted, and it's not empty.
+	Exclude *Exclude
+
+	// A container for what is included in this configuration. This container can only
+	// be valid if there is no Exclude container submitted, and it's not empty.
+	Include *Include
+
+	// The Amazon Resource Name (ARN) of the S3 Storage Lens configuration. This
+	// property is read-only and follows the following format:
+	// arn:aws:s3:us-east-1:example-account-id:storage-lens/your-dashboard-name
+	StorageLensArn *string
+}
+
+// A container to specify the properties of your S3 Storage Lens metrics export,
+// including the destination, schema, and format.
+type StorageLensDataExport struct {
+
+	// A container for the bucket where the S3 Storage Lens metrics export will be
+	// located.
+	//
+	// This member is required.
+	S3BucketDestination *S3BucketDestination
+}
+
+// A container for the encryption of the S3 Storage Lens metrics exports.
+type StorageLensDataExportEncryption struct {
+
+	//
+	SSEKMS *SSEKMS
+
+	//
+	SSES3 *SSES3
+}
+
+//
+type StorageLensTag struct {
+
+	//
+	//
+	// This member is required.
+	Key *string
+
+	//
+	//
+	// This member is required.
+	Value *string
+}
+
+//
 type Tagging struct {
 
 	// A collection for a set of tags.
@@ -779,7 +1027,7 @@ type Tagging struct {
 
 // Specifies when an object transitions to a specified storage class. For more
 // information about Amazon S3 Lifecycle configuration rules, see  Transitioning
-// Objects Using Amazon S3 Lifecycle
+// objects using Amazon S3 Lifecycle
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-transition-general-considerations.html)
 // in the Amazon Simple Storage Service Developer Guide.
 type Transition struct {

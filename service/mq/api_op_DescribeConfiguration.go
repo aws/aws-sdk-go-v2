@@ -50,8 +50,8 @@ type DescribeConfigurationOutput struct {
 	// Required. The description of the configuration.
 	Description *string
 
-	// Required. The type of broker engine. Note: Currently, Amazon MQ supports only
-	// ACTIVEMQ.
+	// Required. The type of broker engine. Note: Currently, Amazon MQ supports
+	// ACTIVEMQ and RABBITMQ.
 	EngineType types.EngineType
 
 	// Required. The version of the broker engine. For a list of supported engine

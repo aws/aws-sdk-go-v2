@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes the content of the specified data set.
+// Deletes the content of the specified dataset.
 func (c *Client) DeleteDatasetContent(ctx context.Context, params *DeleteDatasetContentInput, optFns ...func(*Options)) (*DeleteDatasetContentOutput, error) {
 	if params == nil {
 		params = &DeleteDatasetContentInput{}
@@ -28,12 +28,12 @@ func (c *Client) DeleteDatasetContent(ctx context.Context, params *DeleteDataset
 
 type DeleteDatasetContentInput struct {
 
-	// The name of the data set whose content is deleted.
+	// The name of the dataset whose content is deleted.
 	//
 	// This member is required.
 	DatasetName *string
 
-	// The version of the data set whose content is deleted. You can also use the
+	// The version of the dataset whose content is deleted. You can also use the
 	// strings "$LATEST" or "$LATEST_SUCCEEDED" to delete the latest or latest
 	// successfully completed data set. If not specified, "$LATEST_SUCCEEDED" is the
 	// default.

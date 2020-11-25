@@ -30,10 +30,9 @@ func (c *Client) DescribeAutoScalingGroups(ctx context.Context, params *Describe
 
 type DescribeAutoScalingGroupsInput struct {
 
-	// The names of the Auto Scaling groups. Each name can be a maximum of 1600
-	// characters. By default, you can only specify up to 50 names. You can optionally
-	// increase this limit using the MaxRecords parameter. If you omit this parameter,
-	// all Auto Scaling groups are described.
+	// The names of the Auto Scaling groups. By default, you can only specify up to 50
+	// names. You can optionally increase this limit using the MaxRecords parameter. If
+	// you omit this parameter, all Auto Scaling groups are described.
 	AutoScalingGroupNames []string
 
 	// The maximum number of items to return with this call. The default value is 50

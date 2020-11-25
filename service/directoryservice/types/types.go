@@ -196,6 +196,9 @@ type DirectoryDescription struct {
 	// The status of the RADIUS MFA server connection.
 	RadiusStatus RadiusStatus
 
+	// Lists the Regions where the directory has replicated.
+	RegionsInfo *RegionsInfo
+
 	// The method used when sharing a directory to determine whether the directory
 	// should be shared within your AWS organization (ORGANIZATIONS) or with any AWS
 	// account by sending a shared directory request (HANDSHAKE).
@@ -461,8 +464,9 @@ type RadiusSettings struct {
 	// attempted.
 	RadiusRetries int32
 
-	// An array of strings that contains the IP addresses of the RADIUS server
-	// endpoints, or the IP addresses of your RADIUS server load balancer.
+	// An array of strings that contains the fully qualified domain name (FQDN) or IP
+	// addresses of the RADIUS server endpoints, or the FQDN or IP addresses of your
+	// RADIUS server load balancer.
 	RadiusServers []string
 
 	// The amount of time, in seconds, to wait for the RADIUS server to respond.
@@ -473,6 +477,51 @@ type RadiusSettings struct {
 
 	// Not currently used.
 	UseSameUsername bool
+}
+
+// The replicated regional information for a directory.
+type RegionDescription struct {
+
+	// The desired number of domain controllers in the specified Region for the
+	// specified directory.
+	DesiredNumberOfDomainControllers int32
+
+	// The identifier of the directory.
+	DirectoryId *string
+
+	// The date and time that the Region description was last updated.
+	LastUpdatedDateTime *time.Time
+
+	// Specifies when the Region replication began.
+	LaunchTime *time.Time
+
+	// The name of the Region. For example, us-east-1.
+	RegionName *string
+
+	// Specifies if the Region is the primary Region or an additional Region.
+	RegionType RegionType
+
+	// The status of the replication process for the specified Region.
+	Status DirectoryStage
+
+	// The date and time that the Region status was last updated.
+	StatusLastUpdatedDateTime *time.Time
+
+	// Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
+	VpcSettings *DirectoryVpcSettings
+}
+
+// Provides information about the Regions that are configured for multi-Region
+// replication.
+type RegionsInfo struct {
+
+	// Lists the Regions where the directory has been replicated, excluding the primary
+	// Region.
+	AdditionalRegions []string
+
+	// The Region from where the AWS Managed Microsoft AD directory was originally
+	// created.
+	PrimaryRegion *string
 }
 
 // Information about a schema extension.

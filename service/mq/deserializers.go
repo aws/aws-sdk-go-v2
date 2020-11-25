@@ -4768,6 +4768,15 @@ func awsRestjson1_deserializeDocumentBrokerSummary(v **types.BrokerSummary, valu
 				sv.DeploymentMode = types.DeploymentMode(jtv)
 			}
 
+		case "engineType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EngineType to be of type string, got %T instead", value)
+				}
+				sv.EngineType = types.EngineType(jtv)
+			}
+
 		case "hostInstanceType":
 			if value != nil {
 				jtv, ok := value.(string)

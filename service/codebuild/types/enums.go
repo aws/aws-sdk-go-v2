@@ -448,6 +448,24 @@ func (ReportGroupSortByType) Values() []ReportGroupSortByType {
 	}
 }
 
+type ReportGroupStatusType string
+
+// Enum values for ReportGroupStatusType
+const (
+	ReportGroupStatusTypeActive   ReportGroupStatusType = "ACTIVE"
+	ReportGroupStatusTypeDeleting ReportGroupStatusType = "DELETING"
+)
+
+// Values returns all known values for ReportGroupStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReportGroupStatusType) Values() []ReportGroupStatusType {
+	return []ReportGroupStatusType{
+		"ACTIVE",
+		"DELETING",
+	}
+}
+
 type ReportPackagingType string
 
 // Enum values for ReportPackagingType

@@ -12,7 +12,8 @@ import (
 
 // Associates the specified security groups with the specified Application Load
 // Balancer. The specified security groups override the previously associated
-// security groups. You can't specify a security group for a Network Load Balancer.
+// security groups. You can't specify a security group for a Network Load Balancer
+// or Gateway Load Balancer.
 func (c *Client) SetSecurityGroups(ctx context.Context, params *SetSecurityGroupsInput, optFns ...func(*Options)) (*SetSecurityGroupsOutput, error) {
 	if params == nil {
 		params = &SetSecurityGroupsInput{}

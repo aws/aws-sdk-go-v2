@@ -17,7 +17,7 @@ import (
 // describe the load balancers for an Auto Scaling group, call the
 // DescribeLoadBalancers API. To detach the load balancer from the Auto Scaling
 // group, call the DetachLoadBalancers API. For more information, see Attaching a
-// Load Balancer to Your Auto Scaling Group
+// load balancer to your Auto Scaling group
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) AttachLoadBalancers(ctx context.Context, params *AttachLoadBalancersInput, optFns ...func(*Options)) (*AttachLoadBalancersOutput, error) {

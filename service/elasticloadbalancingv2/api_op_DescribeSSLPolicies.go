@@ -12,9 +12,11 @@ import (
 )
 
 // Describes the specified policies or all policies used for SSL negotiation. For
-// more information, see Security Policies
+// more information, see Security policies
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies)
-// in the Application Load Balancers Guide.
+// in the Application Load Balancers Guide or Security policies
+// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies)
+// in the Network Load Balancers Guide.
 func (c *Client) DescribeSSLPolicies(ctx context.Context, params *DescribeSSLPoliciesInput, optFns ...func(*Options)) (*DescribeSSLPoliciesOutput, error) {
 	if params == nil {
 		params = &DescribeSSLPoliciesInput{}

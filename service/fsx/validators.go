@@ -10,6 +10,26 @@ import (
 	"github.com/awslabs/smithy-go/middleware"
 )
 
+type validateOpAssociateFileSystemAliases struct {
+}
+
+func (*validateOpAssociateFileSystemAliases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateFileSystemAliases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateFileSystemAliasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateFileSystemAliasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelDataRepositoryTask struct {
 }
 
@@ -150,6 +170,46 @@ func (m *validateOpDeleteFileSystem) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeFileSystemAliases struct {
+}
+
+func (*validateOpDescribeFileSystemAliases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFileSystemAliases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFileSystemAliasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFileSystemAliasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateFileSystemAliases struct {
+}
+
+func (*validateOpDisassociateFileSystemAliases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateFileSystemAliases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateFileSystemAliasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateFileSystemAliasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -230,6 +290,10 @@ func (m *validateOpUpdateFileSystem) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateFileSystemAliasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateFileSystemAliases{}, middleware.After)
+}
+
 func addOpCancelDataRepositoryTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelDataRepositoryTask{}, middleware.After)
 }
@@ -256,6 +320,14 @@ func addOpDeleteBackupValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteFileSystemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFileSystem{}, middleware.After)
+}
+
+func addOpDescribeFileSystemAliasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFileSystemAliases{}, middleware.After)
+}
+
+func addOpDisassociateFileSystemAliasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateFileSystemAliases{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -351,14 +423,14 @@ func validateSelfManagedActiveDirectoryConfiguration(v *types.SelfManagedActiveD
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
-	if v.DnsIps == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DnsIps"))
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
 	}
 	if v.Password == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Password"))
 	}
-	if v.UserName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	if v.DnsIps == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DnsIps"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -372,11 +444,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -394,6 +466,24 @@ func validateTags(v []types.Tag) error {
 		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateFileSystemAliasesInput(v *AssociateFileSystemAliasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateFileSystemAliasesInput"}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
+	if v.Aliases == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Aliases"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -422,13 +512,13 @@ func validateOpCreateBackupInput(v *CreateBackupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateBackupInput"}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.FileSystemId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -442,6 +532,9 @@ func validateOpCreateDataRepositoryTaskInput(v *CreateDataRepositoryTaskInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDataRepositoryTaskInput"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
 	if v.FileSystemId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
 	}
@@ -457,9 +550,6 @@ func validateOpCreateDataRepositoryTaskInput(v *CreateDataRepositoryTaskInput) e
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -472,20 +562,20 @@ func validateOpCreateFileSystemFromBackupInput(v *CreateFileSystemFromBackupInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateFileSystemFromBackupInput"}
-	if v.SubnetIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
-	}
 	if v.BackupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BackupId"))
 	}
-	if v.WindowsConfiguration != nil {
-		if err := validateCreateFileSystemWindowsConfiguration(v.WindowsConfiguration); err != nil {
-			invalidParams.AddNested("WindowsConfiguration", err.(smithy.InvalidParamsError))
-		}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WindowsConfiguration != nil {
+		if err := validateCreateFileSystemWindowsConfiguration(v.WindowsConfiguration); err != nil {
+			invalidParams.AddNested("WindowsConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -500,6 +590,12 @@ func validateOpCreateFileSystemInput(v *CreateFileSystemInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateFileSystemInput"}
+	if len(v.FileSystemType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemType"))
+	}
+	if v.StorageCapacity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageCapacity"))
+	}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
@@ -512,12 +608,6 @@ func validateOpCreateFileSystemInput(v *CreateFileSystemInput) error {
 		if err := validateCreateFileSystemWindowsConfiguration(v.WindowsConfiguration); err != nil {
 			invalidParams.AddNested("WindowsConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.FileSystemType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("FileSystemType"))
-	}
-	if v.StorageCapacity == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StorageCapacity"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -546,18 +636,51 @@ func validateOpDeleteFileSystemInput(v *DeleteFileSystemInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteFileSystemInput"}
-	if v.LustreConfiguration != nil {
-		if err := validateDeleteFileSystemLustreConfiguration(v.LustreConfiguration); err != nil {
-			invalidParams.AddNested("LustreConfiguration", err.(smithy.InvalidParamsError))
-		}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
 	}
 	if v.WindowsConfiguration != nil {
 		if err := validateDeleteFileSystemWindowsConfiguration(v.WindowsConfiguration); err != nil {
 			invalidParams.AddNested("WindowsConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.LustreConfiguration != nil {
+		if err := validateDeleteFileSystemLustreConfiguration(v.LustreConfiguration); err != nil {
+			invalidParams.AddNested("LustreConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeFileSystemAliasesInput(v *DescribeFileSystemAliasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFileSystemAliasesInput"}
 	if v.FileSystemId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateFileSystemAliasesInput(v *DisassociateFileSystemAliasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateFileSystemAliasesInput"}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
+	if v.Aliases == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Aliases"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -33,6 +33,13 @@ type AnnotationValue struct {
 	StringValue *string
 }
 
+// The service within the service graph that has anomalously high fault rates.
+type AnomalousService struct {
+
+	//
+	ServiceId *ServiceId
+}
+
 // A list of Availability Zones corresponding to the segments in a trace.
 type AvailabilityZoneDetail struct {
 
@@ -235,6 +242,17 @@ type FaultStatistics struct {
 	TotalCount *int64
 }
 
+// The predicted high and low fault count. This is used to determine if a service
+// has become anomalous and if an insight should be created.
+type ForecastStatistics struct {
+
+	// The upper limit of fault counts for a service.
+	FaultCountHigh *int64
+
+	// The lower limit of fault counts for a service.
+	FaultCountLow *int64
+}
+
 // Details and metadata for a group.
 type Group struct {
 
@@ -313,6 +331,118 @@ type Http struct {
 	UserAgent *string
 }
 
+// When fault rates go outside of the expected range, X-Ray creates an insight.
+// Insights tracks emergent issues within your applications.
+type Insight struct {
+
+	// The categories that label and describe the type of insight.
+	Categories []InsightCategory
+
+	// The impact statistics of the client side service. This includes the number of
+	// requests to the client service and whether the requests were faults or okay.
+	ClientRequestImpactStatistics *RequestImpactStatistics
+
+	// The time, in Unix seconds, at which the insight ended.
+	EndTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the group that the insight belongs to.
+	GroupARN *string
+
+	// The name of the group that the insight belongs to.
+	GroupName *string
+
+	// The insights unique identifier.
+	InsightId *string
+
+	//
+	RootCauseServiceId *ServiceId
+
+	// The impact statistics of the root cause service. This includes the number of
+	// requests to the client service and whether the requests were faults or okay.
+	RootCauseServiceRequestImpactStatistics *RequestImpactStatistics
+
+	// The time, in Unix seconds, at which the insight began.
+	StartTime *time.Time
+
+	// The current state of the insight.
+	State InsightState
+
+	// A brief description of the insight.
+	Summary *string
+
+	// The service within the insight that is most impacted by the incident.
+	TopAnomalousServices []AnomalousService
+}
+
+// X-Ray reevaluates insights periodically until they are resolved, and records
+// each intermediate state in an event. You can review incident events in the
+// Impact Timeline on the Inspect page in the X-Ray console.
+type InsightEvent struct {
+
+	// The impact statistics of the client side service. This includes the number of
+	// requests to the client service and whether the requests were faults or okay.
+	ClientRequestImpactStatistics *RequestImpactStatistics
+
+	// The time, in Unix seconds, at which the event was recorded.
+	EventTime *time.Time
+
+	// The impact statistics of the root cause service. This includes the number of
+	// requests to the client service and whether the requests were faults or okay.
+	RootCauseServiceRequestImpactStatistics *RequestImpactStatistics
+
+	// A brief description of the event.
+	Summary *string
+
+	// The service during the event that is most impacted by the incident.
+	TopAnomalousServices []AnomalousService
+}
+
+// The connection between two service in an insight impact graph.
+type InsightImpactGraphEdge struct {
+
+	// Identifier of the edge. Unique within a service map.
+	ReferenceId *int32
+}
+
+// Information about an application that processed requests, users that made
+// requests, or downstream services, resources, and applications that an
+// application used.
+type InsightImpactGraphService struct {
+
+	// Identifier of the AWS account in which the service runs.
+	AccountId *string
+
+	// Connections to downstream services.
+	Edges []InsightImpactGraphEdge
+
+	// The canonical name of the service.
+	Name *string
+
+	// A list of names for the service, including the canonical name.
+	Names []string
+
+	// Identifier for the service. Unique within the service map.
+	ReferenceId *int32
+
+	// Identifier for the service. Unique within the service map.
+	//
+	// * AWS Resource - The
+	// type of an AWS resource. For example, AWS::EC2::Instance for an application
+	// running on Amazon EC2 or AWS::DynamoDB::Table for an Amazon DynamoDB table that
+	// the application used.
+	//
+	// * AWS Service - The type of an AWS service. For example,
+	// AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't target a
+	// specific table.
+	//
+	// * AWS Service - The type of an AWS service. For example,
+	// AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't target a
+	// specific table.
+	//
+	// * remote - A downstream service of indeterminate type.
+	Type *string
+}
+
 // The structure containing configurations related to insights.
 type InsightsConfiguration struct {
 
@@ -325,11 +455,69 @@ type InsightsConfiguration struct {
 	NotificationsEnabled *bool
 }
 
+// Information that describes an insight.
+type InsightSummary struct {
+
+	// Categories The categories that label and describe the type of insight.
+	Categories []InsightCategory
+
+	// The impact statistics of the client side service. This includes the number of
+	// requests to the client service and whether the requests were faults or okay.
+	ClientRequestImpactStatistics *RequestImpactStatistics
+
+	// The time, in Unix seconds, at which the insight ended.
+	EndTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the group that the insight belongs to.
+	GroupARN *string
+
+	// The name of the group that the insight belongs to.
+	GroupName *string
+
+	// The insights unique identifier.
+	InsightId *string
+
+	// The time, in Unix seconds, that the insight was last updated.
+	LastUpdateTime *time.Time
+
+	//
+	RootCauseServiceId *ServiceId
+
+	// The impact statistics of the root cause service. This includes the number of
+	// requests to the client service and whether the requests were faults or okay.
+	RootCauseServiceRequestImpactStatistics *RequestImpactStatistics
+
+	// The time, in Unix seconds, at which the insight began.
+	StartTime *time.Time
+
+	// The current state of the insight.
+	State InsightState
+
+	// A brief description of the insight.
+	Summary *string
+
+	// The service within the insight that is most impacted by the incident.
+	TopAnomalousServices []AnomalousService
+}
+
 // A list of EC2 instance IDs corresponding to the segments in a trace.
 type InstanceIdDetail struct {
 
 	// The ID of a corresponding EC2 instance.
 	Id *string
+}
+
+// Statistics that describe how the incident has impacted a service.
+type RequestImpactStatistics struct {
+
+	// The number of requests that have resulted in a fault,
+	FaultCount *int64
+
+	// The number of successful requests.
+	OkCount *int64
+
+	// The total number of requests to the service.
+	TotalCount *int64
 }
 
 // A list of resources ARNs corresponding to the segments in a trace.
@@ -783,6 +971,9 @@ type TimeSeriesServiceStatistics struct {
 
 	// The response time histogram for the selected entities.
 	ResponseTimeHistogram []HistogramEntry
+
+	// The forecasted high and low fault count values.
+	ServiceForecastStatistics *ForecastStatistics
 
 	// Response statistics for a service.
 	ServiceSummaryStatistics *ServiceStatistics

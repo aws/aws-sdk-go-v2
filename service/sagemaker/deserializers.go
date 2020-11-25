@@ -37970,6 +37970,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeDomainOutput(v **DescribeDomainOu
 				sv.HomeEfsFileSystemKmsKeyId = ptr.String(jtv)
 			}
 
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
+			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)

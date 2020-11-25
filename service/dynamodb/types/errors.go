@@ -82,6 +82,40 @@ func (e *ContinuousBackupsUnavailableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// There was a conflict when writing to the specified S3 bucket.
+type ExportConflictException struct {
+	Message *string
+}
+
+func (e *ExportConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ExportConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ExportConflictException) ErrorCode() string             { return "ExportConflictException" }
+func (e *ExportConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified export was not found.
+type ExportNotFoundException struct {
+	Message *string
+}
+
+func (e *ExportNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ExportNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ExportNotFoundException) ErrorCode() string             { return "ExportNotFoundException" }
+func (e *ExportNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified global table already exists.
 type GlobalTableAlreadyExistsException struct {
 	Message *string
@@ -189,6 +223,23 @@ func (e *InvalidEndpointException) ErrorMessage() string {
 }
 func (e *InvalidEndpointException) ErrorCode() string             { return "InvalidEndpointException" }
 func (e *InvalidEndpointException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified ExportTime is outside of the point in time recovery window.
+type InvalidExportTimeException struct {
+	Message *string
+}
+
+func (e *InvalidExportTimeException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidExportTimeException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidExportTimeException) ErrorCode() string             { return "InvalidExportTimeException" }
+func (e *InvalidExportTimeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An invalid restore time was specified. RestoreDateTime must be between
 // EarliestRestorableDateTime and LatestRestorableDateTime.

@@ -65,13 +65,13 @@ type UpdateBranchInput struct {
 	// Enables notifications for the branch.
 	EnableNotification *bool
 
-	// Performance mode optimizes for faster hosting performance by keeping content
-	// cached at the edge for a longer interval. Enabling performance mode will mean
-	// that hosting configuration or code changes can take up to 10 minutes to roll
-	// out.
+	// Enables performance mode for the branch. Performance mode optimizes for faster
+	// hosting performance by keeping content cached at the edge for a longer interval.
+	// When performance mode is enabled, hosting configuration or code changes can take
+	// up to 10 minutes to roll out.
 	EnablePerformanceMode *bool
 
-	// Enables pull request preview for this branch.
+	// Enables pull request previews for this branch.
 	EnablePullRequestPreview *bool
 
 	// The environment variables for the branch.

@@ -720,11 +720,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -755,17 +755,17 @@ func validateOpAddPermissionInput(v *AddPermissionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddPermissionInput"}
-	if v.Label == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Label"))
-	}
-	if v.ActionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ActionName"))
-	}
 	if v.TopicArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TopicArn"))
 	}
+	if v.Label == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Label"))
+	}
 	if v.AWSAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AWSAccountId"))
+	}
+	if v.ActionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -812,14 +812,14 @@ func validateOpCreatePlatformApplicationInput(v *CreatePlatformApplicationInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePlatformApplicationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.Platform == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Platform"))
 	}
 	if v.Attributes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1036,13 +1036,13 @@ func validateOpPublishInput(v *PublishInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PublishInput"}
+	if v.Message == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Message"))
+	}
 	if v.MessageAttributes != nil {
 		if err := validateMessageAttributeMap(v.MessageAttributes); err != nil {
 			invalidParams.AddNested("MessageAttributes", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Message == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Message"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1056,11 +1056,11 @@ func validateOpRemovePermissionInput(v *RemovePermissionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemovePermissionInput"}
-	if v.Label == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Label"))
-	}
 	if v.TopicArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TopicArn"))
+	}
+	if v.Label == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Label"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1074,11 +1074,11 @@ func validateOpSetEndpointAttributesInput(v *SetEndpointAttributesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetEndpointAttributesInput"}
-	if v.Attributes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
-	}
 	if v.EndpointArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointArn"))
+	}
+	if v.Attributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1125,11 +1125,11 @@ func validateOpSetSubscriptionAttributesInput(v *SetSubscriptionAttributesInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetSubscriptionAttributesInput"}
-	if v.AttributeName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
-	}
 	if v.SubscriptionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionArn"))
+	}
+	if v.AttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1143,11 +1143,11 @@ func validateOpSetTopicAttributesInput(v *SetTopicAttributesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetTopicAttributesInput"}
-	if v.AttributeName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
-	}
 	if v.TopicArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TopicArn"))
+	}
+	if v.AttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1161,11 +1161,11 @@ func validateOpSubscribeInput(v *SubscribeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SubscribeInput"}
-	if v.Protocol == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
-	}
 	if v.TopicArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TopicArn"))
+	}
+	if v.Protocol == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

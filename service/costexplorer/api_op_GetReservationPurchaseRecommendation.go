@@ -52,8 +52,8 @@ type GetReservationPurchaseRecommendationInput struct {
 	AccountId *string
 
 	// The account scope that you want your recommendations for. Amazon Web Services
-	// calculates recommendations including the master account and member accounts if
-	// the value is set to PAYER. If the value is LINKED, recommendations are
+	// calculates recommendations including the management account and member accounts
+	// if the value is set to PAYER. If the value is LINKED, recommendations are
 	// calculated for individual member accounts only.
 	AccountScope types.AccountScope
 

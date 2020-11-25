@@ -1139,45 +1139,42 @@ type ProjectCache struct {
 	// * S3: This is the S3 bucket name/prefix.
 	Location *string
 
-	// If you use a LOCAL cache, the local cache mode. You can use one or more local
-	// cache modes at the same time.
+	// An array of strings that specify the local cache modes. You can use one or more
+	// local cache modes at the same time. This is only used for LOCAL cache types.
+	// Possible values are: LOCAL_SOURCE_CACHE Caches Git metadata for primary and
+	// secondary sources. After the cache is created, subsequent builds pull only the
+	// change between commits. This mode is a good choice for projects with a clean
+	// working directory and a source that is a large Git repository. If you choose
+	// this option and your project does not use a Git repository (GitHub, GitHub
+	// Enterprise, or Bitbucket), the option is ignored. LOCAL_DOCKER_LAYER_CACHE
+	// Caches existing Docker layers. This mode is a good choice for projects that
+	// build or pull large Docker images. It can prevent the performance issues caused
+	// by pulling large Docker images down from the network.
 	//
-	// * LOCAL_SOURCE_CACHE mode caches Git metadata for
-	// primary and secondary sources. After the cache is created, subsequent builds
-	// pull only the change between commits. This mode is a good choice for projects
-	// with a clean working directory and a source that is a large Git repository. If
-	// you choose this option and your project does not use a Git repository (GitHub,
-	// GitHub Enterprise, or Bitbucket), the option is ignored.
+	// * You can use a Docker
+	// layer cache in the Linux environment only.
 	//
-	// *
-	// LOCAL_DOCKER_LAYER_CACHE mode caches existing Docker layers. This mode is a good
-	// choice for projects that build or pull large Docker images. It can prevent the
-	// performance issues caused by pulling large Docker images down from the
-	// network.
+	// * The privileged flag must be set so
+	// that your project has the required Docker permissions.
 	//
-	// * You can use a Docker layer cache in the Linux environment only.
+	// * You should consider
+	// the security implications before you use a Docker layer
+	// cache.
 	//
-	// *
-	// The privileged flag must be set so that your project has the required Docker
-	// permissions.
+	// LOCAL_CUSTOM_CACHE Caches directories you specify in the buildspec file.
+	// This mode is a good choice if your build scenario is not suited to one of the
+	// other three local cache modes. If you use a custom cache:
 	//
-	// * You should consider the security implications before you use a
-	// Docker layer cache.
+	// * Only directories
+	// can be specified for caching. You cannot specify individual files.
 	//
-	// * LOCAL_CUSTOM_CACHE mode caches directories you specify in
-	// the buildspec file. This mode is a good choice if your build scenario is not
-	// suited to one of the other three local cache modes. If you use a custom
-	// cache:
+	// * Symlinks
+	// are used to reference cached directories.
 	//
-	// * Only directories can be specified for caching. You cannot specify
-	// individual files.
-	//
-	// * Symlinks are used to reference cached directories.
-	//
-	// *
-	// Cached directories are linked to your build before it downloads its project
-	// sources. Cached items are overridden if a source item has the same name.
-	// Directories are specified using cache paths in the buildspec file.
+	// * Cached directories are linked to
+	// your build before it downloads its project sources. Cached items are overridden
+	// if a source item has the same name. Directories are specified using cache paths
+	// in the buildspec file.
 	Modes []CacheMode
 }
 
@@ -1226,11 +1223,10 @@ type ProjectEnvironment struct {
 	//
 	// * For an image tag: /:. For example,
 	// in the Docker repository that CodeBuild uses to manage its Docker images, this
-	// would be aws/codebuild/standard:4.0. To specify the latest version of this
-	// image, this would be aws/codebuild/standard:latest.
+	// would be aws/codebuild/standard:4.0.
 	//
-	// * For an image digest: /@.
-	// For example, to specify an image with the digest
+	// * For an image digest: /@. For example, to
+	// specify an image with the digest
 	// "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf," use
 	// /@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf.
 	//
@@ -1260,7 +1256,11 @@ type ProjectEnvironment struct {
 	// This member is required.
 	Type EnvironmentType
 
-	// The certificate to use with this build project.
+	// The ARN of the Amazon Simple Storage Service (Amazon S3) bucket, path prefix,
+	// and object key that contains the PEM-encoded certificate for the build project.
+	// For more information, see certificate
+	// (https://docs.aws.amazon.com/codebuild/latest/userguide/create-project-cli.html#cli.environment.certificate)
+	// in the AWS CodeBuild User Guide.
 	Certificate *string
 
 	// A set of environment variables to make available to builds for this build
@@ -1309,8 +1309,8 @@ type ProjectFileSystemLocation struct {
 
 	// The name used to access a file system created by Amazon EFS. CodeBuild creates
 	// an environment variable by appending the identifier in all capital letters to
-	// CODEBUILD_. For example, if you specify my-efs for identifier, a new environment
-	// variable is create named CODEBUILD_MY-EFS. The identifier is used to mount your
+	// CODEBUILD_. For example, if you specify my_efs for identifier, a new environment
+	// variable is create named CODEBUILD_MY_EFS. The identifier is used to mount your
 	// file system.
 	Identifier *string
 
@@ -1616,6 +1616,8 @@ type ReportGroup struct {
 
 	// The name of a ReportGroup.
 	Name *string
+
+	Status ReportGroupStatusType
 
 	// A list of tag key and value pairs associated with this report group. These tags
 	// are available for use by AWS services that support AWS CodeBuild report group

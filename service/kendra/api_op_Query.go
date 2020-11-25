@@ -93,6 +93,9 @@ type QueryInput struct {
 	// don't provide sorting configuration, the results are sorted by the relevance
 	// that Amazon Kendra determines for the result.
 	SortingConfiguration *types.SortingConfiguration
+
+	// The user context token.
+	UserContext *types.UserContext
 }
 
 type QueryOutput struct {

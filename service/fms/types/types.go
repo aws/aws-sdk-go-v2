@@ -122,8 +122,8 @@ type ComplianceViolator struct {
 	// The resource type. This is in the format shown in the AWS Resource Types
 	// Reference
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
-	// For example: AWS::ElasticLoadBalancingV2::LoadBalancer or
-	// AWS::CloudFront::Distribution.
+	// For example: AWS::ElasticLoadBalancingV2::LoadBalancer,
+	// AWS::CloudFront::Distribution, or AWS::NetworkFirewall::FirewallPolicy.
 	ResourceType *string
 
 	// The reason that the resource is not protected by the policy.
@@ -148,6 +148,99 @@ type EvaluationResult struct {
 	// considered noncompliant if it doesn't comply with the rules of the policy and
 	// remediation is disabled or not possible.
 	ViolatorCount int64
+}
+
+// Violation details for AWS Network Firewall for a subnet that's not associated to
+// the expected Firewall Manager managed route table.
+type NetworkFirewallMissingExpectedRTViolation struct {
+
+	// The Availability Zone of a violating subnet.
+	AvailabilityZone *string
+
+	// The resource ID of the current route table that's associated with the subnet, if
+	// one is available.
+	CurrentRouteTable *string
+
+	// The resource ID of the route table that should be associated with the subnet.
+	ExpectedRouteTable *string
+
+	// The resource ID of the VPC associated with a violating subnet.
+	VPC *string
+
+	// The ID of the AWS Network Firewall or VPC resource that's in violation.
+	ViolationTarget *string
+}
+
+// Violation details for AWS Network Firewall for a subnet that doesn't have a
+// Firewall Manager managed firewall in its VPC.
+type NetworkFirewallMissingFirewallViolation struct {
+
+	// The Availability Zone of a violating subnet.
+	AvailabilityZone *string
+
+	// The reason the resource has this violation, if one is available.
+	TargetViolationReason *string
+
+	// The resource ID of the VPC associated with a violating subnet.
+	VPC *string
+
+	// The ID of the AWS Network Firewall or VPC resource that's in violation.
+	ViolationTarget *string
+}
+
+// Violation details for AWS Network Firewall for an Availability Zone that's
+// missing the expected Firewall Manager managed subnet.
+type NetworkFirewallMissingSubnetViolation struct {
+
+	// The Availability Zone of a violating subnet.
+	AvailabilityZone *string
+
+	// The reason the resource has this violation, if one is available.
+	TargetViolationReason *string
+
+	// The resource ID of the VPC associated with a violating subnet.
+	VPC *string
+
+	// The ID of the AWS Network Firewall or VPC resource that's in violation.
+	ViolationTarget *string
+}
+
+// The definition of the AWS Network Firewall firewall policy.
+type NetworkFirewallPolicyDescription struct {
+
+	// The stateful rule groups that are used in the Network Firewall firewall policy.
+	StatefulRuleGroups []StatefulRuleGroup
+
+	// Names of custom actions that are available for use in the stateless default
+	// actions settings.
+	StatelessCustomActions []string
+
+	// The actions to take on packets that don't match any of the stateless rule
+	// groups.
+	StatelessDefaultActions []string
+
+	// The actions to take on packet fragments that don't match any of the stateless
+	// rule groups.
+	StatelessFragmentDefaultActions []string
+
+	// The stateless rule groups that are used in the Network Firewall firewall policy.
+	StatelessRuleGroups []StatelessRuleGroup
+}
+
+// Violation details for AWS Network Firewall for a firewall policy that has a
+// different NetworkFirewallPolicyDescription than is required by the Firewall
+// Manager policy.
+type NetworkFirewallPolicyModifiedViolation struct {
+
+	// The policy that's currently in use in the individual account.
+	CurrentPolicyDescription *NetworkFirewallPolicyDescription
+
+	// The policy that should be in use in the individual account in order to be
+	// compliant.
+	ExpectedPolicyDescription *NetworkFirewallPolicyDescription
+
+	// The ID of the AWS Network Firewall or VPC resource that's in violation.
+	ViolationTarget *string
 }
 
 // The reference rule that partially matches the ViolationTarget rule and violation
@@ -190,7 +283,8 @@ type Policy struct {
 	// a security group common policy, valid values are AWS::EC2::NetworkInterface and
 	// AWS::EC2::Instance. For a security group content audit policy, valid values are
 	// AWS::EC2::SecurityGroup, AWS::EC2::NetworkInterface, and AWS::EC2::Instance. For
-	// a security group usage audit policy, the value is AWS::EC2::SecurityGroup.
+	// a security group usage audit policy, the value is AWS::EC2::SecurityGroup. For
+	// an AWS Network Firewall policy, the value is AWS::EC2::VPC.
 	//
 	// This member is required.
 	ResourceType *string
@@ -351,7 +445,8 @@ type PolicySummary struct {
 	// a security group common policy, valid values are AWS::EC2::NetworkInterface and
 	// AWS::EC2::Instance. For a security group content audit policy, valid values are
 	// AWS::EC2::SecurityGroup, AWS::EC2::NetworkInterface, and AWS::EC2::Instance. For
-	// a security group usage audit policy, the value is AWS::EC2::SecurityGroup.
+	// a security group usage audit policy, the value is AWS::EC2::SecurityGroup. For
+	// an AWS Network Firewall policy, the value is AWS::EC2::VPC.
 	ResourceType *string
 
 	// The service that the policy is using to protect the resources. This specifies
@@ -437,6 +532,25 @@ type ResourceViolation struct {
 
 	// Violation details for security groups.
 	AwsVPCSecurityGroupViolation *AwsVPCSecurityGroupViolation
+
+	// Violation detail for an Network Firewall policy that indicates that a subnet is
+	// not associated with the expected Firewall Manager managed route table.
+	NetworkFirewallMissingExpectedRTViolation *NetworkFirewallMissingExpectedRTViolation
+
+	// Violation detail for an Network Firewall policy that indicates that a subnet has
+	// no Firewall Manager managed firewall in its VPC.
+	NetworkFirewallMissingFirewallViolation *NetworkFirewallMissingFirewallViolation
+
+	// Violation detail for an Network Firewall policy that indicates that an
+	// Availability Zone is missing the expected Firewall Manager managed subnet.
+	NetworkFirewallMissingSubnetViolation *NetworkFirewallMissingSubnetViolation
+
+	// Violation detail for an Network Firewall policy that indicates that a firewall
+	// policy in an individual account has been modified in a way that makes it
+	// noncompliant. For example, the individual account owner might have deleted a
+	// rule group, changed the priority of a stateless rule group, or changed a policy
+	// default action.
+	NetworkFirewallPolicyModifiedViolation *NetworkFirewallPolicyModifiedViolation
 }
 
 // Remediation option for the rule specified in the ViolationTarget.
@@ -497,24 +611,27 @@ type SecurityServicePolicyData struct {
 	// For service type SHIELD_ADVANCED, this is an empty string.
 	//
 	// * Example:
-	// WAFV2"ManagedServiceData":
-	// "{\"type\":\"WAFV2\",\"defaultAction\":{\"type\":\"ALLOW\"},\"preProcessRuleGroups\":[{\"managedRuleGroupIdentifier\":null,\"ruleGroupArn\":\"rulegrouparn\",\"overrideAction\":{\"type\":\"COUNT\"},\"excludeRules\":[{\"name\":\"EntityName\"}],\"ruleGroupType\":\"RuleGroup\"}],\"postProcessRuleGroups\":[{\"managedRuleGroupIdentifier\":{\"managedRuleGroupName\":\"AWSManagedRulesAdminProtectionRuleSet\",\"vendorName\":\"AWS\"},\"ruleGroupArn\":\"rulegrouparn\",\"overrideAction\":{\"type\":\"NONE\"},\"excludeRules\":[],\"ruleGroupType\":\"ManagedRuleGroup\"}],\"overrideCustomerWebACLAssociation\":false}"
-	//
-	// *
-	// Example: WAF Classic"ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\":
-	// [{\"id\": \"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\" :
-	// {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}
+	// NETWORK_FIREWALL"{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-west-1:1234567891011:stateless-rulegroup/rulegroup2\",\"priority\":10}],\"networkFirewallStatelessDefaultActions\":[\"aws:pass\",\"custom1\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"custom2\",\"aws:pass\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"custom1\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"dimension1\"}]}}},{\"actionName\":\"custom2\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"dimension2\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-west-1:1234567891011:stateful-rulegroup/rulegroup1\"}],\"networkFirewallOrchestrationConfig\":{\"singleFirewallEndpointPerVPC\":true,\"allowedIPV4CidrList\":[\"10.24.34.0/28\"]}
+	// }"
 	//
 	// * Example:
-	// SECURITY_GROUPS_COMMON"SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_COMMON","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false,
-	// \"applyToAllEC2InstanceENIs\":false,\"securityGroups\":[{\"id\":\"
-	// sg-000e55995d61a06bd\"}]}"},"RemediationEnabled":false,"ResourceType":"AWS::EC2::NetworkInterface"}
+	// WAFV2"{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesAmazonIpReputationList\"},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[]}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":{\"logDestinationConfigs\":[\"arn:aws:firehose:us-west-2:12345678912:deliverystream/aws-waf-logs-fms-admin-destination\"],\"redactedFields\":[{\"redactedFieldType\":\"SingleHeader\",\"redactedFieldValue\":\"Cookies\"},{\"redactedFieldType\":\"Method\"}]}}"
+	// In the loggingConfiguration, you can specify one logDestinationConfigs, you can
+	// optionally provide up to 20 redactedFields, and the RedactedFieldType must be
+	// one of URI, QUERY_STRING, HEADER, or METHOD.
 	//
-	// *
-	// Example:
-	// SECURITY_GROUPS_CONTENT_AUDIT"SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_CONTENT_AUDIT","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_CONTENT_AUDIT\",\"securityGroups\":[{\"id\":\"
-	// sg-000e55995d61a06bd
-	// \"}],\"securityGroupAction\":{\"type\":\"ALLOW\"}}"},"RemediationEnabled":false,"ResourceType":"AWS::EC2::NetworkInterface"}
+	// * Example: WAF Classic"{\"type\":
+	// \"WAF\", \"ruleGroups\": [{\"id\":\"12345678-1bcd-9012-efga-0987654321ab\",
+	// \"overrideAction\" : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\":
+	// \"BLOCK\"}}"
+	//
+	// * Example:
+	// SECURITY_GROUPS_COMMON"{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false,
+	// \"applyToAllEC2InstanceENIs\":false,\"securityGroups\":[{\"id\":\"
+	// sg-000e55995d61a06bd\"}]}"
+	//
+	// * Example:
+	// SECURITY_GROUPS_CONTENT_AUDIT"{\"type\":\"SECURITY_GROUPS_CONTENT_AUDIT\",\"securityGroups\":[{\"id\":\"sg-000e55995d61a06bd\"}],\"securityGroupAction\":{\"type\":\"ALLOW\"}}"
 	// The security group action for content audit can be ALLOW or DENY. For ALLOW, all
 	// in-scope security group rules must be within the allowed range of the policy's
 	// security group rules. For DENY, all in-scope security group rules must not
@@ -522,9 +639,34 @@ type SecurityServicePolicyData struct {
 	// security group.
 	//
 	// * Example:
-	// SECURITY_GROUPS_USAGE_AUDIT"SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_USAGE_AUDIT","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"deleteUnusedSecurityGroups\":true,\"coalesceRedundantSecurityGroups\":true}"},"RemediationEnabled":false,"Resou
-	// rceType":"AWS::EC2::SecurityGroup"}
+	// SECURITY_GROUPS_USAGE_AUDIT"{\"type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"deleteUnusedSecurityGroups\":true,\"coalesceRedundantSecurityGroups\":true}"
 	ManagedServiceData *string
+}
+
+// AWS Network Firewall stateful rule group, used in a
+// NetworkFirewallPolicyDescription.
+type StatefulRuleGroup struct {
+
+	// The resource ID of the rule group.
+	ResourceId *string
+
+	// The name of the rule group.
+	RuleGroupName *string
+}
+
+// AWS Network Firewall stateless rule group, used in a
+// NetworkFirewallPolicyDescription.
+type StatelessRuleGroup struct {
+
+	// The priority of the rule group. AWS Network Firewall evaluates the stateless
+	// rule groups in a firewall policy starting from the lowest priority setting.
+	Priority int32
+
+	// The resource ID of the rule group.
+	ResourceId *string
+
+	// The name of the rule group.
+	RuleGroupName *string
 }
 
 // A collection of key:value pairs associated with an AWS resource. The key:value

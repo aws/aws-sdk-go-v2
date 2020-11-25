@@ -76,31 +76,28 @@ type CopyImageInput struct {
 	// Amazon Elastic Compute Cloud User Guide.
 	Encrypted bool
 
-	// An identifier for the symmetric AWS Key Management Service (AWS KMS) customer
-	// master key (CMK) to use when creating the encrypted volume. This parameter is
-	// only required if you want to use a non-default CMK; if this parameter is not
-	// specified, the default CMK for EBS is used. If a KmsKeyId is specified, the
-	// Encrypted flag must also be set. To specify a CMK, use its key ID, Amazon
-	// Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix
-	// it with "alias/". For example:
+	// The identifier of the symmetric AWS Key Management Service (AWS KMS) customer
+	// master key (CMK) to use when creating encrypted volumes. If this parameter is
+	// not specified, your AWS managed CMK for EBS is used. If you specify a CMK, you
+	// must also set the encrypted state to true. You can specify a CMK using any of
+	// the following:
 	//
-	// * Key ID:
-	// 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key ARN:
-	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	// * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
 	//
 	// *
-	// Alias name: alias/ExampleAlias
+	// Key alias. For example, alias/ExampleAlias.
 	//
-	// * Alias ARN:
-	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
+	// * Key ARN. For example,
+	// arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
 	//
-	// AWS parses KmsKeyId
-	// asynchronously, meaning that the action you call may appear to complete even
-	// though you provided an invalid identifier. This action will eventually report
-	// failure. The specified CMK must exist in the Region that the snapshot is being
-	// copied to. Amazon EBS does not support asymmetric CMKs.
+	// *
+	// Alias ARN. For example,
+	// arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
+	//
+	// AWS authenticates the
+	// CMK asynchronously. Therefore, if you specify an identifier that is not valid,
+	// the action can appear to complete, but eventually fails. The specified CMK must
+	// exist in the destination Region. Amazon EBS does not support asymmetric CMKs.
 	KmsKeyId *string
 }
 

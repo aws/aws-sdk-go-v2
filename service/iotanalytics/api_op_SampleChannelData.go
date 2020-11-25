@@ -38,7 +38,7 @@ type SampleChannelDataInput struct {
 	// The end of the time window from which sample messages are retrieved.
 	EndTime *time.Time
 
-	// The number of sample messages to be retrieved. The limit is 10, the default is
+	// The number of sample messages to be retrieved. The limit is 10. The default is
 	// also 10.
 	MaxMessages *int32
 

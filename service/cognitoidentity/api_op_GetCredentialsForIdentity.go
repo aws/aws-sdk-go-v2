@@ -127,7 +127,6 @@ func newServiceMetadataMiddleware_opGetCredentialsForIdentity(region string) *aw
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "cognito-identity",
 		OperationName: "GetCredentialsForIdentity",
 	}
 }

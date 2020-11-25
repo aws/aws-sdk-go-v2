@@ -196,6 +196,21 @@ type EncryptionConfig struct {
 	RoleArn *string
 }
 
+// Provides detailed error metrics to evaluate the performance of a predictor. This
+// object is part of the Metrics object.
+type ErrorMetric struct {
+
+	// Forecast types can be quantiles from 0.01 to 0.99 (by increments of 0.01), and
+	// the mean.
+	ForecastType *string
+
+	// The root-mean-square error (RMSE).
+	RMSE *float64
+
+	// The weighted absolute percentage error (WAPE).
+	WAPE *float64
+}
+
 // Parameters that define how to split a dataset into training data and testing
 // data, and the number of iterations to perform. These parameters are specified in
 // the predefined algorithms but you can override them in the CreatePredictor
@@ -345,6 +360,12 @@ type FeaturizationMethod struct {
 	// median, mean, min, max
 	//
 	// * futurefill: zero, value, median, mean, min, max
+	//
+	// To
+	// set a filling method to a specific value, set the fill parameter to value and
+	// define the value in a corresponding _value parameter. For example, to set
+	// backfilling to a value of 2, include the following: "backfill": "value" and
+	// "backfill_value":"2".
 	FeaturizationMethodParameters map[string]string
 }
 
@@ -524,7 +545,11 @@ type IntegerParameterRange struct {
 // object is part of the WindowSummary object.
 type Metrics struct {
 
-	// The root mean square error (RMSE).
+	// Provides detailed error metrics on forecast type, root-mean square-error (RMSE),
+	// and weighted average percentage error (WAPE).
+	ErrorMetrics []ErrorMetric
+
+	// The root-mean-square error (RMSE).
 	RMSE *float64
 
 	// An array of weighted quantile losses. Quantiles divide a probability
@@ -694,41 +719,10 @@ type Statistics struct {
 }
 
 // Describes a supplementary feature of a dataset group. This object is part of the
-// InputDataConfig object. The only supported feature is a holiday calendar. If you
-// use the calendar, all data in the datasets should belong to the same country as
-// the calendar. For the holiday calendar data, see the Jollyday
-// (http://jollyday.sourceforge.net/data.html) web site. India and Korea's holidays
-// are not included in the Jollyday library, but both are supported by Amazon
-// Forecast. Their holidays are: "IN" - INDIA
-//
-// * JANUARY 26 - REPUBLIC DAY
-//
-// *
-// AUGUST 15 - INDEPENDENCE DAY
-//
-// * OCTOBER 2 GANDHI'S BIRTHDAY
-//
-// "KR" - KOREA
-//
-// *
-// JANUARY 1 - NEW YEAR
-//
-// * MARCH 1 - INDEPENDENCE MOVEMENT DAY
-//
-// * MAY 5 -
-// CHILDREN'S DAY
-//
-// * JUNE 6 - MEMORIAL DAY
-//
-// * AUGUST 15 - LIBERATION DAY
-//
-// * OCTOBER
-// 3 - NATIONAL FOUNDATION DAY
-//
-// * OCTOBER 9 - HANGEUL DAY
-//
-// * DECEMBER 25 -
-// CHRISTMAS DAY
+// InputDataConfig object. The only supported feature is Holidays. If you use the
+// calendar, all data in the datasets should belong to the same country as the
+// calendar. For the holiday calendar data, see the Jollyday
+// (http://jollyday.sourceforge.net/data.html) website.
 type SupplementaryFeature struct {
 
 	// The name of the feature. This must be "holiday".
@@ -738,21 +732,39 @@ type SupplementaryFeature struct {
 
 	// One of the following 2 letter country codes:
 	//
-	// * "AR" - ARGENTINA
+	// * "AL" - ALBANIA
 	//
-	// * "AT" -
-	// AUSTRIA
+	// * "AR" -
+	// ARGENTINA
+	//
+	// * "AT" - AUSTRIA
 	//
 	// * "AU" - AUSTRALIA
 	//
-	// * "BE" - BELGIUM
+	// * "BA" - BOSNIA HERZEGOVINA
+	//
+	// *
+	// "BE" - BELGIUM
+	//
+	// * "BG" - BULGARIA
+	//
+	// * "BO" - BOLIVIA
 	//
 	// * "BR" - BRAZIL
 	//
-	// * "CA" -
-	// CANADA
+	// * "BY" -
+	// BELARUS
 	//
-	// * "CN" - CHINA
+	// * "CA" - CANADA
+	//
+	// * "CL" - CHILE
+	//
+	// * "CO" - COLOMBIA
+	//
+	// * "CR" - COSTA
+	// RICA
+	//
+	// * "HR" - CROATIA
 	//
 	// * "CZ" - CZECH REPUBLIC
 	//
@@ -761,54 +773,112 @@ type SupplementaryFeature struct {
 	// * "EC" -
 	// ECUADOR
 	//
+	// * "EE" - ESTONIA
+	//
+	// * "ET" - ETHIOPIA
+	//
 	// * "FI" - FINLAND
 	//
-	// * "FR" - FRANCE
+	// * "FR" -
+	// FRANCE
 	//
 	// * "DE" - GERMANY
 	//
-	// * "HU" -
-	// HUNGARY
+	// * "GR" - GREECE
+	//
+	// * "HU" - HUNGARY
+	//
+	// * "IS" - ICELAND
+	//
+	// *
+	// "IN" - INDIA
 	//
 	// * "IE" - IRELAND
-	//
-	// * "IN" - INDIA
 	//
 	// * "IT" - ITALY
 	//
 	// * "JP" - JAPAN
 	//
-	// *
-	// "KR" - KOREA
+	// * "KZ" -
+	// KAZAKHSTAN
+	//
+	// * "KR" - KOREA
+	//
+	// * "LV" - LATVIA
+	//
+	// * "LI" - LIECHTENSTEIN
+	//
+	// * "LT" -
+	// LITHUANIA
 	//
 	// * "LU" - LUXEMBOURG
 	//
-	// * "MX" - MEXICO
+	// * "MK" - MACEDONIA
+	//
+	// * "MT" - MALTA
+	//
+	// * "MX" -
+	// MEXICO
+	//
+	// * "MD" - MOLDOVA
+	//
+	// * "ME" - MONTENEGRO
 	//
 	// * "NL" - NETHERLANDS
 	//
-	// * "NO"
-	// - NORWAY
+	// * "NZ" -
+	// NEW ZEALAND
+	//
+	// * "NI" - NICARAGUA
+	//
+	// * "NG" - NIGERIA
+	//
+	// * "NO" - NORWAY
+	//
+	// * "PA" -
+	// PANAMA
+	//
+	// * "PY" - PARAGUAY
+	//
+	// * "PE" - PERU
 	//
 	// * "PL" - POLAND
 	//
 	// * "PT" - PORTUGAL
 	//
+	// *
+	// "RO" - ROMANIA
+	//
 	// * "RU" - RUSSIA
 	//
-	// * "ZA" - SOUTH
-	// AFRICA
+	// * "RS" - SERBIA
+	//
+	// * "SK" - SLOVAKIA
+	//
+	// * "SI" -
+	// SLOVENIA
+	//
+	// * "ZA" - SOUTH AFRICA
 	//
 	// * "ES" - SPAIN
 	//
 	// * "SE" - SWEDEN
 	//
-	// * "CH" - SWITZERLAND
+	// * "CH" -
+	// SWITZERLAND
+	//
+	// * "UA" - UKRAINE
+	//
+	// * "AE" - UNITED ARAB EMIRATES
 	//
 	// * "US" - UNITED
 	// STATES
 	//
 	// * "UK" - UNITED KINGDOM
+	//
+	// * "UY" - URUGUAY
+	//
+	// * "VE" - VENEZUELA
 	//
 	// This member is required.
 	Value *string

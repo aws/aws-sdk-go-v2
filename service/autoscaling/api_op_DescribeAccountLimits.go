@@ -12,7 +12,7 @@ import (
 
 // Describes the current Amazon EC2 Auto Scaling resource quotas for your AWS
 // account. For information about requesting an increase, see Amazon EC2 Auto
-// Scaling Service Quotas
+// Scaling service quotas
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) DescribeAccountLimits(ctx context.Context, params *DescribeAccountLimitsInput, optFns ...func(*Options)) (*DescribeAccountLimitsOutput, error) {

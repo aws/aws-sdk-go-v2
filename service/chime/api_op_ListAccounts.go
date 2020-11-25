@@ -48,10 +48,10 @@ type ListAccountsInput struct {
 
 type ListAccountsOutput struct {
 
-	// List of Amazon Chime accounts and account details.
+	// The list of accounts.
 	Accounts []types.Account
 
-	// The token to use to retrieve the next page of results.
+	// The account's user token.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

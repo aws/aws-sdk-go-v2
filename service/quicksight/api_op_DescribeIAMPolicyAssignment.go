@@ -30,7 +30,7 @@ func (c *Client) DescribeIAMPolicyAssignment(ctx context.Context, params *Descri
 
 type DescribeIAMPolicyAssignmentInput struct {
 
-	// The name of the assignment.
+	// The name of the assignment, also called a rule.
 	//
 	// This member is required.
 	AssignmentName *string

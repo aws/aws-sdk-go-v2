@@ -53,6 +53,12 @@ type GetSessionInput struct {
 
 type GetSessionOutput struct {
 
+	// A list of active contexts for the session. A context can be set when an intent
+	// is fulfilled or by calling the PostContent, PostText, or PutSession operation.
+	// You can use a context to control the intents that can follow up an intent, or to
+	// modify the operation of your application.
+	ActiveContexts []types.ActiveContext
+
 	// Describes the current state of the bot.
 	DialogAction *types.DialogAction
 

@@ -60,7 +60,7 @@ type CreateClusterInput struct {
 	EncryptionInfo *types.EncryptionInfo
 
 	// Specifies the level of monitoring for the MSK cluster. The possible values are
-	// DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.
+	// DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION.
 	EnhancedMonitoring types.EnhancedMonitoring
 
 	LoggingInfo *types.LoggingInfo

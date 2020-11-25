@@ -35,13 +35,13 @@ type CreateChannelInput struct {
 	// This member is required.
 	ChannelName *string
 
-	// Where channel data is stored. You may choose one of "serviceManagedS3" or
-	// "customerManagedS3" storage. If not specified, the default is
-	// "serviceManagedS3". This cannot be changed after creation of the channel.
+	// Where channel data is stored. You can choose one of serviceManagedS3 or
+	// customerManagedS3 storage. If not specified, the default is serviceManagedS3.
+	// You cannot change this storage option after the channel is created.
 	ChannelStorage *types.ChannelStorage
 
-	// How long, in days, message data is kept for the channel. When
-	// "customerManagedS3" storage is selected, this parameter is ignored.
+	// How long, in days, message data is kept for the channel. When customerManagedS3
+	// storage is selected, this parameter is ignored.
 	RetentionPeriod *types.RetentionPeriod
 
 	// Metadata which can be used to manage the channel.

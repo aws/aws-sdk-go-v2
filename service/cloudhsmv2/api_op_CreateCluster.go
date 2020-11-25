@@ -47,6 +47,9 @@ type CreateClusterInput struct {
 	// This member is required.
 	SubnetIds []string
 
+	// A policy that defines how the service retains backups.
+	BackupRetentionPolicy *types.BackupRetentionPolicy
+
 	// The identifier (ID) of the cluster backup to restore. Use this value to restore
 	// the cluster from a backup instead of creating a new cluster. To find the backup
 	// ID, use DescribeBackups.

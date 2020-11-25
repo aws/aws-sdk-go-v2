@@ -134,6 +134,9 @@ func validateOpCreateOutpostInput(v *CreateOutpostInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateOutpostInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.SiteId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SiteId"))
 	}

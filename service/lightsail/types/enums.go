@@ -236,6 +236,121 @@ func (ContactProtocol) Values() []ContactProtocol {
 	}
 }
 
+type ContainerServiceDeploymentState string
+
+// Enum values for ContainerServiceDeploymentState
+const (
+	ContainerServiceDeploymentStateActivating ContainerServiceDeploymentState = "ACTIVATING"
+	ContainerServiceDeploymentStateActive     ContainerServiceDeploymentState = "ACTIVE"
+	ContainerServiceDeploymentStateInactive   ContainerServiceDeploymentState = "INACTIVE"
+	ContainerServiceDeploymentStateFailed     ContainerServiceDeploymentState = "FAILED"
+)
+
+// Values returns all known values for ContainerServiceDeploymentState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ContainerServiceDeploymentState) Values() []ContainerServiceDeploymentState {
+	return []ContainerServiceDeploymentState{
+		"ACTIVATING",
+		"ACTIVE",
+		"INACTIVE",
+		"FAILED",
+	}
+}
+
+type ContainerServiceMetricName string
+
+// Enum values for ContainerServiceMetricName
+const (
+	ContainerServiceMetricNameCpuutilization    ContainerServiceMetricName = "CPUUtilization"
+	ContainerServiceMetricNameMemoryutilization ContainerServiceMetricName = "MemoryUtilization"
+)
+
+// Values returns all known values for ContainerServiceMetricName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerServiceMetricName) Values() []ContainerServiceMetricName {
+	return []ContainerServiceMetricName{
+		"CPUUtilization",
+		"MemoryUtilization",
+	}
+}
+
+type ContainerServicePowerName string
+
+// Enum values for ContainerServicePowerName
+const (
+	ContainerServicePowerNameNano   ContainerServicePowerName = "nano"
+	ContainerServicePowerNameMicro  ContainerServicePowerName = "micro"
+	ContainerServicePowerNameSmall  ContainerServicePowerName = "small"
+	ContainerServicePowerNameMedium ContainerServicePowerName = "medium"
+	ContainerServicePowerNameLarge  ContainerServicePowerName = "large"
+	ContainerServicePowerNameXlarge ContainerServicePowerName = "xlarge"
+)
+
+// Values returns all known values for ContainerServicePowerName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerServicePowerName) Values() []ContainerServicePowerName {
+	return []ContainerServicePowerName{
+		"nano",
+		"micro",
+		"small",
+		"medium",
+		"large",
+		"xlarge",
+	}
+}
+
+type ContainerServiceProtocol string
+
+// Enum values for ContainerServiceProtocol
+const (
+	ContainerServiceProtocolHttp  ContainerServiceProtocol = "HTTP"
+	ContainerServiceProtocolHttps ContainerServiceProtocol = "HTTPS"
+	ContainerServiceProtocolTcp   ContainerServiceProtocol = "TCP"
+	ContainerServiceProtocolUdp   ContainerServiceProtocol = "UDP"
+)
+
+// Values returns all known values for ContainerServiceProtocol. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerServiceProtocol) Values() []ContainerServiceProtocol {
+	return []ContainerServiceProtocol{
+		"HTTP",
+		"HTTPS",
+		"TCP",
+		"UDP",
+	}
+}
+
+type ContainerServiceState string
+
+// Enum values for ContainerServiceState
+const (
+	ContainerServiceStatePending  ContainerServiceState = "PENDING"
+	ContainerServiceStateReady    ContainerServiceState = "READY"
+	ContainerServiceStateRunning  ContainerServiceState = "RUNNING"
+	ContainerServiceStateUpdating ContainerServiceState = "UPDATING"
+	ContainerServiceStateDeleting ContainerServiceState = "DELETING"
+	ContainerServiceStateDisabled ContainerServiceState = "DISABLED"
+)
+
+// Values returns all known values for ContainerServiceState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerServiceState) Values() []ContainerServiceState {
+	return []ContainerServiceState{
+		"PENDING",
+		"READY",
+		"RUNNING",
+		"UPDATING",
+		"DELETING",
+		"DISABLED",
+	}
+}
+
 type DiskSnapshotState string
 
 // Enum values for DiskSnapshotState
@@ -1044,6 +1159,13 @@ const (
 	OperationTypeUpdatedistributionbundle             OperationType = "UpdateDistributionBundle"
 	OperationTypeCreatecertificate                    OperationType = "CreateCertificate"
 	OperationTypeDeletecertificate                    OperationType = "DeleteCertificate"
+	OperationTypeCreatecontainerservice               OperationType = "CreateContainerService"
+	OperationTypeUpdatecontainerservice               OperationType = "UpdateContainerService"
+	OperationTypeDeletecontainerservice               OperationType = "DeleteContainerService"
+	OperationTypeCreatecontainerservicedeployment     OperationType = "CreateContainerServiceDeployment"
+	OperationTypeCreatecontainerserviceregistrylogin  OperationType = "CreateContainerServiceRegistryLogin"
+	OperationTypeRegistercontainerimage               OperationType = "RegisterContainerImage"
+	OperationTypeDeletecontainerimage                 OperationType = "DeleteContainerImage"
 )
 
 // Values returns all known values for OperationType. Note that this can be
@@ -1115,6 +1237,13 @@ func (OperationType) Values() []OperationType {
 		"UpdateDistributionBundle",
 		"CreateCertificate",
 		"DeleteCertificate",
+		"CreateContainerService",
+		"UpdateContainerService",
+		"DeleteContainerService",
+		"CreateContainerServiceDeployment",
+		"CreateContainerServiceRegistryLogin",
+		"RegisterContainerImage",
+		"DeleteContainerImage",
 	}
 }
 
@@ -1345,6 +1474,7 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
+	ResourceTypeContainerservice           ResourceType = "ContainerService"
 	ResourceTypeInstance                   ResourceType = "Instance"
 	ResourceTypeStaticip                   ResourceType = "StaticIp"
 	ResourceTypeKeypair                    ResourceType = "KeyPair"
@@ -1370,6 +1500,7 @@ const (
 // this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
+		"ContainerService",
 		"Instance",
 		"StaticIp",
 		"KeyPair",

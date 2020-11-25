@@ -14,8 +14,8 @@ import (
 	"strings"
 )
 
-// This API operation deletes an Amazon S3 on Outposts bucket's tags. To delete an
-// S3 bucket tags, see DeleteBucketTagging
+// This operation deletes an Amazon S3 on Outposts bucket's tags. To delete an S3
+// bucket tags, see DeleteBucketTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html)
 // in the Amazon Simple Storage Service API. Deletes the tags from the Outposts
 // bucket. For more information, see Using Amazon S3 on Outposts
@@ -24,12 +24,12 @@ import (
 // permission to perform the PutBucketTagging action. By default, the bucket owner
 // has this permission and can grant this permission to others. All Amazon S3 on
 // Outposts REST API requests for this action require an additional parameter of
-// outpost-id to be passed with the request and an S3 on Outposts endpoint hostname
-// prefix instead of s3-control. For an example of the request syntax for Amazon S3
-// on Outposts that uses the S3 on Outposts endpoint hostname prefix and the
-// outpost-id derived using the access point ARN, see the  Example
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteBucketTagging.html#API_control_DeleteBucketTagging_Examples)
-// section below. The following actions are related to DeleteBucketTagging:
+// x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint
+// hostname prefix instead of s3-control. For an example of the request syntax for
+// Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and
+// the x-amz-outpost-id derived using the access point ARN, see the Examples
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html#API_control_DeleteBucketTagging_Examples)
+// section. The following actions are related to DeleteBucketTagging:
 //
 // *
 // GetBucketTagging
@@ -60,8 +60,10 @@ type DeleteBucketTaggingInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The bucket ARN that has the tag set to be removed. For Amazon S3 on Outposts
-	// specify the ARN of the bucket accessed in the format
+	// The bucket ARN that has the tag set to be removed. For using this parameter with
+	// Amazon S3 on Outposts with the REST API, you must specify the name and the
+	// x-amz-outpost-id as well. For using this parameter with S3 on Outposts with the
+	// AWS SDK and CLI, you must specify the ARN of the bucket accessed in the format
 	// arn:aws:s3-outposts:::outpost//bucket/. For example, to access the bucket
 	// reports through outpost my-outpost owned by account 123456789012 in Region
 	// us-west-2, use the URL encoding of

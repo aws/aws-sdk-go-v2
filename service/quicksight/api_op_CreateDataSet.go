@@ -59,6 +59,9 @@ type CreateDataSetInput struct {
 	// Currently, only geospatial hierarchy is supported.
 	ColumnGroups []types.ColumnGroup
 
+	// A set of one or more definitions of a ColumnLevelPermissionRule.
+	ColumnLevelPermissionRules []types.ColumnLevelPermissionRule
+
 	// Configures the combination and transformation of the data from the physical
 	// tables.
 	LogicalTableMap map[string]types.LogicalTable

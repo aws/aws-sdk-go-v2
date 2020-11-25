@@ -1488,6 +1488,13 @@ func awsRestjson1_serializeOpDocumentCreateWorldGenerationJobInput(v *CreateWorl
 		}
 	}
 
+	if v.WorldTags != nil {
+		ok := object.Key("worldTags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.WorldTags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

@@ -65,8 +65,7 @@ func (e *ConflictException) ErrorMessage() string {
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The client is permanently forbidden from making the request. For example, when a
-// user tries to create an account from an unsupported Region.
+// The client is permanently forbidden from making the request.
 type ForbiddenException struct {
 	Message *string
 

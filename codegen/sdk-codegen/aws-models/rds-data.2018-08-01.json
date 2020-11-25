@@ -900,7 +900,7 @@
           "cloudTrailEventSource": "rds-data.amazonaws.com"
         },
         "aws.auth#sigv4": {
-          "name": ""
+          "name": "rds-data"
         },
         "aws.protocols#restJson1": {},
         "smithy.api#cors": {},

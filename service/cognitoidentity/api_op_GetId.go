@@ -127,7 +127,6 @@ func newServiceMetadataMiddleware_opGetId(region string) *awsmiddleware.Register
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "cognito-identity",
 		OperationName: "GetId",
 	}
 }

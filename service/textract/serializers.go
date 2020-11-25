@@ -552,6 +552,11 @@ func awsAwsjson11_serializeOpDocumentStartDocumentAnalysisInput(v *StartDocument
 		ok.String(*v.JobTag)
 	}
 
+	if v.KMSKeyId != nil {
+		ok := object.Key("KMSKeyId")
+		ok.String(*v.KMSKeyId)
+	}
+
 	if v.NotificationChannel != nil {
 		ok := object.Key("NotificationChannel")
 		if err := awsAwsjson11_serializeDocumentNotificationChannel(v.NotificationChannel, ok); err != nil {
@@ -588,6 +593,11 @@ func awsAwsjson11_serializeOpDocumentStartDocumentTextDetectionInput(v *StartDoc
 	if v.JobTag != nil {
 		ok := object.Key("JobTag")
 		ok.String(*v.JobTag)
+	}
+
+	if v.KMSKeyId != nil {
+		ok := object.Key("KMSKeyId")
+		ok.String(*v.KMSKeyId)
 	}
 
 	if v.NotificationChannel != nil {

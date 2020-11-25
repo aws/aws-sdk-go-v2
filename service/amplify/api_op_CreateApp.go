@@ -30,7 +30,7 @@ func (c *Client) CreateApp(ctx context.Context, params *CreateAppInput, optFns .
 // The request structure used to create apps in Amplify.
 type CreateAppInput struct {
 
-	// The name for the Amplify app.
+	// The name for an Amplify app.
 	//
 	// This member is required.
 	Name *string
@@ -40,10 +40,10 @@ type CreateAppInput struct {
 	// deploy key. The token is not stored.
 	AccessToken *string
 
-	// The automated branch creation configuration for the Amplify app.
+	// The automated branch creation configuration for an Amplify app.
 	AutoBranchCreationConfig *types.AutoBranchCreationConfig
 
-	// The automated branch creation glob patterns for the Amplify app.
+	// The automated branch creation glob patterns for an Amplify app.
 	AutoBranchCreationPatterns []string
 
 	// The credentials for basic authorization for an Amplify app.
@@ -52,13 +52,16 @@ type CreateAppInput struct {
 	// The build specification (build spec) for an Amplify app.
 	BuildSpec *string
 
+	// The custom HTTP headers for an Amplify app.
+	CustomHeaders *string
+
 	// The custom rewrite and redirect rules for an Amplify app.
 	CustomRules []types.CustomRule
 
 	// The description for an Amplify app.
 	Description *string
 
-	// Enables automated branch creation for the Amplify app.
+	// Enables automated branch creation for an Amplify app.
 	EnableAutoBranchCreation *bool
 
 	// Enables basic authorization for an Amplify app. This will apply to all branches

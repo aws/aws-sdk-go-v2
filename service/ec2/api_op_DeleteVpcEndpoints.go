@@ -13,8 +13,9 @@ import (
 
 // Deletes one or more specified VPC endpoints. Deleting a gateway endpoint also
 // deletes the endpoint routes in the route tables that were associated with the
-// endpoint. Deleting an interface endpoint deletes the endpoint network
-// interfaces.
+// endpoint. Deleting an interface endpoint or a Gateway Load Balancer endpoint
+// deletes the endpoint network interfaces. Gateway Load Balancer endpoints can
+// only be deleted if the routes that are associated with the endpoint are deleted.
 func (c *Client) DeleteVpcEndpoints(ctx context.Context, params *DeleteVpcEndpointsInput, optFns ...func(*Options)) (*DeleteVpcEndpointsOutput, error) {
 	if params == nil {
 		params = &DeleteVpcEndpointsInput{}

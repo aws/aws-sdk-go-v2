@@ -52,7 +52,8 @@ type CreateProductInput struct {
 	// This member is required.
 	ProductType types.ProductType
 
-	// The configuration of the provisioning artifact.
+	// The configuration of the provisioning artifact. The info field accepts
+	// ImportFromPhysicalID.
 	//
 	// This member is required.
 	ProvisioningArtifactParameters *types.ProvisioningArtifactProperties

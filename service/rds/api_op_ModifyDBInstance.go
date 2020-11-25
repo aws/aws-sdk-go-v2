@@ -209,9 +209,10 @@ type ModifyDBInstanceInput struct {
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
-	// For information about the supported DB engines, see CreateDBInstance. For more
-	// information about IAM database authentication, see  IAM Database Authentication
-	// for MySQL and PostgreSQL
+	// This setting doesn't apply to Amazon Aurora. Mapping AWS IAM accounts to
+	// database accounts is managed by the DB cluster. For more information about IAM
+	// database authentication, see  IAM Database Authentication for MySQL and
+	// PostgreSQL
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
 	// in the Amazon RDS User Guide.
 	EnableIAMDatabaseAuthentication *bool
@@ -224,7 +225,7 @@ type ModifyDBInstanceInput struct {
 
 	// The version number of the database engine to upgrade to. Changing this parameter
 	// results in an outage and the change is applied during the next maintenance
-	// window unless the ApplyImmediately parameter is eanbled for this request. For
+	// window unless the ApplyImmediately parameter is enabled for this request. For
 	// major version upgrades, if a nondefault DB parameter group is currently in use,
 	// a new DB parameter group in the DB parameter group family for the new engine
 	// version must be specified. The new DB parameter group can be the default for

@@ -20,18 +20,15 @@ type ConnectionState struct {
 // The destination configuration.
 type DestinationConfig struct {
 
-	// A list of service names that identity the target application. Currently, you can
-	// only specify a single name. The AWS IoT client running on the destination device
-	// reads this value and uses it to look up a port or an IP address and a port. The
-	// AWS IoT client instantiates the local proxy which uses this information to
-	// connect to the destination application.
+	// A list of service names that identity the target application. The AWS IoT client
+	// running on the destination device reads this value and uses it to look up a port
+	// or an IP address and a port. The AWS IoT client instantiates the local proxy
+	// which uses this information to connect to the destination application.
 	//
 	// This member is required.
 	Services []string
 
 	// The name of the IoT thing to which you want to connect.
-	//
-	// This member is required.
 	ThingName *string
 }
 

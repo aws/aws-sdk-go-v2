@@ -683,7 +683,7 @@ type ContinuousBackupsDescription struct {
 	PointInTimeRecoveryDescription *PointInTimeRecoveryDescription
 }
 
-// Represents a Contributor Insights summary entry..
+// Represents a Contributor Insights summary entry.
 type ContributorInsightsSummary struct {
 
 	// Describes the current status for contributor insights for the given table and
@@ -1016,6 +1016,88 @@ type ExpectedAttributeValue struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes)
 	// in the Amazon DynamoDB Developer Guide.
 	Value *AttributeValue
+}
+
+// Represents the properties of the exported table.
+type ExportDescription struct {
+
+	// The billable size of the table export.
+	BilledSizeBytes *int64
+
+	// The client token that was provided for the export task. A client token makes
+	// calls to ExportTableToPointInTimeInput idempotent, meaning that multiple
+	// identical calls have the same effect as one single call.
+	ClientToken *string
+
+	// The time at which the export task completed.
+	EndTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the table export.
+	ExportArn *string
+
+	// The format of the exported data. Valid values for ExportFormat are DYNAMODB_JSON
+	// or ION.
+	ExportFormat ExportFormat
+
+	// The name of the manifest file for the export task.
+	ExportManifest *string
+
+	// Export can be in one of the following states: IN_PROGRESS, COMPLETED, or FAILED.
+	ExportStatus ExportStatus
+
+	// Point in time from which table data was exported.
+	ExportTime *time.Time
+
+	// Status code for the result of the failed export.
+	FailureCode *string
+
+	// Export failure reason description.
+	FailureMessage *string
+
+	// The number of items exported.
+	ItemCount *int64
+
+	// The name of the Amazon S3 bucket containing the export.
+	S3Bucket *string
+
+	// The ID of the AWS account that owns the bucket containing the export.
+	S3BucketOwner *string
+
+	// The Amazon S3 bucket prefix used as the file name and path of the exported
+	// snapshot.
+	S3Prefix *string
+
+	// Type of encryption used on the bucket where export data is stored. Valid values
+	// for S3SseAlgorithm are:
+	//
+	// * AES256 - server-side encryption with Amazon S3
+	// managed keys
+	//
+	// * KMS - server-side encryption with AWS KMS managed keys
+	S3SseAlgorithm S3SseAlgorithm
+
+	// The ID of the AWS KMS managed key used to encrypt the S3 bucket where export
+	// data is stored (if applicable).
+	S3SseKmsKeyId *string
+
+	// The time at which the export task began.
+	StartTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the table that was exported.
+	TableArn *string
+
+	// Unique ID of the table that was exported.
+	TableId *string
+}
+
+// Summary information about an export task.
+type ExportSummary struct {
+
+	// The Amazon Resource Name (ARN) of the export.
+	ExportArn *string
+
+	// Export can be in one of the following states: IN_PROGRESS, COMPLETED, or FAILED.
+	ExportStatus ExportStatus
 }
 
 // Represents a failure a contributor insights operation.
@@ -1812,6 +1894,12 @@ type ReplicaDescription struct {
 	// Region remains inaccessible for more than 20 hours, DynamoDB will remove this
 	// replica from the replication group. The replica will not be deleted and
 	// replication will stop from and to this region.
+	//
+	// *
+	// INACCESSIBLE_ENCRYPTION_CREDENTIALS  - The AWS KMS key used to encrypt the table
+	// is inaccessible. If the AWS KMS key remains inaccessible for more than 20 hours,
+	// DynamoDB will remove this replica from the replication group. The replica will
+	// not be deleted and replication will stop from and to this region.
 	ReplicaStatus ReplicaStatus
 
 	// Detailed information about the replica status.

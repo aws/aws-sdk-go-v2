@@ -2432,6 +2432,9 @@ type InputDeviceSummary struct {
 	// means that it has not updated its configuration.
 	DeviceSettingsSyncState DeviceSettingsSyncState
 
+	// The status of software on the input device.
+	DeviceUpdateStatus DeviceUpdateStatus
+
 	// Settings that describe an input device that is type HD.
 	HdDeviceSettings *InputDeviceHdSettings
 
@@ -3913,6 +3916,11 @@ type RtmpCaptionInfoDestinationSettings struct {
 
 // Rtmp Group Settings
 type RtmpGroupSettings struct {
+
+	// Choose the ad marker type for this output group. MediaLive will create a message
+	// based on the content of each SCTE-35 message, format it for that marker type,
+	// and insert it in the datastream.
+	AdMarkers []RtmpAdMarkers
 
 	// Authentication scheme to use when connecting with CDN
 	AuthenticationScheme AuthenticationScheme

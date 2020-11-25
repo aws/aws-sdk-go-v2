@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// For Redis engine version 6.04 onwards: Deletes a user. The user will be removed
+// For Redis engine version 6.x onwards: Deletes a user. The user will be removed
 // from all user groups and in turn removed from all replication groups. For more
 // information, see Using Role Based Access Control (RBAC)
 // (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html).

@@ -7754,6 +7754,22 @@ func awsAwsquery_deserializeDocumentLoadBalancerAddress(v **types.LoadBalancerAd
 				sv.IpAddress = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("IPv6Address", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.IPv6Address = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.IPv6Address = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("PrivateIPv4Address", t.Name.Local):
 			val, done, err := decoder.Value()
 			if err != nil {
@@ -12699,6 +12715,19 @@ func awsAwsquery_deserializeOpDocumentSetSubnetsOutput(v **SetSubnetsOutput, dec
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentAvailabilityZones(&sv.AvailabilityZones, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("IpAddressType", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.IpAddressType = types.IpAddressType(xtv)
 			}
 
 		default:

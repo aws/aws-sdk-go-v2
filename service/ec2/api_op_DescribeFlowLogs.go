@@ -45,7 +45,7 @@ type DescribeFlowLogsInput struct {
 	//
 	// * log-destination-type - The type of destination to which
 	// the flow log publishes data. Possible destination types include cloud-watch-logs
-	// and S3.
+	// and s3.
 	//
 	// * flow-log-id - The ID of the flow log.
 	//

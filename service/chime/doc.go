@@ -24,9 +24,9 @@
 // Command Line Interface User Guide. For a list of available Amazon Chime
 // commands, see the Amazon Chime commands
 // (https://docs.aws.amazon.com/cli/latest/reference/chime/index.html) in the AWS
-// CLI Command Reference. Using REST API If you use REST to make API calls, you
-// must authenticate your request by providing a signature. Amazon Chime supports
-// signature version 4. For more information, see Signature Version 4 Signing
+// CLI Command Reference. Using REST If you use REST to make API calls, you must
+// authenticate your request by providing a signature. Amazon Chime supports
+// Signature Version 4. For more information, see Signature Version 4 Signing
 // Process (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
 // in the Amazon Web Services General Reference. When making REST API calls, use
 // the service name chime and REST endpoint https://service.chime.aws.amazon.com.

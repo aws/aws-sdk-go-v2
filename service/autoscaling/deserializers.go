@@ -6587,6 +6587,22 @@ func awsAwsquery_deserializeDocumentAutoScalingGroup(v **types.AutoScalingGroup,
 				return err
 			}
 
+		case strings.EqualFold("CapacityRebalance", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected CapacityRebalanceEnabled to be of type *bool, got %T instead", val)
+				}
+				sv.CapacityRebalance = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("CreatedTime", t.Name.Local):
 			val, done, err := decoder.Value()
 			if err != nil {
@@ -9328,6 +9344,12 @@ func awsAwsquery_deserializeDocumentLaunchTemplateOverrides(v **types.LaunchTemp
 			if val != nil {
 				xtv := string(val)
 				sv.InstanceType = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("LaunchTemplateSpecification", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentLaunchTemplateSpecification(&sv.LaunchTemplateSpecification, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("WeightedCapacity", t.Name.Local):

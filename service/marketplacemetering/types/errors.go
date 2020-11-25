@@ -196,6 +196,23 @@ func (e *InvalidRegionException) ErrorMessage() string {
 func (e *InvalidRegionException) ErrorCode() string             { return "InvalidRegionException" }
 func (e *InvalidRegionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The tag is invalid, or the number of tags is greater than 5.
+type InvalidTagException struct {
+	Message *string
+}
+
+func (e *InvalidTagException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidTagException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidTagException) ErrorCode() string             { return "InvalidTagException" }
+func (e *InvalidTagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Registration token is invalid.
 type InvalidTokenException struct {
 	Message *string
@@ -212,6 +229,26 @@ func (e *InvalidTokenException) ErrorMessage() string {
 }
 func (e *InvalidTokenException) ErrorCode() string             { return "InvalidTokenException" }
 func (e *InvalidTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The usage allocation objects are invalid, or the number of allocations is
+// greater than 500 for a single usage record.
+type InvalidUsageAllocationsException struct {
+	Message *string
+}
+
+func (e *InvalidUsageAllocationsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidUsageAllocationsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidUsageAllocationsException) ErrorCode() string {
+	return "InvalidUsageAllocationsException"
+}
+func (e *InvalidUsageAllocationsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The usage dimension does not match one of the UsageDimensions associated with
 // products.

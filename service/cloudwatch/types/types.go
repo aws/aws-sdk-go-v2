@@ -190,7 +190,8 @@ type Dimension struct {
 	// This member is required.
 	Name *string
 
-	// The value of the dimension.
+	// The value of the dimension. Dimension values cannot contain blank spaces or
+	// non-ASCII characters.
 	//
 	// This member is required.
 	Value *string
@@ -410,7 +411,7 @@ type MetricAlarm struct {
 	// An array of MetricDataQuery structures, used in an alarm based on a metric math
 	// expression. Each structure either retrieves a metric or performs a math
 	// expression. One item in the Metrics array is the math expression that the alarm
-	// watches. This expression by designated by having ReturnValue set to true.
+	// watches. This expression by designated by having ReturnData set to true.
 	Metrics []MetricDataQuery
 
 	// The namespace of the metric associated with the alarm.

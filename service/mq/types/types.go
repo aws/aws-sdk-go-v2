@@ -26,13 +26,14 @@ type BrokerEngineType struct {
 // Returns information about all brokers.
 type BrokerInstance struct {
 
-	// The URL of the broker's ActiveMQ Web Console.
+	// The URL of the broker's Web Console.
 	ConsoleURL *string
 
 	// The broker's wire-level protocol endpoints.
 	Endpoints []string
 
 	// The IP address of the Elastic Network Interface (ENI) attached to the broker.
+	// Does not apply to RabbitMQ brokers
 	IpAddress *string
 }
 
@@ -82,6 +83,9 @@ type BrokerSummary struct {
 	// Required. The deployment mode of the broker.
 	DeploymentMode DeploymentMode
 
+	// Required. The type of broker engine.
+	EngineType EngineType
+
 	// The broker's instance type.
 	HostInstanceType *string
 }
@@ -101,8 +105,8 @@ type Configuration struct {
 	// Required. The description of the configuration.
 	Description *string
 
-	// Required. The type of broker engine. Note: Currently, Amazon MQ supports only
-	// ACTIVEMQ.
+	// Required. The type of broker engine. Note: Currently, Amazon MQ supports
+	// ACTIVEMQ and RABBITMQ.
 	EngineType EngineType
 
 	// Required. The version of the broker engine. For a list of supported engine
@@ -125,7 +129,8 @@ type Configuration struct {
 	Tags map[string]string
 }
 
-// A list of information about the configuration.
+// A list of information about the configuration. Does not apply to RabbitMQ
+// brokers.
 type ConfigurationId struct {
 
 	// Required. The unique ID that Amazon MQ generates for the configuration.
@@ -265,7 +270,7 @@ type LdapServerMetadataOutput struct {
 type Logs struct {
 
 	// Enables audit logging. Every user management action made using JMX or the
-	// ActiveMQ Web Console is logged.
+	// ActiveMQ Web Console is logged. Does not apply to RabbitMQ brokers.
 	Audit bool
 
 	// Enables general logging.
@@ -319,10 +324,11 @@ type SanitizationWarning struct {
 	Reason SanitizationWarningReason
 }
 
-// An ActiveMQ user associated with the broker.
+// A user associated with the broker.
 type User struct {
 
-	// Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+	// Enables access to the ActiveMQ Web Console for the ActiveMQ user (Does not apply
+	// to RabbitMQ brokers).
 	ConsoleAccess bool
 
 	// The list of groups (20 maximum) to which the ActiveMQ user belongs. This value
@@ -330,12 +336,12 @@ type User struct {
 	// tildes (- . _ ~). This value must be 2-100 characters long.
 	Groups []string
 
-	// Required. The password of the ActiveMQ user. This value must be at least 12
+	// Required. The password of the broker user. This value must be at least 12
 	// characters long, must contain at least 4 unique characters, and must not contain
 	// commas.
 	Password *string
 
-	// Required. The username of the ActiveMQ user. This value can contain only
+	// Required. The username of the broker user. This value can contain only
 	// alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~).
 	// This value must be 2-100 characters long.
 	Username *string
@@ -357,13 +363,13 @@ type UserPendingChanges struct {
 	PendingChange ChangeType
 }
 
-// Returns a list of all ActiveMQ users.
+// Returns a list of all broker users.
 type UserSummary struct {
 
-	// The type of change pending for the ActiveMQ user.
+	// The type of change pending for the broker user.
 	PendingChange ChangeType
 
-	// Required. The username of the ActiveMQ user. This value can contain only
+	// Required. The username of the broker user. This value can contain only
 	// alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~).
 	// This value must be 2-100 characters long.
 	Username *string

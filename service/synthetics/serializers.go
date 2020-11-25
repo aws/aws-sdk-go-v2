@@ -1114,6 +1114,13 @@ func awsRestjson1_serializeDocumentCanaryRunConfigInput(v *types.CanaryRunConfig
 		ok.Boolean(*v.ActiveTracing)
 	}
 
+	if v.EnvironmentVariables != nil {
+		ok := object.Key("EnvironmentVariables")
+		if err := awsRestjson1_serializeDocumentEnvironmentVariablesMap(v.EnvironmentVariables, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MemoryInMB != nil {
 		ok := object.Key("MemoryInMB")
 		ok.Integer(*v.MemoryInMB)
@@ -1141,6 +1148,17 @@ func awsRestjson1_serializeDocumentCanaryScheduleInput(v *types.CanaryScheduleIn
 		ok.String(*v.Expression)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEnvironmentVariablesMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }
 

@@ -12,11 +12,19 @@ import (
 )
 
 // Describes the current Elastic Load Balancing resource limits for your AWS
-// account. For more information, see Limits for Your Application Load Balancers
+// account. For more information, see the following:
+//
+// * Quotas for your Application
+// Load Balancers
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html)
-// in the Application Load Balancer Guide or Limits for Your Network Load Balancers
+//
+// *
+// Quotas for your Network Load Balancers
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html)
-// in the Network Load Balancers Guide.
+//
+// *
+// Quotas for your Gateway Load Balancers
+// (https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/quotas-limits.html)
 func (c *Client) DescribeAccountLimits(ctx context.Context, params *DescribeAccountLimitsInput, optFns ...func(*Options)) (*DescribeAccountLimitsOutput, error) {
 	if params == nil {
 		params = &DescribeAccountLimitsInput{}

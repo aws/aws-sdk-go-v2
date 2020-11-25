@@ -10,6 +10,86 @@ import (
 	"github.com/awslabs/smithy-go/middleware"
 )
 
+type validateOpAssociateApprovedOrigin struct {
+}
+
+func (*validateOpAssociateApprovedOrigin) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateApprovedOrigin) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateApprovedOriginInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateApprovedOriginInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAssociateInstanceStorageConfig struct {
+}
+
+func (*validateOpAssociateInstanceStorageConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateInstanceStorageConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateInstanceStorageConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateInstanceStorageConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAssociateLambdaFunction struct {
+}
+
+func (*validateOpAssociateLambdaFunction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateLambdaFunction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateLambdaFunctionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateLambdaFunctionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAssociateLexBot struct {
+}
+
+func (*validateOpAssociateLexBot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateLexBot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateLexBotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateLexBotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateRoutingProfileQueues struct {
 }
 
@@ -25,6 +105,26 @@ func (m *validateOpAssociateRoutingProfileQueues) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpAssociateRoutingProfileQueuesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAssociateSecurityKey struct {
+}
+
+func (*validateOpAssociateSecurityKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateSecurityKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateSecurityKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateSecurityKeyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -50,6 +150,26 @@ func (m *validateOpCreateContactFlow) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateInstance struct {
+}
+
+func (*validateOpCreateInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateRoutingProfile struct {
 }
 
@@ -70,6 +190,26 @@ func (m *validateOpCreateRoutingProfile) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateUserHierarchyGroup struct {
+}
+
+func (*validateOpCreateUserHierarchyGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateUserHierarchyGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateUserHierarchyGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateUserHierarchyGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateUser struct {
 }
 
@@ -85,6 +225,46 @@ func (m *validateOpCreateUser) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteInstance struct {
+}
+
+func (*validateOpDeleteInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteUserHierarchyGroup struct {
+}
+
+func (*validateOpDeleteUserHierarchyGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteUserHierarchyGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteUserHierarchyGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteUserHierarchyGroupInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -125,6 +305,66 @@ func (m *validateOpDescribeContactFlow) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeContactFlowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeInstanceAttribute struct {
+}
+
+func (*validateOpDescribeInstanceAttribute) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeInstanceAttribute) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeInstanceAttributeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeInstanceAttributeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeInstance struct {
+}
+
+func (*validateOpDescribeInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeInstanceStorageConfig struct {
+}
+
+func (*validateOpDescribeInstanceStorageConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeInstanceStorageConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeInstanceStorageConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeInstanceStorageConfigInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -210,6 +450,86 @@ func (m *validateOpDescribeUser) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateApprovedOrigin struct {
+}
+
+func (*validateOpDisassociateApprovedOrigin) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateApprovedOrigin) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateApprovedOriginInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateApprovedOriginInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateInstanceStorageConfig struct {
+}
+
+func (*validateOpDisassociateInstanceStorageConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateInstanceStorageConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateInstanceStorageConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateInstanceStorageConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateLambdaFunction struct {
+}
+
+func (*validateOpDisassociateLambdaFunction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateLambdaFunction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateLambdaFunctionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateLambdaFunctionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateLexBot struct {
+}
+
+func (*validateOpDisassociateLexBot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateLexBot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateLexBotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateLexBotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateRoutingProfileQueues struct {
 }
 
@@ -225,6 +545,26 @@ func (m *validateOpDisassociateRoutingProfileQueues) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateRoutingProfileQueuesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateSecurityKey struct {
+}
+
+func (*validateOpDisassociateSecurityKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateSecurityKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateSecurityKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateSecurityKeyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -310,6 +650,26 @@ func (m *validateOpGetMetricData) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListApprovedOrigins struct {
+}
+
+func (*validateOpListApprovedOrigins) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListApprovedOrigins) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListApprovedOriginsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListApprovedOriginsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListContactFlows struct {
 }
 
@@ -345,6 +705,86 @@ func (m *validateOpListHoursOfOperations) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListHoursOfOperationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListInstanceAttributes struct {
+}
+
+func (*validateOpListInstanceAttributes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInstanceAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInstanceAttributesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInstanceAttributesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListInstanceStorageConfigs struct {
+}
+
+func (*validateOpListInstanceStorageConfigs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInstanceStorageConfigs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInstanceStorageConfigsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInstanceStorageConfigsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListLambdaFunctions struct {
+}
+
+func (*validateOpListLambdaFunctions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListLambdaFunctions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListLambdaFunctionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListLambdaFunctionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListLexBots struct {
+}
+
+func (*validateOpListLexBots) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListLexBots) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListLexBotsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListLexBotsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -445,6 +885,26 @@ func (m *validateOpListRoutingProfiles) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListRoutingProfilesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSecurityKeys struct {
+}
+
+func (*validateOpListSecurityKeys) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSecurityKeys) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSecurityKeysInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSecurityKeysInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -770,6 +1230,46 @@ func (m *validateOpUpdateContactFlowName) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateInstanceAttribute struct {
+}
+
+func (*validateOpUpdateInstanceAttribute) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateInstanceAttribute) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateInstanceAttributeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateInstanceAttributeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateInstanceStorageConfig struct {
+}
+
+func (*validateOpUpdateInstanceStorageConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateInstanceStorageConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateInstanceStorageConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateInstanceStorageConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRoutingProfileConcurrency struct {
 }
 
@@ -850,6 +1350,26 @@ func (m *validateOpUpdateRoutingProfileQueues) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateUserHierarchyGroupName struct {
+}
+
+func (*validateOpUpdateUserHierarchyGroupName) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateUserHierarchyGroupName) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateUserHierarchyGroupNameInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateUserHierarchyGroupNameInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateUserHierarchy struct {
 }
 
@@ -865,6 +1385,26 @@ func (m *validateOpUpdateUserHierarchy) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateUserHierarchyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateUserHierarchyStructure struct {
+}
+
+func (*validateOpUpdateUserHierarchyStructure) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateUserHierarchyStructure) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateUserHierarchyStructureInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateUserHierarchyStructureInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -950,20 +1490,56 @@ func (m *validateOpUpdateUserSecurityProfiles) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateApprovedOriginValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateApprovedOrigin{}, middleware.After)
+}
+
+func addOpAssociateInstanceStorageConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateInstanceStorageConfig{}, middleware.After)
+}
+
+func addOpAssociateLambdaFunctionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateLambdaFunction{}, middleware.After)
+}
+
+func addOpAssociateLexBotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateLexBot{}, middleware.After)
+}
+
 func addOpAssociateRoutingProfileQueuesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateRoutingProfileQueues{}, middleware.After)
+}
+
+func addOpAssociateSecurityKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateSecurityKey{}, middleware.After)
 }
 
 func addOpCreateContactFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateContactFlow{}, middleware.After)
 }
 
+func addOpCreateInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateInstance{}, middleware.After)
+}
+
 func addOpCreateRoutingProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRoutingProfile{}, middleware.After)
 }
 
+func addOpCreateUserHierarchyGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateUserHierarchyGroup{}, middleware.After)
+}
+
 func addOpCreateUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUser{}, middleware.After)
+}
+
+func addOpDeleteInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteInstance{}, middleware.After)
+}
+
+func addOpDeleteUserHierarchyGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteUserHierarchyGroup{}, middleware.After)
 }
 
 func addOpDeleteUserValidationMiddleware(stack *middleware.Stack) error {
@@ -972,6 +1548,18 @@ func addOpDeleteUserValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeContactFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeContactFlow{}, middleware.After)
+}
+
+func addOpDescribeInstanceAttributeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeInstanceAttribute{}, middleware.After)
+}
+
+func addOpDescribeInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeInstance{}, middleware.After)
+}
+
+func addOpDescribeInstanceStorageConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeInstanceStorageConfig{}, middleware.After)
 }
 
 func addOpDescribeRoutingProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -990,8 +1578,28 @@ func addOpDescribeUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeUser{}, middleware.After)
 }
 
+func addOpDisassociateApprovedOriginValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateApprovedOrigin{}, middleware.After)
+}
+
+func addOpDisassociateInstanceStorageConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateInstanceStorageConfig{}, middleware.After)
+}
+
+func addOpDisassociateLambdaFunctionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateLambdaFunction{}, middleware.After)
+}
+
+func addOpDisassociateLexBotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateLexBot{}, middleware.After)
+}
+
 func addOpDisassociateRoutingProfileQueuesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateRoutingProfileQueues{}, middleware.After)
+}
+
+func addOpDisassociateSecurityKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateSecurityKey{}, middleware.After)
 }
 
 func addOpGetContactAttributesValidationMiddleware(stack *middleware.Stack) error {
@@ -1010,12 +1618,32 @@ func addOpGetMetricDataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMetricData{}, middleware.After)
 }
 
+func addOpListApprovedOriginsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListApprovedOrigins{}, middleware.After)
+}
+
 func addOpListContactFlowsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListContactFlows{}, middleware.After)
 }
 
 func addOpListHoursOfOperationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListHoursOfOperations{}, middleware.After)
+}
+
+func addOpListInstanceAttributesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInstanceAttributes{}, middleware.After)
+}
+
+func addOpListInstanceStorageConfigsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInstanceStorageConfigs{}, middleware.After)
+}
+
+func addOpListLambdaFunctionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListLambdaFunctions{}, middleware.After)
+}
+
+func addOpListLexBotsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListLexBots{}, middleware.After)
 }
 
 func addOpListPhoneNumbersValidationMiddleware(stack *middleware.Stack) error {
@@ -1036,6 +1664,10 @@ func addOpListRoutingProfileQueuesValidationMiddleware(stack *middleware.Stack) 
 
 func addOpListRoutingProfilesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRoutingProfiles{}, middleware.After)
+}
+
+func addOpListSecurityKeysValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSecurityKeys{}, middleware.After)
 }
 
 func addOpListSecurityProfilesValidationMiddleware(stack *middleware.Stack) error {
@@ -1102,6 +1734,14 @@ func addOpUpdateContactFlowNameValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpUpdateContactFlowName{}, middleware.After)
 }
 
+func addOpUpdateInstanceAttributeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateInstanceAttribute{}, middleware.After)
+}
+
+func addOpUpdateInstanceStorageConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateInstanceStorageConfig{}, middleware.After)
+}
+
 func addOpUpdateRoutingProfileConcurrencyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRoutingProfileConcurrency{}, middleware.After)
 }
@@ -1118,8 +1758,16 @@ func addOpUpdateRoutingProfileQueuesValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpUpdateRoutingProfileQueues{}, middleware.After)
 }
 
+func addOpUpdateUserHierarchyGroupNameValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateUserHierarchyGroupName{}, middleware.After)
+}
+
 func addOpUpdateUserHierarchyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateUserHierarchy{}, middleware.After)
+}
+
+func addOpUpdateUserHierarchyStructureValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateUserHierarchyStructure{}, middleware.After)
 }
 
 func addOpUpdateUserIdentityInfoValidationMiddleware(stack *middleware.Stack) error {
@@ -1148,6 +1796,163 @@ func validateChatMessage(v *types.ChatMessage) error {
 	}
 	if v.Content == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEncryptionConfig(v *types.EncryptionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EncryptionConfig"}
+	if len(v.EncryptionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EncryptionType"))
+	}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHierarchyLevelUpdate(v *types.HierarchyLevelUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HierarchyLevelUpdate"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHierarchyStructureUpdate(v *types.HierarchyStructureUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HierarchyStructureUpdate"}
+	if v.LevelOne != nil {
+		if err := validateHierarchyLevelUpdate(v.LevelOne); err != nil {
+			invalidParams.AddNested("LevelOne", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LevelTwo != nil {
+		if err := validateHierarchyLevelUpdate(v.LevelTwo); err != nil {
+			invalidParams.AddNested("LevelTwo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LevelThree != nil {
+		if err := validateHierarchyLevelUpdate(v.LevelThree); err != nil {
+			invalidParams.AddNested("LevelThree", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LevelFour != nil {
+		if err := validateHierarchyLevelUpdate(v.LevelFour); err != nil {
+			invalidParams.AddNested("LevelFour", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LevelFive != nil {
+		if err := validateHierarchyLevelUpdate(v.LevelFive); err != nil {
+			invalidParams.AddNested("LevelFive", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInstanceStorageConfig(v *types.InstanceStorageConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstanceStorageConfig"}
+	if len(v.StorageType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageType"))
+	}
+	if v.S3Config != nil {
+		if err := validateS3Config(v.S3Config); err != nil {
+			invalidParams.AddNested("S3Config", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.KinesisVideoStreamConfig != nil {
+		if err := validateKinesisVideoStreamConfig(v.KinesisVideoStreamConfig); err != nil {
+			invalidParams.AddNested("KinesisVideoStreamConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.KinesisStreamConfig != nil {
+		if err := validateKinesisStreamConfig(v.KinesisStreamConfig); err != nil {
+			invalidParams.AddNested("KinesisStreamConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.KinesisFirehoseConfig != nil {
+		if err := validateKinesisFirehoseConfig(v.KinesisFirehoseConfig); err != nil {
+			invalidParams.AddNested("KinesisFirehoseConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKinesisFirehoseConfig(v *types.KinesisFirehoseConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KinesisFirehoseConfig"}
+	if v.FirehoseArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirehoseArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKinesisStreamConfig(v *types.KinesisStreamConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KinesisStreamConfig"}
+	if v.StreamArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKinesisVideoStreamConfig(v *types.KinesisVideoStreamConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KinesisVideoStreamConfig"}
+	if v.Prefix == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Prefix"))
+	}
+	if v.EncryptionConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EncryptionConfig"))
+	} else if v.EncryptionConfig != nil {
+		if err := validateEncryptionConfig(v.EncryptionConfig); err != nil {
+			invalidParams.AddNested("EncryptionConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1244,11 +2049,11 @@ func validateRoutingProfileQueueReference(v *types.RoutingProfileQueueReference)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RoutingProfileQueueReference"}
-	if len(v.Channel) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Channel"))
-	}
 	if v.QueueId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if len(v.Channel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Channel"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1274,6 +2079,29 @@ func validateRoutingProfileQueueReferenceList(v []types.RoutingProfileQueueRefer
 	}
 }
 
+func validateS3Config(v *types.S3Config) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3Config"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if v.BucketPrefix == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketPrefix"))
+	}
+	if v.EncryptionConfig != nil {
+		if err := validateEncryptionConfig(v.EncryptionConfig); err != nil {
+			invalidParams.AddNested("EncryptionConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUserPhoneConfig(v *types.UserPhoneConfig) error {
 	if v == nil {
 		return nil
@@ -1281,6 +2109,85 @@ func validateUserPhoneConfig(v *types.UserPhoneConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UserPhoneConfig"}
 	if len(v.PhoneType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PhoneType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateApprovedOriginInput(v *AssociateApprovedOriginInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateApprovedOriginInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Origin == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Origin"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateInstanceStorageConfigInput(v *AssociateInstanceStorageConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateInstanceStorageConfigInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.StorageConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageConfig"))
+	} else if v.StorageConfig != nil {
+		if err := validateInstanceStorageConfig(v.StorageConfig); err != nil {
+			invalidParams.AddNested("StorageConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateLambdaFunctionInput(v *AssociateLambdaFunctionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateLambdaFunctionInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.FunctionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateLexBotInput(v *AssociateLexBotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateLexBotInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.LexBot == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LexBot"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1297,6 +2204,9 @@ func validateOpAssociateRoutingProfileQueuesInput(v *AssociateRoutingProfileQueu
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
+	if v.RoutingProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
+	}
 	if v.QueueConfigs == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueueConfigs"))
 	} else if v.QueueConfigs != nil {
@@ -1304,8 +2214,23 @@ func validateOpAssociateRoutingProfileQueuesInput(v *AssociateRoutingProfileQueu
 			invalidParams.AddNested("QueueConfigs", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.RoutingProfileId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateSecurityKeyInput(v *AssociateSecurityKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateSecurityKeyInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1319,9 +2244,6 @@ func validateOpCreateContactFlowInput(v *CreateContactFlowInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateContactFlowInput"}
-	if v.Content == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Content"))
-	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
@@ -1330,6 +2252,30 @@ func validateOpCreateContactFlowInput(v *CreateContactFlowInput) error {
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateInstanceInput(v *CreateInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateInstanceInput"}
+	if len(v.IdentityManagementType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityManagementType"))
+	}
+	if v.InboundCallsEnabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InboundCallsEnabled"))
+	}
+	if v.OutboundCallsEnabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutboundCallsEnabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1343,14 +2289,17 @@ func validateOpCreateRoutingProfileInput(v *CreateRoutingProfileInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateRoutingProfileInput"}
-	if v.DefaultOutboundQueueId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DefaultOutboundQueueId"))
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.Description == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if v.DefaultOutboundQueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultOutboundQueueId"))
 	}
 	if v.QueueConfigs != nil {
 		if err := validateRoutingProfileQueueConfigList(v.QueueConfigs); err != nil {
@@ -1363,6 +2312,21 @@ func validateOpCreateRoutingProfileInput(v *CreateRoutingProfileInput) error {
 		if err := validateMediaConcurrencies(v.MediaConcurrencies); err != nil {
 			invalidParams.AddNested("MediaConcurrencies", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateUserHierarchyGroupInput(v *CreateUserHierarchyGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateUserHierarchyGroupInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
@@ -1379,8 +2343,8 @@ func validateOpCreateUserInput(v *CreateUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateUserInput"}
-	if v.SecurityProfileIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SecurityProfileIds"))
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if v.PhoneConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PhoneConfig"))
@@ -1389,14 +2353,47 @@ func validateOpCreateUserInput(v *CreateUserInput) error {
 			invalidParams.AddNested("PhoneConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.InstanceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	if v.SecurityProfileIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityProfileIds"))
 	}
 	if v.RoutingProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
 	}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteInstanceInput(v *DeleteInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteInstanceInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteUserHierarchyGroupInput(v *DeleteUserHierarchyGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteUserHierarchyGroupInput"}
+	if v.HierarchyGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HierarchyGroupId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1410,11 +2407,11 @@ func validateOpDeleteUserInput(v *DeleteUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteUserInput"}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1428,11 +2425,65 @@ func validateOpDescribeContactFlowInput(v *DescribeContactFlowInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeContactFlowInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
 	if v.ContactFlowId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeInstanceAttributeInput(v *DescribeInstanceAttributeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeInstanceAttributeInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if len(v.AttributeType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeInstanceInput(v *DescribeInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeInstanceInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeInstanceStorageConfigInput(v *DescribeInstanceStorageConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeInstanceStorageConfigInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1464,11 +2515,11 @@ func validateOpDescribeUserHierarchyGroupInput(v *DescribeUserHierarchyGroupInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeUserHierarchyGroupInput"}
-	if v.InstanceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
-	}
 	if v.HierarchyGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HierarchyGroupId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1510,6 +2561,84 @@ func validateOpDescribeUserInput(v *DescribeUserInput) error {
 	}
 }
 
+func validateOpDisassociateApprovedOriginInput(v *DisassociateApprovedOriginInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateApprovedOriginInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Origin == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Origin"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateInstanceStorageConfigInput(v *DisassociateInstanceStorageConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateInstanceStorageConfigInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateLambdaFunctionInput(v *DisassociateLambdaFunctionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateLambdaFunctionInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.FunctionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateLexBotInput(v *DisassociateLexBotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateLexBotInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.BotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotName"))
+	}
+	if v.LexRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LexRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateRoutingProfileQueuesInput(v *DisassociateRoutingProfileQueuesInput) error {
 	if v == nil {
 		return nil
@@ -1527,6 +2656,24 @@ func validateOpDisassociateRoutingProfileQueuesInput(v *DisassociateRoutingProfi
 		if err := validateRoutingProfileQueueReferenceList(v.QueueReferences); err != nil {
 			invalidParams.AddNested("QueueReferences", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateSecurityKeyInput(v *DisassociateSecurityKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateSecurityKeyInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1558,11 +2705,11 @@ func validateOpGetCurrentMetricDataInput(v *GetCurrentMetricDataInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetCurrentMetricDataInput"}
-	if v.Filters == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
-	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
 	}
 	if v.CurrentMetrics == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentMetrics"))
@@ -1594,20 +2741,35 @@ func validateOpGetMetricDataInput(v *GetMetricDataInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetMetricDataInput"}
-	if v.EndTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
-	}
-	if v.HistoricalMetrics == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HistoricalMetrics"))
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
 	}
-	if v.InstanceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if v.Filters == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	}
+	if v.HistoricalMetrics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HistoricalMetrics"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListApprovedOriginsInput(v *ListApprovedOriginsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListApprovedOriginsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1636,6 +2798,69 @@ func validateOpListHoursOfOperationsInput(v *ListHoursOfOperationsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListHoursOfOperationsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListInstanceAttributesInput(v *ListInstanceAttributesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInstanceAttributesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListInstanceStorageConfigsInput(v *ListInstanceStorageConfigsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInstanceStorageConfigsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListLambdaFunctionsInput(v *ListLambdaFunctionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListLambdaFunctionsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListLexBotsInput(v *ListLexBotsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListLexBotsInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
@@ -1696,11 +2921,11 @@ func validateOpListRoutingProfileQueuesInput(v *ListRoutingProfileQueuesInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListRoutingProfileQueuesInput"}
-	if v.RoutingProfileId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
-	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.RoutingProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1714,6 +2939,21 @@ func validateOpListRoutingProfilesInput(v *ListRoutingProfilesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListRoutingProfilesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSecurityKeysInput(v *ListSecurityKeysInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSecurityKeysInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
@@ -1789,14 +3029,14 @@ func validateOpResumeContactRecordingInput(v *ResumeContactRecordingInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResumeContactRecordingInput"}
-	if v.InitialContactId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InitialContactId"))
-	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if v.ContactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.InitialContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InitialContactId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1810,22 +3050,22 @@ func validateOpStartChatContactInput(v *StartChatContactInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartChatContactInput"}
-	if v.ContactFlowId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
-	}
-	if v.InitialMessage != nil {
-		if err := validateChatMessage(v.InitialMessage); err != nil {
-			invalidParams.AddNested("InitialMessage", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactFlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
 	}
 	if v.ParticipantDetails == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParticipantDetails"))
 	} else if v.ParticipantDetails != nil {
 		if err := validateParticipantDetails(v.ParticipantDetails); err != nil {
 			invalidParams.AddNested("ParticipantDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InitialMessage != nil {
+		if err := validateChatMessage(v.InitialMessage); err != nil {
+			invalidParams.AddNested("InitialMessage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1840,6 +3080,9 @@ func validateOpStartContactRecordingInput(v *StartContactRecordingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartContactRecordingInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
 	if v.ContactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
 	}
@@ -1848,9 +3091,6 @@ func validateOpStartContactRecordingInput(v *StartContactRecordingInput) error {
 	}
 	if v.VoiceRecordingConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VoiceRecordingConfiguration"))
-	}
-	if v.InstanceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1867,11 +3107,11 @@ func validateOpStartOutboundVoiceContactInput(v *StartOutboundVoiceContactInput)
 	if v.DestinationPhoneNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationPhoneNumber"))
 	}
-	if v.InstanceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
-	}
 	if v.ContactFlowId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1927,11 +3167,11 @@ func validateOpSuspendContactRecordingInput(v *SuspendContactRecordingInput) err
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
-	if v.InitialContactId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InitialContactId"))
-	}
 	if v.ContactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.InitialContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InitialContactId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1945,11 +3185,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1981,14 +3221,14 @@ func validateOpUpdateContactAttributesInput(v *UpdateContactAttributesInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateContactAttributesInput"}
-	if v.Attributes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
+	if v.InitialContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InitialContactId"))
 	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
-	if v.InitialContactId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InitialContactId"))
+	if v.Attributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2002,14 +3242,14 @@ func validateOpUpdateContactFlowContentInput(v *UpdateContactFlowContentInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateContactFlowContentInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
 	if v.ContactFlowId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
 	}
 	if v.Content == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Content"))
-	}
-	if v.InstanceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2028,6 +3268,55 @@ func validateOpUpdateContactFlowNameInput(v *UpdateContactFlowNameInput) error {
 	}
 	if v.ContactFlowId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateInstanceAttributeInput(v *UpdateInstanceAttributeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateInstanceAttributeInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if len(v.AttributeType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeType"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateInstanceStorageConfigInput(v *UpdateInstanceStorageConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateInstanceStorageConfigInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.StorageConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageConfig"))
+	} else if v.StorageConfig != nil {
+		if err := validateInstanceStorageConfig(v.StorageConfig); err != nil {
+			invalidParams.AddNested("StorageConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2069,11 +3358,11 @@ func validateOpUpdateRoutingProfileDefaultOutboundQueueInput(v *UpdateRoutingPro
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
-	if v.DefaultOutboundQueueId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DefaultOutboundQueueId"))
-	}
 	if v.RoutingProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
+	}
+	if v.DefaultOutboundQueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultOutboundQueueId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2105,6 +3394,12 @@ func validateOpUpdateRoutingProfileQueuesInput(v *UpdateRoutingProfileQueuesInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRoutingProfileQueuesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.RoutingProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
+	}
 	if v.QueueConfigs == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueueConfigs"))
 	} else if v.QueueConfigs != nil {
@@ -2112,11 +3407,26 @@ func validateOpUpdateRoutingProfileQueuesInput(v *UpdateRoutingProfileQueuesInpu
 			invalidParams.AddNested("QueueConfigs", err.(smithy.InvalidParamsError))
 		}
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateUserHierarchyGroupNameInput(v *UpdateUserHierarchyGroupNameInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserHierarchyGroupNameInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.HierarchyGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HierarchyGroupId"))
+	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
-	}
-	if v.RoutingProfileId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2130,11 +3440,33 @@ func validateOpUpdateUserHierarchyInput(v *UpdateUserHierarchyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserHierarchyInput"}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateUserHierarchyStructureInput(v *UpdateUserHierarchyStructureInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserHierarchyStructureInput"}
+	if v.HierarchyStructure == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HierarchyStructure"))
+	} else if v.HierarchyStructure != nil {
+		if err := validateHierarchyStructureUpdate(v.HierarchyStructure); err != nil {
+			invalidParams.AddNested("HierarchyStructure", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2148,14 +3480,14 @@ func validateOpUpdateUserIdentityInfoInput(v *UpdateUserIdentityInfoInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserIdentityInfoInput"}
-	if v.InstanceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	if v.IdentityInfo == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityInfo"))
 	}
 	if v.UserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
-	if v.IdentityInfo == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdentityInfo"))
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2169,15 +3501,15 @@ func validateOpUpdateUserPhoneConfigInput(v *UpdateUserPhoneConfigInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserPhoneConfigInput"}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
 	if v.PhoneConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PhoneConfig"))
 	} else if v.PhoneConfig != nil {
 		if err := validateUserPhoneConfig(v.PhoneConfig); err != nil {
 			invalidParams.AddNested("PhoneConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
@@ -2215,14 +3547,14 @@ func validateOpUpdateUserSecurityProfilesInput(v *UpdateUserSecurityProfilesInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserSecurityProfilesInput"}
-	if v.InstanceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
-	}
 	if v.SecurityProfileIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityProfileIds"))
 	}
 	if v.UserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

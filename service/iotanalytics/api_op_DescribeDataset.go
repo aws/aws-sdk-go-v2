@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Retrieves information about a data set.
+// Retrieves information about a dataset.
 func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInput, optFns ...func(*Options)) (*DescribeDatasetOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetInput{}

@@ -49,8 +49,9 @@ type GetViolationDetailsInput struct {
 	// The resource type. This is in the format shown in the AWS Resource Types
 	// Reference
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
-	// Supported resource types are: AWS::EC2::Instance, AWS::EC2::NetworkInterface, or
-	// AWS::EC2::SecurityGroup.
+	// Supported resource types are: AWS::EC2::Instance, AWS::EC2::NetworkInterface,
+	// AWS::EC2::SecurityGroup, AWS::NetworkFirewall::FirewallPolicy, and
+	// AWS::EC2::Subnet.
 	//
 	// This member is required.
 	ResourceType *string
