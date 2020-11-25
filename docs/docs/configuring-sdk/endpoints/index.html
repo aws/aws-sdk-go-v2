@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.78.0" />
+
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+
+<link rel="shortcut icon" href="/favicons/favicon.ico" >
+<link rel="apple-touch-icon" href="/aws-sdk-go-v2/favicons/apple-touch-icon-180x180.png" sizes="180x180">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-36x36.png" sizes="36x36">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-48x48.png" sizes="48x48">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-72x72.png" sizes="72x72">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-144x144.png" sizes="144x144">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-192x192.png" sizes="192x192">
+
+<title>Configuring Client Endpoints | AWS SDK for Go V2</title><meta property="og:title" content="Configuring Client Endpoints" />
+<meta property="og:description" content="Customizing service client endpoints." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/endpoints/" />
+<meta property="article:published_time" content="2020-11-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-24T14:58:20-08:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
+<meta itemprop="name" content="Configuring Client Endpoints">
+<meta itemprop="description" content="Customizing service client endpoints.">
+<meta itemprop="datePublished" content="2020-11-12T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-11-24T14:58:20-08:00" />
+<meta itemprop="wordCount" content="511">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Configuring Client Endpoints"/>
+<meta name="twitter:description" content="Customizing service client endpoints."/>
+
+
+
+
+
+<link rel="preload" href="/aws-sdk-go-v2/scss/main.min.a40e8388f84bdd24bc3411e01a2a4a50b09036c9b079bd05a1eb025839f53861.css" as="style">
+<link href="/aws-sdk-go-v2/scss/main.min.a40e8388f84bdd24bc3411e01a2a4a50b09036c9b079bd05a1eb025839f53861.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+
+<script
+  src="https://unpkg.com/lunr@2.3.8/lunr.min.js"
+  integrity="sha384-vRQ9bDyE0Wnu+lMfm57BlYLO0/XauFuKpVsZPs7KEDwYKktWi5+Kz3MP8++DFlRY"
+  crossorigin="anonymous"></script>
+
+
+
+
+  </head>
+  <body class="td-page">
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+        <a class="navbar-brand" href="/aws-sdk-go-v2/">
+		<span class="navbar-logo"></span><span class="text-uppercase font-weight-bold">AWS SDK for Go V2</span>
+	</a>
+	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				<a class="nav-link active" href="/aws-sdk-go-v2/docs/" ><span class="active">Documentation</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				<a class="nav-link" href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2" target="_blank" ><span>API</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				<a class="nav-link" href="https://github.com/aws/aws-sdk-go-v2" target="_blank" ><span>GitHub</span></a>
+			</li>
+			
+			
+			
+		</ul>
+	</div>
+	<div class="navbar-nav d-none d-lg-block">
+
+
+
+<input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.c4f65b5ca8db8903b35112598c16e5c1.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
+</div>
+</nav>
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <form class="td-sidebar__search d-flex align-items-center d-lg-none">
+    
+
+
+
+<input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.c4f65b5ca8db8903b35112598c16e5c1.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+    
+    
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Documentation</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="aws-sdk-go-v2docs">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsgetting-started" href="/aws-sdk-go-v2/docs/getting-started/">Getting Started</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/configuring-sdk/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Configuring the SDK</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="aws-sdk-go-v2docsconfiguring-sdk">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints" href="/aws-sdk-go-v2/docs/configuring-sdk/endpoints/">Endpoints</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsconfiguring-sdkcustom-http" href="/aws-sdk-go-v2/docs/configuring-sdk/custom-http/">HTTP Client</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsconfiguring-sdklogging" href="/aws-sdk-go-v2/docs/configuring-sdk/logging/">Logging</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docshandling-errors" href="/aws-sdk-go-v2/docs/handling-errors/">Handling Errors</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/sdk-utilities/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">SDK Utilities</a>
+  </li>
+  <ul>
+    <li class="collapse " id="aws-sdk-go-v2docssdk-utilities">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssdk-utilitiescloudfront" href="/aws-sdk-go-v2/docs/sdk-utilities/cloudfront/">Amazon CloudFront</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssdk-utilitiesec2-imds" href="/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/">Amazon EC2 IMDS</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssdk-utilitiess3" href="/aws-sdk-go-v2/docs/sdk-utilities/s3/">Amazon S3</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsmaking-requests" href="/aws-sdk-go-v2/docs/making-requests/">Using AWS Services</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docscloud9-go" href="/aws-sdk-go-v2/docs/cloud9-go/">Using Cloud9 with the SDK</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/security/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Security</a>
+  </li>
+  <ul>
+    <li class="collapse " id="aws-sdk-go-v2docssecurity">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritycompliance-validation" href="/aws-sdk-go-v2/docs/security/compliance-validation/">Compliance Validation</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecurityiam" href="/aws-sdk-go-v2/docs/security/iam/">Identity and Access Management</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecurityinfrastructure-security" href="/aws-sdk-go-v2/docs/security/infrastructure-security/">Infrastructure Security</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritydisaster-recovery-resiliency" href="/aws-sdk-go-v2/docs/security/disaster-recovery-resiliency/">Resilience</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritydata-protection" href="/aws-sdk-go-v2/docs/security/data-protection/">Data Protection</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritytls" href="/aws-sdk-go-v2/docs/security/tls/">Enforcing TLS 1.2</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+    </li>
+  </ul>
+</ul>
+
+  </nav>
+</div>
+
+
+
+
+          </div>
+          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+            
+
+
+
+
+
+
+<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
+
+
+
+
+
+
+
+
+
+
+
+<a href="https://github.com/aws/aws-sdk-go-v2/edit/documentation/content/en/docs/configuring-sdk/endpoints.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/aws/aws-sdk-go-v2/new/documentation/content/en/docs/configuring-sdk/endpoints.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> Create child page</a>
+<a href="https://github.com/aws/aws-sdk-go-v2/issues/new?title=Configuring%20Client%20Endpoints" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+
+
+<a href="https://github.com/aws/aws-sdk-go-v2/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
+
+</div>
+
+
+
+
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#examples">Examples</a>
+      <ul>
+        <li><a href="#overriding-endpoint-with-fallback">Overriding Endpoint with Fallback</a></li>
+        <li><a href="#overriding-endpoint-without-fallback">Overriding Endpoint Without Fallback</a></li>
+        <li><a href="#immutable-endpoints">Immutable Endpoints</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+          </div>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
+	<ol class="breadcrumb spb-1">
+		
+
+
+
+
+
+
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://aws.github.io/aws-sdk-go-v2/docs/">Documentation</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/">Configuring the SDK</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item active" aria-current="page">
+	<a href="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/endpoints/">Endpoints</a>
+</li>
+
+	</ol>
+</nav	>
+
+            
+<div class="td-content">
+	<h1>Configuring Client Endpoints</h1>
+    <div class="lead">Customizing service client endpoints.</div>
+	       
+	<p>In most cases you use the endpoint that is pre-configured for a service. However, you can specify a custom endpoint,
+such as for pre-release versions of the service.</p>
+<p>A <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#EndpointResolver">EndpointResolver</a> can be configured to provide custom endpoint resolution
+logic for service clients. A custom endpoint resolver has the ability to override the resolution of a service&rsquo;s endpoint
+resolution for all endpoints, or a just specific regional endpoint. Custom endpoint resolver have the ability trigger
+the service&rsquo;s endpoint resolution logic to fallback if a custom resolver does not wish to resolve a requested
+endpoint. <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#EndpointResolverFunc">EndpointResolverFunc</a> can be used to easily wrap functions to
+satisfy the <code>EndpointResolver</code> interface.</p>
+<p>A <code>EndpointResolver</code> can be easily configured by passing the resolver wrapped with
+<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config#WithEndpointResolver">WithEndpointResolver</a> to
+<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config#LoadDefaultConfig">LoadDefaultConfig</a>, allowing for the ability to override endpoints when
+loading credentials, as well as configuring the resulting <code>aws.Config</code> with your custom endpoint resolver.</p>
+<p>The endpoint resolver is given the service and region as a string, allowing for the resolver to dynamically drive its
+behavior. Each service client package has an exported <code>ServiceID</code> constant which can be used to determine which service
+client is invoking your endpoint resolver.</p>
+<p>An endpoint resolver can use the <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#EndpointNotFoundError">EndpointNotFoundError</a> sentinel error
+value to trigger fallback resolution to the service clients default resolution logic. This allows you to selectively
+override one or more endpoints seamlessly without having to handle fallback logic.</p>
+<p>If your endpoint resolver implementation returns an error other than <code>EndpointNotFoundError</code>, endpoint resolution will
+stop and the service operation returns an error to your application.</p>
+<h2 id="examples">Examples</h2>
+<h3 id="overriding-endpoint-with-fallback">Overriding Endpoint with Fallback</h3>
+<p>The following code snippet shows how a single service endpoint can be overridden for DynamoDB with
+fallback behavior for other endpoints:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000">customResolver</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EndpointResolverFunc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">service</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">region</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">service</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ServiceID</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#000">region</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#4e9a06">&#34;us-west-2&#34;</span> <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">{</span>
+            <span style="color:#000">PartitionID</span><span style="color:#000;font-weight:bold">:</span>   <span style="color:#4e9a06">&#34;aws&#34;</span><span style="color:#000;font-weight:bold">,</span>
+            <span style="color:#000">URL</span><span style="color:#000;font-weight:bold">:</span>           <span style="color:#4e9a06">&#34;https://test.us-west-2.amazonaws.com&#34;</span><span style="color:#000;font-weight:bold">,</span>
+            <span style="color:#000">SigningRegion</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;us-west-2&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#000;font-weight:bold">},</span> <span style="color:#204a87;font-weight:bold">nil</span>
+    <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#8f5902;font-style:italic">// returning EndpointNotFoundError will allow the service to fallback to it&#39;s default resolution
+</span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">{},</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EndpointNotFoundError</span><span style="color:#000;font-weight:bold">{}</span>
+<span style="color:#000;font-weight:bold">})</span>
+
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WithEndpointResolver</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">customResolver</span><span style="color:#000;font-weight:bold">))</span>
+</code></pre></div><h3 id="overriding-endpoint-without-fallback">Overriding Endpoint Without Fallback</h3>
+<p>The following code snippet shows how a single service endpoint can be overridden for DynamoDB without
+fallback behavior for other endpoints:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000">customResolver</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EndpointResolverFunc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">service</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">region</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">service</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ServiceID</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#000">region</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#4e9a06">&#34;us-west-2&#34;</span> <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">{</span>
+            <span style="color:#000">PartitionID</span><span style="color:#000;font-weight:bold">:</span>   <span style="color:#4e9a06">&#34;aws&#34;</span><span style="color:#000;font-weight:bold">,</span>
+            <span style="color:#000">URL</span><span style="color:#000;font-weight:bold">:</span>           <span style="color:#4e9a06">&#34;https://test.us-west-2.amazonaws.com&#34;</span><span style="color:#000;font-weight:bold">,</span>
+            <span style="color:#000">SigningRegion</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;us-west-2&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#000;font-weight:bold">},</span> <span style="color:#204a87;font-weight:bold">nil</span>
+    <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">{},</span> <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Errorf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;unknown endpoint requested&#34;</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">})</span>
+
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WithEndpointResolver</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">customResolver</span><span style="color:#000;font-weight:bold">))</span>
+</code></pre></div><h3 id="immutable-endpoints">Immutable Endpoints</h3>
+
+
+<div class="pageinfo pageinfo-warning">
+<p>Setting an endpoint as immutable may prevent some service client features from functioning correctly, and could result
+in undefined behavior. Caution should be taken when defining an endpoint as immutable.</p>
+
+</div>
+
+<p>Some service clients, such as Amazon S3, can modify the endpoint returned by the resolver for certain
+service operations. For example, the Amazon S3 will automatically handle
+<a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html">Virtual Bucket Addressing</a> by mutating the
+resolved endpoint. You can prevent the SDK from mutating your custom endpoints by setting
+<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Endpoint.HostnameImmutable">HostnameImmutable</a> to<code>true</code>. For example:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000">customResolver</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EndpointResolverFunc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">service</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">region</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">service</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ServiceID</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#000">region</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#4e9a06">&#34;us-west-2&#34;</span> <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">{</span>
+            <span style="color:#000">PartitionID</span><span style="color:#000;font-weight:bold">:</span>   <span style="color:#4e9a06">&#34;aws&#34;</span><span style="color:#000;font-weight:bold">,</span>
+            <span style="color:#000">URL</span><span style="color:#000;font-weight:bold">:</span>           <span style="color:#4e9a06">&#34;https://test.us-west-2.amazonaws.com&#34;</span><span style="color:#000;font-weight:bold">,</span>
+            <span style="color:#000">SigningRegion</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;us-west-2&#34;</span><span style="color:#000;font-weight:bold">,</span>
+            <span style="color:#000">HostnameImmutable</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#000;font-weight:bold">},</span> <span style="color:#204a87;font-weight:bold">nil</span>
+    <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">{},</span> <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Errorf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;unknown endpoint requested&#34;</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">})</span>
+
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WithEndpointResolver</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">customResolver</span><span style="color:#000;font-weight:bold">))</span>
+</code></pre></div>
+	
+	
+	<div class="text-muted mt-5 pt-3 border-top">Last modified November 24, 2020: <a  href="https://github.com/aws/aws-sdk-go-v2/commit/653d2e220003e1a68dd2b8512fb12b5f7a9e447e">Developer: Guide Using AWS Services (#907) (653d2e2)</a>
+</div>
+</div>
+
+
+          </main>
+        </div>
+      </div>
+      
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Blog" aria-label="Blog">
+    <a class="text-white" target="_blank" rel="noopener noreferrer" href="https://aws.amazon.com/blogs/developer/category/developer-tools/aws-sdk-for-go/">
+      <i class="fa fa-rss"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
+    <a class="text-white" target="_blank" rel="noopener noreferrer" href="https://github.com/aws/aws-sdk-go-v2">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        <small class="text-white">&copy; 2020 Amazon Web Services, Inc. or its affiliates. All rights reserved. All Rights Reserved</small>
+        
+	
+		
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    </div>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/aws-sdk-go-v2/js/main.min.460c8ae21829f9b330823a08f34ac961d7d0daa8874c8c9eba7ea0484bb42a79.js" integrity="sha256-RgyK4hgp&#43;bMwgjoI80rJYdfQ2qiHTIyeun6gSEu0Knk=" crossorigin="anonymous"></script>
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.78.0" />
+
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+
+<link rel="shortcut icon" href="/favicons/favicon.ico" >
+<link rel="apple-touch-icon" href="/aws-sdk-go-v2/favicons/apple-touch-icon-180x180.png" sizes="180x180">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-36x36.png" sizes="36x36">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-48x48.png" sizes="48x48">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-72x72.png" sizes="72x72">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-144x144.png" sizes="144x144">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-192x192.png" sizes="192x192">
+
+<title>Amazon S3 Utilities | AWS SDK for Go V2</title><meta property="og:title" content="Amazon S3 Utilities" />
+<meta property="og:description" content="Transfer Managers The Amazon Simple Storage Service upload and download managers can break up large objects, so they can be transferred in multiple parts, in parallel. This makes it easy to resume interrupted transfers.
+Upload Manager The Amazon Simple Storage Service upload manager determines if a file can be split into smaller parts and uploaded in parallel. You can customize the number of parallel uploads and the size of the uploaded parts." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/s3/" />
+<meta property="article:modified_time" content="2020-11-24T14:29:02-08:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
+<meta itemprop="name" content="Amazon S3 Utilities">
+<meta itemprop="description" content="Transfer Managers The Amazon Simple Storage Service upload and download managers can break up large objects, so they can be transferred in multiple parts, in parallel. This makes it easy to resume interrupted transfers.
+Upload Manager The Amazon Simple Storage Service upload manager determines if a file can be split into smaller parts and uploaded in parallel. You can customize the number of parallel uploads and the size of the uploaded parts.">
+<meta itemprop="dateModified" content="2020-11-24T14:29:02-08:00" />
+<meta itemprop="wordCount" content="1831">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Amazon S3 Utilities"/>
+<meta name="twitter:description" content="Transfer Managers The Amazon Simple Storage Service upload and download managers can break up large objects, so they can be transferred in multiple parts, in parallel. This makes it easy to resume interrupted transfers.
+Upload Manager The Amazon Simple Storage Service upload manager determines if a file can be split into smaller parts and uploaded in parallel. You can customize the number of parallel uploads and the size of the uploaded parts."/>
+
+
+
+
+
+<link rel="preload" href="/aws-sdk-go-v2/scss/main.min.a40e8388f84bdd24bc3411e01a2a4a50b09036c9b079bd05a1eb025839f53861.css" as="style">
+<link href="/aws-sdk-go-v2/scss/main.min.a40e8388f84bdd24bc3411e01a2a4a50b09036c9b079bd05a1eb025839f53861.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+
+<script
+  src="https://unpkg.com/lunr@2.3.8/lunr.min.js"
+  integrity="sha384-vRQ9bDyE0Wnu+lMfm57BlYLO0/XauFuKpVsZPs7KEDwYKktWi5+Kz3MP8++DFlRY"
+  crossorigin="anonymous"></script>
+
+
+
+
+  </head>
+  <body class="td-page">
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+        <a class="navbar-brand" href="/aws-sdk-go-v2/">
+		<span class="navbar-logo"></span><span class="text-uppercase font-weight-bold">AWS SDK for Go V2</span>
+	</a>
+	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				<a class="nav-link active" href="/aws-sdk-go-v2/docs/" ><span class="active">Documentation</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				<a class="nav-link" href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2" target="_blank" ><span>API</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				<a class="nav-link" href="https://github.com/aws/aws-sdk-go-v2" target="_blank" ><span>GitHub</span></a>
+			</li>
+			
+			
+			
+		</ul>
+	</div>
+	<div class="navbar-nav d-none d-lg-block">
+
+
+
+<input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.c4f65b5ca8db8903b35112598c16e5c1.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
+</div>
+</nav>
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <form class="td-sidebar__search d-flex align-items-center d-lg-none">
+    
+
+
+
+<input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.c4f65b5ca8db8903b35112598c16e5c1.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+    
+    
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Documentation</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="aws-sdk-go-v2docs">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsgetting-started" href="/aws-sdk-go-v2/docs/getting-started/">Getting Started</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/configuring-sdk/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Configuring the SDK</a>
+  </li>
+  <ul>
+    <li class="collapse " id="aws-sdk-go-v2docsconfiguring-sdk">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints" href="/aws-sdk-go-v2/docs/configuring-sdk/endpoints/">Endpoints</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsconfiguring-sdkcustom-http" href="/aws-sdk-go-v2/docs/configuring-sdk/custom-http/">HTTP Client</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsconfiguring-sdklogging" href="/aws-sdk-go-v2/docs/configuring-sdk/logging/">Logging</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docshandling-errors" href="/aws-sdk-go-v2/docs/handling-errors/">Handling Errors</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/sdk-utilities/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">SDK Utilities</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="aws-sdk-go-v2docssdk-utilities">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssdk-utilitiescloudfront" href="/aws-sdk-go-v2/docs/sdk-utilities/cloudfront/">Amazon CloudFront</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssdk-utilitiesec2-imds" href="/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/">Amazon EC2 IMDS</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-aws-sdk-go-v2docssdk-utilitiess3" href="/aws-sdk-go-v2/docs/sdk-utilities/s3/">Amazon S3</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsmaking-requests" href="/aws-sdk-go-v2/docs/making-requests/">Using AWS Services</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docscloud9-go" href="/aws-sdk-go-v2/docs/cloud9-go/">Using Cloud9 with the SDK</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/security/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Security</a>
+  </li>
+  <ul>
+    <li class="collapse " id="aws-sdk-go-v2docssecurity">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritycompliance-validation" href="/aws-sdk-go-v2/docs/security/compliance-validation/">Compliance Validation</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecurityiam" href="/aws-sdk-go-v2/docs/security/iam/">Identity and Access Management</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecurityinfrastructure-security" href="/aws-sdk-go-v2/docs/security/infrastructure-security/">Infrastructure Security</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritydisaster-recovery-resiliency" href="/aws-sdk-go-v2/docs/security/disaster-recovery-resiliency/">Resilience</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritydata-protection" href="/aws-sdk-go-v2/docs/security/data-protection/">Data Protection</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritytls" href="/aws-sdk-go-v2/docs/security/tls/">Enforcing TLS 1.2</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+    </li>
+  </ul>
+</ul>
+
+  </nav>
+</div>
+
+
+
+
+          </div>
+          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+            
+
+
+
+
+
+
+<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
+
+
+
+
+
+
+
+
+
+
+
+<a href="https://github.com/aws/aws-sdk-go-v2/edit/documentation/content/en/docs/sdk-utilities/s3.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/aws/aws-sdk-go-v2/new/documentation/content/en/docs/sdk-utilities/s3.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> Create child page</a>
+<a href="https://github.com/aws/aws-sdk-go-v2/issues/new?title=Amazon%20S3%20Utilities" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+
+
+<a href="https://github.com/aws/aws-sdk-go-v2/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
+
+</div>
+
+
+
+
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#upload-manager">Upload Manager</a>
+      <ul>
+        <li><a href="#configuration-options">Configuration Options</a></li>
+        <li><a href="#putobjectinput-body-field-ioreadseeker-vs-ioreader">PutObjectInput Body Field (io.ReadSeeker vs. io.Reader)</a></li>
+        <li><a href="#handling-failed-uploads">Handling Failed Uploads</a></li>
+        <li><a href="#overriding-uploader-options-per-upload">Overriding Uploader Options Per Upload</a></li>
+        <li><a href="#examples">Examples</a></li>
+      </ul>
+    </li>
+    <li><a href="#download-manager">Download Manager</a>
+      <ul>
+        <li></li>
+        <li><a href="#overriding-downloader-options-per-download">Overriding Downloader Options Per Download</a></li>
+      </ul>
+    </li>
+    <li><a href="#getbucketregion">GetBucketRegion</a></li>
+  </ul>
+</nav>
+
+
+
+          </div>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
+	<ol class="breadcrumb spb-1">
+		
+
+
+
+
+
+
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://aws.github.io/aws-sdk-go-v2/docs/">Documentation</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/">SDK Utilities</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item active" aria-current="page">
+	<a href="https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/s3/">Amazon S3</a>
+</li>
+
+	</ol>
+</nav	>
+
+            
+<div class="td-content">
+	<h1>Amazon S3 Utilities</h1>
+    
+	       
+	<h1 id="transfer-managers">Transfer Managers</h1>
+<p>The Amazon Simple Storage Service upload and download managers can break up large objects, so they can be transferred
+in multiple parts, in parallel. This makes it easy to resume interrupted transfers.</p>
+<h2 id="upload-manager">Upload Manager</h2>
+<p>The Amazon Simple Storage Service upload manager determines if a file can be split into
+smaller parts and uploaded in parallel. You can customize the number of parallel uploads and the size of the uploaded
+parts.</p>
+<p>The following example uses the Amazon S3 <code>Uploader</code> to upload a file.
+Using <code>Uploader</code> is similar to the <code>s3.PutObject()</code> operation.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/feature/s3/manager&#34;</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">()</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#204a87;font-weight:bold">return</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">)</span>
+
+<span style="color:#000">uploader</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">manager</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewUploader</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">client</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000">result</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">uploader</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Upload</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PutObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;my-bucket&#34;</span><span style="color:#000;font-weight:bold">),</span>
+	<span style="color:#000">Key</span><span style="color:#000;font-weight:bold">:</span>    <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;my-object-okey&#34;</span><span style="color:#000;font-weight:bold">),</span>
+	<span style="color:#000">Body</span><span style="color:#000;font-weight:bold">:</span>   <span style="color:#000">uploadFile</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#000;font-weight:bold">})</span>
+</code></pre></div><h3 id="configuration-options">Configuration Options</h3>
+<p>When you instantiate an <code>Uploader</code> instance using <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/feature/s3/manager#NewUploader">NewUploader</a>, you
+can specify several configuration options to customize how objects are uploaded. Options are overridden by providing one
+or more arguments to <code>NewUploader</code>. These options include:</p>
+<ul>
+<li><code>PartSize</code> – Specifies the buffer size, in bytes, of each part to upload. The minimum size per part is 5 MiB.</li>
+<li><code>Concurrency</code> – Specifies the number of parts to upload in parallel.</li>
+<li><code>LeavePartsOnError</code> – Indicates whether to leave successfully uploaded parts in Amazon S3.</li>
+</ul>
+<p>The <code>Concurrency</code> value limits the concurrent number of part uploads that can occur for a given <code>Upload</code> call.
+This is not a global client concurrency limit. Tweak the <code>PartSize</code> and <code>Concurrency</code> configuration values to find the
+optimal configuration. For example, systems with high-bandwidth connections can send bigger parts and more uploads in parallel.</p>
+<p>For example, your application configures <code>Uploader</code>  with a <code>Concurrency</code> of setting of <code>5</code>. If your application then
+calls <code>Upload</code> from two different goroutines, the result is <code>10</code> concurrent part uploads
+(2 goroutines * 5 <code>Concurrency</code>).</p>
+
+
+<div class="pageinfo pageinfo-warning">
+<p>Your application is expected to limit the concurrent calls to <code>Upload</code> to prevent application resource exhaustion.</p>
+
+</div>
+
+<p>For example, to check the default part size during <code>Uploader</code> creation:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000">uploader</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">manager</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewUploader</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">client</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">u</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">Uploader</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">u</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PartSize</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">10</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#0000cf;font-weight:bold">1024</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#0000cf;font-weight:bold">1024</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#8f5902;font-style:italic">// 10 MiB
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">})</span>
+</code></pre></div><p>For more information about <code>Uploader</code> and its configurations, see
+<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/feature/s3/manager/#Uploader">Uploader</a> in the AWS SDK for Go V2 API Reference.</p>
+<h3 id="putobjectinput-body-field-ioreadseeker-vs-ioreader">PutObjectInput Body Field (io.ReadSeeker vs. io.Reader)</h3>
+<p>The <code>Body</code> field of the <code>s3.PutObjectInput</code> struct is an <code>io.Reader</code> type. However, this field can be populated with a
+type that satisfies both the <code>io.ReadSeeker</code> and <code>io.ReaderAt</code> interface to improve application resource utilization
+of the host environment. The following example creates the type <code>ReadSeekerAt</code> that satisfies both interfaces:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">ReadSeekerAt</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">io</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ReadSeeker</span>
+	<span style="color:#000">io</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ReaderAt</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>For <code>body</code> values that implement the <code>ReadSeekerAt</code> type, the <code>Uploader</code> doesn&rsquo;t buffer the body contents in memory
+before sending it to Amazon S3. <code>Uploader</code> calculates the expected number of parts before uploading the
+file to Amazon S3. If the current value of <code>PartSize</code> requires more than 10,000 parts to upload the
+file, <code>Uploader</code> increases the part size value so that fewer parts are required.</p>
+<p>For <code>io.Reader</code> types, the bytes of the reader must be buffered in memory before the part can be uploaded. When you
+increase the <code>PartSize</code> or <code>Concurrency</code> value, the required memory (RAM) for the <code>Uploader</code> increases significantly.
+The required memory is approximately <em><code>PartSize</code></em> * <em><code>Concurrency</code></em>. For example, specifying 100 MB for <code>PartSize</code>
+and 10 for <code>Concurrency</code>, requires at least 1 GB.</p>
+<p>Because an <code>io.Reader</code> type cannot determine its size before reading its bytes, <code>Uploader</code> cannot calculate how many
+parts will be uploaded. Consequently, <code>Uploader</code> can reach the Amazon S3 upload limit of 10,000 parts
+for large files if you set the <code>PartSize</code> too low. If you try to upload more than 10,000 parts, the upload stops and
+returns an error.</p>
+<h3 id="handling-failed-uploads">Handling Failed Uploads</h3>
+<p>If an upload to Amazon S3 fails, by default, <code>Uploader</code> uses the
+Amazon S3 <code>AbortMultipartUpload</code> operation to remove the uploaded parts. This functionality ensures
+that failed uploads do not consume Amazon S3 storage.</p>
+<p>You can set <code>LeavePartsOnError</code> to true so that the <code>Uploader</code> doesn&rsquo;t delete successfully uploaded parts. This is
+useful for resuming  partially completed uploads. To operate on uploaded parts, you must get the <code>UploadID</code> of the
+failed upload. The following example demonstrates how to use the <code>manager.MultiUploadFailure</code> error interface type to
+get the <code>UploadID</code>.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000">result</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">uploader</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Upload</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PutObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;my-bucket&#34;</span><span style="color:#000;font-weight:bold">),</span>
+	<span style="color:#000">Key</span><span style="color:#000;font-weight:bold">:</span>    <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;my-object-okey&#34;</span><span style="color:#000;font-weight:bold">),</span>
+	<span style="color:#000">Body</span><span style="color:#000;font-weight:bold">:</span>   <span style="color:#000">uploadFile</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#000;font-weight:bold">})</span>
+<span style="color:#000">output</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">u</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">upload</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">input</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">mu</span> <span style="color:#000">manager</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">MultiUploadFailure</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">errors</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">As</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">mu</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#8f5902;font-style:italic">// Process error and its associated uploadID
+</span><span style="color:#8f5902;font-style:italic"></span>		<span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Error:&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">mu</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#000">_</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">mu</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">UploadID</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#8f5902;font-style:italic">// retrieve the associated UploadID
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000;font-weight:bold">}</span> <span style="color:#204a87;font-weight:bold">else</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#8f5902;font-style:italic">// Process error generically
+</span><span style="color:#8f5902;font-style:italic"></span>		<span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Error:&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Error</span><span style="color:#000;font-weight:bold">())</span>
+	<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#204a87;font-weight:bold">return</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+</code></pre></div><h3 id="overriding-uploader-options-per-upload">Overriding Uploader Options Per Upload</h3>
+<p>You can override the <code>Uploader</code> options when calling <code>Upload</code> by providing one or more arguments to the
+method. These overrides are concurrency-safe modifications and do not affect ongoing uploads, or subsequent <code>Upload</code>
+calls to the manager. For example, to override the <code>PartSize</code> configuration for a specific upload request:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000">params</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PutObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;my-bucket&#34;</span><span style="color:#000;font-weight:bold">),</span>
+	<span style="color:#000">Key</span><span style="color:#000;font-weight:bold">:</span>    <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;my-key&#34;</span><span style="color:#000;font-weight:bold">),</span>
+	<span style="color:#000">Body</span><span style="color:#000;font-weight:bold">:</span>   <span style="color:#000">myBody</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000">resp</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">uploader</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Upload</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#000">params</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">u</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">manager</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Uploader</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">u</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PartSize</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">10</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#0000cf;font-weight:bold">1024</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#0000cf;font-weight:bold">1024</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#8f5902;font-style:italic">// 10 MiB
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">})</span>
+</code></pre></div><h3 id="examples">Examples</h3>
+<h4 id="upload-a-folder-to-amazon-s3">Upload a Folder to Amazon S3</h4>
+<p>The following example uses the <code>path/filepath</code> package to recursively gather a list of files and upload them to the
+specified Amazon S3 bucket. The keys of the Amazon S3 objects are prefixed with the
+file&rsquo;s relative path.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">package</span> <span style="color:#000">main</span>
+
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">(</span>
+	<span style="color:#4e9a06">&#34;context&#34;</span>
+	<span style="color:#4e9a06">&#34;log&#34;</span>
+	<span style="color:#4e9a06">&#34;os&#34;</span>
+	<span style="color:#4e9a06">&#34;path/filepath&#34;</span>
+
+	<span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/aws&#34;</span>
+	<span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+	<span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/feature/s3/manager&#34;</span>
+	<span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+<span style="color:#000;font-weight:bold">)</span>
+
+<span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000;font-weight:bold">(</span>
+	<span style="color:#000">localPath</span> <span style="color:#204a87;font-weight:bold">string</span>
+	<span style="color:#000">bucket</span>    <span style="color:#204a87;font-weight:bold">string</span>
+	<span style="color:#000">prefix</span>    <span style="color:#204a87;font-weight:bold">string</span>
+<span style="color:#000;font-weight:bold">)</span>
+
+<span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">init</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#204a87">len</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">os</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Args</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#0000cf;font-weight:bold">4</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Fatalln</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Usage:&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">os</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Args</span><span style="color:#000;font-weight:bold">[</span><span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">],</span> <span style="color:#4e9a06">&#34;&lt;local path&gt; &lt;bucket&gt; &lt;prefix&gt;&#34;</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#000">localPath</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">os</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Args</span><span style="color:#000;font-weight:bold">[</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">]</span>
+	<span style="color:#000">bucket</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">os</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Args</span><span style="color:#000;font-weight:bold">[</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">]</span>
+	<span style="color:#000">prefix</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">os</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Args</span><span style="color:#000;font-weight:bold">[</span><span style="color:#0000cf;font-weight:bold">3</span><span style="color:#000;font-weight:bold">]</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">walker</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#204a87">make</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">fileWalk</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#204a87;font-weight:bold">go</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#8f5902;font-style:italic">// Gather the files to upload by walking the path recursively 
+</span><span style="color:#8f5902;font-style:italic"></span>		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">filepath</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Walk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">localPath</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">walker</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Walk</span><span style="color:#000;font-weight:bold">);</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Fatalln</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Walk failed:&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#000;font-weight:bold">}</span>
+		<span style="color:#204a87">close</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">walker</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#000;font-weight:bold">}()</span>
+
+	<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">()</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Fatalln</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error:&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#000;font-weight:bold">}</span>
+	
+	<span style="color:#8f5902;font-style:italic">// For each file found walking, upload it to Amazon S3
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000">uploader</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">manager</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewUploader</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">))</span>
+	<span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">path</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#204a87;font-weight:bold">range</span> <span style="color:#000">walker</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">rel</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">filepath</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Rel</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">localPath</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">path</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Fatalln</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Unable to get relative path:&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">path</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#000;font-weight:bold">}</span>
+		<span style="color:#000">file</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">os</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Open</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">path</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Failed opening file&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">path</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+			<span style="color:#204a87;font-weight:bold">continue</span>
+		<span style="color:#000;font-weight:bold">}</span>
+		<span style="color:#204a87;font-weight:bold">defer</span> <span style="color:#000">file</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Close</span><span style="color:#000;font-weight:bold">()</span>
+		<span style="color:#000">result</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">uploader</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Upload</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PutObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">bucket</span><span style="color:#000;font-weight:bold">,</span>
+			<span style="color:#000">Key</span><span style="color:#000;font-weight:bold">:</span>    <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">filepath</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Join</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">prefix</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">rel</span><span style="color:#000;font-weight:bold">)),</span>
+			<span style="color:#000">Body</span><span style="color:#000;font-weight:bold">:</span>   <span style="color:#000">file</span><span style="color:#000;font-weight:bold">,</span>
+		<span style="color:#000;font-weight:bold">})</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Fatalln</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Failed to upload&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">path</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#000;font-weight:bold">}</span>
+		<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Uploaded&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">path</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">result</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Location</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">fileWalk</span> <span style="color:#204a87;font-weight:bold">chan</span> <span style="color:#204a87;font-weight:bold">string</span>
+
+<span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">f</span> <span style="color:#000">fileWalk</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">Walk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">path</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">info</span> <span style="color:#000">os</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">FileInfo</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">error</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">err</span>
+	<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">!</span><span style="color:#000">info</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">IsDir</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">f</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">path</span>
+	<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87;font-weight:bold">nil</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><h2 id="download-manager">Download Manager</h2>
+<p>The Amazon S3 <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/feature/s3/manager#Downloader">Downloader</a> manager determines if a file
+can be split into smaller parts and downloaded in parallel. You can customize the number of parallel downloads and the
+size of the downloaded parts.</p>
+<h4 id="example-download-a-file">Example: Download a File</h4>
+<p>The following example uses the Amazon S3 <code>Downloader</code> to download a file. Using <code>Downloader</code> is similar
+to the [s3.GetObject]({% apiref &ldquo;service/s3#Client.GetObject&rdquo; %}}) operation.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/aws&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/feature/s3/manager&#34;</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">()</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error:&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#204a87;font-weight:bold">return</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">)</span>
+
+<span style="color:#000">downloader</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">manager</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewDownloader</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">client</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000">numBytes</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">downloader</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Download</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#000">downloadFile</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;my-bucket&#34;</span><span style="color:#000;font-weight:bold">),</span> 
+	<span style="color:#000">Key</span><span style="color:#000;font-weight:bold">:</span>    <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;my-key&#34;</span><span style="color:#000;font-weight:bold">),</span>
+<span style="color:#000;font-weight:bold">})</span>
+</code></pre></div><p>The <code>downloadFile</code> parameter is an <code>io.WriterAt</code> type. The <code>WriterAt</code> interface enables the <code>Downloader</code> to write
+multiple parts of the file in parallel.</p>
+<h4 id="configuration-options-1">Configuration Options</h4>
+<p>When you instantiate a <code>Downloader</code> instance, you can specify configuration options to customize how objects are
+downloaded:</p>
+<ul>
+<li><code>PartSize</code> – Specifies the buffer size, in bytes, of each part to
+download. The minimum size per part is 5 MB.</li>
+<li><code>Concurrency</code> – Specifies the number of parts to download in
+parallel.</li>
+</ul>
+<p>The <code>Concurrency</code> value limits the concurrent number of part download that can occur for a given <code>Download</code> call.
+This is not a global client concurrency limit. Tweak the <code>PartSize</code> and <code>Concurrency</code> configuration values to find the
+optimal configuration. For example, systems with high-bandwidth connections can recieve bigger parts and more downloads
+in parallel.</p>
+<p>For example, your application configures <code>Downloader</code>  with a <code>Concurrency</code> of <code>5</code>. Your application then
+calls <code>Download</code> from two different goroutines, the result will be <code>10</code> concurrent part downloads
+(2 goroutines * 5 <code>Concurrency</code>).</p>
+
+
+<div class="pageinfo pageinfo-warning">
+<p>Your application is expected to limit the concurrent calls to <code>Download</code> to prevent application resource exhaustion.</p>
+
+</div>
+
+<p>For more information about <code>Downloader</code> and its other configuration options, see
+<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/feature/s3/manager/#Downloader">manager.Downloader</a> in the AWS SDK for Go V2 API Reference.</p>
+<h3 id="overriding-downloader-options-per-download">Overriding Downloader Options Per Download</h3>
+<p>You can override the <code>Downloader</code> options when calling <code>Download</code> by providing one or more functional arguments to the
+method. These overrides are concurrency safe modifications and do not affect ongoing uploads, or subsequent <code>Download</code>
+calls to the manager. For example, to override the <code>PartSize</code> configuration for a specific upload request:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000">params</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;my-bucket&#34;</span><span style="color:#000;font-weight:bold">),</span>
+	<span style="color:#000">Key</span><span style="color:#000;font-weight:bold">:</span>    <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;my-key&#34;</span><span style="color:#000;font-weight:bold">),</span>
+<span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000">resp</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">downloader</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Download</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#000">targetWriter</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">params</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">u</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">manager</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Downloader</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">u</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PartSize</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">10</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#0000cf;font-weight:bold">1024</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#0000cf;font-weight:bold">1024</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#8f5902;font-style:italic">// 10 MiB
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">})</span>
+</code></pre></div><h4 id="examples-1">Examples</h4>
+<h5 id="download-all-objects-in-a-bucket">Download All Objects in a Bucket</h5>
+<p>The following example uses pagination to gather a list of objects from an Amazon S3  bucket. Then it
+downloads each object to a local file.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">package</span> <span style="color:#000">main</span>
+
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">(</span>
+	<span style="color:#4e9a06">&#34;context&#34;</span>
+	<span style="color:#4e9a06">&#34;fmt&#34;</span>
+	<span style="color:#4e9a06">&#34;log&#34;</span>
+	<span style="color:#4e9a06">&#34;os&#34;</span>
+	<span style="color:#4e9a06">&#34;path/filepath&#34;</span>
+
+	<span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/aws&#34;</span>
+	<span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+	<span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/feature/s3/manager&#34;</span>
+	<span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+<span style="color:#000;font-weight:bold">)</span>
+
+<span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000;font-weight:bold">(</span>
+	<span style="color:#000">Bucket</span>         <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;MyBucket&#34;</span> <span style="color:#8f5902;font-style:italic">// Download from this bucket
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000">Prefix</span>         <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;logs/&#34;</span>    <span style="color:#8f5902;font-style:italic">// Using this key prefix
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000">LocalDirectory</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;s3logs&#34;</span>   <span style="color:#8f5902;font-style:italic">// Into this directory
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">)</span>
+
+<span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">()</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Fatalln</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error:&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#000;font-weight:bold">}</span>
+
+	<span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#000">manager</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">manager</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewDownloader</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">client</span><span style="color:#000;font-weight:bold">)</span>
+
+	<span style="color:#000">paginator</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewListObjectsV2Paginator</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">client</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ListObjectsV2Input</span><span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">,</span>
+		<span style="color:#000">Prefix</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">Prefix</span><span style="color:#000;font-weight:bold">,</span>
+	<span style="color:#000;font-weight:bold">})</span>
+
+	<span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">paginator</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HasMorePages</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">page</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">paginator</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NextPage</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">())</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Fatalln</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error:&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#000;font-weight:bold">}</span>
+		<span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">obj</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#204a87;font-weight:bold">range</span> <span style="color:#000">page</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Contents</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">downloadToFile</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">manager</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">LocalDirectory</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ToString</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">obj</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Key</span><span style="color:#000;font-weight:bold">));</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+				<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Fatalln</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error:&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+			<span style="color:#000;font-weight:bold">}</span>
+		<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">downloadToFile</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">downloader</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">manager</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Downloader</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">targetDirectory</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bucket</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">key</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">error</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#8f5902;font-style:italic">// Create the directories in the path
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000">file</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">filepath</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Join</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">targetDirectory</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">key</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">os</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">MkdirAll</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">filepath</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Dir</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">file</span><span style="color:#000;font-weight:bold">),</span> <span style="color:#0000cf;font-weight:bold">0775</span><span style="color:#000;font-weight:bold">);</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">err</span>
+	<span style="color:#000;font-weight:bold">}</span>
+
+	<span style="color:#8f5902;font-style:italic">// Set up the local file
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000">fd</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">os</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Create</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">file</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">err</span>
+	<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#204a87;font-weight:bold">defer</span> <span style="color:#000">fd</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Close</span><span style="color:#000;font-weight:bold">()</span>
+
+	<span style="color:#8f5902;font-style:italic">// Download the file using the AWS SDK for Go
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Downloading s3://%s/%s to %s...\n&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bucket</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">key</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">file</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#000">_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">downloader</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Download</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#000">fd</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectInput</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">bucket</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Key</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">key</span><span style="color:#000;font-weight:bold">})</span>
+
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">err</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><h2 id="getbucketregion">GetBucketRegion</h2>
+<p>The <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/feature/s3/manager#GetBucketRegion">GetBucketRegion</a> is a utility function for determining the
+AWS Region location of an Amazon S3 Bucket. <code>GetBucketRegion</code> takes an Amazon S3
+client and uses it to determine the location of the requested Bucket within the AWS Partition associated with the
+client&rsquo;s configured Region.</p>
+<p>For example to find the Region for the Bucket <code>my-bucket</code>:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">()</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error:&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#204a87;font-weight:bold">return</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">bucket</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#4e9a06">&#34;my-bucket&#34;</span>
+<span style="color:#000">region</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">manager</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetBucketRegion</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">),</span> <span style="color:#000">bucket</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">bnf</span> <span style="color:#000">manager</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">BucketNotFound</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">errors</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">As</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">bnf</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;unable to find bucket %s&#39;s Region\n&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bucket</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#000;font-weight:bold">}</span> <span style="color:#204a87;font-weight:bold">else</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error:&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#204a87;font-weight:bold">return</span>
+<span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Bucket %s is in %s region\n&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bucket</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">region</span><span style="color:#000;font-weight:bold">)</span>
+</code></pre></div><p>If <code>GetBucketRegion</code> is not able to resolve the location of a Bucket, the function returns a
+<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/feature/s3/manager#BucketNotFound">BucketNotFound</a> error type as shown in the example.</p>
+
+	
+	
+	<div class="text-muted mt-5 pt-3 border-top">Last modified November 24, 2020: <a  href="https://github.com/aws/aws-sdk-go-v2/commit/cdec04c06f8a11e94b5d3d7e1dedf6666a8847f8">Developer Guide: SDK Utilities (#924) (cdec04c)</a>
+</div>
+</div>
+
+
+          </main>
+        </div>
+      </div>
+      
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Blog" aria-label="Blog">
+    <a class="text-white" target="_blank" rel="noopener noreferrer" href="https://aws.amazon.com/blogs/developer/category/developer-tools/aws-sdk-for-go/">
+      <i class="fa fa-rss"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
+    <a class="text-white" target="_blank" rel="noopener noreferrer" href="https://github.com/aws/aws-sdk-go-v2">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        <small class="text-white">&copy; 2020 Amazon Web Services, Inc. or its affiliates. All rights reserved. All Rights Reserved</small>
+        
+	
+		
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    </div>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/aws-sdk-go-v2/js/main.min.460c8ae21829f9b330823a08f34ac961d7d0daa8874c8c9eba7ea0484bb42a79.js" integrity="sha256-RgyK4hgp&#43;bMwgjoI80rJYdfQ2qiHTIyeun6gSEu0Knk=" crossorigin="anonymous"></script>
+
+
+
+
+  </body>
+</html>
