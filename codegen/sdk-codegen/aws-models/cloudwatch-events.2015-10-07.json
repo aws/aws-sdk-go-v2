@@ -37,6 +37,12 @@
           "target": "com.amazonaws.cloudwatchevents#ActivateEventSource"
         },
         {
+          "target": "com.amazonaws.cloudwatchevents#CancelReplay"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#CreateArchive"
+        },
+        {
           "target": "com.amazonaws.cloudwatchevents#CreateEventBus"
         },
         {
@@ -44,6 +50,9 @@
         },
         {
           "target": "com.amazonaws.cloudwatchevents#DeactivateEventSource"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#DeleteArchive"
         },
         {
           "target": "com.amazonaws.cloudwatchevents#DeleteEventBus"
@@ -55,6 +64,9 @@
           "target": "com.amazonaws.cloudwatchevents#DeleteRule"
         },
         {
+          "target": "com.amazonaws.cloudwatchevents#DescribeArchive"
+        },
+        {
           "target": "com.amazonaws.cloudwatchevents#DescribeEventBus"
         },
         {
@@ -64,6 +76,9 @@
           "target": "com.amazonaws.cloudwatchevents#DescribePartnerEventSource"
         },
         {
+          "target": "com.amazonaws.cloudwatchevents#DescribeReplay"
+        },
+        {
           "target": "com.amazonaws.cloudwatchevents#DescribeRule"
         },
         {
@@ -71,6 +86,9 @@
         },
         {
           "target": "com.amazonaws.cloudwatchevents#EnableRule"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#ListArchives"
         },
         {
           "target": "com.amazonaws.cloudwatchevents#ListEventBuses"
@@ -83,6 +101,9 @@
         },
         {
           "target": "com.amazonaws.cloudwatchevents#ListPartnerEventSources"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#ListReplays"
         },
         {
           "target": "com.amazonaws.cloudwatchevents#ListRuleNamesByTarget"
@@ -118,6 +139,9 @@
           "target": "com.amazonaws.cloudwatchevents#RemoveTargets"
         },
         {
+          "target": "com.amazonaws.cloudwatchevents#StartReplay"
+        },
+        {
           "target": "com.amazonaws.cloudwatchevents#TagResource"
         },
         {
@@ -125,6 +149,9 @@
         },
         {
           "target": "com.amazonaws.cloudwatchevents#UntagResource"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#UpdateArchive"
         }
       ],
       "traits": {
@@ -203,6 +230,139 @@
         }
       }
     },
+    "com.amazonaws.cloudwatchevents#Archive": {
+      "type": "structure",
+      "members": {
+        "ArchiveName": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the archive.</p>"
+          }
+        },
+        "EventSourceArn": {
+          "target": "com.amazonaws.cloudwatchevents#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the event bus associated with the archive. Only events from this event bus\n            are sent to the archive.</p>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveState",
+          "traits": {
+            "smithy.api#documentation": "<p>The current state of the archive.</p>"
+          }
+        },
+        "StateReason": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveStateReason",
+          "traits": {
+            "smithy.api#documentation": "<p>A description for the reason that the archive is in the current state.</p>"
+          }
+        },
+        "RetentionDays": {
+          "target": "com.amazonaws.cloudwatchevents#RetentionDays",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of days to retain events in the archive before they are deleted.</p>"
+          }
+        },
+        "SizeBytes": {
+          "target": "com.amazonaws.cloudwatchevents#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The size of the archive, in bytes.</p>"
+          }
+        },
+        "EventCount": {
+          "target": "com.amazonaws.cloudwatchevents#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of events in the archive.</p>"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time stamp for the time that the archive was created.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An <code>Archive</code> object that contains details about an archive.</p>"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#ArchiveArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1600
+        },
+        "smithy.api#pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:.+\\/.+$"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#ArchiveDescription": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 512
+        },
+        "smithy.api#pattern": ".*"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#ArchiveName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 48
+        },
+        "smithy.api#pattern": "[\\.\\-_A-Za-z0-9]+"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#ArchiveResponseList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.cloudwatchevents#Archive"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#ArchiveState": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ENABLED",
+            "name": "ENABLED"
+          },
+          {
+            "value": "DISABLED",
+            "name": "DISABLED"
+          },
+          {
+            "value": "CREATING",
+            "name": "CREATING"
+          },
+          {
+            "value": "UPDATING",
+            "name": "UPDATING"
+          },
+          {
+            "value": "CREATE_FAILED",
+            "name": "CREATE_FAILED"
+          },
+          {
+            "value": "UPDATE_FAILED",
+            "name": "UPDATE_FAILED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.cloudwatchevents#ArchiveStateReason": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 512
+        },
+        "smithy.api#pattern": ".*"
+      }
+    },
     "com.amazonaws.cloudwatchevents#Arn": {
       "type": "string",
       "traits": {
@@ -271,17 +431,17 @@
     "com.amazonaws.cloudwatchevents#BatchParameters": {
       "type": "structure",
       "members": {
-        "JobName": {
-          "target": "com.amazonaws.cloudwatchevents#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name to use for this execution of the job, if the target is an AWS Batch\n            job.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "JobDefinition": {
           "target": "com.amazonaws.cloudwatchevents#String",
           "traits": {
             "smithy.api#documentation": "<p>The ARN or name of the job definition to use if the event target is an AWS Batch\n            job. This job definition must already exist.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "JobName": {
+          "target": "com.amazonaws.cloudwatchevents#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name to use for this execution of the job, if the target is an AWS Batch\n            job.</p>",
             "smithy.api#required": {}
           }
         },
@@ -319,6 +479,67 @@
     "com.amazonaws.cloudwatchevents#Boolean": {
       "type": "boolean"
     },
+    "com.amazonaws.cloudwatchevents#CancelReplay": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.cloudwatchevents#CancelReplayRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.cloudwatchevents#CancelReplayResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.cloudwatchevents#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#IllegalStatusException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#InternalException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Cancels the specified replay.</p>"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#CancelReplayRequest": {
+      "type": "structure",
+      "members": {
+        "ReplayName": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the replay to cancel.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.cloudwatchevents#CancelReplayResponse": {
+      "type": "structure",
+      "members": {
+        "ReplayArn": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the replay to cancel.</p>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayState",
+          "traits": {
+            "smithy.api#documentation": "<p>The current state of the replay.</p>"
+          }
+        },
+        "StateReason": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayStateReason",
+          "traits": {
+            "smithy.api#documentation": "<p>The reason that the replay is in the current state.</p>"
+          }
+        }
+      }
+    },
     "com.amazonaws.cloudwatchevents#ConcurrentModificationException": {
       "type": "structure",
       "members": {
@@ -327,17 +548,17 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>There is concurrent modification on a rule or target.</p>",
+        "smithy.api#documentation": "<p>There is concurrent modification on a rule, target, archive, or replay.</p>",
         "smithy.api#error": "client"
       }
     },
     "com.amazonaws.cloudwatchevents#Condition": {
       "type": "structure",
       "members": {
-        "Value": {
+        "Type": {
           "target": "com.amazonaws.cloudwatchevents#String",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the value for the key. Currently, this must be the ID of the\n            organization.</p>",
+            "smithy.api#documentation": "<p>Specifies the type of condition. Currently the only supported value is\n                <code>StringEquals</code>.</p>",
             "smithy.api#required": {}
           }
         },
@@ -348,16 +569,114 @@
             "smithy.api#required": {}
           }
         },
-        "Type": {
+        "Value": {
           "target": "com.amazonaws.cloudwatchevents#String",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the type of condition. Currently the only supported value is\n                <code>StringEquals</code>.</p>",
+            "smithy.api#documentation": "<p>Specifies the value for the key. Currently, this must be the ID of the\n            organization.</p>",
             "smithy.api#required": {}
           }
         }
       },
       "traits": {
         "smithy.api#documentation": "<p>A JSON string which you can use to limit the event bus permissions you are granting to\n            only accounts that fulfill the condition. Currently, the only supported condition is\n            membership in a certain AWS organization. The string must contain <code>Type</code>,\n                <code>Key</code>, and <code>Value</code> fields. The <code>Value</code> field\n            specifies the ID of the AWS organization. Following is an example value for\n                <code>Condition</code>:</p>\n        <p>\n            <code>'{\"Type\" : \"StringEquals\", \"Key\": \"aws:PrincipalOrgID\", \"Value\":\n                \"o-1234567890\"}'</code>\n         </p>"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#CreateArchive": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.cloudwatchevents#CreateArchiveRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.cloudwatchevents#CreateArchiveResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.cloudwatchevents#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#InternalException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#InvalidEventPatternException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#ResourceAlreadyExistsException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates an archive of events with the specified settings. When you create an archive,\n            incoming events might not immediately start being sent to the archive. Allow a short\n            period of time for changes to take effect. If you do not specify a pattern to filter events sent to the archive, all events are sent to the archive except replayed events. Replayed events are not sent to an archive.</p>"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#CreateArchiveRequest": {
+      "type": "structure",
+      "members": {
+        "ArchiveName": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name for the archive to create.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "EventSourceArn": {
+          "target": "com.amazonaws.cloudwatchevents#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the event source associated with the archive.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>A description for the archive.</p>"
+          }
+        },
+        "EventPattern": {
+          "target": "com.amazonaws.cloudwatchevents#EventPattern",
+          "traits": {
+            "smithy.api#documentation": "<p>An event pattern to use to filter events sent to the archive.</p>"
+          }
+        },
+        "RetentionDays": {
+          "target": "com.amazonaws.cloudwatchevents#RetentionDays",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of days to retain events for. Default value is 0. If set to 0, events are\n            retained indefinitely</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.cloudwatchevents#CreateArchiveResponse": {
+      "type": "structure",
+      "members": {
+        "ArchiveArn": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the archive that was created.</p>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveState",
+          "traits": {
+            "smithy.api#documentation": "<p>The state of the archive that was created.</p>"
+          }
+        },
+        "StateReason": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveStateReason",
+          "traits": {
+            "smithy.api#documentation": "<p>The reason that the archive is in the state.</p>"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the archive was created.</p>"
+          }
+        }
       }
     },
     "com.amazonaws.cloudwatchevents#CreateEventBus": {
@@ -398,6 +717,13 @@
     "com.amazonaws.cloudwatchevents#CreateEventBusRequest": {
       "type": "structure",
       "members": {
+        "Name": {
+          "target": "com.amazonaws.cloudwatchevents#EventBusName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the new event bus. </p>\n        <p>Event bus names cannot contain the / character. You can't use the name\n                <code>default</code> for a custom event bus, as this name is already used for your\n            account's default event bus.</p>\n        <p>If this is a partner event bus, the name must exactly match the name of the partner\n            event source that this event bus is matched to.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "EventSourceName": {
           "target": "com.amazonaws.cloudwatchevents#EventSourceName",
           "traits": {
@@ -408,13 +734,6 @@
           "target": "com.amazonaws.cloudwatchevents#TagList",
           "traits": {
             "smithy.api#documentation": "<p>Tags to associate with the event bus.</p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.cloudwatchevents#EventBusName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the new event bus. </p>\n        <p>Event bus names cannot contain the / character. You can't use the name\n                <code>default</code> for a custom event bus, as this name is already used for your\n            account's default event bus.</p>\n        <p>If this is a partner event bus, the name must exactly match the name of the partner\n            event source that this event bus is matched to.</p>",
-            "smithy.api#required": {}
           }
         }
       }
@@ -462,17 +781,17 @@
     "com.amazonaws.cloudwatchevents#CreatePartnerEventSourceRequest": {
       "type": "structure",
       "members": {
-        "Account": {
-          "target": "com.amazonaws.cloudwatchevents#AccountId",
-          "traits": {
-            "smithy.api#documentation": "<p>The AWS account ID that is permitted to create a matching partner event bus for this\n            partner event source.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Name": {
           "target": "com.amazonaws.cloudwatchevents#EventSourceName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the partner event source. This name must be unique and must be in the\n            format\n                    <code>\n               <i>partner_name</i>/<i>event_namespace</i>/<i>event_name</i>\n            </code>.\n            The AWS account that wants to use this partner event source must create a partner event\n            bus with a name that matches the name of the partner event source.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Account": {
+          "target": "com.amazonaws.cloudwatchevents#AccountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS account ID that is permitted to create a matching partner event bus for this\n            partner event source.</p>",
             "smithy.api#required": {}
           }
         }
@@ -486,6 +805,15 @@
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the partner event source.</p>"
           }
+        }
+      }
+    },
+    "com.amazonaws.cloudwatchevents#CreatedBy": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
         }
       }
     },
@@ -558,8 +886,47 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>A <code>DeadLetterConfig</code> object that contains information about a dead-letter queue configuration.</p>"
+        "smithy.api#documentation": "<p>A <code>DeadLetterConfig</code> object that contains information about a dead-letter\n            queue configuration.</p>"
       }
+    },
+    "com.amazonaws.cloudwatchevents#DeleteArchive": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.cloudwatchevents#DeleteArchiveRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.cloudwatchevents#DeleteArchiveResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.cloudwatchevents#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#InternalException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes the specified archive.</p>"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#DeleteArchiveRequest": {
+      "type": "structure",
+      "members": {
+        "ArchiveName": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the archive to delete.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.cloudwatchevents#DeleteArchiveResponse": {
+      "type": "structure",
+      "members": {}
     },
     "com.amazonaws.cloudwatchevents#DeleteEventBus": {
       "type": "operation",
@@ -613,17 +980,17 @@
     "com.amazonaws.cloudwatchevents#DeletePartnerEventSourceRequest": {
       "type": "structure",
       "members": {
-        "Account": {
-          "target": "com.amazonaws.cloudwatchevents#AccountId",
-          "traits": {
-            "smithy.api#documentation": "<p>The AWS account ID of the AWS customer that the event source was created for.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Name": {
           "target": "com.amazonaws.cloudwatchevents#EventSourceName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the event source to delete.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Account": {
+          "target": "com.amazonaws.cloudwatchevents#AccountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS account ID of the AWS customer that the event source was created for.</p>",
             "smithy.api#required": {}
           }
         }
@@ -655,23 +1022,129 @@
     "com.amazonaws.cloudwatchevents#DeleteRuleRequest": {
       "type": "structure",
       "members": {
-        "Force": {
-          "target": "com.amazonaws.cloudwatchevents#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>If this is a managed rule, created by an AWS service on your behalf, you must specify\n                <code>Force</code> as <code>True</code> to delete the rule. This parameter is\n            ignored for rules that are not managed rules. You can check whether a rule is a managed\n            rule by using <code>DescribeRule</code> or <code>ListRules</code> and checking the\n                <code>ManagedBy</code> field of the response.</p>"
-          }
-        },
-        "EventBusName": {
-          "target": "com.amazonaws.cloudwatchevents#EventBusName",
-          "traits": {
-            "smithy.api#documentation": "<p>The event bus associated with the rule. If you omit this, the default event bus is\n            used.</p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.cloudwatchevents#RuleName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the rule.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "EventBusName": {
+          "target": "com.amazonaws.cloudwatchevents#EventBusNameOrArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is\n            used.</p>"
+          }
+        },
+        "Force": {
+          "target": "com.amazonaws.cloudwatchevents#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>If this is a managed rule, created by an AWS service on your behalf, you must specify\n                <code>Force</code> as <code>True</code> to delete the rule. This parameter is\n            ignored for rules that are not managed rules. You can check whether a rule is a managed\n            rule by using <code>DescribeRule</code> or <code>ListRules</code> and checking the\n                <code>ManagedBy</code> field of the response.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.cloudwatchevents#DescribeArchive": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.cloudwatchevents#DescribeArchiveRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.cloudwatchevents#DescribeArchiveResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.cloudwatchevents#InternalException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#ResourceAlreadyExistsException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves details about an archive.</p>"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#DescribeArchiveRequest": {
+      "type": "structure",
+      "members": {
+        "ArchiveName": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the archive to retrieve.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.cloudwatchevents#DescribeArchiveResponse": {
+      "type": "structure",
+      "members": {
+        "ArchiveArn": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the archive.</p>"
+          }
+        },
+        "ArchiveName": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the archive.</p>"
+          }
+        },
+        "EventSourceArn": {
+          "target": "com.amazonaws.cloudwatchevents#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the event source associated with the archive.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the archive.</p>"
+          }
+        },
+        "EventPattern": {
+          "target": "com.amazonaws.cloudwatchevents#EventPattern",
+          "traits": {
+            "smithy.api#documentation": "<p>The event pattern used to filter events sent to the archive.</p>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveState",
+          "traits": {
+            "smithy.api#documentation": "<p>The state of the archive.</p>"
+          }
+        },
+        "StateReason": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveStateReason",
+          "traits": {
+            "smithy.api#documentation": "<p>The reason that the archive is in the state.</p>"
+          }
+        },
+        "RetentionDays": {
+          "target": "com.amazonaws.cloudwatchevents#RetentionDays",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of days to retain events for in the archive.</p>"
+          }
+        },
+        "SizeBytes": {
+          "target": "com.amazonaws.cloudwatchevents#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The size of the archive in bytes.</p>"
+          }
+        },
+        "EventCount": {
+          "target": "com.amazonaws.cloudwatchevents#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of events in the archive.</p>"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the archive was created.</p>"
           }
         }
       }
@@ -700,9 +1173,9 @@
       "type": "structure",
       "members": {
         "Name": {
-          "target": "com.amazonaws.cloudwatchevents#EventBusName",
+          "target": "com.amazonaws.cloudwatchevents#EventBusNameOrArn",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the event bus to show details for. If you omit this, the default event bus\n            is displayed.</p>"
+            "smithy.api#documentation": "<p>The name or ARN of the event bus to show details for. If you omit this, the default event bus\n            is displayed.</p>"
           }
         }
       }
@@ -710,16 +1183,16 @@
     "com.amazonaws.cloudwatchevents#DescribeEventBusResponse": {
       "type": "structure",
       "members": {
-        "Arn": {
-          "target": "com.amazonaws.cloudwatchevents#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the account permitted to write events to the\n            current account.</p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.cloudwatchevents#String",
           "traits": {
             "smithy.api#documentation": "<p>The name of the event bus. Currently, this is always\n            <code>default</code>.</p>"
+          }
+        },
+        "Arn": {
+          "target": "com.amazonaws.cloudwatchevents#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the account permitted to write events to the\n            current account.</p>"
           }
         },
         "Policy": {
@@ -768,22 +1241,16 @@
     "com.amazonaws.cloudwatchevents#DescribeEventSourceResponse": {
       "type": "structure",
       "members": {
-        "ExpirationTime": {
-          "target": "com.amazonaws.cloudwatchevents#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time that the event source will expire if you do not create a matching\n            event bus.</p>"
-          }
-        },
         "Arn": {
           "target": "com.amazonaws.cloudwatchevents#String",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the partner event source.</p>"
           }
         },
-        "Name": {
+        "CreatedBy": {
           "target": "com.amazonaws.cloudwatchevents#String",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the partner event source.</p>"
+            "smithy.api#documentation": "<p>The name of the SaaS partner that created the event source.</p>"
           }
         },
         "CreationTime": {
@@ -792,10 +1259,16 @@
             "smithy.api#documentation": "<p>The date and time that the event source was created.</p>"
           }
         },
-        "CreatedBy": {
+        "ExpirationTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the event source will expire if you do not create a matching\n            event bus.</p>"
+          }
+        },
+        "Name": {
           "target": "com.amazonaws.cloudwatchevents#String",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the SaaS partner that created the event source.</p>"
+            "smithy.api#documentation": "<p>The name of the partner event source.</p>"
           }
         },
         "State": {
@@ -858,6 +1331,115 @@
         }
       }
     },
+    "com.amazonaws.cloudwatchevents#DescribeReplay": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.cloudwatchevents#DescribeReplayRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.cloudwatchevents#DescribeReplayResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.cloudwatchevents#InternalException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves details about a replay. Use <code>DescribeReplay</code> to determine the\n            progress of a running replay. A replay processes events to replay based on\n            the time in the event, and replays them using 1 minute intervals. If you use <code>StartReplay</code> and specify an\n            <code>EventStartTime</code> and an <code>EventEndTime</code> that covers a 20 minute\n            time range, the events are replayed from the first minute of that 20 minute range first.\n            Then the events from the second minute are replayed. You can use\n            <code>DescribeReplay</code> to determine the progress of a replay. The value\n            returned for <code>EventLastReplayedTime</code> indicates the time within the specified\n            time range associated with the last event replayed.</p>"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#DescribeReplayRequest": {
+      "type": "structure",
+      "members": {
+        "ReplayName": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the replay to retrieve.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.cloudwatchevents#DescribeReplayResponse": {
+      "type": "structure",
+      "members": {
+        "ReplayName": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the replay.</p>"
+          }
+        },
+        "ReplayArn": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the replay.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the replay.</p>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayState",
+          "traits": {
+            "smithy.api#documentation": "<p>The current state of the replay.</p>"
+          }
+        },
+        "StateReason": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayStateReason",
+          "traits": {
+            "smithy.api#documentation": "<p>The reason that the replay is in the current state.</p>"
+          }
+        },
+        "EventSourceArn": {
+          "target": "com.amazonaws.cloudwatchevents#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the archive events were replayed from.</p>"
+          }
+        },
+        "Destination": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayDestination",
+          "traits": {
+            "smithy.api#documentation": "<p>A <code>ReplayDestination</code> object that contains details about the replay.</p>"
+          }
+        },
+        "EventStartTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time stamp of the first event that was last replayed from the archive.</p>"
+          }
+        },
+        "EventEndTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time stamp for the last event that was replayed from the archive.</p>"
+          }
+        },
+        "EventLastReplayedTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time that the event was last replayed.</p>"
+          }
+        },
+        "ReplayStartTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>A time stamp for the time that the replay started.</p>"
+          }
+        },
+        "ReplayEndTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>A time stamp for the time that the replay stopped.</p>"
+          }
+        }
+      }
+    },
     "com.amazonaws.cloudwatchevents#DescribeRule": {
       "type": "operation",
       "input": {
@@ -889,9 +1471,9 @@
           }
         },
         "EventBusName": {
-          "target": "com.amazonaws.cloudwatchevents#EventBusName",
+          "target": "com.amazonaws.cloudwatchevents#EventBusNameOrArn",
           "traits": {
-            "smithy.api#documentation": "<p>The event bus associated with the rule. If you omit this, the default event bus is\n            used.</p>"
+            "smithy.api#documentation": "<p>The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is\n            used.</p>"
           }
         }
       }
@@ -899,22 +1481,34 @@
     "com.amazonaws.cloudwatchevents#DescribeRuleResponse": {
       "type": "structure",
       "members": {
+        "Name": {
+          "target": "com.amazonaws.cloudwatchevents#RuleName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the rule.</p>"
+          }
+        },
+        "Arn": {
+          "target": "com.amazonaws.cloudwatchevents#RuleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rule.</p>"
+          }
+        },
+        "EventPattern": {
+          "target": "com.amazonaws.cloudwatchevents#EventPattern",
+          "traits": {
+            "smithy.api#documentation": "<p>The event pattern. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html\">Events and\n                Event Patterns</a> in the <i>Amazon EventBridge User\n            Guide</i>.</p>"
+          }
+        },
+        "ScheduleExpression": {
+          "target": "com.amazonaws.cloudwatchevents#ScheduleExpression",
+          "traits": {
+            "smithy.api#documentation": "<p>The scheduling expression. For example, \"cron(0 20 * * ? *)\", \"rate(5\n            minutes)\".</p>"
+          }
+        },
         "State": {
           "target": "com.amazonaws.cloudwatchevents#RuleState",
           "traits": {
             "smithy.api#documentation": "<p>Specifies whether the rule is enabled or disabled.</p>"
-          }
-        },
-        "ManagedBy": {
-          "target": "com.amazonaws.cloudwatchevents#ManagedBy",
-          "traits": {
-            "smithy.api#documentation": "<p>If this is a managed rule, created by an AWS service on your behalf, this field\n            displays the principal name of the AWS service that created the rule.</p>"
-          }
-        },
-        "EventBusName": {
-          "target": "com.amazonaws.cloudwatchevents#EventBusName",
-          "traits": {
-            "smithy.api#documentation": "<p>The event bus associated with the rule.</p>"
           }
         },
         "Description": {
@@ -929,28 +1523,22 @@
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role associated with the rule.</p>"
           }
         },
-        "Name": {
-          "target": "com.amazonaws.cloudwatchevents#RuleName",
+        "ManagedBy": {
+          "target": "com.amazonaws.cloudwatchevents#ManagedBy",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the rule.</p>"
+            "smithy.api#documentation": "<p>If this is a managed rule, created by an AWS service on your behalf, this field\n            displays the principal name of the AWS service that created the rule.</p>"
           }
         },
-        "EventPattern": {
-          "target": "com.amazonaws.cloudwatchevents#EventPattern",
+        "EventBusName": {
+          "target": "com.amazonaws.cloudwatchevents#EventBusName",
           "traits": {
-            "smithy.api#documentation": "<p>The event pattern. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html\">Events and\n                Event Patterns</a> in the <i>Amazon EventBridge User\n            Guide</i>.</p>"
+            "smithy.api#documentation": "<p>The name of the event bus associated with the rule.</p>"
           }
         },
-        "Arn": {
-          "target": "com.amazonaws.cloudwatchevents#RuleArn",
+        "CreatedBy": {
+          "target": "com.amazonaws.cloudwatchevents#CreatedBy",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rule.</p>"
-          }
-        },
-        "ScheduleExpression": {
-          "target": "com.amazonaws.cloudwatchevents#ScheduleExpression",
-          "traits": {
-            "smithy.api#documentation": "<p>The scheduling expression. For example, \"cron(0 20 * * ? *)\", \"rate(5\n            minutes)\".</p>"
+            "smithy.api#documentation": "<p>The account ID of the user that created the rule. If you use <code>PutRule</code> \n            to put a rule on an event bus in another account, the other account is the owner of the rule, and the rule ARN includes the account ID for that account.  \n            However, the value for <code>CreatedBy</code> is the account ID as the account that created the rule in the other account.</p>"
           }
         }
       }
@@ -981,17 +1569,17 @@
     "com.amazonaws.cloudwatchevents#DisableRuleRequest": {
       "type": "structure",
       "members": {
-        "EventBusName": {
-          "target": "com.amazonaws.cloudwatchevents#EventBusName",
-          "traits": {
-            "smithy.api#documentation": "<p>The event bus associated with the rule. If you omit this, the default event bus is\n            used.</p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.cloudwatchevents#RuleName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the rule.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "EventBusName": {
+          "target": "com.amazonaws.cloudwatchevents#EventBusNameOrArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is\n            used.</p>"
           }
         }
       }
@@ -999,22 +1587,11 @@
     "com.amazonaws.cloudwatchevents#EcsParameters": {
       "type": "structure",
       "members": {
-        "NetworkConfiguration": {
-          "target": "com.amazonaws.cloudwatchevents#NetworkConfiguration",
+        "TaskDefinitionArn": {
+          "target": "com.amazonaws.cloudwatchevents#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>Use this structure if the ECS task uses the <code>awsvpc</code> network mode. This\n            structure specifies the VPC subnets and security groups associated with the task, and\n            whether a public IP address is to be used. This structure is required if\n                <code>LaunchType</code> is <code>FARGATE</code> because the <code>awsvpc</code> mode\n            is required for Fargate tasks.</p>\n        <p>If you specify <code>NetworkConfiguration</code> when the target ECS task does not use\n            the <code>awsvpc</code> network mode, the task fails.</p>"
-          }
-        },
-        "Group": {
-          "target": "com.amazonaws.cloudwatchevents#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies an ECS task group for the task. The maximum length is 255 characters.</p>"
-          }
-        },
-        "PlatformVersion": {
-          "target": "com.amazonaws.cloudwatchevents#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the platform version for the task. Specify only the numeric portion of the\n            platform version, such as <code>1.1.0</code>.</p>\n        <p>This structure is used only if <code>LaunchType</code> is <code>FARGATE</code>. For\n            more information about valid platform versions, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html\">AWS Fargate Platform\n                Versions</a> in the <i>Amazon Elastic Container Service Developer\n                Guide</i>.</p>"
+            "smithy.api#documentation": "<p>The ARN of the task definition to use if the event target is an Amazon ECS task.\n        </p>",
+            "smithy.api#required": {}
           }
         },
         "TaskCount": {
@@ -1023,17 +1600,28 @@
             "smithy.api#documentation": "<p>The number of tasks to create based on <code>TaskDefinition</code>. The default is\n            1.</p>"
           }
         },
-        "TaskDefinitionArn": {
-          "target": "com.amazonaws.cloudwatchevents#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the task definition to use if the event target is an Amazon ECS task.\n        </p>",
-            "smithy.api#required": {}
-          }
-        },
         "LaunchType": {
           "target": "com.amazonaws.cloudwatchevents#LaunchType",
           "traits": {
             "smithy.api#documentation": "<p>Specifies the launch type on which your task is running. The launch type that you\n            specify here must match one of the launch type (compatibilities) of the target task. The\n                <code>FARGATE</code> value is supported only in the Regions where AWS Fargate with\n            Amazon ECS is supported. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html\">AWS Fargate on Amazon\n                ECS</a> in the <i>Amazon Elastic Container Service Developer\n                Guide</i>.</p>"
+          }
+        },
+        "NetworkConfiguration": {
+          "target": "com.amazonaws.cloudwatchevents#NetworkConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Use this structure if the ECS task uses the <code>awsvpc</code> network mode. This\n            structure specifies the VPC subnets and security groups associated with the task, and\n            whether a public IP address is to be used. This structure is required if\n                <code>LaunchType</code> is <code>FARGATE</code> because the <code>awsvpc</code> mode\n            is required for Fargate tasks.</p>\n        <p>If you specify <code>NetworkConfiguration</code> when the target ECS task does not use\n            the <code>awsvpc</code> network mode, the task fails.</p>"
+          }
+        },
+        "PlatformVersion": {
+          "target": "com.amazonaws.cloudwatchevents#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the platform version for the task. Specify only the numeric portion of the\n            platform version, such as <code>1.1.0</code>.</p>\n        <p>This structure is used only if <code>LaunchType</code> is <code>FARGATE</code>. For\n            more information about valid platform versions, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html\">AWS Fargate Platform\n                Versions</a> in the <i>Amazon Elastic Container Service Developer\n                Guide</i>.</p>"
+          }
+        },
+        "Group": {
+          "target": "com.amazonaws.cloudwatchevents#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies an ECS task group for the task. The maximum length is 255 characters.</p>"
           }
         }
       },
@@ -1067,17 +1655,17 @@
     "com.amazonaws.cloudwatchevents#EnableRuleRequest": {
       "type": "structure",
       "members": {
-        "EventBusName": {
-          "target": "com.amazonaws.cloudwatchevents#EventBusName",
-          "traits": {
-            "smithy.api#documentation": "<p>The event bus associated with the rule. If you omit this, the default event bus is\n            used.</p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.cloudwatchevents#RuleName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the rule.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "EventBusName": {
+          "target": "com.amazonaws.cloudwatchevents#EventBusNameOrArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is\n            used.</p>"
           }
         }
       }
@@ -1130,6 +1718,16 @@
         "smithy.api#pattern": "[/\\.\\-_A-Za-z0-9]+"
       }
     },
+    "com.amazonaws.cloudwatchevents#EventBusNameOrArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1600
+        },
+        "smithy.api#pattern": "(arn:aws[\\w-]*:events:[a-z]{2}-[a-z]+-[\\w-]+:[0-9]{12}:event-bus\\/)?[/\\.\\-_A-Za-z0-9]+"
+      }
+    },
     "com.amazonaws.cloudwatchevents#EventId": {
       "type": "string"
     },
@@ -1154,22 +1752,22 @@
             "smithy.api#documentation": "<p>The ARN of the event source.</p>"
           }
         },
-        "ExpirationTime": {
-          "target": "com.amazonaws.cloudwatchevents#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time that the event source will expire, if the AWS account doesn't create\n            a matching event bus for it.</p>"
-          }
-        },
-        "State": {
-          "target": "com.amazonaws.cloudwatchevents#EventSourceState",
-          "traits": {
-            "smithy.api#documentation": "<p>The state of the event source. If it is ACTIVE, you have already created a matching\n            event bus for this event source, and that event bus is active. If it is PENDING, either\n            you haven't yet created a matching event bus, or that event bus is deactivated. If it is\n            DELETED, you have created a matching event bus, but the event source has since been\n            deleted.</p>"
-          }
-        },
         "CreatedBy": {
           "target": "com.amazonaws.cloudwatchevents#String",
           "traits": {
             "smithy.api#documentation": "<p>The name of the partner that created the event source.</p>"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the event source was created.</p>"
+          }
+        },
+        "ExpirationTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the event source will expire, if the AWS account doesn't create\n            a matching event bus for it.</p>"
           }
         },
         "Name": {
@@ -1178,10 +1776,10 @@
             "smithy.api#documentation": "<p>The name of the event source.</p>"
           }
         },
-        "CreationTime": {
-          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+        "State": {
+          "target": "com.amazonaws.cloudwatchevents#EventSourceState",
           "traits": {
-            "smithy.api#documentation": "<p>The date and time the event source was created.</p>"
+            "smithy.api#documentation": "<p>The state of the event source. If it is ACTIVE, you have already created a matching\n            event bus for this event source, and that event bus is active. If it is PENDING, either\n            you haven't yet created a matching event bus, or that event bus is deactivated. If it is\n            DELETED, you have created a matching event bus, but the event source has since been\n            deleted.</p>"
           }
         }
       },
@@ -1272,40 +1870,52 @@
         "PathParameterValues": {
           "target": "com.amazonaws.cloudwatchevents#PathParameterList",
           "traits": {
-            "smithy.api#documentation": "<p>The path parameter values to be used to populate API Gateway REST API\n         path wildcards (\"*\").</p>"
+            "smithy.api#documentation": "<p>The path parameter values to be used to populate API Gateway REST API path wildcards\n            (\"*\").</p>"
           }
         },
         "HeaderParameters": {
           "target": "com.amazonaws.cloudwatchevents#HeaderParametersMap",
           "traits": {
-            "smithy.api#documentation": "<p>The headers that need to be sent as part of request invoking the API Gateway REST \n            API.</p>"
+            "smithy.api#documentation": "<p>The headers that need to be sent as part of request invoking the API Gateway REST\n            API.</p>"
           }
         },
         "QueryStringParameters": {
           "target": "com.amazonaws.cloudwatchevents#QueryStringParametersMap",
           "traits": {
-            "smithy.api#documentation": "<p>The query string keys/values that need to be sent as part of request invoking the \n            API Gateway REST API.</p>"
+            "smithy.api#documentation": "<p>The query string keys/values that need to be sent as part of request invoking the API\n            Gateway REST API.</p>"
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>These are custom parameter to be used when the target is an API Gateway REST \n            APIs.</p>"
+        "smithy.api#documentation": "<p>These are custom parameter to be used when the target is an API Gateway REST\n            APIs.</p>"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#IllegalStatusException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.cloudwatchevents#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An error occurred because a replay can be canceled only when the state is Running or\n            Starting.</p>",
+        "smithy.api#error": "client"
       }
     },
     "com.amazonaws.cloudwatchevents#InputTransformer": {
       "type": "structure",
       "members": {
+        "InputPathsMap": {
+          "target": "com.amazonaws.cloudwatchevents#TransformerPaths",
+          "traits": {
+            "smithy.api#documentation": "<p>Map of JSON paths to be extracted from the event. You can then insert these in the\n            template in <code>InputTemplate</code> to produce the output you want to be sent to the\n            target.</p>\n        <p>\n            <code>InputPathsMap</code> is an array key-value pairs, where each value is a valid\n            JSON path. You can have as many as 10 key-value pairs. You must use JSON dot notation,\n            not bracket notation.</p>\n        <p>The keys cannot start with \"AWS.\" </p>"
+          }
+        },
         "InputTemplate": {
           "target": "com.amazonaws.cloudwatchevents#TransformerInput",
           "traits": {
             "smithy.api#documentation": "<p>Input template where you specify placeholders that will be filled with the values\n            of the keys from <code>InputPathsMap</code> to customize the data sent to the target.\n            Enclose each <code>InputPathsMaps</code> value in brackets:\n                <<i>value</i>> The InputTemplate must be valid JSON.</p>\n\n        <p>If <code>InputTemplate</code> is a JSON object (surrounded by curly braces), the\n            following restrictions apply:</p>\n        <ul>\n            <li>\n                <p>The placeholder cannot be used as an object key.</p>\n            </li>\n            <li>\n                <p>Object values cannot include quote marks.</p>\n            </li>\n         </ul>\n        <p>The following example shows the syntax for using <code>InputPathsMap</code> and\n                <code>InputTemplate</code>.</p>\n        <p>\n            <code> \"InputTransformer\":</code>\n         </p>\n        <p>\n            <code>{</code>\n         </p>\n        <p>\n            <code>\"InputPathsMap\": {\"instance\": \"$.detail.instance\",\"status\":\n                \"$.detail.status\"},</code>\n         </p>\n        <p>\n            <code>\"InputTemplate\": \"<instance> is in state\n            <status>\"</code>\n         </p>\n        <p>\n            <code>}</code>\n         </p>\n        <p>To have the <code>InputTemplate</code> include quote marks within a JSON string,\n            escape each quote marks with a slash, as in the following example:</p>\n        <p>\n            <code> \"InputTransformer\":</code>\n         </p>\n        <p>\n            <code>{</code>\n         </p>\n        <p>\n            <code>\"InputPathsMap\": {\"instance\": \"$.detail.instance\",\"status\":\n                \"$.detail.status\"},</code>\n         </p>\n        <p>\n            <code>\"InputTemplate\": \"<instance> is in state\n            \\\"<status>\\\"\"</code>\n         </p>\n        <p>\n            <code>}</code>\n         </p>",
             "smithy.api#required": {}
-          }
-        },
-        "InputPathsMap": {
-          "target": "com.amazonaws.cloudwatchevents#TransformerPaths",
-          "traits": {
-            "smithy.api#documentation": "<p>Map of JSON paths to be extracted from the event. You can then insert these in the\n            template in <code>InputTemplate</code> to produce the output you want to be sent to the\n            target.</p>\n        <p>\n            <code>InputPathsMap</code> is an array key-value pairs, where each value is a valid\n            JSON path. You can have as many as 10 key-value pairs. You must use JSON dot notation,\n            not bracket notation.</p>\n        <p>The keys cannot start with \"AWS.\" </p>"
           }
         }
       },
@@ -1400,7 +2010,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>You tried to create more rules or add more targets to a rule than is\n            allowed.</p>",
+        "smithy.api#documentation": "<p>The request failed because it attempted to create resource beyond the allowed service\n            quota.</p>",
         "smithy.api#error": "client"
       }
     },
@@ -1420,6 +2030,78 @@
         "smithy.api#box": {},
         "smithy.api#range": {
           "min": 1
+        }
+      }
+    },
+    "com.amazonaws.cloudwatchevents#ListArchives": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.cloudwatchevents#ListArchivesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.cloudwatchevents#ListArchivesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.cloudwatchevents#InternalException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists your archives. You can either list all the archives or you can provide a prefix\n            to match to the archive names. Filter parameters are exclusive.</p>"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#ListArchivesRequest": {
+      "type": "structure",
+      "members": {
+        "NamePrefix": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveName",
+          "traits": {
+            "smithy.api#documentation": "<p>A name prefix to filter the archives returned. Only archives with name that match the\n            prefix are returned.</p>"
+          }
+        },
+        "EventSourceArn": {
+          "target": "com.amazonaws.cloudwatchevents#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the event source associated with the archive.</p>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveState",
+          "traits": {
+            "smithy.api#documentation": "<p>The state of the archive.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.cloudwatchevents#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token returned by a previous call to retrieve the next set of results.</p>"
+          }
+        },
+        "Limit": {
+          "target": "com.amazonaws.cloudwatchevents#LimitMax100",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.cloudwatchevents#ListArchivesResponse": {
+      "type": "structure",
+      "members": {
+        "Archives": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveResponseList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of <code>Archive</code> objects that include details about an archive.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.cloudwatchevents#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token returned by a previous call to retrieve the next set of results.</p>"
+          }
         }
       }
     },
@@ -1443,12 +2125,6 @@
     "com.amazonaws.cloudwatchevents#ListEventBusesRequest": {
       "type": "structure",
       "members": {
-        "Limit": {
-          "target": "com.amazonaws.cloudwatchevents#LimitMax100",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifying this limits the number of results returned by this operation. The operation\n            also returns a NextToken which you can use in a subsequent operation to retrieve the\n            next set of results.</p>"
-          }
-        },
         "NamePrefix": {
           "target": "com.amazonaws.cloudwatchevents#EventBusName",
           "traits": {
@@ -1460,22 +2136,28 @@
           "traits": {
             "smithy.api#documentation": "<p>The token returned by a previous call to retrieve the next set of results.</p>"
           }
+        },
+        "Limit": {
+          "target": "com.amazonaws.cloudwatchevents#LimitMax100",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifying this limits the number of results returned by this operation. The operation\n            also returns a NextToken which you can use in a subsequent operation to retrieve the\n            next set of results.</p>"
+          }
         }
       }
     },
     "com.amazonaws.cloudwatchevents#ListEventBusesResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.cloudwatchevents#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A token you can use in a subsequent operation to retrieve the next set of\n            results.</p>"
-          }
-        },
         "EventBuses": {
           "target": "com.amazonaws.cloudwatchevents#EventBusList",
           "traits": {
             "smithy.api#documentation": "<p>This list of event buses.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.cloudwatchevents#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token you can use in a subsequent operation to retrieve the next set of\n            results.</p>"
           }
         }
       }
@@ -1503,6 +2185,12 @@
     "com.amazonaws.cloudwatchevents#ListEventSourcesRequest": {
       "type": "structure",
       "members": {
+        "NamePrefix": {
+          "target": "com.amazonaws.cloudwatchevents#EventSourceNamePrefix",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifying this limits the results to only those partner event sources with names that\n            start with the specified prefix.</p>"
+          }
+        },
         "NextToken": {
           "target": "com.amazonaws.cloudwatchevents#NextToken",
           "traits": {
@@ -1514,28 +2202,22 @@
           "traits": {
             "smithy.api#documentation": "<p>Specifying this limits the number of results returned by this operation. The operation\n            also returns a NextToken which you can use in a subsequent operation to retrieve the\n            next set of results.</p>"
           }
-        },
-        "NamePrefix": {
-          "target": "com.amazonaws.cloudwatchevents#EventSourceNamePrefix",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifying this limits the results to only those partner event sources with names that\n            start with the specified prefix.</p>"
-          }
         }
       }
     },
     "com.amazonaws.cloudwatchevents#ListEventSourcesResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.cloudwatchevents#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A token you can use in a subsequent operation to retrieve the next set of\n            results.</p>"
-          }
-        },
         "EventSources": {
           "target": "com.amazonaws.cloudwatchevents#EventSourceList",
           "traits": {
             "smithy.api#documentation": "<p>The list of event sources.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.cloudwatchevents#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token you can use in a subsequent operation to retrieve the next set of\n            results.</p>"
           }
         }
       }
@@ -1627,17 +2309,17 @@
     "com.amazonaws.cloudwatchevents#ListPartnerEventSourcesRequest": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.cloudwatchevents#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The token returned by a previous call to this operation. Specifying this retrieves the\n            next set of results.</p>"
-          }
-        },
         "NamePrefix": {
           "target": "com.amazonaws.cloudwatchevents#PartnerEventSourceNamePrefix",
           "traits": {
             "smithy.api#documentation": "<p>If you specify this, the results are limited to only those partner event sources that\n            start with the string you specify.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.cloudwatchevents#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token returned by a previous call to this operation. Specifying this retrieves the\n            next set of results.</p>"
           }
         },
         "Limit": {
@@ -1665,6 +2347,75 @@
         }
       }
     },
+    "com.amazonaws.cloudwatchevents#ListReplays": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.cloudwatchevents#ListReplaysRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.cloudwatchevents#ListReplaysResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.cloudwatchevents#InternalException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists your replays. You can either list all the replays or you can provide a prefix to\n            match to the replay names. Filter parameters are exclusive.</p>"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#ListReplaysRequest": {
+      "type": "structure",
+      "members": {
+        "NamePrefix": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayName",
+          "traits": {
+            "smithy.api#documentation": "<p>A name prefix to filter the replays returned. Only replays with name that match the\n            prefix are returned.</p>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayState",
+          "traits": {
+            "smithy.api#documentation": "<p>The state of the replay.</p>"
+          }
+        },
+        "EventSourceArn": {
+          "target": "com.amazonaws.cloudwatchevents#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the event source associated with the replay.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.cloudwatchevents#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token returned by a previous call to retrieve the next set of results.</p>"
+          }
+        },
+        "Limit": {
+          "target": "com.amazonaws.cloudwatchevents#LimitMax100",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of replays to retrieve.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.cloudwatchevents#ListReplaysResponse": {
+      "type": "structure",
+      "members": {
+        "Replays": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of <code>Replay</code> objects that contain information about the\n            replay.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.cloudwatchevents#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token returned by a previous call to retrieve the next set of results.</p>"
+          }
+        }
+      }
+    },
     "com.amazonaws.cloudwatchevents#ListRuleNamesByTarget": {
       "type": "operation",
       "input": {
@@ -1688,6 +2439,19 @@
     "com.amazonaws.cloudwatchevents#ListRuleNamesByTargetRequest": {
       "type": "structure",
       "members": {
+        "TargetArn": {
+          "target": "com.amazonaws.cloudwatchevents#TargetArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target resource.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "EventBusName": {
+          "target": "com.amazonaws.cloudwatchevents#EventBusNameOrArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ARN of the event bus to list rules for. If you omit this, the default event bus is\n            used.</p>"
+          }
+        },
         "NextToken": {
           "target": "com.amazonaws.cloudwatchevents#NextToken",
           "traits": {
@@ -1698,19 +2462,6 @@
           "target": "com.amazonaws.cloudwatchevents#LimitMax100",
           "traits": {
             "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
-          }
-        },
-        "TargetArn": {
-          "target": "com.amazonaws.cloudwatchevents#TargetArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target resource.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "EventBusName": {
-          "target": "com.amazonaws.cloudwatchevents#EventBusName",
-          "traits": {
-            "smithy.api#documentation": "<p>Limits the results to show only the rules associated with the specified event\n            bus.</p>"
           }
         }
       }
@@ -1755,22 +2506,16 @@
     "com.amazonaws.cloudwatchevents#ListRulesRequest": {
       "type": "structure",
       "members": {
-        "Limit": {
-          "target": "com.amazonaws.cloudwatchevents#LimitMax100",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
-          }
-        },
-        "EventBusName": {
-          "target": "com.amazonaws.cloudwatchevents#EventBusName",
-          "traits": {
-            "smithy.api#documentation": "<p>Limits the results to show only the rules associated with the specified event\n            bus.</p>"
-          }
-        },
         "NamePrefix": {
           "target": "com.amazonaws.cloudwatchevents#RuleName",
           "traits": {
             "smithy.api#documentation": "<p>The prefix matching the rule name.</p>"
+          }
+        },
+        "EventBusName": {
+          "target": "com.amazonaws.cloudwatchevents#EventBusNameOrArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ARN of the event bus to list the rules for. If you omit this, the default event bus is\n            used.</p>"
           }
         },
         "NextToken": {
@@ -1778,22 +2523,28 @@
           "traits": {
             "smithy.api#documentation": "<p>The token returned by a previous call to retrieve the next set of\n            results.</p>"
           }
+        },
+        "Limit": {
+          "target": "com.amazonaws.cloudwatchevents#LimitMax100",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
+          }
         }
       }
     },
     "com.amazonaws.cloudwatchevents#ListRulesResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.cloudwatchevents#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether there are additional results to retrieve. If there are no more\n            results, the value is null.</p>"
-          }
-        },
         "Rules": {
           "target": "com.amazonaws.cloudwatchevents#RuleResponseList",
           "traits": {
             "smithy.api#documentation": "<p>The rules that match the specified criteria.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.cloudwatchevents#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether there are additional results to retrieve. If there are no more\n            results, the value is null.</p>"
           }
         }
       }
@@ -1815,7 +2566,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Displays the tags associated with an EventBridge resource. In EventBridge,\n            rules and event buses can be tagged.</p>"
+        "smithy.api#documentation": "<p>Displays the tags associated with an EventBridge resource. In EventBridge, rules and\n            event buses can be tagged.</p>"
       }
     },
     "com.amazonaws.cloudwatchevents#ListTagsForResourceRequest": {
@@ -1871,10 +2622,10 @@
             "smithy.api#required": {}
           }
         },
-        "Limit": {
-          "target": "com.amazonaws.cloudwatchevents#LimitMax100",
+        "EventBusName": {
+          "target": "com.amazonaws.cloudwatchevents#EventBusNameOrArn",
           "traits": {
-            "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
+            "smithy.api#documentation": "<p>The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is\n            used.</p>"
           }
         },
         "NextToken": {
@@ -1883,10 +2634,10 @@
             "smithy.api#documentation": "<p>The token returned by a previous call to retrieve the next set of\n            results.</p>"
           }
         },
-        "EventBusName": {
-          "target": "com.amazonaws.cloudwatchevents#EventBusName",
+        "Limit": {
+          "target": "com.amazonaws.cloudwatchevents#LimitMax100",
           "traits": {
-            "smithy.api#documentation": "<p>The event bus associated with the rule. If you omit this, the default event bus is\n            used.</p>"
+            "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
           }
         }
       }
@@ -1907,6 +2658,9 @@
           }
         }
       }
+    },
+    "com.amazonaws.cloudwatchevents#Long": {
+      "type": "long"
     },
     "com.amazonaws.cloudwatchevents#ManagedBy": {
       "type": "string",
@@ -1985,6 +2739,16 @@
         "smithy.api#pattern": "[\\.\\-_A-Za-z0-9]+"
       }
     },
+    "com.amazonaws.cloudwatchevents#NonPartnerEventBusNameOrArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1600
+        },
+        "smithy.api#pattern": "(arn:aws[\\w-]*:events:[a-z]{2}-[a-z]+-[\\w-]+:[0-9]{12}:event-bus\\/)?[\\.\\-_A-Za-z0-9]+"
+      }
+    },
     "com.amazonaws.cloudwatchevents#OperationDisabledException": {
       "type": "structure",
       "members": {
@@ -2020,28 +2784,28 @@
     "com.amazonaws.cloudwatchevents#PartnerEventSourceAccount": {
       "type": "structure",
       "members": {
-        "CreationTime": {
-          "target": "com.amazonaws.cloudwatchevents#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time the event source was created.</p>"
-          }
-        },
-        "State": {
-          "target": "com.amazonaws.cloudwatchevents#EventSourceState",
-          "traits": {
-            "smithy.api#documentation": "<p>The state of the event source. If it is ACTIVE, you have already created a matching\n            event bus for this event source, and that event bus is active. If it is PENDING, either\n            you haven't yet created a matching event bus, or that event bus is deactivated. If it is\n            DELETED, you have created a matching event bus, but the event source has since been\n            deleted.</p>"
-          }
-        },
         "Account": {
           "target": "com.amazonaws.cloudwatchevents#AccountId",
           "traits": {
             "smithy.api#documentation": "<p>The AWS account ID that the partner event source was offered to.</p>"
           }
         },
+        "CreationTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the event source was created.</p>"
+          }
+        },
         "ExpirationTime": {
           "target": "com.amazonaws.cloudwatchevents#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The date and time that the event source will expire, if the AWS account doesn't create\n            a matching event bus for it.</p>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.cloudwatchevents#EventSourceState",
+          "traits": {
+            "smithy.api#documentation": "<p>The state of the event source. If it is ACTIVE, you have already created a matching\n            event bus for this event source, and that event bus is active. If it is PENDING, either\n            you haven't yet created a matching event bus, or that event bus is deactivated. If it is\n            DELETED, you have created a matching event bus, but the event source has since been\n            deleted.</p>"
           }
         }
       },
@@ -2137,6 +2901,24 @@
     "com.amazonaws.cloudwatchevents#PutEventsRequestEntry": {
       "type": "structure",
       "members": {
+        "Time": {
+          "target": "com.amazonaws.cloudwatchevents#EventTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The time stamp of the event, per <a href=\"https://www.rfc-editor.org/rfc/rfc3339.txt\">RFC3339</a>. If no time stamp\n            is provided, the time stamp of the <a>PutEvents</a> call is used.</p>"
+          }
+        },
+        "Source": {
+          "target": "com.amazonaws.cloudwatchevents#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The source of the event.</p>"
+          }
+        },
+        "Resources": {
+          "target": "com.amazonaws.cloudwatchevents#EventResourceList",
+          "traits": {
+            "smithy.api#documentation": "<p>AWS resources, identified by Amazon Resource Name (ARN), which the event primarily\n            concerns. Any number, including zero, may be present.</p>"
+          }
+        },
         "DetailType": {
           "target": "com.amazonaws.cloudwatchevents#String",
           "traits": {
@@ -2149,28 +2931,10 @@
             "smithy.api#documentation": "<p>A valid JSON string. There is no other schema imposed. The JSON string may contain\n            fields and nested subobjects.</p>"
           }
         },
-        "Source": {
-          "target": "com.amazonaws.cloudwatchevents#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The source of the event.</p>"
-          }
-        },
         "EventBusName": {
-          "target": "com.amazonaws.cloudwatchevents#NonPartnerEventBusName",
+          "target": "com.amazonaws.cloudwatchevents#NonPartnerEventBusNameOrArn",
           "traits": {
-            "smithy.api#documentation": "<p>The event bus that will receive the event. Only the rules that are associated with\n            this event bus will be able to match the event.</p>"
-          }
-        },
-        "Time": {
-          "target": "com.amazonaws.cloudwatchevents#EventTime",
-          "traits": {
-            "smithy.api#documentation": "<p>The time stamp of the event, per <a href=\"https://www.rfc-editor.org/rfc/rfc3339.txt\">RFC3339</a>. If no time stamp\n            is provided, the time stamp of the <a>PutEvents</a> call is used.</p>"
-          }
-        },
-        "Resources": {
-          "target": "com.amazonaws.cloudwatchevents#EventResourceList",
-          "traits": {
-            "smithy.api#documentation": "<p>AWS resources, identified by Amazon Resource Name (ARN), which the event primarily\n            concerns. Any number, including zero, may be present.</p>"
+            "smithy.api#documentation": "<p>The name or ARN of the event bus to receive the event. Only the rules that are associated with\n            this event bus are used to match the event. If you omit this, the default event bus is\n            used.</p>"
           }
         }
       },
@@ -2193,16 +2957,16 @@
     "com.amazonaws.cloudwatchevents#PutEventsResponse": {
       "type": "structure",
       "members": {
-        "Entries": {
-          "target": "com.amazonaws.cloudwatchevents#PutEventsResultEntryList",
-          "traits": {
-            "smithy.api#documentation": "<p>The successfully and unsuccessfully ingested events results. If the ingestion was\n            successful, the entry has the event ID in it. Otherwise, you can use the error code and\n            error message to identify the problem with the entry.</p>"
-          }
-        },
         "FailedEntryCount": {
           "target": "com.amazonaws.cloudwatchevents#Integer",
           "traits": {
             "smithy.api#documentation": "<p>The number of failed entries.</p>"
+          }
+        },
+        "Entries": {
+          "target": "com.amazonaws.cloudwatchevents#PutEventsResultEntryList",
+          "traits": {
+            "smithy.api#documentation": "<p>The successfully and unsuccessfully ingested events results. If the ingestion was\n            successful, the entry has the event ID in it. Otherwise, you can use the error code and\n            error message to identify the problem with the entry.</p>"
           }
         }
       }
@@ -2210,10 +2974,10 @@
     "com.amazonaws.cloudwatchevents#PutEventsResultEntry": {
       "type": "structure",
       "members": {
-        "ErrorMessage": {
-          "target": "com.amazonaws.cloudwatchevents#ErrorMessage",
+        "EventId": {
+          "target": "com.amazonaws.cloudwatchevents#EventId",
           "traits": {
-            "smithy.api#documentation": "<p>The error message that explains why the event submission failed.</p>"
+            "smithy.api#documentation": "<p>The ID of the event.</p>"
           }
         },
         "ErrorCode": {
@@ -2222,10 +2986,10 @@
             "smithy.api#documentation": "<p>The error code that indicates why the event submission failed.</p>"
           }
         },
-        "EventId": {
-          "target": "com.amazonaws.cloudwatchevents#EventId",
+        "ErrorMessage": {
+          "target": "com.amazonaws.cloudwatchevents#ErrorMessage",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the event.</p>"
+            "smithy.api#documentation": "<p>The error message that explains why the event submission failed.</p>"
           }
         }
       },
@@ -2274,10 +3038,10 @@
     "com.amazonaws.cloudwatchevents#PutPartnerEventsRequestEntry": {
       "type": "structure",
       "members": {
-        "Resources": {
-          "target": "com.amazonaws.cloudwatchevents#EventResourceList",
+        "Time": {
+          "target": "com.amazonaws.cloudwatchevents#EventTime",
           "traits": {
-            "smithy.api#documentation": "<p>AWS resources, identified by Amazon Resource Name (ARN), which the event primarily\n            concerns. Any number, including zero, may be present.</p>"
+            "smithy.api#documentation": "<p>The date and time of the event.</p>"
           }
         },
         "Source": {
@@ -2286,10 +3050,10 @@
             "smithy.api#documentation": "<p>The event source that is generating the evntry.</p>"
           }
         },
-        "Detail": {
-          "target": "com.amazonaws.cloudwatchevents#String",
+        "Resources": {
+          "target": "com.amazonaws.cloudwatchevents#EventResourceList",
           "traits": {
-            "smithy.api#documentation": "<p>A valid JSON string. There is no other schema imposed. The JSON string may contain\n            fields and nested subobjects.</p>"
+            "smithy.api#documentation": "<p>AWS resources, identified by Amazon Resource Name (ARN), which the event primarily\n            concerns. Any number, including zero, may be present.</p>"
           }
         },
         "DetailType": {
@@ -2298,10 +3062,10 @@
             "smithy.api#documentation": "<p>A free-form string used to decide what fields to expect in the event detail.</p>"
           }
         },
-        "Time": {
-          "target": "com.amazonaws.cloudwatchevents#EventTime",
+        "Detail": {
+          "target": "com.amazonaws.cloudwatchevents#String",
           "traits": {
-            "smithy.api#documentation": "<p>The date and time of the event.</p>"
+            "smithy.api#documentation": "<p>A valid JSON string. There is no other schema imposed. The JSON string may contain\n            fields and nested subobjects.</p>"
           }
         }
       },
@@ -2347,16 +3111,16 @@
             "smithy.api#documentation": "<p>The ID of the event.</p>"
           }
         },
-        "ErrorMessage": {
-          "target": "com.amazonaws.cloudwatchevents#ErrorMessage",
-          "traits": {
-            "smithy.api#documentation": "<p>The error message that explains why the event submission failed.</p>"
-          }
-        },
         "ErrorCode": {
           "target": "com.amazonaws.cloudwatchevents#ErrorCode",
           "traits": {
             "smithy.api#documentation": "<p>The error code that indicates why the event submission failed.</p>"
+          }
+        },
+        "ErrorMessage": {
+          "target": "com.amazonaws.cloudwatchevents#ErrorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>The error message that explains why the event submission failed.</p>"
           }
         }
       },
@@ -2383,6 +3147,9 @@
           "target": "com.amazonaws.cloudwatchevents#InternalException"
         },
         {
+          "target": "com.amazonaws.cloudwatchevents#OperationDisabledException"
+        },
+        {
           "target": "com.amazonaws.cloudwatchevents#PolicyLengthExceededException"
         },
         {
@@ -2390,30 +3157,34 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Running <code>PutPermission</code> permits the specified AWS account or AWS\n            organization to put events to the specified <i>event bus</i>. Amazon EventBridge (CloudWatch Events) \n            rules in your account are triggered by these events arriving to an event bus in\n            your account. </p>\n        <p>For another account to send events to your account, that external account must have\n            an EventBridge rule with your account's event bus as a target.</p>\n\n        <p>To enable multiple AWS accounts to put events to your event bus, run\n                <code>PutPermission</code> once for each of these accounts. Or, if all the accounts\n            are members of the same AWS organization, you can run <code>PutPermission</code> once\n            specifying <code>Principal</code> as \"*\" and specifying the AWS organization ID in\n                <code>Condition</code>, to grant permissions to all accounts in that\n            organization.</p>\n\n        <p>If you grant permissions using an organization, then accounts in that organization\n            must specify a <code>RoleArn</code> with proper permissions when they use\n                <code>PutTarget</code> to add your account's event bus as a target. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and Receiving Events Between AWS Accounts</a> in the <i>Amazon\n                EventBridge User Guide</i>.</p>\n\n        <p>The permission policy on the default event bus cannot exceed 10 KB in\n            size.</p>"
+        "smithy.api#documentation": "<p>Running <code>PutPermission</code> permits the specified AWS account or AWS\n            organization to put events to the specified <i>event bus</i>. Amazon\n            EventBridge (CloudWatch Events) rules in your account are triggered by these events\n            arriving to an event bus in your account. </p>\n        <p>For another account to send events to your account, that external account must have\n            an EventBridge rule with your account's event bus as a target.</p>\n\n        <p>To enable multiple AWS accounts to put events to your event bus, run\n                <code>PutPermission</code> once for each of these accounts. Or, if all the accounts\n            are members of the same AWS organization, you can run <code>PutPermission</code> once\n            specifying <code>Principal</code> as \"*\" and specifying the AWS organization ID in\n                <code>Condition</code>, to grant permissions to all accounts in that\n            organization.</p>\n\n        <p>If you grant permissions using an organization, then accounts in that organization\n            must specify a <code>RoleArn</code> with proper permissions when they use\n                <code>PutTarget</code> to add your account's event bus as a target. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and Receiving Events Between AWS Accounts</a> in the <i>Amazon\n                EventBridge User Guide</i>.</p>\n\n        <p>The permission policy on the default event bus cannot exceed 10 KB in\n            size.</p>"
       }
     },
     "com.amazonaws.cloudwatchevents#PutPermissionRequest": {
       "type": "structure",
       "members": {
+        "EventBusName": {
+          "target": "com.amazonaws.cloudwatchevents#NonPartnerEventBusName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the event bus associated with the rule. If you omit this, the default event bus is\n            used.</p>"
+          }
+        },
+        "Action": {
+          "target": "com.amazonaws.cloudwatchevents#Action",
+          "traits": {
+            "smithy.api#documentation": "<p>The action that you are enabling the other account to perform. Currently, this must\n            be <code>events:PutEvents</code>.</p>"
+          }
+        },
         "Principal": {
           "target": "com.amazonaws.cloudwatchevents#Principal",
           "traits": {
-            "smithy.api#documentation": "<p>The 12-digit AWS account ID that you are permitting to put events to your default\n            event bus. Specify \"*\" to permit any account to put events to your default event\n            bus.</p>\n\n        <p>If you specify \"*\" without specifying <code>Condition</code>, avoid creating rules\n            that may match undesirable events. To create more secure rules, make sure that the event\n            pattern for each rule contains an <code>account</code> field with a specific account ID\n            from which to receive events. Rules with an account field do not match any events sent\n            from other accounts.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The 12-digit AWS account ID that you are permitting to put events to your default\n            event bus. Specify \"*\" to permit any account to put events to your default event\n            bus.</p>\n\n        <p>If you specify \"*\" without specifying <code>Condition</code>, avoid creating rules\n            that may match undesirable events. To create more secure rules, make sure that the event\n            pattern for each rule contains an <code>account</code> field with a specific account ID\n            from which to receive events. Rules with an account field do not match any events sent\n            from other accounts.</p>"
           }
         },
         "StatementId": {
           "target": "com.amazonaws.cloudwatchevents#StatementId",
           "traits": {
-            "smithy.api#documentation": "<p>An identifier string for the external account that you are granting permissions to.\n            If you later want to revoke the permission for this external account, specify this\n                <code>StatementId</code> when you run <a>RemovePermission</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "EventBusName": {
-          "target": "com.amazonaws.cloudwatchevents#NonPartnerEventBusName",
-          "traits": {
-            "smithy.api#documentation": "<p>The event bus associated with the rule. If you omit this, the default event bus is\n            used.</p>"
+            "smithy.api#documentation": "<p>An identifier string for the external account that you are granting permissions to.\n            If you later want to revoke the permission for this external account, specify this\n                <code>StatementId</code> when you run <a>RemovePermission</a>.</p>"
           }
         },
         "Condition": {
@@ -2422,11 +3193,10 @@
             "smithy.api#documentation": "<p>This parameter enables you to limit the permission to accounts that fulfill a certain\n            condition, such as being a member of a certain AWS organization. For more information\n            about AWS Organizations, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html\">What Is AWS\n                Organizations</a> in the <i>AWS Organizations User\n            Guide</i>.</p>\n        <p>If you specify <code>Condition</code> with an AWS organization ID, and specify \"*\" as\n            the value for <code>Principal</code>, you grant permission to all the accounts in the\n            named organization.</p>\n\n        <p>The <code>Condition</code> is a JSON string which must contain <code>Type</code>,\n                <code>Key</code>, and <code>Value</code> fields.</p>"
           }
         },
-        "Action": {
-          "target": "com.amazonaws.cloudwatchevents#Action",
+        "Policy": {
+          "target": "com.amazonaws.cloudwatchevents#String",
           "traits": {
-            "smithy.api#documentation": "<p>The action that you are enabling the other account to perform. Currently, this must\n            be <code>events:PutEvents</code>.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>A JSON string that describes the permission policy statement. You can include a <code>Policy</code> parameter \n            in the request instead of using the <code>StatementId</code>, <code>Action</code>, <code>Principal</code>, or <code>Condition</code> parameters.</p>"
           }
         }
       }
@@ -2466,28 +3236,11 @@
     "com.amazonaws.cloudwatchevents#PutRuleRequest": {
       "type": "structure",
       "members": {
-        "State": {
-          "target": "com.amazonaws.cloudwatchevents#RuleState",
+        "Name": {
+          "target": "com.amazonaws.cloudwatchevents#RuleName",
           "traits": {
-            "smithy.api#documentation": "<p>Indicates whether the rule is enabled or disabled.</p>"
-          }
-        },
-        "RoleArn": {
-          "target": "com.amazonaws.cloudwatchevents#RoleArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role associated with the rule.</p>"
-          }
-        },
-        "EventPattern": {
-          "target": "com.amazonaws.cloudwatchevents#EventPattern",
-          "traits": {
-            "smithy.api#documentation": "<p>The event pattern. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html\">Events and\n                Event Patterns</a> in the <i>Amazon EventBridge User\n            Guide</i>.</p>"
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.cloudwatchevents#RuleDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>A description of the rule.</p>"
+            "smithy.api#documentation": "<p>The name of the rule that you are creating or updating.</p>",
+            "smithy.api#required": {}
           }
         },
         "ScheduleExpression": {
@@ -2496,23 +3249,40 @@
             "smithy.api#documentation": "<p>The scheduling expression. For example, \"cron(0 20 * * ? *)\" or \"rate(5\n            minutes)\".</p>"
           }
         },
+        "EventPattern": {
+          "target": "com.amazonaws.cloudwatchevents#EventPattern",
+          "traits": {
+            "smithy.api#documentation": "<p>The event pattern. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html\">Events and\n                Event Patterns</a> in the <i>Amazon EventBridge User\n            Guide</i>.</p>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.cloudwatchevents#RuleState",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether the rule is enabled or disabled.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.cloudwatchevents#RuleDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>A description of the rule.</p>"
+          }
+        },
+        "RoleArn": {
+          "target": "com.amazonaws.cloudwatchevents#RoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role associated with the rule.</p>"
+          }
+        },
         "Tags": {
           "target": "com.amazonaws.cloudwatchevents#TagList",
           "traits": {
             "smithy.api#documentation": "<p>The list of key-value pairs to associate with the rule.</p>"
           }
         },
-        "Name": {
-          "target": "com.amazonaws.cloudwatchevents#RuleName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the rule that you are creating or updating.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "EventBusName": {
-          "target": "com.amazonaws.cloudwatchevents#EventBusName",
+          "target": "com.amazonaws.cloudwatchevents#EventBusNameOrArn",
           "traits": {
-            "smithy.api#documentation": "<p>The event bus to associate with this rule. If you omit this, the default event bus is\n            used.</p>"
+            "smithy.api#documentation": "<p>The name or ARN of the event bus to associate with this rule. If you omit this, the default event bus is\n            used.</p>"
           }
         }
       }
@@ -2554,7 +3324,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Adds the specified targets to the specified rule, or updates the targets if they\n            are already associated with the rule.</p>\n        <p>Targets are the resources that are invoked when a rule is triggered.</p>\n        <p>You can configure the following as targets for Events:</p>\n\n        <ul>\n            <li>\n                <p>EC2 instances</p>\n            </li>\n            <li>\n                <p>SSM Run Command</p>\n            </li>\n            <li>\n                <p>SSM Automation</p>\n            </li>\n            <li>\n                <p>AWS Lambda functions</p>\n            </li>\n            <li>\n                <p>Data streams in Amazon Kinesis Data Streams</p>\n            </li>\n            <li>\n                <p>Data delivery streams in Amazon Kinesis Data Firehose</p>\n            </li>\n            <li>\n                <p>Amazon ECS tasks</p>\n            </li>\n            <li>\n                <p>AWS Step Functions state machines</p>\n            </li>\n            <li>\n                <p>AWS Batch jobs</p>\n            </li>\n            <li>\n                <p>AWS CodeBuild projects</p>\n            </li>\n            <li>\n                <p>Pipelines in AWS CodePipeline</p>\n            </li>\n            <li>\n                <p>Amazon Inspector assessment templates</p>\n            </li>\n            <li>\n                <p>Amazon SNS topics</p>\n            </li>\n            <li>\n                <p>Amazon SQS queues, including FIFO queues</p>\n            </li>\n            <li>\n                <p>The default event bus of another AWS account</p>\n            </li>\n            <li>\n                <p>Amazon API Gateway REST APIs</p>\n            </li>\n            <li>\n                <p>Redshift Clusters to invoke Data API ExecuteStatement on</p>\n            </li>\n         </ul>\n\n\n\n        <p>Creating rules with built-in targets is supported only in the AWS Management\n            Console. The built-in targets are <code>EC2 CreateSnapshot API call</code>, <code>EC2\n                RebootInstances API call</code>, <code>EC2 StopInstances API call</code>, and\n                <code>EC2 TerminateInstances API call</code>. </p>\n\n        <p>For some target types, <code>PutTargets</code> provides target-specific parameters.\n            If the target is a Kinesis data stream, you can optionally specify which shard the event\n            goes to by using the <code>KinesisParameters</code> argument. To invoke a command on\n            multiple EC2 instances with one rule, you can use the <code>RunCommandParameters</code>\n            field.</p>\n        <p>To be able to make API calls against the resources that you own, Amazon EventBridge \n            (CloudWatch Events) needs the appropriate permissions. For AWS Lambda and Amazon SNS resources,\n            EventBridge relies on resource-based policies. For EC2 instances, Kinesis data\n            streams, AWS Step Functions state machines and API Gateway REST APIs, EventBridge relies on IAM roles\n            that you specify in the <code>RoleARN</code> argument in <code>PutTargets</code>. For more information, \n            see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html\">Authentication and Access Control</a> in the <i>Amazon EventBridge User\n                Guide</i>.</p>\n\n        <p>If another AWS account is in the same region and has granted you permission (using\n                <code>PutPermission</code>), you can send events to that account. Set that account's\n            event bus as a target of the rules in your account. To send the matched events to the\n            other account, specify that account's event bus as the <code>Arn</code> value when you\n            run <code>PutTargets</code>. If your account sends events to another account, your\n            account is charged for each sent event. Each event sent to another account is charged as\n            a custom event. The account receiving the event is not charged. For more information,\n            see <a href=\"https://aws.amazon.com/eventbridge/pricing/\">Amazon EventBridge (CloudWatch Events)\n                Pricing</a>.</p>\n\n        <note>\n            <p>\n               <code>Input</code>, <code>InputPath</code>, and <code>InputTransformer</code> are\n                not available with <code>PutTarget</code> if the target is an event bus of a\n                different AWS account.</p>\n        </note>\n\n        <p>If you are setting the event bus of another account as the target, and that account\n            granted permission to your account through an organization instead of directly by the\n            account ID, then you must specify a <code>RoleArn</code> with proper permissions in the\n                <code>Target</code> structure. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and Receiving Events Between AWS Accounts</a> in the <i>Amazon\n                EventBridge User Guide</i>.</p>\n\n        <p>For more information about enabling cross-account events, see <a>PutPermission</a>.</p>\n\n        <p>\n            <b>Input</b>, <b>InputPath</b>, and\n                <b>InputTransformer</b> are mutually exclusive and\n            optional parameters of a target. When a rule is triggered due to a matched\n            event:</p>\n\n        <ul>\n            <li>\n                <p>If none of the following arguments are specified for a target, then the\n                    entire event is passed to the target in JSON format (unless the target is Amazon\n                    EC2 Run Command or Amazon ECS task, in which case nothing from the event is\n                    passed to the target).</p>\n            </li>\n            <li>\n                <p>If <b>Input</b> is specified in the form of valid\n                    JSON, then the matched event is overridden with this constant.</p>\n            </li>\n            <li>\n                <p>If <b>InputPath</b> is specified in the form of\n                    JSONPath (for example, <code>$.detail</code>), then only the part of the event\n                    specified in the path is passed to the target (for example, only the detail part\n                    of the event is passed).</p>\n            </li>\n            <li>\n                <p>If <b>InputTransformer</b> is specified, then one\n                    or more specified JSONPaths are extracted from the event and used as values in a\n                    template that you specify as the input to the target.</p>\n            </li>\n         </ul>\n\n        <p>When you specify <code>InputPath</code> or <code>InputTransformer</code>, you must\n            use JSON dot notation, not bracket notation.</p>\n\n        <p>When you add targets to a rule and the associated rule triggers soon after, new or\n            updated targets might not be immediately invoked. Allow a short period of time for\n            changes to take effect.</p>\n\n        <p>This action can partially fail if too many requests are made at the same time. If\n            that happens, <code>FailedEntryCount</code> is non-zero in the response and each entry\n            in <code>FailedEntries</code> provides the ID of the failed target and the error\n            code.</p>"
+        "smithy.api#documentation": "<p>Adds the specified targets to the specified rule, or updates the targets if they\n            are already associated with the rule.</p>\n        <p>Targets are the resources that are invoked when a rule is triggered.</p>\n        <p>You can configure the following as targets for Events:</p>\n\n        <ul>\n            <li>\n                <p>EC2 instances</p>\n            </li>\n            <li>\n                <p>SSM Run Command</p>\n            </li>\n            <li>\n                <p>SSM Automation</p>\n            </li>\n            <li>\n                <p>AWS Lambda functions</p>\n            </li>\n            <li>\n                <p>Data streams in Amazon Kinesis Data Streams</p>\n            </li>\n            <li>\n                <p>Data delivery streams in Amazon Kinesis Data Firehose</p>\n            </li>\n            <li>\n                <p>Amazon ECS tasks</p>\n            </li>\n            <li>\n                <p>AWS Step Functions state machines</p>\n            </li>\n            <li>\n                <p>AWS Batch jobs</p>\n            </li>\n            <li>\n                <p>AWS CodeBuild projects</p>\n            </li>\n            <li>\n                <p>Pipelines in AWS CodePipeline</p>\n            </li>\n            <li>\n                <p>Amazon Inspector assessment templates</p>\n            </li>\n            <li>\n                <p>Amazon SNS topics</p>\n            </li>\n            <li>\n                <p>Amazon SQS queues, including FIFO queues</p>\n            </li>\n            <li>\n                <p>The default event bus of another AWS account</p>\n            </li>\n            <li>\n                <p>Amazon API Gateway REST APIs</p>\n            </li>\n            <li>\n                <p>Redshift Clusters to invoke Data API ExecuteStatement on</p>\n            </li>\n         </ul>\n\n\n\n        <p>Creating rules with built-in targets is supported only in the AWS Management\n            Console. The built-in targets are <code>EC2 CreateSnapshot API call</code>, <code>EC2\n                RebootInstances API call</code>, <code>EC2 StopInstances API call</code>, and\n                <code>EC2 TerminateInstances API call</code>. </p>\n\n        <p>For some target types, <code>PutTargets</code> provides target-specific parameters.\n            If the target is a Kinesis data stream, you can optionally specify which shard the event\n            goes to by using the <code>KinesisParameters</code> argument. To invoke a command on\n            multiple EC2 instances with one rule, you can use the <code>RunCommandParameters</code>\n            field.</p>\n\n        <p>To be able to make API calls against the resources that you own, Amazon EventBridge \n            (CloudWatch Events) needs the appropriate permissions. For AWS Lambda and Amazon SNS resources,\n            EventBridge relies on resource-based policies. For EC2 instances, Kinesis data\n            streams, AWS Step Functions state machines and API Gateway REST APIs, EventBridge relies on IAM roles\n            that you specify in the <code>RoleARN</code> argument in <code>PutTargets</code>. For more information, \n            see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html\">Authentication and Access Control</a> in the <i>Amazon EventBridge User\n                Guide</i>.</p>\n\n        <p>If another AWS account is in the same region and has granted you permission (using\n                <code>PutPermission</code>), you can send events to that account. Set that account's\n            event bus as a target of the rules in your account. To send the matched events to the\n            other account, specify that account's event bus as the <code>Arn</code> value when you\n            run <code>PutTargets</code>. If your account sends events to another account, your\n            account is charged for each sent event. Each event sent to another account is charged as\n            a custom event. The account receiving the event is not charged. For more information,\n            see <a href=\"https://aws.amazon.com/eventbridge/pricing/\">Amazon EventBridge (CloudWatch Events)\n                Pricing</a>.</p>\n\n        <note>\n            <p>\n               <code>Input</code>, <code>InputPath</code>, and <code>InputTransformer</code> are\n                not available with <code>PutTarget</code> if the target is an event bus of a\n                different AWS account.</p>\n        </note>\n\n        <p>If you are setting the event bus of another account as the target, and that account\n            granted permission to your account through an organization instead of directly by the\n            account ID, then you must specify a <code>RoleArn</code> with proper permissions in the\n                <code>Target</code> structure. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and Receiving Events Between AWS Accounts</a> in the <i>Amazon\n                EventBridge User Guide</i>.</p>\n\n        <p>For more information about enabling cross-account events, see <a>PutPermission</a>.</p>\n\n        <p>\n            <b>Input</b>, <b>InputPath</b>, and\n                <b>InputTransformer</b> are mutually exclusive and\n            optional parameters of a target. When a rule is triggered due to a matched\n            event:</p>\n\n        <ul>\n            <li>\n                <p>If none of the following arguments are specified for a target, then the\n                    entire event is passed to the target in JSON format (unless the target is Amazon\n                    EC2 Run Command or Amazon ECS task, in which case nothing from the event is\n                    passed to the target).</p>\n            </li>\n            <li>\n                <p>If <b>Input</b> is specified in the form of valid\n                    JSON, then the matched event is overridden with this constant.</p>\n            </li>\n            <li>\n                <p>If <b>InputPath</b> is specified in the form of\n                    JSONPath (for example, <code>$.detail</code>), then only the part of the event\n                    specified in the path is passed to the target (for example, only the detail part\n                    of the event is passed).</p>\n            </li>\n            <li>\n                <p>If <b>InputTransformer</b> is specified, then one\n                    or more specified JSONPaths are extracted from the event and used as values in a\n                    template that you specify as the input to the target.</p>\n            </li>\n         </ul>\n\n        <p>When you specify <code>InputPath</code> or <code>InputTransformer</code>, you must\n            use JSON dot notation, not bracket notation.</p>\n\n        <p>When you add targets to a rule and the associated rule triggers soon after, new or\n            updated targets might not be immediately invoked. Allow a short period of time for\n            changes to take effect.</p>\n\n        <p>This action can partially fail if too many requests are made at the same time. If\n            that happens, <code>FailedEntryCount</code> is non-zero in the response and each entry\n            in <code>FailedEntries</code> provides the ID of the failed target and the error\n            code.</p>"
       }
     },
     "com.amazonaws.cloudwatchevents#PutTargetsRequest": {
@@ -2568,9 +3338,9 @@
           }
         },
         "EventBusName": {
-          "target": "com.amazonaws.cloudwatchevents#EventBusName",
+          "target": "com.amazonaws.cloudwatchevents#EventBusNameOrArn",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the event bus associated with the rule. If you omit this, the default\n            event bus is used.</p>"
+            "smithy.api#documentation": "<p>The name or ARN of the event bus associated with the rule. If you omit this, the default\n            event bus is used.</p>"
           }
         },
         "Targets": {
@@ -2602,6 +3372,12 @@
     "com.amazonaws.cloudwatchevents#PutTargetsResultEntry": {
       "type": "structure",
       "members": {
+        "TargetId": {
+          "target": "com.amazonaws.cloudwatchevents#TargetId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the target.</p>"
+          }
+        },
         "ErrorCode": {
           "target": "com.amazonaws.cloudwatchevents#ErrorCode",
           "traits": {
@@ -2612,12 +3388,6 @@
           "target": "com.amazonaws.cloudwatchevents#ErrorMessage",
           "traits": {
             "smithy.api#documentation": "<p>The error message that explains why the target addition failed.</p>"
-          }
-        },
-        "TargetId": {
-          "target": "com.amazonaws.cloudwatchevents#TargetId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the target.</p>"
           }
         }
       },
@@ -2666,19 +3436,20 @@
         "SecretManagerArn": {
           "target": "com.amazonaws.cloudwatchevents#RedshiftSecretManagerArn",
           "traits": {
-            "smithy.api#documentation": "<p>The name or ARN of the secret that enables access to the database.\n        Required when authenticating using AWS Secrets Manager.</p>"
+            "smithy.api#documentation": "<p>The name or ARN of the secret that enables access to the database. Required when\n            authenticating using AWS Secrets Manager.</p>"
+          }
+        },
+        "Database": {
+          "target": "com.amazonaws.cloudwatchevents#Database",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the database. Required when authenticating using temporary\n            credentials.</p>",
+            "smithy.api#required": {}
           }
         },
         "DbUser": {
           "target": "com.amazonaws.cloudwatchevents#DbUser",
           "traits": {
-            "smithy.api#documentation": "<p>The database user name. Required when authenticating using temporary credentials.</p>"
-          }
-        },
-        "WithEvent": {
-          "target": "com.amazonaws.cloudwatchevents#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether to send an event back to EventBridge after the SQL statement runs.</p>"
+            "smithy.api#documentation": "<p>The database user name. Required when authenticating using temporary\n            credentials.</p>"
           }
         },
         "Sql": {
@@ -2688,22 +3459,21 @@
             "smithy.api#required": {}
           }
         },
-        "Database": {
-          "target": "com.amazonaws.cloudwatchevents#Database",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the database. Required when authenticating using temporary credentials.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "StatementName": {
           "target": "com.amazonaws.cloudwatchevents#StatementName",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the SQL statement. You can name the SQL statement when you create it to identify the query.</p>"
+            "smithy.api#documentation": "<p>The name of the SQL statement. You can name the SQL statement when you create it to\n            identify the query.</p>"
+          }
+        },
+        "WithEvent": {
+          "target": "com.amazonaws.cloudwatchevents#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether to send an event back to EventBridge after the SQL statement\n            runs.</p>"
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>These are custom parameters to be used when the target is a Redshift cluster\n            to invoke the Redshift Data API ExecuteStatement based on EventBridge events.</p>"
+        "smithy.api#documentation": "<p>These are custom parameters to be used when the target is a Redshift cluster to invoke\n            the Redshift Data API ExecuteStatement based on EventBridge events.</p>"
       }
     },
     "com.amazonaws.cloudwatchevents#RedshiftSecretManagerArn": {
@@ -2729,6 +3499,9 @@
           "target": "com.amazonaws.cloudwatchevents#InternalException"
         },
         {
+          "target": "com.amazonaws.cloudwatchevents#OperationDisabledException"
+        },
+        {
           "target": "com.amazonaws.cloudwatchevents#ResourceNotFoundException"
         }
       ],
@@ -2742,8 +3515,13 @@
         "StatementId": {
           "target": "com.amazonaws.cloudwatchevents#StatementId",
           "traits": {
-            "smithy.api#documentation": "<p>The statement ID corresponding to the account that is no longer allowed to put\n            events to the default event bus.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The statement ID corresponding to the account that is no longer allowed to put\n            events to the default event bus.</p>"
+          }
+        },
+        "RemoveAllPermissions": {
+          "target": "com.amazonaws.cloudwatchevents#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether to remove all permissions.</p>"
           }
         },
         "EventBusName": {
@@ -2783,6 +3561,19 @@
     "com.amazonaws.cloudwatchevents#RemoveTargetsRequest": {
       "type": "structure",
       "members": {
+        "Rule": {
+          "target": "com.amazonaws.cloudwatchevents#RuleName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the rule.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "EventBusName": {
+          "target": "com.amazonaws.cloudwatchevents#EventBusNameOrArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is\n            used.</p>"
+          }
+        },
         "Ids": {
           "target": "com.amazonaws.cloudwatchevents#TargetIdList",
           "traits": {
@@ -2795,35 +3586,22 @@
           "traits": {
             "smithy.api#documentation": "<p>If this is a managed rule, created by an AWS service on your behalf, you must specify\n                <code>Force</code> as <code>True</code> to remove targets. This parameter is ignored\n            for rules that are not managed rules. You can check whether a rule is a managed rule by\n            using <code>DescribeRule</code> or <code>ListRules</code> and checking the\n                <code>ManagedBy</code> field of the response.</p>"
           }
-        },
-        "Rule": {
-          "target": "com.amazonaws.cloudwatchevents#RuleName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the rule.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "EventBusName": {
-          "target": "com.amazonaws.cloudwatchevents#EventBusName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the event bus associated with the rule.</p>"
-          }
         }
       }
     },
     "com.amazonaws.cloudwatchevents#RemoveTargetsResponse": {
       "type": "structure",
       "members": {
-        "FailedEntries": {
-          "target": "com.amazonaws.cloudwatchevents#RemoveTargetsResultEntryList",
-          "traits": {
-            "smithy.api#documentation": "<p>The failed target entries.</p>"
-          }
-        },
         "FailedEntryCount": {
           "target": "com.amazonaws.cloudwatchevents#Integer",
           "traits": {
             "smithy.api#documentation": "<p>The number of failed entries.</p>"
+          }
+        },
+        "FailedEntries": {
+          "target": "com.amazonaws.cloudwatchevents#RemoveTargetsResultEntryList",
+          "traits": {
+            "smithy.api#documentation": "<p>The failed target entries.</p>"
           }
         }
       }
@@ -2837,16 +3615,16 @@
             "smithy.api#documentation": "<p>The ID of the target.</p>"
           }
         },
-        "ErrorMessage": {
-          "target": "com.amazonaws.cloudwatchevents#ErrorMessage",
-          "traits": {
-            "smithy.api#documentation": "<p>The error message that explains why the target removal failed.</p>"
-          }
-        },
         "ErrorCode": {
           "target": "com.amazonaws.cloudwatchevents#ErrorCode",
           "traits": {
             "smithy.api#documentation": "<p>The error code that indicates why the target removal failed. If the value is\n                <code>ConcurrentModificationException</code>, too many requests were made at the\n            same time.</p>"
+          }
+        },
+        "ErrorMessage": {
+          "target": "com.amazonaws.cloudwatchevents#ErrorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>The error message that explains why the target removal failed.</p>"
           }
         }
       },
@@ -2858,6 +3636,172 @@
       "type": "list",
       "member": {
         "target": "com.amazonaws.cloudwatchevents#RemoveTargetsResultEntry"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#Replay": {
+      "type": "structure",
+      "members": {
+        "ReplayName": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the replay.</p>"
+          }
+        },
+        "EventSourceArn": {
+          "target": "com.amazonaws.cloudwatchevents#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the archive to replay event from.</p>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayState",
+          "traits": {
+            "smithy.api#documentation": "<p>The current state of the replay.</p>"
+          }
+        },
+        "StateReason": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayStateReason",
+          "traits": {
+            "smithy.api#documentation": "<p>A description of why the replay is in the current state.</p>"
+          }
+        },
+        "EventStartTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>A time stamp for the time to start replaying events. This is determined by the time in\n            the event as described in <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEventsRequestEntry.html#eventbridge-Type-PutEventsRequestEntry-Time\">Time</a>.</p>"
+          }
+        },
+        "EventEndTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>A time stamp for the time to start replaying events. Any event with a creation time\n            prior to the <code>EventEndTime</code> specified is replayed.</p>"
+          }
+        },
+        "EventLastReplayedTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>A time stamp for the time that the last event was replayed.</p>"
+          }
+        },
+        "ReplayStartTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>A time stamp for the time that the replay started.</p>"
+          }
+        },
+        "ReplayEndTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>A time stamp for the time that the replay completed.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A <code>Replay</code> object that contains details about a replay.</p>"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#ReplayArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1600
+        },
+        "smithy.api#pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:.+\\/[\\.\\-_A-Za-z0-9]+$"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#ReplayDescription": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 512
+        },
+        "smithy.api#pattern": ".*"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#ReplayDestination": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "target": "com.amazonaws.cloudwatchevents#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the event bus to replay event to. You can replay events only to the event\n            bus specified to create the archive.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "FilterArns": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayDestinationFilters",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of ARNs for rules to replay events to.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A <code>ReplayDestination</code> object that contains details about a replay.</p>"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#ReplayDestinationFilters": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.cloudwatchevents#Arn"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#ReplayList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.cloudwatchevents#Replay"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#ReplayName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 64
+        },
+        "smithy.api#pattern": "[\\.\\-_A-Za-z0-9]+"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#ReplayState": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "STARTING",
+            "name": "STARTING"
+          },
+          {
+            "value": "RUNNING",
+            "name": "RUNNING"
+          },
+          {
+            "value": "CANCELLING",
+            "name": "CANCELLING"
+          },
+          {
+            "value": "COMPLETED",
+            "name": "COMPLETED"
+          },
+          {
+            "value": "CANCELLED",
+            "name": "CANCELLED"
+          },
+          {
+            "value": "FAILED",
+            "name": "FAILED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.cloudwatchevents#ReplayStateReason": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 512
+        },
+        "smithy.api#pattern": ".*"
       }
     },
     "com.amazonaws.cloudwatchevents#ResourceAlreadyExistsException": {
@@ -2893,24 +3837,33 @@
         "smithy.api#error": "client"
       }
     },
+    "com.amazonaws.cloudwatchevents#RetentionDays": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 0
+        }
+      }
+    },
     "com.amazonaws.cloudwatchevents#RetryPolicy": {
       "type": "structure",
       "members": {
+        "MaximumRetryAttempts": {
+          "target": "com.amazonaws.cloudwatchevents#MaximumRetryAttempts",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of retry attempts to make before the request fails. Retry attempts\n            continue until either the maximum number of attempts is made or until the duration of\n            the <code>MaximumEventAgeInSeconds</code> is met.</p>"
+          }
+        },
         "MaximumEventAgeInSeconds": {
           "target": "com.amazonaws.cloudwatchevents#MaximumEventAgeInSeconds",
           "traits": {
             "smithy.api#documentation": "<p>The maximum amount of time, in seconds, to continue to make retry attempts.</p>"
           }
-        },
-        "MaximumRetryAttempts": {
-          "target": "com.amazonaws.cloudwatchevents#MaximumRetryAttempts",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of retry attempts to make before the request fails. Retry attempts continue until either the maximum number of attempts is made or until the duration of the <code>MaximumEventAgeInSeconds</code> is met.</p>"
-          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>A <code>RetryPolicy</code> object that includes information about the retry policy settings.</p>"
+        "smithy.api#documentation": "<p>A <code>RetryPolicy</code> object that includes information about the retry policy\n            settings.</p>"
       }
     },
     "com.amazonaws.cloudwatchevents#RoleArn": {
@@ -2925,10 +3878,10 @@
     "com.amazonaws.cloudwatchevents#Rule": {
       "type": "structure",
       "members": {
-        "Description": {
-          "target": "com.amazonaws.cloudwatchevents#RuleDescription",
+        "Name": {
+          "target": "com.amazonaws.cloudwatchevents#RuleName",
           "traits": {
-            "smithy.api#documentation": "<p>The description of the rule.</p>"
+            "smithy.api#documentation": "<p>The name of the rule.</p>"
           }
         },
         "Arn": {
@@ -2937,28 +3890,10 @@
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rule.</p>"
           }
         },
-        "RoleArn": {
-          "target": "com.amazonaws.cloudwatchevents#RoleArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that is used for target\n            invocation.</p>"
-          }
-        },
         "EventPattern": {
           "target": "com.amazonaws.cloudwatchevents#EventPattern",
           "traits": {
             "smithy.api#documentation": "<p>The event pattern of the rule. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html\">Events and\n                Event Patterns</a> in the <i>Amazon EventBridge User\n            Guide</i>.</p>"
-          }
-        },
-        "ScheduleExpression": {
-          "target": "com.amazonaws.cloudwatchevents#ScheduleExpression",
-          "traits": {
-            "smithy.api#documentation": "<p>The scheduling expression. For example, \"cron(0 20 * * ? *)\", \"rate(5\n            minutes)\".</p>"
-          }
-        },
-        "ManagedBy": {
-          "target": "com.amazonaws.cloudwatchevents#ManagedBy",
-          "traits": {
-            "smithy.api#documentation": "<p>If the rule was created on behalf of your account by an AWS service, this field\n            displays the principal name of the service that created the rule.</p>"
           }
         },
         "State": {
@@ -2967,16 +3902,34 @@
             "smithy.api#documentation": "<p>The state of the rule.</p>"
           }
         },
-        "Name": {
-          "target": "com.amazonaws.cloudwatchevents#RuleName",
+        "Description": {
+          "target": "com.amazonaws.cloudwatchevents#RuleDescription",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the rule.</p>"
+            "smithy.api#documentation": "<p>The description of the rule.</p>"
+          }
+        },
+        "ScheduleExpression": {
+          "target": "com.amazonaws.cloudwatchevents#ScheduleExpression",
+          "traits": {
+            "smithy.api#documentation": "<p>The scheduling expression. For example, \"cron(0 20 * * ? *)\", \"rate(5\n            minutes)\".</p>"
+          }
+        },
+        "RoleArn": {
+          "target": "com.amazonaws.cloudwatchevents#RoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that is used for target\n            invocation.</p>"
+          }
+        },
+        "ManagedBy": {
+          "target": "com.amazonaws.cloudwatchevents#ManagedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>If the rule was created on behalf of your account by an AWS service, this field\n            displays the principal name of the service that created the rule.</p>"
           }
         },
         "EventBusName": {
           "target": "com.amazonaws.cloudwatchevents#EventBusName",
           "traits": {
-            "smithy.api#documentation": "<p>The event bus associated with the rule.</p>"
+            "smithy.api#documentation": "<p>The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is\n            used.</p>"
           }
         }
       },
@@ -3057,17 +4010,17 @@
     "com.amazonaws.cloudwatchevents#RunCommandTarget": {
       "type": "structure",
       "members": {
-        "Values": {
-          "target": "com.amazonaws.cloudwatchevents#RunCommandTargetValues",
-          "traits": {
-            "smithy.api#documentation": "<p>If <code>Key</code> is <code>tag:</code>\n            <i>tag-key</i>,\n                <code>Values</code> is a list of tag values. If <code>Key</code> is\n                <code>InstanceIds</code>, <code>Values</code> is a list of Amazon EC2 instance\n            IDs.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Key": {
           "target": "com.amazonaws.cloudwatchevents#RunCommandTargetKey",
           "traits": {
             "smithy.api#documentation": "<p>Can be either <code>tag:</code>\n            <i>tag-key</i> or\n                <code>InstanceIds</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Values": {
+          "target": "com.amazonaws.cloudwatchevents#RunCommandTargetValues",
+          "traits": {
+            "smithy.api#documentation": "<p>If <code>Key</code> is <code>tag:</code>\n            <i>tag-key</i>,\n                <code>Values</code> is a list of tag values. If <code>Key</code> is\n                <code>InstanceIds</code>, <code>Values</code> is a list of Amazon EC2 instance\n            IDs.</p>",
             "smithy.api#required": {}
           }
         }
@@ -3151,6 +4104,110 @@
         "smithy.api#documentation": "<p>This structure includes the custom parameter to be used when the target is an SQS FIFO\n            queue.</p>"
       }
     },
+    "com.amazonaws.cloudwatchevents#StartReplay": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.cloudwatchevents#StartReplayRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.cloudwatchevents#StartReplayResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.cloudwatchevents#InternalException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#InvalidEventPatternException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#ResourceAlreadyExistsException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Starts the specified replay. Events are not necessarily replayed in the exact same\n            order that they were added to the archive. A replay processes events to replay based on\n            the time in the event, and replays them using 1 minute intervals. If you specify an\n                <code>EventStartTime</code> and an <code>EventEndTime</code> that covers a 20 minute\n            time range, the events are replayed from the first minute of that 20 minute range first.\n            Then the events from the second minute are replayed. You can use\n                <code>DescribeReplay</code> to determine the progress of a replay. The value\n            returned for <code>EventLastReplayedTime</code> indicates the time within the specified\n            time range associated with the last event replayed.</p>"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#StartReplayRequest": {
+      "type": "structure",
+      "members": {
+        "ReplayName": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the replay to start.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>A description for the replay to start.</p>"
+          }
+        },
+        "EventSourceArn": {
+          "target": "com.amazonaws.cloudwatchevents#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the archive to replay events from.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "EventStartTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>A time stamp for the time to start replaying events. Only events that occurred between\n            the <code>EventStartTime</code> and <code>EventEndTime</code> are replayed.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "EventEndTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>A time stamp for the time to stop replaying events. Only events that occurred between\n            the <code>EventStartTime</code> and <code>EventEndTime</code> are replayed.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Destination": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayDestination",
+          "traits": {
+            "smithy.api#documentation": "<p>A <code>ReplayDestination</code> object that includes details about the destination\n            for the replay.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.cloudwatchevents#StartReplayResponse": {
+      "type": "structure",
+      "members": {
+        "ReplayArn": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the replay.</p>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayState",
+          "traits": {
+            "smithy.api#documentation": "<p>The state of the replay.</p>"
+          }
+        },
+        "StateReason": {
+          "target": "com.amazonaws.cloudwatchevents#ReplayStateReason",
+          "traits": {
+            "smithy.api#documentation": "<p>The reason that the replay is in the state.</p>"
+          }
+        },
+        "ReplayStartTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the replay started.</p>"
+          }
+        }
+      }
+    },
     "com.amazonaws.cloudwatchevents#StatementId": {
       "type": "string",
       "traits": {
@@ -3198,7 +4255,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>A key-value pair associated with an AWS resource. In EventBridge, rules and event buses support\n            tagging.</p>"
+        "smithy.api#documentation": "<p>A key-value pair associated with an AWS resource. In EventBridge, rules and event\n            buses support tagging.</p>"
       }
     },
     "com.amazonaws.cloudwatchevents#TagKey": {
@@ -3245,7 +4302,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified EventBridge\n            resource. Tags can help you organize and categorize your resources. You can also use\n            them to scope user permissions by granting a user permission to access or change only\n            resources with certain tag values. In EventBridge, rules and event buses can be tagged.</p>\n        <p>Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of\n            characters.</p>\n        <p>You can use the <code>TagResource</code> action with a resource that already has tags. If\n            you specify a new tag key, this tag is appended to the list of tags\n            associated with the resource. If you specify a tag key that is already associated with the\n            resource, the new tag value that you specify replaces the previous value for that\n            tag.</p>\n        <p>You can associate as many as 50 tags with a resource.</p>"
+        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified EventBridge resource. Tags\n            can help you organize and categorize your resources. You can also use them to scope user\n            permissions by granting a user permission to access or change only resources with\n            certain tag values. In EventBridge, rules and event buses can be tagged.</p>\n        <p>Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of\n            characters.</p>\n        <p>You can use the <code>TagResource</code> action with a resource that already has tags.\n            If you specify a new tag key, this tag is appended to the list of tags associated with\n            the resource. If you specify a tag key that is already associated with the resource, the\n            new tag value that you specify replaces the previous value for that tag.</p>\n        <p>You can associate as many as 50 tags with a resource.</p>"
       }
     },
     "com.amazonaws.cloudwatchevents#TagResourceRequest": {
@@ -3283,10 +4340,36 @@
     "com.amazonaws.cloudwatchevents#Target": {
       "type": "structure",
       "members": {
-        "BatchParameters": {
-          "target": "com.amazonaws.cloudwatchevents#BatchParameters",
+        "Id": {
+          "target": "com.amazonaws.cloudwatchevents#TargetId",
           "traits": {
-            "smithy.api#documentation": "<p>If the event target is an AWS Batch job, this contains the job definition, job\n            name, and other parameters. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/jobs.html\">Jobs</a> in the <i>AWS Batch User\n                Guide</i>.</p>"
+            "smithy.api#documentation": "<p>The ID of the target.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Arn": {
+          "target": "com.amazonaws.cloudwatchevents#TargetArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RoleArn": {
+          "target": "com.amazonaws.cloudwatchevents#RoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to be used for this target when the\n            rule is triggered. If one rule triggers multiple targets, you can use a different IAM\n            role for each target.</p>"
+          }
+        },
+        "Input": {
+          "target": "com.amazonaws.cloudwatchevents#TargetInput",
+          "traits": {
+            "smithy.api#documentation": "<p>Valid JSON text passed to the target. In this case, nothing from the event itself\n            is passed to the target. For more information, see <a href=\"http://www.rfc-editor.org/rfc/rfc7159.txt\">The JavaScript Object Notation\n                (JSON) Data Interchange Format</a>.</p>"
+          }
+        },
+        "InputPath": {
+          "target": "com.amazonaws.cloudwatchevents#TargetInputPath",
+          "traits": {
+            "smithy.api#documentation": "<p>The value of the JSONPath that is used for extracting part of the matched event\n            when passing it to the target. You must use JSON dot notation, not bracket notation. For\n            more information about JSON paths, see <a href=\"http://goessner.net/articles/JsonPath/\">JSONPath</a>.</p>"
           }
         },
         "InputTransformer": {
@@ -3301,10 +4384,22 @@
             "smithy.api#documentation": "<p>The custom parameter you can use to control the shard assignment, when the target\n            is a Kinesis data stream. If you do not include this parameter, the default is to use\n            the <code>eventId</code> as the partition key.</p>"
           }
         },
+        "RunCommandParameters": {
+          "target": "com.amazonaws.cloudwatchevents#RunCommandParameters",
+          "traits": {
+            "smithy.api#documentation": "<p>Parameters used when you are using the rule to invoke Amazon EC2 Run\n            Command.</p>"
+          }
+        },
         "EcsParameters": {
           "target": "com.amazonaws.cloudwatchevents#EcsParameters",
           "traits": {
             "smithy.api#documentation": "<p>Contains the Amazon ECS task definition and task count to be used, if the event\n            target is an Amazon ECS task. For more information about Amazon ECS tasks, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html\">Task\n                Definitions </a> in the <i>Amazon EC2 Container Service Developer\n                Guide</i>.</p>"
+          }
+        },
+        "BatchParameters": {
+          "target": "com.amazonaws.cloudwatchevents#BatchParameters",
+          "traits": {
+            "smithy.api#documentation": "<p>If the event target is an AWS Batch job, this contains the job definition, job\n            name, and other parameters. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/jobs.html\">Jobs</a> in the <i>AWS Batch User\n                Guide</i>.</p>"
           }
         },
         "SqsParameters": {
@@ -3313,66 +4408,28 @@
             "smithy.api#documentation": "<p>Contains the message group ID to use when the target is a FIFO queue.</p>\n        <p>If you specify an SQS FIFO queue as a target, the queue must have content-based\n            deduplication enabled.</p>"
           }
         },
-        "RedshiftDataParameters": {
-          "target": "com.amazonaws.cloudwatchevents#RedshiftDataParameters",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains the Redshift Data API parameters to use when the target is a Redshift cluster.</p>\n        <p>If you specify a Redshift Cluster as a Target, you can use this\n        to specify parameters to invoke the Redshift Data API ExecuteStatement based on\n        EventBridge events.</p>"
-          }
-        },
         "HttpParameters": {
           "target": "com.amazonaws.cloudwatchevents#HttpParameters",
           "traits": {
-            "smithy.api#documentation": "<p>Contains the HTTP parameters to use when the target is a API Gateway REST \n            endpoint.</p>\n        <p>If you specify an API Gateway REST API as a target, you can use this \n        parameter to specify headers, path parameter, query string keys/values as part of your target \n        invoking request.</p>"
+            "smithy.api#documentation": "<p>Contains the HTTP parameters to use when the target is a API Gateway REST\n            endpoint.</p>\n        <p>If you specify an API Gateway REST API as a target, you can use this parameter to\n            specify headers, path parameter, query string keys/values as part of your target\n            invoking request.</p>"
           }
         },
-        "RunCommandParameters": {
-          "target": "com.amazonaws.cloudwatchevents#RunCommandParameters",
+        "RedshiftDataParameters": {
+          "target": "com.amazonaws.cloudwatchevents#RedshiftDataParameters",
           "traits": {
-            "smithy.api#documentation": "<p>Parameters used when you are using the rule to invoke Amazon EC2 Run\n            Command.</p>"
-          }
-        },
-        "RoleArn": {
-          "target": "com.amazonaws.cloudwatchevents#RoleArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to be used for this target when the\n            rule is triggered. If one rule triggers multiple targets, you can use a different IAM\n            role for each target.</p>"
-          }
-        },
-        "InputPath": {
-          "target": "com.amazonaws.cloudwatchevents#TargetInputPath",
-          "traits": {
-            "smithy.api#documentation": "<p>The value of the JSONPath that is used for extracting part of the matched event\n            when passing it to the target. You must use JSON dot notation, not bracket notation. For\n            more information about JSON paths, see <a href=\"http://goessner.net/articles/JsonPath/\">JSONPath</a>.</p>"
-          }
-        },
-        "RetryPolicy": {
-          "target": "com.amazonaws.cloudwatchevents#RetryPolicy",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>RetryPolicy</code> object that contains the retry policy configuration to use for the dead-letter queue.</p>"
-          }
-        },
-        "Input": {
-          "target": "com.amazonaws.cloudwatchevents#TargetInput",
-          "traits": {
-            "smithy.api#documentation": "<p>Valid JSON text passed to the target. In this case, nothing from the event itself\n            is passed to the target. For more information, see <a href=\"http://www.rfc-editor.org/rfc/rfc7159.txt\">The JavaScript Object Notation\n                (JSON) Data Interchange Format</a>.</p>"
+            "smithy.api#documentation": "<p>Contains the Redshift Data API parameters to use when the target is a Redshift\n            cluster.</p>\n        <p>If you specify a Redshift Cluster as a Target, you can use this to specify\n            parameters to invoke the Redshift Data API ExecuteStatement based on EventBridge\n            events.</p>"
           }
         },
         "DeadLetterConfig": {
           "target": "com.amazonaws.cloudwatchevents#DeadLetterConfig",
           "traits": {
-            "smithy.api#documentation": "<p>The <code>DeadLetterConfig</code> that defines the target queue to send dead-letter queue events to.</p>"
+            "smithy.api#documentation": "<p>The <code>DeadLetterConfig</code> that defines the target queue to send dead-letter\n            queue events to.</p>"
           }
         },
-        "Arn": {
-          "target": "com.amazonaws.cloudwatchevents#TargetArn",
+        "RetryPolicy": {
+          "target": "com.amazonaws.cloudwatchevents#RetryPolicy",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Id": {
-          "target": "com.amazonaws.cloudwatchevents#TargetId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the target.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The <code>RetryPolicy</code> object that contains the retry policy configuration to\n            use for the dead-letter queue.</p>"
           }
         }
       },
@@ -3550,23 +4607,23 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Removes one or more tags from the specified EventBridge resource. In Amazon EventBridge (CloudWatch\n            Events, rules and event buses can be tagged.</p>"
+        "smithy.api#documentation": "<p>Removes one or more tags from the specified EventBridge resource. In Amazon\n            EventBridge (CloudWatch Events, rules and event buses can be tagged.</p>"
       }
     },
     "com.amazonaws.cloudwatchevents#UntagResourceRequest": {
       "type": "structure",
       "members": {
-        "TagKeys": {
-          "target": "com.amazonaws.cloudwatchevents#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of tag keys to remove from the resource.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "ResourceARN": {
           "target": "com.amazonaws.cloudwatchevents#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the EventBridge resource from which you are removing tags.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.cloudwatchevents#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of tag keys to remove from the resource.</p>",
             "smithy.api#required": {}
           }
         }
@@ -3575,6 +4632,94 @@
     "com.amazonaws.cloudwatchevents#UntagResourceResponse": {
       "type": "structure",
       "members": {}
+    },
+    "com.amazonaws.cloudwatchevents#UpdateArchive": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.cloudwatchevents#UpdateArchiveRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.cloudwatchevents#UpdateArchiveResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.cloudwatchevents#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#InternalException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#InvalidEventPatternException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.cloudwatchevents#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates the specified archive.</p>"
+      }
+    },
+    "com.amazonaws.cloudwatchevents#UpdateArchiveRequest": {
+      "type": "structure",
+      "members": {
+        "ArchiveName": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the archive to update.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The description for the archive.</p>"
+          }
+        },
+        "EventPattern": {
+          "target": "com.amazonaws.cloudwatchevents#EventPattern",
+          "traits": {
+            "smithy.api#documentation": "<p>The event pattern to use to filter events sent to the archive.</p>"
+          }
+        },
+        "RetentionDays": {
+          "target": "com.amazonaws.cloudwatchevents#RetentionDays",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of days to retain events in the archive.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.cloudwatchevents#UpdateArchiveResponse": {
+      "type": "structure",
+      "members": {
+        "ArchiveArn": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the archive.</p>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveState",
+          "traits": {
+            "smithy.api#documentation": "<p>The state of the archive.</p>"
+          }
+        },
+        "StateReason": {
+          "target": "com.amazonaws.cloudwatchevents#ArchiveStateReason",
+          "traits": {
+            "smithy.api#documentation": "<p>The reason that the archive is in the current state.</p>"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.cloudwatchevents#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the archive was updated.</p>"
+          }
+        }
+      }
     }
   }
 }

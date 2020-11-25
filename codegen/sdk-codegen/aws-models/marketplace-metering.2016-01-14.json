@@ -61,6 +61,16 @@
         "smithy.api#title": "AWSMarketplace Metering"
       }
     },
+    "com.amazonaws.marketplacemetering#AllocatedUsageQuantity": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 0,
+          "max": 2147483647
+        }
+      }
+    },
     "com.amazonaws.marketplacemetering#BatchMeterUsage": {
       "type": "operation",
       "input": {
@@ -83,6 +93,12 @@
           "target": "com.amazonaws.marketplacemetering#InvalidProductCodeException"
         },
         {
+          "target": "com.amazonaws.marketplacemetering#InvalidTagException"
+        },
+        {
+          "target": "com.amazonaws.marketplacemetering#InvalidUsageAllocationsException"
+        },
+        {
           "target": "com.amazonaws.marketplacemetering#InvalidUsageDimensionException"
         },
         {
@@ -93,23 +109,23 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>BatchMeterUsage is called from a SaaS application listed on the AWS Marketplace to\n            post metering records for a set of customers.</p>\n        <p>For identical requests, the API is idempotent; requests can be retried with the\n            same records or a subset of the input records.</p>\n        <p>Every request to BatchMeterUsage is for one product. If you need to meter usage for\n            multiple products, you must make multiple calls to BatchMeterUsage.</p>\n        <p>BatchMeterUsage can process up to 25 UsageRecords at a time.</p>"
+        "smithy.api#documentation": "<p>BatchMeterUsage is called from a SaaS application listed on the AWS Marketplace to\n            post metering records for a set of customers.</p>\n        <p>For identical requests, the API is idempotent; requests can be retried with the\n            same records or a subset of the input records.</p>\n        <p>Every request to BatchMeterUsage is for one product. If you need to meter usage for\n            multiple products, you must make multiple calls to BatchMeterUsage.</p>\n        <p>BatchMeterUsage can process up to 25 UsageRecords at a time.</p>\n        <p>A UsageRecord can optionally include multiple usage allocations, to provide customers\n            with usagedata split into buckets by tags that you define (or allow the customer to \n            define).</p>\n        <p>BatchMeterUsage requests must be less than 1MB in size.</p>"
       }
     },
     "com.amazonaws.marketplacemetering#BatchMeterUsageRequest": {
       "type": "structure",
       "members": {
-        "ProductCode": {
-          "target": "com.amazonaws.marketplacemetering#ProductCode",
-          "traits": {
-            "smithy.api#documentation": "<p>Product code is used to uniquely identify a product in AWS Marketplace. The product\n            code should be the same as the one used during the publishing of a new\n            product.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "UsageRecords": {
           "target": "com.amazonaws.marketplacemetering#UsageRecordList",
           "traits": {
             "smithy.api#documentation": "<p>The set of UsageRecords to submit. BatchMeterUsage accepts up to 25 UsageRecords at\n            a time.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ProductCode": {
+          "target": "com.amazonaws.marketplacemetering#ProductCode",
+          "traits": {
+            "smithy.api#documentation": "<p>Product code is used to uniquely identify a product in AWS Marketplace. The product\n            code should be the same as the one used during the publishing of a new\n            product.</p>",
             "smithy.api#required": {}
           }
         }
@@ -150,7 +166,8 @@
         "smithy.api#length": {
           "min": 1,
           "max": 255
-        }
+        },
+        "smithy.api#pattern": "[\\s\\S]+"
       }
     },
     "com.amazonaws.marketplacemetering#CustomerNotEntitledException": {
@@ -273,6 +290,18 @@
         "smithy.api#error": "client"
       }
     },
+    "com.amazonaws.marketplacemetering#InvalidTagException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.marketplacemetering#errorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The tag is invalid, or the number of tags is greater than 5.</p>",
+        "smithy.api#error": "client"
+      }
+    },
     "com.amazonaws.marketplacemetering#InvalidTokenException": {
       "type": "structure",
       "members": {
@@ -282,6 +311,18 @@
       },
       "traits": {
         "smithy.api#documentation": "<p>Registration token is invalid.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.marketplacemetering#InvalidUsageAllocationsException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.marketplacemetering#errorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The usage allocation objects are invalid, or the number of allocations is greater\n            than 500 for a single usage record.</p>",
         "smithy.api#error": "client"
       }
     },
@@ -322,6 +363,12 @@
           "target": "com.amazonaws.marketplacemetering#InvalidProductCodeException"
         },
         {
+          "target": "com.amazonaws.marketplacemetering#InvalidTagException"
+        },
+        {
+          "target": "com.amazonaws.marketplacemetering#InvalidUsageAllocationsException"
+        },
+        {
           "target": "com.amazonaws.marketplacemetering#InvalidUsageDimensionException"
         },
         {
@@ -332,7 +379,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>API to emit metering records. For identical requests, the API is idempotent. It\n            simply returns the metering record ID.</p>\n        <p>MeterUsage is authenticated on the buyer's AWS account using credentials from the\n            EC2 instance, ECS task, or EKS pod.</p>"
+        "smithy.api#documentation": "<p>API to emit metering records. For identical requests, the API is idempotent. It\n            simply returns the metering record ID.</p>\n        <p>MeterUsage is authenticated on the buyer's AWS account using credentials from the\n            EC2 instance, ECS task, or EKS pod.</p>\n        <p>MeterUsage can optionally include multiple usage allocations, to provide customers\n            with usage data split into buckets by tags that you define (or allow the customer to\n            define).</p>"
       }
     },
     "com.amazonaws.marketplacemetering#MeterUsageRequest": {
@@ -345,10 +392,23 @@
             "smithy.api#required": {}
           }
         },
-        "DryRun": {
-          "target": "com.amazonaws.marketplacemetering#Boolean",
+        "UsageDimension": {
+          "target": "com.amazonaws.marketplacemetering#UsageDimension",
           "traits": {
-            "smithy.api#documentation": "<p>Checks whether you have the permissions required for the action, but does not make\n            the request. If you have the permissions, the request returns DryRunOperation;\n            otherwise, it returns UnauthorizedException. Defaults to <code>false</code> if not\n            specified.</p>"
+            "smithy.api#documentation": "<p>It will be one of the fcp dimension name provided during the publishing of the\n            product.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "UsageAllocations": {
+          "target": "com.amazonaws.marketplacemetering#UsageAllocations",
+          "traits": {
+            "smithy.api#documentation": "<p>The set of UsageAllocations to submit.</p>\n        <p>The sum of all UsageAllocation quantities must equal the\n            UsageQuantity of the MeterUsage request, and each UsageAllocation must have a\n            unique set of tags (include no tags).</p>"
+          }
+        },
+        "UsageQuantity": {
+          "target": "com.amazonaws.marketplacemetering#UsageQuantity",
+          "traits": {
+            "smithy.api#documentation": "<p>Consumption value for the hour. Defaults to <code>0</code> if not\n            specified.</p>"
           }
         },
         "ProductCode": {
@@ -358,17 +418,10 @@
             "smithy.api#required": {}
           }
         },
-        "UsageQuantity": {
-          "target": "com.amazonaws.marketplacemetering#UsageQuantity",
+        "DryRun": {
+          "target": "com.amazonaws.marketplacemetering#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>Consumption value for the hour. Defaults to <code>0</code> if not\n            specified.</p>"
-          }
-        },
-        "UsageDimension": {
-          "target": "com.amazonaws.marketplacemetering#UsageDimension",
-          "traits": {
-            "smithy.api#documentation": "<p>It will be one of the fcp dimension name provided during the publishing of the\n            product.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Checks whether you have the permissions required for the action, but does not make\n            the request. If you have the permissions, the request returns DryRunOperation;\n            otherwise, it returns UnauthorizedException. Defaults to <code>false</code> if not\n            specified.</p>"
           }
         }
       }
@@ -387,7 +440,7 @@
     "com.amazonaws.marketplacemetering#NonEmptyString": {
       "type": "string",
       "traits": {
-        "smithy.api#pattern": "\\S+"
+        "smithy.api#pattern": "[\\s\\S]+"
       }
     },
     "com.amazonaws.marketplacemetering#Nonce": {
@@ -396,7 +449,8 @@
         "smithy.api#length": {
           "min": 0,
           "max": 255
-        }
+        },
+        "smithy.api#pattern": "[\\s\\S]*"
       }
     },
     "com.amazonaws.marketplacemetering#PlatformNotSupportedException": {
@@ -417,7 +471,8 @@
         "smithy.api#length": {
           "min": 1,
           "max": 255
-        }
+        },
+        "smithy.api#pattern": "[\\s\\S]+"
       }
     },
     "com.amazonaws.marketplacemetering#RegisterUsage": {
@@ -461,6 +516,13 @@
     "com.amazonaws.marketplacemetering#RegisterUsageRequest": {
       "type": "structure",
       "members": {
+        "PublicKeyVersion": {
+          "target": "com.amazonaws.marketplacemetering#VersionInteger",
+          "traits": {
+            "smithy.api#documentation": "<p>Public Key Version provided by AWS Marketplace</p>",
+            "smithy.api#required": {}
+          }
+        },
         "Nonce": {
           "target": "com.amazonaws.marketplacemetering#Nonce",
           "traits": {
@@ -471,13 +533,6 @@
           "target": "com.amazonaws.marketplacemetering#ProductCode",
           "traits": {
             "smithy.api#documentation": "<p>Product code is used to uniquely identify a product in AWS Marketplace. The product\n            code should be the same as the one used during the publishing of a new\n            product.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "PublicKeyVersion": {
-          "target": "com.amazonaws.marketplacemetering#VersionInteger",
-          "traits": {
-            "smithy.api#documentation": "<p>Public Key Version provided by AWS Marketplace</p>",
             "smithy.api#required": {}
           }
         }
@@ -547,16 +602,16 @@
     "com.amazonaws.marketplacemetering#ResolveCustomerResult": {
       "type": "structure",
       "members": {
-        "CustomerIdentifier": {
-          "target": "com.amazonaws.marketplacemetering#CustomerIdentifier",
-          "traits": {
-            "smithy.api#documentation": "<p>The CustomerIdentifier is used to identify an individual customer in your\n            application. Calls to BatchMeterUsage require CustomerIdentifiers for each\n            UsageRecord.</p>"
-          }
-        },
         "ProductCode": {
           "target": "com.amazonaws.marketplacemetering#ProductCode",
           "traits": {
             "smithy.api#documentation": "<p>The product code is returned to confirm that the buyer is registering for your\n            product. Subsequent BatchMeterUsage calls should be made using this product\n            code.</p>"
+          }
+        },
+        "CustomerIdentifier": {
+          "target": "com.amazonaws.marketplacemetering#CustomerIdentifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The CustomerIdentifier is used to identify an individual customer in your\n            application. Calls to BatchMeterUsage require CustomerIdentifiers for each\n            UsageRecord.</p>"
           }
         }
       },
@@ -566,6 +621,60 @@
     },
     "com.amazonaws.marketplacemetering#String": {
       "type": "string"
+    },
+    "com.amazonaws.marketplacemetering#Tag": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "target": "com.amazonaws.marketplacemetering#TagKey",
+          "traits": {
+            "smithy.api#documentation": "<p>One part of a key-value pair that makes up a tag. A key is a label that acts like a\n            category for the specific tag values.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Value": {
+          "target": "com.amazonaws.marketplacemetering#TagValue",
+          "traits": {
+            "smithy.api#documentation": "<p>One part of a key-value pair that makes up a tag. A value acts as a descriptor within\n            a tag category (key). The value can be empty or null.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Metadata assigned to an allocation. Each tag is made up of a key and a value.</p>"
+      }
+    },
+    "com.amazonaws.marketplacemetering#TagKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 100
+        },
+        "smithy.api#pattern": "^[a-zA-Z0-9+ -=._:\\/@]+$"
+      }
+    },
+    "com.amazonaws.marketplacemetering#TagList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.marketplacemetering#Tag"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 5
+        }
+      }
+    },
+    "com.amazonaws.marketplacemetering#TagValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        },
+        "smithy.api#pattern": "^[a-zA-Z0-9+ -=._:\\/@]+$"
+      }
     },
     "com.amazonaws.marketplacemetering#ThrottlingException": {
       "type": "structure",
@@ -594,13 +703,47 @@
         "smithy.api#error": "client"
       }
     },
+    "com.amazonaws.marketplacemetering#UsageAllocation": {
+      "type": "structure",
+      "members": {
+        "AllocatedUsageQuantity": {
+          "target": "com.amazonaws.marketplacemetering#AllocatedUsageQuantity",
+          "traits": {
+            "smithy.api#documentation": "<p>The total quantity allocated to this bucket of usage.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.marketplacemetering#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>The set of tags that define the bucket of usage. For the bucket of items with no\n            tags, this parameter can be left out.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Usage allocations allow you to split usage into buckets by tags.</p>\n        <p>Each UsageAllocation indicates the usage quantity for a specific set of tags.</p>"
+      }
+    },
+    "com.amazonaws.marketplacemetering#UsageAllocations": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.marketplacemetering#UsageAllocation"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 500
+        }
+      }
+    },
     "com.amazonaws.marketplacemetering#UsageDimension": {
       "type": "string",
       "traits": {
         "smithy.api#length": {
           "min": 1,
           "max": 255
-        }
+        },
+        "smithy.api#pattern": "[\\s\\S]+"
       }
     },
     "com.amazonaws.marketplacemetering#UsageQuantity": {
@@ -616,17 +759,10 @@
     "com.amazonaws.marketplacemetering#UsageRecord": {
       "type": "structure",
       "members": {
-        "Quantity": {
-          "target": "com.amazonaws.marketplacemetering#UsageQuantity",
+        "UsageAllocations": {
+          "target": "com.amazonaws.marketplacemetering#UsageAllocations",
           "traits": {
-            "smithy.api#documentation": "<p>The quantity of usage consumed by the customer for the given dimension and time.\n            Defaults to <code>0</code> if not specified.</p>"
-          }
-        },
-        "Dimension": {
-          "target": "com.amazonaws.marketplacemetering#UsageDimension",
-          "traits": {
-            "smithy.api#documentation": "<p>During the process of registering a product on AWS Marketplace, up to eight\n            dimensions are specified. These represent different units of value in your\n            application.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The set of UsageAllocations to submit. The sum of all UsageAllocation quantities \n            must equal the Quantity of the UsageRecord.</p>"
           }
         },
         "Timestamp": {
@@ -636,10 +772,23 @@
             "smithy.api#required": {}
           }
         },
+        "Quantity": {
+          "target": "com.amazonaws.marketplacemetering#UsageQuantity",
+          "traits": {
+            "smithy.api#documentation": "<p>The quantity of usage consumed by the customer for the given dimension and time.\n            Defaults to <code>0</code> if not specified.</p>"
+          }
+        },
         "CustomerIdentifier": {
           "target": "com.amazonaws.marketplacemetering#CustomerIdentifier",
           "traits": {
             "smithy.api#documentation": "<p>The CustomerIdentifier is obtained through the ResolveCustomer operation and\n            represents an individual buyer in your application.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Dimension": {
+          "target": "com.amazonaws.marketplacemetering#UsageDimension",
+          "traits": {
+            "smithy.api#documentation": "<p>During the process of registering a product on AWS Marketplace, up to eight\n            dimensions are specified. These represent different units of value in your\n            application.</p>",
             "smithy.api#required": {}
           }
         }
@@ -663,10 +812,10 @@
     "com.amazonaws.marketplacemetering#UsageRecordResult": {
       "type": "structure",
       "members": {
-        "UsageRecord": {
-          "target": "com.amazonaws.marketplacemetering#UsageRecord",
+        "MeteringRecordId": {
+          "target": "com.amazonaws.marketplacemetering#String",
           "traits": {
-            "smithy.api#documentation": "<p>The UsageRecord that was part of the BatchMeterUsage request.</p>"
+            "smithy.api#documentation": "<p>The MeteringRecordId is a unique identifier for this metering event.</p>"
           }
         },
         "Status": {
@@ -675,10 +824,10 @@
             "smithy.api#documentation": "<p>The UsageRecordResult Status indicates the status of an individual UsageRecord\n            processed by BatchMeterUsage.</p>\n        <ul>\n            <li>\n                <p>\n                    <i>Success</i>- The UsageRecord was accepted and honored by\n                    BatchMeterUsage.</p>\n            </li>\n            <li>\n                <p>\n                    <i>CustomerNotSubscribed</i>- The CustomerIdentifier specified is\n                    not subscribed to your product. The UsageRecord was not honored. Future\n                    UsageRecords for this customer will fail until the customer subscribes to your\n                    product.</p>\n            </li>\n            <li>\n                <p>\n                    <i>DuplicateRecord</i>- Indicates that the UsageRecord was invalid\n                    and not honored. A previously metered UsageRecord had the same customer,\n                    dimension, and time, but a different quantity.</p>\n            </li>\n         </ul>"
           }
         },
-        "MeteringRecordId": {
-          "target": "com.amazonaws.marketplacemetering#String",
+        "UsageRecord": {
+          "target": "com.amazonaws.marketplacemetering#UsageRecord",
           "traits": {
-            "smithy.api#documentation": "<p>The MeteringRecordId is a unique identifier for this metering event.</p>"
+            "smithy.api#documentation": "<p>The UsageRecord that was part of the BatchMeterUsage request.</p>"
           }
         }
       },

@@ -1,0 +1,4811 @@
+{
+  "smithy": "1.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "id": "HttpMethodSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpResponseCodeSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "PaginatedTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpHeaderTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpUriConflict",
+        "namespace": "*"
+      },
+      {
+        "id": "Service",
+        "namespace": "*"
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.databrew#AWSGlueDataBrew": {
+      "type": "service",
+      "version": "2017-07-25",
+      "operations": [
+        {
+          "target": "com.amazonaws.databrew#BatchDeleteRecipeVersion"
+        },
+        {
+          "target": "com.amazonaws.databrew#CreateDataset"
+        },
+        {
+          "target": "com.amazonaws.databrew#CreateProfileJob"
+        },
+        {
+          "target": "com.amazonaws.databrew#CreateProject"
+        },
+        {
+          "target": "com.amazonaws.databrew#CreateRecipe"
+        },
+        {
+          "target": "com.amazonaws.databrew#CreateRecipeJob"
+        },
+        {
+          "target": "com.amazonaws.databrew#CreateSchedule"
+        },
+        {
+          "target": "com.amazonaws.databrew#DeleteDataset"
+        },
+        {
+          "target": "com.amazonaws.databrew#DeleteJob"
+        },
+        {
+          "target": "com.amazonaws.databrew#DeleteProject"
+        },
+        {
+          "target": "com.amazonaws.databrew#DeleteRecipeVersion"
+        },
+        {
+          "target": "com.amazonaws.databrew#DeleteSchedule"
+        },
+        {
+          "target": "com.amazonaws.databrew#DescribeDataset"
+        },
+        {
+          "target": "com.amazonaws.databrew#DescribeJob"
+        },
+        {
+          "target": "com.amazonaws.databrew#DescribeProject"
+        },
+        {
+          "target": "com.amazonaws.databrew#DescribeRecipe"
+        },
+        {
+          "target": "com.amazonaws.databrew#DescribeSchedule"
+        },
+        {
+          "target": "com.amazonaws.databrew#ListDatasets"
+        },
+        {
+          "target": "com.amazonaws.databrew#ListJobRuns"
+        },
+        {
+          "target": "com.amazonaws.databrew#ListJobs"
+        },
+        {
+          "target": "com.amazonaws.databrew#ListProjects"
+        },
+        {
+          "target": "com.amazonaws.databrew#ListRecipes"
+        },
+        {
+          "target": "com.amazonaws.databrew#ListRecipeVersions"
+        },
+        {
+          "target": "com.amazonaws.databrew#ListSchedules"
+        },
+        {
+          "target": "com.amazonaws.databrew#ListTagsForResource"
+        },
+        {
+          "target": "com.amazonaws.databrew#PublishRecipe"
+        },
+        {
+          "target": "com.amazonaws.databrew#SendProjectSessionAction"
+        },
+        {
+          "target": "com.amazonaws.databrew#StartJobRun"
+        },
+        {
+          "target": "com.amazonaws.databrew#StartProjectSession"
+        },
+        {
+          "target": "com.amazonaws.databrew#StopJobRun"
+        },
+        {
+          "target": "com.amazonaws.databrew#TagResource"
+        },
+        {
+          "target": "com.amazonaws.databrew#UntagResource"
+        },
+        {
+          "target": "com.amazonaws.databrew#UpdateDataset"
+        },
+        {
+          "target": "com.amazonaws.databrew#UpdateProfileJob"
+        },
+        {
+          "target": "com.amazonaws.databrew#UpdateProject"
+        },
+        {
+          "target": "com.amazonaws.databrew#UpdateRecipe"
+        },
+        {
+          "target": "com.amazonaws.databrew#UpdateRecipeJob"
+        },
+        {
+          "target": "com.amazonaws.databrew#UpdateSchedule"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "DataBrew",
+          "arnNamespace": "databrew",
+          "cloudFormationName": "DataBrew",
+          "cloudTrailEventSource": "databrew.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "databrew"
+        },
+        "aws.protocols#restJson1": {},
+        "smithy.api#documentation": "<p>AWS Glue DataBrew is a visual, cloud-scale data-preparation service. DataBrew\n            simplifies data preparation tasks, targeting data issues that are hard to spot and\n            time-consuming to fix. DataBrew empowers users of all technical levels to visualize the\n            data and perform one-click data transformations, with no coding required.</p>",
+        "smithy.api#title": "AWS Glue DataBrew"
+      }
+    },
+    "com.amazonaws.databrew#AccessDeniedException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.databrew#Message"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Access to the specified resource was denied.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 403
+      }
+    },
+    "com.amazonaws.databrew#AccountId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 255
+        }
+      }
+    },
+    "com.amazonaws.databrew#ActionId": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {}
+      }
+    },
+    "com.amazonaws.databrew#Arn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 20,
+          "max": 2048
+        }
+      }
+    },
+    "com.amazonaws.databrew#AssumeControl": {
+      "type": "boolean"
+    },
+    "com.amazonaws.databrew#Attempt": {
+      "type": "integer"
+    },
+    "com.amazonaws.databrew#BatchDeleteRecipeVersion": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#BatchDeleteRecipeVersionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#BatchDeleteRecipeVersionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes one or more versions of a recipe at a time.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/recipes/{Name}/batchDeleteRecipeVersion",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#BatchDeleteRecipeVersionRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#RecipeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the recipe to be modified.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "RecipeVersions": {
+          "target": "com.amazonaws.databrew#RecipeVersionList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of version identifiers to be deleted.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#BatchDeleteRecipeVersionResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#RecipeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the recipe that was modified.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Errors": {
+          "target": "com.amazonaws.databrew#RecipeErrorList",
+          "traits": {
+            "smithy.api#documentation": "<p>Errors, if any, that were encountered when deleting the recipe versions.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#Bucket": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 3,
+          "max": 63
+        }
+      }
+    },
+    "com.amazonaws.databrew#CatalogId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        }
+      }
+    },
+    "com.amazonaws.databrew#ClientSessionId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        },
+        "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*$"
+      }
+    },
+    "com.amazonaws.databrew#ColumnName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        }
+      }
+    },
+    "com.amazonaws.databrew#ColumnNameList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.databrew#ColumnName"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#ColumnRange": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 0,
+          "max": 20
+        }
+      }
+    },
+    "com.amazonaws.databrew#CompressionFormat": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "GZIP",
+            "name": "GZIP"
+          },
+          {
+            "value": "LZ4",
+            "name": "LZ4"
+          },
+          {
+            "value": "SNAPPY",
+            "name": "SNAPPY"
+          },
+          {
+            "value": "BZIP2",
+            "name": "BZIP2"
+          },
+          {
+            "value": "DEFLATE",
+            "name": "DEFLATE"
+          },
+          {
+            "value": "LZO",
+            "name": "LZO"
+          },
+          {
+            "value": "BROTLI",
+            "name": "BROTLI"
+          },
+          {
+            "value": "ZSTD",
+            "name": "ZSTD"
+          },
+          {
+            "value": "ZLIB",
+            "name": "ZLIB"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.databrew#Condition": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "^[A-Z\\_]+$"
+      }
+    },
+    "com.amazonaws.databrew#ConditionExpression": {
+      "type": "structure",
+      "members": {
+        "Condition": {
+          "target": "com.amazonaws.databrew#Condition",
+          "traits": {
+            "smithy.api#documentation": "<p>A specific condition to apply to a recipe action. For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/recipe-structure.html\">Recipe\n                structure</a> in the <i>AWS Glue DataBrew Developer\n            Guide</i>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Value": {
+          "target": "com.amazonaws.databrew#ConditionValue",
+          "traits": {
+            "smithy.api#documentation": "<p>A value that the condition must evaluate to for the condition to succeed.</p>"
+          }
+        },
+        "TargetColumn": {
+          "target": "com.amazonaws.databrew#TargetColumn",
+          "traits": {
+            "smithy.api#documentation": "<p>A column to apply this condition to, within an AWS Glue DataBrew dataset.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents an individual condition that evaluates to true or false.</p>\n        <p>Conditions are used with recipe actions: The action is only performed for column\n            values where the condition evaluates to true.</p>\n        <p>If a recipe requires more than one condition, then the recipe must specify multiple\n                <code>ConditionExpression</code> elements. Each condition is applied to the rows in\n            a dataset first, before the recipe action is performed.</p>"
+      }
+    },
+    "com.amazonaws.databrew#ConditionExpressionList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.databrew#ConditionExpression"
+      }
+    },
+    "com.amazonaws.databrew#ConditionValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 1024
+        }
+      }
+    },
+    "com.amazonaws.databrew#ConflictException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.databrew#Message"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Updating or deleting a resource can cause an inconsistent state.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 409
+      }
+    },
+    "com.amazonaws.databrew#CreateDataset": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#CreateDatasetRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#CreateDatasetResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a new AWS Glue DataBrew dataset for this AWS account.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/datasets",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#CreateDatasetRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#DatasetName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the dataset to be created.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "FormatOptions": {
+          "target": "com.amazonaws.databrew#FormatOptions"
+        },
+        "Input": {
+          "target": "com.amazonaws.databrew#Input",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.databrew#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata tags to apply to this dataset.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#CreateDatasetResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#DatasetName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the dataset that you created.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#CreateProfileJob": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#CreateProfileJobRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#CreateProfileJobResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a new job to profile an AWS Glue DataBrew dataset that exists in the current AWS\n            account.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/profileJobs",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#CreateProfileJobRequest": {
+      "type": "structure",
+      "members": {
+        "DatasetName": {
+          "target": "com.amazonaws.databrew#DatasetName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the dataset that this job is to act upon.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "EncryptionKeyArn": {
+          "target": "com.amazonaws.databrew#EncryptionKeyArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an encryption key that is used to \n            protect the job.</p>"
+          }
+        },
+        "EncryptionMode": {
+          "target": "com.amazonaws.databrew#EncryptionMode",
+          "traits": {
+            "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - para><code>SSE-KMS</code> - server-side encryption with AWS KMS-managed keys.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon\n                    S3.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#JobName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the job to be created.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "LogSubscription": {
+          "target": "com.amazonaws.databrew#LogSubscription",
+          "traits": {
+            "smithy.api#documentation": "<p>A value that enables or disables Amazon CloudWatch logging for the current AWS\n            account. If logging is enabled, CloudWatch writes one log stream for each job\n            run.</p>"
+          }
+        },
+        "MaxCapacity": {
+          "target": "com.amazonaws.databrew#MaxCapacity",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of nodes that DataBrew can use when the job processes data.</p>"
+          }
+        },
+        "MaxRetries": {
+          "target": "com.amazonaws.databrew#MaxRetries",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of times to retry the job after a job run fails.</p>"
+          }
+        },
+        "OutputLocation": {
+          "target": "com.amazonaws.databrew#S3Location",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "RoleArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to\n            be assumed for this request.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.databrew#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata tags to apply to this job.</p>"
+          }
+        },
+        "Timeout": {
+          "target": "com.amazonaws.databrew#Timeout",
+          "traits": {
+            "smithy.api#documentation": "<p>The job's timeout in minutes. A job that attempts to run longer than this timeout\n            period ends with a status of <code>TIMEOUT</code>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#CreateProfileJobResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#JobName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the job that was created.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#CreateProject": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#CreateProjectRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#CreateProjectResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.databrew#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a new AWS Glue DataBrew project in the current AWS account.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/projects",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#CreateProjectRequest": {
+      "type": "structure",
+      "members": {
+        "DatasetName": {
+          "target": "com.amazonaws.databrew#DatasetName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the dataset to associate this project with.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#ProjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique name for the new project.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RecipeName": {
+          "target": "com.amazonaws.databrew#RecipeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of an existing recipe to associate with the project.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Sample": {
+          "target": "com.amazonaws.databrew#Sample"
+        },
+        "RoleArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to\n            be assumed for this request.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.databrew#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata tags to apply to this project.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#CreateProjectResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#ProjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the project that you created.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#CreateRecipe": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#CreateRecipeRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#CreateRecipeResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a new AWS Glue DataBrew recipe for the current AWS account.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/recipes",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#CreateRecipeJob": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#CreateRecipeJobRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#CreateRecipeJobResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a new job for an existing AWS Glue DataBrew recipe in the current AWS account.\n            You can create a standalone job using either a project, or a combination of a recipe and\n            a dataset.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/recipeJobs",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#CreateRecipeJobRequest": {
+      "type": "structure",
+      "members": {
+        "DatasetName": {
+          "target": "com.amazonaws.databrew#DatasetName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the dataset that this job processes.</p>"
+          }
+        },
+        "EncryptionKeyArn": {
+          "target": "com.amazonaws.databrew#EncryptionKeyArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an encryption key that is used to protect the job.</p>"
+          }
+        },
+        "EncryptionMode": {
+          "target": "com.amazonaws.databrew#EncryptionMode",
+          "traits": {
+            "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#JobName",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique name for the job.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "LogSubscription": {
+          "target": "com.amazonaws.databrew#LogSubscription",
+          "traits": {
+            "smithy.api#documentation": "<p>A value that enables or disables Amazon CloudWatch logging for the current AWS\n            account. If logging is enabled, CloudWatch writes one log stream for each job\n            run.</p>"
+          }
+        },
+        "MaxCapacity": {
+          "target": "com.amazonaws.databrew#MaxCapacity",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of nodes that DataBrew can consume when the job processes\n            data.</p>"
+          }
+        },
+        "MaxRetries": {
+          "target": "com.amazonaws.databrew#MaxRetries",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of times to retry the job after a job run fails.</p>"
+          }
+        },
+        "Outputs": {
+          "target": "com.amazonaws.databrew#OutputList",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more artifacts that represent the output from running the job.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ProjectName": {
+          "target": "com.amazonaws.databrew#ProjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>Either the name of an existing project, or a combination of a recipe and a dataset to\n            associate with the recipe.</p>"
+          }
+        },
+        "RecipeReference": {
+          "target": "com.amazonaws.databrew#RecipeReference"
+        },
+        "RoleArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to\n            be assumed for this request.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.databrew#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata tags to apply to this job dataset.</p>"
+          }
+        },
+        "Timeout": {
+          "target": "com.amazonaws.databrew#Timeout",
+          "traits": {
+            "smithy.api#documentation": "<p>The job's timeout in minutes. A job that attempts to run longer than this timeout\n            period ends with a status of <code>TIMEOUT</code>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#CreateRecipeJobResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#JobName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the job that you created.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#CreateRecipeRequest": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "target": "com.amazonaws.databrew#RecipeDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>A description for the recipe.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#RecipeName",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique name for the recipe.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Steps": {
+          "target": "com.amazonaws.databrew#RecipeStepList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array containing the steps to be performed by the recipe.  Each recipe step consists of one  \n            recipe action and (optionally) an array of condition expressions.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.databrew#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata tags to apply to this recipe.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#CreateRecipeResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#RecipeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the recipe that you created.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#CreateSchedule": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#CreateScheduleRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#CreateScheduleResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a new schedule for one or more AWS Glue DataBrew jobs. Jobs can be run at a\n            specific date and time, or at regular intervals.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/schedules",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#CreateScheduleRequest": {
+      "type": "structure",
+      "members": {
+        "JobNames": {
+          "target": "com.amazonaws.databrew#JobNameList",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or names of one or more jobs to be run.</p>"
+          }
+        },
+        "CronExpression": {
+          "target": "com.amazonaws.databrew#CronExpression",
+          "traits": {
+            "smithy.api#documentation": "<p>The date or dates and time or times, in <code>cron</code> format, when the jobs are to\n            be run.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.databrew#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata tags to apply to this schedule.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#ScheduleName",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique name for the schedule.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#CreateScheduleResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#ScheduleName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the schedule that was created.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#CreatedBy": {
+      "type": "string"
+    },
+    "com.amazonaws.databrew#CronExpression": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 512
+        }
+      }
+    },
+    "com.amazonaws.databrew#DataCatalogInputDefinition": {
+      "type": "structure",
+      "members": {
+        "CatalogId": {
+          "target": "com.amazonaws.databrew#CatalogId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier of the AWS account that holds the Data Catalog that stores the\n            data.</p>"
+          }
+        },
+        "DatabaseName": {
+          "target": "com.amazonaws.databrew#DatabaseName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of a database in the Data Catalog.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TableName": {
+          "target": "com.amazonaws.databrew#TableName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of a database table in the Data Catalog. This table corresponds to a DataBrew\n            dataset.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TempDirectory": {
+          "target": "com.amazonaws.databrew#S3Location",
+          "traits": {
+            "smithy.api#documentation": "<p>An Amazon location that AWS Glue Data Catalog can use as a temporary directory.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents how metadata stored in the AWS Glue Data Catalog is defined in an AWS Glue\n            DataBrew dataset. </p>"
+      }
+    },
+    "com.amazonaws.databrew#DatabaseName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        }
+      }
+    },
+    "com.amazonaws.databrew#Dataset": {
+      "type": "structure",
+      "members": {
+        "AccountId": {
+          "target": "com.amazonaws.databrew#AccountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the AWS account that owns the dataset.</p>"
+          }
+        },
+        "CreatedBy": {
+          "target": "com.amazonaws.databrew#CreatedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (the user name) of the user who created the dataset.</p>"
+          }
+        },
+        "CreateDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the dataset was created.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#DatasetName",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique name of the dataset.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "FormatOptions": {
+          "target": "com.amazonaws.databrew#FormatOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>Options that define how DataBrew interprets the data in the dataset.</p>"
+          }
+        },
+        "Input": {
+          "target": "com.amazonaws.databrew#Input",
+          "traits": {
+            "smithy.api#documentation": "<p>Information on how DataBrew can find the dataset, in either the AWS Glue Data Catalog\n            or Amazon S3.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "LastModifiedDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The last modification date and time of the dataset.</p>"
+          }
+        },
+        "LastModifiedBy": {
+          "target": "com.amazonaws.databrew#LastModifiedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (the user name) of the user who last modified the dataset.</p>"
+          }
+        },
+        "Source": {
+          "target": "com.amazonaws.databrew#Source",
+          "traits": {
+            "smithy.api#documentation": "<p>The location of the data for the dataset, either Amazon S3 or the AWS Glue Data\n            Catalog.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.databrew#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata tags that have been applied to the dataset.</p>"
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique Amazon Resource Name (ARN) for the dataset.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents a dataset that can be processed by AWS Glue DataBrew.</p>"
+      }
+    },
+    "com.amazonaws.databrew#DatasetList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.databrew#Dataset"
+      }
+    },
+    "com.amazonaws.databrew#DatasetName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        }
+      }
+    },
+    "com.amazonaws.databrew#Date": {
+      "type": "timestamp"
+    },
+    "com.amazonaws.databrew#DeleteDataset": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#DeleteDatasetRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#DeleteDatasetResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes a dataset from AWS Glue DataBrew.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/datasets/{Name}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#DeleteDatasetRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#DatasetName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the dataset to be deleted.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#DeleteDatasetResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#DatasetName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the dataset that you deleted.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#DeleteJob": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#DeleteJobRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#DeleteJobResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes the specified AWS Glue DataBrew job from the current AWS account. The job can\n            be for a recipe or for a profile.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/jobs/{Name}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#DeleteJobRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#JobName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the job to be deleted.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#DeleteJobResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#JobName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the job that you deleted.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#DeleteProject": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#DeleteProjectRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#DeleteProjectResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes an existing AWS Glue DataBrew project from the current AWS account.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/projects/{Name}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#DeleteProjectRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#ProjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the project to be deleted.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#DeleteProjectResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#ProjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the project that you deleted.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#DeleteRecipeVersion": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#DeleteRecipeVersionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#DeleteRecipeVersionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes a single version of an AWS Glue DataBrew recipe.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/recipes/{Name}/recipeVersion/{RecipeVersion}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#DeleteRecipeVersionRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#RecipeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the recipe to be deleted.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "RecipeVersion": {
+          "target": "com.amazonaws.databrew#RecipeVersion",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the recipe to be deleted.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#DeleteRecipeVersionResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#RecipeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the recipe that was deleted.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RecipeVersion": {
+          "target": "com.amazonaws.databrew#RecipeVersion",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the recipe that was deleted.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#DeleteSchedule": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#DeleteScheduleRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#DeleteScheduleResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes the specified AWS Glue DataBrew schedule from the current AWS account.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/schedules/{Name}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#DeleteScheduleRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#ScheduleName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the schedule to be deleted.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#DeleteScheduleResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#ScheduleName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the schedule that was deleted.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#DescribeDataset": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#DescribeDatasetRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#DescribeDatasetResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns the definition of a specific AWS Glue DataBrew dataset that is in the current\n            AWS account.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/datasets/{Name}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#DescribeDatasetRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#DatasetName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the dataset to be described.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#DescribeDatasetResponse": {
+      "type": "structure",
+      "members": {
+        "CreatedBy": {
+          "target": "com.amazonaws.databrew#CreatedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (user name) of the user who created the dataset.</p>"
+          }
+        },
+        "CreateDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the dataset was created.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#DatasetName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the dataset.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "FormatOptions": {
+          "target": "com.amazonaws.databrew#FormatOptions"
+        },
+        "Input": {
+          "target": "com.amazonaws.databrew#Input",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "LastModifiedDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the dataset was last modified.</p>"
+          }
+        },
+        "LastModifiedBy": {
+          "target": "com.amazonaws.databrew#LastModifiedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (user name) of the user who last modified the dataset.</p>"
+          }
+        },
+        "Source": {
+          "target": "com.amazonaws.databrew#Source",
+          "traits": {
+            "smithy.api#documentation": "<p>The location of the data for this dataset, Amazon S3 or the AWS Glue Data\n            Catalog.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.databrew#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata tags associated with this dataset.</p>"
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#DescribeJob": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#DescribeJobRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#DescribeJobResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns the definition of a specific AWS Glue DataBrew job that is in the current AWS\n            account.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/jobs/{Name}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#DescribeJobRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#JobName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the job to be described.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#DescribeJobResponse": {
+      "type": "structure",
+      "members": {
+        "CreateDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the job was created.</p>"
+          }
+        },
+        "CreatedBy": {
+          "target": "com.amazonaws.databrew#CreatedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (user name) of the user associated with the creation of the job.</p>"
+          }
+        },
+        "DatasetName": {
+          "target": "com.amazonaws.databrew#DatasetName",
+          "traits": {
+            "smithy.api#documentation": "<p>The dataset that the job acts upon.</p>"
+          }
+        },
+        "EncryptionKeyArn": {
+          "target": "com.amazonaws.databrew#EncryptionKeyArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an encryption key that is used to protect the job.</p>"
+          }
+        },
+        "EncryptionMode": {
+          "target": "com.amazonaws.databrew#EncryptionMode",
+          "traits": {
+            "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#JobName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the job.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Type": {
+          "target": "com.amazonaws.databrew#JobType",
+          "traits": {
+            "smithy.api#documentation": "<p>The job type, which must be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>PROFILE</code> - The job analyzes the dataset to determine its size,\n                    data types, data distribution, and more.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RECIPE</code> - The job applies one or more transformations to a\n                    dataset.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "LastModifiedBy": {
+          "target": "com.amazonaws.databrew#LastModifiedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (user name) of the user who last modified the job.</p>"
+          }
+        },
+        "LastModifiedDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the job was last modified.</p>"
+          }
+        },
+        "LogSubscription": {
+          "target": "com.amazonaws.databrew#LogSubscription",
+          "traits": {
+            "smithy.api#documentation": "<p>A value that indicates whether Amazon CloudWatch logging is enabled for this job.</p>"
+          }
+        },
+        "MaxCapacity": {
+          "target": "com.amazonaws.databrew#MaxCapacity",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of nodes that AWS Glue DataBrew can consume when the job processes\n            data.</p>"
+          }
+        },
+        "MaxRetries": {
+          "target": "com.amazonaws.databrew#MaxRetries",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of times to retry the job after a job run fails.</p>"
+          }
+        },
+        "Outputs": {
+          "target": "com.amazonaws.databrew#OutputList",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more artifacts that represent the output from running the job.</p>"
+          }
+        },
+        "ProjectName": {
+          "target": "com.amazonaws.databrew#ProjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>The DataBrew project associated with this job.</p>"
+          }
+        },
+        "RecipeReference": {
+          "target": "com.amazonaws.databrew#RecipeReference"
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the job.</p>"
+          }
+        },
+        "RoleArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the AWS Identity and Access Management (IAM) role that was assumed for this\n            request.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.databrew#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata tags associated with this job.</p>"
+          }
+        },
+        "Timeout": {
+          "target": "com.amazonaws.databrew#Timeout",
+          "traits": {
+            "smithy.api#documentation": "<p>The job's timeout in minutes. A job that attempts to run longer than this timeout\n            period ends with a status of <code>TIMEOUT</code>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#DescribeProject": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#DescribeProjectRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#DescribeProjectResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns the definition of a specific AWS Glue DataBrew project that is in the current\n            AWS account.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/projects/{Name}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#DescribeProjectRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#ProjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the project to be described.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#DescribeProjectResponse": {
+      "type": "structure",
+      "members": {
+        "CreateDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the project was created.</p>"
+          }
+        },
+        "CreatedBy": {
+          "target": "com.amazonaws.databrew#CreatedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (user name) of the user who created the project.</p>"
+          }
+        },
+        "DatasetName": {
+          "target": "com.amazonaws.databrew#DatasetName",
+          "traits": {
+            "smithy.api#documentation": "<p>The dataset associated with the project.</p>"
+          }
+        },
+        "LastModifiedDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the project was last modified.</p>"
+          }
+        },
+        "LastModifiedBy": {
+          "target": "com.amazonaws.databrew#LastModifiedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (user name) of the user who last modified the project.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#ProjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the project.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RecipeName": {
+          "target": "com.amazonaws.databrew#RecipeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The recipe associated with this job.</p>"
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project.</p>"
+          }
+        },
+        "Sample": {
+          "target": "com.amazonaws.databrew#Sample"
+        },
+        "RoleArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the AWS Identity and Access Management (IAM) role that was assumed for this\n            request.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.databrew#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata tags associated with this project.</p>"
+          }
+        },
+        "SessionStatus": {
+          "target": "com.amazonaws.databrew#SessionStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>Describes the current state of the session:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>PROVISIONING</code> - allocating resources for the session.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INITIALIZING</code> - getting the session ready for first use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ASSIGNED</code> - the session is ready for use.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "OpenedBy": {
+          "target": "com.amazonaws.databrew#OpenedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (user name) of the user that opened the project for use. </p>"
+          }
+        },
+        "OpenDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time when the project was opened. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#DescribeRecipe": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#DescribeRecipeRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#DescribeRecipeResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns the definition of a specific AWS Glue DataBrew recipe that is in the current\n            AWS account.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/recipes/{Name}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#DescribeRecipeRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#RecipeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the recipe to be described.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "RecipeVersion": {
+          "target": "com.amazonaws.databrew#RecipeVersion",
+          "traits": {
+            "smithy.api#documentation": "<p>The recipe version identifier. If this parameter isn't specified, then the latest\n            published version is returned.</p>",
+            "smithy.api#httpQuery": "recipeVersion"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#DescribeRecipeResponse": {
+      "type": "structure",
+      "members": {
+        "CreatedBy": {
+          "target": "com.amazonaws.databrew#CreatedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (user name) of the user who created the recipe.</p>"
+          }
+        },
+        "CreateDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the recipe was created.</p>"
+          }
+        },
+        "LastModifiedBy": {
+          "target": "com.amazonaws.databrew#LastModifiedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (user name) of the user who last modified the recipe.</p>"
+          }
+        },
+        "LastModifiedDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the recipe was last modified.</p>"
+          }
+        },
+        "ProjectName": {
+          "target": "com.amazonaws.databrew#ProjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the project associated with this recipe.</p>"
+          }
+        },
+        "PublishedBy": {
+          "target": "com.amazonaws.databrew#PublishedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (user name) of the user who last published the recipe.</p>"
+          }
+        },
+        "PublishedDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time when the recipe was last published.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.databrew#RecipeDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the recipe.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#RecipeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the recipe.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Steps": {
+          "target": "com.amazonaws.databrew#RecipeStepList",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more steps to be performed by the recipe. Each step consists of an action, and\n            the conditions under which the action should succeed.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.databrew#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata tags associated with this project.</p>"
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the recipe.</p>"
+          }
+        },
+        "RecipeVersion": {
+          "target": "com.amazonaws.databrew#RecipeVersion",
+          "traits": {
+            "smithy.api#documentation": "<p>The recipe version identifier.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#DescribeSchedule": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#DescribeScheduleRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#DescribeScheduleResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns the definition of a specific AWS Glue DataBrew schedule that is in the current\n            AWS account.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/schedules/{Name}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#DescribeScheduleRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#ScheduleName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the schedule to be described.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#DescribeScheduleResponse": {
+      "type": "structure",
+      "members": {
+        "CreateDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the schedule was created.</p>"
+          }
+        },
+        "CreatedBy": {
+          "target": "com.amazonaws.databrew#CreatedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (user name) of the user who created the schedule. </p>"
+          }
+        },
+        "JobNames": {
+          "target": "com.amazonaws.databrew#JobNameList",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or names of one or more jobs to be run by using the schedule.</p>"
+          }
+        },
+        "LastModifiedBy": {
+          "target": "com.amazonaws.databrew#LastModifiedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (user name) of the user who last modified the schedule.</p>"
+          }
+        },
+        "LastModifiedDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the schedule was last modified.</p>"
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the schedule.</p>"
+          }
+        },
+        "CronExpression": {
+          "target": "com.amazonaws.databrew#CronExpression",
+          "traits": {
+            "smithy.api#documentation": "<p>The date or dates and time or times, in <code>cron</code> format, when the jobs are to\n            be run for the schedule.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.databrew#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata tags associated with this schedule.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#ScheduleName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the schedule.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#EncryptionKeyArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 20,
+          "max": 2048
+        }
+      }
+    },
+    "com.amazonaws.databrew#EncryptionMode": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "SSE-KMS",
+            "name": "SSEKMS"
+          },
+          {
+            "value": "SSE-S3",
+            "name": "SSES3"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.databrew#ErrorCode": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "^[1-5][0-9][0-9]$"
+      }
+    },
+    "com.amazonaws.databrew#ExcelOptions": {
+      "type": "structure",
+      "members": {
+        "SheetNames": {
+          "target": "com.amazonaws.databrew#SheetNameList",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies one or more named sheets in the Excel file, which will be included in the dataset.</p>"
+          }
+        },
+        "SheetIndexes": {
+          "target": "com.amazonaws.databrew#SheetIndexList",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies one or more sheet numbers in the Excel file, which will be included in the dataset.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Options that define how DataBrew will interpret a Microsoft Excel file, when creating a\n            dataset from that file.</p>"
+      }
+    },
+    "com.amazonaws.databrew#ExecutionTime": {
+      "type": "integer"
+    },
+    "com.amazonaws.databrew#FormatOptions": {
+      "type": "structure",
+      "members": {
+        "Json": {
+          "target": "com.amazonaws.databrew#JsonOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>Options that define how JSON input is to be interpreted by DataBrew.</p>"
+          }
+        },
+        "Excel": {
+          "target": "com.amazonaws.databrew#ExcelOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>Options that define how Excel input is to be interpreted by DataBrew.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Options that define how Microsoft Excel input is to be interpreted by DataBrew.</p>"
+      }
+    },
+    "com.amazonaws.databrew#HiddenColumnList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.databrew#ColumnName"
+      }
+    },
+    "com.amazonaws.databrew#Input": {
+      "type": "structure",
+      "members": {
+        "S3InputDefinition": {
+          "target": "com.amazonaws.databrew#S3Location",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon S3 location where the data is stored.</p>"
+          }
+        },
+        "DataCatalogInputDefinition": {
+          "target": "com.amazonaws.databrew#DataCatalogInputDefinition",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS Glue Data Catalog parameters for the data.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Information on how AWS Glue DataBrew can find data, in either the AWS Glue Data\n            Catalog or Amazon S3.</p>"
+      }
+    },
+    "com.amazonaws.databrew#InternalServerException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.databrew#Message"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An internal service failure occurred.</p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 500
+      }
+    },
+    "com.amazonaws.databrew#Job": {
+      "type": "structure",
+      "members": {
+        "AccountId": {
+          "target": "com.amazonaws.databrew#AccountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the AWS account that owns the job.</p>"
+          }
+        },
+        "CreatedBy": {
+          "target": "com.amazonaws.databrew#CreatedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (the user name) of the user who created the job.</p>"
+          }
+        },
+        "CreateDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the job was created.</p>"
+          }
+        },
+        "DatasetName": {
+          "target": "com.amazonaws.databrew#DatasetName",
+          "traits": {
+            "smithy.api#documentation": "<p>A dataset that the job is to process.</p>"
+          }
+        },
+        "EncryptionKeyArn": {
+          "target": "com.amazonaws.databrew#EncryptionKeyArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an encryption key that is used to protect a job.</p>"
+          }
+        },
+        "EncryptionMode": {
+          "target": "com.amazonaws.databrew#EncryptionMode",
+          "traits": {
+            "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon\n                    S3.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#JobName",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique name of the job.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Type": {
+          "target": "com.amazonaws.databrew#JobType",
+          "traits": {
+            "smithy.api#documentation": "<p>The job type of the job, which must be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>PROFILE</code> - A job to analyze a dataset, to determine its size, data\n                    types, data distribution, and more.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RECIPE</code> - A job to apply one or more transformations to a\n                    dataset.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "LastModifiedBy": {
+          "target": "com.amazonaws.databrew#LastModifiedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (the user name) of the user who last modified the job.</p>"
+          }
+        },
+        "LastModifiedDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The modification date and time of the job.</p>"
+          }
+        },
+        "LogSubscription": {
+          "target": "com.amazonaws.databrew#LogSubscription",
+          "traits": {
+            "smithy.api#documentation": "<p>The current status of Amazon CloudWatch logging for the job.</p>"
+          }
+        },
+        "MaxCapacity": {
+          "target": "com.amazonaws.databrew#MaxCapacity",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of nodes that can be consumed when the job processes data.</p>"
+          }
+        },
+        "MaxRetries": {
+          "target": "com.amazonaws.databrew#MaxRetries",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of times to retry the job after a job run fails.</p>"
+          }
+        },
+        "Outputs": {
+          "target": "com.amazonaws.databrew#OutputList",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more artifacts that represent output from running the job.</p>"
+          }
+        },
+        "ProjectName": {
+          "target": "com.amazonaws.databrew#ProjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the project that the job is associated with.</p>"
+          }
+        },
+        "RecipeReference": {
+          "target": "com.amazonaws.databrew#RecipeReference",
+          "traits": {
+            "smithy.api#documentation": "<p>A set of steps that the job runs.</p>"
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique Amazon Resource Name (ARN) for the job.</p>"
+          }
+        },
+        "RoleArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that will be assumed for this job.</p>"
+          }
+        },
+        "Timeout": {
+          "target": "com.amazonaws.databrew#Timeout",
+          "traits": {
+            "smithy.api#documentation": "<p>The job's timeout in minutes. A job that attempts to run longer than this timeout\n            period ends with a status of <code>TIMEOUT</code>.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.databrew#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata tags that have been applied to the job.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents all of the attributes of an AWS Glue DataBrew job.</p>"
+      }
+    },
+    "com.amazonaws.databrew#JobList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.databrew#Job"
+      }
+    },
+    "com.amazonaws.databrew#JobName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 240
+        }
+      }
+    },
+    "com.amazonaws.databrew#JobNameList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.databrew#JobName"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.databrew#JobRun": {
+      "type": "structure",
+      "members": {
+        "Attempt": {
+          "target": "com.amazonaws.databrew#Attempt",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of times that DataBrew has attempted to run the job.</p>"
+          }
+        },
+        "CompletedOn": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time when the job completed processing.</p>"
+          }
+        },
+        "DatasetName": {
+          "target": "com.amazonaws.databrew#DatasetName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the dataset for the job to process.</p>"
+          }
+        },
+        "ErrorMessage": {
+          "target": "com.amazonaws.databrew#JobRunErrorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>A message indicating an error (if any) that was encountered when the job ran.</p>"
+          }
+        },
+        "ExecutionTime": {
+          "target": "com.amazonaws.databrew#ExecutionTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The amount of time, in seconds, during which a job run consumed resources.</p>"
+          }
+        },
+        "JobName": {
+          "target": "com.amazonaws.databrew#JobName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the job being processed during this run.</p>"
+          }
+        },
+        "RunId": {
+          "target": "com.amazonaws.databrew#JobRunId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier of the job run.</p>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.databrew#JobRunState",
+          "traits": {
+            "smithy.api#documentation": "<p>The current state of the job run entity itself.</p>"
+          }
+        },
+        "LogSubscription": {
+          "target": "com.amazonaws.databrew#LogSubscription",
+          "traits": {
+            "smithy.api#documentation": "<p>The current status of Amazon CloudWatch logging for the job run.</p>"
+          }
+        },
+        "LogGroupName": {
+          "target": "com.amazonaws.databrew#LogGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of an Amazon CloudWatch log group, where the job writes diagnostic messages\n            when it runs.</p>"
+          }
+        },
+        "Outputs": {
+          "target": "com.amazonaws.databrew#OutputList",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more output artifacts from a job run.</p>"
+          }
+        },
+        "RecipeReference": {
+          "target": "com.amazonaws.databrew#RecipeReference",
+          "traits": {
+            "smithy.api#documentation": "<p>The set of steps processed by the job.</p>"
+          }
+        },
+        "StartedBy": {
+          "target": "com.amazonaws.databrew#StartedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (the user name) of the user who initiated the job run. </p>"
+          }
+        },
+        "StartedOn": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time when the job run began. </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents one run of an AWS Glue DataBrew job.</p>"
+      }
+    },
+    "com.amazonaws.databrew#JobRunErrorMessage": {
+      "type": "string"
+    },
+    "com.amazonaws.databrew#JobRunId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        }
+      }
+    },
+    "com.amazonaws.databrew#JobRunList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.databrew#JobRun"
+      }
+    },
+    "com.amazonaws.databrew#JobRunState": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "STARTING",
+            "name": "STARTING"
+          },
+          {
+            "value": "RUNNING",
+            "name": "RUNNING"
+          },
+          {
+            "value": "STOPPING",
+            "name": "STOPPING"
+          },
+          {
+            "value": "STOPPED",
+            "name": "STOPPED"
+          },
+          {
+            "value": "SUCCEEDED",
+            "name": "SUCCEEDED"
+          },
+          {
+            "value": "FAILED",
+            "name": "FAILED"
+          },
+          {
+            "value": "TIMEOUT",
+            "name": "TIMEOUT"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.databrew#JobType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "PROFILE",
+            "name": "PROFILE"
+          },
+          {
+            "value": "RECIPE",
+            "name": "RECIPE"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.databrew#JsonOptions": {
+      "type": "structure",
+      "members": {
+        "MultiLine": {
+          "target": "com.amazonaws.databrew#MultiLine",
+          "traits": {
+            "smithy.api#documentation": "<p>A value that specifies whether JSON input contains embedded new line\n            characters.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents the JSON-specific options that define how input is to be interpreted by AWS\n            Glue DataBrew.</p>"
+      }
+    },
+    "com.amazonaws.databrew#Key": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1280
+        }
+      }
+    },
+    "com.amazonaws.databrew#LastModifiedBy": {
+      "type": "string"
+    },
+    "com.amazonaws.databrew#ListDatasets": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#ListDatasetsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#ListDatasetsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists all of the AWS Glue DataBrew datasets for the current AWS account.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/datasets",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "Datasets",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListDatasetsRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.databrew#MaxResults100",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in this request. </p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.databrew#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token generated by DataBrew that specifies where to continue pagination if a\n            previous request was truncated. To get the next set of pages, pass in the NextToken\n            value from the response object of the previous page call. </p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListDatasetsResponse": {
+      "type": "structure",
+      "members": {
+        "Datasets": {
+          "target": "com.amazonaws.databrew#DatasetList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of datasets that are defined in the current AWS account.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.databrew#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token generated by DataBrew that specifies where to continue pagination if a previous\n            request was truncated. To obtain the next set of pages, pass in the NextToken from the\n            response object of the previous page call. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListJobRuns": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#ListJobRunsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#ListJobRunsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists all of the previous runs of a particular AWS Glue DataBrew job in the current\n            AWS account.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/jobs/{Name}/jobRuns",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "JobRuns",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListJobRunsRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#JobName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the job.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.databrew#MaxResults100",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in this request. </p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.databrew#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token generated by AWS Glue DataBrew that specifies where to continue pagination if\n            a previous request was truncated. To get the next set of pages, pass in the NextToken\n            value from the response object of the previous page call. </p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListJobRunsResponse": {
+      "type": "structure",
+      "members": {
+        "JobRuns": {
+          "target": "com.amazonaws.databrew#JobRunList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of job runs that have occurred for the specified job.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.databrew#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token generated by DataBrew that specifies where to continue pagination if a previous\n            request was truncated. To obtain the next set of pages, pass in the NextToken from the\n            response object of the previous page call. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListJobs": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#ListJobsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#ListJobsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists the AWS Glue DataBrew jobs in the current AWS account.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/jobs",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "Jobs",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListJobsRequest": {
+      "type": "structure",
+      "members": {
+        "DatasetName": {
+          "target": "com.amazonaws.databrew#DatasetName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of a dataset. Using this parameter indicates to return only those jobs that\n            act on the specified dataset.</p>",
+            "smithy.api#httpQuery": "datasetName"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.databrew#MaxResults100",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in this request. </p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.databrew#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token generated by DataBrew that specifies where to continue pagination if a\n            previous request was truncated. To get the next set of pages, pass in the NextToken\n            value from the response object of the previous page call. </p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "ProjectName": {
+          "target": "com.amazonaws.databrew#ProjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of a project. Using this parameter indicates to return\n            only those jobs that are associated with the specified project.</p>",
+            "smithy.api#httpQuery": "projectName"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListJobsResponse": {
+      "type": "structure",
+      "members": {
+        "Jobs": {
+          "target": "com.amazonaws.databrew#JobList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of jobs that are defined in the current AWS account.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.databrew#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token generated by DataBrew that specifies where to continue pagination if a previous\n            request was truncated. To obtain the next set of pages, pass in the NextToken from the\n            response object of the previous page call. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListProjects": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#ListProjectsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#ListProjectsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists all of the DataBrew projects in the current AWS account.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/projects",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "Projects",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListProjectsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.databrew#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A pagination token that can be used in a subsequent request.</p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.databrew#MaxResults100",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in this request. </p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListProjectsResponse": {
+      "type": "structure",
+      "members": {
+        "Projects": {
+          "target": "com.amazonaws.databrew#ProjectList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of projects that are defined in the current AWS account.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.databrew#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token generated by DataBrew that specifies where to continue pagination if a\n            previous request was truncated. To get the next set of pages, pass in the NextToken\n            value from the response object of the previous page call. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListRecipeVersions": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#ListRecipeVersionsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#ListRecipeVersionsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists all of the versions of a particular AWS Glue DataBrew recipe in the current AWS\n            account.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/recipeVersions",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "Recipes",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListRecipeVersionsRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.databrew#MaxResults100",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in this request. </p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.databrew#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A pagination token that can be used in a subsequent request.</p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#RecipeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the recipe for which to return version information.</p>",
+            "smithy.api#httpQuery": "name",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListRecipeVersionsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.databrew#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token generated by DataBrew that specifies where to continue pagination if a\n            previous request was truncated. To get the next set of pages, pass in the NextToken\n            value from the response object of the previous page call. </p>"
+          }
+        },
+        "Recipes": {
+          "target": "com.amazonaws.databrew#RecipeList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of versions for the specified recipe.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListRecipes": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#ListRecipesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#ListRecipesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists all of the AWS Glue DataBrew recipes in the current AWS account.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/recipes",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "Recipes",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListRecipesRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.databrew#MaxResults100",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in this request. </p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.databrew#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A pagination token that can be used in a subsequent request.</p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "RecipeVersion": {
+          "target": "com.amazonaws.databrew#RecipeVersion",
+          "traits": {
+            "smithy.api#documentation": "<p>A version identifier. Using this parameter indicates to return only those \n            recipes that have this version identifier.</p>",
+            "smithy.api#httpQuery": "recipeVersion"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListRecipesResponse": {
+      "type": "structure",
+      "members": {
+        "Recipes": {
+          "target": "com.amazonaws.databrew#RecipeList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of recipes that are defined in the current AWS account.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.databrew#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token generated by DataBrew that specifies where to continue pagination if a\n            previous request was truncated. To get the next set of pages, pass in the NextToken\n            value from the response object of the previous page call. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListSchedules": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#ListSchedulesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#ListSchedulesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists the AWS Glue DataBrew schedules in the current AWS account.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/schedules",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "Schedules",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListSchedulesRequest": {
+      "type": "structure",
+      "members": {
+        "JobName": {
+          "target": "com.amazonaws.databrew#JobName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the job that these schedules apply to.</p>",
+            "smithy.api#httpQuery": "jobName"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.databrew#MaxResults100",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in this request. </p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.databrew#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A pagination token that can be used in a subsequent request.</p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListSchedulesResponse": {
+      "type": "structure",
+      "members": {
+        "Schedules": {
+          "target": "com.amazonaws.databrew#ScheduleList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of schedules in the current AWS account.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.databrew#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token generated by DataBrew that specifies where to continue pagination if a\n            previous request was truncated. To get the next set of pages, pass in the NextToken\n            value from the response object of the previous page call. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListTagsForResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#ListTagsForResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists all the tags for an AWS Glue DataBrew resource. </p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/tags/{ResourceArn}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListTagsForResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) string that uniquely identifies the DataBrew resource. </p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "target": "com.amazonaws.databrew#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of tags associated with the DataBrew resource.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#LogGroupName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 512
+        }
+      }
+    },
+    "com.amazonaws.databrew#LogSubscription": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ENABLE",
+            "name": "ENABLE"
+          },
+          {
+            "value": "DISABLE",
+            "name": "DISABLE"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.databrew#MaxCapacity": {
+      "type": "integer"
+    },
+    "com.amazonaws.databrew#MaxResults100": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 1,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.databrew#MaxRetries": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 0
+        }
+      }
+    },
+    "com.amazonaws.databrew#Message": {
+      "type": "string"
+    },
+    "com.amazonaws.databrew#MultiLine": {
+      "type": "boolean"
+    },
+    "com.amazonaws.databrew#NextToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 2000
+        }
+      }
+    },
+    "com.amazonaws.databrew#OpenedBy": {
+      "type": "string"
+    },
+    "com.amazonaws.databrew#Operation": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "^[A-Z\\_]+$"
+      }
+    },
+    "com.amazonaws.databrew#Output": {
+      "type": "structure",
+      "members": {
+        "CompressionFormat": {
+          "target": "com.amazonaws.databrew#CompressionFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The compression algorithm used to compress the output text of the job.</p>"
+          }
+        },
+        "Format": {
+          "target": "com.amazonaws.databrew#OutputFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The data format of the output of the job.</p>"
+          }
+        },
+        "PartitionColumns": {
+          "target": "com.amazonaws.databrew#ColumnNameList",
+          "traits": {
+            "smithy.api#documentation": "<p>The names of one or more partition columns for the output of the job.</p>"
+          }
+        },
+        "Location": {
+          "target": "com.amazonaws.databrew#S3Location",
+          "traits": {
+            "smithy.api#documentation": "<p>The location in Amazon S3 where the job writes its output.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Overwrite": {
+          "target": "com.amazonaws.databrew#OverwriteOutput",
+          "traits": {
+            "smithy.api#documentation": "<p>A value that, if true, means that any data in the location specified for output is\n            overwritten with new output.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents individual output from a particular job run.</p>"
+      }
+    },
+    "com.amazonaws.databrew#OutputFormat": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "CSV",
+            "name": "CSV"
+          },
+          {
+            "value": "JSON",
+            "name": "JSON"
+          },
+          {
+            "value": "PARQUET",
+            "name": "PARQUET"
+          },
+          {
+            "value": "GLUEPARQUET",
+            "name": "GLUEPARQUET"
+          },
+          {
+            "value": "AVRO",
+            "name": "AVRO"
+          },
+          {
+            "value": "ORC",
+            "name": "ORC"
+          },
+          {
+            "value": "XML",
+            "name": "XML"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.databrew#OutputList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.databrew#Output"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1
+        }
+      }
+    },
+    "com.amazonaws.databrew#OverwriteOutput": {
+      "type": "boolean"
+    },
+    "com.amazonaws.databrew#ParameterMap": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.databrew#ParameterName"
+      },
+      "value": {
+        "target": "com.amazonaws.databrew#ParameterValue"
+      }
+    },
+    "com.amazonaws.databrew#ParameterName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "^[A-Za-z0-9]+$"
+      }
+    },
+    "com.amazonaws.databrew#ParameterValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 8192
+        }
+      }
+    },
+    "com.amazonaws.databrew#Preview": {
+      "type": "boolean"
+    },
+    "com.amazonaws.databrew#Project": {
+      "type": "structure",
+      "members": {
+        "AccountId": {
+          "target": "com.amazonaws.databrew#AccountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the AWS account that owns the project.</p>"
+          }
+        },
+        "CreateDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the project was created.</p>"
+          }
+        },
+        "CreatedBy": {
+          "target": "com.amazonaws.databrew#CreatedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (the user name) of the user who crated the\n            project.</p>"
+          }
+        },
+        "DatasetName": {
+          "target": "com.amazonaws.databrew#DatasetName",
+          "traits": {
+            "smithy.api#documentation": "<p>The dataset that the project is to act upon.</p>"
+          }
+        },
+        "LastModifiedDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The last modification date and time for the project.</p>"
+          }
+        },
+        "LastModifiedBy": {
+          "target": "com.amazonaws.databrew#LastModifiedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (user name) of the user who last modified the project.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#ProjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique name of a project.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RecipeName": {
+          "target": "com.amazonaws.databrew#RecipeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of a recipe that will be developed during a project session.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the project.</p>"
+          }
+        },
+        "Sample": {
+          "target": "com.amazonaws.databrew#Sample",
+          "traits": {
+            "smithy.api#documentation": "<p>The sample size and sampling type to apply to the data.  If this parameter isn't specified, then the sample will consiste of the first 500 rows from the dataset.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.databrew#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata tags that have been applied to the project.</p>"
+          }
+        },
+        "RoleArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that will be assumed for this project.</p>"
+          }
+        },
+        "OpenedBy": {
+          "target": "com.amazonaws.databrew#OpenedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (the user name) of the user that opened the project for use.</p>"
+          }
+        },
+        "OpenDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time when the project was opened.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents all of the attributes of an AWS Glue DataBrew project.</p>"
+      }
+    },
+    "com.amazonaws.databrew#ProjectList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.databrew#Project"
+      }
+    },
+    "com.amazonaws.databrew#ProjectName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        }
+      }
+    },
+    "com.amazonaws.databrew#PublishRecipe": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#PublishRecipeRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#PublishRecipeResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Publishes a new major version of an AWS Glue DataBrew recipe that exists in the\n            current AWS account.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/recipes/{Name}/publishRecipe",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#PublishRecipeRequest": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "target": "com.amazonaws.databrew#RecipeDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>A description of the recipe to be published, for this version of the recipe.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#RecipeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the recipe to be published.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#PublishRecipeResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#RecipeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the recipe that you published.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#PublishedBy": {
+      "type": "string"
+    },
+    "com.amazonaws.databrew#Recipe": {
+      "type": "structure",
+      "members": {
+        "CreatedBy": {
+          "target": "com.amazonaws.databrew#CreatedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (the user name) of the user who created the recipe.</p>"
+          }
+        },
+        "CreateDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the recipe was created.</p>"
+          }
+        },
+        "LastModifiedBy": {
+          "target": "com.amazonaws.databrew#LastModifiedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (user name) of the user who last modified the recipe.</p>"
+          }
+        },
+        "LastModifiedDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The last modification date and time of the recipe.</p>"
+          }
+        },
+        "ProjectName": {
+          "target": "com.amazonaws.databrew#ProjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the project that the recipe is associated with.</p>"
+          }
+        },
+        "PublishedBy": {
+          "target": "com.amazonaws.databrew#PublishedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (the user name) of the user who published the recipe.</p>"
+          }
+        },
+        "PublishedDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time when the recipe was published.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.databrew#RecipeDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the recipe.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#RecipeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique name for the recipe.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the recipe.</p>"
+          }
+        },
+        "Steps": {
+          "target": "com.amazonaws.databrew#RecipeStepList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of steps that are defined by the recipe.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.databrew#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata tags that have been applied to the recipe.</p>"
+          }
+        },
+        "RecipeVersion": {
+          "target": "com.amazonaws.databrew#RecipeVersion",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier for the version for the recipe. </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents one or more actions to be performed on an AWS Glue DataBrew dataset.</p>"
+      }
+    },
+    "com.amazonaws.databrew#RecipeAction": {
+      "type": "structure",
+      "members": {
+        "Operation": {
+          "target": "com.amazonaws.databrew#Operation",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of a valid DataBrew transformation to be performed on the data.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Parameters": {
+          "target": "com.amazonaws.databrew#ParameterMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Contextual parameters for the transformation.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents a transformation and associated parameters that are used to apply a change\n            to an AWS Glue DataBrew dataset. For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/recipe-structure.html\">Recipe structure</a> and <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/recipe-actions-reference.html\">ecipe\n                actions reference</a> .</p>"
+      }
+    },
+    "com.amazonaws.databrew#RecipeDescription": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 1024
+        }
+      }
+    },
+    "com.amazonaws.databrew#RecipeErrorList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.databrew#RecipeVersionErrorDetail"
+      }
+    },
+    "com.amazonaws.databrew#RecipeErrorMessage": {
+      "type": "string"
+    },
+    "com.amazonaws.databrew#RecipeList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.databrew#Recipe"
+      }
+    },
+    "com.amazonaws.databrew#RecipeName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        }
+      }
+    },
+    "com.amazonaws.databrew#RecipeReference": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#RecipeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the recipe.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RecipeVersion": {
+          "target": "com.amazonaws.databrew#RecipeVersion",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier for the version for the recipe. </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents all of the attributes of an AWS Glue DataBrew recipe.</p>"
+      }
+    },
+    "com.amazonaws.databrew#RecipeStep": {
+      "type": "structure",
+      "members": {
+        "Action": {
+          "target": "com.amazonaws.databrew#RecipeAction",
+          "traits": {
+            "smithy.api#documentation": "<p>The particular action to be performed in the recipe step.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ConditionExpressions": {
+          "target": "com.amazonaws.databrew#ConditionExpressionList",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more conditions that must be met, in order for the recipe step to succeed.</p>\n        <note>\n            <p>All of the conditions in the array must be met. In other words, all of the\n                conditions must be combined using a logical AND operation.</p>\n        </note>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents a single step to be performed in an AWS Glue DataBrew recipe.</p>"
+      }
+    },
+    "com.amazonaws.databrew#RecipeStepList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.databrew#RecipeStep"
+      }
+    },
+    "com.amazonaws.databrew#RecipeVersion": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 16
+        }
+      }
+    },
+    "com.amazonaws.databrew#RecipeVersionErrorDetail": {
+      "type": "structure",
+      "members": {
+        "ErrorCode": {
+          "target": "com.amazonaws.databrew#ErrorCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The HTTP status code for the error.</p>"
+          }
+        },
+        "ErrorMessage": {
+          "target": "com.amazonaws.databrew#RecipeErrorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>The text of the error message.</p>"
+          }
+        },
+        "RecipeVersion": {
+          "target": "com.amazonaws.databrew#RecipeVersion",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier for the recipe version associated with this error.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents any errors encountered when attempting to delete multiple recipe versions.</p>"
+      }
+    },
+    "com.amazonaws.databrew#RecipeVersionList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.databrew#RecipeVersion"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.databrew#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.databrew#Message"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>One or more resources can't be found.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.databrew#Result": {
+      "type": "string"
+    },
+    "com.amazonaws.databrew#S3Location": {
+      "type": "structure",
+      "members": {
+        "Bucket": {
+          "target": "com.amazonaws.databrew#Bucket",
+          "traits": {
+            "smithy.api#documentation": "<p>The S3 bucket name.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Key": {
+          "target": "com.amazonaws.databrew#Key",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique name of the object in the bucket.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An Amazon S3 location (bucket name an object key) where DataBrew can read input data, or write output from a job.</p>"
+      }
+    },
+    "com.amazonaws.databrew#Sample": {
+      "type": "structure",
+      "members": {
+        "Size": {
+          "target": "com.amazonaws.databrew#SampleSize",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of rows in the sample.</p>"
+          }
+        },
+        "Type": {
+          "target": "com.amazonaws.databrew#SampleType",
+          "traits": {
+            "smithy.api#documentation": "<p>The way in which DataBrew obtains rows from a dataset.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents the sample size and sampling type for AWS Glue DataBrew to use for\n            interactive data analysis.</p>"
+      }
+    },
+    "com.amazonaws.databrew#SampleSize": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 1,
+          "max": 5000
+        }
+      }
+    },
+    "com.amazonaws.databrew#SampleType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "FIRST_N",
+            "name": "FIRST_N"
+          },
+          {
+            "value": "LAST_N",
+            "name": "LAST_N"
+          },
+          {
+            "value": "RANDOM",
+            "name": "RANDOM"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.databrew#Schedule": {
+      "type": "structure",
+      "members": {
+        "AccountId": {
+          "target": "com.amazonaws.databrew#AccountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the AWS account that owns the schedule.</p>"
+          }
+        },
+        "CreatedBy": {
+          "target": "com.amazonaws.databrew#CreatedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (the user name) of the user who created the schedule.</p>"
+          }
+        },
+        "CreateDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the schedule was created.</p>"
+          }
+        },
+        "JobNames": {
+          "target": "com.amazonaws.databrew#JobNameList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of jobs to be run, according to the schedule.</p>"
+          }
+        },
+        "LastModifiedBy": {
+          "target": "com.amazonaws.databrew#LastModifiedBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (the user name) of the user who last modified the schedule.</p>"
+          }
+        },
+        "LastModifiedDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time when the schedule was last modified.</p>"
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the schedule.</p>"
+          }
+        },
+        "CronExpression": {
+          "target": "com.amazonaws.databrew#CronExpression",
+          "traits": {
+            "smithy.api#documentation": "<p>The date(s) and time(s), in <code>cron</code> format, when the job will run.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.databrew#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata tags that have been applied to the schedule.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#ScheduleName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the schedule.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents one or more dates and times when a job is to run.</p>"
+      }
+    },
+    "com.amazonaws.databrew#ScheduleList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.databrew#Schedule"
+      }
+    },
+    "com.amazonaws.databrew#ScheduleName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        }
+      }
+    },
+    "com.amazonaws.databrew#SendProjectSessionAction": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#SendProjectSessionActionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#SendProjectSessionActionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Performs a recipe step within an interactive AWS Glue DataBrew session that's\n            currently open.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/projects/{Name}/sendProjectSessionAction",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#SendProjectSessionActionRequest": {
+      "type": "structure",
+      "members": {
+        "Preview": {
+          "target": "com.amazonaws.databrew#Preview",
+          "traits": {
+            "smithy.api#documentation": "<p>Returns the result of the recipe step, without applying it. The result isn't\n            added to the view frame stack.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#ProjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the project to apply the action to.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "RecipeStep": {
+          "target": "com.amazonaws.databrew#RecipeStep"
+        },
+        "StepIndex": {
+          "target": "com.amazonaws.databrew#StepIndex",
+          "traits": {
+            "smithy.api#documentation": "<p>The index from which to preview a step. This index is used to preview the result of\n            steps that have already been applied, so that the resulting view frame is from earlier\n            in the view frame stack.</p>"
+          }
+        },
+        "ClientSessionId": {
+          "target": "com.amazonaws.databrew#ClientSessionId",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for an interactive session that's currently open and ready for\n            work. The action will be performed on this session.</p>"
+          }
+        },
+        "ViewFrame": {
+          "target": "com.amazonaws.databrew#ViewFrame"
+        }
+      }
+    },
+    "com.amazonaws.databrew#SendProjectSessionActionResponse": {
+      "type": "structure",
+      "members": {
+        "Result": {
+          "target": "com.amazonaws.databrew#Result",
+          "traits": {
+            "smithy.api#documentation": "<p>A message indicating the result of performing the action.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#ProjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the project that was affected by the action.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ActionId": {
+          "target": "com.amazonaws.databrew#ActionId",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the action that was performed.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#ServiceQuotaExceededException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.databrew#Message"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A service quota is exceeded.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 402
+      }
+    },
+    "com.amazonaws.databrew#SessionStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ASSIGNED",
+            "name": "ASSIGNED"
+          },
+          {
+            "value": "FAILED",
+            "name": "FAILED"
+          },
+          {
+            "value": "INITIALIZING",
+            "name": "INITIALIZING"
+          },
+          {
+            "value": "PROVISIONING",
+            "name": "PROVISIONING"
+          },
+          {
+            "value": "READY",
+            "name": "READY"
+          },
+          {
+            "value": "RECYCLING",
+            "name": "RECYCLING"
+          },
+          {
+            "value": "ROTATING",
+            "name": "ROTATING"
+          },
+          {
+            "value": "TERMINATED",
+            "name": "TERMINATED"
+          },
+          {
+            "value": "TERMINATING",
+            "name": "TERMINATING"
+          },
+          {
+            "value": "UPDATING",
+            "name": "UPDATING"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.databrew#SheetIndex": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 0,
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#SheetIndexList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.databrew#SheetIndex"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1
+        }
+      }
+    },
+    "com.amazonaws.databrew#SheetName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 31
+        }
+      }
+    },
+    "com.amazonaws.databrew#SheetNameList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.databrew#SheetName"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1
+        }
+      }
+    },
+    "com.amazonaws.databrew#Source": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "S3",
+            "name": "S3"
+          },
+          {
+            "value": "DATA-CATALOG",
+            "name": "DATACATALOG"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.databrew#StartColumnIndex": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 0
+        }
+      }
+    },
+    "com.amazonaws.databrew#StartJobRun": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#StartJobRunRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#StartJobRunResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Runs an AWS Glue DataBrew job that exists in the current AWS account.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/jobs/{Name}/startJobRun",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#StartJobRunRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#JobName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the job to be run.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#StartJobRunResponse": {
+      "type": "structure",
+      "members": {
+        "RunId": {
+          "target": "com.amazonaws.databrew#JobRunId",
+          "traits": {
+            "smithy.api#documentation": "<p>A system-generated identifier for this particular job run.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#StartProjectSession": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#StartProjectSessionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#StartProjectSessionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates an interactive session, enabling you to manipulate an AWS Glue DataBrew\n            project.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/projects/{Name}/startProjectSession",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#StartProjectSessionRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#ProjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the project to act upon.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "AssumeControl": {
+          "target": "com.amazonaws.databrew#AssumeControl",
+          "traits": {
+            "smithy.api#documentation": "<p>A value that, if true, enables you to take control of a session, even if a different client is\n            currently accessing the project.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#StartProjectSessionResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#ProjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the project to be acted upon.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ClientSessionId": {
+          "target": "com.amazonaws.databrew#ClientSessionId",
+          "traits": {
+            "smithy.api#documentation": "<p>A system-generated identifier for the session.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#StartedBy": {
+      "type": "string"
+    },
+    "com.amazonaws.databrew#StepIndex": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 0
+        }
+      }
+    },
+    "com.amazonaws.databrew#StopJobRun": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#StopJobRunRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#StopJobRunResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Stops the specified job from running in the current AWS account.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/jobs/{Name}/jobRun/{RunId}/stopJobRun",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#StopJobRunRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#JobName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the job to be stopped.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "RunId": {
+          "target": "com.amazonaws.databrew#JobRunId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the job run to be stopped.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#StopJobRunResponse": {
+      "type": "structure",
+      "members": {
+        "RunId": {
+          "target": "com.amazonaws.databrew#JobRunId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the job run that you stopped.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#TableName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        }
+      }
+    },
+    "com.amazonaws.databrew#TagKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        }
+      }
+    },
+    "com.amazonaws.databrew#TagKeyList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.databrew#TagKey"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#TagMap": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.databrew#TagKey"
+      },
+      "value": {
+        "target": "com.amazonaws.databrew#TagValue"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#TagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#TagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Adds metadata tags to an AWS Glue DataBrew resource, such as a dataset, job, project,\n            or recipe.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/tags/{ResourceArn}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The DataBrew resource to which tags should be added. The value for this parameter is\n            an Amazon Resource Name (ARN). For DataBrew, you can tag a dataset, a job, a project, or a\n            recipe.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.databrew#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more tags to be assigned to the resource.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.databrew#TagValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.databrew#TargetColumn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1024
+        }
+      }
+    },
+    "com.amazonaws.databrew#Timeout": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 0
+        }
+      }
+    },
+    "com.amazonaws.databrew#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#UntagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes metadata tags from an AWS Glue DataBrew resource.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/tags/{ResourceArn}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>An DataBrew resource from which you want to remove a tag or tags. The value for this\n            parameter is an Amazon Resource Name (ARN). </p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.databrew#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tag keys (names) of one or more tags to be removed.</p>",
+            "smithy.api#httpQuery": "tagKeys",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.databrew#UpdateDataset": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#UpdateDatasetRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#UpdateDatasetResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Modifies the definition of an existing AWS Glue DataBrew dataset in the current AWS\n            account.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/datasets/{Name}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#UpdateDatasetRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#DatasetName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the dataset to be updated.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "FormatOptions": {
+          "target": "com.amazonaws.databrew#FormatOptions"
+        },
+        "Input": {
+          "target": "com.amazonaws.databrew#Input",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#UpdateDatasetResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#DatasetName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the dataset that you updated.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#UpdateProfileJob": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#UpdateProfileJobRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#UpdateProfileJobResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Modifies the definition of an existing AWS Glue DataBrew job in the current AWS\n            account.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/profileJobs/{Name}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#UpdateProfileJobRequest": {
+      "type": "structure",
+      "members": {
+        "EncryptionKeyArn": {
+          "target": "com.amazonaws.databrew#EncryptionKeyArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an encryption key that is used to protect the job.</p>"
+          }
+        },
+        "EncryptionMode": {
+          "target": "com.amazonaws.databrew#EncryptionMode",
+          "traits": {
+            "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#JobName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the job to be updated.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "LogSubscription": {
+          "target": "com.amazonaws.databrew#LogSubscription",
+          "traits": {
+            "smithy.api#documentation": "<p>A value that enables or disables Amazon CloudWatch logging for the current AWS\n            account. If logging is enabled, CloudWatch writes one log stream for each job\n            run.</p>"
+          }
+        },
+        "MaxCapacity": {
+          "target": "com.amazonaws.databrew#MaxCapacity",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of nodes that DataBrew can use when the job processes data.</p>"
+          }
+        },
+        "MaxRetries": {
+          "target": "com.amazonaws.databrew#MaxRetries",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of times to retry the job after a job run fails.</p>"
+          }
+        },
+        "OutputLocation": {
+          "target": "com.amazonaws.databrew#S3Location",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "RoleArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to\n            be assumed for this request.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Timeout": {
+          "target": "com.amazonaws.databrew#Timeout",
+          "traits": {
+            "smithy.api#documentation": "<p>The job's timeout in minutes. A job that attempts to run longer than this timeout\n            period ends with a status of <code>TIMEOUT</code>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#UpdateProfileJobResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#JobName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the job that was updated.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#UpdateProject": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#UpdateProjectRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#UpdateProjectResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Modifies the definition of an existing AWS Glue DataBrew project in the current AWS\n            account.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/projects/{Name}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#UpdateProjectRequest": {
+      "type": "structure",
+      "members": {
+        "Sample": {
+          "target": "com.amazonaws.databrew#Sample"
+        },
+        "RoleArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to be assumed for this request.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#ProjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the project to be updated.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#UpdateProjectResponse": {
+      "type": "structure",
+      "members": {
+        "LastModifiedDate": {
+          "target": "com.amazonaws.databrew#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the project was last modified.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#ProjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the project that you updated.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#UpdateRecipe": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#UpdateRecipeRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#UpdateRecipeResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Modifies the definition of the latest working version of an AWS Glue DataBrew recipe\n            in the current AWS account.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/recipes/{Name}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#UpdateRecipeJob": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#UpdateRecipeJobRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#UpdateRecipeJobResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Modifies the definition of an existing AWS Glue DataBrew recipe job in the current AWS\n            account.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/recipeJobs/{Name}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#UpdateRecipeJobRequest": {
+      "type": "structure",
+      "members": {
+        "EncryptionKeyArn": {
+          "target": "com.amazonaws.databrew#EncryptionKeyArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an encryption key that is used to protect the job.</p>"
+          }
+        },
+        "EncryptionMode": {
+          "target": "com.amazonaws.databrew#EncryptionMode",
+          "traits": {
+            "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#JobName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the job to update.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "LogSubscription": {
+          "target": "com.amazonaws.databrew#LogSubscription",
+          "traits": {
+            "smithy.api#documentation": "<p>A value that enables or disables Amazon CloudWatch logging for the current AWS\n            account. If logging is enabled, CloudWatch writes one log stream for each job\n            run.</p>"
+          }
+        },
+        "MaxCapacity": {
+          "target": "com.amazonaws.databrew#MaxCapacity",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of nodes that DataBrew\n            can consume when the job processes data.</p>"
+          }
+        },
+        "MaxRetries": {
+          "target": "com.amazonaws.databrew#MaxRetries",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of times to retry the job after a job run fails.</p>"
+          }
+        },
+        "Outputs": {
+          "target": "com.amazonaws.databrew#OutputList",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more artifacts that represent the output from running the job. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RoleArn": {
+          "target": "com.amazonaws.databrew#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to\n            be assumed for this request.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Timeout": {
+          "target": "com.amazonaws.databrew#Timeout",
+          "traits": {
+            "smithy.api#documentation": "<p>The job's timeout in minutes. A job that attempts to run longer than this timeout\n            period ends with a status of <code>TIMEOUT</code>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#UpdateRecipeJobResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#JobName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the job that you updated.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#UpdateRecipeRequest": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "target": "com.amazonaws.databrew#RecipeDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>A description of the recipe.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#RecipeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the recipe to be updated.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "Steps": {
+          "target": "com.amazonaws.databrew#RecipeStepList",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more steps to be performed by the recipe. Each step consists of an action, and\n            the conditions under which the action should succeed.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#UpdateRecipeResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#RecipeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the recipe that was updated.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#UpdateSchedule": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.databrew#UpdateScheduleRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.databrew#UpdateScheduleResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.databrew#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Modifies the definition of an existing AWS Glue DataBrew schedule in the current AWS\n            account.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/schedules/{Name}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.databrew#UpdateScheduleRequest": {
+      "type": "structure",
+      "members": {
+        "JobNames": {
+          "target": "com.amazonaws.databrew#JobNameList",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or names of one or more jobs to be run for this schedule.</p>"
+          }
+        },
+        "CronExpression": {
+          "target": "com.amazonaws.databrew#CronExpression",
+          "traits": {
+            "smithy.api#documentation": "<p>The date or dates and time or times, in <code>cron</code> format, when the jobs are to\n            be run.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.databrew#ScheduleName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the schedule to update.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#UpdateScheduleResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.databrew#ScheduleName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the schedule that was updated.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.databrew#ValidationException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.databrew#Message"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The input parameters for this request failed validation.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.databrew#ViewFrame": {
+      "type": "structure",
+      "members": {
+        "StartColumnIndex": {
+          "target": "com.amazonaws.databrew#StartColumnIndex",
+          "traits": {
+            "smithy.api#documentation": "<p>The starting index for the range of columns to return in the view\n            frame.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ColumnRange": {
+          "target": "com.amazonaws.databrew#ColumnRange",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of columns to include in the view frame, beginning with the\n            <code>StartColumnIndex</code> value and ignoring any columns in the\n            <code>HiddenColumns</code> list.</p>"
+          }
+        },
+        "HiddenColumns": {
+          "target": "com.amazonaws.databrew#HiddenColumnList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of columns to hide in the view frame.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents the data being being transformed during an AWS Glue DataBrew project session.</p>"
+      }
+    }
+  }
+}

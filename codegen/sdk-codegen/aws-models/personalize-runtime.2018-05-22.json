@@ -103,6 +103,41 @@
     "com.amazonaws.personalizeruntime#ErrorMessage": {
       "type": "string"
     },
+    "com.amazonaws.personalizeruntime#FilterAttributeName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 50
+        },
+        "smithy.api#pattern": "[A-Za-z0-9]+"
+      }
+    },
+    "com.amazonaws.personalizeruntime#FilterAttributeValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 1000
+        },
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.personalizeruntime#FilterValues": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.personalizeruntime#FilterAttributeName"
+      },
+      "value": {
+        "target": "com.amazonaws.personalizeruntime#FilterAttributeValue"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 25
+        }
+      }
+    },
     "com.amazonaws.personalizeruntime#GetPersonalizedRanking": {
       "type": "operation",
       "input": {
@@ -132,18 +167,6 @@
     "com.amazonaws.personalizeruntime#GetPersonalizedRankingRequest": {
       "type": "structure",
       "members": {
-        "filterArn": {
-          "target": "com.amazonaws.personalizeruntime#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a filter you created to include or exclude items from recommendations for a given user.</p>"
-          }
-        },
-        "context": {
-          "target": "com.amazonaws.personalizeruntime#Context",
-          "traits": {
-            "smithy.api#documentation": "<p>The contextual metadata to use when getting recommendations. Contextual metadata includes\n      any interaction information that might be relevant when getting a user's recommendations, such\n      as the user's current location or device type.</p>"
-          }
-        },
         "campaignArn": {
           "target": "com.amazonaws.personalizeruntime#Arn",
           "traits": {
@@ -163,6 +186,24 @@
           "traits": {
             "smithy.api#documentation": "<p>The user for which you want the campaign to provide a personalized ranking.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "context": {
+          "target": "com.amazonaws.personalizeruntime#Context",
+          "traits": {
+            "smithy.api#documentation": "<p>The contextual metadata to use when getting recommendations. Contextual metadata includes\n      any interaction information that might be relevant when getting a user's recommendations, such\n      as the user's current location or device type.</p>"
+          }
+        },
+        "filterArn": {
+          "target": "com.amazonaws.personalizeruntime#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a filter you created to include items or exclude items from recommendations for a given user. \n      For more information, see\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/filter.html\">Filtering Recommendations</a>.</p>"
+          }
+        },
+        "filterValues": {
+          "target": "com.amazonaws.personalizeruntime#FilterValues",
+          "traits": {
+            "smithy.api#documentation": "<p>The values to use when filtering recommendations. For each placeholder parameter in your filter expression, provide the parameter name (in matching case)\n      as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma.\n    </p> \n         <p>For filter expressions that use an <code>INCLUDE</code> element to include items,\n      you must provide values for all parameters that are defined in the expression. For\n      filters with expressions that use an <code>EXCLUDE</code> element to exclude items, you\n      can omit the <code>filter-values</code>.In this case, Amazon Personalize doesn't use that portion of\n      the expression to filter recommendations.</p>\n         <p>For more information, see\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/filter.html\">Filtering Recommendations</a>.</p>"
           }
         }
       }
@@ -213,12 +254,6 @@
     "com.amazonaws.personalizeruntime#GetRecommendationsRequest": {
       "type": "structure",
       "members": {
-        "userId": {
-          "target": "com.amazonaws.personalizeruntime#UserID",
-          "traits": {
-            "smithy.api#documentation": "<p>The user ID to provide recommendations for.</p>\n         <p>Required for <code>USER_PERSONALIZATION</code> recipe type.</p>"
-          }
-        },
         "campaignArn": {
           "target": "com.amazonaws.personalizeruntime#Arn",
           "traits": {
@@ -226,10 +261,16 @@
             "smithy.api#required": {}
           }
         },
-        "context": {
-          "target": "com.amazonaws.personalizeruntime#Context",
+        "itemId": {
+          "target": "com.amazonaws.personalizeruntime#ItemID",
           "traits": {
-            "smithy.api#documentation": "<p>The contextual metadata to use when getting recommendations. Contextual metadata includes\n      any interaction information that might be relevant when getting a user's recommendations, such\n      as the user's current location or device type.</p>"
+            "smithy.api#documentation": "<p>The item ID to provide recommendations for.</p>\n         <p>Required for <code>RELATED_ITEMS</code> recipe type.</p>"
+          }
+        },
+        "userId": {
+          "target": "com.amazonaws.personalizeruntime#UserID",
+          "traits": {
+            "smithy.api#documentation": "<p>The user ID to provide recommendations for.</p>\n         <p>Required for <code>USER_PERSONALIZATION</code> recipe type.</p>"
           }
         },
         "numResults": {
@@ -238,16 +279,22 @@
             "smithy.api#documentation": "<p>The number of results to return. The default is 25. The maximum is 500.</p>"
           }
         },
+        "context": {
+          "target": "com.amazonaws.personalizeruntime#Context",
+          "traits": {
+            "smithy.api#documentation": "<p>The contextual metadata to use when getting recommendations. Contextual metadata includes\n      any interaction information that might be relevant when getting a user's recommendations, such\n      as the user's current location or device type.</p>"
+          }
+        },
         "filterArn": {
           "target": "com.amazonaws.personalizeruntime#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the filter to apply to the returned recommendations. For more information, see\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/filters.html\">Using Filters with Amazon Personalize</a>.</p>\n         <p>When using this parameter, be sure the filter resource is <code>ACTIVE</code>.</p>"
+            "smithy.api#documentation": "<p>The ARN of the filter to apply to the returned recommendations. For more information, see\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/filter.html\">Filtering Recommendations</a>.</p>\n         <p>When using this parameter, be sure the filter resource is <code>ACTIVE</code>.</p>"
           }
         },
-        "itemId": {
-          "target": "com.amazonaws.personalizeruntime#ItemID",
+        "filterValues": {
+          "target": "com.amazonaws.personalizeruntime#FilterValues",
           "traits": {
-            "smithy.api#documentation": "<p>The item ID to provide recommendations for.</p>\n         <p>Required for <code>RELATED_ITEMS</code> recipe type.</p>"
+            "smithy.api#documentation": "<p>The values to use when filtering recommendations. For each placeholder parameter in your filter expression, provide the parameter name (in matching case)\n      as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma.\n    </p> \n         <p>For filter expressions that use an <code>INCLUDE</code> element to include items,\n    you must provide values for all parameters that are defined in the expression. For\n    filters with expressions that use an <code>EXCLUDE</code> element to exclude items, you\n      can omit the <code>filter-values</code>.In this case, Amazon Personalize doesn't use that portion of\n    the expression to filter recommendations.</p>\n         <p>For more information, see\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/filter.html\">Filtering Recommendations</a>.</p>"
           }
         }
       }
@@ -255,16 +302,16 @@
     "com.amazonaws.personalizeruntime#GetRecommendationsResponse": {
       "type": "structure",
       "members": {
-        "recommendationId": {
-          "target": "com.amazonaws.personalizeruntime#RecommendationID",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the recommendation.</p>"
-          }
-        },
         "itemList": {
           "target": "com.amazonaws.personalizeruntime#ItemList",
           "traits": {
             "smithy.api#documentation": "<p>A list of recommendations sorted in ascending order by prediction score. There can be a\n      maximum of 500 items in the list.</p>"
+          }
+        },
+        "recommendationId": {
+          "target": "com.amazonaws.personalizeruntime#RecommendationID",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the recommendation.</p>"
           }
         }
       }
@@ -314,16 +361,16 @@
     "com.amazonaws.personalizeruntime#PredictedItem": {
       "type": "structure",
       "members": {
-        "score": {
-          "target": "com.amazonaws.personalizeruntime#Score",
-          "traits": {
-            "smithy.api#documentation": "<p>A numeric representation of the model's certainty that the item will be the next user\n      selection. For more information on scoring logic, see <a>how-scores-work</a>.</p>"
-          }
-        },
         "itemId": {
           "target": "com.amazonaws.personalizeruntime#ItemID",
           "traits": {
             "smithy.api#documentation": "<p>The recommended item ID.</p>"
+          }
+        },
+        "score": {
+          "target": "com.amazonaws.personalizeruntime#Score",
+          "traits": {
+            "smithy.api#documentation": "<p>A numeric representation of the model's certainty that the item will be the next user\n      selection. For more information on scoring logic, see <a>how-scores-work</a>.</p>"
           }
         }
       },

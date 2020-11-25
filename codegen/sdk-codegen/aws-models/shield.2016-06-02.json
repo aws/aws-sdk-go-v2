@@ -49,16 +49,25 @@
           "target": "com.amazonaws.shield#CreateProtection"
         },
         {
+          "target": "com.amazonaws.shield#CreateProtectionGroup"
+        },
+        {
           "target": "com.amazonaws.shield#CreateSubscription"
         },
         {
           "target": "com.amazonaws.shield#DeleteProtection"
         },
         {
+          "target": "com.amazonaws.shield#DeleteProtectionGroup"
+        },
+        {
           "target": "com.amazonaws.shield#DeleteSubscription"
         },
         {
           "target": "com.amazonaws.shield#DescribeAttack"
+        },
+        {
+          "target": "com.amazonaws.shield#DescribeAttackStatistics"
         },
         {
           "target": "com.amazonaws.shield#DescribeDRTAccess"
@@ -68,6 +77,9 @@
         },
         {
           "target": "com.amazonaws.shield#DescribeProtection"
+        },
+        {
+          "target": "com.amazonaws.shield#DescribeProtectionGroup"
         },
         {
           "target": "com.amazonaws.shield#DescribeSubscription"
@@ -94,10 +106,19 @@
           "target": "com.amazonaws.shield#ListAttacks"
         },
         {
+          "target": "com.amazonaws.shield#ListProtectionGroups"
+        },
+        {
           "target": "com.amazonaws.shield#ListProtections"
         },
         {
+          "target": "com.amazonaws.shield#ListResourcesInProtectionGroup"
+        },
+        {
           "target": "com.amazonaws.shield#UpdateEmergencyContactSettings"
+        },
+        {
+          "target": "com.amazonaws.shield#UpdateProtectionGroup"
         },
         {
           "target": "com.amazonaws.shield#UpdateSubscription"
@@ -279,17 +300,17 @@
     "com.amazonaws.shield#AssociateHealthCheckRequest": {
       "type": "structure",
       "members": {
-        "HealthCheckArn": {
-          "target": "com.amazonaws.shield#HealthCheckArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the health check to associate with the protection.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "ProtectionId": {
           "target": "com.amazonaws.shield#ProtectionId",
           "traits": {
             "smithy.api#documentation": "<p>The unique identifier (ID) for the <a>Protection</a> object to add the health check association to. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "HealthCheckArn": {
+          "target": "com.amazonaws.shield#HealthCheckArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the health check to associate with the protection.</p>",
             "smithy.api#required": {}
           }
         }
@@ -347,16 +368,10 @@
     "com.amazonaws.shield#AttackDetail": {
       "type": "structure",
       "members": {
-        "SubResources": {
-          "target": "com.amazonaws.shield#SubResourceSummaryList",
+        "AttackId": {
+          "target": "com.amazonaws.shield#AttackId",
           "traits": {
-            "smithy.api#documentation": "<p>If applicable, additional detail about the resource being attacked, for example, IP\n         address or URL.</p>"
-          }
-        },
-        "AttackProperties": {
-          "target": "com.amazonaws.shield#AttackProperties",
-          "traits": {
-            "smithy.api#documentation": "<p>The array of <a>AttackProperty</a> objects.</p>"
+            "smithy.api#documentation": "<p>The unique identifier (ID) of the attack.</p>"
           }
         },
         "ResourceArn": {
@@ -365,22 +380,22 @@
             "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the resource that was attacked.</p>"
           }
         },
+        "SubResources": {
+          "target": "com.amazonaws.shield#SubResourceSummaryList",
+          "traits": {
+            "smithy.api#documentation": "<p>If applicable, additional detail about the resource being attacked, for example, IP address or URL.</p>"
+          }
+        },
+        "StartTime": {
+          "target": "com.amazonaws.shield#AttackTimestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time the attack started, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
+          }
+        },
         "EndTime": {
           "target": "com.amazonaws.shield#AttackTimestamp",
           "traits": {
             "smithy.api#documentation": "<p>The time the attack ended, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
-          }
-        },
-        "AttackId": {
-          "target": "com.amazonaws.shield#AttackId",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique identifier (ID) of the attack.</p>"
-          }
-        },
-        "Mitigations": {
-          "target": "com.amazonaws.shield#MitigationList",
-          "traits": {
-            "smithy.api#documentation": "<p>List of mitigation actions taken for the attack.</p>"
           }
         },
         "AttackCounters": {
@@ -389,10 +404,16 @@
             "smithy.api#documentation": "<p>List of counters that describe the attack for the specified time period.</p>"
           }
         },
-        "StartTime": {
-          "target": "com.amazonaws.shield#AttackTimestamp",
+        "AttackProperties": {
+          "target": "com.amazonaws.shield#AttackProperties",
           "traits": {
-            "smithy.api#documentation": "<p>The time the attack started, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
+            "smithy.api#documentation": "<p>The array of <a>AttackProperty</a> objects.</p>"
+          }
+        },
+        "Mitigations": {
+          "target": "com.amazonaws.shield#MitigationList",
+          "traits": {
+            "smithy.api#documentation": "<p>List of mitigation actions taken for the attack.</p>"
           }
         }
       },
@@ -434,28 +455,28 @@
     "com.amazonaws.shield#AttackProperty": {
       "type": "structure",
       "members": {
-        "Unit": {
-          "target": "com.amazonaws.shield#Unit",
-          "traits": {
-            "smithy.api#documentation": "<p>The unit of the <code>Value</code> of the contributions.</p>"
-          }
-        },
         "AttackLayer": {
           "target": "com.amazonaws.shield#AttackLayer",
           "traits": {
             "smithy.api#documentation": "<p>The type of distributed denial of service (DDoS) event that was observed.\n            <code>NETWORK</code> indicates layer 3 and layer 4 events and <code>APPLICATION</code>\n         indicates layer 7 events.</p>"
           }
         },
-        "TopContributors": {
-          "target": "com.amazonaws.shield#TopContributors",
-          "traits": {
-            "smithy.api#documentation": "<p>The array of <a>Contributor</a> objects that includes the top five contributors to an attack. </p>"
-          }
-        },
         "AttackPropertyIdentifier": {
           "target": "com.amazonaws.shield#AttackPropertyIdentifier",
           "traits": {
             "smithy.api#documentation": "<p>Defines the DDoS attack property information that is provided. The\n            <code>WORDPRESS_PINGBACK_REFLECTOR</code> and <code>WORDPRESS_PINGBACK_SOURCE</code>\n         values are valid only for WordPress reflective pingback DDoS attacks.</p>"
+          }
+        },
+        "TopContributors": {
+          "target": "com.amazonaws.shield#TopContributors",
+          "traits": {
+            "smithy.api#documentation": "<p>The array of contributor objects that includes the top five contributors to an attack. </p>"
+          }
+        },
+        "Unit": {
+          "target": "com.amazonaws.shield#Unit",
+          "traits": {
+            "smithy.api#documentation": "<p>The unit of the <code>Value</code> of the contributions.</p>"
           }
         },
         "Total": {
@@ -508,6 +529,33 @@
         ]
       }
     },
+    "com.amazonaws.shield#AttackStatisticsDataItem": {
+      "type": "structure",
+      "members": {
+        "AttackVolume": {
+          "target": "com.amazonaws.shield#AttackVolume",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the volume of attacks during the time period. If the accompanying <code>AttackCount</code> is zero, this setting might be empty.</p>"
+          }
+        },
+        "AttackCount": {
+          "target": "com.amazonaws.shield#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of attacks detected during the time period. This is always present, but might be zero. </p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A single attack statistics data record. This is returned by <a>DescribeAttackStatistics</a> along with a time range indicating the time period that the attack statistics apply to.  </p>"
+      }
+    },
+    "com.amazonaws.shield#AttackStatisticsDataList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.shield#AttackStatisticsDataItem"
+      }
+    },
     "com.amazonaws.shield#AttackSummaries": {
       "type": "list",
       "member": {
@@ -523,18 +571,6 @@
             "smithy.api#documentation": "<p>The unique identifier (ID) of the attack.</p>"
           }
         },
-        "EndTime": {
-          "target": "com.amazonaws.shield#AttackTimestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The end time of the attack, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
-          }
-        },
-        "AttackVectors": {
-          "target": "com.amazonaws.shield#AttackVectorDescriptionList",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of attacks for a specified time period.</p>"
-          }
-        },
         "ResourceArn": {
           "target": "com.amazonaws.shield#String",
           "traits": {
@@ -545,6 +581,18 @@
           "target": "com.amazonaws.shield#AttackTimestamp",
           "traits": {
             "smithy.api#documentation": "<p>The start time of the attack, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
+          }
+        },
+        "EndTime": {
+          "target": "com.amazonaws.shield#AttackTimestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The end time of the attack, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
+          }
+        },
+        "AttackVectors": {
+          "target": "com.amazonaws.shield#AttackVectorDescriptionList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of attacks for a specified time period.</p>"
           }
         }
       },
@@ -574,6 +622,47 @@
       "type": "list",
       "member": {
         "target": "com.amazonaws.shield#AttackVectorDescription"
+      }
+    },
+    "com.amazonaws.shield#AttackVolume": {
+      "type": "structure",
+      "members": {
+        "BitsPerSecond": {
+          "target": "com.amazonaws.shield#AttackVolumeStatistics",
+          "traits": {
+            "smithy.api#documentation": "<p>A statistics object that uses bits per second as the unit. This is included for network level attacks. </p>"
+          }
+        },
+        "PacketsPerSecond": {
+          "target": "com.amazonaws.shield#AttackVolumeStatistics",
+          "traits": {
+            "smithy.api#documentation": "<p>A statistics object that uses packets per second as the unit. This is included for network level attacks. </p>"
+          }
+        },
+        "RequestsPerSecond": {
+          "target": "com.amazonaws.shield#AttackVolumeStatistics",
+          "traits": {
+            "smithy.api#documentation": "<p>A statistics object that uses requests per second as the unit. This is included for application level attacks, and is only available for accounts that are subscribed to Shield Advanced.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Information about the volume of attacks during the time period, included in an <a>AttackStatisticsDataItem</a>. If the accompanying <code>AttackCount</code> in the statistics object is zero, this setting might be empty.</p>"
+      }
+    },
+    "com.amazonaws.shield#AttackVolumeStatistics": {
+      "type": "structure",
+      "members": {
+        "Max": {
+          "target": "com.amazonaws.shield#Double",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum attack volume observed for the given unit.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Statistics objects for the various data types in <a>AttackVolume</a>. </p>"
       }
     },
     "com.amazonaws.shield#AutoRenew": {
@@ -656,20 +745,94 @@
         "smithy.api#documentation": "<p>Enables AWS Shield Advanced for a specific AWS resource. The resource can be an Amazon\n         CloudFront distribution, Elastic Load Balancing load balancer, AWS Global Accelerator accelerator, Elastic IP Address, or an Amazon Route 53 hosted zone.</p>\n         <p>You can add protection to only a single resource with each CreateProtection request. If you want to add protection to multiple resources at once, use the <a href=\"https://console.aws.amazon.com/waf/\">AWS WAF console</a>. For more information see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html\">Getting Started with AWS Shield Advanced</a> and <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html\">Add AWS Shield Advanced Protection to more AWS Resources</a>.</p>"
       }
     },
-    "com.amazonaws.shield#CreateProtectionRequest": {
+    "com.amazonaws.shield#CreateProtectionGroup": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#CreateProtectionGroupRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#CreateProtectionGroupResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidParameterException"
+        },
+        {
+          "target": "com.amazonaws.shield#LimitsExceededException"
+        },
+        {
+          "target": "com.amazonaws.shield#OptimisticLockException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceAlreadyExistsException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a grouping of protected resources so they can be handled as a collective. This resource grouping improves the accuracy of detection and reduces false positives. </p>"
+      }
+    },
+    "com.amazonaws.shield#CreateProtectionGroupRequest": {
       "type": "structure",
       "members": {
-        "ResourceArn": {
-          "target": "com.amazonaws.shield#ResourceArn",
+        "ProtectionGroupId": {
+          "target": "com.amazonaws.shield#ProtectionGroupId",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the resource to be protected.</p>\n         <p>The ARN should be in one of the following formats:</p>\n         <ul>\n            <li>\n               <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Elastic Load Balancer (Classic Load Balancer): <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/<i>load-balancer-name</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an AWS CloudFront distribution: <code>arn:aws:cloudfront::<i>account-id</i>:distribution/<i>distribution-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an AWS Global Accelerator accelerator: <code>arn:aws:globalaccelerator::<i>account-id</i>:accelerator/<i>accelerator-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For Amazon Route 53: <code>arn:aws:route53:::hostedzone/<i>hosted-zone-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Elastic IP address: <code>arn:aws:ec2:<i>region</i>:<i>account-id</i>:eip-allocation/<i>allocation-id</i>\n                  </code>\n               </p>\n            </li>\n         </ul>",
+            "smithy.api#documentation": "<p>The name of the protection group. You use this to identify the protection group in lists and to manage the protection group, for example to update, delete, or describe it. </p>",
             "smithy.api#required": {}
           }
         },
+        "Aggregation": {
+          "target": "com.amazonaws.shield#ProtectionGroupAggregation",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines how AWS Shield combines resource data for the group in order to detect, mitigate, and report events.</p>\n         <ul>\n            <li>\n               <p>Sum - Use the total traffic across the group. This is a good choice for most cases. Examples include Elastic IP addresses for EC2 instances that scale manually or automatically.</p>\n            </li>\n            <li>\n               <p>Mean - Use the average of the traffic across the group. This is a good choice for resources that share traffic uniformly. Examples include accelerators and load balancers.</p>\n            </li>\n            <li>\n               <p>Max - Use the highest traffic from each resource. This is useful for resources that don't share traffic and for resources that share that traffic in a non-uniform way. Examples include CloudFront distributions and origin resources for CloudFront distributions.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
+        "Pattern": {
+          "target": "com.amazonaws.shield#ProtectionGroupPattern",
+          "traits": {
+            "smithy.api#documentation": "<p>The criteria to use to choose the protected resources for inclusion in the group. You can include all resources that have protections, provide a list of resource Amazon Resource Names (ARNs), or include all resources of a specified resource type. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ResourceType": {
+          "target": "com.amazonaws.shield#ProtectedResourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource type to include in the protection group. All protected resources of this type are included in the protection group. Newly protected resources of this type are automatically added to the group. \n           You must set this when you set <code>Pattern</code> to <code>BY_RESOURCE_TYPE</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
+          }
+        },
+        "Members": {
+          "target": "com.amazonaws.shield#ProtectionGroupMembers",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set <code>Pattern</code> to <code>ARBITRARY</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#CreateProtectionGroupResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#CreateProtectionRequest": {
+      "type": "structure",
+      "members": {
         "Name": {
           "target": "com.amazonaws.shield#ProtectionName",
           "traits": {
             "smithy.api#documentation": "<p>Friendly name for the <code>Protection</code> you are creating.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.shield#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the resource to be protected.</p>\n         <p>The ARN should be in one of the following formats:</p>\n         <ul>\n            <li>\n               <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Elastic Load Balancer (Classic Load Balancer): <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/<i>load-balancer-name</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an AWS CloudFront distribution: <code>arn:aws:cloudfront::<i>account-id</i>:distribution/<i>distribution-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an AWS Global Accelerator accelerator: <code>arn:aws:globalaccelerator::<i>account-id</i>:accelerator/<i>accelerator-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For Amazon Route 53: <code>arn:aws:route53:::hostedzone/<i>hosted-zone-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Elastic IP address: <code>arn:aws:ec2:<i>region</i>:<i>account-id</i>:eip-allocation/<i>allocation-id</i>\n                  </code>\n               </p>\n            </li>\n         </ul>",
             "smithy.api#required": {}
           }
         }
@@ -736,6 +899,45 @@
       "traits": {
         "smithy.api#documentation": "<p>Deletes an AWS Shield Advanced <a>Protection</a>.</p>"
       }
+    },
+    "com.amazonaws.shield#DeleteProtectionGroup": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#DeleteProtectionGroupRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#DeleteProtectionGroupResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#OptimisticLockException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes the specified protection group.</p>"
+      }
+    },
+    "com.amazonaws.shield#DeleteProtectionGroupRequest": {
+      "type": "structure",
+      "members": {
+        "ProtectionGroupId": {
+          "target": "com.amazonaws.shield#ProtectionGroupId",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the protection group. You use this to identify the protection group in lists and to manage the protection group, for example to update, delete, or describe it. </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#DeleteProtectionGroupResponse": {
+      "type": "structure",
+      "members": {}
     },
     "com.amazonaws.shield#DeleteProtectionRequest": {
       "type": "structure",
@@ -830,6 +1032,45 @@
           "target": "com.amazonaws.shield#AttackDetail",
           "traits": {
             "smithy.api#documentation": "<p>The attack that is described.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#DescribeAttackStatistics": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#DescribeAttackStatisticsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#DescribeAttackStatisticsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Provides information about the number and type of attacks AWS Shield has detected in the last year for all resources that belong to your account, regardless of whether you've defined Shield protections for them. This operation is available to Shield customers as well as to Shield Advanced customers.</p>\n         <p>The operation returns data for the time range of midnight UTC, one year ago, to midnight UTC, today. For example, if the current time is <code>2020-10-26 15:39:32 PDT</code>, equal to <code>2020-10-26 22:39:32 UTC</code>, then the time range for the attack data returned is from <code>2019-10-26 00:00:00 UTC</code> to <code>2020-10-26 00:00:00 UTC</code>. </p>\n         <p>The time range indicates the period covered by the attack statistics data items.</p>"
+      }
+    },
+    "com.amazonaws.shield#DescribeAttackStatisticsRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#DescribeAttackStatisticsResponse": {
+      "type": "structure",
+      "members": {
+        "TimeRange": {
+          "target": "com.amazonaws.shield#TimeRange",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "DataItems": {
+          "target": "com.amazonaws.shield#AttackStatisticsDataList",
+          "traits": {
+            "smithy.api#documentation": "<p>The data that describes the attacks detected during the time period.</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -933,19 +1174,63 @@
         "smithy.api#documentation": "<p>Lists the details of a <a>Protection</a> object.</p>"
       }
     },
+    "com.amazonaws.shield#DescribeProtectionGroup": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#DescribeProtectionGroupRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#DescribeProtectionGroupResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns the specification for the specified protection group.</p>"
+      }
+    },
+    "com.amazonaws.shield#DescribeProtectionGroupRequest": {
+      "type": "structure",
+      "members": {
+        "ProtectionGroupId": {
+          "target": "com.amazonaws.shield#ProtectionGroupId",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the protection group. You use this to identify the protection group in lists and to manage the protection group, for example to update, delete, or describe it. </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#DescribeProtectionGroupResponse": {
+      "type": "structure",
+      "members": {
+        "ProtectionGroup": {
+          "target": "com.amazonaws.shield#ProtectionGroup",
+          "traits": {
+            "smithy.api#documentation": "<p>A grouping of protected resources that you and AWS Shield Advanced can monitor as a collective. This resource grouping improves the accuracy of detection and reduces false positives. </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
     "com.amazonaws.shield#DescribeProtectionRequest": {
       "type": "structure",
       "members": {
-        "ResourceArn": {
-          "target": "com.amazonaws.shield#ResourceArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the AWS resource for the <a>Protection</a> object that is\n         described. When submitting the <code>DescribeProtection</code> request you must provide either the <code>ResourceArn</code> or the <code>ProtectionID</code>, but not both.</p>"
-          }
-        },
         "ProtectionId": {
           "target": "com.amazonaws.shield#ProtectionId",
           "traits": {
             "smithy.api#documentation": "<p>The unique identifier (ID) for the <a>Protection</a> object that is\n         described. When submitting the <code>DescribeProtection</code> request you must provide either the <code>ResourceArn</code> or the <code>ProtectionID</code>, but not both.</p>"
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.shield#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the AWS resource for the <a>Protection</a> object that is\n         described. When submitting the <code>DescribeProtection</code> request you must provide either the <code>ResourceArn</code> or the <code>ProtectionID</code>, but not both.</p>"
           }
         }
       }
@@ -1144,17 +1429,17 @@
     "com.amazonaws.shield#DisassociateHealthCheckRequest": {
       "type": "structure",
       "members": {
-        "HealthCheckArn": {
-          "target": "com.amazonaws.shield#HealthCheckArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the health check that is associated with the protection.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "ProtectionId": {
           "target": "com.amazonaws.shield#ProtectionId",
           "traits": {
             "smithy.api#documentation": "<p>The unique identifier (ID) for the <a>Protection</a> object to remove the health check association from. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "HealthCheckArn": {
+          "target": "com.amazonaws.shield#HealthCheckArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the health check that is associated with the protection.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1188,17 +1473,17 @@
     "com.amazonaws.shield#EmergencyContact": {
       "type": "structure",
       "members": {
-        "PhoneNumber": {
-          "target": "com.amazonaws.shield#PhoneNumber",
-          "traits": {
-            "smithy.api#documentation": "<p>The phone number for the contact.</p>"
-          }
-        },
         "EmailAddress": {
           "target": "com.amazonaws.shield#EmailAddress",
           "traits": {
             "smithy.api#documentation": "<p>The email address for the contact.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "PhoneNumber": {
+          "target": "com.amazonaws.shield#PhoneNumber",
+          "traits": {
+            "smithy.api#documentation": "<p>The phone number for the contact.</p>"
           }
         },
         "ContactNotes": {
@@ -1357,10 +1642,22 @@
       "members": {
         "message": {
           "target": "com.amazonaws.shield#errorMessage"
+        },
+        "reason": {
+          "target": "com.amazonaws.shield#ValidationExceptionReason",
+          "traits": {
+            "smithy.api#documentation": "<p>Additional information about the exception.</p>"
+          }
+        },
+        "fields": {
+          "target": "com.amazonaws.shield#ValidationExceptionFieldList",
+          "traits": {
+            "smithy.api#documentation": "<p>Fields that caused the exception.</p>"
+          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Exception that indicates that the parameters passed to the API are invalid. </p>",
+        "smithy.api#documentation": "<p>Exception that indicates that the parameters passed to the API are invalid. If available, this exception includes details in additional properties. </p>",
         "smithy.api#error": "client"
       }
     },
@@ -1379,16 +1676,16 @@
     "com.amazonaws.shield#Limit": {
       "type": "structure",
       "members": {
-        "Max": {
-          "target": "com.amazonaws.shield#Long",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of protections that can be created for the specified <code>Type</code>.</p>"
-          }
-        },
         "Type": {
           "target": "com.amazonaws.shield#String",
           "traits": {
             "smithy.api#documentation": "<p>The type of protection.</p>"
+          }
+        },
+        "Max": {
+          "target": "com.amazonaws.shield#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of protections that can be created for the specified <code>Type</code>.</p>"
           }
         }
       },
@@ -1414,11 +1711,11 @@
         "message": {
           "target": "com.amazonaws.shield#errorMessage"
         },
-        "Limit": {
-          "target": "com.amazonaws.shield#LimitNumber"
-        },
         "Type": {
           "target": "com.amazonaws.shield#LimitType"
+        },
+        "Limit": {
+          "target": "com.amazonaws.shield#LimitNumber"
         }
       },
       "traits": {
@@ -1458,16 +1755,16 @@
     "com.amazonaws.shield#ListAttacksRequest": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.shield#Token",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>ListAttacksRequest.NextMarker</code> value from a previous call to <code>ListAttacksRequest</code>. Pass null if this is the first call.</p>"
-          }
-        },
         "ResourceArns": {
           "target": "com.amazonaws.shield#ResourceArnFilterList",
           "traits": {
             "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the resource that was attacked. If this is left\n         blank, all applicable resources for this account will be included.</p>"
+          }
+        },
+        "StartTime": {
+          "target": "com.amazonaws.shield#TimeRange",
+          "traits": {
+            "smithy.api#documentation": "<p>The start of the time period for the attacks. This is a <code>timestamp</code> type. The sample request above indicates a <code>number</code> type because the default used by WAF is Unix time in seconds. However any valid <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp format</a>  is allowed.  </p>"
           }
         },
         "EndTime": {
@@ -1476,16 +1773,16 @@
             "smithy.api#documentation": "<p>The end of the time period for the attacks. This is a <code>timestamp</code> type. The sample request above indicates a <code>number</code> type because the default used by WAF is Unix time in seconds. However any valid <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp format</a>  is allowed.  </p>"
           }
         },
+        "NextToken": {
+          "target": "com.amazonaws.shield#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>ListAttacksRequest.NextMarker</code> value from a previous call to <code>ListAttacksRequest</code>. Pass null if this is the first call.</p>"
+          }
+        },
         "MaxResults": {
           "target": "com.amazonaws.shield#MaxResults",
           "traits": {
-            "smithy.api#documentation": "<p>The maximum number of <a>AttackSummary</a> objects to be returned. If this is left blank, the first 20 results will be returned.</p>\n         <p>This is a maximum value; it is possible that AWS WAF will return the results in smaller batches. That is, the number of <a>AttackSummary</a> objects returned could be less than <code>MaxResults</code>, even if there are still more <a>AttackSummary</a> objects yet to return. If there are more <a>AttackSummary</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>"
-          }
-        },
-        "StartTime": {
-          "target": "com.amazonaws.shield#TimeRange",
-          "traits": {
-            "smithy.api#documentation": "<p>The start of the time period for the attacks. This is a <code>timestamp</code> type. The sample request above indicates a <code>number</code> type because the default used by WAF is Unix time in seconds. However any valid <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp format</a>  is allowed.  </p>"
+            "smithy.api#documentation": "<p>The maximum number of <a>AttackSummary</a> objects to return. If you leave this blank, \n         Shield Advanced returns the first 20 results.</p>\n         <p>This is a maximum value. Shield Advanced might return the results in smaller batches. That is, the number of objects returned could be less than <code>MaxResults</code>, even if there are still more objects yet to return. If there are more objects to return, Shield Advanced returns a value in <code>NextToken</code> that you can use in your next request, to get the next batch of objects.</p>"
           }
         }
       }
@@ -1502,7 +1799,70 @@
         "NextToken": {
           "target": "com.amazonaws.shield#Token",
           "traits": {
-            "smithy.api#documentation": "<p>The token returned by a previous call to indicate that there is more data available.\n         If not null, more results are available. Pass this value for the <code>NextMarker</code>\n         parameter in a subsequent call to <code>ListAttacks</code> to retrieve the next set of\n         items.</p>\n         <p>AWS WAF might return the list of <a>AttackSummary</a> objects in batches smaller than the number specified by MaxResults. If there are more <a>AttackSummary</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>"
+            "smithy.api#documentation": "<p>The token returned by a previous call to indicate that there is more data available.\n         If not null, more results are available. Pass this value for the <code>NextMarker</code>\n         parameter in a subsequent call to <code>ListAttacks</code> to retrieve the next set of\n         items.</p>\n         <p>Shield Advanced might return the list of <a>AttackSummary</a> objects in batches smaller than the number specified by MaxResults. If there are more attack summary objects to return, Shield Advanced will always also return a <code>NextToken</code>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#ListProtectionGroups": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#ListProtectionGroupsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#ListProtectionGroupsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidPaginationTokenException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves the <a>ProtectionGroup</a> objects for the account.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.shield#ListProtectionGroupsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.shield#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>The next token value from a previous call to <code>ListProtectionGroups</code>. Pass null if this is the first call.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.shield#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of <a>ProtectionGroup</a> objects to return. If you leave this blank, \n         Shield Advanced returns the first 20 results.</p>\n         <p>This is a maximum value. Shield Advanced might return the results in smaller batches. That is, the number of objects returned could be less than <code>MaxResults</code>, even if there are still more objects yet to return. If there are more objects to return, Shield Advanced returns a value in <code>NextToken</code> that you can use in your next request, to get the next batch of objects.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#ListProtectionGroupsResponse": {
+      "type": "structure",
+      "members": {
+        "ProtectionGroups": {
+          "target": "com.amazonaws.shield#ProtectionGroups",
+          "traits": {
+            "smithy.api#documentation": "<p></p>",
+            "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.shield#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>If you specify a value for <code>MaxResults</code> and you have more protection groups than the value of MaxResults, AWS Shield Advanced returns this token that you can use in your next request, to get the next batch of objects. </p>"
           }
         }
       }
@@ -1548,7 +1908,7 @@
         "MaxResults": {
           "target": "com.amazonaws.shield#MaxResults",
           "traits": {
-            "smithy.api#documentation": "<p>The maximum number of <a>Protection</a> objects to be returned. If this is\n         left blank the first 20 results will be returned.</p>\n         <p>This is a maximum value; it is possible that AWS WAF will return the results in smaller batches. That is, the number of <a>Protection</a> objects returned could be less than <code>MaxResults</code>, even if there are still more <a>Protection</a> objects yet to return. If there are more <a>Protection</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>"
+            "smithy.api#documentation": "<p>The maximum number of <a>Protection</a> objects to return. If you leave this blank, \n         Shield Advanced returns the first 20 results.</p>\n         <p>This is a maximum value. Shield Advanced might return the results in smaller batches. That is, the number of objects returned could be less than <code>MaxResults</code>, even if there are still more objects yet to return. If there are more objects to return, Shield Advanced returns a value in <code>NextToken</code> that you can use in your next request, to get the next batch of objects.</p>"
           }
         }
       }
@@ -1565,7 +1925,77 @@
         "NextToken": {
           "target": "com.amazonaws.shield#Token",
           "traits": {
-            "smithy.api#documentation": "<p>If you specify a value for <code>MaxResults</code> and you have more Protections than the value of MaxResults, AWS Shield Advanced returns a NextToken value in the response that allows you to list another group of Protections. For the second and subsequent ListProtections requests, specify the value of NextToken from the previous response to get information about another batch of Protections.</p>\n         <p>AWS WAF might return the list of <a>Protection</a> objects in batches smaller than the number specified by MaxResults. If there are more <a>Protection</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>"
+            "smithy.api#documentation": "<p>If you specify a value for <code>MaxResults</code> and you have more Protections than the value of MaxResults, AWS Shield Advanced returns a NextToken value in the response that allows you to list another group of Protections. For the second and subsequent ListProtections requests, specify the value of NextToken from the previous response to get information about another batch of Protections.</p>\n         <p>Shield Advanced might return the list of <a>Protection</a> objects in batches smaller than the number specified by MaxResults. If there are more <a>Protection</a> objects to return, Shield Advanced will always also return a <code>NextToken</code>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#ListResourcesInProtectionGroup": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#ListResourcesInProtectionGroupRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#ListResourcesInProtectionGroupResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidPaginationTokenException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves the resources that are included in the protection group. </p>",
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.shield#ListResourcesInProtectionGroupRequest": {
+      "type": "structure",
+      "members": {
+        "ProtectionGroupId": {
+          "target": "com.amazonaws.shield#ProtectionGroupId",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the protection group. You use this to identify the protection group in lists and to manage the protection group, for example to update, delete, or describe it. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.shield#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>The next token value from a previous call to <code>ListResourcesInProtectionGroup</code>. Pass null if this is the first call.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.shield#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of resource ARN objects to return. If you leave this blank, \n         Shield Advanced returns the first 20 results.</p>\n         <p>This is a maximum value. Shield Advanced might return the results in smaller batches. That is, the number of objects returned could be less than <code>MaxResults</code>, even if there are still more objects yet to return. If there are more objects to return, Shield Advanced returns a value in <code>NextToken</code> that you can use in your next request, to get the next batch of objects.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#ListResourcesInProtectionGroupResponse": {
+      "type": "structure",
+      "members": {
+        "ResourceArns": {
+          "target": "com.amazonaws.shield#ResourceArnList",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the resources that are included in the protection group.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.shield#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>If you specify a value for <code>MaxResults</code> and you have more resources in the protection group than the value of MaxResults, AWS Shield Advanced returns this token that you can use in your next request, to get the next batch of objects. </p>"
           }
         }
       }
@@ -1690,13 +2120,50 @@
         ]
       }
     },
+    "com.amazonaws.shield#ProtectedResourceType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "CLOUDFRONT_DISTRIBUTION",
+            "name": "CLOUDFRONT_DISTRIBUTION"
+          },
+          {
+            "value": "ROUTE_53_HOSTED_ZONE",
+            "name": "ROUTE_53_HOSTED_ZONE"
+          },
+          {
+            "value": "ELASTIC_IP_ALLOCATION",
+            "name": "ELASTIC_IP_ALLOCATION"
+          },
+          {
+            "value": "CLASSIC_LOAD_BALANCER",
+            "name": "CLASSIC_LOAD_BALANCER"
+          },
+          {
+            "value": "APPLICATION_LOAD_BALANCER",
+            "name": "APPLICATION_LOAD_BALANCER"
+          },
+          {
+            "value": "GLOBAL_ACCELERATOR",
+            "name": "GLOBAL_ACCELERATOR"
+          }
+        ]
+      }
+    },
     "com.amazonaws.shield#Protection": {
       "type": "structure",
       "members": {
-        "HealthCheckIds": {
-          "target": "com.amazonaws.shield#HealthCheckIds",
+        "Id": {
+          "target": "com.amazonaws.shield#ProtectionId",
           "traits": {
-            "smithy.api#documentation": "<p>The unique identifier (ID) for the Route 53 health check that's associated with the protection. </p>"
+            "smithy.api#documentation": "<p>The unique identifier (ID) of the protection.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.shield#ProtectionName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the protection. For example, <code>My CloudFront distributions</code>.</p>"
           }
         },
         "ResourceArn": {
@@ -1705,21 +2172,175 @@
             "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the AWS resource that is protected.</p>"
           }
         },
-        "Name": {
-          "target": "com.amazonaws.shield#ProtectionName",
+        "HealthCheckIds": {
+          "target": "com.amazonaws.shield#HealthCheckIds",
           "traits": {
-            "smithy.api#documentation": "<p>The friendly name of the protection. For example, <code>My CloudFront distributions</code>.</p>"
-          }
-        },
-        "Id": {
-          "target": "com.amazonaws.shield#ProtectionId",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique identifier (ID) of the protection.</p>"
+            "smithy.api#documentation": "<p>The unique identifier (ID) for the Route 53 health check that's associated with the protection. </p>"
           }
         }
       },
       "traits": {
         "smithy.api#documentation": "<p>An object that represents a resource that is under DDoS protection.</p>"
+      }
+    },
+    "com.amazonaws.shield#ProtectionGroup": {
+      "type": "structure",
+      "members": {
+        "ProtectionGroupId": {
+          "target": "com.amazonaws.shield#ProtectionGroupId",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the protection group. You use this to identify the protection group in lists and to manage the protection group, for example to update, delete, or describe it. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Aggregation": {
+          "target": "com.amazonaws.shield#ProtectionGroupAggregation",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines how AWS Shield combines resource data for the group in order to detect, mitigate, and report events.</p>\n         <ul>\n            <li>\n               <p>Sum - Use the total traffic across the group. This is a good choice for most cases. Examples include Elastic IP addresses for EC2 instances that scale manually or automatically.</p>\n            </li>\n            <li>\n               <p>Mean - Use the average of the traffic across the group. This is a good choice for resources that share traffic uniformly. Examples include accelerators and load balancers.</p>\n            </li>\n            <li>\n               <p>Max - Use the highest traffic from each resource. This is useful for resources that don't share traffic and for resources that share that traffic in a non-uniform way. Examples include CloudFront distributions and origin resources for CloudFront distributions.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
+        "Pattern": {
+          "target": "com.amazonaws.shield#ProtectionGroupPattern",
+          "traits": {
+            "smithy.api#documentation": "<p>The criteria to use to choose the protected resources for inclusion in the group. You can include all resources that have protections, provide a list of resource Amazon Resource Names (ARNs), or include all resources of a specified resource type.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ResourceType": {
+          "target": "com.amazonaws.shield#ProtectedResourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource type to include in the protection group. All protected resources of this type are included in the protection group. \n           You must set this when you set <code>Pattern</code> to <code>BY_RESOURCE_TYPE</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
+          }
+        },
+        "Members": {
+          "target": "com.amazonaws.shield#ProtectionGroupMembers",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set <code>Pattern</code> to <code>ARBITRARY</code> and you must not set it for any other <code>Pattern</code> setting. </p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A grouping of protected resources that you and AWS Shield Advanced can monitor as a collective. This resource grouping improves the accuracy of detection and reduces false positives. </p>"
+      }
+    },
+    "com.amazonaws.shield#ProtectionGroupAggregation": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "SUM",
+            "name": "SUM"
+          },
+          {
+            "value": "MEAN",
+            "name": "MEAN"
+          },
+          {
+            "value": "MAX",
+            "name": "MAX"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.shield#ProtectionGroupArbitraryPatternLimits": {
+      "type": "structure",
+      "members": {
+        "MaxMembers": {
+          "target": "com.amazonaws.shield#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of resources you can specify for a single arbitrary pattern in a protection group.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Limits settings on protection groups with arbitrary pattern type. </p>"
+      }
+    },
+    "com.amazonaws.shield#ProtectionGroupId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 36
+        },
+        "smithy.api#pattern": "[a-zA-Z0-9\\\\-]*"
+      }
+    },
+    "com.amazonaws.shield#ProtectionGroupLimits": {
+      "type": "structure",
+      "members": {
+        "MaxProtectionGroups": {
+          "target": "com.amazonaws.shield#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of protection groups that you can have at one time. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "PatternTypeLimits": {
+          "target": "com.amazonaws.shield#ProtectionGroupPatternTypeLimits",
+          "traits": {
+            "smithy.api#documentation": "<p>Limits settings by pattern type in the protection groups for your subscription. </p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Limits settings on protection groups for your subscription. </p>"
+      }
+    },
+    "com.amazonaws.shield#ProtectionGroupMembers": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.shield#ResourceArn"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 10000
+        }
+      }
+    },
+    "com.amazonaws.shield#ProtectionGroupPattern": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ALL",
+            "name": "ALL"
+          },
+          {
+            "value": "ARBITRARY",
+            "name": "ARBITRARY"
+          },
+          {
+            "value": "BY_RESOURCE_TYPE",
+            "name": "BY_RESOURCE_TYPE"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.shield#ProtectionGroupPatternTypeLimits": {
+      "type": "structure",
+      "members": {
+        "ArbitraryPatternLimits": {
+          "target": "com.amazonaws.shield#ProtectionGroupArbitraryPatternLimits",
+          "traits": {
+            "smithy.api#documentation": "<p>Limits settings on protection groups with arbitrary pattern type. </p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Limits settings by pattern type in the protection groups for your subscription. </p>"
+      }
+    },
+    "com.amazonaws.shield#ProtectionGroups": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.shield#ProtectionGroup"
       }
     },
     "com.amazonaws.shield#ProtectionId": {
@@ -1730,6 +2351,21 @@
           "max": 36
         },
         "smithy.api#pattern": "[a-zA-Z0-9\\\\-]*"
+      }
+    },
+    "com.amazonaws.shield#ProtectionLimits": {
+      "type": "structure",
+      "members": {
+        "ProtectedResourceTypeLimits": {
+          "target": "com.amazonaws.shield#Limits",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of resource types that you can specify in a protection.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Limits settings on protections for your subscription. </p>"
       }
     },
     "com.amazonaws.shield#ProtectionName": {
@@ -1753,10 +2389,16 @@
       "members": {
         "message": {
           "target": "com.amazonaws.shield#errorMessage"
+        },
+        "resourceType": {
+          "target": "com.amazonaws.shield#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of resource that already exists.</p>"
+          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Exception indicating the specified resource already exists.</p>",
+        "smithy.api#documentation": "<p>Exception indicating the specified resource already exists. If available, this exception includes details in additional properties. </p>",
         "smithy.api#error": "client"
       }
     },
@@ -1776,15 +2418,27 @@
         "target": "com.amazonaws.shield#ResourceArn"
       }
     },
+    "com.amazonaws.shield#ResourceArnList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.shield#ResourceArn"
+      }
+    },
     "com.amazonaws.shield#ResourceNotFoundException": {
       "type": "structure",
       "members": {
         "message": {
           "target": "com.amazonaws.shield#errorMessage"
+        },
+        "resourceType": {
+          "target": "com.amazonaws.shield#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Type of resource.</p>"
+          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Exception indicating the specified resource does not exist.</p>",
+        "smithy.api#documentation": "<p>Exception indicating the specified resource does not exist. If available, this exception includes details in additional properties. </p>",
         "smithy.api#error": "client"
       }
     },
@@ -1810,16 +2464,16 @@
             "smithy.api#documentation": "<p>The <code>SubResource</code> type.</p>"
           }
         },
-        "AttackVectors": {
-          "target": "com.amazonaws.shield#SummarizedAttackVectorList",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of attack types and associated counters.</p>"
-          }
-        },
         "Id": {
           "target": "com.amazonaws.shield#String",
           "traits": {
             "smithy.api#documentation": "<p>The unique identifier (ID) of the <code>SubResource</code>.</p>"
+          }
+        },
+        "AttackVectors": {
+          "target": "com.amazonaws.shield#SummarizedAttackVectorList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of attack types and associated counters.</p>"
           }
         },
         "Counters": {
@@ -1863,24 +2517,6 @@
             "smithy.api#documentation": "<p>The start time of the subscription, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
           }
         },
-        "AutoRenew": {
-          "target": "com.amazonaws.shield#AutoRenew",
-          "traits": {
-            "smithy.api#documentation": "<p>If <code>ENABLED</code>, the subscription will be automatically renewed at the end of the existing subscription period.</p>\n         <p>When you initally create a subscription, <code>AutoRenew</code> is set to <code>ENABLED</code>. You can change this by submitting an <code>UpdateSubscription</code> request. If the <code>UpdateSubscription</code> request does not included a value for <code>AutoRenew</code>, the existing value for <code>AutoRenew</code> remains unchanged.</p>"
-          }
-        },
-        "ProactiveEngagementStatus": {
-          "target": "com.amazonaws.shield#ProactiveEngagementStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>If <code>ENABLED</code>, the DDoS Response Team (DRT) will use email and phone to notify contacts about escalations to the DRT and to initiate proactive customer support.</p>\n         <p>If <code>PENDING</code>, you have requested proactive engagement and the request is pending. The status changes to <code>ENABLED</code> when your request is fully processed.</p>\n         <p>If <code>DISABLED</code>, the DRT will not proactively notify contacts about escalations or to initiate proactive customer support. </p>"
-          }
-        },
-        "Limits": {
-          "target": "com.amazonaws.shield#Limits",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies how many protections of a given type you can create.</p>"
-          }
-        },
         "EndTime": {
           "target": "com.amazonaws.shield#Timestamp",
           "traits": {
@@ -1892,10 +2528,57 @@
           "traits": {
             "smithy.api#documentation": "<p>The length, in seconds, of the AWS Shield Advanced subscription for the account.</p>"
           }
+        },
+        "AutoRenew": {
+          "target": "com.amazonaws.shield#AutoRenew",
+          "traits": {
+            "smithy.api#documentation": "<p>If <code>ENABLED</code>, the subscription will be automatically renewed at the end of the existing subscription period.</p>\n         <p>When you initally create a subscription, <code>AutoRenew</code> is set to <code>ENABLED</code>. You can change this by submitting an <code>UpdateSubscription</code> request. If the <code>UpdateSubscription</code> request does not included a value for <code>AutoRenew</code>, the existing value for <code>AutoRenew</code> remains unchanged.</p>"
+          }
+        },
+        "Limits": {
+          "target": "com.amazonaws.shield#Limits",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies how many protections of a given type you can create.</p>"
+          }
+        },
+        "ProactiveEngagementStatus": {
+          "target": "com.amazonaws.shield#ProactiveEngagementStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>If <code>ENABLED</code>, the DDoS Response Team (DRT) will use email and phone to notify contacts about escalations to the DRT and to initiate proactive customer support.</p>\n         <p>If <code>PENDING</code>, you have requested proactive engagement and the request is pending. The status changes to <code>ENABLED</code> when your request is fully processed.</p>\n         <p>If <code>DISABLED</code>, the DRT will not proactively notify contacts about escalations or to initiate proactive customer support. </p>"
+          }
+        },
+        "SubscriptionLimits": {
+          "target": "com.amazonaws.shield#SubscriptionLimits",
+          "traits": {
+            "smithy.api#documentation": "<p>Limits settings for your subscription. </p>",
+            "smithy.api#required": {}
+          }
         }
       },
       "traits": {
         "smithy.api#documentation": "<p>Information about the AWS Shield Advanced subscription for an account.</p>"
+      }
+    },
+    "com.amazonaws.shield#SubscriptionLimits": {
+      "type": "structure",
+      "members": {
+        "ProtectionLimits": {
+          "target": "com.amazonaws.shield#ProtectionLimits",
+          "traits": {
+            "smithy.api#documentation": "<p>Limits settings on protections for your subscription. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ProtectionGroupLimits": {
+          "target": "com.amazonaws.shield#ProtectionGroupLimits",
+          "traits": {
+            "smithy.api#documentation": "<p>Limits settings on protection groups for your subscription. </p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Limits settings for your subscription. </p>"
       }
     },
     "com.amazonaws.shield#SubscriptionState": {
@@ -1943,16 +2626,10 @@
     "com.amazonaws.shield#SummarizedCounter": {
       "type": "structure",
       "members": {
-        "Unit": {
+        "Name": {
           "target": "com.amazonaws.shield#String",
           "traits": {
-            "smithy.api#documentation": "<p>The unit of the counters.</p>"
-          }
-        },
-        "Sum": {
-          "target": "com.amazonaws.shield#Double",
-          "traits": {
-            "smithy.api#documentation": "<p>The total of counter values for a specified time period.</p>"
+            "smithy.api#documentation": "<p>The counter name.</p>"
           }
         },
         "Max": {
@@ -1967,16 +2644,22 @@
             "smithy.api#documentation": "<p>The average value of the counter for a specified time period.</p>"
           }
         },
+        "Sum": {
+          "target": "com.amazonaws.shield#Double",
+          "traits": {
+            "smithy.api#documentation": "<p>The total of counter values for a specified time period.</p>"
+          }
+        },
         "N": {
           "target": "com.amazonaws.shield#Integer",
           "traits": {
             "smithy.api#documentation": "<p>The number of counters for a specified time period.</p>"
           }
         },
-        "Name": {
+        "Unit": {
           "target": "com.amazonaws.shield#String",
           "traits": {
-            "smithy.api#documentation": "<p>The counter name.</p>"
+            "smithy.api#documentation": "<p>The unit of the counters.</p>"
           }
         }
       },
@@ -1993,21 +2676,21 @@
     "com.amazonaws.shield#TimeRange": {
       "type": "structure",
       "members": {
-        "ToExclusive": {
-          "target": "com.amazonaws.shield#AttackTimestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The end time, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
-          }
-        },
         "FromInclusive": {
           "target": "com.amazonaws.shield#AttackTimestamp",
           "traits": {
             "smithy.api#documentation": "<p>The start time, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
           }
+        },
+        "ToExclusive": {
+          "target": "com.amazonaws.shield#AttackTimestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The end time, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
+          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The time range.</p>"
+        "smithy.api#documentation": "<p>The time range. </p>"
       }
     },
     "com.amazonaws.shield#Timestamp": {
@@ -2093,6 +2776,74 @@
       "type": "structure",
       "members": {}
     },
+    "com.amazonaws.shield#UpdateProtectionGroup": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#UpdateProtectionGroupRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#UpdateProtectionGroupResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidParameterException"
+        },
+        {
+          "target": "com.amazonaws.shield#OptimisticLockException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates an existing protection group. A protection group is a grouping of protected resources so they can be handled as a collective. This resource grouping improves the accuracy of detection and reduces false positives. </p>"
+      }
+    },
+    "com.amazonaws.shield#UpdateProtectionGroupRequest": {
+      "type": "structure",
+      "members": {
+        "ProtectionGroupId": {
+          "target": "com.amazonaws.shield#ProtectionGroupId",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the protection group. You use this to identify the protection group in lists and to manage the protection group, for example to update, delete, or describe it. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Aggregation": {
+          "target": "com.amazonaws.shield#ProtectionGroupAggregation",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines how AWS Shield combines resource data for the group in order to detect, mitigate, and report events.</p>\n         <ul>\n            <li>\n               <p>Sum - Use the total traffic across the group. This is a good choice for most cases. Examples include Elastic IP addresses for EC2 instances that scale manually or automatically.</p>\n            </li>\n            <li>\n               <p>Mean - Use the average of the traffic across the group. This is a good choice for resources that share traffic uniformly. Examples include accelerators and load balancers.</p>\n            </li>\n            <li>\n               <p>Max - Use the highest traffic from each resource. This is useful for resources that don't share traffic and for resources that share that traffic in a non-uniform way. Examples include CloudFront distributions and origin resources for CloudFront distributions.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
+        "Pattern": {
+          "target": "com.amazonaws.shield#ProtectionGroupPattern",
+          "traits": {
+            "smithy.api#documentation": "<p>The criteria to use to choose the protected resources for inclusion in the group. You can include all resources that have protections, provide a list of resource Amazon Resource Names (ARNs), or include all resources of a specified resource type.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ResourceType": {
+          "target": "com.amazonaws.shield#ProtectedResourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource type to include in the protection group. All protected resources of this type are included in the protection group. \n           You must set this when you set <code>Pattern</code> to <code>BY_RESOURCE_TYPE</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
+          }
+        },
+        "Members": {
+          "target": "com.amazonaws.shield#ProtectionGroupMembers",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set <code>Pattern</code> to <code>ARBITRARY</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#UpdateProtectionGroupResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "com.amazonaws.shield#UpdateSubscription": {
       "type": "operation",
       "input": {
@@ -2136,6 +2887,49 @@
     "com.amazonaws.shield#UpdateSubscriptionResponse": {
       "type": "structure",
       "members": {}
+    },
+    "com.amazonaws.shield#ValidationExceptionField": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.shield#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the parameter that failed validation.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.shield#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The message describing why the parameter failed validation.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Provides information about a particular parameter passed inside a request that resulted in an exception.</p>"
+      }
+    },
+    "com.amazonaws.shield#ValidationExceptionFieldList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.shield#ValidationExceptionField"
+      }
+    },
+    "com.amazonaws.shield#ValidationExceptionReason": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "FIELD_VALIDATION_FAILED",
+            "name": "FIELD_VALIDATION_FAILED"
+          },
+          {
+            "value": "OTHER",
+            "name": "OTHER"
+          }
+        ]
+      }
     },
     "com.amazonaws.shield#errorMessage": {
       "type": "string"

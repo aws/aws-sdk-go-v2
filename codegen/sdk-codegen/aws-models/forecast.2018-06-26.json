@@ -218,16 +218,17 @@
     "com.amazonaws.forecast#ContinuousParameterRange": {
       "type": "structure",
       "members": {
-        "ScalingType": {
-          "target": "com.amazonaws.forecast#ScalingType",
-          "traits": {
-            "smithy.api#documentation": "<p>The scale that hyperparameter tuning uses to search the hyperparameter range.\n      Valid values:</p>\n         <dl>\n            <dt>Auto</dt>\n            <dd>\n               <p>Amazon Forecast hyperparameter tuning chooses the best scale for the hyperparameter.</p>\n            </dd>\n            <dt>Linear</dt>\n            <dd>\n               <p>Hyperparameter tuning searches the values in the hyperparameter range by using a\n            linear scale.</p>\n            </dd>\n            <dt>Logarithmic</dt>\n            <dd>\n               <p>Hyperparameter tuning searches the values in the hyperparameter range by using a\n            logarithmic scale.</p>\n               <p>Logarithmic scaling works only for ranges that have values greater than 0.</p>\n            </dd>\n            <dt>ReverseLogarithmic</dt>\n            <dd>\n               <p>hyperparameter tuning searches the values in the hyperparameter range by using a\n            reverse logarithmic scale.</p>\n               <p>Reverse logarithmic scaling works only for ranges that are entirely within the\n            range 0 <= x < 1.0.</p>\n            </dd>\n         </dl>\n         <p>For information about choosing a hyperparameter scale, see\n      <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type\">Hyperparameter Scaling</a>.\n      One of the following values:</p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.forecast#Name",
           "traits": {
             "smithy.api#documentation": "<p>The name of the hyperparameter to tune.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MaxValue": {
+          "target": "com.amazonaws.forecast#Double",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum tunable value of the hyperparameter.</p>",
             "smithy.api#required": {}
           }
         },
@@ -238,11 +239,10 @@
             "smithy.api#required": {}
           }
         },
-        "MaxValue": {
-          "target": "com.amazonaws.forecast#Double",
+        "ScalingType": {
+          "target": "com.amazonaws.forecast#ScalingType",
           "traits": {
-            "smithy.api#documentation": "<p>The maximum tunable value of the hyperparameter.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The scale that hyperparameter tuning uses to search the hyperparameter range.\n      Valid values:</p>\n         <dl>\n            <dt>Auto</dt>\n            <dd>\n               <p>Amazon Forecast hyperparameter tuning chooses the best scale for the hyperparameter.</p>\n            </dd>\n            <dt>Linear</dt>\n            <dd>\n               <p>Hyperparameter tuning searches the values in the hyperparameter range by using a\n            linear scale.</p>\n            </dd>\n            <dt>Logarithmic</dt>\n            <dd>\n               <p>Hyperparameter tuning searches the values in the hyperparameter range by using a\n            logarithmic scale.</p>\n               <p>Logarithmic scaling works only for ranges that have values greater than 0.</p>\n            </dd>\n            <dt>ReverseLogarithmic</dt>\n            <dd>\n               <p>hyperparameter tuning searches the values in the hyperparameter range by using a\n            reverse logarithmic scale.</p>\n               <p>Reverse logarithmic scaling works only for ranges that are entirely within the\n            range 0 <= x < 1.0.</p>\n            </dd>\n         </dl>\n         <p>For information about choosing a hyperparameter scale, see\n      <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type\">Hyperparameter Scaling</a>.\n      One of the following values:</p>"
           }
         }
       },
@@ -311,18 +311,12 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Creates a dataset group, which holds a collection of related datasets. You can add\n      datasets to the dataset group when you create the dataset group, or later by using the <a>UpdateDatasetGroup</a> operation.</p>\n         <p>After creating a dataset group and adding datasets, you use the dataset group when you\n      create a predictor. For more information, see <a>howitworks-datasets-groups</a>.</p>\n         <p>To get a list of all your datasets groups, use the <a>ListDatasetGroups</a>\n      operation.</p>\n         <note>\n            <p>The <code>Status</code> of a dataset group must be <code>ACTIVE</code> before you can\n        create use the dataset group to create a predictor. To get the status, use the <a>DescribeDatasetGroup</a> operation.</p>\n         </note>"
+        "smithy.api#documentation": "<p>Creates a dataset group, which holds a collection of related datasets. You can add\n      datasets to the dataset group when you create the dataset group, or later by using the <a>UpdateDatasetGroup</a> operation.</p>\n         <p>After creating a dataset group and adding datasets, you use the dataset group when you\n      create a predictor. For more information, see <a>howitworks-datasets-groups</a>.</p>\n         <p>To get a list of all your datasets groups, use the <a>ListDatasetGroups</a>\n      operation.</p>\n         <note>\n            <p>The <code>Status</code> of a dataset group must be <code>ACTIVE</code> before you can\n         use the dataset group to create a predictor. To get the status, use the <a>DescribeDatasetGroup</a> operation.</p>\n         </note>"
       }
     },
     "com.amazonaws.forecast#CreateDatasetGroupRequest": {
       "type": "structure",
       "members": {
-        "DatasetArns": {
-          "target": "com.amazonaws.forecast#ArnList",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of Amazon Resource Names (ARNs) of the datasets that you want to include in the\n      dataset group.</p>"
-          }
-        },
         "DatasetGroupName": {
           "target": "com.amazonaws.forecast#Name",
           "traits": {
@@ -330,17 +324,23 @@
             "smithy.api#required": {}
           }
         },
-        "Tags": {
-          "target": "com.amazonaws.forecast#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>The optional metadata that you apply to the dataset group to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
-          }
-        },
         "Domain": {
           "target": "com.amazonaws.forecast#Domain",
           "traits": {
             "smithy.api#documentation": "<p>The domain associated with the dataset group. When you add a dataset to a dataset group,\n      this value and the value specified for the <code>Domain</code> parameter of the <a>CreateDataset</a> operation must match.</p>\n         <p>The <code>Domain</code> and <code>DatasetType</code> that you choose determine the fields\n      that must be present in training data that you import to a dataset. For example, if you choose\n      the <code>RETAIL</code> domain and <code>TARGET_TIME_SERIES</code> as the\n        <code>DatasetType</code>, Amazon Forecast requires that <code>item_id</code>,\n        <code>timestamp</code>, and <code>demand</code> fields are present in your data. For more\n      information, see <a>howitworks-datasets-groups</a>.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "DatasetArns": {
+          "target": "com.amazonaws.forecast#ArnList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of Amazon Resource Names (ARNs) of the datasets that you want to include in the\n      dataset group.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.forecast#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>The optional metadata that you apply to the dataset group to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
           }
         }
       }
@@ -395,12 +395,6 @@
             "smithy.api#required": {}
           }
         },
-        "TimestampFormat": {
-          "target": "com.amazonaws.forecast#TimestampFormat",
-          "traits": {
-            "smithy.api#documentation": "<p>The format of timestamps in the dataset. The format that you specify depends on the\n        <code>DataFrequency</code> specified when the dataset was created. The following formats are\n      supported</p>\n         <ul>\n            <li>\n               <p>\"yyyy-MM-dd\"</p>\n               <p>For the following data frequencies: Y, M, W, and D</p>\n            </li>\n            <li>\n               <p>\"yyyy-MM-dd HH:mm:ss\"</p>\n               <p>For the following data frequencies: H, 30min, 15min, and 1min; and optionally, for: Y,\n          M, W, and D</p>\n            </li>\n         </ul>\n         <p>If the format isn't specified, Amazon Forecast expects the format to be \"yyyy-MM-dd\n      HH:mm:ss\".</p>"
-          }
-        },
         "DatasetArn": {
           "target": "com.amazonaws.forecast#Arn",
           "traits": {
@@ -408,17 +402,23 @@
             "smithy.api#required": {}
           }
         },
-        "Tags": {
-          "target": "com.amazonaws.forecast#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>The optional metadata that you apply to the dataset import job to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
-          }
-        },
         "DataSource": {
           "target": "com.amazonaws.forecast#DataSource",
           "traits": {
             "smithy.api#documentation": "<p>The location of the training data to import and an AWS Identity and Access Management (IAM) role that Amazon Forecast\n      can assume to access the data. The training data must be stored in an Amazon S3 bucket.</p>\n         <p>If encryption is used, <code>DataSource</code> must include an AWS Key Management Service (KMS) key and the\n      IAM role must allow Amazon Forecast permission to access the key. The KMS key and IAM role must\n      match those specified in the <code>EncryptionConfig</code> parameter of the <a>CreateDataset</a> operation.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "TimestampFormat": {
+          "target": "com.amazonaws.forecast#TimestampFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The format of timestamps in the dataset. The format that you specify depends on the\n        <code>DataFrequency</code> specified when the dataset was created. The following formats are\n      supported</p>\n         <ul>\n            <li>\n               <p>\"yyyy-MM-dd\"</p>\n               <p>For the following data frequencies: Y, M, W, and D</p>\n            </li>\n            <li>\n               <p>\"yyyy-MM-dd HH:mm:ss\"</p>\n               <p>For the following data frequencies: H, 30min, 15min, and 1min; and optionally, for: Y,\n          M, W, and D</p>\n            </li>\n         </ul>\n         <p>If the format isn't specified, Amazon Forecast expects the format to be \"yyyy-MM-dd\n      HH:mm:ss\".</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.forecast#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>The optional metadata that you apply to the dataset import job to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
           }
         }
       }
@@ -437,10 +437,37 @@
     "com.amazonaws.forecast#CreateDatasetRequest": {
       "type": "structure",
       "members": {
+        "DatasetName": {
+          "target": "com.amazonaws.forecast#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>A name for the dataset.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "Domain": {
           "target": "com.amazonaws.forecast#Domain",
           "traits": {
             "smithy.api#documentation": "<p>The domain associated with the dataset. When you add a dataset to a dataset group, this\n      value and the value specified for the <code>Domain</code> parameter of the <a>CreateDatasetGroup</a> operation must match.</p>\n         <p>The <code>Domain</code> and <code>DatasetType</code> that you choose determine the fields\n      that must be present in the training data that you import to the dataset. For example, if you\n      choose the <code>RETAIL</code> domain and <code>TARGET_TIME_SERIES</code> as the\n        <code>DatasetType</code>, Amazon Forecast requires <code>item_id</code>, <code>timestamp</code>,\n      and <code>demand</code> fields to be present in your data. For more information, see <a>howitworks-datasets-groups</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DatasetType": {
+          "target": "com.amazonaws.forecast#DatasetType",
+          "traits": {
+            "smithy.api#documentation": "<p>The dataset type. Valid values depend on the chosen <code>Domain</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DataFrequency": {
+          "target": "com.amazonaws.forecast#Frequency",
+          "traits": {
+            "smithy.api#documentation": "<p>The frequency of data collection. This parameter is required for RELATED_TIME_SERIES\n      datasets.</p>\n         <p>Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min (30 minutes),\n      15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute). For example,\n      \"D\" indicates every day and \"15min\" indicates every 15 minutes.</p>"
+          }
+        },
+        "Schema": {
+          "target": "com.amazonaws.forecast#Schema",
+          "traits": {
+            "smithy.api#documentation": "<p>The schema for the dataset. The schema attributes and their order must match the fields in\n      your data. The dataset <code>Domain</code> and <code>DatasetType</code> that you choose\n      determine the minimum required fields in your training data. For information about the\n      required fields for a specific dataset domain and type, see <a>howitworks-domains-ds-types</a>.</p>",
             "smithy.api#required": {}
           }
         },
@@ -454,33 +481,6 @@
           "target": "com.amazonaws.forecast#Tags",
           "traits": {
             "smithy.api#documentation": "<p>The optional metadata that you apply to the dataset to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
-          }
-        },
-        "DatasetType": {
-          "target": "com.amazonaws.forecast#DatasetType",
-          "traits": {
-            "smithy.api#documentation": "<p>The dataset type. Valid values depend on the chosen <code>Domain</code>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Schema": {
-          "target": "com.amazonaws.forecast#Schema",
-          "traits": {
-            "smithy.api#documentation": "<p>The schema for the dataset. The schema attributes and their order must match the fields in\n      your data. The dataset <code>Domain</code> and <code>DatasetType</code> that you choose\n      determine the minimum required fields in your training data. For information about the\n      required fields for a specific dataset domain and type, see <a>howitworks-domains-ds-types</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "DataFrequency": {
-          "target": "com.amazonaws.forecast#Frequency",
-          "traits": {
-            "smithy.api#documentation": "<p>The frequency of data collection. This parameter is required for RELATED_TIME_SERIES\n      datasets.</p>\n         <p>Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min (30 minutes),\n      15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute). For example,\n      \"D\" indicates every day and \"15min\" indicates every 15 minutes.</p>"
-          }
-        },
-        "DatasetName": {
-          "target": "com.amazonaws.forecast#Name",
-          "traits": {
-            "smithy.api#documentation": "<p>A name for the dataset.</p>",
-            "smithy.api#required": {}
           }
         }
       }
@@ -564,6 +564,13 @@
             "smithy.api#required": {}
           }
         },
+        "ForecastArn": {
+          "target": "com.amazonaws.forecast#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the forecast that you want to export.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "Destination": {
           "target": "com.amazonaws.forecast#DataDestination",
           "traits": {
@@ -575,13 +582,6 @@
           "target": "com.amazonaws.forecast#Tags",
           "traits": {
             "smithy.api#documentation": "<p>The optional metadata that you apply to the forecast export job to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
-          }
-        },
-        "ForecastArn": {
-          "target": "com.amazonaws.forecast#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the forecast that you want to export.</p>",
-            "smithy.api#required": {}
           }
         }
       }
@@ -607,17 +607,17 @@
             "smithy.api#required": {}
           }
         },
-        "ForecastTypes": {
-          "target": "com.amazonaws.forecast#ForecastTypes",
-          "traits": {
-            "smithy.api#documentation": "<p>The quantiles at which probabilistic forecasts are generated. <b>You\n        can currently specify up to 5 quantiles per forecast</b>. Accepted values include\n        <code>0.01 to 0.99</code> (increments of .01 only) and <code>mean</code>. The mean forecast\n      is different from the median (0.50) when the distribution is not symmetric (for example, Beta\n      and Negative Binomial). The default value is <code>[\"0.1\", \"0.5\", \"0.9\"]</code>.</p>"
-          }
-        },
         "PredictorArn": {
           "target": "com.amazonaws.forecast#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the predictor to use to generate the forecast.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "ForecastTypes": {
+          "target": "com.amazonaws.forecast#ForecastTypes",
+          "traits": {
+            "smithy.api#documentation": "<p>The quantiles at which probabilistic forecasts are generated. <b>You\n        can currently specify up to 5 quantiles per forecast</b>. Accepted values include\n        <code>0.01 to 0.99</code> (increments of .01 only) and <code>mean</code>. The mean forecast\n      is different from the median (0.50) when the distribution is not symmetric (for example, Beta\n      and Negative Binomial). The default value is <code>[\"0.1\", \"0.5\", \"0.9\"]</code>.</p>"
           }
         },
         "Tags": {
@@ -665,23 +665,23 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Creates an Amazon Forecast predictor.</p>\n         <p>In the request, you provide a dataset group and either specify an algorithm or let\n      Amazon Forecast choose the algorithm for you using AutoML. If you specify an algorithm, you also can\n      override algorithm-specific hyperparameters.</p>\n         <p>Amazon Forecast uses the chosen algorithm to train a model using the latest version of the\n      datasets in the specified dataset group. The result is called a predictor. You then generate a\n      forecast using the <a>CreateForecast</a> operation.</p>\n         <p>After training a model, the <code>CreatePredictor</code> operation also evaluates it. To\n      see the evaluation metrics, use the <a>GetAccuracyMetrics</a> operation. Always\n      review the evaluation metrics before deciding to use the predictor to generate a\n      forecast.</p>\n         <p>Optionally, you can specify a featurization configuration to fill and aggregate the data\n      fields in the <code>TARGET_TIME_SERIES</code> dataset to improve model training. For more\n      information, see <a>FeaturizationConfig</a>.</p>\n         <p>For RELATED_TIME_SERIES datasets, <code>CreatePredictor</code> verifies that the\n        <code>DataFrequency</code> specified when the dataset was created matches the\n        <code>ForecastFrequency</code>. TARGET_TIME_SERIES datasets don't have this restriction.\n      Amazon Forecast also verifies the delimiter and timestamp format. For more information, see <a>howitworks-datasets-groups</a>.</p>\n         <p>\n            <b>AutoML</b>\n         </p>\n         <p>If you want Amazon Forecast to evaluate each algorithm and choose the one that minimizes the\n        <code>objective function</code>, set <code>PerformAutoML</code> to <code>true</code>. The\n        <code>objective function</code> is defined as the mean of the weighted p10, p50, and p90\n      quantile losses. For more information, see <a>EvaluationResult</a>.</p>\n         <p>When AutoML is enabled, the following properties are disallowed:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AlgorithmArn</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>HPOConfig</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PerformHPO</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TrainingParameters</code>\n               </p>\n            </li>\n         </ul>\n\n      \n\n         <p>To get a list of all of your predictors, use the <a>ListPredictors</a>\n      operation.</p>\n         <note>\n            <p>Before you can use the predictor to create a forecast, the <code>Status</code> of the\n        predictor must be <code>ACTIVE</code>, signifying that training has completed. To get the\n        status, use the <a>DescribePredictor</a> operation.</p>\n         </note>"
+        "smithy.api#documentation": "<p>Creates an Amazon Forecast predictor.</p>\n         <p>In the request, provide a dataset group and either specify an algorithm or let\n      Amazon Forecast choose an algorithm for you using AutoML. If you specify an algorithm, you also can\n      override algorithm-specific hyperparameters.</p>\n         <p>Amazon Forecast uses the algorithm to train a predictor using the latest version of the\n      datasets in the specified dataset group. You can then generate a\n      forecast using the <a>CreateForecast</a> operation.</p>\n         <p>\n      To see the evaluation metrics, use the <a>GetAccuracyMetrics</a> operation.\n    </p>\n         <p>You can specify a featurization configuration to fill and aggregate the data\n      fields in the <code>TARGET_TIME_SERIES</code> dataset to improve model training. For more\n      information, see <a>FeaturizationConfig</a>.</p>\n         <p>For RELATED_TIME_SERIES datasets, <code>CreatePredictor</code> verifies that the\n        <code>DataFrequency</code> specified when the dataset was created matches the\n        <code>ForecastFrequency</code>. TARGET_TIME_SERIES datasets don't have this restriction.\n      Amazon Forecast also verifies the delimiter and timestamp format. For more information, see <a>howitworks-datasets-groups</a>.</p>\n         <p>By default, predictors are trained and evaluated at the 0.1 (P10), 0.5 (P50), and 0.9\n      (P90) quantiles. You can choose custom forecast types to train and evaluate your predictor\n      by setting the <code>ForecastTypes</code>.\n    </p>\n         <p>\n            <b>AutoML</b>\n         </p>\n         <p>If you want Amazon Forecast to evaluate each algorithm and choose the one that minimizes the\n        <code>objective function</code>, set <code>PerformAutoML</code> to <code>true</code>. The\n        <code>objective function</code> is defined as the mean of the weighted losses over the\n      forecast types. By default, these are the p10, p50, and p90\n      quantile losses. For more information, see <a>EvaluationResult</a>.</p>\n         <p>When AutoML is enabled, the following properties are disallowed:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AlgorithmArn</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>HPOConfig</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PerformHPO</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TrainingParameters</code>\n               </p>\n            </li>\n         </ul>\n\n      \n\n         <p>To get a list of all of your predictors, use the <a>ListPredictors</a>\n      operation.</p>\n         <note>\n            <p>Before you can use the predictor to create a forecast, the <code>Status</code> of the\n        predictor must be <code>ACTIVE</code>, signifying that training has completed. To get the\n        status, use the <a>DescribePredictor</a> operation.</p>\n         </note>"
       }
     },
     "com.amazonaws.forecast#CreatePredictorRequest": {
       "type": "structure",
       "members": {
-        "InputDataConfig": {
-          "target": "com.amazonaws.forecast#InputDataConfig",
+        "PredictorName": {
+          "target": "com.amazonaws.forecast#Name",
           "traits": {
-            "smithy.api#documentation": "<p>Describes the dataset group that contains the data to use to train the predictor.</p>",
+            "smithy.api#documentation": "<p>A name for the predictor.</p>",
             "smithy.api#required": {}
           }
         },
-        "EncryptionConfig": {
-          "target": "com.amazonaws.forecast#EncryptionConfig",
+        "AlgorithmArn": {
+          "target": "com.amazonaws.forecast#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>An AWS Key Management Service (KMS) key and the AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access\n      the key.</p>"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the algorithm to use for model training. Required if\n        <code>PerformAutoML</code> is not set to <code>true</code>.</p>\n         <p class=\"title\">\n            <b>Supported algorithms:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>arn:aws:forecast:::algorithm/ARIMA</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>arn:aws:forecast:::algorithm/CNN-QR</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>arn:aws:forecast:::algorithm/Deep_AR_Plus</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>arn:aws:forecast:::algorithm/ETS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>arn:aws:forecast:::algorithm/NPTS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>arn:aws:forecast:::algorithm/Prophet</code>\n               </p>\n            </li>\n         </ul>"
           }
         },
         "ForecastHorizon": {
@@ -691,22 +691,10 @@
             "smithy.api#required": {}
           }
         },
-        "EvaluationParameters": {
-          "target": "com.amazonaws.forecast#EvaluationParameters",
+        "ForecastTypes": {
+          "target": "com.amazonaws.forecast#ForecastTypes",
           "traits": {
-            "smithy.api#documentation": "<p>Used to override the default evaluation parameters of the specified algorithm. Amazon Forecast\n      evaluates a predictor by splitting a dataset into training data and testing data. The\n      evaluation parameters define how to perform the split and the number of iterations.</p>"
-          }
-        },
-        "AlgorithmArn": {
-          "target": "com.amazonaws.forecast#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the algorithm to use for model training. Required if\n        <code>PerformAutoML</code> is not set to <code>true</code>.</p>\n         <p class=\"title\">\n            <b>Supported algorithms:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>arn:aws:forecast:::algorithm/ARIMA</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>arn:aws:forecast:::algorithm/Deep_AR_Plus</code>\n               </p>\n               <p>Supports hyperparameter optimization (HPO)</p>\n            </li>\n            <li>\n               <p>\n                  <code>arn:aws:forecast:::algorithm/ETS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>arn:aws:forecast:::algorithm/NPTS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>arn:aws:forecast:::algorithm/Prophet</code>\n               </p>\n            </li>\n         </ul>"
-          }
-        },
-        "HPOConfig": {
-          "target": "com.amazonaws.forecast#HyperParameterTuningJobConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides hyperparameter override values for the algorithm. If you don't provide this\n      parameter, Amazon Forecast uses default values. The individual algorithms specify which\n      hyperparameters support hyperparameter optimization (HPO). For more information, see <a>aws-forecast-choosing-recipes</a>.</p>\n         <p>If you included the <code>HPOConfig</code> object, you must set <code>PerformHPO</code> to\n      true.</p>"
+            "smithy.api#documentation": "<p>Specifies the forecast types used to train a predictor. You can specify up to five forecast types.\n      Forecast types can be quantiles from 0.01 to 0.99, by increments of 0.01 or higher. You can also specify \n      the mean forecast with <code>mean</code>.\n    </p>\n         <p>The default value is <code>[\"0.10\", \"0.50\", \"0.9\"]</code>.</p>"
           }
         },
         "PerformAutoML": {
@@ -718,20 +706,32 @@
         "PerformHPO": {
           "target": "com.amazonaws.forecast#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>Whether to perform hyperparameter optimization (HPO). HPO finds optimal hyperparameter\n      values for your training data. The process of performing HPO is known as running a\n      hyperparameter tuning job.</p>\n         <p>The default value is <code>false</code>. In this case, Amazon Forecast uses default\n      hyperparameter values from the chosen algorithm.</p>\n         <p>To override the default values, set <code>PerformHPO</code> to <code>true</code> and,\n      optionally, supply the <a>HyperParameterTuningJobConfig</a> object. The tuning job\n      specifies a metric to optimize, which hyperparameters participate in tuning, and the valid\n      range for each tunable hyperparameter. In this case, you are required to specify an algorithm\n      and <code>PerformAutoML</code> must be false.</p>\n         <p>The following algorithm supports HPO:</p>\n         <ul>\n            <li>\n               <p>DeepAR+</p>\n            </li>\n         </ul>"
+            "smithy.api#documentation": "<p>Whether to perform hyperparameter optimization (HPO). HPO finds optimal hyperparameter\n      values for your training data. The process of performing HPO is known as running a\n      hyperparameter tuning job.</p>\n         <p>The default value is <code>false</code>. In this case, Amazon Forecast uses default\n      hyperparameter values from the chosen algorithm.</p>\n         <p>To override the default values, set <code>PerformHPO</code> to <code>true</code> and,\n      optionally, supply the <a>HyperParameterTuningJobConfig</a> object. The tuning job\n      specifies a metric to optimize, which hyperparameters participate in tuning, and the valid\n      range for each tunable hyperparameter. In this case, you are required to specify an algorithm\n      and <code>PerformAutoML</code> must be false.</p>\n         <p>The following algorithms support HPO:</p>\n         <ul>\n            <li>\n               <p>DeepAR+</p>\n            </li>\n            <li>\n               <p>CNN-QR</p>\n            </li>\n         </ul>"
           }
         },
-        "PredictorName": {
-          "target": "com.amazonaws.forecast#Name",
+        "TrainingParameters": {
+          "target": "com.amazonaws.forecast#TrainingParameters",
           "traits": {
-            "smithy.api#documentation": "<p>A name for the predictor.</p>",
+            "smithy.api#documentation": "<p>The hyperparameters to override for model training. The hyperparameters that you can\n      override are listed in the individual algorithms. For the list of supported algorithms, see\n        <a>aws-forecast-choosing-recipes</a>.</p>"
+          }
+        },
+        "EvaluationParameters": {
+          "target": "com.amazonaws.forecast#EvaluationParameters",
+          "traits": {
+            "smithy.api#documentation": "<p>Used to override the default evaluation parameters of the specified algorithm. Amazon Forecast\n      evaluates a predictor by splitting a dataset into training data and testing data. The\n      evaluation parameters define how to perform the split and the number of iterations.</p>"
+          }
+        },
+        "HPOConfig": {
+          "target": "com.amazonaws.forecast#HyperParameterTuningJobConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides hyperparameter override values for the algorithm. If you don't provide this\n      parameter, Amazon Forecast uses default values. The individual algorithms specify which\n      hyperparameters support hyperparameter optimization (HPO). For more information, see <a>aws-forecast-choosing-recipes</a>.</p>\n         <p>If you included the <code>HPOConfig</code> object, you must set <code>PerformHPO</code> to\n      true.</p>"
+          }
+        },
+        "InputDataConfig": {
+          "target": "com.amazonaws.forecast#InputDataConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>Describes the dataset group that contains the data to use to train the predictor.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.forecast#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>The optional metadata that you apply to the predictor to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
           }
         },
         "FeaturizationConfig": {
@@ -741,10 +741,16 @@
             "smithy.api#required": {}
           }
         },
-        "TrainingParameters": {
-          "target": "com.amazonaws.forecast#TrainingParameters",
+        "EncryptionConfig": {
+          "target": "com.amazonaws.forecast#EncryptionConfig",
           "traits": {
-            "smithy.api#documentation": "<p>The hyperparameters to override for model training. The hyperparameters that you can\n      override are listed in the individual algorithms. For the list of supported algorithms, see\n        <a>aws-forecast-choosing-recipes</a>.</p>"
+            "smithy.api#documentation": "<p>An AWS Key Management Service (KMS) key and the AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access\n      the key.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.forecast#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>The optional metadata that you apply to the predictor to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
           }
         }
       }
@@ -831,22 +837,28 @@
     "com.amazonaws.forecast#DatasetImportJobSummary": {
       "type": "structure",
       "members": {
-        "Status": {
-          "target": "com.amazonaws.forecast#Status",
+        "DatasetImportJobArn": {
+          "target": "com.amazonaws.forecast#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The status of the dataset import job. The status is reflected in the status of the\n      dataset. For example, when the import job status is <code>CREATE_IN_PROGRESS</code>, the\n      status of the dataset is <code>UPDATE_IN_PROGRESS</code>. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset import job.</p>"
           }
         },
-        "LastModificationTime": {
-          "target": "com.amazonaws.forecast#Timestamp",
+        "DatasetImportJobName": {
+          "target": "com.amazonaws.forecast#Name",
           "traits": {
-            "smithy.api#documentation": "<p>The last time that the dataset was modified. The time depends on the status of the job, as\n      follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The same time as <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
+            "smithy.api#documentation": "<p>The name of the dataset import job.</p>"
           }
         },
         "DataSource": {
           "target": "com.amazonaws.forecast#DataSource",
           "traits": {
             "smithy.api#documentation": "<p>The location of the training data to import and an AWS Identity and Access Management (IAM) role that Amazon Forecast\n      can assume to access the data. The training data must be stored in an Amazon S3 bucket.</p>\n         <p>If encryption is used, <code>DataSource</code> includes an AWS Key Management Service (KMS) key.</p>"
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.forecast#Status",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the dataset import job. The status is reflected in the status of the\n      dataset. For example, when the import job status is <code>CREATE_IN_PROGRESS</code>, the\n      status of the dataset is <code>UPDATE_IN_PROGRESS</code>. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>"
           }
         },
         "Message": {
@@ -861,16 +873,10 @@
             "smithy.api#documentation": "<p>When the dataset import job was created.</p>"
           }
         },
-        "DatasetImportJobName": {
-          "target": "com.amazonaws.forecast#Name",
+        "LastModificationTime": {
+          "target": "com.amazonaws.forecast#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the dataset import job.</p>"
-          }
-        },
-        "DatasetImportJobArn": {
-          "target": "com.amazonaws.forecast#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset import job.</p>"
+            "smithy.api#documentation": "<p>The last time that the dataset was modified. The time depends on the status of the job, as\n      follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The same time as <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
           }
         }
       },
@@ -911,16 +917,16 @@
             "smithy.api#documentation": "<p>The domain associated with the dataset.</p>"
           }
         },
-        "LastModificationTime": {
-          "target": "com.amazonaws.forecast#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>When you create a dataset, <code>LastModificationTime</code> is the same as\n        <code>CreationTime</code>. While data is being imported to the dataset,\n        <code>LastModificationTime</code> is the current time of the <code>ListDatasets</code> call.\n      After a <a>CreateDatasetImportJob</a> operation has finished,\n        <code>LastModificationTime</code> is when the import job completed or failed.</p>"
-          }
-        },
         "CreationTime": {
           "target": "com.amazonaws.forecast#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>When the dataset was created.</p>"
+          }
+        },
+        "LastModificationTime": {
+          "target": "com.amazonaws.forecast#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>When you create a dataset, <code>LastModificationTime</code> is the same as\n        <code>CreationTime</code>. While data is being imported to the dataset,\n        <code>LastModificationTime</code> is the current time of the <code>ListDatasets</code> call.\n      After a <a>CreateDatasetImportJob</a> operation has finished,\n        <code>LastModificationTime</code> is when the import job completed or failed.</p>"
           }
         }
       },
@@ -1208,10 +1214,10 @@
     "com.amazonaws.forecast#DescribeDatasetGroupResponse": {
       "type": "structure",
       "members": {
-        "CreationTime": {
-          "target": "com.amazonaws.forecast#Timestamp",
+        "DatasetGroupName": {
+          "target": "com.amazonaws.forecast#Name",
           "traits": {
-            "smithy.api#documentation": "<p>When the dataset group was created.</p>"
+            "smithy.api#documentation": "<p>The name of the dataset group.</p>"
           }
         },
         "DatasetGroupArn": {
@@ -1220,34 +1226,34 @@
             "smithy.api#documentation": "<p>The ARN of the dataset group.</p>"
           }
         },
-        "Status": {
-          "target": "com.amazonaws.forecast#Status",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of the dataset group. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_PENDING</code>, <code>UPDATE_IN_PROGRESS</code>,\n            <code>UPDATE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <p>The <code>UPDATE</code> states apply when you call the <a>UpdateDatasetGroup</a> operation.</p>\n         <note>\n            <p>The <code>Status</code> of the dataset group must be <code>ACTIVE</code> before you can\n        use the dataset group to create a predictor.</p>\n         </note>"
-          }
-        },
-        "DatasetGroupName": {
-          "target": "com.amazonaws.forecast#Name",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the dataset group.</p>"
-          }
-        },
         "DatasetArns": {
           "target": "com.amazonaws.forecast#ArnList",
           "traits": {
             "smithy.api#documentation": "<p>An array of Amazon Resource Names (ARNs) of the datasets contained in the dataset\n      group.</p>"
           }
         },
-        "LastModificationTime": {
-          "target": "com.amazonaws.forecast#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>When the dataset group was created or last updated from a call to the <a>UpdateDatasetGroup</a> operation. While the dataset group is being updated,\n        <code>LastModificationTime</code> is the current time of the\n        <code>DescribeDatasetGroup</code> call.</p>"
-          }
-        },
         "Domain": {
           "target": "com.amazonaws.forecast#Domain",
           "traits": {
             "smithy.api#documentation": "<p>The domain associated with the dataset group.</p>"
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.forecast#Status",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the dataset group. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_PENDING</code>, <code>UPDATE_IN_PROGRESS</code>,\n            <code>UPDATE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <p>The <code>UPDATE</code> states apply when you call the <a>UpdateDatasetGroup</a> operation.</p>\n         <note>\n            <p>The <code>Status</code> of the dataset group must be <code>ACTIVE</code> before you can\n        use the dataset group to create a predictor.</p>\n         </note>"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.forecast#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>When the dataset group was created.</p>"
+          }
+        },
+        "LastModificationTime": {
+          "target": "com.amazonaws.forecast#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>When the dataset group was created or last updated from a call to the <a>UpdateDatasetGroup</a> operation. While the dataset group is being updated,\n        <code>LastModificationTime</code> is the current time of the\n        <code>DescribeDatasetGroup</code> call.</p>"
           }
         }
       }
@@ -1288,34 +1294,10 @@
     "com.amazonaws.forecast#DescribeDatasetImportJobResponse": {
       "type": "structure",
       "members": {
-        "CreationTime": {
-          "target": "com.amazonaws.forecast#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>When the dataset import job was created.</p>"
-          }
-        },
-        "DataSource": {
-          "target": "com.amazonaws.forecast#DataSource",
-          "traits": {
-            "smithy.api#documentation": "<p>The location of the training data to import and an AWS Identity and Access Management (IAM) role that Amazon Forecast\n      can assume to access the data.</p>\n         <p>If encryption is used, <code>DataSource</code> includes an AWS Key Management Service (KMS) key.</p>"
-          }
-        },
         "DatasetImportJobName": {
           "target": "com.amazonaws.forecast#Name",
           "traits": {
             "smithy.api#documentation": "<p>The name of the dataset import job.</p>"
-          }
-        },
-        "TimestampFormat": {
-          "target": "com.amazonaws.forecast#TimestampFormat",
-          "traits": {
-            "smithy.api#documentation": "<p>The format of timestamps in the dataset. The format that you specify depends on the\n        <code>DataFrequency</code> specified when the dataset was created. The following formats are\n      supported</p>\n         <ul>\n            <li>\n               <p>\"yyyy-MM-dd\"</p>\n               <p>For the following data frequencies: Y, M, W, and D</p>\n            </li>\n            <li>\n               <p>\"yyyy-MM-dd HH:mm:ss\"</p>\n               <p>For the following data frequencies: H, 30min, 15min, and 1min; and optionally, for: Y,\n          M, W, and D</p>\n            </li>\n         </ul>"
-          }
-        },
-        "Status": {
-          "target": "com.amazonaws.forecast#Status",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of the dataset import job. The status is reflected in the status of the\n      dataset. For example, when the import job status is <code>CREATE_IN_PROGRESS</code>, the\n      status of the dataset is <code>UPDATE_IN_PROGRESS</code>. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>"
           }
         },
         "DatasetImportJobArn": {
@@ -1324,10 +1306,28 @@
             "smithy.api#documentation": "<p>The ARN of the dataset import job.</p>"
           }
         },
-        "LastModificationTime": {
-          "target": "com.amazonaws.forecast#Timestamp",
+        "DatasetArn": {
+          "target": "com.amazonaws.forecast#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The last time that the dataset was modified. The time depends on the status of the job, as\n      follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The same time as <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset that the training data was imported\n      to.</p>"
+          }
+        },
+        "TimestampFormat": {
+          "target": "com.amazonaws.forecast#TimestampFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The format of timestamps in the dataset. The format that you specify depends on the\n        <code>DataFrequency</code> specified when the dataset was created. The following formats are\n      supported</p>\n         <ul>\n            <li>\n               <p>\"yyyy-MM-dd\"</p>\n               <p>For the following data frequencies: Y, M, W, and D</p>\n            </li>\n            <li>\n               <p>\"yyyy-MM-dd HH:mm:ss\"</p>\n               <p>For the following data frequencies: H, 30min, 15min, and 1min; and optionally, for: Y,\n          M, W, and D</p>\n            </li>\n         </ul>"
+          }
+        },
+        "DataSource": {
+          "target": "com.amazonaws.forecast#DataSource",
+          "traits": {
+            "smithy.api#documentation": "<p>The location of the training data to import and an AWS Identity and Access Management (IAM) role that Amazon Forecast\n      can assume to access the data.</p>\n         <p>If encryption is used, <code>DataSource</code> includes an AWS Key Management Service (KMS) key.</p>"
+          }
+        },
+        "FieldStatistics": {
+          "target": "com.amazonaws.forecast#FieldStatistics",
+          "traits": {
+            "smithy.api#documentation": "<p>Statistical information about each field in the input data.</p>"
           }
         },
         "DataSize": {
@@ -1336,10 +1336,10 @@
             "smithy.api#documentation": "<p>The size of the dataset in gigabytes (GB) after the import job has finished.</p>"
           }
         },
-        "DatasetArn": {
-          "target": "com.amazonaws.forecast#Arn",
+        "Status": {
+          "target": "com.amazonaws.forecast#Status",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset that the training data was imported\n      to.</p>"
+            "smithy.api#documentation": "<p>The status of the dataset import job. The status is reflected in the status of the\n      dataset. For example, when the import job status is <code>CREATE_IN_PROGRESS</code>, the\n      status of the dataset is <code>UPDATE_IN_PROGRESS</code>. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>"
           }
         },
         "Message": {
@@ -1348,10 +1348,16 @@
             "smithy.api#documentation": "<p>If an error occurred, an informational message about the error.</p>"
           }
         },
-        "FieldStatistics": {
-          "target": "com.amazonaws.forecast#FieldStatistics",
+        "CreationTime": {
+          "target": "com.amazonaws.forecast#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>Statistical information about each field in the input data.</p>"
+            "smithy.api#documentation": "<p>When the dataset import job was created.</p>"
+          }
+        },
+        "LastModificationTime": {
+          "target": "com.amazonaws.forecast#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The last time that the dataset was modified. The time depends on the status of the job, as\n      follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The same time as <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
           }
         }
       }
@@ -1371,10 +1377,16 @@
     "com.amazonaws.forecast#DescribeDatasetResponse": {
       "type": "structure",
       "members": {
-        "DataFrequency": {
-          "target": "com.amazonaws.forecast#Frequency",
+        "DatasetArn": {
+          "target": "com.amazonaws.forecast#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The frequency of data collection.</p>\n         <p>Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min (30 minutes),\n      15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute). For example,\n      \"M\" indicates every month and \"30min\" indicates every 30 minutes.</p>"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset.</p>"
+          }
+        },
+        "DatasetName": {
+          "target": "com.amazonaws.forecast#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the dataset.</p>"
           }
         },
         "Domain": {
@@ -1389,16 +1401,28 @@
             "smithy.api#documentation": "<p>The dataset type.</p>"
           }
         },
-        "DatasetArn": {
-          "target": "com.amazonaws.forecast#Arn",
+        "DataFrequency": {
+          "target": "com.amazonaws.forecast#Frequency",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset.</p>"
+            "smithy.api#documentation": "<p>The frequency of data collection.</p>\n         <p>Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min (30 minutes),\n      15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute). For example,\n      \"M\" indicates every month and \"30min\" indicates every 30 minutes.</p>"
+          }
+        },
+        "Schema": {
+          "target": "com.amazonaws.forecast#Schema",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of <code>SchemaAttribute</code> objects that specify the dataset fields. Each\n        <code>SchemaAttribute</code> specifies the name and data type of a field.</p>"
           }
         },
         "EncryptionConfig": {
           "target": "com.amazonaws.forecast#EncryptionConfig",
           "traits": {
             "smithy.api#documentation": "<p>The AWS Key Management Service (KMS) key and the AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access\n      the key.</p>"
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.forecast#Status",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the dataset. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_PENDING</code>, <code>UPDATE_IN_PROGRESS</code>,\n            <code>UPDATE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <p>The <code>UPDATE</code> states apply while data is imported to the dataset from a call to\n      the <a>CreateDatasetImportJob</a> operation and reflect the status of the dataset\n      import job. For example, when the import job status is <code>CREATE_IN_PROGRESS</code>, the\n      status of the dataset is <code>UPDATE_IN_PROGRESS</code>.</p>\n         <note>\n            <p>The <code>Status</code> of the dataset must be <code>ACTIVE</code> before you can import\n        training data.</p>\n         </note>"
           }
         },
         "CreationTime": {
@@ -1411,24 +1435,6 @@
           "target": "com.amazonaws.forecast#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>When you create a dataset, <code>LastModificationTime</code> is the same as\n        <code>CreationTime</code>. While data is being imported to the dataset,\n        <code>LastModificationTime</code> is the current time of the <code>DescribeDataset</code>\n      call. After a <a>CreateDatasetImportJob</a> operation has finished,\n        <code>LastModificationTime</code> is when the import job completed or failed.</p>"
-          }
-        },
-        "Status": {
-          "target": "com.amazonaws.forecast#Status",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of the dataset. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_PENDING</code>, <code>UPDATE_IN_PROGRESS</code>,\n            <code>UPDATE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <p>The <code>UPDATE</code> states apply while data is imported to the dataset from a call to\n      the <a>CreateDatasetImportJob</a> operation and reflect the status of the dataset\n      import job. For example, when the import job status is <code>CREATE_IN_PROGRESS</code>, the\n      status of the dataset is <code>UPDATE_IN_PROGRESS</code>.</p>\n         <note>\n            <p>The <code>Status</code> of the dataset must be <code>ACTIVE</code> before you can import\n        training data.</p>\n         </note>"
-          }
-        },
-        "DatasetName": {
-          "target": "com.amazonaws.forecast#Name",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the dataset.</p>"
-          }
-        },
-        "Schema": {
-          "target": "com.amazonaws.forecast#Schema",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of <code>SchemaAttribute</code> objects that specify the dataset fields. Each\n        <code>SchemaAttribute</code> specifies the name and data type of a field.</p>"
           }
         }
       }
@@ -1490,16 +1496,10 @@
     "com.amazonaws.forecast#DescribeForecastExportJobResponse": {
       "type": "structure",
       "members": {
-        "Message": {
-          "target": "com.amazonaws.forecast#Message",
-          "traits": {
-            "smithy.api#documentation": "<p>If an error occurred, an informational message about the error.</p>"
-          }
-        },
-        "ForecastArn": {
+        "ForecastExportJobArn": {
           "target": "com.amazonaws.forecast#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the exported forecast.</p>"
+            "smithy.api#documentation": "<p>The ARN of the forecast export job.</p>"
           }
         },
         "ForecastExportJobName": {
@@ -1508,10 +1508,10 @@
             "smithy.api#documentation": "<p>The name of the forecast export job.</p>"
           }
         },
-        "ForecastExportJobArn": {
+        "ForecastArn": {
           "target": "com.amazonaws.forecast#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the forecast export job.</p>"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the exported forecast.</p>"
           }
         },
         "Destination": {
@@ -1520,22 +1520,28 @@
             "smithy.api#documentation": "<p>The path to the Amazon Simple Storage Service (Amazon S3) bucket where the forecast is exported.</p>"
           }
         },
+        "Message": {
+          "target": "com.amazonaws.forecast#Message",
+          "traits": {
+            "smithy.api#documentation": "<p>If an error occurred, an informational message about the error.</p>"
+          }
+        },
         "Status": {
           "target": "com.amazonaws.forecast#Status",
           "traits": {
             "smithy.api#documentation": "<p>The status of the forecast export job. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the forecast export job must be <code>ACTIVE</code> before\n        you can access the forecast in your S3 bucket.</p>\n         </note>"
           }
         },
-        "LastModificationTime": {
-          "target": "com.amazonaws.forecast#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>When the last successful export job finished.</p>"
-          }
-        },
         "CreationTime": {
           "target": "com.amazonaws.forecast#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>When the forecast export job was created.</p>"
+          }
+        },
+        "LastModificationTime": {
+          "target": "com.amazonaws.forecast#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>When the last successful export job finished.</p>"
           }
         }
       }
@@ -1555,10 +1561,10 @@
     "com.amazonaws.forecast#DescribeForecastResponse": {
       "type": "structure",
       "members": {
-        "Status": {
-          "target": "com.amazonaws.forecast#String",
+        "ForecastArn": {
+          "target": "com.amazonaws.forecast#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The status of the forecast. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the forecast must be <code>ACTIVE</code> before you can query\n        or export the forecast.</p>\n         </note>"
+            "smithy.api#documentation": "<p>The forecast ARN as specified in the request.</p>"
           }
         },
         "ForecastName": {
@@ -1573,10 +1579,10 @@
             "smithy.api#documentation": "<p>The quantiles at which probabilistic forecasts were generated.</p>"
           }
         },
-        "Message": {
-          "target": "com.amazonaws.forecast#ErrorMessage",
+        "PredictorArn": {
+          "target": "com.amazonaws.forecast#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>If an error occurred, an informational message about the error.</p>"
+            "smithy.api#documentation": "<p>The ARN of the predictor used to generate the forecast.</p>"
           }
         },
         "DatasetGroupArn": {
@@ -1585,22 +1591,22 @@
             "smithy.api#documentation": "<p>The ARN of the dataset group that provided the data used to train the predictor.</p>"
           }
         },
+        "Status": {
+          "target": "com.amazonaws.forecast#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the forecast. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the forecast must be <code>ACTIVE</code> before you can query\n        or export the forecast.</p>\n         </note>"
+          }
+        },
+        "Message": {
+          "target": "com.amazonaws.forecast#ErrorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>If an error occurred, an informational message about the error.</p>"
+          }
+        },
         "CreationTime": {
           "target": "com.amazonaws.forecast#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>When the forecast creation task was created.</p>"
-          }
-        },
-        "PredictorArn": {
-          "target": "com.amazonaws.forecast#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the predictor used to generate the forecast.</p>"
-          }
-        },
-        "ForecastArn": {
-          "target": "com.amazonaws.forecast#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The forecast ARN as specified in the request.</p>"
           }
         },
         "LastModificationTime": {
@@ -1647,28 +1653,10 @@
     "com.amazonaws.forecast#DescribePredictorResponse": {
       "type": "structure",
       "members": {
-        "LastModificationTime": {
-          "target": "com.amazonaws.forecast#Timestamp",
+        "PredictorArn": {
+          "target": "com.amazonaws.forecast#Name",
           "traits": {
-            "smithy.api#documentation": "<p>Initially, the same as <code>CreationTime</code> (when the status is\n        <code>CREATE_PENDING</code>). This value is updated when training starts (when the status\n      changes to <code>CREATE_IN_PROGRESS</code>), and when training has completed (when the status\n      changes to <code>ACTIVE</code>) or fails (when the status changes to\n        <code>CREATE_FAILED</code>).</p>"
-          }
-        },
-        "Status": {
-          "target": "com.amazonaws.forecast#Status",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of the predictor. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_PENDING</code>, <code>UPDATE_IN_PROGRESS</code>,\n            <code>UPDATE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the predictor must be <code>ACTIVE</code> before you can use\n        the predictor to create a forecast.</p>\n         </note>"
-          }
-        },
-        "PerformAutoML": {
-          "target": "com.amazonaws.forecast#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether the predictor is set to perform AutoML.</p>"
-          }
-        },
-        "EncryptionConfig": {
-          "target": "com.amazonaws.forecast#EncryptionConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>An AWS Key Management Service (KMS) key and the AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access\n      the key.</p>"
+            "smithy.api#documentation": "<p>The ARN of the predictor.</p>"
           }
         },
         "PredictorName": {
@@ -1677,76 +1665,10 @@
             "smithy.api#documentation": "<p>The name of the predictor.</p>"
           }
         },
-        "InputDataConfig": {
-          "target": "com.amazonaws.forecast#InputDataConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>Describes the dataset group that contains the data to use to train the predictor.</p>"
-          }
-        },
-        "PredictorExecutionDetails": {
-          "target": "com.amazonaws.forecast#PredictorExecutionDetails",
-          "traits": {
-            "smithy.api#documentation": "<p>Details on the the status and results of the backtests performed to evaluate the accuracy\n      of the predictor. You specify the number of backtests to perform when you call the  operation.</p>"
-          }
-        },
-        "CreationTime": {
-          "target": "com.amazonaws.forecast#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>When the model training task was created.</p>"
-          }
-        },
-        "DatasetImportJobArns": {
-          "target": "com.amazonaws.forecast#ArnList",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of the ARNs of the dataset import jobs used to import training data for the\n      predictor.</p>"
-          }
-        },
-        "HPOConfig": {
-          "target": "com.amazonaws.forecast#HyperParameterTuningJobConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>The hyperparameter override values for the algorithm.</p>"
-          }
-        },
-        "FeaturizationConfig": {
-          "target": "com.amazonaws.forecast#FeaturizationConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>The featurization configuration.</p>"
-          }
-        },
-        "PredictorArn": {
-          "target": "com.amazonaws.forecast#Name",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the predictor.</p>"
-          }
-        },
-        "TrainingParameters": {
-          "target": "com.amazonaws.forecast#TrainingParameters",
-          "traits": {
-            "smithy.api#documentation": "<p>The default training parameters or overrides selected during model training. If using the\n      AutoML algorithm or if HPO is turned on while using the DeepAR+ algorithms, the optimized\n      values for the chosen hyperparameters are returned. For more information, see <a>aws-forecast-choosing-recipes</a>.</p>"
-          }
-        },
-        "EvaluationParameters": {
-          "target": "com.amazonaws.forecast#EvaluationParameters",
-          "traits": {
-            "smithy.api#documentation": "<p>Used to override the default evaluation parameters of the specified algorithm. Amazon Forecast\n      evaluates a predictor by splitting a dataset into training data and testing data. The\n      evaluation parameters define how to perform the split and the number of iterations.</p>"
-          }
-        },
-        "PerformHPO": {
-          "target": "com.amazonaws.forecast#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether the predictor is set to perform hyperparameter optimization (HPO).</p>"
-          }
-        },
         "AlgorithmArn": {
           "target": "com.amazonaws.forecast#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the algorithm used for model training.</p>"
-          }
-        },
-        "AutoMLAlgorithmArns": {
-          "target": "com.amazonaws.forecast#ArnList",
-          "traits": {
-            "smithy.api#documentation": "<p>When <code>PerformAutoML</code> is specified, the ARN of the chosen algorithm.</p>"
           }
         },
         "ForecastHorizon": {
@@ -1755,10 +1677,100 @@
             "smithy.api#documentation": "<p>The number of time-steps of the forecast. The forecast horizon is also called the\n      prediction length.</p>"
           }
         },
+        "ForecastTypes": {
+          "target": "com.amazonaws.forecast#ForecastTypes",
+          "traits": {
+            "smithy.api#documentation": "<p>The forecast types used during predictor training. Default value is <code>[\"0.1\",\"0.5\",\"0.9\"]</code>\n         </p>"
+          }
+        },
+        "PerformAutoML": {
+          "target": "com.amazonaws.forecast#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether the predictor is set to perform AutoML.</p>"
+          }
+        },
+        "PerformHPO": {
+          "target": "com.amazonaws.forecast#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether the predictor is set to perform hyperparameter optimization (HPO).</p>"
+          }
+        },
+        "TrainingParameters": {
+          "target": "com.amazonaws.forecast#TrainingParameters",
+          "traits": {
+            "smithy.api#documentation": "<p>The default training parameters or overrides selected during model training. When running\n      AutoML or choosing HPO with CNN-QR or DeepAR+, the optimized values for the chosen\n      hyperparameters are returned. For more information, see <a>aws-forecast-choosing-recipes</a>.</p>"
+          }
+        },
+        "EvaluationParameters": {
+          "target": "com.amazonaws.forecast#EvaluationParameters",
+          "traits": {
+            "smithy.api#documentation": "<p>Used to override the default evaluation parameters of the specified algorithm. Amazon Forecast\n      evaluates a predictor by splitting a dataset into training data and testing data. The\n      evaluation parameters define how to perform the split and the number of iterations.</p>"
+          }
+        },
+        "HPOConfig": {
+          "target": "com.amazonaws.forecast#HyperParameterTuningJobConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The hyperparameter override values for the algorithm.</p>"
+          }
+        },
+        "InputDataConfig": {
+          "target": "com.amazonaws.forecast#InputDataConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>Describes the dataset group that contains the data to use to train the predictor.</p>"
+          }
+        },
+        "FeaturizationConfig": {
+          "target": "com.amazonaws.forecast#FeaturizationConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The featurization configuration.</p>"
+          }
+        },
+        "EncryptionConfig": {
+          "target": "com.amazonaws.forecast#EncryptionConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>An AWS Key Management Service (KMS) key and the AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access\n      the key.</p>"
+          }
+        },
+        "PredictorExecutionDetails": {
+          "target": "com.amazonaws.forecast#PredictorExecutionDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Details on the the status and results of the backtests performed to evaluate the accuracy\n      of the predictor. You specify the number of backtests to perform when you call the  operation.</p>"
+          }
+        },
+        "DatasetImportJobArns": {
+          "target": "com.amazonaws.forecast#ArnList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of the ARNs of the dataset import jobs used to import training data for the\n      predictor.</p>"
+          }
+        },
+        "AutoMLAlgorithmArns": {
+          "target": "com.amazonaws.forecast#ArnList",
+          "traits": {
+            "smithy.api#documentation": "<p>When <code>PerformAutoML</code> is specified, the ARN of the chosen algorithm.</p>"
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.forecast#Status",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the predictor. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_PENDING</code>, <code>UPDATE_IN_PROGRESS</code>,\n            <code>UPDATE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the predictor must be <code>ACTIVE</code> before you can use\n        the predictor to create a forecast.</p>\n         </note>"
+          }
+        },
         "Message": {
           "target": "com.amazonaws.forecast#Message",
           "traits": {
             "smithy.api#documentation": "<p>If an error occurred, an informational message about the error.</p>"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.forecast#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>When the model training task was created.</p>"
+          }
+        },
+        "LastModificationTime": {
+          "target": "com.amazonaws.forecast#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>Initially, the same as <code>CreationTime</code> (when the status is\n        <code>CREATE_PENDING</code>). This value is updated when training starts (when the status\n      changes to <code>CREATE_IN_PROGRESS</code>), and when training has completed (when the status\n      changes to <code>ACTIVE</code>) or fails (when the status changes to\n        <code>CREATE_FAILED</code>).</p>"
           }
         }
       }
@@ -1807,17 +1819,17 @@
     "com.amazonaws.forecast#EncryptionConfig": {
       "type": "structure",
       "members": {
-        "KMSKeyArn": {
-          "target": "com.amazonaws.forecast#KMSKeyArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "RoleArn": {
           "target": "com.amazonaws.forecast#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the IAM role that Amazon Forecast can assume to access the AWS KMS key.</p>\n         <p>Passing a role across AWS accounts is not allowed. If you pass a role that isn't in your\n      account, you get an <code>InvalidInputException</code> error.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "KMSKeyArn": {
+          "target": "com.amazonaws.forecast#KMSKeyArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1828,6 +1840,38 @@
     },
     "com.amazonaws.forecast#ErrorMessage": {
       "type": "string"
+    },
+    "com.amazonaws.forecast#ErrorMetric": {
+      "type": "structure",
+      "members": {
+        "ForecastType": {
+          "target": "com.amazonaws.forecast#ForecastType",
+          "traits": {
+            "smithy.api#documentation": "<p>\n      Forecast types can be quantiles from 0.01 to 0.99 (by increments of 0.01), and the mean.\n    </p>"
+          }
+        },
+        "WAPE": {
+          "target": "com.amazonaws.forecast#Double",
+          "traits": {
+            "smithy.api#documentation": "<p>\n      The weighted absolute percentage error (WAPE).\n    </p>"
+          }
+        },
+        "RMSE": {
+          "target": "com.amazonaws.forecast#Double",
+          "traits": {
+            "smithy.api#documentation": "<p>\n      The root-mean-square error (RMSE).\n    </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>\n      Provides detailed error metrics to evaluate the performance of a predictor. This object is\n      part of the <a>Metrics</a> object.\n    </p>"
+      }
+    },
+    "com.amazonaws.forecast#ErrorMetrics": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.forecast#ErrorMetric"
+      }
     },
     "com.amazonaws.forecast#EvaluationParameters": {
       "type": "structure",
@@ -1915,16 +1959,16 @@
             "smithy.api#required": {}
           }
         },
-        "Featurizations": {
-          "target": "com.amazonaws.forecast#Featurizations",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of featurization (transformation) information for the fields of a dataset.</p>"
-          }
-        },
         "ForecastDimensions": {
           "target": "com.amazonaws.forecast#ForecastDimensions",
           "traits": {
             "smithy.api#documentation": "<p>An array of dimension (field) names that specify how to group the generated forecast.</p>\n         <p>For example, suppose that you are generating a forecast for item sales across all of\n      your stores, and your dataset contains a <code>store_id</code> field. If you want the sales\n      forecast for each item by store, you would specify <code>store_id</code> as the dimension.</p>\n         <p>All forecast dimensions specified in the <code>TARGET_TIME_SERIES</code> dataset don't\n      need to be specified in the <code>CreatePredictor</code> request.\n      All forecast dimensions specified in the <code>RELATED_TIME_SERIES</code> dataset must\n      be specified in the <code>CreatePredictor</code> request.</p>"
+          }
+        },
+        "Featurizations": {
+          "target": "com.amazonaws.forecast#Featurizations",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of featurization (transformation) information for the fields of a dataset.</p>"
           }
         }
       },
@@ -1945,7 +1989,7 @@
         "FeaturizationMethodParameters": {
           "target": "com.amazonaws.forecast#FeaturizationMethodParameters",
           "traits": {
-            "smithy.api#documentation": "<p>The method parameters (key-value pairs), which are a map of override parameters. Specify these parameters to override the default values. \n      Related Time Series attributes do not accept aggregation parameters.</p>\n         <p>The following list shows the parameters and their valid values for the \"filling\" featurization method for a <b>Target Time Series</b> dataset. Bold signifies the default\n      value.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aggregation</code>: <b>sum</b>, <code>avg</code>, <code>first</code>, <code>min</code>, <code>max</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>frontfill</code>: <b>none</b>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>middlefill</code>: <b>zero</b>, <code>nan</code> (not a number), <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>backfill</code>: <b>zero</b>, <code>nan</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code>\n               </p>\n            </li>\n         </ul>\n\n         <p>The following list shows the parameters and their valid values for a <b>Related Time Series</b> featurization method (there are no defaults):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>middlefill</code>: <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>backfill</code>: <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>futurefill</code>: <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code>\n               </p>\n            </li>\n         </ul>"
+            "smithy.api#documentation": "<p>The method parameters (key-value pairs), which are a map of override parameters. Specify these parameters to override the default values. \n      Related Time Series attributes do not accept aggregation parameters.</p>\n         <p>The following list shows the parameters and their valid values for the \"filling\" featurization method for a <b>Target Time Series</b> dataset. Bold signifies the default\n      value.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aggregation</code>: <b>sum</b>, <code>avg</code>, <code>first</code>, <code>min</code>, <code>max</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>frontfill</code>: <b>none</b>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>middlefill</code>: <b>zero</b>, <code>nan</code> (not a number), <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>backfill</code>: <b>zero</b>, <code>nan</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code>\n               </p>\n            </li>\n         </ul>\n\n         <p>The following list shows the parameters and their valid values for a <b>Related Time Series</b> featurization method (there are no defaults):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>middlefill</code>: <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>backfill</code>: <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>futurefill</code>: <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code>\n               </p>\n            </li>\n         </ul>\n         <p>To set a filling method to a specific value, set the fill parameter to <code>value</code>\n      and define the value in a corresponding <code>_value</code> parameter. For example, to set\n      backfilling to a value of 2, include the following: <code>\"backfill\": \"value\"</code> and\n        <code>\"backfill_value\":\"2\"</code>. </p>"
           }
         }
       },
@@ -2015,6 +2059,13 @@
     "com.amazonaws.forecast#Filter": {
       "type": "structure",
       "members": {
+        "Key": {
+          "target": "com.amazonaws.forecast#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the parameter to filter on.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "Value": {
           "target": "com.amazonaws.forecast#Arn",
           "traits": {
@@ -2026,13 +2077,6 @@
           "target": "com.amazonaws.forecast#FilterConditionString",
           "traits": {
             "smithy.api#documentation": "<p>The condition to apply. To include the objects that match the statement, specify\n      <code>IS</code>. To exclude matching objects, specify <code>IS_NOT</code>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Key": {
-          "target": "com.amazonaws.forecast#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the parameter to filter on.</p>",
             "smithy.api#required": {}
           }
         }
@@ -2077,34 +2121,16 @@
     "com.amazonaws.forecast#ForecastExportJobSummary": {
       "type": "structure",
       "members": {
-        "Message": {
-          "target": "com.amazonaws.forecast#ErrorMessage",
-          "traits": {
-            "smithy.api#documentation": "<p>If an error occurred, an informational message about the error.</p>"
-          }
-        },
-        "LastModificationTime": {
-          "target": "com.amazonaws.forecast#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>When the last successful export job finished.</p>"
-          }
-        },
-        "Status": {
-          "target": "com.amazonaws.forecast#Status",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of the forecast export job. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the forecast export job must be <code>ACTIVE</code> before\n        you can access the forecast in your S3 bucket.</p>\n         </note>"
-          }
-        },
-        "CreationTime": {
-          "target": "com.amazonaws.forecast#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>When the forecast export job was created.</p>"
-          }
-        },
         "ForecastExportJobArn": {
           "target": "com.amazonaws.forecast#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the forecast export job.</p>"
+          }
+        },
+        "ForecastExportJobName": {
+          "target": "com.amazonaws.forecast#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the forecast export job.</p>"
           }
         },
         "Destination": {
@@ -2113,10 +2139,28 @@
             "smithy.api#documentation": "<p>The path to the Amazon Simple Storage Service (Amazon S3) bucket where the forecast is exported.</p>"
           }
         },
-        "ForecastExportJobName": {
-          "target": "com.amazonaws.forecast#Name",
+        "Status": {
+          "target": "com.amazonaws.forecast#Status",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the forecast export job.</p>"
+            "smithy.api#documentation": "<p>The status of the forecast export job. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the forecast export job must be <code>ACTIVE</code> before\n        you can access the forecast in your S3 bucket.</p>\n         </note>"
+          }
+        },
+        "Message": {
+          "target": "com.amazonaws.forecast#ErrorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>If an error occurred, an informational message about the error.</p>"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.forecast#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>When the forecast export job was created.</p>"
+          }
+        },
+        "LastModificationTime": {
+          "target": "com.amazonaws.forecast#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>When the last successful export job finished.</p>"
           }
         }
       },
@@ -2133,10 +2177,10 @@
     "com.amazonaws.forecast#ForecastSummary": {
       "type": "structure",
       "members": {
-        "Status": {
-          "target": "com.amazonaws.forecast#Status",
+        "ForecastArn": {
+          "target": "com.amazonaws.forecast#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The status of the forecast. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the forecast must be <code>ACTIVE</code> before you can query\n        or export the forecast.</p>\n         </note>"
+            "smithy.api#documentation": "<p>The ARN of the forecast.</p>"
           }
         },
         "ForecastName": {
@@ -2145,28 +2189,10 @@
             "smithy.api#documentation": "<p>The name of the forecast.</p>"
           }
         },
-        "LastModificationTime": {
-          "target": "com.amazonaws.forecast#Timestamp",
+        "PredictorArn": {
+          "target": "com.amazonaws.forecast#String",
           "traits": {
-            "smithy.api#documentation": "<p>Initially, the same as <code>CreationTime</code> (status is <code>CREATE_PENDING</code>).\n      Updated when inference (creating the forecast) starts (status changed to\n        <code>CREATE_IN_PROGRESS</code>), and when inference is complete (status changed to\n        <code>ACTIVE</code>) or fails (status changed to <code>CREATE_FAILED</code>).</p>"
-          }
-        },
-        "CreationTime": {
-          "target": "com.amazonaws.forecast#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>When the forecast creation task was created.</p>"
-          }
-        },
-        "ForecastArn": {
-          "target": "com.amazonaws.forecast#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the forecast.</p>"
-          }
-        },
-        "Message": {
-          "target": "com.amazonaws.forecast#ErrorMessage",
-          "traits": {
-            "smithy.api#documentation": "<p>If an error occurred, an informational message about the error.</p>"
+            "smithy.api#documentation": "<p>The ARN of the predictor used to generate the forecast.</p>"
           }
         },
         "DatasetGroupArn": {
@@ -2175,10 +2201,28 @@
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset group that provided the data used to train\n      the predictor.</p>"
           }
         },
-        "PredictorArn": {
-          "target": "com.amazonaws.forecast#String",
+        "Status": {
+          "target": "com.amazonaws.forecast#Status",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the predictor used to generate the forecast.</p>"
+            "smithy.api#documentation": "<p>The status of the forecast. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the forecast must be <code>ACTIVE</code> before you can query\n        or export the forecast.</p>\n         </note>"
+          }
+        },
+        "Message": {
+          "target": "com.amazonaws.forecast#ErrorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>If an error occurred, an informational message about the error.</p>"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.forecast#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>When the forecast creation task was created.</p>"
+          }
+        },
+        "LastModificationTime": {
+          "target": "com.amazonaws.forecast#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>Initially, the same as <code>CreationTime</code> (status is <code>CREATE_PENDING</code>).\n      Updated when inference (creating the forecast) starts (status changed to\n        <code>CREATE_IN_PROGRESS</code>), and when inference is complete (status changed to\n        <code>ACTIVE</code>) or fails (status changed to <code>CREATE_FAILED</code>).</p>"
           }
         }
       },
@@ -2236,7 +2280,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Provides metrics on the accuracy of the models that were trained by the\n      <a>CreatePredictor</a> operation. Use metrics to see how well the model performed\n      and to decide whether to use the predictor to generate a forecast. For more information, see\n      <a>metrics</a>.</p>\n         <p>This operation generates metrics for each backtest window that was evaluated. The number of backtest windows\n      (<code>NumberOfBacktestWindows</code>) is specified using the\n      <a>EvaluationParameters</a> object, which is optionally\n      included in the <code>CreatePredictor</code> request. If\n      <code>NumberOfBacktestWindows</code> isn't specified, the number defaults to one.</p>\n         <p>The parameters of the <code>filling</code> method determine which items contribute to\n      the metrics. If you want all items to contribute, specify <code>zero</code>.\n      If you want only those items that have complete data in the range being evaluated to\n      contribute, specify <code>nan</code>.\n      For more information, see <a>FeaturizationMethod</a>.</p>\n      \n         <note>\n            <p>Before you can get accuracy metrics, the <code>Status</code> of the predictor must be\n        <code>ACTIVE</code>, signifying that training has completed.\n        To get the status, use the <a>DescribePredictor</a> operation.</p>\n         </note>",
+        "smithy.api#documentation": "<p>Provides metrics on the accuracy of the models that were trained by the <a>CreatePredictor</a> operation. Use metrics to see how well the model performed and\n      to decide whether to use the predictor to generate a forecast. For more information, see\n        <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/metrics.html\">Predictor\n        Metrics</a>.</p>\n         <p>This operation generates metrics for each backtest window that was evaluated. The number of backtest windows\n      (<code>NumberOfBacktestWindows</code>) is specified using the\n      <a>EvaluationParameters</a> object, which is optionally\n      included in the <code>CreatePredictor</code> request. If\n      <code>NumberOfBacktestWindows</code> isn't specified, the number defaults to one.</p>\n         <p>The parameters of the <code>filling</code> method determine which items contribute to\n      the metrics. If you want all items to contribute, specify <code>zero</code>.\n      If you want only those items that have complete data in the range being evaluated to\n      contribute, specify <code>nan</code>.\n      For more information, see <a>FeaturizationMethod</a>.</p>\n      \n         <note>\n            <p>Before you can get accuracy metrics, the <code>Status</code> of the predictor must be\n        <code>ACTIVE</code>, signifying that training has completed.\n        To get the status, use the <a>DescribePredictor</a> operation.</p>\n         </note>",
         "smithy.api#idempotent": {}
       }
     },
@@ -2307,10 +2351,11 @@
     "com.amazonaws.forecast#IntegerParameterRange": {
       "type": "structure",
       "members": {
-        "ScalingType": {
-          "target": "com.amazonaws.forecast#ScalingType",
+        "Name": {
+          "target": "com.amazonaws.forecast#Name",
           "traits": {
-            "smithy.api#documentation": "<p>The scale that hyperparameter tuning uses to search the hyperparameter range.\n      Valid values:</p>\n         <dl>\n            <dt>Auto</dt>\n            <dd>\n               <p>Amazon Forecast hyperparameter tuning chooses the best scale for the hyperparameter.</p>\n            </dd>\n            <dt>Linear</dt>\n            <dd>\n               <p>Hyperparameter tuning searches the values in the hyperparameter range by using a\n            linear scale.</p>\n            </dd>\n            <dt>Logarithmic</dt>\n            <dd>\n               <p>Hyperparameter tuning searches the values in the hyperparameter range by using a\n            logarithmic scale.</p>\n               <p>Logarithmic scaling works only for ranges that have values greater than 0.</p>\n            </dd>\n            <dt>ReverseLogarithmic</dt>\n            <dd>\n               <p>Not supported for <code>IntegerParameterRange</code>.</p>\n               <p>Reverse logarithmic scaling works only for ranges that are entirely within the\n            range 0 <= x < 1.0.</p>\n            </dd>\n         </dl>\n         <p>For information about choosing a hyperparameter scale, see\n      <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type\">Hyperparameter Scaling</a>.\n      One of the following values:</p>"
+            "smithy.api#documentation": "<p>The name of the hyperparameter to tune.</p>",
+            "smithy.api#required": {}
           }
         },
         "MaxValue": {
@@ -2320,18 +2365,17 @@
             "smithy.api#required": {}
           }
         },
-        "Name": {
-          "target": "com.amazonaws.forecast#Name",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the hyperparameter to tune.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "MinValue": {
           "target": "com.amazonaws.forecast#Integer",
           "traits": {
             "smithy.api#documentation": "<p>The minimum tunable value of the hyperparameter.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "ScalingType": {
+          "target": "com.amazonaws.forecast#ScalingType",
+          "traits": {
+            "smithy.api#documentation": "<p>The scale that hyperparameter tuning uses to search the hyperparameter range.\n      Valid values:</p>\n         <dl>\n            <dt>Auto</dt>\n            <dd>\n               <p>Amazon Forecast hyperparameter tuning chooses the best scale for the hyperparameter.</p>\n            </dd>\n            <dt>Linear</dt>\n            <dd>\n               <p>Hyperparameter tuning searches the values in the hyperparameter range by using a\n            linear scale.</p>\n            </dd>\n            <dt>Logarithmic</dt>\n            <dd>\n               <p>Hyperparameter tuning searches the values in the hyperparameter range by using a\n            logarithmic scale.</p>\n               <p>Logarithmic scaling works only for ranges that have values greater than 0.</p>\n            </dd>\n            <dt>ReverseLogarithmic</dt>\n            <dd>\n               <p>Not supported for <code>IntegerParameterRange</code>.</p>\n               <p>Reverse logarithmic scaling works only for ranges that are entirely within the\n            range 0 <= x < 1.0.</p>\n            </dd>\n         </dl>\n         <p>For information about choosing a hyperparameter scale, see\n      <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type\">Hyperparameter Scaling</a>.\n      One of the following values:</p>"
           }
         }
       },
@@ -2427,16 +2471,16 @@
     "com.amazonaws.forecast#ListDatasetGroupsRequest": {
       "type": "structure",
       "members": {
-        "MaxResults": {
-          "target": "com.amazonaws.forecast#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of items to return in the response.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.forecast#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>If the result of the previous request was truncated, the response includes a\n        <code>NextToken</code>. To retrieve the next set of results, use the token in the next\n      request. Tokens expire after 24 hours.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.forecast#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of items to return in the response.</p>"
           }
         }
       }
@@ -2488,10 +2532,10 @@
     "com.amazonaws.forecast#ListDatasetImportJobsRequest": {
       "type": "structure",
       "members": {
-        "Filters": {
-          "target": "com.amazonaws.forecast#Filters",
+        "NextToken": {
+          "target": "com.amazonaws.forecast#NextToken",
           "traits": {
-            "smithy.api#documentation": "<p>An array of filters. For each filter, you provide a condition and a match statement. The\n      condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include\n      or exclude the datasets that match the statement from the list, respectively. The match\n      statement consists of a key and a value.</p>\n         <p>\n            <b>Filter properties</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Condition</code> - The condition to apply. Valid values are <code>IS</code> and\n            <code>IS_NOT</code>. To include the datasets that match the statement, specify\n            <code>IS</code>. To exclude matching datasets, specify <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n            <code>DatasetArn</code> and <code>Status</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Value</code> - The value to match.</p>\n            </li>\n         </ul>\n         <p>For example, to list all dataset import jobs whose status is ACTIVE, you specify the\n      following filter:</p>\n         <p>\n            <code>\"Filters\": [ { \"Condition\": \"IS\", \"Key\": \"Status\", \"Value\": \"ACTIVE\" }\n      ]</code>\n         </p>"
+            "smithy.api#documentation": "<p>If the result of the previous request was truncated, the response includes a\n        <code>NextToken</code>. To retrieve the next set of results, use the token in the next\n      request. Tokens expire after 24 hours.</p>"
           }
         },
         "MaxResults": {
@@ -2500,10 +2544,10 @@
             "smithy.api#documentation": "<p>The number of items to return in the response.</p>"
           }
         },
-        "NextToken": {
-          "target": "com.amazonaws.forecast#NextToken",
+        "Filters": {
+          "target": "com.amazonaws.forecast#Filters",
           "traits": {
-            "smithy.api#documentation": "<p>If the result of the previous request was truncated, the response includes a\n        <code>NextToken</code>. To retrieve the next set of results, use the token in the next\n      request. Tokens expire after 24 hours.</p>"
+            "smithy.api#documentation": "<p>An array of filters. For each filter, you provide a condition and a match statement. The\n      condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include\n      or exclude the datasets that match the statement from the list, respectively. The match\n      statement consists of a key and a value.</p>\n         <p>\n            <b>Filter properties</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Condition</code> - The condition to apply. Valid values are <code>IS</code> and\n            <code>IS_NOT</code>. To include the datasets that match the statement, specify\n            <code>IS</code>. To exclude matching datasets, specify <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n            <code>DatasetArn</code> and <code>Status</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Value</code> - The value to match.</p>\n            </li>\n         </ul>\n         <p>For example, to list all dataset import jobs whose status is ACTIVE, you specify the\n      following filter:</p>\n         <p>\n            <code>\"Filters\": [ { \"Condition\": \"IS\", \"Key\": \"Status\", \"Value\": \"ACTIVE\" }\n      ]</code>\n         </p>"
           }
         }
       }
@@ -2552,16 +2596,16 @@
     "com.amazonaws.forecast#ListDatasetsRequest": {
       "type": "structure",
       "members": {
-        "MaxResults": {
-          "target": "com.amazonaws.forecast#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of items to return in the response.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.forecast#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>If the result of the previous request was truncated, the response includes a\n        <code>NextToken</code>. To retrieve the next set of results, use the token in the next\n      request. Tokens expire after 24 hours.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.forecast#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of items to return in the response.</p>"
           }
         }
       }
@@ -2569,16 +2613,16 @@
     "com.amazonaws.forecast#ListDatasetsResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.forecast#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>If the response is truncated, Amazon Forecast returns this token. To retrieve the next set of\n      results, use the token in the next request.</p>"
-          }
-        },
         "Datasets": {
           "target": "com.amazonaws.forecast#Datasets",
           "traits": {
             "smithy.api#documentation": "<p>An array of objects that summarize each dataset's properties.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.forecast#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If the response is truncated, Amazon Forecast returns this token. To retrieve the next set of\n      results, use the token in the next request.</p>"
           }
         }
       }
@@ -2613,6 +2657,12 @@
     "com.amazonaws.forecast#ListForecastExportJobsRequest": {
       "type": "structure",
       "members": {
+        "NextToken": {
+          "target": "com.amazonaws.forecast#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If the result of the previous request was truncated, the response includes a\n        <code>NextToken</code>. To retrieve the next set of results, use the token in the next\n      request. Tokens expire after 24 hours.</p>"
+          }
+        },
         "MaxResults": {
           "target": "com.amazonaws.forecast#MaxResults",
           "traits": {
@@ -2624,28 +2674,22 @@
           "traits": {
             "smithy.api#documentation": "<p>An array of filters. For each filter, you provide a condition and a match statement. The\n      condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include\n      or exclude the forecast export jobs that match the statement from the list, respectively. The\n      match statement consists of a key and a value.</p>\n         <p>\n            <b>Filter properties</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Condition</code> - The condition to apply. Valid values are <code>IS</code> and\n            <code>IS_NOT</code>. To include the forecast export jobs that match the statement,\n          specify <code>IS</code>. To exclude matching forecast export jobs, specify\n            <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n            <code>ForecastArn</code> and <code>Status</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Value</code> - The value to match.</p>\n            </li>\n         </ul>\n         <p>For example, to list all jobs that export a forecast named\n        <i>electricityforecast</i>, specify the following filter:</p>\n         <p>\n            <code>\"Filters\": [ { \"Condition\": \"IS\", \"Key\": \"ForecastArn\", \"Value\":\n        \"arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityforecast\" } ]</code>\n         </p>"
           }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.forecast#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>If the result of the previous request was truncated, the response includes a\n        <code>NextToken</code>. To retrieve the next set of results, use the token in the next\n      request. Tokens expire after 24 hours.</p>"
-          }
         }
       }
     },
     "com.amazonaws.forecast#ListForecastExportJobsResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.forecast#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>If the response is truncated, Amazon Forecast returns this token. To retrieve the next set of\n      results, use the token in the next request.</p>"
-          }
-        },
         "ForecastExportJobs": {
           "target": "com.amazonaws.forecast#ForecastExportJobs",
           "traits": {
             "smithy.api#documentation": "<p>An array of objects that summarize each export job's properties.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.forecast#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If the response is truncated, Amazon Forecast returns this token. To retrieve the next set of\n      results, use the token in the next request.</p>"
           }
         }
       }
@@ -2680,16 +2724,16 @@
     "com.amazonaws.forecast#ListForecastsRequest": {
       "type": "structure",
       "members": {
-        "MaxResults": {
-          "target": "com.amazonaws.forecast#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of items to return in the response.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.forecast#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>If the result of the previous request was truncated, the response includes a\n        <code>NextToken</code>. To retrieve the next set of results, use the token in the next\n      request. Tokens expire after 24 hours.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.forecast#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of items to return in the response.</p>"
           }
         },
         "Filters": {
@@ -2843,16 +2887,25 @@
     "com.amazonaws.forecast#Metrics": {
       "type": "structure",
       "members": {
+        "RMSE": {
+          "target": "com.amazonaws.forecast#Double",
+          "traits": {
+            "smithy.api#deprecated": {
+              "message": "This property is deprecated, please refer to ErrorMetrics for both RMSE and WAPE"
+            },
+            "smithy.api#documentation": "<p>The root-mean-square error (RMSE).</p>"
+          }
+        },
         "WeightedQuantileLosses": {
           "target": "com.amazonaws.forecast#WeightedQuantileLosses",
           "traits": {
             "smithy.api#documentation": "<p>An array of weighted quantile losses. Quantiles divide a probability distribution into\n      regions of equal probability. The distribution in this case is the loss function.</p>"
           }
         },
-        "RMSE": {
-          "target": "com.amazonaws.forecast#Double",
+        "ErrorMetrics": {
+          "target": "com.amazonaws.forecast#ErrorMetrics",
           "traits": {
-            "smithy.api#documentation": "<p>The root mean square error (RMSE).</p>"
+            "smithy.api#documentation": "<p>\n      Provides detailed error metrics on forecast type, root-mean square-error (RMSE), and weighted\n      average percentage error (WAPE).\n    </p>"
           }
         }
       },
@@ -2898,16 +2951,16 @@
             "smithy.api#documentation": "<p>Specifies the tunable range for each categorical hyperparameter.</p>"
           }
         },
-        "IntegerParameterRanges": {
-          "target": "com.amazonaws.forecast#IntegerParameterRanges",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the tunable range for each integer hyperparameter.</p>"
-          }
-        },
         "ContinuousParameterRanges": {
           "target": "com.amazonaws.forecast#ContinuousParameterRanges",
           "traits": {
             "smithy.api#documentation": "<p>Specifies the tunable range for each continuous hyperparameter.</p>"
+          }
+        },
+        "IntegerParameterRanges": {
+          "target": "com.amazonaws.forecast#IntegerParameterRanges",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the tunable range for each integer hyperparameter.</p>"
           }
         }
       },
@@ -2934,16 +2987,16 @@
     "com.amazonaws.forecast#PredictorExecution": {
       "type": "structure",
       "members": {
-        "TestWindows": {
-          "target": "com.amazonaws.forecast#TestWindowDetails",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of test windows used to evaluate the algorithm. The\n        <code>NumberOfBacktestWindows</code> from the \n      object determines the number of windows in the array.</p>"
-          }
-        },
         "AlgorithmArn": {
           "target": "com.amazonaws.forecast#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the algorithm used to test the predictor.</p>"
+          }
+        },
+        "TestWindows": {
+          "target": "com.amazonaws.forecast#TestWindowDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of test windows used to evaluate the algorithm. The\n        <code>NumberOfBacktestWindows</code> from the \n      object determines the number of windows in the array.</p>"
           }
         }
       },
@@ -2980,10 +3033,22 @@
     "com.amazonaws.forecast#PredictorSummary": {
       "type": "structure",
       "members": {
+        "PredictorArn": {
+          "target": "com.amazonaws.forecast#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the predictor.</p>"
+          }
+        },
         "PredictorName": {
           "target": "com.amazonaws.forecast#Name",
           "traits": {
             "smithy.api#documentation": "<p>The name of the predictor.</p>"
+          }
+        },
+        "DatasetGroupArn": {
+          "target": "com.amazonaws.forecast#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset group that contains the data used to train\n      the predictor.</p>"
           }
         },
         "Status": {
@@ -2998,28 +3063,16 @@
             "smithy.api#documentation": "<p>If an error occurred, an informational message about the error.</p>"
           }
         },
-        "LastModificationTime": {
-          "target": "com.amazonaws.forecast#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>Initially, the same as <code>CreationTime</code> (status is <code>CREATE_PENDING</code>).\n      Updated when training starts (status changed to <code>CREATE_IN_PROGRESS</code>), and when\n      training is complete (status changed to <code>ACTIVE</code>) or fails (status changed to\n        <code>CREATE_FAILED</code>).</p>"
-          }
-        },
         "CreationTime": {
           "target": "com.amazonaws.forecast#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>When the model training task was created.</p>"
           }
         },
-        "PredictorArn": {
-          "target": "com.amazonaws.forecast#Arn",
+        "LastModificationTime": {
+          "target": "com.amazonaws.forecast#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the predictor.</p>"
-          }
-        },
-        "DatasetGroupArn": {
-          "target": "com.amazonaws.forecast#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset group that contains the data used to train\n      the predictor.</p>"
+            "smithy.api#documentation": "<p>Initially, the same as <code>CreationTime</code> (status is <code>CREATE_PENDING</code>).\n      Updated when training starts (status changed to <code>CREATE_IN_PROGRESS</code>), and when\n      training is complete (status changed to <code>ACTIVE</code>) or fails (status changed to\n        <code>CREATE_FAILED</code>).</p>"
           }
         }
       },
@@ -3082,17 +3135,17 @@
             "smithy.api#required": {}
           }
         },
-        "KMSKeyArn": {
-          "target": "com.amazonaws.forecast#KMSKeyArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key.</p>"
-          }
-        },
         "RoleArn": {
           "target": "com.amazonaws.forecast#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the Amazon S3\n      bucket or files. If you provide a value for the <code>KMSKeyArn</code> key, the role must\n      allow access to the key.</p>\n         <p>Passing a role across AWS accounts is not allowed. If you pass a role that isn't in your\n      account, you get an <code>InvalidInputException</code> error.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "KMSKeyArn": {
+          "target": "com.amazonaws.forecast#KMSKeyArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key.</p>"
           }
         }
       },
@@ -3146,16 +3199,16 @@
     "com.amazonaws.forecast#SchemaAttribute": {
       "type": "structure",
       "members": {
-        "AttributeType": {
-          "target": "com.amazonaws.forecast#AttributeType",
-          "traits": {
-            "smithy.api#documentation": "<p>The data type of the field.</p>"
-          }
-        },
         "AttributeName": {
           "target": "com.amazonaws.forecast#Name",
           "traits": {
             "smithy.api#documentation": "<p>The name of the dataset field.</p>"
+          }
+        },
+        "AttributeType": {
+          "target": "com.amazonaws.forecast#AttributeType",
+          "traits": {
+            "smithy.api#documentation": "<p>The data type of the field.</p>"
           }
         }
       },
@@ -3184,30 +3237,6 @@
             "smithy.api#documentation": "<p>The number of values in the field.</p>"
           }
         },
-        "Stddev": {
-          "target": "com.amazonaws.forecast#Double",
-          "traits": {
-            "smithy.api#documentation": "<p>For a numeric field, the standard deviation.</p>"
-          }
-        },
-        "Min": {
-          "target": "com.amazonaws.forecast#String",
-          "traits": {
-            "smithy.api#documentation": "<p>For a numeric field, the minimum value in the field.</p>"
-          }
-        },
-        "Avg": {
-          "target": "com.amazonaws.forecast#Double",
-          "traits": {
-            "smithy.api#documentation": "<p>For a numeric field, the average value in the field.</p>"
-          }
-        },
-        "Max": {
-          "target": "com.amazonaws.forecast#String",
-          "traits": {
-            "smithy.api#documentation": "<p>For a numeric field, the maximum value in the field.</p>"
-          }
-        },
         "CountDistinct": {
           "target": "com.amazonaws.forecast#Integer",
           "traits": {
@@ -3224,6 +3253,30 @@
           "target": "com.amazonaws.forecast#Integer",
           "traits": {
             "smithy.api#documentation": "<p>The number of NAN (not a number) values in the field.</p>"
+          }
+        },
+        "Min": {
+          "target": "com.amazonaws.forecast#String",
+          "traits": {
+            "smithy.api#documentation": "<p>For a numeric field, the minimum value in the field.</p>"
+          }
+        },
+        "Max": {
+          "target": "com.amazonaws.forecast#String",
+          "traits": {
+            "smithy.api#documentation": "<p>For a numeric field, the maximum value in the field.</p>"
+          }
+        },
+        "Avg": {
+          "target": "com.amazonaws.forecast#Double",
+          "traits": {
+            "smithy.api#documentation": "<p>For a numeric field, the average value in the field.</p>"
+          }
+        },
+        "Stddev": {
+          "target": "com.amazonaws.forecast#Double",
+          "traits": {
+            "smithy.api#documentation": "<p>For a numeric field, the standard deviation.</p>"
           }
         }
       },
@@ -3253,23 +3306,23 @@
     "com.amazonaws.forecast#SupplementaryFeature": {
       "type": "structure",
       "members": {
-        "Value": {
-          "target": "com.amazonaws.forecast#Value",
-          "traits": {
-            "smithy.api#documentation": "<p>One of the following 2 letter country codes:</p>\n         <ul>\n            <li>\n               <p>\"AR\" - ARGENTINA</p>\n            </li>\n            <li>\n               <p>\"AT\" - AUSTRIA</p>\n            </li>\n            <li>\n               <p>\"AU\" - AUSTRALIA</p>\n            </li>\n            <li>\n               <p>\"BE\" - BELGIUM</p>\n            </li>\n            <li>\n               <p>\"BR\" - BRAZIL</p>\n            </li>\n            <li>\n               <p>\"CA\" - CANADA</p>\n            </li>\n            <li>\n               <p>\"CN\" - CHINA</p>\n            </li>\n            <li>\n               <p>\"CZ\" - CZECH REPUBLIC</p>\n            </li>\n            <li>\n               <p>\"DK\" - DENMARK</p>\n            </li>\n            <li>\n               <p>\"EC\" - ECUADOR</p>\n            </li>\n            <li>\n               <p>\"FI\" - FINLAND</p>\n            </li>\n            <li>\n               <p>\"FR\" - FRANCE</p>\n            </li>\n            <li>\n               <p>\"DE\" - GERMANY</p>\n            </li>\n            <li>\n               <p>\"HU\" - HUNGARY</p>\n            </li>\n            <li>\n               <p>\"IE\" - IRELAND</p>\n            </li>\n            <li>\n               <p>\"IN\" - INDIA</p>\n            </li>\n            <li>\n               <p>\"IT\" - ITALY</p>\n            </li>\n            <li>\n               <p>\"JP\" - JAPAN</p>\n            </li>\n            <li>\n               <p>\"KR\" - KOREA</p>\n            </li>\n            <li>\n               <p>\"LU\" - LUXEMBOURG</p>\n            </li>\n            <li>\n               <p>\"MX\" - MEXICO</p>\n            </li>\n            <li>\n               <p>\"NL\" - NETHERLANDS</p>\n            </li>\n            <li>\n               <p>\"NO\" - NORWAY</p>\n            </li>\n            <li>\n               <p>\"PL\" - POLAND</p>\n            </li>\n            <li>\n               <p>\"PT\" - PORTUGAL</p>\n            </li>\n            <li>\n               <p>\"RU\" - RUSSIA</p>\n            </li>\n            <li>\n               <p>\"ZA\" - SOUTH AFRICA</p>\n            </li>\n            <li>\n               <p>\"ES\" - SPAIN</p>\n            </li>\n            <li>\n               <p>\"SE\" - SWEDEN</p>\n            </li>\n            <li>\n               <p>\"CH\" - SWITZERLAND</p>\n            </li>\n            <li>\n               <p>\"US\" - UNITED STATES</p>\n            </li>\n            <li>\n               <p>\"UK\" - UNITED KINGDOM</p>\n            </li>\n         </ul>",
-            "smithy.api#required": {}
-          }
-        },
         "Name": {
           "target": "com.amazonaws.forecast#Name",
           "traits": {
             "smithy.api#documentation": "<p>The name of the feature. This must be \"holiday\".</p>",
             "smithy.api#required": {}
           }
+        },
+        "Value": {
+          "target": "com.amazonaws.forecast#Value",
+          "traits": {
+            "smithy.api#documentation": "<p>One of the following 2 letter country codes:</p>\n         <ul>\n            <li>\n               <p>\"AL\" - ALBANIA</p>\n            </li>\n            <li>\n               <p>\"AR\" - ARGENTINA</p>\n            </li>\n            <li>\n               <p>\"AT\" - AUSTRIA</p>\n            </li>\n            <li>\n               <p>\"AU\" - AUSTRALIA</p>\n            </li>\n            <li>\n               <p>\"BA\" - BOSNIA HERZEGOVINA</p>\n            </li>\n            <li>\n               <p>\"BE\" - BELGIUM</p>\n            </li>\n            <li>\n               <p>\"BG\" - BULGARIA</p>\n            </li>\n            <li>\n               <p>\"BO\" - BOLIVIA</p>\n            </li>\n            <li>\n               <p>\"BR\" - BRAZIL</p>\n            </li>\n            <li>\n               <p>\"BY\" - BELARUS</p>\n            </li>\n            <li>\n               <p>\"CA\" - CANADA</p>\n            </li>\n            <li>\n               <p>\"CL\" - CHILE</p>\n            </li>\n            <li>\n               <p>\"CO\" - COLOMBIA</p>\n            </li>\n            <li>\n               <p>\"CR\" - COSTA RICA</p>\n            </li>\n            <li>\n               <p>\"HR\" - CROATIA</p>\n            </li>\n            <li>\n               <p>\"CZ\" - CZECH REPUBLIC</p>\n            </li>\n            <li>\n               <p>\"DK\" - DENMARK</p>\n            </li>\n            <li>\n               <p>\"EC\" - ECUADOR</p>\n            </li>\n            <li>\n               <p>\"EE\" - ESTONIA</p>\n            </li>\n            <li>\n               <p>\"ET\" - ETHIOPIA</p>\n            </li>\n            <li>\n               <p>\"FI\" - FINLAND</p>\n            </li>\n            <li>\n               <p>\"FR\" - FRANCE</p>\n            </li>\n            <li>\n               <p>\"DE\" - GERMANY</p>\n            </li>\n            <li>\n               <p>\"GR\" - GREECE</p>\n            </li>\n            <li>\n               <p>\"HU\" - HUNGARY</p>\n            </li>\n            <li>\n               <p>\"IS\" - ICELAND</p>\n            </li>\n            <li>\n               <p>\"IN\" - INDIA</p>\n            </li>\n            <li>\n               <p>\"IE\" - IRELAND</p>\n            </li>\n            <li>\n               <p>\"IT\" - ITALY</p>\n            </li>\n            <li>\n               <p>\"JP\" - JAPAN</p>\n            </li>\n            <li>\n               <p>\"KZ\" - KAZAKHSTAN</p>\n            </li>\n            <li>\n               <p>\"KR\" - KOREA</p>\n            </li>\n            <li>\n               <p>\"LV\" - LATVIA</p>\n            </li>\n            <li>\n               <p>\"LI\" - LIECHTENSTEIN</p>\n            </li>\n            <li>\n               <p>\"LT\" - LITHUANIA</p>\n            </li>\n            <li>\n               <p>\"LU\" - LUXEMBOURG</p>\n            </li>\n            <li>\n               <p>\"MK\" - MACEDONIA</p>\n            </li>\n            <li>\n               <p>\"MT\" - MALTA</p>\n            </li>\n            <li>\n               <p>\"MX\" - MEXICO</p>\n            </li>\n            <li>\n               <p>\"MD\" - MOLDOVA</p>\n            </li>\n            <li>\n               <p>\"ME\" - MONTENEGRO</p>\n            </li>\n            <li>\n               <p>\"NL\" - NETHERLANDS</p>\n            </li>\n            <li>\n               <p>\"NZ\" - NEW ZEALAND</p>\n            </li>\n            <li>\n               <p>\"NI\" - NICARAGUA</p>\n            </li>\n            <li>\n               <p>\"NG\" - NIGERIA</p>\n            </li>\n            <li>\n               <p>\"NO\" - NORWAY</p>\n            </li>\n            <li>\n               <p>\"PA\" - PANAMA</p>\n            </li>\n            <li>\n               <p>\"PY\" - PARAGUAY</p>\n            </li>\n            <li>\n               <p>\"PE\" - PERU</p>\n            </li>\n            <li>\n               <p>\"PL\" - POLAND</p>\n            </li>\n            <li>\n               <p>\"PT\" - PORTUGAL</p>\n            </li>\n            <li>\n               <p>\"RO\" - ROMANIA</p>\n            </li>\n            <li>\n               <p>\"RU\" - RUSSIA</p>\n            </li>\n            <li>\n               <p>\"RS\" - SERBIA</p>\n            </li>\n            <li>\n               <p>\"SK\" - SLOVAKIA</p>\n            </li>\n            <li>\n               <p>\"SI\" - SLOVENIA</p>\n            </li>\n            <li>\n               <p>\"ZA\" - SOUTH AFRICA</p>\n            </li>\n            <li>\n               <p>\"ES\" - SPAIN</p>\n            </li>\n            <li>\n               <p>\"SE\" - SWEDEN</p>\n            </li>\n            <li>\n               <p>\"CH\" - SWITZERLAND</p>\n            </li>\n            <li>\n               <p>\"UA\" - UKRAINE</p>\n            </li>\n            <li>\n               <p>\"AE\" - UNITED ARAB EMIRATES</p>\n            </li>\n            <li>\n               <p>\"US\" - UNITED STATES</p>\n            </li>\n            <li>\n               <p>\"UK\" - UNITED KINGDOM</p>\n            </li>\n            <li>\n               <p>\"UY\" - URUGUAY</p>\n            </li>\n            <li>\n               <p>\"VE\" - VENEZUELA</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Describes a supplementary feature of a dataset group. This object is part of the <a>InputDataConfig</a> object.</p>\n         <p>The only supported feature is a holiday calendar. If you use the calendar, all data in the\n      datasets should belong to the same country as the calendar. For the holiday calendar data, see\n      the <a href=\"http://jollyday.sourceforge.net/data.html\">Jollyday</a> web site.</p>\n         <p>India and Korea's holidays are not included in the Jollyday library, but both are\n      supported by Amazon Forecast. Their holidays are:</p>\n         <p>\n            <b>\"IN\" - INDIA</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>JANUARY 26 - REPUBLIC DAY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AUGUST 15 - INDEPENDENCE DAY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OCTOBER 2 GANDHI'S BIRTHDAY</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>\"KR\" - KOREA</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>JANUARY 1 - NEW YEAR</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>MARCH 1 - INDEPENDENCE MOVEMENT DAY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>MAY 5 - CHILDREN'S DAY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>JUNE 6 - MEMORIAL DAY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AUGUST 15 - LIBERATION DAY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OCTOBER 3 - NATIONAL FOUNDATION DAY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OCTOBER 9 - HANGEUL DAY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DECEMBER 25 - CHRISTMAS DAY</code>\n               </p>\n            </li>\n         </ul>"
+        "smithy.api#documentation": "<p>Describes a supplementary feature of a dataset group. This object is part of the <a>InputDataConfig</a> object.</p>\n         <p>The only supported feature is Holidays. If you use the calendar, all data in the\n      datasets should belong to the same country as the calendar. For the holiday calendar data, see\n      the <a href=\"http://jollyday.sourceforge.net/data.html\">Jollyday</a> website.</p>"
       }
     },
     "com.amazonaws.forecast#SupplementaryFeatures": {
@@ -3354,17 +3407,17 @@
     "com.amazonaws.forecast#TagResourceRequest": {
       "type": "structure",
       "members": {
-        "Tags": {
-          "target": "com.amazonaws.forecast#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags to add to the resource. A tag is an array of key-value pairs.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do not count against your tags per resource limit.</p>\n            </li>\n         </ul>",
-            "smithy.api#required": {}
-          }
-        },
         "ResourceArn": {
           "target": "com.amazonaws.forecast#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are Forecast dataset groups, datasets, dataset import jobs, predictors, forecasts, and forecast export jobs.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.forecast#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to add to the resource. A tag is an array of key-value pairs.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do not count against your tags per resource limit.</p>\n            </li>\n         </ul>",
             "smithy.api#required": {}
           }
         }
@@ -3405,10 +3458,10 @@
     "com.amazonaws.forecast#TestWindowSummary": {
       "type": "structure",
       "members": {
-        "Status": {
-          "target": "com.amazonaws.forecast#Status",
+        "TestWindowStart": {
+          "target": "com.amazonaws.forecast#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>The status of the test. Possible status values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code>\n               </p>\n            </li>\n         </ul>"
+            "smithy.api#documentation": "<p>The time at which the test began.</p>"
           }
         },
         "TestWindowEnd": {
@@ -3417,10 +3470,10 @@
             "smithy.api#documentation": "<p>The time at which the test ended.</p>"
           }
         },
-        "TestWindowStart": {
-          "target": "com.amazonaws.forecast#Timestamp",
+        "Status": {
+          "target": "com.amazonaws.forecast#Status",
           "traits": {
-            "smithy.api#documentation": "<p>The time at which the test began.</p>"
+            "smithy.api#documentation": "<p>The status of the test. Possible status values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code>\n               </p>\n            </li>\n         </ul>"
           }
         },
         "Message": {
@@ -3538,17 +3591,17 @@
     "com.amazonaws.forecast#UpdateDatasetGroupRequest": {
       "type": "structure",
       "members": {
-        "DatasetArns": {
-          "target": "com.amazonaws.forecast#ArnList",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of the Amazon Resource Names (ARNs) of the datasets to add to the dataset\n      group.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "DatasetGroupArn": {
           "target": "com.amazonaws.forecast#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the dataset group.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DatasetArns": {
+          "target": "com.amazonaws.forecast#ArnList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of the Amazon Resource Names (ARNs) of the datasets to add to the dataset\n      group.</p>",
             "smithy.api#required": {}
           }
         }
@@ -3609,6 +3662,18 @@
     "com.amazonaws.forecast#WindowSummary": {
       "type": "structure",
       "members": {
+        "TestWindowStart": {
+          "target": "com.amazonaws.forecast#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The timestamp that defines the start of the window.</p>"
+          }
+        },
+        "TestWindowEnd": {
+          "target": "com.amazonaws.forecast#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The timestamp that defines the end of the window.</p>"
+          }
+        },
         "ItemCount": {
           "target": "com.amazonaws.forecast#Integer",
           "traits": {
@@ -3621,22 +3686,10 @@
             "smithy.api#documentation": "<p>The type of evaluation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUMMARY</code> - The average metrics across all windows.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPUTED</code> - The metrics for the specified window.</p>\n            </li>\n         </ul>"
           }
         },
-        "TestWindowEnd": {
-          "target": "com.amazonaws.forecast#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The timestamp that defines the end of the window.</p>"
-          }
-        },
         "Metrics": {
           "target": "com.amazonaws.forecast#Metrics",
           "traits": {
             "smithy.api#documentation": "<p>Provides metrics used to evaluate the performance of a predictor.</p>"
-          }
-        },
-        "TestWindowStart": {
-          "target": "com.amazonaws.forecast#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The timestamp that defines the start of the window.</p>"
           }
         }
       },

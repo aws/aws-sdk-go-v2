@@ -61,7 +61,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Deletes the specified pronunciation lexicon stored in an AWS Region.\n      A lexicon which has been deleted is not available for speech synthesis, \n      nor is it possible to retrieve it using either the \n      <code>GetLexicon</code> or <code>ListLexicon</code> APIs.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing Lexicons</a>.</p>",
+        "smithy.api#documentation": "<p>Deletes the specified pronunciation lexicon stored in an AWS Region. A lexicon which\n      has been deleted is not available for speech synthesis, nor is it possible to retrieve it\n      using either the <code>GetLexicon</code> or <code>ListLexicon</code> APIs.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing\n        Lexicons</a>.</p>",
         "smithy.api#http": {
           "method": "DELETE",
           "uri": "/v1/lexicons/{Name}",
@@ -75,7 +75,7 @@
         "Name": {
           "target": "com.amazonaws.polly#LexiconName",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the lexicon to delete. \n      Must be an existing lexicon in the region.</p>",
+            "smithy.api#documentation": "<p>The name of the lexicon to delete. Must be an existing lexicon in the region.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -103,7 +103,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Returns the list of voices that are available for use when requesting speech synthesis.\n      Each voice speaks a specified language, is either male or female, and is identified by an ID, \n      which is the ASCII version of the voice name. </p>\n      \n         <p>When synthesizing speech ( <code>SynthesizeSpeech</code> ),\n      you provide the voice ID for the voice you want from the list of voices \n      returned by <code>DescribeVoices</code>.</p>\n\n         <p>For example, you want your news reader application to read news in a specific language, \n      but giving a user the option to choose the voice. \n      Using the <code>DescribeVoices</code> operation you can provide the user with a list of available voices to select from.</p>\n    \n         <p>\n      You can optionally specify a language code \n      to filter the available voices.\n      For example, if you specify <code>en-US</code>, the operation returns a list of all \n      available US English voices.\n    </p>\n         <p>This operation requires permissions to perform the \n      <code>polly:DescribeVoices</code> action.</p>",
+        "smithy.api#documentation": "<p>Returns the list of voices that are available for use when requesting speech synthesis.\n      Each voice speaks a specified language, is either male or female, and is identified by an ID,\n      which is the ASCII version of the voice name. </p>\n\n         <p>When synthesizing speech ( <code>SynthesizeSpeech</code> ), you provide the voice ID\n      for the voice you want from the list of voices returned by\n      <code>DescribeVoices</code>.</p>\n\n         <p>For example, you want your news reader application to read news in a specific language,\n      but giving a user the option to choose the voice. Using the <code>DescribeVoices</code>\n      operation you can provide the user with a list of available voices to select from.</p>\n\n         <p> You can optionally specify a language code to filter the available voices. For\n      example, if you specify <code>en-US</code>, the operation returns a list of all available US\n      English voices. </p>\n         <p>This operation requires permissions to perform the <code>polly:DescribeVoices</code>\n      action.</p>",
         "smithy.api#http": {
           "method": "GET",
           "uri": "/v1/voices",
@@ -114,32 +114,32 @@
     "com.amazonaws.polly#DescribeVoicesInput": {
       "type": "structure",
       "members": {
-        "IncludeAdditionalLanguageCodes": {
-          "target": "com.amazonaws.polly#IncludeAdditionalLanguageCodes",
-          "traits": {
-            "smithy.api#documentation": "<p>Boolean value indicating whether to return any bilingual voices that use the specified language as an additional language. For instance, if \n    you request all languages that use US English (es-US), and there is an Italian voice that speaks both Italian (it-IT) and US English, that voice will\n    be included if you specify <code>yes</code> but not if you specify <code>no</code>.</p>",
-            "smithy.api#httpQuery": "IncludeAdditionalLanguageCodes"
-          }
-        },
         "Engine": {
           "target": "com.amazonaws.polly#Engine",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the engine (<code>standard</code> or <code>neural</code>) used by Amazon Polly when processing input text for speech synthesis. </p>",
+            "smithy.api#documentation": "<p>Specifies the engine (<code>standard</code> or <code>neural</code>) used by Amazon Polly\n      when processing input text for speech synthesis. </p>",
             "smithy.api#httpQuery": "Engine"
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.polly#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>An opaque pagination token returned from the previous \n    <code>DescribeVoices</code> operation. If present, this indicates where to \n    continue the listing.</p>",
-            "smithy.api#httpQuery": "NextToken"
           }
         },
         "LanguageCode": {
           "target": "com.amazonaws.polly#LanguageCode",
           "traits": {
-            "smithy.api#documentation": "<p>\n      \n      The language identification tag (ISO 639 code for the language name-ISO 3166 country code) \n      for filtering the list of voices returned. \n    If you don't specify this optional parameter, all available voices are returned.\n    </p>",
+            "smithy.api#documentation": "<p> The language identification tag (ISO 639 code for the language name-ISO 3166 country\n      code) for filtering the list of voices returned. If you don't specify this optional parameter,\n      all available voices are returned. </p>",
             "smithy.api#httpQuery": "LanguageCode"
+          }
+        },
+        "IncludeAdditionalLanguageCodes": {
+          "target": "com.amazonaws.polly#IncludeAdditionalLanguageCodes",
+          "traits": {
+            "smithy.api#documentation": "<p>Boolean value indicating whether to return any bilingual voices that use the specified\n      language as an additional language. For instance, if you request all languages that use US\n      English (es-US), and there is an Italian voice that speaks both Italian (it-IT) and US\n      English, that voice will be included if you specify <code>yes</code> but not if you specify\n        <code>no</code>.</p>",
+            "smithy.api#httpQuery": "IncludeAdditionalLanguageCodes"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.polly#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An opaque pagination token returned from the previous <code>DescribeVoices</code>\n      operation. If present, this indicates where to continue the listing.</p>",
+            "smithy.api#httpQuery": "NextToken"
           }
         }
       }
@@ -147,16 +147,16 @@
     "com.amazonaws.polly#DescribeVoicesOutput": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.polly#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The pagination token to use in the next request to continue \n    the listing of voices. <code>NextToken</code> is returned only if \n    the response is truncated.</p>"
-          }
-        },
         "Voices": {
           "target": "com.amazonaws.polly#VoiceList",
           "traits": {
             "smithy.api#documentation": "<p>A list of voices with their properties.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.polly#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The pagination token to use in the next request to continue the listing of voices.\n        <code>NextToken</code> is returned only if the response is truncated.</p>"
           }
         }
       }
@@ -190,7 +190,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>This engine is not compatible with the voice that you have designated. Choose a new voice that is compatible with the engine or change the engine \n      and restart the operation.</p>",
+        "smithy.api#documentation": "<p>This engine is not compatible with the voice that you have designated. Choose a new voice\n      that is compatible with the engine or change the engine and restart the operation.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 400
       }
@@ -228,7 +228,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Returns the content of the specified pronunciation lexicon stored in an AWS Region. \n      For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing Lexicons</a>.</p>",
+        "smithy.api#documentation": "<p>Returns the content of the specified pronunciation lexicon stored in an AWS Region. For\n      more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing\n        Lexicons</a>.</p>",
         "smithy.api#http": {
           "method": "GET",
           "uri": "/v1/lexicons/{Name}",
@@ -252,16 +252,16 @@
     "com.amazonaws.polly#GetLexiconOutput": {
       "type": "structure",
       "members": {
-        "LexiconAttributes": {
-          "target": "com.amazonaws.polly#LexiconAttributes",
-          "traits": {
-            "smithy.api#documentation": "<p>Metadata of the lexicon, including phonetic alphabetic used, language code, \n    lexicon ARN, number of lexemes defined in the lexicon, and size of lexicon in bytes.</p>"
-          }
-        },
         "Lexicon": {
           "target": "com.amazonaws.polly#Lexicon",
           "traits": {
-            "smithy.api#documentation": "<p>Lexicon object that provides name and the string content of the \n    lexicon. </p>"
+            "smithy.api#documentation": "<p>Lexicon object that provides name and the string content of the lexicon. </p>"
+          }
+        },
+        "LexiconAttributes": {
+          "target": "com.amazonaws.polly#LexiconAttributes",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata of the lexicon, including phonetic alphabetic used, language code, lexicon\n      ARN, number of lexemes defined in the lexicon, and size of lexicon in bytes.</p>"
           }
         }
       }
@@ -286,7 +286,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Retrieves a specific SpeechSynthesisTask object based on its TaskID. This object \n      contains information about the given speech synthesis task, including the status of the \n      task, and a link to the S3 bucket containing the output of the task.</p>",
+        "smithy.api#documentation": "<p>Retrieves a specific SpeechSynthesisTask object based on its TaskID. This object contains\n      information about the given speech synthesis task, including the status of the task, and a\n      link to the S3 bucket containing the output of the task.</p>",
         "smithy.api#http": {
           "method": "GET",
           "uri": "/v1/synthesisTasks/{TaskId}",
@@ -313,7 +313,7 @@
         "SynthesisTask": {
           "target": "com.amazonaws.polly#SynthesisTask",
           "traits": {
-            "smithy.api#documentation": "<p>SynthesisTask object that provides information from the requested task, \n      including output format, creation time, task status, and so on.</p>"
+            "smithy.api#documentation": "<p>SynthesisTask object that provides information from the requested task, including output\n      format, creation time, task status, and so on.</p>"
           }
         }
       }
@@ -329,7 +329,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Amazon Polly can't find the specified lexicon.\n      Verify that the lexicon's name is spelled correctly, and then try again.</p>",
+        "smithy.api#documentation": "<p>Amazon Polly can't find the specified lexicon. Verify that the lexicon's name is\n      spelled correctly, and then try again.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 400
       }
@@ -342,7 +342,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The NextToken is invalid.\n      Verify that it's spelled correctly, and then try again.</p>",
+        "smithy.api#documentation": "<p>The NextToken is invalid. Verify that it's spelled correctly, and then try\n      again.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 400
       }
@@ -355,7 +355,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The provided Amazon S3 bucket name is invalid. Please check your input with S3 bucket \n      naming requirements and try again.</p>",
+        "smithy.api#documentation": "<p>The provided Amazon S3 bucket name is invalid. Please check your input with S3 bucket\n      naming requirements and try again.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 400
       }
@@ -368,7 +368,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The provided Amazon S3 key prefix is invalid. Please provide a valid S3 object key name.</p>",
+        "smithy.api#documentation": "<p>The provided Amazon S3 key prefix is invalid. Please provide a valid S3 object key\n      name.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 400
       }
@@ -394,7 +394,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The provided SNS topic ARN is invalid. Please provide a valid SNS topic ARN and try again.</p>",
+        "smithy.api#documentation": "<p>The provided SNS topic ARN is invalid. Please provide a valid SNS topic ARN and try\n      again.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 400
       }
@@ -407,7 +407,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The SSML you provided is invalid.\n      Verify the SSML syntax, spelling of tags and values, and then try again.</p>",
+        "smithy.api#documentation": "<p>The SSML you provided is invalid. Verify the SSML syntax, spelling of tags and values,\n      and then try again.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 400
       }
@@ -553,7 +553,7 @@
         "Content": {
           "target": "com.amazonaws.polly#LexiconContent",
           "traits": {
-            "smithy.api#documentation": "<p>Lexicon content in string format.\n      The content of a lexicon must be in PLS format.</p>"
+            "smithy.api#documentation": "<p>Lexicon content in string format. The content of a lexicon must be in PLS\n      format.</p>"
           }
         },
         "Name": {
@@ -564,7 +564,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Provides lexicon name and lexicon content in string format.\n      For more information, see <a href=\"https://www.w3.org/TR/pronunciation-lexicon/\">Pronunciation Lexicon Specification (PLS) Version 1.0</a>.</p>"
+        "smithy.api#documentation": "<p>Provides lexicon name and lexicon content in string format. For more information, see\n        <a href=\"https://www.w3.org/TR/pronunciation-lexicon/\">Pronunciation Lexicon\n        Specification (PLS) Version 1.0</a>.</p>"
       }
     },
     "com.amazonaws.polly#LexiconArn": {
@@ -576,13 +576,13 @@
         "Alphabet": {
           "target": "com.amazonaws.polly#Alphabet",
           "traits": {
-            "smithy.api#documentation": "<p>Phonetic alphabet used in the lexicon.\n      Valid values are <code>ipa</code> and <code>x-sampa</code>.</p>"
+            "smithy.api#documentation": "<p>Phonetic alphabet used in the lexicon. Valid values are <code>ipa</code> and\n        <code>x-sampa</code>.</p>"
           }
         },
         "LanguageCode": {
           "target": "com.amazonaws.polly#LanguageCode",
           "traits": {
-            "smithy.api#documentation": "<p>Language code that the lexicon applies to.\n      A lexicon with a language code such as \"en\" would be\n      applied to all English languages (en-GB, en-US, en-AUS,\n      en-WLS, and so on.</p>"
+            "smithy.api#documentation": "<p>Language code that the lexicon applies to. A lexicon with a language code such as \"en\"\n      would be applied to all English languages (en-GB, en-US, en-AUS, en-WLS, and so on.</p>"
           }
         },
         "LastModified": {
@@ -597,39 +597,42 @@
             "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the lexicon.</p>"
           }
         },
-        "Size": {
-          "target": "com.amazonaws.polly#Size",
-          "traits": {
-            "smithy.api#documentation": "<p>Total size of the lexicon, in characters.</p>"
-          }
-        },
         "LexemesCount": {
           "target": "com.amazonaws.polly#LexemesCount",
           "traits": {
             "smithy.api#documentation": "<p>Number of lexemes in the lexicon.</p>"
           }
+        },
+        "Size": {
+          "target": "com.amazonaws.polly#Size",
+          "traits": {
+            "smithy.api#documentation": "<p>Total size of the lexicon, in characters.</p>"
+          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains metadata describing the lexicon such as the number of lexemes, language code, \n      and so on.\n      For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing Lexicons</a>.</p>"
+        "smithy.api#documentation": "<p>Contains metadata describing the lexicon such as the number of lexemes, language code,\n      and so on. For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing\n        Lexicons</a>.</p>"
       }
     },
     "com.amazonaws.polly#LexiconContent": {
-      "type": "string"
+      "type": "string",
+      "traits": {
+        "smithy.api#sensitive": {}
+      }
     },
     "com.amazonaws.polly#LexiconDescription": {
       "type": "structure",
       "members": {
-        "Attributes": {
-          "target": "com.amazonaws.polly#LexiconAttributes",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides lexicon metadata.</p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.polly#LexiconName",
           "traits": {
             "smithy.api#documentation": "<p>Name of the lexicon.</p>"
+          }
+        },
+        "Attributes": {
+          "target": "com.amazonaws.polly#LexiconAttributes",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides lexicon metadata.</p>"
           }
         }
       },
@@ -646,8 +649,7 @@
     "com.amazonaws.polly#LexiconName": {
       "type": "string",
       "traits": {
-        "smithy.api#pattern": "[0-9A-Za-z]{1,20}",
-        "smithy.api#sensitive": {}
+        "smithy.api#pattern": "[0-9A-Za-z]{1,20}"
       }
     },
     "com.amazonaws.polly#LexiconNameList": {
@@ -670,7 +672,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Amazon Polly can't find the specified lexicon.\n      This could be caused by a lexicon that is missing, its name is misspelled or specifying a lexicon\n      that is in a different region.</p>\n         <p>Verify that the lexicon exists, is in the region (see <a>ListLexicons</a>) \n      and that you spelled its name is spelled correctly. Then try again.</p>",
+        "smithy.api#documentation": "<p>Amazon Polly can't find the specified lexicon. This could be caused by a lexicon that\n      is missing, its name is misspelled or specifying a lexicon that is in a different\n      region.</p>\n         <p>Verify that the lexicon exists, is in the region (see <a>ListLexicons</a>)\n      and that you spelled its name is spelled correctly. Then try again.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 404
       }
@@ -683,7 +685,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The maximum size of the specified lexicon would be exceeded by this operation.</p>",
+        "smithy.api#documentation": "<p>The maximum size of the specified lexicon would be exceeded by this\n      operation.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 400
       }
@@ -705,7 +707,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Returns a list of pronunciation lexicons stored in an AWS Region. \n      For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing Lexicons</a>.</p>",
+        "smithy.api#documentation": "<p>Returns a list of pronunciation lexicons stored in an AWS Region. For more information,\n      see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing\n        Lexicons</a>.</p>",
         "smithy.api#http": {
           "method": "GET",
           "uri": "/v1/lexicons",
@@ -719,7 +721,7 @@
         "NextToken": {
           "target": "com.amazonaws.polly#NextToken",
           "traits": {
-            "smithy.api#documentation": "<p>An opaque pagination token returned from previous \n      <code>ListLexicons</code> operation. If present, indicates where to \n      continue the list of lexicons.</p>",
+            "smithy.api#documentation": "<p>An opaque pagination token returned from previous <code>ListLexicons</code> operation.\n      If present, indicates where to continue the list of lexicons.</p>",
             "smithy.api#httpQuery": "NextToken"
           }
         }
@@ -728,16 +730,16 @@
     "com.amazonaws.polly#ListLexiconsOutput": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.polly#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The pagination token to use in the next request to continue \n      the listing of lexicons. <code>NextToken</code> is returned only if \n      the response is truncated.</p>"
-          }
-        },
         "Lexicons": {
           "target": "com.amazonaws.polly#LexiconDescriptionList",
           "traits": {
             "smithy.api#documentation": "<p>A list of lexicon names and attributes.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.polly#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The pagination token to use in the next request to continue the listing of lexicons.\n        <code>NextToken</code> is returned only if the response is truncated.</p>"
           }
         }
       }
@@ -759,7 +761,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Returns a list of SpeechSynthesisTask objects ordered by their creation date. This operation \n      can filter the tasks by their status, for example, allowing users to list only tasks that are completed.</p>",
+        "smithy.api#documentation": "<p>Returns a list of SpeechSynthesisTask objects ordered by their creation date. This\n      operation can filter the tasks by their status, for example, allowing users to list only tasks\n      that are completed.</p>",
         "smithy.api#http": {
           "method": "GET",
           "uri": "/v1/synthesisTasks",
@@ -782,18 +784,18 @@
             "smithy.api#httpQuery": "MaxResults"
           }
         },
+        "NextToken": {
+          "target": "com.amazonaws.polly#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The pagination token to use in the next request to continue the listing of speech\n      synthesis tasks. </p>",
+            "smithy.api#httpQuery": "NextToken"
+          }
+        },
         "Status": {
           "target": "com.amazonaws.polly#TaskStatus",
           "traits": {
             "smithy.api#documentation": "<p>Status of the speech synthesis tasks returned in a List operation</p>",
             "smithy.api#httpQuery": "Status"
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.polly#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The pagination token to use in the next request to continue the listing of speech synthesis \n      tasks. </p>",
-            "smithy.api#httpQuery": "NextToken"
           }
         }
       }
@@ -801,16 +803,16 @@
     "com.amazonaws.polly#ListSpeechSynthesisTasksOutput": {
       "type": "structure",
       "members": {
-        "SynthesisTasks": {
-          "target": "com.amazonaws.polly#SynthesisTasks",
-          "traits": {
-            "smithy.api#documentation": "<p>List of SynthesisTask objects that provides information from the specified task in the list request, \n      including output format, creation time, task status, and so on.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.polly#NextToken",
           "traits": {
-            "smithy.api#documentation": "<p>An opaque pagination token returned from the previous List operation \n      in this request. If present, this indicates where to continue the listing.</p>"
+            "smithy.api#documentation": "<p>An opaque pagination token returned from the previous List operation in this request. If\n      present, this indicates where to continue the listing.</p>"
+          }
+        },
+        "SynthesisTasks": {
+          "target": "com.amazonaws.polly#SynthesisTasks",
+          "traits": {
+            "smithy.api#documentation": "<p>List of SynthesisTask objects that provides information from the specified task in the\n      list request, including output format, creation time, task status, and so on.</p>"
           }
         }
       }
@@ -823,7 +825,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Speech marks are not supported for the <code>OutputFormat</code> selected. \n      Speech marks are only available for content in <code>json</code> format.</p>",
+        "smithy.api#documentation": "<p>Speech marks are not supported for the <code>OutputFormat</code> selected. Speech marks\n      are only available for content in <code>json</code> format.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 400
       }
@@ -905,7 +907,7 @@
     "com.amazonaws.polly#OutputS3KeyPrefix": {
       "type": "string",
       "traits": {
-        "smithy.api#pattern": "^[0-9a-zA-Z\\/\\!\\-_\\.\\*\\'\\(\\)]{0,800}$"
+        "smithy.api#pattern": "^[0-9a-zA-Z\\/\\!\\-_\\.\\*\\'\\(\\):;\\$@=+\\,\\?&]{0,800}$"
       }
     },
     "com.amazonaws.polly#OutputUri": {
@@ -954,7 +956,7 @@
           "name": "polly"
         },
         "aws.protocols#restJson1": {},
-        "smithy.api#documentation": "<p>Amazon Polly is a web service that makes it easy to synthesize speech from text.</p>\n         <p>The Amazon Polly service provides API operations for synthesizing high-quality speech from plain text and Speech Synthesis Markup Language (SSML), \n      along with managing pronunciations lexicons that enable you to get the best results for your application domain.</p>",
+        "smithy.api#documentation": "<p>Amazon Polly is a web service that makes it easy to synthesize speech from\n      text.</p>\n         <p>The Amazon Polly service provides API operations for synthesizing high-quality speech\n      from plain text and Speech Synthesis Markup Language (SSML), along with managing\n      pronunciations lexicons that enable you to get the best results for your application\n      domain.</p>",
         "smithy.api#title": "Amazon Polly",
         "smithy.api#xmlNamespace": {
           "uri": "http://polly.amazonaws.com/doc/v1"
@@ -993,7 +995,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Stores a pronunciation lexicon in an AWS Region.\n      If a lexicon with the same name already exists in the region,\n      it is overwritten by the new lexicon.\n      Lexicon operations have eventual consistency, \n      therefore, it might take some time before the lexicon is available to the SynthesizeSpeech operation.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing Lexicons</a>.</p>",
+        "smithy.api#documentation": "<p>Stores a pronunciation lexicon in an AWS Region. If a lexicon with the same name\n      already exists in the region, it is overwritten by the new lexicon. Lexicon operations have\n      eventual consistency, therefore, it might take some time before the lexicon is available to\n      the SynthesizeSpeech operation.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing\n        Lexicons</a>.</p>",
         "smithy.api#http": {
           "method": "PUT",
           "uri": "/v1/lexicons/{Name}",
@@ -1007,7 +1009,7 @@
         "Name": {
           "target": "com.amazonaws.polly#LexiconName",
           "traits": {
-            "smithy.api#documentation": "<p>Name of the lexicon. The name must follow the regular express format \n      [0-9A-Za-z]{1,20}.\n      That is, the name is a case-sensitive alphanumeric string up to 20 characters long.\n    </p>",
+            "smithy.api#documentation": "<p>Name of the lexicon. The name must follow the regular express format [0-9A-Za-z]{1,20}.\n      That is, the name is a case-sensitive alphanumeric string up to 20 characters long. </p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -1148,7 +1150,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Allows the creation of an asynchronous synthesis task, by starting a new <code>SpeechSynthesisTask</code>. This \n      operation requires all the standard information needed for speech synthesis, plus the name of an Amazon S3 bucket  \n      for the service to store the output of the synthesis task and two optional parameters (OutputS3KeyPrefix and SnsTopicArn). \n      Once the synthesis task is created, this operation will return a SpeechSynthesisTask object, which will include an \n      identifier of this task as well as the current status.</p>",
+        "smithy.api#documentation": "<p>Allows the creation of an asynchronous synthesis task, by starting a new\n        <code>SpeechSynthesisTask</code>. This operation requires all the standard information\n      needed for speech synthesis, plus the name of an Amazon S3 bucket for the service to store the\n      output of the synthesis task and two optional parameters (OutputS3KeyPrefix and SnsTopicArn).\n      Once the synthesis task is created, this operation will return a SpeechSynthesisTask object,\n      which will include an identifier of this task as well as the current status.</p>",
         "smithy.api#http": {
           "method": "POST",
           "uri": "/v1/synthesisTasks",
@@ -1159,16 +1161,29 @@
     "com.amazonaws.polly#StartSpeechSynthesisTaskInput": {
       "type": "structure",
       "members": {
-        "TextType": {
-          "target": "com.amazonaws.polly#TextType",
+        "Engine": {
+          "target": "com.amazonaws.polly#Engine",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies whether the input text is plain text or SSML. The default value is plain text. </p>"
+            "smithy.api#documentation": "<p>Specifies the engine (<code>standard</code> or <code>neural</code>) for Amazon Polly to\n      use when processing input text for speech synthesis. Using a voice that is not supported for\n      the engine selected will result in an error.</p>"
           }
         },
-        "OutputS3KeyPrefix": {
-          "target": "com.amazonaws.polly#OutputS3KeyPrefix",
+        "LanguageCode": {
+          "target": "com.amazonaws.polly#LanguageCode",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon S3 key prefix for the output speech file.</p>"
+            "smithy.api#documentation": "<p>Optional language code for the Speech Synthesis request. This is only necessary if using a\n      bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi\n      (hi-IN). </p>\n         <p>If a bilingual voice is used and no language code is specified, Amazon Polly will use the\n      default language of the bilingual voice. The default language for any voice is the one\n      returned by the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html\">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example,\n      if no language code is specified, Aditi will use Indian English rather than Hindi.</p>"
+          }
+        },
+        "LexiconNames": {
+          "target": "com.amazonaws.polly#LexiconNameList",
+          "traits": {
+            "smithy.api#documentation": "<p>List of one or more pronunciation lexicon names you want the service to apply during\n      synthesis. Lexicons are applied only if the language of the lexicon is the same as the\n      language of the voice. </p>"
+          }
+        },
+        "OutputFormat": {
+          "target": "com.amazonaws.polly#OutputFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The format in which the returned output will be encoded. For audio stream, this will be\n      mp3, ogg_vorbis, or pcm. For speech marks, this will be json. </p>",
+            "smithy.api#required": {}
           }
         },
         "OutputS3BucketName": {
@@ -1178,10 +1193,22 @@
             "smithy.api#required": {}
           }
         },
-        "LanguageCode": {
-          "target": "com.amazonaws.polly#LanguageCode",
+        "OutputS3KeyPrefix": {
+          "target": "com.amazonaws.polly#OutputS3KeyPrefix",
           "traits": {
-            "smithy.api#documentation": "<p>Optional language code for the Speech Synthesis request. This is only necessary if using a bilingual voice, \n      such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p>\n         <p>If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. \n        The default language for any voice is the one returned by the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html\">DescribeVoices</a> \n        operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>"
+            "smithy.api#documentation": "<p>The Amazon S3 key prefix for the output speech file.</p>"
+          }
+        },
+        "SampleRate": {
+          "target": "com.amazonaws.polly#SampleRate",
+          "traits": {
+            "smithy.api#documentation": "<p>The audio frequency specified in Hz.</p>\n         <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\", and \"24000\". The\n      default value for standard voices is \"22050\". The default value for neural voices is\n      \"24000\".</p>\n         <p>Valid values for pcm are \"8000\" and \"16000\" The default value is \"16000\". </p>"
+          }
+        },
+        "SnsTopicArn": {
+          "target": "com.amazonaws.polly#SnsTopicArn",
+          "traits": {
+            "smithy.api#documentation": "<p>ARN for the SNS topic optionally used for providing status notification for a speech\n      synthesis task.</p>"
           }
         },
         "SpeechMarkTypes": {
@@ -1190,16 +1217,17 @@
             "smithy.api#documentation": "<p>The type of speech marks returned for the input text.</p>"
           }
         },
-        "SampleRate": {
-          "target": "com.amazonaws.polly#SampleRate",
+        "Text": {
+          "target": "com.amazonaws.polly#Text",
           "traits": {
-            "smithy.api#documentation": "<p>The audio frequency specified in Hz.</p>\n         <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\", and \"24000\". The \n      default value for standard voices is \"22050\". The default value for neural voices is \"24000\".</p>\n         <p>Valid values for pcm are \"8000\" and \"16000\" The default value is \"16000\". </p>"
+            "smithy.api#documentation": "<p>The input text to synthesize. If you specify ssml as the TextType, follow the SSML format\n      for the input text. </p>",
+            "smithy.api#required": {}
           }
         },
-        "SnsTopicArn": {
-          "target": "com.amazonaws.polly#SnsTopicArn",
+        "TextType": {
+          "target": "com.amazonaws.polly#TextType",
           "traits": {
-            "smithy.api#documentation": "<p>ARN for the SNS topic optionally used for providing status notification for a speech synthesis task.</p>"
+            "smithy.api#documentation": "<p>Specifies whether the input text is plain text or SSML. The default value is plain text.\n    </p>"
           }
         },
         "VoiceId": {
@@ -1207,32 +1235,6 @@
           "traits": {
             "smithy.api#documentation": "<p>Voice ID to use for the synthesis. </p>",
             "smithy.api#required": {}
-          }
-        },
-        "Text": {
-          "target": "com.amazonaws.polly#Text",
-          "traits": {
-            "smithy.api#documentation": "<p>The input text to synthesize. If you specify \n      ssml as the TextType, follow the SSML format for the input text. </p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Engine": {
-          "target": "com.amazonaws.polly#Engine",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the engine (<code>standard</code> or <code>neural</code>) for Amazon Polly to use when processing input text for speech synthesis. Using a voice that is not supported for the engine\n      selected will result in an error.</p>"
-          }
-        },
-        "OutputFormat": {
-          "target": "com.amazonaws.polly#OutputFormat",
-          "traits": {
-            "smithy.api#documentation": "<p>The format in which the returned output will be encoded. For \n      audio stream, this will be mp3, ogg_vorbis, or pcm. For speech\n      marks, this will be json. </p>",
-            "smithy.api#required": {}
-          }
-        },
-        "LexiconNames": {
-          "target": "com.amazonaws.polly#LexiconNameList",
-          "traits": {
-            "smithy.api#documentation": "<p>List of one or more pronunciation lexicon names you want the service \n      to apply during synthesis. Lexicons are applied only if the language \n      of the lexicon is the same as the language of the voice. </p>"
           }
         }
       }
@@ -1243,7 +1245,7 @@
         "SynthesisTask": {
           "target": "com.amazonaws.polly#SynthesisTask",
           "traits": {
-            "smithy.api#documentation": "<p>SynthesisTask object that provides information and attributes about a newly submitted speech synthesis task.</p>"
+            "smithy.api#documentation": "<p>SynthesisTask object that provides information and attributes about a newly submitted\n      speech synthesis task.</p>"
           }
         }
       }
@@ -1251,82 +1253,10 @@
     "com.amazonaws.polly#SynthesisTask": {
       "type": "structure",
       "members": {
-        "LanguageCode": {
-          "target": "com.amazonaws.polly#LanguageCode",
-          "traits": {
-            "smithy.api#documentation": "<p>Optional language code for a synthesis task. This is only necessary if using a bilingual voice, such as \n      Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p>\n         <p>If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language\n        of the bilingual voice. The default language for any voice is the one returned by the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html\">DescribeVoices</a> \n        operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather \n      than Hindi.</p>"
-          }
-        },
-        "SampleRate": {
-          "target": "com.amazonaws.polly#SampleRate",
-          "traits": {
-            "smithy.api#documentation": "<p>The audio frequency specified in Hz.</p>\n         <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\", and \"24000\". The \n      default value for standard voices is \"22050\". The default value for neural voices is \"24000\".</p>\n         <p>Valid values for pcm are \"8000\" and \"16000\" The default value is \"16000\". </p>"
-          }
-        },
-        "OutputUri": {
-          "target": "com.amazonaws.polly#OutputUri",
-          "traits": {
-            "smithy.api#documentation": "<p>Pathway for the output speech file.</p>"
-          }
-        },
-        "TaskStatusReason": {
-          "target": "com.amazonaws.polly#TaskStatusReason",
-          "traits": {
-            "smithy.api#documentation": "<p>Reason for the current status of a specific speech synthesis task, including \n      errors if the task has failed.</p>"
-          }
-        },
-        "RequestCharacters": {
-          "target": "com.amazonaws.polly#RequestCharacters",
-          "traits": {
-            "smithy.api#documentation": "<p>Number of billable characters synthesized.</p>"
-          }
-        },
-        "TaskStatus": {
-          "target": "com.amazonaws.polly#TaskStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>Current status of the individual speech synthesis task.</p>"
-          }
-        },
-        "TextType": {
-          "target": "com.amazonaws.polly#TextType",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies whether the input text is plain text or SSML. The default value is plain text. </p>"
-          }
-        },
-        "LexiconNames": {
-          "target": "com.amazonaws.polly#LexiconNameList",
-          "traits": {
-            "smithy.api#documentation": "<p>List of one or more pronunciation lexicon names you want the service \n      to apply during synthesis. Lexicons are applied only if the language \n      of the lexicon is the same as the language of the voice. </p>"
-          }
-        },
-        "SnsTopicArn": {
-          "target": "com.amazonaws.polly#SnsTopicArn",
-          "traits": {
-            "smithy.api#documentation": "<p>ARN for the SNS topic optionally used for providing status notification for a speech synthesis task.</p>"
-          }
-        },
-        "OutputFormat": {
-          "target": "com.amazonaws.polly#OutputFormat",
-          "traits": {
-            "smithy.api#documentation": "<p>The format in which the returned output will be encoded. For \n      audio stream, this will be mp3, ogg_vorbis, or pcm. For speech\n      marks, this will be json. </p>"
-          }
-        },
-        "CreationTime": {
-          "target": "com.amazonaws.polly#DateTime",
-          "traits": {
-            "smithy.api#documentation": "<p>Timestamp for the time the synthesis task was started.</p>"
-          }
-        },
         "Engine": {
           "target": "com.amazonaws.polly#Engine",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the engine (<code>standard</code> or <code>neural</code>) for Amazon Polly to use when processing input text for speech synthesis. Using a voice that is not supported for the engine\n      selected will result in an error.</p>"
-          }
-        },
-        "VoiceId": {
-          "target": "com.amazonaws.polly#VoiceId",
-          "traits": {
-            "smithy.api#documentation": "<p>Voice ID to use for the synthesis. </p>"
+            "smithy.api#documentation": "<p>Specifies the engine (<code>standard</code> or <code>neural</code>) for Amazon Polly to\n      use when processing input text for speech synthesis. Using a voice that is not supported for\n      the engine selected will result in an error.</p>"
           }
         },
         "TaskId": {
@@ -1335,10 +1265,82 @@
             "smithy.api#documentation": "<p>The Amazon Polly generated identifier for a speech synthesis task.</p>"
           }
         },
+        "TaskStatus": {
+          "target": "com.amazonaws.polly#TaskStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>Current status of the individual speech synthesis task.</p>"
+          }
+        },
+        "TaskStatusReason": {
+          "target": "com.amazonaws.polly#TaskStatusReason",
+          "traits": {
+            "smithy.api#documentation": "<p>Reason for the current status of a specific speech synthesis task, including errors if the\n      task has failed.</p>"
+          }
+        },
+        "OutputUri": {
+          "target": "com.amazonaws.polly#OutputUri",
+          "traits": {
+            "smithy.api#documentation": "<p>Pathway for the output speech file.</p>"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.polly#DateTime",
+          "traits": {
+            "smithy.api#documentation": "<p>Timestamp for the time the synthesis task was started.</p>"
+          }
+        },
+        "RequestCharacters": {
+          "target": "com.amazonaws.polly#RequestCharacters",
+          "traits": {
+            "smithy.api#documentation": "<p>Number of billable characters synthesized.</p>"
+          }
+        },
+        "SnsTopicArn": {
+          "target": "com.amazonaws.polly#SnsTopicArn",
+          "traits": {
+            "smithy.api#documentation": "<p>ARN for the SNS topic optionally used for providing status notification for a speech\n      synthesis task.</p>"
+          }
+        },
+        "LexiconNames": {
+          "target": "com.amazonaws.polly#LexiconNameList",
+          "traits": {
+            "smithy.api#documentation": "<p>List of one or more pronunciation lexicon names you want the service to apply during\n      synthesis. Lexicons are applied only if the language of the lexicon is the same as the\n      language of the voice. </p>"
+          }
+        },
+        "OutputFormat": {
+          "target": "com.amazonaws.polly#OutputFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The format in which the returned output will be encoded. For audio stream, this will be\n      mp3, ogg_vorbis, or pcm. For speech marks, this will be json. </p>"
+          }
+        },
+        "SampleRate": {
+          "target": "com.amazonaws.polly#SampleRate",
+          "traits": {
+            "smithy.api#documentation": "<p>The audio frequency specified in Hz.</p>\n         <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\", and \"24000\". The\n      default value for standard voices is \"22050\". The default value for neural voices is\n      \"24000\".</p>\n         <p>Valid values for pcm are \"8000\" and \"16000\" The default value is \"16000\". </p>"
+          }
+        },
         "SpeechMarkTypes": {
           "target": "com.amazonaws.polly#SpeechMarkTypeList",
           "traits": {
             "smithy.api#documentation": "<p>The type of speech marks returned for the input text.</p>"
+          }
+        },
+        "TextType": {
+          "target": "com.amazonaws.polly#TextType",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether the input text is plain text or SSML. The default value is plain text.\n    </p>"
+          }
+        },
+        "VoiceId": {
+          "target": "com.amazonaws.polly#VoiceId",
+          "traits": {
+            "smithy.api#documentation": "<p>Voice ID to use for the synthesis. </p>"
+          }
+        },
+        "LanguageCode": {
+          "target": "com.amazonaws.polly#LanguageCode",
+          "traits": {
+            "smithy.api#documentation": "<p>Optional language code for a synthesis task. This is only necessary if using a bilingual\n      voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p>\n         <p>If a bilingual voice is used and no language code is specified, Amazon Polly will use the\n      default language of the bilingual voice. The default language for any voice is the one\n      returned by the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html\">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example,\n      if no language code is specified, Aditi will use Indian English rather than Hindi.</p>"
           }
         }
       },
@@ -1403,7 +1405,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Synthesizes UTF-8 input, plain text or SSML, to a stream of bytes.\n      SSML input must be valid, well-formed SSML.\n      Some alphabets might not be available with all the voices (for example, Cyrillic might not be read at all by English voices) unless phoneme mapping is used.\n      For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/how-text-to-speech-works.html\">How it Works</a>.</p>",
+        "smithy.api#documentation": "<p>Synthesizes UTF-8 input, plain text or SSML, to a stream of bytes. SSML input must be\n      valid, well-formed SSML. Some alphabets might not be available with all the voices (for\n      example, Cyrillic might not be read at all by English voices) unless phoneme mapping is used.\n      For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/how-text-to-speech-works.html\">How it\n        Works</a>.</p>",
         "smithy.api#http": {
           "method": "POST",
           "uri": "/v1/speech",
@@ -1417,28 +1419,32 @@
         "Engine": {
           "target": "com.amazonaws.polly#Engine",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the engine (<code>standard</code> or <code>neural</code>) for Amazon Polly to use when processing input text for speech synthesis. Using a voice that is not supported for the engine\n      selected will result in an error.</p>"
+            "smithy.api#documentation": "<p>Specifies the engine (<code>standard</code> or <code>neural</code>) for Amazon Polly to\n      use when processing input text for speech synthesis. For information on Amazon Polly voices and which voices are available in standard-only, NTTS-only, and \n      both standard and NTTS formats, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/voicelist.html\">Available Voices</a>.</p>\n         <p>\n            <b>NTTS-only voices</b>\n         </p>\n         <p>When using NTTS-only voices such as Kevin (en-US), this parameter is required and must be\n      set to <code>neural</code>. If the engine is not specified, or is set to <code>standard</code>,\n      this will result in an error. </p>\n         <p>Type: String</p>\n         <p>Valid Values: <code>standard</code>  |  <code>neural</code>\n         </p>\n         <p>Required: Yes</p>\n    \n         <p>\n            <b>Standard voices</b>\n         </p>\n         <p>For standard voices, this is not required; the engine parameter defaults to\n      <code>standard</code>. If the engine is not specified, or is set to <code>standard</code> and\n      an NTTS-only voice is selected, this will result in an error. </p>"
           }
         },
-        "VoiceId": {
-          "target": "com.amazonaws.polly#VoiceId",
+        "LanguageCode": {
+          "target": "com.amazonaws.polly#LanguageCode",
           "traits": {
-            "smithy.api#documentation": "<p>\n      Voice ID to use for the synthesis. You can get a list of \n      available voice IDs by calling the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html\">DescribeVoices</a> operation.\n    </p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Optional language code for the Synthesize Speech request. This is only necessary if using\n      a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi\n      (hi-IN). </p>\n         <p>If a bilingual voice is used and no language code is specified, Amazon Polly will use the\n      default language of the bilingual voice. The default language for any voice is the one\n      returned by the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html\">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example,\n      if no language code is specified, Aditi will use Indian English rather than Hindi.</p>"
           }
         },
-        "Text": {
-          "target": "com.amazonaws.polly#Text",
+        "LexiconNames": {
+          "target": "com.amazonaws.polly#LexiconNameList",
           "traits": {
-            "smithy.api#documentation": "<p>\n      Input text to synthesize. If you specify \n      <code>ssml</code> as the <code>TextType</code>, follow the SSML format for the \n      input text.\n    </p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>List of one or more pronunciation lexicon names you want the service to apply during\n      synthesis. Lexicons are applied only if the language of the lexicon is the same as the\n      language of the voice. For information about storing lexicons, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html\">PutLexicon</a>.</p>"
           }
         },
         "OutputFormat": {
           "target": "com.amazonaws.polly#OutputFormat",
           "traits": {
-            "smithy.api#documentation": "<p>\n      The format in which the returned output will be encoded. For audio stream, this will be mp3, ogg_vorbis, or pcm. \n      For speech marks, this will be json.  </p>\n         <p>When pcm is used, the content returned is audio/pcm in a signed 16-bit, 1 channel (mono), little-endian format. </p>",
+            "smithy.api#documentation": "<p> The format in which the returned output will be encoded. For audio stream, this will\n      be mp3, ogg_vorbis, or pcm. For speech marks, this will be json. </p>\n         <p>When pcm is used, the content returned is audio/pcm in a signed 16-bit, 1 channel\n      (mono), little-endian format. </p>",
             "smithy.api#required": {}
+          }
+        },
+        "SampleRate": {
+          "target": "com.amazonaws.polly#SampleRate",
+          "traits": {
+            "smithy.api#documentation": "<p>The audio frequency specified in Hz.</p>\n         <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\", and \"24000\". The\n      default value for standard voices is \"22050\". The default value for neural voices is\n      \"24000\".</p>\n         <p>Valid values for pcm are \"8000\" and \"16000\" The default value is \"16000\". </p>"
           }
         },
         "SpeechMarkTypes": {
@@ -1447,28 +1453,24 @@
             "smithy.api#documentation": "<p>The type of speech marks returned for the input text.</p>"
           }
         },
-        "LanguageCode": {
-          "target": "com.amazonaws.polly#LanguageCode",
+        "Text": {
+          "target": "com.amazonaws.polly#Text",
           "traits": {
-            "smithy.api#documentation": "<p>Optional language code for the Synthesize Speech request. This is only necessary if using a bilingual voice, \n      such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p>\n         <p>If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language\n        of the bilingual voice. The default language for any voice is the one returned by the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html\">DescribeVoices</a> \n        operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than \n      Hindi.</p>"
-          }
-        },
-        "LexiconNames": {
-          "target": "com.amazonaws.polly#LexiconNameList",
-          "traits": {
-            "smithy.api#documentation": "<p>List of one or more pronunciation lexicon names you want the service to apply\n      during synthesis. Lexicons are applied only if the language of the lexicon is the same\n      as the language of the voice. For information about storing lexicons, \n      see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html\">PutLexicon</a>.</p>"
+            "smithy.api#documentation": "<p> Input text to synthesize. If you specify <code>ssml</code> as the\n        <code>TextType</code>, follow the SSML format for the input text. </p>",
+            "smithy.api#required": {}
           }
         },
         "TextType": {
           "target": "com.amazonaws.polly#TextType",
           "traits": {
-            "smithy.api#documentation": "<p>\n      Specifies whether the input text is plain text or SSML. The default value is plain text.\n      For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/ssml.html\">Using SSML</a>.</p>"
+            "smithy.api#documentation": "<p> Specifies whether the input text is plain text or SSML. The default value is plain\n      text. For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/ssml.html\">Using SSML</a>.</p>"
           }
         },
-        "SampleRate": {
-          "target": "com.amazonaws.polly#SampleRate",
+        "VoiceId": {
+          "target": "com.amazonaws.polly#VoiceId",
           "traits": {
-            "smithy.api#documentation": "<p>The audio frequency specified in Hz.</p>\n         <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\", and \"24000\". The \n      default value for standard voices is \"22050\". The default value for neural voices is \"24000\".</p>\n         <p>Valid values for pcm are \"8000\" and \"16000\" The default value is \"16000\". </p>"
+            "smithy.api#documentation": "<p> Voice ID to use for the synthesis. You can get a list of available voice IDs by\n      calling the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html\">DescribeVoices</a> operation. </p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -1479,8 +1481,15 @@
         "AudioStream": {
           "target": "com.amazonaws.polly#AudioStream",
           "traits": {
-            "smithy.api#documentation": "<p>\n      Stream containing the synthesized speech.\n    </p>",
+            "smithy.api#documentation": "<p> Stream containing the synthesized speech. </p>",
             "smithy.api#httpPayload": {}
+          }
+        },
+        "ContentType": {
+          "target": "com.amazonaws.polly#ContentType",
+          "traits": {
+            "smithy.api#documentation": "<p> Specifies the type audio stream. This should reflect the <code>OutputFormat</code>\n      parameter in your request. </p>\n         <ul>\n            <li>\n               <p> If you request <code>mp3</code> as the <code>OutputFormat</code>, the\n            <code>ContentType</code> returned is audio/mpeg. </p>\n            </li>\n            <li>\n               <p> If you request <code>ogg_vorbis</code> as the <code>OutputFormat</code>, the\n            <code>ContentType</code> returned is audio/ogg. </p>\n            </li>\n            <li>\n               <p> If you request <code>pcm</code> as the <code>OutputFormat</code>, the\n            <code>ContentType</code> returned is audio/pcm in a signed 16-bit, 1 channel (mono),\n          little-endian format. </p>\n            </li>\n            <li>\n               <p>If you request <code>json</code> as the <code>OutputFormat</code>, the\n            <code>ContentType</code> returned is audio/json.</p>\n            </li>\n         </ul>\n         <p> </p>",
+            "smithy.api#httpHeader": "Content-Type"
           }
         },
         "RequestCharacters": {
@@ -1488,13 +1497,6 @@
           "traits": {
             "smithy.api#documentation": "<p>Number of characters synthesized.</p>",
             "smithy.api#httpHeader": "x-amzn-RequestCharacters"
-          }
-        },
-        "ContentType": {
-          "target": "com.amazonaws.polly#ContentType",
-          "traits": {
-            "smithy.api#documentation": "<p>\n      Specifies the type audio stream. This should reflect the   \n      <code>OutputFormat</code> parameter in your request.\n    </p>\n         <ul>\n            <li>\n               <p>\n          If you request <code>mp3</code> as the <code>OutputFormat</code>, \n          the <code>ContentType</code> returned is audio/mpeg.\n        </p>\n            </li>\n            <li>\n               <p>\n          If you request <code>ogg_vorbis</code> as the <code>OutputFormat</code>, \n          the <code>ContentType</code> returned is audio/ogg.\n        </p>\n            </li>\n            <li>\n               <p> If you request <code>pcm</code> as the <code>OutputFormat</code>, the\n            <code>ContentType</code> returned is audio/pcm   in a signed 16-bit, 1 channel (mono),\n          little-endian format. </p>\n            </li>\n            <li>\n               <p>If you request <code>json</code> as the <code>OutputFormat</code>, the <code>ContentType</code>\n          returned is audio/json.</p>\n            </li>\n         </ul>\n         <p>\n      \n    </p>",
-            "smithy.api#httpHeader": "Content-Type"
           }
         }
       }
@@ -1542,7 +1544,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The value of the \"Text\" parameter is longer than the accepted limits. For the <code>SynthesizeSpeech</code> API, the limit for \n      input text is a maximum of 6000 characters total, of which no more than 3000 can be billed characters. For the <code>StartSpeechSynthesisTask</code> API, the maximum \n      is 200,000 characters, of which no more than 100,000 can be billed characters.\n      SSML tags are not counted as billed characters.</p>",
+        "smithy.api#documentation": "<p>The value of the \"Text\" parameter is longer than the accepted limits. For the\n        <code>SynthesizeSpeech</code> API, the limit for input text is a maximum of 6000 characters\n      total, of which no more than 3000 can be billed characters. For the\n        <code>StartSpeechSynthesisTask</code> API, the maximum is 200,000 characters, of which no\n      more than 100,000 can be billed characters. SSML tags are not counted as billed\n      characters.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 400
       }
@@ -1570,7 +1572,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The alphabet specified by the lexicon is not a supported alphabet.\n      Valid values are <code>x-sampa</code> and <code>ipa</code>.</p>",
+        "smithy.api#documentation": "<p>The alphabet specified by the lexicon is not a supported alphabet. Valid values are\n        <code>x-sampa</code> and <code>ipa</code>.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 400
       }
@@ -1583,7 +1585,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The language specified in the lexicon is unsupported. For a list of \n      supported languages, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_LexiconAttributes.html\">Lexicon Attributes</a>.</p>",
+        "smithy.api#documentation": "<p>The language specified in the lexicon is unsupported. For a list of supported\n      languages, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_LexiconAttributes.html\">Lexicon\n        Attributes</a>.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 400
       }
@@ -1591,6 +1593,18 @@
     "com.amazonaws.polly#Voice": {
       "type": "structure",
       "members": {
+        "Gender": {
+          "target": "com.amazonaws.polly#Gender",
+          "traits": {
+            "smithy.api#documentation": "<p>Gender of the voice.</p>"
+          }
+        },
+        "Id": {
+          "target": "com.amazonaws.polly#VoiceId",
+          "traits": {
+            "smithy.api#documentation": "<p>Amazon Polly assigned voice ID. This is the ID that you specify when calling the\n        <code>SynthesizeSpeech</code> operation.</p>"
+          }
+        },
         "LanguageCode": {
           "target": "com.amazonaws.polly#LanguageCode",
           "traits": {
@@ -1603,34 +1617,22 @@
             "smithy.api#documentation": "<p>Human readable name of the language in English.</p>"
           }
         },
-        "Id": {
-          "target": "com.amazonaws.polly#VoiceId",
-          "traits": {
-            "smithy.api#documentation": "<p>Amazon Polly assigned voice ID. This is the ID that you specify \n    when calling the <code>SynthesizeSpeech</code> operation.</p>"
-          }
-        },
-        "Gender": {
-          "target": "com.amazonaws.polly#Gender",
-          "traits": {
-            "smithy.api#documentation": "<p>Gender of the voice.</p>"
-          }
-        },
-        "SupportedEngines": {
-          "target": "com.amazonaws.polly#EngineList",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies which engines (<code>standard</code> or <code>neural</code>) that are supported by a given voice.</p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.polly#VoiceName",
           "traits": {
-            "smithy.api#documentation": "<p>Name of the voice (for example, Salli, Kendra, etc.).\n      This provides a human readable voice name that you might display \n    in your application.</p>"
+            "smithy.api#documentation": "<p>Name of the voice (for example, Salli, Kendra, etc.). This provides a human readable\n      voice name that you might display in your application.</p>"
           }
         },
         "AdditionalLanguageCodes": {
           "target": "com.amazonaws.polly#LanguageCodeList",
           "traits": {
-            "smithy.api#documentation": "<p>Additional codes for languages available for the specified voice in addition to its default language. </p>\n         <p>For example, the default language for Aditi is Indian English (en-IN) because it was first used for that language. Since \n    Aditi is bilingual and fluent in both Indian English and Hindi, this parameter would show the code <code>hi-IN</code>.</p>"
+            "smithy.api#documentation": "<p>Additional codes for languages available for the specified voice in addition to its\n      default language. </p>\n         <p>For example, the default language for Aditi is Indian English (en-IN) because it was first\n      used for that language. Since Aditi is bilingual and fluent in both Indian English and Hindi,\n      this parameter would show the code <code>hi-IN</code>.</p>"
+          }
+        },
+        "SupportedEngines": {
+          "target": "com.amazonaws.polly#EngineList",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies which engines (<code>standard</code> or <code>neural</code>) that are supported\n      by a given voice.</p>"
           }
         }
       },
@@ -1785,6 +1787,9 @@
           },
           {
             "value": "Nicole"
+          },
+          {
+            "value": "Olivia"
           },
           {
             "value": "Penelope"
