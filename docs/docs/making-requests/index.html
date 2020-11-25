@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.78.0" />
+
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+
+<link rel="shortcut icon" href="/favicons/favicon.ico" >
+<link rel="apple-touch-icon" href="/aws-sdk-go-v2/favicons/apple-touch-icon-180x180.png" sizes="180x180">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-36x36.png" sizes="36x36">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-48x48.png" sizes="48x48">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-72x72.png" sizes="72x72">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-144x144.png" sizes="144x144">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-192x192.png" sizes="192x192">
+
+<title>Using the AWS SDK for Go V2 with AWS Services | AWS SDK for Go V2</title><meta property="og:title" content="Using the AWS SDK for Go V2 with AWS Services" />
+<meta property="og:description" content="Construct service clients and make operation calls to send requests to AWS services." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/making-requests/" />
+<meta property="article:published_time" content="2020-11-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-24T14:58:20-08:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
+<meta itemprop="name" content="Using the AWS SDK for Go V2 with AWS Services">
+<meta itemprop="description" content="Construct service clients and make operation calls to send requests to AWS services.">
+<meta itemprop="datePublished" content="2020-11-12T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-11-24T14:58:20-08:00" />
+<meta itemprop="wordCount" content="2002">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Using the AWS SDK for Go V2 with AWS Services"/>
+<meta name="twitter:description" content="Construct service clients and make operation calls to send requests to AWS services."/>
+
+
+
+
+
+<link rel="preload" href="/aws-sdk-go-v2/scss/main.min.a40e8388f84bdd24bc3411e01a2a4a50b09036c9b079bd05a1eb025839f53861.css" as="style">
+<link href="/aws-sdk-go-v2/scss/main.min.a40e8388f84bdd24bc3411e01a2a4a50b09036c9b079bd05a1eb025839f53861.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+
+<script
+  src="https://unpkg.com/lunr@2.3.8/lunr.min.js"
+  integrity="sha384-vRQ9bDyE0Wnu+lMfm57BlYLO0/XauFuKpVsZPs7KEDwYKktWi5+Kz3MP8++DFlRY"
+  crossorigin="anonymous"></script>
+
+
+
+
+  </head>
+  <body class="td-page">
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+        <a class="navbar-brand" href="/aws-sdk-go-v2/">
+		<span class="navbar-logo"></span><span class="text-uppercase font-weight-bold">AWS SDK for Go V2</span>
+	</a>
+	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				<a class="nav-link active" href="/aws-sdk-go-v2/docs/" ><span class="active">Documentation</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				<a class="nav-link" href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2" target="_blank" ><span>API</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				<a class="nav-link" href="https://github.com/aws/aws-sdk-go-v2" target="_blank" ><span>GitHub</span></a>
+			</li>
+			
+			
+			
+		</ul>
+	</div>
+	<div class="navbar-nav d-none d-lg-block">
+
+
+
+<input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.c4f65b5ca8db8903b35112598c16e5c1.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
+</div>
+</nav>
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <form class="td-sidebar__search d-flex align-items-center d-lg-none">
+    
+
+
+
+<input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.c4f65b5ca8db8903b35112598c16e5c1.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+    
+    
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Documentation</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="aws-sdk-go-v2docs">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsgetting-started" href="/aws-sdk-go-v2/docs/getting-started/">Getting Started</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/configuring-sdk/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Configuring the SDK</a>
+  </li>
+  <ul>
+    <li class="collapse " id="aws-sdk-go-v2docsconfiguring-sdk">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints" href="/aws-sdk-go-v2/docs/configuring-sdk/endpoints/">Endpoints</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsconfiguring-sdkcustom-http" href="/aws-sdk-go-v2/docs/configuring-sdk/custom-http/">HTTP Client</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsconfiguring-sdklogging" href="/aws-sdk-go-v2/docs/configuring-sdk/logging/">Logging</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docshandling-errors" href="/aws-sdk-go-v2/docs/handling-errors/">Handling Errors</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/sdk-utilities/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">SDK Utilities</a>
+  </li>
+  <ul>
+    <li class="collapse " id="aws-sdk-go-v2docssdk-utilities">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssdk-utilitiescloudfront" href="/aws-sdk-go-v2/docs/sdk-utilities/cloudfront/">Amazon CloudFront</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssdk-utilitiesec2-imds" href="/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/">Amazon EC2 IMDS</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssdk-utilitiess3" href="/aws-sdk-go-v2/docs/sdk-utilities/s3/">Amazon S3</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-aws-sdk-go-v2docsmaking-requests" href="/aws-sdk-go-v2/docs/making-requests/">Using AWS Services</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docscloud9-go" href="/aws-sdk-go-v2/docs/cloud9-go/">Using Cloud9 with the SDK</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/security/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Security</a>
+  </li>
+  <ul>
+    <li class="collapse " id="aws-sdk-go-v2docssecurity">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritycompliance-validation" href="/aws-sdk-go-v2/docs/security/compliance-validation/">Compliance Validation</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecurityiam" href="/aws-sdk-go-v2/docs/security/iam/">Identity and Access Management</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecurityinfrastructure-security" href="/aws-sdk-go-v2/docs/security/infrastructure-security/">Infrastructure Security</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritydisaster-recovery-resiliency" href="/aws-sdk-go-v2/docs/security/disaster-recovery-resiliency/">Resilience</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritydata-protection" href="/aws-sdk-go-v2/docs/security/data-protection/">Data Protection</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritytls" href="/aws-sdk-go-v2/docs/security/tls/">Enforcing TLS 1.2</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+    </li>
+  </ul>
+</ul>
+
+  </nav>
+</div>
+
+
+
+
+          </div>
+          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+            
+
+
+
+
+
+
+<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
+
+
+
+
+
+
+
+
+
+
+
+<a href="https://github.com/aws/aws-sdk-go-v2/edit/documentation/content/en/docs/making-requests.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/aws/aws-sdk-go-v2/new/documentation/content/en/docs/making-requests.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> Create child page</a>
+<a href="https://github.com/aws/aws-sdk-go-v2/issues/new?title=Using%20the%20AWS%20SDK%20for%20Go%20V2%20with%20AWS%20Services" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+
+
+<a href="https://github.com/aws/aws-sdk-go-v2/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
+
+</div>
+
+
+
+
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#constructing-a-service-client">Constructing a Service Client</a>
+      <ul>
+        <li><a href="#newfromconfig">NewFromConfig</a></li>
+        <li><a href="#new">New</a></li>
+      </ul>
+    </li>
+    <li><a href="#calling-service-operations">Calling Service Operations</a>
+      <ul>
+        <li><a href="#passing-parameters-to-a-service-operation">Passing Parameters to a Service Operation</a></li>
+        <li><a href="#OverrideClientOptionsForOperation">Overriding Client Options For Operation Call</a></li>
+        <li><a href="#HandlingOperationResponses">Handling Operation Responses</a></li>
+      </ul>
+    </li>
+    <li><a href="#concurrently-using-service-clients">Concurrently Using Service Clients</a></li>
+    <li><a href="#using-operation-paginators">Using Operation Paginators</a></li>
+    <li><a href="#using-waiters">Using Waiters</a></li>
+  </ul>
+</nav>
+
+
+
+          </div>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
+	<ol class="breadcrumb spb-1">
+		
+
+
+
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://aws.github.io/aws-sdk-go-v2/docs/">Documentation</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item active" aria-current="page">
+	<a href="https://aws.github.io/aws-sdk-go-v2/docs/making-requests/">Using AWS Services</a>
+</li>
+
+	</ol>
+</nav	>
+
+            
+<div class="td-content">
+	<h1>Using the AWS SDK for Go V2 with AWS Services</h1>
+    <div class="lead">Construct service clients and make operation calls to send requests to AWS services.</div>
+	       
+	<p>To make calls to an AWS service, you must first construct a service client instance. A service client
+provides low-level access to every API action for that service. For example, you create an Amazon S3
+service client to make calls to Amazon S3 APIs.</p>
+<p>When you call service operations, you pass in input parameters as a struct. A successful call will result in an
+output struct containing the service API response. For example, after you successfully call an Amazon S3
+create bucket action, the action returns an output struct with the bucket&rsquo;s location.</p>
+<p>For the list of service clients, including their methods and parameters, see the <a href="">AWS SDK for Go V2 API Reference</a></p>
+<h2 id="constructing-a-service-client">Constructing a Service Client</h2>
+<p>Service clients can be constructed using either the <code>New</code> or <code>NewFromConfig</code> functions available in service client&rsquo;s
+Go package. Each function will return a <code>Client</code> struct type containing the methods for invoking the service APIs.
+The <code>New</code> and <code>NewFromConfig</code> each provide the same set of configurable options for constructing a service client, but
+but provide slightly different construction patterns that we will look at in the following sections.</p>
+<h3 id="newfromconfig">NewFromConfig</h3>
+<p><code>NewFromConfig</code> function provides a consistent interface for constructing service clients using the
+<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Config">aws.Config</a>. An <code>aws.Config</code> can be loaded using the
+<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config#LoadDefaultConfig">config.LoadDefaultConfig</a>. For more information on constructing
+an <code>aws.Config</code> see <a href="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/">Configure the SDK</a>. The following example shows how to construct
+an Amazon S3 service client using the <code>aws.Config</code>and the <code>NewFromConfig</code> function:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">()</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87">panic</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">)</span>
+</code></pre></div><h4 id="overriding-configuration">Overriding Configuration</h4>
+<p><code>NewFromConfig</code> can take one or more functional arguments that can mutate a client&rsquo;s configuration <code>Options</code> struct.
+This allows you to make specific overrides such as changing the Region, or modifying service specific options such as
+Amazon S3 <code>UseAccelerate</code> option. For example:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">()</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87">panic</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Region</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;us-west-2&#34;</span>
+	<span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">UseAccelerate</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">true</span>
+<span style="color:#000;font-weight:bold">})</span>
+</code></pre></div><p>Overrides to the client <code>Options</code> value is determined by the order that the functional arguments are given to
+<code>NewFromConfig</code>.</p>
+<h3 id="new">New</h3>
+
+
+<div class="pageinfo pageinfo-info">
+<p><code>New</code> is considered a more advanced form of client construction. We recommend you use <code>NewFromConfig</code> for client
+construction, as it allows construction using the <code>aws.Config</code> struct. This removes the need to construct an <code>Options</code>
+struct instance for each service client your application requires.</p>
+
+</div>
+
+<p><code>New</code> function is a client constructor provides an interface for constructing clients using only the client packages
+<code>Options</code> struct for defining the client&rsquo;s configuration options. For example to construct Amazon S3
+client using <code>New</code>:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/aws&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/credentials&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">New</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">Region</span><span style="color:#000;font-weight:bold">:</span>      <span style="color:#4e9a06">&#34;us-west-2&#34;</span><span style="color:#000;font-weight:bold">,</span>
+	<span style="color:#000">Credentials</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">CredentialsCache</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">Provider</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">credentials</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewStaticCredentials</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">accessKey</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">secretKey</span><span style="color:#000;font-weight:bold">)}.</span>
+<span style="color:#000;font-weight:bold">})</span>
+</code></pre></div><h4 id="overriding-configuration-1">Overriding Configuration</h4>
+<p><code>New</code> can take one or more functional arguments that can mutate a client&rsquo;s configuration <code>Options</code> struct.
+This allows you to make specific overrides such as changing the Region or modifying service specific options
+such as Amazon S3 <code>UseAccelerate</code> option. For example:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/aws&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/credentials&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#000">options</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">Region</span><span style="color:#000;font-weight:bold">:</span>      <span style="color:#4e9a06">&#34;us-west-2&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#000">Credentials</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">CredentialsCache</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">Provider</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">credentials</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewStaticCredentials</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">accessKey</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">secretKey</span><span style="color:#000;font-weight:bold">)}.</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">New</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">options</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Region</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;us-east-1&#34;</span>
+	<span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">UseAccelerate</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">true</span>
+<span style="color:#000;font-weight:bold">})</span>
+</code></pre></div><p>Overrides to the client <code>Options</code> value is determined by the order that the functional arguments are given to <code>New</code>.</p>
+<h2 id="calling-service-operations">Calling Service Operations</h2>
+<p>After you have a service client instance, you can use it to call a service&rsquo;s operations. For example to call the
+Amazon S3 <code>GetObject</code> operation:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000">response</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObject</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;my-bucket&#34;</span><span style="color:#000;font-weight:bold">),</span>
+	<span style="color:#000">Key</span><span style="color:#000;font-weight:bold">:</span>    <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;obj-key&#34;</span><span style="color:#000;font-weight:bold">),</span>
+<span style="color:#000;font-weight:bold">})</span>
+</code></pre></div><p>When you call a service operation, the SDK synchronously validates the input, serializes the request, signs it with your
+credentials, sends it to AWS, and then deserializes a response or an error. In most cases, you can call service
+operations directly. Each service operation client method will return an operation response struct, and an
+error interface type. You should always check <code>error</code> type to determine if an error occurred before attempting to access
+the service operation&rsquo;s response struct.</p>
+<h3 id="passing-parameters-to-a-service-operation">Passing Parameters to a Service Operation</h3>
+<p>Each service operation method takes a <a href="https://golang.org/pkg/context/#Context">context.Context</a> value that can be
+used for setting request deadlines that will be honored by the SDK. In addition, each service operation will take a
+<code>&lt;OperationName&gt;Input</code> struct found in the service&rsquo;s respective Go package. You pass in API input parameters using
+the operation input struct.</p>
+<p>Operation input structures can have input parameters such as the standard Go numerics, boolean, string, map, and list
+types. In more complex API operations a service may have more complex modeling of input parameters. These other types
+such as service specific structures and enum values are found in the service&rsquo;s <code>types</code> Go package.</p>
+<p>In addition, services may distinguish between the default value of a Go type and whether the value was set or not by the
+user. In these cases, input parameters may require you to pass a pointer reference to the type in question. For standard
+Go types like numerics, boolean, and string there are <code>&lt;Type&gt;</code> and <code>From&lt;Type&gt;</code> convenience functions available in the
+<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws">aws</a> to ease this conversion. For example <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#String">aws.String</a> can be used
+to convert a <code>string</code> to a <code>*string</code> type for input parameters that require a pointer to a string. Inversely
+<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#ToString">aws.ToString</a> can be used to transform a <code>*string</code> to a <code>string</code> while providing
+protection from dereferencing a nil pointer. The <code>To&lt;Type&gt;</code> functions are helpful when handling service responses.</p>
+<p>Let&rsquo;s look at an example of how we can use a Amazon S3 client to call the <code>GetObject</code> API, and construct
+our input using the <code>types</code> package, and <code>aws.&lt;Type&gt;</code> helpers.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;context&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3/types&#34;</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">()</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87">panic</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">)</span>
+
+<span style="color:#000">resp</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObject</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span>       <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;my-bucket&#34;</span><span style="color:#000;font-weight:bold">),</span>
+    <span style="color:#000">Key</span><span style="color:#000;font-weight:bold">:</span>          <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;keyName&#34;</span><span style="color:#000;font-weight:bold">),</span>
+    <span style="color:#000">RequestPayer</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">types</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">RequestPayerRequester</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#000;font-weight:bold">})</span>
+</code></pre></div><h3 id="OverrideClientOptionsForOperation">Overriding Client Options For Operation Call</h3>
+<p>Similar to how client operation options can be modified during construction of a client using functional arguments,
+the client options can be modified at the time the operation method is called by providing one or more functional
+arguments to the service operation method. This action is concurrency safe and will not affect other concurrent
+operations on the client.</p>
+<p>For example to override the client region from &ldquo;us-west-2&rdquo; to &ldquo;us-east-1&rdquo;:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WithRegion</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;us-west-2&#34;</span><span style="color:#000;font-weight:bold">))</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#204a87;font-weight:bold">return</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">)</span>
+
+<span style="color:#000">params</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">resp</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObject</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#000">params</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Region</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;us-east-1&#34;</span>
+<span style="color:#000;font-weight:bold">})</span>
+</code></pre></div><h3 id="HandlingOperationResponses">Handling Operation Responses</h3>
+<p>Each service operation has an associated output struct that contains the service&rsquo;s operation response members.
+The output struct follows the following naming pattern <code>&lt;OperationName&gt;Output</code>. Some operations may have no members
+defined for their operation output. After calling a service operation, the return <code>error</code> argument type should always
+be checked to determine if an error occurred while invoking the service operation. Errors returned can range from
+client-side input validation errors to service-side error responses returned to the client. The operation&rsquo;s output
+struct should not be accessed in the event that a non-nil error is returned by the client.</p>
+<p>For example to log an operation error and prematurely return from the calling function:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000">response</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObject</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">())</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;GetObject error: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#204a87;font-weight:bold">return</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>For more information on error handling, including how to inspect for specific error types, see the
+<a href="https://aws.github.io/aws-sdk-go-v2/docs/handling-errors/">Handling Errors</a> documentation.</p>
+<h4 id="responses-with-ioreadcloser">Responses with io.ReadCloser</h4>
+<p>Some API operations return a response struct that contain an output member that is an <code>io.ReadCloser</code>. If you&rsquo;re making
+requests with these operations, always be sure to call <code>io.ReadCloser</code> member&rsquo;s <code>Close</code> method after you&rsquo;ve completed
+reading the content.</p>
+<p>For example Amazon S3 <code>GetObject</code> operation returns a response
+whose <code>Body</code> member is an <code>io.ReadCloser</code>:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000">resp</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObject</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectInput</span><span style="color:#000;font-weight:bold">{</span><span style="color:#ce5c00;font-weight:bold">...</span><span style="color:#000;font-weight:bold">})</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#8f5902;font-style:italic">// handle error
+</span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#204a87;font-weight:bold">return</span>
+<span style="color:#000;font-weight:bold">}</span>
+<span style="color:#8f5902;font-style:italic">// Make sure to always close the response Body when finished
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">defer</span> <span style="color:#000">resp</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Body</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Close</span><span style="color:#000;font-weight:bold">()</span>
+
+<span style="color:#000">decoder</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">json</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewDecoder</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">resp</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Body</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">decoder</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Decode</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">myStruct</span><span style="color:#000;font-weight:bold">);</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#8f5902;font-style:italic">// handle error
+</span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#204a87;font-weight:bold">return</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><h4 id="response-metadata">Response Metadata</h4>
+<p>All service operation output structs include a <code>ResultMetadata</code> member of type
+<a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#Metadata">middleware.Metadata</a>. <code>middleware.Metadata</code> is used by the SDK middleware
+to provide additional information from a service response that is not modeled by the service. This includes metadata
+like the <code>RequestID</code>. For example to retrieve the <code>RequestID</code> associated with a service response to assit AWS Support in
+troubleshooting a request:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;fmt&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;log&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/aws/middleware&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+
+<span style="color:#8f5902;font-style:italic">// ..
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#000">resp</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObject</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">})</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#204a87;font-weight:bold">return</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">requestID</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">ok</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetRequestIDMetadata</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">resp</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ResultMetadata</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">!</span><span style="color:#000">ok</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;RequestID not included with request&#34;</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;RequestID: %s\n&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">requestID</span><span style="color:#000;font-weight:bold">)</span>
+</code></pre></div><h2 id="concurrently-using-service-clients">Concurrently Using Service Clients</h2>
+<p>You can create goroutines that concurrently use the same service client to send multiple requests. You can use a service
+client with as many goroutines as you want.</p>
+<p>In the following example, an  service client is used in multiple goroutines. This example
+concurrently uploads two objects to an Amazon S3 bucket.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;log&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;strings&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">()</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#204a87;font-weight:bold">return</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">)</span>
+
+<span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">result</span> <span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">Output</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PutObjectOutput</span>
+    <span style="color:#000">Err</span>    <span style="color:#204a87;font-weight:bold">error</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">results</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#204a87">make</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">chan</span> <span style="color:#000">result</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">)</span>
+
+<span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">wg</span> <span style="color:#000">sync</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WaitGroup</span>
+<span style="color:#000">wg</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Add</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">)</span>
+
+<span style="color:#204a87;font-weight:bold">go</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+<span style="color:#204a87;font-weight:bold">defer</span> <span style="color:#000">wg</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Done</span><span style="color:#000;font-weight:bold">()</span>
+    <span style="color:#000">output</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PutObject</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PutObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;my-bucket&#34;</span><span style="color:#000;font-weight:bold">),</span>
+        <span style="color:#000">Key</span><span style="color:#000;font-weight:bold">:</span>    <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;foo&#34;</span><span style="color:#000;font-weight:bold">),</span>
+        <span style="color:#000">Body</span><span style="color:#000;font-weight:bold">:</span>   <span style="color:#000">strings</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewReader</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;foo body content&#34;</span><span style="color:#000;font-weight:bold">),</span>
+    <span style="color:#000;font-weight:bold">})</span>
+    <span style="color:#000">results</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">result</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">Output</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">output</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Err</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000;font-weight:bold">}()</span>
+
+<span style="color:#204a87;font-weight:bold">go</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#204a87;font-weight:bold">defer</span> <span style="color:#000">wg</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Done</span><span style="color:#000;font-weight:bold">()</span>
+    <span style="color:#000">output</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PutObject</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PutObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;my-bucket&#34;</span><span style="color:#000;font-weight:bold">),</span>
+        <span style="color:#000">Key</span><span style="color:#000;font-weight:bold">:</span>    <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;bar&#34;</span><span style="color:#000;font-weight:bold">),</span>
+        <span style="color:#000">Body</span><span style="color:#000;font-weight:bold">:</span>   <span style="color:#000">strings</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewReader</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;bar body content&#34;</span><span style="color:#000;font-weight:bold">),</span>
+    <span style="color:#000;font-weight:bold">})</span>
+    <span style="color:#000">results</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">result</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">Output</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">output</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Err</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000;font-weight:bold">}()</span>
+
+<span style="color:#000">wg</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Wait</span><span style="color:#000;font-weight:bold">()</span>
+
+<span style="color:#204a87">close</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">results</span><span style="color:#000;font-weight:bold">)</span>
+
+<span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">result</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#204a87;font-weight:bold">range</span> <span style="color:#000">results</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">result</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">result</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Err</span><span style="color:#000;font-weight:bold">)</span>
+        <span style="color:#204a87;font-weight:bold">continue</span>
+    <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;etag: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ToString</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">result</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Output</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ETag</span><span style="color:#000;font-weight:bold">))</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><h2 id="using-operation-paginators">Using Operation Paginators</h2>
+<p>Typically, when you retrieve a list of items, you may need to check the output struct for a token or marker to confirm
+whether the AWS service returned all results from your request. If present, you use the token or marker to request the
+next page of results. Instead of managing these tokens or markers, you can use the service package&rsquo;s available paginator
+types.</p>
+<p>Paginator helpers are available for supported service operations, and can be found in the service client&rsquo;s Go package.
+To construct a paginator for a supported operation, use the <code>New&lt;OperationName&gt;Paginator</code> function. Paginator construct
+functions take the service <code>Client</code>, the operation&rsquo;s <code>&lt;OperationName&gt;Input</code> input parameters, and an optional set of
+functional arguments allowing you to configure other optional paginator settings.</p>
+<p>The returned operation paginator type provides a convenient way to iterate over a paginated operation until you have
+reached the last page, or you have found the item(s) that your application was searching for. A paginator type has
+two methods: <code>HasMorePages</code> and <code>NextPage</code>. <code>HasMorePages</code> returns a boolean value of <code>true</code> if the first page has not
+been retrieved, or if additional pages available to retrieve using the operation. To retrieve the first or subsequent
+pages of the operation, the <code>NextPage</code> operation must be called. <code>NextPage</code> takes <code>context.Context</code> and returns
+the operation output and any corresponding error. Like the client operation method return parameters, the return error
+should always be checked before attempting to use the returned response structure.
+See <a href="#HandlingOperationResponses">Handling Operation Responses</a></p>
+<p>The following example uses the <code>ListObjectsV2</code> paginator to list up to three pages of object keys from the
+<code>ListObjectV2</code>operation. Each page consists of up to 10 keys, which is defined by the <code>Limit</code> paginator option.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;log&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/aws&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">()</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#204a87;font-weight:bold">return</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">)</span>
+
+<span style="color:#000">params</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ListObjectsV2Input</span><span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;my-bucket&#34;</span><span style="color:#000;font-weight:bold">),</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">pagiantor</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewListObjectsV2Paginator</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">client</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">params</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">ListObjectsV2PaginatorOptions</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Limit</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">10</span>
+<span style="color:#000;font-weight:bold">})</span>
+
+<span style="color:#000">pageNum</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#0000cf;font-weight:bold">0</span>
+<span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">pagiantor</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HasMorePages</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#000">pageNum</span> <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#0000cf;font-weight:bold">3</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">output</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">pagiantor</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NextPage</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">())</span>
+    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+    	<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+    	<span style="color:#204a87;font-weight:bold">return</span>
+    <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">value</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#204a87;font-weight:bold">range</span> <span style="color:#000">page</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Contents</span> <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">value</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Key</span><span style="color:#000;font-weight:bold">)</span>
+    <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#000">pageNum</span><span style="color:#ce5c00;font-weight:bold">++</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>Similar to client operation method, the client options like the request Region can be modified by providing one or more
+functional arguments to <code>NextPage</code>. For more information about overriding client options when calling an operation see
+<a href="#OverrideClientOptionsForOperation">Overriding Clients For Operation</a></p>
+<h2 id="using-waiters">Using Waiters</h2>
+
+
+<div class="pageinfo pageinfo-primary">
+<p>Waiters are not currently supported in the current AWS SDK for Go V2 developer preview release.</p>
+
+</div>
+
+
+	
+	
+	<div class="text-muted mt-5 pt-3 border-top">Last modified November 24, 2020: <a  href="https://github.com/aws/aws-sdk-go-v2/commit/653d2e220003e1a68dd2b8512fb12b5f7a9e447e">Developer: Guide Using AWS Services (#907) (653d2e2)</a>
+</div>
+</div>
+
+
+          </main>
+        </div>
+      </div>
+      
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Blog" aria-label="Blog">
+    <a class="text-white" target="_blank" rel="noopener noreferrer" href="https://aws.amazon.com/blogs/developer/category/developer-tools/aws-sdk-for-go/">
+      <i class="fa fa-rss"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
+    <a class="text-white" target="_blank" rel="noopener noreferrer" href="https://github.com/aws/aws-sdk-go-v2">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        <small class="text-white">&copy; 2020 Amazon Web Services, Inc. or its affiliates. All rights reserved. All Rights Reserved</small>
+        
+	
+		
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    </div>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/aws-sdk-go-v2/js/main.min.460c8ae21829f9b330823a08f34ac961d7d0daa8874c8c9eba7ea0484bb42a79.js" integrity="sha256-RgyK4hgp&#43;bMwgjoI80rJYdfQ2qiHTIyeun6gSEu0Knk=" crossorigin="anonymous"></script>
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,206 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AWS SDK for Go V2 – Security for this AWS Product or Service</title>
+    <link>https://aws.github.io/aws-sdk-go-v2/docs/security/</link>
+    <description>Recent content in Security for this AWS Product or Service on AWS SDK for Go V2</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 09 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://aws.github.io/aws-sdk-go-v2/docs/security/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Compliance Validation for this AWS Product or Service</title>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/security/compliance-validation/</link>
+      <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/security/compliance-validation/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This AWS product or service follows
+the &lt;a href=&#34;https://aws.amazon.com/compliance/shared-responsibility-model&#34;&gt;shared responsibility model&lt;/a&gt; through the specific
+Amazon Web Services (AWS)
+services it supports.
+For &lt;a href=&#34;https://aws.amazon.com/security/?id=docs_gateway#aws-security&#34;&gt;AWS service security information&lt;/a&gt;, see the AWS
+service security documentation page
+and &lt;a href=&#34;https://aws.amazon.com/compliance/services-in-scope/&#34;&gt;AWS services that are in scope of AWS compliance efforts by compliance program&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The security and compliance of Amazon Web Services (AWS) services is assessed by third-party auditors as part of
+multiple AWS compliance programs. These include SOC, PCI, FedRAMP, HIPAA, and others. AWS provides a frequently updated
+list of AWS services in scope of specific compliance programs at AWS Services in Scope by Compliance Program.&lt;/p&gt;
+&lt;p&gt;Third-party audit reports are available for you to download using AWS Artifact. For more information,
+see &lt;a href=&#34;https://docs.aws.amazon.com/artifact/latest/ug/downloading-documents.html&#34;&gt;Downloading Reports in AWS Artifact&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For more information about AWS compliance programs,
+see &lt;a href=&#34;https://aws.amazon.com/compliance/programs/&#34;&gt;AWS Compliance Programs&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Your compliance responsibility when using this AWS product or service to access an AWS service is determined by the
+sensitivity of your data, your organization’s compliance objectives, and applicable laws and regulations. If your use of
+an AWS service is subject to compliance with standards such as HIPAA, PCI, or FedRAMP, AWS provides resources to help:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://aws.amazon.com/quickstart/?quickstart-all.sort-by=item.additionalFields.updateDate&amp;amp;quickstart-all.sort-order=desc&amp;amp;awsf.quickstart-homepage-filter=categories%23security-identity-compliance&#34;&gt;Security and Compliance Quick Start Guides&lt;/a&gt;
+– Deployment guides that discuss architectural considerations and provide steps for deploying security-focused and
+compliance-focused baseline environments on AWS.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://d0.awsstatic.com/whitepapers/compliance/AWS_HIPAA_Compliance_Whitepaper.pdf&#34;&gt;Architecting for HIPAA Security and Compliance Whitepaper&lt;/a&gt;
+– A whitepaper that describes how companies can use AWS to create HIPAA-compliant applications.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://aws.amazon.com/compliance/resources/&#34;&gt;AWS Compliance Resources&lt;/a&gt; – A collection of workbooks and guides that
+might apply to your industry and location.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://aws.amazon.com/config/&#34;&gt;AWS Config&lt;/a&gt; – A service that assesses how well your resource configurations comply
+with internal practices, industry guidelines, and regulations.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://aws.amazon.com/security-hub&#34;&gt;AWS Security Hub&lt;/a&gt; – A comprehensive view of your security state within AWS that
+helps you check your compliance with security industry standards and best practices.&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Identity and Access Management for this AWS Product or Service</title>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/security/iam/</link>
+      <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/security/iam/</guid>
+      <description>
+        
+        
+        &lt;p&gt;AWS Identity and Access Management (IAM) is an Amazon Web Services (AWS) service that helps an administrator securely
+control access to AWS resources. IAM administrators control who can be authenticated (signed in) and authorized (have
+permissions) to use resources AWS services. IAM is an AWS service that you can use with no additional charge.&lt;/p&gt;
+&lt;p&gt;To use this AWS product or service to access AWS, you need an AWS account and AWS credentials. To increase the security
+of your AWS account, we recommend that you use an IAM user to provide access credentials instead of using your AWS
+account credentials.&lt;/p&gt;
+&lt;p&gt;For details about working with IAM, see &lt;a href=&#34;https://aws.amazon.com/iam/&#34;&gt;IAM&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For an overview of IAM users and why they are important for the security of your account,
+see &lt;a href=&#34;https://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html&#34;&gt;AWS Security Credentials&lt;/a&gt;
+in the &lt;a href=&#34;https://docs.aws.amazon.com/general/latest/gr/&#34;&gt;Amazon Web Services General Reference&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This AWS product or service follows
+the &lt;a href=&#34;https://aws.amazon.com/compliance/shared-responsibility-model&#34;&gt;shared responsibility model&lt;/a&gt; through the specific
+Amazon Web Services (AWS)
+services it supports. For AWS service security information, see
+the &lt;a href=&#34;https://aws.amazon.com/security/?id=docs_gateway#aws-security&#34;&gt;AWS service security documentation page&lt;/a&gt; and AWS
+services that are in scope
+of &lt;a href=&#34;https://aws.amazon.com/compliance/services-in-scope/&#34;&gt;AWS compliance efforts by compliance program&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Infrastructure Security for this AWS Product or Service</title>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/security/infrastructure-security/</link>
+      <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/security/infrastructure-security/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This AWS product or service follows
+the &lt;a href=&#34;https://aws.amazon.com/compliance/shared-responsibility-model&#34;&gt;shared responsibility model&lt;/a&gt; through the specific
+Amazon Web Services (AWS)
+services it supports. For AWS service security information, see
+the &lt;a href=&#34;https://aws.amazon.com/security/?id=docs_gateway#aws-security&#34;&gt;AWS service security documentation page&lt;/a&gt;
+and &lt;a href=&#34;https://aws.amazon.com/compliance/services-in-scope/&#34;&gt;AWS services that are in scope of AWS compliance efforts by compliance program&lt;/a&gt;
+.&lt;/p&gt;
+&lt;p&gt;For information about AWS security processes, see
+the &lt;a href=&#34;https://d0.awsstatic.com/whitepapers/Security/AWS_Security_Whitepaper.pdf&#34;&gt;AWS: Overview of Security Processes&lt;/a&gt;
+whitepaper.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Resilience for this AWS Product or Service</title>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/security/disaster-recovery-resiliency/</link>
+      <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/security/disaster-recovery-resiliency/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The Amazon Web Services (AWS) global infrastructure is built around AWS Regions and Availability Zones.&lt;/p&gt;
+&lt;p&gt;AWS Regions provide multiple physically separated and isolated Availability Zones, which are connected with low-latency,
+high-throughput, and highly redundant networking.&lt;/p&gt;
+&lt;p&gt;With Availability Zones, you can design and operate applications and databases that automatically fail over between
+Availability Zones without interruption. Availability Zones are more highly available, fault tolerant, and scalable than
+traditional single or multiple data center infrastructures.&lt;/p&gt;
+&lt;p&gt;For more information about AWS Regions and Availability Zones,
+see &lt;a href=&#34;https://aws.amazon.com/about-aws/global-infrastructure/&#34;&gt;AWS Global Infrastructure&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This AWS product or service follows
+the &lt;a href=&#34;https://aws.amazon.com/compliance/shared-responsibility-model&#34;&gt;shared responsibility model&lt;/a&gt; through the specific
+Amazon Web Services (AWS)
+services it supports. For AWS service security information, see
+the &lt;a href=&#34;https://aws.amazon.com/security/?id=docs_gateway#aws-security&#34;&gt;AWS service security documentation page&lt;/a&gt;
+and &lt;a href=&#34;https://aws.amazon.com/compliance/services-in-scope/&#34;&gt;AWS services that are in scope of AWS compliance efforts by compliance program&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Data Protection in this AWS Product or Service</title>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/security/data-protection/</link>
+      <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/security/data-protection/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;a href=&#34;https://aws.amazon.com/compliance/shared-responsibility-model&#34;&gt;shared responsibility model&lt;/a&gt; applies to data
+protection in this AWS product or service. As described in this model, AWS is responsible for protecting the global
+infrastructure that runs all of the AWS Cloud. You are responsible for maintaining control over your content that is
+hosted on this infrastructure. This content includes the security configuration and management tasks for the AWS
+services that you use. For more information about data privacy, see
+the &lt;a href=&#34;http://aws.amazon.com/compliance/data-privacy-faq%3E&#34;&gt;Data Privacy FAQ&lt;/a&gt;. For information about data protection in
+Europe, see the
+&lt;a href=&#34;http://aws.amazon.com/blogs/security/the-aws-shared-responsibility-model-and-gdpr&#34;&gt;AWS Shared Responsibility Model and GDPR&lt;/a&gt;
+blog post on the AWS Security Blog.&lt;/p&gt;
+&lt;p&gt;For data protection purposes, we recommend that you protect AWS account credentials and set up individual user accounts
+with AWS Identity and Access Management (IAM). That way each user is given only the permissions necessary to fulfill
+their job duties. We also recommend that you secure your data in the following ways:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Use multi-factor authentication (MFA) with each account.&lt;/li&gt;
+&lt;li&gt;Use SSL/TLS to communicate with AWS resources. We recommend TLS 1.2 or later.&lt;/li&gt;
+&lt;li&gt;Set up API and user activity logging with AWS CloudTrail.&lt;/li&gt;
+&lt;li&gt;Use AWS encryption solutions, with all default security controls within AWS services.&lt;/li&gt;
+&lt;li&gt;Use advanced managed security services such as Amazon Macie, which assists in discovering and securing personal data that
+is stored in Amazon S3.&lt;/li&gt;
+&lt;li&gt;If you require FIPS 140-2 validated cryptographic modules when accessing AWS through a command line interface or an
+API, use a FIPS endpoint. For more information about the available FIPS endpoints,
+see &lt;a href=&#34;http://aws.amazon.com/compliance/fips&#34;&gt;Federal Information Processing Standard (FIPS) 140-2&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We strongly recommend that you never put sensitive identifying information, such as your customers&#39; account numbers,
+into free-form fields such as a &lt;strong&gt;Name&lt;/strong&gt; field. This includes when you work with AWS SDK for Go V2 or other AWS services
+using the console, API, AWS CLI, or AWS SDKs. Any data that you enter into AWS SDK for Go V2 or other services might get
+picked up for inclusion in diagnostic logs. When you provide a URL to an external server, don&amp;rsquo;t include credentials
+information in the URL to validate your request to that server.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Enforcing TLS Version 1.2 in AWS SDK for Go V2</title>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/security/tls/</link>
+      <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/security/tls/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The AWS SDK for Go V2 configures the default HTTP client used by the SDK service clients to require a minimum version
+of TLS 1.2 or greater. When using the &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/transport/http#BuildableClient&#34;&gt;http.BuildableClient&lt;/a&gt; to
+customize the SDK HTTP client, the minimum TLS value is configured as TLS 1.2.&lt;/p&gt;
+
+
+&lt;div class=&#34;pageinfo pageinfo-warning&#34;&gt;
+&lt;p&gt;If your application constructs an HTTP client using a method other than the provided &lt;code&gt;BuildableClient&lt;/code&gt;, you must
+configure your client to set the minimum TLS version to 1.2.&lt;/p&gt;
+
+&lt;/div&gt;
+
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
