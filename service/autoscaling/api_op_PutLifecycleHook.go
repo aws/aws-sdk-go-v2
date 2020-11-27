@@ -37,7 +37,7 @@ import (
 // lifecycle action using the CompleteLifecycleAction API call.
 //
 // For more
-// information, see Amazon EC2 Auto Scaling Lifecycle Hooks
+// information, see Amazon EC2 Auto Scaling lifecycle hooks
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html) in
 // the Amazon EC2 Auto Scaling User Guide. If you exceed your maximum limit of
 // lifecycle hooks, which by default is 50 per Auto Scaling group, the call fails.

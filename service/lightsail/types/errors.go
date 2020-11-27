@@ -12,9 +12,9 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
-	Code *string
-	Docs *string
 	Tip  *string
+	Docs *string
+	Code *string
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -34,9 +34,9 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 type AccountSetupInProgressException struct {
 	Message *string
 
-	Tip  *string
 	Code *string
 	Docs *string
+	Tip  *string
 }
 
 func (e *AccountSetupInProgressException) Error() string {
@@ -60,9 +60,9 @@ func (e *AccountSetupInProgressException) ErrorFault() smithy.ErrorFault { retur
 type InvalidInputException struct {
 	Message *string
 
+	Tip  *string
 	Docs *string
 	Code *string
-	Tip  *string
 }
 
 func (e *InvalidInputException) Error() string {
@@ -81,9 +81,9 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 type NotFoundException struct {
 	Message *string
 
-	Code *string
 	Docs *string
 	Tip  *string
+	Code *string
 }
 
 func (e *NotFoundException) Error() string {
@@ -102,9 +102,9 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type OperationFailureException struct {
 	Message *string
 
-	Docs *string
-	Tip  *string
 	Code *string
+	Tip  *string
+	Docs *string
 }
 
 func (e *OperationFailureException) Error() string {
@@ -145,8 +145,8 @@ type UnauthenticatedException struct {
 	Message *string
 
 	Docs *string
-	Tip  *string
 	Code *string
+	Tip  *string
 }
 
 func (e *UnauthenticatedException) Error() string {

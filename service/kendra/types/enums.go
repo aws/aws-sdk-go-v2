@@ -152,6 +152,7 @@ type ConfluenceVersion string
 
 // Enum values for ConfluenceVersion
 const (
+	ConfluenceVersionCloud  ConfluenceVersion = "CLOUD"
 	ConfluenceVersionServer ConfluenceVersion = "SERVER"
 )
 
@@ -160,6 +161,7 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ConfluenceVersion) Values() []ConfluenceVersion {
 	return []ConfluenceVersion{
+		"CLOUD",
 		"SERVER",
 	}
 }
@@ -417,6 +419,24 @@ func (IndexStatus) Values() []IndexStatus {
 		"FAILED",
 		"UPDATING",
 		"SYSTEM_UPDATING",
+	}
+}
+
+type KeyLocation string
+
+// Enum values for KeyLocation
+const (
+	KeyLocationUrl           KeyLocation = "URL"
+	KeyLocationSecretManager KeyLocation = "SECRET_MANAGER"
+)
+
+// Values returns all known values for KeyLocation. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (KeyLocation) Values() []KeyLocation {
+	return []KeyLocation{
+		"URL",
+		"SECRET_MANAGER",
 	}
 }
 
@@ -690,5 +710,23 @@ func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"DESC",
 		"ASC",
+	}
+}
+
+type UserContextPolicy string
+
+// Enum values for UserContextPolicy
+const (
+	UserContextPolicyAttributeFilter UserContextPolicy = "ATTRIBUTE_FILTER"
+	UserContextPolicyUserToken       UserContextPolicy = "USER_TOKEN"
+)
+
+// Values returns all known values for UserContextPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UserContextPolicy) Values() []UserContextPolicy {
+	return []UserContextPolicy{
+		"ATTRIBUTE_FILTER",
+		"USER_TOKEN",
 	}
 }

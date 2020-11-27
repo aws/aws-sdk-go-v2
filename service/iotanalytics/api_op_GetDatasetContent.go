@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Retrieves the contents of a data set as pre-signed URIs.
+// Retrieves the contents of a data set as presigned URIs.
 func (c *Client) GetDatasetContent(ctx context.Context, params *GetDatasetContentInput, optFns ...func(*Options)) (*GetDatasetContentOutput, error) {
 	if params == nil {
 		params = &GetDatasetContentInput{}
@@ -44,7 +44,7 @@ type GetDatasetContentInput struct {
 
 type GetDatasetContentOutput struct {
 
-	// A list of "DatasetEntry" objects.
+	// A list of DatasetEntry objects.
 	Entries []types.DatasetEntry
 
 	// The status of the data set content.

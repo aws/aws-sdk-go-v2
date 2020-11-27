@@ -46,6 +46,10 @@ type GetTimeSeriesServiceStatisticsInput struct {
 	// specified, edge statistics are returned.
 	EntitySelectorExpression *string
 
+	// The forecasted high and low fault count values. Forecast enabled requests
+	// require the EntitySelectorExpression ID be provided.
+	ForecastStatistics *bool
+
 	// The Amazon Resource Name (ARN) of the group for which to pull statistics from.
 	GroupARN *string
 

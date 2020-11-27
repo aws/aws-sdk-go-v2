@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates a computer account in the specified directory, and joins the computer to
-// the directory.
+// Creates an Active Directory computer object in the specified directory.
 func (c *Client) CreateComputer(ctx context.Context, params *CreateComputerInput, optFns ...func(*Options)) (*CreateComputerOutput, error) {
 	if params == nil {
 		params = &CreateComputerInput{}

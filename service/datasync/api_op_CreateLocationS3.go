@@ -32,8 +32,8 @@ func (c *Client) CreateLocationS3(ctx context.Context, params *CreateLocationS3I
 // CreateLocationS3Request
 type CreateLocationS3Input struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon S3 bucket. If the bucket is on an
-	// AWS Outpost, this must be an access point ARN.
+	// The ARN of the Amazon S3 bucket. If the bucket is on an AWS Outpost, this must
+	// be an access point ARN.
 	//
 	// This member is required.
 	S3BucketArn *string
@@ -47,18 +47,17 @@ type CreateLocationS3Input struct {
 	S3Config *types.S3Config
 
 	// If you are using DataSync on an AWS Outpost, specify the Amazon Resource Names
-	// (ARNs) of the DataSync agents deployed on your AWS Outpost. For more information
-	// about launching a DataSync agent on an Amazon Outpost, see outposts-agent.
+	// (ARNs) of the DataSync agents deployed on your Outpost. For more information
+	// about launching a DataSync agent on an AWS Outpost, see outposts-agent.
 	AgentArns []string
 
 	// The Amazon S3 storage class that you want to store your files in when this
 	// location is used as a task destination. For buckets in AWS Regions, the storage
 	// class defaults to Standard. For buckets on AWS Outposts, the storage class
 	// defaults to AWS S3 Outposts. For more information about S3 storage classes, see
-	// Amazon S3 Storage Classes (https://aws.amazon.com/s3/storage-classes/) in the
-	// Amazon Simple Storage Service Developer Guide. Some storage classes have
-	// behaviors that can affect your S3 storage cost. For detailed information, see
-	// using-storage-classes.
+	// Amazon S3 Storage Classes (http://aws.amazon.com/s3/storage-classes/). Some
+	// storage classes have behaviors that can affect your S3 storage cost. For
+	// detailed information, see using-storage-classes.
 	S3StorageClass types.S3StorageClass
 
 	// A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used

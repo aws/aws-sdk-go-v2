@@ -345,6 +345,13 @@ func awsRestjson1_serializeOpDocumentCreateDatasetInput(v *CreateDatasetInput, v
 		ok.String(*v.DatasetName)
 	}
 
+	if v.LateDataRules != nil {
+		ok := object.Key("lateDataRules")
+		if err := awsRestjson1_serializeDocumentLateDataRules(v.LateDataRules, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RetentionPeriod != nil {
 		ok := object.Key("retentionPeriod")
 		if err := awsRestjson1_serializeDocumentRetentionPeriod(v.RetentionPeriod, ok); err != nil {
@@ -415,6 +422,17 @@ func (m *awsRestjson1_serializeOpCreateDatasetContent) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateDatasetContentInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -434,6 +452,18 @@ func awsRestjson1_serializeOpHttpBindingsCreateDatasetContentInput(v *CreateData
 		if err := encoder.SetURI("datasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateDatasetContentInput(v *CreateDatasetContentInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.VersionId != nil {
+		ok := object.Key("versionId")
+		ok.String(*v.VersionId)
 	}
 
 	return nil
@@ -2358,6 +2388,13 @@ func awsRestjson1_serializeOpDocumentUpdateDatasetInput(v *UpdateDatasetInput, v
 		}
 	}
 
+	if v.LateDataRules != nil {
+		ok := object.Key("lateDataRules")
+		if err := awsRestjson1_serializeDocumentLateDataRules(v.LateDataRules, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RetentionPeriod != nil {
 		ok := object.Key("retentionPeriod")
 		if err := awsRestjson1_serializeDocumentRetentionPeriod(v.RetentionPeriod, ok); err != nil {
@@ -2922,6 +2959,18 @@ func awsRestjson1_serializeDocumentDeltaTime(v *types.DeltaTime, value smithyjso
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDeltaTimeSessionWindowConfiguration(v *types.DeltaTimeSessionWindowConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TimeoutInMinutes != nil {
+		ok := object.Key("timeoutInMinutes")
+		ok.Integer(*v.TimeoutInMinutes)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDeviceRegistryEnrichActivity(v *types.DeviceRegistryEnrichActivity, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3066,6 +3115,52 @@ func awsRestjson1_serializeDocumentLambdaActivity(v *types.LambdaActivity, value
 		ok.String(*v.Next)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLateDataRule(v *types.LateDataRule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RuleConfiguration != nil {
+		ok := object.Key("ruleConfiguration")
+		if err := awsRestjson1_serializeDocumentLateDataRuleConfiguration(v.RuleConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RuleName != nil {
+		ok := object.Key("ruleName")
+		ok.String(*v.RuleName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLateDataRuleConfiguration(v *types.LateDataRuleConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeltaTimeSessionWindowConfiguration != nil {
+		ok := object.Key("deltaTimeSessionWindowConfiguration")
+		if err := awsRestjson1_serializeDocumentDeltaTimeSessionWindowConfiguration(v.DeltaTimeSessionWindowConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLateDataRules(v []types.LateDataRule, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentLateDataRule(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

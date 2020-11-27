@@ -230,6 +230,46 @@ func (m *validateOpDeletePublicAccessBlock) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteStorageLensConfiguration struct {
+}
+
+func (*validateOpDeleteStorageLensConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteStorageLensConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteStorageLensConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteStorageLensConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteStorageLensConfigurationTagging struct {
+}
+
+func (*validateOpDeleteStorageLensConfigurationTagging) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteStorageLensConfigurationTagging) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteStorageLensConfigurationTaggingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteStorageLensConfigurationTaggingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeJob struct {
 }
 
@@ -430,6 +470,46 @@ func (m *validateOpGetPublicAccessBlock) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetStorageLensConfiguration struct {
+}
+
+func (*validateOpGetStorageLensConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetStorageLensConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetStorageLensConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetStorageLensConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetStorageLensConfigurationTagging struct {
+}
+
+func (*validateOpGetStorageLensConfigurationTagging) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetStorageLensConfigurationTagging) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetStorageLensConfigurationTaggingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetStorageLensConfigurationTaggingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAccessPoints struct {
 }
 
@@ -485,6 +565,26 @@ func (m *validateOpListRegionalBuckets) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListRegionalBucketsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListStorageLensConfigurations struct {
+}
+
+func (*validateOpListStorageLensConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListStorageLensConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListStorageLensConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListStorageLensConfigurationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -610,6 +710,46 @@ func (m *validateOpPutPublicAccessBlock) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutStorageLensConfiguration struct {
+}
+
+func (*validateOpPutStorageLensConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutStorageLensConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutStorageLensConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutStorageLensConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutStorageLensConfigurationTagging struct {
+}
+
+func (*validateOpPutStorageLensConfigurationTagging) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutStorageLensConfigurationTagging) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutStorageLensConfigurationTaggingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutStorageLensConfigurationTaggingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateJobPriority struct {
 }
 
@@ -694,6 +834,14 @@ func addOpDeletePublicAccessBlockValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDeletePublicAccessBlock{}, middleware.After)
 }
 
+func addOpDeleteStorageLensConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteStorageLensConfiguration{}, middleware.After)
+}
+
+func addOpDeleteStorageLensConfigurationTaggingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteStorageLensConfigurationTagging{}, middleware.After)
+}
+
 func addOpDescribeJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeJob{}, middleware.After)
 }
@@ -734,6 +882,14 @@ func addOpGetPublicAccessBlockValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpGetPublicAccessBlock{}, middleware.After)
 }
 
+func addOpGetStorageLensConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetStorageLensConfiguration{}, middleware.After)
+}
+
+func addOpGetStorageLensConfigurationTaggingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetStorageLensConfigurationTagging{}, middleware.After)
+}
+
 func addOpListAccessPointsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAccessPoints{}, middleware.After)
 }
@@ -744,6 +900,10 @@ func addOpListJobsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListRegionalBucketsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRegionalBuckets{}, middleware.After)
+}
+
+func addOpListStorageLensConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListStorageLensConfigurations{}, middleware.After)
 }
 
 func addOpPutAccessPointPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -770,6 +930,14 @@ func addOpPutPublicAccessBlockValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpPutPublicAccessBlock{}, middleware.After)
 }
 
+func addOpPutStorageLensConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutStorageLensConfiguration{}, middleware.After)
+}
+
+func addOpPutStorageLensConfigurationTaggingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutStorageLensConfigurationTagging{}, middleware.After)
+}
+
 func addOpUpdateJobPriorityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateJobPriority{}, middleware.After)
 }
@@ -778,23 +946,59 @@ func addOpUpdateJobStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateJobStatus{}, middleware.After)
 }
 
+func validateAccountLevel(v *types.AccountLevel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AccountLevel"}
+	if v.BucketLevel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketLevel"))
+	} else if v.BucketLevel != nil {
+		if err := validateBucketLevel(v.BucketLevel); err != nil {
+			invalidParams.AddNested("BucketLevel", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBucketLevel(v *types.BucketLevel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BucketLevel"}
+	if v.PrefixLevel != nil {
+		if err := validatePrefixLevel(v.PrefixLevel); err != nil {
+			invalidParams.AddNested("PrefixLevel", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateJobManifest(v *types.JobManifest) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "JobManifest"}
-	if v.Location == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Location"))
-	} else if v.Location != nil {
-		if err := validateJobManifestLocation(v.Location); err != nil {
-			invalidParams.AddNested("Location", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Spec == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Spec"))
 	} else if v.Spec != nil {
 		if err := validateJobManifestSpec(v.Spec); err != nil {
 			invalidParams.AddNested("Spec", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	} else if v.Location != nil {
+		if err := validateJobManifestLocation(v.Location); err != nil {
+			invalidParams.AddNested("Location", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -809,11 +1013,11 @@ func validateJobManifestLocation(v *types.JobManifestLocation) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "JobManifestLocation"}
-	if v.ETag == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ETag"))
-	}
 	if v.ObjectArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectArn"))
+	}
+	if v.ETag == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ETag"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -842,14 +1046,14 @@ func validateJobOperation(v *types.JobOperation) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "JobOperation"}
-	if v.S3PutObjectLegalHold != nil {
-		if err := validateS3SetObjectLegalHoldOperation(v.S3PutObjectLegalHold); err != nil {
-			invalidParams.AddNested("S3PutObjectLegalHold", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.S3PutObjectCopy != nil {
 		if err := validateS3CopyObjectOperation(v.S3PutObjectCopy); err != nil {
 			invalidParams.AddNested("S3PutObjectCopy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3PutObjectAcl != nil {
+		if err := validateS3SetObjectAclOperation(v.S3PutObjectAcl); err != nil {
+			invalidParams.AddNested("S3PutObjectAcl", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.S3PutObjectTagging != nil {
@@ -857,14 +1061,14 @@ func validateJobOperation(v *types.JobOperation) error {
 			invalidParams.AddNested("S3PutObjectTagging", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.S3PutObjectLegalHold != nil {
+		if err := validateS3SetObjectLegalHoldOperation(v.S3PutObjectLegalHold); err != nil {
+			invalidParams.AddNested("S3PutObjectLegalHold", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.S3PutObjectRetention != nil {
 		if err := validateS3SetObjectRetentionOperation(v.S3PutObjectRetention); err != nil {
 			invalidParams.AddNested("S3PutObjectRetention", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.S3PutObjectAcl != nil {
-		if err := validateS3SetObjectAclOperation(v.S3PutObjectAcl); err != nil {
-			invalidParams.AddNested("S3PutObjectAcl", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -979,6 +1183,21 @@ func validateLifecycleRules(v []types.LifecycleRule) error {
 	}
 }
 
+func validatePrefixLevel(v *types.PrefixLevel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrefixLevel"}
+	if v.StorageMetrics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageMetrics"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3AccessControlList(v *types.S3AccessControlList) error {
 	if v == nil {
 		return nil
@@ -1002,6 +1221,35 @@ func validateS3AccessControlPolicy(v *types.S3AccessControlPolicy) error {
 	if v.AccessControlList != nil {
 		if err := validateS3AccessControlList(v.AccessControlList); err != nil {
 			invalidParams.AddNested("AccessControlList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3BucketDestination(v *types.S3BucketDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3BucketDestination"}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if len(v.OutputSchemaVersion) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputSchemaVersion"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.Encryption != nil {
+		if err := validateStorageLensDataExportEncryption(v.Encryption); err != nil {
+			invalidParams.AddNested("Encryption", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1116,11 +1364,11 @@ func validateS3Tag(v *types.S3Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "S3Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1136,6 +1384,139 @@ func validateS3TagSet(v []types.S3Tag) error {
 	invalidParams := smithy.InvalidParamsError{Context: "S3TagSet"}
 	for i := range v {
 		if err := validateS3Tag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSSEKMS(v *types.SSEKMS) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SSEKMS"}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStorageLensAwsOrg(v *types.StorageLensAwsOrg) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StorageLensAwsOrg"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStorageLensConfiguration(v *types.StorageLensConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StorageLensConfiguration"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.AccountLevel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountLevel"))
+	} else if v.AccountLevel != nil {
+		if err := validateAccountLevel(v.AccountLevel); err != nil {
+			invalidParams.AddNested("AccountLevel", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataExport != nil {
+		if err := validateStorageLensDataExport(v.DataExport); err != nil {
+			invalidParams.AddNested("DataExport", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AwsOrg != nil {
+		if err := validateStorageLensAwsOrg(v.AwsOrg); err != nil {
+			invalidParams.AddNested("AwsOrg", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStorageLensDataExport(v *types.StorageLensDataExport) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StorageLensDataExport"}
+	if v.S3BucketDestination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketDestination"))
+	} else if v.S3BucketDestination != nil {
+		if err := validateS3BucketDestination(v.S3BucketDestination); err != nil {
+			invalidParams.AddNested("S3BucketDestination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStorageLensDataExportEncryption(v *types.StorageLensDataExportEncryption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StorageLensDataExportEncryption"}
+	if v.SSEKMS != nil {
+		if err := validateSSEKMS(v.SSEKMS); err != nil {
+			invalidParams.AddNested("SSEKMS", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStorageLensTag(v *types.StorageLensTag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StorageLensTag"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStorageLensTags(v []types.StorageLensTag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StorageLensTags"}
+	for i := range v {
+		if err := validateStorageLensTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1185,19 +1566,19 @@ func validateOpCreateAccessPointInput(v *CreateAccessPointInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAccessPointInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if v.VpcConfiguration != nil {
 		if err := validateVpcConfiguration(v.VpcConfiguration); err != nil {
 			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1229,22 +1610,12 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
-	if v.Manifest == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Manifest"))
-	} else if v.Manifest != nil {
-		if err := validateJobManifest(v.Manifest); err != nil {
-			invalidParams.AddNested("Manifest", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Operation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Operation"))
 	} else if v.Operation != nil {
 		if err := validateJobOperation(v.Operation); err != nil {
 			invalidParams.AddNested("Operation", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ClientRequestToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
 	}
 	if v.Report == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Report"))
@@ -1253,13 +1624,23 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 			invalidParams.AddNested("Report", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Tags != nil {
-		if err := validateS3TagSet(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if v.Manifest == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Manifest"))
+	} else if v.Manifest != nil {
+		if err := validateJobManifest(v.Manifest); err != nil {
+			invalidParams.AddNested("Manifest", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.Tags != nil {
+		if err := validateS3TagSet(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1309,11 +1690,11 @@ func validateOpDeleteBucketInput(v *DeleteBucketInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBucketInput"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1381,11 +1762,11 @@ func validateOpDeleteJobTaggingInput(v *DeleteJobTaggingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteJobTaggingInput"}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1409,16 +1790,52 @@ func validateOpDeletePublicAccessBlockInput(v *DeletePublicAccessBlockInput) err
 	}
 }
 
+func validateOpDeleteStorageLensConfigurationInput(v *DeleteStorageLensConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteStorageLensConfigurationInput"}
+	if v.ConfigId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigId"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteStorageLensConfigurationTaggingInput(v *DeleteStorageLensConfigurationTaggingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteStorageLensConfigurationTaggingInput"}
+	if v.ConfigId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigId"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeJobInput(v *DescribeJobInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeJobInput"}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1432,11 +1849,11 @@ func validateOpGetAccessPointInput(v *GetAccessPointInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetAccessPointInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1450,11 +1867,11 @@ func validateOpGetAccessPointPolicyInput(v *GetAccessPointPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetAccessPointPolicyInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1468,11 +1885,11 @@ func validateOpGetAccessPointPolicyStatusInput(v *GetAccessPointPolicyStatusInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetAccessPointPolicyStatusInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1504,11 +1921,11 @@ func validateOpGetBucketLifecycleConfigurationInput(v *GetBucketLifecycleConfigu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetBucketLifecycleConfigurationInput"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1540,11 +1957,11 @@ func validateOpGetBucketTaggingInput(v *GetBucketTaggingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetBucketTaggingInput"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1558,11 +1975,11 @@ func validateOpGetJobTaggingInput(v *GetJobTaggingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetJobTaggingInput"}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1576,6 +1993,42 @@ func validateOpGetPublicAccessBlockInput(v *GetPublicAccessBlockInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetPublicAccessBlockInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetStorageLensConfigurationInput(v *GetStorageLensConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetStorageLensConfigurationInput"}
+	if v.ConfigId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigId"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetStorageLensConfigurationTaggingInput(v *GetStorageLensConfigurationTaggingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetStorageLensConfigurationTaggingInput"}
+	if v.ConfigId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigId"))
+	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
@@ -1631,19 +2084,34 @@ func validateOpListRegionalBucketsInput(v *ListRegionalBucketsInput) error {
 	}
 }
 
+func validateOpListStorageLensConfigurationsInput(v *ListStorageLensConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListStorageLensConfigurationsInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutAccessPointPolicyInput(v *PutAccessPointPolicyInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutAccessPointPolicyInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.Policy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
-	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1657,11 +2125,11 @@ func validateOpPutBucketLifecycleConfigurationInput(v *PutBucketLifecycleConfigu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutBucketLifecycleConfigurationInput"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if v.LifecycleConfiguration != nil {
 		if err := validateLifecycleConfiguration(v.LifecycleConfiguration); err != nil {
@@ -1701,18 +2169,18 @@ func validateOpPutBucketTaggingInput(v *PutBucketTaggingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutBucketTaggingInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
 	if v.Tagging == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tagging"))
 	} else if v.Tagging != nil {
 		if err := validateTagging(v.Tagging); err != nil {
 			invalidParams.AddNested("Tagging", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
-	}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1729,15 +2197,15 @@ func validateOpPutJobTaggingInput(v *PutJobTaggingInput) error {
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateS3TagSet(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1764,16 +2232,71 @@ func validateOpPutPublicAccessBlockInput(v *PutPublicAccessBlockInput) error {
 	}
 }
 
+func validateOpPutStorageLensConfigurationInput(v *PutStorageLensConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutStorageLensConfigurationInput"}
+	if v.ConfigId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigId"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.StorageLensConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageLensConfiguration"))
+	} else if v.StorageLensConfiguration != nil {
+		if err := validateStorageLensConfiguration(v.StorageLensConfiguration); err != nil {
+			invalidParams.AddNested("StorageLensConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateStorageLensTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutStorageLensConfigurationTaggingInput(v *PutStorageLensConfigurationTaggingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutStorageLensConfigurationTaggingInput"}
+	if v.ConfigId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigId"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	} else if v.Tags != nil {
+		if err := validateStorageLensTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateJobPriorityInput(v *UpdateJobPriorityInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateJobPriorityInput"}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1787,14 +2310,14 @@ func validateOpUpdateJobStatusInput(v *UpdateJobStatusInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateJobStatusInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if len(v.RequestedJobStatus) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RequestedJobStatus"))
-	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

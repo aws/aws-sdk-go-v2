@@ -661,6 +661,25 @@ func (ClientVpnConnectionStatusCode) Values() []ClientVpnConnectionStatusCode {
 	}
 }
 
+type ClientVpnEndpointAttributeStatusCode string
+
+// Enum values for ClientVpnEndpointAttributeStatusCode
+const (
+	ClientVpnEndpointAttributeStatusCodeApplying ClientVpnEndpointAttributeStatusCode = "applying"
+	ClientVpnEndpointAttributeStatusCodeApplied  ClientVpnEndpointAttributeStatusCode = "applied"
+)
+
+// Values returns all known values for ClientVpnEndpointAttributeStatusCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ClientVpnEndpointAttributeStatusCode) Values() []ClientVpnEndpointAttributeStatusCode {
+	return []ClientVpnEndpointAttributeStatusCode{
+		"applying",
+		"applied",
+	}
+}
+
 type ClientVpnEndpointStatusCode string
 
 // Enum values for ClientVpnEndpointStatusCode
@@ -1416,6 +1435,22 @@ func (FleetOnDemandAllocationStrategy) Values() []FleetOnDemandAllocationStrateg
 	}
 }
 
+type FleetReplacementStrategy string
+
+// Enum values for FleetReplacementStrategy
+const (
+	FleetReplacementStrategyLaunch FleetReplacementStrategy = "launch"
+)
+
+// Values returns all known values for FleetReplacementStrategy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FleetReplacementStrategy) Values() []FleetReplacementStrategy {
+	return []FleetReplacementStrategy{
+		"launch",
+	}
+}
+
 type FleetStateCode string
 
 // Enum values for FleetStateCode
@@ -2150,6 +2185,7 @@ const (
 	InstanceTypeP38xlarge    InstanceType = "p3.8xlarge"
 	InstanceTypeP316xlarge   InstanceType = "p3.16xlarge"
 	InstanceTypeP3dn24xlarge InstanceType = "p3dn.24xlarge"
+	InstanceTypeP4d24xlarge  InstanceType = "p4d.24xlarge"
 	InstanceTypeD2Xlarge     InstanceType = "d2.xlarge"
 	InstanceTypeD22xlarge    InstanceType = "d2.2xlarge"
 	InstanceTypeD24xlarge    InstanceType = "d2.4xlarge"
@@ -2506,6 +2542,7 @@ func (InstanceType) Values() []InstanceType {
 		"p3.8xlarge",
 		"p3.16xlarge",
 		"p3dn.24xlarge",
+		"p4d.24xlarge",
 		"d2.xlarge",
 		"d2.2xlarge",
 		"d2.4xlarge",
@@ -3419,6 +3456,22 @@ func (RecurringChargeFrequency) Values() []RecurringChargeFrequency {
 	}
 }
 
+type ReplacementStrategy string
+
+// Enum values for ReplacementStrategy
+const (
+	ReplacementStrategyLaunch ReplacementStrategy = "launch"
+)
+
+// Values returns all known values for ReplacementStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReplacementStrategy) Values() []ReplacementStrategy {
+	return []ReplacementStrategy{
+		"launch",
+	}
+}
+
 type ReportInstanceReasonCodes string
 
 // Enum values for ReportInstanceReasonCodes
@@ -3836,8 +3889,9 @@ type ServiceType string
 
 // Enum values for ServiceType
 const (
-	ServiceTypeInterface ServiceType = "Interface"
-	ServiceTypeGateway   ServiceType = "Gateway"
+	ServiceTypeInterface           ServiceType = "Interface"
+	ServiceTypeGateway             ServiceType = "Gateway"
+	ServiceTypeGatewayloadbalancer ServiceType = "GatewayLoadBalancer"
 )
 
 // Values returns all known values for ServiceType. Note that this can be expanded
@@ -3847,6 +3901,7 @@ func (ServiceType) Values() []ServiceType {
 	return []ServiceType{
 		"Interface",
 		"Gateway",
+		"GatewayLoadBalancer",
 	}
 }
 
@@ -4905,8 +4960,9 @@ type VpcEndpointType string
 
 // Enum values for VpcEndpointType
 const (
-	VpcEndpointTypeInterface VpcEndpointType = "Interface"
-	VpcEndpointTypeGateway   VpcEndpointType = "Gateway"
+	VpcEndpointTypeInterface           VpcEndpointType = "Interface"
+	VpcEndpointTypeGateway             VpcEndpointType = "Gateway"
+	VpcEndpointTypeGatewayloadbalancer VpcEndpointType = "GatewayLoadBalancer"
 )
 
 // Values returns all known values for VpcEndpointType. Note that this can be
@@ -4916,6 +4972,7 @@ func (VpcEndpointType) Values() []VpcEndpointType {
 	return []VpcEndpointType{
 		"Interface",
 		"Gateway",
+		"GatewayLoadBalancer",
 	}
 }
 

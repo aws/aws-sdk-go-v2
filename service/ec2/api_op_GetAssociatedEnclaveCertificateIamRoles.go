@@ -15,7 +15,7 @@ import (
 // Manager (ACM) certificate. It also returns the name of the Amazon S3 bucket and
 // the Amazon S3 object key where the certificate, certificate chain, and encrypted
 // private key bundle are stored, and the ARN of the AWS Key Management Service
-// (KMS) key that's used to encrypt the private key.
+// (KMS) customer master key (CMK) that's used to encrypt the private key.
 func (c *Client) GetAssociatedEnclaveCertificateIamRoles(ctx context.Context, params *GetAssociatedEnclaveCertificateIamRolesInput, optFns ...func(*Options)) (*GetAssociatedEnclaveCertificateIamRolesOutput, error) {
 	if params == nil {
 		params = &GetAssociatedEnclaveCertificateIamRolesInput{}

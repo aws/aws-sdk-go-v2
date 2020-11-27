@@ -4,6 +4,7 @@ package storagegateway
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
@@ -120,6 +121,91 @@ func addOperationListTapePoolsMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	return nil
+}
+
+// ListTapePoolsAPIClient is a client that implements the ListTapePools operation.
+type ListTapePoolsAPIClient interface {
+	ListTapePools(context.Context, *ListTapePoolsInput, ...func(*Options)) (*ListTapePoolsOutput, error)
+}
+
+var _ ListTapePoolsAPIClient = (*Client)(nil)
+
+// ListTapePoolsPaginatorOptions is the paginator options for ListTapePools
+type ListTapePoolsPaginatorOptions struct {
+	// An optional number limit for the tape pools in the list returned by this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTapePoolsPaginator is a paginator for ListTapePools
+type ListTapePoolsPaginator struct {
+	options   ListTapePoolsPaginatorOptions
+	client    ListTapePoolsAPIClient
+	params    *ListTapePoolsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTapePoolsPaginator returns a new ListTapePoolsPaginator
+func NewListTapePoolsPaginator(client ListTapePoolsAPIClient, params *ListTapePoolsInput, optFns ...func(*ListTapePoolsPaginatorOptions)) *ListTapePoolsPaginator {
+	options := ListTapePoolsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListTapePoolsInput{}
+	}
+
+	return &ListTapePoolsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTapePoolsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTapePools page.
+func (p *ListTapePoolsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTapePoolsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.ListTapePools(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTapePools(region string) *awsmiddleware.RegisterServiceMetadata {

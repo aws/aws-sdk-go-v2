@@ -149,6 +149,28 @@ func (e *ClientException) ErrorMessage() string {
 func (e *ClientException) ErrorCode() string             { return "ClientException" }
 func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The Region you specified is the same Region where the AWS Managed Microsoft AD
+// directory was created. Specify a different Region and try again.
+type DirectoryAlreadyInRegionException struct {
+	Message *string
+
+	RequestId *string
+}
+
+func (e *DirectoryAlreadyInRegionException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DirectoryAlreadyInRegionException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DirectoryAlreadyInRegionException) ErrorCode() string {
+	return "DirectoryAlreadyInRegionException"
+}
+func (e *DirectoryAlreadyInRegionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified directory has already been shared with this AWS account.
 type DirectoryAlreadySharedException struct {
 	Message *string
@@ -509,6 +531,26 @@ func (e *OrganizationsException) ErrorMessage() string {
 }
 func (e *OrganizationsException) ErrorCode() string             { return "OrganizationsException" }
 func (e *OrganizationsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You have reached the limit for maximum number of simultaneous region
+// replications per directory.
+type RegionLimitExceededException struct {
+	Message *string
+
+	RequestId *string
+}
+
+func (e *RegionLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RegionLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RegionLimitExceededException) ErrorCode() string             { return "RegionLimitExceededException" }
+func (e *RegionLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An exception has occurred in AWS Directory Service.
 type ServiceException struct {

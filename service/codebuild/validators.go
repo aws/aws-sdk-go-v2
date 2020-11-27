@@ -774,11 +774,11 @@ func validateEnvironmentVariable(v *types.EnvironmentVariable) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EnvironmentVariable"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -858,14 +858,14 @@ func validateLogsConfig(v *types.LogsConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LogsConfig"}
-	if v.S3Logs != nil {
-		if err := validateS3LogsConfig(v.S3Logs); err != nil {
-			invalidParams.AddNested("S3Logs", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.CloudWatchLogs != nil {
 		if err := validateCloudWatchLogsConfig(v.CloudWatchLogs); err != nil {
 			invalidParams.AddNested("CloudWatchLogs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3Logs != nil {
+		if err := validateS3LogsConfig(v.S3Logs); err != nil {
+			invalidParams.AddNested("S3Logs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -930,20 +930,20 @@ func validateProjectEnvironment(v *types.ProjectEnvironment) error {
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
-	if len(v.ComputeType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ComputeType"))
-	}
 	if v.Image == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Image"))
 	}
-	if v.RegistryCredential != nil {
-		if err := validateRegistryCredential(v.RegistryCredential); err != nil {
-			invalidParams.AddNested("RegistryCredential", err.(smithy.InvalidParamsError))
-		}
+	if len(v.ComputeType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeType"))
 	}
 	if v.EnvironmentVariables != nil {
 		if err := validateEnvironmentVariables(v.EnvironmentVariables); err != nil {
 			invalidParams.AddNested("EnvironmentVariables", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RegistryCredential != nil {
+		if err := validateRegistryCredential(v.RegistryCredential); err != nil {
+			invalidParams.AddNested("RegistryCredential", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -975,18 +975,18 @@ func validateProjectSource(v *types.ProjectSource) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProjectSource"}
-	if v.Auth != nil {
-		if err := validateSourceAuth(v.Auth); err != nil {
-			invalidParams.AddNested("Auth", err.(smithy.InvalidParamsError))
-		}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if v.GitSubmodulesConfig != nil {
 		if err := validateGitSubmodulesConfig(v.GitSubmodulesConfig); err != nil {
 			invalidParams.AddNested("GitSubmodulesConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	if v.Auth != nil {
+		if err := validateSourceAuth(v.Auth); err != nil {
+			invalidParams.AddNested("Auth", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1083,11 +1083,11 @@ func validateWebhookFilter(v *types.WebhookFilter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "WebhookFilter"}
-	if v.Pattern == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Pattern"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Pattern == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Pattern"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1191,12 +1191,14 @@ func validateOpCreateProjectInput(v *CreateProjectInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateProjectInput"}
-	if v.ServiceRole == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceRole"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.LogsConfig != nil {
-		if err := validateLogsConfig(v.LogsConfig); err != nil {
-			invalidParams.AddNested("LogsConfig", err.(smithy.InvalidParamsError))
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateProjectSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.SecondarySources != nil {
@@ -1204,13 +1206,10 @@ func validateOpCreateProjectInput(v *CreateProjectInput) error {
 			invalidParams.AddNested("SecondarySources", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Cache != nil {
-		if err := validateProjectCache(v.Cache); err != nil {
-			invalidParams.AddNested("Cache", err.(smithy.InvalidParamsError))
+	if v.SecondarySourceVersions != nil {
+		if err := validateProjectSecondarySourceVersions(v.SecondarySourceVersions); err != nil {
+			invalidParams.AddNested("SecondarySourceVersions", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.Artifacts == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Artifacts"))
@@ -1219,11 +1218,14 @@ func validateOpCreateProjectInput(v *CreateProjectInput) error {
 			invalidParams.AddNested("Artifacts", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Source == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Source"))
-	} else if v.Source != nil {
-		if err := validateProjectSource(v.Source); err != nil {
-			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+	if v.SecondaryArtifacts != nil {
+		if err := validateProjectArtifactsList(v.SecondaryArtifacts); err != nil {
+			invalidParams.AddNested("SecondaryArtifacts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Cache != nil {
+		if err := validateProjectCache(v.Cache); err != nil {
+			invalidParams.AddNested("Cache", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Environment == nil {
@@ -1233,14 +1235,12 @@ func validateOpCreateProjectInput(v *CreateProjectInput) error {
 			invalidParams.AddNested("Environment", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.SecondarySourceVersions != nil {
-		if err := validateProjectSecondarySourceVersions(v.SecondarySourceVersions); err != nil {
-			invalidParams.AddNested("SecondarySourceVersions", err.(smithy.InvalidParamsError))
-		}
+	if v.ServiceRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceRole"))
 	}
-	if v.SecondaryArtifacts != nil {
-		if err := validateProjectArtifactsList(v.SecondaryArtifacts); err != nil {
-			invalidParams.AddNested("SecondaryArtifacts", err.(smithy.InvalidParamsError))
+	if v.LogsConfig != nil {
+		if err := validateLogsConfig(v.LogsConfig); err != nil {
+			invalidParams.AddNested("LogsConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1255,14 +1255,14 @@ func validateOpCreateReportGroupInput(v *CreateReportGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateReportGroupInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if v.ExportConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExportConfig"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1276,13 +1276,13 @@ func validateOpCreateWebhookInput(v *CreateWebhookInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateWebhookInput"}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
 	if v.FilterGroups != nil {
 		if err := validateFilterGroups(v.FilterGroups); err != nil {
 			invalidParams.AddNested("FilterGroups", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ProjectName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1446,14 +1446,14 @@ func validateOpImportSourceCredentialsInput(v *ImportSourceCredentialsInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ImportSourceCredentialsInput"}
+	if v.Token == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Token"))
+	}
 	if len(v.ServerType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerType"))
 	}
 	if len(v.AuthType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthType"))
-	}
-	if v.Token == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Token"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1512,11 +1512,11 @@ func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutResourcePolicyInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.Policy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1530,24 +1530,12 @@ func validateOpStartBuildBatchInput(v *StartBuildBatchInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartBuildBatchInput"}
-	if v.LogsConfigOverride != nil {
-		if err := validateLogsConfig(v.LogsConfigOverride); err != nil {
-			invalidParams.AddNested("LogsConfigOverride", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.SourceAuthOverride != nil {
-		if err := validateSourceAuth(v.SourceAuthOverride); err != nil {
-			invalidParams.AddNested("SourceAuthOverride", err.(smithy.InvalidParamsError))
-		}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
 	}
 	if v.SecondarySourcesOverride != nil {
 		if err := validateProjectSources(v.SecondarySourcesOverride); err != nil {
 			invalidParams.AddNested("SecondarySourcesOverride", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.SecondaryArtifactsOverride != nil {
-		if err := validateProjectArtifactsList(v.SecondaryArtifactsOverride); err != nil {
-			invalidParams.AddNested("SecondaryArtifactsOverride", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.SecondarySourcesVersionOverride != nil {
@@ -1555,22 +1543,24 @@ func validateOpStartBuildBatchInput(v *StartBuildBatchInput) error {
 			invalidParams.AddNested("SecondarySourcesVersionOverride", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ArtifactsOverride != nil {
+		if err := validateProjectArtifacts(v.ArtifactsOverride); err != nil {
+			invalidParams.AddNested("ArtifactsOverride", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SecondaryArtifactsOverride != nil {
+		if err := validateProjectArtifactsList(v.SecondaryArtifactsOverride); err != nil {
+			invalidParams.AddNested("SecondaryArtifactsOverride", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.EnvironmentVariablesOverride != nil {
 		if err := validateEnvironmentVariables(v.EnvironmentVariablesOverride); err != nil {
 			invalidParams.AddNested("EnvironmentVariablesOverride", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ProjectName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
-	}
-	if v.RegistryCredentialOverride != nil {
-		if err := validateRegistryCredential(v.RegistryCredentialOverride); err != nil {
-			invalidParams.AddNested("RegistryCredentialOverride", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.CacheOverride != nil {
-		if err := validateProjectCache(v.CacheOverride); err != nil {
-			invalidParams.AddNested("CacheOverride", err.(smithy.InvalidParamsError))
+	if v.SourceAuthOverride != nil {
+		if err := validateSourceAuth(v.SourceAuthOverride); err != nil {
+			invalidParams.AddNested("SourceAuthOverride", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.GitSubmodulesConfigOverride != nil {
@@ -1578,9 +1568,19 @@ func validateOpStartBuildBatchInput(v *StartBuildBatchInput) error {
 			invalidParams.AddNested("GitSubmodulesConfigOverride", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ArtifactsOverride != nil {
-		if err := validateProjectArtifacts(v.ArtifactsOverride); err != nil {
-			invalidParams.AddNested("ArtifactsOverride", err.(smithy.InvalidParamsError))
+	if v.CacheOverride != nil {
+		if err := validateProjectCache(v.CacheOverride); err != nil {
+			invalidParams.AddNested("CacheOverride", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LogsConfigOverride != nil {
+		if err := validateLogsConfig(v.LogsConfigOverride); err != nil {
+			invalidParams.AddNested("LogsConfigOverride", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RegistryCredentialOverride != nil {
+		if err := validateRegistryCredential(v.RegistryCredentialOverride); err != nil {
+			invalidParams.AddNested("RegistryCredentialOverride", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1595,34 +1595,12 @@ func validateOpStartBuildInput(v *StartBuildInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartBuildInput"}
-	if v.LogsConfigOverride != nil {
-		if err := validateLogsConfig(v.LogsConfigOverride); err != nil {
-			invalidParams.AddNested("LogsConfigOverride", err.(smithy.InvalidParamsError))
-		}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
 	}
-	if v.SourceAuthOverride != nil {
-		if err := validateSourceAuth(v.SourceAuthOverride); err != nil {
-			invalidParams.AddNested("SourceAuthOverride", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.GitSubmodulesConfigOverride != nil {
-		if err := validateGitSubmodulesConfig(v.GitSubmodulesConfigOverride); err != nil {
-			invalidParams.AddNested("GitSubmodulesConfigOverride", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.EnvironmentVariablesOverride != nil {
-		if err := validateEnvironmentVariables(v.EnvironmentVariablesOverride); err != nil {
-			invalidParams.AddNested("EnvironmentVariablesOverride", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.SecondaryArtifactsOverride != nil {
-		if err := validateProjectArtifactsList(v.SecondaryArtifactsOverride); err != nil {
-			invalidParams.AddNested("SecondaryArtifactsOverride", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.CacheOverride != nil {
-		if err := validateProjectCache(v.CacheOverride); err != nil {
-			invalidParams.AddNested("CacheOverride", err.(smithy.InvalidParamsError))
+	if v.SecondarySourcesOverride != nil {
+		if err := validateProjectSources(v.SecondarySourcesOverride); err != nil {
+			invalidParams.AddNested("SecondarySourcesOverride", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.SecondarySourcesVersionOverride != nil {
@@ -1635,17 +1613,39 @@ func validateOpStartBuildInput(v *StartBuildInput) error {
 			invalidParams.AddNested("ArtifactsOverride", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SecondaryArtifactsOverride != nil {
+		if err := validateProjectArtifactsList(v.SecondaryArtifactsOverride); err != nil {
+			invalidParams.AddNested("SecondaryArtifactsOverride", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EnvironmentVariablesOverride != nil {
+		if err := validateEnvironmentVariables(v.EnvironmentVariablesOverride); err != nil {
+			invalidParams.AddNested("EnvironmentVariablesOverride", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourceAuthOverride != nil {
+		if err := validateSourceAuth(v.SourceAuthOverride); err != nil {
+			invalidParams.AddNested("SourceAuthOverride", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GitSubmodulesConfigOverride != nil {
+		if err := validateGitSubmodulesConfig(v.GitSubmodulesConfigOverride); err != nil {
+			invalidParams.AddNested("GitSubmodulesConfigOverride", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CacheOverride != nil {
+		if err := validateProjectCache(v.CacheOverride); err != nil {
+			invalidParams.AddNested("CacheOverride", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LogsConfigOverride != nil {
+		if err := validateLogsConfig(v.LogsConfigOverride); err != nil {
+			invalidParams.AddNested("LogsConfigOverride", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.RegistryCredentialOverride != nil {
 		if err := validateRegistryCredential(v.RegistryCredentialOverride); err != nil {
 			invalidParams.AddNested("RegistryCredentialOverride", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ProjectName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
-	}
-	if v.SecondarySourcesOverride != nil {
-		if err := validateProjectSources(v.SecondarySourcesOverride); err != nil {
-			invalidParams.AddNested("SecondarySourcesOverride", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1690,14 +1690,12 @@ func validateOpUpdateProjectInput(v *UpdateProjectInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateProjectInput"}
-	if v.Cache != nil {
-		if err := validateProjectCache(v.Cache); err != nil {
-			invalidParams.AddNested("Cache", err.(smithy.InvalidParamsError))
-		}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.Artifacts != nil {
-		if err := validateProjectArtifacts(v.Artifacts); err != nil {
-			invalidParams.AddNested("Artifacts", err.(smithy.InvalidParamsError))
+	if v.Source != nil {
+		if err := validateProjectSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.SecondarySources != nil {
@@ -1705,22 +1703,14 @@ func validateOpUpdateProjectInput(v *UpdateProjectInput) error {
 			invalidParams.AddNested("SecondarySources", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.LogsConfig != nil {
-		if err := validateLogsConfig(v.LogsConfig); err != nil {
-			invalidParams.AddNested("LogsConfig", err.(smithy.InvalidParamsError))
+	if v.SecondarySourceVersions != nil {
+		if err := validateProjectSecondarySourceVersions(v.SecondarySourceVersions); err != nil {
+			invalidParams.AddNested("SecondarySourceVersions", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Environment != nil {
-		if err := validateProjectEnvironment(v.Environment); err != nil {
-			invalidParams.AddNested("Environment", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Source != nil {
-		if err := validateProjectSource(v.Source); err != nil {
-			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+	if v.Artifacts != nil {
+		if err := validateProjectArtifacts(v.Artifacts); err != nil {
+			invalidParams.AddNested("Artifacts", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.SecondaryArtifacts != nil {
@@ -1728,9 +1718,19 @@ func validateOpUpdateProjectInput(v *UpdateProjectInput) error {
 			invalidParams.AddNested("SecondaryArtifacts", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.SecondarySourceVersions != nil {
-		if err := validateProjectSecondarySourceVersions(v.SecondarySourceVersions); err != nil {
-			invalidParams.AddNested("SecondarySourceVersions", err.(smithy.InvalidParamsError))
+	if v.Cache != nil {
+		if err := validateProjectCache(v.Cache); err != nil {
+			invalidParams.AddNested("Cache", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Environment != nil {
+		if err := validateProjectEnvironment(v.Environment); err != nil {
+			invalidParams.AddNested("Environment", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LogsConfig != nil {
+		if err := validateLogsConfig(v.LogsConfig); err != nil {
+			invalidParams.AddNested("LogsConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1760,13 +1760,13 @@ func validateOpUpdateWebhookInput(v *UpdateWebhookInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateWebhookInput"}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
 	if v.FilterGroups != nil {
 		if err := validateFilterGroups(v.FilterGroups); err != nil {
 			invalidParams.AddNested("FilterGroups", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ProjectName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

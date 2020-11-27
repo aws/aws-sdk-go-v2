@@ -205,10 +205,10 @@ type CreateServiceInput struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html)
 	// in the Amazon Elastic Container Service Developer Guide. If the service is using
 	// the rolling update (ECS) deployment controller and using either an Application
-	// Load Balancer or Network Load Balancer, you can specify multiple target groups
-	// to attach to the service. The service-linked role is required for services that
-	// make use of multiple target groups. For more information, see Using
-	// Service-Linked Roles for Amazon ECS
+	// Load Balancer or Network Load Balancer, you must specify one or more target
+	// group ARNs to attach to the service. The service-linked role is required for
+	// services that make use of multiple target groups. For more information, see
+	// Using Service-Linked Roles for Amazon ECS
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html)
 	// in the Amazon Elastic Container Service Developer Guide. If the service is using
 	// the CODE_DEPLOY deployment controller, the service is required to use either an
@@ -227,19 +227,20 @@ type CreateServiceInput struct {
 	// Application Load Balancers and Network Load Balancers, this object must contain
 	// the load balancer target group ARN, the container name (as it appears in a
 	// container definition), and the container port to access from the load balancer.
-	// When a task from this service is placed on a container instance, the container
-	// instance and port combination is registered as a target in the target group
-	// specified here. For Classic Load Balancers, this object must contain the load
-	// balancer name, the container name (as it appears in a container definition), and
-	// the container port to access from the load balancer. When a task from this
-	// service is placed on a container instance, the container instance is registered
-	// with the load balancer specified here. Services with tasks that use the awsvpc
-	// network mode (for example, those with the Fargate launch type) only support
-	// Application Load Balancers and Network Load Balancers. Classic Load Balancers
-	// are not supported. Also, when you create any target groups for these services,
-	// you must choose ip as the target type, not instance, because tasks that use the
-	// awsvpc network mode are associated with an elastic network interface, not an
-	// Amazon EC2 instance.
+	// The load balancer name parameter must be omitted. When a task from this service
+	// is placed on a container instance, the container instance and port combination
+	// is registered as a target in the target group specified here. For Classic Load
+	// Balancers, this object must contain the load balancer name, the container name
+	// (as it appears in a container definition), and the container port to access from
+	// the load balancer. The target group ARN parameter must be omitted. When a task
+	// from this service is placed on a container instance, the container instance is
+	// registered with the load balancer specified here. Services with tasks that use
+	// the awsvpc network mode (for example, those with the Fargate launch type) only
+	// support Application Load Balancers and Network Load Balancers. Classic Load
+	// Balancers are not supported. Also, when you create any target groups for these
+	// services, you must choose ip as the target type, not instance, because tasks
+	// that use the awsvpc network mode are associated with an elastic network
+	// interface, not an Amazon EC2 instance.
 	LoadBalancers []types.LoadBalancer
 
 	// The network configuration for the service. This parameter is required for task
@@ -360,8 +361,8 @@ type CreateServiceInput struct {
 
 	// The family and revision (family:revision) or full ARN of the task definition to
 	// run in your service. If a revision is not specified, the latest ACTIVE revision
-	// is used. A task definition must be specified if the service is using the ECS
-	// deployment controller.
+	// is used. A task definition must be specified if the service is using either the
+	// ECS or CODE_DEPLOY deployment controllers.
 	TaskDefinition *string
 }
 

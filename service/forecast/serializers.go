@@ -2122,6 +2122,13 @@ func awsAwsjson11_serializeOpDocumentCreatePredictorInput(v *CreatePredictorInpu
 		ok.Integer(*v.ForecastHorizon)
 	}
 
+	if v.ForecastTypes != nil {
+		ok := object.Key("ForecastTypes")
+		if err := awsAwsjson11_serializeDocumentForecastTypes(v.ForecastTypes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.HPOConfig != nil {
 		ok := object.Key("HPOConfig")
 		if err := awsAwsjson11_serializeDocumentHyperParameterTuningJobConfig(v.HPOConfig, ok); err != nil {

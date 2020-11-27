@@ -55,9 +55,23 @@ type GetPersonalizedRankingInput struct {
 	// user's recommendations, such as the user's current location or device type.
 	Context map[string]string
 
-	// The Amazon Resource Name (ARN) of a filter you created to include or exclude
-	// items from recommendations for a given user.
+	// The Amazon Resource Name (ARN) of a filter you created to include items or
+	// exclude items from recommendations for a given user. For more information, see
+	// Filtering Recommendations
+	// (https://docs.aws.amazon.com/personalize/latest/dg/filter.html).
 	FilterArn *string
+
+	// The values to use when filtering recommendations. For each placeholder parameter
+	// in your filter expression, provide the parameter name (in matching case) as a
+	// key and the filter value(s) as the corresponding value. Separate multiple values
+	// for one parameter with a comma. For filter expressions that use an INCLUDE
+	// element to include items, you must provide values for all parameters that are
+	// defined in the expression. For filters with expressions that use an EXCLUDE
+	// element to exclude items, you can omit the filter-values.In this case, Amazon
+	// Personalize doesn't use that portion of the expression to filter
+	// recommendations. For more information, see Filtering Recommendations
+	// (https://docs.aws.amazon.com/personalize/latest/dg/filter.html).
+	FilterValues map[string]string
 }
 
 type GetPersonalizedRankingOutput struct {

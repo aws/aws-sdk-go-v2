@@ -120,6 +120,12 @@ type ActionDeclaration struct {
 // Represents information about the run of an action.
 type ActionExecution struct {
 
+	// ID of the workflow action execution in the current stage. Use the
+	// GetPipelineState action to retrieve the current action execution details of the
+	// current stage. For older executions, this field might be empty. The action
+	// execution ID is available for executions run on or after March 2020.
+	ActionExecutionId *string
+
 	// The details of an error returned by a URL external to AWS.
 	ErrorDetails *ErrorDetails
 
@@ -332,10 +338,26 @@ type ActionTypeId struct {
 	// the provider type for the action. Valid categories are limited to one of the
 	// following values.
 	//
+	// * Source
+	//
+	// * Build
+	//
+	// * Test
+	//
+	// * Deploy
+	//
+	// * Invoke
+	//
+	// * Approval
+	//
 	// This member is required.
 	Category ActionCategory
 
-	// The creator of the action being called.
+	// The creator of the action being called. There are three valid values for the
+	// Owner field in the action category section within your pipeline structure: AWS,
+	// ThirdParty, and Custom. For more information, see Valid Action Types and
+	// Providers in CodePipeline
+	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers).
 	//
 	// This member is required.
 	Owner ActionOwner
@@ -788,7 +810,7 @@ type PipelineContext struct {
 // Represents the structure of actions and stages to be performed in the pipeline.
 type PipelineDeclaration struct {
 
-	// The name of the action to be performed.
+	// The name of the pipeline.
 	//
 	// This member is required.
 	Name *string
@@ -1040,6 +1062,9 @@ type StageState struct {
 
 	// The state of the stage.
 	ActionStates []ActionState
+
+	// Represents information about the run of a stage.
+	InboundExecution *StageExecution
 
 	// The state of the inbound transition, which is either enabled or disabled.
 	InboundTransitionState *TransitionState

@@ -123,8 +123,8 @@ type GetMetricDataInput struct {
 	// If you omit this, the default of 100,800 is used.
 	MaxDatapoints *int32
 
-	// Include this value, if it was returned by the previous call, to get the next set
-	// of data points.
+	// Include this value, if it was returned by the previous GetMetricData operation,
+	// to get the next set of data points.
 	NextToken *string
 
 	// The order in which data points should be returned. TimestampDescending returns

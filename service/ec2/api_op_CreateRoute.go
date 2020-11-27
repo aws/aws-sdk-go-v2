@@ -96,6 +96,9 @@ type CreateRouteInput struct {
 	// The ID of a transit gateway.
 	TransitGatewayId *string
 
+	// The ID of a VPC endpoint. Supported for Gateway Load Balancer endpoints only.
+	VpcEndpointId *string
+
 	// The ID of a VPC peering connection.
 	VpcPeeringConnectionId *string
 }

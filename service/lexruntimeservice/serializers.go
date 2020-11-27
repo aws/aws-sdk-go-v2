@@ -249,6 +249,12 @@ func awsRestjson1_serializeOpHttpBindingsPostContentInput(v *PostContentInput, e
 		encoder.SetHeader(locationName).String(*v.Accept)
 	}
 
+	if v.ActiveContexts != nil && len(*v.ActiveContexts) > 0 {
+		locationName := "X-Amz-Lex-Active-Contexts"
+		encoded := ptr.String(base64.StdEncoding.EncodeToString([]byte(*v.ActiveContexts)))
+		encoder.SetHeader(locationName).String(*encoded)
+	}
+
 	if v.BotAlias == nil || len(*v.BotAlias) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member botAlias must not be empty")}
 	}
@@ -392,6 +398,13 @@ func awsRestjson1_serializeOpDocumentPostTextInput(v *PostTextInput, value smith
 	object := value.Object()
 	defer object.Close()
 
+	if v.ActiveContexts != nil {
+		ok := object.Key("activeContexts")
+		if err := awsRestjson1_serializeDocumentActiveContextsList(v.ActiveContexts, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InputText != nil {
 		ok := object.Key("inputText")
 		ok.String(*v.InputText)
@@ -515,6 +528,13 @@ func awsRestjson1_serializeOpDocumentPutSessionInput(v *PutSessionInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.ActiveContexts != nil {
+		ok := object.Key("activeContexts")
+		if err := awsRestjson1_serializeDocumentActiveContextsList(v.ActiveContexts, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DialogAction != nil {
 		ok := object.Key("dialogAction")
 		if err := awsRestjson1_serializeDocumentDialogAction(v.DialogAction, ok); err != nil {
@@ -534,6 +554,73 @@ func awsRestjson1_serializeOpDocumentPutSessionInput(v *PutSessionInput, value s
 		if err := awsRestjson1_serializeDocumentStringMap(v.SessionAttributes, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentActiveContext(v *types.ActiveContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Parameters != nil {
+		ok := object.Key("parameters")
+		if err := awsRestjson1_serializeDocumentActiveContextParametersMap(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimeToLive != nil {
+		ok := object.Key("timeToLive")
+		if err := awsRestjson1_serializeDocumentActiveContextTimeToLive(v.TimeToLive, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentActiveContextParametersMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentActiveContextsList(v []types.ActiveContext, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentActiveContext(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentActiveContextTimeToLive(v *types.ActiveContextTimeToLive, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TimeToLiveInSeconds != nil {
+		ok := object.Key("timeToLiveInSeconds")
+		ok.Integer(*v.TimeToLiveInSeconds)
+	}
+
+	if v.TurnsToLive != nil {
+		ok := object.Key("turnsToLive")
+		ok.Integer(*v.TurnsToLive)
 	}
 
 	return nil

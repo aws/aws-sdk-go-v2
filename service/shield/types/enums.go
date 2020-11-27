@@ -88,6 +88,72 @@ func (ProactiveEngagementStatus) Values() []ProactiveEngagementStatus {
 	}
 }
 
+type ProtectedResourceType string
+
+// Enum values for ProtectedResourceType
+const (
+	ProtectedResourceTypeCloudfrontDistribution  ProtectedResourceType = "CLOUDFRONT_DISTRIBUTION"
+	ProtectedResourceTypeRoute53HostedZone       ProtectedResourceType = "ROUTE_53_HOSTED_ZONE"
+	ProtectedResourceTypeElasticIpAllocation     ProtectedResourceType = "ELASTIC_IP_ALLOCATION"
+	ProtectedResourceTypeClassicLoadBalancer     ProtectedResourceType = "CLASSIC_LOAD_BALANCER"
+	ProtectedResourceTypeApplicationLoadBalancer ProtectedResourceType = "APPLICATION_LOAD_BALANCER"
+	ProtectedResourceTypeGlobalAccelerator       ProtectedResourceType = "GLOBAL_ACCELERATOR"
+)
+
+// Values returns all known values for ProtectedResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProtectedResourceType) Values() []ProtectedResourceType {
+	return []ProtectedResourceType{
+		"CLOUDFRONT_DISTRIBUTION",
+		"ROUTE_53_HOSTED_ZONE",
+		"ELASTIC_IP_ALLOCATION",
+		"CLASSIC_LOAD_BALANCER",
+		"APPLICATION_LOAD_BALANCER",
+		"GLOBAL_ACCELERATOR",
+	}
+}
+
+type ProtectionGroupAggregation string
+
+// Enum values for ProtectionGroupAggregation
+const (
+	ProtectionGroupAggregationSum  ProtectionGroupAggregation = "SUM"
+	ProtectionGroupAggregationMean ProtectionGroupAggregation = "MEAN"
+	ProtectionGroupAggregationMax  ProtectionGroupAggregation = "MAX"
+)
+
+// Values returns all known values for ProtectionGroupAggregation. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProtectionGroupAggregation) Values() []ProtectionGroupAggregation {
+	return []ProtectionGroupAggregation{
+		"SUM",
+		"MEAN",
+		"MAX",
+	}
+}
+
+type ProtectionGroupPattern string
+
+// Enum values for ProtectionGroupPattern
+const (
+	ProtectionGroupPatternAll            ProtectionGroupPattern = "ALL"
+	ProtectionGroupPatternArbitrary      ProtectionGroupPattern = "ARBITRARY"
+	ProtectionGroupPatternByResourceType ProtectionGroupPattern = "BY_RESOURCE_TYPE"
+)
+
+// Values returns all known values for ProtectionGroupPattern. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProtectionGroupPattern) Values() []ProtectionGroupPattern {
+	return []ProtectionGroupPattern{
+		"ALL",
+		"ARBITRARY",
+		"BY_RESOURCE_TYPE",
+	}
+}
+
 type SubResourceType string
 
 // Enum values for SubResourceType
@@ -143,5 +209,23 @@ func (Unit) Values() []Unit {
 		"BYTES",
 		"PACKETS",
 		"REQUESTS",
+	}
+}
+
+type ValidationExceptionReason string
+
+// Enum values for ValidationExceptionReason
+const (
+	ValidationExceptionReasonFieldValidationFailed ValidationExceptionReason = "FIELD_VALIDATION_FAILED"
+	ValidationExceptionReasonOther                 ValidationExceptionReason = "OTHER"
+)
+
+// Values returns all known values for ValidationExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValidationExceptionReason) Values() []ValidationExceptionReason {
+	return []ValidationExceptionReason{
+		"FIELD_VALIDATION_FAILED",
+		"OTHER",
 	}
 }

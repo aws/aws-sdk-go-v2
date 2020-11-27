@@ -246,6 +246,7 @@ const (
 	VoiceIdMizuki    VoiceId = "Mizuki"
 	VoiceIdNaja      VoiceId = "Naja"
 	VoiceIdNicole    VoiceId = "Nicole"
+	VoiceIdOlivia    VoiceId = "Olivia"
 	VoiceIdPenelope  VoiceId = "Penelope"
 	VoiceIdRaveena   VoiceId = "Raveena"
 	VoiceIdRicardo   VoiceId = "Ricardo"
@@ -314,6 +315,7 @@ func (VoiceId) Values() []VoiceId {
 		"Mizuki",
 		"Naja",
 		"Nicole",
+		"Olivia",
 		"Penelope",
 		"Raveena",
 		"Ricardo",

@@ -29,7 +29,7 @@ func (c *Client) UpdateDataset(ctx context.Context, params *UpdateDatasetInput, 
 
 type UpdateDatasetInput struct {
 
-	// A list of "DatasetAction" objects.
+	// A list of DatasetAction objects.
 	//
 	// This member is required.
 	Actions []types.DatasetAction
@@ -39,22 +39,30 @@ type UpdateDatasetInput struct {
 	// This member is required.
 	DatasetName *string
 
-	// When data set contents are created they are delivered to destinations specified
+	// When dataset contents are created, they are delivered to destinations specified
 	// here.
 	ContentDeliveryRules []types.DatasetContentDeliveryRule
 
-	// How long, in days, data set contents are kept for the data set.
+	// A list of data rules that send notifications to Amazon CloudWatch, when data
+	// arrives late. To specify lateDataRules, the dataset must use a DeltaTimer
+	// (https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html)
+	// filter.
+	LateDataRules []types.LateDataRule
+
+	// How long, in days, dataset contents are kept for the dataset.
 	RetentionPeriod *types.RetentionPeriod
 
-	// A list of "DatasetTrigger" objects. The list can be empty or can contain up to
-	// five DataSetTrigger objects.
+	// A list of DatasetTrigger objects. The list can be empty or can contain up to
+	// five DatasetTrigger objects.
 	Triggers []types.DatasetTrigger
 
-	// [Optional] How many versions of data set contents are kept. If not specified or
+	// Optional. How many versions of dataset contents are kept. If not specified or
 	// set to null, only the latest version plus the latest succeeded version (if they
-	// are different) are kept for the time period specified by the "retentionPeriod"
-	// parameter. (For more information, see
-	// https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+	// are different) are kept for the time period specified by the retentionPeriod
+	// parameter. For more information, see Keeping Multiple Versions of AWS IoT
+	// Analytics Data Sets
+	// (https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+	// in the AWS IoT Analytics User Guide.
 	VersioningConfiguration *types.VersioningConfiguration
 }
 

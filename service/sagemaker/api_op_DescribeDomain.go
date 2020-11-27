@@ -54,7 +54,7 @@ type DescribeDomainOutput struct {
 	// The creation time.
 	CreationTime *time.Time
 
-	// Settings which are applied to all UserProfile in this domain, if settings are
+	// Settings which are applied to all UserProfiles in this domain, if settings are
 	// not explicitly specified in a given UserProfile.
 	DefaultUserSettings *types.UserSettings
 
@@ -73,8 +73,12 @@ type DescribeDomainOutput struct {
 	// The ID of the Amazon Elastic File System (EFS) managed by this Domain.
 	HomeEfsFileSystemId *string
 
-	// The AWS Key Management Service encryption key ID.
+	// This member is deprecated and replaced with KmsKeyId.
 	HomeEfsFileSystemKmsKeyId *string
+
+	// The AWS KMS customer managed CMK used to encrypt the EFS volume attached to the
+	// domain.
+	KmsKeyId *string
 
 	// The last modified time.
 	LastModifiedTime *time.Time

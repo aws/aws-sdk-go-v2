@@ -3489,6 +3489,13 @@ func awsAwsquery_serializeDocumentLaunchTemplateOverrides(v *types.LaunchTemplat
 		objectKey.String(*v.InstanceType)
 	}
 
+	if v.LaunchTemplateSpecification != nil {
+		objectKey := object.Key("LaunchTemplateSpecification")
+		if err := awsAwsquery_serializeDocumentLaunchTemplateSpecification(v.LaunchTemplateSpecification, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.WeightedCapacity != nil {
 		objectKey := object.Key("WeightedCapacity")
 		objectKey.String(*v.WeightedCapacity)
@@ -4146,6 +4153,11 @@ func awsAwsquery_serializeOpDocumentCreateAutoScalingGroupInput(v *CreateAutoSca
 		if err := awsAwsquery_serializeDocumentAvailabilityZones(v.AvailabilityZones, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if v.CapacityRebalance != nil {
+		objectKey := object.Key("CapacityRebalance")
+		objectKey.Boolean(*v.CapacityRebalance)
 	}
 
 	if v.DefaultCooldown != nil {
@@ -5434,6 +5446,11 @@ func awsAwsquery_serializeOpDocumentUpdateAutoScalingGroupInput(v *UpdateAutoSca
 		if err := awsAwsquery_serializeDocumentAvailabilityZones(v.AvailabilityZones, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if v.CapacityRebalance != nil {
+		objectKey := object.Key("CapacityRebalance")
+		objectKey.Boolean(*v.CapacityRebalance)
 	}
 
 	if v.DefaultCooldown != nil {

@@ -271,6 +271,46 @@ func (GroupBy) Values() []GroupBy {
 	}
 }
 
+type IsDefinedInJob string
+
+// Enum values for IsDefinedInJob
+const (
+	IsDefinedInJobTrue    IsDefinedInJob = "TRUE"
+	IsDefinedInJobFalse   IsDefinedInJob = "FALSE"
+	IsDefinedInJobUnknown IsDefinedInJob = "UNKNOWN"
+)
+
+// Values returns all known values for IsDefinedInJob. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IsDefinedInJob) Values() []IsDefinedInJob {
+	return []IsDefinedInJob{
+		"TRUE",
+		"FALSE",
+		"UNKNOWN",
+	}
+}
+
+type IsMonitoredByJob string
+
+// Enum values for IsMonitoredByJob
+const (
+	IsMonitoredByJobTrue    IsMonitoredByJob = "TRUE"
+	IsMonitoredByJobFalse   IsMonitoredByJob = "FALSE"
+	IsMonitoredByJobUnknown IsMonitoredByJob = "UNKNOWN"
+)
+
+// Values returns all known values for IsMonitoredByJob. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IsMonitoredByJob) Values() []IsMonitoredByJob {
+	return []IsMonitoredByJob{
+		"TRUE",
+		"FALSE",
+		"UNKNOWN",
+	}
+}
+
 type JobComparator string
 
 // Enum values for JobComparator
@@ -340,6 +380,24 @@ func (JobType) Values() []JobType {
 	return []JobType{
 		"ONE_TIME",
 		"SCHEDULED",
+	}
+}
+
+type LastRunErrorStatusCode string
+
+// Enum values for LastRunErrorStatusCode
+const (
+	LastRunErrorStatusCodeNone  LastRunErrorStatusCode = "NONE"
+	LastRunErrorStatusCodeError LastRunErrorStatusCode = "ERROR"
+)
+
+// Values returns all known values for LastRunErrorStatusCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LastRunErrorStatusCode) Values() []LastRunErrorStatusCode {
+	return []LastRunErrorStatusCode{
+		"NONE",
+		"ERROR",
 	}
 }
 

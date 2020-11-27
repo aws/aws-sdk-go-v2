@@ -1735,6 +1735,77 @@ func awsRestjson1_serializeOpHttpBindingsGetCompatibleElasticsearchVersionsInput
 	return nil
 }
 
+type awsRestjson1_serializeOpGetPackageVersionHistory struct {
+}
+
+func (*awsRestjson1_serializeOpGetPackageVersionHistory) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetPackageVersionHistory) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetPackageVersionHistoryInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/packages/{PackageID}/history")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetPackageVersionHistoryInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetPackageVersionHistoryInput(v *GetPackageVersionHistoryInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.PackageID == nil || len(*v.PackageID) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PackageID must not be empty")}
+	}
+	if v.PackageID != nil {
+		if err := encoder.SetURI("PackageID").String(*v.PackageID); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetUpgradeHistory struct {
 }
 
@@ -2704,6 +2775,96 @@ func awsRestjson1_serializeOpDocumentUpdateElasticsearchDomainConfigInput(v *Upd
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdatePackage struct {
+}
+
+func (*awsRestjson1_serializeOpUpdatePackage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdatePackage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdatePackageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/packages/update")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdatePackageInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdatePackageInput(v *UpdatePackageInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdatePackageInput(v *UpdatePackageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CommitMessage != nil {
+		ok := object.Key("CommitMessage")
+		ok.String(*v.CommitMessage)
+	}
+
+	if v.PackageDescription != nil {
+		ok := object.Key("PackageDescription")
+		ok.String(*v.PackageDescription)
+	}
+
+	if v.PackageID != nil {
+		ok := object.Key("PackageID")
+		ok.String(*v.PackageID)
+	}
+
+	if v.PackageSource != nil {
+		ok := object.Key("PackageSource")
+		if err := awsRestjson1_serializeDocumentPackageSource(v.PackageSource, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpgradeElasticsearchDomain struct {
 }
 
@@ -2819,6 +2980,13 @@ func awsRestjson1_serializeDocumentAdvancedSecurityOptionsInput(v *types.Advance
 		}
 	}
 
+	if v.SAMLOptions != nil {
+		ok := object.Key("SAMLOptions")
+		if err := awsRestjson1_serializeDocumentSAMLOptionsInput(v.SAMLOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2895,6 +3063,21 @@ func awsRestjson1_serializeDocumentDescribePackagesFilterValues(v []string, valu
 func awsRestjson1_serializeDocumentDomainEndpointOptions(v *types.DomainEndpointOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CustomEndpoint != nil {
+		ok := object.Key("CustomEndpoint")
+		ok.String(*v.CustomEndpoint)
+	}
+
+	if v.CustomEndpointCertificateArn != nil {
+		ok := object.Key("CustomEndpointCertificateArn")
+		ok.String(*v.CustomEndpointCertificateArn)
+	}
+
+	if v.CustomEndpointEnabled != nil {
+		ok := object.Key("CustomEndpointEnabled")
+		ok.Boolean(*v.CustomEndpointEnabled)
+	}
 
 	if v.EnforceHTTPS != nil {
 		ok := object.Key("EnforceHTTPS")
@@ -3154,6 +3337,67 @@ func awsRestjson1_serializeDocumentPackageSource(v *types.PackageSource, value s
 	if v.S3Key != nil {
 		ok := object.Key("S3Key")
 		ok.String(*v.S3Key)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSAMLIdp(v *types.SAMLIdp, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EntityId != nil {
+		ok := object.Key("EntityId")
+		ok.String(*v.EntityId)
+	}
+
+	if v.MetadataContent != nil {
+		ok := object.Key("MetadataContent")
+		ok.String(*v.MetadataContent)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSAMLOptionsInput(v *types.SAMLOptionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("Enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if v.Idp != nil {
+		ok := object.Key("Idp")
+		if err := awsRestjson1_serializeDocumentSAMLIdp(v.Idp, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MasterBackendRole != nil {
+		ok := object.Key("MasterBackendRole")
+		ok.String(*v.MasterBackendRole)
+	}
+
+	if v.MasterUserName != nil {
+		ok := object.Key("MasterUserName")
+		ok.String(*v.MasterUserName)
+	}
+
+	if v.RolesKey != nil {
+		ok := object.Key("RolesKey")
+		ok.String(*v.RolesKey)
+	}
+
+	if v.SessionTimeoutMinutes != nil {
+		ok := object.Key("SessionTimeoutMinutes")
+		ok.Integer(*v.SessionTimeoutMinutes)
+	}
+
+	if v.SubjectKey != nil {
+		ok := object.Key("SubjectKey")
+		ok.String(*v.SubjectKey)
 	}
 
 	return nil

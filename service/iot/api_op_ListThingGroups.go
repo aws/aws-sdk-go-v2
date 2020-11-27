@@ -36,7 +36,8 @@ type ListThingGroupsInput struct {
 	// A filter that limits the results to those with the specified name prefix.
 	NamePrefixFilter *string
 
-	// The token to retrieve the next set of results.
+	// To retrieve the next set of results, the nextToken value from a previous
+	// response; otherwise null to receive the first set of results.
 	NextToken *string
 
 	// A filter that limits the results to those with the specified parent group.
@@ -48,8 +49,8 @@ type ListThingGroupsInput struct {
 
 type ListThingGroupsOutput struct {
 
-	// The token used to get the next set of results. Will not be returned if operation
-	// has returned all results.
+	// The token to use to get the next set of results. Will not be returned if
+	// operation has returned all results.
 	NextToken *string
 
 	// The thing groups.

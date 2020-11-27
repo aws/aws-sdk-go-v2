@@ -61,6 +61,12 @@ type StartDocumentTextDetectionInput struct {
 	// tax form or a receipt).
 	JobTag *string
 
+	// The KMS key used to encrypt the inference results. This can be in either Key ID
+	// or Key Alias format. When a KMS key is provided, the KMS key will be used for
+	// server-side encryption of the objects in the customer bucket. When this
+	// parameter is not enabled, the result will be encrypted server side,using SSE-S3.
+	KMSKeyId *string
+
 	// The Amazon SNS topic ARN that you want Amazon Textract to publish the completion
 	// status of the operation to.
 	NotificationChannel *types.NotificationChannel

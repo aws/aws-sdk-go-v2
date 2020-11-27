@@ -182,9 +182,8 @@ type CreateDBInstanceReadReplicaInput struct {
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
-	// For information about the supported DB engines, see CreateDBInstance. For more
-	// information about IAM database authentication, see  IAM Database Authentication
-	// for MySQL and PostgreSQL
+	// For more information about IAM database authentication, see  IAM Database
+	// Authentication for MySQL and PostgreSQL
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
 	// in the Amazon RDS User Guide.
 	EnableIAMDatabaseAuthentication *bool
@@ -210,6 +209,10 @@ type CreateDBInstanceReadReplicaInput struct {
 	// encryption keys from one AWS Region in another AWS Region. You can't create an
 	// encrypted read replica from an unencrypted DB instance.
 	KmsKeyId *string
+
+	// The upper limit to which Amazon RDS can automatically scale the storage of the
+	// DB instance.
+	MaxAllocatedStorage *int32
 
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
 	// collected for the read replica. To disable collecting Enhanced Monitoring

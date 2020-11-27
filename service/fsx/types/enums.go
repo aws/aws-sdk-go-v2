@@ -28,8 +28,10 @@ type AdministrativeActionType string
 
 // Enum values for AdministrativeActionType
 const (
-	AdministrativeActionTypeFileSystemUpdate    AdministrativeActionType = "FILE_SYSTEM_UPDATE"
-	AdministrativeActionTypeStorageOptimization AdministrativeActionType = "STORAGE_OPTIMIZATION"
+	AdministrativeActionTypeFileSystemUpdate              AdministrativeActionType = "FILE_SYSTEM_UPDATE"
+	AdministrativeActionTypeStorageOptimization           AdministrativeActionType = "STORAGE_OPTIMIZATION"
+	AdministrativeActionTypeFileSystemAliasAssociation    AdministrativeActionType = "FILE_SYSTEM_ALIAS_ASSOCIATION"
+	AdministrativeActionTypeFileSystemAliasDisassociation AdministrativeActionType = "FILE_SYSTEM_ALIAS_DISASSOCIATION"
 )
 
 // Values returns all known values for AdministrativeActionType. Note that this can
@@ -39,6 +41,32 @@ func (AdministrativeActionType) Values() []AdministrativeActionType {
 	return []AdministrativeActionType{
 		"FILE_SYSTEM_UPDATE",
 		"STORAGE_OPTIMIZATION",
+		"FILE_SYSTEM_ALIAS_ASSOCIATION",
+		"FILE_SYSTEM_ALIAS_DISASSOCIATION",
+	}
+}
+
+type AliasLifecycle string
+
+// Enum values for AliasLifecycle
+const (
+	AliasLifecycleAvailable    AliasLifecycle = "AVAILABLE"
+	AliasLifecycleCreating     AliasLifecycle = "CREATING"
+	AliasLifecycleDeleting     AliasLifecycle = "DELETING"
+	AliasLifecycleCreateFailed AliasLifecycle = "CREATE_FAILED"
+	AliasLifecycleDeleteFailed AliasLifecycle = "DELETE_FAILED"
+)
+
+// Values returns all known values for AliasLifecycle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AliasLifecycle) Values() []AliasLifecycle {
+	return []AliasLifecycle{
+		"AVAILABLE",
+		"CREATING",
+		"DELETING",
+		"CREATE_FAILED",
+		"DELETE_FAILED",
 	}
 }
 
@@ -92,6 +120,7 @@ type BackupType string
 const (
 	BackupTypeAutomatic     BackupType = "AUTOMATIC"
 	BackupTypeUserInitiated BackupType = "USER_INITIATED"
+	BackupTypeAwsBackup     BackupType = "AWS_BACKUP"
 )
 
 // Values returns all known values for BackupType. Note that this can be expanded
@@ -101,6 +130,7 @@ func (BackupType) Values() []BackupType {
 	return []BackupType{
 		"AUTOMATIC",
 		"USER_INITIATED",
+		"AWS_BACKUP",
 	}
 }
 

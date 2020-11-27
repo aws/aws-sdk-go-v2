@@ -40,18 +40,18 @@ type DescribeInstanceTypesInput struct {
 	// One or more filters. Filter names and values are case-sensitive.
 	//
 	// *
-	// auto-recovery-supported - Indicates whether auto recovery is supported. (true |
-	// false)
+	// auto-recovery-supported - Indicates whether auto recovery is supported (true |
+	// false).
 	//
-	// * bare-metal - Indicates whether it is a bare metal instance type. (true
-	// | false)
+	// * bare-metal - Indicates whether it is a bare metal instance type (true
+	// | false).
 	//
 	// * burstable-performance-supported - Indicates whether it is a
-	// burstable performance instance type. (true | false)
+	// burstable performance instance type (true | false).
 	//
 	// * current-generation -
 	// Indicates whether this instance type is the latest generation instance type of
-	// an instance family. (true | false)
+	// an instance family (true | false).
 	//
 	// *
 	// ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps - The baseline bandwidth
@@ -63,7 +63,7 @@ type DescribeInstanceTypesInput struct {
 	//
 	// *
 	// ebs-info.ebs-optimized-info.baseline-throughput-in-mbps - The baseline
-	// throughput performance for an EBS-optimized instance type, in MBps.
+	// throughput performance for an EBS-optimized instance type, in MB/s.
 	//
 	// *
 	// ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps - The maximum bandwidth
@@ -75,28 +75,28 @@ type DescribeInstanceTypesInput struct {
 	//
 	// *
 	// ebs-info.ebs-optimized-info.maximum-throughput-in-mbps - The maximum throughput
-	// performance for an EBS-optimized instance type, in MBps.
+	// performance for an EBS-optimized instance type, in MB/s.
 	//
 	// *
 	// ebs-info.ebs-optimized-support - Indicates whether the instance type is
-	// EBS-optimized. (supported | unsupported | default)
+	// EBS-optimized (supported | unsupported | default).
 	//
 	// *
-	// ebs-info.encryption-support - Indicates whether EBS encryption is supported.
-	// (supported | unsupported)
+	// ebs-info.encryption-support - Indicates whether EBS encryption is supported
+	// (supported | unsupported).
 	//
 	// * ebs-info.nvme-support - Indicates whether
-	// non-volatile memory express (NVMe) is supported for EBS volumes. (required |
-	// supported | unsupported)
+	// non-volatile memory express (NVMe) is supported for EBS volumes (required |
+	// supported | unsupported).
 	//
 	// * free-tier-eligible - Indicates whether the instance
-	// type is eligible to use in the free tier. (true | false)
+	// type is eligible to use in the free tier (true | false).
 	//
 	// *
-	// hibernation-supported - Indicates whether On-Demand hibernation is supported.
-	// (true | false)
+	// hibernation-supported - Indicates whether On-Demand hibernation is supported
+	// (true | false).
 	//
-	// * hypervisor - The hypervisor. (nitro | xen)
+	// * hypervisor - The hypervisor (nitro | xen).
 	//
 	// *
 	// instance-storage-info.disk.count - The number of local disks.
@@ -106,19 +106,19 @@ type DescribeInstanceTypesInput struct {
 	// storage disk, in GB.
 	//
 	// * instance-storage-info.disk.type - The storage technology
-	// for the local instance storage disks. (hdd | ssd)
+	// for the local instance storage disks (hdd | ssd).
 	//
 	// *
 	// instance-storage-info.nvme-support - Indicates whether non-volatile memory
-	// express (NVMe) is supported for instance store. (required | supported) |
-	// unsupported)
+	// express (NVMe) is supported for instance store (required | supported) |
+	// unsupported).
 	//
 	// * instance-storage-info.total-size-in-gb - The total amount of
 	// storage available from all local instance storage, in GB.
 	//
 	// *
 	// instance-storage-supported - Indicates whether the instance type has local
-	// instance storage. (true | false)
+	// instance storage (true | false).
 	//
 	// * instance-type - The instance type (for
 	// example c5.2xlarge or c5*).
@@ -127,11 +127,11 @@ type DescribeInstanceTypesInput struct {
 	//
 	// *
 	// network-info.efa-supported - Indicates whether the instance type supports
-	// Elastic Fabric Adapter (EFA). (true | false)
+	// Elastic Fabric Adapter (EFA) (true | false).
 	//
 	// * network-info.ena-support -
-	// Indicates whether Elastic Network Adapter (ENA) is supported or required.
-	// (required | supported | unsupported)
+	// Indicates whether Elastic Network Adapter (ENA) is supported or required
+	// (required | supported | unsupported).
 	//
 	// *
 	// network-info.ipv4-addresses-per-interface - The maximum number of private IPv4
@@ -141,8 +141,8 @@ type DescribeInstanceTypesInput struct {
 	// The maximum number of private IPv6 addresses per network interface.
 	//
 	// *
-	// network-info.ipv6-supported - Indicates whether the instance type supports IPv6.
-	// (true | false)
+	// network-info.ipv6-supported - Indicates whether the instance type supports IPv6
+	// (true | false).
 	//
 	// * network-info.maximum-network-interfaces - The maximum number
 	// of network interfaces per instance.
@@ -151,20 +151,20 @@ type DescribeInstanceTypesInput struct {
 	// network performance (for example, "25 Gigabit").
 	//
 	// *
-	// processor-info.supported-architecture - The CPU architecture. (arm64 | i386 |
-	// x86_64)
+	// processor-info.supported-architecture - The CPU architecture (arm64 | i386 |
+	// x86_64).
 	//
-	// * processor-info.sustained-clock-speed-in-ghz - The CPU clock speed, in
-	// GHz.
+	// * processor-info.sustained-clock-speed-in-ghz - The CPU clock speed,
+	// in GHz.
 	//
-	// * supported-root-device-type - The root device type. (ebs |
-	// instance-store)
+	// * supported-root-device-type - The root device type (ebs |
+	// instance-store).
 	//
-	// * supported-usage-class - The usage class. (on-demand |
-	// spot)
+	// * supported-usage-class - The usage class (on-demand |
+	// spot).
 	//
-	// * supported-virtualization-type - The virtualization type. (hvm |
-	// paravirtual)
+	// * supported-virtualization-type - The virtualization type (hvm |
+	// paravirtual).
 	//
 	// * vcpu-info.default-cores - The default number of cores for the
 	// instance type.

@@ -6142,6 +6142,15 @@ func awsRestjson1_deserializeDocumentApp(v **types.App, value interface{}) error
 				sv.CreateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
+		case "customHeaders":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomHeaders to be of type string, got %T instead", value)
+				}
+				sv.CustomHeaders = ptr.String(jtv)
+			}
+
 		case "customRules":
 			if err := awsRestjson1_deserializeDocumentCustomRules(&sv.CustomRules, value); err != nil {
 				return err

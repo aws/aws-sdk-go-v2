@@ -69,6 +69,16 @@ type CreateIndexInput struct {
 	// A list of key-value pairs that identify the index. You can use the tags to
 	// identify and organize your resources and to control access to resources.
 	Tags []types.Tag
+
+	// The user context policy. ATTRIBUTE_FILTER All indexed content is searchable and
+	// displayable for all users. If there is an access control list, it is ignored.
+	// You can filter on user and group attributes. USER_TOKEN Enables SSO and
+	// token-based user access control. All documents with no access control and all
+	// documents accessible to the user will be searchable and displayable.
+	UserContextPolicy types.UserContextPolicy
+
+	// The user token configuration.
+	UserTokenConfigurations []types.UserTokenConfiguration
 }
 
 type CreateIndexOutput struct {

@@ -38,12 +38,13 @@ type ListAttacksInput struct {
 	// is allowed.
 	EndTime *types.TimeRange
 
-	// The maximum number of AttackSummary objects to be returned. If this is left
-	// blank, the first 20 results will be returned. This is a maximum value; it is
-	// possible that AWS WAF will return the results in smaller batches. That is, the
-	// number of AttackSummary objects returned could be less than MaxResults, even if
-	// there are still more AttackSummary objects yet to return. If there are more
-	// AttackSummary objects to return, AWS WAF will always also return a NextToken.
+	// The maximum number of AttackSummary objects to return. If you leave this blank,
+	// Shield Advanced returns the first 20 results. This is a maximum value. Shield
+	// Advanced might return the results in smaller batches. That is, the number of
+	// objects returned could be less than MaxResults, even if there are still more
+	// objects yet to return. If there are more objects to return, Shield Advanced
+	// returns a value in NextToken that you can use in your next request, to get the
+	// next batch of objects.
 	MaxResults *int32
 
 	// The ListAttacksRequest.NextMarker value from a previous call to
@@ -70,9 +71,10 @@ type ListAttacksOutput struct {
 	// The token returned by a previous call to indicate that there is more data
 	// available. If not null, more results are available. Pass this value for the
 	// NextMarker parameter in a subsequent call to ListAttacks to retrieve the next
-	// set of items. AWS WAF might return the list of AttackSummary objects in batches
-	// smaller than the number specified by MaxResults. If there are more AttackSummary
-	// objects to return, AWS WAF will always also return a NextToken.
+	// set of items. Shield Advanced might return the list of AttackSummary objects in
+	// batches smaller than the number specified by MaxResults. If there are more
+	// attack summary objects to return, Shield Advanced will always also return a
+	// NextToken.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -145,12 +147,13 @@ var _ ListAttacksAPIClient = (*Client)(nil)
 
 // ListAttacksPaginatorOptions is the paginator options for ListAttacks
 type ListAttacksPaginatorOptions struct {
-	// The maximum number of AttackSummary objects to be returned. If this is left
-	// blank, the first 20 results will be returned. This is a maximum value; it is
-	// possible that AWS WAF will return the results in smaller batches. That is, the
-	// number of AttackSummary objects returned could be less than MaxResults, even if
-	// there are still more AttackSummary objects yet to return. If there are more
-	// AttackSummary objects to return, AWS WAF will always also return a NextToken.
+	// The maximum number of AttackSummary objects to return. If you leave this blank,
+	// Shield Advanced returns the first 20 results. This is a maximum value. Shield
+	// Advanced might return the results in smaller batches. That is, the number of
+	// objects returned could be less than MaxResults, even if there are still more
+	// objects yet to return. If there are more objects to return, Shield Advanced
+	// returns a value in NextToken that you can use in your next request, to get the
+	// next batch of objects.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

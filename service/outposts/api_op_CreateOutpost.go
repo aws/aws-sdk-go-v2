@@ -29,6 +29,11 @@ func (c *Client) CreateOutpost(ctx context.Context, params *CreateOutpostInput, 
 
 type CreateOutpostInput struct {
 
+	// The name of the Outpost.
+	//
+	// This member is required.
+	Name *string
+
 	// The ID of the site.
 	//
 	// This member is required.
@@ -43,9 +48,6 @@ type CreateOutpostInput struct {
 
 	// The Outpost description.
 	Description *string
-
-	// The name of the Outpost.
-	Name *string
 }
 
 type CreateOutpostOutput struct {

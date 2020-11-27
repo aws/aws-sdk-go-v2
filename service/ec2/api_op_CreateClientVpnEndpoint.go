@@ -70,6 +70,9 @@ type CreateClientVpnEndpointInput struct {
 	// This member is required.
 	ServerCertificateArn *string
 
+	// The options for managing connection authorization for new client connections.
+	ClientConnectOptions *types.ClientConnectOptions
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see How to Ensure Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).

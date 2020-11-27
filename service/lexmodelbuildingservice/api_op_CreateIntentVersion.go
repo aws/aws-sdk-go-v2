@@ -81,6 +81,10 @@ type CreateIntentVersionOutput struct {
 	// Describes how the intent is fulfilled.
 	FulfillmentActivity *types.FulfillmentActivity
 
+	// An array of InputContext objects that lists the contexts that must be active for
+	// Amazon Lex to choose the intent in a conversation with the user.
+	InputContexts []types.InputContext
+
 	// Configuration information, if any, for connecting an Amazon Kendra index with
 	// the AMAZON.KendraSearchIntent intent.
 	KendraConfiguration *types.KendraConfiguration
@@ -90,6 +94,10 @@ type CreateIntentVersionOutput struct {
 
 	// The name of the intent.
 	Name *string
+
+	// An array of OutputContext objects that lists the contexts that the intent
+	// activates when the intent is fulfilled.
+	OutputContexts []types.OutputContext
 
 	// A unique identifier for a built-in intent.
 	ParentIntentSignature *string

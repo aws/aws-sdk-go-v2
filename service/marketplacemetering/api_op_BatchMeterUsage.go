@@ -16,7 +16,10 @@ import (
 // is idempotent; requests can be retried with the same records or a subset of the
 // input records. Every request to BatchMeterUsage is for one product. If you need
 // to meter usage for multiple products, you must make multiple calls to
-// BatchMeterUsage. BatchMeterUsage can process up to 25 UsageRecords at a time.
+// BatchMeterUsage. BatchMeterUsage can process up to 25 UsageRecords at a time. A
+// UsageRecord can optionally include multiple usage allocations, to provide
+// customers with usagedata split into buckets by tags that you define (or allow
+// the customer to define). BatchMeterUsage requests must be less than 1MB in size.
 func (c *Client) BatchMeterUsage(ctx context.Context, params *BatchMeterUsageInput, optFns ...func(*Options)) (*BatchMeterUsageOutput, error) {
 	if params == nil {
 		params = &BatchMeterUsageInput{}

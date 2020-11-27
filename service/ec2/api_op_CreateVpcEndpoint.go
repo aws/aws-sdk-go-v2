@@ -23,8 +23,11 @@ import (
 // that use the endpoint. An interface endpoint is a network interface in your
 // subnet that serves as an endpoint for communicating with the specified service.
 // You can specify the subnets in which to create an endpoint, and the security
-// groups to associate with the endpoint network interface. Use
-// DescribeVpcEndpointServices to get a list of supported services.
+// groups to associate with the endpoint network interface. A GatewayLoadBalancer
+// endpoint is a network interface in your subnet that serves an endpoint for
+// communicating with a Gateway Load Balancer that you've configured as a VPC
+// endpoint service. Use DescribeVpcEndpointServices to get a list of supported
+// services.
 func (c *Client) CreateVpcEndpoint(ctx context.Context, params *CreateVpcEndpointInput, optFns ...func(*Options)) (*CreateVpcEndpointOutput, error) {
 	if params == nil {
 		params = &CreateVpcEndpointInput{}
@@ -65,9 +68,10 @@ type CreateVpcEndpointInput struct {
 	// UnauthorizedOperation.
 	DryRun bool
 
-	// A policy to attach to the endpoint that controls access to the service. The
-	// policy must be in valid JSON format. If this parameter is not specified, we
-	// attach a default policy that allows full access to the service.
+	// (Interface and gateway endpoints) A policy to attach to the endpoint that
+	// controls access to the service. The policy must be in valid JSON format. If this
+	// parameter is not specified, we attach a default policy that allows full access
+	// to the service.
 	PolicyDocument *string
 
 	// (Interface endpoint) Indicates whether to associate a private hosted zone with
@@ -89,8 +93,9 @@ type CreateVpcEndpointInput struct {
 	// endpoint network interface.
 	SecurityGroupIds []string
 
-	// (Interface endpoint) The ID of one or more subnets in which to create an
-	// endpoint network interface.
+	// (Interface and Gateway Load Balancer endpoints) The ID of one or more subnets in
+	// which to create an endpoint network interface. For a Gateway Load Balancer
+	// endpoint, you can specify one subnet only.
 	SubnetIds []string
 
 	// The tags to associate with the endpoint.

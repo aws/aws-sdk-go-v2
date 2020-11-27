@@ -159,9 +159,6 @@ func validateDestinationConfig(v *types.DestinationConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DestinationConfig"}
-	if v.ThingName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
-	}
 	if v.Services == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Services"))
 	}
@@ -177,11 +174,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -257,14 +254,14 @@ func validateOpOpenTunnelInput(v *OpenTunnelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OpenTunnelInput"}
-	if v.DestinationConfig != nil {
-		if err := validateDestinationConfig(v.DestinationConfig); err != nil {
-			invalidParams.AddNested("DestinationConfig", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DestinationConfig != nil {
+		if err := validateDestinationConfig(v.DestinationConfig); err != nil {
+			invalidParams.AddNested("DestinationConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

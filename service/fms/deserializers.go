@@ -474,8 +474,14 @@ func awsAwsjson11_deserializeOpErrorDeletePolicy(response *smithyhttp.Response, 
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
+	case strings.EqualFold("InvalidInputException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
+
 	case strings.EqualFold("InvalidOperationException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidOperationException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -4313,6 +4319,358 @@ func awsAwsjson11_deserializeDocumentMemberAccounts(v *[]string, value interface
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentNetworkFirewallActionList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected NetworkFirewallAction to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNetworkFirewallMissingExpectedRTViolation(v **types.NetworkFirewallMissingExpectedRTViolation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkFirewallMissingExpectedRTViolation
+	if *v == nil {
+		sv = &types.NetworkFirewallMissingExpectedRTViolation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityZone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LengthBoundedString to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityZone = ptr.String(jtv)
+			}
+
+		case "CurrentRouteTable":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
+				}
+				sv.CurrentRouteTable = ptr.String(jtv)
+			}
+
+		case "ExpectedRouteTable":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
+				}
+				sv.ExpectedRouteTable = ptr.String(jtv)
+			}
+
+		case "ViolationTarget":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ViolationTarget to be of type string, got %T instead", value)
+				}
+				sv.ViolationTarget = ptr.String(jtv)
+			}
+
+		case "VPC":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
+				}
+				sv.VPC = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNetworkFirewallMissingFirewallViolation(v **types.NetworkFirewallMissingFirewallViolation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkFirewallMissingFirewallViolation
+	if *v == nil {
+		sv = &types.NetworkFirewallMissingFirewallViolation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityZone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LengthBoundedString to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityZone = ptr.String(jtv)
+			}
+
+		case "TargetViolationReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetViolationReason to be of type string, got %T instead", value)
+				}
+				sv.TargetViolationReason = ptr.String(jtv)
+			}
+
+		case "ViolationTarget":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ViolationTarget to be of type string, got %T instead", value)
+				}
+				sv.ViolationTarget = ptr.String(jtv)
+			}
+
+		case "VPC":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
+				}
+				sv.VPC = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNetworkFirewallMissingSubnetViolation(v **types.NetworkFirewallMissingSubnetViolation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkFirewallMissingSubnetViolation
+	if *v == nil {
+		sv = &types.NetworkFirewallMissingSubnetViolation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityZone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LengthBoundedString to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityZone = ptr.String(jtv)
+			}
+
+		case "TargetViolationReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetViolationReason to be of type string, got %T instead", value)
+				}
+				sv.TargetViolationReason = ptr.String(jtv)
+			}
+
+		case "ViolationTarget":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ViolationTarget to be of type string, got %T instead", value)
+				}
+				sv.ViolationTarget = ptr.String(jtv)
+			}
+
+		case "VPC":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
+				}
+				sv.VPC = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNetworkFirewallPolicyDescription(v **types.NetworkFirewallPolicyDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkFirewallPolicyDescription
+	if *v == nil {
+		sv = &types.NetworkFirewallPolicyDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StatefulRuleGroups":
+			if err := awsAwsjson11_deserializeDocumentStatefulRuleGroupList(&sv.StatefulRuleGroups, value); err != nil {
+				return err
+			}
+
+		case "StatelessCustomActions":
+			if err := awsAwsjson11_deserializeDocumentNetworkFirewallActionList(&sv.StatelessCustomActions, value); err != nil {
+				return err
+			}
+
+		case "StatelessDefaultActions":
+			if err := awsAwsjson11_deserializeDocumentNetworkFirewallActionList(&sv.StatelessDefaultActions, value); err != nil {
+				return err
+			}
+
+		case "StatelessFragmentDefaultActions":
+			if err := awsAwsjson11_deserializeDocumentNetworkFirewallActionList(&sv.StatelessFragmentDefaultActions, value); err != nil {
+				return err
+			}
+
+		case "StatelessRuleGroups":
+			if err := awsAwsjson11_deserializeDocumentStatelessRuleGroupList(&sv.StatelessRuleGroups, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNetworkFirewallPolicyModifiedViolation(v **types.NetworkFirewallPolicyModifiedViolation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkFirewallPolicyModifiedViolation
+	if *v == nil {
+		sv = &types.NetworkFirewallPolicyModifiedViolation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CurrentPolicyDescription":
+			if err := awsAwsjson11_deserializeDocumentNetworkFirewallPolicyDescription(&sv.CurrentPolicyDescription, value); err != nil {
+				return err
+			}
+
+		case "ExpectedPolicyDescription":
+			if err := awsAwsjson11_deserializeDocumentNetworkFirewallPolicyDescription(&sv.ExpectedPolicyDescription, value); err != nil {
+				return err
+			}
+
+		case "ViolationTarget":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ViolationTarget to be of type string, got %T instead", value)
+				}
+				sv.ViolationTarget = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentPartialMatch(v **types.PartialMatch, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5362,6 +5720,26 @@ func awsAwsjson11_deserializeDocumentResourceViolation(v **types.ResourceViolati
 				return err
 			}
 
+		case "NetworkFirewallMissingExpectedRTViolation":
+			if err := awsAwsjson11_deserializeDocumentNetworkFirewallMissingExpectedRTViolation(&sv.NetworkFirewallMissingExpectedRTViolation, value); err != nil {
+				return err
+			}
+
+		case "NetworkFirewallMissingFirewallViolation":
+			if err := awsAwsjson11_deserializeDocumentNetworkFirewallMissingFirewallViolation(&sv.NetworkFirewallMissingFirewallViolation, value); err != nil {
+				return err
+			}
+
+		case "NetworkFirewallMissingSubnetViolation":
+			if err := awsAwsjson11_deserializeDocumentNetworkFirewallMissingSubnetViolation(&sv.NetworkFirewallMissingSubnetViolation, value); err != nil {
+				return err
+			}
+
+		case "NetworkFirewallPolicyModifiedViolation":
+			if err := awsAwsjson11_deserializeDocumentNetworkFirewallPolicyModifiedViolation(&sv.NetworkFirewallPolicyModifiedViolation, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5641,6 +6019,185 @@ func awsAwsjson11_deserializeDocumentSecurityServicePolicyData(v **types.Securit
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentStatefulRuleGroup(v **types.StatefulRuleGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StatefulRuleGroup
+	if *v == nil {
+		sv = &types.StatefulRuleGroup{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ResourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
+				}
+				sv.ResourceId = ptr.String(jtv)
+			}
+
+		case "RuleGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkFirewallResourceName to be of type string, got %T instead", value)
+				}
+				sv.RuleGroupName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentStatefulRuleGroupList(v *[]types.StatefulRuleGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.StatefulRuleGroup
+	if *v == nil {
+		cv = []types.StatefulRuleGroup{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.StatefulRuleGroup
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentStatefulRuleGroup(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentStatelessRuleGroup(v **types.StatelessRuleGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StatelessRuleGroup
+	if *v == nil {
+		sv = &types.StatelessRuleGroup{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Priority":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected StatelessRuleGroupPriority to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Priority = int32(i64)
+			}
+
+		case "ResourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
+				}
+				sv.ResourceId = ptr.String(jtv)
+			}
+
+		case "RuleGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkFirewallResourceName to be of type string, got %T instead", value)
+				}
+				sv.RuleGroupName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentStatelessRuleGroupList(v *[]types.StatelessRuleGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.StatelessRuleGroup
+	if *v == nil {
+		cv = []types.StatelessRuleGroup{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.StatelessRuleGroup
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentStatelessRuleGroup(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

@@ -1,0 +1,1751 @@
+{
+  "smithy": "1.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "id": "HttpMethodSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpResponseCodeSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "PaginatedTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpHeaderTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpUriConflict",
+        "namespace": "*"
+      },
+      {
+        "id": "Service",
+        "namespace": "*"
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.servicecatalogappregistry#AWS242AppRegistry": {
+      "type": "service",
+      "version": "2020-06-24",
+      "operations": [
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#AssociateAttributeGroup"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#AssociateResource"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#CreateApplication"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#CreateAttributeGroup"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#DeleteApplication"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#DeleteAttributeGroup"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#DisassociateAttributeGroup"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#DisassociateResource"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#GetApplication"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#GetAttributeGroup"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ListApplications"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ListAssociatedAttributeGroups"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ListAssociatedResources"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ListAttributeGroups"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#UpdateApplication"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#UpdateAttributeGroup"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "Service Catalog AppRegistry",
+          "arnNamespace": "servicecatalog",
+          "cloudFormationName": "ServiceCatalogAppRegistry",
+          "cloudTrailEventSource": "servicecatalogappregistry.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "servicecatalog"
+        },
+        "aws.protocols#restJson1": {},
+        "smithy.api#documentation": "<p> AWS Service Catalog AppRegistry enables organizations to understand the application context of their AWS resources. AppRegistry provides a repository of your applications, their resources, and the application metadata that you use within your enterprise.</p>",
+        "smithy.api#title": "AWS Service Catalog App Registry"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#Application": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationId",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of the application.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon resource name (ARN) that specifies the application across services.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.servicecatalogappregistry#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the application. The name must be unique in the region in which you are creating the application.</p>"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.servicecatalogappregistry#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the application.</p>"
+          }
+        },
+        "creationTime": {
+          "target": "com.amazonaws.servicecatalogappregistry#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The ISO-8601 formatted timestamp of the moment when the application was created.</p>"
+          }
+        },
+        "lastUpdateTime": {
+          "target": "com.amazonaws.servicecatalogappregistry#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p> The ISO-8601 formatted timestamp of the moment when the application was last updated.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.servicecatalogappregistry#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>Key-value pairs you can use to associate with the application.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents a Service Catalog AppRegistry application that is the top-level node in a hierarchy of related\n       cloud resource abstractions.</p>"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ApplicationArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ApplicationId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "[a-z0-9]{12}"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        },
+        "smithy.api#pattern": "\\w+"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ApplicationSummaries": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.servicecatalogappregistry#ApplicationSummary"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ApplicationSummary": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationId",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of the application.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon resource name (ARN) that specifies the application across services.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.servicecatalogappregistry#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the application. The name must be unique in the region in which you are creating the application.</p>"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.servicecatalogappregistry#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the application.</p>"
+          }
+        },
+        "creationTime": {
+          "target": "com.amazonaws.servicecatalogappregistry#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The ISO-8601 formatted timestamp of the moment when the application was created.</p>"
+          }
+        },
+        "lastUpdateTime": {
+          "target": "com.amazonaws.servicecatalogappregistry#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p> The ISO-8601 formatted timestamp of the moment when the application was last updated.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Summary of a Service Catalog AppRegistry application.</p>"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#Arn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1600
+        },
+        "smithy.api#pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#AssociateAttributeGroup": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicecatalogappregistry#AssociateAttributeGroupRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicecatalogappregistry#AssociateAttributeGroupResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Associates an attribute group with an application to augment the application's metadata\n      with the group's attributes. This feature enables applications to be described with\n      user-defined details that are machine-readable, such as third-party integrations.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/applications/{application}/attribute-groups/{attributeGroup}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#AssociateAttributeGroupRequest": {
+      "type": "structure",
+      "members": {
+        "application": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ID of the application.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "attributeGroup": {
+          "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupSpecifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ID of the attribute group that holds the attributes to describe the application.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#AssociateAttributeGroupResponse": {
+      "type": "structure",
+      "members": {
+        "applicationArn": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the application that was augmented with attributes.</p>"
+          }
+        },
+        "attributeGroupArn": {
+          "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the attribute group that contains the application's new attributes.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#AssociateResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicecatalogappregistry#AssociateResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicecatalogappregistry#AssociateResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ServiceQuotaExceededException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Associates a resource with an application. Both the resource and the application can be specified either by ID or name.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/applications/{application}/resources/{resourceType}/{resource}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#AssociateResourceRequest": {
+      "type": "structure",
+      "members": {
+        "application": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ID of the application.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "resourceType": {
+          "target": "com.amazonaws.servicecatalogappregistry#ResourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of resource of which the application will be associated.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "resource": {
+          "target": "com.amazonaws.servicecatalogappregistry#ResourceSpecifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ID of the resource of which the application will be associated.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#AssociateResourceResponse": {
+      "type": "structure",
+      "members": {
+        "applicationArn": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the application that was augmented with attributes.</p>"
+          }
+        },
+        "resourceArn": {
+          "target": "com.amazonaws.servicecatalogappregistry#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon resource name (ARN) that specifies the resource.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#AssociationCount": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 0
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#AttributeGroup": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupId",
+          "traits": {
+            "smithy.api#documentation": "<p>The globally unique attribute group identifier of the attribute group.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon resource name (ARN) that specifies the attribute group across services.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.servicecatalogappregistry#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the attribute group.</p>"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.servicecatalogappregistry#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the attribute group that the user provides.</p>"
+          }
+        },
+        "creationTime": {
+          "target": "com.amazonaws.servicecatalogappregistry#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The ISO-8601 formatted timestamp of the moment the attribute group was created.</p>"
+          }
+        },
+        "lastUpdateTime": {
+          "target": "com.amazonaws.servicecatalogappregistry#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The ISO-8601 formatted timestamp of the moment the attribute group was last updated. This time is the same as the creationTime for a newly created attribute group.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.servicecatalogappregistry#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>Key-value pairs you can use to associate with the attribute group.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents a Service Catalog AppRegistry attribute group that is rich metadata which describes an application and its components.</p>"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#AttributeGroupArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#AttributeGroupId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 100
+        },
+        "smithy.api#pattern": "[a-z0-9]{12}"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#AttributeGroupIds": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupId"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#AttributeGroupSpecifier": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        },
+        "smithy.api#pattern": "\\w+"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#AttributeGroupSummaries": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupSummary"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#AttributeGroupSummary": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupId",
+          "traits": {
+            "smithy.api#documentation": "<p>The globally unique attribute group identifier of the attribute group.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon resource name (ARN) that specifies the attribute group across services.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.servicecatalogappregistry#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the attribute group.</p>"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.servicecatalogappregistry#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the attribute group that the user provides.</p>"
+          }
+        },
+        "creationTime": {
+          "target": "com.amazonaws.servicecatalogappregistry#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The ISO-8601 formatted timestamp of the moment the attribute group was created.</p>"
+          }
+        },
+        "lastUpdateTime": {
+          "target": "com.amazonaws.servicecatalogappregistry#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The ISO-8601 formatted timestamp of the moment the attribute group was last updated. This time is the same as the creationTime for a newly created attribute group.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Summary of a Service Catalog AppRegistry attribute group.</p>"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#Attributes": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 8000
+        },
+        "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ClientToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ConflictException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.servicecatalogappregistry#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>There was a conflict when processing the request (for example, a resource with the given name already\n      exists within the account).</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 409
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#CreateApplication": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicecatalogappregistry#CreateApplicationRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicecatalogappregistry#CreateApplicationResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ServiceQuotaExceededException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a new application that is the top-level node in a hierarchy of related cloud resource abstractions.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/applications",
+          "code": 201
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#CreateApplicationRequest": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.servicecatalogappregistry#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the application. The name must be unique in the region in which you are creating the application.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.servicecatalogappregistry#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the application.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.servicecatalogappregistry#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>Key-value pairs you can use to associate with the application.</p>"
+          }
+        },
+        "clientToken": {
+          "target": "com.amazonaws.servicecatalogappregistry#ClientToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier that you provide to ensure idempotency. If you retry a request that\n      completed successfully using the same client token and the same parameters, the retry succeeds\n      without performing any further actions. If you retry a successful request using the same\n      client token, but one or more of the parameters are different, the retry fails.</p>",
+            "smithy.api#idempotencyToken": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#CreateApplicationResponse": {
+      "type": "structure",
+      "members": {
+        "application": {
+          "target": "com.amazonaws.servicecatalogappregistry#Application",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the application.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#CreateAttributeGroup": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicecatalogappregistry#CreateAttributeGroupRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicecatalogappregistry#CreateAttributeGroupResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a new attribute group as a container for user-defined attributes. This feature\n      enables users to have full control over their cloud application's metadata in a rich\n      machine-readable format to facilitate integration with automated workflows and third-party\n      tools.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/attribute-groups",
+          "code": 201
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#CreateAttributeGroupRequest": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.servicecatalogappregistry#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the attribute group.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.servicecatalogappregistry#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the attribute group that the user provides.</p>"
+          }
+        },
+        "attributes": {
+          "target": "com.amazonaws.servicecatalogappregistry#Attributes",
+          "traits": {
+            "smithy.api#documentation": "<p>A JSON string in the form of nested key-value pairs that represent the attributes in the group and describes an application and its components.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.servicecatalogappregistry#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>Key-value pairs you can use to associate with the attribute group.</p>"
+          }
+        },
+        "clientToken": {
+          "target": "com.amazonaws.servicecatalogappregistry#ClientToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier that you provide to ensure idempotency. If you retry a request that\n      completed successfully using the same client token and the same parameters, the retry succeeds\n      without performing any further actions. If you retry a successful request using the same\n      client token, but one or more of the parameters are different, the retry fails.</p>",
+            "smithy.api#idempotencyToken": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#CreateAttributeGroupResponse": {
+      "type": "structure",
+      "members": {
+        "attributeGroup": {
+          "target": "com.amazonaws.servicecatalogappregistry#AttributeGroup",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the attribute group.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#DeleteApplication": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicecatalogappregistry#DeleteApplicationRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicecatalogappregistry#DeleteApplicationResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes an application that is specified either by its application ID or name. All associated attribute groups and resources must be disassociated from it before deleting an application.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/applications/{application}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#DeleteApplicationRequest": {
+      "type": "structure",
+      "members": {
+        "application": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ID of the application.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#DeleteApplicationResponse": {
+      "type": "structure",
+      "members": {
+        "application": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationSummary",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the deleted application.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#DeleteAttributeGroup": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicecatalogappregistry#DeleteAttributeGroupRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicecatalogappregistry#DeleteAttributeGroupResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes an attribute group, specified either by its attribute group ID or name.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/attribute-groups/{attributeGroup}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#DeleteAttributeGroupRequest": {
+      "type": "structure",
+      "members": {
+        "attributeGroup": {
+          "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupSpecifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ID of the attribute group that holds the attributes to describe the application.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#DeleteAttributeGroupResponse": {
+      "type": "structure",
+      "members": {
+        "attributeGroup": {
+          "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupSummary",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the deleted attribute group.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#Description": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 1024
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#DisassociateAttributeGroup": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicecatalogappregistry#DisassociateAttributeGroupRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicecatalogappregistry#DisassociateAttributeGroupResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Disassociates an attribute group from an application to remove the extra attributes contained in the attribute group from the application's metadata. This operation reverts <code>AssociateAttributeGroup</code>.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/applications/{application}/attribute-groups/{attributeGroup}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#DisassociateAttributeGroupRequest": {
+      "type": "structure",
+      "members": {
+        "application": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ID of the application.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "attributeGroup": {
+          "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupSpecifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ID of the attribute group that holds the attributes to describe the application.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#DisassociateAttributeGroupResponse": {
+      "type": "structure",
+      "members": {
+        "applicationArn": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon resource name (ARN) that specifies the application.</p>"
+          }
+        },
+        "attributeGroupArn": {
+          "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon resource name (ARN) that specifies the attribute group.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#DisassociateResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicecatalogappregistry#DisassociateResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicecatalogappregistry#DisassociateResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Disassociates a resource from application. Both the resource and the application can be specified either by ID or name.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/applications/{application}/resources/{resourceType}/{resource}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#DisassociateResourceRequest": {
+      "type": "structure",
+      "members": {
+        "application": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ID of the application.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "resourceType": {
+          "target": "com.amazonaws.servicecatalogappregistry#ResourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the resource that is being disassociated.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "resource": {
+          "target": "com.amazonaws.servicecatalogappregistry#ResourceSpecifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ID of the resource.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#DisassociateResourceResponse": {
+      "type": "structure",
+      "members": {
+        "applicationArn": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon resource name (ARN) that specifies the application.</p>"
+          }
+        },
+        "resourceArn": {
+          "target": "com.amazonaws.servicecatalogappregistry#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon resource name (ARN) that specifies the resource.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#GetApplication": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicecatalogappregistry#GetApplicationRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicecatalogappregistry#GetApplicationResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves metadata information about one of your applications. The application can be specified either by its unique ID or by its name (which is unique within one account in one region at a given point in time). Specify by ID in automated workflows if you want to make sure that the exact same application is returned or a <code>ResourceNotFoundException</code> is thrown, avoiding the ABA addressing problem.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/applications/{application}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#GetApplicationRequest": {
+      "type": "structure",
+      "members": {
+        "application": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ID of the application.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#GetApplicationResponse": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationId",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of the application.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon resource name (ARN) that specifies the application across services.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.servicecatalogappregistry#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the application. The name must be unique in the region in which you are creating the application.</p>"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.servicecatalogappregistry#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the application.</p>"
+          }
+        },
+        "creationTime": {
+          "target": "com.amazonaws.servicecatalogappregistry#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The ISO-8601 formatted timestamp of the moment when the application was created.</p>"
+          }
+        },
+        "lastUpdateTime": {
+          "target": "com.amazonaws.servicecatalogappregistry#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The ISO-8601 formatted timestamp of the moment when the application was last updated.</p>"
+          }
+        },
+        "associatedResourceCount": {
+          "target": "com.amazonaws.servicecatalogappregistry#AssociationCount",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of top-level resources that were registered as part of this application.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.servicecatalogappregistry#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>Key-value pairs associated with the application.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#GetAttributeGroup": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicecatalogappregistry#GetAttributeGroupRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicecatalogappregistry#GetAttributeGroupResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves an attribute group, either by its name or its ID. The attribute group can be specified either by its unique ID or by its name.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/attribute-groups/{attributeGroup}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#GetAttributeGroupRequest": {
+      "type": "structure",
+      "members": {
+        "attributeGroup": {
+          "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupSpecifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ID of the attribute group that holds the attributes to describe the application.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#GetAttributeGroupResponse": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupId",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of the attribute group.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon resource name (ARN) that specifies the attribute group across services.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.servicecatalogappregistry#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the attribute group.</p>"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.servicecatalogappregistry#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the attribute group that the user provides.</p>"
+          }
+        },
+        "attributes": {
+          "target": "com.amazonaws.servicecatalogappregistry#Attributes",
+          "traits": {
+            "smithy.api#documentation": "<p>A JSON string in the form of nested key-value pairs that represent the attributes in the group and describes an application and its components.</p>"
+          }
+        },
+        "creationTime": {
+          "target": "com.amazonaws.servicecatalogappregistry#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The ISO-8601 formatted timestamp of the moment the attribute group was created.</p>"
+          }
+        },
+        "lastUpdateTime": {
+          "target": "com.amazonaws.servicecatalogappregistry#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The ISO-8601 formatted timestamp of the moment the attribute group was last updated. This time is the same as the creationTime for a newly created attribute group.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.servicecatalogappregistry#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>Key-value pairs associated with the attribute group.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#InternalServerException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.servicecatalogappregistry#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The service is experiencing internal problems.</p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 500
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ListApplications": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicecatalogappregistry#ListApplicationsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicecatalogappregistry#ListApplicationsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves a list of all of your applications. Results are paginated.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/applications",
+          "code": 200
+        },
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ListApplicationsRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.servicecatalogappregistry#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token to use to get the next page of results after a previous API call. </p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.servicecatalogappregistry#MaxResults",
+          "traits": {
+            "smithy.api#box": {},
+            "smithy.api#documentation": "<p>The upper bound of the number of results to return (cannot exceed 25). If this parameter is omitted, it defaults to 25. This value is optional.</p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ListApplicationsResponse": {
+      "type": "structure",
+      "members": {
+        "applications": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationSummaries",
+          "traits": {
+            "smithy.api#documentation": "<p>This list of applications.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.servicecatalogappregistry#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token to use to get the next page of results after a previous API call. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ListAssociatedAttributeGroups": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicecatalogappregistry#ListAssociatedAttributeGroupsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicecatalogappregistry#ListAssociatedAttributeGroupsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists all attribute groups that are associated with specified application.  Results are paginated.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/applications/{application}/attribute-groups",
+          "code": 200
+        },
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ListAssociatedAttributeGroupsRequest": {
+      "type": "structure",
+      "members": {
+        "application": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ID of the application.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.servicecatalogappregistry#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token to use to get the next page of results after a previous API call. </p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.servicecatalogappregistry#MaxResults",
+          "traits": {
+            "smithy.api#box": {},
+            "smithy.api#documentation": "<p>The upper bound of the number of results to return (cannot exceed 25). If this parameter is omitted, it defaults to 25. This value is optional.</p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ListAssociatedAttributeGroupsResponse": {
+      "type": "structure",
+      "members": {
+        "attributeGroups": {
+          "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupIds",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of attribute group IDs.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.servicecatalogappregistry#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token to use to get the next page of results after a previous API call. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ListAssociatedResources": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicecatalogappregistry#ListAssociatedResourcesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicecatalogappregistry#ListAssociatedResourcesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists all resources that are associated with specified application. Results are paginated.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/applications/{application}/resources",
+          "code": 200
+        },
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ListAssociatedResourcesRequest": {
+      "type": "structure",
+      "members": {
+        "application": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ID of the application.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.servicecatalogappregistry#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token to use to get the next page of results after a previous API call. </p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.servicecatalogappregistry#MaxResults",
+          "traits": {
+            "smithy.api#box": {},
+            "smithy.api#documentation": "<p>The upper bound of the number of results to return (cannot exceed 25). If this parameter is omitted, it defaults to 25. This value is optional.</p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ListAssociatedResourcesResponse": {
+      "type": "structure",
+      "members": {
+        "resources": {
+          "target": "com.amazonaws.servicecatalogappregistry#Resources",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the resources.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.servicecatalogappregistry#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token to use to get the next page of results after a previous API call. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ListAttributeGroups": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicecatalogappregistry#ListAttributeGroupsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicecatalogappregistry#ListAttributeGroupsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists all attribute groups which you have access to. Results are paginated.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/attribute-groups",
+          "code": 200
+        },
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ListAttributeGroupsRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.servicecatalogappregistry#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token to use to get the next page of results after a previous API call. </p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.servicecatalogappregistry#MaxResults",
+          "traits": {
+            "smithy.api#box": {},
+            "smithy.api#documentation": "<p>The upper bound of the number of results to return (cannot exceed 25). If this parameter is omitted, it defaults to 25. This value is optional.</p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ListAttributeGroupsResponse": {
+      "type": "structure",
+      "members": {
+        "attributeGroups": {
+          "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupSummaries",
+          "traits": {
+            "smithy.api#documentation": "<p>This list of attribute groups.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.servicecatalogappregistry#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token to use to get the next page of results after a previous API call. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#MaxResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 1,
+          "max": 25
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#Name": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        },
+        "smithy.api#pattern": "\\w+"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#NextToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 2024
+        },
+        "smithy.api#pattern": "[A-Za-z0-9+/=]+"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ResourceInfo": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.servicecatalogappregistry#ResourceSpecifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the resource.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.servicecatalogappregistry#StackArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon resource name (ARN) that specifies the resource across services.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Information about the resource.</p>"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.servicecatalogappregistry#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The specified resource does not exist.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ResourceSpecifier": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        },
+        "smithy.api#pattern": "\\S+"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ResourceType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "CFN_STACK",
+            "name": "CFN_STACK"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#Resources": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.servicecatalogappregistry#ResourceInfo"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ServiceQuotaExceededException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.servicecatalogappregistry#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The maximum number of resources per account has been reached.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 402
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#StackArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "arn:aws[-a-z]*:cloudformation:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:stack/[a-zA-Z][-A-Za-z0-9]{0,127}/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#String": {
+      "type": "string"
+    },
+    "com.amazonaws.servicecatalogappregistry#TagKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "(?!aws:)[a-zA-Z+-=._:/]+"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#TagValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        },
+        "smithy.api#pattern": "[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#Tags": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.servicecatalogappregistry#TagKey"
+      },
+      "value": {
+        "target": "com.amazonaws.servicecatalogappregistry#TagValue"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#Timestamp": {
+      "type": "timestamp",
+      "traits": {
+        "smithy.api#timestampFormat": "date-time"
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#UpdateApplication": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicecatalogappregistry#UpdateApplicationRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicecatalogappregistry#UpdateApplicationResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates an existing application with new attributes.</p>",
+        "smithy.api#http": {
+          "method": "PATCH",
+          "uri": "/applications/{application}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#UpdateApplicationRequest": {
+      "type": "structure",
+      "members": {
+        "application": {
+          "target": "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ID of the application that will be updated.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.servicecatalogappregistry#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The new name of the application. The name must be unique in the region in which you are updating the application.</p>"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.servicecatalogappregistry#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>The new description of the application.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#UpdateApplicationResponse": {
+      "type": "structure",
+      "members": {
+        "application": {
+          "target": "com.amazonaws.servicecatalogappregistry#Application",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated information of the application.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#UpdateAttributeGroup": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicecatalogappregistry#UpdateAttributeGroupRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicecatalogappregistry#UpdateAttributeGroupResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.servicecatalogappregistry#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates an existing attribute group with new details. </p>",
+        "smithy.api#http": {
+          "method": "PATCH",
+          "uri": "/attribute-groups/{attributeGroup}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#UpdateAttributeGroupRequest": {
+      "type": "structure",
+      "members": {
+        "attributeGroup": {
+          "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupSpecifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ID of the attribute group that holds the attributes to describe the application.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.servicecatalogappregistry#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The new name of the attribute group. The name must be unique in the region in which you are\n       updating the attribute group.</p>"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.servicecatalogappregistry#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the attribute group that the user provides.</p>"
+          }
+        },
+        "attributes": {
+          "target": "com.amazonaws.servicecatalogappregistry#Attributes",
+          "traits": {
+            "smithy.api#documentation": "<p>A JSON string in the form of nested key-value pairs that represent the attributes in the group and describes an application and its components.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#UpdateAttributeGroupResponse": {
+      "type": "structure",
+      "members": {
+        "attributeGroup": {
+          "target": "com.amazonaws.servicecatalogappregistry#AttributeGroup",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated information of the attribute group.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicecatalogappregistry#ValidationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.servicecatalogappregistry#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The request has invalid or missing parameters.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    }
+  }
+}

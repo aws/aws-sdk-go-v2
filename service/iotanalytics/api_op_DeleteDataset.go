@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes the specified data set. You do not have to delete the content of the
-// data set before you perform this operation.
+// Deletes the specified dataset. You do not have to delete the content of the
+// dataset before you perform this operation.
 func (c *Client) DeleteDataset(ctx context.Context, params *DeleteDatasetInput, optFns ...func(*Options)) (*DeleteDatasetOutput, error) {
 	if params == nil {
 		params = &DeleteDatasetInput{}

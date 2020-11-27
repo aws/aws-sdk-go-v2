@@ -184,13 +184,10 @@ type RunInstancesInput struct {
 	ElasticInferenceAccelerators []types.ElasticInferenceAccelerator
 
 	// Indicates whether the instance is enabled for AWS Nitro Enclaves. For more
-	// information, see  AWS Nitro Enclaves
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html) in the
-	// Amazon Elastic Compute Cloud User Guide. You can't enable AWS Nitro Enclaves and
-	// hibernation on the same instance. For more information about AWS Nitro Enclaves
-	// requirements, see  AWS Nitro Enclaves
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// information, see  What is AWS Nitro Enclaves?
+	// (https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html) in the AWS
+	// Nitro Enclaves User Guide. You can't enable AWS Nitro Enclaves and hibernation
+	// on the same instance.
 	EnclaveOptions *types.EnclaveOptionsRequest
 
 	// Indicates whether an instance is enabled for hibernation. For more information,

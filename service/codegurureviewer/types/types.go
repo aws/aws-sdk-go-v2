@@ -20,8 +20,16 @@ type CodeCommitRepository struct {
 	Name *string
 }
 
-// Information about a code review.
+// Information about a code review. A code review belongs to the associated
+// repository that contains the reviewed code.
 type CodeReview struct {
+
+	// The Amazon Resource Name (ARN) of the RepositoryAssociation
+	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
+	// that contains the reviewed source code. You can retrieve associated repository
+	// ARNs by calling ListRepositoryAssociations
+	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html).
+	AssociationArn *string
 
 	// The Amazon Resource Name (ARN) of the CodeReview
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
@@ -152,7 +160,7 @@ type CodeReviewType struct {
 	// A code review that analyzes all code under a specified branch in an associated
 	// respository. The assocated repository is specified using its ARN in
 	// CreateCodeReview
-	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview)
+	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview).
 	//
 	// This member is required.
 	RepositoryAnalysis *RepositoryAnalysis
@@ -374,6 +382,15 @@ type RepositoryAssociation struct {
 	//
 	// * Disassociating: CodeGuru Reviewer is
 	// removing the repository's pull request notifications and source code access.
+	//
+	// *
+	// Disassociated: CodeGuru Reviewer successfully disassociated the repository. You
+	// can create a new association with this repository if you want to review source
+	// code in it later. You can control access to code reviews created in an
+	// associated repository with tags after it has been disassociated. For more
+	// information, see Using tags to control access to associated repositories
+	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html)
+	// in the Amazon CodeGuru Reviewer User Guide.
 	State RepositoryAssociationState
 
 	// A description of why the repository association is in the current state.
@@ -388,7 +405,8 @@ type RepositoryAssociationSummary struct {
 
 	// The Amazon Resource Name (ARN) of the RepositoryAssociation
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
-	// object. You can retrieve this ARN by calling ListRepositories.
+	// object. You can retrieve this ARN by calling ListRepositoryAssociations
+	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html).
 	AssociationArn *string
 
 	// The repository association ID.
@@ -441,6 +459,15 @@ type RepositoryAssociationSummary struct {
 	//
 	// * Disassociating: CodeGuru Reviewer is
 	// removing the repository's pull request notifications and source code access.
+	//
+	// *
+	// Disassociated: CodeGuru Reviewer successfully disassociated the repository. You
+	// can create a new association with this repository if you want to review source
+	// code in it later. You can control access to code reviews created in an
+	// associated repository with tags after it has been disassociated. For more
+	// information, see Using tags to control access to associated repositories
+	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html)
+	// in the Amazon CodeGuru Reviewer User Guide.
 	State RepositoryAssociationState
 }
 

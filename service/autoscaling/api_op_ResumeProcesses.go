@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Resumes the specified suspended automatic scaling processes, or all suspended
+// Resumes the specified suspended auto scaling processes, or all suspended
 // process, for the specified Auto Scaling group. For more information, see
-// Suspending and Resuming Scaling Processes
+// Suspending and resuming scaling processes
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) ResumeProcesses(ctx context.Context, params *ResumeProcessesInput, optFns ...func(*Options)) (*ResumeProcessesOutput, error) {

@@ -13,9 +13,9 @@ import (
 
 // Creates or updates a scaling policy for an Auto Scaling group. For more
 // information about using scaling policies to scale your Auto Scaling group, see
-// Target Tracking Scaling Policies
+// Target tracking scaling policies
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html)
-// and Step and Simple Scaling Policies
+// and Step and simple scaling policies
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) PutScalingPolicy(ctx context.Context, params *PutScalingPolicyInput, optFns ...func(*Options)) (*PutScalingPolicyOutput, error) {
@@ -48,7 +48,7 @@ type PutScalingPolicyInput struct {
 	// Specifies how the scaling adjustment is interpreted (for example, an absolute
 	// number or a percentage). The valid values are ChangeInCapacity, ExactCapacity,
 	// and PercentChangeInCapacity. Required if the policy type is StepScaling or
-	// SimpleScaling. For more information, see Scaling Adjustment Types
+	// SimpleScaling. For more information, see Scaling adjustment types
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html#as-scaling-adjustment)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	AdjustmentType *string
@@ -56,14 +56,14 @@ type PutScalingPolicyInput struct {
 	// The duration of the policy's cooldown period, in seconds. When a cooldown period
 	// is specified here, it overrides the default cooldown period defined for the Auto
 	// Scaling group. Valid only if the policy type is SimpleScaling. For more
-	// information, see Scaling Cooldowns for Amazon EC2 Auto Scaling
+	// information, see Scaling cooldowns for Amazon EC2 Auto Scaling
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html) in the
 	// Amazon EC2 Auto Scaling User Guide.
 	Cooldown *int32
 
 	// Indicates whether the scaling policy is enabled or disabled. The default is
-	// enabled. For more information, see Disabling a Scaling Policy for an Auto
-	// Scaling Group
+	// enabled. For more information, see Disabling a scaling policy for an Auto
+	// Scaling group
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enable-disable-scaling-policy.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	Enabled *bool
@@ -86,7 +86,7 @@ type PutScalingPolicyInput struct {
 	// is performed, 25 percent of 4 is 1. However, because you specified a
 	// MinAdjustmentMagnitude of 2, Amazon EC2 Auto Scaling scales out the group by 2
 	// instances. Valid only if the policy type is StepScaling or SimpleScaling. For
-	// more information, see Scaling Adjustment Types
+	// more information, see Scaling adjustment types
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html#as-scaling-adjustment)
 	// in the Amazon EC2 Auto Scaling User Guide. Some Auto Scaling groups use instance
 	// weights. In this case, set the MinAdjustmentMagnitude to a value that is at

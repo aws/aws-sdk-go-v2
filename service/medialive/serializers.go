@@ -4652,6 +4652,17 @@ func awsRestjson1_serializeDocument__listOfPipelinePauseStateSettings(v []types.
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfRtmpAdMarkers(v []types.RtmpAdMarkers, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfScheduleAction(v []types.ScheduleAction, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -8833,6 +8844,13 @@ func awsRestjson1_serializeDocumentRtmpCaptionInfoDestinationSettings(v *types.R
 func awsRestjson1_serializeDocumentRtmpGroupSettings(v *types.RtmpGroupSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AdMarkers != nil {
+		ok := object.Key("adMarkers")
+		if err := awsRestjson1_serializeDocument__listOfRtmpAdMarkers(v.AdMarkers, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.AuthenticationScheme) > 0 {
 		ok := object.Key("authenticationScheme")

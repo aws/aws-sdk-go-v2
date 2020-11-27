@@ -157,11 +157,19 @@ type PutIntentInput struct {
 	// an order with a pizzeria).
 	FulfillmentActivity *types.FulfillmentActivity
 
+	// An array of InputContext objects that lists the contexts that must be active for
+	// Amazon Lex to choose the intent in a conversation with the user.
+	InputContexts []types.InputContext
+
 	// Configuration information required to use the AMAZON.KendraSearchIntent intent
 	// to connect to an Amazon Kendra index. For more information, see
 	// AMAZON.KendraSearchIntent
 	// (http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html).
 	KendraConfiguration *types.KendraConfiguration
+
+	// An array of OutputContext objects that lists the contexts that the intent
+	// activates when the intent is fulfilled.
+	OutputContexts []types.OutputContext
 
 	// A unique identifier for the built-in intent to base this intent on. To find the
 	// signature for an intent, see Standard Built-in Intents
@@ -222,6 +230,10 @@ type PutIntentOutput struct {
 	// intent after the user provides all of the information required by the intent.
 	FulfillmentActivity *types.FulfillmentActivity
 
+	// An array of InputContext objects that lists the contexts that must be active for
+	// Amazon Lex to choose the intent in a conversation with the user.
+	InputContexts []types.InputContext
+
 	// Configuration information, if any, required to connect to an Amazon Kendra index
 	// and use the AMAZON.KendraSearchIntent intent.
 	KendraConfiguration *types.KendraConfiguration
@@ -232,6 +244,10 @@ type PutIntentOutput struct {
 
 	// The name of the intent.
 	Name *string
+
+	// An array of OutputContext objects that lists the contexts that the intent
+	// activates when the intent is fulfilled.
+	OutputContexts []types.OutputContext
 
 	// A unique identifier for the built-in intent that this intent is based on.
 	ParentIntentSignature *string

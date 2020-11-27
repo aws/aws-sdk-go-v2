@@ -345,13 +345,13 @@ type TaskExecutionResultDetail struct {
 	// phase.
 	TransferDuration *int64
 
-	// The status of the TRANSFERRING Phase.
+	// The status of the TRANSFERRING phase.
 	TransferStatus PhaseStatus
 
 	// The total time in milliseconds that AWS DataSync spent in the VERIFYING phase.
 	VerifyDuration *int64
 
-	// The status of the VERIFYING Phase.
+	// The status of the VERIFYING phase.
 	VerifyStatus PhaseStatus
 }
 

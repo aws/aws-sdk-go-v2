@@ -495,11 +495,11 @@ func validateApp(v *types.App) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "App"}
-	if v.Protocol == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
-	}
 	if v.AppName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppName"))
+	}
+	if v.Protocol == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
 	}
 	if v.Port == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Port"))
@@ -533,6 +533,9 @@ func validateAppsListData(v *types.AppsListData) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AppsListData"}
+	if v.ListName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ListName"))
+	}
 	if v.AppsList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppsList"))
 	} else if v.AppsList != nil {
@@ -544,9 +547,6 @@ func validateAppsListData(v *types.AppsListData) error {
 		if err := validatePreviousAppsList(v.PreviousAppsList); err != nil {
 			invalidParams.AddNested("PreviousAppsList", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ListName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ListName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -560,14 +560,6 @@ func validatePolicy(v *types.Policy) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Policy"}
-	if v.ResourceTags != nil {
-		if err := validateResourceTags(v.ResourceTags); err != nil {
-			invalidParams.AddNested("ResourceTags", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ResourceType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
-	}
 	if v.PolicyName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
 	}
@@ -576,6 +568,14 @@ func validatePolicy(v *types.Policy) error {
 	} else if v.SecurityServicePolicyData != nil {
 		if err := validateSecurityServicePolicyData(v.SecurityServicePolicyData); err != nil {
 			invalidParams.AddNested("SecurityServicePolicyData", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.ResourceTags != nil {
+		if err := validateResourceTags(v.ResourceTags); err != nil {
+			invalidParams.AddNested("ResourceTags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -607,11 +607,11 @@ func validateProtocolsListData(v *types.ProtocolsListData) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProtocolsListData"}
-	if v.ProtocolsList == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProtocolsList"))
-	}
 	if v.ListName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ListName"))
+	}
+	if v.ProtocolsList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtocolsList"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -848,11 +848,11 @@ func validateOpGetViolationDetailsInput(v *GetViolationDetailsInput) error {
 	if v.PolicyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyId"))
 	}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if v.MemberAccount == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MemberAccount"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if v.ResourceType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
@@ -929,16 +929,16 @@ func validateOpPutAppsListInput(v *PutAppsListInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutAppsListInput"}
-	if v.TagList != nil {
-		if err := validateTagList(v.TagList); err != nil {
-			invalidParams.AddNested("TagList", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.AppsList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppsList"))
 	} else if v.AppsList != nil {
 		if err := validateAppsListData(v.AppsList); err != nil {
 			invalidParams.AddNested("AppsList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TagList != nil {
+		if err := validateTagList(v.TagList); err != nil {
+			invalidParams.AddNested("TagList", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1019,15 +1019,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
 	if v.TagList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagList"))
 	} else if v.TagList != nil {
 		if err := validateTagList(v.TagList); err != nil {
 			invalidParams.AddNested("TagList", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1041,11 +1041,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

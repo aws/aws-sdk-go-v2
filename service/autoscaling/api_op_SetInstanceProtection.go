@@ -12,9 +12,10 @@ import (
 
 // Updates the instance protection settings of the specified instances. For more
 // information about preventing instances that are part of an Auto Scaling group
-// from terminating on scale in, see Instance Protection
+// from terminating on scale in, see Instance scale-in protection
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection)
-// in the Amazon EC2 Auto Scaling User Guide.
+// in the Amazon EC2 Auto Scaling User Guide. If you exceed your maximum limit of
+// instance IDs, which is 50 per Auto Scaling group, the call fails.
 func (c *Client) SetInstanceProtection(ctx context.Context, params *SetInstanceProtectionInput, optFns ...func(*Options)) (*SetInstanceProtectionOutput, error) {
 	if params == nil {
 		params = &SetInstanceProtectionInput{}
@@ -37,7 +38,7 @@ type SetInstanceProtectionInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
-	// One or more instance IDs.
+	// One or more instance IDs. You can specify up to 50 instances.
 	//
 	// This member is required.
 	InstanceIds []string

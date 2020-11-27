@@ -17,8 +17,8 @@ import (
 // adding datasets, you use the dataset group when you create a predictor. For more
 // information, see howitworks-datasets-groups. To get a list of all your datasets
 // groups, use the ListDatasetGroups operation. The Status of a dataset group must
-// be ACTIVE before you can create use the dataset group to create a predictor. To
-// get the status, use the DescribeDatasetGroup operation.
+// be ACTIVE before you can use the dataset group to create a predictor. To get the
+// status, use the DescribeDatasetGroup operation.
 func (c *Client) CreateDatasetGroup(ctx context.Context, params *CreateDatasetGroupInput, optFns ...func(*Options)) (*CreateDatasetGroupOutput, error) {
 	if params == nil {
 		params = &CreateDatasetGroupInput{}

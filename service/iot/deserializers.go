@@ -23448,6 +23448,9 @@ func awsRestjson1_deserializeOpErrorListThingGroups(response *smithyhttp.Respons
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -23609,6 +23612,9 @@ func awsRestjson1_deserializeOpErrorListThingGroupsForThing(response *smithyhttp
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -23813,6 +23819,15 @@ func awsRestjson1_deserializeOpDocumentListThingPrincipalsOutput(v **ListThingPr
 
 	for key, value := range shape {
 		switch key {
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
 		case "principals":
 			if err := awsRestjson1_deserializeDocumentPrincipals(&sv.Principals, value); err != nil {
 				return err
@@ -24605,6 +24620,9 @@ func awsRestjson1_deserializeOpErrorListThingsInThingGroup(response *smithyhttp.
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -38167,6 +38185,15 @@ func awsRestjson1_deserializeDocumentFirehoseAction(v **types.FirehoseAction, va
 
 	for key, value := range shape {
 		switch key {
+		case "batchMode":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BatchMode to be of type *bool, got %T instead", value)
+				}
+				sv.BatchMode = ptr.Bool(jtv)
+			}
+
 		case "deliveryStreamName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -38924,6 +38951,15 @@ func awsRestjson1_deserializeDocumentIotAnalyticsAction(v **types.IotAnalyticsAc
 
 	for key, value := range shape {
 		switch key {
+		case "batchMode":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BatchMode to be of type *bool, got %T instead", value)
+				}
+				sv.BatchMode = ptr.Bool(jtv)
+			}
+
 		case "channelArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -38982,6 +39018,15 @@ func awsRestjson1_deserializeDocumentIotEventsAction(v **types.IotEventsAction, 
 
 	for key, value := range shape {
 		switch key {
+		case "batchMode":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BatchMode to be of type *bool, got %T instead", value)
+				}
+				sv.BatchMode = ptr.Bool(jtv)
+			}
+
 		case "inputName":
 			if value != nil {
 				jtv, ok := value.(string)

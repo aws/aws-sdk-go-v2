@@ -41,7 +41,8 @@ type UpdateAccountInput struct {
 
 type UpdateAccountOutput struct {
 
-	// The updated Amazon Chime account details.
+	// The Amazon Chime account details. An AWS account can have multiple Amazon Chime
+	// accounts.
 	Account *types.Account
 
 	// Metadata pertaining to the operation's result.

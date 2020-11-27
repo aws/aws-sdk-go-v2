@@ -10,7 +10,7 @@ import (
 // objects contain the BackupId, BackupState, ClusterId, and CreateTimestamp
 // parameters. Backups that were copied into a destination region additionally
 // contain the CopyTimestamp, SourceBackup, SourceCluster, and SourceRegion
-// paramters. A backup that is pending deletion will include the DeleteTimestamp
+// parameters. A backup that is pending deletion will include the DeleteTimestamp
 // parameter.
 type Backup struct {
 
@@ -34,6 +34,11 @@ type Backup struct {
 	// The date and time when the backup will be permanently deleted.
 	DeleteTimestamp *time.Time
 
+	// Specifies whether the service should exempt a backup from the retention policy
+	// for the cluster. True exempts a backup from the retention policy. False means
+	// the service applies the backup retention policy defined at the cluster.
+	NeverExpires *bool
+
 	// The identifier (ID) of the source backup from which the new backup was copied.
 	SourceBackup *string
 
@@ -47,6 +52,17 @@ type Backup struct {
 
 	// The list of tags for the backup.
 	TagList []Tag
+}
+
+// A policy that defines the number of days to retain backups.
+type BackupRetentionPolicy struct {
+
+	// The type of backup retention policy. For the DAYS type, the value is the number
+	// of days to retain backups.
+	Type BackupRetentionType
+
+	// Use a value between 7 - 379.
+	Value *string
 }
 
 // Contains one or more certificates or a certificate signing request (CSR).
@@ -75,6 +91,9 @@ type Cluster struct {
 
 	// The cluster's backup policy.
 	BackupPolicy BackupPolicy
+
+	// A policy that defines how the service retains backups.
+	BackupRetentionPolicy *BackupRetentionPolicy
 
 	// Contains one or more certificates or a certificate signing request (CSR).
 	Certificates *Certificates

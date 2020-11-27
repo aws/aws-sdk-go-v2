@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Restarts a batch build.
+// Restarts a failed batch build. Only batch builds that have failed can be
+// retried.
 func (c *Client) RetryBuildBatch(ctx context.Context, params *RetryBuildBatchInput, optFns ...func(*Options)) (*RetryBuildBatchOutput, error) {
 	if params == nil {
 		params = &RetryBuildBatchInput{}

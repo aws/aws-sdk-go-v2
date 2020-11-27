@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Redacts the specified message from the specified Amazon Chime chat room.
+// Redacts the specified message from the specified Amazon Chime channel.
 func (c *Client) RedactRoomMessage(ctx context.Context, params *RedactRoomMessageInput, optFns ...func(*Options)) (*RedactRoomMessageOutput, error) {
 	if params == nil {
 		params = &RedactRoomMessageInput{}

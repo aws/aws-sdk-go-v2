@@ -106,19 +106,96 @@ func addOpResolveCustomerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpResolveCustomer{}, middleware.After)
 }
 
+func validateTag(v *types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagList(v []types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
+	for i := range v {
+		if err := validateTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUsageAllocation(v *types.UsageAllocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UsageAllocation"}
+	if v.AllocatedUsageQuantity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllocatedUsageQuantity"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUsageAllocations(v []types.UsageAllocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UsageAllocations"}
+	for i := range v {
+		if err := validateUsageAllocation(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUsageRecord(v *types.UsageRecord) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UsageRecord"}
-	if v.Dimension == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Dimension"))
+	if v.UsageAllocations != nil {
+		if err := validateUsageAllocations(v.UsageAllocations); err != nil {
+			invalidParams.AddNested("UsageAllocations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Timestamp == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Timestamp"))
 	}
 	if v.CustomerIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CustomerIdentifier"))
+	}
+	if v.Dimension == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Dimension"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -149,15 +226,15 @@ func validateOpBatchMeterUsageInput(v *BatchMeterUsageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchMeterUsageInput"}
-	if v.ProductCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProductCode"))
-	}
 	if v.UsageRecords == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UsageRecords"))
 	} else if v.UsageRecords != nil {
 		if err := validateUsageRecordList(v.UsageRecords); err != nil {
 			invalidParams.AddNested("UsageRecords", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ProductCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -174,11 +251,16 @@ func validateOpMeterUsageInput(v *MeterUsageInput) error {
 	if v.Timestamp == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Timestamp"))
 	}
-	if v.ProductCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProductCode"))
-	}
 	if v.UsageDimension == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UsageDimension"))
+	}
+	if v.UsageAllocations != nil {
+		if err := validateUsageAllocations(v.UsageAllocations); err != nil {
+			invalidParams.AddNested("UsageAllocations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProductCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -192,11 +274,11 @@ func validateOpRegisterUsageInput(v *RegisterUsageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterUsageInput"}
-	if v.ProductCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProductCode"))
-	}
 	if v.PublicKeyVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PublicKeyVersion"))
+	}
+	if v.ProductCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -2,6 +2,32 @@
 
 package types
 
+type ArchiveState string
+
+// Enum values for ArchiveState
+const (
+	ArchiveStateEnabled      ArchiveState = "ENABLED"
+	ArchiveStateDisabled     ArchiveState = "DISABLED"
+	ArchiveStateCreating     ArchiveState = "CREATING"
+	ArchiveStateUpdating     ArchiveState = "UPDATING"
+	ArchiveStateCreateFailed ArchiveState = "CREATE_FAILED"
+	ArchiveStateUpdateFailed ArchiveState = "UPDATE_FAILED"
+)
+
+// Values returns all known values for ArchiveState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ArchiveState) Values() []ArchiveState {
+	return []ArchiveState{
+		"ENABLED",
+		"DISABLED",
+		"CREATING",
+		"UPDATING",
+		"CREATE_FAILED",
+		"UPDATE_FAILED",
+	}
+}
+
 type AssignPublicIp string
 
 // Enum values for AssignPublicIp
@@ -55,6 +81,32 @@ func (LaunchType) Values() []LaunchType {
 	return []LaunchType{
 		"EC2",
 		"FARGATE",
+	}
+}
+
+type ReplayState string
+
+// Enum values for ReplayState
+const (
+	ReplayStateStarting   ReplayState = "STARTING"
+	ReplayStateRunning    ReplayState = "RUNNING"
+	ReplayStateCancelling ReplayState = "CANCELLING"
+	ReplayStateCompleted  ReplayState = "COMPLETED"
+	ReplayStateCancelled  ReplayState = "CANCELLED"
+	ReplayStateFailed     ReplayState = "FAILED"
+)
+
+// Values returns all known values for ReplayState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ReplayState) Values() []ReplayState {
+	return []ReplayState{
+		"STARTING",
+		"RUNNING",
+		"CANCELLING",
+		"COMPLETED",
+		"CANCELLED",
+		"FAILED",
 	}
 }
 

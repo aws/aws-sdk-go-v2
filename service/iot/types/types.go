@@ -1201,6 +1201,15 @@ type FirehoseAction struct {
 	// This member is required.
 	RoleArn *string
 
+	// Whether to deliver the Kinesis Data Firehose stream as a batch by using
+	// PutRecordBatch
+	// (https://docs.aws.amazon.com/firehose/latest/APIReference/API_PutRecordBatch.html).
+	// The default value is false. When batchMode is true and the rule's SQL statement
+	// evaluates to an Array, each Array element forms one record in the PutRecordBatch
+	// (https://docs.aws.amazon.com/firehose/latest/APIReference/API_PutRecordBatch.html)
+	// request. The resulting array can't have more than 500 records.
+	BatchMode *bool
+
 	// A character separator that will be used to separate records written to the
 	// Firehose stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows
 	// newline), ',' (comma).
@@ -1312,6 +1321,14 @@ type ImplicitDeny struct {
 // Sends message data to an AWS IoT Analytics channel.
 type IotAnalyticsAction struct {
 
+	// Whether to process the action as a batch. The default value is false. When
+	// batchMode is true and the rule SQL statement evaluates to an Array, each Array
+	// element is delivered as a separate message when passed by BatchPutMessage
+	// (https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_BatchPutMessage.html)
+	// to the AWS IoT Analytics channel. The resulting array can't have more than 100
+	// messages.
+	BatchMode *bool
+
 	// (deprecated) The ARN of the IoT Analytics channel to which message data will be
 	// sent.
 	ChannelArn *string
@@ -1338,8 +1355,19 @@ type IotEventsAction struct {
 	// This member is required.
 	RoleArn *string
 
-	// [Optional] Use this to ensure that only one input (message) with a given
-	// messageId will be processed by an AWS IoT Events detector.
+	// Whether to process the event actions as a batch. The default value is false.
+	// When batchMode is true, you can't specify a messageId. When batchMode is true
+	// and the rule SQL statement evaluates to an Array, each Array element is treated
+	// as a separate message when it's sent to AWS IoT Events by calling
+	// BatchPutMessage
+	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchPutMessage.html).
+	// The resulting array can't have more than 10 messages.
+	BatchMode *bool
+
+	// The ID of the message. The default messageId is a new UUID value. When batchMode
+	// is true, you can't specify a messageId--a new UUID value will be assigned.
+	// Assign a value to this property to ensure that only one input (message) with a
+	// given messageId will be processed by an AWS IoT Events detector.
 	MessageId *string
 }
 
@@ -2205,7 +2233,9 @@ type S3Action struct {
 	// This member is required.
 	BucketName *string
 
-	// The object key.
+	// The object key. For more information, see Actions, resources, and condition keys
+	// for Amazon S3
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html).
 	//
 	// This member is required.
 	Key *string
@@ -2342,7 +2372,8 @@ type SigningProfileParameter struct {
 	Platform *string
 }
 
-// Use Sig V4 authorization.
+// For more information, see Signature Version 4 signing process
+// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 type SigV4Authorization struct {
 
 	// The ARN of the signing role.

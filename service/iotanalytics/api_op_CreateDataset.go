@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates a data set. A data set stores data retrieved from a data store by
-// applying a "queryAction" (a SQL query) or a "containerAction" (executing a
-// containerized application). This operation creates the skeleton of a data set.
-// The data set can be populated manually by calling "CreateDatasetContent" or
-// automatically according to a "trigger" you specify.
+// Creates a dataset. A dataset stores data retrieved from a data store by applying
+// a queryAction (a SQL query) or a containerAction (executing a containerized
+// application). This operation creates the skeleton of a dataset. The dataset can
+// be populated manually by calling CreateDatasetContent or automatically according
+// to a trigger you specify.
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
 	if params == nil {
 		params = &CreateDatasetInput{}
@@ -43,16 +43,23 @@ type CreateDatasetInput struct {
 	// This member is required.
 	DatasetName *string
 
-	// When data set contents are created they are delivered to destinations specified
+	// When dataset contents are created, they are delivered to destinations specified
 	// here.
 	ContentDeliveryRules []types.DatasetContentDeliveryRule
 
-	// [Optional] How long, in days, versions of data set contents are kept for the
-	// data set. If not specified or set to null, versions of data set contents are
-	// retained for at most 90 days. The number of versions of data set contents
-	// retained is determined by the versioningConfiguration parameter. (For more
-	// information, see
-	// https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+	// A list of data rules that send notifications to Amazon CloudWatch, when data
+	// arrives late. To specify lateDataRules, the dataset must use a DeltaTimer
+	// (https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html)
+	// filter.
+	LateDataRules []types.LateDataRule
+
+	// Optional. How long, in days, versions of dataset contents are kept for the
+	// dataset. If not specified or set to null, versions of dataset contents are
+	// retained for at most 90 days. The number of versions of dataset contents
+	// retained is determined by the versioningConfiguration parameter. For more
+	// information, see Keeping Multiple Versions of AWS IoT Analytics Data Sets
+	// (https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+	// in the AWS IoT Analytics User Guide.
 	RetentionPeriod *types.RetentionPeriod
 
 	// Metadata which can be used to manage the data set.
@@ -63,23 +70,25 @@ type CreateDatasetInput struct {
 	// list of triggers can be empty or contain up to five DataSetTrigger objects.
 	Triggers []types.DatasetTrigger
 
-	// [Optional] How many versions of data set contents are kept. If not specified or
+	// Optional. How many versions of dataset contents are kept. If not specified or
 	// set to null, only the latest version plus the latest succeeded version (if they
-	// are different) are kept for the time period specified by the "retentionPeriod"
-	// parameter. (For more information, see
-	// https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+	// are different) are kept for the time period specified by the retentionPeriod
+	// parameter. For more information, see Keeping Multiple Versions of AWS IoT
+	// Analytics Data Sets
+	// (https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+	// in the AWS IoT Analytics User Guide.
 	VersioningConfiguration *types.VersioningConfiguration
 }
 
 type CreateDatasetOutput struct {
 
-	// The ARN of the data set.
+	// The ARN of the dataset.
 	DatasetArn *string
 
-	// The name of the data set.
+	// The name of the dataset.
 	DatasetName *string
 
-	// How long, in days, data set contents are kept for the data set.
+	// How long, in days, dataset contents are kept for the dataset.
 	RetentionPeriod *types.RetentionPeriod
 
 	// Metadata pertaining to the operation's result.

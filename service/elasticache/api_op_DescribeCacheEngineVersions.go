@@ -32,16 +32,16 @@ func (c *Client) DescribeCacheEngineVersions(ctx context.Context, params *Descri
 type DescribeCacheEngineVersionsInput struct {
 
 	// The name of a specific cache parameter group family to return details for. Valid
-	// values are: memcached1.4 | memcached1.5 | redis2.6 | redis2.8 | redis3.2 |
-	// redis4.0 | redis5.0 | redis6.0 | Constraints:
+	// values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 | redis2.8 |
+	// redis3.2 | redis4.0 | redis5.0 | redis6.x | Constraints:
 	//
-	// * Must be 1 to 255 alphanumeric
-	// characters
+	// * Must be 1 to 255
+	// alphanumeric characters
 	//
 	// * First character must be a letter
 	//
-	// * Cannot end with a hyphen or
-	// contain two consecutive hyphens
+	// * Cannot end with a
+	// hyphen or contain two consecutive hyphens
 	CacheParameterGroupFamily *string
 
 	// If true, specifies that only the default version of the specified engine or

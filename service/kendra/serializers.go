@@ -2088,9 +2088,73 @@ func awsAwsjson11_serializeDocumentFacetList(v []types.Facet, value smithyjson.V
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentJsonTokenTypeConfiguration(v *types.JsonTokenTypeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GroupAttributeField != nil {
+		ok := object.Key("GroupAttributeField")
+		ok.String(*v.GroupAttributeField)
+	}
+
+	if v.UserNameAttributeField != nil {
+		ok := object.Key("UserNameAttributeField")
+		ok.String(*v.UserNameAttributeField)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentJwtTokenTypeConfiguration(v *types.JwtTokenTypeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClaimRegex != nil {
+		ok := object.Key("ClaimRegex")
+		ok.String(*v.ClaimRegex)
+	}
+
+	if v.GroupAttributeField != nil {
+		ok := object.Key("GroupAttributeField")
+		ok.String(*v.GroupAttributeField)
+	}
+
+	if v.Issuer != nil {
+		ok := object.Key("Issuer")
+		ok.String(*v.Issuer)
+	}
+
+	if len(v.KeyLocation) > 0 {
+		ok := object.Key("KeyLocation")
+		ok.String(string(v.KeyLocation))
+	}
+
+	if v.SecretManagerArn != nil {
+		ok := object.Key("SecretManagerArn")
+		ok.String(*v.SecretManagerArn)
+	}
+
+	if v.URL != nil {
+		ok := object.Key("URL")
+		ok.String(*v.URL)
+	}
+
+	if v.UserNameAttributeField != nil {
+		ok := object.Key("UserNameAttributeField")
+		ok.String(*v.UserNameAttributeField)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentOneDriveConfiguration(v *types.OneDriveConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DisableLocalGroups {
+		ok := object.Key("DisableLocalGroups")
+		ok.Boolean(v.DisableLocalGroups)
+	}
 
 	if v.ExclusionPatterns != nil {
 		ok := object.Key("ExclusionPatterns")
@@ -2781,6 +2845,11 @@ func awsAwsjson11_serializeDocumentSharePointConfiguration(v *types.SharePointCo
 		ok.Boolean(v.CrawlAttachments)
 	}
 
+	if v.DisableLocalGroups {
+		ok := object.Key("DisableLocalGroups")
+		ok.Boolean(v.DisableLocalGroups)
+	}
+
 	if v.DocumentTitleFieldName != nil {
 		ok := object.Key("DocumentTitleFieldName")
 		ok.String(*v.DocumentTitleFieldName)
@@ -2945,6 +3014,52 @@ func awsAwsjson11_serializeDocumentTimeRange(v *types.TimeRange, value smithyjso
 		ok.Double(smithytime.FormatEpochSeconds(*v.StartTime))
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUserContext(v *types.UserContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Token != nil {
+		ok := object.Key("Token")
+		ok.String(*v.Token)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUserTokenConfiguration(v *types.UserTokenConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JsonTokenTypeConfiguration != nil {
+		ok := object.Key("JsonTokenTypeConfiguration")
+		if err := awsAwsjson11_serializeDocumentJsonTokenTypeConfiguration(v.JsonTokenTypeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.JwtTokenTypeConfiguration != nil {
+		ok := object.Key("JwtTokenTypeConfiguration")
+		if err := awsAwsjson11_serializeDocumentJwtTokenTypeConfiguration(v.JwtTokenTypeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUserTokenConfigurationList(v []types.UserTokenConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentUserTokenConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -3155,6 +3270,18 @@ func awsAwsjson11_serializeOpDocumentCreateIndexInput(v *CreateIndexInput, value
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.UserContextPolicy) > 0 {
+		ok := object.Key("UserContextPolicy")
+		ok.String(string(v.UserContextPolicy))
+	}
+
+	if v.UserTokenConfigurations != nil {
+		ok := object.Key("UserTokenConfigurations")
+		if err := awsAwsjson11_serializeDocumentUserTokenConfigurationList(v.UserTokenConfigurations, ok); err != nil {
 			return err
 		}
 	}
@@ -3423,6 +3550,13 @@ func awsAwsjson11_serializeOpDocumentQueryInput(v *QueryInput, value smithyjson.
 		}
 	}
 
+	if v.UserContext != nil {
+		ok := object.Key("UserContext")
+		if err := awsAwsjson11_serializeDocumentUserContext(v.UserContext, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3609,6 +3743,18 @@ func awsAwsjson11_serializeOpDocumentUpdateIndexInput(v *UpdateIndexInput, value
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)
+	}
+
+	if len(v.UserContextPolicy) > 0 {
+		ok := object.Key("UserContextPolicy")
+		ok.String(string(v.UserContextPolicy))
+	}
+
+	if v.UserTokenConfigurations != nil {
+		ok := object.Key("UserTokenConfigurations")
+		if err := awsAwsjson11_serializeDocumentUserTokenConfigurationList(v.UserTokenConfigurations, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

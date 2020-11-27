@@ -143,3 +143,21 @@ func (SelectionStatus) Values() []SelectionStatus {
 		"NOT_SELECTED",
 	}
 }
+
+type TextType string
+
+// Enum values for TextType
+const (
+	TextTypeHandwriting TextType = "HANDWRITING"
+	TextTypePrinted     TextType = "PRINTED"
+)
+
+// Values returns all known values for TextType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (TextType) Values() []TextType {
+	return []TextType{
+		"HANDWRITING",
+		"PRINTED",
+	}
+}

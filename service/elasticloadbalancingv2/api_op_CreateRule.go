@@ -16,11 +16,9 @@ import (
 // actions, and one or more conditions. Rules are evaluated in priority order, from
 // the lowest value to the highest value. When the conditions for a rule are met,
 // its actions are performed. If the conditions for no rules are met, the actions
-// for the default rule are performed. For more information, see Listener Rules
+// for the default rule are performed. For more information, see Listener rules
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules)
-// in the Application Load Balancers Guide. To view your current rules, use
-// DescribeRules. To update a rule, use ModifyRule. To set the priorities of your
-// rules, use SetRulePriorities. To delete a rule, use DeleteRule.
+// in the Application Load Balancers Guide.
 func (c *Client) CreateRule(ctx context.Context, params *CreateRuleInput, optFns ...func(*Options)) (*CreateRuleOutput, error) {
 	if params == nil {
 		params = &CreateRuleInput{}

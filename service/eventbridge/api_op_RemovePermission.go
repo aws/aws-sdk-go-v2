@@ -31,15 +31,16 @@ func (c *Client) RemovePermission(ctx context.Context, params *RemovePermissionI
 
 type RemovePermissionInput struct {
 
-	// The statement ID corresponding to the account that is no longer allowed to put
-	// events to the default event bus.
-	//
-	// This member is required.
-	StatementId *string
-
 	// The name of the event bus to revoke permissions for. If you omit this, the
 	// default event bus is used.
 	EventBusName *string
+
+	// Specifies whether to remove all permissions.
+	RemoveAllPermissions bool
+
+	// The statement ID corresponding to the account that is no longer allowed to put
+	// events to the default event bus.
+	StatementId *string
 }
 
 type RemovePermissionOutput struct {
@@ -87,9 +88,6 @@ func addOperationRemovePermissionMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpRemovePermissionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemovePermission(options.Region), middleware.Before); err != nil {

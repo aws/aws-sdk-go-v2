@@ -11,7 +11,12 @@ import (
 )
 
 // Designates the IAM role and Amazon Simple Notification Service (SNS) topic that
-// AWS Firewall Manager uses to record SNS logs.
+// AWS Firewall Manager uses to record SNS logs. To perform this action outside of
+// the console, you must configure the SNS topic to allow the Firewall Manager role
+// AWSServiceRoleForFMS to publish SNS logs. For more information, see Firewall
+// Manager required permissions for API actions
+// (https://docs.aws.amazon.com/waf/latest/developerguide/fms-api-permissions-ref.html)
+// in the AWS Firewall Manager Developer Guide.
 func (c *Client) PutNotificationChannel(ctx context.Context, params *PutNotificationChannelInput, optFns ...func(*Options)) (*PutNotificationChannelOutput, error) {
 	if params == nil {
 		params = &PutNotificationChannelInput{}

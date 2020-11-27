@@ -558,16 +558,16 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateJobInput"}
+	if v.AccelerationSettings != nil {
+		if err := validateAccelerationSettings(v.AccelerationSettings); err != nil {
+			invalidParams.AddNested("AccelerationSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Role == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Role"))
 	}
 	if v.Settings == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Settings"))
-	}
-	if v.AccelerationSettings != nil {
-		if err := validateAccelerationSettings(v.AccelerationSettings); err != nil {
-			invalidParams.AddNested("AccelerationSettings", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -586,11 +586,11 @@ func validateOpCreateJobTemplateInput(v *CreateJobTemplateInput) error {
 			invalidParams.AddNested("AccelerationSettings", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Settings == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Settings"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Settings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Settings"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -777,11 +777,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -810,13 +810,13 @@ func validateOpUpdateJobTemplateInput(v *UpdateJobTemplateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateJobTemplateInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.AccelerationSettings != nil {
 		if err := validateAccelerationSettings(v.AccelerationSettings); err != nil {
 			invalidParams.AddNested("AccelerationSettings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -845,13 +845,13 @@ func validateOpUpdateQueueInput(v *UpdateQueueInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateQueueInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.ReservationPlanSettings != nil {
 		if err := validateReservationPlanSettings(v.ReservationPlanSettings); err != nil {
 			invalidParams.AddNested("ReservationPlanSettings", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -60,8 +60,8 @@ type CreateBrokerInput struct {
 	// Encryption options for the broker.
 	EncryptionOptions *types.EncryptionOptions
 
-	// Required. The type of broker engine. Note: Currently, Amazon MQ supports only
-	// ACTIVEMQ.
+	// Required. The type of broker engine. Note: Currently, Amazon MQ supports
+	// ACTIVEMQ and RABBITMQ.
 	EngineType types.EngineType
 
 	// Required. The version of the broker engine. For a list of supported engine
@@ -93,19 +93,24 @@ type CreateBrokerInput struct {
 	// The broker's storage type.
 	StorageType types.BrokerStorageType
 
-	// The list of groups (2 maximum) that define which subnets and IP ranges the
-	// broker can use from different Availability Zones. A SINGLE_INSTANCE deployment
-	// requires one subnet (for example, the default subnet). An
-	// ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.
+	// The list of groups that define which subnets and IP ranges the broker can use
+	// from different Availability Zones. A SINGLE_INSTANCE deployment requires one
+	// subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment
+	// (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ deployment (RABBITMQ) has no
+	// subnet requirements when deployed with public accessibility, deployment without
+	// public accessibility requires at least one subnet.
 	SubnetIds []string
 
 	// Create tags when creating the broker.
 	Tags map[string]string
 
-	// Required. The list of ActiveMQ users (persons or applications) who can access
-	// queues and topics. This value can contain only alphanumeric characters, dashes,
-	// periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters
-	// long.
+	// Required. The list of broker users (persons or applications) who can access
+	// queues and topics. For RabbitMQ brokers, one and only one administrative user is
+	// accepted and created when a broker is first provisioned. All subsequent broker
+	// users are created by making RabbitMQ API calls directly to brokers or via the
+	// RabbitMQ Web Console. This value can contain only alphanumeric characters,
+	// dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100
+	// characters long.
 	Users []types.User
 }
 

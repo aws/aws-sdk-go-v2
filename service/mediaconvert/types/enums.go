@@ -2414,6 +2414,7 @@ type H264AdaptiveQuantization string
 // Enum values for H264AdaptiveQuantization
 const (
 	H264AdaptiveQuantizationOff    H264AdaptiveQuantization = "OFF"
+	H264AdaptiveQuantizationAuto   H264AdaptiveQuantization = "AUTO"
 	H264AdaptiveQuantizationLow    H264AdaptiveQuantization = "LOW"
 	H264AdaptiveQuantizationMedium H264AdaptiveQuantization = "MEDIUM"
 	H264AdaptiveQuantizationHigh   H264AdaptiveQuantization = "HIGH"
@@ -2427,6 +2428,7 @@ const (
 func (H264AdaptiveQuantization) Values() []H264AdaptiveQuantization {
 	return []H264AdaptiveQuantization{
 		"OFF",
+		"AUTO",
 		"LOW",
 		"MEDIUM",
 		"HIGH",

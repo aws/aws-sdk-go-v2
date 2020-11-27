@@ -12,7 +12,12 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Use to create a code review for a repository analysis.
+// Use to create a code review with a CodeReviewType
+// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html)
+// of RepositoryAnalysis. This type of code review analyzes all code under a
+// specified branch in an associated repository. PullRequest code reviews are
+// automatically triggered by a pull request so cannot be created using this
+// method.
 func (c *Client) CreateCodeReview(ctx context.Context, params *CreateCodeReviewInput, optFns ...func(*Options)) (*CreateCodeReviewOutput, error) {
 	if params == nil {
 		params = &CreateCodeReviewInput{}
@@ -30,24 +35,25 @@ func (c *Client) CreateCodeReview(ctx context.Context, params *CreateCodeReviewI
 
 type CreateCodeReviewInput struct {
 
-	// The name of the code review. Each code review of the same code review type must
-	// have a unique name in your AWS account.
+	// The name of the code review. The name of each code review in your AWS account
+	// must be unique.
 	//
 	// This member is required.
 	Name *string
 
 	// The Amazon Resource Name (ARN) of the RepositoryAssociation
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
-	// object. You can retrieve this ARN by calling ListRepositories. A code review can
-	// only be created on an associated repository. This is the ARN of the associated
-	// repository.
+	// object. You can retrieve this ARN by calling ListRepositoryAssociations
+	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html).
+	// A code review can only be created on an associated repository. This is the ARN
+	// of the associated repository.
 	//
 	// This member is required.
 	RepositoryAssociationArn *string
 
 	// The type of code review to create. This is specified using a CodeReviewType
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html)
-	// object.
+	// object. You can create a code review only of type RepositoryAnalysis.
 	//
 	// This member is required.
 	Type *types.CodeReviewType
@@ -59,7 +65,8 @@ type CreateCodeReviewInput struct {
 
 type CreateCodeReviewOutput struct {
 
-	// Information about a code review.
+	// Information about a code review. A code review belongs to the associated
+	// repository that contains the reviewed code.
 	CodeReview *types.CodeReview
 
 	// Metadata pertaining to the operation's result.

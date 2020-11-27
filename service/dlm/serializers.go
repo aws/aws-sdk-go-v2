@@ -784,6 +784,11 @@ func awsRestjson1_serializeDocumentParameters(v *types.Parameters, value smithyj
 		ok.Boolean(*v.ExcludeBootVolume)
 	}
 
+	if v.NoReboot != nil {
+		ok := object.Key("NoReboot")
+		ok.Boolean(*v.NoReboot)
+	}
+
 	return nil
 }
 

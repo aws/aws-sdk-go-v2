@@ -35,8 +35,8 @@ type DescribeRuleInput struct {
 	// This member is required.
 	Name *string
 
-	// The event bus associated with the rule. If you omit this, the default event bus
-	// is used.
+	// The name or ARN of the event bus associated with the rule. If you omit this, the
+	// default event bus is used.
 	EventBusName *string
 }
 
@@ -45,10 +45,17 @@ type DescribeRuleOutput struct {
 	// The Amazon Resource Name (ARN) of the rule.
 	Arn *string
 
+	// The account ID of the user that created the rule. If you use PutRule to put a
+	// rule on an event bus in another account, the other account is the owner of the
+	// rule, and the rule ARN includes the account ID for that account. However, the
+	// value for CreatedBy is the account ID as the account that created the rule in
+	// the other account.
+	CreatedBy *string
+
 	// The description of the rule.
 	Description *string
 
-	// The event bus associated with the rule.
+	// The name of the event bus associated with the rule.
 	EventBusName *string
 
 	// The event pattern. For more information, see Events and Event Patterns

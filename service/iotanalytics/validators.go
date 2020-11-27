@@ -711,11 +711,11 @@ func validateAddAttributesActivity(v *types.AddAttributesActivity) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddAttributesActivity"}
-	if v.Attributes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Attributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -729,11 +729,11 @@ func validateChannelActivity(v *types.ChannelActivity) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ChannelActivity"}
-	if v.ChannelName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -764,10 +764,11 @@ func validateContainerDatasetAction(v *types.ContainerDatasetAction) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ContainerDatasetAction"}
-	if v.Variables != nil {
-		if err := validateVariables(v.Variables); err != nil {
-			invalidParams.AddNested("Variables", err.(smithy.InvalidParamsError))
-		}
+	if v.Image == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Image"))
+	}
+	if v.ExecutionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
 	}
 	if v.ResourceConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceConfiguration"))
@@ -776,11 +777,10 @@ func validateContainerDatasetAction(v *types.ContainerDatasetAction) error {
 			invalidParams.AddNested("ResourceConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Image == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Image"))
-	}
-	if v.ExecutionRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
+	if v.Variables != nil {
+		if err := validateVariables(v.Variables); err != nil {
+			invalidParams.AddNested("Variables", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -812,11 +812,11 @@ func validateCustomerManagedDatastoreS3Storage(v *types.CustomerManagedDatastore
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CustomerManagedDatastoreS3Storage"}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1024,13 +1024,28 @@ func validateDeltaTime(v *types.DeltaTime) error {
 	}
 }
 
+func validateDeltaTimeSessionWindowConfiguration(v *types.DeltaTimeSessionWindowConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeltaTimeSessionWindowConfiguration"}
+	if v.TimeoutInMinutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeoutInMinutes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDeviceRegistryEnrichActivity(v *types.DeviceRegistryEnrichActivity) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeviceRegistryEnrichActivity"}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.Attribute == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Attribute"))
@@ -1038,8 +1053,8 @@ func validateDeviceRegistryEnrichActivity(v *types.DeviceRegistryEnrichActivity)
 	if v.ThingName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1053,17 +1068,17 @@ func validateDeviceShadowEnrichActivity(v *types.DeviceShadowEnrichActivity) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeviceShadowEnrichActivity"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Attribute == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attribute"))
+	}
 	if v.ThingName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
-	if v.Attribute == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Attribute"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1077,11 +1092,11 @@ func validateFilterActivity(v *types.FilterActivity) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FilterActivity"}
-	if v.Filter == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Filter"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Filter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filter"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1095,11 +1110,11 @@ func validateGlueConfiguration(v *types.GlueConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GlueConfiguration"}
-	if v.DatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
-	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1131,14 +1146,67 @@ func validateLambdaActivity(v *types.LambdaActivity) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LambdaActivity"}
-	if v.BatchSize == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BatchSize"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.LambdaName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LambdaName"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.BatchSize == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BatchSize"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLateDataRule(v *types.LateDataRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LateDataRule"}
+	if v.RuleConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleConfiguration"))
+	} else if v.RuleConfiguration != nil {
+		if err := validateLateDataRuleConfiguration(v.RuleConfiguration); err != nil {
+			invalidParams.AddNested("RuleConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLateDataRuleConfiguration(v *types.LateDataRuleConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LateDataRuleConfiguration"}
+	if v.DeltaTimeSessionWindowConfiguration != nil {
+		if err := validateDeltaTimeSessionWindowConfiguration(v.DeltaTimeSessionWindowConfiguration); err != nil {
+			invalidParams.AddNested("DeltaTimeSessionWindowConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLateDataRules(v []types.LateDataRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LateDataRules"}
+	for i := range v {
+		if err := validateLateDataRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1170,14 +1238,14 @@ func validateMathActivity(v *types.MathActivity) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MathActivity"}
-	if v.Math == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Math"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.Attribute == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Attribute"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.Math == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Math"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1191,11 +1259,11 @@ func validateMessage(v *types.Message) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Message"}
-	if v.Payload == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
-	}
 	if v.MessageId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
+	}
+	if v.Payload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1258,44 +1326,14 @@ func validatePipelineActivity(v *types.PipelineActivity) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PipelineActivity"}
-	if v.Lambda != nil {
-		if err := validateLambdaActivity(v.Lambda); err != nil {
-			invalidParams.AddNested("Lambda", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Math != nil {
-		if err := validateMathActivity(v.Math); err != nil {
-			invalidParams.AddNested("Math", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Filter != nil {
-		if err := validateFilterActivity(v.Filter); err != nil {
-			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.SelectAttributes != nil {
-		if err := validateSelectAttributesActivity(v.SelectAttributes); err != nil {
-			invalidParams.AddNested("SelectAttributes", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Channel != nil {
 		if err := validateChannelActivity(v.Channel); err != nil {
 			invalidParams.AddNested("Channel", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.RemoveAttributes != nil {
-		if err := validateRemoveAttributesActivity(v.RemoveAttributes); err != nil {
-			invalidParams.AddNested("RemoveAttributes", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.DeviceShadowEnrich != nil {
-		if err := validateDeviceShadowEnrichActivity(v.DeviceShadowEnrich); err != nil {
-			invalidParams.AddNested("DeviceShadowEnrich", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.DeviceRegistryEnrich != nil {
-		if err := validateDeviceRegistryEnrichActivity(v.DeviceRegistryEnrich); err != nil {
-			invalidParams.AddNested("DeviceRegistryEnrich", err.(smithy.InvalidParamsError))
+	if v.Lambda != nil {
+		if err := validateLambdaActivity(v.Lambda); err != nil {
+			invalidParams.AddNested("Lambda", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Datastore != nil {
@@ -1306,6 +1344,36 @@ func validatePipelineActivity(v *types.PipelineActivity) error {
 	if v.AddAttributes != nil {
 		if err := validateAddAttributesActivity(v.AddAttributes); err != nil {
 			invalidParams.AddNested("AddAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RemoveAttributes != nil {
+		if err := validateRemoveAttributesActivity(v.RemoveAttributes); err != nil {
+			invalidParams.AddNested("RemoveAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SelectAttributes != nil {
+		if err := validateSelectAttributesActivity(v.SelectAttributes); err != nil {
+			invalidParams.AddNested("SelectAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filter != nil {
+		if err := validateFilterActivity(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Math != nil {
+		if err := validateMathActivity(v.Math); err != nil {
+			invalidParams.AddNested("Math", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeviceRegistryEnrich != nil {
+		if err := validateDeviceRegistryEnrichActivity(v.DeviceRegistryEnrich); err != nil {
+			invalidParams.AddNested("DeviceRegistryEnrich", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeviceShadowEnrich != nil {
+		if err := validateDeviceShadowEnrichActivity(v.DeviceShadowEnrich); err != nil {
+			invalidParams.AddNested("DeviceShadowEnrich", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1387,19 +1455,19 @@ func validateS3DestinationConfiguration(v *types.S3DestinationConfiguration) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "S3DestinationConfiguration"}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if v.GlueConfiguration != nil {
 		if err := validateGlueConfiguration(v.GlueConfiguration); err != nil {
 			invalidParams.AddNested("GlueConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1413,11 +1481,11 @@ func validateSelectAttributesActivity(v *types.SelectAttributesActivity) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SelectAttributesActivity"}
-	if v.Attributes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Attributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1431,13 +1499,13 @@ func validateSqlQueryDatasetAction(v *types.SqlQueryDatasetAction) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SqlQueryDatasetAction"}
+	if v.SqlQuery == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SqlQuery"))
+	}
 	if v.Filters != nil {
 		if err := validateQueryFilters(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.SqlQuery == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SqlQuery"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1451,11 +1519,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1501,17 +1569,17 @@ func validateVariable(v *types.Variable) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Variable"}
-	if v.OutputFileUriValue != nil {
-		if err := validateOutputFileUriValue(v.OutputFileUriValue); err != nil {
-			invalidParams.AddNested("OutputFileUriValue", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.DatasetContentVersionValue != nil {
 		if err := validateDatasetContentVersionValue(v.DatasetContentVersionValue); err != nil {
 			invalidParams.AddNested("DatasetContentVersionValue", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputFileUriValue != nil {
+		if err := validateOutputFileUriValue(v.OutputFileUriValue); err != nil {
+			invalidParams.AddNested("OutputFileUriValue", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1583,17 +1651,17 @@ func validateOpCreateChannelInput(v *CreateChannelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateChannelInput"}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.ChannelName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
 	}
 	if v.ChannelStorage != nil {
 		if err := validateChannelStorage(v.ChannelStorage); err != nil {
 			invalidParams.AddNested("ChannelStorage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1623,15 +1691,8 @@ func validateOpCreateDatasetInput(v *CreateDatasetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDatasetInput"}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ContentDeliveryRules != nil {
-		if err := validateDatasetContentDeliveryRules(v.ContentDeliveryRules); err != nil {
-			invalidParams.AddNested("ContentDeliveryRules", err.(smithy.InvalidParamsError))
-		}
+	if v.DatasetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
 	}
 	if v.Actions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
@@ -1640,12 +1701,24 @@ func validateOpCreateDatasetInput(v *CreateDatasetInput) error {
 			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.DatasetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
-	}
 	if v.Triggers != nil {
 		if err := validateDatasetTriggers(v.Triggers); err != nil {
 			invalidParams.AddNested("Triggers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContentDeliveryRules != nil {
+		if err := validateDatasetContentDeliveryRules(v.ContentDeliveryRules); err != nil {
+			invalidParams.AddNested("ContentDeliveryRules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LateDataRules != nil {
+		if err := validateLateDataRules(v.LateDataRules); err != nil {
+			invalidParams.AddNested("LateDataRules", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1663,14 +1736,14 @@ func validateOpCreateDatastoreInput(v *CreateDatastoreInput) error {
 	if v.DatastoreName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatastoreName"))
 	}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.DatastoreStorage != nil {
 		if err := validateDatastoreStorage(v.DatastoreStorage); err != nil {
 			invalidParams.AddNested("DatastoreStorage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1685,15 +1758,15 @@ func validateOpCreatePipelineInput(v *CreatePipelineInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePipelineInput"}
+	if v.PipelineName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
+	}
 	if v.PipelineActivities == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PipelineActivities"))
 	} else if v.PipelineActivities != nil {
 		if err := validatePipelineActivities(v.PipelineActivities); err != nil {
 			invalidParams.AddNested("PipelineActivities", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.PipelineName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -1985,11 +2058,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2003,13 +2076,13 @@ func validateOpUpdateChannelInput(v *UpdateChannelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateChannelInput"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
 	if v.ChannelStorage != nil {
 		if err := validateChannelStorage(v.ChannelStorage); err != nil {
 			invalidParams.AddNested("ChannelStorage", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ChannelName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2033,14 +2106,19 @@ func validateOpUpdateDatasetInput(v *UpdateDatasetInput) error {
 			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Triggers != nil {
+		if err := validateDatasetTriggers(v.Triggers); err != nil {
+			invalidParams.AddNested("Triggers", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ContentDeliveryRules != nil {
 		if err := validateDatasetContentDeliveryRules(v.ContentDeliveryRules); err != nil {
 			invalidParams.AddNested("ContentDeliveryRules", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Triggers != nil {
-		if err := validateDatasetTriggers(v.Triggers); err != nil {
-			invalidParams.AddNested("Triggers", err.(smithy.InvalidParamsError))
+	if v.LateDataRules != nil {
+		if err := validateLateDataRules(v.LateDataRules); err != nil {
+			invalidParams.AddNested("LateDataRules", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2075,15 +2153,15 @@ func validateOpUpdatePipelineInput(v *UpdatePipelineInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePipelineInput"}
+	if v.PipelineName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
+	}
 	if v.PipelineActivities == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PipelineActivities"))
 	} else if v.PipelineActivities != nil {
 		if err := validatePipelineActivities(v.PipelineActivities); err != nil {
 			invalidParams.AddNested("PipelineActivities", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.PipelineName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

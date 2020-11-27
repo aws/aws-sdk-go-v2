@@ -12,7 +12,8 @@ import (
 )
 
 // Updates an existing IAM policy assignment. This operation updates only the
-// optional parameter or parameters that are specified in the request.
+// optional parameter or parameters that are specified in the request. This
+// overwrites all of the users included in Identities.
 func (c *Client) UpdateIAMPolicyAssignment(ctx context.Context, params *UpdateIAMPolicyAssignmentInput, optFns ...func(*Options)) (*UpdateIAMPolicyAssignmentOutput, error) {
 	if params == nil {
 		params = &UpdateIAMPolicyAssignmentInput{}
@@ -30,7 +31,8 @@ func (c *Client) UpdateIAMPolicyAssignment(ctx context.Context, params *UpdateIA
 
 type UpdateIAMPolicyAssignmentInput struct {
 
-	// The name of the assignment. This name must be unique within an AWS account.
+	// The name of the assignment, also called a rule. This name must be unique within
+	// an AWS account.
 	//
 	// This member is required.
 	AssignmentName *string
@@ -71,7 +73,7 @@ type UpdateIAMPolicyAssignmentOutput struct {
 	// The ID of the assignment.
 	AssignmentId *string
 
-	// The name of the assignment.
+	// The name of the assignment or rule.
 	AssignmentName *string
 
 	// The status of the assignment. Possible values are as follows:

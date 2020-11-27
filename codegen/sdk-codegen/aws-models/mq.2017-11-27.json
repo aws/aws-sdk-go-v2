@@ -109,10 +109,17 @@
     "com.amazonaws.mq#BrokerInstance": {
       "type": "structure",
       "members": {
+        "ConsoleURL": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "The URL of the broker's Web Console.",
+            "smithy.api#jsonName": "consoleURL"
+          }
+        },
         "IpAddress": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "The IP address of the Elastic Network Interface (ENI) attached to the broker.",
+            "smithy.api#documentation": "The IP address of the Elastic Network Interface (ENI) attached to the broker. Does not apply to RabbitMQ brokers",
             "smithy.api#jsonName": "ipAddress"
           }
         },
@@ -121,13 +128,6 @@
           "traits": {
             "smithy.api#documentation": "The broker's wire-level protocol endpoints.",
             "smithy.api#jsonName": "endpoints"
-          }
-        },
-        "ConsoleURL": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The URL of the broker's ActiveMQ Web Console.",
-            "smithy.api#jsonName": "consoleURL"
           }
         }
       },
@@ -138,6 +138,13 @@
     "com.amazonaws.mq#BrokerInstanceOption": {
       "type": "structure",
       "members": {
+        "StorageType": {
+          "target": "com.amazonaws.mq#BrokerStorageType",
+          "traits": {
+            "smithy.api#documentation": "The broker's storage type.",
+            "smithy.api#jsonName": "storageType"
+          }
+        },
         "SupportedEngineVersions": {
           "target": "com.amazonaws.mq#__listOf__string",
           "traits": {
@@ -152,6 +159,13 @@
             "smithy.api#jsonName": "hostInstanceType"
           }
         },
+        "AvailabilityZones": {
+          "target": "com.amazonaws.mq#__listOfAvailabilityZone",
+          "traits": {
+            "smithy.api#documentation": "The list of available az.",
+            "smithy.api#jsonName": "availabilityZones"
+          }
+        },
         "SupportedDeploymentModes": {
           "target": "com.amazonaws.mq#__listOfDeploymentMode",
           "traits": {
@@ -164,20 +178,6 @@
           "traits": {
             "smithy.api#documentation": "The type of broker engine.",
             "smithy.api#jsonName": "engineType"
-          }
-        },
-        "AvailabilityZones": {
-          "target": "com.amazonaws.mq#__listOfAvailabilityZone",
-          "traits": {
-            "smithy.api#documentation": "The list of available az.",
-            "smithy.api#jsonName": "availabilityZones"
-          }
-        },
-        "StorageType": {
-          "target": "com.amazonaws.mq#BrokerStorageType",
-          "traits": {
-            "smithy.api#documentation": "The broker's storage type.",
-            "smithy.api#jsonName": "storageType"
           }
         }
       },
@@ -216,7 +216,7 @@
     "com.amazonaws.mq#BrokerStorageType": {
       "type": "string",
       "traits": {
-        "smithy.api#documentation": "The storage type of the broker.",
+        "smithy.api#documentation": "The broker's storage type. <important>EFS is currently not Supported for RabbitMQ engine type.</important>",
         "smithy.api#enum": [
           {
             "value": "EBS",
@@ -232,18 +232,11 @@
     "com.amazonaws.mq#BrokerSummary": {
       "type": "structure",
       "members": {
-        "Created": {
-          "target": "com.amazonaws.mq#__timestampIso8601",
+        "EngineType": {
+          "target": "com.amazonaws.mq#EngineType",
           "traits": {
-            "smithy.api#documentation": "The time when the broker was created.",
-            "smithy.api#jsonName": "created"
-          }
-        },
-        "BrokerId": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The unique ID that Amazon MQ generates for the broker.",
-            "smithy.api#jsonName": "brokerId"
+            "smithy.api#documentation": "Required. The type of broker engine.",
+            "smithy.api#jsonName": "engineType"
           }
         },
         "DeploymentMode": {
@@ -253,18 +246,18 @@
             "smithy.api#jsonName": "deploymentMode"
           }
         },
+        "Created": {
+          "target": "com.amazonaws.mq#__timestampIso8601",
+          "traits": {
+            "smithy.api#documentation": "The time when the broker was created.",
+            "smithy.api#jsonName": "created"
+          }
+        },
         "BrokerName": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
             "smithy.api#documentation": "The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.",
             "smithy.api#jsonName": "brokerName"
-          }
-        },
-        "HostInstanceType": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The broker's instance type.",
-            "smithy.api#jsonName": "hostInstanceType"
           }
         },
         "BrokerArn": {
@@ -279,6 +272,20 @@
           "traits": {
             "smithy.api#documentation": "The status of the broker.",
             "smithy.api#jsonName": "brokerState"
+          }
+        },
+        "HostInstanceType": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "The broker's instance type.",
+            "smithy.api#jsonName": "hostInstanceType"
+          }
+        },
+        "BrokerId": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "The unique ID that Amazon MQ generates for the broker.",
+            "smithy.api#jsonName": "brokerId"
           }
         }
       },
@@ -309,11 +316,25 @@
     "com.amazonaws.mq#Configuration": {
       "type": "structure",
       "members": {
-        "AuthenticationStrategy": {
-          "target": "com.amazonaws.mq#AuthenticationStrategy",
+        "Created": {
+          "target": "com.amazonaws.mq#__timestampIso8601",
           "traits": {
-            "smithy.api#documentation": "The authentication strategy associated with the configuration.",
-            "smithy.api#jsonName": "authenticationStrategy"
+            "smithy.api#documentation": "Required. The date and time of the configuration revision.",
+            "smithy.api#jsonName": "created"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.mq#__mapOf__string",
+          "traits": {
+            "smithy.api#documentation": "The list of all tags associated with this configuration.",
+            "smithy.api#jsonName": "tags"
+          }
+        },
+        "EngineVersion": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html",
+            "smithy.api#jsonName": "engineVersion"
           }
         },
         "Description": {
@@ -321,6 +342,13 @@
           "traits": {
             "smithy.api#documentation": "Required. The description of the configuration.",
             "smithy.api#jsonName": "description"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.",
+            "smithy.api#jsonName": "name"
           }
         },
         "Arn": {
@@ -337,11 +365,18 @@
             "smithy.api#jsonName": "id"
           }
         },
-        "EngineVersion": {
-          "target": "com.amazonaws.mq#__string",
+        "EngineType": {
+          "target": "com.amazonaws.mq#EngineType",
           "traits": {
-            "smithy.api#documentation": "Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html",
-            "smithy.api#jsonName": "engineVersion"
+            "smithy.api#documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.",
+            "smithy.api#jsonName": "engineType"
+          }
+        },
+        "AuthenticationStrategy": {
+          "target": "com.amazonaws.mq#AuthenticationStrategy",
+          "traits": {
+            "smithy.api#documentation": "The authentication strategy associated with the configuration.",
+            "smithy.api#jsonName": "authenticationStrategy"
           }
         },
         "LatestRevision": {
@@ -349,34 +384,6 @@
           "traits": {
             "smithy.api#documentation": "Required. The latest revision of the configuration.",
             "smithy.api#jsonName": "latestRevision"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.",
-            "smithy.api#jsonName": "name"
-          }
-        },
-        "EngineType": {
-          "target": "com.amazonaws.mq#EngineType",
-          "traits": {
-            "smithy.api#documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.",
-            "smithy.api#jsonName": "engineType"
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.mq#__mapOf__string",
-          "traits": {
-            "smithy.api#documentation": "The list of all tags associated with this configuration.",
-            "smithy.api#jsonName": "tags"
-          }
-        },
-        "Created": {
-          "target": "com.amazonaws.mq#__timestampIso8601",
-          "traits": {
-            "smithy.api#documentation": "Required. The date and time of the configuration revision.",
-            "smithy.api#jsonName": "created"
           }
         }
       },
@@ -387,35 +394,28 @@
     "com.amazonaws.mq#ConfigurationId": {
       "type": "structure",
       "members": {
-        "Revision": {
-          "target": "com.amazonaws.mq#__integer",
-          "traits": {
-            "smithy.api#documentation": "The revision number of the configuration.",
-            "smithy.api#jsonName": "revision"
-          }
-        },
         "Id": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
             "smithy.api#documentation": "Required. The unique ID that Amazon MQ generates for the configuration.",
             "smithy.api#jsonName": "id"
           }
+        },
+        "Revision": {
+          "target": "com.amazonaws.mq#__integer",
+          "traits": {
+            "smithy.api#documentation": "The revision number of the configuration.",
+            "smithy.api#jsonName": "revision"
+          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "A list of information about the configuration."
+        "smithy.api#documentation": "A list of information about the configuration. <important>Does not apply to RabbitMQ brokers.</important>"
       }
     },
     "com.amazonaws.mq#ConfigurationRevision": {
       "type": "structure",
       "members": {
-        "Created": {
-          "target": "com.amazonaws.mq#__timestampIso8601",
-          "traits": {
-            "smithy.api#documentation": "Required. The date and time of the configuration revision.",
-            "smithy.api#jsonName": "created"
-          }
-        },
         "Description": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
@@ -429,6 +429,13 @@
             "smithy.api#documentation": "Required. The revision number of the configuration.",
             "smithy.api#jsonName": "revision"
           }
+        },
+        "Created": {
+          "target": "com.amazonaws.mq#__timestampIso8601",
+          "traits": {
+            "smithy.api#documentation": "Required. The date and time of the configuration revision.",
+            "smithy.api#jsonName": "created"
+          }
         }
       },
       "traits": {
@@ -438,13 +445,6 @@
     "com.amazonaws.mq#Configurations": {
       "type": "structure",
       "members": {
-        "History": {
-          "target": "com.amazonaws.mq#__listOfConfigurationId",
-          "traits": {
-            "smithy.api#documentation": "The history of configurations applied to the broker.",
-            "smithy.api#jsonName": "history"
-          }
-        },
         "Pending": {
           "target": "com.amazonaws.mq#ConfigurationId",
           "traits": {
@@ -458,6 +458,13 @@
             "smithy.api#documentation": "The current configuration of the broker.",
             "smithy.api#jsonName": "current"
           }
+        },
+        "History": {
+          "target": "com.amazonaws.mq#__listOfConfigurationId",
+          "traits": {
+            "smithy.api#documentation": "The history of configurations applied to the broker.",
+            "smithy.api#jsonName": "history"
+          }
         }
       },
       "traits": {
@@ -467,18 +474,18 @@
     "com.amazonaws.mq#ConflictException": {
       "type": "structure",
       "members": {
-        "ErrorAttribute": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The attribute which caused the error.",
-            "smithy.api#jsonName": "errorAttribute"
-          }
-        },
         "Message": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
             "smithy.api#documentation": "The explanation of the error.",
             "smithy.api#jsonName": "message"
+          }
+        },
+        "ErrorAttribute": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "The attribute which caused the error.",
+            "smithy.api#jsonName": "errorAttribute"
           }
         }
       },
@@ -525,18 +532,32 @@
     "com.amazonaws.mq#CreateBrokerRequest": {
       "type": "structure",
       "members": {
-        "Logs": {
-          "target": "com.amazonaws.mq#Logs",
+        "EngineVersion": {
+          "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "Enables Amazon CloudWatch logging for brokers.",
-            "smithy.api#jsonName": "logs"
+            "smithy.api#documentation": "Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html",
+            "smithy.api#jsonName": "engineVersion"
           }
         },
-        "EncryptionOptions": {
-          "target": "com.amazonaws.mq#EncryptionOptions",
+        "SubnetIds": {
+          "target": "com.amazonaws.mq#__listOf__string",
           "traits": {
-            "smithy.api#documentation": "Encryption options for the broker.",
-            "smithy.api#jsonName": "encryptionOptions"
+            "smithy.api#documentation": "The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ deployment (RABBITMQ) has no subnet requirements when deployed with public accessibility, deployment without public accessibility requires at least one subnet.",
+            "smithy.api#jsonName": "subnetIds"
+          }
+        },
+        "Configuration": {
+          "target": "com.amazonaws.mq#ConfigurationId",
+          "traits": {
+            "smithy.api#documentation": "A list of information about the configuration.",
+            "smithy.api#jsonName": "configuration"
+          }
+        },
+        "AuthenticationStrategy": {
+          "target": "com.amazonaws.mq#AuthenticationStrategy",
+          "traits": {
+            "smithy.api#documentation": "The authentication strategy used to secure the broker.",
+            "smithy.api#jsonName": "authenticationStrategy"
           }
         },
         "CreatorRequestId": {
@@ -547,11 +568,18 @@
             "smithy.api#jsonName": "creatorRequestId"
           }
         },
-        "LdapServerMetadata": {
-          "target": "com.amazonaws.mq#LdapServerMetadataInput",
+        "BrokerName": {
+          "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "The metadata of the LDAP server used to authenticate and authorize connections to the broker.",
-            "smithy.api#jsonName": "ldapServerMetadata"
+            "smithy.api#documentation": "Required. The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.",
+            "smithy.api#jsonName": "brokerName"
+          }
+        },
+        "Logs": {
+          "target": "com.amazonaws.mq#Logs",
+          "traits": {
+            "smithy.api#documentation": "Enables Amazon CloudWatch logging for brokers.",
+            "smithy.api#jsonName": "logs"
           }
         },
         "MaintenanceWindowStartTime": {
@@ -559,27 +587,6 @@
           "traits": {
             "smithy.api#documentation": "The parameters that determine the WeeklyStartTime.",
             "smithy.api#jsonName": "maintenanceWindowStartTime"
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.mq#__mapOf__string",
-          "traits": {
-            "smithy.api#documentation": "Create tags when creating the broker.",
-            "smithy.api#jsonName": "tags"
-          }
-        },
-        "DeploymentMode": {
-          "target": "com.amazonaws.mq#DeploymentMode",
-          "traits": {
-            "smithy.api#documentation": "Required. The deployment mode of the broker.",
-            "smithy.api#jsonName": "deploymentMode"
-          }
-        },
-        "HostInstanceType": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "Required. The broker's instance type.",
-            "smithy.api#jsonName": "hostInstanceType"
           }
         },
         "SecurityGroups": {
@@ -596,41 +603,6 @@
             "smithy.api#jsonName": "storageType"
           }
         },
-        "AuthenticationStrategy": {
-          "target": "com.amazonaws.mq#AuthenticationStrategy",
-          "traits": {
-            "smithy.api#documentation": "The authentication strategy used to secure the broker.",
-            "smithy.api#jsonName": "authenticationStrategy"
-          }
-        },
-        "EngineVersion": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html",
-            "smithy.api#jsonName": "engineVersion"
-          }
-        },
-        "BrokerName": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "Required. The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.",
-            "smithy.api#jsonName": "brokerName"
-          }
-        },
-        "SubnetIds": {
-          "target": "com.amazonaws.mq#__listOf__string",
-          "traits": {
-            "smithy.api#documentation": "The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.",
-            "smithy.api#jsonName": "subnetIds"
-          }
-        },
-        "Users": {
-          "target": "com.amazonaws.mq#__listOfUser",
-          "traits": {
-            "smithy.api#documentation": "Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.",
-            "smithy.api#jsonName": "users"
-          }
-        },
         "AutoMinorVersionUpgrade": {
           "target": "com.amazonaws.mq#__boolean",
           "traits": {
@@ -638,10 +610,38 @@
             "smithy.api#jsonName": "autoMinorVersionUpgrade"
           }
         },
+        "Users": {
+          "target": "com.amazonaws.mq#__listOfUser",
+          "traits": {
+            "smithy.api#documentation": "Required. The list of broker users (persons or applications) who can access queues and topics. For RabbitMQ brokers, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ Web Console. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.",
+            "smithy.api#jsonName": "users"
+          }
+        },
+        "EncryptionOptions": {
+          "target": "com.amazonaws.mq#EncryptionOptions",
+          "traits": {
+            "smithy.api#documentation": "Encryption options for the broker.",
+            "smithy.api#jsonName": "encryptionOptions"
+          }
+        },
+        "LdapServerMetadata": {
+          "target": "com.amazonaws.mq#LdapServerMetadataInput",
+          "traits": {
+            "smithy.api#documentation": "The metadata of the LDAP server used to authenticate and authorize connections to the broker.",
+            "smithy.api#jsonName": "ldapServerMetadata"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.mq#__mapOf__string",
+          "traits": {
+            "smithy.api#documentation": "Create tags when creating the broker.",
+            "smithy.api#jsonName": "tags"
+          }
+        },
         "EngineType": {
           "target": "com.amazonaws.mq#EngineType",
           "traits": {
-            "smithy.api#documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.",
+            "smithy.api#documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.",
             "smithy.api#jsonName": "engineType"
           }
         },
@@ -652,11 +652,18 @@
             "smithy.api#jsonName": "publiclyAccessible"
           }
         },
-        "Configuration": {
-          "target": "com.amazonaws.mq#ConfigurationId",
+        "HostInstanceType": {
+          "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "A list of information about the configuration.",
-            "smithy.api#jsonName": "configuration"
+            "smithy.api#documentation": "Required. The broker's instance type.",
+            "smithy.api#jsonName": "hostInstanceType"
+          }
+        },
+        "DeploymentMode": {
+          "target": "com.amazonaws.mq#DeploymentMode",
+          "traits": {
+            "smithy.api#documentation": "Required. The deployment mode of the broker.",
+            "smithy.api#jsonName": "deploymentMode"
           }
         }
       },
@@ -717,25 +724,18 @@
     "com.amazonaws.mq#CreateConfigurationRequest": {
       "type": "structure",
       "members": {
-        "EngineVersion": {
-          "target": "com.amazonaws.mq#__string",
+        "AuthenticationStrategy": {
+          "target": "com.amazonaws.mq#AuthenticationStrategy",
           "traits": {
-            "smithy.api#documentation": "Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html",
-            "smithy.api#jsonName": "engineVersion"
+            "smithy.api#documentation": "The authentication strategy associated with the configuration.",
+            "smithy.api#jsonName": "authenticationStrategy"
           }
         },
         "EngineType": {
           "target": "com.amazonaws.mq#EngineType",
           "traits": {
-            "smithy.api#documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.",
+            "smithy.api#documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.",
             "smithy.api#jsonName": "engineType"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.",
-            "smithy.api#jsonName": "name"
           }
         },
         "Tags": {
@@ -745,11 +745,18 @@
             "smithy.api#jsonName": "tags"
           }
         },
-        "AuthenticationStrategy": {
-          "target": "com.amazonaws.mq#AuthenticationStrategy",
+        "Name": {
+          "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "The authentication strategy associated with the configuration.",
-            "smithy.api#jsonName": "authenticationStrategy"
+            "smithy.api#documentation": "Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.",
+            "smithy.api#jsonName": "name"
+          }
+        },
+        "EngineVersion": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html",
+            "smithy.api#jsonName": "engineVersion"
           }
         }
       },
@@ -760,32 +767,11 @@
     "com.amazonaws.mq#CreateConfigurationResponse": {
       "type": "structure",
       "members": {
-        "AuthenticationStrategy": {
-          "target": "com.amazonaws.mq#AuthenticationStrategy",
-          "traits": {
-            "smithy.api#documentation": "The authentication strategy associated with the configuration.",
-            "smithy.api#jsonName": "authenticationStrategy"
-          }
-        },
-        "Id": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "Required. The unique ID that Amazon MQ generates for the configuration.",
-            "smithy.api#jsonName": "id"
-          }
-        },
         "Created": {
           "target": "com.amazonaws.mq#__timestampIso8601",
           "traits": {
             "smithy.api#documentation": "Required. The date and time of the configuration.",
             "smithy.api#jsonName": "created"
-          }
-        },
-        "Arn": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "Required. The Amazon Resource Name (ARN) of the configuration.",
-            "smithy.api#jsonName": "arn"
           }
         },
         "Name": {
@@ -795,11 +781,32 @@
             "smithy.api#jsonName": "name"
           }
         },
+        "Id": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "Required. The unique ID that Amazon MQ generates for the configuration.",
+            "smithy.api#jsonName": "id"
+          }
+        },
         "LatestRevision": {
           "target": "com.amazonaws.mq#ConfigurationRevision",
           "traits": {
             "smithy.api#documentation": "The latest revision of the configuration.",
             "smithy.api#jsonName": "latestRevision"
+          }
+        },
+        "Arn": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "Required. The Amazon Resource Name (ARN) of the configuration.",
+            "smithy.api#jsonName": "arn"
+          }
+        },
+        "AuthenticationStrategy": {
+          "target": "com.amazonaws.mq#AuthenticationStrategy",
+          "traits": {
+            "smithy.api#documentation": "The authentication strategy associated with the configuration.",
+            "smithy.api#jsonName": "authenticationStrategy"
           }
         }
       }
@@ -835,19 +842,19 @@
     "com.amazonaws.mq#CreateTagsRequest": {
       "type": "structure",
       "members": {
+        "Tags": {
+          "target": "com.amazonaws.mq#__mapOf__string",
+          "traits": {
+            "smithy.api#documentation": "The key-value pair for the resource tag.",
+            "smithy.api#jsonName": "tags"
+          }
+        },
         "ResourceArn": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
             "smithy.api#documentation": "The Amazon Resource Name (ARN) of the resource tag.",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.mq#__mapOf__string",
-          "traits": {
-            "smithy.api#documentation": "The key-value pair for the resource tag.",
-            "smithy.api#jsonName": "tags"
           }
         }
       },
@@ -892,11 +899,12 @@
     "com.amazonaws.mq#CreateUserRequest": {
       "type": "structure",
       "members": {
-        "Groups": {
-          "target": "com.amazonaws.mq#__listOf__string",
+        "Username": {
+          "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.",
-            "smithy.api#jsonName": "groups"
+            "smithy.api#documentation": "The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
           }
         },
         "BrokerId": {
@@ -905,6 +913,13 @@
             "smithy.api#documentation": "The unique ID that Amazon MQ generates for the broker.",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
+          }
+        },
+        "Groups": {
+          "target": "com.amazonaws.mq#__listOf__string",
+          "traits": {
+            "smithy.api#documentation": "The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.",
+            "smithy.api#jsonName": "groups"
           }
         },
         "ConsoleAccess": {
@@ -919,14 +934,6 @@
           "traits": {
             "smithy.api#documentation": "Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.",
             "smithy.api#jsonName": "password"
-          }
-        },
-        "Username": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
           }
         }
       },
@@ -1112,18 +1119,18 @@
     "com.amazonaws.mq#DeleteUserRequest": {
       "type": "structure",
       "members": {
-        "Username": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "BrokerId": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
             "smithy.api#documentation": "The unique ID that Amazon MQ generates for the broker.",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "Username": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -1146,6 +1153,10 @@
           {
             "value": "ACTIVE_STANDBY_MULTI_AZ",
             "name": "ACTIVE_STANDBY_MULTI_AZ"
+          },
+          {
+            "value": "CLUSTER_MULTI_AZ",
+            "name": "CLUSTER_MULTI_AZ"
           }
         ]
       }
@@ -1212,13 +1223,6 @@
     "com.amazonaws.mq#DescribeBrokerEngineTypesRequest": {
       "type": "structure",
       "members": {
-        "EngineType": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "Filter response by engine type.",
-            "smithy.api#httpQuery": "engineType"
-          }
-        },
         "MaxResults": {
           "target": "com.amazonaws.mq#MaxResults",
           "traits": {
@@ -1232,24 +1236,31 @@
             "smithy.api#documentation": "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.",
             "smithy.api#httpQuery": "nextToken"
           }
+        },
+        "EngineType": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "Filter response by engine type.",
+            "smithy.api#httpQuery": "engineType"
+          }
         }
       }
     },
     "com.amazonaws.mq#DescribeBrokerEngineTypesResponse": {
       "type": "structure",
       "members": {
-        "MaxResults": {
-          "target": "com.amazonaws.mq#__integerMin5Max100",
-          "traits": {
-            "smithy.api#documentation": "Required. The maximum number of engine types that can be returned per page (20 by default). This value must be an integer from 5 to 100.",
-            "smithy.api#jsonName": "maxResults"
-          }
-        },
         "BrokerEngineTypes": {
           "target": "com.amazonaws.mq#__listOfBrokerEngineType",
           "traits": {
             "smithy.api#documentation": "List of available engine types and versions.",
             "smithy.api#jsonName": "brokerEngineTypes"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.mq#__integerMin5Max100",
+          "traits": {
+            "smithy.api#documentation": "Required. The maximum number of engine types that can be returned per page (20 by default). This value must be an integer from 5 to 100.",
+            "smithy.api#jsonName": "maxResults"
           }
         },
         "NextToken": {
@@ -1292,11 +1303,11 @@
     "com.amazonaws.mq#DescribeBrokerInstanceOptionsRequest": {
       "type": "structure",
       "members": {
-        "StorageType": {
+        "NextToken": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "Filter response by storage type.",
-            "smithy.api#httpQuery": "storageType"
+            "smithy.api#documentation": "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.",
+            "smithy.api#httpQuery": "nextToken"
           }
         },
         "EngineType": {
@@ -1320,11 +1331,11 @@
             "smithy.api#httpQuery": "maxResults"
           }
         },
-        "NextToken": {
+        "StorageType": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.",
-            "smithy.api#httpQuery": "nextToken"
+            "smithy.api#documentation": "Filter response by storage type.",
+            "smithy.api#httpQuery": "storageType"
           }
         }
       }
@@ -1332,11 +1343,11 @@
     "com.amazonaws.mq#DescribeBrokerInstanceOptionsResponse": {
       "type": "structure",
       "members": {
-        "BrokerInstanceOptions": {
-          "target": "com.amazonaws.mq#__listOfBrokerInstanceOption",
+        "MaxResults": {
+          "target": "com.amazonaws.mq#__integerMin5Max100",
           "traits": {
-            "smithy.api#documentation": "List of available broker instance options.",
-            "smithy.api#jsonName": "brokerInstanceOptions"
+            "smithy.api#documentation": "Required. The maximum number of instance options that can be returned per page (20 by default). This value must be an integer from 5 to 100.",
+            "smithy.api#jsonName": "maxResults"
           }
         },
         "NextToken": {
@@ -1346,11 +1357,11 @@
             "smithy.api#jsonName": "nextToken"
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.mq#__integerMin5Max100",
+        "BrokerInstanceOptions": {
+          "target": "com.amazonaws.mq#__listOfBrokerInstanceOption",
           "traits": {
-            "smithy.api#documentation": "Required. The maximum number of instance options that can be returned per page (20 by default). This value must be an integer from 5 to 100.",
-            "smithy.api#jsonName": "maxResults"
+            "smithy.api#documentation": "List of available broker instance options.",
+            "smithy.api#jsonName": "brokerInstanceOptions"
           }
         }
       }
@@ -1371,67 +1382,25 @@
     "com.amazonaws.mq#DescribeBrokerResponse": {
       "type": "structure",
       "members": {
-        "BrokerArn": {
+        "PendingEngineVersion": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "The Amazon Resource Name (ARN) of the broker.",
-            "smithy.api#jsonName": "brokerArn"
+            "smithy.api#documentation": "The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html",
+            "smithy.api#jsonName": "pendingEngineVersion"
           }
         },
-        "PendingLdapServerMetadata": {
-          "target": "com.amazonaws.mq#LdapServerMetadataOutput",
+        "PendingAuthenticationStrategy": {
+          "target": "com.amazonaws.mq#AuthenticationStrategy",
           "traits": {
-            "smithy.api#documentation": "The metadata of the LDAP server that will be used to authenticate and authorize connections to the broker once it is rebooted.",
-            "smithy.api#jsonName": "pendingLdapServerMetadata"
+            "smithy.api#documentation": "The authentication strategy that will be applied when the broker is rebooted.",
+            "smithy.api#jsonName": "pendingAuthenticationStrategy"
           }
         },
-        "Tags": {
-          "target": "com.amazonaws.mq#__mapOf__string",
+        "Configurations": {
+          "target": "com.amazonaws.mq#Configurations",
           "traits": {
-            "smithy.api#documentation": "The list of all tags associated with this broker.",
-            "smithy.api#jsonName": "tags"
-          }
-        },
-        "PubliclyAccessible": {
-          "target": "com.amazonaws.mq#__boolean",
-          "traits": {
-            "smithy.api#documentation": "Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.",
-            "smithy.api#jsonName": "publiclyAccessible"
-          }
-        },
-        "Users": {
-          "target": "com.amazonaws.mq#__listOfUserSummary",
-          "traits": {
-            "smithy.api#documentation": "The list of all ActiveMQ usernames for the specified broker.",
-            "smithy.api#jsonName": "users"
-          }
-        },
-        "EngineType": {
-          "target": "com.amazonaws.mq#EngineType",
-          "traits": {
-            "smithy.api#documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.",
-            "smithy.api#jsonName": "engineType"
-          }
-        },
-        "EncryptionOptions": {
-          "target": "com.amazonaws.mq#EncryptionOptions",
-          "traits": {
-            "smithy.api#documentation": "Encryption options for the broker.",
-            "smithy.api#jsonName": "encryptionOptions"
-          }
-        },
-        "SecurityGroups": {
-          "target": "com.amazonaws.mq#__listOf__string",
-          "traits": {
-            "smithy.api#documentation": "The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.",
-            "smithy.api#jsonName": "securityGroups"
-          }
-        },
-        "BrokerInstances": {
-          "target": "com.amazonaws.mq#__listOfBrokerInstance",
-          "traits": {
-            "smithy.api#documentation": "A list of information about allocated brokers.",
-            "smithy.api#jsonName": "brokerInstances"
+            "smithy.api#documentation": "The list of all revisions for the specified configuration.",
+            "smithy.api#jsonName": "configurations"
           }
         },
         "HostInstanceType": {
@@ -1441,18 +1410,88 @@
             "smithy.api#jsonName": "hostInstanceType"
           }
         },
-        "PendingEngineVersion": {
+        "BrokerId": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html",
-            "smithy.api#jsonName": "pendingEngineVersion"
+            "smithy.api#documentation": "The unique ID that Amazon MQ generates for the broker.",
+            "smithy.api#jsonName": "brokerId"
           }
         },
-        "PendingSecurityGroups": {
+        "Tags": {
+          "target": "com.amazonaws.mq#__mapOf__string",
+          "traits": {
+            "smithy.api#documentation": "The list of all tags associated with this broker.",
+            "smithy.api#jsonName": "tags"
+          }
+        },
+        "EncryptionOptions": {
+          "target": "com.amazonaws.mq#EncryptionOptions",
+          "traits": {
+            "smithy.api#documentation": "Encryption options for the broker.",
+            "smithy.api#jsonName": "encryptionOptions"
+          }
+        },
+        "Logs": {
+          "target": "com.amazonaws.mq#LogsSummary",
+          "traits": {
+            "smithy.api#documentation": "The list of information about logs currently enabled and pending to be deployed for the specified broker.",
+            "smithy.api#jsonName": "logs"
+          }
+        },
+        "EngineType": {
+          "target": "com.amazonaws.mq#EngineType",
+          "traits": {
+            "smithy.api#documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.",
+            "smithy.api#jsonName": "engineType"
+          }
+        },
+        "MaintenanceWindowStartTime": {
+          "target": "com.amazonaws.mq#WeeklyStartTime",
+          "traits": {
+            "smithy.api#documentation": "The parameters that determine the WeeklyStartTime.",
+            "smithy.api#jsonName": "maintenanceWindowStartTime"
+          }
+        },
+        "SubnetIds": {
           "target": "com.amazonaws.mq#__listOf__string",
           "traits": {
-            "smithy.api#documentation": "The list of pending security groups to authorize connections to brokers.",
-            "smithy.api#jsonName": "pendingSecurityGroups"
+            "smithy.api#documentation": "The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ deployment (RABBITMQ) has no subnet requirements when deployed with public accessibility, deployment without public accessibility requires at least one subnet.",
+            "smithy.api#jsonName": "subnetIds"
+          }
+        },
+        "BrokerName": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.",
+            "smithy.api#jsonName": "brokerName"
+          }
+        },
+        "PendingHostInstanceType": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types",
+            "smithy.api#jsonName": "pendingHostInstanceType"
+          }
+        },
+        "AutoMinorVersionUpgrade": {
+          "target": "com.amazonaws.mq#__boolean",
+          "traits": {
+            "smithy.api#documentation": "Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.",
+            "smithy.api#jsonName": "autoMinorVersionUpgrade"
+          }
+        },
+        "BrokerState": {
+          "target": "com.amazonaws.mq#BrokerState",
+          "traits": {
+            "smithy.api#documentation": "The status of the broker.",
+            "smithy.api#jsonName": "brokerState"
+          }
+        },
+        "SecurityGroups": {
+          "target": "com.amazonaws.mq#__listOf__string",
+          "traits": {
+            "smithy.api#documentation": "The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.",
+            "smithy.api#jsonName": "securityGroups"
           }
         },
         "Created": {
@@ -1460,13 +1499,6 @@
           "traits": {
             "smithy.api#documentation": "The time when the broker was created.",
             "smithy.api#jsonName": "created"
-          }
-        },
-        "Configurations": {
-          "target": "com.amazonaws.mq#Configurations",
-          "traits": {
-            "smithy.api#documentation": "The list of all revisions for the specified configuration.",
-            "smithy.api#jsonName": "configurations"
           }
         },
         "AuthenticationStrategy": {
@@ -1483,39 +1515,18 @@
             "smithy.api#jsonName": "deploymentMode"
           }
         },
-        "AutoMinorVersionUpgrade": {
-          "target": "com.amazonaws.mq#__boolean",
-          "traits": {
-            "smithy.api#documentation": "Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.",
-            "smithy.api#jsonName": "autoMinorVersionUpgrade"
-          }
-        },
-        "Logs": {
-          "target": "com.amazonaws.mq#LogsSummary",
-          "traits": {
-            "smithy.api#documentation": "The list of information about logs currently enabled and pending to be deployed for the specified broker.",
-            "smithy.api#jsonName": "logs"
-          }
-        },
-        "MaintenanceWindowStartTime": {
-          "target": "com.amazonaws.mq#WeeklyStartTime",
-          "traits": {
-            "smithy.api#documentation": "The parameters that determine the WeeklyStartTime.",
-            "smithy.api#jsonName": "maintenanceWindowStartTime"
-          }
-        },
-        "BrokerId": {
+        "BrokerArn": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "The unique ID that Amazon MQ generates for the broker.",
-            "smithy.api#jsonName": "brokerId"
+            "smithy.api#documentation": "The Amazon Resource Name (ARN) of the broker.",
+            "smithy.api#jsonName": "brokerArn"
           }
         },
-        "PendingHostInstanceType": {
-          "target": "com.amazonaws.mq#__string",
+        "PendingSecurityGroups": {
+          "target": "com.amazonaws.mq#__listOf__string",
           "traits": {
-            "smithy.api#documentation": "The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types",
-            "smithy.api#jsonName": "pendingHostInstanceType"
+            "smithy.api#documentation": "The list of pending security groups to authorize connections to brokers.",
+            "smithy.api#jsonName": "pendingSecurityGroups"
           }
         },
         "LdapServerMetadata": {
@@ -1523,6 +1534,34 @@
           "traits": {
             "smithy.api#documentation": "The metadata of the LDAP server used to authenticate and authorize connections to the broker.",
             "smithy.api#jsonName": "ldapServerMetadata"
+          }
+        },
+        "PubliclyAccessible": {
+          "target": "com.amazonaws.mq#__boolean",
+          "traits": {
+            "smithy.api#documentation": "Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.",
+            "smithy.api#jsonName": "publiclyAccessible"
+          }
+        },
+        "BrokerInstances": {
+          "target": "com.amazonaws.mq#__listOfBrokerInstance",
+          "traits": {
+            "smithy.api#documentation": "A list of information about allocated brokers.",
+            "smithy.api#jsonName": "brokerInstances"
+          }
+        },
+        "PendingLdapServerMetadata": {
+          "target": "com.amazonaws.mq#LdapServerMetadataOutput",
+          "traits": {
+            "smithy.api#documentation": "The metadata of the LDAP server that will be used to authenticate and authorize connections to the broker once it is rebooted.",
+            "smithy.api#jsonName": "pendingLdapServerMetadata"
+          }
+        },
+        "Users": {
+          "target": "com.amazonaws.mq#__listOfUserSummary",
+          "traits": {
+            "smithy.api#documentation": "The list of all broker usernames for the specified broker.",
+            "smithy.api#jsonName": "users"
           }
         },
         "EngineVersion": {
@@ -1537,34 +1576,6 @@
           "traits": {
             "smithy.api#documentation": "The broker's storage type.",
             "smithy.api#jsonName": "storageType"
-          }
-        },
-        "PendingAuthenticationStrategy": {
-          "target": "com.amazonaws.mq#AuthenticationStrategy",
-          "traits": {
-            "smithy.api#documentation": "The authentication strategy that will be applied when the broker is rebooted.",
-            "smithy.api#jsonName": "pendingAuthenticationStrategy"
-          }
-        },
-        "BrokerState": {
-          "target": "com.amazonaws.mq#BrokerState",
-          "traits": {
-            "smithy.api#documentation": "The status of the broker.",
-            "smithy.api#jsonName": "brokerState"
-          }
-        },
-        "BrokerName": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.",
-            "smithy.api#jsonName": "brokerName"
-          }
-        },
-        "SubnetIds": {
-          "target": "com.amazonaws.mq#__listOf__string",
-          "traits": {
-            "smithy.api#documentation": "The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.",
-            "smithy.api#jsonName": "subnetIds"
           }
         }
       }
@@ -1616,6 +1627,27 @@
     "com.amazonaws.mq#DescribeConfigurationResponse": {
       "type": "structure",
       "members": {
+        "EngineType": {
+          "target": "com.amazonaws.mq#EngineType",
+          "traits": {
+            "smithy.api#documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.",
+            "smithy.api#jsonName": "engineType"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.",
+            "smithy.api#jsonName": "name"
+          }
+        },
+        "EngineVersion": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html",
+            "smithy.api#jsonName": "engineVersion"
+          }
+        },
         "Created": {
           "target": "com.amazonaws.mq#__timestampIso8601",
           "traits": {
@@ -1630,11 +1662,11 @@
             "smithy.api#jsonName": "tags"
           }
         },
-        "EngineVersion": {
+        "Arn": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html",
-            "smithy.api#jsonName": "engineVersion"
+            "smithy.api#documentation": "Required. The ARN of the configuration.",
+            "smithy.api#jsonName": "arn"
           }
         },
         "Description": {
@@ -1651,13 +1683,6 @@
             "smithy.api#jsonName": "latestRevision"
           }
         },
-        "AuthenticationStrategy": {
-          "target": "com.amazonaws.mq#AuthenticationStrategy",
-          "traits": {
-            "smithy.api#documentation": "The authentication strategy associated with the configuration.",
-            "smithy.api#jsonName": "authenticationStrategy"
-          }
-        },
         "Id": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
@@ -1665,25 +1690,11 @@
             "smithy.api#jsonName": "id"
           }
         },
-        "Arn": {
-          "target": "com.amazonaws.mq#__string",
+        "AuthenticationStrategy": {
+          "target": "com.amazonaws.mq#AuthenticationStrategy",
           "traits": {
-            "smithy.api#documentation": "Required. The ARN of the configuration.",
-            "smithy.api#jsonName": "arn"
-          }
-        },
-        "EngineType": {
-          "target": "com.amazonaws.mq#EngineType",
-          "traits": {
-            "smithy.api#documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.",
-            "smithy.api#jsonName": "engineType"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.",
-            "smithy.api#jsonName": "name"
+            "smithy.api#documentation": "The authentication strategy associated with the configuration.",
+            "smithy.api#jsonName": "authenticationStrategy"
           }
         }
       }
@@ -1743,6 +1754,20 @@
     "com.amazonaws.mq#DescribeConfigurationRevisionResponse": {
       "type": "structure",
       "members": {
+        "Data": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "Required. The base64-encoded XML configuration.",
+            "smithy.api#jsonName": "data"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "The description of the configuration.",
+            "smithy.api#jsonName": "description"
+          }
+        },
         "ConfigurationId": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
@@ -1755,20 +1780,6 @@
           "traits": {
             "smithy.api#documentation": "Required. The date and time of the configuration.",
             "smithy.api#jsonName": "created"
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The description of the configuration.",
-            "smithy.api#jsonName": "description"
-          }
-        },
-        "Data": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "Required. The base64-encoded XML configuration.",
-            "smithy.api#jsonName": "data"
           }
         }
       }
@@ -1807,18 +1818,18 @@
     "com.amazonaws.mq#DescribeUserRequest": {
       "type": "structure",
       "members": {
-        "BrokerId": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The unique ID that Amazon MQ generates for the broker.",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "Username": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
             "smithy.api#documentation": "The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "BrokerId": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "The unique ID that Amazon MQ generates for the broker.",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -1835,20 +1846,6 @@
             "smithy.api#jsonName": "brokerId"
           }
         },
-        "Pending": {
-          "target": "com.amazonaws.mq#UserPendingChanges",
-          "traits": {
-            "smithy.api#documentation": "The status of the changes pending for the ActiveMQ user.",
-            "smithy.api#jsonName": "pending"
-          }
-        },
-        "ConsoleAccess": {
-          "target": "com.amazonaws.mq#__boolean",
-          "traits": {
-            "smithy.api#documentation": "Enables access to the the ActiveMQ Web Console for the ActiveMQ user.",
-            "smithy.api#jsonName": "consoleAccess"
-          }
-        },
         "Groups": {
           "target": "com.amazonaws.mq#__listOf__string",
           "traits": {
@@ -1856,11 +1853,25 @@
             "smithy.api#jsonName": "groups"
           }
         },
+        "Pending": {
+          "target": "com.amazonaws.mq#UserPendingChanges",
+          "traits": {
+            "smithy.api#documentation": "The status of the changes pending for the ActiveMQ user.",
+            "smithy.api#jsonName": "pending"
+          }
+        },
         "Username": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
             "smithy.api#documentation": "Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.",
             "smithy.api#jsonName": "username"
+          }
+        },
+        "ConsoleAccess": {
+          "target": "com.amazonaws.mq#__boolean",
+          "traits": {
+            "smithy.api#documentation": "Enables access to the the ActiveMQ Web Console for the ActiveMQ user.",
+            "smithy.api#jsonName": "consoleAccess"
           }
         }
       }
@@ -1891,11 +1902,15 @@
     "com.amazonaws.mq#EngineType": {
       "type": "string",
       "traits": {
-        "smithy.api#documentation": "The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.",
+        "smithy.api#documentation": "The type of broker engine. Note: Currently, Amazon MQ supports ActiveMQ and RabbitMQ.",
         "smithy.api#enum": [
           {
             "value": "ACTIVEMQ",
             "name": "ACTIVEMQ"
+          },
+          {
+            "value": "RABBITMQ",
+            "name": "RABBITMQ"
           }
         ]
       }
@@ -1966,18 +1981,18 @@
     "com.amazonaws.mq#LdapServerMetadataInput": {
       "type": "structure",
       "members": {
+        "UserSearchSubtree": {
+          "target": "com.amazonaws.mq#__boolean",
+          "traits": {
+            "smithy.api#documentation": "The directory search scope for the user. If set to true, scope is to search the entire sub-tree.",
+            "smithy.api#jsonName": "userSearchSubtree"
+          }
+        },
         "RoleName": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
             "smithy.api#documentation": "Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.",
             "smithy.api#jsonName": "roleName"
-          }
-        },
-        "RoleSearchSubtree": {
-          "target": "com.amazonaws.mq#__boolean",
-          "traits": {
-            "smithy.api#documentation": "The directory search scope for the role. If set to true, scope is to search the entire sub-tree.",
-            "smithy.api#jsonName": "roleSearchSubtree"
           }
         },
         "Hosts": {
@@ -1987,25 +2002,11 @@
             "smithy.api#jsonName": "hosts"
           }
         },
-        "UserSearchSubtree": {
-          "target": "com.amazonaws.mq#__boolean",
-          "traits": {
-            "smithy.api#documentation": "The directory search scope for the user. If set to true, scope is to search the entire sub-tree.",
-            "smithy.api#jsonName": "userSearchSubtree"
-          }
-        },
-        "UserSearchMatching": {
+        "ServiceAccountUsername": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "The search criteria for users.",
-            "smithy.api#jsonName": "userSearchMatching"
-          }
-        },
-        "ServiceAccountPassword": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "Service account password.",
-            "smithy.api#jsonName": "serviceAccountPassword"
+            "smithy.api#documentation": "Service account username.",
+            "smithy.api#jsonName": "serviceAccountUsername"
           }
         },
         "RoleBase": {
@@ -2015,6 +2016,13 @@
             "smithy.api#jsonName": "roleBase"
           }
         },
+        "ServiceAccountPassword": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "Service account password.",
+            "smithy.api#jsonName": "serviceAccountPassword"
+          }
+        },
         "UserBase": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
@@ -2022,11 +2030,11 @@
             "smithy.api#jsonName": "userBase"
           }
         },
-        "ServiceAccountUsername": {
+        "RoleSearchMatching": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "Service account username.",
-            "smithy.api#jsonName": "serviceAccountUsername"
+            "smithy.api#documentation": "The search criteria for groups.",
+            "smithy.api#jsonName": "roleSearchMatching"
           }
         },
         "UserRoleName": {
@@ -2036,11 +2044,18 @@
             "smithy.api#jsonName": "userRoleName"
           }
         },
-        "RoleSearchMatching": {
+        "UserSearchMatching": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "The search criteria for groups.",
-            "smithy.api#jsonName": "roleSearchMatching"
+            "smithy.api#documentation": "The search criteria for users.",
+            "smithy.api#jsonName": "userSearchMatching"
+          }
+        },
+        "RoleSearchSubtree": {
+          "target": "com.amazonaws.mq#__boolean",
+          "traits": {
+            "smithy.api#documentation": "The directory search scope for the role. If set to true, scope is to search the entire sub-tree.",
+            "smithy.api#jsonName": "roleSearchSubtree"
           }
         }
       },
@@ -2051,60 +2066,11 @@
     "com.amazonaws.mq#LdapServerMetadataOutput": {
       "type": "structure",
       "members": {
-        "RoleSearchMatching": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The search criteria for groups.",
-            "smithy.api#jsonName": "roleSearchMatching"
-          }
-        },
-        "RoleBase": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "Fully qualified name of the directory to search for a user’s groups.",
-            "smithy.api#jsonName": "roleBase"
-          }
-        },
         "Hosts": {
           "target": "com.amazonaws.mq#__listOf__string",
           "traits": {
             "smithy.api#documentation": "Fully qualified domain name of the LDAP server. Optional failover server.",
             "smithy.api#jsonName": "hosts"
-          }
-        },
-        "RoleName": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.",
-            "smithy.api#jsonName": "roleName"
-          }
-        },
-        "UserSearchMatching": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The search criteria for users.",
-            "smithy.api#jsonName": "userSearchMatching"
-          }
-        },
-        "UserSearchSubtree": {
-          "target": "com.amazonaws.mq#__boolean",
-          "traits": {
-            "smithy.api#documentation": "The directory search scope for the user. If set to true, scope is to search the entire sub-tree.",
-            "smithy.api#jsonName": "userSearchSubtree"
-          }
-        },
-        "ServiceAccountUsername": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "Service account username.",
-            "smithy.api#jsonName": "serviceAccountUsername"
-          }
-        },
-        "RoleSearchSubtree": {
-          "target": "com.amazonaws.mq#__boolean",
-          "traits": {
-            "smithy.api#documentation": "The directory search scope for the role. If set to true, scope is to search the entire sub-tree.",
-            "smithy.api#jsonName": "roleSearchSubtree"
           }
         },
         "UserRoleName": {
@@ -2114,11 +2080,60 @@
             "smithy.api#jsonName": "userRoleName"
           }
         },
+        "UserSearchMatching": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "The search criteria for users.",
+            "smithy.api#jsonName": "userSearchMatching"
+          }
+        },
+        "RoleName": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.",
+            "smithy.api#jsonName": "roleName"
+          }
+        },
         "UserBase": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
             "smithy.api#documentation": "Fully qualified name of the directory where you want to search for users.",
             "smithy.api#jsonName": "userBase"
+          }
+        },
+        "RoleSearchMatching": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "The search criteria for groups.",
+            "smithy.api#jsonName": "roleSearchMatching"
+          }
+        },
+        "ServiceAccountUsername": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "Service account username.",
+            "smithy.api#jsonName": "serviceAccountUsername"
+          }
+        },
+        "RoleBase": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "Fully qualified name of the directory to search for a user’s groups.",
+            "smithy.api#jsonName": "roleBase"
+          }
+        },
+        "UserSearchSubtree": {
+          "target": "com.amazonaws.mq#__boolean",
+          "traits": {
+            "smithy.api#documentation": "The directory search scope for the user. If set to true, scope is to search the entire sub-tree.",
+            "smithy.api#jsonName": "userSearchSubtree"
+          }
+        },
+        "RoleSearchSubtree": {
+          "target": "com.amazonaws.mq#__boolean",
+          "traits": {
+            "smithy.api#documentation": "The directory search scope for the role. If set to true, scope is to search the entire sub-tree.",
+            "smithy.api#jsonName": "roleSearchSubtree"
           }
         }
       },
@@ -2182,18 +2197,18 @@
     "com.amazonaws.mq#ListBrokersResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.",
-            "smithy.api#jsonName": "nextToken"
-          }
-        },
         "BrokerSummaries": {
           "target": "com.amazonaws.mq#__listOfBrokerSummary",
           "traits": {
             "smithy.api#documentation": "A list of information about all brokers.",
             "smithy.api#jsonName": "brokerSummaries"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.",
+            "smithy.api#jsonName": "nextToken"
           }
         }
       }
@@ -2232,13 +2247,6 @@
     "com.amazonaws.mq#ListConfigurationRevisionsRequest": {
       "type": "structure",
       "members": {
-        "MaxResults": {
-          "target": "com.amazonaws.mq#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.",
-            "smithy.api#httpQuery": "maxResults"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
@@ -2253,24 +2261,31 @@
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.mq#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.",
+            "smithy.api#httpQuery": "maxResults"
+          }
         }
       }
     },
     "com.amazonaws.mq#ListConfigurationRevisionsResponse": {
       "type": "structure",
       "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.mq#__integer",
+          "traits": {
+            "smithy.api#documentation": "The maximum number of configuration revisions that can be returned per page (20 by default). This value must be an integer from 5 to 100.",
+            "smithy.api#jsonName": "maxResults"
+          }
+        },
         "ConfigurationId": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
             "smithy.api#documentation": "The unique ID that Amazon MQ generates for the configuration.",
             "smithy.api#jsonName": "configurationId"
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.",
-            "smithy.api#jsonName": "nextToken"
           }
         },
         "Revisions": {
@@ -2280,11 +2295,11 @@
             "smithy.api#jsonName": "revisions"
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.mq#__integer",
+        "NextToken": {
+          "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "The maximum number of configuration revisions that can be returned per page (20 by default). This value must be an integer from 5 to 100.",
-            "smithy.api#jsonName": "maxResults"
+            "smithy.api#documentation": "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.",
+            "smithy.api#jsonName": "nextToken"
           }
         }
       }
@@ -2339,13 +2354,6 @@
     "com.amazonaws.mq#ListConfigurationsResponse": {
       "type": "structure",
       "members": {
-        "MaxResults": {
-          "target": "com.amazonaws.mq#__integer",
-          "traits": {
-            "smithy.api#documentation": "The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.",
-            "smithy.api#jsonName": "maxResults"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
@@ -2358,6 +2366,13 @@
           "traits": {
             "smithy.api#documentation": "The list of all revisions for the specified configuration.",
             "smithy.api#jsonName": "configurations"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.mq#__integer",
+          "traits": {
+            "smithy.api#documentation": "The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.",
+            "smithy.api#jsonName": "maxResults"
           }
         }
       }
@@ -2452,19 +2467,19 @@
     "com.amazonaws.mq#ListUsersRequest": {
       "type": "structure",
       "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.mq#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100.",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
         "BrokerId": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
             "smithy.api#documentation": "The unique ID that Amazon MQ generates for the broker.",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
-          }
-        },
-        "MaxResults": {
-          "target": "com.amazonaws.mq#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100.",
-            "smithy.api#httpQuery": "maxResults"
           }
         },
         "NextToken": {
@@ -2479,18 +2494,18 @@
     "com.amazonaws.mq#ListUsersResponse": {
       "type": "structure",
       "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.mq#__integerMin5Max100",
+          "traits": {
+            "smithy.api#documentation": "Required. The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100.",
+            "smithy.api#jsonName": "maxResults"
+          }
+        },
         "Users": {
           "target": "com.amazonaws.mq#__listOfUserSummary",
           "traits": {
             "smithy.api#documentation": "Required. The list of all ActiveMQ usernames for the specified broker.",
             "smithy.api#jsonName": "users"
-          }
-        },
-        "BrokerId": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "Required. The unique ID that Amazon MQ generates for the broker.",
-            "smithy.api#jsonName": "brokerId"
           }
         },
         "NextToken": {
@@ -2500,11 +2515,11 @@
             "smithy.api#jsonName": "nextToken"
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.mq#__integerMin5Max100",
+        "BrokerId": {
+          "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "Required. The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100.",
-            "smithy.api#jsonName": "maxResults"
+            "smithy.api#documentation": "Required. The unique ID that Amazon MQ generates for the broker.",
+            "smithy.api#jsonName": "brokerId"
           }
         }
       }
@@ -2515,7 +2530,7 @@
         "Audit": {
           "target": "com.amazonaws.mq#__boolean",
           "traits": {
-            "smithy.api#documentation": "Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.",
+            "smithy.api#documentation": "Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged. Does not apply to RabbitMQ brokers.",
             "smithy.api#jsonName": "audit"
           }
         },
@@ -2534,20 +2549,6 @@
     "com.amazonaws.mq#LogsSummary": {
       "type": "structure",
       "members": {
-        "Pending": {
-          "target": "com.amazonaws.mq#PendingLogs",
-          "traits": {
-            "smithy.api#documentation": "The list of information about logs pending to be deployed for the specified broker.",
-            "smithy.api#jsonName": "pending"
-          }
-        },
-        "GeneralLogGroup": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The location of the CloudWatch Logs log group where general logs are sent.",
-            "smithy.api#jsonName": "generalLogGroup"
-          }
-        },
         "Audit": {
           "target": "com.amazonaws.mq#__boolean",
           "traits": {
@@ -2562,11 +2563,25 @@
             "smithy.api#jsonName": "general"
           }
         },
+        "GeneralLogGroup": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "The location of the CloudWatch Logs log group where general logs are sent.",
+            "smithy.api#jsonName": "generalLogGroup"
+          }
+        },
         "AuditLogGroup": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
             "smithy.api#documentation": "The location of the CloudWatch Logs log group where audit logs are sent.",
             "smithy.api#jsonName": "auditLogGroup"
+          }
+        },
+        "Pending": {
+          "target": "com.amazonaws.mq#PendingLogs",
+          "traits": {
+            "smithy.api#documentation": "The list of information about logs pending to be deployed for the specified broker.",
+            "smithy.api#jsonName": "pending"
           }
         }
       },
@@ -2610,18 +2625,18 @@
     "com.amazonaws.mq#PendingLogs": {
       "type": "structure",
       "members": {
-        "Audit": {
-          "target": "com.amazonaws.mq#__boolean",
-          "traits": {
-            "smithy.api#documentation": "Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.",
-            "smithy.api#jsonName": "audit"
-          }
-        },
         "General": {
           "target": "com.amazonaws.mq#__boolean",
           "traits": {
             "smithy.api#documentation": "Enables general logging.",
             "smithy.api#jsonName": "general"
+          }
+        },
+        "Audit": {
+          "target": "com.amazonaws.mq#__boolean",
+          "traits": {
+            "smithy.api#documentation": "Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.",
+            "smithy.api#jsonName": "audit"
           }
         }
       },
@@ -2687,18 +2702,18 @@
             "smithy.api#jsonName": "elementName"
           }
         },
-        "AttributeName": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The name of the XML attribute that has been sanitized.",
-            "smithy.api#jsonName": "attributeName"
-          }
-        },
         "Reason": {
           "target": "com.amazonaws.mq#SanitizationWarningReason",
           "traits": {
             "smithy.api#documentation": "Required. The reason for which the XML elements or attributes were sanitized.",
             "smithy.api#jsonName": "reason"
+          }
+        },
+        "AttributeName": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "The name of the XML attribute that has been sanitized.",
+            "smithy.api#jsonName": "attributeName"
           }
         }
       },
@@ -2729,18 +2744,18 @@
     "com.amazonaws.mq#UnauthorizedException": {
       "type": "structure",
       "members": {
-        "Message": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The explanation of the error.",
-            "smithy.api#jsonName": "message"
-          }
-        },
         "ErrorAttribute": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
             "smithy.api#documentation": "The attribute which caused the error.",
             "smithy.api#jsonName": "errorAttribute"
+          }
+        },
+        "Message": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "The explanation of the error.",
+            "smithy.api#jsonName": "message"
           }
         }
       },
@@ -2787,18 +2802,11 @@
     "com.amazonaws.mq#UpdateBrokerRequest": {
       "type": "structure",
       "members": {
-        "AuthenticationStrategy": {
-          "target": "com.amazonaws.mq#AuthenticationStrategy",
+        "LdapServerMetadata": {
+          "target": "com.amazonaws.mq#LdapServerMetadataInput",
           "traits": {
-            "smithy.api#documentation": "The authentication strategy used to secure the broker.",
-            "smithy.api#jsonName": "authenticationStrategy"
-          }
-        },
-        "SecurityGroups": {
-          "target": "com.amazonaws.mq#__listOf__string",
-          "traits": {
-            "smithy.api#documentation": "The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.",
-            "smithy.api#jsonName": "securityGroups"
+            "smithy.api#documentation": "The metadata of the LDAP server used to authenticate and authorize connections to the broker.",
+            "smithy.api#jsonName": "ldapServerMetadata"
           }
         },
         "EngineVersion": {
@@ -2808,33 +2816,19 @@
             "smithy.api#jsonName": "engineVersion"
           }
         },
-        "AutoMinorVersionUpgrade": {
-          "target": "com.amazonaws.mq#__boolean",
-          "traits": {
-            "smithy.api#documentation": "Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.",
-            "smithy.api#jsonName": "autoMinorVersionUpgrade"
-          }
-        },
-        "Configuration": {
-          "target": "com.amazonaws.mq#ConfigurationId",
-          "traits": {
-            "smithy.api#documentation": "A list of information about the configuration.",
-            "smithy.api#jsonName": "configuration"
-          }
-        },
-        "LdapServerMetadata": {
-          "target": "com.amazonaws.mq#LdapServerMetadataInput",
-          "traits": {
-            "smithy.api#documentation": "The metadata of the LDAP server used to authenticate and authorize connections to the broker.",
-            "smithy.api#jsonName": "ldapServerMetadata"
-          }
-        },
         "BrokerId": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
             "smithy.api#documentation": "The unique ID that Amazon MQ generates for the broker.",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
+          }
+        },
+        "AutoMinorVersionUpgrade": {
+          "target": "com.amazonaws.mq#__boolean",
+          "traits": {
+            "smithy.api#documentation": "Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.",
+            "smithy.api#jsonName": "autoMinorVersionUpgrade"
           }
         },
         "Logs": {
@@ -2849,6 +2843,27 @@
           "traits": {
             "smithy.api#documentation": "The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types",
             "smithy.api#jsonName": "hostInstanceType"
+          }
+        },
+        "AuthenticationStrategy": {
+          "target": "com.amazonaws.mq#AuthenticationStrategy",
+          "traits": {
+            "smithy.api#documentation": "The authentication strategy used to secure the broker.",
+            "smithy.api#jsonName": "authenticationStrategy"
+          }
+        },
+        "SecurityGroups": {
+          "target": "com.amazonaws.mq#__listOf__string",
+          "traits": {
+            "smithy.api#documentation": "The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.",
+            "smithy.api#jsonName": "securityGroups"
+          }
+        },
+        "Configuration": {
+          "target": "com.amazonaws.mq#ConfigurationId",
+          "traits": {
+            "smithy.api#documentation": "A list of information about the configuration.",
+            "smithy.api#jsonName": "configuration"
           }
         }
       },
@@ -2866,11 +2881,39 @@
             "smithy.api#jsonName": "brokerId"
           }
         },
+        "AutoMinorVersionUpgrade": {
+          "target": "com.amazonaws.mq#__boolean",
+          "traits": {
+            "smithy.api#documentation": "The new value of automatic upgrades to new minor version for brokers.",
+            "smithy.api#jsonName": "autoMinorVersionUpgrade"
+          }
+        },
         "LdapServerMetadata": {
           "target": "com.amazonaws.mq#LdapServerMetadataOutput",
           "traits": {
             "smithy.api#documentation": "The metadata of the LDAP server used to authenticate and authorize connections to the broker.",
             "smithy.api#jsonName": "ldapServerMetadata"
+          }
+        },
+        "Logs": {
+          "target": "com.amazonaws.mq#Logs",
+          "traits": {
+            "smithy.api#documentation": "The list of information about logs to be enabled for the specified broker.",
+            "smithy.api#jsonName": "logs"
+          }
+        },
+        "HostInstanceType": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types",
+            "smithy.api#jsonName": "hostInstanceType"
+          }
+        },
+        "EngineVersion": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html",
+            "smithy.api#jsonName": "engineVersion"
           }
         },
         "Configuration": {
@@ -2892,34 +2935,6 @@
           "traits": {
             "smithy.api#documentation": "The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.",
             "smithy.api#jsonName": "securityGroups"
-          }
-        },
-        "EngineVersion": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html",
-            "smithy.api#jsonName": "engineVersion"
-          }
-        },
-        "AutoMinorVersionUpgrade": {
-          "target": "com.amazonaws.mq#__boolean",
-          "traits": {
-            "smithy.api#documentation": "The new value of automatic upgrades to new minor version for brokers.",
-            "smithy.api#jsonName": "autoMinorVersionUpgrade"
-          }
-        },
-        "HostInstanceType": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types",
-            "smithy.api#jsonName": "hostInstanceType"
-          }
-        },
-        "Logs": {
-          "target": "com.amazonaws.mq#Logs",
-          "traits": {
-            "smithy.api#documentation": "The list of information about logs to be enabled for the specified broker.",
-            "smithy.api#jsonName": "logs"
           }
         }
       }
@@ -2961,13 +2976,6 @@
     "com.amazonaws.mq#UpdateConfigurationRequest": {
       "type": "structure",
       "members": {
-        "Description": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The description of the configuration.",
-            "smithy.api#jsonName": "description"
-          }
-        },
         "ConfigurationId": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
@@ -2982,6 +2990,13 @@
             "smithy.api#documentation": "Required. The base64-encoded XML configuration.",
             "smithy.api#jsonName": "data"
           }
+        },
+        "Description": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "The description of the configuration.",
+            "smithy.api#jsonName": "description"
+          }
         }
       },
       "traits": {
@@ -2991,32 +3006,11 @@
     "com.amazonaws.mq#UpdateConfigurationResponse": {
       "type": "structure",
       "members": {
-        "LatestRevision": {
-          "target": "com.amazonaws.mq#ConfigurationRevision",
+        "Created": {
+          "target": "com.amazonaws.mq#__timestampIso8601",
           "traits": {
-            "smithy.api#documentation": "The latest revision of the configuration.",
-            "smithy.api#jsonName": "latestRevision"
-          }
-        },
-        "Id": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "Required. The unique ID that Amazon MQ generates for the configuration.",
-            "smithy.api#jsonName": "id"
-          }
-        },
-        "Arn": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "Required. The Amazon Resource Name (ARN) of the configuration.",
-            "smithy.api#jsonName": "arn"
-          }
-        },
-        "Warnings": {
-          "target": "com.amazonaws.mq#__listOfSanitizationWarning",
-          "traits": {
-            "smithy.api#documentation": "The list of the first 20 warnings about the configuration XML elements or attributes that were sanitized.",
-            "smithy.api#jsonName": "warnings"
+            "smithy.api#documentation": "Required. The date and time of the configuration.",
+            "smithy.api#jsonName": "created"
           }
         },
         "Name": {
@@ -3026,11 +3020,32 @@
             "smithy.api#jsonName": "name"
           }
         },
-        "Created": {
-          "target": "com.amazonaws.mq#__timestampIso8601",
+        "Id": {
+          "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "Required. The date and time of the configuration.",
-            "smithy.api#jsonName": "created"
+            "smithy.api#documentation": "Required. The unique ID that Amazon MQ generates for the configuration.",
+            "smithy.api#jsonName": "id"
+          }
+        },
+        "Warnings": {
+          "target": "com.amazonaws.mq#__listOfSanitizationWarning",
+          "traits": {
+            "smithy.api#documentation": "The list of the first 20 warnings about the configuration XML elements or attributes that were sanitized.",
+            "smithy.api#jsonName": "warnings"
+          }
+        },
+        "Arn": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "Required. The Amazon Resource Name (ARN) of the configuration.",
+            "smithy.api#jsonName": "arn"
+          }
+        },
+        "LatestRevision": {
+          "target": "com.amazonaws.mq#ConfigurationRevision",
+          "traits": {
+            "smithy.api#documentation": "The latest revision of the configuration.",
+            "smithy.api#jsonName": "latestRevision"
           }
         }
       }
@@ -3072,17 +3087,17 @@
     "com.amazonaws.mq#UpdateUserRequest": {
       "type": "structure",
       "members": {
-        "Password": {
-          "target": "com.amazonaws.mq#__string",
+        "ConsoleAccess": {
+          "target": "com.amazonaws.mq#__boolean",
           "traits": {
-            "smithy.api#documentation": "The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.",
-            "smithy.api#jsonName": "password"
+            "smithy.api#documentation": "Enables access to the the ActiveMQ Web Console for the ActiveMQ user.",
+            "smithy.api#jsonName": "consoleAccess"
           }
         },
-        "BrokerId": {
+        "Username": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "The unique ID that Amazon MQ generates for the broker.",
+            "smithy.api#documentation": "Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -3094,19 +3109,19 @@
             "smithy.api#jsonName": "groups"
           }
         },
-        "Username": {
+        "BrokerId": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.",
+            "smithy.api#documentation": "The unique ID that Amazon MQ generates for the broker.",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
         },
-        "ConsoleAccess": {
-          "target": "com.amazonaws.mq#__boolean",
+        "Password": {
+          "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "Enables access to the the ActiveMQ Web Console for the ActiveMQ user.",
-            "smithy.api#jsonName": "consoleAccess"
+            "smithy.api#documentation": "The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.",
+            "smithy.api#jsonName": "password"
           }
         }
       },
@@ -3121,24 +3136,10 @@
     "com.amazonaws.mq#User": {
       "type": "structure",
       "members": {
-        "ConsoleAccess": {
-          "target": "com.amazonaws.mq#__boolean",
-          "traits": {
-            "smithy.api#documentation": "Enables access to the the ActiveMQ Web Console for the ActiveMQ user.",
-            "smithy.api#jsonName": "consoleAccess"
-          }
-        },
-        "Password": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "Required. The password of the ActiveMQ user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.",
-            "smithy.api#jsonName": "password"
-          }
-        },
         "Username": {
           "target": "com.amazonaws.mq#__string",
           "traits": {
-            "smithy.api#documentation": "Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.",
+            "smithy.api#documentation": "Required. The username of the broker user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.",
             "smithy.api#jsonName": "username"
           }
         },
@@ -3148,22 +3149,29 @@
             "smithy.api#documentation": "The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.",
             "smithy.api#jsonName": "groups"
           }
+        },
+        "ConsoleAccess": {
+          "target": "com.amazonaws.mq#__boolean",
+          "traits": {
+            "smithy.api#documentation": "Enables access to the ActiveMQ Web Console for the ActiveMQ user (Does not apply to RabbitMQ brokers).",
+            "smithy.api#jsonName": "consoleAccess"
+          }
+        },
+        "Password": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "Required. The password of the broker user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.",
+            "smithy.api#jsonName": "password"
+          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "An ActiveMQ user associated with the broker."
+        "smithy.api#documentation": "A user associated with the broker."
       }
     },
     "com.amazonaws.mq#UserPendingChanges": {
       "type": "structure",
       "members": {
-        "ConsoleAccess": {
-          "target": "com.amazonaws.mq#__boolean",
-          "traits": {
-            "smithy.api#documentation": "Enables access to the the ActiveMQ Web Console for the ActiveMQ user.",
-            "smithy.api#jsonName": "consoleAccess"
-          }
-        },
         "PendingChange": {
           "target": "com.amazonaws.mq#ChangeType",
           "traits": {
@@ -3177,6 +3185,13 @@
             "smithy.api#documentation": "The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.",
             "smithy.api#jsonName": "groups"
           }
+        },
+        "ConsoleAccess": {
+          "target": "com.amazonaws.mq#__boolean",
+          "traits": {
+            "smithy.api#documentation": "Enables access to the the ActiveMQ Web Console for the ActiveMQ user.",
+            "smithy.api#jsonName": "consoleAccess"
+          }
         }
       },
       "traits": {
@@ -3186,23 +3201,23 @@
     "com.amazonaws.mq#UserSummary": {
       "type": "structure",
       "members": {
-        "Username": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.",
-            "smithy.api#jsonName": "username"
-          }
-        },
         "PendingChange": {
           "target": "com.amazonaws.mq#ChangeType",
           "traits": {
-            "smithy.api#documentation": "The type of change pending for the ActiveMQ user.",
+            "smithy.api#documentation": "The type of change pending for the broker user.",
             "smithy.api#jsonName": "pendingChange"
+          }
+        },
+        "Username": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "Required. The username of the broker user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.",
+            "smithy.api#jsonName": "username"
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "Returns a list of all ActiveMQ users."
+        "smithy.api#documentation": "Returns a list of all broker users."
       }
     },
     "com.amazonaws.mq#WeeklyStartTime": {
@@ -3215,18 +3230,18 @@
             "smithy.api#jsonName": "timeOfDay"
           }
         },
-        "TimeZone": {
-          "target": "com.amazonaws.mq#__string",
-          "traits": {
-            "smithy.api#documentation": "The time zone, UTC by default, in either the Country/City format, or the UTC offset format.",
-            "smithy.api#jsonName": "timeZone"
-          }
-        },
         "DayOfWeek": {
           "target": "com.amazonaws.mq#DayOfWeek",
           "traits": {
             "smithy.api#documentation": "Required. The day of the week.",
             "smithy.api#jsonName": "dayOfWeek"
+          }
+        },
+        "TimeZone": {
+          "target": "com.amazonaws.mq#__string",
+          "traits": {
+            "smithy.api#documentation": "The time zone, UTC by default, in either the Country/City format, or the UTC offset format.",
+            "smithy.api#jsonName": "timeZone"
           }
         }
       },
@@ -3433,7 +3448,7 @@
           "name": "mq"
         },
         "aws.protocols#restJson1": {},
-        "smithy.api#documentation": "Amazon MQ is a managed message broker service for Apache ActiveMQ that makes it easy to set up and operate message brokers in the cloud. A message broker allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols.",
+        "smithy.api#documentation": "Amazon MQ is a managed message broker service for Apache ActiveMQ and RabbitMQ that makes it easy to set up and operate message brokers in the cloud. A message broker allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols.",
         "smithy.api#title": "AmazonMQ"
       }
     }

@@ -6384,6 +6384,149 @@ func awsAwsjson11_deserializeDocumentInternalServerException(v **types.InternalS
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentJsonTokenTypeConfiguration(v **types.JsonTokenTypeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JsonTokenTypeConfiguration
+	if *v == nil {
+		sv = &types.JsonTokenTypeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "GroupAttributeField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.GroupAttributeField = ptr.String(jtv)
+			}
+
+		case "UserNameAttributeField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.UserNameAttributeField = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentJwtTokenTypeConfiguration(v **types.JwtTokenTypeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JwtTokenTypeConfiguration
+	if *v == nil {
+		sv = &types.JwtTokenTypeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ClaimRegex":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClaimRegex to be of type string, got %T instead", value)
+				}
+				sv.ClaimRegex = ptr.String(jtv)
+			}
+
+		case "GroupAttributeField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GroupAttributeField to be of type string, got %T instead", value)
+				}
+				sv.GroupAttributeField = ptr.String(jtv)
+			}
+
+		case "Issuer":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Issuer to be of type string, got %T instead", value)
+				}
+				sv.Issuer = ptr.String(jtv)
+			}
+
+		case "KeyLocation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KeyLocation to be of type string, got %T instead", value)
+				}
+				sv.KeyLocation = types.KeyLocation(jtv)
+			}
+
+		case "SecretManagerArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.SecretManagerArn = ptr.String(jtv)
+			}
+
+		case "URL":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
+				}
+				sv.URL = ptr.String(jtv)
+			}
+
+		case "UserNameAttributeField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserNameAttributeField to be of type string, got %T instead", value)
+				}
+				sv.UserNameAttributeField = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentOneDriveConfiguration(v **types.OneDriveConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6406,6 +6549,15 @@ func awsAwsjson11_deserializeDocumentOneDriveConfiguration(v **types.OneDriveCon
 
 	for key, value := range shape {
 		switch key {
+		case "DisableLocalGroups":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DisableLocalGroups = jtv
+			}
+
 		case "ExclusionPatterns":
 			if err := awsAwsjson11_deserializeDocumentDataSourceInclusionsExclusionsStrings(&sv.ExclusionPatterns, value); err != nil {
 				return err
@@ -8032,6 +8184,15 @@ func awsAwsjson11_deserializeDocumentSharePointConfiguration(v **types.SharePoin
 				sv.CrawlAttachments = jtv
 			}
 
+		case "DisableLocalGroups":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DisableLocalGroups = jtv
+			}
+
 		case "DocumentTitleFieldName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8436,6 +8597,81 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentUserTokenConfiguration(v **types.UserTokenConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UserTokenConfiguration
+	if *v == nil {
+		sv = &types.UserTokenConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "JsonTokenTypeConfiguration":
+			if err := awsAwsjson11_deserializeDocumentJsonTokenTypeConfiguration(&sv.JsonTokenTypeConfiguration, value); err != nil {
+				return err
+			}
+
+		case "JwtTokenTypeConfiguration":
+			if err := awsAwsjson11_deserializeDocumentJwtTokenTypeConfiguration(&sv.JwtTokenTypeConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentUserTokenConfigurationList(v *[]types.UserTokenConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.UserTokenConfiguration
+	if *v == nil {
+		cv = []types.UserTokenConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.UserTokenConfiguration
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentUserTokenConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -9210,6 +9446,20 @@ func awsAwsjson11_deserializeOpDocumentDescribeIndexOutput(v **DescribeIndexOutp
 					return err
 				}
 				sv.UpdatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "UserContextPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserContextPolicy to be of type string, got %T instead", value)
+				}
+				sv.UserContextPolicy = types.UserContextPolicy(jtv)
+			}
+
+		case "UserTokenConfigurations":
+			if err := awsAwsjson11_deserializeDocumentUserTokenConfigurationList(&sv.UserTokenConfigurations, value); err != nil {
+				return err
 			}
 
 		default:

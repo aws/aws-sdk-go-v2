@@ -119,7 +119,7 @@ class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
         // that impractical since you can't make a function for a map[string]any
         writer.write("keys := make([]string, 0, len(v))");
         writer.write("for key := range v { keys = append(keys, key) }");
-        writer.addUseImports(GoDependency.standardLibraryDependency("sort", "1.14"));
+        writer.addUseImports(GoDependency.standardLibraryDependency("sort", "1.15"));
         writer.write("sort.Strings(keys)");
         writer.write("");
 

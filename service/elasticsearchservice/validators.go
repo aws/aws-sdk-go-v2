@@ -330,6 +330,26 @@ func (m *validateOpDissociatePackage) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPackageVersionHistory struct {
+}
+
+func (*validateOpGetPackageVersionHistory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPackageVersionHistory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPackageVersionHistoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPackageVersionHistoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetUpgradeHistory struct {
 }
 
@@ -550,6 +570,26 @@ func (m *validateOpUpdateElasticsearchDomainConfig) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePackage struct {
+}
+
+func (*validateOpUpdatePackage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePackage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePackageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePackageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpgradeElasticsearchDomain struct {
 }
 
@@ -634,6 +674,10 @@ func addOpDissociatePackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDissociatePackage{}, middleware.After)
 }
 
+func addOpGetPackageVersionHistoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPackageVersionHistory{}, middleware.After)
+}
+
 func addOpGetUpgradeHistoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetUpgradeHistory{}, middleware.After)
 }
@@ -678,8 +722,29 @@ func addOpUpdateElasticsearchDomainConfigValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpUpdateElasticsearchDomainConfig{}, middleware.After)
 }
 
+func addOpUpdatePackageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePackage{}, middleware.After)
+}
+
 func addOpUpgradeElasticsearchDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpgradeElasticsearchDomain{}, middleware.After)
+}
+
+func validateAdvancedSecurityOptionsInput(v *types.AdvancedSecurityOptionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdvancedSecurityOptionsInput"}
+	if v.SAMLOptions != nil {
+		if err := validateSAMLOptionsInput(v.SAMLOptions); err != nil {
+			invalidParams.AddNested("SAMLOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateDomainInformation(v *types.DomainInformation) error {
@@ -697,16 +762,51 @@ func validateDomainInformation(v *types.DomainInformation) error {
 	}
 }
 
+func validateSAMLIdp(v *types.SAMLIdp) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SAMLIdp"}
+	if v.MetadataContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetadataContent"))
+	}
+	if v.EntityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSAMLOptionsInput(v *types.SAMLOptionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SAMLOptionsInput"}
+	if v.Idp != nil {
+		if err := validateSAMLIdp(v.Idp); err != nil {
+			invalidParams.AddNested("Idp", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -752,15 +852,15 @@ func validateOpAddTagsInput(v *AddTagsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddTagsInput"}
+	if v.ARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ARN"))
+	}
 	if v.TagList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagList"))
 	} else if v.TagList != nil {
 		if err := validateTagList(v.TagList); err != nil {
 			invalidParams.AddNested("TagList", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -774,11 +874,11 @@ func validateOpAssociatePackageInput(v *AssociatePackageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociatePackageInput"}
-	if v.DomainName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
-	}
 	if v.PackageID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PackageID"))
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -810,6 +910,11 @@ func validateOpCreateElasticsearchDomainInput(v *CreateElasticsearchDomainInput)
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
+	if v.AdvancedSecurityOptions != nil {
+		if err := validateAdvancedSecurityOptionsInput(v.AdvancedSecurityOptions); err != nil {
+			invalidParams.AddNested("AdvancedSecurityOptions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -822,18 +927,18 @@ func validateOpCreateOutboundCrossClusterSearchConnectionInput(v *CreateOutbound
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateOutboundCrossClusterSearchConnectionInput"}
-	if v.DestinationDomainInfo == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DestinationDomainInfo"))
-	} else if v.DestinationDomainInfo != nil {
-		if err := validateDomainInformation(v.DestinationDomainInfo); err != nil {
-			invalidParams.AddNested("DestinationDomainInfo", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.SourceDomainInfo == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceDomainInfo"))
 	} else if v.SourceDomainInfo != nil {
 		if err := validateDomainInformation(v.SourceDomainInfo); err != nil {
 			invalidParams.AddNested("SourceDomainInfo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DestinationDomainInfo == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationDomainInfo"))
+	} else if v.DestinationDomainInfo != nil {
+		if err := validateDomainInformation(v.DestinationDomainInfo); err != nil {
+			invalidParams.AddNested("DestinationDomainInfo", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ConnectionAlias == nil {
@@ -977,11 +1082,11 @@ func validateOpDescribeElasticsearchInstanceTypeLimitsInput(v *DescribeElasticse
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeElasticsearchInstanceTypeLimitsInput"}
-	if v.ElasticsearchVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ElasticsearchVersion"))
-	}
 	if len(v.InstanceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	}
+	if v.ElasticsearchVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ElasticsearchVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -995,9 +1100,24 @@ func validateOpDissociatePackageInput(v *DissociatePackageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DissociatePackageInput"}
+	if v.PackageID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageID"))
+	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPackageVersionHistoryInput(v *GetPackageVersionHistoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPackageVersionHistoryInput"}
 	if v.PackageID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PackageID"))
 	}
@@ -1171,6 +1291,29 @@ func validateOpUpdateElasticsearchDomainConfigInput(v *UpdateElasticsearchDomain
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateElasticsearchDomainConfigInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.AdvancedSecurityOptions != nil {
+		if err := validateAdvancedSecurityOptionsInput(v.AdvancedSecurityOptions); err != nil {
+			invalidParams.AddNested("AdvancedSecurityOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePackageInput(v *UpdatePackageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePackageInput"}
+	if v.PackageID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageID"))
+	}
+	if v.PackageSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageSource"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

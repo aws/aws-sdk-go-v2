@@ -79,6 +79,13 @@ type PutSessionInput struct {
 	// text/plain; charset=utf-8
 	Accept *string
 
+	// A list of contexts active for the request. A context can be activated when a
+	// previous intent is fulfilled, or by including the context in the request, If you
+	// don't specify a list of contexts, Amazon Lex will use the current list of
+	// contexts for the session. If you specify an empty list, all contexts for the
+	// session are cleared.
+	ActiveContexts []types.ActiveContext
+
 	// Sets the next action that the bot should take to fulfill the conversation.
 	DialogAction *types.DialogAction
 
@@ -109,6 +116,10 @@ type PutSessionInput struct {
 }
 
 type PutSessionOutput struct {
+
+	// A list of active contexts for the session.
+	// This value conforms to the media type: application/json
+	ActiveContexts *string
 
 	// The audio version of the message to convey to the user.
 	AudioStream io.ReadCloser

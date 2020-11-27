@@ -72,6 +72,121 @@ type AlexaForBusinessMetadata struct {
 	IsAlexaForBusinessEnabled *bool
 }
 
+// An instance of a Chime messaging application.
+type AppInstance struct {
+
+	// The ARN of the messaging instance.
+	AppInstanceArn *string
+
+	// The time at which an app instance was created. In epoch milliseconds.
+	CreatedTimestamp *time.Time
+
+	// The time an app instance was last updated. In epoch milliseconds.
+	LastUpdatedTimestamp *time.Time
+
+	// The metadata of an app instance.
+	Metadata *string
+
+	// The name of an app instance.
+	Name *string
+}
+
+// Promotes a user to the administrator role for the duration of an app instance.
+type AppInstanceAdmin struct {
+
+	// The name and metadata of the app instance administrator.
+	Admin *Identity
+
+	// The ARN of the app instance administrator.
+	AppInstanceArn *string
+
+	// The time at which an administrator was created.
+	CreatedTimestamp *time.Time
+}
+
+// The identity and metadata of an administrator.
+type AppInstanceAdminSummary struct {
+
+	// The name and metadata of the app instance administrator.
+	Admin *Identity
+}
+
+// The length of time in days to retain messages.
+type AppInstanceRetentionSettings struct {
+
+	// The length of time in days to retain a channel.
+	ChannelRetentionSettings *ChannelRetentionSettings
+}
+
+// The streaming configuration of an app instance.
+type AppInstanceStreamingConfiguration struct {
+
+	// The data type of the app instance.
+	//
+	// This member is required.
+	AppInstanceDataType AppInstanceDataType
+
+	// The resource ARN.
+	//
+	// This member is required.
+	ResourceArn *string
+}
+
+// The summary data for an app instance.
+type AppInstanceSummary struct {
+
+	// The app instance ARN.
+	AppInstanceArn *string
+
+	// The metadata of the app instance summary.
+	Metadata *string
+
+	// The name of the app instance summary.
+	Name *string
+}
+
+// The app instance user.
+type AppInstanceUser struct {
+
+	// The ARN of the app instance user.
+	AppInstanceUserArn *string
+
+	// The time at which the app instance user was created.
+	CreatedTimestamp *time.Time
+
+	// The time at which the app instance user was last updated.
+	LastUpdatedTimestamp *time.Time
+
+	// The metadata of the app instance user.
+	Metadata *string
+
+	// The name of the app instance user.
+	Name *string
+}
+
+// Lists the channels to which app instance users belong.
+type AppInstanceUserMembershipSummary struct {
+
+	// The time at which a summary was last read.
+	ReadMarkerTimestamp *time.Time
+
+	// The type of channel summary,
+	Type ChannelMembershipType
+}
+
+// The app instance user summary data .
+type AppInstanceUserSummary struct {
+
+	// The ARN of the app instance user.
+	AppInstanceUserArn *string
+
+	// The metadata in an app instance user summary.
+	Metadata *string
+
+	// The name in an app instance user summary.
+	Name *string
+}
+
 // An Amazon Chime SDK meeting attendee. Includes a unique AttendeeId and
 // JoinToken. The JoinToken allows a client to authenticate and join as the
 // specified attendee. The JoinToken expires when the meeting ends or when
@@ -84,8 +199,9 @@ type Attendee struct {
 	// The Amazon Chime SDK attendee ID.
 	AttendeeId *string
 
-	// The Amazon Chime SDK external user ID. Links the attendee to an identity managed
-	// by a builder application.
+	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
+	// to an identity managed by a builder application. If you create an attendee with
+	// the same external user id, the service returns the existing record.
 	ExternalUserId *string
 
 	// The join token used by the Amazon Chime SDK attendee.
@@ -133,6 +249,225 @@ type BusinessCallingSettings struct {
 	CdrBucket *string
 }
 
+// Creates a channel.
+type Channel struct {
+
+	// The ARN of the channel.
+	ChannelArn *string
+
+	// The administrator who created the channel.
+	CreatedBy *Identity
+
+	// The time at which the administrator created the channel.
+	CreatedTimestamp *time.Time
+
+	// The time at which a member sent the last message in a session.
+	LastMessageTimestamp *time.Time
+
+	// The time at which a channel was last updated.
+	LastUpdatedTimestamp *time.Time
+
+	// The metadata of the channel.
+	Metadata *string
+
+	// The mode of the channel.
+	Mode ChannelMode
+
+	// The name of the channel.
+	Name *string
+
+	// The channel's privacy setting, PUBLIC or HIDDEN.
+	Privacy ChannelPrivacy
+}
+
+// Bans a user from a channel.
+type ChannelBan struct {
+
+	// The ARN of the channel from which a member is being banned.
+	ChannelArn *string
+
+	// The parameter of the action.
+	CreatedBy *Identity
+
+	// The time at which the ban was created.
+	CreatedTimestamp *time.Time
+
+	// The member being banned from the channel.
+	Member *Identity
+}
+
+// The summary data for the channel ban.
+type ChannelBanSummary struct {
+
+	// The member being banned from a channel.
+	Member *Identity
+}
+
+// Creates a channel member.
+type ChannelMembership struct {
+
+	// The ARN of the member's channel.
+	ChannelArn *string
+
+	// The time at which the channel membership was created.
+	CreatedTimestamp *time.Time
+
+	// The identifier of the member who invited another member. Taken from the message
+	// header.
+	InvitedBy *Identity
+
+	// The time at which a channel membership was last updated.
+	LastUpdatedTimestamp *time.Time
+
+	// The data of the channel member.
+	Member *Identity
+
+	// The membership type set for the channel member.
+	Type ChannelMembershipType
+}
+
+// Returns the channel membership summary data for an app instance.
+type ChannelMembershipForAppInstanceUserSummary struct {
+
+	// Returns the channel membership data for an app instance.
+	AppInstanceUserMembershipSummary *AppInstanceUserMembershipSummary
+
+	// The summary data for a channel.
+	ChannelSummary *ChannelSummary
+}
+
+// The summary data of a channel membership.
+type ChannelMembershipSummary struct {
+
+	// A member's summary data.
+	Member *Identity
+}
+
+// Creates a message in a channel.
+type ChannelMessage struct {
+
+	// The ARN of the channel.
+	ChannelArn *string
+
+	// The message content.
+	Content *string
+
+	// The time at which the message was created.
+	CreatedTimestamp *time.Time
+
+	// The time at which a message was edited.
+	LastEditedTimestamp *time.Time
+
+	// The time at which a message was updated.
+	LastUpdatedTimestamp *time.Time
+
+	// The ID of a message.
+	MessageId *string
+
+	// The message metadata.
+	Metadata *string
+
+	Persistence ChannelMessagePersistenceType
+
+	// Hides the content of a message. The message still exists on the back end, but
+	// this action only returns metadata.
+	Redacted bool
+
+	// The message sender.
+	Sender *Identity
+
+	// The message type.
+	Type ChannelMessageType
+}
+
+// A summary of the messages in a channel.
+type ChannelMessageSummary struct {
+
+	// The content of the message summary.
+	Content *string
+
+	// The time at which the message summary was created.
+	CreatedTimestamp *time.Time
+
+	LastEditedTimestamp *time.Time
+
+	LastUpdatedTimestamp *time.Time
+
+	// The ID of the message summary.
+	MessageId *string
+
+	// The metadata of the message summary.
+	Metadata *string
+
+	// Redacts the content of a message summary.
+	Redacted bool
+
+	// The sender of the message summary.
+	Sender *Identity
+
+	// The type of message summary.
+	Type ChannelMessageType
+}
+
+// Returns the summary data for a moderated channel.
+type ChannelModeratedByAppInstanceUserSummary struct {
+
+	// The summary data for a channel.
+	ChannelSummary *ChannelSummary
+}
+
+// Creates a moderator on a channel.
+type ChannelModerator struct {
+
+	// The ARN of the moderator's channel.
+	ChannelArn *string
+
+	// The member who created the moderator.
+	CreatedBy *Identity
+
+	// The time at which the moderator was created.
+	CreatedTimestamp *time.Time
+
+	// The moderator's data.
+	Moderator *Identity
+}
+
+// Summary data of the moderators in a channel.
+type ChannelModeratorSummary struct {
+
+	// The data for a moderator.
+	Moderator *Identity
+}
+
+// The retention settings for a channel.
+type ChannelRetentionSettings struct {
+
+	// The time in days to retain a channel.
+	RetentionDays *int32
+}
+
+// The summary data for a channel.
+type ChannelSummary struct {
+
+	// The ARN of the channel summary.
+	ChannelArn *string
+
+	// The time at which the last message in a channel was sent.
+	LastMessageTimestamp *time.Time
+
+	// The metadata of the channel summary.
+	Metadata *string
+
+	// The summary mode of the channel.
+	Mode ChannelMode
+
+	// The parameter of the action.
+	Name *string
+
+	// The privacy setting of the channel being summarized, PUBLIC or HIDDEN.
+	Privacy ChannelPrivacy
+}
+
 // The retention settings that determine how long to retain chat conversation
 // messages for an Amazon Chime Enterprise account.
 type ConversationRetentionSettings struct {
@@ -152,8 +487,9 @@ type CreateAttendeeError struct {
 	// The error message.
 	ErrorMessage *string
 
-	// The Amazon Chime SDK external user ID. Links the attendee to an identity managed
-	// by a builder application.
+	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
+	// to an identity managed by a builder application. If you create an attendee with
+	// the same external user id, the service returns the existing record.
 	ExternalUserId *string
 }
 
@@ -161,8 +497,11 @@ type CreateAttendeeError struct {
 // BatchCreateAttendee action.
 type CreateAttendeeRequestItem struct {
 
-	// The Amazon Chime SDK external user ID. Links the attendee to an identity managed
-	// by a builder application.
+	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
+	// to an identity managed by a builder application. If you create an attendee with
+	// the same external user id, the service returns the existing record. The Amazon
+	// Chime SDK external user ID. Links the attendee to an identity managed by a
+	// builder application.
 	//
 	// This member is required.
 	ExternalUserId *string
@@ -239,6 +578,16 @@ type GeoMatchParams struct {
 	//
 	// This member is required.
 	Country *string
+}
+
+// The ARN and name of a user.
+type Identity struct {
+
+	// The ARN in an Identity.
+	Arn *string
+
+	// The name in an Identity.
+	Name *string
 }
 
 // Invitation object returned after emailing users to invite them to join the
@@ -364,6 +713,13 @@ type MembershipItem struct {
 
 	// The member role.
 	Role RoomMembershipRole
+}
+
+// The endpoint of a meeting session.
+type MessagingSessionEndpoint struct {
+
+	// The URL of a meeting session endpoint.
+	Url *string
 }
 
 // A phone number for which an order has been placed.
@@ -670,6 +1026,102 @@ type SigninDelegateGroup struct {
 
 	// The group name.
 	GroupName *string
+}
+
+// The SIP media application details, including name and endpoints. An AWS account
+// can have multiple SIP media applications.
+type SipMediaApplication struct {
+
+	// The AWS Region in which the SIP media application is created.
+	AwsRegion *string
+
+	// The SIP media application creation timestamp, in ISO 8601 format.
+	CreatedTimestamp *time.Time
+
+	// List of endpoints for SIP media application. Currently, only one endpoint per
+	// SIP media application is permitted.
+	Endpoints []SipMediaApplicationEndpoint
+
+	// The name of the SIP media application.
+	Name *string
+
+	// The SIP media application ID.
+	SipMediaApplicationId *string
+
+	// The SIP media application updated timestamp, in ISO 8601 format.
+	UpdatedTimestamp *time.Time
+}
+
+// A Call instance for a SIP media application.
+type SipMediaApplicationCall struct {
+
+	// The transaction ID of a call.
+	TransactionId *string
+}
+
+// Endpoints to specify as part of a SIP media application.
+type SipMediaApplicationEndpoint struct {
+
+	// Valid Amazon Resource Name (ARN) of the Lambda function of the same AWS Region
+	// where the SIP media application is created.
+	LambdaArn *string
+}
+
+// Logging configuration of the SIP media application.
+type SipMediaApplicationLoggingConfiguration struct {
+
+	// Enables application message logs for the SIP media application.
+	EnableSipMediaApplicationMessageLogs *bool
+}
+
+// The SIP rule details, including name, triggers, and target applications. An AWS
+// account can have multiple SIP rules.
+type SipRule struct {
+
+	// The SIP rule created timestamp, in ISO 8601 format.
+	CreatedTimestamp *time.Time
+
+	// Indicates if the SIP rule is enabled or disabled. You must disable a rule before
+	// you can delete it.
+	Disabled *bool
+
+	// The name of the SIP rule.
+	Name *string
+
+	// The SIP rule ID.
+	SipRuleId *string
+
+	// List of SIP media applications with priority and AWS Region. You can only use
+	// one SIP application per AWS Region and priority combination.
+	TargetApplications []SipRuleTargetApplication
+
+	// The type of trigger whose value is assigned to the SIP rule in TriggerValue.
+	TriggerType SipRuleTriggerType
+
+	// If TriggerType is RequestUriHostname, then the value can be the outbound host
+	// name of the Amazon Chime Voice Connector. If TriggerType is ToPhoneNumber, then
+	// the value can be a customer-owned phone number in E164 format. SipRule is
+	// triggered when a SIP rule requests host name or ToPhoneNumber matches in the
+	// incoming SIP request.
+	TriggerValue *string
+
+	// The SIP rule updated timestamp, in ISO 8601 format.
+	UpdatedTimestamp *time.Time
+}
+
+// Target SIP media application along with other details like priority and AWS
+// Region to be specified in the SIP rule. Only one SIP rule per AWS Region can be
+// provided.
+type SipRuleTargetApplication struct {
+
+	// AWS Region of target application.
+	AwsRegion *string
+
+	// Priority of the SIP media application in the target list.
+	Priority *int32
+
+	// The SIP media application ID.
+	SipMediaApplicationId *string
 }
 
 // The streaming configuration associated with an Amazon Chime Voice Connector.

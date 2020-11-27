@@ -24,6 +24,24 @@ func (AccountType) Values() []AccountType {
 	}
 }
 
+type AppInstanceDataType string
+
+// Enum values for AppInstanceDataType
+const (
+	AppInstanceDataTypeChannel        AppInstanceDataType = "Channel"
+	AppInstanceDataTypeChannelmessage AppInstanceDataType = "ChannelMessage"
+)
+
+// Values returns all known values for AppInstanceDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AppInstanceDataType) Values() []AppInstanceDataType {
+	return []AppInstanceDataType{
+		"Channel",
+		"ChannelMessage",
+	}
+}
+
 type BotType string
 
 // Enum values for BotType
@@ -77,6 +95,97 @@ func (Capability) Values() []Capability {
 	return []Capability{
 		"Voice",
 		"SMS",
+	}
+}
+
+type ChannelMembershipType string
+
+// Enum values for ChannelMembershipType
+const (
+	ChannelMembershipTypeDefault ChannelMembershipType = "DEFAULT"
+	ChannelMembershipTypeHidden  ChannelMembershipType = "HIDDEN"
+)
+
+// Values returns all known values for ChannelMembershipType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelMembershipType) Values() []ChannelMembershipType {
+	return []ChannelMembershipType{
+		"DEFAULT",
+		"HIDDEN",
+	}
+}
+
+type ChannelMessagePersistenceType string
+
+// Enum values for ChannelMessagePersistenceType
+const (
+	ChannelMessagePersistenceTypePersistent    ChannelMessagePersistenceType = "PERSISTENT"
+	ChannelMessagePersistenceTypeNonPersistent ChannelMessagePersistenceType = "NON_PERSISTENT"
+)
+
+// Values returns all known values for ChannelMessagePersistenceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ChannelMessagePersistenceType) Values() []ChannelMessagePersistenceType {
+	return []ChannelMessagePersistenceType{
+		"PERSISTENT",
+		"NON_PERSISTENT",
+	}
+}
+
+type ChannelMessageType string
+
+// Enum values for ChannelMessageType
+const (
+	ChannelMessageTypeStandard ChannelMessageType = "STANDARD"
+	ChannelMessageTypeControl  ChannelMessageType = "CONTROL"
+)
+
+// Values returns all known values for ChannelMessageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelMessageType) Values() []ChannelMessageType {
+	return []ChannelMessageType{
+		"STANDARD",
+		"CONTROL",
+	}
+}
+
+type ChannelMode string
+
+// Enum values for ChannelMode
+const (
+	ChannelModeUnrestricted ChannelMode = "UNRESTRICTED"
+	ChannelModeRestricted   ChannelMode = "RESTRICTED"
+)
+
+// Values returns all known values for ChannelMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChannelMode) Values() []ChannelMode {
+	return []ChannelMode{
+		"UNRESTRICTED",
+		"RESTRICTED",
+	}
+}
+
+type ChannelPrivacy string
+
+// Enum values for ChannelPrivacy
+const (
+	ChannelPrivacyPublic  ChannelPrivacy = "PUBLIC"
+	ChannelPrivacyPrivate ChannelPrivacy = "PRIVATE"
+)
+
+// Values returns all known values for ChannelPrivacy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelPrivacy) Values() []ChannelPrivacy {
+	return []ChannelPrivacy{
+		"PUBLIC",
+		"PRIVATE",
 	}
 }
 
@@ -308,6 +417,7 @@ const (
 	PhoneNumberAssociationNameUserid                PhoneNumberAssociationName = "UserId"
 	PhoneNumberAssociationNameVoiceconnectorid      PhoneNumberAssociationName = "VoiceConnectorId"
 	PhoneNumberAssociationNameVoiceconnectorgroupid PhoneNumberAssociationName = "VoiceConnectorGroupId"
+	PhoneNumberAssociationNameSipruleid             PhoneNumberAssociationName = "SipRuleId"
 )
 
 // Values returns all known values for PhoneNumberAssociationName. Note that this
@@ -319,6 +429,7 @@ func (PhoneNumberAssociationName) Values() []PhoneNumberAssociationName {
 		"UserId",
 		"VoiceConnectorId",
 		"VoiceConnectorGroupId",
+		"SipRuleId",
 	}
 }
 
@@ -465,6 +576,42 @@ func (RoomMembershipRole) Values() []RoomMembershipRole {
 	return []RoomMembershipRole{
 		"Administrator",
 		"Member",
+	}
+}
+
+type SipRuleTriggerType string
+
+// Enum values for SipRuleTriggerType
+const (
+	SipRuleTriggerTypeTophonenumber      SipRuleTriggerType = "ToPhoneNumber"
+	SipRuleTriggerTypeRequesturihostname SipRuleTriggerType = "RequestUriHostname"
+)
+
+// Values returns all known values for SipRuleTriggerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SipRuleTriggerType) Values() []SipRuleTriggerType {
+	return []SipRuleTriggerType{
+		"ToPhoneNumber",
+		"RequestUriHostname",
+	}
+}
+
+type SortOrder string
+
+// Enum values for SortOrder
+const (
+	SortOrderAscending  SortOrder = "ASCENDING"
+	SortOrderDescending SortOrder = "DESCENDING"
+)
+
+// Values returns all known values for SortOrder. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ASCENDING",
+		"DESCENDING",
 	}
 }
 

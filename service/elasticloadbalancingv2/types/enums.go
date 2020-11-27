@@ -132,6 +132,7 @@ type LoadBalancerTypeEnum string
 const (
 	LoadBalancerTypeEnumApplication LoadBalancerTypeEnum = "application"
 	LoadBalancerTypeEnumNetwork     LoadBalancerTypeEnum = "network"
+	LoadBalancerTypeEnumGateway     LoadBalancerTypeEnum = "gateway"
 )
 
 // Values returns all known values for LoadBalancerTypeEnum. Note that this can be
@@ -141,6 +142,7 @@ func (LoadBalancerTypeEnum) Values() []LoadBalancerTypeEnum {
 	return []LoadBalancerTypeEnum{
 		"application",
 		"network",
+		"gateway",
 	}
 }
 
@@ -154,6 +156,7 @@ const (
 	ProtocolEnumTls    ProtocolEnum = "TLS"
 	ProtocolEnumUdp    ProtocolEnum = "UDP"
 	ProtocolEnumTcpUdp ProtocolEnum = "TCP_UDP"
+	ProtocolEnumGeneve ProtocolEnum = "GENEVE"
 )
 
 // Values returns all known values for ProtocolEnum. Note that this can be expanded
@@ -167,6 +170,7 @@ func (ProtocolEnum) Values() []ProtocolEnum {
 		"TLS",
 		"UDP",
 		"TCP_UDP",
+		"GENEVE",
 	}
 }
 

@@ -123,6 +123,13 @@ type PostTextInput struct {
 	// This member is required.
 	UserId *string
 
+	// A list of contexts active for the request. A context can be activated when a
+	// previous intent is fulfilled, or by including the context in the request, If you
+	// don't specify a list of contexts, Amazon Lex will use the current list of
+	// contexts for the session. If you specify an empty list, all contexts for the
+	// session are cleared.
+	ActiveContexts []types.ActiveContext
+
 	// Request-specific information passed between Amazon Lex and a client application.
 	// The namespace x-amz-lex: is reserved for special attributes. Don't create any
 	// request attributes with the prefix x-amz-lex:. For more information, see Setting
@@ -138,6 +145,12 @@ type PostTextInput struct {
 
 type PostTextOutput struct {
 
+	// A list of active contexts for the session. A context can be set when an intent
+	// is fulfilled or by calling the PostContent, PostText, or PutSession operation.
+	// You can use a context to control the intents that can follow up an intent, or to
+	// modify the operation of your application.
+	ActiveContexts []types.ActiveContext
+
 	// One to four alternative intents that may be applicable to the user's intent.
 	// Each alternative includes a score that indicates how confident Amazon Lex is
 	// that the intent matches the user's intent. The intents are sorted by the
@@ -146,12 +159,7 @@ type PostTextOutput struct {
 
 	// The version of the bot that responded to the conversation. You can use this
 	// information to help determine if one version of a bot is performing better than
-	// another version. If you have enabled the new natural language understanding
-	// (NLU) model, you can use this to determine if the improvement is due to changes
-	// to the bot or changes to the NLU. For more information about enabling the new
-	// NLU, see the enableModelImprovements
-	// (https://docs.aws.amazon.com/lex/latest/dg/API_PutBot.html#lex-PutBot-request-enableModelImprovements)
-	// parameter of the PutBot operation.
+	// another version.
 	BotVersion *string
 
 	// Identifies the current state of the user interaction. Amazon Lex returns one of
@@ -230,7 +238,7 @@ type PostTextOutput struct {
 	// 1.0. For more information, see Confidence Scores
 	// (https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html). The score is
 	// a relative score, not an absolute score. The score may change based on
-	// improvements to the Amazon Lex natural language understanding (NLU) model.
+	// improvements to Amazon Lex.
 	NluIntentConfidence *types.IntentConfidence
 
 	// Represents the options that the user has to respond to the current prompt.

@@ -274,8 +274,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 type ResourceUnavailableException struct {
 	Message *string
 
-	RequestId    *string
 	ResourceType ExceptionResourceType
+	RequestId    *string
 }
 
 func (e *ResourceUnavailableException) Error() string {

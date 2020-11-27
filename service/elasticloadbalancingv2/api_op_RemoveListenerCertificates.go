@@ -12,9 +12,7 @@ import (
 )
 
 // Removes the specified certificate from the certificate list for the specified
-// HTTPS or TLS listener. You can't remove the default certificate for a listener.
-// To replace the default certificate, call ModifyListener. To list the
-// certificates for your listener, use DescribeListenerCertificates.
+// HTTPS or TLS listener.
 func (c *Client) RemoveListenerCertificates(ctx context.Context, params *RemoveListenerCertificatesInput, optFns ...func(*Options)) (*RemoveListenerCertificatesOutput, error) {
 	if params == nil {
 		params = &RemoveListenerCertificatesInput{}

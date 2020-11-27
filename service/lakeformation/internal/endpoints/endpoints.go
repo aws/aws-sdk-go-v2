@@ -60,11 +60,35 @@ var defaultPartitions = endpoints.Partitions{
 			"eu-west-1":      endpoints.Endpoint{},
 			"eu-west-2":      endpoints.Endpoint{},
 			"eu-west-3":      endpoints.Endpoint{},
-			"sa-east-1":      endpoints.Endpoint{},
-			"us-east-1":      endpoints.Endpoint{},
-			"us-east-2":      endpoints.Endpoint{},
-			"us-west-1":      endpoints.Endpoint{},
-			"us-west-2":      endpoints.Endpoint{},
+			"fips-us-east-1": endpoints.Endpoint{
+				Hostname: "lakeformation-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"fips-us-east-2": endpoints.Endpoint{
+				Hostname: "lakeformation-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			"fips-us-west-1": endpoints.Endpoint{
+				Hostname: "lakeformation-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+			},
+			"fips-us-west-2": endpoints.Endpoint{
+				Hostname: "lakeformation-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+			"sa-east-1": endpoints.Endpoint{},
+			"us-east-1": endpoints.Endpoint{},
+			"us-east-2": endpoints.Endpoint{},
+			"us-west-1": endpoints.Endpoint{},
+			"us-west-2": endpoints.Endpoint{},
 		},
 	},
 	{
@@ -109,5 +133,14 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    regexp.MustCompile("^us\\-gov\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"fips-us-gov-west-1": endpoints.Endpoint{
+				Hostname: "lakeformation-fips.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+			"us-gov-west-1": endpoints.Endpoint{},
+		},
 	},
 }

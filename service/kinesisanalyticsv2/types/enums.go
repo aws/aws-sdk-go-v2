@@ -174,9 +174,10 @@ type RuntimeEnvironment string
 
 // Enum values for RuntimeEnvironment
 const (
-	RuntimeEnvironmentSql10   RuntimeEnvironment = "SQL-1_0"
-	RuntimeEnvironmentFlink16 RuntimeEnvironment = "FLINK-1_6"
-	RuntimeEnvironmentFlink18 RuntimeEnvironment = "FLINK-1_8"
+	RuntimeEnvironmentSql10    RuntimeEnvironment = "SQL-1_0"
+	RuntimeEnvironmentFlink16  RuntimeEnvironment = "FLINK-1_6"
+	RuntimeEnvironmentFlink18  RuntimeEnvironment = "FLINK-1_8"
+	RuntimeEnvironmentFlink111 RuntimeEnvironment = "FLINK-1_11"
 )
 
 // Values returns all known values for RuntimeEnvironment. Note that this can be
@@ -187,6 +188,7 @@ func (RuntimeEnvironment) Values() []RuntimeEnvironment {
 		"SQL-1_0",
 		"FLINK-1_6",
 		"FLINK-1_8",
+		"FLINK-1_11",
 	}
 }
 
@@ -209,5 +211,21 @@ func (SnapshotStatus) Values() []SnapshotStatus {
 		"READY",
 		"DELETING",
 		"FAILED",
+	}
+}
+
+type UrlType string
+
+// Enum values for UrlType
+const (
+	UrlTypeFlinkDashboardUrl UrlType = "FLINK_DASHBOARD_URL"
+)
+
+// Values returns all known values for UrlType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (UrlType) Values() []UrlType {
+	return []UrlType{
+		"FLINK_DASHBOARD_URL",
 	}
 }

@@ -198,15 +198,16 @@ type AutomationExecutionFilterKey string
 
 // Enum values for AutomationExecutionFilterKey
 const (
-	AutomationExecutionFilterKeyDocumentNamePrefix AutomationExecutionFilterKey = "DocumentNamePrefix"
-	AutomationExecutionFilterKeyExecutionStatus    AutomationExecutionFilterKey = "ExecutionStatus"
-	AutomationExecutionFilterKeyExecutionId        AutomationExecutionFilterKey = "ExecutionId"
-	AutomationExecutionFilterKeyParentExecutionId  AutomationExecutionFilterKey = "ParentExecutionId"
-	AutomationExecutionFilterKeyCurrentAction      AutomationExecutionFilterKey = "CurrentAction"
-	AutomationExecutionFilterKeyStartTimeBefore    AutomationExecutionFilterKey = "StartTimeBefore"
-	AutomationExecutionFilterKeyStartTimeAfter     AutomationExecutionFilterKey = "StartTimeAfter"
-	AutomationExecutionFilterKeyAutomationType     AutomationExecutionFilterKey = "AutomationType"
-	AutomationExecutionFilterKeyTagKey             AutomationExecutionFilterKey = "TagKey"
+	AutomationExecutionFilterKeyDocumentNamePrefix  AutomationExecutionFilterKey = "DocumentNamePrefix"
+	AutomationExecutionFilterKeyExecutionStatus     AutomationExecutionFilterKey = "ExecutionStatus"
+	AutomationExecutionFilterKeyExecutionId         AutomationExecutionFilterKey = "ExecutionId"
+	AutomationExecutionFilterKeyParentExecutionId   AutomationExecutionFilterKey = "ParentExecutionId"
+	AutomationExecutionFilterKeyCurrentAction       AutomationExecutionFilterKey = "CurrentAction"
+	AutomationExecutionFilterKeyStartTimeBefore     AutomationExecutionFilterKey = "StartTimeBefore"
+	AutomationExecutionFilterKeyStartTimeAfter      AutomationExecutionFilterKey = "StartTimeAfter"
+	AutomationExecutionFilterKeyAutomationType      AutomationExecutionFilterKey = "AutomationType"
+	AutomationExecutionFilterKeyTagKey              AutomationExecutionFilterKey = "TagKey"
+	AutomationExecutionFilterKeyTargetResourceGroup AutomationExecutionFilterKey = "TargetResourceGroup"
 )
 
 // Values returns all known values for AutomationExecutionFilterKey. Note that this
@@ -223,6 +224,7 @@ func (AutomationExecutionFilterKey) Values() []AutomationExecutionFilterKey {
 		"StartTimeAfter",
 		"AutomationType",
 		"TagKey",
+		"TargetResourceGroup",
 	}
 }
 
@@ -1539,6 +1541,7 @@ const (
 	SessionFilterKeyTargetId      SessionFilterKey = "Target"
 	SessionFilterKeyOwner         SessionFilterKey = "Owner"
 	SessionFilterKeyStatus        SessionFilterKey = "Status"
+	SessionFilterKeySessionId     SessionFilterKey = "SessionId"
 )
 
 // Values returns all known values for SessionFilterKey. Note that this can be
@@ -1551,6 +1554,7 @@ func (SessionFilterKey) Values() []SessionFilterKey {
 		"Target",
 		"Owner",
 		"Status",
+		"SessionId",
 	}
 }
 

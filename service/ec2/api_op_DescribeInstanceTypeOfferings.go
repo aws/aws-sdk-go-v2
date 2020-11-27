@@ -45,7 +45,7 @@ type DescribeInstanceTypeOfferingsInput struct {
 	// (default), the location is the Region code (for example, us-east-2.)
 	//
 	// *
-	// instance-type - The instance type.
+	// instance-type - The instance type. For example, c5.2xlarge.
 	Filters []types.Filter
 
 	// The location type.

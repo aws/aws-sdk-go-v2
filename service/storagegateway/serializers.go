@@ -1394,6 +1394,52 @@ func (m *awsAwsjson11_serializeOpDescribeBandwidthRateLimit) HandleSerialize(ctx
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDescribeBandwidthRateLimitSchedule struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeBandwidthRateLimitSchedule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeBandwidthRateLimitSchedule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeBandwidthRateLimitScheduleInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("StorageGateway_20130630.DescribeBandwidthRateLimitSchedule")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeBandwidthRateLimitScheduleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDescribeCache struct {
 }
 
@@ -3326,6 +3372,52 @@ func (m *awsAwsjson11_serializeOpUpdateBandwidthRateLimit) HandleSerialize(ctx c
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpUpdateBandwidthRateLimitSchedule struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateBandwidthRateLimitSchedule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateBandwidthRateLimitSchedule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateBandwidthRateLimitScheduleInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("StorageGateway_20130630.UpdateBandwidthRateLimitSchedule")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateBandwidthRateLimitScheduleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateChapCredentials struct {
 }
 
@@ -3830,6 +3922,63 @@ func awsAwsjson11_serializeDocumentAutomaticTapeCreationRules(v []types.Automati
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentBandwidthRateLimitInterval(v *types.BandwidthRateLimitInterval, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AverageDownloadRateLimitInBitsPerSec != nil {
+		ok := object.Key("AverageDownloadRateLimitInBitsPerSec")
+		ok.Long(*v.AverageDownloadRateLimitInBitsPerSec)
+	}
+
+	if v.AverageUploadRateLimitInBitsPerSec != nil {
+		ok := object.Key("AverageUploadRateLimitInBitsPerSec")
+		ok.Long(*v.AverageUploadRateLimitInBitsPerSec)
+	}
+
+	if v.DaysOfWeek != nil {
+		ok := object.Key("DaysOfWeek")
+		if err := awsAwsjson11_serializeDocumentDaysOfWeek(v.DaysOfWeek, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EndHourOfDay != nil {
+		ok := object.Key("EndHourOfDay")
+		ok.Integer(*v.EndHourOfDay)
+	}
+
+	if v.EndMinuteOfHour != nil {
+		ok := object.Key("EndMinuteOfHour")
+		ok.Integer(*v.EndMinuteOfHour)
+	}
+
+	if v.StartHourOfDay != nil {
+		ok := object.Key("StartHourOfDay")
+		ok.Integer(*v.StartHourOfDay)
+	}
+
+	if v.StartMinuteOfHour != nil {
+		ok := object.Key("StartMinuteOfHour")
+		ok.Integer(*v.StartMinuteOfHour)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentBandwidthRateLimitIntervals(v []types.BandwidthRateLimitInterval, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentBandwidthRateLimitInterval(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCacheAttributes(v *types.CacheAttributes, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3839,6 +3988,17 @@ func awsAwsjson11_serializeDocumentCacheAttributes(v *types.CacheAttributes, val
 		ok.Integer(*v.CacheStaleTimeoutInSeconds)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDaysOfWeek(v []int32, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
+	}
 	return nil
 }
 
@@ -4947,6 +5107,18 @@ func awsAwsjson11_serializeOpDocumentDescribeBandwidthRateLimitInput(v *Describe
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDescribeBandwidthRateLimitScheduleInput(v *DescribeBandwidthRateLimitScheduleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GatewayARN != nil {
+		ok := object.Key("GatewayARN")
+		ok.String(*v.GatewayARN)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDescribeCachediSCSIVolumesInput(v *DescribeCachediSCSIVolumesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5657,6 +5829,25 @@ func awsAwsjson11_serializeOpDocumentUpdateBandwidthRateLimitInput(v *UpdateBand
 	if v.AverageUploadRateLimitInBitsPerSec != nil {
 		ok := object.Key("AverageUploadRateLimitInBitsPerSec")
 		ok.Long(*v.AverageUploadRateLimitInBitsPerSec)
+	}
+
+	if v.GatewayARN != nil {
+		ok := object.Key("GatewayARN")
+		ok.String(*v.GatewayARN)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateBandwidthRateLimitScheduleInput(v *UpdateBandwidthRateLimitScheduleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BandwidthRateLimitIntervals != nil {
+		ok := object.Key("BandwidthRateLimitIntervals")
+		if err := awsAwsjson11_serializeDocumentBandwidthRateLimitIntervals(v.BandwidthRateLimitIntervals, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.GatewayARN != nil {

@@ -10,14 +10,14 @@ import (
 // message.
 type AddAttributesActivity struct {
 
-	// A list of 1-50 "AttributeNameMapping" objects that map an existing attribute to
-	// a new attribute. The existing attributes remain in the message, so if you want
-	// to remove the originals, use "RemoveAttributeActivity".
+	// A list of 1-50 AttributeNameMapping objects that map an existing attribute to a
+	// new attribute. The existing attributes remain in the message, so if you want to
+	// remove the originals, use RemoveAttributeActivity.
 	//
 	// This member is required.
 	Attributes map[string]string
 
-	// The name of the 'addAttributes' activity.
+	// The name of the addAttributes activity.
 	//
 	// This member is required.
 	Name *string
@@ -35,8 +35,8 @@ type BatchPutMessageErrorEntry struct {
 	// The message associated with the error.
 	ErrorMessage *string
 
-	// The ID of the message that caused the error. (See the value corresponding to the
-	// "messageId" key in the message object.)
+	// The ID of the message that caused the error. See the value corresponding to the
+	// messageId key in the message object.
 	MessageId *string
 }
 
@@ -50,6 +50,12 @@ type Channel struct {
 	// When the channel was created.
 	CreationTime *time.Time
 
+	// The last time when a new message arrived in the channel. AWS IoT Analytics
+	// updates this value at most once per minute for one channel. Hence, the
+	// lastMessageArrivalTime value is an approximation. This feature only applies to
+	// messages that arrived in the data store after October 23, 2020.
+	LastMessageArrivalTime *time.Time
+
 	// When the channel was last updated.
 	LastUpdateTime *time.Time
 
@@ -62,9 +68,9 @@ type Channel struct {
 	// The status of the channel.
 	Status ChannelStatus
 
-	// Where channel data is stored. You may choose one of "serviceManagedS3" or
-	// "customerManagedS3" storage. If not specified, the default is
-	// "serviceManagedS3". This cannot be changed after creation of the channel.
+	// Where channel data is stored. You can choose one of serviceManagedS3 or
+	// customerManagedS3 storage. If not specified, the default is serviceManagedS3.
+	// You cannot change this storage option after the channel is created.
 	Storage *ChannelStorage
 }
 
@@ -76,7 +82,7 @@ type ChannelActivity struct {
 	// This member is required.
 	ChannelName *string
 
-	// The name of the 'channel' activity.
+	// The name of the channel activity.
 	//
 	// This member is required.
 	Name *string
@@ -92,20 +98,20 @@ type ChannelStatistics struct {
 	Size *EstimatedResourceSize
 }
 
-// Where channel data is stored. You may choose one of "serviceManagedS3" or
-// "customerManagedS3" storage. If not specified, the default is
-// "serviceManagedS3". This cannot be changed after creation of the channel.
+// Where channel data is stored. You may choose one of serviceManagedS3 or
+// customerManagedS3 storage. If not specified, the default is serviceManagedS3.
+// This cannot be changed after creation of the channel.
 type ChannelStorage struct {
 
 	// Use this to store channel data in an S3 bucket that you manage. If customer
-	// managed storage is selected, the "retentionPeriod" parameter is ignored. The
-	// choice of service-managed or customer-managed S3 storage cannot be changed after
-	// creation of the channel.
+	// managed storage is selected, the retentionPeriod parameter is ignored. You
+	// cannot change the choice of service-managed or customer-managed S3 storage after
+	// the channel is created.
 	CustomerManagedS3 *CustomerManagedChannelS3Storage
 
-	// Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics
-	// service. The choice of service-managed or customer-managed S3 storage cannot be
-	// changed after creation of the channel.
+	// Use this to store channel data in an S3 bucket managed by AWS IoT Analytics. You
+	// cannot change the choice of service-managed or customer-managed S3 storage after
+	// the channel is created.
 	ServiceManagedS3 *ServiceManagedChannelS3Storage
 }
 
@@ -115,8 +121,7 @@ type ChannelStorageSummary struct {
 	// Used to store channel data in an S3 bucket that you manage.
 	CustomerManagedS3 *CustomerManagedChannelS3StorageSummary
 
-	// Used to store channel data in an S3 bucket managed by the AWS IoT Analytics
-	// service.
+	// Used to store channel data in an S3 bucket managed by AWS IoT Analytics.
 	ServiceManagedS3 *ServiceManagedChannelS3StorageSummary
 }
 
@@ -132,6 +137,12 @@ type ChannelSummary struct {
 	// When the channel was created.
 	CreationTime *time.Time
 
+	// The last time when a new message arrived in the channel. AWS IoT Analytics
+	// updates this value at most once per minute for one channel. Hence, the
+	// lastMessageArrivalTime value is an approximation. This feature only applies to
+	// messages that arrived in the data store after October 23, 2020.
+	LastMessageArrivalTime *time.Time
+
 	// The last time the channel was updated.
 	LastUpdateTime *time.Time
 
@@ -139,114 +150,114 @@ type ChannelSummary struct {
 	Status ChannelStatus
 }
 
-// Information needed to run the "containerAction" to produce data set contents.
+// Information required to run the containerAction to produce dataset contents.
 type ContainerDatasetAction struct {
 
-	// The ARN of the role which gives permission to the system to access needed
-	// resources in order to run the "containerAction". This includes, at minimum,
-	// permission to retrieve the data set contents which are the input to the
-	// containerized application.
+	// The ARN of the role that gives permission to the system to access required
+	// resources to run the containerAction. This includes, at minimum, permission to
+	// retrieve the dataset contents that are the input to the containerized
+	// application.
 	//
 	// This member is required.
 	ExecutionRoleArn *string
 
 	// The ARN of the Docker container stored in your account. The Docker container
-	// contains an application and needed support libraries and is used to generate
-	// data set contents.
+	// contains an application and required support libraries and is used to generate
+	// dataset contents.
 	//
 	// This member is required.
 	Image *string
 
-	// Configuration of the resource which executes the "containerAction".
+	// Configuration of the resource that executes the containerAction.
 	//
 	// This member is required.
 	ResourceConfiguration *ResourceConfiguration
 
-	// The values of variables used within the context of the execution of the
+	// The values of variables used in the context of the execution of the
 	// containerized application (basically, parameters passed to the application).
-	// Each variable must have a name and a value given by one of "stringValue",
-	// "datasetContentVersionValue", or "outputFileUriValue".
+	// Each variable must have a name and a value given by one of stringValue,
+	// datasetContentVersionValue, or outputFileUriValue.
 	Variables []Variable
 }
 
 // Use this to store channel data in an S3 bucket that you manage. If customer
-// managed storage is selected, the "retentionPeriod" parameter is ignored. The
-// choice of service-managed or customer-managed S3 storage cannot be changed after
-// creation of the channel.
+// managed storage is selected, the retentionPeriod parameter is ignored. You
+// cannot change the choice of service-managed or customer-managed S3 storage after
+// the channel is created.
 type CustomerManagedChannelS3Storage struct {
 
-	// The name of the Amazon S3 bucket in which channel data is stored.
+	// The name of the S3 bucket in which channel data is stored.
 	//
 	// This member is required.
 	Bucket *string
 
-	// The ARN of the role which grants AWS IoT Analytics permission to interact with
+	// The ARN of the role that grants AWS IoT Analytics permission to interact with
 	// your Amazon S3 resources.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// [Optional] The prefix used to create the keys of the channel data objects. Each
-	// object in an Amazon S3 bucket has a key that is its unique identifier within the
-	// bucket (each object in a bucket has exactly one key). The prefix must end with a
-	// '/'.
+	// Optional. The prefix used to create the keys of the channel data objects. Each
+	// object in an S3 bucket has a key that is its unique identifier in the bucket.
+	// Each object in a bucket has exactly one key. The prefix must end with a forward
+	// slash (/).
 	KeyPrefix *string
 }
 
 // Used to store channel data in an S3 bucket that you manage.
 type CustomerManagedChannelS3StorageSummary struct {
 
-	// The name of the Amazon S3 bucket in which channel data is stored.
+	// The name of the S3 bucket in which channel data is stored.
 	Bucket *string
 
-	// [Optional] The prefix used to create the keys of the channel data objects. Each
-	// object in an Amazon S3 bucket has a key that is its unique identifier within the
-	// bucket (each object in a bucket has exactly one key). The prefix must end with a
-	// '/'.
+	// Optional. The prefix used to create the keys of the channel data objects. Each
+	// object in an S3 bucket has a key that is its unique identifier within the bucket
+	// (each object in a bucket has exactly one key). The prefix must end with a
+	// forward slash (/).
 	KeyPrefix *string
 
-	// The ARN of the role which grants AWS IoT Analytics permission to interact with
+	// The ARN of the role that grants AWS IoT Analytics permission to interact with
 	// your Amazon S3 resources.
 	RoleArn *string
 }
 
-// Use this to store data store data in an S3 bucket that you manage. When customer
-// managed storage is selected, the "retentionPeriod" parameter is ignored. The
-// choice of service-managed or customer-managed S3 storage cannot be changed after
-// creation of the data store.
+// Use this to store data store data in an S3 bucket that you manage. When
+// customer-managed storage is selected, the retentionPeriod parameter is ignored.
+// You cannot change the choice of service-managed or customer-managed S3 storage
+// after the data store is created.
 type CustomerManagedDatastoreS3Storage struct {
 
-	// The name of the Amazon S3 bucket in which data store data is stored.
+	// The name of the S3 bucket in which data store data is stored.
 	//
 	// This member is required.
 	Bucket *string
 
-	// The ARN of the role which grants AWS IoT Analytics permission to interact with
+	// The ARN of the role that grants AWS IoT Analytics permission to interact with
 	// your Amazon S3 resources.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// [Optional] The prefix used to create the keys of the data store data objects.
-	// Each object in an Amazon S3 bucket has a key that is its unique identifier
-	// within the bucket (each object in a bucket has exactly one key). The prefix must
-	// end with a '/'.
+	// Optional. The prefix used to create the keys of the data store data objects.
+	// Each object in an S3 bucket has a key that is its unique identifier in the
+	// bucket. Each object in a bucket has exactly one key. The prefix must end with a
+	// forward slash (/).
 	KeyPrefix *string
 }
 
 // Used to store data store data in an S3 bucket that you manage.
 type CustomerManagedDatastoreS3StorageSummary struct {
 
-	// The name of the Amazon S3 bucket in which data store data is stored.
+	// The name of the S3 bucket in which data store data is stored.
 	Bucket *string
 
-	// [Optional] The prefix used to create the keys of the data store data objects.
-	// Each object in an Amazon S3 bucket has a key that is its unique identifier
-	// within the bucket (each object in a bucket has exactly one key). The prefix must
-	// end with a '/'.
+	// Optional. The prefix used to create the keys of the data store data objects.
+	// Each object in an S3 bucket has a key that is its unique identifier in the
+	// bucket. Each object in a bucket has exactly one key. The prefix must end with a
+	// forward slash (/).
 	KeyPrefix *string
 
-	// The ARN of the role which grants AWS IoT Analytics permission to interact with
+	// The ARN of the role that grants AWS IoT Analytics permission to interact with
 	// your Amazon S3 resources.
 	RoleArn *string
 }
@@ -254,13 +265,13 @@ type CustomerManagedDatastoreS3StorageSummary struct {
 // Information about a data set.
 type Dataset struct {
 
-	// The "DatasetAction" objects that automatically create the data set contents.
+	// The DatasetAction objects that automatically create the data set contents.
 	Actions []DatasetAction
 
 	// The ARN of the data set.
 	Arn *string
 
-	// When data set contents are created they are delivered to destinations specified
+	// When dataset contents are created they are delivered to destinations specified
 	// here.
 	ContentDeliveryRules []DatasetContentDeliveryRule
 
@@ -270,28 +281,36 @@ type Dataset struct {
 	// The last time the data set was updated.
 	LastUpdateTime *time.Time
 
+	// A list of data rules that send notifications to Amazon CloudWatch, when data
+	// arrives late. To specify lateDataRules, the dataset must use a DeltaTimer
+	// (https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html)
+	// filter.
+	LateDataRules []LateDataRule
+
 	// The name of the data set.
 	Name *string
 
-	// [Optional] How long, in days, message data is kept for the data set.
+	// Optional. How long, in days, message data is kept for the data set.
 	RetentionPeriod *RetentionPeriod
 
 	// The status of the data set.
 	Status DatasetStatus
 
-	// The "DatasetTrigger" objects that specify when the data set is automatically
+	// The DatasetTrigger objects that specify when the data set is automatically
 	// updated.
 	Triggers []DatasetTrigger
 
-	// [Optional] How many versions of data set contents are kept. If not specified or
+	// Optional. How many versions of dataset contents are kept. If not specified or
 	// set to null, only the latest version plus the latest succeeded version (if they
-	// are different) are kept for the time period specified by the "retentionPeriod"
-	// parameter. (For more information, see
-	// https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+	// are different) are kept for the time period specified by the retentionPeriod
+	// parameter. For more information, see Keeping Multiple Versions of AWS IoT
+	// Analytics Data Sets
+	// (https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+	// in the AWS IoT Analytics User Guide.
 	VersioningConfiguration *VersioningConfiguration
 }
 
-// A "DatasetAction" object that specifies how data set contents are automatically
+// A DatasetAction object that specifies how data set contents are automatically
 // created.
 type DatasetAction struct {
 
@@ -299,47 +318,46 @@ type DatasetAction struct {
 	// created.
 	ActionName *string
 
-	// Information which allows the system to run a containerized application in order
-	// to create the data set contents. The application must be in a Docker container
-	// along with any needed support libraries.
+	// Information that allows the system to run a containerized application to create
+	// the dataset contents. The application must be in a Docker container along with
+	// any required support libraries.
 	ContainerAction *ContainerDatasetAction
 
-	// An "SqlQueryDatasetAction" object that uses an SQL query to automatically create
+	// An SqlQueryDatasetAction object that uses an SQL query to automatically create
 	// data set contents.
 	QueryAction *SqlQueryDatasetAction
 }
 
-// Information about the action which automatically creates the data set's
-// contents.
+// Information about the action that automatically creates the dataset's contents.
 type DatasetActionSummary struct {
 
-	// The name of the action which automatically creates the data set's contents.
+	// The name of the action that automatically creates the dataset's contents.
 	ActionName *string
 
-	// The type of action by which the data set's contents are automatically created.
+	// The type of action by which the dataset's contents are automatically created.
 	ActionType DatasetActionType
 }
 
-// The destination to which data set contents are delivered.
+// The destination to which dataset contents are delivered.
 type DatasetContentDeliveryDestination struct {
 
-	// Configuration information for delivery of data set contents to AWS IoT Events.
+	// Configuration information for delivery of dataset contents to AWS IoT Events.
 	IotEventsDestinationConfiguration *IotEventsDestinationConfiguration
 
-	// Configuration information for delivery of data set contents to Amazon S3.
+	// Configuration information for delivery of dataset contents to Amazon S3.
 	S3DestinationConfiguration *S3DestinationConfiguration
 }
 
-// When data set contents are created they are delivered to destination specified
+// When dataset contents are created, they are delivered to destination specified
 // here.
 type DatasetContentDeliveryRule struct {
 
-	// The destination to which data set contents are delivered.
+	// The destination to which dataset contents are delivered.
 	//
 	// This member is required.
 	Destination *DatasetContentDeliveryDestination
 
-	// The name of the data set content delivery rules entry.
+	// The name of the dataset content delivery rules entry.
 	EntryName *string
 }
 
@@ -349,35 +367,35 @@ type DatasetContentStatus struct {
 	// The reason the data set contents are in this state.
 	Reason *string
 
-	// The state of the data set contents. Can be one of "READY", "CREATING",
-	// "SUCCEEDED" or "FAILED".
+	// The state of the data set contents. Can be one of READY, CREATING, SUCCEEDED, or
+	// FAILED.
 	State DatasetContentState
 }
 
-// Summary information about data set contents.
+// Summary information about dataset contents.
 type DatasetContentSummary struct {
 
 	// The time the dataset content status was updated to SUCCEEDED or FAILED.
 	CompletionTime *time.Time
 
-	// The actual time the creation of the data set contents was started.
+	// The actual time the creation of the dataset contents was started.
 	CreationTime *time.Time
 
-	// The time the creation of the data set contents was scheduled to start.
+	// The time the creation of the dataset contents was scheduled to start.
 	ScheduleTime *time.Time
 
 	// The status of the data set contents.
 	Status *DatasetContentStatus
 
-	// The version of the data set contents.
+	// The version of the dataset contents.
 	Version *string
 }
 
-// The data set whose latest contents are used as input to the notebook or
+// The dataset whose latest contents are used as input to the notebook or
 // application.
 type DatasetContentVersionValue struct {
 
-	// The name of the data set whose latest contents are used as input to the notebook
+	// The name of the dataset whose latest contents are used as input to the notebook
 	// or application.
 	//
 	// This member is required.
@@ -387,7 +405,7 @@ type DatasetContentVersionValue struct {
 // The reference to a data set entry.
 type DatasetEntry struct {
 
-	// The pre-signed URI of the data set item.
+	// The presigned URI of the data set item.
 	DataURI *string
 
 	// The name of the data set item.
@@ -397,7 +415,7 @@ type DatasetEntry struct {
 // A summary of information about a data set.
 type DatasetSummary struct {
 
-	// A list of "DataActionSummary" objects.
+	// A list of DataActionSummary objects.
 	Actions []DatasetActionSummary
 
 	// The time the data set was created.
@@ -418,14 +436,14 @@ type DatasetSummary struct {
 	Triggers []DatasetTrigger
 }
 
-// The "DatasetTrigger" that specifies when the data set is automatically updated.
+// The DatasetTrigger that specifies when the data set is automatically updated.
 type DatasetTrigger struct {
 
 	// The data set whose content creation triggers the creation of this data set's
 	// contents.
 	Dataset *TriggeringDataset
 
-	// The "Schedule" when the trigger is initiated.
+	// The Schedule when the trigger is initiated.
 	Schedule *Schedule
 }
 
@@ -438,6 +456,12 @@ type Datastore struct {
 	// When the data store was created.
 	CreationTime *time.Time
 
+	// The last time when a new message arrived in the data store. AWS IoT Analytics
+	// updates this value at most once per minute for one data store. Hence, the
+	// lastMessageArrivalTime value is an approximation. This feature only applies to
+	// messages that arrived in the data store after October 23, 2020.
+	LastMessageArrivalTime *time.Time
+
 	// The last time the data store was updated.
 	LastUpdateTime *time.Time
 
@@ -445,7 +469,7 @@ type Datastore struct {
 	Name *string
 
 	// How long, in days, message data is kept for the data store. When
-	// "customerManagedS3" storage is selected, this parameter is ignored.
+	// customerManagedS3 storage is selected, this parameter is ignored.
 	RetentionPeriod *RetentionPeriod
 
 	// The status of a data store: CREATING The data store is being created. ACTIVE The
@@ -453,13 +477,13 @@ type Datastore struct {
 	// deleted.
 	Status DatastoreStatus
 
-	// Where data store data is stored. You may choose one of "serviceManagedS3" or
-	// "customerManagedS3" storage. If not specified, the default is
-	// "serviceManagedS3". This cannot be changed after the data store is created.
+	// Where data store data is stored. You can choose one of serviceManagedS3 or
+	// customerManagedS3 storage. If not specified, the default is serviceManagedS3.
+	// You cannot change this storage option after the data store is created.
 	Storage *DatastoreStorage
 }
 
-// The 'datastore' activity that specifies where to store the processed data.
+// The datastore activity that specifies where to store the processed data.
 type DatastoreActivity struct {
 
 	// The name of the data store where processed messages are stored.
@@ -467,7 +491,7 @@ type DatastoreActivity struct {
 	// This member is required.
 	DatastoreName *string
 
-	// The name of the 'datastore' activity.
+	// The name of the datastore activity.
 	//
 	// This member is required.
 	Name *string
@@ -480,20 +504,20 @@ type DatastoreStatistics struct {
 	Size *EstimatedResourceSize
 }
 
-// Where data store data is stored. You may choose one of "serviceManagedS3" or
-// "customerManagedS3" storage. If not specified, the default is
-// "serviceManagedS3". This cannot be changed after the data store is created.
+// Where data store data is stored. You can choose one of serviceManagedS3 or
+// customerManagedS3 storage. If not specified, the default is serviceManagedS3.
+// You cannot change this storage option after the data store is created.
 type DatastoreStorage struct {
 
 	// Use this to store data store data in an S3 bucket that you manage. When customer
-	// managed storage is selected, the "retentionPeriod" parameter is ignored. The
+	// managed storage is selected, the retentionPeriod parameter is ignored. The
 	// choice of service-managed or customer-managed S3 storage cannot be changed after
 	// creation of the data store.
 	CustomerManagedS3 *CustomerManagedDatastoreS3Storage
 
-	// Use this to store data store data in an S3 bucket managed by the AWS IoT
-	// Analytics service. The choice of service-managed or customer-managed S3 storage
-	// cannot be changed after creation of the data store.
+	// Use this to store data store data in an S3 bucket managed by AWS IoT Analytics.
+	// You cannot change the choice of service-managed or customer-managed S3 storage
+	// after the data store is created.
 	ServiceManagedS3 *ServiceManagedDatastoreS3Storage
 }
 
@@ -503,8 +527,7 @@ type DatastoreStorageSummary struct {
 	// Used to store data store data in an S3 bucket that you manage.
 	CustomerManagedS3 *CustomerManagedDatastoreS3StorageSummary
 
-	// Used to store data store data in an S3 bucket managed by the AWS IoT Analytics
-	// service.
+	// Used to store data store data in an S3 bucket managed by AWS IoT Analytics.
 	ServiceManagedS3 *ServiceManagedDatastoreS3StorageSummary
 }
 
@@ -520,6 +543,12 @@ type DatastoreSummary struct {
 	// Where data store data is stored.
 	DatastoreStorage *DatastoreStorageSummary
 
+	// The last time when a new message arrived in the data store. AWS IoT Analytics
+	// updates this value at most once per minute for one data store. Hence, the
+	// lastMessageArrivalTime value is an approximation. This feature only applies to
+	// messages that arrived in the data store after October 23, 2020.
+	LastMessageArrivalTime *time.Time
+
 	// The last time the data store was updated.
 	LastUpdateTime *time.Time
 
@@ -531,24 +560,46 @@ type DatastoreSummary struct {
 // action.
 type DeltaTime struct {
 
-	// The number of seconds of estimated "in flight" lag time of message data. When
-	// you create data set contents using message data from a specified time frame,
-	// some message data may still be "in flight" when processing begins, and so will
-	// not arrive in time to be processed. Use this field to make allowances for the
-	// "in flight" time of your message data, so that data not processed from a
-	// previous time frame will be included with the next time frame. Without this,
-	// missed message data would be excluded from processing during the next time frame
-	// as well, because its timestamp places it within the previous time frame.
+	// The number of seconds of estimated in-flight lag time of message data. When you
+	// create dataset contents using message data from a specified timeframe, some
+	// message data might still be in flight when processing begins, and so do not
+	// arrive in time to be processed. Use this field to make allowances for the in
+	// flight time of your message data, so that data not processed from a previous
+	// timeframe is included with the next timeframe. Otherwise, missed message data
+	// would be excluded from processing during the next timeframe too, because its
+	// timestamp places it within the previous timeframe.
 	//
 	// This member is required.
 	OffsetSeconds *int32
 
-	// An expression by which the time of the message data may be determined. This may
-	// be the name of a timestamp field, or a SQL expression which is used to derive
+	// An expression by which the time of the message data might be determined. This
+	// can be the name of a timestamp field or a SQL expression that is used to derive
 	// the time the message data was generated.
 	//
 	// This member is required.
 	TimeExpression *string
+}
+
+// A structure that contains the configuration information of a delta time session
+// window. DeltaTime
+// (https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html)
+// specifies a time interval. You can use DeltaTime to create dataset contents with
+// data that has arrived in the data store since the last execution. For an example
+// of DeltaTime, see  Creating a SQL dataset with a delta window (CLI)
+// (https://docs.aws.amazon.com/iotanalytics/latest/userguide/automate-create-dataset.html#automate-example6)
+// in the AWS IoT Analytics User Guide.
+type DeltaTimeSessionWindowConfiguration struct {
+
+	// A time interval. You can use timeoutInMinutes so that AWS IoT Analytics can
+	// batch up late data notifications that have been generated since the last
+	// execution. AWS IoT Analytics sends one batch of notifications to Amazon
+	// CloudWatch Events at one time. For more information about how to write a
+	// timestamp expression, see Date and Time Functions and Operators
+	// (https://prestodb.io/docs/0.172/functions/datetime.html), in the Presto 0.172
+	// Documentation.
+	//
+	// This member is required.
+	TimeoutInMinutes *int32
 }
 
 // An activity that adds data from the AWS IoT device registry to your message.
@@ -559,7 +610,7 @@ type DeviceRegistryEnrichActivity struct {
 	// This member is required.
 	Attribute *string
 
-	// The name of the 'deviceRegistryEnrich' activity.
+	// The name of the deviceRegistryEnrich activity.
 	//
 	// This member is required.
 	Name *string
@@ -578,7 +629,7 @@ type DeviceRegistryEnrichActivity struct {
 	Next *string
 }
 
-// An activity that adds information from the AWS IoT Device Shadows service to a
+// An activity that adds information from the AWS IoT Device Shadow service to a
 // message.
 type DeviceShadowEnrichActivity struct {
 
@@ -587,7 +638,7 @@ type DeviceShadowEnrichActivity struct {
 	// This member is required.
 	Attribute *string
 
-	// The name of the 'deviceShadowEnrich' activity.
+	// The name of the deviceShadowEnrich activity.
 	//
 	// This member is required.
 	Name *string
@@ -612,7 +663,7 @@ type EstimatedResourceSize struct {
 	// The time when the estimate of the size of the resource was made.
 	EstimatedOn *time.Time
 
-	// The estimated size of the resource in bytes.
+	// The estimated size of the resource, in bytes.
 	EstimatedSizeInBytes *float64
 }
 
@@ -620,12 +671,12 @@ type EstimatedResourceSize struct {
 type FilterActivity struct {
 
 	// An expression that looks like a SQL WHERE clause that must return a Boolean
-	// value.
+	// value. Messages that satisfy the condition are passed to the next activity.
 	//
 	// This member is required.
 	Filter *string
 
-	// The name of the 'filter' activity.
+	// The name of the filter activity.
 	//
 	// This member is required.
 	Name *string
@@ -634,34 +685,34 @@ type FilterActivity struct {
 	Next *string
 }
 
-// Configuration information for coordination with the AWS Glue ETL (extract,
-// transform and load) service.
+// Configuration information for coordination with AWS Glue, a fully managed
+// extract, transform and load (ETL) service.
 type GlueConfiguration struct {
 
 	// The name of the database in your AWS Glue Data Catalog in which the table is
-	// located. (An AWS Glue Data Catalog database contains Glue Data tables.)
+	// located. An AWS Glue Data Catalog database contains metadata tables.
 	//
 	// This member is required.
 	DatabaseName *string
 
-	// The name of the table in your AWS Glue Data Catalog which is used to perform the
-	// ETL (extract, transform and load) operations. (An AWS Glue Data Catalog table
-	// contains partitioned data and descriptions of data sources and targets.)
+	// The name of the table in your AWS Glue Data Catalog that is used to perform the
+	// ETL operations. An AWS Glue Data Catalog table contains partitioned data and
+	// descriptions of data sources and targets.
 	//
 	// This member is required.
 	TableName *string
 }
 
-// Configuration information for delivery of data set contents to AWS IoT Events.
+// Configuration information for delivery of dataset contents to AWS IoT Events.
 type IotEventsDestinationConfiguration struct {
 
-	// The name of the AWS IoT Events input to which data set contents are delivered.
+	// The name of the AWS IoT Events input to which dataset contents are delivered.
 	//
 	// This member is required.
 	InputName *string
 
-	// The ARN of the role which grants AWS IoT Analytics permission to deliver data
-	// set contents to an AWS IoT Events input.
+	// The ARN of the role that grants AWS IoT Analytics permission to deliver dataset
+	// contents to an AWS IoT Events input.
 	//
 	// This member is required.
 	RoleArn *string
@@ -670,9 +721,9 @@ type IotEventsDestinationConfiguration struct {
 // An activity that runs a Lambda function to modify the message.
 type LambdaActivity struct {
 
-	// The number of messages passed to the Lambda function for processing. The AWS
-	// Lambda function must be able to process all of these messages within five
-	// minutes, which is the maximum timeout duration for Lambda functions.
+	// The number of messages passed to the Lambda function for processing. The Lambda
+	// function must be able to process all of these messages within five minutes,
+	// which is the maximum timeout duration for Lambda functions.
 	//
 	// This member is required.
 	BatchSize *int32
@@ -682,13 +733,33 @@ type LambdaActivity struct {
 	// This member is required.
 	LambdaName *string
 
-	// The name of the 'lambda' activity.
+	// The name of the lambda activity.
 	//
 	// This member is required.
 	Name *string
 
 	// The next activity in the pipeline.
 	Next *string
+}
+
+// A structure that contains the name and configuration information of a late data
+// rule.
+type LateDataRule struct {
+
+	// The information needed to configure the late data rule.
+	//
+	// This member is required.
+	RuleConfiguration *LateDataRuleConfiguration
+
+	// The name of the late data rule.
+	RuleName *string
+}
+
+// The information needed to configure a delta time session window.
+type LateDataRuleConfiguration struct {
+
+	// The information needed to configure a delta time session window.
+	DeltaTimeSessionWindowConfiguration *DeltaTimeSessionWindowConfiguration
 }
 
 // Information about logging options.
@@ -699,7 +770,7 @@ type LoggingOptions struct {
 	// This member is required.
 	Enabled bool
 
-	// The logging level. Currently, only "ERROR" is supported.
+	// The logging level. Currently, only ERROR is supported.
 	//
 	// This member is required.
 	Level LoggingLevel
@@ -726,7 +797,7 @@ type MathActivity struct {
 	// This member is required.
 	Math *string
 
-	// The name of the 'math' activity.
+	// The name of the math activity.
 	//
 	// This member is required.
 	Name *string
@@ -738,15 +809,15 @@ type MathActivity struct {
 // Information about a message.
 type Message struct {
 
-	// The ID you wish to assign to the message. Each "messageId" must be unique within
+	// The ID you want to assign to the message. Each messageId must be unique within
 	// each batch sent.
 	//
 	// This member is required.
 	MessageId *string
 
-	// The payload of the message. This may be a JSON string or a Base64-encoded string
-	// representing binary data (in which case you must decode it by means of a
-	// pipeline activity).
+	// The payload of the message. This can be a JSON string or a base64-encoded string
+	// representing binary data, in which case you must decode it by means of a
+	// pipeline activity.
 	//
 	// This member is required.
 	Payload []byte
@@ -755,7 +826,7 @@ type Message struct {
 // The value of the variable as a structure that specifies an output file URI.
 type OutputFileUriValue struct {
 
-	// The URI of the location where data set contents are stored, usually the URI of a
+	// The URI of the location where dataset contents are stored, usually the URI of a
 	// file in an S3 bucket.
 	//
 	// This member is required.
@@ -799,7 +870,7 @@ type PipelineActivity struct {
 	// Adds data from the AWS IoT device registry to your message.
 	DeviceRegistryEnrich *DeviceRegistryEnrichActivity
 
-	// Adds information from the AWS IoT Device Shadows service to a message.
+	// Adds information from the AWS IoT Device Shadow service to a message.
 	DeviceShadowEnrich *DeviceShadowEnrichActivity
 
 	// Filters a message based on its attributes.
@@ -836,8 +907,8 @@ type PipelineSummary struct {
 	ReprocessingSummaries []ReprocessingSummary
 }
 
-// Information which is used to filter message data, to segregate it according to
-// the time frame in which it arrives.
+// Information that is used to filter message data, to segregate it according to
+// the timeframe in which it arrives.
 type QueryFilter struct {
 
 	// Used to limit data to that which has arrived since the last execution of the
@@ -853,7 +924,7 @@ type RemoveAttributesActivity struct {
 	// This member is required.
 	Attributes []string
 
-	// The name of the 'removeAttributes' activity.
+	// The name of the removeAttributes activity.
 	//
 	// This member is required.
 	Name *string
@@ -868,24 +939,24 @@ type ReprocessingSummary struct {
 	// The time the pipeline reprocessing was created.
 	CreationTime *time.Time
 
-	// The 'reprocessingId' returned by "StartPipelineReprocessing".
+	// The reprocessingId returned by StartPipelineReprocessing.
 	Id *string
 
 	// The status of the pipeline reprocessing.
 	Status ReprocessingStatus
 }
 
-// The configuration of the resource used to execute the "containerAction".
+// The configuration of the resource used to execute the containerAction.
 type ResourceConfiguration struct {
 
-	// The type of the compute resource used to execute the "containerAction". Possible
-	// values are: ACU_1 (vCPU=4, memory=16GiB) or ACU_2 (vCPU=8, memory=32GiB).
+	// The type of the compute resource used to execute the containerAction. Possible
+	// values are: ACU_1 (vCPU=4, memory=16 GiB) or ACU_2 (vCPU=8, memory=32 GiB).
 	//
 	// This member is required.
 	ComputeType ComputeType
 
-	// The size (in GB) of the persistent storage available to the resource instance
-	// used to execute the "containerAction" (min: 1, max: 50).
+	// The size, in GB, of the persistent storage available to the resource instance
+	// used to execute the containerAction (min: 1, max: 50).
 	//
 	// This member is required.
 	VolumeSizeInGB int32
@@ -894,7 +965,7 @@ type ResourceConfiguration struct {
 // How long, in days, message data is kept.
 type RetentionPeriod struct {
 
-	// The number of days that message data is kept. The "unlimited" parameter must be
+	// The number of days that message data is kept. The unlimited parameter must be
 	// false.
 	NumberOfDays *int32
 
@@ -902,33 +973,47 @@ type RetentionPeriod struct {
 	Unlimited bool
 }
 
-// Configuration information for delivery of data set contents to Amazon S3.
+// Configuration information for delivery of dataset contents to Amazon Simple
+// Storage Service (Amazon S3).
 type S3DestinationConfiguration struct {
 
-	// The name of the Amazon S3 bucket to which data set contents are delivered.
+	// The name of the S3 bucket to which dataset contents are delivered.
 	//
 	// This member is required.
 	Bucket *string
 
-	// The key of the data set contents object. Each object in an Amazon S3 bucket has
-	// a key that is its unique identifier within the bucket (each object in a bucket
-	// has exactly one key). To produce a unique key, you can use
-	// "!{iotanalytics:scheduledTime}" to insert the time of the scheduled SQL query
-	// run, or "!{iotanalytics:versioned} to insert a unique hash identifying the data
-	// set, for example:
-	// "/DataSet/!{iotanalytics:scheduledTime}/!{iotanalytics:versioned}.csv".
+	// The key of the dataset contents object in an S3 bucket. Each object has a key
+	// that is a unique identifier. Each object has exactly one key. You can create a
+	// unique key with the following options:
+	//
+	// * Use !{iotanalytics:scheduleTime} to
+	// insert the time of a scheduled SQL query run.
+	//
+	// * Use !{iotanalytics:versionId}
+	// to insert a unique hash that identifies a dataset content.
+	//
+	// * Use
+	// !{iotanalytics:creationTime} to insert the creation time of a dataset
+	// content.
+	//
+	// The following example creates a unique key for a CSV file:
+	// dataset/mydataset/!{iotanalytics:scheduleTime}/!{iotanalytics:versionId}.csv If
+	// you don't use !{iotanalytics:versionId} to specify the key, you might get
+	// duplicate keys. For example, you might have two dataset contents with the same
+	// scheduleTime but different versionIds. This means that one dataset content
+	// overwrites the other.
 	//
 	// This member is required.
 	Key *string
 
-	// The ARN of the role which grants AWS IoT Analytics permission to interact with
+	// The ARN of the role that grants AWS IoT Analytics permission to interact with
 	// your Amazon S3 and AWS Glue resources.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// Configuration information for coordination with the AWS Glue ETL (extract,
-	// transform and load) service.
+	// Configuration information for coordination with AWS Glue, a fully managed
+	// extract, transform and load (ETL) service.
 	GlueConfiguration *GlueConfiguration
 }
 
@@ -951,7 +1036,7 @@ type SelectAttributesActivity struct {
 	// This member is required.
 	Attributes []string
 
-	// The name of the 'selectAttributes' activity.
+	// The name of the selectAttributes activity.
 	//
 	// This member is required.
 	Name *string
@@ -960,25 +1045,23 @@ type SelectAttributesActivity struct {
 	Next *string
 }
 
-// Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics
-// service. The choice of service-managed or customer-managed S3 storage cannot be
-// changed after creation of the channel.
+// Use this to store channel data in an S3 bucket managed by AWS IoT Analytics. You
+// cannot change the choice of service-managed or customer-managed S3 storage after
+// the channel is created.
 type ServiceManagedChannelS3Storage struct {
 }
 
-// Used to store channel data in an S3 bucket managed by the AWS IoT Analytics
-// service.
+// Used to store channel data in an S3 bucket managed by AWS IoT Analytics.
 type ServiceManagedChannelS3StorageSummary struct {
 }
 
-// Use this to store data store data in an S3 bucket managed by the AWS IoT
-// Analytics service. The choice of service-managed or customer-managed S3 storage
-// cannot be changed after creation of the data store.
+// Use this to store data store data in an S3 bucket managed by AWS IoT Analytics.
+// You cannot change the choice of service-managed or customer-managed S3 storage
+// after the data store is created.
 type ServiceManagedDatastoreS3Storage struct {
 }
 
-// Used to store data store data in an S3 bucket managed by the AWS IoT Analytics
-// service.
+// Used to store data store data in an S3 bucket managed by AWS IoT Analytics.
 type ServiceManagedDatastoreS3StorageSummary struct {
 }
 
@@ -990,11 +1073,11 @@ type SqlQueryDatasetAction struct {
 	// This member is required.
 	SqlQuery *string
 
-	// Pre-filters applied to message data.
+	// Prefilters applied to message data.
 	Filters []QueryFilter
 }
 
-// A set of key/value pairs which are used to manage the resource.
+// A set of key-value pairs that are used to manage the resource.
 type Tag struct {
 
 	// The tag's key.
@@ -1008,20 +1091,20 @@ type Tag struct {
 	Value *string
 }
 
-// Information about the data set whose content generation triggers the new data
-// set content generation.
+// Information about the dataset whose content generation triggers the new dataset
+// content generation.
 type TriggeringDataset struct {
 
-	// The name of the data set whose content generation triggers the new data set
+	// The name of the dataset whose content generation triggers the new dataset
 	// content generation.
 	//
 	// This member is required.
 	Name *string
 }
 
-// An instance of a variable to be passed to the "containerAction" execution. Each
-// variable must have a name and a value given by one of "stringValue",
-// "datasetContentVersionValue", or "outputFileUriValue".
+// An instance of a variable to be passed to the containerAction execution. Each
+// variable must have a name and a value given by one of stringValue,
+// datasetContentVersionValue, or outputFileUriValue.
 type Variable struct {
 
 	// The name of the variable.
@@ -1029,7 +1112,7 @@ type Variable struct {
 	// This member is required.
 	Name *string
 
-	// The value of the variable as a structure that specifies a data set content
+	// The value of the variable as a structure that specifies a dataset content
 	// version.
 	DatasetContentVersionValue *DatasetContentVersionValue
 
@@ -1043,13 +1126,13 @@ type Variable struct {
 	StringValue *string
 }
 
-// Information about the versioning of data set contents.
+// Information about the versioning of dataset contents.
 type VersioningConfiguration struct {
 
-	// How many versions of data set contents will be kept. The "unlimited" parameter
-	// must be false.
+	// How many versions of dataset contents are kept. The unlimited parameter must be
+	// false.
 	MaxVersions *int32
 
-	// If true, unlimited versions of data set contents will be kept.
+	// If true, unlimited versions of dataset contents are kept.
 	Unlimited bool
 }

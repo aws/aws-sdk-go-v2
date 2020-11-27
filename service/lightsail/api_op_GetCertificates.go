@@ -33,13 +33,13 @@ func (c *Client) GetCertificates(ctx context.Context, params *GetCertificatesInp
 type GetCertificatesInput struct {
 
 	// The name for the certificate for which to return information. When omitted, the
-	// response includes all of your certificates in the AWS region where the request
+	// response includes all of your certificates in the AWS Region where the request
 	// is made.
 	CertificateName *string
 
 	// The status of the certificates for which to return information. For example,
 	// specify ISSUED to return only certificates with an ISSUED status. When omitted,
-	// the response includes all of your certificates in the AWS region where the
+	// the response includes all of your certificates in the AWS Region where the
 	// request is made, regardless of their current status.
 	CertificateStatuses []types.CertificateStatus
 

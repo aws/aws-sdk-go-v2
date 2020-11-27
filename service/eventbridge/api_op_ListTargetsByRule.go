@@ -34,8 +34,8 @@ type ListTargetsByRuleInput struct {
 	// This member is required.
 	Rule *string
 
-	// The event bus associated with the rule. If you omit this, the default event bus
-	// is used.
+	// The name or ARN of the event bus associated with the rule. If you omit this, the
+	// default event bus is used.
 	EventBusName *string
 
 	// The maximum number of results to return.

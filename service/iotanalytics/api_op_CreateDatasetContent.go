@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates the content of a data set by applying a "queryAction" (a SQL query) or a
-// "containerAction" (executing a containerized application).
+// Creates the content of a data set by applying a queryAction (a SQL query) or a
+// containerAction (executing a containerized application).
 func (c *Client) CreateDatasetContent(ctx context.Context, params *CreateDatasetContentInput, optFns ...func(*Options)) (*CreateDatasetContentOutput, error) {
 	if params == nil {
 		params = &CreateDatasetContentInput{}
@@ -29,15 +29,21 @@ func (c *Client) CreateDatasetContent(ctx context.Context, params *CreateDataset
 
 type CreateDatasetContentInput struct {
 
-	// The name of the data set.
+	// The name of the dataset.
 	//
 	// This member is required.
 	DatasetName *string
+
+	// The version ID of the dataset content. To specify versionId for a dataset
+	// content, the dataset must use a DeltaTimer
+	// (https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html)
+	// filter.
+	VersionId *string
 }
 
 type CreateDatasetContentOutput struct {
 
-	// The version ID of the data set contents which are being created.
+	// The version ID of the dataset contents that are being created.
 	VersionId *string
 
 	// Metadata pertaining to the operation's result.

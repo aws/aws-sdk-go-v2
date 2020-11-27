@@ -687,11 +687,11 @@ func validateAccountDetail(v *types.AccountDetail) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AccountDetail"}
-	if v.Email == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Email"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Email == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Email"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -740,11 +740,11 @@ func validateOpAcceptInvitationInput(v *AcceptInvitationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AcceptInvitationInput"}
-	if v.MasterAccount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MasterAccount"))
-	}
 	if v.InvitationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InvitationId"))
+	}
+	if v.MasterAccount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MasterAccount"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -758,9 +758,6 @@ func validateOpCreateClassificationJobInput(v *CreateClassificationJobInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateClassificationJobInput"}
-	if v.S3JobDefinition == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3JobDefinition"))
-	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
@@ -769,6 +766,9 @@ func validateOpCreateClassificationJobInput(v *CreateClassificationJobInput) err
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.S3JobDefinition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3JobDefinition"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1081,11 +1081,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1168,11 +1168,11 @@ func validateOpUpdateMemberSessionInput(v *UpdateMemberSessionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateMemberSessionInput"}
-	if len(v.Status) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Status"))
-	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

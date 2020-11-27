@@ -9388,6 +9388,15 @@ func awsAwsjson11_deserializeDocumentReportGroup(v **types.ReportGroup, value in
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReportGroupStatusType to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ReportGroupStatusType(jtv)
+			}
+
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err

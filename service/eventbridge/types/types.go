@@ -6,6 +6,35 @@ import (
 	"time"
 )
 
+// An Archive object that contains details about an archive.
+type Archive struct {
+
+	// The name of the archive.
+	ArchiveName *string
+
+	// The time stamp for the time that the archive was created.
+	CreationTime *time.Time
+
+	// The number of events in the archive.
+	EventCount int64
+
+	// The ARN of the event bus associated with the archive. Only events from this
+	// event bus are sent to the archive.
+	EventSourceArn *string
+
+	// The number of days to retain events in the archive before they are deleted.
+	RetentionDays *int32
+
+	// The size of the archive, in bytes.
+	SizeBytes int64
+
+	// The current state of the archive.
+	State ArchiveState
+
+	// A description for the reason that the archive is in the current state.
+	StateReason *string
+}
+
 // This structure specifies the VPC subnets and security groups for the task, and
 // whether a public IP address is to be used. This structure is relevant only for
 // ECS tasks that use the awsvpc network mode.
@@ -334,8 +363,9 @@ type PutEventsRequestEntry struct {
 	// Free-form string used to decide what fields to expect in the event detail.
 	DetailType *string
 
-	// The event bus that will receive the event. Only the rules that are associated
-	// with this event bus will be able to match the event.
+	// The name or ARN of the event bus to receive the event. Only the rules that are
+	// associated with this event bus are used to match the event. If you omit this,
+	// the default event bus is used.
 	EventBusName *string
 
 	// AWS resources, identified by Amazon Resource Name (ARN), which the event
@@ -458,6 +488,53 @@ type RemoveTargetsResultEntry struct {
 	TargetId *string
 }
 
+// A Replay object that contains details about a replay.
+type Replay struct {
+
+	// A time stamp for the time to start replaying events. Any event with a creation
+	// time prior to the EventEndTime specified is replayed.
+	EventEndTime *time.Time
+
+	// A time stamp for the time that the last event was replayed.
+	EventLastReplayedTime *time.Time
+
+	// The ARN of the archive to replay event from.
+	EventSourceArn *string
+
+	// A time stamp for the time to start replaying events. This is determined by the
+	// time in the event as described in Time
+	// (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEventsRequestEntry.html#eventbridge-Type-PutEventsRequestEntry-Time).
+	EventStartTime *time.Time
+
+	// A time stamp for the time that the replay completed.
+	ReplayEndTime *time.Time
+
+	// The name of the replay.
+	ReplayName *string
+
+	// A time stamp for the time that the replay started.
+	ReplayStartTime *time.Time
+
+	// The current state of the replay.
+	State ReplayState
+
+	// A description of why the replay is in the current state.
+	StateReason *string
+}
+
+// A ReplayDestination object that contains details about a replay.
+type ReplayDestination struct {
+
+	// The ARN of the event bus to replay event to. You can replay events only to the
+	// event bus specified to create the archive.
+	//
+	// This member is required.
+	Arn *string
+
+	// A list of ARNs for rules to replay events to.
+	FilterArns []string
+}
+
 // A RetryPolicy object that includes information about the retry policy settings.
 type RetryPolicy struct {
 
@@ -479,7 +556,8 @@ type Rule struct {
 	// The description of the rule.
 	Description *string
 
-	// The event bus associated with the rule.
+	// The name or ARN of the event bus associated with the rule. If you omit this, the
+	// default event bus is used.
 	EventBusName *string
 
 	// The event pattern of the rule. For more information, see Events and Event

@@ -123,6 +123,12 @@ type DescribeRecoveryPointOutput struct {
 	// (Amazon RDS) database.
 	ResourceType *string
 
+	// An Amazon Resource Name (ARN) that uniquely identifies the source vault where
+	// the resource was originally backed up in; for example,
+	// arn:aws:backup:us-east-1:123456789012:vault:BackupVault. If the recovery is
+	// restored to the same AWS account or Region, this value will be null.
+	SourceBackupVaultArn *string
+
 	// A status code specifying the state of the recovery point. A partial status
 	// indicates that the recovery point was not successfully re-created and must be
 	// retried.

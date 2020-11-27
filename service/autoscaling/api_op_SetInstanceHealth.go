@@ -11,7 +11,7 @@ import (
 )
 
 // Sets the health status of the specified instance. For more information, see
-// Health Checks for Auto Scaling Instances
+// Health checks for Auto Scaling instances
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html) in the
 // Amazon EC2 Auto Scaling User Guide.
 func (c *Client) SetInstanceHealth(ctx context.Context, params *SetInstanceHealthInput, optFns ...func(*Options)) (*SetInstanceHealthOutput, error) {

@@ -128,6 +128,10 @@ type Block struct {
 
 	// The word or line of text that's recognized by Amazon Textract.
 	Text *string
+
+	// The kind of text that Amazon Textract has detected. Can check for handwritten
+	// text and printed text.
+	TextType TextType
 }
 
 // The bounding box around the detected page, text, key-value pair, table, table

@@ -47,7 +47,24 @@ import (
 // that region. For more information, see Activating and Deactivating AWS STS in an
 // AWS Region
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
-// in the AWS Identity and Access Management User Guide.
+// in the AWS Identity and Access Management User Guide. To add the IAM role
+// policies for using this API operation, go to the IAM console
+// (https://console.aws.amazon.com/iam/), and choose Roles in the left navigation
+// pane. Search the IAM role that you want to grant access to use the
+// CreateEndpoint and CreateEndpointConfig API operations, add the following
+// policies to the role.
+//
+// * Option 1: For a full Amazon SageMaker access, search
+// and attach the AmazonSageMakerFullAccess policy.
+//
+// * Option 2: For granting a
+// limited access to an IAM role, paste the following Action elements manually into
+// the JSON file of the IAM role: "Action": ["sagemaker:CreateEndpoint",
+// "sagemaker:CreateEndpointConfig"]"Resource":
+// ["arn:aws:sagemaker:region:account-id:endpoint/endpointName""arn:aws:sagemaker:region:account-id:endpoint-config/endpointConfigName"]
+// For more information, see Amazon SageMaker API Permissions: Actions,
+// Permissions, and Resources Reference
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html).
 func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput, optFns ...func(*Options)) (*CreateEndpointOutput, error) {
 	if params == nil {
 		params = &CreateEndpointInput{}

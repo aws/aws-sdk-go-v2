@@ -12,11 +12,10 @@ import (
 )
 
 // Adds the specified tags to the specified Elastic Load Balancing resource. You
-// can tag your Application Load Balancers, Network Load Balancers, target groups,
-// listeners, and rules. Each tag consists of a key and an optional value. If a
-// resource already has a tag with the same key, AddTags updates its value. To list
-// the current tags for your resources, use DescribeTags. To remove tags from your
-// resources, use RemoveTags.
+// can tag your Application Load Balancers, Network Load Balancers, Gateway Load
+// Balancers, target groups, listeners, and rules. Each tag consists of a key and
+// an optional value. If a resource already has a tag with the same key, AddTags
+// updates its value.
 func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...func(*Options)) (*AddTagsOutput, error) {
 	if params == nil {
 		params = &AddTagsInput{}

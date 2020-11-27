@@ -290,6 +290,26 @@ func (m *validateOpCancelMLTaskRun) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCheckSchemaVersionValidity struct {
+}
+
+func (*validateOpCheckSchemaVersionValidity) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCheckSchemaVersionValidity) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CheckSchemaVersionValidityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCheckSchemaVersionValidityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateClassifier struct {
 }
 
@@ -445,6 +465,46 @@ func (m *validateOpCreatePartition) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreatePartitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRegistry struct {
+}
+
+func (*validateOpCreateRegistry) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRegistry) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRegistryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRegistryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateSchema struct {
+}
+
+func (*validateOpCreateSchema) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSchema) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSchemaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSchemaInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -765,6 +825,66 @@ func (m *validateOpDeletePartition) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeletePartitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRegistry struct {
+}
+
+func (*validateOpDeleteRegistry) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRegistry) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRegistryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRegistryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSchema struct {
+}
+
+func (*validateOpDeleteSchema) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSchema) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSchemaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSchemaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSchemaVersions struct {
+}
+
+func (*validateOpDeleteSchemaVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSchemaVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSchemaVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSchemaVersionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1290,6 +1410,86 @@ func (m *validateOpGetPlan) HandleInitialize(ctx context.Context, in middleware.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetRegistry struct {
+}
+
+func (*validateOpGetRegistry) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRegistry) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRegistryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRegistryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSchemaByDefinition struct {
+}
+
+func (*validateOpGetSchemaByDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSchemaByDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSchemaByDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSchemaByDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSchema struct {
+}
+
+func (*validateOpGetSchema) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSchema) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSchemaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSchemaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSchemaVersionsDiff struct {
+}
+
+func (*validateOpGetSchemaVersionsDiff) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSchemaVersionsDiff) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSchemaVersionsDiffInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSchemaVersionsDiffInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSecurityConfiguration struct {
 }
 
@@ -1570,6 +1770,26 @@ func (m *validateOpListMLTransforms) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListSchemaVersions struct {
+}
+
+func (*validateOpListSchemaVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSchemaVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSchemaVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSchemaVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutDataCatalogEncryptionSettings struct {
 }
 
@@ -1610,6 +1830,26 @@ func (m *validateOpPutResourcePolicy) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutSchemaVersionMetadata struct {
+}
+
+func (*validateOpPutSchemaVersionMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutSchemaVersionMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutSchemaVersionMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutSchemaVersionMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutWorkflowRunProperties struct {
 }
 
@@ -1625,6 +1865,46 @@ func (m *validateOpPutWorkflowRunProperties) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutWorkflowRunPropertiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRegisterSchemaVersion struct {
+}
+
+func (*validateOpRegisterSchemaVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterSchemaVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterSchemaVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterSchemaVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRemoveSchemaVersionMetadata struct {
+}
+
+func (*validateOpRemoveSchemaVersionMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveSchemaVersionMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveSchemaVersionMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveSchemaVersionMetadataInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2190,6 +2470,46 @@ func (m *validateOpUpdatePartition) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRegistry struct {
+}
+
+func (*validateOpUpdateRegistry) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRegistry) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRegistryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRegistryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateSchema struct {
+}
+
+func (*validateOpUpdateSchema) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSchema) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSchemaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSchemaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTable struct {
 }
 
@@ -2326,6 +2646,10 @@ func addOpCancelMLTaskRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelMLTaskRun{}, middleware.After)
 }
 
+func addOpCheckSchemaVersionValidityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCheckSchemaVersionValidity{}, middleware.After)
+}
+
 func addOpCreateClassifierValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateClassifier{}, middleware.After)
 }
@@ -2356,6 +2680,14 @@ func addOpCreateMLTransformValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreatePartitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePartition{}, middleware.After)
+}
+
+func addOpCreateRegistryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRegistry{}, middleware.After)
+}
+
+func addOpCreateSchemaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSchema{}, middleware.After)
 }
 
 func addOpCreateScriptValidationMiddleware(stack *middleware.Stack) error {
@@ -2420,6 +2752,18 @@ func addOpDeleteMLTransformValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeletePartitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePartition{}, middleware.After)
+}
+
+func addOpDeleteRegistryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRegistry{}, middleware.After)
+}
+
+func addOpDeleteSchemaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSchema{}, middleware.After)
+}
+
+func addOpDeleteSchemaVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSchemaVersions{}, middleware.After)
 }
 
 func addOpDeleteSecurityConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -2526,6 +2870,22 @@ func addOpGetPlanValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPlan{}, middleware.After)
 }
 
+func addOpGetRegistryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRegistry{}, middleware.After)
+}
+
+func addOpGetSchemaByDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSchemaByDefinition{}, middleware.After)
+}
+
+func addOpGetSchemaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSchema{}, middleware.After)
+}
+
+func addOpGetSchemaVersionsDiffValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSchemaVersionsDiff{}, middleware.After)
+}
+
 func addOpGetSecurityConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSecurityConfiguration{}, middleware.After)
 }
@@ -2582,6 +2942,10 @@ func addOpListMLTransformsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListMLTransforms{}, middleware.After)
 }
 
+func addOpListSchemaVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSchemaVersions{}, middleware.After)
+}
+
 func addOpPutDataCatalogEncryptionSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutDataCatalogEncryptionSettings{}, middleware.After)
 }
@@ -2590,8 +2954,20 @@ func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutResourcePolicy{}, middleware.After)
 }
 
+func addOpPutSchemaVersionMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutSchemaVersionMetadata{}, middleware.After)
+}
+
 func addOpPutWorkflowRunPropertiesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutWorkflowRunProperties{}, middleware.After)
+}
+
+func addOpRegisterSchemaVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterSchemaVersion{}, middleware.After)
+}
+
+func addOpRemoveSchemaVersionMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveSchemaVersionMetadata{}, middleware.After)
 }
 
 func addOpResetJobBookmarkValidationMiddleware(stack *middleware.Stack) error {
@@ -2704,6 +3080,14 @@ func addOpUpdateMLTransformValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdatePartitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePartition{}, middleware.After)
+}
+
+func addOpUpdateRegistryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRegistry{}, middleware.After)
+}
+
+func addOpUpdateSchemaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSchema{}, middleware.After)
 }
 
 func addOpUpdateTableValidationMiddleware(stack *middleware.Stack) error {
@@ -2912,18 +3296,18 @@ func validateCodeGenNode(v *types.CodeGenNode) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CodeGenNode"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.NodeType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeType"))
+	}
 	if v.Args == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Args"))
 	} else if v.Args != nil {
 		if err := validateCodeGenNodeArgs(v.Args); err != nil {
 			invalidParams.AddNested("Args", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
-	if v.NodeType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NodeType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3007,18 +3391,18 @@ func validateColumnStatistics(v *types.ColumnStatistics) error {
 	if v.ColumnName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
 	}
+	if v.ColumnType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnType"))
+	}
+	if v.AnalyzedTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalyzedTime"))
+	}
 	if v.StatisticsData == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StatisticsData"))
 	} else if v.StatisticsData != nil {
 		if err := validateColumnStatisticsData(v.StatisticsData); err != nil {
 			invalidParams.AddNested("StatisticsData", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.AnalyzedTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AnalyzedTime"))
-	}
-	if v.ColumnType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ColumnType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3032,19 +3416,22 @@ func validateColumnStatisticsData(v *types.ColumnStatisticsData) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ColumnStatisticsData"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
 	if v.BooleanColumnStatisticsData != nil {
 		if err := validateBooleanColumnStatisticsData(v.BooleanColumnStatisticsData); err != nil {
 			invalidParams.AddNested("BooleanColumnStatisticsData", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.DateColumnStatisticsData != nil {
+		if err := validateDateColumnStatisticsData(v.DateColumnStatisticsData); err != nil {
+			invalidParams.AddNested("DateColumnStatisticsData", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.DecimalColumnStatisticsData != nil {
 		if err := validateDecimalColumnStatisticsData(v.DecimalColumnStatisticsData); err != nil {
 			invalidParams.AddNested("DecimalColumnStatisticsData", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.BinaryColumnStatisticsData != nil {
-		if err := validateBinaryColumnStatisticsData(v.BinaryColumnStatisticsData); err != nil {
-			invalidParams.AddNested("BinaryColumnStatisticsData", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.DoubleColumnStatisticsData != nil {
@@ -3057,17 +3444,14 @@ func validateColumnStatisticsData(v *types.ColumnStatisticsData) error {
 			invalidParams.AddNested("LongColumnStatisticsData", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
 	if v.StringColumnStatisticsData != nil {
 		if err := validateStringColumnStatisticsData(v.StringColumnStatisticsData); err != nil {
 			invalidParams.AddNested("StringColumnStatisticsData", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.DateColumnStatisticsData != nil {
-		if err := validateDateColumnStatisticsData(v.DateColumnStatisticsData); err != nil {
-			invalidParams.AddNested("DateColumnStatisticsData", err.(smithy.InvalidParamsError))
+	if v.BinaryColumnStatisticsData != nil {
+		if err := validateBinaryColumnStatisticsData(v.BinaryColumnStatisticsData); err != nil {
+			invalidParams.AddNested("BinaryColumnStatisticsData", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3186,11 +3570,11 @@ func validateCreateXMLClassifierRequest(v *types.CreateXMLClassifierRequest) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateXMLClassifierRequest"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.Classification == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Classification"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3253,14 +3637,14 @@ func validateDataCatalogEncryptionSettings(v *types.DataCatalogEncryptionSetting
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DataCatalogEncryptionSettings"}
-	if v.ConnectionPasswordEncryption != nil {
-		if err := validateConnectionPasswordEncryption(v.ConnectionPasswordEncryption); err != nil {
-			invalidParams.AddNested("ConnectionPasswordEncryption", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.EncryptionAtRest != nil {
 		if err := validateEncryptionAtRest(v.EncryptionAtRest); err != nil {
 			invalidParams.AddNested("EncryptionAtRest", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConnectionPasswordEncryption != nil {
+		if err := validateConnectionPasswordEncryption(v.ConnectionPasswordEncryption); err != nil {
+			invalidParams.AddNested("ConnectionPasswordEncryption", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3287,14 +3671,14 @@ func validateDecimalColumnStatisticsData(v *types.DecimalColumnStatisticsData) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DecimalColumnStatisticsData"}
-	if v.MaximumValue != nil {
-		if err := validateDecimalNumber(v.MaximumValue); err != nil {
-			invalidParams.AddNested("MaximumValue", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.MinimumValue != nil {
 		if err := validateDecimalNumber(v.MinimumValue); err != nil {
 			invalidParams.AddNested("MinimumValue", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MaximumValue != nil {
+		if err := validateDecimalNumber(v.MaximumValue); err != nil {
+			invalidParams.AddNested("MaximumValue", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3351,11 +3735,11 @@ func validateGlueTable(v *types.GlueTable) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GlueTable"}
-	if v.TableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
-	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3386,14 +3770,14 @@ func validateLocation(v *types.Location) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Location"}
-	if v.S3 != nil {
-		if err := validateCodeGenNodeArgs(v.S3); err != nil {
-			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Jdbc != nil {
 		if err := validateCodeGenNodeArgs(v.Jdbc); err != nil {
 			invalidParams.AddNested("Jdbc", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3 != nil {
+		if err := validateCodeGenNodeArgs(v.S3); err != nil {
+			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.DynamoDB != nil {
@@ -3568,14 +3952,14 @@ func validateStorageDescriptor(v *types.StorageDescriptor) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StorageDescriptor"}
-	if v.SortColumns != nil {
-		if err := validateOrderList(v.SortColumns); err != nil {
-			invalidParams.AddNested("SortColumns", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Columns != nil {
 		if err := validateColumnList(v.Columns); err != nil {
 			invalidParams.AddNested("Columns", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SortColumns != nil {
+		if err := validateOrderList(v.SortColumns); err != nil {
+			invalidParams.AddNested("SortColumns", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3627,11 +4011,11 @@ func validateTaskRunSortCriteria(v *types.TaskRunSortCriteria) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TaskRunSortCriteria"}
-	if len(v.SortDirection) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("SortDirection"))
-	}
 	if len(v.Column) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Column"))
+	}
+	if len(v.SortDirection) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortDirection"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3677,11 +4061,11 @@ func validateTransformSortCriteria(v *types.TransformSortCriteria) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TransformSortCriteria"}
-	if len(v.SortDirection) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("SortDirection"))
-	}
 	if len(v.Column) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Column"))
+	}
+	if len(v.SortDirection) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortDirection"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3815,15 +4199,15 @@ func validateOpBatchDeletePartitionInput(v *BatchDeletePartitionInput) error {
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
 	if v.PartitionsToDelete == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PartitionsToDelete"))
 	} else if v.PartitionsToDelete != nil {
 		if err := validateBatchDeletePartitionValueList(v.PartitionsToDelete); err != nil {
 			invalidParams.AddNested("PartitionsToDelete", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.TableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3837,11 +4221,11 @@ func validateOpBatchDeleteTableInput(v *BatchDeleteTableInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteTableInput"}
-	if v.TablesToDelete == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TablesToDelete"))
-	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TablesToDelete == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TablesToDelete"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3855,14 +4239,14 @@ func validateOpBatchDeleteTableVersionInput(v *BatchDeleteTableVersionInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteTableVersionInput"}
-	if v.VersionIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VersionIds"))
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
-	if v.DatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	if v.VersionIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3924,15 +4308,15 @@ func validateOpBatchGetPartitionInput(v *BatchGetPartitionInput) error {
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
 	if v.PartitionsToGet == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PartitionsToGet"))
 	} else if v.PartitionsToGet != nil {
 		if err := validateBatchGetPartitionValueList(v.PartitionsToGet); err != nil {
 			invalidParams.AddNested("PartitionsToGet", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.TableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3976,11 +4360,11 @@ func validateOpBatchStopJobRunInput(v *BatchStopJobRunInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchStopJobRunInput"}
-	if v.JobRunIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobRunIds"))
-	}
 	if v.JobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if v.JobRunIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobRunIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3994,11 +4378,11 @@ func validateOpBatchUpdatePartitionInput(v *BatchUpdatePartitionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdatePartitionInput"}
-	if v.TableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
-	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if v.Entries == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Entries"))
@@ -4032,6 +4416,24 @@ func validateOpCancelMLTaskRunInput(v *CancelMLTaskRunInput) error {
 	}
 }
 
+func validateOpCheckSchemaVersionValidityInput(v *CheckSchemaVersionValidityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CheckSchemaVersionValidityInput"}
+	if len(v.DataFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DataFormat"))
+	}
+	if v.SchemaDefinition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaDefinition"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateClassifierInput(v *CreateClassifierInput) error {
 	if v == nil {
 		return nil
@@ -4047,14 +4449,14 @@ func validateOpCreateClassifierInput(v *CreateClassifierInput) error {
 			invalidParams.AddNested("XMLClassifier", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.CsvClassifier != nil {
-		if err := validateCreateCsvClassifierRequest(v.CsvClassifier); err != nil {
-			invalidParams.AddNested("CsvClassifier", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.JsonClassifier != nil {
 		if err := validateCreateJsonClassifierRequest(v.JsonClassifier); err != nil {
 			invalidParams.AddNested("JsonClassifier", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CsvClassifier != nil {
+		if err := validateCreateCsvClassifierRequest(v.CsvClassifier); err != nil {
+			invalidParams.AddNested("CsvClassifier", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4088,11 +4490,11 @@ func validateOpCreateCrawlerInput(v *CreateCrawlerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCrawlerInput"}
-	if v.Role == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Role"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Role == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
 	}
 	if v.Targets == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Targets"))
@@ -4132,11 +4534,11 @@ func validateOpCreateDevEndpointInput(v *CreateDevEndpointInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDevEndpointInput"}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
 	if v.EndpointName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4150,14 +4552,14 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateJobInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.Role == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Role"))
 	}
 	if v.Command == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Command"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4174,12 +4576,11 @@ func validateOpCreateMLTransformInput(v *CreateMLTransformInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.Role == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Role"))
-	}
-	if v.TransformEncryption != nil {
-		if err := validateTransformEncryption(v.TransformEncryption); err != nil {
-			invalidParams.AddNested("TransformEncryption", err.(smithy.InvalidParamsError))
+	if v.InputRecordTables == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputRecordTables"))
+	} else if v.InputRecordTables != nil {
+		if err := validateGlueTables(v.InputRecordTables); err != nil {
+			invalidParams.AddNested("InputRecordTables", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Parameters == nil {
@@ -4189,11 +4590,12 @@ func validateOpCreateMLTransformInput(v *CreateMLTransformInput) error {
 			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.InputRecordTables == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputRecordTables"))
-	} else if v.InputRecordTables != nil {
-		if err := validateGlueTables(v.InputRecordTables); err != nil {
-			invalidParams.AddNested("InputRecordTables", err.(smithy.InvalidParamsError))
+	if v.Role == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if v.TransformEncryption != nil {
+		if err := validateTransformEncryption(v.TransformEncryption); err != nil {
+			invalidParams.AddNested("TransformEncryption", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4220,6 +4622,39 @@ func validateOpCreatePartitionInput(v *CreatePartitionInput) error {
 		if err := validatePartitionInput(v.PartitionInput); err != nil {
 			invalidParams.AddNested("PartitionInput", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRegistryInput(v *CreateRegistryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRegistryInput"}
+	if v.RegistryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistryName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateSchemaInput(v *CreateSchemaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSchemaInput"}
+	if v.SchemaName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
+	}
+	if len(v.DataFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DataFormat"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4255,11 +4690,11 @@ func validateOpCreateSecurityConfigurationInput(v *CreateSecurityConfigurationIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSecurityConfigurationInput"}
-	if v.EncryptionConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EncryptionConfiguration"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.EncryptionConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EncryptionConfiguration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4321,11 +4756,11 @@ func validateOpCreateUserDefinedFunctionInput(v *CreateUserDefinedFunctionInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateUserDefinedFunctionInput"}
-	if v.FunctionInput == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionInput"))
-	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.FunctionInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionInput"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4369,17 +4804,17 @@ func validateOpDeleteColumnStatisticsForPartitionInput(v *DeleteColumnStatistics
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteColumnStatisticsForPartitionInput"}
-	if v.PartitionValues == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PartitionValues"))
-	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
-	if v.ColumnName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
-	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.PartitionValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartitionValues"))
+	}
+	if v.ColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4393,14 +4828,14 @@ func validateOpDeleteColumnStatisticsForTableInput(v *DeleteColumnStatisticsForT
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteColumnStatisticsForTableInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if v.ColumnName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
-	}
-	if v.DatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4504,14 +4939,62 @@ func validateOpDeletePartitionInput(v *DeletePartitionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeletePartitionInput"}
-	if v.PartitionValues == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PartitionValues"))
-	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.PartitionValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartitionValues"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRegistryInput(v *DeleteRegistryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRegistryInput"}
+	if v.RegistryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSchemaInput(v *DeleteSchemaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSchemaInput"}
+	if v.SchemaId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSchemaVersionsInput(v *DeleteSchemaVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSchemaVersionsInput"}
+	if v.SchemaId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaId"))
+	}
+	if v.Versions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Versions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4540,11 +5023,11 @@ func validateOpDeleteTableInput(v *DeleteTableInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTableInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4558,11 +5041,11 @@ func validateOpDeleteTableVersionInput(v *DeleteTableVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTableVersionInput"}
-	if v.TableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
-	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if v.VersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VersionId"))
@@ -4594,11 +5077,11 @@ func validateOpDeleteUserDefinedFunctionInput(v *DeleteUserDefinedFunctionInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteUserDefinedFunctionInput"}
-	if v.FunctionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
-	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4642,17 +5125,17 @@ func validateOpGetColumnStatisticsForPartitionInput(v *GetColumnStatisticsForPar
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetColumnStatisticsForPartitionInput"}
-	if v.ColumnNames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ColumnNames"))
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
-	if v.DatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
-	}
 	if v.PartitionValues == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PartitionValues"))
+	}
+	if v.ColumnNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnNames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4777,11 +5260,11 @@ func validateOpGetJobRunInput(v *GetJobRunInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetJobRunInput"}
-	if v.RunId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RunId"))
-	}
 	if v.JobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if v.RunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4810,11 +5293,6 @@ func validateOpGetMappingInput(v *GetMappingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetMappingInput"}
-	if v.Location != nil {
-		if err := validateLocation(v.Location); err != nil {
-			invalidParams.AddNested("Location", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Source == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Source"))
 	} else if v.Source != nil {
@@ -4825,6 +5303,11 @@ func validateOpGetMappingInput(v *GetMappingInput) error {
 	if v.Sinks != nil {
 		if err := validateCatalogEntries(v.Sinks); err != nil {
 			invalidParams.AddNested("Sinks", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Location != nil {
+		if err := validateLocation(v.Location); err != nil {
+			invalidParams.AddNested("Location", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4857,13 +5340,13 @@ func validateOpGetMLTaskRunsInput(v *GetMLTaskRunsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetMLTaskRunsInput"}
+	if v.TransformId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransformId"))
+	}
 	if v.Sort != nil {
 		if err := validateTaskRunSortCriteria(v.Sort); err != nil {
 			invalidParams.AddNested("Sort", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.TransformId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TransformId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4909,11 +5392,11 @@ func validateOpGetPartitionIndexesInput(v *GetPartitionIndexesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetPartitionIndexesInput"}
-	if v.TableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
-	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4927,11 +5410,11 @@ func validateOpGetPartitionInput(v *GetPartitionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetPartitionInput"}
-	if v.TableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
-	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if v.PartitionValues == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PartitionValues"))
@@ -4948,6 +5431,9 @@ func validateOpGetPartitionsInput(v *GetPartitionsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetPartitionsInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
@@ -4955,9 +5441,6 @@ func validateOpGetPartitionsInput(v *GetPartitionsInput) error {
 		if err := validateSegment(v.Segment); err != nil {
 			invalidParams.AddNested("Segment", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.DatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4971,6 +5454,9 @@ func validateOpGetPlanInput(v *GetPlanInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetPlanInput"}
+	if v.Mapping == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Mapping"))
+	}
 	if v.Source == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Source"))
 	} else if v.Source != nil {
@@ -4978,18 +5464,87 @@ func validateOpGetPlanInput(v *GetPlanInput) error {
 			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Mapping == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Mapping"))
+	if v.Sinks != nil {
+		if err := validateCatalogEntries(v.Sinks); err != nil {
+			invalidParams.AddNested("Sinks", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Location != nil {
 		if err := validateLocation(v.Location); err != nil {
 			invalidParams.AddNested("Location", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Sinks != nil {
-		if err := validateCatalogEntries(v.Sinks); err != nil {
-			invalidParams.AddNested("Sinks", err.(smithy.InvalidParamsError))
-		}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRegistryInput(v *GetRegistryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRegistryInput"}
+	if v.RegistryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSchemaByDefinitionInput(v *GetSchemaByDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSchemaByDefinitionInput"}
+	if v.SchemaId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaId"))
+	}
+	if v.SchemaDefinition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaDefinition"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSchemaInput(v *GetSchemaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSchemaInput"}
+	if v.SchemaId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSchemaVersionsDiffInput(v *GetSchemaVersionsDiffInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSchemaVersionsDiffInput"}
+	if v.SchemaId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaId"))
+	}
+	if v.FirstSchemaVersionNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirstSchemaVersionNumber"))
+	}
+	if v.SecondSchemaVersionNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecondSchemaVersionNumber"))
+	}
+	if len(v.SchemaDiffType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaDiffType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5018,11 +5573,11 @@ func validateOpGetTableInput(v *GetTableInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetTableInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5051,11 +5606,11 @@ func validateOpGetTableVersionInput(v *GetTableVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetTableVersionInput"}
-	if v.TableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
-	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5069,11 +5624,11 @@ func validateOpGetTableVersionsInput(v *GetTableVersionsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetTableVersionsInput"}
-	if v.TableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
-	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5117,11 +5672,11 @@ func validateOpGetUserDefinedFunctionInput(v *GetUserDefinedFunctionInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetUserDefinedFunctionInput"}
-	if v.FunctionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
-	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5228,6 +5783,21 @@ func validateOpListMLTransformsInput(v *ListMLTransformsInput) error {
 	}
 }
 
+func validateOpListSchemaVersionsInput(v *ListSchemaVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSchemaVersionsInput"}
+	if v.SchemaId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutDataCatalogEncryptionSettingsInput(v *PutDataCatalogEncryptionSettingsInput) error {
 	if v == nil {
 		return nil
@@ -5262,19 +5832,67 @@ func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
 	}
 }
 
+func validateOpPutSchemaVersionMetadataInput(v *PutSchemaVersionMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutSchemaVersionMetadataInput"}
+	if v.MetadataKeyValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetadataKeyValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutWorkflowRunPropertiesInput(v *PutWorkflowRunPropertiesInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutWorkflowRunPropertiesInput"}
-	if v.RunId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RunId"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.RunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunId"))
+	}
 	if v.RunProperties == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RunProperties"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRegisterSchemaVersionInput(v *RegisterSchemaVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterSchemaVersionInput"}
+	if v.SchemaId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaId"))
+	}
+	if v.SchemaDefinition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaDefinition"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemoveSchemaVersionMetadataInput(v *RemoveSchemaVersionMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveSchemaVersionMetadataInput"}
+	if v.MetadataKeyValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetadataKeyValue"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5303,14 +5921,14 @@ func validateOpResumeWorkflowRunInput(v *ResumeWorkflowRunInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResumeWorkflowRunInput"}
-	if v.NodeIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NodeIds"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.RunId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RunId"))
+	}
+	if v.NodeIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5420,11 +6038,11 @@ func validateOpStartMLLabelingSetGenerationTaskRunInput(v *StartMLLabelingSetGen
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartMLLabelingSetGenerationTaskRunInput"}
-	if v.OutputS3Path == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OutputS3Path"))
-	}
 	if v.TransformId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TransformId"))
+	}
+	if v.OutputS3Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputS3Path"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5513,11 +6131,11 @@ func validateOpStopWorkflowRunInput(v *StopWorkflowRunInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StopWorkflowRunInput"}
-	if v.RunId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RunId"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5567,24 +6185,24 @@ func validateOpUpdateClassifierInput(v *UpdateClassifierInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateClassifierInput"}
-	if v.XMLClassifier != nil {
-		if err := validateUpdateXMLClassifierRequest(v.XMLClassifier); err != nil {
-			invalidParams.AddNested("XMLClassifier", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.GrokClassifier != nil {
 		if err := validateUpdateGrokClassifierRequest(v.GrokClassifier); err != nil {
 			invalidParams.AddNested("GrokClassifier", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.CsvClassifier != nil {
-		if err := validateUpdateCsvClassifierRequest(v.CsvClassifier); err != nil {
-			invalidParams.AddNested("CsvClassifier", err.(smithy.InvalidParamsError))
+	if v.XMLClassifier != nil {
+		if err := validateUpdateXMLClassifierRequest(v.XMLClassifier); err != nil {
+			invalidParams.AddNested("XMLClassifier", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.JsonClassifier != nil {
 		if err := validateUpdateJsonClassifierRequest(v.JsonClassifier); err != nil {
 			invalidParams.AddNested("JsonClassifier", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CsvClassifier != nil {
+		if err := validateUpdateCsvClassifierRequest(v.CsvClassifier); err != nil {
+			invalidParams.AddNested("CsvClassifier", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -5599,8 +6217,14 @@ func validateOpUpdateColumnStatisticsForPartitionInput(v *UpdateColumnStatistics
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateColumnStatisticsForPartitionInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.PartitionValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartitionValues"))
 	}
 	if v.ColumnStatisticsList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ColumnStatisticsList"))
@@ -5608,12 +6232,6 @@ func validateOpUpdateColumnStatisticsForPartitionInput(v *UpdateColumnStatistics
 		if err := validateUpdateColumnStatisticsList(v.ColumnStatisticsList); err != nil {
 			invalidParams.AddNested("ColumnStatisticsList", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.PartitionValues == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PartitionValues"))
-	}
-	if v.DatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5627,6 +6245,9 @@ func validateOpUpdateColumnStatisticsForTableInput(v *UpdateColumnStatisticsForT
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateColumnStatisticsForTableInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
@@ -5636,9 +6257,6 @@ func validateOpUpdateColumnStatisticsForTableInput(v *UpdateColumnStatisticsForT
 		if err := validateUpdateColumnStatisticsList(v.ColumnStatisticsList); err != nil {
 			invalidParams.AddNested("ColumnStatisticsList", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.DatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5652,15 +6270,15 @@ func validateOpUpdateConnectionInput(v *UpdateConnectionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.ConnectionInput == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectionInput"))
 	} else if v.ConnectionInput != nil {
 		if err := validateConnectionInput(v.ConnectionInput); err != nil {
 			invalidParams.AddNested("ConnectionInput", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5709,15 +6327,15 @@ func validateOpUpdateDatabaseInput(v *UpdateDatabaseInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDatabaseInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.DatabaseInput == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseInput"))
 	} else if v.DatabaseInput != nil {
 		if err := validateDatabaseInput(v.DatabaseInput); err != nil {
 			invalidParams.AddNested("DatabaseInput", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5746,11 +6364,11 @@ func validateOpUpdateJobInput(v *UpdateJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateJobInput"}
-	if v.JobUpdate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobUpdate"))
-	}
 	if v.JobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if v.JobUpdate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobUpdate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5784,8 +6402,14 @@ func validateOpUpdatePartitionInput(v *UpdatePartitionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePartitionInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.PartitionValueList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartitionValueList"))
 	}
 	if v.PartitionInput == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PartitionInput"))
@@ -5794,11 +6418,38 @@ func validateOpUpdatePartitionInput(v *UpdatePartitionInput) error {
 			invalidParams.AddNested("PartitionInput", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.PartitionValueList == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PartitionValueList"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
 	}
-	if v.DatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+}
+
+func validateOpUpdateRegistryInput(v *UpdateRegistryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRegistryInput"}
+	if v.RegistryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistryId"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSchemaInput(v *UpdateSchemaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSchemaInput"}
+	if v.SchemaId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5834,11 +6485,11 @@ func validateOpUpdateTriggerInput(v *UpdateTriggerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTriggerInput"}
-	if v.TriggerUpdate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TriggerUpdate"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.TriggerUpdate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TriggerUpdate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5852,11 +6503,11 @@ func validateOpUpdateUserDefinedFunctionInput(v *UpdateUserDefinedFunctionInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserDefinedFunctionInput"}
-	if v.FunctionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
-	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}
 	if v.FunctionInput == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FunctionInput"))

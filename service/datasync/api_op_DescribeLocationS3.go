@@ -40,9 +40,9 @@ type DescribeLocationS3Input struct {
 // DescribeLocationS3Response
 type DescribeLocationS3Output struct {
 
-	// If you are using DataSync on an Amazon Outpost, the Amazon Resource Name (ARNs)
-	// of the EC2 agents deployed on your AWS Outpost. For more information about
-	// launching a DataSync agent on an Amazon Outpost, see outposts-agent.
+	// If you are using DataSync on an AWS Outpost, the Amazon Resource Name (ARNs) of
+	// the EC2 agents deployed on your Outpost. For more information about launching a
+	// DataSync agent on an AWS Outpost, see outposts-agent.
 	AgentArns []string
 
 	// The time that the Amazon S3 bucket location was created.
@@ -63,9 +63,9 @@ type DescribeLocationS3Output struct {
 	// The Amazon S3 storage class that you chose to store your files in when this
 	// location is used as a task destination. For more information about S3 storage
 	// classes, see Amazon S3 Storage Classes
-	// (https://aws.amazon.com/s3/storage-classes/) in the Amazon Simple Storage
-	// Service Developer Guide. Some storage classes have behaviors that can affect
-	// your S3 storage cost. For detailed information, see using-storage-classes.
+	// (http://aws.amazon.com/s3/storage-classes/). Some storage classes have behaviors
+	// that can affect your S3 storage cost. For detailed information, see
+	// using-storage-classes.
 	S3StorageClass types.S3StorageClass
 
 	// Metadata pertaining to the operation's result.

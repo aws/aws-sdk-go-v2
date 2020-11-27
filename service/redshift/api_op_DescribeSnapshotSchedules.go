@@ -4,6 +4,7 @@ package redshift
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
@@ -126,6 +127,97 @@ func addOperationDescribeSnapshotSchedulesMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+// DescribeSnapshotSchedulesAPIClient is a client that implements the
+// DescribeSnapshotSchedules operation.
+type DescribeSnapshotSchedulesAPIClient interface {
+	DescribeSnapshotSchedules(context.Context, *DescribeSnapshotSchedulesInput, ...func(*Options)) (*DescribeSnapshotSchedulesOutput, error)
+}
+
+var _ DescribeSnapshotSchedulesAPIClient = (*Client)(nil)
+
+// DescribeSnapshotSchedulesPaginatorOptions is the paginator options for
+// DescribeSnapshotSchedules
+type DescribeSnapshotSchedulesPaginatorOptions struct {
+	// The maximum number or response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeSnapshotSchedulesPaginator is a paginator for DescribeSnapshotSchedules
+type DescribeSnapshotSchedulesPaginator struct {
+	options   DescribeSnapshotSchedulesPaginatorOptions
+	client    DescribeSnapshotSchedulesAPIClient
+	params    *DescribeSnapshotSchedulesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeSnapshotSchedulesPaginator returns a new
+// DescribeSnapshotSchedulesPaginator
+func NewDescribeSnapshotSchedulesPaginator(client DescribeSnapshotSchedulesAPIClient, params *DescribeSnapshotSchedulesInput, optFns ...func(*DescribeSnapshotSchedulesPaginatorOptions)) *DescribeSnapshotSchedulesPaginator {
+	options := DescribeSnapshotSchedulesPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &DescribeSnapshotSchedulesInput{}
+	}
+
+	return &DescribeSnapshotSchedulesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeSnapshotSchedulesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeSnapshotSchedules page.
+func (p *DescribeSnapshotSchedulesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeSnapshotSchedulesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeSnapshotSchedules(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeSnapshotSchedules(region string) *awsmiddleware.RegisterServiceMetadata {

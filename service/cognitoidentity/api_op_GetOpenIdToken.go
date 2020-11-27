@@ -117,7 +117,6 @@ func newServiceMetadataMiddleware_opGetOpenIdToken(region string) *awsmiddleware
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "cognito-identity",
 		OperationName: "GetOpenIdToken",
 	}
 }

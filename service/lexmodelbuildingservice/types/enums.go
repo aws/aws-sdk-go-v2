@@ -166,7 +166,11 @@ const (
 	LocaleEnAu Locale = "en-AU"
 	LocaleEnGb Locale = "en-GB"
 	LocaleEnUs Locale = "en-US"
+	LocaleEsEs Locale = "es-ES"
 	LocaleEsUs Locale = "es-US"
+	LocaleFrFr Locale = "fr-FR"
+	LocaleFrCa Locale = "fr-CA"
+	LocaleItIt Locale = "it-IT"
 )
 
 // Values returns all known values for Locale. Note that this can be expanded in
@@ -178,7 +182,11 @@ func (Locale) Values() []Locale {
 		"en-AU",
 		"en-GB",
 		"en-US",
+		"es-ES",
 		"es-US",
+		"fr-FR",
+		"fr-CA",
+		"it-IT",
 	}
 }
 

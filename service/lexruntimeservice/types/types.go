@@ -2,6 +2,43 @@
 
 package types
 
+// A context is a variable that contains information about the current state of the
+// conversation between a user and Amazon Lex. Context can be set automatically by
+// Amazon Lex when an intent is fulfilled, or it can be set at runtime using the
+// PutContent, PutText, or PutSession operation.
+type ActiveContext struct {
+
+	// The name of the context.
+	//
+	// This member is required.
+	Name *string
+
+	// State variables for the current context. You can use these values as default
+	// values for slots in subsequent events.
+	//
+	// This member is required.
+	Parameters map[string]string
+
+	// The length of time or number of turns that a context remains active.
+	//
+	// This member is required.
+	TimeToLive *ActiveContextTimeToLive
+}
+
+// The length of time or number of turns that a context remains active.
+type ActiveContextTimeToLive struct {
+
+	// The number of seconds that the context should be active after it is first sent
+	// in a PostContent or PostText response. You can set the value between 5 and
+	// 86,400 seconds (24 hours).
+	TimeToLiveInSeconds *int32
+
+	// The number of conversation turns that the context should be active. A
+	// conversation turn is one PostContent or PostText request and the corresponding
+	// response from Amazon Lex.
+	TurnsToLive *int32
+}
+
 // Represents an option to be shown on the client platform (Facebook, Slack, etc.)
 type Button struct {
 

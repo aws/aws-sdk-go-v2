@@ -43,13 +43,15 @@ type UpdateClassificationJobInput struct {
 	//
 	// * RUNNING - Resumes the job. This value is valid only if the job's
 	// current status is USER_PAUSED. If you specify this value, Amazon Macie
-	// immediately resumes the job.
+	// immediately resumes processing from the point where you paused the job.
+	// Otherwise, Macie resumes the job according to the schedule and other
+	// configuration settings for the job.
 	//
-	// * USER_PAUSED - Pauses the job. This value is
-	// valid only if the job's current status is IDLE or RUNNING. If you specify this
-	// value and the job is currently running, Macie immediately stops running the job.
-	// To resume a job after you pause it, change the job's status to RUNNING. If you
-	// don't resume a job within 30 days of pausing it, the job expires and Macie
+	// * USER_PAUSED - Pauses the job. This value
+	// is valid only if the job's current status is IDLE or RUNNING. If you specify
+	// this value and the job's current status is RUNNING, Macie immediately begins to
+	// pause all processing tasks for the job. If you pause a job when its status is
+	// RUNNING and you don't resume the job within 30 days, the job expires and Macie
 	// cancels it. You can't resume a job after it's cancelled.
 	//
 	// This member is required.

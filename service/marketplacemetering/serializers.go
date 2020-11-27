@@ -198,6 +198,68 @@ func (m *awsAwsjson11_serializeOpResolveCustomer) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("Key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentTag(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUsageAllocation(v *types.UsageAllocation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllocatedUsageQuantity != nil {
+		ok := object.Key("AllocatedUsageQuantity")
+		ok.Integer(*v.AllocatedUsageQuantity)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUsageAllocations(v []types.UsageAllocation, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentUsageAllocation(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentUsageRecord(v *types.UsageRecord, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -220,6 +282,13 @@ func awsAwsjson11_serializeDocumentUsageRecord(v *types.UsageRecord, value smith
 	if v.Timestamp != nil {
 		ok := object.Key("Timestamp")
 		ok.Double(smithytime.FormatEpochSeconds(*v.Timestamp))
+	}
+
+	if v.UsageAllocations != nil {
+		ok := object.Key("UsageAllocations")
+		if err := awsAwsjson11_serializeDocumentUsageAllocations(v.UsageAllocations, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -274,6 +343,13 @@ func awsAwsjson11_serializeOpDocumentMeterUsageInput(v *MeterUsageInput, value s
 	if v.Timestamp != nil {
 		ok := object.Key("Timestamp")
 		ok.Double(smithytime.FormatEpochSeconds(*v.Timestamp))
+	}
+
+	if v.UsageAllocations != nil {
+		ok := object.Key("UsageAllocations")
+		if err := awsAwsjson11_serializeDocumentUsageAllocations(v.UsageAllocations, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.UsageDimension != nil {

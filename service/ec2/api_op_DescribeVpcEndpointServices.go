@@ -11,7 +11,13 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Describes available services to which you can create a VPC endpoint.
+// Describes available services to which you can create a VPC endpoint. When the
+// service provider and the consumer have different accounts multiple Availability
+// Zones, and the consumer views the VPC endpoint service information, the response
+// only includes the common Availability Zones. For example, when the service
+// provider account uses us-east-1a and us-east-1c and the consumer uses us-east-1a
+// and us-east-1a and us-east-1b, the response includes the VPC endpoint services
+// in the common Availability Zone, us-east-1a.
 func (c *Client) DescribeVpcEndpointServices(ctx context.Context, params *DescribeVpcEndpointServicesInput, optFns ...func(*Options)) (*DescribeVpcEndpointServicesOutput, error) {
 	if params == nil {
 		params = &DescribeVpcEndpointServicesInput{}

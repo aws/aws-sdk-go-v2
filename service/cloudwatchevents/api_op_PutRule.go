@@ -76,8 +76,8 @@ type PutRuleInput struct {
 	// A description of the rule.
 	Description *string
 
-	// The event bus to associate with this rule. If you omit this, the default event
-	// bus is used.
+	// The name or ARN of the event bus to associate with this rule. If you omit this,
+	// the default event bus is used.
 	EventBusName *string
 
 	// The event pattern. For more information, see Events and Event Patterns

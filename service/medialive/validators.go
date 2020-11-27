@@ -1396,16 +1396,16 @@ func validateAudioDescription(v *types.AudioDescription) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AudioDescription"}
-	if v.RemixSettings != nil {
-		if err := validateRemixSettings(v.RemixSettings); err != nil {
-			invalidParams.AddNested("RemixSettings", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.AudioSelectorName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AudioSelectorName"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RemixSettings != nil {
+		if err := validateRemixSettings(v.RemixSettings); err != nil {
+			invalidParams.AddNested("RemixSettings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1483,6 +1483,11 @@ func validateAudioSelectorSettings(v *types.AudioSelectorSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AudioSelectorSettings"}
+	if v.AudioLanguageSelection != nil {
+		if err := validateAudioLanguageSelection(v.AudioLanguageSelection); err != nil {
+			invalidParams.AddNested("AudioLanguageSelection", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.AudioPidSelection != nil {
 		if err := validateAudioPidSelection(v.AudioPidSelection); err != nil {
 			invalidParams.AddNested("AudioPidSelection", err.(smithy.InvalidParamsError))
@@ -1491,11 +1496,6 @@ func validateAudioSelectorSettings(v *types.AudioSelectorSettings) error {
 	if v.AudioTrackSelection != nil {
 		if err := validateAudioTrackSelection(v.AudioTrackSelection); err != nil {
 			invalidParams.AddNested("AudioTrackSelection", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.AudioLanguageSelection != nil {
-		if err := validateAudioLanguageSelection(v.AudioLanguageSelection); err != nil {
-			invalidParams.AddNested("AudioLanguageSelection", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1607,14 +1607,14 @@ func validateBlackoutSlate(v *types.BlackoutSlate) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BlackoutSlate"}
-	if v.NetworkEndBlackoutImage != nil {
-		if err := validateInputLocation(v.NetworkEndBlackoutImage); err != nil {
-			invalidParams.AddNested("NetworkEndBlackoutImage", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.BlackoutSlateImage != nil {
 		if err := validateInputLocation(v.BlackoutSlateImage); err != nil {
 			invalidParams.AddNested("BlackoutSlateImage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NetworkEndBlackoutImage != nil {
+		if err := validateInputLocation(v.NetworkEndBlackoutImage); err != nil {
+			invalidParams.AddNested("NetworkEndBlackoutImage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1649,13 +1649,13 @@ func validateCaptionDescription(v *types.CaptionDescription) error {
 	if v.CaptionSelectorName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CaptionSelectorName"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.DestinationSettings != nil {
 		if err := validateCaptionDestinationSettings(v.DestinationSettings); err != nil {
 			invalidParams.AddNested("DestinationSettings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1669,14 +1669,14 @@ func validateCaptionDestinationSettings(v *types.CaptionDestinationSettings) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CaptionDestinationSettings"}
-	if v.DvbSubDestinationSettings != nil {
-		if err := validateDvbSubDestinationSettings(v.DvbSubDestinationSettings); err != nil {
-			invalidParams.AddNested("DvbSubDestinationSettings", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.BurnInDestinationSettings != nil {
 		if err := validateBurnInDestinationSettings(v.BurnInDestinationSettings); err != nil {
 			invalidParams.AddNested("BurnInDestinationSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DvbSubDestinationSettings != nil {
+		if err := validateDvbSubDestinationSettings(v.DvbSubDestinationSettings); err != nil {
+			invalidParams.AddNested("DvbSubDestinationSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1756,11 +1756,6 @@ func validateEncoderSettings(v *types.EncoderSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EncoderSettings"}
-	if v.AvailBlanking != nil {
-		if err := validateAvailBlanking(v.AvailBlanking); err != nil {
-			invalidParams.AddNested("AvailBlanking", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.AudioDescriptions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AudioDescriptions"))
 	} else if v.AudioDescriptions != nil {
@@ -1768,21 +1763,24 @@ func validateEncoderSettings(v *types.EncoderSettings) error {
 			invalidParams.AddNested("AudioDescriptions", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.VideoDescriptions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VideoDescriptions"))
-	} else if v.VideoDescriptions != nil {
-		if err := validate__listOfVideoDescription(v.VideoDescriptions); err != nil {
-			invalidParams.AddNested("VideoDescriptions", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.GlobalConfiguration != nil {
-		if err := validateGlobalConfiguration(v.GlobalConfiguration); err != nil {
-			invalidParams.AddNested("GlobalConfiguration", err.(smithy.InvalidParamsError))
+	if v.AvailBlanking != nil {
+		if err := validateAvailBlanking(v.AvailBlanking); err != nil {
+			invalidParams.AddNested("AvailBlanking", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.BlackoutSlate != nil {
 		if err := validateBlackoutSlate(v.BlackoutSlate); err != nil {
 			invalidParams.AddNested("BlackoutSlate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CaptionDescriptions != nil {
+		if err := validate__listOfCaptionDescription(v.CaptionDescriptions); err != nil {
+			invalidParams.AddNested("CaptionDescriptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GlobalConfiguration != nil {
+		if err := validateGlobalConfiguration(v.GlobalConfiguration); err != nil {
+			invalidParams.AddNested("GlobalConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.OutputGroups == nil {
@@ -1799,9 +1797,11 @@ func validateEncoderSettings(v *types.EncoderSettings) error {
 			invalidParams.AddNested("TimecodeConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.CaptionDescriptions != nil {
-		if err := validate__listOfCaptionDescription(v.CaptionDescriptions); err != nil {
-			invalidParams.AddNested("CaptionDescriptions", err.(smithy.InvalidParamsError))
+	if v.VideoDescriptions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VideoDescriptions"))
+	} else if v.VideoDescriptions != nil {
+		if err := validate__listOfVideoDescription(v.VideoDescriptions); err != nil {
+			invalidParams.AddNested("VideoDescriptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1905,17 +1905,17 @@ func validateHlsGroupSettings(v *types.HlsGroupSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HlsGroupSettings"}
-	if v.KeyProviderSettings != nil {
-		if err := validateKeyProviderSettings(v.KeyProviderSettings); err != nil {
-			invalidParams.AddNested("KeyProviderSettings", err.(smithy.InvalidParamsError))
+	if v.CaptionLanguageMappings != nil {
+		if err := validate__listOfCaptionLanguageMapping(v.CaptionLanguageMappings); err != nil {
+			invalidParams.AddNested("CaptionLanguageMappings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Destination == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
 	}
-	if v.CaptionLanguageMappings != nil {
-		if err := validate__listOfCaptionLanguageMapping(v.CaptionLanguageMappings); err != nil {
-			invalidParams.AddNested("CaptionLanguageMappings", err.(smithy.InvalidParamsError))
+	if v.KeyProviderSettings != nil {
+		if err := validateKeyProviderSettings(v.KeyProviderSettings); err != nil {
+			invalidParams.AddNested("KeyProviderSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1964,14 +1964,14 @@ func validateHlsSettings(v *types.HlsSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HlsSettings"}
-	if v.StandardHlsSettings != nil {
-		if err := validateStandardHlsSettings(v.StandardHlsSettings); err != nil {
-			invalidParams.AddNested("StandardHlsSettings", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.AudioOnlyHlsSettings != nil {
 		if err := validateAudioOnlyHlsSettings(v.AudioOnlyHlsSettings); err != nil {
 			invalidParams.AddNested("AudioOnlyHlsSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StandardHlsSettings != nil {
+		if err := validateStandardHlsSettings(v.StandardHlsSettings); err != nil {
+			invalidParams.AddNested("StandardHlsSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2121,13 +2121,13 @@ func validateInputSwitchScheduleActionSettings(v *types.InputSwitchScheduleActio
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InputSwitchScheduleActionSettings"}
+	if v.InputAttachmentNameReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputAttachmentNameReference"))
+	}
 	if v.InputClippingSettings != nil {
 		if err := validateInputClippingSettings(v.InputClippingSettings); err != nil {
 			invalidParams.AddNested("InputClippingSettings", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.InputAttachmentNameReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputAttachmentNameReference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2247,11 +2247,11 @@ func validateMultiplexProgramServiceDescriptor(v *types.MultiplexProgramServiceD
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MultiplexProgramServiceDescriptor"}
-	if v.ServiceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
-	}
 	if v.ProviderName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProviderName"))
+	}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2339,9 +2339,9 @@ func validateOutputGroupSettings(v *types.OutputGroupSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OutputGroupSettings"}
-	if v.MediaPackageGroupSettings != nil {
-		if err := validateMediaPackageGroupSettings(v.MediaPackageGroupSettings); err != nil {
-			invalidParams.AddNested("MediaPackageGroupSettings", err.(smithy.InvalidParamsError))
+	if v.ArchiveGroupSettings != nil {
+		if err := validateArchiveGroupSettings(v.ArchiveGroupSettings); err != nil {
+			invalidParams.AddNested("ArchiveGroupSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.FrameCaptureGroupSettings != nil {
@@ -2354,9 +2354,9 @@ func validateOutputGroupSettings(v *types.OutputGroupSettings) error {
 			invalidParams.AddNested("HlsGroupSettings", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ArchiveGroupSettings != nil {
-		if err := validateArchiveGroupSettings(v.ArchiveGroupSettings); err != nil {
-			invalidParams.AddNested("ArchiveGroupSettings", err.(smithy.InvalidParamsError))
+	if v.MediaPackageGroupSettings != nil {
+		if err := validateMediaPackageGroupSettings(v.MediaPackageGroupSettings); err != nil {
+			invalidParams.AddNested("MediaPackageGroupSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.MsSmoothGroupSettings != nil {
@@ -2381,6 +2381,16 @@ func validateOutputSettings(v *types.OutputSettings) error {
 			invalidParams.AddNested("ArchiveOutputSettings", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.HlsOutputSettings != nil {
+		if err := validateHlsOutputSettings(v.HlsOutputSettings); err != nil {
+			invalidParams.AddNested("HlsOutputSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MultiplexOutputSettings != nil {
+		if err := validateMultiplexOutputSettings(v.MultiplexOutputSettings); err != nil {
+			invalidParams.AddNested("MultiplexOutputSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.RtmpOutputSettings != nil {
 		if err := validateRtmpOutputSettings(v.RtmpOutputSettings); err != nil {
 			invalidParams.AddNested("RtmpOutputSettings", err.(smithy.InvalidParamsError))
@@ -2389,16 +2399,6 @@ func validateOutputSettings(v *types.OutputSettings) error {
 	if v.UdpOutputSettings != nil {
 		if err := validateUdpOutputSettings(v.UdpOutputSettings); err != nil {
 			invalidParams.AddNested("UdpOutputSettings", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.MultiplexOutputSettings != nil {
-		if err := validateMultiplexOutputSettings(v.MultiplexOutputSettings); err != nil {
-			invalidParams.AddNested("MultiplexOutputSettings", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.HlsOutputSettings != nil {
-		if err := validateHlsOutputSettings(v.HlsOutputSettings); err != nil {
-			invalidParams.AddNested("HlsOutputSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2479,15 +2479,15 @@ func validateScheduleAction(v *types.ScheduleAction) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ScheduleAction"}
+	if v.ActionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionName"))
+	}
 	if v.ScheduleActionSettings == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScheduleActionSettings"))
 	} else if v.ScheduleActionSettings != nil {
 		if err := validateScheduleActionSettings(v.ScheduleActionSettings); err != nil {
 			invalidParams.AddNested("ScheduleActionSettings", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ActionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ActionName"))
 	}
 	if v.ScheduleActionStartSettings == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScheduleActionStartSettings"))
@@ -2508,24 +2508,14 @@ func validateScheduleActionSettings(v *types.ScheduleActionSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ScheduleActionSettings"}
-	if v.InputSwitchSettings != nil {
-		if err := validateInputSwitchScheduleActionSettings(v.InputSwitchSettings); err != nil {
-			invalidParams.AddNested("InputSwitchSettings", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Scte35SpliceInsertSettings != nil {
-		if err := validateScte35SpliceInsertScheduleActionSettings(v.Scte35SpliceInsertSettings); err != nil {
-			invalidParams.AddNested("Scte35SpliceInsertSettings", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.StaticImageActivateSettings != nil {
-		if err := validateStaticImageActivateScheduleActionSettings(v.StaticImageActivateSettings); err != nil {
-			invalidParams.AddNested("StaticImageActivateSettings", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.HlsId3SegmentTaggingSettings != nil {
 		if err := validateHlsId3SegmentTaggingScheduleActionSettings(v.HlsId3SegmentTaggingSettings); err != nil {
 			invalidParams.AddNested("HlsId3SegmentTaggingSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HlsTimedMetadataSettings != nil {
+		if err := validateHlsTimedMetadataScheduleActionSettings(v.HlsTimedMetadataSettings); err != nil {
+			invalidParams.AddNested("HlsTimedMetadataSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.InputPrepareSettings != nil {
@@ -2533,14 +2523,9 @@ func validateScheduleActionSettings(v *types.ScheduleActionSettings) error {
 			invalidParams.AddNested("InputPrepareSettings", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Scte35TimeSignalSettings != nil {
-		if err := validateScte35TimeSignalScheduleActionSettings(v.Scte35TimeSignalSettings); err != nil {
-			invalidParams.AddNested("Scte35TimeSignalSettings", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Scte35ReturnToNetworkSettings != nil {
-		if err := validateScte35ReturnToNetworkScheduleActionSettings(v.Scte35ReturnToNetworkSettings); err != nil {
-			invalidParams.AddNested("Scte35ReturnToNetworkSettings", err.(smithy.InvalidParamsError))
+	if v.InputSwitchSettings != nil {
+		if err := validateInputSwitchScheduleActionSettings(v.InputSwitchSettings); err != nil {
+			invalidParams.AddNested("InputSwitchSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.PauseStateSettings != nil {
@@ -2548,9 +2533,24 @@ func validateScheduleActionSettings(v *types.ScheduleActionSettings) error {
 			invalidParams.AddNested("PauseStateSettings", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.HlsTimedMetadataSettings != nil {
-		if err := validateHlsTimedMetadataScheduleActionSettings(v.HlsTimedMetadataSettings); err != nil {
-			invalidParams.AddNested("HlsTimedMetadataSettings", err.(smithy.InvalidParamsError))
+	if v.Scte35ReturnToNetworkSettings != nil {
+		if err := validateScte35ReturnToNetworkScheduleActionSettings(v.Scte35ReturnToNetworkSettings); err != nil {
+			invalidParams.AddNested("Scte35ReturnToNetworkSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Scte35SpliceInsertSettings != nil {
+		if err := validateScte35SpliceInsertScheduleActionSettings(v.Scte35SpliceInsertSettings); err != nil {
+			invalidParams.AddNested("Scte35SpliceInsertSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Scte35TimeSignalSettings != nil {
+		if err := validateScte35TimeSignalScheduleActionSettings(v.Scte35TimeSignalSettings); err != nil {
+			invalidParams.AddNested("Scte35TimeSignalSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StaticImageActivateSettings != nil {
+		if err := validateStaticImageActivateScheduleActionSettings(v.StaticImageActivateSettings); err != nil {
+			invalidParams.AddNested("StaticImageActivateSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2590,14 +2590,14 @@ func validateScte35DeliveryRestrictions(v *types.Scte35DeliveryRestrictions) err
 	if len(v.ArchiveAllowedFlag) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ArchiveAllowedFlag"))
 	}
+	if len(v.DeviceRestrictions) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceRestrictions"))
+	}
 	if len(v.NoRegionalBlackoutFlag) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("NoRegionalBlackoutFlag"))
 	}
 	if len(v.WebDeliveryAllowedFlag) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("WebDeliveryAllowedFlag"))
-	}
-	if len(v.DeviceRestrictions) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("DeviceRestrictions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2798,15 +2798,15 @@ func validateUdpOutputSettings(v *types.UdpOutputSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UdpOutputSettings"}
-	if v.Destination == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
-	}
 	if v.ContainerSettings == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContainerSettings"))
 	} else if v.ContainerSettings != nil {
 		if err := validateUdpContainerSettings(v.ContainerSettings); err != nil {
 			invalidParams.AddNested("ContainerSettings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2847,13 +2847,13 @@ func validateVideoDescription(v *types.VideoDescription) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VideoDescription"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.CodecSettings != nil {
 		if err := validateVideoCodecSettings(v.CodecSettings); err != nil {
 			invalidParams.AddNested("CodecSettings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2882,17 +2882,17 @@ func validateOpBatchUpdateScheduleInput(v *BatchUpdateScheduleInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateScheduleInput"}
-	if v.Deletes != nil {
-		if err := validateBatchScheduleActionDeleteRequest(v.Deletes); err != nil {
-			invalidParams.AddNested("Deletes", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.ChannelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
 	}
 	if v.Creates != nil {
 		if err := validateBatchScheduleActionCreateRequest(v.Creates); err != nil {
 			invalidParams.AddNested("Creates", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Deletes != nil {
+		if err := validateBatchScheduleActionDeleteRequest(v.Deletes); err != nil {
+			invalidParams.AddNested("Deletes", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2922,14 +2922,14 @@ func validateOpCreateChannelInput(v *CreateChannelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateChannelInput"}
-	if v.InputAttachments != nil {
-		if err := validate__listOfInputAttachment(v.InputAttachments); err != nil {
-			invalidParams.AddNested("InputAttachments", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.EncoderSettings != nil {
 		if err := validateEncoderSettings(v.EncoderSettings); err != nil {
 			invalidParams.AddNested("EncoderSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InputAttachments != nil {
+		if err := validate__listOfInputAttachment(v.InputAttachments); err != nil {
+			invalidParams.AddNested("InputAttachments", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2971,11 +2971,11 @@ func validateOpCreateMultiplexInput(v *CreateMultiplexInput) error {
 			invalidParams.AddNested("MultiplexSettings", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.RequestId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RequestId"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2989,6 +2989,9 @@ func validateOpCreateMultiplexProgramInput(v *CreateMultiplexProgramInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateMultiplexProgramInput"}
+	if v.MultiplexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MultiplexId"))
+	}
 	if v.MultiplexProgramSettings == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MultiplexProgramSettings"))
 	} else if v.MultiplexProgramSettings != nil {
@@ -3001,9 +3004,6 @@ func validateOpCreateMultiplexProgramInput(v *CreateMultiplexProgramInput) error
 	}
 	if v.RequestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RequestId"))
-	}
-	if v.MultiplexId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MultiplexId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3188,11 +3188,11 @@ func validateOpDescribeInputDeviceThumbnailInput(v *DescribeInputDeviceThumbnail
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeInputDeviceThumbnailInput"}
-	if len(v.Accept) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Accept"))
-	}
 	if v.InputDeviceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputDeviceId"))
+	}
+	if len(v.Accept) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Accept"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3464,11 +3464,11 @@ func validateOpUpdateChannelClassInput(v *UpdateChannelClassInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateChannelClassInput"}
-	if v.ChannelId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
-	}
 	if len(v.ChannelClass) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelClass"))
+	}
+	if v.ChannelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3482,13 +3482,13 @@ func validateOpUpdateChannelInput(v *UpdateChannelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateChannelInput"}
+	if v.ChannelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
+	}
 	if v.EncoderSettings != nil {
 		if err := validateEncoderSettings(v.EncoderSettings); err != nil {
 			invalidParams.AddNested("EncoderSettings", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ChannelId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
 	}
 	if v.InputAttachments != nil {
 		if err := validate__listOfInputAttachment(v.InputAttachments); err != nil {
@@ -3552,13 +3552,13 @@ func validateOpUpdateMultiplexInput(v *UpdateMultiplexInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateMultiplexInput"}
+	if v.MultiplexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MultiplexId"))
+	}
 	if v.MultiplexSettings != nil {
 		if err := validateMultiplexSettings(v.MultiplexSettings); err != nil {
 			invalidParams.AddNested("MultiplexSettings", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.MultiplexId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MultiplexId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

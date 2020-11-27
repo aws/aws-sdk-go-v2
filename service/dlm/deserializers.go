@@ -1743,6 +1743,15 @@ func awsRestjson1_deserializeDocumentLifecyclePolicySummary(v **types.LifecycleP
 				sv.PolicyId = ptr.String(jtv)
 			}
 
+		case "PolicyType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyTypeValues to be of type string, got %T instead", value)
+				}
+				sv.PolicyType = types.PolicyTypeValues(jtv)
+			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1923,6 +1932,15 @@ func awsRestjson1_deserializeDocumentParameters(v **types.Parameters, value inte
 					return fmt.Errorf("expected ExcludeBootVolume to be of type *bool, got %T instead", value)
 				}
 				sv.ExcludeBootVolume = ptr.Bool(jtv)
+			}
+
+		case "NoReboot":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NoReboot to be of type *bool, got %T instead", value)
+				}
+				sv.NoReboot = ptr.Bool(jtv)
 			}
 
 		default:

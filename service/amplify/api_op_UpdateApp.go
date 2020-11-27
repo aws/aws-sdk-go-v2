@@ -40,10 +40,10 @@ type UpdateAppInput struct {
 	// is not stored.
 	AccessToken *string
 
-	// The automated branch creation configuration for the Amplify app.
+	// The automated branch creation configuration for an Amplify app.
 	AutoBranchCreationConfig *types.AutoBranchCreationConfig
 
-	// Describes the automated branch creation glob patterns for the Amplify app.
+	// Describes the automated branch creation glob patterns for an Amplify app.
 	AutoBranchCreationPatterns []string
 
 	// The basic authorization credentials for an Amplify app.
@@ -52,13 +52,16 @@ type UpdateAppInput struct {
 	// The build specification (build spec) for an Amplify app.
 	BuildSpec *string
 
+	// The custom HTTP headers for an Amplify app.
+	CustomHeaders *string
+
 	// The custom redirect and rewrite rules for an Amplify app.
 	CustomRules []types.CustomRule
 
 	// The description for an Amplify app.
 	Description *string
 
-	// Enables automated branch creation for the Amplify app.
+	// Enables automated branch creation for an Amplify app.
 	EnableAutoBranchCreation *bool
 
 	// Enables basic authorization for an Amplify app.

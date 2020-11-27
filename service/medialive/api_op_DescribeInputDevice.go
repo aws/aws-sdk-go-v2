@@ -52,6 +52,9 @@ type DescribeInputDeviceOutput struct {
 	// means that it has not updated its configuration.
 	DeviceSettingsSyncState types.DeviceSettingsSyncState
 
+	// The status of software on the input device.
+	DeviceUpdateStatus types.DeviceUpdateStatus
+
 	// Settings that describe an input device that is type HD.
 	HdDeviceSettings *types.InputDeviceHdSettings
 

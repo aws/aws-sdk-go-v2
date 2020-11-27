@@ -90,6 +90,36 @@ func (Comparator) Values() []Comparator {
 	}
 }
 
+type Compatibility string
+
+// Enum values for Compatibility
+const (
+	CompatibilityNone        Compatibility = "NONE"
+	CompatibilityDisabled    Compatibility = "DISABLED"
+	CompatibilityBackward    Compatibility = "BACKWARD"
+	CompatibilityBackwardAll Compatibility = "BACKWARD_ALL"
+	CompatibilityForward     Compatibility = "FORWARD"
+	CompatibilityForwardAll  Compatibility = "FORWARD_ALL"
+	CompatibilityFull        Compatibility = "FULL"
+	CompatibilityFullAll     Compatibility = "FULL_ALL"
+)
+
+// Values returns all known values for Compatibility. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Compatibility) Values() []Compatibility {
+	return []Compatibility{
+		"NONE",
+		"DISABLED",
+		"BACKWARD",
+		"BACKWARD_ALL",
+		"FORWARD",
+		"FORWARD_ALL",
+		"FULL",
+		"FULL_ALL",
+	}
+}
+
 type ConnectionPropertyKey string
 
 // Enum values for ConnectionPropertyKey
@@ -231,6 +261,22 @@ func (CsvHeaderOption) Values() []CsvHeaderOption {
 		"UNKNOWN",
 		"PRESENT",
 		"ABSENT",
+	}
+}
+
+type DataFormat string
+
+// Enum values for DataFormat
+const (
+	DataFormatAvro DataFormat = "AVRO"
+)
+
+// Values returns all known values for DataFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DataFormat) Values() []DataFormat {
+	return []DataFormat{
+		"AVRO",
 	}
 }
 
@@ -535,6 +581,24 @@ func (RecrawlBehavior) Values() []RecrawlBehavior {
 	}
 }
 
+type RegistryStatus string
+
+// Enum values for RegistryStatus
+const (
+	RegistryStatusAvailable RegistryStatus = "AVAILABLE"
+	RegistryStatusDeleting  RegistryStatus = "DELETING"
+)
+
+// Values returns all known values for RegistryStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RegistryStatus) Values() []RegistryStatus {
+	return []RegistryStatus{
+		"AVAILABLE",
+		"DELETING",
+	}
+}
+
 type ResourceShareType string
 
 // Enum values for ResourceShareType
@@ -610,6 +674,64 @@ func (ScheduleState) Values() []ScheduleState {
 		"SCHEDULED",
 		"NOT_SCHEDULED",
 		"TRANSITIONING",
+	}
+}
+
+type SchemaDiffType string
+
+// Enum values for SchemaDiffType
+const (
+	SchemaDiffTypeSyntaxDiff SchemaDiffType = "SYNTAX_DIFF"
+)
+
+// Values returns all known values for SchemaDiffType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SchemaDiffType) Values() []SchemaDiffType {
+	return []SchemaDiffType{
+		"SYNTAX_DIFF",
+	}
+}
+
+type SchemaStatus string
+
+// Enum values for SchemaStatus
+const (
+	SchemaStatusAvailable SchemaStatus = "AVAILABLE"
+	SchemaStatusPending   SchemaStatus = "PENDING"
+	SchemaStatusDeleting  SchemaStatus = "DELETING"
+)
+
+// Values returns all known values for SchemaStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SchemaStatus) Values() []SchemaStatus {
+	return []SchemaStatus{
+		"AVAILABLE",
+		"PENDING",
+		"DELETING",
+	}
+}
+
+type SchemaVersionStatus string
+
+// Enum values for SchemaVersionStatus
+const (
+	SchemaVersionStatusAvailable SchemaVersionStatus = "AVAILABLE"
+	SchemaVersionStatusPending   SchemaVersionStatus = "PENDING"
+	SchemaVersionStatusFailure   SchemaVersionStatus = "FAILURE"
+	SchemaVersionStatusDeleting  SchemaVersionStatus = "DELETING"
+)
+
+// Values returns all known values for SchemaVersionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SchemaVersionStatus) Values() []SchemaVersionStatus {
+	return []SchemaVersionStatus{
+		"AVAILABLE",
+		"PENDING",
+		"FAILURE",
+		"DELETING",
 	}
 }
 

@@ -748,6 +748,24 @@ func (DeviceSettingsSyncState) Values() []DeviceSettingsSyncState {
 	}
 }
 
+type DeviceUpdateStatus string
+
+// Enum values for DeviceUpdateStatus
+const (
+	DeviceUpdateStatusUpToDate    DeviceUpdateStatus = "UP_TO_DATE"
+	DeviceUpdateStatusNotUpToDate DeviceUpdateStatus = "NOT_UP_TO_DATE"
+)
+
+// Values returns all known values for DeviceUpdateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceUpdateStatus) Values() []DeviceUpdateStatus {
+	return []DeviceUpdateStatus{
+		"UP_TO_DATE",
+		"NOT_UP_TO_DATE",
+	}
+}
+
 type DvbSdtOutputSdt string
 
 // Enum values for DvbSdtOutputSdt
@@ -4131,6 +4149,22 @@ func (ReservationVideoQuality) Values() []ReservationVideoQuality {
 		"STANDARD",
 		"ENHANCED",
 		"PREMIUM",
+	}
+}
+
+type RtmpAdMarkers string
+
+// Enum values for RtmpAdMarkers
+const (
+	RtmpAdMarkersOnCuePointScte35 RtmpAdMarkers = "ON_CUE_POINT_SCTE35"
+)
+
+// Values returns all known values for RtmpAdMarkers. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RtmpAdMarkers) Values() []RtmpAdMarkers {
+	return []RtmpAdMarkers{
+		"ON_CUE_POINT_SCTE35",
 	}
 }
 

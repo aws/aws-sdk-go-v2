@@ -17,8 +17,8 @@ import (
 // are placed into standby is equal to or greater than the minimum capacity of the
 // group. If you choose not to decrement the desired capacity of the Auto Scaling
 // group, the Auto Scaling group launches new instances to replace the instances on
-// standby. For more information, see Temporarily Removing Instances from Your Auto
-// Scaling Group
+// standby. For more information, see Temporarily removing instances from your Auto
+// Scaling group
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) EnterStandby(ctx context.Context, params *EnterStandbyInput, optFns ...func(*Options)) (*EnterStandbyOutput, error) {

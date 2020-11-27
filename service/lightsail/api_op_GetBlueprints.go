@@ -52,7 +52,7 @@ type GetBlueprintsOutput struct {
 	// blueprints.
 	Blueprints []types.Blueprint
 
-	// The token to advance to the next page of resutls from your request. A next page
+	// The token to advance to the next page of results from your request. A next page
 	// token is not returned if there are no more results to display. To get the next
 	// page of results, perform another GetBlueprints request and specify the next page
 	// token using the pageToken parameter.

@@ -37,30 +37,30 @@ import (
 // Location constraint
 //
 // For an example of the request syntax for Amazon S3 on
-// Outposts that uses the S3 on Outposts endpoint hostname prefix and outpost-id in
-// your API request, see the  Example
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_CreateBucket.html#API_control_CreateBucket_Examples)
-// section below. The following actions are related to CreateBucket for Amazon S3
-// on Outposts:
+// Outposts that uses the S3 on Outposts endpoint hostname prefix and
+// x-amz-outpost-id in your API request, see the Examples
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html#API_control_CreateBucket_Examples)
+// section. The following actions are related to CreateBucket for Amazon S3 on
+// Outposts:
 //
 // * PutObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 //
 // *
 // GetBucket
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_GetBucket.html)
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html)
 //
 // *
 // DeleteBucket
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteBucket.html)
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html)
 //
 // *
 // CreateAccessPoint
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_CreateAccessPoint.html)
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html)
 //
 // *
 // PutAccessPointPolicy
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_PutAccessPointPolicy.html)
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html)
 func (c *Client) CreateBucket(ctx context.Context, params *CreateBucketInput, optFns ...func(*Options)) (*CreateBucketOutput, error) {
 	if params == nil {
 		params = &CreateBucketInput{}
@@ -122,8 +122,10 @@ type CreateBucketInput struct {
 
 type CreateBucketOutput struct {
 
-	// The Amazon Resource Name (ARN) of the bucket. For Amazon S3 on Outposts specify
-	// the ARN of the bucket accessed in the format
+	// The Amazon Resource Name (ARN) of the bucket. For using this parameter with
+	// Amazon S3 on Outposts with the REST API, you must specify the name and the
+	// x-amz-outpost-id as well. For using this parameter with S3 on Outposts with the
+	// AWS SDK and CLI, you must specify the ARN of the bucket accessed in the format
 	// arn:aws:s3-outposts:::outpost//bucket/. For example, to access the bucket
 	// reports through outpost my-outpost owned by account 123456789012 in Region
 	// us-west-2, use the URL encoding of

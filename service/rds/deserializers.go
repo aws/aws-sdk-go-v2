@@ -1242,6 +1242,9 @@ func awsAwsquery_deserializeOpErrorCopyDBSnapshot(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("CustomAvailabilityZoneNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorCustomAvailabilityZoneNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("DBSnapshotAlreadyExistsFault", errorCode):
 		return awsAwsquery_deserializeErrorDBSnapshotAlreadyExistsFault(response, errorBody)
 

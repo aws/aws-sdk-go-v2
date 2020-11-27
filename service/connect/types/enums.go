@@ -108,6 +108,42 @@ func (CurrentMetricName) Values() []CurrentMetricName {
 	}
 }
 
+type DirectoryType string
+
+// Enum values for DirectoryType
+const (
+	DirectoryTypeSaml              DirectoryType = "SAML"
+	DirectoryTypeConnectManaged    DirectoryType = "CONNECT_MANAGED"
+	DirectoryTypeExistingDirectory DirectoryType = "EXISTING_DIRECTORY"
+)
+
+// Values returns all known values for DirectoryType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DirectoryType) Values() []DirectoryType {
+	return []DirectoryType{
+		"SAML",
+		"CONNECT_MANAGED",
+		"EXISTING_DIRECTORY",
+	}
+}
+
+type EncryptionType string
+
+// Enum values for EncryptionType
+const (
+	EncryptionTypeKms EncryptionType = "KMS"
+)
+
+// Values returns all known values for EncryptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionType) Values() []EncryptionType {
+	return []EncryptionType{
+		"KMS",
+	}
+}
+
 type Grouping string
 
 // Enum values for Grouping
@@ -187,6 +223,80 @@ func (HistoricalMetricName) Values() []HistoricalMetricName {
 		"INTERACTION_TIME",
 		"INTERACTION_AND_HOLD_TIME",
 		"SERVICE_LEVEL",
+	}
+}
+
+type InstanceAttributeType string
+
+// Enum values for InstanceAttributeType
+const (
+	InstanceAttributeTypeInboundCalls          InstanceAttributeType = "INBOUND_CALLS"
+	InstanceAttributeTypeOutboundCalls         InstanceAttributeType = "OUTBOUND_CALLS"
+	InstanceAttributeTypeContactflowLogs       InstanceAttributeType = "CONTACTFLOW_LOGS"
+	InstanceAttributeTypeContactLens           InstanceAttributeType = "CONTACT_LENS"
+	InstanceAttributeTypeAutoResolveBestVoices InstanceAttributeType = "AUTO_RESOLVE_BEST_VOICES"
+	InstanceAttributeTypeUseCustomTtsVoices    InstanceAttributeType = "USE_CUSTOM_TTS_VOICES"
+	InstanceAttributeTypeEarlyMedia            InstanceAttributeType = "EARLY_MEDIA"
+)
+
+// Values returns all known values for InstanceAttributeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceAttributeType) Values() []InstanceAttributeType {
+	return []InstanceAttributeType{
+		"INBOUND_CALLS",
+		"OUTBOUND_CALLS",
+		"CONTACTFLOW_LOGS",
+		"CONTACT_LENS",
+		"AUTO_RESOLVE_BEST_VOICES",
+		"USE_CUSTOM_TTS_VOICES",
+		"EARLY_MEDIA",
+	}
+}
+
+type InstanceStatus string
+
+// Enum values for InstanceStatus
+const (
+	InstanceStatusCreationInProgress InstanceStatus = "CREATION_IN_PROGRESS"
+	InstanceStatusActive             InstanceStatus = "ACTIVE"
+	InstanceStatusCreationFailed     InstanceStatus = "CREATION_FAILED"
+)
+
+// Values returns all known values for InstanceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceStatus) Values() []InstanceStatus {
+	return []InstanceStatus{
+		"CREATION_IN_PROGRESS",
+		"ACTIVE",
+		"CREATION_FAILED",
+	}
+}
+
+type InstanceStorageResourceType string
+
+// Enum values for InstanceStorageResourceType
+const (
+	InstanceStorageResourceTypeChatTranscripts     InstanceStorageResourceType = "CHAT_TRANSCRIPTS"
+	InstanceStorageResourceTypeCallRecordings      InstanceStorageResourceType = "CALL_RECORDINGS"
+	InstanceStorageResourceTypeScheduledReports    InstanceStorageResourceType = "SCHEDULED_REPORTS"
+	InstanceStorageResourceTypeMediaStreams        InstanceStorageResourceType = "MEDIA_STREAMS"
+	InstanceStorageResourceTypeContactTraceRecords InstanceStorageResourceType = "CONTACT_TRACE_RECORDS"
+	InstanceStorageResourceTypeAgentEvents         InstanceStorageResourceType = "AGENT_EVENTS"
+)
+
+// Values returns all known values for InstanceStorageResourceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceStorageResourceType) Values() []InstanceStorageResourceType {
+	return []InstanceStorageResourceType{
+		"CHAT_TRANSCRIPTS",
+		"CALL_RECORDINGS",
+		"SCHEDULED_REPORTS",
+		"MEDIA_STREAMS",
+		"CONTACT_TRACE_RECORDS",
+		"AGENT_EVENTS",
 	}
 }
 
@@ -732,6 +842,34 @@ func (QueueType) Values() []QueueType {
 	}
 }
 
+type ResourceType string
+
+// Enum values for ResourceType
+const (
+	ResourceTypeContact        ResourceType = "CONTACT"
+	ResourceTypeContactFlow    ResourceType = "CONTACT_FLOW"
+	ResourceTypeInstance       ResourceType = "INSTANCE"
+	ResourceTypeParticipant    ResourceType = "PARTICIPANT"
+	ResourceTypeHierarchyLevel ResourceType = "HIERARCHY_LEVEL"
+	ResourceTypeHierarchyGroup ResourceType = "HIERARCHY_GROUP"
+	ResourceTypeUser           ResourceType = "USER"
+)
+
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"CONTACT",
+		"CONTACT_FLOW",
+		"INSTANCE",
+		"PARTICIPANT",
+		"HIERARCHY_LEVEL",
+		"HIERARCHY_GROUP",
+		"USER",
+	}
+}
+
 type Statistic string
 
 // Enum values for Statistic
@@ -749,6 +887,28 @@ func (Statistic) Values() []Statistic {
 		"SUM",
 		"MAX",
 		"AVG",
+	}
+}
+
+type StorageType string
+
+// Enum values for StorageType
+const (
+	StorageTypeS3                 StorageType = "S3"
+	StorageTypeKinesisVideoStream StorageType = "KINESIS_VIDEO_STREAM"
+	StorageTypeKinesisStream      StorageType = "KINESIS_STREAM"
+	StorageTypeKinesisFirehose    StorageType = "KINESIS_FIREHOSE"
+)
+
+// Values returns all known values for StorageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StorageType) Values() []StorageType {
+	return []StorageType{
+		"S3",
+		"KINESIS_VIDEO_STREAM",
+		"KINESIS_STREAM",
+		"KINESIS_FIREHOSE",
 	}
 }
 

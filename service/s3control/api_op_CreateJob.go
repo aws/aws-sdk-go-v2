@@ -19,8 +19,8 @@ import (
 // Batch Operations can run a single operation or action on lists of Amazon S3
 // objects that you specify. For more information, see S3 Batch Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html) in the
-// Amazon Simple Storage Service Developer Guide. This operation creates a S3 Batch
-// Operations job. Related actions include:
+// Amazon Simple Storage Service Developer Guide. This operation creates an S3
+// Batch Operations job. Related actions include:
 //
 // * DescribeJob
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html)

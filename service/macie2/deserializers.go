@@ -2289,6 +2289,11 @@ func awsRestjson1_deserializeOpDocumentDescribeClassificationJobOutput(v **Descr
 				sv.JobType = types.JobType(jtv)
 			}
 
+		case "lastRunErrorStatus":
+			if err := awsRestjson1_deserializeDocumentLastRunErrorStatus(&sv.LastRunErrorStatus, value); err != nil {
+				return err
+			}
+
 		case "lastRunTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9800,6 +9805,11 @@ func awsRestjson1_deserializeDocumentBucketMetadata(v **types.BucketMetadata, va
 				sv.ClassifiableSizeInBytes = i64
 			}
 
+		case "jobDetails":
+			if err := awsRestjson1_deserializeDocumentJobDetails(&sv.JobDetails, value); err != nil {
+				return err
+			}
+
 		case "lastUpdated":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11917,6 +11927,77 @@ func awsRestjson1_deserializeDocumentIpOwner(v **types.IpOwner, value interface{
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentJobDetails(v **types.JobDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JobDetails
+	if *v == nil {
+		sv = &types.JobDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "isDefinedInJob":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IsDefinedInJob to be of type string, got %T instead", value)
+				}
+				sv.IsDefinedInJob = types.IsDefinedInJob(jtv)
+			}
+
+		case "isMonitoredByJob":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IsMonitoredByJob to be of type string, got %T instead", value)
+				}
+				sv.IsMonitoredByJob = types.IsMonitoredByJob(jtv)
+			}
+
+		case "lastJobId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.LastJobId = ptr.String(jtv)
+			}
+
+		case "lastJobRunTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __timestampIso8601 to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.LastJobRunTime = ptr.Time(t)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentJobScheduleFrequency(v **types.JobScheduleFrequency, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12107,6 +12188,11 @@ func awsRestjson1_deserializeDocumentJobSummary(v **types.JobSummary, value inte
 				sv.JobType = types.JobType(jtv)
 			}
 
+		case "lastRunErrorStatus":
+			if err := awsRestjson1_deserializeDocumentLastRunErrorStatus(&sv.LastRunErrorStatus, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12210,6 +12296,46 @@ func awsRestjson1_deserializeDocumentKeyValuePairList(v *[]types.KeyValuePair, v
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLastRunErrorStatus(v **types.LastRunErrorStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LastRunErrorStatus
+	if *v == nil {
+		sv = &types.LastRunErrorStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LastRunErrorStatusCode to be of type string, got %T instead", value)
+				}
+				sv.Code = types.LastRunErrorStatusCode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -12828,6 +12954,15 @@ func awsRestjson1_deserializeDocumentRecord(v **types.Record, value interface{})
 
 	for key, value := range shape {
 		switch key {
+		case "jsonPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.JsonPath = ptr.String(jtv)
+			}
+
 		case "recordIndex":
 			if value != nil {
 				jtv, ok := value.(json.Number)

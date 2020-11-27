@@ -5274,6 +5274,19 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 				sv.CreationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
+		case "lastMessageArrivalTime":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.LastMessageArrivalTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
 		case "lastUpdateTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5581,6 +5594,19 @@ func awsRestjson1_deserializeDocumentChannelSummary(v **types.ChannelSummary, va
 					return err
 				}
 				sv.CreationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "lastMessageArrivalTime":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.LastMessageArrivalTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "lastUpdateTime":
@@ -5970,6 +5996,11 @@ func awsRestjson1_deserializeDocumentDataset(v **types.Dataset, value interface{
 					return err
 				}
 				sv.LastUpdateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "lateDataRules":
+			if err := awsRestjson1_deserializeDocumentLateDataRules(&sv.LateDataRules, value); err != nil {
+				return err
 			}
 
 		case "name":
@@ -6829,6 +6860,19 @@ func awsRestjson1_deserializeDocumentDatastore(v **types.Datastore, value interf
 				sv.CreationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
+		case "lastMessageArrivalTime":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.LastMessageArrivalTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
 		case "lastUpdateTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7129,6 +7173,19 @@ func awsRestjson1_deserializeDocumentDatastoreSummary(v **types.DatastoreSummary
 				return err
 			}
 
+		case "lastMessageArrivalTime":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.LastMessageArrivalTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
 		case "lastUpdateTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7202,6 +7259,50 @@ func awsRestjson1_deserializeDocumentDeltaTime(v **types.DeltaTime, value interf
 					return fmt.Errorf("expected TimeExpression to be of type string, got %T instead", value)
 				}
 				sv.TimeExpression = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDeltaTimeSessionWindowConfiguration(v **types.DeltaTimeSessionWindowConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeltaTimeSessionWindowConfiguration
+	if *v == nil {
+		sv = &types.DeltaTimeSessionWindowConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "timeoutInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SessionTimeoutInMinutes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimeoutInMinutes = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -7726,6 +7827,121 @@ func awsRestjson1_deserializeDocumentLambdaActivity(v **types.LambdaActivity, va
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLateDataRule(v **types.LateDataRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LateDataRule
+	if *v == nil {
+		sv = &types.LateDataRule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ruleConfiguration":
+			if err := awsRestjson1_deserializeDocumentLateDataRuleConfiguration(&sv.RuleConfiguration, value); err != nil {
+				return err
+			}
+
+		case "ruleName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LateDataRuleName to be of type string, got %T instead", value)
+				}
+				sv.RuleName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLateDataRuleConfiguration(v **types.LateDataRuleConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LateDataRuleConfiguration
+	if *v == nil {
+		sv = &types.LateDataRuleConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "deltaTimeSessionWindowConfiguration":
+			if err := awsRestjson1_deserializeDocumentDeltaTimeSessionWindowConfiguration(&sv.DeltaTimeSessionWindowConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLateDataRules(v *[]types.LateDataRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LateDataRule
+	if *v == nil {
+		cv = []types.LateDataRule{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LateDataRule
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentLateDataRule(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

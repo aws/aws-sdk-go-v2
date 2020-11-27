@@ -1590,7 +1590,7 @@ type DBSnapshot struct {
 	// class of the DB instance when the DB snapshot was created.
 	ProcessorFeatures []ProcessorFeature
 
-	// Specifies when the snapshot was taken in Coodinated Universal Time (UTC).
+	// Specifies when the snapshot was taken in Coordinated Universal Time (UTC).
 	SnapshotCreateTime *time.Time
 
 	// Provides the type of the DB snapshot.

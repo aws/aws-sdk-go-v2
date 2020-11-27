@@ -11,19 +11,24 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates a listener for the specified Application Load Balancer or Network Load
-// Balancer. To update a listener, use ModifyListener. When you are finished with a
-// listener, you can delete it using DeleteListener. If you are finished with both
-// the listener and the load balancer, you can delete them both using
-// DeleteLoadBalancer. This operation is idempotent, which means that it completes
-// at most one time. If you attempt to create multiple listeners with the same
-// settings, each call succeeds. For more information, see Listeners for Your
-// Application Load Balancers
+// Creates a listener for the specified Application Load Balancer, Network Load
+// Balancer. or Gateway Load Balancer. For more information, see the following:
+//
+// *
+// Listeners for your Application Load Balancers
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html)
-// in the Application Load Balancers Guide and Listeners for Your Network Load
-// Balancers
+//
+// *
+// Listeners for your Network Load Balancers
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html)
-// in the Network Load Balancers Guide.
+//
+// *
+// Listeners for your Gateway Load Balancers
+// (https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/gateway-listeners.html)
+//
+// This
+// operation is idempotent, which means that it completes at most one time. If you
+// attempt to create multiple listeners with the same settings, each call succeeds.
 func (c *Client) CreateListener(ctx context.Context, params *CreateListenerInput, optFns ...func(*Options)) (*CreateListenerOutput, error) {
 	if params == nil {
 		params = &CreateListenerInput{}
@@ -51,18 +56,6 @@ type CreateListenerInput struct {
 	// This member is required.
 	LoadBalancerArn *string
 
-	// The port on which the load balancer is listening.
-	//
-	// This member is required.
-	Port *int32
-
-	// The protocol for connections from clients to the load balancer. For Application
-	// Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load
-	// Balancers, the supported protocols are TCP, TLS, UDP, and TCP_UDP.
-	//
-	// This member is required.
-	Protocol types.ProtocolEnum
-
 	// [TLS listeners] The name of the Application-Layer Protocol Negotiation (ALPN)
 	// policy. You can specify one policy name. The following are the possible
 	// values:
@@ -78,47 +71,31 @@ type CreateListenerInput struct {
 	// *
 	// None
 	//
-	// For more information, see ALPN Policies
+	// For more information, see ALPN policies
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies)
 	// in the Network Load Balancers Guide.
 	AlpnPolicy []string
 
 	// [HTTPS and TLS listeners] The default certificate for the listener. You must
 	// provide exactly one certificate. Set CertificateArn to the certificate ARN but
-	// do not set IsDefault. To create a certificate list for the listener, use
-	// AddListenerCertificates.
+	// do not set IsDefault.
 	Certificates []types.Certificate
 
+	// The port on which the load balancer is listening. You cannot specify a port for
+	// a Gateway Load Balancer.
+	Port *int32
+
+	// The protocol for connections from clients to the load balancer. For Application
+	// Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load
+	// Balancers, the supported protocols are TCP, TLS, UDP, and TCP_UDP. You can’t
+	// specify the UDP or TCP_UDP protocol if dual-stack mode is enabled. You cannot
+	// specify a protocol for a Gateway Load Balancer.
+	Protocol types.ProtocolEnum
+
 	// [HTTPS and TLS listeners] The security policy that defines which protocols and
-	// ciphers are supported. The following are the possible values:
-	//
-	// *
-	// ELBSecurityPolicy-2016-08
-	//
-	// * ELBSecurityPolicy-TLS-1-0-2015-04
-	//
-	// *
-	// ELBSecurityPolicy-TLS-1-1-2017-01
-	//
-	// * ELBSecurityPolicy-TLS-1-2-2017-01
-	//
-	// *
-	// ELBSecurityPolicy-TLS-1-2-Ext-2018-06
-	//
-	// * ELBSecurityPolicy-FS-2018-06
-	//
-	// *
-	// ELBSecurityPolicy-FS-1-1-2019-08
-	//
-	// * ELBSecurityPolicy-FS-1-2-2019-08
-	//
-	// *
-	// ELBSecurityPolicy-FS-1-2-Res-2019-08
-	//
-	// For more information, see Security
-	// Policies
+	// ciphers are supported. For more information, see Security policies
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies)
-	// in the Application Load Balancers Guide and Security Policies
+	// in the Application Load Balancers Guide and Security policies
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies)
 	// in the Network Load Balancers Guide.
 	SslPolicy *string

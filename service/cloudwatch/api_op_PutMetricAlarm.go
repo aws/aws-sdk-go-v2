@@ -160,7 +160,7 @@ type PutMetricAlarmInput struct {
 	// you must specify either MetricName or a Metrics array. Each item in the Metrics
 	// array either retrieves a metric or performs a math expression. One item in the
 	// Metrics array is the expression that the alarm watches. You designate this
-	// expression by setting ReturnValue to true for this object in the array. For more
+	// expression by setting ReturnData to true for this object in the array. For more
 	// information, see MetricDataQuery
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html).
 	// If you use the Metrics parameter, you cannot include the MetricName, Dimensions,

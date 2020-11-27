@@ -95,6 +95,13 @@ func awsRestjson1_serializeOpDocumentGetPersonalizedRankingInput(v *GetPersonali
 		ok.String(*v.FilterArn)
 	}
 
+	if v.FilterValues != nil {
+		ok := object.Key("filterValues")
+		if err := awsRestjson1_serializeDocumentFilterValues(v.FilterValues, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InputList != nil {
 		ok := object.Key("inputList")
 		if err := awsRestjson1_serializeDocumentInputList(v.InputList, ok); err != nil {
@@ -192,6 +199,13 @@ func awsRestjson1_serializeOpDocumentGetRecommendationsInput(v *GetRecommendatio
 		ok.String(*v.FilterArn)
 	}
 
+	if v.FilterValues != nil {
+		ok := object.Key("filterValues")
+		if err := awsRestjson1_serializeDocumentFilterValues(v.FilterValues, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ItemId != nil {
 		ok := object.Key("itemId")
 		ok.String(*v.ItemId)
@@ -211,6 +225,17 @@ func awsRestjson1_serializeOpDocumentGetRecommendationsInput(v *GetRecommendatio
 }
 
 func awsRestjson1_serializeDocumentContext(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFilterValues(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

@@ -4317,6 +4317,106 @@ func awsAwsjson11_deserializeDocumentEncryptionConfig(v **types.EncryptionConfig
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentErrorMetric(v **types.ErrorMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ErrorMetric
+	if *v == nil {
+		sv = &types.ErrorMetric{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ForecastType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ForecastType to be of type string, got %T instead", value)
+				}
+				sv.ForecastType = ptr.String(jtv)
+			}
+
+		case "RMSE":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Double to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.RMSE = ptr.Float64(f64)
+			}
+
+		case "WAPE":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Double to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.WAPE = ptr.Float64(f64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentErrorMetrics(v *[]types.ErrorMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ErrorMetric
+	if *v == nil {
+		cv = []types.ErrorMetric{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ErrorMetric
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentErrorMetric(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEvaluationParameters(v **types.EvaluationParameters, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5379,6 +5479,11 @@ func awsAwsjson11_deserializeDocumentMetrics(v **types.Metrics, value interface{
 
 	for key, value := range shape {
 		switch key {
+		case "ErrorMetrics":
+			if err := awsAwsjson11_deserializeDocumentErrorMetrics(&sv.ErrorMetrics, value); err != nil {
+				return err
+			}
+
 		case "RMSE":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7799,6 +7904,11 @@ func awsAwsjson11_deserializeOpDocumentDescribePredictorOutput(v **DescribePredi
 					return err
 				}
 				sv.ForecastHorizon = ptr.Int32(int32(i64))
+			}
+
+		case "ForecastTypes":
+			if err := awsAwsjson11_deserializeDocumentForecastTypes(&sv.ForecastTypes, value); err != nil {
+				return err
 			}
 
 		case "HPOConfig":

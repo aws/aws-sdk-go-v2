@@ -168,16 +168,6 @@ type PutBotInput struct {
 	// In other Regions, the
 	// enableModelImprovements parameter is set to true by default. In these Regions
 	// setting the parameter to false throws a ValidationException exception.
-	//
-	// * Asia
-	// Pacific (Singapore) (ap-southeast-1)
-	//
-	// * Asia Pacific (Tokyo) (ap-northeast-1)
-	//
-	// *
-	// EU (Frankfurt) (eu-central-1)
-	//
-	// * EU (London) (eu-west-2)
 	EnableModelImprovements *bool
 
 	// The maximum time in seconds that Amazon Lex retains the data gathered in a
@@ -204,15 +194,15 @@ type PutBotInput struct {
 	// PostText (https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html)
 	// response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted
 	// if they are configured for the bot. You must set the enableModelImprovements
-	// parameter to true to use confidence scores.
+	// parameter to true to use confidence scores in the following regions.
 	//
-	// * US East (N. Virginia)
-	// (us-east-1)
+	// * US East
+	// (N. Virginia) (us-east-1)
 	//
 	// * US West (Oregon) (us-west-2)
 	//
-	// * Asia Pacific (Sydney)
-	// (ap-southeast-2)
+	// * Asia Pacific
+	// (Sydney) (ap-southeast-2)
 	//
 	// * EU (Ireland) (eu-west-1)
 	//
@@ -231,7 +221,7 @@ type PutBotInput struct {
 	// * IntentB
 	//
 	// * IntentC
-	NluIntentConfidenceThreshold float64
+	NluIntentConfidenceThreshold *float64
 
 	// If you set the processBehavior element to BUILD, Amazon Lex builds the bot so
 	// that it can be run. If you set the element to SAVE Amazon Lex saves the bot, but
@@ -336,7 +326,7 @@ type PutBotOutput struct {
 	// response. AMAZON.FallbackIntent is inserted if the confidence score for all
 	// intents is below this value. AMAZON.KendraSearchIntent is only inserted if it is
 	// configured for the bot.
-	NluIntentConfidenceThreshold float64
+	NluIntentConfidenceThreshold *float64
 
 	// When you send a request to create a bot with processBehavior set to BUILD,
 	// Amazon Lex sets the status response element to BUILDING. In the

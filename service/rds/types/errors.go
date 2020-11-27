@@ -642,7 +642,7 @@ func (e *DBProxyAlreadyExistsFault) ErrorMessage() string {
 func (e *DBProxyAlreadyExistsFault) ErrorCode() string             { return "DBProxyAlreadyExistsFault" }
 func (e *DBProxyAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified proxy name doesn't correspond to a proxy owned by your AWS accoutn
+// The specified proxy name doesn't correspond to a proxy owned by your AWS account
 // in the specified AWS Region.
 type DBProxyNotFoundFault struct {
 	Message *string

@@ -89,6 +89,9 @@ type AdvancedSecurityOptions struct {
 
 	// True if the internal user database is enabled.
 	InternalUserDatabaseEnabled *bool
+
+	// Describes the SAML application configured for a domain.
+	SAMLOptions *SAMLOptionsOutput
 }
 
 // Specifies the advanced security configuration: whether advanced security is
@@ -105,6 +108,9 @@ type AdvancedSecurityOptionsInput struct {
 
 	// Credentials for the master user: username and password, ARN, or both.
 	MasterUserOptions *MasterUserOptions
+
+	// Specifies the SAML application configuration for the domain.
+	SAMLOptions *SAMLOptionsInput
 }
 
 // Specifies the status of advanced security options for the specified
@@ -180,6 +186,15 @@ type DescribePackagesFilter struct {
 
 // Options to configure endpoint for the Elasticsearch domain.
 type DomainEndpointOptions struct {
+
+	// Specify the fully qualified domain for your custom endpoint.
+	CustomEndpoint *string
+
+	// Specify ACM certificate ARN for your custom endpoint.
+	CustomEndpointCertificateArn *string
+
+	// Specify if custom endpoint should be enabled for the Elasticsearch domain.
+	CustomEndpointEnabled *bool
 
 	// Specify if only HTTPS endpoint should be enabled for the Elasticsearch domain.
 	EnforceHTTPS *bool
@@ -258,6 +273,8 @@ type DomainPackageDetails struct {
 
 	// Currently supports only TXT-DICTIONARY.
 	PackageType PackageType
+
+	PackageVersion *string
 
 	// The relative path on Amazon ES nodes, which can be used as synonym_path when the
 	// package is synonym file.
@@ -800,12 +817,15 @@ type OutboundCrossClusterSearchConnectionStatus struct {
 
 // Basic information about a package.
 type PackageDetails struct {
+	AvailablePackageVersion *string
 
 	// Timestamp which tells creation date of the package.
 	CreatedAt *time.Time
 
 	// Additional information if the package is in an error state. Null otherwise.
 	ErrorDetails *ErrorDetails
+
+	LastUpdatedAt *time.Time
 
 	// User-specified description of the package.
 	PackageDescription *string
@@ -832,6 +852,19 @@ type PackageSource struct {
 
 	// Key (file name) of the package.
 	S3Key *string
+}
+
+// Details of a package version.
+type PackageVersionHistory struct {
+
+	// A message associated with the version.
+	CommitMessage *string
+
+	// Timestamp which tells creation time of the package version.
+	CreatedAt *time.Time
+
+	// Version of the package.
+	PackageVersion *string
 }
 
 // Contains the specific price and frequency of a recurring charges for a reserved
@@ -921,6 +954,66 @@ type ReservedElasticsearchInstanceOffering struct {
 	// The rate you are charged for each hour the domain that is using the offering is
 	// running.
 	UsagePrice *float64
+}
+
+// Specifies the SAML Identity Provider's information.
+type SAMLIdp struct {
+
+	// The unique Entity ID of the application in SAML Identity Provider.
+	//
+	// This member is required.
+	EntityId *string
+
+	// The Metadata of the SAML application in xml format.
+	//
+	// This member is required.
+	MetadataContent *string
+}
+
+// Specifies the SAML application configuration for the domain.
+type SAMLOptionsInput struct {
+
+	// True if SAML is enabled.
+	Enabled *bool
+
+	// Specifies the SAML Identity Provider's information.
+	Idp *SAMLIdp
+
+	// The backend role to which the SAML master user is mapped to.
+	MasterBackendRole *string
+
+	// The SAML master username, which is stored in the Amazon Elasticsearch Service
+	// domain's internal database.
+	MasterUserName *string
+
+	// The key to use for matching the SAML Roles attribute.
+	RolesKey *string
+
+	// The duration, in minutes, after which a user session becomes inactive.
+	// Acceptable values are between 1 and 1440, and the default value is 60.
+	SessionTimeoutMinutes *int32
+
+	// The key to use for matching the SAML Subject attribute.
+	SubjectKey *string
+}
+
+// Describes the SAML application configured for the domain.
+type SAMLOptionsOutput struct {
+
+	// True if SAML is enabled.
+	Enabled *bool
+
+	// Describes the SAML Identity Provider's information.
+	Idp *SAMLIdp
+
+	// The key used for matching the SAML Roles attribute.
+	RolesKey *string
+
+	// The duration, in minutes, after which a user session becomes inactive.
+	SessionTimeoutMinutes *int32
+
+	// The key used for matching the SAML Subject attribute.
+	SubjectKey *string
 }
 
 // The current options of an Elasticsearch domain service software options.

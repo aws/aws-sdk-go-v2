@@ -835,6 +835,38 @@ func awsRestjson1_deserializeOpDocumentCreateEventSourceMappingOutput(v **Create
 				sv.ParallelizationFactor = ptr.Int32(int32(i64))
 			}
 
+		case "Queues":
+			if err := awsRestjson1_deserializeDocumentQueues(&sv.Queues, value); err != nil {
+				return err
+			}
+
+		case "SourceAccessConfigurations":
+			if err := awsRestjson1_deserializeDocumentSourceAccessConfigurations(&sv.SourceAccessConfigurations, value); err != nil {
+				return err
+			}
+
+		case "StartingPosition":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventSourcePosition to be of type string, got %T instead", value)
+				}
+				sv.StartingPosition = types.EventSourcePosition(jtv)
+			}
+
+		case "StartingPositionTimestamp":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Date to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.StartingPositionTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1618,6 +1650,38 @@ func awsRestjson1_deserializeOpDocumentDeleteEventSourceMappingOutput(v **Delete
 					return err
 				}
 				sv.ParallelizationFactor = ptr.Int32(int32(i64))
+			}
+
+		case "Queues":
+			if err := awsRestjson1_deserializeDocumentQueues(&sv.Queues, value); err != nil {
+				return err
+			}
+
+		case "SourceAccessConfigurations":
+			if err := awsRestjson1_deserializeDocumentSourceAccessConfigurations(&sv.SourceAccessConfigurations, value); err != nil {
+				return err
+			}
+
+		case "StartingPosition":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventSourcePosition to be of type string, got %T instead", value)
+				}
+				sv.StartingPosition = types.EventSourcePosition(jtv)
+			}
+
+		case "StartingPositionTimestamp":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Date to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.StartingPositionTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "State":
@@ -2739,6 +2803,38 @@ func awsRestjson1_deserializeOpDocumentGetEventSourceMappingOutput(v **GetEventS
 					return err
 				}
 				sv.ParallelizationFactor = ptr.Int32(int32(i64))
+			}
+
+		case "Queues":
+			if err := awsRestjson1_deserializeDocumentQueues(&sv.Queues, value); err != nil {
+				return err
+			}
+
+		case "SourceAccessConfigurations":
+			if err := awsRestjson1_deserializeDocumentSourceAccessConfigurations(&sv.SourceAccessConfigurations, value); err != nil {
+				return err
+			}
+
+		case "StartingPosition":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventSourcePosition to be of type string, got %T instead", value)
+				}
+				sv.StartingPosition = types.EventSourcePosition(jtv)
+			}
+
+		case "StartingPositionTimestamp":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Date to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.StartingPositionTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "State":
@@ -8544,6 +8640,38 @@ func awsRestjson1_deserializeOpDocumentUpdateEventSourceMappingOutput(v **Update
 				sv.ParallelizationFactor = ptr.Int32(int32(i64))
 			}
 
+		case "Queues":
+			if err := awsRestjson1_deserializeDocumentQueues(&sv.Queues, value); err != nil {
+				return err
+			}
+
+		case "SourceAccessConfigurations":
+			if err := awsRestjson1_deserializeDocumentSourceAccessConfigurations(&sv.SourceAccessConfigurations, value); err != nil {
+				return err
+			}
+
+		case "StartingPosition":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventSourcePosition to be of type string, got %T instead", value)
+				}
+				sv.StartingPosition = types.EventSourcePosition(jtv)
+			}
+
+		case "StartingPositionTimestamp":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Date to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.StartingPositionTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11922,6 +12050,38 @@ func awsRestjson1_deserializeDocumentEventSourceMappingConfiguration(v **types.E
 				sv.ParallelizationFactor = ptr.Int32(int32(i64))
 			}
 
+		case "Queues":
+			if err := awsRestjson1_deserializeDocumentQueues(&sv.Queues, value); err != nil {
+				return err
+			}
+
+		case "SourceAccessConfigurations":
+			if err := awsRestjson1_deserializeDocumentSourceAccessConfigurations(&sv.SourceAccessConfigurations, value); err != nil {
+				return err
+			}
+
+		case "StartingPosition":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventSourcePosition to be of type string, got %T instead", value)
+				}
+				sv.StartingPosition = types.EventSourcePosition(jtv)
+			}
+
+		case "StartingPositionTimestamp":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Date to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.StartingPositionTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13756,6 +13916,42 @@ func awsRestjson1_deserializeDocumentProvisionedConcurrencyConfigNotFoundExcepti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentQueues(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Queue to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRequestTooLargeException(v **types.RequestTooLargeException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14083,6 +14279,89 @@ func awsRestjson1_deserializeDocumentServiceException(v **types.ServiceException
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSourceAccessConfiguration(v **types.SourceAccessConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SourceAccessConfiguration
+	if *v == nil {
+		sv = &types.SourceAccessConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SourceAccessType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.SourceAccessType(jtv)
+			}
+
+		case "URI":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.URI = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSourceAccessConfigurations(v *[]types.SourceAccessConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SourceAccessConfiguration
+	if *v == nil {
+		cv = []types.SourceAccessConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SourceAccessConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSourceAccessConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

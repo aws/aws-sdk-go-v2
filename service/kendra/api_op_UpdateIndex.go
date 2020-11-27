@@ -52,6 +52,12 @@ type UpdateIndexInput struct {
 	// A new IAM role that gives Amazon Kendra permission to access your Amazon
 	// CloudWatch logs.
 	RoleArn *string
+
+	// The user user token context policy.
+	UserContextPolicy types.UserContextPolicy
+
+	// The user token configuration.
+	UserTokenConfigurations []types.UserTokenConfiguration
 }
 
 type UpdateIndexOutput struct {

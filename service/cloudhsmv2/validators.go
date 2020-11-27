@@ -170,6 +170,46 @@ func (m *validateOpListTags) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyBackupAttributes struct {
+}
+
+func (*validateOpModifyBackupAttributes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyBackupAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyBackupAttributesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyBackupAttributesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpModifyCluster struct {
+}
+
+func (*validateOpModifyCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRestoreBackup struct {
 }
 
@@ -262,6 +302,14 @@ func addOpListTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTags{}, middleware.After)
 }
 
+func addOpModifyBackupAttributesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyBackupAttributes{}, middleware.After)
+}
+
+func addOpModifyClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyCluster{}, middleware.After)
+}
+
 func addOpRestoreBackupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRestoreBackup{}, middleware.After)
 }
@@ -314,11 +362,11 @@ func validateOpCopyBackupToRegionInput(v *CopyBackupToRegionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CopyBackupToRegionInput"}
-	if v.BackupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BackupId"))
-	}
 	if v.DestinationRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationRegion"))
+	}
+	if v.BackupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupId"))
 	}
 	if v.TagList != nil {
 		if err := validateTagList(v.TagList); err != nil {
@@ -337,16 +385,16 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateClusterInput"}
-	if v.TagList != nil {
-		if err := validateTagList(v.TagList); err != nil {
-			invalidParams.AddNested("TagList", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.HsmType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HsmType"))
 	}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if v.TagList != nil {
+		if err := validateTagList(v.TagList); err != nil {
+			invalidParams.AddNested("TagList", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -426,11 +474,11 @@ func validateOpInitializeClusterInput(v *InitializeClusterInput) error {
 	if v.ClusterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
 	}
-	if v.TrustAnchor == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TrustAnchor"))
-	}
 	if v.SignedCert == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SignedCert"))
+	}
+	if v.TrustAnchor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrustAnchor"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -446,6 +494,42 @@ func validateOpListTagsInput(v *ListTagsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsInput"}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyBackupAttributesInput(v *ModifyBackupAttributesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyBackupAttributesInput"}
+	if v.BackupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupId"))
+	}
+	if v.NeverExpires == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NeverExpires"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyClusterInput(v *ModifyClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyClusterInput"}
+	if v.BackupRetentionPolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupRetentionPolicy"))
+	}
+	if v.ClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -250,6 +250,66 @@ func (m *validateOpCreateAccount) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAppInstanceAdmin struct {
+}
+
+func (*validateOpCreateAppInstanceAdmin) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAppInstanceAdmin) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAppInstanceAdminInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAppInstanceAdminInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAppInstance struct {
+}
+
+func (*validateOpCreateAppInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAppInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAppInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAppInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAppInstanceUser struct {
+}
+
+func (*validateOpCreateAppInstanceUser) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAppInstanceUser) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAppInstanceUserInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAppInstanceUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAttendee struct {
 }
 
@@ -285,6 +345,106 @@ func (m *validateOpCreateBot) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateBotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateChannelBan struct {
+}
+
+func (*validateOpCreateChannelBan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateChannelBan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateChannelBanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateChannelBanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateChannel struct {
+}
+
+func (*validateOpCreateChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateChannelMembership struct {
+}
+
+func (*validateOpCreateChannelMembership) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateChannelMembership) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateChannelMembershipInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateChannelMembershipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateChannelModerator struct {
+}
+
+func (*validateOpCreateChannelModerator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateChannelModerator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateChannelModeratorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateChannelModeratorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateMeetingDialOut struct {
+}
+
+func (*validateOpCreateMeetingDialOut) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMeetingDialOut) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMeetingDialOutInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMeetingDialOutInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -410,6 +570,66 @@ func (m *validateOpCreateRoomMembership) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateSipMediaApplicationCall struct {
+}
+
+func (*validateOpCreateSipMediaApplicationCall) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSipMediaApplicationCall) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSipMediaApplicationCallInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSipMediaApplicationCallInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateSipMediaApplication struct {
+}
+
+func (*validateOpCreateSipMediaApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSipMediaApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSipMediaApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSipMediaApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateSipRule struct {
+}
+
+func (*validateOpCreateSipRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSipRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSipRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSipRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateUser struct {
 }
 
@@ -490,6 +710,86 @@ func (m *validateOpDeleteAccount) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAppInstanceAdmin struct {
+}
+
+func (*validateOpDeleteAppInstanceAdmin) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAppInstanceAdmin) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAppInstanceAdminInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAppInstanceAdminInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAppInstance struct {
+}
+
+func (*validateOpDeleteAppInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAppInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAppInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAppInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAppInstanceStreamingConfigurations struct {
+}
+
+func (*validateOpDeleteAppInstanceStreamingConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAppInstanceStreamingConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAppInstanceStreamingConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAppInstanceStreamingConfigurationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAppInstanceUser struct {
+}
+
+func (*validateOpDeleteAppInstanceUser) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAppInstanceUser) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAppInstanceUserInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAppInstanceUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAttendee struct {
 }
 
@@ -505,6 +805,106 @@ func (m *validateOpDeleteAttendee) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAttendeeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteChannelBan struct {
+}
+
+func (*validateOpDeleteChannelBan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteChannelBan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteChannelBanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteChannelBanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteChannel struct {
+}
+
+func (*validateOpDeleteChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteChannelMembership struct {
+}
+
+func (*validateOpDeleteChannelMembership) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteChannelMembership) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteChannelMembershipInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteChannelMembershipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteChannelMessage struct {
+}
+
+func (*validateOpDeleteChannelMessage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteChannelMessage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteChannelMessageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteChannelMessageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteChannelModerator struct {
+}
+
+func (*validateOpDeleteChannelModerator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteChannelModerator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteChannelModeratorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteChannelModeratorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -625,6 +1025,46 @@ func (m *validateOpDeleteRoomMembership) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteRoomMembershipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSipMediaApplication struct {
+}
+
+func (*validateOpDeleteSipMediaApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSipMediaApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSipMediaApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSipMediaApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSipRule struct {
+}
+
+func (*validateOpDeleteSipRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSipRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSipRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSipRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -790,6 +1230,186 @@ func (m *validateOpDeleteVoiceConnectorTermination) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeAppInstanceAdmin struct {
+}
+
+func (*validateOpDescribeAppInstanceAdmin) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAppInstanceAdmin) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAppInstanceAdminInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAppInstanceAdminInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAppInstance struct {
+}
+
+func (*validateOpDescribeAppInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAppInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAppInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAppInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAppInstanceUser struct {
+}
+
+func (*validateOpDescribeAppInstanceUser) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAppInstanceUser) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAppInstanceUserInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAppInstanceUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeChannelBan struct {
+}
+
+func (*validateOpDescribeChannelBan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeChannelBan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeChannelBanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeChannelBanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeChannel struct {
+}
+
+func (*validateOpDescribeChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeChannelMembershipForAppInstanceUser struct {
+}
+
+func (*validateOpDescribeChannelMembershipForAppInstanceUser) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeChannelMembershipForAppInstanceUser) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeChannelMembershipForAppInstanceUserInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeChannelMembershipForAppInstanceUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeChannelMembership struct {
+}
+
+func (*validateOpDescribeChannelMembership) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeChannelMembership) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeChannelMembershipInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeChannelMembershipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeChannelModeratedByAppInstanceUser struct {
+}
+
+func (*validateOpDescribeChannelModeratedByAppInstanceUser) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeChannelModeratedByAppInstanceUser) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeChannelModeratedByAppInstanceUserInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeChannelModeratedByAppInstanceUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeChannelModerator struct {
+}
+
+func (*validateOpDescribeChannelModerator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeChannelModerator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeChannelModeratorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeChannelModeratorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociatePhoneNumberFromUser struct {
 }
 
@@ -910,6 +1530,46 @@ func (m *validateOpGetAccountSettings) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAppInstanceRetentionSettings struct {
+}
+
+func (*validateOpGetAppInstanceRetentionSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAppInstanceRetentionSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAppInstanceRetentionSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAppInstanceRetentionSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAppInstanceStreamingConfigurations struct {
+}
+
+func (*validateOpGetAppInstanceStreamingConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAppInstanceStreamingConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAppInstanceStreamingConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAppInstanceStreamingConfigurationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAttendee struct {
 }
 
@@ -945,6 +1605,26 @@ func (m *validateOpGetBot) HandleInitialize(ctx context.Context, in middleware.I
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetBotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetChannelMessage struct {
+}
+
+func (*validateOpGetChannelMessage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetChannelMessage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetChannelMessageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetChannelMessageInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1085,6 +1765,66 @@ func (m *validateOpGetRoom) HandleInitialize(ctx context.Context, in middleware.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetRoomInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSipMediaApplication struct {
+}
+
+func (*validateOpGetSipMediaApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSipMediaApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSipMediaApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSipMediaApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSipMediaApplicationLoggingConfiguration struct {
+}
+
+func (*validateOpGetSipMediaApplicationLoggingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSipMediaApplicationLoggingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSipMediaApplicationLoggingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSipMediaApplicationLoggingConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSipRule struct {
+}
+
+func (*validateOpGetSipRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSipRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSipRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSipRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1330,6 +2070,46 @@ func (m *validateOpInviteUsers) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAppInstanceAdmins struct {
+}
+
+func (*validateOpListAppInstanceAdmins) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAppInstanceAdmins) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAppInstanceAdminsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAppInstanceAdminsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAppInstanceUsers struct {
+}
+
+func (*validateOpListAppInstanceUsers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAppInstanceUsers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAppInstanceUsersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAppInstanceUsersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAttendees struct {
 }
 
@@ -1385,6 +2165,106 @@ func (m *validateOpListBots) HandleInitialize(ctx context.Context, in middleware
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListBotsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListChannelBans struct {
+}
+
+func (*validateOpListChannelBans) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListChannelBans) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListChannelBansInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListChannelBansInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListChannelMemberships struct {
+}
+
+func (*validateOpListChannelMemberships) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListChannelMemberships) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListChannelMembershipsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListChannelMembershipsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListChannelMessages struct {
+}
+
+func (*validateOpListChannelMessages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListChannelMessages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListChannelMessagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListChannelMessagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListChannelModerators struct {
+}
+
+func (*validateOpListChannelModerators) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListChannelModerators) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListChannelModeratorsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListChannelModeratorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListChannels struct {
+}
+
+func (*validateOpListChannels) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListChannels) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListChannelsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListChannelsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1550,6 +2430,46 @@ func (m *validateOpLogoutUser) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutAppInstanceRetentionSettings struct {
+}
+
+func (*validateOpPutAppInstanceRetentionSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAppInstanceRetentionSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAppInstanceRetentionSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAppInstanceRetentionSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutAppInstanceStreamingConfigurations struct {
+}
+
+func (*validateOpPutAppInstanceStreamingConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAppInstanceStreamingConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAppInstanceStreamingConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAppInstanceStreamingConfigurationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutEventsConfiguration struct {
 }
 
@@ -1585,6 +2505,26 @@ func (m *validateOpPutRetentionSettings) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutRetentionSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutSipMediaApplicationLoggingConfiguration struct {
+}
+
+func (*validateOpPutSipMediaApplicationLoggingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutSipMediaApplicationLoggingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutSipMediaApplicationLoggingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutSipMediaApplicationLoggingConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1730,6 +2670,26 @@ func (m *validateOpPutVoiceConnectorTermination) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRedactChannelMessage struct {
+}
+
+func (*validateOpRedactChannelMessage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRedactChannelMessage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RedactChannelMessageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRedactChannelMessageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRedactConversationMessage struct {
 }
 
@@ -1825,6 +2785,26 @@ func (m *validateOpRestorePhoneNumber) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRestorePhoneNumberInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSendChannelMessage struct {
+}
+
+func (*validateOpSendChannelMessage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendChannelMessage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendChannelMessageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendChannelMessageInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1990,6 +2970,46 @@ func (m *validateOpUpdateAccountSettings) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAppInstance struct {
+}
+
+func (*validateOpUpdateAppInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAppInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAppInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAppInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAppInstanceUser struct {
+}
+
+func (*validateOpUpdateAppInstanceUser) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAppInstanceUser) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAppInstanceUserInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAppInstanceUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateBot struct {
 }
 
@@ -2005,6 +3025,66 @@ func (m *validateOpUpdateBot) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateBotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateChannel struct {
+}
+
+func (*validateOpUpdateChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateChannelMessage struct {
+}
+
+func (*validateOpUpdateChannelMessage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateChannelMessage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateChannelMessageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateChannelMessageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateChannelReadMarker struct {
+}
+
+func (*validateOpUpdateChannelReadMarker) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateChannelReadMarker) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateChannelReadMarkerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateChannelReadMarkerInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2125,6 +3205,46 @@ func (m *validateOpUpdateRoomMembership) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateRoomMembershipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateSipMediaApplication struct {
+}
+
+func (*validateOpUpdateSipMediaApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSipMediaApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSipMediaApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSipMediaApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateSipRule struct {
+}
+
+func (*validateOpUpdateSipRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSipRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSipRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSipRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2258,12 +3378,44 @@ func addOpCreateAccountValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAccount{}, middleware.After)
 }
 
+func addOpCreateAppInstanceAdminValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAppInstanceAdmin{}, middleware.After)
+}
+
+func addOpCreateAppInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAppInstance{}, middleware.After)
+}
+
+func addOpCreateAppInstanceUserValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAppInstanceUser{}, middleware.After)
+}
+
 func addOpCreateAttendeeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAttendee{}, middleware.After)
 }
 
 func addOpCreateBotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBot{}, middleware.After)
+}
+
+func addOpCreateChannelBanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateChannelBan{}, middleware.After)
+}
+
+func addOpCreateChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateChannel{}, middleware.After)
+}
+
+func addOpCreateChannelMembershipValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateChannelMembership{}, middleware.After)
+}
+
+func addOpCreateChannelModeratorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateChannelModerator{}, middleware.After)
+}
+
+func addOpCreateMeetingDialOutValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMeetingDialOut{}, middleware.After)
 }
 
 func addOpCreateMeetingValidationMiddleware(stack *middleware.Stack) error {
@@ -2290,6 +3442,18 @@ func addOpCreateRoomMembershipValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpCreateRoomMembership{}, middleware.After)
 }
 
+func addOpCreateSipMediaApplicationCallValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSipMediaApplicationCall{}, middleware.After)
+}
+
+func addOpCreateSipMediaApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSipMediaApplication{}, middleware.After)
+}
+
+func addOpCreateSipRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSipRule{}, middleware.After)
+}
+
 func addOpCreateUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUser{}, middleware.After)
 }
@@ -2306,8 +3470,44 @@ func addOpDeleteAccountValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAccount{}, middleware.After)
 }
 
+func addOpDeleteAppInstanceAdminValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAppInstanceAdmin{}, middleware.After)
+}
+
+func addOpDeleteAppInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAppInstance{}, middleware.After)
+}
+
+func addOpDeleteAppInstanceStreamingConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAppInstanceStreamingConfigurations{}, middleware.After)
+}
+
+func addOpDeleteAppInstanceUserValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAppInstanceUser{}, middleware.After)
+}
+
 func addOpDeleteAttendeeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAttendee{}, middleware.After)
+}
+
+func addOpDeleteChannelBanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteChannelBan{}, middleware.After)
+}
+
+func addOpDeleteChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteChannel{}, middleware.After)
+}
+
+func addOpDeleteChannelMembershipValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteChannelMembership{}, middleware.After)
+}
+
+func addOpDeleteChannelMessageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteChannelMessage{}, middleware.After)
+}
+
+func addOpDeleteChannelModeratorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteChannelModerator{}, middleware.After)
 }
 
 func addOpDeleteEventsConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -2332,6 +3532,14 @@ func addOpDeleteRoomValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteRoomMembershipValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRoomMembership{}, middleware.After)
+}
+
+func addOpDeleteSipMediaApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSipMediaApplication{}, middleware.After)
+}
+
+func addOpDeleteSipRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSipRule{}, middleware.After)
 }
 
 func addOpDeleteVoiceConnectorEmergencyCallingConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -2366,6 +3574,42 @@ func addOpDeleteVoiceConnectorTerminationValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpDeleteVoiceConnectorTermination{}, middleware.After)
 }
 
+func addOpDescribeAppInstanceAdminValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAppInstanceAdmin{}, middleware.After)
+}
+
+func addOpDescribeAppInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAppInstance{}, middleware.After)
+}
+
+func addOpDescribeAppInstanceUserValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAppInstanceUser{}, middleware.After)
+}
+
+func addOpDescribeChannelBanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeChannelBan{}, middleware.After)
+}
+
+func addOpDescribeChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeChannel{}, middleware.After)
+}
+
+func addOpDescribeChannelMembershipForAppInstanceUserValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeChannelMembershipForAppInstanceUser{}, middleware.After)
+}
+
+func addOpDescribeChannelMembershipValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeChannelMembership{}, middleware.After)
+}
+
+func addOpDescribeChannelModeratedByAppInstanceUserValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeChannelModeratedByAppInstanceUser{}, middleware.After)
+}
+
+func addOpDescribeChannelModeratorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeChannelModerator{}, middleware.After)
+}
+
 func addOpDisassociatePhoneNumberFromUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociatePhoneNumberFromUser{}, middleware.After)
 }
@@ -2390,12 +3634,24 @@ func addOpGetAccountSettingsValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpGetAccountSettings{}, middleware.After)
 }
 
+func addOpGetAppInstanceRetentionSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAppInstanceRetentionSettings{}, middleware.After)
+}
+
+func addOpGetAppInstanceStreamingConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAppInstanceStreamingConfigurations{}, middleware.After)
+}
+
 func addOpGetAttendeeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAttendee{}, middleware.After)
 }
 
 func addOpGetBotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetBot{}, middleware.After)
+}
+
+func addOpGetChannelMessageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetChannelMessage{}, middleware.After)
 }
 
 func addOpGetEventsConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -2424,6 +3680,18 @@ func addOpGetRetentionSettingsValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpGetRoomValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRoom{}, middleware.After)
+}
+
+func addOpGetSipMediaApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSipMediaApplication{}, middleware.After)
+}
+
+func addOpGetSipMediaApplicationLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSipMediaApplicationLoggingConfiguration{}, middleware.After)
+}
+
+func addOpGetSipRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSipRule{}, middleware.After)
 }
 
 func addOpGetUserValidationMiddleware(stack *middleware.Stack) error {
@@ -2474,6 +3742,14 @@ func addOpInviteUsersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInviteUsers{}, middleware.After)
 }
 
+func addOpListAppInstanceAdminsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAppInstanceAdmins{}, middleware.After)
+}
+
+func addOpListAppInstanceUsersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAppInstanceUsers{}, middleware.After)
+}
+
 func addOpListAttendeesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAttendees{}, middleware.After)
 }
@@ -2484,6 +3760,26 @@ func addOpListAttendeeTagsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListBotsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListBots{}, middleware.After)
+}
+
+func addOpListChannelBansValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListChannelBans{}, middleware.After)
+}
+
+func addOpListChannelMembershipsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListChannelMemberships{}, middleware.After)
+}
+
+func addOpListChannelMessagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListChannelMessages{}, middleware.After)
+}
+
+func addOpListChannelModeratorsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListChannelModerators{}, middleware.After)
+}
+
+func addOpListChannelsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListChannels{}, middleware.After)
 }
 
 func addOpListMeetingTagsValidationMiddleware(stack *middleware.Stack) error {
@@ -2518,12 +3814,24 @@ func addOpLogoutUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpLogoutUser{}, middleware.After)
 }
 
+func addOpPutAppInstanceRetentionSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAppInstanceRetentionSettings{}, middleware.After)
+}
+
+func addOpPutAppInstanceStreamingConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAppInstanceStreamingConfigurations{}, middleware.After)
+}
+
 func addOpPutEventsConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutEventsConfiguration{}, middleware.After)
 }
 
 func addOpPutRetentionSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutRetentionSettings{}, middleware.After)
+}
+
+func addOpPutSipMediaApplicationLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutSipMediaApplicationLoggingConfiguration{}, middleware.After)
 }
 
 func addOpPutVoiceConnectorEmergencyCallingConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -2554,6 +3862,10 @@ func addOpPutVoiceConnectorTerminationValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpPutVoiceConnectorTermination{}, middleware.After)
 }
 
+func addOpRedactChannelMessageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRedactChannelMessage{}, middleware.After)
+}
+
 func addOpRedactConversationMessageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRedactConversationMessage{}, middleware.After)
 }
@@ -2572,6 +3884,10 @@ func addOpResetPersonalPINValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRestorePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRestorePhoneNumber{}, middleware.After)
+}
+
+func addOpSendChannelMessageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendChannelMessage{}, middleware.After)
 }
 
 func addOpTagAttendeeValidationMiddleware(stack *middleware.Stack) error {
@@ -2606,8 +3922,28 @@ func addOpUpdateAccountSettingsValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpUpdateAccountSettings{}, middleware.After)
 }
 
+func addOpUpdateAppInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAppInstance{}, middleware.After)
+}
+
+func addOpUpdateAppInstanceUserValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAppInstanceUser{}, middleware.After)
+}
+
 func addOpUpdateBotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateBot{}, middleware.After)
+}
+
+func addOpUpdateChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateChannel{}, middleware.After)
+}
+
+func addOpUpdateChannelMessageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateChannelMessage{}, middleware.After)
+}
+
+func addOpUpdateChannelReadMarkerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateChannelReadMarker{}, middleware.After)
 }
 
 func addOpUpdateGlobalSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -2634,6 +3970,14 @@ func addOpUpdateRoomMembershipValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpUpdateRoomMembership{}, middleware.After)
 }
 
+func addOpUpdateSipMediaApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSipMediaApplication{}, middleware.After)
+}
+
+func addOpUpdateSipRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSipRule{}, middleware.After)
+}
+
 func addOpUpdateUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateUser{}, middleware.After)
 }
@@ -2648,6 +3992,41 @@ func addOpUpdateVoiceConnectorGroupValidationMiddleware(stack *middleware.Stack)
 
 func addOpUpdateVoiceConnectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateVoiceConnector{}, middleware.After)
+}
+
+func validateAppInstanceStreamingConfiguration(v *types.AppInstanceStreamingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AppInstanceStreamingConfiguration"}
+	if len(v.AppInstanceDataType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceDataType"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAppInstanceStreamingConfigurationList(v []types.AppInstanceStreamingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AppInstanceStreamingConfigurationList"}
+	for i := range v {
+		if err := validateAppInstanceStreamingConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAttendeeTagList(v []types.Tag) error {
@@ -2672,13 +4051,13 @@ func validateCreateAttendeeRequestItem(v *types.CreateAttendeeRequestItem) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAttendeeRequestItem"}
+	if v.ExternalUserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExternalUserId"))
+	}
 	if v.Tags != nil {
 		if err := validateAttendeeTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ExternalUserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ExternalUserId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2778,11 +4157,11 @@ func validateGeoMatchParams(v *types.GeoMatchParams) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GeoMatchParams"}
-	if v.AreaCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AreaCode"))
-	}
 	if v.Country == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Country"))
+	}
+	if v.AreaCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AreaCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2900,14 +4279,14 @@ func validateTelephonySettings(v *types.TelephonySettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TelephonySettings"}
-	if v.SMS == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SMS"))
-	}
 	if v.InboundCalling == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InboundCalling"))
 	}
 	if v.OutboundCalling == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutboundCalling"))
+	}
+	if v.SMS == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SMS"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3039,11 +4418,11 @@ func validateOpAssociatePhoneNumbersWithVoiceConnectorGroupInput(v *AssociatePho
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociatePhoneNumbersWithVoiceConnectorGroupInput"}
-	if v.E164PhoneNumbers == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("E164PhoneNumbers"))
-	}
 	if v.VoiceConnectorGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorGroupId"))
+	}
+	if v.E164PhoneNumbers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("E164PhoneNumbers"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3057,11 +4436,11 @@ func validateOpAssociatePhoneNumbersWithVoiceConnectorInput(v *AssociatePhoneNum
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociatePhoneNumbersWithVoiceConnectorInput"}
-	if v.E164PhoneNumbers == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("E164PhoneNumbers"))
-	}
 	if v.VoiceConnectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
+	}
+	if v.E164PhoneNumbers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("E164PhoneNumbers"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3075,11 +4454,11 @@ func validateOpAssociatePhoneNumberWithUserInput(v *AssociatePhoneNumberWithUser
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociatePhoneNumberWithUserInput"}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if v.E164PhoneNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("E164PhoneNumber"))
@@ -3096,11 +4475,11 @@ func validateOpAssociateSigninDelegateGroupsWithAccountInput(v *AssociateSigninD
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateSigninDelegateGroupsWithAccountInput"}
-	if v.SigninDelegateGroups == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SigninDelegateGroups"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.SigninDelegateGroups == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SigninDelegateGroups"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3114,15 +4493,15 @@ func validateOpBatchCreateAttendeeInput(v *BatchCreateAttendeeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchCreateAttendeeInput"}
+	if v.MeetingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MeetingId"))
+	}
 	if v.Attendees == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Attendees"))
 	} else if v.Attendees != nil {
 		if err := validateCreateAttendeeRequestItemList(v.Attendees); err != nil {
 			invalidParams.AddNested("Attendees", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.MeetingId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MeetingId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3136,14 +4515,14 @@ func validateOpBatchCreateRoomMembershipInput(v *BatchCreateRoomMembershipInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchCreateRoomMembershipInput"}
-	if v.MembershipItemList == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MembershipItemList"))
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if v.RoomId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoomId"))
 	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	if v.MembershipItemList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipItemList"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3259,21 +4638,81 @@ func validateOpCreateAccountInput(v *CreateAccountInput) error {
 	}
 }
 
+func validateOpCreateAppInstanceAdminInput(v *CreateAppInstanceAdminInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAppInstanceAdminInput"}
+	if v.AppInstanceAdminArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceAdminArn"))
+	}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAppInstanceInput(v *CreateAppInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAppInstanceInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAppInstanceUserInput(v *CreateAppInstanceUserInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAppInstanceUserInput"}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if v.AppInstanceUserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceUserId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAttendeeInput(v *CreateAttendeeInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAttendeeInput"}
-	if v.Tags != nil {
-		if err := validateAttendeeTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
+	if v.MeetingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MeetingId"))
 	}
 	if v.ExternalUserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExternalUserId"))
 	}
-	if v.MeetingId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MeetingId"))
+	if v.Tags != nil {
+		if err := validateAttendeeTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3300,18 +4739,125 @@ func validateOpCreateBotInput(v *CreateBotInput) error {
 	}
 }
 
+func validateOpCreateChannelBanInput(v *CreateChannelBanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateChannelBanInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.MemberArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateChannelInput(v *CreateChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateChannelInput"}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateChannelMembershipInput(v *CreateChannelMembershipInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateChannelMembershipInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.MemberArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberArn"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateChannelModeratorInput(v *CreateChannelModeratorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateChannelModeratorInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.ChannelModeratorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelModeratorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateMeetingDialOutInput(v *CreateMeetingDialOutInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMeetingDialOutInput"}
+	if v.MeetingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MeetingId"))
+	}
+	if v.FromPhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FromPhoneNumber"))
+	}
+	if v.ToPhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ToPhoneNumber"))
+	}
+	if v.JoinToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JoinToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateMeetingInput(v *CreateMeetingInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateMeetingInput"}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
 	if v.Tags != nil {
 		if err := validateMeetingTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ClientRequestToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3325,13 +4871,13 @@ func validateOpCreateMeetingWithAttendeesInput(v *CreateMeetingWithAttendeesInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateMeetingWithAttendeesInput"}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
 	if v.Tags != nil {
 		if err := validateMeetingTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ClientRequestToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
 	}
 	if v.Attendees != nil {
 		if err := validateCreateMeetingWithAttendeesRequestItemList(v.Attendees); err != nil {
@@ -3368,19 +4914,19 @@ func validateOpCreateProxySessionInput(v *CreateProxySessionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateProxySessionInput"}
-	if v.GeoMatchParams != nil {
-		if err := validateGeoMatchParams(v.GeoMatchParams); err != nil {
-			invalidParams.AddNested("GeoMatchParams", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Capabilities == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Capabilities"))
-	}
 	if v.VoiceConnectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
 	}
 	if v.ParticipantPhoneNumbers == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParticipantPhoneNumbers"))
+	}
+	if v.Capabilities == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Capabilities"))
+	}
+	if v.GeoMatchParams != nil {
+		if err := validateGeoMatchParams(v.GeoMatchParams); err != nil {
+			invalidParams.AddNested("GeoMatchParams", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3412,14 +4958,71 @@ func validateOpCreateRoomMembershipInput(v *CreateRoomMembershipInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateRoomMembershipInput"}
-	if v.MemberId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if v.RoomId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoomId"))
+	}
+	if v.MemberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateSipMediaApplicationCallInput(v *CreateSipMediaApplicationCallInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSipMediaApplicationCallInput"}
+	if v.SipMediaApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SipMediaApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateSipMediaApplicationInput(v *CreateSipMediaApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSipMediaApplicationInput"}
+	if v.AwsRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsRegion"))
+	}
+	if v.Endpoints == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Endpoints"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateSipRuleInput(v *CreateSipRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSipRuleInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.TriggerType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TriggerType"))
+	}
+	if v.TriggerValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TriggerValue"))
+	}
+	if v.TargetApplications == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetApplications"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3448,13 +5051,13 @@ func validateOpCreateVoiceConnectorGroupInput(v *CreateVoiceConnectorGroupInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateVoiceConnectorGroupInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.VoiceConnectorItems != nil {
 		if err := validateVoiceConnectorItemList(v.VoiceConnectorItems); err != nil {
 			invalidParams.AddNested("VoiceConnectorItems", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3468,11 +5071,11 @@ func validateOpCreateVoiceConnectorInput(v *CreateVoiceConnectorInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateVoiceConnectorInput"}
-	if v.RequireEncryption == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RequireEncryption"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RequireEncryption == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequireEncryption"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3496,6 +5099,69 @@ func validateOpDeleteAccountInput(v *DeleteAccountInput) error {
 	}
 }
 
+func validateOpDeleteAppInstanceAdminInput(v *DeleteAppInstanceAdminInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAppInstanceAdminInput"}
+	if v.AppInstanceAdminArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceAdminArn"))
+	}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAppInstanceInput(v *DeleteAppInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAppInstanceInput"}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAppInstanceStreamingConfigurationsInput(v *DeleteAppInstanceStreamingConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAppInstanceStreamingConfigurationsInput"}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAppInstanceUserInput(v *DeleteAppInstanceUserInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAppInstanceUserInput"}
+	if v.AppInstanceUserArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceUserArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAttendeeInput(v *DeleteAttendeeInput) error {
 	if v == nil {
 		return nil
@@ -3506,6 +5172,93 @@ func validateOpDeleteAttendeeInput(v *DeleteAttendeeInput) error {
 	}
 	if v.AttendeeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AttendeeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteChannelBanInput(v *DeleteChannelBanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteChannelBanInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.MemberArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteChannelInput(v *DeleteChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteChannelInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteChannelMembershipInput(v *DeleteChannelMembershipInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteChannelMembershipInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.MemberArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteChannelMessageInput(v *DeleteChannelMessageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteChannelMessageInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.MessageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteChannelModeratorInput(v *DeleteChannelModeratorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteChannelModeratorInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.ChannelModeratorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelModeratorArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3603,14 +5356,44 @@ func validateOpDeleteRoomMembershipInput(v *DeleteRoomMembershipInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteRoomMembershipInput"}
-	if v.MemberId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if v.RoomId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoomId"))
 	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	if v.MemberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSipMediaApplicationInput(v *DeleteSipMediaApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSipMediaApplicationInput"}
+	if v.SipMediaApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SipMediaApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSipRuleInput(v *DeleteSipRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSipRuleInput"}
+	if v.SipRuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SipRuleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3714,11 +5497,11 @@ func validateOpDeleteVoiceConnectorTerminationCredentialsInput(v *DeleteVoiceCon
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteVoiceConnectorTerminationCredentialsInput"}
-	if v.Usernames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Usernames"))
-	}
 	if v.VoiceConnectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
+	}
+	if v.Usernames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Usernames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3742,16 +5525,169 @@ func validateOpDeleteVoiceConnectorTerminationInput(v *DeleteVoiceConnectorTermi
 	}
 }
 
+func validateOpDescribeAppInstanceAdminInput(v *DescribeAppInstanceAdminInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAppInstanceAdminInput"}
+	if v.AppInstanceAdminArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceAdminArn"))
+	}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAppInstanceInput(v *DescribeAppInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAppInstanceInput"}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAppInstanceUserInput(v *DescribeAppInstanceUserInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAppInstanceUserInput"}
+	if v.AppInstanceUserArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceUserArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeChannelBanInput(v *DescribeChannelBanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeChannelBanInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.MemberArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeChannelInput(v *DescribeChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeChannelInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeChannelMembershipForAppInstanceUserInput(v *DescribeChannelMembershipForAppInstanceUserInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeChannelMembershipForAppInstanceUserInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.AppInstanceUserArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceUserArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeChannelMembershipInput(v *DescribeChannelMembershipInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeChannelMembershipInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.MemberArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeChannelModeratedByAppInstanceUserInput(v *DescribeChannelModeratedByAppInstanceUserInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeChannelModeratedByAppInstanceUserInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.AppInstanceUserArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceUserArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeChannelModeratorInput(v *DescribeChannelModeratorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeChannelModeratorInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.ChannelModeratorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelModeratorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociatePhoneNumberFromUserInput(v *DisassociatePhoneNumberFromUserInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociatePhoneNumberFromUserInput"}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3765,11 +5701,11 @@ func validateOpDisassociatePhoneNumbersFromVoiceConnectorGroupInput(v *Disassoci
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociatePhoneNumbersFromVoiceConnectorGroupInput"}
-	if v.E164PhoneNumbers == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("E164PhoneNumbers"))
-	}
 	if v.VoiceConnectorGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorGroupId"))
+	}
+	if v.E164PhoneNumbers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("E164PhoneNumbers"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3844,16 +5780,46 @@ func validateOpGetAccountSettingsInput(v *GetAccountSettingsInput) error {
 	}
 }
 
+func validateOpGetAppInstanceRetentionSettingsInput(v *GetAppInstanceRetentionSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAppInstanceRetentionSettingsInput"}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAppInstanceStreamingConfigurationsInput(v *GetAppInstanceStreamingConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAppInstanceStreamingConfigurationsInput"}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetAttendeeInput(v *GetAttendeeInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetAttendeeInput"}
-	if v.AttendeeId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AttendeeId"))
-	}
 	if v.MeetingId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MeetingId"))
+	}
+	if v.AttendeeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttendeeId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3872,6 +5838,24 @@ func validateOpGetBotInput(v *GetBotInput) error {
 	}
 	if v.BotId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetChannelMessageInput(v *GetChannelMessageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetChannelMessageInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.MessageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3986,6 +5970,51 @@ func validateOpGetRoomInput(v *GetRoomInput) error {
 	}
 	if v.RoomId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoomId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSipMediaApplicationInput(v *GetSipMediaApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSipMediaApplicationInput"}
+	if v.SipMediaApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SipMediaApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSipMediaApplicationLoggingConfigurationInput(v *GetSipMediaApplicationLoggingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSipMediaApplicationLoggingConfigurationInput"}
+	if v.SipMediaApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SipMediaApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSipRuleInput(v *GetSipRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSipRuleInput"}
+	if v.SipRuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SipRuleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4170,11 +6199,41 @@ func validateOpInviteUsersInput(v *InviteUsersInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InviteUsersInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
 	if v.UserEmailList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserEmailList"))
 	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAppInstanceAdminsInput(v *ListAppInstanceAdminsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAppInstanceAdminsInput"}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAppInstanceUsersInput(v *ListAppInstanceUsersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAppInstanceUsersInput"}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4223,6 +6282,81 @@ func validateOpListBotsInput(v *ListBotsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListBotsInput"}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListChannelBansInput(v *ListChannelBansInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListChannelBansInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListChannelMembershipsInput(v *ListChannelMembershipsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListChannelMembershipsInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListChannelMessagesInput(v *ListChannelMessagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListChannelMessagesInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListChannelModeratorsInput(v *ListChannelModeratorsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListChannelModeratorsInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListChannelsInput(v *ListChannelsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListChannelsInput"}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4357,16 +6491,56 @@ func validateOpLogoutUserInput(v *LogoutUserInput) error {
 	}
 }
 
+func validateOpPutAppInstanceRetentionSettingsInput(v *PutAppInstanceRetentionSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAppInstanceRetentionSettingsInput"}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if v.AppInstanceRetentionSettings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceRetentionSettings"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAppInstanceStreamingConfigurationsInput(v *PutAppInstanceStreamingConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAppInstanceStreamingConfigurationsInput"}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if v.AppInstanceStreamingConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceStreamingConfigurations"))
+	} else if v.AppInstanceStreamingConfigurations != nil {
+		if err := validateAppInstanceStreamingConfigurationList(v.AppInstanceStreamingConfigurations); err != nil {
+			invalidParams.AddNested("AppInstanceStreamingConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutEventsConfigurationInput(v *PutEventsConfigurationInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutEventsConfigurationInput"}
-	if v.BotId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4393,20 +6567,35 @@ func validateOpPutRetentionSettingsInput(v *PutRetentionSettingsInput) error {
 	}
 }
 
+func validateOpPutSipMediaApplicationLoggingConfigurationInput(v *PutSipMediaApplicationLoggingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutSipMediaApplicationLoggingConfigurationInput"}
+	if v.SipMediaApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SipMediaApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutVoiceConnectorEmergencyCallingConfigurationInput(v *PutVoiceConnectorEmergencyCallingConfigurationInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutVoiceConnectorEmergencyCallingConfigurationInput"}
+	if v.VoiceConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
+	}
 	if v.EmergencyCallingConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EmergencyCallingConfiguration"))
 	} else if v.EmergencyCallingConfiguration != nil {
 		if err := validateEmergencyCallingConfiguration(v.EmergencyCallingConfiguration); err != nil {
 			invalidParams.AddNested("EmergencyCallingConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.VoiceConnectorId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4438,11 +6627,11 @@ func validateOpPutVoiceConnectorOriginationInput(v *PutVoiceConnectorOrigination
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutVoiceConnectorOriginationInput"}
-	if v.Origination == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Origination"))
-	}
 	if v.VoiceConnectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
+	}
+	if v.Origination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Origination"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4456,14 +6645,14 @@ func validateOpPutVoiceConnectorProxyInput(v *PutVoiceConnectorProxyInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutVoiceConnectorProxyInput"}
-	if v.PhoneNumberPoolCountries == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumberPoolCountries"))
+	if v.VoiceConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
 	}
 	if v.DefaultSessionExpiryMinutes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DefaultSessionExpiryMinutes"))
 	}
-	if v.VoiceConnectorId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
+	if v.PhoneNumberPoolCountries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumberPoolCountries"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4477,15 +6666,15 @@ func validateOpPutVoiceConnectorStreamingConfigurationInput(v *PutVoiceConnector
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutVoiceConnectorStreamingConfigurationInput"}
+	if v.VoiceConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
+	}
 	if v.StreamingConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StreamingConfiguration"))
 	} else if v.StreamingConfiguration != nil {
 		if err := validateStreamingConfiguration(v.StreamingConfiguration); err != nil {
 			invalidParams.AddNested("StreamingConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.VoiceConnectorId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4514,11 +6703,29 @@ func validateOpPutVoiceConnectorTerminationInput(v *PutVoiceConnectorTermination
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutVoiceConnectorTerminationInput"}
+	if v.VoiceConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
+	}
 	if v.Termination == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Termination"))
 	}
-	if v.VoiceConnectorId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRedactChannelMessageInput(v *RedactChannelMessageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedactChannelMessageInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.MessageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4532,14 +6739,14 @@ func validateOpRedactConversationMessageInput(v *RedactConversationMessageInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RedactConversationMessageInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
 	if v.ConversationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConversationId"))
 	}
 	if v.MessageId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
-	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4553,14 +6760,14 @@ func validateOpRedactRoomMessageInput(v *RedactRoomMessageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RedactRoomMessageInput"}
-	if v.MessageId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if v.RoomId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoomId"))
 	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	if v.MessageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4620,6 +6827,33 @@ func validateOpRestorePhoneNumberInput(v *RestorePhoneNumberInput) error {
 	}
 }
 
+func validateOpSendChannelMessageInput(v *SendChannelMessageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendChannelMessageInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if len(v.Persistence) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Persistence"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagAttendeeInput(v *TagAttendeeInput) error {
 	if v == nil {
 		return nil
@@ -4628,15 +6862,15 @@ func validateOpTagAttendeeInput(v *TagAttendeeInput) error {
 	if v.MeetingId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MeetingId"))
 	}
+	if v.AttendeeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttendeeId"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateAttendeeTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.AttendeeId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AttendeeId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4650,15 +6884,15 @@ func validateOpTagMeetingInput(v *TagMeetingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagMeetingInput"}
+	if v.MeetingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MeetingId"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateMeetingTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.MeetingId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MeetingId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4672,15 +6906,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4694,14 +6928,14 @@ func validateOpUntagAttendeeInput(v *UntagAttendeeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagAttendeeInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.MeetingId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MeetingId"))
 	}
 	if v.AttendeeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AttendeeId"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4715,11 +6949,11 @@ func validateOpUntagMeetingInput(v *UntagMeetingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagMeetingInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.MeetingId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MeetingId"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4779,16 +7013,106 @@ func validateOpUpdateAccountSettingsInput(v *UpdateAccountSettingsInput) error {
 	}
 }
 
+func validateOpUpdateAppInstanceInput(v *UpdateAppInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAppInstanceInput"}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAppInstanceUserInput(v *UpdateAppInstanceUserInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAppInstanceUserInput"}
+	if v.AppInstanceUserArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceUserArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateBotInput(v *UpdateBotInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateBotInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
 	if v.BotId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
 	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateChannelInput(v *UpdateChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateChannelInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateChannelMessageInput(v *UpdateChannelMessageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateChannelMessageInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.MessageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateChannelReadMarkerInput(v *UpdateChannelReadMarkerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateChannelReadMarkerInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4802,11 +7126,11 @@ func validateOpUpdateGlobalSettingsInput(v *UpdateGlobalSettingsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateGlobalSettingsInput"}
-	if v.VoiceConnector == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnector"))
-	}
 	if v.BusinessCalling == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BusinessCalling"))
+	}
+	if v.VoiceConnector == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnector"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4850,11 +7174,11 @@ func validateOpUpdateProxySessionInput(v *UpdateProxySessionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateProxySessionInput"}
-	if v.ProxySessionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProxySessionId"))
-	}
 	if v.VoiceConnectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
+	}
+	if v.ProxySessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProxySessionId"))
 	}
 	if v.Capabilities == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Capabilities"))
@@ -4871,11 +7195,11 @@ func validateOpUpdateRoomInput(v *UpdateRoomInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRoomInput"}
-	if v.RoomId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoomId"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.RoomId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoomId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4889,14 +7213,47 @@ func validateOpUpdateRoomMembershipInput(v *UpdateRoomMembershipInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRoomMembershipInput"}
-	if v.MemberId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if v.RoomId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoomId"))
 	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	if v.MemberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSipMediaApplicationInput(v *UpdateSipMediaApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSipMediaApplicationInput"}
+	if v.SipMediaApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SipMediaApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSipRuleInput(v *UpdateSipRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSipRuleInput"}
+	if v.SipRuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SipRuleId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4910,11 +7267,11 @@ func validateOpUpdateUserInput(v *UpdateUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserInput"}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4931,15 +7288,15 @@ func validateOpUpdateUserSettingsInput(v *UpdateUserSettingsInput) error {
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
 	if v.UserSettings == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserSettings"))
 	} else if v.UserSettings != nil {
 		if err := validateUserSettings(v.UserSettings); err != nil {
 			invalidParams.AddNested("UserSettings", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4953,18 +7310,18 @@ func validateOpUpdateVoiceConnectorGroupInput(v *UpdateVoiceConnectorGroupInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateVoiceConnectorGroupInput"}
+	if v.VoiceConnectorGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorGroupId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.VoiceConnectorItems == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorItems"))
 	} else if v.VoiceConnectorItems != nil {
 		if err := validateVoiceConnectorItemList(v.VoiceConnectorItems); err != nil {
 			invalidParams.AddNested("VoiceConnectorItems", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.VoiceConnectorGroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

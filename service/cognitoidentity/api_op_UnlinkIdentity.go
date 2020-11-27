@@ -110,7 +110,6 @@ func newServiceMetadataMiddleware_opUnlinkIdentity(region string) *awsmiddleware
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "cognito-identity",
 		OperationName: "UnlinkIdentity",
 	}
 }

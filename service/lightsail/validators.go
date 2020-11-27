@@ -230,6 +230,46 @@ func (m *validateOpCreateContactMethod) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateContainerServiceDeployment struct {
+}
+
+func (*validateOpCreateContainerServiceDeployment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateContainerServiceDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateContainerServiceDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateContainerServiceDeploymentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateContainerService struct {
+}
+
+func (*validateOpCreateContainerService) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateContainerService) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateContainerServiceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateContainerServiceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDiskFromSnapshot struct {
 }
 
@@ -605,6 +645,46 @@ func (m *validateOpDeleteContactMethod) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteContactMethodInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteContainerImage struct {
+}
+
+func (*validateOpDeleteContainerImage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteContainerImage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteContainerImageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteContainerImageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteContainerService struct {
+}
+
+func (*validateOpDeleteContainerService) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteContainerService) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteContainerServiceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteContainerServiceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1005,6 +1085,86 @@ func (m *validateOpGetAutoSnapshots) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetAutoSnapshotsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetContainerImages struct {
+}
+
+func (*validateOpGetContainerImages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetContainerImages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetContainerImagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetContainerImagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetContainerLog struct {
+}
+
+func (*validateOpGetContainerLog) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetContainerLog) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetContainerLogInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetContainerLogInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetContainerServiceDeployments struct {
+}
+
+func (*validateOpGetContainerServiceDeployments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetContainerServiceDeployments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetContainerServiceDeploymentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetContainerServiceDeploymentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetContainerServiceMetricData struct {
+}
+
+func (*validateOpGetContainerServiceMetricData) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetContainerServiceMetricData) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetContainerServiceMetricDataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetContainerServiceMetricDataInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1630,6 +1790,26 @@ func (m *validateOpRebootRelationalDatabase) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRegisterContainerImage struct {
+}
+
+func (*validateOpRegisterContainerImage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterContainerImage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterContainerImageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterContainerImageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpReleaseStaticIp struct {
 }
 
@@ -1810,6 +1990,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateContainerService struct {
+}
+
+func (*validateOpUpdateContainerService) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateContainerService) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateContainerServiceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateContainerServiceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDistribution struct {
 }
 
@@ -1954,6 +2154,14 @@ func addOpCreateContactMethodValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreateContactMethod{}, middleware.After)
 }
 
+func addOpCreateContainerServiceDeploymentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateContainerServiceDeployment{}, middleware.After)
+}
+
+func addOpCreateContainerServiceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateContainerService{}, middleware.After)
+}
+
 func addOpCreateDiskFromSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDiskFromSnapshot{}, middleware.After)
 }
@@ -2028,6 +2236,14 @@ func addOpDeleteCertificateValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteContactMethodValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteContactMethod{}, middleware.After)
+}
+
+func addOpDeleteContainerImageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteContainerImage{}, middleware.After)
+}
+
+func addOpDeleteContainerServiceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteContainerService{}, middleware.After)
 }
 
 func addOpDeleteDiskValidationMiddleware(stack *middleware.Stack) error {
@@ -2108,6 +2324,22 @@ func addOpExportSnapshotValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetAutoSnapshotsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAutoSnapshots{}, middleware.After)
+}
+
+func addOpGetContainerImagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetContainerImages{}, middleware.After)
+}
+
+func addOpGetContainerLogValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetContainerLog{}, middleware.After)
+}
+
+func addOpGetContainerServiceDeploymentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetContainerServiceDeployments{}, middleware.After)
+}
+
+func addOpGetContainerServiceMetricDataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetContainerServiceMetricData{}, middleware.After)
 }
 
 func addOpGetDiskValidationMiddleware(stack *middleware.Stack) error {
@@ -2234,6 +2466,10 @@ func addOpRebootRelationalDatabaseValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpRebootRelationalDatabase{}, middleware.After)
 }
 
+func addOpRegisterContainerImageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterContainerImage{}, middleware.After)
+}
+
 func addOpReleaseStaticIpValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpReleaseStaticIp{}, middleware.After)
 }
@@ -2268,6 +2504,10 @@ func addOpTestAlarmValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateContainerServiceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateContainerService{}, middleware.After)
 }
 
 func addOpUpdateDistributionValidationMiddleware(stack *middleware.Stack) error {
@@ -2322,11 +2562,49 @@ func validateAddOnRequestList(v []types.AddOnRequest) error {
 	}
 }
 
+func validateContainerServiceDeploymentRequest(v *types.ContainerServiceDeploymentRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerServiceDeploymentRequest"}
+	if v.PublicEndpoint != nil {
+		if err := validateEndpointRequest(v.PublicEndpoint); err != nil {
+			invalidParams.AddNested("PublicEndpoint", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEndpointRequest(v *types.EndpointRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EndpointRequest"}
+	if v.ContainerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerName"))
+	}
+	if v.ContainerPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerPort"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInstanceEntry(v *types.InstanceEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InstanceEntry"}
+	if len(v.PortInfoSource) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PortInfoSource"))
+	}
 	if v.AvailabilityZone == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
 	}
@@ -2335,9 +2613,6 @@ func validateInstanceEntry(v *types.InstanceEntry) error {
 	}
 	if v.InstanceType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
-	}
-	if len(v.PortInfoSource) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("PortInfoSource"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2383,11 +2658,11 @@ func validateOpAttachCertificateToDistributionInput(v *AttachCertificateToDistri
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttachCertificateToDistributionInput"}
-	if v.CertificateName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateName"))
-	}
 	if v.DistributionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DistributionName"))
+	}
+	if v.CertificateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2440,11 +2715,11 @@ func validateOpAttachLoadBalancerTlsCertificateInput(v *AttachLoadBalancerTlsCer
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttachLoadBalancerTlsCertificateInput"}
-	if v.LoadBalancerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
-	}
 	if v.CertificateName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateName"))
+	}
+	if v.LoadBalancerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2458,11 +2733,11 @@ func validateOpAttachStaticIpInput(v *AttachStaticIpInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttachStaticIpInput"}
-	if v.InstanceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceName"))
-	}
 	if v.StaticIpName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StaticIpName"))
+	}
+	if v.InstanceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2476,11 +2751,11 @@ func validateOpCloseInstancePublicPortsInput(v *CloseInstancePublicPortsInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CloseInstancePublicPortsInput"}
-	if v.PortInfo == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PortInfo"))
-	}
 	if v.InstanceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceName"))
+	}
+	if v.PortInfo == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortInfo"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2494,11 +2769,11 @@ func validateOpCopySnapshotInput(v *CopySnapshotInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CopySnapshotInput"}
-	if len(v.SourceRegion) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceRegion"))
-	}
 	if v.TargetSnapshotName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetSnapshotName"))
+	}
+	if len(v.SourceRegion) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceRegion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2549,11 +2824,57 @@ func validateOpCreateContactMethodInput(v *CreateContactMethodInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateContactMethodInput"}
+	if v.ContactEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactEndpoint"))
+	}
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
 	}
-	if v.ContactEndpoint == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ContactEndpoint"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateContainerServiceDeploymentInput(v *CreateContainerServiceDeploymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateContainerServiceDeploymentInput"}
+	if v.PublicEndpoint != nil {
+		if err := validateEndpointRequest(v.PublicEndpoint); err != nil {
+			invalidParams.AddNested("PublicEndpoint", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateContainerServiceInput(v *CreateContainerServiceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateContainerServiceInput"}
+	if len(v.Power) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Power"))
+	}
+	if v.Scale == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Scale"))
+	}
+	if v.Deployment != nil {
+		if err := validateContainerServiceDeploymentRequest(v.Deployment); err != nil {
+			invalidParams.AddNested("Deployment", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2567,19 +2888,19 @@ func validateOpCreateDiskFromSnapshotInput(v *CreateDiskFromSnapshotInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDiskFromSnapshotInput"}
-	if v.SizeInGb == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SizeInGb"))
-	}
 	if v.DiskName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DiskName"))
 	}
-	if v.AvailabilityZone == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
+	if v.SizeInGb == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SizeInGb"))
 	}
 	if v.AddOns != nil {
 		if err := validateAddOnRequestList(v.AddOns); err != nil {
 			invalidParams.AddNested("AddOns", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.AvailabilityZone == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2593,6 +2914,12 @@ func validateOpCreateDiskInput(v *CreateDiskInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDiskInput"}
+	if v.SizeInGb == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SizeInGb"))
+	}
+	if v.AvailabilityZone == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
+	}
 	if v.DiskName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DiskName"))
 	}
@@ -2600,12 +2927,6 @@ func validateOpCreateDiskInput(v *CreateDiskInput) error {
 		if err := validateAddOnRequestList(v.AddOns); err != nil {
 			invalidParams.AddNested("AddOns", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.AvailabilityZone == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
-	}
-	if v.SizeInGb == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SizeInGb"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2634,17 +2955,17 @@ func validateOpCreateDistributionInput(v *CreateDistributionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDistributionInput"}
-	if v.BundleId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
-	}
-	if v.DefaultCacheBehavior == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DefaultCacheBehavior"))
-	}
 	if v.DistributionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DistributionName"))
 	}
 	if v.Origin == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Origin"))
+	}
+	if v.DefaultCacheBehavior == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultCacheBehavior"))
+	}
+	if v.BundleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2658,11 +2979,11 @@ func validateOpCreateDomainEntryInput(v *CreateDomainEntryInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDomainEntryInput"}
-	if v.DomainName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
-	}
 	if v.DomainEntry == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainEntry"))
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2691,19 +3012,19 @@ func validateOpCreateInstancesFromSnapshotInput(v *CreateInstancesFromSnapshotIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateInstancesFromSnapshotInput"}
-	if v.InstanceNames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceNames"))
-	}
 	if v.AvailabilityZone == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
-	}
-	if v.BundleId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
 	}
 	if v.AddOns != nil {
 		if err := validateAddOnRequestList(v.AddOns); err != nil {
 			invalidParams.AddNested("AddOns", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.BundleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
+	}
+	if v.InstanceNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceNames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2717,11 +3038,10 @@ func validateOpCreateInstancesInput(v *CreateInstancesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateInstancesInput"}
-	if v.InstanceNames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceNames"))
-	}
-	if v.BundleId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
+	if v.AddOns != nil {
+		if err := validateAddOnRequestList(v.AddOns); err != nil {
+			invalidParams.AddNested("AddOns", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.AvailabilityZone == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
@@ -2729,10 +3049,11 @@ func validateOpCreateInstancesInput(v *CreateInstancesInput) error {
 	if v.BlueprintId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BlueprintId"))
 	}
-	if v.AddOns != nil {
-		if err := validateAddOnRequestList(v.AddOns); err != nil {
-			invalidParams.AddNested("AddOns", err.(smithy.InvalidParamsError))
-		}
+	if v.BundleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
+	}
+	if v.InstanceNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceNames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2794,14 +3115,14 @@ func validateOpCreateLoadBalancerTlsCertificateInput(v *CreateLoadBalancerTlsCer
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLoadBalancerTlsCertificateInput"}
-	if v.LoadBalancerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
+	if v.CertificateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateName"))
 	}
 	if v.CertificateDomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateDomainName"))
 	}
-	if v.CertificateName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateName"))
+	if v.LoadBalancerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2830,17 +3151,17 @@ func validateOpCreateRelationalDatabaseInput(v *CreateRelationalDatabaseInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateRelationalDatabaseInput"}
-	if v.MasterUsername == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MasterUsername"))
+	if v.RelationalDatabaseBlueprintId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseBlueprintId"))
 	}
 	if v.MasterDatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MasterDatabaseName"))
 	}
-	if v.RelationalDatabaseBlueprintId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseBlueprintId"))
-	}
 	if v.RelationalDatabaseBundleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseBundleId"))
+	}
+	if v.MasterUsername == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MasterUsername"))
 	}
 	if v.RelationalDatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseName"))
@@ -2890,11 +3211,11 @@ func validateOpDeleteAutoSnapshotInput(v *DeleteAutoSnapshotInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAutoSnapshotInput"}
-	if v.Date == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Date"))
-	}
 	if v.ResourceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if v.Date == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Date"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2925,6 +3246,39 @@ func validateOpDeleteContactMethodInput(v *DeleteContactMethodInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteContactMethodInput"}
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteContainerImageInput(v *DeleteContainerImageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteContainerImageInput"}
+	if v.Image == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Image"))
+	}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteContainerServiceInput(v *DeleteContainerServiceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteContainerServiceInput"}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3154,11 +3508,11 @@ func validateOpDetachInstancesFromLoadBalancerInput(v *DetachInstancesFromLoadBa
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DetachInstancesFromLoadBalancerInput"}
-	if v.InstanceNames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceNames"))
-	}
 	if v.LoadBalancerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
+	}
+	if v.InstanceNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceNames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3187,11 +3541,11 @@ func validateOpDisableAddOnInput(v *DisableAddOnInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisableAddOnInput"}
-	if len(v.AddOnType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("AddOnType"))
-	}
 	if v.ResourceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if len(v.AddOnType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AddOnType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3252,6 +3606,81 @@ func validateOpGetAutoSnapshotsInput(v *GetAutoSnapshotsInput) error {
 	}
 }
 
+func validateOpGetContainerImagesInput(v *GetContainerImagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetContainerImagesInput"}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetContainerLogInput(v *GetContainerLogInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetContainerLogInput"}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if v.ContainerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetContainerServiceDeploymentsInput(v *GetContainerServiceDeploymentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetContainerServiceDeploymentsInput"}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetContainerServiceMetricDataInput(v *GetContainerServiceMetricDataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetContainerServiceMetricDataInput"}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if len(v.MetricName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if v.Statistics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Statistics"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDiskInput(v *GetDiskInput) error {
 	if v == nil {
 		return nil
@@ -3287,20 +3716,20 @@ func validateOpGetDistributionMetricDataInput(v *GetDistributionMetricDataInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDistributionMetricDataInput"}
-	if v.Statistics == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Statistics"))
-	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if v.DistributionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DistributionName"))
+	}
+	if v.Statistics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Statistics"))
 	}
 	if len(v.Unit) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
 	}
 	if len(v.MetricName) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
-	}
-	if v.DistributionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DistributionName"))
 	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
@@ -3362,11 +3791,8 @@ func validateOpGetInstanceMetricDataInput(v *GetInstanceMetricDataInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetInstanceMetricDataInput"}
-	if v.EndTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
-	}
-	if len(v.MetricName) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	if v.InstanceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceName"))
 	}
 	if len(v.Unit) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
@@ -3374,8 +3800,11 @@ func validateOpGetInstanceMetricDataInput(v *GetInstanceMetricDataInput) error {
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
 	}
-	if v.InstanceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceName"))
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if len(v.MetricName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
 	}
 	if v.Statistics == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Statistics"))
@@ -3467,8 +3896,8 @@ func validateOpGetLoadBalancerMetricDataInput(v *GetLoadBalancerMetricDataInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetLoadBalancerMetricDataInput"}
-	if v.StartTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	if len(v.MetricName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
 	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
@@ -3476,11 +3905,11 @@ func validateOpGetLoadBalancerMetricDataInput(v *GetLoadBalancerMetricDataInput)
 	if v.Statistics == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Statistics"))
 	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
 	if len(v.Unit) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
-	}
-	if len(v.MetricName) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
 	}
 	if v.LoadBalancerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
@@ -3572,11 +4001,11 @@ func validateOpGetRelationalDatabaseLogEventsInput(v *GetRelationalDatabaseLogEv
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetRelationalDatabaseLogEventsInput"}
-	if v.LogStreamName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LogStreamName"))
-	}
 	if v.RelationalDatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseName"))
+	}
+	if v.LogStreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogStreamName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3620,20 +4049,20 @@ func validateOpGetRelationalDatabaseMetricDataInput(v *GetRelationalDatabaseMetr
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetRelationalDatabaseMetricDataInput"}
+	if v.RelationalDatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseName"))
+	}
+	if len(v.MetricName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
 	}
 	if len(v.Unit) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
-	}
-	if v.RelationalDatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseName"))
-	}
-	if v.EndTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
-	}
-	if len(v.MetricName) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
 	}
 	if v.Statistics == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Statistics"))
@@ -3713,11 +4142,11 @@ func validateOpOpenInstancePublicPortsInput(v *OpenInstancePublicPortsInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OpenInstancePublicPortsInput"}
-	if v.InstanceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceName"))
-	}
 	if v.PortInfo == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PortInfo"))
+	}
+	if v.InstanceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3731,20 +4160,20 @@ func validateOpPutAlarmInput(v *PutAlarmInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutAlarmInput"}
-	if v.Threshold == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Threshold"))
-	}
-	if v.MonitoredResourceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MonitoredResourceName"))
+	if len(v.ComparisonOperator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
 	}
 	if v.EvaluationPeriods == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EvaluationPeriods"))
 	}
-	if len(v.ComparisonOperator) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
+	if v.Threshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Threshold"))
 	}
 	if v.AlarmName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AlarmName"))
+	}
+	if v.MonitoredResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitoredResourceName"))
 	}
 	if len(v.MetricName) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
@@ -3761,11 +4190,11 @@ func validateOpPutInstancePublicPortsInput(v *PutInstancePublicPortsInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutInstancePublicPortsInput"}
-	if v.InstanceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceName"))
-	}
 	if v.PortInfos == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PortInfos"))
+	}
+	if v.InstanceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3796,6 +4225,27 @@ func validateOpRebootRelationalDatabaseInput(v *RebootRelationalDatabaseInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "RebootRelationalDatabaseInput"}
 	if v.RelationalDatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRegisterContainerImageInput(v *RegisterContainerImageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterContainerImageInput"}
+	if v.Label == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Label"))
+	}
+	if v.Digest == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Digest"))
+	}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3917,11 +4367,11 @@ func validateOpTestAlarmInput(v *TestAlarmInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TestAlarmInput"}
-	if v.AlarmName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AlarmName"))
-	}
 	if len(v.State) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if v.AlarmName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AlarmName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3935,11 +4385,26 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
-	if v.ResourceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateContainerServiceInput(v *UpdateContainerServiceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateContainerServiceInput"}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3968,11 +4433,11 @@ func validateOpUpdateDomainEntryInput(v *UpdateDomainEntryInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDomainEntryInput"}
-	if v.DomainName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
-	}
 	if v.DomainEntry == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainEntry"))
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3986,14 +4451,14 @@ func validateOpUpdateLoadBalancerAttributeInput(v *UpdateLoadBalancerAttributeIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateLoadBalancerAttributeInput"}
-	if v.LoadBalancerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
+	if len(v.AttributeName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
 	}
 	if v.AttributeValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AttributeValue"))
 	}
-	if len(v.AttributeName) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
+	if v.LoadBalancerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4022,11 +4487,11 @@ func validateOpUpdateRelationalDatabaseParametersInput(v *UpdateRelationalDataba
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRelationalDatabaseParametersInput"}
-	if v.RelationalDatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseName"))
-	}
 	if v.Parameters == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Parameters"))
+	}
+	if v.RelationalDatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

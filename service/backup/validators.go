@@ -989,6 +989,9 @@ func validateBackupSelection(v *types.BackupSelection) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BackupSelection"}
+	if v.SelectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SelectionName"))
+	}
 	if v.IamRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
 	}
@@ -996,9 +999,6 @@ func validateBackupSelection(v *types.BackupSelection) error {
 		if err := validateListOfTags(v.ListOfTags); err != nil {
 			invalidParams.AddNested("ListOfTags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.SelectionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SelectionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1101,15 +1101,15 @@ func validateOpCreateBackupSelectionInput(v *CreateBackupSelectionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateBackupSelectionInput"}
+	if v.BackupPlanId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupPlanId"))
+	}
 	if v.BackupSelection == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BackupSelection"))
 	} else if v.BackupSelection != nil {
 		if err := validateBackupSelection(v.BackupSelection); err != nil {
 			invalidParams.AddNested("BackupSelection", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.BackupPlanId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BackupPlanId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1216,11 +1216,11 @@ func validateOpDeleteRecoveryPointInput(v *DeleteRecoveryPointInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteRecoveryPointInput"}
-	if v.RecoveryPointArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
-	}
 	if v.BackupVaultName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if v.RecoveryPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1294,11 +1294,11 @@ func validateOpDescribeRecoveryPointInput(v *DescribeRecoveryPointInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeRecoveryPointInput"}
-	if v.RecoveryPointArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
-	}
 	if v.BackupVaultName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if v.RecoveryPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1387,11 +1387,11 @@ func validateOpGetBackupSelectionInput(v *GetBackupSelectionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetBackupSelectionInput"}
-	if v.SelectionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SelectionId"))
-	}
 	if v.BackupPlanId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BackupPlanId"))
+	}
+	if v.SelectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SelectionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1543,14 +1543,14 @@ func validateOpPutBackupVaultNotificationsInput(v *PutBackupVaultNotificationsIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutBackupVaultNotificationsInput"}
+	if v.BackupVaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
 	if v.SNSTopicArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SNSTopicArn"))
 	}
 	if v.BackupVaultEvents == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultEvents"))
-	}
-	if v.BackupVaultName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1564,11 +1564,11 @@ func validateOpStartBackupJobInput(v *StartBackupJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartBackupJobInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.BackupVaultName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if v.IamRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
@@ -1585,17 +1585,17 @@ func validateOpStartCopyJobInput(v *StartCopyJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartCopyJobInput"}
-	if v.DestinationBackupVaultArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DestinationBackupVaultArn"))
+	if v.RecoveryPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
 	}
 	if v.SourceBackupVaultName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceBackupVaultName"))
 	}
+	if v.DestinationBackupVaultArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationBackupVaultArn"))
+	}
 	if v.IamRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
-	}
-	if v.RecoveryPointArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1609,14 +1609,14 @@ func validateOpStartRestoreJobInput(v *StartRestoreJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartRestoreJobInput"}
-	if v.IamRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
-	}
 	if v.RecoveryPointArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
 	}
 	if v.Metadata == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Metadata"))
+	}
+	if v.IamRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1645,11 +1645,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1681,15 +1681,15 @@ func validateOpUpdateBackupPlanInput(v *UpdateBackupPlanInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateBackupPlanInput"}
+	if v.BackupPlanId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupPlanId"))
+	}
 	if v.BackupPlan == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BackupPlan"))
 	} else if v.BackupPlan != nil {
 		if err := validateBackupPlanInput(v.BackupPlan); err != nil {
 			invalidParams.AddNested("BackupPlan", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.BackupPlanId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BackupPlanId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1703,11 +1703,11 @@ func validateOpUpdateRecoveryPointLifecycleInput(v *UpdateRecoveryPointLifecycle
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRecoveryPointLifecycleInput"}
-	if v.RecoveryPointArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
-	}
 	if v.BackupVaultName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if v.RecoveryPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

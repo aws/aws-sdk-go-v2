@@ -78,6 +78,24 @@ func (ExpirationStatus) Values() []ExpirationStatus {
 	}
 }
 
+type Format string
+
+// Enum values for Format
+const (
+	FormatCsv     Format = "CSV"
+	FormatParquet Format = "Parquet"
+)
+
+// Values returns all known values for Format. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Format) Values() []Format {
+	return []Format{
+		"CSV",
+		"Parquet",
+	}
+}
+
 type JobManifestFieldName string
 
 // Enum values for JobManifestFieldName
@@ -235,6 +253,22 @@ func (OperationName) Values() []OperationName {
 		"S3InitiateRestoreObject",
 		"S3PutObjectLegalHold",
 		"S3PutObjectRetention",
+	}
+}
+
+type OutputSchemaVersion string
+
+// Enum values for OutputSchemaVersion
+const (
+	OutputSchemaVersionV1 OutputSchemaVersion = "V_1"
+)
+
+// Values returns all known values for OutputSchemaVersion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OutputSchemaVersion) Values() []OutputSchemaVersion {
+	return []OutputSchemaVersion{
+		"V_1",
 	}
 }
 

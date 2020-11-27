@@ -86,6 +86,10 @@ type DescribePredictorOutput struct {
 	// the prediction length.
 	ForecastHorizon *int32
 
+	// The forecast types used during predictor training. Default value is
+	// ["0.1","0.5","0.9"]
+	ForecastTypes []string
+
 	// The hyperparameter override values for the algorithm.
 	HPOConfig *types.HyperParameterTuningJobConfig
 
@@ -136,10 +140,10 @@ type DescribePredictorOutput struct {
 	// forecast.
 	Status *string
 
-	// The default training parameters or overrides selected during model training. If
-	// using the AutoML algorithm or if HPO is turned on while using the DeepAR+
-	// algorithms, the optimized values for the chosen hyperparameters are returned.
-	// For more information, see aws-forecast-choosing-recipes.
+	// The default training parameters or overrides selected during model training.
+	// When running AutoML or choosing HPO with CNN-QR or DeepAR+, the optimized values
+	// for the chosen hyperparameters are returned. For more information, see
+	// aws-forecast-choosing-recipes.
 	TrainingParameters map[string]string
 
 	// Metadata pertaining to the operation's result.

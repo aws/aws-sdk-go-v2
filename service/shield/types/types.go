@@ -52,7 +52,7 @@ type AttackProperty struct {
 	// for WordPress reflective pingback DDoS attacks.
 	AttackPropertyIdentifier AttackPropertyIdentifier
 
-	// The array of Contributor objects that includes the top five contributors to an
+	// The array of contributor objects that includes the top five contributors to an
 	// attack.
 	TopContributors []Contributor
 
@@ -62,6 +62,22 @@ type AttackProperty struct {
 
 	// The unit of the Value of the contributions.
 	Unit Unit
+}
+
+// A single attack statistics data record. This is returned by
+// DescribeAttackStatistics along with a time range indicating the time period that
+// the attack statistics apply to.
+type AttackStatisticsDataItem struct {
+
+	// The number of attacks detected during the time period. This is always present,
+	// but might be zero.
+	//
+	// This member is required.
+	AttackCount int64
+
+	// Information about the volume of attacks during the time period. If the
+	// accompanying AttackCount is zero, this setting might be empty.
+	AttackVolume *AttackVolume
 }
 
 // Summarizes all DDoS attacks for a specified time period.
@@ -137,6 +153,34 @@ type AttackVectorDescription struct {
 	VectorType *string
 }
 
+// Information about the volume of attacks during the time period, included in an
+// AttackStatisticsDataItem. If the accompanying AttackCount in the statistics
+// object is zero, this setting might be empty.
+type AttackVolume struct {
+
+	// A statistics object that uses bits per second as the unit. This is included for
+	// network level attacks.
+	BitsPerSecond *AttackVolumeStatistics
+
+	// A statistics object that uses packets per second as the unit. This is included
+	// for network level attacks.
+	PacketsPerSecond *AttackVolumeStatistics
+
+	// A statistics object that uses requests per second as the unit. This is included
+	// for application level attacks, and is only available for accounts that are
+	// subscribed to Shield Advanced.
+	RequestsPerSecond *AttackVolumeStatistics
+}
+
+// Statistics objects for the various data types in AttackVolume.
+type AttackVolumeStatistics struct {
+
+	// The maximum attack volume observed for the given unit.
+	//
+	// This member is required.
+	Max float64
+}
+
 // A contributor to the attack and their contribution.
 type Contributor struct {
 
@@ -194,11 +238,107 @@ type Protection struct {
 	// The unique identifier (ID) of the protection.
 	Id *string
 
-	// The friendly name of the protection. For example, My CloudFront distributions.
+	// The name of the protection. For example, My CloudFront distributions.
 	Name *string
 
 	// The ARN (Amazon Resource Name) of the AWS resource that is protected.
 	ResourceArn *string
+}
+
+// A grouping of protected resources that you and AWS Shield Advanced can monitor
+// as a collective. This resource grouping improves the accuracy of detection and
+// reduces false positives.
+type ProtectionGroup struct {
+
+	// Defines how AWS Shield combines resource data for the group in order to detect,
+	// mitigate, and report events.
+	//
+	// * Sum - Use the total traffic across the group.
+	// This is a good choice for most cases. Examples include Elastic IP addresses for
+	// EC2 instances that scale manually or automatically.
+	//
+	// * Mean - Use the average of
+	// the traffic across the group. This is a good choice for resources that share
+	// traffic uniformly. Examples include accelerators and load balancers.
+	//
+	// * Max -
+	// Use the highest traffic from each resource. This is useful for resources that
+	// don't share traffic and for resources that share that traffic in a non-uniform
+	// way. Examples include CloudFront distributions and origin resources for
+	// CloudFront distributions.
+	//
+	// This member is required.
+	Aggregation ProtectionGroupAggregation
+
+	// The Amazon Resource Names (ARNs) of the resources to include in the protection
+	// group. You must set this when you set Pattern to ARBITRARY and you must not set
+	// it for any other Pattern setting.
+	//
+	// This member is required.
+	Members []string
+
+	// The criteria to use to choose the protected resources for inclusion in the
+	// group. You can include all resources that have protections, provide a list of
+	// resource Amazon Resource Names (ARNs), or include all resources of a specified
+	// resource type.
+	//
+	// This member is required.
+	Pattern ProtectionGroupPattern
+
+	// The name of the protection group. You use this to identify the protection group
+	// in lists and to manage the protection group, for example to update, delete, or
+	// describe it.
+	//
+	// This member is required.
+	ProtectionGroupId *string
+
+	// The resource type to include in the protection group. All protected resources of
+	// this type are included in the protection group. You must set this when you set
+	// Pattern to BY_RESOURCE_TYPE and you must not set it for any other Pattern
+	// setting.
+	ResourceType ProtectedResourceType
+}
+
+// Limits settings on protection groups with arbitrary pattern type.
+type ProtectionGroupArbitraryPatternLimits struct {
+
+	// The maximum number of resources you can specify for a single arbitrary pattern
+	// in a protection group.
+	//
+	// This member is required.
+	MaxMembers int64
+}
+
+// Limits settings on protection groups for your subscription.
+type ProtectionGroupLimits struct {
+
+	// The maximum number of protection groups that you can have at one time.
+	//
+	// This member is required.
+	MaxProtectionGroups int64
+
+	// Limits settings by pattern type in the protection groups for your subscription.
+	//
+	// This member is required.
+	PatternTypeLimits *ProtectionGroupPatternTypeLimits
+}
+
+// Limits settings by pattern type in the protection groups for your subscription.
+type ProtectionGroupPatternTypeLimits struct {
+
+	// Limits settings on protection groups with arbitrary pattern type.
+	//
+	// This member is required.
+	ArbitraryPatternLimits *ProtectionGroupArbitraryPatternLimits
+}
+
+// Limits settings on protections for your subscription.
+type ProtectionLimits struct {
+
+	// The maximum number of resource types that you can specify in a protection.
+	//
+	// This member is required.
+	ProtectedResourceTypeLimits []Limit
 }
 
 // The attack information for the specified SubResource.
@@ -219,6 +359,11 @@ type SubResourceSummary struct {
 
 // Information about the AWS Shield Advanced subscription for an account.
 type Subscription struct {
+
+	// Limits settings for your subscription.
+	//
+	// This member is required.
+	SubscriptionLimits *SubscriptionLimits
 
 	// If ENABLED, the subscription will be automatically renewed at the end of the
 	// existing subscription period. When you initally create a subscription, AutoRenew
@@ -248,6 +393,20 @@ type Subscription struct {
 
 	// The length, in seconds, of the AWS Shield Advanced subscription for the account.
 	TimeCommitmentInSeconds int64
+}
+
+// Limits settings for your subscription.
+type SubscriptionLimits struct {
+
+	// Limits settings on protection groups for your subscription.
+	//
+	// This member is required.
+	ProtectionGroupLimits *ProtectionGroupLimits
+
+	// Limits settings on protections for your subscription.
+	//
+	// This member is required.
+	ProtectionLimits *ProtectionLimits
 }
 
 // A summary of information about the attack.
@@ -294,4 +453,19 @@ type TimeRange struct {
 	// The end time, in Unix time in seconds. For more information see timestamp
 	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
 	ToExclusive *time.Time
+}
+
+// Provides information about a particular parameter passed inside a request that
+// resulted in an exception.
+type ValidationExceptionField struct {
+
+	// The message describing why the parameter failed validation.
+	//
+	// This member is required.
+	Message *string
+
+	// The name of the parameter that failed validation.
+	//
+	// This member is required.
+	Name *string
 }

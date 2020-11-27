@@ -6082,6 +6082,112 @@ func awsRestjson1_deserializeDocumentAudioSelectorGroup(v **types.AudioSelectorG
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAutomatedAbrSettings(v **types.AutomatedAbrSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutomatedAbrSettings
+	if *v == nil {
+		sv = &types.AutomatedAbrSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maxAbrBitrate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin100000Max100000000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxAbrBitrate = int32(i64)
+			}
+
+		case "maxRenditions":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin3Max15 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxRenditions = int32(i64)
+			}
+
+		case "minAbrBitrate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin100000Max100000000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinAbrBitrate = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedEncodingSettings(v **types.AutomatedEncodingSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutomatedEncodingSettings
+	if *v == nil {
+		sv = &types.AutomatedEncodingSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "abrSettings":
+			if err := awsRestjson1_deserializeDocumentAutomatedAbrSettings(&sv.AbrSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAv1QvbrSettings(v **types.Av1QvbrSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15484,6 +15590,11 @@ func awsRestjson1_deserializeDocumentOutputGroup(v **types.OutputGroup, value in
 
 	for key, value := range shape {
 		switch key {
+		case "automatedEncodingSettings":
+			if err := awsRestjson1_deserializeDocumentAutomatedEncodingSettings(&sv.AutomatedEncodingSettings, value); err != nil {
+				return err
+			}
+
 		case "customName":
 			if value != nil {
 				jtv, ok := value.(string)

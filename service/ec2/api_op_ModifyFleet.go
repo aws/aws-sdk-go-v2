@@ -56,11 +56,6 @@ type ModifyFleetInput struct {
 	// This member is required.
 	FleetId *string
 
-	// The size of the EC2 Fleet.
-	//
-	// This member is required.
-	TargetCapacitySpecification *types.TargetCapacitySpecificationRequest
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -73,6 +68,9 @@ type ModifyFleetInput struct {
 
 	// The launch template and overrides.
 	LaunchTemplateConfigs []types.FleetLaunchTemplateConfigRequest
+
+	// The size of the EC2 Fleet.
+	TargetCapacitySpecification *types.TargetCapacitySpecificationRequest
 }
 
 type ModifyFleetOutput struct {

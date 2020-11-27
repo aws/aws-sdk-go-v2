@@ -58,6 +58,18 @@
           "target": "com.amazonaws.xray#GetGroups"
         },
         {
+          "target": "com.amazonaws.xray#GetInsight"
+        },
+        {
+          "target": "com.amazonaws.xray#GetInsightEvents"
+        },
+        {
+          "target": "com.amazonaws.xray#GetInsightImpactGraph"
+        },
+        {
+          "target": "com.amazonaws.xray#GetInsightSummaries"
+        },
+        {
           "target": "com.amazonaws.xray#GetSamplingRules"
         },
         {
@@ -121,10 +133,10 @@
     "com.amazonaws.xray#Alias": {
       "type": "structure",
       "members": {
-        "Type": {
+        "Name": {
           "target": "com.amazonaws.xray#String",
           "traits": {
-            "smithy.api#documentation": "<p>The type of the alias.</p>"
+            "smithy.api#documentation": "<p>The canonical name of the alias.</p>"
           }
         },
         "Names": {
@@ -133,10 +145,10 @@
             "smithy.api#documentation": "<p>A list of names for the alias, including the canonical name.</p>"
           }
         },
-        "Name": {
+        "Type": {
           "target": "com.amazonaws.xray#String",
           "traits": {
-            "smithy.api#documentation": "<p>The canonical name of the alias.</p>"
+            "smithy.api#documentation": "<p>The type of the alias.</p>"
           }
         }
       },
@@ -171,6 +183,12 @@
     "com.amazonaws.xray#AnnotationValue": {
       "type": "structure",
       "members": {
+        "NumberValue": {
+          "target": "com.amazonaws.xray#NullableDouble",
+          "traits": {
+            "smithy.api#documentation": "<p>Value for a Number annotation.</p>"
+          }
+        },
         "BooleanValue": {
           "target": "com.amazonaws.xray#NullableBoolean",
           "traits": {
@@ -181,12 +199,6 @@
           "target": "com.amazonaws.xray#String",
           "traits": {
             "smithy.api#documentation": "<p>Value for a String annotation.</p>"
-          }
-        },
-        "NumberValue": {
-          "target": "com.amazonaws.xray#NullableDouble",
-          "traits": {
-            "smithy.api#documentation": "<p>Value for a Number annotation.</p>"
           }
         }
       },
@@ -201,6 +213,23 @@
       },
       "value": {
         "target": "com.amazonaws.xray#ValuesWithServiceIds"
+      }
+    },
+    "com.amazonaws.xray#AnomalousService": {
+      "type": "structure",
+      "members": {
+        "ServiceId": {
+          "target": "com.amazonaws.xray#ServiceId"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The service within the service graph that has anomalously high fault rates. </p>"
+      }
+    },
+    "com.amazonaws.xray#AnomalousServiceList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.xray#AnomalousService"
       }
     },
     "com.amazonaws.xray#AttributeKey": {
@@ -253,13 +282,7 @@
     "com.amazonaws.xray#BackendConnectionErrors": {
       "type": "structure",
       "members": {
-        "HTTPCode5XXCount": {
-          "target": "com.amazonaws.xray#NullableInteger",
-          "traits": {
-            "smithy.api#documentation": "<p></p>"
-          }
-        },
-        "HTTPCode4XXCount": {
+        "TimeoutCount": {
           "target": "com.amazonaws.xray#NullableInteger",
           "traits": {
             "smithy.api#documentation": "<p></p>"
@@ -271,7 +294,13 @@
             "smithy.api#documentation": "<p></p>"
           }
         },
-        "TimeoutCount": {
+        "HTTPCode4XXCount": {
+          "target": "com.amazonaws.xray#NullableInteger",
+          "traits": {
+            "smithy.api#documentation": "<p></p>"
+          }
+        },
+        "HTTPCode5XXCount": {
           "target": "com.amazonaws.xray#NullableInteger",
           "traits": {
             "smithy.api#documentation": "<p></p>"
@@ -327,17 +356,17 @@
     "com.amazonaws.xray#BatchGetTracesRequest": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.xray#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Pagination token.</p>"
-          }
-        },
         "TraceIds": {
           "target": "com.amazonaws.xray#TraceIdList",
           "traits": {
             "smithy.api#documentation": "<p>Specify the trace IDs of requests for which to retrieve segments.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Pagination token.</p>"
           }
         }
       }
@@ -345,10 +374,10 @@
     "com.amazonaws.xray#BatchGetTracesResult": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.xray#String",
+        "Traces": {
+          "target": "com.amazonaws.xray#TraceList",
           "traits": {
-            "smithy.api#documentation": "<p>Pagination token.</p>"
+            "smithy.api#documentation": "<p>Full traces for the specified requests.</p>"
           }
         },
         "UnprocessedTraceIds": {
@@ -357,10 +386,10 @@
             "smithy.api#documentation": "<p>Trace IDs of requests that haven't been processed.</p>"
           }
         },
-        "Traces": {
-          "target": "com.amazonaws.xray#TraceList",
+        "NextToken": {
+          "target": "com.amazonaws.xray#String",
           "traits": {
-            "smithy.api#documentation": "<p>Full traces for the specified requests.</p>"
+            "smithy.api#documentation": "<p>Pagination token.</p>"
           }
         }
       }
@@ -420,10 +449,10 @@
             "smithy.api#required": {}
           }
         },
-        "Tags": {
-          "target": "com.amazonaws.xray#TagList",
+        "FilterExpression": {
+          "target": "com.amazonaws.xray#FilterExpression",
           "traits": {
-            "smithy.api#documentation": "<p>A map that contains one or more tag keys and tag values to attach to an X-Ray group.\n            For more information about ways to use tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n                resources</a> in the <i>AWS General Reference</i>.</p>\n        <p>The following restrictions apply to tags:</p>\n        <ul>\n            <li>\n                <p>Maximum number of user-applied tags per resource: 50</p>\n            </li>\n            <li>\n                <p>Maximum tag key length: 128 Unicode characters</p>\n            </li>\n            <li>\n                <p>Maximum tag value length: 256 Unicode characters</p>\n            </li>\n            <li>\n                <p>Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . :\n                    / = + - and @</p>\n            </li>\n            <li>\n                <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n                <p>Don't use <code>aws:</code> as a prefix for keys; it's reserved for AWS\n                    use.</p>\n            </li>\n         </ul>"
+            "smithy.api#documentation": "<p>The filter expression defining criteria by which to group traces.</p>"
           }
         },
         "InsightsConfiguration": {
@@ -432,10 +461,10 @@
             "smithy.api#documentation": "<p>The structure containing configurations related to insights.</p>\n            <ul>\n            <li>\n                    <p>The InsightsEnabled boolean can be set to true to enable insights for the\n                    new group or false to disable insights for the new group.</p>\n                </li>\n            <li>\n                    <p>The NotifcationsEnabled boolean can be set to true to enable insights\n                    notifications for the new group. Notifications may only be enabled on a group\n                    with InsightsEnabled set to true.</p>\n                </li>\n         </ul>"
           }
         },
-        "FilterExpression": {
-          "target": "com.amazonaws.xray#FilterExpression",
+        "Tags": {
+          "target": "com.amazonaws.xray#TagList",
           "traits": {
-            "smithy.api#documentation": "<p>The filter expression defining criteria by which to group traces.</p>"
+            "smithy.api#documentation": "<p>A map that contains one or more tag keys and tag values to attach to an X-Ray group.\n            For more information about ways to use tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n                resources</a> in the <i>AWS General Reference</i>.</p>\n        <p>The following restrictions apply to tags:</p>\n        <ul>\n            <li>\n                <p>Maximum number of user-applied tags per resource: 50</p>\n            </li>\n            <li>\n                <p>Maximum tag key length: 128 Unicode characters</p>\n            </li>\n            <li>\n                <p>Maximum tag value length: 256 Unicode characters</p>\n            </li>\n            <li>\n                <p>Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . :\n                    / = + - and @</p>\n            </li>\n            <li>\n                <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n                <p>Don't use <code>aws:</code> as a prefix for keys; it's reserved for AWS\n                    use.</p>\n            </li>\n         </ul>"
           }
         }
       }
@@ -582,16 +611,16 @@
     "com.amazonaws.xray#DeleteSamplingRuleRequest": {
       "type": "structure",
       "members": {
-        "RuleARN": {
-          "target": "com.amazonaws.xray#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.</p>"
-          }
-        },
         "RuleName": {
           "target": "com.amazonaws.xray#String",
           "traits": {
             "smithy.api#documentation": "<p>The name of the sampling rule. Specify a rule by either name or ARN, but not both.</p>"
+          }
+        },
+        "RuleARN": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.</p>"
           }
         }
       }
@@ -622,10 +651,10 @@
     "com.amazonaws.xray#Edge": {
       "type": "structure",
       "members": {
-        "ResponseTimeHistogram": {
-          "target": "com.amazonaws.xray#Histogram",
+        "ReferenceId": {
+          "target": "com.amazonaws.xray#NullableInteger",
           "traits": {
-            "smithy.api#documentation": "<p>A histogram that maps the spread of client response times on an edge.</p>"
+            "smithy.api#documentation": "<p>Identifier of the edge. Unique within a service map.</p>"
           }
         },
         "StartTime": {
@@ -634,10 +663,10 @@
             "smithy.api#documentation": "<p>The start time of the first segment on the edge.</p>"
           }
         },
-        "ReferenceId": {
-          "target": "com.amazonaws.xray#NullableInteger",
+        "EndTime": {
+          "target": "com.amazonaws.xray#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>Identifier of the edge. Unique within a service map.</p>"
+            "smithy.api#documentation": "<p>The end time of the last segment on the edge.</p>"
           }
         },
         "SummaryStatistics": {
@@ -646,10 +675,10 @@
             "smithy.api#documentation": "<p>Response statistics for segments on the edge.</p>"
           }
         },
-        "EndTime": {
-          "target": "com.amazonaws.xray#Timestamp",
+        "ResponseTimeHistogram": {
+          "target": "com.amazonaws.xray#Histogram",
           "traits": {
-            "smithy.api#documentation": "<p>The end time of the last segment on the edge.</p>"
+            "smithy.api#documentation": "<p>A histogram that maps the spread of client response times on an edge.</p>"
           }
         },
         "Aliases": {
@@ -684,10 +713,10 @@
             "smithy.api#documentation": "<p>Information about requests that failed with a 4xx Client Error status code.</p>"
           }
         },
-        "TotalResponseTime": {
-          "target": "com.amazonaws.xray#NullableDouble",
+        "FaultStatistics": {
+          "target": "com.amazonaws.xray#FaultStatistics",
           "traits": {
-            "smithy.api#documentation": "<p>The aggregate response time of completed requests.</p>"
+            "smithy.api#documentation": "<p>Information about requests that failed with a 5xx Server Error status code.</p>"
           }
         },
         "TotalCount": {
@@ -696,10 +725,10 @@
             "smithy.api#documentation": "<p>The total number of completed requests.</p>"
           }
         },
-        "FaultStatistics": {
-          "target": "com.amazonaws.xray#FaultStatistics",
+        "TotalResponseTime": {
+          "target": "com.amazonaws.xray#NullableDouble",
           "traits": {
-            "smithy.api#documentation": "<p>Information about requests that failed with a 5xx Server Error status code.</p>"
+            "smithy.api#documentation": "<p>The aggregate response time of completed requests.</p>"
           }
         }
       },
@@ -716,16 +745,16 @@
             "smithy.api#documentation": "<p>The ID of the customer master key (CMK) used for encryption, if applicable.</p>"
           }
         },
-        "Type": {
-          "target": "com.amazonaws.xray#EncryptionType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of encryption. Set to <code>KMS</code> for encryption with CMKs. Set to <code>NONE</code> for\n      default encryption.</p>"
-          }
-        },
         "Status": {
           "target": "com.amazonaws.xray#EncryptionStatus",
           "traits": {
             "smithy.api#documentation": "<p>The encryption status. While the status is <code>UPDATING</code>, X-Ray may encrypt data with a combination of the new and old settings.</p>"
+          }
+        },
+        "Type": {
+          "target": "com.amazonaws.xray#EncryptionType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of encryption. Set to <code>KMS</code> for encryption with CMKs. Set to <code>NONE</code> for\n      default encryption.</p>"
           }
         }
       },
@@ -807,16 +836,16 @@
     "com.amazonaws.xray#ErrorRootCauseEntity": {
       "type": "structure",
       "members": {
-        "Exceptions": {
-          "target": "com.amazonaws.xray#RootCauseExceptions",
-          "traits": {
-            "smithy.api#documentation": "<p>The types and messages of the exceptions.</p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.xray#String",
           "traits": {
             "smithy.api#documentation": "<p>The name of the entity.</p>"
+          }
+        },
+        "Exceptions": {
+          "target": "com.amazonaws.xray#RootCauseExceptions",
+          "traits": {
+            "smithy.api#documentation": "<p>The types and messages of the exceptions.</p>"
           }
         },
         "Remote": {
@@ -839,6 +868,24 @@
     "com.amazonaws.xray#ErrorRootCauseService": {
       "type": "structure",
       "members": {
+        "Name": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The service name.</p>"
+          }
+        },
+        "Names": {
+          "target": "com.amazonaws.xray#ServiceNames",
+          "traits": {
+            "smithy.api#documentation": "<p>A collection of associated service names.</p>"
+          }
+        },
+        "Type": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The type associated to the service.</p>"
+          }
+        },
         "AccountId": {
           "target": "com.amazonaws.xray#String",
           "traits": {
@@ -849,24 +896,6 @@
           "target": "com.amazonaws.xray#ErrorRootCauseEntityPath",
           "traits": {
             "smithy.api#documentation": "<p>The path of root cause entities found on the service. </p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.xray#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The service name.</p>"
-          }
-        },
-        "Type": {
-          "target": "com.amazonaws.xray#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The type associated to the service.</p>"
-          }
-        },
-        "Names": {
-          "target": "com.amazonaws.xray#ServiceNames",
-          "traits": {
-            "smithy.api#documentation": "<p>A collection of associated service names.</p>"
           }
         },
         "Inferred": {
@@ -895,12 +924,6 @@
     "com.amazonaws.xray#ErrorStatistics": {
       "type": "structure",
       "members": {
-        "TotalCount": {
-          "target": "com.amazonaws.xray#NullableLong",
-          "traits": {
-            "smithy.api#documentation": "<p>The total number of requests that failed with a 4xx Client Error status code.</p>"
-          }
-        },
         "ThrottleCount": {
           "target": "com.amazonaws.xray#NullableLong",
           "traits": {
@@ -912,25 +935,34 @@
           "traits": {
             "smithy.api#documentation": "<p>The number of requests that failed with untracked 4xx Client Error status\n      codes.</p>"
           }
+        },
+        "TotalCount": {
+          "target": "com.amazonaws.xray#NullableLong",
+          "traits": {
+            "smithy.api#documentation": "<p>The total number of requests that failed with a 4xx Client Error status code.</p>"
+          }
         }
       },
       "traits": {
         "smithy.api#documentation": "<p>Information about requests that failed with a 4xx Client Error status code.</p>"
       }
     },
+    "com.amazonaws.xray#EventSummaryText": {
+      "type": "string"
+    },
     "com.amazonaws.xray#FaultRootCause": {
       "type": "structure",
       "members": {
-        "ClientImpacting": {
-          "target": "com.amazonaws.xray#NullableBoolean",
-          "traits": {
-            "smithy.api#documentation": "<p>A flag that denotes that the root cause impacts the trace client.</p>"
-          }
-        },
         "Services": {
           "target": "com.amazonaws.xray#FaultRootCauseServices",
           "traits": {
             "smithy.api#documentation": "<p>A list of corresponding services. A service identifies a segment and it contains a\n      name, account ID, type, and inferred flag.</p>"
+          }
+        },
+        "ClientImpacting": {
+          "target": "com.amazonaws.xray#NullableBoolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A flag that denotes that the root cause impacts the trace client.</p>"
           }
         }
       },
@@ -941,16 +973,16 @@
     "com.amazonaws.xray#FaultRootCauseEntity": {
       "type": "structure",
       "members": {
-        "Exceptions": {
-          "target": "com.amazonaws.xray#RootCauseExceptions",
-          "traits": {
-            "smithy.api#documentation": "<p>The types and messages of the exceptions.</p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.xray#String",
           "traits": {
             "smithy.api#documentation": "<p>The name of the entity.</p>"
+          }
+        },
+        "Exceptions": {
+          "target": "com.amazonaws.xray#RootCauseExceptions",
+          "traits": {
+            "smithy.api#documentation": "<p>The types and messages of the exceptions.</p>"
           }
         },
         "Remote": {
@@ -979,22 +1011,16 @@
             "smithy.api#documentation": "<p>The service name.</p>"
           }
         },
-        "Type": {
-          "target": "com.amazonaws.xray#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The type associated to the service.</p>"
-          }
-        },
         "Names": {
           "target": "com.amazonaws.xray#ServiceNames",
           "traits": {
             "smithy.api#documentation": "<p>A collection of associated service names.</p>"
           }
         },
-        "Inferred": {
-          "target": "com.amazonaws.xray#NullableBoolean",
+        "Type": {
+          "target": "com.amazonaws.xray#String",
           "traits": {
-            "smithy.api#documentation": "<p>A Boolean value indicating if the service is inferred from the trace.</p>"
+            "smithy.api#documentation": "<p>The type associated to the service.</p>"
           }
         },
         "AccountId": {
@@ -1007,6 +1033,12 @@
           "target": "com.amazonaws.xray#FaultRootCauseEntityPath",
           "traits": {
             "smithy.api#documentation": "<p>The path of root cause entities found on the service. </p>"
+          }
+        },
+        "Inferred": {
+          "target": "com.amazonaws.xray#NullableBoolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A Boolean value indicating if the service is inferred from the trace.</p>"
           }
         }
       },
@@ -1056,6 +1088,26 @@
           "min": 0,
           "max": 1
         }
+      }
+    },
+    "com.amazonaws.xray#ForecastStatistics": {
+      "type": "structure",
+      "members": {
+        "FaultCountHigh": {
+          "target": "com.amazonaws.xray#NullableLong",
+          "traits": {
+            "smithy.api#documentation": "<p>The upper limit of fault counts for a service.</p>"
+          }
+        },
+        "FaultCountLow": {
+          "target": "com.amazonaws.xray#NullableLong",
+          "traits": {
+            "smithy.api#documentation": "<p>The lower limit of fault counts for a service.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The predicted high and low fault count. This is used to determine if a service has\n         become anomalous and if an insight should be created.</p>"
       }
     },
     "com.amazonaws.xray#GetEncryptionConfig": {
@@ -1126,16 +1178,16 @@
     "com.amazonaws.xray#GetGroupRequest": {
       "type": "structure",
       "members": {
-        "GroupARN": {
-          "target": "com.amazonaws.xray#GroupARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the group that was generated on creation.</p>"
-          }
-        },
         "GroupName": {
           "target": "com.amazonaws.xray#GroupName",
           "traits": {
             "smithy.api#documentation": "<p>The case-sensitive name of the group.</p>"
+          }
+        },
+        "GroupARN": {
+          "target": "com.amazonaws.xray#GroupARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the group that was generated on creation.</p>"
           }
         }
       }
@@ -1204,16 +1256,355 @@
     "com.amazonaws.xray#GetGroupsResult": {
       "type": "structure",
       "members": {
+        "Groups": {
+          "target": "com.amazonaws.xray#GroupSummaryList",
+          "traits": {
+            "smithy.api#documentation": "<p>The collection of all active groups.</p>"
+          }
+        },
         "NextToken": {
           "target": "com.amazonaws.xray#String",
           "traits": {
             "smithy.api#documentation": "<p>Pagination token.</p>"
           }
+        }
+      }
+    },
+    "com.amazonaws.xray#GetInsight": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.xray#GetInsightRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.xray#GetInsightResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.xray#InvalidRequestException"
         },
-        "Groups": {
-          "target": "com.amazonaws.xray#GroupSummaryList",
+        {
+          "target": "com.amazonaws.xray#ThrottledException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves the summary information of an insight. This includes impact to clients and\n         root cause services, the top anomalous services, the category, the state of the insight,\n         and the start and end time of the insight.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/Insight",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.xray#GetInsightEvents": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.xray#GetInsightEventsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.xray#GetInsightEventsResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.xray#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.xray#ThrottledException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>X-Ray reevaluates insights periodically until they're resolved, and records each intermediate state as an\n         event. You can review an insight's events in the Impact Timeline on the Inspect page in the X-Ray\n         console.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/InsightEvents",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.xray#GetInsightEventsMaxResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 1,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.xray#GetInsightEventsRequest": {
+      "type": "structure",
+      "members": {
+        "InsightId": {
+          "target": "com.amazonaws.xray#InsightId",
           "traits": {
-            "smithy.api#documentation": "<p>The collection of all active groups.</p>"
+            "smithy.api#documentation": "<p>The insight's unique identifier. Use the GetInsightSummaries action to retrieve an InsightId.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.xray#GetInsightEventsMaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>Used to retrieve at most the specified value of events.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.xray#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>Specify the pagination token returned by a previous request to retrieve the next page of events. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.xray#GetInsightEventsResult": {
+      "type": "structure",
+      "members": {
+        "InsightEvents": {
+          "target": "com.amazonaws.xray#InsightEventList",
+          "traits": {
+            "smithy.api#documentation": "<p>A detailed description of the event. This includes the time of the event, client and\n         root cause impact statistics, and the top anomalous service at the time of the\n         event.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.xray#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>Use this token to retrieve the next page of insight events.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.xray#GetInsightImpactGraph": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.xray#GetInsightImpactGraphRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.xray#GetInsightImpactGraphResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.xray#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.xray#ThrottledException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves a service graph structure filtered by the specified insight. The service graph is limited to only\n         structural information. For a complete service graph, use this API with the GetServiceGraph API.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/InsightImpactGraph",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.xray#GetInsightImpactGraphRequest": {
+      "type": "structure",
+      "members": {
+        "InsightId": {
+          "target": "com.amazonaws.xray#InsightId",
+          "traits": {
+            "smithy.api#documentation": "<p>The insight's unique identifier. Use the GetInsightSummaries action to retrieve an InsightId.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "StartTime": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The estimated start time of the insight, in Unix time seconds. The StartTime is inclusive of the value\n         provided and can't be more than 30 days old.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "EndTime": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The estimated end time of the insight, in Unix time seconds. The EndTime is exclusive of the value provided.\n         The time range between the start time and end time can't be more than six hours. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.xray#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>Specify the pagination token returned by a previous request to retrieve the next page of results. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.xray#GetInsightImpactGraphResult": {
+      "type": "structure",
+      "members": {
+        "InsightId": {
+          "target": "com.amazonaws.xray#InsightId",
+          "traits": {
+            "smithy.api#documentation": "<p>The insight's unique identifier.</p>"
+          }
+        },
+        "StartTime": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The provided start time.</p>"
+          }
+        },
+        "EndTime": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The provided end time. </p>"
+          }
+        },
+        "ServiceGraphStartTime": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time, in Unix seconds, at which the service graph started.</p>"
+          }
+        },
+        "ServiceGraphEndTime": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time, in Unix seconds, at which the service graph ended.</p>"
+          }
+        },
+        "Services": {
+          "target": "com.amazonaws.xray#InsightImpactGraphServiceList",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS instrumented services related to the insight.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.xray#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>Pagination token.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.xray#GetInsightRequest": {
+      "type": "structure",
+      "members": {
+        "InsightId": {
+          "target": "com.amazonaws.xray#InsightId",
+          "traits": {
+            "smithy.api#documentation": "<p>The insight's unique identifier. Use the GetInsightSummaries action to retrieve an InsightId.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.xray#GetInsightResult": {
+      "type": "structure",
+      "members": {
+        "Insight": {
+          "target": "com.amazonaws.xray#Insight",
+          "traits": {
+            "smithy.api#documentation": "<p>The summary information of an insight.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.xray#GetInsightSummaries": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.xray#GetInsightSummariesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.xray#GetInsightSummariesResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.xray#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.xray#ThrottledException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves the summaries of all insights in the specified group matching the provided filter values.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/InsightSummaries",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.xray#GetInsightSummariesMaxResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 1,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.xray#GetInsightSummariesRequest": {
+      "type": "structure",
+      "members": {
+        "States": {
+          "target": "com.amazonaws.xray#InsightStateList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of insight states. </p>"
+          }
+        },
+        "GroupARN": {
+          "target": "com.amazonaws.xray#GroupARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the group. Required if the GroupName isn't provided.</p>"
+          }
+        },
+        "GroupName": {
+          "target": "com.amazonaws.xray#GroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the group. Required if the GroupARN isn't provided.</p>"
+          }
+        },
+        "StartTime": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The beginning of the time frame in which the insights started. The start time can't be more than 30 days\n         old.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "EndTime": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The end of the time frame in which the insights ended. The end time can't be more than 30 days old.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.xray#GetInsightSummariesMaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to display.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.xray#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>Pagination token.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.xray#GetInsightSummariesResult": {
+      "type": "structure",
+      "members": {
+        "InsightSummaries": {
+          "target": "com.amazonaws.xray#InsightSummaryList",
+          "traits": {
+            "smithy.api#documentation": "<p>The summary of each insight within the group matching the provided filters. The summary\n         contains the InsightID, start and end time, the root cause service, the root cause and\n         client impact statistics, the top anomalous services, and the status of the insight.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.xray#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>Pagination token.</p>"
           }
         }
       }
@@ -1320,16 +1711,16 @@
     "com.amazonaws.xray#GetSamplingStatisticSummariesResult": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.xray#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Pagination token.</p>"
-          }
-        },
         "SamplingStatisticSummaries": {
           "target": "com.amazonaws.xray#SamplingStatisticSummaryList",
           "traits": {
             "smithy.api#documentation": "<p>Information about the number of requests instrumented for each sampling\n         rule.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Pagination token.</p>"
           }
         }
       }
@@ -1374,16 +1765,16 @@
     "com.amazonaws.xray#GetSamplingTargetsResult": {
       "type": "structure",
       "members": {
-        "LastRuleModification": {
-          "target": "com.amazonaws.xray#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The last time a user changed the sampling rule configuration. If\n         the sampling rule configuration changed since the service last retrieved it, the service\n         should call <a>GetSamplingRules</a> to get the latest version.</p>"
-          }
-        },
         "SamplingTargetDocuments": {
           "target": "com.amazonaws.xray#SamplingTargetDocumentList",
           "traits": {
             "smithy.api#documentation": "<p>Updated rules that the service should use to sample requests.</p>"
+          }
+        },
+        "LastRuleModification": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The last time a user changed the sampling rule configuration. If\n         the sampling rule configuration changed since the service last retrieved it, the service\n         should call <a>GetSamplingRules</a> to get the latest version.</p>"
           }
         },
         "UnprocessedStatistics": {
@@ -1427,10 +1818,11 @@
     "com.amazonaws.xray#GetServiceGraphRequest": {
       "type": "structure",
       "members": {
-        "GroupName": {
-          "target": "com.amazonaws.xray#GroupName",
+        "StartTime": {
+          "target": "com.amazonaws.xray#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>The name of a group based on which you want to generate a graph.</p>"
+            "smithy.api#documentation": "<p>The start of the time frame for which to generate a graph.</p>",
+            "smithy.api#required": {}
           }
         },
         "EndTime": {
@@ -1440,10 +1832,10 @@
             "smithy.api#required": {}
           }
         },
-        "NextToken": {
-          "target": "com.amazonaws.xray#String",
+        "GroupName": {
+          "target": "com.amazonaws.xray#GroupName",
           "traits": {
-            "smithy.api#documentation": "<p>Pagination token.</p>"
+            "smithy.api#documentation": "<p>The name of a group based on which you want to generate a graph.</p>"
           }
         },
         "GroupARN": {
@@ -1452,11 +1844,10 @@
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a group based on which you want to generate a graph.</p>"
           }
         },
-        "StartTime": {
-          "target": "com.amazonaws.xray#Timestamp",
+        "NextToken": {
+          "target": "com.amazonaws.xray#String",
           "traits": {
-            "smithy.api#documentation": "<p>The start of the time frame for which to generate a graph.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Pagination token.</p>"
           }
         }
       }
@@ -1464,24 +1855,6 @@
     "com.amazonaws.xray#GetServiceGraphResult": {
       "type": "structure",
       "members": {
-        "ContainsOldGroupVersions": {
-          "target": "com.amazonaws.xray#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>A flag indicating whether the group's filter expression has been consistent, or\n      if the returned service graph may show traces from an older version of the group's filter\n      expression.</p>"
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.xray#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Pagination token.</p>"
-          }
-        },
-        "Services": {
-          "target": "com.amazonaws.xray#ServiceList",
-          "traits": {
-            "smithy.api#documentation": "<p>The services that have processed a traced request during the specified time\n      frame.</p>"
-          }
-        },
         "StartTime": {
           "target": "com.amazonaws.xray#Timestamp",
           "traits": {
@@ -1492,6 +1865,24 @@
           "target": "com.amazonaws.xray#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The end of the time frame for which the graph was generated.</p>"
+          }
+        },
+        "Services": {
+          "target": "com.amazonaws.xray#ServiceList",
+          "traits": {
+            "smithy.api#documentation": "<p>The services that have processed a traced request during the specified time\n      frame.</p>"
+          }
+        },
+        "ContainsOldGroupVersions": {
+          "target": "com.amazonaws.xray#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A flag indicating whether the group's filter expression has been consistent, or\n      if the returned service graph may show traces from an older version of the group's filter\n      expression.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Pagination token.</p>"
           }
         }
       }
@@ -1529,16 +1920,11 @@
     "com.amazonaws.xray#GetTimeSeriesServiceStatisticsRequest": {
       "type": "structure",
       "members": {
-        "EntitySelectorExpression": {
-          "target": "com.amazonaws.xray#EntitySelectorExpression",
+        "StartTime": {
+          "target": "com.amazonaws.xray#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>A filter expression defining entities that will be aggregated for statistics.\n            Supports ID, service, and edge functions. If no selector expression is specified, edge\n            statistics are returned. </p>"
-          }
-        },
-        "GroupName": {
-          "target": "com.amazonaws.xray#GroupName",
-          "traits": {
-            "smithy.api#documentation": "<p>The case-sensitive name of the group for which to pull statistics from.</p>"
+            "smithy.api#documentation": "<p>The start of the time frame for which to aggregate statistics.</p>",
+            "smithy.api#required": {}
           }
         },
         "EndTime": {
@@ -1548,11 +1934,10 @@
             "smithy.api#required": {}
           }
         },
-        "StartTime": {
-          "target": "com.amazonaws.xray#Timestamp",
+        "GroupName": {
+          "target": "com.amazonaws.xray#GroupName",
           "traits": {
-            "smithy.api#documentation": "<p>The start of the time frame for which to aggregate statistics.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The case-sensitive name of the group for which to pull statistics from.</p>"
           }
         },
         "GroupARN": {
@@ -1561,10 +1946,10 @@
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the group for which to pull statistics from.</p>"
           }
         },
-        "NextToken": {
-          "target": "com.amazonaws.xray#String",
+        "EntitySelectorExpression": {
+          "target": "com.amazonaws.xray#EntitySelectorExpression",
           "traits": {
-            "smithy.api#documentation": "<p>Pagination token.</p>"
+            "smithy.api#documentation": "<p>A filter expression defining entities that will be aggregated for statistics.\n            Supports ID, service, and edge functions. If no selector expression is specified, edge\n            statistics are returned. </p>"
           }
         },
         "Period": {
@@ -1572,22 +1957,34 @@
           "traits": {
             "smithy.api#documentation": "<p>Aggregation period in seconds.</p>"
           }
+        },
+        "ForecastStatistics": {
+          "target": "com.amazonaws.xray#NullableBoolean",
+          "traits": {
+            "smithy.api#documentation": "<p>The forecasted high and low fault count values. Forecast enabled requests require the\n            EntitySelectorExpression ID be provided.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Pagination token.</p>"
+          }
         }
       }
     },
     "com.amazonaws.xray#GetTimeSeriesServiceStatisticsResult": {
       "type": "structure",
       "members": {
-        "ContainsOldGroupVersions": {
-          "target": "com.amazonaws.xray#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>A flag indicating whether or not a group's filter expression has been consistent, or if a returned\n            aggregation might show statistics from an older version of the group's filter expression.</p>"
-          }
-        },
         "TimeSeriesServiceStatistics": {
           "target": "com.amazonaws.xray#TimeSeriesServiceStatisticsList",
           "traits": {
             "smithy.api#documentation": "<p>The collection of statistics.</p>"
+          }
+        },
+        "ContainsOldGroupVersions": {
+          "target": "com.amazonaws.xray#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A flag indicating whether or not a group's filter expression has been consistent, or if a returned\n            aggregation might show statistics from an older version of the group's filter expression.</p>"
           }
         },
         "NextToken": {
@@ -1696,6 +2093,13 @@
     "com.amazonaws.xray#GetTraceSummariesRequest": {
       "type": "structure",
       "members": {
+        "StartTime": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The start of the time frame for which to retrieve traces.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "EndTime": {
           "target": "com.amazonaws.xray#Timestamp",
           "traits": {
@@ -1703,10 +2107,10 @@
             "smithy.api#required": {}
           }
         },
-        "SamplingStrategy": {
-          "target": "com.amazonaws.xray#SamplingStrategy",
+        "TimeRangeType": {
+          "target": "com.amazonaws.xray#TimeRangeType",
           "traits": {
-            "smithy.api#documentation": "<p>A parameter to indicate whether to enable sampling on trace summaries. Input parameters are Name and\n            Value.</p>"
+            "smithy.api#documentation": "<p>A parameter to indicate whether to query trace summaries by TraceId or Event time.</p>"
           }
         },
         "Sampling": {
@@ -1715,17 +2119,10 @@
             "smithy.api#documentation": "<p>Set to <code>true</code> to get summaries for only a subset of available\n      traces.</p>"
           }
         },
-        "StartTime": {
-          "target": "com.amazonaws.xray#Timestamp",
+        "SamplingStrategy": {
+          "target": "com.amazonaws.xray#SamplingStrategy",
           "traits": {
-            "smithy.api#documentation": "<p>The start of the time frame for which to retrieve traces.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "TimeRangeType": {
-          "target": "com.amazonaws.xray#TimeRangeType",
-          "traits": {
-            "smithy.api#documentation": "<p>A parameter to indicate whether to query trace summaries by TraceId or Event time.</p>"
+            "smithy.api#documentation": "<p>A parameter to indicate whether to enable sampling on trace summaries. Input parameters are Name and\n            Value.</p>"
           }
         },
         "FilterExpression": {
@@ -1774,16 +2171,10 @@
     "com.amazonaws.xray#Group": {
       "type": "structure",
       "members": {
-        "InsightsConfiguration": {
-          "target": "com.amazonaws.xray#InsightsConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The structure containing configurations related to insights.</p>\n        <ul>\n            <li>\n                <p>The InsightsEnabled boolean can be set to true to enable insights for the\n                    group or false to disable insights for the group.</p>\n            </li>\n            <li>\n                <p>The NotifcationsEnabled  boolean can be set to true to enable insights\n                    notifications through Amazon EventBridge for the group.</p>\n            </li>\n         </ul>"
-          }
-        },
-        "FilterExpression": {
+        "GroupName": {
           "target": "com.amazonaws.xray#String",
           "traits": {
-            "smithy.api#documentation": "<p>The filter expression defining the parameters to include traces.</p>"
+            "smithy.api#documentation": "<p>The unique case-sensitive name of the group.</p>"
           }
         },
         "GroupARN": {
@@ -1792,10 +2183,16 @@
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the group generated based on the GroupName.</p>"
           }
         },
-        "GroupName": {
+        "FilterExpression": {
           "target": "com.amazonaws.xray#String",
           "traits": {
-            "smithy.api#documentation": "<p>The unique case-sensitive name of the group.</p>"
+            "smithy.api#documentation": "<p>The filter expression defining the parameters to include traces.</p>"
+          }
+        },
+        "InsightsConfiguration": {
+          "target": "com.amazonaws.xray#InsightsConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The structure containing configurations related to insights.</p>\n        <ul>\n            <li>\n                <p>The InsightsEnabled boolean can be set to true to enable insights for the\n                    group or false to disable insights for the group.</p>\n            </li>\n            <li>\n                <p>The NotifcationsEnabled  boolean can be set to true to enable insights\n                    notifications through Amazon EventBridge for the group.</p>\n            </li>\n         </ul>"
           }
         }
       },
@@ -1824,6 +2221,12 @@
     "com.amazonaws.xray#GroupSummary": {
       "type": "structure",
       "members": {
+        "GroupName": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique case-sensitive name of the group.</p>"
+          }
+        },
         "GroupARN": {
           "target": "com.amazonaws.xray#String",
           "traits": {
@@ -1840,12 +2243,6 @@
           "target": "com.amazonaws.xray#InsightsConfiguration",
           "traits": {
             "smithy.api#documentation": "<p>The structure containing configurations related to insights.</p>\n        <ul>\n            <li>\n                <p>The InsightsEnabled boolean can be set to true to enable insights for the\n                    group or false to disable insights for the group.</p>\n            </li>\n            <li>\n                <p>The NotificationsEnabled boolean can be set to true to enable insights notifications.\n                    Notifications can only be enabled on a group with InsightsEnabled set to true.</p>\n            </li>\n         </ul>"
-          }
-        },
-        "GroupName": {
-          "target": "com.amazonaws.xray#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique case-sensitive name of the group.</p>"
           }
         }
       },
@@ -1927,6 +2324,12 @@
             "smithy.api#documentation": "<p>The response status.</p>"
           }
         },
+        "HttpMethod": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The request method.</p>"
+          }
+        },
         "UserAgent": {
           "target": "com.amazonaws.xray#String",
           "traits": {
@@ -1938,31 +2341,358 @@
           "traits": {
             "smithy.api#documentation": "<p>The IP address of the requestor.</p>"
           }
-        },
-        "HttpMethod": {
-          "target": "com.amazonaws.xray#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The request method.</p>"
-          }
         }
       },
       "traits": {
         "smithy.api#documentation": "<p>Information about an HTTP request.</p>"
       }
     },
+    "com.amazonaws.xray#Insight": {
+      "type": "structure",
+      "members": {
+        "InsightId": {
+          "target": "com.amazonaws.xray#InsightId",
+          "traits": {
+            "smithy.api#documentation": "<p>The insights unique identifier. </p>"
+          }
+        },
+        "GroupARN": {
+          "target": "com.amazonaws.xray#GroupARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the group that the insight belongs to.</p>"
+          }
+        },
+        "GroupName": {
+          "target": "com.amazonaws.xray#GroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the group  that the insight belongs to.</p>"
+          }
+        },
+        "RootCauseServiceId": {
+          "target": "com.amazonaws.xray#ServiceId"
+        },
+        "Categories": {
+          "target": "com.amazonaws.xray#InsightCategoryList",
+          "traits": {
+            "smithy.api#documentation": "<p>The categories that label and describe the type of insight.</p>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.xray#InsightState",
+          "traits": {
+            "smithy.api#documentation": "<p>The current state of the insight.</p>"
+          }
+        },
+        "StartTime": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time, in Unix seconds, at which the insight began.</p>"
+          }
+        },
+        "EndTime": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time, in Unix seconds, at which the insight ended.</p>"
+          }
+        },
+        "Summary": {
+          "target": "com.amazonaws.xray#InsightSummaryText",
+          "traits": {
+            "smithy.api#documentation": "<p>A brief description of the insight.</p>"
+          }
+        },
+        "ClientRequestImpactStatistics": {
+          "target": "com.amazonaws.xray#RequestImpactStatistics",
+          "traits": {
+            "smithy.api#documentation": "<p>The impact statistics of the client side service. This includes the number of requests to the client service\n         and whether the requests were faults or okay.</p>"
+          }
+        },
+        "RootCauseServiceRequestImpactStatistics": {
+          "target": "com.amazonaws.xray#RequestImpactStatistics",
+          "traits": {
+            "smithy.api#documentation": "<p>The impact statistics of the root cause service. This includes the number of requests to the client service\n         and whether the requests were faults or okay.</p>"
+          }
+        },
+        "TopAnomalousServices": {
+          "target": "com.amazonaws.xray#AnomalousServiceList",
+          "traits": {
+            "smithy.api#documentation": "<p>The service within the insight that is most impacted by the incident.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>When fault rates go outside of the expected range, X-Ray creates an insight. Insights\n         tracks emergent issues within your applications.</p>"
+      }
+    },
+    "com.amazonaws.xray#InsightCategory": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "FAULT",
+            "name": "FAULT"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.xray#InsightCategoryList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.xray#InsightCategory"
+      }
+    },
+    "com.amazonaws.xray#InsightEvent": {
+      "type": "structure",
+      "members": {
+        "Summary": {
+          "target": "com.amazonaws.xray#EventSummaryText",
+          "traits": {
+            "smithy.api#documentation": "<p>A brief description of the event.</p>"
+          }
+        },
+        "EventTime": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time, in Unix seconds, at which the event was recorded.</p>"
+          }
+        },
+        "ClientRequestImpactStatistics": {
+          "target": "com.amazonaws.xray#RequestImpactStatistics",
+          "traits": {
+            "smithy.api#documentation": "<p>The impact statistics of the client side service. This includes the number of requests to the client service\n         and whether the requests were faults or okay.</p>"
+          }
+        },
+        "RootCauseServiceRequestImpactStatistics": {
+          "target": "com.amazonaws.xray#RequestImpactStatistics",
+          "traits": {
+            "smithy.api#documentation": "<p>The impact statistics of the root cause service. This includes the number of requests to the client service\n         and whether the requests were faults or okay.</p>"
+          }
+        },
+        "TopAnomalousServices": {
+          "target": "com.amazonaws.xray#AnomalousServiceList",
+          "traits": {
+            "smithy.api#documentation": "<p>The service during the event that is most impacted by the incident.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>X-Ray reevaluates insights periodically until they are resolved, and records each intermediate state in an\n         event. You can review incident events in the Impact Timeline on the Inspect page in the X-Ray console.</p>"
+      }
+    },
+    "com.amazonaws.xray#InsightEventList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.xray#InsightEvent"
+      }
+    },
+    "com.amazonaws.xray#InsightId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"
+      }
+    },
+    "com.amazonaws.xray#InsightImpactGraphEdge": {
+      "type": "structure",
+      "members": {
+        "ReferenceId": {
+          "target": "com.amazonaws.xray#NullableInteger",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifier of the edge. Unique within a service map.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The connection between two service in an insight impact graph.</p>"
+      }
+    },
+    "com.amazonaws.xray#InsightImpactGraphEdgeList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.xray#InsightImpactGraphEdge"
+      }
+    },
+    "com.amazonaws.xray#InsightImpactGraphService": {
+      "type": "structure",
+      "members": {
+        "ReferenceId": {
+          "target": "com.amazonaws.xray#NullableInteger",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifier for the service. Unique within the service map.</p>"
+          }
+        },
+        "Type": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifier for the service. Unique within the service map.</p>\n         <ul>\n            <li>\n               <p>AWS Resource - The type of an AWS resource. For example, AWS::EC2::Instance for an application running\n               on Amazon EC2 or AWS::DynamoDB::Table for an Amazon DynamoDB table that the application used. </p>\n            </li>\n            <li>\n               <p>AWS Service - The type of an AWS service. For example, AWS::DynamoDB for downstream calls to Amazon\n               DynamoDB that didn't target a specific table. </p>\n            </li>\n            <li>\n               <p>AWS Service - The type of an AWS service. For example, AWS::DynamoDB for downstream calls to Amazon\n               DynamoDB that didn't target a specific table. </p>\n            </li>\n            <li>\n               <p>remote - A downstream service of indeterminate type.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The canonical name of the service.</p>"
+          }
+        },
+        "Names": {
+          "target": "com.amazonaws.xray#ServiceNames",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of names for the service, including the canonical name.</p>"
+          }
+        },
+        "AccountId": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifier of the AWS account in which the service runs.</p>"
+          }
+        },
+        "Edges": {
+          "target": "com.amazonaws.xray#InsightImpactGraphEdgeList",
+          "traits": {
+            "smithy.api#documentation": "<p>Connections to downstream services.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Information about an application that processed requests, users that made requests, or downstream services,\n         resources, and applications that an application used. </p>"
+      }
+    },
+    "com.amazonaws.xray#InsightImpactGraphServiceList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.xray#InsightImpactGraphService"
+      }
+    },
+    "com.amazonaws.xray#InsightState": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ACTIVE",
+            "name": "ACTIVE"
+          },
+          {
+            "value": "CLOSED",
+            "name": "CLOSED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.xray#InsightStateList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.xray#InsightState"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 1
+        }
+      }
+    },
+    "com.amazonaws.xray#InsightSummary": {
+      "type": "structure",
+      "members": {
+        "InsightId": {
+          "target": "com.amazonaws.xray#InsightId",
+          "traits": {
+            "smithy.api#documentation": "<p>The insights unique identifier. </p>"
+          }
+        },
+        "GroupARN": {
+          "target": "com.amazonaws.xray#GroupARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the group that the insight belongs to.</p>"
+          }
+        },
+        "GroupName": {
+          "target": "com.amazonaws.xray#GroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the group  that the insight belongs to.</p>"
+          }
+        },
+        "RootCauseServiceId": {
+          "target": "com.amazonaws.xray#ServiceId"
+        },
+        "Categories": {
+          "target": "com.amazonaws.xray#InsightCategoryList",
+          "traits": {
+            "smithy.api#documentation": "<p> Categories The categories that label and describe the type of insight.</p>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.xray#InsightState",
+          "traits": {
+            "smithy.api#documentation": "<p>The current state of the insight.</p>"
+          }
+        },
+        "StartTime": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time, in Unix seconds, at which the insight began.</p>"
+          }
+        },
+        "EndTime": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time, in Unix seconds, at which the insight ended.</p>"
+          }
+        },
+        "Summary": {
+          "target": "com.amazonaws.xray#InsightSummaryText",
+          "traits": {
+            "smithy.api#documentation": "<p>A brief description of the insight.</p>"
+          }
+        },
+        "ClientRequestImpactStatistics": {
+          "target": "com.amazonaws.xray#RequestImpactStatistics",
+          "traits": {
+            "smithy.api#documentation": "<p>The impact statistics of the client side service. This includes the number of requests\n         to the client service and whether the requests were faults or okay. </p>"
+          }
+        },
+        "RootCauseServiceRequestImpactStatistics": {
+          "target": "com.amazonaws.xray#RequestImpactStatistics",
+          "traits": {
+            "smithy.api#documentation": "<p>The impact statistics of the root cause service. This includes the number of requests to\n         the client service and whether the requests were faults or okay. </p>"
+          }
+        },
+        "TopAnomalousServices": {
+          "target": "com.amazonaws.xray#AnomalousServiceList",
+          "traits": {
+            "smithy.api#documentation": "<p>The service within the insight that is most impacted by the incident.</p>"
+          }
+        },
+        "LastUpdateTime": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time, in Unix seconds, that the insight was last updated.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Information that describes an insight.</p>"
+      }
+    },
+    "com.amazonaws.xray#InsightSummaryList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.xray#InsightSummary"
+      }
+    },
+    "com.amazonaws.xray#InsightSummaryText": {
+      "type": "string"
+    },
     "com.amazonaws.xray#InsightsConfiguration": {
       "type": "structure",
       "members": {
-        "NotificationsEnabled": {
-          "target": "com.amazonaws.xray#NullableBoolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Set the NotificationsEnabled value to true to enable insights notifications. Notifications can only be\n            enabled on a group with InsightsEnabled set to true.</p>"
-          }
-        },
         "InsightsEnabled": {
           "target": "com.amazonaws.xray#NullableBoolean",
           "traits": {
             "smithy.api#documentation": "<p>Set the InsightsEnabled value to true to enable insights or false to disable\n            insights.</p>"
+          }
+        },
+        "NotificationsEnabled": {
+          "target": "com.amazonaws.xray#NullableBoolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Set the NotificationsEnabled value to true to enable insights notifications. Notifications can only be\n            enabled on a group with InsightsEnabled set to true.</p>"
           }
         }
       },
@@ -2048,16 +2778,16 @@
     "com.amazonaws.xray#ListTagsForResourceResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.xray#String",
-          "traits": {
-            "smithy.api#documentation": "<p>A pagination token. If multiple pages of results are returned, use the <code>NextToken</code> value returned with \n      the current page of results to get the next page of results.</p>"
-          }
-        },
         "Tags": {
           "target": "com.amazonaws.xray#TagList",
           "traits": {
             "smithy.api#documentation": "<p>A list of tags, as key and value pairs, that is associated with the specified X-Ray group or sampling rule.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A pagination token. If multiple pages of results are returned, use the <code>NextToken</code> value returned with \n      the current page of results to get the next page of results.</p>"
           }
         }
       }
@@ -2123,17 +2853,17 @@
     "com.amazonaws.xray#PutEncryptionConfigRequest": {
       "type": "structure",
       "members": {
+        "KeyId": {
+          "target": "com.amazonaws.xray#EncryptionKeyId",
+          "traits": {
+            "smithy.api#documentation": "<p>An AWS KMS customer master key (CMK) in one of the following formats:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Alias</b> - The name of the key. For example,\n            <code>alias/MyKey</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Key ID</b> - The KMS key ID of the key. For example,\n          <code>ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. AWS X-Ray does not support asymmetric CMKs.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ARN</b> - The full Amazon Resource Name of the key ID or alias.\n          For example,\n            <code>arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>.\n          Use this format to specify a key in a different account.</p>\n            </li>\n         </ul>\n         <p>Omit this key if you set <code>Type</code> to <code>NONE</code>.</p>"
+          }
+        },
         "Type": {
           "target": "com.amazonaws.xray#EncryptionType",
           "traits": {
             "smithy.api#documentation": "<p>The type of encryption. Set to <code>KMS</code> to use your own key for encryption. Set\n      to <code>NONE</code> for default encryption.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "KeyId": {
-          "target": "com.amazonaws.xray#EncryptionKeyId",
-          "traits": {
-            "smithy.api#documentation": "<p>An AWS KMS customer master key (CMK) in one of the following formats:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Alias</b> - The name of the key. For example,\n            <code>alias/MyKey</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Key ID</b> - The KMS key ID of the key. For example,\n          <code>ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. AWS X-Ray does not support asymmetric CMKs.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ARN</b> - The full Amazon Resource Name of the key ID or alias.\n          For example,\n            <code>arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>.\n          Use this format to specify a key in a different account.</p>\n            </li>\n         </ul>\n         <p>Omit this key if you set <code>Type</code> to <code>NONE</code>.</p>"
           }
         }
       }
@@ -2184,12 +2914,6 @@
             "smithy.api#required": {}
           }
         },
-        "ResourceARN": {
-          "target": "com.amazonaws.xray#ResourceARN",
-          "traits": {
-            "smithy.api#documentation": "<p></p>"
-          }
-        },
         "EC2InstanceId": {
           "target": "com.amazonaws.xray#EC2InstanceId",
           "traits": {
@@ -2198,6 +2922,12 @@
         },
         "Hostname": {
           "target": "com.amazonaws.xray#Hostname",
+          "traits": {
+            "smithy.api#documentation": "<p></p>"
+          }
+        },
+        "ResourceARN": {
+          "target": "com.amazonaws.xray#ResourceARN",
           "traits": {
             "smithy.api#documentation": "<p></p>"
           }
@@ -2264,6 +2994,32 @@
         }
       }
     },
+    "com.amazonaws.xray#RequestImpactStatistics": {
+      "type": "structure",
+      "members": {
+        "FaultCount": {
+          "target": "com.amazonaws.xray#NullableLong",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of requests that have resulted in a fault,</p>"
+          }
+        },
+        "OkCount": {
+          "target": "com.amazonaws.xray#NullableLong",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of successful requests.</p>"
+          }
+        },
+        "TotalCount": {
+          "target": "com.amazonaws.xray#NullableLong",
+          "traits": {
+            "smithy.api#documentation": "<p>The total number of requests to the service.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Statistics that describe how the incident has impacted a service.</p>"
+      }
+    },
     "com.amazonaws.xray#ReservoirSize": {
       "type": "integer",
       "traits": {
@@ -2314,16 +3070,16 @@
     "com.amazonaws.xray#ResponseTimeRootCause": {
       "type": "structure",
       "members": {
-        "ClientImpacting": {
-          "target": "com.amazonaws.xray#NullableBoolean",
-          "traits": {
-            "smithy.api#documentation": "<p>A flag that denotes that the root cause impacts the trace client.</p>"
-          }
-        },
         "Services": {
           "target": "com.amazonaws.xray#ResponseTimeRootCauseServices",
           "traits": {
             "smithy.api#documentation": "<p>A list of corresponding services. A service identifies a segment and contains a name,\n      account ID, type, and inferred flag.</p>"
+          }
+        },
+        "ClientImpacting": {
+          "target": "com.amazonaws.xray#NullableBoolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A flag that denotes that the root cause impacts the trace client.</p>"
           }
         }
       },
@@ -2340,16 +3096,16 @@
             "smithy.api#documentation": "<p>The name of the entity.</p>"
           }
         },
-        "Remote": {
-          "target": "com.amazonaws.xray#NullableBoolean",
-          "traits": {
-            "smithy.api#documentation": "<p>A flag that denotes a remote subsegment.</p>"
-          }
-        },
         "Coverage": {
           "target": "com.amazonaws.xray#NullableDouble",
           "traits": {
             "smithy.api#documentation": "<p>The type and messages of the exceptions.</p>"
+          }
+        },
+        "Remote": {
+          "target": "com.amazonaws.xray#NullableBoolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A flag that denotes a remote subsegment.</p>"
           }
         }
       },
@@ -2366,6 +3122,30 @@
     "com.amazonaws.xray#ResponseTimeRootCauseService": {
       "type": "structure",
       "members": {
+        "Name": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The service name.</p>"
+          }
+        },
+        "Names": {
+          "target": "com.amazonaws.xray#ServiceNames",
+          "traits": {
+            "smithy.api#documentation": "<p>A collection of associated service names.</p>"
+          }
+        },
+        "Type": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The type associated to the service.</p>"
+          }
+        },
+        "AccountId": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The account ID associated to the service.</p>"
+          }
+        },
         "EntityPath": {
           "target": "com.amazonaws.xray#ResponseTimeRootCauseEntityPath",
           "traits": {
@@ -2376,30 +3156,6 @@
           "target": "com.amazonaws.xray#NullableBoolean",
           "traits": {
             "smithy.api#documentation": "<p>A Boolean value indicating if the service is inferred from the trace.</p>"
-          }
-        },
-        "AccountId": {
-          "target": "com.amazonaws.xray#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The account ID associated to the service.</p>"
-          }
-        },
-        "Type": {
-          "target": "com.amazonaws.xray#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The type associated to the service.</p>"
-          }
-        },
-        "Names": {
-          "target": "com.amazonaws.xray#ServiceNames",
-          "traits": {
-            "smithy.api#documentation": "<p>A collection of associated service names.</p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.xray#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The service name.</p>"
           }
         }
       },
@@ -2477,51 +3233,16 @@
     "com.amazonaws.xray#SamplingRule": {
       "type": "structure",
       "members": {
-        "Priority": {
-          "target": "com.amazonaws.xray#Priority",
-          "traits": {
-            "smithy.api#documentation": "<p>The priority of the sampling rule.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "URLPath": {
-          "target": "com.amazonaws.xray#URLPath",
-          "traits": {
-            "smithy.api#documentation": "<p>Matches the path from a request URL.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Host": {
-          "target": "com.amazonaws.xray#Host",
-          "traits": {
-            "smithy.api#documentation": "<p>Matches the hostname from a request URL.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "ServiceName": {
-          "target": "com.amazonaws.xray#ServiceName",
-          "traits": {
-            "smithy.api#documentation": "<p>Matches the <code>name</code> that the service uses to identify itself in segments.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Attributes": {
-          "target": "com.amazonaws.xray#AttributeMap",
-          "traits": {
-            "smithy.api#documentation": "<p>Matches attributes derived from the request.</p>"
-          }
-        },
-        "FixedRate": {
-          "target": "com.amazonaws.xray#FixedRate",
-          "traits": {
-            "smithy.api#documentation": "<p>The percentage of matching requests to instrument, after the reservoir is\n      exhausted.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "RuleName": {
           "target": "com.amazonaws.xray#RuleName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the sampling rule. Specify a rule by either name or ARN, but not both.</p>"
+          }
+        },
+        "RuleARN": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.</p>"
           }
         },
         "ResourceARN": {
@@ -2531,16 +3252,17 @@
             "smithy.api#required": {}
           }
         },
-        "RuleARN": {
-          "target": "com.amazonaws.xray#String",
+        "Priority": {
+          "target": "com.amazonaws.xray#Priority",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.</p>"
+            "smithy.api#documentation": "<p>The priority of the sampling rule.</p>",
+            "smithy.api#required": {}
           }
         },
-        "Version": {
-          "target": "com.amazonaws.xray#Version",
+        "FixedRate": {
+          "target": "com.amazonaws.xray#FixedRate",
           "traits": {
-            "smithy.api#documentation": "<p>The version of the sampling rule format (<code>1</code>).</p>",
+            "smithy.api#documentation": "<p>The percentage of matching requests to instrument, after the reservoir is\n      exhausted.</p>",
             "smithy.api#required": {}
           }
         },
@@ -2551,10 +3273,24 @@
             "smithy.api#required": {}
           }
         },
+        "ServiceName": {
+          "target": "com.amazonaws.xray#ServiceName",
+          "traits": {
+            "smithy.api#documentation": "<p>Matches the <code>name</code> that the service uses to identify itself in segments.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "ServiceType": {
           "target": "com.amazonaws.xray#ServiceType",
           "traits": {
             "smithy.api#documentation": "<p>Matches the <code>origin</code> that the service uses to identify its type in segments.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Host": {
+          "target": "com.amazonaws.xray#Host",
+          "traits": {
+            "smithy.api#documentation": "<p>Matches the hostname from a request URL.</p>",
             "smithy.api#required": {}
           }
         },
@@ -2563,6 +3299,26 @@
           "traits": {
             "smithy.api#documentation": "<p>Matches the HTTP method of a request.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "URLPath": {
+          "target": "com.amazonaws.xray#URLPath",
+          "traits": {
+            "smithy.api#documentation": "<p>Matches the path from a request URL.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Version": {
+          "target": "com.amazonaws.xray#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the sampling rule format (<code>1</code>).</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Attributes": {
+          "target": "com.amazonaws.xray#AttributeMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Matches attributes derived from the request.</p>"
           }
         }
       },
@@ -2579,16 +3335,16 @@
             "smithy.api#documentation": "<p>The sampling rule.</p>"
           }
         },
-        "ModifiedAt": {
-          "target": "com.amazonaws.xray#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>When the rule was last modified.</p>"
-          }
-        },
         "CreatedAt": {
           "target": "com.amazonaws.xray#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>When the rule was created.</p>"
+          }
+        },
+        "ModifiedAt": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>When the rule was last modified.</p>"
           }
         }
       },
@@ -2605,52 +3361,16 @@
     "com.amazonaws.xray#SamplingRuleUpdate": {
       "type": "structure",
       "members": {
-        "ServiceName": {
-          "target": "com.amazonaws.xray#ServiceName",
-          "traits": {
-            "smithy.api#documentation": "<p>Matches the <code>name</code> that the service uses to identify itself in segments.</p>"
-          }
-        },
-        "RuleARN": {
-          "target": "com.amazonaws.xray#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.</p>"
-          }
-        },
-        "Attributes": {
-          "target": "com.amazonaws.xray#AttributeMap",
-          "traits": {
-            "smithy.api#documentation": "<p>Matches attributes derived from the request.</p>"
-          }
-        },
-        "ReservoirSize": {
-          "target": "com.amazonaws.xray#NullableInteger",
-          "traits": {
-            "smithy.api#documentation": "<p>A fixed number of matching requests to instrument per second, prior to applying the\n      fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.</p>"
-          }
-        },
         "RuleName": {
           "target": "com.amazonaws.xray#RuleName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the sampling rule. Specify a rule by either name or ARN, but not both.</p>"
           }
         },
-        "HTTPMethod": {
-          "target": "com.amazonaws.xray#HTTPMethod",
+        "RuleARN": {
+          "target": "com.amazonaws.xray#String",
           "traits": {
-            "smithy.api#documentation": "<p>Matches the HTTP method of a request.</p>"
-          }
-        },
-        "FixedRate": {
-          "target": "com.amazonaws.xray#NullableDouble",
-          "traits": {
-            "smithy.api#documentation": "<p>The percentage of matching requests to instrument, after the reservoir is\n      exhausted.</p>"
-          }
-        },
-        "URLPath": {
-          "target": "com.amazonaws.xray#URLPath",
-          "traits": {
-            "smithy.api#documentation": "<p>Matches the path from a request URL.</p>"
+            "smithy.api#documentation": "<p>The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.</p>"
           }
         },
         "ResourceARN": {
@@ -2665,16 +3385,52 @@
             "smithy.api#documentation": "<p>The priority of the sampling rule.</p>"
           }
         },
+        "FixedRate": {
+          "target": "com.amazonaws.xray#NullableDouble",
+          "traits": {
+            "smithy.api#documentation": "<p>The percentage of matching requests to instrument, after the reservoir is\n      exhausted.</p>"
+          }
+        },
+        "ReservoirSize": {
+          "target": "com.amazonaws.xray#NullableInteger",
+          "traits": {
+            "smithy.api#documentation": "<p>A fixed number of matching requests to instrument per second, prior to applying the\n      fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.</p>"
+          }
+        },
         "Host": {
           "target": "com.amazonaws.xray#Host",
           "traits": {
             "smithy.api#documentation": "<p>Matches the hostname from a request URL.</p>"
           }
         },
+        "ServiceName": {
+          "target": "com.amazonaws.xray#ServiceName",
+          "traits": {
+            "smithy.api#documentation": "<p>Matches the <code>name</code> that the service uses to identify itself in segments.</p>"
+          }
+        },
         "ServiceType": {
           "target": "com.amazonaws.xray#ServiceType",
           "traits": {
             "smithy.api#documentation": "<p>Matches the <code>origin</code> that the service uses to identify its type in segments.</p>"
+          }
+        },
+        "HTTPMethod": {
+          "target": "com.amazonaws.xray#HTTPMethod",
+          "traits": {
+            "smithy.api#documentation": "<p>Matches the HTTP method of a request.</p>"
+          }
+        },
+        "URLPath": {
+          "target": "com.amazonaws.xray#URLPath",
+          "traits": {
+            "smithy.api#documentation": "<p>Matches the path from a request URL.</p>"
+          }
+        },
+        "Attributes": {
+          "target": "com.amazonaws.xray#AttributeMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Matches attributes derived from the request.</p>"
           }
         }
       },
@@ -2691,10 +3447,10 @@
             "smithy.api#documentation": "<p>The name of the sampling rule.</p>"
           }
         },
-        "SampledCount": {
-          "target": "com.amazonaws.xray#Integer",
+        "Timestamp": {
+          "target": "com.amazonaws.xray#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>The number of requests recorded.</p>"
+            "smithy.api#documentation": "<p>The start time of the reporting window.</p>"
           }
         },
         "RequestCount": {
@@ -2709,10 +3465,10 @@
             "smithy.api#documentation": "<p>The number of requests recorded with borrowed reservoir quota.</p>"
           }
         },
-        "Timestamp": {
-          "target": "com.amazonaws.xray#Timestamp",
+        "SampledCount": {
+          "target": "com.amazonaws.xray#Integer",
           "traits": {
-            "smithy.api#documentation": "<p>The start time of the reporting window.</p>"
+            "smithy.api#documentation": "<p>The number of requests recorded.</p>"
           }
         }
       },
@@ -2729,10 +3485,10 @@
     "com.amazonaws.xray#SamplingStatisticsDocument": {
       "type": "structure",
       "members": {
-        "RequestCount": {
-          "target": "com.amazonaws.xray#RequestCount",
+        "RuleName": {
+          "target": "com.amazonaws.xray#RuleName",
           "traits": {
-            "smithy.api#documentation": "<p>The number of requests that matched the rule.</p>",
+            "smithy.api#documentation": "<p>The name of the sampling rule.</p>",
             "smithy.api#required": {}
           }
         },
@@ -2743,13 +3499,6 @@
             "smithy.api#required": {}
           }
         },
-        "SampledCount": {
-          "target": "com.amazonaws.xray#SampledCount",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of requests recorded.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Timestamp": {
           "target": "com.amazonaws.xray#Timestamp",
           "traits": {
@@ -2757,17 +3506,24 @@
             "smithy.api#required": {}
           }
         },
+        "RequestCount": {
+          "target": "com.amazonaws.xray#RequestCount",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of requests that matched the rule.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "SampledCount": {
+          "target": "com.amazonaws.xray#SampledCount",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of requests recorded.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "BorrowCount": {
           "target": "com.amazonaws.xray#BorrowCount",
           "traits": {
             "smithy.api#documentation": "<p>The number of requests recorded with borrowed reservoir quota.</p>"
-          }
-        },
-        "RuleName": {
-          "target": "com.amazonaws.xray#RuleName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the sampling rule.</p>",
-            "smithy.api#required": {}
           }
         }
       },
@@ -2825,18 +3581,6 @@
     "com.amazonaws.xray#SamplingTargetDocument": {
       "type": "structure",
       "members": {
-        "ReservoirQuota": {
-          "target": "com.amazonaws.xray#NullableInteger",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of requests per second that X-Ray allocated for this service.</p>"
-          }
-        },
-        "Interval": {
-          "target": "com.amazonaws.xray#NullableInteger",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of seconds for the service to wait before getting sampling targets\n      again.</p>"
-          }
-        },
         "RuleName": {
           "target": "com.amazonaws.xray#String",
           "traits": {
@@ -2849,10 +3593,22 @@
             "smithy.api#documentation": "<p>The percentage of matching requests to instrument, after the reservoir is\n      exhausted.</p>"
           }
         },
+        "ReservoirQuota": {
+          "target": "com.amazonaws.xray#NullableInteger",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of requests per second that X-Ray allocated for this service.</p>"
+          }
+        },
         "ReservoirQuotaTTL": {
           "target": "com.amazonaws.xray#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>When the reservoir quota expires.</p>"
+          }
+        },
+        "Interval": {
+          "target": "com.amazonaws.xray#NullableInteger",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of seconds for the service to wait before getting sampling targets\n      again.</p>"
           }
         }
       },
@@ -2906,52 +3662,10 @@
     "com.amazonaws.xray#Service": {
       "type": "structure",
       "members": {
-        "AccountId": {
-          "target": "com.amazonaws.xray#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Identifier of the AWS account in which the service runs.</p>"
-          }
-        },
-        "EndTime": {
-          "target": "com.amazonaws.xray#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The end time of the last segment that the service generated.</p>"
-          }
-        },
-        "Edges": {
-          "target": "com.amazonaws.xray#EdgeList",
-          "traits": {
-            "smithy.api#documentation": "<p>Connections to downstream services.</p>"
-          }
-        },
-        "Type": {
-          "target": "com.amazonaws.xray#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of service.</p>\n         <ul>\n            <li>\n               <p>AWS Resource - The type of an AWS resource. For example, <code>AWS::EC2::Instance</code> for an\n          application running on Amazon EC2 or <code>AWS::DynamoDB::Table</code> for an Amazon DynamoDB table that the\n          application used.</p>\n            </li>\n            <li>\n               <p>AWS Service - The type of an AWS service. For example, <code>AWS::DynamoDB</code>\n          for downstream calls to Amazon DynamoDB that didn't target a specific table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>client</code> - Represents the clients that sent requests to a root\n          service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>remote</code> - A downstream service of indeterminate type.</p>\n            </li>\n         </ul>"
-          }
-        },
         "ReferenceId": {
           "target": "com.amazonaws.xray#NullableInteger",
           "traits": {
             "smithy.api#documentation": "<p>Identifier for the service. Unique within the service map.</p>"
-          }
-        },
-        "State": {
-          "target": "com.amazonaws.xray#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The service's state.</p>"
-          }
-        },
-        "StartTime": {
-          "target": "com.amazonaws.xray#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The start time of the first segment that the service generated.</p>"
-          }
-        },
-        "DurationHistogram": {
-          "target": "com.amazonaws.xray#Histogram",
-          "traits": {
-            "smithy.api#documentation": "<p>A histogram that maps the spread of service durations.</p>"
           }
         },
         "Name": {
@@ -2966,22 +3680,64 @@
             "smithy.api#documentation": "<p>A list of names for the service, including the canonical name.</p>"
           }
         },
-        "ResponseTimeHistogram": {
-          "target": "com.amazonaws.xray#Histogram",
-          "traits": {
-            "smithy.api#documentation": "<p>A histogram that maps the spread of service response times.</p>"
-          }
-        },
         "Root": {
           "target": "com.amazonaws.xray#NullableBoolean",
           "traits": {
             "smithy.api#documentation": "<p>Indicates that the service was the first service to process a request.</p>"
           }
         },
+        "AccountId": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifier of the AWS account in which the service runs.</p>"
+          }
+        },
+        "Type": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of service.</p>\n         <ul>\n            <li>\n               <p>AWS Resource - The type of an AWS resource. For example, <code>AWS::EC2::Instance</code> for an\n          application running on Amazon EC2 or <code>AWS::DynamoDB::Table</code> for an Amazon DynamoDB table that the\n          application used.</p>\n            </li>\n            <li>\n               <p>AWS Service - The type of an AWS service. For example, <code>AWS::DynamoDB</code>\n          for downstream calls to Amazon DynamoDB that didn't target a specific table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>client</code> - Represents the clients that sent requests to a root\n          service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>remote</code> - A downstream service of indeterminate type.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The service's state.</p>"
+          }
+        },
+        "StartTime": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The start time of the first segment that the service generated.</p>"
+          }
+        },
+        "EndTime": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The end time of the last segment that the service generated.</p>"
+          }
+        },
+        "Edges": {
+          "target": "com.amazonaws.xray#EdgeList",
+          "traits": {
+            "smithy.api#documentation": "<p>Connections to downstream services.</p>"
+          }
+        },
         "SummaryStatistics": {
           "target": "com.amazonaws.xray#ServiceStatistics",
           "traits": {
             "smithy.api#documentation": "<p>Aggregated statistics for the service.</p>"
+          }
+        },
+        "DurationHistogram": {
+          "target": "com.amazonaws.xray#Histogram",
+          "traits": {
+            "smithy.api#documentation": "<p>A histogram that maps the spread of service durations.</p>"
+          }
+        },
+        "ResponseTimeHistogram": {
+          "target": "com.amazonaws.xray#Histogram",
+          "traits": {
+            "smithy.api#documentation": "<p>A histogram that maps the spread of service response times.</p>"
           }
         }
       },
@@ -2992,13 +3748,7 @@
     "com.amazonaws.xray#ServiceId": {
       "type": "structure",
       "members": {
-        "AccountId": {
-          "target": "com.amazonaws.xray#String",
-          "traits": {
-            "smithy.api#documentation": "<p></p>"
-          }
-        },
-        "Type": {
+        "Name": {
           "target": "com.amazonaws.xray#String",
           "traits": {
             "smithy.api#documentation": "<p></p>"
@@ -3010,7 +3760,13 @@
             "smithy.api#documentation": "<p></p>"
           }
         },
-        "Name": {
+        "AccountId": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p></p>"
+          }
+        },
+        "Type": {
           "target": "com.amazonaws.xray#String",
           "traits": {
             "smithy.api#documentation": "<p></p>"
@@ -3051,10 +3807,16 @@
     "com.amazonaws.xray#ServiceStatistics": {
       "type": "structure",
       "members": {
-        "TotalResponseTime": {
-          "target": "com.amazonaws.xray#NullableDouble",
+        "OkCount": {
+          "target": "com.amazonaws.xray#NullableLong",
           "traits": {
-            "smithy.api#documentation": "<p>The aggregate response time of completed requests.</p>"
+            "smithy.api#documentation": "<p>The number of requests that completed with a 2xx Success status code.</p>"
+          }
+        },
+        "ErrorStatistics": {
+          "target": "com.amazonaws.xray#ErrorStatistics",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about requests that failed with a 4xx Client Error status code.</p>"
           }
         },
         "FaultStatistics": {
@@ -3063,22 +3825,16 @@
             "smithy.api#documentation": "<p>Information about requests that failed with a 5xx Server Error status code.</p>"
           }
         },
-        "OkCount": {
-          "target": "com.amazonaws.xray#NullableLong",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of requests that completed with a 2xx Success status code.</p>"
-          }
-        },
         "TotalCount": {
           "target": "com.amazonaws.xray#NullableLong",
           "traits": {
             "smithy.api#documentation": "<p>The total number of completed requests.</p>"
           }
         },
-        "ErrorStatistics": {
-          "target": "com.amazonaws.xray#ErrorStatistics",
+        "TotalResponseTime": {
+          "target": "com.amazonaws.xray#NullableDouble",
           "traits": {
-            "smithy.api#documentation": "<p>Information about requests that failed with a 4xx Client Error status code.</p>"
+            "smithy.api#documentation": "<p>The aggregate response time of completed requests.</p>"
           }
         }
       },
@@ -3101,17 +3857,17 @@
     "com.amazonaws.xray#Tag": {
       "type": "structure",
       "members": {
-        "Value": {
-          "target": "com.amazonaws.xray#TagValue",
-          "traits": {
-            "smithy.api#documentation": "<p>An optional tag value, such as <code>Production</code> or <code>test-only</code>. The value can be \n      a maximum of 255 characters, and contain only Unicode letters, numbers, or separators, or the following \n      special characters: <code>+ - = . _ : /</code>\n         </p>",
-            "smithy.api#required": {}
-          }
-        },
         "Key": {
           "target": "com.amazonaws.xray#TagKey",
           "traits": {
             "smithy.api#documentation": "<p>A tag key, such as <code>Stage</code> or <code>Name</code>. A tag key cannot be empty. The \n      key can be a maximum of 128 characters, and can contain only Unicode letters, numbers, or separators, \n      or the following special characters: <code>+ - = . _ : /</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Value": {
+          "target": "com.amazonaws.xray#TagValue",
+          "traits": {
+            "smithy.api#documentation": "<p>An optional tag value, such as <code>Production</code> or <code>test-only</code>. The value can be \n      a maximum of 255 characters, and contain only Unicode letters, numbers, or separators, or the following \n      special characters: <code>+ - = . _ : /</code>\n         </p>",
             "smithy.api#required": {}
           }
         }
@@ -3226,14 +3982,14 @@
             "smithy.api#required": {}
           }
         },
-        "SegmentsRejectedCount": {
+        "SegmentsReceivedCount": {
           "target": "com.amazonaws.xray#NullableInteger",
           "traits": {
             "smithy.api#documentation": "<p></p>"
           }
         },
-        "BackendConnectionErrors": {
-          "target": "com.amazonaws.xray#BackendConnectionErrors",
+        "SegmentsSentCount": {
+          "target": "com.amazonaws.xray#NullableInteger",
           "traits": {
             "smithy.api#documentation": "<p></p>"
           }
@@ -3244,14 +4000,14 @@
             "smithy.api#documentation": "<p></p>"
           }
         },
-        "SegmentsReceivedCount": {
+        "SegmentsRejectedCount": {
           "target": "com.amazonaws.xray#NullableInteger",
           "traits": {
             "smithy.api#documentation": "<p></p>"
           }
         },
-        "SegmentsSentCount": {
-          "target": "com.amazonaws.xray#NullableInteger",
+        "BackendConnectionErrors": {
+          "target": "com.amazonaws.xray#BackendConnectionErrors",
           "traits": {
             "smithy.api#documentation": "<p></p>"
           }
@@ -3298,22 +4054,28 @@
     "com.amazonaws.xray#TimeSeriesServiceStatistics": {
       "type": "structure",
       "members": {
-        "ServiceSummaryStatistics": {
-          "target": "com.amazonaws.xray#ServiceStatistics"
+        "Timestamp": {
+          "target": "com.amazonaws.xray#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>Timestamp of the window for which statistics are aggregated.</p>"
+          }
         },
         "EdgeSummaryStatistics": {
           "target": "com.amazonaws.xray#EdgeStatistics"
+        },
+        "ServiceSummaryStatistics": {
+          "target": "com.amazonaws.xray#ServiceStatistics"
+        },
+        "ServiceForecastStatistics": {
+          "target": "com.amazonaws.xray#ForecastStatistics",
+          "traits": {
+            "smithy.api#documentation": "<p>The forecasted high and low fault count values.</p>"
+          }
         },
         "ResponseTimeHistogram": {
           "target": "com.amazonaws.xray#Histogram",
           "traits": {
             "smithy.api#documentation": "<p>The response time histogram for the selected entities.</p>"
-          }
-        },
-        "Timestamp": {
-          "target": "com.amazonaws.xray#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>Timestamp of the window for which statistics are aggregated.</p>"
           }
         }
       },
@@ -3329,6 +4091,15 @@
     },
     "com.amazonaws.xray#Timestamp": {
       "type": "timestamp"
+    },
+    "com.amazonaws.xray#Token": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 2000
+        }
+      }
     },
     "com.amazonaws.xray#TooManyTagsException": {
       "type": "structure",
@@ -3355,6 +4126,12 @@
             "smithy.api#documentation": "<p>The unique identifier for the request that generated the trace's segments and\n      subsegments.</p>"
           }
         },
+        "Duration": {
+          "target": "com.amazonaws.xray#NullableDouble",
+          "traits": {
+            "smithy.api#documentation": "<p>The length of time in seconds between the start time of the root segment and the end\n      time of the last segment that completed.</p>"
+          }
+        },
         "LimitExceeded": {
           "target": "com.amazonaws.xray#NullableBoolean",
           "traits": {
@@ -3365,12 +4142,6 @@
           "target": "com.amazonaws.xray#SegmentList",
           "traits": {
             "smithy.api#documentation": "<p>Segment documents for the segments and subsegments that comprise the trace.</p>"
-          }
-        },
-        "Duration": {
-          "target": "com.amazonaws.xray#NullableDouble",
-          "traits": {
-            "smithy.api#documentation": "<p>The length of time in seconds between the start time of the root segment and the end\n      time of the last segment that completed.</p>"
           }
         }
       },
@@ -3429,28 +4200,22 @@
     "com.amazonaws.xray#TraceSummary": {
       "type": "structure",
       "members": {
-        "IsPartial": {
-          "target": "com.amazonaws.xray#NullableBoolean",
-          "traits": {
-            "smithy.api#documentation": "<p>One or more of the segment documents is in progress.</p>"
-          }
-        },
-        "HasThrottle": {
-          "target": "com.amazonaws.xray#NullableBoolean",
-          "traits": {
-            "smithy.api#documentation": "<p>One or more of the segment documents has a 429 throttling error.</p>"
-          }
-        },
         "Id": {
           "target": "com.amazonaws.xray#TraceId",
           "traits": {
             "smithy.api#documentation": "<p>The unique identifier for the request that generated the trace's segments and\n      subsegments.</p>"
           }
         },
-        "ServiceIds": {
-          "target": "com.amazonaws.xray#ServiceIds",
+        "Duration": {
+          "target": "com.amazonaws.xray#NullableDouble",
           "traits": {
-            "smithy.api#documentation": "<p>Service IDs from the trace's segment documents.</p>"
+            "smithy.api#documentation": "<p>The length of time in seconds between the start time of the root segment and the end\n      time of the last segment that completed.</p>"
+          }
+        },
+        "ResponseTime": {
+          "target": "com.amazonaws.xray#NullableDouble",
+          "traits": {
+            "smithy.api#documentation": "<p>The length of time in seconds between the start and end times of the root segment. If\n      the service performs work asynchronously, the response time measures the time before the\n      response is sent to the user, while the duration measures the amount of time before the last\n      traced activity completes.</p>"
           }
         },
         "HasFault": {
@@ -3465,52 +4230,16 @@
             "smithy.api#documentation": "<p>The root segment document has a 400 series error.</p>"
           }
         },
-        "InstanceIds": {
-          "target": "com.amazonaws.xray#TraceInstanceIds",
+        "HasThrottle": {
+          "target": "com.amazonaws.xray#NullableBoolean",
           "traits": {
-            "smithy.api#documentation": "<p>A list of EC2 instance IDs for any instance corresponding to the trace\n      segments.</p>"
+            "smithy.api#documentation": "<p>One or more of the segment documents has a 429 throttling error.</p>"
           }
         },
-        "ResponseTime": {
-          "target": "com.amazonaws.xray#NullableDouble",
+        "IsPartial": {
+          "target": "com.amazonaws.xray#NullableBoolean",
           "traits": {
-            "smithy.api#documentation": "<p>The length of time in seconds between the start and end times of the root segment. If\n      the service performs work asynchronously, the response time measures the time before the\n      response is sent to the user, while the duration measures the amount of time before the last\n      traced activity completes.</p>"
-          }
-        },
-        "FaultRootCauses": {
-          "target": "com.amazonaws.xray#FaultRootCauses",
-          "traits": {
-            "smithy.api#documentation": "<p>A collection of FaultRootCause structures corresponding to the trace segments.</p>"
-          }
-        },
-        "EntryPoint": {
-          "target": "com.amazonaws.xray#ServiceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The root of a trace.</p>"
-          }
-        },
-        "ErrorRootCauses": {
-          "target": "com.amazonaws.xray#ErrorRootCauses",
-          "traits": {
-            "smithy.api#documentation": "<p>A collection of ErrorRootCause structures corresponding to the trace\n      segments.</p>"
-          }
-        },
-        "Revision": {
-          "target": "com.amazonaws.xray#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The revision number of a trace.</p>"
-          }
-        },
-        "ResponseTimeRootCauses": {
-          "target": "com.amazonaws.xray#ResponseTimeRootCauses",
-          "traits": {
-            "smithy.api#documentation": "<p>A collection of ResponseTimeRootCause structures corresponding to the trace\n      segments.</p>"
-          }
-        },
-        "ResourceARNs": {
-          "target": "com.amazonaws.xray#TraceResourceARNs",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of resource ARNs for any resource corresponding to the trace segments.</p>"
+            "smithy.api#documentation": "<p>One or more of the segment documents is in progress.</p>"
           }
         },
         "Http": {
@@ -3531,22 +4260,64 @@
             "smithy.api#documentation": "<p>Users from the trace's segment documents.</p>"
           }
         },
+        "ServiceIds": {
+          "target": "com.amazonaws.xray#ServiceIds",
+          "traits": {
+            "smithy.api#documentation": "<p>Service IDs from the trace's segment documents.</p>"
+          }
+        },
+        "ResourceARNs": {
+          "target": "com.amazonaws.xray#TraceResourceARNs",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of resource ARNs for any resource corresponding to the trace segments.</p>"
+          }
+        },
+        "InstanceIds": {
+          "target": "com.amazonaws.xray#TraceInstanceIds",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of EC2 instance IDs for any instance corresponding to the trace\n      segments.</p>"
+          }
+        },
         "AvailabilityZones": {
           "target": "com.amazonaws.xray#TraceAvailabilityZones",
           "traits": {
             "smithy.api#documentation": "<p>A list of Availability Zones for any zone corresponding to the trace segments.</p>"
           }
         },
+        "EntryPoint": {
+          "target": "com.amazonaws.xray#ServiceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The root of a trace.</p>"
+          }
+        },
+        "FaultRootCauses": {
+          "target": "com.amazonaws.xray#FaultRootCauses",
+          "traits": {
+            "smithy.api#documentation": "<p>A collection of FaultRootCause structures corresponding to the trace segments.</p>"
+          }
+        },
+        "ErrorRootCauses": {
+          "target": "com.amazonaws.xray#ErrorRootCauses",
+          "traits": {
+            "smithy.api#documentation": "<p>A collection of ErrorRootCause structures corresponding to the trace\n      segments.</p>"
+          }
+        },
+        "ResponseTimeRootCauses": {
+          "target": "com.amazonaws.xray#ResponseTimeRootCauses",
+          "traits": {
+            "smithy.api#documentation": "<p>A collection of ResponseTimeRootCause structures corresponding to the trace\n      segments.</p>"
+          }
+        },
+        "Revision": {
+          "target": "com.amazonaws.xray#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The revision number of a trace.</p>"
+          }
+        },
         "MatchedEventTime": {
           "target": "com.amazonaws.xray#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The matched time stamp of a defined event.</p>"
-          }
-        },
-        "Duration": {
-          "target": "com.amazonaws.xray#NullableDouble",
-          "traits": {
-            "smithy.api#documentation": "<p>The length of time in seconds between the start time of the root segment and the end\n      time of the last segment that completed.</p>"
           }
         }
       },
@@ -3563,16 +4334,16 @@
     "com.amazonaws.xray#TraceUser": {
       "type": "structure",
       "members": {
-        "ServiceIds": {
-          "target": "com.amazonaws.xray#ServiceIds",
-          "traits": {
-            "smithy.api#documentation": "<p>Services that the user's request hit.</p>"
-          }
-        },
         "UserName": {
           "target": "com.amazonaws.xray#String",
           "traits": {
             "smithy.api#documentation": "<p>The user's name.</p>"
+          }
+        },
+        "ServiceIds": {
+          "target": "com.amazonaws.xray#ServiceIds",
+          "traits": {
+            "smithy.api#documentation": "<p>Services that the user's request hit.</p>"
           }
         }
       },
@@ -3598,10 +4369,10 @@
     "com.amazonaws.xray#UnprocessedStatistics": {
       "type": "structure",
       "members": {
-        "Message": {
+        "RuleName": {
           "target": "com.amazonaws.xray#String",
           "traits": {
-            "smithy.api#documentation": "<p>The error message.</p>"
+            "smithy.api#documentation": "<p>The name of the sampling rule.</p>"
           }
         },
         "ErrorCode": {
@@ -3610,10 +4381,10 @@
             "smithy.api#documentation": "<p>The error code.</p>"
           }
         },
-        "RuleName": {
+        "Message": {
           "target": "com.amazonaws.xray#String",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the sampling rule.</p>"
+            "smithy.api#documentation": "<p>The error message.</p>"
           }
         }
       },
@@ -3636,12 +4407,6 @@
     "com.amazonaws.xray#UnprocessedTraceSegment": {
       "type": "structure",
       "members": {
-        "Message": {
-          "target": "com.amazonaws.xray#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The error message.</p>"
-          }
-        },
         "Id": {
           "target": "com.amazonaws.xray#String",
           "traits": {
@@ -3652,6 +4417,12 @@
           "target": "com.amazonaws.xray#String",
           "traits": {
             "smithy.api#documentation": "<p>The error that caused processing to fail.</p>"
+          }
+        },
+        "Message": {
+          "target": "com.amazonaws.xray#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The error message.</p>"
           }
         }
       },
@@ -3696,17 +4467,17 @@
     "com.amazonaws.xray#UntagResourceRequest": {
       "type": "structure",
       "members": {
-        "TagKeys": {
-          "target": "com.amazonaws.xray#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>Keys for one or more tags that you want to remove from an X-Ray group or sampling rule.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "ResourceARN": {
           "target": "com.amazonaws.xray#AmazonResourceName",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.xray#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>Keys for one or more tags that you want to remove from an X-Ray group or sampling rule.</p>",
             "smithy.api#required": {}
           }
         }
@@ -3744,28 +4515,28 @@
     "com.amazonaws.xray#UpdateGroupRequest": {
       "type": "structure",
       "members": {
-        "FilterExpression": {
-          "target": "com.amazonaws.xray#FilterExpression",
-          "traits": {
-            "smithy.api#documentation": "<p>The updated filter expression defining criteria by which to group traces.</p>"
-          }
-        },
         "GroupName": {
           "target": "com.amazonaws.xray#GroupName",
           "traits": {
             "smithy.api#documentation": "<p>The case-sensitive name of the group.</p>"
           }
         },
-        "InsightsConfiguration": {
-          "target": "com.amazonaws.xray#InsightsConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The structure containing configurations related to insights.</p>\n        <ul>\n            <li>\n                <p>The InsightsEnabled boolean can be set to true to enable insights for the\n                    group or false to disable insights for the group.</p>\n            </li>\n            <li>\n                <p>The NotifcationsEnabled boolean can be set to true to enable insights notifications for the group.\n                    Notifications can only be enabled on a group with InsightsEnabled set to true.</p>\n            </li>\n         </ul>"
-          }
-        },
         "GroupARN": {
           "target": "com.amazonaws.xray#GroupARN",
           "traits": {
             "smithy.api#documentation": "<p>The ARN that was generated upon creation.</p>"
+          }
+        },
+        "FilterExpression": {
+          "target": "com.amazonaws.xray#FilterExpression",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated filter expression defining criteria by which to group traces.</p>"
+          }
+        },
+        "InsightsConfiguration": {
+          "target": "com.amazonaws.xray#InsightsConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The structure containing configurations related to insights.</p>\n        <ul>\n            <li>\n                <p>The InsightsEnabled boolean can be set to true to enable insights for the\n                    group or false to disable insights for the group.</p>\n            </li>\n            <li>\n                <p>The NotifcationsEnabled boolean can be set to true to enable insights notifications for the group.\n                    Notifications can only be enabled on a group with InsightsEnabled set to true.</p>\n            </li>\n         </ul>"
           }
         }
       }

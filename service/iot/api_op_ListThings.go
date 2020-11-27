@@ -46,7 +46,8 @@ type ListThingsInput struct {
 	// The maximum number of results to return in this operation.
 	MaxResults *int32
 
-	// The token to retrieve the next set of results.
+	// To retrieve the next set of results, the nextToken value from a previous
+	// response; otherwise null to receive the first set of results.
 	NextToken *string
 
 	// The name of the thing type used to search for things.
@@ -56,8 +57,8 @@ type ListThingsInput struct {
 // The output from the ListThings operation.
 type ListThingsOutput struct {
 
-	// The token used to get the next set of results. Will not be returned if operation
-	// has returned all results.
+	// The token to use to get the next set of results. Will not be returned if
+	// operation has returned all results.
 	NextToken *string
 
 	// The things.

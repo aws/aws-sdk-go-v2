@@ -1055,19 +1055,19 @@ func validateCustomizedMetricSpecification(v *types.CustomizedMetricSpecificatio
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CustomizedMetricSpecification"}
-	if len(v.Statistic) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Statistic"))
-	}
 	if v.MetricName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
 	}
 	if v.Dimensions != nil {
 		if err := validateMetricDimensions(v.Dimensions); err != nil {
 			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Namespace == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	if len(v.Statistic) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Statistic"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1116,11 +1116,11 @@ func validateMetricDimension(v *types.MetricDimension) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricDimension"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1262,6 +1262,11 @@ func validateTargetTrackingConfiguration(v *types.TargetTrackingConfiguration) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TargetTrackingConfiguration"}
+	if v.PredefinedMetricSpecification != nil {
+		if err := validatePredefinedMetricSpecification(v.PredefinedMetricSpecification); err != nil {
+			invalidParams.AddNested("PredefinedMetricSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.CustomizedMetricSpecification != nil {
 		if err := validateCustomizedMetricSpecification(v.CustomizedMetricSpecification); err != nil {
 			invalidParams.AddNested("CustomizedMetricSpecification", err.(smithy.InvalidParamsError))
@@ -1269,11 +1274,6 @@ func validateTargetTrackingConfiguration(v *types.TargetTrackingConfiguration) e
 	}
 	if v.TargetValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetValue"))
-	}
-	if v.PredefinedMetricSpecification != nil {
-		if err := validatePredefinedMetricSpecification(v.PredefinedMetricSpecification); err != nil {
-			invalidParams.AddNested("PredefinedMetricSpecification", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1320,11 +1320,11 @@ func validateOpAttachLoadBalancerTargetGroupsInput(v *AttachLoadBalancerTargetGr
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttachLoadBalancerTargetGroupsInput"}
-	if v.TargetGroupARNs == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetGroupARNs"))
-	}
 	if v.AutoScalingGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
+	}
+	if v.TargetGroupARNs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetGroupARNs"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1393,14 +1393,14 @@ func validateOpCompleteLifecycleActionInput(v *CompleteLifecycleActionInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CompleteLifecycleActionInput"}
+	if v.LifecycleHookName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LifecycleHookName"))
+	}
 	if v.AutoScalingGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if v.LifecycleActionResult == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LifecycleActionResult"))
-	}
-	if v.LifecycleHookName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LifecycleHookName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1414,6 +1414,12 @@ func validateOpCreateAutoScalingGroupInput(v *CreateAutoScalingGroupInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAutoScalingGroupInput"}
+	if v.AutoScalingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
+	}
+	if v.MinSize == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinSize"))
+	}
 	if v.MaxSize == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MaxSize"))
 	}
@@ -1421,12 +1427,6 @@ func validateOpCreateAutoScalingGroupInput(v *CreateAutoScalingGroupInput) error
 		if err := validateLifecycleHookSpecifications(v.LifecycleHookSpecificationList); err != nil {
 			invalidParams.AddNested("LifecycleHookSpecificationList", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.AutoScalingGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if v.MinSize == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MinSize"))
 	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
@@ -1514,11 +1514,11 @@ func validateOpDeleteLifecycleHookInput(v *DeleteLifecycleHookInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteLifecycleHookInput"}
-	if v.AutoScalingGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
-	}
 	if v.LifecycleHookName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LifecycleHookName"))
+	}
+	if v.AutoScalingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1565,11 +1565,11 @@ func validateOpDeleteScheduledActionInput(v *DeleteScheduledActionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteScheduledActionInput"}
-	if v.ScheduledActionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ScheduledActionName"))
-	}
 	if v.AutoScalingGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
+	}
+	if v.ScheduledActionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduledActionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1698,11 +1698,11 @@ func validateOpDetachLoadBalancerTargetGroupsInput(v *DetachLoadBalancerTargetGr
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DetachLoadBalancerTargetGroupsInput"}
-	if v.TargetGroupARNs == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetGroupARNs"))
-	}
 	if v.AutoScalingGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
+	}
+	if v.TargetGroupARNs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetGroupARNs"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1731,11 +1731,11 @@ func validateOpEnableMetricsCollectionInput(v *EnableMetricsCollectionInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EnableMetricsCollectionInput"}
-	if v.Granularity == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Granularity"))
-	}
 	if v.AutoScalingGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
+	}
+	if v.Granularity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Granularity"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1749,11 +1749,11 @@ func validateOpEnterStandbyInput(v *EnterStandbyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EnterStandbyInput"}
-	if v.ShouldDecrementDesiredCapacity == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ShouldDecrementDesiredCapacity"))
-	}
 	if v.AutoScalingGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
+	}
+	if v.ShouldDecrementDesiredCapacity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ShouldDecrementDesiredCapacity"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1797,11 +1797,11 @@ func validateOpPutLifecycleHookInput(v *PutLifecycleHookInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutLifecycleHookInput"}
-	if v.AutoScalingGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
-	}
 	if v.LifecycleHookName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LifecycleHookName"))
+	}
+	if v.AutoScalingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1818,11 +1818,11 @@ func validateOpPutNotificationConfigurationInput(v *PutNotificationConfiguration
 	if v.AutoScalingGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
 	}
-	if v.NotificationTypes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NotificationTypes"))
-	}
 	if v.TopicARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TopicARN"))
+	}
+	if v.NotificationTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotificationTypes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1839,17 +1839,17 @@ func validateOpPutScalingPolicyInput(v *PutScalingPolicyInput) error {
 	if v.AutoScalingGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
 	}
-	if v.TargetTrackingConfiguration != nil {
-		if err := validateTargetTrackingConfiguration(v.TargetTrackingConfiguration); err != nil {
-			invalidParams.AddNested("TargetTrackingConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.PolicyName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
 	}
 	if v.StepAdjustments != nil {
 		if err := validateStepAdjustments(v.StepAdjustments); err != nil {
 			invalidParams.AddNested("StepAdjustments", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TargetTrackingConfiguration != nil {
+		if err := validateTargetTrackingConfiguration(v.TargetTrackingConfiguration); err != nil {
+			invalidParams.AddNested("TargetTrackingConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1864,11 +1864,11 @@ func validateOpPutScheduledUpdateGroupActionInput(v *PutScheduledUpdateGroupActi
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutScheduledUpdateGroupActionInput"}
-	if v.ScheduledActionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ScheduledActionName"))
-	}
 	if v.AutoScalingGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
+	}
+	if v.ScheduledActionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduledActionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1882,11 +1882,11 @@ func validateOpRecordLifecycleActionHeartbeatInput(v *RecordLifecycleActionHeart
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RecordLifecycleActionHeartbeatInput"}
-	if v.AutoScalingGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
-	}
 	if v.LifecycleHookName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LifecycleHookName"))
+	}
+	if v.AutoScalingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1951,11 +1951,11 @@ func validateOpSetInstanceProtectionInput(v *SetInstanceProtectionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetInstanceProtectionInput"}
-	if v.AutoScalingGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
-	}
 	if v.InstanceIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceIds"))
+	}
+	if v.AutoScalingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if v.ProtectedFromScaleIn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProtectedFromScaleIn"))

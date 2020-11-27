@@ -469,6 +469,20 @@ func awsRestjson1_serializeOpDocumentCreateEventSourceMappingInput(v *CreateEven
 		ok.Integer(*v.ParallelizationFactor)
 	}
 
+	if v.Queues != nil {
+		ok := object.Key("Queues")
+		if err := awsRestjson1_serializeDocumentQueues(v.Queues, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceAccessConfigurations != nil {
+		ok := object.Key("SourceAccessConfigurations")
+		if err := awsRestjson1_serializeDocumentSourceAccessConfigurations(v.SourceAccessConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.StartingPosition) > 0 {
 		ok := object.Key("StartingPosition")
 		ok.String(string(v.StartingPosition))
@@ -3751,6 +3765,13 @@ func awsRestjson1_serializeOpDocumentUpdateEventSourceMappingInput(v *UpdateEven
 		ok.Integer(*v.ParallelizationFactor)
 	}
 
+	if v.SourceAccessConfigurations != nil {
+		ok := object.Key("SourceAccessConfigurations")
+		if err := awsRestjson1_serializeDocumentSourceAccessConfigurations(v.SourceAccessConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4348,6 +4369,17 @@ func awsRestjson1_serializeDocumentOnSuccess(v *types.OnSuccess, value smithyjso
 	return nil
 }
 
+func awsRestjson1_serializeDocumentQueues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSecurityGroupIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4355,6 +4387,36 @@ func awsRestjson1_serializeDocumentSecurityGroupIds(v []string, value smithyjson
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSourceAccessConfiguration(v *types.SourceAccessConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	if v.URI != nil {
+		ok := object.Key("URI")
+		ok.String(*v.URI)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSourceAccessConfigurations(v []types.SourceAccessConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSourceAccessConfiguration(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }

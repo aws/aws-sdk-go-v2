@@ -43,7 +43,7 @@ type ExecutePolicyInput struct {
 
 	// Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to
 	// complete before executing the policy. Valid only if the policy type is
-	// SimpleScaling. For more information, see Scaling Cooldowns for Amazon EC2 Auto
+	// SimpleScaling. For more information, see Scaling cooldowns for Amazon EC2 Auto
 	// Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html) in
 	// the Amazon EC2 Auto Scaling User Guide.
 	HonorCooldown *bool

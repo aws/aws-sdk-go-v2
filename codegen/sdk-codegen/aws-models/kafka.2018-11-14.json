@@ -585,7 +585,7 @@
         "EnhancedMonitoring": {
           "target": "com.amazonaws.kafka#EnhancedMonitoring",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For a list of the metrics associated with each of these three levels of monitoring, see <a href=\"https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html\">Monitoring</a>.</p>",
+            "smithy.api#documentation": "<p>Specifies which metrics are gathered for the MSK cluster. This property has the following possible values: DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION. For a list of the metrics associated with each of these levels of monitoring, see <a href=\"https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html\">Monitoring</a>.</p>",
             "smithy.api#jsonName": "enhancedMonitoring"
           }
         }
@@ -998,7 +998,7 @@
         "EnhancedMonitoring": {
           "target": "com.amazonaws.kafka#EnhancedMonitoring",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.</p>",
+            "smithy.api#documentation": "<p>Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION.</p>",
             "smithy.api#jsonName": "enhancedMonitoring"
           }
         },
@@ -1726,7 +1726,7 @@
     "com.amazonaws.kafka#EnhancedMonitoring": {
       "type": "string",
       "traits": {
-        "smithy.api#documentation": "<p>Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For a list of the metrics associated with each of these three levels of monitoring, see <a href=\"https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html\">Monitoring</a>.</p>",
+        "smithy.api#documentation": "<p>Specifies which metrics are gathered for the MSK cluster. This property has the following possible values: DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION. For a list of the metrics associated with each of these levels of monitoring, see <a href=\"https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html\">Monitoring</a>.</p>",
         "smithy.api#enum": [
           {
             "value": "DEFAULT",
@@ -1739,6 +1739,10 @@
           {
             "value": "PER_TOPIC_PER_BROKER",
             "name": "PER_TOPIC_PER_BROKER"
+          },
+          {
+            "value": "PER_TOPIC_PER_PARTITION",
+            "name": "PER_TOPIC_PER_PARTITION"
           }
         ]
       }

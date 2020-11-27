@@ -90,6 +90,26 @@ func (m *validateOpAssociateProactiveEngagementDetails) HandleInitialize(ctx con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateProtectionGroup struct {
+}
+
+func (*validateOpCreateProtectionGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateProtectionGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateProtectionGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateProtectionGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateProtection struct {
 }
 
@@ -105,6 +125,26 @@ func (m *validateOpCreateProtection) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateProtectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteProtectionGroup struct {
+}
+
+func (*validateOpDeleteProtectionGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteProtectionGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteProtectionGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteProtectionGroupInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -150,6 +190,26 @@ func (m *validateOpDescribeAttack) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeProtectionGroup struct {
+}
+
+func (*validateOpDescribeProtectionGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeProtectionGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeProtectionGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeProtectionGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateDRTLogBucket struct {
 }
 
@@ -190,6 +250,26 @@ func (m *validateOpDisassociateHealthCheck) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListResourcesInProtectionGroup struct {
+}
+
+func (*validateOpListResourcesInProtectionGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListResourcesInProtectionGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListResourcesInProtectionGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListResourcesInProtectionGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEmergencyContactSettings struct {
 }
 
@@ -205,6 +285,26 @@ func (m *validateOpUpdateEmergencyContactSettings) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateEmergencyContactSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateProtectionGroup struct {
+}
+
+func (*validateOpUpdateProtectionGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProtectionGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProtectionGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProtectionGroupInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -226,8 +326,16 @@ func addOpAssociateProactiveEngagementDetailsValidationMiddleware(stack *middlew
 	return stack.Initialize.Add(&validateOpAssociateProactiveEngagementDetails{}, middleware.After)
 }
 
+func addOpCreateProtectionGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateProtectionGroup{}, middleware.After)
+}
+
 func addOpCreateProtectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateProtection{}, middleware.After)
+}
+
+func addOpDeleteProtectionGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteProtectionGroup{}, middleware.After)
 }
 
 func addOpDeleteProtectionValidationMiddleware(stack *middleware.Stack) error {
@@ -238,6 +346,10 @@ func addOpDescribeAttackValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAttack{}, middleware.After)
 }
 
+func addOpDescribeProtectionGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeProtectionGroup{}, middleware.After)
+}
+
 func addOpDisassociateDRTLogBucketValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateDRTLogBucket{}, middleware.After)
 }
@@ -246,8 +358,16 @@ func addOpDisassociateHealthCheckValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDisassociateHealthCheck{}, middleware.After)
 }
 
+func addOpListResourcesInProtectionGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListResourcesInProtectionGroup{}, middleware.After)
+}
+
 func addOpUpdateEmergencyContactSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEmergencyContactSettings{}, middleware.After)
+}
+
+func addOpUpdateProtectionGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProtectionGroup{}, middleware.After)
 }
 
 func validateEmergencyContact(v *types.EmergencyContact) error {
@@ -317,11 +437,11 @@ func validateOpAssociateHealthCheckInput(v *AssociateHealthCheckInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateHealthCheckInput"}
-	if v.HealthCheckArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HealthCheckArn"))
-	}
 	if v.ProtectionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProtectionId"))
+	}
+	if v.HealthCheckArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HealthCheckArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -349,16 +469,52 @@ func validateOpAssociateProactiveEngagementDetailsInput(v *AssociateProactiveEng
 	}
 }
 
+func validateOpCreateProtectionGroupInput(v *CreateProtectionGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateProtectionGroupInput"}
+	if v.ProtectionGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtectionGroupId"))
+	}
+	if len(v.Aggregation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Aggregation"))
+	}
+	if len(v.Pattern) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Pattern"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateProtectionInput(v *CreateProtectionInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateProtectionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteProtectionGroupInput(v *DeleteProtectionGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteProtectionGroupInput"}
+	if v.ProtectionGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtectionGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -397,6 +553,21 @@ func validateOpDescribeAttackInput(v *DescribeAttackInput) error {
 	}
 }
 
+func validateOpDescribeProtectionGroupInput(v *DescribeProtectionGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeProtectionGroupInput"}
+	if v.ProtectionGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtectionGroupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateDRTLogBucketInput(v *DisassociateDRTLogBucketInput) error {
 	if v == nil {
 		return nil
@@ -417,11 +588,26 @@ func validateOpDisassociateHealthCheckInput(v *DisassociateHealthCheckInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateHealthCheckInput"}
+	if v.ProtectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtectionId"))
+	}
 	if v.HealthCheckArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HealthCheckArn"))
 	}
-	if v.ProtectionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProtectionId"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListResourcesInProtectionGroupInput(v *ListResourcesInProtectionGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListResourcesInProtectionGroupInput"}
+	if v.ProtectionGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtectionGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -439,6 +625,27 @@ func validateOpUpdateEmergencyContactSettingsInput(v *UpdateEmergencyContactSett
 		if err := validateEmergencyContactList(v.EmergencyContactList); err != nil {
 			invalidParams.AddNested("EmergencyContactList", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProtectionGroupInput(v *UpdateProtectionGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProtectionGroupInput"}
+	if v.ProtectionGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtectionGroupId"))
+	}
+	if len(v.Aggregation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Aggregation"))
+	}
+	if len(v.Pattern) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Pattern"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

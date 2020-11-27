@@ -46,10 +46,11 @@ type ChangeAction string
 
 // Enum values for ChangeAction
 const (
-	ChangeActionAdd    ChangeAction = "Add"
-	ChangeActionModify ChangeAction = "Modify"
-	ChangeActionRemove ChangeAction = "Remove"
-	ChangeActionImport ChangeAction = "Import"
+	ChangeActionAdd     ChangeAction = "Add"
+	ChangeActionModify  ChangeAction = "Modify"
+	ChangeActionRemove  ChangeAction = "Remove"
+	ChangeActionImport  ChangeAction = "Import"
+	ChangeActionDynamic ChangeAction = "Dynamic"
 )
 
 // Values returns all known values for ChangeAction. Note that this can be expanded
@@ -61,6 +62,7 @@ func (ChangeAction) Values() []ChangeAction {
 		"Modify",
 		"Remove",
 		"Import",
+		"Dynamic",
 	}
 }
 
@@ -71,7 +73,10 @@ const (
 	ChangeSetStatusCreatePending    ChangeSetStatus = "CREATE_PENDING"
 	ChangeSetStatusCreateInProgress ChangeSetStatus = "CREATE_IN_PROGRESS"
 	ChangeSetStatusCreateComplete   ChangeSetStatus = "CREATE_COMPLETE"
+	ChangeSetStatusDeletePending    ChangeSetStatus = "DELETE_PENDING"
+	ChangeSetStatusDeleteInProgress ChangeSetStatus = "DELETE_IN_PROGRESS"
 	ChangeSetStatusDeleteComplete   ChangeSetStatus = "DELETE_COMPLETE"
+	ChangeSetStatusDeleteFailed     ChangeSetStatus = "DELETE_FAILED"
 	ChangeSetStatusFailed           ChangeSetStatus = "FAILED"
 )
 
@@ -83,7 +88,10 @@ func (ChangeSetStatus) Values() []ChangeSetStatus {
 		"CREATE_PENDING",
 		"CREATE_IN_PROGRESS",
 		"CREATE_COMPLETE",
+		"DELETE_PENDING",
+		"DELETE_IN_PROGRESS",
 		"DELETE_COMPLETE",
+		"DELETE_FAILED",
 		"FAILED",
 	}
 }

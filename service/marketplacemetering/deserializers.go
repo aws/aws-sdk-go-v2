@@ -129,6 +129,12 @@ func awsAwsjson11_deserializeOpErrorBatchMeterUsage(response *smithyhttp.Respons
 	case strings.EqualFold("InvalidProductCodeException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidProductCodeException(response, errorBody)
 
+	case strings.EqualFold("InvalidTagException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidTagException(response, errorBody)
+
+	case strings.EqualFold("InvalidUsageAllocationsException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidUsageAllocationsException(response, errorBody)
+
 	case strings.EqualFold("InvalidUsageDimensionException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidUsageDimensionException(response, errorBody)
 
@@ -260,6 +266,12 @@ func awsAwsjson11_deserializeOpErrorMeterUsage(response *smithyhttp.Response, me
 
 	case strings.EqualFold("InvalidProductCodeException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidProductCodeException(response, errorBody)
+
+	case strings.EqualFold("InvalidTagException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidTagException(response, errorBody)
+
+	case strings.EqualFold("InvalidUsageAllocationsException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidUsageAllocationsException(response, errorBody)
 
 	case strings.EqualFold("InvalidUsageDimensionException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidUsageDimensionException(response, errorBody)
@@ -885,6 +897,41 @@ func awsAwsjson11_deserializeErrorInvalidRegionException(response *smithyhttp.Re
 	return output
 }
 
+func awsAwsjson11_deserializeErrorInvalidTagException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.InvalidTagException{}
+	err := awsAwsjson11_deserializeDocumentInvalidTagException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorInvalidTokenException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -905,6 +952,41 @@ func awsAwsjson11_deserializeErrorInvalidTokenException(response *smithyhttp.Res
 
 	output := &types.InvalidTokenException{}
 	err := awsAwsjson11_deserializeDocumentInvalidTokenException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorInvalidUsageAllocationsException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.InvalidUsageAllocationsException{}
+	err := awsAwsjson11_deserializeDocumentInvalidUsageAllocationsException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -1460,6 +1542,46 @@ func awsAwsjson11_deserializeDocumentInvalidRegionException(v **types.InvalidReg
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentInvalidTagException(v **types.InvalidTagException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvalidTagException
+	if *v == nil {
+		sv = &types.InvalidTagException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInvalidTokenException(v **types.InvalidTokenException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -1476,6 +1598,46 @@ func awsAwsjson11_deserializeDocumentInvalidTokenException(v **types.InvalidToke
 	var sv *types.InvalidTokenException
 	if *v == nil {
 		sv = &types.InvalidTokenException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInvalidUsageAllocationsException(v **types.InvalidUsageAllocationsException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvalidUsageAllocationsException
+	if *v == nil {
+		sv = &types.InvalidUsageAllocationsException{}
 	} else {
 		sv = *v
 	}
@@ -1580,6 +1742,89 @@ func awsAwsjson11_deserializeDocumentPlatformNotSupportedException(v **types.Pla
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Tag
+	if *v == nil {
+		sv = &types.Tag{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagKey to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTagList(v *[]types.Tag, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Tag
+	if *v == nil {
+		cv = []types.Tag{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Tag
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentTag(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -1660,6 +1905,89 @@ func awsAwsjson11_deserializeDocumentTimestampOutOfBoundsException(v **types.Tim
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentUsageAllocation(v **types.UsageAllocation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UsageAllocation
+	if *v == nil {
+		sv = &types.UsageAllocation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AllocatedUsageQuantity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AllocatedUsageQuantity to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AllocatedUsageQuantity = ptr.Int32(int32(i64))
+			}
+
+		case "Tags":
+			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentUsageAllocations(v *[]types.UsageAllocation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.UsageAllocation
+	if *v == nil {
+		cv = []types.UsageAllocation{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.UsageAllocation
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentUsageAllocation(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentUsageRecord(v **types.UsageRecord, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -1724,6 +2052,11 @@ func awsAwsjson11_deserializeDocumentUsageRecord(v **types.UsageRecord, value in
 					return err
 				}
 				sv.Timestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "UsageAllocations":
+			if err := awsAwsjson11_deserializeDocumentUsageAllocations(&sv.UsageAllocations, value); err != nil {
+				return err
 			}
 
 		default:

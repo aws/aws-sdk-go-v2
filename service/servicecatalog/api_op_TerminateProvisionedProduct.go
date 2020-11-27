@@ -60,6 +60,12 @@ type TerminateProvisionedProductInput struct {
 	// The name of the provisioned product. You cannot specify both
 	// ProvisionedProductName and ProvisionedProductId.
 	ProvisionedProductName *string
+
+	// When this boolean parameter is set to true, the TerminateProvisionedProduct API
+	// deletes the Service Catalog provisioned product. However, it does not remove the
+	// CloudFormation stack, stack set, or the underlying resources of the deleted
+	// provisioned product. The default value is false.
+	RetainPhysicalResources bool
 }
 
 type TerminateProvisionedProductOutput struct {

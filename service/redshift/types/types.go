@@ -81,6 +81,9 @@ type Cluster struct {
 	// The unique identifier of the cluster.
 	ClusterIdentifier *string
 
+	// The namespace Amazon Resource Name (ARN) of the cluster.
+	ClusterNamespaceArn *string
+
 	// The nodes in the cluster.
 	ClusterNodes []ClusterNode
 

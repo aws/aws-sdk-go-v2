@@ -3563,6 +3563,11 @@ func awsAwsquery_serializeOpDocumentCreateChangeSetInput(v *CreateChangeSetInput
 		objectKey.String(*v.Description)
 	}
 
+	if v.IncludeNestedStacks != nil {
+		objectKey := object.Key("IncludeNestedStacks")
+		objectKey.Boolean(*v.IncludeNestedStacks)
+	}
+
 	if v.NotificationARNs != nil {
 		objectKey := object.Key("NotificationARNs")
 		if err := awsAwsquery_serializeDocumentNotificationARNs(v.NotificationARNs, objectKey); err != nil {

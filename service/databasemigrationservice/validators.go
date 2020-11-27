@@ -810,6 +810,26 @@ func (m *validateOpModifyReplicationTask) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpMoveReplicationTask struct {
+}
+
+func (*validateOpMoveReplicationTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpMoveReplicationTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*MoveReplicationTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpMoveReplicationTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRebootReplicationInstance struct {
 }
 
@@ -1148,6 +1168,10 @@ func addOpModifyReplicationSubnetGroupValidationMiddleware(stack *middleware.Sta
 
 func addOpModifyReplicationTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyReplicationTask{}, middleware.After)
+}
+
+func addOpMoveReplicationTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpMoveReplicationTask{}, middleware.After)
 }
 
 func addOpRebootReplicationInstanceValidationMiddleware(stack *middleware.Stack) error {
@@ -2008,6 +2032,24 @@ func validateOpModifyReplicationTaskInput(v *ModifyReplicationTaskInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyReplicationTaskInput"}
 	if v.ReplicationTaskArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationTaskArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpMoveReplicationTaskInput(v *MoveReplicationTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MoveReplicationTaskInput"}
+	if v.ReplicationTaskArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationTaskArn"))
+	}
+	if v.TargetReplicationInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetReplicationInstanceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -22,9 +22,9 @@ import (
 // entirely, or make changes within the existing tag set by retrieving the existing
 // tag set using GetJobTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetJobTagging.html),
-// modify that tag set, and use this API action to replace the tag set with the one
-// you modified. For more information, see Controlling access and labeling jobs
-// using tags
+// modify that tag set, and use this action to replace the tag set with the one you
+// modified. For more information, see Controlling access and labeling jobs using
+// tags
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags)
 // in the Amazon Simple Storage Service Developer Guide.
 //

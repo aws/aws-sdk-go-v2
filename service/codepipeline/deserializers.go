@@ -3783,6 +3783,9 @@ func awsAwsjson11_deserializeOpErrorRetryStageExecution(response *smithyhttp.Res
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("NotLatestPipelineExecutionException", errorCode):
 		return awsAwsjson11_deserializeErrorNotLatestPipelineExecutionException(response, errorBody)
 
@@ -3906,6 +3909,9 @@ func awsAwsjson11_deserializeOpErrorStartPipelineExecution(response *smithyhttp.
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("PipelineNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorPipelineNotFoundException(response, errorBody)
 
@@ -4020,6 +4026,9 @@ func awsAwsjson11_deserializeOpErrorStopPipelineExecution(response *smithyhttp.R
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("DuplicatedStopRequestException", errorCode):
 		return awsAwsjson11_deserializeErrorDuplicatedStopRequestException(response, errorBody)
 
@@ -4542,6 +4551,41 @@ func awsAwsjson11_deserializeErrorConcurrentModificationException(response *smit
 
 	output := &types.ConcurrentModificationException{}
 	err := awsAwsjson11_deserializeDocumentConcurrentModificationException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorConflictException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.ConflictException{}
+	err := awsAwsjson11_deserializeDocumentConflictException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -5978,6 +6022,15 @@ func awsAwsjson11_deserializeDocumentActionExecution(v **types.ActionExecution, 
 
 	for key, value := range shape {
 		switch key {
+		case "actionExecutionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ActionExecutionId to be of type string, got %T instead", value)
+				}
+				sv.ActionExecutionId = ptr.String(jtv)
+			}
+
 		case "errorDetails":
 			if err := awsAwsjson11_deserializeDocumentErrorDetails(&sv.ErrorDetails, value); err != nil {
 				return err
@@ -7525,6 +7578,46 @@ func awsAwsjson11_deserializeDocumentConcurrentModificationException(v **types.C
 	var sv *types.ConcurrentModificationException
 	if *v == nil {
 		sv = &types.ConcurrentModificationException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConflictException
+	if *v == nil {
+		sv = &types.ConflictException{}
 	} else {
 		sv = *v
 	}
@@ -10300,6 +10393,11 @@ func awsAwsjson11_deserializeDocumentStageState(v **types.StageState, value inte
 		switch key {
 		case "actionStates":
 			if err := awsAwsjson11_deserializeDocumentActionStateList(&sv.ActionStates, value); err != nil {
+				return err
+			}
+
+		case "inboundExecution":
+			if err := awsAwsjson11_deserializeDocumentStageExecution(&sv.InboundExecution, value); err != nil {
 				return err
 			}
 

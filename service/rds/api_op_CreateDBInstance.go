@@ -334,30 +334,9 @@ type CreateDBInstanceInput struct {
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
-	// You can enable IAM database authentication for the following database engines:
-	// Amazon Aurora Not applicable. Mapping AWS IAM accounts to database accounts is
-	// managed by the DB cluster. MySQL
-	//
-	// * For MySQL 5.6, minor version 5.6.34 or
-	// higher
-	//
-	// * For MySQL 5.7, minor version 5.7.16 or higher
-	//
-	// * For MySQL 8.0, minor
-	// version 8.0.16 or higher
-	//
-	// PostgreSQL
-	//
-	// * For PostgreSQL 9.5, minor version 9.5.15
-	// or higher
-	//
-	// * For PostgreSQL 9.6, minor version 9.6.11 or higher
-	//
-	// * PostgreSQL
-	// 10.6, 10.7, and 10.9
-	//
-	// For more information, see  IAM Database Authentication for
-	// MySQL and PostgreSQL
+	// This setting doesn't apply to Amazon Aurora. Mapping AWS IAM accounts to
+	// database accounts is managed by the DB cluster. For more information, see  IAM
+	// Database Authentication for MySQL and PostgreSQL
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
 	// in the Amazon RDS User Guide.
 	EnableIAMDatabaseAuthentication *bool

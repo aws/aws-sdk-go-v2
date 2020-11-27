@@ -2868,6 +2868,42 @@ func awsRestjson1_serializeDocumentAudioSelectorGroup(v *types.AudioSelectorGrou
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAutomatedAbrSettings(v *types.AutomatedAbrSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxAbrBitrate != 0 {
+		ok := object.Key("maxAbrBitrate")
+		ok.Integer(v.MaxAbrBitrate)
+	}
+
+	if v.MaxRenditions != 0 {
+		ok := object.Key("maxRenditions")
+		ok.Integer(v.MaxRenditions)
+	}
+
+	if v.MinAbrBitrate != 0 {
+		ok := object.Key("minAbrBitrate")
+		ok.Integer(v.MinAbrBitrate)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAutomatedEncodingSettings(v *types.AutomatedEncodingSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AbrSettings != nil {
+		ok := object.Key("abrSettings")
+		if err := awsRestjson1_serializeDocumentAutomatedAbrSettings(v.AbrSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAv1QvbrSettings(v *types.Av1QvbrSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6785,6 +6821,13 @@ func awsRestjson1_serializeDocumentOutputChannelMapping(v *types.OutputChannelMa
 func awsRestjson1_serializeDocumentOutputGroup(v *types.OutputGroup, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AutomatedEncodingSettings != nil {
+		ok := object.Key("automatedEncodingSettings")
+		if err := awsRestjson1_serializeDocumentAutomatedEncodingSettings(v.AutomatedEncodingSettings, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CustomName != nil {
 		ok := object.Key("customName")

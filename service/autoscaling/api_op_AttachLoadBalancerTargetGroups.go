@@ -16,8 +16,8 @@ import (
 // Scaling group, call the DetachLoadBalancerTargetGroups API. With Application
 // Load Balancers and Network Load Balancers, instances are registered as targets
 // with a target group. With Classic Load Balancers, instances are registered with
-// the load balancer. For more information, see Attaching a Load Balancer to Your
-// Auto Scaling Group
+// the load balancer. For more information, see Attaching a load balancer to your
+// Auto Scaling group
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) AttachLoadBalancerTargetGroups(ctx context.Context, params *AttachLoadBalancerTargetGroupsInput, optFns ...func(*Options)) (*AttachLoadBalancerTargetGroupsOutput, error) {
