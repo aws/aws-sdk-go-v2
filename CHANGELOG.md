@@ -1,4 +1,4 @@
-# Pending Release
+# Release 2020-11-30
 
 ## Breaking Change
 * `codegen`: Add support for slice and maps generated with value members instead of pointer ([#887](https://github.com/aws/aws-sdk-go-v2/pull/887))

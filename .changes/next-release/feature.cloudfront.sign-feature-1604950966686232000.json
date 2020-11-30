@@ -1,9 +1,0 @@
-{
- "ID": "feature.cloudfront.sign-feature-1604950966686232000",
- "SchemaVersion": 1,
- "Module": "feature/cloudfront/sign",
- "Type": "feature",
- "Description": "Add Amazon CloudFront resource signing feature as standalong module. * Moves service/cloudfront/sign package out of the cloudfront module, and into its own module as github.com/aws/aws-sdk-go-v2/feature/cloudfront/sign",
- "MinVersion": "",
- "AffectedModules": null
-}

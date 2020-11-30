@@ -1,9 +1,0 @@
-{
- "ID": "config-feature-1605221765957672000",
- "SchemaVersion": 1,
- "Module": "config",
- "Type": "feature",
- "Description": "Add a WithRetryer provider helper to the config loader",
- "MinVersion": "",
- "AffectedModules": null
-}
