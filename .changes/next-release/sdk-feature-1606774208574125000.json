@@ -1,0 +1,9 @@
+{
+ "ID": "sdk-feature-1606774208574125000",
+ "SchemaVersion": 1,
+ "Module": "/",
+ "Type": "feature",
+ "Description": "Move aws.BuildableHTTPClient to HTTP transport package",
+ "MinVersion": "",
+ "AffectedModules": null
+}

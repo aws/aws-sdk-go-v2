@@ -1,0 +1,9 @@
+{
+ "ID": "config-feature-1606774254010127000",
+ "SchemaVersion": 1,
+ "Module": "config",
+ "Type": "feature",
+ "Description": "multiple changes",
+ "MinVersion": "",
+ "AffectedModules": null
+}
