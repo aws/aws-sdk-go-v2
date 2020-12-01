@@ -141,7 +141,7 @@
       }
     },
     "com.amazonaws.dynamodb#AttributeValue": {
-      "type": "structure",
+      "type": "union",
       "members": {
         "S": {
           "target": "com.amazonaws.dynamodb#StringAttributeValue",

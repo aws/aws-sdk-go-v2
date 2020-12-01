@@ -48,7 +48,7 @@
       }
     },
     "com.amazonaws.dynamodbstreams#AttributeValue": {
-      "type": "structure",
+      "type": "union",
       "members": {
         "SS": {
           "target": "com.amazonaws.dynamodbstreams#StringSetAttributeValue",
