@@ -3,19 +3,45 @@ package main
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"os/exec"
 )
 
-func editTemplate(template []byte) ([]byte, error) {
+const defaultEditor = "vim"
+
+var allowedEditors = map[string]struct{}{
+	"vi":    {},
+	"vim":   {},
+	"gvim":  {},
+	"nano":  {},
+	"edit":  {},
+	"gedit": {},
+	"emacs": {},
+}
+
+func getEditorTool() (string, error) {
 	editor := os.Getenv("VISUAL")
 	if editor == "" {
 		editor = os.Getenv("EDITOR")
 
 		if editor == "" {
-			editor = "vim"
+			editor = defaultEditor
 		}
+	}
+
+	if _, ok := allowedEditors[editor]; !ok {
+		return "", fmt.Errorf("unknown editor %q not allowed, %v", editor, allowedEditors)
+	}
+
+	return editor, nil
+}
+
+func editTemplate(template []byte) ([]byte, error) {
+	editor, err := getEditorTool()
+	if err != nil {
+		return nil, err
 	}
 
 	f, err := ioutil.TempFile("", "change-*.yml")
