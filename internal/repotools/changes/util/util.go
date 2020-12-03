@@ -1,10 +1,12 @@
 package util
 
 import (
+	"bufio"
 	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -89,26 +91,46 @@ func FindFile(fileName string, dir bool) (string, error) {
 	}
 }
 
-// ReplaceLine replaces any line in the file at the given path that begins with linePrefix with the given replacement
-// string.
-func ReplaceLine(path, linePrefix, replacement string) error {
-	data, err := ioutil.ReadFile(path)
+// ReplaceLine replaces any line in the file at the given filename that begins
+// with linePrefix with the given replacement string.
+func ReplaceLine(filename, linePrefix, replacement string) (err error) {
+	var f *os.File
+	f, err = os.OpenFile(filename, os.O_RDWR, 0)
 	if err != nil {
-		return fmt.Errorf("couldn't replace file's line: %v", err)
+		return fmt.Errorf("failed to open file %v", err)
 	}
-
-	lines := strings.Split(string(data), "\n")
-	for i, l := range lines {
-		if strings.HasPrefix(l, linePrefix) {
-			lines[i] = replacement
+	defer func() {
+		cErr := f.Close()
+		if err == nil && cErr != nil {
+			err = fmt.Errorf("failed to close file, %w", cErr)
 		}
+	}()
+
+	var buff bytes.Buffer
+	scanner := bufio.NewScanner(ioutil.NopCloser(f))
+	for scanner.Scan() {
+		line := scanner.Text()
+		if strings.HasPrefix(line, linePrefix) {
+			line = replacement
+		}
+
+		buff.WriteString(line)
+		buff.WriteRune('\n')
 	}
 
-	output := strings.Join(lines, "\n")
+	if err = scanner.Err(); err != nil {
+		return fmt.Errorf("failed to scan file lines, %w", err)
+	}
 
-	err = ioutil.WriteFile(path, []byte(output), 0644)
-	if err != nil {
-		return fmt.Errorf("failed to write replacement file: %v", err)
+	if err = f.Truncate(0); err != nil {
+		return fmt.Errorf("failed to reset file, %w", err)
+	}
+	if _, err = f.Seek(0, os.SEEK_SET); err != nil {
+		return fmt.Errorf("failed to seek file, %w", err)
+	}
+
+	if _, err = io.Copy(f, &buff); err != nil {
+		return fmt.Errorf("failed to update file, %w", err)
 	}
 
 	return nil
