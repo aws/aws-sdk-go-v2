@@ -18,15 +18,15 @@ in Go 1.13. A number of packages provided by the SDK have been modularized and a
 released respectively. This change enables improved application dependency modeling, and enables the SDK to
 provide new features and functionality that follows the Go module versioning strategy.
 
-The following is some of the Go modules provided by the SDK:
+The following list are some of the Go modules provided by the SDK:
 Module | Description
 --- | ---
 `github.com/aws/aws-sdk-go-v2` | The SDK core
 `github.com/aws/aws-sdk-go-v2/config` | Shared Configuration Loading
 `github.com/aws/aws-sdk-go-v2/credentials` | AWS Credential Providers
 `github.com/aws/aws-sdk-go-v2/ec2imds` | {{% alias service=EC2 %}} Instance Metadata Service Client
-`github.com/aws/aws-sdk-go-v2/service/<service name>` | Service Client Module
-`github.com/aws/aws-sdk-go-v2/feature/s3/manager` | {{% alias service=S3 %}} Transfer Manager
+`github.com/aws/aws-sdk-go-v2/service/` | Service Client Modules
+`github.com/aws/aws-sdk-go-v2/feature/` | High-Level utilities for services, for example the {{% alias service=S3 %}} Transfer Manager
 
 ## Configuration Loading
 
@@ -157,6 +157,11 @@ interface, which defines a `Retrieve` method that returns a `(aws.Credentials, e
 [aws.Credentials]({{< apiref "aws#Credentials" >}}) that is analogous to the AWS SDK for Go
 [credentials.Value]({{< apiref "aws/credentials#Value" >}}) type.
 
+You must wrap `aws/CredentialsProvider` objects with [aws.CredentialsCache]({{< apiref "aws#CredentialsCache" >}}), to
+allow credential caching to occur. You use [NewCredentialsCache]({{< apiref "aws#NewCredentialsCache" >}}) to
+construct a `aws.CredentialsCache` object. By default, credentials configured by `config.LoadDefaultConfig` are wrapped
+with `aws.CredentialsCache`.
+
 The following table list the location changes of the AWS credential providers from AWS SDK for Go V1 to
 {{% alias sdk-go %}}.
 
@@ -193,11 +198,12 @@ if err != nil {
 
 ```go
 import "context"
+import "github.com/aws/aws-sdk-go-v2/aws"
 import "github.com/aws/aws-sdk-go-v2/credentials"
 
 // ...
 
-appCreds := credentials.NewStaticCredentialsProvider(accessKey, secretKey, sessionToken)
+appCreds := aws.NewCredentialsCache(credentials.NewStaticCredentialsProvider(accessKey, secretKey, sessionToken))
 value, err := appCreds.Retrieve(context.TODO())
 if err != nil {
 	// handle error
@@ -231,12 +237,13 @@ if err != nil {
 ##### V2
 ```go
 import "context"
+import "github.coma/aws/aws-sdk-go-v2/aws"
 import "github.coma/aws/aws-sdk-go-v2/credentials/ec2rolecreds"
 
 // ...
 
 // New returns an object of a type that satisfies the aws.CredentialProvider interface
-appCreds := ec2rolecreds.New(ec2rolecreds.Options{})
+appCreds := aws.NewCredentialsCache(ec2rolecreds.New(ec2rolecreds.Options{}))
 value, err := appCreds.Retrieve(context.TODO())
 if err != nil {
 	// handle error
@@ -291,11 +298,12 @@ if err != nil {
 
 ```go
 import "context"
+import "github.coma/aws/aws-sdk-go-v2/aws"
 import "github.coma/aws/aws-sdk-go-v2/credentials/processcreds"
 
 // ...
 
-appCreds := processcreds.NewProvider("/path/to/command")
+appCreds := aws.NewCredentialsCache(processcreds.NewProvider("/path/to/command"))
 value, err := appCreds.Retrieve(context.TODO())
 if err != nil {
 	// handle error
@@ -387,15 +395,16 @@ if err != nil {
 
 ```go
 import "context"
+import "github.coma/aws/aws-sdk-go-v2/aws"
 import "github.com/aws/aws-sdk-go-v2/credentials/stscreds"
 
 // ...
 
 client := sts.NewFromConfig(cfg)
 
-appCreds := stscreds.NewWebIdentityRoleProvider(client, "arn:aws:iam::123456789012:role/demo", stscreds.IdentityTokenFile("/path/to/file"), func(o *stscreds.WebIdentityRoleOptions) {
+appCreds := aws.NewCredentialsCache(stscreds.NewWebIdentityRoleProvider(client, "arn:aws:iam::123456789012:role/demo", stscreds.IdentityTokenFile("/path/to/file"), func(o *stscreds.WebIdentityRoleOptions) {
 	o.RoleSessionName = "sessionName"
-})
+}))
 value, err := appCreds.Retrieve(context.TODO())
 if err != nil {
 	// handle error
