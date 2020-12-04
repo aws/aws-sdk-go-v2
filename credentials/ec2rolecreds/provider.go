@@ -50,13 +50,15 @@ type Options struct {
 
 // New returns an initialized Provider value configured to retrieve
 // credentials from EC2 Instance Metadata service.
-func New(options Options, optFns ...func(*Options)) *Provider {
-	if options.Client == nil {
-		options.Client = ec2imds.New(ec2imds.Options{})
-	}
+func New(optFns ...func(*Options)) *Provider {
+	options := Options{}
 
 	for _, fn := range optFns {
 		fn(&options)
+	}
+
+	if options.Client == nil {
+		options.Client = ec2imds.New(ec2imds.Options{})
 	}
 
 	return &Provider{

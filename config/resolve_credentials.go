@@ -24,7 +24,6 @@ const (
 
 var (
 	ecsContainerEndpoint = "http://169.254.170.2" // not constant to allow for swapping during unit-testing
-
 )
 
 // resolveCredentials extracts a credential provider from slice of config sources.
@@ -66,7 +65,7 @@ func resolveCredentialProvider(cfg *aws.Config, cfgs configs) (bool, error) {
 		return false, nil
 	}
 
-	cfg.Credentials = &aws.CredentialsCache{Provider: credProvider}
+	cfg.Credentials = wrapWithCredentialsCache(credProvider)
 
 	return true, nil
 }
@@ -100,7 +99,7 @@ func resolveCredentialChain(cfg *aws.Config, configs configs) (err error) {
 	}
 
 	// Wrap the resolved provider in a cache so the SDK will cache credentials.
-	cfg.Credentials = &aws.CredentialsCache{Provider: cfg.Credentials}
+	cfg.Credentials = wrapWithCredentialsCache(cfg.Credentials)
 
 	return nil
 }
@@ -198,7 +197,6 @@ func resolveLocalHTTPCredProvider(cfg *aws.Config, endpointURL, authToken string
 func resolveHTTPCredProvider(cfg *aws.Config, url, authToken string, configs configs) error {
 	optFns := []func(*endpointcreds.Options){
 		func(options *endpointcreds.Options) {
-			options.ExpiryWindow = 5 * time.Minute
 			if len(authToken) != 0 {
 				options.AuthorizationToken = authToken
 			}
@@ -217,7 +215,9 @@ func resolveHTTPCredProvider(cfg *aws.Config, url, authToken string, configs con
 
 	provider := endpointcreds.New(url, optFns...)
 
-	cfg.Credentials = provider
+	cfg.Credentials = wrapWithCredentialsCache(provider, func(options *aws.CredentialsCacheOptions) {
+		options.ExpiryWindow = 5 * time.Minute
+	})
 
 	return nil
 }
@@ -264,11 +264,11 @@ func resolveEC2RoleCredentials(cfg *aws.Config, configs configs) error {
 		}
 	})
 
-	provider := ec2rolecreds.New(ec2rolecreds.Options{
-		ExpiryWindow: 5 * time.Minute,
-	}, optFns...)
+	provider := ec2rolecreds.New(optFns...)
 
-	cfg.Credentials = provider
+	cfg.Credentials = wrapWithCredentialsCache(provider, func(options *aws.CredentialsCacheOptions) {
+		options.ExpiryWindow = 5*time.Minute
+	})
 
 	return nil
 }
@@ -398,4 +398,14 @@ func credsFromAssumeRole(cfg *aws.Config, sharedCfg *SharedConfig, configs confi
 	cfg.Credentials = stscreds.NewAssumeRoleProvider(sts.NewFromConfig(cfg.Copy()), sharedCfg.RoleARN, optFns...)
 
 	return nil
+}
+
+// wrapWithCredentialsCache will wrap provider with an aws.CredentialsCache with the provided options if the provider is not already a aws.CredentialsCache.
+func wrapWithCredentialsCache(provider aws.CredentialsProvider, optFns ...func(options *aws.CredentialsCacheOptions)) aws.CredentialsProvider {
+	_, ok := provider.(*aws.CredentialsCache)
+	if ok {
+		return provider
+	}
+
+	return aws.NewCredentialsCache(provider, optFns...)
 }

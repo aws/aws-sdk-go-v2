@@ -8,7 +8,7 @@ import (
 )
 
 func TestInteg_RetrieveCredentials(t *testing.T) {
-	provider := New(Options{})
+	provider := New()
 
 	creds, err := provider.Retrieve(context.Background())
 	if err != nil {
