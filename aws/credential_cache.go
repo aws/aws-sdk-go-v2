@@ -11,8 +11,6 @@ import (
 
 // CredentialsCacheOptions are the options
 type CredentialsCacheOptions struct {
-	// Provider is the CredentialProvider implementation to be wrapped by the CredentialCache.
-	Provider CredentialsProvider
 
 	// ExpiryWindow will allow the credentials to trigger refreshing prior to
 	// the credentials actually expiring. This is beneficial so race conditions
@@ -20,7 +18,8 @@ type CredentialsCacheOptions struct {
 	// due to ExpiredTokenException exceptions.
 	//
 	// An ExpiryWindow of 10s would cause calls to IsExpired() to return true
-	// 10 seconds before the credentials are actually expired.
+	// 10 seconds before the credentials are actually expired. This can cause an
+	// increased number of requests to refresh the credentials to occur.
 	//
 	// If ExpiryWindow is 0 or less it will be ignored.
 	ExpiryWindow time.Duration
@@ -41,6 +40,9 @@ type CredentialsCacheOptions struct {
 // CredentialsCache provides caching and concurrency safe credentials retrieval
 // via the provider's retrieve method.
 type CredentialsCache struct {
+	// provider is the CredentialProvider implementation to be wrapped by the CredentialCache.
+	provider CredentialsProvider
+
 	options CredentialsCacheOptions
 	creds   atomic.Value
 	sf      singleflight.Group
@@ -50,9 +52,7 @@ type CredentialsCache struct {
 // list of one or more functions can be provided to modify the CredentialsCache configuration. This allows for
 // configuration of credential expiry window and jitter.
 func NewCredentialsCache(provider CredentialsProvider, optFns ...func(options *CredentialsCacheOptions)) *CredentialsCache {
-	options := CredentialsCacheOptions{
-		Provider: provider,
-	}
+	options := CredentialsCacheOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
@@ -69,6 +69,7 @@ func NewCredentialsCache(provider CredentialsProvider, optFns ...func(options *C
 	}
 
 	return &CredentialsCache{
+		provider: provider,
 		options: options,
 	}
 }
@@ -84,7 +85,9 @@ func (p *CredentialsCache) Retrieve(ctx context.Context) (Credentials, error) {
 		return *creds, nil
 	}
 
-	resCh := p.sf.DoChan("", p.singleRetrieve)
+	resCh := p.sf.DoChan("", func() (interface{}, error) {
+		return p.singleRetrieve(&suppressedContext{ctx})
+	})
 	select {
 	case res := <-resCh:
 		return res.Val.(Credentials), res.Err
@@ -93,12 +96,12 @@ func (p *CredentialsCache) Retrieve(ctx context.Context) (Credentials, error) {
 	}
 }
 
-func (p *CredentialsCache) singleRetrieve() (interface{}, error) {
+func (p *CredentialsCache) singleRetrieve(ctx context.Context) (interface{}, error) {
 	if creds := p.getCreds(); creds != nil {
 		return *creds, nil
 	}
 
-	creds, err := p.options.Provider.Retrieve(context.TODO())
+	creds, err := p.provider.Retrieve(ctx)
 	if err == nil {
 		if creds.CanExpire {
 			randFloat64, err := sdkrand.CryptoRandFloat64()
