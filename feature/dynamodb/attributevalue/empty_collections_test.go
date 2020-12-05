@@ -1,11 +1,11 @@
 package attributevalue
 
 import (
-	"reflect"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	"github.com/google/go-cmp/cmp"
 )
 
 type testEmptyCollectionsNumericalScalars struct {
@@ -42,6 +42,23 @@ type testEmptyCollectionsOmittedNumericalScalars struct {
 	Float64 float64 `dynamodbav:",omitempty"`
 }
 
+type testEmptyCollectionsNulledNumericalScalars struct {
+	String string `dynamodbav:",nullempty"`
+
+	Uint8  uint8  `dynamodbav:",nullempty"`
+	Uint16 uint16 `dynamodbav:",nullempty"`
+	Uint32 uint32 `dynamodbav:",nullempty"`
+	Uint64 uint64 `dynamodbav:",nullempty"`
+
+	Int8  int8  `dynamodbav:",nullempty"`
+	Int16 int16 `dynamodbav:",nullempty"`
+	Int32 int32 `dynamodbav:",nullempty"`
+	Int64 int64 `dynamodbav:",nullempty"`
+
+	Float32 float32 `dynamodbav:",nullempty"`
+	Float64 float64 `dynamodbav:",nullempty"`
+}
+
 type testEmptyCollectionsPtrScalars struct {
 	PtrString *string
 
@@ -60,6 +77,8 @@ type testEmptyCollectionsPtrScalars struct {
 }
 
 type testEmptyCollectionsOmittedPtrNumericalScalars struct {
+	PtrString *string `dynamodbav:",omitempty"`
+
 	PtrUint8  *uint8  `dynamodbav:",omitempty"`
 	PtrUint16 *uint16 `dynamodbav:",omitempty"`
 	PtrUint32 *uint32 `dynamodbav:",omitempty"`
@@ -72,6 +91,23 @@ type testEmptyCollectionsOmittedPtrNumericalScalars struct {
 
 	PtrFloat32 *float32 `dynamodbav:",omitempty"`
 	PtrFloat64 *float64 `dynamodbav:",omitempty"`
+}
+
+type testEmptyCollectionsNulledPtrNumericalScalars struct {
+	PtrString *string `dynamodbav:",nullempty"`
+
+	PtrUint8  *uint8  `dynamodbav:",nullempty"`
+	PtrUint16 *uint16 `dynamodbav:",nullempty"`
+	PtrUint32 *uint32 `dynamodbav:",nullempty"`
+	PtrUint64 *uint64 `dynamodbav:",nullempty"`
+
+	PtrInt8  *int8  `dynamodbav:",nullempty"`
+	PtrInt16 *int16 `dynamodbav:",nullempty"`
+	PtrInt32 *int32 `dynamodbav:",nullempty"`
+	PtrInt64 *int64 `dynamodbav:",nullempty"`
+
+	PtrFloat32 *float32 `dynamodbav:",nullempty"`
+	PtrFloat64 *float64 `dynamodbav:",nullempty"`
 }
 
 type testEmptyCollectionTypes struct {
@@ -96,6 +132,17 @@ type testEmptyCollectionTypesOmitted struct {
 	StringSet []string          `dynamodbav:",stringset,omitempty"`
 }
 
+type testEmptyCollectionTypesNulled struct {
+	Map       map[string]string `dynamodbav:",nullempty"`
+	Slice     []string          `dynamodbav:",nullempty"`
+	ByteSlice []byte            `dynamodbav:",nullempty"`
+	ByteArray [4]byte           `dynamodbav:",nullempty"`
+	ZeroArray [0]byte           `dynamodbav:",nullempty"`
+	BinarySet [][]byte          `dynamodbav:",binaryset,nullempty"`
+	NumberSet []int             `dynamodbav:",numberset,nullempty"`
+	StringSet []string          `dynamodbav:",stringset,nullempty"`
+}
+
 type testEmptyCollectionStruct struct {
 	Int int
 }
@@ -105,43 +152,46 @@ type testEmptyCollectionStructOmitted struct {
 }
 
 var sharedEmptyCollectionsTestCases = map[string]struct {
-	in               *types.AttributeValue
+	in types.AttributeValue
+	// alternative input to compare against for marshal flow
+	inMarshal types.AttributeValue
+
 	actual, expected interface{}
 	err              error
 }{
 	"scalars with zero value": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"String":  {NULL: aws.Bool(true)},
-				"Uint8":   {N: aws.String("0")},
-				"Uint16":  {N: aws.String("0")},
-				"Uint32":  {N: aws.String("0")},
-				"Uint64":  {N: aws.String("0")},
-				"Int8":    {N: aws.String("0")},
-				"Int16":   {N: aws.String("0")},
-				"Int32":   {N: aws.String("0")},
-				"Int64":   {N: aws.String("0")},
-				"Float32": {N: aws.String("0")},
-				"Float64": {N: aws.String("0")},
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"String":  &types.AttributeValueMemberS{Value: ""},
+				"Uint8":   &types.AttributeValueMemberN{Value: "0"},
+				"Uint16":  &types.AttributeValueMemberN{Value: "0"},
+				"Uint32":  &types.AttributeValueMemberN{Value: "0"},
+				"Uint64":  &types.AttributeValueMemberN{Value: "0"},
+				"Int8":    &types.AttributeValueMemberN{Value: "0"},
+				"Int16":   &types.AttributeValueMemberN{Value: "0"},
+				"Int32":   &types.AttributeValueMemberN{Value: "0"},
+				"Int64":   &types.AttributeValueMemberN{Value: "0"},
+				"Float32": &types.AttributeValueMemberN{Value: "0"},
+				"Float64": &types.AttributeValueMemberN{Value: "0"},
 			},
 		},
 		actual:   &testEmptyCollectionsNumericalScalars{},
 		expected: testEmptyCollectionsNumericalScalars{},
 	},
 	"scalars with non-zero values": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"String":  {S: aws.String("test string")},
-				"Uint8":   {N: aws.String("1")},
-				"Uint16":  {N: aws.String("2")},
-				"Uint32":  {N: aws.String("3")},
-				"Uint64":  {N: aws.String("4")},
-				"Int8":    {N: aws.String("-5")},
-				"Int16":   {N: aws.String("-6")},
-				"Int32":   {N: aws.String("-7")},
-				"Int64":   {N: aws.String("-8")},
-				"Float32": {N: aws.String("9.9")},
-				"Float64": {N: aws.String("10.1")},
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"String":  &types.AttributeValueMemberS{Value: "test string"},
+				"Uint8":   &types.AttributeValueMemberN{Value: "1"},
+				"Uint16":  &types.AttributeValueMemberN{Value: "2"},
+				"Uint32":  &types.AttributeValueMemberN{Value: "3"},
+				"Uint64":  &types.AttributeValueMemberN{Value: "4"},
+				"Int8":    &types.AttributeValueMemberN{Value: "-5"},
+				"Int16":   &types.AttributeValueMemberN{Value: "-6"},
+				"Int32":   &types.AttributeValueMemberN{Value: "-7"},
+				"Int64":   &types.AttributeValueMemberN{Value: "-8"},
+				"Float32": &types.AttributeValueMemberN{Value: "9.9"},
+				"Float64": &types.AttributeValueMemberN{Value: "10.1"},
 			},
 		},
 		actual: &testEmptyCollectionsNumericalScalars{},
@@ -160,24 +210,24 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"omittable scalars with zero value": {
-		in:       &types.AttributeValue{M: map[string]types.AttributeValue{}},
+		in:       &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{}},
 		actual:   &testEmptyCollectionsOmittedNumericalScalars{},
 		expected: testEmptyCollectionsOmittedNumericalScalars{},
 	},
 	"omittable scalars with non-zero value": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"String":  {S: aws.String("test string")},
-				"Uint8":   {N: aws.String("1")},
-				"Uint16":  {N: aws.String("2")},
-				"Uint32":  {N: aws.String("3")},
-				"Uint64":  {N: aws.String("4")},
-				"Int8":    {N: aws.String("-5")},
-				"Int16":   {N: aws.String("-6")},
-				"Int32":   {N: aws.String("-7")},
-				"Int64":   {N: aws.String("-8")},
-				"Float32": {N: aws.String("9.9")},
-				"Float64": {N: aws.String("10.1")},
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"String":  &types.AttributeValueMemberS{Value: "test string"},
+				"Uint8":   &types.AttributeValueMemberN{Value: "1"},
+				"Uint16":  &types.AttributeValueMemberN{Value: "2"},
+				"Uint32":  &types.AttributeValueMemberN{Value: "3"},
+				"Uint64":  &types.AttributeValueMemberN{Value: "4"},
+				"Int8":    &types.AttributeValueMemberN{Value: "-5"},
+				"Int16":   &types.AttributeValueMemberN{Value: "-6"},
+				"Int32":   &types.AttributeValueMemberN{Value: "-7"},
+				"Int64":   &types.AttributeValueMemberN{Value: "-8"},
+				"Float32": &types.AttributeValueMemberN{Value: "9.9"},
+				"Float64": &types.AttributeValueMemberN{Value: "10.1"},
 			},
 		},
 		actual: &testEmptyCollectionsOmittedNumericalScalars{},
@@ -195,39 +245,89 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 			Float64: 10.1,
 		},
 	},
+	"null scalars with zero value": {
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"String":  &types.AttributeValueMemberNULL{Value: true},
+				"Uint8":   &types.AttributeValueMemberNULL{Value: true},
+				"Uint16":  &types.AttributeValueMemberNULL{Value: true},
+				"Uint32":  &types.AttributeValueMemberNULL{Value: true},
+				"Uint64":  &types.AttributeValueMemberNULL{Value: true},
+				"Int8":    &types.AttributeValueMemberNULL{Value: true},
+				"Int16":   &types.AttributeValueMemberNULL{Value: true},
+				"Int32":   &types.AttributeValueMemberNULL{Value: true},
+				"Int64":   &types.AttributeValueMemberNULL{Value: true},
+				"Float32": &types.AttributeValueMemberNULL{Value: true},
+				"Float64": &types.AttributeValueMemberNULL{Value: true},
+			},
+		},
+		actual:   &testEmptyCollectionsNulledNumericalScalars{},
+		expected: testEmptyCollectionsNulledNumericalScalars{},
+	},
+	"null scalars with non-zero value": {
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"String":  &types.AttributeValueMemberS{Value: "test string"},
+				"Uint8":   &types.AttributeValueMemberN{Value: "1"},
+				"Uint16":  &types.AttributeValueMemberN{Value: "2"},
+				"Uint32":  &types.AttributeValueMemberN{Value: "3"},
+				"Uint64":  &types.AttributeValueMemberN{Value: "4"},
+				"Int8":    &types.AttributeValueMemberN{Value: "-5"},
+				"Int16":   &types.AttributeValueMemberN{Value: "-6"},
+				"Int32":   &types.AttributeValueMemberN{Value: "-7"},
+				"Int64":   &types.AttributeValueMemberN{Value: "-8"},
+				"Float32": &types.AttributeValueMemberN{Value: "9.9"},
+				"Float64": &types.AttributeValueMemberN{Value: "10.1"},
+			},
+		},
+		actual: &testEmptyCollectionsNulledNumericalScalars{},
+		expected: testEmptyCollectionsNulledNumericalScalars{
+			String:  "test string",
+			Uint8:   1,
+			Uint16:  2,
+			Uint32:  3,
+			Uint64:  4,
+			Int8:    -5,
+			Int16:   -6,
+			Int32:   -7,
+			Int64:   -8,
+			Float32: 9.9,
+			Float64: 10.1,
+		},
+	},
 	"nil pointer scalars": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"PtrString":  {NULL: aws.Bool(true)},
-				"PtrUint8":   {NULL: aws.Bool(true)},
-				"PtrUint16":  {NULL: aws.Bool(true)},
-				"PtrUint32":  {NULL: aws.Bool(true)},
-				"PtrUint64":  {NULL: aws.Bool(true)},
-				"PtrInt8":    {NULL: aws.Bool(true)},
-				"PtrInt16":   {NULL: aws.Bool(true)},
-				"PtrInt32":   {NULL: aws.Bool(true)},
-				"PtrInt64":   {NULL: aws.Bool(true)},
-				"PtrFloat32": {NULL: aws.Bool(true)},
-				"PtrFloat64": {NULL: aws.Bool(true)},
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"PtrString":  &types.AttributeValueMemberNULL{Value: true},
+				"PtrUint8":   &types.AttributeValueMemberNULL{Value: true},
+				"PtrUint16":  &types.AttributeValueMemberNULL{Value: true},
+				"PtrUint32":  &types.AttributeValueMemberNULL{Value: true},
+				"PtrUint64":  &types.AttributeValueMemberNULL{Value: true},
+				"PtrInt8":    &types.AttributeValueMemberNULL{Value: true},
+				"PtrInt16":   &types.AttributeValueMemberNULL{Value: true},
+				"PtrInt32":   &types.AttributeValueMemberNULL{Value: true},
+				"PtrInt64":   &types.AttributeValueMemberNULL{Value: true},
+				"PtrFloat32": &types.AttributeValueMemberNULL{Value: true},
+				"PtrFloat64": &types.AttributeValueMemberNULL{Value: true},
 			},
 		},
 		actual:   &testEmptyCollectionsPtrScalars{},
 		expected: testEmptyCollectionsPtrScalars{},
 	},
 	"non-nil pointer to scalars with zero value": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"PtrString":  {NULL: aws.Bool(true)},
-				"PtrUint8":   {N: aws.String("0")},
-				"PtrUint16":  {N: aws.String("0")},
-				"PtrUint32":  {N: aws.String("0")},
-				"PtrUint64":  {N: aws.String("0")},
-				"PtrInt8":    {N: aws.String("0")},
-				"PtrInt16":   {N: aws.String("0")},
-				"PtrInt32":   {N: aws.String("0")},
-				"PtrInt64":   {N: aws.String("0")},
-				"PtrFloat32": {N: aws.String("0")},
-				"PtrFloat64": {N: aws.String("0")},
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"PtrString":  &types.AttributeValueMemberNULL{Value: true},
+				"PtrUint8":   &types.AttributeValueMemberN{Value: "0"},
+				"PtrUint16":  &types.AttributeValueMemberN{Value: "0"},
+				"PtrUint32":  &types.AttributeValueMemberN{Value: "0"},
+				"PtrUint64":  &types.AttributeValueMemberN{Value: "0"},
+				"PtrInt8":    &types.AttributeValueMemberN{Value: "0"},
+				"PtrInt16":   &types.AttributeValueMemberN{Value: "0"},
+				"PtrInt32":   &types.AttributeValueMemberN{Value: "0"},
+				"PtrInt64":   &types.AttributeValueMemberN{Value: "0"},
+				"PtrFloat32": &types.AttributeValueMemberN{Value: "0"},
+				"PtrFloat64": &types.AttributeValueMemberN{Value: "0"},
 			},
 		},
 		actual: &testEmptyCollectionsPtrScalars{},
@@ -245,19 +345,19 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"pointer scalars non-nil non-zero": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"PtrString":  {S: aws.String("test string")},
-				"PtrUint8":   {N: aws.String("1")},
-				"PtrUint16":  {N: aws.String("2")},
-				"PtrUint32":  {N: aws.String("3")},
-				"PtrUint64":  {N: aws.String("4")},
-				"PtrInt8":    {N: aws.String("-5")},
-				"PtrInt16":   {N: aws.String("-6")},
-				"PtrInt32":   {N: aws.String("-7")},
-				"PtrInt64":   {N: aws.String("-8")},
-				"PtrFloat32": {N: aws.String("9.9")},
-				"PtrFloat64": {N: aws.String("10.1")},
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"PtrString":  &types.AttributeValueMemberS{Value: "test string"},
+				"PtrUint8":   &types.AttributeValueMemberN{Value: "1"},
+				"PtrUint16":  &types.AttributeValueMemberN{Value: "2"},
+				"PtrUint32":  &types.AttributeValueMemberN{Value: "3"},
+				"PtrUint64":  &types.AttributeValueMemberN{Value: "4"},
+				"PtrInt8":    &types.AttributeValueMemberN{Value: "-5"},
+				"PtrInt16":   &types.AttributeValueMemberN{Value: "-6"},
+				"PtrInt32":   &types.AttributeValueMemberN{Value: "-7"},
+				"PtrInt64":   &types.AttributeValueMemberN{Value: "-8"},
+				"PtrFloat32": &types.AttributeValueMemberN{Value: "9.9"},
+				"PtrFloat64": &types.AttributeValueMemberN{Value: "10.1"},
 			},
 		},
 		actual: &testEmptyCollectionsPtrScalars{},
@@ -276,25 +376,25 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"omittable nil pointer scalars": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{},
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{},
 		},
 		actual:   &testEmptyCollectionsOmittedPtrNumericalScalars{},
 		expected: testEmptyCollectionsOmittedPtrNumericalScalars{},
 	},
 	"omittable non-nil pointer to scalars with zero value": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"PtrUint8":   {N: aws.String("0")},
-				"PtrUint16":  {N: aws.String("0")},
-				"PtrUint32":  {N: aws.String("0")},
-				"PtrUint64":  {N: aws.String("0")},
-				"PtrInt8":    {N: aws.String("0")},
-				"PtrInt16":   {N: aws.String("0")},
-				"PtrInt32":   {N: aws.String("0")},
-				"PtrInt64":   {N: aws.String("0")},
-				"PtrFloat32": {N: aws.String("0")},
-				"PtrFloat64": {N: aws.String("0")},
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"PtrUint8":   &types.AttributeValueMemberN{Value: "0"},
+				"PtrUint16":  &types.AttributeValueMemberN{Value: "0"},
+				"PtrUint32":  &types.AttributeValueMemberN{Value: "0"},
+				"PtrUint64":  &types.AttributeValueMemberN{Value: "0"},
+				"PtrInt8":    &types.AttributeValueMemberN{Value: "0"},
+				"PtrInt16":   &types.AttributeValueMemberN{Value: "0"},
+				"PtrInt32":   &types.AttributeValueMemberN{Value: "0"},
+				"PtrInt64":   &types.AttributeValueMemberN{Value: "0"},
+				"PtrFloat32": &types.AttributeValueMemberN{Value: "0"},
+				"PtrFloat64": &types.AttributeValueMemberN{Value: "0"},
 			},
 		},
 		actual: &testEmptyCollectionsOmittedPtrNumericalScalars{},
@@ -312,18 +412,18 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"omittable non-nil pointer to non-zero scalar": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"PtrUint8":   {N: aws.String("1")},
-				"PtrUint16":  {N: aws.String("2")},
-				"PtrUint32":  {N: aws.String("3")},
-				"PtrUint64":  {N: aws.String("4")},
-				"PtrInt8":    {N: aws.String("-5")},
-				"PtrInt16":   {N: aws.String("-6")},
-				"PtrInt32":   {N: aws.String("-7")},
-				"PtrInt64":   {N: aws.String("-8")},
-				"PtrFloat32": {N: aws.String("9.9")},
-				"PtrFloat64": {N: aws.String("10.1")},
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"PtrUint8":   &types.AttributeValueMemberN{Value: "1"},
+				"PtrUint16":  &types.AttributeValueMemberN{Value: "2"},
+				"PtrUint32":  &types.AttributeValueMemberN{Value: "3"},
+				"PtrUint64":  &types.AttributeValueMemberN{Value: "4"},
+				"PtrInt8":    &types.AttributeValueMemberN{Value: "-5"},
+				"PtrInt16":   &types.AttributeValueMemberN{Value: "-6"},
+				"PtrInt32":   &types.AttributeValueMemberN{Value: "-7"},
+				"PtrInt64":   &types.AttributeValueMemberN{Value: "-8"},
+				"PtrFloat32": &types.AttributeValueMemberN{Value: "9.9"},
+				"PtrFloat64": &types.AttributeValueMemberN{Value: "10.1"},
 			},
 		},
 		actual: &testEmptyCollectionsOmittedPtrNumericalScalars{},
@@ -341,32 +441,127 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"maps slices nil values": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"Map":       {NULL: aws.Bool(true)},
-				"Slice":     {NULL: aws.Bool(true)},
-				"ByteSlice": {NULL: aws.Bool(true)},
-				"ByteArray": {B: make([]byte, 4)},
-				"ZeroArray": {B: make([]byte, 0)},
-				"BinarySet": {NULL: aws.Bool(true)},
-				"NumberSet": {NULL: aws.Bool(true)},
-				"StringSet": {NULL: aws.Bool(true)},
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"Map":       &types.AttributeValueMemberNULL{Value: true},
+				"Slice":     &types.AttributeValueMemberNULL{Value: true},
+				"ByteSlice": &types.AttributeValueMemberNULL{Value: true},
+				"ByteArray": &types.AttributeValueMemberB{Value: make([]byte, 4)},
+				"ZeroArray": &types.AttributeValueMemberB{Value: make([]byte, 0)},
+				"BinarySet": &types.AttributeValueMemberNULL{Value: true},
+				"NumberSet": &types.AttributeValueMemberNULL{Value: true},
+				"StringSet": &types.AttributeValueMemberNULL{Value: true},
 			},
 		},
 		actual:   &testEmptyCollectionTypes{},
 		expected: testEmptyCollectionTypes{},
 	},
+	"null nil pointer scalars": {
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"PtrString":  &types.AttributeValueMemberNULL{Value: true},
+				"PtrUint8":   &types.AttributeValueMemberNULL{Value: true},
+				"PtrUint16":  &types.AttributeValueMemberNULL{Value: true},
+				"PtrUint32":  &types.AttributeValueMemberNULL{Value: true},
+				"PtrUint64":  &types.AttributeValueMemberNULL{Value: true},
+				"PtrInt8":    &types.AttributeValueMemberNULL{Value: true},
+				"PtrInt16":   &types.AttributeValueMemberNULL{Value: true},
+				"PtrInt32":   &types.AttributeValueMemberNULL{Value: true},
+				"PtrInt64":   &types.AttributeValueMemberNULL{Value: true},
+				"PtrFloat32": &types.AttributeValueMemberNULL{Value: true},
+				"PtrFloat64": &types.AttributeValueMemberNULL{Value: true},
+			},
+		},
+		actual:   &testEmptyCollectionsNulledPtrNumericalScalars{},
+		expected: testEmptyCollectionsNulledPtrNumericalScalars{},
+	},
+	"null non-nil pointer to scalars with zero value": {
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"PtrString":  &types.AttributeValueMemberS{Value: ""},
+				"PtrUint8":   &types.AttributeValueMemberN{Value: "0"},
+				"PtrUint16":  &types.AttributeValueMemberN{Value: "0"},
+				"PtrUint32":  &types.AttributeValueMemberN{Value: "0"},
+				"PtrUint64":  &types.AttributeValueMemberN{Value: "0"},
+				"PtrInt8":    &types.AttributeValueMemberN{Value: "0"},
+				"PtrInt16":   &types.AttributeValueMemberN{Value: "0"},
+				"PtrInt32":   &types.AttributeValueMemberN{Value: "0"},
+				"PtrInt64":   &types.AttributeValueMemberN{Value: "0"},
+				"PtrFloat32": &types.AttributeValueMemberN{Value: "0"},
+				"PtrFloat64": &types.AttributeValueMemberN{Value: "0"},
+			},
+		},
+		actual: &testEmptyCollectionsNulledPtrNumericalScalars{},
+		expected: testEmptyCollectionsNulledPtrNumericalScalars{
+			PtrString:  aws.String(""),
+			PtrUint8:   aws.Uint8(0),
+			PtrUint16:  aws.Uint16(0),
+			PtrUint32:  aws.Uint32(0),
+			PtrUint64:  aws.Uint64(0),
+			PtrInt8:    aws.Int8(0),
+			PtrInt16:   aws.Int16(0),
+			PtrInt32:   aws.Int32(0),
+			PtrInt64:   aws.Int64(0),
+			PtrFloat32: aws.Float32(0),
+			PtrFloat64: aws.Float64(0),
+		},
+	},
+	"null non-nil pointer to non-zero scalar": {
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"PtrString":  &types.AttributeValueMemberS{Value: "abc"},
+				"PtrUint8":   &types.AttributeValueMemberN{Value: "1"},
+				"PtrUint16":  &types.AttributeValueMemberN{Value: "2"},
+				"PtrUint32":  &types.AttributeValueMemberN{Value: "3"},
+				"PtrUint64":  &types.AttributeValueMemberN{Value: "4"},
+				"PtrInt8":    &types.AttributeValueMemberN{Value: "-5"},
+				"PtrInt16":   &types.AttributeValueMemberN{Value: "-6"},
+				"PtrInt32":   &types.AttributeValueMemberN{Value: "-7"},
+				"PtrInt64":   &types.AttributeValueMemberN{Value: "-8"},
+				"PtrFloat32": &types.AttributeValueMemberN{Value: "9.9"},
+				"PtrFloat64": &types.AttributeValueMemberN{Value: "10.1"},
+			},
+		},
+		actual: &testEmptyCollectionsNulledPtrNumericalScalars{},
+		expected: testEmptyCollectionsNulledPtrNumericalScalars{
+			PtrString:  aws.String("abc"),
+			PtrUint8:   aws.Uint8(1),
+			PtrUint16:  aws.Uint16(2),
+			PtrUint32:  aws.Uint32(3),
+			PtrUint64:  aws.Uint64(4),
+			PtrInt8:    aws.Int8(-5),
+			PtrInt16:   aws.Int16(-6),
+			PtrInt32:   aws.Int32(-7),
+			PtrInt64:   aws.Int64(-8),
+			PtrFloat32: aws.Float32(9.9),
+			PtrFloat64: aws.Float64(10.1),
+		},
+	},
 	"maps slices zero values": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"Map":       {M: map[string]types.AttributeValue{}},
-				"Slice":     {L: []types.AttributeValue{}},
-				"ByteSlice": {B: []byte{}},
-				"ByteArray": {B: make([]byte, 4)},
-				"ZeroArray": {B: make([]byte, 0)},
-				"BinarySet": {BS: [][]byte{}},
-				"NumberSet": {NS: []string{}},
-				"StringSet": {SS: []string{}},
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"Map":       &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{}},
+				"Slice":     &types.AttributeValueMemberL{Value: []types.AttributeValue{}},
+				"ByteSlice": &types.AttributeValueMemberB{Value: []byte{}},
+				"ByteArray": &types.AttributeValueMemberB{Value: make([]byte, 4)},
+				"ZeroArray": &types.AttributeValueMemberB{Value: make([]byte, 0)},
+				// sets are special and not serialized to empty if no elements
+				"BinarySet": &types.AttributeValueMemberBS{Value: [][]byte{}},
+				"NumberSet": &types.AttributeValueMemberNS{Value: []string{}},
+				"StringSet": &types.AttributeValueMemberSS{Value: []string{}},
+			},
+		},
+		inMarshal: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"Map":       &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{}},
+				"Slice":     &types.AttributeValueMemberL{Value: []types.AttributeValue{}},
+				"ByteSlice": &types.AttributeValueMemberB{Value: []byte{}},
+				"ByteArray": &types.AttributeValueMemberB{Value: make([]byte, 4)},
+				"ZeroArray": &types.AttributeValueMemberB{Value: make([]byte, 0)},
+				// sets are special and not serialized to empty if no elements
+				"BinarySet": &types.AttributeValueMemberNULL{Value: true},
+				"NumberSet": &types.AttributeValueMemberNULL{Value: true},
+				"StringSet": &types.AttributeValueMemberNULL{Value: true},
 			},
 		},
 		actual: &testEmptyCollectionTypes{},
@@ -382,20 +577,23 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"maps slices non-zero values": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"Map": {
-					M: map[string]types.AttributeValue{
-						"key": {S: aws.String("value")},
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"Map": &types.AttributeValueMemberM{
+					Value: map[string]types.AttributeValue{
+						"key": &types.AttributeValueMemberS{Value: "value"},
 					},
 				},
-				"Slice":     {L: []types.AttributeValue{{S: aws.String("test")}, {S: aws.String("slice")}}},
-				"ByteSlice": {B: []byte{0, 1}},
-				"ByteArray": {B: []byte{0, 1, 2, 3}},
-				"ZeroArray": {B: make([]byte, 0)},
-				"BinarySet": {BS: [][]byte{{0, 1}, {2, 3}}},
-				"NumberSet": {NS: []string{"0", "1"}},
-				"StringSet": {SS: []string{"test", "slice"}},
+				"Slice": &types.AttributeValueMemberL{Value: []types.AttributeValue{
+					&types.AttributeValueMemberS{Value: "test"},
+					&types.AttributeValueMemberS{Value: "slice"},
+				}},
+				"ByteSlice": &types.AttributeValueMemberB{Value: []byte{0, 1}},
+				"ByteArray": &types.AttributeValueMemberB{Value: []byte{0, 1, 2, 3}},
+				"ZeroArray": &types.AttributeValueMemberB{Value: make([]byte, 0)},
+				"BinarySet": &types.AttributeValueMemberBS{Value: [][]byte{{0, 1}, {2, 3}}},
+				"NumberSet": &types.AttributeValueMemberNS{Value: []string{"0", "1"}},
+				"StringSet": &types.AttributeValueMemberSS{Value: []string{"test", "slice"}},
 			},
 		},
 		actual: &testEmptyCollectionTypes{},
@@ -411,24 +609,35 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"omittable maps slices nil values": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"ByteArray": {B: make([]byte, 4)},
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"ByteArray": &types.AttributeValueMemberB{Value: make([]byte, 4)},
 			},
 		},
 		actual:   &testEmptyCollectionTypesOmitted{},
 		expected: testEmptyCollectionTypesOmitted{},
 	},
 	"omittable maps slices zero values": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"Map":       {M: map[string]types.AttributeValue{}},
-				"Slice":     {L: []types.AttributeValue{}},
-				"ByteSlice": {B: []byte{}},
-				"ByteArray": {B: make([]byte, 4)},
-				"BinarySet": {BS: [][]byte{}},
-				"NumberSet": {NS: []string{}},
-				"StringSet": {SS: []string{}},
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"Map":       &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{}},
+				"Slice":     &types.AttributeValueMemberL{Value: []types.AttributeValue{}},
+				"ByteSlice": &types.AttributeValueMemberB{Value: []byte{}},
+				"ByteArray": &types.AttributeValueMemberB{Value: make([]byte, 4)},
+				"BinarySet": &types.AttributeValueMemberBS{Value: [][]byte{}},
+				"NumberSet": &types.AttributeValueMemberNS{Value: []string{}},
+				"StringSet": &types.AttributeValueMemberSS{Value: []string{}},
+			},
+		},
+		inMarshal: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"Map":       &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{}},
+				"Slice":     &types.AttributeValueMemberL{Value: []types.AttributeValue{}},
+				"ByteSlice": &types.AttributeValueMemberB{Value: []byte{}},
+				"ByteArray": &types.AttributeValueMemberB{Value: make([]byte, 4)},
+				"BinarySet": &types.AttributeValueMemberNULL{Value: true},
+				"NumberSet": &types.AttributeValueMemberNULL{Value: true},
+				"StringSet": &types.AttributeValueMemberNULL{Value: true},
 			},
 		},
 		actual: &testEmptyCollectionTypesOmitted{},
@@ -443,19 +652,22 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"omittable maps slices non-zero values": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"Map": {
-					M: map[string]types.AttributeValue{
-						"key": {S: aws.String("value")},
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"Map": &types.AttributeValueMemberM{
+					Value: map[string]types.AttributeValue{
+						"key": &types.AttributeValueMemberS{Value: "value"},
 					},
 				},
-				"Slice":     {L: []types.AttributeValue{{S: aws.String("test")}, {S: aws.String("slice")}}},
-				"ByteSlice": {B: []byte{0, 1}},
-				"ByteArray": {B: []byte{0, 1, 2, 3}},
-				"BinarySet": {BS: [][]byte{{0, 1}, {2, 3}}},
-				"NumberSet": {NS: []string{"0", "1"}},
-				"StringSet": {SS: []string{"test", "slice"}},
+				"Slice": &types.AttributeValueMemberL{Value: []types.AttributeValue{
+					&types.AttributeValueMemberS{Value: "test"},
+					&types.AttributeValueMemberS{Value: "slice"},
+				}},
+				"ByteSlice": &types.AttributeValueMemberB{Value: []byte{0, 1}},
+				"ByteArray": &types.AttributeValueMemberB{Value: []byte{0, 1, 2, 3}},
+				"BinarySet": &types.AttributeValueMemberBS{Value: [][]byte{{0, 1}, {2, 3}}},
+				"NumberSet": &types.AttributeValueMemberNS{Value: []string{"0", "1"}},
+				"StringSet": &types.AttributeValueMemberSS{Value: []string{"test", "slice"}},
 			},
 		},
 		actual: &testEmptyCollectionTypesOmitted{},
@@ -470,15 +682,98 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 			StringSet: []string{"test", "slice"},
 		},
 	},
-	"structs with members zero": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"Struct": {
-					M: map[string]types.AttributeValue{
-						"Int": {N: aws.String("0")},
+	"null maps slices nil values": {
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"Map":       &types.AttributeValueMemberNULL{Value: true},
+				"Slice":     &types.AttributeValueMemberNULL{Value: true},
+				"ByteSlice": &types.AttributeValueMemberNULL{Value: true},
+				"ByteArray": &types.AttributeValueMemberB{Value: make([]byte, 4)},
+				"BinarySet": &types.AttributeValueMemberNULL{Value: true},
+				"NumberSet": &types.AttributeValueMemberNULL{Value: true},
+				"StringSet": &types.AttributeValueMemberNULL{Value: true},
+				"ZeroArray": &types.AttributeValueMemberNULL{Value: true},
+			},
+		},
+		actual:   &testEmptyCollectionTypesNulled{},
+		expected: testEmptyCollectionTypesNulled{},
+	},
+	"null maps slices zero values": {
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"Map":       &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{}},
+				"Slice":     &types.AttributeValueMemberL{Value: []types.AttributeValue{}},
+				"ByteSlice": &types.AttributeValueMemberB{Value: []byte{}},
+				"ByteArray": &types.AttributeValueMemberB{Value: make([]byte, 4)},
+				"BinarySet": &types.AttributeValueMemberBS{Value: [][]byte{}},
+				"NumberSet": &types.AttributeValueMemberNS{Value: []string{}},
+				"StringSet": &types.AttributeValueMemberSS{Value: []string{}},
+			},
+		},
+		inMarshal: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"Map":       &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{}},
+				"Slice":     &types.AttributeValueMemberL{Value: []types.AttributeValue{}},
+				"ByteSlice": &types.AttributeValueMemberB{Value: []byte{}},
+				"ByteArray": &types.AttributeValueMemberB{Value: make([]byte, 4)},
+				"BinarySet": &types.AttributeValueMemberNULL{Value: true},
+				"NumberSet": &types.AttributeValueMemberNULL{Value: true},
+				"StringSet": &types.AttributeValueMemberNULL{Value: true},
+				"ZeroArray": &types.AttributeValueMemberNULL{Value: true},
+			},
+		},
+		actual: &testEmptyCollectionTypesNulled{},
+		expected: testEmptyCollectionTypesNulled{
+			Map:       map[string]string{},
+			Slice:     []string{},
+			ByteSlice: []byte{},
+			ByteArray: [4]byte{},
+			BinarySet: [][]byte{},
+			NumberSet: []int{},
+			StringSet: []string{},
+		},
+	},
+	"null maps slices non-zero values": {
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"Map": &types.AttributeValueMemberM{
+					Value: map[string]types.AttributeValue{
+						"key": &types.AttributeValueMemberS{Value: "value"},
 					},
 				},
-				"PtrStruct": {NULL: aws.Bool(true)},
+				"Slice": &types.AttributeValueMemberL{Value: []types.AttributeValue{
+					&types.AttributeValueMemberS{Value: "test"},
+					&types.AttributeValueMemberS{Value: "slice"},
+				}},
+				"ByteSlice": &types.AttributeValueMemberB{Value: []byte{0, 1}},
+				"ByteArray": &types.AttributeValueMemberB{Value: []byte{0, 1, 2, 3}},
+				"BinarySet": &types.AttributeValueMemberBS{Value: [][]byte{{0, 1}, {2, 3}}},
+				"NumberSet": &types.AttributeValueMemberNS{Value: []string{"0", "1"}},
+				"StringSet": &types.AttributeValueMemberSS{Value: []string{"test", "slice"}},
+				"ZeroArray": &types.AttributeValueMemberNULL{Value: true},
+			},
+		},
+		actual: &testEmptyCollectionTypesNulled{},
+		expected: testEmptyCollectionTypesNulled{
+			Map:       map[string]string{"key": "value"},
+			Slice:     []string{"test", "slice"},
+			ByteSlice: []byte{0, 1},
+			ByteArray: [4]byte{0, 1, 2, 3},
+			ZeroArray: [0]byte{},
+			BinarySet: [][]byte{{0, 1}, {2, 3}},
+			NumberSet: []int{0, 1},
+			StringSet: []string{"test", "slice"},
+		},
+	},
+	"structs with members zero": {
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"Struct": &types.AttributeValueMemberM{
+					Value: map[string]types.AttributeValue{
+						"Int": &types.AttributeValueMemberN{Value: "0"},
+					},
+				},
+				"PtrStruct": &types.AttributeValueMemberNULL{Value: true},
 			},
 		},
 		actual: &struct {
@@ -491,16 +786,16 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		}{},
 	},
 	"structs with members non-zero value": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"Struct": {
-					M: map[string]types.AttributeValue{
-						"Int": {N: aws.String("1")},
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"Struct": &types.AttributeValueMemberM{
+					Value: map[string]types.AttributeValue{
+						"Int": &types.AttributeValueMemberN{Value: "1"},
 					},
 				},
-				"PtrStruct": {
-					M: map[string]types.AttributeValue{
-						"Int": {N: aws.String("1")},
+				"PtrStruct": &types.AttributeValueMemberM{
+					Value: map[string]types.AttributeValue{
+						"Int": &types.AttributeValueMemberN{Value: "1"},
 					},
 				},
 			},
@@ -518,10 +813,10 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		},
 	},
 	"struct with omittable members zero value": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"Struct":    {M: map[string]types.AttributeValue{}},
-				"PtrStruct": {NULL: aws.Bool(true)},
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"Struct":    &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{}},
+				"PtrStruct": &types.AttributeValueMemberNULL{Value: true},
 			},
 		},
 		actual: &struct {
@@ -534,9 +829,9 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		}{},
 	},
 	"omittable struct with omittable members zero value": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"Struct": {M: map[string]types.AttributeValue{}},
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"Struct": &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{}},
 			},
 		},
 		actual: &struct {
@@ -549,16 +844,20 @@ var sharedEmptyCollectionsTestCases = map[string]struct {
 		}{},
 	},
 	"omittable struct with omittable members non-zero value": {
-		in: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"Struct": {
-					M: map[string]types.AttributeValue{
-						"Slice": {L: []types.AttributeValue{{S: aws.String("test")}}},
+		in: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"Struct": &types.AttributeValueMemberM{
+					Value: map[string]types.AttributeValue{
+						"Slice": &types.AttributeValueMemberL{Value: []types.AttributeValue{
+							&types.AttributeValueMemberS{Value: "test"},
+						}},
 					},
 				},
-				"InitPtrStruct": {
-					M: map[string]types.AttributeValue{
-						"Slice": {L: []types.AttributeValue{{S: aws.String("test")}}},
+				"InitPtrStruct": &types.AttributeValueMemberM{
+					Value: map[string]types.AttributeValue{
+						"Slice": &types.AttributeValueMemberL{Value: []types.AttributeValue{
+							&types.AttributeValueMemberS{Value: "test"},
+						}},
 					},
 				},
 			},
@@ -581,7 +880,11 @@ func TestMarshalEmptyCollections(t *testing.T) {
 	for name, c := range sharedEmptyCollectionsTestCases {
 		t.Run(name, func(t *testing.T) {
 			av, err := Marshal(c.expected)
-			assertConvertTest(t, av, c.in, err, c.err)
+			in := c.in
+			if c.inMarshal != nil {
+				in = c.inMarshal
+			}
+			assertConvertTest(t, av, in, err, c.err)
 		})
 	}
 }
@@ -591,34 +894,37 @@ func TestEmptyCollectionsSpecialCases(t *testing.T) {
 
 	type SpecialCases struct {
 		PtrString        *string
+		OmittedString    string  `dynamodbav:",omitempty"`
 		OmittedPtrString *string `dynamodbav:",omitempty"`
 	}
 
-	expectedEncode := &types.AttributeValue{
-		M: map[string]types.AttributeValue{
-			"PtrString": {NULL: aws.Bool(true)},
+	expectedEncode := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"PtrString": &types.AttributeValueMemberS{Value: ""},
 		},
 	}
 	expectedDecode := SpecialCases{}
 
 	actualEncode, err := Marshal(&SpecialCases{
 		PtrString:        aws.String(""),
-		OmittedPtrString: aws.String(""),
+		OmittedString:    "",
+		OmittedPtrString: nil,
 	})
 	if err != nil {
 		t.Fatalf("expected no err got %v", err)
 	}
-	if e, a := expectedEncode, actualEncode; !reflect.DeepEqual(e, a) {
-		t.Errorf("expected %v, got %v", e, a)
+	if diff := cmp.Diff(expectedEncode, actualEncode); len(diff) != 0 {
+		t.Errorf("expected encode match\n%s", diff)
 	}
 
 	var actualDecode SpecialCases
-	err = Unmarshal(&types.AttributeValue{}, &actualDecode)
+	var av types.AttributeValue
+	err = Unmarshal(av, &actualDecode)
 	if err != nil {
 		t.Fatalf("expected no err got %v", err)
 	}
-	if e, a := expectedDecode, actualDecode; !reflect.DeepEqual(e, a) {
-		t.Errorf("expected %v, got %v", e, a)
+	if diff := cmp.Diff(expectedDecode, actualDecode); len(diff) != 0 {
+		t.Errorf("expected dencode match\n%s", diff)
 	}
 }
 

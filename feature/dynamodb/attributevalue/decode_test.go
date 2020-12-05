@@ -12,8 +12,8 @@ import (
 )
 
 func TestUnmarshalShared(t *testing.T) {
-	for i, c := range sharedTestCases {
-		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+	for name, c := range sharedTestCases {
+		t.Run(name, func(t *testing.T) {
 			err := Unmarshal(c.in, c.actual)
 			assertConvertTest(t, c.actual, c.expected, err, c.err)
 		})
@@ -22,7 +22,7 @@ func TestUnmarshalShared(t *testing.T) {
 
 func TestUnmarshal(t *testing.T) {
 	cases := []struct {
-		in               *types.AttributeValue
+		in               types.AttributeValue
 		actual, expected interface{}
 		err              error
 	}{
@@ -30,35 +30,35 @@ func TestUnmarshal(t *testing.T) {
 		// Sets
 		//------------
 		{
-			in: &types.AttributeValue{BS: [][]byte{
+			in: &types.AttributeValueMemberBS{Value: [][]byte{
 				{48, 49}, {50, 51},
 			}},
 			actual:   &[][]byte{},
 			expected: [][]byte{{48, 49}, {50, 51}},
 		},
 		{
-			in: &types.AttributeValue{NS: []string{
+			in: &types.AttributeValueMemberNS{Value: []string{
 				"123", "321",
 			}},
 			actual:   &[]int{},
 			expected: []int{123, 321},
 		},
 		{
-			in: &types.AttributeValue{NS: []string{
+			in: &types.AttributeValueMemberNS{Value: []string{
 				"123", "321",
 			}},
 			actual:   &[]interface{}{},
 			expected: []interface{}{123., 321.},
 		},
 		{
-			in: &types.AttributeValue{SS: []string{
+			in: &types.AttributeValueMemberSS{Value: []string{
 				"abc", "123",
 			}},
 			actual:   &[]string{},
 			expected: &[]string{"abc", "123"},
 		},
 		{
-			in: &types.AttributeValue{SS: []string{
+			in: &types.AttributeValueMemberSS{Value: []string{
 				"abc", "123",
 			}},
 			actual:   &[]*string{},
@@ -68,7 +68,7 @@ func TestUnmarshal(t *testing.T) {
 		// Interfaces
 		//------------
 		{
-			in: &types.AttributeValue{B: []byte{48, 49}},
+			in: &types.AttributeValueMemberB{Value: []byte{48, 49}},
 			actual: func() interface{} {
 				var v interface{}
 				return &v
@@ -76,7 +76,7 @@ func TestUnmarshal(t *testing.T) {
 			expected: []byte{48, 49},
 		},
 		{
-			in: &types.AttributeValue{BS: [][]byte{
+			in: &types.AttributeValueMemberBS{Value: [][]byte{
 				{48, 49}, {50, 51},
 			}},
 			actual: func() interface{} {
@@ -86,7 +86,7 @@ func TestUnmarshal(t *testing.T) {
 			expected: [][]byte{{48, 49}, {50, 51}},
 		},
 		{
-			in: &types.AttributeValue{BOOL: aws.Bool(true)},
+			in: &types.AttributeValueMemberBOOL{Value: true},
 			actual: func() interface{} {
 				var v interface{}
 				return &v
@@ -94,8 +94,9 @@ func TestUnmarshal(t *testing.T) {
 			expected: bool(true),
 		},
 		{
-			in: &types.AttributeValue{L: []types.AttributeValue{
-				{S: aws.String("abc")}, {S: aws.String("123")},
+			in: &types.AttributeValueMemberL{Value: []types.AttributeValue{
+				&types.AttributeValueMemberS{Value: "abc"},
+				&types.AttributeValueMemberS{Value: "123"},
 			}},
 			actual: func() interface{} {
 				var v interface{}
@@ -104,9 +105,9 @@ func TestUnmarshal(t *testing.T) {
 			expected: []interface{}{"abc", "123"},
 		},
 		{
-			in: &types.AttributeValue{M: map[string]types.AttributeValue{
-				"123": {S: aws.String("abc")},
-				"abc": {S: aws.String("123")},
+			in: &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{
+				"123": &types.AttributeValueMemberS{Value: "abc"},
+				"abc": &types.AttributeValueMemberS{Value: "123"},
 			}},
 			actual: func() interface{} {
 				var v interface{}
@@ -115,7 +116,7 @@ func TestUnmarshal(t *testing.T) {
 			expected: map[string]interface{}{"123": "abc", "abc": "123"},
 		},
 		{
-			in: &types.AttributeValue{N: aws.String("123")},
+			in: &types.AttributeValueMemberN{Value: "123"},
 			actual: func() interface{} {
 				var v interface{}
 				return &v
@@ -123,7 +124,7 @@ func TestUnmarshal(t *testing.T) {
 			expected: float64(123),
 		},
 		{
-			in: &types.AttributeValue{NS: []string{
+			in: &types.AttributeValueMemberNS{Value: []string{
 				"123", "321",
 			}},
 			actual: func() interface{} {
@@ -133,7 +134,7 @@ func TestUnmarshal(t *testing.T) {
 			expected: []float64{123., 321.},
 		},
 		{
-			in: &types.AttributeValue{S: aws.String("123")},
+			in: &types.AttributeValueMemberS{Value: "123"},
 			actual: func() interface{} {
 				var v interface{}
 				return &v
@@ -141,7 +142,31 @@ func TestUnmarshal(t *testing.T) {
 			expected: "123",
 		},
 		{
-			in: &types.AttributeValue{SS: []string{
+			in: &types.AttributeValueMemberNULL{Value: true},
+			actual: func() interface{} {
+				var v string
+				return &v
+			}(),
+			expected: "",
+		},
+		{
+			in: &types.AttributeValueMemberNULL{Value: true},
+			actual: func() interface{} {
+				v := new(string)
+				return &v
+			}(),
+			expected: nil,
+		},
+		{
+			in: &types.AttributeValueMemberS{Value: ""},
+			actual: func() interface{} {
+				v := new(string)
+				return &v
+			}(),
+			expected: aws.String(""),
+		},
+		{
+			in: &types.AttributeValueMemberSS{Value: []string{
 				"123", "321",
 			}},
 			actual: func() interface{} {
@@ -151,15 +176,15 @@ func TestUnmarshal(t *testing.T) {
 			expected: []string{"123", "321"},
 		},
 		{
-			in: &types.AttributeValue{M: map[string]types.AttributeValue{
-				"abc": {S: aws.String("123")},
-				"Cba": {S: aws.String("321")},
+			in: &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{
+				"abc": &types.AttributeValueMemberS{Value: "123"},
+				"Cba": &types.AttributeValueMemberS{Value: "321"},
 			}},
 			actual:   &struct{ Abc, Cba string }{},
 			expected: struct{ Abc, Cba string }{Abc: "123", Cba: "321"},
 		},
 		{
-			in:     &types.AttributeValue{N: aws.String("512")},
+			in:     &types.AttributeValueMemberN{Value: "512"},
 			actual: new(uint8),
 			err: &UnmarshalTypeError{
 				Value: fmt.Sprintf("number overflow, 512"),
@@ -179,28 +204,29 @@ func TestUnmarshal(t *testing.T) {
 func TestInterfaceInput(t *testing.T) {
 	var v interface{}
 	expected := []interface{}{"abc", "123"}
-	err := Unmarshal(&types.AttributeValue{L: []types.AttributeValue{
-		{S: aws.String("abc")}, {S: aws.String("123")},
+	err := Unmarshal(&types.AttributeValueMemberL{Value: []types.AttributeValue{
+		&types.AttributeValueMemberS{Value: "abc"},
+		&types.AttributeValueMemberS{Value: "123"},
 	}}, &v)
 	assertConvertTest(t, v, expected, err, nil)
 }
 
 func TestUnmarshalError(t *testing.T) {
-	cases := []struct {
-		in               *types.AttributeValue
+	cases := map[string]struct {
+		in               types.AttributeValue
 		actual, expected interface{}
 		err              error
 	}{
-		{
-			in:       &types.AttributeValue{},
+		"invalid unmarshal": {
+			in:       nil,
 			actual:   int(0),
 			expected: nil,
 			err:      &InvalidUnmarshalError{Type: reflect.TypeOf(int(0))},
 		},
 	}
 
-	for i, c := range cases {
-		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
 			err := Unmarshal(c.in, c.actual)
 			assertConvertTest(t, c.actual, c.expected, err, c.err)
 		})
@@ -208,8 +234,8 @@ func TestUnmarshalError(t *testing.T) {
 }
 
 func TestUnmarshalListShared(t *testing.T) {
-	for i, c := range sharedListTestCases {
-		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+	for name, c := range sharedListTestCases {
+		t.Run(name, func(t *testing.T) {
 			err := UnmarshalList(c.in, c.actual)
 			assertConvertTest(t, c.actual, c.expected, err, c.err)
 		})
@@ -217,12 +243,12 @@ func TestUnmarshalListShared(t *testing.T) {
 }
 
 func TestUnmarshalListError(t *testing.T) {
-	cases := []struct {
+	cases := map[string]struct {
 		in               []types.AttributeValue
 		actual, expected interface{}
 		err              error
 	}{
-		{
+		"invalid unmarshal": {
 			in:       []types.AttributeValue{},
 			actual:   []interface{}{},
 			expected: nil,
@@ -230,8 +256,8 @@ func TestUnmarshalListError(t *testing.T) {
 		},
 	}
 
-	for i, c := range cases {
-		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
 			err := UnmarshalList(c.in, c.actual)
 			assertConvertTest(t, c.actual, c.expected, err, c.err)
 		})
@@ -239,8 +265,8 @@ func TestUnmarshalListError(t *testing.T) {
 }
 
 func TestUnmarshalMapShared(t *testing.T) {
-	for i, c := range sharedMapTestCases {
-		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+	for name, c := range sharedMapTestCases {
+		t.Run(name, func(t *testing.T) {
 			err := UnmarshalMap(c.in, c.actual)
 			assertConvertTest(t, c.actual, c.expected, err, c.err)
 		})
@@ -261,7 +287,7 @@ func TestUnmarshalMapError(t *testing.T) {
 		},
 		{
 			in: map[string]types.AttributeValue{
-				"BOOL": {BOOL: aws.Bool(true)},
+				"BOOL": &types.AttributeValueMemberBOOL{Value: true},
 			},
 			actual:   &map[int]interface{}{},
 			expected: nil,
@@ -283,17 +309,15 @@ func TestUnmarshalListOfMaps(t *testing.T) {
 		Value2 int
 	}
 
-	cases := []struct {
+	cases := map[string]struct {
 		in               []map[string]types.AttributeValue
 		actual, expected interface{}
 		err              error
 	}{
-		{ // Simple map conversion.
+		"simple map conversion": {
 			in: []map[string]types.AttributeValue{
 				{
-					"Value": types.AttributeValue{
-						BOOL: aws.Bool(true),
-					},
+					"Value": &types.AttributeValueMemberBOOL{Value: true},
 				},
 			},
 			actual: &[]map[string]interface{}{},
@@ -303,15 +327,11 @@ func TestUnmarshalListOfMaps(t *testing.T) {
 				},
 			},
 		},
-		{ // attribute to struct.
+		"attribute to struct": {
 			in: []map[string]types.AttributeValue{
 				{
-					"Value": types.AttributeValue{
-						S: aws.String("abc"),
-					},
-					"Value2": types.AttributeValue{
-						N: aws.String("123"),
-					},
+					"Value":  &types.AttributeValueMemberS{Value: "abc"},
+					"Value2": &types.AttributeValueMemberN{Value: "123"},
 				},
 			},
 			actual: &[]testItem{},
@@ -324,8 +344,8 @@ func TestUnmarshalListOfMaps(t *testing.T) {
 		},
 	}
 
-	for i, c := range cases {
-		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
 			err := UnmarshalListOfMaps(c.in, c.actual)
 			assertConvertTest(t, c.actual, c.expected, err, c.err)
 		})
@@ -339,45 +359,46 @@ type unmarshalUnmarshaler struct {
 	Value4 time.Time
 }
 
-func (u *unmarshalUnmarshaler) UnmarshalDynamoDBAttributeValue(av *types.AttributeValue) error {
-	if av.M == nil {
+func (u *unmarshalUnmarshaler) UnmarshalDynamoDBAttributeValue(av types.AttributeValue) error {
+	m, ok := av.(*types.AttributeValueMemberM)
+	if !ok || m == nil {
 		return fmt.Errorf("expected AttributeValue to be map")
 	}
 
-	if v, ok := av.M["abc"]; !ok {
+	if v, ok := m.Value["abc"]; !ok {
 		return fmt.Errorf("expected `abc` map key")
-	} else if v.S == nil {
+	} else if vv, kk := v.(*types.AttributeValueMemberS); !kk || vv == nil {
 		return fmt.Errorf("expected `abc` map value string")
 	} else {
-		u.Value = *v.S
+		u.Value = vv.Value
 	}
 
-	if v, ok := av.M["def"]; !ok {
+	if v, ok := m.Value["def"]; !ok {
 		return fmt.Errorf("expected `def` map key")
-	} else if v.N == nil {
+	} else if vv, kk := v.(*types.AttributeValueMemberN); !kk || vv == nil {
 		return fmt.Errorf("expected `def` map value number")
 	} else {
-		n, err := strconv.ParseInt(*v.N, 10, 64)
+		n, err := strconv.ParseInt(vv.Value, 10, 64)
 		if err != nil {
 			return err
 		}
 		u.Value2 = int(n)
 	}
 
-	if v, ok := av.M["ghi"]; !ok {
+	if v, ok := m.Value["ghi"]; !ok {
 		return fmt.Errorf("expected `ghi` map key")
-	} else if v.BOOL == nil {
+	} else if vv, kk := v.(*types.AttributeValueMemberBOOL); !kk || vv == nil {
 		return fmt.Errorf("expected `ghi` map value number")
 	} else {
-		u.Value3 = *v.BOOL
+		u.Value3 = vv.Value
 	}
 
-	if v, ok := av.M["jkl"]; !ok {
+	if v, ok := m.Value["jkl"]; !ok {
 		return fmt.Errorf("expected `jkl` map key")
-	} else if v.S == nil {
+	} else if vv, kk := v.(*types.AttributeValueMemberS); !kk || vv == nil {
 		return fmt.Errorf("expected `jkl` map value string")
 	} else {
-		t, err := time.Parse(time.RFC3339, *v.S)
+		t, err := time.Parse(time.RFC3339, vv.Value)
 		if err != nil {
 			return err
 		}
@@ -389,12 +410,12 @@ func (u *unmarshalUnmarshaler) UnmarshalDynamoDBAttributeValue(av *types.Attribu
 
 func TestUnmarshalUnmashaler(t *testing.T) {
 	u := &unmarshalUnmarshaler{}
-	av := &types.AttributeValue{
-		M: map[string]types.AttributeValue{
-			"abc": {S: aws.String("value")},
-			"def": {N: aws.String("123")},
-			"ghi": {BOOL: aws.Bool(true)},
-			"jkl": {S: aws.String("2016-05-03T17:06:26.209072Z")},
+	av := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"abc": &types.AttributeValueMemberS{Value: "value"},
+			"def": &types.AttributeValueMemberN{Value: "123"},
+			"ghi": &types.AttributeValueMemberBOOL{Value: true},
+			"jkl": &types.AttributeValueMemberS{Value: "2016-05-03T17:06:26.209072Z"},
 		},
 	}
 
@@ -419,16 +440,16 @@ func TestUnmarshalUnmashaler(t *testing.T) {
 
 func TestDecodeUseNumber(t *testing.T) {
 	u := map[string]interface{}{}
-	av := &types.AttributeValue{
-		M: map[string]types.AttributeValue{
-			"abc": {S: aws.String("value")},
-			"def": {N: aws.String("123")},
-			"ghi": {BOOL: aws.Bool(true)},
+	av := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"abc": &types.AttributeValueMemberS{Value: "value"},
+			"def": &types.AttributeValueMemberN{Value: "123"},
+			"ghi": &types.AttributeValueMemberBOOL{Value: true},
 		},
 	}
 
-	decoder := NewDecoder(func(d *Decoder) {
-		d.UseNumber = true
+	decoder := NewDecoder(func(o *DecoderOptions) {
+		o.UseNumber = true
 	})
 	err := decoder.Decode(av, &u)
 	if err != nil {
@@ -449,18 +470,18 @@ func TestDecodeUseNumber(t *testing.T) {
 
 func TestDecodeUseNumberNumberSet(t *testing.T) {
 	u := map[string]interface{}{}
-	av := &types.AttributeValue{
-		M: map[string]types.AttributeValue{
-			"ns": {
-				NS: []string{
+	av := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"ns": &types.AttributeValueMemberNS{
+				Value: []string{
 					"123", "321",
 				},
 			},
 		},
 	}
 
-	decoder := NewDecoder(func(d *Decoder) {
-		d.UseNumber = true
+	decoder := NewDecoder(func(o *DecoderOptions) {
+		o.UseNumber = true
 	})
 	err := decoder.Decode(av, &u)
 	if err != nil {
@@ -489,14 +510,10 @@ func TestDecodeEmbeddedPointerStruct(t *testing.T) {
 		*B
 		*C
 	}
-	av := &types.AttributeValue{
-		M: map[string]types.AttributeValue{
-			"Aint": {
-				N: aws.String("321"),
-			},
-			"Bint": {
-				N: aws.String("123"),
-			},
+	av := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"Aint": &types.AttributeValueMemberN{Value: "321"},
+			"Bint": &types.AttributeValueMemberN{Value: "123"},
 		},
 	}
 	decoder := NewDecoder()
@@ -521,9 +538,7 @@ func TestDecodeEmbeddedPointerStruct(t *testing.T) {
 func TestDecodeBooleanOverlay(t *testing.T) {
 	type BooleanOverlay bool
 
-	av := &types.AttributeValue{
-		BOOL: aws.Bool(true),
-	}
+	av := &types.AttributeValueMemberBOOL{Value: true}
 
 	decoder := NewDecoder()
 
@@ -551,17 +566,11 @@ func TestDecodeUnixTime(t *testing.T) {
 		Typed:  UnixTime(time.Unix(789, 0)),
 	}
 
-	input := &types.AttributeValue{
-		M: map[string]types.AttributeValue{
-			"Normal": {
-				S: aws.String("1970-01-01T00:02:03Z"),
-			},
-			"Tagged": {
-				N: aws.String("456"),
-			},
-			"Typed": {
-				N: aws.String("789"),
-			},
+	input := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"Normal": &types.AttributeValueMemberS{Value: "1970-01-01T00:02:03Z"},
+			"Tagged": &types.AttributeValueMemberN{Value: "456"},
+			"Typed":  &types.AttributeValueMemberN{Value: "789"},
 		},
 	}
 	actual := A{}
@@ -586,14 +595,10 @@ func TestDecodeAliasedUnixTime(t *testing.T) {
 		Tagged: AliasedTime(time.Unix(456, 0)),
 	}
 
-	input := &types.AttributeValue{
-		M: map[string]types.AttributeValue{
-			"Normal": {
-				S: aws.String("1970-01-01T00:02:03Z"),
-			},
-			"Tagged": {
-				N: aws.String("456"),
-			},
+	input := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"Normal": &types.AttributeValueMemberS{Value: "1970-01-01T00:02:03Z"},
+			"Tagged": &types.AttributeValueMemberN{Value: "456"},
 		},
 	}
 	actual := A{}

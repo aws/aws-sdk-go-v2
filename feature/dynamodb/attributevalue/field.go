@@ -51,7 +51,17 @@ func buildField(pIdx []int, i int, sf reflect.StructField, fieldTag tag) field {
 	return f
 }
 
-func unionStructFields(t reflect.Type, opts MarshalOptions) []field {
+type structFieldOptions struct {
+	// Support other custom struct tag keys, such as `yaml`, `json`, or `toml`.
+	// Note that values provided with a custom TagKey must also be supported
+	// by the (un)marshalers in this package.
+	//
+	// Tag key `dynamodbav` will always be read, but if custom tag key
+	// conflicts with `dynamodbav` the custom tag key value will be used.
+	TagKey string
+}
+
+func unionStructFields(t reflect.Type, opts structFieldOptions) []field {
 	fields := enumFields(t, opts)
 
 	sort.Sort(fieldsByName(fields))
@@ -66,7 +76,7 @@ func unionStructFields(t reflect.Type, opts MarshalOptions) []field {
 //
 // Based on the enoding/json struct field enumeration of the Go Stdlib
 // https://golang.org/src/encoding/json/encode.go typeField func.
-func enumFields(t reflect.Type, opts MarshalOptions) []field {
+func enumFields(t reflect.Type, opts structFieldOptions) []field {
 	// Fields to explore
 	current := []field{}
 	next := []field{{Type: t}}
@@ -99,12 +109,9 @@ func enumFields(t reflect.Type, opts MarshalOptions) []field {
 
 				fieldTag := tag{}
 				fieldTag.parseAVTag(sf.Tag)
-				// Because MarshalOptions.TagKey must be explicitly set, use it
-				// over JSON, which is enabled by default.
+				// Because TagKey must be explicitly set.
 				if opts.TagKey != "" && fieldTag == (tag{}) {
 					fieldTag.parseStructTag(opts.TagKey, sf.Tag)
-				} else if opts.SupportJSONTags && fieldTag == (tag{}) {
-					fieldTag.parseStructTag("json", sf.Tag)
 				}
 
 				if fieldTag.Ignore {

@@ -1,19 +1,32 @@
 // Package attributevalue provides marshaling and unmarshaling utilities to
-// convert between Go types and types.AttributeValues.
+// convert between Go types and Amazon DynamoDB AttributeValues.
 //
-// These utilities allow you to marshal slices, maps, structs, and scalar values
-// to and from types.AttributeValue. These are useful when marshaling
-// Go value tyes to types.AttributeValue for DynamoDB requests, or
-// unmarshaling the types.AttributeValue back into a Go value type.
+// These utilities allow you to marshal slices, maps, structs, and scalar
+// values to and from AttributeValue type. These utilities make it
+// easier to convert between AttributeValue and Go types when working with
+// DynamoDB resources.
+//
+// This package only converts between Go types and DynamoDB AttributeValue. See
+// the feature/dynamodbstreams/attributevalue package for converting to
+// DynamoDBStreams AttributeValue types.
+//
+// Converting AttributeValue between DynamoDB and DynamoDBStreams
+//
+// The FromDynamoStreamsDBMap, FromDynamoStreamsDBList, and FromDynamoDBStreams
+// functions provide the conversion utilities to convert a DynamoDBStreams
+// AttributeValue type to a DynamoDB AttributeValue type. Use these utilities
+// when you need to convert the AttributeValue type between the two APIs.
 //
 // AttributeValue Marshaling
 //
-// To marshal a Go type to a AttributeValue you can use the Marshal
-// functions in the attributevalue package. There are specialized versions
-// of these functions for collections of Attributevalue, such as maps and lists.
+// To marshal a Go type to an AttributeValue you can use the Marshal,
+// MarshalList, and MarshalMap functions. The List and Map functions are
+// specialized versions of the Marshal for serializing slices and maps of
+// Attributevalues.
 //
-// The following example uses MarshalMap to convert the Record Go type to a
-// types.AttributeValue type and use the value to make a PutItem API request.
+// The following example uses MarshalMap to convert a Go struct, Record to a
+// AttributeValue. The AttributeValue value is then used as input to the
+// PutItem operation call.
 //
 //     type Record struct {
 //         ID     string
@@ -31,26 +44,27 @@
 //     }
 //     av, err := attributevalue.MarshalMap(r)
 //     if err != nil {
-//         panic(fmt.Sprintf("failed to DynamoDB marshal Record, %v", err))
+//         return fmt.Errorf("failed to marshal Record, %w", err)
 //     }
 //
-//     _, err = svc.PutItem(&dynamodb.PutItemInput{
+//     _, err = client.PutItem(context.TODO(), &dynamodb.PutItemInput{
 //         TableName: aws.String(myTableName),
 //         Item:      av,
 //     })
 //     if err != nil {
-//         panic(fmt.Sprintf("failed to put Record to DynamoDB, %v", err))
+//         return fmt.Errorf("failed to put Record, %w", err)
 //     }
 //
 // AttributeValue Unmarshaling
 //
-// To unmarshal a types.AttributeValue to a Go type you can use the Unmarshal
-// functions in the attributevalue package. There are specialized versions
-// of these functions for collections of Attributevalue, such as maps and lists.
+// To unmarshal an AttributeValue to a Go type you can use the Unmarshal,
+// UnmarshalList, UnmarshalMap, and UnmarshalListOfMaps functions. The List and
+// Map functions are specialized versions of the Unmarshal function for
+// unmarshal slices and maps of Attributevalues.
 //
-// The following example will unmarshal the DynamoDB's Scan API operation. The
-// Items returned by the operation will be unmarshaled into the slice of Records
-// Go type.
+// The following example will unmarshal Items result from the DynamoDB's
+// Scan API operation. The Items returned will be unmarshaled into the slice of
+// the Records struct.
 //
 //     type Record struct {
 //         ID     string
@@ -59,37 +73,25 @@
 //
 //     //...
 //
-//     var records []Record
-//
-//     // Use the ScanPages method to perform the scan with pagination. Use
-//     // just Scan method to make the API call without pagination.
-//     err := svc.ScanPages(&dynamodb.ScanInput{
+//     result, err := client.Scan(context.Context(), &dynamodb.ScanInput{
 //         TableName: aws.String(myTableName),
-//     }, func(page *dynamodb.ScanOutput, last bool) bool {
-//         recs := []Record{}
-//
-//         err := attributevalue.UnmarshalListOfMaps(page.Items, &recs)
-//         if err != nil {
-//              panic(fmt.Sprintf("failed to unmarshal Dynamodb Scan Items, %v", err))
-//         }
-//
-//         records = append(records, recs...)
-//
-//         return true // keep paging
 //     })
+//     if err != nil {
+//         return fmt.Errorf("failed to scan  table, %w", err)
+//     }
 //
-// The ConvertTo, ConvertToList, ConvertToMap, ConvertFrom, ConvertFromMap
-// and ConvertFromList methods have been deprecated. The Marshal and Unmarshal
-// functions should be used instead. The ConvertTo|From marshallers do not
-// support BinarySet, NumberSet, nor StringSets, and will incorrect marshal
-// binary data fields in structs as base64 strings.
+//     var records []Record
+//     err := attributevalue.UnmarshalListOfMaps(results.Items, &records)
+//     if err != nil {
+//          return fmt.Errorf("failed to unmarshal Items, %w", err))
+//     }
 //
-// The Marshal and Unmarshal functions correct this behavior, and removes
-// the reliance on encoding.json. `json` struct tags are still supported. In
-// addition support for a new struct tag `dynamodbav` was added. Support for
-// the json.Marshaler and json.Unmarshaler interfaces have been removed and
-// replaced with have been replaced with attributevalue.Marshaler and
-// attributevalue.Unmarshaler interfaces.
+// Struct tags
 //
-// `time.Time` is marshaled as `time.RFC3339Nano` format.
+// The AttributeValue Marshal and Unmarshal functions support the `dynamodbav`
+// struct tag by default. Additional tags can be enabled with the
+// EncoderOptions and DecoderOptions, TagKey option.
+//
+// See the Marshal and Unmarshal function for information on how struct tags
+// and fields are marshaled and unmarshaled.
 package attributevalue

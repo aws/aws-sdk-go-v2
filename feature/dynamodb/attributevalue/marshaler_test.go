@@ -5,20 +5,20 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	"github.com/google/go-cmp/cmp"
 )
 
 type simpleMarshalStruct struct {
-	Byte    []byte
-	String  string
-	Int     int
-	Uint    uint
-	Float32 float32
-	Float64 float64
-	Bool    bool
-	Null    *interface{}
+	Byte      []byte
+	String    string
+	PtrString *string
+	Int       int
+	Uint      uint
+	Float32   float32
+	Float64   float64
+	Bool      bool
+	Null      *interface{}
 }
 
 type complexMarshalStruct struct {
@@ -42,210 +42,209 @@ type marshallerTestInput struct {
 var trueValue = true
 var falseValue = false
 
-var marshalerScalarInputs = []marshallerTestInput{
-	{
+var marshalerScalarInputs = map[string]marshallerTestInput{
+	"nil": {
 		input:    nil,
-		expected: &types.AttributeValue{NULL: &trueValue},
+		expected: &types.AttributeValueMemberNULL{Value: true},
 	},
-	{
+	"string": {
 		input:    "some string",
-		expected: &types.AttributeValue{S: aws.String("some string")},
+		expected: &types.AttributeValueMemberS{Value: "some string"},
 	},
-	{
+	"bool": {
 		input:    true,
-		expected: &types.AttributeValue{BOOL: &trueValue},
+		expected: &types.AttributeValueMemberBOOL{Value: true},
 	},
-	{
+	"bool false": {
 		input:    false,
-		expected: &types.AttributeValue{BOOL: &falseValue},
+		expected: &types.AttributeValueMemberBOOL{Value: false},
 	},
-	{
+	"float": {
 		input:    3.14,
-		expected: &types.AttributeValue{N: aws.String("3.14")},
+		expected: &types.AttributeValueMemberN{Value: "3.14"},
 	},
-	{
+	"max float32": {
 		input:    math.MaxFloat32,
-		expected: &types.AttributeValue{N: aws.String("340282346638528860000000000000000000000")},
+		expected: &types.AttributeValueMemberN{Value: "340282346638528860000000000000000000000"},
 	},
-	{
+	"max float64": {
 		input:    math.MaxFloat64,
-		expected: &types.AttributeValue{N: aws.String("179769313486231570000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000")},
+		expected: &types.AttributeValueMemberN{Value: "179769313486231570000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"},
 	},
-	{
+	"integer": {
 		input:    12,
-		expected: &types.AttributeValue{N: aws.String("12")},
+		expected: &types.AttributeValueMemberN{Value: "12"},
 	},
-	{
+	"number integer": {
 		input:    Number("12"),
-		expected: &types.AttributeValue{N: aws.String("12")},
+		expected: &types.AttributeValueMemberN{Value: "12"},
 	},
-	{
+	"zero values": {
 		input: simpleMarshalStruct{},
-		expected: &types.AttributeValue{
-			M: map[string]types.AttributeValue{
-				"Byte":    {NULL: &trueValue},
-				"Bool":    {BOOL: &falseValue},
-				"Float32": {N: aws.String("0")},
-				"Float64": {N: aws.String("0")},
-				"Int":     {N: aws.String("0")},
-				"Null":    {NULL: &trueValue},
-				"String":  {NULL: &trueValue},
-				"Uint":    {N: aws.String("0")},
+		expected: &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"Byte":      &types.AttributeValueMemberNULL{Value: true},
+				"Bool":      &types.AttributeValueMemberBOOL{Value: false},
+				"Float32":   &types.AttributeValueMemberN{Value: "0"},
+				"Float64":   &types.AttributeValueMemberN{Value: "0"},
+				"Int":       &types.AttributeValueMemberN{Value: "0"},
+				"Null":      &types.AttributeValueMemberNULL{Value: true},
+				"String":    &types.AttributeValueMemberS{Value: ""},
+				"PtrString": &types.AttributeValueMemberNULL{Value: true},
+				"Uint":      &types.AttributeValueMemberN{Value: "0"},
 			},
 		},
 	},
 }
 
-var marshallerMapTestInputs = []marshallerTestInput{
+var marshallerMapTestInputs = map[string]marshallerTestInput{
 	// Scalar tests
-	{
+	"nil": {
 		input:    nil,
 		expected: map[string]types.AttributeValue{},
 	},
-	{
+	"string": {
 		input:    map[string]interface{}{"string": "some string"},
-		expected: map[string]types.AttributeValue{"string": {S: aws.String("some string")}},
+		expected: map[string]types.AttributeValue{"string": &types.AttributeValueMemberS{Value: "some string"}},
 	},
-	{
+	"bool": {
 		input:    map[string]interface{}{"bool": true},
-		expected: map[string]types.AttributeValue{"bool": {BOOL: &trueValue}},
+		expected: map[string]types.AttributeValue{"bool": &types.AttributeValueMemberBOOL{Value: true}},
 	},
-	{
+	"bool false": {
 		input:    map[string]interface{}{"bool": false},
-		expected: map[string]types.AttributeValue{"bool": {BOOL: &falseValue}},
+		expected: map[string]types.AttributeValue{"bool": &types.AttributeValueMemberBOOL{Value: false}},
 	},
-	{
+	"null": {
 		input:    map[string]interface{}{"null": nil},
-		expected: map[string]types.AttributeValue{"null": {NULL: &trueValue}},
+		expected: map[string]types.AttributeValue{"null": &types.AttributeValueMemberNULL{Value: true}},
 	},
-	{
+	"float": {
 		input:    map[string]interface{}{"float": 3.14},
-		expected: map[string]types.AttributeValue{"float": {N: aws.String("3.14")}},
+		expected: map[string]types.AttributeValue{"float": &types.AttributeValueMemberN{Value: "3.14"}},
 	},
-	{
+	"float32": {
 		input:    map[string]interface{}{"float": math.MaxFloat32},
-		expected: map[string]types.AttributeValue{"float": {N: aws.String("340282346638528860000000000000000000000")}},
+		expected: map[string]types.AttributeValue{"float": &types.AttributeValueMemberN{Value: "340282346638528860000000000000000000000"}},
 	},
-	{
+	"float64": {
 		input:    map[string]interface{}{"float": math.MaxFloat64},
-		expected: map[string]types.AttributeValue{"float": {N: aws.String("179769313486231570000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000")}},
+		expected: map[string]types.AttributeValue{"float": &types.AttributeValueMemberN{Value: "179769313486231570000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"}},
 	},
-	{
+	"decimal number": {
 		input:    map[string]interface{}{"num": 12.},
-		expected: map[string]types.AttributeValue{"num": {N: aws.String("12")}},
+		expected: map[string]types.AttributeValue{"num": &types.AttributeValueMemberN{Value: "12"}},
 	},
-	{
+	"byte": {
 		input:    map[string]interface{}{"byte": []byte{48, 49}},
-		expected: map[string]types.AttributeValue{"byte": {B: []byte{48, 49}}},
+		expected: map[string]types.AttributeValue{"byte": &types.AttributeValueMemberB{Value: []byte{48, 49}}},
 	},
-	{
+	"nested blob": {
 		input:    struct{ Byte []byte }{Byte: []byte{48, 49}},
-		expected: map[string]types.AttributeValue{"Byte": {B: []byte{48, 49}}},
+		expected: map[string]types.AttributeValue{"Byte": &types.AttributeValueMemberB{Value: []byte{48, 49}}},
 	},
-	{
+	"map nested blob": {
 		input:    map[string]interface{}{"byte_set": [][]byte{{48, 49}, {50, 51}}},
-		expected: map[string]types.AttributeValue{"byte_set": {BS: [][]byte{{48, 49}, {50, 51}}}},
+		expected: map[string]types.AttributeValue{"byte_set": &types.AttributeValueMemberBS{Value: [][]byte{{48, 49}, {50, 51}}}},
 	},
-	{
+	"bytes set": {
 		input:    struct{ ByteSet [][]byte }{ByteSet: [][]byte{{48, 49}, {50, 51}}},
-		expected: map[string]types.AttributeValue{"ByteSet": {BS: [][]byte{{48, 49}, {50, 51}}}},
+		expected: map[string]types.AttributeValue{"ByteSet": &types.AttributeValueMemberBS{Value: [][]byte{{48, 49}, {50, 51}}}},
 	},
-	// List
-	{
+	"list": {
 		input: map[string]interface{}{"list": []interface{}{"a string", 12., 3.14, true, nil, false}},
 		expected: map[string]types.AttributeValue{
-			"list": {
-				L: []types.AttributeValue{
-					{S: aws.String("a string")},
-					{N: aws.String("12")},
-					{N: aws.String("3.14")},
-					{BOOL: &trueValue},
-					{NULL: &trueValue},
-					{BOOL: &falseValue},
+			"list": &types.AttributeValueMemberL{
+				Value: []types.AttributeValue{
+					&types.AttributeValueMemberS{Value: "a string"},
+					&types.AttributeValueMemberN{Value: "12"},
+					&types.AttributeValueMemberN{Value: "3.14"},
+					&types.AttributeValueMemberBOOL{Value: true},
+					&types.AttributeValueMemberNULL{Value: true},
+					&types.AttributeValueMemberBOOL{Value: false},
 				},
 			},
 		},
 	},
-	// Map
-	{
+	"map": {
 		input: map[string]interface{}{"map": map[string]interface{}{"nestednum": 12.}},
 		expected: map[string]types.AttributeValue{
-			"map": {
-				M: map[string]types.AttributeValue{
-					"nestednum": {
-						N: aws.String("12"),
-					},
+			"map": &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"nestednum": &types.AttributeValueMemberN{Value: "12"},
 				},
 			},
 		},
 	},
-	// Structs
-	{
+	"struct": {
 		input: simpleMarshalStruct{},
 		expected: map[string]types.AttributeValue{
-			"Byte":    {NULL: &trueValue},
-			"Bool":    {BOOL: &falseValue},
-			"Float32": {N: aws.String("0")},
-			"Float64": {N: aws.String("0")},
-			"Int":     {N: aws.String("0")},
-			"Null":    {NULL: &trueValue},
-			"String":  {NULL: &trueValue},
-			"Uint":    {N: aws.String("0")},
+			"Byte":      &types.AttributeValueMemberNULL{Value: true},
+			"Bool":      &types.AttributeValueMemberBOOL{Value: false},
+			"Float32":   &types.AttributeValueMemberN{Value: "0"},
+			"Float64":   &types.AttributeValueMemberN{Value: "0"},
+			"Int":       &types.AttributeValueMemberN{Value: "0"},
+			"Null":      &types.AttributeValueMemberNULL{Value: true},
+			"String":    &types.AttributeValueMemberS{Value: ""},
+			"PtrString": &types.AttributeValueMemberNULL{Value: true},
+			"Uint":      &types.AttributeValueMemberN{Value: "0"},
 		},
 	},
-	{
+	"nested struct": {
 		input: complexMarshalStruct{},
 		expected: map[string]types.AttributeValue{
-			"Simple": {NULL: &trueValue},
+			"Simple": &types.AttributeValueMemberNULL{Value: true},
 		},
 	},
-	{
+	"nested nil slice": {
 		input: struct {
-			Simple []string `json:"simple"`
+			Simple []string `dynamodbav:"simple"`
 		}{},
 		expected: map[string]types.AttributeValue{
-			"simple": {NULL: &trueValue},
+			"simple": &types.AttributeValueMemberNULL{Value: true},
 		},
 	},
-	{
+	"nested nil slice omit empty": {
 		input: struct {
-			Simple []string `json:"simple,omitempty"`
+			Simple []string `dynamodbav:"simple,omitempty"`
 		}{},
 		expected: map[string]types.AttributeValue{},
 	},
-	{
+	"nested ignored field": {
 		input: struct {
-			Simple []string `json:"-"`
+			Simple []string `dynamodbav:"-"`
 		}{},
 		expected: map[string]types.AttributeValue{},
 	},
-	{
+	"complex struct members with zero": {
 		input: complexMarshalStruct{Simple: []simpleMarshalStruct{{Int: -2}, {Uint: 5}}},
 		expected: map[string]types.AttributeValue{
-			"Simple": {
-				L: []types.AttributeValue{
-					{
-						M: map[string]types.AttributeValue{
-							"Byte":    {NULL: &trueValue},
-							"Bool":    {BOOL: &falseValue},
-							"Float32": {N: aws.String("0")},
-							"Float64": {N: aws.String("0")},
-							"Int":     {N: aws.String("-2")},
-							"Null":    {NULL: &trueValue},
-							"String":  {NULL: &trueValue},
-							"Uint":    {N: aws.String("0")},
+			"Simple": &types.AttributeValueMemberL{
+				Value: []types.AttributeValue{
+					&types.AttributeValueMemberM{
+						Value: map[string]types.AttributeValue{
+							"Byte":      &types.AttributeValueMemberNULL{Value: true},
+							"Bool":      &types.AttributeValueMemberBOOL{Value: false},
+							"Float32":   &types.AttributeValueMemberN{Value: "0"},
+							"Float64":   &types.AttributeValueMemberN{Value: "0"},
+							"Int":       &types.AttributeValueMemberN{Value: "-2"},
+							"Null":      &types.AttributeValueMemberNULL{Value: true},
+							"String":    &types.AttributeValueMemberS{Value: ""},
+							"PtrString": &types.AttributeValueMemberNULL{Value: true},
+							"Uint":      &types.AttributeValueMemberN{Value: "0"},
 						},
 					},
-					{
-						M: map[string]types.AttributeValue{
-							"Byte":    {NULL: &trueValue},
-							"Bool":    {BOOL: &falseValue},
-							"Float32": {N: aws.String("0")},
-							"Float64": {N: aws.String("0")},
-							"Int":     {N: aws.String("0")},
-							"Null":    {NULL: &trueValue},
-							"String":  {NULL: &trueValue},
-							"Uint":    {N: aws.String("5")},
+					&types.AttributeValueMemberM{
+						Value: map[string]types.AttributeValue{
+							"Byte":      &types.AttributeValueMemberNULL{Value: true},
+							"Bool":      &types.AttributeValueMemberBOOL{Value: false},
+							"Float32":   &types.AttributeValueMemberN{Value: "0"},
+							"Float64":   &types.AttributeValueMemberN{Value: "0"},
+							"Int":       &types.AttributeValueMemberN{Value: "0"},
+							"Null":      &types.AttributeValueMemberNULL{Value: true},
+							"String":    &types.AttributeValueMemberS{Value: ""},
+							"PtrString": &types.AttributeValueMemberNULL{Value: true},
+							"Uint":      &types.AttributeValueMemberN{Value: "5"},
 						},
 					},
 				},
@@ -254,43 +253,44 @@ var marshallerMapTestInputs = []marshallerTestInput{
 	},
 }
 
-var marshallerListTestInputs = []marshallerTestInput{
-	{
+var marshallerListTestInputs = map[string]marshallerTestInput{
+	"nil": {
 		input:    nil,
 		expected: []types.AttributeValue{},
 	},
-	{
+	"empty interface": {
 		input:    []interface{}{},
 		expected: []types.AttributeValue{},
 	},
-	{
+	"empty struct": {
 		input:    []simpleMarshalStruct{},
 		expected: []types.AttributeValue{},
 	},
-	{
+	"various types": {
 		input: []interface{}{"a string", 12., 3.14, true, nil, false},
 		expected: []types.AttributeValue{
-			{S: aws.String("a string")},
-			{N: aws.String("12")},
-			{N: aws.String("3.14")},
-			{BOOL: &trueValue},
-			{NULL: &trueValue},
-			{BOOL: &falseValue},
+			&types.AttributeValueMemberS{Value: "a string"},
+			&types.AttributeValueMemberN{Value: "12"},
+			&types.AttributeValueMemberN{Value: "3.14"},
+			&types.AttributeValueMemberBOOL{Value: true},
+			&types.AttributeValueMemberNULL{Value: true},
+			&types.AttributeValueMemberBOOL{Value: false},
 		},
 	},
-	{
+	"nested zero values": {
 		input: []simpleMarshalStruct{{}},
 		expected: []types.AttributeValue{
-			{
-				M: map[string]types.AttributeValue{
-					"Byte":    {NULL: &trueValue},
-					"Bool":    {BOOL: &falseValue},
-					"Float32": {N: aws.String("0")},
-					"Float64": {N: aws.String("0")},
-					"Int":     {N: aws.String("0")},
-					"Null":    {NULL: &trueValue},
-					"String":  {NULL: &trueValue},
-					"Uint":    {N: aws.String("0")},
+			&types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"Byte":      &types.AttributeValueMemberNULL{Value: true},
+					"Bool":      &types.AttributeValueMemberBOOL{Value: false},
+					"Float32":   &types.AttributeValueMemberN{Value: "0"},
+					"Float64":   &types.AttributeValueMemberN{Value: "0"},
+					"Int":       &types.AttributeValueMemberN{Value: "0"},
+					"Null":      &types.AttributeValueMemberNULL{Value: true},
+					"String":    &types.AttributeValueMemberS{Value: ""},
+					"PtrString": &types.AttributeValueMemberNULL{Value: true},
+					"Uint":      &types.AttributeValueMemberN{Value: "0"},
 				},
 			},
 		},
@@ -298,38 +298,43 @@ var marshallerListTestInputs = []marshallerTestInput{
 }
 
 func Test_New_Marshal(t *testing.T) {
-	for _, test := range marshalerScalarInputs {
-		testMarshal(t, test)
+	for name, test := range marshalerScalarInputs {
+		t.Run(name, func(t *testing.T) {
+			actual, err := Marshal(test.input)
+			if test.err != nil {
+				if err == nil {
+					t.Errorf("Marshal with input %#v returned %#v, expected error `%s`",
+						test.input, actual, test.err)
+				} else if err.Error() != test.err.Error() {
+					t.Errorf("Marshal with input %#v returned error `%s`, expected error `%s`",
+						test.input, err, test.err)
+				}
+			} else {
+				if err != nil {
+					t.Errorf("Marshal with input %#v returned error `%s`", test.input, err)
+				}
+				compareObjects(t, test.expected, actual)
+			}
+		})
 	}
 }
 
 func testMarshal(t *testing.T, test marshallerTestInput) {
-	actual, err := Marshal(test.input)
-	if test.err != nil {
-		if err == nil {
-			t.Errorf("Marshal with input %#v retured %#v, expected error `%s`", test.input, actual, test.err)
-		} else if err.Error() != test.err.Error() {
-			t.Errorf("Marshal with input %#v retured error `%s`, expected error `%s`", test.input, err, test.err)
-		}
-	} else {
-		if err != nil {
-			t.Errorf("Marshal with input %#v retured error `%s`", test.input, err)
-		}
-		compareObjects(t, test.expected, actual)
-	}
 }
 
 func Test_New_Unmarshal(t *testing.T) {
 	// Using the same inputs from Marshal, test the reverse mapping.
-	for i, test := range marshalerScalarInputs {
-		if test.input == nil {
-			continue
-		}
-		actual := reflect.New(reflect.TypeOf(test.input)).Interface()
-		if err := Unmarshal(test.expected.(*types.AttributeValue), actual); err != nil {
-			t.Errorf("Unmarshal %d, with input %#v retured error `%s`", i+1, test.expected, err)
-		}
-		compareObjects(t, test.input, reflect.ValueOf(actual).Elem().Interface())
+	for name, test := range marshalerScalarInputs {
+		t.Run(name, func(t *testing.T) {
+			if test.input == nil {
+				t.Skip()
+			}
+			actual := reflect.New(reflect.TypeOf(test.input)).Interface()
+			if err := Unmarshal(test.expected.(types.AttributeValue), actual); err != nil {
+				t.Errorf("Unmarshal with input %#v returned error `%s`", test.expected, err)
+			}
+			compareObjects(t, test.input, reflect.ValueOf(actual).Elem().Interface())
+		})
 	}
 }
 
@@ -362,38 +367,40 @@ func Test_New_UnmarshalError(t *testing.T) {
 }
 
 func Test_New_MarshalMap(t *testing.T) {
-	for _, test := range marshallerMapTestInputs {
-		testMarshalMap(t, test)
-	}
-}
-
-func testMarshalMap(t *testing.T, test marshallerTestInput) {
-	actual, err := MarshalMap(test.input)
-	if test.err != nil {
-		if err == nil {
-			t.Errorf("MarshalMap with input %#v retured %#v, expected error `%s`", test.input, actual, test.err)
-		} else if err.Error() != test.err.Error() {
-			t.Errorf("MarshalMap with input %#v retured error `%s`, expected error `%s`", test.input, err, test.err)
-		}
-	} else {
-		if err != nil {
-			t.Errorf("MarshalMap with input %#v retured error `%s`", test.input, err)
-		}
-		compareObjects(t, test.expected, actual)
+	for name, test := range marshallerMapTestInputs {
+		t.Run(name, func(t *testing.T) {
+			actual, err := MarshalMap(test.input)
+			if test.err != nil {
+				if err == nil {
+					t.Errorf("MarshalMap with input %#v returned %#v, expected error `%s`",
+						test.input, actual, test.err)
+				} else if err.Error() != test.err.Error() {
+					t.Errorf("MarshalMap with input %#v returned error `%s`, expected error `%s`",
+						test.input, err, test.err)
+				}
+			} else {
+				if err != nil {
+					t.Errorf("MarshalMap with input %#v returned error `%s`", test.input, err)
+				}
+				compareObjects(t, test.expected, actual)
+			}
+		})
 	}
 }
 
 func Test_New_UnmarshalMap(t *testing.T) {
 	// Using the same inputs from MarshalMap, test the reverse mapping.
-	for i, test := range marshallerMapTestInputs {
-		if test.input == nil {
-			continue
-		}
-		actual := reflect.New(reflect.TypeOf(test.input)).Interface()
-		if err := UnmarshalMap(test.expected.(map[string]types.AttributeValue), actual); err != nil {
-			t.Errorf("Unmarshal %d, with input %#v retured error `%s`", i+1, test.expected, err)
-		}
-		compareObjects(t, test.input, reflect.ValueOf(actual).Elem().Interface())
+	for name, test := range marshallerMapTestInputs {
+		t.Run(name, func(t *testing.T) {
+			if test.input == nil {
+				t.Skip()
+			}
+			actual := reflect.New(reflect.TypeOf(test.input)).Interface()
+			if err := UnmarshalMap(test.expected.(map[string]types.AttributeValue), actual); err != nil {
+				t.Errorf("Unmarshal with input %#v returned error `%s`", test.expected, err)
+			}
+			compareObjects(t, test.input, reflect.ValueOf(actual).Elem().Interface())
+		})
 	}
 }
 
@@ -426,44 +433,49 @@ func Test_New_UnmarshalMapError(t *testing.T) {
 }
 
 func Test_New_MarshalList(t *testing.T) {
-	for _, test := range marshallerListTestInputs {
-		testMarshalList(t, test)
-	}
-}
+	for name, c := range marshallerListTestInputs {
+		t.Run(name, func(t *testing.T) {
+			actual, err := MarshalList(c.input)
+			if c.err != nil {
+				if err == nil {
+					t.Fatalf("marshalList with input %#v returned %#v, expected error `%s`",
+						c.input, actual, c.err)
+				} else if err.Error() != c.err.Error() {
+					t.Fatalf("marshalList with input %#v returned error `%s`, expected error `%s`",
+						c.input, err, c.err)
+				}
+				return
+			}
+			if err != nil {
+				t.Fatalf("MarshalList with input %#v returned error `%s`", c.input, err)
+			}
 
-func testMarshalList(t *testing.T, test marshallerTestInput) {
-	actual, err := MarshalList(test.input)
-	if test.err != nil {
-		if err == nil {
-			t.Errorf("MarshalList with input %#v retured %#v, expected error `%s`", test.input, actual, test.err)
-		} else if err.Error() != test.err.Error() {
-			t.Errorf("MarshalList with input %#v retured error `%s`, expected error `%s`", test.input, err, test.err)
-		}
-	} else {
-		if err != nil {
-			t.Errorf("MarshalList with input %#v retured error `%s`", test.input, err)
-		}
-		compareObjects(t, test.expected, actual)
+			compareObjects(t, c.expected, actual)
+
+		})
 	}
 }
 
 func Test_New_UnmarshalList(t *testing.T) {
 	// Using the same inputs from MarshalList, test the reverse mapping.
-	for i, test := range marshallerListTestInputs {
-		if test.input == nil {
-			continue
-		}
-		iv := reflect.ValueOf(test.input)
+	for name, c := range marshallerListTestInputs {
+		t.Run(name, func(t *testing.T) {
+			if c.input == nil {
+				t.Skip()
+			}
 
-		actual := reflect.New(iv.Type())
-		if iv.Kind() == reflect.Slice {
-			actual.Elem().Set(reflect.MakeSlice(iv.Type(), iv.Len(), iv.Cap()))
-		}
+			iv := reflect.ValueOf(c.input)
 
-		if err := UnmarshalList(test.expected.([]types.AttributeValue), actual.Interface()); err != nil {
-			t.Errorf("Unmarshal %d, with input %#v retured error `%s`", i+1, test.expected, err)
-		}
-		compareObjects(t, test.input, actual.Elem().Interface())
+			actual := reflect.New(iv.Type())
+			if iv.Kind() == reflect.Slice {
+				actual.Elem().Set(reflect.MakeSlice(iv.Type(), iv.Len(), iv.Cap()))
+			}
+
+			if err := UnmarshalList(c.expected.([]types.AttributeValue), actual.Interface()); err != nil {
+				t.Errorf("unmarshal with input %#v returned error `%s`", c.expected, err)
+			}
+			compareObjects(t, c.input, actual.Elem().Interface())
+		})
 	}
 }
 
@@ -496,6 +508,7 @@ func Test_New_UnmarshalListError(t *testing.T) {
 }
 
 func compareObjects(t *testing.T, expected interface{}, actual interface{}) {
+	t.Helper()
 	if !reflect.DeepEqual(expected, actual) {
 		ev := reflect.ValueOf(expected)
 		av := reflect.ValueOf(actual)
@@ -549,38 +562,38 @@ func Test_Encode_YAML_TagKey(t *testing.T) {
 		NoTag: "NoTag",
 	}
 
-	expected := &types.AttributeValue{
-		M: map[string]types.AttributeValue{
-			"string":  {S: aws.String("String")},
-			"empty":   {NULL: &trueValue},
-			"byte":    {NULL: &trueValue},
-			"float32": {N: aws.String("0")},
-			"float64": {N: aws.String("0")},
-			"int":     {N: aws.String("0")},
-			"uint":    {N: aws.String("0")},
-			"slice": {
-				L: []types.AttributeValue{
-					{S: aws.String("one")},
-					{S: aws.String("two")},
+	expected := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"string":  &types.AttributeValueMemberS{Value: "String"},
+			"empty":   &types.AttributeValueMemberS{Value: ""},
+			"byte":    &types.AttributeValueMemberNULL{Value: true},
+			"float32": &types.AttributeValueMemberN{Value: "0"},
+			"float64": &types.AttributeValueMemberN{Value: "0"},
+			"int":     &types.AttributeValueMemberN{Value: "0"},
+			"uint":    &types.AttributeValueMemberN{Value: "0"},
+			"slice": &types.AttributeValueMemberL{
+				Value: []types.AttributeValue{
+					&types.AttributeValueMemberS{Value: "one"},
+					&types.AttributeValueMemberS{Value: "two"},
 				},
 			},
-			"map": {
-				M: map[string]types.AttributeValue{
-					"one": {N: aws.String("1")},
-					"two": {N: aws.String("2")},
+			"map": &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"one": &types.AttributeValueMemberN{Value: "1"},
+					"two": &types.AttributeValueMemberN{Value: "2"},
 				},
 			},
-			"NoTag": {S: aws.String("NoTag")},
+			"NoTag": &types.AttributeValueMemberS{Value: "NoTag"},
 		},
 	}
 
-	enc := NewEncoder(func(e *Encoder) {
-		e.TagKey = "yaml"
+	enc := NewEncoder(func(o *EncoderOptions) {
+		o.TagKey = "yaml"
 	})
 
 	actual, err := enc.Encode(input)
 	if err != nil {
-		t.Errorf("Encode with input %#v retured error `%s`, expected nil", input, err)
+		t.Errorf("Encode with input %#v returned error `%s`, expected nil", input, err)
 	}
 
 	compareObjects(t, expected, actual)

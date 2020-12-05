@@ -30,10 +30,10 @@ import (
 // 			return nil
 // 		}
 type Unmarshaler interface {
-	UnmarshalDynamoDBAttributeValue(*types.AttributeValue) error
+	UnmarshalDynamoDBAttributeValue(types.AttributeValue) error
 }
 
-// Unmarshal will unmarshal DynamoDB AttributeValues to Go value types.
+// Unmarshal will unmarshal AttributeValues to Go value types.
 // Both generic interface{} and concrete types are valid unmarshal
 // destination types.
 //
@@ -74,7 +74,7 @@ type Unmarshaler interface {
 // and return the error.
 //
 // The output value provided must be a non-nil pointer
-func Unmarshal(av *types.AttributeValue, out interface{}) error {
+func Unmarshal(av types.AttributeValue, out interface{}) error {
 	return NewDecoder().Decode(av, out)
 }
 
@@ -83,7 +83,7 @@ func Unmarshal(av *types.AttributeValue, out interface{}) error {
 //
 // The output value provided must be a non-nil pointer
 func UnmarshalMap(m map[string]types.AttributeValue, out interface{}) error {
-	return NewDecoder().Decode(&types.AttributeValue{M: m}, out)
+	return NewDecoder().Decode(&types.AttributeValueMemberM{Value: m}, out)
 }
 
 // UnmarshalList is an alias for Unmarshal func which unmarshals
@@ -91,28 +91,35 @@ func UnmarshalMap(m map[string]types.AttributeValue, out interface{}) error {
 //
 // The output value provided must be a non-nil pointer
 func UnmarshalList(l []types.AttributeValue, out interface{}) error {
-	return NewDecoder().Decode(&types.AttributeValue{L: l}, out)
+	return NewDecoder().Decode(&types.AttributeValueMemberL{Value: l}, out)
 }
 
 // UnmarshalListOfMaps is an alias for Unmarshal func which unmarshals a
 // slice of maps of attribute values.
 //
-// This is useful for when you need to unmarshal the Items from a DynamoDB
-// Query API call.
+// This is useful for when you need to unmarshal the Items from a Query API
+// call.
 //
 // The output value provided must be a non-nil pointer
 func UnmarshalListOfMaps(l []map[string]types.AttributeValue, out interface{}) error {
 	items := make([]types.AttributeValue, len(l))
 	for i, m := range l {
-		items[i] = types.AttributeValue{M: m}
+		items[i] = &types.AttributeValueMemberM{Value: m}
 	}
 
 	return UnmarshalList(items, out)
 }
 
-// A Decoder provides unmarshaling AttributeValues to Go value types.
-type Decoder struct {
-	MarshalOptions
+// DecoderOptions is a collection of options to configure how the decoder
+// unmarshalls the value.
+type DecoderOptions struct {
+	// Support other custom struct tag keys, such as `yaml`, `json`, or `toml`.
+	// Note that values provided with a custom TagKey must also be supported
+	// by the (un)marshalers in this package.
+	//
+	// Tag key `dynamodbav` will always be read, but if custom tag key
+	// conflicts with `dynamodbav` the custom tag key value will be used.
+	TagKey string
 
 	// Instructs the decoder to decode AttributeValue Numbers as
 	// Number type instead of float64 when the destination type
@@ -120,19 +127,22 @@ type Decoder struct {
 	UseNumber bool
 }
 
+// A Decoder provides unmarshaling AttributeValues to Go value types.
+type Decoder struct {
+	options DecoderOptions
+}
+
 // NewDecoder creates a new Decoder with default configuration. Use
 // the `opts` functional options to override the default configuration.
-func NewDecoder(opts ...func(*Decoder)) *Decoder {
-	d := &Decoder{
-		MarshalOptions: MarshalOptions{
-			SupportJSONTags: true,
-		},
-	}
-	for _, o := range opts {
-		o(d)
+func NewDecoder(optFns ...func(*DecoderOptions)) *Decoder {
+	var options DecoderOptions
+	for _, fn := range optFns {
+		fn(&options)
 	}
 
-	return d
+	return &Decoder{
+		options: options,
+	}
 }
 
 // Decode will unmarshal an AttributeValue into a Go value type. An error
@@ -140,7 +150,7 @@ func NewDecoder(opts ...func(*Decoder)) *Decoder {
 // to the provide Go value type.
 //
 // The output value provided must be a non-nil pointer
-func (d *Decoder) Decode(av *types.AttributeValue, out interface{}, opts ...func(*Decoder)) error {
+func (d *Decoder) Decode(av types.AttributeValue, out interface{}, opts ...func(*Decoder)) error {
 	v := reflect.ValueOf(out)
 	if v.Kind() != reflect.Ptr || v.IsNil() || !v.IsValid() {
 		return &InvalidUnmarshalError{Type: reflect.TypeOf(out)}
@@ -151,13 +161,13 @@ func (d *Decoder) Decode(av *types.AttributeValue, out interface{}, opts ...func
 
 var stringInterfaceMapType = reflect.TypeOf(map[string]interface{}(nil))
 var byteSliceType = reflect.TypeOf([]byte(nil))
-var byteSliceSlicetype = reflect.TypeOf([][]byte(nil))
-var numberType = reflect.TypeOf(Number(""))
+var byteSliceSliceType = reflect.TypeOf([][]byte(nil))
 var timeType = reflect.TypeOf(time.Time{})
 
-func (d *Decoder) decode(av *types.AttributeValue, v reflect.Value, fieldTag tag) error {
+func (d *Decoder) decode(av types.AttributeValue, v reflect.Value, fieldTag tag) error {
 	var u Unmarshaler
-	if av == nil || av.NULL != nil {
+	_, isNull := av.(*types.AttributeValueMemberNULL)
+	if av == nil || isNull {
 		u, v = indirect(v, true)
 		if u != nil {
 			return u.UnmarshalDynamoDBAttributeValue(av)
@@ -170,28 +180,37 @@ func (d *Decoder) decode(av *types.AttributeValue, v reflect.Value, fieldTag tag
 		return u.UnmarshalDynamoDBAttributeValue(av)
 	}
 
-	switch {
-	case av.B != nil:
-		return d.decodeBinary(av.B, v)
-	case av.BOOL != nil:
-		return d.decodeBool(av.BOOL, v)
-	case av.BS != nil:
-		return d.decodeBinarySet(av.BS, v)
-	case av.L != nil:
-		return d.decodeList(av.L, v)
-	case av.M != nil:
-		return d.decodeMap(av.M, v)
-	case av.N != nil:
-		return d.decodeNumber(av.N, v, fieldTag)
-	case av.NS != nil:
-		return d.decodeNumberSet(av.NS, v)
-	case av.S != nil: // DynamoDB does not allow for empty strings, so we do not consider the length or EnableEmptyCollections flag here
-		return d.decodeString(av.S, v, fieldTag)
-	case av.SS != nil:
-		return d.decodeStringSet(av.SS, v)
-	}
+	switch tv := av.(type) {
+	case *types.AttributeValueMemberB:
+		return d.decodeBinary(tv.Value, v)
 
-	return nil
+	case *types.AttributeValueMemberBOOL:
+		return d.decodeBool(tv.Value, v)
+
+	case *types.AttributeValueMemberBS:
+		return d.decodeBinarySet(tv.Value, v)
+
+	case *types.AttributeValueMemberL:
+		return d.decodeList(tv.Value, v)
+
+	case *types.AttributeValueMemberM:
+		return d.decodeMap(tv.Value, v)
+
+	case *types.AttributeValueMemberN:
+		return d.decodeNumber(tv.Value, v, fieldTag)
+
+	case *types.AttributeValueMemberNS:
+		return d.decodeNumberSet(tv.Value, v)
+
+	case *types.AttributeValueMemberS:
+		return d.decodeString(tv.Value, v, fieldTag)
+
+	case *types.AttributeValueMemberSS:
+		return d.decodeStringSet(tv.Value, v)
+
+	default:
+		return fmt.Errorf("unsupported AttributeValue type, %T", av)
+	}
 }
 
 func (d *Decoder) decodeBinary(b []byte, v reflect.Value) error {
@@ -239,10 +258,11 @@ func (d *Decoder) decodeBinary(b []byte, v reflect.Value) error {
 	return nil
 }
 
-func (d *Decoder) decodeBool(b *bool, v reflect.Value) error {
+func (d *Decoder) decodeBool(b bool, v reflect.Value) error {
 	switch v.Kind() {
 	case reflect.Bool, reflect.Interface:
-		v.Set(reflect.ValueOf(*b).Convert(v.Type()))
+		v.Set(reflect.ValueOf(b).Convert(v.Type()))
+
 	default:
 		return &UnmarshalTypeError{Value: "bool", Type: v.Type()}
 	}
@@ -277,7 +297,7 @@ func (d *Decoder) decodeBinarySet(bs [][]byte, v reflect.Value) error {
 		v.SetLen(i + 1)
 		u, elem := indirect(v.Index(i), false)
 		if u != nil {
-			return u.UnmarshalDynamoDBAttributeValue(&types.AttributeValue{BS: bs})
+			return u.UnmarshalDynamoDBAttributeValue(&types.AttributeValueMemberBS{Value: bs})
 		}
 		if err := d.decodeBinary(bs[i], elem); err != nil {
 			return err
@@ -287,7 +307,7 @@ func (d *Decoder) decodeBinarySet(bs [][]byte, v reflect.Value) error {
 	return nil
 }
 
-func (d *Decoder) decodeNumber(n *string, v reflect.Value, fieldTag tag) error {
+func (d *Decoder) decodeNumber(n string, v reflect.Value, fieldTag tag) error {
 	switch v.Kind() {
 	case reflect.Interface:
 		i, err := d.decodeNumberToInterface(n)
@@ -297,50 +317,50 @@ func (d *Decoder) decodeNumber(n *string, v reflect.Value, fieldTag tag) error {
 		v.Set(reflect.ValueOf(i))
 		return nil
 	case reflect.String:
-		if v.Type() == numberType { // Support Number value type
-			v.Set(reflect.ValueOf(Number(*n)))
+		if isNumberValueType(v) {
+			v.SetString(n)
 			return nil
 		}
-		v.Set(reflect.ValueOf(*n))
+		v.Set(reflect.ValueOf(n))
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
-		i, err := strconv.ParseInt(*n, 10, 64)
+		i, err := strconv.ParseInt(n, 10, 64)
 		if err != nil {
 			return err
 		}
 		if v.OverflowInt(i) {
 			return &UnmarshalTypeError{
-				Value: fmt.Sprintf("number overflow, %s", *n),
+				Value: fmt.Sprintf("number overflow, %s", n),
 				Type:  v.Type(),
 			}
 		}
 		v.SetInt(i)
 	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
-		i, err := strconv.ParseUint(*n, 10, 64)
+		i, err := strconv.ParseUint(n, 10, 64)
 		if err != nil {
 			return err
 		}
 		if v.OverflowUint(i) {
 			return &UnmarshalTypeError{
-				Value: fmt.Sprintf("number overflow, %s", *n),
+				Value: fmt.Sprintf("number overflow, %s", n),
 				Type:  v.Type(),
 			}
 		}
 		v.SetUint(i)
 	case reflect.Float32, reflect.Float64:
-		i, err := strconv.ParseFloat(*n, 64)
+		i, err := strconv.ParseFloat(n, 64)
 		if err != nil {
 			return err
 		}
 		if v.OverflowFloat(i) {
 			return &UnmarshalTypeError{
-				Value: fmt.Sprintf("number overflow, %s", *n),
+				Value: fmt.Sprintf("number overflow, %s", n),
 				Type:  v.Type(),
 			}
 		}
 		v.SetFloat(i)
 	default:
 		if v.Type().ConvertibleTo(timeType) && fieldTag.AsUnixTime {
-			t, err := decodeUnixTime(*n)
+			t, err := decodeUnixTime(n)
 			if err != nil {
 				return err
 			}
@@ -353,13 +373,13 @@ func (d *Decoder) decodeNumber(n *string, v reflect.Value, fieldTag tag) error {
 	return nil
 }
 
-func (d *Decoder) decodeNumberToInterface(n *string) (interface{}, error) {
-	if d.UseNumber {
-		return Number(*n), nil
+func (d *Decoder) decodeNumberToInterface(n string) (interface{}, error) {
+	if d.options.UseNumber {
+		return Number(n), nil
 	}
 
 	// Default to float64 for all numbers
-	return strconv.ParseFloat(*n, 64)
+	return strconv.ParseFloat(n, 64)
 }
 
 func (d *Decoder) decodeNumberSet(ns []string, v reflect.Value) error {
@@ -373,10 +393,10 @@ func (d *Decoder) decodeNumberSet(ns []string, v reflect.Value) error {
 	case reflect.Array:
 		// Limited to capacity of existing array.
 	case reflect.Interface:
-		if d.UseNumber {
+		if d.options.UseNumber {
 			set := make([]Number, len(ns))
 			for i, n := range ns {
-				if err := d.decodeNumber(&n, reflect.ValueOf(&set[i]).Elem(), tag{}); err != nil {
+				if err := d.decodeNumber(n, reflect.ValueOf(&set[i]).Elem(), tag{}); err != nil {
 					return err
 				}
 			}
@@ -384,7 +404,7 @@ func (d *Decoder) decodeNumberSet(ns []string, v reflect.Value) error {
 		} else {
 			set := make([]float64, len(ns))
 			for i, n := range ns {
-				if err := d.decodeNumber(&n, reflect.ValueOf(&set[i]).Elem(), tag{}); err != nil {
+				if err := d.decodeNumber(n, reflect.ValueOf(&set[i]).Elem(), tag{}); err != nil {
 					return err
 				}
 			}
@@ -399,9 +419,9 @@ func (d *Decoder) decodeNumberSet(ns []string, v reflect.Value) error {
 		v.SetLen(i + 1)
 		u, elem := indirect(v.Index(i), false)
 		if u != nil {
-			return u.UnmarshalDynamoDBAttributeValue(&types.AttributeValue{NS: ns})
+			return u.UnmarshalDynamoDBAttributeValue(&types.AttributeValueMemberNS{Value: ns})
 		}
-		if err := d.decodeNumber(&ns[i], elem, tag{}); err != nil {
+		if err := d.decodeNumber(ns[i], elem, tag{}); err != nil {
 			return err
 		}
 	}
@@ -422,7 +442,7 @@ func (d *Decoder) decodeList(avList []types.AttributeValue, v reflect.Value) err
 	case reflect.Interface:
 		s := make([]interface{}, len(avList))
 		for i, av := range avList {
-			if err := d.decode(&av, reflect.ValueOf(&s[i]).Elem(), tag{}); err != nil {
+			if err := d.decode(av, reflect.ValueOf(&s[i]).Elem(), tag{}); err != nil {
 				return err
 			}
 		}
@@ -435,7 +455,7 @@ func (d *Decoder) decodeList(avList []types.AttributeValue, v reflect.Value) err
 	// If v is not a slice, array
 	for i := 0; i < v.Cap() && i < len(avList); i++ {
 		v.SetLen(i + 1)
-		if err := d.decode(&avList[i], v.Index(i), tag{}); err != nil {
+		if err := d.decode(avList[i], v.Index(i), tag{}); err != nil {
 			return err
 		}
 	}
@@ -466,20 +486,22 @@ func (d *Decoder) decodeMap(avMap map[string]types.AttributeValue, v reflect.Val
 			key := reflect.New(v.Type().Key()).Elem()
 			key.SetString(k)
 			elem := reflect.New(v.Type().Elem()).Elem()
-			if err := d.decode(&av, elem, tag{}); err != nil {
+			if err := d.decode(av, elem, tag{}); err != nil {
 				return err
 			}
 			v.SetMapIndex(key, elem)
 		}
 	} else if v.Kind() == reflect.Struct {
-		fields := unionStructFields(v.Type(), d.MarshalOptions)
+		fields := unionStructFields(v.Type(), structFieldOptions{
+			TagKey: d.options.TagKey,
+		})
 		for k, av := range avMap {
 			if f, ok := fieldByName(fields, k); ok {
 				fv := fieldByIndex(v, f.Index, func(v *reflect.Value) bool {
 					v.Set(reflect.New(v.Type().Elem()))
 					return true // to continue the loop.
 				})
-				if err := d.decode(&av, fv, f.tag); err != nil {
+				if err := d.decode(av, fv, f.tag); err != nil {
 					return err
 				}
 			}
@@ -497,7 +519,7 @@ func (d *Decoder) decodeNull(v reflect.Value) error {
 	return nil
 }
 
-func (d *Decoder) decodeString(s *string, v reflect.Value, fieldTag tag) error {
+func (d *Decoder) decodeString(s string, v reflect.Value, fieldTag tag) error {
 	if fieldTag.AsString {
 		return d.decodeNumber(s, v, fieldTag)
 	}
@@ -505,7 +527,7 @@ func (d *Decoder) decodeString(s *string, v reflect.Value, fieldTag tag) error {
 	// To maintain backwards compatibility with ConvertFrom family of methods which
 	// converted strings to time.Time structs
 	if v.Type().ConvertibleTo(timeType) {
-		t, err := time.Parse(time.RFC3339, *s)
+		t, err := time.Parse(time.RFC3339, s)
 		if err != nil {
 			return err
 		}
@@ -515,10 +537,10 @@ func (d *Decoder) decodeString(s *string, v reflect.Value, fieldTag tag) error {
 
 	switch v.Kind() {
 	case reflect.String:
-		v.SetString(*s)
+		v.SetString(s)
 	case reflect.Interface:
 		// Ensure type aliasing is handled properly
-		v.Set(reflect.ValueOf(*s).Convert(v.Type()))
+		v.Set(reflect.ValueOf(s).Convert(v.Type()))
 	default:
 		return &UnmarshalTypeError{Value: "string", Type: v.Type()}
 	}
@@ -538,7 +560,7 @@ func (d *Decoder) decodeStringSet(ss []string, v reflect.Value) error {
 	case reflect.Interface:
 		set := make([]string, len(ss))
 		for i, s := range ss {
-			if err := d.decodeString(&s, reflect.ValueOf(&set[i]).Elem(), tag{}); err != nil {
+			if err := d.decodeString(s, reflect.ValueOf(&set[i]).Elem(), tag{}); err != nil {
 				return err
 			}
 		}
@@ -552,9 +574,9 @@ func (d *Decoder) decodeStringSet(ss []string, v reflect.Value) error {
 		v.SetLen(i + 1)
 		u, elem := indirect(v.Index(i), false)
 		if u != nil {
-			return u.UnmarshalDynamoDBAttributeValue(&types.AttributeValue{SS: ss})
+			return u.UnmarshalDynamoDBAttributeValue(&types.AttributeValueMemberSS{Value: ss})
 		}
-		if err := d.decodeString(&ss[i], elem, tag{}); err != nil {
+		if err := d.decodeString(ss[i], elem, tag{}); err != nil {
 			return err
 		}
 	}
@@ -636,17 +658,10 @@ func (n Number) String() string {
 	return string(n)
 }
 
-type emptyOrigError struct{}
-
-func (e emptyOrigError) OrigErr() error {
-	return nil
-}
-
 // An UnmarshalTypeError is an error type representing a error
 // unmarshaling the AttributeValue's element to a Go value type.
 // Includes details about the AttributeValue type and Go value type.
 type UnmarshalTypeError struct {
-	emptyOrigError
 	Value string
 	Type  reflect.Type
 }
@@ -654,81 +669,43 @@ type UnmarshalTypeError struct {
 // Error returns the string representation of the error.
 // satisfying the error interface
 func (e *UnmarshalTypeError) Error() string {
-	return fmt.Sprintf("%s: %s", e.Code(), e.Message())
-}
-
-// Code returns the code of the error, satisfying the awserr.Error
-// interface.
-func (e *UnmarshalTypeError) Code() string {
-	return "UnmarshalTypeError"
-}
-
-// Message returns the detailed message of the error, satisfying
-// the awserr.Error interface.
-func (e *UnmarshalTypeError) Message() string {
-	return "cannot unmarshal " + e.Value + " into Go value of type " + e.Type.String()
+	return fmt.Sprintf("unmarshal failed, cannot unmarshal %s into Go value type %s",
+		e.Value, e.Type.String())
 }
 
 // An InvalidUnmarshalError is an error type representing an invalid type
 // encountered while unmarshaling a AttributeValue to a Go value type.
 type InvalidUnmarshalError struct {
-	emptyOrigError
 	Type reflect.Type
 }
 
 // Error returns the string representation of the error.
 // satisfying the error interface
 func (e *InvalidUnmarshalError) Error() string {
-	return fmt.Sprintf("%s: %s", e.Code(), e.Message())
-}
-
-// Code returns the code of the error, satisfying the awserr.Error
-// interface.
-func (e *InvalidUnmarshalError) Code() string {
-	return "InvalidUnmarshalError"
-}
-
-// Message returns the detailed message of the error, satisfying
-// the awserr.Error interface.
-func (e *InvalidUnmarshalError) Message() string {
+	var msg string
 	if e.Type == nil {
-		return "cannot unmarshal to nil value"
+		msg = "cannot unmarshal to nil value"
+	} else if e.Type.Kind() != reflect.Ptr {
+		msg = fmt.Sprintf("cannot unmarshal to non-pointer value, got %s", e.Type.String())
+	} else {
+		msg = fmt.Sprintf("cannot unmarshal to nil value, %s", e.Type.String())
 	}
-	if e.Type.Kind() != reflect.Ptr {
-		return "cannot unmarshal to non-pointer value, got " + e.Type.String()
-	}
-	return "cannot unmarshal to nil value, " + e.Type.String()
+
+	return fmt.Sprintf("unmarshal failed, %s", msg)
 }
 
-// An UnmarshalError wraps an error that occured while unmarshaling a DynamoDB
-// AttributeValue element into a Go type. This is different from UnmarshalTypeError
-// in that it wraps the underlying error that occured.
+// An UnmarshalError wraps an error that occurred while unmarshaling a
+// AttributeValue element into a Go type. This is different from
+// UnmarshalTypeError in that it wraps the underlying error that occurred.
 type UnmarshalError struct {
 	Err   error
 	Value string
 	Type  reflect.Type
 }
 
-// Error returns the string representation of the error.
-// satisfying the error interface.
-func (e *UnmarshalError) Error() string {
-	return fmt.Sprintf("%s: %s\ncaused by: %v", e.Code(), e.Message(), e.Err)
-}
-
-// OrigErr returns the original error that caused this issue.
-func (e UnmarshalError) OrigErr() error {
-	return e.Err
-}
-
-// Code returns the code of the error, satisfying the awserr.Error
+// Error returns the string representation of the error satisfying the error
 // interface.
-func (e *UnmarshalError) Code() string {
-	return "UnmarshalError"
-}
-
-// Message returns the detailed message of the error, satisfying
-// the awserr.Error interface.
-func (e *UnmarshalError) Message() string {
-	return fmt.Sprintf("cannot unmarshal %q into %s.",
-		e.Value, e.Type.String())
+func (e *UnmarshalError) Error() string {
+	return fmt.Sprintf("unmarshal failed, cannot unmarshal %q into %s, %v",
+		e.Value, e.Type.String(), e.Err)
 }

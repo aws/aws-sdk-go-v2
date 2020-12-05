@@ -72,7 +72,7 @@ func TestUnionStructFields(t *testing.T) {
 	for i, c := range cases {
 		v := reflect.ValueOf(c.in)
 
-		fields := unionStructFields(v.Type(), MarshalOptions{SupportJSONTags: true})
+		fields := unionStructFields(v.Type(), structFieldOptions{TagKey: "json"})
 		for j, f := range fields {
 			expected := c.expect[j]
 			if e, a := expected.Name, f.Name; e != a {

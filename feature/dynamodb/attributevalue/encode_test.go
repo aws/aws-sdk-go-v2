@@ -1,18 +1,19 @@
 package attributevalue
 
 import (
-	"fmt"
 	"reflect"
+	"strconv"
 	"testing"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestMarshalShared(t *testing.T) {
-	for i, c := range sharedTestCases {
-		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+	for name, c := range sharedTestCases {
+		t.Run(name, func(t *testing.T) {
 			av, err := Marshal(c.expected)
 			assertConvertTest(t, av, c.in, err, c.err)
 		})
@@ -20,8 +21,8 @@ func TestMarshalShared(t *testing.T) {
 }
 
 func TestMarshalListShared(t *testing.T) {
-	for i, c := range sharedListTestCases {
-		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+	for name, c := range sharedListTestCases {
+		t.Run(name, func(t *testing.T) {
 			av, err := MarshalList(c.expected)
 			assertConvertTest(t, av, c.in, err, c.err)
 		})
@@ -29,8 +30,8 @@ func TestMarshalListShared(t *testing.T) {
 }
 
 func TestMarshalMapShared(t *testing.T) {
-	for i, c := range sharedMapTestCases {
-		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+	for name, c := range sharedMapTestCases {
+		t.Run(name, func(t *testing.T) {
 			av, err := MarshalMap(c.expected)
 			assertConvertTest(t, av, c.in, err, c.err)
 		})
@@ -44,15 +45,15 @@ type marshalMarshaler struct {
 	Value4 time.Time
 }
 
-func (m *marshalMarshaler) MarshalDynamoDBAttributeValue(av *types.AttributeValue) error {
-	av.M = map[string]types.AttributeValue{
-		"abc": {S: &m.Value},
-		"def": {N: aws.String(fmt.Sprintf("%d", m.Value2))},
-		"ghi": {BOOL: &m.Value3},
-		"jkl": {S: aws.String(m.Value4.Format(time.RFC3339Nano))},
-	}
-
-	return nil
+func (m *marshalMarshaler) MarshalDynamoDBAttributeValue() (types.AttributeValue, error) {
+	return &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"abc": &types.AttributeValueMemberS{Value: m.Value},
+			"def": &types.AttributeValueMemberN{Value: strconv.Itoa(m.Value2)},
+			"ghi": &types.AttributeValueMemberBOOL{Value: m.Value3},
+			"jkl": &types.AttributeValueMemberS{Value: m.Value4.Format(time.RFC3339Nano)},
+		},
+	}, nil
 }
 
 func TestMarshalMashaler(t *testing.T) {
@@ -63,12 +64,12 @@ func TestMarshalMashaler(t *testing.T) {
 		Value4: testDate,
 	}
 
-	expect := &types.AttributeValue{
-		M: map[string]types.AttributeValue{
-			"abc": {S: aws.String("value")},
-			"def": {N: aws.String("123")},
-			"ghi": {BOOL: aws.Bool(true)},
-			"jkl": {S: aws.String("2016-05-03T17:06:26.209072Z")},
+	expect := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"abc": &types.AttributeValueMemberS{Value: "value"},
+			"def": &types.AttributeValueMemberN{Value: "123"},
+			"ghi": &types.AttributeValueMemberBOOL{Value: true},
+			"jkl": &types.AttributeValueMemberS{Value: "2016-05-03T17:06:26.209072Z"},
 		},
 	}
 
@@ -91,11 +92,11 @@ type testOmitEmptyElemMapStruct struct {
 }
 
 func TestMarshalListOmitEmptyElem(t *testing.T) {
-	expect := &types.AttributeValue{
-		M: map[string]types.AttributeValue{
-			"Values": {L: []types.AttributeValue{
-				{S: aws.String("abc")},
-				{S: aws.String("123")},
+	expect := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"Values": &types.AttributeValueMemberL{Value: []types.AttributeValue{
+				&types.AttributeValueMemberS{Value: "abc"},
+				&types.AttributeValueMemberS{Value: "123"},
 			}},
 		},
 	}
@@ -106,17 +107,19 @@ func TestMarshalListOmitEmptyElem(t *testing.T) {
 	if err != nil {
 		t.Errorf("expect nil, got %v", err)
 	}
-	if e, a := expect, actual; !reflect.DeepEqual(e, a) {
-		t.Errorf("expect %v, got %v", e, a)
+	if diff := cmp.Diff(expect, actual); len(diff) != 0 {
+		t.Errorf("expect match\n%s", diff)
 	}
 }
 
 func TestMarshalMapOmitEmptyElem(t *testing.T) {
-	expect := &types.AttributeValue{
-		M: map[string]types.AttributeValue{
-			"Values": {M: map[string]types.AttributeValue{
-				"abc": {N: aws.String("123")},
-				"klm": {S: aws.String("abc")},
+	expect := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"Values": &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{
+				"abc": &types.AttributeValueMemberN{Value: "123"},
+				"hij": &types.AttributeValueMemberS{Value: ""},
+				"klm": &types.AttributeValueMemberS{Value: "abc"},
+				"qrs": &types.AttributeValueMemberS{Value: "abc"},
 			}},
 		},
 	}
@@ -126,14 +129,90 @@ func TestMarshalMapOmitEmptyElem(t *testing.T) {
 		"efg": nil,
 		"hij": "",
 		"klm": "abc",
+		"nop": func() interface{} {
+			var v *string
+			return v
+		}(),
+		"qrs": func() interface{} {
+			v := "abc"
+			return &v
+		}(),
 	}}
 
 	actual, err := Marshal(m)
 	if err != nil {
 		t.Errorf("expect nil, got %v", err)
 	}
-	if e, a := expect, actual; !reflect.DeepEqual(e, a) {
-		t.Errorf("expect %v, got %v", e, a)
+	if diff := cmp.Diff(expect, actual); len(diff) != 0 {
+		t.Errorf("expect match\n%s", diff)
+	}
+}
+
+type testNullEmptyElemListStruct struct {
+	Values []string `dynamodbav:",nullemptyelem"`
+}
+
+type testNullEmptyElemMapStruct struct {
+	Values map[string]interface{} `dynamodbav:",nullemptyelem"`
+}
+
+func TestMarshalListNullEmptyElem(t *testing.T) {
+	expect := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"Values": &types.AttributeValueMemberL{Value: []types.AttributeValue{
+				&types.AttributeValueMemberS{Value: "abc"},
+				&types.AttributeValueMemberNULL{Value: true},
+				&types.AttributeValueMemberS{Value: "123"},
+			}},
+		},
+	}
+
+	m := testNullEmptyElemListStruct{Values: []string{"abc", "", "123"}}
+
+	actual, err := Marshal(m)
+	if err != nil {
+		t.Errorf("expect nil, got %v", err)
+	}
+	if diff := cmp.Diff(expect, actual); len(diff) != 0 {
+		t.Errorf("expect match\n%s", diff)
+	}
+}
+
+func TestMarshalMapNullEmptyElem(t *testing.T) {
+	expect := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"Values": &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{
+				"abc": &types.AttributeValueMemberN{Value: "123"},
+				"efg": &types.AttributeValueMemberNULL{Value: true},
+				"hij": &types.AttributeValueMemberS{Value: ""},
+				"klm": &types.AttributeValueMemberS{Value: "abc"},
+				"nop": &types.AttributeValueMemberNULL{Value: true},
+				"qrs": &types.AttributeValueMemberS{Value: "abc"},
+			}},
+		},
+	}
+
+	m := testNullEmptyElemMapStruct{Values: map[string]interface{}{
+		"abc": 123.,
+		"efg": nil,
+		"hij": "",
+		"klm": "abc",
+		"nop": func() interface{} {
+			var v *string
+			return v
+		}(),
+		"qrs": func() interface{} {
+			v := "abc"
+			return &v
+		}(),
+	}}
+
+	actual, err := Marshal(m)
+	if err != nil {
+		t.Errorf("expect nil, got %v", err)
+	}
+	if diff := cmp.Diff(expect, actual); len(diff) != 0 {
+		t.Errorf("expect match\n%s", diff)
 	}
 }
 
@@ -144,9 +223,9 @@ type testOmitEmptyScalar struct {
 }
 
 func TestMarshalOmitEmpty(t *testing.T) {
-	expect := &types.AttributeValue{
-		M: map[string]types.AttributeValue{
-			"IntPtrSetZero": {N: aws.String("0")},
+	expect := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"IntPtrSetZero": &types.AttributeValueMemberN{Value: "0"},
 		},
 	}
 
@@ -188,14 +267,10 @@ func TestEncodeEmbeddedPointerStruct(t *testing.T) {
 	if err != nil {
 		t.Errorf("expect nil, got %v", err)
 	}
-	expect := &types.AttributeValue{
-		M: map[string]types.AttributeValue{
-			"Aint": {
-				N: aws.String("321"),
-			},
-			"Bint": {
-				N: aws.String("123"),
-			},
+	expect := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"Aint": &types.AttributeValueMemberN{Value: "321"},
+			"Bint": &types.AttributeValueMemberN{Value: "123"},
 		},
 	}
 	if e, a := expect, actual; !reflect.DeepEqual(e, a) {
@@ -220,17 +295,11 @@ func TestEncodeUnixTime(t *testing.T) {
 	if err != nil {
 		t.Errorf("expect nil, got %v", err)
 	}
-	expect := &types.AttributeValue{
-		M: map[string]types.AttributeValue{
-			"Normal": {
-				S: aws.String("1970-01-01T00:02:03Z"),
-			},
-			"Tagged": {
-				N: aws.String("456"),
-			},
-			"Typed": {
-				N: aws.String("789"),
-			},
+	expect := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"Normal": &types.AttributeValueMemberS{Value: "1970-01-01T00:02:03Z"},
+			"Tagged": &types.AttributeValueMemberN{Value: "456"},
+			"Typed":  &types.AttributeValueMemberN{Value: "789"},
 		},
 	}
 	if e, a := expect, actual; !reflect.DeepEqual(e, a) {
@@ -255,14 +324,10 @@ func TestEncodeAliasedUnixTime(t *testing.T) {
 	if err != nil {
 		t.Errorf("expect no err, got %v", err)
 	}
-	expect := &types.AttributeValue{
-		M: map[string]types.AttributeValue{
-			"Normal": {
-				S: aws.String("1970-01-01T00:02:03Z"),
-			},
-			"Tagged": {
-				N: aws.String("456"),
-			},
+	expect := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"Normal": &types.AttributeValueMemberS{Value: "1970-01-01T00:02:03Z"},
+			"Tagged": &types.AttributeValueMemberN{Value: "456"},
 		},
 	}
 	if e, a := expect, actual; !reflect.DeepEqual(e, a) {

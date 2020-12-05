@@ -10,6 +10,8 @@ type tag struct {
 	Ignore                       bool
 	OmitEmpty                    bool
 	OmitEmptyElem                bool
+	NullEmpty                    bool
+	NullEmptyElem                bool
 	AsString                     bool
 	AsBinSet, AsNumSet, AsStrSet bool
 	AsUnixTime                   bool
@@ -53,6 +55,10 @@ func (t *tag) parseTagStr(tagStr string) {
 			t.OmitEmpty = true
 		case "omitemptyelem":
 			t.OmitEmptyElem = true
+		case "nullempty":
+			t.NullEmpty = true
+		case "nullemptyelem":
+			t.NullEmptyElem = true
 		case "string":
 			t.AsString = true
 		case "binaryset":

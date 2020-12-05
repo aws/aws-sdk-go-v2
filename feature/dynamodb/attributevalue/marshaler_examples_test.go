@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	"github.com/aws/aws-sdk-go/aws/awsutil"
@@ -25,44 +24,31 @@ func ExampleMarshal() {
 		Numbers: []int{1, 2, 3},
 	}
 	av, err := attributevalue.Marshal(r)
+	m := av.(*types.AttributeValueMemberM)
 	fmt.Println("err", err)
-	fmt.Println("Bytes", awsutil.Prettify(av.M["Bytes"]))
-	fmt.Println("MyField", awsutil.Prettify(av.M["MyField"]))
-	fmt.Println("Letters", awsutil.Prettify(av.M["Letters"]))
-	fmt.Println("Numbers", awsutil.Prettify(av.M["Numbers"]))
+	fmt.Println("Bytes", awsutil.Prettify(m.Value["Bytes"]))
+	fmt.Println("MyField", awsutil.Prettify(m.Value["MyField"]))
+	fmt.Println("Letters", awsutil.Prettify(m.Value["Letters"]))
+	fmt.Println("Numbers", awsutil.Prettify(m.Value["Numbers"]))
 
 	// Output:
 	// err <nil>
 	// Bytes {
-	//   B: <binary> len 2
+	//   Value: <binary> len 2
 	// }
 	// MyField {
-	//   S: "MyFieldValue"
+	//   Value: "MyFieldValue"
 	// }
 	// Letters {
-	//   L: [
-	//     {
-	//       S: "a"
-	//     },
-	//     {
-	//       S: "b"
-	//     },
-	//     {
-	//       S: "c"
-	//     },
-	//     {
-	//       S: "d"
-	//     }
+	//   Value: [
+	//     &{a},
+	//     &{b},
+	//     &{c},
+	//     &{d}
 	//   ]
 	// }
 	// Numbers {
-	//   L: [{
-	//       N: "1"
-	//     },{
-	//       N: "2"
-	//     },{
-	//       N: "3"
-	//     }]
+	//   Value: [&{1},&{2},&{3}]
 	// }
 }
 
@@ -81,17 +67,20 @@ func ExampleUnmarshal() {
 		A2Num:   map[string]int{"a": 1, "b": 2, "c": 3},
 	}
 
-	av := &types.AttributeValue{
-		M: map[string]types.AttributeValue{
-			"Bytes":   {B: []byte{48, 49}},
-			"MyField": {S: aws.String("MyFieldValue")},
-			"Letters": {L: []types.AttributeValue{
-				{S: aws.String("a")}, {S: aws.String("b")}, {S: aws.String("c")}, {S: aws.String("d")},
+	av := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"Bytes":   &types.AttributeValueMemberB{Value: []byte{48, 49}},
+			"MyField": &types.AttributeValueMemberS{Value: "MyFieldValue"},
+			"Letters": &types.AttributeValueMemberL{Value: []types.AttributeValue{
+				&types.AttributeValueMemberS{Value: "a"},
+				&types.AttributeValueMemberS{Value: "b"},
+				&types.AttributeValueMemberS{Value: "c"},
+				&types.AttributeValueMemberS{Value: "d"},
 			}},
-			"A2Num": {M: map[string]types.AttributeValue{
-				"a": {N: aws.String("1")},
-				"b": {N: aws.String("2")},
-				"c": {N: aws.String("3")},
+			"A2Num": &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{
+				"a": &types.AttributeValueMemberN{Value: "1"},
+				"b": &types.AttributeValueMemberN{Value: "2"},
+				"c": &types.AttributeValueMemberN{Value: "3"},
 			}},
 		},
 	}
