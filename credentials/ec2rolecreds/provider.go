@@ -46,28 +46,19 @@ type Options struct {
 	//
 	// If nil, the provider will default to the ec2imds client.
 	Client GetMetadataAPIClient
-
-	// ExpiryWindow will allow the credentials to trigger refreshing prior to
-	// the credentials actually expiring. This is beneficial so race conditions
-	// with expiring credentials do not cause request to fail unexpectedly
-	// due to ExpiredTokenException exceptions.
-	//
-	// So a ExpiryWindow of 10s would cause calls to IsExpired() to return true
-	// 10 seconds before the credentials are actually expired.
-	//
-	// If ExpiryWindow is 0 or less it will be ignored.
-	ExpiryWindow time.Duration
 }
 
 // New returns an initialized Provider value configured to retrieve
 // credentials from EC2 Instance Metadata service.
-func New(options Options, optFns ...func(*Options)) *Provider {
-	if options.Client == nil {
-		options.Client = ec2imds.New(ec2imds.Options{})
-	}
+func New(optFns ...func(*Options)) *Provider {
+	options := Options{}
 
 	for _, fn := range optFns {
 		fn(&options)
+	}
+
+	if options.Client == nil {
+		options.Client = ec2imds.New(ec2imds.Options{})
 	}
 
 	return &Provider{
@@ -102,7 +93,7 @@ func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 		Source:          ProviderName,
 
 		CanExpire: true,
-		Expires:   roleCreds.Expiration.Add(-p.options.ExpiryWindow),
+		Expires:   roleCreds.Expiration,
 	}
 
 	return creds, nil
