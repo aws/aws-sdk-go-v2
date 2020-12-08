@@ -195,15 +195,27 @@ func (m *contentSHA256Header) HandleBuild(
 	return next.HandleBuild(ctx, in)
 }
 
+// SignHTTPRequestMiddlewareOptions is the configuration options for the SignHTTPRequest middleware.
+type SignHTTPRequestMiddlewareOptions struct {
+	CredentialsProvider aws.CredentialsProvider
+	Signer              HTTPSigner
+	LogSigning          bool
+}
+
 // SignHTTPRequest is a `FinalizeMiddleware` implementation for SigV4 HTTP Signing
 type SignHTTPRequest struct {
 	credentialsProvider aws.CredentialsProvider
 	signer              HTTPSigner
+	logSigning          bool
 }
 
 // NewSignHTTPRequestMiddleware constructs a SignHTTPRequest using the given Signer for signing requests
-func NewSignHTTPRequestMiddleware(credentialsProvider aws.CredentialsProvider, signer HTTPSigner) *SignHTTPRequest {
-	return &SignHTTPRequest{credentialsProvider: credentialsProvider, signer: signer}
+func NewSignHTTPRequestMiddleware(options SignHTTPRequestMiddlewareOptions) *SignHTTPRequest {
+	return &SignHTTPRequest{
+		credentialsProvider: options.CredentialsProvider,
+		signer:              options.Signer,
+		logSigning:          options.LogSigning,
+	}
 }
 
 // ID is the SignHTTPRequest identifier
@@ -235,7 +247,9 @@ func (s *SignHTTPRequest) HandleFinalize(ctx context.Context, in middleware.Fina
 		return out, metadata, &SigningError{Err: fmt.Errorf("failed to retrieve credentials: %w", err)}
 	}
 
-	err = s.signer.SignHTTP(ctx, credentials, req.Request, payloadHash, signingName, signingRegion, sdk.NowTime())
+	err = s.signer.SignHTTP(ctx, credentials, req.Request, payloadHash, signingName, signingRegion, sdk.NowTime(), func(options *SignerOptions) {
+		options.LogSigning = s.logSigning
+	})
 	if err != nil {
 		return out, metadata, &SigningError{Err: fmt.Errorf("failed to sign http request, %w", err)}
 	}

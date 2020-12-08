@@ -81,10 +81,10 @@ func TestComputePayloadHashMiddleware(t *testing.T) {
 	}
 }
 
-type httpSignerFunc func(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error
+type httpSignerFunc func(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time, optFns ...func(*SignerOptions)) error
 
-func (f httpSignerFunc) SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error {
-	return f(ctx, credentials, r, payloadHash, service, region, signingTime)
+func (f httpSignerFunc) SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time, optFns ...func(*SignerOptions)) error {
+	return f(ctx, credentials, r, payloadHash, service, region, signingTime, optFns...)
 }
 
 func TestSignHTTPRequestMiddleware(t *testing.T) {
@@ -122,7 +122,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 				signer: httpSignerFunc(
 					func(ctx context.Context,
 						credentials aws.Credentials, r *http.Request, payloadHash string,
-						service string, region string, signingTime time.Time,
+						service string, region string, signingTime time.Time, _ ...func(*SignerOptions),
 					) error {
 						expectCreds, _ := unit.StubCredentialsProvider{}.Retrieve(context.Background())
 						if e, a := expectCreds, credentials; e != a {

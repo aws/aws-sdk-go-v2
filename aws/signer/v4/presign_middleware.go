@@ -19,6 +19,7 @@ type HTTPPresigner interface {
 	PresignHTTP(
 		ctx context.Context, credentials aws.Credentials, r *http.Request,
 		payloadHash string, service string, region string, signingTime time.Time,
+		optFns ...func(*SignerOptions),
 	) (url string, signedHeader http.Header, err error)
 }
 
@@ -30,33 +31,42 @@ type PresignedHTTPRequest struct {
 	SignedHeader http.Header
 }
 
-// PresignHTTPRequestMiddleware provides the Finalize middleware for creating a
+// PresignHTTPRequestMiddlewareOptions is the options for the PresignHTTPRequest middleware.
+type PresignHTTPRequestMiddlewareOptions struct {
+	CredentialsProvider aws.CredentialsProvider
+	Presigner           HTTPPresigner
+	LogSigning          bool
+}
+
+// PresignHTTPRequest provides the Finalize middleware for creating a
 // presigned URL for an HTTP request.
 //
 // Will short circuit the middleware stack and not forward onto the next
 // Finalize handler.
-type PresignHTTPRequestMiddleware struct {
+type PresignHTTPRequest struct {
 	credentialsProvider aws.CredentialsProvider
 	presigner           HTTPPresigner
+	logSigning          bool
 }
 
-// NewPresignHTTPRequestMiddleware returns a new PresignHTTPRequestMiddleware
+// NewPresignHTTPRequestMiddleware returns a new PresignHTTPRequest
 // initialized with the presigner.
-func NewPresignHTTPRequestMiddleware(provider aws.CredentialsProvider, presigner HTTPPresigner) *PresignHTTPRequestMiddleware {
-	return &PresignHTTPRequestMiddleware{
-		credentialsProvider: provider,
-		presigner:           presigner,
+func NewPresignHTTPRequestMiddleware(options PresignHTTPRequestMiddlewareOptions) *PresignHTTPRequest {
+	return &PresignHTTPRequest{
+		credentialsProvider: options.CredentialsProvider,
+		presigner:           options.Presigner,
+		logSigning:          options.LogSigning,
 	}
 }
 
 // ID provides the middleware ID.
-func (*PresignHTTPRequestMiddleware) ID() string { return "PresignHTTPRequestMiddleware" }
+func (*PresignHTTPRequest) ID() string { return "PresignHTTPRequest" }
 
 // HandleFinalize will take the provided input and create a presigned url for
 // the http request using the SigV4 presign authentication scheme.
 //
 // Since the signed request is not a valid HTTP request
-func (s *PresignHTTPRequestMiddleware) HandleFinalize(
+func (s *PresignHTTPRequest) HandleFinalize(
 	ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler,
 ) (
 	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
@@ -96,7 +106,9 @@ func (s *PresignHTTPRequestMiddleware) HandleFinalize(
 	}
 
 	u, h, err := s.presigner.PresignHTTP(ctx, credentials,
-		httpReq, payloadHash, signingName, signingRegion, sdk.NowTime())
+		httpReq, payloadHash, signingName, signingRegion, sdk.NowTime(), func(options *SignerOptions) {
+			options.LogSigning = s.logSigning
+		})
 	if err != nil {
 		return out, metadata, &SigningError{
 			Err: fmt.Errorf("failed to sign http request, %w", err),
