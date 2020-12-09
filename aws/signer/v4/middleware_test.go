@@ -117,7 +117,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 
 	for name, tt := range cases {
 		t.Run(name, func(t *testing.T) {
-			c := &SignHTTPRequest{
+			c := &SignHTTPRequestMiddleware{
 				credentialsProvider: tt.creds,
 				signer: httpSignerFunc(
 					func(ctx context.Context,
@@ -196,5 +196,5 @@ var (
 	_ middleware.BuildMiddleware    = &unsignedPayload{}
 	_ middleware.BuildMiddleware    = &computePayloadSHA256{}
 	_ middleware.BuildMiddleware    = &contentSHA256Header{}
-	_ middleware.FinalizeMiddleware = &SignHTTPRequest{}
+	_ middleware.FinalizeMiddleware = &SignHTTPRequestMiddleware{}
 )

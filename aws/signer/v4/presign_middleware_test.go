@@ -105,7 +105,7 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			m := &PresignHTTPRequest{
+			m := &PresignHTTPRequestMiddleware{
 				credentialsProvider: c.Creds,
 
 				presigner: httpPresignerFunc(func(
@@ -178,5 +178,5 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 }
 
 var (
-	_ middleware.FinalizeMiddleware = &PresignHTTPRequest{}
+	_ middleware.FinalizeMiddleware = &PresignHTTPRequestMiddleware{}
 )
