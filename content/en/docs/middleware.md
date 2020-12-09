@@ -1,5 +1,5 @@
 ---
-title: "Customizing AWS SDK for Go V2 Client Requests"
+title: "Customizing the AWS SDK for Go V2 Client Requests"
 linkTitle: "Middleware"
 description: "How to use stack step middleware to customize AWS SDK for Go V2 client requests."
 ---
@@ -20,17 +20,17 @@ the stack.
 
 Stack Step | Description
 --- | ---
-Initialize | Prepares the input, and sets any default parameters as needed etc.
+Initialize | Prepares the input, and sets any default parameters as needed.
 Serialize | Serializes the input to a protocol format suitable for the target transport layer.
 Build | Attach additional metadata to the serialized input, such as HTTP Content-Length.
 Finalize | Final message preparation, including retries and authentication (SigV4 signing).
-Deserialize | Deserialize responses from the protocol format into a structured type or error.\\
+Deserialize | Deserialize responses from the protocol format into a structured type or error.
 
-Each middleware within a given step must have a unique identifier, which is determined by the middlewares'
+Each middleware within a given step must have a unique identifier, which is determined by the middleware's
 `ID` method. Middleware identifiers ensure that only one instance of a given middleware is registered to a step, and
 allows other step middleware to be inserted relative to it.
 
-Ypu attach step middleware by using a step's `Insert` or `Add` methods. You use `Add` to attach a middleware to the 
+You attach step middleware by using a step's `Insert` or `Add` methods. You use `Add` to attach a middleware to the 
 beginning of a step by specifying
 [middleware.Before]({{< apiref "middleware#Before" >}}) as the
 [RelativePosition]({{< apiref "middleware#RelativePosition" >}}), and
@@ -57,14 +57,9 @@ Serialize | [SerializeMiddleware]({{< apiref smithy="middleware#SerializeMiddlew
 Finalize | [FinalizeMiddleware]({{< apiref smithy="middleware#FinalizeMiddleware" >}}) | [FinalizeMiddlewareFunc]({{< apiref smithy="middleware#FinalizeMiddlewareFunc" >}})
 Deserialize | [DeserializeMiddleware]({{< apiref smithy="middleware#DeserializeMiddleware" >}}) | [DeserializeMiddlewareFunc]({{< apiref smithy="middleware#DeserializeMiddlewareFunc" >}})
 
-The following examples shows how you can write a custom middleware to populate Bucket member of the
-{{% alias service=S3 %}} `GetObject` API calls if one is not provided.
-
-{{% pageinfo color="warning" %}}
-This middleware is meant to be a a full end-to-end example of how to construct and attach step middleware to the stack.
-This example is not official guidance on how you should structure API service input, and is only meant to show you
-the capabilities of the overall stack.
-{{% /pageinfo %}}
+The following examples show how you can write a custom middleware to populate the Bucket member of the
+{{% alias service=S3 %}} `GetObject` API calls if one is not provided. This middleware will be referenced in proceeding
+examples to show how to attach step middleware to the stack.
 
 ```go
 import "github.com/awslabs/smithy-go/middleware"
@@ -87,7 +82,7 @@ var defaultBucket = middleware.InitializeMiddlewareFunc("DefaultBucket", func(
 	}
 
 	// Middleware must call the next middleware to be executed in order to continue execution of the stack.
-	// Alternatively if an error has occurred you may return prematurely to prevent further execution.
+	// If an error occurs, you can return to prevent further execution.
 	return next.HandleInitialize(ctx, in)
 })
 
@@ -96,7 +91,7 @@ var defaultBucket = middleware.InitializeMiddlewareFunc("DefaultBucket", func(
 ## Attaching Middleware to All Clients
 
 You can attach your custom step middleware to every client by adding the middleware using the `APIOptions` member of the
-[aws.Config]({{< apiref "aws#Config" >}}) type. For example, to attach the `defaultBucket` middleware to every
+[aws.Config]({{< apiref "aws#Config" >}}) type. The following examples attaches the `defaultBucket` middleware to every
 client constructed using your applications `aws.Config` object:
 
 ```go
@@ -123,8 +118,8 @@ client := s3.NewFromConfig(cfg)
 ## Attaching Middleware to a Specific Operation
 
 You can attach your custom step middleware to a specific client operation by modifying the client's `APIOptions`
-member using the variadic argument list for an operation. For example, to attach the `defaultBucket` middleware to only
-{{% alias service=S3 %}} `GetObject` operation:
+member using the variadic argument list for an operation. The following examples attaches the `defaultBucket` middleware
+to a specific {{% alias service=S3 %}} `GetObject` operation invocation:
 
 ```go
 import "github.com/aws/aws-sdk-go-v2/aws"
@@ -225,7 +220,7 @@ Logger | [GetLogger]({{< apiref smithy="middleware#GetLogger" >}}) | Retrieve th
 ## Passing Metadata Up the Stack
 
 You can pass metadata up through the stack by adding metadata key and value pairs using the
-[middleware.Metadata]({{< apiref smithy="middleware#Metadata" >}}). Each middleware step returns an output type,
+[middleware.Metadata]({{< apiref smithy="middleware#Metadata" >}}). Each middleware step returns an output structure,
 metadata, and an error. Your custom middleware must return the metadata received from calling the next handler in the
 step. This ensures that metadata added by downstream middleware propagates to the application invoking the
 service operation. The resulting metadata is accessible to the invoking application by either the operation's
