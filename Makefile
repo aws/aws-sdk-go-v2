@@ -110,6 +110,24 @@ gen-endpoint-prefix.json:
 			-m '/tmp/aws-sdk-go-model-sync/models/apis/*/*/api-2.json' \
 			-o ${ENDPOINT_PREFIX_JSON}
 
+copy-attributevalue-feature:
+	cd ./feature/dynamodbstreams/attributevalue && \
+	find . -name "*.go" | grep -v "doc.go" | xargs -I % rm % && \
+	find ../../dynamodb/attributevalue -name "*.go" | grep -v "doc.go" | xargs -I % cp % . && \
+	ls *.go | grep -v "convert.go" | grep -v "doc.go" | \
+		xargs -I % sed -i.bk -E 's:github.com/aws/aws-sdk-go-v2/(service|feature)/dynamodb:github.com/aws/aws-sdk-go-v2/\1/dynamodbstreams:g' % &&  \
+	ls *.go | grep -v "convert.go" | grep -v "doc.go" | \
+		xargs -I % sed -i.bk 's:DynamoDB:DynamoDBStreams:g' % &&  \
+	ls *.go | grep -v "doc.go" | \
+		xargs -I % sed -i.bk 's:dynamodb\.:dynamodbstreams.:g' % &&  \
+	sed -i.bk 's:streams\.:ddbtypes.:g' "convert.go" && \
+	sed -i.bk 's:ddb\.:streams.:g' "convert.go" &&  \
+	sed -i.bk 's:ddbtypes\.:ddb.:g' "convert.go" &&\
+	sed -i.bk 's:Streams::g' "convert.go" && \
+	rm -rf ./*.bk && \
+	gofmt -w -s . && \
+	go test .
+
 
 ################
 # Unit Testing #
