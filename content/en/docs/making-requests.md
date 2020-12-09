@@ -20,7 +20,7 @@ For the list of service clients, including their methods and parameters, see the
 Service clients can be constructed using either the `New` or `NewFromConfig` functions available in service client's
 Go package. Each function will return a `Client` struct type containing the methods for invoking the service APIs.
 The `New` and `NewFromConfig` each provide the same set of configurable options for constructing a service client, but
-but provide slightly different construction patterns that we will look at in the following sections.
+provide slightly different construction patterns that we will look at in the following sections.
 
 ### NewFromConfig
 
@@ -357,7 +357,7 @@ for result := range results {
 ## Using Operation Paginators {id="using-paginators"}
 
 Typically, when you retrieve a list of items, you might need to check the output struct for a token or marker to confirm
-whether the AWS service returned all results from your request. If the token or market is present, you use it to request
+whether the AWS service returned all results from your request. If the token or marker is present, you use it to request
 the next page of results. Instead of managing these tokens or markers, you can use the service package's available
 paginator types.
 

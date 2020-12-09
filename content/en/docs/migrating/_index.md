@@ -18,7 +18,7 @@ in Go 1.13. A number of packages provided by the SDK have been modularized and a
 released respectively. This change enables improved application dependency modeling, and enables the SDK to
 provide new features and functionality that follows the Go module versioning strategy.
 
-The following list are some of the Go modules provided by the SDK:
+The following list are some Go modules provided by the SDK:
 Module | Description
 --- | ---
 `github.com/aws/aws-sdk-go-v2` | The SDK core
@@ -42,7 +42,9 @@ module, and can be included in your applications dependencies by performing
 
 The `config` package provides several helper functions that aid in overriding the shared configuration loading
 programmatically. These function names are prefixed with `With` followed by option that they override. Let's look at
-some examples of how to migrate usage of the `session` package. For more information on loading shared configuration
+some examples of how to migrate usage of the `session` package.
+
+For more information on loading shared configuration
 see [Configuring the {{% alias sdk-go %}}]({{% ref "configuring-sdk" %}}).
 
 #### Examples
@@ -157,7 +159,7 @@ interface, which defines a `Retrieve` method that returns a `(aws.Credentials, e
 [aws.Credentials]({{< apiref "aws#Credentials" >}}) that is analogous to the AWS SDK for Go
 [credentials.Value]({{< apiref "aws/credentials#Value" >}}) type.
 
-You must wrap `aws/CredentialsProvider` objects with [aws.CredentialsCache]({{< apiref "aws#CredentialsCache" >}}), to
+You must wrap `aws/CredentialsProvider` objects with [aws.CredentialsCache]({{< apiref "aws#CredentialsCache" >}}) to
 allow credential caching to occur. You use [NewCredentialsCache]({{< apiref "aws#NewCredentialsCache" >}}) to
 construct a `aws.CredentialsCache` object. By default, credentials configured by `config.LoadDefaultConfig` are wrapped
 with `aws.CredentialsCache`.
@@ -212,11 +214,11 @@ if err != nil {
 
 ### {{% alias service=EC2 %}} IAM Role Credentials
 
-You must migrate usage of [NewCredentials]({{< apiref v1="aws/credentials/ec2rolecreds#NewCredentials" >}}), and
+You must migrate usage of [NewCredentials]({{< apiref v1="aws/credentials/ec2rolecreds#NewCredentials" >}}) and
 [NewCredentialsWithClient]({{< apiref v1="aws/credentials/ec2rolecreds#NewCredentialsWithClient" >}}) to use
 [New]({{< apiref "credentials/ec2rolecreds#New" >}}).
 
-`New` takes [Options]({{< apiref "credentials/ec2rolecreds#Options" >}}) as input that allows you override the specific
+`New` takes [Options]({{< apiref "credentials/ec2rolecreds#Options" >}}) as input, allowing you override the specific
 {{% alias service=EC2 %}} Instance Metadata Service client to use, or to override the credential expiry window.
 
 #### Example
@@ -253,7 +255,7 @@ if err != nil {
 ### Endpoint Credentials
 
 You must migrate usage of [NewCredentialsClient]({{< apiref v1="aws/credentials/endpointcreds#NewCredentialsClient" >}})
-, and [NewProviderClient]({{< apiref v1="aws/credentials/endpointcreds#NewProviderClient" >}}) to use
+and [NewProviderClient]({{< apiref v1="aws/credentials/endpointcreds#NewProviderClient" >}}) to use
 [New]({{< apiref "credentials/endpointcreds#New" >}}).
 
 `New` takes a string argument containing the URL of an HTTP or HTTPS endpoint to retrieve credentials from, and an
@@ -528,7 +530,7 @@ For more information on endpoints and implementing a custom resolver, see
 
 ### Invoking API Operations
 
-The number of service client operations methods have been reduced significantly. The `<OperationName>Request`,
+The number of service client operation methods have been reduced significantly. The `<OperationName>Request`,
 `<OperationName>dWithContext`, and `<OperationName>` methods have all been consolidated into a single operation method.
 
 #### Example
@@ -580,9 +582,9 @@ output, err := client.PutObject(context.TODO(), &s3.PutObjectInput{
 ### Service Data Types
 
 The top-level input and output types of an operation are found in the service client package. The input and output shape
-for a given operation follow the pattern of `<OperationName>Input` and `<OperationName>Output`. Where
-`OperationName` is the name of the operation you are invoking. For example the input and output shape for
-the {{% alias service=S3 %}} PutObject operation are [PutObjectInput]({{< apiref "service/s3#PutObjectInput" >}}) and
+for a given operation follow the pattern of `<OperationName>Input` and `<OperationName>Output`, where `OperationName`
+is the name of the operation you are invoking. For example the input and output shape for the
+{{% alias service=S3 %}} PutObject operation are [PutObjectInput]({{< apiref "service/s3#PutObjectInput" >}}) and
 [PutObjectOutput]({{< apiref "service/s3#PutObjectOutput" >}}) respectively.
 
 All other service data types, other than input and output types, have been migrated to the `types` package located
@@ -609,10 +611,10 @@ The AWS SDK for Go required pointer references to be passed for all input parame
 pointers where possible. This change means that many service clients operations no longer require your application
 to pass pointer references for the following types: `uint8`, `uint16`, `uint32`, `int8`, `int16`, `int32`, `float32`,
 `float64`, `bool`. Similarly, slice and map element types have been updated accordingly to reflect whether their
-elements must be passed as pointer references accordingly.
+elements must be passed as pointer references.
 
 The [aws]({{< apiref "aws" >}}) package contains helper functions for creating pointers for the Go built-in types, these
-helpers should be used to more easily handle creating pointer types for these Go types. Similarly helpers methods are
+helpers should be used to more easily handle creating pointer types for these Go types. Similarly, helper methods are
 provided for safely de-referencing pointer values for these types. For example, the
 [aws.String]({{< apiref "aws#String" >}}) function converts from `string` &rArr; `*string`. Inversely,
 the [aws.ToString]({{< apiref "aws#ToString" >}}) converts from `*string` &rArr; `string`. When upgrading your
@@ -830,6 +832,5 @@ Dwonload manager client.
 
 ### {{% alias service=CFlong %}} Signing Utilities
 
-The {{% alias service=CFlong %}} signing utilities are available for use in the {{% alias sdk-go %}}. This package is
-located in a Go module outisde the service client import path. This module can be retrieved by using
-`go get github.com/aws/aws-sdk-go-v2/feature/cloudfront/sign`.
+The {{% alias sdk-go %}} provides {{% alias service=CFlong %}} signing utilities in a Go module outside the service
+client import path. This module can be retrieved by using `go get github.com/aws/aws-sdk-go-v2/feature/cloudfront/sign`.
