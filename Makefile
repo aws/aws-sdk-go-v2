@@ -40,7 +40,7 @@ all: generate unit
 ###################
 # Code Generation #
 ###################
-generate: smithy-generate gen-config-asserts gen-repo-mod-replace gen-mod-dropreplace-smithy tidy-modules-. add-module-license-files gen-aws-ptrs
+generate: smithy-generate gen-config-asserts copy-attributevalue-feature gen-repo-mod-replace gen-mod-dropreplace-smithy tidy-modules-. add-module-license-files gen-aws-ptrs
 
 smithy-generate:
 	cd codegen && ./gradlew clean build -Plog-tests && ./gradlew clean
