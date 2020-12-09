@@ -267,7 +267,7 @@ func resolveEC2RoleCredentials(cfg *aws.Config, configs configs) error {
 	provider := ec2rolecreds.New(optFns...)
 
 	cfg.Credentials = wrapWithCredentialsCache(provider, func(options *aws.CredentialsCacheOptions) {
-		options.ExpiryWindow = 5*time.Minute
+		options.ExpiryWindow = 5 * time.Minute
 	})
 
 	return nil

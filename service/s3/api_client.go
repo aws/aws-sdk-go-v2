@@ -205,11 +205,16 @@ func addClientUserAgent(stack *middleware.Stack) error {
 }
 
 func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) error {
-	return stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(o.Credentials, o.HTTPSignerV4), middleware.After)
+	mw := v4.NewSignHTTPRequestMiddleware(v4.SignHTTPRequestMiddlewareOptions{
+		CredentialsProvider: o.Credentials,
+		Signer:              o.HTTPSignerV4,
+		LogSigning:          o.ClientLogMode.IsSigning(),
+	})
+	return stack.Finalize.Add(mw, middleware.After)
 }
 
 type HTTPSignerV4 interface {
-	SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error
+	SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time, optFns ...func(*v4.SignerOptions)) error
 }
 
 func resolveHTTPSignerV4(o *Options) {
@@ -217,10 +222,10 @@ func resolveHTTPSignerV4(o *Options) {
 		return
 	}
 	o.HTTPSignerV4 = v4.NewSigner(
-		func(s *v4.Signer) {
-			s.Logger = o.Logger
-			s.LogSigning = o.ClientLogMode.IsSigning()
-			s.DisableURIPathEscaping = true
+		func(so *v4.SignerOptions) {
+			so.Logger = o.Logger
+			so.LogSigning = o.ClientLogMode.IsSigning()
+			so.DisableURIPathEscaping = true
 		},
 	)
 }
@@ -265,6 +270,7 @@ type HTTPPresignerV4 interface {
 	PresignHTTP(
 		ctx context.Context, credentials aws.Credentials, r *http.Request,
 		payloadHash string, service string, region string, signingTime time.Time,
+		optFns ...func(*v4.SignerOptions),
 	) (url string, signedHeader http.Header, err error)
 }
 
@@ -342,7 +348,12 @@ func (c *PresignClient) convertToPresignMiddleware(stack *middleware.Stack, opti
 	stack.Finalize.Clear()
 	stack.Deserialize.Clear()
 	stack.Build.Remove((*awsmiddleware.ClientRequestID)(nil).ID())
-	err = stack.Finalize.Add(v4.NewPresignHTTPRequestMiddleware(options.Credentials, c.presigner), middleware.After)
+	pmw := v4.NewPresignHTTPRequestMiddleware(v4.PresignHTTPRequestMiddlewareOptions{
+		CredentialsProvider: options.Credentials,
+		Presigner:           c.presigner,
+		LogSigning:          options.ClientLogMode.IsSigning(),
+	})
+	err = stack.Finalize.Add(pmw, middleware.After)
 	if err != nil {
 		return err
 	}

@@ -174,8 +174,8 @@ func TestCredentialsCache_ExpireTime(t *testing.T) {
 			},
 		},
 		"no expire window with jitter": {
-			ExpireTime:   mockTime,
-			JitterFrac:   0.5,
+			ExpireTime: mockTime,
+			JitterFrac: 0.5,
 			Validate: func(t *testing.T, v time.Time) {
 				t.Helper()
 				if e, a := mockTime, v; !e.Equal(a) {
