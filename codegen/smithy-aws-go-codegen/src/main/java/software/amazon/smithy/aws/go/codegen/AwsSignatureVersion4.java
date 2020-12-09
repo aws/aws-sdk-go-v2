@@ -46,7 +46,6 @@ public final class AwsSignatureVersion4 implements GoIntegration {
     public static final String SIGNER_CONFIG_FIELD_NAME = SIGNER_INTERFACE_NAME;
     public static final String SIGNER_RESOLVER = "resolve" + SIGNER_CONFIG_FIELD_NAME;
 
-    private static final String CONFIGURE_SIGNER_FUNCTION = "configureSignerV4";
     private static final List<String> DISABLE_URI_PATH_ESCAPE = ListUtils.of("com.amazonaws.s3#AmazonS3");
 
     @Override
@@ -75,27 +74,29 @@ public final class AwsSignatureVersion4 implements GoIntegration {
         writer.openBlock("type $L interface {", "}", SIGNER_INTERFACE_NAME, () -> {
             writer.addUseImports(SmithyGoDependency.CONTEXT);
             writer.addUseImports(AwsGoDependency.AWS_CORE);
+            writer.addUseImports(AwsGoDependency.AWS_SIGNER_V4);
             writer.addUseImports(SmithyGoDependency.NET_HTTP);
             writer.addUseImports(SmithyGoDependency.TIME);
             writer.write("SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, "
-                    + "payloadHash string, service string, region string, signingTime time.Time) error");
+                    + "payloadHash string, service string, region string, signingTime time.Time, "
+                    + "optFns ...func(*v4.SignerOptions)) error");
         });
     }
 
     private void writerConfigFieldResolver(GoWriter writer, ServiceShape serviceShape) {
         Symbol newSignerSymbol = SymbolUtils.createValueSymbolBuilder("NewSigner",
                 AwsGoDependency.AWS_SIGNER_V4).build();
-        Symbol signerSymbol = SymbolUtils.createPointableSymbolBuilder("Signer",
+        Symbol signerOptionsSymbol = SymbolUtils.createPointableSymbolBuilder("SignerOptions",
                 AwsGoDependency.AWS_SIGNER_V4).build();
 
         writer.openBlock("func $L(o *Options) {", "}", SIGNER_RESOLVER, () -> {
             writer.openBlock("if o.$L != nil {", "}", SIGNER_CONFIG_FIELD_NAME, () -> writer.write("return"));
             writer.openBlock("o.$L = $T(", ")", SIGNER_CONFIG_FIELD_NAME, newSignerSymbol, () -> {
-                writer.openBlock("func (s $P) {", "},", signerSymbol, () -> {
-                    writer.write("s.Logger = o.$L", AddAwsConfigFields.LOGGER_CONFIG_NAME);
-                    writer.write("s.LogSigning = o.$L.IsSigning()", AddAwsConfigFields.LOG_MODE_CONFIG_NAME);
+                writer.openBlock("func (so $P) {", "},", signerOptionsSymbol, () -> {
+                    writer.write("so.Logger = o.$L", AddAwsConfigFields.LOGGER_CONFIG_NAME);
+                    writer.write("so.LogSigning = o.$L.IsSigning()", AddAwsConfigFields.LOG_MODE_CONFIG_NAME);
                     if (DISABLE_URI_PATH_ESCAPE.contains(serviceShape.getId().toString())) {
-                        writer.write("s.DisableURIPathEscaping = true");
+                        writer.write("so.DisableURIPathEscaping = true");
                     }
                 });
             });
@@ -120,10 +121,17 @@ public final class AwsSignatureVersion4 implements GoIntegration {
         writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
         writer.openBlock("func $L(stack $P, o Options) error {", "}", REGISTER_MIDDLEWARE_FUNCTION,
                 SymbolUtils.createPointableSymbolBuilder("Stack", SmithyGoDependency.SMITHY_MIDDLEWARE).build(), () -> {
-                    writer.write("return stack.Finalize.Add($T(o.$L, o.$L), middleware.After)",
-                            SymbolUtils.createValueSymbolBuilder("NewSignHTTPRequestMiddleware",
-                                    AwsGoDependency.AWS_SIGNER_V4).build(),
-                            AddAwsConfigFields.CREDENTIALS_CONFIG_NAME, SIGNER_CONFIG_FIELD_NAME);
+                    Symbol newMiddlewareSymbol = SymbolUtils.createValueSymbolBuilder(
+                            "NewSignHTTPRequestMiddleware", AwsGoDependency.AWS_SIGNER_V4).build();
+                    Symbol middlewareOptionsSymbol = SymbolUtils.createValueSymbolBuilder(
+                            "SignHTTPRequestMiddlewareOptions", AwsGoDependency.AWS_SIGNER_V4).build();
+
+                    writer.openBlock("mw := $T($T{", "})", newMiddlewareSymbol, middlewareOptionsSymbol, () -> {
+                        writer.write("CredentialsProvider: o.$L,", AddAwsConfigFields.CREDENTIALS_CONFIG_NAME);
+                        writer.write("Signer: o.$L,", SIGNER_CONFIG_FIELD_NAME);
+                        writer.write("LogSigning: o.$L.IsSigning(),", AddAwsConfigFields.LOG_MODE_CONFIG_NAME);
+                    });
+                    writer.write("return stack.Finalize.Add(mw, middleware.After)");
                 });
         writer.write("");
     }
