@@ -70,7 +70,7 @@ func NewCredentialsCache(provider CredentialsProvider, optFns ...func(options *C
 
 	return &CredentialsCache{
 		provider: provider,
-		options: options,
+		options:  options,
 	}
 }
 

@@ -19,15 +19,17 @@ import (
 type httpPresignerFunc func(
 	ctx context.Context, credentials aws.Credentials, r *http.Request,
 	payloadHash string, service string, region string, signingTime time.Time,
+	optFns ...func(*SignerOptions),
 ) (url string, signedHeader http.Header, err error)
 
 func (f httpPresignerFunc) PresignHTTP(
 	ctx context.Context, credentials aws.Credentials, r *http.Request,
 	payloadHash string, service string, region string, signingTime time.Time,
+	optFns ...func(*SignerOptions),
 ) (
 	url string, signedHeader http.Header, err error,
 ) {
-	return f(ctx, credentials, r, payloadHash, service, region, signingTime)
+	return f(ctx, credentials, r, payloadHash, service, region, signingTime, optFns...)
 }
 
 func TestPresignHTTPRequestMiddleware(t *testing.T) {
@@ -109,6 +111,7 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 				presigner: httpPresignerFunc(func(
 					ctx context.Context, credentials aws.Credentials, r *http.Request,
 					payloadHash string, service string, region string, signingTime time.Time,
+					_ ...func(*SignerOptions),
 				) (url string, signedHeader http.Header, err error) {
 
 					if !haveCredentialProvider(c.Creds) {

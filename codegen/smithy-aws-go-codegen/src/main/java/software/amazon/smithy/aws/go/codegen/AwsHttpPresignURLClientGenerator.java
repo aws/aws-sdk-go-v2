@@ -352,8 +352,14 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                     writer.write("stack.Deserialize.Clear()");
                     writer.write("stack.Build.Remove(($P)(nil).ID())", requestInvocationID);
 
-                    writer.write("err = stack.Finalize.Add($T(options.Credentials, c.presigner), $T)",
-                            presignMiddleware, smithyAfter);
+                    Symbol middlewareOptionsSymbol = SymbolUtils.createValueSymbolBuilder(
+                            "PresignHTTPRequestMiddlewareOptions", AwsGoDependency.AWS_SIGNER_V4).build();
+                    writer.openBlock("pmw := $T($T{", "})", presignMiddleware, middlewareOptionsSymbol, () -> {
+                        writer.write("CredentialsProvider: options.$L,", AddAwsConfigFields.CREDENTIALS_CONFIG_NAME);
+                        writer.write("Presigner: c.presigner,");
+                        writer.write("LogSigning: options.$L.IsSigning(),", AddAwsConfigFields.LOG_MODE_CONFIG_NAME);
+                    });
+                    writer.write("err = stack.Finalize.Add(pmw, $T)", smithyAfter);
                     writer.write("if err != nil { return err }");
 
                     // if protocol used is ec2query or query
@@ -466,14 +472,18 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
             SymbolProvider symbolProvider,
             ServiceShape serviceShape
     ) {
+        Symbol signerOptionsSymbol = SymbolUtils.createPointableSymbolBuilder("SignerOptions",
+                AwsGoDependency.AWS_SIGNER_V4).build();
+
         writer.writeDocs(
                 String.format("%s represents presigner interface used by presign url client",
                         presignerInterfaceSymbol.getName())
         );
         writer.openBlock("type $T interface {", "}", presignerInterfaceSymbol, () -> {
             writer.write("PresignHTTP(");
-            writer.write("ctx context.Context, credentials aws.Credentials, r *http.Request, ");
-            writer.write("payloadHash string, service string, region string, signingTime time.Time, ");
+            writer.write("ctx context.Context, credentials aws.Credentials, r *http.Request,");
+            writer.write("payloadHash string, service string, region string, signingTime time.Time,");
+            writer.write("optFns ...func($P),", signerOptionsSymbol);
             writer.write(") (url string, signedHeader http.Header, err error)");
         });
 

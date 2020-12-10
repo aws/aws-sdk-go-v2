@@ -35,7 +35,7 @@ func TestStandaloneSign_CustomURIEscape(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	signer := v4.NewSigner(func(signer *v4.Signer) {
+	signer := v4.NewSigner(func(signer *v4.SignerOptions) {
 		signer.DisableURIPathEscaping = true
 	})
 

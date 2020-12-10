@@ -5,13 +5,6 @@ go 1.15
 require (
 	github.com/aws/aws-sdk-go-v2/config v0.3.0
 	github.com/aws/aws-sdk-go-v2/service/s3 v0.30.0
-	github.com/aws/aws-sdk-go-v2 v0.30.0
-	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v0.3.1
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v0.1.2
-	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v0.3.2
-	github.com/aws/aws-sdk-go-v2/service/sts v0.30.0
-	github.com/aws/aws-sdk-go-v2/credentials v0.1.5
-	github.com/aws/aws-sdk-go-v2/ec2imds v0.1.5
 )
 
 replace (
