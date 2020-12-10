@@ -1,0 +1,867 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.79.0" />
+
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+
+<link rel="shortcut icon" href="/favicons/favicon.ico" >
+<link rel="apple-touch-icon" href="/aws-sdk-go-v2/favicons/apple-touch-icon-180x180.png" sizes="180x180">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-36x36.png" sizes="36x36">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-48x48.png" sizes="48x48">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-72x72.png" sizes="72x72">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-144x144.png" sizes="144x144">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-192x192.png" sizes="192x192">
+
+<title>Customizing the AWS SDK for Go V2 Client Requests | AWS SDK for Go V2</title><meta property="og:title" content="Customizing the AWS SDK for Go V2 Client Requests" />
+<meta property="og:description" content="How to use stack step middleware to customize AWS SDK for Go V2 client requests." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/middleware/" />
+<meta property="article:modified_time" content="2020-12-10T11:45:42-08:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
+<meta itemprop="name" content="Customizing the AWS SDK for Go V2 Client Requests">
+<meta itemprop="description" content="How to use stack step middleware to customize AWS SDK for Go V2 client requests.">
+<meta itemprop="dateModified" content="2020-12-10T11:45:42-08:00" />
+<meta itemprop="wordCount" content="1305">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Customizing the AWS SDK for Go V2 Client Requests"/>
+<meta name="twitter:description" content="How to use stack step middleware to customize AWS SDK for Go V2 client requests."/>
+
+
+
+
+
+<link rel="preload" href="/aws-sdk-go-v2/scss/main.min.a40e8388f84bdd24bc3411e01a2a4a50b09036c9b079bd05a1eb025839f53861.css" as="style">
+<link href="/aws-sdk-go-v2/scss/main.min.a40e8388f84bdd24bc3411e01a2a4a50b09036c9b079bd05a1eb025839f53861.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+
+<script
+  src="https://unpkg.com/lunr@2.3.8/lunr.min.js"
+  integrity="sha384-vRQ9bDyE0Wnu+lMfm57BlYLO0/XauFuKpVsZPs7KEDwYKktWi5+Kz3MP8++DFlRY"
+  crossorigin="anonymous"></script>
+
+
+
+
+  </head>
+  <body class="td-page">
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+        <a class="navbar-brand" href="/aws-sdk-go-v2/">
+		<span class="navbar-logo"></span><span class="text-uppercase font-weight-bold">AWS SDK for Go V2</span>
+	</a>
+	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				<a class="nav-link active" href="/aws-sdk-go-v2/docs/" ><span class="active">Documentation</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				<a class="nav-link" href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2" target="_blank" ><span>API</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				<a class="nav-link" href="https://github.com/aws/aws-sdk-go-v2" target="_blank" ><span>GitHub</span></a>
+			</li>
+			
+			
+			
+		</ul>
+	</div>
+	<div class="navbar-nav d-none d-lg-block">
+
+
+
+<input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.c5574c27dfa6a260860207d71b08d554.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
+</div>
+</nav>
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <form class="td-sidebar__search d-flex align-items-center d-lg-none">
+    
+
+
+
+<input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.c5574c27dfa6a260860207d71b08d554.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+    
+    
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Documentation</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="aws-sdk-go-v2docs">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsgetting-started" href="/aws-sdk-go-v2/docs/getting-started/">Getting Started</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/configuring-sdk/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Configuring the SDK</a>
+  </li>
+  <ul>
+    <li class="collapse " id="aws-sdk-go-v2docsconfiguring-sdk">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints" href="/aws-sdk-go-v2/docs/configuring-sdk/endpoints/">Endpoints</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsconfiguring-sdkcustom-http" href="/aws-sdk-go-v2/docs/configuring-sdk/custom-http/">HTTP Client</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsconfiguring-sdklogging" href="/aws-sdk-go-v2/docs/configuring-sdk/logging/">Logging</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docshandling-errors" href="/aws-sdk-go-v2/docs/handling-errors/">Handling Errors</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/sdk-utilities/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">SDK Utilities</a>
+  </li>
+  <ul>
+    <li class="collapse " id="aws-sdk-go-v2docssdk-utilities">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssdk-utilitiescloudfront" href="/aws-sdk-go-v2/docs/sdk-utilities/cloudfront/">Amazon CloudFront</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssdk-utilitiesec2-imds" href="/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/">Amazon EC2 IMDS</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssdk-utilitiess3" href="/aws-sdk-go-v2/docs/sdk-utilities/s3/">Amazon S3</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsmaking-requests" href="/aws-sdk-go-v2/docs/making-requests/">Using AWS Services</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docscloud9-go" href="/aws-sdk-go-v2/docs/cloud9-go/">Using Cloud9 with the SDK</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/security/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Security</a>
+  </li>
+  <ul>
+    <li class="collapse " id="aws-sdk-go-v2docssecurity">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritycompliance-validation" href="/aws-sdk-go-v2/docs/security/compliance-validation/">Compliance Validation</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecurityiam" href="/aws-sdk-go-v2/docs/security/iam/">Identity and Access Management</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecurityinfrastructure-security" href="/aws-sdk-go-v2/docs/security/infrastructure-security/">Infrastructure Security</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritydisaster-recovery-resiliency" href="/aws-sdk-go-v2/docs/security/disaster-recovery-resiliency/">Resilience</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritydata-protection" href="/aws-sdk-go-v2/docs/security/data-protection/">Data Protection</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritytls" href="/aws-sdk-go-v2/docs/security/tls/">Enforcing TLS 1.2</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-aws-sdk-go-v2docsmiddleware" href="/aws-sdk-go-v2/docs/middleware/">Middleware</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/migrating/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Migrating</a>
+  </li>
+  <ul>
+    <li class="collapse " id="aws-sdk-go-v2docsmigrating">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+    </li>
+  </ul>
+</ul>
+
+  </nav>
+</div>
+
+
+
+
+          </div>
+          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+            
+
+
+
+
+
+
+<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
+
+
+
+
+
+
+
+
+
+
+
+<a href="https://github.com/aws/aws-sdk-go-v2/edit/documentation/content/en/docs/middleware.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/aws/aws-sdk-go-v2/new/documentation/content/en/docs/middleware.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> Create child page</a>
+<a href="https://github.com/aws/aws-sdk-go-v2/issues/new?title=Customizing%20the%20AWS%20SDK%20for%20Go%20V2%20Client%20Requests" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+
+
+<a href="https://github.com/aws/aws-sdk-go-v2/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
+
+</div>
+
+
+
+
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#writing-a-custom-middleware">Writing a Custom Middleware</a></li>
+    <li><a href="#attaching-middleware-to-all-clients">Attaching Middleware to All Clients</a></li>
+    <li><a href="#attaching-middleware-to-a-specific-operation">Attaching Middleware to a Specific Operation</a></li>
+    <li><a href="#passing-metadata-down-the-stack">Passing Metadata Down the Stack</a>
+      <ul>
+        <li><a href="#metadata-provided-by-the-sdk">Metadata Provided by the SDK</a></li>
+      </ul>
+    </li>
+    <li><a href="#passing-metadata-up-the-stack">Passing Metadata Up the Stack</a></li>
+  </ul>
+</nav>
+
+
+
+          </div>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
+	<ol class="breadcrumb spb-1">
+		
+
+
+
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://aws.github.io/aws-sdk-go-v2/docs/">Documentation</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item active" aria-current="page">
+	<a href="https://aws.github.io/aws-sdk-go-v2/docs/middleware/">Middleware</a>
+</li>
+
+	</ol>
+</nav	>
+
+            
+<div class="td-content">
+	<h1>Customizing the AWS SDK for Go V2 Client Requests</h1>
+    <div class="lead">How to use stack step middleware to customize AWS SDK for Go V2 client requests.</div>
+	       
+	
+
+<div class="pageinfo pageinfo-warning">
+<p>Modifying the client request pipeline can result in malformed/invalid requests, or
+can result in unexpected application errors. This functionality is meant for advanced uses cases not provided by the SDK
+interface by default.</p>
+
+</div>
+
+<p>You can customize AWS SDK for Go V2 client requests by registering one or more middleware to a service operation&rsquo;s
+<a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#Stack">stack</a>. The stack is composed of a series of steps: Initialize, Serialize,
+Build, Finalize, and Deserialize. Each step contains zero or more middleware that operates on that step&rsquo;s input and
+output types. The following diagram and table provide an overview of how an operation&rsquo;s request and response traverses
+the stack.</p>
+<p><img src="/aws-sdk-go-v2/diagram/middleware.png" alt="Middleware"></p>
+<table>
+<thead>
+<tr>
+<th>Stack Step</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Initialize</td>
+<td>Prepares the input, and sets any default parameters as needed.</td>
+</tr>
+<tr>
+<td>Serialize</td>
+<td>Serializes the input to a protocol format suitable for the target transport layer.</td>
+</tr>
+<tr>
+<td>Build</td>
+<td>Attach additional metadata to the serialized input, such as HTTP Content-Length.</td>
+</tr>
+<tr>
+<td>Finalize</td>
+<td>Final message preparation, including retries and authentication (SigV4 signing).</td>
+</tr>
+<tr>
+<td>Deserialize</td>
+<td>Deserialize responses from the protocol format into a structured type or error.</td>
+</tr>
+</tbody>
+</table>
+<p>Each middleware within a given step must have a unique identifier, which is determined by the middleware&rsquo;s
+<code>ID</code> method. Middleware identifiers ensure that only one instance of a given middleware is registered to a step, and
+allows other step middleware to be inserted relative to it.</p>
+<p>You attach step middleware by using a step&rsquo;s <code>Insert</code> or <code>Add</code> methods. You use <code>Add</code> to attach a middleware to the
+beginning of a step by specifying
+<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/middleware#Before">middleware.Before</a> as the
+<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/middleware#RelativePosition">RelativePosition</a>, and
+<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/middleware#After">middleware.After</a> to attach to the end of the step.
+You use <code>Insert</code> to attach a middleware to a step by inserting the middleware relative to another step middleware.</p>
+
+
+<div class="pageinfo pageinfo-warning">
+<p>You must use the <code>Add</code> method to safely insert custom step middleware. Using <code>Insert</code> creates a dependency between your
+custom middleware, and the middleware that you are inserting relative to. The middleware within a stack step must be
+considered opaque to avoid breaking changes occurring to your application.</p>
+
+</div>
+
+<h2 id="writing-a-custom-middleware">Writing a Custom Middleware</h2>
+<p>Each stack step has an interface that you must satisfy in order attach a middleware to a given step. You can use one of
+the provided <code>&lt;Step&gt;MiddlewareFunc</code> functions to quickly satisfy this interface. The following table outlines the steps,
+their interface, and the helper function that can be used to satisfy the interface.</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Interface</th>
+<th>Helper Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Initialize</td>
+<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#InitializeMiddleware">InitializeMiddleware</a></td>
+<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#InitializeMiddlewareFunc">InitializeMiddlewareFunc</a></td>
+</tr>
+<tr>
+<td>Build</td>
+<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#BuildMiddleware">BuildMiddleware</a></td>
+<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#BuildMiddlewareFunc">BuildMiddlewareFunc</a></td>
+</tr>
+<tr>
+<td>Serialize</td>
+<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#SerializeMiddleware">SerializeMiddleware</a></td>
+<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#SerializeMiddlewareFunc">SerializeMiddlewareFunc</a></td>
+</tr>
+<tr>
+<td>Finalize</td>
+<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#FinalizeMiddleware">FinalizeMiddleware</a></td>
+<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#FinalizeMiddlewareFunc">FinalizeMiddlewareFunc</a></td>
+</tr>
+<tr>
+<td>Deserialize</td>
+<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#DeserializeMiddleware">DeserializeMiddleware</a></td>
+<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#DeserializeMiddlewareFunc">DeserializeMiddlewareFunc</a></td>
+</tr>
+</tbody>
+</table>
+<p>The following examples show how you can write a custom middleware to populate the Bucket member of the
+Amazon S3 <code>GetObject</code> API calls if one is not provided. This middleware will be referenced in proceeding
+examples to show how to attach step middleware to the stack.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/awslabs/smithy-go/middleware&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">defaultBucket</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeMiddlewareFunc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;DefaultBucket&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span>
+	<span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeInput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">next</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeHandler</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span>
+	<span style="color:#000">out</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeOutput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">metadata</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#8f5902;font-style:italic">// Type switch to check if the input is s3.GetObjectInput, if so and the bucket is not set, populate it with
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#8f5902;font-style:italic">// our default.
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#204a87;font-weight:bold">switch</span> <span style="color:#000">v</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">in</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Parameters</span><span style="color:#000;font-weight:bold">.(</span><span style="color:#204a87;font-weight:bold">type</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87;font-weight:bold">case</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectInput</span><span style="color:#000;font-weight:bold">:</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">v</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Bucket</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">v</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Bucket</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;my-default-bucket&#34;</span>
+		<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#000;font-weight:bold">}</span>
+
+	<span style="color:#8f5902;font-style:italic">// Middleware must call the next middleware to be executed in order to continue execution of the stack.
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#8f5902;font-style:italic">// If an error occurs, you can return to prevent further execution.
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">next</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HandleInitialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">})</span>
+
+</code></pre></div><h2 id="attaching-middleware-to-all-clients">Attaching Middleware to All Clients</h2>
+<p>You can attach your custom step middleware to every client by adding the middleware using the <code>APIOptions</code> member of the
+<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Config">aws.Config</a> type. The following examples attaches the <code>defaultBucket</code> middleware to every
+client constructed using your applications <code>aws.Config</code> object:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/aws&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/awslabs/smithy-go/middleware&#34;</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">()</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#8f5902;font-style:italic">// handle error
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">APIOptions</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#204a87">append</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">APIOptions</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">stack</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Stack</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">error</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#8f5902;font-style:italic">// Attach the custom middleware to the beginning of the Initialize step
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">stack</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Initialize</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Add</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">defaultBucket</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Before</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">})</span>
+
+<span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">)</span>
+</code></pre></div><h2 id="attaching-middleware-to-a-specific-operation">Attaching Middleware to a Specific Operation</h2>
+<p>You can attach your custom step middleware to a specific client operation by modifying the client&rsquo;s <code>APIOptions</code>
+member using the variadic argument list for an operation. The following examples attaches the <code>defaultBucket</code> middleware
+to a specific Amazon S3 <code>GetObject</code> operation invocation:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/aws&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/awslabs/smithy-go/middleware&#34;</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#8f5902;font-style:italic">// registerDefaultBucketMiddleware registers the defaultBucket middleware with the provided stack.
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">registerDefaultBucketMiddleware</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">stack</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Stack</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">error</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#8f5902;font-style:italic">// Attach the custom middleware to the beginning of the Initialize step
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">stack</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Initialize</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Add</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">defaultBucket</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Before</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">()</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#8f5902;font-style:italic">// handle error
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">)</span>
+
+<span style="color:#000">object</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObject</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">Key</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;my-key&#34;</span><span style="color:#000;font-weight:bold">),</span>
+<span style="color:#000;font-weight:bold">},</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">options</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#8f5902;font-style:italic">// Register the defaultBucketMiddleware for this operation only
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000">options</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">APIOptions</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#204a87">append</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">options</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">APIOptions</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">registerDefaultBucketMiddleware</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">})</span>
+</code></pre></div><h2 id="passing-metadata-down-the-stack">Passing Metadata Down the Stack</h2>
+<p>In certain situations, you may find that you require two or more middleware to function in tandem by sharing information
+or state. You can use the <a href="https://golang.org/pkg/context/#Context">context.Context</a> to pass this metadata by
+wrapping the <code>context.Context</code>using <a href="https://golang.org/pkg/context/#WithValue">context.WithValue</a>. <code>context.WithValue</code>
+wraps the provided context and attaches the provided key and value. Values can be retrieved from a context using
+<code>context.Value</code> and providing the key used to stored the value previously. Context keys must be comparable, and you must
+define your own types as context keys to avoid collisions. The following examples shows how to middleware steps can
+used <code>context.Context</code> to pass information down the stack.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;context&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/awslabs/smithy-go/middleware&#34;</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">customKey</span> <span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000;font-weight:bold">{}</span>
+
+<span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">GetCustomKey</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">v</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">v</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">_</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Value</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">customKey</span><span style="color:#000;font-weight:bold">{}).(</span><span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">v</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">SetCustomKey</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">value</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WithValue</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">customkey</span><span style="color:#000;font-weight:bold">{},</span> <span style="color:#000">value</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">customInitalize</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeMiddlewareFunc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;customInitialize&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span>
+	<span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeInput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">next</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeHandler</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span>
+	<span style="color:#000">out</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeOutput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">metadata</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">ctx</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">SetCustomKey</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;my-custom-value&#34;</span><span style="color:#000;font-weight:bold">)</span>
+	
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">next</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HandleInitialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">})</span>
+
+<span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">customBuild</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">BuildMiddlewareFunc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;customBuild&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span>
+	<span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">BuildInput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">next</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">BuildHandler</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span>
+	<span style="color:#000">out</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">BuildOutput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">metadata</span> <span style="color:#000">Metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">customValue</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">GetCustomKey</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">)</span>
+	
+	<span style="color:#8f5902;font-style:italic">// use customValue
+</span><span style="color:#8f5902;font-style:italic"></span>
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">next</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HandleBuild</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">})</span>
+</code></pre></div><h3 id="metadata-provided-by-the-sdk">Metadata Provided by the SDK</h3>
+<p>The AWS SDK for Go V2 provides several metadata values that can be retrieved from the provided context. These values
+can be used to enable more dynamic middleware that modifies its behavior based on the executing service, operation, or
+target region. A few of the available keys are provided in the table below:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Retriever</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ServiceID</td>
+<td><a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/middleware#GetServiceID">GetServiceID</a></td>
+<td>Retrieve the service identifier for the executing stack. This can be compared to the service client package&rsquo;s <code>ServiceID</code> constant.</td>
+</tr>
+<tr>
+<td>OperationName</td>
+<td><a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/middleware#GetOperationName">GetOperationName</a></td>
+<td>Retrieve the operation name for the executing stack.</td>
+</tr>
+<tr>
+<td>Logger</td>
+<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#GetLogger">GetLogger</a></td>
+<td>Retrieve the logger that can be used for logging message from the middleware.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="passing-metadata-up-the-stack">Passing Metadata Up the Stack</h2>
+<p>You can pass metadata up through the stack by adding metadata key and value pairs using the
+<a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#Metadata">middleware.Metadata</a>. Each middleware step returns an output structure,
+metadata, and an error. Your custom middleware must return the metadata received from calling the next handler in the
+step. This ensures that metadata added by downstream middleware propagates to the application invoking the
+service operation. The resulting metadata is accessible to the invoking application by either the operation&rsquo;s
+output shape via the <code>ResultMetadata</code> structure member.</p>
+<p>The following examples shows how a custom middleware can add metadata that is returned as part of the operation output.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;context&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/awslabs/smithy-go/middleware&#34;</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">customKey</span> <span style="color:#204a87;font-weight:bold">struct</span><span style="color:#000;font-weight:bold">{}</span>
+
+<span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">GetCustomKey</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">metadata</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Metadata</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">v</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">v</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">_</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">metadata</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Get</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">customKey</span><span style="color:#000;font-weight:bold">{}).(</span><span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">v</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">SetCustomKey</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">metadata</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">value</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">metadata</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Set</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">customKey</span><span style="color:#000;font-weight:bold">{},</span> <span style="color:#000">value</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">customInitalize</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeMiddlewareFunc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;customInitialize&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span>
+	<span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeInput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">next</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeHandler</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span>
+	<span style="color:#000">out</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeOutput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">metadata</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">out</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">next</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HandleInitialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">out</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span>
+	<span style="color:#000;font-weight:bold">}</span>
+	
+	<span style="color:#000">SetCustomKey</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;my-custom-value&#34;</span><span style="color:#000;font-weight:bold">)</span>
+	
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">out</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">nil</span>
+<span style="color:#000;font-weight:bold">})</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">options</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">options</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">APIOptions</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#204a87">append</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">options</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">APIOptions</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">stack</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Stack</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">error</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">stack</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Initialize</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Add</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">customInitalize</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">After</span><span style="color:#000;font-weight:bold">)</span>
+	<span style="color:#000;font-weight:bold">})</span>
+<span style="color:#000;font-weight:bold">})</span>
+
+<span style="color:#000">out</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObject</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#8f5902;font-style:italic">// input parameters
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">})</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#8f5902;font-style:italic">// handle error
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">customValue</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">GetCustomKey</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">out</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ResponseMetadata</span><span style="color:#000;font-weight:bold">)</span>
+
+</code></pre></div>
+	
+	
+	<div class="text-muted mt-5 pt-3 border-top">Last modified December 10, 2020: <a  href="https://github.com/aws/aws-sdk-go-v2/commit/375e9cf2ac0c9f36cd7edbd6e209c7de4c90303a">Add Middleware Developer Guide (#954) (375e9cf)</a>
+</div>
+</div>
+
+
+          </main>
+        </div>
+      </div>
+      
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Blog" aria-label="Blog">
+    <a class="text-white" target="_blank" rel="noopener noreferrer" href="https://aws.amazon.com/blogs/developer/category/developer-tools/aws-sdk-for-go/">
+      <i class="fa fa-rss"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
+    <a class="text-white" target="_blank" rel="noopener noreferrer" href="https://github.com/aws/aws-sdk-go-v2">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        <small class="text-white">&copy; 2020 Amazon Web Services, Inc. or its affiliates. All rights reserved. All Rights Reserved</small>
+        
+	
+		
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    </div>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/aws-sdk-go-v2/js/main.min.460c8ae21829f9b330823a08f34ac961d7d0daa8874c8c9eba7ea0484bb42a79.js" integrity="sha256-RgyK4hgp&#43;bMwgjoI80rJYdfQ2qiHTIyeun6gSEu0Knk=" crossorigin="anonymous"></script>
+
+
+
+
+  </body>
+</html>

@@ -6,8 +6,9 @@ on:
     branches: [ documentation ]
 jobs:
   build:
+    name: Hugo Documentation Build
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
+    - name: Build Hugo Static Content image
       run: docker build .
