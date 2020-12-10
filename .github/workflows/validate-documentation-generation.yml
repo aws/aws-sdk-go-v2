@@ -1,0 +1,13 @@
+name: Validate Documentation Static Content Generation
+on:
+  push:
+    branches: [ documentation ]
+  pull_request:
+    branches: [ documentation ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build .
