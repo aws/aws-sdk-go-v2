@@ -69,7 +69,7 @@
   
   <url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/making-requests/</loc>
-    <lastmod>2020-11-24T14:58:20-08:00</lastmod>
+    <lastmod>2020-12-10T11:45:29-08:00</lastmod>
   </url>
   
   <url>
@@ -105,6 +105,16 @@
   <url>
     <loc>https://aws.github.io/aws-sdk-go-v2/</loc>
     <lastmod>2020-11-09T17:07:54-08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://aws.github.io/aws-sdk-go-v2/docs/middleware/</loc>
+    <lastmod>2020-12-10T11:45:42-08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://aws.github.io/aws-sdk-go-v2/docs/migrating/</loc>
+    <lastmod>2020-12-10T11:45:29-08:00</lastmod>
   </url>
   
 </urlset>

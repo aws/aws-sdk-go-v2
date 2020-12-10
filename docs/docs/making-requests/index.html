@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.78.0" />
+<meta name="generator" content="Hugo 0.79.0" />
 
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
@@ -25,12 +25,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/making-requests/" />
 <meta property="article:published_time" content="2020-11-12T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-11-24T14:58:20-08:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
+<meta property="article:modified_time" content="2020-12-10T11:45:29-08:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
 <meta itemprop="name" content="Using the AWS SDK for Go V2 with AWS Services">
 <meta itemprop="description" content="Construct service clients and make operation calls to send requests to AWS services.">
 <meta itemprop="datePublished" content="2020-11-12T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2020-11-24T14:58:20-08:00" />
-<meta itemprop="wordCount" content="2002">
+<meta itemprop="dateModified" content="2020-12-10T11:45:29-08:00" />
+<meta itemprop="wordCount" content="2003">
 
 
 
@@ -113,7 +113,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.c4f65b5ca8db8903b35112598c16e5c1.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.c5574c27dfa6a260860207d71b08d554.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -145,7 +145,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.c4f65b5ca8db8903b35112598c16e5c1.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.c5574c27dfa6a260860207d71b08d554.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -338,6 +338,35 @@
 
       
       
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsmiddleware" href="/aws-sdk-go-v2/docs/middleware/">Middleware</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/migrating/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Migrating</a>
+  </li>
+  <ul>
+    <li class="collapse " id="aws-sdk-go-v2docsmigrating">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
     </li>
   </ul>
 </ul>
@@ -399,7 +428,7 @@
       </ul>
     </li>
     <li><a href="#concurrently-using-service-clients">Concurrently Using Service Clients</a></li>
-    <li><a href="#using-operation-paginators">Using Operation Paginators</a></li>
+    <li><a href="#using-paginators">Using Operation Paginators</a></li>
     <li><a href="#using-waiters">Using Waiters</a></li>
   </ul>
 </nav>
@@ -451,7 +480,7 @@ create bucket action, the action returns an output struct with the bucket&rsquo;
 <p>Service clients can be constructed using either the <code>New</code> or <code>NewFromConfig</code> functions available in service client&rsquo;s
 Go package. Each function will return a <code>Client</code> struct type containing the methods for invoking the service APIs.
 The <code>New</code> and <code>NewFromConfig</code> each provide the same set of configurable options for constructing a service client, but
-but provide slightly different construction patterns that we will look at in the following sections.</p>
+provide slightly different construction patterns that we will look at in the following sections.</p>
 <h3 id="newfromconfig">NewFromConfig</h3>
 <p><code>NewFromConfig</code> function provides a consistent interface for constructing service clients using the
 <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Config">aws.Config</a>. An <code>aws.Config</code> can be loaded using the
@@ -550,13 +579,13 @@ used for setting request deadlines that will be honored by the SDK. In addition,
 <code>&lt;OperationName&gt;Input</code> struct found in the service&rsquo;s respective Go package. You pass in API input parameters using
 the operation input struct.</p>
 <p>Operation input structures can have input parameters such as the standard Go numerics, boolean, string, map, and list
-types. In more complex API operations a service may have more complex modeling of input parameters. These other types
+types. In more complex API operations a service might have more complex modeling of input parameters. These other types
 such as service specific structures and enum values are found in the service&rsquo;s <code>types</code> Go package.</p>
-<p>In addition, services may distinguish between the default value of a Go type and whether the value was set or not by the
-user. In these cases, input parameters may require you to pass a pointer reference to the type in question. For standard
-Go types like numerics, boolean, and string there are <code>&lt;Type&gt;</code> and <code>From&lt;Type&gt;</code> convenience functions available in the
-<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws">aws</a> to ease this conversion. For example <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#String">aws.String</a> can be used
-to convert a <code>string</code> to a <code>*string</code> type for input parameters that require a pointer to a string. Inversely
+<p>In addition, services might distinguish between the default value of a Go type and whether the value was set or not by
+the user. In these cases, input parameters might require you to pass a pointer reference to the type in question. For
+standard Go types like numerics, boolean, and string there are <code>&lt;Type&gt;</code> and <code>From&lt;Type&gt;</code> convenience functions available
+in the <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws">aws</a> to ease this conversion. For example <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#String">aws.String</a> can be
+used to convert a <code>string</code> to a <code>*string</code> type for input parameters that require a pointer to a string. Inversely
 <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#ToString">aws.ToString</a> can be used to transform a <code>*string</code> to a <code>string</code> while providing
 protection from dereferencing a nil pointer. The <code>To&lt;Type&gt;</code> functions are helpful when handling service responses.</p>
 <p>Let&rsquo;s look at an example of how we can use a Amazon S3 client to call the <code>GetObject</code> API, and construct
@@ -603,7 +632,7 @@ operations on the client.</p>
 <span style="color:#000;font-weight:bold">})</span>
 </code></pre></div><h3 id="HandlingOperationResponses">Handling Operation Responses</h3>
 <p>Each service operation has an associated output struct that contains the service&rsquo;s operation response members.
-The output struct follows the following naming pattern <code>&lt;OperationName&gt;Output</code>. Some operations may have no members
+The output struct follows the following naming pattern <code>&lt;OperationName&gt;Output</code>. Some operations might have no members
 defined for their operation output. After calling a service operation, the return <code>error</code> argument type should always
 be checked to determine if an error occurred while invoking the service operation. Errors returned can range from
 client-side input validation errors to service-side error responses returned to the client. The operation&rsquo;s output
@@ -723,11 +752,11 @@ concurrently uploads two objects to an Amazon S3 bucket.</p>
     <span style="color:#000;font-weight:bold">}</span>
     <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;etag: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ToString</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">result</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Output</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ETag</span><span style="color:#000;font-weight:bold">))</span>
 <span style="color:#000;font-weight:bold">}</span>
-</code></pre></div><h2 id="using-operation-paginators">Using Operation Paginators</h2>
-<p>Typically, when you retrieve a list of items, you may need to check the output struct for a token or marker to confirm
-whether the AWS service returned all results from your request. If present, you use the token or marker to request the
-next page of results. Instead of managing these tokens or markers, you can use the service package&rsquo;s available paginator
-types.</p>
+</code></pre></div><h2 id="using-paginators">Using Operation Paginators</h2>
+<p>Typically, when you retrieve a list of items, you might need to check the output struct for a token or marker to confirm
+whether the AWS service returned all results from your request. If the token or marker is present, you use it to request
+the next page of results. Instead of managing these tokens or markers, you can use the service package&rsquo;s available
+paginator types.</p>
 <p>Paginator helpers are available for supported service operations, and can be found in the service client&rsquo;s Go package.
 To construct a paginator for a supported operation, use the <code>New&lt;OperationName&gt;Paginator</code> function. Paginator construct
 functions take the service <code>Client</code>, the operation&rsquo;s <code>&lt;OperationName&gt;Input</code> input parameters, and an optional set of
@@ -791,7 +820,7 @@ functional arguments to <code>NextPage</code>. For more information about overri
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified November 24, 2020: <a  href="https://github.com/aws/aws-sdk-go-v2/commit/653d2e220003e1a68dd2b8512fb12b5f7a9e447e">Developer: Guide Using AWS Services (#907) (653d2e2)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified December 10, 2020: <a  href="https://github.com/aws/aws-sdk-go-v2/commit/fde6dd80a0d36b5a5ebb6eccc3fda8238c9c85f6">Initial Migration Guide Content (#942) (fde6dd8)</a>
 </div>
 </div>
 
