@@ -11,25 +11,31 @@ import (
 )
 
 const (
-	sharedConfigType = "&SharedConfig{}"
-	envConfigType    = "&EnvConfig{}"
+	sharedConfigType  = "&SharedConfig{}"
+	envConfigType     = "&EnvConfig{}"
+	awsConfigType     = "&awsConfig{}"
+	ec2IMDSRegionType = "&UseEC2IMDSRegion{}"
+	loadOptionsType   = "&LoadOptions{}"
 )
 
 var implAsserts = map[string][]string{
-	"SharedConfigProfileProvider":              {envConfigType, `WithSharedConfigProfile("")`},
-	"SharedConfigFilesProvider":                {envConfigType, `WithSharedConfigFiles(nil)`},
-	"CustomCABundleProvider":                   {envConfigType, `WithCustomCABundle(nil)`},
-	"RegionProvider":                           {envConfigType, sharedConfigType, `WithRegion("")`, `WithEC2IMDSRegion{}`},
-	"CredentialsProviderProvider":              {`WithCredentialsProvider(nil)`},
-	"DefaultRegionProvider":                    {`WithDefaultRegion("")`},
-	"EC2RoleCredentialOptionsProvider":         {`WithEC2RoleCredentialOptions(nil)`},
-	"EndpointCredentialOptionsProvider":        {`WithEndpointCredentialOptions(nil)`},
-	"EndpointResolverProvider":                 {`WithEndpointResolver(nil)`},
-	"APIOptionsProvider":                       {`WithAPIOptions(nil)`},
-	"HTTPClientProvider":                       {`WithHTTPClient(nil)`},
-	"AssumeRoleCredentialOptionsProvider":      {`WithAssumeRoleCredentialOptions(nil)`},
-	"WebIdentityRoleCredentialOptionsProvider": {`WithWebIdentityRoleCredentialOptions(nil)`},
-	"RetryProvider":                            {`WithRetryer(nil)`},
+	"sharedConfigProfileProvider":              {envConfigType, loadOptionsType},
+	"sharedConfigFilesProvider":                {envConfigType, loadOptionsType},
+	"customCABundleProvider":                   {envConfigType, loadOptionsType},
+	"regionProvider":                           {envConfigType, sharedConfigType, loadOptionsType, ec2IMDSRegionType},
+	"credentialsProviderProvider":              {loadOptionsType},
+	"defaultRegionProvider":                    {loadOptionsType},
+	"ec2RoleCredentialOptionsProvider":         {loadOptionsType},
+	"endpointCredentialOptionsProvider":        {loadOptionsType},
+	"assumeRoleCredentialOptionsProvider":      {loadOptionsType},
+	"webIdentityRoleCredentialOptionsProvider": {loadOptionsType},
+	"httpClientProvider":                       {loadOptionsType},
+	"apiOptionsProvider":                       {loadOptionsType},
+	"retryProvider":                            {loadOptionsType},
+	"endpointResolverProvider":                 {loadOptionsType},
+	"loggerProvider":                           {loadOptionsType},
+	"clientLogModeProvider":                    {loadOptionsType},
+	"logConfigurationWarningsProvider":         {loadOptionsType},
 }
 
 var tplProviderTests = template.Must(template.New("tplProviderTests").Funcs(map[string]interface{}{

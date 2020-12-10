@@ -201,28 +201,30 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 
 			var credChain []string
 
-			configSources := []Config{
+			loadOptions := []func(*LoadOptions) error{
 				WithEndpointResolver(endpointResolver),
-				WithAPIOptions(append([]func(*middleware.Stack) error{}, func(stack *middleware.Stack) error {
-					return stack.Initialize.Add(middleware.InitializeMiddlewareFunc("GetRoleArns", func(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler,
-					) (
-						out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-					) {
-						switch v := in.Parameters.(type) {
-						case *sts.AssumeRoleInput:
-							credChain = append(credChain, *v.RoleArn)
-						}
+				WithAPIOptions([]func(*middleware.Stack) error{
+					func(stack *middleware.Stack) error {
+						return stack.Initialize.Add(middleware.InitializeMiddlewareFunc("GetRoleArns", func(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler,
+						) (
+							out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+						) {
+							switch v := in.Parameters.(type) {
+							case *sts.AssumeRoleInput:
+								credChain = append(credChain, *v.RoleArn)
+							}
 
-						return next.HandleInitialize(ctx, in)
-					}), middleware.After)
-				})),
+							return next.HandleInitialize(ctx, in)
+						}), middleware.After)
+					},
+				}),
 			}
 
 			if len(c.configProfile) != 0 {
-				configSources = append(configSources, WithSharedConfigProfile(c.configProfile))
+				loadOptions = append(loadOptions, WithSharedConfigProfile(c.configProfile))
 			}
 
-			config, err := LoadDefaultConfig(configSources...)
+			config, err := LoadDefaultConfig(context.Background(), loadOptions...)
 			if err != nil {
 				if len(c.expectedError) > 0 {
 					if e, a := c.expectedError, err.Error(); !strings.Contains(a, e) {

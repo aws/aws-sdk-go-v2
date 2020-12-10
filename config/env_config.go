@@ -1,7 +1,10 @@
 package config
 
 import (
+	"bytes"
+	"context"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -181,7 +184,7 @@ type EnvConfig struct {
 
 // loadEnvConfig reads configuration values from the OS's environment variables.
 // Returning the a Config typed EnvConfig to satisfy the ConfigLoader func type.
-func loadEnvConfig(cfgs configs) (Config, error) {
+func loadEnvConfig(ctx context.Context, cfgs configs) (Config, error) {
 	return NewEnvConfig()
 }
 
@@ -230,14 +233,21 @@ func NewEnvConfig() (EnvConfig, error) {
 
 // GetRegion returns the AWS Region if set in the environment. Returns an empty
 // string if not set.
-func (c EnvConfig) GetRegion() (string, error) {
-	return c.Region, nil
+func (c EnvConfig) getRegion(ctx context.Context) (string, bool, error) {
+	if len(c.Region) == 0 {
+		return "", false, nil
+	}
+	return c.Region, true, nil
 }
 
 // GetSharedConfigProfile returns the shared config profile if set in the
 // environment. Returns an empty string if not set.
-func (c EnvConfig) GetSharedConfigProfile() (string, error) {
-	return c.SharedConfigProfile, nil
+func (c EnvConfig) getSharedConfigProfile(ctx context.Context) (string, bool, error) {
+	if len(c.SharedConfigProfile) == 0 {
+		return "", false, nil
+	}
+
+	return c.SharedConfigProfile, true, nil
 }
 
 // GetSharedConfigFiles returns a slice of filenames set in the environment.
@@ -245,7 +255,7 @@ func (c EnvConfig) GetSharedConfigProfile() (string, error) {
 // Will return the filenames in the order of:
 // * Shared Credentials
 // * Shared Config
-func (c EnvConfig) GetSharedConfigFiles() ([]string, error) {
+func (c EnvConfig) getSharedConfigFiles(context.Context) ([]string, bool, error) {
 	files := make([]string, 0, 2)
 	if v := c.SharedCredentialsFile; len(v) > 0 {
 		files = append(files, v)
@@ -254,19 +264,29 @@ func (c EnvConfig) GetSharedConfigFiles() ([]string, error) {
 		files = append(files, v)
 	}
 
-	return files, nil
+	if len(files) == 0 {
+		return nil, false, nil
+	}
+	return files, true, nil
 }
 
 // GetCustomCABundle returns the custom CA bundle's PEM bytes if the file was
-func (c EnvConfig) GetCustomCABundle() ([]byte, error) {
+func (c EnvConfig) getCustomCABundle(context.Context) (io.Reader, bool, error) {
 	if len(c.CustomCABundle) == 0 {
-		return nil, nil
+		return nil, false, nil
 	}
 
-	return ioutil.ReadFile(c.CustomCABundle)
+	b, err := ioutil.ReadFile(c.CustomCABundle)
+	if err != nil {
+		return nil, false, err
+	}
+	return bytes.NewReader(b), true, nil
 }
 
 // GetEnableEndpointDiscovery returns whether to enable service endpoint discovery
+// TODO: These probably should be unexported and
+// 	EnableEndpointDiscovery should be an option on LoadOptions?
+//	Will also need a resolver (qq: do these need to be resolved before other resolver?)
 func (c EnvConfig) GetEnableEndpointDiscovery() (value, ok bool, err error) {
 	if c.EnableEndpointDiscovery == nil {
 		return false, false, nil
@@ -277,6 +297,9 @@ func (c EnvConfig) GetEnableEndpointDiscovery() (value, ok bool, err error) {
 
 // GetS3UseARNRegion returns whether to allow ARNs to direct the region
 // the S3 client's requests are sent to.
+// TODO: GetS3UseARNRegion probably should be unexported and
+//	S3UseARNRegion should be an option on LoadOptions?
+//	Will also need a resolver (qq: do these need to be resolved before other resolver? probably not)
 func (c EnvConfig) GetS3UseARNRegion() (value, ok bool, err error) {
 	if c.S3UseARNRegion == nil {
 		return false, false, nil

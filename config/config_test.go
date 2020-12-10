@@ -2,6 +2,7 @@ package config
 
 import (
 	"context"
+	"github.com/google/go-cmp/cmp"
 	"reflect"
 	"testing"
 
@@ -10,29 +11,36 @@ import (
 )
 
 func TestConfigs_SharedConfigOptions(t *testing.T) {
-	_, err := configs{
+	var options LoadOptions
+	optFns := []func(*LoadOptions) error{
 		WithSharedConfigProfile("profile-name"),
 		WithSharedConfigFiles([]string{"creds-file"}),
-	}.AppendFromLoaders([]loader{
-		func(configs configs) (Config, error) {
+	}
+
+	for _, optFn := range optFns {
+		optFn(&options)
+	}
+
+	_, err := configs{options}.AppendFromLoaders(context.TODO(), []loader{
+		func(ctx context.Context, configs configs) (Config, error) {
 			var profile string
+			var found bool
 			var files []string
 			var err error
 
 			for _, cfg := range configs {
-				if p, ok := cfg.(SharedConfigProfileProvider); ok {
-					profile, err = p.GetSharedConfigProfile()
-					if err != nil {
+				if p, ok := cfg.(sharedConfigProfileProvider); ok {
+					profile, found, err = p.getSharedConfigProfile(ctx)
+					if err != nil || !found {
 						return nil, err
 					}
 				}
-				if p, ok := cfg.(SharedConfigFilesProvider); ok {
-					files, err = p.GetSharedConfigFiles()
-					if err != nil {
+				if p, ok := cfg.(sharedConfigFilesProvider); ok {
+					files, found, err = p.getSharedConfigFiles(ctx)
+					if err != nil || !found {
 						return nil, err
 					}
 				}
-
 			}
 
 			if e, a := "profile-name", profile; e != a {
@@ -52,16 +60,21 @@ func TestConfigs_SharedConfigOptions(t *testing.T) {
 }
 
 func TestConfigs_AppendFromLoaders(t *testing.T) {
-	expectCfg := WithRegion("mock-region")
+	var options LoadOptions
+	err := WithRegion("mock-region")(&options)
+	if err != nil {
+		t.Fatalf("expect not error, got %v", err)
+	}
 
-	cfgs, err := configs{}.AppendFromLoaders([]loader{
-		func(configs configs) (Config, error) {
-			if e, a := 0, len(configs); e != a {
-				t.Errorf("expect %v configs, got %v", e, a)
-			}
-			return expectCfg, nil
-		},
-	})
+	cfgs, err := configs{}.AppendFromLoaders(
+		context.TODO(), []loader{
+			func(ctx context.Context, configs configs) (Config, error) {
+				if e, a := 0, len(configs); e != a {
+					t.Errorf("expect %v configs, got %v", e, a)
+				}
+				return options, nil
+			},
+		})
 
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
@@ -71,13 +84,14 @@ func TestConfigs_AppendFromLoaders(t *testing.T) {
 		t.Errorf("expect %v configs, got %v", e, a)
 	}
 
-	if e, a := expectCfg, cfgs[0]; e != a {
+	if e, a := options, cfgs[0]; len(cmp.Diff(e, a)) != 0 {
 		t.Errorf("expect %v config, got %v", e, a)
 	}
 }
 
 func TestConfigs_ResolveAWSConfig(t *testing.T) {
-	configSources := configs{
+	var options LoadOptions
+	optFns := []func(*LoadOptions) error{
 		WithRegion("mock-region"),
 		WithCredentialsProvider(credentials.StaticCredentialsProvider{
 			Value: aws.Credentials{
@@ -87,7 +101,13 @@ func TestConfigs_ResolveAWSConfig(t *testing.T) {
 		}),
 	}
 
-	cfg, err := configSources.ResolveAWSConfig([]awsConfigResolver{
+	for _, optFn := range optFns {
+		optFn(&options)
+	}
+
+	config := configs{options}
+
+	cfg, err := config.ResolveAWSConfig(context.TODO(), []awsConfigResolver{
 		resolveRegion,
 		resolveCredentials,
 	})
@@ -99,7 +119,7 @@ func TestConfigs_ResolveAWSConfig(t *testing.T) {
 		t.Errorf("expect %v region, got %v", e, a)
 	}
 
-	creds, err := cfg.Credentials.Retrieve(context.Background())
+	creds, err := cfg.Credentials.Retrieve(context.TODO())
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}

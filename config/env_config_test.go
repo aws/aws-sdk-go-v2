@@ -11,10 +11,10 @@ import (
 	"github.com/awslabs/smithy-go/ptr"
 )
 
-var _ SharedConfigProfileProvider = (*EnvConfig)(nil)
-var _ SharedConfigFilesProvider = (*EnvConfig)(nil)
-var _ CustomCABundleProvider = (*EnvConfig)(nil)
-var _ RegionProvider = (*EnvConfig)(nil)
+var _ sharedConfigProfileProvider = (*EnvConfig)(nil)
+var _ sharedConfigFilesProvider = (*EnvConfig)(nil)
+var _ customCABundleProvider = (*EnvConfig)(nil)
+var _ regionProvider = (*EnvConfig)(nil)
 
 func TestNewEnvConfig_Creds(t *testing.T) {
 	restoreEnv := awstesting.StashEnv()

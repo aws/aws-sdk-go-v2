@@ -1,6 +1,7 @@
 package config
 
 import (
+	"context"
 	"fmt"
 	"path/filepath"
 	"reflect"
@@ -13,7 +14,7 @@ import (
 	"github.com/awslabs/smithy-go/ptr"
 )
 
-var _ RegionProvider = (*SharedConfig)(nil)
+var _ regionProvider = (*SharedConfig)(nil)
 
 var (
 	testConfigFilename      = filepath.Join("testdata", "shared_config")
@@ -349,8 +350,7 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 
 	for i, c := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
-			cfg := SharedConfig{}
-
+			var cfg SharedConfig
 			err := cfg.setFromIniFile(c.Profile, iniFile)
 			if c.Err != nil {
 				if e, a := c.Err.Error(), err.Error(); !strings.Contains(a, e) {
@@ -392,7 +392,6 @@ func TestLoadSharedConfigIniFiles(t *testing.T) {
 	for i, c := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			files, err := loadSharedConfigIniFiles(c.Filenames)
-
 			if err != nil {
 				t.Fatalf("expect no error, got %v", err)
 			}
@@ -424,17 +423,15 @@ func TestLoadSharedConfig(t *testing.T) {
 	}()
 
 	cases := []struct {
-		Configs configs
-		Files   []string
-		Profile string
-		LoadFn  func(configs) (Config, error)
-		Expect  SharedConfig
-		Err     string
+		LoadOptionFn func(*LoadOptions) error
+		Files        []string
+		Profile      string
+		LoadFn       func(context.Context, configs) (Config, error)
+		Expect       SharedConfig
+		Err          string
 	}{
 		{
-			Configs: configs{
-				WithSharedConfigProfile("alt_profile_name"),
-			},
+			LoadOptionFn: WithSharedConfigProfile("alt_profile_name"),
 			Files: []string{
 				filepath.Join("testdata", "shared_config"),
 			},
@@ -445,11 +442,9 @@ func TestLoadSharedConfig(t *testing.T) {
 			},
 		},
 		{
-			Configs: configs{
-				WithSharedConfigFiles([]string{
-					filepath.Join("testdata", "shared_config"),
-				}),
-			},
+			LoadOptionFn: WithSharedConfigFiles([]string{
+				filepath.Join("testdata", "shared_config"),
+			}),
 			Profile: "alt_profile_name",
 			LoadFn:  loadSharedConfig,
 			Expect: SharedConfig{
@@ -458,9 +453,7 @@ func TestLoadSharedConfig(t *testing.T) {
 			},
 		},
 		{
-			Configs: configs{
-				WithSharedConfigProfile("default"),
-			},
+			LoadOptionFn: WithSharedConfigProfile("default"),
 			Files: []string{
 				filepath.Join("file_not_exist"),
 			},
@@ -468,9 +461,7 @@ func TestLoadSharedConfig(t *testing.T) {
 			Err:    "failed to open shared config file, file_not_exist",
 		},
 		{
-			Configs: configs{
-				WithSharedConfigProfile("profile_not_exist"),
-			},
+			LoadOptionFn: WithSharedConfigProfile("profile_not_exist"),
 			Files: []string{
 				filepath.Join("testdata", "shared_config"),
 			},
@@ -478,18 +469,14 @@ func TestLoadSharedConfig(t *testing.T) {
 			Err:    "failed to get shared config profile, profile_not_exist",
 		},
 		{
-			Configs: configs{
-				WithSharedConfigProfile("default"),
-			},
+			LoadOptionFn: WithSharedConfigProfile("default"),
 			Files: []string{
 				filepath.Join("file_not_exist"),
 			},
 			LoadFn: loadSharedConfigIgnoreNotExist,
 		},
 		{
-			Configs: configs{
-				WithSharedConfigProfile("assume_role_invalid_source_profile"),
-			},
+			LoadOptionFn: WithSharedConfigProfile("assume_role_invalid_source_profile"),
 			Files: []string{
 				testConfigOtherFilename, testConfigFilename,
 			},
@@ -497,9 +484,7 @@ func TestLoadSharedConfig(t *testing.T) {
 			Err:    "failed to get shared config profile",
 		},
 		{
-			Configs: configs{
-				WithSharedConfigProfile("assume_role_invalid_source_profile"),
-			},
+			LoadOptionFn: WithSharedConfigProfile("assume_role_invalid_source_profile"),
 			Files: []string{
 				testConfigOtherFilename, testConfigFilename,
 			},
@@ -520,10 +505,16 @@ func TestLoadSharedConfig(t *testing.T) {
 				DefaultSharedConfigFiles = c.Files
 			}
 
-			cfg, err := c.LoadFn(c.Configs)
+			var options LoadOptions
+			c.LoadOptionFn(&options)
+
+			cfg, err := c.LoadFn(context.Background(), configs{options})
 			if len(c.Err) > 0 {
+				if err == nil {
+					t.Fatalf("expected error %v, got none", c.Err)
+				}
 				if e, a := c.Err, err.Error(); !strings.Contains(a, e) {
-					t.Errorf("expect %q to be in %q", e, a)
+					t.Fatalf("expect %q to be in %q", e, a)
 				}
 				return
 			} else if err != nil {

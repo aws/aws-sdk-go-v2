@@ -23,7 +23,7 @@ import (
 )
 
 func newUploader(clientConfig ClientConfig, sdkConfig SDKConfig) *manager.Uploader {
-	defaultConfig, err := config.LoadDefaultConfig()
+	defaultConfig, err := config.LoadDefaultConfig(context.Background())
 	if err != nil {
 		log.Fatalf("failed to load config: %v", err)
 	}

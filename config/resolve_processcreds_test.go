@@ -35,7 +35,7 @@ func TestProcessCredentialsProvider_FromConfig(t *testing.T) {
 	setupEnvForProcesscredsConfigFile()
 	os.Setenv("AWS_SDK_LOAD_CONFIG", "1")
 
-	config, err := LoadDefaultConfig(WithRegion("region"))
+	config, err := LoadDefaultConfig(context.Background(), WithRegion("region"))
 	if err != nil {
 		t.Fatalf("error loading default config: %v", err)
 	}
@@ -67,7 +67,7 @@ func TestProcessCredentialsProvider_FromConfigWithProfile(t *testing.T) {
 	os.Setenv("AWS_PROFILE", "not_expire")
 	setupEnvForProcesscredsConfigFile()
 
-	config, err := LoadDefaultConfig(WithRegion("region"))
+	config, err := LoadDefaultConfig(context.Background(), WithRegion("region"))
 	if err != nil {
 		t.Fatalf("error loading default config: %v", err)
 	}
@@ -91,7 +91,7 @@ func TestProcessCredentialsProvider_FromConfigWithStaticCreds(t *testing.T) {
 	os.Setenv("AWS_PROFILE", "not_alone")
 	setupEnvForProcesscredsConfigFile()
 
-	config, err := LoadDefaultConfig(WithRegion("region"))
+	config, err := LoadDefaultConfig(context.Background(), WithRegion("region"))
 	if err != nil {
 		t.Fatalf("error loading default config: %v", err)
 	}
@@ -117,7 +117,7 @@ func TestProcessCredentialsProvider_FromCredentials(t *testing.T) {
 
 	setupEnvForProcesscredsCredentialsFile()
 
-	config, err := LoadDefaultConfig(WithRegion("region"))
+	config, err := LoadDefaultConfig(context.Background(), WithRegion("region"))
 	if err != nil {
 		t.Fatalf("error loading default config: %v", err)
 	}
@@ -148,7 +148,7 @@ func TestProcessCredentialsProvider_FromCredentialsWithProfile(t *testing.T) {
 	os.Setenv("AWS_PROFILE", "not_expire")
 	setupEnvForProcesscredsCredentialsFile()
 
-	config, err := LoadDefaultConfig(WithRegion("region"))
+	config, err := LoadDefaultConfig(context.Background(), WithRegion("region"))
 	if err != nil {
 		t.Fatalf("error loading default config: %v", err)
 	}
@@ -171,7 +171,7 @@ func TestProcessCredentialsProvider_FromCredentialsWithStaticCreds(t *testing.T)
 	os.Setenv("AWS_PROFILE", "not_alone")
 	setupEnvForProcesscredsCredentialsFile()
 
-	config, err := LoadDefaultConfig(WithRegion("region"))
+	config, err := LoadDefaultConfig(context.Background(), WithRegion("region"))
 	if err != nil {
 		t.Fatalf("error loading default config: %v", err)
 	}

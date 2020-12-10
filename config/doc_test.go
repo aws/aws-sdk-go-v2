@@ -11,14 +11,14 @@ import (
 )
 
 func Example() {
-	cfg, err := config.LoadDefaultConfig()
+	ctx := context.TODO()
+	cfg, err := config.LoadDefaultConfig(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	client := sts.NewFromConfig(cfg)
-
-	identity, err := client.GetCallerIdentity(context.Background(), &sts.GetCallerIdentityInput{})
+	identity, err := client.GetCallerIdentity(ctx, &sts.GetCallerIdentityInput{})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -27,9 +27,11 @@ func Example() {
 }
 
 func Example_custom_config() {
+	ctx := context.TODO()
+
 	// Config sources can be passed to LoadDefaultConfig, these sources can implement one or more
 	// provider interfaces. These sources take priority over the standard environment and shared configuration values.
-	cfg, err := config.LoadDefaultConfig(
+	cfg, err := config.LoadDefaultConfig(ctx,
 		config.WithRegion("us-west-2"),
 		config.WithSharedConfigProfile("customProfile"),
 	)
@@ -38,8 +40,7 @@ func Example_custom_config() {
 	}
 
 	client := sts.NewFromConfig(cfg)
-
-	identity, err := client.GetCallerIdentity(context.Background(), &sts.GetCallerIdentityInput{})
+	identity, err := client.GetCallerIdentity(ctx, &sts.GetCallerIdentityInput{})
 	if err != nil {
 		log.Fatal(err)
 	}

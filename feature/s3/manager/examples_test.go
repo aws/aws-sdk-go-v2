@@ -17,7 +17,7 @@ import (
 // on a custom ReadSeekerWriteToProvider can be provided to Uploader
 // to define how parts will be buffered in memory.
 func ExampleNewUploader_overrideReadSeekerProvider() {
-	cfg, err := config.LoadDefaultConfig()
+	cfg, err := config.LoadDefaultConfig(context.TODO())
 	if err != nil {
 		panic(err)
 	}
@@ -27,7 +27,7 @@ func ExampleNewUploader_overrideReadSeekerProvider() {
 		u.BufferProvider = manager.NewBufferedReadSeekerWriteToPool(25 * 1024 * 1024)
 	})
 
-	_, err = uploader.Upload(context.Background(), &s3.PutObjectInput{
+	_, err = uploader.Upload(context.TODO(), &s3.PutObjectInput{
 		Bucket: aws.String("examplebucket"),
 		Key:    aws.String("largeobject"),
 		Body:   bytes.NewReader([]byte("large_multi_part_upload")),
@@ -43,7 +43,7 @@ func ExampleNewUploader_overrideReadSeekerProvider() {
 // write / read buffer usage when writing or reading respectively
 // from the net/http transport.
 func ExampleNewUploader_overrideTransport() {
-	cfg, err := config.LoadDefaultConfig()
+	cfg, err := config.LoadDefaultConfig(context.TODO())
 	if err != nil {
 		panic(err)
 	}
@@ -59,7 +59,7 @@ func ExampleNewUploader_overrideTransport() {
 
 	uploader := manager.NewUploader(client)
 
-	_, err = uploader.Upload(context.Background(), &s3.PutObjectInput{
+	_, err = uploader.Upload(context.TODO(), &s3.PutObjectInput{
 		Bucket: aws.String("examplebucket"),
 		Key:    aws.String("largeobject"),
 		Body:   bytes.NewReader([]byte("large_multi_part_upload")),

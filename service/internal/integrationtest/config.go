@@ -1,9 +1,11 @@
 package integrationtest
 
 import (
+	"context"
 	"crypto/rand"
-	"io"
 	"fmt"
+	"github.com/awslabs/smithy-go/middleware"
+	"io"
 	"log"
 	"os"
 	"strings"
@@ -24,17 +26,16 @@ func LoadConfigWithDefaultRegion(defaultRegion string) (cfg aws.Config, err erro
 		lm |= aws.LogRequestWithBody
 	}
 
-	cfg, err = config.LoadDefaultConfig(config.WithClientLogMode(lm))
+	cfg, err = config.LoadDefaultConfig(context.Background(),
+		config.WithClientLogMode(lm),
+		config.WithAPIOptions([]func(*middleware.Stack) error{
+			RemoveOperationInputValidationMiddleware,
+		}),
+		config.WithDefaultRegion(defaultRegion),
+	)
 	if err != nil {
 		return cfg, err
 	}
-
-	if len(cfg.Region) == 0 {
-		cfg.Region = defaultRegion
-	}
-
-	cfg.APIOptions = append(cfg.APIOptions,
-		RemoveOperationInputValidationMiddleware)
 
 	return cfg, nil
 }
