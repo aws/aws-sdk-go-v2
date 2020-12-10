@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 	"net/url"
+	"os"
 	"strings"
 	"testing"
 	"time"
@@ -11,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/awslabs/smithy-go/logging"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"github.com/google/go-cmp/cmp"
@@ -37,6 +39,8 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 		Request      *http.Request
 		Creds        aws.CredentialsProvider
 		PayloadHash  string
+		Logger       logging.Logger
+		LogSigning   bool
 		ExpectResult *PresignedHTTPRequest
 		ExpectErr    string
 	}{
@@ -55,7 +59,6 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 				SignedHeader: http.Header{},
 			},
 		},
-
 		"error": {
 			Request: func() *http.Request {
 				return &http.Request{}
@@ -64,7 +67,6 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 			PayloadHash: "",
 			ExpectErr:   "failed to sign request",
 		},
-
 		"anonymous creds": {
 			Request: &http.Request{
 				URL: func() *url.URL {
@@ -81,7 +83,6 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 				SignedHeader: http.Header{},
 			},
 		},
-
 		"nil creds": {
 			Request: &http.Request{
 				URL: func() *url.URL {
@@ -95,6 +96,41 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 				URL:          "https://example.aws/path?query=foo",
 				SignedHeader: http.Header{},
 			},
+		},
+		"with logger": {
+			Request: &http.Request{
+				URL: func() *url.URL {
+					u, _ := url.Parse("https://example.aws/path?query=foo")
+					return u
+				}(),
+				Header: http.Header{},
+			},
+			Creds:       unit.StubCredentialsProvider{},
+			PayloadHash: "0123456789abcdef",
+			ExpectResult: &PresignedHTTPRequest{
+				URL:          "https://example.aws/path?query=foo",
+				SignedHeader: http.Header{},
+			},
+
+			Logger: logging.NewStandardLogger(os.Stdout),
+		},
+		"with log signing": {
+			Request: &http.Request{
+				URL: func() *url.URL {
+					u, _ := url.Parse("https://example.aws/path?query=foo")
+					return u
+				}(),
+				Header: http.Header{},
+			},
+			Creds:       unit.StubCredentialsProvider{},
+			PayloadHash: "0123456789abcdef",
+			ExpectResult: &PresignedHTTPRequest{
+				URL:          "https://example.aws/path?query=foo",
+				SignedHeader: http.Header{},
+			},
+
+			Logger:     logging.NewStandardLogger(os.Stdout),
+			LogSigning: true,
 		},
 	}
 
@@ -111,8 +147,18 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 				presigner: httpPresignerFunc(func(
 					ctx context.Context, credentials aws.Credentials, r *http.Request,
 					payloadHash string, service string, region string, signingTime time.Time,
-					_ ...func(*SignerOptions),
+					optFns ...func(*SignerOptions),
 				) (url string, signedHeader http.Header, err error) {
+					var options SignerOptions
+					for _, fn := range optFns {
+						fn(&options)
+					}
+					if e, a := c.LogSigning, options.LogSigning; e != a {
+						t.Errorf("expect %v log signing, got %v", e, a)
+					}
+					if options.Logger == nil {
+						t.Errorf("expect logger, got none")
+					}
 
 					if !haveCredentialProvider(c.Creds) {
 						t.Errorf("expect presigner not to be called for not credentials provider")
@@ -134,6 +180,7 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 
 					return c.ExpectResult.URL, c.ExpectResult.SignedHeader, nil
 				}),
+				logSigning: c.LogSigning,
 			}
 
 			next := middleware.FinalizeHandlerFunc(
@@ -147,6 +194,10 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 			ctx := awsmiddleware.SetSigningRegion(
 				awsmiddleware.SetSigningName(context.Background(), signingName),
 				signingRegion)
+
+			if c.Logger != nil {
+				ctx = middleware.SetLogger(ctx, c.Logger)
+			}
 
 			if len(c.PayloadHash) != 0 {
 				ctx = context.WithValue(ctx, payloadHashKey{}, c.PayloadHash)

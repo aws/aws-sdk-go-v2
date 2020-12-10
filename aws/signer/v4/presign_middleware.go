@@ -106,7 +106,11 @@ func (s *PresignHTTPRequestMiddleware) HandleFinalize(
 	}
 
 	u, h, err := s.presigner.PresignHTTP(ctx, credentials,
-		httpReq, payloadHash, signingName, signingRegion, sdk.NowTime(), s.addSignerOptions)
+		httpReq, payloadHash, signingName, signingRegion, sdk.NowTime(),
+		func(o *SignerOptions) {
+			o.Logger = middleware.GetLogger(ctx)
+			o.LogSigning = s.logSigning
+		})
 	if err != nil {
 		return out, metadata, &SigningError{
 			Err: fmt.Errorf("failed to sign http request, %w", err),
@@ -120,8 +124,4 @@ func (s *PresignHTTPRequestMiddleware) HandleFinalize(
 	}
 
 	return out, metadata, nil
-}
-
-func (s *PresignHTTPRequestMiddleware) addSignerOptions(options *SignerOptions) {
-	options.LogSigning = s.logSigning
 }

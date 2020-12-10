@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"strconv"
 	"testing"
 	"time"
@@ -14,6 +15,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/awslabs/smithy-go/logging"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -91,6 +93,8 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 	cases := map[string]struct {
 		creds       aws.CredentialsProvider
 		hash        string
+		logger      logging.Logger
+		logSigning  bool
 		expectedErr error
 	}{
 		"success": {
@@ -108,6 +112,17 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 		"nil creds": {
 			creds: nil,
 		},
+		"with logger": {
+			creds:  unit.StubCredentialsProvider{},
+			hash:   "0123456789abcdef",
+			logger: logging.NewStandardLogger(os.Stdout),
+		},
+		"with log signing": {
+			creds:      unit.StubCredentialsProvider{},
+			hash:       "0123456789abcdef",
+			logger:     logging.NewStandardLogger(os.Stdout),
+			logSigning: true,
+		},
 	}
 
 	const (
@@ -122,8 +137,20 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 				signer: httpSignerFunc(
 					func(ctx context.Context,
 						credentials aws.Credentials, r *http.Request, payloadHash string,
-						service string, region string, signingTime time.Time, _ ...func(*SignerOptions),
+						service string, region string, signingTime time.Time,
+						optFns ...func(*SignerOptions),
 					) error {
+						var options SignerOptions
+						for _, fn := range optFns {
+							fn(&options)
+						}
+						if e, a := tt.logSigning, options.LogSigning; e != a {
+							t.Errorf("expect %v log signing, got %v", e, a)
+						}
+						if options.Logger == nil {
+							t.Errorf("expect logger, got none")
+						}
+
 						expectCreds, _ := unit.StubCredentialsProvider{}.Retrieve(context.Background())
 						if e, a := expectCreds, credentials; e != a {
 							t.Errorf("expected %v, got %v", e, a)
@@ -139,6 +166,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 						}
 						return nil
 					}),
+				logSigning: tt.logSigning,
 			}
 
 			next := middleware.FinalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
@@ -148,6 +176,10 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 			ctx := awsmiddleware.SetSigningRegion(
 				awsmiddleware.SetSigningName(context.Background(), signingName),
 				signingRegion)
+
+			if tt.logger != nil {
+				ctx = middleware.SetLogger(ctx, tt.logger)
+			}
 
 			if len(tt.hash) != 0 {
 				ctx = context.WithValue(ctx, payloadHashKey{}, tt.hash)
