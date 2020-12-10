@@ -20,7 +20,7 @@ For the list of service clients, including their methods and parameters, see the
 Service clients can be constructed using either the `New` or `NewFromConfig` functions available in service client's
 Go package. Each function will return a `Client` struct type containing the methods for invoking the service APIs.
 The `New` and `NewFromConfig` each provide the same set of configurable options for constructing a service client, but
-but provide slightly different construction patterns that we will look at in the following sections.
+provide slightly different construction patterns that we will look at in the following sections.
 
 ### NewFromConfig
 
@@ -146,14 +146,14 @@ used for setting request deadlines that will be honored by the SDK. In addition,
 the operation input struct.
 
 Operation input structures can have input parameters such as the standard Go numerics, boolean, string, map, and list
-types. In more complex API operations a service may have more complex modeling of input parameters. These other types
+types. In more complex API operations a service might have more complex modeling of input parameters. These other types
 such as service specific structures and enum values are found in the service's `types` Go package.
 
-In addition, services may distinguish between the default value of a Go type and whether the value was set or not by the
-user. In these cases, input parameters may require you to pass a pointer reference to the type in question. For standard
-Go types like numerics, boolean, and string there are `<Type>` and `From<Type>` convenience functions available in the
-[aws]({{< apiref aws >}}) to ease this conversion. For example [aws.String]({{% apiref "aws#String" %}}) can be used
-to convert a `string` to a `*string` type for input parameters that require a pointer to a string. Inversely
+In addition, services might distinguish between the default value of a Go type and whether the value was set or not by
+the user. In these cases, input parameters might require you to pass a pointer reference to the type in question. For
+standard Go types like numerics, boolean, and string there are `<Type>` and `From<Type>` convenience functions available
+in the [aws]({{< apiref aws >}}) to ease this conversion. For example [aws.String]({{% apiref "aws#String" %}}) can be
+used to convert a `string` to a `*string` type for input parameters that require a pointer to a string. Inversely
 [aws.ToString]({{% apiref "aws#ToString" %}}) can be used to transform a `*string` to a `string` while providing
 protection from dereferencing a nil pointer. The `To<Type>` functions are helpful when handling service responses.
 
@@ -212,7 +212,7 @@ resp, err := client.GetObject(context.TODO(), params, func(o *Options) {
 ### Handling Operation Responses {#HandlingOperationResponses}
 
 Each service operation has an associated output struct that contains the service's operation response members.
-The output struct follows the following naming pattern `<OperationName>Output`. Some operations may have no members
+The output struct follows the following naming pattern `<OperationName>Output`. Some operations might have no members
 defined for their operation output. After calling a service operation, the return `error` argument type should always
 be checked to determine if an error occurred while invoking the service operation. Errors returned can range from
 client-side input validation errors to service-side error responses returned to the client. The operation's output
@@ -354,12 +354,12 @@ for result := range results {
 }
 ```
 
-## Using Operation Paginators
+## Using Operation Paginators {id="using-paginators"}
 
-Typically, when you retrieve a list of items, you may need to check the output struct for a token or marker to confirm
-whether the AWS service returned all results from your request. If present, you use the token or marker to request the 
-next page of results. Instead of managing these tokens or markers, you can use the service package's available paginator
-types.
+Typically, when you retrieve a list of items, you might need to check the output struct for a token or marker to confirm
+whether the AWS service returned all results from your request. If the token or marker is present, you use it to request
+the next page of results. Instead of managing these tokens or markers, you can use the service package's available
+paginator types.
 
 Paginator helpers are available for supported service operations, and can be found in the service client's Go package.
 To construct a paginator for a supported operation, use the `New<OperationName>Paginator` function. Paginator construct
