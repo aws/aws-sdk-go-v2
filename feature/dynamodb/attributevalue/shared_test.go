@@ -2,6 +2,7 @@ package attributevalue
 
 import (
 	"reflect"
+	"strings"
 	"testing"
 	"time"
 
@@ -378,7 +379,7 @@ func assertConvertTest(t *testing.T, actual, expected interface{}, err, expected
 
 	if expectedErr != nil {
 		if err != nil {
-			if e, a := expectedErr, err; !reflect.DeepEqual(e, a) {
+			if e, a := expectedErr, err; !strings.Contains(a.Error(), e.Error()) {
 				t.Errorf("expect %v, got %v", e, a)
 			}
 		} else {

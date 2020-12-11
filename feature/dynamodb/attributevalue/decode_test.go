@@ -9,6 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestUnmarshalShared(t *testing.T) {
@@ -191,10 +192,53 @@ func TestUnmarshal(t *testing.T) {
 				Type:  reflect.TypeOf(uint8(0)),
 			},
 		},
+		// -------
+		// Empty Values
+		// -------
+		{
+			in:       &types.AttributeValueMemberB{Value: []byte{}},
+			actual:   &[]byte{},
+			expected: []byte{},
+		},
+		{
+			in:       &types.AttributeValueMemberBS{Value: [][]byte{}},
+			actual:   &[][]byte{},
+			expected: [][]byte{},
+		},
+		{
+			in:       &types.AttributeValueMemberL{Value: []types.AttributeValue{}},
+			actual:   &[]interface{}{},
+			expected: []interface{}{},
+		},
+		{
+			in:       &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{}},
+			actual:   &map[string]interface{}{},
+			expected: map[string]interface{}{},
+		},
+		{
+			in:     &types.AttributeValueMemberN{Value: ""},
+			actual: new(int),
+			err:    fmt.Errorf("invalid syntax"),
+		},
+		{
+			in:       &types.AttributeValueMemberNS{Value: []string{}},
+			actual:   &[]string{},
+			expected: []string{},
+		},
+		{
+			in:       &types.AttributeValueMemberS{Value: ""},
+			actual:   new(string),
+			expected: "",
+		},
+		{
+			in:       &types.AttributeValueMemberSS{Value: []string{}},
+			actual:   &[]string{},
+			expected: []string{},
+		},
 	}
 
 	for i, c := range cases {
-		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+		t.Run(fmt.Sprintf("case %d/%d", i, len(cases)), func(t *testing.T) {
 			err := Unmarshal(c.in, c.actual)
 			assertConvertTest(t, c.actual, c.expected, err, c.err)
 		})
@@ -609,5 +653,73 @@ func TestDecodeAliasedUnixTime(t *testing.T) {
 	}
 	if expect != actual {
 		t.Errorf("expect %v, got %v", expect, actual)
+	}
+}
+
+// see github issue #1594
+func TestDecodeArrayType(t *testing.T) {
+	cases := []struct {
+		to, from interface{}
+	}{
+		{
+			&[2]int{1, 2},
+			&[2]int{},
+		},
+		{
+			&[2]int64{1, 2},
+			&[2]int64{},
+		},
+		{
+			&[2]byte{1, 2},
+			&[2]byte{},
+		},
+		{
+			&[2]bool{true, false},
+			&[2]bool{},
+		},
+		{
+			&[2]string{"1", "2"},
+			&[2]string{},
+		},
+		{
+			&[2][]string{{"1", "2"}},
+			&[2][]string{},
+		},
+	}
+
+	for _, c := range cases {
+		marshaled, err := Marshal(c.to)
+		if err != nil {
+			t.Errorf("expected no error, but received %v", err)
+		}
+
+		if err = Unmarshal(marshaled, c.from); err != nil {
+			t.Errorf("expected no error, but received %v", err)
+		}
+
+		if diff := cmp.Diff(c.to, c.from); len(diff) != 0 {
+			t.Errorf("expected match\n:%s", diff)
+		}
+	}
+}
+
+func TestDecoderFieldByIndex(t *testing.T) {
+	type (
+		Middle struct{ Inner int }
+		Outer  struct{ *Middle }
+	)
+	var outer Outer
+
+	outerType := reflect.TypeOf(outer)
+	outerValue := reflect.ValueOf(&outer)
+	outerFields := unionStructFields(outerType, structFieldOptions{})
+	innerField, _ := outerFields.FieldByName("Inner")
+
+	f := decoderFieldByIndex(outerValue.Elem(), innerField.Index)
+	if outer.Middle == nil {
+		t.Errorf("expected outer.Middle to be non-nil")
+	}
+	if f.Kind() != reflect.Int || f.Int() != int64(outer.Inner) {
+		t.Error("expected f to be an int with value equal to outer.Inner")
 	}
 }

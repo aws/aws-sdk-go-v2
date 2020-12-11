@@ -3,7 +3,6 @@ package attributevalue
 import (
 	"reflect"
 	"sort"
-	"strings"
 )
 
 type field struct {
@@ -14,23 +13,6 @@ type field struct {
 
 	Index []int
 	Type  reflect.Type
-}
-
-func fieldByName(fields []field, name string) (field, bool) {
-	foldExists := false
-	foldField := field{}
-
-	for _, f := range fields {
-		if f.Name == name {
-			return f, true
-		}
-		if !foldExists && strings.EqualFold(f.Name, name) {
-			foldField = f
-			foldExists = true
-		}
-	}
-
-	return foldField, foldExists
 }
 
 func buildField(pIdx []int, i int, sf reflect.StructField, fieldTag tag) field {
@@ -61,14 +43,27 @@ type structFieldOptions struct {
 	TagKey string
 }
 
-func unionStructFields(t reflect.Type, opts structFieldOptions) []field {
-	fields := enumFields(t, opts)
+// unionStructFields returns a list of fields for the given type. Type info is cached
+// to avoid repeated calls into the reflect package
+func unionStructFields(t reflect.Type, opts structFieldOptions) *cachedFields {
+	if cached, ok := fieldCache.Load(t); ok {
+		return cached
+	}
 
-	sort.Sort(fieldsByName(fields))
+	f := enumFields(t, opts)
+	sort.Sort(fieldsByName(f))
+	f = visibleFields(f)
 
-	fields = visibleFields(fields)
+	fs := &cachedFields{
+		fields:       f,
+		fieldsByName: make(map[string]int, len(f)),
+	}
+	for i, f := range fs.fields {
+		fs.fieldsByName[f.Name] = i
+	}
 
-	return fields
+	cached, _ := fieldCache.LoadOrStore(t, fs)
+	return cached
 }
 
 // enumFields will recursively iterate through a structure and its nested
@@ -109,7 +104,7 @@ func enumFields(t reflect.Type, opts structFieldOptions) []field {
 
 				fieldTag := tag{}
 				fieldTag.parseAVTag(sf.Tag)
-				// Because TagKey must be explicitly set.
+				// Because MarshalOptions.TagKey must be explicitly set.
 				if opts.TagKey != "" && fieldTag == (tag{}) {
 					fieldTag.parseStructTag(opts.TagKey, sf.Tag)
 				}
