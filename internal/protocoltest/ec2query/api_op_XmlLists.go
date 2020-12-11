@@ -28,7 +28,10 @@ import (
 // * Flattened XML
 // lists with @xmlName.
 //
-// * Lists of structures.
+// * Flattened XML lists with @xmlNamespace.
+//
+// * Lists of
+// structures.
 func (c *Client) XmlLists(ctx context.Context, params *XmlListsInput, optFns ...func(*Options)) (*XmlListsOutput, error) {
 	if params == nil {
 		params = &XmlListsInput{}
@@ -55,6 +58,10 @@ type XmlListsOutput struct {
 	FlattenedList []string
 
 	FlattenedList2 []string
+
+	FlattenedListWithMemberNamespace []string
+
+	FlattenedListWithNamespace []string
 
 	IntegerList []int32
 

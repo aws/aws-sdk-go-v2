@@ -78,6 +78,10 @@ func TestClient_XmlLists_awsEc2queryDeserialize(t *testing.T) {
 			    <flattenedList>bye</flattenedList>
 			    <customName>yep</customName>
 			    <customName>nope</customName>
+			    <flattenedListWithMemberNamespace xmlns="https://xml-member.example.com">a</flattenedListWithMemberNamespace>
+			    <flattenedListWithMemberNamespace xmlns="https://xml-member.example.com">b</flattenedListWithMemberNamespace>
+			    <flattenedListWithNamespace>a</flattenedListWithNamespace>
+			    <flattenedListWithNamespace>b</flattenedListWithNamespace>
 			    <myStructureList>
 			        <item>
 			            <value>1</value>
@@ -137,6 +141,14 @@ func TestClient_XmlLists_awsEc2queryDeserialize(t *testing.T) {
 				FlattenedList2: []string{
 					"yep",
 					"nope",
+				},
+				FlattenedListWithMemberNamespace: []string{
+					"a",
+					"b",
+				},
+				FlattenedListWithNamespace: []string{
+					"a",
+					"b",
 				},
 				StructureList: []types.StructureListMember{
 					{
