@@ -498,6 +498,7 @@ func (c *PresignClient) PresignGetObject(ctx context.Context, params *GetObjectI
 	result, _, err := c.client.invokeOperation(ctx, "GetObject", params, clientOptFns,
 		addOperationGetObjectMiddlewares,
 		c.convertToPresignMiddleware,
+		addGetObjectPayloadAsUnsigned,
 	)
 	if err != nil {
 		return nil, err
@@ -505,4 +506,10 @@ func (c *PresignClient) PresignGetObject(ctx context.Context, params *GetObjectI
 
 	out := result.(*v4.PresignedHTTPRequest)
 	return out, nil
+}
+
+func addGetObjectPayloadAsUnsigned(stack *middleware.Stack, options Options) error {
+	v4.RemoveContentSHA256HeaderMiddleware(stack)
+	v4.RemoveComputePayloadSHA256Middleware(stack)
+	return v4.AddUnsignedPayloadMiddleware(stack)
 }

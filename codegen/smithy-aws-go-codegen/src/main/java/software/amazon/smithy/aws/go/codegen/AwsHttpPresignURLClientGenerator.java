@@ -85,14 +85,13 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                     ShapeId.from("com.amazonaws.s3#PutObject")
             )
     );
+    // map of service to list of operations for which presignedURL client and operation should
+    // be generated.
+    public static Map<ShapeId, Set<ShapeId>> PRESIGNER_MAP = new TreeMap<>();
 
     private static final String addAsUnsignedPayloadName(String operationName) {
         return String.format("add%sPayloadAsUnsigned", operationName);
     }
-
-    // map of service to list of operations for which presignedURL client and operation should
-    // be generated.
-    public static Map<ShapeId, Set<ShapeId>> PRESIGNER_MAP = new TreeMap<>();
 
     // build pointable symbols
     private static Symbol buildSymbol(String name, boolean exported) {
@@ -256,14 +255,9 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                                         .getAddOperationMiddlewareFuncName(operationSymbol));
                                 writer.write("c.$L,", CONVERT_TO_PRESIGN_MIDDLEWARE_NAME);
 
-                                // s3 should add a middleware where it switches to using unisgned payload if
-                                // input is a stream.
+                                // s3 needs to add a middleware to switch to using unsigned payload .
                                 if (isS3ServiceShape(model, serviceShape)) {
-                                    if (operationInputShape.members().stream().anyMatch(memberShape -> {
-                                        return memberShape.getMemberTrait(model, StreamingTrait.class).isPresent();
-                                    })) {
-                                        writer.write("$L,", addAsUnsignedPayloadName(operationSymbol.getName()));
-                                    }
+                                    writer.write("$L,", addAsUnsignedPayloadName(operationSymbol.getName()));
                                 }
                             });
                     writer.write("if err != nil { return nil, err }");
@@ -291,11 +285,6 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
 
         Shape operationInputShape = model.expectShape(operationShape.getInput().get());
 
-        // return if not streaming
-        if (operationInputShape.members().stream().noneMatch(memberShape -> {
-            return memberShape.getMemberTrait(model, StreamingTrait.class).isPresent();
-        })) { return; }
-
         writer.openBlock("func $L(stack $P, options Options) error {", "}",
                 addAsUnsignedPayloadName(operationSymbol.getName()),
                 SymbolUtils.createPointableSymbolBuilder("Stack", SmithyGoDependency.SMITHY_MIDDLEWARE).build(),
@@ -306,7 +295,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
 
                     writer.write("return $T(stack)", SymbolUtils.createValueSymbolBuilder(
                             "AddUnsignedPayloadMiddleware", AwsGoDependency.AWS_SIGNER_V4).build());
-        });
+                });
         writer.write("");
     }
 
