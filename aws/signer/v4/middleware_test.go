@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"os"
 	"strconv"
+	"strings"
 	"testing"
 	"time"
 
@@ -93,7 +93,6 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 	cases := map[string]struct {
 		creds       aws.CredentialsProvider
 		hash        string
-		logger      logging.Logger
 		logSigning  bool
 		expectedErr error
 	}{
@@ -112,15 +111,9 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 		"nil creds": {
 			creds: nil,
 		},
-		"with logger": {
-			creds:  unit.StubCredentialsProvider{},
-			hash:   "0123456789abcdef",
-			logger: logging.NewStandardLogger(os.Stdout),
-		},
 		"with log signing": {
 			creds:      unit.StubCredentialsProvider{},
 			hash:       "0123456789abcdef",
-			logger:     logging.NewStandardLogger(os.Stdout),
 			logSigning: true,
 		},
 	}
@@ -144,11 +137,11 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 						for _, fn := range optFns {
 							fn(&options)
 						}
-						if e, a := tt.logSigning, options.LogSigning; e != a {
-							t.Errorf("expect %v log signing, got %v", e, a)
-						}
 						if options.Logger == nil {
 							t.Errorf("expect logger, got none")
+						}
+						if options.LogSigning {
+							options.Logger.Logf(logging.Debug, t.Name())
 						}
 
 						expectCreds, _ := unit.StubCredentialsProvider{}.Retrieve(context.Background())
@@ -177,9 +170,9 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 				awsmiddleware.SetSigningName(context.Background(), signingName),
 				signingRegion)
 
-			if tt.logger != nil {
-				ctx = middleware.SetLogger(ctx, tt.logger)
-			}
+			var loggerBuf bytes.Buffer
+			logger := logging.NewStandardLogger(&loggerBuf)
+			ctx = middleware.SetLogger(ctx, logger)
 
 			if len(tt.hash) != 0 {
 				ctx = context.WithValue(ctx, payloadHashKey{}, tt.hash)
@@ -197,6 +190,16 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 				}
 			} else if err == nil && tt.expectedErr != nil {
 				t.Errorf("expected error, got nil")
+			}
+
+			if tt.logSigning {
+				if e, a := t.Name(), loggerBuf.String(); !strings.Contains(a, e) {
+					t.Errorf("expect %v logged in %v", e, a)
+				}
+			} else {
+				if loggerBuf.Len() != 0 {
+					t.Errorf("expect no log, got %v", loggerBuf.String())
+				}
 			}
 		})
 	}
