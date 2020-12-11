@@ -85,6 +85,9 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                     ShapeId.from("com.amazonaws.s3#PutObject")
             )
     );
+    private static final Symbol removeContentTypeHeader = SymbolUtils.createValueSymbolBuilder(
+            "RemoveContentTypeHeader", AwsGoDependency.AWS_MIDDLEWARE
+    ).build();
     // map of service to list of operations for which presignedURL client and operation should
     // be generated.
     public static Map<ShapeId, Set<ShapeId>> PRESIGNER_MAP = new TreeMap<>();
@@ -254,6 +257,20 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                                 writer.write("$L,", OperationGenerator
                                         .getAddOperationMiddlewareFuncName(operationSymbol));
                                 writer.write("c.$L,", CONVERT_TO_PRESIGN_MIDDLEWARE_NAME);
+
+                                // we should remove Content-Type header if input is a stream and
+                                // payload is empty/nil stream.
+                                if (operationInputShape.members().stream().anyMatch(memberShape -> {
+                                    return memberShape.getMemberTrait(model, StreamingTrait.class).isPresent();
+                                })) {
+                                    writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
+                                    writer.addUseImports(AwsGoDependency.AWS_MIDDLEWARE);
+
+                                    writer.openBlock("func(stack *middleware.Stack, options Options) error {", "},",
+                                            () -> {
+                                                writer.write("return $T(stack)", removeContentTypeHeader);
+                                            });
+                                }
 
                                 // s3 needs to add a middleware to switch to using unsigned payload .
                                 if (isS3ServiceShape(model, serviceShape)) {

@@ -449,6 +449,9 @@ func (c *PresignClient) PresignPutObject(ctx context.Context, params *PutObjectI
 	result, _, err := c.client.invokeOperation(ctx, "PutObject", params, clientOptFns,
 		addOperationPutObjectMiddlewares,
 		c.convertToPresignMiddleware,
+		func(stack *middleware.Stack, options Options) error {
+			return awsmiddleware.RemoveContentTypeHeader(stack)
+		},
 		addPutObjectPayloadAsUnsigned,
 	)
 	if err != nil {

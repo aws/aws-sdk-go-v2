@@ -37,10 +37,8 @@ func TestInteg_PresignURL(t *testing.T) {
 			expectedSignedHeader: http.Header{},
 		},
 		"empty-body": {
-			body: bytes.NewReader([]byte("")),
-			expectedSignedHeader: http.Header{
-				"content-type": {"application/octet-stream"},
-			},
+			body:                 bytes.NewReader([]byte("")),
+			expectedSignedHeader: http.Header{},
 		},
 	}
 
