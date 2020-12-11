@@ -85,9 +85,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                     ShapeId.from("com.amazonaws.s3#PutObject")
             )
     );
-    private static final Symbol removeContentTypeHeader = SymbolUtils.createValueSymbolBuilder(
-            "RemoveContentTypeHeader", AwsGoDependency.AWS_MIDDLEWARE
-    ).build();
+
     // map of service to list of operations for which presignedURL client and operation should
     // be generated.
     public static Map<ShapeId, Set<ShapeId>> PRESIGNER_MAP = new TreeMap<>();
@@ -265,6 +263,10 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                                 })) {
                                     writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
                                     writer.addUseImports(AwsGoDependency.AWS_MIDDLEWARE);
+
+                                    Symbol removeContentTypeHeader = SymbolUtils.createValueSymbolBuilder(
+                                            "RemoveContentTypeHeader", AwsGoDependency.AWS_HTTP_TRANSPORT
+                                    ).build();
 
                                     writer.openBlock("func(stack *middleware.Stack, options Options) error {", "},",
                                             () -> {
