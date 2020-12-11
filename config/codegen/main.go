@@ -36,6 +36,7 @@ var implAsserts = map[string][]string{
 	"loggerProvider":                           {loadOptionsType},
 	"clientLogModeProvider":                    {loadOptionsType},
 	"logConfigurationWarningsProvider":         {loadOptionsType},
+	"ec2IMDSRegionProvider":                    {loadOptionsType},
 }
 
 var tplProviderTests = template.Must(template.New("tplProviderTests").Funcs(map[string]interface{}{

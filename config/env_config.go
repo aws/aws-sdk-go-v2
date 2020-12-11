@@ -283,21 +283,9 @@ func (c EnvConfig) getCustomCABundle(context.Context) (io.Reader, bool, error) {
 	return bytes.NewReader(b), true, nil
 }
 
-// getEnableEndpointDiscovery returns whether to enable service endpoint discovery
-func (c EnvConfig) getEnableEndpointDiscovery() (value, ok bool, err error) {
-	if c.EnableEndpointDiscovery == nil {
-		return false, false, nil
-	}
-
-	return *c.EnableEndpointDiscovery, true, nil
-}
-
 // GetS3UseARNRegion returns whether to allow ARNs to direct the region
 // the S3 client's requests are sent to.
-// TODO: S3UseARNRegion should be an option on LoadOptions?
-//	Will also need a resolver
-//  These are used in s3/internal package and so not able to un-export
-func (c EnvConfig) GetS3UseARNRegion() (value, ok bool, err error) {
+func (c EnvConfig) GetS3UseARNRegion(ctx context.Context) (value, ok bool, err error) {
 	if c.S3UseARNRegion == nil {
 		return false, false, nil
 	}

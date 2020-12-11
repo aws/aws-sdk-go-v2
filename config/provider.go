@@ -13,7 +13,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/credentials/endpointcreds"
 	"github.com/aws/aws-sdk-go-v2/credentials/processcreds"
 	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
-	"github.com/aws/aws-sdk-go-v2/ec2imds"
 )
 
 // sharedConfigProfileProvider provides access to the shared config profile
@@ -99,34 +98,25 @@ func getRegion(ctx context.Context, configs configs) (value string, found bool, 
 	return
 }
 
-// UseEC2IMDSRegion provides a regionProvider that retrieves the region
-// from the EC2 Metadata service.
-//
-// TODO should this provider be added to the default config loading?
-type UseEC2IMDSRegion struct {
-	// If unset will default to generic EC2 IMDS client.
-	Client *ec2imds.Client
+// ec2IMDSRegionProvider provides access to the ec2 imds region
+// configuration value
+type ec2IMDSRegionProvider interface {
+	getEC2IMDSRegion(ctx context.Context) (string, bool, error)
 }
 
-// GetRegion attempts to retrieve the region from EC2 Metadata service.
-func (p *UseEC2IMDSRegion) getRegion(ctx context.Context) (string, bool, error) {
-	if ctx == nil {
-		ctx = context.Background()
+// getEC2IMDSRegion searches the configs for a ec2IMDSRegionProvider and
+// returns the value if found. Returns an error if a provider fails before
+// a value is found.
+func getEC2IMDSRegion(ctx context.Context, configs configs) (region string, found bool, err error) {
+	for _, cfg := range configs {
+		if provider, ok := cfg.(ec2IMDSRegionProvider); ok {
+			region, found, err = provider.getEC2IMDSRegion(ctx)
+			if err != nil || found {
+				break
+			}
+		}
 	}
-
-	client := p.Client
-	if client == nil {
-		client = ec2imds.New(ec2imds.Options{})
-	}
-
-	result, err := p.Client.GetRegion(ctx, nil)
-	if err != nil {
-		return "", false, err
-	}
-	if len(result.Region) != 0 {
-		return result.Region, true, nil
-	}
-	return "", false, nil
+	return
 }
 
 // credentialsProviderProvider provides access to the credentials external

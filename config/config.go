@@ -44,7 +44,7 @@ var defaultAWSConfigResolvers = []awsConfigResolver{
 
 	// Sets the region the API Clients should use for making requests to.
 	resolveRegion,
-	// TODO: Add back EC2 Region Resolver Support
+	resolveEC2IMDSRegion,
 	resolveDefaultRegion,
 
 	// Sets the additional set of middleware stack mutators that will custom

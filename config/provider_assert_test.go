@@ -33,6 +33,11 @@ var (
 	_ defaultRegionProvider = &LoadOptions{}
 )
 
+// ec2IMDSRegionProvider implementor assertions
+var (
+	_ ec2IMDSRegionProvider = &LoadOptions{}
+)
+
 // ec2RoleCredentialOptionsProvider implementor assertions
 var (
 	_ ec2RoleCredentialOptionsProvider = &LoadOptions{}

@@ -2,6 +2,7 @@ package config
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/ec2imds"
 	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -88,9 +89,13 @@ type LoadOptions struct {
 	// stscreds.AssumeRoleOptions
 	AssumeRoleCredentialOptions func(*stscreds.AssumeRoleOptions)
 
-	//LogConfigurationWarnings when set to true, enables logging
+	// LogConfigurationWarnings when set to true, enables logging
 	// configuration warnings
 	LogConfigurationWarnings *bool
+
+	// S3UseARNRegion specifies if the S3 service should allow ARNs to direct
+	// the region, the client's requests are sent to.
+	S3UseARNRegion *bool
 }
 
 // getRegion returns Region from config's LoadOptions
@@ -127,7 +132,9 @@ func (o LoadOptions) getDefaultRegion(ctx context.Context) (string, bool, error)
 // that sets a DefaultRegion on config's LoadOptions. Setting the default
 // region to an empty string, will result in the default region value
 // being ignored. If multiple WithDefaultRegion calls are made, the last
-// call overrides the previous call values.
+// call overrides the previous call values. Note that both WithRegion and
+// WithEC2IMDSRegion call takes precedence over WithDefaultRegion call
+// when resolving region.
 func WithDefaultRegion(v string) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.DefaultRegion = v
@@ -148,7 +155,8 @@ func (o LoadOptions) getSharedConfigProfile(ctx context.Context) (string, bool, 
 // that sets SharedConfigProfile on config's LoadOptions. Setting the shared
 // config profile to an empty string, will result in the shared config profile
 // value being ignored.
-//If multiple WithSharedConfigProfile calls are made, the last call overrides the previous call values.
+// If multiple WithSharedConfigProfile calls are made, the last call overrides
+// the previous call values.
 func WithSharedConfigProfile(v string) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.SharedConfigProfile = v
@@ -166,9 +174,11 @@ func (o LoadOptions) getSharedConfigFiles(ctx context.Context) ([]string, bool, 
 }
 
 // WithSharedConfigFiles is a helper function to construct functional options
-// that sets slice of SharedConfigFiles on config's LoadOptions. Setting the shared config
-// files to an nil string slice, will result in the shared config files value being ignored.
-// If multiple WithSharedConfigFiles calls are made, the last call overrides the previous call values.
+// that sets slice of SharedConfigFiles on config's LoadOptions.
+// Setting the shared config files to an nil string slice, will result in the
+// shared config files value being ignored.
+// If multiple WithSharedConfigFiles calls are made, the last call overrides
+// the previous call values.
 func WithSharedConfigFiles(v []string) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.SharedConfigFiles = v
@@ -188,7 +198,8 @@ func (o LoadOptions) getCustomCABundle(ctx context.Context) (io.Reader, bool, er
 // WithCustomCABundle is a helper function to construct functional options
 // that sets CustomCABundle on config's LoadOptions. Setting the custom CA Bundle
 // to nil will result in custom CA Bundle value being ignored.
-// If multiple WithCustomCABundle calls are made, the last call overrides the previous call values.
+// If multiple WithCustomCABundle calls are made, the last call overrides the
+// previous call values.
 func WithCustomCABundle(v io.Reader) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.CustomCABundle = v
@@ -196,12 +207,51 @@ func WithCustomCABundle(v io.Reader) LoadOptionsFunc {
 	}
 }
 
+// UseEC2IMDSRegion provides a regionProvider that retrieves the region
+// from the EC2 Metadata service.
+type UseEC2IMDSRegion struct {
+	// If unset will default to generic EC2 IMDS client.
+	Client *ec2imds.Client
+}
+
+// getRegion attempts to retrieve the region from EC2 Metadata service.
+func (p *UseEC2IMDSRegion) getRegion(ctx context.Context) (string, bool, error) {
+	if ctx == nil {
+		ctx = context.Background()
+	}
+
+	client := p.Client
+	if client == nil {
+		client = ec2imds.New(ec2imds.Options{})
+	}
+
+	result, err := p.Client.GetRegion(ctx, nil)
+	if err != nil {
+		return "", false, err
+	}
+	if len(result.Region) != 0 {
+		return result.Region, true, nil
+	}
+	return "", false, nil
+}
+
+// getEC2IMDSRegion returns the value of ec2imds region.
+func (o LoadOptions) getEC2IMDSRegion(ctx context.Context) (string, bool, error) {
+	if o.UseEC2IMDSRegion == nil {
+		return "", false, nil
+	}
+
+	return o.UseEC2IMDSRegion.getRegion(ctx)
+}
+
 // WithEC2IMDSRegion is a helper function to construct functional options
 // that enables resolving EC2IMDS region. The function takes
-// in a UseEC2IMDSRegion functional option, and can be used to set the EC2IMDS client
-// which will be used to resolve EC2IMDSRegion. If no functional option is provided,
-// an EC2IMDS client is built and used by the resolver.
-// If multiple WithEC2IMDSRegion calls are made, the last call overrides the previous call values.
+// in a UseEC2IMDSRegion functional option, and can be used to set the
+// EC2IMDS client which will be used to resolve EC2IMDSRegion.
+// If no functional option is provided, an EC2IMDS client is built and used
+// by the resolver. If multiple WithEC2IMDSRegion calls are made, the last
+// call overrides the previous call values. Note that the WithRegion calls takes
+// precedence over WithEC2IMDSRegion when resolving region.
 func WithEC2IMDSRegion(fnOpts ...func(o *UseEC2IMDSRegion)) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.UseEC2IMDSRegion = &UseEC2IMDSRegion{}
@@ -223,9 +273,10 @@ func (o LoadOptions) getCredentialsProvider(ctx context.Context) (aws.Credential
 }
 
 // WithCredentialsProvider is a helper function to construct functional options
-// that sets Credential provider value on config's LoadOptions. If credentials provider
-// is set to nil, the credentials provider value will be ignored.
-// If multiple WithCredentialsProvider calls are made, the last call overrides the previous call values.
+// that sets Credential provider value on config's LoadOptions. If credentials
+// provider is set to nil, the credentials provider value will be ignored.
+// If multiple WithCredentialsProvider calls are made, the last call overrides
+// the previous call values.
 func WithCredentialsProvider(v aws.CredentialsProvider) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.Credentials = v
@@ -243,9 +294,10 @@ func (o LoadOptions) getProcessCredentialOptions(ctx context.Context) (func(*pro
 }
 
 // WithProcessCredentialOptions is a helper function to construct functional options
-// that sets a function to use processcreds.Options on config's LoadOptions. If process
-// credential options is set to nil, the process credential value will be ignored.
-// If multiple WithProcessCredentialOptions calls are made, the last call overrides the previous call values.
+// that sets a function to use processcreds.Options on config's LoadOptions.
+// If process credential options is set to nil, the process credential value will
+// be ignored. If multiple WithProcessCredentialOptions calls are made, the last call
+// overrides the previous call values.
 func WithProcessCredentialOptions(v func(*processcreds.Options)) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.ProcessCredentialOptions = v
@@ -265,8 +317,8 @@ func (o LoadOptions) getEC2RoleCredentialOptions(ctx context.Context) (func(*ec2
 // WithEC2RoleCredentialOptions is a helper function to construct functional options
 // that sets a function to use ec2rolecreds.Options on config's LoadOptions. If
 // EC2 role credential options is set to nil, the EC2 role credential options value
-// will be ignored. If multiple WithEC2RoleCredentialOptions calls are made, the last call
-// overrides the previous call values.
+// will be ignored. If multiple WithEC2RoleCredentialOptions calls are made,
+// the last call overrides the previous call values.
 func WithEC2RoleCredentialOptions(v func(*ec2rolecreds.Options)) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.EC2RoleCredentialOptions = v
@@ -285,9 +337,9 @@ func (o LoadOptions) getEndpointCredentialOptions(context.Context) (func(*endpoi
 
 // WithEndpointCredentialOptions is a helper function to construct functional options
 // that sets a function to use endpointcreds.Options on config's LoadOptions. If
-// endpoint credential options is set to nil, the endpoint credential options value will
-// be ignored. If multiple WithEndpointCredentialOptions calls are made, the last call overrides
-// the previous call values.
+// endpoint credential options is set to nil, the endpoint credential options
+// value will be ignored. If multiple WithEndpointCredentialOptions calls are made,
+// the last call overrides the previous call values.
 func WithEndpointCredentialOptions(v func(*endpointcreds.Options)) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.EndpointCredentialOptions = v
@@ -304,11 +356,12 @@ func (o LoadOptions) getWebIdentityRoleCredentialOptions(context.Context) (func(
 	return o.WebIdentityRoleCredentialOptions, true, nil
 }
 
-// WithWebIdentityRoleCredentialOptions is a helper function to construct functional options
-// that sets a function to use stscreds.WebIdentityRoleOptions on config's LoadOptions. If
-// web identity role credentials options is set to nil, the web identity role credentials value
-// will be ignored. If multiple WithWebIdentityRoleCredentialOptions calls are made, the last call overrides
-// the previous call values.
+// WithWebIdentityRoleCredentialOptions is a helper function to construct
+// functional options that sets a function to use stscreds.WebIdentityRoleOptions
+// on config's LoadOptions. If web identity role credentials options is set to nil,
+// the web identity role credentials value will be ignored. If multiple
+// WithWebIdentityRoleCredentialOptions calls are made, the last call
+// overrides the previous call values.
 func WithWebIdentityRoleCredentialOptions(v func(*stscreds.WebIdentityRoleOptions)) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.WebIdentityRoleCredentialOptions = v
@@ -325,10 +378,11 @@ func (o LoadOptions) getAssumeRoleCredentialOptions(context.Context) (func(optio
 	return o.AssumeRoleCredentialOptions, true, nil
 }
 
-// WithAssumeRoleCredentialOptions  is a helper function to construct functional options
-// that sets a function to use stscreds.AssumeRoleOptions on config's LoadOptions. If
-// assume role credentials options is set to nil, the assume role credentials value
-// will be ignored. If multiple WithAssumeRoleCredentialOptions calls are made, the last call overrides
+// WithAssumeRoleCredentialOptions  is a helper function to construct
+// functional options that sets a function to use stscreds.AssumeRoleOptions
+// on config's LoadOptions. If assume role credentials options is set to nil,
+// the assume role credentials value will be ignored. If multiple
+// WithAssumeRoleCredentialOptions calls are made, the last call overrides
 // the previous call values.
 func WithAssumeRoleCredentialOptions(v func(*stscreds.AssumeRoleOptions)) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
@@ -409,8 +463,8 @@ func (o LoadOptions) getEndpointResolver(ctx context.Context) (aws.EndpointResol
 
 // WithEndpointResolver is a helper function to construct functional options
 // that sets endpoint resolver on LoadOptions. The EndpointResolver is set to nil,
-// the EndpointResolver value is ignored. If multiple WithEndpointResolver calls are made,
-// the last call overrides the previous call values.
+// the EndpointResolver value is ignored. If multiple WithEndpointResolver calls
+// are made, the last call overrides the previous call values.
 func WithEndpointResolver(v aws.EndpointResolver) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.EndpointResolver = v
@@ -463,13 +517,35 @@ func (o LoadOptions) getLogConfigurationWarnings(ctx context.Context) (v bool, f
 	return *o.LogConfigurationWarnings, true, nil
 }
 
-// WithLogConfigurationWarnings is a helper function to construct functional options
-// that can be used to set Log configuration warnings. If log configuration warnings
-// is set to nil, the log configuration warnings value is ignored.
-// If multiple WithLogConfigurationWarnings calls are made, the last call overrides the previous call values.
+// WithLogConfigurationWarnings is a helper function to construct
+// functional options that can be used to set LogConfigurationWarnings
+// on LoadOptions.
+//
+// If multiple WithLogConfigurationWarnings calls are made, the last call
+// overrides the previous call values.
 func WithLogConfigurationWarnings(v bool) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.LogConfigurationWarnings = &v
+		return nil
+	}
+}
+
+// GetS3UseARNRegion returns whether to allow ARNs to direct the region
+// the S3 client's requests are sent to.
+func (o LoadOptions) GetS3UseARNRegion(ctx context.Context) (v bool, found bool, err error) {
+	if o.S3UseARNRegion == nil {
+		return false, false, nil
+	}
+	return *o.S3UseARNRegion, true, nil
+}
+
+// WithS3UseARNRegion is a helper function to construct functional options
+// that can be used to set S3UseARNRegion on LoadOptions.
+// If multiple WithS3UseARNRegion calls are made, the last call overrides
+// the previous call values.
+func WithS3UseARNRegion(v bool) LoadOptionsFunc {
+	return func(o *LoadOptions) error {
+		o.S3UseARNRegion = &v
 		return nil
 	}
 }

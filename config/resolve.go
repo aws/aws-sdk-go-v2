@@ -208,3 +208,21 @@ func resolveRetryer(ctx context.Context, cfg *aws.Config, configs configs) error
 
 	return nil
 }
+
+func resolveEC2IMDSRegion(ctx context.Context, cfg *aws.Config, configs configs) error {
+	if len(cfg.Region) > 0 {
+		return nil
+	}
+
+	region, found, err := getEC2IMDSRegion(ctx, configs)
+	if err != nil {
+		return err
+	}
+	if !found {
+		return nil
+	}
+
+	cfg.Region = region
+
+	return nil
+}
