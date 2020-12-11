@@ -44,6 +44,7 @@ public final class AwsSignatureVersion4 implements GoIntegration {
     public static final String REGISTER_MIDDLEWARE_FUNCTION = "addHTTPSignerV4Middleware";
     public static final String SIGNER_INTERFACE_NAME = "HTTPSignerV4";
     public static final String SIGNER_CONFIG_FIELD_NAME = SIGNER_INTERFACE_NAME;
+    public static final String NEW_SIGNER_FUNC_NAME = "newDefaultV4Signer";
     public static final String SIGNER_RESOLVER = "resolve" + SIGNER_CONFIG_FIELD_NAME;
 
     private static final List<String> DISABLE_URI_PATH_ESCAPE = ListUtils.of("com.amazonaws.s3#AmazonS3");
@@ -66,6 +67,7 @@ public final class AwsSignatureVersion4 implements GoIntegration {
                 writeMiddlewareRegister(model, writer, serviceShape);
                 writerSignerInterface(writer);
                 writerConfigFieldResolver(writer, serviceShape);
+                writeNewV4SignerFunc(writer, serviceShape);
             });
         }
     }
@@ -84,24 +86,29 @@ public final class AwsSignatureVersion4 implements GoIntegration {
     }
 
     private void writerConfigFieldResolver(GoWriter writer, ServiceShape serviceShape) {
+        writer.openBlock("func $L(o *Options) {", "}", SIGNER_RESOLVER, () -> {
+            writer.openBlock("if o.$L != nil {", "}", SIGNER_CONFIG_FIELD_NAME, () -> writer.write("return"));
+            writer.write("o.$L = $L(*o)", SIGNER_CONFIG_FIELD_NAME, NEW_SIGNER_FUNC_NAME);
+        });
+        writer.write("");
+    }
+    private void writeNewV4SignerFunc(GoWriter writer, ServiceShape serviceShape) {
+        Symbol signerSymbol = SymbolUtils.createValueSymbolBuilder("Signer",
+                AwsGoDependency.AWS_SIGNER_V4).build();
         Symbol newSignerSymbol = SymbolUtils.createValueSymbolBuilder("NewSigner",
                 AwsGoDependency.AWS_SIGNER_V4).build();
         Symbol signerOptionsSymbol = SymbolUtils.createPointableSymbolBuilder("SignerOptions",
                 AwsGoDependency.AWS_SIGNER_V4).build();
 
-        writer.openBlock("func $L(o *Options) {", "}", SIGNER_RESOLVER, () -> {
-            writer.openBlock("if o.$L != nil {", "}", SIGNER_CONFIG_FIELD_NAME, () -> writer.write("return"));
-            writer.openBlock("o.$L = $T(", ")", SIGNER_CONFIG_FIELD_NAME, newSignerSymbol, () -> {
-                writer.openBlock("func (so $P) {", "},", signerOptionsSymbol, () -> {
-                    writer.write("so.Logger = o.$L", AddAwsConfigFields.LOGGER_CONFIG_NAME);
-                    writer.write("so.LogSigning = o.$L.IsSigning()", AddAwsConfigFields.LOG_MODE_CONFIG_NAME);
-                    if (DISABLE_URI_PATH_ESCAPE.contains(serviceShape.getId().toString())) {
-                        writer.write("so.DisableURIPathEscaping = true");
-                    }
-                });
-            });
+        writer.openBlock("func $L(o Options) *$T {", "}", NEW_SIGNER_FUNC_NAME, signerSymbol, () -> {
+           writer.openBlock("return $T(func(so $P) {", "})", newSignerSymbol, signerOptionsSymbol, () -> {
+               writer.write("so.Logger = o.$L", AddAwsConfigFields.LOGGER_CONFIG_NAME);
+               writer.write("so.LogSigning = o.$L.IsSigning()", AddAwsConfigFields.LOG_MODE_CONFIG_NAME);
+               if (DISABLE_URI_PATH_ESCAPE.contains(serviceShape.getId().toString())) {
+                   writer.write("so.DisableURIPathEscaping = true");
+               }
+           });
         });
-        writer.write("");
     }
 
     @Override

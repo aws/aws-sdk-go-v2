@@ -36,7 +36,6 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.model.Model;
-import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.Shape;
@@ -57,6 +56,8 @@ import software.amazon.smithy.utils.SetUtils;
 public class AwsHttpPresignURLClientGenerator implements GoIntegration {
     // constants
     private static final String CONVERT_TO_PRESIGN_MIDDLEWARE_NAME = "convertToPresignMiddleware";
+    private static final String CONVERT_TO_PRESIGN_TYPE_NAME = "presignConverter";
+    private static final String NOP_HTTP_CLIENT_OPTION_FUNC_NAME = "withNopHTTPClientAPIOption";
 
     private static final String PRESIGN_CLIENT = "PresignClient";
     private static final Symbol presignClientSymbol = buildSymbol(PRESIGN_CLIENT, true);
@@ -105,18 +106,15 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
     /**
      * generates code to iterate thru func optionals and assign value into the dest variable
      *
-     * @param writer   GoWriter to write the code to
-     * @param src      variable name that denotes functional options
-     * @param dest     variable in which result of processed functional options are stored
-     * @param destType value type used by functional options
+     * @param writer GoWriter to write the code to
+     * @param src    variable name that denotes functional options
+     * @param dest   variable in which result of processed functional options are stored
      */
     private static final void processFunctionalOptions(
             GoWriter writer,
             String src,
-            String dest,
-            Symbol destType
+            String dest
     ) {
-        writer.write("var $L $T", dest, destType);
         writer.openBlock("for _, fn := range $L {", "}", src, () -> {
             writer.write("fn(&$L)", dest);
         }).insertTrailingNewline();
@@ -225,25 +223,13 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                         + "($P, error) {", "}", presignClientSymbol, operationSymbol,
                 operationInputSymbol, presignOptionsSymbol, v4PresignedHTTPRequestSymbol,
                 () -> {
-                    Symbol nopClient = SymbolUtils.createPointableSymbolBuilder("NopClient",
-                            SmithyGoDependency.SMITHY_HTTP_TRANSPORT)
-                            .build();
-
                     writer.write("if params == nil { params = &$T{} }", operationInputSymbol).insertTrailingNewline();
 
                     // process presignerOptions
-                    processFunctionalOptions(writer, "optFns", "presignOptions", presignOptionsSymbol);
+                    writer.write("options := c.options.copy()");
+                    processFunctionalOptions(writer, "optFns", "options");
 
-                    // check if presigner was set for presignerOptions
-                    writer.openBlock("if len(optFns) != 0 {", "}", () -> {
-                        writer.write("c = $L(c.client, optFns...)", NEW_CLIENT);
-                    });
-                    writer.write("");
-
-                    writer.write("clientOptFns := make([]func(o *Options), 0)");
-                    writer.openBlock("clientOptFns = append(clientOptFns, func(o *Options) {", "})", () -> {
-                        writer.write("o.HTTPClient = &$T{}", nopClient);
-                    });
+                    writer.write("clientOptFns := append(options.ClientOptions, $L)", NOP_HTTP_CLIENT_OPTION_FUNC_NAME);
                     writer.write("");
 
                     Symbol withIsPresigning = SymbolUtils.createValueSymbolBuilder("WithIsPresigning",
@@ -254,7 +240,8 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                             operationSymbol.getName(), () -> {
                                 writer.write("$L,", OperationGenerator
                                         .getAddOperationMiddlewareFuncName(operationSymbol));
-                                writer.write("c.$L,", CONVERT_TO_PRESIGN_MIDDLEWARE_NAME);
+                                writer.write("$L(options).$L,", CONVERT_TO_PRESIGN_TYPE_NAME,
+                                        CONVERT_TO_PRESIGN_MIDDLEWARE_NAME);
 
                                 // we should remove Content-Type header if input is a stream and
                                 // payload is empty/nil stream.
@@ -335,8 +322,9 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
         Symbol smithyStack = SymbolUtils.createPointableSymbolBuilder("Stack", SmithyGoDependency.SMITHY_MIDDLEWARE)
                 .build();
 
-        writer.openBlock("func (c *$T) $L(stack $P, options Options) (err error) {", "}",
-                presignClientSymbol,
+        writer.write("type $L $T", CONVERT_TO_PRESIGN_TYPE_NAME, presignOptionsSymbol);
+        writer.openBlock("func (c $L) $L(stack $P, options Options) (err error) {", "}",
+                CONVERT_TO_PRESIGN_TYPE_NAME,
                 CONVERT_TO_PRESIGN_MIDDLEWARE_NAME,
                 smithyStack,
                 () -> {
@@ -354,7 +342,6 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                             AwsGoDependency.AWS_SIGNER_V4)
                             .build();
 
-
                     // Middleware to add
                     writer.write("stack.Finalize.Clear()");
                     writer.write("stack.Deserialize.Clear()");
@@ -364,7 +351,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                             "PresignHTTPRequestMiddlewareOptions", AwsGoDependency.AWS_SIGNER_V4).build();
                     writer.openBlock("pmw := $T($T{", "})", presignMiddleware, middlewareOptionsSymbol, () -> {
                         writer.write("CredentialsProvider: options.$L,", AddAwsConfigFields.CREDENTIALS_CONFIG_NAME);
-                        writer.write("Presigner: c.presigner,");
+                        writer.write("Presigner: c.Presigner,");
                         writer.write("LogSigning: options.$L.IsSigning(),", AddAwsConfigFields.LOG_MODE_CONFIG_NAME);
                     });
                     writer.write("err = stack.Finalize.Add(pmw, $T)", smithyAfter);
@@ -388,7 +375,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                                 AwsCustomGoDependency.S3_CUSTOMIZATION).build();
                         writer.writeDocs("add middleware to set expiration for s3 presigned url, "
                                 + " if expiration is set to 0, this middleware sets a default expiration of 900 seconds");
-                        writer.write("err = stack.Build.Add(&$T{ Expires: c.expires, }, middleware.After)",
+                        writer.write("err = stack.Build.Add(&$T{ Expires: c.Expires, }, middleware.After)",
                                 expiresAsHeaderMiddleware);
                         writer.write("if err != nil { return err }");
                     }
@@ -415,12 +402,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
         writer.writeDocs(String.format("%s represents the presign url client", PRESIGN_CLIENT));
         writer.openBlock("type $T struct {", "}", presignClientSymbol, () -> {
             writer.write("client *Client");
-            writer.write("presigner $T", presignerInterfaceSymbol);
-
-            if (isS3ServiceShape(model, serviceShape)) {
-                writer.addUseImports(SmithyGoDependency.TIME);
-                writer.write("expires time.Duration");
-            }
+            writer.write("options $T", presignOptionsSymbol);
         });
         writer.write("");
 
@@ -431,20 +413,22 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
         );
         writer.openBlock("func $L(c *Client, optFns ...func($P)) $P {", "}",
                 NEW_CLIENT, presignOptionsSymbol, presignClientSymbol, () -> {
-                    processFunctionalOptions(writer, "optFns", "presignOptions", presignOptionsSymbol);
-                    writer.write("client := copyAPIClient(c, presignOptions.ClientOptions...)");
-                    writer.openBlock("if presignOptions.Presigner == nil {", "}", () -> {
-                        writer.write("presignOptions.Presigner = $T()", v4NewPresignerSymbol);
-                    });
+                    writer.write("var options $T", presignOptionsSymbol);
+                    processFunctionalOptions(writer, "optFns", "options");
 
+                    writer.openBlock("if len(options.ClientOptions) != 0 {", "}", () -> {
+                        writer.write("c = New(c.options, options.ClientOptions...)");
+                    });
                     writer.write("");
+
+                    writer.openBlock("if options.Presigner == nil {", "}", () -> {
+                        writer.write("options.Presigner = $L(c.options)", AwsSignatureVersion4.NEW_SIGNER_FUNC_NAME);
+                    });
+                    writer.write("");
+
                     writer.openBlock("return &$L{", "}", presignClientSymbol, () -> {
-                        writer.write("client: client,");
-                        writer.write("presigner: presignOptions.Presigner,");
-                        //  if s3 assign expires value on client
-                        if (isS3ServiceShape(model, serviceShape)) {
-                            writer.write("expires: presignOptions.Expires,");
-                        }
+                        writer.write("client: c,");
+                        writer.write("options: options,");
                     });
                 });
         writer.write("");
@@ -460,14 +444,15 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
             Model model,
             SymbolProvider symbolProvider,
             ServiceShape serviceShape
-    ) {
-        // generate copy API client
-        final String COPY_API_CLIENT = "copyAPIClient";
-        writer.openBlock("func $L(c *Client, optFns ...func(*Options)) *Client {", "}",
-                COPY_API_CLIENT, () -> {
-                    writer.write("return New(c.options, optFns...)");
-                    writer.insertTrailingNewline();
-                });
+        ) {
+        // Helper function for NopClient
+        writer.openBlock("func $L(o *Options) {", "}", NOP_HTTP_CLIENT_OPTION_FUNC_NAME, () -> {
+            Symbol nopClientSymbol = SymbolUtils.createPointableSymbolBuilder("NopClient",
+                    SmithyGoDependency.SMITHY_HTTP_TRANSPORT)
+                    .build();
+
+            writer.write("o.HTTPClient = $T{}", nopClientSymbol);
+        });
         writer.write("");
     }
 
@@ -510,14 +495,13 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
             ServiceShape serviceShape
     ) {
         writer.addUseImports(SmithyGoDependency.CONTEXT);
-        Symbol presignOptionSymbol = buildSymbol(PRESIGN_OPTIONS, true);
 
         // generate presign options
         writer.writeDocs(String.format("%s represents the presign client options", PRESIGN_OPTIONS));
-        writer.openBlock("type $T struct {", "}", presignOptionSymbol, () -> {
+        writer.openBlock("type $T struct {", "}", presignOptionsSymbol, () -> {
             writer.write("");
             writer.writeDocs(
-                    "ClientOptions are list of functional options to mutate client options used by presign client"
+                    "ClientOptions are list of functional options to mutate client options used by the presign client."
             );
             writer.write("ClientOptions []func(*Options)");
 
@@ -537,6 +521,12 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                 writer.write("Expires time.Duration");
             }
         });
+        writer.openBlock("func (o $T) copy() $T {", "}", presignOptionsSymbol, presignOptionsSymbol, () -> {
+            writer.write("clientOptions := make([]func(*Options), len(o.ClientOptions))");
+            writer.write("copy(clientOptions, o.ClientOptions)");
+            writer.write("o.ClientOptions = clientOptions");
+            writer.write("return o");
+        });
 
         // generate WithPresignClientFromClientOptions Helper
         Symbol presignOptionsFromClientOptionsInternal = buildSymbol(PRESIGN_OPTIONS_FROM_CLIENT_OPTIONS, false);
@@ -545,7 +535,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                         PRESIGN_OPTIONS_FROM_CLIENT_OPTIONS)
         );
         writer.openBlock("func $L(optFns ...func(*Options)) func($P) {", "}",
-                PRESIGN_OPTIONS_FROM_CLIENT_OPTIONS, presignOptionSymbol, () -> {
+                PRESIGN_OPTIONS_FROM_CLIENT_OPTIONS, presignOptionsSymbol, () -> {
                     writer.write("return $L(optFns).options", presignOptionsFromClientOptionsInternal.getName());
                 });
 
@@ -553,7 +543,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
 
         writer.write("type $L []func(*Options)", presignOptionsFromClientOptionsInternal.getName());
         writer.openBlock("func (w $L) options (o $P) {", "}",
-                presignOptionsFromClientOptionsInternal.getName(), presignOptionSymbol, () -> {
+                presignOptionsFromClientOptionsInternal.getName(), presignOptionsSymbol, () -> {
                     writer.write("o.ClientOptions = append(o.ClientOptions, w...)");
                 }).insertTrailingNewline();
 
@@ -566,7 +556,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                     "%s is a helper utility to append Expires value on presign options optional function",
                     PRESIGN_OPTIONS_FROM_EXPIRES));
             writer.openBlock("func $L(dur time.Duration) func($P) {", "}",
-                    PRESIGN_OPTIONS_FROM_EXPIRES, presignOptionSymbol, () -> {
+                    PRESIGN_OPTIONS_FROM_EXPIRES, presignOptionsSymbol, () -> {
                         writer.write("return $L(dur).options", presignOptionsFromExpiresInternal.getName());
                     });
 
@@ -574,7 +564,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
 
             writer.write("type $L time.Duration", presignOptionsFromExpiresInternal.getName());
             writer.openBlock("func (w $L) options (o $P) {", "}",
-                    presignOptionsFromExpiresInternal.getName(), presignOptionSymbol, () -> {
+                    presignOptionsFromExpiresInternal.getName(), presignOptionsSymbol, () -> {
                         writer.write("o.Expires = time.Duration(w)");
                     }).insertTrailingNewline();
         }
