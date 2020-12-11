@@ -40,7 +40,7 @@ func ExampleWithSharedConfigProfile() {
 }
 
 func ExampleWithCredentialsProvider() {
-	cfg, err := config.LoadDefaultConfig(context.Background(),
+	cfg, err := config.LoadDefaultConfig(context.TODO(),
 		// Hard coded credentials.
 		config.WithCredentialsProvider(credentials.StaticCredentialsProvider{
 			Value: aws.Credentials{

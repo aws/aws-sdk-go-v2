@@ -128,11 +128,8 @@ type SharedConfig struct {
 	S3UseARNRegion *bool
 }
 
-// GetEnableEndpointDiscovery returns whether to enable service endpoint discovery
-// TODO: These probably should be unexported and
-// 	EnableEndpointDiscovery should be an option on LoadOptions?
-//	Will also need a resolver (qq: do these need to be resolved before other resolver?)
-func (c *SharedConfig) GetEnableEndpointDiscovery() (value, ok bool, err error) {
+// getEnableEndpointDiscovery returns whether to enable service endpoint discovery
+func (c *SharedConfig) getEnableEndpointDiscovery() (value, ok bool, err error) {
 	if c.EnableEndpointDiscovery == nil {
 		return false, false, nil
 	}
@@ -142,9 +139,9 @@ func (c *SharedConfig) GetEnableEndpointDiscovery() (value, ok bool, err error) 
 
 // GetS3UseARNRegion returns if the S3 service should allow ARNs to direct the region
 // the client's requests are sent to.
-// TODO: GetS3UseARNRegion probably should be unexported and
-//	S3UseARNRegion should be an option on LoadOptions?
-//	Will also need a resolver (qq: do these need to be resolved before other resolver? probably not)
+// TODO: S3UseARNRegion should be an option on LoadOptions?
+//	Will also need a resolver
+//  These are used in s3/internal package and so not able to un-export
 func (c *SharedConfig) GetS3UseARNRegion() (value, ok bool, err error) {
 	if c.S3UseARNRegion == nil {
 		return false, false, nil

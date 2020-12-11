@@ -3,7 +3,6 @@ package config
 import (
 	"context"
 	"github.com/google/go-cmp/cmp"
-	"reflect"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -46,8 +45,8 @@ func TestConfigs_SharedConfigOptions(t *testing.T) {
 			if e, a := "profile-name", profile; e != a {
 				t.Errorf("expect %v profile, got %v", e, a)
 			}
-			if e, a := []string{"creds-file"}, files; !reflect.DeepEqual(e, a) {
-				t.Errorf("expect %v files, got %v", e, a)
+			if diff := cmp.Diff([]string{"creds-file"}, files); len(diff) != 0 {
+				t.Errorf("expect resolved shared config match, got diff: \n %s", diff)
 			}
 
 			return nil, nil
@@ -84,8 +83,8 @@ func TestConfigs_AppendFromLoaders(t *testing.T) {
 		t.Errorf("expect %v configs, got %v", e, a)
 	}
 
-	if e, a := options, cfgs[0]; len(cmp.Diff(e, a)) != 0 {
-		t.Errorf("expect %v config, got %v", e, a)
+	if diff := cmp.Diff(options, cfgs[0]); len(diff) != 0 {
+		t.Errorf("expect config match, got diff: \n %s", diff)
 	}
 }
 
@@ -132,7 +131,7 @@ func TestConfigs_ResolveAWSConfig(t *testing.T) {
 		expectedSources = append(expectedSources, s)
 	}
 
-	if e, a := expectedSources, cfg.ConfigSources; !reflect.DeepEqual(e, a) {
-		t.Errorf("expected %v, got %v", e, a)
+	if diff := cmp.Diff(expectedSources, cfg.ConfigSources); len(diff) != 0 {
+		t.Errorf("expect config sources match, got diff: \n %s", diff)
 	}
 }

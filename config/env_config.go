@@ -283,11 +283,8 @@ func (c EnvConfig) getCustomCABundle(context.Context) (io.Reader, bool, error) {
 	return bytes.NewReader(b), true, nil
 }
 
-// GetEnableEndpointDiscovery returns whether to enable service endpoint discovery
-// TODO: These probably should be unexported and
-// 	EnableEndpointDiscovery should be an option on LoadOptions?
-//	Will also need a resolver (qq: do these need to be resolved before other resolver?)
-func (c EnvConfig) GetEnableEndpointDiscovery() (value, ok bool, err error) {
+// getEnableEndpointDiscovery returns whether to enable service endpoint discovery
+func (c EnvConfig) getEnableEndpointDiscovery() (value, ok bool, err error) {
 	if c.EnableEndpointDiscovery == nil {
 		return false, false, nil
 	}
@@ -297,9 +294,9 @@ func (c EnvConfig) GetEnableEndpointDiscovery() (value, ok bool, err error) {
 
 // GetS3UseARNRegion returns whether to allow ARNs to direct the region
 // the S3 client's requests are sent to.
-// TODO: GetS3UseARNRegion probably should be unexported and
-//	S3UseARNRegion should be an option on LoadOptions?
-//	Will also need a resolver (qq: do these need to be resolved before other resolver? probably not)
+// TODO: S3UseARNRegion should be an option on LoadOptions?
+//	Will also need a resolver
+//  These are used in s3/internal package and so not able to un-export
 func (c EnvConfig) GetS3UseARNRegion() (value, ok bool, err error) {
 	if c.S3UseARNRegion == nil {
 		return false, false, nil
