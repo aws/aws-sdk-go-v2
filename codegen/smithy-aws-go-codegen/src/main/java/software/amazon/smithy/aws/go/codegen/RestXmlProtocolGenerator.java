@@ -6,6 +6,7 @@ import static software.amazon.smithy.aws.go.codegen.XmlProtocolUtils.initializeX
 import static software.amazon.smithy.aws.go.codegen.XmlProtocolUtils.handleDecodeError;
 import static software.amazon.smithy.aws.go.codegen.XmlProtocolUtils.writeXmlErrorMessageCodeDeserializer;
 import static software.amazon.smithy.aws.go.codegen.XmlProtocolUtils.generateXMLStartElement;
+import static software.amazon.smithy.aws.go.codegen.XmlProtocolUtils.generatePayloadAsDocumentXMLStartElement;
 
 import java.util.Optional;
 import java.util.Set;
@@ -132,7 +133,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.addUseImports(SmithyGoDependency.BYTES);
         writer.write("xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))");
 
-        generateXMLStartElement(context, payloadShape, "payloadRoot", operand);
+        generatePayloadAsDocumentXMLStartElement(context, memberShape, "payloadRoot", operand);
 
         // check if service shape is bound by xmlNameSpace Trait
         Optional<XmlNamespaceTrait> xmlNamespaceTrait = context.getService().getTrait(XmlNamespaceTrait.class);
