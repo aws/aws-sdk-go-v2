@@ -303,6 +303,99 @@ func awsAwsquery_deserializeOpErrorFlattenedXmlMapWithXmlName(response *smithyht
 	}
 }
 
+type awsAwsquery_deserializeOpFlattenedXmlMapWithXmlNamespace struct {
+}
+
+func (*awsAwsquery_deserializeOpFlattenedXmlMapWithXmlNamespace) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpFlattenedXmlMapWithXmlNamespace) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorFlattenedXmlMapWithXmlNamespace(response, &metadata)
+	}
+	output := &FlattenedXmlMapWithXmlNamespaceOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsAwsquery_deserializeOpDocumentFlattenedXmlMapWithXmlNamespaceOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorFlattenedXmlMapWithXmlNamespace(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsquery_deserializeOpGreetingWithErrors struct {
 }
 
@@ -2607,6 +2700,90 @@ func awsAwsquery_deserializeDocumentFlattenedXmlMapWithXmlNameOutputMapUnwrapped
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentFlattenedXmlMapWithXmlNamespaceOutputMap(v *map[string]string, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv map[string]string
+	if *v == nil {
+		sv = make(map[string]string, 0)
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		if strings.EqualFold("entry", t.Name.Local) {
+			entryDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentFlattenedXmlMapWithXmlNamespaceOutputMapUnwrapped(&sv, entryDecoder); err != nil {
+				return err
+			}
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentFlattenedXmlMapWithXmlNamespaceOutputMapUnwrapped(v *map[string]string, decoder smithyxml.NodeDecoder) error {
+	var sv map[string]string
+	if *v == nil {
+		sv = make(map[string]string, 0)
+	} else {
+		sv = *v
+	}
+
+	var ek string
+	var ev string
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			sv[ek] = ev
+			break
+		}
+		switch {
+		case strings.EqualFold("K", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				ek = xtv
+			}
+
+		case strings.EqualFold("V", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				ev = xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
 func awsAwsquery_deserializeDocumentInvalidGreeting(v **types.InvalidGreeting, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2655,6 +2832,158 @@ func awsAwsquery_deserializeDocumentInvalidGreeting(v **types.InvalidGreeting, d
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentListWithMemberNamespace(v *[]string, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []string
+	if *v == nil {
+		sv = make([]string, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		for {
+			if strings.EqualFold("member", t.Name.Local) {
+				var col string
+				val, done, err := decoder.Value()
+				if err != nil {
+					return err
+				}
+				if done {
+					break
+				}
+				if val != nil {
+					xtv := string(val)
+					col = xtv
+				}
+				sv = append(sv, col)
+			} else {
+				break
+			}
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentListWithMemberNamespaceUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
+	if *v == nil {
+		sv = make([]string, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv string
+		t := decoder.StartEl
+		_ = t
+		val, done, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		if val != nil {
+			xtv := string(val)
+			mv = xtv
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsAwsquery_deserializeDocumentListWithNamespace(v *[]string, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []string
+	if *v == nil {
+		sv = make([]string, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		for {
+			if strings.EqualFold("member", t.Name.Local) {
+				var col string
+				val, done, err := decoder.Value()
+				if err != nil {
+					return err
+				}
+				if done {
+					break
+				}
+				if val != nil {
+					xtv := string(val)
+					col = xtv
+				}
+				sv = append(sv, col)
+			} else {
+				break
+			}
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentListWithNamespaceUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
+	if *v == nil {
+		sv = make([]string, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv string
+		t := decoder.StartEl
+		_ = t
+		val, done, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		if val != nil {
+			xtv := string(val)
+			mv = xtv
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsAwsquery_deserializeDocumentRecursiveXmlShapesOutputNested1(v **types.RecursiveXmlShapesOutputNested1, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4113,6 +4442,44 @@ func awsAwsquery_deserializeOpDocumentFlattenedXmlMapWithXmlNameOutput(v **Flatt
 	return nil
 }
 
+func awsAwsquery_deserializeOpDocumentFlattenedXmlMapWithXmlNamespaceOutput(v **FlattenedXmlMapWithXmlNamespaceOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *FlattenedXmlMapWithXmlNamespaceOutput
+	if *v == nil {
+		sv = &FlattenedXmlMapWithXmlNamespaceOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("KVP", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentFlattenedXmlMapWithXmlNamespaceOutputMapUnwrapped(&sv.MyMap, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeOpDocumentGreetingWithErrorsOutput(v **GreetingWithErrorsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4853,6 +5220,18 @@ func awsAwsquery_deserializeOpDocumentXmlEmptyListsOutput(v **XmlEmptyListsOutpu
 				return err
 			}
 
+		case strings.EqualFold("flattenedListWithMemberNamespace", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentListWithMemberNamespaceUnwrapped(&sv.FlattenedListWithMemberNamespace, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("flattenedListWithNamespace", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentListWithNamespaceUnwrapped(&sv.FlattenedListWithNamespace, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("integerList", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentIntegerList(&sv.IntegerList, nodeDecoder); err != nil {
@@ -5075,6 +5454,18 @@ func awsAwsquery_deserializeOpDocumentXmlListsOutput(v **XmlListsOutput, decoder
 		case strings.EqualFold("customName", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentRenamedListMembersUnwrapped(&sv.FlattenedList2, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("flattenedListWithMemberNamespace", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentListWithMemberNamespaceUnwrapped(&sv.FlattenedListWithMemberNamespace, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("flattenedListWithNamespace", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentListWithNamespaceUnwrapped(&sv.FlattenedListWithNamespace, nodeDecoder); err != nil {
 				return err
 			}
 

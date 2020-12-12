@@ -32,12 +32,12 @@ func TestClient_XmlEmptyMaps_awsAwsqueryDeserialize(t *testing.T) {
 				"Content-Type": []string{"text/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlMapsResponse xmlns="https://example.com/">
-			    <XmlMapsResult>
+			Body: []byte(`<XmlEmptyMapsResponse xmlns="https://example.com/">
+			    <XmlEmptyMapsResult>
 			        <myMap>
 			        </myMap>
-			    </XmlMapsResult>
-			</XmlMapsResponse>
+			    </XmlEmptyMapsResult>
+			</XmlEmptyMapsResponse>
 			`),
 			ExpectResult: &XmlEmptyMapsOutput{
 				MyMap: map[string]types.GreetingStruct{},
@@ -50,11 +50,11 @@ func TestClient_XmlEmptyMaps_awsAwsqueryDeserialize(t *testing.T) {
 				"Content-Type": []string{"text/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlMapsResponse xmlns="https://example.com/">
-			    <XmlMapsResult>
+			Body: []byte(`<XmlEmptyMapsResponse xmlns="https://example.com/">
+			    <XmlEmptyMapsResult>
 			        <myMap/>
-			    </XmlMapsResult>
-			</XmlMapsResponse>
+			    </XmlEmptyMapsResult>
+			</XmlEmptyMapsResponse>
 			`),
 			ExpectResult: &XmlEmptyMapsOutput{
 				MyMap: map[string]types.GreetingStruct{},

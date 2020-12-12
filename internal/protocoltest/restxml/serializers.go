@@ -504,6 +504,56 @@ func awsRestxml_serializeOpDocumentFlattenedXmlMapWithXmlNameInput(v *FlattenedX
 	return nil
 }
 
+type awsRestxml_serializeOpFlattenedXmlMapWithXmlNamespace struct {
+}
+
+func (*awsRestxml_serializeOpFlattenedXmlMapWithXmlNamespace) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpFlattenedXmlMapWithXmlNamespace) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*FlattenedXmlMapWithXmlNamespaceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/FlattenedXmlMapWithXmlNamespace")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsFlattenedXmlMapWithXmlNamespaceInput(v *FlattenedXmlMapWithXmlNamespaceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
 type awsRestxml_serializeOpGreetingWithErrors struct {
 }
 
@@ -2797,6 +2847,32 @@ func awsRestxml_serializeOpDocumentXmlEmptyListsInput(v *XmlEmptyListsInput, val
 			return err
 		}
 	}
+	if v.FlattenedListWithMemberNamespace != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "flattenedListWithMemberNamespace",
+			},
+			Attr: rootAttr,
+		}
+		el := value.FlattenedElement(root)
+		if err := awsRestxml_serializeDocumentListWithMemberNamespace(v.FlattenedListWithMemberNamespace, el); err != nil {
+			return err
+		}
+	}
+	if v.FlattenedListWithNamespace != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "flattenedListWithNamespace",
+			},
+			Attr: rootAttr,
+		}
+		el := value.FlattenedElement(root)
+		if err := awsRestxml_serializeDocumentListWithNamespace(v.FlattenedListWithNamespace, el); err != nil {
+			return err
+		}
+	}
 	if v.IntegerList != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -3324,6 +3400,32 @@ func awsRestxml_serializeOpDocumentXmlListsInput(v *XmlListsInput, value smithyx
 			return err
 		}
 	}
+	if v.FlattenedListWithMemberNamespace != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "flattenedListWithMemberNamespace",
+			},
+			Attr: rootAttr,
+		}
+		el := value.FlattenedElement(root)
+		if err := awsRestxml_serializeDocumentListWithMemberNamespace(v.FlattenedListWithMemberNamespace, el); err != nil {
+			return err
+		}
+	}
+	if v.FlattenedListWithNamespace != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "flattenedListWithNamespace",
+			},
+			Attr: rootAttr,
+		}
+		el := value.FlattenedElement(root)
+		if err := awsRestxml_serializeDocumentListWithNamespace(v.FlattenedListWithNamespace, el); err != nil {
+			return err
+		}
+	}
 	if v.IntegerList != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -3814,6 +3916,40 @@ func awsRestxml_serializeDocumentFlattenedXmlMapWithXmlNameInputOutputMap(v map[
 		}
 		entry.MemberElement(valueElement).String(v[key])
 		entry.Close()
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentListWithMemberNamespace(v []string, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	customMemberNameAttr := []smithyxml.Attr{}
+	customMemberNameAttr = append(customMemberNameAttr, smithyxml.NewNamespaceAttribute("", "https://xml-member.example.com"))
+	customMemberName := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "member",
+		},
+		Attr: customMemberNameAttr,
+	}
+	array = value.ArrayWithCustomName(customMemberName)
+	for i := range v {
+		am := array.Member()
+		am.String(v[i])
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentListWithNamespace(v []string, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	array = value.Array()
+	for i := range v {
+		am := array.Member()
+		am.String(v[i])
 	}
 	return nil
 }

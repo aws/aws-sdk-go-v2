@@ -31,10 +31,10 @@ func TestClient_XmlEmptyLists_awsEc2queryDeserialize(t *testing.T) {
 				"Content-Type": []string{"text/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlListsResponse xmlns="https://example.com/">
+			Body: []byte(`<XmlEmptyListsResponse xmlns="https://example.com/">
 			  <stringList/>
 			  <stringSet></stringSet>
-			</XmlListsResponse>
+			</XmlEmptyListsResponse>
 			`),
 			ExpectResult: &XmlEmptyListsOutput{
 				StringList: []string{},

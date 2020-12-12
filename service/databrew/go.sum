@@ -1,5 +1,7 @@
 github.com/awslabs/smithy-go v0.4.0 h1:El0KyKn4zdM3pLuWJlgoeitQuu/mjwUPssr7L3xu3vs=
 github.com/awslabs/smithy-go v0.4.0/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
+github.com/awslabs/smithy-go v0.4.1-0.20201208232924-b8cdbaa577ff h1:mtSekcc5R2mJG5+cdIlL15WD//Lobtzil5hkcr8WhiA=
+github.com/awslabs/smithy-go v0.4.1-0.20201208232924-b8cdbaa577ff/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/google/go-cmp v0.4.1/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
 github.com/google/go-cmp v0.5.4 h1:L8R9j+yAqZuZjsqh/z+F1NCffTKKLShY6zXTItVIZ8M=

@@ -38,6 +38,10 @@ type XmlEmptyListsOutput struct {
 
 	FlattenedList2 []string
 
+	FlattenedListWithMemberNamespace []string
+
+	FlattenedListWithNamespace []string
+
 	IntegerList []int32
 
 	// A list of lists of strings.

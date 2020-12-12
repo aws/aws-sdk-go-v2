@@ -335,23 +335,16 @@ func (c *PresignClient) PresignCopyDBSnapshot(ctx context.Context, params *CopyD
 	if params == nil {
 		params = &CopyDBSnapshotInput{}
 	}
-	var presignOptions PresignOptions
+	options := c.options.copy()
 	for _, fn := range optFns {
-		fn(&presignOptions)
+		fn(&options)
 	}
-	if len(optFns) != 0 {
-		c = NewPresignClient(c.client, optFns...)
-	}
-
-	clientOptFns := make([]func(o *Options), 0)
-	clientOptFns = append(clientOptFns, func(o *Options) {
-		o.HTTPClient = &smithyhttp.NopClient{}
-	})
+	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
 
 	ctx = presignedurlcust.WithIsPresigning(ctx)
 	result, _, err := c.client.invokeOperation(ctx, "CopyDBSnapshot", params, clientOptFns,
 		addOperationCopyDBSnapshotMiddlewares,
-		c.convertToPresignMiddleware,
+		presignConverter(options).convertToPresignMiddleware,
 	)
 	if err != nil {
 		return nil, err
