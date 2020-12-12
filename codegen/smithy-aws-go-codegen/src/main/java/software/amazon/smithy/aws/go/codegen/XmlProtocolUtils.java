@@ -42,13 +42,71 @@ final class XmlProtocolUtils {
     ) {
         GoWriter writer = context.getWriter();
         String attrName = dst + "Attr";
-        writer.write("$L := []smithyxml.Attr{}", attrName);
+        generateXmlNamespaceAndAttributes(context, shape, attrName, inputSrc);
+
+        writer.openBlock("$L := smithyxml.StartElement{ ", "}", dst, () -> {
+            writer.openBlock("Name:smithyxml.Name{", "},", () -> {
+                writer.write("Local: $S,", getSerializedXMLShapeName(context, shape));
+            });
+            writer.write("Attr : $L,", attrName);
+        });
+    }
+
+    /**
+     * Generates XML Start element for a document shape marked as a payload.
+     *
+     * @param context  is the generation context.
+     * @param memberShape is the payload as document member shape
+     * @param dst is the operand name which holds the generated start element.
+     * @param inputSrc is the input variable for the shape with values to be serialized.
+     */
+    public static void generatePayloadAsDocumentXMLStartElement(
+            ProtocolGenerator.GenerationContext context, MemberShape memberShape, String dst, String inputSrc
+    ) {
+        GoWriter writer = context.getWriter();
+        String attrName = dst + "Attr";
+        Shape targetShape = context.getModel().expectShape(memberShape.getTarget());
+
+        generateXmlNamespaceAndAttributes(context, targetShape, attrName, inputSrc);
+
+        writer.openBlock("$L := smithyxml.StartElement{ ", "}", dst, () -> {
+            writer.openBlock("Name:smithyxml.Name{", "},", () -> {
+                String name = memberShape.getMemberName();
+                if (targetShape.isStructureShape()) {
+                    if (memberShape.hasTrait(XmlNameTrait.class)) {
+                       name = getSerializedXMLMemberName(memberShape);
+                    } else {
+                        name = getSerializedXMLShapeName(context, targetShape);
+                    }
+                }
+
+                writer.write("Local: $S,", name);
+
+            });
+            writer.write("Attr : $L,", attrName);
+        });
+    }
+
+
+    /**
+     * Generates XML Attributes as per xmlNamespace and xmlAttribute traits.
+     *
+     * @param context is the generation context.
+     * @param shape is the shape that is decorated with XmlNamespace, XmlAttribute trait.
+     * @param dst is the operand name which holds the generated xml Attribute value.
+     * @param inputSrc is the input variable for the shape with values to be put as xml attributes.
+     */
+    private static void generateXmlNamespaceAndAttributes(
+            ProtocolGenerator.GenerationContext context, Shape shape, String dst, String inputSrc
+    ) {
+        GoWriter writer = context.getWriter();
+        writer.write("$L := []smithyxml.Attr{}", dst);
 
         Optional<XmlNamespaceTrait> xmlNamespaceTrait = shape.getTrait(XmlNamespaceTrait.class);
         if (xmlNamespaceTrait.isPresent()) {
             XmlNamespaceTrait namespace = xmlNamespaceTrait.get();
             writer.write("$L = append($L, smithyxml.NewNamespaceAttribute($S, $S))",
-                    attrName, attrName,
+                    dst, dst,
                     namespace.getPrefix().isPresent() ? namespace.getPrefix().get() : "", namespace.getUri()
             );
         }
@@ -62,18 +120,13 @@ final class XmlProtocolUtils {
                             String dest = "av";
                             formatXmlAttributeValueAsString(context, memberShape, operand, dest);
                             writer.write("$L = append($L, smithyxml.NewAttribute($S, $L))",
-                                    attrName, attrName, getSerializedXMLMemberName(memberShape), dest);
+                                    dst, dst, getSerializedXMLMemberName(memberShape), dest);
                         });
             }
         });
-
-        writer.openBlock("$L := smithyxml.StartElement{ ", "}", dst, () -> {
-            writer.openBlock("Name:smithyxml.Name{", "},", () -> {
-                writer.write("Local: $S,", getSerializedXMLShapeName(context, shape));
-            });
-            writer.write("Attr : $L,", attrName);
-        });
     }
+
+
 
     // generates code to format xml attributes. If a shape type is timestamp, number, or boolean
     // it will be formatted into a string.
