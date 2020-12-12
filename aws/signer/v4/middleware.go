@@ -247,16 +247,16 @@ func (s *SignHTTPRequestMiddleware) HandleFinalize(ctx context.Context, in middl
 		return out, metadata, &SigningError{Err: fmt.Errorf("failed to retrieve credentials: %w", err)}
 	}
 
-	err = s.signer.SignHTTP(ctx, credentials, req.Request, payloadHash, signingName, signingRegion, sdk.NowTime(), s.addSignerOptions)
+	err = s.signer.SignHTTP(ctx, credentials, req.Request, payloadHash, signingName, signingRegion, sdk.NowTime(),
+		func(o *SignerOptions) {
+			o.Logger = middleware.GetLogger(ctx)
+			o.LogSigning = s.logSigning
+		})
 	if err != nil {
 		return out, metadata, &SigningError{Err: fmt.Errorf("failed to sign http request, %w", err)}
 	}
 
 	return next.HandleFinalize(ctx, in)
-}
-
-func (s *SignHTTPRequestMiddleware) addSignerOptions(options *SignerOptions) {
-	options.LogSigning = s.logSigning
 }
 
 func haveCredentialProvider(p aws.CredentialsProvider) bool {
