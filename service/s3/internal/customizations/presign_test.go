@@ -104,7 +104,6 @@ func TestPutObject_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"content-type": {"application/octet-stream"},
 				"host":         []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
 			},
 		},
