@@ -481,23 +481,16 @@ func (c *PresignClient) PresignGetObject(ctx context.Context, params *GetObjectI
 	if params == nil {
 		params = &GetObjectInput{}
 	}
-	var presignOptions PresignOptions
+	options := c.options.copy()
 	for _, fn := range optFns {
-		fn(&presignOptions)
+		fn(&options)
 	}
-	if len(optFns) != 0 {
-		c = NewPresignClient(c.client, optFns...)
-	}
-
-	clientOptFns := make([]func(o *Options), 0)
-	clientOptFns = append(clientOptFns, func(o *Options) {
-		o.HTTPClient = &smithyhttp.NopClient{}
-	})
+	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
 
 	ctx = presignedurlcust.WithIsPresigning(ctx)
 	result, _, err := c.client.invokeOperation(ctx, "GetObject", params, clientOptFns,
 		addOperationGetObjectMiddlewares,
-		c.convertToPresignMiddleware,
+		presignConverter(options).convertToPresignMiddleware,
 		addGetObjectPayloadAsUnsigned,
 	)
 	if err != nil {
