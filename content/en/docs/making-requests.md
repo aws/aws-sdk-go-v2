@@ -31,12 +31,13 @@ an `aws.Config` see [Configure the SDK]({{% ref "configuring-sdk" %}}). The foll
 an {{% alias service=S3 %}} service client using the `aws.Config`and the `NewFromConfig` function:
 
 ```go
+import "context"
 import "github.com/aws/aws-sdk-go-v2/config"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
 
 // ...
 
-cfg, err := config.LoadDefaultConfig()
+cfg, err := config.LoadDefaultConfig(context.TODO())
 if err != nil {
 	panic(err)
 }
@@ -50,12 +51,13 @@ This allows you to make specific overrides such as changing the Region, or modif
 {{% alias service=S3 %}} `UseAccelerate` option. For example:
 
 ```go
+import "context"
 import "github.com/aws/aws-sdk-go-v2/config"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
 
 // ...
 
-cfg, err := config.LoadDefaultConfig()
+cfg, err := config.LoadDefaultConfig(context.TODO())
 if err != nil {
 	panic(err)
 }
@@ -168,7 +170,7 @@ import "github.com/aws/aws-sdk-go-v2/service/s3/types"
 
 // ...
 
-cfg, err := config.LoadDefaultConfig()
+cfg, err := config.LoadDefaultConfig(context.TODO())
 if err != nil {
 	panic(err)
 }
@@ -192,7 +194,7 @@ operations on the client.
 For example to override the client region from "us-west-2" to "us-east-1":
 
 ```go
-cfg, err := config.LoadDefaultConfig(config.WithRegion("us-west-2"))
+cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("us-west-2"))
 if err != nil {
 	log.Printf("error: %v", err)
 	return
@@ -296,6 +298,7 @@ In the following example, an {{% alias=service=S3 %}} service client is used in 
 concurrently uploads two objects to an {{% alias service=S3 %}} bucket.
 
 ```go
+import "context"
 import "log"
 import "strings"
 import "github.com/aws/aws-sdk-go-v2/config"
@@ -303,7 +306,7 @@ import "github.com/aws/aws-sdk-go-v2/service/s3"
 
 // ...
 
-cfg, err := config.LoadDefaultConfig()
+cfg, err := config.LoadDefaultConfig(context.TODO())
 if err != nil {
 	log.Printf("error: %v", err)
 	return
@@ -379,6 +382,7 @@ The following example uses the `ListObjectsV2` paginator to list up to three pag
 `ListObjectV2`operation. Each page consists of up to 10 keys, which is defined by the `Limit` paginator option.
 
 ```go
+import "context"
 import "log"
 import "github.com/aws/aws-sdk-go-v2/config"
 import "github.com/aws/aws-sdk-go-v2/aws"
@@ -386,7 +390,7 @@ import "github.com/aws/aws-sdk-go-v2/service/s3"
 
 // ...
 
-cfg, err := config.LoadDefaultConfig()
+cfg, err := config.LoadDefaultConfig(context.TODO())
 if err != nil {
 	log.Printf("error: %v", err)
 	return
