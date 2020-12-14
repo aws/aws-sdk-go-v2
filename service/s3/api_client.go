@@ -4,6 +4,7 @@ package s3
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
@@ -368,6 +369,9 @@ func (c presignConverter) convertToPresignMiddleware(stack *middleware.Stack, op
 	err = stack.Finalize.Add(pmw, middleware.After)
 	if err != nil {
 		return err
+	}
+	if c.Expires < 0 {
+		return fmt.Errorf("presign URL duration must be 0 or greater, %v", c.Expires)
 	}
 	// add middleware to set expiration for s3 presigned url, if expiration is set to
 	// 0, this middleware sets a default expiration of 900 seconds
