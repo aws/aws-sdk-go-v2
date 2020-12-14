@@ -31,10 +31,10 @@ func TestClient_XmlEmptyBlobs_awsEc2queryDeserialize(t *testing.T) {
 				"Content-Type": []string{"text/xml;charset=UTF-8"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlBlobsResponse xmlns="https://example.com/">
+			Body: []byte(`<XmlEmptyBlobsResponse xmlns="https://example.com/">
 			    <data></data>
 			    <RequestId>requestid</RequestId>
-			</XmlBlobsResponse>
+			</XmlEmptyBlobsResponse>
 			`),
 			ExpectResult: &XmlEmptyBlobsOutput{
 				Data: []byte(""),
@@ -47,10 +47,10 @@ func TestClient_XmlEmptyBlobs_awsEc2queryDeserialize(t *testing.T) {
 				"Content-Type": []string{"text/xml;charset=UTF-8"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlBlobsResponse xmlns="https://example.com/">
+			Body: []byte(`<XmlEmptyBlobsResponse xmlns="https://example.com/">
 			    <data/>
 			    <RequestId>requestid</RequestId>
-			</XmlBlobsResponse>
+			</XmlEmptyBlobsResponse>
 			`),
 			ExpectResult: &XmlEmptyBlobsOutput{
 				Data: []byte(""),

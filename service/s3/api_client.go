@@ -4,6 +4,7 @@ package s3
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
@@ -221,13 +222,15 @@ func resolveHTTPSignerV4(o *Options) {
 	if o.HTTPSignerV4 != nil {
 		return
 	}
-	o.HTTPSignerV4 = v4.NewSigner(
-		func(so *v4.SignerOptions) {
-			so.Logger = o.Logger
-			so.LogSigning = o.ClientLogMode.IsSigning()
-			so.DisableURIPathEscaping = true
-		},
-	)
+	o.HTTPSignerV4 = newDefaultV4Signer(*o)
+}
+
+func newDefaultV4Signer(o Options) *v4.Signer {
+	return v4.NewSigner(func(so *v4.SignerOptions) {
+		so.Logger = o.Logger
+		so.LogSigning = o.ClientLogMode.IsSigning()
+		so.DisableURIPathEscaping = true
+	})
 }
 
 func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
@@ -278,7 +281,7 @@ type HTTPPresignerV4 interface {
 type PresignOptions struct {
 
 	// ClientOptions are list of functional options to mutate client options used by
-	// presign client
+	// the presign client.
 	ClientOptions []func(*Options)
 
 	// Presigner is the presigner used by the presign url client
@@ -288,6 +291,13 @@ type PresignOptions struct {
 	// be the duration in seconds the presigned URL should be considered valid for. If
 	// not set or set to zero, presign url would default to expire after 900 seconds.
 	Expires time.Duration
+}
+
+func (o PresignOptions) copy() PresignOptions {
+	clientOptions := make([]func(*Options), len(o.ClientOptions))
+	copy(clientOptions, o.ClientOptions)
+	o.ClientOptions = clientOptions
+	return o
 }
 
 // WithPresignClientFromClientOptions is a helper utility to retrieve a function
@@ -316,50 +326,56 @@ func (w withPresignExpires) options(o *PresignOptions) {
 
 // PresignClient represents the presign url client
 type PresignClient struct {
-	client    *Client
-	presigner HTTPPresignerV4
-	expires   time.Duration
+	client  *Client
+	options PresignOptions
 }
 
 // NewPresignClient generates a presign client using provided API Client and
 // presign options
 func NewPresignClient(c *Client, optFns ...func(*PresignOptions)) *PresignClient {
-	var presignOptions PresignOptions
+	var options PresignOptions
 	for _, fn := range optFns {
-		fn(&presignOptions)
+		fn(&options)
 	}
-	client := copyAPIClient(c, presignOptions.ClientOptions...)
-	if presignOptions.Presigner == nil {
-		presignOptions.Presigner = v4.NewSigner()
+	if len(options.ClientOptions) != 0 {
+		c = New(c.options, options.ClientOptions...)
+	}
+
+	if options.Presigner == nil {
+		options.Presigner = newDefaultV4Signer(c.options)
 	}
 
 	return &PresignClient{
-		client:    client,
-		presigner: presignOptions.Presigner,
-		expires:   presignOptions.Expires,
+		client:  c,
+		options: options,
 	}
 }
 
-func copyAPIClient(c *Client, optFns ...func(*Options)) *Client {
-	return New(c.options, optFns...)
+func withNopHTTPClientAPIOption(o *Options) {
+	o.HTTPClient = smithyhttp.NopClient{}
 }
 
-func (c *PresignClient) convertToPresignMiddleware(stack *middleware.Stack, options Options) (err error) {
+type presignConverter PresignOptions
+
+func (c presignConverter) convertToPresignMiddleware(stack *middleware.Stack, options Options) (err error) {
 	stack.Finalize.Clear()
 	stack.Deserialize.Clear()
 	stack.Build.Remove((*awsmiddleware.ClientRequestID)(nil).ID())
 	pmw := v4.NewPresignHTTPRequestMiddleware(v4.PresignHTTPRequestMiddlewareOptions{
 		CredentialsProvider: options.Credentials,
-		Presigner:           c.presigner,
+		Presigner:           c.Presigner,
 		LogSigning:          options.ClientLogMode.IsSigning(),
 	})
 	err = stack.Finalize.Add(pmw, middleware.After)
 	if err != nil {
 		return err
 	}
+	if c.Expires < 0 {
+		return fmt.Errorf("presign URL duration must be 0 or greater, %v", c.Expires)
+	}
 	// add middleware to set expiration for s3 presigned url, if expiration is set to
 	// 0, this middleware sets a default expiration of 900 seconds
-	err = stack.Build.Add(&s3cust.AddExpiresOnPresignedURL{Expires: c.expires}, middleware.After)
+	err = stack.Build.Add(&s3cust.AddExpiresOnPresignedURL{Expires: c.Expires}, middleware.After)
 	if err != nil {
 		return err
 	}

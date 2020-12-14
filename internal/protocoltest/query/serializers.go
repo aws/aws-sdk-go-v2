@@ -175,6 +175,59 @@ func (m *awsAwsquery_serializeOpFlattenedXmlMapWithXmlName) HandleSerialize(ctx 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpFlattenedXmlMapWithXmlNamespace struct {
+}
+
+func (*awsAwsquery_serializeOpFlattenedXmlMapWithXmlNamespace) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpFlattenedXmlMapWithXmlNamespace) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*FlattenedXmlMapWithXmlNamespaceInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("FlattenedXmlMapWithXmlNamespace")
+	body.Key("Version").String("2020-01-08")
+
+	_ = input
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpGreetingWithErrors struct {
 }
 
@@ -1528,6 +1581,13 @@ func awsAwsquery_serializeDocumentFlattenedXmlMapInput(v *FlattenedXmlMapInput, 
 }
 
 func awsAwsquery_serializeDocumentFlattenedXmlMapWithXmlNameInput(v *FlattenedXmlMapWithXmlNameInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentFlattenedXmlMapWithXmlNamespaceInput(v *FlattenedXmlMapWithXmlNamespaceInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 

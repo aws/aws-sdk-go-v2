@@ -31,12 +31,12 @@ func TestClient_XmlEmptyLists_awsAwsqueryDeserialize(t *testing.T) {
 				"Content-Type": []string{"text/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlListsResponse xmlns="https://example.com/">
-			    <XmlListsResult>
+			Body: []byte(`<XmlEmptyListsResponse xmlns="https://example.com/">
+			    <XmlEmptyListsResult>
 			        <stringList/>
 			        <stringSet></stringSet>
-			    </XmlListsResult>
-			</XmlListsResponse>
+			    </XmlEmptyListsResult>
+			</XmlEmptyListsResponse>
 			`),
 			ExpectResult: &XmlEmptyListsOutput{
 				StringList: []string{},

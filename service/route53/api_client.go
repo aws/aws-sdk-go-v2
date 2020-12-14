@@ -200,12 +200,14 @@ func resolveHTTPSignerV4(o *Options) {
 	if o.HTTPSignerV4 != nil {
 		return
 	}
-	o.HTTPSignerV4 = v4.NewSigner(
-		func(so *v4.SignerOptions) {
-			so.Logger = o.Logger
-			so.LogSigning = o.ClientLogMode.IsSigning()
-		},
-	)
+	o.HTTPSignerV4 = newDefaultV4Signer(*o)
+}
+
+func newDefaultV4Signer(o Options) *v4.Signer {
+	return v4.NewSigner(func(so *v4.SignerOptions) {
+		so.Logger = o.Logger
+		so.LogSigning = o.ClientLogMode.IsSigning()
+	})
 }
 
 func addRetryMiddlewares(stack *middleware.Stack, o Options) error {

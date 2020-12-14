@@ -1,0 +1,9 @@
+{
+ "ID": "service.s3-bugfix-1607970870724256000",
+ "SchemaVersion": 1,
+ "Module": "service/s3",
+ "Type": "bugfix",
+ "Description": "Fixes PresignClient S3 signing behavior for special characters, [#969](https://github.com/aws/aws-sdk-go-v2/pull/969)",
+ "MinVersion": "",
+ "AffectedModules": null
+}
