@@ -370,6 +370,11 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
 
                     // s3 service needs expires and sets unsignedPayload if input is stream
                     if (isS3ServiceShape(model, serviceShape)) {
+                        writer.openBlock("if c.Expires < 0 {", "}", () -> {
+                            writer.addUseImports(SmithyGoDependency.FMT);
+                            writer.write(
+                                    "return fmt.Errorf(\"presign URL duration must be 0 or greater, %v\", c.Expires)");
+                        });
                         Symbol expiresAsHeaderMiddleware = SymbolUtils.createValueSymbolBuilder(
                                 "AddExpiresOnPresignedURL",
                                 AwsCustomGoDependency.S3_CUSTOMIZATION).build();
@@ -444,7 +449,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
             Model model,
             SymbolProvider symbolProvider,
             ServiceShape serviceShape
-        ) {
+    ) {
         // Helper function for NopClient
         writer.openBlock("func $L(o *Options) {", "}", NOP_HTTP_CLIENT_OPTION_FUNC_NAME, () -> {
             Symbol nopClientSymbol = SymbolUtils.createPointableSymbolBuilder("NopClient",
