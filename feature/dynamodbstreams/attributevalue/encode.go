@@ -258,24 +258,6 @@ func (e *Encoder) Encode(in interface{}) (types.AttributeValue, error) {
 	return e.encode(reflect.ValueOf(in), tag{})
 }
 
-func fieldByIndex(
-	v reflect.Value, index []int, OnEmbeddedNilStruct func(*reflect.Value) bool,
-) reflect.Value {
-	fv := v
-	for i, x := range index {
-		if i > 0 {
-			if fv.Kind() == reflect.Ptr && fv.Type().Elem().Kind() == reflect.Struct {
-				if fv.IsNil() && !OnEmbeddedNilStruct(&fv) {
-					break
-				}
-				fv = fv.Elem()
-			}
-		}
-		fv = fv.Field(x)
-	}
-	return fv
-}
-
 func (e *Encoder) encode(v reflect.Value, fieldTag tag) (types.AttributeValue, error) {
 	// Ignore fields explicitly marked to be skipped.
 	if fieldTag.Ignore {
@@ -350,16 +332,12 @@ func (e *Encoder) encodeStruct(v reflect.Value, fieldTag tag) (types.AttributeVa
 	fields := unionStructFields(v.Type(), structFieldOptions{
 		TagKey: e.options.TagKey,
 	})
-	for _, f := range fields {
+	for _, f := range fields.All() {
 		if f.Name == "" {
 			return nil, &InvalidMarshalError{msg: "map key cannot be empty"}
 		}
 
-		found := true
-		fv := fieldByIndex(v, f.Index, func(v *reflect.Value) bool {
-			found = false
-			return false // to break the loop.
-		})
+		fv, found := encoderFieldByIndex(v, f.Index)
 		if !found {
 			continue
 		}
@@ -601,6 +579,20 @@ func encodeFloat(f float64, bitSize int) string {
 }
 func encodeNull() types.AttributeValue {
 	return &types.AttributeValueMemberNULL{Value: true}
+}
+
+// encoderFieldByIndex finds the field with the provided nested index
+func encoderFieldByIndex(v reflect.Value, index []int) (reflect.Value, bool) {
+	for i, x := range index {
+		if i > 0 && v.Kind() == reflect.Ptr && v.Type().Elem().Kind() == reflect.Struct {
+			if v.IsNil() {
+				return reflect.Value{}, false
+			}
+			v = v.Elem()
+		}
+		v = v.Field(x)
+	}
+	return v, true
 }
 
 func valueElem(v reflect.Value) reflect.Value {
