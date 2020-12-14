@@ -686,11 +686,10 @@ func awsAwsjson10_deserializeDocumentAttributeMap(v *map[string]types.AttributeV
 	for key, value := range shape {
 		var parsedVal types.AttributeValue
 		mapVar := parsedVal
-		destAddr := &mapVar
-		if err := awsAwsjson10_deserializeDocumentAttributeValue(&destAddr, value); err != nil {
+		if err := awsAwsjson10_deserializeDocumentAttributeValue(&mapVar, value); err != nil {
 			return err
 		}
-		parsedVal = *destAddr
+		parsedVal = mapVar
 		mv[key] = parsedVal
 
 	}
@@ -698,7 +697,7 @@ func awsAwsjson10_deserializeDocumentAttributeMap(v *map[string]types.AttributeV
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentAttributeValue(v **types.AttributeValue, value interface{}) error {
+func awsAwsjson10_deserializeDocumentAttributeValue(v *types.AttributeValue, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -711,16 +710,12 @@ func awsAwsjson10_deserializeDocumentAttributeValue(v **types.AttributeValue, va
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var sv *types.AttributeValue
-	if *v == nil {
-		sv = &types.AttributeValue{}
-	} else {
-		sv = *v
-	}
-
+	var uv types.AttributeValue
+loop:
 	for key, value := range shape {
 		switch key {
 		case "B":
+			var mv []byte
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -730,76 +725,108 @@ func awsAwsjson10_deserializeDocumentAttributeValue(v **types.AttributeValue, va
 				if err != nil {
 					return fmt.Errorf("failed to base64 decode BinaryAttributeValue, %w", err)
 				}
-				sv.B = dv
+				mv = dv
 			}
+			uv = &types.AttributeValueMemberB{Value: mv}
+			break loop
 
 		case "BOOL":
+			var mv bool
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
 					return fmt.Errorf("expected BooleanAttributeValue to be of type *bool, got %T instead", value)
 				}
-				sv.BOOL = ptr.Bool(jtv)
+				mv = jtv
 			}
+			uv = &types.AttributeValueMemberBOOL{Value: mv}
+			break loop
 
 		case "BS":
-			if err := awsAwsjson10_deserializeDocumentBinarySetAttributeValue(&sv.BS, value); err != nil {
+			var mv [][]byte
+			if err := awsAwsjson10_deserializeDocumentBinarySetAttributeValue(&mv, value); err != nil {
 				return err
 			}
+			uv = &types.AttributeValueMemberBS{Value: mv}
+			break loop
 
 		case "L":
-			if err := awsAwsjson10_deserializeDocumentListAttributeValue(&sv.L, value); err != nil {
+			var mv []types.AttributeValue
+			if err := awsAwsjson10_deserializeDocumentListAttributeValue(&mv, value); err != nil {
 				return err
 			}
+			uv = &types.AttributeValueMemberL{Value: mv}
+			break loop
 
 		case "M":
-			if err := awsAwsjson10_deserializeDocumentMapAttributeValue(&sv.M, value); err != nil {
+			var mv map[string]types.AttributeValue
+			if err := awsAwsjson10_deserializeDocumentMapAttributeValue(&mv, value); err != nil {
 				return err
 			}
+			uv = &types.AttributeValueMemberM{Value: mv}
+			break loop
 
 		case "N":
+			var mv string
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected NumberAttributeValue to be of type string, got %T instead", value)
 				}
-				sv.N = ptr.String(jtv)
+				mv = jtv
 			}
+			uv = &types.AttributeValueMemberN{Value: mv}
+			break loop
 
 		case "NS":
-			if err := awsAwsjson10_deserializeDocumentNumberSetAttributeValue(&sv.NS, value); err != nil {
+			var mv []string
+			if err := awsAwsjson10_deserializeDocumentNumberSetAttributeValue(&mv, value); err != nil {
 				return err
 			}
+			uv = &types.AttributeValueMemberNS{Value: mv}
+			break loop
 
 		case "NULL":
+			var mv bool
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
 					return fmt.Errorf("expected NullAttributeValue to be of type *bool, got %T instead", value)
 				}
-				sv.NULL = ptr.Bool(jtv)
+				mv = jtv
 			}
+			uv = &types.AttributeValueMemberNULL{Value: mv}
+			break loop
 
 		case "S":
+			var mv string
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected StringAttributeValue to be of type string, got %T instead", value)
 				}
-				sv.S = ptr.String(jtv)
+				mv = jtv
 			}
+			uv = &types.AttributeValueMemberS{Value: mv}
+			break loop
 
 		case "SS":
-			if err := awsAwsjson10_deserializeDocumentStringSetAttributeValue(&sv.SS, value); err != nil {
+			var mv []string
+			if err := awsAwsjson10_deserializeDocumentStringSetAttributeValue(&mv, value); err != nil {
 				return err
 			}
+			uv = &types.AttributeValueMemberSS{Value: mv}
+			break loop
 
 		default:
-			_, _ = key, value
+			uv = &types.UnknownUnionMember{Tag: key}
+			// TODO: FIX ME
+			_ = value
+			break loop
 
 		}
 	}
-	*v = sv
+	*v = uv
 	return nil
 }
 
@@ -1117,11 +1144,9 @@ func awsAwsjson10_deserializeDocumentListAttributeValue(v *[]types.AttributeValu
 
 	for _, value := range shape {
 		var col types.AttributeValue
-		destAddr := &col
-		if err := awsAwsjson10_deserializeDocumentAttributeValue(&destAddr, value); err != nil {
+		if err := awsAwsjson10_deserializeDocumentAttributeValue(&col, value); err != nil {
 			return err
 		}
-		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1152,11 +1177,10 @@ func awsAwsjson10_deserializeDocumentMapAttributeValue(v *map[string]types.Attri
 	for key, value := range shape {
 		var parsedVal types.AttributeValue
 		mapVar := parsedVal
-		destAddr := &mapVar
-		if err := awsAwsjson10_deserializeDocumentAttributeValue(&destAddr, value); err != nil {
+		if err := awsAwsjson10_deserializeDocumentAttributeValue(&mapVar, value); err != nil {
 			return err
 		}
-		parsedVal = *destAddr
+		parsedVal = mapVar
 		mv[key] = parsedVal
 
 	}
