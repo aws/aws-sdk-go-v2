@@ -21,6 +21,7 @@ import (
 
 func TestInteg_PresignURL(t *testing.T) {
 	cases := map[string]struct {
+		key                  string
 		body                 io.Reader
 		expires              time.Duration
 		sha256Header         string
@@ -33,6 +34,9 @@ func TestInteg_PresignURL(t *testing.T) {
 				"content-length": {"11"},
 			},
 		},
+		"special characters": {
+			key: "some_value_(1).foo",
+		},
 		"nil-body": {
 			expectedSignedHeader: http.Header{},
 		},
@@ -44,7 +48,10 @@ func TestInteg_PresignURL(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			key := integrationtest.UniqueID()
+			key := c.key
+			if len(key) == 0 {
+				key = integrationtest.UniqueID()
+			}
 
 			ctx, cancelFn := context.WithTimeout(context.Background(), 5*time.Second)
 			defer cancelFn()
