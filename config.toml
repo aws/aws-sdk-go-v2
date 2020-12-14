@@ -132,7 +132,7 @@ enable = false
 
 [[menu.main]]
 identifier = "APIRef"
-name = "API"
+name = "API Reference"
 url = "https://pkg.go.dev/github.com/aws/aws-sdk-go-v2"
 
 [[menu.main]]
