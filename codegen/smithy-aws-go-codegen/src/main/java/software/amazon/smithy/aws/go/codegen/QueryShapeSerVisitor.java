@@ -12,6 +12,7 @@ import software.amazon.smithy.go.codegen.GoDependency;
 import software.amazon.smithy.go.codegen.GoValueAccessUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
+import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.DocumentShapeSerVisitor;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
@@ -211,21 +212,23 @@ class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
             Set<MemberShape> members = new TreeSet<>(shape.getAllMembers().values());
             for (MemberShape member : members) {
                 Shape target = context.getModel().expectShape(member.getTarget());
-                String exportedMemberName = symbol.getName() + symbolProvider.toMemberName(member);
+                Symbol memberSymbol = SymbolUtils.createValueSymbolBuilder(
+                        symbolProvider.toMemberName(member),
+                        symbol.getNamespace()
+                ).build();
 
-                writer.openBlock("case *$L:", "", exportedMemberName, () -> {
+                writer.openBlock("case *$T:", "", memberSymbol, () -> {
                     String locationName = getSerializedLocationName(member, member.getMemberName());
                     if (isFlattened(context, member)) {
                         writer.write("objectKey := object.FlatKey($S)", locationName);
                     } else {
                         writer.write("objectKey := object.Key($S)", locationName);
                     }
-                    target.accept(getMemberSerVisitor(member, "uv.Value()", "objectKey"));
+                    target.accept(getMemberSerVisitor(member, "uv.Value", "objectKey"));
                 });
             }
 
             // Handle unknown union values
-            writer.openBlock("case *$LUnknown:", "", symbol.getName(), () -> writer.write("fallthrough"));
             writer.openBlock("default:", "", () -> {
                 writer.write("return fmt.Errorf(\"attempted to serialize unknown member type %T"
                         + " for union %T\", uv, v)");

@@ -11,6 +11,7 @@ import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoValueAccessUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
+import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.DocumentShapeSerVisitor;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
 import software.amazon.smithy.go.codegen.trait.NoSerializeTrait;
@@ -183,17 +184,19 @@ final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
             Set<MemberShape> members = new TreeSet<>(shape.getAllMembers().values());
             for (MemberShape member : members) {
                 Shape target = context.getModel().expectShape(member.getTarget());
-                Symbol memberSymbol = symbolProvider.toSymbol(member);
-                String exportedMemberName = symbol.getName() + symbolProvider.toMemberName(member);
+                Symbol memberSymbol = SymbolUtils.createValueSymbolBuilder(
+                        symbolProvider.toMemberName(member),
+                        symbol.getNamespace()
+                ).build();
 
-                writer.openBlock("case *$L:", "", exportedMemberName, () -> {
-                    writer.write("av := value.MemberElement($S)", memberSymbol.getName());
-                    target.accept(getMemberSerVisitor(member, "uv.Value()", "av"));
+                writer.openBlock("case *$T:", "", memberSymbol, () -> {
+                    XmlProtocolUtils.generateXMLStartElement(context, member, "customMemberName", "v");
+                    writer.write("av := value.MemberElement(customMemberName)");
+                    target.accept(getMemberSerVisitor(member, "uv.Value", "av"));
                 });
             }
 
             // Handle unknown union values
-            writer.openBlock("case *$LUnknown:", "", symbol.getName(), () -> writer.write("fallthrough"));
             writer.openBlock("default:", "", () -> {
                 writer.write("return fmt.Errorf(\"attempted to serialize unknown member type %T"
                         + " for union %T\", uv, v)");
