@@ -16,7 +16,7 @@
 // 	// Initial credentials loaded from SDK's default credential chain. Such as
 // 	// the environment, shared credentials (~/.aws/credentials), or EC2 Instance
 // 	// Role. These credentials will be used to to make the STS Assume Role API.
-// 	cfg, err := config.LoadDefaultConfig()
+// 	cfg, err := config.LoadDefaultConfig(context.TODO())
 // 	if err != nil {
 // 		panic(err)
 // 	}
@@ -43,7 +43,7 @@
 // With TokenCode the AssumeRoleProvider will be not be able to refresh the role's
 // credentials.
 //
-// 	cfg, err := config.LoadDefaultConfig()
+// 	cfg, err := config.LoadDefaultConfig(context.TODO())
 // 	if err != nil {
 // 		panic(err)
 // 	}
@@ -76,7 +76,7 @@
 // have undesirable results as the StdinTokenProvider will not be synchronized. A
 // single Credentials with an AssumeRoleProvider can be shared safely.
 //
-// 	cfg, err := config.LoadDefaultConfig()
+// 	cfg, err := config.LoadDefaultConfig(context.TODO())
 // 	if err != nil {
 // 		panic(err)
 // 	}

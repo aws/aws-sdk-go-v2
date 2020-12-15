@@ -23,7 +23,7 @@ var integConfig aws.Config
 func init() {
 	var err error
 
-	integConfig, err = config.LoadDefaultConfig(config.WithDefaultRegion("us-west-2"))
+	integConfig, err = config.LoadDefaultConfig(context.Background(), config.WithDefaultRegion("us-west-2"))
 	if err != nil {
 		panic(err)
 	}

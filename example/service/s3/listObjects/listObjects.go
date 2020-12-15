@@ -36,7 +36,7 @@ func main() {
 
 	// Load the SDK's configuration from environment and shared config, and
 	// create the client with this.
-	cfg, err := config.LoadDefaultConfig()
+	cfg, err := config.LoadDefaultConfig(context.TODO())
 	if err != nil {
 		log.Fatalf("failed to load SDK configuration, %v", err)
 	}

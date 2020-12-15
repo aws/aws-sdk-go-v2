@@ -31,7 +31,7 @@ func TestAssumeRole(t *testing.T) {
 		}, nil
 	})
 
-	config, err := LoadDefaultConfig(WithHTTPClient(client))
+	config, err := LoadDefaultConfig(context.Background(), WithHTTPClient(client))
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -83,17 +83,16 @@ func TestAssumeRole_WithMFA(t *testing.T) {
 	})
 
 	customProviderCalled := false
-	config, err := LoadDefaultConfig(
+	config, err := LoadDefaultConfig(context.Background(),
+		WithHTTPClient(client),
 		WithRegion("us-east-1"),
 		WithSharedConfigProfile("assume_role_w_mfa"),
 		WithAssumeRoleCredentialOptions(func(options *stscreds.AssumeRoleOptions) {
 			options.TokenProvider = func() (string, error) {
 				customProviderCalled = true
-
 				return "tokencode", nil
 			}
 		}),
-		WithHTTPClient(client),
 	)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
@@ -129,7 +128,7 @@ func TestAssumeRole_WithMFA_NoTokenProvider(t *testing.T) {
 	os.Setenv("AWS_SHARED_CREDENTIALS_FILE", testConfigFilename)
 	os.Setenv("AWS_PROFILE", "assume_role_w_creds")
 
-	_, err := LoadDefaultConfig(WithSharedConfigProfile("assume_role_w_mfa"))
+	_, err := LoadDefaultConfig(context.Background(), WithSharedConfigProfile("assume_role_w_mfa"))
 	if e, a := (AssumeRoleTokenProviderNotSetError{}), err; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
@@ -144,7 +143,7 @@ func TestAssumeRole_InvalidSourceProfile(t *testing.T) {
 	os.Setenv("AWS_SHARED_CREDENTIALS_FILE", testConfigFilename)
 	os.Setenv("AWS_PROFILE", "assume_role_invalid_source_profile")
 
-	_, err := LoadDefaultConfig()
+	_, err := LoadDefaultConfig(context.Background())
 	if err == nil {
 		t.Fatalf("expect error, got none")
 	}
@@ -178,7 +177,7 @@ func TestAssumeRole_ExtendedDuration(t *testing.T) {
 		}, nil
 	})
 
-	config, err := LoadDefaultConfig(WithHTTPClient(client))
+	config, err := LoadDefaultConfig(context.Background(), WithHTTPClient(client))
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}

@@ -1,6 +1,7 @@
 package config
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"os"
@@ -127,18 +128,9 @@ type SharedConfig struct {
 	S3UseARNRegion *bool
 }
 
-// GetEnableEndpointDiscovery returns whether to enable service endpoint discovery
-func (c *SharedConfig) GetEnableEndpointDiscovery() (value, ok bool, err error) {
-	if c.EnableEndpointDiscovery == nil {
-		return false, false, nil
-	}
-
-	return *c.EnableEndpointDiscovery, true, nil
-}
-
 // GetS3UseARNRegion returns if the S3 service should allow ARNs to direct the region
 // the client's requests are sent to.
-func (c *SharedConfig) GetS3UseARNRegion() (value, ok bool, err error) {
+func (c *SharedConfig) GetS3UseARNRegion(ctx context.Context) (value, ok bool, err error) {
 	if c.S3UseARNRegion == nil {
 		return false, false, nil
 	}
@@ -147,20 +139,23 @@ func (c *SharedConfig) GetS3UseARNRegion() (value, ok bool, err error) {
 }
 
 // GetRegion returns the region for the profile if a region is set.
-func (c SharedConfig) GetRegion() (string, error) {
-	return c.Region, nil
+func (c SharedConfig) getRegion(ctx context.Context) (string, bool, error) {
+	if len(c.Region) == 0 {
+		return "", false, nil
+	}
+	return c.Region, true, nil
 }
 
 // GetCredentialsProvider returns the credentials for a profile if they were set.
-func (c SharedConfig) GetCredentialsProvider() (aws.Credentials, error) {
-	return c.Credentials, nil
+func (c SharedConfig) getCredentialsProvider() (aws.Credentials, bool, error) {
+	return c.Credentials, true, nil
 }
 
 // loadSharedConfigIgnoreNotExist is an alias for loadSharedConfig with the
 // addition of ignoring when none of the files exist or when the profile
 // is not found in any of the files.
-func loadSharedConfigIgnoreNotExist(configs configs) (Config, error) {
-	cfg, err := loadSharedConfig(configs)
+func loadSharedConfigIgnoreNotExist(ctx context.Context, configs configs) (Config, error) {
+	cfg, err := loadSharedConfig(ctx, configs)
 	if err != nil {
 		if _, ok := err.(SharedConfigNotExistErrors); ok {
 			return SharedConfig{}, nil
@@ -181,15 +176,15 @@ func loadSharedConfigIgnoreNotExist(configs configs) (Config, error) {
 // be used.
 //
 // Config providers used:
-// * SharedConfigProfileProvider
-// * SharedConfigFilesProvider
-func loadSharedConfig(configs configs) (Config, error) {
+// * sharedConfigProfileProvider
+// * sharedConfigFilesProvider
+func loadSharedConfig(ctx context.Context, configs configs) (Config, error) {
 	var profile string
 	var files []string
 	var ok bool
 	var err error
 
-	profile, ok, err = getSharedConfigProfile(configs)
+	profile, ok, err = getSharedConfigProfile(ctx, configs)
 	if err != nil {
 		return nil, err
 	}
@@ -197,7 +192,7 @@ func loadSharedConfig(configs configs) (Config, error) {
 		profile = defaultSharedConfigProfile
 	}
 
-	files, ok, err = getSharedConfigFiles(configs)
+	files, ok, err = getSharedConfigFiles(ctx, configs)
 	if err != nil {
 		return nil, err
 	}

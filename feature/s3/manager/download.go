@@ -101,7 +101,7 @@ func WithDownloaderClientOptions(opts ...func(*s3.Options)) func(*Downloader) {
 //
 // Example:
 // 	// Load AWS Config
-//	cfg, err := config.LoadDefaultConfig()
+//	cfg, err := config.LoadDefaultConfig(context.TODO())
 //	if err != nil {
 //		panic(err)
 //	}

@@ -4,7 +4,7 @@ package configtesting
 
 import (
 	"github.com/aws/aws-sdk-go-v2/config"
-	svcExternal "github.com/aws/aws-sdk-go-v2/service/s3/internal/external"
+	svcExternal "github.com/aws/aws-sdk-go-v2/service/s3/internal/config"
 )
 
 // UseARNRegionProvider Assertions

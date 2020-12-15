@@ -1,6 +1,7 @@
 package config
 
 import (
+	"bytes"
 	"context"
 	"io/ioutil"
 	"net/http"
@@ -15,14 +16,14 @@ import (
 )
 
 func TestResolveCustomCABundle(t *testing.T) {
-	configs := configs{
-		WithCustomCABundle(awstesting.TLSBundleCA),
-	}
+	var options LoadOptions
+	var cfg aws.Config
+	cfg.HTTPClient = awshttp.NewBuildableClient()
 
-	cfg := aws.Config{
-		HTTPClient: awshttp.NewBuildableClient(),
-	}
-	if err := resolveCustomCABundle(&cfg, configs); err != nil {
+	WithCustomCABundle(bytes.NewReader(awstesting.TLSBundleCA))(&options)
+	configs := configs{options}
+
+	if err := resolveCustomCABundle(context.Background(), &cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
@@ -56,14 +57,14 @@ func TestResolveCustomCABundle_ValidCA(t *testing.T) {
 		t.Fatalf("failed to read CA file, %v", err)
 	}
 
-	configs := configs{
-		WithCustomCABundle(caPEM),
-	}
+	var options LoadOptions
+	var cfg aws.Config
+	cfg.HTTPClient = awshttp.NewBuildableClient()
 
-	cfg := aws.Config{
-		HTTPClient: awshttp.NewBuildableClient(),
-	}
-	if err := resolveCustomCABundle(&cfg, configs); err != nil {
+	WithCustomCABundle(bytes.NewReader(caPEM))(&options)
+	configs := configs{options}
+
+	if err := resolveCustomCABundle(context.Background(), &cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
@@ -80,28 +81,36 @@ func TestResolveCustomCABundle_ValidCA(t *testing.T) {
 }
 
 func TestResolveCustomCABundle_ErrorCustomClient(t *testing.T) {
-	configs := configs{
-		WithCustomCABundle(awstesting.TLSBundleCA),
-	}
+	var options LoadOptions
+	var cfg aws.Config
 
-	cfg := aws.Config{
-		HTTPClient: &http.Client{},
-	}
-	if err := resolveCustomCABundle(&cfg, configs); err == nil {
+	cfg.HTTPClient = &http.Client{}
+
+	WithCustomCABundle(bytes.NewReader(awstesting.TLSBundleCA))(&options)
+	configs := configs{options}
+
+	if err := resolveCustomCABundle(context.Background(), &cfg, configs); err == nil {
 		t.Fatalf("expect error, got none")
 	}
 }
 
 func TestResolveRegion(t *testing.T) {
-	configs := configs{
-		WithRegion("mock-region"),
+	var options LoadOptions
+	optFns := []func(options *LoadOptions) error{
 		WithRegion("ignored-region"),
+
+		WithRegion("mock-region"),
 	}
 
-	cfg := aws.Config{}
-	cfg.Credentials = nil
+	for _, optFn := range optFns {
+		optFn(&options)
+	}
 
-	if err := resolveRegion(&cfg, configs); err != nil {
+	configs := configs{options}
+
+	var cfg aws.Config
+
+	if err := resolveRegion(context.Background(), &cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
@@ -111,7 +120,8 @@ func TestResolveRegion(t *testing.T) {
 }
 
 func TestResolveCredentialsProvider(t *testing.T) {
-	configs := configs{
+	var options LoadOptions
+	optFns := []func(options *LoadOptions) error{
 		WithCredentialsProvider(credentials.StaticCredentialsProvider{
 			Value: aws.Credentials{
 				AccessKeyID:     "AKID",
@@ -121,10 +131,16 @@ func TestResolveCredentialsProvider(t *testing.T) {
 		),
 	}
 
-	cfg := aws.Config{}
+	for _, optFn := range optFns {
+		optFn(&options)
+	}
+
+	configs := configs{options}
+
+	var cfg aws.Config
 	cfg.Credentials = nil
 
-	if found, err := resolveCredentialProvider(&cfg, configs); err != nil {
+	if found, err := resolveCredentialProvider(context.Background(), &cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	} else if e, a := true, found; e != a {
 		t.Fatalf("expected %v, got %v", e, a)
@@ -152,13 +168,15 @@ func TestResolveCredentialsProvider(t *testing.T) {
 }
 
 func TestDefaultRegion(t *testing.T) {
-	configs := configs{
-		WithDefaultRegion("foo-region"),
-	}
+	ctx := context.Background()
 
+	var options LoadOptions
+	WithDefaultRegion("foo-region")(&options)
+
+	configs := configs{options}
 	cfg := unit.Config()
 
-	err := resolveDefaultRegion(&cfg, configs)
+	err := resolveDefaultRegion(ctx, &cfg, configs)
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
 	}
@@ -169,7 +187,7 @@ func TestDefaultRegion(t *testing.T) {
 
 	cfg.Region = ""
 
-	err = resolveDefaultRegion(&cfg, configs)
+	err = resolveDefaultRegion(ctx, &cfg, configs)
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
 	}
@@ -180,13 +198,10 @@ func TestDefaultRegion(t *testing.T) {
 }
 
 func TestResolveLogger(t *testing.T) {
-	configs := configs{
-		WithLogger(logging.Nop{}),
-	}
-
-	cfg := unit.Config()
-
-	err := resolveLogger(&cfg, configs)
+	cfg, err := LoadDefaultConfig(context.Background(), func(o *LoadOptions) error {
+		o.Logger = logging.Nop{}
+		return nil
+	})
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}

@@ -2,78 +2,98 @@
 
 package config
 
-// APIOptionsProvider implementor assertions
+// apiOptionsProvider implementor assertions
 var (
-	_ APIOptionsProvider = WithAPIOptions(nil)
+	_ apiOptionsProvider = &LoadOptions{}
 )
 
-// AssumeRoleCredentialOptionsProvider implementor assertions
+// assumeRoleCredentialOptionsProvider implementor assertions
 var (
-	_ AssumeRoleCredentialOptionsProvider = WithAssumeRoleCredentialOptions(nil)
+	_ assumeRoleCredentialOptionsProvider = &LoadOptions{}
 )
 
-// CredentialsProviderProvider implementor assertions
+// clientLogModeProvider implementor assertions
 var (
-	_ CredentialsProviderProvider = WithCredentialsProvider(nil)
+	_ clientLogModeProvider = &LoadOptions{}
 )
 
-// CustomCABundleProvider implementor assertions
+// credentialsProviderProvider implementor assertions
 var (
-	_ CustomCABundleProvider = &EnvConfig{}
-	_ CustomCABundleProvider = WithCustomCABundle(nil)
+	_ credentialsProviderProvider = &LoadOptions{}
 )
 
-// DefaultRegionProvider implementor assertions
+// customCABundleProvider implementor assertions
 var (
-	_ DefaultRegionProvider = WithDefaultRegion("")
+	_ customCABundleProvider = &EnvConfig{}
+	_ customCABundleProvider = &LoadOptions{}
 )
 
-// EC2RoleCredentialOptionsProvider implementor assertions
+// defaultRegionProvider implementor assertions
 var (
-	_ EC2RoleCredentialOptionsProvider = WithEC2RoleCredentialOptions(nil)
+	_ defaultRegionProvider = &LoadOptions{}
 )
 
-// EndpointCredentialOptionsProvider implementor assertions
+// ec2IMDSRegionProvider implementor assertions
 var (
-	_ EndpointCredentialOptionsProvider = WithEndpointCredentialOptions(nil)
+	_ ec2IMDSRegionProvider = &LoadOptions{}
 )
 
-// EndpointResolverProvider implementor assertions
+// ec2RoleCredentialOptionsProvider implementor assertions
 var (
-	_ EndpointResolverProvider = WithEndpointResolver(nil)
+	_ ec2RoleCredentialOptionsProvider = &LoadOptions{}
 )
 
-// HTTPClientProvider implementor assertions
+// endpointCredentialOptionsProvider implementor assertions
 var (
-	_ HTTPClientProvider = WithHTTPClient(nil)
+	_ endpointCredentialOptionsProvider = &LoadOptions{}
 )
 
-// RegionProvider implementor assertions
+// endpointResolverProvider implementor assertions
 var (
-	_ RegionProvider = &EnvConfig{}
-	_ RegionProvider = &SharedConfig{}
-	_ RegionProvider = WithRegion("")
-	_ RegionProvider = WithEC2IMDSRegion{}
+	_ endpointResolverProvider = &LoadOptions{}
 )
 
-// RetryProvider implementor assertions
+// httpClientProvider implementor assertions
 var (
-	_ RetryProvider = WithRetryer(nil)
+	_ httpClientProvider = &LoadOptions{}
 )
 
-// SharedConfigFilesProvider implementor assertions
+// logConfigurationWarningsProvider implementor assertions
 var (
-	_ SharedConfigFilesProvider = &EnvConfig{}
-	_ SharedConfigFilesProvider = WithSharedConfigFiles(nil)
+	_ logConfigurationWarningsProvider = &LoadOptions{}
 )
 
-// SharedConfigProfileProvider implementor assertions
+// loggerProvider implementor assertions
 var (
-	_ SharedConfigProfileProvider = &EnvConfig{}
-	_ SharedConfigProfileProvider = WithSharedConfigProfile("")
+	_ loggerProvider = &LoadOptions{}
 )
 
-// WebIdentityRoleCredentialOptionsProvider implementor assertions
+// regionProvider implementor assertions
 var (
-	_ WebIdentityRoleCredentialOptionsProvider = WithWebIdentityRoleCredentialOptions(nil)
+	_ regionProvider = &EnvConfig{}
+	_ regionProvider = &SharedConfig{}
+	_ regionProvider = &LoadOptions{}
+	_ regionProvider = &UseEC2IMDSRegion{}
+)
+
+// retryProvider implementor assertions
+var (
+	_ retryProvider = &LoadOptions{}
+)
+
+// sharedConfigFilesProvider implementor assertions
+var (
+	_ sharedConfigFilesProvider = &EnvConfig{}
+	_ sharedConfigFilesProvider = &LoadOptions{}
+)
+
+// sharedConfigProfileProvider implementor assertions
+var (
+	_ sharedConfigProfileProvider = &EnvConfig{}
+	_ sharedConfigProfileProvider = &LoadOptions{}
+)
+
+// webIdentityRoleCredentialOptionsProvider implementor assertions
+var (
+	_ webIdentityRoleCredentialOptionsProvider = &LoadOptions{}
 )

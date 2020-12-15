@@ -25,7 +25,7 @@ const bucketRegionHeader = "X-Amz-Bucket-Region"
 // For example to get the region of a bucket which exists in "eu-central-1"
 // you could provide a region hint of "us-west-2".
 //
-//	cfg, err := config.LoadDefaultConfig()
+//	cfg, err := config.LoadDefaultConfig(context.TODO())
 //	if err != nil {
 //		log.Println("error:", err)
 //		return
@@ -51,11 +51,12 @@ const bucketRegionHeader = "X-Amz-Bucket-Region"
 // fips-us-gov-west-1) set the EndpointResolver on the config or client the
 // utility is called with.
 //
-//	cfg, err := config.LoadDefaultConfig(config.WithEndpointResolver{
-//		EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
-//			return aws.Endpoint{URL: "https://s3-fips.us-west-2.amazonaws.com"}, nil
-//		}),
-//	})
+//	cfg, err := config.LoadDefaultConfig(context.TODO(),
+//		config.WithEndpointResolver(
+//			aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
+//				return aws.Endpoint{URL: "https://s3-fips.us-west-2.amazonaws.com"}, nil
+//			}),
+//	)
 //	if err != nil {
 //		panic(err)
 //	}

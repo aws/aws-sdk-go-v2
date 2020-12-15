@@ -34,7 +34,9 @@
 //	    // Using the SDK's default configuration, loading additional config
 //	    // and credentials values from the environment variables, shared
 //	    // credentials, and shared configuration files
-//	    cfg, err := config.LoadDefaultConfig(config.WithRegion("us-west-2"))
+//	    cfg, err := config.LoadDefaultConfig(context.TODO(),
+//	   		config.WithRegion("us-west-2"),
+//	   	)
 //	    if err != nil {
 //	        log.Fatalf("unable to load SDK config, %v", err)
 //	    }
@@ -43,7 +45,7 @@
 //	    svc := dynamodb.NewFromConfig(cfg)
 //
 //	    // Build the request with its input parameters
-//	    resp, err := svc.ListTables(context.Background(), &dynamodb.ListTablesInput{
+//	    resp, err := svc.ListTables(context.TODO(), &dynamodb.ListTablesInput{
 //	        Limit: aws.Int32(5),
 //	    })
 //	    if err != nil {

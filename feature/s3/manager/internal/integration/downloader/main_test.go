@@ -208,7 +208,7 @@ func setupDownloadTest(bucket string, fileSize, partSize int64) (key string, err
 
 	key = integration.MustUUID()
 
-	defaultConfig, err := config.LoadDefaultConfig()
+	defaultConfig, err := config.LoadDefaultConfig(context.Background())
 	if err != nil {
 		return "", err
 	}
@@ -233,7 +233,7 @@ func setupDownloadTest(bucket string, fileSize, partSize int64) (key string, err
 }
 
 func teardownDownloadTest(bucket, key string) error {
-	defaultConfig, err := config.LoadDefaultConfig()
+	defaultConfig, err := config.LoadDefaultConfig(context.Background())
 	if err != nil {
 		log.Fatalf("failed to load config: %v", err)
 	}
@@ -245,7 +245,7 @@ func teardownDownloadTest(bucket, key string) error {
 }
 
 func newDownloader(clientConfig ClientConfig, sdkConfig SDKConfig) *manager.Downloader {
-	defaultConfig, err := config.LoadDefaultConfig()
+	defaultConfig, err := config.LoadDefaultConfig(context.Background())
 	if err != nil {
 		log.Fatalf("failed to load config: %v", err)
 	}

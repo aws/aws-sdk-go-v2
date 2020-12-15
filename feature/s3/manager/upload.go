@@ -173,7 +173,7 @@ type Uploader struct {
 //
 // Example:
 //	// Load AWS Config
-//	cfg, err := config.LoadDefaultConfig()
+//	cfg, err := config.LoadDefaultConfig(context.TODO())
 //	if err != nil {
 //		panic(err)
 //	}

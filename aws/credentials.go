@@ -23,8 +23,9 @@ import (
 // The following example demonstrates using the AnonymousCredentials to prevent
 // SDK's external config loading attempt to resolve credentials.
 //
-//     cfg, err := config.LoadDefaultConfig(
-//          config.WithCredentialsProvider(aws.AnonymousCredentials{}))
+//     cfg, err := config.LoadDefaultConfig(context.TODO(),
+//          config.WithCredentialsProvider(aws.AnonymousCredentials{}),
+//     )
 //     if err != nil {
 //          log.Fatalf("failed to load config, %v", err)
 //     }
@@ -42,7 +43,7 @@ import (
 //
 // This can also be configured for specific operations calls too.
 //
-//     cfg, err := config.LoadDefaultConfig()
+//     cfg, err := config.LoadDefaultConfig(context.TODO())
 //     if err != nil {
 //          log.Fatalf("failed to load config, %v", err)
 //     }
