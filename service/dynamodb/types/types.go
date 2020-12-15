@@ -54,49 +54,90 @@ type AttributeDefinition struct {
 // For more information, see Data Types
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes)
 // in the Amazon DynamoDB Developer Guide.
-type AttributeValue struct {
-
-	// An attribute of type Binary. For example: "B":
-	// "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"
-	B []byte
-
-	// An attribute of type Boolean. For example: "BOOL": true
-	BOOL *bool
-
-	// An attribute of type Binary Set. For example: "BS": ["U3Vubnk=", "UmFpbnk=",
-	// "U25vd3k="]
-	BS [][]byte
-
-	// An attribute of type List. For example: "L": [ {"S": "Cookies"} , {"S":
-	// "Coffee"}, {"N", "3.14159"}]
-	L []AttributeValue
-
-	// An attribute of type Map. For example: "M": {"Name": {"S": "Joe"}, "Age": {"N":
-	// "35"}}
-	M map[string]AttributeValue
-
-	// An attribute of type Number. For example: "N": "123.45" Numbers are sent across
-	// the network to DynamoDB as strings, to maximize compatibility across languages
-	// and libraries. However, DynamoDB treats them as number type attributes for
-	// mathematical operations.
-	N *string
-
-	// An attribute of type Number Set. For example: "NS": ["42.2", "-19", "7.5",
-	// "3.14"] Numbers are sent across the network to DynamoDB as strings, to maximize
-	// compatibility across languages and libraries. However, DynamoDB treats them as
-	// number type attributes for mathematical operations.
-	NS []string
-
-	// An attribute of type Null. For example: "NULL": true
-	NULL *bool
-
-	// An attribute of type String. For example: "S": "Hello"
-	S *string
-
-	// An attribute of type String Set. For example: "SS": ["Giraffe", "Hippo"
-	// ,"Zebra"]
-	SS []string
+type AttributeValue interface {
+	isAttributeValue()
 }
+
+// An attribute of type String. For example: "S": "Hello"
+type AttributeValueMemberS struct {
+	Value string
+}
+
+func (*AttributeValueMemberS) isAttributeValue() {}
+
+// An attribute of type Number. For example: "N": "123.45" Numbers are sent across
+// the network to DynamoDB as strings, to maximize compatibility across languages
+// and libraries. However, DynamoDB treats them as number type attributes for
+// mathematical operations.
+type AttributeValueMemberN struct {
+	Value string
+}
+
+func (*AttributeValueMemberN) isAttributeValue() {}
+
+// An attribute of type Binary. For example: "B":
+// "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"
+type AttributeValueMemberB struct {
+	Value []byte
+}
+
+func (*AttributeValueMemberB) isAttributeValue() {}
+
+// An attribute of type String Set. For example: "SS": ["Giraffe", "Hippo"
+// ,"Zebra"]
+type AttributeValueMemberSS struct {
+	Value []string
+}
+
+func (*AttributeValueMemberSS) isAttributeValue() {}
+
+// An attribute of type Number Set. For example: "NS": ["42.2", "-19", "7.5",
+// "3.14"] Numbers are sent across the network to DynamoDB as strings, to maximize
+// compatibility across languages and libraries. However, DynamoDB treats them as
+// number type attributes for mathematical operations.
+type AttributeValueMemberNS struct {
+	Value []string
+}
+
+func (*AttributeValueMemberNS) isAttributeValue() {}
+
+// An attribute of type Binary Set. For example: "BS": ["U3Vubnk=", "UmFpbnk=",
+// "U25vd3k="]
+type AttributeValueMemberBS struct {
+	Value [][]byte
+}
+
+func (*AttributeValueMemberBS) isAttributeValue() {}
+
+// An attribute of type Map. For example: "M": {"Name": {"S": "Joe"}, "Age": {"N":
+// "35"}}
+type AttributeValueMemberM struct {
+	Value map[string]AttributeValue
+}
+
+func (*AttributeValueMemberM) isAttributeValue() {}
+
+// An attribute of type List. For example: "L": [ {"S": "Cookies"} , {"S":
+// "Coffee"}, {"N", "3.14159"}]
+type AttributeValueMemberL struct {
+	Value []AttributeValue
+}
+
+func (*AttributeValueMemberL) isAttributeValue() {}
+
+// An attribute of type Null. For example: "NULL": true
+type AttributeValueMemberNULL struct {
+	Value bool
+}
+
+func (*AttributeValueMemberNULL) isAttributeValue() {}
+
+// An attribute of type Boolean. For example: "BOOL": true
+type AttributeValueMemberBOOL struct {
+	Value bool
+}
+
+func (*AttributeValueMemberBOOL) isAttributeValue() {}
 
 // For the UpdateItem operation, represents the attributes to be modified, the
 // action to perform on each, and the new value for each. You cannot use UpdateItem
@@ -174,7 +215,7 @@ type AttributeValueUpdate struct {
 	// For more information, see Data Types
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes)
 	// in the Amazon DynamoDB Developer Guide.
-	Value *AttributeValue
+	Value AttributeValue
 }
 
 // Represents the properties of the scaling policy.
@@ -1015,7 +1056,7 @@ type ExpectedAttributeValue struct {
 	// data itself. For more information, see Data Types
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes)
 	// in the Amazon DynamoDB Developer Guide.
-	Value *AttributeValue
+	Value AttributeValue
 }
 
 // Represents the properties of the exported table.
@@ -2769,3 +2810,12 @@ type WriteRequest struct {
 	// A request to perform a PutItem operation.
 	PutRequest *PutRequest
 }
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+}
+
+func (*UnknownUnionMember) isAttributeValue() {}

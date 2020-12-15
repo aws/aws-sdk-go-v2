@@ -2079,70 +2079,65 @@ func awsAwsjson10_serializeDocumentAttributeUpdates(v map[string]types.Attribute
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentAttributeValue(v *types.AttributeValue, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentAttributeValue(v types.AttributeValue, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	if v.B != nil {
-		ok := object.Key("B")
-		ok.Base64EncodeBytes(v.B)
-	}
+	switch uv := v.(type) {
+	case *types.AttributeValueMemberB:
+		av := object.Key("B")
+		av.Base64EncodeBytes(uv.Value)
 
-	if v.BOOL != nil {
-		ok := object.Key("BOOL")
-		ok.Boolean(*v.BOOL)
-	}
+	case *types.AttributeValueMemberBOOL:
+		av := object.Key("BOOL")
+		av.Boolean(uv.Value)
 
-	if v.BS != nil {
-		ok := object.Key("BS")
-		if err := awsAwsjson10_serializeDocumentBinarySetAttributeValue(v.BS, ok); err != nil {
+	case *types.AttributeValueMemberBS:
+		av := object.Key("BS")
+		if err := awsAwsjson10_serializeDocumentBinarySetAttributeValue(uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.L != nil {
-		ok := object.Key("L")
-		if err := awsAwsjson10_serializeDocumentListAttributeValue(v.L, ok); err != nil {
+	case *types.AttributeValueMemberL:
+		av := object.Key("L")
+		if err := awsAwsjson10_serializeDocumentListAttributeValue(uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.M != nil {
-		ok := object.Key("M")
-		if err := awsAwsjson10_serializeDocumentMapAttributeValue(v.M, ok); err != nil {
+	case *types.AttributeValueMemberM:
+		av := object.Key("M")
+		if err := awsAwsjson10_serializeDocumentMapAttributeValue(uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.N != nil {
-		ok := object.Key("N")
-		ok.String(*v.N)
-	}
+	case *types.AttributeValueMemberN:
+		av := object.Key("N")
+		av.String(uv.Value)
 
-	if v.NS != nil {
-		ok := object.Key("NS")
-		if err := awsAwsjson10_serializeDocumentNumberSetAttributeValue(v.NS, ok); err != nil {
+	case *types.AttributeValueMemberNS:
+		av := object.Key("NS")
+		if err := awsAwsjson10_serializeDocumentNumberSetAttributeValue(uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.NULL != nil {
-		ok := object.Key("NULL")
-		ok.Boolean(*v.NULL)
-	}
+	case *types.AttributeValueMemberNULL:
+		av := object.Key("NULL")
+		av.Boolean(uv.Value)
 
-	if v.S != nil {
-		ok := object.Key("S")
-		ok.String(*v.S)
-	}
+	case *types.AttributeValueMemberS:
+		av := object.Key("S")
+		av.String(uv.Value)
 
-	if v.SS != nil {
-		ok := object.Key("SS")
-		if err := awsAwsjson10_serializeDocumentStringSetAttributeValue(v.SS, ok); err != nil {
+	case *types.AttributeValueMemberSS:
+		av := object.Key("SS")
+		if err := awsAwsjson10_serializeDocumentStringSetAttributeValue(uv.Value, av); err != nil {
 			return err
 		}
-	}
 
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -2152,7 +2147,10 @@ func awsAwsjson10_serializeDocumentAttributeValueList(v []types.AttributeValue, 
 
 	for i := range v {
 		av := array.Value()
-		if err := awsAwsjson10_serializeDocumentAttributeValue(&v[i], av); err != nil {
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson10_serializeDocumentAttributeValue(v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2595,8 +2593,10 @@ func awsAwsjson10_serializeDocumentExpressionAttributeValueMap(v map[string]type
 
 	for key := range v {
 		om := object.Key(key)
-		mapVar := v[key]
-		if err := awsAwsjson10_serializeDocumentAttributeValue(&mapVar, om); err != nil {
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson10_serializeDocumentAttributeValue(v[key], om); err != nil {
 			return err
 		}
 	}
@@ -2810,8 +2810,10 @@ func awsAwsjson10_serializeDocumentKey(v map[string]types.AttributeValue, value 
 
 	for key := range v {
 		om := object.Key(key)
-		mapVar := v[key]
-		if err := awsAwsjson10_serializeDocumentAttributeValue(&mapVar, om); err != nil {
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson10_serializeDocumentAttributeValue(v[key], om); err != nil {
 			return err
 		}
 	}
@@ -2922,7 +2924,10 @@ func awsAwsjson10_serializeDocumentListAttributeValue(v []types.AttributeValue, 
 
 	for i := range v {
 		av := array.Value()
-		if err := awsAwsjson10_serializeDocumentAttributeValue(&v[i], av); err != nil {
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson10_serializeDocumentAttributeValue(v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2974,8 +2979,10 @@ func awsAwsjson10_serializeDocumentMapAttributeValue(v map[string]types.Attribut
 
 	for key := range v {
 		om := object.Key(key)
-		mapVar := v[key]
-		if err := awsAwsjson10_serializeDocumentAttributeValue(&mapVar, om); err != nil {
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson10_serializeDocumentAttributeValue(v[key], om); err != nil {
 			return err
 		}
 	}
@@ -3113,8 +3120,10 @@ func awsAwsjson10_serializeDocumentPutItemInputAttributeMap(v map[string]types.A
 
 	for key := range v {
 		om := object.Key(key)
-		mapVar := v[key]
-		if err := awsAwsjson10_serializeDocumentAttributeValue(&mapVar, om); err != nil {
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson10_serializeDocumentAttributeValue(v[key], om); err != nil {
 			return err
 		}
 	}
