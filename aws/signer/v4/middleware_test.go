@@ -8,12 +8,14 @@ import (
 	"io"
 	"net/http"
 	"strconv"
+	"strings"
 	"testing"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/awslabs/smithy-go/logging"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -81,16 +83,17 @@ func TestComputePayloadHashMiddleware(t *testing.T) {
 	}
 }
 
-type httpSignerFunc func(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error
+type httpSignerFunc func(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time, optFns ...func(*SignerOptions)) error
 
-func (f httpSignerFunc) SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error {
-	return f(ctx, credentials, r, payloadHash, service, region, signingTime)
+func (f httpSignerFunc) SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time, optFns ...func(*SignerOptions)) error {
+	return f(ctx, credentials, r, payloadHash, service, region, signingTime, optFns...)
 }
 
 func TestSignHTTPRequestMiddleware(t *testing.T) {
 	cases := map[string]struct {
 		creds       aws.CredentialsProvider
 		hash        string
+		logSigning  bool
 		expectedErr error
 	}{
 		"success": {
@@ -108,6 +111,11 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 		"nil creds": {
 			creds: nil,
 		},
+		"with log signing": {
+			creds:      unit.StubCredentialsProvider{},
+			hash:       "0123456789abcdef",
+			logSigning: true,
+		},
 	}
 
 	const (
@@ -117,13 +125,25 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 
 	for name, tt := range cases {
 		t.Run(name, func(t *testing.T) {
-			c := &SignHTTPRequest{
+			c := &SignHTTPRequestMiddleware{
 				credentialsProvider: tt.creds,
 				signer: httpSignerFunc(
 					func(ctx context.Context,
 						credentials aws.Credentials, r *http.Request, payloadHash string,
 						service string, region string, signingTime time.Time,
+						optFns ...func(*SignerOptions),
 					) error {
+						var options SignerOptions
+						for _, fn := range optFns {
+							fn(&options)
+						}
+						if options.Logger == nil {
+							t.Errorf("expect logger, got none")
+						}
+						if options.LogSigning {
+							options.Logger.Logf(logging.Debug, t.Name())
+						}
+
 						expectCreds, _ := unit.StubCredentialsProvider{}.Retrieve(context.Background())
 						if e, a := expectCreds, credentials; e != a {
 							t.Errorf("expected %v, got %v", e, a)
@@ -139,6 +159,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 						}
 						return nil
 					}),
+				logSigning: tt.logSigning,
 			}
 
 			next := middleware.FinalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
@@ -148,6 +169,10 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 			ctx := awsmiddleware.SetSigningRegion(
 				awsmiddleware.SetSigningName(context.Background(), signingName),
 				signingRegion)
+
+			var loggerBuf bytes.Buffer
+			logger := logging.NewStandardLogger(&loggerBuf)
+			ctx = middleware.SetLogger(ctx, logger)
 
 			if len(tt.hash) != 0 {
 				ctx = context.WithValue(ctx, payloadHashKey{}, tt.hash)
@@ -165,6 +190,16 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 				}
 			} else if err == nil && tt.expectedErr != nil {
 				t.Errorf("expected error, got nil")
+			}
+
+			if tt.logSigning {
+				if e, a := t.Name(), loggerBuf.String(); !strings.Contains(a, e) {
+					t.Errorf("expect %v logged in %v", e, a)
+				}
+			} else {
+				if loggerBuf.Len() != 0 {
+					t.Errorf("expect no log, got %v", loggerBuf.String())
+				}
 			}
 		})
 	}
@@ -196,5 +231,5 @@ var (
 	_ middleware.BuildMiddleware    = &unsignedPayload{}
 	_ middleware.BuildMiddleware    = &computePayloadSHA256{}
 	_ middleware.BuildMiddleware    = &contentSHA256Header{}
-	_ middleware.FinalizeMiddleware = &SignHTTPRequest{}
+	_ middleware.FinalizeMiddleware = &SignHTTPRequestMiddleware{}
 )

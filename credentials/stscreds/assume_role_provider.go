@@ -215,17 +215,6 @@ type AssumeRoleOptions struct {
 	// If both TokenCode and TokenProvider is set, TokenProvider will be used and
 	// TokenCode is ignored.
 	TokenProvider func() (string, error)
-
-	// ExpiryWindow will allow the credentials to trigger refreshing prior to
-	// the credentials actually expiring. This is beneficial so race conditions
-	// with expiring credentials do not cause request to fail unexpectedly
-	// due to ExpiredTokenException exceptions.
-	//
-	// So a ExpiryWindow of 10s would cause calls to IsExpired() to return true
-	// 10 seconds before the credentials are actually expired.
-	//
-	// If ExpiryWindow is 0 or less it will be ignored.
-	ExpiryWindow time.Duration
 }
 
 // NewAssumeRoleProvider constructs and returns a credentials provider that
@@ -291,6 +280,6 @@ func (p *AssumeRoleProvider) Retrieve(ctx context.Context) (aws.Credentials, err
 		Source:          ProviderName,
 
 		CanExpire: true,
-		Expires:   resp.Credentials.Expiration.Add(-p.options.ExpiryWindow),
+		Expires:   *resp.Credentials.Expiration,
 	}, nil
 }

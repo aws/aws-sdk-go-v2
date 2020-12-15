@@ -67,12 +67,12 @@ func TestProvider(t *testing.T) {
 	orig := sdk.NowTime
 	defer func() { sdk.NowTime = orig }()
 
-	p := New(Options{
-		Client: mockClient{
+	p := New(func(options *Options) {
+		options.Client = mockClient{
 			roleName:   "RoleName",
 			failAssume: false,
 			expireOn:   "2014-12-16T01:51:37Z",
-		},
+		}
 	})
 
 	creds, err := p.Retrieve(context.Background())
@@ -99,12 +99,12 @@ func TestProvider(t *testing.T) {
 }
 
 func TestProvider_FailAssume(t *testing.T) {
-	p := New(Options{
-		Client: mockClient{
+	p := New(func(options *Options) {
+		options.Client = mockClient{
 			roleName:   "RoleName",
 			failAssume: true,
 			expireOn:   "2014-12-16T01:51:37Z",
-		},
+		}
 	})
 
 	creds, err := p.Retrieve(context.Background())
@@ -143,12 +143,12 @@ func TestProvider_IsExpired(t *testing.T) {
 	orig := sdk.NowTime
 	defer func() { sdk.NowTime = orig }()
 
-	p := New(Options{
-		Client: mockClient{
+	p := New(func(options *Options) {
+		options.Client = mockClient{
 			roleName:   "RoleName",
 			failAssume: false,
 			expireOn:   "2014-12-16T01:51:37Z",
-		},
+		}
 	})
 
 	sdk.NowTime = func() time.Time {
@@ -165,40 +165,6 @@ func TestProvider_IsExpired(t *testing.T) {
 
 	sdk.NowTime = func() time.Time {
 		return time.Date(2014, 12, 16, 1, 55, 37, 0, time.UTC)
-	}
-
-	if !creds.Expired() {
-		t.Errorf("expect to be expired")
-	}
-}
-
-func TestProvider_ExpiryWindowIsExpired(t *testing.T) {
-	orig := sdk.NowTime
-	defer func() { sdk.NowTime = orig }()
-
-	p := New(Options{
-		Client: mockClient{
-			roleName:   "RoleName",
-			failAssume: false,
-			expireOn:   "2014-12-16T01:51:37Z",
-		},
-		ExpiryWindow: time.Hour,
-	})
-
-	sdk.NowTime = func() time.Time {
-		return time.Date(2014, 12, 16, 0, 40, 37, 0, time.UTC)
-	}
-
-	creds, err := p.Retrieve(context.Background())
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-	if creds.Expired() {
-		t.Errorf("expect not to be expired")
-	}
-
-	sdk.NowTime = func() time.Time {
-		return time.Date(2014, 12, 16, 1, 30, 37, 0, time.UTC)
 	}
 
 	if !creds.Expired() {

@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
@@ -432,23 +433,19 @@ func (c *PresignClient) PresignPutObject(ctx context.Context, params *PutObjectI
 	if params == nil {
 		params = &PutObjectInput{}
 	}
-	var presignOptions PresignOptions
+	options := c.options.copy()
 	for _, fn := range optFns {
-		fn(&presignOptions)
+		fn(&options)
 	}
-	if len(optFns) != 0 {
-		c = NewPresignClient(c.client, optFns...)
-	}
-
-	clientOptFns := make([]func(o *Options), 0)
-	clientOptFns = append(clientOptFns, func(o *Options) {
-		o.HTTPClient = &smithyhttp.NopClient{}
-	})
+	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
 
 	ctx = presignedurlcust.WithIsPresigning(ctx)
 	result, _, err := c.client.invokeOperation(ctx, "PutObject", params, clientOptFns,
 		addOperationPutObjectMiddlewares,
-		c.convertToPresignMiddleware,
+		presignConverter(options).convertToPresignMiddleware,
+		func(stack *middleware.Stack, options Options) error {
+			return awshttp.RemoveContentTypeHeader(stack)
+		},
 		addPutObjectPayloadAsUnsigned,
 	)
 	if err != nil {

@@ -42,15 +42,13 @@ func TestCredentialsCache_Cache(t *testing.T) {
 	}
 
 	var called bool
-	p := &CredentialsCache{
-		Provider: CredentialsProviderFunc(func(ctx context.Context) (Credentials, error) {
-			if called {
-				t.Fatalf("expect provider.Retrieve to only be called once")
-			}
-			called = true
-			return expect, nil
-		}),
-	}
+	p := NewCredentialsCache(CredentialsProviderFunc(func(ctx context.Context) (Credentials, error) {
+		if called {
+			t.Fatalf("expect provider.Retrieve to only be called once")
+		}
+		called = true
+		return expect, nil
+	}))
 
 	for i := 0; i < 2; i++ {
 		creds, err := p.Retrieve(context.Background())
@@ -108,12 +106,10 @@ func TestCredentialsCache_Expires(t *testing.T) {
 
 	for _, c := range cases {
 		var called int
-		p := &CredentialsCache{
-			Provider: CredentialsProviderFunc(func(ctx context.Context) (Credentials, error) {
-				called++
-				return c.Creds(), nil
-			}),
-		}
+		p := NewCredentialsCache(CredentialsProviderFunc(func(ctx context.Context) (Credentials, error) {
+			called++
+			return c.Creds(), nil
+		}))
 
 		p.Retrieve(context.Background())
 		p.Retrieve(context.Background())
@@ -131,12 +127,91 @@ func TestCredentialsCache_Expires(t *testing.T) {
 	}
 }
 
-func TestCredentialsCache_Error(t *testing.T) {
-	p := &CredentialsCache{
-		Provider: CredentialsProviderFunc(func(ctx context.Context) (Credentials, error) {
-			return Credentials{}, fmt.Errorf("failed")
-		}),
+func TestCredentialsCache_ExpireTime(t *testing.T) {
+	orig := sdk.NowTime
+	defer func() { sdk.NowTime = orig }()
+	var mockTime time.Time
+	sdk.NowTime = func() time.Time { return mockTime }
+
+	cases := map[string]struct {
+		ExpireTime   time.Time
+		ExpiryWindow time.Duration
+		JitterFrac   float64
+		Validate     func(t *testing.T, v time.Time)
+	}{
+		"no expire window": {
+			Validate: func(t *testing.T, v time.Time) {
+				t.Helper()
+				if e, a := mockTime, v; !e.Equal(a) {
+					t.Errorf("expect %v, got %v", e, a)
+				}
+			},
+		},
+		"expire window": {
+			ExpireTime:   mockTime.Add(100),
+			ExpiryWindow: 50,
+			Validate: func(t *testing.T, v time.Time) {
+				t.Helper()
+				if e, a := mockTime.Add(50), v; !e.Equal(a) {
+					t.Errorf("expect %v, got %v", e, a)
+				}
+			},
+		},
+		"expire window with jitter": {
+			ExpireTime:   mockTime.Add(100),
+			JitterFrac:   0.5,
+			ExpiryWindow: 50,
+			Validate: func(t *testing.T, v time.Time) {
+				t.Helper()
+				max := mockTime.Add(75)
+				min := mockTime.Add(50)
+				if v.Before(min) {
+					t.Errorf("expect %v to be before %s", v, min)
+				}
+				if v.After(max) {
+					t.Errorf("expect %v to be after %s", v, max)
+				}
+			},
+		},
+		"no expire window with jitter": {
+			ExpireTime: mockTime,
+			JitterFrac: 0.5,
+			Validate: func(t *testing.T, v time.Time) {
+				t.Helper()
+				if e, a := mockTime, v; !e.Equal(a) {
+					t.Errorf("expect %v, got %v", e, a)
+				}
+			},
+		},
 	}
+
+	for name, tt := range cases {
+		t.Run(name, func(t *testing.T) {
+			p := NewCredentialsCache(CredentialsProviderFunc(func(ctx context.Context) (Credentials, error) {
+				return Credentials{
+					AccessKeyID:     "accessKey",
+					SecretAccessKey: "secretKey",
+					CanExpire:       true,
+					Expires:         tt.ExpireTime,
+				}, nil
+			}), func(options *CredentialsCacheOptions) {
+				options.ExpiryWindow = tt.ExpiryWindow
+				options.ExpiryWindowJitterFrac = tt.JitterFrac
+			})
+
+			credentials, err := p.Retrieve(context.Background())
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			tt.Validate(t, credentials.Expires)
+		})
+	}
+}
+
+func TestCredentialsCache_Error(t *testing.T) {
+	p := NewCredentialsCache(CredentialsProviderFunc(func(ctx context.Context) (Credentials, error) {
+		return Credentials{}, fmt.Errorf("failed")
+	}))
 
 	creds, err := p.Retrieve(context.Background())
 	if err == nil {
@@ -156,16 +231,14 @@ func TestCredentialsCache_Race(t *testing.T) {
 		SecretAccessKey: "secret",
 	}
 	var called bool
-	p := &CredentialsCache{
-		Provider: CredentialsProviderFunc(func(ctx context.Context) (Credentials, error) {
-			time.Sleep(time.Duration(rand.Intn(10)) * time.Millisecond)
-			if called {
-				t.Fatalf("expect provider.Retrieve only called once")
-			}
-			called = true
-			return expect, nil
-		}),
-	}
+	p := NewCredentialsCache(CredentialsProviderFunc(func(ctx context.Context) (Credentials, error) {
+		time.Sleep(time.Duration(rand.Intn(10)) * time.Millisecond)
+		if called {
+			t.Fatalf("expect provider.Retrieve only called once")
+		}
+		called = true
+		return expect, nil
+	}))
 
 	var wg sync.WaitGroup
 	wg.Add(100)
@@ -206,9 +279,7 @@ func TestCredentialsCache_RetrieveConcurrent(t *testing.T) {
 	stub := &stubConcurrentProvider{
 		done: make(chan struct{}),
 	}
-	provider := CredentialsCache{
-		Provider: stub,
-	}
+	provider := NewCredentialsCache(stub)
 
 	var wg sync.WaitGroup
 	wg.Add(2)

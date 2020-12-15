@@ -146,28 +146,24 @@ func TestResolveCredentialsProvider(t *testing.T) {
 		t.Fatalf("expected %v, got %v", e, a)
 	}
 
-	cache, ok := cfg.Credentials.(*aws.CredentialsCache)
+	_, ok := cfg.Credentials.(*aws.CredentialsCache)
 	if !ok {
 		t.Fatalf("expect resolved credentials to be wrapped in cache, was not, %T", cfg.Credentials)
-	}
-
-	p := cache.Provider.(credentials.StaticCredentialsProvider)
-	if e, a := "AKID", p.Value.AccessKeyID; e != a {
-		t.Errorf("expect %v key, got %v", e, a)
-	}
-	if e, a := "SECRET", p.Value.SecretAccessKey; e != a {
-		t.Errorf("expect %v secret, got %v", e, a)
-	}
-	if e, a := "valid", p.Value.Source; e != a {
-		t.Errorf("expect %v provider name, got %v", e, a)
 	}
 
 	creds, err := cfg.Credentials.Retrieve(context.Background())
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
+
+	if e, a := "AKID", creds.AccessKeyID; e != a {
+		t.Errorf("expect %v key, got %v", e, a)
+	}
+	if e, a := "SECRET", creds.SecretAccessKey; e != a {
+		t.Errorf("expect %v secret, got %v", e, a)
+	}
 	if e, a := "valid", creds.Source; e != a {
-		t.Errorf("expect %v creds, got %v", e, a)
+		t.Errorf("expect %v provider name, got %v", e, a)
 	}
 }
 

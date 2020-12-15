@@ -21,9 +21,7 @@ func BenchmarkCredentialsCache_Retrieve(b *testing.B) {
 	cases := []int{1, 10, 100, 500, 1000, 10000}
 	for _, c := range cases {
 		b.Run(strconv.Itoa(c), func(b *testing.B) {
-			p := CredentialsCache{
-				Provider: provider,
-			}
+			p := NewCredentialsCache(provider)
 			var wg sync.WaitGroup
 			wg.Add(c)
 			for i := 0; i < c; i++ {
@@ -59,9 +57,7 @@ func BenchmarkCredentialsCache_Retrieve_Invalidate(b *testing.B) {
 	for _, expRate := range expRates {
 		for _, c := range cases {
 			b.Run(fmt.Sprintf("%d-%d", expRate, c), func(b *testing.B) {
-				p := CredentialsCache{
-					Provider: provider,
-				}
+				p := NewCredentialsCache(provider)
 				var wg sync.WaitGroup
 				wg.Add(c)
 				for i := 0; i < c; i++ {

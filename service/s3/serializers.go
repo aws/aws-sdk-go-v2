@@ -150,7 +150,7 @@ func (m *awsRestxml_serializeOpCompleteMultipartUpload) HandleSerialize(ctx cont
 		payloadRootAttr := []smithyxml.Attr{}
 		payloadRoot := smithyxml.StartElement{
 			Name: smithyxml.Name{
-				Local: "CompletedMultipartUpload",
+				Local: "CompleteMultipartUpload",
 			},
 			Attr: payloadRootAttr,
 		}

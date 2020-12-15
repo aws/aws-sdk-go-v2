@@ -1,6 +1,7 @@
 package v4
 
 import (
+	"bytes"
 	"context"
 	"net/http"
 	"net/url"
@@ -11,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/awslabs/smithy-go/logging"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"github.com/google/go-cmp/cmp"
@@ -19,15 +21,17 @@ import (
 type httpPresignerFunc func(
 	ctx context.Context, credentials aws.Credentials, r *http.Request,
 	payloadHash string, service string, region string, signingTime time.Time,
+	optFns ...func(*SignerOptions),
 ) (url string, signedHeader http.Header, err error)
 
 func (f httpPresignerFunc) PresignHTTP(
 	ctx context.Context, credentials aws.Credentials, r *http.Request,
 	payloadHash string, service string, region string, signingTime time.Time,
+	optFns ...func(*SignerOptions),
 ) (
 	url string, signedHeader http.Header, err error,
 ) {
-	return f(ctx, credentials, r, payloadHash, service, region, signingTime)
+	return f(ctx, credentials, r, payloadHash, service, region, signingTime, optFns...)
 }
 
 func TestPresignHTTPRequestMiddleware(t *testing.T) {
@@ -35,6 +39,7 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 		Request      *http.Request
 		Creds        aws.CredentialsProvider
 		PayloadHash  string
+		LogSigning   bool
 		ExpectResult *PresignedHTTPRequest
 		ExpectErr    string
 	}{
@@ -53,7 +58,6 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 				SignedHeader: http.Header{},
 			},
 		},
-
 		"error": {
 			Request: func() *http.Request {
 				return &http.Request{}
@@ -62,7 +66,6 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 			PayloadHash: "",
 			ExpectErr:   "failed to sign request",
 		},
-
 		"anonymous creds": {
 			Request: &http.Request{
 				URL: func() *url.URL {
@@ -79,7 +82,6 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 				SignedHeader: http.Header{},
 			},
 		},
-
 		"nil creds": {
 			Request: &http.Request{
 				URL: func() *url.URL {
@@ -93,6 +95,23 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 				URL:          "https://example.aws/path?query=foo",
 				SignedHeader: http.Header{},
 			},
+		},
+		"with log signing": {
+			Request: &http.Request{
+				URL: func() *url.URL {
+					u, _ := url.Parse("https://example.aws/path?query=foo")
+					return u
+				}(),
+				Header: http.Header{},
+			},
+			Creds:       unit.StubCredentialsProvider{},
+			PayloadHash: "0123456789abcdef",
+			ExpectResult: &PresignedHTTPRequest{
+				URL:          "https://example.aws/path?query=foo",
+				SignedHeader: http.Header{},
+			},
+
+			LogSigning: true,
 		},
 	}
 
@@ -109,7 +128,18 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 				presigner: httpPresignerFunc(func(
 					ctx context.Context, credentials aws.Credentials, r *http.Request,
 					payloadHash string, service string, region string, signingTime time.Time,
+					optFns ...func(*SignerOptions),
 				) (url string, signedHeader http.Header, err error) {
+					var options SignerOptions
+					for _, fn := range optFns {
+						fn(&options)
+					}
+					if options.Logger == nil {
+						t.Errorf("expect logger, got none")
+					}
+					if options.LogSigning {
+						options.Logger.Logf(logging.Debug, t.Name())
+					}
 
 					if !haveCredentialProvider(c.Creds) {
 						t.Errorf("expect presigner not to be called for not credentials provider")
@@ -131,6 +161,7 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 
 					return c.ExpectResult.URL, c.ExpectResult.SignedHeader, nil
 				}),
+				logSigning: c.LogSigning,
 			}
 
 			next := middleware.FinalizeHandlerFunc(
@@ -144,6 +175,10 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 			ctx := awsmiddleware.SetSigningRegion(
 				awsmiddleware.SetSigningName(context.Background(), signingName),
 				signingRegion)
+
+			var loggerBuf bytes.Buffer
+			logger := logging.NewStandardLogger(&loggerBuf)
+			ctx = middleware.SetLogger(ctx, logger)
 
 			if len(c.PayloadHash) != 0 {
 				ctx = context.WithValue(ctx, payloadHashKey{}, c.PayloadHash)
@@ -169,6 +204,16 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 
 			if diff := cmp.Diff(c.ExpectResult, result.Result); len(diff) != 0 {
 				t.Errorf("expect result match\n%v", diff)
+			}
+
+			if c.LogSigning {
+				if e, a := t.Name(), loggerBuf.String(); !strings.Contains(a, e) {
+					t.Errorf("expect %v logged in %v", e, a)
+				}
+			} else {
+				if loggerBuf.Len() != 0 {
+					t.Errorf("expect no log, got %v", loggerBuf.String())
+				}
 			}
 		})
 	}
