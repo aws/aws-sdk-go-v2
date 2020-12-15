@@ -772,11 +772,11 @@ fmt.Println("total objects:", totalObjects)
 ### Waiters
 
 Service operation waiters are no longer invoked as methods on the service client. To use a waiter you first construct
-the operations associated waiter type, and then invoke the desired wait condition method. For example,
-to wait for a {{% alias service=S3 %}} Bucket to exist must construct a waiter for the `HeadBucket` operation. Use the
-[s3.NewHeadBucketWaiter]({{< apiref "service/s3#NewHeadBucketWaiter" >}}) constructor to create a
-[s3.HeadBucketWaiter]({{< apiref "service/s3#HeadBucketWaiter" >}}). The `s3.HeadBucketWaiter` provides a
-`WaitUntilBucketExists` method which can be used to wait for a bucket to become available.
+the desired waiter type, and then invoke the wait method. For example, 
+to wait for a {{% alias service=S3 %}} Bucket to exist, you must construct a `BucketExists` waiter. Use the
+[s3.NewBucketExistsWaiter]({{< apiref "service/s3#NewBucketExistsWaiter" >}}) constructor to create a
+[s3.BucketExistsWaiter]({{< apiref "service/s3#BucketExistsWaiter" >}}). The `s3.BucketExistsWaiter` provides a
+`Wait` method which can be used to wait for a bucket to become available.
 
 ## Features
 
