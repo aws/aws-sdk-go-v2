@@ -67,11 +67,12 @@ if err != nil {
 
 ###### V2 LoadDefaultConfig
 ```go
+import "context"
 import "github.com/aws/aws-sdk-go-v2/config"
 
 // ...
 
-cfg, err := config.LoadDefaultConfig()
+cfg, err := config.LoadDefaultConfig(context.TODO())
 if err != nil {
 	// handle error
 }
@@ -100,11 +101,12 @@ if err != nil {
 
 ###### V2
 ```go
+import "context"
 import "github.com/aws/aws-sdk-go-v2/config"
 
 // ...
 
-cfg, err := config.LoadDefaultConfig(
+cfg, err := config.LoadDefaultConfig(context.TODO(), 
 	config.WithRegion("us-west-2"),
 )
 if err != nil {
@@ -135,11 +137,12 @@ if err != nil {
 
 ###### V2
 ```go
+import "context"
 import "github.com/aws/aws-sdk-go-v2/config"
 
 // ...
 
-cfg, err := config.LoadDefaultConfig(
+cfg, err := config.LoadDefaultConfig(context.TODO(), 
 	config.WithSharedConfigProfile("my-application-profile"),
 )
 if err != nil {
@@ -458,12 +461,13 @@ client := s3.New(sess)
 ###### V2
 
 ```go
+import "context"
 import "github.com/aws/aws-sdk-go-v2/config"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
 
 // ...
 
-cfg, err := config.LoadDefaultConfig()
+cfg, err := config.LoadDefaultConfig(context.TODO())
 if err != nil {
 	// handle error
 }
@@ -496,12 +500,13 @@ client := s3.New(sess, &aws.Connfig{
 ###### V2
 
 ```go
+import "context"
 import "github.com/aws/aws-sdk-go-v2/config"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
 
 // ...
 
-cfg, err := config.LoadDefaultConfig()
+cfg, err := config.LoadDefaultConfig(context.TODO())
 if err != nil {
 	// handle error
 }

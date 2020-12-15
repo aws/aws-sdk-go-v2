@@ -21,7 +21,8 @@ by wrapping it with [config.WithLogger]({{< apiref "config#WithLogger" >}}).
 For example to configure our clients to use our `applicationLogger`:
 
 ```go
-cfg, err := config.LoadDefaultConfig(config.WithLogger(applicationLogger))
+cfg, err := config.LoadDefaultConfig(context.TODO(), 
+	config.WithLogger(applicationLogger))
 ```
 
 Now clients configured using the constructed `aws.Config` will send log messages to `applicationLogger`.
@@ -47,7 +48,8 @@ can be set to enable debugging messaging for:
 For example to enable logging of HTTP requests and retries:
 
 ```go
-cfg, err := config.LoadDefaultConfig(config.WithClientLogMode(aws.LogRetries | aws.LogRequest))
+cfg, err := config.LoadDefaultConfig(context.TODO(), 
+	config.WithClientLogMode(aws.LogRetries | aws.LogRequest))
 ```
 
 See [ClientLogMode]({{< apiref "aws#ClientLogMode" >}}) for the different client log modes available.
