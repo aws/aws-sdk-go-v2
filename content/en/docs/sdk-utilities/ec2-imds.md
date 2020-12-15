@@ -19,12 +19,13 @@ like other AWS Services.
 
 For example to construct a client:
 ```go
+import "context"
 import "github.com/aws/aws-sdk-go-v2/config"
 import "github.com/aws/aws-sdk-go-v2/ec2imds"
 
 // ...
 
-cfg, err := config.LoadDefaultConfig()
+cfg, err := config.LoadDefaultConfig(context.TODO())
 if err != nil {
 	log.Printf("error: %v", err)
 	return

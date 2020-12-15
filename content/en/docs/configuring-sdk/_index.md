@@ -18,19 +18,20 @@ To configure the SDK to use the AWS shared configuration use the following code:
 
 ```go
 import (
+  "context"
   "log"
   "github.com/aws/aws-sdk-go-v2/config"
 )
 
 // ...
 
-cfg, err := config.LoadDefaultConfig()
+cfg, err := config.LoadDefaultConfig(context.TODO())
 if err != nil {
   log.Fatalf("failed to load configuration, %v", err)
 }
 ```
 
-`config.LoadDefaultConfig()` will construct an [aws.Config]({{< apiref "aws#Config" >}})
+`config.LoadDefaultConfig(context.TODO())` will construct an [aws.Config]({{< apiref "aws#Config" >}})
 using the AWS shared configuration sources. This includes configuring a credential provider. configuring the AWS Region,
 and loading service specific configuration. Service clients can be constructed using the loaded `aws.Config`, providing
 a consistent pattern for constructing clients.
@@ -70,7 +71,7 @@ set AWS_REGION=us-west-2
 ##### Specify Region Programmatically
 
 ```go
-cfg, err := config.LoadDefaultConfig(config.WithRegion("us-west-2"))
+cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("us-west-2"))
 ```
 
 ## Specifying Credentials
@@ -222,7 +223,8 @@ You can also use instruct the SDK to select a profile by either
 or by passing an explicit profile as an argument as shown in the following example:
 
 ```go
-cfg, err := config.LoadDefaultConfig(config.WithSharedConfigProfile("test-account"))
+cfg, err := config.LoadDefaultConfig(context.TODO(), 
+	config.WithSharedConfigProfile("test-account"))
 ```
 
 {{% pageinfo color="info" %}}
@@ -268,7 +270,8 @@ references an instance of `aws.CredentialProvider` implementation, it can be pas
 like so:
 
 ```go
-cfg, err := config.LoadDefaultConfig(config.WithCredentialsProvider(customProvider))
+cfg, err := config.LoadDefaultConfig(context.TODO(), 
+	config.WithCredentialsProvider(customProvider))
 ```
 
 If you explicitly provide credentials, as in this example, the SDK uses only those credentials.
@@ -286,7 +289,7 @@ You can hard-code credentials in your application by using the [credentials.Stat
 credential provider to explicitly set the access keys to be used. For example:
 
 ```go
-cfg, err := config.LoadDefaultConfig(
+cfg, err := config.LoadDefaultConfig(context.TODO(), 
 	config.WithCredentialsProvider(aws.StaticCredentialsProvider("AKID", "SECRET_KEY", "TOKEN")),
 )
 ```

@@ -95,6 +95,7 @@ You can attach your custom step middleware to every client by adding the middlew
 client constructed using your applications `aws.Config` object:
 
 ```go
+import "context"
 import "github.com/aws/aws-sdk-go-v2/aws"
 import "github.com/aws/aws-sdk-go-v2/config"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
@@ -102,7 +103,7 @@ import "github.com/awslabs/smithy-go/middleware"
 
 // ...
 
-cfg, err := config.LoadDefaultConfig()
+cfg, err := config.LoadDefaultConfig(context.TODO())
 if err != nil {
 	// handle error
 }
@@ -122,6 +123,7 @@ member using the variadic argument list for an operation. The following examples
 to a specific {{% alias service=S3 %}} `GetObject` operation invocation:
 
 ```go
+import "context"
 import "github.com/aws/aws-sdk-go-v2/aws"
 import "github.com/aws/aws-sdk-go-v2/config"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
@@ -137,7 +139,7 @@ func registerDefaultBucketMiddleware(stack *middleware.Stack) error {
 
 // ...
 
-cfg, err := config.LoadDefaultConfig()
+cfg, err := config.LoadDefaultConfig(context.TODO())
 if err != nil {
 	// handle error
 }
