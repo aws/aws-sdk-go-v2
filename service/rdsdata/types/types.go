@@ -3,6 +3,13 @@
 package types
 
 // Contains an array.
+//
+// The following types satisfy this interface:
+//  ArrayValueMemberArrayValues
+//  ArrayValueMemberBooleanValues
+//  ArrayValueMemberDoubleValues
+//  ArrayValueMemberLongValues
+//  ArrayValueMemberStringValues
 type ArrayValue interface {
 	isArrayValue()
 }
@@ -89,6 +96,15 @@ type ColumnMetadata struct {
 }
 
 // Contains a value.
+//
+// The following types satisfy this interface:
+//  FieldMemberArrayValue
+//  FieldMemberBlobValue
+//  FieldMemberBooleanValue
+//  FieldMemberDoubleValue
+//  FieldMemberIsNull
+//  FieldMemberLongValue
+//  FieldMemberStringValue
 type Field interface {
 	isField()
 }
@@ -235,6 +251,18 @@ type UpdateResult struct {
 }
 
 // Contains the value of a column. This data type is deprecated.
+//
+// The following types satisfy this interface:
+//  ValueMemberArrayValues
+//  ValueMemberBigIntValue
+//  ValueMemberBitValue
+//  ValueMemberBlobValue
+//  ValueMemberDoubleValue
+//  ValueMemberIntValue
+//  ValueMemberIsNull
+//  ValueMemberRealValue
+//  ValueMemberStringValue
+//  ValueMemberStructValue
 type Value interface {
 	isValue()
 }
