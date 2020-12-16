@@ -12,7 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/credentials/endpointcreds"
 	"github.com/aws/aws-sdk-go-v2/credentials/processcreds"
 	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
-	"github.com/aws/aws-sdk-go-v2/ec2imds"
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 )
 
@@ -258,7 +258,7 @@ func resolveEC2RoleCredentials(ctx context.Context, cfg *aws.Config, configs con
 	optFns = append(optFns, func(o *ec2rolecreds.Options) {
 		// Only define a client from config if not already defined.
 		if o.Client != nil {
-			o.Client = ec2imds.New(ec2imds.Options{
+			o.Client = imds.New(imds.Options{
 				HTTPClient: cfg.HTTPClient,
 				Retryer:    cfg.Retryer,
 			})

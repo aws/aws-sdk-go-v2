@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/ec2imds"
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/awslabs/smithy-go"
 )
 
@@ -20,7 +20,7 @@ const ProviderName = "EC2RoleProvider"
 // GetMetadataAPIClient provides the interface for an EC2 IMDS API client for the
 // GetMetadata operation.
 type GetMetadataAPIClient interface {
-	GetMetadata(context.Context, *ec2imds.GetMetadataInput, ...func(*ec2imds.Options)) (*ec2imds.GetMetadataOutput, error)
+	GetMetadata(context.Context, *imds.GetMetadataInput, ...func(*imds.Options)) (*imds.GetMetadataOutput, error)
 }
 
 // A Provider retrieves credentials from the EC2 service, and keeps track if
@@ -29,7 +29,7 @@ type GetMetadataAPIClient interface {
 // The New function must be used to create the Provider.
 //
 //     p := &ec2rolecreds.New(ec2rolecreds.Options{
-//          Client: ec2imds.New(ec2imds.Options{}),
+//          Client: imds.New(imds.Options{}),
 //
 //          // Expire the credentials 10 minutes before IAM states they should.
 //          // Proactively refreshing the credentials.
@@ -44,7 +44,7 @@ type Options struct {
 	// The API client that will be used by the provider to make GetMetadata API
 	// calls to EC2 IMDS.
 	//
-	// If nil, the provider will default to the ec2imds client.
+	// If nil, the provider will default to the EC2 IMDS client.
 	Client GetMetadataAPIClient
 }
 
@@ -58,7 +58,7 @@ func New(optFns ...func(*Options)) *Provider {
 	}
 
 	if options.Client == nil {
-		options.Client = ec2imds.New(ec2imds.Options{})
+		options.Client = imds.New(imds.Options{})
 	}
 
 	return &Provider{
@@ -119,7 +119,7 @@ const iamSecurityCredsPath = "/iam/security-credentials/"
 // there are no credentials, or there is an error making or receiving the
 // request
 func requestCredList(ctx context.Context, client GetMetadataAPIClient) ([]string, error) {
-	resp, err := client.GetMetadata(ctx, &ec2imds.GetMetadataInput{
+	resp, err := client.GetMetadata(ctx, &imds.GetMetadataInput{
 		Path: iamSecurityCredsPath,
 	})
 	if err != nil {
@@ -145,7 +145,7 @@ func requestCredList(ctx context.Context, client GetMetadataAPIClient) ([]string
 // If the credentials cannot be found, or there is an error reading the response
 // and error will be returned.
 func requestCred(ctx context.Context, client GetMetadataAPIClient, credsName string) (ec2RoleCredRespBody, error) {
-	resp, err := client.GetMetadata(ctx, &ec2imds.GetMetadataInput{
+	resp, err := client.GetMetadata(ctx, &imds.GetMetadataInput{
 		Path: path.Join(iamSecurityCredsPath, credsName),
 	})
 	if err != nil {

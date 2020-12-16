@@ -2,8 +2,9 @@ package config
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/ec2imds"
 	"io"
+
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/credentials/ec2rolecreds"
@@ -211,7 +212,7 @@ func WithCustomCABundle(v io.Reader) LoadOptionsFunc {
 // from the EC2 Metadata service.
 type UseEC2IMDSRegion struct {
 	// If unset will default to generic EC2 IMDS client.
-	Client *ec2imds.Client
+	Client *imds.Client
 }
 
 // getRegion attempts to retrieve the region from EC2 Metadata service.
@@ -222,7 +223,7 @@ func (p *UseEC2IMDSRegion) getRegion(ctx context.Context) (string, bool, error) 
 
 	client := p.Client
 	if client == nil {
-		client = ec2imds.New(ec2imds.Options{})
+		client = imds.New(imds.Options{})
 	}
 
 	result, err := p.Client.GetRegion(ctx, nil)
@@ -235,7 +236,7 @@ func (p *UseEC2IMDSRegion) getRegion(ctx context.Context) (string, bool, error) 
 	return "", false, nil
 }
 
-// getEC2IMDSRegion returns the value of ec2imds region.
+// getEC2IMDSRegion returns the value of EC2 IMDS region.
 func (o LoadOptions) getEC2IMDSRegion(ctx context.Context) (string, bool, error) {
 	if o.UseEC2IMDSRegion == nil {
 		return "", false, nil
