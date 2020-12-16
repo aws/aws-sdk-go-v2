@@ -8767,7 +8767,7 @@ func awsRestxml_deserializeDocumentS3InitiateRestoreObjectOperation(v **types.S3
 				if err != nil {
 					return err
 				}
-				sv.ExpirationInDays = int32(i64)
+				sv.ExpirationInDays = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("GlacierJobTier", t.Name.Local):
