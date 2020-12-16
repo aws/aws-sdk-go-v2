@@ -1,6 +1,6 @@
 // +build integration,ec2env
 
-package ec2imds
+package imds
 
 import (
 	"context"
