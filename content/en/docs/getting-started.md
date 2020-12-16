@@ -87,16 +87,44 @@ represents Amazon will ever ask you for your secret key. {{% /pageinfo %}}
 * [AWS Security Credentials](https://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html)
   in Amazon Web Services General Reference.
 
-## Import Packages
+## Invoke an Operation
 
 After you have installed the SDK, you import AWS packages into your Go applications to use the SDK, as shown in the
-following example, which imports the AWS, Config, and Amazon S3 libraries:
+following example, which imports the AWS, Config, and Amazon S3 libraries. After importing the SDK packages, the
+AWS SDK Shared Configuration is loaded, a client is constructed, and an API operation is invoked.
 
 ```go
+package main
+
 import (
+	"context"
+	"log"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
-```
 
+func main() {
+	// Load the Shared AWS Configuration (~/.aws/config)
+	config, err := config.LoadDefaultConfig(context.TODO())
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Create an Amazon S3 service client
+	client := s3.NewFromConfig(config)
+
+	// Get the first page of results for ListObjectsV2 for a bucket
+	output, err := client.ListObjectsV2(context.TODO(), &s3.ListObjectsV2Input{
+		Bucket: aws.String("my-bucket"),
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println("first page results:")
+	for _, object := range output.Contents {
+		log.Printf("key=%s size=%d", aws.ToString(object.Key), object.Size)
+	}
+}
+```
