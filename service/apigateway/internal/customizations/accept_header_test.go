@@ -44,7 +44,7 @@ func (m *mockClient) Do(*http.Request) (*http.Response, error) {
 func TestAddAcceptHeader(t *testing.T) {
 	options := apigateway.Options{
 		Credentials: unit.StubCredentialsProvider{},
-		Retryer:     aws.NoOpRetryer{},
+		Retryer:     aws.NopRetryer{},
 		HTTPClient:  &mockClient{},
 		Region:      "mock-region",
 	}

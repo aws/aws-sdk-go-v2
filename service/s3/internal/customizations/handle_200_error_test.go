@@ -71,7 +71,7 @@ func TestErrorResponseWith200StatusCode(t *testing.T) {
 
 			options := s3.Options{
 				Credentials: unit.StubCredentialsProvider{},
-				Retryer:     aws.NoOpRetryer{},
+				Retryer:     aws.NopRetryer{},
 				Region:      "mock-region",
 				EndpointResolver: EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (e aws.Endpoint, err error) {
 					e.URL = server.URL

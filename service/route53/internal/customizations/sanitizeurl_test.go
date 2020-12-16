@@ -37,7 +37,7 @@ func TestSanitizeURLMiddleware(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			cfg := aws.Config{
 				Credentials: unit.StubCredentialsProvider{},
-				Retryer:     aws.NoOpRetryer{},
+				Retryer:     aws.NopRetryer{},
 				Region:      "mock-region",
 			}
 

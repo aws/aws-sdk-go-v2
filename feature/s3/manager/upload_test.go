@@ -871,7 +871,7 @@ func TestUploadRetry(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			restoreSleep := sdk.TestingUseNoOpSleep()
+			restoreSleep := sdk.TestingUseNopSleep()
 			defer restoreSleep()
 
 			mux := newMockS3UploadServer(t, c.PartHandlers(t))

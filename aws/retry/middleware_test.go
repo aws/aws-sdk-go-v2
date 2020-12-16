@@ -122,7 +122,7 @@ func (m mockRetryableError) Error() string {
 }
 
 func TestAttemptMiddleware(t *testing.T) {
-	restoreSleep := sdk.TestingUseNoOpSleep()
+	restoreSleep := sdk.TestingUseNopSleep()
 	defer restoreSleep()
 
 	sdkTime := sdk.NowTime

@@ -104,7 +104,7 @@ func TestPutObject_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"host":         []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
+				"host": []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
 			},
 		},
 		"nil body": {
@@ -133,7 +133,7 @@ func TestPutObject_PresignURL(t *testing.T) {
 			cfg := aws.Config{
 				Region:      "us-west-2",
 				Credentials: unit.StubCredentialsProvider{},
-				Retryer:     aws.NoOpRetryer{},
+				Retryer:     aws.NopRetryer{},
 			}
 			presignClient := s3.NewPresignClient(s3.NewFromConfig(cfg), func(options *s3.PresignOptions) {
 				options = &c.options

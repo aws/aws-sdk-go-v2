@@ -127,7 +127,6 @@ func TestUpdateEndpointBuild(t *testing.T) {
 					{"a.b.c", "key", "https://example.region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
 					{"a..bc", "key", "https://example.region.amazonaws.com/a..bc/key?x-id=GetObject", ""},
 					{"abc", "k:e,y", "https://example.region.amazonaws.com/abc/k%3Ae%2Cy?x-id=GetObject", ""},
-
 				},
 			},
 			"Accelerate": {
@@ -177,7 +176,7 @@ func TestUpdateEndpointBuild(t *testing.T) {
 				t.Run(unitName, func(t *testing.T) {
 					options := s3.Options{
 						Credentials: unit.StubCredentialsProvider{},
-						Retryer:     aws.NoOpRetryer{},
+						Retryer:     aws.NopRetryer{},
 						Region:      "mock-region",
 
 						HTTPClient: smithyhttp.NopClient{},
@@ -624,7 +623,7 @@ func TestEndpointWithARN(t *testing.T) {
 			opts := c.options.Copy()
 			opts.Credentials = unit.StubCredentialsProvider{}
 			opts.HTTPClient = smithyhttp.NopClient{}
-			opts.Retryer = aws.NoOpRetryer{}
+			opts.Retryer = aws.NopRetryer{}
 
 			// build an s3 client
 			svc := s3.New(opts)
