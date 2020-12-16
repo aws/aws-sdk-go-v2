@@ -51,7 +51,8 @@ customResolver := aws.EndpointResolverFunc(func(service, region string) (aws.End
     return aws.Endpoint{}, &aws.EndpointNotFoundError{}
 })
 
-cfg, err := config.LoadDefaultConfig(config.WithEndpointResolver(customResolver))
+cfg, err := config.LoadDefaultConfig(context.TODO(), 
+	config.WithEndpointResolver(customResolver))
 ```
 
 ### Overriding Endpoint Without Fallback
@@ -71,7 +72,8 @@ customResolver := aws.EndpointResolverFunc(func(service, region string) (aws.End
     return aws.Endpoint{}, fmt.Errorf("unknown endpoint requested")
 })
 
-cfg, err := config.LoadDefaultConfig(config.WithEndpointResolver(customResolver))
+cfg, err := config.LoadDefaultConfig(context.TODO(), 
+	config.WithEndpointResolver(customResolver))
 ```
 
 ### Immutable Endpoints
@@ -100,6 +102,7 @@ customResolver := aws.EndpointResolverFunc(func(service, region string) (aws.End
     return aws.Endpoint{}, fmt.Errorf("unknown endpoint requested")
 })
 
-cfg, err := config.LoadDefaultConfig(config.WithEndpointResolver(customResolver))
+cfg, err := config.LoadDefaultConfig(context.TODO(), 
+	config.WithEndpointResolver(customResolver))
 ```
 
