@@ -54,6 +54,18 @@ type AttributeDefinition struct {
 // For more information, see Data Types
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes)
 // in the Amazon DynamoDB Developer Guide.
+//
+// The following types satisfy this interface:
+//  AttributeValueMemberS
+//  AttributeValueMemberN
+//  AttributeValueMemberB
+//  AttributeValueMemberSS
+//  AttributeValueMemberNS
+//  AttributeValueMemberBS
+//  AttributeValueMemberM
+//  AttributeValueMemberL
+//  AttributeValueMemberNULL
+//  AttributeValueMemberBOOL
 type AttributeValue interface {
 	isAttributeValue()
 }

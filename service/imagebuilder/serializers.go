@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/httpbinding"
-	smithyjson "github.com/awslabs/smithy-go/json"
+	"github.com/awslabs/smithy-go/encoding/httpbinding"
+	smithyjson "github.com/awslabs/smithy-go/encoding/json"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )

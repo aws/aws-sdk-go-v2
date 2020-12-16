@@ -8,11 +8,11 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/httpbinding"
+	"github.com/awslabs/smithy-go/encoding/httpbinding"
+	smithyxml "github.com/awslabs/smithy-go/encoding/xml"
 	"github.com/awslabs/smithy-go/middleware"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
-	smithyxml "github.com/awslabs/smithy-go/xml"
 )
 
 type awsRestxml_serializeOpCreateAccessPoint struct {

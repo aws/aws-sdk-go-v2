@@ -11,6 +11,18 @@ import (
 // For more information, see Data Types
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes)
 // in the Amazon DynamoDB Developer Guide.
+//
+// The following types satisfy this interface:
+//  AttributeValueMemberSS
+//  AttributeValueMemberBS
+//  AttributeValueMemberN
+//  AttributeValueMemberL
+//  AttributeValueMemberBOOL
+//  AttributeValueMemberM
+//  AttributeValueMemberNULL
+//  AttributeValueMemberNS
+//  AttributeValueMemberB
+//  AttributeValueMemberS
 type AttributeValue interface {
 	isAttributeValue()
 }
