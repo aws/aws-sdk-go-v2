@@ -10,9 +10,9 @@ import (
 	"strings"
 
 	"github.com/awslabs/smithy-go"
+	smithyxml "github.com/awslabs/smithy-go/encoding/xml"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
-	smithyxml "github.com/awslabs/smithy-go/xml"
 )
 
 // HandleResponseErrorWith200Status check for S3 200 error response.
