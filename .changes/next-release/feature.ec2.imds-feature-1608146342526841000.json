@@ -1,0 +1,9 @@
+{
+ "ID": "feature.ec2.imds-feature-1608146342526841000",
+ "SchemaVersion": 1,
+ "Module": "feature/ec2/imds",
+ "Type": "feature",
+ "Description": "Move ec2imds module to feature/ec2/imds",
+ "MinVersion": "",
+ "AffectedModules": null
+}

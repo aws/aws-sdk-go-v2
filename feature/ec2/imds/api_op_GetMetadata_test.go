@@ -1,4 +1,4 @@
-package ec2imds
+package imds
 
 import (
 	"bytes"
@@ -6,34 +6,53 @@ import (
 	"encoding/hex"
 	"io/ioutil"
 	"net/http/httptest"
-	"strings"
 	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestGetUserData(t *testing.T) {
+func TestGetMetadata(t *testing.T) {
 	cases := map[string]struct {
-		RespStatusCode int
-		ExpectContent  []byte
-		ExpectTrace    []string
-		ExpectErr      string
+		Path          string
+		ExpectPath    string
+		ExpectContent []byte
+		ExpectTrace   []string
 	}{
-		"get data": {
+		"empty path": {
+			ExpectPath:    getMetadataPath,
 			ExpectContent: []byte("success"),
 			ExpectTrace: []string{
 				getTokenPath,
-				getUserDataPath,
+				getMetadataPath,
 			},
 		},
-		"get data error": {
-			RespStatusCode: 400,
+		"with path no leading slash": {
+			Path:          "abc",
+			ExpectPath:    getMetadataPath + "/abc",
+			ExpectContent: []byte("success"),
 			ExpectTrace: []string{
 				getTokenPath,
-				getUserDataPath,
+				getMetadataPath + "/abc",
 			},
-			ExpectErr: "EC2 IMDS failed",
+		},
+		"with path": {
+			Path:          "/abc",
+			ExpectPath:    getMetadataPath + "/abc",
+			ExpectContent: []byte("success"),
+			ExpectTrace: []string{
+				getTokenPath,
+				getMetadataPath + "/abc",
+			},
+		},
+		"with path trailing slash": {
+			Path:          "/abc/",
+			ExpectPath:    getMetadataPath + "/abc/",
+			ExpectContent: []byte("success"),
+			ExpectTrace: []string{
+				getTokenPath,
+				getMetadataPath + "/abc/",
+			},
 		},
 	}
 
@@ -48,10 +67,9 @@ func TestGetUserData(t *testing.T) {
 						[]string{"tokenA"},
 						5*time.Minute,
 						&successAPIResponseHandler{t: t,
-							path:       getUserDataPath,
-							method:     "GET",
-							statusCode: c.RespStatusCode,
-							body:       append([]byte{}, c.ExpectContent...),
+							path:   c.ExpectPath,
+							method: "GET",
+							body:   append([]byte{}, c.ExpectContent...),
 						},
 					))))
 			defer server.Close()
@@ -61,16 +79,9 @@ func TestGetUserData(t *testing.T) {
 				Endpoint: server.URL,
 			})
 
-			resp, err := client.GetUserData(ctx, nil)
-			if len(c.ExpectErr) != 0 {
-				if err == nil {
-					t.Fatalf("expect error, got none")
-				}
-				if e, a := c.ExpectErr, err.Error(); !strings.Contains(a, e) {
-					t.Fatalf("expect error to contain %v, got %v", e, a)
-				}
-				return
-			}
+			resp, err := client.GetMetadata(ctx, &GetMetadataInput{
+				Path: c.Path,
+			})
 			if err != nil {
 				t.Fatalf("expect no error, got %v", err)
 			}

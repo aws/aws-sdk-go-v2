@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/ec2imds"
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/awslabs/smithy-go"
 )
@@ -38,13 +38,13 @@ type mockClient struct {
 }
 
 func (c mockClient) GetMetadata(
-	ctx context.Context, params *ec2imds.GetMetadataInput, optFns ...func(*ec2imds.Options),
+	ctx context.Context, params *imds.GetMetadataInput, optFns ...func(*imds.Options),
 ) (
-	*ec2imds.GetMetadataOutput, error,
+	*imds.GetMetadataOutput, error,
 ) {
 	switch params.Path {
 	case iamSecurityCredsPath:
-		return &ec2imds.GetMetadataOutput{
+		return &imds.GetMetadataOutput{
 			Content: ioutil.NopCloser(strings.NewReader(c.roleName)),
 		}, nil
 
@@ -55,7 +55,7 @@ func (c mockClient) GetMetadata(
 		} else {
 			fmt.Fprintf(&w, credsRespTmpl, c.expireOn)
 		}
-		return &ec2imds.GetMetadataOutput{
+		return &imds.GetMetadataOutput{
 			Content: ioutil.NopCloser(strings.NewReader(w.String())),
 		}, nil
 	default:

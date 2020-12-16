@@ -1,4 +1,4 @@
-package ec2imds
+package imds
 
 import (
 	"net/http"
