@@ -1,0 +1,9 @@
+{
+ "ID": "config-feature-1608146507258154000",
+ "SchemaVersion": 1,
+ "Module": "config",
+ "Type": "feature",
+ "Description": "Update to use moved feature/ec2/imds module",
+ "MinVersion": "",
+ "AffectedModules": null
+}
