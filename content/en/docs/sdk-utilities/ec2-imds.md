@@ -6,7 +6,7 @@ description: "Using the AWS SDK for Go V2 Amazon EC2 Instance Metadata Service C
 
 You can use the {{% alias sdk-go %}} to access the
 [{{% alias service=EC2 %}} Instance Metadata Service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html).
-The [ec2imds]({{% apiref "ec2imds" %}}) Go package provide a [Client]({{% apiref "ec2imds#Client" %}}) type that can
+The [feature/ec2/imds]({{% apiref "feature/ec2/imds" %}}) Go package provide a [Client]({{% apiref "imds#Client" %}}) type that can
 be used to access the {{% alias service=EC2 %}} Instance Metadata Service. The `Client` and associated operations
 can be used similarly to the other AWS service clients provided by the SDK. To learn more information on how to
 configure the SDK, and use service clients see [Configuring the SDK]({{% ref "configuring-sdk" %}}) and
@@ -14,14 +14,14 @@ configure the SDK, and use service clients see [Configuring the SDK]({{% ref "co
 
 The client can help you easily retrieve information about instances on which your applications run, such as its AWS
 Region or local IP address. Typically, you must create and submit HTTP requests to retrieve instance metadata. Instead,
-create an `ec2imds.Client` to access the {{% alias service=EC2 %}} Instance Metadata Service using a programmatic client
+create an `imds.Client` to access the {{% alias service=EC2 %}} Instance Metadata Service using a programmatic client
 like other AWS Services.
 
 For example to construct a client:
 ```go
 import "context"
 import "github.com/aws/aws-sdk-go-v2/config"
-import "github.com/aws/aws-sdk-go-v2/ec2imds"
+import "github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 
 // ...
 
@@ -31,14 +31,14 @@ if err != nil {
 	return
 }
 
-client := ec2imds.NewFromConfig(cfg)
+client := imds.NewFromConfig(cfg)
 ```
 
 Then use the service client to retrieve information from a metadata category such as `local-ipv4`
 (the private IP address of the instance).
 
 ```go
-localip, err := client.GetMetadata(context.Background(), &ec2imds.GetMetadataInput{
+localip, err := client.GetMetadata(context.TODO(), &imds.GetMetadataInput{
 	Path: "local-ipv4",
 })
 if err != nil {
@@ -60,7 +60,7 @@ instance. Instead, use the included `Region` method to easily return
 an instance's Region.
 
 ```go
-region, err := client.GetRegion(context.Background(), &ec2imds.GetRegionInput{})
+region, err := client.GetRegion(context.TODO(), &imds.GetRegionInput{})
 if err != nil {
     log.Printf("Unable to retrieve the region from the EC2 instance %v\n", err)
 }
@@ -68,6 +68,6 @@ if err != nil {
 fmt.Printf("region: %v\n", region)
 ```
 
-For more information about the EC2 metadata utility, see the [ec2imds]({{< apiref ec2imds >}}) package in the
+For more information about the EC2 metadata utility, see the [feature/ec2/imds]({{% apiref "feature/ec2/imds" %}}) package in the
 {{% alias sdk-api %}}.
 

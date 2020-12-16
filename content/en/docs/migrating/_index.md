@@ -24,7 +24,7 @@ Module | Description
 `github.com/aws/aws-sdk-go-v2` | The SDK core
 `github.com/aws/aws-sdk-go-v2/config` | Shared Configuration Loading
 `github.com/aws/aws-sdk-go-v2/credentials` | AWS Credential Providers
-`github.com/aws/aws-sdk-go-v2/ec2imds` | {{% alias service=EC2 %}} Instance Metadata Service Client
+`github.com/aws/aws-sdk-go-v2/feature/ec2/imds` | {{% alias service=EC2 %}} Instance Metadata Service Client
 `github.com/aws/aws-sdk-go-v2/service/` | Service Client Modules
 `github.com/aws/aws-sdk-go-v2/feature/` | High-Level utilities for services, for example the {{% alias service=S3 %}} Transfer Manager
 
@@ -784,7 +784,7 @@ to wait for a {{% alias service=S3 %}} Bucket to exist, you must construct a `Bu
 
 The {{% alias sdk-go %}} provides an {{% alias service=EC2 %}} Instance Metadata Service (IMDS) client that you can use
 to query the local IMDS when executing your application on an {{% alias service=EC2 %}} instance. The IMDS client is
-a separate Go module that can be added to your application by using `go get github.com/aws/aws-sdk-go-v2/ec2imds`. The
+a separate Go module that can be added to your application by using `go get github.com/aws/aws-sdk-go-v2/feature/ec2/imds`. The
 client constructor and method operations have been updated to match the design of the other SDK service clients.
 
 #### Example
@@ -808,11 +808,11 @@ if err != nil {
 
 ````go
 import "context"
-import "github.com/aws/aws-sdk-go-v2/ec2imds"
+import "github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 
 // ...
 
-client := ec2imds.NewFromConfig(cfg)
+client := imds.NewFromConfig(cfg)
 
 region, err := client.GetRegion(context.TODO())
 if err != nil {
