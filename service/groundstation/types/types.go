@@ -70,6 +70,14 @@ type ConfigListItem struct {
 
 // Object containing the parameters of a Config. See the subtype definitions for
 // what each type of Config contains.
+//
+// The following types satisfy this interface:
+//  ConfigTypeDataMemberAntennaDownlinkConfig
+//  ConfigTypeDataMemberAntennaDownlinkDemodDecodeConfig
+//  ConfigTypeDataMemberAntennaUplinkConfig
+//  ConfigTypeDataMemberDataflowEndpointConfig
+//  ConfigTypeDataMemberTrackingConfig
+//  ConfigTypeDataMemberUplinkEchoConfig
 type ConfigTypeData interface {
 	isConfigTypeData()
 }

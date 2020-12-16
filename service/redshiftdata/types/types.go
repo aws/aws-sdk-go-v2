@@ -50,6 +50,14 @@ type ColumnMetadata struct {
 }
 
 // A data value in a column.
+//
+// The following types satisfy this interface:
+//  FieldMemberIsNull
+//  FieldMemberBooleanValue
+//  FieldMemberLongValue
+//  FieldMemberDoubleValue
+//  FieldMemberStringValue
+//  FieldMemberBlobValue
 type Field interface {
 	isField()
 }
