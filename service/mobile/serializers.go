@@ -7,7 +7,7 @@ import (
 	"context"
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/httpbinding"
+	"github.com/awslabs/smithy-go/encoding/httpbinding"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )

@@ -9,7 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/query"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/httpbinding"
+	"github.com/awslabs/smithy-go/encoding/httpbinding"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
