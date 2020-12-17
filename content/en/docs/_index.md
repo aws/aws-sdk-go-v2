@@ -1,6 +1,6 @@
 ---
-title: "Documentation"
-linkTitle: "Documentation"
+title: "User Guide"
+linkTitle: "User Guide"
 date: "2020-11-12"
 weight: 1
 menu:
