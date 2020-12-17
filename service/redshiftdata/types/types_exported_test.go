@@ -37,3 +37,9 @@ func ExampleField_outputUsage() {
 
 	}
 }
+
+var _ *string
+var _ *bool
+var _ *int64
+var _ *float64
+var _ []byte

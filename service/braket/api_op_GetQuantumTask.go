@@ -49,6 +49,7 @@ type GetQuantumTaskOutput struct {
 	DeviceArn *string
 
 	// The parameters for the device on which the task ran.
+	//
 	// This value conforms to the media type: application/json
 	//
 	// This member is required.

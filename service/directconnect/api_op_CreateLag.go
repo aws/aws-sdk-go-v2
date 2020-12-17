@@ -89,6 +89,8 @@ type CreateLagOutput struct {
 	AllowsHostedConnections bool
 
 	// The AWS Direct Connect endpoint that hosts the LAG.
+	//
+	// Deprecated: This member has been deprecated.
 	AwsDevice *string
 
 	// The AWS Direct Connect endpoint that hosts the LAG.

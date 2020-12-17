@@ -26,8 +26,11 @@ func (c *Client) RegisterClient(ctx context.Context, params *RegisterClientInput
 }
 
 type RegisterClientInput struct {
+
+	// This member is required.
 	ClientName *string
 
+	// This member is required.
 	ClientType *string
 
 	Scopes []string

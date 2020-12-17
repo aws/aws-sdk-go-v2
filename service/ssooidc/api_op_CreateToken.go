@@ -26,12 +26,17 @@ func (c *Client) CreateToken(ctx context.Context, params *CreateTokenInput, optF
 }
 
 type CreateTokenInput struct {
+
+	// This member is required.
 	ClientId *string
 
+	// This member is required.
 	ClientSecret *string
 
+	// This member is required.
 	DeviceCode *string
 
+	// This member is required.
 	GrantType *string
 
 	Code *string

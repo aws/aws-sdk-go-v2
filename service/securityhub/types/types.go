@@ -2013,6 +2013,8 @@ type AwsIamAccessKeyDetails struct {
 	// The user associated with the IAM access key related to a finding. The UserName
 	// parameter has been replaced with the PrincipalName parameter because access keys
 	// can also be assigned to principals that are not IAM users.
+	//
+	// Deprecated: This field is deprecated, use PrincipalName instead.
 	UserName *string
 }
 
@@ -3943,6 +3945,8 @@ type AwsSecurityFinding struct {
 	Workflow *Workflow
 
 	// The workflow state of a finding.
+	//
+	// Deprecated: This field is deprecated, use Workflow.Status instead.
 	WorkflowState WorkflowState
 }
 

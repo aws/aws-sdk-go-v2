@@ -16,6 +16,8 @@ import (
 // the transcoding process. The action attempts to assume the specified IAM role,
 // checks read access to the input and output buckets, and tries to send a test
 // notification to Amazon SNS topics that you specify.
+//
+// Deprecated: This operation has been deprecated.
 func (c *Client) TestRole(ctx context.Context, params *TestRoleInput, optFns ...func(*Options)) (*TestRoleOutput, error) {
 	if params == nil {
 		params = &TestRoleInput{}

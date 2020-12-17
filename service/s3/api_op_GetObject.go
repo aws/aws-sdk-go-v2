@@ -306,6 +306,8 @@ type GetObjectOutput struct {
 	LastModified *time.Time
 
 	// A map of metadata to store with the object in S3.
+	//
+	// Map keys will be normalized to lower-case.
 	Metadata map[string]string
 
 	// This is set to the number of metadata entries not returned in x-amz-meta

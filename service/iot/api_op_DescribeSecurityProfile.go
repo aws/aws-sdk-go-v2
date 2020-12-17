@@ -42,6 +42,8 @@ type DescribeSecurityProfileOutput struct {
 	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors, but it is also retained for any
 	// metric specified here.
+	//
+	// Deprecated: Use additionalMetricsToRetainV2.
 	AdditionalMetricsToRetain []string
 
 	// A list of metrics whose data is retained (stored). By default, data is retained

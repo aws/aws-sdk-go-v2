@@ -906,6 +906,10 @@ type ClientVpnEndpoint struct {
 
 	// Information about the associated target networks. A target network is a subnet
 	// in a VPC.
+	//
+	// Deprecated: This property is deprecated. To view the target networks associated
+	// with a Client VPN endpoint, call DescribeClientVpnTargetNetworks and inspect the
+	// clientVpnTargetNetworks response element.
 	AssociatedTargetNetworks []AssociatedTargetNetwork
 
 	// Information about the authentication method used by the Client VPN endpoint.

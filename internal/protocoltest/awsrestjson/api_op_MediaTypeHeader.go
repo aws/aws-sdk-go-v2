@@ -26,10 +26,14 @@ func (c *Client) MediaTypeHeader(ctx context.Context, params *MediaTypeHeaderInp
 }
 
 type MediaTypeHeaderInput struct {
+
+	// This value conforms to the media type: application/json
 	Json *string
 }
 
 type MediaTypeHeaderOutput struct {
+
+	// This value conforms to the media type: application/json
 	Json *string
 
 	// Metadata pertaining to the operation's result.

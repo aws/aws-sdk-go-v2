@@ -286,6 +286,8 @@ type DeploymentInfo struct {
 	// Provides information about the results of a deployment, such as whether
 	// instances in the original environment in a blue/green deployment were not
 	// terminated.
+	//
+	// Deprecated: This member has been deprecated.
 	AdditionalDeploymentStatusInfo *string
 
 	// The application name.
@@ -841,6 +843,8 @@ type InstanceSummary struct {
 	//
 	// * Unknown: The deployment status is unknown
 	// for this instance.
+	//
+	// Deprecated: InstanceStatus is deprecated, use TargetStatus instead.
 	Status InstanceStatus
 }
 
@@ -1097,6 +1101,9 @@ type RevisionLocation struct {
 
 	// Information about the location of an AWS Lambda deployment revision stored as a
 	// RawString.
+	//
+	// Deprecated: RawString and String revision type are deprecated, use
+	// AppSpecContent type instead.
 	String_ *RawString
 }
 

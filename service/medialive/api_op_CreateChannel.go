@@ -61,6 +61,8 @@ type CreateChannelInput struct {
 	RequestId *string
 
 	// Deprecated field that's only usable by whitelisted customers.
+	//
+	// Deprecated: This member has been deprecated.
 	Reserved *string
 
 	// An optional Amazon Resource Name (ARN) of the role to assume when running the

@@ -16,6 +16,8 @@ import (
 // an interconnect. Allocates a VLAN number and a specified amount of bandwidth for
 // use by a hosted connection on the specified interconnect. Intended for use by
 // AWS Direct Connect Partners only.
+//
+// Deprecated: This operation has been deprecated.
 func (c *Client) AllocateConnectionOnInterconnect(ctx context.Context, params *AllocateConnectionOnInterconnectInput, optFns ...func(*Options)) (*AllocateConnectionOnInterconnectOutput, error) {
 	if params == nil {
 		params = &AllocateConnectionOnInterconnectInput{}
@@ -67,6 +69,8 @@ type AllocateConnectionOnInterconnectInput struct {
 type AllocateConnectionOnInterconnectOutput struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
+	//
+	// Deprecated: This member has been deprecated.
 	AwsDevice *string
 
 	// The Direct Connect endpoint on which the physical connection terminates.

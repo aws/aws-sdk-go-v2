@@ -13,6 +13,8 @@ import (
 // Removes AWS Shield Advanced from an account. AWS Shield Advanced requires a
 // 1-year subscription commitment. You cannot delete a subscription prior to the
 // completion of that commitment.
+//
+// Deprecated: This operation has been deprecated.
 func (c *Client) DeleteSubscription(ctx context.Context, params *DeleteSubscriptionInput, optFns ...func(*Options)) (*DeleteSubscriptionOutput, error) {
 	if params == nil {
 		params = &DeleteSubscriptionInput{}

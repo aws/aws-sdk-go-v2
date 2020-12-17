@@ -29,12 +29,16 @@ func (c *Client) StreamingTraitsWithMediaType(ctx context.Context, params *Strea
 }
 
 type StreamingTraitsWithMediaTypeInput struct {
+
+	// This value conforms to the media type: text/plain
 	Blob io.Reader
 
 	Foo *string
 }
 
 type StreamingTraitsWithMediaTypeOutput struct {
+
+	// This value conforms to the media type: text/plain
 	Blob io.ReadCloser
 
 	Foo *string

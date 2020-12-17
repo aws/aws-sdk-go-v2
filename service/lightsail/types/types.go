@@ -1030,6 +1030,8 @@ type Disk struct {
 	// (Deprecated) The attachment state of the disk. In releases prior to November 14,
 	// 2017, this parameter returned attached for system disks in the API response. It
 	// is now deprecated, but still included in the response. Use isAttached instead.
+	//
+	// Deprecated: This member has been deprecated.
 	AttachmentState *string
 
 	// The date when the disk was created.
@@ -1038,6 +1040,8 @@ type Disk struct {
 	// (Deprecated) The number of GB in use by the disk. In releases prior to November
 	// 14, 2017, this parameter was not included in the API response. It is now
 	// deprecated.
+	//
+	// Deprecated: This member has been deprecated.
 	GbInUse *int32
 
 	// The input/output operations per second (IOPS) of the disk.
@@ -1239,6 +1243,8 @@ type DomainEntry struct {
 
 	// (Deprecated) The options for the domain entry. In releases prior to November 29,
 	// 2017, this parameter was not included in the API response. It is now deprecated.
+	//
+	// Deprecated: This member has been deprecated.
 	Options map[string]string
 
 	// The target AWS name server (e.g., ns-111.awsdns-22.com.). For Lightsail load

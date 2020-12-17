@@ -118,6 +118,7 @@ type PutSessionInput struct {
 type PutSessionOutput struct {
 
 	// A list of active contexts for the session.
+	//
 	// This value conforms to the media type: application/json
 	ActiveContexts *string
 
@@ -171,6 +172,7 @@ type PutSessionOutput struct {
 	MessageFormat types.MessageFormatType
 
 	// Map of key/value pairs representing session-specific context information.
+	//
 	// This value conforms to the media type: application/json
 	SessionAttributes *string
 
@@ -190,6 +192,7 @@ type PutSessionOutput struct {
 	// valueSelectionStrategy is set to TOP_RESOLUTION Amazon Lex returns the first
 	// value in the resolution list or, if there is no resolution list, null. If you
 	// don't specify a valueSelectionStrategy the default is ORIGINAL_VALUE.
+	//
 	// This value conforms to the media type: application/json
 	Slots *string
 

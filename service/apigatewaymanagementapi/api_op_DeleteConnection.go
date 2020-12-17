@@ -27,6 +27,8 @@ func (c *Client) DeleteConnection(ctx context.Context, params *DeleteConnectionI
 }
 
 type DeleteConnectionInput struct {
+
+	// This member is required.
 	ConnectionId *string
 }
 

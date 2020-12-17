@@ -14,8 +14,10 @@ type ChildShard struct {
 	// This member is required.
 	HashKeyRange *HashKeyRange
 
+	// This member is required.
 	ParentShards []string
 
+	// This member is required.
 	ShardId *string
 }
 
@@ -257,6 +259,8 @@ type Shard struct {
 }
 
 type ShardFilter struct {
+
+	// This member is required.
 	Type ShardFilterType
 
 	ShardId *string

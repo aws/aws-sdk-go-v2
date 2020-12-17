@@ -270,6 +270,8 @@ type CacheBehavior struct {
 	// (Expiration)
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
+	//
+	// Deprecated: This member has been deprecated.
 	DefaultTTL *int64
 
 	// The value of ID for the field-level encryption configuration that you want
@@ -294,6 +296,8 @@ type CacheBehavior struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html)
 	// in the Amazon CloudFront Developer Guide. A complex type that specifies how
 	// CloudFront handles query strings, cookies, and HTTP headers.
+	//
+	// Deprecated: This member has been deprecated.
 	ForwardedValues *ForwardedValues
 
 	// A complex type that contains zero or more Lambda function associations for a
@@ -313,6 +317,8 @@ type CacheBehavior struct {
 	// information, see Managing How Long Content Stays in an Edge Cache (Expiration)
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
+	//
+	// Deprecated: This member has been deprecated.
 	MaxTTL *int64
 
 	// This field is deprecated. We recommend that you use the MinTTL field in a cache
@@ -329,6 +335,8 @@ type CacheBehavior struct {
 	// in the Amazon CloudFront Developer Guide. You must specify 0 for MinTTL if you
 	// configure CloudFront to forward all headers to your origin (under Headers, if
 	// you specify 1 for Quantity and * for Name).
+	//
+	// Deprecated: This member has been deprecated.
 	MinTTL *int64
 
 	// The unique identifier of the origin request policy that is attached to this
@@ -1140,6 +1148,8 @@ type DefaultCacheBehavior struct {
 	// (Expiration)
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
+	//
+	// Deprecated: This member has been deprecated.
 	DefaultTTL *int64
 
 	// The value of ID for the field-level encryption configuration that you want
@@ -1164,6 +1174,8 @@ type DefaultCacheBehavior struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html)
 	// in the Amazon CloudFront Developer Guide. A complex type that specifies how
 	// CloudFront handles query strings, cookies, and HTTP headers.
+	//
+	// Deprecated: This member has been deprecated.
 	ForwardedValues *ForwardedValues
 
 	// A complex type that contains zero or more Lambda function associations for a
@@ -1183,6 +1195,8 @@ type DefaultCacheBehavior struct {
 	// information, see Managing How Long Content Stays in an Edge Cache (Expiration)
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
+	//
+	// Deprecated: This member has been deprecated.
 	MaxTTL *int64
 
 	// This field is deprecated. We recommend that you use the MinTTL field in a cache
@@ -1199,6 +1213,8 @@ type DefaultCacheBehavior struct {
 	// in the Amazon CloudFront Developer Guide. You must specify 0 for MinTTL if you
 	// configure CloudFront to forward all headers to your origin (under Headers, if
 	// you specify 1 for Quantity and * for Name).
+	//
+	// Deprecated: This member has been deprecated.
 	MinTTL *int64
 
 	// The unique identifier of the origin request policy that is attached to the
@@ -3745,6 +3761,8 @@ type ViewerCertificate struct {
 	// * IAMCertificateId
 	//
 	// * CloudFrontDefaultCertificate
+	//
+	// Deprecated: This member has been deprecated.
 	Certificate *string
 
 	// This field is deprecated. Use one of the following fields instead:
@@ -3755,6 +3773,8 @@ type ViewerCertificate struct {
 	// * IAMCertificateId
 	//
 	// * CloudFrontDefaultCertificate
+	//
+	// Deprecated: This member has been deprecated.
 	CertificateSource CertificateSource
 
 	// If the distribution uses the CloudFront domain name such as

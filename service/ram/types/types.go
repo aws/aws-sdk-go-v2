@@ -153,6 +153,8 @@ type ResourceShareInvitation struct {
 	// To view the resources associated with a pending resource share invitation, use
 	// ListPendingInvitationResources
 	// (https://docs.aws.amazon.com/ram/latest/APIReference/API_ListPendingInvitationResources.html).
+	//
+	// Deprecated: This member has been deprecated. Use ListPendingInvitationResources.
 	ResourceShareAssociations []ResourceShareAssociation
 
 	// The Amazon Resource Name (ARN) of the invitation.

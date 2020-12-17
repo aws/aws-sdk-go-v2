@@ -192,6 +192,10 @@ type LogStream struct {
 	// The number of bytes stored. Important: On June 17, 2019, this parameter was
 	// deprecated for log streams, and is always reported as zero. This change applies
 	// only to log streams. The storedBytes parameter for log groups is not affected.
+	//
+	// Deprecated: Starting on June 17, 2019, this parameter will be deprecated for log
+	// streams, and will be reported as zero. This change applies only to log streams.
+	// The storedBytes parameter for log groups is not affected.
 	StoredBytes *int64
 
 	// The sequence token.

@@ -29,6 +29,8 @@ func (c *Client) GetConnection(ctx context.Context, params *GetConnectionInput, 
 }
 
 type GetConnectionInput struct {
+
+	// This member is required.
 	ConnectionId *string
 }
 

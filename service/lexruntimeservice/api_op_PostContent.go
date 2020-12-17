@@ -194,6 +194,7 @@ type PostContentInput struct {
 	// don't specify a list of contexts, Amazon Lex will use the current list of
 	// contexts for the session. If you specify an empty list, all contexts for the
 	// session are cleared.
+	//
 	// This value conforms to the media type: application/json
 	ActiveContexts *string
 
@@ -205,6 +206,7 @@ type PostContentInput struct {
 	// Don't create any request attributes with the prefix x-amz-lex:. For more
 	// information, see Setting Request Attributes
 	// (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs).
+	//
 	// This value conforms to the media type: application/json
 	RequestAttributes *string
 
@@ -215,6 +217,7 @@ type PostContentInput struct {
 	// requestAttributes headers is limited to 12 KB. For more information, see Setting
 	// Session Attributes
 	// (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs).
+	//
 	// This value conforms to the media type: application/json
 	SessionAttributes *string
 }
@@ -225,6 +228,7 @@ type PostContentOutput struct {
 	// is fulfilled or by calling the PostContent, PostText, or PutSession operation.
 	// You can use a context to control the intents that can follow up an intent, or to
 	// modify the operation of your application.
+	//
 	// This value conforms to the media type: application/json
 	ActiveContexts *string
 
@@ -232,6 +236,7 @@ type PostContentOutput struct {
 	// Each alternative includes a score that indicates how confident Amazon Lex is
 	// that the intent matches the user's intent. The intents are sorted by the
 	// confidence score.
+	//
 	// This value conforms to the media type: application/json
 	AlternativeIntents *string
 
@@ -335,6 +340,7 @@ type PostContentOutput struct {
 	// intent is the one that matches the user's intent. The score is between 0.0 and
 	// 1.0. The score is a relative score, not an absolute score. The score may change
 	// based on improvements to Amazon Lex.
+	//
 	// This value conforms to the media type: application/json
 	NluIntentConfidence *string
 
@@ -344,6 +350,7 @@ type PostContentOutput struct {
 	SentimentResponse *string
 
 	// Map of key/value pairs representing the session-specific context information.
+	//
 	// This value conforms to the media type: application/json
 	SessionAttributes *string
 
@@ -363,6 +370,7 @@ type PostContentOutput struct {
 	// values. If valueSelectionStrategy is set to TOP_RESOLUTION Amazon Lex returns
 	// the first value in the resolution list or, if there is no resolution list, null.
 	// If you don't specify a valueSelectionStrategy, the default is ORIGINAL_VALUE.
+	//
 	// This value conforms to the media type: application/json
 	Slots *string
 

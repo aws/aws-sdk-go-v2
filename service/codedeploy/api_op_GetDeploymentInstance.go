@@ -12,6 +12,8 @@ import (
 )
 
 // Gets information about an instance as part of a deployment.
+//
+// Deprecated: This operation is deprecated, use GetDeploymentTarget instead.
 func (c *Client) GetDeploymentInstance(ctx context.Context, params *GetDeploymentInstanceInput, optFns ...func(*Options)) (*GetDeploymentInstanceOutput, error) {
 	if params == nil {
 		params = &GetDeploymentInstanceInput{}
@@ -45,6 +47,8 @@ type GetDeploymentInstanceInput struct {
 type GetDeploymentInstanceOutput struct {
 
 	// Information about the instance.
+	//
+	// Deprecated: InstanceSummary is deprecated, use DeploymentTarget instead.
 	InstanceSummary *types.InstanceSummary
 
 	// Metadata pertaining to the operation's result.

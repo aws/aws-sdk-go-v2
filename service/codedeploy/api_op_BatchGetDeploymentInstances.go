@@ -16,6 +16,8 @@ import (
 // method works with EC2/On-premises and AWS Lambda compute platforms. The newer
 // BatchGetDeploymentTargets works with all compute platforms. The maximum number
 // of instances that can be returned is 25.
+//
+// Deprecated: This operation is deprecated, use BatchGetDeploymentTargets instead.
 func (c *Client) BatchGetDeploymentInstances(ctx context.Context, params *BatchGetDeploymentInstancesInput, optFns ...func(*Options)) (*BatchGetDeploymentInstancesOutput, error) {
 	if params == nil {
 		params = &BatchGetDeploymentInstancesInput{}

@@ -4932,7 +4932,7 @@ func awsRestxml_deserializeOpHttpBindingsGetObjectOutput(v *GetObjectOutput, res
 				v.Metadata = map[string]string{}
 			}
 			headerValues[0] = strings.TrimSpace(headerValues[0])
-			v.Metadata[headerKey[lenPrefix:]] = headerValues[0]
+			v.Metadata[strings.ToLower(headerKey[lenPrefix:])] = headerValues[0]
 		}
 	}
 
@@ -6227,7 +6227,7 @@ func awsRestxml_deserializeOpHttpBindingsHeadObjectOutput(v *HeadObjectOutput, r
 				v.Metadata = map[string]string{}
 			}
 			headerValues[0] = strings.TrimSpace(headerValues[0])
-			v.Metadata[headerKey[lenPrefix:]] = headerValues[0]
+			v.Metadata[strings.ToLower(headerKey[lenPrefix:])] = headerValues[0]
 		}
 	}
 

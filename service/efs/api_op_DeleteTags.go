@@ -17,6 +17,8 @@ import (
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
 // in the AWS Billing and Cost Management User Guide. This operation requires
 // permissions for the elasticfilesystem:DeleteTags action.
+//
+// Deprecated: Use UntagResource.
 func (c *Client) DeleteTags(ctx context.Context, params *DeleteTagsInput, optFns ...func(*Options)) (*DeleteTagsOutput, error) {
 	if params == nil {
 		params = &DeleteTagsInput{}

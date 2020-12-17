@@ -29,6 +29,7 @@ func (c *Client) CreateQuantumTask(ctx context.Context, params *CreateQuantumTas
 type CreateQuantumTaskInput struct {
 
 	// The action associated with the task.
+	//
 	// This value conforms to the media type: application/json
 	//
 	// This member is required.
@@ -60,6 +61,7 @@ type CreateQuantumTaskInput struct {
 	Shots *int64
 
 	// The parameters for the device to run the task on.
+	//
 	// This value conforms to the media type: application/json
 	DeviceParameters *string
 }

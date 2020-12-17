@@ -72,6 +72,9 @@ type PutBucketEncryptionInput struct {
 	// The base64-encoded 128-bit MD5 digest of the server-side encryption
 	// configuration. This parameter is auto-populated when using the command from the
 	// CLI.
+	//
+	// Deprecated: Content-MD5 header will now be automatically computed and injected
+	// in associated operation's Http request.
 	ContentMD5 *string
 
 	// The account id of the expected bucket owner. If the bucket is owned by a

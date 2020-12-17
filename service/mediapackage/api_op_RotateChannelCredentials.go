@@ -13,6 +13,9 @@ import (
 
 // Changes the Channel's first IngestEndpoint's username and password. WARNING -
 // This API is deprecated. Please use RotateIngestEndpointCredentials instead
+//
+// Deprecated: This API is deprecated. Please use RotateIngestEndpointCredentials
+// instead
 func (c *Client) RotateChannelCredentials(ctx context.Context, params *RotateChannelCredentialsInput, optFns ...func(*Options)) (*RotateChannelCredentialsOutput, error) {
 	if params == nil {
 		params = &RotateChannelCredentialsInput{}

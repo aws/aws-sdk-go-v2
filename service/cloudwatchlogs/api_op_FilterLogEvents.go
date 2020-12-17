@@ -61,6 +61,10 @@ type FilterLogEventsInput struct {
 	// on. The default is false. Important: Starting on June 17, 2019, this parameter
 	// is ignored and the value is assumed to be true. The response from this operation
 	// always interleaves events from multiple log streams within a log group.
+	//
+	// Deprecated: Starting on June 17, 2019, this parameter will be ignored and the
+	// value will be assumed to be true. The response from this operation will always
+	// interleave events from multiple log streams within a log group.
 	Interleaved *bool
 
 	// The maximum number of events to return. The default is 10,000 events.

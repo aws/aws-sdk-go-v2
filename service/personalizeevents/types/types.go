@@ -47,6 +47,7 @@ type Event struct {
 	// {"numberOfRatings": "12"} The keys use camel case names that match the fields in
 	// the Interactions schema. In the above example, the numberOfRatings would match
 	// the 'NUMBER_OF_RATINGS' field defined in the Interactions schema.
+	//
 	// This value conforms to the media type: application/json
 	Properties *string
 
@@ -67,6 +68,7 @@ type Item struct {
 	// names that match the fields in the Items schema. In the above example, the
 	// numberOfRatings would match the 'NUMBER_OF_RATINGS' field defined in the Items
 	// schema.
+	//
 	// This value conforms to the media type: application/json
 	Properties *string
 }
@@ -84,6 +86,7 @@ type User struct {
 	// case names that match the fields in the Users schema. In the above example, the
 	// numberOfVideosWatched would match the 'NUMBER_OF_VIDEOS_WATCHED' field defined
 	// in the Users schema.
+	//
 	// This value conforms to the media type: application/json
 	Properties *string
 }

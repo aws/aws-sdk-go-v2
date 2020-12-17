@@ -1564,7 +1564,7 @@ func awsRestxml_deserializeOpHttpBindingsHttpPrefixHeadersOutput(v *HttpPrefixHe
 				v.FooMap = map[string]string{}
 			}
 			headerValues[0] = strings.TrimSpace(headerValues[0])
-			v.FooMap[headerKey[lenPrefix:]] = headerValues[0]
+			v.FooMap[strings.ToLower(headerKey[lenPrefix:])] = headerValues[0]
 		}
 	}
 

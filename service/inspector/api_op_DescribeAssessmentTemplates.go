@@ -29,6 +29,8 @@ func (c *Client) DescribeAssessmentTemplates(ctx context.Context, params *Descri
 }
 
 type DescribeAssessmentTemplatesInput struct {
+
+	// This member is required.
 	AssessmentTemplateArns []string
 }
 

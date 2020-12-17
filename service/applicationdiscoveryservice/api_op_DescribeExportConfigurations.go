@@ -14,6 +14,8 @@ import (
 // DescribeExportConfigurations is deprecated. Use DescribeImportTasks
 // (https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html),
 // instead.
+//
+// Deprecated: This operation has been deprecated.
 func (c *Client) DescribeExportConfigurations(ctx context.Context, params *DescribeExportConfigurationsInput, optFns ...func(*Options)) (*DescribeExportConfigurationsOutput, error) {
 	if params == nil {
 		params = &DescribeExportConfigurationsInput{}

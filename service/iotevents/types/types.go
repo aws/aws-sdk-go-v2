@@ -732,6 +732,10 @@ type SetTimerAction struct {
 
 	// The number of seconds until the timer expires. The minimum value is 60 seconds
 	// to ensure accuracy. The maximum value is 31622400 seconds.
+	//
+	// Deprecated: seconds is deprecated. You can use durationExpression for
+	// SetTimerAction. The value of seconds can be used as a string expression for
+	// durationExpression.
 	Seconds *int32
 }
 

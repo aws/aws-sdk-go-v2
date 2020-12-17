@@ -1843,6 +1843,7 @@ type HumanLoopActivationConditionsConfig struct {
 	// in Amazon Augmented AI
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-human-fallback-conditions-json-schema.html)
 	// in the Amazon SageMaker Developer Guide.
+	//
 	// This value conforms to the media type: application/json
 	//
 	// This member is required.

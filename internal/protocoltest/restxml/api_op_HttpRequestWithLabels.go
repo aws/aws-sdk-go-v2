@@ -34,16 +34,22 @@ type HttpRequestWithLabelsInput struct {
 	// This member is required.
 	Boolean *bool
 
+	// This member is required.
 	Double *float64
 
+	// This member is required.
 	Float *float32
 
+	// This member is required.
 	Integer *int32
 
+	// This member is required.
 	Long *int64
 
+	// This member is required.
 	Short *int16
 
+	// This member is required.
 	String_ *string
 
 	// Note that this member has no format, so it's serialized as an RFC 3399

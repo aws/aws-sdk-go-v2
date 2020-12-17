@@ -85,6 +85,8 @@ type UpdateDestinationInput struct {
 	RedshiftDestinationUpdate *types.RedshiftDestinationUpdate
 
 	// [Deprecated] Describes an update for a destination in Amazon S3.
+	//
+	// Deprecated: This member has been deprecated.
 	S3DestinationUpdate *types.S3DestinationUpdate
 
 	// Describes an update for a destination in Splunk.

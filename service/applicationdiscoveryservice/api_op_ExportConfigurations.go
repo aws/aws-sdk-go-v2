@@ -16,6 +16,8 @@ import (
 // connections, servers, and system performance. This API returns an export ID that
 // you can query using the DescribeExportConfigurations API. The system imposes a
 // limit of two configuration exports in six hours.
+//
+// Deprecated: This operation has been deprecated.
 func (c *Client) ExportConfigurations(ctx context.Context, params *ExportConfigurationsInput, optFns ...func(*Options)) (*ExportConfigurationsOutput, error) {
 	if params == nil {
 		params = &ExportConfigurationsInput{}

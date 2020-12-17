@@ -5,6 +5,7 @@ package types_test
 import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/types"
+	"time"
 )
 
 func ExampleMyUnion_outputUsage() {
@@ -18,13 +19,13 @@ func ExampleMyUnion_outputUsage() {
 		_ = v.Value // Value is bool
 
 	case *types.MyUnionMemberEnumValue:
-		_ = v.Value // Value is FooEnum
+		_ = v.Value // Value is types.FooEnum
 
 	case *types.MyUnionMemberListValue:
-		_ = v.Value // Value is StringList
+		_ = v.Value // Value is []string
 
 	case *types.MyUnionMemberMapValue:
-		_ = v.Value // Value is StringMap
+		_ = v.Value // Value is map[string]string
 
 	case *types.MyUnionMemberNumberValue:
 		_ = v.Value // Value is int32
@@ -33,10 +34,10 @@ func ExampleMyUnion_outputUsage() {
 		_ = v.Value // Value is string
 
 	case *types.MyUnionMemberStructureValue:
-		_ = v.Value // Value is GreetingStruct
+		_ = v.Value // Value is types.GreetingStruct
 
 	case *types.MyUnionMemberTimestampValue:
-		_ = v.Value // Value is Time
+		_ = v.Value // Value is time.Time
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -46,3 +47,13 @@ func ExampleMyUnion_outputUsage() {
 
 	}
 }
+
+var _ map[string]string
+var _ types.FooEnum
+var _ []string
+var _ *string
+var _ *types.GreetingStruct
+var _ *int32
+var _ *bool
+var _ *time.Time
+var _ []byte

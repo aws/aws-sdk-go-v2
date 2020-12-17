@@ -94,6 +94,8 @@ type PutScalingPolicyInput struct {
 	MinAdjustmentMagnitude *int32
 
 	// Available for backward compatibility. Use MinAdjustmentMagnitude instead.
+	//
+	// Deprecated: This member has been deprecated.
 	MinAdjustmentStep *int32
 
 	// One of the following policy types:

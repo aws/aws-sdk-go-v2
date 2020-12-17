@@ -12,22 +12,22 @@ func ExampleConfigTypeData_outputUsage() {
 	// type switches can be used to check the union value
 	switch v := union.(type) {
 	case *types.ConfigTypeDataMemberAntennaDownlinkConfig:
-		_ = v.Value // Value is AntennaDownlinkConfig
+		_ = v.Value // Value is types.AntennaDownlinkConfig
 
 	case *types.ConfigTypeDataMemberAntennaDownlinkDemodDecodeConfig:
-		_ = v.Value // Value is AntennaDownlinkDemodDecodeConfig
+		_ = v.Value // Value is types.AntennaDownlinkDemodDecodeConfig
 
 	case *types.ConfigTypeDataMemberAntennaUplinkConfig:
-		_ = v.Value // Value is AntennaUplinkConfig
+		_ = v.Value // Value is types.AntennaUplinkConfig
 
 	case *types.ConfigTypeDataMemberDataflowEndpointConfig:
-		_ = v.Value // Value is DataflowEndpointConfig
+		_ = v.Value // Value is types.DataflowEndpointConfig
 
 	case *types.ConfigTypeDataMemberTrackingConfig:
-		_ = v.Value // Value is TrackingConfig
+		_ = v.Value // Value is types.TrackingConfig
 
 	case *types.ConfigTypeDataMemberUplinkEchoConfig:
-		_ = v.Value // Value is UplinkEchoConfig
+		_ = v.Value // Value is types.UplinkEchoConfig
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -37,3 +37,10 @@ func ExampleConfigTypeData_outputUsage() {
 
 	}
 }
+
+var _ *types.TrackingConfig
+var _ *types.UplinkEchoConfig
+var _ *types.AntennaDownlinkDemodDecodeConfig
+var _ *types.AntennaUplinkConfig
+var _ *types.AntennaDownlinkConfig
+var _ *types.DataflowEndpointConfig

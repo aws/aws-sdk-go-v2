@@ -28,18 +28,26 @@ func (c *Client) HttpRequestWithLabelsAndTimestampFormat(ctx context.Context, pa
 }
 
 type HttpRequestWithLabelsAndTimestampFormatInput struct {
+
+	// This member is required.
 	DefaultFormat *time.Time
 
+	// This member is required.
 	MemberDateTime *time.Time
 
+	// This member is required.
 	MemberEpochSeconds *time.Time
 
+	// This member is required.
 	MemberHttpDate *time.Time
 
+	// This member is required.
 	TargetDateTime *time.Time
 
+	// This member is required.
 	TargetEpochSeconds *time.Time
 
+	// This member is required.
 	TargetHttpDate *time.Time
 }
 

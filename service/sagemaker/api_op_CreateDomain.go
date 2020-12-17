@@ -93,6 +93,8 @@ type CreateDomainInput struct {
 	AppNetworkAccessType types.AppNetworkAccessType
 
 	// This member is deprecated and replaced with KmsKeyId.
+	//
+	// Deprecated: This property is deprecated, use KmsKeyId instead.
 	HomeEfsFileSystemKmsKeyId *string
 
 	// SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain with an

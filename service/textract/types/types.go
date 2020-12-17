@@ -224,6 +224,7 @@ type HumanLoopActivationOutput struct {
 
 	// Shows the result of condition evaluations, including those conditions which
 	// activated a human review.
+	//
 	// This value conforms to the media type: application/json
 	HumanLoopActivationConditionsEvaluationResults *string
 

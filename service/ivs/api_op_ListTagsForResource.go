@@ -43,6 +43,8 @@ type ListTagsForResourceInput struct {
 }
 
 type ListTagsForResourceOutput struct {
+
+	// This member is required.
 	Tags map[string]string
 
 	// If there are more tags than maxResults, use nextToken in the request to get the

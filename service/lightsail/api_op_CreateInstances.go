@@ -71,6 +71,8 @@ type CreateInstancesInput struct {
 
 	// (Deprecated) The name for your custom image. In releases prior to June 12, 2017,
 	// this parameter was ignored by the API. It is now deprecated.
+	//
+	// Deprecated: This member has been deprecated.
 	CustomImageName *string
 
 	// The name of your key pair.

@@ -37,6 +37,7 @@ type ExportSchemaInput struct {
 	// This member is required.
 	SchemaName *string
 
+	// This member is required.
 	Type *string
 
 	// Specifying this limits the results to only this schema version.

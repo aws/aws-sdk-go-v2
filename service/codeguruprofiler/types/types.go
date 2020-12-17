@@ -88,9 +88,13 @@ type ProfileTime struct {
 }
 
 type FrameMetric struct {
+
+	// This member is required.
 	FrameName *string
 
+	// This member is required.
 	ThreadStates []string
 
+	// This member is required.
 	Type MetricType
 }

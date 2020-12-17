@@ -26,10 +26,14 @@ func (c *Client) StartDeviceAuthorization(ctx context.Context, params *StartDevi
 }
 
 type StartDeviceAuthorizationInput struct {
+
+	// This member is required.
 	ClientId *string
 
+	// This member is required.
 	ClientSecret *string
 
+	// This member is required.
 	StartUrl *string
 }
 
