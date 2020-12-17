@@ -259,6 +259,24 @@ func disableAcceptEncodingGzip(stack *middleware.Stack) error {
 	return acceptencodingcust.AddAcceptEncodingGzip(stack, acceptencodingcust.AddAcceptEncodingGzipOptions{})
 }
 
+// ResponseError provides the HTTP centric error type wrapping the underlying error
+// with the HTTP response value and the deserialized RequestID.
+type ResponseError interface {
+	error
+
+	ServiceHostID() string
+	ServiceRequestID() string
+}
+
+var _ ResponseError = (*s3shared.ResponseError)(nil)
+
+// GetHostIDMetadata retrieves the host id from middleware metadata returns host id
+// as string along with a boolean indicating presence of hostId on middleware
+// metadata.
+func GetHostIDMetadata(metadata middleware.Metadata) (string, bool) {
+	return s3shared.GetHostIDMetadata(metadata)
+}
+
 func addRequestResponseLogging(stack *middleware.Stack, o Options) error {
 	return stack.Deserialize.Add(&smithyhttp.RequestResponseLogger{
 		LogRequest:          o.ClientLogMode.IsRequest(),
