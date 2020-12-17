@@ -52,6 +52,8 @@ type ListStateMachinesInput struct {
 }
 
 type ListStateMachinesOutput struct {
+
+	// This member is required.
 	StateMachines []types.StateMachineListItem
 
 	// If nextToken is returned, there are more results available. The value of

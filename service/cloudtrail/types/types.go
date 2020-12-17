@@ -306,6 +306,8 @@ type Trail struct {
 	SnsTopicARN *string
 
 	// This field is no longer in use. Use SnsTopicARN.
+	//
+	// Deprecated: This member has been deprecated.
 	SnsTopicName *string
 
 	// Specifies the ARN of the trail. The format of a trail ARN is:

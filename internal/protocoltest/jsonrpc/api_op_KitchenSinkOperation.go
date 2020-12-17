@@ -44,6 +44,7 @@ type KitchenSinkOperationInput struct {
 
 	Iso8601Timestamp *time.Time
 
+	// This value conforms to the media type: application/json
 	JsonValue *string
 
 	ListOfLists [][]string
@@ -98,6 +99,7 @@ type KitchenSinkOperationOutput struct {
 
 	Iso8601Timestamp *time.Time
 
+	// This value conforms to the media type: application/json
 	JsonValue *string
 
 	ListOfLists [][]string

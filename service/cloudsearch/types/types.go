@@ -545,8 +545,11 @@ type LatLonOptions struct {
 }
 
 type Limits struct {
+
+	// This member is required.
 	MaximumPartitionCount int32
 
+	// This member is required.
 	MaximumReplicationCount int32
 }
 

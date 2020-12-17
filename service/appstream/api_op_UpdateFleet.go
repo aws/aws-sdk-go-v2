@@ -40,6 +40,8 @@ type UpdateFleetInput struct {
 	ComputeCapacity *types.ComputeCapacity
 
 	// Deletes the VPC association for the specified fleet.
+	//
+	// Deprecated: This member has been deprecated.
 	DeleteVpcConfig bool
 
 	// The description to display.

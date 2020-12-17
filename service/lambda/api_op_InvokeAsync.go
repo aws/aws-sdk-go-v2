@@ -13,6 +13,8 @@ import (
 
 // For asynchronous function invocation, use Invoke. Invokes a function
 // asynchronously.
+//
+// Deprecated: This operation has been deprecated.
 func (c *Client) InvokeAsync(ctx context.Context, params *InvokeAsyncInput, optFns ...func(*Options)) (*InvokeAsyncOutput, error) {
 	if params == nil {
 		params = &InvokeAsyncInput{}

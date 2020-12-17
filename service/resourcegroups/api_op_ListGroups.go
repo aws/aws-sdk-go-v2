@@ -71,6 +71,8 @@ type ListGroupsOutput struct {
 
 	// This output element is deprecated and shouldn't be used. Refer to
 	// GroupIdentifiers instead.
+	//
+	// Deprecated: This field is deprecated, use GroupIdentifiers instead.
 	Groups []types.Group
 
 	// If present, indicates that more output is available than is included in the

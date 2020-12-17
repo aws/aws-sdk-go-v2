@@ -223,6 +223,8 @@ type CreateDBInstanceInput struct {
 	PromotionTier *int32
 
 	// This flag should no longer be used.
+	//
+	// Deprecated: This member has been deprecated.
 	PubliclyAccessible *bool
 
 	// Specifies whether the DB instance is encrypted. Not applicable. The encryption

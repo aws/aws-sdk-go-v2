@@ -50,6 +50,8 @@ type AssociateHostedConnectionInput struct {
 type AssociateHostedConnectionOutput struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
+	//
+	// Deprecated: This member has been deprecated.
 	AwsDevice *string
 
 	// The Direct Connect endpoint on which the physical connection terminates.

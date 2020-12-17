@@ -627,6 +627,8 @@ type DBInstance struct {
 	PromotionTier *int32
 
 	// This flag should no longer be used.
+	//
+	// Deprecated: This member has been deprecated.
 	PubliclyAccessible bool
 
 	// Contains one or more identifiers of DB clusters that are Read Replicas of this

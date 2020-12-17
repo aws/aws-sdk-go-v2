@@ -30,6 +30,7 @@ type KitchenSink struct {
 
 	Iso8601Timestamp *time.Time
 
+	// This value conforms to the media type: application/json
 	JsonValue *string
 
 	ListOfLists [][]string

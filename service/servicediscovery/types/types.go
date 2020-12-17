@@ -17,6 +17,9 @@ type DnsConfig struct {
 	DnsRecords []DnsRecord
 
 	// The ID of the namespace to use for DNS configuration.
+	//
+	// Deprecated: Top level attribute in request should be used to reference
+	// namespace-id
 	NamespaceId *string
 
 	// The routing policy that you want to apply to all Route 53 DNS records that AWS

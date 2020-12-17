@@ -17,6 +17,8 @@ import (
 // responses of a multiple-call iteration (when using pagination) is unspecified.
 // This operation requires permissions for the elasticfilesystem:DescribeTags
 // action.
+//
+// Deprecated: Use ListTagsForResource.
 func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, optFns ...func(*Options)) (*DescribeTagsOutput, error) {
 	if params == nil {
 		params = &DescribeTagsInput{}

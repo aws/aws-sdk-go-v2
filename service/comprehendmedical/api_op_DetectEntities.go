@@ -15,6 +15,8 @@ import (
 // operation instead. Inspects the clinical text for a variety of medical entities
 // and returns specific information about them such as entity category, location,
 // and confidence score on that information .
+//
+// Deprecated: This operation is deprecated, use DetectEntitiesV2 instead.
 func (c *Client) DetectEntities(ctx context.Context, params *DetectEntitiesInput, optFns ...func(*Options)) (*DetectEntitiesOutput, error) {
 	if params == nil {
 		params = &DetectEntitiesInput{}

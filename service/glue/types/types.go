@@ -1495,6 +1495,8 @@ type Job struct {
 	// that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
 	// information, see the AWS Glue pricing page
 	// (https://aws.amazon.com/glue/pricing/).
+	//
+	// Deprecated: This property is deprecated, use MaxCapacity instead.
 	AllocatedCapacity int32
 
 	// The JobCommand that executes this job.
@@ -1670,6 +1672,8 @@ type JobRun struct {
 	// that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
 	// information, see the AWS Glue pricing page
 	// (https://aws.amazon.com/glue/pricing/).
+	//
+	// Deprecated: This property is deprecated, use MaxCapacity instead.
 	AllocatedCapacity int32
 
 	// The job arguments associated with this run. For this job run, they replace the
@@ -1800,6 +1804,8 @@ type JobUpdate struct {
 	// consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
 	// information, see the AWS Glue pricing page
 	// (https://aws.amazon.com/glue/pricing/).
+	//
+	// Deprecated: This property is deprecated, use MaxCapacity instead.
 	AllocatedCapacity int32
 
 	// The JobCommand that executes this job (required).

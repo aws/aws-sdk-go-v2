@@ -106,6 +106,9 @@ type PutObjectTaggingInput struct {
 	Tagging *types.Tagging
 
 	// The MD5 hash for the request body.
+	//
+	// Deprecated: Content-MD5 header will now be automatically computed and injected
+	// in associated operation's Http request.
 	ContentMD5 *string
 
 	// The account id of the expected bucket owner. If the bucket is owned by a

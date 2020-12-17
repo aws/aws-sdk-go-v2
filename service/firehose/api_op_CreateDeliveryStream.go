@@ -127,6 +127,8 @@ type CreateDeliveryStreamInput struct {
 	RedshiftDestinationConfiguration *types.RedshiftDestinationConfiguration
 
 	// [Deprecated] The destination in Amazon S3. You can specify only one destination.
+	//
+	// Deprecated: This member has been deprecated.
 	S3DestinationConfiguration *types.S3DestinationConfiguration
 
 	// The destination in Splunk. You can specify only one destination.

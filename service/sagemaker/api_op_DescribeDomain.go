@@ -74,6 +74,8 @@ type DescribeDomainOutput struct {
 	HomeEfsFileSystemId *string
 
 	// This member is deprecated and replaced with KmsKeyId.
+	//
+	// Deprecated: This property is deprecated, use KmsKeyId instead.
 	HomeEfsFileSystemKmsKeyId *string
 
 	// The AWS KMS customer managed CMK used to encrypt the EFS volume attached to the

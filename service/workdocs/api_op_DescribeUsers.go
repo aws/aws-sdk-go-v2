@@ -74,6 +74,8 @@ type DescribeUsersOutput struct {
 	Marker *string
 
 	// The total number of users included in the results.
+	//
+	// Deprecated: This member has been deprecated.
 	TotalNumberOfUsers *int64
 
 	// The users.

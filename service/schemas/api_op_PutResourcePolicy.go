@@ -30,6 +30,7 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 type PutResourcePolicyInput struct {
 
 	// The resource-based policy.
+	//
 	// This value conforms to the media type: application/json
 	//
 	// This member is required.
@@ -45,6 +46,7 @@ type PutResourcePolicyInput struct {
 type PutResourcePolicyOutput struct {
 
 	// The resource-based policy.
+	//
 	// This value conforms to the media type: application/json
 	Policy *string
 

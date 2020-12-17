@@ -12,6 +12,9 @@ import (
 
 // In a blue/green deployment, overrides any specified wait time and starts
 // terminating instances immediately after the traffic routing is complete.
+//
+// Deprecated: This operation is deprecated, use ContinueDeployment with
+// DeploymentWaitType instead.
 func (c *Client) SkipWaitTimeForInstanceTermination(ctx context.Context, params *SkipWaitTimeForInstanceTerminationInput, optFns ...func(*Options)) (*SkipWaitTimeForInstanceTerminationOutput, error) {
 	if params == nil {
 		params = &SkipWaitTimeForInstanceTerminationInput{}

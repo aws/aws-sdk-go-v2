@@ -12,6 +12,8 @@ import (
 
 // Attaches the specified policy to the specified principal (certificate or other
 // credential). Note: This API is deprecated. Please use AttachPolicy instead.
+//
+// Deprecated: This operation has been deprecated.
 func (c *Client) AttachPrincipalPolicy(ctx context.Context, params *AttachPrincipalPolicyInput, optFns ...func(*Options)) (*AttachPrincipalPolicyOutput, error) {
 	if params == nil {
 		params = &AttachPrincipalPolicyInput{}

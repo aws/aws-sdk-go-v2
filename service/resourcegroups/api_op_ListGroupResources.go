@@ -58,6 +58,8 @@ type ListGroupResourcesInput struct {
 	Group *string
 
 	// Don't use this parameter. Use Group instead.
+	//
+	// Deprecated: This field is deprecated, use Group instead.
 	GroupName *string
 
 	// The total number of results that you want included on each page of the response.

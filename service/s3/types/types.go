@@ -1847,6 +1847,8 @@ type LifecycleRule struct {
 
 	// Prefix identifying one or more objects to which the rule applies. This is No
 	// longer used; use Filter instead.
+	//
+	// Deprecated: This member has been deprecated.
 	Prefix *string
 
 	// Specifies when an Amazon S3 object transitions to a specified storage class.
@@ -2438,6 +2440,8 @@ type ReplicationRule struct {
 	// An object key name prefix that identifies the object or objects to which the
 	// rule applies. The maximum prefix length is 1,024 characters. To include all
 	// objects in a bucket, specify an empty string.
+	//
+	// Deprecated: This member has been deprecated.
 	Prefix *string
 
 	// The priority associated with the rule. If you specify multiple rules in a

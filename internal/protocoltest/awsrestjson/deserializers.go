@@ -929,7 +929,7 @@ func awsRestjson1_deserializeOpHttpBindingsHttpPrefixHeadersOutput(v *HttpPrefix
 				v.FooMap = map[string]string{}
 			}
 			headerValues[0] = strings.TrimSpace(headerValues[0])
-			v.FooMap[headerKey[lenPrefix:]] = headerValues[0]
+			v.FooMap[strings.ToLower(headerKey[lenPrefix:])] = headerValues[0]
 		}
 	}
 
@@ -1032,7 +1032,7 @@ func awsRestjson1_deserializeOpHttpBindingsHttpPrefixHeadersResponseOutput(v *Ht
 				v.PrefixHeaders = map[string]string{}
 			}
 			headerValues[0] = strings.TrimSpace(headerValues[0])
-			v.PrefixHeaders[headerKey[lenPrefix:]] = headerValues[0]
+			v.PrefixHeaders[strings.ToLower(headerKey[lenPrefix:])] = headerValues[0]
 		}
 	}
 

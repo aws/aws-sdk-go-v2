@@ -17,6 +17,8 @@ import (
 // request. If you add the Name tag to your file system, Amazon EFS returns it in
 // the response to the DescribeFileSystems operation. This operation requires
 // permission for the elasticfilesystem:CreateTags action.
+//
+// Deprecated: Use TagResource.
 func (c *Client) CreateTags(ctx context.Context, params *CreateTagsInput, optFns ...func(*Options)) (*CreateTagsOutput, error) {
 	if params == nil {
 		params = &CreateTagsInput{}

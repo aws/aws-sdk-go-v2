@@ -35,6 +35,8 @@ type DeleteGroupInput struct {
 	Group *string
 
 	// Don't use this parameter. Use Group instead.
+	//
+	// Deprecated: This field is deprecated, use Group instead.
 	GroupName *string
 }
 

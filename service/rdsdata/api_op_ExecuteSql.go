@@ -13,6 +13,9 @@ import (
 
 // Runs one or more SQL statements. This operation is deprecated. Use the
 // BatchExecuteStatement or ExecuteStatement operation.
+//
+// Deprecated: The ExecuteSql API is deprecated, please use the ExecuteStatement
+// API.
 func (c *Client) ExecuteSql(ctx context.Context, params *ExecuteSqlInput, optFns ...func(*Options)) (*ExecuteSqlOutput, error) {
 	if params == nil {
 		params = &ExecuteSqlInput{}

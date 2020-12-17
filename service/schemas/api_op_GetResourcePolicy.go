@@ -35,6 +35,7 @@ type GetResourcePolicyInput struct {
 type GetResourcePolicyOutput struct {
 
 	// The resource-based policy.
+	//
 	// This value conforms to the media type: application/json
 	Policy *string
 

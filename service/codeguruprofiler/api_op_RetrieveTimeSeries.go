@@ -28,6 +28,8 @@ func (c *Client) RetrieveTimeSeries(ctx context.Context, params *RetrieveTimeSer
 }
 
 type RetrieveTimeSeriesInput struct {
+
+	// This member is required.
 	ProfilingGroupName *string
 
 	EndTime *time.Time
@@ -42,18 +44,26 @@ type RetrieveTimeSeriesInput struct {
 }
 
 type RetrieveTimeSeriesOutput struct {
+
+	// This member is required.
 	Data [][]float64
 
+	// This member is required.
 	EndTime *time.Time
 
+	// This member is required.
 	EndTimes []time.Time
 
+	// This member is required.
 	FrameMetrics []types.FrameMetric
 
+	// This member is required.
 	Resolution types.AggregationPeriod
 
+	// This member is required.
 	StartTime *time.Time
 
+	// This member is required.
 	UnprocessedEndTimes map[string][]time.Time
 
 	// Metadata pertaining to the operation's result.

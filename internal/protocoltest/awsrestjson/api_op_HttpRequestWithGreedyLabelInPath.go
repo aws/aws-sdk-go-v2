@@ -25,8 +25,11 @@ func (c *Client) HttpRequestWithGreedyLabelInPath(ctx context.Context, params *H
 }
 
 type HttpRequestWithGreedyLabelInPathInput struct {
+
+	// This member is required.
 	Baz *string
 
+	// This member is required.
 	Foo *string
 }
 

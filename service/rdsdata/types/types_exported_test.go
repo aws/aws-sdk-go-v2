@@ -12,19 +12,19 @@ func ExampleArrayValue_outputUsage() {
 	// type switches can be used to check the union value
 	switch v := union.(type) {
 	case *types.ArrayValueMemberArrayValues:
-		_ = v.Value // Value is ArrayOfArray
+		_ = v.Value // Value is []types.ArrayValue
 
 	case *types.ArrayValueMemberBooleanValues:
-		_ = v.Value // Value is BooleanArray
+		_ = v.Value // Value is []bool
 
 	case *types.ArrayValueMemberDoubleValues:
-		_ = v.Value // Value is DoubleArray
+		_ = v.Value // Value is []float64
 
 	case *types.ArrayValueMemberLongValues:
-		_ = v.Value // Value is LongArray
+		_ = v.Value // Value is []int64
 
 	case *types.ArrayValueMemberStringValues:
-		_ = v.Value // Value is StringArray
+		_ = v.Value // Value is []string
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -35,12 +35,18 @@ func ExampleArrayValue_outputUsage() {
 	}
 }
 
+var _ []int64
+var _ []float64
+var _ []string
+var _ []types.ArrayValue
+var _ []bool
+
 func ExampleField_outputUsage() {
 	var union types.Field
 	// type switches can be used to check the union value
 	switch v := union.(type) {
 	case *types.FieldMemberArrayValue:
-		_ = v.Value // Value is ArrayValue
+		_ = v.Value // Value is types.ArrayValue
 
 	case *types.FieldMemberBlobValue:
 		_ = v.Value // Value is []byte
@@ -69,12 +75,19 @@ func ExampleField_outputUsage() {
 	}
 }
 
+var _ types.ArrayValue
+var _ *string
+var _ *bool
+var _ *int64
+var _ *float64
+var _ []byte
+
 func ExampleValue_outputUsage() {
 	var union types.Value
 	// type switches can be used to check the union value
 	switch v := union.(type) {
 	case *types.ValueMemberArrayValues:
-		_ = v.Value // Value is ArrayValueList
+		_ = v.Value // Value is []types.Value
 
 	case *types.ValueMemberBigIntValue:
 		_ = v.Value // Value is int64
@@ -101,7 +114,7 @@ func ExampleValue_outputUsage() {
 		_ = v.Value // Value is string
 
 	case *types.ValueMemberStructValue:
-		_ = v.Value // Value is StructValue
+		_ = v.Value // Value is types.StructValue
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -111,3 +124,13 @@ func ExampleValue_outputUsage() {
 
 	}
 }
+
+var _ *types.StructValue
+var _ *string
+var _ *int32
+var _ *int64
+var _ *bool
+var _ *float64
+var _ []types.Value
+var _ *float32
+var _ []byte

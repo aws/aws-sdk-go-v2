@@ -174,6 +174,8 @@ type Condition struct {
 
 	// Represents the equal condition to be applied to a single field when querying for
 	// findings.
+	//
+	// Deprecated: This member has been deprecated.
 	Eq []string
 
 	// Represents an equal condition to be applied to a single field when querying for
@@ -190,10 +192,14 @@ type Condition struct {
 
 	// Represents a greater than condition to be applied to a single field when
 	// querying for findings.
+	//
+	// Deprecated: This member has been deprecated.
 	Gt int32
 
 	// Represents a greater than or equal condition to be applied to a single field
 	// when querying for findings.
+	//
+	// Deprecated: This member has been deprecated.
 	Gte int32
 
 	// Represents a less than condition to be applied to a single field when querying
@@ -206,14 +212,20 @@ type Condition struct {
 
 	// Represents a less than condition to be applied to a single field when querying
 	// for findings.
+	//
+	// Deprecated: This member has been deprecated.
 	Lt int32
 
 	// Represents a less than or equal condition to be applied to a single field when
 	// querying for findings.
+	//
+	// Deprecated: This member has been deprecated.
 	Lte int32
 
 	// Represents the not equal condition to be applied to a single field when querying
 	// for findings.
+	//
+	// Deprecated: This member has been deprecated.
 	Neq []string
 
 	// Represents a not equal condition to be applied to a single field when querying

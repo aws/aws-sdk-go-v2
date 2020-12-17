@@ -29,6 +29,8 @@ func (c *Client) ConstantQueryString(ctx context.Context, params *ConstantQueryS
 }
 
 type ConstantQueryStringInput struct {
+
+	// This member is required.
 	Hello *string
 }
 

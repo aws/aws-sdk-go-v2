@@ -34,8 +34,8 @@ func TestClient_HttpPrefixHeadersResponse_awsRestjson1Deserialize(t *testing.T) 
 			Body: []byte(``),
 			ExpectResult: &HttpPrefixHeadersResponseOutput{
 				PrefixHeaders: map[string]string{
-					"X-Foo": "Foo",
-					"Hello": "Hello",
+					"x-foo": "Foo",
+					"hello": "Hello",
 				},
 			},
 		},

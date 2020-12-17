@@ -43,6 +43,7 @@ type GetDeviceOutput struct {
 	DeviceArn *string
 
 	// Details about the capabilities of the device.
+	//
 	// This value conforms to the media type: application/json
 	//
 	// This member is required.

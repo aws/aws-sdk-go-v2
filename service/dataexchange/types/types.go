@@ -448,6 +448,8 @@ type JobError struct {
 }
 
 type OriginDetails struct {
+
+	// This member is required.
 	ProductId *string
 }
 

@@ -51,6 +51,8 @@ type UpdateDomainNameserversInput struct {
 	Nameservers []types.Nameserver
 
 	// The authorization key for .fi domains
+	//
+	// Deprecated: This member has been deprecated.
 	FIAuthKey *string
 }
 

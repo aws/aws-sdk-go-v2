@@ -29,6 +29,8 @@ import (
 // STARTING
 //
 // Amazon EMR can return a maximum of 512 job flow descriptions.
+//
+// Deprecated: This operation has been deprecated.
 func (c *Client) DescribeJobFlows(ctx context.Context, params *DescribeJobFlowsInput, optFns ...func(*Options)) (*DescribeJobFlowsOutput, error) {
 	if params == nil {
 		params = &DescribeJobFlowsInput{}

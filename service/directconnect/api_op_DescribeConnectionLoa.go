@@ -18,6 +18,8 @@ import (
 // Cross Connects at AWS Direct Connect Locations
 // (https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html) in
 // the AWS Direct Connect User Guide.
+//
+// Deprecated: This operation has been deprecated.
 func (c *Client) DescribeConnectionLoa(ctx context.Context, params *DescribeConnectionLoaInput, optFns ...func(*Options)) (*DescribeConnectionLoaOutput, error) {
 	if params == nil {
 		params = &DescribeConnectionLoaInput{}

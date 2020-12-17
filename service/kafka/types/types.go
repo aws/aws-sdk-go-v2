@@ -115,6 +115,8 @@ type ClientAuthentication struct {
 }
 
 type CloudWatchLogs struct {
+
+	// This member is required.
 	Enabled bool
 
 	LogGroup *string
@@ -376,6 +378,8 @@ type ErrorInfo struct {
 }
 
 type Firehose struct {
+
+	// This member is required.
 	Enabled bool
 
 	DeliveryStream *string
@@ -406,6 +410,8 @@ type KafkaVersion struct {
 }
 
 type LoggingInfo struct {
+
+	// This member is required.
 	BrokerLogs *BrokerLogs
 }
 
@@ -513,6 +519,8 @@ type PrometheusInfo struct {
 }
 
 type S3 struct {
+
+	// This member is required.
 	Enabled bool
 
 	Bucket *string

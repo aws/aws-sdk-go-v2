@@ -346,6 +346,8 @@ type Captions struct {
 
 	// Source files for the input sidecar captions used during the transcoding process.
 	// To omit all sidecar captions, leave CaptionSources blank.
+	//
+	// Deprecated: This member has been deprecated.
 	CaptionSources []CaptionSource
 
 	// A policy that determines how Elastic Transcoder handles the existence of
@@ -368,6 +370,8 @@ type Captions struct {
 	// specify in CaptionSources.
 	//
 	// MergePolicy cannot be null.
+	//
+	// Deprecated: This member has been deprecated.
 	MergePolicy *string
 }
 
@@ -464,6 +468,8 @@ type CreateJobOutput struct {
 	// The Composition object contains settings for the clips that make up an output
 	// file. For the current release, you can only specify settings for a single clip
 	// per output file. The Composition object cannot be null.
+	//
+	// Deprecated: This member has been deprecated.
 	Composition []Clip
 
 	// You can specify encryption settings for any output files that you want to use
@@ -1003,6 +1009,8 @@ type JobOutput struct {
 	// The Composition object contains settings for the clips that make up an output
 	// file. For the current release, you can only specify settings for a single clip
 	// per output file. The Composition object cannot be null.
+	//
+	// Deprecated: This member has been deprecated.
 	Composition []Clip
 
 	// Duration of the output file, in seconds.

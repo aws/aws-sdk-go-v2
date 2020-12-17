@@ -410,6 +410,8 @@ type QualificationRequirement struct {
 	// will be allowed to preview the HIT's question data, but will not be allowed to
 	// accept and complete the HIT. The default is false. This should not be used in
 	// combination with the ActionsGuarded field.
+	//
+	// Deprecated: This member has been deprecated.
 	RequiredToPreview *bool
 }
 

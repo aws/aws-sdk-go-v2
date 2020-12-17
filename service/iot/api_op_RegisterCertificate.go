@@ -41,6 +41,8 @@ type RegisterCertificateInput struct {
 	CaCertificatePem *string
 
 	// A boolean value that specifies if the certificate is set to active.
+	//
+	// Deprecated: This member has been deprecated.
 	SetAsActive *bool
 
 	// The status of the register certificate request.

@@ -85,6 +85,8 @@ type BGPPeer struct {
 type Connection struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
+	//
+	// Deprecated: This member has been deprecated.
 	AwsDevice *string
 
 	// The Direct Connect endpoint on which the physical connection terminates.
@@ -252,6 +254,8 @@ type DirectConnectGatewayAssociation struct {
 	VirtualGatewayOwnerAccount *string
 
 	// The AWS Region where the virtual private gateway is located.
+	//
+	// Deprecated: This member has been deprecated.
 	VirtualGatewayRegion *string
 }
 
@@ -336,6 +340,8 @@ type DirectConnectGatewayAttachment struct {
 type Interconnect struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
+	//
+	// Deprecated: This member has been deprecated.
 	AwsDevice *string
 
 	// The Direct Connect endpoint on which the physical connection terminates.
@@ -407,6 +413,8 @@ type Lag struct {
 	AllowsHostedConnections bool
 
 	// The AWS Direct Connect endpoint that hosts the LAG.
+	//
+	// Deprecated: This member has been deprecated.
 	AwsDevice *string
 
 	// The AWS Direct Connect endpoint that hosts the LAG.

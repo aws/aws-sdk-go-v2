@@ -1274,6 +1274,8 @@ type ScalingPolicy struct {
 	MinAdjustmentMagnitude *int32
 
 	// Available for backward compatibility. Use MinAdjustmentMagnitude instead.
+	//
+	// Deprecated: This member has been deprecated.
 	MinAdjustmentStep *int32
 
 	// The Amazon Resource Name (ARN) of the policy.

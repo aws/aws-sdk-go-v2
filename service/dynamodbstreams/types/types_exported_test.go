@@ -18,19 +18,19 @@ func ExampleAttributeValue_outputUsage() {
 		_ = v.Value // Value is bool
 
 	case *types.AttributeValueMemberBS:
-		_ = v.Value // Value is BinarySetAttributeValue
+		_ = v.Value // Value is [][]byte
 
 	case *types.AttributeValueMemberL:
-		_ = v.Value // Value is ListAttributeValue
+		_ = v.Value // Value is []types.AttributeValue
 
 	case *types.AttributeValueMemberM:
-		_ = v.Value // Value is MapAttributeValue
+		_ = v.Value // Value is map[string]types.AttributeValue
 
 	case *types.AttributeValueMemberN:
 		_ = v.Value // Value is string
 
 	case *types.AttributeValueMemberNS:
-		_ = v.Value // Value is NumberSetAttributeValue
+		_ = v.Value // Value is []string
 
 	case *types.AttributeValueMemberNULL:
 		_ = v.Value // Value is bool
@@ -39,7 +39,7 @@ func ExampleAttributeValue_outputUsage() {
 		_ = v.Value // Value is string
 
 	case *types.AttributeValueMemberSS:
-		_ = v.Value // Value is StringSetAttributeValue
+		_ = v.Value // Value is []string
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -49,3 +49,14 @@ func ExampleAttributeValue_outputUsage() {
 
 	}
 }
+
+var _ [][]byte
+var _ map[string]types.AttributeValue
+var _ []string
+var _ *string
+var _ *string
+var _ *bool
+var _ []types.AttributeValue
+var _ *bool
+var _ []string
+var _ []byte

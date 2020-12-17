@@ -34,6 +34,7 @@ type HttpPrefixHeadersInput struct {
 type HttpPrefixHeadersOutput struct {
 	Foo *string
 
+	// Map keys will be normalized to lower-case.
 	FooMap map[string]string
 
 	// Metadata pertaining to the operation's result.

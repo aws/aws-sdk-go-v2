@@ -120,6 +120,8 @@ type ModifyReplicationGroupInput struct {
 	MultiAZEnabled *bool
 
 	// Deprecated. This parameter is not used.
+	//
+	// Deprecated: This member has been deprecated.
 	NodeGroupId *string
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications

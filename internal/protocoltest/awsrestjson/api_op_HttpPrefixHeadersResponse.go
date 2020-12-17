@@ -29,6 +29,8 @@ type HttpPrefixHeadersResponseInput struct {
 }
 
 type HttpPrefixHeadersResponseOutput struct {
+
+	// Map keys will be normalized to lower-case.
 	PrefixHeaders map[string]string
 
 	// Metadata pertaining to the operation's result.

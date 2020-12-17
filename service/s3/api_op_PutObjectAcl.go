@@ -202,6 +202,9 @@ type PutObjectAclInput struct {
 	// message integrity check to verify that the request body was not corrupted in
 	// transit. For more information, go to RFC 1864.>
 	// (http://www.ietf.org/rfc/rfc1864.txt)
+	//
+	// Deprecated: Content-MD5 header will now be automatically computed and injected
+	// in associated operation's Http request.
 	ContentMD5 *string
 
 	// The account id of the expected bucket owner. If the bucket is owned by a

@@ -550,6 +550,9 @@ type Metrics struct {
 	ErrorMetrics []ErrorMetric
 
 	// The root-mean-square error (RMSE).
+	//
+	// Deprecated: This property is deprecated, please refer to ErrorMetrics for both
+	// RMSE and WAPE
 	RMSE *float64
 
 	// An array of weighted quantile losses. Quantiles divide a probability

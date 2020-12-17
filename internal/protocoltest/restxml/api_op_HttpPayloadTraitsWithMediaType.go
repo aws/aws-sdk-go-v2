@@ -27,12 +27,16 @@ func (c *Client) HttpPayloadTraitsWithMediaType(ctx context.Context, params *Htt
 }
 
 type HttpPayloadTraitsWithMediaTypeInput struct {
+
+	// This value conforms to the media type: text/plain
 	Blob []byte
 
 	Foo *string
 }
 
 type HttpPayloadTraitsWithMediaTypeOutput struct {
+
+	// This value conforms to the media type: text/plain
 	Blob []byte
 
 	Foo *string
