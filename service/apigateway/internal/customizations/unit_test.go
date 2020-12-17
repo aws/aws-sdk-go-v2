@@ -51,7 +51,7 @@ func Test_EmptyResponse(t *testing.T) {
 						SigningName: "apigateway",
 					}, nil
 				}),
-				Retryer: aws.NoOpRetryer{},
+				Retryer: aws.NopRetryer{},
 			}
 
 			client := apigateway.NewFromConfig(cfg)

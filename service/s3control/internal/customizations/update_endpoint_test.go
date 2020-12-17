@@ -83,7 +83,7 @@ func TestUpdateEndpointBuild(t *testing.T) {
 
 					options := s3control.Options{
 						Credentials: unit.StubCredentialsProvider{},
-						Retryer:     aws.NoOpRetryer{},
+						Retryer:     aws.NopRetryer{},
 						Region:      "mock-region",
 
 						HTTPClient: smithyhttp.NopClient{},
@@ -399,7 +399,7 @@ func TestEndpointWithARN(t *testing.T) {
 			opts := c.options.Copy()
 			opts.Credentials = unit.StubCredentialsProvider{}
 			opts.HTTPClient = smithyhttp.NopClient{}
-			opts.Retryer = aws.NoOpRetryer{}
+			opts.Retryer = aws.NopRetryer{}
 
 			// build an s3control client
 			svc := s3control.New(opts)
@@ -584,7 +584,7 @@ func TestCustomEndpoint_SpecialOperations(t *testing.T) {
 			opts := c.options.Copy()
 			opts.Credentials = unit.StubCredentialsProvider{}
 			opts.HTTPClient = smithyhttp.NopClient{}
-			opts.Retryer = aws.NoOpRetryer{}
+			opts.Retryer = aws.NopRetryer{}
 
 			// build an s3control client
 			svc := s3control.New(opts)
@@ -645,7 +645,7 @@ func TestInputIsNotModified(t *testing.T) {
 	opts := s3control.Options{}
 	opts.Credentials = unit.StubCredentialsProvider{}
 	opts.HTTPClient = smithyhttp.NopClient{}
-	opts.Retryer = aws.NoOpRetryer{}
+	opts.Retryer = aws.NopRetryer{}
 	opts.Region = "us-west-2"
 	opts.UseARNRegion = true
 

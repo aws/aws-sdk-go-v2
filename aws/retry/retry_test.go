@@ -22,7 +22,7 @@ func TestAddWithErrorCodes(t *testing.T) {
 		},
 	}
 
-	r := retry.AddWithErrorCodes(aws.NoOpRetryer{}, "Error1", "Error2")
+	r := retry.AddWithErrorCodes(aws.NopRetryer{}, "Error1", "Error2")
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
