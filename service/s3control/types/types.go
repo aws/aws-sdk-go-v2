@@ -748,7 +748,7 @@ type S3Grantee struct {
 type S3InitiateRestoreObjectOperation struct {
 
 	//
-	ExpirationInDays int32
+	ExpirationInDays *int32
 
 	//
 	GlacierJobTier S3GlacierJobTier

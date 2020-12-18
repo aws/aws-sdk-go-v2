@@ -4475,7 +4475,7 @@ func awsRestxml_serializeDocumentS3GrantList(v []types.S3Grant, value smithyxml.
 
 func awsRestxml_serializeDocumentS3InitiateRestoreObjectOperation(v *types.S3InitiateRestoreObjectOperation, value smithyxml.Value) error {
 	defer value.Close()
-	if v.ExpirationInDays != 0 {
+	if v.ExpirationInDays != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -4484,7 +4484,7 @@ func awsRestxml_serializeDocumentS3InitiateRestoreObjectOperation(v *types.S3Ini
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(v.ExpirationInDays)
+		el.Integer(*v.ExpirationInDays)
 	}
 	if len(v.GlacierJobTier) > 0 {
 		rootAttr := []smithyxml.Attr{}
