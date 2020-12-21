@@ -57,6 +57,28 @@ func getSharedConfigFiles(ctx context.Context, configs configs) (value []string,
 	return
 }
 
+// sharedCredentialsFilesProvider provides access to the shared credentials filesnames
+// external configuration value.
+type sharedCredentialsFilesProvider interface {
+	getSharedCredentialsFiles(ctx context.Context) ([]string, bool, error)
+}
+
+// getSharedCredentialsFiles searches the configs for a sharedCredentialsFilesProvider
+// and returns the value if found. Returns an error if a provider fails before a
+// value is found.
+func getSharedCredentialsFiles(ctx context.Context, configs configs) (value []string, found bool, err error) {
+	for _, cfg := range configs {
+		if p, ok := cfg.(sharedCredentialsFilesProvider); ok {
+			value, found, err = p.getSharedCredentialsFiles(ctx)
+			if err != nil || found {
+				break
+			}
+		}
+	}
+
+	return
+}
+
 // customCABundleProvider provides access to the custom CA bundle PEM bytes.
 type customCABundleProvider interface {
 	getCustomCABundle(ctx context.Context) (io.Reader, bool, error)

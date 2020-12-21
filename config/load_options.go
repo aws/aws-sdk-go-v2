@@ -56,8 +56,21 @@ type LoadOptions struct {
 	// SharedConfigProfile is the profile to be used when loading the SharedConfig
 	SharedConfigProfile string
 
-	// SharedConfigFiles is the slice of custom shared config files to use when loading the SharedConfig
+	// SharedConfigFiles is the slice of custom shared config files to use when loading the SharedConfig.
+	// A non-default profile used within config file must have name defined with prefix 'profile '.
+	// eg [profile xyz] indicates a profile with name 'xyz'.
+	// If duplicate profiles are provided with a same, or across multiple shared config files, the next parsed
+	// profile will override only properties that conflict with the previously defined profile.
 	SharedConfigFiles []string
+
+	// SharedCredentialsFile is the slice of custom shared credentials files to use when loading the SharedConfig.
+	// The profile name used within credentials file must not prefix 'profile '.
+	// eg [xyz] indicates a profile with name 'xyz'. Profile declared as [profile xyz] will be ignored.
+	// If duplicate profiles are provided with a same, or across multiple shared credentials files, the next parsed
+	// profile will override only properties that conflict with the previously defined profile.
+	// If duplicate profiles are provided within a shared credentials and shared config files, the properties
+	// defined in shared credentials file take precedence.
+	SharedCredentialsFiles []string
 
 	// CustomCABundle is CA bundle PEM bytes reader
 	CustomCABundle io.Reader
@@ -182,6 +195,28 @@ func (o LoadOptions) getSharedConfigFiles(ctx context.Context) ([]string, bool, 
 func WithSharedConfigFiles(v []string) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.SharedConfigFiles = v
+		return nil
+	}
+}
+
+// getSharedCredentialsFiles returns SharedCredentialsFiles set on config's LoadOptions
+func (o LoadOptions) getSharedCredentialsFiles(ctx context.Context) ([]string, bool, error) {
+	if o.SharedCredentialsFiles == nil {
+		return nil, false, nil
+	}
+
+	return o.SharedCredentialsFiles, true, nil
+}
+
+// WithSharedCredentialsFiles is a helper function to construct functional options
+// that sets slice of SharedCredentialsFiles on config's LoadOptions.
+// Setting the shared credentials files to an nil string slice, will result in the
+// shared credentials files value being ignored.
+// If multiple WithSharedCredentialsFiles calls are made, the last call overrides
+// the previous call values.
+func WithSharedCredentialsFiles(v []string) LoadOptionsFunc {
+	return func(o *LoadOptions) error {
+		o.SharedCredentialsFiles = v
 		return nil
 	}
 }

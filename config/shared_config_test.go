@@ -1,17 +1,18 @@
 package config
 
 import (
+	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/internal/ini"
+	"github.com/awslabs/smithy-go/logging"
+	"github.com/awslabs/smithy-go/ptr"
 	"path/filepath"
 	"reflect"
 	"strconv"
 	"strings"
 	"testing"
-
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/ini"
-	"github.com/aws/smithy-go/ptr"
 )
 
 var _ regionProvider = (*SharedConfig)(nil)
@@ -22,18 +23,18 @@ var (
 )
 
 func TestNewSharedConfig(t *testing.T) {
-	cases := []struct {
+	cases := map[string]struct {
 		Filenames []string
 		Profile   string
 		Expected  SharedConfig
 		Err       error
 	}{
-		0: {
+		"file not exist": {
 			Filenames: []string{"file_not_exist"},
 			Profile:   "default",
-			Err:       fmt.Errorf("failed to open shared config file, file_not_exist"),
+			Err:       fmt.Errorf("failed to get shared config profile"),
 		},
-		1: {
+		"default profile": {
 			Filenames: []string{testConfigFilename},
 			Profile:   "default",
 			Expected: SharedConfig{
@@ -41,7 +42,7 @@ func TestNewSharedConfig(t *testing.T) {
 				Region:  "default_region",
 			},
 		},
-		2: {
+		"multiple config files": {
 			Filenames: []string{testConfigOtherFilename, testConfigFilename},
 			Profile:   "config_file_load_order",
 			Expected: SharedConfig{
@@ -54,7 +55,7 @@ func TestNewSharedConfig(t *testing.T) {
 				},
 			},
 		},
-		3: {
+		"mutliple config files reverse order": {
 			Filenames: []string{testConfigFilename, testConfigOtherFilename},
 			Profile:   "config_file_load_order",
 			Expected: SharedConfig{
@@ -67,7 +68,7 @@ func TestNewSharedConfig(t *testing.T) {
 				},
 			},
 		},
-		4: {
+		"Assume role": {
 			Filenames: []string{testConfigOtherFilename, testConfigFilename},
 			Profile:   "assume_role",
 			Expected: SharedConfig{
@@ -84,27 +85,19 @@ func TestNewSharedConfig(t *testing.T) {
 				},
 			},
 		},
-		5: {
+		"Assume role with invalid source profile": {
 			Filenames: []string{testConfigOtherFilename, testConfigFilename},
 			Profile:   "assume_role_invalid_source_profile",
 			Err: SharedConfigAssumeRoleError{
 				Profile: "profile_not_exists",
 				RoleARN: "assume_role_invalid_source_profile_role_arn",
-				Err: SharedConfigNotExistErrors{
-					SharedConfigProfileNotExistError{
-						Profile:  "profile_not_exists",
-						Filename: testConfigOtherFilename,
-						Err:      nil,
-					},
-					SharedConfigProfileNotExistError{
-						Profile:  "profile_not_exists",
-						Filename: testConfigFilename,
-						Err:      nil,
-					},
+				Err: SharedConfigProfileNotExistError{
+					Profile: "profile_not_exists",
+					Err:     nil,
 				},
 			},
 		},
-		6: {
+		"Assume role with creds": {
 			Filenames: []string{testConfigOtherFilename, testConfigFilename},
 			Profile:   "assume_role_w_creds",
 			Expected: SharedConfig{
@@ -123,7 +116,7 @@ func TestNewSharedConfig(t *testing.T) {
 				},
 			},
 		},
-		7: {
+		"Assume role without creds": {
 			Filenames: []string{testConfigOtherFilename, testConfigFilename},
 			Profile:   "assume_role_wo_creds",
 			Expected: SharedConfig{
@@ -136,7 +129,7 @@ func TestNewSharedConfig(t *testing.T) {
 				RoleARN: "assume_role_wo_creds_role_arn",
 			},
 		},
-		8: {
+		"Invalid INI file": {
 			Filenames: []string{filepath.Join("testdata", "shared_config_invalid_ini")},
 			Profile:   "profile_name",
 			Err: SharedConfigLoadError{
@@ -144,7 +137,7 @@ func TestNewSharedConfig(t *testing.T) {
 				Err:      fmt.Errorf("invalid state"),
 			},
 		},
-		9: {
+		"S3UseARNRegion property on profile": {
 			Profile:   "valid_arn_region",
 			Filenames: []string{testConfigFilename},
 			Expected: SharedConfig{
@@ -152,7 +145,7 @@ func TestNewSharedConfig(t *testing.T) {
 				S3UseARNRegion: ptr.Bool(true),
 			},
 		},
-		10: {
+		"EndpointDiscovery property on profile": {
 			Profile:   "endpoint_discovery",
 			Filenames: []string{testConfigFilename},
 			Expected: SharedConfig{
@@ -160,7 +153,7 @@ func TestNewSharedConfig(t *testing.T) {
 				EnableEndpointDiscovery: ptr.Bool(true),
 			},
 		},
-		11: {
+		"Assume role with credential source Ec2Metadata": {
 			Filenames: []string{testConfigOtherFilename, testConfigFilename},
 			Profile:   "assume_role_with_credential_source",
 			Expected: SharedConfig{
@@ -169,7 +162,7 @@ func TestNewSharedConfig(t *testing.T) {
 				CredentialSource: credSourceEc2Metadata,
 			},
 		},
-		12: {
+		"Assume role chained with creds": {
 			Filenames: []string{testConfigOtherFilename, testConfigFilename},
 			Profile:   "multiple_assume_role",
 			Expected: SharedConfig{
@@ -191,7 +184,7 @@ func TestNewSharedConfig(t *testing.T) {
 				},
 			},
 		},
-		13: {
+		"Assume role chained with credential source": {
 			Filenames: []string{testConfigOtherFilename, testConfigFilename},
 			Profile:   "multiple_assume_role_with_credential_source",
 			Expected: SharedConfig{
@@ -205,7 +198,7 @@ func TestNewSharedConfig(t *testing.T) {
 				},
 			},
 		},
-		14: {
+		"Assume role chained with credential source reversed order": {
 			Filenames: []string{testConfigOtherFilename, testConfigFilename},
 			Profile:   "multiple_assume_role_with_credential_source2",
 			Expected: SharedConfig{
@@ -226,9 +219,11 @@ func TestNewSharedConfig(t *testing.T) {
 		},
 	}
 
-	for i, c := range cases {
-		t.Run(strconv.Itoa(i), func(t *testing.T) {
-			cfg, err := NewSharedConfig(c.Profile, c.Filenames)
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			cfg, err := NewSharedConfig(context.TODO(), c.Profile, sharedConfigsLoadInfo{
+				ConfigurationFiles: c.Filenames,
+			})
 			if c.Err != nil {
 				if e, a := c.Err.Error(), err.Error(); !strings.Contains(a, e) {
 					t.Errorf("expect %q to be in %q", e, a)
@@ -246,112 +241,124 @@ func TestNewSharedConfig(t *testing.T) {
 	}
 }
 
-func TestLoadSharedConfigFromFile(t *testing.T) {
+func TestLoadSharedConfigFromSection(t *testing.T) {
 	filename := testConfigFilename
 	sections, err := ini.OpenFile(filename)
+
 	if err != nil {
 		t.Fatalf("failed to load test config file, %s, %v", filename, err)
 	}
-	iniFile := sharedConfigFile{IniData: sections, Filename: filename}
-
-	cases := []struct {
+	cases := map[string]struct {
 		Profile  string
 		Expected SharedConfig
 		Err      error
 	}{
-		0: {
+		"Default as profile": {
 			Profile:  "default",
 			Expected: SharedConfig{Region: "default_region"},
 		},
-		1: {
-			Profile:  "alt_profile_name",
+		"prefixed profile": {
+			Profile:  "profile alt_profile_name",
 			Expected: SharedConfig{Region: "alt_profile_name_region"},
 		},
-		2: {
-			Profile:  "short_profile_name_first",
-			Expected: SharedConfig{Region: "short_profile_name_first_short"},
+		"prefixed profile 2": {
+			Profile:  "profile short_profile_name_first",
+			Expected: SharedConfig{Region: "short_profile_name_first_alt"},
 		},
-		3: {
-			Profile:  "partial_creds",
+		"profile with partial creds": {
+			Profile:  "profile partial_creds",
 			Expected: SharedConfig{},
 		},
-		4: {
-			Profile: "complete_creds",
+		"profile with complete creds": {
+			Profile: "profile complete_creds",
 			Expected: SharedConfig{
 				Credentials: aws.Credentials{
 					AccessKeyID:     "complete_creds_akid",
 					SecretAccessKey: "complete_creds_secret",
-					Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+					Source:          fmt.Sprintf("SharedConfigCredentials: %s", filename),
 				},
 			},
 		},
-		5: {
-			Profile: "complete_creds_with_token",
+		"profile with complete creds and token": {
+			Profile: "profile complete_creds_with_token",
 			Expected: SharedConfig{
 				Credentials: aws.Credentials{
 					AccessKeyID:     "complete_creds_with_token_akid",
 					SecretAccessKey: "complete_creds_with_token_secret",
 					SessionToken:    "complete_creds_with_token_token",
-					Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+					Source:          fmt.Sprintf("SharedConfigCredentials: %s", filename),
 				},
 			},
 		},
-		6: {
-			Profile: "full_profile",
+		"complete profile": {
+			Profile: "profile full_profile",
 			Expected: SharedConfig{
 				Credentials: aws.Credentials{
 					AccessKeyID:     "full_profile_akid",
 					SecretAccessKey: "full_profile_secret",
-					Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+					Source:          fmt.Sprintf("SharedConfigCredentials: %s", filename),
 				},
 				Region: "full_profile_region",
 			},
 		},
-		7: {
-			Profile: "partial_assume_role",
+		"profile with partial assume role": {
+			Profile: "profile partial_assume_role",
 			Expected: SharedConfig{
 				RoleARN: "partial_assume_role_role_arn",
 			},
 		},
-		8: {
-			Profile: "assume_role",
+		"profile using assume role": {
+			Profile: "profile assume_role",
 			Expected: SharedConfig{
 				RoleARN:           "assume_role_role_arn",
 				SourceProfileName: "complete_creds",
 			},
 		},
-		9: {
-			Profile: "assume_role_w_mfa",
+		"profile with assume role and MFA": {
+			Profile: "profile assume_role_w_mfa",
 			Expected: SharedConfig{
 				RoleARN:           "assume_role_role_arn",
 				SourceProfileName: "complete_creds",
 				MFASerial:         "0123456789",
 			},
 		},
-		10: {
+		"does not exist": {
 			Profile: "does_not_exist",
 			Err: SharedConfigProfileNotExistError{
-				Filename: filepath.Join("testdata", "shared_config"),
+				Filename: []string{filename},
 				Profile:  "does_not_exist",
 				Err:      nil,
 			},
 		},
-		{
-			Profile: "with_mixed_case_keys",
+		"profile with mixed casing": {
+			Profile: "profile with_mixed_case_keys",
 			Expected: SharedConfig{
 				Credentials: aws.Credentials{
 					AccessKeyID:     "accessKey",
 					SecretAccessKey: "secret",
-					Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+					Source:          fmt.Sprintf("SharedConfigCredentials: %s", filename),
 				},
 			},
 		},
 	}
 
-	for i, c := range cases {
-		t.Run(strconv.Itoa(i), func(t *testing.T) {
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
 			var cfg SharedConfig
-			err := cfg.setFromIniFile(c.Profile, iniFile)
+
+			section, ok := sections.GetSection(c.Profile)
+			if !ok {
+				if c.Err == nil {
+					t.Fatalf("expected section to be present, was not")
+				} else {
+					if e, a := c.Err.Error(), "failed to get shared config profile"; !strings.Contains(e, a) {
+						t.Fatalf("expect %q to be in %q", a, e)
+					}
+					return
+				}
+			}
+
+			err := cfg.setFromIniSection(c.Profile, section)
 			if c.Err != nil {
 				if e, a := c.Err.Error(), err.Error(); !strings.Contains(a, e) {
 					t.Errorf("expect %q to be in %q", e, a)
@@ -369,43 +376,7 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 	}
 }
 
-func TestLoadSharedConfigIniFiles(t *testing.T) {
-	cases := []struct {
-		Filenames []string
-		Expected  []sharedConfigFile
-	}{
-		{
-			Filenames: []string{"not_exist", testConfigFilename},
-			Expected: []sharedConfigFile{
-				{Filename: testConfigFilename},
-			},
-		},
-		{
-			Filenames: []string{testConfigFilename, testConfigOtherFilename},
-			Expected: []sharedConfigFile{
-				{Filename: testConfigFilename},
-				{Filename: testConfigOtherFilename},
-			},
-		},
-	}
-
-	for i, c := range cases {
-		t.Run(strconv.Itoa(i), func(t *testing.T) {
-			files, err := loadSharedConfigIniFiles(c.Filenames)
-			if err != nil {
-				t.Fatalf("expect no error, got %v", err)
-			}
-			if e, a := len(c.Expected), len(files); e != a {
-				t.Errorf("expect %v, got %v", e, a)
-			}
-			if e, a := c.Expected, files; !cmpFiles(e, a) {
-				t.Errorf("expect %v, got %v", e, a)
-			}
-		})
-	}
-}
-
-func cmpFiles(expects, actuals []sharedConfigFile) bool {
+func cmpFiles(expects, actuals []parsedINIFile) bool {
 	for i, expect := range expects {
 		if expect.Filename != actuals[i].Filename {
 			return false
@@ -416,10 +387,12 @@ func cmpFiles(expects, actuals []sharedConfigFile) bool {
 
 func TestLoadSharedConfig(t *testing.T) {
 	origProf := defaultSharedConfigProfile
-	origFiles := DefaultSharedConfigFiles
+	origConfigFiles := DefaultSharedConfigFiles
+	origCredentialFiles := DefaultSharedCredentialsFiles
 	defer func() {
 		defaultSharedConfigProfile = origProf
-		DefaultSharedConfigFiles = origFiles
+		DefaultSharedConfigFiles = origConfigFiles
+		DefaultSharedCredentialsFiles = origCredentialFiles
 	}()
 
 	cases := []struct {
@@ -458,7 +431,7 @@ func TestLoadSharedConfig(t *testing.T) {
 				filepath.Join("file_not_exist"),
 			},
 			LoadFn: loadSharedConfig,
-			Err:    "failed to open shared config file, file_not_exist",
+			Err:    "failed to get shared config profile",
 		},
 		{
 			LoadOptionFn: WithSharedConfigProfile("profile_not_exist"),
@@ -466,7 +439,7 @@ func TestLoadSharedConfig(t *testing.T) {
 				filepath.Join("testdata", "shared_config"),
 			},
 			LoadFn: loadSharedConfig,
-			Err:    "failed to get shared config profile, profile_not_exist",
+			Err:    "failed to get shared config profile",
 		},
 		{
 			LoadOptionFn: WithSharedConfigProfile("default"),
@@ -496,7 +469,8 @@ func TestLoadSharedConfig(t *testing.T) {
 	for i, c := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			defaultSharedConfigProfile = origProf
-			DefaultSharedConfigFiles = origFiles
+			DefaultSharedConfigFiles = origConfigFiles
+			DefaultSharedCredentialsFiles = origCredentialFiles
 
 			if len(c.Profile) > 0 {
 				defaultSharedConfigProfile = c.Profile
@@ -504,6 +478,8 @@ func TestLoadSharedConfig(t *testing.T) {
 			if len(c.Files) > 0 {
 				DefaultSharedConfigFiles = c.Files
 			}
+
+			DefaultSharedCredentialsFiles = []string{}
 
 			var options LoadOptions
 			c.LoadOptionFn(&options)
@@ -523,6 +499,251 @@ func TestLoadSharedConfig(t *testing.T) {
 
 			if e, a := c.Expect, cfg; !reflect.DeepEqual(e, a) {
 				t.Errorf("expect %v got %v", e, a)
+			}
+		})
+	}
+}
+
+func TestSharedConfigLoading(t *testing.T) {
+	// initialize a logger
+	var loggerBuf bytes.Buffer
+	logger := logging.NewStandardLogger(&loggerBuf)
+
+	cases := map[string]struct {
+		LoadOptionFns []func(*LoadOptions) error
+		LoadFn        func(context.Context, configs) (Config, error)
+		Expect        SharedConfig
+		ExpectLog     string
+		Err           string
+	}{
+		"duplicate profiles in the configuration files": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("duplicate-profile"),
+				WithSharedConfigFiles([]string{"testdata/load_config"}),
+				WithSharedCredentialsFiles([]string{"testdata/empty_creds_config"}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn: loadSharedConfig,
+			Expect: SharedConfig{
+				Profile: "duplicate-profile",
+				Region:  "us-west-2",
+			},
+			ExpectLog: "For profile: profile duplicate-profile, overriding region value, with a region value found in a " +
+				"duplicate profile defined later in the same file testdata/load_config",
+		},
+
+		"profile prefix not used in the configuration files": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("no-such-profile"),
+				WithSharedConfigFiles([]string{"testdata/load_config"}),
+				WithSharedCredentialsFiles([]string{"testdata/empty_creds_config"}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn: loadSharedConfig,
+			Expect: SharedConfig{},
+			Err:    "failed to get shared config profile",
+		},
+
+		"profile prefix overrides default": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigFiles([]string{"testdata/load_config"}),
+				WithSharedCredentialsFiles([]string{"testdata/empty_creds_config"}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn: loadSharedConfig,
+			Expect: SharedConfig{
+				Profile: "default",
+				Region:  "ap-north-1",
+			},
+			ExpectLog: "overrided non-prefixed default profile",
+		},
+
+		"duplicate profiles in credentials file": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("duplicate-profile"),
+				WithSharedConfigFiles([]string{"testdata/empty_creds_config"}),
+				WithSharedCredentialsFiles([]string{"testdata/load_credentials"}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn: loadSharedConfig,
+			Expect: SharedConfig{
+				Profile: "duplicate-profile",
+				Region:  "us-west-2",
+			},
+			ExpectLog: "overriding region value, with a region value found in a duplicate profile defined later in the same file",
+			Err:       "",
+		},
+
+		"profile prefix used in credentials files": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("unused-profile"),
+				WithSharedConfigFiles([]string{"testdata/empty_creds_config"}),
+				WithSharedCredentialsFiles([]string{"testdata/load_credentials"}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn:    loadSharedConfig,
+			ExpectLog: "profile unused-profile is ignored. A profile with the \"profile \" prefix is invalid for the shared credentials file",
+			Err:       "failed to get shared config profile, unused-profile",
+		},
+		"partial credentials in configuration files": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("partial-creds-1"),
+				WithSharedConfigFiles([]string{"testdata/load_config"}),
+				WithSharedCredentialsFiles([]string{"testdata/empty_creds_config"}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn: loadSharedConfig,
+			Expect: SharedConfig{
+				Profile: "partial-creds-1",
+			},
+			Err: "Partial Credentials",
+		},
+		"parital credentials in the credentials files": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("partial-creds-1"),
+				WithSharedConfigFiles([]string{"testdata/empty_creds_config"}),
+				WithSharedCredentialsFiles([]string{"testdata/load_credentials"}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn: loadSharedConfig,
+			Expect: SharedConfig{
+				Profile: "partial-creds-1",
+			},
+			Err: "Partial Credentials found for profile partial-creds-1",
+		},
+		"credentials override configuration profile": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("complete"),
+				WithSharedConfigFiles([]string{"testdata/load_config"}),
+				WithSharedCredentialsFiles([]string{"testdata/load_credentials"}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn: loadSharedConfig,
+			Expect: SharedConfig{
+				Profile: "complete",
+				Credentials: aws.Credentials{
+					AccessKeyID:     "credsAccessKey",
+					SecretAccessKey: "credsSecretKey",
+					Source:          "SharedConfigCredentials: testdata/load_credentials",
+				},
+				Region: "us-west-2",
+			},
+		},
+		"credentials profile has complete credentials": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("complete"),
+				WithSharedConfigFiles([]string{"testdata/empty_creds_config"}),
+				WithSharedCredentialsFiles([]string{"testdata/load_credentials"}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn: loadSharedConfig,
+			Expect: SharedConfig{
+				Profile: "complete",
+				Credentials: aws.Credentials{
+					AccessKeyID:     "credsAccessKey",
+					SecretAccessKey: "credsSecretKey",
+					Source:          "SharedConfigCredentials: testdata/load_credentials",
+				},
+			},
+		},
+		"credentials split between multiple credentials files": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("partial-creds-1"),
+				WithSharedConfigFiles([]string{"testdata/empty_creds_config"}),
+				WithSharedCredentialsFiles([]string{
+					"testdata/load_credentials",
+					"testdata/load_credentials_secondary",
+				}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn: loadSharedConfig,
+			Expect: SharedConfig{
+				Profile: "partial-creds-1",
+			},
+			Err: "Partial Credentials",
+		},
+		"credentials split between multiple configuration files": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("partial-creds-1"),
+				WithSharedCredentialsFiles([]string{"testdata/empty_creds_config"}),
+				WithSharedConfigFiles([]string{
+					"testdata/load_config",
+					"testdata/load_config_secondary",
+				}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn: loadSharedConfig,
+			Expect: SharedConfig{
+				Profile: "partial-creds-1",
+				Region:  "us-west-2",
+			},
+			ExpectLog: "",
+			Err:       "Partial Credentials",
+		},
+		"credentials split between credentials and config files": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("partial-creds-1"),
+				WithSharedConfigFiles([]string{
+					"testdata/load_config",
+				}),
+				WithSharedCredentialsFiles([]string{
+					"testdata/load_credentials",
+				}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn:    loadSharedConfig,
+			Expect:    SharedConfig{
+				Profile: "partial-creds-1",
+			},
+			ExpectLog: "",
+			Err:       "Partial Credentials",
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			defer loggerBuf.Reset()
+
+			var options LoadOptions
+
+			for _, fn := range c.LoadOptionFns {
+				fn(&options)
+			}
+
+			cfg, err := c.LoadFn(context.Background(), configs{options})
+			if len(c.Err) > 0 {
+				if err == nil {
+					t.Fatalf("expected error %v, got none", c.Err)
+				}
+				if e, a := c.Err, err.Error(); !strings.Contains(a, e) {
+					t.Fatalf("expect %q to be in %q", e, a)
+				}
+				return
+			} else if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			if e, a := c.Expect, cfg; !reflect.DeepEqual(e, a) {
+				t.Errorf("expect %v got %v", e, a)
+			}
+
+			if e, a := c.ExpectLog, loggerBuf.String(); !strings.Contains(a, e) {
+				t.Errorf("expect %v logged in %v", e, a)
+			}
+			if loggerBuf.Len() == 0 && len(c.ExpectLog) != 0 {
+				t.Errorf("expected log, got none")
 			}
 		})
 	}

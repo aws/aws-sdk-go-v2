@@ -13,51 +13,51 @@ aws_secret_access_key = SECRET
 [profile alt_profile_name]
 region = alt_profile_name_region
 
-[short_profile_name_first]
+[profile short_profile_name_first]
 region = short_profile_name_first_short
 
 [profile short_profile_name_first]
 region = short_profile_name_first_alt
 
-[partial_creds]
+[profile partial_creds]
 aws_access_key_id = partial_creds_akid
 
-[complete_creds]
+[profile complete_creds]
 aws_access_key_id = complete_creds_akid
 aws_secret_access_key = complete_creds_secret
 
-[complete_creds_with_token]
+[profile complete_creds_with_token]
 aws_access_key_id = complete_creds_with_token_akid
 aws_secret_access_key = complete_creds_with_token_secret
 aws_session_token = complete_creds_with_token_token
 
-[full_profile]
+[profile full_profile]
 aws_access_key_id = full_profile_akid
 aws_secret_access_key = full_profile_secret
 region = full_profile_region
 
-[config_file_load_order]
+[profile config_file_load_order]
 region = shared_config_region
 aws_access_key_id = shared_config_akid
 aws_secret_access_key = shared_config_secret
 
-[partial_assume_role]
+[profile partial_assume_role]
 role_arn = partial_assume_role_role_arn
 
-[assume_role]
+[profile assume_role]
 role_arn = assume_role_role_arn
 source_profile = complete_creds
 
-[assume_role_w_mfa]
+[profile assume_role_w_mfa]
 role_arn = assume_role_role_arn
 source_profile = complete_creds
 mfa_serial = 0123456789
 
-[assume_role_invalid_source_profile]
+[profile assume_role_invalid_source_profile]
 role_arn = assume_role_invalid_source_profile_role_arn
 source_profile = profile_not_exists
 
-[assume_role_w_creds]
+[profile assume_role_w_creds]
 role_arn = assume_role_w_creds_role_arn
 source_profile = assume_role_w_creds
 external_id = 1234
@@ -65,7 +65,7 @@ role_session_name = assume_role_w_creds_session_name
 aws_access_key_id = assume_role_w_creds_akid
 aws_secret_access_key = assume_role_w_creds_secret
 
-[assume_role_w_creds_ext_dur]
+[profile assume_role_w_creds_ext_dur]
 role_arn = assume_role_w_creds_role_arn
 duration_seconds=1800
 source_profile = assume_role_w_creds_ext_dur
@@ -74,33 +74,33 @@ role_session_name = assume_role_w_creds_session_name
 aws_access_key_id = assume_role_w_creds_akid
 aws_secret_access_key = assume_role_w_creds_secret
 
-[assume_role_wo_creds]
+[profile assume_role_wo_creds]
 role_arn = assume_role_wo_creds_role_arn
 source_profile = assume_role_wo_creds
 
-[valid_arn_region]
+[profile valid_arn_region]
 s3_use_arn_region=true
 
-[endpoint_discovery]
+[profile endpoint_discovery]
 endpoint_discovery_enabled=true
 
 
-[with_mixed_case_keys]
+[profile with_mixed_case_keys]
 aWs_AcCeSs_kEy_ID = accessKey
 aWs_SecrEt_AccEsS_kEY = secret
 
-[assume_role_with_credential_source]
+[profile assume_role_with_credential_source]
 role_arn = assume_role_with_credential_source_role_arn
 credential_source = Ec2InstanceMetadata
 
-[multiple_assume_role]
+[profile multiple_assume_role]
 role_arn = multiple_assume_role_role_arn
 source_profile = assume_role
 
-[multiple_assume_role_with_credential_source]
+[profile multiple_assume_role_with_credential_source]
 role_arn = multiple_assume_role_with_credential_source_role_arn
 source_profile = assume_role_with_credential_source
 
-[multiple_assume_role_with_credential_source2]
+[profile multiple_assume_role_with_credential_source2]
 role_arn = multiple_assume_role_with_credential_source2_role_arn
 source_profile = multiple_assume_role_with_credential_source

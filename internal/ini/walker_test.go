@@ -31,7 +31,7 @@ func TestValidDataFiles(t *testing.T) {
 			t.Errorf("%s: unexpected parse error, %v", path, err)
 		}
 
-		v := NewDefaultVisitor()
+		v := NewDefaultVisitor(path)
 		err = Walk(tree, v)
 		if err != nil {
 			t.Errorf("%s: unexpected walk error, %v", path, err)
@@ -52,6 +52,9 @@ func TestValidDataFiles(t *testing.T) {
 		}
 
 		for profile, tableIface := range e {
+			// standardize by lower casing
+			profile = strings.ToLower(profile)
+
 			p, ok := v.Sections.GetSection(profile)
 			if !ok {
 				t.Fatal("could not find profile " + profile)
@@ -135,7 +138,7 @@ func TestInvalidDataFiles(t *testing.T) {
 				return
 			}
 
-			v := NewDefaultVisitor()
+			v := NewDefaultVisitor(c.path)
 			err = Walk(tree, v)
 			if err == nil && c.expectedWalkError {
 				t.Errorf("%d: expected error, but received none", i+1)

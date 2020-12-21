@@ -110,7 +110,7 @@ func (v Credentials) HasKeys() bool {
 //
 // A credentials provider implementation can be wrapped with a CredentialCache
 // to cache the credential value retrieved. Without the cache the SDK will
-// attempt to retrieve the credentials for ever request.
+// attempt to retrieve the credentials for every request.
 type CredentialsProvider interface {
 	// Retrieve returns nil if it successfully retrieved the value.
 	// Error is returned if the value were not obtainable, or empty.

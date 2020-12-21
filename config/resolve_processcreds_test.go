@@ -2,12 +2,11 @@ package config
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"os"
 	"path/filepath"
 	"runtime"
 	"testing"
-
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 )
 
 func setupEnvForProcesscredsConfigFile() {
@@ -17,6 +16,7 @@ func setupEnvForProcesscredsConfigFile() {
 	}
 
 	os.Setenv("AWS_CONFIG_FILE", filepath.Join("testdata", filename))
+	os.Setenv("AWS_SHARED_CREDENTIALS_FILE", filepath.Join("testdata", "empty_creds_config"))
 }
 
 func setupEnvForProcesscredsCredentialsFile() {

@@ -3,6 +3,8 @@ package config_test
 import (
 	"context"
 	"fmt"
+	"github.com/awslabs/smithy-go/middleware"
+	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"log"
 	"net/http"
 	"path/filepath"
