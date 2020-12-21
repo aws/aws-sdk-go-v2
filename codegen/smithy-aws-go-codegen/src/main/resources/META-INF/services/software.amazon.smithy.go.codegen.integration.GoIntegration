@@ -32,3 +32,4 @@ software.amazon.smithy.aws.go.codegen.FilterStreamingOperations
 software.amazon.smithy.aws.go.codegen.RequestResponseLogging
 software.amazon.smithy.aws.go.codegen.customization.S3ControlEndpointResolver
 software.amazon.smithy.aws.go.codegen.AwsHttpPresignURLClientGenerator
+software.amazon.smithy.aws.go.codegen.ResolveClientConfig

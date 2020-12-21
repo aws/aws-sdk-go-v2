@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
+	s3sharedconfig "github.com/aws/aws-sdk-go-v2/service/internal/s3shared/config"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/logging"
 	"github.com/awslabs/smithy-go/middleware"
@@ -168,6 +169,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		ClientLogMode: cfg.ClientLogMode,
 	}
 	resolveAWSEndpointResolver(cfg, &opts)
+	resolveClientConfig(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -236,6 +238,21 @@ func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
 		LogRetryAttempts: o.ClientLogMode.IsRetries(),
 	}
 	return retry.AddRetryMiddlewares(stack, mo)
+}
+
+// resolves client config
+func resolveClientConfig(cfg aws.Config, o *Options) error {
+	if len(cfg.ConfigSources) == 0 {
+		return nil
+	}
+	value, found, err := s3sharedconfig.ResolveUseARNRegion(context.Background(), cfg.ConfigSources)
+	if err != nil {
+		return err
+	}
+	if found {
+		o.UseARNRegion = value
+	}
+	return nil
 }
 
 // IdempotencyTokenProvider interface for providing idempotency token

@@ -34,6 +34,8 @@ public class AwsGoDependency {
     public static final GoDependency AWS_HTTP_TRANSPORT = aws("aws/transport/http", "awshttp");
     public static final GoDependency AWSTESTING_UNIT = aws("internal/awstesting/unit");
 
+    public static final GoDependency S3_SHARED_CONFIG = aws("service/internal/s3shared/config", "s3sharedconfig");
+
     public static final GoDependency REGEXP = SmithyGoDependency.stdlib("regexp");
 
     public static final String AWS_SOURCE_PATH = "github.com/aws/aws-sdk-go-v2";
@@ -82,6 +84,6 @@ public class AwsGoDependency {
     }
 
     private static final class Versions {
-        private static final String AWS_SDK = "v0.30.1-0.20201217001905-4acf9c65b2d1";
+        private static final String AWS_SDK = "v0.30.1-0.20201221101722-677dd4a81dad";
     }
 }
