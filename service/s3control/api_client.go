@@ -242,7 +242,7 @@ func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
 
 // resolves client config
 func resolveClientConfig(cfg aws.Config, o *Options) error {
-	if cfg.ConfigSources == nil || len(cfg.ConfigSources) == 0 {
+	if len(cfg.ConfigSources) == 0 {
 		return nil
 	}
 	value, found, err := s3sharedconfig.ResolveUseARNRegion(context.Background(), cfg.ConfigSources)

@@ -130,7 +130,7 @@ type SharedConfig struct {
 
 // GetS3UseARNRegion returns if the S3 service should allow ARNs to direct the region
 // the client's requests are sent to.
-func (c *SharedConfig) GetS3UseARNRegion(ctx context.Context) (value, ok bool, err error) {
+func (c SharedConfig) GetS3UseARNRegion(ctx context.Context) (value, ok bool, err error) {
 	if c.S3UseARNRegion == nil {
 		return false, false, nil
 	}

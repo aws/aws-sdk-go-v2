@@ -56,8 +56,8 @@ public class ResolveClientConfig implements GoIntegration {
             writer.addUseImports(AwsGoDependency.AWS_CORE);
             writer.openBlock("func $L(cfg aws.Config, o *Options) error {", "}",
                     CLIENT_CONFIG_RESOLVER_FUNC, () -> {
-                writer.openBlock("if cfg.$L == nil || len(cfg.$L) == 0 {", "}",
-                        CONFIG_SOURCE_CONFIG_NAME, CONFIG_SOURCE_CONFIG_NAME,
+                writer.openBlock("if len(cfg.$L) == 0 {", "}",
+                        CONFIG_SOURCE_CONFIG_NAME,
                         () -> writer.write("return nil")
                 );
 

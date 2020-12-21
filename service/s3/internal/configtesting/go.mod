@@ -4,7 +4,7 @@ go 1.15
 
 require (
 	github.com/aws/aws-sdk-go-v2/config v0.3.0
-	github.com/aws/aws-sdk-go-v2/service/s3 v0.30.0
+	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v0.3.3-0.20201217001905-4acf9c65b2d1
 )
 
 replace (
