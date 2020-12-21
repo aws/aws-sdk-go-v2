@@ -234,6 +234,11 @@ public class AddAwsConfigFields implements GoIntegration {
                         if (!awsResolverFunction.isPresent()) {
                             continue;
                         }
+                        if (field.getServicePredicate().isPresent()) {
+                            if (!field.getServicePredicate().get().test(model, service)) {
+                                continue;
+                            }
+                        }
                         writer.write("$L(cfg, &opts)", awsResolverFunction.get());
                     }
 

@@ -12,6 +12,7 @@ import (
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	acceptencodingcust "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding"
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
+	s3sharedconfig "github.com/aws/aws-sdk-go-v2/service/internal/s3shared/config"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/logging"
@@ -177,6 +178,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		ClientLogMode: cfg.ClientLogMode,
 	}
 	resolveAWSEndpointResolver(cfg, &opts)
+	resolveClientConfig(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -239,6 +241,21 @@ func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
 		LogRetryAttempts: o.ClientLogMode.IsRetries(),
 	}
 	return retry.AddRetryMiddlewares(stack, mo)
+}
+
+// resolves client config
+func resolveClientConfig(cfg aws.Config, o *Options) error {
+	if cfg.ConfigSources == nil || len(cfg.ConfigSources) == 0 {
+		return nil
+	}
+	value, found, err := s3sharedconfig.ResolveUseARNRegion(context.Background(), cfg.ConfigSources)
+	if err != nil {
+		return err
+	}
+	if found {
+		o.UseARNRegion = value
+	}
+	return nil
 }
 
 func addMetadataRetrieverMiddleware(stack *middleware.Stack) error {
