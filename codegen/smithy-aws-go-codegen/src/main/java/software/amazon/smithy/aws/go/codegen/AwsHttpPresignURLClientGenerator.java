@@ -89,7 +89,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
 
     // map of service to list of operations for which presignedURL client and operation should
     // be generated.
-    public static Map<ShapeId, Set<ShapeId>> PRESIGNER_MAP = new TreeMap<>();
+    private final Map<ShapeId, Set<ShapeId>> PRESIGNER_MAP = new TreeMap<>();
 
     private static final String addAsUnsignedPayloadName(String operationName) {
         return String.format("add%sPayloadAsUnsigned", operationName);

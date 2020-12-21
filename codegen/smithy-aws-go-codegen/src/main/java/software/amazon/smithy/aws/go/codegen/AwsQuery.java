@@ -9,6 +9,7 @@ import software.amazon.smithy.aws.traits.protocols.AwsQueryTrait;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
+import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.HttpRpcProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
@@ -95,6 +96,7 @@ class AwsQuery extends HttpRpcProtocolGenerator {
         StructureShape output = ProtocolUtils.expectOutput(context.getModel(), operation);
         String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(output, getProtocolName());
         initializeXmlDecoder(writer, "response.Body", "out, metadata, ","nil");
+        unwrapOutputDocument(context, operation);
         writer.write("err = $L(&output, decoder)", functionName);
         handleDecodeError(writer, "out, metadata, ");
     }
@@ -111,11 +113,30 @@ class AwsQuery extends HttpRpcProtocolGenerator {
                     shape, getProtocolName());
             writer.addUseImports(SmithyGoDependency.IO);
             initializeXmlDecoder(writer, "errorBody", "output");
+            unwrapErrorElement(context);
             writer.write("err = $L(&output, decoder)", documentDeserFunctionName);
             XmlProtocolUtils.handleDecodeError(writer, "");
             writer.insertTrailingNewline();
         }
         writer.write("return output");
+    }
+
+    protected void unwrapOutputDocument(GenerationContext context, OperationShape shape) {
+        GoWriter writer = context.getWriter();
+        writer.write("t, err = decoder.GetElement(\"$LResult\")", shape.getId().getName());
+        handleDecodeError(writer, "out, metadata, ");
+        Symbol wrapNodeDecoder = SymbolUtils.createValueSymbolBuilder("WrapNodeDecoder",
+                SmithyGoDependency.SMITHY_XML).build();
+        writer.write("decoder = $T(decoder.Decoder, t)", wrapNodeDecoder);
+    }
+
+    protected void unwrapErrorElement(GenerationContext context) {
+        GoWriter writer = context.getWriter();
+        writer.write("t, err = decoder.GetElement(\"Error\")");
+        XmlProtocolUtils.handleDecodeError(writer, "");
+        Symbol wrapNodeDecoder = SymbolUtils.createValueSymbolBuilder("WrapNodeDecoder",
+                SmithyGoDependency.SMITHY_XML).build();
+        writer.write("decoder = $T(decoder.Decoder, t)", wrapNodeDecoder);
     }
 
     @Override

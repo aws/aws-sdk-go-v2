@@ -86,7 +86,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
         writer.addUseImports(SmithyGoDependency.FMT);
         consumeToken(shape);
 
-        writer.openBlock("if val != nil {", "}", () -> {
+        writer.openBlock("{", "}", () -> {
             writer.addUseImports(SmithyGoDependency.STRCONV);
             writer.write("xtv, err := strconv.ParseBool(string(val))");
             writer.openBlock("if err != nil {", "}", () -> {
@@ -113,43 +113,9 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
             return;
         }
 
-        writer.write("val, done, err := decoder.Value()");
+        writer.write("val, err := decoder.Value()");
         writer.write("if err != nil { return err }");
-        writer.openBlock("if done {", "}", () -> {
-            handleDone(shape);
-            writer.write("break");
-        });
-    }
-
-    // handles zero value assignment in case a empty or self closed xml tag is sent for the response member
-    private void handleDone(Shape shape) {
-        GoWriter writer = context.getWriter();
-
-        // Member shapes string, blob, collection and map can have an empty xml or self closed tag in response.
-        // The string, blob shape with empty xml or self closed tag in response are deserialized as empty string.
-        // Collection, map shape are deserialized as empty list, map respectively.
-        //
-        // empty values are handled for collection, map in their respective member deser func.
-        //
-        // Handle string shape zero value assignment
-        switch (shape.getType()) {
-            case STRING:
-                if (pointableIndex.isPointable(member)) {
-                    // assign empty string as zero value if val for string member is nil.
-                    writer.addUseImports(SmithyGoDependency.SMITHY_PTR);
-                    writer.write("if val == nil { $L = ptr.String(\"\") }", dataDest);
-                }
-                break;
-
-            case BLOB:
-                // assign empty byte slice as zero value if val for blob member is nil.
-                writer.addUseImports(SmithyGoDependency.SMITHY_PTR);
-                writer.write("if val == nil { $L = []byte{} }", dataDest);
-                break;
-
-            default:
-                break;
-        }
+        writer.write("if val == nil { break }");
     }
 
     @Override
@@ -210,7 +176,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
         writer.addUseImports(SmithyGoDependency.FMT);
         consumeToken(shape);
 
-        writer.openBlock("if val != nil {", "}", () -> {
+        writer.openBlock("{", "}", () -> {
             writer.write("xtv := string(val)");
             r.run();
         });
@@ -273,7 +239,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
         writer.addUseImports(SmithyGoDependency.FMT);
         consumeToken(shape);
 
-        writer.openBlock("if val != nil {", "}", () -> {
+        writer.openBlock("{", "}", () -> {
             writer.write("xtv := string(val)");
             r.run();
         });
