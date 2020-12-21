@@ -222,7 +222,14 @@ public class AddAwsConfigFields implements GoIntegration {
                         }
                     });
 
-                    for (AwsConfigField field : AWS_CONFIG_FIELDS) {
+
+                    List<AwsConfigField> configFields = new ArrayList<>(AWS_CONFIG_FIELDS);
+                    // add client specific config fields
+                    for (AwsConfigField cfgField: ResolveClientConfig.AWS_CONFIG_FIELDS) {
+                        configFields.add(cfgField);
+                    }
+
+                    for (AwsConfigField field : configFields) {
                         Optional<Symbol> awsResolverFunction = field.getAwsResolverFunction();
                         if (!awsResolverFunction.isPresent()) {
                             continue;
