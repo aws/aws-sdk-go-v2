@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes invitations received by the AWS account to become a member account.
+// Deletes invitations received by the AWS account to become a member account. This
+// operation is only used by accounts that are not part of an organization.
+// Organization accounts do not receive invitations.
 func (c *Client) DeleteInvitations(ctx context.Context, params *DeleteInvitationsInput, optFns ...func(*Options)) (*DeleteInvitationsOutput, error) {
 	if params == nil {
 		params = &DeleteInvitationsInput{}

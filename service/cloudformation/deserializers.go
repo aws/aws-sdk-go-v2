@@ -8626,6 +8626,68 @@ func awsAwsquery_deserializeDocumentLogicalResourceIdsUnwrapped(v *[]string, dec
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentModuleInfo(v **types.ModuleInfo, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ModuleInfo
+	if *v == nil {
+		sv = &types.ModuleInfo{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("LogicalIdHierarchy", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.LogicalIdHierarchy = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("TypeHierarchy", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TypeHierarchy = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentNameAlreadyExistsException(v **types.NameAlreadyExistsException, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10050,6 +10112,12 @@ func awsAwsquery_deserializeDocumentResourceChange(v **types.ResourceChange, dec
 			{
 				xtv := string(val)
 				sv.LogicalResourceId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ModuleInfo", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentModuleInfo(&sv.ModuleInfo, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("PhysicalResourceId", t.Name.Local):
@@ -12099,6 +12167,12 @@ func awsAwsquery_deserializeDocumentStackResource(v **types.StackResource, decod
 				sv.LogicalResourceId = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("ModuleInfo", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentModuleInfo(&sv.ModuleInfo, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("PhysicalResourceId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -12292,6 +12366,12 @@ func awsAwsquery_deserializeDocumentStackResourceDetail(v **types.StackResourceD
 				sv.Metadata = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("ModuleInfo", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentModuleInfo(&sv.ModuleInfo, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("PhysicalResourceId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -12443,6 +12523,12 @@ func awsAwsquery_deserializeDocumentStackResourceDrift(v **types.StackResourceDr
 			{
 				xtv := string(val)
 				sv.LogicalResourceId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ModuleInfo", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentModuleInfo(&sv.ModuleInfo, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("PhysicalResourceId", t.Name.Local):
@@ -12923,6 +13009,12 @@ func awsAwsquery_deserializeDocumentStackResourceSummary(v **types.StackResource
 			{
 				xtv := string(val)
 				sv.LogicalResourceId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ModuleInfo", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentModuleInfo(&sv.ModuleInfo, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("PhysicalResourceId", t.Name.Local):

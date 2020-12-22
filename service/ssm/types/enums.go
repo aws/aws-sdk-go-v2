@@ -589,12 +589,6 @@ func (DocumentHashType) Values() []DocumentHashType {
 
 type DocumentParameterType string
 
-// Enum values for DocumentParameterType
-const (
-	DocumentParameterTypeString     DocumentParameterType = "String"
-	DocumentParameterTypeStringlist DocumentParameterType = "StringList"
-)
-
 // Values returns all known values for DocumentParameterType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -696,13 +690,6 @@ func (ExecutionMode) Values() []ExecutionMode {
 }
 
 type Fault string
-
-// Enum values for Fault
-const (
-	FaultClient  Fault = "Client"
-	FaultServer  Fault = "Server"
-	FaultUnknown Fault = "Unknown"
-)
 
 // Values returns all known values for Fault. Note that this can be expanded in the
 // future, and so it is only as up to date as the client. The ordering of this
@@ -997,6 +984,7 @@ const (
 	OperatingSystemCentos                OperatingSystem = "CENTOS"
 	OperatingSystemOraclelinux           OperatingSystem = "ORACLE_LINUX"
 	OperatingSystemDebian                OperatingSystem = "DEBIAN"
+	OperatingSystemMacos                 OperatingSystem = "MACOS"
 )
 
 // Values returns all known values for OperatingSystem. Note that this can be
@@ -1013,6 +1001,7 @@ func (OperatingSystem) Values() []OperatingSystem {
 		"CENTOS",
 		"ORACLE_LINUX",
 		"DEBIAN",
+		"MACOS",
 	}
 }
 

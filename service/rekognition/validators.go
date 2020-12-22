@@ -1113,11 +1113,11 @@ func validateNotificationChannel(v *types.NotificationChannel) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NotificationChannel"}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
 	if v.SNSTopicArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SNSTopicArn"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1197,20 +1197,20 @@ func validateOpCreateProjectVersionInput(v *CreateProjectVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateProjectVersionInput"}
+	if v.ProjectArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
+	}
 	if v.VersionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VersionName"))
 	}
 	if v.OutputConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
 	}
-	if v.TestingData == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TestingData"))
-	}
 	if v.TrainingData == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrainingData"))
 	}
-	if v.ProjectArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
+	if v.TestingData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestingData"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1224,11 +1224,11 @@ func validateOpCreateStreamProcessorInput(v *CreateStreamProcessorInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateStreamProcessorInput"}
-	if v.Output == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Output"))
-	}
 	if v.Input == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Input"))
+	}
+	if v.Output == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Output"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
@@ -1442,13 +1442,13 @@ func validateOpDetectProtectiveEquipmentInput(v *DetectProtectiveEquipmentInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DetectProtectiveEquipmentInput"}
+	if v.Image == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Image"))
+	}
 	if v.SummarizationAttributes != nil {
 		if err := validateProtectiveEquipmentSummarizationAttributes(v.SummarizationAttributes); err != nil {
 			invalidParams.AddNested("SummarizationAttributes", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Image == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Image"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1612,11 +1612,11 @@ func validateOpIndexFacesInput(v *IndexFacesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IndexFacesInput"}
-	if v.Image == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Image"))
-	}
 	if v.CollectionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CollectionId"))
+	}
+	if v.Image == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Image"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1660,11 +1660,11 @@ func validateOpSearchFacesByImageInput(v *SearchFacesByImageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SearchFacesByImageInput"}
-	if v.Image == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Image"))
-	}
 	if v.CollectionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CollectionId"))
+	}
+	if v.Image == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Image"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1678,11 +1678,11 @@ func validateOpSearchFacesInput(v *SearchFacesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SearchFacesInput"}
-	if v.FaceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FaceId"))
-	}
 	if v.CollectionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CollectionId"))
+	}
+	if v.FaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FaceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1756,6 +1756,9 @@ func validateOpStartFaceSearchInput(v *StartFaceSearchInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartFaceSearchInput"}
+	if v.Video == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Video"))
+	}
 	if v.CollectionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CollectionId"))
 	}
@@ -1763,9 +1766,6 @@ func validateOpStartFaceSearchInput(v *StartFaceSearchInput) error {
 		if err := validateNotificationChannel(v.NotificationChannel); err != nil {
 			invalidParams.AddNested("NotificationChannel", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Video == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Video"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1837,9 +1837,6 @@ func validateOpStartSegmentDetectionInput(v *StartSegmentDetectionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartSegmentDetectionInput"}
-	if v.SegmentTypes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SegmentTypes"))
-	}
 	if v.Video == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Video"))
 	}
@@ -1847,6 +1844,9 @@ func validateOpStartSegmentDetectionInput(v *StartSegmentDetectionInput) error {
 		if err := validateNotificationChannel(v.NotificationChannel); err != nil {
 			invalidParams.AddNested("NotificationChannel", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.SegmentTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentTypes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

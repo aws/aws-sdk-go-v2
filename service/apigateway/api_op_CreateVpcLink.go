@@ -36,6 +36,11 @@ func (c *Client) CreateVpcLink(ctx context.Context, params *CreateVpcLinkInput, 
 // services.
 type CreateVpcLinkInput struct {
 
+	// [Required] The name used to label and identify the VPC link.
+	//
+	// This member is required.
+	Name *string
+
 	// [Required] The ARN of the network load balancer of the VPC targeted by the VPC
 	// link. The network load balancer must be owned by the same AWS account of the API
 	// owner.

@@ -558,9 +558,12 @@ func validateBudget(v *types.Budget) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Budget"}
-	if v.CalculatedSpend != nil {
-		if err := validateCalculatedSpend(v.CalculatedSpend); err != nil {
-			invalidParams.AddNested("CalculatedSpend", err.(smithy.InvalidParamsError))
+	if v.BudgetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
+	}
+	if v.BudgetLimit != nil {
+		if err := validateSpend(v.BudgetLimit); err != nil {
+			invalidParams.AddNested("BudgetLimit", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.PlannedBudgetLimits != nil {
@@ -571,16 +574,13 @@ func validateBudget(v *types.Budget) error {
 	if len(v.TimeUnit) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("TimeUnit"))
 	}
-	if len(v.BudgetType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("BudgetType"))
-	}
-	if v.BudgetLimit != nil {
-		if err := validateSpend(v.BudgetLimit); err != nil {
-			invalidParams.AddNested("BudgetLimit", err.(smithy.InvalidParamsError))
+	if v.CalculatedSpend != nil {
+		if err := validateCalculatedSpend(v.CalculatedSpend); err != nil {
+			invalidParams.AddNested("CalculatedSpend", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.BudgetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
+	if len(v.BudgetType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("BudgetType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -623,14 +623,14 @@ func validateDefinition(v *types.Definition) error {
 			invalidParams.AddNested("IamActionDefinition", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.SsmActionDefinition != nil {
-		if err := validateSsmActionDefinition(v.SsmActionDefinition); err != nil {
-			invalidParams.AddNested("SsmActionDefinition", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.ScpActionDefinition != nil {
 		if err := validateScpActionDefinition(v.ScpActionDefinition); err != nil {
 			invalidParams.AddNested("ScpActionDefinition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SsmActionDefinition != nil {
+		if err := validateSsmActionDefinition(v.SsmActionDefinition); err != nil {
+			invalidParams.AddNested("SsmActionDefinition", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -678,18 +678,18 @@ func validateNotificationWithSubscribers(v *types.NotificationWithSubscribers) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NotificationWithSubscribers"}
-	if v.Subscribers == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Subscribers"))
-	} else if v.Subscribers != nil {
-		if err := validateSubscribers(v.Subscribers); err != nil {
-			invalidParams.AddNested("Subscribers", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Notification == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Notification"))
 	} else if v.Notification != nil {
 		if err := validateNotification(v.Notification); err != nil {
 			invalidParams.AddNested("Notification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Subscribers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Subscribers"))
+	} else if v.Subscribers != nil {
+		if err := validateSubscribers(v.Subscribers); err != nil {
+			invalidParams.AddNested("Subscribers", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -757,11 +757,11 @@ func validateSpend(v *types.Spend) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Spend"}
-	if v.Unit == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
-	}
 	if v.Amount == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Amount"))
+	}
+	if v.Unit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -775,14 +775,14 @@ func validateSsmActionDefinition(v *types.SsmActionDefinition) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SsmActionDefinition"}
+	if len(v.ActionSubType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionSubType"))
+	}
 	if v.Region == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Region"))
 	}
 	if v.InstanceIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceIds"))
-	}
-	if len(v.ActionSubType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ActionSubType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -796,11 +796,11 @@ func validateSubscriber(v *types.Subscriber) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Subscriber"}
-	if v.Address == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Address"))
-	}
 	if len(v.SubscriptionType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionType"))
+	}
+	if v.Address == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Address"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -831,11 +831,17 @@ func validateOpCreateBudgetActionInput(v *CreateBudgetActionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateBudgetActionInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
 	if v.BudgetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
 	}
 	if len(v.NotificationType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("NotificationType"))
+	}
+	if len(v.ActionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionType"))
 	}
 	if v.ActionThreshold == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionThreshold"))
@@ -843,22 +849,6 @@ func validateOpCreateBudgetActionInput(v *CreateBudgetActionInput) error {
 		if err := validateActionThreshold(v.ActionThreshold); err != nil {
 			invalidParams.AddNested("ActionThreshold", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Subscribers == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Subscribers"))
-	} else if v.Subscribers != nil {
-		if err := validateSubscribers(v.Subscribers); err != nil {
-			invalidParams.AddNested("Subscribers", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
-	}
-	if len(v.ActionType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ActionType"))
-	}
-	if len(v.ApprovalModel) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ApprovalModel"))
 	}
 	if v.Definition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
@@ -869,6 +859,16 @@ func validateOpCreateBudgetActionInput(v *CreateBudgetActionInput) error {
 	}
 	if v.ExecutionRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
+	}
+	if len(v.ApprovalModel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ApprovalModel"))
+	}
+	if v.Subscribers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Subscribers"))
+	} else if v.Subscribers != nil {
+		if err := validateSubscribers(v.Subscribers); err != nil {
+			invalidParams.AddNested("Subscribers", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -882,10 +882,8 @@ func validateOpCreateBudgetInput(v *CreateBudgetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateBudgetInput"}
-	if v.NotificationsWithSubscribers != nil {
-		if err := validateNotificationWithSubscribersList(v.NotificationsWithSubscribers); err != nil {
-			invalidParams.AddNested("NotificationsWithSubscribers", err.(smithy.InvalidParamsError))
-		}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if v.Budget == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Budget"))
@@ -894,8 +892,10 @@ func validateOpCreateBudgetInput(v *CreateBudgetInput) error {
 			invalidParams.AddNested("Budget", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	if v.NotificationsWithSubscribers != nil {
+		if err := validateNotificationWithSubscribersList(v.NotificationsWithSubscribers); err != nil {
+			invalidParams.AddNested("NotificationsWithSubscribers", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -915,18 +915,18 @@ func validateOpCreateNotificationInput(v *CreateNotificationInput) error {
 	if v.BudgetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
 	}
-	if v.Subscribers == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Subscribers"))
-	} else if v.Subscribers != nil {
-		if err := validateSubscribers(v.Subscribers); err != nil {
-			invalidParams.AddNested("Subscribers", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Notification == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Notification"))
 	} else if v.Notification != nil {
 		if err := validateNotification(v.Notification); err != nil {
 			invalidParams.AddNested("Notification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Subscribers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Subscribers"))
+	} else if v.Subscribers != nil {
+		if err := validateSubscribers(v.Subscribers); err != nil {
+			invalidParams.AddNested("Subscribers", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -941,18 +941,18 @@ func validateOpCreateSubscriberInput(v *CreateSubscriberInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSubscriberInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.BudgetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
+	}
 	if v.Notification == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Notification"))
 	} else if v.Notification != nil {
 		if err := validateNotification(v.Notification); err != nil {
 			invalidParams.AddNested("Notification", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.BudgetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
-	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if v.Subscriber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Subscriber"))
@@ -973,14 +973,14 @@ func validateOpDeleteBudgetActionInput(v *DeleteBudgetActionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBudgetActionInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
 	if v.BudgetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
 	}
 	if v.ActionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionId"))
-	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1015,15 +1015,15 @@ func validateOpDeleteNotificationInput(v *DeleteNotificationInput) error {
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
+	if v.BudgetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
+	}
 	if v.Notification == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Notification"))
 	} else if v.Notification != nil {
 		if err := validateNotification(v.Notification); err != nil {
 			invalidParams.AddNested("Notification", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.BudgetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1037,6 +1037,9 @@ func validateOpDeleteSubscriberInput(v *DeleteSubscriberInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteSubscriberInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
 	if v.BudgetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
 	}
@@ -1054,9 +1057,6 @@ func validateOpDeleteSubscriberInput(v *DeleteSubscriberInput) error {
 			invalidParams.AddNested("Subscriber", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1072,11 +1072,11 @@ func validateOpDescribeBudgetActionHistoriesInput(v *DescribeBudgetActionHistori
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
-	if v.ActionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ActionId"))
-	}
 	if v.BudgetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
+	}
+	if v.ActionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1090,14 +1090,14 @@ func validateOpDescribeBudgetActionInput(v *DescribeBudgetActionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeBudgetActionInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
 	if v.BudgetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
 	}
 	if v.ActionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionId"))
-	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1126,11 +1126,11 @@ func validateOpDescribeBudgetActionsForBudgetInput(v *DescribeBudgetActionsForBu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeBudgetActionsForBudgetInput"}
-	if v.BudgetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.BudgetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1144,11 +1144,11 @@ func validateOpDescribeBudgetInput(v *DescribeBudgetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeBudgetInput"}
-	if v.BudgetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.BudgetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1213,18 +1213,18 @@ func validateOpDescribeSubscribersForNotificationInput(v *DescribeSubscribersFor
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeSubscribersForNotificationInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.BudgetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
+	}
 	if v.Notification == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Notification"))
 	} else if v.Notification != nil {
 		if err := validateNotification(v.Notification); err != nil {
 			invalidParams.AddNested("Notification", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.BudgetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
-	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1238,6 +1238,9 @@ func validateOpExecuteBudgetActionInput(v *ExecuteBudgetActionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExecuteBudgetActionInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
 	if v.BudgetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
 	}
@@ -1246,9 +1249,6 @@ func validateOpExecuteBudgetActionInput(v *ExecuteBudgetActionInput) error {
 	}
 	if len(v.ExecutionType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ExecutionType"))
-	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1265,6 +1265,9 @@ func validateOpUpdateBudgetActionInput(v *UpdateBudgetActionInput) error {
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
+	if v.BudgetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
+	}
 	if v.ActionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionId"))
 	}
@@ -1273,17 +1276,14 @@ func validateOpUpdateBudgetActionInput(v *UpdateBudgetActionInput) error {
 			invalidParams.AddNested("ActionThreshold", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.BudgetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
+	if v.Definition != nil {
+		if err := validateDefinition(v.Definition); err != nil {
+			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Subscribers != nil {
 		if err := validateSubscribers(v.Subscribers); err != nil {
 			invalidParams.AddNested("Subscribers", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Definition != nil {
-		if err := validateDefinition(v.Definition); err != nil {
-			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1298,15 +1298,15 @@ func validateOpUpdateBudgetInput(v *UpdateBudgetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateBudgetInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
 	if v.NewBudget == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NewBudget"))
 	} else if v.NewBudget != nil {
 		if err := validateBudget(v.NewBudget); err != nil {
 			invalidParams.AddNested("NewBudget", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1320,6 +1320,12 @@ func validateOpUpdateNotificationInput(v *UpdateNotificationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateNotificationInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.BudgetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
+	}
 	if v.OldNotification == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OldNotification"))
 	} else if v.OldNotification != nil {
@@ -1334,12 +1340,6 @@ func validateOpUpdateNotificationInput(v *UpdateNotificationInput) error {
 			invalidParams.AddNested("NewNotification", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.BudgetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
-	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1352,6 +1352,9 @@ func validateOpUpdateSubscriberInput(v *UpdateSubscriberInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSubscriberInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
 	if v.BudgetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
 	}
@@ -1362,13 +1365,6 @@ func validateOpUpdateSubscriberInput(v *UpdateSubscriberInput) error {
 			invalidParams.AddNested("Notification", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.NewSubscriber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NewSubscriber"))
-	} else if v.NewSubscriber != nil {
-		if err := validateSubscriber(v.NewSubscriber); err != nil {
-			invalidParams.AddNested("NewSubscriber", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.OldSubscriber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OldSubscriber"))
 	} else if v.OldSubscriber != nil {
@@ -1376,8 +1372,12 @@ func validateOpUpdateSubscriberInput(v *UpdateSubscriberInput) error {
 			invalidParams.AddNested("OldSubscriber", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	if v.NewSubscriber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewSubscriber"))
+	} else if v.NewSubscriber != nil {
+		if err := validateSubscriber(v.NewSubscriber); err != nil {
+			invalidParams.AddNested("NewSubscriber", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

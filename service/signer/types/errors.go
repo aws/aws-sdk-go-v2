@@ -10,6 +10,8 @@ import (
 // You do not have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
+
+	Code *string
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -28,6 +30,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // occurs when you call a tagging API on a cancelled signing profile.
 type BadRequestException struct {
 	Message *string
+
+	Code *string
 }
 
 func (e *BadRequestException) Error() string {
@@ -42,9 +46,30 @@ func (e *BadRequestException) ErrorMessage() string {
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The resource encountered a conflicting state.
+type ConflictException struct {
+	Message *string
+
+	Code *string
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // An internal error occurred.
 type InternalServiceErrorException struct {
 	Message *string
+
+	Code *string
 }
 
 func (e *InternalServiceErrorException) Error() string {
@@ -62,6 +87,8 @@ func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return 
 // The signing profile was not found.
 type NotFoundException struct {
 	Message *string
+
+	Code *string
 }
 
 func (e *NotFoundException) Error() string {
@@ -79,6 +106,8 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // A specified resource could not be found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -93,9 +122,31 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The signing job has been throttled.
+// The client is making a request that exceeds service limits.
+type ServiceLimitExceededException struct {
+	Message *string
+
+	Code *string
+}
+
+func (e *ServiceLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceLimitExceededException) ErrorCode() string             { return "ServiceLimitExceededException" }
+func (e *ServiceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The request was denied due to request throttling. Instead of this error,
+// TooManyRequestsException should be used.
 type ThrottlingException struct {
 	Message *string
+
+	Code *string
 }
 
 func (e *ThrottlingException) Error() string {
@@ -110,9 +161,31 @@ func (e *ThrottlingException) ErrorMessage() string {
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The allowed number of job-signing requests has been exceeded. This error
+// supersedes the error ThrottlingException.
+type TooManyRequestsException struct {
+	Message *string
+
+	Code *string
+}
+
+func (e *TooManyRequestsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyRequestsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // You signing certificate could not be validated.
 type ValidationException struct {
 	Message *string
+
+	Code *string
 }
 
 func (e *ValidationException) Error() string {

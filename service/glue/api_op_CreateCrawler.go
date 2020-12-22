@@ -67,6 +67,9 @@ type CreateCrawlerInput struct {
 	// A description of the new crawler.
 	Description *string
 
+	// Specifies data lineage configuration settings for the crawler.
+	LineageConfiguration *types.LineageConfiguration
+
 	// A policy that specifies whether to crawl the entire dataset again, or to crawl
 	// only folders that were added since the last crawler run.
 	RecrawlPolicy *types.RecrawlPolicy

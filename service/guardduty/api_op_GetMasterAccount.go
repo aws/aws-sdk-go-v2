@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides the details for the GuardDuty master account associated with the
+// Provides the details for the GuardDuty administrator account associated with the
 // current GuardDuty member account.
 func (c *Client) GetMasterAccount(ctx context.Context, params *GetMasterAccountInput, optFns ...func(*Options)) (*GetMasterAccountOutput, error) {
 	if params == nil {
@@ -38,7 +38,7 @@ type GetMasterAccountInput struct {
 
 type GetMasterAccountOutput struct {
 
-	// The master account details.
+	// The administrator account details.
 	//
 	// This member is required.
 	Master *types.Master

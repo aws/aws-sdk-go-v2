@@ -907,14 +907,14 @@ func validateOpAbortMultipartUploadInput(v *AbortMultipartUploadInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AbortMultipartUploadInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
 	if v.VaultName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
 	}
 	if v.UploadId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
-	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -946,11 +946,11 @@ func validateOpAddTagsToVaultInput(v *AddTagsToVaultInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddTagsToVaultInput"}
-	if v.VaultName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.VaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -964,14 +964,14 @@ func validateOpCompleteMultipartUploadInput(v *CompleteMultipartUploadInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CompleteMultipartUploadInput"}
-	if v.UploadId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if v.VaultName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
 	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	if v.UploadId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -985,14 +985,14 @@ func validateOpCompleteVaultLockInput(v *CompleteVaultLockInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CompleteVaultLockInput"}
-	if v.LockId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LockId"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if v.VaultName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
+	}
+	if v.LockId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LockId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1006,11 +1006,11 @@ func validateOpCreateVaultInput(v *CreateVaultInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateVaultInput"}
-	if v.VaultName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.VaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1027,11 +1027,11 @@ func validateOpDeleteArchiveInput(v *DeleteArchiveInput) error {
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
-	if v.ArchiveId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ArchiveId"))
-	}
 	if v.VaultName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
+	}
+	if v.ArchiveId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ArchiveId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1045,11 +1045,11 @@ func validateOpDeleteVaultAccessPolicyInput(v *DeleteVaultAccessPolicyInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteVaultAccessPolicyInput"}
-	if v.VaultName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.VaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1063,11 +1063,11 @@ func validateOpDeleteVaultInput(v *DeleteVaultInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteVaultInput"}
-	if v.VaultName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.VaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1081,11 +1081,11 @@ func validateOpDeleteVaultNotificationsInput(v *DeleteVaultNotificationsInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteVaultNotificationsInput"}
-	if v.VaultName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.VaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1099,14 +1099,14 @@ func validateOpDescribeJobInput(v *DescribeJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeJobInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
 	if v.VaultName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
 	}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
-	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1120,11 +1120,11 @@ func validateOpDescribeVaultInput(v *DescribeVaultInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeVaultInput"}
-	if v.VaultName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.VaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1153,14 +1153,14 @@ func validateOpGetJobOutputInput(v *GetJobOutputInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetJobOutputInput"}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if v.VaultName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1192,11 +1192,11 @@ func validateOpGetVaultLockInput(v *GetVaultLockInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetVaultLockInput"}
-	if v.VaultName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.VaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1228,16 +1228,16 @@ func validateOpInitiateJobInput(v *InitiateJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InitiateJobInput"}
-	if v.JobParameters != nil {
-		if err := validateJobParameters(v.JobParameters); err != nil {
-			invalidParams.AddNested("JobParameters", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if v.VaultName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
+	}
+	if v.JobParameters != nil {
+		if err := validateJobParameters(v.JobParameters); err != nil {
+			invalidParams.AddNested("JobParameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1287,11 +1287,11 @@ func validateOpListJobsInput(v *ListJobsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListJobsInput"}
-	if v.VaultName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.VaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1305,11 +1305,11 @@ func validateOpListMultipartUploadsInput(v *ListMultipartUploadsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListMultipartUploadsInput"}
-	if v.VaultName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.VaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1323,14 +1323,14 @@ func validateOpListPartsInput(v *ListPartsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListPartsInput"}
-	if v.UploadId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if v.VaultName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
 	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	if v.UploadId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1359,11 +1359,11 @@ func validateOpListTagsForVaultInput(v *ListTagsForVaultInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForVaultInput"}
-	if v.VaultName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.VaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1458,11 +1458,11 @@ func validateOpSetVaultNotificationsInput(v *SetVaultNotificationsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetVaultNotificationsInput"}
-	if v.VaultName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.VaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VaultName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

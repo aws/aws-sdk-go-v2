@@ -93,12 +93,6 @@ func (OperatorType) Values() []OperatorType {
 
 type ParameterApplyType string
 
-// Enum values for ParameterApplyType
-const (
-	ParameterApplyTypeStatic  ParameterApplyType = "static"
-	ParameterApplyTypeDynamic ParameterApplyType = "dynamic"
-)
-
 // Values returns all known values for ParameterApplyType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -110,12 +104,6 @@ func (ParameterApplyType) Values() []ParameterApplyType {
 }
 
 type ReservedNodeOfferingType string
-
-// Enum values for ReservedNodeOfferingType
-const (
-	ReservedNodeOfferingTypeRegular    ReservedNodeOfferingType = "Regular"
-	ReservedNodeOfferingTypeUpgradable ReservedNodeOfferingType = "Upgradable"
-)
 
 // Values returns all known values for ReservedNodeOfferingType. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
@@ -185,13 +173,6 @@ func (ScheduledActionTypeValues) Values() []ScheduledActionTypeValues {
 
 type ScheduleState string
 
-// Enum values for ScheduleState
-const (
-	ScheduleStateModifying ScheduleState = "MODIFYING"
-	ScheduleStateActive    ScheduleState = "ACTIVE"
-	ScheduleStateFailed    ScheduleState = "FAILED"
-)
-
 // Values returns all known values for ScheduleState. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -243,15 +224,6 @@ func (SortByOrder) Values() []SortByOrder {
 
 type SourceType string
 
-// Enum values for SourceType
-const (
-	SourceTypeCluster               SourceType = "cluster"
-	SourceTypeClusterParameterGroup SourceType = "cluster-parameter-group"
-	SourceTypeClusterSecurityGroup  SourceType = "cluster-security-group"
-	SourceTypeClusterSnapshot       SourceType = "cluster-snapshot"
-	SourceTypeScheduledAction       SourceType = "scheduled-action"
-)
-
 // Values returns all known values for SourceType. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
 // this slice is not guaranteed to be stable across updates.
@@ -266,15 +238,6 @@ func (SourceType) Values() []SourceType {
 }
 
 type TableRestoreStatusType string
-
-// Enum values for TableRestoreStatusType
-const (
-	TableRestoreStatusTypePending    TableRestoreStatusType = "PENDING"
-	TableRestoreStatusTypeInProgress TableRestoreStatusType = "IN_PROGRESS"
-	TableRestoreStatusTypeSucceeded  TableRestoreStatusType = "SUCCEEDED"
-	TableRestoreStatusTypeFailed     TableRestoreStatusType = "FAILED"
-	TableRestoreStatusTypeCanceled   TableRestoreStatusType = "CANCELED"
-)
 
 // Values returns all known values for TableRestoreStatusType. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The

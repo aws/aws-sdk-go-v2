@@ -60,14 +60,16 @@ type UpdateScriptInput struct {
 	// to be unique.
 	Name *string
 
-	// The location of the Amazon S3 bucket where a zipped file containing your
-	// Realtime scripts is stored. The storage location must specify the Amazon S3
-	// bucket name, the zip file name (the "key"), and a role ARN that allows Amazon
-	// GameLift to access the Amazon S3 storage location. The S3 bucket must be in the
-	// same Region where you want to create a new script. By default, Amazon GameLift
-	// uploads the latest version of the zip file; if you have S3 object versioning
-	// turned on, you can use the ObjectVersion parameter to specify an earlier
-	// version.
+	// The Amazon S3 location of your Realtime scripts. The storage location must
+	// specify the S3 bucket name, the zip file name (the "key"), and an IAM role ARN
+	// that allows Amazon GameLift to access the S3 storage location. The S3 bucket
+	// must be in the same Region as the script you're updating. By default, Amazon
+	// GameLift uploads the latest version of the zip file; if you have S3 object
+	// versioning turned on, you can use the ObjectVersion parameter to specify an
+	// earlier version. To call this operation with a storage location, you must have
+	// IAM PassRole permission. For more details on IAM roles and PassRole permissions,
+	// see  Set up a role for GameLift access
+	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/setting-up-role.html).
 	StorageLocation *types.S3Location
 
 	// The version that is associated with a build or script. Version strings do not

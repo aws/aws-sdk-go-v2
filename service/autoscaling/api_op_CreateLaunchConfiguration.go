@@ -159,7 +159,7 @@ type CreateLaunchConfigurationInput struct {
 	// dedicated. If you specify PlacementTenancy, you must specify at least one subnet
 	// for VPCZoneIdentifier when you create your group. For more information, see
 	// Configuring instance tenancy with Amazon EC2 Auto Scaling
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html)
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html)
 	// in the Amazon EC2 Auto Scaling User Guide. Valid Values: default | dedicated
 	PlacementTenancy *string
 

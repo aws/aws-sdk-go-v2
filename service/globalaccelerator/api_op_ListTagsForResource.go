@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all tags for an accelerator. To see an AWS CLI example of listing tags for
-// an accelerator, scroll down to Example. For more information, see Tagging in AWS
+// List all tags for an accelerator. For more information, see Tagging in AWS
 // Global Accelerator
 // (https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html)
 // in the AWS Global Accelerator Developer Guide.

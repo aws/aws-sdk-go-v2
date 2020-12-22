@@ -20,9 +20,7 @@ import (
 // that you can recover any data stored in their ephemeral instance storage. To
 // terminate a cluster that has been locked by setting SetTerminationProtection to
 // true, you must first unlock the job flow by a subsequent call to
-// SetTerminationProtection in which you set the value to false.
-//
-// For more
+// SetTerminationProtection in which you set the value to false. For more
 // information, seeManaging Cluster Termination
 // (https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html)
 // in the Amazon EMR Management Guide.

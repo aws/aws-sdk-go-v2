@@ -6943,6 +6943,61 @@ func (m *awsAwsquery_serializeOpStartDBInstance) HandleSerialize(ctx context.Con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpStartDBInstanceAutomatedBackupsReplication struct {
+}
+
+func (*awsAwsquery_serializeOpStartDBInstanceAutomatedBackupsReplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpStartDBInstanceAutomatedBackupsReplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartDBInstanceAutomatedBackupsReplicationInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("StartDBInstanceAutomatedBackupsReplication")
+	body.Key("Version").String("2014-10-31")
+
+	if err := awsAwsquery_serializeOpDocumentStartDBInstanceAutomatedBackupsReplicationInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpStartExportTask struct {
 }
 
@@ -7143,6 +7198,61 @@ func (m *awsAwsquery_serializeOpStopDBInstance) HandleSerialize(ctx context.Cont
 	body.Key("Version").String("2014-10-31")
 
 	if err := awsAwsquery_serializeOpDocumentStopDBInstanceInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpStopDBInstanceAutomatedBackupsReplication struct {
+}
+
+func (*awsAwsquery_serializeOpStopDBInstanceAutomatedBackupsReplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpStopDBInstanceAutomatedBackupsReplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StopDBInstanceAutomatedBackupsReplicationInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("StopDBInstanceAutomatedBackupsReplication")
+	body.Key("Version").String("2014-10-31")
+
+	if err := awsAwsquery_serializeOpDocumentStopDBInstanceAutomatedBackupsReplicationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -9238,6 +9348,11 @@ func awsAwsquery_serializeOpDocumentDeleteDBInstanceAutomatedBackupInput(v *Dele
 	object := value.Object()
 	_ = object
 
+	if v.DBInstanceAutomatedBackupsArn != nil {
+		objectKey := object.Key("DBInstanceAutomatedBackupsArn")
+		objectKey.String(*v.DBInstanceAutomatedBackupsArn)
+	}
+
 	if v.DbiResourceId != nil {
 		objectKey := object.Key("DbiResourceId")
 		objectKey.String(*v.DbiResourceId)
@@ -9765,6 +9880,11 @@ func awsAwsquery_serializeOpDocumentDescribeDBEngineVersionsInput(v *DescribeDBE
 func awsAwsquery_serializeOpDocumentDescribeDBInstanceAutomatedBackupsInput(v *DescribeDBInstanceAutomatedBackupsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.DBInstanceAutomatedBackupsArn != nil {
+		objectKey := object.Key("DBInstanceAutomatedBackupsArn")
+		objectKey.String(*v.DBInstanceAutomatedBackupsArn)
+	}
 
 	if v.DBInstanceIdentifier != nil {
 		objectKey := object.Key("DBInstanceIdentifier")
@@ -12739,6 +12859,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceToPointInTimeInput(v *Resto
 		objectKey.String(smithytime.FormatDateTime(*v.RestoreTime))
 	}
 
+	if v.SourceDBInstanceAutomatedBackupsArn != nil {
+		objectKey := object.Key("SourceDBInstanceAutomatedBackupsArn")
+		objectKey.String(*v.SourceDBInstanceAutomatedBackupsArn)
+	}
+
 	if v.SourceDBInstanceIdentifier != nil {
 		objectKey := object.Key("SourceDBInstanceIdentifier")
 		objectKey.String(*v.SourceDBInstanceIdentifier)
@@ -12867,6 +12992,33 @@ func awsAwsquery_serializeOpDocumentStartDBClusterInput(v *StartDBClusterInput, 
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentStartDBInstanceAutomatedBackupsReplicationInput(v *StartDBInstanceAutomatedBackupsReplicationInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.BackupRetentionPeriod != nil {
+		objectKey := object.Key("BackupRetentionPeriod")
+		objectKey.Integer(*v.BackupRetentionPeriod)
+	}
+
+	if v.KmsKeyId != nil {
+		objectKey := object.Key("KmsKeyId")
+		objectKey.String(*v.KmsKeyId)
+	}
+
+	if v.PreSignedUrl != nil {
+		objectKey := object.Key("PreSignedUrl")
+		objectKey.String(*v.PreSignedUrl)
+	}
+
+	if v.SourceDBInstanceArn != nil {
+		objectKey := object.Key("SourceDBInstanceArn")
+		objectKey.String(*v.SourceDBInstanceArn)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentStartDBInstanceInput(v *StartDBInstanceInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -12947,6 +13099,18 @@ func awsAwsquery_serializeOpDocumentStopDBClusterInput(v *StopDBClusterInput, va
 	if v.DBClusterIdentifier != nil {
 		objectKey := object.Key("DBClusterIdentifier")
 		objectKey.String(*v.DBClusterIdentifier)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentStopDBInstanceAutomatedBackupsReplicationInput(v *StopDBInstanceAutomatedBackupsReplicationInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.SourceDBInstanceArn != nil {
+		objectKey := object.Key("SourceDBInstanceArn")
+		objectKey.String(*v.SourceDBInstanceArn)
 	}
 
 	return nil

@@ -480,7 +480,7 @@ type Datastore struct {
 	// Where data store data is stored. You can choose one of serviceManagedS3 or
 	// customerManagedS3 storage. If not specified, the default is serviceManagedS3.
 	// You cannot change this storage option after the data store is created.
-	Storage *DatastoreStorage
+	Storage DatastoreStorage
 }
 
 // The datastore activity that specifies where to store the processed data.
@@ -507,19 +507,32 @@ type DatastoreStatistics struct {
 // Where data store data is stored. You can choose one of serviceManagedS3 or
 // customerManagedS3 storage. If not specified, the default is serviceManagedS3.
 // You cannot change this storage option after the data store is created.
-type DatastoreStorage struct {
-
-	// Use this to store data store data in an S3 bucket that you manage. When customer
-	// managed storage is selected, the retentionPeriod parameter is ignored. The
-	// choice of service-managed or customer-managed S3 storage cannot be changed after
-	// creation of the data store.
-	CustomerManagedS3 *CustomerManagedDatastoreS3Storage
-
-	// Use this to store data store data in an S3 bucket managed by AWS IoT Analytics.
-	// You cannot change the choice of service-managed or customer-managed S3 storage
-	// after the data store is created.
-	ServiceManagedS3 *ServiceManagedDatastoreS3Storage
+//
+// The following types satisfy this interface:
+//  DatastoreStorageMemberServiceManagedS3
+//  DatastoreStorageMemberCustomerManagedS3
+type DatastoreStorage interface {
+	isDatastoreStorage()
 }
+
+// Use this to store data store data in an S3 bucket managed by AWS IoT Analytics.
+// You cannot change the choice of service-managed or customer-managed S3 storage
+// after the data store is created.
+type DatastoreStorageMemberServiceManagedS3 struct {
+	Value ServiceManagedDatastoreS3Storage
+}
+
+func (*DatastoreStorageMemberServiceManagedS3) isDatastoreStorage() {}
+
+// Use this to store data store data in an S3 bucket that you manage. When customer
+// managed storage is selected, the retentionPeriod parameter is ignored. The
+// choice of service-managed or customer-managed S3 storage cannot be changed after
+// creation of the data store.
+type DatastoreStorageMemberCustomerManagedS3 struct {
+	Value CustomerManagedDatastoreS3Storage
+}
+
+func (*DatastoreStorageMemberCustomerManagedS3) isDatastoreStorage() {}
 
 // Where data store data is stored.
 type DatastoreStorageSummary struct {
@@ -1136,3 +1149,12 @@ type VersioningConfiguration struct {
 	// If true, unlimited versions of dataset contents are kept.
 	Unlimited bool
 }
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+}
+
+func (*UnknownUnionMember) isDatastoreStorage() {}

@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update an accelerator. To see an AWS CLI example of updating an accelerator,
-// scroll down to Example. Global Accelerator is a global service that supports
+// Update an accelerator. Global Accelerator is a global service that supports
 // endpoints in multiple AWS Regions but you must specify the US West (Oregon)
 // Region to create or update accelerators.
 func (c *Client) UpdateAccelerator(ctx context.Context, params *UpdateAcceleratorInput, optFns ...func(*Options)) (*UpdateAcceleratorOutput, error) {
@@ -42,7 +41,7 @@ type UpdateAcceleratorInput struct {
 	// deleted. If set to false, the accelerator can be deleted.
 	Enabled *bool
 
-	// The value for the address type must be IPv4.
+	// The IP address type, which must be IPv4.
 	IpAddressType types.IpAddressType
 
 	// The name of the accelerator. The name can have a maximum of 32 characters, must

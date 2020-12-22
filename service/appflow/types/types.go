@@ -174,6 +174,9 @@ type ConnectorMetadata struct {
 	// The connector metadata specific to Trend Micro.
 	Trendmicro *TrendmicroMetadata
 
+	// The connector metadata specific to Upsolver.
+	Upsolver *UpsolverMetadata
+
 	// The connector metadata specific to Veeva.
 	Veeva *VeevaMetadata
 
@@ -443,6 +446,9 @@ type DestinationConnectorProperties struct {
 
 	// The properties required to query Snowflake.
 	Snowflake *SnowflakeDestinationProperties
+
+	// The properties required to query Upsolver.
+	Upsolver *UpsolverDestinationProperties
 }
 
 // The properties that can be applied to a field when connector is being used as a
@@ -1040,7 +1046,8 @@ type SalesforceSourceProperties struct {
 // the user. Currently, these settings only apply to the Scheduled trigger type.
 type ScheduledTriggerProperties struct {
 
-	// The scheduling expression that determines when and how often the rule runs.
+	// The scheduling expression that determines the rate at which the schedule will
+	// run, for example rate(5minutes).
 	//
 	// This member is required.
 	ScheduleExpression *string
@@ -1416,6 +1423,50 @@ type TriggerProperties struct {
 	// Specifies the configuration details of a schedule-triggered flow as defined by
 	// the user.
 	Scheduled *ScheduledTriggerProperties
+}
+
+// The properties that are applied when Upsolver is used as a destination.
+type UpsolverDestinationProperties struct {
+
+	// The Upsolver Amazon S3 bucket name in which Amazon AppFlow places the
+	// transferred data.
+	//
+	// This member is required.
+	BucketName *string
+
+	// The configuration that determines how data is formatted when Upsolver is used as
+	// the flow destination.
+	//
+	// This member is required.
+	S3OutputFormatConfig *UpsolverS3OutputFormatConfig
+
+	// The object key for the destination Upsolver Amazon S3 bucket in which Amazon
+	// AppFlow places the files.
+	BucketPrefix *string
+}
+
+// The connector metadata specific to Upsolver.
+type UpsolverMetadata struct {
+}
+
+// The configuration that determines how Amazon AppFlow formats the flow output
+// data when Upsolver is used as the destination.
+type UpsolverS3OutputFormatConfig struct {
+
+	// Determines the prefix that Amazon AppFlow applies to the destination folder
+	// name. You can name your destination folders according to the flow frequency and
+	// date.
+	//
+	// This member is required.
+	PrefixConfig *PrefixConfig
+
+	// The aggregation settings that you can use to customize the output format of your
+	// flow data.
+	AggregationConfig *AggregationConfig
+
+	// Indicates the file type that Amazon AppFlow places in the Upsolver Amazon S3
+	// bucket.
+	FileType FileType
 }
 
 // The connector-specific profile credentials required when using Veeva.

@@ -50,7 +50,7 @@ type CrossRegionCopyRule struct {
 	// not enabled.
 	//
 	// This member is required.
-	Encrypted *bool
+	Encrypted bool
 
 	// The target Region.
 	//
@@ -63,7 +63,7 @@ type CrossRegionCopyRule struct {
 	CmkArn *string
 
 	// Copy all user-defined tags from the source snapshot to the copied snapshot.
-	CopyTags *bool
+	CopyTags bool
 
 	// The retention rule.
 	RetainRule *CrossRegionCopyRetainRule
@@ -153,13 +153,13 @@ type Parameters struct {
 	// the root volume from snapshots created using CreateSnapshots
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSnapshots.html).
 	// The default is false.
-	ExcludeBootVolume *bool
+	ExcludeBootVolume bool
 
 	// Applies to AMI lifecycle policies only. Indicates whether targeted instances are
 	// rebooted when the lifecycle policy runs. true indicates that targeted instances
 	// are not rebooted when the policy runs. false indicates that target instances are
 	// rebooted when the policy runs. The default is true (instance are not rebooted).
-	NoReboot *bool
+	NoReboot bool
 }
 
 // Specifies the configuration of a lifecycle policy.

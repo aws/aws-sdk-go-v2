@@ -37,7 +37,7 @@ type CreateDatastoreInput struct {
 	// Where data store data is stored. You can choose one of serviceManagedS3 or
 	// customerManagedS3 storage. If not specified, the default is serviceManagedS3.
 	// You cannot change this storage option after the data store is created.
-	DatastoreStorage *types.DatastoreStorage
+	DatastoreStorage types.DatastoreStorage
 
 	// How long, in days, message data is kept for the data store. When
 	// customerManagedS3 storage is selected, this parameter is ignored.

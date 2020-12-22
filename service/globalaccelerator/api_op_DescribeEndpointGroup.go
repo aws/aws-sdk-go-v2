@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe an endpoint group. To see an AWS CLI example of describing an endpoint
-// group, scroll down to Example.
+// Describe an endpoint group.
 func (c *Client) DescribeEndpointGroup(ctx context.Context, params *DescribeEndpointGroupInput, optFns ...func(*Options)) (*DescribeEndpointGroupOutput, error) {
 	if params == nil {
 		params = &DescribeEndpointGroupInput{}

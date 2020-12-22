@@ -29,9 +29,9 @@ import (
 // more players failed to respond, the ticket status is set to CANCELLED, and
 // processing is terminated. A new matchmaking request for these players can be
 // submitted as needed. Learn more  Add FlexMatch to a Game Client
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html)
+// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html)
 // FlexMatch Events Reference
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-events.html)
+// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html)
 // Related operations
 //
 // * StartMatchmaking

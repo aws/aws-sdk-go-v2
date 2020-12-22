@@ -34,8 +34,8 @@ type CreateUserInput struct {
 	// This member is required.
 	DisplayName *string
 
-	// The name for the new user. WorkMail directory user names have a maximum length
-	// of 64. All others have a maximum length of 20.
+	// The name for the new user. Simple AD or AD Connector user names have a maximum
+	// length of 20. All others have a maximum length of 64.
 	//
 	// This member is required.
 	Name *string

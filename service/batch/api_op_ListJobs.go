@@ -12,20 +12,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of AWS Batch jobs. You must specify only one of the following:
+// Returns a list of AWS Batch jobs. You must specify only one of the following
+// items:
 //
-// *
-// a job queue ID to return a list of jobs in that job queue
+// * A job queue ID to return a list of jobs in that job queue
 //
-// * a multi-node
-// parallel job ID to return a list of that job's nodes
+// * A
+// multi-node parallel job ID to return a list of that job's nodes
 //
-// * an array job ID to
-// return a list of that job's children
+// * An array job
+// ID to return a list of that job's children
 //
-// You can filter the results by job status
-// with the jobStatus parameter. If you do not specify a status, only RUNNING jobs
-// are returned.
+// You can filter the results by job
+// status with the jobStatus parameter. If you don't specify a status, only RUNNING
+// jobs are returned.
 func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...func(*Options)) (*ListJobsOutput, error) {
 	if params == nil {
 		params = &ListJobsInput{}
@@ -47,12 +47,11 @@ type ListJobsInput struct {
 	// lists all child jobs from within the specified array.
 	ArrayJobId *string
 
-	// The name or full Amazon Resource Name (ARN) of the job queue with which to list
-	// jobs.
+	// The name or full Amazon Resource Name (ARN) of the job queue used to list jobs.
 	JobQueue *string
 
-	// The job status with which to filter jobs in the specified queue. If you do not
-	// specify a status, only RUNNING jobs are returned.
+	// The job status used to filter jobs in the specified queue. If you don't specify
+	// a status, only RUNNING jobs are returned.
 	JobStatus types.JobStatus
 
 	// The maximum number of results returned by ListJobs in paginated output. When
@@ -60,7 +59,7 @@ type ListJobsInput struct {
 	// page along with a nextToken response element. The remaining results of the
 	// initial request can be seen by sending another ListJobs request with the
 	// returned nextToken value. This value can be between 1 and 100. If this parameter
-	// is not used, then ListJobs returns up to 100 results and a nextToken value if
+	// isn't used, then ListJobs returns up to 100 results and a nextToken value if
 	// applicable.
 	MaxResults int32
 
@@ -166,7 +165,7 @@ type ListJobsPaginatorOptions struct {
 	// page along with a nextToken response element. The remaining results of the
 	// initial request can be seen by sending another ListJobs request with the
 	// returned nextToken value. This value can be between 1 and 100. If this parameter
-	// is not used, then ListJobs returns up to 100 results and a nextToken value if
+	// isn't used, then ListJobs returns up to 100 results and a nextToken value if
 	// applicable.
 	Limit int32
 

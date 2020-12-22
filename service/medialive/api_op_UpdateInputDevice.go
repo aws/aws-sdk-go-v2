@@ -35,11 +35,14 @@ type UpdateInputDeviceInput struct {
 	// This member is required.
 	InputDeviceId *string
 
-	// The settings that you want to apply to the input device.
+	// The settings that you want to apply to the HD input device.
 	HdDeviceSettings *types.InputDeviceConfigurableSettings
 
 	// The name that you assigned to this input device (not the unique ID).
 	Name *string
+
+	// The settings that you want to apply to the UHD input device.
+	UhdDeviceSettings *types.InputDeviceConfigurableSettings
 }
 
 // Placeholder documentation for UpdateInputDeviceResponse
@@ -81,6 +84,9 @@ type UpdateInputDeviceOutput struct {
 
 	// The type of the input device.
 	Type types.InputDeviceType
+
+	// Settings that describe an input device that is type UHD.
+	UhdDeviceSettings *types.InputDeviceUhdSettings
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

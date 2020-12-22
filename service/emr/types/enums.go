@@ -44,6 +44,24 @@ func (AdjustmentType) Values() []AdjustmentType {
 	}
 }
 
+type AuthMode string
+
+// Enum values for AuthMode
+const (
+	AuthModeSso AuthMode = "SSO"
+	AuthModeIam AuthMode = "IAM"
+)
+
+// Values returns all known values for AuthMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (AuthMode) Values() []AuthMode {
+	return []AuthMode{
+		"SSO",
+		"IAM",
+	}
+}
+
 type AutoScalingPolicyState string
 
 // Enum values for AutoScalingPolicyState
@@ -225,6 +243,24 @@ func (ExecutionEngineType) Values() []ExecutionEngineType {
 	}
 }
 
+type IdentityType string
+
+// Enum values for IdentityType
+const (
+	IdentityTypeUser  IdentityType = "USER"
+	IdentityTypeGroup IdentityType = "GROUP"
+)
+
+// Values returns all known values for IdentityType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (IdentityType) Values() []IdentityType {
+	return []IdentityType{
+		"USER",
+		"GROUP",
+	}
+}
+
 type InstanceCollectionType string
 
 // Enum values for InstanceCollectionType
@@ -394,13 +430,6 @@ func (InstanceGroupType) Values() []InstanceGroupType {
 }
 
 type InstanceRoleType string
-
-// Enum values for InstanceRoleType
-const (
-	InstanceRoleTypeMaster InstanceRoleType = "MASTER"
-	InstanceRoleTypeCore   InstanceRoleType = "CORE"
-	InstanceRoleTypeTask   InstanceRoleType = "TASK"
-)
 
 // Values returns all known values for InstanceRoleType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -638,12 +667,6 @@ func (SpotProvisioningAllocationStrategy) Values() []SpotProvisioningAllocationS
 
 type SpotProvisioningTimeoutAction string
 
-// Enum values for SpotProvisioningTimeoutAction
-const (
-	SpotProvisioningTimeoutActionSwitchToOnDemand SpotProvisioningTimeoutAction = "SWITCH_TO_ON_DEMAND"
-	SpotProvisioningTimeoutActionTerminateCluster SpotProvisioningTimeoutAction = "TERMINATE_CLUSTER"
-)
-
 // Values returns all known values for SpotProvisioningTimeoutAction. Note that
 // this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
@@ -681,12 +704,6 @@ func (Statistic) Values() []Statistic {
 
 type StepCancellationOption string
 
-// Enum values for StepCancellationOption
-const (
-	StepCancellationOptionSendInterrupt    StepCancellationOption = "SEND_INTERRUPT"
-	StepCancellationOptionTerminateProcess StepCancellationOption = "TERMINATE_PROCESS"
-)
-
 // Values returns all known values for StepCancellationOption. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -698,17 +715,6 @@ func (StepCancellationOption) Values() []StepCancellationOption {
 }
 
 type StepExecutionState string
-
-// Enum values for StepExecutionState
-const (
-	StepExecutionStatePending     StepExecutionState = "PENDING"
-	StepExecutionStateRunning     StepExecutionState = "RUNNING"
-	StepExecutionStateContinue    StepExecutionState = "CONTINUE"
-	StepExecutionStateCompleted   StepExecutionState = "COMPLETED"
-	StepExecutionStateCancelled   StepExecutionState = "CANCELLED"
-	StepExecutionStateFailed      StepExecutionState = "FAILED"
-	StepExecutionStateInterrupted StepExecutionState = "INTERRUPTED"
-)
 
 // Values returns all known values for StepExecutionState. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -754,11 +760,6 @@ func (StepState) Values() []StepState {
 }
 
 type StepStateChangeReasonCode string
-
-// Enum values for StepStateChangeReasonCode
-const (
-	StepStateChangeReasonCodeNone StepStateChangeReasonCode = "NONE"
-)
 
 // Values returns all known values for StepStateChangeReasonCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.

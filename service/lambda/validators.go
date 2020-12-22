@@ -70,6 +70,26 @@ func (m *validateOpCreateAlias) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCodeSigningConfig struct {
+}
+
+func (*validateOpCreateCodeSigningConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCodeSigningConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCodeSigningConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCodeSigningConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEventSourceMapping struct {
 }
 
@@ -130,6 +150,26 @@ func (m *validateOpDeleteAlias) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteCodeSigningConfig struct {
+}
+
+func (*validateOpDeleteCodeSigningConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCodeSigningConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCodeSigningConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCodeSigningConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteEventSourceMapping struct {
 }
 
@@ -145,6 +185,26 @@ func (m *validateOpDeleteEventSourceMapping) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteEventSourceMappingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteFunctionCodeSigningConfig struct {
+}
+
+func (*validateOpDeleteFunctionCodeSigningConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFunctionCodeSigningConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFunctionCodeSigningConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFunctionCodeSigningConfigInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -270,6 +330,26 @@ func (m *validateOpGetAlias) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCodeSigningConfig struct {
+}
+
+func (*validateOpGetCodeSigningConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCodeSigningConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCodeSigningConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCodeSigningConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetEventSourceMapping struct {
 }
 
@@ -285,6 +365,26 @@ func (m *validateOpGetEventSourceMapping) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetEventSourceMappingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetFunctionCodeSigningConfig struct {
+}
+
+func (*validateOpGetFunctionCodeSigningConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFunctionCodeSigningConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFunctionCodeSigningConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFunctionCodeSigningConfigInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -550,6 +650,26 @@ func (m *validateOpListFunctionEventInvokeConfigs) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListFunctionsByCodeSigningConfig struct {
+}
+
+func (*validateOpListFunctionsByCodeSigningConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFunctionsByCodeSigningConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFunctionsByCodeSigningConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFunctionsByCodeSigningConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListLayerVersions struct {
 }
 
@@ -665,6 +785,26 @@ func (m *validateOpPublishVersion) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPublishVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutFunctionCodeSigningConfig struct {
+}
+
+func (*validateOpPutFunctionCodeSigningConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutFunctionCodeSigningConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutFunctionCodeSigningConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutFunctionCodeSigningConfigInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -830,6 +970,26 @@ func (m *validateOpUpdateAlias) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCodeSigningConfig struct {
+}
+
+func (*validateOpUpdateCodeSigningConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCodeSigningConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCodeSigningConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCodeSigningConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEventSourceMapping struct {
 }
 
@@ -922,6 +1082,10 @@ func addOpCreateAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAlias{}, middleware.After)
 }
 
+func addOpCreateCodeSigningConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCodeSigningConfig{}, middleware.After)
+}
+
 func addOpCreateEventSourceMappingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEventSourceMapping{}, middleware.After)
 }
@@ -934,8 +1098,16 @@ func addOpDeleteAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAlias{}, middleware.After)
 }
 
+func addOpDeleteCodeSigningConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCodeSigningConfig{}, middleware.After)
+}
+
 func addOpDeleteEventSourceMappingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEventSourceMapping{}, middleware.After)
+}
+
+func addOpDeleteFunctionCodeSigningConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFunctionCodeSigningConfig{}, middleware.After)
 }
 
 func addOpDeleteFunctionConcurrencyValidationMiddleware(stack *middleware.Stack) error {
@@ -962,8 +1134,16 @@ func addOpGetAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAlias{}, middleware.After)
 }
 
+func addOpGetCodeSigningConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCodeSigningConfig{}, middleware.After)
+}
+
 func addOpGetEventSourceMappingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEventSourceMapping{}, middleware.After)
+}
+
+func addOpGetFunctionCodeSigningConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFunctionCodeSigningConfig{}, middleware.After)
 }
 
 func addOpGetFunctionConcurrencyValidationMiddleware(stack *middleware.Stack) error {
@@ -1018,6 +1198,10 @@ func addOpListFunctionEventInvokeConfigsValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpListFunctionEventInvokeConfigs{}, middleware.After)
 }
 
+func addOpListFunctionsByCodeSigningConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFunctionsByCodeSigningConfig{}, middleware.After)
+}
+
 func addOpListLayerVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListLayerVersions{}, middleware.After)
 }
@@ -1040,6 +1224,10 @@ func addOpPublishLayerVersionValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPublishVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPublishVersion{}, middleware.After)
+}
+
+func addOpPutFunctionCodeSigningConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutFunctionCodeSigningConfig{}, middleware.After)
 }
 
 func addOpPutFunctionConcurrencyValidationMiddleware(stack *middleware.Stack) error {
@@ -1074,6 +1262,10 @@ func addOpUpdateAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAlias{}, middleware.After)
 }
 
+func addOpUpdateCodeSigningConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCodeSigningConfig{}, middleware.After)
+}
+
 func addOpUpdateEventSourceMappingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEventSourceMapping{}, middleware.After)
 }
@@ -1088,6 +1280,21 @@ func addOpUpdateFunctionConfigurationValidationMiddleware(stack *middleware.Stac
 
 func addOpUpdateFunctionEventInvokeConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFunctionEventInvokeConfig{}, middleware.After)
+}
+
+func validateAllowedPublishers(v *types.AllowedPublishers) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AllowedPublishers"}
+	if v.SigningProfileVersionArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SigningProfileVersionArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateFileSystemConfig(v *types.FileSystemConfig) error {
@@ -1194,6 +1401,25 @@ func validateOpCreateAliasInput(v *CreateAliasInput) error {
 	}
 }
 
+func validateOpCreateCodeSigningConfigInput(v *CreateCodeSigningConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCodeSigningConfigInput"}
+	if v.AllowedPublishers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowedPublishers"))
+	} else if v.AllowedPublishers != nil {
+		if err := validateAllowedPublishers(v.AllowedPublishers); err != nil {
+			invalidParams.AddNested("AllowedPublishers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateEventSourceMappingInput(v *CreateEventSourceMappingInput) error {
 	if v == nil {
 		return nil
@@ -1220,14 +1446,8 @@ func validateOpCreateFunctionInput(v *CreateFunctionInput) error {
 	if v.FunctionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}
-	if len(v.Runtime) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Runtime"))
-	}
 	if v.Role == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Role"))
-	}
-	if v.Handler == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Handler"))
 	}
 	if v.Code == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Code"))
@@ -1262,6 +1482,21 @@ func validateOpDeleteAliasInput(v *DeleteAliasInput) error {
 	}
 }
 
+func validateOpDeleteCodeSigningConfigInput(v *DeleteCodeSigningConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCodeSigningConfigInput"}
+	if v.CodeSigningConfigArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CodeSigningConfigArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteEventSourceMappingInput(v *DeleteEventSourceMappingInput) error {
 	if v == nil {
 		return nil
@@ -1269,6 +1504,21 @@ func validateOpDeleteEventSourceMappingInput(v *DeleteEventSourceMappingInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteEventSourceMappingInput"}
 	if v.UUID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UUID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFunctionCodeSigningConfigInput(v *DeleteFunctionCodeSigningConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFunctionCodeSigningConfigInput"}
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1373,6 +1623,21 @@ func validateOpGetAliasInput(v *GetAliasInput) error {
 	}
 }
 
+func validateOpGetCodeSigningConfigInput(v *GetCodeSigningConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCodeSigningConfigInput"}
+	if v.CodeSigningConfigArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CodeSigningConfigArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetEventSourceMappingInput(v *GetEventSourceMappingInput) error {
 	if v == nil {
 		return nil
@@ -1380,6 +1645,21 @@ func validateOpGetEventSourceMappingInput(v *GetEventSourceMappingInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetEventSourceMappingInput"}
 	if v.UUID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UUID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFunctionCodeSigningConfigInput(v *GetFunctionCodeSigningConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFunctionCodeSigningConfigInput"}
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1589,6 +1869,21 @@ func validateOpListFunctionEventInvokeConfigsInput(v *ListFunctionEventInvokeCon
 	}
 }
 
+func validateOpListFunctionsByCodeSigningConfigInput(v *ListFunctionsByCodeSigningConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFunctionsByCodeSigningConfigInput"}
+	if v.CodeSigningConfigArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CodeSigningConfigArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListLayerVersionsInput(v *ListLayerVersionsInput) error {
 	if v == nil {
 		return nil
@@ -1672,6 +1967,24 @@ func validateOpPublishVersionInput(v *PublishVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PublishVersionInput"}
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutFunctionCodeSigningConfigInput(v *PutFunctionCodeSigningConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutFunctionCodeSigningConfigInput"}
+	if v.CodeSigningConfigArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CodeSigningConfigArn"))
+	}
 	if v.FunctionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}
@@ -1818,6 +2131,26 @@ func validateOpUpdateAliasInput(v *UpdateAliasInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCodeSigningConfigInput(v *UpdateCodeSigningConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCodeSigningConfigInput"}
+	if v.CodeSigningConfigArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CodeSigningConfigArn"))
+	}
+	if v.AllowedPublishers != nil {
+		if err := validateAllowedPublishers(v.AllowedPublishers); err != nil {
+			invalidParams.AddNested("AllowedPublishers", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -86,6 +86,10 @@ type QueryOutput struct {
 	// results.
 	NextToken *string
 
+	// Information about the status of the query, including progress and bytes
+	// scannned.
+	QueryStatus *types.QueryStatus
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }

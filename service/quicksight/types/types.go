@@ -716,7 +716,7 @@ type DataSource struct {
 	// The parameters that Amazon QuickSight uses to connect to your underlying source.
 	// This is a variant type structure. For this structure to be valid, only one of
 	// the attributes can be non-null.
-	DataSourceParameters *DataSourceParameters
+	DataSourceParameters DataSourceParameters
 
 	// Error information from the last update or the creation of the data source.
 	ErrorInfo *DataSourceErrorInfo
@@ -771,68 +771,171 @@ type DataSourceErrorInfo struct {
 // The parameters that Amazon QuickSight uses to connect to your underlying data
 // source. This is a variant type structure. For this structure to be valid, only
 // one of the attributes can be non-null.
-type DataSourceParameters struct {
-
-	// Amazon Elasticsearch Service parameters.
-	AmazonElasticsearchParameters *AmazonElasticsearchParameters
-
-	// Amazon Athena parameters.
-	AthenaParameters *AthenaParameters
-
-	// Amazon Aurora MySQL parameters.
-	AuroraParameters *AuroraParameters
-
-	// Aurora PostgreSQL parameters.
-	AuroraPostgreSqlParameters *AuroraPostgreSqlParameters
-
-	// AWS IoT Analytics parameters.
-	AwsIotAnalyticsParameters *AwsIotAnalyticsParameters
-
-	// Jira parameters.
-	JiraParameters *JiraParameters
-
-	// MariaDB parameters.
-	MariaDbParameters *MariaDbParameters
-
-	// MySQL parameters.
-	MySqlParameters *MySqlParameters
-
-	// Oracle parameters.
-	OracleParameters *OracleParameters
-
-	// PostgreSQL parameters.
-	PostgreSqlParameters *PostgreSqlParameters
-
-	// Presto parameters.
-	PrestoParameters *PrestoParameters
-
-	// Amazon RDS parameters.
-	RdsParameters *RdsParameters
-
-	// Amazon Redshift parameters.
-	RedshiftParameters *RedshiftParameters
-
-	// S3 parameters.
-	S3Parameters *S3Parameters
-
-	// ServiceNow parameters.
-	ServiceNowParameters *ServiceNowParameters
-
-	// Snowflake parameters.
-	SnowflakeParameters *SnowflakeParameters
-
-	// Spark parameters.
-	SparkParameters *SparkParameters
-
-	// SQL Server parameters.
-	SqlServerParameters *SqlServerParameters
-
-	// Teradata parameters.
-	TeradataParameters *TeradataParameters
-
-	// Twitter parameters.
-	TwitterParameters *TwitterParameters
+//
+// The following types satisfy this interface:
+//  DataSourceParametersMemberAmazonElasticsearchParameters
+//  DataSourceParametersMemberAthenaParameters
+//  DataSourceParametersMemberAuroraParameters
+//  DataSourceParametersMemberAuroraPostgreSqlParameters
+//  DataSourceParametersMemberAwsIotAnalyticsParameters
+//  DataSourceParametersMemberJiraParameters
+//  DataSourceParametersMemberMariaDbParameters
+//  DataSourceParametersMemberMySqlParameters
+//  DataSourceParametersMemberOracleParameters
+//  DataSourceParametersMemberPostgreSqlParameters
+//  DataSourceParametersMemberPrestoParameters
+//  DataSourceParametersMemberRdsParameters
+//  DataSourceParametersMemberRedshiftParameters
+//  DataSourceParametersMemberS3Parameters
+//  DataSourceParametersMemberServiceNowParameters
+//  DataSourceParametersMemberSnowflakeParameters
+//  DataSourceParametersMemberSparkParameters
+//  DataSourceParametersMemberSqlServerParameters
+//  DataSourceParametersMemberTeradataParameters
+//  DataSourceParametersMemberTwitterParameters
+type DataSourceParameters interface {
+	isDataSourceParameters()
 }
+
+// Amazon Elasticsearch Service parameters.
+type DataSourceParametersMemberAmazonElasticsearchParameters struct {
+	Value AmazonElasticsearchParameters
+}
+
+func (*DataSourceParametersMemberAmazonElasticsearchParameters) isDataSourceParameters() {}
+
+// Amazon Athena parameters.
+type DataSourceParametersMemberAthenaParameters struct {
+	Value AthenaParameters
+}
+
+func (*DataSourceParametersMemberAthenaParameters) isDataSourceParameters() {}
+
+// Amazon Aurora MySQL parameters.
+type DataSourceParametersMemberAuroraParameters struct {
+	Value AuroraParameters
+}
+
+func (*DataSourceParametersMemberAuroraParameters) isDataSourceParameters() {}
+
+// Aurora PostgreSQL parameters.
+type DataSourceParametersMemberAuroraPostgreSqlParameters struct {
+	Value AuroraPostgreSqlParameters
+}
+
+func (*DataSourceParametersMemberAuroraPostgreSqlParameters) isDataSourceParameters() {}
+
+// AWS IoT Analytics parameters.
+type DataSourceParametersMemberAwsIotAnalyticsParameters struct {
+	Value AwsIotAnalyticsParameters
+}
+
+func (*DataSourceParametersMemberAwsIotAnalyticsParameters) isDataSourceParameters() {}
+
+// Jira parameters.
+type DataSourceParametersMemberJiraParameters struct {
+	Value JiraParameters
+}
+
+func (*DataSourceParametersMemberJiraParameters) isDataSourceParameters() {}
+
+// MariaDB parameters.
+type DataSourceParametersMemberMariaDbParameters struct {
+	Value MariaDbParameters
+}
+
+func (*DataSourceParametersMemberMariaDbParameters) isDataSourceParameters() {}
+
+// MySQL parameters.
+type DataSourceParametersMemberMySqlParameters struct {
+	Value MySqlParameters
+}
+
+func (*DataSourceParametersMemberMySqlParameters) isDataSourceParameters() {}
+
+// Oracle parameters.
+type DataSourceParametersMemberOracleParameters struct {
+	Value OracleParameters
+}
+
+func (*DataSourceParametersMemberOracleParameters) isDataSourceParameters() {}
+
+// PostgreSQL parameters.
+type DataSourceParametersMemberPostgreSqlParameters struct {
+	Value PostgreSqlParameters
+}
+
+func (*DataSourceParametersMemberPostgreSqlParameters) isDataSourceParameters() {}
+
+// Presto parameters.
+type DataSourceParametersMemberPrestoParameters struct {
+	Value PrestoParameters
+}
+
+func (*DataSourceParametersMemberPrestoParameters) isDataSourceParameters() {}
+
+// Amazon RDS parameters.
+type DataSourceParametersMemberRdsParameters struct {
+	Value RdsParameters
+}
+
+func (*DataSourceParametersMemberRdsParameters) isDataSourceParameters() {}
+
+// Amazon Redshift parameters.
+type DataSourceParametersMemberRedshiftParameters struct {
+	Value RedshiftParameters
+}
+
+func (*DataSourceParametersMemberRedshiftParameters) isDataSourceParameters() {}
+
+// S3 parameters.
+type DataSourceParametersMemberS3Parameters struct {
+	Value S3Parameters
+}
+
+func (*DataSourceParametersMemberS3Parameters) isDataSourceParameters() {}
+
+// ServiceNow parameters.
+type DataSourceParametersMemberServiceNowParameters struct {
+	Value ServiceNowParameters
+}
+
+func (*DataSourceParametersMemberServiceNowParameters) isDataSourceParameters() {}
+
+// Snowflake parameters.
+type DataSourceParametersMemberSnowflakeParameters struct {
+	Value SnowflakeParameters
+}
+
+func (*DataSourceParametersMemberSnowflakeParameters) isDataSourceParameters() {}
+
+// Spark parameters.
+type DataSourceParametersMemberSparkParameters struct {
+	Value SparkParameters
+}
+
+func (*DataSourceParametersMemberSparkParameters) isDataSourceParameters() {}
+
+// SQL Server parameters.
+type DataSourceParametersMemberSqlServerParameters struct {
+	Value SqlServerParameters
+}
+
+func (*DataSourceParametersMemberSqlServerParameters) isDataSourceParameters() {}
+
+// Teradata parameters.
+type DataSourceParametersMemberTeradataParameters struct {
+	Value TeradataParameters
+}
+
+func (*DataSourceParametersMemberTeradataParameters) isDataSourceParameters() {}
+
+// Twitter parameters.
+type DataSourceParametersMemberTwitterParameters struct {
+	Value TwitterParameters
+}
+
+func (*DataSourceParametersMemberTwitterParameters) isDataSourceParameters() {}
 
 // A date-time parameter.
 type DateTimeParameter struct {
@@ -1056,28 +1159,42 @@ type JiraParameters struct {
 	SiteBaseUrl *string
 }
 
-// Join instruction.
+// The instructions associated with a join.
 type JoinInstruction struct {
 
-	// Left operand.
+	// The operand on the left side of a join.
 	//
 	// This member is required.
 	LeftOperand *string
 
-	// On Clause.
+	// The join instructions provided in the ON clause of a join.
 	//
 	// This member is required.
 	OnClause *string
 
-	// Right operand.
+	// The operand on the right side of a join.
 	//
 	// This member is required.
 	RightOperand *string
 
-	// Type.
+	// The type of join that it is.
 	//
 	// This member is required.
 	Type JoinType
+
+	// Join key properties of the left operand.
+	LeftJoinKeyProperties *JoinKeyProperties
+
+	// Join key properties of the right operand.
+	RightJoinKeyProperties *JoinKeyProperties
+}
+
+// Properties associated with the columns participating in a join.
+type JoinKeyProperties struct {
+
+	// Indicates that a row in a table is uniquely identified by the columns in a join
+	// key. This is used by QuickSight to optimize query performance.
+	UniqueKey bool
 }
 
 // A logical table is a unit that joins and that data transformations operate on. A
@@ -1254,17 +1371,35 @@ type Parameters struct {
 // A view of a data source that contains information about the shape of the data in
 // the underlying source. This is a variant type structure. For this structure to
 // be valid, only one of the attributes can be non-null.
-type PhysicalTable struct {
-
-	// A physical table type built from the results of the custom SQL query.
-	CustomSql *CustomSql
-
-	// A physical table type for relational data sources.
-	RelationalTable *RelationalTable
-
-	// A physical table type for as S3 data source.
-	S3Source *S3Source
+//
+// The following types satisfy this interface:
+//  PhysicalTableMemberRelationalTable
+//  PhysicalTableMemberCustomSql
+//  PhysicalTableMemberS3Source
+type PhysicalTable interface {
+	isPhysicalTable()
 }
+
+// A physical table type for relational data sources.
+type PhysicalTableMemberRelationalTable struct {
+	Value RelationalTable
+}
+
+func (*PhysicalTableMemberRelationalTable) isPhysicalTable() {}
+
+// A physical table type built from the results of the custom SQL query.
+type PhysicalTableMemberCustomSql struct {
+	Value CustomSql
+}
+
+func (*PhysicalTableMemberCustomSql) isPhysicalTable() {}
+
+// A physical table type for as S3 data source.
+type PhysicalTableMemberS3Source struct {
+	Value S3Source
+}
+
+func (*PhysicalTableMemberS3Source) isPhysicalTable() {}
 
 // PostgreSQL parameters.
 type PostgreSqlParameters struct {
@@ -1959,28 +2094,61 @@ type TileStyle struct {
 
 // A data transformation on a logical table. This is a variant type structure. For
 // this structure to be valid, only one of the attributes can be non-null.
-type TransformOperation struct {
-
-	// A transform operation that casts a column to a different type.
-	CastColumnTypeOperation *CastColumnTypeOperation
-
-	// An operation that creates calculated columns. Columns created in one such
-	// operation form a lexical closure.
-	CreateColumnsOperation *CreateColumnsOperation
-
-	// An operation that filters rows based on some condition.
-	FilterOperation *FilterOperation
-
-	// An operation that projects columns. Operations that come after a projection can
-	// only refer to projected columns.
-	ProjectOperation *ProjectOperation
-
-	// An operation that renames a column.
-	RenameColumnOperation *RenameColumnOperation
-
-	// An operation that tags a column with additional information.
-	TagColumnOperation *TagColumnOperation
+//
+// The following types satisfy this interface:
+//  TransformOperationMemberProjectOperation
+//  TransformOperationMemberFilterOperation
+//  TransformOperationMemberCreateColumnsOperation
+//  TransformOperationMemberRenameColumnOperation
+//  TransformOperationMemberCastColumnTypeOperation
+//  TransformOperationMemberTagColumnOperation
+type TransformOperation interface {
+	isTransformOperation()
 }
+
+// An operation that projects columns. Operations that come after a projection can
+// only refer to projected columns.
+type TransformOperationMemberProjectOperation struct {
+	Value ProjectOperation
+}
+
+func (*TransformOperationMemberProjectOperation) isTransformOperation() {}
+
+// An operation that filters rows based on some condition.
+type TransformOperationMemberFilterOperation struct {
+	Value FilterOperation
+}
+
+func (*TransformOperationMemberFilterOperation) isTransformOperation() {}
+
+// An operation that creates calculated columns. Columns created in one such
+// operation form a lexical closure.
+type TransformOperationMemberCreateColumnsOperation struct {
+	Value CreateColumnsOperation
+}
+
+func (*TransformOperationMemberCreateColumnsOperation) isTransformOperation() {}
+
+// An operation that renames a column.
+type TransformOperationMemberRenameColumnOperation struct {
+	Value RenameColumnOperation
+}
+
+func (*TransformOperationMemberRenameColumnOperation) isTransformOperation() {}
+
+// A transform operation that casts a column to a different type.
+type TransformOperationMemberCastColumnTypeOperation struct {
+	Value CastColumnTypeOperation
+}
+
+func (*TransformOperationMemberCastColumnTypeOperation) isTransformOperation() {}
+
+// An operation that tags a column with additional information.
+type TransformOperationMemberTagColumnOperation struct {
+	Value TagColumnOperation
+}
+
+func (*TransformOperationMemberTagColumnOperation) isTransformOperation() {}
 
 // Twitter parameters.
 type TwitterParameters struct {
@@ -2135,3 +2303,14 @@ type VpcConnectionProperties struct {
 	// This member is required.
 	VpcConnectionArn *string
 }
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+}
+
+func (*UnknownUnionMember) isDataSourceParameters() {}
+func (*UnknownUnionMember) isPhysicalTable()        {}
+func (*UnknownUnionMember) isTransformOperation()   {}

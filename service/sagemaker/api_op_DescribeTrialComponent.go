@@ -60,6 +60,9 @@ type DescribeTrialComponentOutput struct {
 	// When the component was last modified.
 	LastModifiedTime *time.Time
 
+	// Metadata properties of the tracking entity, trial, or trial component.
+	MetadataProperties *types.MetadataProperties
+
 	// The metrics for the component.
 	Metrics []types.TrialComponentMetricSummary
 

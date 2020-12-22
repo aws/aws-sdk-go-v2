@@ -539,19 +539,19 @@ func validateOpCreateUserInput(v *CreateUserInput) error {
 			invalidParams.AddNested("HomeDirectoryMappings", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ServerId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
-	}
-	if v.UserName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
-	}
 	if v.Role == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if v.ServerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
 	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -670,11 +670,11 @@ func validateOpImportSshPublicKeyInput(v *ImportSshPublicKeyInput) error {
 	if v.ServerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
 	}
-	if v.UserName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
-	}
 	if v.SshPublicKeyBody == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SshPublicKeyBody"))
+	}
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

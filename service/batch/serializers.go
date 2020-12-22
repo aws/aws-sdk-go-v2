@@ -1102,6 +1102,18 @@ func awsRestjson1_serializeOpDocumentRegisterJobDefinitionInput(v *RegisterJobDe
 		}
 	}
 
+	if v.PlatformCapabilities != nil {
+		ok := object.Key("platformCapabilities")
+		if err := awsRestjson1_serializeDocumentPlatformCapabilityList(v.PlatformCapabilities, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PropagateTags {
+		ok := object.Key("propagateTags")
+		ok.Boolean(v.PropagateTags)
+	}
+
 	if v.RetryStrategy != nil {
 		ok := object.Key("retryStrategy")
 		if err := awsRestjson1_serializeDocumentRetryStrategy(v.RetryStrategy, ok); err != nil {
@@ -1244,6 +1256,11 @@ func awsRestjson1_serializeOpDocumentSubmitJobInput(v *SubmitJobInput, value smi
 		if err := awsRestjson1_serializeDocumentParametersMap(v.Parameters, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.PropagateTags {
+		ok := object.Key("propagateTags")
+		ok.Boolean(v.PropagateTags)
 	}
 
 	if v.RetryStrategy != nil {
@@ -1746,6 +1763,13 @@ func awsRestjson1_serializeDocumentComputeResource(v *types.ComputeResource, val
 		ok.Integer(v.DesiredvCpus)
 	}
 
+	if v.Ec2Configuration != nil {
+		ok := object.Key("ec2Configuration")
+		if err := awsRestjson1_serializeDocumentEc2ConfigurationList(v.Ec2Configuration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Ec2KeyPair != nil {
 		ok := object.Key("ec2KeyPair")
 		ok.String(*v.Ec2KeyPair)
@@ -1843,6 +1867,20 @@ func awsRestjson1_serializeDocumentComputeResourceUpdate(v *types.ComputeResourc
 		ok.Integer(v.MinvCpus)
 	}
 
+	if v.SecurityGroupIds != nil {
+		ok := object.Key("securityGroupIds")
+		if err := awsRestjson1_serializeDocumentStringList(v.SecurityGroupIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Subnets != nil {
+		ok := object.Key("subnets")
+		if err := awsRestjson1_serializeDocumentStringList(v.Subnets, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1912,6 +1950,13 @@ func awsRestjson1_serializeDocumentContainerProperties(v *types.ContainerPropert
 		ok.String(*v.ExecutionRoleArn)
 	}
 
+	if v.FargatePlatformConfiguration != nil {
+		ok := object.Key("fargatePlatformConfiguration")
+		if err := awsRestjson1_serializeDocumentFargatePlatformConfiguration(v.FargatePlatformConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Image != nil {
 		ok := object.Key("image")
 		ok.String(*v.Image)
@@ -1949,6 +1994,13 @@ func awsRestjson1_serializeDocumentContainerProperties(v *types.ContainerPropert
 	if v.MountPoints != nil {
 		ok := object.Key("mountPoints")
 		if err := awsRestjson1_serializeDocumentMountPoints(v.MountPoints, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NetworkConfiguration != nil {
+		ok := object.Key("networkConfiguration")
+		if err := awsRestjson1_serializeDocumentNetworkConfiguration(v.NetworkConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -2052,6 +2104,36 @@ func awsRestjson1_serializeDocumentDevicesList(v []types.Device, value smithyjso
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEc2Configuration(v *types.Ec2Configuration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ImageIdOverride != nil {
+		ok := object.Key("imageIdOverride")
+		ok.String(*v.ImageIdOverride)
+	}
+
+	if v.ImageType != nil {
+		ok := object.Key("imageType")
+		ok.String(*v.ImageType)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEc2ConfigurationList(v []types.Ec2Configuration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentEc2Configuration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEnvironmentVariables(v []types.KeyValuePair, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2102,6 +2184,18 @@ func awsRestjson1_serializeDocumentEvaluateOnExitList(v []types.EvaluateOnExit, 
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFargatePlatformConfiguration(v *types.FargatePlatformConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PlatformVersion != nil {
+		ok := object.Key("platformVersion")
+		ok.String(*v.PlatformVersion)
+	}
+
 	return nil
 }
 
@@ -2311,6 +2405,18 @@ func awsRestjson1_serializeDocumentMountPoints(v []types.MountPoint, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentNetworkConfiguration(v *types.NetworkConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AssignPublicIp) > 0 {
+		ok := object.Key("assignPublicIp")
+		ok.String(string(v.AssignPublicIp))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentNodeOverrides(v *types.NodeOverrides, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2425,6 +2531,17 @@ func awsRestjson1_serializeDocumentParametersMap(v map[string]string, value smit
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPlatformCapabilityList(v []types.PlatformCapability, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }

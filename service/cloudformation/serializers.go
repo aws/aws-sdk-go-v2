@@ -4662,6 +4662,11 @@ func awsAwsquery_serializeOpDocumentListTypesInput(v *ListTypesInput, value quer
 		objectKey.String(string(v.ProvisioningType))
 	}
 
+	if len(v.Type) > 0 {
+		objectKey := object.Key("Type")
+		objectKey.String(string(v.Type))
+	}
+
 	if len(v.Visibility) > 0 {
 		objectKey := object.Key("Visibility")
 		objectKey.String(string(v.Visibility))

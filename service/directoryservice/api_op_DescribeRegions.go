@@ -50,7 +50,7 @@ type DescribeRegionsOutput struct {
 	// items.
 	NextToken *string
 
-	// List of regional information related to the directory per replicated Region.
+	// List of Region information related to the directory for each replicated Region.
 	RegionsDescription []types.RegionDescription
 
 	// Metadata pertaining to the operation's result.

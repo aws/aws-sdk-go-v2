@@ -73,7 +73,7 @@ type ListResourceRecordSetsInput struct {
 	// true, and the values of the NextRecordName and NextRecordType elements in the
 	// response identify the first resource record set in the next group of maxitems
 	// resource record sets.
-	MaxItems *string
+	MaxItems *int32
 
 	// Resource record sets that have a routing policy other than simple: If results
 	// were truncated for a given DNS name and type, specify the value of
@@ -129,7 +129,7 @@ type ListResourceRecordSetsOutput struct {
 	// The maximum number of records you requested.
 	//
 	// This member is required.
-	MaxItems *string
+	MaxItems *int32
 
 	// Information about multiple resource record sets.
 	//

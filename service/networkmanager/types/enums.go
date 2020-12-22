@@ -2,6 +2,28 @@
 
 package types
 
+type ConnectionState string
+
+// Enum values for ConnectionState
+const (
+	ConnectionStatePending   ConnectionState = "PENDING"
+	ConnectionStateAvailable ConnectionState = "AVAILABLE"
+	ConnectionStateDeleting  ConnectionState = "DELETING"
+	ConnectionStateUpdating  ConnectionState = "UPDATING"
+)
+
+// Values returns all known values for ConnectionState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionState) Values() []ConnectionState {
+	return []ConnectionState{
+		"PENDING",
+		"AVAILABLE",
+		"DELETING",
+		"UPDATING",
+	}
+}
+
 type CustomerGatewayAssociationState string
 
 // Enum values for CustomerGatewayAssociationState
@@ -132,6 +154,29 @@ func (SiteState) Values() []SiteState {
 		"AVAILABLE",
 		"DELETING",
 		"UPDATING",
+	}
+}
+
+type TransitGatewayConnectPeerAssociationState string
+
+// Enum values for TransitGatewayConnectPeerAssociationState
+const (
+	TransitGatewayConnectPeerAssociationStatePending   TransitGatewayConnectPeerAssociationState = "PENDING"
+	TransitGatewayConnectPeerAssociationStateAvailable TransitGatewayConnectPeerAssociationState = "AVAILABLE"
+	TransitGatewayConnectPeerAssociationStateDeleting  TransitGatewayConnectPeerAssociationState = "DELETING"
+	TransitGatewayConnectPeerAssociationStateDeleted   TransitGatewayConnectPeerAssociationState = "DELETED"
+)
+
+// Values returns all known values for TransitGatewayConnectPeerAssociationState.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (TransitGatewayConnectPeerAssociationState) Values() []TransitGatewayConnectPeerAssociationState {
+	return []TransitGatewayConnectPeerAssociationState{
+		"PENDING",
+		"AVAILABLE",
+		"DELETING",
+		"DELETED",
 	}
 }
 

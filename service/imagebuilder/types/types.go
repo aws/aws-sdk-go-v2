@@ -67,7 +67,7 @@ type Component struct {
 	Description *string
 
 	// The encryption status of the component.
-	Encrypted *bool
+	Encrypted bool
 
 	// The KMS key identifier used to encrypt the component.
 	KmsKeyId *string
@@ -202,7 +202,7 @@ type DistributionConfiguration struct {
 	// The maximum duration in minutes for this distribution configuration.
 	//
 	// This member is required.
-	TimeoutMinutes *int32
+	TimeoutMinutes int32
 
 	// The Amazon Resource Name (ARN) of the distribution configuration.
 	Arn *string
@@ -252,13 +252,13 @@ type DistributionConfigurationSummary struct {
 type EbsInstanceBlockDeviceSpecification struct {
 
 	// Use to configure delete on termination of the associated device.
-	DeleteOnTermination *bool
+	DeleteOnTermination bool
 
 	// Use to configure device encryption.
-	Encrypted *bool
+	Encrypted bool
 
 	// Use to configure device IOPS.
-	Iops *int32
+	Iops int32
 
 	// Use to configure the KMS key to use when encrypting the device.
 	KmsKeyId *string
@@ -267,7 +267,7 @@ type EbsInstanceBlockDeviceSpecification struct {
 	SnapshotId *string
 
 	// Use to override the device's volume size.
-	VolumeSize *int32
+	VolumeSize int32
 
 	// Use to override the device's volume type.
 	VolumeType EbsVolumeType
@@ -300,7 +300,7 @@ type Image struct {
 	// Collects additional information about the image being created, including the
 	// operating system (OS) version and package list. This information is used to
 	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
-	EnhancedImageMetadataEnabled *bool
+	EnhancedImageMetadataEnabled bool
 
 	// The image recipe used when creating the image.
 	ImageRecipe *ImageRecipe
@@ -368,7 +368,7 @@ type ImagePipeline struct {
 	// Collects additional information about the image being created, including the
 	// operating system (OS) version and package list. This information is used to
 	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
-	EnhancedImageMetadataEnabled *bool
+	EnhancedImageMetadataEnabled bool
 
 	// The Amazon Resource Name (ARN) of the image recipe associated with this image
 	// pipeline.
@@ -511,10 +511,10 @@ type ImageSummary struct {
 type ImageTestsConfiguration struct {
 
 	// Defines if tests should be executed when building this image.
-	ImageTestsEnabled *bool
+	ImageTestsEnabled bool
 
 	// The maximum time in minutes that tests are permitted to run.
-	TimeoutMinutes *int32
+	TimeoutMinutes int32
 }
 
 // An image semantic version.
@@ -590,7 +590,7 @@ type InfrastructureConfiguration struct {
 
 	// The terminate instance on failure configuration of the infrastructure
 	// configuration.
-	TerminateInstanceOnFailure *bool
+	TerminateInstanceOnFailure bool
 }
 
 // The infrastructure used when building EC2 AMIs.

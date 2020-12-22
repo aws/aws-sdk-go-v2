@@ -12,22 +12,22 @@ import (
 )
 
 // Creates a new DB instance from a DB snapshot. The target database is created
-// from the source database restore point with the most of original configuration
-// with the default security group and the default DB parameter group. By default,
-// the new DB instance is created as a single-AZ deployment except when the
-// instance is a SQL Server instance that has an option group that is associated
-// with mirroring; in this case, the instance becomes a mirrored AZ deployment and
-// not a single-AZ deployment. If your intent is to replace your original DB
-// instance with the new, restored DB instance, then rename your original DB
-// instance before you call the RestoreDBInstanceFromDBSnapshot action. RDS doesn't
-// allow two DB instances with the same name. Once you have renamed your original
-// DB instance with a different identifier, then you can pass the original name of
-// the DB instance as the DBInstanceIdentifier in the call to the
-// RestoreDBInstanceFromDBSnapshot action. The result is that you will replace the
-// original DB instance with the DB instance created from the snapshot. If you are
-// restoring from a shared manual DB snapshot, the DBSnapshotIdentifier must be the
-// ARN of the shared DB snapshot. This command doesn't apply to Aurora MySQL and
-// Aurora PostgreSQL. For Aurora, use RestoreDBClusterFromSnapshot.
+// from the source database restore point with most of the source's original
+// configuration, including the default security group and DB parameter group. By
+// default, the new DB instance is created as a Single-AZ deployment, except when
+// the instance is a SQL Server instance that has an option group associated with
+// mirroring. In this case, the instance becomes a Multi-AZ deployment, not a
+// Single-AZ deployment. If you want to replace your original DB instance with the
+// new, restored DB instance, then rename your original DB instance before you call
+// the RestoreDBInstanceFromDBSnapshot action. RDS doesn't allow two DB instances
+// with the same name. After you have renamed your original DB instance with a
+// different identifier, then you can pass the original name of the DB instance as
+// the DBInstanceIdentifier in the call to the RestoreDBInstanceFromDBSnapshot
+// action. The result is that you replace the original DB instance with the DB
+// instance created from the snapshot. If you are restoring from a shared manual DB
+// snapshot, the DBSnapshotIdentifier must be the ARN of the shared DB snapshot.
+// This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora,
+// use RestoreDBClusterFromSnapshot.
 func (c *Client) RestoreDBInstanceFromDBSnapshot(ctx context.Context, params *RestoreDBInstanceFromDBSnapshotInput, optFns ...func(*Options)) (*RestoreDBInstanceFromDBSnapshotOutput, error) {
 	if params == nil {
 		params = &RestoreDBInstanceFromDBSnapshotInput{}

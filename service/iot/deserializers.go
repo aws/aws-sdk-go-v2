@@ -33746,7 +33746,7 @@ func awsRestjson1_deserializeDocumentAssetPropertyValueList(v *[]types.AssetProp
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentAssetPropertyVariant(v **types.AssetPropertyVariant, value interface{}) error {
+func awsRestjson1_deserializeDocumentAssetPropertyVariant(v *types.AssetPropertyVariant, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -33759,57 +33759,65 @@ func awsRestjson1_deserializeDocumentAssetPropertyVariant(v **types.AssetPropert
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var sv *types.AssetPropertyVariant
-	if *v == nil {
-		sv = &types.AssetPropertyVariant{}
-	} else {
-		sv = *v
-	}
-
+	var uv types.AssetPropertyVariant
+loop:
 	for key, value := range shape {
 		switch key {
 		case "booleanValue":
+			var mv string
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected AssetPropertyBooleanValue to be of type string, got %T instead", value)
 				}
-				sv.BooleanValue = ptr.String(jtv)
+				mv = jtv
 			}
+			uv = &types.AssetPropertyVariantMemberBooleanValue{Value: mv}
+			break loop
 
 		case "doubleValue":
+			var mv string
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected AssetPropertyDoubleValue to be of type string, got %T instead", value)
 				}
-				sv.DoubleValue = ptr.String(jtv)
+				mv = jtv
 			}
+			uv = &types.AssetPropertyVariantMemberDoubleValue{Value: mv}
+			break loop
 
 		case "integerValue":
+			var mv string
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected AssetPropertyIntegerValue to be of type string, got %T instead", value)
 				}
-				sv.IntegerValue = ptr.String(jtv)
+				mv = jtv
 			}
+			uv = &types.AssetPropertyVariantMemberIntegerValue{Value: mv}
+			break loop
 
 		case "stringValue":
+			var mv string
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected AssetPropertyStringValue to be of type string, got %T instead", value)
 				}
-				sv.StringValue = ptr.String(jtv)
+				mv = jtv
 			}
+			uv = &types.AssetPropertyVariantMemberStringValue{Value: mv}
+			break loop
 
 		default:
-			_, _ = key, value
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
 
 		}
 	}
-	*v = sv
+	*v = uv
 	return nil
 }
 
@@ -41062,6 +41070,19 @@ func awsRestjson1_deserializeDocumentOTAUpdateFile(v **types.OTAUpdateFile, valu
 					return fmt.Errorf("expected FileName to be of type string, got %T instead", value)
 				}
 				sv.FileName = ptr.String(jtv)
+			}
+
+		case "fileType":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected FileType to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FileType = ptr.Int32(int32(i64))
 			}
 
 		case "fileVersion":

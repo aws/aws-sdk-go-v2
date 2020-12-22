@@ -199,6 +199,52 @@ func (m *awsAwsjson10_serializeOpGetAutoScalingGroupRecommendations) HandleSeria
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpGetEBSVolumeRecommendations struct {
+}
+
+func (*awsAwsjson10_serializeOpGetEBSVolumeRecommendations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpGetEBSVolumeRecommendations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetEBSVolumeRecommendationsInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComputeOptimizerService.GetEBSVolumeRecommendations")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetEBSVolumeRecommendationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpGetEC2InstanceRecommendations struct {
 }
 
@@ -443,6 +489,38 @@ func awsAwsjson10_serializeDocumentAutoScalingGroupArns(v []string, value smithy
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentEBSFilter(v *types.EBSFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Name) > 0 {
+		ok := object.Key("name")
+		ok.String(string(v.Name))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("values")
+		if err := awsAwsjson10_serializeDocumentFilterValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentEBSFilters(v []types.EBSFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentEBSFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentExportableAutoScalingGroupFields(v []types.ExportableAutoScalingGroupField, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -576,6 +654,17 @@ func awsAwsjson10_serializeDocumentS3DestinationConfig(v *types.S3DestinationCon
 		ok.String(*v.KeyPrefix)
 	}
 
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentVolumeArns(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -733,6 +822,44 @@ func awsAwsjson10_serializeOpDocumentGetAutoScalingGroupRecommendationsInput(v *
 	if v.NextToken != nil {
 		ok := object.Key("nextToken")
 		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentGetEBSVolumeRecommendationsInput(v *GetEBSVolumeRecommendationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountIds != nil {
+		ok := object.Key("accountIds")
+		if err := awsAwsjson10_serializeDocumentAccountIds(v.AccountIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Filters != nil {
+		ok := object.Key("filters")
+		if err := awsAwsjson10_serializeDocumentEBSFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.VolumeArns != nil {
+		ok := object.Key("volumeArns")
+		if err := awsAwsjson10_serializeDocumentVolumeArns(v.VolumeArns, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

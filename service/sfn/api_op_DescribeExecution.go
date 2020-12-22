@@ -40,7 +40,7 @@ type DescribeExecutionInput struct {
 
 type DescribeExecutionOutput struct {
 
-	// The Amazon Resource Name (ARN) that id entifies the execution.
+	// The Amazon Resource Name (ARN) that identifies the execution.
 	//
 	// This member is required.
 	ExecutionArn *string
@@ -97,7 +97,7 @@ type DescribeExecutionOutput struct {
 	// If the execution has already ended, the date the execution stopped.
 	StopDate *time.Time
 
-	// The AWS X-Ray trace header which was passed to the execution.
+	// The AWS X-Ray trace header that was passed to the execution.
 	TraceHeader *string
 
 	// Metadata pertaining to the operation's result.

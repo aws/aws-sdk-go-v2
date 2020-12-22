@@ -35,6 +35,10 @@ func (c *Client) DescribeDBInstanceAutomatedBackups(ctx context.Context, params 
 // Parameter input for DescribeDBInstanceAutomatedBackups.
 type DescribeDBInstanceAutomatedBackupsInput struct {
 
+	// The Amazon Resource Name (ARN) of the replicated automated backups, for example,
+	// arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE.
+	DBInstanceAutomatedBackupsArn *string
+
 	// (Optional) The user-supplied instance identifier. If this parameter is
 	// specified, it must match the identifier of an existing DB instance. It returns
 	// information from the specific DB instance' automated backup. This parameter

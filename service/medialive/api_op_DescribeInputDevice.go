@@ -76,6 +76,9 @@ type DescribeInputDeviceOutput struct {
 	// The type of the input device.
 	Type types.InputDeviceType
 
+	// Settings that describe an input device that is type UHD.
+	UhdDeviceSettings *types.InputDeviceUhdSettings
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }

@@ -690,11 +690,11 @@ func validateOperationFilter(v *types.OperationFilter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OperationFilter"}
-	if v.Values == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Values"))
-	}
 	if len(v.Name) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -782,11 +782,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -837,16 +837,16 @@ func validateOpCreatePrivateDnsNamespaceInput(v *CreatePrivateDnsNamespaceInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePrivateDnsNamespaceInput"}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.Vpc == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Vpc"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -883,6 +883,11 @@ func validateOpCreateServiceInput(v *CreateServiceInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.DnsConfig != nil {
+		if err := validateDnsConfig(v.DnsConfig); err != nil {
+			invalidParams.AddNested("DnsConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.HealthCheckConfig != nil {
 		if err := validateHealthCheckConfig(v.HealthCheckConfig); err != nil {
 			invalidParams.AddNested("HealthCheckConfig", err.(smithy.InvalidParamsError))
@@ -891,11 +896,6 @@ func validateOpCreateServiceInput(v *CreateServiceInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.DnsConfig != nil {
-		if err := validateDnsConfig(v.DnsConfig); err != nil {
-			invalidParams.AddNested("DnsConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -958,11 +958,11 @@ func validateOpDiscoverInstancesInput(v *DiscoverInstancesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DiscoverInstancesInput"}
-	if v.ServiceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
-	}
 	if v.NamespaceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NamespaceName"))
+	}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -976,11 +976,11 @@ func validateOpGetInstanceInput(v *GetInstanceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetInstanceInput"}
-	if v.InstanceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
-	}
 	if v.ServiceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1138,11 +1138,11 @@ func validateOpRegisterInstanceInput(v *RegisterInstanceInput) error {
 	if v.ServiceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceId"))
 	}
-	if v.Attributes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
-	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Attributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1156,15 +1156,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1178,11 +1178,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1196,14 +1196,14 @@ func validateOpUpdateInstanceCustomHealthStatusInput(v *UpdateInstanceCustomHeal
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateInstanceCustomHealthStatusInput"}
+	if v.ServiceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceId"))
+	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if len(v.Status) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Status"))
-	}
-	if v.ServiceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1217,15 +1217,15 @@ func validateOpUpdateServiceInput(v *UpdateServiceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateServiceInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
 	if v.Service == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Service"))
 	} else if v.Service != nil {
 		if err := validateServiceChange(v.Service); err != nil {
 			invalidParams.AddNested("Service", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

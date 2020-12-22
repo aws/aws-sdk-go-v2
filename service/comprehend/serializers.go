@@ -843,6 +843,52 @@ func (m *awsAwsjson11_serializeOpDescribeEntityRecognizer) HandleSerialize(ctx c
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDescribeEventsDetectionJob struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeEventsDetectionJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeEventsDetectionJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeEventsDetectionJobInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.DescribeEventsDetectionJob")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeEventsDetectionJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDescribeKeyPhrasesDetectionJob struct {
 }
 
@@ -1579,6 +1625,52 @@ func (m *awsAwsjson11_serializeOpListEntityRecognizers) HandleSerialize(ctx cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListEventsDetectionJobs struct {
+}
+
+func (*awsAwsjson11_serializeOpListEventsDetectionJobs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListEventsDetectionJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListEventsDetectionJobsInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.ListEventsDetectionJobs")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListEventsDetectionJobsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListKeyPhrasesDetectionJobs struct {
 }
 
@@ -1947,6 +2039,52 @@ func (m *awsAwsjson11_serializeOpStartEntitiesDetectionJob) HandleSerialize(ctx 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpStartEventsDetectionJob struct {
+}
+
+func (*awsAwsjson11_serializeOpStartEventsDetectionJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpStartEventsDetectionJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartEventsDetectionJobInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.StartEventsDetectionJob")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentStartEventsDetectionJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpStartKeyPhrasesDetectionJob struct {
 }
 
@@ -2208,6 +2346,52 @@ func (m *awsAwsjson11_serializeOpStopEntitiesDetectionJob) HandleSerialize(ctx c
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentStopEntitiesDetectionJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpStopEventsDetectionJob struct {
+}
+
+func (*awsAwsjson11_serializeOpStopEventsDetectionJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpStopEventsDetectionJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StopEventsDetectionJobInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.StopEventsDetectionJob")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentStopEventsDetectionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2963,6 +3147,33 @@ func awsAwsjson11_serializeDocumentEntityTypesListItem(v *types.EntityTypesListI
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEventsDetectionJobFilter(v *types.EventsDetectionJobFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JobName != nil {
+		ok := object.Key("JobName")
+		ok.String(*v.JobName)
+	}
+
+	if len(v.JobStatus) > 0 {
+		ok := object.Key("JobStatus")
+		ok.String(string(v.JobStatus))
+	}
+
+	if v.SubmitTimeAfter != nil {
+		ok := object.Key("SubmitTimeAfter")
+		ok.Double(smithytime.FormatEpochSeconds(*v.SubmitTimeAfter))
+	}
+
+	if v.SubmitTimeBefore != nil {
+		ok := object.Key("SubmitTimeBefore")
+		ok.Double(smithytime.FormatEpochSeconds(*v.SubmitTimeBefore))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInputDataConfig(v *types.InputDataConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3172,6 +3383,17 @@ func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 		if err := awsAwsjson11_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTargetEventTypes(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
@@ -3591,6 +3813,18 @@ func awsAwsjson11_serializeOpDocumentDescribeEntityRecognizerInput(v *DescribeEn
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDescribeEventsDetectionJobInput(v *DescribeEventsDetectionJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JobId != nil {
+		ok := object.Key("JobId")
+		ok.String(*v.JobId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDescribeKeyPhrasesDetectionJobInput(v *DescribeKeyPhrasesDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3885,6 +4119,30 @@ func awsAwsjson11_serializeOpDocumentListEntityRecognizersInput(v *ListEntityRec
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentListEventsDetectionJobsInput(v *ListEventsDetectionJobsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filter != nil {
+		ok := object.Key("Filter")
+		if err := awsAwsjson11_serializeDocumentEventsDetectionJobFilter(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentListKeyPhrasesDetectionJobsInput(v *ListKeyPhrasesDetectionJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4152,6 +4410,54 @@ func awsAwsjson11_serializeOpDocumentStartEntitiesDetectionJobInput(v *StartEnti
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentStartEventsDetectionJobInput(v *StartEventsDetectionJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.DataAccessRoleArn != nil {
+		ok := object.Key("DataAccessRoleArn")
+		ok.String(*v.DataAccessRoleArn)
+	}
+
+	if v.InputDataConfig != nil {
+		ok := object.Key("InputDataConfig")
+		if err := awsAwsjson11_serializeDocumentInputDataConfig(v.InputDataConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.JobName != nil {
+		ok := object.Key("JobName")
+		ok.String(*v.JobName)
+	}
+
+	if len(v.LanguageCode) > 0 {
+		ok := object.Key("LanguageCode")
+		ok.String(string(v.LanguageCode))
+	}
+
+	if v.OutputDataConfig != nil {
+		ok := object.Key("OutputDataConfig")
+		if err := awsAwsjson11_serializeDocumentOutputDataConfig(v.OutputDataConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetEventTypes != nil {
+		ok := object.Key("TargetEventTypes")
+		if err := awsAwsjson11_serializeDocumentTargetEventTypes(v.TargetEventTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentStartKeyPhrasesDetectionJobInput(v *StartKeyPhrasesDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4377,6 +4683,18 @@ func awsAwsjson11_serializeOpDocumentStopDominantLanguageDetectionJobInput(v *St
 }
 
 func awsAwsjson11_serializeOpDocumentStopEntitiesDetectionJobInput(v *StopEntitiesDetectionJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JobId != nil {
+		ok := object.Key("JobId")
+		ok.String(*v.JobId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentStopEventsDetectionJobInput(v *StopEventsDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

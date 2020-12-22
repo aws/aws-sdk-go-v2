@@ -47,6 +47,9 @@ type CreateLicenseConfigurationInput struct {
 	// Description of the license configuration.
 	Description *string
 
+	// When true, disassociates a resource when software is uninstalled.
+	DisassociateWhenNotFound *bool
+
 	// Number of licenses managed by the license configuration.
 	LicenseCount *int64
 

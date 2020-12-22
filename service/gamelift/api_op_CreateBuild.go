@@ -86,11 +86,15 @@ type CreateBuildInput struct {
 	// changed later.
 	OperatingSystem types.OperatingSystem
 
-	// Information indicating where your game build files are stored. Use this
-	// parameter only when creating a build with files stored in an S3 bucket that you
-	// own. The storage location must specify an S3 bucket name and key. The location
-	// must also specify a role ARN that you set up to allow Amazon GameLift to access
-	// your S3 bucket. The S3 bucket and your new build must be in the same Region.
+	// The location where your game build files are stored. Use this parameter only
+	// when creating a build using files that are stored in an S3 bucket that you own.
+	// Identify an S3 bucket name and key, which must in the same Region where you're
+	// creating a build. This parameter must also specify the ARN for an IAM role that
+	// you've set up to give Amazon GameLift access your S3 bucket. To call this
+	// operation with a storage location, you must have IAM PassRole permission. For
+	// more details on IAM roles and PassRole permissions, see  Set up a role for
+	// GameLift access
+	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/setting-up-role.html).
 	StorageLocation *types.S3Location
 
 	// A list of labels to assign to the new build resource. Tags are developer-defined

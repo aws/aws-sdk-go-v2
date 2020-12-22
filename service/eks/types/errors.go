@@ -31,8 +31,9 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type ClientException struct {
 	Message *string
 
-	NodegroupName *string
 	ClusterName   *string
+	NodegroupName *string
+	AddonName     *string
 }
 
 func (e *ClientException) Error() string {
@@ -52,9 +53,10 @@ func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 type InvalidParameterException struct {
 	Message *string
 
-	FargateProfileName *string
-	NodegroupName      *string
 	ClusterName        *string
+	NodegroupName      *string
+	FargateProfileName *string
+	AddonName          *string
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -74,8 +76,9 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 type InvalidRequestException struct {
 	Message *string
 
-	NodegroupName *string
 	ClusterName   *string
+	NodegroupName *string
+	AddonName     *string
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -112,8 +115,9 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type ResourceInUseException struct {
 	Message *string
 
-	NodegroupName *string
 	ClusterName   *string
+	NodegroupName *string
+	AddonName     *string
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -157,6 +161,7 @@ type ResourceNotFoundException struct {
 	ClusterName        *string
 	NodegroupName      *string
 	FargateProfileName *string
+	AddonName          *string
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -175,8 +180,9 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 type ServerException struct {
 	Message *string
 
-	NodegroupName *string
 	ClusterName   *string
+	NodegroupName *string
+	AddonName     *string
 }
 
 func (e *ServerException) Error() string {
@@ -215,9 +221,9 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 type UnsupportedAvailabilityZoneException struct {
 	Message *string
 
-	ValidZones    []string
 	ClusterName   *string
 	NodegroupName *string
+	ValidZones    []string
 }
 
 func (e *UnsupportedAvailabilityZoneException) Error() string {

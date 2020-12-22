@@ -13,7 +13,7 @@ import (
 
 // Lists the ThreatIntelSets of the GuardDuty service specified by the detector ID.
 // If you use this operation from a member account, the ThreatIntelSets associated
-// with the master account are returned.
+// with the administrator account are returned.
 func (c *Client) ListThreatIntelSets(ctx context.Context, params *ListThreatIntelSetsInput, optFns ...func(*Options)) (*ListThreatIntelSetsOutput, error) {
 	if params == nil {
 		params = &ListThreatIntelSetsInput{}

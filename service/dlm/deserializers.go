@@ -1334,7 +1334,7 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyRule(v **types.CrossRegionCo
 				if !ok {
 					return fmt.Errorf("expected CopyTagsNullable to be of type *bool, got %T instead", value)
 				}
-				sv.CopyTags = ptr.Bool(jtv)
+				sv.CopyTags = jtv
 			}
 
 		case "Encrypted":
@@ -1343,7 +1343,7 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyRule(v **types.CrossRegionCo
 				if !ok {
 					return fmt.Errorf("expected Encrypted to be of type *bool, got %T instead", value)
 				}
-				sv.Encrypted = ptr.Bool(jtv)
+				sv.Encrypted = jtv
 			}
 
 		case "RetainRule":
@@ -1606,28 +1606,28 @@ func awsRestjson1_deserializeDocumentLifecyclePolicy(v **types.LifecyclePolicy, 
 		switch key {
 		case "DateCreated":
 			if value != nil {
-				jtv, ok := value.(json.Number)
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
 				}
-				f64, err := jtv.Float64()
+				t, err := smithytime.ParseDateTime(jtv)
 				if err != nil {
 					return err
 				}
-				sv.DateCreated = ptr.Time(smithytime.ParseEpochSeconds(f64))
+				sv.DateCreated = ptr.Time(t)
 			}
 
 		case "DateModified":
 			if value != nil {
-				jtv, ok := value.(json.Number)
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
 				}
-				f64, err := jtv.Float64()
+				t, err := smithytime.ParseDateTime(jtv)
 				if err != nil {
 					return err
 				}
-				sv.DateModified = ptr.Time(smithytime.ParseEpochSeconds(f64))
+				sv.DateModified = ptr.Time(t)
 			}
 
 		case "Description":
@@ -1931,7 +1931,7 @@ func awsRestjson1_deserializeDocumentParameters(v **types.Parameters, value inte
 				if !ok {
 					return fmt.Errorf("expected ExcludeBootVolume to be of type *bool, got %T instead", value)
 				}
-				sv.ExcludeBootVolume = ptr.Bool(jtv)
+				sv.ExcludeBootVolume = jtv
 			}
 
 		case "NoReboot":
@@ -1940,7 +1940,7 @@ func awsRestjson1_deserializeDocumentParameters(v **types.Parameters, value inte
 				if !ok {
 					return fmt.Errorf("expected NoReboot to be of type *bool, got %T instead", value)
 				}
-				sv.NoReboot = ptr.Bool(jtv)
+				sv.NoReboot = jtv
 			}
 
 		default:

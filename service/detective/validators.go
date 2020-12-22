@@ -281,15 +281,15 @@ func validateOpCreateMembersInput(v *CreateMembersInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateMembersInput"}
+	if v.GraphArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphArn"))
+	}
 	if v.Accounts == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Accounts"))
 	} else if v.Accounts != nil {
 		if err := validateAccountList(v.Accounts); err != nil {
 			invalidParams.AddNested("Accounts", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.GraphArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GraphArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -318,11 +318,11 @@ func validateOpDeleteMembersInput(v *DeleteMembersInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteMembersInput"}
-	if v.AccountIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
-	}
 	if v.GraphArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GraphArn"))
+	}
+	if v.AccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -399,11 +399,11 @@ func validateOpStartMonitoringMemberInput(v *StartMonitoringMemberInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartMonitoringMemberInput"}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
-	}
 	if v.GraphArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GraphArn"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

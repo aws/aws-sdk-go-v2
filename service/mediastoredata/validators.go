@@ -155,11 +155,11 @@ func validateOpPutObjectInput(v *PutObjectInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutObjectInput"}
-	if v.Path == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Path"))
-	}
 	if v.Body == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Body"))
+	}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

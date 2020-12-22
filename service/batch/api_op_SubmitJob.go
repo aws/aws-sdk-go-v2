@@ -12,7 +12,9 @@ import (
 )
 
 // Submits an AWS Batch job from a job definition. Parameters specified during
-// SubmitJob override parameters defined in the job definition.
+// SubmitJob override parameters defined in the job definition. Jobs run on Fargate
+// resources don't run for more than 14 days. After 14 days, the Fargate resources
+// might no longer be available and the job is terminated.
 func (c *Client) SubmitJob(ctx context.Context, params *SubmitJobInput, optFns ...func(*Options)) (*SubmitJobOutput, error) {
 	if params == nil {
 		params = &SubmitJobInput{}
@@ -75,7 +77,8 @@ type SubmitJobInput struct {
 	DependsOn []types.JobDependency
 
 	// A list of node overrides in JSON format that specify the node range to target
-	// and the container overrides for that node range.
+	// and the container overrides for that node range. This parameter isn't applicable
+	// to jobs running on Fargate resources; use containerOverrides instead.
 	NodeOverrides *types.NodeOverrides
 
 	// Additional parameters passed to the job that replace parameter substitution
@@ -83,6 +86,15 @@ type SubmitJobInput struct {
 	// key and value pair mapping. Parameters in a SubmitJob request override any
 	// corresponding parameter defaults from the job definition.
 	Parameters map[string]string
+
+	// Specifies whether to propagate the tags from the job or job definition to the
+	// corresponding Amazon ECS task. If no value is specified, the tags aren't
+	// propagated. Tags can only be propagated to the tasks during task creation. For
+	// tags with the same name, job tags are given priority over job definitions tags.
+	// If the total number of combined tags from the job and job definition is over 50,
+	// the job is moved to the FAILED state. When specified, this overrides the tag
+	// propagation setting in the job definition.
+	PropagateTags bool
 
 	// The retry strategy to use for failed jobs from this SubmitJob operation. When a
 	// retry strategy is specified here, it overrides the retry strategy defined in the
@@ -97,12 +109,12 @@ type SubmitJobInput struct {
 	Tags map[string]string
 
 	// The timeout configuration for this SubmitJob operation. You can specify a
-	// timeout duration after which AWS Batch terminates your jobs if they have not
-	// finished. If a job is terminated due to a timeout, it is not retried. The
-	// minimum value for the timeout is 60 seconds. This configuration overrides any
-	// timeout configuration specified in the job definition. For array jobs, child
-	// jobs have the same timeout configuration as the parent job. For more
-	// information, see Job Timeouts
+	// timeout duration after which AWS Batch terminates your jobs if they haven't
+	// finished. If a job is terminated due to a timeout, it isn't retried. The minimum
+	// value for the timeout is 60 seconds. This configuration overrides any timeout
+	// configuration specified in the job definition. For array jobs, child jobs have
+	// the same timeout configuration as the parent job. For more information, see Job
+	// Timeouts
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Timeout *types.JobTimeout

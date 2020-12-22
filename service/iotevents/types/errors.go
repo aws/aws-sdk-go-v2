@@ -62,8 +62,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 type ResourceAlreadyExistsException struct {
 	Message *string
 
-	ResourceArn *string
 	ResourceId  *string
+	ResourceArn *string
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {

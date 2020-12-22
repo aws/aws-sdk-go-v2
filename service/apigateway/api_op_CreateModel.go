@@ -34,6 +34,11 @@ type CreateModelInput struct {
 	// This member is required.
 	ContentType *string
 
+	// [Required] The name of the model. Must be alphanumeric.
+	//
+	// This member is required.
+	Name *string
+
 	// [Required] The RestApi identifier under which the Model will be created.
 	//
 	// This member is required.

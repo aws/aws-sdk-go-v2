@@ -1758,11 +1758,11 @@ func validateGameProperty(v *types.GameProperty) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GameProperty"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1844,17 +1844,17 @@ func validateIpPermission(v *types.IpPermission) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IpPermission"}
-	if v.IpRange == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IpRange"))
+	if v.FromPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FromPort"))
 	}
 	if v.ToPort == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ToPort"))
 	}
+	if v.IpRange == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpRange"))
+	}
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
-	}
-	if v.FromPort == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FromPort"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1937,11 +1937,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1999,14 +1999,14 @@ func validateOpAcceptMatchInput(v *AcceptMatchInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AcceptMatchInput"}
+	if v.TicketId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TicketId"))
+	}
 	if v.PlayerIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PlayerIds"))
 	}
 	if len(v.AcceptanceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AcceptanceType"))
-	}
-	if v.TicketId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TicketId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2038,13 +2038,13 @@ func validateOpCreateAliasInput(v *CreateAliasInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.RoutingStrategy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingStrategy"))
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.RoutingStrategy == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoutingStrategy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2075,31 +2075,31 @@ func validateOpCreateFleetInput(v *CreateFleetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateFleetInput"}
-	if v.CertificateConfiguration != nil {
-		if err := validateCertificateConfiguration(v.CertificateConfiguration); err != nil {
-			invalidParams.AddNested("CertificateConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.RuntimeConfiguration != nil {
-		if err := validateRuntimeConfiguration(v.RuntimeConfiguration); err != nil {
-			invalidParams.AddNested("RuntimeConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
+	if len(v.EC2InstanceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EC2InstanceType"))
 	}
 	if v.EC2InboundPermissions != nil {
 		if err := validateIpPermissionsList(v.EC2InboundPermissions); err != nil {
 			invalidParams.AddNested("EC2InboundPermissions", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.EC2InstanceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("EC2InstanceType"))
+	if v.RuntimeConfiguration != nil {
+		if err := validateRuntimeConfiguration(v.RuntimeConfiguration); err != nil {
+			invalidParams.AddNested("RuntimeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CertificateConfiguration != nil {
+		if err := validateCertificateConfiguration(v.CertificateConfiguration); err != nil {
+			invalidParams.AddNested("CertificateConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2113,11 +2113,27 @@ func validateOpCreateGameServerGroupInput(v *CreateGameServerGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateGameServerGroupInput"}
+	if v.GameServerGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GameServerGroupName"))
+	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
+	if v.MinSize == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinSize"))
+	}
 	if v.MaxSize == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MaxSize"))
+	}
+	if v.LaunchTemplate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LaunchTemplate"))
+	}
+	if v.InstanceDefinitions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceDefinitions"))
+	} else if v.InstanceDefinitions != nil {
+		if err := validateInstanceDefinitions(v.InstanceDefinitions); err != nil {
+			invalidParams.AddNested("InstanceDefinitions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.AutoScalingPolicy != nil {
 		if err := validateGameServerGroupAutoScalingPolicy(v.AutoScalingPolicy); err != nil {
@@ -2128,22 +2144,6 @@ func validateOpCreateGameServerGroupInput(v *CreateGameServerGroupInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.InstanceDefinitions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceDefinitions"))
-	} else if v.InstanceDefinitions != nil {
-		if err := validateInstanceDefinitions(v.InstanceDefinitions); err != nil {
-			invalidParams.AddNested("InstanceDefinitions", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.GameServerGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GameServerGroupName"))
-	}
-	if v.LaunchTemplate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LaunchTemplate"))
-	}
-	if v.MinSize == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MinSize"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2197,6 +2197,9 @@ func validateOpCreateMatchmakingConfigurationInput(v *CreateMatchmakingConfigura
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateMatchmakingConfigurationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.RequestTimeoutSeconds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RequestTimeoutSeconds"))
 	}
@@ -2206,21 +2209,15 @@ func validateOpCreateMatchmakingConfigurationInput(v *CreateMatchmakingConfigura
 	if v.RuleSetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleSetName"))
 	}
-	if v.GameSessionQueueArns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GameSessionQueueArns"))
-	}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.GameProperties != nil {
 		if err := validateGamePropertyList(v.GameProperties); err != nil {
 			invalidParams.AddNested("GameProperties", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2234,6 +2231,9 @@ func validateOpCreateMatchmakingRuleSetInput(v *CreateMatchmakingRuleSetInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateMatchmakingRuleSetInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.RuleSetBody == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleSetBody"))
 	}
@@ -2241,9 +2241,6 @@ func validateOpCreateMatchmakingRuleSetInput(v *CreateMatchmakingRuleSetInput) e
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2328,14 +2325,14 @@ func validateOpCreateVpcPeeringConnectionInput(v *CreateVpcPeeringConnectionInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateVpcPeeringConnectionInput"}
-	if v.PeerVpcId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PeerVpcId"))
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
 	}
 	if v.PeerVpcAwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PeerVpcAwsAccountId"))
 	}
-	if v.FleetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	if v.PeerVpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PeerVpcId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2523,11 +2520,11 @@ func validateOpDeregisterGameServerInput(v *DeregisterGameServerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeregisterGameServerInput"}
-	if v.GameServerId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GameServerId"))
-	}
 	if v.GameServerGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GameServerGroupName"))
+	}
+	if v.GameServerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GameServerId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2616,11 +2613,11 @@ func validateOpDescribeGameServerInput(v *DescribeGameServerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeGameServerInput"}
-	if v.GameServerId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GameServerId"))
-	}
 	if v.GameServerGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GameServerGroupName"))
+	}
+	if v.GameServerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GameServerId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2805,16 +2802,16 @@ func validateOpPutScalingPolicyInput(v *PutScalingPolicyInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.TargetConfiguration != nil {
-		if err := validateTargetConfiguration(v.TargetConfiguration); err != nil {
-			invalidParams.AddNested("TargetConfiguration", err.(smithy.InvalidParamsError))
-		}
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
 	}
 	if len(v.MetricName) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
 	}
-	if v.FleetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	if v.TargetConfiguration != nil {
+		if err := validateTargetConfiguration(v.TargetConfiguration); err != nil {
+			invalidParams.AddNested("TargetConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2828,14 +2825,14 @@ func validateOpRegisterGameServerInput(v *RegisterGameServerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterGameServerInput"}
+	if v.GameServerGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GameServerGroupName"))
+	}
 	if v.GameServerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GameServerId"))
 	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
-	}
-	if v.GameServerGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GameServerGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2879,11 +2876,11 @@ func validateOpResumeGameServerGroupInput(v *ResumeGameServerGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResumeGameServerGroupInput"}
-	if v.ResumeActions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResumeActions"))
-	}
 	if v.GameServerGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GameServerGroupName"))
+	}
+	if v.ResumeActions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResumeActions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2897,11 +2894,11 @@ func validateOpStartFleetActionsInput(v *StartFleetActionsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartFleetActionsInput"}
-	if v.Actions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
-	}
 	if v.FleetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
+	if v.Actions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2915,19 +2912,19 @@ func validateOpStartGameSessionPlacementInput(v *StartGameSessionPlacementInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartGameSessionPlacementInput"}
+	if v.PlacementId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PlacementId"))
+	}
+	if v.GameSessionQueueName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GameSessionQueueName"))
+	}
 	if v.GameProperties != nil {
 		if err := validateGamePropertyList(v.GameProperties); err != nil {
 			invalidParams.AddNested("GameProperties", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.GameSessionQueueName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GameSessionQueueName"))
-	}
 	if v.MaximumPlayerSessionCount == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MaximumPlayerSessionCount"))
-	}
-	if v.PlacementId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PlacementId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2941,14 +2938,11 @@ func validateOpStartMatchBackfillInput(v *StartMatchBackfillInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartMatchBackfillInput"}
-	if v.Players == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Players"))
-	}
-	if v.GameSessionArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GameSessionArn"))
-	}
 	if v.ConfigurationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationName"))
+	}
+	if v.Players == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Players"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2962,11 +2956,11 @@ func validateOpStartMatchmakingInput(v *StartMatchmakingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartMatchmakingInput"}
-	if v.Players == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Players"))
-	}
 	if v.ConfigurationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationName"))
+	}
+	if v.Players == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Players"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3046,15 +3040,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3146,6 +3140,9 @@ func validateOpUpdateFleetPortSettingsInput(v *UpdateFleetPortSettingsInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFleetPortSettingsInput"}
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
 	if v.InboundPermissionAuthorizations != nil {
 		if err := validateIpPermissionsList(v.InboundPermissionAuthorizations); err != nil {
 			invalidParams.AddNested("InboundPermissionAuthorizations", err.(smithy.InvalidParamsError))
@@ -3155,9 +3152,6 @@ func validateOpUpdateFleetPortSettingsInput(v *UpdateFleetPortSettingsInput) err
 		if err := validateIpPermissionsList(v.InboundPermissionRevocations); err != nil {
 			invalidParams.AddNested("InboundPermissionRevocations", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.FleetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3191,11 +3185,11 @@ func validateOpUpdateGameServerInput(v *UpdateGameServerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateGameServerInput"}
-	if v.GameServerId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GameServerId"))
-	}
 	if v.GameServerGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GameServerGroupName"))
+	}
+	if v.GameServerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GameServerId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3259,15 +3253,15 @@ func validateOpUpdateRuntimeConfigurationInput(v *UpdateRuntimeConfigurationInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRuntimeConfigurationInput"}
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
 	if v.RuntimeConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuntimeConfiguration"))
 	} else if v.RuntimeConfiguration != nil {
 		if err := validateRuntimeConfiguration(v.RuntimeConfiguration); err != nil {
 			invalidParams.AddNested("RuntimeConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.FleetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

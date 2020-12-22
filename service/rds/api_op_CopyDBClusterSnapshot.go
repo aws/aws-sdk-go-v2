@@ -34,21 +34,21 @@ import (
 // copied. The pre-signed URL request must contain the following parameter
 // values:
 //
-// * KmsKeyId - The KMS key identifier for the key to use to encrypt the
-// copy of the DB cluster snapshot in the destination AWS Region. This is the same
-// identifier for both the CopyDBClusterSnapshot action that is called in the
-// destination AWS Region, and the action contained in the pre-signed URL.
+// * KmsKeyId - The AWS KMS key identifier for the customer master key
+// (CMK) to use to encrypt the copy of the DB cluster snapshot in the destination
+// AWS Region. This is the same identifier for both the CopyDBClusterSnapshot
+// action that is called in the destination AWS Region, and the action contained in
+// the pre-signed URL.
 //
-// *
-// DestinationRegion - The name of the AWS Region that the DB cluster snapshot is
-// to be created in.
+// * DestinationRegion - The name of the AWS Region that the
+// DB cluster snapshot is to be created in.
 //
-// * SourceDBClusterSnapshotIdentifier - The DB cluster snapshot
-// identifier for the encrypted DB cluster snapshot to be copied. This identifier
-// must be in the Amazon Resource Name (ARN) format for the source AWS Region. For
-// example, if you are copying an encrypted DB cluster snapshot from the us-west-2
-// AWS Region, then your SourceDBClusterSnapshotIdentifier looks like the following
-// example:
+// * SourceDBClusterSnapshotIdentifier -
+// The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be
+// copied. This identifier must be in the Amazon Resource Name (ARN) format for the
+// source AWS Region. For example, if you are copying an encrypted DB cluster
+// snapshot from the us-west-2 AWS Region, then your
+// SourceDBClusterSnapshotIdentifier looks like the following example:
 // arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115.
 //
 // To
@@ -142,20 +142,20 @@ type CopyDBClusterSnapshotInput struct {
 	// snapshot to the target DB cluster snapshot. By default, tags are not copied.
 	CopyTags *bool
 
-	// The AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key ID is the
-	// Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS
-	// encryption key. If you copy an encrypted DB cluster snapshot from your AWS
-	// account, you can specify a value for KmsKeyId to encrypt the copy with a new KMS
-	// encryption key. If you don't specify a value for KmsKeyId, then the copy of the
-	// DB cluster snapshot is encrypted with the same KMS key as the source DB cluster
-	// snapshot. If you copy an encrypted DB cluster snapshot that is shared from
-	// another AWS account, then you must specify a value for KmsKeyId. To copy an
+	// The AWS KMS key identifier for an encrypted DB cluster snapshot. The AWS KMS key
+	// identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS
+	// customer master key (CMK). If you copy an encrypted DB cluster snapshot from
+	// your AWS account, you can specify a value for KmsKeyId to encrypt the copy with
+	// a new AWS KMS CMK. If you don't specify a value for KmsKeyId, then the copy of
+	// the DB cluster snapshot is encrypted with the same AWS KMS key as the source DB
+	// cluster snapshot. If you copy an encrypted DB cluster snapshot that is shared
+	// from another AWS account, then you must specify a value for KmsKeyId. To copy an
 	// encrypted DB cluster snapshot to another AWS Region, you must set KmsKeyId to
-	// the KMS key ID you want to use to encrypt the copy of the DB cluster snapshot in
-	// the destination AWS Region. KMS encryption keys are specific to the AWS Region
-	// that they are created in, and you can't use encryption keys from one AWS Region
-	// in another AWS Region. If you copy an unencrypted DB cluster snapshot and
-	// specify a value for the KmsKeyId parameter, an error is returned.
+	// the AWS KMS key identifier you want to use to encrypt the copy of the DB cluster
+	// snapshot in the destination AWS Region. AWS KMS CMKs are specific to the AWS
+	// Region that they are created in, and you can't use CMKs from one AWS Region in
+	// another AWS Region. If you copy an unencrypted DB cluster snapshot and specify a
+	// value for the KmsKeyId parameter, an error is returned.
 	KmsKeyId *string
 
 	// The URL that contains a Signature Version 4 signed request for the
@@ -169,20 +169,21 @@ type CopyDBClusterSnapshotInput struct {
 	// request must contain the following parameter values:
 	//
 	// * KmsKeyId - The AWS KMS
-	// key identifier for the key to use to encrypt the copy of the DB cluster snapshot
-	// in the destination AWS Region. This is the same identifier for both the
-	// CopyDBClusterSnapshot action that is called in the destination AWS Region, and
-	// the action contained in the pre-signed URL.
-	//
-	// * DestinationRegion - The name of
-	// the AWS Region that the DB cluster snapshot is to be created in.
+	// key identifier for the customer master key (CMK) to use to encrypt the copy of
+	// the DB cluster snapshot in the destination AWS Region. This is the same
+	// identifier for both the CopyDBClusterSnapshot action that is called in the
+	// destination AWS Region, and the action contained in the pre-signed URL.
 	//
 	// *
-	// SourceDBClusterSnapshotIdentifier - The DB cluster snapshot identifier for the
-	// encrypted DB cluster snapshot to be copied. This identifier must be in the
-	// Amazon Resource Name (ARN) format for the source AWS Region. For example, if you
-	// are copying an encrypted DB cluster snapshot from the us-west-2 AWS Region, then
-	// your SourceDBClusterSnapshotIdentifier looks like the following example:
+	// DestinationRegion - The name of the AWS Region that the DB cluster snapshot is
+	// to be created in.
+	//
+	// * SourceDBClusterSnapshotIdentifier - The DB cluster snapshot
+	// identifier for the encrypted DB cluster snapshot to be copied. This identifier
+	// must be in the Amazon Resource Name (ARN) format for the source AWS Region. For
+	// example, if you are copying an encrypted DB cluster snapshot from the us-west-2
+	// AWS Region, then your SourceDBClusterSnapshotIdentifier looks like the following
+	// example:
 	// arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115.
 	//
 	// To

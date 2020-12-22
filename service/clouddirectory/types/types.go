@@ -37,7 +37,7 @@ type AttributeKeyAndValue struct {
 	// The value of the attribute.
 	//
 	// This member is required.
-	Value *TypedAttributeValue
+	Value TypedAttributeValue
 }
 
 // Identifies the attribute name and value for a typed link.
@@ -51,7 +51,7 @@ type AttributeNameAndValue struct {
 	// The value for the typed link.
 	//
 	// This member is required.
-	Value *TypedAttributeValue
+	Value TypedAttributeValue
 }
 
 // Represents the output of a batch add facet to object operation.
@@ -1115,7 +1115,7 @@ type FacetAttributeDefinition struct {
 	Type FacetAttributeType
 
 	// The default value of the attribute (if configured).
-	DefaultValue *TypedAttributeValue
+	DefaultValue TypedAttributeValue
 
 	// Whether the attribute is mutable or not.
 	IsImmutable bool
@@ -1176,7 +1176,7 @@ type LinkAttributeAction struct {
 	AttributeActionType UpdateActionType
 
 	// The value that you want to update to.
-	AttributeUpdateValue *TypedAttributeValue
+	AttributeUpdateValue TypedAttributeValue
 }
 
 // Structure that contains attribute update information.
@@ -1196,7 +1196,7 @@ type ObjectAttributeAction struct {
 	ObjectAttributeActionType UpdateActionType
 
 	// The value that you want to update to.
-	ObjectAttributeUpdateValue *TypedAttributeValue
+	ObjectAttributeUpdateValue TypedAttributeValue
 }
 
 // A range of attributes.
@@ -1326,23 +1326,51 @@ type Tag struct {
 // Represents the data for a typed attribute. You can set one, and only one, of the
 // elements. Each attribute in an item is a name-value pair. Attributes have a
 // single value.
-type TypedAttributeValue struct {
-
-	// A binary data value.
-	BinaryValue []byte
-
-	// A Boolean data value.
-	BooleanValue *bool
-
-	// A date and time value.
-	DatetimeValue *time.Time
-
-	// A number data value.
-	NumberValue *string
-
-	// A string data value.
-	StringValue *string
+//
+// The following types satisfy this interface:
+//  TypedAttributeValueMemberStringValue
+//  TypedAttributeValueMemberBinaryValue
+//  TypedAttributeValueMemberBooleanValue
+//  TypedAttributeValueMemberNumberValue
+//  TypedAttributeValueMemberDatetimeValue
+type TypedAttributeValue interface {
+	isTypedAttributeValue()
 }
+
+// A string data value.
+type TypedAttributeValueMemberStringValue struct {
+	Value string
+}
+
+func (*TypedAttributeValueMemberStringValue) isTypedAttributeValue() {}
+
+// A binary data value.
+type TypedAttributeValueMemberBinaryValue struct {
+	Value []byte
+}
+
+func (*TypedAttributeValueMemberBinaryValue) isTypedAttributeValue() {}
+
+// A Boolean data value.
+type TypedAttributeValueMemberBooleanValue struct {
+	Value bool
+}
+
+func (*TypedAttributeValueMemberBooleanValue) isTypedAttributeValue() {}
+
+// A number data value.
+type TypedAttributeValueMemberNumberValue struct {
+	Value string
+}
+
+func (*TypedAttributeValueMemberNumberValue) isTypedAttributeValue() {}
+
+// A date and time value.
+type TypedAttributeValueMemberDatetimeValue struct {
+	Value time.Time
+}
+
+func (*TypedAttributeValueMemberDatetimeValue) isTypedAttributeValue() {}
 
 // A range of attribute values. For more information, see Range Filters
 // (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_range_filters.html).
@@ -1359,10 +1387,10 @@ type TypedAttributeValueRange struct {
 	StartMode RangeMode
 
 	// The attribute value to terminate the range at.
-	EndValue *TypedAttributeValue
+	EndValue TypedAttributeValue
 
 	// The value to start the range at.
-	StartValue *TypedAttributeValue
+	StartValue TypedAttributeValue
 }
 
 // A typed link attribute definition.
@@ -1384,7 +1412,7 @@ type TypedLinkAttributeDefinition struct {
 	Type FacetAttributeType
 
 	// The default value of the attribute (if configured).
-	DefaultValue *TypedAttributeValue
+	DefaultValue TypedAttributeValue
 
 	// Whether the attribute is mutable or not.
 	IsImmutable bool
@@ -1490,3 +1518,12 @@ type TypedLinkSpecifier struct {
 	// This member is required.
 	TypedLinkFacet *TypedLinkSchemaAndFacetName
 }
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+}
+
+func (*UnknownUnionMember) isTypedAttributeValue() {}

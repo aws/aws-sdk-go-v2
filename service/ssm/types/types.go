@@ -97,7 +97,7 @@ type AssociationDescription struct {
 	// By default, when you create a new associations, the system runs it immediately
 	// after it is created and then according to the schedule you specified. Specify
 	// this option if you don't want an association to run immediately after you create
-	// it.
+	// it. This parameter is not supported for rate expressions.
 	ApplyOnlyAtCronInterval bool
 
 	// The association ID.
@@ -340,7 +340,7 @@ type AssociationVersionInfo struct {
 	// By default, when you create a new associations, the system runs it immediately
 	// after it is created and then according to the schedule you specified. Specify
 	// this option if you don't want an association to run immediately after you create
-	// it.
+	// it. This parameter is not supported for rate expressions.
 	ApplyOnlyAtCronInterval bool
 
 	// The ID created by the system when the association was created.
@@ -1234,7 +1234,7 @@ type CreateAssociationBatchRequestEntry struct {
 	// By default, when you create a new associations, the system runs it immediately
 	// after it is created and then according to the schedule you specified. Specify
 	// this option if you don't want an association to run immediately after you create
-	// it.
+	// it. This parameter is not supported for rate expressions.
 	ApplyOnlyAtCronInterval bool
 
 	// Specify a descriptive name for the association.
@@ -2643,6 +2643,13 @@ type MaintenanceWindowTaskParameterValueExpression struct {
 	Values []string
 }
 
+// Metadata to assign to an AppManager application.
+type MetadataValue struct {
+
+	// Metadata value to assign to an AppManager application.
+	Value *string
+}
+
 // A summary of resources that are not compliant. The summary is organized
 // according to resource type.
 type NonCompliantSummary struct {
@@ -2899,6 +2906,39 @@ type OpsItemSummary struct {
 	Title *string
 }
 
+// Operational metadata for an application in AppManager.
+type OpsMetadata struct {
+
+	// The date the OpsMetadata objects was created.
+	CreationDate *time.Time
+
+	// The date the OpsMetadata object was last updated.
+	LastModifiedDate *time.Time
+
+	// The user name who last updated the OpsMetadata object.
+	LastModifiedUser *string
+
+	// The Amazon Resource Name (ARN) of the OpsMetadata Object or blob.
+	OpsMetadataArn *string
+
+	// The ID of the AppManager application.
+	ResourceId *string
+}
+
+// A filter to limit the number of OpsMetadata objects displayed.
+type OpsMetadataFilter struct {
+
+	// A filter key.
+	//
+	// This member is required.
+	Key *string
+
+	// A filter value.
+	//
+	// This member is required.
+	Values []string
+}
+
 // The OpsItem data type to return.
 type OpsResultAttribute struct {
 
@@ -3122,7 +3162,7 @@ type Patch struct {
 	BugzillaIds []string
 
 	// The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example,
-	// CVE-1999-0067. Applies to Linux-based instances only.
+	// CVE-2011-3192. Applies to Linux-based instances only.
 	CVEIds []string
 
 	// The classification of the patch. For example, SecurityUpdates, Updates, or

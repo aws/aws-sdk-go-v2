@@ -67,8 +67,8 @@ type StartNotebookExecutionInput struct {
 	// execution.
 	NotebookParams *string
 
-	// A list of tags associated with a notebook execution. Tags are user-defined key
-	// value pairs that consist of a required key string with a maximum of 128
+	// A list of tags associated with a notebook execution. Tags are user-defined
+	// key-value pairs that consist of a required key string with a maximum of 128
 	// characters and an optional value string with a maximum of 256 characters.
 	Tags []types.Tag
 }

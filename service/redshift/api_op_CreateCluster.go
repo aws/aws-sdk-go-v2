@@ -99,8 +99,8 @@ type CreateClusterInput struct {
 	// types, go to  Working with Clusters
 	// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes)
 	// in the Amazon Redshift Cluster Management Guide. Valid Values: ds2.xlarge |
-	// ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.4xlarge |
-	// ra3.16xlarge
+	// ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.xlplus |
+	// ra3.4xlarge | ra3.16xlarge
 	//
 	// This member is required.
 	NodeType *string
@@ -129,6 +129,10 @@ type CreateClusterInput struct {
 	// Example: us-east-2d Constraint: The specified Availability Zone must be in the
 	// same region as the current endpoint.
 	AvailabilityZone *string
+
+	// The option to enable relocation for an Amazon Redshift cluster between
+	// Availability Zones after the cluster is created.
+	AvailabilityZoneRelocation *bool
 
 	// The name of the parameter group to be associated with this cluster. Default: The
 	// default Amazon Redshift cluster parameter group. For information about the

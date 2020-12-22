@@ -37,9 +37,11 @@ type CreateJobQueueInput struct {
 
 	// The set of compute environments mapped to a job queue and their order relative
 	// to each other. The job scheduler uses this parameter to determine which compute
-	// environment should execute a given job. Compute environments must be in the
-	// VALID state before you can associate them with a job queue. You can associate up
-	// to three compute environments with a job queue.
+	// environment should run a specific job. Compute environments must be in the VALID
+	// state before you can associate them with a job queue. You can associate up to
+	// three compute environments with a job queue. All of the compute environments
+	// must be either EC2 (EC2 or SPOT) or Fargate (FARGATE or FARGATE_SPOT); EC2 and
+	// Fargate compute environments can't be mixed.
 	//
 	// This member is required.
 	ComputeEnvironmentOrder []types.ComputeEnvironmentOrder
@@ -51,15 +53,15 @@ type CreateJobQueueInput struct {
 
 	// The priority of the job queue. Job queues with a higher priority (or a higher
 	// integer value for the priority parameter) are evaluated first when associated
-	// with the same compute environment. Priority is determined in descending order,
-	// for example, a job queue with a priority value of 10 is given scheduling
+	// with the same compute environment. Priority is determined in descending order.
+	// For example, a job queue with a priority value of 10 is given scheduling
 	// preference over a job queue with a priority value of 1.
 	//
 	// This member is required.
 	Priority int32
 
 	// The state of the job queue. If the job queue state is ENABLED, it is able to
-	// accept jobs. If the job queue state is DISABLED, new jobs cannot be added to the
+	// accept jobs. If the job queue state is DISABLED, new jobs can't be added to the
 	// queue, but jobs already in the queue can finish.
 	State types.JQState
 

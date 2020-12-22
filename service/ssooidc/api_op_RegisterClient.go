@@ -5,11 +5,13 @@ package ssooidc
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Registers a client with AWS SSO. This allows clients to initiate device
+// authorization. The output should be persisted for reuse through many
+// authentication requests.
 func (c *Client) RegisterClient(ctx context.Context, params *RegisterClientInput, optFns ...func(*Options)) (*RegisterClientOutput, error) {
 	if params == nil {
 		params = &RegisterClientInput{}
@@ -27,26 +29,42 @@ func (c *Client) RegisterClient(ctx context.Context, params *RegisterClientInput
 
 type RegisterClientInput struct {
 
+	// The friendly name of the client.
+	//
 	// This member is required.
 	ClientName *string
 
+	// The type of client. The service supports only public as a client type. Anything
+	// other than public will be rejected by the service.
+	//
 	// This member is required.
 	ClientType *string
 
+	// The list of scopes that are defined by the client. Upon authorization, this list
+	// is used to restrict permissions when granting an access token.
 	Scopes []string
 }
 
 type RegisterClientOutput struct {
+
+	// The endpoint where the client can request authorization.
 	AuthorizationEndpoint *string
 
+	// The unique identifier string for each client. This client uses this identifier
+	// to get authenticated by the service in subsequent calls.
 	ClientId *string
 
+	// Indicates the time at which the clientId and clientSecret were issued.
 	ClientIdIssuedAt int64
 
+	// A secret string generated for the client. The client will use this string to get
+	// authenticated by the service in subsequent calls.
 	ClientSecret *string
 
+	// Indicates the time at which the clientId and clientSecret will become invalid.
 	ClientSecretExpiresAt int64
 
+	// The endpoint where the client can get an access token.
 	TokenEndpoint *string
 
 	// Metadata pertaining to the operation's result.
@@ -74,13 +92,7 @@ func addOperationRegisterClientMiddlewares(stack *middleware.Stack, options Opti
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
-		return err
-	}
 	if err = addRetryMiddlewares(stack, options); err != nil {
-		return err
-	}
-	if err = addHTTPSignerV4Middleware(stack, options); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddAttemptClockSkewMiddleware(stack); err != nil {
@@ -117,7 +129,6 @@ func newServiceMetadataMiddleware_opRegisterClient(region string) *awsmiddleware
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "awsssooidc",
 		OperationName: "RegisterClient",
 	}
 }

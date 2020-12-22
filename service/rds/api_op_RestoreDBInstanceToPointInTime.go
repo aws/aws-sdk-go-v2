@@ -219,6 +219,11 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// Example: 2009-09-07T23:45:00Z
 	RestoreTime *time.Time
 
+	// The Amazon Resource Name (ARN) of the replicated automated backups from which to
+	// restore, for example,
+	// arn:aws:rds:useast-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE.
+	SourceDBInstanceAutomatedBackupsArn *string
+
 	// The identifier of the source DB instance from which to restore. Constraints:
 	//
 	// *

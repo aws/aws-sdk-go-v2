@@ -33,6 +33,8 @@ func (c *Client) DescribeStandardsControls(ctx context.Context, params *Describe
 type DescribeStandardsControlsInput struct {
 
 	// The ARN of a resource that represents your subscription to a supported standard.
+	// To get the subscription ARNs of the standards you have enabled, use the
+	// GetEnabledStandards operation.
 	//
 	// This member is required.
 	StandardsSubscriptionArn *string

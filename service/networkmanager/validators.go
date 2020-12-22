@@ -49,6 +49,46 @@ func (m *validateOpAssociateLink) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateTransitGatewayConnectPeer struct {
+}
+
+func (*validateOpAssociateTransitGatewayConnectPeer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateTransitGatewayConnectPeer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateTransitGatewayConnectPeerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateTransitGatewayConnectPeerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateConnection struct {
+}
+
+func (*validateOpCreateConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDevice struct {
 }
 
@@ -104,6 +144,26 @@ func (m *validateOpCreateSite) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateSiteInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteConnection struct {
+}
+
+func (*validateOpDeleteConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConnectionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -249,6 +309,46 @@ func (m *validateOpDisassociateLink) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateTransitGatewayConnectPeer struct {
+}
+
+func (*validateOpDisassociateTransitGatewayConnectPeer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateTransitGatewayConnectPeer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateTransitGatewayConnectPeerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateTransitGatewayConnectPeerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetConnections struct {
+}
+
+func (*validateOpGetConnections) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConnections) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConnectionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConnectionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetCustomerGatewayAssociations struct {
 }
 
@@ -344,6 +444,26 @@ func (m *validateOpGetSites) HandleInitialize(ctx context.Context, in middleware
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetSitesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTransitGatewayConnectPeerAssociations struct {
+}
+
+func (*validateOpGetTransitGatewayConnectPeerAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTransitGatewayConnectPeerAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTransitGatewayConnectPeerAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTransitGatewayConnectPeerAssociationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -449,6 +569,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateConnection struct {
+}
+
+func (*validateOpUpdateConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDevice struct {
 }
 
@@ -537,6 +677,14 @@ func addOpAssociateLinkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateLink{}, middleware.After)
 }
 
+func addOpAssociateTransitGatewayConnectPeerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateTransitGatewayConnectPeer{}, middleware.After)
+}
+
+func addOpCreateConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConnection{}, middleware.After)
+}
+
 func addOpCreateDeviceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDevice{}, middleware.After)
 }
@@ -547,6 +695,10 @@ func addOpCreateLinkValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateSiteValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateSite{}, middleware.After)
+}
+
+func addOpDeleteConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConnection{}, middleware.After)
 }
 
 func addOpDeleteDeviceValidationMiddleware(stack *middleware.Stack) error {
@@ -577,6 +729,14 @@ func addOpDisassociateLinkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateLink{}, middleware.After)
 }
 
+func addOpDisassociateTransitGatewayConnectPeerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateTransitGatewayConnectPeer{}, middleware.After)
+}
+
+func addOpGetConnectionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConnections{}, middleware.After)
+}
+
 func addOpGetCustomerGatewayAssociationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCustomerGatewayAssociations{}, middleware.After)
 }
@@ -597,6 +757,10 @@ func addOpGetSitesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSites{}, middleware.After)
 }
 
+func addOpGetTransitGatewayConnectPeerAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTransitGatewayConnectPeerAssociations{}, middleware.After)
+}
+
 func addOpGetTransitGatewayRegistrationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTransitGatewayRegistrations{}, middleware.After)
 }
@@ -615,6 +779,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConnection{}, middleware.After)
 }
 
 func addOpUpdateDeviceValidationMiddleware(stack *middleware.Stack) error {
@@ -638,14 +806,14 @@ func validateOpAssociateCustomerGatewayInput(v *AssociateCustomerGatewayInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateCustomerGatewayInput"}
+	if v.CustomerGatewayArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomerGatewayArn"))
+	}
 	if v.GlobalNetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
 	}
 	if v.DeviceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
-	}
-	if v.CustomerGatewayArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CustomerGatewayArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -675,6 +843,48 @@ func validateOpAssociateLinkInput(v *AssociateLinkInput) error {
 	}
 }
 
+func validateOpAssociateTransitGatewayConnectPeerInput(v *AssociateTransitGatewayConnectPeerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateTransitGatewayConnectPeerInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if v.TransitGatewayConnectPeerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayConnectPeerArn"))
+	}
+	if v.DeviceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateConnectionInput(v *CreateConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectionInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if v.DeviceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
+	}
+	if v.ConnectedDeviceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectedDeviceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDeviceInput(v *CreateDeviceInput) error {
 	if v == nil {
 		return nil
@@ -695,14 +905,14 @@ func validateOpCreateLinkInput(v *CreateLinkInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLinkInput"}
-	if v.SiteId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SiteId"))
-	}
 	if v.GlobalNetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
 	}
 	if v.Bandwidth == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bandwidth"))
+	}
+	if v.SiteId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SiteId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -726,16 +936,34 @@ func validateOpCreateSiteInput(v *CreateSiteInput) error {
 	}
 }
 
+func validateOpDeleteConnectionInput(v *DeleteConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConnectionInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if v.ConnectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDeviceInput(v *DeleteDeviceInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDeviceInput"}
-	if v.DeviceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
-	}
 	if v.GlobalNetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if v.DeviceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -800,11 +1028,11 @@ func validateOpDeregisterTransitGatewayInput(v *DeregisterTransitGatewayInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeregisterTransitGatewayInput"}
-	if v.TransitGatewayArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayArn"))
-	}
 	if v.GlobalNetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if v.TransitGatewayArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -818,11 +1046,11 @@ func validateOpDisassociateCustomerGatewayInput(v *DisassociateCustomerGatewayIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateCustomerGatewayInput"}
-	if v.CustomerGatewayArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CustomerGatewayArn"))
-	}
 	if v.GlobalNetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if v.CustomerGatewayArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomerGatewayArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -836,14 +1064,47 @@ func validateOpDisassociateLinkInput(v *DisassociateLinkInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateLinkInput"}
-	if v.LinkId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LinkId"))
-	}
 	if v.GlobalNetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
 	}
 	if v.DeviceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
+	}
+	if v.LinkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LinkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateTransitGatewayConnectPeerInput(v *DisassociateTransitGatewayConnectPeerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateTransitGatewayConnectPeerInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if v.TransitGatewayConnectPeerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayConnectPeerArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetConnectionsInput(v *GetConnectionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConnectionsInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -927,6 +1188,21 @@ func validateOpGetSitesInput(v *GetSitesInput) error {
 	}
 }
 
+func validateOpGetTransitGatewayConnectPeerAssociationsInput(v *GetTransitGatewayConnectPeerAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTransitGatewayConnectPeerAssociationsInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTransitGatewayRegistrationsInput(v *GetTransitGatewayRegistrationsInput) error {
 	if v == nil {
 		return nil
@@ -962,11 +1238,11 @@ func validateOpRegisterTransitGatewayInput(v *RegisterTransitGatewayInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterTransitGatewayInput"}
-	if v.TransitGatewayArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayArn"))
-	}
 	if v.GlobalNetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if v.TransitGatewayArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -980,11 +1256,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -998,11 +1274,29 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateConnectionInput(v *UpdateConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectionInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if v.ConnectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1049,11 +1343,11 @@ func validateOpUpdateLinkInput(v *UpdateLinkInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateLinkInput"}
-	if v.LinkId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LinkId"))
-	}
 	if v.GlobalNetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if v.LinkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LinkId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1067,11 +1361,11 @@ func validateOpUpdateSiteInput(v *UpdateSiteInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSiteInput"}
-	if v.SiteId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SiteId"))
-	}
 	if v.GlobalNetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if v.SiteId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SiteId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

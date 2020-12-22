@@ -1670,11 +1670,11 @@ func validateOpCreateApiInput(v *CreateApiInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateApiInput"}
-	if len(v.ProtocolType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ProtocolType"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.ProtocolType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtocolType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1688,14 +1688,14 @@ func validateOpCreateApiMappingInput(v *CreateApiMappingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateApiMappingInput"}
-	if v.Stage == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Stage"))
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
-	if v.ApiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	if v.Stage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Stage"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1709,14 +1709,14 @@ func validateOpCreateAuthorizerInput(v *CreateAuthorizerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAuthorizerInput"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
 	if len(v.AuthorizerType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthorizerType"))
 	}
 	if v.IdentitySource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentitySource"))
-	}
-	if v.ApiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
@@ -1781,14 +1781,14 @@ func validateOpCreateIntegrationResponseInput(v *CreateIntegrationResponseInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateIntegrationResponseInput"}
-	if v.IntegrationResponseKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IntegrationResponseKey"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
 	if v.IntegrationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IntegrationId"))
+	}
+	if v.IntegrationResponseKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationResponseKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1802,14 +1802,14 @@ func validateOpCreateModelInput(v *CreateModelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateModelInput"}
-	if v.Schema == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Schema"))
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.ApiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	if v.Schema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Schema"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1844,11 +1844,11 @@ func validateOpCreateRouteResponseInput(v *CreateRouteResponseInput) error {
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
-	if v.RouteResponseKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RouteResponseKey"))
-	}
 	if v.RouteId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RouteId"))
+	}
+	if v.RouteResponseKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RouteResponseKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1862,11 +1862,11 @@ func validateOpCreateStageInput(v *CreateStageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateStageInput"}
-	if v.StageName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.StageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1931,11 +1931,11 @@ func validateOpDeleteApiMappingInput(v *DeleteApiMappingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteApiMappingInput"}
-	if v.DomainName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
-	}
 	if v.ApiMappingId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiMappingId"))
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1949,11 +1949,11 @@ func validateOpDeleteAuthorizerInput(v *DeleteAuthorizerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAuthorizerInput"}
-	if v.AuthorizerId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AuthorizerId"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.AuthorizerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizerId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1982,11 +1982,11 @@ func validateOpDeleteDeploymentInput(v *DeleteDeploymentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDeploymentInput"}
-	if v.DeploymentId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeploymentId"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.DeploymentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2033,14 +2033,14 @@ func validateOpDeleteIntegrationResponseInput(v *DeleteIntegrationResponseInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteIntegrationResponseInput"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
 	if v.IntegrationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IntegrationId"))
 	}
 	if v.IntegrationResponseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IntegrationResponseId"))
-	}
-	if v.ApiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2054,11 +2054,11 @@ func validateOpDeleteModelInput(v *DeleteModelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteModelInput"}
-	if v.ModelId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2093,11 +2093,11 @@ func validateOpDeleteRouteRequestParameterInput(v *DeleteRouteRequestParameterIn
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
-	if v.RouteId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RouteId"))
-	}
 	if v.RequestParameterKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RequestParameterKey"))
+	}
+	if v.RouteId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RouteId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2111,14 +2111,14 @@ func validateOpDeleteRouteResponseInput(v *DeleteRouteResponseInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteRouteResponseInput"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
 	if v.RouteId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RouteId"))
 	}
 	if v.RouteResponseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RouteResponseId"))
-	}
-	if v.ApiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2132,14 +2132,14 @@ func validateOpDeleteRouteSettingsInput(v *DeleteRouteSettingsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteRouteSettingsInput"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
 	if v.RouteKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RouteKey"))
 	}
 	if v.StageName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
-	}
-	if v.ApiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2153,11 +2153,11 @@ func validateOpDeleteStageInput(v *DeleteStageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteStageInput"}
-	if v.StageName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.StageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2189,11 +2189,11 @@ func validateOpExportApiInput(v *ExportApiInput) error {
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
-	if v.Specification == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Specification"))
-	}
 	if v.OutputType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputType"))
+	}
+	if v.Specification == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Specification"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2255,11 +2255,11 @@ func validateOpGetAuthorizerInput(v *GetAuthorizerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetAuthorizerInput"}
-	if v.AuthorizerId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AuthorizerId"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.AuthorizerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizerId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2288,11 +2288,11 @@ func validateOpGetDeploymentInput(v *GetDeploymentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDeploymentInput"}
-	if v.DeploymentId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeploymentId"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.DeploymentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2357,11 +2357,11 @@ func validateOpGetIntegrationResponseInput(v *GetIntegrationResponseInput) error
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
-	if v.IntegrationResponseId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IntegrationResponseId"))
-	}
 	if v.IntegrationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IntegrationId"))
+	}
+	if v.IntegrationResponseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationResponseId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2375,11 +2375,11 @@ func validateOpGetIntegrationResponsesInput(v *GetIntegrationResponsesInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetIntegrationResponsesInput"}
-	if v.IntegrationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IntegrationId"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.IntegrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2477,11 +2477,11 @@ func validateOpGetRouteResponseInput(v *GetRouteResponseInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetRouteResponseInput"}
-	if v.RouteId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RouteId"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.RouteId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RouteId"))
 	}
 	if v.RouteResponseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RouteResponseId"))
@@ -2660,11 +2660,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2693,14 +2693,14 @@ func validateOpUpdateApiMappingInput(v *UpdateApiMappingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateApiMappingInput"}
-	if v.DomainName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
 	if v.ApiMappingId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiMappingId"))
 	}
-	if v.ApiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2783,14 +2783,14 @@ func validateOpUpdateIntegrationResponseInput(v *UpdateIntegrationResponseInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateIntegrationResponseInput"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
 	if v.IntegrationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IntegrationId"))
 	}
 	if v.IntegrationResponseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IntegrationResponseId"))
-	}
-	if v.ApiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2840,14 +2840,14 @@ func validateOpUpdateRouteResponseInput(v *UpdateRouteResponseInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRouteResponseInput"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
 	if v.RouteId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RouteId"))
 	}
 	if v.RouteResponseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RouteResponseId"))
-	}
-	if v.ApiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -6,6 +6,36 @@ import (
 	"time"
 )
 
+// These are AWS SSO identity store attributes that you can configure for use in
+// attributes-based access control (ABAC). You can create permission policies that
+// determine who can access your AWS resources based upon the configured attribute
+// value(s). When you enable ABAC and specify AccessControlAttributes, AWS SSO
+// passes the attribute(s) value of the authenticated user into IAM for use in
+// policy evaluation.
+type AccessControlAttribute struct {
+
+	// The name of the attribute associated with your identities in your identity
+	// source. This is used to map a specified attribute in your identity source with
+	// an attribute in AWS SSO.
+	//
+	// This member is required.
+	Key *string
+
+	// The value used for mapping a specified attribute to an identity source.
+	//
+	// This member is required.
+	Value *AccessControlAttributeValue
+}
+
+// The value used for mapping a specified attribute to an identity source.
+type AccessControlAttributeValue struct {
+
+	// The identity source to use when mapping a specified attribute to AWS SSO.
+	//
+	// This member is required.
+	Source []string
+}
+
 // The assignment that indicates a principal's limited access to a specified AWS
 // account with a specified permission set. The term principal here refers to a
 // user or group that is defined in AWS SSO.
@@ -89,6 +119,17 @@ type AttachedManagedPolicy struct {
 
 	// The name of the IAM managed policy.
 	Name *string
+}
+
+// Specifies the attributes to add to your attribute-based access control (ABAC)
+// configuration.
+type InstanceAccessControlAttributeConfiguration struct {
+
+	// Lists the attributes that are configured for ABAC in the specified AWS SSO
+	// instance.
+	//
+	// This member is required.
+	AccessControlAttributes []AccessControlAttribute
 }
 
 // Provides information about the SSO instance.

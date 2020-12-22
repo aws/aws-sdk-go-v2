@@ -13,7 +13,10 @@ import (
 // Deletes an AWS Batch compute environment. Before you can delete a compute
 // environment, you must set its state to DISABLED with the
 // UpdateComputeEnvironment API operation and disassociate it from any job queues
-// with the UpdateJobQueue API operation.
+// with the UpdateJobQueue API operation. Compute environments that use AWS Fargate
+// resources must terminate all active jobs on that compute environment before
+// deleting the compute environment. If this isn't done, the compute environment
+// will end up in an invalid state.
 func (c *Client) DeleteComputeEnvironment(ctx context.Context, params *DeleteComputeEnvironmentInput, optFns ...func(*Options)) (*DeleteComputeEnvironmentOutput, error) {
 	if params == nil {
 		params = &DeleteComputeEnvironmentInput{}

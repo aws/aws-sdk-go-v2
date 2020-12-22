@@ -28,6 +28,40 @@ func (CertificateState) Values() []CertificateState {
 	}
 }
 
+type CertificateType string
+
+// Enum values for CertificateType
+const (
+	CertificateTypeClientCertAuth CertificateType = "ClientCertAuth"
+	CertificateTypeClientLdaps    CertificateType = "ClientLDAPS"
+)
+
+// Values returns all known values for CertificateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateType) Values() []CertificateType {
+	return []CertificateType{
+		"ClientCertAuth",
+		"ClientLDAPS",
+	}
+}
+
+type ClientAuthenticationType string
+
+// Enum values for ClientAuthenticationType
+const (
+	ClientAuthenticationTypeSmartCard ClientAuthenticationType = "SmartCard"
+)
+
+// Values returns all known values for ClientAuthenticationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ClientAuthenticationType) Values() []ClientAuthenticationType {
+	return []ClientAuthenticationType{
+		"SmartCard",
+	}
+}
+
 type DirectoryEdition string
 
 // Enum values for DirectoryEdition

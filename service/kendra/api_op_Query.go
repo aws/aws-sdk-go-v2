@@ -96,6 +96,11 @@ type QueryInput struct {
 
 	// The user context token.
 	UserContext *types.UserContext
+
+	// Provides an identifier for a specific user. The VisitorId should be a unique
+	// identifier, such as a GUID. Don't use personally identifiable information, such
+	// as the user's email address, as the VisitorId.
+	VisitorId *string
 }
 
 type QueryOutput struct {

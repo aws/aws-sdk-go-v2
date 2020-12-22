@@ -4,7 +4,6 @@ package imagebuilder
 
 import (
 	"context"
-	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
@@ -119,88 +118,6 @@ func addOperationListImageRecipesMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
-}
-
-// ListImageRecipesAPIClient is a client that implements the ListImageRecipes
-// operation.
-type ListImageRecipesAPIClient interface {
-	ListImageRecipes(context.Context, *ListImageRecipesInput, ...func(*Options)) (*ListImageRecipesOutput, error)
-}
-
-var _ ListImageRecipesAPIClient = (*Client)(nil)
-
-// ListImageRecipesPaginatorOptions is the paginator options for ListImageRecipes
-type ListImageRecipesPaginatorOptions struct {
-	// The maximum items to return in a request.
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// ListImageRecipesPaginator is a paginator for ListImageRecipes
-type ListImageRecipesPaginator struct {
-	options   ListImageRecipesPaginatorOptions
-	client    ListImageRecipesAPIClient
-	params    *ListImageRecipesInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewListImageRecipesPaginator returns a new ListImageRecipesPaginator
-func NewListImageRecipesPaginator(client ListImageRecipesAPIClient, params *ListImageRecipesInput, optFns ...func(*ListImageRecipesPaginatorOptions)) *ListImageRecipesPaginator {
-	options := ListImageRecipesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListImageRecipesInput{}
-	}
-
-	return &ListImageRecipesPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListImageRecipesPaginator) HasMorePages() bool {
-	return p.firstPage || p.nextToken != nil
-}
-
-// NextPage retrieves the next ListImageRecipes page.
-func (p *ListImageRecipesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListImageRecipesOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.NextToken = p.nextToken
-
-	params.MaxResults = p.options.Limit
-
-	result, err := p.client.ListImageRecipes(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.NextToken
-
-	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListImageRecipes(region string) *awsmiddleware.RegisterServiceMetadata {

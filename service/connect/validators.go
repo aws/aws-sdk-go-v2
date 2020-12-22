@@ -170,6 +170,26 @@ func (m *validateOpCreateInstance) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateIntegrationAssociation struct {
+}
+
+func (*validateOpCreateIntegrationAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateIntegrationAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateIntegrationAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateIntegrationAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateRoutingProfile struct {
 }
 
@@ -185,6 +205,26 @@ func (m *validateOpCreateRoutingProfile) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateRoutingProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateUseCase struct {
+}
+
+func (*validateOpCreateUseCase) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateUseCase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateUseCaseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateUseCaseInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -245,6 +285,46 @@ func (m *validateOpDeleteInstance) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteIntegrationAssociation struct {
+}
+
+func (*validateOpDeleteIntegrationAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteIntegrationAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteIntegrationAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteIntegrationAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteUseCase struct {
+}
+
+func (*validateOpDeleteUseCase) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteUseCase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteUseCaseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteUseCaseInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -750,6 +830,26 @@ func (m *validateOpListInstanceStorageConfigs) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListIntegrationAssociations struct {
+}
+
+func (*validateOpListIntegrationAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListIntegrationAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListIntegrationAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListIntegrationAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListLambdaFunctions struct {
 }
 
@@ -950,6 +1050,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListUseCases struct {
+}
+
+func (*validateOpListUseCases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListUseCases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListUseCasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListUseCasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListUserHierarchyGroups struct {
 }
 
@@ -1065,6 +1185,26 @@ func (m *validateOpStartOutboundVoiceContact) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartOutboundVoiceContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartTaskContact struct {
+}
+
+func (*validateOpStartTaskContact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartTaskContact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartTaskContactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartTaskContactInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1522,8 +1662,16 @@ func addOpCreateInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateInstance{}, middleware.After)
 }
 
+func addOpCreateIntegrationAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateIntegrationAssociation{}, middleware.After)
+}
+
 func addOpCreateRoutingProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRoutingProfile{}, middleware.After)
+}
+
+func addOpCreateUseCaseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateUseCase{}, middleware.After)
 }
 
 func addOpCreateUserHierarchyGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1536,6 +1684,14 @@ func addOpCreateUserValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteInstance{}, middleware.After)
+}
+
+func addOpDeleteIntegrationAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteIntegrationAssociation{}, middleware.After)
+}
+
+func addOpDeleteUseCaseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteUseCase{}, middleware.After)
 }
 
 func addOpDeleteUserHierarchyGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1638,6 +1794,10 @@ func addOpListInstanceStorageConfigsValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpListInstanceStorageConfigs{}, middleware.After)
 }
 
+func addOpListIntegrationAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListIntegrationAssociations{}, middleware.After)
+}
+
 func addOpListLambdaFunctionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListLambdaFunctions{}, middleware.After)
 }
@@ -1678,6 +1838,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpListUseCasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListUseCases{}, middleware.After)
+}
+
 func addOpListUserHierarchyGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListUserHierarchyGroups{}, middleware.After)
 }
@@ -1700,6 +1864,10 @@ func addOpStartContactRecordingValidationMiddleware(stack *middleware.Stack) err
 
 func addOpStartOutboundVoiceContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartOutboundVoiceContact{}, middleware.After)
+}
+
+func addOpStartTaskContactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartTaskContact{}, middleware.After)
 }
 
 func addOpStopContactValidationMiddleware(stack *middleware.Stack) error {
@@ -1796,6 +1964,24 @@ func validateChatMessage(v *types.ChatMessage) error {
 	}
 	if v.Content == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContactReferences(v map[string]types.Reference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContactReferences"}
+	for key := range v {
+		value := v[key]
+		if err := validateReference(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2000,6 +2186,24 @@ func validateParticipantDetails(v *types.ParticipantDetails) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ParticipantDetails"}
 	if v.DisplayName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReference(v *types.Reference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Reference"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2284,6 +2488,36 @@ func validateOpCreateInstanceInput(v *CreateInstanceInput) error {
 	}
 }
 
+func validateOpCreateIntegrationAssociationInput(v *CreateIntegrationAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateIntegrationAssociationInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if len(v.IntegrationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationType"))
+	}
+	if v.IntegrationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationArn"))
+	}
+	if v.SourceApplicationUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceApplicationUrl"))
+	}
+	if v.SourceApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceApplicationName"))
+	}
+	if len(v.SourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateRoutingProfileInput(v *CreateRoutingProfileInput) error {
 	if v == nil {
 		return nil
@@ -2312,6 +2546,27 @@ func validateOpCreateRoutingProfileInput(v *CreateRoutingProfileInput) error {
 		if err := validateMediaConcurrencies(v.MediaConcurrencies); err != nil {
 			invalidParams.AddNested("MediaConcurrencies", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateUseCaseInput(v *CreateUseCaseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateUseCaseInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.IntegrationAssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationAssociationId"))
+	}
+	if len(v.UseCaseType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("UseCaseType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2376,6 +2631,45 @@ func validateOpDeleteInstanceInput(v *DeleteInstanceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteInstanceInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteIntegrationAssociationInput(v *DeleteIntegrationAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteIntegrationAssociationInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.IntegrationAssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationAssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteUseCaseInput(v *DeleteUseCaseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteUseCaseInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.IntegrationAssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationAssociationId"))
+	}
+	if v.UseCaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UseCaseId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2841,6 +3135,21 @@ func validateOpListInstanceStorageConfigsInput(v *ListInstanceStorageConfigsInpu
 	}
 }
 
+func validateOpListIntegrationAssociationsInput(v *ListIntegrationAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListIntegrationAssociationsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListLambdaFunctionsInput(v *ListLambdaFunctionsInput) error {
 	if v == nil {
 		return nil
@@ -2994,6 +3303,24 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpListUseCasesInput(v *ListUseCasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListUseCasesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.IntegrationAssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationAssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListUserHierarchyGroupsInput(v *ListUserHierarchyGroupsInput) error {
 	if v == nil {
 		return nil
@@ -3112,6 +3439,32 @@ func validateOpStartOutboundVoiceContactInput(v *StartOutboundVoiceContactInput)
 	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartTaskContactInput(v *StartTaskContactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartTaskContactInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactFlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.References != nil {
+		if err := validateContactReferences(v.References); err != nil {
+			invalidParams.AddNested("References", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

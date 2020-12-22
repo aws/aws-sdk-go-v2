@@ -12967,6 +12967,15 @@ func awsAwsjson11_deserializeDocumentS3Settings(v **types.S3Settings, value inte
 				sv.CdcInsertsOnly = ptr.Bool(jtv)
 			}
 
+		case "CdcPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CdcPath = ptr.String(jtv)
+			}
+
 		case "CompressionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12983,6 +12992,15 @@ func awsAwsjson11_deserializeDocumentS3Settings(v **types.S3Settings, value inte
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.CsvDelimiter = ptr.String(jtv)
+			}
+
+		case "CsvNoSupValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CsvNoSupValue = ptr.String(jtv)
 			}
 
 		case "CsvRowDelimiter":
@@ -13119,6 +13137,15 @@ func awsAwsjson11_deserializeDocumentS3Settings(v **types.S3Settings, value inte
 				sv.ParquetVersion = types.ParquetVersionValue(jtv)
 			}
 
+		case "PreserveTransactions":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.PreserveTransactions = ptr.Bool(jtv)
+			}
+
 		case "RowGroupLength":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13157,6 +13184,15 @@ func awsAwsjson11_deserializeDocumentS3Settings(v **types.S3Settings, value inte
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.TimestampColumnName = ptr.String(jtv)
+			}
+
+		case "UseCsvNoSupValue":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.UseCsvNoSupValue = ptr.Bool(jtv)
 			}
 
 		default:

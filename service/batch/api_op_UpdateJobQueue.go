@@ -36,7 +36,9 @@ type UpdateJobQueueInput struct {
 
 	// Details the set of compute environments mapped to a job queue and their order
 	// relative to each other. This is one of the parameters used by the job scheduler
-	// to determine which compute environment should execute a given job.
+	// to determine which compute environment should run a given job. All of the
+	// compute environments must be either EC2 (EC2 or SPOT) or Fargate (FARGATE or
+	// FARGATE_SPOT); EC2 and Fargate compute environments can't be mixed.
 	ComputeEnvironmentOrder []types.ComputeEnvironmentOrder
 
 	// The priority of the job queue. Job queues with a higher priority (or a higher

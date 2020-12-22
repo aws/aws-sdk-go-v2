@@ -16,23 +16,28 @@ import (
 // and a variety of security, application, policy, and Amazon Virtual Private Cloud
 // (VPC) configurations. An AWS account is limited to one domain per region. Users
 // within a domain can share notebook files and other artifacts with each other.
-// When a domain is created, an EFS volume is created for use by all of the users
-// within the domain. Each user receives a private home directory within the EFS
-// volume for notebooks, Git repositories, and data files. VPC configuration All
-// SageMaker Studio traffic between the domain and the EFS volume is through the
-// specified VPC and subnets. For other Studio traffic, you can specify the
-// AppNetworkAccessType parameter. AppNetworkAccessType corresponds to the network
-// access type that you choose when you onboard to Studio. The following options
-// are available:
+// EFS storage When a domain is created, an EFS volume is created for use by all of
+// the users within the domain. Each user receives a private home directory within
+// the EFS volume for notebooks, Git repositories, and data files. SageMaker uses
+// the AWS Key Management Service (AWS KMS) to encrypt the EFS volume attached to
+// the domain with an AWS managed customer master key (CMK) by default. For more
+// control, you can specify a customer managed CMK. For more information, see
+// Protect Data at Rest Using Encryption
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html). VPC
+// configuration All SageMaker Studio traffic between the domain and the EFS volume
+// is through the specified VPC and subnets. For other Studio traffic, you can
+// specify the AppNetworkAccessType parameter. AppNetworkAccessType corresponds to
+// the network access type that you choose when you onboard to Studio. The
+// following options are available:
 //
-// * PublicInternetOnly - Non-EFS traffic goes through a VPC
-// managed by Amazon SageMaker, which allows internet access. This is the default
-// value.
+// * PublicInternetOnly - Non-EFS traffic goes
+// through a VPC managed by Amazon SageMaker, which allows internet access. This is
+// the default value.
 //
-// * VpcOnly - All Studio traffic is through the specified VPC and subnets.
-// Internet access is disabled by default. To allow internet access, you must
-// specify a NAT gateway. When internet access is disabled, you won't be able to
-// run a Studio notebook or to train or host models unless your VPC has an
+// * VpcOnly - All Studio traffic is through the specified VPC
+// and subnets. Internet access is disabled by default. To allow internet access,
+// you must specify a NAT gateway. When internet access is disabled, you won't be
+// able to run a Studio notebook or to train or host models unless your VPC has an
 // interface endpoint to the SageMaker API and runtime or a NAT gateway and your
 // security groups allow outbound connections.
 //

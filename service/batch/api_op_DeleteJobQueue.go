@@ -12,8 +12,8 @@ import (
 
 // Deletes the specified job queue. You must first disable submissions for a queue
 // with the UpdateJobQueue operation. All jobs in the queue are terminated when you
-// delete a job queue. It is not necessary to disassociate compute environments
-// from a queue before submitting a DeleteJobQueue request.
+// delete a job queue. It's not necessary to disassociate compute environments from
+// a queue before submitting a DeleteJobQueue request.
 func (c *Client) DeleteJobQueue(ctx context.Context, params *DeleteJobQueueInput, optFns ...func(*Options)) (*DeleteJobQueueOutput, error) {
 	if params == nil {
 		params = &DeleteJobQueueInput{}

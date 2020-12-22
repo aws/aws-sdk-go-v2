@@ -13,7 +13,7 @@ import (
 // Describes the default customer master key (CMK) for EBS encryption by default
 // for your account in this Region. You can change the default CMK for encryption
 // by default using ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId. For more
-// information, see Amazon EBS Encryption
+// information, see Amazon EBS encryption
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the
 // Amazon Elastic Compute Cloud User Guide.
 func (c *Client) GetEbsDefaultKmsKeyId(ctx context.Context, params *GetEbsDefaultKmsKeyIdInput, optFns ...func(*Options)) (*GetEbsDefaultKmsKeyIdOutput, error) {

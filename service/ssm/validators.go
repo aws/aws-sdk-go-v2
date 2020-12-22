@@ -190,6 +190,26 @@ func (m *validateOpCreateOpsItem) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateOpsMetadata struct {
+}
+
+func (*validateOpCreateOpsMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateOpsMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateOpsMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateOpsMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreatePatchBaseline struct {
 }
 
@@ -305,6 +325,26 @@ func (m *validateOpDeleteMaintenanceWindow) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteMaintenanceWindowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteOpsMetadata struct {
+}
+
+func (*validateOpDeleteOpsMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteOpsMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteOpsMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteOpsMetadataInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1210,6 +1250,26 @@ func (m *validateOpGetOpsItem) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetOpsMetadata struct {
+}
+
+func (*validateOpGetOpsMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetOpsMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetOpsMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetOpsMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetOpsSummary struct {
 }
 
@@ -1525,6 +1585,26 @@ func (m *validateOpListInventoryEntries) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListInventoryEntriesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListOpsMetadata struct {
+}
+
+func (*validateOpListOpsMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListOpsMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListOpsMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListOpsMetadataInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2090,6 +2170,26 @@ func (m *validateOpUpdateOpsItem) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateOpsMetadata struct {
+}
+
+func (*validateOpUpdateOpsMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateOpsMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateOpsMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateOpsMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePatchBaseline struct {
 }
 
@@ -2186,6 +2286,10 @@ func addOpCreateOpsItemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateOpsItem{}, middleware.After)
 }
 
+func addOpCreateOpsMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateOpsMetadata{}, middleware.After)
+}
+
 func addOpCreatePatchBaselineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePatchBaseline{}, middleware.After)
 }
@@ -2208,6 +2312,10 @@ func addOpDeleteInventoryValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteMaintenanceWindowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMaintenanceWindow{}, middleware.After)
+}
+
+func addOpDeleteOpsMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteOpsMetadata{}, middleware.After)
 }
 
 func addOpDeleteParameterValidationMiddleware(stack *middleware.Stack) error {
@@ -2390,6 +2498,10 @@ func addOpGetOpsItemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetOpsItem{}, middleware.After)
 }
 
+func addOpGetOpsMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetOpsMetadata{}, middleware.After)
+}
+
 func addOpGetOpsSummaryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetOpsSummary{}, middleware.After)
 }
@@ -2452,6 +2564,10 @@ func addOpListDocumentVersionsValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpListInventoryEntriesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListInventoryEntries{}, middleware.After)
+}
+
+func addOpListOpsMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListOpsMetadata{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -2564,6 +2680,10 @@ func addOpUpdateManagedInstanceRoleValidationMiddleware(stack *middleware.Stack)
 
 func addOpUpdateOpsItemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateOpsItem{}, middleware.After)
+}
+
+func addOpUpdateOpsMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateOpsMetadata{}, middleware.After)
 }
 
 func addOpUpdatePatchBaselineValidationMiddleware(stack *middleware.Stack) error {
@@ -3315,6 +3435,41 @@ func validateOpsItemFilters(v []types.OpsItemFilter) error {
 	}
 }
 
+func validateOpsMetadataFilter(v *types.OpsMetadataFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpsMetadataFilter"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpsMetadataFilterList(v []types.OpsMetadataFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpsMetadataFilterList"}
+	for i := range v {
+		if err := validateOpsMetadataFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpsResultAttribute(v *types.OpsResultAttribute) error {
 	if v == nil {
 		return nil
@@ -3980,6 +4135,21 @@ func validateOpCreateOpsItemInput(v *CreateOpsItemInput) error {
 	}
 }
 
+func validateOpCreateOpsMetadataInput(v *CreateOpsMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateOpsMetadataInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreatePatchBaselineInput(v *CreatePatchBaselineInput) error {
 	if v == nil {
 		return nil
@@ -4092,6 +4262,21 @@ func validateOpDeleteMaintenanceWindowInput(v *DeleteMaintenanceWindowInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteMaintenanceWindowInput"}
 	if v.WindowId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WindowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteOpsMetadataInput(v *DeleteOpsMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteOpsMetadataInput"}
+	if v.OpsMetadataArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OpsMetadataArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4872,6 +5057,21 @@ func validateOpGetOpsItemInput(v *GetOpsItemInput) error {
 	}
 }
 
+func validateOpGetOpsMetadataInput(v *GetOpsMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetOpsMetadataInput"}
+	if v.OpsMetadataArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OpsMetadataArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetOpsSummaryInput(v *GetOpsSummaryInput) error {
 	if v == nil {
 		return nil
@@ -5138,6 +5338,23 @@ func validateOpListInventoryEntriesInput(v *ListInventoryEntriesInput) error {
 	}
 	if v.Filters != nil {
 		if err := validateInventoryFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListOpsMetadataInput(v *ListOpsMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOpsMetadataInput"}
+	if v.Filters != nil {
+		if err := validateOpsMetadataFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -5679,6 +5896,21 @@ func validateOpUpdateOpsItemInput(v *UpdateOpsItemInput) error {
 	}
 	if v.OpsItemId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OpsItemId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateOpsMetadataInput(v *UpdateOpsMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOpsMetadataInput"}
+	if v.OpsMetadataArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OpsMetadataArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -30,8 +30,8 @@ func (c *Client) CreateFilter(ctx context.Context, params *CreateFilterInput, op
 
 type CreateFilterInput struct {
 
-	// The unique ID of the detector of the GuardDuty account that you want to create a
-	// filter for.
+	// The ID of the detector belonging to the GuardDuty account that you want to
+	// create a filter for.
 	//
 	// This member is required.
 	DetectorId *string
@@ -110,6 +110,9 @@ type CreateFilterInput struct {
 	// service.action.awsApiCallAction.callerType
 	//
 	// *
+	// service.action.awsApiCallAction.errorCode
+	//
+	// *
 	// service.action.awsApiCallAction.remoteIpDetails.city.cityName
 	//
 	// *
@@ -184,7 +187,9 @@ type CreateFilterInput struct {
 	// This member is required.
 	FindingCriteria *types.FindingCriteria
 
-	// The name of the filter.
+	// The name of the filter. Minimum length of 3. Maximum length of 64. Valid
+	// characters include alphanumeric characters, dot (.), underscore (_), and dash
+	// (-). Spaces are not allowed.
 	//
 	// This member is required.
 	Name *string

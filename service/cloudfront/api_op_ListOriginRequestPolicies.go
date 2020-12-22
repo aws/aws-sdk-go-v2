@@ -43,7 +43,7 @@ type ListOriginRequestPoliciesInput struct {
 	Marker *string
 
 	// The maximum number of origin request policies that you want in the response.
-	MaxItems *string
+	MaxItems *int32
 
 	// A filter to return only the specified kinds of origin request policies. Valid
 	// values are:

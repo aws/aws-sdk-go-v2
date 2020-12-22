@@ -4,15 +4,6 @@ package types
 
 type ExecutionStatus string
 
-// Enum values for ExecutionStatus
-const (
-	ExecutionStatusRunning   ExecutionStatus = "RUNNING"
-	ExecutionStatusSucceeded ExecutionStatus = "SUCCEEDED"
-	ExecutionStatusFailed    ExecutionStatus = "FAILED"
-	ExecutionStatusTimedOut  ExecutionStatus = "TIMED_OUT"
-	ExecutionStatusAborted   ExecutionStatus = "ABORTED"
-)
-
 // Values returns all known values for ExecutionStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -27,65 +18,6 @@ func (ExecutionStatus) Values() []ExecutionStatus {
 }
 
 type HistoryEventType string
-
-// Enum values for HistoryEventType
-const (
-	HistoryEventTypeActivityfailed               HistoryEventType = "ActivityFailed"
-	HistoryEventTypeActivityscheduled            HistoryEventType = "ActivityScheduled"
-	HistoryEventTypeActivityschedulefailed       HistoryEventType = "ActivityScheduleFailed"
-	HistoryEventTypeActivitystarted              HistoryEventType = "ActivityStarted"
-	HistoryEventTypeActivitysucceeded            HistoryEventType = "ActivitySucceeded"
-	HistoryEventTypeActivitytimedout             HistoryEventType = "ActivityTimedOut"
-	HistoryEventTypeChoicestateentered           HistoryEventType = "ChoiceStateEntered"
-	HistoryEventTypeChoicestateexited            HistoryEventType = "ChoiceStateExited"
-	HistoryEventTypeExecutionaborted             HistoryEventType = "ExecutionAborted"
-	HistoryEventTypeExecutionfailed              HistoryEventType = "ExecutionFailed"
-	HistoryEventTypeExecutionstarted             HistoryEventType = "ExecutionStarted"
-	HistoryEventTypeExecutionsucceeded           HistoryEventType = "ExecutionSucceeded"
-	HistoryEventTypeExecutiontimedout            HistoryEventType = "ExecutionTimedOut"
-	HistoryEventTypeFailstateentered             HistoryEventType = "FailStateEntered"
-	HistoryEventTypeLambdafunctionfailed         HistoryEventType = "LambdaFunctionFailed"
-	HistoryEventTypeLambdafunctionscheduled      HistoryEventType = "LambdaFunctionScheduled"
-	HistoryEventTypeLambdafunctionschedulefailed HistoryEventType = "LambdaFunctionScheduleFailed"
-	HistoryEventTypeLambdafunctionstarted        HistoryEventType = "LambdaFunctionStarted"
-	HistoryEventTypeLambdafunctionstartfailed    HistoryEventType = "LambdaFunctionStartFailed"
-	HistoryEventTypeLambdafunctionsucceeded      HistoryEventType = "LambdaFunctionSucceeded"
-	HistoryEventTypeLambdafunctiontimedout       HistoryEventType = "LambdaFunctionTimedOut"
-	HistoryEventTypeMapiterationaborted          HistoryEventType = "MapIterationAborted"
-	HistoryEventTypeMapiterationfailed           HistoryEventType = "MapIterationFailed"
-	HistoryEventTypeMapiterationstarted          HistoryEventType = "MapIterationStarted"
-	HistoryEventTypeMapiterationsucceeded        HistoryEventType = "MapIterationSucceeded"
-	HistoryEventTypeMapstateaborted              HistoryEventType = "MapStateAborted"
-	HistoryEventTypeMapstateentered              HistoryEventType = "MapStateEntered"
-	HistoryEventTypeMapstateexited               HistoryEventType = "MapStateExited"
-	HistoryEventTypeMapstatefailed               HistoryEventType = "MapStateFailed"
-	HistoryEventTypeMapstatestarted              HistoryEventType = "MapStateStarted"
-	HistoryEventTypeMapstatesucceeded            HistoryEventType = "MapStateSucceeded"
-	HistoryEventTypeParallelstateaborted         HistoryEventType = "ParallelStateAborted"
-	HistoryEventTypeParallelstateentered         HistoryEventType = "ParallelStateEntered"
-	HistoryEventTypeParallelstateexited          HistoryEventType = "ParallelStateExited"
-	HistoryEventTypeParallelstatefailed          HistoryEventType = "ParallelStateFailed"
-	HistoryEventTypeParallelstatestarted         HistoryEventType = "ParallelStateStarted"
-	HistoryEventTypeParallelstatesucceeded       HistoryEventType = "ParallelStateSucceeded"
-	HistoryEventTypePassstateentered             HistoryEventType = "PassStateEntered"
-	HistoryEventTypePassstateexited              HistoryEventType = "PassStateExited"
-	HistoryEventTypeSucceedstateentered          HistoryEventType = "SucceedStateEntered"
-	HistoryEventTypeSucceedstateexited           HistoryEventType = "SucceedStateExited"
-	HistoryEventTypeTaskfailed                   HistoryEventType = "TaskFailed"
-	HistoryEventTypeTaskscheduled                HistoryEventType = "TaskScheduled"
-	HistoryEventTypeTaskstarted                  HistoryEventType = "TaskStarted"
-	HistoryEventTypeTaskstartfailed              HistoryEventType = "TaskStartFailed"
-	HistoryEventTypeTaskstateaborted             HistoryEventType = "TaskStateAborted"
-	HistoryEventTypeTaskstateentered             HistoryEventType = "TaskStateEntered"
-	HistoryEventTypeTaskstateexited              HistoryEventType = "TaskStateExited"
-	HistoryEventTypeTasksubmitfailed             HistoryEventType = "TaskSubmitFailed"
-	HistoryEventTypeTasksubmitted                HistoryEventType = "TaskSubmitted"
-	HistoryEventTypeTasksucceeded                HistoryEventType = "TaskSucceeded"
-	HistoryEventTypeTasktimedout                 HistoryEventType = "TaskTimedOut"
-	HistoryEventTypeWaitstateaborted             HistoryEventType = "WaitStateAborted"
-	HistoryEventTypeWaitstateentered             HistoryEventType = "WaitStateEntered"
-	HistoryEventTypeWaitstateexited              HistoryEventType = "WaitStateExited"
-)
 
 // Values returns all known values for HistoryEventType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -152,14 +84,6 @@ func (HistoryEventType) Values() []HistoryEventType {
 
 type LogLevel string
 
-// Enum values for LogLevel
-const (
-	LogLevelAll   LogLevel = "ALL"
-	LogLevelError LogLevel = "ERROR"
-	LogLevelFatal LogLevel = "FATAL"
-	LogLevelOff   LogLevel = "OFF"
-)
-
 // Values returns all known values for LogLevel. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
@@ -174,12 +98,6 @@ func (LogLevel) Values() []LogLevel {
 
 type StateMachineStatus string
 
-// Enum values for StateMachineStatus
-const (
-	StateMachineStatusActive   StateMachineStatus = "ACTIVE"
-	StateMachineStatusDeleting StateMachineStatus = "DELETING"
-)
-
 // Values returns all known values for StateMachineStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -192,12 +110,6 @@ func (StateMachineStatus) Values() []StateMachineStatus {
 
 type StateMachineType string
 
-// Enum values for StateMachineType
-const (
-	StateMachineTypeStandard StateMachineType = "STANDARD"
-	StateMachineTypeExpress  StateMachineType = "EXPRESS"
-)
-
 // Values returns all known values for StateMachineType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -205,5 +117,18 @@ func (StateMachineType) Values() []StateMachineType {
 	return []StateMachineType{
 		"STANDARD",
 		"EXPRESS",
+	}
+}
+
+type SyncExecutionStatus string
+
+// Values returns all known values for SyncExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SyncExecutionStatus) Values() []SyncExecutionStatus {
+	return []SyncExecutionStatus{
+		"SUCCEEDED",
+		"FAILED",
+		"TIMED_OUT",
 	}
 }

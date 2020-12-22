@@ -2,6 +2,24 @@
 
 package types
 
+type CodeSigningPolicy string
+
+// Enum values for CodeSigningPolicy
+const (
+	CodeSigningPolicyWarn    CodeSigningPolicy = "Warn"
+	CodeSigningPolicyEnforce CodeSigningPolicy = "Enforce"
+)
+
+// Values returns all known values for CodeSigningPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CodeSigningPolicy) Values() []CodeSigningPolicy {
+	return []CodeSigningPolicy{
+		"Warn",
+		"Enforce",
+	}
+}
+
 type EventSourcePosition string
 
 // Enum values for EventSourcePosition
@@ -89,6 +107,9 @@ const (
 	LastUpdateStatusReasonCodeSubnetoutofipaddresses      LastUpdateStatusReasonCode = "SubnetOutOfIPAddresses"
 	LastUpdateStatusReasonCodeInvalidsubnet               LastUpdateStatusReasonCode = "InvalidSubnet"
 	LastUpdateStatusReasonCodeInvalidsecuritygroup        LastUpdateStatusReasonCode = "InvalidSecurityGroup"
+	LastUpdateStatusReasonCodeImagedeleted                LastUpdateStatusReasonCode = "ImageDeleted"
+	LastUpdateStatusReasonCodeImageaccessdenied           LastUpdateStatusReasonCode = "ImageAccessDenied"
+	LastUpdateStatusReasonCodeInvalidimage                LastUpdateStatusReasonCode = "InvalidImage"
 )
 
 // Values returns all known values for LastUpdateStatusReasonCode. Note that this
@@ -103,6 +124,9 @@ func (LastUpdateStatusReasonCode) Values() []LastUpdateStatusReasonCode {
 		"SubnetOutOfIPAddresses",
 		"InvalidSubnet",
 		"InvalidSecurityGroup",
+		"ImageDeleted",
+		"ImageAccessDenied",
+		"InvalidImage",
 	}
 }
 
@@ -121,6 +145,24 @@ func (LogType) Values() []LogType {
 	return []LogType{
 		"None",
 		"Tail",
+	}
+}
+
+type PackageType string
+
+// Enum values for PackageType
+const (
+	PackageTypeZip   PackageType = "Zip"
+	PackageTypeImage PackageType = "Image"
+)
+
+// Values returns all known values for PackageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PackageType) Values() []PackageType {
+	return []PackageType{
+		"Zip",
+		"Image",
 	}
 }
 
@@ -257,6 +299,9 @@ const (
 	StateReasonCodeSubnetoutofipaddresses      StateReasonCode = "SubnetOutOfIPAddresses"
 	StateReasonCodeInvalidsubnet               StateReasonCode = "InvalidSubnet"
 	StateReasonCodeInvalidsecuritygroup        StateReasonCode = "InvalidSecurityGroup"
+	StateReasonCodeImagedeleted                StateReasonCode = "ImageDeleted"
+	StateReasonCodeImageaccessdenied           StateReasonCode = "ImageAccessDenied"
+	StateReasonCodeInvalidimage                StateReasonCode = "InvalidImage"
 )
 
 // Values returns all known values for StateReasonCode. Note that this can be
@@ -274,6 +319,9 @@ func (StateReasonCode) Values() []StateReasonCode {
 		"SubnetOutOfIPAddresses",
 		"InvalidSubnet",
 		"InvalidSecurityGroup",
+		"ImageDeleted",
+		"ImageAccessDenied",
+		"InvalidImage",
 	}
 }
 

@@ -4,12 +4,15 @@ package s3
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
 
@@ -196,6 +199,13 @@ type HeadObjectOutput struct {
 	// Indicates that a range of bytes was specified.
 	AcceptRanges *string
 
+	// The archive state of the head object.
+	ArchiveStatus types.ArchiveStatus
+
+	// Indicates whether the object uses an S3 Bucket Key for server-side encryption
+	// with AWS KMS (SSE-KMS).
+	BucketKeyEnabled bool
+
 	// Specifies caching behavior along the request/reply chain.
 	CacheControl *string
 
@@ -268,14 +278,14 @@ type HeadObjectOutput struct {
 	PartsCount int32
 
 	// Amazon S3 can return this header if your request involves a bucket that is
-	// either a source or destination in a replication rule. In replication, you have a
-	// source bucket on which you configure replication and destination bucket where
-	// Amazon S3 stores object replicas. When you request an object (GetObject) or
-	// object metadata (HeadObject) from these buckets, Amazon S3 will return the
-	// x-amz-replication-status header in the response as follows:
+	// either a source or a destination in a replication rule. In replication, you have
+	// a source bucket on which you configure replication and destination bucket or
+	// buckets where Amazon S3 stores object replicas. When you request an object
+	// (GetObject) or object metadata (HeadObject) from these buckets, Amazon S3 will
+	// return the x-amz-replication-status header in the response as follows:
 	//
-	// * If requesting an
-	// object from the source bucket — Amazon S3 will return the
+	// * If
+	// requesting an object from the source bucket — Amazon S3 will return the
 	// x-amz-replication-status header if the object in your request is eligible for
 	// replication. For example, suppose that in your replication configuration, you
 	// specify object prefix TaxDocs requesting Amazon S3 to replicate objects with key
@@ -285,11 +295,20 @@ type HeadObjectOutput struct {
 	// with value PENDING, COMPLETED or FAILED indicating object replication status.
 	//
 	// *
-	// If requesting an object from the destination bucket — Amazon S3 will return the
+	// If requesting an object from a destination bucket — Amazon S3 will return the
 	// x-amz-replication-status header with value REPLICA if the object in your request
-	// is a replica that Amazon S3 created.
+	// is a replica that Amazon S3 created and there is no replica modification
+	// replication in progress.
 	//
-	// For more information, see Replication
+	// * When replicating objects to multiple destination
+	// buckets the x-amz-replication-status header acts differently. The header of the
+	// source object will only return a value of COMPLETED when replication is
+	// successful to all destinations. The header will remain at value PENDING until
+	// replication has completed for all destinations. If one or more destinations
+	// fails replication the header will return FAILED.
+	//
+	// For more information, see
+	// Replication
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html).
 	ReplicationStatus types.ReplicationStatus
 
@@ -415,6 +434,151 @@ func addOperationHeadObjectMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+// HeadObjectAPIClient is a client that implements the HeadObject operation.
+type HeadObjectAPIClient interface {
+	HeadObject(context.Context, *HeadObjectInput, ...func(*Options)) (*HeadObjectOutput, error)
+}
+
+var _ HeadObjectAPIClient = (*Client)(nil)
+
+// ObjectExistsWaiterOptions are waiter options for ObjectExistsWaiter
+type ObjectExistsWaiterOptions struct {
+
+	// Set of options to modify how an operation is invoked. These apply to all
+	// operations invoked for this client. Use functional options on operation call to
+	// modify this list for per operation behavior.
+	APIOptions []func(*middleware.Stack) error
+
+	// MinDelay is the minimum amount of time to delay between retries. If unset,
+	// ObjectExistsWaiter will use default minimum delay of 5 seconds. Note that
+	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
+	MinDelay time.Duration
+
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
+	// to zero, ObjectExistsWaiter will use default max delay of 120 seconds. Note that
+	// MaxDelay must resolve to value greater than or equal to the MinDelay.
+	MaxDelay time.Duration
+
+	// LogWaitAttempts is used to enable logging for waiter retry attempts
+	LogWaitAttempts bool
+
+	// Retryable is function that can be used to override the service defined
+	// waiter-behavior based on operation output, or returned error. This function is
+	// used by the waiter to decide if a state is retryable or a terminal state. By
+	// default service-modeled logic will populate this option. This option can thus be
+	// used to define a custom waiter state with fall-back to service-modeled waiter
+	// state mutators.The function returns an error in case of a failure state. In case
+	// of retry state, this function returns a bool value of true and nil error, while
+	// in case of success it returns a bool value of false and nil error.
+	Retryable func(context.Context, *HeadObjectInput, *HeadObjectOutput, error) (bool, error)
+}
+
+// ObjectExistsWaiter defines the waiters for ObjectExists
+type ObjectExistsWaiter struct {
+	client HeadObjectAPIClient
+
+	options ObjectExistsWaiterOptions
+}
+
+// NewObjectExistsWaiter constructs a ObjectExistsWaiter.
+func NewObjectExistsWaiter(client HeadObjectAPIClient, optFns ...func(*ObjectExistsWaiterOptions)) *ObjectExistsWaiter {
+	options := ObjectExistsWaiterOptions{}
+	options.MinDelay = 5 * time.Second
+	options.MaxDelay = 120 * time.Second
+	options.Retryable = objectExistsStateRetryable
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	return &ObjectExistsWaiter{
+		client:  client,
+		options: options,
+	}
+}
+
+// Wait calls the waiter function for ObjectExists waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
+func (w *ObjectExistsWaiter) Wait(ctx context.Context, params *HeadObjectInput, maxWaitDur time.Duration, optFns ...func(*ObjectExistsWaiterOptions)) error {
+	if maxWaitDur <= 0 {
+		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+	}
+
+	options := w.options
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if options.MaxDelay <= 0 {
+		options.MaxDelay = 120 * time.Second
+	}
+
+	if options.MinDelay > options.MaxDelay {
+		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+	}
+
+	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
+	defer cancelFn()
+
+	logger := smithywaiter.Logger{}
+	remainingTime := maxWaitDur
+
+	var attempt int64
+	for {
+
+		attempt++
+		apiOptions := options.APIOptions
+		start := time.Now()
+
+		if options.LogWaitAttempts {
+			logger.Attempt = attempt
+			apiOptions = append([]func(*middleware.Stack) error{}, options.APIOptions...)
+			apiOptions = append(apiOptions, logger.AddLogger)
+		}
+
+		out, err := w.client.HeadObject(ctx, params, func(o *Options) {
+			o.APIOptions = append(o.APIOptions, apiOptions...)
+		})
+
+		retryable, err := options.Retryable(ctx, params, out, err)
+		if err != nil {
+			return err
+		}
+		if !retryable {
+			return nil
+		}
+
+		remainingTime -= time.Since(start)
+		if remainingTime < options.MinDelay || remainingTime <= 0 {
+			break
+		}
+
+		// compute exponential backoff between waiter retries
+		delay, err := smithywaiter.ComputeDelay(
+			attempt, options.MinDelay, options.MaxDelay, remainingTime,
+		)
+		if err != nil {
+			return fmt.Errorf("error computing waiter delay, %w", err)
+		}
+
+		remainingTime -= delay
+		// sleep for the delay amount before invoking a request
+		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
+			return fmt.Errorf("request cancelled while waiting, %w", err)
+		}
+	}
+	return fmt.Errorf("exceeded max wait time for ObjectExists waiter")
+}
+
+func objectExistsStateRetryable(ctx context.Context, input *HeadObjectInput, output *HeadObjectOutput, err error) (bool, error) {
+
+	if err == nil {
+		return false, nil
+	}
+
+	return true, nil
 }
 
 func newServiceMetadataMiddleware_opHeadObject(region string) *awsmiddleware.RegisterServiceMetadata {

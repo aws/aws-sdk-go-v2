@@ -466,6 +466,38 @@ func (ReportGroupStatusType) Values() []ReportGroupStatusType {
 	}
 }
 
+type ReportGroupTrendFieldType string
+
+// Enum values for ReportGroupTrendFieldType
+const (
+	ReportGroupTrendFieldTypePassRate        ReportGroupTrendFieldType = "PASS_RATE"
+	ReportGroupTrendFieldTypeDuration        ReportGroupTrendFieldType = "DURATION"
+	ReportGroupTrendFieldTypeTotal           ReportGroupTrendFieldType = "TOTAL"
+	ReportGroupTrendFieldTypeLineCoverage    ReportGroupTrendFieldType = "LINE_COVERAGE"
+	ReportGroupTrendFieldTypeLinesCovered    ReportGroupTrendFieldType = "LINES_COVERED"
+	ReportGroupTrendFieldTypeLinesMissed     ReportGroupTrendFieldType = "LINES_MISSED"
+	ReportGroupTrendFieldTypeBranchCoverage  ReportGroupTrendFieldType = "BRANCH_COVERAGE"
+	ReportGroupTrendFieldTypeBranchesCovered ReportGroupTrendFieldType = "BRANCHES_COVERED"
+	ReportGroupTrendFieldTypeBranchesMissed  ReportGroupTrendFieldType = "BRANCHES_MISSED"
+)
+
+// Values returns all known values for ReportGroupTrendFieldType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReportGroupTrendFieldType) Values() []ReportGroupTrendFieldType {
+	return []ReportGroupTrendFieldType{
+		"PASS_RATE",
+		"DURATION",
+		"TOTAL",
+		"LINE_COVERAGE",
+		"LINES_COVERED",
+		"LINES_MISSED",
+		"BRANCH_COVERAGE",
+		"BRANCHES_COVERED",
+		"BRANCHES_MISSED",
+	}
+}
+
 type ReportPackagingType string
 
 // Enum values for ReportPackagingType

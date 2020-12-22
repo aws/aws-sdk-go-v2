@@ -11,8 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
-	CanRetry   *bool
 	ErrorCode_ AccessDeniedErrorCode
+	CanRetry   *bool
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -33,8 +33,8 @@ type AgentsAlreadyRunningAssessmentException struct {
 	Message *string
 
 	Agents          []AgentAlreadyRunningAssessment
-	CanRetry        *bool
 	AgentsTruncated *bool
+	CanRetry        *bool
 }
 
 func (e *AgentsAlreadyRunningAssessmentException) Error() string {
@@ -58,9 +58,9 @@ func (e *AgentsAlreadyRunningAssessmentException) ErrorFault() smithy.ErrorFault
 type AssessmentRunInProgressException struct {
 	Message *string
 
-	CanRetry                   *bool
 	AssessmentRunArns          []string
 	AssessmentRunArnsTruncated *bool
+	CanRetry                   *bool
 }
 
 func (e *AssessmentRunInProgressException) Error() string {
@@ -101,8 +101,8 @@ func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type InvalidCrossAccountRoleException struct {
 	Message *string
 
-	CanRetry   *bool
 	ErrorCode_ InvalidCrossAccountRoleErrorCode
+	CanRetry   *bool
 }
 
 func (e *InvalidCrossAccountRoleException) Error() string {
@@ -124,8 +124,8 @@ func (e *InvalidCrossAccountRoleException) ErrorFault() smithy.ErrorFault { retu
 type InvalidInputException struct {
 	Message *string
 
-	CanRetry   *bool
 	ErrorCode_ InvalidInputErrorCode
+	CanRetry   *bool
 }
 
 func (e *InvalidInputException) Error() string {
@@ -145,8 +145,8 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 type LimitExceededException struct {
 	Message *string
 
-	CanRetry   *bool
 	ErrorCode_ LimitExceededErrorCode
+	CanRetry   *bool
 }
 
 func (e *LimitExceededException) Error() string {
@@ -166,8 +166,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 type NoSuchEntityException struct {
 	Message *string
 
-	CanRetry   *bool
 	ErrorCode_ NoSuchEntityErrorCode
+	CanRetry   *bool
 }
 
 func (e *NoSuchEntityException) Error() string {

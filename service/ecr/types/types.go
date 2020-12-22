@@ -314,6 +314,42 @@ type ListImagesFilter struct {
 	TagStatus TagStatus
 }
 
+// The replication configuration for a registry.
+type ReplicationConfiguration struct {
+
+	// An array of objects representing the replication rules for a replication
+	// configuration. A replication configuration may contain only one replication rule
+	// but the rule may contain one or more replication destinations.
+	//
+	// This member is required.
+	Rules []ReplicationRule
+}
+
+// An array of objects representing the details of a replication destination.
+type ReplicationDestination struct {
+
+	// A Region to replicate to.
+	//
+	// This member is required.
+	Region *string
+
+	// The account ID of the destination registry to replicate to.
+	//
+	// This member is required.
+	RegistryId *string
+}
+
+// An array of objects representing the replication destinations for a replication
+// configuration. A replication configuration may contain only one replication rule
+// but the rule may contain one or more replication destinations.
+type ReplicationRule struct {
+
+	// An array of objects representing the details of a replication destination.
+	//
+	// This member is required.
+	Destinations []ReplicationDestination
+}
+
 // An object representing a repository.
 type Repository struct {
 

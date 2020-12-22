@@ -3546,6 +3546,11 @@ func awsRestjson1_serializeDocumentCmfcSettings(v *types.CmfcSettings, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AudioDuration) > 0 {
+		ok := object.Key("audioDuration")
+		ok.String(string(v.AudioDuration))
+	}
+
 	if len(v.Scte35Esam) > 0 {
 		ok := object.Key("scte35Esam")
 		ok.String(string(v.Scte35Esam))
@@ -3752,6 +3757,11 @@ func awsRestjson1_serializeDocumentDashIsoGroupSettings(v *types.DashIsoGroupSet
 	if v.MinBufferTime != 0 {
 		ok := object.Key("minBufferTime")
 		ok.Integer(v.MinBufferTime)
+	}
+
+	if v.MinFinalSegmentLength != 0 {
+		ok := object.Key("minFinalSegmentLength")
+		ok.Double(v.MinFinalSegmentLength)
 	}
 
 	if len(v.MpdProfile) > 0 {
@@ -5771,6 +5781,11 @@ func awsRestjson1_serializeDocumentM2tsSettings(v *types.M2tsSettings, value smi
 		ok.String(string(v.AudioBufferModel))
 	}
 
+	if len(v.AudioDuration) > 0 {
+		ok := object.Key("audioDuration")
+		ok.String(string(v.AudioDuration))
+	}
+
 	if v.AudioFramesPerPes != 0 {
 		ok := object.Key("audioFramesPerPes")
 		ok.Integer(v.AudioFramesPerPes)
@@ -5964,6 +5979,11 @@ func awsRestjson1_serializeDocumentM2tsSettings(v *types.M2tsSettings, value smi
 func awsRestjson1_serializeDocumentM3u8Settings(v *types.M3u8Settings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.AudioDuration) > 0 {
+		ok := object.Key("audioDuration")
+		ok.String(string(v.AudioDuration))
+	}
 
 	if v.AudioFramesPerPes != 0 {
 		ok := object.Key("audioFramesPerPes")
@@ -6215,6 +6235,11 @@ func awsRestjson1_serializeDocumentMp4Settings(v *types.Mp4Settings, value smith
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AudioDuration) > 0 {
+		ok := object.Key("audioDuration")
+		ok.String(string(v.AudioDuration))
+	}
+
 	if len(v.CslgAtom) > 0 {
 		ok := object.Key("cslgAtom")
 		ok.String(string(v.CslgAtom))
@@ -6246,6 +6271,16 @@ func awsRestjson1_serializeDocumentMp4Settings(v *types.Mp4Settings, value smith
 func awsRestjson1_serializeDocumentMpdSettings(v *types.MpdSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.AccessibilityCaptionHints) > 0 {
+		ok := object.Key("accessibilityCaptionHints")
+		ok.String(string(v.AccessibilityCaptionHints))
+	}
+
+	if len(v.AudioDuration) > 0 {
+		ok := object.Key("audioDuration")
+		ok.String(string(v.AudioDuration))
+	}
 
 	if len(v.CaptionContainerType) > 0 {
 		ok := object.Key("captionContainerType")

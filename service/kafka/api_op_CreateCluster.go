@@ -80,7 +80,8 @@ type CreateClusterOutput struct {
 	// The name of the MSK cluster.
 	ClusterName *string
 
-	// The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.
+	// The state of the cluster. The possible states are ACTIVE, CREATING, DELETING,
+	// FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.
 	State types.ClusterState
 
 	// Metadata pertaining to the operation's result.

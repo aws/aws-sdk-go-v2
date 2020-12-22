@@ -285,6 +285,10 @@ type UploadPartCopyInput struct {
 
 type UploadPartCopyOutput struct {
 
+	// Indicates whether the multipart upload uses an S3 Bucket Key for server-side
+	// encryption with AWS KMS (SSE-KMS).
+	BucketKeyEnabled bool
+
 	// Container for all response elements.
 	CopyPartResult *types.CopyPartResult
 

@@ -141,12 +141,6 @@ func (DeliveryStreamStatus) Values() []DeliveryStreamStatus {
 
 type DeliveryStreamType string
 
-// Enum values for DeliveryStreamType
-const (
-	DeliveryStreamTypeDirectput             DeliveryStreamType = "DirectPut"
-	DeliveryStreamTypeKinesisstreamassource DeliveryStreamType = "KinesisStreamAsSource"
-)
-
 // Values returns all known values for DeliveryStreamType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -158,15 +152,6 @@ func (DeliveryStreamType) Values() []DeliveryStreamType {
 }
 
 type ElasticsearchIndexRotationPeriod string
-
-// Enum values for ElasticsearchIndexRotationPeriod
-const (
-	ElasticsearchIndexRotationPeriodNorotation ElasticsearchIndexRotationPeriod = "NoRotation"
-	ElasticsearchIndexRotationPeriodOnehour    ElasticsearchIndexRotationPeriod = "OneHour"
-	ElasticsearchIndexRotationPeriodOneday     ElasticsearchIndexRotationPeriod = "OneDay"
-	ElasticsearchIndexRotationPeriodOneweek    ElasticsearchIndexRotationPeriod = "OneWeek"
-	ElasticsearchIndexRotationPeriodOnemonth   ElasticsearchIndexRotationPeriod = "OneMonth"
-)
 
 // Values returns all known values for ElasticsearchIndexRotationPeriod. Note that
 // this can be expanded in the future, and so it is only as up to date as the
@@ -184,12 +169,6 @@ func (ElasticsearchIndexRotationPeriod) Values() []ElasticsearchIndexRotationPer
 
 type ElasticsearchS3BackupMode string
 
-// Enum values for ElasticsearchS3BackupMode
-const (
-	ElasticsearchS3BackupModeFaileddocumentsonly ElasticsearchS3BackupMode = "FailedDocumentsOnly"
-	ElasticsearchS3BackupModeAlldocuments        ElasticsearchS3BackupMode = "AllDocuments"
-)
-
 // Values returns all known values for ElasticsearchS3BackupMode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
 // The ordering of this slice is not guaranteed to be stable across updates.
@@ -202,12 +181,6 @@ func (ElasticsearchS3BackupMode) Values() []ElasticsearchS3BackupMode {
 
 type HECEndpointType string
 
-// Enum values for HECEndpointType
-const (
-	HECEndpointTypeRaw   HECEndpointType = "Raw"
-	HECEndpointTypeEvent HECEndpointType = "Event"
-)
-
 // Values returns all known values for HECEndpointType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -219,12 +192,6 @@ func (HECEndpointType) Values() []HECEndpointType {
 }
 
 type HttpEndpointS3BackupMode string
-
-// Enum values for HttpEndpointS3BackupMode
-const (
-	HttpEndpointS3BackupModeFaileddataonly HttpEndpointS3BackupMode = "FailedDataOnly"
-	HttpEndpointS3BackupModeAlldata        HttpEndpointS3BackupMode = "AllData"
-)
 
 // Values returns all known values for HttpEndpointS3BackupMode. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
@@ -255,11 +222,6 @@ func (KeyType) Values() []KeyType {
 }
 
 type NoEncryptionConfig string
-
-// Enum values for NoEncryptionConfig
-const (
-	NoEncryptionConfigNoencryption NoEncryptionConfig = "NoEncryption"
-)
 
 // Values returns all known values for NoEncryptionConfig. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -372,11 +334,6 @@ func (ProcessorParameterName) Values() []ProcessorParameterName {
 
 type ProcessorType string
 
-// Enum values for ProcessorType
-const (
-	ProcessorTypeLambda ProcessorType = "Lambda"
-)
-
 // Values returns all known values for ProcessorType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -387,12 +344,6 @@ func (ProcessorType) Values() []ProcessorType {
 }
 
 type RedshiftS3BackupMode string
-
-// Enum values for RedshiftS3BackupMode
-const (
-	RedshiftS3BackupModeDisabled RedshiftS3BackupMode = "Disabled"
-	RedshiftS3BackupModeEnabled  RedshiftS3BackupMode = "Enabled"
-)
 
 // Values returns all known values for RedshiftS3BackupMode. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -406,12 +357,6 @@ func (RedshiftS3BackupMode) Values() []RedshiftS3BackupMode {
 
 type S3BackupMode string
 
-// Enum values for S3BackupMode
-const (
-	S3BackupModeDisabled S3BackupMode = "Disabled"
-	S3BackupModeEnabled  S3BackupMode = "Enabled"
-)
-
 // Values returns all known values for S3BackupMode. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
 // this slice is not guaranteed to be stable across updates.
@@ -423,12 +368,6 @@ func (S3BackupMode) Values() []S3BackupMode {
 }
 
 type SplunkS3BackupMode string
-
-// Enum values for SplunkS3BackupMode
-const (
-	SplunkS3BackupModeFailedeventsonly SplunkS3BackupMode = "FailedEventsOnly"
-	SplunkS3BackupModeAllevents        SplunkS3BackupMode = "AllEvents"
-)
 
 // Values returns all known values for SplunkS3BackupMode. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The

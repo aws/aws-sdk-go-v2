@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe a listener. To see an AWS CLI example of describing a listener, scroll
-// down to Example.
+// Describe a listener.
 func (c *Client) DescribeListener(ctx context.Context, params *DescribeListenerInput, optFns ...func(*Options)) (*DescribeListenerOutput, error) {
 	if params == nil {
 		params = &DescribeListenerInput{}

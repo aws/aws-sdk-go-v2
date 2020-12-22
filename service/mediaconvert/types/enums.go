@@ -1298,6 +1298,24 @@ func (CmafWriteSegmentTimelineInRepresentation) Values() []CmafWriteSegmentTimel
 	}
 }
 
+type CmfcAudioDuration string
+
+// Enum values for CmfcAudioDuration
+const (
+	CmfcAudioDurationDefaultCodecDuration CmfcAudioDuration = "DEFAULT_CODEC_DURATION"
+	CmfcAudioDurationMatchVideoDuration   CmfcAudioDuration = "MATCH_VIDEO_DURATION"
+)
+
+// Values returns all known values for CmfcAudioDuration. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmfcAudioDuration) Values() []CmfcAudioDuration {
+	return []CmfcAudioDuration{
+		"DEFAULT_CODEC_DURATION",
+		"MATCH_VIDEO_DURATION",
+	}
+}
+
 type CmfcScte35Esam string
 
 // Enum values for CmfcScte35Esam
@@ -4392,6 +4410,24 @@ func (M2tsAudioBufferModel) Values() []M2tsAudioBufferModel {
 	}
 }
 
+type M2tsAudioDuration string
+
+// Enum values for M2tsAudioDuration
+const (
+	M2tsAudioDurationDefaultCodecDuration M2tsAudioDuration = "DEFAULT_CODEC_DURATION"
+	M2tsAudioDurationMatchVideoDuration   M2tsAudioDuration = "MATCH_VIDEO_DURATION"
+)
+
+// Values returns all known values for M2tsAudioDuration. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M2tsAudioDuration) Values() []M2tsAudioDuration {
+	return []M2tsAudioDuration{
+		"DEFAULT_CODEC_DURATION",
+		"MATCH_VIDEO_DURATION",
+	}
+}
+
 type M2tsBufferModel string
 
 // Enum values for M2tsBufferModel
@@ -4595,6 +4631,24 @@ func (M2tsSegmentationStyle) Values() []M2tsSegmentationStyle {
 	return []M2tsSegmentationStyle{
 		"MAINTAIN_CADENCE",
 		"RESET_CADENCE",
+	}
+}
+
+type M3u8AudioDuration string
+
+// Enum values for M3u8AudioDuration
+const (
+	M3u8AudioDurationDefaultCodecDuration M3u8AudioDuration = "DEFAULT_CODEC_DURATION"
+	M3u8AudioDurationMatchVideoDuration   M3u8AudioDuration = "MATCH_VIDEO_DURATION"
+)
+
+// Values returns all known values for M3u8AudioDuration. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M3u8AudioDuration) Values() []M3u8AudioDuration {
+	return []M3u8AudioDuration{
+		"DEFAULT_CODEC_DURATION",
+		"MATCH_VIDEO_DURATION",
 	}
 }
 
@@ -4847,6 +4901,42 @@ func (Mp4MoovPlacement) Values() []Mp4MoovPlacement {
 	return []Mp4MoovPlacement{
 		"PROGRESSIVE_DOWNLOAD",
 		"NORMAL",
+	}
+}
+
+type MpdAccessibilityCaptionHints string
+
+// Enum values for MpdAccessibilityCaptionHints
+const (
+	MpdAccessibilityCaptionHintsInclude MpdAccessibilityCaptionHints = "INCLUDE"
+	MpdAccessibilityCaptionHintsExclude MpdAccessibilityCaptionHints = "EXCLUDE"
+)
+
+// Values returns all known values for MpdAccessibilityCaptionHints. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MpdAccessibilityCaptionHints) Values() []MpdAccessibilityCaptionHints {
+	return []MpdAccessibilityCaptionHints{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
+
+type MpdAudioDuration string
+
+// Enum values for MpdAudioDuration
+const (
+	MpdAudioDurationDefaultCodecDuration MpdAudioDuration = "DEFAULT_CODEC_DURATION"
+	MpdAudioDurationMatchVideoDuration   MpdAudioDuration = "MATCH_VIDEO_DURATION"
+)
+
+// Values returns all known values for MpdAudioDuration. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MpdAudioDuration) Values() []MpdAudioDuration {
+	return []MpdAudioDuration{
+		"DEFAULT_CODEC_DURATION",
+		"MATCH_VIDEO_DURATION",
 	}
 }
 

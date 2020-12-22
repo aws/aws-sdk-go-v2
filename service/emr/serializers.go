@@ -291,6 +291,98 @@ func (m *awsAwsjson11_serializeOpCreateSecurityConfiguration) HandleSerialize(ct
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateStudio struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateStudio) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateStudio) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateStudioInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ElasticMapReduce.CreateStudio")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateStudioInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpCreateStudioSessionMapping struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateStudioSessionMapping) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateStudioSessionMapping) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateStudioSessionMappingInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ElasticMapReduce.CreateStudioSessionMapping")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateStudioSessionMappingInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDeleteSecurityConfiguration struct {
 }
 
@@ -322,6 +414,98 @@ func (m *awsAwsjson11_serializeOpDeleteSecurityConfiguration) HandleSerialize(ct
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDeleteSecurityConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteStudio struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteStudio) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteStudio) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteStudioInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ElasticMapReduce.DeleteStudio")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteStudioInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteStudioSessionMapping struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteStudioSessionMapping) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteStudioSessionMapping) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteStudioSessionMappingInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ElasticMapReduce.DeleteStudioSessionMapping")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteStudioSessionMappingInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -567,6 +751,52 @@ func (m *awsAwsjson11_serializeOpDescribeStep) HandleSerialize(ctx context.Conte
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDescribeStudio struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeStudio) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeStudio) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeStudioInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ElasticMapReduce.DescribeStudio")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeStudioInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetBlockPublicAccessConfiguration struct {
 }
 
@@ -637,6 +867,52 @@ func (m *awsAwsjson11_serializeOpGetManagedScalingPolicy) HandleSerialize(ctx co
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentGetManagedScalingPolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetStudioSessionMapping struct {
+}
+
+func (*awsAwsjson11_serializeOpGetStudioSessionMapping) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetStudioSessionMapping) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetStudioSessionMappingInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ElasticMapReduce.GetStudioSessionMapping")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetStudioSessionMappingInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1005,6 +1281,98 @@ func (m *awsAwsjson11_serializeOpListSteps) HandleSerialize(ctx context.Context,
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentListStepsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListStudios struct {
+}
+
+func (*awsAwsjson11_serializeOpListStudios) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListStudios) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListStudiosInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ElasticMapReduce.ListStudios")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListStudiosInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListStudioSessionMappings struct {
+}
+
+func (*awsAwsjson11_serializeOpListStudioSessionMappings) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListStudioSessionMappings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListStudioSessionMappingsInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ElasticMapReduce.ListStudioSessionMappings")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListStudioSessionMappingsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1695,6 +2063,52 @@ func (m *awsAwsjson11_serializeOpTerminateJobFlows) HandleSerialize(ctx context.
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentTerminateJobFlowsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpUpdateStudioSessionMapping struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateStudioSessionMapping) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateStudioSessionMapping) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateStudioSessionMappingInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ElasticMapReduce.UpdateStudioSessionMapping")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateStudioSessionMappingInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3025,6 +3439,17 @@ func awsAwsjson11_serializeDocumentStringMap(v map[string]string, value smithyjs
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSubnetIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSupportedProductConfig(v *types.SupportedProductConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3246,6 +3671,104 @@ func awsAwsjson11_serializeOpDocumentCreateSecurityConfigurationInput(v *CreateS
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentCreateStudioInput(v *CreateStudioInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AuthMode) > 0 {
+		ok := object.Key("AuthMode")
+		ok.String(string(v.AuthMode))
+	}
+
+	if v.DefaultS3Location != nil {
+		ok := object.Key("DefaultS3Location")
+		ok.String(*v.DefaultS3Location)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.EngineSecurityGroupId != nil {
+		ok := object.Key("EngineSecurityGroupId")
+		ok.String(*v.EngineSecurityGroupId)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.ServiceRole != nil {
+		ok := object.Key("ServiceRole")
+		ok.String(*v.ServiceRole)
+	}
+
+	if v.SubnetIds != nil {
+		ok := object.Key("SubnetIds")
+		if err := awsAwsjson11_serializeDocumentSubnetIdList(v.SubnetIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UserRole != nil {
+		ok := object.Key("UserRole")
+		ok.String(*v.UserRole)
+	}
+
+	if v.VpcId != nil {
+		ok := object.Key("VpcId")
+		ok.String(*v.VpcId)
+	}
+
+	if v.WorkspaceSecurityGroupId != nil {
+		ok := object.Key("WorkspaceSecurityGroupId")
+		ok.String(*v.WorkspaceSecurityGroupId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateStudioSessionMappingInput(v *CreateStudioSessionMappingInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IdentityId != nil {
+		ok := object.Key("IdentityId")
+		ok.String(*v.IdentityId)
+	}
+
+	if v.IdentityName != nil {
+		ok := object.Key("IdentityName")
+		ok.String(*v.IdentityName)
+	}
+
+	if len(v.IdentityType) > 0 {
+		ok := object.Key("IdentityType")
+		ok.String(string(v.IdentityType))
+	}
+
+	if v.SessionPolicyArn != nil {
+		ok := object.Key("SessionPolicyArn")
+		ok.String(*v.SessionPolicyArn)
+	}
+
+	if v.StudioId != nil {
+		ok := object.Key("StudioId")
+		ok.String(*v.StudioId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDeleteSecurityConfigurationInput(v *DeleteSecurityConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3253,6 +3776,45 @@ func awsAwsjson11_serializeOpDocumentDeleteSecurityConfigurationInput(v *DeleteS
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteStudioInput(v *DeleteStudioInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StudioId != nil {
+		ok := object.Key("StudioId")
+		ok.String(*v.StudioId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteStudioSessionMappingInput(v *DeleteStudioSessionMappingInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IdentityId != nil {
+		ok := object.Key("IdentityId")
+		ok.String(*v.IdentityId)
+	}
+
+	if v.IdentityName != nil {
+		ok := object.Key("IdentityName")
+		ok.String(*v.IdentityName)
+	}
+
+	if len(v.IdentityType) > 0 {
+		ok := object.Key("IdentityType")
+		ok.String(string(v.IdentityType))
+	}
+
+	if v.StudioId != nil {
+		ok := object.Key("StudioId")
+		ok.String(*v.StudioId)
 	}
 
 	return nil
@@ -3342,6 +3904,18 @@ func awsAwsjson11_serializeOpDocumentDescribeStepInput(v *DescribeStepInput, val
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDescribeStudioInput(v *DescribeStudioInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StudioId != nil {
+		ok := object.Key("StudioId")
+		ok.String(*v.StudioId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentGetBlockPublicAccessConfigurationInput(v *GetBlockPublicAccessConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3356,6 +3930,33 @@ func awsAwsjson11_serializeOpDocumentGetManagedScalingPolicyInput(v *GetManagedS
 	if v.ClusterId != nil {
 		ok := object.Key("ClusterId")
 		ok.String(*v.ClusterId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetStudioSessionMappingInput(v *GetStudioSessionMappingInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IdentityId != nil {
+		ok := object.Key("IdentityId")
+		ok.String(*v.IdentityId)
+	}
+
+	if v.IdentityName != nil {
+		ok := object.Key("IdentityName")
+		ok.String(*v.IdentityName)
+	}
+
+	if len(v.IdentityType) > 0 {
+		ok := object.Key("IdentityType")
+		ok.String(string(v.IdentityType))
+	}
+
+	if v.StudioId != nil {
+		ok := object.Key("StudioId")
+		ok.String(*v.StudioId)
 	}
 
 	return nil
@@ -3557,6 +4158,40 @@ func awsAwsjson11_serializeOpDocumentListStepsInput(v *ListStepsInput, value smi
 		if err := awsAwsjson11_serializeDocumentStepStateList(v.StepStates, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListStudioSessionMappingsInput(v *ListStudioSessionMappingsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.IdentityType) > 0 {
+		ok := object.Key("IdentityType")
+		ok.String(string(v.IdentityType))
+	}
+
+	if v.Marker != nil {
+		ok := object.Key("Marker")
+		ok.String(*v.Marker)
+	}
+
+	if v.StudioId != nil {
+		ok := object.Key("StudioId")
+		ok.String(*v.StudioId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListStudiosInput(v *ListStudiosInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Marker != nil {
+		ok := object.Key("Marker")
+		ok.String(*v.Marker)
 	}
 
 	return nil
@@ -3996,6 +4631,38 @@ func awsAwsjson11_serializeOpDocumentTerminateJobFlowsInput(v *TerminateJobFlows
 		if err := awsAwsjson11_serializeDocumentXmlStringList(v.JobFlowIds, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateStudioSessionMappingInput(v *UpdateStudioSessionMappingInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IdentityId != nil {
+		ok := object.Key("IdentityId")
+		ok.String(*v.IdentityId)
+	}
+
+	if v.IdentityName != nil {
+		ok := object.Key("IdentityName")
+		ok.String(*v.IdentityName)
+	}
+
+	if len(v.IdentityType) > 0 {
+		ok := object.Key("IdentityType")
+		ok.String(string(v.IdentityType))
+	}
+
+	if v.SessionPolicyArn != nil {
+		ok := object.Key("SessionPolicyArn")
+		ok.String(*v.SessionPolicyArn)
+	}
+
+	if v.StudioId != nil {
+		ok := object.Key("StudioId")
+		ok.String(*v.StudioId)
 	}
 
 	return nil

@@ -4,6 +4,7 @@ package globalaccelerator
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
@@ -11,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the accelerators for an AWS account. To see an AWS CLI example of listing
-// the accelerators for an AWS account, scroll down to Example.
+// List the accelerators for an AWS account.
 func (c *Client) ListAccelerators(ctx context.Context, params *ListAcceleratorsInput, optFns ...func(*Options)) (*ListAcceleratorsOutput, error) {
 	if params == nil {
 		params = &ListAcceleratorsInput{}
@@ -107,6 +107,93 @@ func addOperationListAcceleratorsMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// ListAcceleratorsAPIClient is a client that implements the ListAccelerators
+// operation.
+type ListAcceleratorsAPIClient interface {
+	ListAccelerators(context.Context, *ListAcceleratorsInput, ...func(*Options)) (*ListAcceleratorsOutput, error)
+}
+
+var _ ListAcceleratorsAPIClient = (*Client)(nil)
+
+// ListAcceleratorsPaginatorOptions is the paginator options for ListAccelerators
+type ListAcceleratorsPaginatorOptions struct {
+	// The number of Global Accelerator objects that you want to return with this call.
+	// The default value is 10.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAcceleratorsPaginator is a paginator for ListAccelerators
+type ListAcceleratorsPaginator struct {
+	options   ListAcceleratorsPaginatorOptions
+	client    ListAcceleratorsAPIClient
+	params    *ListAcceleratorsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAcceleratorsPaginator returns a new ListAcceleratorsPaginator
+func NewListAcceleratorsPaginator(client ListAcceleratorsAPIClient, params *ListAcceleratorsInput, optFns ...func(*ListAcceleratorsPaginatorOptions)) *ListAcceleratorsPaginator {
+	options := ListAcceleratorsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListAcceleratorsInput{}
+	}
+
+	return &ListAcceleratorsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAcceleratorsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListAccelerators page.
+func (p *ListAcceleratorsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAcceleratorsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListAccelerators(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListAccelerators(region string) *awsmiddleware.RegisterServiceMetadata {

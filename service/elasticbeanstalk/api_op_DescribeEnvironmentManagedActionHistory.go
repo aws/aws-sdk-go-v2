@@ -38,7 +38,7 @@ type DescribeEnvironmentManagedActionHistoryInput struct {
 	EnvironmentName *string
 
 	// The maximum number of items to return for a single request.
-	MaxItems int32
+	MaxItems *int32
 
 	// The pagination token returned by a previous request.
 	NextToken *string
@@ -148,8 +148,8 @@ type DescribeEnvironmentManagedActionHistoryPaginator struct {
 // DescribeEnvironmentManagedActionHistoryPaginator
 func NewDescribeEnvironmentManagedActionHistoryPaginator(client DescribeEnvironmentManagedActionHistoryAPIClient, params *DescribeEnvironmentManagedActionHistoryInput, optFns ...func(*DescribeEnvironmentManagedActionHistoryPaginatorOptions)) *DescribeEnvironmentManagedActionHistoryPaginator {
 	options := DescribeEnvironmentManagedActionHistoryPaginatorOptions{}
-	if params.MaxItems != 0 {
-		options.Limit = params.MaxItems
+	if params.MaxItems != nil {
+		options.Limit = *params.MaxItems
 	}
 
 	for _, fn := range optFns {
@@ -182,7 +182,11 @@ func (p *DescribeEnvironmentManagedActionHistoryPaginator) NextPage(ctx context.
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxItems = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxItems = limit
 
 	result, err := p.client.DescribeEnvironmentManagedActionHistory(ctx, &params, optFns...)
 	if err != nil {

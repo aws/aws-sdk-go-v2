@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the tags for an AWS Batch resource. AWS Batch resources that support tags
+// Lists the tags for an AWS Batch resource. AWS Batch resources that support tags
 // are compute environments, jobs, job definitions, and job queues. ARNs for child
 // jobs of array and multi-node parallel (MNP) jobs are not supported.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
@@ -30,9 +30,9 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) that identifies the resource for which to list
-	// the tags. AWS Batch resources that support tags are compute environments, jobs,
-	// job definitions, and job queues. ARNs for child jobs of array and multi-node
+	// The Amazon Resource Name (ARN) that identifies the resource that tags are listed
+	// for. AWS Batch resources that support tags are compute environments, jobs, job
+	// definitions, and job queues. ARNs for child jobs of array and multi-node
 	// parallel (MNP) jobs are not supported.
 	//
 	// This member is required.

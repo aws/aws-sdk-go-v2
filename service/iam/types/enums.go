@@ -23,13 +23,6 @@ func (AccessAdvisorUsageGranularityType) Values() []AccessAdvisorUsageGranularit
 
 type AssignmentStatusType string
 
-// Enum values for AssignmentStatusType
-const (
-	AssignmentStatusTypeAssigned   AssignmentStatusType = "Assigned"
-	AssignmentStatusTypeUnassigned AssignmentStatusType = "Unassigned"
-	AssignmentStatusTypeAny        AssignmentStatusType = "Any"
-)
-
 // Values returns all known values for AssignmentStatusType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -103,12 +96,6 @@ func (DeletionTaskStatusType) Values() []DeletionTaskStatusType {
 
 type EncodingType string
 
-// Enum values for EncodingType
-const (
-	EncodingTypeSsh EncodingType = "SSH"
-	EncodingTypePem EncodingType = "PEM"
-)
-
 // Values returns all known values for EncodingType. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
 // this slice is not guaranteed to be stable across updates.
@@ -162,13 +149,6 @@ func (GlobalEndpointTokenVersion) Values() []GlobalEndpointTokenVersion {
 }
 
 type JobStatusType string
-
-// Enum values for JobStatusType
-const (
-	JobStatusTypeInProgress JobStatusType = "IN_PROGRESS"
-	JobStatusTypeCompleted  JobStatusType = "COMPLETED"
-	JobStatusTypeFailed     JobStatusType = "FAILED"
-)
 
 // Values returns all known values for JobStatusType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -306,12 +286,6 @@ func (PolicyType) Values() []PolicyType {
 
 type PolicyUsageType string
 
-// Enum values for PolicyUsageType
-const (
-	PolicyUsageTypePermissionspolicy   PolicyUsageType = "PermissionsPolicy"
-	PolicyUsageTypePermissionsboundary PolicyUsageType = "PermissionsBoundary"
-)
-
 // Values returns all known values for PolicyUsageType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -323,11 +297,6 @@ func (PolicyUsageType) Values() []PolicyUsageType {
 }
 
 type ReportFormatType string
-
-// Enum values for ReportFormatType
-const (
-	ReportFormatTypeTextCsv ReportFormatType = "text/csv"
-)
 
 // Values returns all known values for ReportFormatType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -382,12 +351,6 @@ func (SortKeyType) Values() []SortKeyType {
 
 type StatusType string
 
-// Enum values for StatusType
-const (
-	StatusTypeActive   StatusType = "Active"
-	StatusTypeInactive StatusType = "Inactive"
-)
-
 // Values returns all known values for StatusType. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
 // this slice is not guaranteed to be stable across updates.
@@ -399,36 +362,6 @@ func (StatusType) Values() []StatusType {
 }
 
 type SummaryKeyType string
-
-// Enum values for SummaryKeyType
-const (
-	SummaryKeyTypeUsers                             SummaryKeyType = "Users"
-	SummaryKeyTypeUsersquota                        SummaryKeyType = "UsersQuota"
-	SummaryKeyTypeGroups                            SummaryKeyType = "Groups"
-	SummaryKeyTypeGroupsquota                       SummaryKeyType = "GroupsQuota"
-	SummaryKeyTypeServercertificates                SummaryKeyType = "ServerCertificates"
-	SummaryKeyTypeServercertificatesquota           SummaryKeyType = "ServerCertificatesQuota"
-	SummaryKeyTypeUserpolicysizequota               SummaryKeyType = "UserPolicySizeQuota"
-	SummaryKeyTypeGrouppolicysizequota              SummaryKeyType = "GroupPolicySizeQuota"
-	SummaryKeyTypeGroupsperuserquota                SummaryKeyType = "GroupsPerUserQuota"
-	SummaryKeyTypeSigningcertificatesperuserquota   SummaryKeyType = "SigningCertificatesPerUserQuota"
-	SummaryKeyTypeAccesskeysperuserquota            SummaryKeyType = "AccessKeysPerUserQuota"
-	SummaryKeyTypeMfadevices                        SummaryKeyType = "MFADevices"
-	SummaryKeyTypeMfadevicesinuse                   SummaryKeyType = "MFADevicesInUse"
-	SummaryKeyTypeAccountmfaenabled                 SummaryKeyType = "AccountMFAEnabled"
-	SummaryKeyTypeAccountaccesskeyspresent          SummaryKeyType = "AccountAccessKeysPresent"
-	SummaryKeyTypeAccountsigningcertificatespresent SummaryKeyType = "AccountSigningCertificatesPresent"
-	SummaryKeyTypeAttachedpoliciespergroupquota     SummaryKeyType = "AttachedPoliciesPerGroupQuota"
-	SummaryKeyTypeAttachedpoliciesperrolequota      SummaryKeyType = "AttachedPoliciesPerRoleQuota"
-	SummaryKeyTypeAttachedpoliciesperuserquota      SummaryKeyType = "AttachedPoliciesPerUserQuota"
-	SummaryKeyTypePolicies                          SummaryKeyType = "Policies"
-	SummaryKeyTypePoliciesquota                     SummaryKeyType = "PoliciesQuota"
-	SummaryKeyTypePolicysizequota                   SummaryKeyType = "PolicySizeQuota"
-	SummaryKeyTypePolicyversionsinuse               SummaryKeyType = "PolicyVersionsInUse"
-	SummaryKeyTypePolicyversionsinusequota          SummaryKeyType = "PolicyVersionsInUseQuota"
-	SummaryKeyTypeVersionsperpolicyquota            SummaryKeyType = "VersionsPerPolicyQuota"
-	SummaryKeyTypeGlobalendpointtokenversion        SummaryKeyType = "GlobalEndpointTokenVersion"
-)
 
 // Values returns all known values for SummaryKeyType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The

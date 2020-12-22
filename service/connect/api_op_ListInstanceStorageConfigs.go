@@ -12,6 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Returns a paginated list of storage configs for the identified instance and
 // resource type.
 func (c *Client) ListInstanceStorageConfigs(ctx context.Context, params *ListInstanceStorageConfigsInput, optFns ...func(*Options)) (*ListInstanceStorageConfigsOutput, error) {

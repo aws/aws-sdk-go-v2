@@ -99,6 +99,7 @@ const (
 	BackupLifecycleTransferring BackupLifecycle = "TRANSFERRING"
 	BackupLifecycleDeleted      BackupLifecycle = "DELETED"
 	BackupLifecycleFailed       BackupLifecycle = "FAILED"
+	BackupLifecyclePending      BackupLifecycle = "PENDING"
 )
 
 // Values returns all known values for BackupLifecycle. Note that this can be
@@ -111,6 +112,7 @@ func (BackupLifecycle) Values() []BackupLifecycle {
 		"TRANSFERRING",
 		"DELETED",
 		"FAILED",
+		"PENDING",
 	}
 }
 

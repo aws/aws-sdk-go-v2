@@ -488,11 +488,11 @@ func validateCorsRule(v *types.CorsRule) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CorsRule"}
-	if v.AllowedHeaders == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AllowedHeaders"))
-	}
 	if v.AllowedOrigins == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AllowedOrigins"))
+	}
+	if v.AllowedHeaders == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowedHeaders"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -526,11 +526,11 @@ func validateMetricPolicyRule(v *types.MetricPolicyRule) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricPolicyRule"}
-	if v.ObjectGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ObjectGroupName"))
-	}
 	if v.ObjectGroup == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectGroup"))
+	}
+	if v.ObjectGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -821,15 +821,15 @@ func validateOpPutMetricPolicyInput(v *PutMetricPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutMetricPolicyInput"}
+	if v.ContainerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerName"))
+	}
 	if v.MetricPolicy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricPolicy"))
 	} else if v.MetricPolicy != nil {
 		if err := validateMetricPolicy(v.MetricPolicy); err != nil {
 			invalidParams.AddNested("MetricPolicy", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ContainerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ContainerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -895,11 +895,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.Resource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

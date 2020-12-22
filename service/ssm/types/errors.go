@@ -1557,6 +1557,128 @@ func (e *OpsItemNotFoundException) ErrorMessage() string {
 func (e *OpsItemNotFoundException) ErrorCode() string             { return "OpsItemNotFoundException" }
 func (e *OpsItemNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// An OpsMetadata object already exists for the selected resource.
+type OpsMetadataAlreadyExistsException struct {
+	Message *string
+}
+
+func (e *OpsMetadataAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *OpsMetadataAlreadyExistsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *OpsMetadataAlreadyExistsException) ErrorCode() string {
+	return "OpsMetadataAlreadyExistsException"
+}
+func (e *OpsMetadataAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// One of the arguments passed is invalid.
+type OpsMetadataInvalidArgumentException struct {
+	Message *string
+}
+
+func (e *OpsMetadataInvalidArgumentException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *OpsMetadataInvalidArgumentException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *OpsMetadataInvalidArgumentException) ErrorCode() string {
+	return "OpsMetadataInvalidArgumentException"
+}
+func (e *OpsMetadataInvalidArgumentException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The OpsMetadata object exceeds the maximum number of OpsMetadata keys that you
+// can assign to an application in AppManager.
+type OpsMetadataKeyLimitExceededException struct {
+	Message *string
+}
+
+func (e *OpsMetadataKeyLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *OpsMetadataKeyLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *OpsMetadataKeyLimitExceededException) ErrorCode() string {
+	return "OpsMetadataKeyLimitExceededException"
+}
+func (e *OpsMetadataKeyLimitExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// Your account reached the maximum number of OpsMetadata objects allowed by
+// AppManager. The maximum is 200 OpsMetadata objects. Delete one or more
+// OpsMetadata object and try again.
+type OpsMetadataLimitExceededException struct {
+	Message *string
+}
+
+func (e *OpsMetadataLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *OpsMetadataLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *OpsMetadataLimitExceededException) ErrorCode() string {
+	return "OpsMetadataLimitExceededException"
+}
+func (e *OpsMetadataLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The OpsMetadata object does not exist.
+type OpsMetadataNotFoundException struct {
+	Message *string
+}
+
+func (e *OpsMetadataNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *OpsMetadataNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *OpsMetadataNotFoundException) ErrorCode() string             { return "OpsMetadataNotFoundException" }
+func (e *OpsMetadataNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The system is processing too many concurrent updates. Wait a few moments and try
+// again.
+type OpsMetadataTooManyUpdatesException struct {
+	Message *string
+}
+
+func (e *OpsMetadataTooManyUpdatesException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *OpsMetadataTooManyUpdatesException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *OpsMetadataTooManyUpdatesException) ErrorCode() string {
+	return "OpsMetadataTooManyUpdatesException"
+}
+func (e *OpsMetadataTooManyUpdatesException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The parameter already exists. You can't create duplicate parameters.
 type ParameterAlreadyExists struct {
 	Message *string

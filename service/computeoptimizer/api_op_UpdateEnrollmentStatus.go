@@ -12,8 +12,8 @@ import (
 )
 
 // Updates the enrollment (opt in) status of an account to the AWS Compute
-// Optimizer service. If the account is a master account of an organization, this
-// action can also be used to enroll member accounts within the organization.
+// Optimizer service. If the account is a management account of an organization,
+// this action can also be used to enroll member accounts within the organization.
 func (c *Client) UpdateEnrollmentStatus(ctx context.Context, params *UpdateEnrollmentStatusInput, optFns ...func(*Options)) (*UpdateEnrollmentStatusOutput, error) {
 	if params == nil {
 		params = &UpdateEnrollmentStatusInput{}
@@ -38,7 +38,7 @@ type UpdateEnrollmentStatusInput struct {
 	Status types.Status
 
 	// Indicates whether to enroll member accounts of the organization if the your
-	// account is the master account of an organization.
+	// account is the management account of an organization.
 	IncludeMemberAccounts bool
 }
 

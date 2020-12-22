@@ -4082,6 +4082,11 @@ func awsRestjson1_deserializeOpDocumentDescribeInputDeviceOutput(v **DescribeInp
 				sv.Type = types.InputDeviceType(jtv)
 			}
 
+		case "uhdDeviceSettings":
+			if err := awsRestjson1_deserializeDocumentInputDeviceUhdSettings(&sv.UhdDeviceSettings, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -9531,6 +9536,11 @@ func awsRestjson1_deserializeOpDocumentUpdateInputDeviceOutput(v **UpdateInputDe
 				sv.Type = types.InputDeviceType(jtv)
 			}
 
+		case "uhdDeviceSettings":
+			if err := awsRestjson1_deserializeDocumentInputDeviceUhdSettings(&sv.UhdDeviceSettings, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -13041,6 +13051,59 @@ func awsRestjson1_deserializeDocumentAudioSelectorSettings(v **types.AudioSelect
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAudioSilenceFailoverSettings(v **types.AudioSilenceFailoverSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioSilenceFailoverSettings
+	if *v == nil {
+		sv = &types.AudioSilenceFailoverSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "audioSelectorName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.AudioSelectorName = ptr.String(jtv)
+			}
+
+		case "audioSilenceThresholdMsec":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AudioSilenceThresholdMsec = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAudioTrack(v **types.AudioTrack, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15671,8 +15734,18 @@ func awsRestjson1_deserializeDocumentFailoverConditionSettings(v **types.Failove
 
 	for key, value := range shape {
 		switch key {
+		case "audioSilenceSettings":
+			if err := awsRestjson1_deserializeDocumentAudioSilenceFailoverSettings(&sv.AudioSilenceSettings, value); err != nil {
+				return err
+			}
+
 		case "inputLossSettings":
 			if err := awsRestjson1_deserializeDocumentInputLossFailoverSettings(&sv.InputLossSettings, value); err != nil {
+				return err
+			}
+
+		case "videoBlackSettings":
+			if err := awsRestjson1_deserializeDocumentVideoBlackFailoverSettings(&sv.VideoBlackSettings, value); err != nil {
 				return err
 			}
 
@@ -19156,6 +19229,130 @@ func awsRestjson1_deserializeDocumentInputDeviceSummary(v **types.InputDeviceSum
 					return fmt.Errorf("expected InputDeviceType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.InputDeviceType(jtv)
+			}
+
+		case "uhdDeviceSettings":
+			if err := awsRestjson1_deserializeDocumentInputDeviceUhdSettings(&sv.UhdDeviceSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInputDeviceUhdSettings(v **types.InputDeviceUhdSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InputDeviceUhdSettings
+	if *v == nil {
+		sv = &types.InputDeviceUhdSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "activeInput":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputDeviceActiveInput to be of type string, got %T instead", value)
+				}
+				sv.ActiveInput = types.InputDeviceActiveInput(jtv)
+			}
+
+		case "configuredInput":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputDeviceConfiguredInput to be of type string, got %T instead", value)
+				}
+				sv.ConfiguredInput = types.InputDeviceConfiguredInput(jtv)
+			}
+
+		case "deviceState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputDeviceState to be of type string, got %T instead", value)
+				}
+				sv.DeviceState = types.InputDeviceState(jtv)
+			}
+
+		case "framerate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __double to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.Framerate = f64
+			}
+
+		case "height":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Height = int32(i64)
+			}
+
+		case "maxBitrate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxBitrate = int32(i64)
+			}
+
+		case "scanType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputDeviceScanType to be of type string, got %T instead", value)
+				}
+				sv.ScanType = types.InputDeviceScanType(jtv)
+			}
+
+		case "width":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Width = int32(i64)
 			}
 
 		default:
@@ -25793,6 +25990,63 @@ func awsRestjson1_deserializeDocumentValidationError(v **types.ValidationError, 
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVideoBlackFailoverSettings(v **types.VideoBlackFailoverSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VideoBlackFailoverSettings
+	if *v == nil {
+		sv = &types.VideoBlackFailoverSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "blackDetectThreshold":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __doubleMin0Max1 to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.BlackDetectThreshold = f64
+			}
+
+		case "videoBlackThresholdMsec":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.VideoBlackThresholdMsec = int32(i64)
 			}
 
 		default:

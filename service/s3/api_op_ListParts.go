@@ -4,6 +4,7 @@ package s3
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
@@ -106,7 +107,7 @@ type ListPartsInput struct {
 
 	// Specifies the part after which listing should begin. Only parts with higher part
 	// numbers will be listed.
-	PartNumberMarker int32
+	PartNumberMarker *string
 
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information
@@ -158,7 +159,7 @@ type ListPartsOutput struct {
 	// When a list is truncated, this element specifies the last part in the list, as
 	// well as the value to use for the part-number-marker request parameter in a
 	// subsequent request.
-	NextPartNumberMarker int32
+	NextPartNumberMarker *string
 
 	// Container element that identifies the object owner, after the object is created.
 	// If multipart upload is initiated by an IAM user, this element provides the
@@ -168,7 +169,7 @@ type ListPartsOutput struct {
 	// When a list is truncated, this element specifies the last part in the list, as
 	// well as the value to use for the part-number-marker request parameter in a
 	// subsequent request.
-	PartNumberMarker int32
+	PartNumberMarker *string
 
 	// Container for elements related to a particular part. A response can contain zero
 	// or more Part elements.
@@ -256,6 +257,87 @@ func addOperationListPartsMiddlewares(stack *middleware.Stack, options Options) 
 		return err
 	}
 	return nil
+}
+
+// ListPartsAPIClient is a client that implements the ListParts operation.
+type ListPartsAPIClient interface {
+	ListParts(context.Context, *ListPartsInput, ...func(*Options)) (*ListPartsOutput, error)
+}
+
+var _ ListPartsAPIClient = (*Client)(nil)
+
+// ListPartsPaginatorOptions is the paginator options for ListParts
+type ListPartsPaginatorOptions struct {
+	// Sets the maximum number of parts to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPartsPaginator is a paginator for ListParts
+type ListPartsPaginator struct {
+	options   ListPartsPaginatorOptions
+	client    ListPartsAPIClient
+	params    *ListPartsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPartsPaginator returns a new ListPartsPaginator
+func NewListPartsPaginator(client ListPartsAPIClient, params *ListPartsInput, optFns ...func(*ListPartsPaginatorOptions)) *ListPartsPaginator {
+	options := ListPartsPaginatorOptions{}
+	if params.MaxParts != 0 {
+		options.Limit = params.MaxParts
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListPartsInput{}
+	}
+
+	return &ListPartsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPartsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListParts page.
+func (p *ListPartsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPartsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PartNumberMarker = p.nextToken
+
+	params.MaxParts = p.options.Limit
+
+	result, err := p.client.ListParts(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPartNumberMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListParts(region string) *awsmiddleware.RegisterServiceMetadata {

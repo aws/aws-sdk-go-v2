@@ -6,7 +6,9 @@ import (
 	"time"
 )
 
-// Access Control List files for the documents in a data source.
+// Access Control List files for the documents in a data source. For the format of
+// the file, see Access control for S3 data sources
+// (https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html).
 type AccessControlListConfiguration struct {
 
 	// Path to the AWS S3 bucket that contains the ACL files.
@@ -463,7 +465,10 @@ type DataSourceConfiguration struct {
 	// Provides information necessary to create a data source connector for a database.
 	DatabaseConfiguration *DatabaseConfiguration
 
-	// Provided configuration for data sources that connect to Microsoft OneDrive.
+	// Provides configuration for data sources that connect to Google Drive.
+	GoogleDriveConfiguration *GoogleDriveConfiguration
+
+	// Provides configuration for data sources that connect to Microsoft OneDrive.
 	OneDriveConfiguration *OneDriveConfiguration
 
 	// Provides information to create a data source connector for a document repository
@@ -659,25 +664,48 @@ type DocumentAttribute struct {
 	// The value of the attribute.
 	//
 	// This member is required.
-	Value *DocumentAttributeValue
+	Value DocumentAttributeValue
 }
 
 // The value of a custom document attribute. You can only provide one value for a
 // custom attribute.
-type DocumentAttributeValue struct {
-
-	// A date expressed as an ISO 8601 string.
-	DateValue *time.Time
-
-	// A long integer value.
-	LongValue *int64
-
-	// A list of strings.
-	StringListValue []string
-
-	// A string, such as "department".
-	StringValue *string
+//
+// The following types satisfy this interface:
+//  DocumentAttributeValueMemberStringValue
+//  DocumentAttributeValueMemberStringListValue
+//  DocumentAttributeValueMemberLongValue
+//  DocumentAttributeValueMemberDateValue
+type DocumentAttributeValue interface {
+	isDocumentAttributeValue()
 }
+
+// A string, such as "department".
+type DocumentAttributeValueMemberStringValue struct {
+	Value string
+}
+
+func (*DocumentAttributeValueMemberStringValue) isDocumentAttributeValue() {}
+
+// A list of strings.
+type DocumentAttributeValueMemberStringListValue struct {
+	Value []string
+}
+
+func (*DocumentAttributeValueMemberStringListValue) isDocumentAttributeValue() {}
+
+// A long integer value.
+type DocumentAttributeValueMemberLongValue struct {
+	Value int64
+}
+
+func (*DocumentAttributeValueMemberLongValue) isDocumentAttributeValue() {}
+
+// A date expressed as an ISO 8601 string.
+type DocumentAttributeValueMemberDateValue struct {
+	Value time.Time
+}
+
+func (*DocumentAttributeValueMemberDateValue) isDocumentAttributeValue() {}
 
 // Provides the count of documents that match a particular attribute when doing a
 // faceted search.
@@ -688,7 +716,7 @@ type DocumentAttributeValueCountPair struct {
 	Count *int32
 
 	// The value of the attribute. For example, "HR."
-	DocumentAttributeValue *DocumentAttributeValue
+	DocumentAttributeValue DocumentAttributeValue
 }
 
 // Specifies the properties of a custom index field.
@@ -780,6 +808,54 @@ type FaqSummary struct {
 	UpdatedAt *time.Time
 }
 
+// Provides configuration information for data sources that connect to Google
+// Drive.
+type GoogleDriveConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of a AWS Secrets Manager secret that contains the
+	// credentials required to connect to Google Drive. For more information, see Using
+	// a Google Workspace Drive data source
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html).
+	//
+	// This member is required.
+	SecretArn *string
+
+	// A list of MIME types to exclude from the index. All documents matching the
+	// specified MIME type are excluded. For a list of MIME types, see Using a Google
+	// Workspace Drive data source
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html).
+	ExcludeMimeTypes []string
+
+	// A list of identifiers or shared drives to exclude from the index. All files and
+	// folders stored on the shared drive are excluded.
+	ExcludeSharedDrives []string
+
+	// A list of email addresses of the users. Documents owned by these users are
+	// excluded from the index. Documents shared with excluded users are indexed unless
+	// they are excluded in another way.
+	ExcludeUserAccounts []string
+
+	// A list of regular expression patterns that apply to the path on Google Drive.
+	// Items that match the pattern are excluded from the index from both shared drives
+	// and users' My Drives. Items that don't match the pattern are included in the
+	// index. If an item matches both an exclusion pattern and an inclusion pattern, it
+	// is excluded from the index.
+	ExclusionPatterns []string
+
+	// Defines mapping between a field in the Google Drive and a Amazon Kendra index
+	// field. If you are using the console, you can define index fields when creating
+	// the mapping. If you are using the API, you must first create the field using the
+	// UpdateIndex operation.
+	FieldMappings []DataSourceToIndexFieldMapping
+
+	// A list of regular expression patterns that apply to path on Google Drive. Items
+	// that match the pattern are included in the index from both shared drives and
+	// users' My Drives. Items that don't match the pattern are excluded from the
+	// index. If an item matches both an inclusion pattern and an exclusion pattern, it
+	// is excluded from the index.
+	InclusionPatterns []string
+}
+
 // Provides information that you can use to highlight a search result so that your
 // users can quickly identify terms in the response.
 type Highlight struct {
@@ -797,6 +873,9 @@ type Highlight struct {
 	// Indicates whether the response is the best response. True if this is the best
 	// response; otherwise, false.
 	TopAnswer bool
+
+	// The highlight type.
+	Type HighlightType
 }
 
 // A summary of information about an index.
@@ -902,7 +981,7 @@ type OneDriveConfiguration struct {
 	// This member is required.
 	SecretArn *string
 
-	// Tha Azure Active Directory domain of the organization.
+	// The Azure Active Directory domain of the organization.
 	//
 	// This member is required.
 	TenantDomain *string
@@ -991,6 +1070,12 @@ type QueryResultItem struct {
 	// The URI of the original location of the document.
 	DocumentURI *string
 
+	// A token that identifies a particular result from a particular query. Use this
+	// token to provide click-through feedback for the result. For more information,
+	// see  Submitting feedback
+	// (https://docs.aws.amazon.com/kendra/latest/dg/submitting-feedback.html).
+	FeedbackToken *string
+
 	// The unique identifier for the query result.
 	Id *string
 
@@ -1075,7 +1160,8 @@ type S3DataSourceConfiguration struct {
 	BucketName *string
 
 	// Provides the path to the S3 bucket that contains the user context filtering
-	// files for the data source.
+	// files for the data source. For the format of the file, see Access control for S3
+	// data sources (https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html).
 	AccessControlListConfiguration *AccessControlListConfiguration
 
 	// Document metadata files that contain information such as the document access
@@ -1604,6 +1690,25 @@ type TextWithHighlights struct {
 	Text *string
 }
 
+// An array of summary information for one or more thesauruses.
+type ThesaurusSummary struct {
+
+	// The Unix datetime that the thesaurus was created.
+	CreatedAt *time.Time
+
+	// The identifier of the thesaurus.
+	Id *string
+
+	// The name of the thesaurus.
+	Name *string
+
+	// The status of the thesaurus.
+	Status ThesaurusStatus
+
+	// The Unix datetime that the thesaurus was last updated.
+	UpdatedAt *time.Time
+}
+
 // Provides a range of time.
 type TimeRange struct {
 
@@ -1630,3 +1735,12 @@ type UserTokenConfiguration struct {
 	// Information about the JWT token type configuration.
 	JwtTokenTypeConfiguration *JwtTokenTypeConfiguration
 }
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+}
+
+func (*UnknownUnionMember) isDocumentAttributeValue() {}

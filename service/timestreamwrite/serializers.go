@@ -767,6 +767,11 @@ func awsAwsjson10_serializeDocumentRecord(v *types.Record, value smithyjson.Valu
 		ok.String(string(v.TimeUnit))
 	}
 
+	if v.Version != 0 {
+		ok := object.Key("Version")
+		ok.Long(v.Version)
+	}
+
 	return nil
 }
 

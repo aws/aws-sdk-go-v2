@@ -886,11 +886,11 @@ func validateOpGetTableMetadataInput(v *GetTableMetadataInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetTableMetadataInput"}
-	if v.DatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
-	}
 	if v.CatalogName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CatalogName"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
@@ -937,11 +937,11 @@ func validateOpListTableMetadataInput(v *ListTableMetadataInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListTableMetadataInput"}
-	if v.DatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
-	}
 	if v.CatalogName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CatalogName"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1005,11 +1005,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1041,11 +1041,11 @@ func validateOpUpdateDataCatalogInput(v *UpdateDataCatalogInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDataCatalogInput"}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

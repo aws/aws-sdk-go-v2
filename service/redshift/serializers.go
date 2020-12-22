@@ -5311,9 +5311,9 @@ func awsAwsquery_serializeDocumentResizeClusterMessage(v *types.ResizeClusterMes
 		objectKey.String(*v.NodeType)
 	}
 
-	if v.NumberOfNodes != 0 {
+	if v.NumberOfNodes != nil {
 		objectKey := object.Key("NumberOfNodes")
-		objectKey.Integer(v.NumberOfNodes)
+		objectKey.Integer(*v.NumberOfNodes)
 	}
 
 	return nil
@@ -5726,6 +5726,11 @@ func awsAwsquery_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, va
 	if v.AvailabilityZone != nil {
 		objectKey := object.Key("AvailabilityZone")
 		objectKey.String(*v.AvailabilityZone)
+	}
+
+	if v.AvailabilityZoneRelocation != nil {
+		objectKey := object.Key("AvailabilityZoneRelocation")
+		objectKey.Boolean(*v.AvailabilityZoneRelocation)
 	}
 
 	if v.ClusterIdentifier != nil {
@@ -7553,6 +7558,16 @@ func awsAwsquery_serializeOpDocumentModifyClusterInput(v *ModifyClusterInput, va
 		objectKey.Integer(*v.AutomatedSnapshotRetentionPeriod)
 	}
 
+	if v.AvailabilityZone != nil {
+		objectKey := object.Key("AvailabilityZone")
+		objectKey.String(*v.AvailabilityZone)
+	}
+
+	if v.AvailabilityZoneRelocation != nil {
+		objectKey := object.Key("AvailabilityZoneRelocation")
+		objectKey.Boolean(*v.AvailabilityZoneRelocation)
+	}
+
 	if v.ClusterIdentifier != nil {
 		objectKey := object.Key("ClusterIdentifier")
 		objectKey.String(*v.ClusterIdentifier)
@@ -7638,6 +7653,11 @@ func awsAwsquery_serializeOpDocumentModifyClusterInput(v *ModifyClusterInput, va
 	if v.NumberOfNodes != nil {
 		objectKey := object.Key("NumberOfNodes")
 		objectKey.Integer(*v.NumberOfNodes)
+	}
+
+	if v.Port != nil {
+		objectKey := object.Key("Port")
+		objectKey.Integer(*v.Port)
 	}
 
 	if v.PreferredMaintenanceWindow != nil {
@@ -8031,9 +8051,9 @@ func awsAwsquery_serializeOpDocumentResizeClusterInput(v *ResizeClusterInput, va
 		objectKey.String(*v.NodeType)
 	}
 
-	if v.NumberOfNodes != 0 {
+	if v.NumberOfNodes != nil {
 		objectKey := object.Key("NumberOfNodes")
-		objectKey.Integer(v.NumberOfNodes)
+		objectKey.Integer(*v.NumberOfNodes)
 	}
 
 	return nil
@@ -8061,6 +8081,11 @@ func awsAwsquery_serializeOpDocumentRestoreFromClusterSnapshotInput(v *RestoreFr
 	if v.AvailabilityZone != nil {
 		objectKey := object.Key("AvailabilityZone")
 		objectKey.String(*v.AvailabilityZone)
+	}
+
+	if v.AvailabilityZoneRelocation != nil {
+		objectKey := object.Key("AvailabilityZoneRelocation")
+		objectKey.Boolean(*v.AvailabilityZoneRelocation)
 	}
 
 	if v.ClusterIdentifier != nil {

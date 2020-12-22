@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves GuardDuty member accounts (to the current GuardDuty master account)
-// specified by the account IDs.
+// Retrieves GuardDuty member accounts (of the current GuardDuty administrator
+// account) specified by the account IDs.
 func (c *Client) GetMembers(ctx context.Context, params *GetMembersInput, optFns ...func(*Options)) (*GetMembersOutput, error) {
 	if params == nil {
 		params = &GetMembersInput{}

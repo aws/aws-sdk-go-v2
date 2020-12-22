@@ -6,6 +6,17 @@ import (
 	"time"
 )
 
+// Specifies a location in AWS.
+type AWSLocation struct {
+
+	// The Amazon Resource Name (ARN) of the subnet the device is located in.
+	SubnetArn *string
+
+	// The Zone the device is located in. This can be the ID of an Availability Zone,
+	// Local Zone, Wavelength Zone, or an Outpost.
+	Zone *string
+}
+
 // Describes bandwidth information.
 type Bandwidth struct {
 
@@ -14,6 +25,43 @@ type Bandwidth struct {
 
 	// Upload speed in Mbps.
 	UploadSpeed *int32
+}
+
+// Describes a connection.
+type Connection struct {
+
+	// The ID of the second device in the connection.
+	ConnectedDeviceId *string
+
+	// The ID of the link for the second device in the connection.
+	ConnectedLinkId *string
+
+	// The Amazon Resource Name (ARN) of the connection.
+	ConnectionArn *string
+
+	// The ID of the connection.
+	ConnectionId *string
+
+	// The date and time that the connection was created.
+	CreatedAt *time.Time
+
+	// The description of the connection.
+	Description *string
+
+	// The ID of the first device in the connection.
+	DeviceId *string
+
+	// The ID of the global network.
+	GlobalNetworkId *string
+
+	// The ID of the link for the first device in the connection.
+	LinkId *string
+
+	// The state of the connection.
+	State ConnectionState
+
+	// The tags for the connection.
+	Tags []Tag
 }
 
 // Describes the association between a customer gateway, a device, and a link.
@@ -37,6 +85,9 @@ type CustomerGatewayAssociation struct {
 
 // Describes a device.
 type Device struct {
+
+	// The AWS location of the device.
+	AWSLocation *AWSLocation
 
 	// The date and time that the site was created.
 	CreatedAt *time.Time
@@ -202,6 +253,25 @@ type Tag struct {
 
 	// The tag value. Length Constraints: Maximum length of 256 characters.
 	Value *string
+}
+
+// Describes a transit gateway Connect peer association.
+type TransitGatewayConnectPeerAssociation struct {
+
+	// The ID of the device.
+	DeviceId *string
+
+	// The ID of the global network.
+	GlobalNetworkId *string
+
+	// The ID of the link.
+	LinkId *string
+
+	// The state of the association.
+	State TransitGatewayConnectPeerAssociationState
+
+	// The Amazon Resource Name (ARN) of the transit gateway Connect peer.
+	TransitGatewayConnectPeerArn *string
 }
 
 // Describes the registration of a transit gateway to a global network.

@@ -1096,6 +1096,76 @@ func awsAwsjson10_deserializeDocumentQueryExecutionException(v **types.QueryExec
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentQueryStatus(v **types.QueryStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QueryStatus
+	if *v == nil {
+		sv = &types.QueryStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CumulativeBytesMetered":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CumulativeBytesMetered = i64
+			}
+
+		case "CumulativeBytesScanned":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CumulativeBytesScanned = i64
+			}
+
+		case "ProgressPercentage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Double to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.ProgressPercentage = f64
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentRow(v **types.Row, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -1499,6 +1569,11 @@ func awsAwsjson10_deserializeOpDocumentQueryOutput(v **QueryOutput, value interf
 					return fmt.Errorf("expected QueryId to be of type string, got %T instead", value)
 				}
 				sv.QueryId = ptr.String(jtv)
+			}
+
+		case "QueryStatus":
+			if err := awsAwsjson10_deserializeDocumentQueryStatus(&sv.QueryStatus, value); err != nil {
+				return err
 			}
 
 		case "Rows":

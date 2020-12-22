@@ -1071,11 +1071,11 @@ func validateAlarmIdentifier(v *types.AlarmIdentifier) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AlarmIdentifier"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if len(v.Region) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Region"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1089,11 +1089,11 @@ func validateAliasTarget(v *types.AliasTarget) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AliasTarget"}
-	if v.DNSName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DNSName"))
-	}
 	if v.HostedZoneId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
+	}
+	if v.DNSName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DNSName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1165,13 +1165,13 @@ func validateHealthCheckConfig(v *types.HealthCheckConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HealthCheckConfig"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
 	if v.AlarmIdentifier != nil {
 		if err := validateAlarmIdentifier(v.AlarmIdentifier); err != nil {
 			invalidParams.AddNested("AlarmIdentifier", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1217,21 +1217,21 @@ func validateResourceRecordSet(v *types.ResourceRecordSet) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceRecordSet"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
-	if v.AliasTarget != nil {
-		if err := validateAliasTarget(v.AliasTarget); err != nil {
-			invalidParams.AddNested("AliasTarget", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.ResourceRecords != nil {
 		if err := validateResourceRecords(v.ResourceRecords); err != nil {
 			invalidParams.AddNested("ResourceRecords", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.AliasTarget != nil {
+		if err := validateAliasTarget(v.AliasTarget); err != nil {
+			invalidParams.AddNested("AliasTarget", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1263,15 +1263,15 @@ func validateOpChangeResourceRecordSetsInput(v *ChangeResourceRecordSetsInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ChangeResourceRecordSetsInput"}
+	if v.HostedZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
+	}
 	if v.ChangeBatch == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChangeBatch"))
 	} else if v.ChangeBatch != nil {
 		if err := validateChangeBatch(v.ChangeBatch); err != nil {
 			invalidParams.AddNested("ChangeBatch", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.HostedZoneId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1285,11 +1285,11 @@ func validateOpChangeTagsForResourceInput(v *ChangeTagsForResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ChangeTagsForResourceInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if len(v.ResourceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1303,15 +1303,15 @@ func validateOpCreateHealthCheckInput(v *CreateHealthCheckInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateHealthCheckInput"}
+	if v.CallerReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CallerReference"))
+	}
 	if v.HealthCheckConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HealthCheckConfig"))
 	} else if v.HealthCheckConfig != nil {
 		if err := validateHealthCheckConfig(v.HealthCheckConfig); err != nil {
 			invalidParams.AddNested("HealthCheckConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.CallerReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CallerReference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1394,20 +1394,20 @@ func validateOpCreateTrafficPolicyInstanceInput(v *CreateTrafficPolicyInstanceIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTrafficPolicyInstanceInput"}
-	if v.TTL == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TTL"))
-	}
 	if v.HostedZoneId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
 	}
-	if v.TrafficPolicyVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TrafficPolicyVersion"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.TTL == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TTL"))
 	}
 	if v.TrafficPolicyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrafficPolicyId"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.TrafficPolicyVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrafficPolicyVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1421,11 +1421,11 @@ func validateOpCreateTrafficPolicyVersionInput(v *CreateTrafficPolicyVersionInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTrafficPolicyVersionInput"}
-	if v.Document == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Document"))
-	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Document == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Document"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1439,11 +1439,11 @@ func validateOpCreateVPCAssociationAuthorizationInput(v *CreateVPCAssociationAut
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateVPCAssociationAuthorizationInput"}
-	if v.VPC == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VPC"))
-	}
 	if v.HostedZoneId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
+	}
+	if v.VPC == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VPC"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1676,11 +1676,11 @@ func validateOpGetHostedZoneLimitInput(v *GetHostedZoneLimitInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetHostedZoneLimitInput"}
-	if v.HostedZoneId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.HostedZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1724,11 +1724,11 @@ func validateOpGetReusableDelegationSetLimitInput(v *GetReusableDelegationSetLim
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetReusableDelegationSetLimitInput"}
-	if v.DelegationSetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DelegationSetId"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.DelegationSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DelegationSetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1742,11 +1742,11 @@ func validateOpGetTrafficPolicyInput(v *GetTrafficPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetTrafficPolicyInput"}
-	if v.Version == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Version"))
-	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1775,11 +1775,11 @@ func validateOpListHostedZonesByVPCInput(v *ListHostedZonesByVPCInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListHostedZonesByVPCInput"}
-	if len(v.VPCRegion) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("VPCRegion"))
-	}
 	if v.VPCId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VPCId"))
+	}
+	if len(v.VPCRegion) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("VPCRegion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1808,11 +1808,11 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if len(v.ResourceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1826,11 +1826,11 @@ func validateOpListTagsForResourcesInput(v *ListTagsForResourcesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourcesInput"}
-	if v.ResourceIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceIds"))
-	}
 	if len(v.ResourceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.ResourceIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1859,11 +1859,11 @@ func validateOpListTrafficPolicyInstancesByPolicyInput(v *ListTrafficPolicyInsta
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListTrafficPolicyInstancesByPolicyInput"}
-	if v.TrafficPolicyVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TrafficPolicyVersion"))
-	}
 	if v.TrafficPolicyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrafficPolicyId"))
+	}
+	if v.TrafficPolicyVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrafficPolicyVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1928,13 +1928,13 @@ func validateOpUpdateHealthCheckInput(v *UpdateHealthCheckInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateHealthCheckInput"}
+	if v.HealthCheckId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HealthCheckId"))
+	}
 	if v.AlarmIdentifier != nil {
 		if err := validateAlarmIdentifier(v.AlarmIdentifier); err != nil {
 			invalidParams.AddNested("AlarmIdentifier", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.HealthCheckId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HealthCheckId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1963,14 +1963,14 @@ func validateOpUpdateTrafficPolicyCommentInput(v *UpdateTrafficPolicyCommentInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTrafficPolicyCommentInput"}
-	if v.Comment == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Comment"))
-	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if v.Version == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if v.Comment == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Comment"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1984,17 +1984,17 @@ func validateOpUpdateTrafficPolicyInstanceInput(v *UpdateTrafficPolicyInstanceIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTrafficPolicyInstanceInput"}
-	if v.TTL == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TTL"))
-	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
-	if v.TrafficPolicyVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TrafficPolicyVersion"))
+	if v.TTL == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TTL"))
 	}
 	if v.TrafficPolicyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrafficPolicyId"))
+	}
+	if v.TrafficPolicyVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrafficPolicyVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

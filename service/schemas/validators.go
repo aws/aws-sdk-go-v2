@@ -692,14 +692,14 @@ func validateOpCreateSchemaInput(v *CreateSchemaInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSchemaInput"}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
 	if v.RegistryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RegistryName"))
 	}
 	if v.SchemaName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
-	}
-	if v.Content == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Content"))
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
@@ -746,11 +746,11 @@ func validateOpDeleteSchemaInput(v *DeleteSchemaInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteSchemaInput"}
-	if v.SchemaName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
-	}
 	if v.RegistryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RegistryName"))
+	}
+	if v.SchemaName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -764,11 +764,11 @@ func validateOpDeleteSchemaVersionInput(v *DeleteSchemaVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteSchemaVersionInput"}
-	if v.SchemaName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
-	}
 	if v.RegistryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RegistryName"))
+	}
+	if v.SchemaName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
 	}
 	if v.SchemaVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaVersion"))
@@ -785,14 +785,14 @@ func validateOpDescribeCodeBindingInput(v *DescribeCodeBindingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeCodeBindingInput"}
-	if v.SchemaName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
-	}
 	if v.Language == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Language"))
 	}
 	if v.RegistryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RegistryName"))
+	}
+	if v.SchemaName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -836,11 +836,11 @@ func validateOpDescribeSchemaInput(v *DescribeSchemaInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeSchemaInput"}
-	if v.SchemaName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
-	}
 	if v.RegistryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RegistryName"))
+	}
+	if v.SchemaName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -854,11 +854,11 @@ func validateOpExportSchemaInput(v *ExportSchemaInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExportSchemaInput"}
-	if v.SchemaName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
-	}
 	if v.RegistryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RegistryName"))
+	}
+	if v.SchemaName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
 	}
 	if v.Type == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
@@ -875,14 +875,14 @@ func validateOpGetCodeBindingSourceInput(v *GetCodeBindingSourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetCodeBindingSourceInput"}
-	if v.SchemaName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
-	}
 	if v.Language == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Language"))
 	}
 	if v.RegistryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RegistryName"))
+	}
+	if v.SchemaName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -896,11 +896,11 @@ func validateOpGetDiscoveredSchemaInput(v *GetDiscoveredSchemaInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDiscoveredSchemaInput"}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
 	if v.Events == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Events"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -962,14 +962,14 @@ func validateOpPutCodeBindingInput(v *PutCodeBindingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutCodeBindingInput"}
+	if v.Language == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Language"))
+	}
 	if v.RegistryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RegistryName"))
 	}
 	if v.SchemaName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
-	}
-	if v.Language == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Language"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

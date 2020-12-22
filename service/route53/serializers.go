@@ -2901,7 +2901,7 @@ func awsRestxml_serializeOpHttpBindingsListGeoLocationsInput(v *ListGeoLocations
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("maxitems").String(*v.MaxItems)
+		encoder.SetQuery("maxitems").Integer(*v.MaxItems)
 	}
 
 	if v.StartContinentCode != nil {
@@ -2975,7 +2975,7 @@ func awsRestxml_serializeOpHttpBindingsListHealthChecksInput(v *ListHealthChecks
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("maxitems").String(*v.MaxItems)
+		encoder.SetQuery("maxitems").Integer(*v.MaxItems)
 	}
 
 	return nil
@@ -3041,7 +3041,7 @@ func awsRestxml_serializeOpHttpBindingsListHostedZonesInput(v *ListHostedZonesIn
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("maxitems").String(*v.MaxItems)
+		encoder.SetQuery("maxitems").Integer(*v.MaxItems)
 	}
 
 	return nil
@@ -3107,7 +3107,7 @@ func awsRestxml_serializeOpHttpBindingsListHostedZonesByNameInput(v *ListHostedZ
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("maxitems").String(*v.MaxItems)
+		encoder.SetQuery("maxitems").Integer(*v.MaxItems)
 	}
 
 	return nil
@@ -3165,7 +3165,7 @@ func awsRestxml_serializeOpHttpBindingsListHostedZonesByVPCInput(v *ListHostedZo
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("maxitems").String(*v.MaxItems)
+		encoder.SetQuery("maxitems").Integer(*v.MaxItems)
 	}
 
 	if v.NextToken != nil {
@@ -3239,7 +3239,7 @@ func awsRestxml_serializeOpHttpBindingsListQueryLoggingConfigsInput(v *ListQuery
 	}
 
 	if v.MaxResults != nil {
-		encoder.SetQuery("maxresults").String(*v.MaxResults)
+		encoder.SetQuery("maxresults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3310,7 +3310,7 @@ func awsRestxml_serializeOpHttpBindingsListResourceRecordSetsInput(v *ListResour
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("maxitems").String(*v.MaxItems)
+		encoder.SetQuery("maxitems").Integer(*v.MaxItems)
 	}
 
 	if v.StartRecordIdentifier != nil {
@@ -3384,7 +3384,7 @@ func awsRestxml_serializeOpHttpBindingsListReusableDelegationSetsInput(v *ListRe
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("maxitems").String(*v.MaxItems)
+		encoder.SetQuery("maxitems").Integer(*v.MaxItems)
 	}
 
 	return nil
@@ -3613,7 +3613,7 @@ func awsRestxml_serializeOpHttpBindingsListTrafficPoliciesInput(v *ListTrafficPo
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("maxitems").String(*v.MaxItems)
+		encoder.SetQuery("maxitems").Integer(*v.MaxItems)
 	}
 
 	if v.TrafficPolicyIdMarker != nil {
@@ -3679,7 +3679,7 @@ func awsRestxml_serializeOpHttpBindingsListTrafficPolicyInstancesInput(v *ListTr
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("maxitems").String(*v.MaxItems)
+		encoder.SetQuery("maxitems").Integer(*v.MaxItems)
 	}
 
 	if v.TrafficPolicyInstanceNameMarker != nil {
@@ -3749,7 +3749,7 @@ func awsRestxml_serializeOpHttpBindingsListTrafficPolicyInstancesByHostedZoneInp
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("maxitems").String(*v.MaxItems)
+		encoder.SetQuery("maxitems").Integer(*v.MaxItems)
 	}
 
 	if v.TrafficPolicyInstanceNameMarker != nil {
@@ -3819,7 +3819,7 @@ func awsRestxml_serializeOpHttpBindingsListTrafficPolicyInstancesByPolicyInput(v
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("maxitems").String(*v.MaxItems)
+		encoder.SetQuery("maxitems").Integer(*v.MaxItems)
 	}
 
 	if v.TrafficPolicyId != nil {
@@ -3902,7 +3902,7 @@ func awsRestxml_serializeOpHttpBindingsListTrafficPolicyVersionsInput(v *ListTra
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("maxitems").String(*v.MaxItems)
+		encoder.SetQuery("maxitems").Integer(*v.MaxItems)
 	}
 
 	if v.TrafficPolicyVersionMarker != nil {
@@ -3973,7 +3973,7 @@ func awsRestxml_serializeOpHttpBindingsListVPCAssociationAuthorizationsInput(v *
 	}
 
 	if v.MaxResults != nil {
-		encoder.SetQuery("maxresults").String(*v.MaxResults)
+		encoder.SetQuery("maxresults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {

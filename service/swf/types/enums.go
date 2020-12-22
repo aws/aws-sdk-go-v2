@@ -4,14 +4,6 @@ package types
 
 type ActivityTaskTimeoutType string
 
-// Enum values for ActivityTaskTimeoutType
-const (
-	ActivityTaskTimeoutTypeStartToClose    ActivityTaskTimeoutType = "START_TO_CLOSE"
-	ActivityTaskTimeoutTypeScheduleToStart ActivityTaskTimeoutType = "SCHEDULE_TO_START"
-	ActivityTaskTimeoutTypeScheduleToClose ActivityTaskTimeoutType = "SCHEDULE_TO_CLOSE"
-	ActivityTaskTimeoutTypeHeartbeat       ActivityTaskTimeoutType = "HEARTBEAT"
-)
-
 // Values returns all known values for ActivityTaskTimeoutType. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -26,12 +18,6 @@ func (ActivityTaskTimeoutType) Values() []ActivityTaskTimeoutType {
 
 type CancelTimerFailedCause string
 
-// Enum values for CancelTimerFailedCause
-const (
-	CancelTimerFailedCauseTimerIdUnknown        CancelTimerFailedCause = "TIMER_ID_UNKNOWN"
-	CancelTimerFailedCauseOperationNotPermitted CancelTimerFailedCause = "OPERATION_NOT_PERMITTED"
-)
-
 // Values returns all known values for CancelTimerFailedCause. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -43,12 +29,6 @@ func (CancelTimerFailedCause) Values() []CancelTimerFailedCause {
 }
 
 type CancelWorkflowExecutionFailedCause string
-
-// Enum values for CancelWorkflowExecutionFailedCause
-const (
-	CancelWorkflowExecutionFailedCauseUnhandledDecision     CancelWorkflowExecutionFailedCause = "UNHANDLED_DECISION"
-	CancelWorkflowExecutionFailedCauseOperationNotPermitted CancelWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
-)
 
 // Values returns all known values for CancelWorkflowExecutionFailedCause. Note
 // that this can be expanded in the future, and so it is only as up to date as the
@@ -63,13 +43,6 @@ func (CancelWorkflowExecutionFailedCause) Values() []CancelWorkflowExecutionFail
 
 type ChildPolicy string
 
-// Enum values for ChildPolicy
-const (
-	ChildPolicyTerminate     ChildPolicy = "TERMINATE"
-	ChildPolicyRequestCancel ChildPolicy = "REQUEST_CANCEL"
-	ChildPolicyAbandon       ChildPolicy = "ABANDON"
-)
-
 // Values returns all known values for ChildPolicy. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
 // this slice is not guaranteed to be stable across updates.
@@ -82,16 +55,6 @@ func (ChildPolicy) Values() []ChildPolicy {
 }
 
 type CloseStatus string
-
-// Enum values for CloseStatus
-const (
-	CloseStatusCompleted      CloseStatus = "COMPLETED"
-	CloseStatusFailed         CloseStatus = "FAILED"
-	CloseStatusCanceled       CloseStatus = "CANCELED"
-	CloseStatusTerminated     CloseStatus = "TERMINATED"
-	CloseStatusContinuedAsNew CloseStatus = "CONTINUED_AS_NEW"
-	CloseStatusTimedOut       CloseStatus = "TIMED_OUT"
-)
 
 // Values returns all known values for CloseStatus. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
@@ -109,12 +72,6 @@ func (CloseStatus) Values() []CloseStatus {
 
 type CompleteWorkflowExecutionFailedCause string
 
-// Enum values for CompleteWorkflowExecutionFailedCause
-const (
-	CompleteWorkflowExecutionFailedCauseUnhandledDecision     CompleteWorkflowExecutionFailedCause = "UNHANDLED_DECISION"
-	CompleteWorkflowExecutionFailedCauseOperationNotPermitted CompleteWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
-)
-
 // Values returns all known values for CompleteWorkflowExecutionFailedCause. Note
 // that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
@@ -127,19 +84,6 @@ func (CompleteWorkflowExecutionFailedCause) Values() []CompleteWorkflowExecution
 }
 
 type ContinueAsNewWorkflowExecutionFailedCause string
-
-// Enum values for ContinueAsNewWorkflowExecutionFailedCause
-const (
-	ContinueAsNewWorkflowExecutionFailedCauseUnhandledDecision                            ContinueAsNewWorkflowExecutionFailedCause = "UNHANDLED_DECISION"
-	ContinueAsNewWorkflowExecutionFailedCauseWorkflowTypeDeprecated                       ContinueAsNewWorkflowExecutionFailedCause = "WORKFLOW_TYPE_DEPRECATED"
-	ContinueAsNewWorkflowExecutionFailedCauseWorkflowTypeDoesNotExist                     ContinueAsNewWorkflowExecutionFailedCause = "WORKFLOW_TYPE_DOES_NOT_EXIST"
-	ContinueAsNewWorkflowExecutionFailedCauseDefaultExecutionStartToCloseTimeoutUndefined ContinueAsNewWorkflowExecutionFailedCause = "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED"
-	ContinueAsNewWorkflowExecutionFailedCauseDefaultTaskStartToCloseTimeoutUndefined      ContinueAsNewWorkflowExecutionFailedCause = "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED"
-	ContinueAsNewWorkflowExecutionFailedCauseDefaultTaskListUndefined                     ContinueAsNewWorkflowExecutionFailedCause = "DEFAULT_TASK_LIST_UNDEFINED"
-	ContinueAsNewWorkflowExecutionFailedCauseDefaultChildPolicyUndefined                  ContinueAsNewWorkflowExecutionFailedCause = "DEFAULT_CHILD_POLICY_UNDEFINED"
-	ContinueAsNewWorkflowExecutionFailedCauseContinueAsNewWorkflowExecutionRateExceeded   ContinueAsNewWorkflowExecutionFailedCause = "CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED"
-	ContinueAsNewWorkflowExecutionFailedCauseOperationNotPermitted                        ContinueAsNewWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
-)
 
 // Values returns all known values for ContinueAsNewWorkflowExecutionFailedCause.
 // Note that this can be expanded in the future, and so it is only as up to date as
@@ -161,11 +105,6 @@ func (ContinueAsNewWorkflowExecutionFailedCause) Values() []ContinueAsNewWorkflo
 
 type DecisionTaskTimeoutType string
 
-// Enum values for DecisionTaskTimeoutType
-const (
-	DecisionTaskTimeoutTypeStartToClose DecisionTaskTimeoutType = "START_TO_CLOSE"
-)
-
 // Values returns all known values for DecisionTaskTimeoutType. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -176,23 +115,6 @@ func (DecisionTaskTimeoutType) Values() []DecisionTaskTimeoutType {
 }
 
 type DecisionType string
-
-// Enum values for DecisionType
-const (
-	DecisionTypeScheduleactivitytask                   DecisionType = "ScheduleActivityTask"
-	DecisionTypeRequestcancelactivitytask              DecisionType = "RequestCancelActivityTask"
-	DecisionTypeCompleteworkflowexecution              DecisionType = "CompleteWorkflowExecution"
-	DecisionTypeFailworkflowexecution                  DecisionType = "FailWorkflowExecution"
-	DecisionTypeCancelworkflowexecution                DecisionType = "CancelWorkflowExecution"
-	DecisionTypeContinueasnewworkflowexecution         DecisionType = "ContinueAsNewWorkflowExecution"
-	DecisionTypeRecordmarker                           DecisionType = "RecordMarker"
-	DecisionTypeStarttimer                             DecisionType = "StartTimer"
-	DecisionTypeCanceltimer                            DecisionType = "CancelTimer"
-	DecisionTypeSignalexternalworkflowexecution        DecisionType = "SignalExternalWorkflowExecution"
-	DecisionTypeRequestcancelexternalworkflowexecution DecisionType = "RequestCancelExternalWorkflowExecution"
-	DecisionTypeStartchildworkflowexecution            DecisionType = "StartChildWorkflowExecution"
-	DecisionTypeSchedulelambdafunction                 DecisionType = "ScheduleLambdaFunction"
-)
 
 // Values returns all known values for DecisionType. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
@@ -216,64 +138,6 @@ func (DecisionType) Values() []DecisionType {
 }
 
 type EventType string
-
-// Enum values for EventType
-const (
-	EventTypeWorkflowexecutionstarted                        EventType = "WorkflowExecutionStarted"
-	EventTypeWorkflowexecutioncancelrequested                EventType = "WorkflowExecutionCancelRequested"
-	EventTypeWorkflowexecutioncompleted                      EventType = "WorkflowExecutionCompleted"
-	EventTypeCompleteworkflowexecutionfailed                 EventType = "CompleteWorkflowExecutionFailed"
-	EventTypeWorkflowexecutionfailed                         EventType = "WorkflowExecutionFailed"
-	EventTypeFailworkflowexecutionfailed                     EventType = "FailWorkflowExecutionFailed"
-	EventTypeWorkflowexecutiontimedout                       EventType = "WorkflowExecutionTimedOut"
-	EventTypeWorkflowexecutioncanceled                       EventType = "WorkflowExecutionCanceled"
-	EventTypeCancelworkflowexecutionfailed                   EventType = "CancelWorkflowExecutionFailed"
-	EventTypeWorkflowexecutioncontinuedasnew                 EventType = "WorkflowExecutionContinuedAsNew"
-	EventTypeContinueasnewworkflowexecutionfailed            EventType = "ContinueAsNewWorkflowExecutionFailed"
-	EventTypeWorkflowexecutionterminated                     EventType = "WorkflowExecutionTerminated"
-	EventTypeDecisiontaskscheduled                           EventType = "DecisionTaskScheduled"
-	EventTypeDecisiontaskstarted                             EventType = "DecisionTaskStarted"
-	EventTypeDecisiontaskcompleted                           EventType = "DecisionTaskCompleted"
-	EventTypeDecisiontasktimedout                            EventType = "DecisionTaskTimedOut"
-	EventTypeActivitytaskscheduled                           EventType = "ActivityTaskScheduled"
-	EventTypeScheduleactivitytaskfailed                      EventType = "ScheduleActivityTaskFailed"
-	EventTypeActivitytaskstarted                             EventType = "ActivityTaskStarted"
-	EventTypeActivitytaskcompleted                           EventType = "ActivityTaskCompleted"
-	EventTypeActivitytaskfailed                              EventType = "ActivityTaskFailed"
-	EventTypeActivitytasktimedout                            EventType = "ActivityTaskTimedOut"
-	EventTypeActivitytaskcanceled                            EventType = "ActivityTaskCanceled"
-	EventTypeActivitytaskcancelrequested                     EventType = "ActivityTaskCancelRequested"
-	EventTypeRequestcancelactivitytaskfailed                 EventType = "RequestCancelActivityTaskFailed"
-	EventTypeWorkflowexecutionsignaled                       EventType = "WorkflowExecutionSignaled"
-	EventTypeMarkerrecorded                                  EventType = "MarkerRecorded"
-	EventTypeRecordmarkerfailed                              EventType = "RecordMarkerFailed"
-	EventTypeTimerstarted                                    EventType = "TimerStarted"
-	EventTypeStarttimerfailed                                EventType = "StartTimerFailed"
-	EventTypeTimerfired                                      EventType = "TimerFired"
-	EventTypeTimercanceled                                   EventType = "TimerCanceled"
-	EventTypeCanceltimerfailed                               EventType = "CancelTimerFailed"
-	EventTypeStartchildworkflowexecutioninitiated            EventType = "StartChildWorkflowExecutionInitiated"
-	EventTypeStartchildworkflowexecutionfailed               EventType = "StartChildWorkflowExecutionFailed"
-	EventTypeChildworkflowexecutionstarted                   EventType = "ChildWorkflowExecutionStarted"
-	EventTypeChildworkflowexecutioncompleted                 EventType = "ChildWorkflowExecutionCompleted"
-	EventTypeChildworkflowexecutionfailed                    EventType = "ChildWorkflowExecutionFailed"
-	EventTypeChildworkflowexecutiontimedout                  EventType = "ChildWorkflowExecutionTimedOut"
-	EventTypeChildworkflowexecutioncanceled                  EventType = "ChildWorkflowExecutionCanceled"
-	EventTypeChildworkflowexecutionterminated                EventType = "ChildWorkflowExecutionTerminated"
-	EventTypeSignalexternalworkflowexecutioninitiated        EventType = "SignalExternalWorkflowExecutionInitiated"
-	EventTypeSignalexternalworkflowexecutionfailed           EventType = "SignalExternalWorkflowExecutionFailed"
-	EventTypeExternalworkflowexecutionsignaled               EventType = "ExternalWorkflowExecutionSignaled"
-	EventTypeRequestcancelexternalworkflowexecutioninitiated EventType = "RequestCancelExternalWorkflowExecutionInitiated"
-	EventTypeRequestcancelexternalworkflowexecutionfailed    EventType = "RequestCancelExternalWorkflowExecutionFailed"
-	EventTypeExternalworkflowexecutioncancelrequested        EventType = "ExternalWorkflowExecutionCancelRequested"
-	EventTypeLambdafunctionscheduled                         EventType = "LambdaFunctionScheduled"
-	EventTypeLambdafunctionstarted                           EventType = "LambdaFunctionStarted"
-	EventTypeLambdafunctioncompleted                         EventType = "LambdaFunctionCompleted"
-	EventTypeLambdafunctionfailed                            EventType = "LambdaFunctionFailed"
-	EventTypeLambdafunctiontimedout                          EventType = "LambdaFunctionTimedOut"
-	EventTypeSchedulelambdafunctionfailed                    EventType = "ScheduleLambdaFunctionFailed"
-	EventTypeStartlambdafunctionfailed                       EventType = "StartLambdaFunctionFailed"
-)
 
 // Values returns all known values for EventType. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
@@ -339,12 +203,6 @@ func (EventType) Values() []EventType {
 
 type ExecutionStatus string
 
-// Enum values for ExecutionStatus
-const (
-	ExecutionStatusOpen   ExecutionStatus = "OPEN"
-	ExecutionStatusClosed ExecutionStatus = "CLOSED"
-)
-
 // Values returns all known values for ExecutionStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -356,12 +214,6 @@ func (ExecutionStatus) Values() []ExecutionStatus {
 }
 
 type FailWorkflowExecutionFailedCause string
-
-// Enum values for FailWorkflowExecutionFailedCause
-const (
-	FailWorkflowExecutionFailedCauseUnhandledDecision     FailWorkflowExecutionFailedCause = "UNHANDLED_DECISION"
-	FailWorkflowExecutionFailedCauseOperationNotPermitted FailWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
-)
 
 // Values returns all known values for FailWorkflowExecutionFailedCause. Note that
 // this can be expanded in the future, and so it is only as up to date as the
@@ -376,11 +228,6 @@ func (FailWorkflowExecutionFailedCause) Values() []FailWorkflowExecutionFailedCa
 
 type LambdaFunctionTimeoutType string
 
-// Enum values for LambdaFunctionTimeoutType
-const (
-	LambdaFunctionTimeoutTypeStartToClose LambdaFunctionTimeoutType = "START_TO_CLOSE"
-)
-
 // Values returns all known values for LambdaFunctionTimeoutType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
 // The ordering of this slice is not guaranteed to be stable across updates.
@@ -391,11 +238,6 @@ func (LambdaFunctionTimeoutType) Values() []LambdaFunctionTimeoutType {
 }
 
 type RecordMarkerFailedCause string
-
-// Enum values for RecordMarkerFailedCause
-const (
-	RecordMarkerFailedCauseOperationNotPermitted RecordMarkerFailedCause = "OPERATION_NOT_PERMITTED"
-)
 
 // Values returns all known values for RecordMarkerFailedCause. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
@@ -408,12 +250,6 @@ func (RecordMarkerFailedCause) Values() []RecordMarkerFailedCause {
 
 type RegistrationStatus string
 
-// Enum values for RegistrationStatus
-const (
-	RegistrationStatusRegistered RegistrationStatus = "REGISTERED"
-	RegistrationStatusDeprecated RegistrationStatus = "DEPRECATED"
-)
-
 // Values returns all known values for RegistrationStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -425,12 +261,6 @@ func (RegistrationStatus) Values() []RegistrationStatus {
 }
 
 type RequestCancelActivityTaskFailedCause string
-
-// Enum values for RequestCancelActivityTaskFailedCause
-const (
-	RequestCancelActivityTaskFailedCauseActivityIdUnknown     RequestCancelActivityTaskFailedCause = "ACTIVITY_ID_UNKNOWN"
-	RequestCancelActivityTaskFailedCauseOperationNotPermitted RequestCancelActivityTaskFailedCause = "OPERATION_NOT_PERMITTED"
-)
 
 // Values returns all known values for RequestCancelActivityTaskFailedCause. Note
 // that this can be expanded in the future, and so it is only as up to date as the
@@ -445,13 +275,6 @@ func (RequestCancelActivityTaskFailedCause) Values() []RequestCancelActivityTask
 
 type RequestCancelExternalWorkflowExecutionFailedCause string
 
-// Enum values for RequestCancelExternalWorkflowExecutionFailedCause
-const (
-	RequestCancelExternalWorkflowExecutionFailedCauseUnknownExternalWorkflowExecution                   RequestCancelExternalWorkflowExecutionFailedCause = "UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION"
-	RequestCancelExternalWorkflowExecutionFailedCauseRequestCancelExternalWorkflowExecutionRateExceeded RequestCancelExternalWorkflowExecutionFailedCause = "REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED"
-	RequestCancelExternalWorkflowExecutionFailedCauseOperationNotPermitted                              RequestCancelExternalWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
-)
-
 // Values returns all known values for
 // RequestCancelExternalWorkflowExecutionFailedCause. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -465,21 +288,6 @@ func (RequestCancelExternalWorkflowExecutionFailedCause) Values() []RequestCance
 }
 
 type ScheduleActivityTaskFailedCause string
-
-// Enum values for ScheduleActivityTaskFailedCause
-const (
-	ScheduleActivityTaskFailedCauseActivityTypeDeprecated                 ScheduleActivityTaskFailedCause = "ACTIVITY_TYPE_DEPRECATED"
-	ScheduleActivityTaskFailedCauseActivityTypeDoesNotExist               ScheduleActivityTaskFailedCause = "ACTIVITY_TYPE_DOES_NOT_EXIST"
-	ScheduleActivityTaskFailedCauseActivityIdAlreadyInUse                 ScheduleActivityTaskFailedCause = "ACTIVITY_ID_ALREADY_IN_USE"
-	ScheduleActivityTaskFailedCauseOpenActivitiesLimitExceeded            ScheduleActivityTaskFailedCause = "OPEN_ACTIVITIES_LIMIT_EXCEEDED"
-	ScheduleActivityTaskFailedCauseActivityCreationRateExceeded           ScheduleActivityTaskFailedCause = "ACTIVITY_CREATION_RATE_EXCEEDED"
-	ScheduleActivityTaskFailedCauseDefaultScheduleToCloseTimeoutUndefined ScheduleActivityTaskFailedCause = "DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED"
-	ScheduleActivityTaskFailedCauseDefaultTaskListUndefined               ScheduleActivityTaskFailedCause = "DEFAULT_TASK_LIST_UNDEFINED"
-	ScheduleActivityTaskFailedCauseDefaultScheduleToStartTimeoutUndefined ScheduleActivityTaskFailedCause = "DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED"
-	ScheduleActivityTaskFailedCauseDefaultStartToCloseTimeoutUndefined    ScheduleActivityTaskFailedCause = "DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED"
-	ScheduleActivityTaskFailedCauseDefaultHeartbeatTimeoutUndefined       ScheduleActivityTaskFailedCause = "DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED"
-	ScheduleActivityTaskFailedCauseOperationNotPermitted                  ScheduleActivityTaskFailedCause = "OPERATION_NOT_PERMITTED"
-)
 
 // Values returns all known values for ScheduleActivityTaskFailedCause. Note that
 // this can be expanded in the future, and so it is only as up to date as the
@@ -503,14 +311,6 @@ func (ScheduleActivityTaskFailedCause) Values() []ScheduleActivityTaskFailedCaus
 
 type ScheduleLambdaFunctionFailedCause string
 
-// Enum values for ScheduleLambdaFunctionFailedCause
-const (
-	ScheduleLambdaFunctionFailedCauseIdAlreadyInUse                     ScheduleLambdaFunctionFailedCause = "ID_ALREADY_IN_USE"
-	ScheduleLambdaFunctionFailedCauseOpenLambdaFunctionsLimitExceeded   ScheduleLambdaFunctionFailedCause = "OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED"
-	ScheduleLambdaFunctionFailedCauseLambdaFunctionCreationRateExceeded ScheduleLambdaFunctionFailedCause = "LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED"
-	ScheduleLambdaFunctionFailedCauseLambdaServiceNotAvailableInRegion  ScheduleLambdaFunctionFailedCause = "LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION"
-)
-
 // Values returns all known values for ScheduleLambdaFunctionFailedCause. Note that
 // this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
@@ -526,13 +326,6 @@ func (ScheduleLambdaFunctionFailedCause) Values() []ScheduleLambdaFunctionFailed
 
 type SignalExternalWorkflowExecutionFailedCause string
 
-// Enum values for SignalExternalWorkflowExecutionFailedCause
-const (
-	SignalExternalWorkflowExecutionFailedCauseUnknownExternalWorkflowExecution            SignalExternalWorkflowExecutionFailedCause = "UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION"
-	SignalExternalWorkflowExecutionFailedCauseSignalExternalWorkflowExecutionRateExceeded SignalExternalWorkflowExecutionFailedCause = "SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED"
-	SignalExternalWorkflowExecutionFailedCauseOperationNotPermitted                       SignalExternalWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
-)
-
 // Values returns all known values for SignalExternalWorkflowExecutionFailedCause.
 // Note that this can be expanded in the future, and so it is only as up to date as
 // the client. The ordering of this slice is not guaranteed to be stable across
@@ -546,21 +339,6 @@ func (SignalExternalWorkflowExecutionFailedCause) Values() []SignalExternalWorkf
 }
 
 type StartChildWorkflowExecutionFailedCause string
-
-// Enum values for StartChildWorkflowExecutionFailedCause
-const (
-	StartChildWorkflowExecutionFailedCauseWorkflowTypeDoesNotExist                     StartChildWorkflowExecutionFailedCause = "WORKFLOW_TYPE_DOES_NOT_EXIST"
-	StartChildWorkflowExecutionFailedCauseWorkflowTypeDeprecated                       StartChildWorkflowExecutionFailedCause = "WORKFLOW_TYPE_DEPRECATED"
-	StartChildWorkflowExecutionFailedCauseOpenChildrenLimitExceeded                    StartChildWorkflowExecutionFailedCause = "OPEN_CHILDREN_LIMIT_EXCEEDED"
-	StartChildWorkflowExecutionFailedCauseOpenWorkflowsLimitExceeded                   StartChildWorkflowExecutionFailedCause = "OPEN_WORKFLOWS_LIMIT_EXCEEDED"
-	StartChildWorkflowExecutionFailedCauseChildCreationRateExceeded                    StartChildWorkflowExecutionFailedCause = "CHILD_CREATION_RATE_EXCEEDED"
-	StartChildWorkflowExecutionFailedCauseWorkflowAlreadyRunning                       StartChildWorkflowExecutionFailedCause = "WORKFLOW_ALREADY_RUNNING"
-	StartChildWorkflowExecutionFailedCauseDefaultExecutionStartToCloseTimeoutUndefined StartChildWorkflowExecutionFailedCause = "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED"
-	StartChildWorkflowExecutionFailedCauseDefaultTaskListUndefined                     StartChildWorkflowExecutionFailedCause = "DEFAULT_TASK_LIST_UNDEFINED"
-	StartChildWorkflowExecutionFailedCauseDefaultTaskStartToCloseTimeoutUndefined      StartChildWorkflowExecutionFailedCause = "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED"
-	StartChildWorkflowExecutionFailedCauseDefaultChildPolicyUndefined                  StartChildWorkflowExecutionFailedCause = "DEFAULT_CHILD_POLICY_UNDEFINED"
-	StartChildWorkflowExecutionFailedCauseOperationNotPermitted                        StartChildWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
-)
 
 // Values returns all known values for StartChildWorkflowExecutionFailedCause. Note
 // that this can be expanded in the future, and so it is only as up to date as the
@@ -584,11 +362,6 @@ func (StartChildWorkflowExecutionFailedCause) Values() []StartChildWorkflowExecu
 
 type StartLambdaFunctionFailedCause string
 
-// Enum values for StartLambdaFunctionFailedCause
-const (
-	StartLambdaFunctionFailedCauseAssumeRoleFailed StartLambdaFunctionFailedCause = "ASSUME_ROLE_FAILED"
-)
-
 // Values returns all known values for StartLambdaFunctionFailedCause. Note that
 // this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
@@ -600,14 +373,6 @@ func (StartLambdaFunctionFailedCause) Values() []StartLambdaFunctionFailedCause 
 }
 
 type StartTimerFailedCause string
-
-// Enum values for StartTimerFailedCause
-const (
-	StartTimerFailedCauseTimerIdAlreadyInUse       StartTimerFailedCause = "TIMER_ID_ALREADY_IN_USE"
-	StartTimerFailedCauseOpenTimersLimitExceeded   StartTimerFailedCause = "OPEN_TIMERS_LIMIT_EXCEEDED"
-	StartTimerFailedCauseTimerCreationRateExceeded StartTimerFailedCause = "TIMER_CREATION_RATE_EXCEEDED"
-	StartTimerFailedCauseOperationNotPermitted     StartTimerFailedCause = "OPERATION_NOT_PERMITTED"
-)
 
 // Values returns all known values for StartTimerFailedCause. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -623,11 +388,6 @@ func (StartTimerFailedCause) Values() []StartTimerFailedCause {
 
 type WorkflowExecutionCancelRequestedCause string
 
-// Enum values for WorkflowExecutionCancelRequestedCause
-const (
-	WorkflowExecutionCancelRequestedCauseChildPolicyApplied WorkflowExecutionCancelRequestedCause = "CHILD_POLICY_APPLIED"
-)
-
 // Values returns all known values for WorkflowExecutionCancelRequestedCause. Note
 // that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
@@ -639,13 +399,6 @@ func (WorkflowExecutionCancelRequestedCause) Values() []WorkflowExecutionCancelR
 }
 
 type WorkflowExecutionTerminatedCause string
-
-// Enum values for WorkflowExecutionTerminatedCause
-const (
-	WorkflowExecutionTerminatedCauseChildPolicyApplied WorkflowExecutionTerminatedCause = "CHILD_POLICY_APPLIED"
-	WorkflowExecutionTerminatedCauseEventLimitExceeded WorkflowExecutionTerminatedCause = "EVENT_LIMIT_EXCEEDED"
-	WorkflowExecutionTerminatedCauseOperatorInitiated  WorkflowExecutionTerminatedCause = "OPERATOR_INITIATED"
-)
 
 // Values returns all known values for WorkflowExecutionTerminatedCause. Note that
 // this can be expanded in the future, and so it is only as up to date as the
@@ -660,11 +413,6 @@ func (WorkflowExecutionTerminatedCause) Values() []WorkflowExecutionTerminatedCa
 }
 
 type WorkflowExecutionTimeoutType string
-
-// Enum values for WorkflowExecutionTimeoutType
-const (
-	WorkflowExecutionTimeoutTypeStartToClose WorkflowExecutionTimeoutType = "START_TO_CLOSE"
-)
 
 // Values returns all known values for WorkflowExecutionTimeoutType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.

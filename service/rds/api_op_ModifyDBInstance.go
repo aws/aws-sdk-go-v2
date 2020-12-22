@@ -333,12 +333,12 @@ type ModifyDBInstanceInput struct {
 	// with a DB instance
 	OptionGroupName *string
 
-	// The AWS KMS key identifier for encryption of Performance Insights data. The KMS
-	// key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key
-	// alias for the KMS encryption key. If you do not specify a value for
-	// PerformanceInsightsKMSKeyId, then Amazon RDS uses your default encryption key.
-	// AWS KMS creates the default encryption key for your AWS account. Your AWS
-	// account has a different default encryption key for each AWS Region.
+	// The AWS KMS key identifier for encryption of Performance Insights data. The AWS
+	// KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS
+	// KMS customer master key (CMK). If you do not specify a value for
+	// PerformanceInsightsKMSKeyId, then Amazon RDS uses your default CMK. There is a
+	// default CMK for your AWS account. Your AWS account has a different default CMK
+	// for each AWS Region.
 	PerformanceInsightsKMSKeyId *string
 
 	// The amount of time, in days, to retain Performance Insights data. Valid values

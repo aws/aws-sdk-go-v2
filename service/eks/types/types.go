@@ -6,6 +6,91 @@ import (
 	"time"
 )
 
+// An Amazon EKS add-on.
+type Addon struct {
+
+	// The Amazon Resource Name (ARN) of the add-on.
+	AddonArn *string
+
+	// The name of the add-on.
+	AddonName *string
+
+	// The version of the add-on.
+	AddonVersion *string
+
+	// The name of the cluster.
+	ClusterName *string
+
+	// The date and time that the add-on was created.
+	CreatedAt *time.Time
+
+	// An object that represents the health of the add-on.
+	Health *AddonHealth
+
+	// The date and time that the add-on was last modified.
+	ModifiedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the IAM role that is bound to the Kubernetes
+	// service account used by the add-on.
+	ServiceAccountRoleArn *string
+
+	// The status of the add-on.
+	Status AddonStatus
+
+	// The metadata that you apply to the cluster to assist with categorization and
+	// organization. Each tag consists of a key and an optional value, both of which
+	// you define. Cluster tags do not propagate to any other resources associated with
+	// the cluster.
+	Tags map[string]string
+}
+
+// The health of the add-on.
+type AddonHealth struct {
+
+	// An object that represents the add-on's health issues.
+	Issues []AddonIssue
+}
+
+// Information about an add-on.
+type AddonInfo struct {
+
+	// The name of the add-on.
+	AddonName *string
+
+	// An object that represents information about available add-on versions and
+	// compatible Kubernetes versions.
+	AddonVersions []AddonVersionInfo
+
+	// The type of the add-on.
+	Type *string
+}
+
+// An issue related to an add-on.
+type AddonIssue struct {
+
+	// A code that describes the type of issue.
+	Code AddonIssueCode
+
+	// A message that provides details about the issue and what might cause it.
+	Message *string
+
+	// The resource IDs of the issue.
+	ResourceIds []string
+}
+
+// Information about an add-on version.
+type AddonVersionInfo struct {
+
+	// The version of the add-on.
+	AddonVersion *string
+
+	// The architectures that the version supports.
+	Architecture []string
+
+	// An object that represents the compatibilities of a version.
+	Compatibilities []Compatibility
+}
+
 // An Auto Scaling group that is associated with an Amazon EKS managed node group.
 type AutoScalingGroup struct {
 
@@ -48,7 +133,7 @@ type Cluster struct {
 	// The identity provider information for the cluster.
 	Identity *Identity
 
-	// Network configuration settings for your cluster.
+	// The Kubernetes network configuration for the cluster.
 	KubernetesNetworkConfig *KubernetesNetworkConfigResponse
 
 	// The logging configuration for your cluster.
@@ -87,6 +172,19 @@ type Cluster struct {
 
 	// The Kubernetes server version for the cluster.
 	Version *string
+}
+
+// Compatibility information.
+type Compatibility struct {
+
+	// The supported Kubernetes version of the cluster.
+	ClusterVersion *string
+
+	// The supported default version.
+	DefaultVersion bool
+
+	// The supported compute platform.
+	PlatformVersions []string
 }
 
 // The encryption configuration for the cluster.
@@ -198,26 +296,39 @@ type Issue struct {
 
 	// A brief description of the error.
 	//
-	// * AutoScalingGroupNotFound: We couldn't find
-	// the Auto Scaling group associated with the managed node group. You may be able
-	// to recreate an Auto Scaling group with the same settings to recover.
+	// * AccessDenied: Amazon EKS or one or more of
+	// your managed nodes is failing to authenticate or authorize with your Kubernetes
+	// cluster API server.
+	//
+	// * AsgInstanceLaunchFailures: Your Auto Scaling group is
+	// experiencing failures while attempting to launch instances.
 	//
 	// *
-	// Ec2SecurityGroupNotFound: We couldn't find the cluster security group for the
-	// cluster. You must recreate your cluster.
+	// AutoScalingGroupNotFound: We couldn't find the Auto Scaling group associated
+	// with the managed node group. You may be able to recreate an Auto Scaling group
+	// with the same settings to recover.
 	//
-	// * Ec2SecurityGroupDeletionFailure: We
-	// could not delete the remote access security group for your managed node group.
-	// Remove any dependencies from the security group.
+	// * ClusterUnreachable: Amazon EKS or one or
+	// more of your managed nodes is unable to to communicate with your Kubernetes
+	// cluster API server. This can happen if there are network disruptions or if API
+	// servers are timing out processing requests.
 	//
-	// * Ec2LaunchTemplateNotFound:
-	// We couldn't find the Amazon EC2 launch template for your managed node group. You
+	// * Ec2LaunchTemplateNotFound: We
+	// couldn't find the Amazon EC2 launch template for your managed node group. You
 	// may be able to recreate a launch template with the same settings to recover.
 	//
 	// *
 	// Ec2LaunchTemplateVersionMismatch: The Amazon EC2 launch template version for
 	// your managed node group does not match the version that Amazon EKS created. You
 	// may be able to revert to the version that Amazon EKS created to recover.
+	//
+	// *
+	// Ec2SecurityGroupDeletionFailure: We could not delete the remote access security
+	// group for your managed node group. Remove any dependencies from the security
+	// group.
+	//
+	// * Ec2SecurityGroupNotFound: We couldn't find the cluster security group
+	// for the cluster. You must recreate your cluster.
 	//
 	// *
 	// Ec2SubnetInvalidConfiguration: One or more Amazon EC2 subnets specified for a
@@ -237,16 +348,6 @@ type Issue struct {
 	// You may be able to recreate an IAM role with the same settings to recover.
 	//
 	// *
-	// AsgInstanceLaunchFailures: Your Auto Scaling group is experiencing failures
-	// while attempting to launch instances.
-	//
-	// * NodeCreationFailure: Your launched
-	// instances are unable to register with your Amazon EKS cluster. Common causes of
-	// this failure are insufficient worker node IAM role
-	// (https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html)
-	// permissions or lack of outbound internet access for the nodes.
-	//
-	// *
 	// InstanceLimitExceeded: Your AWS account is unable to launch any more instances
 	// of the specified instance type. You may be able to request an Amazon EC2
 	// instance limit increase to recover.
@@ -255,12 +356,14 @@ type Issue struct {
 	// the subnets associated with your managed node group does not have enough
 	// available IP addresses for new nodes.
 	//
-	// * AccessDenied: Amazon EKS or one or more
-	// of your managed nodes is unable to communicate with your cluster API server.
+	// * InternalFailure: These errors are
+	// usually caused by an Amazon EKS server-side issue.
 	//
-	// *
-	// InternalFailure: These errors are usually caused by an Amazon EKS server-side
-	// issue.
+	// * NodeCreationFailure: Your
+	// launched instances are unable to register with your Amazon EKS cluster. Common
+	// causes of this failure are insufficient worker node IAM role
+	// (https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html)
+	// permissions or lack of outbound internet access for the nodes.
 	Code NodegroupIssueCode
 
 	// The error message associated with the issue.
@@ -298,9 +401,10 @@ type KubernetesNetworkConfigRequest struct {
 type KubernetesNetworkConfigResponse struct {
 
 	// The CIDR block that Kubernetes service IP addresses are assigned from. If you
-	// didn't specify a CIDR block, then Kubernetes assigns addresses from either the
-	// 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. If this was specified, then it was
-	// specified when the cluster was created and it cannot be changed.
+	// didn't specify a CIDR block when you created the cluster, then Kubernetes
+	// assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. If
+	// this was specified, then it was specified when the cluster was created and it
+	// cannot be changed.
 	ServiceIpv4Cidr *string
 }
 
@@ -364,6 +468,9 @@ type Nodegroup struct {
 	// this is the AMI type that was specified in the node group configuration.
 	AmiType AMITypes
 
+	// The capacity type of your managed node group.
+	CapacityType CapacityTypes
+
 	// The name of the cluster that the managed node group resides in.
 	ClusterName *string
 
@@ -411,7 +518,7 @@ type Nodegroup struct {
 	// If the node group was deployed using a launch template with a custom AMI, then
 	// this is the AMI ID that was specified in the launch template. For node groups
 	// that weren't deployed using a launch template, this is the version of the Amazon
-	// EKS-optimized AMI that the node group was deployed with.
+	// EKS optimized AMI that the node group was deployed with.
 	ReleaseVersion *string
 
 	// If the node group wasn't deployed with a launch template, then this is the
@@ -598,8 +705,19 @@ type VpcConfigRequest struct {
 
 	// Specify one or more security groups for the cross-account elastic network
 	// interfaces that Amazon EKS creates to use to allow communication between your
-	// worker nodes and the Kubernetes control plane. If you don't specify a security
-	// group, the default security group for your VPC is used.
+	// worker nodes and the Kubernetes control plane. If you don't specify any security
+	// groups, then familiarize yourself with the difference between Amazon EKS
+	// defaults for clusters deployed with Kubernetes:
+	//
+	// * 1.14 Amazon EKS platform
+	// version eks.2 and earlier
+	//
+	// * 1.14 Amazon EKS platform version eks.3 and
+	// later
+	//
+	// For more information, see Amazon EKS security group considerations
+	// (https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html) in the
+	// Amazon EKS User Guide .
 	SecurityGroupIds []string
 
 	// Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates

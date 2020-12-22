@@ -2,14 +2,48 @@
 
 package types
 
-type AMITypes string
+type AddonIssueCode string
 
-// Enum values for AMITypes
+// Enum values for AddonIssueCode
 const (
-	AMITypesAl2X8664    AMITypes = "AL2_x86_64"
-	AMITypesAl2X8664Gpu AMITypes = "AL2_x86_64_GPU"
-	AMITypesAl2Arm64    AMITypes = "AL2_ARM_64"
+	AddonIssueCodeAccessDenied                 AddonIssueCode = "AccessDenied"
+	AddonIssueCodeInternalFailure              AddonIssueCode = "InternalFailure"
+	AddonIssueCodeClusterUnreachable           AddonIssueCode = "ClusterUnreachable"
+	AddonIssueCodeInsufficientNumberOfReplicas AddonIssueCode = "InsufficientNumberOfReplicas"
+	AddonIssueCodeConfigurationConflict        AddonIssueCode = "ConfigurationConflict"
 )
+
+// Values returns all known values for AddonIssueCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AddonIssueCode) Values() []AddonIssueCode {
+	return []AddonIssueCode{
+		"AccessDenied",
+		"InternalFailure",
+		"ClusterUnreachable",
+		"InsufficientNumberOfReplicas",
+		"ConfigurationConflict",
+	}
+}
+
+type AddonStatus string
+
+// Values returns all known values for AddonStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AddonStatus) Values() []AddonStatus {
+	return []AddonStatus{
+		"CREATING",
+		"ACTIVE",
+		"CREATE_FAILED",
+		"UPDATING",
+		"DELETING",
+		"DELETE_FAILED",
+		"DEGRADED",
+	}
+}
+
+type AMITypes string
 
 // Values returns all known values for AMITypes. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
@@ -22,16 +56,19 @@ func (AMITypes) Values() []AMITypes {
 	}
 }
 
-type ClusterStatus string
+type CapacityTypes string
 
-// Enum values for ClusterStatus
-const (
-	ClusterStatusCreating ClusterStatus = "CREATING"
-	ClusterStatusActive   ClusterStatus = "ACTIVE"
-	ClusterStatusDeleting ClusterStatus = "DELETING"
-	ClusterStatusFailed   ClusterStatus = "FAILED"
-	ClusterStatusUpdating ClusterStatus = "UPDATING"
-)
+// Values returns all known values for CapacityTypes. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityTypes) Values() []CapacityTypes {
+	return []CapacityTypes{
+		"ON_DEMAND",
+		"SPOT",
+	}
+}
+
+type ClusterStatus string
 
 // Values returns all known values for ClusterStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -50,18 +87,20 @@ type ErrorCode string
 
 // Enum values for ErrorCode
 const (
-	ErrorCodeSubnetNotFound            ErrorCode = "SubnetNotFound"
-	ErrorCodeSecurityGroupNotFound     ErrorCode = "SecurityGroupNotFound"
-	ErrorCodeEniLimitReached           ErrorCode = "EniLimitReached"
-	ErrorCodeIpNotAvailable            ErrorCode = "IpNotAvailable"
-	ErrorCodeAccessDenied              ErrorCode = "AccessDenied"
-	ErrorCodeOperationNotPermitted     ErrorCode = "OperationNotPermitted"
-	ErrorCodeVpcIdNotFound             ErrorCode = "VpcIdNotFound"
-	ErrorCodeUnknown                   ErrorCode = "Unknown"
-	ErrorCodeNodeCreationFailure       ErrorCode = "NodeCreationFailure"
-	ErrorCodePodEvictionFailure        ErrorCode = "PodEvictionFailure"
-	ErrorCodeInsufficientFreeAddresses ErrorCode = "InsufficientFreeAddresses"
-	ErrorCodeClusterUnreachable        ErrorCode = "ClusterUnreachable"
+	ErrorCodeSubnetNotFound               ErrorCode = "SubnetNotFound"
+	ErrorCodeSecurityGroupNotFound        ErrorCode = "SecurityGroupNotFound"
+	ErrorCodeEniLimitReached              ErrorCode = "EniLimitReached"
+	ErrorCodeIpNotAvailable               ErrorCode = "IpNotAvailable"
+	ErrorCodeAccessDenied                 ErrorCode = "AccessDenied"
+	ErrorCodeOperationNotPermitted        ErrorCode = "OperationNotPermitted"
+	ErrorCodeVpcIdNotFound                ErrorCode = "VpcIdNotFound"
+	ErrorCodeUnknown                      ErrorCode = "Unknown"
+	ErrorCodeNodeCreationFailure          ErrorCode = "NodeCreationFailure"
+	ErrorCodePodEvictionFailure           ErrorCode = "PodEvictionFailure"
+	ErrorCodeInsufficientFreeAddresses    ErrorCode = "InsufficientFreeAddresses"
+	ErrorCodeClusterUnreachable           ErrorCode = "ClusterUnreachable"
+	ErrorCodeInsufficientNumberOfReplicas ErrorCode = "InsufficientNumberOfReplicas"
+	ErrorCodeConfigurationConflict        ErrorCode = "ConfigurationConflict"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded in
@@ -81,19 +120,12 @@ func (ErrorCode) Values() []ErrorCode {
 		"PodEvictionFailure",
 		"InsufficientFreeAddresses",
 		"ClusterUnreachable",
+		"InsufficientNumberOfReplicas",
+		"ConfigurationConflict",
 	}
 }
 
 type FargateProfileStatus string
-
-// Enum values for FargateProfileStatus
-const (
-	FargateProfileStatusCreating     FargateProfileStatus = "CREATING"
-	FargateProfileStatusActive       FargateProfileStatus = "ACTIVE"
-	FargateProfileStatusDeleting     FargateProfileStatus = "DELETING"
-	FargateProfileStatusCreateFailed FargateProfileStatus = "CREATE_FAILED"
-	FargateProfileStatusDeleteFailed FargateProfileStatus = "DELETE_FAILED"
-)
 
 // Values returns all known values for FargateProfileStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -184,17 +216,6 @@ func (NodegroupIssueCode) Values() []NodegroupIssueCode {
 
 type NodegroupStatus string
 
-// Enum values for NodegroupStatus
-const (
-	NodegroupStatusCreating     NodegroupStatus = "CREATING"
-	NodegroupStatusActive       NodegroupStatus = "ACTIVE"
-	NodegroupStatusUpdating     NodegroupStatus = "UPDATING"
-	NodegroupStatusDeleting     NodegroupStatus = "DELETING"
-	NodegroupStatusCreateFailed NodegroupStatus = "CREATE_FAILED"
-	NodegroupStatusDeleteFailed NodegroupStatus = "DELETE_FAILED"
-	NodegroupStatusDegraded     NodegroupStatus = "DEGRADED"
-)
-
 // Values returns all known values for NodegroupStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -207,6 +228,18 @@ func (NodegroupStatus) Values() []NodegroupStatus {
 		"CREATE_FAILED",
 		"DELETE_FAILED",
 		"DEGRADED",
+	}
+}
+
+type ResolveConflicts string
+
+// Values returns all known values for ResolveConflicts. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResolveConflicts) Values() []ResolveConflicts {
+	return []ResolveConflicts{
+		"OVERWRITE",
+		"NONE",
 	}
 }
 
@@ -226,6 +259,9 @@ const (
 	UpdateParamTypeMinSize               UpdateParamType = "MinSize"
 	UpdateParamTypeReleaseVersion        UpdateParamType = "ReleaseVersion"
 	UpdateParamTypePublicAccessCidrs     UpdateParamType = "PublicAccessCidrs"
+	UpdateParamTypeAddonVersion          UpdateParamType = "AddonVersion"
+	UpdateParamTypeServiceAccountRoleArn UpdateParamType = "ServiceAccountRoleArn"
+	UpdateParamTypeResolveConflicts      UpdateParamType = "ResolveConflicts"
 )
 
 // Values returns all known values for UpdateParamType. Note that this can be
@@ -245,6 +281,9 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"MinSize",
 		"ReleaseVersion",
 		"PublicAccessCidrs",
+		"AddonVersion",
+		"ServiceAccountRoleArn",
+		"ResolveConflicts",
 	}
 }
 
@@ -278,6 +317,7 @@ const (
 	UpdateTypeEndpointAccessUpdate UpdateType = "EndpointAccessUpdate"
 	UpdateTypeLoggingUpdate        UpdateType = "LoggingUpdate"
 	UpdateTypeConfigUpdate         UpdateType = "ConfigUpdate"
+	UpdateTypeAddonUpdate          UpdateType = "AddonUpdate"
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded
@@ -289,5 +329,6 @@ func (UpdateType) Values() []UpdateType {
 		"EndpointAccessUpdate",
 		"LoggingUpdate",
 		"ConfigUpdate",
+		"AddonUpdate",
 	}
 }

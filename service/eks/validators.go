@@ -9,6 +9,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateAddon struct {
+}
+
+func (*validateOpCreateAddon) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAddon) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAddonInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAddonInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCluster struct {
 }
 
@@ -69,6 +89,26 @@ func (m *validateOpCreateNodegroup) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAddon struct {
+}
+
+func (*validateOpDeleteAddon) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAddon) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAddonInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAddonInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteCluster struct {
 }
 
@@ -124,6 +164,26 @@ func (m *validateOpDeleteNodegroup) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteNodegroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAddon struct {
+}
+
+func (*validateOpDescribeAddon) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAddon) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAddonInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAddonInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -204,6 +264,26 @@ func (m *validateOpDescribeUpdate) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeUpdateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAddons struct {
+}
+
+func (*validateOpListAddons) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAddons) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAddonsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAddonsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -329,6 +409,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAddon struct {
+}
+
+func (*validateOpUpdateAddon) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAddon) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAddonInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAddonInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateClusterConfig struct {
 }
 
@@ -409,6 +509,10 @@ func (m *validateOpUpdateNodegroupVersion) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateAddonValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAddon{}, middleware.After)
+}
+
 func addOpCreateClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCluster{}, middleware.After)
 }
@@ -421,6 +525,10 @@ func addOpCreateNodegroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateNodegroup{}, middleware.After)
 }
 
+func addOpDeleteAddonValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAddon{}, middleware.After)
+}
+
 func addOpDeleteClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCluster{}, middleware.After)
 }
@@ -431,6 +539,10 @@ func addOpDeleteFargateProfileValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDeleteNodegroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteNodegroup{}, middleware.After)
+}
+
+func addOpDescribeAddonValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAddon{}, middleware.After)
 }
 
 func addOpDescribeClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -447,6 +559,10 @@ func addOpDescribeNodegroupValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeUpdateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeUpdate{}, middleware.After)
+}
+
+func addOpListAddonsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAddons{}, middleware.After)
 }
 
 func addOpListFargateProfilesValidationMiddleware(stack *middleware.Stack) error {
@@ -473,6 +589,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateAddonValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAddon{}, middleware.After)
+}
+
 func addOpUpdateClusterConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateClusterConfig{}, middleware.After)
 }
@@ -489,19 +609,37 @@ func addOpUpdateNodegroupVersionValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpUpdateNodegroupVersion{}, middleware.After)
 }
 
+func validateOpCreateAddonInput(v *CreateAddonInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAddonInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.AddonName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AddonName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateClusterInput(v *CreateClusterInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateClusterInput"}
-	if v.ResourcesVpcConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourcesVpcConfig"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.ResourcesVpcConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourcesVpcConfig"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -536,17 +674,35 @@ func validateOpCreateNodegroupInput(v *CreateNodegroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateNodegroupInput"}
-	if v.NodeRole == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NodeRole"))
-	}
-	if v.Subnets == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
 	}
 	if v.NodegroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodegroupName"))
 	}
+	if v.Subnets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
+	}
+	if v.NodeRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeRole"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAddonInput(v *DeleteAddonInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAddonInput"}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.AddonName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AddonName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -606,6 +762,24 @@ func validateOpDeleteNodegroupInput(v *DeleteNodegroupInput) error {
 	}
 }
 
+func validateOpDescribeAddonInput(v *DescribeAddonInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAddonInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.AddonName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AddonName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeClusterInput(v *DescribeClusterInput) error {
 	if v == nil {
 		return nil
@@ -626,11 +800,11 @@ func validateOpDescribeFargateProfileInput(v *DescribeFargateProfileInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeFargateProfileInput"}
-	if v.FargateProfileName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FargateProfileName"))
-	}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.FargateProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FargateProfileName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -667,6 +841,21 @@ func validateOpDescribeUpdateInput(v *DescribeUpdateInput) error {
 	}
 	if v.UpdateId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UpdateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAddonsInput(v *ListAddonsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAddonsInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -740,11 +929,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -758,11 +947,29 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAddonInput(v *UpdateAddonInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAddonInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.AddonName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AddonName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -791,11 +998,11 @@ func validateOpUpdateClusterVersionInput(v *UpdateClusterVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateClusterVersionInput"}
-	if v.Version == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Version"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -809,11 +1016,11 @@ func validateOpUpdateNodegroupConfigInput(v *UpdateNodegroupConfigInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateNodegroupConfigInput"}
-	if v.NodegroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NodegroupName"))
-	}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.NodegroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodegroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -827,11 +1034,11 @@ func validateOpUpdateNodegroupVersionInput(v *UpdateNodegroupVersionInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateNodegroupVersionInput"}
-	if v.NodegroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NodegroupName"))
-	}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.NodegroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodegroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

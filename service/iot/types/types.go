@@ -201,7 +201,7 @@ type AssetPropertyValue struct {
 	// The value of the asset property.
 	//
 	// This member is required.
-	Value *AssetPropertyVariant
+	Value AssetPropertyVariant
 
 	// Optional. A string that describes the quality of the value. Accepts substitution
 	// templates. Must be GOOD, BAD, or UNCERTAIN.
@@ -209,23 +209,46 @@ type AssetPropertyValue struct {
 }
 
 // Contains an asset property value (of a single type).
-type AssetPropertyVariant struct {
-
-	// Optional. A string that contains the boolean value (true or false) of the value
-	// entry. Accepts substitution templates.
-	BooleanValue *string
-
-	// Optional. A string that contains the double value of the value entry. Accepts
-	// substitution templates.
-	DoubleValue *string
-
-	// Optional. A string that contains the integer value of the value entry. Accepts
-	// substitution templates.
-	IntegerValue *string
-
-	// Optional. The string value of the value entry. Accepts substitution templates.
-	StringValue *string
+//
+// The following types satisfy this interface:
+//  AssetPropertyVariantMemberStringValue
+//  AssetPropertyVariantMemberIntegerValue
+//  AssetPropertyVariantMemberDoubleValue
+//  AssetPropertyVariantMemberBooleanValue
+type AssetPropertyVariant interface {
+	isAssetPropertyVariant()
 }
+
+// Optional. The string value of the value entry. Accepts substitution templates.
+type AssetPropertyVariantMemberStringValue struct {
+	Value string
+}
+
+func (*AssetPropertyVariantMemberStringValue) isAssetPropertyVariant() {}
+
+// Optional. A string that contains the integer value of the value entry. Accepts
+// substitution templates.
+type AssetPropertyVariantMemberIntegerValue struct {
+	Value string
+}
+
+func (*AssetPropertyVariantMemberIntegerValue) isAssetPropertyVariant() {}
+
+// Optional. A string that contains the double value of the value entry. Accepts
+// substitution templates.
+type AssetPropertyVariantMemberDoubleValue struct {
+	Value string
+}
+
+func (*AssetPropertyVariantMemberDoubleValue) isAssetPropertyVariant() {}
+
+// Optional. A string that contains the boolean value (true or false) of the value
+// entry. Accepts substitution templates.
+type AssetPropertyVariantMemberBooleanValue struct {
+	Value string
+}
+
+func (*AssetPropertyVariantMemberBooleanValue) isAssetPropertyVariant() {}
 
 // The attribute payload.
 type AttributePayload struct {
@@ -1852,6 +1875,10 @@ type OTAUpdateFile struct {
 	// The name of the file.
 	FileName *string
 
+	// An integer value you can include in the job document to allow your devices to
+	// identify the type of file received from the cloud.
+	FileType *int32
+
 	// The file version.
 	FileVersion *string
 }
@@ -3139,3 +3166,12 @@ type ViolationEvent struct {
 	// The ID of the violation event.
 	ViolationId *string
 }
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+}
+
+func (*UnknownUnionMember) isAssetPropertyVariant() {}

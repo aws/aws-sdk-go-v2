@@ -48,6 +48,9 @@ type CreateOutpostInput struct {
 
 	// The Outpost description.
 	Description *string
+
+	// The tags to apply to the Outpost.
+	Tags map[string]string
 }
 
 type CreateOutpostOutput struct {

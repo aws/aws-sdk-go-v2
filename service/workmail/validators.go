@@ -5,7 +5,6 @@ package workmail
 import (
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -45,26 +44,6 @@ func (m *validateOpAssociateMemberToGroup) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpAssociateMemberToGroupInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpCancelMailboxExportJob struct {
-}
-
-func (*validateOpCancelMailboxExportJob) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpCancelMailboxExportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*CancelMailboxExportJobInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpCancelMailboxExportJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -110,26 +89,6 @@ func (m *validateOpCreateGroup) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpCreateOrganization struct {
-}
-
-func (*validateOpCreateOrganization) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpCreateOrganization) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*CreateOrganizationInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpCreateOrganizationInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpCreateResource struct {
 }
 
@@ -165,26 +124,6 @@ func (m *validateOpCreateUser) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateUserInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpDeleteAccessControlRule struct {
-}
-
-func (*validateOpDeleteAccessControlRule) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDeleteAccessControlRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DeleteAccessControlRuleInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDeleteAccessControlRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,26 +189,6 @@ func (m *validateOpDeleteMailboxPermissions) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpDeleteOrganization struct {
-}
-
-func (*validateOpDeleteOrganization) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDeleteOrganization) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DeleteOrganizationInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDeleteOrganizationInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpDeleteResource struct {
 }
 
@@ -285,26 +204,6 @@ func (m *validateOpDeleteResource) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteResourceInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpDeleteRetentionPolicy struct {
-}
-
-func (*validateOpDeleteRetentionPolicy) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDeleteRetentionPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DeleteRetentionPolicyInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDeleteRetentionPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -365,26 +264,6 @@ func (m *validateOpDescribeGroup) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeGroupInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpDescribeMailboxExportJob struct {
-}
-
-func (*validateOpDescribeMailboxExportJob) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDescribeMailboxExportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DescribeMailboxExportJobInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDescribeMailboxExportJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -490,46 +369,6 @@ func (m *validateOpDisassociateMemberFromGroup) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpGetAccessControlEffect struct {
-}
-
-func (*validateOpGetAccessControlEffect) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpGetAccessControlEffect) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*GetAccessControlEffectInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpGetAccessControlEffectInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpGetDefaultRetentionPolicy struct {
-}
-
-func (*validateOpGetDefaultRetentionPolicy) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpGetDefaultRetentionPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*GetDefaultRetentionPolicyInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpGetDefaultRetentionPolicyInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpGetMailboxDetails struct {
 }
 
@@ -545,26 +384,6 @@ func (m *validateOpGetMailboxDetails) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetMailboxDetailsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpListAccessControlRules struct {
-}
-
-func (*validateOpListAccessControlRules) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpListAccessControlRules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ListAccessControlRulesInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpListAccessControlRulesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -630,26 +449,6 @@ func (m *validateOpListGroups) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpListMailboxExportJobs struct {
-}
-
-func (*validateOpListMailboxExportJobs) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpListMailboxExportJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ListMailboxExportJobsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpListMailboxExportJobsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpListMailboxPermissions struct {
 }
 
@@ -710,26 +509,6 @@ func (m *validateOpListResources) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpListTagsForResource struct {
-}
-
-func (*validateOpListTagsForResource) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ListTagsForResourceInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpListTagsForResourceInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpListUsers struct {
 }
 
@@ -750,26 +529,6 @@ func (m *validateOpListUsers) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpPutAccessControlRule struct {
-}
-
-func (*validateOpPutAccessControlRule) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpPutAccessControlRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*PutAccessControlRuleInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpPutAccessControlRuleInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpPutMailboxPermissions struct {
 }
 
@@ -785,26 +544,6 @@ func (m *validateOpPutMailboxPermissions) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutMailboxPermissionsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpPutRetentionPolicy struct {
-}
-
-func (*validateOpPutRetentionPolicy) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpPutRetentionPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*PutRetentionPolicyInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpPutRetentionPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -845,66 +584,6 @@ func (m *validateOpResetPassword) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpResetPasswordInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpStartMailboxExportJob struct {
-}
-
-func (*validateOpStartMailboxExportJob) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpStartMailboxExportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*StartMailboxExportJobInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpStartMailboxExportJobInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpTagResource struct {
-}
-
-func (*validateOpTagResource) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*TagResourceInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpTagResourceInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpUntagResource struct {
-}
-
-func (*validateOpUntagResource) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*UntagResourceInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpUntagResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -978,10 +657,6 @@ func addOpAssociateMemberToGroupValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpAssociateMemberToGroup{}, middleware.After)
 }
 
-func addOpCancelMailboxExportJobValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpCancelMailboxExportJob{}, middleware.After)
-}
-
 func addOpCreateAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAlias{}, middleware.After)
 }
@@ -990,20 +665,12 @@ func addOpCreateGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateGroup{}, middleware.After)
 }
 
-func addOpCreateOrganizationValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpCreateOrganization{}, middleware.After)
-}
-
 func addOpCreateResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateResource{}, middleware.After)
 }
 
 func addOpCreateUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUser{}, middleware.After)
-}
-
-func addOpDeleteAccessControlRuleValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDeleteAccessControlRule{}, middleware.After)
 }
 
 func addOpDeleteAliasValidationMiddleware(stack *middleware.Stack) error {
@@ -1018,16 +685,8 @@ func addOpDeleteMailboxPermissionsValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpDeleteMailboxPermissions{}, middleware.After)
 }
 
-func addOpDeleteOrganizationValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDeleteOrganization{}, middleware.After)
-}
-
 func addOpDeleteResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteResource{}, middleware.After)
-}
-
-func addOpDeleteRetentionPolicyValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDeleteRetentionPolicy{}, middleware.After)
 }
 
 func addOpDeleteUserValidationMiddleware(stack *middleware.Stack) error {
@@ -1040,10 +699,6 @@ func addOpDeregisterFromWorkMailValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDescribeGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeGroup{}, middleware.After)
-}
-
-func addOpDescribeMailboxExportJobValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDescribeMailboxExportJob{}, middleware.After)
 }
 
 func addOpDescribeOrganizationValidationMiddleware(stack *middleware.Stack) error {
@@ -1066,20 +721,8 @@ func addOpDisassociateMemberFromGroupValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpDisassociateMemberFromGroup{}, middleware.After)
 }
 
-func addOpGetAccessControlEffectValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpGetAccessControlEffect{}, middleware.After)
-}
-
-func addOpGetDefaultRetentionPolicyValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpGetDefaultRetentionPolicy{}, middleware.After)
-}
-
 func addOpGetMailboxDetailsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMailboxDetails{}, middleware.After)
-}
-
-func addOpListAccessControlRulesValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpListAccessControlRules{}, middleware.After)
 }
 
 func addOpListAliasesValidationMiddleware(stack *middleware.Stack) error {
@@ -1094,10 +737,6 @@ func addOpListGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListGroups{}, middleware.After)
 }
 
-func addOpListMailboxExportJobsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpListMailboxExportJobs{}, middleware.After)
-}
-
 func addOpListMailboxPermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListMailboxPermissions{}, middleware.After)
 }
@@ -1110,24 +749,12 @@ func addOpListResourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListResources{}, middleware.After)
 }
 
-func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
-}
-
 func addOpListUsersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListUsers{}, middleware.After)
 }
 
-func addOpPutAccessControlRuleValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpPutAccessControlRule{}, middleware.After)
-}
-
 func addOpPutMailboxPermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutMailboxPermissions{}, middleware.After)
-}
-
-func addOpPutRetentionPolicyValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpPutRetentionPolicy{}, middleware.After)
 }
 
 func addOpRegisterToWorkMailValidationMiddleware(stack *middleware.Stack) error {
@@ -1136,18 +763,6 @@ func addOpRegisterToWorkMailValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpResetPasswordValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpResetPassword{}, middleware.After)
-}
-
-func addOpStartMailboxExportJobValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpStartMailboxExportJob{}, middleware.After)
-}
-
-func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
-}
-
-func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
 func addOpUpdateMailboxQuotaValidationMiddleware(stack *middleware.Stack) error {
@@ -1162,76 +777,6 @@ func addOpUpdateResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateResource{}, middleware.After)
 }
 
-func validateFolderConfiguration(v *types.FolderConfiguration) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "FolderConfiguration"}
-	if len(v.Action) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Action"))
-	}
-	if len(v.Name) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateFolderConfigurations(v []types.FolderConfiguration) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "FolderConfigurations"}
-	for i := range v {
-		if err := validateFolderConfiguration(&v[i]); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateTag(v *types.Tag) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateTagList(v []types.Tag) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
-	for i := range v {
-		if err := validateTag(&v[i]); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpAssociateDelegateToResourceInput(v *AssociateDelegateToResourceInput) error {
 	if v == nil {
 		return nil
@@ -1240,11 +785,11 @@ func validateOpAssociateDelegateToResourceInput(v *AssociateDelegateToResourceIn
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
-	if v.EntityId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
-	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.EntityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1258,35 +803,14 @@ func validateOpAssociateMemberToGroupInput(v *AssociateMemberToGroupInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateMemberToGroupInput"}
-	if v.MemberId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if v.GroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
 	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpCancelMailboxExportJobInput(v *CancelMailboxExportJobInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CancelMailboxExportJobInput"}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
-	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
-	}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	if v.MemberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1303,11 +827,11 @@ func validateOpCreateAliasInput(v *CreateAliasInput) error {
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
-	if v.Alias == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
-	}
 	if v.EntityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
+	}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1321,26 +845,11 @@ func validateOpCreateGroupInput(v *CreateGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateGroupInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpCreateOrganizationInput(v *CreateOrganizationInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CreateOrganizationInput"}
-	if v.Alias == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1354,14 +863,14 @@ func validateOpCreateResourceInput(v *CreateResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateResourceInput"}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1375,35 +884,17 @@ func validateOpCreateUserInput(v *CreateUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateUserInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.Password == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Password"))
 	}
 	if v.DisplayName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
 	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDeleteAccessControlRuleInput(v *DeleteAccessControlRuleInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccessControlRuleInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	if v.Password == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Password"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1417,14 +908,14 @@ func validateOpDeleteAliasInput(v *DeleteAliasInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAliasInput"}
-	if v.Alias == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if v.EntityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
+	}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1456,29 +947,14 @@ func validateOpDeleteMailboxPermissionsInput(v *DeleteMailboxPermissionsInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteMailboxPermissionsInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
 	if v.EntityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
 	}
 	if v.GranteeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GranteeId"))
-	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDeleteOrganizationInput(v *DeleteOrganizationInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DeleteOrganizationInput"}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1497,24 +973,6 @@ func validateOpDeleteResourceInput(v *DeleteResourceInput) error {
 	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDeleteRetentionPolicyInput(v *DeleteRetentionPolicyInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DeleteRetentionPolicyInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1546,11 +1004,11 @@ func validateOpDeregisterFromWorkMailInput(v *DeregisterFromWorkMailInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeregisterFromWorkMailInput"}
-	if v.EntityId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.EntityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1564,29 +1022,11 @@ func validateOpDescribeGroupInput(v *DescribeGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeGroupInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
 	if v.GroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
-	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDescribeMailboxExportJobInput(v *DescribeMailboxExportJobInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DescribeMailboxExportJobInput"}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
-	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1651,11 +1091,11 @@ func validateOpDisassociateDelegateFromResourceInput(v *DisassociateDelegateFrom
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateDelegateFromResourceInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if v.EntityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
@@ -1672,53 +1112,14 @@ func validateOpDisassociateMemberFromGroupInput(v *DisassociateMemberFromGroupIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateMemberFromGroupInput"}
-	if v.MemberId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if v.GroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
 	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpGetAccessControlEffectInput(v *GetAccessControlEffectInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "GetAccessControlEffectInput"}
-	if v.Action == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Action"))
-	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
-	}
-	if v.IpAddress == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IpAddress"))
-	}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpGetDefaultRetentionPolicyInput(v *GetDefaultRetentionPolicyInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "GetDefaultRetentionPolicyInput"}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	if v.MemberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1732,26 +1133,11 @@ func validateOpGetMailboxDetailsInput(v *GetMailboxDetailsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetMailboxDetailsInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
 	if v.UserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpListAccessControlRulesInput(v *ListAccessControlRulesInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ListAccessControlRulesInput"}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1783,11 +1169,11 @@ func validateOpListGroupMembersInput(v *ListGroupMembersInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListGroupMembersInput"}
-	if v.GroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.GroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1801,21 +1187,6 @@ func validateOpListGroupsInput(v *ListGroupsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListGroupsInput"}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpListMailboxExportJobsInput(v *ListMailboxExportJobsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ListMailboxExportJobsInput"}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
@@ -1849,11 +1220,11 @@ func validateOpListResourceDelegatesInput(v *ListResourceDelegatesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListResourceDelegatesInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1877,21 +1248,6 @@ func validateOpListResourcesInput(v *ListResourcesInput) error {
 	}
 }
 
-func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpListUsersInput(v *ListUsersInput) error {
 	if v == nil {
 		return nil
@@ -1907,71 +1263,22 @@ func validateOpListUsersInput(v *ListUsersInput) error {
 	}
 }
 
-func validateOpPutAccessControlRuleInput(v *PutAccessControlRuleInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "PutAccessControlRuleInput"}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if len(v.Effect) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Effect"))
-	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpPutMailboxPermissionsInput(v *PutMailboxPermissionsInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutMailboxPermissionsInput"}
-	if v.GranteeId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GranteeId"))
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if v.EntityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
 	}
+	if v.GranteeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GranteeId"))
+	}
 	if v.PermissionValues == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PermissionValues"))
-	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpPutRetentionPolicyInput(v *PutRetentionPolicyInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "PutRetentionPolicyInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
-	}
-	if v.FolderConfigurations == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FolderConfigurations"))
-	} else if v.FolderConfigurations != nil {
-		if err := validateFolderConfigurations(v.FolderConfigurations); err != nil {
-			invalidParams.AddNested("FolderConfigurations", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1985,14 +1292,14 @@ func validateOpRegisterToWorkMailInput(v *RegisterToWorkMailInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterToWorkMailInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
 	if v.EntityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
 	}
 	if v.Email == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Email"))
-	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2006,87 +1313,14 @@ func validateOpResetPasswordInput(v *ResetPasswordInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResetPasswordInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
 	if v.UserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
-	}
 	if v.Password == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Password"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpStartMailboxExportJobInput(v *StartMailboxExportJobInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "StartMailboxExportJobInput"}
-	if v.EntityId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
-	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
-	}
-	if v.S3BucketName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3BucketName"))
-	}
-	if v.S3Prefix == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3Prefix"))
-	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
-	}
-	if v.KmsKeyArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpTagResourceInput(v *TagResourceInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	} else if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpUntagResourceInput(v *UntagResourceInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
-	}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2100,11 +1334,11 @@ func validateOpUpdateMailboxQuotaInput(v *UpdateMailboxQuotaInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateMailboxQuotaInput"}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if v.MailboxQuota == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MailboxQuota"))
@@ -2124,11 +1358,11 @@ func validateOpUpdatePrimaryEmailAddressInput(v *UpdatePrimaryEmailAddressInput)
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
-	if v.Email == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Email"))
-	}
 	if v.EntityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
+	}
+	if v.Email == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Email"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2142,11 +1376,11 @@ func validateOpUpdateResourceInput(v *UpdateResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateResourceInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

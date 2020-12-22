@@ -162,15 +162,16 @@ type Locale string
 
 // Enum values for Locale
 const (
-	LocaleDeDe Locale = "de-DE"
-	LocaleEnAu Locale = "en-AU"
-	LocaleEnGb Locale = "en-GB"
-	LocaleEnUs Locale = "en-US"
-	LocaleEsEs Locale = "es-ES"
-	LocaleEsUs Locale = "es-US"
-	LocaleFrFr Locale = "fr-FR"
-	LocaleFrCa Locale = "fr-CA"
-	LocaleItIt Locale = "it-IT"
+	LocaleDeDe  Locale = "de-DE"
+	LocaleEnAu  Locale = "en-AU"
+	LocaleEnGb  Locale = "en-GB"
+	LocaleEnUs  Locale = "en-US"
+	LocaleEs419 Locale = "es-419"
+	LocaleEsEs  Locale = "es-ES"
+	LocaleEsUs  Locale = "es-US"
+	LocaleFrFr  Locale = "fr-FR"
+	LocaleFrCa  Locale = "fr-CA"
+	LocaleItIt  Locale = "it-IT"
 )
 
 // Values returns all known values for Locale. Note that this can be expanded in
@@ -182,6 +183,7 @@ func (Locale) Values() []Locale {
 		"en-AU",
 		"en-GB",
 		"en-US",
+		"es-419",
 		"es-ES",
 		"es-US",
 		"fr-FR",

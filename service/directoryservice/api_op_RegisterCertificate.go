@@ -6,11 +6,12 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers a certificate for secured LDAP connection.
+// Registers a certificate for a secure LDAP or client certificate authentication.
 func (c *Client) RegisterCertificate(ctx context.Context, params *RegisterCertificateInput, optFns ...func(*Options)) (*RegisterCertificateOutput, error) {
 	if params == nil {
 		params = &RegisterCertificateInput{}
@@ -37,6 +38,14 @@ type RegisterCertificateInput struct {
 	//
 	// This member is required.
 	DirectoryId *string
+
+	// A ClientCertAuthSettings object that contains client certificate authentication
+	// settings.
+	ClientCertAuthSettings *types.ClientCertAuthSettings
+
+	// The function that the registered certificate performs. Valid values include
+	// ClientLDAPS or ClientCertAuth. The default value is ClientLDAPS.
+	Type types.CertificateType
 }
 
 type RegisterCertificateOutput struct {

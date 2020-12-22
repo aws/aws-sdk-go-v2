@@ -189,7 +189,7 @@ func awsRestjson1_serializeOpDocumentGetDASHStreamingSessionURLInput(v *GetDASHS
 
 	if v.MaxManifestFragmentResults != nil {
 		ok := object.Key("MaxManifestFragmentResults")
-		ok.Long(*v.MaxManifestFragmentResults)
+		ok.Integer(*v.MaxManifestFragmentResults)
 	}
 
 	if len(v.PlaybackMode) > 0 {
@@ -304,7 +304,7 @@ func awsRestjson1_serializeOpDocumentGetHLSStreamingSessionURLInput(v *GetHLSStr
 
 	if v.MaxMediaPlaylistFragmentResults != nil {
 		ok := object.Key("MaxMediaPlaylistFragmentResults")
-		ok.Long(*v.MaxMediaPlaylistFragmentResults)
+		ok.Integer(*v.MaxMediaPlaylistFragmentResults)
 	}
 
 	if len(v.PlaybackMode) > 0 {
@@ -479,7 +479,7 @@ func awsRestjson1_serializeOpDocumentListFragmentsInput(v *ListFragmentsInput, v
 
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Long(*v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {

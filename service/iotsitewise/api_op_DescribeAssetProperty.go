@@ -64,10 +64,15 @@ type DescribeAssetPropertyOutput struct {
 	// This member is required.
 	AssetName *string
 
-	// The asset property's definition, alias, and notification state.
-	//
-	// This member is required.
+	// The asset property's definition, alias, and notification state. This response
+	// includes this object for normal asset properties. If you describe an asset
+	// property in a composite model, this response includes the asset property
+	// information in compositeModel.
 	AssetProperty *types.Property
+
+	// The composite asset model that declares this asset property, if this asset
+	// property exists in a composite model.
+	CompositeModel *types.CompositeModelProperty
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

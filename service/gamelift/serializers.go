@@ -5302,6 +5302,11 @@ func awsAwsjson11_serializeOpDocumentCreateMatchmakingConfigurationInput(v *Crea
 		ok.String(*v.Description)
 	}
 
+	if len(v.FlexMatchMode) > 0 {
+		ok := object.Key("FlexMatchMode")
+		ok.String(string(v.FlexMatchMode))
+	}
+
 	if v.GameProperties != nil {
 		ok := object.Key("GameProperties")
 		if err := awsAwsjson11_serializeDocumentGamePropertyList(v.GameProperties, ok); err != nil {
@@ -7068,6 +7073,11 @@ func awsAwsjson11_serializeOpDocumentUpdateMatchmakingConfigurationInput(v *Upda
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if len(v.FlexMatchMode) > 0 {
+		ok := object.Key("FlexMatchMode")
+		ok.String(string(v.FlexMatchMode))
 	}
 
 	if v.GameProperties != nil {

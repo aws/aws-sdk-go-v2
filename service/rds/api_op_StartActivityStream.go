@@ -33,7 +33,8 @@ func (c *Client) StartActivityStream(ctx context.Context, params *StartActivityS
 type StartActivityStreamInput struct {
 
 	// The AWS KMS key identifier for encrypting messages in the database activity
-	// stream. The key identifier can be either a key ID, a key ARN, or a key alias.
+	// stream. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+	// name for the AWS KMS customer master key (CMK).
 	//
 	// This member is required.
 	KmsKeyId *string
@@ -45,7 +46,7 @@ type StartActivityStreamInput struct {
 	// This member is required.
 	Mode types.ActivityStreamMode
 
-	// The Amazon Resource Name (ARN) of the DB cluster, for example
+	// The Amazon Resource Name (ARN) of the DB cluster, for example,
 	// arn:aws:rds:us-east-1:12345667890:cluster:das-cluster.
 	//
 	// This member is required.

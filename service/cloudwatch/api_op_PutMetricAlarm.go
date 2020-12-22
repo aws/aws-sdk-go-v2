@@ -21,34 +21,18 @@ import (
 // of the alarm. If you are an IAM user, you must have Amazon EC2 permissions for
 // some alarm operations:
 //
-// * iam:CreateServiceLinkedRole for all alarms with EC2
-// actions
+// * The iam:CreateServiceLinkedRole for all alarms with
+// EC2 actions
 //
-// * ec2:DescribeInstanceStatus and ec2:DescribeInstances for all alarms
-// on EC2 instance status metrics
+// * The iam:CreateServiceLinkedRole to create an alarm with Systems
+// Manager OpsItem actions.
 //
-// * ec2:StopInstances for alarms with stop
-// actions
-//
-// * ec2:TerminateInstances for alarms with terminate actions
-//
-// * No
-// specific permissions are needed for alarms with recover actions
-//
-// If you have
-// read/write permissions for Amazon CloudWatch but not for Amazon EC2, you can
-// still create an alarm, but the stop or terminate actions are not performed.
-// However, if you are later granted the required permissions, the alarm actions
-// that you created earlier are performed. If you are using an IAM role (for
-// example, an EC2 instance profile), you cannot stop or terminate the instance
-// using alarm actions. However, you can still see the alarm state and perform any
-// other actions such as Amazon SNS notifications or Auto Scaling policies. If you
-// are using temporary security credentials granted using AWS STS, you cannot stop
-// or terminate an EC2 instance using alarm actions. The first time you create an
-// alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm
-// API, CloudWatch creates the necessary service-linked role for you. The
-// service-linked role is called AWSServiceRoleForCloudWatchEvents. For more
-// information, see AWS service-linked role
+// The first time you create an alarm in the AWS
+// Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch
+// creates the necessary service-linked rolea for you. The service-linked roles are
+// called AWSServiceRoleForCloudWatchEvents and
+// AWSServiceRoleForCloudWatchAlarms_ActionSSM. For more information, see AWS
+// service-linked role
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role).
 func (c *Client) PutMetricAlarm(ctx context.Context, params *PutMetricAlarmInput, optFns ...func(*Options)) (*PutMetricAlarmOutput, error) {
 	if params == nil {
@@ -101,10 +85,10 @@ type PutMetricAlarmInput struct {
 	// | arn:aws:automate:region:ec2:recover | arn:aws:automate:region:ec2:reboot |
 	// arn:aws:sns:region:account-id:sns-topic-name  |
 	// arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
-	// Valid Values (for use with IAM roles):
-	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0 |
-	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0 |
-	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0
+	// | arn:aws:ssm:region:account-id:opsitem:severity  Valid Values (for use with IAM
+	// roles): arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0
+	// | arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0
+	// | arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0
 	AlarmActions []string
 
 	// The description for the alarm.
@@ -211,7 +195,13 @@ type PutMetricAlarmInput struct {
 	// A list of key-value pairs to associate with the alarm. You can associate as many
 	// as 50 tags with an alarm. Tags can help you organize and categorize your
 	// resources. You can also use them to scope user permissions by granting a user
-	// permission to access or change only resources with certain tag values.
+	// permission to access or change only resources with certain tag values. If you
+	// are using this operation to update an existing alarm, any tags you specify in
+	// this parameter are ignored. To change the tags of an existing alarm, use
+	// TagResource
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html)
+	// or UntagResource
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html).
 	Tags []types.Tag
 
 	// The value against which the specified statistic is compared. This parameter is

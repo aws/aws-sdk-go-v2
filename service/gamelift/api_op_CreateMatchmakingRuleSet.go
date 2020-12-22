@@ -22,15 +22,15 @@ import (
 // before creating a new rule set. Learn more
 //
 // * Build a Rule Set
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html)
+// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
 //
 // *
 // Design a Matchmaker
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-configuration.html)
+// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-configuration.html)
 //
 // *
 // Matchmaking with FlexMatch
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-intro.html)
+// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-intro.html)
 //
 // Related
 // operations

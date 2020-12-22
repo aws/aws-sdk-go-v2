@@ -4,12 +4,6 @@ package types
 
 type ActivityStreamMode string
 
-// Enum values for ActivityStreamMode
-const (
-	ActivityStreamModeSync  ActivityStreamMode = "sync"
-	ActivityStreamModeAsync ActivityStreamMode = "async"
-)
-
 // Values returns all known values for ActivityStreamMode. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -21,14 +15,6 @@ func (ActivityStreamMode) Values() []ActivityStreamMode {
 }
 
 type ActivityStreamStatus string
-
-// Enum values for ActivityStreamStatus
-const (
-	ActivityStreamStatusStopped  ActivityStreamStatus = "stopped"
-	ActivityStreamStatusStarting ActivityStreamStatus = "starting"
-	ActivityStreamStatusStarted  ActivityStreamStatus = "started"
-	ActivityStreamStatusStopping ActivityStreamStatus = "stopping"
-)
 
 // Values returns all known values for ActivityStreamStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -43,12 +29,6 @@ func (ActivityStreamStatus) Values() []ActivityStreamStatus {
 }
 
 type ApplyMethod string
-
-// Enum values for ApplyMethod
-const (
-	ApplyMethodImmediate     ApplyMethod = "immediate"
-	ApplyMethodPendingReboot ApplyMethod = "pending-reboot"
-)
 
 // Values returns all known values for ApplyMethod. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
@@ -163,16 +143,6 @@ func (ReplicaMode) Values() []ReplicaMode {
 }
 
 type SourceType string
-
-// Enum values for SourceType
-const (
-	SourceTypeDbInstance        SourceType = "db-instance"
-	SourceTypeDbParameterGroup  SourceType = "db-parameter-group"
-	SourceTypeDbSecurityGroup   SourceType = "db-security-group"
-	SourceTypeDbSnapshot        SourceType = "db-snapshot"
-	SourceTypeDbCluster         SourceType = "db-cluster"
-	SourceTypeDbClusterSnapshot SourceType = "db-cluster-snapshot"
-)
 
 // Values returns all known values for SourceType. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of

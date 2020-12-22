@@ -11,7 +11,7 @@ import (
 )
 
 // Describes whether EBS encryption by default is enabled for your account in the
-// current Region. For more information, see Amazon EBS Encryption
+// current Region. For more information, see Amazon EBS encryption
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the
 // Amazon Elastic Compute Cloud User Guide.
 func (c *Client) GetEbsEncryptionByDefault(ctx context.Context, params *GetEbsEncryptionByDefaultInput, optFns ...func(*Options)) (*GetEbsEncryptionByDefaultOutput, error) {

@@ -22,6 +22,10 @@ type Certificate struct {
 	// The identifier of the certificate.
 	CertificateId *string
 
+	// A ClientCertAuthSettings object that contains client certificate authentication
+	// settings.
+	ClientCertAuthSettings *ClientCertAuthSettings
+
 	// The common name for the certificate.
 	CommonName *string
 
@@ -36,6 +40,10 @@ type Certificate struct {
 
 	// Describes a state change for the certificate.
 	StateReason *string
+
+	// The function that the registered certificate performs. Valid values include
+	// ClientLDAPS or ClientCertAuth. The default value is ClientLDAPS.
+	Type CertificateType
 }
 
 // Contains general information about a certificate.
@@ -52,6 +60,20 @@ type CertificateInfo struct {
 
 	// The state of the certificate.
 	State CertificateState
+
+	// The function that the registered certificate performs. Valid values include
+	// ClientLDAPS or ClientCertAuth. The default value is ClientLDAPS.
+	Type CertificateType
+}
+
+// Contains information about the client certificate authentication settings for
+// the RegisterCertificate and DescribeCertificate operations.
+type ClientCertAuthSettings struct {
+
+	// Specifies the URL of the default OCSP server used to check for revocation
+	// status. A secondary value to any OCSP address found in the AIA extension of the
+	// user certificate.
+	OCSPUrl *string
 }
 
 // Contains information about a computer account in a directory.
@@ -479,7 +501,7 @@ type RadiusSettings struct {
 	UseSameUsername bool
 }
 
-// The replicated regional information for a directory.
+// The replicated Region information for a directory.
 type RegionDescription struct {
 
 	// The desired number of domain controllers in the specified Region for the
@@ -498,7 +520,7 @@ type RegionDescription struct {
 	// The name of the Region. For example, us-east-1.
 	RegionName *string
 
-	// Specifies if the Region is the primary Region or an additional Region.
+	// Specifies whether the Region is the primary Region or an additional Region.
 	RegionType RegionType
 
 	// The status of the replication process for the specified Region.
@@ -519,8 +541,7 @@ type RegionsInfo struct {
 	// Region.
 	AdditionalRegions []string
 
-	// The Region from where the AWS Managed Microsoft AD directory was originally
-	// created.
+	// The Region where the AWS Managed Microsoft AD directory was originally created.
 	PrimaryRegion *string
 }
 

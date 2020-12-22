@@ -314,11 +314,11 @@ func validateOpCreateEnvironmentEC2Input(v *CreateEnvironmentEC2Input) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateEnvironmentEC2Input"}
-	if v.InstanceType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.InstanceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -337,11 +337,11 @@ func validateOpCreateEnvironmentMembershipInput(v *CreateEnvironmentMembershipIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateEnvironmentMembershipInput"}
-	if v.UserArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserArn"))
-	}
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.UserArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserArn"))
 	}
 	if len(v.Permissions) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
@@ -373,11 +373,11 @@ func validateOpDeleteEnvironmentMembershipInput(v *DeleteEnvironmentMembershipIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteEnvironmentMembershipInput"}
-	if v.UserArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserArn"))
-	}
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.UserArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -436,15 +436,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -458,11 +458,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -491,14 +491,14 @@ func validateOpUpdateEnvironmentMembershipInput(v *UpdateEnvironmentMembershipIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateEnvironmentMembershipInput"}
-	if len(v.Permissions) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
-	}
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
 	}
 	if v.UserArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserArn"))
+	}
+	if len(v.Permissions) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

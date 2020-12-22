@@ -303,11 +303,11 @@ func validateDomainValidationOption(v *types.DomainValidationOption) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DomainValidationOption"}
-	if v.ValidationDomain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ValidationDomain"))
-	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.ValidationDomain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ValidationDomain"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -370,15 +370,15 @@ func validateOpAddTagsToCertificateInput(v *AddTagsToCertificateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddTagsToCertificateInput"}
+	if v.CertificateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateArn"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.CertificateArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -422,11 +422,11 @@ func validateOpExportCertificateInput(v *ExportCertificateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExportCertificateInput"}
-	if v.Passphrase == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Passphrase"))
-	}
 	if v.CertificateArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateArn"))
+	}
+	if v.Passphrase == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Passphrase"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -455,11 +455,11 @@ func validateOpImportCertificateInput(v *ImportCertificateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ImportCertificateInput"}
-	if v.PrivateKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PrivateKey"))
-	}
 	if v.Certificate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Certificate"))
+	}
+	if v.PrivateKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivateKey"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -555,14 +555,14 @@ func validateOpResendValidationEmailInput(v *ResendValidationEmailInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResendValidationEmailInput"}
-	if v.ValidationDomain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ValidationDomain"))
-	}
 	if v.CertificateArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateArn"))
 	}
 	if v.Domain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.ValidationDomain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ValidationDomain"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -576,11 +576,11 @@ func validateOpUpdateCertificateOptionsInput(v *UpdateCertificateOptionsInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCertificateOptionsInput"}
-	if v.Options == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Options"))
-	}
 	if v.CertificateArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateArn"))
+	}
+	if v.Options == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Options"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

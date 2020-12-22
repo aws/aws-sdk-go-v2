@@ -44,7 +44,7 @@ type ListVPCAssociationAuthorizationsInput struct {
 	// Optional: An integer that specifies the maximum number of VPCs that you want
 	// Amazon Route 53 to return. If you don't specify a value for MaxResults, Route 53
 	// returns up to 50 VPCs per page.
-	MaxResults *string
+	MaxResults *int32
 
 	// Optional: If a response includes a NextToken element, there are more VPCs that
 	// can be associated with the specified hosted zone. To get the next page of

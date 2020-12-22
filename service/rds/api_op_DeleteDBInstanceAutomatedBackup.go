@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes automated backups based on the source instance's DbiResourceId value or
-// the restorable instance's resource ID.
+// Deletes automated backups using the DbiResourceId value of the source DB
+// instance or the Amazon Resource Name (ARN) of the automated backups.
 func (c *Client) DeleteDBInstanceAutomatedBackup(ctx context.Context, params *DeleteDBInstanceAutomatedBackupInput, optFns ...func(*Options)) (*DeleteDBInstanceAutomatedBackupOutput, error) {
 	if params == nil {
 		params = &DeleteDBInstanceAutomatedBackupInput{}
@@ -31,18 +31,20 @@ func (c *Client) DeleteDBInstanceAutomatedBackup(ctx context.Context, params *De
 // Parameter input for the DeleteDBInstanceAutomatedBackup operation.
 type DeleteDBInstanceAutomatedBackupInput struct {
 
+	// The Amazon Resource Name (ARN) of the automated backups to delete, for example,
+	// arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE.
+	DBInstanceAutomatedBackupsArn *string
+
 	// The identifier for the source DB instance, which can't be changed and which is
 	// unique to an AWS Region.
-	//
-	// This member is required.
 	DbiResourceId *string
 }
 
 type DeleteDBInstanceAutomatedBackupOutput struct {
 
-	// An automated backup of a DB instance. It it consists of system backups,
-	// transaction logs, and the database instance properties that existed at the time
-	// you deleted the source instance.
+	// An automated backup of a DB instance. It consists of system backups, transaction
+	// logs, and the database instance properties that existed at the time you deleted
+	// the source instance.
 	DBInstanceAutomatedBackup *types.DBInstanceAutomatedBackup
 
 	// Metadata pertaining to the operation's result.
@@ -89,9 +91,6 @@ func addOperationDeleteDBInstanceAutomatedBackupMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpDeleteDBInstanceAutomatedBackupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDBInstanceAutomatedBackup(options.Region), middleware.Before); err != nil {

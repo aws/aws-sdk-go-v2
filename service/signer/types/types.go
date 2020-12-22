@@ -43,6 +43,22 @@ type HashAlgorithmOptions struct {
 	DefaultValue HashAlgorithm
 }
 
+// A cross-account permission for a signing profile.
+type Permission struct {
+
+	// An AWS Signer action permitted as part of cross-account permissions.
+	Action *string
+
+	// The AWS principal that has been granted a cross-account permission.
+	Principal *string
+
+	// The signing profile version that a permission applies to.
+	ProfileVersion *string
+
+	// A unique identifier for a cross-account permission statement.
+	StatementId *string
+}
+
 // The name and prefix of the S3 bucket where code signing saves your signed
 // objects.
 type S3Destination struct {
@@ -82,6 +98,16 @@ type S3Source struct {
 	//
 	// This member is required.
 	Version *string
+}
+
+// The validity period for a signing job.
+type SignatureValidityPeriod struct {
+
+	// The time unit for signature validity.
+	Type ValidityType
+
+	// The numerical value of the time unit for signature validity.
+	Value int32
 }
 
 // Points to an S3SignedObject object that contains information about your signed
@@ -139,8 +165,32 @@ type SigningJob struct {
 	// The date and time that the signing job was created.
 	CreatedAt *time.Time
 
+	// Indicates whether the signing job is revoked.
+	IsRevoked bool
+
 	// The ID of the signing job.
 	JobId *string
+
+	// The AWS account ID of the job invoker.
+	JobInvoker *string
+
+	// The AWS account ID of the job owner.
+	JobOwner *string
+
+	// The name of a signing platform.
+	PlatformDisplayName *string
+
+	// The unique identifier for a signing platform.
+	PlatformId *string
+
+	// The name of the signing profile that created a signing job.
+	ProfileName *string
+
+	// The version of the signing profile that created a signing job.
+	ProfileVersion *string
+
+	// The time when the signature of a signing job expires.
+	SignatureExpiresAt *time.Time
 
 	// A SignedObject structure that contains information about a signing job's signed
 	// code image.
@@ -155,6 +205,19 @@ type SigningJob struct {
 
 	// The status of the signing job.
 	Status SigningStatus
+}
+
+// Revocation information for a signing job.
+type SigningJobRevocationRecord struct {
+
+	// A caller-supplied reason for revocation.
+	Reason *string
+
+	// The time of revocation.
+	RevokedAt *time.Time
+
+	// The identity of the revoker.
+	RevokedBy *string
 }
 
 // The ACM certificate that is used to sign your code.
@@ -185,6 +248,9 @@ type SigningPlatform struct {
 
 	// The ID of a code signing; platform.
 	PlatformId *string
+
+	// Indicates whether revocation is supported for the platform.
+	RevocationSupported bool
 
 	// The configuration of a code signing platform. This includes the designated hash
 	// algorithm and encryption algorithm of a signing platform.
@@ -220,11 +286,23 @@ type SigningProfile struct {
 	// The Amazon Resource Name (ARN) for the signing profile.
 	Arn *string
 
+	// The name of the signing platform.
+	PlatformDisplayName *string
+
 	// The ID of a platform that is available for use by a signing profile.
 	PlatformId *string
 
 	// The name of the signing profile.
 	ProfileName *string
+
+	// The version of a signing profile.
+	ProfileVersion *string
+
+	// The ARN of a signing profile, including the profile version.
+	ProfileVersionArn *string
+
+	// The validity period for a signing job created using this signing profile.
+	SignatureValidityPeriod *SignatureValidityPeriod
 
 	// The ACM certificate that is available for use by a signing profile.
 	SigningMaterial *SigningMaterial
@@ -237,6 +315,19 @@ type SigningProfile struct {
 
 	// A list of tags associated with the signing profile.
 	Tags map[string]string
+}
+
+// Revocation information for a signing profile.
+type SigningProfileRevocationRecord struct {
+
+	// The time when revocation becomes effective.
+	RevocationEffectiveFrom *time.Time
+
+	// The time when the signing profile was revoked.
+	RevokedAt *time.Time
+
+	// The identity of the revoker.
+	RevokedBy *string
 }
 
 // An S3Source object that contains information about the S3 bucket where you saved

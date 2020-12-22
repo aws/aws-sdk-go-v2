@@ -42,6 +42,11 @@ type DescribeUpdateInput struct {
 	// This member is required.
 	UpdateId *string
 
+	// The name of the add-on. The name must match one of the names returned by
+	// ListAddons
+	// (https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html).
+	AddonName *string
+
 	// The name of the Amazon EKS node group associated with the update.
 	NodegroupName *string
 }

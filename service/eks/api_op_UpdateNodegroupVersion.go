@@ -22,8 +22,8 @@ import (
 // AMI version of a node group's current Kubernetes version by not specifying a
 // Kubernetes version in the request. You can update to the latest AMI version of
 // your cluster's current Kubernetes version by specifying your cluster's
-// Kubernetes version in the request. For more information, see Amazon
-// EKS-Optimized Linux AMI Versions
+// Kubernetes version in the request. For more information, see Amazon EKS
+// optimized Amazon Linux 2 AMI versions
 // (https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html)
 // in the Amazon EKS User Guide. You cannot roll back a node group to an earlier
 // Kubernetes version or AMI version. When a node in a managed node group is
@@ -74,10 +74,10 @@ type UpdateNodegroupVersionInput struct {
 	// originally deployed with a launch template.
 	LaunchTemplate *types.LaunchTemplateSpecification
 
-	// The AMI version of the Amazon EKS-optimized AMI to use for the update. By
+	// The AMI version of the Amazon EKS optimized AMI to use for the update. By
 	// default, the latest available AMI version for the node group's Kubernetes
-	// version is used. For more information, see Amazon EKS-Optimized Linux AMI
-	// Versions
+	// version is used. For more information, see Amazon EKS optimized Amazon Linux 2
+	// AMI versions
 	// (https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html)
 	// in the Amazon EKS User Guide. If you specify launchTemplate, and your launch
 	// template uses a custom AMI, then don't specify releaseVersion, or the node group

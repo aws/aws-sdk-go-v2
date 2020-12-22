@@ -20,7 +20,7 @@ import (
 // provided to the game server. If the operation is successful, the service sends
 // back an empty JSON struct with the HTTP 200 response (not an empty HTTP body).
 // Learn more  Add FlexMatch to a Game Client
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html)
+// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html)
 // Related operations
 //
 // * StartMatchmaking

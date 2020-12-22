@@ -186,18 +186,18 @@ func validateOpPutEventsInput(v *PutEventsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutEventsInput"}
+	if v.TrackingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrackingId"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
 	if v.EventList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventList"))
 	} else if v.EventList != nil {
 		if err := validateEventList(v.EventList); err != nil {
 			invalidParams.AddNested("EventList", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.SessionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
-	}
-	if v.TrackingId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TrackingId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

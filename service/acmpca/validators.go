@@ -543,14 +543,14 @@ func validateCertificateAuthorityConfiguration(v *types.CertificateAuthorityConf
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CertificateAuthorityConfiguration"}
+	if len(v.KeyAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyAlgorithm"))
+	}
 	if len(v.SigningAlgorithm) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SigningAlgorithm"))
 	}
 	if v.Subject == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Subject"))
-	}
-	if len(v.KeyAlgorithm) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("KeyAlgorithm"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -643,14 +643,14 @@ func validateOpCreateCertificateAuthorityAuditReportInput(v *CreateCertificateAu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCertificateAuthorityAuditReportInput"}
+	if v.CertificateAuthorityArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
+	}
 	if v.S3BucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3BucketName"))
 	}
 	if len(v.AuditReportResponseFormat) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AuditReportResponseFormat"))
-	}
-	if v.CertificateAuthorityArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -664,11 +664,6 @@ func validateOpCreateCertificateAuthorityInput(v *CreateCertificateAuthorityInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCertificateAuthorityInput"}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.CertificateAuthorityConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityConfiguration"))
 	} else if v.CertificateAuthorityConfiguration != nil {
@@ -676,12 +671,17 @@ func validateOpCreateCertificateAuthorityInput(v *CreateCertificateAuthorityInpu
 			invalidParams.AddNested("CertificateAuthorityConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.CertificateAuthorityType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityType"))
-	}
 	if v.RevocationConfiguration != nil {
 		if err := validateRevocationConfiguration(v.RevocationConfiguration); err != nil {
 			invalidParams.AddNested("RevocationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.CertificateAuthorityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityType"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -696,14 +696,14 @@ func validateOpCreatePermissionInput(v *CreatePermissionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePermissionInput"}
-	if v.Actions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
+	if v.CertificateAuthorityArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
 	}
 	if v.Principal == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
 	}
-	if v.CertificateAuthorityArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
+	if v.Actions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -765,11 +765,11 @@ func validateOpDescribeCertificateAuthorityAuditReportInput(v *DescribeCertifica
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeCertificateAuthorityAuditReportInput"}
-	if v.AuditReportId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AuditReportId"))
-	}
 	if v.CertificateAuthorityArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
+	}
+	if v.AuditReportId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuditReportId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -828,11 +828,11 @@ func validateOpGetCertificateInput(v *GetCertificateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetCertificateInput"}
-	if v.CertificateArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateArn"))
-	}
 	if v.CertificateAuthorityArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
+	}
+	if v.CertificateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -861,11 +861,11 @@ func validateOpImportCertificateAuthorityCertificateInput(v *ImportCertificateAu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ImportCertificateAuthorityCertificateInput"}
-	if v.Certificate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Certificate"))
-	}
 	if v.CertificateAuthorityArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
+	}
+	if v.Certificate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Certificate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -879,11 +879,11 @@ func validateOpIssueCertificateInput(v *IssueCertificateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IssueCertificateInput"}
-	if v.Csr == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Csr"))
-	}
 	if v.CertificateAuthorityArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
+	}
+	if v.Csr == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Csr"))
 	}
 	if len(v.SigningAlgorithm) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SigningAlgorithm"))
@@ -937,11 +937,11 @@ func validateOpPutPolicyInput(v *PutPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutPolicyInput"}
-	if v.Policy == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -970,11 +970,11 @@ func validateOpRevokeCertificateInput(v *RevokeCertificateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RevokeCertificateInput"}
-	if v.CertificateSerial == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateSerial"))
-	}
 	if v.CertificateAuthorityArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
+	}
+	if v.CertificateSerial == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateSerial"))
 	}
 	if len(v.RevocationReason) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RevocationReason"))
@@ -1013,15 +1013,15 @@ func validateOpUntagCertificateAuthorityInput(v *UntagCertificateAuthorityInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagCertificateAuthorityInput"}
+	if v.CertificateAuthorityArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.CertificateAuthorityArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1035,13 +1035,13 @@ func validateOpUpdateCertificateAuthorityInput(v *UpdateCertificateAuthorityInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCertificateAuthorityInput"}
+	if v.CertificateAuthorityArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
+	}
 	if v.RevocationConfiguration != nil {
 		if err := validateRevocationConfiguration(v.RevocationConfiguration); err != nil {
 			invalidParams.AddNested("RevocationConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.CertificateAuthorityArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -256,6 +256,9 @@ func awsAwsjson11_deserializeOpErrorCreateTrail(response *smithyhttp.Response, m
 	case strings.EqualFold("CloudTrailAccessNotEnabledException", errorCode):
 		return awsAwsjson11_deserializeErrorCloudTrailAccessNotEnabledException(response, errorBody)
 
+	case strings.EqualFold("CloudTrailInvalidClientTokenIdException", errorCode):
+		return awsAwsjson11_deserializeErrorCloudTrailInvalidClientTokenIdException(response, errorBody)
+
 	case strings.EqualFold("CloudWatchLogsDeliveryUnavailableException", errorCode):
 		return awsAwsjson11_deserializeErrorCloudWatchLogsDeliveryUnavailableException(response, errorBody)
 
@@ -2323,6 +2326,9 @@ func awsAwsjson11_deserializeOpErrorUpdateTrail(response *smithyhttp.Response, m
 	case strings.EqualFold("CloudTrailAccessNotEnabledException", errorCode):
 		return awsAwsjson11_deserializeErrorCloudTrailAccessNotEnabledException(response, errorBody)
 
+	case strings.EqualFold("CloudTrailInvalidClientTokenIdException", errorCode):
+		return awsAwsjson11_deserializeErrorCloudTrailInvalidClientTokenIdException(response, errorBody)
+
 	case strings.EqualFold("CloudWatchLogsDeliveryUnavailableException", errorCode):
 		return awsAwsjson11_deserializeErrorCloudWatchLogsDeliveryUnavailableException(response, errorBody)
 
@@ -2466,6 +2472,41 @@ func awsAwsjson11_deserializeErrorCloudTrailARNInvalidException(response *smithy
 
 	output := &types.CloudTrailARNInvalidException{}
 	err := awsAwsjson11_deserializeDocumentCloudTrailARNInvalidException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorCloudTrailInvalidClientTokenIdException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.CloudTrailInvalidClientTokenIdException{}
+	err := awsAwsjson11_deserializeDocumentCloudTrailInvalidClientTokenIdException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -3881,6 +3922,189 @@ func awsAwsjson11_deserializeErrorUnsupportedOperationException(response *smithy
 	return output
 }
 
+func awsAwsjson11_deserializeDocumentAdvancedEventSelector(v **types.AdvancedEventSelector, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdvancedEventSelector
+	if *v == nil {
+		sv = &types.AdvancedEventSelector{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FieldSelectors":
+			if err := awsAwsjson11_deserializeDocumentAdvancedFieldSelectors(&sv.FieldSelectors, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SelectorName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAdvancedEventSelectors(v *[]types.AdvancedEventSelector, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AdvancedEventSelector
+	if *v == nil {
+		cv = []types.AdvancedEventSelector{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AdvancedEventSelector
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAdvancedEventSelector(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAdvancedFieldSelector(v **types.AdvancedFieldSelector, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdvancedFieldSelector
+	if *v == nil {
+		sv = &types.AdvancedFieldSelector{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EndsWith":
+			if err := awsAwsjson11_deserializeDocumentOperator(&sv.EndsWith, value); err != nil {
+				return err
+			}
+
+		case "Equals":
+			if err := awsAwsjson11_deserializeDocumentOperator(&sv.Equals, value); err != nil {
+				return err
+			}
+
+		case "Field":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SelectorField to be of type string, got %T instead", value)
+				}
+				sv.Field = ptr.String(jtv)
+			}
+
+		case "NotEndsWith":
+			if err := awsAwsjson11_deserializeDocumentOperator(&sv.NotEndsWith, value); err != nil {
+				return err
+			}
+
+		case "NotEquals":
+			if err := awsAwsjson11_deserializeDocumentOperator(&sv.NotEquals, value); err != nil {
+				return err
+			}
+
+		case "NotStartsWith":
+			if err := awsAwsjson11_deserializeDocumentOperator(&sv.NotStartsWith, value); err != nil {
+				return err
+			}
+
+		case "StartsWith":
+			if err := awsAwsjson11_deserializeDocumentOperator(&sv.StartsWith, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAdvancedFieldSelectors(v *[]types.AdvancedFieldSelector, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AdvancedFieldSelector
+	if *v == nil {
+		cv = []types.AdvancedFieldSelector{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AdvancedFieldSelector
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAdvancedFieldSelector(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCloudTrailAccessNotEnabledException(v **types.CloudTrailAccessNotEnabledException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3937,6 +4161,46 @@ func awsAwsjson11_deserializeDocumentCloudTrailARNInvalidException(v **types.Clo
 	var sv *types.CloudTrailARNInvalidException
 	if *v == nil {
 		sv = &types.CloudTrailARNInvalidException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCloudTrailInvalidClientTokenIdException(v **types.CloudTrailInvalidClientTokenIdException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CloudTrailInvalidClientTokenIdException
+	if *v == nil {
+		sv = &types.CloudTrailInvalidClientTokenIdException{}
 	} else {
 		sv = *v
 	}
@@ -5625,6 +5889,42 @@ func awsAwsjson11_deserializeDocumentOperationNotPermittedException(v **types.Op
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentOperator(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected OperatorValue to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentOrganizationNotInAllFeaturesModeException(v **types.OrganizationNotInAllFeaturesModeException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6952,6 +7252,11 @@ func awsAwsjson11_deserializeOpDocumentGetEventSelectorsOutput(v **GetEventSelec
 
 	for key, value := range shape {
 		switch key {
+		case "AdvancedEventSelectors":
+			if err := awsAwsjson11_deserializeDocumentAdvancedEventSelectors(&sv.AdvancedEventSelectors, value); err != nil {
+				return err
+			}
+
 		case "EventSelectors":
 			if err := awsAwsjson11_deserializeDocumentEventSelectors(&sv.EventSelectors, value); err != nil {
 				return err
@@ -7466,6 +7771,11 @@ func awsAwsjson11_deserializeOpDocumentPutEventSelectorsOutput(v **PutEventSelec
 
 	for key, value := range shape {
 		switch key {
+		case "AdvancedEventSelectors":
+			if err := awsAwsjson11_deserializeDocumentAdvancedEventSelectors(&sv.AdvancedEventSelectors, value); err != nil {
+				return err
+			}
+
 		case "EventSelectors":
 			if err := awsAwsjson11_deserializeDocumentEventSelectors(&sv.EventSelectors, value); err != nil {
 				return err

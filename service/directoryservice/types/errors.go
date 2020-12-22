@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You do not have sufficient access to perform this action.
+// Client authentication is not available in this region at this time.
 type AccessDeniedException struct {
 	Message *string
 
@@ -374,6 +374,27 @@ func (e *InvalidCertificateException) ErrorMessage() string {
 func (e *InvalidCertificateException) ErrorCode() string             { return "InvalidCertificateException" }
 func (e *InvalidCertificateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Client authentication is already enabled.
+type InvalidClientAuthStatusException struct {
+	Message *string
+
+	RequestId *string
+}
+
+func (e *InvalidClientAuthStatusException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidClientAuthStatusException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidClientAuthStatusException) ErrorCode() string {
+	return "InvalidClientAuthStatusException"
+}
+func (e *InvalidClientAuthStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The LDAP activities could not be performed because they are limited by the LDAPS
 // status.
 type InvalidLDAPSStatusException struct {
@@ -491,8 +512,8 @@ func (e *IpRouteLimitExceededException) ErrorMessage() string {
 func (e *IpRouteLimitExceededException) ErrorCode() string             { return "IpRouteLimitExceededException" }
 func (e *IpRouteLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The LDAP activities could not be performed because at least one valid
-// certificate must be registered with the system.
+// Client authentication setup could not be completed because at least one valid
+// certificate must be registered in the system.
 type NoAvailableCertificateException struct {
 	Message *string
 
@@ -532,7 +553,7 @@ func (e *OrganizationsException) ErrorMessage() string {
 func (e *OrganizationsException) ErrorCode() string             { return "OrganizationsException" }
 func (e *OrganizationsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have reached the limit for maximum number of simultaneous region
+// You have reached the limit for maximum number of simultaneous Region
 // replications per directory.
 type RegionLimitExceededException struct {
 	Message *string

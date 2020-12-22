@@ -842,6 +842,52 @@ func (m *awsAwsjson11_serializeOpDescribeTestCases) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetReportGroupTrend struct {
+}
+
+func (*awsAwsjson11_serializeOpGetReportGroupTrend) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetReportGroupTrend) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetReportGroupTrendInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeBuild_20161006.GetReportGroupTrend")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetReportGroupTrendInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetResourcePolicy struct {
 }
 
@@ -3207,6 +3253,28 @@ func awsAwsjson11_serializeOpDocumentDescribeTestCasesInput(v *DescribeTestCases
 	if v.ReportArn != nil {
 		ok := object.Key("reportArn")
 		ok.String(*v.ReportArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetReportGroupTrendInput(v *GetReportGroupTrendInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NumOfReports != nil {
+		ok := object.Key("numOfReports")
+		ok.Integer(*v.NumOfReports)
+	}
+
+	if v.ReportGroupArn != nil {
+		ok := object.Key("reportGroupArn")
+		ok.String(*v.ReportGroupArn)
+	}
+
+	if len(v.TrendField) > 0 {
+		ok := object.Key("trendField")
+		ok.String(string(v.TrendField))
 	}
 
 	return nil

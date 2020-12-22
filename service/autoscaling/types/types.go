@@ -605,24 +605,24 @@ type InstancesDistribution struct {
 	OnDemandPercentageAboveBaseCapacity *int32
 
 	// Indicates how to allocate instances across Spot Instance pools. If the
-	// allocation strategy is lowest-price, the Auto Scaling group launches instances
-	// using the Spot pools with the lowest price, and evenly allocates your instances
-	// across the number of Spot pools that you specify. If the allocation strategy is
-	// capacity-optimized, the Auto Scaling group launches instances using Spot pools
-	// that are optimally chosen based on the available Spot capacity. Defaults to
-	// lowest-price if not specified.
+	// allocation strategy is capacity-optimized (recommended), the Auto Scaling group
+	// launches instances using Spot pools that are optimally chosen based on the
+	// available Spot capacity. If the allocation strategy is lowest-price, the Auto
+	// Scaling group launches instances using the Spot pools with the lowest price, and
+	// evenly allocates your instances across the number of Spot pools that you
+	// specify. Defaults to lowest-price if not specified.
 	SpotAllocationStrategy *string
 
 	// The number of Spot Instance pools across which to allocate your Spot Instances.
 	// The Spot pools are determined from the different instance types in the
-	// overrides. Defaults to 2 if not specified. Valid only when the Spot allocation
-	// strategy is lowest-price. Valid Range: Minimum value of 1. Maximum value of 20.
+	// overrides. Valid only when the Spot allocation strategy is lowest-price. Value
+	// must be in the range of 1 to 20. Defaults to 2 if not specified.
 	SpotInstancePools *int32
 
 	// The maximum price per unit hour that you are willing to pay for a Spot Instance.
-	// If you leave the value of this parameter blank (which is the default), the
-	// maximum Spot price is set at the On-Demand price. To remove a value that you
-	// previously set, include the parameter but leave the value blank.
+	// If you leave the value at its default (empty), Amazon EC2 Auto Scaling uses the
+	// On-Demand price as the maximum Spot price. To remove a value that you previously
+	// set, include the property but specify an empty string ("") for the value.
 	SpotMaxPrice *string
 }
 
@@ -806,8 +806,8 @@ type LaunchTemplateOverrides struct {
 	// capacity is exceeded by 3 units. For more information, see Instance weighting
 	// for Amazon EC2 Auto Scaling
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html)
-	// in the Amazon EC2 Auto Scaling User Guide. Valid Range: Minimum value of 1.
-	// Maximum value of 999.
+	// in the Amazon EC2 Auto Scaling User Guide. Value must be in the range of 1 to
+	// 999.
 	WeightedCapacity *string
 }
 
@@ -826,7 +826,8 @@ type LaunchTemplateSpecification struct {
 	// API operation. New launch templates can be created using the Amazon EC2
 	// CreateLaunchTemplate
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html)
-	// API. You must specify either a LaunchTemplateId or a LaunchTemplateName.
+	// API. Conditional: You must specify either a LaunchTemplateId or a
+	// LaunchTemplateName.
 	LaunchTemplateId *string
 
 	// The name of the launch template. To get the template name, use the Amazon EC2
@@ -835,7 +836,8 @@ type LaunchTemplateSpecification struct {
 	// API operation. New launch templates can be created using the Amazon EC2
 	// CreateLaunchTemplate
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html)
-	// API. You must specify either a LaunchTemplateId or a LaunchTemplateName.
+	// API. Conditional: You must specify either a LaunchTemplateId or a
+	// LaunchTemplateName.
 	LaunchTemplateName *string
 
 	// The version number, $Latest, or $Default. To get the version number, use the

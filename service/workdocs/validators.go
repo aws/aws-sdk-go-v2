@@ -927,14 +927,14 @@ func validateSharePrincipal(v *types.SharePrincipal) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SharePrincipal"}
-	if len(v.Role) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Role"))
-	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if len(v.Role) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -965,11 +965,11 @@ func validateOpAbortDocumentVersionUploadInput(v *AbortDocumentVersionUploadInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AbortDocumentVersionUploadInput"}
-	if v.VersionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VersionId"))
-	}
 	if v.DocumentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DocumentId"))
+	}
+	if v.VersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -998,15 +998,15 @@ func validateOpAddResourcePermissionsInput(v *AddResourcePermissionsInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddResourcePermissionsInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
 	if v.Principals == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Principals"))
 	} else if v.Principals != nil {
 		if err := validateSharePrincipalList(v.Principals); err != nil {
 			invalidParams.AddNested("Principals", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1020,14 +1020,14 @@ func validateOpCreateCommentInput(v *CreateCommentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCommentInput"}
-	if v.Text == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Text"))
-	}
 	if v.DocumentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DocumentId"))
 	}
 	if v.VersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VersionId"))
+	}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1074,11 +1074,11 @@ func validateOpCreateLabelsInput(v *CreateLabelsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLabelsInput"}
-	if v.Labels == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Labels"))
-	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.Labels == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Labels"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1092,17 +1092,17 @@ func validateOpCreateNotificationSubscriptionInput(v *CreateNotificationSubscrip
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateNotificationSubscriptionInput"}
-	if len(v.Protocol) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
-	}
-	if len(v.SubscriptionType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionType"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if v.Endpoint == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Endpoint"))
+	}
+	if len(v.Protocol) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if len(v.SubscriptionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1116,11 +1116,11 @@ func validateOpCreateUserInput(v *CreateUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateUserInput"}
-	if v.GivenName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GivenName"))
-	}
 	if v.Username == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	}
+	if v.GivenName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GivenName"))
 	}
 	if v.Surname == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Surname"))
@@ -1251,11 +1251,11 @@ func validateOpDeleteNotificationSubscriptionInput(v *DeleteNotificationSubscrip
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteNotificationSubscriptionInput"}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
-	}
 	if v.SubscriptionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionId"))
+	}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1515,11 +1515,11 @@ func validateOpRemoveResourcePermissionInput(v *RemoveResourcePermissionInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemoveResourcePermissionInput"}
-	if v.PrincipalId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
-	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.PrincipalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

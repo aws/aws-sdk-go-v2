@@ -95,6 +95,36 @@ type AutoScalingGroupProvider struct {
 	ManagedTerminationProtection ManagedTerminationProtection
 }
 
+// The details of the Auto Scaling group capacity provider to update.
+type AutoScalingGroupProviderUpdate struct {
+
+	// The managed scaling settings for the Auto Scaling group capacity provider. When
+	// managed scaling is enabled, Amazon ECS manages the scale-in and scale-out
+	// actions of the Auto Scaling group. Amazon ECS manages a target tracking scaling
+	// policy using an Amazon ECS-managed CloudWatch metric with the specified
+	// targetCapacity value as the target value for the metric. For more information,
+	// see Using Managed Scaling
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/asg-capacity-providers.html#asg-capacity-providers-managed-scaling)
+	// in the Amazon Elastic Container Service Developer Guide. If managed scaling is
+	// disabled, the user must manage the scaling of the Auto Scaling group.
+	ManagedScaling *ManagedScaling
+
+	// The managed termination protection setting to use for the Auto Scaling group
+	// capacity provider. This determines whether the Auto Scaling group has managed
+	// termination protection. When using managed termination protection, managed
+	// scaling must also be used otherwise managed termination protection will not
+	// work. When managed termination protection is enabled, Amazon ECS prevents the
+	// Amazon EC2 instances in an Auto Scaling group that contain tasks from being
+	// terminated during a scale-in action. The Auto Scaling group and each instance in
+	// the Auto Scaling group must have instance protection from scale-in actions
+	// enabled as well. For more information, see Instance Protection
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection)
+	// in the AWS Auto Scaling User Guide. When managed termination protection is
+	// disabled, your Amazon EC2 instances are not protected from termination when the
+	// Auto Scaling group scales in.
+	ManagedTerminationProtection ManagedTerminationProtection
+}
+
 // An object representing the networking details for a task or service.
 type AwsVpcConfiguration struct {
 
@@ -933,14 +963,16 @@ type ContainerDefinition struct {
 	// or tasks that use the awsvpc network mode.
 	Ulimits []Ulimit
 
-	// The user name to use inside the container. This parameter maps to User in the
-	// Create a container
+	// The user to use inside the container. This parameter maps to User in the Create
+	// a container
 	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
 	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the --user
 	// option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). You can
-	// use the following formats. If specifying a UID or GID, you must specify it as a
-	// positive integer.
+	// (https://docs.docker.com/engine/reference/run/#security-configuration). When
+	// running tasks using the host network mode, you should not run containers using
+	// the root user (UID 0). It is considered best practice to use a non-root user.
+	// You can specify the user using the following formats. If specifying a UID or
+	// GID, you must specify it as a positive integer.
 	//
 	// * user
 	//
@@ -948,15 +980,15 @@ type ContainerDefinition struct {
 	//
 	// * uid
 	//
-	// * uid:gid
+	// *
+	// uid:gid
 	//
 	// * user:gid
 	//
-	// *
-	// uid:group
+	// * uid:group
 	//
-	// This parameter is not supported for Windows containers or tasks that
-	// use the awsvpc network mode.
+	// This parameter is not supported for Windows
+	// containers or tasks that use the awsvpc network mode.
 	User *string
 
 	// Data volumes to mount from another container. This parameter maps to VolumesFrom
@@ -1236,6 +1268,13 @@ type Deployment struct {
 	// deploy or maintain.
 	DesiredCount int32
 
+	// The number of consecutively failed tasks in the deployment. A task is considered
+	// a failure if the service scheduler can't launch the task, the task doesn't
+	// transition to a RUNNING state, or if it fails any of its defined health checks
+	// and is stopped. Once a service deployment has one or more successfully running
+	// tasks, the failed task count resets to zero and stops being evaluated.
+	FailedTasks int32
+
 	// The ID of the deployment.
 	Id *string
 
@@ -1260,6 +1299,19 @@ type Deployment struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
 
+	// The rolloutState of a service is only returned for services that use the rolling
+	// update (ECS) deployment type that are not behind a Classic Load Balancer. The
+	// rollout state of the deployment. When a service deployment is started, it begins
+	// in an IN_PROGRESS state. When the service reaches a steady state, the deployment
+	// will transition to a COMPLETED state. If the service fails to reach a steady
+	// state and circuit breaker is enabled, the deployment will transition to a FAILED
+	// state. A deployment in FAILED state will launch no new tasks. For more
+	// information, see DeploymentCircuitBreaker.
+	RolloutState DeploymentRolloutState
+
+	// A description of the rollout state of a deployment.
+	RolloutStateReason *string
+
 	// The number of tasks in the deployment that are in the RUNNING status.
 	RunningCount int32
 
@@ -1277,9 +1329,42 @@ type Deployment struct {
 	UpdatedAt *time.Time
 }
 
+// The deployment circuit breaker can only be used for services using the rolling
+// update (ECS) deployment type that are not behind a Classic Load Balancer. The
+// deployment circuit breaker determines whether a service deployment will fail if
+// the service can't reach a steady state. If enabled, a service deployment will
+// transition to a failed state and stop launching new tasks. You can also enable
+// Amazon ECS to roll back your service to the last completed deployment after a
+// failure. For more information, see Rolling update
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html)
+// in the Amazon Elastic Container Service Developer Guide.
+type DeploymentCircuitBreaker struct {
+
+	// Whether to enable the deployment circuit breaker logic for the service.
+	//
+	// This member is required.
+	Enable bool
+
+	// Whether to enable Amazon ECS to roll back the service if a service deployment
+	// fails. If rollback is enabled, when a service deployment fails, the service is
+	// rolled back to the last deployment that completed successfully.
+	//
+	// This member is required.
+	Rollback bool
+}
+
 // Optional deployment parameters that control how many tasks run during a
 // deployment and the ordering of stopping and starting tasks.
 type DeploymentConfiguration struct {
+
+	// The deployment circuit breaker can only be used for services using the rolling
+	// update (ECS) deployment type. The deployment circuit breaker determines whether
+	// a service deployment will fail if the service can't reach a steady state. If
+	// deployment circuit breaker is enabled, a service deployment will transition to a
+	// failed state and stop launching new tasks. If rollback is enabled, when a
+	// service deployment fails, the service is rolled back to the last deployment that
+	// completed successfully.
+	DeploymentCircuitBreaker *DeploymentCircuitBreaker
 
 	// If a service is using the rolling update (ECS) deployment type, the maximum
 	// percent parameter represents an upper limit on the number of tasks in a service
@@ -1548,25 +1633,16 @@ type FirelensConfiguration struct {
 type FSxWindowsFileServerAuthorizationConfig struct {
 
 	// The authorization credential option to use. The authorization credential options
-	// can be provided using either the AWS Secrets Manager ARN or the AWS Systems
-	// Manager ARN. The ARNs refer to the stored credentials. options:
-	//
-	// * ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// an AWS Secrets Manager (https://docs.aws.amazon.com/secretsmanager) secret.
-	//
-	// *
-	// ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of an AWS Systems Manager
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/integration-ps-secretsmanager.html)
-	// parameter.
+	// can be provided using either the Amazon Resource Name (ARN) of an AWS Secrets
+	// Manager secret or AWS Systems Manager Parameter Store parameter. The ARNs refer
+	// to the stored credentials.
 	//
 	// This member is required.
 	CredentialsParameter *string
 
 	// A fully qualified domain name hosted by an AWS Directory Service
 	// (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html)
-	// Managed Microsoft AD (Active Directory) or self-hosted EC2 AD.
+	// Managed Microsoft AD (Active Directory) or self-hosted AD on Amazon EC2.
 	//
 	// This member is required.
 	Domain *string
@@ -1996,20 +2072,18 @@ type LogConfiguration struct {
 // disabled, the user must manage the scaling of the Auto Scaling group.
 type ManagedScaling struct {
 
-	// The maximum number of Amazon EC2 instances that Amazon ECS will scale out at one
-	// time. The scale in process is not affected by this parameter. If this parameter
-	// is omitted, the default value of 10000 is used.
+	// The period of time, in seconds, after a newly launched Amazon EC2 instance can
+	// contribute to CloudWatch metrics for Auto Scaling group. If this parameter is
+	// omitted, the default value of 300 seconds is used.
+	InstanceWarmupPeriod *int32
+
+	// The maximum number of container instances that Amazon ECS will scale in or scale
+	// out at one time. If this parameter is omitted, the default value of 10000 is
+	// used.
 	MaximumScalingStepSize *int32
 
-	// The minimum number of Amazon EC2 instances that Amazon ECS will scale out at one
-	// time. The scale in process is not affected by this parameter If this parameter
-	// is omitted, the default value of 1 is used. When additional capacity is
-	// required, Amazon ECS will scale up the minimum scaling step size even if the
-	// actual demand is less than the minimum scaling step size. If you use a capacity
-	// provider with an Auto Scaling group configured with more than one Amazon EC2
-	// instance type or Availability Zone, Amazon ECS will scale up by the exact
-	// minimum scaling step size value and will ignore both the maximum scaling step
-	// size as well as the capacity demand.
+	// The minimum number of container instances that Amazon ECS will scale in or scale
+	// out at one time. If this parameter is omitted, the default value of 1 is used.
 	MinimumScalingStepSize *int32
 
 	// Whether or not to enable managed scaling for the capacity provider.
@@ -2197,9 +2271,6 @@ type PortMapping struct {
 // versions of the container agent and ecs-init. For more information, see Amazon
 // ECS-optimized Linux AMI
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
-// in the Amazon Elastic Container Service Developer Guide. For tasks using the
-// Fargate launch type, the task or service requires platform version 1.3.0 or
-// later.
 type ProxyConfiguration struct {
 
 	// The name of the container that will serve as the App Mesh proxy.
@@ -2981,21 +3052,23 @@ type TaskDefinition struct {
 	Memory *string
 
 	// The Docker networking mode to use for the containers in the task. The valid
-	// values are none, bridge, awsvpc, and host. The default Docker network mode is
-	// bridge. If you are using the Fargate launch type, the awsvpc network mode is
-	// required. If you are using the EC2 launch type, any network mode can be used. If
-	// the network mode is set to none, you cannot specify port mappings in your
-	// container definitions, and the tasks containers do not have external
+	// values are none, bridge, awsvpc, and host. If no network mode is specified, the
+	// default is bridge. For Amazon ECS tasks on Fargate, the awsvpc network mode is
+	// required. For Amazon ECS tasks on Amazon EC2 instances, any network mode can be
+	// used. If the network mode is set to none, you cannot specify port mappings in
+	// your container definitions, and the tasks containers do not have external
 	// connectivity. The host and awsvpc network modes offer the highest networking
 	// performance for containers because they use the EC2 network stack instead of the
 	// virtualized network stack provided by the bridge mode. With the host and awsvpc
 	// network modes, exposed container ports are mapped directly to the corresponding
 	// host port (for the host network mode) or the attached elastic network interface
 	// port (for the awsvpc network mode), so you cannot take advantage of dynamic host
-	// port mappings. If the network mode is awsvpc, the task is allocated an elastic
-	// network interface, and you must specify a NetworkConfiguration value when you
-	// create a service or run a task with the task definition. For more information,
-	// see Task Networking
+	// port mappings. When using the host network mode, you should not run containers
+	// using the root user (UID 0). It is considered best practice to use a non-root
+	// user. If the network mode is awsvpc, the task is allocated an elastic network
+	// interface, and you must specify a NetworkConfiguration value when you create a
+	// service or run a task with the task definition. For more information, see Task
+	// Networking
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
 	// in the Amazon Elastic Container Service Developer Guide. Currently, only Amazon
 	// ECS-optimized AMIs, other Amazon Linux variants with the ecs-init package, or

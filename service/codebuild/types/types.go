@@ -1628,6 +1628,20 @@ type ReportGroup struct {
 	Type ReportType
 }
 
+type ReportGroupTrendStats struct {
+	Average *string
+
+	Max *string
+
+	Min *string
+}
+
+type ReportWithRawData struct {
+	Data *string
+
+	ReportArn *string
+}
+
 // Represents a resolved build artifact. A resolve artifact is an artifact that is
 // built and deployed to the destination, such as Amazon Simple Storage Service
 // (Amazon S3).

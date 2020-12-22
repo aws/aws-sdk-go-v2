@@ -7,6 +7,43 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// Another modification is being made. That modification must complete before you
+// can make your change.
+type ConcurrentModificationException struct {
+	Message *string
+}
+
+func (e *ConcurrentModificationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConcurrentModificationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConcurrentModificationException) ErrorCode() string {
+	return "ConcurrentModificationException"
+}
+func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// There was a conflict processing the request. Try your request again.
+type ConflictException struct {
+	Message *string
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The confidence that Amazon Comprehend accurately detected the source language is
 // low. If a low confidence level is acceptable for your application, you can use
 // the language in the exception to call Amazon Translate again. For more

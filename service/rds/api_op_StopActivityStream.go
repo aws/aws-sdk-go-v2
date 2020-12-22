@@ -51,7 +51,8 @@ type StopActivityStreamOutput struct {
 	KinesisStreamName *string
 
 	// The AWS KMS key identifier used for encrypting messages in the database activity
-	// stream.
+	// stream. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+	// name for the AWS KMS customer master key (CMK).
 	KmsKeyId *string
 
 	// The status of the database activity stream.

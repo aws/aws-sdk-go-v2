@@ -11,8 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
-	Logref *string
 	Code   *string
+	Logref *string
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -32,11 +32,11 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 type HumanLoopQuotaExceededException struct {
 	Message *string
 
+	ResourceType *string
 	QuotaCode    *string
 	ServiceCode  *string
-	Logref       *string
 	Code         *string
-	ResourceType *string
+	Logref       *string
 }
 
 func (e *HumanLoopQuotaExceededException) Error() string {
@@ -59,8 +59,8 @@ func (e *HumanLoopQuotaExceededException) ErrorFault() smithy.ErrorFault { retur
 type IdempotentParameterMismatchException struct {
 	Message *string
 
-	Logref *string
 	Code   *string
+	Logref *string
 }
 
 func (e *IdempotentParameterMismatchException) Error() string {
@@ -104,8 +104,8 @@ func (e *ImageTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.
 type InternalServerError struct {
 	Message *string
 
-	Logref *string
 	Code   *string
+	Logref *string
 }
 
 func (e *InternalServerError) Error() string {
@@ -144,8 +144,8 @@ func (e *InvalidImageFormatException) ErrorFault() smithy.ErrorFault { return sm
 type InvalidPaginationTokenException struct {
 	Message *string
 
-	Logref *string
 	Code   *string
+	Logref *string
 }
 
 func (e *InvalidPaginationTokenException) Error() string {
@@ -211,8 +211,8 @@ func (e *InvalidS3ObjectException) ErrorFault() smithy.ErrorFault { return smith
 type LimitExceededException struct {
 	Message *string
 
-	Logref *string
 	Code   *string
+	Logref *string
 }
 
 func (e *LimitExceededException) Error() string {
@@ -232,8 +232,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 type ProvisionedThroughputExceededException struct {
 	Message *string
 
-	Logref *string
 	Code   *string
+	Logref *string
 }
 
 func (e *ProvisionedThroughputExceededException) Error() string {
@@ -276,8 +276,8 @@ func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 type ResourceInUseException struct {
 	Message *string
 
-	Logref *string
 	Code   *string
+	Logref *string
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -296,8 +296,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 type ResourceNotFoundException struct {
 	Message *string
 
-	Logref *string
 	Code   *string
+	Logref *string
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -317,8 +317,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 type ResourceNotReadyException struct {
 	Message *string
 
-	Logref *string
 	Code   *string
+	Logref *string
 }
 
 func (e *ResourceNotReadyException) Error() string {
@@ -380,8 +380,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type VideoTooLargeException struct {
 	Message *string
 
-	Logref *string
 	Code   *string
+	Logref *string
 }
 
 func (e *VideoTooLargeException) Error() string {

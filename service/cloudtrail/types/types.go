@@ -6,13 +6,125 @@ import (
 	"time"
 )
 
+// Advanced event selectors let you create fine-grained selectors for the following
+// AWS CloudTrail event record ﬁelds. They help you control costs by logging only
+// those events that are important to you. For more information about advanced
+// event selectors, see Logging data events for trails
+// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html)
+// in the AWS CloudTrail User Guide.
+//
+// * readOnly
+//
+// * eventSource
+//
+// * eventName
+//
+// *
+// eventCategory
+//
+// * resources.type
+//
+// * resources.ARN
+//
+// You cannot apply both event
+// selectors and advanced event selectors to a trail.
+type AdvancedEventSelector struct {
+
+	// Contains all selector statements in an advanced event selector.
+	//
+	// This member is required.
+	FieldSelectors []AdvancedFieldSelector
+
+	// An optional, descriptive name for an advanced event selector, such as "Log data
+	// events for only two S3 buckets".
+	Name *string
+}
+
+// A single selector statement in an advanced event selector.
+type AdvancedFieldSelector struct {
+
+	// A field in an event record on which to filter events to be logged. Supported
+	// fields include readOnly, eventCategory, eventSource (for management events),
+	// eventName, resources.type, and resources.ARN.
+	//
+	// * readOnly - Optional. Can be set
+	// to Equals a value of true or false. A value of false logs both read and write
+	// events.
+	//
+	// * eventSource - For filtering management events only. This can be set
+	// only to NotEqualskms.amazonaws.com.
+	//
+	// * eventName - Can use any operator. You can
+	// use it to ﬁlter in or ﬁlter out any data event logged to CloudTrail, such as
+	// PutBucket. You can have multiple values for this ﬁeld, separated by commas.
+	//
+	// *
+	// eventCategory - This is required. It must be set to Equals, and the value must
+	// be Management or Data.
+	//
+	// * resources.type - This ﬁeld is required. resources.type
+	// can only use the Equals operator, and the value can be one of the following:
+	// AWS::S3::Object or AWS::Lambda::Function. You can have only one resources.type
+	// ﬁeld per selector. To log data events on more than one resource type, add
+	// another selector.
+	//
+	// * resources.ARN - You can use any operator with
+	// resources.ARN, but if you use Equals or NotEquals, the value must exactly match
+	// the ARN of a valid resource of the type you've speciﬁed in the template as the
+	// value of resources.type. For example, if resources.type equals AWS::S3::Object,
+	// the ARN must be in one of the following formats. The trailing slash is
+	// intentional; do not exclude it.
+	//
+	// * arn:partition:s3:::bucket_name/
+	//
+	// *
+	// arn:partition:s3:::bucket_name/object_or_file_name/
+	//
+	// When resources.type equals
+	// AWS::Lambda::Function, and the operator is set to Equals or NotEquals, the ARN
+	// must be in the following format:
+	//
+	// *
+	// arn:partition:lambda:region:account_ID:function:function_name
+	//
+	// This member is required.
+	Field *string
+
+	// An operator that includes events that match the last few characters of the event
+	// record field specified as the value of Field.
+	EndsWith []string
+
+	// An operator that includes events that match the exact value of the event record
+	// field specified as the value of Field. This is the only valid operator that you
+	// can use with the readOnly, eventCategory, and resources.type fields.
+	Equals []string
+
+	// An operator that excludes events that match the last few characters of the event
+	// record field specified as the value of Field.
+	NotEndsWith []string
+
+	// An operator that excludes events that match the exact value of the event record
+	// field specified as the value of Field.
+	NotEquals []string
+
+	// An operator that excludes events that match the first few characters of the
+	// event record field specified as the value of Field.
+	NotStartsWith []string
+
+	// An operator that includes events that match the first few characters of the
+	// event record field specified as the value of Field.
+	StartsWith []string
+}
+
 // The Amazon S3 buckets or AWS Lambda functions that you specify in your event
 // selectors for your trail to log data events. Data events provide information
 // about the resource operations performed on or within a resource itself. These
 // are also known as data plane operations. You can specify up to 250 data
 // resources for a trail. The total number of allowed data resources is 250. This
 // number can be distributed between 1 and 5 event selectors, but the total cannot
-// exceed 250 across all selectors. The following example demonstrates how logging
+// exceed 250 across all selectors. If you are using advanced event selectors, the
+// maximum total number of values for all conditions, across all advanced event
+// selectors for the trail, is 500. The following example demonstrates how logging
 // works when you configure logging of all data events for an S3 bucket named
 // bucket-1. In this example, the CloudTrail user specified an empty prefix, and
 // the option to log both Read and Write data events.
@@ -132,7 +244,8 @@ type Event struct {
 // for all trails. For each trail, if the event matches any event selector, the
 // trail processes and logs the event. If the event doesn't match any event
 // selector, the trail doesn't log the event. You can configure up to five event
-// selectors for a trail.
+// selectors for a trail. You cannot apply both event selectors and advanced event
+// selectors to a trail.
 type EventSelector struct {
 
 	// CloudTrail supports data event logging for Amazon S3 objects and AWS Lambda
@@ -156,7 +269,11 @@ type EventSelector struct {
 	// Specify if you want your event selector to include management events for your
 	// trail. For more information, see Management Events
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-management-events)
-	// in the AWS CloudTrail User Guide. By default, the value is true.
+	// in the AWS CloudTrail User Guide. By default, the value is true. The first copy
+	// of management events is free. You are charged for additional copies of
+	// management events that you are logging on any subsequent trail in the same
+	// region. For more information about CloudTrail pricing, see AWS CloudTrail
+	// Pricing (http://aws.amazon.com/cloudtrail/pricing/).
 	IncludeManagementEvents *bool
 
 	// Specify if you want your trail to log read-only events, write-only events, or

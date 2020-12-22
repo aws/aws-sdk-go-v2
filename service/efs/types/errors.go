@@ -12,8 +12,8 @@ import (
 type AccessPointAlreadyExists struct {
 	Message *string
 
-	AccessPointId *string
 	ErrorCode_    *string
+	AccessPointId *string
 }
 
 func (e *AccessPointAlreadyExists) Error() string {

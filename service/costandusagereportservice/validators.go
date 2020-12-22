@@ -63,26 +63,26 @@ func validateReportDefinition(v *types.ReportDefinition) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReportDefinition"}
-	if len(v.Format) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Format"))
-	}
 	if v.ReportName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReportName"))
 	}
 	if len(v.TimeUnit) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("TimeUnit"))
 	}
-	if v.S3Prefix == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3Prefix"))
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if len(v.Compression) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Compression"))
 	}
+	if v.AdditionalSchemaElements == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdditionalSchemaElements"))
+	}
 	if v.S3Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
 	}
-	if v.AdditionalSchemaElements == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AdditionalSchemaElements"))
+	if v.S3Prefix == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Prefix"))
 	}
 	if len(v.S3Region) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Region"))

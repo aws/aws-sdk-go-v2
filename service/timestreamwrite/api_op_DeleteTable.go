@@ -12,7 +12,9 @@ import (
 
 // Deletes a given Timestream table. This is an irreversible operation. After a
 // Timestream database table is deleted, the time series data stored in the table
-// cannot be recovered.
+// cannot be recovered. Due to the nature of distributed retries, the operation can
+// return either success or a ResourceNotFoundException. Clients should consider
+// them equivalent.
 func (c *Client) DeleteTable(ctx context.Context, params *DeleteTableInput, optFns ...func(*Options)) (*DeleteTableOutput, error) {
 	if params == nil {
 		params = &DeleteTableInput{}

@@ -106,6 +106,9 @@ type DescribeEndpointOutput struct {
 	// If the status of the endpoint is Failed, the reason why it failed.
 	FailureReason *string
 
+	// The most recent deployment configuration for the endpoint.
+	LastDeploymentConfig *types.DeploymentConfig
+
 	// An array of ProductionVariantSummary objects, one for each model hosted behind
 	// this endpoint.
 	ProductionVariants []types.ProductionVariantSummary

@@ -647,9 +647,9 @@ func validateBrokerLogs(v *types.BrokerLogs) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BrokerLogs"}
-	if v.S3 != nil {
-		if err := validateS3(v.S3); err != nil {
-			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
+	if v.CloudWatchLogs != nil {
+		if err := validateCloudWatchLogs(v.CloudWatchLogs); err != nil {
+			invalidParams.AddNested("CloudWatchLogs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Firehose != nil {
@@ -657,9 +657,9 @@ func validateBrokerLogs(v *types.BrokerLogs) error {
 			invalidParams.AddNested("Firehose", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.CloudWatchLogs != nil {
-		if err := validateCloudWatchLogs(v.CloudWatchLogs); err != nil {
-			invalidParams.AddNested("CloudWatchLogs", err.(smithy.InvalidParamsError))
+	if v.S3 != nil {
+		if err := validateS3(v.S3); err != nil {
+			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -859,11 +859,11 @@ func validateOpBatchAssociateScramSecretInput(v *BatchAssociateScramSecretInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchAssociateScramSecretInput"}
-	if v.SecretArnList == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SecretArnList"))
-	}
 	if v.ClusterArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.SecretArnList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArnList"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -877,11 +877,11 @@ func validateOpBatchDisassociateScramSecretInput(v *BatchDisassociateScramSecret
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchDisassociateScramSecretInput"}
-	if v.SecretArnList == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SecretArnList"))
-	}
 	if v.ClusterArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.SecretArnList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArnList"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -895,9 +895,6 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateClusterInput"}
-	if v.KafkaVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KafkaVersion"))
-	}
 	if v.BrokerNodeGroupInfo == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BrokerNodeGroupInfo"))
 	} else if v.BrokerNodeGroupInfo != nil {
@@ -905,23 +902,26 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 			invalidParams.AddNested("BrokerNodeGroupInfo", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.OpenMonitoring != nil {
-		if err := validateOpenMonitoringInfo(v.OpenMonitoring); err != nil {
-			invalidParams.AddNested("OpenMonitoring", err.(smithy.InvalidParamsError))
-		}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
 	}
 	if v.ConfigurationInfo != nil {
 		if err := validateConfigurationInfo(v.ConfigurationInfo); err != nil {
 			invalidParams.AddNested("ConfigurationInfo", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ClusterName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
-	}
 	if v.EncryptionInfo != nil {
 		if err := validateEncryptionInfo(v.EncryptionInfo); err != nil {
 			invalidParams.AddNested("EncryptionInfo", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.OpenMonitoring != nil {
+		if err := validateOpenMonitoringInfo(v.OpenMonitoring); err != nil {
+			invalidParams.AddNested("OpenMonitoring", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.KafkaVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KafkaVersion"))
 	}
 	if v.LoggingInfo != nil {
 		if err := validateLoggingInfo(v.LoggingInfo); err != nil {
@@ -940,11 +940,11 @@ func validateOpCreateConfigurationInput(v *CreateConfigurationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateConfigurationInput"}
-	if v.ServerProperties == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServerProperties"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ServerProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerProperties"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1174,11 +1174,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1192,11 +1192,11 @@ func validateOpUpdateBrokerCountInput(v *UpdateBrokerCountInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateBrokerCountInput"}
-	if v.CurrentVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
-	}
 	if v.ClusterArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.CurrentVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1210,11 +1210,11 @@ func validateOpUpdateBrokerStorageInput(v *UpdateBrokerStorageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateBrokerStorageInput"}
-	if v.CurrentVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
-	}
 	if v.ClusterArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.CurrentVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
 	}
 	if v.TargetBrokerEBSVolumeInfo == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetBrokerEBSVolumeInfo"))
@@ -1235,6 +1235,9 @@ func validateOpUpdateClusterConfigurationInput(v *UpdateClusterConfigurationInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateClusterConfigurationInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
 	if v.ConfigurationInfo == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationInfo"))
 	} else if v.ConfigurationInfo != nil {
@@ -1244,9 +1247,6 @@ func validateOpUpdateClusterConfigurationInput(v *UpdateClusterConfigurationInpu
 	}
 	if v.CurrentVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
-	}
-	if v.ClusterArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1286,11 +1286,11 @@ func validateOpUpdateConfigurationInput(v *UpdateConfigurationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateConfigurationInput"}
-	if v.ServerProperties == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServerProperties"))
-	}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.ServerProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerProperties"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1304,16 +1304,16 @@ func validateOpUpdateMonitoringInput(v *UpdateMonitoringInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateMonitoringInput"}
-	if v.OpenMonitoring != nil {
-		if err := validateOpenMonitoringInfo(v.OpenMonitoring); err != nil {
-			invalidParams.AddNested("OpenMonitoring", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.ClusterArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
 	}
 	if v.CurrentVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
+	}
+	if v.OpenMonitoring != nil {
+		if err := validateOpenMonitoringInfo(v.OpenMonitoring); err != nil {
+			invalidParams.AddNested("OpenMonitoring", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.LoggingInfo != nil {
 		if err := validateLoggingInfo(v.LoggingInfo); err != nil {

@@ -33,6 +33,11 @@ func (c *Client) CreateUsagePlan(ctx context.Context, params *CreateUsagePlanInp
 // payload.
 type CreateUsagePlanInput struct {
 
+	// [Required] The name of the usage plan.
+	//
+	// This member is required.
+	Name *string
+
 	// The associated API stages of the usage plan.
 	ApiStages []types.ApiStage
 
@@ -127,6 +132,9 @@ func addOperationCreateUsagePlanMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpCreateUsagePlanValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUsagePlan(options.Region), middleware.Before); err != nil {

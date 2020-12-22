@@ -4,6 +4,7 @@ package route53
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53/types"
@@ -44,7 +45,7 @@ type ListHealthChecksInput struct {
 	// response to the current request. Amazon Route 53 returns a maximum of 100 items.
 	// If you set MaxItems to a value greater than 100, Route 53 returns only the first
 	// 100 health checks.
-	MaxItems *string
+	MaxItems *int32
 }
 
 // A complex type that contains the response to a ListHealthChecks request.
@@ -74,7 +75,7 @@ type ListHealthChecksOutput struct {
 	// ListHealthChecks that produced the current response.
 	//
 	// This member is required.
-	MaxItems *string
+	MaxItems *int32
 
 	// If IsTruncated is true, the value of NextMarker identifies the first health
 	// check that Amazon Route 53 returns if you submit another ListHealthChecks
@@ -140,6 +141,95 @@ func addOperationListHealthChecksMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	return nil
+}
+
+// ListHealthChecksAPIClient is a client that implements the ListHealthChecks
+// operation.
+type ListHealthChecksAPIClient interface {
+	ListHealthChecks(context.Context, *ListHealthChecksInput, ...func(*Options)) (*ListHealthChecksOutput, error)
+}
+
+var _ ListHealthChecksAPIClient = (*Client)(nil)
+
+// ListHealthChecksPaginatorOptions is the paginator options for ListHealthChecks
+type ListHealthChecksPaginatorOptions struct {
+	// The maximum number of health checks that you want ListHealthChecks to return in
+	// response to the current request. Amazon Route 53 returns a maximum of 100 items.
+	// If you set MaxItems to a value greater than 100, Route 53 returns only the first
+	// 100 health checks.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListHealthChecksPaginator is a paginator for ListHealthChecks
+type ListHealthChecksPaginator struct {
+	options   ListHealthChecksPaginatorOptions
+	client    ListHealthChecksAPIClient
+	params    *ListHealthChecksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListHealthChecksPaginator returns a new ListHealthChecksPaginator
+func NewListHealthChecksPaginator(client ListHealthChecksAPIClient, params *ListHealthChecksInput, optFns ...func(*ListHealthChecksPaginatorOptions)) *ListHealthChecksPaginator {
+	options := ListHealthChecksPaginatorOptions{}
+	if params.MaxItems != nil {
+		options.Limit = *params.MaxItems
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListHealthChecksInput{}
+	}
+
+	return &ListHealthChecksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListHealthChecksPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListHealthChecks page.
+func (p *ListHealthChecksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListHealthChecksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxItems = limit
+
+	result, err := p.client.ListHealthChecks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListHealthChecks(region string) *awsmiddleware.RegisterServiceMetadata {

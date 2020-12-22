@@ -31,6 +31,11 @@ func (c *Client) CreateAuthorizer(ctx context.Context, params *CreateAuthorizerI
 // Request to add a new Authorizer to an existing RestApi resource.
 type CreateAuthorizerInput struct {
 
+	// [Required] The name of the authorizer.
+	//
+	// This member is required.
+	Name *string
+
 	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.

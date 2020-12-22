@@ -103,6 +103,13 @@ func awsRestjson1_serializeOpDocumentCreateOutpostInput(v *CreateOutpostInput, v
 		ok.String(*v.SiteId)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -487,5 +494,16 @@ func awsRestjson1_serializeOpHttpBindingsListSitesInput(v *ListSitesInput, encod
 		encoder.SetQuery("NextToken").String(*v.NextToken)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }

@@ -47,6 +47,7 @@ func (c *Client) GetDashboardEmbedUrl(ctx context.Context, params *GetDashboardE
 	return out, nil
 }
 
+// Parameter input for the GetDashboardEmbedUrl operation.
 type GetDashboardEmbedUrlInput struct {
 
 	// The ID for the AWS account that contains the dashboard that you're embedding.
@@ -62,7 +63,18 @@ type GetDashboardEmbedUrlInput struct {
 	// The authentication method that the user uses to sign in.
 	//
 	// This member is required.
-	IdentityType types.IdentityType
+	IdentityType types.EmbeddingIdentityType
+
+	// A list of one or more dashboard ids that you want to add to a session that
+	// includes anonymous authorizations. IdentityType must be set to ANONYMOUS for
+	// this to work, because other identity types authenticate as QuickSight users. For
+	// example, if you set "--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3
+	// identity-type ANONYMOUS", the session can access all three dashboards.
+	AdditionalDashboardIds []string
+
+	// The QuickSight namespace that contains the dashboard IDs in this request. If
+	// you're not using a custom namespace, set this to "default".
+	Namespace *string
 
 	// Remove the reset button on the embedded dashboard. The default is FALSE, which
 	// enables the reset button.
@@ -103,6 +115,7 @@ type GetDashboardEmbedUrlInput struct {
 	UserArn *string
 }
 
+// Output returned from the GetDashboardEmbedUrl operation.
 type GetDashboardEmbedUrlOutput struct {
 
 	// A single-use URL that you can put into your server-side webpage to embed your

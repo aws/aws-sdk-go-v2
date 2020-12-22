@@ -274,6 +274,40 @@ type CustomDomainConfigType struct {
 	CertificateArn *string
 }
 
+// A custom email sender Lambda configuration type.
+type CustomEmailLambdaVersionConfigType struct {
+
+	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito
+	// triggers to send email notifications to users.
+	//
+	// This member is required.
+	LambdaArn *string
+
+	// The Lambda version represents the signature of the "request" attribute in the
+	// "event" information Amazon Cognito passes to your custom email Lambda function.
+	// The only supported value is V1_0.
+	//
+	// This member is required.
+	LambdaVersion CustomEmailSenderLambdaVersionType
+}
+
+// A custom SMS sender Lambda configuration type.
+type CustomSMSLambdaVersionConfigType struct {
+
+	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito
+	// triggers to send SMS notifications to users.
+	//
+	// This member is required.
+	LambdaArn *string
+
+	// The Lambda version represents the signature of the "request" attribute in the
+	// "event" information Amazon Cognito passes to your custom SMS Lambda function.
+	// The only supported value is V1_0.
+	//
+	// This member is required.
+	LambdaVersion CustomSMSSenderLambdaVersionType
+}
+
 // The configuration for the user pool's device tracking.
 type DeviceConfigurationType struct {
 
@@ -343,7 +377,10 @@ type DomainDescriptionType struct {
 	Version *string
 }
 
-// The email configuration type.
+// The email configuration type. Amazon Cognito has specific regions for use with
+// Amazon SES. For more information on the supported regions, see Email Settings
+// for Amazon Cognito User Pools
+// (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-email.html).
 type EmailConfigurationType struct {
 
 	// The set of configuration rules that can be applied to emails sent using Amazon
@@ -375,19 +412,47 @@ type EmailConfigurationType struct {
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/limits.html) in the
 	// Amazon Cognito Developer Guide. The default FROM address is
 	// no-reply@verificationemail.com. To customize the FROM address, provide the ARN
-	// of an Amazon SES verified email address for the SourceArn parameter. DEVELOPER
-	// When Amazon Cognito emails your users, it uses your Amazon SES configuration.
-	// Amazon Cognito calls Amazon SES on your behalf to send email from your verified
-	// email address. When you use this option, the email delivery limits are the same
-	// limits that apply to your Amazon SES verified email address in your AWS account.
-	// If you use this option, you must provide the ARN of an Amazon SES verified email
-	// address for the SourceArn parameter. Before Amazon Cognito can email your users,
-	// it requires additional permissions to call Amazon SES on your behalf. When you
-	// update your user pool with this option, Amazon Cognito creates a service-linked
-	// role, which is a type of IAM role, in your AWS account. This role contains the
-	// permissions that allow Amazon Cognito to access Amazon SES and send email
-	// messages with your address. For more information about the service-linked role
-	// that Amazon Cognito creates, see Using Service-Linked Roles for Amazon Cognito
+	// of an Amazon SES verified email address for the SourceArn parameter. If
+	// EmailSendingAccount is COGNITO_DEFAULT, the following parameters aren't
+	// allowed:
+	//
+	// * EmailVerificationMessage
+	//
+	// * EmailVerificationSubject
+	//
+	// *
+	// InviteMessageTemplate.EmailMessage
+	//
+	// * InviteMessageTemplate.EmailSubject
+	//
+	// *
+	// VerificationMessageTemplate.EmailMessage
+	//
+	// *
+	// VerificationMessageTemplate.EmailMessageByLink
+	//
+	// *
+	// VerificationMessageTemplate.EmailSubject,
+	//
+	// *
+	// VerificationMessageTemplate.EmailSubjectByLink
+	//
+	// DEVELOPER EmailSendingAccount is
+	// required.
+	//
+	// DEVELOPER When Amazon Cognito emails your users, it uses your Amazon
+	// SES configuration. Amazon Cognito calls Amazon SES on your behalf to send email
+	// from your verified email address. When you use this option, the email delivery
+	// limits are the same limits that apply to your Amazon SES verified email address
+	// in your AWS account. If you use this option, you must provide the ARN of an
+	// Amazon SES verified email address for the SourceArn parameter. Before Amazon
+	// Cognito can email your users, it requires additional permissions to call Amazon
+	// SES on your behalf. When you update your user pool with this option, Amazon
+	// Cognito creates a service-linked role, which is a type of IAM role, in your AWS
+	// account. This role contains the permissions that allow Amazon Cognito to access
+	// Amazon SES and send email messages with your address. For more information about
+	// the service-linked role that Amazon Cognito creates, see Using Service-Linked
+	// Roles for Amazon Cognito
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/using-service-linked-roles.html)
 	// in the Amazon Cognito Developer Guide.
 	EmailSendingAccount EmailSendingAccountType
@@ -614,11 +679,22 @@ type LambdaConfigType struct {
 	// Creates an authentication challenge.
 	CreateAuthChallenge *string
 
+	// A custom email sender AWS Lambda trigger.
+	CustomEmailSender *CustomEmailLambdaVersionConfigType
+
 	// A custom Message AWS Lambda trigger.
 	CustomMessage *string
 
+	// A custom SMS sender AWS Lambda trigger.
+	CustomSMSSender *CustomSMSLambdaVersionConfigType
+
 	// Defines the authentication challenge.
 	DefineAuthChallenge *string
+
+	// The Amazon Resource Name of Key Management Service Customer master keys . Amazon
+	// Cognito uses the key to encrypt codes and temporary passwords sent to
+	// CustomEmailSender and CustomSMSSender.
+	KMSKeyID *string
 
 	// A post-authentication AWS Lambda trigger.
 	PostAuthentication *string
@@ -645,10 +721,16 @@ type LambdaConfigType struct {
 // The message template structure.
 type MessageTemplateType struct {
 
-	// The message template for email messages.
+	// The message template for email messages. EmailMessage is allowed only if
+	// EmailSendingAccount
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount)
+	// is DEVELOPER.
 	EmailMessage *string
 
-	// The subject line for email messages.
+	// The subject line for email messages. EmailSubject is allowed only if
+	// EmailSendingAccount
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount)
+	// is DEVELOPER.
 	EmailSubject *string
 
 	// The message template for SMS messages.
@@ -921,7 +1003,8 @@ type SmsConfigurationType struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS)
 	// caller. This is the ARN of the IAM role in your AWS account which Cognito will
-	// use to send SMS messages.
+	// use to send SMS messages. SMS messages are subject to a spending limit
+	// (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html).
 	//
 	// This member is required.
 	SnsCallerArn *string
@@ -949,10 +1032,17 @@ type SmsMfaConfigType struct {
 	SmsConfiguration *SmsConfigurationType
 }
 
-// The type used for enabling SMS MFA at the user level.
+// The type used for enabling SMS MFA at the user level. Phone numbers don't need
+// to be verified to be used for SMS MFA. If an MFA type is enabled for a user, the
+// user will be prompted for MFA during all sign in attempts, unless device
+// tracking is turned on and the device has been trusted. If you would like MFA to
+// be applied selectively based on the assessed risk level of sign in attempts,
+// disable MFA for users and turn on Adaptive Authentication for the user pool.
 type SMSMfaSettingsType struct {
 
-	// Specifies whether SMS text message MFA is enabled.
+	// Specifies whether SMS text message MFA is enabled. If an MFA type is enabled for
+	// a user, the user will be prompted for MFA during all sign in attempts, unless
+	// device tracking is turned on and the device has been trusted.
 	Enabled bool
 
 	// Specifies whether SMS is the preferred MFA method.
@@ -966,10 +1056,17 @@ type SoftwareTokenMfaConfigType struct {
 	Enabled bool
 }
 
-// The type used for enabling software token MFA at the user level.
+// The type used for enabling software token MFA at the user level. If an MFA type
+// is enabled for a user, the user will be prompted for MFA during all sign in
+// attempts, unless device tracking is turned on and the device has been trusted.
+// If you would like MFA to be applied selectively based on the assessed risk level
+// of sign in attempts, disable MFA for users and turn on Adaptive Authentication
+// for the user pool.
 type SoftwareTokenMfaSettingsType struct {
 
-	// Specifies whether software token MFA is enabled.
+	// Specifies whether software token MFA is enabled. If an MFA type is enabled for a
+	// user, the user will be prompted for MFA during all sign in attempts, unless
+	// device tracking is turned on and the device has been trusted.
 	Enabled bool
 
 	// Specifies whether software token MFA is the preferred MFA method.
@@ -1512,17 +1609,27 @@ type VerificationMessageTemplateType struct {
 	// The default email option.
 	DefaultEmailOption DefaultEmailOptionType
 
-	// The email message template.
+	// The email message template. EmailMessage is allowed only if  EmailSendingAccount
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount)
+	// is DEVELOPER.
 	EmailMessage *string
 
 	// The email message template for sending a confirmation link to the user.
+	// EmailMessageByLink is allowed only if  EmailSendingAccount
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount)
+	// is DEVELOPER.
 	EmailMessageByLink *string
 
-	// The subject line for the email message template.
+	// The subject line for the email message template. EmailSubject is allowed only if
+	// EmailSendingAccount
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount)
+	// is DEVELOPER.
 	EmailSubject *string
 
 	// The subject line for the email message template for sending a confirmation link
-	// to the user.
+	// to the user. EmailSubjectByLink is allowed only  EmailSendingAccount
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount)
+	// is DEVELOPER.
 	EmailSubjectByLink *string
 
 	// The SMS message template.

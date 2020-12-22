@@ -194,11 +194,11 @@ func validateOpUpdateThingShadowInput(v *UpdateThingShadowInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateThingShadowInput"}
-	if v.Payload == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
-	}
 	if v.ThingName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
+	}
+	if v.Payload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

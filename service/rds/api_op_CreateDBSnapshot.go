@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a snapshot of a DB instance. The source DB instance must be in the
-// available or storage-optimizationstate.
+// available or storage-optimization state.
 func (c *Client) CreateDBSnapshot(ctx context.Context, params *CreateDBSnapshotInput, optFns ...func(*Options)) (*CreateDBSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateDBSnapshotInput{}

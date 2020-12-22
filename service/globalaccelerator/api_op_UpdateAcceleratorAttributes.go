@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update the attributes for an accelerator. To see an AWS CLI example of updating
-// an accelerator to enable flow logs, scroll down to Example.
+// Update the attributes for an accelerator.
 func (c *Client) UpdateAcceleratorAttributes(ctx context.Context, params *UpdateAcceleratorAttributesInput, optFns ...func(*Options)) (*UpdateAcceleratorAttributesOutput, error) {
 	if params == nil {
 		params = &UpdateAcceleratorAttributesInput{}

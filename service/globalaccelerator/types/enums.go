@@ -4,12 +4,6 @@ package types
 
 type AcceleratorStatus string
 
-// Enum values for AcceleratorStatus
-const (
-	AcceleratorStatusDeployed   AcceleratorStatus = "DEPLOYED"
-	AcceleratorStatusInProgress AcceleratorStatus = "IN_PROGRESS"
-)
-
 // Values returns all known values for AcceleratorStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -58,12 +52,6 @@ func (ByoipCidrState) Values() []ByoipCidrState {
 
 type ClientAffinity string
 
-// Enum values for ClientAffinity
-const (
-	ClientAffinityNone     ClientAffinity = "NONE"
-	ClientAffinitySourceIp ClientAffinity = "SOURCE_IP"
-)
-
 // Values returns all known values for ClientAffinity. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -71,6 +59,56 @@ func (ClientAffinity) Values() []ClientAffinity {
 	return []ClientAffinity{
 		"NONE",
 		"SOURCE_IP",
+	}
+}
+
+type CustomRoutingAcceleratorStatus string
+
+// Values returns all known values for CustomRoutingAcceleratorStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CustomRoutingAcceleratorStatus) Values() []CustomRoutingAcceleratorStatus {
+	return []CustomRoutingAcceleratorStatus{
+		"DEPLOYED",
+		"IN_PROGRESS",
+	}
+}
+
+type CustomRoutingDestinationTrafficState string
+
+// Enum values for CustomRoutingDestinationTrafficState
+const (
+	CustomRoutingDestinationTrafficStateAllow CustomRoutingDestinationTrafficState = "ALLOW"
+	CustomRoutingDestinationTrafficStateDeny  CustomRoutingDestinationTrafficState = "DENY"
+)
+
+// Values returns all known values for CustomRoutingDestinationTrafficState. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CustomRoutingDestinationTrafficState) Values() []CustomRoutingDestinationTrafficState {
+	return []CustomRoutingDestinationTrafficState{
+		"ALLOW",
+		"DENY",
+	}
+}
+
+type CustomRoutingProtocol string
+
+// Enum values for CustomRoutingProtocol
+const (
+	CustomRoutingProtocolTcp CustomRoutingProtocol = "TCP"
+	CustomRoutingProtocolUdp CustomRoutingProtocol = "UDP"
+)
+
+// Values returns all known values for CustomRoutingProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CustomRoutingProtocol) Values() []CustomRoutingProtocol {
+	return []CustomRoutingProtocol{
+		"TCP",
+		"UDP",
 	}
 }
 
@@ -95,13 +133,6 @@ func (HealthCheckProtocol) Values() []HealthCheckProtocol {
 }
 
 type HealthState string
-
-// Enum values for HealthState
-const (
-	HealthStateInitial   HealthState = "INITIAL"
-	HealthStateHealthy   HealthState = "HEALTHY"
-	HealthStateUnhealthy HealthState = "UNHEALTHY"
-)
 
 // Values returns all known values for HealthState. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of

@@ -43,7 +43,7 @@ type ListTrafficPolicyVersionsInput struct {
 	// has more than MaxItems versions, the value of IsTruncated in the response is
 	// true, and the value of the TrafficPolicyVersionMarker element is the ID of the
 	// first version that Route 53 will return if you submit another request.
-	MaxItems *string
+	MaxItems *int32
 
 	// For your first request to ListTrafficPolicyVersions, don't include the
 	// TrafficPolicyVersionMarker parameter. If you have more traffic policy versions
@@ -69,7 +69,7 @@ type ListTrafficPolicyVersionsOutput struct {
 	// ListTrafficPolicyVersions request that produced the current response.
 	//
 	// This member is required.
-	MaxItems *string
+	MaxItems *int32
 
 	// A list that contains one TrafficPolicy element for each traffic policy version
 	// that is associated with the specified traffic policy.

@@ -10,6 +10,8 @@ import (
 type AccountDetails struct {
 
 	// The ID of an AWS account.
+	//
+	// This member is required.
 	AccountId *string
 
 	// The email of an AWS account.
@@ -33,6 +35,18 @@ type ActionTarget struct {
 	//
 	// This member is required.
 	Name *string
+}
+
+// Represents a Security Hub administrator account designated by an organization
+// management account.
+type AdminAccount struct {
+
+	// The AWS account identifier of the Security Hub administrator account.
+	AccountId *string
+
+	// The current status of the Security Hub administrator account. Indicates whether
+	// the account is currently enabled as a Security Hub administrator.
+	Status AdminStatus
 }
 
 // Information about an Availability Zone.
@@ -4703,17 +4717,18 @@ type Member struct {
 	// member account. The member account has not yet responded to the invitation.
 	//
 	// *
-	// ASSOCIATED - Indicates that the member account accepted the invitation.
+	// ENABLED - Indicates that the member account is currently active. For manually
+	// invited member accounts, indicates that the member account accepted the
+	// invitation.
 	//
-	// *
-	// REMOVED - Indicates that the master account disassociated the member account.
-	//
-	// *
-	// RESIGNED - Indicates that the member account disassociated themselves from the
-	// master account.
-	//
-	// * DELETED - Indicates that the master account deleted the
+	// * REMOVED - Indicates that the master account disassociated the
 	// member account.
+	//
+	// * RESIGNED - Indicates that the member account disassociated
+	// themselves from the master account.
+	//
+	// * DELETED - Indicates that the master
+	// account deleted the member account.
 	MemberStatus *string
 
 	// The timestamp for the date and time when the member account was updated.

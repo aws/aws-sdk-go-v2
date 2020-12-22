@@ -39,6 +39,9 @@ type Outpost struct {
 
 	// The ID of the site.
 	SiteId *string
+
+	// The Outpost tags.
+	Tags map[string]string
 }
 
 // Information about a site.
@@ -55,4 +58,7 @@ type Site struct {
 
 	// The ID of the site.
 	SiteId *string
+
+	// The site tags.
+	Tags map[string]string
 }

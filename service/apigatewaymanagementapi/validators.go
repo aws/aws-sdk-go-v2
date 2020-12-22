@@ -116,11 +116,11 @@ func validateOpPostToConnectionInput(v *PostToConnectionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PostToConnectionInput"}
-	if v.ConnectionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConnectionId"))
-	}
 	if v.Data == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Data"))
+	}
+	if v.ConnectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

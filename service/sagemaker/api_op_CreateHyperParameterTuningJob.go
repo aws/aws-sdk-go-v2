@@ -53,10 +53,10 @@ type CreateHyperParameterTuningJobInput struct {
 
 	// An array of key-value pairs. You can use tags to categorize your AWS resources
 	// in different ways, for example, by purpose, owner, or environment. For more
-	// information, see AWS Tagging Strategies
-	// (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/).
-	// Tags that you specify for the tuning job are also added to all training jobs
-	// that the tuning job launches.
+	// information, see Tagging AWS Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html). Tags that you
+	// specify for the tuning job are also added to all training jobs that the tuning
+	// job launches.
 	Tags []types.Tag
 
 	// The HyperParameterTrainingJobDefinition object that describes the training jobs

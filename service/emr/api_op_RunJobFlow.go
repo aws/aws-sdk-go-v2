@@ -103,8 +103,8 @@ type RunJobFlowInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html).
 	CustomAmiId *string
 
-	// The size, in GiB, of the EBS root device volume of the Linux AMI that is used
-	// for each EC2 instance. Available in Amazon EMR version 4.x and later.
+	// The size, in GiB, of the Amazon EBS root device volume of the Linux AMI that is
+	// used for each EC2 instance. Available in Amazon EMR version 4.x and later.
 	EbsRootVolumeSize *int32
 
 	// Also called instance profile and EC2 role. An IAM role for an EMR cluster. The
@@ -117,12 +117,12 @@ type RunJobFlowInput struct {
 	// using a security configuration. For more information see Use Kerberos
 	// Authentication
 	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html) in
-	// the EMR Management Guide.
+	// the Amazon EMR Management Guide.
 	KerberosAttributes *types.KerberosAttributes
 
 	// The AWS KMS customer master key (CMK) used for encrypting log files. If a value
-	// is not provided, the logs will remain encrypted by AES-256. This attribute is
-	// only available with EMR version 5.30.0 and later, excluding EMR 6.0.0.
+	// is not provided, the logs remain encrypted by AES-256. This attribute is only
+	// available with Amazon EMR version 5.30.0 and later, excluding Amazon EMR 6.0.0.
 	LogEncryptionKmsKeyId *string
 
 	// The location in Amazon S3 to write the log files of the job flow. If a value is
@@ -191,13 +191,13 @@ type RunJobFlowInput struct {
 	// instance-hour boundary, regardless of when the request to terminate the instance
 	// was submitted. This option is only available with Amazon EMR 5.1.0 and later and
 	// is the default for clusters created using that version.
-	// TERMINATE_AT_TASK_COMPLETION indicates that Amazon EMR blacklists and drains
-	// tasks from nodes before terminating the Amazon EC2 instances, regardless of the
-	// instance-hour boundary. With either behavior, Amazon EMR removes the least
-	// active nodes first and blocks instance termination if it could lead to HDFS
-	// corruption. TERMINATE_AT_TASK_COMPLETION available only in Amazon EMR version
-	// 4.1.0 and later, and is the default for versions of Amazon EMR earlier than
-	// 5.1.0.
+	// TERMINATE_AT_TASK_COMPLETION indicates that Amazon EMR adds nodes to a deny list
+	// and drains tasks from nodes before terminating the Amazon EC2 instances,
+	// regardless of the instance-hour boundary. With either behavior, Amazon EMR
+	// removes the least active nodes first and blocks instance termination if it could
+	// lead to HDFS corruption. TERMINATE_AT_TASK_COMPLETION available only in Amazon
+	// EMR version 4.1.0 and later, and is the default for versions of Amazon EMR
+	// earlier than 5.1.0.
 	ScaleDownBehavior types.ScaleDownBehavior
 
 	// The name of a security configuration to apply to the cluster.

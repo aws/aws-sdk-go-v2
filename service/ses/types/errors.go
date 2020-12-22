@@ -284,8 +284,8 @@ func (e *FromEmailAddressNotVerifiedException) ErrorFault() smithy.ErrorFault {
 type InvalidCloudWatchDestinationException struct {
 	Message *string
 
-	EventDestinationName *string
 	ConfigurationSetName *string
+	EventDestinationName *string
 }
 
 func (e *InvalidCloudWatchDestinationException) Error() string {
@@ -348,8 +348,8 @@ func (e *InvalidDeliveryOptionsException) ErrorFault() smithy.ErrorFault { retur
 type InvalidFirehoseDestinationException struct {
 	Message *string
 
-	EventDestinationName *string
 	ConfigurationSetName *string
+	EventDestinationName *string
 }
 
 func (e *InvalidFirehoseDestinationException) Error() string {
@@ -462,8 +462,8 @@ func (e *InvalidS3ConfigurationException) ErrorFault() smithy.ErrorFault { retur
 type InvalidSNSDestinationException struct {
 	Message *string
 
-	EventDestinationName *string
 	ConfigurationSetName *string
+	EventDestinationName *string
 }
 
 func (e *InvalidSNSDestinationException) Error() string {

@@ -3465,6 +3465,11 @@ func awsAwsjson11_serializeDocumentS3Settings(v *types.S3Settings, value smithyj
 		ok.Boolean(*v.CdcInsertsOnly)
 	}
 
+	if v.CdcPath != nil {
+		ok := object.Key("CdcPath")
+		ok.String(*v.CdcPath)
+	}
+
 	if len(v.CompressionType) > 0 {
 		ok := object.Key("CompressionType")
 		ok.String(string(v.CompressionType))
@@ -3473,6 +3478,11 @@ func awsAwsjson11_serializeDocumentS3Settings(v *types.S3Settings, value smithyj
 	if v.CsvDelimiter != nil {
 		ok := object.Key("CsvDelimiter")
 		ok.String(*v.CsvDelimiter)
+	}
+
+	if v.CsvNoSupValue != nil {
+		ok := object.Key("CsvNoSupValue")
+		ok.String(*v.CsvNoSupValue)
 	}
 
 	if v.CsvRowDelimiter != nil {
@@ -3545,6 +3555,11 @@ func awsAwsjson11_serializeDocumentS3Settings(v *types.S3Settings, value smithyj
 		ok.String(string(v.ParquetVersion))
 	}
 
+	if v.PreserveTransactions != nil {
+		ok := object.Key("PreserveTransactions")
+		ok.Boolean(*v.PreserveTransactions)
+	}
+
 	if v.RowGroupLength != nil {
 		ok := object.Key("RowGroupLength")
 		ok.Integer(*v.RowGroupLength)
@@ -3563,6 +3578,11 @@ func awsAwsjson11_serializeDocumentS3Settings(v *types.S3Settings, value smithyj
 	if v.TimestampColumnName != nil {
 		ok := object.Key("TimestampColumnName")
 		ok.String(*v.TimestampColumnName)
+	}
+
+	if v.UseCsvNoSupValue != nil {
+		ok := object.Key("UseCsvNoSupValue")
+		ok.Boolean(*v.UseCsvNoSupValue)
 	}
 
 	return nil

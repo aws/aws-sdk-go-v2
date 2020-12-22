@@ -428,13 +428,7 @@ type FleetAttributes struct {
 	FleetType FleetType
 
 	// A unique identifier for an AWS IAM role that manages access to your AWS
-	// services. With an instance role ARN set, any application that runs on an
-	// instance in this fleet can assume the role, including install scripts, server
-	// processes, and daemons (background processes). Create a role or look up a role's
-	// ARN from the IAM dashboard (https://console.aws.amazon.com/iam/) in the AWS
-	// Management Console. Learn more about using on-box credentials for your game
-	// servers at  Access external resources from a game server
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html).
+	// services.
 	InstanceRoleArn *string
 
 	// EC2 instance type indicating the computing resources of each instance in the
@@ -1009,7 +1003,7 @@ type GameSession struct {
 	// matchmaking configuration used, it contains data on all players assigned to the
 	// match, including player attributes and team assignments. For more details on
 	// matchmaker data, see Match Data
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data).
+	// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data).
 	// Matchmaker data is useful when requesting match backfills, and is updated
 	// whenever new players are added during a successful backfill (see
 	// StartMatchBackfill).
@@ -1044,12 +1038,12 @@ type GameSession struct {
 	TerminationTime *time.Time
 }
 
-// Connection information for the new game session that is created with
-// matchmaking. (with StartMatchmaking). Once a match is set, the FlexMatch engine
-// places the match and creates a new game session for it. This information,
-// including the game session endpoint and player sessions for each player in the
-// original matchmaking request, is added to the MatchmakingTicket, which can be
-// retrieved by calling DescribeMatchmaking.
+// Connection information for a new game session that is created in response to a
+// StartMatchmaking request. Once a match is made, the FlexMatch engine creates a
+// new game session for it. This information, including the game session endpoint
+// and player sessions for each player in the original matchmaking request, is
+// added to the MatchmakingTicket, which can be retrieved by calling
+// DescribeMatchmaking.
 type GameSessionConnectionInfo struct {
 
 	// DNS identifier assigned to the instance that is running the game session. Values
@@ -1180,7 +1174,7 @@ type GameSessionPlacement struct {
 	// create the match, and contains data on all players assigned to the match,
 	// including player attributes and team assignments. For more details on matchmaker
 	// data, see Match Data
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data).
+	// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data).
 	MatchmakerData *string
 
 	// The maximum number of players that can be connected simultaneously to the game
@@ -1499,17 +1493,22 @@ type MatchmakingConfiguration struct {
 
 	// A flag that indicates whether a match that was created with this configuration
 	// must be accepted by the matched players. To require acceptance, set to TRUE.
+	// When this option is enabled, matchmaking tickets use the status
+	// REQUIRES_ACCEPTANCE to indicate when a completed potential match is waiting for
+	// player acceptance.
 	AcceptanceRequired *bool
 
-	// The length of time (in seconds) to wait for players to accept a proposed match.
-	// If any player rejects the match or fails to accept before the timeout, the
-	// ticket continues to look for an acceptable match.
+	// The length of time (in seconds) to wait for players to accept a proposed match,
+	// if acceptance is required. If any player rejects the match or fails to accept
+	// before the timeout, the tickets are returned to the ticket pool and continue to
+	// be evaluated for an acceptable match.
 	AcceptanceTimeoutSeconds *int32
 
 	// The number of player slots in a match to keep open for future players. For
 	// example, assume that the configuration's rule set specifies a match for a single
 	// 12-person team. If the additional player count is set to 2, only 10 players are
-	// initially selected for the match.
+	// initially selected for the match. This parameter is not used when FlexMatchMode
+	// is set to STANDALONE.
 	AdditionalPlayerCount *int32
 
 	// The method used to backfill game sessions created with this matchmaking
@@ -1518,7 +1517,8 @@ type MatchmakingConfiguration struct {
 	// StartMatchBackfill requests whenever a game session has one or more open slots.
 	// Learn more about manual and automatic backfill in Backfill Existing Games with
 	// FlexMatch
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html).
+	// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-backfill.html).
+	// Automatic backfill is not available when FlexMatchMode is set to STANDALONE.
 	BackfillMode BackfillMode
 
 	// Amazon Resource Name (ARN
@@ -1538,12 +1538,26 @@ type MatchmakingConfiguration struct {
 	// A descriptive label that is associated with matchmaking configuration.
 	Description *string
 
+	// Indicates whether this matchmaking configuration is being used with GameLift
+	// hosting or as a standalone matchmaking solution.
+	//
+	// * STANDALONE - FlexMatch forms
+	// matches and returns match information, including players and team assignments,
+	// in a  MatchmakingSucceeded
+	// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html#match-events-matchmakingsucceeded)
+	// event.
+	//
+	// * WITH_QUEUE - FlexMatch forms matches and uses the specified GameLift
+	// queue to start a game session for the match.
+	FlexMatchMode FlexMatchMode
+
 	// A set of custom properties for a game session, formatted as key-value pairs.
 	// These properties are passed to a game server process in the GameSession object
 	// with a request to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	// This information is added to the new GameSession object that is created for a
-	// successful match.
+	// successful match. This parameter is not used when FlexMatchMode is set to
+	// STANDALONE.
 	GameProperties []GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.
@@ -1551,15 +1565,17 @@ type MatchmakingConfiguration struct {
 	// request to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	// This information is added to the new GameSession object that is created for a
-	// successful match.
+	// successful match. This parameter is not used when FlexMatchMode is set to
+	// STANDALONE.
 	GameSessionData *string
 
 	// Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
 	// that is assigned to a GameLift game session queue resource and uniquely
-	// identifies it. ARNs are unique across all Regions. GameLift uses the listed
-	// queues when placing game sessions for matches that are created with this
-	// matchmaking configuration. Queues can be located in any Region.
+	// identifies it. ARNs are unique across all Regions. Queues can be located in any
+	// Region. Queues are used to start new GameLift-hosted game sessions for matches
+	// that are created with this matchmaking configuration. Thais property is not set
+	// when FlexMatchMode is set to STANDALONE.
 	GameSessionQueueArns []string
 
 	// A unique identifier for a matchmaking configuration. This name is used to
@@ -1592,7 +1608,7 @@ type MatchmakingConfiguration struct {
 // MatchmakingConfiguration objects. A rule set may define the following elements
 // for a match. For detailed information and examples showing how to construct a
 // rule set, see Build a FlexMatch Rule Set
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html).
+// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html).
 //
 // *
 // Teams -- Required. A rule set must define one or multiple teams for the match
@@ -1671,7 +1687,8 @@ type MatchmakingTicket struct {
 
 	// Identifier and connection information of the game session created for the match.
 	// This information is added to the ticket only after the matchmaking request has
-	// been successfully completed.
+	// been successfully completed. This parameter is not set when FlexMatch is being
+	// used without GameLift hosting.
 	GameSessionConnectionInfo *GameSessionConnectionInfo
 
 	// A set of Player objects, each representing a player to find matches for. Players

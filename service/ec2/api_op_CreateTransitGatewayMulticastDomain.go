@@ -44,6 +44,9 @@ type CreateTransitGatewayMulticastDomainInput struct {
 	// UnauthorizedOperation.
 	DryRun bool
 
+	// The options for the transit gateway multicast domain.
+	Options *types.CreateTransitGatewayMulticastDomainRequestOptions
+
 	// The tags for the transit gateway multicast domain.
 	TagSpecifications []types.TagSpecification
 }

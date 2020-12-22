@@ -200,11 +200,11 @@ func validateOpSendMessageInput(v *SendMessageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SendMessageInput"}
-	if v.Content == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Content"))
-	}
 	if v.ContentType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
 	}
 	if v.ConnectionToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectionToken"))

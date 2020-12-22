@@ -42,10 +42,10 @@ type CreateDetectorInput struct {
 	// The idempotency token for the create request.
 	ClientToken *string
 
-	// An object that describes which data sources will be enabled for the detector.
+	// Describes which data sources will be enabled for the detector.
 	DataSources *types.DataSourceConfigurations
 
-	// An enum value that specifies how frequently updated findings are exported.
+	// A value that specifies how frequently updated findings are exported.
 	FindingPublishingFrequency types.FindingPublishingFrequency
 
 	// The tags to be added to a new detector resource.

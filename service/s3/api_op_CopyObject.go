@@ -93,27 +93,24 @@ import (
 // evaluates to true
 //
 // All headers with the x-amz- prefix, including
-// x-amz-copy-source, must be signed. Encryption The source object that you are
-// copying can be encrypted or unencrypted. The source object can be encrypted with
-// server-side encryption using AWS managed encryption keys (SSE-S3 or SSE-KMS) or
-// by using a customer-provided encryption key. With server-side encryption, Amazon
-// S3 encrypts your data as it writes it to disks in its data centers and decrypts
-// the data when you access it. You can optionally use the appropriate
-// encryption-related headers to request server-side encryption for the target
-// object. You have the option to provide your own encryption key or use SSE-S3 or
-// SSE-KMS, regardless of the form of server-side encryption that was used to
-// encrypt the source object. You can even request encryption if the source object
-// was not encrypted. For more information about server-side encryption, see Using
-// Server-Side Encryption
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html).
-// Access Control List (ACL)-Specific Request Headers
-//
-// When copying an object, you
-// can optionally use headers to grant ACL-based permissions. By default, all
-// objects are private. Only the owner has full access control. When adding a new
-// object, you can grant permissions to individual AWS accounts or to predefined
-// groups defined by Amazon S3. These permissions are then added to the ACL on the
-// object. For more information, see Access Control List (ACL) Overview
+// x-amz-copy-source, must be signed. Server-side encryption When you perform a
+// CopyObject operation, you can optionally use the appropriate encryption-related
+// headers to encrypt the object using server-side encryption with AWS managed
+// encryption keys (SSE-S3 or SSE-KMS) or a customer-provided encryption key. With
+// server-side encryption, Amazon S3 encrypts your data as it writes it to disks in
+// its data centers and decrypts the data when you access it. For more information
+// about server-side encryption, see Using Server-Side Encryption
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html). If
+// a target object uses SSE-KMS, you can enable an S3 Bucket Key for the object.
+// For more information, see Amazon S3 Bucket Keys
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in the Amazon
+// Simple Storage Service Developer Guide. Access Control List (ACL)-Specific
+// Request Headers When copying an object, you can optionally use headers to grant
+// ACL-based permissions. By default, all objects are private. Only the owner has
+// full access control. When adding a new object, you can grant permissions to
+// individual AWS accounts or to predefined groups defined by Amazon S3. These
+// permissions are then added to the ACL on the object. For more information, see
+// Access Control List (ACL) Overview
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html) and Managing
 // ACLs Using the REST API
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html).
@@ -228,6 +225,13 @@ type CopyObjectInput struct {
 	// The canned ACL to apply to the object. This action is not supported by Amazon S3
 	// on Outposts.
 	ACL types.ObjectCannedACL
+
+	// Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption
+	// with server-side encryption using AWS KMS (SSE-KMS). Setting this header to true
+	// causes Amazon S3 to use an S3 Bucket Key for object encryption with SSE-KMS.
+	// Specifying this header with a COPY operation doesn’t affect bucket-level
+	// settings for S3 Bucket Key.
+	BucketKeyEnabled bool
 
 	// Specifies caching behavior along the request/reply chain.
 	CacheControl *string
@@ -384,6 +388,10 @@ type CopyObjectInput struct {
 }
 
 type CopyObjectOutput struct {
+
+	// Indicates whether the copied object uses an S3 Bucket Key for server-side
+	// encryption with AWS KMS (SSE-KMS).
+	BucketKeyEnabled bool
 
 	// Container for all response elements.
 	CopyObjectResult *types.CopyObjectResult

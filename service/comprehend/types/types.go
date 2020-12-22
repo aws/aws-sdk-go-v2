@@ -534,9 +534,9 @@ type DominantLanguageDetectionJobProperties struct {
 	VpcConfig *VpcConfig
 }
 
-// The filter used to determine which endpoints are are returned. You can filter
-// jobs on their name, model, status, or the date and time that they were created.
-// You can only set one filter at a time.
+// The filter used to determine which endpoints are returned. You can filter jobs
+// on their name, model, status, or the date and time that they were created. You
+// can only set one filter at a time.
 type EndpointFilter struct {
 
 	// Specifies a date after which the returned endpoint or endpoints were created.
@@ -910,8 +910,8 @@ type EntityRecognizerProperties struct {
 // entity type.
 type EntityTypesEvaluationMetrics struct {
 
-	// A measure of how accurate the recognizer results are for for a specific entity
-	// type in the test data. It is derived from the Precision and Recall values. The
+	// A measure of how accurate the recognizer results are for a specific entity type
+	// in the test data. It is derived from the Precision and Recall values. The
 	// F1Score is the harmonic average of the two scores. The highest score is 1, and
 	// the worst score is 0.
 	F1Score *float64
@@ -939,6 +939,67 @@ type EntityTypesListItem struct {
 	//
 	// This member is required.
 	Type *string
+}
+
+// Provides information for filtering a list of event detection jobs.
+type EventsDetectionJobFilter struct {
+
+	// Filters on the name of the events detection job.
+	JobName *string
+
+	// Filters the list of jobs based on job status. Returns only jobs with the
+	// specified status.
+	JobStatus JobStatus
+
+	// Filters the list of jobs based on the time that the job was submitted for
+	// processing. Returns only jobs submitted after the specified time. Jobs are
+	// returned in descending order, newest to oldest.
+	SubmitTimeAfter *time.Time
+
+	// Filters the list of jobs based on the time that the job was submitted for
+	// processing. Returns only jobs submitted before the specified time. Jobs are
+	// returned in ascending order, oldest to newest.
+	SubmitTimeBefore *time.Time
+}
+
+// Provides information about an events detection job.
+type EventsDetectionJobProperties struct {
+
+	// The Amazon Resource Name (ARN) of the AWS Identify and Access Management (IAM)
+	// role that grants Amazon Comprehend read access to your input data.
+	DataAccessRoleArn *string
+
+	// The time that the events detection job completed.
+	EndTime *time.Time
+
+	// The input data configuration that you supplied when you created the events
+	// detection job.
+	InputDataConfig *InputDataConfig
+
+	// The identifier assigned to the events detection job.
+	JobId *string
+
+	// The name you assigned the events detection job.
+	JobName *string
+
+	// The current status of the events detection job.
+	JobStatus JobStatus
+
+	// The language code of the input documents.
+	LanguageCode LanguageCode
+
+	// A description of the status of the events detection job.
+	Message *string
+
+	// The output data configuration that you supplied when you created the events
+	// detection job.
+	OutputDataConfig *OutputDataConfig
+
+	// The time that the events detection job was submitted for processing.
+	SubmitTime *time.Time
+
+	// The types of events that are detected by the job.
+	TargetEventTypes []string
 }
 
 // The input properties for a topic detection job.
@@ -1456,8 +1517,8 @@ type TopicsDetectionJobProperties struct {
 }
 
 // Configuration parameters for an optional private Virtual Private Cloud (VPC)
-// containing the resources you are using for the job. For For more information,
-// see Amazon VPC
+// containing the resources you are using for the job. For more information, see
+// Amazon VPC
 // (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 type VpcConfig struct {
 

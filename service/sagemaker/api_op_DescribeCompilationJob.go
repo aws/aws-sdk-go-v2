@@ -116,6 +116,10 @@ type DescribeCompilationJobOutput struct {
 	// job container.
 	CompilationStartTime *time.Time
 
+	// Provides a BLAKE2 hash value that identifies the compiled model artifacts in
+	// Amazon S3.
+	ModelDigests *types.ModelDigests
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }

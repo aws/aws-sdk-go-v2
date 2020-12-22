@@ -41,7 +41,7 @@ type ListKeyGroupsInput struct {
 	Marker *string
 
 	// The maximum number of key groups that you want in the response.
-	MaxItems *string
+	MaxItems *int32
 }
 
 type ListKeyGroupsOutput struct {

@@ -98,6 +98,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeEndpointInput(v *InvokeEndpointIn
 		}
 	}
 
+	if v.InferenceId != nil && len(*v.InferenceId) > 0 {
+		locationName := "X-Amzn-Sagemaker-Inference-Id"
+		encoder.SetHeader(locationName).String(*v.InferenceId)
+	}
+
 	if v.TargetModel != nil && len(*v.TargetModel) > 0 {
 		locationName := "X-Amzn-Sagemaker-Target-Model"
 		encoder.SetHeader(locationName).String(*v.TargetModel)

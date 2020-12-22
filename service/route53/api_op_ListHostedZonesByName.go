@@ -92,7 +92,7 @@ type ListHostedZonesByNameInput struct {
 	// IsTruncated element in the response is true, and the values of NextDNSName and
 	// NextHostedZoneId specify the first hosted zone in the next group of maxitems
 	// hosted zones.
-	MaxItems *string
+	MaxItems *int32
 }
 
 // A complex type that contains the response information for the request.
@@ -115,7 +115,7 @@ type ListHostedZonesByNameOutput struct {
 	// ListHostedZonesByName that produced the current response.
 	//
 	// This member is required.
-	MaxItems *string
+	MaxItems *int32
 
 	// For the second and subsequent calls to ListHostedZonesByName, DNSName is the
 	// value that you specified for the dnsname parameter in the request that produced

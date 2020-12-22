@@ -8,8 +8,8 @@ import (
 )
 
 // You do not have sufficient access to perform this action. Check that the
-// workbook is owned by you and your IAM policy allows access to the
-// screen/automation in the request.
+// workbook is owned by you and your IAM policy allows access to the resource in
+// the request.
 type AccessDeniedException struct {
 	Message *string
 }
@@ -98,7 +98,8 @@ func (e *RequestTimeoutException) ErrorMessage() string {
 func (e *RequestTimeoutException) ErrorCode() string             { return "RequestTimeoutException" }
 func (e *RequestTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// A Workbook, App, Screen or Screen Automation was not found with the given ID.
+// A Workbook, Table, App, Screen or Screen Automation was not found with the given
+// ID.
 type ResourceNotFoundException struct {
 	Message *string
 }
@@ -114,6 +115,23 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The request caused service quota to be breached.
+type ServiceQuotaExceededException struct {
+	Message *string
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Remote service is unreachable.
 type ServiceUnavailableException struct {

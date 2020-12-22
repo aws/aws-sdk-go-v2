@@ -162,21 +162,23 @@ type RegisterTaskDefinitionInput struct {
 	Memory *string
 
 	// The Docker networking mode to use for the containers in the task. The valid
-	// values are none, bridge, awsvpc, and host. The default Docker network mode is
-	// bridge. If you are using the Fargate launch type, the awsvpc network mode is
-	// required. If you are using the EC2 launch type, any network mode can be used. If
-	// the network mode is set to none, you cannot specify port mappings in your
-	// container definitions, and the tasks containers do not have external
+	// values are none, bridge, awsvpc, and host. If no network mode is specified, the
+	// default is bridge. For Amazon ECS tasks on Fargate, the awsvpc network mode is
+	// required. For Amazon ECS tasks on Amazon EC2 instances, any network mode can be
+	// used. If the network mode is set to none, you cannot specify port mappings in
+	// your container definitions, and the tasks containers do not have external
 	// connectivity. The host and awsvpc network modes offer the highest networking
 	// performance for containers because they use the EC2 network stack instead of the
 	// virtualized network stack provided by the bridge mode. With the host and awsvpc
 	// network modes, exposed container ports are mapped directly to the corresponding
 	// host port (for the host network mode) or the attached elastic network interface
 	// port (for the awsvpc network mode), so you cannot take advantage of dynamic host
-	// port mappings. If the network mode is awsvpc, the task is allocated an elastic
-	// network interface, and you must specify a NetworkConfiguration value when you
-	// create a service or run a task with the task definition. For more information,
-	// see Task Networking
+	// port mappings. When using the host network mode, you should not run containers
+	// using the root user (UID 0). It is considered best practice to use a non-root
+	// user. If the network mode is awsvpc, the task is allocated an elastic network
+	// interface, and you must specify a NetworkConfiguration value when you create a
+	// service or run a task with the task definition. For more information, see Task
+	// Networking
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
 	// in the Amazon Elastic Container Service Developer Guide. Currently, only Amazon
 	// ECS-optimized AMIs, other Amazon Linux variants with the ecs-init package, or
@@ -218,9 +220,6 @@ type RegisterTaskDefinitionInput struct {
 	// versions of the container agent and ecs-init. For more information, see Amazon
 	// ECS-optimized Linux AMI
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
-	// in the Amazon Elastic Container Service Developer Guide. For tasks using the
-	// Fargate launch type, the task or service requires platform version 1.3.0 or
-	// later.
 	ProxyConfiguration *types.ProxyConfiguration
 
 	// The task launch type that Amazon ECS should validate the task definition

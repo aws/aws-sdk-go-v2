@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Accepts the invitation to be monitored by a master GuardDuty account.
+// Accepts the invitation to be monitored by a GuardDuty administrator account.
 func (c *Client) AcceptInvitation(ctx context.Context, params *AcceptInvitationInput, optFns ...func(*Options)) (*AcceptInvitationOutput, error) {
 	if params == nil {
 		params = &AcceptInvitationInput{}
@@ -33,12 +33,13 @@ type AcceptInvitationInput struct {
 	// This member is required.
 	DetectorId *string
 
-	// The value that is used to validate the master account to the member account.
+	// The value that is used to validate the administrator account to the member
+	// account.
 	//
 	// This member is required.
 	InvitationId *string
 
-	// The account ID of the master GuardDuty account whose invitation you're
+	// The account ID of the GuardDuty administrator account whose invitation you're
 	// accepting.
 	//
 	// This member is required.

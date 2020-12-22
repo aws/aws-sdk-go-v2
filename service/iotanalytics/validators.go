@@ -807,24 +807,6 @@ func validateCustomerManagedChannelS3Storage(v *types.CustomerManagedChannelS3St
 	}
 }
 
-func validateCustomerManagedDatastoreS3Storage(v *types.CustomerManagedDatastoreS3Storage) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CustomerManagedDatastoreS3Storage"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateDatasetAction(v *types.DatasetAction) error {
 	if v == nil {
 		return nil
@@ -981,23 +963,6 @@ func validateDatastoreActivity(v *types.DatastoreActivity) error {
 	}
 	if v.DatastoreName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatastoreName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateDatastoreStorage(v *types.DatastoreStorage) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DatastoreStorage"}
-	if v.CustomerManagedS3 != nil {
-		if err := validateCustomerManagedDatastoreS3Storage(v.CustomerManagedS3); err != nil {
-			invalidParams.AddNested("CustomerManagedS3", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1736,11 +1701,6 @@ func validateOpCreateDatastoreInput(v *CreateDatastoreInput) error {
 	if v.DatastoreName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatastoreName"))
 	}
-	if v.DatastoreStorage != nil {
-		if err := validateDatastoreStorage(v.DatastoreStorage); err != nil {
-			invalidParams.AddNested("DatastoreStorage", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
@@ -2135,11 +2095,6 @@ func validateOpUpdateDatastoreInput(v *UpdateDatastoreInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDatastoreInput"}
 	if v.DatastoreName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatastoreName"))
-	}
-	if v.DatastoreStorage != nil {
-		if err := validateDatastoreStorage(v.DatastoreStorage); err != nil {
-			invalidParams.AddNested("DatastoreStorage", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

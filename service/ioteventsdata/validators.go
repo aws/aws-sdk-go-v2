@@ -114,18 +114,18 @@ func validateDetectorStateDefinition(v *types.DetectorStateDefinition) error {
 	if v.StateName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StateName"))
 	}
-	if v.Timers == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Timers"))
-	} else if v.Timers != nil {
-		if err := validateTimerDefinitions(v.Timers); err != nil {
-			invalidParams.AddNested("Timers", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Variables == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Variables"))
 	} else if v.Variables != nil {
 		if err := validateVariableDefinitions(v.Variables); err != nil {
 			invalidParams.AddNested("Variables", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Timers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Timers"))
+	} else if v.Timers != nil {
+		if err := validateTimerDefinitions(v.Timers); err != nil {
+			invalidParams.AddNested("Timers", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -178,11 +178,11 @@ func validateTimerDefinition(v *types.TimerDefinition) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TimerDefinition"}
-	if v.Seconds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Seconds"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Seconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Seconds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -213,18 +213,18 @@ func validateUpdateDetectorRequest(v *types.UpdateDetectorRequest) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDetectorRequest"}
+	if v.MessageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
+	}
+	if v.DetectorModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorModelName"))
+	}
 	if v.State == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("State"))
 	} else if v.State != nil {
 		if err := validateDetectorStateDefinition(v.State); err != nil {
 			invalidParams.AddNested("State", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.MessageId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
-	}
-	if v.DetectorModelName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DetectorModelName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -28,9 +28,7 @@ import (
 // application needs, you may choose to set the ACL on a bucket using either the
 // request body or the headers. For example, if you have an existing application
 // that updates a bucket ACL using the request body, then you can continue to use
-// that approach. Access Permissions
-//
-// You can set access permissions using one of
+// that approach. Access Permissions You can set access permissions using one of
 // the following methods:
 //
 // * Specify a canned ACL with the x-amz-acl request
@@ -93,9 +91,7 @@ import (
 // id="111122223333", id="555566667777"
 //
 // You can use either a canned ACL or specify
-// access permissions explicitly. You cannot do both. Grantee Values
-//
-// You can
+// access permissions explicitly. You cannot do both. Grantee Values You can
 // specify the person (grantee) to whom you're assigning access rights (using
 // request elements) in the following ways:
 //
@@ -178,10 +174,8 @@ type PutBucketAclInput struct {
 	// The base64-encoded 128-bit MD5 digest of the data. This header must be used as a
 	// message integrity check to verify that the request body was not corrupted in
 	// transit. For more information, go to RFC 1864.
-	// (http://www.ietf.org/rfc/rfc1864.txt)
-	//
-	// Deprecated: Content-MD5 header will now be automatically computed and injected
-	// in associated operation's Http request.
+	// (http://www.ietf.org/rfc/rfc1864.txt) For requests made using the AWS Command
+	// Line Interface (CLI) or AWS SDKs, this field is calculated automatically.
 	ContentMD5 *string
 
 	// The account id of the expected bucket owner. If the bucket is owned by a

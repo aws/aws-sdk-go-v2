@@ -421,6 +421,34 @@ type InstanceSummary struct {
 	ServiceRole *string
 }
 
+// Contains summary information about the associated AppIntegrations.
+type IntegrationAssociationSummary struct {
+
+	// The identifier of the Amazon Connect instance.
+	InstanceId *string
+
+	// The Amazon Resource Name (ARN) for the AppIntegration.
+	IntegrationArn *string
+
+	// The Amazon Resource Name (ARN) for the AppIntegration association.
+	IntegrationAssociationArn *string
+
+	// The identifier for the AppIntegration association.
+	IntegrationAssociationId *string
+
+	// The integration type.
+	IntegrationType IntegrationType
+
+	// The user-provided, friendly name for the external application.
+	SourceApplicationName *string
+
+	// The URL for the external application.
+	SourceApplicationUrl *string
+
+	// The name of the source.
+	SourceType SourceType
+}
+
 // Configuration information of a Kinesis Firehose delivery stream.
 type KinesisFirehoseConfig struct {
 
@@ -557,6 +585,22 @@ type QueueSummary struct {
 
 	// The type of queue.
 	QueueType QueueType
+}
+
+// A link that an agent selects to complete a given task. You can have up to 4,096
+// UTF-8 bytes across all references for a contact.
+type Reference struct {
+
+	// A valid URL.
+	//
+	// This member is required.
+	Type ReferenceType
+
+	// A formatted URL that will be shown to an agent in the Contact Control Panel
+	// (CCP)
+	//
+	// This member is required.
+	Value *string
 }
 
 // Contains information about a routing profile.
@@ -733,6 +777,20 @@ type Threshold struct {
 
 	// The threshold value to compare.
 	ThresholdValue *float64
+}
+
+// Contains the use case.
+type UseCase struct {
+
+	// The Amazon Resource Name (ARN) for the use case.
+	UseCaseArn *string
+
+	// The identifier for the use case.
+	UseCaseId *string
+
+	// The type of use case to associate to the AppIntegration association. Each
+	// AppIntegration association can have only one of each use case type.
+	UseCaseType UseCaseType
 }
 
 // Contains information about a user account for a Amazon Connect instance.

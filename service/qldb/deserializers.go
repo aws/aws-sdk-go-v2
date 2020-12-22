@@ -4004,7 +4004,7 @@ func awsRestjson1_deserializeDocumentS3ExportConfiguration(v **types.S3ExportCon
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentTags(v *map[string]string, value interface{}) error {
+func awsRestjson1_deserializeDocumentTags(v *map[string]*string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4017,21 +4017,21 @@ func awsRestjson1_deserializeDocumentTags(v *map[string]string, value interface{
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var mv map[string]string
+	var mv map[string]*string
 	if *v == nil {
-		mv = map[string]string{}
+		mv = map[string]*string{}
 	} else {
 		mv = *v
 	}
 
 	for key, value := range shape {
-		var parsedVal string
+		var parsedVal *string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
 			}
-			parsedVal = jtv
+			parsedVal = ptr.String(jtv)
 		}
 		mv[key] = parsedVal
 

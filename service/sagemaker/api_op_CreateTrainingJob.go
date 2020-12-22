@@ -16,7 +16,7 @@ import (
 // choose to host your model using Amazon SageMaker hosting services, you can use
 // the resulting model artifacts as part of the model. You can also use the
 // artifacts in a machine learning service other than Amazon SageMaker, provided
-// that you know how to use them for inferences. In the request body, you provide
+// that you know how to use them for inference. In the request body, you provide
 // the following:
 //
 // * AlgorithmSpecification - Identifies the training algorithm to
@@ -46,7 +46,7 @@ import (
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html).
 //
 // *
-// RoleARN - The Amazon Resource Number (ARN) that Amazon SageMaker assumes to
+// RoleArn - The Amazon Resource Number (ARN) that Amazon SageMaker assumes to
 // perform tasks on your behalf during model training. You must grant this role the
 // necessary permissions so that Amazon SageMaker can successfully complete model
 // training.
@@ -136,11 +136,14 @@ type CreateTrainingJobInput struct {
 	// checkpoint data.
 	CheckpointConfig *types.CheckpointConfig
 
-	// Configuration information for the debug hook parameters, collection
-	// configuration, and storage paths.
+	// Configuration information for the Debugger hook parameters, metric and tensor
+	// collections, and storage paths. To learn more about how to configure the
+	// DebugHookConfig parameter, see Use the SageMaker and Debugger Configuration API
+	// Operations to Create, Update, and Debug Your Training Job
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html).
 	DebugHookConfig *types.DebugHookConfig
 
-	// Configuration information for debugging rules.
+	// Configuration information for Debugger rules for debugging output tensors.
 	DebugRuleConfigurations []types.DebugRuleConfiguration
 
 	// To encrypt all communications between ML compute instances in distributed
@@ -204,13 +207,21 @@ type CreateTrainingJobInput struct {
 	// do not need to be downloaded.
 	InputDataConfig []types.Channel
 
-	// An array of key-value pairs. For more information, see Using Cost Allocation
-	// Tags
-	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
-	// in the AWS Billing and Cost Management User Guide.
+	// Configuration information for Debugger system monitoring, framework profiling,
+	// and storage paths.
+	ProfilerConfig *types.ProfilerConfig
+
+	// Configuration information for Debugger rules for profiling system and framework
+	// metrics.
+	ProfilerRuleConfigurations []types.ProfilerRuleConfiguration
+
+	// An array of key-value pairs. You can use tags to categorize your AWS resources
+	// in different ways, for example, by purpose, owner, or environment. For more
+	// information, see Tagging AWS Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags []types.Tag
 
-	// Configuration of storage locations for TensorBoard output.
+	// Configuration of storage locations for the Debugger TensorBoard output data.
 	TensorBoardOutputConfig *types.TensorBoardOutputConfig
 
 	// A VpcConfig object that specifies the VPC that you want your training job to

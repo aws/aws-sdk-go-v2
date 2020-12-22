@@ -290,6 +290,52 @@ func (m *awsAwsjson11_serializeOpCreatePredictor) HandleSerialize(ctx context.Co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreatePredictorBacktestExportJob struct {
+}
+
+func (*awsAwsjson11_serializeOpCreatePredictorBacktestExportJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreatePredictorBacktestExportJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreatePredictorBacktestExportJobInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.CreatePredictorBacktestExportJob")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreatePredictorBacktestExportJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDeleteDataset struct {
 }
 
@@ -551,6 +597,52 @@ func (m *awsAwsjson11_serializeOpDeletePredictor) HandleSerialize(ctx context.Co
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDeletePredictorInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeletePredictorBacktestExportJob struct {
+}
+
+func (*awsAwsjson11_serializeOpDeletePredictorBacktestExportJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeletePredictorBacktestExportJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeletePredictorBacktestExportJobInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.DeletePredictorBacktestExportJob")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeletePredictorBacktestExportJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -842,6 +934,52 @@ func (m *awsAwsjson11_serializeOpDescribePredictor) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDescribePredictorBacktestExportJob struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribePredictorBacktestExportJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribePredictorBacktestExportJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribePredictorBacktestExportJobInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.DescribePredictorBacktestExportJob")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribePredictorBacktestExportJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetAccuracyMetrics struct {
 }
 
@@ -1103,6 +1241,52 @@ func (m *awsAwsjson11_serializeOpListForecasts) HandleSerialize(ctx context.Cont
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentListForecastsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListPredictorBacktestExportJobs struct {
+}
+
+func (*awsAwsjson11_serializeOpListPredictorBacktestExportJobs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListPredictorBacktestExportJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListPredictorBacktestExportJobsInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.ListPredictorBacktestExportJobs")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListPredictorBacktestExportJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1962,6 +2146,11 @@ func awsAwsjson11_serializeOpDocumentCreateDatasetImportJobInput(v *CreateDatase
 		}
 	}
 
+	if v.GeolocationFormat != nil {
+		ok := object.Key("GeolocationFormat")
+		ok.String(*v.GeolocationFormat)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
@@ -1972,6 +2161,16 @@ func awsAwsjson11_serializeOpDocumentCreateDatasetImportJobInput(v *CreateDatase
 	if v.TimestampFormat != nil {
 		ok := object.Key("TimestampFormat")
 		ok.String(*v.TimestampFormat)
+	}
+
+	if v.TimeZone != nil {
+		ok := object.Key("TimeZone")
+		ok.String(*v.TimeZone)
+	}
+
+	if v.UseGeolocationForTimeZone {
+		ok := object.Key("UseGeolocationForTimeZone")
+		ok.Boolean(v.UseGeolocationForTimeZone)
 	}
 
 	return nil
@@ -2075,6 +2274,37 @@ func awsAwsjson11_serializeOpDocumentCreateForecastInput(v *CreateForecastInput,
 	if v.PredictorArn != nil {
 		ok := object.Key("PredictorArn")
 		ok.String(*v.PredictorArn)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreatePredictorBacktestExportJobInput(v *CreatePredictorBacktestExportJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Destination != nil {
+		ok := object.Key("Destination")
+		if err := awsAwsjson11_serializeDocumentDataDestination(v.Destination, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PredictorArn != nil {
+		ok := object.Key("PredictorArn")
+		ok.String(*v.PredictorArn)
+	}
+
+	if v.PredictorBacktestExportJobName != nil {
+		ok := object.Key("PredictorBacktestExportJobName")
+		ok.String(*v.PredictorBacktestExportJobName)
 	}
 
 	if v.Tags != nil {
@@ -2235,6 +2465,18 @@ func awsAwsjson11_serializeOpDocumentDeleteForecastInput(v *DeleteForecastInput,
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDeletePredictorBacktestExportJobInput(v *DeletePredictorBacktestExportJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PredictorBacktestExportJobArn != nil {
+		ok := object.Key("PredictorBacktestExportJobArn")
+		ok.String(*v.PredictorBacktestExportJobArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDeletePredictorInput(v *DeletePredictorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2302,6 +2544,18 @@ func awsAwsjson11_serializeOpDocumentDescribeForecastInput(v *DescribeForecastIn
 	if v.ForecastArn != nil {
 		ok := object.Key("ForecastArn")
 		ok.String(*v.ForecastArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDescribePredictorBacktestExportJobInput(v *DescribePredictorBacktestExportJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PredictorBacktestExportJobArn != nil {
+		ok := object.Key("PredictorBacktestExportJobArn")
+		ok.String(*v.PredictorBacktestExportJobArn)
 	}
 
 	return nil
@@ -2414,6 +2668,30 @@ func awsAwsjson11_serializeOpDocumentListForecastExportJobsInput(v *ListForecast
 }
 
 func awsAwsjson11_serializeOpDocumentListForecastsInput(v *ListForecastsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson11_serializeDocumentFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListPredictorBacktestExportJobsInput(v *ListPredictorBacktestExportJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

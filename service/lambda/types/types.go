@@ -75,6 +75,61 @@ type AliasRoutingConfiguration struct {
 	AdditionalVersionWeights map[string]float64
 }
 
+// List of signing profiles that can sign a code package.
+type AllowedPublishers struct {
+
+	// The Amazon Resource Name (ARN) for each of the signing profiles. A signing
+	// profile defines a trusted user who can sign a code package.
+	//
+	// This member is required.
+	SigningProfileVersionArns []string
+}
+
+// Details about a Code signing configuration.
+type CodeSigningConfig struct {
+
+	// List of allowed publishers.
+	//
+	// This member is required.
+	AllowedPublishers *AllowedPublishers
+
+	// The Amazon Resource Name (ARN) of the Code signing configuration.
+	//
+	// This member is required.
+	CodeSigningConfigArn *string
+
+	// Unique identifer for the Code signing configuration.
+	//
+	// This member is required.
+	CodeSigningConfigId *string
+
+	// The code signing policy controls the validation failure action for signature
+	// mismatch or expiry.
+	//
+	// This member is required.
+	CodeSigningPolicies *CodeSigningPolicies
+
+	// The date and time that the Code signing configuration was last modified, in
+	// ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// This member is required.
+	LastModified *string
+
+	// Code signing configuration description.
+	Description *string
+}
+
+// Code signing configuration policies specifies the validation failure action for
+// signature mismatch or expiry.
+type CodeSigningPolicies struct {
+
+	// Code signing configuration policy for deployment validation failure. If you set
+	// the policy to Enforce, Lambda blocks the deployment request if signature
+	// validation checks fail. If you set the policy to Warn, Lambda allows the
+	// deployment and creates a CloudWatch log. Default value: Warn
+	UntrustedArtifactOnDeployment CodeSigningPolicy
+}
+
 type Concurrency struct {
 
 	// The number of concurrent executions that are reserved for this function. For
@@ -231,8 +286,12 @@ type FileSystemConfig struct {
 }
 
 // The code for the Lambda function. You can specify either an object in Amazon S3,
-// or upload a deployment package directly.
+// upload a .zip file archive deployment package directly, or specify the URI of a
+// container image.
 type FunctionCode struct {
+
+	// URI of a container image in the Amazon ECR registry.
+	ImageUri *string
 
 	// An Amazon S3 bucket in the same AWS Region as your function. The bucket can be
 	// in a different AWS account.
@@ -252,11 +311,17 @@ type FunctionCode struct {
 // Details about a function's deployment package.
 type FunctionCodeLocation struct {
 
+	// URI of a container image in the Amazon ECR registry.
+	ImageUri *string
+
 	// A presigned URL that you can use to download the deployment package.
 	Location *string
 
 	// The service that's hosting the file.
 	RepositoryType *string
+
+	// The resolved URI for the image.
+	ResolvedImageUri *string
 }
 
 // Details about a function's configuration.
@@ -289,6 +354,9 @@ type FunctionConfiguration struct {
 	// The function that Lambda calls to begin executing your function.
 	Handler *string
 
+	// The function's image configuration values.
+	ImageConfigResponse *ImageConfigResponse
+
 	// The KMS key that's used to encrypt the function's environment variables. This
 	// key is only returned if you've configured a customer managed CMK.
 	KMSKeyArn *string
@@ -314,8 +382,12 @@ type FunctionConfiguration struct {
 	// For Lambda@Edge functions, the ARN of the master function.
 	MasterArn *string
 
-	// The memory that's allocated to the function.
+	// The amount of memory available to the function at runtime.
 	MemorySize *int32
+
+	// The type of deployment package. Set to Image for container image and set Zip for
+	// .zip file archive.
+	PackageType PackageType
 
 	// The latest updated revision of the function or alias.
 	RevisionId *string
@@ -325,6 +397,12 @@ type FunctionConfiguration struct {
 
 	// The runtime environment for the Lambda function.
 	Runtime Runtime
+
+	// The ARN of the signing job.
+	SigningJobArn *string
+
+	// The ARN of the signing profile version.
+	SigningProfileVersionArn *string
 
 	// The current state of the function. When the state is Inactive, you can
 	// reactivate the function by invoking it.
@@ -380,6 +458,42 @@ type FunctionEventInvokeConfig struct {
 	MaximumRetryAttempts *int32
 }
 
+// Configuration values that override the container image Dockerfile. See Override
+// Container settings
+// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-images-settings.html).
+type ImageConfig struct {
+
+	// Specifies parameters that you want to pass in with ENTRYPOINT.
+	Command []string
+
+	// Specifies the entry point to their application, which is typically the location
+	// of the runtime executable.
+	EntryPoint []string
+
+	// Specifies the working directory.
+	WorkingDirectory *string
+}
+
+// Error response to GetFunctionConfiguration.
+type ImageConfigError struct {
+
+	// Error code.
+	ErrorCode *string
+
+	// Error message.
+	Message *string
+}
+
+// Response to GetFunctionConfiguration request.
+type ImageConfigResponse struct {
+
+	// Error response to GetFunctionConfiguration.
+	Error *ImageConfigError
+
+	// Configuration values that override the container image Dockerfile.
+	ImageConfig *ImageConfig
+}
+
 // An AWS Lambda layer
 // (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
 type Layer struct {
@@ -389,6 +503,12 @@ type Layer struct {
 
 	// The size of the layer archive in bytes.
 	CodeSize int64
+
+	// The Amazon Resource Name (ARN) of a signing job.
+	SigningJobArn *string
+
+	// The Amazon Resource Name (ARN) for a signing profile version.
+	SigningProfileVersionArn *string
 }
 
 // Details about an AWS Lambda layer
@@ -436,6 +556,12 @@ type LayerVersionContentOutput struct {
 
 	// A link to the layer archive in Amazon S3 that is valid for 10 minutes.
 	Location *string
+
+	// The Amazon Resource Name (ARN) of a signing job.
+	SigningJobArn *string
+
+	// The Amazon Resource Name (ARN) for a signing profile version.
+	SigningProfileVersionArn *string
 }
 
 // Details about a version of an AWS Lambda layer

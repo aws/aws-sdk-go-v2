@@ -86,17 +86,17 @@ func validateOpCreateTokenInput(v *CreateTokenInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTokenInput"}
-	if v.GrantType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GrantType"))
-	}
-	if v.DeviceCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeviceCode"))
-	}
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
 	if v.ClientSecret == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	}
+	if v.GrantType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GrantType"))
+	}
+	if v.DeviceCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -110,11 +110,11 @@ func validateOpRegisterClientInput(v *RegisterClientInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterClientInput"}
-	if v.ClientType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientType"))
-	}
 	if v.ClientName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientName"))
+	}
+	if v.ClientType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -128,11 +128,11 @@ func validateOpStartDeviceAuthorizationInput(v *StartDeviceAuthorizationInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartDeviceAuthorizationInput"}
-	if v.ClientSecret == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
-	}
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.ClientSecret == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
 	}
 	if v.StartUrl == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartUrl"))

@@ -61,7 +61,7 @@ type DescribeIndexOutput struct {
 	// that explains why.
 	ErrorMessage *string
 
-	// the name of the index.
+	// The name of the index.
 	Id *string
 
 	// Provides information about the number of FAQ questions and answers and the

@@ -70,8 +70,7 @@ type CreateProcessingJobInput struct {
 	// Networking options for a processing job.
 	NetworkConfig *types.NetworkConfig
 
-	// For each input, data is downloaded from S3 into the processing container before
-	// the processing job begins running if "S3InputMode" is set to File.
+	// List of input configurations for the processing job.
 	ProcessingInputs []types.ProcessingInput
 
 	// Output configuration for the processing job.

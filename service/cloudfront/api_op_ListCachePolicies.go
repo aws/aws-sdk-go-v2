@@ -42,7 +42,7 @@ type ListCachePoliciesInput struct {
 	Marker *string
 
 	// The maximum number of cache policies that you want in the response.
-	MaxItems *string
+	MaxItems *int32
 
 	// A filter to return only the specified kinds of cache policies. Valid values
 	// are:

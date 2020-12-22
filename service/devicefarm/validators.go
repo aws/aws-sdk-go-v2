@@ -1527,11 +1527,11 @@ func validateDeviceSelectionConfiguration(v *types.DeviceSelectionConfiguration)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeviceSelectionConfiguration"}
-	if v.MaxDevices == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxDevices"))
-	}
 	if v.Filters == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	}
+	if v.MaxDevices == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxDevices"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1630,14 +1630,14 @@ func validateOpCreateDevicePoolInput(v *CreateDevicePoolInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDevicePoolInput"}
+	if v.ProjectArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
+	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.Rules == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
-	}
-	if v.ProjectArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1666,11 +1666,11 @@ func validateOpCreateNetworkProfileInput(v *CreateNetworkProfileInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateNetworkProfileInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.ProjectArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1750,11 +1750,11 @@ func validateOpCreateUploadInput(v *CreateUploadInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateUploadInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.ProjectArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
@@ -1771,14 +1771,14 @@ func validateOpCreateVPCEConfigurationInput(v *CreateVPCEConfigurationInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateVPCEConfigurationInput"}
-	if v.ServiceDnsName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceDnsName"))
+	if v.VpceConfigurationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpceConfigurationName"))
 	}
 	if v.VpceServiceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpceServiceName"))
 	}
-	if v.VpceConfigurationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VpceConfigurationName"))
+	if v.ServiceDnsName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceDnsName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1960,14 +1960,14 @@ func validateOpGetDevicePoolCompatibilityInput(v *GetDevicePoolCompatibilityInpu
 	if v.DevicePoolArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DevicePoolArn"))
 	}
-	if v.Configuration != nil {
-		if err := validateScheduleRunConfiguration(v.Configuration); err != nil {
-			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Test != nil {
 		if err := validateScheduleRunTest(v.Test); err != nil {
 			invalidParams.AddNested("Test", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Configuration != nil {
+		if err := validateScheduleRunConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2408,20 +2408,20 @@ func validateOpScheduleRunInput(v *ScheduleRunInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ScheduleRunInput"}
-	if v.Test == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Test"))
-	} else if v.Test != nil {
-		if err := validateScheduleRunTest(v.Test); err != nil {
-			invalidParams.AddNested("Test", err.(smithy.InvalidParamsError))
-		}
+	if v.ProjectArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
 	}
 	if v.DeviceSelectionConfiguration != nil {
 		if err := validateDeviceSelectionConfiguration(v.DeviceSelectionConfiguration); err != nil {
 			invalidParams.AddNested("DeviceSelectionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ProjectArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
+	if v.Test == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Test"))
+	} else if v.Test != nil {
+		if err := validateScheduleRunTest(v.Test); err != nil {
+			invalidParams.AddNested("Test", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Configuration != nil {
 		if err := validateScheduleRunConfiguration(v.Configuration); err != nil {
@@ -2507,11 +2507,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

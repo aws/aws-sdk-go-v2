@@ -19,7 +19,7 @@ import (
 // each requested name. Learn more
 //
 // * Build a Rule Set
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html)
+// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
 //
 // Related
 // operations

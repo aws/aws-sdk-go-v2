@@ -11,6 +11,8 @@ import (
 )
 
 // Disassociates the specified member accounts from the associated master account.
+// Can be used to disassociate both accounts that are in an organization and
+// accounts that were invited manually.
 func (c *Client) DisassociateMembers(ctx context.Context, params *DisassociateMembersInput, optFns ...func(*Options)) (*DisassociateMembersOutput, error) {
 	if params == nil {
 		params = &DisassociateMembersInput{}
@@ -29,6 +31,8 @@ func (c *Client) DisassociateMembers(ctx context.Context, params *DisassociateMe
 type DisassociateMembersInput struct {
 
 	// The account IDs of the member accounts to disassociate from the master account.
+	//
+	// This member is required.
 	AccountIds []string
 }
 
@@ -77,6 +81,9 @@ func addOperationDisassociateMembersMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpDisassociateMembersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateMembers(options.Region), middleware.Before); err != nil {

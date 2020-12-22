@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns summaries of the customer's organizations.
+// Returns summaries of the customer's non-deleted organizations.
 func (c *Client) ListOrganizations(ctx context.Context, params *ListOrganizationsInput, optFns ...func(*Options)) (*ListOrganizationsOutput, error) {
 	if params == nil {
 		params = &ListOrganizationsInput{}

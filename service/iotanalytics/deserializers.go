@@ -7008,7 +7008,7 @@ func awsRestjson1_deserializeDocumentDatastoreStatistics(v **types.DatastoreStat
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentDatastoreStorage(v **types.DatastoreStorage, value interface{}) error {
+func awsRestjson1_deserializeDocumentDatastoreStorage(v *types.DatastoreStorage, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7021,31 +7021,37 @@ func awsRestjson1_deserializeDocumentDatastoreStorage(v **types.DatastoreStorage
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var sv *types.DatastoreStorage
-	if *v == nil {
-		sv = &types.DatastoreStorage{}
-	} else {
-		sv = *v
-	}
-
+	var uv types.DatastoreStorage
+loop:
 	for key, value := range shape {
 		switch key {
 		case "customerManagedS3":
-			if err := awsRestjson1_deserializeDocumentCustomerManagedDatastoreS3Storage(&sv.CustomerManagedS3, value); err != nil {
+			var mv types.CustomerManagedDatastoreS3Storage
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentCustomerManagedDatastoreS3Storage(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DatastoreStorageMemberCustomerManagedS3{Value: mv}
+			break loop
 
 		case "serviceManagedS3":
-			if err := awsRestjson1_deserializeDocumentServiceManagedDatastoreS3Storage(&sv.ServiceManagedS3, value); err != nil {
+			var mv types.ServiceManagedDatastoreS3Storage
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentServiceManagedDatastoreS3Storage(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DatastoreStorageMemberServiceManagedS3{Value: mv}
+			break loop
 
 		default:
-			_, _ = key, value
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
 
 		}
 	}
-	*v = sv
+	*v = uv
 	return nil
 }
 

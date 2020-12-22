@@ -35,6 +35,9 @@ type ListUpdatesInput struct {
 	// This member is required.
 	Name *string
 
+	// The names of the installed add-ons that have available updates.
+	AddonName *string
+
 	// The maximum number of update results returned by ListUpdates in paginated
 	// output. When you use this parameter, ListUpdates returns only maxResults results
 	// in a single page along with a nextToken response element. You can see the

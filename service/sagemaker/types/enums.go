@@ -2,6 +2,32 @@
 
 package types
 
+type ActionStatus string
+
+// Enum values for ActionStatus
+const (
+	ActionStatusUnknown    ActionStatus = "Unknown"
+	ActionStatusInProgress ActionStatus = "InProgress"
+	ActionStatusCompleted  ActionStatus = "Completed"
+	ActionStatusFailed     ActionStatus = "Failed"
+	ActionStatusStopping   ActionStatus = "Stopping"
+	ActionStatusStopped    ActionStatus = "Stopped"
+)
+
+// Values returns all known values for ActionStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ActionStatus) Values() []ActionStatus {
+	return []ActionStatus{
+		"Unknown",
+		"InProgress",
+		"Completed",
+		"Failed",
+		"Stopping",
+		"Stopped",
+	}
+}
+
 type AlgorithmSortBy string
 
 // Enum values for AlgorithmSortBy
@@ -220,6 +246,28 @@ func (AppType) Values() []AppType {
 	}
 }
 
+type ArtifactSourceIdType string
+
+// Enum values for ArtifactSourceIdType
+const (
+	ArtifactSourceIdTypeMd5Hash   ArtifactSourceIdType = "MD5Hash"
+	ArtifactSourceIdTypeS3Etag    ArtifactSourceIdType = "S3ETag"
+	ArtifactSourceIdTypeS3Version ArtifactSourceIdType = "S3Version"
+	ArtifactSourceIdTypeCustom    ArtifactSourceIdType = "Custom"
+)
+
+// Values returns all known values for ArtifactSourceIdType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ArtifactSourceIdType) Values() []ArtifactSourceIdType {
+	return []ArtifactSourceIdType{
+		"MD5Hash",
+		"S3ETag",
+		"S3Version",
+		"Custom",
+	}
+}
+
 type AssemblyType string
 
 // Enum values for AssemblyType
@@ -235,6 +283,72 @@ func (AssemblyType) Values() []AssemblyType {
 	return []AssemblyType{
 		"None",
 		"Line",
+	}
+}
+
+type AssociationEdgeType string
+
+// Enum values for AssociationEdgeType
+const (
+	AssociationEdgeTypeContributedTo  AssociationEdgeType = "ContributedTo"
+	AssociationEdgeTypeAssociatedWith AssociationEdgeType = "AssociatedWith"
+	AssociationEdgeTypeDerivedFrom    AssociationEdgeType = "DerivedFrom"
+	AssociationEdgeTypeProduced       AssociationEdgeType = "Produced"
+)
+
+// Values returns all known values for AssociationEdgeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssociationEdgeType) Values() []AssociationEdgeType {
+	return []AssociationEdgeType{
+		"ContributedTo",
+		"AssociatedWith",
+		"DerivedFrom",
+		"Produced",
+	}
+}
+
+type AthenaResultCompressionType string
+
+// Enum values for AthenaResultCompressionType
+const (
+	AthenaResultCompressionTypeGzip   AthenaResultCompressionType = "GZIP"
+	AthenaResultCompressionTypeSnappy AthenaResultCompressionType = "SNAPPY"
+	AthenaResultCompressionTypeZlib   AthenaResultCompressionType = "ZLIB"
+)
+
+// Values returns all known values for AthenaResultCompressionType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AthenaResultCompressionType) Values() []AthenaResultCompressionType {
+	return []AthenaResultCompressionType{
+		"GZIP",
+		"SNAPPY",
+		"ZLIB",
+	}
+}
+
+type AthenaResultFormat string
+
+// Enum values for AthenaResultFormat
+const (
+	AthenaResultFormatParquet  AthenaResultFormat = "PARQUET"
+	AthenaResultFormatOrc      AthenaResultFormat = "ORC"
+	AthenaResultFormatAvro     AthenaResultFormat = "AVRO"
+	AthenaResultFormatJson     AthenaResultFormat = "JSON"
+	AthenaResultFormatTextfile AthenaResultFormat = "TEXTFILE"
+)
+
+// Values returns all known values for AthenaResultFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AthenaResultFormat) Values() []AthenaResultFormat {
+	return []AthenaResultFormat{
+		"PARQUET",
+		"ORC",
+		"AVRO",
+		"JSON",
+		"TEXTFILE",
 	}
 }
 
@@ -531,6 +645,24 @@ func (CandidateStepType) Values() []CandidateStepType {
 	}
 }
 
+type CapacitySizeType string
+
+// Enum values for CapacitySizeType
+const (
+	CapacitySizeTypeInstanceCount   CapacitySizeType = "INSTANCE_COUNT"
+	CapacitySizeTypeCapacityPercent CapacitySizeType = "CAPACITY_PERCENT"
+)
+
+// Values returns all known values for CapacitySizeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CapacitySizeType) Values() []CapacitySizeType {
+	return []CapacitySizeType{
+		"INSTANCE_COUNT",
+		"CAPACITY_PERCENT",
+	}
+}
+
 type CaptureMode string
 
 // Enum values for CaptureMode
@@ -649,6 +781,24 @@ func (CompressionType) Values() []CompressionType {
 	}
 }
 
+type ConditionOutcome string
+
+// Enum values for ConditionOutcome
+const (
+	ConditionOutcomeTrue  ConditionOutcome = "True"
+	ConditionOutcomeFalse ConditionOutcome = "False"
+)
+
+// Values returns all known values for ConditionOutcome. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConditionOutcome) Values() []ConditionOutcome {
+	return []ConditionOutcome{
+		"True",
+		"False",
+	}
+}
+
 type ContainerMode string
 
 // Enum values for ContainerMode
@@ -682,6 +832,24 @@ func (ContentClassifier) Values() []ContentClassifier {
 	return []ContentClassifier{
 		"FreeOfPersonallyIdentifiableInformation",
 		"FreeOfAdultContent",
+	}
+}
+
+type DataDistributionType string
+
+// Enum values for DataDistributionType
+const (
+	DataDistributionTypeFullyreplicated DataDistributionType = "FullyReplicated"
+	DataDistributionTypeShardedbys3key  DataDistributionType = "ShardedByS3Key"
+)
+
+// Values returns all known values for DataDistributionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataDistributionType) Values() []DataDistributionType {
+	return []DataDistributionType{
+		"FullyReplicated",
+		"ShardedByS3Key",
 	}
 }
 
@@ -772,6 +940,32 @@ func (DomainStatus) Values() []DomainStatus {
 		"Updating",
 		"Update_Failed",
 		"Delete_Failed",
+	}
+}
+
+type EdgePackagingJobStatus string
+
+// Enum values for EdgePackagingJobStatus
+const (
+	EdgePackagingJobStatusStarting   EdgePackagingJobStatus = "STARTING"
+	EdgePackagingJobStatusInprogress EdgePackagingJobStatus = "INPROGRESS"
+	EdgePackagingJobStatusCompleted  EdgePackagingJobStatus = "COMPLETED"
+	EdgePackagingJobStatusFailed     EdgePackagingJobStatus = "FAILED"
+	EdgePackagingJobStatusStopping   EdgePackagingJobStatus = "STOPPING"
+	EdgePackagingJobStatusStopped    EdgePackagingJobStatus = "STOPPED"
+)
+
+// Values returns all known values for EdgePackagingJobStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EdgePackagingJobStatus) Values() []EdgePackagingJobStatus {
+	return []EdgePackagingJobStatus{
+		"STARTING",
+		"INPROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"STOPPING",
+		"STOPPED",
 	}
 }
 
@@ -871,6 +1065,90 @@ func (ExecutionStatus) Values() []ExecutionStatus {
 	}
 }
 
+type FeatureGroupSortBy string
+
+// Enum values for FeatureGroupSortBy
+const (
+	FeatureGroupSortByName               FeatureGroupSortBy = "Name"
+	FeatureGroupSortByFeatureGroupStatus FeatureGroupSortBy = "FeatureGroupStatus"
+	FeatureGroupSortByOfflineStoreStatus FeatureGroupSortBy = "OfflineStoreStatus"
+	FeatureGroupSortByCreationTime       FeatureGroupSortBy = "CreationTime"
+)
+
+// Values returns all known values for FeatureGroupSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FeatureGroupSortBy) Values() []FeatureGroupSortBy {
+	return []FeatureGroupSortBy{
+		"Name",
+		"FeatureGroupStatus",
+		"OfflineStoreStatus",
+		"CreationTime",
+	}
+}
+
+type FeatureGroupSortOrder string
+
+// Enum values for FeatureGroupSortOrder
+const (
+	FeatureGroupSortOrderAscending  FeatureGroupSortOrder = "Ascending"
+	FeatureGroupSortOrderDescending FeatureGroupSortOrder = "Descending"
+)
+
+// Values returns all known values for FeatureGroupSortOrder. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FeatureGroupSortOrder) Values() []FeatureGroupSortOrder {
+	return []FeatureGroupSortOrder{
+		"Ascending",
+		"Descending",
+	}
+}
+
+type FeatureGroupStatus string
+
+// Enum values for FeatureGroupStatus
+const (
+	FeatureGroupStatusCreating     FeatureGroupStatus = "Creating"
+	FeatureGroupStatusCreated      FeatureGroupStatus = "Created"
+	FeatureGroupStatusCreateFailed FeatureGroupStatus = "CreateFailed"
+	FeatureGroupStatusDeleting     FeatureGroupStatus = "Deleting"
+	FeatureGroupStatusDeleteFailed FeatureGroupStatus = "DeleteFailed"
+)
+
+// Values returns all known values for FeatureGroupStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FeatureGroupStatus) Values() []FeatureGroupStatus {
+	return []FeatureGroupStatus{
+		"Creating",
+		"Created",
+		"CreateFailed",
+		"Deleting",
+		"DeleteFailed",
+	}
+}
+
+type FeatureType string
+
+// Enum values for FeatureType
+const (
+	FeatureTypeIntegral   FeatureType = "Integral"
+	FeatureTypeFractional FeatureType = "Fractional"
+	FeatureTypeString     FeatureType = "String"
+)
+
+// Values returns all known values for FeatureType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FeatureType) Values() []FeatureType {
+	return []FeatureType{
+		"Integral",
+		"Fractional",
+		"String",
+	}
+}
+
 type FileSystemAccessMode string
 
 // Enum values for FileSystemAccessMode
@@ -941,6 +1219,7 @@ const (
 	FrameworkXgboost    Framework = "XGBOOST"
 	FrameworkTflite     Framework = "TFLITE"
 	FrameworkDarknet    Framework = "DARKNET"
+	FrameworkSklearn    Framework = "SKLEARN"
 )
 
 // Values returns all known values for Framework. Note that this can be expanded in
@@ -956,6 +1235,7 @@ func (Framework) Values() []Framework {
 		"XGBOOST",
 		"TFLITE",
 		"DARKNET",
+		"SKLEARN",
 	}
 }
 
@@ -1230,6 +1510,24 @@ func (ImageVersionStatus) Values() []ImageVersionStatus {
 	}
 }
 
+type InputMode string
+
+// Enum values for InputMode
+const (
+	InputModePipe InputMode = "Pipe"
+	InputModeFile InputMode = "File"
+)
+
+// Values returns all known values for InputMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (InputMode) Values() []InputMode {
+	return []InputMode{
+		"Pipe",
+		"File",
+	}
+}
+
 type InstanceType string
 
 // Enum values for InstanceType
@@ -1384,6 +1682,50 @@ func (ListCompilationJobsSortBy) Values() []ListCompilationJobsSortBy {
 	}
 }
 
+type ListDeviceFleetsSortBy string
+
+// Enum values for ListDeviceFleetsSortBy
+const (
+	ListDeviceFleetsSortByName             ListDeviceFleetsSortBy = "NAME"
+	ListDeviceFleetsSortByCreationtime     ListDeviceFleetsSortBy = "CREATION_TIME"
+	ListDeviceFleetsSortByLastmodifiedtime ListDeviceFleetsSortBy = "LAST_MODIFIED_TIME"
+)
+
+// Values returns all known values for ListDeviceFleetsSortBy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ListDeviceFleetsSortBy) Values() []ListDeviceFleetsSortBy {
+	return []ListDeviceFleetsSortBy{
+		"NAME",
+		"CREATION_TIME",
+		"LAST_MODIFIED_TIME",
+	}
+}
+
+type ListEdgePackagingJobsSortBy string
+
+// Enum values for ListEdgePackagingJobsSortBy
+const (
+	ListEdgePackagingJobsSortByName                   ListEdgePackagingJobsSortBy = "NAME"
+	ListEdgePackagingJobsSortByModelname              ListEdgePackagingJobsSortBy = "MODEL_NAME"
+	ListEdgePackagingJobsSortByCreationtime           ListEdgePackagingJobsSortBy = "CREATION_TIME"
+	ListEdgePackagingJobsSortByLastmodifiedtime       ListEdgePackagingJobsSortBy = "LAST_MODIFIED_TIME"
+	ListEdgePackagingJobsSortByEdgepackagingjobstatus ListEdgePackagingJobsSortBy = "STATUS"
+)
+
+// Values returns all known values for ListEdgePackagingJobsSortBy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListEdgePackagingJobsSortBy) Values() []ListEdgePackagingJobsSortBy {
+	return []ListEdgePackagingJobsSortBy{
+		"NAME",
+		"MODEL_NAME",
+		"CREATION_TIME",
+		"LAST_MODIFIED_TIME",
+		"STATUS",
+	}
+}
+
 type ListLabelingJobsForWorkteamSortByOptions string
 
 // Enum values for ListLabelingJobsForWorkteamSortByOptions
@@ -1437,6 +1779,70 @@ func (ListWorkteamsSortByOptions) Values() []ListWorkteamsSortByOptions {
 	}
 }
 
+type ModelApprovalStatus string
+
+// Enum values for ModelApprovalStatus
+const (
+	ModelApprovalStatusApproved              ModelApprovalStatus = "Approved"
+	ModelApprovalStatusRejected              ModelApprovalStatus = "Rejected"
+	ModelApprovalStatusPendingManualApproval ModelApprovalStatus = "PendingManualApproval"
+)
+
+// Values returns all known values for ModelApprovalStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelApprovalStatus) Values() []ModelApprovalStatus {
+	return []ModelApprovalStatus{
+		"Approved",
+		"Rejected",
+		"PendingManualApproval",
+	}
+}
+
+type ModelPackageGroupSortBy string
+
+// Enum values for ModelPackageGroupSortBy
+const (
+	ModelPackageGroupSortByName         ModelPackageGroupSortBy = "Name"
+	ModelPackageGroupSortByCreationTime ModelPackageGroupSortBy = "CreationTime"
+)
+
+// Values returns all known values for ModelPackageGroupSortBy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelPackageGroupSortBy) Values() []ModelPackageGroupSortBy {
+	return []ModelPackageGroupSortBy{
+		"Name",
+		"CreationTime",
+	}
+}
+
+type ModelPackageGroupStatus string
+
+// Enum values for ModelPackageGroupStatus
+const (
+	ModelPackageGroupStatusPending      ModelPackageGroupStatus = "Pending"
+	ModelPackageGroupStatusInProgress   ModelPackageGroupStatus = "InProgress"
+	ModelPackageGroupStatusCompleted    ModelPackageGroupStatus = "Completed"
+	ModelPackageGroupStatusFailed       ModelPackageGroupStatus = "Failed"
+	ModelPackageGroupStatusDeleting     ModelPackageGroupStatus = "Deleting"
+	ModelPackageGroupStatusDeleteFailed ModelPackageGroupStatus = "DeleteFailed"
+)
+
+// Values returns all known values for ModelPackageGroupStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelPackageGroupStatus) Values() []ModelPackageGroupStatus {
+	return []ModelPackageGroupStatus{
+		"Pending",
+		"InProgress",
+		"Completed",
+		"Failed",
+		"Deleting",
+		"DeleteFailed",
+	}
+}
+
 type ModelPackageSortBy string
 
 // Enum values for ModelPackageSortBy
@@ -1479,6 +1885,26 @@ func (ModelPackageStatus) Values() []ModelPackageStatus {
 	}
 }
 
+type ModelPackageType string
+
+// Enum values for ModelPackageType
+const (
+	ModelPackageTypeVersioned   ModelPackageType = "Versioned"
+	ModelPackageTypeUnversioned ModelPackageType = "Unversioned"
+	ModelPackageTypeBoth        ModelPackageType = "Both"
+)
+
+// Values returns all known values for ModelPackageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelPackageType) Values() []ModelPackageType {
+	return []ModelPackageType{
+		"Versioned",
+		"Unversioned",
+		"Both",
+	}
+}
+
 type ModelSortKey string
 
 // Enum values for ModelSortKey
@@ -1517,6 +1943,45 @@ func (MonitoringExecutionSortKey) Values() []MonitoringExecutionSortKey {
 	}
 }
 
+type MonitoringJobDefinitionSortKey string
+
+// Enum values for MonitoringJobDefinitionSortKey
+const (
+	MonitoringJobDefinitionSortKeyName         MonitoringJobDefinitionSortKey = "Name"
+	MonitoringJobDefinitionSortKeyCreationTime MonitoringJobDefinitionSortKey = "CreationTime"
+)
+
+// Values returns all known values for MonitoringJobDefinitionSortKey. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (MonitoringJobDefinitionSortKey) Values() []MonitoringJobDefinitionSortKey {
+	return []MonitoringJobDefinitionSortKey{
+		"Name",
+		"CreationTime",
+	}
+}
+
+type MonitoringProblemType string
+
+// Enum values for MonitoringProblemType
+const (
+	MonitoringProblemTypeBinaryClassification     MonitoringProblemType = "BinaryClassification"
+	MonitoringProblemTypeMulticlassClassification MonitoringProblemType = "MulticlassClassification"
+	MonitoringProblemTypeRegression               MonitoringProblemType = "Regression"
+)
+
+// Values returns all known values for MonitoringProblemType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MonitoringProblemType) Values() []MonitoringProblemType {
+	return []MonitoringProblemType{
+		"BinaryClassification",
+		"MulticlassClassification",
+		"Regression",
+	}
+}
+
 type MonitoringScheduleSortKey string
 
 // Enum values for MonitoringScheduleSortKey
@@ -1534,6 +1999,28 @@ func (MonitoringScheduleSortKey) Values() []MonitoringScheduleSortKey {
 		"Name",
 		"CreationTime",
 		"Status",
+	}
+}
+
+type MonitoringType string
+
+// Enum values for MonitoringType
+const (
+	MonitoringTypeDataQuality         MonitoringType = "DataQuality"
+	MonitoringTypeModelQuality        MonitoringType = "ModelQuality"
+	MonitoringTypeModelBias           MonitoringType = "ModelBias"
+	MonitoringTypeModelExplainability MonitoringType = "ModelExplainability"
+)
+
+// Values returns all known values for MonitoringType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MonitoringType) Values() []MonitoringType {
+	return []MonitoringType{
+		"DataQuality",
+		"ModelQuality",
+		"ModelBias",
+		"ModelExplainability",
 	}
 }
 
@@ -1708,6 +2195,26 @@ func (ObjectiveStatus) Values() []ObjectiveStatus {
 	}
 }
 
+type OfflineStoreStatusValue string
+
+// Enum values for OfflineStoreStatusValue
+const (
+	OfflineStoreStatusValueActive   OfflineStoreStatusValue = "Active"
+	OfflineStoreStatusValueBlocked  OfflineStoreStatusValue = "Blocked"
+	OfflineStoreStatusValueDisabled OfflineStoreStatusValue = "Disabled"
+)
+
+// Values returns all known values for OfflineStoreStatusValue. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OfflineStoreStatusValue) Values() []OfflineStoreStatusValue {
+	return []OfflineStoreStatusValue{
+		"Active",
+		"Blocked",
+		"Disabled",
+	}
+}
+
 type Operator string
 
 // Enum values for Operator
@@ -1779,6 +2286,46 @@ func (ParameterType) Values() []ParameterType {
 		"Continuous",
 		"Categorical",
 		"FreeText",
+	}
+}
+
+type PipelineExecutionStatus string
+
+// Enum values for PipelineExecutionStatus
+const (
+	PipelineExecutionStatusExecuting PipelineExecutionStatus = "Executing"
+	PipelineExecutionStatusStopping  PipelineExecutionStatus = "Stopping"
+	PipelineExecutionStatusStopped   PipelineExecutionStatus = "Stopped"
+	PipelineExecutionStatusFailed    PipelineExecutionStatus = "Failed"
+	PipelineExecutionStatusSucceeded PipelineExecutionStatus = "Succeeded"
+)
+
+// Values returns all known values for PipelineExecutionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PipelineExecutionStatus) Values() []PipelineExecutionStatus {
+	return []PipelineExecutionStatus{
+		"Executing",
+		"Stopping",
+		"Stopped",
+		"Failed",
+		"Succeeded",
+	}
+}
+
+type PipelineStatus string
+
+// Enum values for PipelineStatus
+const (
+	PipelineStatusActive PipelineStatus = "Active"
+)
+
+// Values returns all known values for PipelineStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PipelineStatus) Values() []PipelineStatus {
+	return []PipelineStatus{
+		"Active",
 	}
 }
 
@@ -2181,6 +2728,88 @@ func (ProductionVariantInstanceType) Values() []ProductionVariantInstanceType {
 	}
 }
 
+type ProfilingStatus string
+
+// Enum values for ProfilingStatus
+const (
+	ProfilingStatusEnabled  ProfilingStatus = "Enabled"
+	ProfilingStatusDisabled ProfilingStatus = "Disabled"
+)
+
+// Values returns all known values for ProfilingStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProfilingStatus) Values() []ProfilingStatus {
+	return []ProfilingStatus{
+		"Enabled",
+		"Disabled",
+	}
+}
+
+type ProjectSortBy string
+
+// Enum values for ProjectSortBy
+const (
+	ProjectSortByName         ProjectSortBy = "Name"
+	ProjectSortByCreationTime ProjectSortBy = "CreationTime"
+)
+
+// Values returns all known values for ProjectSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProjectSortBy) Values() []ProjectSortBy {
+	return []ProjectSortBy{
+		"Name",
+		"CreationTime",
+	}
+}
+
+type ProjectSortOrder string
+
+// Enum values for ProjectSortOrder
+const (
+	ProjectSortOrderAscending  ProjectSortOrder = "Ascending"
+	ProjectSortOrderDescending ProjectSortOrder = "Descending"
+)
+
+// Values returns all known values for ProjectSortOrder. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProjectSortOrder) Values() []ProjectSortOrder {
+	return []ProjectSortOrder{
+		"Ascending",
+		"Descending",
+	}
+}
+
+type ProjectStatus string
+
+// Enum values for ProjectStatus
+const (
+	ProjectStatusPending          ProjectStatus = "Pending"
+	ProjectStatusCreateInProgress ProjectStatus = "CreateInProgress"
+	ProjectStatusCreateCompleted  ProjectStatus = "CreateCompleted"
+	ProjectStatusCreateFailed     ProjectStatus = "CreateFailed"
+	ProjectStatusDeleteInProgress ProjectStatus = "DeleteInProgress"
+	ProjectStatusDeleteFailed     ProjectStatus = "DeleteFailed"
+	ProjectStatusDeleteCompleted  ProjectStatus = "DeleteCompleted"
+)
+
+// Values returns all known values for ProjectStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProjectStatus) Values() []ProjectStatus {
+	return []ProjectStatus{
+		"Pending",
+		"CreateInProgress",
+		"CreateCompleted",
+		"CreateFailed",
+		"DeleteInProgress",
+		"DeleteFailed",
+		"DeleteCompleted",
+	}
+}
+
 type RecordWrapper string
 
 // Enum values for RecordWrapper
@@ -2196,6 +2825,49 @@ func (RecordWrapper) Values() []RecordWrapper {
 	return []RecordWrapper{
 		"None",
 		"RecordIO",
+	}
+}
+
+type RedshiftResultCompressionType string
+
+// Enum values for RedshiftResultCompressionType
+const (
+	RedshiftResultCompressionTypeNone   RedshiftResultCompressionType = "None"
+	RedshiftResultCompressionTypeGzip   RedshiftResultCompressionType = "GZIP"
+	RedshiftResultCompressionTypeBzip2  RedshiftResultCompressionType = "BZIP2"
+	RedshiftResultCompressionTypeZstd   RedshiftResultCompressionType = "ZSTD"
+	RedshiftResultCompressionTypeSnappy RedshiftResultCompressionType = "SNAPPY"
+)
+
+// Values returns all known values for RedshiftResultCompressionType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RedshiftResultCompressionType) Values() []RedshiftResultCompressionType {
+	return []RedshiftResultCompressionType{
+		"None",
+		"GZIP",
+		"BZIP2",
+		"ZSTD",
+		"SNAPPY",
+	}
+}
+
+type RedshiftResultFormat string
+
+// Enum values for RedshiftResultFormat
+const (
+	RedshiftResultFormatParquet RedshiftResultFormat = "PARQUET"
+	RedshiftResultFormatCsv     RedshiftResultFormat = "CSV"
+)
+
+// Values returns all known values for RedshiftResultFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RedshiftResultFormat) Values() []RedshiftResultFormat {
+	return []RedshiftResultFormat{
+		"PARQUET",
+		"CSV",
 	}
 }
 
@@ -2225,6 +2897,12 @@ const (
 	ResourceTypeExperiment               ResourceType = "Experiment"
 	ResourceTypeExperimentTrial          ResourceType = "ExperimentTrial"
 	ResourceTypeExperimentTrialComponent ResourceType = "ExperimentTrialComponent"
+	ResourceTypeEndpoint                 ResourceType = "Endpoint"
+	ResourceTypeModelPackage             ResourceType = "ModelPackage"
+	ResourceTypeModelPackageGroup        ResourceType = "ModelPackageGroup"
+	ResourceTypePipeline                 ResourceType = "Pipeline"
+	ResourceTypePipelineExecution        ResourceType = "PipelineExecution"
+	ResourceTypeFeatureGroup             ResourceType = "FeatureGroup"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -2236,6 +2914,12 @@ func (ResourceType) Values() []ResourceType {
 		"Experiment",
 		"ExperimentTrial",
 		"ExperimentTrialComponent",
+		"Endpoint",
+		"ModelPackage",
+		"ModelPackageGroup",
+		"Pipeline",
+		"PipelineExecution",
+		"FeatureGroup",
 	}
 }
 
@@ -2339,6 +3023,25 @@ func (S3DataType) Values() []S3DataType {
 	}
 }
 
+type SagemakerServicecatalogStatus string
+
+// Enum values for SagemakerServicecatalogStatus
+const (
+	SagemakerServicecatalogStatusEnabled  SagemakerServicecatalogStatus = "Enabled"
+	SagemakerServicecatalogStatusDisabled SagemakerServicecatalogStatus = "Disabled"
+)
+
+// Values returns all known values for SagemakerServicecatalogStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SagemakerServicecatalogStatus) Values() []SagemakerServicecatalogStatus {
+	return []SagemakerServicecatalogStatus{
+		"Enabled",
+		"Disabled",
+	}
+}
+
 type ScheduleStatus string
 
 // Enum values for ScheduleStatus
@@ -2397,6 +3100,7 @@ const (
 	SecondaryStatusFailed                   SecondaryStatus = "Failed"
 	SecondaryStatusInterrupted              SecondaryStatus = "Interrupted"
 	SecondaryStatusMaxWaitTimeExceeded      SecondaryStatus = "MaxWaitTimeExceeded"
+	SecondaryStatusUpdating                 SecondaryStatus = "Updating"
 )
 
 // Values returns all known values for SecondaryStatus. Note that this can be
@@ -2418,6 +3122,65 @@ func (SecondaryStatus) Values() []SecondaryStatus {
 		"Failed",
 		"Interrupted",
 		"MaxWaitTimeExceeded",
+		"Updating",
+	}
+}
+
+type SortActionsBy string
+
+// Enum values for SortActionsBy
+const (
+	SortActionsByName         SortActionsBy = "Name"
+	SortActionsByCreationTime SortActionsBy = "CreationTime"
+)
+
+// Values returns all known values for SortActionsBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SortActionsBy) Values() []SortActionsBy {
+	return []SortActionsBy{
+		"Name",
+		"CreationTime",
+	}
+}
+
+type SortArtifactsBy string
+
+// Enum values for SortArtifactsBy
+const (
+	SortArtifactsByCreationTime SortArtifactsBy = "CreationTime"
+)
+
+// Values returns all known values for SortArtifactsBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SortArtifactsBy) Values() []SortArtifactsBy {
+	return []SortArtifactsBy{
+		"CreationTime",
+	}
+}
+
+type SortAssociationsBy string
+
+// Enum values for SortAssociationsBy
+const (
+	SortAssociationsBySourceArn       SortAssociationsBy = "SourceArn"
+	SortAssociationsByDestinationArn  SortAssociationsBy = "DestinationArn"
+	SortAssociationsBySourceType      SortAssociationsBy = "SourceType"
+	SortAssociationsByDestinationType SortAssociationsBy = "DestinationType"
+	SortAssociationsByCreationTime    SortAssociationsBy = "CreationTime"
+)
+
+// Values returns all known values for SortAssociationsBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SortAssociationsBy) Values() []SortAssociationsBy {
+	return []SortAssociationsBy{
+		"SourceArn",
+		"DestinationArn",
+		"SourceType",
+		"DestinationType",
+		"CreationTime",
 	}
 }
 
@@ -2438,6 +3201,24 @@ func (SortBy) Values() []SortBy {
 		"Name",
 		"CreationTime",
 		"Status",
+	}
+}
+
+type SortContextsBy string
+
+// Enum values for SortContextsBy
+const (
+	SortContextsByName         SortContextsBy = "Name"
+	SortContextsByCreationTime SortContextsBy = "CreationTime"
+)
+
+// Values returns all known values for SortContextsBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SortContextsBy) Values() []SortContextsBy {
+	return []SortContextsBy{
+		"Name",
+		"CreationTime",
 	}
 }
 
@@ -2474,6 +3255,42 @@ func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"Ascending",
 		"Descending",
+	}
+}
+
+type SortPipelineExecutionsBy string
+
+// Enum values for SortPipelineExecutionsBy
+const (
+	SortPipelineExecutionsByCreationTime         SortPipelineExecutionsBy = "CreationTime"
+	SortPipelineExecutionsByPipelineExecutionArn SortPipelineExecutionsBy = "PipelineExecutionArn"
+)
+
+// Values returns all known values for SortPipelineExecutionsBy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SortPipelineExecutionsBy) Values() []SortPipelineExecutionsBy {
+	return []SortPipelineExecutionsBy{
+		"CreationTime",
+		"PipelineExecutionArn",
+	}
+}
+
+type SortPipelinesBy string
+
+// Enum values for SortPipelinesBy
+const (
+	SortPipelinesByName         SortPipelinesBy = "Name"
+	SortPipelinesByCreationTime SortPipelinesBy = "CreationTime"
+)
+
+// Values returns all known values for SortPipelinesBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SortPipelinesBy) Values() []SortPipelinesBy {
+	return []SortPipelinesBy{
+		"Name",
+		"CreationTime",
 	}
 }
 
@@ -2535,37 +3352,64 @@ func (SplitType) Values() []SplitType {
 	}
 }
 
+type StepStatus string
+
+// Enum values for StepStatus
+const (
+	StepStatusStarting  StepStatus = "Starting"
+	StepStatusExecuting StepStatus = "Executing"
+	StepStatusStopping  StepStatus = "Stopping"
+	StepStatusStopped   StepStatus = "Stopped"
+	StepStatusFailed    StepStatus = "Failed"
+	StepStatusSucceeded StepStatus = "Succeeded"
+)
+
+// Values returns all known values for StepStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StepStatus) Values() []StepStatus {
+	return []StepStatus{
+		"Starting",
+		"Executing",
+		"Stopping",
+		"Stopped",
+		"Failed",
+		"Succeeded",
+	}
+}
+
 type TargetDevice string
 
 // Enum values for TargetDevice
 const (
-	TargetDeviceLambda       TargetDevice = "lambda"
-	TargetDeviceMlM4         TargetDevice = "ml_m4"
-	TargetDeviceMlM5         TargetDevice = "ml_m5"
-	TargetDeviceMlC4         TargetDevice = "ml_c4"
-	TargetDeviceMlC5         TargetDevice = "ml_c5"
-	TargetDeviceMlP2         TargetDevice = "ml_p2"
-	TargetDeviceMlP3         TargetDevice = "ml_p3"
-	TargetDeviceMlG4dn       TargetDevice = "ml_g4dn"
-	TargetDeviceMlInf1       TargetDevice = "ml_inf1"
-	TargetDeviceJetsonTx1    TargetDevice = "jetson_tx1"
-	TargetDeviceJetsonTx2    TargetDevice = "jetson_tx2"
-	TargetDeviceJetsonNano   TargetDevice = "jetson_nano"
-	TargetDeviceJetsonXavier TargetDevice = "jetson_xavier"
-	TargetDeviceRasp3b       TargetDevice = "rasp3b"
-	TargetDeviceImx8qm       TargetDevice = "imx8qm"
-	TargetDeviceDeeplens     TargetDevice = "deeplens"
-	TargetDeviceRk3399       TargetDevice = "rk3399"
-	TargetDeviceRk3288       TargetDevice = "rk3288"
-	TargetDeviceAisage       TargetDevice = "aisage"
-	TargetDeviceSbeC         TargetDevice = "sbe_c"
-	TargetDeviceQcs605       TargetDevice = "qcs605"
-	TargetDeviceQcs603       TargetDevice = "qcs603"
-	TargetDeviceSitaraAm57x  TargetDevice = "sitara_am57x"
-	TargetDeviceAmbaCv22     TargetDevice = "amba_cv22"
-	TargetDeviceX86Win32     TargetDevice = "x86_win32"
-	TargetDeviceX86Win64     TargetDevice = "x86_win64"
-	TargetDeviceCoreml       TargetDevice = "coreml"
+	TargetDeviceLambda        TargetDevice = "lambda"
+	TargetDeviceMlM4          TargetDevice = "ml_m4"
+	TargetDeviceMlM5          TargetDevice = "ml_m5"
+	TargetDeviceMlC4          TargetDevice = "ml_c4"
+	TargetDeviceMlC5          TargetDevice = "ml_c5"
+	TargetDeviceMlP2          TargetDevice = "ml_p2"
+	TargetDeviceMlP3          TargetDevice = "ml_p3"
+	TargetDeviceMlG4dn        TargetDevice = "ml_g4dn"
+	TargetDeviceMlInf1        TargetDevice = "ml_inf1"
+	TargetDeviceJetsonTx1     TargetDevice = "jetson_tx1"
+	TargetDeviceJetsonTx2     TargetDevice = "jetson_tx2"
+	TargetDeviceJetsonNano    TargetDevice = "jetson_nano"
+	TargetDeviceJetsonXavier  TargetDevice = "jetson_xavier"
+	TargetDeviceRasp3b        TargetDevice = "rasp3b"
+	TargetDeviceImx8qm        TargetDevice = "imx8qm"
+	TargetDeviceDeeplens      TargetDevice = "deeplens"
+	TargetDeviceRk3399        TargetDevice = "rk3399"
+	TargetDeviceRk3288        TargetDevice = "rk3288"
+	TargetDeviceAisage        TargetDevice = "aisage"
+	TargetDeviceSbeC          TargetDevice = "sbe_c"
+	TargetDeviceQcs605        TargetDevice = "qcs605"
+	TargetDeviceQcs603        TargetDevice = "qcs603"
+	TargetDeviceSitaraAm57x   TargetDevice = "sitara_am57x"
+	TargetDeviceAmbaCv22      TargetDevice = "amba_cv22"
+	TargetDeviceX86Win32      TargetDevice = "x86_win32"
+	TargetDeviceX86Win64      TargetDevice = "x86_win64"
+	TargetDeviceCoreml        TargetDevice = "coreml"
+	TargetDeviceJacintoTda4vm TargetDevice = "jacinto_tda4vm"
 )
 
 // Values returns all known values for TargetDevice. Note that this can be expanded
@@ -2600,6 +3444,7 @@ func (TargetDevice) Values() []TargetDevice {
 		"x86_win32",
 		"x86_win64",
 		"coreml",
+		"jacinto_tda4vm",
 	}
 }
 
@@ -2662,6 +3507,24 @@ func (TargetPlatformOs) Values() []TargetPlatformOs {
 	return []TargetPlatformOs{
 		"ANDROID",
 		"LINUX",
+	}
+}
+
+type TrafficRoutingConfigType string
+
+// Enum values for TrafficRoutingConfigType
+const (
+	TrafficRoutingConfigTypeAllAtOnce TrafficRoutingConfigType = "ALL_AT_ONCE"
+	TrafficRoutingConfigTypeCanary    TrafficRoutingConfigType = "CANARY"
+)
+
+// Values returns all known values for TrafficRoutingConfigType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TrafficRoutingConfigType) Values() []TrafficRoutingConfigType {
+	return []TrafficRoutingConfigType{
+		"ALL_AT_ONCE",
+		"CANARY",
 	}
 }
 

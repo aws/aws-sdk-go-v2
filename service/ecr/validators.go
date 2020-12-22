@@ -430,6 +430,46 @@ func (m *validateOpPutLifecyclePolicy) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutRegistryPolicy struct {
+}
+
+func (*validateOpPutRegistryPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutRegistryPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutRegistryPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutRegistryPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutReplicationConfiguration struct {
+}
+
+func (*validateOpPutReplicationConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutReplicationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutReplicationConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutReplicationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSetRepositoryPolicy struct {
 }
 
@@ -634,6 +674,14 @@ func addOpPutLifecyclePolicyValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpPutLifecyclePolicy{}, middleware.After)
 }
 
+func addOpPutRegistryPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutRegistryPolicy{}, middleware.After)
+}
+
+func addOpPutReplicationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutReplicationConfiguration{}, middleware.After)
+}
+
 func addOpSetRepositoryPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSetRepositoryPolicy{}, middleware.After)
 }
@@ -665,6 +713,96 @@ func validateEncryptionConfiguration(v *types.EncryptionConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "EncryptionConfiguration"}
 	if len(v.EncryptionType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("EncryptionType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReplicationConfiguration(v *types.ReplicationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReplicationConfiguration"}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	} else if v.Rules != nil {
+		if err := validateReplicationRuleList(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReplicationDestination(v *types.ReplicationDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReplicationDestination"}
+	if v.Region == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Region"))
+	}
+	if v.RegistryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReplicationDestinationList(v []types.ReplicationDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReplicationDestinationList"}
+	for i := range v {
+		if err := validateReplicationDestination(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReplicationRule(v *types.ReplicationRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReplicationRule"}
+	if v.Destinations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destinations"))
+	} else if v.Destinations != nil {
+		if err := validateReplicationDestinationList(v.Destinations); err != nil {
+			invalidParams.AddNested("Destinations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReplicationRuleList(v []types.ReplicationRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReplicationRuleList"}
+	for i := range v {
+		if err := validateReplicationRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -732,14 +870,14 @@ func validateOpCompleteLayerUploadInput(v *CompleteLayerUploadInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CompleteLayerUploadInput"}
-	if v.LayerDigests == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LayerDigests"))
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
 	if v.UploadId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
 	}
-	if v.RepositoryName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	if v.LayerDigests == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LayerDigests"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -818,11 +956,11 @@ func validateOpDescribeImageScanFindingsInput(v *DescribeImageScanFindingsInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeImageScanFindingsInput"}
-	if v.ImageId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImageId"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.ImageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -851,11 +989,11 @@ func validateOpGetDownloadUrlForLayerInput(v *GetDownloadUrlForLayerInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDownloadUrlForLayerInput"}
-	if v.LayerDigest == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LayerDigest"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.LayerDigest == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LayerDigest"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -959,11 +1097,11 @@ func validateOpPutImageInput(v *PutImageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutImageInput"}
-	if v.ImageManifest == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImageManifest"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.ImageManifest == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageManifest"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -977,11 +1115,11 @@ func validateOpPutImageScanningConfigurationInput(v *PutImageScanningConfigurati
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutImageScanningConfigurationInput"}
-	if v.ImageScanningConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImageScanningConfiguration"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.ImageScanningConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageScanningConfiguration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -995,11 +1133,11 @@ func validateOpPutImageTagMutabilityInput(v *PutImageTagMutabilityInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutImageTagMutabilityInput"}
-	if len(v.ImageTagMutability) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ImageTagMutability"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if len(v.ImageTagMutability) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageTagMutability"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1026,16 +1164,50 @@ func validateOpPutLifecyclePolicyInput(v *PutLifecyclePolicyInput) error {
 	}
 }
 
+func validateOpPutRegistryPolicyInput(v *PutRegistryPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutRegistryPolicyInput"}
+	if v.PolicyText == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyText"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutReplicationConfigurationInput(v *PutReplicationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutReplicationConfigurationInput"}
+	if v.ReplicationConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationConfiguration"))
+	} else if v.ReplicationConfiguration != nil {
+		if err := validateReplicationConfiguration(v.ReplicationConfiguration); err != nil {
+			invalidParams.AddNested("ReplicationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSetRepositoryPolicyInput(v *SetRepositoryPolicyInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetRepositoryPolicyInput"}
-	if v.PolicyText == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyText"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.PolicyText == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyText"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1049,11 +1221,11 @@ func validateOpStartImageScanInput(v *StartImageScanInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartImageScanInput"}
-	if v.ImageId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImageId"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.ImageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1118,8 +1290,8 @@ func validateOpUploadLayerPartInput(v *UploadLayerPartInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UploadLayerPartInput"}
-	if v.LayerPartBlob == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LayerPartBlob"))
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
 	if v.UploadId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
@@ -1127,11 +1299,11 @@ func validateOpUploadLayerPartInput(v *UploadLayerPartInput) error {
 	if v.PartFirstByte == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PartFirstByte"))
 	}
-	if v.RepositoryName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
-	}
 	if v.PartLastByte == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PartLastByte"))
+	}
+	if v.LayerPartBlob == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LayerPartBlob"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

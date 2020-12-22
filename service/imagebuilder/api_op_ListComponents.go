@@ -4,7 +4,6 @@ package imagebuilder
 
 import (
 	"context"
-	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
@@ -119,88 +118,6 @@ func addOperationListComponentsMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
-}
-
-// ListComponentsAPIClient is a client that implements the ListComponents
-// operation.
-type ListComponentsAPIClient interface {
-	ListComponents(context.Context, *ListComponentsInput, ...func(*Options)) (*ListComponentsOutput, error)
-}
-
-var _ ListComponentsAPIClient = (*Client)(nil)
-
-// ListComponentsPaginatorOptions is the paginator options for ListComponents
-type ListComponentsPaginatorOptions struct {
-	// The maximum items to return in a request.
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// ListComponentsPaginator is a paginator for ListComponents
-type ListComponentsPaginator struct {
-	options   ListComponentsPaginatorOptions
-	client    ListComponentsAPIClient
-	params    *ListComponentsInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewListComponentsPaginator returns a new ListComponentsPaginator
-func NewListComponentsPaginator(client ListComponentsAPIClient, params *ListComponentsInput, optFns ...func(*ListComponentsPaginatorOptions)) *ListComponentsPaginator {
-	options := ListComponentsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListComponentsInput{}
-	}
-
-	return &ListComponentsPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListComponentsPaginator) HasMorePages() bool {
-	return p.firstPage || p.nextToken != nil
-}
-
-// NextPage retrieves the next ListComponents page.
-func (p *ListComponentsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListComponentsOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.NextToken = p.nextToken
-
-	params.MaxResults = p.options.Limit
-
-	result, err := p.client.ListComponents(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.NextToken
-
-	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListComponents(region string) *awsmiddleware.RegisterServiceMetadata {

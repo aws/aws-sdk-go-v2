@@ -2125,6 +2125,132 @@ func awsAwsjson10_deserializeOpErrorStartExecution(response *smithyhttp.Response
 	}
 }
 
+type awsAwsjson10_deserializeOpStartSyncExecution struct {
+}
+
+func (*awsAwsjson10_deserializeOpStartSyncExecution) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson10_deserializeOpStartSyncExecution) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson10_deserializeOpErrorStartSyncExecution(response, &metadata)
+	}
+	output := &StartSyncExecutionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson10_deserializeOpDocumentStartSyncExecutionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson10_deserializeOpErrorStartSyncExecution(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InvalidArn", errorCode):
+		return awsAwsjson10_deserializeErrorInvalidArn(response, errorBody)
+
+	case strings.EqualFold("InvalidExecutionInput", errorCode):
+		return awsAwsjson10_deserializeErrorInvalidExecutionInput(response, errorBody)
+
+	case strings.EqualFold("InvalidName", errorCode):
+		return awsAwsjson10_deserializeErrorInvalidName(response, errorBody)
+
+	case strings.EqualFold("StateMachineDeleting", errorCode):
+		return awsAwsjson10_deserializeErrorStateMachineDeleting(response, errorBody)
+
+	case strings.EqualFold("StateMachineDoesNotExist", errorCode):
+		return awsAwsjson10_deserializeErrorStateMachineDoesNotExist(response, errorBody)
+
+	case strings.EqualFold("StateMachineTypeNotSupported", errorCode):
+		return awsAwsjson10_deserializeErrorStateMachineTypeNotSupported(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson10_deserializeOpStopExecution struct {
 }
 
@@ -3967,6 +4093,63 @@ func awsAwsjson10_deserializeDocumentActivityWorkerLimitExceeded(v **types.Activ
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentBillingDetails(v **types.BillingDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BillingDetails
+	if *v == nil {
+		sv = &types.BillingDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "billedDurationInMilliseconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BilledDuration to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BilledDurationInMilliseconds = i64
+			}
+
+		case "billedMemoryUsedInMB":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BilledMemoryUsed to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BilledMemoryUsedInMB = i64
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentCloudWatchEventsExecutionDataDetails(v **types.CloudWatchEventsExecutionDataDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3993,7 +4176,7 @@ func awsAwsjson10_deserializeDocumentCloudWatchEventsExecutionDataDetails(v **ty
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected included to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected includedDetails to be of type *bool, got %T instead", value)
 				}
 				sv.Included = jtv
 			}
@@ -7950,6 +8133,159 @@ func awsAwsjson10_deserializeOpDocumentStartExecutionOutput(v **StartExecutionOu
 					return err
 				}
 				sv.StartDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeOpDocumentStartSyncExecutionOutput(v **StartSyncExecutionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *StartSyncExecutionOutput
+	if *v == nil {
+		sv = &StartSyncExecutionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "billingDetails":
+			if err := awsAwsjson10_deserializeDocumentBillingDetails(&sv.BillingDetails, value); err != nil {
+				return err
+			}
+
+		case "cause":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveCause to be of type string, got %T instead", value)
+				}
+				sv.Cause = ptr.String(jtv)
+			}
+
+		case "error":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveError to be of type string, got %T instead", value)
+				}
+				sv.Error = ptr.String(jtv)
+			}
+
+		case "executionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.ExecutionArn = ptr.String(jtv)
+			}
+
+		case "input":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveData to be of type string, got %T instead", value)
+				}
+				sv.Input = ptr.String(jtv)
+			}
+
+		case "inputDetails":
+			if err := awsAwsjson10_deserializeDocumentCloudWatchEventsExecutionDataDetails(&sv.InputDetails, value); err != nil {
+				return err
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "output":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveData to be of type string, got %T instead", value)
+				}
+				sv.Output = ptr.String(jtv)
+			}
+
+		case "outputDetails":
+			if err := awsAwsjson10_deserializeDocumentCloudWatchEventsExecutionDataDetails(&sv.OutputDetails, value); err != nil {
+				return err
+			}
+
+		case "startDate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.StartDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "stateMachineArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.StateMachineArn = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SyncExecutionStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.SyncExecutionStatus(jtv)
+			}
+
+		case "stopDate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.StopDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "traceHeader":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TraceHeader to be of type string, got %T instead", value)
+				}
+				sv.TraceHeader = ptr.String(jtv)
 			}
 
 		default:

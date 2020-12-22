@@ -51,7 +51,7 @@ type ClassifyDocumentOutput struct {
 
 	// The labels used the document being analyzed. These are used for multi-label
 	// trained models. Individual labels represent different categories that are
-	// related in some manner and are not multually exclusive. For example, a movie can
+	// related in some manner and are not mutually exclusive. For example, a movie can
 	// be just an action movie, or it can be an action movie, a science fiction movie,
 	// and a comedy, all at the same time.
 	Labels []types.DocumentLabel

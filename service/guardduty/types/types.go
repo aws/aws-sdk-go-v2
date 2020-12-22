@@ -546,19 +546,19 @@ type LocalPortDetails struct {
 	PortName *string
 }
 
-// Contains information about the master account and invitation.
+// Contains information about the administrator account and invitation.
 type Master struct {
 
-	// The ID of the account used as the master account.
+	// The ID of the account used as the administrator account.
 	AccountId *string
 
-	// The value used to validate the master account to the member account.
+	// The value used to validate the administrator account to the member account.
 	InvitationId *string
 
 	// The timestamp when the invitation was sent.
 	InvitedAt *string
 
-	// The status of the relationship between the master and member accounts.
+	// The status of the relationship between the administrator and member accounts.
 	RelationshipStatus *string
 }
 
@@ -575,12 +575,12 @@ type Member struct {
 	// This member is required.
 	Email *string
 
-	// The master account ID.
+	// The administrator account ID.
 	//
 	// This member is required.
 	MasterId *string
 
-	// The status of the relationship between the member and the master.
+	// The status of the relationship between the member and the administrator.
 	//
 	// This member is required.
 	RelationshipStatus *string

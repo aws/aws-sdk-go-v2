@@ -1031,8 +1031,9 @@ type CmafGroupSettings struct {
 	// the manifest file.
 	BaseUrl *string
 
-	// When set to ENABLED, sets #EXT-X-ALLOW-CACHE:no tag, which prevents client from
-	// saving media segments for later replay.
+	// Disable this setting only when your workflow requires the #EXT-X-ALLOW-CACHE:no
+	// tag. Otherwise, keep the default value Enabled (ENABLED) and control caching in
+	// your video distribution set up. For example, use the Cache-Control http header.
 	ClientCache CmafClientCache
 
 	// Specification to use (RFC-6381 or the default RFC-4281) during m3u8 playlist
@@ -1131,6 +1132,21 @@ type CmafGroupSettings struct {
 
 // Settings for MP4 segments in CMAF
 type CmfcSettings struct {
+
+	// Specify this setting only when your output will be consumed by a downstream
+	// repackaging workflow that is sensitive to very small duration differences
+	// between video and audio. For this situation, choose Match video duration
+	// (MATCH_VIDEO_DURATION). In all other cases, keep the default value, Default
+	// codec duration (DEFAULT_CODEC_DURATION). When you choose Match video duration,
+	// MediaConvert pads the output audio streams with silence or trims them to ensure
+	// that the total duration of each audio stream is at least as long as the total
+	// duration of the video stream. After padding or trimming, the audio stream
+	// duration is no more than one frame longer than the video stream. MediaConvert
+	// applies audio padding or trimming only to the end of the last segment of the
+	// output. For unsegmented outputs, MediaConvert adds padding only to the end of
+	// the file. When you keep the default value, any minor discrepancies between audio
+	// and video duration will depend on your output audio codec.
+	AudioDuration CmfcAudioDuration
 
 	// Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT
 	// to put SCTE-35 markers in this output at the insertion points that you specify
@@ -1301,6 +1317,19 @@ type DashIsoGroupSettings struct {
 	// Minimum time of initially buffered media that is needed to ensure smooth
 	// playout.
 	MinBufferTime int32
+
+	// Keep this setting at the default value of 0, unless you are troubleshooting a
+	// problem with how devices play back the end of your video asset. If you know that
+	// player devices are hanging on the final segment of your video because the length
+	// of your final segment is too short, use this setting to specify a minimum final
+	// segment length, in seconds. Choose a value that is greater than or equal to 1
+	// and less than your segment length. When you specify a value for this setting,
+	// the encoder will combine any final segment that is shorter than the length that
+	// you specify with the previous segment. For example, your segment length is 3
+	// seconds and your final segment is .5 seconds without a minimum final segment
+	// length; when you set the minimum final segment length to 1, your final segment
+	// is 3.5 seconds.
+	MinFinalSegmentLength float64
 
 	// Specify whether your DASH profile is on-demand or main. When you choose Main
 	// profile (MAIN_PROFILE), the service signals
@@ -2748,8 +2777,9 @@ type HlsGroupSettings struct {
 	// from the manifest.
 	CaptionLanguageSetting HlsCaptionLanguageSetting
 
-	// When set to ENABLED, sets #EXT-X-ALLOW-CACHE:no tag, which prevents client from
-	// saving media segments for later replay.
+	// Disable this setting only when your workflow requires the #EXT-X-ALLOW-CACHE:no
+	// tag. Otherwise, keep the default value Enabled (ENABLED) and control caching in
+	// your video distribution set up. For example, use the Cache-Control http header.
 	ClientCache HlsClientCache
 
 	// Specification to use (RFC-6381 or the default RFC-4281) during m3u8 playlist
@@ -3634,6 +3664,21 @@ type M2tsSettings struct {
 	// Selects between the DVB and ATSC buffer models for Dolby Digital audio.
 	AudioBufferModel M2tsAudioBufferModel
 
+	// Specify this setting only when your output will be consumed by a downstream
+	// repackaging workflow that is sensitive to very small duration differences
+	// between video and audio. For this situation, choose Match video duration
+	// (MATCH_VIDEO_DURATION). In all other cases, keep the default value, Default
+	// codec duration (DEFAULT_CODEC_DURATION). When you choose Match video duration,
+	// MediaConvert pads the output audio streams with silence or trims them to ensure
+	// that the total duration of each audio stream is at least as long as the total
+	// duration of the video stream. After padding or trimming, the audio stream
+	// duration is no more than one frame longer than the video stream. MediaConvert
+	// applies audio padding or trimming only to the end of the last segment of the
+	// output. For unsegmented outputs, MediaConvert adds padding only to the end of
+	// the file. When you keep the default value, any minor discrepancies between audio
+	// and video duration will depend on your output audio codec.
+	AudioDuration M2tsAudioDuration
+
 	// The number of audio frames to insert for each PES packet.
 	AudioFramesPerPes int32
 
@@ -3815,6 +3860,21 @@ type M2tsSettings struct {
 
 // Settings for TS segments in HLS
 type M3u8Settings struct {
+
+	// Specify this setting only when your output will be consumed by a downstream
+	// repackaging workflow that is sensitive to very small duration differences
+	// between video and audio. For this situation, choose Match video duration
+	// (MATCH_VIDEO_DURATION). In all other cases, keep the default value, Default
+	// codec duration (DEFAULT_CODEC_DURATION). When you choose Match video duration,
+	// MediaConvert pads the output audio streams with silence or trims them to ensure
+	// that the total duration of each audio stream is at least as long as the total
+	// duration of the video stream. After padding or trimming, the audio stream
+	// duration is no more than one frame longer than the video stream. MediaConvert
+	// applies audio padding or trimming only to the end of the last segment of the
+	// output. For unsegmented outputs, MediaConvert adds padding only to the end of
+	// the file. When you keep the default value, any minor discrepancies between audio
+	// and video duration will depend on your output audio codec.
+	AudioDuration M3u8AudioDuration
 
 	// The number of audio frames to insert for each PES packet.
 	AudioFramesPerPes int32
@@ -4036,6 +4096,21 @@ type Mp3Settings struct {
 // container.
 type Mp4Settings struct {
 
+	// Specify this setting only when your output will be consumed by a downstream
+	// repackaging workflow that is sensitive to very small duration differences
+	// between video and audio. For this situation, choose Match video duration
+	// (MATCH_VIDEO_DURATION). In all other cases, keep the default value, Default
+	// codec duration (DEFAULT_CODEC_DURATION). When you choose Match video duration,
+	// MediaConvert pads the output audio streams with silence or trims them to ensure
+	// that the total duration of each audio stream is at least as long as the total
+	// duration of the video stream. After padding or trimming, the audio stream
+	// duration is no more than one frame longer than the video stream. MediaConvert
+	// applies audio padding or trimming only to the end of the last segment of the
+	// output. For unsegmented outputs, MediaConvert adds padding only to the end of
+	// the file. When you keep the default value, any minor discrepancies between audio
+	// and video duration will depend on your output audio codec.
+	AudioDuration CmfcAudioDuration
+
 	// When enabled, file composition times will start at zero, composition times in
 	// the 'ctts' (composition time to sample) box for B-frames will be negative, and a
 	// 'cslg' (composition shift least greatest) box will be included per 14496-1
@@ -4065,6 +4140,29 @@ type Mp4Settings struct {
 
 // Settings for MP4 segments in DASH
 type MpdSettings struct {
+
+	// Optional. Choose Include (INCLUDE) to have MediaConvert mark up your DASH
+	// manifest with elements for embedded 608 captions. This markup isn't generally
+	// required, but some video players require it to discover and play embedded 608
+	// captions. Keep the default value, Exclude (EXCLUDE), to leave these elements
+	// out. When you enable this setting, this is the markup that MediaConvert includes
+	// in your manifest:
+	AccessibilityCaptionHints MpdAccessibilityCaptionHints
+
+	// Specify this setting only when your output will be consumed by a downstream
+	// repackaging workflow that is sensitive to very small duration differences
+	// between video and audio. For this situation, choose Match video duration
+	// (MATCH_VIDEO_DURATION). In all other cases, keep the default value, Default
+	// codec duration (DEFAULT_CODEC_DURATION). When you choose Match video duration,
+	// MediaConvert pads the output audio streams with silence or trims them to ensure
+	// that the total duration of each audio stream is at least as long as the total
+	// duration of the video stream. After padding or trimming, the audio stream
+	// duration is no more than one frame longer than the video stream. MediaConvert
+	// applies audio padding or trimming only to the end of the last segment of the
+	// output. For unsegmented outputs, MediaConvert adds padding only to the end of
+	// the file. When you keep the default value, any minor discrepancies between audio
+	// and video duration will depend on your output audio codec.
+	AudioDuration MpdAudioDuration
 
 	// Use this setting only in DASH output groups that include sidecar TTML or IMSC
 	// captions. You specify sidecar captions in a separate output from your audio and

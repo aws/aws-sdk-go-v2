@@ -178,14 +178,17 @@ type DescribeTrainingJobOutput struct {
 	// checkpoint data.
 	CheckpointConfig *types.CheckpointConfig
 
-	// Configuration information for the debug hook parameters, collection
-	// configuration, and storage paths.
+	// Configuration information for the Debugger hook parameters, metric and tensor
+	// collections, and storage paths. To learn more about how to configure the
+	// DebugHookConfig parameter, see Use the SageMaker and Debugger Configuration API
+	// Operations to Create, Update, and Debug Your Training Job
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html).
 	DebugHookConfig *types.DebugHookConfig
 
-	// Configuration information for debugging rules.
+	// Configuration information for Debugger rules for debugging output tensors.
 	DebugRuleConfigurations []types.DebugRuleConfiguration
 
-	// Status about the debug rule evaluation.
+	// Evaluation status of Debugger rules for debugging on a training job.
 	DebugRuleEvaluationStatuses []types.DebugRuleEvaluationStatus
 
 	// To encrypt all communications between ML compute instances in distributed
@@ -242,6 +245,20 @@ type DescribeTrainingJobOutput struct {
 	// stored. Amazon SageMaker creates subfolders for model artifacts.
 	OutputDataConfig *types.OutputDataConfig
 
+	// Configuration information for Debugger system monitoring, framework profiling,
+	// and storage paths.
+	ProfilerConfig *types.ProfilerConfig
+
+	// Configuration information for Debugger rules for profiling system and framework
+	// metrics.
+	ProfilerRuleConfigurations []types.ProfilerRuleConfiguration
+
+	// Evaluation status of Debugger rules for profiling on a training job.
+	ProfilerRuleEvaluationStatuses []types.ProfilerRuleEvaluationStatus
+
+	// Profiling status of a training job.
+	ProfilingStatus types.ProfilingStatus
+
 	// The AWS Identity and Access Management (IAM) role configured for the training
 	// job.
 	RoleArn *string
@@ -250,7 +267,7 @@ type DescribeTrainingJobOutput struct {
 	// transitioned through.
 	SecondaryStatusTransitions []types.SecondaryStatusTransition
 
-	// Configuration of storage locations for TensorBoard output.
+	// Configuration of storage locations for the Debugger TensorBoard output data.
 	TensorBoardOutputConfig *types.TensorBoardOutputConfig
 
 	// Indicates the time when the training job ends on training instances. You are

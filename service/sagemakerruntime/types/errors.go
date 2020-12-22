@@ -28,9 +28,9 @@ func (e *InternalFailure) ErrorFault() smithy.ErrorFault { return smithy.FaultSe
 type ModelError struct {
 	Message *string
 
-	LogStreamArn       *string
-	OriginalMessage    *string
 	OriginalStatusCode *int32
+	OriginalMessage    *string
+	LogStreamArn       *string
 }
 
 func (e *ModelError) Error() string {

@@ -1073,6 +1073,52 @@ func (m *awsAwsjson11_serializeOpCreatePartition) HandleSerialize(ctx context.Co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreatePartitionIndex struct {
+}
+
+func (*awsAwsjson11_serializeOpCreatePartitionIndex) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreatePartitionIndex) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreatePartitionIndexInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CreatePartitionIndex")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreatePartitionIndexInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateRegistry struct {
 }
 
@@ -1886,6 +1932,52 @@ func (m *awsAwsjson11_serializeOpDeletePartition) HandleSerialize(ctx context.Co
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDeletePartitionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeletePartitionIndex struct {
+}
+
+func (*awsAwsjson11_serializeOpDeletePartitionIndex) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeletePartitionIndex) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeletePartitionIndexInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeletePartitionIndex")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeletePartitionIndexInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -8653,6 +8745,18 @@ func awsAwsjson11_serializeDocumentKeyList(v []string, value smithyjson.Value) e
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentLineageConfiguration(v *types.LineageConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.CrawlerLineageSettings) > 0 {
+		ok := object.Key("CrawlerLineageSettings")
+		ok.String(string(v.CrawlerLineageSettings))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentLocation(v *types.Location, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10586,6 +10690,13 @@ func awsAwsjson11_serializeOpDocumentCreateCrawlerInput(v *CreateCrawlerInput, v
 		ok.String(*v.Description)
 	}
 
+	if v.LineageConfiguration != nil {
+		ok := object.Key("LineageConfiguration")
+		if err := awsAwsjson11_serializeDocumentLineageConfiguration(v.LineageConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -10937,6 +11048,35 @@ func awsAwsjson11_serializeOpDocumentCreateMLTransformInput(v *CreateMLTransform
 	if len(v.WorkerType) > 0 {
 		ok := object.Key("WorkerType")
 		ok.String(string(v.WorkerType))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreatePartitionIndexInput(v *CreatePartitionIndexInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("DatabaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.PartitionIndex != nil {
+		ok := object.Key("PartitionIndex")
+		if err := awsAwsjson11_serializeDocumentPartitionIndex(v.PartitionIndex, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TableName != nil {
+		ok := object.Key("TableName")
+		ok.String(*v.TableName)
 	}
 
 	return nil
@@ -11385,6 +11525,33 @@ func awsAwsjson11_serializeOpDocumentDeleteMLTransformInput(v *DeleteMLTransform
 	if v.TransformId != nil {
 		ok := object.Key("TransformId")
 		ok.String(*v.TransformId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeletePartitionIndexInput(v *DeletePartitionIndexInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("DatabaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.IndexName != nil {
+		ok := object.Key("IndexName")
+		ok.String(*v.IndexName)
+	}
+
+	if v.TableName != nil {
+		ok := object.Key("TableName")
+		ok.String(*v.TableName)
 	}
 
 	return nil
@@ -13667,6 +13834,13 @@ func awsAwsjson11_serializeOpDocumentUpdateCrawlerInput(v *UpdateCrawlerInput, v
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.LineageConfiguration != nil {
+		ok := object.Key("LineageConfiguration")
+		if err := awsAwsjson11_serializeDocumentLineageConfiguration(v.LineageConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Name != nil {

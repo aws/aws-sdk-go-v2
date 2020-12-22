@@ -4,6 +4,7 @@ package glacier
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
@@ -64,7 +65,7 @@ type ListVaultsInput struct {
 	// The maximum number of vaults to be returned. The default limit is 10. The number
 	// of vaults returned might be fewer than the specified limit, but the number of
 	// returned vaults never exceeds the limit.
-	Limit *string
+	Limit *int32
 
 	// A string used for pagination. The marker specifies the vault ARN after which the
 	// listing of vaults should begin.
@@ -152,6 +153,93 @@ func addOperationListVaultsMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+// ListVaultsAPIClient is a client that implements the ListVaults operation.
+type ListVaultsAPIClient interface {
+	ListVaults(context.Context, *ListVaultsInput, ...func(*Options)) (*ListVaultsOutput, error)
+}
+
+var _ ListVaultsAPIClient = (*Client)(nil)
+
+// ListVaultsPaginatorOptions is the paginator options for ListVaults
+type ListVaultsPaginatorOptions struct {
+	// The maximum number of vaults to be returned. The default limit is 10. The number
+	// of vaults returned might be fewer than the specified limit, but the number of
+	// returned vaults never exceeds the limit.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListVaultsPaginator is a paginator for ListVaults
+type ListVaultsPaginator struct {
+	options   ListVaultsPaginatorOptions
+	client    ListVaultsAPIClient
+	params    *ListVaultsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListVaultsPaginator returns a new ListVaultsPaginator
+func NewListVaultsPaginator(client ListVaultsAPIClient, params *ListVaultsInput, optFns ...func(*ListVaultsPaginatorOptions)) *ListVaultsPaginator {
+	options := ListVaultsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListVaultsInput{}
+	}
+
+	return &ListVaultsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListVaultsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListVaults page.
+func (p *ListVaultsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListVaultsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.ListVaults(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListVaults(region string) *awsmiddleware.RegisterServiceMetadata {

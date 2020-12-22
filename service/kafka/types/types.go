@@ -168,7 +168,8 @@ type ClusterInfo struct {
 	// Settings for open monitoring using Prometheus.
 	OpenMonitoring *OpenMonitoring
 
-	// The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.
+	// The state of the cluster. The possible states are ACTIVE, CREATING, DELETING,
+	// FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.
 	State ClusterState
 
 	StateInfo *StateInfo

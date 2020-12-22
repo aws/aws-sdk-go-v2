@@ -416,11 +416,11 @@ func validateAuthorization(v *types.Authorization) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Authorization"}
-	if v.SecretsRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SecretsRoleArn"))
-	}
 	if v.CdnIdentifierSecret == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CdnIdentifierSecret"))
+	}
+	if v.SecretsRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretsRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -601,11 +601,11 @@ func validateS3Destination(v *types.S3Destination) error {
 	if v.BucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
 	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
 	if v.ManifestKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ManifestKey"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -622,11 +622,11 @@ func validateSpekeKeyProvider(v *types.SpekeKeyProvider) error {
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
-	if v.SystemIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SystemIds"))
-	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.SystemIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SystemIds"))
 	}
 	if v.Url == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Url"))
@@ -673,17 +673,14 @@ func validateOpCreateHarvestJobInput(v *CreateHarvestJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateHarvestJobInput"}
-	if v.StartTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
-	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
-	if v.OriginEndpointId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OriginEndpointId"))
-	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.OriginEndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginEndpointId"))
 	}
 	if v.S3Destination == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Destination"))
@@ -691,6 +688,9 @@ func validateOpCreateHarvestJobInput(v *CreateHarvestJobInput) error {
 		if err := validateS3Destination(v.S3Destination); err != nil {
 			invalidParams.AddNested("S3Destination", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -704,8 +704,18 @@ func validateOpCreateOriginEndpointInput(v *CreateOriginEndpointInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateOriginEndpointInput"}
+	if v.Authorization != nil {
+		if err := validateAuthorization(v.Authorization); err != nil {
+			invalidParams.AddNested("Authorization", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ChannelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
+	}
+	if v.CmafPackage != nil {
+		if err := validateCmafPackageCreateOrUpdateParameters(v.CmafPackage); err != nil {
+			invalidParams.AddNested("CmafPackage", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.DashPackage != nil {
 		if err := validateDashPackage(v.DashPackage); err != nil {
@@ -717,23 +727,13 @@ func validateOpCreateOriginEndpointInput(v *CreateOriginEndpointInput) error {
 			invalidParams.AddNested("HlsPackage", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Authorization != nil {
-		if err := validateAuthorization(v.Authorization); err != nil {
-			invalidParams.AddNested("Authorization", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.CmafPackage != nil {
-		if err := validateCmafPackageCreateOrUpdateParameters(v.CmafPackage); err != nil {
-			invalidParams.AddNested("CmafPackage", err.(smithy.InvalidParamsError))
-		}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if v.MssPackage != nil {
 		if err := validateMssPackage(v.MssPackage); err != nil {
 			invalidParams.AddNested("MssPackage", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -852,11 +852,11 @@ func validateOpRotateIngestEndpointCredentialsInput(v *RotateIngestEndpointCrede
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RotateIngestEndpointCredentialsInput"}
-	if v.IngestEndpointId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IngestEndpointId"))
-	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.IngestEndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IngestEndpointId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -888,11 +888,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -921,9 +921,14 @@ func validateOpUpdateOriginEndpointInput(v *UpdateOriginEndpointInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateOriginEndpointInput"}
-	if v.HlsPackage != nil {
-		if err := validateHlsPackage(v.HlsPackage); err != nil {
-			invalidParams.AddNested("HlsPackage", err.(smithy.InvalidParamsError))
+	if v.Authorization != nil {
+		if err := validateAuthorization(v.Authorization); err != nil {
+			invalidParams.AddNested("Authorization", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CmafPackage != nil {
+		if err := validateCmafPackageCreateOrUpdateParameters(v.CmafPackage); err != nil {
+			invalidParams.AddNested("CmafPackage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.DashPackage != nil {
@@ -931,22 +936,17 @@ func validateOpUpdateOriginEndpointInput(v *UpdateOriginEndpointInput) error {
 			invalidParams.AddNested("DashPackage", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.MssPackage != nil {
-		if err := validateMssPackage(v.MssPackage); err != nil {
-			invalidParams.AddNested("MssPackage", err.(smithy.InvalidParamsError))
+	if v.HlsPackage != nil {
+		if err := validateHlsPackage(v.HlsPackage); err != nil {
+			invalidParams.AddNested("HlsPackage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
-	if v.CmafPackage != nil {
-		if err := validateCmafPackageCreateOrUpdateParameters(v.CmafPackage); err != nil {
-			invalidParams.AddNested("CmafPackage", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Authorization != nil {
-		if err := validateAuthorization(v.Authorization); err != nil {
-			invalidParams.AddNested("Authorization", err.(smithy.InvalidParamsError))
+	if v.MssPackage != nil {
+		if err := validateMssPackage(v.MssPackage); err != nil {
+			invalidParams.AddNested("MssPackage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -346,16 +346,6 @@ func validateResource(v *types.Resource) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Resource"}
-	if v.DataLocation != nil {
-		if err := validateDataLocationResource(v.DataLocation); err != nil {
-			invalidParams.AddNested("DataLocation", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.TableWithColumns != nil {
-		if err := validateTableWithColumnsResource(v.TableWithColumns); err != nil {
-			invalidParams.AddNested("TableWithColumns", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Database != nil {
 		if err := validateDatabaseResource(v.Database); err != nil {
 			invalidParams.AddNested("Database", err.(smithy.InvalidParamsError))
@@ -364,6 +354,16 @@ func validateResource(v *types.Resource) error {
 	if v.Table != nil {
 		if err := validateTableResource(v.Table); err != nil {
 			invalidParams.AddNested("Table", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TableWithColumns != nil {
+		if err := validateTableWithColumnsResource(v.TableWithColumns); err != nil {
+			invalidParams.AddNested("TableWithColumns", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataLocation != nil {
+		if err := validateDataLocationResource(v.DataLocation); err != nil {
+			invalidParams.AddNested("DataLocation", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -494,9 +494,6 @@ func validateOpGrantPermissionsInput(v *GrantPermissionsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GrantPermissionsInput"}
-	if v.Permissions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
-	}
 	if v.Principal == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
 	}
@@ -506,6 +503,9 @@ func validateOpGrantPermissionsInput(v *GrantPermissionsInput) error {
 		if err := validateResource(v.Resource); err != nil {
 			invalidParams.AddNested("Resource", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Permissions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -566,8 +566,8 @@ func validateOpRevokePermissionsInput(v *RevokePermissionsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RevokePermissionsInput"}
-	if v.Permissions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
+	if v.Principal == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
 	}
 	if v.Resource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
@@ -576,8 +576,8 @@ func validateOpRevokePermissionsInput(v *RevokePermissionsInput) error {
 			invalidParams.AddNested("Resource", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Principal == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
+	if v.Permissions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -591,11 +591,11 @@ func validateOpUpdateResourceInput(v *UpdateResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

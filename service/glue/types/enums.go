@@ -2,6 +2,30 @@
 
 package types
 
+type BackfillErrorCode string
+
+// Enum values for BackfillErrorCode
+const (
+	BackfillErrorCodeEncryptedPartitionError            BackfillErrorCode = "ENCRYPTED_PARTITION_ERROR"
+	BackfillErrorCodeInternalError                      BackfillErrorCode = "INTERNAL_ERROR"
+	BackfillErrorCodeInvalidPartitionTypeDataError      BackfillErrorCode = "INVALID_PARTITION_TYPE_DATA_ERROR"
+	BackfillErrorCodeMissingPartitionValueError         BackfillErrorCode = "MISSING_PARTITION_VALUE_ERROR"
+	BackfillErrorCodeUnsupportedPartitionCharacterError BackfillErrorCode = "UNSUPPORTED_PARTITION_CHARACTER_ERROR"
+)
+
+// Values returns all known values for BackfillErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BackfillErrorCode) Values() []BackfillErrorCode {
+	return []BackfillErrorCode{
+		"ENCRYPTED_PARTITION_ERROR",
+		"INTERNAL_ERROR",
+		"INVALID_PARTITION_TYPE_DATA_ERROR",
+		"MISSING_PARTITION_VALUE_ERROR",
+		"UNSUPPORTED_PARTITION_CHARACTER_ERROR",
+	}
+}
+
 type CatalogEncryptionMode string
 
 // Enum values for CatalogEncryptionMode
@@ -197,6 +221,24 @@ func (ConnectionType) Values() []ConnectionType {
 		"MONGODB",
 		"KAFKA",
 		"NETWORK",
+	}
+}
+
+type CrawlerLineageSettings string
+
+// Enum values for CrawlerLineageSettings
+const (
+	CrawlerLineageSettingsEnable  CrawlerLineageSettings = "ENABLE"
+	CrawlerLineageSettingsDisable CrawlerLineageSettings = "DISABLE"
+)
+
+// Values returns all known values for CrawlerLineageSettings. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CrawlerLineageSettings) Values() []CrawlerLineageSettings {
+	return []CrawlerLineageSettings{
+		"ENABLE",
+		"DISABLE",
 	}
 }
 
@@ -499,7 +541,10 @@ type PartitionIndexStatus string
 
 // Enum values for PartitionIndexStatus
 const (
-	PartitionIndexStatusActive PartitionIndexStatus = "ACTIVE"
+	PartitionIndexStatusCreating PartitionIndexStatus = "CREATING"
+	PartitionIndexStatusActive   PartitionIndexStatus = "ACTIVE"
+	PartitionIndexStatusDeleting PartitionIndexStatus = "DELETING"
+	PartitionIndexStatusFailed   PartitionIndexStatus = "FAILED"
 )
 
 // Values returns all known values for PartitionIndexStatus. Note that this can be
@@ -507,7 +552,10 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PartitionIndexStatus) Values() []PartitionIndexStatus {
 	return []PartitionIndexStatus{
+		"CREATING",
 		"ACTIVE",
+		"DELETING",
+		"FAILED",
 	}
 }
 
@@ -972,13 +1020,6 @@ func (UpdateBehavior) Values() []UpdateBehavior {
 }
 
 type WorkerType string
-
-// Enum values for WorkerType
-const (
-	WorkerTypeStandard WorkerType = "Standard"
-	WorkerTypeG1x      WorkerType = "G.1X"
-	WorkerTypeG2x      WorkerType = "G.2X"
-)
 
 // Values returns all known values for WorkerType. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of

@@ -63,7 +63,7 @@ type CreateImagePipelineInput struct {
 	// Collects additional information about the image being created, including the
 	// operating system (OS) version and package list. This information is used to
 	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
-	EnhancedImageMetadataEnabled *bool
+	EnhancedImageMetadataEnabled bool
 
 	// The image test configuration of the image pipeline.
 	ImageTestsConfiguration *types.ImageTestsConfiguration

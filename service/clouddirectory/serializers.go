@@ -7284,35 +7284,35 @@ func awsRestjson1_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTypedAttributeValue(v *types.TypedAttributeValue, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTypedAttributeValue(v types.TypedAttributeValue, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	if v.BinaryValue != nil {
-		ok := object.Key("BinaryValue")
-		ok.Base64EncodeBytes(v.BinaryValue)
-	}
+	switch uv := v.(type) {
+	case *types.TypedAttributeValueMemberBinaryValue:
+		av := object.Key("BinaryValue")
+		av.Base64EncodeBytes(uv.Value)
 
-	if v.BooleanValue != nil {
-		ok := object.Key("BooleanValue")
-		ok.Boolean(*v.BooleanValue)
-	}
+	case *types.TypedAttributeValueMemberBooleanValue:
+		av := object.Key("BooleanValue")
+		av.Boolean(uv.Value)
 
-	if v.DatetimeValue != nil {
-		ok := object.Key("DatetimeValue")
-		ok.Double(smithytime.FormatEpochSeconds(*v.DatetimeValue))
-	}
+	case *types.TypedAttributeValueMemberDatetimeValue:
+		av := object.Key("DatetimeValue")
+		av.Double(smithytime.FormatEpochSeconds(uv.Value))
 
-	if v.NumberValue != nil {
-		ok := object.Key("NumberValue")
-		ok.String(*v.NumberValue)
-	}
+	case *types.TypedAttributeValueMemberNumberValue:
+		av := object.Key("NumberValue")
+		av.String(uv.Value)
 
-	if v.StringValue != nil {
-		ok := object.Key("StringValue")
-		ok.String(*v.StringValue)
-	}
+	case *types.TypedAttributeValueMemberStringValue:
+		av := object.Key("StringValue")
+		av.String(uv.Value)
 
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 

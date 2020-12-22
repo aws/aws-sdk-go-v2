@@ -33,6 +33,9 @@ type GetSigningProfileInput struct {
 	//
 	// This member is required.
 	ProfileName *string
+
+	// The AWS account ID of the profile owner.
+	ProfileOwner *string
 }
 
 type GetSigningProfileOutput struct {
@@ -44,11 +47,27 @@ type GetSigningProfileOutput struct {
 	// operations.
 	Overrides *types.SigningPlatformOverrides
 
+	// A human-readable name for the signing platform associated with the signing
+	// profile.
+	PlatformDisplayName *string
+
 	// The ID of the platform that is used by the target signing profile.
 	PlatformId *string
 
 	// The name of the target signing profile.
 	ProfileName *string
+
+	// The current version of the signing profile.
+	ProfileVersion *string
+
+	// The signing profile ARN, including the profile version.
+	ProfileVersionArn *string
+
+	// Revocation information for a signing profile.
+	RevocationRecord *types.SigningProfileRevocationRecord
+
+	// The validity period for a signing job.
+	SignatureValidityPeriod *types.SignatureValidityPeriod
 
 	// The ARN of the certificate that the target profile uses for signing operations.
 	SigningMaterial *types.SigningMaterial
@@ -59,6 +78,9 @@ type GetSigningProfileOutput struct {
 
 	// The status of the target signing profile.
 	Status types.SigningProfileStatus
+
+	// Reason for the status of the target signing profile.
+	StatusReason *string
 
 	// A list of tags associated with the signing profile.
 	Tags map[string]string

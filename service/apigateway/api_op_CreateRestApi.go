@@ -31,6 +31,11 @@ func (c *Client) CreateRestApi(ctx context.Context, params *CreateRestApiInput, 
 // The POST Request to add a new RestApi resource to your collection.
 type CreateRestApiInput struct {
 
+	// [Required] The name of the RestApi.
+	//
+	// This member is required.
+	Name *string
+
 	// The source of the API key for metering requests according to a usage plan. Valid
 	// values are:
 	//
@@ -189,6 +194,9 @@ func addOperationCreateRestApiMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpCreateRestApiValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRestApi(options.Region), middleware.Before); err != nil {

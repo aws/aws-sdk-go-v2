@@ -303,11 +303,11 @@ func validateDimension(v *types.Dimension) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Dimension"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -384,11 +384,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -419,13 +419,13 @@ func validateOpCreateDatabaseInput(v *CreateDatabaseInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDatabaseInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.DatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -439,6 +439,12 @@ func validateOpCreateTableInput(v *CreateTableInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTableInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
 	if v.RetentionProperties != nil {
 		if err := validateRetentionProperties(v.RetentionProperties); err != nil {
 			invalidParams.AddNested("RetentionProperties", err.(smithy.InvalidParamsError))
@@ -448,12 +454,6 @@ func validateOpCreateTableInput(v *CreateTableInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.TableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
-	}
-	if v.DatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -482,11 +482,11 @@ func validateOpDeleteTableInput(v *DeleteTableInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTableInput"}
-	if v.TableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
-	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -588,11 +588,11 @@ func validateOpUpdateDatabaseInput(v *UpdateDatabaseInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDatabaseInput"}
-	if v.KmsKeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyId"))
-	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.KmsKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -606,6 +606,9 @@ func validateOpUpdateTableInput(v *UpdateTableInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTableInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
@@ -615,9 +618,6 @@ func validateOpUpdateTableInput(v *UpdateTableInput) error {
 		if err := validateRetentionProperties(v.RetentionProperties); err != nil {
 			invalidParams.AddNested("RetentionProperties", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.DatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -631,13 +631,16 @@ func validateOpWriteRecordsInput(v *WriteRecordsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "WriteRecordsInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
 	if v.CommonAttributes != nil {
 		if err := validateRecord(v.CommonAttributes); err != nil {
 			invalidParams.AddNested("CommonAttributes", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.TableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if v.Records == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Records"))
@@ -645,9 +648,6 @@ func validateOpWriteRecordsInput(v *WriteRecordsInput) error {
 		if err := validateRecords(v.Records); err != nil {
 			invalidParams.AddNested("Records", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.DatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

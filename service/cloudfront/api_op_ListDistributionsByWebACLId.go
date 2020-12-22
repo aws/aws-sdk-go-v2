@@ -47,7 +47,7 @@ type ListDistributionsByWebACLIdInput struct {
 
 	// The maximum number of distributions that you want CloudFront to return in the
 	// response body. The maximum and default values are both 100.
-	MaxItems *string
+	MaxItems *int32
 }
 
 // The response to a request to list the distributions that are associated with a

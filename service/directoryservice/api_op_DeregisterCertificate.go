@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes from the system the certificate that was registered for a secured LDAP
-// connection.
+// Deletes from the system the certificate that was registered for secure LDAP or
+// client certificate authentication.
 func (c *Client) DeregisterCertificate(ctx context.Context, params *DeregisterCertificateInput, optFns ...func(*Options)) (*DeregisterCertificateOutput, error) {
 	if params == nil {
 		params = &DeregisterCertificateInput{}

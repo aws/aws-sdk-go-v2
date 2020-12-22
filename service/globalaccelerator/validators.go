@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAddCustomRoutingEndpoints struct {
+}
+
+func (*validateOpAddCustomRoutingEndpoints) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddCustomRoutingEndpoints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddCustomRoutingEndpointsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddCustomRoutingEndpointsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAdvertiseByoipCidr struct {
 }
 
@@ -30,6 +50,26 @@ func (m *validateOpAdvertiseByoipCidr) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAllowCustomRoutingTraffic struct {
+}
+
+func (*validateOpAllowCustomRoutingTraffic) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAllowCustomRoutingTraffic) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AllowCustomRoutingTrafficInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAllowCustomRoutingTrafficInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAccelerator struct {
 }
 
@@ -45,6 +85,66 @@ func (m *validateOpCreateAccelerator) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateAcceleratorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateCustomRoutingAccelerator struct {
+}
+
+func (*validateOpCreateCustomRoutingAccelerator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCustomRoutingAccelerator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCustomRoutingAcceleratorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCustomRoutingAcceleratorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateCustomRoutingEndpointGroup struct {
+}
+
+func (*validateOpCreateCustomRoutingEndpointGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCustomRoutingEndpointGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCustomRoutingEndpointGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCustomRoutingEndpointGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateCustomRoutingListener struct {
+}
+
+func (*validateOpCreateCustomRoutingListener) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCustomRoutingListener) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCustomRoutingListenerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCustomRoutingListenerInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -110,6 +210,66 @@ func (m *validateOpDeleteAccelerator) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteCustomRoutingAccelerator struct {
+}
+
+func (*validateOpDeleteCustomRoutingAccelerator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCustomRoutingAccelerator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCustomRoutingAcceleratorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCustomRoutingAcceleratorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCustomRoutingEndpointGroup struct {
+}
+
+func (*validateOpDeleteCustomRoutingEndpointGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCustomRoutingEndpointGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCustomRoutingEndpointGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCustomRoutingEndpointGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCustomRoutingListener struct {
+}
+
+func (*validateOpDeleteCustomRoutingListener) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCustomRoutingListener) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCustomRoutingListenerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCustomRoutingListenerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteEndpointGroup struct {
 }
 
@@ -145,6 +305,26 @@ func (m *validateOpDeleteListener) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteListenerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDenyCustomRoutingTraffic struct {
+}
+
+func (*validateOpDenyCustomRoutingTraffic) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDenyCustomRoutingTraffic) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DenyCustomRoutingTrafficInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDenyCustomRoutingTrafficInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -210,6 +390,86 @@ func (m *validateOpDescribeAccelerator) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeCustomRoutingAcceleratorAttributes struct {
+}
+
+func (*validateOpDescribeCustomRoutingAcceleratorAttributes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeCustomRoutingAcceleratorAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeCustomRoutingAcceleratorAttributesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeCustomRoutingAcceleratorAttributesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeCustomRoutingAccelerator struct {
+}
+
+func (*validateOpDescribeCustomRoutingAccelerator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeCustomRoutingAccelerator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeCustomRoutingAcceleratorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeCustomRoutingAcceleratorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeCustomRoutingEndpointGroup struct {
+}
+
+func (*validateOpDescribeCustomRoutingEndpointGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeCustomRoutingEndpointGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeCustomRoutingEndpointGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeCustomRoutingEndpointGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeCustomRoutingListener struct {
+}
+
+func (*validateOpDescribeCustomRoutingListener) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeCustomRoutingListener) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeCustomRoutingListenerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeCustomRoutingListenerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeEndpointGroup struct {
 }
 
@@ -245,6 +505,86 @@ func (m *validateOpDescribeListener) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeListenerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCustomRoutingEndpointGroups struct {
+}
+
+func (*validateOpListCustomRoutingEndpointGroups) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCustomRoutingEndpointGroups) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCustomRoutingEndpointGroupsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCustomRoutingEndpointGroupsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCustomRoutingListeners struct {
+}
+
+func (*validateOpListCustomRoutingListeners) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCustomRoutingListeners) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCustomRoutingListenersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCustomRoutingListenersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCustomRoutingPortMappingsByDestination struct {
+}
+
+func (*validateOpListCustomRoutingPortMappingsByDestination) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCustomRoutingPortMappingsByDestination) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCustomRoutingPortMappingsByDestinationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCustomRoutingPortMappingsByDestinationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCustomRoutingPortMappings struct {
+}
+
+func (*validateOpListCustomRoutingPortMappings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCustomRoutingPortMappings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCustomRoutingPortMappingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCustomRoutingPortMappingsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -330,6 +670,26 @@ func (m *validateOpProvisionByoipCidr) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRemoveCustomRoutingEndpoints struct {
+}
+
+func (*validateOpRemoveCustomRoutingEndpoints) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveCustomRoutingEndpoints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveCustomRoutingEndpointsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveCustomRoutingEndpointsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -410,6 +770,66 @@ func (m *validateOpUpdateAccelerator) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCustomRoutingAcceleratorAttributes struct {
+}
+
+func (*validateOpUpdateCustomRoutingAcceleratorAttributes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCustomRoutingAcceleratorAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCustomRoutingAcceleratorAttributesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCustomRoutingAcceleratorAttributesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateCustomRoutingAccelerator struct {
+}
+
+func (*validateOpUpdateCustomRoutingAccelerator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCustomRoutingAccelerator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCustomRoutingAcceleratorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCustomRoutingAcceleratorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateCustomRoutingListener struct {
+}
+
+func (*validateOpUpdateCustomRoutingListener) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCustomRoutingListener) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCustomRoutingListenerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCustomRoutingListenerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEndpointGroup struct {
 }
 
@@ -470,12 +890,32 @@ func (m *validateOpWithdrawByoipCidr) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAddCustomRoutingEndpointsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddCustomRoutingEndpoints{}, middleware.After)
+}
+
 func addOpAdvertiseByoipCidrValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAdvertiseByoipCidr{}, middleware.After)
 }
 
+func addOpAllowCustomRoutingTrafficValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAllowCustomRoutingTraffic{}, middleware.After)
+}
+
 func addOpCreateAcceleratorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAccelerator{}, middleware.After)
+}
+
+func addOpCreateCustomRoutingAcceleratorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCustomRoutingAccelerator{}, middleware.After)
+}
+
+func addOpCreateCustomRoutingEndpointGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCustomRoutingEndpointGroup{}, middleware.After)
+}
+
+func addOpCreateCustomRoutingListenerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCustomRoutingListener{}, middleware.After)
 }
 
 func addOpCreateEndpointGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -490,12 +930,28 @@ func addOpDeleteAcceleratorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAccelerator{}, middleware.After)
 }
 
+func addOpDeleteCustomRoutingAcceleratorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCustomRoutingAccelerator{}, middleware.After)
+}
+
+func addOpDeleteCustomRoutingEndpointGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCustomRoutingEndpointGroup{}, middleware.After)
+}
+
+func addOpDeleteCustomRoutingListenerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCustomRoutingListener{}, middleware.After)
+}
+
 func addOpDeleteEndpointGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEndpointGroup{}, middleware.After)
 }
 
 func addOpDeleteListenerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteListener{}, middleware.After)
+}
+
+func addOpDenyCustomRoutingTrafficValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDenyCustomRoutingTraffic{}, middleware.After)
 }
 
 func addOpDeprovisionByoipCidrValidationMiddleware(stack *middleware.Stack) error {
@@ -510,12 +966,44 @@ func addOpDescribeAcceleratorValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeAccelerator{}, middleware.After)
 }
 
+func addOpDescribeCustomRoutingAcceleratorAttributesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeCustomRoutingAcceleratorAttributes{}, middleware.After)
+}
+
+func addOpDescribeCustomRoutingAcceleratorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeCustomRoutingAccelerator{}, middleware.After)
+}
+
+func addOpDescribeCustomRoutingEndpointGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeCustomRoutingEndpointGroup{}, middleware.After)
+}
+
+func addOpDescribeCustomRoutingListenerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeCustomRoutingListener{}, middleware.After)
+}
+
 func addOpDescribeEndpointGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeEndpointGroup{}, middleware.After)
 }
 
 func addOpDescribeListenerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeListener{}, middleware.After)
+}
+
+func addOpListCustomRoutingEndpointGroupsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCustomRoutingEndpointGroups{}, middleware.After)
+}
+
+func addOpListCustomRoutingListenersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCustomRoutingListeners{}, middleware.After)
+}
+
+func addOpListCustomRoutingPortMappingsByDestinationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCustomRoutingPortMappingsByDestination{}, middleware.After)
+}
+
+func addOpListCustomRoutingPortMappingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCustomRoutingPortMappings{}, middleware.After)
 }
 
 func addOpListEndpointGroupsValidationMiddleware(stack *middleware.Stack) error {
@@ -534,6 +1022,10 @@ func addOpProvisionByoipCidrValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpProvisionByoipCidr{}, middleware.After)
 }
 
+func addOpRemoveCustomRoutingEndpointsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveCustomRoutingEndpoints{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -548,6 +1040,18 @@ func addOpUpdateAcceleratorAttributesValidationMiddleware(stack *middleware.Stac
 
 func addOpUpdateAcceleratorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAccelerator{}, middleware.After)
+}
+
+func addOpUpdateCustomRoutingAcceleratorAttributesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCustomRoutingAcceleratorAttributes{}, middleware.After)
+}
+
+func addOpUpdateCustomRoutingAcceleratorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCustomRoutingAccelerator{}, middleware.After)
+}
+
+func addOpUpdateCustomRoutingListenerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCustomRoutingListener{}, middleware.After)
 }
 
 func addOpUpdateEndpointGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -580,16 +1084,54 @@ func validateCidrAuthorizationContext(v *types.CidrAuthorizationContext) error {
 	}
 }
 
+func validateCustomRoutingDestinationConfiguration(v *types.CustomRoutingDestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomRoutingDestinationConfiguration"}
+	if v.FromPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FromPort"))
+	}
+	if v.ToPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ToPort"))
+	}
+	if v.Protocols == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Protocols"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomRoutingDestinationConfigurations(v []types.CustomRoutingDestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomRoutingDestinationConfigurations"}
+	for i := range v {
+		if err := validateCustomRoutingDestinationConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -615,6 +1157,24 @@ func validateTags(v []types.Tag) error {
 	}
 }
 
+func validateOpAddCustomRoutingEndpointsInput(v *AddCustomRoutingEndpointsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddCustomRoutingEndpointsInput"}
+	if v.EndpointConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointConfigurations"))
+	}
+	if v.EndpointGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointGroupArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAdvertiseByoipCidrInput(v *AdvertiseByoipCidrInput) error {
 	if v == nil {
 		return nil
@@ -630,18 +1190,108 @@ func validateOpAdvertiseByoipCidrInput(v *AdvertiseByoipCidrInput) error {
 	}
 }
 
+func validateOpAllowCustomRoutingTrafficInput(v *AllowCustomRoutingTrafficInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AllowCustomRoutingTrafficInput"}
+	if v.EndpointGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointGroupArn"))
+	}
+	if v.EndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAcceleratorInput(v *CreateAcceleratorInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAcceleratorInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
+	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCustomRoutingAcceleratorInput(v *CreateCustomRoutingAcceleratorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomRoutingAcceleratorInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCustomRoutingEndpointGroupInput(v *CreateCustomRoutingEndpointGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomRoutingEndpointGroupInput"}
+	if v.ListenerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ListenerArn"))
+	}
+	if v.EndpointGroupRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointGroupRegion"))
+	}
+	if v.DestinationConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationConfigurations"))
+	} else if v.DestinationConfigurations != nil {
+		if err := validateCustomRoutingDestinationConfigurations(v.DestinationConfigurations); err != nil {
+			invalidParams.AddNested("DestinationConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCustomRoutingListenerInput(v *CreateCustomRoutingListenerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomRoutingListenerInput"}
+	if v.AcceleratorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcceleratorArn"))
+	}
+	if v.PortRanges == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortRanges"))
 	}
 	if v.IdempotencyToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
@@ -658,14 +1308,14 @@ func validateOpCreateEndpointGroupInput(v *CreateEndpointGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateEndpointGroupInput"}
+	if v.ListenerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ListenerArn"))
+	}
 	if v.EndpointGroupRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointGroupRegion"))
 	}
 	if v.IdempotencyToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
-	}
-	if v.ListenerArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ListenerArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -679,9 +1329,6 @@ func validateOpCreateListenerInput(v *CreateListenerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateListenerInput"}
-	if v.IdempotencyToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
-	}
 	if v.AcceleratorArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AcceleratorArn"))
 	}
@@ -690,6 +1337,9 @@ func validateOpCreateListenerInput(v *CreateListenerInput) error {
 	}
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -705,6 +1355,51 @@ func validateOpDeleteAcceleratorInput(v *DeleteAcceleratorInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAcceleratorInput"}
 	if v.AcceleratorArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AcceleratorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCustomRoutingAcceleratorInput(v *DeleteCustomRoutingAcceleratorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomRoutingAcceleratorInput"}
+	if v.AcceleratorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcceleratorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCustomRoutingEndpointGroupInput(v *DeleteCustomRoutingEndpointGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomRoutingEndpointGroupInput"}
+	if v.EndpointGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointGroupArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCustomRoutingListenerInput(v *DeleteCustomRoutingListenerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomRoutingListenerInput"}
+	if v.ListenerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ListenerArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -735,6 +1430,24 @@ func validateOpDeleteListenerInput(v *DeleteListenerInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteListenerInput"}
 	if v.ListenerArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ListenerArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDenyCustomRoutingTrafficInput(v *DenyCustomRoutingTrafficInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DenyCustomRoutingTrafficInput"}
+	if v.EndpointGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointGroupArn"))
+	}
+	if v.EndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -788,6 +1501,66 @@ func validateOpDescribeAcceleratorInput(v *DescribeAcceleratorInput) error {
 	}
 }
 
+func validateOpDescribeCustomRoutingAcceleratorAttributesInput(v *DescribeCustomRoutingAcceleratorAttributesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeCustomRoutingAcceleratorAttributesInput"}
+	if v.AcceleratorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcceleratorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeCustomRoutingAcceleratorInput(v *DescribeCustomRoutingAcceleratorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeCustomRoutingAcceleratorInput"}
+	if v.AcceleratorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcceleratorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeCustomRoutingEndpointGroupInput(v *DescribeCustomRoutingEndpointGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeCustomRoutingEndpointGroupInput"}
+	if v.EndpointGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointGroupArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeCustomRoutingListenerInput(v *DescribeCustomRoutingListenerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeCustomRoutingListenerInput"}
+	if v.ListenerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ListenerArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeEndpointGroupInput(v *DescribeEndpointGroupInput) error {
 	if v == nil {
 		return nil
@@ -810,6 +1583,69 @@ func validateOpDescribeListenerInput(v *DescribeListenerInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeListenerInput"}
 	if v.ListenerArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ListenerArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCustomRoutingEndpointGroupsInput(v *ListCustomRoutingEndpointGroupsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCustomRoutingEndpointGroupsInput"}
+	if v.ListenerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ListenerArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCustomRoutingListenersInput(v *ListCustomRoutingListenersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCustomRoutingListenersInput"}
+	if v.AcceleratorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcceleratorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCustomRoutingPortMappingsByDestinationInput(v *ListCustomRoutingPortMappingsByDestinationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCustomRoutingPortMappingsByDestinationInput"}
+	if v.EndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointId"))
+	}
+	if v.DestinationAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationAddress"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCustomRoutingPortMappingsInput(v *ListCustomRoutingPortMappingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCustomRoutingPortMappingsInput"}
+	if v.AcceleratorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcceleratorArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -885,20 +1721,38 @@ func validateOpProvisionByoipCidrInput(v *ProvisionByoipCidrInput) error {
 	}
 }
 
+func validateOpRemoveCustomRoutingEndpointsInput(v *RemoveCustomRoutingEndpointsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveCustomRoutingEndpointsInput"}
+	if v.EndpointIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointIds"))
+	}
+	if v.EndpointGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointGroupArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -947,6 +1801,54 @@ func validateOpUpdateAcceleratorInput(v *UpdateAcceleratorInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAcceleratorInput"}
 	if v.AcceleratorArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AcceleratorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCustomRoutingAcceleratorAttributesInput(v *UpdateCustomRoutingAcceleratorAttributesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCustomRoutingAcceleratorAttributesInput"}
+	if v.AcceleratorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcceleratorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCustomRoutingAcceleratorInput(v *UpdateCustomRoutingAcceleratorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCustomRoutingAcceleratorInput"}
+	if v.AcceleratorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcceleratorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCustomRoutingListenerInput(v *UpdateCustomRoutingListenerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCustomRoutingListenerInput"}
+	if v.ListenerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ListenerArn"))
+	}
+	if v.PortRanges == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortRanges"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

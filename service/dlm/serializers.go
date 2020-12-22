@@ -708,14 +708,14 @@ func awsRestjson1_serializeDocumentCrossRegionCopyRule(v *types.CrossRegionCopyR
 		ok.String(*v.CmkArn)
 	}
 
-	if v.CopyTags != nil {
+	if v.CopyTags {
 		ok := object.Key("CopyTags")
-		ok.Boolean(*v.CopyTags)
+		ok.Boolean(v.CopyTags)
 	}
 
-	if v.Encrypted != nil {
+	if v.Encrypted {
 		ok := object.Key("Encrypted")
-		ok.Boolean(*v.Encrypted)
+		ok.Boolean(v.Encrypted)
 	}
 
 	if v.RetainRule != nil {
@@ -779,14 +779,14 @@ func awsRestjson1_serializeDocumentParameters(v *types.Parameters, value smithyj
 	object := value.Object()
 	defer object.Close()
 
-	if v.ExcludeBootVolume != nil {
+	if v.ExcludeBootVolume {
 		ok := object.Key("ExcludeBootVolume")
-		ok.Boolean(*v.ExcludeBootVolume)
+		ok.Boolean(v.ExcludeBootVolume)
 	}
 
-	if v.NoReboot != nil {
+	if v.NoReboot {
 		ok := object.Key("NoReboot")
-		ok.Boolean(*v.NoReboot)
+		ok.Boolean(v.NoReboot)
 	}
 
 	return nil

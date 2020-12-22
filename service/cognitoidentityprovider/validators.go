@@ -2408,11 +2408,6 @@ func validateAccountTakeoverActionsType(v *types.AccountTakeoverActionsType) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AccountTakeoverActionsType"}
-	if v.HighAction != nil {
-		if err := validateAccountTakeoverActionType(v.HighAction); err != nil {
-			invalidParams.AddNested("HighAction", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.LowAction != nil {
 		if err := validateAccountTakeoverActionType(v.LowAction); err != nil {
 			invalidParams.AddNested("LowAction", err.(smithy.InvalidParamsError))
@@ -2421,6 +2416,11 @@ func validateAccountTakeoverActionsType(v *types.AccountTakeoverActionsType) err
 	if v.MediumAction != nil {
 		if err := validateAccountTakeoverActionType(v.MediumAction); err != nil {
 			invalidParams.AddNested("MediumAction", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HighAction != nil {
+		if err := validateAccountTakeoverActionType(v.HighAction); err != nil {
+			invalidParams.AddNested("HighAction", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2450,16 +2450,16 @@ func validateAccountTakeoverRiskConfigurationType(v *types.AccountTakeoverRiskCo
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AccountTakeoverRiskConfigurationType"}
+	if v.NotifyConfiguration != nil {
+		if err := validateNotifyConfigurationType(v.NotifyConfiguration); err != nil {
+			invalidParams.AddNested("NotifyConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Actions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
 	} else if v.Actions != nil {
 		if err := validateAccountTakeoverActionsType(v.Actions); err != nil {
 			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.NotifyConfiguration != nil {
-		if err := validateNotifyConfigurationType(v.NotifyConfiguration); err != nil {
-			invalidParams.AddNested("NotifyConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2540,17 +2540,17 @@ func validateContextDataType(v *types.ContextDataType) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ContextDataType"}
+	if v.IpAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpAddress"))
+	}
 	if v.ServerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerName"))
-	}
-	if v.HttpHeaders == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HttpHeaders"))
 	}
 	if v.ServerPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerPath"))
 	}
-	if v.IpAddress == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IpAddress"))
+	if v.HttpHeaders == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HttpHeaders"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2574,27 +2574,85 @@ func validateCustomDomainConfigType(v *types.CustomDomainConfigType) error {
 	}
 }
 
+func validateCustomEmailLambdaVersionConfigType(v *types.CustomEmailLambdaVersionConfigType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomEmailLambdaVersionConfigType"}
+	if len(v.LambdaVersion) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LambdaVersion"))
+	}
+	if v.LambdaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LambdaArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomSMSLambdaVersionConfigType(v *types.CustomSMSLambdaVersionConfigType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomSMSLambdaVersionConfigType"}
+	if len(v.LambdaVersion) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LambdaVersion"))
+	}
+	if v.LambdaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LambdaArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLambdaConfigType(v *types.LambdaConfigType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LambdaConfigType"}
+	if v.CustomSMSSender != nil {
+		if err := validateCustomSMSLambdaVersionConfigType(v.CustomSMSSender); err != nil {
+			invalidParams.AddNested("CustomSMSSender", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomEmailSender != nil {
+		if err := validateCustomEmailLambdaVersionConfigType(v.CustomEmailSender); err != nil {
+			invalidParams.AddNested("CustomEmailSender", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNotifyConfigurationType(v *types.NotifyConfigurationType) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NotifyConfigurationType"}
+	if v.SourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceArn"))
+	}
+	if v.BlockEmail != nil {
+		if err := validateNotifyEmailType(v.BlockEmail); err != nil {
+			invalidParams.AddNested("BlockEmail", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.NoActionEmail != nil {
 		if err := validateNotifyEmailType(v.NoActionEmail); err != nil {
 			invalidParams.AddNested("NoActionEmail", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.SourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceArn"))
-	}
 	if v.MfaEmail != nil {
 		if err := validateNotifyEmailType(v.MfaEmail); err != nil {
 			invalidParams.AddNested("MfaEmail", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.BlockEmail != nil {
-		if err := validateNotifyEmailType(v.BlockEmail); err != nil {
-			invalidParams.AddNested("BlockEmail", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2753,11 +2811,11 @@ func validateOpAddCustomAttributesInput(v *AddCustomAttributesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddCustomAttributesInput"}
-	if v.CustomAttributes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CustomAttributes"))
-	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.CustomAttributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomAttributes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2771,14 +2829,14 @@ func validateOpAdminAddUserToGroupInput(v *AdminAddUserToGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdminAddUserToGroupInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
 	if v.Username == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if v.GroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupName"))
-	}
-	if v.UserPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2810,20 +2868,20 @@ func validateOpAdminCreateUserInput(v *AdminCreateUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdminCreateUserInput"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
-	if v.ValidationData != nil {
-		if err := validateAttributeListType(v.ValidationData); err != nil {
-			invalidParams.AddNested("ValidationData", err.(smithy.InvalidParamsError))
-		}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if v.UserAttributes != nil {
 		if err := validateAttributeListType(v.UserAttributes); err != nil {
 			invalidParams.AddNested("UserAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ValidationData != nil {
+		if err := validateAttributeListType(v.ValidationData); err != nil {
+			invalidParams.AddNested("ValidationData", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2838,11 +2896,11 @@ func validateOpAdminDeleteUserAttributesInput(v *AdminDeleteUserAttributesInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdminDeleteUserAttributesInput"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if v.UserAttributeNames == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserAttributeNames"))
@@ -2895,11 +2953,11 @@ func validateOpAdminDisableUserInput(v *AdminDisableUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdminDisableUserInput"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2931,14 +2989,14 @@ func validateOpAdminForgetDeviceInput(v *AdminForgetDeviceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdminForgetDeviceInput"}
-	if v.DeviceKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeviceKey"))
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
 	if v.Username == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
-	if v.UserPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	if v.DeviceKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2955,11 +3013,11 @@ func validateOpAdminGetDeviceInput(v *AdminGetDeviceInput) error {
 	if v.DeviceKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeviceKey"))
 	}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2991,6 +3049,12 @@ func validateOpAdminInitiateAuthInput(v *AdminInitiateAuthInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdminInitiateAuthInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
 	if len(v.AuthFlow) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthFlow"))
 	}
@@ -2998,12 +3062,6 @@ func validateOpAdminInitiateAuthInput(v *AdminInitiateAuthInput) error {
 		if err := validateContextDataType(v.ContextData); err != nil {
 			invalidParams.AddNested("ContextData", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.UserPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
-	}
-	if v.ClientId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3017,14 +3075,14 @@ func validateOpAdminLinkProviderForUserInput(v *AdminLinkProviderForUserInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdminLinkProviderForUserInput"}
-	if v.SourceUser == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceUser"))
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
 	if v.DestinationUser == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationUser"))
 	}
-	if v.UserPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	if v.SourceUser == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceUser"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3038,11 +3096,11 @@ func validateOpAdminListDevicesInput(v *AdminListDevicesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdminListDevicesInput"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3056,11 +3114,11 @@ func validateOpAdminListGroupsForUserInput(v *AdminListGroupsForUserInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdminListGroupsForUserInput"}
-	if v.UserPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
-	}
 	if v.Username == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3074,11 +3132,11 @@ func validateOpAdminListUserAuthEventsInput(v *AdminListUserAuthEventsInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdminListUserAuthEventsInput"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3092,14 +3150,14 @@ func validateOpAdminRemoveUserFromGroupInput(v *AdminRemoveUserFromGroupInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdminRemoveUserFromGroupInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
 	if v.Username == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if v.GroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupName"))
-	}
-	if v.UserPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3131,6 +3189,12 @@ func validateOpAdminRespondToAuthChallengeInput(v *AdminRespondToAuthChallengeIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdminRespondToAuthChallengeInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
 	if len(v.ChallengeName) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ChallengeName"))
 	}
@@ -3138,12 +3202,6 @@ func validateOpAdminRespondToAuthChallengeInput(v *AdminRespondToAuthChallengeIn
 		if err := validateContextDataType(v.ContextData); err != nil {
 			invalidParams.AddNested("ContextData", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ClientId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
-	}
-	if v.UserPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3175,14 +3233,14 @@ func validateOpAdminSetUserPasswordInput(v *AdminSetUserPasswordInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdminSetUserPasswordInput"}
-	if v.Password == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Password"))
-	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
 	if v.Username == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	}
+	if v.Password == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Password"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3196,14 +3254,14 @@ func validateOpAdminSetUserSettingsInput(v *AdminSetUserSettingsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdminSetUserSettingsInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
 	if v.Username == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if v.MFAOptions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MFAOptions"))
-	}
-	if v.UserPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3223,11 +3281,11 @@ func validateOpAdminUpdateAuthEventFeedbackInput(v *AdminUpdateAuthEventFeedback
 	if v.Username == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
-	if len(v.FeedbackValue) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("FeedbackValue"))
-	}
 	if v.EventId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventId"))
+	}
+	if len(v.FeedbackValue) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FeedbackValue"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3241,14 +3299,14 @@ func validateOpAdminUpdateDeviceStatusInput(v *AdminUpdateDeviceStatusInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdminUpdateDeviceStatusInput"}
-	if v.DeviceKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeviceKey"))
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
 	if v.Username == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
-	if v.UserPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	if v.DeviceKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3262,11 +3320,11 @@ func validateOpAdminUpdateUserAttributesInput(v *AdminUpdateUserAttributesInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdminUpdateUserAttributesInput"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if v.UserAttributes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserAttributes"))
@@ -3305,14 +3363,14 @@ func validateOpChangePasswordInput(v *ChangePasswordInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ChangePasswordInput"}
-	if v.AccessToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccessToken"))
-	}
 	if v.PreviousPassword == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PreviousPassword"))
 	}
 	if v.ProposedPassword == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProposedPassword"))
+	}
+	if v.AccessToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3344,11 +3402,11 @@ func validateOpConfirmForgotPasswordInput(v *ConfirmForgotPasswordInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ConfirmForgotPasswordInput"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if v.ConfirmationCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfirmationCode"))
@@ -3368,11 +3426,11 @@ func validateOpConfirmSignUpInput(v *ConfirmSignUpInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ConfirmSignUpInput"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if v.ConfirmationCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfirmationCode"))
@@ -3407,17 +3465,17 @@ func validateOpCreateIdentityProviderInput(v *CreateIdentityProviderInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateIdentityProviderInput"}
-	if v.ProviderName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProviderName"))
-	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
-	if v.ProviderDetails == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProviderDetails"))
+	if v.ProviderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProviderName"))
 	}
 	if len(v.ProviderType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ProviderType"))
+	}
+	if v.ProviderDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProviderDetails"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3431,6 +3489,12 @@ func validateOpCreateResourceServerInput(v *CreateResourceServerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateResourceServerInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -3438,12 +3502,6 @@ func validateOpCreateResourceServerInput(v *CreateResourceServerInput) error {
 		if err := validateResourceServerScopeListType(v.Scopes); err != nil {
 			invalidParams.AddNested("Scopes", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.UserPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
-	}
-	if v.Identifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3457,14 +3515,14 @@ func validateOpCreateUserImportJobInput(v *CreateUserImportJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateUserImportJobInput"}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
 	if v.CloudWatchLogsRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CloudWatchLogsRoleArn"))
-	}
-	if v.JobName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3496,16 +3554,16 @@ func validateOpCreateUserPoolDomainInput(v *CreateUserPoolDomainInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateUserPoolDomainInput"}
-	if v.CustomDomainConfig != nil {
-		if err := validateCustomDomainConfigType(v.CustomDomainConfig); err != nil {
-			invalidParams.AddNested("CustomDomainConfig", err.(smithy.InvalidParamsError))
-		}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	if v.CustomDomainConfig != nil {
+		if err := validateCustomDomainConfigType(v.CustomDomainConfig); err != nil {
+			invalidParams.AddNested("CustomDomainConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3522,9 +3580,9 @@ func validateOpCreateUserPoolInput(v *CreateUserPoolInput) error {
 	if v.PoolName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PoolName"))
 	}
-	if v.UsernameConfiguration != nil {
-		if err := validateUsernameConfigurationType(v.UsernameConfiguration); err != nil {
-			invalidParams.AddNested("UsernameConfiguration", err.(smithy.InvalidParamsError))
+	if v.LambdaConfig != nil {
+		if err := validateLambdaConfigType(v.LambdaConfig); err != nil {
+			invalidParams.AddNested("LambdaConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.SmsConfiguration != nil {
@@ -3535,6 +3593,11 @@ func validateOpCreateUserPoolInput(v *CreateUserPoolInput) error {
 	if v.UserPoolAddOns != nil {
 		if err := validateUserPoolAddOnsType(v.UserPoolAddOns); err != nil {
 			invalidParams.AddNested("UserPoolAddOns", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UsernameConfiguration != nil {
+		if err := validateUsernameConfigurationType(v.UsernameConfiguration); err != nil {
+			invalidParams.AddNested("UsernameConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.AccountRecoverySetting != nil {
@@ -3554,11 +3617,11 @@ func validateOpDeleteGroupInput(v *DeleteGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteGroupInput"}
-	if v.UserPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
-	}
 	if v.GroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupName"))
+	}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3572,11 +3635,11 @@ func validateOpDeleteIdentityProviderInput(v *DeleteIdentityProviderInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteIdentityProviderInput"}
-	if v.ProviderName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProviderName"))
-	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.ProviderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProviderName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3641,11 +3704,11 @@ func validateOpDeleteUserPoolClientInput(v *DeleteUserPoolClientInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteUserPoolClientInput"}
-	if v.ClientId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
-	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3692,11 +3755,11 @@ func validateOpDescribeIdentityProviderInput(v *DescribeIdentityProviderInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeIdentityProviderInput"}
-	if v.ProviderName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProviderName"))
-	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.ProviderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProviderName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3743,11 +3806,11 @@ func validateOpDescribeUserImportJobInput(v *DescribeUserImportJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeUserImportJobInput"}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
-	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3761,11 +3824,11 @@ func validateOpDescribeUserPoolClientInput(v *DescribeUserPoolClientInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeUserPoolClientInput"}
-	if v.ClientId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
-	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3824,11 +3887,11 @@ func validateOpForgotPasswordInput(v *ForgotPasswordInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ForgotPasswordInput"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3890,11 +3953,11 @@ func validateOpGetIdentityProviderByIdentifierInput(v *GetIdentityProviderByIden
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetIdentityProviderByIdentifierInput"}
-	if v.IdpIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdpIdentifier"))
-	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.IdpIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdpIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3938,11 +4001,11 @@ func validateOpGetUserAttributeVerificationCodeInput(v *GetUserAttributeVerifica
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetUserAttributeVerificationCodeInput"}
-	if v.AttributeName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
-	}
 	if v.AccessToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccessToken"))
+	}
+	if v.AttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4169,11 +4232,11 @@ func validateOpResendConfirmationCodeInput(v *ResendConfirmationCodeInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResendConfirmationCodeInput"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4187,11 +4250,11 @@ func validateOpRespondToAuthChallengeInput(v *RespondToAuthChallengeInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RespondToAuthChallengeInput"}
-	if len(v.ChallengeName) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ChallengeName"))
-	}
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if len(v.ChallengeName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ChallengeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4298,6 +4361,12 @@ func validateOpSignUpInput(v *SignUpInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SignUpInput"}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	}
 	if v.Password == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Password"))
 	}
@@ -4306,16 +4375,10 @@ func validateOpSignUpInput(v *SignUpInput) error {
 			invalidParams.AddNested("UserAttributes", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
 	if v.ValidationData != nil {
 		if err := validateAttributeListType(v.ValidationData); err != nil {
 			invalidParams.AddNested("ValidationData", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ClientId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4365,11 +4428,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4383,11 +4446,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4401,6 +4464,12 @@ func validateOpUpdateAuthEventFeedbackInput(v *UpdateAuthEventFeedbackInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAuthEventFeedbackInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	}
 	if v.EventId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventId"))
 	}
@@ -4409,12 +4478,6 @@ func validateOpUpdateAuthEventFeedbackInput(v *UpdateAuthEventFeedbackInput) err
 	}
 	if len(v.FeedbackValue) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("FeedbackValue"))
-	}
-	if v.UserPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
-	}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4428,11 +4491,11 @@ func validateOpUpdateDeviceStatusInput(v *UpdateDeviceStatusInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDeviceStatusInput"}
-	if v.DeviceKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeviceKey"))
-	}
 	if v.AccessToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccessToken"))
+	}
+	if v.DeviceKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4482,19 +4545,19 @@ func validateOpUpdateResourceServerInput(v *UpdateResourceServerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateResourceServerInput"}
-	if v.Scopes != nil {
-		if err := validateResourceServerScopeListType(v.Scopes); err != nil {
-			invalidParams.AddNested("Scopes", err.(smithy.InvalidParamsError))
-		}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
-	if v.UserPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Scopes != nil {
+		if err := validateResourceServerScopeListType(v.Scopes); err != nil {
+			invalidParams.AddNested("Scopes", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4508,15 +4571,15 @@ func validateOpUpdateUserAttributesInput(v *UpdateUserAttributesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserAttributesInput"}
-	if v.AccessToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccessToken"))
-	}
 	if v.UserAttributes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserAttributes"))
 	} else if v.UserAttributes != nil {
 		if err := validateAttributeListType(v.UserAttributes); err != nil {
 			invalidParams.AddNested("UserAttributes", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.AccessToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4548,18 +4611,18 @@ func validateOpUpdateUserPoolDomainInput(v *UpdateUserPoolDomainInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserPoolDomainInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
 	if v.CustomDomainConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CustomDomainConfig"))
 	} else if v.CustomDomainConfig != nil {
 		if err := validateCustomDomainConfigType(v.CustomDomainConfig); err != nil {
 			invalidParams.AddNested("CustomDomainConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
-	}
-	if v.UserPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4573,6 +4636,14 @@ func validateOpUpdateUserPoolInput(v *UpdateUserPoolInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserPoolInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.LambdaConfig != nil {
+		if err := validateLambdaConfigType(v.LambdaConfig); err != nil {
+			invalidParams.AddNested("LambdaConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.SmsConfiguration != nil {
 		if err := validateSmsConfigurationType(v.SmsConfiguration); err != nil {
 			invalidParams.AddNested("SmsConfiguration", err.(smithy.InvalidParamsError))
@@ -4587,9 +4658,6 @@ func validateOpUpdateUserPoolInput(v *UpdateUserPoolInput) error {
 		if err := validateAccountRecoverySettingType(v.AccountRecoverySetting); err != nil {
 			invalidParams.AddNested("AccountRecoverySetting", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.UserPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4621,11 +4689,11 @@ func validateOpVerifyUserAttributeInput(v *VerifyUserAttributeInput) error {
 	if v.AccessToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccessToken"))
 	}
-	if v.Code == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Code"))
-	}
 	if v.AttributeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
+	}
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

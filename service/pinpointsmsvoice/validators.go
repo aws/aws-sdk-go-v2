@@ -149,11 +149,11 @@ func validateOpDeleteConfigurationSetEventDestinationInput(v *DeleteConfiguratio
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteConfigurationSetEventDestinationInput"}
-	if v.EventDestinationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EventDestinationName"))
-	}
 	if v.ConfigurationSetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationSetName"))
+	}
+	if v.EventDestinationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventDestinationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

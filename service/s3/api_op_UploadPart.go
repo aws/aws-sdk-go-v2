@@ -207,6 +207,10 @@ type UploadPartInput struct {
 
 type UploadPartOutput struct {
 
+	// Indicates whether the multipart upload uses an S3 Bucket Key for server-side
+	// encryption with AWS KMS (SSE-KMS).
+	BucketKeyEnabled bool
+
 	// Entity tag for the uploaded object.
 	ETag *string
 

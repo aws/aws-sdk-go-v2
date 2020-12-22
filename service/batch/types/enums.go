@@ -20,6 +20,24 @@ func (ArrayJobDependency) Values() []ArrayJobDependency {
 	}
 }
 
+type AssignPublicIp string
+
+// Enum values for AssignPublicIp
+const (
+	AssignPublicIpEnabled  AssignPublicIp = "ENABLED"
+	AssignPublicIpDisabled AssignPublicIp = "DISABLED"
+)
+
+// Values returns all known values for AssignPublicIp. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssignPublicIp) Values() []AssignPublicIp {
+	return []AssignPublicIp{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type CEState string
 
 // Enum values for CEState
@@ -106,8 +124,10 @@ type CRType string
 
 // Enum values for CRType
 const (
-	CRTypeEc2  CRType = "EC2"
-	CRTypeSpot CRType = "SPOT"
+	CRTypeEc2         CRType = "EC2"
+	CRTypeSpot        CRType = "SPOT"
+	CRTypeFargate     CRType = "FARGATE"
+	CRTypeFargateSpot CRType = "FARGATE_SPOT"
 )
 
 // Values returns all known values for CRType. Note that this can be expanded in
@@ -117,6 +137,8 @@ func (CRType) Values() []CRType {
 	return []CRType{
 		"EC2",
 		"SPOT",
+		"FARGATE",
+		"FARGATE_SPOT",
 	}
 }
 
@@ -258,11 +280,31 @@ func (LogDriver) Values() []LogDriver {
 	}
 }
 
+type PlatformCapability string
+
+// Enum values for PlatformCapability
+const (
+	PlatformCapabilityEc2     PlatformCapability = "EC2"
+	PlatformCapabilityFargate PlatformCapability = "FARGATE"
+)
+
+// Values returns all known values for PlatformCapability. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PlatformCapability) Values() []PlatformCapability {
+	return []PlatformCapability{
+		"EC2",
+		"FARGATE",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeGpu ResourceType = "GPU"
+	ResourceTypeGpu    ResourceType = "GPU"
+	ResourceTypeVcpu   ResourceType = "VCPU"
+	ResourceTypeMemory ResourceType = "MEMORY"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -271,6 +313,8 @@ const (
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"GPU",
+		"VCPU",
+		"MEMORY",
 	}
 }
 

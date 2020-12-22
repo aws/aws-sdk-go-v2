@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/signer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Lists all your signing jobs. You can use the maxResults parameter to limit the
@@ -36,6 +37,12 @@ func (c *Client) ListSigningJobs(ctx context.Context, params *ListSigningJobsInp
 
 type ListSigningJobsInput struct {
 
+	// Filters results to return only signing jobs with revoked signatures.
+	IsRevoked bool
+
+	// Filters results to return only signing jobs initiated by a specified IAM entity.
+	JobInvoker *string
+
 	// Specifies the maximum number of items to return in the response. Use this
 	// parameter when paginating results. If additional items exist beyond the number
 	// you specify, the nextToken element is set in the response. Use the nextToken
@@ -54,6 +61,14 @@ type ListSigningJobsInput struct {
 
 	// The IAM principal that requested the signing job.
 	RequestedBy *string
+
+	// Filters results to return only signing jobs with signatures expiring after a
+	// specified timestamp.
+	SignatureExpiresAfter *time.Time
+
+	// Filters results to return only signing jobs with signatures expiring before a
+	// specified timestamp.
+	SignatureExpiresBefore *time.Time
 
 	// A status value with which to filter your results.
 	Status types.SigningStatus

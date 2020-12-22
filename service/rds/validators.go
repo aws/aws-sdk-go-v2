@@ -650,26 +650,6 @@ func (m *validateOpDeleteDBClusterSnapshot) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpDeleteDBInstanceAutomatedBackup struct {
-}
-
-func (*validateOpDeleteDBInstanceAutomatedBackup) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDeleteDBInstanceAutomatedBackup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DeleteDBInstanceAutomatedBackupInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDeleteDBInstanceAutomatedBackupInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpDeleteDBInstance struct {
 }
 
@@ -2410,6 +2390,26 @@ func (m *validateOpStartDBCluster) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartDBInstanceAutomatedBackupsReplication struct {
+}
+
+func (*validateOpStartDBInstanceAutomatedBackupsReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartDBInstanceAutomatedBackupsReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartDBInstanceAutomatedBackupsReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartDBInstanceAutomatedBackupsReplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartDBInstance struct {
 }
 
@@ -2485,6 +2485,26 @@ func (m *validateOpStopDBCluster) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopDBClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopDBInstanceAutomatedBackupsReplication struct {
+}
+
+func (*validateOpStopDBInstanceAutomatedBackupsReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopDBInstanceAutomatedBackupsReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopDBInstanceAutomatedBackupsReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopDBInstanceAutomatedBackupsReplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2636,10 +2656,6 @@ func addOpDeleteDBClusterParameterGroupValidationMiddleware(stack *middleware.St
 
 func addOpDeleteDBClusterSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDBClusterSnapshot{}, middleware.After)
-}
-
-func addOpDeleteDBInstanceAutomatedBackupValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDeleteDBInstanceAutomatedBackup{}, middleware.After)
 }
 
 func addOpDeleteDBInstanceValidationMiddleware(stack *middleware.Stack) error {
@@ -2990,6 +3006,10 @@ func addOpStartDBClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartDBCluster{}, middleware.After)
 }
 
+func addOpStartDBInstanceAutomatedBackupsReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartDBInstanceAutomatedBackupsReplication{}, middleware.After)
+}
+
 func addOpStartDBInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartDBInstance{}, middleware.After)
 }
@@ -3004,6 +3024,10 @@ func addOpStopActivityStreamValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpStopDBClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopDBCluster{}, middleware.After)
+}
+
+func addOpStopDBInstanceAutomatedBackupsReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopDBInstanceAutomatedBackupsReplication{}, middleware.After)
 }
 
 func addOpStopDBInstanceValidationMiddleware(stack *middleware.Stack) error {
@@ -3666,21 +3690,6 @@ func validateOpDeleteDBClusterSnapshotInput(v *DeleteDBClusterSnapshotInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDBClusterSnapshotInput"}
 	if v.DBClusterSnapshotIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBClusterSnapshotIdentifier"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDeleteDBInstanceAutomatedBackupInput(v *DeleteDBInstanceAutomatedBackupInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DeleteDBInstanceAutomatedBackupInput"}
-	if v.DbiResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DbiResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5209,6 +5218,21 @@ func validateOpStartDBClusterInput(v *StartDBClusterInput) error {
 	}
 }
 
+func validateOpStartDBInstanceAutomatedBackupsReplicationInput(v *StartDBInstanceAutomatedBackupsReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartDBInstanceAutomatedBackupsReplicationInput"}
+	if v.SourceDBInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceDBInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartDBInstanceInput(v *StartDBInstanceInput) error {
 	if v == nil {
 		return nil
@@ -5273,6 +5297,21 @@ func validateOpStopDBClusterInput(v *StopDBClusterInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StopDBClusterInput"}
 	if v.DBClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBClusterIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopDBInstanceAutomatedBackupsReplicationInput(v *StopDBInstanceAutomatedBackupsReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopDBInstanceAutomatedBackupsReplicationInput"}
+	if v.SourceDBInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceDBInstanceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

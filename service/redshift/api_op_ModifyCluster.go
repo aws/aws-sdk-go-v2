@@ -57,6 +57,14 @@ type ModifyClusterInput struct {
 	// value from 0 to 35.
 	AutomatedSnapshotRetentionPeriod *int32
 
+	// The option to initiate relocation for an Amazon Redshift cluster to the target
+	// Availability Zone.
+	AvailabilityZone *string
+
+	// The option to enable relocation for an Amazon Redshift cluster between
+	// Availability Zones after the cluster modification is complete.
+	AvailabilityZoneRelocation *bool
+
 	// The name of the cluster parameter group to apply to this cluster. This change is
 	// applied only after the cluster is rebooted. To reboot a cluster use
 	// RebootCluster. Default: Uses existing setting. Constraints: The cluster
@@ -192,8 +200,8 @@ type ModifyClusterInput struct {
 	// clusters, go to Resizing Clusters in Amazon Redshift
 	// (https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html) in
 	// the Amazon Redshift Cluster Management Guide. Valid Values: ds2.xlarge |
-	// ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.4xlarge |
-	// ra3.16xlarge
+	// ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.xlplus |
+	// ra3.4xlarge | ra3.16xlarge
 	NodeType *string
 
 	// The new number of nodes of the cluster. If you specify a new number of nodes,
@@ -203,6 +211,9 @@ type ModifyClusterInput struct {
 	// the Amazon Redshift Cluster Management Guide. Valid Values: Integer greater than
 	// 0.
 	NumberOfNodes *int32
+
+	// The option to change the port of an Amazon Redshift cluster.
+	Port *int32
 
 	// The weekly time range (in UTC) during which system maintenance can occur, if
 	// necessary. If system maintenance is necessary during the window, it may result

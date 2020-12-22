@@ -370,6 +370,26 @@ func (m *validateOpDescribeTestCases) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetReportGroupTrend struct {
+}
+
+func (*validateOpGetReportGroupTrend) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetReportGroupTrend) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetReportGroupTrendInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetReportGroupTrendInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetResourcePolicy struct {
 }
 
@@ -700,6 +720,10 @@ func addOpDescribeCodeCoveragesValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDescribeTestCasesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTestCases{}, middleware.After)
+}
+
+func addOpGetReportGroupTrendValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetReportGroupTrend{}, middleware.After)
 }
 
 func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -1418,6 +1442,24 @@ func validateOpDescribeTestCasesInput(v *DescribeTestCasesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeTestCasesInput"}
 	if v.ReportArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReportArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetReportGroupTrendInput(v *GetReportGroupTrendInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetReportGroupTrendInput"}
+	if v.ReportGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportGroupArn"))
+	}
+	if len(v.TrendField) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TrendField"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

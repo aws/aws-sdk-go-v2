@@ -45,7 +45,7 @@ type ListDistributionsByRealtimeLogConfigInput struct {
 	Marker *string
 
 	// The maximum number of distributions that you want in the response.
-	MaxItems *string
+	MaxItems *int32
 
 	// The Amazon Resource Name (ARN) of the real-time log configuration whose
 	// associated distributions you want to list.

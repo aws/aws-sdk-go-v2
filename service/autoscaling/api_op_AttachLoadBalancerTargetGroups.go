@@ -10,15 +10,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches one or more target groups to the specified Auto Scaling group. To
-// describe the target groups for an Auto Scaling group, call the
-// DescribeLoadBalancerTargetGroups API. To detach the target group from the Auto
-// Scaling group, call the DetachLoadBalancerTargetGroups API. With Application
-// Load Balancers and Network Load Balancers, instances are registered as targets
-// with a target group. With Classic Load Balancers, instances are registered with
-// the load balancer. For more information, see Attaching a load balancer to your
-// Auto Scaling group
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html)
+// Attaches one or more target groups to the specified Auto Scaling group. This
+// operation is used with the following load balancer types:
+//
+// * Application Load
+// Balancer - Operates at the application layer (layer 7) and supports HTTP and
+// HTTPS.
+//
+// * Network Load Balancer - Operates at the transport layer (layer 4) and
+// supports TCP, TLS, and UDP.
+//
+// * Gateway Load Balancer - Operates at the network
+// layer (layer 3).
+//
+// To describe the target groups for an Auto Scaling group, call
+// the DescribeLoadBalancerTargetGroups API. To detach the target group from the
+// Auto Scaling group, call the DetachLoadBalancerTargetGroups API. For more
+// information, see Elastic Load Balancing and Amazon EC2 Auto Scaling
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) AttachLoadBalancerTargetGroups(ctx context.Context, params *AttachLoadBalancerTargetGroupsInput, optFns ...func(*Options)) (*AttachLoadBalancerTargetGroupsOutput, error) {
 	if params == nil {
@@ -43,7 +52,10 @@ type AttachLoadBalancerTargetGroupsInput struct {
 	AutoScalingGroupName *string
 
 	// The Amazon Resource Names (ARN) of the target groups. You can specify up to 10
-	// target groups.
+	// target groups. To get the ARN of a target group, use the Elastic Load Balancing
+	// DescribeTargetGroups
+	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
+	// API operation.
 	//
 	// This member is required.
 	TargetGroupARNs []string

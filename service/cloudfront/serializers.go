@@ -3300,7 +3300,7 @@ func awsRestxml_serializeOpHttpBindingsListCachePoliciesInput(v *ListCachePolici
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("MaxItems").String(*v.MaxItems)
+		encoder.SetQuery("MaxItems").Integer(*v.MaxItems)
 	}
 
 	if len(v.Type) > 0 {
@@ -3366,7 +3366,7 @@ func awsRestxml_serializeOpHttpBindingsListCloudFrontOriginAccessIdentitiesInput
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("MaxItems").String(*v.MaxItems)
+		encoder.SetQuery("MaxItems").Integer(*v.MaxItems)
 	}
 
 	return nil
@@ -3428,7 +3428,7 @@ func awsRestxml_serializeOpHttpBindingsListDistributionsInput(v *ListDistributio
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("MaxItems").String(*v.MaxItems)
+		encoder.SetQuery("MaxItems").Integer(*v.MaxItems)
 	}
 
 	return nil
@@ -3499,7 +3499,7 @@ func awsRestxml_serializeOpHttpBindingsListDistributionsByCachePolicyIdInput(v *
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("MaxItems").String(*v.MaxItems)
+		encoder.SetQuery("MaxItems").Integer(*v.MaxItems)
 	}
 
 	return nil
@@ -3570,7 +3570,7 @@ func awsRestxml_serializeOpHttpBindingsListDistributionsByKeyGroupInput(v *ListD
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("MaxItems").String(*v.MaxItems)
+		encoder.SetQuery("MaxItems").Integer(*v.MaxItems)
 	}
 
 	return nil
@@ -3632,7 +3632,7 @@ func awsRestxml_serializeOpHttpBindingsListDistributionsByOriginRequestPolicyIdI
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("MaxItems").String(*v.MaxItems)
+		encoder.SetQuery("MaxItems").Integer(*v.MaxItems)
 	}
 
 	if v.OriginRequestPolicyId == nil || len(*v.OriginRequestPolicyId) == 0 {
@@ -3737,7 +3737,7 @@ func awsRestxml_serializeOpDocumentListDistributionsByRealtimeLogConfigInput(v *
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.String(*v.MaxItems)
+		el.Integer(*v.MaxItems)
 	}
 	if v.RealtimeLogConfigArn != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -3820,7 +3820,7 @@ func awsRestxml_serializeOpHttpBindingsListDistributionsByWebACLIdInput(v *ListD
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("MaxItems").String(*v.MaxItems)
+		encoder.SetQuery("MaxItems").Integer(*v.MaxItems)
 	}
 
 	if v.WebACLId == nil || len(*v.WebACLId) == 0 {
@@ -3891,7 +3891,7 @@ func awsRestxml_serializeOpHttpBindingsListFieldLevelEncryptionConfigsInput(v *L
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("MaxItems").String(*v.MaxItems)
+		encoder.SetQuery("MaxItems").Integer(*v.MaxItems)
 	}
 
 	return nil
@@ -3953,7 +3953,7 @@ func awsRestxml_serializeOpHttpBindingsListFieldLevelEncryptionProfilesInput(v *
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("MaxItems").String(*v.MaxItems)
+		encoder.SetQuery("MaxItems").Integer(*v.MaxItems)
 	}
 
 	return nil
@@ -4024,7 +4024,7 @@ func awsRestxml_serializeOpHttpBindingsListInvalidationsInput(v *ListInvalidatio
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("MaxItems").String(*v.MaxItems)
+		encoder.SetQuery("MaxItems").Integer(*v.MaxItems)
 	}
 
 	return nil
@@ -4086,7 +4086,7 @@ func awsRestxml_serializeOpHttpBindingsListKeyGroupsInput(v *ListKeyGroupsInput,
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("MaxItems").String(*v.MaxItems)
+		encoder.SetQuery("MaxItems").Integer(*v.MaxItems)
 	}
 
 	return nil
@@ -4148,7 +4148,7 @@ func awsRestxml_serializeOpHttpBindingsListOriginRequestPoliciesInput(v *ListOri
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("MaxItems").String(*v.MaxItems)
+		encoder.SetQuery("MaxItems").Integer(*v.MaxItems)
 	}
 
 	if len(v.Type) > 0 {
@@ -4214,7 +4214,7 @@ func awsRestxml_serializeOpHttpBindingsListPublicKeysInput(v *ListPublicKeysInpu
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("MaxItems").String(*v.MaxItems)
+		encoder.SetQuery("MaxItems").Integer(*v.MaxItems)
 	}
 
 	return nil
@@ -4276,7 +4276,7 @@ func awsRestxml_serializeOpHttpBindingsListRealtimeLogConfigsInput(v *ListRealti
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("MaxItems").String(*v.MaxItems)
+		encoder.SetQuery("MaxItems").Integer(*v.MaxItems)
 	}
 
 	return nil
@@ -4338,7 +4338,7 @@ func awsRestxml_serializeOpHttpBindingsListStreamingDistributionsInput(v *ListSt
 	}
 
 	if v.MaxItems != nil {
-		encoder.SetQuery("MaxItems").String(*v.MaxItems)
+		encoder.SetQuery("MaxItems").Integer(*v.MaxItems)
 	}
 
 	return nil

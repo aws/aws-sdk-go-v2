@@ -37,9 +37,9 @@ type Dimension struct {
 
 	// Dimension represents the meta data attributes of the time series. For example,
 	// the name and availability zone of an EC2 instance or the name of the
-	// manufacturer of a wind turbine are dimensions. Dimension names can only contain
-	// alphanumeric characters and underscores. Dimension names cannot end with an
-	// underscore.
+	// manufacturer of a wind turbine are dimensions. For constraints on Dimension
+	// names, see Naming Constraints
+	// (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.naming).
 	//
 	// This member is required.
 	Name *string
@@ -93,17 +93,31 @@ type Record struct {
 	MeasureValueType MeasureValueType
 
 	// Contains the time at which the measure value for the data point was collected.
+	// The time value plus the unit provides the time elapsed since the epoch. For
+	// example, if the time value is 12345 and the unit is ms, then 12345 ms have
+	// elapsed since the epoch.
 	Time *string
 
 	// The granularity of the timestamp unit. It indicates if the time value is in
 	// seconds, milliseconds, nanoseconds or other supported values.
 	TimeUnit TimeUnit
+
+	// 64-bit attribute used for record updates. Write requests for duplicate data with
+	// a higher version number will update the existing measure value and version. In
+	// cases where the measure value is the same, Version will still be updated .
+	// Default value is to 1.
+	Version int64
 }
 
 // Records that were not successfully inserted into Timestream due to data
 // validation issues that must be resolved prior to reinserting time series data
 // into the system.
 type RejectedRecord struct {
+
+	// The existing version of the record. This value is populated in scenarios where
+	// an identical record exists with a higher version than the version in the write
+	// request.
+	ExistingVersion int64
 
 	// The reason why a record was not successfully inserted into Timestream. Possible
 	// causes of failure include:
@@ -113,13 +127,20 @@ type RejectedRecord struct {
 	// different measure values.
 	//
 	// * Records with timestamps that lie outside the
-	// retention duration of the memory store
+	// retention duration of the memory store When the retention window is updated, you
+	// will receive a RejectedRecords exception if you immediately try to ingest data
+	// within the new window. To avoid a RejectedRecords exception, wait until the
+	// duration of the new window to ingest new data. For further information, see
+	// Best Practices for Configuring Timestream
+	// (https://docs.aws.amazon.com/timestream/latest/developerguide/best-practices.html#configuration)
+	// and the explanation of how storage works in Timestream
+	// (https://docs.aws.amazon.com/timestream/latest/developerguide/storage.html).
 	//
-	// * Records with dimensions or measures
-	// that exceed the Timestream defined limits.
+	// *
+	// Records with dimensions or measures that exceed the Timestream defined
+	// limits.
 	//
-	// For more information, see Access
-	// Management
+	// For more information, see Access Management
 	// (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html) in
 	// the Timestream Developer Guide.
 	Reason *string

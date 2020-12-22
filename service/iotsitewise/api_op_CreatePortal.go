@@ -73,12 +73,11 @@ type CreatePortalInput struct {
 	// other than the China Regions.
 	//
 	// * IAM – The portal uses AWS Identity and Access
-	// Management (IAM) to authenticate users and manage user permissions. IAM users
-	// must have the iotsitewise:CreatePresignedPortalUrl permission to sign in to the
-	// portal. This option is only available in the China Regions.
+	// Management (IAM) to authenticate users and manage user permissions. This option
+	// is only available in the China Regions.
 	//
-	// You can't change
-	// this value after you create a portal. Default: SSO
+	// You can't change this value after you
+	// create a portal. Default: SSO
 	PortalAuthMode types.AuthMode
 
 	// A description for the portal.
@@ -112,9 +111,7 @@ type CreatePortalOutput struct {
 
 	// The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access
 	// portals that use AWS SSO for authentication. For portals that use IAM for
-	// authentication, you must use the CreatePresignedPortalUrl
-	// (https://docs.aws.amazon.com/AWS IoT SiteWise API
-	// ReferenceAPI_CreatePresignedPortalUrl.html) operation to create a URL that you
+	// authentication, you must use the AWS IoT SiteWise console to get a URL that you
 	// can use to access the portal.
 	//
 	// This member is required.

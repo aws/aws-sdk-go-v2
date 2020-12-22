@@ -480,11 +480,11 @@ func validateGitHubCodeDestination(v *types.GitHubCodeDestination) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.Owner == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Owner"))
-	}
 	if v.Type == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Owner == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Owner"))
 	}
 	if v.Token == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Token"))
@@ -552,14 +552,14 @@ func validateOpAssociateTeamMemberInput(v *AssociateTeamMemberInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateTeamMemberInput"}
-	if v.ProjectRole == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectRole"))
-	}
 	if v.ProjectId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectId"))
 	}
 	if v.UserArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserArn"))
+	}
+	if v.ProjectRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectRole"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -573,20 +573,20 @@ func validateOpCreateProjectInput(v *CreateProjectInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateProjectInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.Toolchain != nil {
-		if err := validateToolchain(v.Toolchain); err != nil {
-			invalidParams.AddNested("Toolchain", err.(smithy.InvalidParamsError))
-		}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if v.SourceCode != nil {
 		if err := validateSourceCode(v.SourceCode); err != nil {
 			invalidParams.AddNested("SourceCode", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Toolchain != nil {
+		if err := validateToolchain(v.Toolchain); err != nil {
+			invalidParams.AddNested("Toolchain", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -601,11 +601,11 @@ func validateOpCreateUserProfileInput(v *CreateUserProfileInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateUserProfileInput"}
-	if v.DisplayName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
-	}
 	if v.UserArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserArn"))
+	}
+	if v.DisplayName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
 	}
 	if v.EmailAddress == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EmailAddress"))
@@ -682,11 +682,11 @@ func validateOpDisassociateTeamMemberInput(v *DisassociateTeamMemberInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateTeamMemberInput"}
-	if v.UserArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserArn"))
-	}
 	if v.ProjectId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectId"))
+	}
+	if v.UserArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -796,11 +796,11 @@ func validateOpUpdateTeamMemberInput(v *UpdateTeamMemberInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTeamMemberInput"}
-	if v.UserArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserArn"))
-	}
 	if v.ProjectId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectId"))
+	}
+	if v.UserArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

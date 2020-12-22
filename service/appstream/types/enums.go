@@ -327,13 +327,6 @@ func (Permission) Values() []Permission {
 
 type PlatformType string
 
-// Enum values for PlatformType
-const (
-	PlatformTypeWindows           PlatformType = "WINDOWS"
-	PlatformTypeWindowsServer2016 PlatformType = "WINDOWS_SERVER_2016"
-	PlatformTypeWindowsServer2019 PlatformType = "WINDOWS_SERVER_2019"
-)
-
 // Values returns all known values for PlatformType. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
 // this slice is not guaranteed to be stable across updates.

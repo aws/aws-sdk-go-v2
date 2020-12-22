@@ -12,19 +12,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This implementation of the PUT operation uses the encryption subresource to set
-// the default encryption state of an existing bucket. This implementation of the
-// PUT operation sets default encryption for a bucket using server-side encryption
-// with Amazon S3-managed keys SSE-S3 or AWS KMS customer master keys (CMKs)
-// (SSE-KMS). For information about the Amazon S3 default encryption feature, see
-// Amazon S3 Default Bucket Encryption
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html). This
-// operation requires AWS Signature Version 4. For more information, see
-// Authenticating Requests (AWS Signature Version 4). To use this operation, you
-// must have permissions to perform the s3:PutEncryptionConfiguration action. The
-// bucket owner has this permission by default. The bucket owner can grant this
-// permission to others. For more information about permissions, see Permissions
-// Related to Bucket Subresource Operations
+// This operation uses the encryption subresource to configure default encryption
+// and Amazon S3 Bucket Key for an existing bucket. Default encryption for a bucket
+// can use server-side encryption with Amazon S3-managed keys (SSE-S3) or AWS KMS
+// customer master keys (SSE-KMS). If you specify default encryption using SSE-KMS,
+// you can also configure Amazon S3 Bucket Key. For information about default
+// encryption, see Amazon S3 default bucket encryption
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html) in the
+// Amazon Simple Storage Service Developer Guide. For more information about S3
+// Bucket Keys, see Amazon S3 Bucket Keys
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in the Amazon
+// Simple Storage Service Developer Guide. This operation requires AWS Signature
+// Version 4. For more information, see  Authenticating Requests (AWS Signature
+// Version 4). To use this operation, you must have permissions to perform the
+// s3:PutEncryptionConfiguration action. The bucket owner has this permission by
+// default. The bucket owner can grant this permission to others. For more
+// information about permissions, see Permissions Related to Bucket Subresource
+// Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html) in the
@@ -70,11 +74,8 @@ type PutBucketEncryptionInput struct {
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
 	// The base64-encoded 128-bit MD5 digest of the server-side encryption
-	// configuration. This parameter is auto-populated when using the command from the
-	// CLI.
-	//
-	// Deprecated: Content-MD5 header will now be automatically computed and injected
-	// in associated operation's Http request.
+	// configuration. For requests made using the AWS Command Line Interface (CLI) or
+	// AWS SDKs, this field is calculated automatically.
 	ContentMD5 *string
 
 	// The account id of the expected bucket owner. If the bucket is owned by a

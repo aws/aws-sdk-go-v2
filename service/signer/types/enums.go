@@ -4,11 +4,6 @@ package types
 
 type Category string
 
-// Enum values for Category
-const (
-	CategoryAwsiot Category = "AWSIoT"
-)
-
 // Values returns all known values for Category. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
@@ -19,12 +14,6 @@ func (Category) Values() []Category {
 }
 
 type EncryptionAlgorithm string
-
-// Enum values for EncryptionAlgorithm
-const (
-	EncryptionAlgorithmRsa   EncryptionAlgorithm = "RSA"
-	EncryptionAlgorithmEcdsa EncryptionAlgorithm = "ECDSA"
-)
 
 // Values returns all known values for EncryptionAlgorithm. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -38,12 +27,6 @@ func (EncryptionAlgorithm) Values() []EncryptionAlgorithm {
 
 type HashAlgorithm string
 
-// Enum values for HashAlgorithm
-const (
-	HashAlgorithmSha1   HashAlgorithm = "SHA1"
-	HashAlgorithmSha256 HashAlgorithm = "SHA256"
-)
-
 // Values returns all known values for HashAlgorithm. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -55,13 +38,6 @@ func (HashAlgorithm) Values() []HashAlgorithm {
 }
 
 type ImageFormat string
-
-// Enum values for ImageFormat
-const (
-	ImageFormatJson         ImageFormat = "JSON"
-	ImageFormatJsonembedded ImageFormat = "JSONEmbedded"
-	ImageFormatJsondetached ImageFormat = "JSONDetached"
-)
 
 // Values returns all known values for ImageFormat. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
@@ -76,12 +52,6 @@ func (ImageFormat) Values() []ImageFormat {
 
 type SigningProfileStatus string
 
-// Enum values for SigningProfileStatus
-const (
-	SigningProfileStatusActive   SigningProfileStatus = "Active"
-	SigningProfileStatusCanceled SigningProfileStatus = "Canceled"
-)
-
 // Values returns all known values for SigningProfileStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -89,17 +59,11 @@ func (SigningProfileStatus) Values() []SigningProfileStatus {
 	return []SigningProfileStatus{
 		"Active",
 		"Canceled",
+		"Revoked",
 	}
 }
 
 type SigningStatus string
-
-// Enum values for SigningStatus
-const (
-	SigningStatusInprogress SigningStatus = "InProgress"
-	SigningStatusFailed     SigningStatus = "Failed"
-	SigningStatusSucceeded  SigningStatus = "Succeeded"
-)
 
 // Values returns all known values for SigningStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -109,5 +73,18 @@ func (SigningStatus) Values() []SigningStatus {
 		"InProgress",
 		"Failed",
 		"Succeeded",
+	}
+}
+
+type ValidityType string
+
+// Values returns all known values for ValidityType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ValidityType) Values() []ValidityType {
+	return []ValidityType{
+		"DAYS",
+		"MONTHS",
+		"YEARS",
 	}
 }

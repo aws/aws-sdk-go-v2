@@ -12,8 +12,8 @@ import (
 )
 
 // Returns the enrollment (opt in) status of an account to the AWS Compute
-// Optimizer service. If the account is the master account of an organization, this
-// action also confirms the enrollment status of member accounts within the
+// Optimizer service. If the account is the management account of an organization,
+// this action also confirms the enrollment status of member accounts within the
 // organization.
 func (c *Client) GetEnrollmentStatus(ctx context.Context, params *GetEnrollmentStatusInput, optFns ...func(*Options)) (*GetEnrollmentStatusOutput, error) {
 	if params == nil {
@@ -36,7 +36,7 @@ type GetEnrollmentStatusInput struct {
 type GetEnrollmentStatusOutput struct {
 
 	// Confirms the enrollment status of member accounts within the organization, if
-	// the account is a master account of an organization.
+	// the account is a management account of an organization.
 	MemberAccountsEnrolled bool
 
 	// The enrollment status of the account.

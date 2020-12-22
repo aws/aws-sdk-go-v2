@@ -70,6 +70,9 @@ type ListTypesInput struct {
 	// delete handlers, and therefore cannot actually be provisioned.
 	ProvisioningType types.ProvisioningType
 
+	// The type of extension.
+	Type types.RegistryType
+
 	// The scope at which the type is visible and usable in CloudFormation operations.
 	// Valid values include:
 	//

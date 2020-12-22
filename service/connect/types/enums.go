@@ -8,6 +8,7 @@ type Channel string
 const (
 	ChannelVoice Channel = "VOICE"
 	ChannelChat  Channel = "CHAT"
+	ChannelTask  Channel = "TASK"
 )
 
 // Values returns all known values for Channel. Note that this can be expanded in
@@ -17,6 +18,7 @@ func (Channel) Values() []Channel {
 	return []Channel{
 		"VOICE",
 		"CHAT",
+		"TASK",
 	}
 }
 
@@ -297,6 +299,22 @@ func (InstanceStorageResourceType) Values() []InstanceStorageResourceType {
 		"MEDIA_STREAMS",
 		"CONTACT_TRACE_RECORDS",
 		"AGENT_EVENTS",
+	}
+}
+
+type IntegrationType string
+
+// Enum values for IntegrationType
+const (
+	IntegrationTypeEvent IntegrationType = "EVENT"
+)
+
+// Values returns all known values for IntegrationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IntegrationType) Values() []IntegrationType {
+	return []IntegrationType{
+		"EVENT",
 	}
 }
 
@@ -842,6 +860,22 @@ func (QueueType) Values() []QueueType {
 	}
 }
 
+type ReferenceType string
+
+// Enum values for ReferenceType
+const (
+	ReferenceTypeUrl ReferenceType = "URL"
+)
+
+// Values returns all known values for ReferenceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReferenceType) Values() []ReferenceType {
+	return []ReferenceType{
+		"URL",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -867,6 +901,24 @@ func (ResourceType) Values() []ResourceType {
 		"HIERARCHY_LEVEL",
 		"HIERARCHY_GROUP",
 		"USER",
+	}
+}
+
+type SourceType string
+
+// Enum values for SourceType
+const (
+	SourceTypeSalesforce SourceType = "SALESFORCE"
+	SourceTypeZendesk    SourceType = "ZENDESK"
+)
+
+// Values returns all known values for SourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SourceType) Values() []SourceType {
+	return []SourceType{
+		"SALESFORCE",
+		"ZENDESK",
 	}
 }
 
@@ -929,6 +981,22 @@ func (Unit) Values() []Unit {
 		"SECONDS",
 		"COUNT",
 		"PERCENT",
+	}
+}
+
+type UseCaseType string
+
+// Enum values for UseCaseType
+const (
+	UseCaseTypeRulesEvaluation UseCaseType = "RULES_EVALUATION"
+)
+
+// Values returns all known values for UseCaseType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (UseCaseType) Values() []UseCaseType {
+	return []UseCaseType{
+		"RULES_EVALUATION",
 	}
 }
 

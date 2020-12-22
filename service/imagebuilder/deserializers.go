@@ -8484,7 +8484,7 @@ func awsRestjson1_deserializeDocumentComponent(v **types.Component, value interf
 				if !ok {
 					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.Encrypted = ptr.Bool(jtv)
+				sv.Encrypted = jtv
 			}
 
 		case "kmsKeyId":
@@ -9069,7 +9069,7 @@ func awsRestjson1_deserializeDocumentDistributionConfiguration(v **types.Distrib
 				if err != nil {
 					return err
 				}
-				sv.TimeoutMinutes = ptr.Int32(int32(i64))
+				sv.TimeoutMinutes = int32(i64)
 			}
 
 		default:
@@ -9258,7 +9258,7 @@ func awsRestjson1_deserializeDocumentEbsInstanceBlockDeviceSpecification(v **typ
 				if !ok {
 					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.DeleteOnTermination = ptr.Bool(jtv)
+				sv.DeleteOnTermination = jtv
 			}
 
 		case "encrypted":
@@ -9267,7 +9267,7 @@ func awsRestjson1_deserializeDocumentEbsInstanceBlockDeviceSpecification(v **typ
 				if !ok {
 					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.Encrypted = ptr.Bool(jtv)
+				sv.Encrypted = jtv
 			}
 
 		case "iops":
@@ -9280,7 +9280,7 @@ func awsRestjson1_deserializeDocumentEbsInstanceBlockDeviceSpecification(v **typ
 				if err != nil {
 					return err
 				}
-				sv.Iops = ptr.Int32(int32(i64))
+				sv.Iops = int32(i64)
 			}
 
 		case "kmsKeyId":
@@ -9311,7 +9311,7 @@ func awsRestjson1_deserializeDocumentEbsInstanceBlockDeviceSpecification(v **typ
 				if err != nil {
 					return err
 				}
-				sv.VolumeSize = ptr.Int32(int32(i64))
+				sv.VolumeSize = int32(i64)
 			}
 
 		case "volumeType":
@@ -9463,7 +9463,7 @@ func awsRestjson1_deserializeDocumentImage(v **types.Image, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnhancedImageMetadataEnabled = ptr.Bool(jtv)
+				sv.EnhancedImageMetadataEnabled = jtv
 			}
 
 		case "imageRecipe":
@@ -9650,7 +9650,7 @@ func awsRestjson1_deserializeDocumentImagePipeline(v **types.ImagePipeline, valu
 				if !ok {
 					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnhancedImageMetadataEnabled = ptr.Bool(jtv)
+				sv.EnhancedImageMetadataEnabled = jtv
 			}
 
 		case "imageRecipeArn":
@@ -10227,7 +10227,7 @@ func awsRestjson1_deserializeDocumentImageTestsConfiguration(v **types.ImageTest
 				if !ok {
 					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.ImageTestsEnabled = ptr.Bool(jtv)
+				sv.ImageTestsEnabled = jtv
 			}
 
 		case "timeoutMinutes":
@@ -10240,7 +10240,7 @@ func awsRestjson1_deserializeDocumentImageTestsConfiguration(v **types.ImageTest
 				if err != nil {
 					return err
 				}
-				sv.TimeoutMinutes = ptr.Int32(int32(i64))
+				sv.TimeoutMinutes = int32(i64)
 			}
 
 		default:
@@ -10514,7 +10514,7 @@ func awsRestjson1_deserializeDocumentInfrastructureConfiguration(v **types.Infra
 				if !ok {
 					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.TerminateInstanceOnFailure = ptr.Bool(jtv)
+				sv.TerminateInstanceOnFailure = jtv
 			}
 
 		default:

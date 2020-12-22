@@ -116,11 +116,11 @@ func validateOpGetShardIteratorInput(v *GetShardIteratorInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetShardIteratorInput"}
-	if v.ShardId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ShardId"))
-	}
 	if v.StreamArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StreamArn"))
+	}
+	if v.ShardId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ShardId"))
 	}
 	if len(v.ShardIteratorType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ShardIteratorType"))

@@ -12,7 +12,8 @@ import (
 )
 
 // Provides the details for the Security Hub master account for the current member
-// account.
+// account. Can be used by both member accounts that are in an organization and
+// accounts that were invited manually.
 func (c *Client) GetMasterAccount(ctx context.Context, params *GetMasterAccountInput, optFns ...func(*Options)) (*GetMasterAccountOutput, error) {
 	if params == nil {
 		params = &GetMasterAccountInput{}

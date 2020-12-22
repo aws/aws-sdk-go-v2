@@ -2921,24 +2921,27 @@ func awsRestjson1_serializeDocumentDatastoreActivity(v *types.DatastoreActivity,
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDatastoreStorage(v *types.DatastoreStorage, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentDatastoreStorage(v types.DatastoreStorage, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	if v.CustomerManagedS3 != nil {
-		ok := object.Key("customerManagedS3")
-		if err := awsRestjson1_serializeDocumentCustomerManagedDatastoreS3Storage(v.CustomerManagedS3, ok); err != nil {
+	switch uv := v.(type) {
+	case *types.DatastoreStorageMemberCustomerManagedS3:
+		av := object.Key("customerManagedS3")
+		if err := awsRestjson1_serializeDocumentCustomerManagedDatastoreS3Storage(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.ServiceManagedS3 != nil {
-		ok := object.Key("serviceManagedS3")
-		if err := awsRestjson1_serializeDocumentServiceManagedDatastoreS3Storage(v.ServiceManagedS3, ok); err != nil {
+	case *types.DatastoreStorageMemberServiceManagedS3:
+		av := object.Key("serviceManagedS3")
+		if err := awsRestjson1_serializeDocumentServiceManagedDatastoreS3Storage(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 

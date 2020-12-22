@@ -391,9 +391,9 @@ func awsRestjson1_serializeOpDocumentCreateImageInput(v *CreateImageInput, value
 		ok.String(*v.DistributionConfigurationArn)
 	}
 
-	if v.EnhancedImageMetadataEnabled != nil {
+	if v.EnhancedImageMetadataEnabled {
 		ok := object.Key("enhancedImageMetadataEnabled")
-		ok.Boolean(*v.EnhancedImageMetadataEnabled)
+		ok.Boolean(v.EnhancedImageMetadataEnabled)
 	}
 
 	if v.ImageRecipeArn != nil {
@@ -503,9 +503,9 @@ func awsRestjson1_serializeOpDocumentCreateImagePipelineInput(v *CreateImagePipe
 		ok.String(*v.DistributionConfigurationArn)
 	}
 
-	if v.EnhancedImageMetadataEnabled != nil {
+	if v.EnhancedImageMetadataEnabled {
 		ok := object.Key("enhancedImageMetadataEnabled")
-		ok.Boolean(*v.EnhancedImageMetadataEnabled)
+		ok.Boolean(v.EnhancedImageMetadataEnabled)
 	}
 
 	if v.ImageRecipeArn != nil {
@@ -806,9 +806,9 @@ func awsRestjson1_serializeOpDocumentCreateInfrastructureConfigurationInput(v *C
 		}
 	}
 
-	if v.TerminateInstanceOnFailure != nil {
+	if v.TerminateInstanceOnFailure {
 		ok := object.Key("terminateInstanceOnFailure")
-		ok.Boolean(*v.TerminateInstanceOnFailure)
+		ok.Boolean(v.TerminateInstanceOnFailure)
 	}
 
 	return nil
@@ -3304,9 +3304,9 @@ func awsRestjson1_serializeOpDocumentUpdateImagePipelineInput(v *UpdateImagePipe
 		ok.String(*v.DistributionConfigurationArn)
 	}
 
-	if v.EnhancedImageMetadataEnabled != nil {
+	if v.EnhancedImageMetadataEnabled {
 		ok := object.Key("enhancedImageMetadataEnabled")
-		ok.Boolean(*v.EnhancedImageMetadataEnabled)
+		ok.Boolean(v.EnhancedImageMetadataEnabled)
 	}
 
 	if v.ImagePipelineArn != nil {
@@ -3474,9 +3474,9 @@ func awsRestjson1_serializeOpDocumentUpdateInfrastructureConfigurationInput(v *U
 		ok.String(*v.SubnetId)
 	}
 
-	if v.TerminateInstanceOnFailure != nil {
+	if v.TerminateInstanceOnFailure {
 		ok := object.Key("terminateInstanceOnFailure")
-		ok.Boolean(*v.TerminateInstanceOnFailure)
+		ok.Boolean(v.TerminateInstanceOnFailure)
 	}
 
 	return nil
@@ -3604,19 +3604,19 @@ func awsRestjson1_serializeDocumentEbsInstanceBlockDeviceSpecification(v *types.
 	object := value.Object()
 	defer object.Close()
 
-	if v.DeleteOnTermination != nil {
+	if v.DeleteOnTermination {
 		ok := object.Key("deleteOnTermination")
-		ok.Boolean(*v.DeleteOnTermination)
+		ok.Boolean(v.DeleteOnTermination)
 	}
 
-	if v.Encrypted != nil {
+	if v.Encrypted {
 		ok := object.Key("encrypted")
-		ok.Boolean(*v.Encrypted)
+		ok.Boolean(v.Encrypted)
 	}
 
-	if v.Iops != nil {
+	if v.Iops != 0 {
 		ok := object.Key("iops")
-		ok.Integer(*v.Iops)
+		ok.Integer(v.Iops)
 	}
 
 	if v.KmsKeyId != nil {
@@ -3629,9 +3629,9 @@ func awsRestjson1_serializeDocumentEbsInstanceBlockDeviceSpecification(v *types.
 		ok.String(*v.SnapshotId)
 	}
 
-	if v.VolumeSize != nil {
+	if v.VolumeSize != 0 {
 		ok := object.Key("volumeSize")
-		ok.Integer(*v.VolumeSize)
+		ok.Integer(v.VolumeSize)
 	}
 
 	if len(v.VolumeType) > 0 {
@@ -3689,14 +3689,14 @@ func awsRestjson1_serializeDocumentImageTestsConfiguration(v *types.ImageTestsCo
 	object := value.Object()
 	defer object.Close()
 
-	if v.ImageTestsEnabled != nil {
+	if v.ImageTestsEnabled {
 		ok := object.Key("imageTestsEnabled")
-		ok.Boolean(*v.ImageTestsEnabled)
+		ok.Boolean(v.ImageTestsEnabled)
 	}
 
-	if v.TimeoutMinutes != nil {
+	if v.TimeoutMinutes != 0 {
 		ok := object.Key("timeoutMinutes")
-		ok.Integer(*v.TimeoutMinutes)
+		ok.Integer(v.TimeoutMinutes)
 	}
 
 	return nil

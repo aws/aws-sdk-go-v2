@@ -186,9 +186,6 @@ func validateCrossRegionCopyRule(v *types.CrossRegionCopyRule) error {
 	if v.TargetRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetRegion"))
 	}
-	if v.Encrypted == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Encrypted"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -233,14 +230,14 @@ func validatePolicyDetails(v *types.PolicyDetails) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PolicyDetails"}
-	if v.Schedules != nil {
-		if err := validateScheduleList(v.Schedules); err != nil {
-			invalidParams.AddNested("Schedules", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.TargetTags != nil {
 		if err := validateTargetTagList(v.TargetTags); err != nil {
 			invalidParams.AddNested("TargetTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Schedules != nil {
+		if err := validateScheduleList(v.Schedules); err != nil {
+			invalidParams.AddNested("Schedules", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -255,11 +252,6 @@ func validateSchedule(v *types.Schedule) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Schedule"}
-	if v.CrossRegionCopyRules != nil {
-		if err := validateCrossRegionCopyRules(v.CrossRegionCopyRules); err != nil {
-			invalidParams.AddNested("CrossRegionCopyRules", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.TagsToAdd != nil {
 		if err := validateTagsToAddList(v.TagsToAdd); err != nil {
 			invalidParams.AddNested("TagsToAdd", err.(smithy.InvalidParamsError))
@@ -273,6 +265,11 @@ func validateSchedule(v *types.Schedule) error {
 	if v.FastRestoreRule != nil {
 		if err := validateFastRestoreRule(v.FastRestoreRule); err != nil {
 			invalidParams.AddNested("FastRestoreRule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CrossRegionCopyRules != nil {
+		if err := validateCrossRegionCopyRules(v.CrossRegionCopyRules); err != nil {
+			invalidParams.AddNested("CrossRegionCopyRules", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -373,11 +370,14 @@ func validateOpCreateLifecyclePolicyInput(v *CreateLifecyclePolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLifecyclePolicyInput"}
-	if len(v.State) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	if v.ExecutionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
 	}
 	if v.Description == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
 	}
 	if v.PolicyDetails == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyDetails"))
@@ -385,9 +385,6 @@ func validateOpCreateLifecyclePolicyInput(v *CreateLifecyclePolicyInput) error {
 		if err := validatePolicyDetails(v.PolicyDetails); err != nil {
 			invalidParams.AddNested("PolicyDetails", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ExecutionRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -446,11 +443,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -464,11 +461,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -482,13 +479,13 @@ func validateOpUpdateLifecyclePolicyInput(v *UpdateLifecyclePolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateLifecyclePolicyInput"}
+	if v.PolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyId"))
+	}
 	if v.PolicyDetails != nil {
 		if err := validatePolicyDetails(v.PolicyDetails); err != nil {
 			invalidParams.AddNested("PolicyDetails", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.PolicyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

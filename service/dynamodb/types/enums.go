@@ -4,13 +4,6 @@ package types
 
 type AttributeAction string
 
-// Enum values for AttributeAction
-const (
-	AttributeActionAdd    AttributeAction = "ADD"
-	AttributeActionPut    AttributeAction = "PUT"
-	AttributeActionDelete AttributeAction = "DELETE"
-)
-
 // Values returns all known values for AttributeAction. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -23,13 +16,6 @@ func (AttributeAction) Values() []AttributeAction {
 }
 
 type BackupStatus string
-
-// Enum values for BackupStatus
-const (
-	BackupStatusCreating  BackupStatus = "CREATING"
-	BackupStatusDeleted   BackupStatus = "DELETED"
-	BackupStatusAvailable BackupStatus = "AVAILABLE"
-)
 
 // Values returns all known values for BackupStatus. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
@@ -84,13 +70,43 @@ func (BackupTypeFilter) Values() []BackupTypeFilter {
 	}
 }
 
-type BillingMode string
+type BatchStatementErrorCodeEnum string
 
-// Enum values for BillingMode
+// Enum values for BatchStatementErrorCodeEnum
 const (
-	BillingModeProvisioned   BillingMode = "PROVISIONED"
-	BillingModePayPerRequest BillingMode = "PAY_PER_REQUEST"
+	BatchStatementErrorCodeEnumConditionalcheckfailed          BatchStatementErrorCodeEnum = "ConditionalCheckFailed"
+	BatchStatementErrorCodeEnumItemcollectionsizelimitexceeded BatchStatementErrorCodeEnum = "ItemCollectionSizeLimitExceeded"
+	BatchStatementErrorCodeEnumRequestlimitexceeded            BatchStatementErrorCodeEnum = "RequestLimitExceeded"
+	BatchStatementErrorCodeEnumValidationerror                 BatchStatementErrorCodeEnum = "ValidationError"
+	BatchStatementErrorCodeEnumProvisionedthroughputexceeded   BatchStatementErrorCodeEnum = "ProvisionedThroughputExceeded"
+	BatchStatementErrorCodeEnumTransactionconflict             BatchStatementErrorCodeEnum = "TransactionConflict"
+	BatchStatementErrorCodeEnumThrottlingerror                 BatchStatementErrorCodeEnum = "ThrottlingError"
+	BatchStatementErrorCodeEnumInternalservererror             BatchStatementErrorCodeEnum = "InternalServerError"
+	BatchStatementErrorCodeEnumResourcenotfound                BatchStatementErrorCodeEnum = "ResourceNotFound"
+	BatchStatementErrorCodeEnumAccessdenied                    BatchStatementErrorCodeEnum = "AccessDenied"
+	BatchStatementErrorCodeEnumDuplicateitem                   BatchStatementErrorCodeEnum = "DuplicateItem"
 )
+
+// Values returns all known values for BatchStatementErrorCodeEnum. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchStatementErrorCodeEnum) Values() []BatchStatementErrorCodeEnum {
+	return []BatchStatementErrorCodeEnum{
+		"ConditionalCheckFailed",
+		"ItemCollectionSizeLimitExceeded",
+		"RequestLimitExceeded",
+		"ValidationError",
+		"ProvisionedThroughputExceeded",
+		"TransactionConflict",
+		"ThrottlingError",
+		"InternalServerError",
+		"ResourceNotFound",
+		"AccessDenied",
+		"DuplicateItem",
+	}
+}
+
+type BillingMode string
 
 // Values returns all known values for BillingMode. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
@@ -103,23 +119,6 @@ func (BillingMode) Values() []BillingMode {
 }
 
 type ComparisonOperator string
-
-// Enum values for ComparisonOperator
-const (
-	ComparisonOperatorEq          ComparisonOperator = "EQ"
-	ComparisonOperatorNe          ComparisonOperator = "NE"
-	ComparisonOperatorIn          ComparisonOperator = "IN"
-	ComparisonOperatorLe          ComparisonOperator = "LE"
-	ComparisonOperatorLt          ComparisonOperator = "LT"
-	ComparisonOperatorGe          ComparisonOperator = "GE"
-	ComparisonOperatorGt          ComparisonOperator = "GT"
-	ComparisonOperatorBetween     ComparisonOperator = "BETWEEN"
-	ComparisonOperatorNotNull     ComparisonOperator = "NOT_NULL"
-	ComparisonOperatorNull        ComparisonOperator = "NULL"
-	ComparisonOperatorContains    ComparisonOperator = "CONTAINS"
-	ComparisonOperatorNotContains ComparisonOperator = "NOT_CONTAINS"
-	ComparisonOperatorBeginsWith  ComparisonOperator = "BEGINS_WITH"
-)
 
 // Values returns all known values for ComparisonOperator. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -144,12 +143,6 @@ func (ComparisonOperator) Values() []ComparisonOperator {
 
 type ConditionalOperator string
 
-// Enum values for ConditionalOperator
-const (
-	ConditionalOperatorAnd ConditionalOperator = "AND"
-	ConditionalOperatorOr  ConditionalOperator = "OR"
-)
-
 // Values returns all known values for ConditionalOperator. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -161,12 +154,6 @@ func (ConditionalOperator) Values() []ConditionalOperator {
 }
 
 type ContinuousBackupsStatus string
-
-// Enum values for ContinuousBackupsStatus
-const (
-	ContinuousBackupsStatusEnabled  ContinuousBackupsStatus = "ENABLED"
-	ContinuousBackupsStatusDisabled ContinuousBackupsStatus = "DISABLED"
-)
 
 // Values returns all known values for ContinuousBackupsStatus. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
@@ -180,12 +167,6 @@ func (ContinuousBackupsStatus) Values() []ContinuousBackupsStatus {
 
 type ContributorInsightsAction string
 
-// Enum values for ContributorInsightsAction
-const (
-	ContributorInsightsActionEnable  ContributorInsightsAction = "ENABLE"
-	ContributorInsightsActionDisable ContributorInsightsAction = "DISABLE"
-)
-
 // Values returns all known values for ContributorInsightsAction. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
 // The ordering of this slice is not guaranteed to be stable across updates.
@@ -198,15 +179,6 @@ func (ContributorInsightsAction) Values() []ContributorInsightsAction {
 
 type ContributorInsightsStatus string
 
-// Enum values for ContributorInsightsStatus
-const (
-	ContributorInsightsStatusEnabling  ContributorInsightsStatus = "ENABLING"
-	ContributorInsightsStatusEnabled   ContributorInsightsStatus = "ENABLED"
-	ContributorInsightsStatusDisabling ContributorInsightsStatus = "DISABLING"
-	ContributorInsightsStatusDisabled  ContributorInsightsStatus = "DISABLED"
-	ContributorInsightsStatusFailed    ContributorInsightsStatus = "FAILED"
-)
-
 // Values returns all known values for ContributorInsightsStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
 // The ordering of this slice is not guaranteed to be stable across updates.
@@ -217,6 +189,21 @@ func (ContributorInsightsStatus) Values() []ContributorInsightsStatus {
 		"DISABLING",
 		"DISABLED",
 		"FAILED",
+	}
+}
+
+type DestinationStatus string
+
+// Values returns all known values for DestinationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DestinationStatus) Values() []DestinationStatus {
+	return []DestinationStatus{
+		"ENABLING",
+		"ACTIVE",
+		"DISABLING",
+		"DISABLED",
+		"ENABLE_FAILED",
 	}
 }
 
@@ -260,14 +247,6 @@ func (ExportStatus) Values() []ExportStatus {
 
 type GlobalTableStatus string
 
-// Enum values for GlobalTableStatus
-const (
-	GlobalTableStatusCreating GlobalTableStatus = "CREATING"
-	GlobalTableStatusActive   GlobalTableStatus = "ACTIVE"
-	GlobalTableStatusDeleting GlobalTableStatus = "DELETING"
-	GlobalTableStatusUpdating GlobalTableStatus = "UPDATING"
-)
-
 // Values returns all known values for GlobalTableStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -281,14 +260,6 @@ func (GlobalTableStatus) Values() []GlobalTableStatus {
 }
 
 type IndexStatus string
-
-// Enum values for IndexStatus
-const (
-	IndexStatusCreating IndexStatus = "CREATING"
-	IndexStatusUpdating IndexStatus = "UPDATING"
-	IndexStatusDeleting IndexStatus = "DELETING"
-	IndexStatusActive   IndexStatus = "ACTIVE"
-)
 
 // Values returns all known values for IndexStatus. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
@@ -304,12 +275,6 @@ func (IndexStatus) Values() []IndexStatus {
 
 type KeyType string
 
-// Enum values for KeyType
-const (
-	KeyTypeHash  KeyType = "HASH"
-	KeyTypeRange KeyType = "RANGE"
-)
-
 // Values returns all known values for KeyType. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
@@ -321,12 +286,6 @@ func (KeyType) Values() []KeyType {
 }
 
 type PointInTimeRecoveryStatus string
-
-// Enum values for PointInTimeRecoveryStatus
-const (
-	PointInTimeRecoveryStatusEnabled  PointInTimeRecoveryStatus = "ENABLED"
-	PointInTimeRecoveryStatusDisabled PointInTimeRecoveryStatus = "DISABLED"
-)
 
 // Values returns all known values for PointInTimeRecoveryStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
@@ -340,13 +299,6 @@ func (PointInTimeRecoveryStatus) Values() []PointInTimeRecoveryStatus {
 
 type ProjectionType string
 
-// Enum values for ProjectionType
-const (
-	ProjectionTypeAll      ProjectionType = "ALL"
-	ProjectionTypeKeysOnly ProjectionType = "KEYS_ONLY"
-	ProjectionTypeInclude  ProjectionType = "INCLUDE"
-)
-
 // Values returns all known values for ProjectionType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -359,17 +311,6 @@ func (ProjectionType) Values() []ProjectionType {
 }
 
 type ReplicaStatus string
-
-// Enum values for ReplicaStatus
-const (
-	ReplicaStatusCreating                          ReplicaStatus = "CREATING"
-	ReplicaStatusCreationFailed                    ReplicaStatus = "CREATION_FAILED"
-	ReplicaStatusUpdating                          ReplicaStatus = "UPDATING"
-	ReplicaStatusDeleting                          ReplicaStatus = "DELETING"
-	ReplicaStatusActive                            ReplicaStatus = "ACTIVE"
-	ReplicaStatusRegionDisabled                    ReplicaStatus = "REGION_DISABLED"
-	ReplicaStatusInaccessibleEncryptionCredentials ReplicaStatus = "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
-)
 
 // Values returns all known values for ReplicaStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -388,13 +329,6 @@ func (ReplicaStatus) Values() []ReplicaStatus {
 
 type ReturnConsumedCapacity string
 
-// Enum values for ReturnConsumedCapacity
-const (
-	ReturnConsumedCapacityIndexes ReturnConsumedCapacity = "INDEXES"
-	ReturnConsumedCapacityTotal   ReturnConsumedCapacity = "TOTAL"
-	ReturnConsumedCapacityNone    ReturnConsumedCapacity = "NONE"
-)
-
 // Values returns all known values for ReturnConsumedCapacity. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -408,12 +342,6 @@ func (ReturnConsumedCapacity) Values() []ReturnConsumedCapacity {
 
 type ReturnItemCollectionMetrics string
 
-// Enum values for ReturnItemCollectionMetrics
-const (
-	ReturnItemCollectionMetricsSize ReturnItemCollectionMetrics = "SIZE"
-	ReturnItemCollectionMetricsNone ReturnItemCollectionMetrics = "NONE"
-)
-
 // Values returns all known values for ReturnItemCollectionMetrics. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
 // The ordering of this slice is not guaranteed to be stable across updates.
@@ -425,15 +353,6 @@ func (ReturnItemCollectionMetrics) Values() []ReturnItemCollectionMetrics {
 }
 
 type ReturnValue string
-
-// Enum values for ReturnValue
-const (
-	ReturnValueNone       ReturnValue = "NONE"
-	ReturnValueAllOld     ReturnValue = "ALL_OLD"
-	ReturnValueUpdatedOld ReturnValue = "UPDATED_OLD"
-	ReturnValueAllNew     ReturnValue = "ALL_NEW"
-	ReturnValueUpdatedNew ReturnValue = "UPDATED_NEW"
-)
 
 // Values returns all known values for ReturnValue. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
@@ -450,12 +369,6 @@ func (ReturnValue) Values() []ReturnValue {
 
 type ReturnValuesOnConditionCheckFailure string
 
-// Enum values for ReturnValuesOnConditionCheckFailure
-const (
-	ReturnValuesOnConditionCheckFailureAllOld ReturnValuesOnConditionCheckFailure = "ALL_OLD"
-	ReturnValuesOnConditionCheckFailureNone   ReturnValuesOnConditionCheckFailure = "NONE"
-)
-
 // Values returns all known values for ReturnValuesOnConditionCheckFailure. Note
 // that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
@@ -469,12 +382,6 @@ func (ReturnValuesOnConditionCheckFailure) Values() []ReturnValuesOnConditionChe
 
 type S3SseAlgorithm string
 
-// Enum values for S3SseAlgorithm
-const (
-	S3SseAlgorithmAes256 S3SseAlgorithm = "AES256"
-	S3SseAlgorithmKms    S3SseAlgorithm = "KMS"
-)
-
 // Values returns all known values for S3SseAlgorithm. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -486,13 +393,6 @@ func (S3SseAlgorithm) Values() []S3SseAlgorithm {
 }
 
 type ScalarAttributeType string
-
-// Enum values for ScalarAttributeType
-const (
-	ScalarAttributeTypeS ScalarAttributeType = "S"
-	ScalarAttributeTypeN ScalarAttributeType = "N"
-	ScalarAttributeTypeB ScalarAttributeType = "B"
-)
 
 // Values returns all known values for ScalarAttributeType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -507,14 +407,6 @@ func (ScalarAttributeType) Values() []ScalarAttributeType {
 
 type Select string
 
-// Enum values for Select
-const (
-	SelectAllAttributes          Select = "ALL_ATTRIBUTES"
-	SelectAllProjectedAttributes Select = "ALL_PROJECTED_ATTRIBUTES"
-	SelectSpecificAttributes     Select = "SPECIFIC_ATTRIBUTES"
-	SelectCount                  Select = "COUNT"
-)
-
 // Values returns all known values for Select. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
@@ -528,15 +420,6 @@ func (Select) Values() []Select {
 }
 
 type SSEStatus string
-
-// Enum values for SSEStatus
-const (
-	SSEStatusEnabling  SSEStatus = "ENABLING"
-	SSEStatusEnabled   SSEStatus = "ENABLED"
-	SSEStatusDisabling SSEStatus = "DISABLING"
-	SSEStatusDisabled  SSEStatus = "DISABLED"
-	SSEStatusUpdating  SSEStatus = "UPDATING"
-)
 
 // Values returns all known values for SSEStatus. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
@@ -553,12 +436,6 @@ func (SSEStatus) Values() []SSEStatus {
 
 type SSEType string
 
-// Enum values for SSEType
-const (
-	SSETypeAes256 SSEType = "AES256"
-	SSETypeKms    SSEType = "KMS"
-)
-
 // Values returns all known values for SSEType. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
@@ -570,14 +447,6 @@ func (SSEType) Values() []SSEType {
 }
 
 type StreamViewType string
-
-// Enum values for StreamViewType
-const (
-	StreamViewTypeNewImage        StreamViewType = "NEW_IMAGE"
-	StreamViewTypeOldImage        StreamViewType = "OLD_IMAGE"
-	StreamViewTypeNewAndOldImages StreamViewType = "NEW_AND_OLD_IMAGES"
-	StreamViewTypeKeysOnly        StreamViewType = "KEYS_ONLY"
-)
 
 // Values returns all known values for StreamViewType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -592,17 +461,6 @@ func (StreamViewType) Values() []StreamViewType {
 }
 
 type TableStatus string
-
-// Enum values for TableStatus
-const (
-	TableStatusCreating                          TableStatus = "CREATING"
-	TableStatusUpdating                          TableStatus = "UPDATING"
-	TableStatusDeleting                          TableStatus = "DELETING"
-	TableStatusActive                            TableStatus = "ACTIVE"
-	TableStatusInaccessibleEncryptionCredentials TableStatus = "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
-	TableStatusArchiving                         TableStatus = "ARCHIVING"
-	TableStatusArchived                          TableStatus = "ARCHIVED"
-)
 
 // Values returns all known values for TableStatus. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
@@ -620,14 +478,6 @@ func (TableStatus) Values() []TableStatus {
 }
 
 type TimeToLiveStatus string
-
-// Enum values for TimeToLiveStatus
-const (
-	TimeToLiveStatusEnabling  TimeToLiveStatus = "ENABLING"
-	TimeToLiveStatusDisabling TimeToLiveStatus = "DISABLING"
-	TimeToLiveStatusEnabled   TimeToLiveStatus = "ENABLED"
-	TimeToLiveStatusDisabled  TimeToLiveStatus = "DISABLED"
-)
 
 // Values returns all known values for TimeToLiveStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The

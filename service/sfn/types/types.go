@@ -113,6 +113,16 @@ type ActivityTimedOutEventDetails struct {
 	Error *string
 }
 
+// An object that describes workflow billing details.
+type BillingDetails struct {
+
+	// Billed duration of your workflow, in milliseconds.
+	BilledDurationInMilliseconds int64
+
+	// Billed memory consumption of your workflow, in MB.
+	BilledMemoryUsedInMB int64
+}
+
 // Provides details about execution input or output.
 type CloudWatchEventsExecutionDataDetails struct {
 
@@ -152,7 +162,7 @@ type ExecutionFailedEventDetails struct {
 // Contains details about an execution.
 type ExecutionListItem struct {
 
-	// The Amazon Resource Name (ARN) that id entifies the execution.
+	// The Amazon Resource Name (ARN) that identifies the execution.
 	//
 	// This member is required.
 	ExecutionArn *string

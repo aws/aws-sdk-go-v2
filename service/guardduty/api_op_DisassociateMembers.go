@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates GuardDuty member accounts (to the current GuardDuty master
+// Disassociates GuardDuty member accounts (to the current GuardDuty administrator
 // account) specified by the account IDs.
 func (c *Client) DisassociateMembers(ctx context.Context, params *DisassociateMembersInput, optFns ...func(*Options)) (*DisassociateMembersOutput, error) {
 	if params == nil {
@@ -31,13 +31,13 @@ func (c *Client) DisassociateMembers(ctx context.Context, params *DisassociateMe
 type DisassociateMembersInput struct {
 
 	// A list of account IDs of the GuardDuty member accounts that you want to
-	// disassociate from the master account.
+	// disassociate from the administrator account.
 	//
 	// This member is required.
 	AccountIds []string
 
 	// The unique ID of the detector of the GuardDuty account whose members you want to
-	// disassociate from the master account.
+	// disassociate from the administrator account.
 	//
 	// This member is required.
 	DetectorId *string

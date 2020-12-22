@@ -22,15 +22,6 @@ func (ResourceOwner) Values() []ResourceOwner {
 
 type ResourceShareAssociationStatus string
 
-// Enum values for ResourceShareAssociationStatus
-const (
-	ResourceShareAssociationStatusAssociating    ResourceShareAssociationStatus = "ASSOCIATING"
-	ResourceShareAssociationStatusAssociated     ResourceShareAssociationStatus = "ASSOCIATED"
-	ResourceShareAssociationStatusFailed         ResourceShareAssociationStatus = "FAILED"
-	ResourceShareAssociationStatusDisassociating ResourceShareAssociationStatus = "DISASSOCIATING"
-	ResourceShareAssociationStatusDisassociated  ResourceShareAssociationStatus = "DISASSOCIATED"
-)
-
 // Values returns all known values for ResourceShareAssociationStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
@@ -47,12 +38,6 @@ func (ResourceShareAssociationStatus) Values() []ResourceShareAssociationStatus 
 
 type ResourceShareAssociationType string
 
-// Enum values for ResourceShareAssociationType
-const (
-	ResourceShareAssociationTypePrincipal ResourceShareAssociationType = "PRINCIPAL"
-	ResourceShareAssociationTypeResource  ResourceShareAssociationType = "RESOURCE"
-)
-
 // Values returns all known values for ResourceShareAssociationType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
 // The ordering of this slice is not guaranteed to be stable across updates.
@@ -64,13 +49,6 @@ func (ResourceShareAssociationType) Values() []ResourceShareAssociationType {
 }
 
 type ResourceShareFeatureSet string
-
-// Enum values for ResourceShareFeatureSet
-const (
-	ResourceShareFeatureSetCreatedFromPolicy   ResourceShareFeatureSet = "CREATED_FROM_POLICY"
-	ResourceShareFeatureSetPromotingToStandard ResourceShareFeatureSet = "PROMOTING_TO_STANDARD"
-	ResourceShareFeatureSetStandard            ResourceShareFeatureSet = "STANDARD"
-)
 
 // Values returns all known values for ResourceShareFeatureSet. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
@@ -84,14 +62,6 @@ func (ResourceShareFeatureSet) Values() []ResourceShareFeatureSet {
 }
 
 type ResourceShareInvitationStatus string
-
-// Enum values for ResourceShareInvitationStatus
-const (
-	ResourceShareInvitationStatusPending  ResourceShareInvitationStatus = "PENDING"
-	ResourceShareInvitationStatusAccepted ResourceShareInvitationStatus = "ACCEPTED"
-	ResourceShareInvitationStatusRejected ResourceShareInvitationStatus = "REJECTED"
-	ResourceShareInvitationStatusExpired  ResourceShareInvitationStatus = "EXPIRED"
-)
 
 // Values returns all known values for ResourceShareInvitationStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
@@ -108,15 +78,6 @@ func (ResourceShareInvitationStatus) Values() []ResourceShareInvitationStatus {
 
 type ResourceShareStatus string
 
-// Enum values for ResourceShareStatus
-const (
-	ResourceShareStatusPending  ResourceShareStatus = "PENDING"
-	ResourceShareStatusActive   ResourceShareStatus = "ACTIVE"
-	ResourceShareStatusFailed   ResourceShareStatus = "FAILED"
-	ResourceShareStatusDeleting ResourceShareStatus = "DELETING"
-	ResourceShareStatusDeleted  ResourceShareStatus = "DELETED"
-)
-
 // Values returns all known values for ResourceShareStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -131,15 +92,6 @@ func (ResourceShareStatus) Values() []ResourceShareStatus {
 }
 
 type ResourceStatus string
-
-// Enum values for ResourceStatus
-const (
-	ResourceStatusAvailable                 ResourceStatus = "AVAILABLE"
-	ResourceStatusZonalResourceInaccessible ResourceStatus = "ZONAL_RESOURCE_INACCESSIBLE"
-	ResourceStatusLimitExceeded             ResourceStatus = "LIMIT_EXCEEDED"
-	ResourceStatusUnavailable               ResourceStatus = "UNAVAILABLE"
-	ResourceStatusPending                   ResourceStatus = "PENDING"
-)
 
 // Values returns all known values for ResourceStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The

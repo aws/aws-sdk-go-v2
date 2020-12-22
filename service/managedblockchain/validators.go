@@ -479,15 +479,15 @@ func validateMemberConfiguration(v *types.MemberConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MemberConfiguration"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.FrameworkConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FrameworkConfiguration"))
 	} else if v.FrameworkConfiguration != nil {
 		if err := validateMemberFrameworkConfiguration(v.FrameworkConfiguration); err != nil {
 			invalidParams.AddNested("FrameworkConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -586,14 +586,14 @@ func validateProposalActions(v *types.ProposalActions) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProposalActions"}
-	if v.Removals != nil {
-		if err := validateRemoveActionList(v.Removals); err != nil {
-			invalidParams.AddNested("Removals", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Invitations != nil {
 		if err := validateInviteActionList(v.Invitations); err != nil {
 			invalidParams.AddNested("Invitations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Removals != nil {
+		if err := validateRemoveActionList(v.Removals); err != nil {
+			invalidParams.AddNested("Removals", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -640,14 +640,14 @@ func validateOpCreateMemberInput(v *CreateMemberInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateMemberInput"}
-	if v.NetworkId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
 	}
 	if v.InvitationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InvitationId"))
 	}
-	if v.ClientRequestToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	if v.NetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
 	}
 	if v.MemberConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MemberConfiguration"))
@@ -668,10 +668,25 @@ func validateOpCreateNetworkInput(v *CreateNetworkInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateNetworkInput"}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Framework) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Framework"))
+	}
+	if v.FrameworkVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FrameworkVersion"))
+	}
 	if v.FrameworkConfiguration != nil {
 		if err := validateNetworkFrameworkConfiguration(v.FrameworkConfiguration); err != nil {
 			invalidParams.AddNested("FrameworkConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.VotingPolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VotingPolicy"))
 	}
 	if v.MemberConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MemberConfiguration"))
@@ -679,21 +694,6 @@ func validateOpCreateNetworkInput(v *CreateNetworkInput) error {
 		if err := validateMemberConfiguration(v.MemberConfiguration); err != nil {
 			invalidParams.AddNested("MemberConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ClientRequestToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
-	}
-	if v.VotingPolicy == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VotingPolicy"))
-	}
-	if len(v.Framework) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Framework"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.FrameworkVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FrameworkVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -707,11 +707,14 @@ func validateOpCreateNodeInput(v *CreateNodeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateNodeInput"}
-	if v.MemberId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
-	}
 	if v.ClientRequestToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if v.NetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
+	}
+	if v.MemberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
 	}
 	if v.NodeConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodeConfiguration"))
@@ -719,9 +722,6 @@ func validateOpCreateNodeInput(v *CreateNodeInput) error {
 		if err := validateNodeConfiguration(v.NodeConfiguration); err != nil {
 			invalidParams.AddNested("NodeConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.NetworkId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -735,11 +735,11 @@ func validateOpCreateProposalInput(v *CreateProposalInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateProposalInput"}
-	if v.NetworkId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
-	}
 	if v.ClientRequestToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if v.NetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
 	}
 	if v.MemberId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
@@ -781,11 +781,11 @@ func validateOpDeleteNodeInput(v *DeleteNodeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteNodeInput"}
-	if v.MemberId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
-	}
 	if v.NetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
+	}
+	if v.MemberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
 	}
 	if v.NodeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodeId"))
@@ -838,11 +838,11 @@ func validateOpGetNodeInput(v *GetNodeInput) error {
 	if v.NetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
 	}
-	if v.NodeId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NodeId"))
-	}
 	if v.MemberId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
+	}
+	if v.NodeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -889,11 +889,11 @@ func validateOpListNodesInput(v *ListNodesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListNodesInput"}
-	if v.MemberId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
-	}
 	if v.NetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
+	}
+	if v.MemberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -955,11 +955,11 @@ func validateOpUpdateMemberInput(v *UpdateMemberInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateMemberInput"}
-	if v.MemberId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
-	}
 	if v.NetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
+	}
+	if v.MemberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -973,14 +973,14 @@ func validateOpUpdateNodeInput(v *UpdateNodeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateNodeInput"}
-	if v.NodeId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NodeId"))
+	if v.NetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
 	}
 	if v.MemberId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
 	}
-	if v.NetworkId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
+	if v.NodeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -994,17 +994,17 @@ func validateOpVoteOnProposalInput(v *VoteOnProposalInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VoteOnProposalInput"}
-	if len(v.Vote) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Vote"))
-	}
 	if v.NetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
+	}
+	if v.ProposalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProposalId"))
 	}
 	if v.VoterMemberId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VoterMemberId"))
 	}
-	if v.ProposalId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProposalId"))
+	if len(v.Vote) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Vote"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

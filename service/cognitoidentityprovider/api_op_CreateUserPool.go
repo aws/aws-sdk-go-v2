@@ -61,10 +61,16 @@ type CreateUserPoolInput struct {
 	// The email configuration.
 	EmailConfiguration *types.EmailConfigurationType
 
-	// A string representing the email verification message.
+	// A string representing the email verification message. EmailVerificationMessage
+	// is allowed only if EmailSendingAccount
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount)
+	// is DEVELOPER.
 	EmailVerificationMessage *string
 
-	// A string representing the email verification subject.
+	// A string representing the email verification subject. EmailVerificationSubject
+	// is allowed only if EmailSendingAccount
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount)
+	// is DEVELOPER.
 	EmailVerificationSubject *string
 
 	// The Lambda trigger configuration information for the new user pool. In a push

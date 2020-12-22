@@ -7,6 +7,29 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// The specified code signing configuration does not exist.
+type CodeSigningConfigNotFoundException struct {
+	Message *string
+
+	Type *string
+}
+
+func (e *CodeSigningConfigNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CodeSigningConfigNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CodeSigningConfigNotFoundException) ErrorCode() string {
+	return "CodeSigningConfigNotFoundException"
+}
+func (e *CodeSigningConfigNotFoundException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // You have exceeded your maximum total code size per account. Learn more
 // (https://docs.aws.amazon.com/lambda/latest/dg/limits.html)
 type CodeStorageExceededException struct {
@@ -26,6 +49,29 @@ func (e *CodeStorageExceededException) ErrorMessage() string {
 }
 func (e *CodeStorageExceededException) ErrorCode() string             { return "CodeStorageExceededException" }
 func (e *CodeStorageExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The code signature failed one or more of the validation checks for signature
+// mismatch or expiry, and the code signing policy is set to ENFORCE. Lambda blocks
+// the deployment.
+type CodeVerificationFailedException struct {
+	Message *string
+
+	Type *string
+}
+
+func (e *CodeVerificationFailedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CodeVerificationFailedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CodeVerificationFailedException) ErrorCode() string {
+	return "CodeVerificationFailedException"
+}
+func (e *CodeVerificationFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Need additional permissions to configure VPC settings.
 type EC2AccessDeniedException struct {
@@ -185,6 +231,26 @@ func (e *ENILimitReachedException) ErrorMessage() string {
 }
 func (e *ENILimitReachedException) ErrorCode() string             { return "ENILimitReachedException" }
 func (e *ENILimitReachedException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// The code signature failed the integrity check. Lambda always blocks deployment
+// if the integrity check fails, even if code signing policy is set to WARN.
+type InvalidCodeSignatureException struct {
+	Message *string
+
+	Type *string
+}
+
+func (e *InvalidCodeSignatureException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidCodeSignatureException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidCodeSignatureException) ErrorCode() string             { return "InvalidCodeSignatureException" }
+func (e *InvalidCodeSignatureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One of the parameters in the request is invalid.
 type InvalidParameterValueException struct {

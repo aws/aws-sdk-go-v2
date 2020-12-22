@@ -493,11 +493,8 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateClusterInput"}
-	if v.AddressId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AddressId"))
-	}
-	if v.RoleARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleARN"))
+	if len(v.JobType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("JobType"))
 	}
 	if v.Resources == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Resources"))
@@ -506,11 +503,14 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 			invalidParams.AddNested("Resources", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AddressId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AddressId"))
+	}
+	if v.RoleARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleARN"))
+	}
 	if len(v.ShippingOption) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ShippingOption"))
-	}
-	if len(v.JobType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("JobType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

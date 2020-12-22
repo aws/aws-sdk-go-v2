@@ -50,7 +50,7 @@ type UpdateDataSourceInput struct {
 	Credentials *types.DataSourceCredentials
 
 	// The parameters that QuickSight uses to connect to your underlying source.
-	DataSourceParameters *types.DataSourceParameters
+	DataSourceParameters types.DataSourceParameters
 
 	// Secure Socket Layer (SSL) properties that apply when QuickSight connects to your
 	// underlying source.

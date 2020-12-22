@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For the specified directory, lists all the certificates registered for a secured
-// LDAP connection.
+// For the specified directory, lists all the certificates registered for a secure
+// LDAP or client certificate authentication.
 func (c *Client) ListCertificates(ctx context.Context, params *ListCertificatesInput, optFns ...func(*Options)) (*ListCertificatesOutput, error) {
 	if params == nil {
 		params = &ListCertificatesInput{}

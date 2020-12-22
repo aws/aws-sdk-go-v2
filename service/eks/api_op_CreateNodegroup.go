@@ -21,7 +21,7 @@ import (
 // (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html). An
 // Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated
 // Amazon EC2 instances that are managed by AWS for an Amazon EKS cluster. Each
-// node group uses a version of the Amazon EKS-optimized Amazon Linux 2 AMI. For
+// node group uses a version of the Amazon EKS optimized Amazon Linux 2 AMI. For
 // more information, see Managed Node Groups
 // (https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html) in
 // the Amazon EKS User Guide.
@@ -86,14 +86,17 @@ type CreateNodegroupInput struct {
 
 	// The AMI type for your node group. GPU instance types should use the
 	// AL2_x86_64_GPU AMI type. Non-GPU instances should use the AL2_x86_64 AMI type.
-	// Arm instances should use the AL2_ARM_64 AMI type. All types use the Amazon
-	// EKS-optimized Amazon Linux 2 AMI. If you specify launchTemplate, and your launch
+	// Arm instances should use the AL2_ARM_64 AMI type. All types use the Amazon EKS
+	// optimized Amazon Linux 2 AMI. If you specify launchTemplate, and your launch
 	// template uses a custom AMI, then don't specify amiType, or the node group
 	// deployment will fail. For more information about using launch templates with
 	// Amazon EKS, see Launch template support
 	// (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html) in the
 	// Amazon EKS User Guide.
 	AmiType types.AMITypes
+
+	// The capacity type for your node group.
+	CapacityType types.CapacityTypes
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
@@ -107,12 +110,18 @@ type CreateNodegroupInput struct {
 	// Amazon EKS User Guide.
 	DiskSize *int32
 
-	// The instance type to use for your node group. You can specify a single instance
-	// type for a node group. The default value for instanceTypes is t3.medium. If you
-	// choose a GPU instance type, be sure to specify AL2_x86_64_GPU with the amiType
-	// parameter. If you specify launchTemplate, then don't specify instanceTypes, or
-	// the node group deployment will fail. For more information about using launch
-	// templates with Amazon EKS, see Launch template support
+	// Specify the instance types for a node group. If you specify a GPU instance type,
+	// be sure to specify AL2_x86_64_GPU with the amiType parameter. If you specify
+	// launchTemplate, then you can specify zero or one instance type in your launch
+	// template or you can specify 0-20 instance types for instanceTypes. If however,
+	// you specify an instance type in your launch template and specify any
+	// instanceTypes, the node group deployment will fail. If you don't specify an
+	// instance type in a launch template or for instanceTypes, then t3.medium is used,
+	// by default. If you specify Spot for capacityType, then we recommend specifying
+	// multiple values for instanceTypes. For more information, see Managed node group
+	// capacity types
+	// (https://docs.aws.amazon.com/managed-node-groups.html#managed-node-group-capacity-types)
+	// and Launch template support
 	// (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html) in the
 	// Amazon EKS User Guide.
 	InstanceTypes []string
@@ -127,10 +136,10 @@ type CreateNodegroupInput struct {
 	// launchTemplateSpecification.
 	LaunchTemplate *types.LaunchTemplateSpecification
 
-	// The AMI version of the Amazon EKS-optimized AMI to use with your node group. By
+	// The AMI version of the Amazon EKS optimized AMI to use with your node group. By
 	// default, the latest available AMI version for the node group's current
-	// Kubernetes version is used. For more information, see Amazon EKS-Optimized Linux
-	// AMI Versions
+	// Kubernetes version is used. For more information, see Amazon EKS optimized
+	// Amazon Linux 2 AMI versions
 	// (https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html)
 	// in the Amazon EKS User Guide. If you specify launchTemplate, and your launch
 	// template uses a custom AMI, then don't specify releaseVersion, or the node group

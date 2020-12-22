@@ -210,26 +210,6 @@ func (m *validateOpCreatePortal) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpCreatePresignedPortalUrl struct {
-}
-
-func (*validateOpCreatePresignedPortalUrl) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpCreatePresignedPortalUrl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*CreatePresignedPortalUrlInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpCreatePresignedPortalUrlInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpCreateProject struct {
 }
 
@@ -610,6 +590,26 @@ func (m *validateOpGetAssetPropertyAggregates) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAssetRelationships struct {
+}
+
+func (*validateOpListAssetRelationships) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssetRelationships) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssetRelationshipsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssetRelationshipsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAssociatedAssets struct {
 }
 
@@ -705,6 +705,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutDefaultEncryptionConfiguration struct {
+}
+
+func (*validateOpPutDefaultEncryptionConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutDefaultEncryptionConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutDefaultEncryptionConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutDefaultEncryptionConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -990,10 +1010,6 @@ func addOpCreatePortalValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePortal{}, middleware.After)
 }
 
-func addOpCreatePresignedPortalUrlValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpCreatePresignedPortalUrl{}, middleware.After)
-}
-
 func addOpCreateProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateProject{}, middleware.After)
 }
@@ -1070,6 +1086,10 @@ func addOpGetAssetPropertyAggregatesValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpGetAssetPropertyAggregates{}, middleware.After)
 }
 
+func addOpListAssetRelationshipsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssetRelationships{}, middleware.After)
+}
+
 func addOpListAssociatedAssetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAssociatedAssets{}, middleware.After)
 }
@@ -1088,6 +1108,10 @@ func addOpListProjectsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPutDefaultEncryptionConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutDefaultEncryptionConfiguration{}, middleware.After)
 }
 
 func addOpPutLoggingOptionsValidationMiddleware(stack *middleware.Stack) error {
@@ -1136,6 +1160,86 @@ func addOpUpdatePortalValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateProject{}, middleware.After)
+}
+
+func validateAssetModelCompositeModel(v *types.AssetModelCompositeModel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetModelCompositeModel"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Properties != nil {
+		if err := validateAssetModelProperties(v.Properties); err != nil {
+			invalidParams.AddNested("Properties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetModelCompositeModelDefinition(v *types.AssetModelCompositeModelDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetModelCompositeModelDefinition"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Properties != nil {
+		if err := validateAssetModelPropertyDefinitions(v.Properties); err != nil {
+			invalidParams.AddNested("Properties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetModelCompositeModelDefinitions(v []types.AssetModelCompositeModelDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetModelCompositeModelDefinitions"}
+	for i := range v {
+		if err := validateAssetModelCompositeModelDefinition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetModelCompositeModels(v []types.AssetModelCompositeModel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetModelCompositeModels"}
+	for i := range v {
+		if err := validateAssetModelCompositeModel(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAssetModelHierarchies(v []types.AssetModelHierarchy) error {
@@ -1893,6 +1997,11 @@ func validateOpCreateAssetModelInput(v *CreateAssetModelInput) error {
 			invalidParams.AddNested("AssetModelHierarchies", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AssetModelCompositeModels != nil {
+		if err := validateAssetModelCompositeModelDefinitions(v.AssetModelCompositeModels); err != nil {
+			invalidParams.AddNested("AssetModelCompositeModels", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1961,21 +2070,6 @@ func validateOpCreatePortalInput(v *CreatePortalInput) error {
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpCreatePresignedPortalUrlInput(v *CreatePresignedPortalUrlInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CreatePresignedPortalUrlInput"}
-	if v.PortalId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PortalId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2293,6 +2387,24 @@ func validateOpGetAssetPropertyAggregatesInput(v *GetAssetPropertyAggregatesInpu
 	}
 }
 
+func validateOpListAssetRelationshipsInput(v *ListAssetRelationshipsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssetRelationshipsInput"}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if len(v.TraversalType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TraversalType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAssociatedAssetsInput(v *ListAssociatedAssetsInput) error {
 	if v == nil {
 		return nil
@@ -2360,6 +2472,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutDefaultEncryptionConfigurationInput(v *PutDefaultEncryptionConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutDefaultEncryptionConfigurationInput"}
+	if len(v.EncryptionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EncryptionType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2492,6 +2619,11 @@ func validateOpUpdateAssetModelInput(v *UpdateAssetModelInput) error {
 	if v.AssetModelHierarchies != nil {
 		if err := validateAssetModelHierarchies(v.AssetModelHierarchies); err != nil {
 			invalidParams.AddNested("AssetModelHierarchies", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AssetModelCompositeModels != nil {
+		if err := validateAssetModelCompositeModels(v.AssetModelCompositeModels); err != nil {
+			invalidParams.AddNested("AssetModelCompositeModels", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

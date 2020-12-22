@@ -67,20 +67,28 @@ type StartSigningJobInput struct {
 	// This member is required.
 	Destination *types.Destination
 
+	// The name of the signing profile.
+	//
+	// This member is required.
+	ProfileName *string
+
 	// The S3 bucket that contains the object to sign or a BLOB that contains your raw
 	// code.
 	//
 	// This member is required.
 	Source *types.Source
 
-	// The name of the signing profile.
-	ProfileName *string
+	// The AWS account ID of the signing profile owner.
+	ProfileOwner *string
 }
 
 type StartSigningJobOutput struct {
 
 	// The ID of your signing job.
 	JobId *string
+
+	// The AWS account ID of the signing job owner.
+	JobOwner *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

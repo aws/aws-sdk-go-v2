@@ -77,14 +77,14 @@ func validateOpSendAlexaOfferToMasterInput(v *SendAlexaOfferToMasterInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SendAlexaOfferToMasterInput"}
+	if v.ChannelARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelARN"))
+	}
 	if v.SenderClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SenderClientId"))
 	}
 	if v.MessagePayload == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MessagePayload"))
-	}
-	if v.ChannelARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChannelARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

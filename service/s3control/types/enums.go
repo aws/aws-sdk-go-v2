@@ -4,14 +4,6 @@ package types
 
 type BucketCannedACL string
 
-// Enum values for BucketCannedACL
-const (
-	BucketCannedACLPrivate           BucketCannedACL = "private"
-	BucketCannedACLPublicRead        BucketCannedACL = "public-read"
-	BucketCannedACLPublicReadWrite   BucketCannedACL = "public-read-write"
-	BucketCannedACLAuthenticatedRead BucketCannedACL = "authenticated-read"
-)
-
 // Values returns all known values for BucketCannedACL. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -25,21 +17,6 @@ func (BucketCannedACL) Values() []BucketCannedACL {
 }
 
 type BucketLocationConstraint string
-
-// Enum values for BucketLocationConstraint
-const (
-	BucketLocationConstraintEu           BucketLocationConstraint = "EU"
-	BucketLocationConstraintEuWest1      BucketLocationConstraint = "eu-west-1"
-	BucketLocationConstraintUsWest1      BucketLocationConstraint = "us-west-1"
-	BucketLocationConstraintUsWest2      BucketLocationConstraint = "us-west-2"
-	BucketLocationConstraintApSouth1     BucketLocationConstraint = "ap-south-1"
-	BucketLocationConstraintApSoutheast1 BucketLocationConstraint = "ap-southeast-1"
-	BucketLocationConstraintApSoutheast2 BucketLocationConstraint = "ap-southeast-2"
-	BucketLocationConstraintApNortheast1 BucketLocationConstraint = "ap-northeast-1"
-	BucketLocationConstraintSaEast1      BucketLocationConstraint = "sa-east-1"
-	BucketLocationConstraintCnNorth1     BucketLocationConstraint = "cn-north-1"
-	BucketLocationConstraintEuCentral1   BucketLocationConstraint = "eu-central-1"
-)
 
 // Values returns all known values for BucketLocationConstraint. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
@@ -62,12 +39,6 @@ func (BucketLocationConstraint) Values() []BucketLocationConstraint {
 
 type ExpirationStatus string
 
-// Enum values for ExpirationStatus
-const (
-	ExpirationStatusEnabled  ExpirationStatus = "Enabled"
-	ExpirationStatusDisabled ExpirationStatus = "Disabled"
-)
-
 // Values returns all known values for ExpirationStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -79,12 +50,6 @@ func (ExpirationStatus) Values() []ExpirationStatus {
 }
 
 type Format string
-
-// Enum values for Format
-const (
-	FormatCsv     Format = "CSV"
-	FormatParquet Format = "Parquet"
-)
 
 // Values returns all known values for Format. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
@@ -257,11 +222,6 @@ func (OperationName) Values() []OperationName {
 }
 
 type OutputSchemaVersion string
-
-// Enum values for OutputSchemaVersion
-const (
-	OutputSchemaVersionV1 OutputSchemaVersion = "V_1"
-)
 
 // Values returns all known values for OutputSchemaVersion. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -497,15 +457,6 @@ func (S3StorageClass) Values() []S3StorageClass {
 }
 
 type TransitionStorageClass string
-
-// Enum values for TransitionStorageClass
-const (
-	TransitionStorageClassGlacier            TransitionStorageClass = "GLACIER"
-	TransitionStorageClassStandardIa         TransitionStorageClass = "STANDARD_IA"
-	TransitionStorageClassOnezoneIa          TransitionStorageClass = "ONEZONE_IA"
-	TransitionStorageClassIntelligentTiering TransitionStorageClass = "INTELLIGENT_TIERING"
-	TransitionStorageClassDeepArchive        TransitionStorageClass = "DEEP_ARCHIVE"
-)
 
 // Values returns all known values for TransitionStorageClass. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The

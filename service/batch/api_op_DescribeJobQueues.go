@@ -39,7 +39,7 @@ type DescribeJobQueuesInput struct {
 	// in a single page along with a nextToken response element. The remaining results
 	// of the initial request can be seen by sending another DescribeJobQueues request
 	// with the returned nextToken value. This value can be between 1 and 100. If this
-	// parameter is not used, then DescribeJobQueues returns up to 100 results and a
+	// parameter isn't used, then DescribeJobQueues returns up to 100 results and a
 	// nextToken value if applicable.
 	MaxResults int32
 
@@ -139,7 +139,7 @@ type DescribeJobQueuesPaginatorOptions struct {
 	// in a single page along with a nextToken response element. The remaining results
 	// of the initial request can be seen by sending another DescribeJobQueues request
 	// with the returned nextToken value. This value can be between 1 and 100. If this
-	// parameter is not used, then DescribeJobQueues returns up to 100 results and a
+	// parameter isn't used, then DescribeJobQueues returns up to 100 results and a
 	// nextToken value if applicable.
 	Limit int32
 

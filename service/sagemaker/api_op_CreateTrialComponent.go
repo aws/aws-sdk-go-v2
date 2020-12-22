@@ -58,6 +58,9 @@ type CreateTrialComponentInput struct {
 	// algorithms, hyperparameters, source code, and instance types.
 	InputArtifacts map[string]types.TrialComponentArtifact
 
+	// Metadata properties of the tracking entity, trial, or trial component.
+	MetadataProperties *types.MetadataProperties
+
 	// The output artifacts for the component. Examples of output artifacts are
 	// metrics, snapshots, logs, and images.
 	OutputArtifacts map[string]types.TrialComponentArtifact

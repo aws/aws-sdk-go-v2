@@ -2221,6 +2221,9 @@ func awsAwsquery_deserializeOpErrorCreateSnapshotSchedule(response *smithyhttp.R
 	case strings.EqualFold("InvalidScheduleFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidScheduleFault(response, errorBody)
 
+	case strings.EqualFold("InvalidTagFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidTagFault(response, errorBody)
+
 	case strings.EqualFold("ScheduleDefinitionTypeUnsupportedFault", errorCode):
 		return awsAwsquery_deserializeErrorScheduleDefinitionTypeUnsupportedFault(response, errorBody)
 
@@ -2338,6 +2341,9 @@ func awsAwsquery_deserializeOpErrorCreateTags(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
+
 	case strings.EqualFold("InvalidTagFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTagFault(response, errorBody)
 
@@ -10381,6 +10387,9 @@ func awsAwsquery_deserializeOpErrorResumeCluster(response *smithyhttp.Response, 
 	case strings.EqualFold("ClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("InsufficientClusterCapacityFault", errorCode):
+		return awsAwsquery_deserializeErrorInsufficientClusterCapacityFault(response, errorBody)
+
 	case strings.EqualFold("InvalidClusterStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
@@ -16531,6 +16540,19 @@ func awsAwsquery_deserializeDocumentCluster(v **types.Cluster, decoder smithyxml
 				sv.AvailabilityZone = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("AvailabilityZoneRelocationStatus", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AvailabilityZoneRelocationStatus = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("ClusterAvailabilityStatus", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -20258,6 +20280,12 @@ func awsAwsquery_deserializeDocumentEndpoint(v **types.Endpoint, decoder smithyx
 					return err
 				}
 				sv.Port = int32(i64)
+			}
+
+		case strings.EqualFold("VpcEndpoints", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentSpartaProxyVpcEndpointList(&sv.VpcEndpoints, nodeDecoder); err != nil {
+				return err
 			}
 
 		default:
@@ -25631,7 +25659,7 @@ func awsAwsquery_deserializeDocumentResizeClusterMessage(v **types.ResizeCluster
 				if err != nil {
 					return err
 				}
-				sv.NumberOfNodes = int32(i64)
+				sv.NumberOfNodes = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -27168,6 +27196,19 @@ func awsAwsquery_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				sv.EncryptedWithHSM = xtv
+			}
+
+		case strings.EqualFold("EngineFullVersion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.EngineFullVersion = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("EnhancedVpcRouting", t.Name.Local):
@@ -28772,6 +28813,120 @@ func awsAwsquery_deserializeDocumentSourceNotFoundFault(v **types.SourceNotFound
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentSpartaProxyVpcEndpoint(v **types.SpartaProxyVpcEndpoint, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.SpartaProxyVpcEndpoint
+	if *v == nil {
+		sv = &types.SpartaProxyVpcEndpoint{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("VpcEndpointId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.VpcEndpointId = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentSpartaProxyVpcEndpointList(v *[]types.SpartaProxyVpcEndpoint, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.SpartaProxyVpcEndpoint
+	if *v == nil {
+		sv = make([]types.SpartaProxyVpcEndpoint, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		for {
+			if strings.EqualFold("SpartaProxyVpcEndpoint", t.Name.Local) {
+				var col types.SpartaProxyVpcEndpoint
+				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+				destAddr := &col
+				if err := awsAwsquery_deserializeDocumentSpartaProxyVpcEndpoint(&destAddr, nodeDecoder); err != nil {
+					return err
+				}
+				col = *destAddr
+				sv = append(sv, col)
+				break
+			} else {
+				break
+			}
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentSpartaProxyVpcEndpointListUnwrapped(v *[]types.SpartaProxyVpcEndpoint, decoder smithyxml.NodeDecoder) error {
+	var sv []types.SpartaProxyVpcEndpoint
+	if *v == nil {
+		sv = make([]types.SpartaProxyVpcEndpoint, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.SpartaProxyVpcEndpoint
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentSpartaProxyVpcEndpoint(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsAwsquery_deserializeDocumentSubnet(v **types.Subnet, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)

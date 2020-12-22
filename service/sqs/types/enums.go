@@ -4,18 +4,6 @@ package types
 
 type MessageSystemAttributeName string
 
-// Enum values for MessageSystemAttributeName
-const (
-	MessageSystemAttributeNameSenderid                         MessageSystemAttributeName = "SenderId"
-	MessageSystemAttributeNameSenttimestamp                    MessageSystemAttributeName = "SentTimestamp"
-	MessageSystemAttributeNameApproximatereceivecount          MessageSystemAttributeName = "ApproximateReceiveCount"
-	MessageSystemAttributeNameApproximatefirstreceivetimestamp MessageSystemAttributeName = "ApproximateFirstReceiveTimestamp"
-	MessageSystemAttributeNameSequencenumber                   MessageSystemAttributeName = "SequenceNumber"
-	MessageSystemAttributeNameMessagededuplicationid           MessageSystemAttributeName = "MessageDeduplicationId"
-	MessageSystemAttributeNameMessagegroupid                   MessageSystemAttributeName = "MessageGroupId"
-	MessageSystemAttributeNameAwstraceheader                   MessageSystemAttributeName = "AWSTraceHeader"
-)
-
 // Values returns all known values for MessageSystemAttributeName. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
 // The ordering of this slice is not guaranteed to be stable across updates.
@@ -34,11 +22,6 @@ func (MessageSystemAttributeName) Values() []MessageSystemAttributeName {
 
 type MessageSystemAttributeNameForSends string
 
-// Enum values for MessageSystemAttributeNameForSends
-const (
-	MessageSystemAttributeNameForSendsAwstraceheader MessageSystemAttributeNameForSends = "AWSTraceHeader"
-)
-
 // Values returns all known values for MessageSystemAttributeNameForSends. Note
 // that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
@@ -50,28 +33,6 @@ func (MessageSystemAttributeNameForSends) Values() []MessageSystemAttributeNameF
 }
 
 type QueueAttributeName string
-
-// Enum values for QueueAttributeName
-const (
-	QueueAttributeNameAll                                   QueueAttributeName = "All"
-	QueueAttributeNamePolicy                                QueueAttributeName = "Policy"
-	QueueAttributeNameVisibilitytimeout                     QueueAttributeName = "VisibilityTimeout"
-	QueueAttributeNameMaximummessagesize                    QueueAttributeName = "MaximumMessageSize"
-	QueueAttributeNameMessageretentionperiod                QueueAttributeName = "MessageRetentionPeriod"
-	QueueAttributeNameApproximatenumberofmessages           QueueAttributeName = "ApproximateNumberOfMessages"
-	QueueAttributeNameApproximatenumberofmessagesnotvisible QueueAttributeName = "ApproximateNumberOfMessagesNotVisible"
-	QueueAttributeNameCreatedtimestamp                      QueueAttributeName = "CreatedTimestamp"
-	QueueAttributeNameLastmodifiedtimestamp                 QueueAttributeName = "LastModifiedTimestamp"
-	QueueAttributeNameQueuearn                              QueueAttributeName = "QueueArn"
-	QueueAttributeNameApproximatenumberofmessagesdelayed    QueueAttributeName = "ApproximateNumberOfMessagesDelayed"
-	QueueAttributeNameDelayseconds                          QueueAttributeName = "DelaySeconds"
-	QueueAttributeNameReceivemessagewaittimeseconds         QueueAttributeName = "ReceiveMessageWaitTimeSeconds"
-	QueueAttributeNameRedrivepolicy                         QueueAttributeName = "RedrivePolicy"
-	QueueAttributeNameFifoqueue                             QueueAttributeName = "FifoQueue"
-	QueueAttributeNameContentbaseddeduplication             QueueAttributeName = "ContentBasedDeduplication"
-	QueueAttributeNameKmsmasterkeyid                        QueueAttributeName = "KmsMasterKeyId"
-	QueueAttributeNameKmsdatakeyreuseperiodseconds          QueueAttributeName = "KmsDataKeyReusePeriodSeconds"
-)
 
 // Values returns all known values for QueueAttributeName. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The

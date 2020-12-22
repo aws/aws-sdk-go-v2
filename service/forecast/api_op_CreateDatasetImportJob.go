@@ -68,6 +68,8 @@ type CreateDatasetImportJobInput struct {
 	// This member is required.
 	DatasetImportJobName *string
 
+	GeolocationFormat *string
+
 	// The optional metadata that you apply to the dataset import job to help you
 	// categorize and organize them. Each tag consists of a key and an optional value,
 	// both of which you define. The following basic restrictions apply to tags:
@@ -101,6 +103,8 @@ type CreateDatasetImportJobInput struct {
 	// limit.
 	Tags []types.Tag
 
+	TimeZone *string
+
 	// The format of timestamps in the dataset. The format that you specify depends on
 	// the DataFrequency specified when the dataset was created. The following formats
 	// are supported
@@ -114,6 +118,8 @@ type CreateDatasetImportJobInput struct {
 	// If the format isn't specified,
 	// Amazon Forecast expects the format to be "yyyy-MM-dd HH:mm:ss".
 	TimestampFormat *string
+
+	UseGeolocationForTimeZone bool
 }
 
 type CreateDatasetImportJobOutput struct {

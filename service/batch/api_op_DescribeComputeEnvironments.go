@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes one or more of your compute environments. If you are using an
-// unmanaged compute environment, you can use the DescribeComputeEnvironment
-// operation to determine the ecsClusterArn that you should launch your Amazon ECS
-// container instances into.
+// Describes one or more of your compute environments. If you're using an unmanaged
+// compute environment, you can use the DescribeComputeEnvironment operation to
+// determine the ecsClusterArn that you should launch your Amazon ECS container
+// instances into.
 func (c *Client) DescribeComputeEnvironments(ctx context.Context, params *DescribeComputeEnvironmentsInput, optFns ...func(*Options)) (*DescribeComputeEnvironmentsOutput, error) {
 	if params == nil {
 		params = &DescribeComputeEnvironmentsInput{}
@@ -42,7 +42,7 @@ type DescribeComputeEnvironmentsInput struct {
 	// returns maxResults results in a single page along with a nextToken response
 	// element. The remaining results of the initial request can be seen by sending
 	// another DescribeComputeEnvironments request with the returned nextToken value.
-	// This value can be between 1 and 100. If this parameter is not used, then
+	// This value can be between 1 and 100. If this parameter isn't used, then
 	// DescribeComputeEnvironments returns up to 100 results and a nextToken value if
 	// applicable.
 	MaxResults int32
@@ -145,7 +145,7 @@ type DescribeComputeEnvironmentsPaginatorOptions struct {
 	// returns maxResults results in a single page along with a nextToken response
 	// element. The remaining results of the initial request can be seen by sending
 	// another DescribeComputeEnvironments request with the returned nextToken value.
-	// This value can be between 1 and 100. If this parameter is not used, then
+	// This value can be between 1 and 100. If this parameter isn't used, then
 	// DescribeComputeEnvironments returns up to 100 results and a nextToken value if
 	// applicable.
 	Limit int32

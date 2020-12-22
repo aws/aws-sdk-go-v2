@@ -13,11 +13,9 @@ import (
 
 // Stops advertising an address range that is provisioned as an address pool. You
 // can perform this operation at most once every 10 seconds, even if you specify
-// different address ranges each time. To see an AWS CLI example of withdrawing an
-// address range for BYOIP so it will no longer be advertised by AWS, scroll down
-// to Example. It can take a few minutes before traffic to the specified addresses
-// stops routing to AWS because of propagation delays. For more information, see
-// Bring Your Own IP Addresses (BYOIP)
+// different address ranges each time. It can take a few minutes before traffic to
+// the specified addresses stops routing to AWS because of propagation delays. For
+// more information, see Bring Your Own IP Addresses (BYOIP)
 // (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html) in
 // the AWS Global Accelerator Developer Guide.
 func (c *Client) WithdrawByoipCidr(ctx context.Context, params *WithdrawByoipCidrInput, optFns ...func(*Options)) (*WithdrawByoipCidrOutput, error) {

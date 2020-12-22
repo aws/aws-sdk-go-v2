@@ -4428,7 +4428,7 @@ func awsRestjson1_deserializeDocumentAnnotations(v *map[string][]types.ValueWith
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentAnnotationValue(v **types.AnnotationValue, value interface{}) error {
+func awsRestjson1_deserializeDocumentAnnotationValue(v *types.AnnotationValue, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4441,25 +4441,24 @@ func awsRestjson1_deserializeDocumentAnnotationValue(v **types.AnnotationValue, 
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var sv *types.AnnotationValue
-	if *v == nil {
-		sv = &types.AnnotationValue{}
-	} else {
-		sv = *v
-	}
-
+	var uv types.AnnotationValue
+loop:
 	for key, value := range shape {
 		switch key {
 		case "BooleanValue":
+			var mv bool
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
 					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.BooleanValue = ptr.Bool(jtv)
+				mv = jtv
 			}
+			uv = &types.AnnotationValueMemberBooleanValue{Value: mv}
+			break loop
 
 		case "NumberValue":
+			var mv float64
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
@@ -4469,24 +4468,30 @@ func awsRestjson1_deserializeDocumentAnnotationValue(v **types.AnnotationValue, 
 				if err != nil {
 					return err
 				}
-				sv.NumberValue = ptr.Float64(f64)
+				mv = f64
 			}
+			uv = &types.AnnotationValueMemberNumberValue{Value: mv}
+			break loop
 
 		case "StringValue":
+			var mv string
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.StringValue = ptr.String(jtv)
+				mv = jtv
 			}
+			uv = &types.AnnotationValueMemberStringValue{Value: mv}
+			break loop
 
 		default:
-			_, _ = key, value
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
 
 		}
 	}
-	*v = sv
+	*v = uv
 	return nil
 }
 

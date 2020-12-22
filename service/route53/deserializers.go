@@ -5120,7 +5120,11 @@ func awsRestxml_deserializeOpDocumentListGeoLocationsOutput(v **ListGeoLocations
 			}
 			{
 				xtv := string(val)
-				sv.MaxItems = ptr.String(xtv)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxItems = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("NextContinentCode", t.Name.Local):
@@ -5341,7 +5345,11 @@ func awsRestxml_deserializeOpDocumentListHealthChecksOutput(v **ListHealthChecks
 			}
 			{
 				xtv := string(val)
-				sv.MaxItems = ptr.String(xtv)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxItems = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("NextMarker", t.Name.Local):
@@ -5539,7 +5547,11 @@ func awsRestxml_deserializeOpDocumentListHostedZonesOutput(v **ListHostedZonesOu
 			}
 			{
 				xtv := string(val)
-				sv.MaxItems = ptr.String(xtv)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxItems = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("NextMarker", t.Name.Local):
@@ -5747,7 +5759,11 @@ func awsRestxml_deserializeOpDocumentListHostedZonesByNameOutput(v **ListHostedZ
 			}
 			{
 				xtv := string(val)
-				sv.MaxItems = ptr.String(xtv)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxItems = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("NextDNSName", t.Name.Local):
@@ -5926,7 +5942,11 @@ func awsRestxml_deserializeOpDocumentListHostedZonesByVPCOutput(v **ListHostedZo
 			}
 			{
 				xtv := string(val)
-				sv.MaxItems = ptr.String(xtv)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxItems = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("NextToken", t.Name.Local):
@@ -6258,7 +6278,11 @@ func awsRestxml_deserializeOpDocumentListResourceRecordSetsOutput(v **ListResour
 			}
 			{
 				xtv := string(val)
-				sv.MaxItems = ptr.String(xtv)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxItems = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("NextRecordIdentifier", t.Name.Local):
@@ -6482,7 +6506,11 @@ func awsRestxml_deserializeOpDocumentListReusableDelegationSetsOutput(v **ListRe
 			}
 			{
 				xtv := string(val)
-				sv.MaxItems = ptr.String(xtv)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxItems = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("NextMarker", t.Name.Local):
@@ -6953,7 +6981,11 @@ func awsRestxml_deserializeOpDocumentListTrafficPoliciesOutput(v **ListTrafficPo
 			}
 			{
 				xtv := string(val)
-				sv.MaxItems = ptr.String(xtv)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxItems = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("TrafficPolicyIdMarker", t.Name.Local):
@@ -7148,7 +7180,11 @@ func awsRestxml_deserializeOpDocumentListTrafficPolicyInstancesOutput(v **ListTr
 			}
 			{
 				xtv := string(val)
-				sv.MaxItems = ptr.String(xtv)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxItems = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("TrafficPolicyInstanceNameMarker", t.Name.Local):
@@ -7346,7 +7382,11 @@ func awsRestxml_deserializeOpDocumentListTrafficPolicyInstancesByHostedZoneOutpu
 			}
 			{
 				xtv := string(val)
-				sv.MaxItems = ptr.String(xtv)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxItems = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("TrafficPolicyInstanceNameMarker", t.Name.Local):
@@ -7557,7 +7597,11 @@ func awsRestxml_deserializeOpDocumentListTrafficPolicyInstancesByPolicyOutput(v 
 			}
 			{
 				xtv := string(val)
-				sv.MaxItems = ptr.String(xtv)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxItems = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("TrafficPolicyInstanceNameMarker", t.Name.Local):
@@ -7752,7 +7796,11 @@ func awsRestxml_deserializeOpDocumentListTrafficPolicyVersionsOutput(v **ListTra
 			}
 			{
 				xtv := string(val)
-				sv.MaxItems = ptr.String(xtv)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxItems = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("TrafficPolicies", t.Name.Local):

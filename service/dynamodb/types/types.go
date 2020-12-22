@@ -469,6 +469,44 @@ type BackupSummary struct {
 	TableName *string
 }
 
+// An error associated with a statement in a PartiQL batch that was run.
+type BatchStatementError struct {
+
+	// The error code associated with the failed PartiQL batch statement.
+	Code BatchStatementErrorCodeEnum
+
+	// The error message associated with the PartiQL batch resposne.
+	Message *string
+}
+
+// A PartiQL batch statement request.
+type BatchStatementRequest struct {
+
+	// A valid PartiQL statement.
+	//
+	// This member is required.
+	Statement *string
+
+	// The read consistency of the PartiQL batch request.
+	ConsistentRead *bool
+
+	// The parameters associated with a PartiQL statement in the batch request.
+	Parameters []AttributeValue
+}
+
+// A PartiQL batch statement response..
+type BatchStatementResponse struct {
+
+	// The error associated with a failed PartiQL batch statement.
+	Error *BatchStatementError
+
+	// A DynamoDB item associated with a BatchStatementResponse
+	Item map[string]AttributeValue
+
+	// The table name associated with a failed PartiQL batch statement.
+	TableName *string
+}
+
 // Contains the details for the read/write capacity mode.
 type BillingModeSummary struct {
 
@@ -1580,6 +1618,19 @@ type KeySchemaElement struct {
 	KeyType KeyType
 }
 
+// Describes a Kinesis data stream destination.
+type KinesisDataStreamDestination struct {
+
+	// The current status of replication.
+	DestinationStatus DestinationStatus
+
+	// The human-readable string that corresponds to the replica status.
+	DestinationStatusDescription *string
+
+	// The ARN for a specific Kinesis data stream.
+	StreamArn *string
+}
+
 // Represents the properties of a local secondary index.
 type LocalSecondaryIndex struct {
 
@@ -1683,6 +1734,18 @@ type LocalSecondaryIndexInfo struct {
 	// secondary index. These are in addition to the primary key attributes and index
 	// key attributes, which are automatically projected.
 	Projection *Projection
+}
+
+// Represents a PartiQL statment that uses parameters.
+type ParameterizedStatement struct {
+
+	// A PartiQL statment that uses parameters.
+	//
+	// This member is required.
+	Statement *string
+
+	// The parameter values.
+	Parameters []AttributeValue
 }
 
 // The description of the point in time settings applied to the table.

@@ -57,6 +57,9 @@ type Cluster struct {
 	// The name of the Availability Zone in which the cluster is located.
 	AvailabilityZone *string
 
+	// Describes the status of the Availability Zone relocation operation.
+	AvailabilityZoneRelocationStatus *string
+
 	// The availability status of the cluster for queries. Possible values are the
 	// following:
 	//
@@ -625,6 +628,9 @@ type Endpoint struct {
 
 	// The port that the database engine is listening on.
 	Port int32
+
+	// Describes a connection endpoint.
+	VpcEndpoints []SpartaProxyVpcEndpoint
 }
 
 // Describes an event.
@@ -1092,7 +1098,7 @@ type ResizeClusterMessage struct {
 
 	// The new number of nodes for the cluster. If not specified, the cluster's current
 	// number of nodes is used.
-	NumberOfNodes int32
+	NumberOfNodes *int32
 }
 
 // Describes a resize operation.
@@ -1285,6 +1291,10 @@ type Snapshot struct {
 	// keys.
 	EncryptedWithHSM bool
 
+	// The cluster version of the cluster used to create the snapshot. For example,
+	// 1.0.15503.
+	EngineFullVersion *string
+
 	// An option that specifies whether to create the cluster with enhanced VPC routing
 	// enabled. To create a cluster that uses enhanced VPC routing, the cluster must be
 	// in a VPC. For more information, see Enhanced VPC Routing
@@ -1446,6 +1456,15 @@ type SnapshotSortingEntity struct {
 
 	// The order for listing the attributes.
 	SortOrder SortByOrder
+}
+
+// The connection endpoint for connecting an Amazon Redshift cluster through the
+// proxy.
+type SpartaProxyVpcEndpoint struct {
+
+	// The connection endpoint ID for connecting an Amazon Redshift cluster through the
+	// proxy.
+	VpcEndpointId *string
 }
 
 // Describes a subnet.

@@ -13,8 +13,8 @@ import (
 
 // Describes the load balancers for the specified Auto Scaling group. This
 // operation describes only Classic Load Balancers. If you have Application Load
-// Balancers or Network Load Balancers, use the DescribeLoadBalancerTargetGroups
-// API instead.
+// Balancers, Network Load Balancers, or Gateway Load Balancers, use the
+// DescribeLoadBalancerTargetGroups API instead.
 func (c *Client) DescribeLoadBalancers(ctx context.Context, params *DescribeLoadBalancersInput, optFns ...func(*Options)) (*DescribeLoadBalancersOutput, error) {
 	if params == nil {
 		params = &DescribeLoadBalancersInput{}

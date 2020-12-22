@@ -161,11 +161,11 @@ func validateOpUpdateJobExecutionInput(v *UpdateJobExecutionInput) error {
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
-	if len(v.Status) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Status"))
-	}
 	if v.ThingName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -12,11 +12,12 @@ import (
 
 // Detaches one or more Classic Load Balancers from the specified Auto Scaling
 // group. This operation detaches only Classic Load Balancers. If you have
-// Application Load Balancers or Network Load Balancers, use the
-// DetachLoadBalancerTargetGroups API instead. When you detach a load balancer, it
-// enters the Removing state while deregistering the instances in the group. When
-// all instances are deregistered, then you can no longer describe the load
-// balancer using the DescribeLoadBalancers API call. The instances remain running.
+// Application Load Balancers, Network Load Balancers, or Gateway Load Balancers,
+// use the DetachLoadBalancerTargetGroups API instead. When you detach a load
+// balancer, it enters the Removing state while deregistering the instances in the
+// group. When all instances are deregistered, then you can no longer describe the
+// load balancer using the DescribeLoadBalancers API call. The instances remain
+// running.
 func (c *Client) DetachLoadBalancers(ctx context.Context, params *DetachLoadBalancersInput, optFns ...func(*Options)) (*DetachLoadBalancersOutput, error) {
 	if params == nil {
 		params = &DetachLoadBalancersInput{}

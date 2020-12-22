@@ -807,11 +807,11 @@ func validateHITLayoutParameter(v *types.HITLayoutParameter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HITLayoutParameter"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -874,17 +874,17 @@ func validateNotificationSpecification(v *types.NotificationSpecification) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NotificationSpecification"}
-	if v.EventTypes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EventTypes"))
-	}
-	if v.Version == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
 	}
 	if len(v.Transport) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Transport"))
 	}
-	if v.Destination == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if v.EventTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTypes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -898,6 +898,9 @@ func validateQualificationRequirement(v *types.QualificationRequirement) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "QualificationRequirement"}
+	if v.QualificationTypeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QualificationTypeId"))
+	}
 	if len(v.Comparator) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Comparator"))
 	}
@@ -905,9 +908,6 @@ func validateQualificationRequirement(v *types.QualificationRequirement) error {
 		if err := validateLocaleList(v.LocaleValues); err != nil {
 			invalidParams.AddNested("LocaleValues", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.QualificationTypeId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QualificationTypeId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -983,11 +983,11 @@ func validateOpAssociateQualificationWithWorkerInput(v *AssociateQualificationWi
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateQualificationWithWorkerInput"}
-	if v.WorkerId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("WorkerId"))
-	}
 	if v.QualificationTypeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QualificationTypeId"))
+	}
+	if v.WorkerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkerId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1001,11 +1001,11 @@ func validateOpCreateAdditionalAssignmentsForHITInput(v *CreateAdditionalAssignm
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAdditionalAssignmentsForHITInput"}
-	if v.NumberOfAdditionalAssignments == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NumberOfAdditionalAssignments"))
-	}
 	if v.HITId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HITId"))
+	}
+	if v.NumberOfAdditionalAssignments == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NumberOfAdditionalAssignments"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1019,39 +1019,39 @@ func validateOpCreateHITInput(v *CreateHITInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateHITInput"}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
-	}
 	if v.LifetimeInSeconds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LifetimeInSeconds"))
-	}
-	if v.AssignmentReviewPolicy != nil {
-		if err := validateReviewPolicy(v.AssignmentReviewPolicy); err != nil {
-			invalidParams.AddNested("AssignmentReviewPolicy", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.HITLayoutParameters != nil {
-		if err := validateHITLayoutParameterList(v.HITLayoutParameters); err != nil {
-			invalidParams.AddNested("HITLayoutParameters", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.AssignmentDurationInSeconds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssignmentDurationInSeconds"))
 	}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
-	}
 	if v.Reward == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Reward"))
+	}
+	if v.Title == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Title"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
 	if v.QualificationRequirements != nil {
 		if err := validateQualificationRequirementList(v.QualificationRequirements); err != nil {
 			invalidParams.AddNested("QualificationRequirements", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AssignmentReviewPolicy != nil {
+		if err := validateReviewPolicy(v.AssignmentReviewPolicy); err != nil {
+			invalidParams.AddNested("AssignmentReviewPolicy", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.HITReviewPolicy != nil {
 		if err := validateReviewPolicy(v.HITReviewPolicy); err != nil {
 			invalidParams.AddNested("HITReviewPolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HITLayoutParameters != nil {
+		if err := validateHITLayoutParameterList(v.HITLayoutParameters); err != nil {
+			invalidParams.AddNested("HITLayoutParameters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1066,22 +1066,22 @@ func validateOpCreateHITTypeInput(v *CreateHITTypeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateHITTypeInput"}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	if v.AssignmentDurationInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssignmentDurationInSeconds"))
 	}
 	if v.Reward == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Reward"))
+	}
+	if v.Title == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Title"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
 	if v.QualificationRequirements != nil {
 		if err := validateQualificationRequirementList(v.QualificationRequirements); err != nil {
 			invalidParams.AddNested("QualificationRequirements", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
-	}
-	if v.AssignmentDurationInSeconds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AssignmentDurationInSeconds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1095,16 +1095,11 @@ func validateOpCreateHITWithHITTypeInput(v *CreateHITWithHITTypeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateHITWithHITTypeInput"}
-	if v.LifetimeInSeconds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LifetimeInSeconds"))
-	}
 	if v.HITTypeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HITTypeId"))
 	}
-	if v.HITLayoutParameters != nil {
-		if err := validateHITLayoutParameterList(v.HITLayoutParameters); err != nil {
-			invalidParams.AddNested("HITLayoutParameters", err.(smithy.InvalidParamsError))
-		}
+	if v.LifetimeInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LifetimeInSeconds"))
 	}
 	if v.AssignmentReviewPolicy != nil {
 		if err := validateReviewPolicy(v.AssignmentReviewPolicy); err != nil {
@@ -1114,6 +1109,11 @@ func validateOpCreateHITWithHITTypeInput(v *CreateHITWithHITTypeInput) error {
 	if v.HITReviewPolicy != nil {
 		if err := validateReviewPolicy(v.HITReviewPolicy); err != nil {
 			invalidParams.AddNested("HITReviewPolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HITLayoutParameters != nil {
+		if err := validateHITLayoutParameterList(v.HITLayoutParameters); err != nil {
+			invalidParams.AddNested("HITLayoutParameters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1128,11 +1128,11 @@ func validateOpCreateQualificationTypeInput(v *CreateQualificationTypeInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateQualificationTypeInput"}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
 	if len(v.QualificationTypeStatus) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("QualificationTypeStatus"))
@@ -1245,11 +1245,11 @@ func validateOpGetFileUploadURLInput(v *GetFileUploadURLInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetFileUploadURLInput"}
-	if v.QuestionIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QuestionIdentifier"))
-	}
 	if v.AssignmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssignmentId"))
+	}
+	if v.QuestionIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuestionIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1389,11 +1389,11 @@ func validateOpNotifyWorkersInput(v *NotifyWorkersInput) error {
 	if v.Subject == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Subject"))
 	}
-	if v.WorkerIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("WorkerIds"))
-	}
 	if v.MessageText == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MessageText"))
+	}
+	if v.WorkerIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkerIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1407,11 +1407,11 @@ func validateOpRejectAssignmentInput(v *RejectAssignmentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RejectAssignmentInput"}
-	if v.RequesterFeedback == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RequesterFeedback"))
-	}
 	if v.AssignmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssignmentId"))
+	}
+	if v.RequesterFeedback == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequesterFeedback"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1440,9 +1440,6 @@ func validateOpSendBonusInput(v *SendBonusInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SendBonusInput"}
-	if v.Reason == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
-	}
 	if v.WorkerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkerId"))
 	}
@@ -1451,6 +1448,9 @@ func validateOpSendBonusInput(v *SendBonusInput) error {
 	}
 	if v.AssignmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssignmentId"))
+	}
+	if v.Reason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1464,15 +1464,15 @@ func validateOpSendTestEventNotificationInput(v *SendTestEventNotificationInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SendTestEventNotificationInput"}
-	if len(v.TestEventType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TestEventType"))
-	}
 	if v.Notification == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Notification"))
 	} else if v.Notification != nil {
 		if err := validateNotificationSpecification(v.Notification); err != nil {
 			invalidParams.AddNested("Notification", err.(smithy.InvalidParamsError))
 		}
+	}
+	if len(v.TestEventType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TestEventType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1537,13 +1537,13 @@ func validateOpUpdateNotificationSettingsInput(v *UpdateNotificationSettingsInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateNotificationSettingsInput"}
+	if v.HITTypeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HITTypeId"))
+	}
 	if v.Notification != nil {
 		if err := validateNotificationSpecification(v.Notification); err != nil {
 			invalidParams.AddNested("Notification", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.HITTypeId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HITTypeId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
