@@ -124,9 +124,7 @@ func (v *DefaultVisitor) VisitStatement(stmt AST) error {
 		name = strings.ToLower(name)
 		// attach profile name on section
 		if !v.Sections.HasSection(name) {
-			v.Sections.container[name] = Section{
-				Name: name,
-			}
+			v.Sections.container[name] = NewSection(name)
 		}
 		v.scope = name
 	default:
@@ -210,6 +208,15 @@ type Section struct {
 	// was retrieved. They key is the property, value is the
 	// source file the property was retrieved from.
 	SourceFile map[string]string
+}
+
+// NewSection returns an initialize section for the name
+func NewSection(name string) Section {
+	return Section{
+		Name:       name,
+		values:     values{},
+		SourceFile: map[string]string{},
+	}
 }
 
 // UpdateSourceFile updates source file for a property to provided filepath.
