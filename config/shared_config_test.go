@@ -524,7 +524,7 @@ func TestSharedConfigLoading(t *testing.T) {
 				Region:  "us-west-2",
 			},
 			ExpectLog: "For profile: profile duplicate-profile, overriding region value, with a region value found in a " +
-				"duplicate profile defined later in the same file testdata/load_config",
+				"duplicate profile defined later in the same file",
 		},
 
 		"profile prefix not used in the configuration files": {
@@ -646,7 +646,7 @@ func TestSharedConfigLoading(t *testing.T) {
 				Credentials: aws.Credentials{
 					AccessKeyID:     "credsAccessKey",
 					SecretAccessKey: "credsSecretKey",
-					Source:          "SharedConfigCredentials: testdata/load_credentials",
+					Source:          fmt.Sprintf("SharedConfigCredentials: %v", filepath.Join("testdata", "load_credentials")),
 				},
 			},
 		},
