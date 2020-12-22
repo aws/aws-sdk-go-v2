@@ -88,8 +88,11 @@ func setupCredentialsEndpoints(t *testing.T) (aws.EndpointResolver, func()) {
 }
 
 func TestSharedConfigCredentialSource(t *testing.T) {
-	var configFileForWindows = filepath.Join("testdata", "credential_source_config_for_windows")
-	var configFile = filepath.Join("testdata", "credential_source_config")
+	var configFileForWindows = filepath.Join("testdata", "config_source_shared_for_windows")
+	var configFile = filepath.Join("testdata", "config_source_shared")
+
+	var credFileForWindows = filepath.Join("testdata", "credentials_source_shared_for_windows")
+	var credFile = filepath.Join("testdata", "credentials_source_shared")
 
 	cases := map[string]struct {
 		name              string
@@ -104,7 +107,7 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 	}{
 		"credential source and source profile": {
 			envProfile:    "invalid_source_and_credential_source",
-			expectedError: "nly source profile or credential source can be specified",
+			expectedError: "only source profile or credential source can be specified",
 			init: func() {
 				os.Setenv("AWS_ACCESS_KEY", "access_key")
 				os.Setenv("AWS_SECRET_KEY", "secret_key")
@@ -174,6 +177,28 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 				"assume_role_w_creds_proc_source_prof",
 			},
 		},
+		"credential source overrides config source": {
+			envProfile:        "credentials_overide",
+			expectedAccessKey: "AKID",
+			expectedSecretKey: "SECRET",
+			expectedChain: []string{
+				"assume_role_w_creds_role_arn_ec2",
+			},
+			init: func() {
+				os.Setenv("AWS_CONTAINER_CREDENTIALS_RELATIVE_URI", "/ECS")
+			},
+		},
+		"only credential source": {
+			envProfile:        "only_credentials_source",
+			expectedAccessKey: "AKID",
+			expectedSecretKey: "SECRET",
+			expectedChain: []string{
+				"assume_role_w_creds_role_arn_ecs",
+			},
+			init: func() {
+				os.Setenv("AWS_CONTAINER_CREDENTIALS_RELATIVE_URI", "/ECS")
+			},
+		},
 	}
 
 	for name, c := range cases {
@@ -183,8 +208,10 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 
 			if c.dependentOnOS && runtime.GOOS == "windows" {
 				os.Setenv("AWS_CONFIG_FILE", configFileForWindows)
+				os.Setenv("AWS_SHARED_CREDENTIALS_FILE", credFileForWindows)
 			} else {
 				os.Setenv("AWS_CONFIG_FILE", configFile)
+				os.Setenv("AWS_SHARED_CREDENTIALS_FILE", credFile)
 			}
 
 			os.Setenv("AWS_REGION", "us-east-1")

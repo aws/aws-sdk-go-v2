@@ -2,12 +2,11 @@ package config
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"os"
 	"path/filepath"
 	"runtime"
 	"testing"
-
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 )
 
 func setupEnvForProcesscredsConfigFile() {
@@ -17,6 +16,7 @@ func setupEnvForProcesscredsConfigFile() {
 	}
 
 	os.Setenv("AWS_CONFIG_FILE", filepath.Join("testdata", filename))
+	os.Setenv("AWS_SHARED_CREDENTIALS_FILE", filepath.Join("testdata", "empty_creds_config"))
 }
 
 func setupEnvForProcesscredsCredentialsFile() {
@@ -33,7 +33,6 @@ func TestProcessCredentialsProvider_FromConfig(t *testing.T) {
 	defer awstesting.PopEnv(restoreEnv)
 
 	setupEnvForProcesscredsConfigFile()
-	os.Setenv("AWS_SDK_LOAD_CONFIG", "1")
 
 	config, err := LoadDefaultConfig(context.Background(), WithRegion("region"))
 	if err != nil {
@@ -63,7 +62,6 @@ func TestProcessCredentialsProvider_FromConfigWithProfile(t *testing.T) {
 	restoreEnv := awstesting.StashEnv()
 	defer awstesting.PopEnv(restoreEnv)
 
-	os.Setenv("AWS_SDK_LOAD_CONFIG", "1")
 	os.Setenv("AWS_PROFILE", "not_expire")
 	setupEnvForProcesscredsConfigFile()
 
@@ -87,7 +85,6 @@ func TestProcessCredentialsProvider_FromConfigWithStaticCreds(t *testing.T) {
 	restoreEnv := awstesting.StashEnv()
 	defer awstesting.PopEnv(restoreEnv)
 
-	os.Setenv("AWS_SDK_LOAD_CONFIG", "1")
 	os.Setenv("AWS_PROFILE", "not_alone")
 	setupEnvForProcesscredsConfigFile()
 

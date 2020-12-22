@@ -250,20 +250,31 @@ func (c EnvConfig) getSharedConfigProfile(ctx context.Context) (string, bool, er
 	return c.SharedConfigProfile, true, nil
 }
 
-// GetSharedConfigFiles returns a slice of filenames set in the environment.
+// getSharedConfigFiles returns a slice of filenames set in the environment.
 //
 // Will return the filenames in the order of:
-// * Shared Credentials
 // * Shared Config
 func (c EnvConfig) getSharedConfigFiles(context.Context) ([]string, bool, error) {
-	files := make([]string, 0, 2)
-	if v := c.SharedCredentialsFile; len(v) > 0 {
-		files = append(files, v)
-	}
+	var files []string
 	if v := c.SharedConfigFile; len(v) > 0 {
 		files = append(files, v)
 	}
 
+	if len(files) == 0 {
+		return nil, false, nil
+	}
+	return files, true, nil
+}
+
+// getSharedCredentialsFiles returns a slice of filenames set in the environment.
+//
+// Will return the filenames in the order of:
+// * Shared Credentials
+func (c EnvConfig) getSharedCredentialsFiles(context.Context) ([]string, bool, error) {
+	var files []string
+	if v := c.SharedCredentialsFile; len(v) > 0 {
+		files = append(files, v)
+	}
 	if len(files) == 0 {
 		return nil, false, nil
 	}

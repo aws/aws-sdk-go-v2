@@ -20,7 +20,7 @@ func TestAssumeRole(t *testing.T) {
 	defer awstesting.PopEnv(restoreEnv)
 
 	os.Setenv("AWS_REGION", "us-east-1")
-	os.Setenv("AWS_SHARED_CREDENTIALS_FILE", testConfigFilename)
+	os.Setenv("AWS_CONFIG_FILE", testConfigFilename)
 	os.Setenv("AWS_PROFILE", "assume_role_w_creds")
 
 	client := mockHTTPClient(func(r *http.Request) (*http.Response, error) {
@@ -59,7 +59,7 @@ func TestAssumeRole_WithMFA(t *testing.T) {
 	defer awstesting.PopEnv(restoreEnv)
 
 	os.Setenv("AWS_REGION", "us-east-1")
-	os.Setenv("AWS_SHARED_CREDENTIALS_FILE", testConfigFilename)
+	os.Setenv("AWS_CONFIG_FILE", testConfigFilename)
 	os.Setenv("AWS_PROFILE", "assume_role_w_creds")
 
 	client := mockHTTPClient(func(r *http.Request) (*http.Response, error) {
@@ -125,7 +125,7 @@ func TestAssumeRole_WithMFA_NoTokenProvider(t *testing.T) {
 	defer awstesting.PopEnv(restoreEnv)
 
 	os.Setenv("AWS_REGION", "us-east-1")
-	os.Setenv("AWS_SHARED_CREDENTIALS_FILE", testConfigFilename)
+	os.Setenv("AWS_CONFIG_FILE", testConfigFilename)
 	os.Setenv("AWS_PROFILE", "assume_role_w_creds")
 
 	_, err := LoadDefaultConfig(context.Background(), WithSharedConfigProfile("assume_role_w_mfa"))
@@ -140,7 +140,7 @@ func TestAssumeRole_InvalidSourceProfile(t *testing.T) {
 	restoreEnv := initConfigTestEnv()
 	defer awstesting.PopEnv(restoreEnv)
 
-	os.Setenv("AWS_SHARED_CREDENTIALS_FILE", testConfigFilename)
+	os.Setenv("AWS_CONFIG_FILE", testConfigFilename)
 	os.Setenv("AWS_PROFILE", "assume_role_invalid_source_profile")
 
 	_, err := LoadDefaultConfig(context.Background())
@@ -159,7 +159,7 @@ func TestAssumeRole_ExtendedDuration(t *testing.T) {
 	defer awstesting.PopEnv(restoreEnv)
 
 	os.Setenv("AWS_REGION", "us-east-1")
-	os.Setenv("AWS_SHARED_CREDENTIALS_FILE", testConfigFilename)
+	os.Setenv("AWS_CONFIG_FILE", testConfigFilename)
 	os.Setenv("AWS_PROFILE", "assume_role_w_creds_ext_dur")
 
 	client := mockHTTPClient(func(r *http.Request) (*http.Response, error) {
