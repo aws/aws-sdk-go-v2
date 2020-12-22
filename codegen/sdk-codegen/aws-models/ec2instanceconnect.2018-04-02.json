@@ -1,0 +1,249 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.ec2instanceconnect#AWSEC2InstanceConnectService": {
+            "type": "service",
+            "version": "2018-04-02",
+            "operations": [
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#SendSSHPublicKey"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "EC2 Instance Connect",
+                    "arnNamespace": "ec2-instance-connect",
+                    "cloudFormationName": "EC2InstanceConnect",
+                    "cloudTrailEventSource": "ec2instanceconnect.amazonaws.com",
+                    "endpointPrefix": "ec2-instance-connect"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ec2-instance-connect"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>AWS EC2 Connect Service is a service that enables system administrators to publish\n            temporary SSH keys to their EC2 instances in order to establish connections to their\n            instances without leaving a permanent authentication option.</p>",
+                "smithy.api#title": "AWS EC2 Instance Connect"
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#AuthException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ec2instanceconnect#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that either your AWS credentials are invalid or you do not have access to the EC2 instance.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#AvailabilityZone": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 6,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^(\\w+-){2,3}\\d+\\w+$"
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#EC2InstanceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ec2instanceconnect#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that the instance requested was not found in the given zone.  Check that you have provided a valid instance ID and the correct zone.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#InstanceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^i-[a-f0-9]+$"
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#InstanceOSUser": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[A-Za-z_][A-Za-z0-9\\@\\._-]{0,30}[A-Za-z0-9\\$_-]?$"
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#InvalidArgsException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ec2instanceconnect#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that you provided bad input.  Ensure you have a valid instance ID, the correct zone, and a valid SSH public key.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#RequestId": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2instanceconnect#SSHPublicKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 256,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#SendSSHPublicKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2instanceconnect#SendSSHPublicKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2instanceconnect#SendSSHPublicKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#AuthException"
+                },
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#EC2InstanceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#InvalidArgsException"
+                },
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Pushes an SSH public key to a particular OS user on a given EC2 instance for 60 seconds.</p>"
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#SendSSHPublicKeyRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.ec2instanceconnect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The EC2 instance you wish to publish the SSH key to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceOSUser": {
+                    "target": "com.amazonaws.ec2instanceconnect#InstanceOSUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OS user on the EC2 instance whom the key may be used to authenticate as.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SSHPublicKey": {
+                    "target": "com.amazonaws.ec2instanceconnect#SSHPublicKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public key to be published to the instance.  To use it after publication you must have the matching private key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.ec2instanceconnect#AvailabilityZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The availability zone the EC2 instance was launched in.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#SendSSHPublicKeyResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.ec2instanceconnect#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request ID as logged by EC2 Connect.  Please provide this when contacting AWS Support.</p>"
+                    }
+                },
+                "Success": {
+                    "target": "com.amazonaws.ec2instanceconnect#Success",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates request success.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#ServiceException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ec2instanceconnect#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that the service encountered an error.  Follow the message's instructions and try again.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#String": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2instanceconnect#Success": {
+            "type": "boolean"
+        },
+        "com.amazonaws.ec2instanceconnect#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ec2instanceconnect#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates you have been making requests too frequently and have been throttled.  Wait for a while and try again.  If higher call volume is warranted contact AWS Support.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        }
+    }
+}

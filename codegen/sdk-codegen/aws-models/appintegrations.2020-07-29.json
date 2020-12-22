@@ -1,0 +1,1073 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.appintegrations#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.appintegrations#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.appintegrations#AmazonAppIntegrationService": {
+            "type": "service",
+            "version": "2020-07-29",
+            "operations": [
+                {
+                    "target": "com.amazonaws.appintegrations#CreateEventIntegration"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#DeleteEventIntegration"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#GetEventIntegration"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ListEventIntegrationAssociations"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ListEventIntegrations"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#UpdateEventIntegration"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "AppIntegrations",
+                    "arnNamespace": "app-integrations",
+                    "cloudFormationName": "AppIntegrations",
+                    "cloudTrailEventSource": "appintegrations.amazonaws.com",
+                    "endpointPrefix": "app-integrations"
+                },
+                "aws.auth#sigv4": {
+                    "name": "app-integrations"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n  \n         <p>The Amazon AppIntegrations service enables you to configure and reuse connections to external applications.</p>\n         <p>For information about how you can use external applications with Amazon Connect, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/crm.html\">Set up pre-built integrations</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#title": "Amazon AppIntegrations Service"
+            }
+        },
+        "com.amazonaws.appintegrations#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
+            }
+        },
+        "com.amazonaws.appintegrations#ClientAssociationMetadata": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.appintegrations#NonBlankString"
+            },
+            "value": {
+                "target": "com.amazonaws.appintegrations#NonBlankString"
+            }
+        },
+        "com.amazonaws.appintegrations#ClientId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.appintegrations#CreateEventIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appintegrations#CreateEventIntegrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appintegrations#CreateEventIntegrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appintegrations#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#DuplicateResourceException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ResourceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>Creates an EventIntegration, given a specified name, description, and a reference to an\n      Amazon Eventbridge bus in your account and a partner event source that will push events to that bus. No\n      objects are created in the your account, only metadata that is persisted on the EventIntegration\n      control plane.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/eventIntegrations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#CreateEventIntegrationRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appintegrations#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event integration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appintegrations#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the event integration.</p>"
+                    }
+                },
+                "EventFilter": {
+                    "target": "com.amazonaws.appintegrations#EventFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventBridgeBus": {
+                    "target": "com.amazonaws.appintegrations#EventBridgeBus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Eventbridge bus.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.appintegrations#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n      request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.appintegrations#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tags.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#CreateEventIntegrationResponse": {
+            "type": "structure",
+            "members": {
+                "EventIntegrationArn": {
+                    "target": "com.amazonaws.appintegrations#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the event integration. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#DeleteEventIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appintegrations#DeleteEventIntegrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appintegrations#DeleteEventIntegrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appintegrations#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>Deletes the specified existing event integration. If the event integration is associated\n      with clients, the request is rejected.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/eventIntegrations/{Name}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#DeleteEventIntegrationRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appintegrations#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event integration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#DeleteEventIntegrationResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.appintegrations#Description": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.appintegrations#DuplicateResourceException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.appintegrations#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A resource with the specified name already exists.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.appintegrations#EventBridgeBus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\/\\._\\-]+$"
+            }
+        },
+        "com.amazonaws.appintegrations#EventBridgeRuleName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\/\\._\\-]+$"
+            }
+        },
+        "com.amazonaws.appintegrations#EventFilter": {
+            "type": "structure",
+            "members": {
+                "Source": {
+                    "target": "com.amazonaws.appintegrations#Source",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the events.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>The event filter.</p>"
+            }
+        },
+        "com.amazonaws.appintegrations#EventIntegration": {
+            "type": "structure",
+            "members": {
+                "EventIntegrationArn": {
+                    "target": "com.amazonaws.appintegrations#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the event integration.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.appintegrations#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event integration.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appintegrations#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event integration description.</p>"
+                    }
+                },
+                "EventFilter": {
+                    "target": "com.amazonaws.appintegrations#EventFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event integration filter.</p>"
+                    }
+                },
+                "EventBridgeBus": {
+                    "target": "com.amazonaws.appintegrations#EventBridgeBus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Eventbridge bus for the event integration.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.appintegrations#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>The event integration.</p>"
+            }
+        },
+        "com.amazonaws.appintegrations#EventIntegrationAssociation": {
+            "type": "structure",
+            "members": {
+                "EventIntegrationAssociationArn": {
+                    "target": "com.amazonaws.appintegrations#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the event integration association.</p>"
+                    }
+                },
+                "EventIntegrationAssociationId": {
+                    "target": "com.amazonaws.appintegrations#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the event integration association.</p>"
+                    }
+                },
+                "EventIntegrationName": {
+                    "target": "com.amazonaws.appintegrations#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event integration.</p>"
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.appintegrations#ClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the client that is associated with the event integration.</p>"
+                    }
+                },
+                "EventBridgeRuleName": {
+                    "target": "com.amazonaws.appintegrations#EventBridgeRuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Eventbridge rule.</p>"
+                    }
+                },
+                "ClientAssociationMetadata": {
+                    "target": "com.amazonaws.appintegrations#ClientAssociationMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata associated with the client.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>The event integration association.</p>"
+            }
+        },
+        "com.amazonaws.appintegrations#EventIntegrationAssociationsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appintegrations#EventIntegrationAssociation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#EventIntegrationsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appintegrations#EventIntegration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#GetEventIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appintegrations#GetEventIntegrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appintegrations#GetEventIntegrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appintegrations#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>Return information about the event integration.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/eventIntegrations/{Name}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#GetEventIntegrationRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appintegrations#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event integration. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#GetEventIntegrationResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appintegrations#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event integration. </p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appintegrations#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the event integration.</p>"
+                    }
+                },
+                "EventIntegrationArn": {
+                    "target": "com.amazonaws.appintegrations#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the event integration.</p>"
+                    }
+                },
+                "EventBridgeBus": {
+                    "target": "com.amazonaws.appintegrations#EventBridgeBus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Eventbridge bus.</p>"
+                    }
+                },
+                "EventFilter": {
+                    "target": "com.amazonaws.appintegrations#EventFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event filter.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.appintegrations#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tags.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#IdempotencyToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.appintegrations#InternalServiceError": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.appintegrations#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request processing failed due to an error or failure with the service.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.appintegrations#InvalidRequestException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.appintegrations#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request is not valid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.appintegrations#ListEventIntegrationAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appintegrations#ListEventIntegrationAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appintegrations#ListEventIntegrationAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appintegrations#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>Returns a paginated list of event integration associations in the account. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/eventIntegrations/{EventIntegrationName}/associations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#ListEventIntegrationAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "EventIntegrationName": {
+                    "target": "com.amazonaws.appintegrations#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event integration. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appintegrations#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.appintegrations#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#ListEventIntegrationAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "EventIntegrationAssociations": {
+                    "target": "com.amazonaws.appintegrations#EventIntegrationAssociationsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event integration associations.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appintegrations#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#ListEventIntegrations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appintegrations#ListEventIntegrationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appintegrations#ListEventIntegrationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appintegrations#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>Returns a paginated list of event integrations in the account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/eventIntegrations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#ListEventIntegrationsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.appintegrations#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.appintegrations#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#ListEventIntegrationsResponse": {
+            "type": "structure",
+            "members": {
+                "EventIntegrations": {
+                    "target": "com.amazonaws.appintegrations#EventIntegrationsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event integrations.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appintegrations#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appintegrations#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appintegrations#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appintegrations#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>Lists the tags for the specified resource.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.appintegrations#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.appintegrations#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the tags.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#Message": {
+            "type": "string"
+        },
+        "com.amazonaws.appintegrations#Name": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\/\\._\\-]+$"
+            }
+        },
+        "com.amazonaws.appintegrations#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.appintegrations#NonBlankString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.appintegrations#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.appintegrations#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified resource was not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.appintegrations#ResourceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.appintegrations#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The allowed quota for the resource has been exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.appintegrations#Source": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^aws\\.partner\\/.*$"
+            }
+        },
+        "com.amazonaws.appintegrations#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+            }
+        },
+        "com.amazonaws.appintegrations#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appintegrations#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.appintegrations#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.appintegrations#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appintegrations#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appintegrations#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appintegrations#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>Adds the specified tags to the specified resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.appintegrations#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.appintegrations#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tags. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.appintegrations#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.appintegrations#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The throttling limit has been exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.appintegrations#UUID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"
+            }
+        },
+        "com.amazonaws.appintegrations#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appintegrations#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appintegrations#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appintegrations#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>Removes the specified tags from the specified resource.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.appintegrations#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.appintegrations#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.appintegrations#UpdateEventIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appintegrations#UpdateEventIntegrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appintegrations#UpdateEventIntegrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appintegrations#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>Updates the description of an event integration.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/eventIntegrations/{Name}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#UpdateEventIntegrationRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appintegrations#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event integration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appintegrations#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the event inegration.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#UpdateEventIntegrationResponse": {
+            "type": "structure",
+            "members": {}
+        }
+    }
+}

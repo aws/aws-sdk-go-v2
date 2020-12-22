@@ -1,0 +1,1627 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.iot1clickprojects#AWSIoT1ClickProjects": {
+            "type": "service",
+            "version": "2018-05-14",
+            "operations": [
+                {
+                    "target": "com.amazonaws.iot1clickprojects#AssociateDeviceWithPlacement"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#CreatePlacement"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#CreateProject"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#DeletePlacement"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#DeleteProject"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#DescribePlacement"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#DescribeProject"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#DisassociateDeviceFromPlacement"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#GetDevicesInPlacement"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ListPlacements"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ListProjects"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#UpdatePlacement"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#UpdateProject"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "IoT 1Click Projects",
+                    "arnNamespace": "iot1click",
+                    "cloudFormationName": "IoT1Click",
+                    "cloudTrailEventSource": "iot1clickprojects.amazonaws.com",
+                    "endpointPrefix": "projects.iot1click"
+                },
+                "aws.auth#sigv4": {
+                    "name": "iot1click"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>The AWS IoT 1-Click Projects API Reference</p>",
+                "smithy.api#title": "AWS IoT 1-Click Projects Service"
+            }
+        },
+        "com.amazonaws.iot1clickprojects#AssociateDeviceWithPlacement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot1clickprojects#AssociateDeviceWithPlacementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot1clickprojects#AssociateDeviceWithPlacementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a physical device with a placement.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/projects/{projectName}/placements/{placementName}/devices/{deviceTemplateName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#AssociateDeviceWithPlacementRequest": {
+            "type": "structure",
+            "members": {
+                "projectName": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project containing the placement in which to associate the device.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "placementName": {
+                    "target": "com.amazonaws.iot1clickprojects#PlacementName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the placement in which to associate the device.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "deviceId": {
+                    "target": "com.amazonaws.iot1clickprojects#DeviceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the physical device to be associated with the given placement in the project.\n      Note that a mandatory 4 character prefix is required for all <code>deviceId</code>\n      values.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deviceTemplateName": {
+                    "target": "com.amazonaws.iot1clickprojects#DeviceTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device template name to associate with the device ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#AssociateDeviceWithPlacementResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iot1clickprojects#AttributeDefaultValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 800
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#AttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#AttributeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 800
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#Code": {
+            "type": "string"
+        },
+        "com.amazonaws.iot1clickprojects#CreatePlacement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot1clickprojects#CreatePlacementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot1clickprojects#CreatePlacementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an empty placement.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/projects/{projectName}/placements",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#CreatePlacementRequest": {
+            "type": "structure",
+            "members": {
+                "placementName": {
+                    "target": "com.amazonaws.iot1clickprojects#PlacementName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the placement to be created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project in which to create the placement.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.iot1clickprojects#PlacementAttributeMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional user-defined key/value pairs providing contextual data (such as location or\n      function) for the placement.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#CreatePlacementResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iot1clickprojects#CreateProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot1clickprojects#CreateProjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot1clickprojects#CreateProjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ResourceConflictException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an empty project with a placement template. A project contains zero or more\n      placements that adhere to the placement template defined in the project.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/projects",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#CreateProjectRequest": {
+            "type": "structure",
+            "members": {
+                "projectName": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project to create.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot1clickprojects#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description for the project.</p>"
+                    }
+                },
+                "placementTemplate": {
+                    "target": "com.amazonaws.iot1clickprojects#PlacementTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema defining the placement to be created. A placement template defines placement\n      default attributes and device templates. You cannot add or remove device templates after the\n      project has been created. However, you can update <code>callbackOverrides</code> for the\n      device templates using the <code>UpdateProject</code> API.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.iot1clickprojects#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional tags (metadata key/value pairs) to be associated with the project. For example,\n        <code>{ {\"key1\": \"value1\", \"key2\": \"value2\"} }</code>. For more information, see <a href=\"https://aws.amazon.com/answers/account-management/aws-tagging-strategies/\">AWS Tagging\n        Strategies</a>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#CreateProjectResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iot1clickprojects#DefaultPlacementAttributeMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iot1clickprojects#AttributeName"
+            },
+            "value": {
+                "target": "com.amazonaws.iot1clickprojects#AttributeDefaultValue"
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DeletePlacement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot1clickprojects#DeletePlacementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot1clickprojects#DeletePlacementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a placement. To delete a placement, it must not have any devices associated with\n      it.</p>\n         <note>\n            <p>When you delete a placement, all associated data becomes irretrievable.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/projects/{projectName}/placements/{placementName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DeletePlacementRequest": {
+            "type": "structure",
+            "members": {
+                "placementName": {
+                    "target": "com.amazonaws.iot1clickprojects#PlacementName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the empty placement to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project containing the empty placement to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DeletePlacementResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iot1clickprojects#DeleteProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot1clickprojects#DeleteProjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot1clickprojects#DeleteProjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a project. To delete a project, it must not have any placements associated with\n      it.</p>\n         <note>\n            <p>When you delete a project, all associated data becomes irretrievable.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/projects/{projectName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DeleteProjectRequest": {
+            "type": "structure",
+            "members": {
+                "projectName": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the empty project to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DeleteProjectResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iot1clickprojects#DescribePlacement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot1clickprojects#DescribePlacementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot1clickprojects#DescribePlacementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a placement in a project.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/projects/{projectName}/placements/{placementName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DescribePlacementRequest": {
+            "type": "structure",
+            "members": {
+                "placementName": {
+                    "target": "com.amazonaws.iot1clickprojects#PlacementName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the placement within a project.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project containing the placement to be described.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DescribePlacementResponse": {
+            "type": "structure",
+            "members": {
+                "placement": {
+                    "target": "com.amazonaws.iot1clickprojects#PlacementDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object describing the placement.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DescribeProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot1clickprojects#DescribeProjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot1clickprojects#DescribeProjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns an object describing a project.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/projects/{projectName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DescribeProjectRequest": {
+            "type": "structure",
+            "members": {
+                "projectName": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project to be described.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DescribeProjectResponse": {
+            "type": "structure",
+            "members": {
+                "project": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object describing the project.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#Description": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DeviceCallbackKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DeviceCallbackOverrideMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iot1clickprojects#DeviceCallbackKey"
+            },
+            "value": {
+                "target": "com.amazonaws.iot1clickprojects#DeviceCallbackValue"
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DeviceCallbackValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DeviceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DeviceMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iot1clickprojects#DeviceTemplateName"
+            },
+            "value": {
+                "target": "com.amazonaws.iot1clickprojects#DeviceId"
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DeviceTemplate": {
+            "type": "structure",
+            "members": {
+                "deviceType": {
+                    "target": "com.amazonaws.iot1clickprojects#DeviceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device type, which currently must be <code>\"button\"</code>.</p>"
+                    }
+                },
+                "callbackOverrides": {
+                    "target": "com.amazonaws.iot1clickprojects#DeviceCallbackOverrideMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional Lambda function to invoke instead of the default Lambda function provided by\n      the placement template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing a device for a placement template (see <a>PlacementTemplate</a>).</p>"
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DeviceTemplateMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iot1clickprojects#DeviceTemplateName"
+            },
+            "value": {
+                "target": "com.amazonaws.iot1clickprojects#DeviceTemplate"
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DeviceTemplateName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DeviceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DisassociateDeviceFromPlacement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot1clickprojects#DisassociateDeviceFromPlacementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot1clickprojects#DisassociateDeviceFromPlacementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes a physical device from a placement.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/projects/{projectName}/placements/{placementName}/devices/{deviceTemplateName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DisassociateDeviceFromPlacementRequest": {
+            "type": "structure",
+            "members": {
+                "projectName": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project that contains the placement.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "placementName": {
+                    "target": "com.amazonaws.iot1clickprojects#PlacementName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the placement that the device should be removed from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "deviceTemplateName": {
+                    "target": "com.amazonaws.iot1clickprojects#DeviceTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device ID that should be removed from the placement.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#DisassociateDeviceFromPlacementResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iot1clickprojects#GetDevicesInPlacement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot1clickprojects#GetDevicesInPlacementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot1clickprojects#GetDevicesInPlacementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns an object enumerating the devices in a placement.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/projects/{projectName}/placements/{placementName}/devices",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#GetDevicesInPlacementRequest": {
+            "type": "structure",
+            "members": {
+                "projectName": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project containing the placement.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "placementName": {
+                    "target": "com.amazonaws.iot1clickprojects#PlacementName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the placement to get the devices from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#GetDevicesInPlacementResponse": {
+            "type": "structure",
+            "members": {
+                "devices": {
+                    "target": "com.amazonaws.iot1clickprojects#DeviceMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing the devices (zero or more) within the placement.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#InternalFailureException": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "com.amazonaws.iot1clickprojects#Code",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.iot1clickprojects#Message",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.iot1clickprojects#InvalidRequestException": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "com.amazonaws.iot1clickprojects#Code",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.iot1clickprojects#Message",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.iot1clickprojects#ListPlacements": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot1clickprojects#ListPlacementsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot1clickprojects#ListPlacementsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the placement(s) of a project.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/projects/{projectName}/placements",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "placements",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#ListPlacementsRequest": {
+            "type": "structure",
+            "members": {
+                "projectName": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project containing the placements to be listed.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot1clickprojects#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iot1clickprojects#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per request. If not set, a default value of 100 is\n      used.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#ListPlacementsResponse": {
+            "type": "structure",
+            "members": {
+                "placements": {
+                    "target": "com.amazonaws.iot1clickprojects#PlacementSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object listing the requested placements.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot1clickprojects#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used to retrieve the next set of results - will be effectively empty if there\n      are no further results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#ListProjects": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot1clickprojects#ListProjectsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot1clickprojects#ListProjectsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the AWS IoT 1-Click project(s) associated with your AWS account and region.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/projects",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "projects",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#ListProjectsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.iot1clickprojects#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iot1clickprojects#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per request. If not set, a default value of 100 is\n      used.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#ListProjectsResponse": {
+            "type": "structure",
+            "members": {
+                "projects": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing the list of projects.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot1clickprojects#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used to retrieve the next set of results - will be effectively empty if there\n      are no further results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot1clickprojects#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot1clickprojects#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the tags (metadata key/value pairs) which you have assigned to the resource.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource whose tags you want to list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.iot1clickprojects#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags (metadata key/value pairs) which you have assigned to the resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 250
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#Message": {
+            "type": "string"
+        },
+        "com.amazonaws.iot1clickprojects#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#PlacementAttributeMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iot1clickprojects#AttributeName"
+            },
+            "value": {
+                "target": "com.amazonaws.iot1clickprojects#AttributeValue"
+            }
+        },
+        "com.amazonaws.iot1clickprojects#PlacementDescription": {
+            "type": "structure",
+            "members": {
+                "projectName": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project containing the placement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "placementName": {
+                    "target": "com.amazonaws.iot1clickprojects#PlacementName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the placement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.iot1clickprojects#PlacementAttributeMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-defined attributes associated with the placement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdDate": {
+                    "target": "com.amazonaws.iot1clickprojects#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the placement was initially created, in UNIX epoch time format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedDate": {
+                    "target": "com.amazonaws.iot1clickprojects#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the placement was last updated, in UNIX epoch time format. If the placement\n      was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the\n      same.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object describing a project's placement.</p>"
+            }
+        },
+        "com.amazonaws.iot1clickprojects#PlacementName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.iot1clickprojects#PlacementSummary": {
+            "type": "structure",
+            "members": {
+                "projectName": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project containing the placement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "placementName": {
+                    "target": "com.amazonaws.iot1clickprojects#PlacementName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the placement being summarized.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdDate": {
+                    "target": "com.amazonaws.iot1clickprojects#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the placement was originally created, in UNIX epoch time format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedDate": {
+                    "target": "com.amazonaws.iot1clickprojects#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the placement was last updated, in UNIX epoch time format. If the placement\n      was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the\n      same.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object providing summary information for a particular placement.</p>"
+            }
+        },
+        "com.amazonaws.iot1clickprojects#PlacementSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot1clickprojects#PlacementSummary"
+            }
+        },
+        "com.amazonaws.iot1clickprojects#PlacementTemplate": {
+            "type": "structure",
+            "members": {
+                "defaultAttributes": {
+                    "target": "com.amazonaws.iot1clickprojects#DefaultPlacementAttributeMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default attributes (key/value pairs) to be applied to all placements using this\n      template.</p>"
+                    }
+                },
+                "deviceTemplates": {
+                    "target": "com.amazonaws.iot1clickprojects#DeviceTemplateMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object specifying the <a>DeviceTemplate</a> for all placements using this\n        (<a>PlacementTemplate</a>) template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object defining the template for a placement.</p>"
+            }
+        },
+        "com.amazonaws.iot1clickprojects#ProjectArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws:iot1click:[A-Za-z0-9_/.-]{0,63}:\\d+:projects/[0-9A-Za-z_-]{1,128}$"
+            }
+        },
+        "com.amazonaws.iot1clickprojects#ProjectDescription": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the project.</p>"
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project for which to obtain information from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot1clickprojects#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the project.</p>"
+                    }
+                },
+                "createdDate": {
+                    "target": "com.amazonaws.iot1clickprojects#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the project was originally created, in UNIX epoch time format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedDate": {
+                    "target": "com.amazonaws.iot1clickprojects#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the project was last updated, in UNIX epoch time format. If the project was\n      not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "placementTemplate": {
+                    "target": "com.amazonaws.iot1clickprojects#PlacementTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object describing the project's placement specifications.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.iot1clickprojects#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags (metadata key/value pairs) associated with the project.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object providing detailed information for a particular project associated with an AWS\n      account and region.</p>"
+            }
+        },
+        "com.amazonaws.iot1clickprojects#ProjectName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[0-9A-Za-z_-]+$"
+            }
+        },
+        "com.amazonaws.iot1clickprojects#ProjectSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the project.</p>"
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project being summarized.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdDate": {
+                    "target": "com.amazonaws.iot1clickprojects#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the project was originally created, in UNIX epoch time format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedDate": {
+                    "target": "com.amazonaws.iot1clickprojects#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the project was last updated, in UNIX epoch time format. If the project was\n      not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.iot1clickprojects#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags (metadata key/value pairs) associated with the project.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object providing summary information for a particular project for an associated AWS\n      account and region.</p>"
+            }
+        },
+        "com.amazonaws.iot1clickprojects#ProjectSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot1clickprojects#ProjectSummary"
+            }
+        },
+        "com.amazonaws.iot1clickprojects#ResourceConflictException": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "com.amazonaws.iot1clickprojects#Code",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.iot1clickprojects#Message",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.iot1clickprojects#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "com.amazonaws.iot1clickprojects#Code",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.iot1clickprojects#Message",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.iot1clickprojects#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+            }
+        },
+        "com.amazonaws.iot1clickprojects#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot1clickprojects#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iot1clickprojects#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.iot1clickprojects#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot1clickprojects#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot1clickprojects#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or modifies tags for a resource. Tags are key/value pairs (metadata) that can be\n      used to manage a resource. For more information, see <a href=\"https://aws.amazon.com/answers/account-management/aws-tagging-strategies/\">AWS Tagging\n        Strategies</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resouce for which tag(s) should be added or modified.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.iot1clickprojects#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new or modifying tag(s) for the resource. See <a href=\"https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits\">AWS IoT 1-Click Service Limits</a> for the maximum number of tags allowed per\n      resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iot1clickprojects#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#Time": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.iot1clickprojects#TooManyRequestsException": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "com.amazonaws.iot1clickprojects#Code",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.iot1clickprojects#Message",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.iot1clickprojects#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot1clickprojects#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot1clickprojects#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes one or more tags (metadata key/value pairs) from a resource.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource whose tag you want to remove.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.iot1clickprojects#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The keys of those tags which you want to remove.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iot1clickprojects#UpdatePlacement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot1clickprojects#UpdatePlacementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot1clickprojects#UpdatePlacementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a placement with the given attributes. To clear an attribute, pass an empty value\n      (i.e., \"\").</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/projects/{projectName}/placements/{placementName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#UpdatePlacementRequest": {
+            "type": "structure",
+            "members": {
+                "placementName": {
+                    "target": "com.amazonaws.iot1clickprojects#PlacementName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the placement to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project containing the placement to be updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.iot1clickprojects#PlacementAttributeMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-defined object of attributes used to update the placement. The maximum number of\n      key/value pairs is 50.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#UpdatePlacementResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iot1clickprojects#UpdateProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot1clickprojects#UpdateProjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot1clickprojects#UpdateProjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot1clickprojects#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a project associated with your AWS account and region. With the exception of\n      device template names, you can pass just the values that need to be updated because the update\n      request will change only the values that are provided. To clear a value, pass the empty string\n      (i.e., <code>\"\"</code>).</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/projects/{projectName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#UpdateProjectRequest": {
+            "type": "structure",
+            "members": {
+                "projectName": {
+                    "target": "com.amazonaws.iot1clickprojects#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project to be updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot1clickprojects#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional user-defined description for the project.</p>"
+                    }
+                },
+                "placementTemplate": {
+                    "target": "com.amazonaws.iot1clickprojects#PlacementTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object defining the project update. Once a project has been created, you cannot add\n      device template names to the project. However, for a given <code>placementTemplate</code>, you\n      can update the associated <code>callbackOverrides</code> for the device definition using this\n      API.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot1clickprojects#UpdateProjectResponse": {
+            "type": "structure",
+            "members": {}
+        }
+    }
+}

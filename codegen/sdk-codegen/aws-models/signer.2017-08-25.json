@@ -1,1776 +1,2702 @@
 {
-  "smithy": "1.0",
-  "metadata": {
-    "suppressions": [
-      {
-        "id": "HttpMethodSemantics",
-        "namespace": "*"
-      },
-      {
-        "id": "HttpResponseCodeSemantics",
-        "namespace": "*"
-      },
-      {
-        "id": "PaginatedTrait",
-        "namespace": "*"
-      },
-      {
-        "id": "HttpHeaderTrait",
-        "namespace": "*"
-      },
-      {
-        "id": "HttpUriConflict",
-        "namespace": "*"
-      },
-      {
-        "id": "Service",
-        "namespace": "*"
-      }
-    ]
-  },
-  "shapes": {
-    "com.amazonaws.signer#AccessDeniedException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.signer#ErrorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 403
-      }
-    },
-    "com.amazonaws.signer#BadRequestException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.signer#ErrorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The request contains invalid parameters for the ARN or tags. This exception also\n\t\t\toccurs when you call a tagging API on a cancelled signing profile.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.signer#BucketName": {
-      "type": "string"
-    },
-    "com.amazonaws.signer#CancelSigningProfile": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.signer#CancelSigningProfileRequest"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.signer#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.signer#InternalServiceErrorException"
-        },
-        {
-          "target": "com.amazonaws.signer#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.signer#ThrottlingException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Changes the state of an <code>ACTIVE</code> signing profile to <code>CANCELED</code>.\n\t\t\tA canceled profile is still viewable with the <code>ListSigningProfiles</code>\n\t\t\toperation, but it cannot perform new signing jobs, and is deleted two years after\n\t\t\tcancelation.</p>",
-        "smithy.api#http": {
-          "method": "DELETE",
-          "uri": "/signing-profiles/{profileName}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.signer#CancelSigningProfileRequest": {
-      "type": "structure",
-      "members": {
-        "profileName": {
-          "target": "com.amazonaws.signer#ProfileName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the signing profile to be canceled.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#Category": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "AWSIoT"
-          }
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
         ]
-      }
     },
-    "com.amazonaws.signer#CertificateArn": {
-      "type": "string"
-    },
-    "com.amazonaws.signer#ClientRequestToken": {
-      "type": "string"
-    },
-    "com.amazonaws.signer#CompletedAt": {
-      "type": "timestamp"
-    },
-    "com.amazonaws.signer#CreatedAt": {
-      "type": "timestamp"
-    },
-    "com.amazonaws.signer#DescribeSigningJob": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.signer#DescribeSigningJobRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.signer#DescribeSigningJobResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.signer#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.signer#InternalServiceErrorException"
-        },
-        {
-          "target": "com.amazonaws.signer#ResourceNotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Returns information about a specific code signing job. You specify the job by using\n\t\t\tthe <code>jobId</code> value that is returned by the <a>StartSigningJob</a>\n\t\t\toperation. </p>",
-        "smithy.api#http": {
-          "method": "GET",
-          "uri": "/signing-jobs/{jobId}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.signer#DescribeSigningJobRequest": {
-      "type": "structure",
-      "members": {
-        "jobId": {
-          "target": "com.amazonaws.signer#JobId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the signing job on input.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#DescribeSigningJobResponse": {
-      "type": "structure",
-      "members": {
-        "profileName": {
-          "target": "com.amazonaws.signer#ProfileName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the profile that initiated the signing operation.</p>"
-          }
-        },
-        "overrides": {
-          "target": "com.amazonaws.signer#SigningPlatformOverrides",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of any overrides that were applied to the signing operation.</p>"
-          }
-        },
-        "signingMaterial": {
-          "target": "com.amazonaws.signer#SigningMaterial",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of your code signing certificate.</p>"
-          }
-        },
-        "signingParameters": {
-          "target": "com.amazonaws.signer#SigningParameters",
-          "traits": {
-            "smithy.api#documentation": "<p>Map of user-assigned key-value pairs used during signing. These values contain any\n\t\t\tinformation that you specified for use in your signing job. </p>"
-          }
-        },
-        "signedObject": {
-          "target": "com.amazonaws.signer#SignedObject",
-          "traits": {
-            "smithy.api#documentation": "<p>Name of the S3 bucket where the signed code image is saved by code signing.</p>"
-          }
-        },
-        "source": {
-          "target": "com.amazonaws.signer#Source",
-          "traits": {
-            "smithy.api#documentation": "<p>The object that contains the name of your S3 bucket or your raw code.</p>"
-          }
-        },
-        "jobId": {
-          "target": "com.amazonaws.signer#JobId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the signing job on output.</p>"
-          }
-        },
-        "requestedBy": {
-          "target": "com.amazonaws.signer#RequestedBy",
-          "traits": {
-            "smithy.api#documentation": "<p>The IAM principal that requested the signing job.</p>"
-          }
-        },
-        "platformId": {
-          "target": "com.amazonaws.signer#PlatformId",
-          "traits": {
-            "smithy.api#documentation": "<p>The microcontroller platform to which your signed code image will be\n\t\t\tdistributed.</p>"
-          }
-        },
-        "createdAt": {
-          "target": "com.amazonaws.signer#CreatedAt",
-          "traits": {
-            "smithy.api#documentation": "<p>Date and time that the signing job was created.</p>"
-          }
-        },
-        "status": {
-          "target": "com.amazonaws.signer#SigningStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>Status of the signing job.</p>"
-          }
-        },
-        "completedAt": {
-          "target": "com.amazonaws.signer#CompletedAt",
-          "traits": {
-            "smithy.api#documentation": "<p>Date and time that the signing job was completed.</p>"
-          }
-        },
-        "statusReason": {
-          "target": "com.amazonaws.signer#StatusReason",
-          "traits": {
-            "smithy.api#documentation": "<p>String value that contains the status reason.</p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#Destination": {
-      "type": "structure",
-      "members": {
-        "s3": {
-          "target": "com.amazonaws.signer#S3Destination",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>S3Destination</code> object.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Points to an <code>S3Destination</code> object that contains information about your S3\n\t\t\tbucket.</p>"
-      }
-    },
-    "com.amazonaws.signer#DisplayName": {
-      "type": "string"
-    },
-    "com.amazonaws.signer#EncryptionAlgorithm": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "RSA"
-          },
-          {
-            "value": "ECDSA"
-          }
-        ]
-      }
-    },
-    "com.amazonaws.signer#EncryptionAlgorithmOptions": {
-      "type": "structure",
-      "members": {
-        "allowedValues": {
-          "target": "com.amazonaws.signer#EncryptionAlgorithms",
-          "traits": {
-            "smithy.api#documentation": "<p>The set of accepted encryption algorithms that are allowed in a code signing job.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "defaultValue": {
-          "target": "com.amazonaws.signer#EncryptionAlgorithm",
-          "traits": {
-            "smithy.api#documentation": "<p>The default encryption algorithm that is used by a code signing job.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The encryption algorithm options that are available to a code signing job.</p>"
-      }
-    },
-    "com.amazonaws.signer#EncryptionAlgorithms": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.signer#EncryptionAlgorithm"
-      }
-    },
-    "com.amazonaws.signer#ErrorMessage": {
-      "type": "string"
-    },
-    "com.amazonaws.signer#GetSigningPlatform": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.signer#GetSigningPlatformRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.signer#GetSigningPlatformResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.signer#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.signer#InternalServiceErrorException"
-        },
-        {
-          "target": "com.amazonaws.signer#ResourceNotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Returns information on a specific signing platform.</p>",
-        "smithy.api#http": {
-          "method": "GET",
-          "uri": "/signing-platforms/{platformId}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.signer#GetSigningPlatformRequest": {
-      "type": "structure",
-      "members": {
-        "platformId": {
-          "target": "com.amazonaws.signer#PlatformId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the target signing platform.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#GetSigningPlatformResponse": {
-      "type": "structure",
-      "members": {
-        "target": {
-          "target": "com.amazonaws.signer#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The validation template that is used by the target signing platform.</p>"
-          }
-        },
-        "signingConfiguration": {
-          "target": "com.amazonaws.signer#SigningConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of configurations applied to the target platform at signing.</p>"
-          }
-        },
-        "displayName": {
-          "target": "com.amazonaws.signer#DisplayName",
-          "traits": {
-            "smithy.api#documentation": "<p>The display name of the target signing platform.</p>"
-          }
-        },
-        "partner": {
-          "target": "com.amazonaws.signer#String",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of partner entities that use the target signing platform.</p>"
-          }
-        },
-        "signingImageFormat": {
-          "target": "com.amazonaws.signer#SigningImageFormat",
-          "traits": {
-            "smithy.api#documentation": "<p>The format of the target platform's signing image.</p>"
-          }
-        },
-        "platformId": {
-          "target": "com.amazonaws.signer#PlatformId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the target signing platform.</p>"
-          }
-        },
-        "maxSizeInMB": {
-          "target": "com.amazonaws.signer#MaxSizeInMB",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum size (in MB) of the payload that can be signed by the target\n\t\t\tplatform.</p>"
-          }
-        },
-        "category": {
-          "target": "com.amazonaws.signer#Category",
-          "traits": {
-            "smithy.api#documentation": "<p>The category type of the target signing platform.</p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#GetSigningProfile": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.signer#GetSigningProfileRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.signer#GetSigningProfileResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.signer#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.signer#InternalServiceErrorException"
-        },
-        {
-          "target": "com.amazonaws.signer#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.signer#ThrottlingException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Returns information on a specific signing profile.</p>",
-        "smithy.api#http": {
-          "method": "GET",
-          "uri": "/signing-profiles/{profileName}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.signer#GetSigningProfileRequest": {
-      "type": "structure",
-      "members": {
-        "profileName": {
-          "target": "com.amazonaws.signer#ProfileName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the target signing profile.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#GetSigningProfileResponse": {
-      "type": "structure",
-      "members": {
-        "overrides": {
-          "target": "com.amazonaws.signer#SigningPlatformOverrides",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of overrides applied by the target signing profile for signing\n\t\t\toperations.</p>"
-          }
-        },
-        "profileName": {
-          "target": "com.amazonaws.signer#ProfileName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the target signing profile.</p>"
-          }
-        },
-        "signingParameters": {
-          "target": "com.amazonaws.signer#SigningParameters",
-          "traits": {
-            "smithy.api#documentation": "<p>A map of key-value pairs for signing operations that is attached to the target signing\n\t\t\tprofile.</p>"
-          }
-        },
-        "platformId": {
-          "target": "com.amazonaws.signer#PlatformId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the platform that is used by the target signing profile.</p>"
-          }
-        },
-        "signingMaterial": {
-          "target": "com.amazonaws.signer#SigningMaterial",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the certificate that the target profile uses for signing operations.</p>"
-          }
-        },
-        "arn": {
-          "target": "com.amazonaws.signer#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the signing profile.</p>"
-          }
-        },
-        "status": {
-          "target": "com.amazonaws.signer#SigningProfileStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of the target signing profile.</p>"
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.signer#TagMap",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of tags associated with the signing profile.</p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#HashAlgorithm": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "SHA1"
-          },
-          {
-            "value": "SHA256"
-          }
-        ]
-      }
-    },
-    "com.amazonaws.signer#HashAlgorithmOptions": {
-      "type": "structure",
-      "members": {
-        "allowedValues": {
-          "target": "com.amazonaws.signer#HashAlgorithms",
-          "traits": {
-            "smithy.api#documentation": "<p>The set of accepted hash algorithms allowed in a code signing job.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "defaultValue": {
-          "target": "com.amazonaws.signer#HashAlgorithm",
-          "traits": {
-            "smithy.api#documentation": "<p>The default hash algorithm that is used in a code signing job.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The hash algorithms that are available to a code signing job.</p>"
-      }
-    },
-    "com.amazonaws.signer#HashAlgorithms": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.signer#HashAlgorithm"
-      }
-    },
-    "com.amazonaws.signer#ImageFormat": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "JSON"
-          },
-          {
-            "value": "JSONEmbedded"
-          },
-          {
-            "value": "JSONDetached"
-          }
-        ]
-      }
-    },
-    "com.amazonaws.signer#ImageFormats": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.signer#ImageFormat"
-      }
-    },
-    "com.amazonaws.signer#InternalServiceErrorException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.signer#ErrorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>An internal error occurred.</p>",
-        "smithy.api#error": "server",
-        "smithy.api#httpError": 500
-      }
-    },
-    "com.amazonaws.signer#JobId": {
-      "type": "string"
-    },
-    "com.amazonaws.signer#Key": {
-      "type": "string"
-    },
-    "com.amazonaws.signer#ListSigningJobs": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.signer#ListSigningJobsRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.signer#ListSigningJobsResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.signer#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.signer#InternalServiceErrorException"
-        },
-        {
-          "target": "com.amazonaws.signer#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.signer#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Lists all your signing jobs. You can use the <code>maxResults</code> parameter to\n\t\t\tlimit the number of signing jobs that are returned in the response. If additional jobs\n\t\t\tremain to be listed, code signing returns a <code>nextToken</code> value. Use this value in\n\t\t\tsubsequent calls to <code>ListSigningJobs</code> to fetch the remaining values. You can\n\t\t\tcontinue calling <code>ListSigningJobs</code> with your <code>maxResults</code>\n\t\t\tparameter and with new values that code signing returns in the <code>nextToken</code>\n\t\t\tparameter until all of your signing jobs have been returned. </p>",
-        "smithy.api#http": {
-          "method": "GET",
-          "uri": "/signing-jobs",
-          "code": 200
-        },
-        "smithy.api#paginated": {
-          "inputToken": "nextToken",
-          "outputToken": "nextToken",
-          "pageSize": "maxResults"
-        }
-      }
-    },
-    "com.amazonaws.signer#ListSigningJobsRequest": {
-      "type": "structure",
-      "members": {
-        "maxResults": {
-          "target": "com.amazonaws.signer#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the maximum number of items to return in the response. Use this parameter\n\t\t\twhen paginating results. If additional items exist beyond the number you specify, the\n\t\t\t\t<code>nextToken</code> element is set in the response. Use the\n\t\t\t\t<code>nextToken</code> value in a subsequent request to retrieve additional items.\n\t\t</p>",
-            "smithy.api#httpQuery": "maxResults"
-          }
-        },
-        "requestedBy": {
-          "target": "com.amazonaws.signer#RequestedBy",
-          "traits": {
-            "smithy.api#documentation": "<p>The IAM principal that requested the signing job.</p>",
-            "smithy.api#httpQuery": "requestedBy"
-          }
-        },
-        "nextToken": {
-          "target": "com.amazonaws.signer#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>String for specifying the next set of paginated results to return. After you receive a\n\t\t\tresponse with truncated results, use this parameter in a subsequent request. Set it to\n\t\t\tthe value of <code>nextToken</code> from the response that you just received.</p>",
-            "smithy.api#httpQuery": "nextToken"
-          }
-        },
-        "platformId": {
-          "target": "com.amazonaws.signer#PlatformId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of microcontroller platform that you specified for the distribution of your\n\t\t\tcode image.</p>",
-            "smithy.api#httpQuery": "platformId"
-          }
-        },
-        "status": {
-          "target": "com.amazonaws.signer#SigningStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>A status value with which to filter your results.</p>",
-            "smithy.api#httpQuery": "status"
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#ListSigningJobsResponse": {
-      "type": "structure",
-      "members": {
-        "jobs": {
-          "target": "com.amazonaws.signer#SigningJobs",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of your signing jobs.</p>"
-          }
-        },
-        "nextToken": {
-          "target": "com.amazonaws.signer#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>String for specifying the next set of paginated results.</p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#ListSigningPlatforms": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.signer#ListSigningPlatformsRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.signer#ListSigningPlatformsResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.signer#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.signer#InternalServiceErrorException"
-        },
-        {
-          "target": "com.amazonaws.signer#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.signer#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Lists all signing platforms available in code signing that match the request parameters. If\n\t\t\tadditional jobs remain to be listed, code signing returns a <code>nextToken</code> value. Use\n\t\t\tthis value in subsequent calls to <code>ListSigningJobs</code> to fetch the remaining\n\t\t\tvalues. You can continue calling <code>ListSigningJobs</code> with your\n\t\t\t\t<code>maxResults</code> parameter and with new values that code signing returns in the\n\t\t\t\t<code>nextToken</code> parameter until all of your signing jobs have been\n\t\t\treturned.</p>",
-        "smithy.api#http": {
-          "method": "GET",
-          "uri": "/signing-platforms",
-          "code": 200
-        },
-        "smithy.api#paginated": {
-          "inputToken": "nextToken",
-          "outputToken": "nextToken",
-          "pageSize": "maxResults"
-        }
-      }
-    },
-    "com.amazonaws.signer#ListSigningPlatformsRequest": {
-      "type": "structure",
-      "members": {
-        "nextToken": {
-          "target": "com.amazonaws.signer#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Value for specifying the next set of paginated results to return. After you receive a\n\t\t\tresponse with truncated results, use this parameter in a subsequent request. Set it to\n\t\t\tthe value of <code>nextToken</code> from the response that you just received.</p>",
-            "smithy.api#httpQuery": "nextToken"
-          }
-        },
-        "target": {
-          "target": "com.amazonaws.signer#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The validation template that is used by the target signing platform.</p>",
-            "smithy.api#httpQuery": "target"
-          }
-        },
-        "category": {
-          "target": "com.amazonaws.signer#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The category type of a signing platform.</p>",
-            "smithy.api#httpQuery": "category"
-          }
-        },
-        "partner": {
-          "target": "com.amazonaws.signer#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Any partner entities connected to a signing platform.</p>",
-            "smithy.api#httpQuery": "partner"
-          }
-        },
-        "maxResults": {
-          "target": "com.amazonaws.signer#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of results to be returned by this operation.</p>",
-            "smithy.api#httpQuery": "maxResults"
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#ListSigningPlatformsResponse": {
-      "type": "structure",
-      "members": {
-        "nextToken": {
-          "target": "com.amazonaws.signer#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Value for specifying the next set of paginated results to return.</p>"
-          }
-        },
-        "platforms": {
-          "target": "com.amazonaws.signer#SigningPlatforms",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of all platforms that match the request parameters.</p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#ListSigningProfiles": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.signer#ListSigningProfilesRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.signer#ListSigningProfilesResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.signer#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.signer#InternalServiceErrorException"
-        },
-        {
-          "target": "com.amazonaws.signer#ThrottlingException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Lists all available signing profiles in your AWS account. Returns only profiles with\n\t\t\tan <code>ACTIVE</code> status unless the <code>includeCanceled</code> request field is\n\t\t\tset to <code>true</code>. If additional jobs remain to be listed, code signing returns a\n\t\t\t\t<code>nextToken</code> value. Use this value in subsequent calls to\n\t\t\t\t<code>ListSigningJobs</code> to fetch the remaining values. You can continue calling\n\t\t\t\t<code>ListSigningJobs</code> with your <code>maxResults</code> parameter and with\n\t\t\tnew values that code signing returns in the <code>nextToken</code> parameter until all of your\n\t\t\tsigning jobs have been returned.</p>",
-        "smithy.api#http": {
-          "method": "GET",
-          "uri": "/signing-profiles",
-          "code": 200
-        },
-        "smithy.api#paginated": {
-          "inputToken": "nextToken",
-          "outputToken": "nextToken",
-          "pageSize": "maxResults"
-        }
-      }
-    },
-    "com.amazonaws.signer#ListSigningProfilesRequest": {
-      "type": "structure",
-      "members": {
-        "maxResults": {
-          "target": "com.amazonaws.signer#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of profiles to be returned.</p>",
-            "smithy.api#httpQuery": "maxResults"
-          }
-        },
-        "includeCanceled": {
-          "target": "com.amazonaws.signer#bool",
-          "traits": {
-            "smithy.api#documentation": "<p>Designates whether to include profiles with the status of\n\t\t\t<code>CANCELED</code>.</p>",
-            "smithy.api#httpQuery": "includeCanceled"
-          }
-        },
-        "nextToken": {
-          "target": "com.amazonaws.signer#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>Value for specifying the next set of paginated results to return. After you receive a\n\t\t\tresponse with truncated results, use this parameter in a subsequent request. Set it to\n\t\t\tthe value of <code>nextToken</code> from the response that you just received.</p>",
-            "smithy.api#httpQuery": "nextToken"
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#ListSigningProfilesResponse": {
-      "type": "structure",
-      "members": {
-        "nextToken": {
-          "target": "com.amazonaws.signer#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>Value for specifying the next set of paginated results to return.</p>"
-          }
-        },
-        "profiles": {
-          "target": "com.amazonaws.signer#SigningProfiles",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of profiles that are available in the AWS account. This includes profiles with\n\t\t\tthe status of <code>CANCELED</code> if the <code>includeCanceled</code> parameter is set\n\t\t\tto <code>true</code>.</p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#ListTagsForResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.signer#ListTagsForResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.signer#ListTagsForResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.signer#BadRequestException"
-        },
-        {
-          "target": "com.amazonaws.signer#InternalServiceErrorException"
-        },
-        {
-          "target": "com.amazonaws.signer#NotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Returns a list of the tags associated with a signing profile resource.</p>",
-        "smithy.api#http": {
-          "method": "GET",
-          "uri": "/tags/{resourceArn}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.signer#ListTagsForResourceRequest": {
-      "type": "structure",
-      "members": {
-        "resourceArn": {
-          "target": "com.amazonaws.signer#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the signing profile.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#ListTagsForResourceResponse": {
-      "type": "structure",
-      "members": {
-        "tags": {
-          "target": "com.amazonaws.signer#TagMap",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of tags associated with the signing profile.</p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#MaxResults": {
-      "type": "integer",
-      "traits": {
-        "smithy.api#box": {},
-        "smithy.api#range": {
-          "min": 1,
-          "max": 25
-        }
-      }
-    },
-    "com.amazonaws.signer#MaxSizeInMB": {
-      "type": "integer"
-    },
-    "com.amazonaws.signer#NextToken": {
-      "type": "string"
-    },
-    "com.amazonaws.signer#NotFoundException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.signer#ErrorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The signing profile was not found.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 404
-      }
-    },
-    "com.amazonaws.signer#PlatformId": {
-      "type": "string"
-    },
-    "com.amazonaws.signer#Prefix": {
-      "type": "string"
-    },
-    "com.amazonaws.signer#ProfileName": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 2,
-          "max": 64
-        },
-        "smithy.api#pattern": "^[a-zA-Z0-9_]{2,}"
-      }
-    },
-    "com.amazonaws.signer#PutSigningProfile": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.signer#PutSigningProfileRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.signer#PutSigningProfileResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.signer#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.signer#InternalServiceErrorException"
-        },
-        {
-          "target": "com.amazonaws.signer#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.signer#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.signer#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Creates a signing profile. A signing profile is a code signing template that can be used to\n\t\t\tcarry out a pre-defined signing job. For more information, see <a href=\"http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html\">http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html</a>\n         </p>",
-        "smithy.api#http": {
-          "method": "PUT",
-          "uri": "/signing-profiles/{profileName}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.signer#PutSigningProfileRequest": {
-      "type": "structure",
-      "members": {
-        "signingParameters": {
-          "target": "com.amazonaws.signer#SigningParameters",
-          "traits": {
-            "smithy.api#documentation": "<p>Map of key-value pairs for signing. These can include any information that you want to\n\t\t\tuse during signing.</p>"
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.signer#TagMap",
-          "traits": {
-            "smithy.api#documentation": "<p>Tags to be associated with the signing profile that is being created.</p>"
-          }
-        },
-        "profileName": {
-          "target": "com.amazonaws.signer#ProfileName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the signing profile to be created.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "overrides": {
-          "target": "com.amazonaws.signer#SigningPlatformOverrides",
-          "traits": {
-            "smithy.api#documentation": "<p>A subfield of <code>platform</code>. This specifies any different configuration\n\t\t\toptions that you want to apply to the chosen platform (such as a different\n\t\t\t\t<code>hash-algorithm</code> or <code>signing-algorithm</code>).</p>"
-          }
-        },
-        "platformId": {
-          "target": "com.amazonaws.signer#PlatformId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the signing platform to be created.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "signingMaterial": {
-          "target": "com.amazonaws.signer#SigningMaterial",
-          "traits": {
-            "smithy.api#documentation": "<p>The AWS Certificate Manager certificate that will be used to sign code with the new signing\n\t\t\tprofile.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#PutSigningProfileResponse": {
-      "type": "structure",
-      "members": {
-        "arn": {
-          "target": "com.amazonaws.signer#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the signing profile created.</p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#RequestedBy": {
-      "type": "string"
-    },
-    "com.amazonaws.signer#ResourceNotFoundException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.signer#ErrorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A specified resource could not be found.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 404
-      }
-    },
-    "com.amazonaws.signer#S3Destination": {
-      "type": "structure",
-      "members": {
-        "bucketName": {
-          "target": "com.amazonaws.signer#BucketName",
-          "traits": {
-            "smithy.api#documentation": "<p>Name of the S3 bucket.</p>"
-          }
-        },
-        "prefix": {
-          "target": "com.amazonaws.signer#Prefix",
-          "traits": {
-            "smithy.api#documentation": "<p>An Amazon S3 prefix that you can use to limit responses to those that begin with the\n\t\t\tspecified prefix.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The name and prefix of the S3 bucket where code signing saves your signed objects.</p>"
-      }
-    },
-    "com.amazonaws.signer#S3SignedObject": {
-      "type": "structure",
-      "members": {
-        "bucketName": {
-          "target": "com.amazonaws.signer#BucketName",
-          "traits": {
-            "smithy.api#documentation": "<p>Name of the S3 bucket.</p>"
-          }
-        },
-        "key": {
-          "target": "com.amazonaws.signer#Key",
-          "traits": {
-            "smithy.api#documentation": "<p>Key name that uniquely identifies a signed code image in your bucket.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The S3 bucket name and key where code signing saved your signed code image.</p>"
-      }
-    },
-    "com.amazonaws.signer#S3Source": {
-      "type": "structure",
-      "members": {
-        "bucketName": {
-          "target": "com.amazonaws.signer#BucketName",
-          "traits": {
-            "smithy.api#documentation": "<p>Name of the S3 bucket.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "version": {
-          "target": "com.amazonaws.signer#Version",
-          "traits": {
-            "smithy.api#documentation": "<p>Version of your source image in your version enabled S3 bucket.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "key": {
-          "target": "com.amazonaws.signer#Key",
-          "traits": {
-            "smithy.api#documentation": "<p>Key name of the bucket object that contains your unsigned code.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Information about the S3 bucket where you saved your unsigned code.</p>"
-      }
-    },
-    "com.amazonaws.signer#SignedObject": {
-      "type": "structure",
-      "members": {
-        "s3": {
-          "target": "com.amazonaws.signer#S3SignedObject",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>S3SignedObject</code>.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Points to an <code>S3SignedObject</code> object that contains information about your\n\t\t\tsigned code image.</p>"
-      }
-    },
-    "com.amazonaws.signer#SigningConfiguration": {
-      "type": "structure",
-      "members": {
-        "encryptionAlgorithmOptions": {
-          "target": "com.amazonaws.signer#EncryptionAlgorithmOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>The encryption algorithm options that are available for a code signing job.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "hashAlgorithmOptions": {
-          "target": "com.amazonaws.signer#HashAlgorithmOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>The hash algorithm options that are available for a code signing job.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The configuration of a code signing operation.</p>"
-      }
-    },
-    "com.amazonaws.signer#SigningConfigurationOverrides": {
-      "type": "structure",
-      "members": {
-        "encryptionAlgorithm": {
-          "target": "com.amazonaws.signer#EncryptionAlgorithm",
-          "traits": {
-            "smithy.api#documentation": "<p>A specified override of the default encryption algorithm that is used in a code signing\n\t\t\tjob.</p>"
-          }
-        },
-        "hashAlgorithm": {
-          "target": "com.amazonaws.signer#HashAlgorithm",
-          "traits": {
-            "smithy.api#documentation": "<p>A specified override of the default hash algorithm that is used in a code signing\n\t\t\tjob.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A signing configuration that overrides the default encryption or hash algorithm of a\n\t\t\tsigning job.</p>"
-      }
-    },
-    "com.amazonaws.signer#SigningImageFormat": {
-      "type": "structure",
-      "members": {
-        "defaultFormat": {
-          "target": "com.amazonaws.signer#ImageFormat",
-          "traits": {
-            "smithy.api#documentation": "<p>The default format of a code signing image.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "supportedFormats": {
-          "target": "com.amazonaws.signer#ImageFormats",
-          "traits": {
-            "smithy.api#documentation": "<p>The supported formats of a code signing image.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The image format of a code signing platform or profile.</p>"
-      }
-    },
-    "com.amazonaws.signer#SigningJob": {
-      "type": "structure",
-      "members": {
-        "source": {
-          "target": "com.amazonaws.signer#Source",
-          "traits": {
-            "smithy.api#documentation": "<p>A <code>Source</code> that contains information about a signing job's code image\n\t\t\tsource.</p>"
-          }
-        },
-        "jobId": {
-          "target": "com.amazonaws.signer#JobId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the signing job.</p>"
-          }
-        },
-        "status": {
-          "target": "com.amazonaws.signer#SigningStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of the signing job.</p>"
-          }
-        },
-        "createdAt": {
-          "target": "com.amazonaws.signer#CreatedAt",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time that the signing job was created.</p>"
-          }
-        },
-        "signingMaterial": {
-          "target": "com.amazonaws.signer#SigningMaterial",
-          "traits": {
-            "smithy.api#documentation": "<p>A <code>SigningMaterial</code> object that contains the Amazon Resource Name (ARN) of\n\t\t\tthe certificate used for the signing job.</p>"
-          }
-        },
-        "signedObject": {
-          "target": "com.amazonaws.signer#SignedObject",
-          "traits": {
-            "smithy.api#documentation": "<p>A <code>SignedObject</code> structure that contains information about a signing job's\n\t\t\tsigned code image.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Contains information about a signing job.</p>"
-      }
-    },
-    "com.amazonaws.signer#SigningJobs": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.signer#SigningJob"
-      }
-    },
-    "com.amazonaws.signer#SigningMaterial": {
-      "type": "structure",
-      "members": {
-        "certificateArn": {
-          "target": "com.amazonaws.signer#CertificateArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the certificates that is used to sign your\n\t\t\tcode.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The ACM certificate that is used to sign your code.</p>"
-      }
-    },
-    "com.amazonaws.signer#SigningParameterKey": {
-      "type": "string"
-    },
-    "com.amazonaws.signer#SigningParameterValue": {
-      "type": "string"
-    },
-    "com.amazonaws.signer#SigningParameters": {
-      "type": "map",
-      "key": {
-        "target": "com.amazonaws.signer#SigningParameterKey"
-      },
-      "value": {
-        "target": "com.amazonaws.signer#SigningParameterValue"
-      }
-    },
-    "com.amazonaws.signer#SigningPlatform": {
-      "type": "structure",
-      "members": {
-        "maxSizeInMB": {
-          "target": "com.amazonaws.signer#MaxSizeInMB",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum size (in MB) of code that can be signed by a code signing platform.</p>"
-          }
-        },
-        "platformId": {
-          "target": "com.amazonaws.signer#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of a code signing; platform.</p>"
-          }
-        },
-        "signingImageFormat": {
-          "target": "com.amazonaws.signer#SigningImageFormat"
-        },
-        "partner": {
-          "target": "com.amazonaws.signer#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Any partner entities linked to a code signing platform.</p>"
-          }
-        },
-        "displayName": {
-          "target": "com.amazonaws.signer#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The display name of a code signing platform.</p>"
-          }
-        },
-        "category": {
-          "target": "com.amazonaws.signer#Category",
-          "traits": {
-            "smithy.api#documentation": "<p>The category of a code signing platform.</p>"
-          }
-        },
-        "signingConfiguration": {
-          "target": "com.amazonaws.signer#SigningConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The configuration of a code signing platform. This includes the designated hash algorithm\n\t\t\tand encryption algorithm of a signing platform.</p>"
-          }
-        },
-        "target": {
-          "target": "com.amazonaws.signer#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The types of targets that can be signed by a code signing platform.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Contains information about the signing configurations and parameters that are used to\n\t\t\tperform a code signing job.</p>"
-      }
-    },
-    "com.amazonaws.signer#SigningPlatformOverrides": {
-      "type": "structure",
-      "members": {
-        "signingImageFormat": {
-          "target": "com.amazonaws.signer#ImageFormat",
-          "traits": {
-            "smithy.api#documentation": "<p>A signed image is a JSON object. When overriding the default signing platform configuration,\n\t\t\ta customer can select either of two signing formats, <code>JSONEmbedded</code> or\n\t\t\t\t<code>JSONDetached</code>.  (A third format value, <code>JSON</code>, is reserved\n\t\t\tfor future use.) With <code>JSONEmbedded</code>, the signing image has the payload\n\t\t\tembedded in it. With <code>JSONDetached</code>, the payload is not be embedded in the\n\t\t\tsigning image.</p>"
-          }
-        },
-        "signingConfiguration": {
-          "target": "com.amazonaws.signer#SigningConfigurationOverrides",
-          "traits": {
-            "smithy.api#documentation": "<p>A signing configuration that overrides the default encryption or hash algorithm of a\n\t\t\tsigning job.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Any overrides that are applied to the signing configuration of a code signing\n\t\t\tplatform.</p>"
-      }
-    },
-    "com.amazonaws.signer#SigningPlatforms": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.signer#SigningPlatform"
-      }
-    },
-    "com.amazonaws.signer#SigningProfile": {
-      "type": "structure",
-      "members": {
-        "platformId": {
-          "target": "com.amazonaws.signer#PlatformId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of a platform that is available for use by a signing profile.</p>"
-          }
-        },
-        "arn": {
-          "target": "com.amazonaws.signer#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the signing profile.</p>"
-          }
-        },
-        "signingParameters": {
-          "target": "com.amazonaws.signer#SigningParameters",
-          "traits": {
-            "smithy.api#documentation": "<p>The parameters that are available for use by a code signing user.</p>"
-          }
-        },
-        "profileName": {
-          "target": "com.amazonaws.signer#ProfileName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the signing profile.</p>"
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.signer#TagMap",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of tags associated with the signing profile.</p>"
-          }
-        },
-        "signingMaterial": {
-          "target": "com.amazonaws.signer#SigningMaterial",
-          "traits": {
-            "smithy.api#documentation": "<p>The ACM certificate that is available for use by a signing profile.</p>"
-          }
-        },
-        "status": {
-          "target": "com.amazonaws.signer#SigningProfileStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of a code signing profile.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Contains information about the ACM certificates and code signing configuration parameters that\n\t\t\tcan be used by a given code signing user.</p>"
-      }
-    },
-    "com.amazonaws.signer#SigningProfileStatus": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "Active"
-          },
-          {
-            "value": "Canceled"
-          }
-        ]
-      }
-    },
-    "com.amazonaws.signer#SigningProfiles": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.signer#SigningProfile"
-      }
-    },
-    "com.amazonaws.signer#SigningStatus": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "InProgress"
-          },
-          {
-            "value": "Failed"
-          },
-          {
-            "value": "Succeeded"
-          }
-        ]
-      }
-    },
-    "com.amazonaws.signer#Source": {
-      "type": "structure",
-      "members": {
-        "s3": {
-          "target": "com.amazonaws.signer#S3Source",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>S3Source</code> object.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>An <code>S3Source</code> object that contains information about the S3 bucket where\n\t\t\tyou saved your unsigned code.</p>"
-      }
-    },
-    "com.amazonaws.signer#StartSigningJob": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.signer#StartSigningJobRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.signer#StartSigningJobResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.signer#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.signer#InternalServiceErrorException"
-        },
-        {
-          "target": "com.amazonaws.signer#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.signer#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.signer#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Initiates a signing job to be performed on the code provided. Signing jobs are\n\t\t\tviewable by the <code>ListSigningJobs</code> operation for two years after they are\n\t\t\tperformed. Note the following requirements: </p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p> You must create an Amazon S3 source bucket. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html\">Create a Bucket</a> in the\n\t\t\t\t\t\t<i>Amazon S3 Getting Started Guide</i>. </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Your S3 source bucket must be version enabled.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You must create an S3 destination bucket. Code signing uses your S3 destination\n\t\t\t\t\tbucket to write your signed code.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You specify the name of the source and destination buckets when calling the\n\t\t\t\t\t\t<code>StartSigningJob</code> operation.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You must also specify a request token that identifies your request to\n\t\t\t\t\tcode signing.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>You can call the <a>DescribeSigningJob</a> and the <a>ListSigningJobs</a> actions after you call\n\t\t\t<code>StartSigningJob</code>.</p>\n\t\t       <p>For a Java example that shows how to use this action, see <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/\">http://docs.aws.amazon.com/acm/latest/userguide/</a>\n         </p>",
-        "smithy.api#http": {
-          "method": "POST",
-          "uri": "/signing-jobs",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.signer#StartSigningJobRequest": {
-      "type": "structure",
-      "members": {
-        "clientRequestToken": {
-          "target": "com.amazonaws.signer#ClientRequestToken",
-          "traits": {
-            "smithy.api#documentation": "<p>String that identifies the signing request. All calls after the first that use this\n\t\t\ttoken return the same response as the first call.</p>",
-            "smithy.api#idempotencyToken": {},
-            "smithy.api#required": {}
-          }
-        },
-        "source": {
-          "target": "com.amazonaws.signer#Source",
-          "traits": {
-            "smithy.api#documentation": "<p>The S3 bucket that contains the object to sign or a BLOB that contains your raw\n\t\t\tcode.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "profileName": {
-          "target": "com.amazonaws.signer#ProfileName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the signing profile.</p>"
-          }
-        },
-        "destination": {
-          "target": "com.amazonaws.signer#Destination",
-          "traits": {
-            "smithy.api#documentation": "<p>The S3 bucket in which to save your signed object. The destination contains the name\n\t\t\tof your bucket and an optional prefix.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#StartSigningJobResponse": {
-      "type": "structure",
-      "members": {
-        "jobId": {
-          "target": "com.amazonaws.signer#JobId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of your signing job.</p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#StatusReason": {
-      "type": "string"
-    },
-    "com.amazonaws.signer#String": {
-      "type": "string"
-    },
-    "com.amazonaws.signer#TagKey": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 128
-        },
-        "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
-      }
-    },
-    "com.amazonaws.signer#TagKeyList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.signer#TagKey"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 200
-        }
-      }
-    },
-    "com.amazonaws.signer#TagMap": {
-      "type": "map",
-      "key": {
-        "target": "com.amazonaws.signer#TagKey"
-      },
-      "value": {
-        "target": "com.amazonaws.signer#TagValue"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 200
-        }
-      }
-    },
-    "com.amazonaws.signer#TagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.signer#TagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.signer#TagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.signer#BadRequestException"
-        },
-        {
-          "target": "com.amazonaws.signer#InternalServiceErrorException"
-        },
-        {
-          "target": "com.amazonaws.signer#NotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Adds one or more tags to a signing profile. Tags are labels that you can use to\n\t\t\tidentify and organize your AWS resources. Each tag consists of a key and an optional\n\t\t\tvalue. To specify the signing profile, use its Amazon Resource Name (ARN). To specify\n\t\t\tthe tag, use a key-value pair.</p>",
-        "smithy.api#http": {
-          "method": "POST",
-          "uri": "/tags/{resourceArn}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.signer#TagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "resourceArn": {
-          "target": "com.amazonaws.signer#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the signing profile.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.signer#TagMap",
-          "traits": {
-            "smithy.api#documentation": "<p>One or more tags to be associated with the signing profile.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#TagResourceResponse": {
-      "type": "structure",
-      "members": {}
-    },
-    "com.amazonaws.signer#TagValue": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 256
-        }
-      }
-    },
-    "com.amazonaws.signer#ThrottlingException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.signer#ErrorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The signing job has been throttled.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 429
-      }
-    },
-    "com.amazonaws.signer#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.signer#UntagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.signer#UntagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.signer#BadRequestException"
-        },
-        {
-          "target": "com.amazonaws.signer#InternalServiceErrorException"
-        },
-        {
-          "target": "com.amazonaws.signer#NotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Removes one or more tags from a signing profile. To remove the tags, specify a list of\n\t\t\ttag keys.</p>",
-        "smithy.api#http": {
-          "method": "DELETE",
-          "uri": "/tags/{resourceArn}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.signer#UntagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "tagKeys": {
-          "target": "com.amazonaws.signer#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of tag keys to be removed from the signing profile.</p>",
-            "smithy.api#httpQuery": "tagKeys",
-            "smithy.api#required": {}
-          }
-        },
-        "resourceArn": {
-          "target": "com.amazonaws.signer#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the signing profile.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        }
-      }
-    },
-    "com.amazonaws.signer#UntagResourceResponse": {
-      "type": "structure",
-      "members": {}
-    },
-    "com.amazonaws.signer#ValidationException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.signer#ErrorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>You signing certificate could not be validated.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.signer#Version": {
-      "type": "string"
-    },
-    "com.amazonaws.signer#WallabyService": {
-      "type": "service",
-      "version": "2017-08-25",
-      "operations": [
-        {
-          "target": "com.amazonaws.signer#CancelSigningProfile"
-        },
-        {
-          "target": "com.amazonaws.signer#DescribeSigningJob"
-        },
-        {
-          "target": "com.amazonaws.signer#GetSigningPlatform"
-        },
-        {
-          "target": "com.amazonaws.signer#GetSigningProfile"
-        },
-        {
-          "target": "com.amazonaws.signer#ListSigningJobs"
-        },
-        {
-          "target": "com.amazonaws.signer#ListSigningPlatforms"
-        },
-        {
-          "target": "com.amazonaws.signer#ListSigningProfiles"
-        },
-        {
-          "target": "com.amazonaws.signer#ListTagsForResource"
-        },
-        {
-          "target": "com.amazonaws.signer#PutSigningProfile"
-        },
-        {
-          "target": "com.amazonaws.signer#StartSigningJob"
-        },
-        {
-          "target": "com.amazonaws.signer#TagResource"
-        },
-        {
-          "target": "com.amazonaws.signer#UntagResource"
+    "shapes": {
+        "com.amazonaws.signer#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.signer#ErrorMessage"
+                },
+                "code": {
+                    "target": "com.amazonaws.signer#ErrorCode"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.signer#AccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
+        "com.amazonaws.signer#AddProfilePermission": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signer#AddProfilePermissionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signer#AddProfilePermissionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.signer#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ServiceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.signer#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds cross-account permissions to a signing profile.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/signing-profiles/{profileName}/permissions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.signer#AddProfilePermissionRequest": {
+            "type": "structure",
+            "members": {
+                "profileName": {
+                    "target": "com.amazonaws.signer#ProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The human-readable name of the signing profile.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "profileVersion": {
+                    "target": "com.amazonaws.signer#ProfileVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the signing profile.</p>"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Signer action permitted as part of cross-account permissions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "principal": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS principal receiving cross-account permissions. This may be an IAM role or\n\t\t\tanother AWS account ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "revisionId": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the current profile revision.</p>"
+                    }
+                },
+                "statementId": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the cross-account permission statement.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#AddProfilePermissionResponse": {
+            "type": "structure",
+            "members": {
+                "revisionId": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the current profile revision.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.signer#BadRequestException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.signer#ErrorMessage"
+                },
+                "code": {
+                    "target": "com.amazonaws.signer#ErrorCode"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request contains invalid parameters for the ARN or tags. This exception also\n\t\t\toccurs when you call a tagging API on a cancelled signing profile.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.signer#BucketName": {
+            "type": "string"
+        },
+        "com.amazonaws.signer#CancelSigningProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signer#CancelSigningProfileRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signer#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signer#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Changes the state of an <code>ACTIVE</code> signing profile to <code>CANCELED</code>.\n\t\t\tA canceled profile is still viewable with the <code>ListSigningProfiles</code>\n\t\t\toperation, but it cannot perform new signing jobs, and is deleted two years after\n\t\t\tcancelation.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/signing-profiles/{profileName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.signer#CancelSigningProfileRequest": {
+            "type": "structure",
+            "members": {
+                "profileName": {
+                    "target": "com.amazonaws.signer#ProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the signing profile to be canceled.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#Category": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AWSIoT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.signer#CertificateArn": {
+            "type": "string"
+        },
+        "com.amazonaws.signer#ClientRequestToken": {
+            "type": "string"
+        },
+        "com.amazonaws.signer#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.signer#ErrorMessage"
+                },
+                "code": {
+                    "target": "com.amazonaws.signer#ErrorCode"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource encountered a conflicting state.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.signer#DescribeSigningJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signer#DescribeSigningJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signer#DescribeSigningJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signer#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signer#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a specific code signing job. You specify the job by using\n\t\t\tthe <code>jobId</code> value that is returned by the <a>StartSigningJob</a>\n\t\t\toperation. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/signing-jobs/{jobId}",
+                    "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "SuccessfulSigningJob": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "Succeeded",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "Failed",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            }
+                        ],
+                        "minDelay": 20
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#DescribeSigningJobRequest": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.signer#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the signing job on input.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#DescribeSigningJobResponse": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.signer#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the signing job on output.</p>"
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.signer#Source",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object that contains the name of your S3 bucket or your raw code.</p>"
+                    }
+                },
+                "signingMaterial": {
+                    "target": "com.amazonaws.signer#SigningMaterial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of your code signing certificate.</p>"
+                    }
+                },
+                "platformId": {
+                    "target": "com.amazonaws.signer#PlatformId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The microcontroller platform to which your signed code image will be\n\t\t\tdistributed.</p>"
+                    }
+                },
+                "platformDisplayName": {
+                    "target": "com.amazonaws.signer#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable name for the signing platform associated with the signing job.</p>"
+                    }
+                },
+                "profileName": {
+                    "target": "com.amazonaws.signer#ProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile that initiated the signing operation.</p>"
+                    }
+                },
+                "profileVersion": {
+                    "target": "com.amazonaws.signer#ProfileVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the signing profile used to initiate the signing job.</p>"
+                    }
+                },
+                "overrides": {
+                    "target": "com.amazonaws.signer#SigningPlatformOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of any overrides that were applied to the signing operation.</p>"
+                    }
+                },
+                "signingParameters": {
+                    "target": "com.amazonaws.signer#SigningParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Map of user-assigned key-value pairs used during signing. These values contain any\n\t\t\tinformation that you specified for use in your signing job. </p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.signer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date and time that the signing job was created.</p>"
+                    }
+                },
+                "completedAt": {
+                    "target": "com.amazonaws.signer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date and time that the signing job was completed.</p>"
+                    }
+                },
+                "signatureExpiresAt": {
+                    "target": "com.amazonaws.signer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Thr expiration timestamp for the signature generated by the signing job.</p>"
+                    }
+                },
+                "requestedBy": {
+                    "target": "com.amazonaws.signer#RequestedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM principal that requested the signing job.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.signer#SigningStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the signing job.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.signer#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>String value that contains the status reason.</p>"
+                    }
+                },
+                "revocationRecord": {
+                    "target": "com.amazonaws.signer#SigningJobRevocationRecord",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A revocation record if the signature generated by the signing job has been revoked.\n\t\t\tContains a timestamp and the ID of the IAM entity that revoked the signature.</p>"
+                    }
+                },
+                "signedObject": {
+                    "target": "com.amazonaws.signer#SignedObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the S3 bucket where the signed code image is saved by code signing.</p>"
+                    }
+                },
+                "jobOwner": {
+                    "target": "com.amazonaws.signer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the job owner.</p>"
+                    }
+                },
+                "jobInvoker": {
+                    "target": "com.amazonaws.signer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM entity that initiated the signing job.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#Destination": {
+            "type": "structure",
+            "members": {
+                "s3": {
+                    "target": "com.amazonaws.signer#S3Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>S3Destination</code> object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Points to an <code>S3Destination</code> object that contains information about your S3\n\t\t\tbucket.</p>"
+            }
+        },
+        "com.amazonaws.signer#DisplayName": {
+            "type": "string"
+        },
+        "com.amazonaws.signer#EncryptionAlgorithm": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RSA"
+                    },
+                    {
+                        "value": "ECDSA"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.signer#EncryptionAlgorithmOptions": {
+            "type": "structure",
+            "members": {
+                "allowedValues": {
+                    "target": "com.amazonaws.signer#EncryptionAlgorithms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The set of accepted encryption algorithms that are allowed in a code signing job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "defaultValue": {
+                    "target": "com.amazonaws.signer#EncryptionAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default encryption algorithm that is used by a code signing job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The encryption algorithm options that are available to a code signing job.</p>"
+            }
+        },
+        "com.amazonaws.signer#EncryptionAlgorithms": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.signer#EncryptionAlgorithm"
+            }
+        },
+        "com.amazonaws.signer#ErrorCode": {
+            "type": "string"
+        },
+        "com.amazonaws.signer#ErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.signer#GetSigningPlatform": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signer#GetSigningPlatformRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signer#GetSigningPlatformResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signer#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signer#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information on a specific signing platform.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/signing-platforms/{platformId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.signer#GetSigningPlatformRequest": {
+            "type": "structure",
+            "members": {
+                "platformId": {
+                    "target": "com.amazonaws.signer#PlatformId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the target signing platform.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#GetSigningPlatformResponse": {
+            "type": "structure",
+            "members": {
+                "platformId": {
+                    "target": "com.amazonaws.signer#PlatformId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the target signing platform.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.signer#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the target signing platform.</p>"
+                    }
+                },
+                "partner": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of partner entities that use the target signing platform.</p>"
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validation template that is used by the target signing platform.</p>"
+                    }
+                },
+                "category": {
+                    "target": "com.amazonaws.signer#Category",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category type of the target signing platform.</p>"
+                    }
+                },
+                "signingConfiguration": {
+                    "target": "com.amazonaws.signer#SigningConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of configurations applied to the target platform at signing.</p>"
+                    }
+                },
+                "signingImageFormat": {
+                    "target": "com.amazonaws.signer#SigningImageFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the target platform's signing image.</p>"
+                    }
+                },
+                "maxSizeInMB": {
+                    "target": "com.amazonaws.signer#MaxSizeInMB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum size (in MB) of the payload that can be signed by the target\n\t\t\tplatform.</p>"
+                    }
+                },
+                "revocationSupported": {
+                    "target": "com.amazonaws.signer#bool",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A flag indicating whether signatures generated for the signing platform can be\n\t\t\trevoked.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#GetSigningProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signer#GetSigningProfileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signer#GetSigningProfileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signer#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signer#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information on a specific signing profile.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/signing-profiles/{profileName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.signer#GetSigningProfileRequest": {
+            "type": "structure",
+            "members": {
+                "profileName": {
+                    "target": "com.amazonaws.signer#ProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the target signing profile.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "profileOwner": {
+                    "target": "com.amazonaws.signer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the profile owner.</p>",
+                        "smithy.api#httpQuery": "profileOwner"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#GetSigningProfileResponse": {
+            "type": "structure",
+            "members": {
+                "profileName": {
+                    "target": "com.amazonaws.signer#ProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the target signing profile.</p>"
+                    }
+                },
+                "profileVersion": {
+                    "target": "com.amazonaws.signer#ProfileVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the signing profile.</p>"
+                    }
+                },
+                "profileVersionArn": {
+                    "target": "com.amazonaws.signer#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The signing profile ARN, including the profile version.</p>"
+                    }
+                },
+                "revocationRecord": {
+                    "target": "com.amazonaws.signer#SigningProfileRevocationRecord"
+                },
+                "signingMaterial": {
+                    "target": "com.amazonaws.signer#SigningMaterial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the certificate that the target profile uses for signing operations.</p>"
+                    }
+                },
+                "platformId": {
+                    "target": "com.amazonaws.signer#PlatformId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the platform that is used by the target signing profile.</p>"
+                    }
+                },
+                "platformDisplayName": {
+                    "target": "com.amazonaws.signer#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable name for the signing platform associated with the signing\n\t\t\tprofile.</p>"
+                    }
+                },
+                "signatureValidityPeriod": {
+                    "target": "com.amazonaws.signer#SignatureValidityPeriod"
+                },
+                "overrides": {
+                    "target": "com.amazonaws.signer#SigningPlatformOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of overrides applied by the target signing profile for signing\n\t\t\toperations.</p>"
+                    }
+                },
+                "signingParameters": {
+                    "target": "com.amazonaws.signer#SigningParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of key-value pairs for signing operations that is attached to the target signing\n\t\t\tprofile.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.signer#SigningProfileStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the target signing profile.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reason for the status of the target signing profile.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the signing profile.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.signer#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags associated with the signing profile.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#HashAlgorithm": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SHA1"
+                    },
+                    {
+                        "value": "SHA256"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.signer#HashAlgorithmOptions": {
+            "type": "structure",
+            "members": {
+                "allowedValues": {
+                    "target": "com.amazonaws.signer#HashAlgorithms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The set of accepted hash algorithms allowed in a code signing job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "defaultValue": {
+                    "target": "com.amazonaws.signer#HashAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default hash algorithm that is used in a code signing job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The hash algorithms that are available to a code signing job.</p>"
+            }
+        },
+        "com.amazonaws.signer#HashAlgorithms": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.signer#HashAlgorithm"
+            }
+        },
+        "com.amazonaws.signer#ImageFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "JSON"
+                    },
+                    {
+                        "value": "JSONEmbedded"
+                    },
+                    {
+                        "value": "JSONDetached"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.signer#ImageFormats": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.signer#ImageFormat"
+            }
+        },
+        "com.amazonaws.signer#Integer": {
+            "type": "integer"
+        },
+        "com.amazonaws.signer#InternalServiceErrorException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.signer#ErrorMessage"
+                },
+                "code": {
+                    "target": "com.amazonaws.signer#ErrorCode"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal error occurred.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.signer#JobId": {
+            "type": "string"
+        },
+        "com.amazonaws.signer#Key": {
+            "type": "string"
+        },
+        "com.amazonaws.signer#ListProfilePermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signer#ListProfilePermissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signer#ListProfilePermissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signer#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signer#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the cross-account permissions associated with a signing profile.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/signing-profiles/{profileName}/permissions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.signer#ListProfilePermissionsRequest": {
+            "type": "structure",
+            "members": {
+                "profileName": {
+                    "target": "com.amazonaws.signer#ProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the signing profile containing the cross-account permissions.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>String for specifying the next set of paginated results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#ListProfilePermissionsResponse": {
+            "type": "structure",
+            "members": {
+                "revisionId": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the current revision of profile permissions.</p>"
+                    }
+                },
+                "policySizeBytes": {
+                    "target": "com.amazonaws.signer#PolicySizeBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total size of the policy associated with the Signing Profile in bytes.</p>"
+                    }
+                },
+                "permissions": {
+                    "target": "com.amazonaws.signer#Permissions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of permissions associated with the Signing Profile.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>String for specifying the next set of paginated results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#ListSigningJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signer#ListSigningJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signer#ListSigningJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signer#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signer#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all your signing jobs. You can use the <code>maxResults</code> parameter to\n\t\t\tlimit the number of signing jobs that are returned in the response. If additional jobs\n\t\t\tremain to be listed, code signing returns a <code>nextToken</code> value. Use this value in\n\t\t\tsubsequent calls to <code>ListSigningJobs</code> to fetch the remaining values. You can\n\t\t\tcontinue calling <code>ListSigningJobs</code> with your <code>maxResults</code>\n\t\t\tparameter and with new values that code signing returns in the <code>nextToken</code>\n\t\t\tparameter until all of your signing jobs have been returned. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/signing-jobs",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.signer#ListSigningJobsRequest": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.signer#SigningStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A status value with which to filter your results.</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                },
+                "platformId": {
+                    "target": "com.amazonaws.signer#PlatformId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of microcontroller platform that you specified for the distribution of your\n\t\t\tcode image.</p>",
+                        "smithy.api#httpQuery": "platformId"
+                    }
+                },
+                "requestedBy": {
+                    "target": "com.amazonaws.signer#RequestedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM principal that requested the signing job.</p>",
+                        "smithy.api#httpQuery": "requestedBy"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.signer#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum number of items to return in the response. Use this parameter\n\t\t\twhen paginating results. If additional items exist beyond the number you specify, the\n\t\t\t\t<code>nextToken</code> element is set in the response. Use the\n\t\t\t\t<code>nextToken</code> value in a subsequent request to retrieve additional items.\n\t\t</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.signer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>String for specifying the next set of paginated results to return. After you receive a\n\t\t\tresponse with truncated results, use this parameter in a subsequent request. Set it to\n\t\t\tthe value of <code>nextToken</code> from the response that you just received.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "isRevoked": {
+                    "target": "com.amazonaws.signer#bool",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters results to return only signing jobs with revoked signatures.</p>",
+                        "smithy.api#httpQuery": "isRevoked"
+                    }
+                },
+                "signatureExpiresBefore": {
+                    "target": "com.amazonaws.signer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters results to return only signing jobs with signatures expiring before a\n\t\t\tspecified timestamp.</p>",
+                        "smithy.api#httpQuery": "signatureExpiresBefore"
+                    }
+                },
+                "signatureExpiresAfter": {
+                    "target": "com.amazonaws.signer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters results to return only signing jobs with signatures expiring after a specified\n\t\t\ttimestamp.</p>",
+                        "smithy.api#httpQuery": "signatureExpiresAfter"
+                    }
+                },
+                "jobInvoker": {
+                    "target": "com.amazonaws.signer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters results to return only signing jobs initiated by a specified IAM\n\t\t\tentity.</p>",
+                        "smithy.api#httpQuery": "jobInvoker"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#ListSigningJobsResponse": {
+            "type": "structure",
+            "members": {
+                "jobs": {
+                    "target": "com.amazonaws.signer#SigningJobs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of your signing jobs.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.signer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>String for specifying the next set of paginated results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#ListSigningPlatforms": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signer#ListSigningPlatformsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signer#ListSigningPlatformsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signer#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signer#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all signing platforms available in code signing that match the request parameters. If\n\t\t\tadditional jobs remain to be listed, code signing returns a <code>nextToken</code> value. Use\n\t\t\tthis value in subsequent calls to <code>ListSigningJobs</code> to fetch the remaining\n\t\t\tvalues. You can continue calling <code>ListSigningJobs</code> with your\n\t\t\t\t<code>maxResults</code> parameter and with new values that code signing returns in the\n\t\t\t\t<code>nextToken</code> parameter until all of your signing jobs have been\n\t\t\treturned.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/signing-platforms",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.signer#ListSigningPlatformsRequest": {
+            "type": "structure",
+            "members": {
+                "category": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category type of a signing platform.</p>",
+                        "smithy.api#httpQuery": "category"
+                    }
+                },
+                "partner": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any partner entities connected to a signing platform.</p>",
+                        "smithy.api#httpQuery": "partner"
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validation template that is used by the target signing platform.</p>",
+                        "smithy.api#httpQuery": "target"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.signer#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned by this operation.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Value for specifying the next set of paginated results to return. After you receive a\n\t\t\tresponse with truncated results, use this parameter in a subsequent request. Set it to\n\t\t\tthe value of <code>nextToken</code> from the response that you just received.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#ListSigningPlatformsResponse": {
+            "type": "structure",
+            "members": {
+                "platforms": {
+                    "target": "com.amazonaws.signer#SigningPlatforms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all platforms that match the request parameters.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Value for specifying the next set of paginated results to return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#ListSigningProfiles": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signer#ListSigningProfilesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signer#ListSigningProfilesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signer#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signer#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all available signing profiles in your AWS account. Returns only profiles with\n\t\t\tan <code>ACTIVE</code> status unless the <code>includeCanceled</code> request field is\n\t\t\tset to <code>true</code>. If additional jobs remain to be listed, code signing returns a\n\t\t\t\t<code>nextToken</code> value. Use this value in subsequent calls to\n\t\t\t\t<code>ListSigningJobs</code> to fetch the remaining values. You can continue calling\n\t\t\t\t<code>ListSigningJobs</code> with your <code>maxResults</code> parameter and with\n\t\t\tnew values that code signing returns in the <code>nextToken</code> parameter until all of your\n\t\t\tsigning jobs have been returned.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/signing-profiles",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.signer#ListSigningProfilesRequest": {
+            "type": "structure",
+            "members": {
+                "includeCanceled": {
+                    "target": "com.amazonaws.signer#bool",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Designates whether to include profiles with the status of\n\t\t\t<code>CANCELED</code>.</p>",
+                        "smithy.api#httpQuery": "includeCanceled"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.signer#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of profiles to be returned.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.signer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Value for specifying the next set of paginated results to return. After you receive a\n\t\t\tresponse with truncated results, use this parameter in a subsequent request. Set it to\n\t\t\tthe value of <code>nextToken</code> from the response that you just received.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "platformId": {
+                    "target": "com.amazonaws.signer#PlatformId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters results to return only signing jobs initiated for a specified signing\n\t\t\tplatform.</p>",
+                        "smithy.api#httpQuery": "platformId"
+                    }
+                },
+                "statuses": {
+                    "target": "com.amazonaws.signer#Statuses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters results to return only signing jobs with statuses in the specified\n\t\t\tlist.</p>",
+                        "smithy.api#httpQuery": "statuses"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#ListSigningProfilesResponse": {
+            "type": "structure",
+            "members": {
+                "profiles": {
+                    "target": "com.amazonaws.signer#SigningProfiles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of profiles that are available in the AWS account. This includes profiles with\n\t\t\tthe status of <code>CANCELED</code> if the <code>includeCanceled</code> parameter is set\n\t\t\tto <code>true</code>.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.signer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Value for specifying the next set of paginated results to return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signer#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signer#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signer#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.signer#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signer#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signer#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of the tags associated with a signing profile resource.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.signer#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the signing profile.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.signer#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags associated with the signing profile.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.signer#MaxSizeInMB": {
+            "type": "integer"
+        },
+        "com.amazonaws.signer#NextToken": {
+            "type": "string"
+        },
+        "com.amazonaws.signer#NotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.signer#ErrorMessage"
+                },
+                "code": {
+                    "target": "com.amazonaws.signer#ErrorCode"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The signing profile was not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.signer#Permission": {
+            "type": "structure",
+            "members": {
+                "action": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An AWS Signer action permitted as part of cross-account permissions.</p>"
+                    }
+                },
+                "principal": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS principal that has been granted a cross-account permission.</p>"
+                    }
+                },
+                "statementId": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for a cross-account permission statement.</p>"
+                    }
+                },
+                "profileVersion": {
+                    "target": "com.amazonaws.signer#ProfileVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The signing profile version that a permission applies to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A cross-account permission for a signing profile.</p>"
+            }
+        },
+        "com.amazonaws.signer#Permissions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.signer#Permission"
+            }
+        },
+        "com.amazonaws.signer#PlatformId": {
+            "type": "string"
+        },
+        "com.amazonaws.signer#PolicySizeBytes": {
+            "type": "integer"
+        },
+        "com.amazonaws.signer#Prefix": {
+            "type": "string"
+        },
+        "com.amazonaws.signer#ProfileName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_]{2,}"
+            }
+        },
+        "com.amazonaws.signer#ProfileVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]{10}$"
+            }
+        },
+        "com.amazonaws.signer#PutSigningProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signer#PutSigningProfileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signer#PutSigningProfileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signer#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signer#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a signing profile. A signing profile is a code signing template that can be used to\n\t\t\tcarry out a pre-defined signing job. For more information, see <a href=\"http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html\">http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html</a>\n         </p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/signing-profiles/{profileName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.signer#PutSigningProfileRequest": {
+            "type": "structure",
+            "members": {
+                "profileName": {
+                    "target": "com.amazonaws.signer#ProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the signing profile to be created.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "signingMaterial": {
+                    "target": "com.amazonaws.signer#SigningMaterial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Certificate Manager certificate that will be used to sign code with the new signing\n\t\t\tprofile.</p>"
+                    }
+                },
+                "signatureValidityPeriod": {
+                    "target": "com.amazonaws.signer#SignatureValidityPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default validity period override for any signature generated using this signing\n\t\t\tprofile. If unspecified, the default is 135 months.</p>"
+                    }
+                },
+                "platformId": {
+                    "target": "com.amazonaws.signer#PlatformId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the signing platform to be created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "overrides": {
+                    "target": "com.amazonaws.signer#SigningPlatformOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A subfield of <code>platform</code>. This specifies any different configuration\n\t\t\toptions that you want to apply to the chosen platform (such as a different\n\t\t\t\t<code>hash-algorithm</code> or <code>signing-algorithm</code>).</p>"
+                    }
+                },
+                "signingParameters": {
+                    "target": "com.amazonaws.signer#SigningParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Map of key-value pairs for signing. These can include any information that you want to\n\t\t\tuse during signing.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.signer#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to be associated with the signing profile that is being created.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#PutSigningProfileResponse": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the signing profile created.</p>"
+                    }
+                },
+                "profileVersion": {
+                    "target": "com.amazonaws.signer#ProfileVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the signing profile being created.</p>"
+                    }
+                },
+                "profileVersionArn": {
+                    "target": "com.amazonaws.signer#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The signing profile ARN, including the profile version.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#RemoveProfilePermission": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signer#RemoveProfilePermissionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signer#RemoveProfilePermissionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.signer#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signer#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes cross-account permissions from a signing profile.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/signing-profiles/{profileName}/permissions/{statementId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.signer#RemoveProfilePermissionRequest": {
+            "type": "structure",
+            "members": {
+                "profileName": {
+                    "target": "com.amazonaws.signer#ProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable name for the signing profile with permissions to be removed.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "revisionId": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier for the current revision of the signing profile permissions.</p>",
+                        "smithy.api#httpQuery": "revisionId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statementId": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the cross-account permissions statement.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#RemoveProfilePermissionResponse": {
+            "type": "structure",
+            "members": {
+                "revisionId": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier for the current revision of the profile permissions.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#RequestedBy": {
+            "type": "string"
+        },
+        "com.amazonaws.signer#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.signer#ErrorMessage"
+                },
+                "code": {
+                    "target": "com.amazonaws.signer#ErrorCode"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A specified resource could not be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.signer#RevocationReasonString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.signer#RevokeSignature": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signer#RevokeSignatureRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signer#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signer#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Changes the state of a signing job to REVOKED. This indicates that the signature is no\n\t\t\tlonger valid.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/signing-jobs/{jobId}/revoke",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.signer#RevokeSignatureRequest": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.signer#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the signing job to be revoked.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobOwner": {
+                    "target": "com.amazonaws.signer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>AWS account ID of the job owner.</p>"
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.signer#RevocationReasonString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for revoking the signing job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#RevokeSigningProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signer#RevokeSigningProfileRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signer#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signer#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Changes the state of a signing profile to REVOKED. This indicates that signatures\n\t\t\tgenerated using the signing profile after an effective start date are no longer\n\t\t\tvalid.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/signing-profiles/{profileName}/revoke",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.signer#RevokeSigningProfileRequest": {
+            "type": "structure",
+            "members": {
+                "profileName": {
+                    "target": "com.amazonaws.signer#ProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the signing profile to be revoked.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "profileVersion": {
+                    "target": "com.amazonaws.signer#ProfileVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the signing profile to be revoked.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.signer#RevocationReasonString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for revoking a signing profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "effectiveTime": {
+                    "target": "com.amazonaws.signer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp for when revocation of a Signing Profile should become effective.\n\t\t\tSignatures generated using the signing profile after this timestamp are not\n\t\t\ttrusted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#S3Destination": {
+            "type": "structure",
+            "members": {
+                "bucketName": {
+                    "target": "com.amazonaws.signer#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the S3 bucket.</p>"
+                    }
+                },
+                "prefix": {
+                    "target": "com.amazonaws.signer#Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon S3 prefix that you can use to limit responses to those that begin with the\n\t\t\tspecified prefix.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The name and prefix of the S3 bucket where code signing saves your signed objects.</p>"
+            }
+        },
+        "com.amazonaws.signer#S3SignedObject": {
+            "type": "structure",
+            "members": {
+                "bucketName": {
+                    "target": "com.amazonaws.signer#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the S3 bucket.</p>"
+                    }
+                },
+                "key": {
+                    "target": "com.amazonaws.signer#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key name that uniquely identifies a signed code image in your bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The S3 bucket name and key where code signing saved your signed code image.</p>"
+            }
+        },
+        "com.amazonaws.signer#S3Source": {
+            "type": "structure",
+            "members": {
+                "bucketName": {
+                    "target": "com.amazonaws.signer#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the S3 bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "key": {
+                    "target": "com.amazonaws.signer#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key name of the bucket object that contains your unsigned code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.signer#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Version of your source image in your version enabled S3 bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the S3 bucket where you saved your unsigned code.</p>"
+            }
+        },
+        "com.amazonaws.signer#ServiceLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.signer#ErrorMessage"
+                },
+                "code": {
+                    "target": "com.amazonaws.signer#ErrorCode"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The client is making a request that exceeds service limits.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.signer#SignatureValidityPeriod": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "com.amazonaws.signer#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The numerical value of the time unit for signature validity.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.signer#ValidityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time unit for signature\n\t\t\tvalidity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The validity period for a signing job.</p>"
+            }
+        },
+        "com.amazonaws.signer#SignedObject": {
+            "type": "structure",
+            "members": {
+                "s3": {
+                    "target": "com.amazonaws.signer#S3SignedObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>S3SignedObject</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Points to an <code>S3SignedObject</code> object that contains information about your\n\t\t\tsigned code image.</p>"
+            }
+        },
+        "com.amazonaws.signer#SigningConfiguration": {
+            "type": "structure",
+            "members": {
+                "encryptionAlgorithmOptions": {
+                    "target": "com.amazonaws.signer#EncryptionAlgorithmOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption algorithm options that are available for a code signing job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "hashAlgorithmOptions": {
+                    "target": "com.amazonaws.signer#HashAlgorithmOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hash algorithm options that are available for a code signing job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of a code signing operation.</p>"
+            }
+        },
+        "com.amazonaws.signer#SigningConfigurationOverrides": {
+            "type": "structure",
+            "members": {
+                "encryptionAlgorithm": {
+                    "target": "com.amazonaws.signer#EncryptionAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A specified override of the default encryption algorithm that is used in a code signing\n\t\t\tjob.</p>"
+                    }
+                },
+                "hashAlgorithm": {
+                    "target": "com.amazonaws.signer#HashAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A specified override of the default hash algorithm that is used in a code signing\n\t\t\tjob.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A signing configuration that overrides the default encryption or hash algorithm of a\n\t\t\tsigning job.</p>"
+            }
+        },
+        "com.amazonaws.signer#SigningImageFormat": {
+            "type": "structure",
+            "members": {
+                "supportedFormats": {
+                    "target": "com.amazonaws.signer#ImageFormats",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported formats of a code signing image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "defaultFormat": {
+                    "target": "com.amazonaws.signer#ImageFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default format of a code signing image.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The image format of a code signing platform or profile.</p>"
+            }
+        },
+        "com.amazonaws.signer#SigningJob": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.signer#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the signing job.</p>"
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.signer#Source",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>Source</code> that contains information about a signing job's code image\n\t\t\tsource.</p>"
+                    }
+                },
+                "signedObject": {
+                    "target": "com.amazonaws.signer#SignedObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>SignedObject</code> structure that contains information about a signing job's\n\t\t\tsigned code image.</p>"
+                    }
+                },
+                "signingMaterial": {
+                    "target": "com.amazonaws.signer#SigningMaterial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>SigningMaterial</code> object that contains the Amazon Resource Name (ARN) of\n\t\t\tthe certificate used for the signing job.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.signer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the signing job was created.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.signer#SigningStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the signing job.</p>"
+                    }
+                },
+                "isRevoked": {
+                    "target": "com.amazonaws.signer#bool",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the signing job is revoked.</p>"
+                    }
+                },
+                "profileName": {
+                    "target": "com.amazonaws.signer#ProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the signing profile that created a signing job.</p>"
+                    }
+                },
+                "profileVersion": {
+                    "target": "com.amazonaws.signer#ProfileVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the signing profile that created a signing job.</p>"
+                    }
+                },
+                "platformId": {
+                    "target": "com.amazonaws.signer#PlatformId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for a signing platform.</p>"
+                    }
+                },
+                "platformDisplayName": {
+                    "target": "com.amazonaws.signer#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a signing platform.</p>"
+                    }
+                },
+                "signatureExpiresAt": {
+                    "target": "com.amazonaws.signer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the signature of a signing job expires.</p>"
+                    }
+                },
+                "jobOwner": {
+                    "target": "com.amazonaws.signer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the job owner.</p>"
+                    }
+                },
+                "jobInvoker": {
+                    "target": "com.amazonaws.signer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the job invoker.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a signing job.</p>"
+            }
+        },
+        "com.amazonaws.signer#SigningJobRevocationRecord": {
+            "type": "structure",
+            "members": {
+                "reason": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A caller-supplied reason for revocation.</p>"
+                    }
+                },
+                "revokedAt": {
+                    "target": "com.amazonaws.signer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time of revocation.</p>"
+                    }
+                },
+                "revokedBy": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity of the revoker.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Revocation information for a signing job.</p>"
+            }
+        },
+        "com.amazonaws.signer#SigningJobs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.signer#SigningJob"
+            }
+        },
+        "com.amazonaws.signer#SigningMaterial": {
+            "type": "structure",
+            "members": {
+                "certificateArn": {
+                    "target": "com.amazonaws.signer#CertificateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the certificates that is used to sign your\n\t\t\tcode.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The ACM certificate that is used to sign your code.</p>"
+            }
+        },
+        "com.amazonaws.signer#SigningParameterKey": {
+            "type": "string"
+        },
+        "com.amazonaws.signer#SigningParameterValue": {
+            "type": "string"
+        },
+        "com.amazonaws.signer#SigningParameters": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.signer#SigningParameterKey"
+            },
+            "value": {
+                "target": "com.amazonaws.signer#SigningParameterValue"
+            }
+        },
+        "com.amazonaws.signer#SigningPlatform": {
+            "type": "structure",
+            "members": {
+                "platformId": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a code signing; platform.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of a code signing platform.</p>"
+                    }
+                },
+                "partner": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any partner entities linked to a code signing platform.</p>"
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of targets that can be signed by a code signing platform.</p>"
+                    }
+                },
+                "category": {
+                    "target": "com.amazonaws.signer#Category",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of a code signing platform.</p>"
+                    }
+                },
+                "signingConfiguration": {
+                    "target": "com.amazonaws.signer#SigningConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of a code signing platform. This includes the designated hash algorithm\n\t\t\tand encryption algorithm of a signing platform.</p>"
+                    }
+                },
+                "signingImageFormat": {
+                    "target": "com.amazonaws.signer#SigningImageFormat"
+                },
+                "maxSizeInMB": {
+                    "target": "com.amazonaws.signer#MaxSizeInMB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum size (in MB) of code that can be signed by a code signing platform.</p>"
+                    }
+                },
+                "revocationSupported": {
+                    "target": "com.amazonaws.signer#bool",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether revocation is supported for the platform.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the signing configurations and parameters that are used to\n\t\t\tperform a code signing job.</p>"
+            }
+        },
+        "com.amazonaws.signer#SigningPlatformOverrides": {
+            "type": "structure",
+            "members": {
+                "signingConfiguration": {
+                    "target": "com.amazonaws.signer#SigningConfigurationOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A signing configuration that overrides the default encryption or hash algorithm of a\n\t\t\tsigning job.</p>"
+                    }
+                },
+                "signingImageFormat": {
+                    "target": "com.amazonaws.signer#ImageFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A signed image is a JSON object. When overriding the default signing platform\n\t\t\tconfiguration, a customer can select either of two signing formats,\n\t\t\t\t<code>JSONEmbedded</code> or <code>JSONDetached</code>. (A third format value,\n\t\t\t\t<code>JSON</code>, is reserved for future use.) With <code>JSONEmbedded</code>, the\n\t\t\tsigning image has the payload embedded in it. With <code>JSONDetached</code>, the\n\t\t\tpayload is not be embedded in the signing image.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Any overrides that are applied to the signing configuration of a code signing\n\t\t\tplatform.</p>"
+            }
+        },
+        "com.amazonaws.signer#SigningPlatforms": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.signer#SigningPlatform"
+            }
+        },
+        "com.amazonaws.signer#SigningProfile": {
+            "type": "structure",
+            "members": {
+                "profileName": {
+                    "target": "com.amazonaws.signer#ProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the signing profile.</p>"
+                    }
+                },
+                "profileVersion": {
+                    "target": "com.amazonaws.signer#ProfileVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of a signing profile.</p>"
+                    }
+                },
+                "profileVersionArn": {
+                    "target": "com.amazonaws.signer#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of a signing profile, including the profile version.</p>"
+                    }
+                },
+                "signingMaterial": {
+                    "target": "com.amazonaws.signer#SigningMaterial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ACM certificate that is available for use by a signing profile.</p>"
+                    }
+                },
+                "signatureValidityPeriod": {
+                    "target": "com.amazonaws.signer#SignatureValidityPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validity period for a signing job created using this signing profile.</p>"
+                    }
+                },
+                "platformId": {
+                    "target": "com.amazonaws.signer#PlatformId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a platform that is available for use by a signing profile.</p>"
+                    }
+                },
+                "platformDisplayName": {
+                    "target": "com.amazonaws.signer#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the signing platform.</p>"
+                    }
+                },
+                "signingParameters": {
+                    "target": "com.amazonaws.signer#SigningParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters that are available for use by a code signing user.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.signer#SigningProfileStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a code signing profile.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the signing profile.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.signer#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags associated with the signing profile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the ACM certificates and code signing configuration parameters\n\t\t\tthat can be used by a given code signing user.</p>"
+            }
+        },
+        "com.amazonaws.signer#SigningProfileRevocationRecord": {
+            "type": "structure",
+            "members": {
+                "revocationEffectiveFrom": {
+                    "target": "com.amazonaws.signer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when revocation becomes effective.</p>"
+                    }
+                },
+                "revokedAt": {
+                    "target": "com.amazonaws.signer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the signing profile was revoked.</p>"
+                    }
+                },
+                "revokedBy": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity of the revoker.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Revocation information for a signing profile.</p>"
+            }
+        },
+        "com.amazonaws.signer#SigningProfileStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Active"
+                    },
+                    {
+                        "value": "Canceled"
+                    },
+                    {
+                        "value": "Revoked"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.signer#SigningProfiles": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.signer#SigningProfile"
+            }
+        },
+        "com.amazonaws.signer#SigningStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "InProgress"
+                    },
+                    {
+                        "value": "Failed"
+                    },
+                    {
+                        "value": "Succeeded"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.signer#Source": {
+            "type": "structure",
+            "members": {
+                "s3": {
+                    "target": "com.amazonaws.signer#S3Source",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>S3Source</code> object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An <code>S3Source</code> object that contains information about the S3 bucket where\n\t\t\tyou saved your unsigned code.</p>"
+            }
+        },
+        "com.amazonaws.signer#StartSigningJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signer#StartSigningJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signer#StartSigningJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signer#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.signer#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates a signing job to be performed on the code provided. Signing jobs are\n\t\t\tviewable by the <code>ListSigningJobs</code> operation for two years after they are\n\t\t\tperformed. Note the following requirements: </p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p> You must create an Amazon S3 source bucket. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html\">Create a Bucket</a> in the\n\t\t\t\t\t\t<i>Amazon S3 Getting Started Guide</i>. </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Your S3 source bucket must be version enabled.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You must create an S3 destination bucket. Code signing uses your S3 destination\n\t\t\t\t\tbucket to write your signed code.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You specify the name of the source and destination buckets when calling the\n\t\t\t\t\t\t<code>StartSigningJob</code> operation.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You must also specify a request token that identifies your request to\n\t\t\t\t\tcode signing.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>You can call the <a>DescribeSigningJob</a> and the <a>ListSigningJobs</a> actions after you call\n\t\t\t<code>StartSigningJob</code>.</p>\n\t\t       <p>For a Java example that shows how to use this action, see <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/\">http://docs.aws.amazon.com/acm/latest/userguide/</a>\n         </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/signing-jobs",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.signer#StartSigningJobRequest": {
+            "type": "structure",
+            "members": {
+                "source": {
+                    "target": "com.amazonaws.signer#Source",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 bucket that contains the object to sign or a BLOB that contains your raw\n\t\t\tcode.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.signer#Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 bucket in which to save your signed object. The destination contains the name\n\t\t\tof your bucket and an optional prefix.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "profileName": {
+                    "target": "com.amazonaws.signer#ProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the signing profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.signer#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>String that identifies the signing request. All calls after the first that use this\n\t\t\ttoken return the same response as the first call.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "profileOwner": {
+                    "target": "com.amazonaws.signer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the signing profile owner.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#StartSigningJobResponse": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.signer#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of your signing job.</p>"
+                    }
+                },
+                "jobOwner": {
+                    "target": "com.amazonaws.signer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the signing job owner.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#StatusReason": {
+            "type": "string"
+        },
+        "com.amazonaws.signer#Statuses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.signer#SigningProfileStatus"
+            }
+        },
+        "com.amazonaws.signer#String": {
+            "type": "string"
+        },
+        "com.amazonaws.signer#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+            }
+        },
+        "com.amazonaws.signer#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.signer#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.signer#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.signer#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.signer#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.signer#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signer#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signer#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signer#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.signer#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signer#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signer#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds one or more tags to a signing profile. Tags are labels that you can use to\n\t\t\tidentify and organize your AWS resources. Each tag consists of a key and an optional\n\t\t\tvalue. To specify the signing profile, use its Amazon Resource Name (ARN). To specify\n\t\t\tthe tag, use a key-value pair.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.signer#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the signing profile.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.signer#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tags to be associated with the signing profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.signer#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.signer#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.signer#ErrorMessage"
+                },
+                "code": {
+                    "target": "com.amazonaws.signer#ErrorCode"
+                }
+            },
+            "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Instead of this error, TooManyRequestsException should be used."
+                },
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>\n        <p>Instead of this error, <code>TooManyRequestsException</code> should be used.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.signer#Timestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.signer#TooManyRequestsException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.signer#ErrorMessage"
+                },
+                "code": {
+                    "target": "com.amazonaws.signer#ErrorCode"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The allowed number of job-signing requests has been exceeded.</p> \n\t\t       <p>This error supersedes the error <code>ThrottlingException</code>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.signer#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signer#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signer#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signer#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.signer#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signer#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signer#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes one or more tags from a signing profile. To remove the tags, specify a list of\n\t\t\ttag keys.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.signer#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the signing profile.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.signer#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag keys to be removed from the signing profile.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signer#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.signer#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.signer#ErrorMessage"
+                },
+                "code": {
+                    "target": "com.amazonaws.signer#ErrorCode"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You signing certificate could not be validated.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.signer#ValidityType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DAYS"
+                    },
+                    {
+                        "value": "MONTHS"
+                    },
+                    {
+                        "value": "YEARS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.signer#Version": {
+            "type": "string"
+        },
+        "com.amazonaws.signer#WallabyService": {
+            "type": "service",
+            "version": "2017-08-25",
+            "operations": [
+                {
+                    "target": "com.amazonaws.signer#AddProfilePermission"
+                },
+                {
+                    "target": "com.amazonaws.signer#CancelSigningProfile"
+                },
+                {
+                    "target": "com.amazonaws.signer#DescribeSigningJob"
+                },
+                {
+                    "target": "com.amazonaws.signer#GetSigningPlatform"
+                },
+                {
+                    "target": "com.amazonaws.signer#GetSigningProfile"
+                },
+                {
+                    "target": "com.amazonaws.signer#ListProfilePermissions"
+                },
+                {
+                    "target": "com.amazonaws.signer#ListSigningJobs"
+                },
+                {
+                    "target": "com.amazonaws.signer#ListSigningPlatforms"
+                },
+                {
+                    "target": "com.amazonaws.signer#ListSigningProfiles"
+                },
+                {
+                    "target": "com.amazonaws.signer#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.signer#PutSigningProfile"
+                },
+                {
+                    "target": "com.amazonaws.signer#RemoveProfilePermission"
+                },
+                {
+                    "target": "com.amazonaws.signer#RevokeSignature"
+                },
+                {
+                    "target": "com.amazonaws.signer#RevokeSigningProfile"
+                },
+                {
+                    "target": "com.amazonaws.signer#StartSigningJob"
+                },
+                {
+                    "target": "com.amazonaws.signer#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.signer#UntagResource"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "signer",
+                    "arnNamespace": "signer",
+                    "cloudFormationName": "Signer",
+                    "cloudTrailEventSource": "signer.amazonaws.com",
+                    "endpointPrefix": "signer"
+                },
+                "aws.auth#sigv4": {
+                    "name": "signer"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>AWS Signer is a fully managed code signing service to help you ensure the trust and\n\t\t\tintegrity of your code. </p>\n\t\t       <p>AWS Signer supports the following applications:</p>\n\n\t\t       <p>With <i>code signing for AWS Lambda</i>, you can sign AWS Lambda\n\t\t\tdeployment packages. Integrated support is provided for Amazon S3, Amazon CloudWatch,\n\t\t\tand AWS CloudTrail. In order to sign code, you create a signing profile and then use\n\t\t\tSigner to sign Lambda zip files in S3. </p>\n\t\t\n\t\t       <p>With <i>code signing for IoT</i>, you can sign code for any IoT device that is\n\t\t\tsupported by AWS. IoT code signing is available for <a href=\"http://docs.aws.amazon.com/freertos/latest/userguide/\">Amazon FreeRTOS</a> and <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/\">AWS IoT Device Management</a>, and is\n\t\t\tintegrated with <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/\">AWS Certificate Manager (ACM)</a>. In order to sign\n\t\t\tcode, you import a third-party code signing certificate using ACM, and use that to\n\t\t\tsign updates in Amazon FreeRTOS and AWS IoT Device Management. </p>\n\t\t       <p>For more information about AWS Signer, see the <a href=\"http://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html\">AWS Signer Developer Guide</a>.</p>\n\t\t\n\t\t       <p></p>",
+                "smithy.api#title": "AWS Signer"
+            }
+        },
+        "com.amazonaws.signer#bool": {
+            "type": "boolean"
         }
-      ],
-      "traits": {
-        "aws.api#service": {
-          "sdkId": "signer",
-          "arnNamespace": "signer",
-          "cloudFormationName": "Signer",
-          "cloudTrailEventSource": "signer.amazonaws.com"
-        },
-        "aws.auth#sigv4": {
-          "name": "signer"
-        },
-        "aws.protocols#restJson1": {},
-        "smithy.api#documentation": "<p>With code signing for IoT, you can sign code that you create for any IoT device that is\n\t\t\tsupported by Amazon Web Services (AWS). Code signing is available through <a href=\"http://docs.aws.amazon.com/freertos/latest/userguide/\">Amazon FreeRTOS</a> and <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/\">AWS IoT Device Management</a>, and integrated with <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/\">AWS Certificate Manager\n\t\t\t\t(ACM)</a>. In order to sign code, you import a third-party code signing\n\t\t\tcertificate with ACM that is used to sign updates in Amazon FreeRTOS and AWS IoT Device Management. For\n\t\t\tgeneral information about using code signing, see the <a href=\"http://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html\">Code Signing for IoT Developer Guide</a>.</p>",
-        "smithy.api#title": "AWS Signer"
-      }
-    },
-    "com.amazonaws.signer#bool": {
-      "type": "boolean"
     }
-  }
 }

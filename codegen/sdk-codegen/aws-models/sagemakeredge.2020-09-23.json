@@ -1,0 +1,356 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.sagemakeredge#AmazonSageMakerEdge": {
+            "type": "service",
+            "version": "2020-09-23",
+            "operations": [
+                {
+                    "target": "com.amazonaws.sagemakeredge#GetDeviceRegistration"
+                },
+                {
+                    "target": "com.amazonaws.sagemakeredge#SendHeartbeat"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Sagemaker Edge",
+                    "arnNamespace": "sagemaker",
+                    "cloudFormationName": "SagemakerEdge",
+                    "cloudTrailEventSource": "sagemakeredge.amazonaws.com",
+                    "endpointPrefix": "edge.sagemaker"
+                },
+                "aws.auth#sigv4": {
+                    "name": "sagemaker"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>SageMaker Edge Manager dataplane service for communicating with active agents.</p>",
+                "smithy.api#title": "Amazon Sagemaker Edge Manager"
+            }
+        },
+        "com.amazonaws.sagemakeredge#CacheTTLSeconds": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.sagemakeredge#DeviceFleetName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$"
+            }
+        },
+        "com.amazonaws.sagemakeredge#DeviceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$"
+            }
+        },
+        "com.amazonaws.sagemakeredge#DeviceRegistration": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.sagemakeredge#Dimension": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9\\/])*$"
+            }
+        },
+        "com.amazonaws.sagemakeredge#EdgeMetric": {
+            "type": "structure",
+            "members": {
+                "Dimension": {
+                    "target": "com.amazonaws.sagemakeredge#Dimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimension of metrics published.</p>"
+                    }
+                },
+                "MetricName": {
+                    "target": "com.amazonaws.sagemakeredge#Metric",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the name of the metric.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.sagemakeredge#Value",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the value of the metric.</p>"
+                    }
+                },
+                "Timestamp": {
+                    "target": "com.amazonaws.sagemakeredge#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp of when the metric was requested.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information required for edge device metrics.</p>"
+            }
+        },
+        "com.amazonaws.sagemakeredge#EdgeMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemakeredge#EdgeMetric"
+            }
+        },
+        "com.amazonaws.sagemakeredge#ErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.sagemakeredge#GetDeviceRegistration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakeredge#GetDeviceRegistrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemakeredge#GetDeviceRegistrationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakeredge#InternalServiceException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use to check if a device is registered with SageMaker Edge Manager.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetDeviceRegistration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sagemakeredge#GetDeviceRegistrationRequest": {
+            "type": "structure",
+            "members": {
+                "DeviceName": {
+                    "target": "com.amazonaws.sagemakeredge#DeviceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the device you want to get the registration status from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeviceFleetName": {
+                    "target": "com.amazonaws.sagemakeredge#DeviceFleetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the fleet that the device belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemakeredge#GetDeviceRegistrationResult": {
+            "type": "structure",
+            "members": {
+                "DeviceRegistration": {
+                    "target": "com.amazonaws.sagemakeredge#DeviceRegistration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes if the device is currently registered with SageMaker Edge Manager.</p>"
+                    }
+                },
+                "CacheTTL": {
+                    "target": "com.amazonaws.sagemakeredge#CacheTTLSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, that the registration status is stored on the device’s cache before it is refreshed.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemakeredge#InternalServiceException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.sagemakeredge#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal failure occurred. Try your request again. If the problem \n      persists, contact AWS customer support.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.sagemakeredge#Metric": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
+            }
+        },
+        "com.amazonaws.sagemakeredge#Model": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.sagemakeredge#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the model.</p>"
+                    }
+                },
+                "ModelVersion": {
+                    "target": "com.amazonaws.sagemakeredge#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the model.</p>"
+                    }
+                },
+                "LatestSampleTime": {
+                    "target": "com.amazonaws.sagemakeredge#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the last data sample taken.</p>"
+                    }
+                },
+                "LatestInference": {
+                    "target": "com.amazonaws.sagemakeredge#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the last inference that was made.</p>"
+                    }
+                },
+                "ModelMetrics": {
+                    "target": "com.amazonaws.sagemakeredge#EdgeMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information required for model metrics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a model deployed on an edge device that is registered with SageMaker Edge Manager.</p>"
+            }
+        },
+        "com.amazonaws.sagemakeredge#ModelName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
+            }
+        },
+        "com.amazonaws.sagemakeredge#Models": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemakeredge#Model"
+            }
+        },
+        "com.amazonaws.sagemakeredge#SendHeartbeat": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakeredge#SendHeartbeatRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakeredge#InternalServiceException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use to get the current status of devices registered on SageMaker Edge Manager.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/SendHeartbeat",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sagemakeredge#SendHeartbeatRequest": {
+            "type": "structure",
+            "members": {
+                "AgentMetrics": {
+                    "target": "com.amazonaws.sagemakeredge#EdgeMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For internal use. Returns a list of SageMaker Edge Manager agent operating metrics.</p>"
+                    }
+                },
+                "Models": {
+                    "target": "com.amazonaws.sagemakeredge#Models",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a list of models deployed on the the device.</p>"
+                    }
+                },
+                "AgentVersion": {
+                    "target": "com.amazonaws.sagemakeredge#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the version of the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeviceName": {
+                    "target": "com.amazonaws.sagemakeredge#DeviceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the device.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeviceFleetName": {
+                    "target": "com.amazonaws.sagemakeredge#DeviceFleetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the fleet that the device belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemakeredge#Timestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.sagemakeredge#Value": {
+            "type": "double"
+        },
+        "com.amazonaws.sagemakeredge#Version": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "[a-zA-Z0-9\\ \\_\\.]+"
+            }
+        }
+    }
+}

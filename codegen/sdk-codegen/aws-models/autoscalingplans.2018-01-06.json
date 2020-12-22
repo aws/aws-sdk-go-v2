@@ -1,0 +1,1597 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.autoscalingplans#AnyScaleScalingPlannerFrontendService": {
+            "type": "service",
+            "version": "2018-01-06",
+            "operations": [
+                {
+                    "target": "com.amazonaws.autoscalingplans#CreateScalingPlan"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#DeleteScalingPlan"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#DescribeScalingPlanResources"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#DescribeScalingPlans"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#GetScalingPlanResourceForecastData"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#UpdateScalingPlan"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Auto Scaling Plans",
+                    "arnNamespace": "autoscaling-plans",
+                    "cloudFormationName": "AutoScalingPlans",
+                    "cloudTrailEventSource": "autoscalingplans.amazonaws.com",
+                    "endpointPrefix": "autoscaling-plans"
+                },
+                "aws.auth#sigv4": {
+                    "name": "autoscaling-plans"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>AWS Auto Scaling</fullname>\n         <p>Use AWS Auto Scaling to quickly discover all the scalable AWS resources for your application and\n         configure dynamic scaling and predictive scaling for your resources using scaling plans.\n         Use this service in conjunction with the Amazon EC2 Auto Scaling, Application Auto Scaling, Amazon CloudWatch, and AWS\n         CloudFormation services. </p>\n         <p>Currently, predictive scaling is only available for Amazon EC2 Auto Scaling groups.</p>\n         <p>For more information about AWS Auto Scaling, including information about granting IAM users\n         required permissions for AWS Auto Scaling actions, see the <a href=\"https://docs.aws.amazon.com/autoscaling/plans/userguide/what-is-aws-auto-scaling.html\">AWS Auto Scaling User Guide</a>.</p>",
+                "smithy.api#title": "AWS Auto Scaling Plans"
+            }
+        },
+        "com.amazonaws.autoscalingplans#ApplicationSource": {
+            "type": "structure",
+            "members": {
+                "CloudFormationStackARN": {
+                    "target": "com.amazonaws.autoscalingplans#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a AWS CloudFormation stack.</p>"
+                    }
+                },
+                "TagFilters": {
+                    "target": "com.amazonaws.autoscalingplans#TagFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of tags (up to 50).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an application source.</p>"
+            }
+        },
+        "com.amazonaws.autoscalingplans#ApplicationSources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscalingplans#ApplicationSource"
+            }
+        },
+        "com.amazonaws.autoscalingplans#ConcurrentUpdateException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.autoscalingplans#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Concurrent updates caused an exception, for example, if you request an update to a\n         scaling plan that already has a pending update.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.autoscalingplans#Cooldown": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.autoscalingplans#CreateScalingPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.autoscalingplans#CreateScalingPlanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.autoscalingplans#CreateScalingPlanResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.autoscalingplans#ConcurrentUpdateException"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a scaling plan.</p>"
+            }
+        },
+        "com.amazonaws.autoscalingplans#CreateScalingPlanRequest": {
+            "type": "structure",
+            "members": {
+                "ScalingPlanName": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scaling plan. Names cannot contain vertical bars, colons, or forward\n         slashes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationSource": {
+                    "target": "com.amazonaws.autoscalingplans#ApplicationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A CloudFormation stack or set of tags. You can create one scaling plan per application\n         source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScalingInstructions": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingInstructions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scaling instructions.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.autoscalingplans#CreateScalingPlanResponse": {
+            "type": "structure",
+            "members": {
+                "ScalingPlanVersion": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPlanVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the scaling plan. This value is always 1.</p>\n         <p>Currently, you cannot specify multiple scaling plan versions.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.autoscalingplans#CustomizedLoadMetricSpecification": {
+            "type": "structure",
+            "members": {
+                "MetricName": {
+                    "target": "com.amazonaws.autoscalingplans#MetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the metric.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.autoscalingplans#MetricNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the metric.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Dimensions": {
+                    "target": "com.amazonaws.autoscalingplans#MetricDimensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimensions of the metric.</p>\n         <p>Conditional: If you published your metric with dimensions, you must specify the same\n         dimensions in your customized load metric specification.</p>"
+                    }
+                },
+                "Statistic": {
+                    "target": "com.amazonaws.autoscalingplans#MetricStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The statistic of the metric. Currently, the value must always be <code>Sum</code>.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Unit": {
+                    "target": "com.amazonaws.autoscalingplans#MetricUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of the metric.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a CloudWatch metric of your choosing that can be used for predictive scaling. </p>\n         <p>For predictive scaling to work with a customized load metric specification, AWS Auto Scaling\n         needs access to the <code>Sum</code> and <code>Average</code> statistics that CloudWatch computes\n         from metric data. Statistics are calculations used to aggregate data over specified time\n         periods.</p>\n         <p>When you choose a load metric, make sure that the required <code>Sum</code> and\n            <code>Average</code> statistics for your metric are available in CloudWatch and that they\n         provide relevant data for predictive scaling. The <code>Sum</code> statistic must represent\n         the total load on the resource, and the <code>Average</code> statistic must represent the\n         average load per capacity unit of the resource. For example, there is a metric that counts\n         the number of requests processed by your Auto Scaling group. If the <code>Sum</code> statistic\n         represents the total request count processed by the group, then the <code>Average</code>\n         statistic for the specified metric must represent the average request count processed by\n         each instance of the group.</p>\n         <p>For information about terminology, available metrics, or how to publish new metrics, see\n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch\n            Concepts</a> in the <i>Amazon CloudWatch User Guide</i>. </p>"
+            }
+        },
+        "com.amazonaws.autoscalingplans#CustomizedScalingMetricSpecification": {
+            "type": "structure",
+            "members": {
+                "MetricName": {
+                    "target": "com.amazonaws.autoscalingplans#MetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the metric.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.autoscalingplans#MetricNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the metric.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Dimensions": {
+                    "target": "com.amazonaws.autoscalingplans#MetricDimensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimensions of the metric.</p>\n         <p>Conditional: If you published your metric with dimensions, you must specify the same\n         dimensions in your customized scaling metric specification.</p>"
+                    }
+                },
+                "Statistic": {
+                    "target": "com.amazonaws.autoscalingplans#MetricStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The statistic of the metric.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Unit": {
+                    "target": "com.amazonaws.autoscalingplans#MetricUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of the metric. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a CloudWatch metric of your choosing that can be used for dynamic scaling as part\n         of a target tracking scaling policy. </p>\n         <p>To create your customized scaling metric specification:</p>\n         <ul>\n            <li>\n               <p>Add values for each required parameter from CloudWatch. You can use an existing metric,\n               or a new metric that you create. To use your own metric, you must first publish the\n               metric to CloudWatch. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html\">Publish Custom\n                  Metrics</a> in the <i>Amazon CloudWatch User Guide</i>.</p>\n            </li>\n            <li>\n               <p>Choose a metric that changes proportionally with capacity. The value of the metric\n               should increase or decrease in inverse proportion to the number of capacity units.\n               That is, the value of the metric should decrease when capacity increases. </p>\n            </li>\n         </ul>\n         <p>For more information about CloudWatch, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch\n            Concepts</a>. </p>"
+            }
+        },
+        "com.amazonaws.autoscalingplans#Datapoint": {
+            "type": "structure",
+            "members": {
+                "Timestamp": {
+                    "target": "com.amazonaws.autoscalingplans#TimestampType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time stamp for the data point in UTC format.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.autoscalingplans#MetricScale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the data point.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a single value in the forecast data used for predictive scaling.</p>"
+            }
+        },
+        "com.amazonaws.autoscalingplans#Datapoints": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscalingplans#Datapoint"
+            }
+        },
+        "com.amazonaws.autoscalingplans#DeleteScalingPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.autoscalingplans#DeleteScalingPlanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.autoscalingplans#DeleteScalingPlanResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.autoscalingplans#ConcurrentUpdateException"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#ObjectNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified scaling plan.</p>\n         <p>Deleting a scaling plan deletes the underlying <a>ScalingInstruction</a> for\n         all of the scalable resources that are covered by the plan.</p>\n         <p>If the plan has launched resources or has scaling activities in progress, you must\n         delete those resources separately.</p>"
+            }
+        },
+        "com.amazonaws.autoscalingplans#DeleteScalingPlanRequest": {
+            "type": "structure",
+            "members": {
+                "ScalingPlanName": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scaling plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScalingPlanVersion": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPlanVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the scaling plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.autoscalingplans#DeleteScalingPlanResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.autoscalingplans#DescribeScalingPlanResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.autoscalingplans#DescribeScalingPlanResourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.autoscalingplans#DescribeScalingPlanResourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.autoscalingplans#ConcurrentUpdateException"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the scalable resources in the specified scaling plan.</p>"
+            }
+        },
+        "com.amazonaws.autoscalingplans#DescribeScalingPlanResourcesRequest": {
+            "type": "structure",
+            "members": {
+                "ScalingPlanName": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scaling plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScalingPlanVersion": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPlanVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the scaling plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.autoscalingplans#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of scalable resources to return. The value must be between\n         1 and 50. The default value is 50.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.autoscalingplans#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.autoscalingplans#DescribeScalingPlanResourcesResponse": {
+            "type": "structure",
+            "members": {
+                "ScalingPlanResources": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPlanResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the scalable resources.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.autoscalingplans#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token required to get the next set of results. This value is <code>null</code> if\n         there are no more results to return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.autoscalingplans#DescribeScalingPlans": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.autoscalingplans#DescribeScalingPlansRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.autoscalingplans#DescribeScalingPlansResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.autoscalingplans#ConcurrentUpdateException"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes one or more of your scaling plans.</p>"
+            }
+        },
+        "com.amazonaws.autoscalingplans#DescribeScalingPlansRequest": {
+            "type": "structure",
+            "members": {
+                "ScalingPlanNames": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPlanNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the scaling plans (up to 10). If you specify application sources, you\n         cannot specify scaling plan names.</p>"
+                    }
+                },
+                "ScalingPlanVersion": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPlanVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the scaling plan. If you specify a scaling plan version, you must\n         also specify a scaling plan name.</p>"
+                    }
+                },
+                "ApplicationSources": {
+                    "target": "com.amazonaws.autoscalingplans#ApplicationSources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sources for the applications (up to 10). If you specify scaling plan names, you\n         cannot specify application sources.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.autoscalingplans#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of scalable resources to return. This value can be between\n         1 and 50. The default value is 50.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.autoscalingplans#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.autoscalingplans#DescribeScalingPlansResponse": {
+            "type": "structure",
+            "members": {
+                "ScalingPlans": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPlans",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the scaling plans.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.autoscalingplans#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token required to get the next set of results. This value is <code>null</code> if\n         there are no more results to return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.autoscalingplans#DisableDynamicScaling": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.autoscalingplans#DisableScaleIn": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.autoscalingplans#ErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.autoscalingplans#ForecastDataType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CapacityForecast",
+                        "name": "CapacityForecast"
+                    },
+                    {
+                        "value": "LoadForecast",
+                        "name": "LoadForecast"
+                    },
+                    {
+                        "value": "ScheduledActionMinCapacity",
+                        "name": "ScheduledActionMinCapacity"
+                    },
+                    {
+                        "value": "ScheduledActionMaxCapacity",
+                        "name": "ScheduledActionMaxCapacity"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscalingplans#GetScalingPlanResourceForecastData": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.autoscalingplans#GetScalingPlanResourceForecastDataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.autoscalingplans#GetScalingPlanResourceForecastDataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.autoscalingplans#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the forecast data for a scalable resource.</p>\n         <p>Capacity forecasts are represented as predicted values, or data points, that are\n         calculated using historical data points from a specified CloudWatch load metric. Data points are\n         available for up to 56 days.\n         \n      </p>"
+            }
+        },
+        "com.amazonaws.autoscalingplans#GetScalingPlanResourceForecastDataRequest": {
+            "type": "structure",
+            "members": {
+                "ScalingPlanName": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scaling plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScalingPlanVersion": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPlanVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the scaling plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceNamespace": {
+                    "target": "com.amazonaws.autoscalingplans#ServiceNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the AWS service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.autoscalingplans#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource. This string consists of the resource type and unique identifier.\n      </p> \n         <ul>\n            <li>\n               <p>Auto Scaling group - The resource type is <code>autoScalingGroup</code> and the unique identifier is the\n               name of the Auto Scaling group. Example: <code>autoScalingGroup/my-asg</code>.</p>\n           </li>\n            <li>\n               <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name  \n               and service name. Example: <code>service/default/sample-webapp</code>.</p>\n           </li>\n            <li>\n               <p>Spot Fleet request - The resource type is <code>spot-fleet-request</code> and the unique identifier is the \n               Spot Fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>\n           </li>\n            <li>\n               <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the resource ID. \n               Example: <code>table/my-table</code>.</p>\n           </li>\n            <li>\n               <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the resource ID. \n               Example: <code>table/my-table/index/my-table-index</code>.</p>\n           </li>\n            <li>\n               <p>Aurora DB cluster - The resource type is <code>cluster</code> and the unique identifier is the cluster name.\n               Example: <code>cluster:my-db-cluster</code>.</p>\n           </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScalableDimension": {
+                    "target": "com.amazonaws.autoscalingplans#ScalableDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scalable dimension for the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ForecastDataType": {
+                    "target": "com.amazonaws.autoscalingplans#ForecastDataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of forecast data to get.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LoadForecast</code>: The load metric forecast. </p>\n            </li>\n            <li>\n               <p>\n                  <code>CapacityForecast</code>: The capacity forecast. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ScheduledActionMinCapacity</code>: The minimum capacity for each scheduled\n               scaling action. This data is calculated as the larger of two values: the capacity\n               forecast or the minimum capacity in the scaling instruction.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ScheduledActionMaxCapacity</code>: The maximum capacity for each scheduled\n               scaling action. The calculation used is determined by the predictive scaling maximum\n               capacity behavior setting in the scaling instruction.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.autoscalingplans#TimestampType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inclusive start time of the time range for the forecast data to get. The date and\n         time can be at most 56 days before the current date and time. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.autoscalingplans#TimestampType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exclusive end time of the time range for the forecast data to get. The maximum time\n         duration between the start and end time is seven days. </p>\n         <p>Although this parameter can accept a date and time that is more than two days in the\n         future, the availability of forecast data has limits. AWS Auto Scaling only issues forecasts for\n         periods of two days in advance.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.autoscalingplans#GetScalingPlanResourceForecastDataResponse": {
+            "type": "structure",
+            "members": {
+                "Datapoints": {
+                    "target": "com.amazonaws.autoscalingplans#Datapoints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data points to return.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.autoscalingplans#InternalServiceException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.autoscalingplans#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service encountered an internal error.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.autoscalingplans#InvalidNextTokenException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.autoscalingplans#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The token provided is not valid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.autoscalingplans#LimitExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.autoscalingplans#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Your account exceeded a limit. This exception is thrown when a per-account resource\n         limit is exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.autoscalingplans#LoadMetricType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ASGTotalCPUUtilization",
+                        "name": "ASGTotalCPUUtilization"
+                    },
+                    {
+                        "value": "ASGTotalNetworkIn",
+                        "name": "ASGTotalNetworkIn"
+                    },
+                    {
+                        "value": "ASGTotalNetworkOut",
+                        "name": "ASGTotalNetworkOut"
+                    },
+                    {
+                        "value": "ALBTargetGroupRequestCount",
+                        "name": "ALBTargetGroupRequestCount"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscalingplans#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.autoscalingplans#MetricDimension": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.autoscalingplans#MetricDimensionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dimension.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.autoscalingplans#MetricDimensionValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the dimension.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a dimension for a customized metric.</p>"
+            }
+        },
+        "com.amazonaws.autoscalingplans#MetricDimensionName": {
+            "type": "string"
+        },
+        "com.amazonaws.autoscalingplans#MetricDimensionValue": {
+            "type": "string"
+        },
+        "com.amazonaws.autoscalingplans#MetricDimensions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscalingplans#MetricDimension"
+            }
+        },
+        "com.amazonaws.autoscalingplans#MetricName": {
+            "type": "string"
+        },
+        "com.amazonaws.autoscalingplans#MetricNamespace": {
+            "type": "string"
+        },
+        "com.amazonaws.autoscalingplans#MetricScale": {
+            "type": "double",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.autoscalingplans#MetricStatistic": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Average",
+                        "name": "Average"
+                    },
+                    {
+                        "value": "Minimum",
+                        "name": "Minimum"
+                    },
+                    {
+                        "value": "Maximum",
+                        "name": "Maximum"
+                    },
+                    {
+                        "value": "SampleCount",
+                        "name": "SampleCount"
+                    },
+                    {
+                        "value": "Sum",
+                        "name": "Sum"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscalingplans#MetricUnit": {
+            "type": "string"
+        },
+        "com.amazonaws.autoscalingplans#NextToken": {
+            "type": "string"
+        },
+        "com.amazonaws.autoscalingplans#ObjectNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.autoscalingplans#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified object could not be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.autoscalingplans#PolicyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "\\p{Print}+"
+            }
+        },
+        "com.amazonaws.autoscalingplans#PolicyType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TargetTrackingScaling",
+                        "name": "TargetTrackingScaling"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscalingplans#PredefinedLoadMetricSpecification": {
+            "type": "structure",
+            "members": {
+                "PredefinedLoadMetricType": {
+                    "target": "com.amazonaws.autoscalingplans#LoadMetricType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceLabel": {
+                    "target": "com.amazonaws.autoscalingplans#ResourceLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the resource associated with the metric type. You can't specify a resource\n         label unless the metric type is <code>ALBRequestCountPerTarget</code> and there is a target\n         group for an Application Load Balancer attached to the Auto Scaling group.</p>\n         <p>The format is\n         app/<load-balancer-name>/<load-balancer-id>/targetgroup/<target-group-name>/<target-group-id>,\n         where:</p>\n         <ul>\n            <li>\n               <p>app/<load-balancer-name>/<load-balancer-id> is the final portion of\n               the load balancer ARN.</p>\n            </li>\n            <li>\n               <p>targetgroup/<target-group-name>/<target-group-id> is the final portion\n               of the target group ARN.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a predefined metric that can be used for predictive scaling. </p>"
+            }
+        },
+        "com.amazonaws.autoscalingplans#PredefinedScalingMetricSpecification": {
+            "type": "structure",
+            "members": {
+                "PredefinedScalingMetricType": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingMetricType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric type. The <code>ALBRequestCountPerTarget</code> metric type applies only to\n         Auto Scaling groups, Spot Fleet requests, and ECS services.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceLabel": {
+                    "target": "com.amazonaws.autoscalingplans#ResourceLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the resource associated with the metric type. You can't specify a resource\n         label unless the metric type is <code>ALBRequestCountPerTarget</code> and there is a target\n         group for an Application Load Balancer attached to the Auto Scaling group, Spot Fleet request, or\n         ECS service.</p>\n         <p>The format is\n         app/<load-balancer-name>/<load-balancer-id>/targetgroup/<target-group-name>/<target-group-id>,\n         where:</p>\n         <ul>\n            <li>\n               <p>app/<load-balancer-name>/<load-balancer-id> is the final portion of\n               the load balancer ARN.</p>\n            </li>\n            <li>\n               <p>targetgroup/<target-group-name>/<target-group-id> is the final portion\n               of the target group ARN.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a predefined metric that can be used for dynamic scaling as part of a target\n         tracking scaling policy.</p>"
+            }
+        },
+        "com.amazonaws.autoscalingplans#PredictiveScalingMaxCapacityBehavior": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SetForecastCapacityToMaxCapacity",
+                        "name": "SetForecastCapacityToMaxCapacity"
+                    },
+                    {
+                        "value": "SetMaxCapacityToForecastCapacity",
+                        "name": "SetMaxCapacityToForecastCapacity"
+                    },
+                    {
+                        "value": "SetMaxCapacityAboveForecastCapacity",
+                        "name": "SetMaxCapacityAboveForecastCapacity"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscalingplans#PredictiveScalingMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ForecastAndScale",
+                        "name": "ForecastAndScale"
+                    },
+                    {
+                        "value": "ForecastOnly",
+                        "name": "ForecastOnly"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscalingplans#ResourceCapacity": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.autoscalingplans#ResourceIdMaxLen1600": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1600
+                },
+                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+        },
+        "com.amazonaws.autoscalingplans#ResourceLabel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1023
+                }
+            }
+        },
+        "com.amazonaws.autoscalingplans#ScalableDimension": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "autoscaling:autoScalingGroup:DesiredCapacity",
+                        "name": "AutoScalingGroupDesiredCapacity"
+                    },
+                    {
+                        "value": "ecs:service:DesiredCount",
+                        "name": "ECSServiceDesiredCount"
+                    },
+                    {
+                        "value": "ec2:spot-fleet-request:TargetCapacity",
+                        "name": "EC2SpotFleetRequestTargetCapacity"
+                    },
+                    {
+                        "value": "rds:cluster:ReadReplicaCount",
+                        "name": "RDSClusterReadReplicaCount"
+                    },
+                    {
+                        "value": "dynamodb:table:ReadCapacityUnits",
+                        "name": "DynamoDBTableReadCapacityUnits"
+                    },
+                    {
+                        "value": "dynamodb:table:WriteCapacityUnits",
+                        "name": "DynamoDBTableWriteCapacityUnits"
+                    },
+                    {
+                        "value": "dynamodb:index:ReadCapacityUnits",
+                        "name": "DynamoDBIndexReadCapacityUnits"
+                    },
+                    {
+                        "value": "dynamodb:index:WriteCapacityUnits",
+                        "name": "DynamoDBIndexWriteCapacityUnits"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscalingplans#ScalingInstruction": {
+            "type": "structure",
+            "members": {
+                "ServiceNamespace": {
+                    "target": "com.amazonaws.autoscalingplans#ServiceNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the AWS service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.autoscalingplans#ResourceIdMaxLen1600",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource. This string consists of the resource type and unique\n         identifier.</p> \n         <ul>\n            <li>\n               <p>Auto Scaling group - The resource type is <code>autoScalingGroup</code> and the unique identifier is the\n               name of the Auto Scaling group. Example: <code>autoScalingGroup/my-asg</code>.</p>\n           </li>\n            <li>\n               <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name  \n               and service name. Example: <code>service/default/sample-webapp</code>.</p>\n           </li>\n            <li>\n               <p>Spot Fleet request - The resource type is <code>spot-fleet-request</code> and the unique identifier is the \n               Spot Fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>\n           </li>\n            <li>\n               <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the resource ID. \n               Example: <code>table/my-table</code>.</p>\n           </li>\n            <li>\n               <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the resource ID. \n               Example: <code>table/my-table/index/my-table-index</code>.</p>\n           </li>\n            <li>\n               <p>Aurora DB cluster - The resource type is <code>cluster</code> and the unique identifier is the cluster name.\n               Example: <code>cluster:my-db-cluster</code>.</p>\n           </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScalableDimension": {
+                    "target": "com.amazonaws.autoscalingplans#ScalableDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scalable dimension associated with the resource.</p> \n         <ul>\n            <li>\n               <p>\n                  <code>autoscaling:autoScalingGroup:DesiredCapacity</code> - The desired capacity of an Auto Scaling group.</p>\n           </li>\n            <li>\n               <p>\n                  <code>ecs:service:DesiredCount</code> - The desired task count of an ECS service.</p>\n           </li>\n            <li>\n               <p>\n                  <code>ec2:spot-fleet-request:TargetCapacity</code> - The target capacity of a Spot Fleet request.</p>\n           </li>\n            <li>\n               <p>\n                  <code>dynamodb:table:ReadCapacityUnits</code> - The provisioned read capacity for a DynamoDB table.</p>\n           </li>\n            <li>\n               <p>\n                  <code>dynamodb:table:WriteCapacityUnits</code> - The provisioned write capacity for a DynamoDB table.</p>\n           </li>\n            <li>\n               <p>\n                  <code>dynamodb:index:ReadCapacityUnits</code> - The provisioned read capacity for a DynamoDB global secondary index.</p>\n           </li>\n            <li>\n               <p>\n                  <code>dynamodb:index:WriteCapacityUnits</code> - The provisioned write capacity for a DynamoDB global secondary index.</p>\n           </li>\n            <li>\n               <p>\n                  <code>rds:cluster:ReadReplicaCount</code> - The count of Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible edition and Aurora PostgreSQL-compatible edition.</p>\n           </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MinCapacity": {
+                    "target": "com.amazonaws.autoscalingplans#ResourceCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum capacity of the resource. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxCapacity": {
+                    "target": "com.amazonaws.autoscalingplans#ResourceCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum capacity of the resource. The exception to this upper limit is if you\n         specify a non-default setting for <b>PredictiveScalingMaxCapacityBehavior</b>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetTrackingConfigurations": {
+                    "target": "com.amazonaws.autoscalingplans#TargetTrackingConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structure that defines new target tracking configurations (up to 10). Each of these\n         structures includes a specific scaling metric and a target value for the metric, along with\n         various parameters to use with dynamic scaling. </p>\n         <p>With predictive scaling and dynamic scaling, the resource scales based on the target\n         tracking configuration that provides the largest capacity for both scale in and scale out. </p>\n         <p>Condition: The scaling metric must be unique across target tracking\n         configurations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PredefinedLoadMetricSpecification": {
+                    "target": "com.amazonaws.autoscalingplans#PredefinedLoadMetricSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The predefined load metric to use for predictive scaling. This parameter or a <b>CustomizedLoadMetricSpecification</b> is required when configuring\n         predictive scaling, and cannot be used otherwise. </p>"
+                    }
+                },
+                "CustomizedLoadMetricSpecification": {
+                    "target": "com.amazonaws.autoscalingplans#CustomizedLoadMetricSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customized load metric to use for predictive scaling. This parameter or a <b>PredefinedLoadMetricSpecification</b> is required when configuring\n         predictive scaling, and cannot be used otherwise. </p>"
+                    }
+                },
+                "ScheduledActionBufferTime": {
+                    "target": "com.amazonaws.autoscalingplans#ScheduledActionBufferTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, to buffer the run time of scheduled scaling actions when\n         scaling out. For example, if the forecast says to add capacity at 10:00 AM, and the buffer\n         time is 5 minutes, then the run time of the corresponding scheduled scaling action will be\n         9:55 AM. The intention is to give resources time to be provisioned. For example, it can\n         take a few minutes to launch an EC2 instance. The actual amount of time required depends on\n         several factors, such as the size of the instance and whether there are startup scripts to\n         complete. </p>\n         <p>The value must be less than the forecast interval duration of 3600 seconds (60 minutes).\n         The default is 300 seconds. </p>\n         <p>Only valid when configuring predictive scaling. </p>"
+                    }
+                },
+                "PredictiveScalingMaxCapacityBehavior": {
+                    "target": "com.amazonaws.autoscalingplans#PredictiveScalingMaxCapacityBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the behavior that should be applied if the forecast capacity approaches or\n         exceeds the maximum capacity specified for the resource. The default value is\n            <code>SetForecastCapacityToMaxCapacity</code>.</p>\n         <p>The following are possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SetForecastCapacityToMaxCapacity</code> - AWS Auto Scaling cannot scale resource\n               capacity higher than the maximum capacity. The maximum capacity is enforced as a hard\n               limit. </p>\n            </li>\n            <li>\n               <p>\n                  <code>SetMaxCapacityToForecastCapacity</code> - AWS Auto Scaling may scale resource\n               capacity higher than the maximum capacity to equal but not exceed forecast\n               capacity.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SetMaxCapacityAboveForecastCapacity</code> - AWS Auto Scaling may scale resource\n               capacity higher than the maximum capacity by a specified buffer value. The intention\n               is to give the target tracking scaling policy extra capacity if unexpected traffic\n               occurs. </p>\n            </li>\n         </ul>\n         <p>Only valid when configuring predictive scaling.</p>"
+                    }
+                },
+                "PredictiveScalingMaxCapacityBuffer": {
+                    "target": "com.amazonaws.autoscalingplans#ResourceCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the capacity buffer to use when the forecast capacity is close to or exceeds\n         the maximum capacity. The value is specified as a percentage relative to the forecast\n         capacity. For example, if the buffer is 10, this means a 10 percent buffer, such that if\n         the forecast capacity is 50, and the maximum capacity is 40, then the effective maximum\n         capacity is 55.</p>\n         <p>Only valid when configuring predictive scaling. Required if the <b>PredictiveScalingMaxCapacityBehavior</b> is set to\n            <code>SetMaxCapacityAboveForecastCapacity</code>, and cannot be used otherwise.</p>\n         <p>The range is 1-100.</p>"
+                    }
+                },
+                "PredictiveScalingMode": {
+                    "target": "com.amazonaws.autoscalingplans#PredictiveScalingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The predictive scaling mode. The default value is <code>ForecastAndScale</code>.\n         Otherwise, AWS Auto Scaling forecasts capacity but does not create any scheduled scaling actions\n         based on the capacity forecast. </p>"
+                    }
+                },
+                "ScalingPolicyUpdateBehavior": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPolicyUpdateBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls whether a resource's externally created scaling policies are kept or replaced. </p>\n         <p>The default value is <code>KeepExternalPolicies</code>. If the parameter is set to\n            <code>ReplaceExternalPolicies</code>, any scaling policies that are external to AWS Auto Scaling\n         are deleted and new target tracking scaling policies created. </p>\n         <p>Only valid when configuring dynamic scaling. </p>\n         <p>Condition: The number of existing policies to be replaced must be less than or equal to\n         50. If there are more than 50 policies to be replaced, AWS Auto Scaling keeps all existing policies\n         and does not create new ones.</p>"
+                    }
+                },
+                "DisableDynamicScaling": {
+                    "target": "com.amazonaws.autoscalingplans#DisableDynamicScaling",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls whether dynamic scaling by AWS Auto Scaling is disabled. When dynamic scaling is\n         enabled, AWS Auto Scaling creates target tracking scaling policies based on the specified target\n         tracking configurations. </p>\n         <p>The default is enabled (<code>false</code>). </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a scaling instruction for a scalable resource.</p>\n         <p>The scaling instruction is used in combination with a scaling plan, which is a set of\n         instructions for configuring dynamic scaling and predictive scaling for the scalable\n         resources in your application. Each scaling instruction applies to one resource.</p>\n         <p>AWS Auto Scaling creates target tracking scaling policies based on the scaling instructions.\n         Target tracking scaling policies adjust the capacity of your scalable resource as required\n         to maintain resource utilization at the target value that you specified. </p>\n         <p>AWS Auto Scaling also configures predictive scaling for your Amazon EC2 Auto Scaling groups using a subset of\n         parameters, including the load metric, the scaling metric, the target value for the scaling\n         metric, the predictive scaling mode (forecast and scale or forecast only), and the desired\n         behavior when the forecast capacity exceeds the maximum capacity of the resource. With\n         predictive scaling, AWS Auto Scaling generates forecasts with traffic predictions for the two days\n         ahead and schedules scaling actions that proactively add and remove resource capacity to\n         match the forecast. </p>\n         <p>We recommend waiting a minimum of 24 hours after creating an Auto Scaling group to configure\n         predictive scaling. At minimum, there must be 24 hours of historical data to generate a\n         forecast.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/plans/userguide/auto-scaling-getting-started.html\">Getting Started with\n            AWS Auto Scaling</a>.</p>"
+            }
+        },
+        "com.amazonaws.autoscalingplans#ScalingInstructions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscalingplans#ScalingInstruction"
+            }
+        },
+        "com.amazonaws.autoscalingplans#ScalingMetricType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ASGAverageCPUUtilization",
+                        "name": "ASGAverageCPUUtilization"
+                    },
+                    {
+                        "value": "ASGAverageNetworkIn",
+                        "name": "ASGAverageNetworkIn"
+                    },
+                    {
+                        "value": "ASGAverageNetworkOut",
+                        "name": "ASGAverageNetworkOut"
+                    },
+                    {
+                        "value": "DynamoDBReadCapacityUtilization",
+                        "name": "DynamoDBReadCapacityUtilization"
+                    },
+                    {
+                        "value": "DynamoDBWriteCapacityUtilization",
+                        "name": "DynamoDBWriteCapacityUtilization"
+                    },
+                    {
+                        "value": "ECSServiceAverageCPUUtilization",
+                        "name": "ECSServiceAverageCPUUtilization"
+                    },
+                    {
+                        "value": "ECSServiceAverageMemoryUtilization",
+                        "name": "ECSServiceAverageMemoryUtilization"
+                    },
+                    {
+                        "value": "ALBRequestCountPerTarget",
+                        "name": "ALBRequestCountPerTarget"
+                    },
+                    {
+                        "value": "RDSReaderAverageCPUUtilization",
+                        "name": "RDSReaderAverageCPUUtilization"
+                    },
+                    {
+                        "value": "RDSReaderAverageDatabaseConnections",
+                        "name": "RDSReaderAverageDatabaseConnections"
+                    },
+                    {
+                        "value": "EC2SpotFleetRequestAverageCPUUtilization",
+                        "name": "EC2SpotFleetRequestAverageCPUUtilization"
+                    },
+                    {
+                        "value": "EC2SpotFleetRequestAverageNetworkIn",
+                        "name": "EC2SpotFleetRequestAverageNetworkIn"
+                    },
+                    {
+                        "value": "EC2SpotFleetRequestAverageNetworkOut",
+                        "name": "EC2SpotFleetRequestAverageNetworkOut"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscalingplans#ScalingPlan": {
+            "type": "structure",
+            "members": {
+                "ScalingPlanName": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scaling plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScalingPlanVersion": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPlanVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the scaling plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationSource": {
+                    "target": "com.amazonaws.autoscalingplans#ApplicationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScalingInstructions": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingInstructions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scaling instructions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusCode": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPlanStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the scaling plan.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Active</code> - The scaling plan is active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ActiveWithProblems</code> - The scaling plan is active, but the scaling\n               configuration for one or more resources could not be applied.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreationInProgress</code> - The scaling plan is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreationFailed</code> - The scaling plan could not be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeletionInProgress</code> - The scaling plan is being deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeletionFailed</code> - The scaling plan could not be deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateInProgress</code> - The scaling plan is being updated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateFailed</code> - The scaling plan could not be updated.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.autoscalingplans#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A simple message about the current status of the scaling plan.</p>"
+                    }
+                },
+                "StatusStartTime": {
+                    "target": "com.amazonaws.autoscalingplans#TimestampType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix time stamp when the scaling plan entered the current status.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.autoscalingplans#TimestampType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix time stamp when the scaling plan was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a scaling plan.</p>"
+            }
+        },
+        "com.amazonaws.autoscalingplans#ScalingPlanName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "[\\p{Print}&&[^|:/]]+"
+            }
+        },
+        "com.amazonaws.autoscalingplans#ScalingPlanNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscalingplans#ScalingPlanName"
+            }
+        },
+        "com.amazonaws.autoscalingplans#ScalingPlanResource": {
+            "type": "structure",
+            "members": {
+                "ScalingPlanName": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scaling plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScalingPlanVersion": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPlanVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the scaling plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceNamespace": {
+                    "target": "com.amazonaws.autoscalingplans#ServiceNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the AWS service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.autoscalingplans#ResourceIdMaxLen1600",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource. This string consists of the resource type and unique\n         identifier.</p> \n         <ul>\n            <li>\n               <p>Auto Scaling group - The resource type is <code>autoScalingGroup</code> and the unique identifier is the\n               name of the Auto Scaling group. Example: <code>autoScalingGroup/my-asg</code>.</p>\n           </li>\n            <li>\n               <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name  \n               and service name. Example: <code>service/default/sample-webapp</code>.</p>\n           </li>\n            <li>\n               <p>Spot Fleet request - The resource type is <code>spot-fleet-request</code> and the unique identifier is the \n               Spot Fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>\n           </li>\n            <li>\n               <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the resource ID. \n               Example: <code>table/my-table</code>.</p>\n           </li>\n            <li>\n               <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the resource ID. \n               Example: <code>table/my-table/index/my-table-index</code>.</p>\n           </li>\n            <li>\n               <p>Aurora DB cluster - The resource type is <code>cluster</code> and the unique identifier is the cluster name.\n               Example: <code>cluster:my-db-cluster</code>.</p>\n           </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScalableDimension": {
+                    "target": "com.amazonaws.autoscalingplans#ScalableDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scalable dimension for the resource.</p> \n         <ul>\n            <li>\n               <p>\n                  <code>autoscaling:autoScalingGroup:DesiredCapacity</code> - The desired capacity of an Auto Scaling group.</p>\n           </li>\n            <li>\n               <p>\n                  <code>ecs:service:DesiredCount</code> - The desired task count of an ECS service.</p>\n           </li>\n            <li>\n               <p>\n                  <code>ec2:spot-fleet-request:TargetCapacity</code> - The target capacity of a Spot Fleet request.</p>\n           </li>\n            <li>\n               <p>\n                  <code>dynamodb:table:ReadCapacityUnits</code> - The provisioned read capacity for a DynamoDB table.</p>\n           </li>\n            <li>\n               <p>\n                  <code>dynamodb:table:WriteCapacityUnits</code> - The provisioned write capacity for a DynamoDB table.</p>\n           </li>\n            <li>\n               <p>\n                  <code>dynamodb:index:ReadCapacityUnits</code> - The provisioned read capacity for a DynamoDB global secondary index.</p>\n           </li>\n            <li>\n               <p>\n                  <code>dynamodb:index:WriteCapacityUnits</code> - The provisioned write capacity for a DynamoDB global secondary index.</p>\n           </li>\n            <li>\n               <p>\n                  <code>rds:cluster:ReadReplicaCount</code> - The count of Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible edition and Aurora PostgreSQL-compatible edition.</p>\n           </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScalingPolicies": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPolicies",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scaling policies.</p>"
+                    }
+                },
+                "ScalingStatusCode": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scaling status of the resource.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Active</code> - The scaling configuration is active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Inactive</code> - The scaling configuration is not active because the\n               scaling plan is being created or the scaling configuration could not be applied.\n               Check the status message for more information.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PartiallyActive</code> - The scaling configuration is partially active\n               because the scaling plan is being created or deleted or the scaling configuration\n               could not be fully applied. Check the status message for more information.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScalingStatusMessage": {
+                    "target": "com.amazonaws.autoscalingplans#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A simple message about the current scaling status of the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a scalable resource.</p>"
+            }
+        },
+        "com.amazonaws.autoscalingplans#ScalingPlanResources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscalingplans#ScalingPlanResource"
+            }
+        },
+        "com.amazonaws.autoscalingplans#ScalingPlanStatusCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Active",
+                        "name": "Active"
+                    },
+                    {
+                        "value": "ActiveWithProblems",
+                        "name": "ActiveWithProblems"
+                    },
+                    {
+                        "value": "CreationInProgress",
+                        "name": "CreationInProgress"
+                    },
+                    {
+                        "value": "CreationFailed",
+                        "name": "CreationFailed"
+                    },
+                    {
+                        "value": "DeletionInProgress",
+                        "name": "DeletionInProgress"
+                    },
+                    {
+                        "value": "DeletionFailed",
+                        "name": "DeletionFailed"
+                    },
+                    {
+                        "value": "UpdateInProgress",
+                        "name": "UpdateInProgress"
+                    },
+                    {
+                        "value": "UpdateFailed",
+                        "name": "UpdateFailed"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscalingplans#ScalingPlanVersion": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.autoscalingplans#ScalingPlans": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscalingplans#ScalingPlan"
+            }
+        },
+        "com.amazonaws.autoscalingplans#ScalingPolicies": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscalingplans#ScalingPolicy"
+            }
+        },
+        "com.amazonaws.autoscalingplans#ScalingPolicy": {
+            "type": "structure",
+            "members": {
+                "PolicyName": {
+                    "target": "com.amazonaws.autoscalingplans#PolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scaling policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyType": {
+                    "target": "com.amazonaws.autoscalingplans#PolicyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of scaling policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetTrackingConfiguration": {
+                    "target": "com.amazonaws.autoscalingplans#TargetTrackingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target tracking scaling policy. Includes support for predefined or customized\n         metrics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a scaling policy.</p>"
+            }
+        },
+        "com.amazonaws.autoscalingplans#ScalingPolicyUpdateBehavior": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "KeepExternalPolicies",
+                        "name": "KeepExternalPolicies"
+                    },
+                    {
+                        "value": "ReplaceExternalPolicies",
+                        "name": "ReplaceExternalPolicies"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscalingplans#ScalingStatusCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Inactive",
+                        "name": "Inactive"
+                    },
+                    {
+                        "value": "PartiallyActive",
+                        "name": "PartiallyActive"
+                    },
+                    {
+                        "value": "Active",
+                        "name": "Active"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscalingplans#ScheduledActionBufferTime": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.autoscalingplans#ServiceNamespace": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "autoscaling",
+                        "name": "AUTOSCALING"
+                    },
+                    {
+                        "value": "ecs",
+                        "name": "ECS"
+                    },
+                    {
+                        "value": "ec2",
+                        "name": "EC2"
+                    },
+                    {
+                        "value": "rds",
+                        "name": "RDS"
+                    },
+                    {
+                        "value": "dynamodb",
+                        "name": "DYNAMODB"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscalingplans#TagFilter": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.autoscalingplans#XmlStringMaxLen128",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key.</p>"
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.autoscalingplans#TagValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag values (0 to 20).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a tag.</p>"
+            }
+        },
+        "com.amazonaws.autoscalingplans#TagFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscalingplans#TagFilter"
+            }
+        },
+        "com.amazonaws.autoscalingplans#TagValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscalingplans#XmlStringMaxLen256"
+            }
+        },
+        "com.amazonaws.autoscalingplans#TargetTrackingConfiguration": {
+            "type": "structure",
+            "members": {
+                "PredefinedScalingMetricSpecification": {
+                    "target": "com.amazonaws.autoscalingplans#PredefinedScalingMetricSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A predefined metric. You can specify either a predefined metric or a customized\n         metric.</p>"
+                    }
+                },
+                "CustomizedScalingMetricSpecification": {
+                    "target": "com.amazonaws.autoscalingplans#CustomizedScalingMetricSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A customized metric. You can specify either a predefined metric or a customized metric.\n      </p>"
+                    }
+                },
+                "TargetValue": {
+                    "target": "com.amazonaws.autoscalingplans#MetricScale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target value for the metric. The range is 8.515920e-109 to 1.174271e+108 (Base 10)\n         or 2e-360 to 2e360 (Base 2).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisableScaleIn": {
+                    "target": "com.amazonaws.autoscalingplans#DisableScaleIn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether scale in by the target tracking scaling policy is disabled. If the\n         value is <code>true</code>, scale in is disabled and the target tracking scaling policy\n         doesn't remove capacity from the scalable resource. Otherwise, scale in is enabled and the\n         target tracking scaling policy can remove capacity from the scalable resource. </p>\n         <p>The default value is <code>false</code>.</p>"
+                    }
+                },
+                "ScaleOutCooldown": {
+                    "target": "com.amazonaws.autoscalingplans#Cooldown",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, after a scale-out activity completes before another\n         scale-out activity can start. This value is not used if the scalable resource is an Auto\n         Scaling group.</p>\n         <p>While the cooldown period is in effect, the capacity that has been added by the previous\n         scale-out event that initiated the cooldown is calculated as part of the desired capacity\n         for the next scale out. The intention is to continuously (but not excessively) scale\n         out.</p>"
+                    }
+                },
+                "ScaleInCooldown": {
+                    "target": "com.amazonaws.autoscalingplans#Cooldown",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, after a scale in activity completes before another scale\n         in activity can start. This value is not used if the scalable resource is an Auto Scaling\n         group.</p>\n         <p>The cooldown period is used to block subsequent scale in requests until it has expired.\n         The intention is to scale in conservatively to protect your application's availability.\n         However, if another alarm triggers a scale-out policy during the cooldown period after a\n         scale-in, AWS Auto Scaling scales out your scalable target immediately.</p>"
+                    }
+                },
+                "EstimatedInstanceWarmup": {
+                    "target": "com.amazonaws.autoscalingplans#Cooldown",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated time, in seconds, until a newly launched instance can contribute to the\n         CloudWatch metrics. This value is used only if the resource is an Auto Scaling group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a target tracking configuration to use with AWS Auto Scaling. Used with <a>ScalingInstruction</a> and <a>ScalingPolicy</a>.</p>"
+            }
+        },
+        "com.amazonaws.autoscalingplans#TargetTrackingConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscalingplans#TargetTrackingConfiguration"
+            }
+        },
+        "com.amazonaws.autoscalingplans#TimestampType": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.autoscalingplans#UpdateScalingPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.autoscalingplans#UpdateScalingPlanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.autoscalingplans#UpdateScalingPlanResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.autoscalingplans#ConcurrentUpdateException"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#ObjectNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.autoscalingplans#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the specified scaling plan.</p>\n         <p>You cannot update a scaling plan if it is in the process of being created, updated, or\n         deleted.</p>"
+            }
+        },
+        "com.amazonaws.autoscalingplans#UpdateScalingPlanRequest": {
+            "type": "structure",
+            "members": {
+                "ScalingPlanName": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scaling plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScalingPlanVersion": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingPlanVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the scaling plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationSource": {
+                    "target": "com.amazonaws.autoscalingplans#ApplicationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A CloudFormation stack or set of tags.</p>"
+                    }
+                },
+                "ScalingInstructions": {
+                    "target": "com.amazonaws.autoscalingplans#ScalingInstructions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scaling instructions.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.autoscalingplans#UpdateScalingPlanResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.autoscalingplans#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.autoscalingplans#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An exception was thrown for a validation issue. Review the parameters provided.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.autoscalingplans#XmlString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+        },
+        "com.amazonaws.autoscalingplans#XmlStringMaxLen128": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+        },
+        "com.amazonaws.autoscalingplans#XmlStringMaxLen256": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+        }
+    }
+}
