@@ -3,7 +3,6 @@ package config
 import (
 	"bytes"
 	"context"
-	"github.com/awslabs/smithy-go/logging"
 	"io/ioutil"
 	"net/http"
 	"testing"
@@ -13,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/smithy-go/logging"
 )
 
 func TestResolveCustomCABundle(t *testing.T) {

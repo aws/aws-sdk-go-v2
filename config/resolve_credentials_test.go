@@ -3,8 +3,6 @@ package config
 import (
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
-	"github.com/awslabs/smithy-go/middleware"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -16,7 +14,9 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
+	"github.com/aws/smithy-go/middleware"
 )
 
 func swapECSContainerURI(path string) func() {

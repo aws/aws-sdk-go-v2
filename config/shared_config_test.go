@@ -4,15 +4,16 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/ini"
-	"github.com/awslabs/smithy-go/logging"
-	"github.com/awslabs/smithy-go/ptr"
 	"path/filepath"
 	"reflect"
 	"strconv"
 	"strings"
 	"testing"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/internal/ini"
+	"github.com/aws/smithy-go/logging"
+	"github.com/aws/smithy-go/ptr"
 )
 
 var _ regionProvider = (*SharedConfig)(nil)
