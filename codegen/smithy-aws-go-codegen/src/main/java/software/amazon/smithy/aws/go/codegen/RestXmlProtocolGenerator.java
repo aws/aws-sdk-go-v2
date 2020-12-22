@@ -13,12 +13,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.TreeSet;
 import java.util.function.Predicate;
+import software.amazon.smithy.aws.traits.protocols.RestXmlTrait;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoStackStepMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
+import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.HttpBindingProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
@@ -107,8 +109,8 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
 
         writer.openBlock("if err := $L(input, xmlEncoder.RootElement(root)); err != nil {", "}",
                 functionName, () -> {
-            writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
-        });
+                    writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
+                });
         writer.insertTrailingNewline();
 
         writer.openBlock("if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); "
@@ -146,8 +148,8 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
 
         writer.openBlock("if err := $L($L, xmlEncoder.RootElement(payloadRoot)); err != nil {", "}", functionName,
                 operand, () -> {
-            writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
-        });
+                    writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
+                });
         writer.write("payload := bytes.NewReader(xmlEncoder.Bytes())");
     }
 
@@ -208,9 +210,25 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
                     shape, getProtocolName());
             writer.addUseImports(SmithyGoDependency.IO);
             initializeXmlDecoder(writer, "errorBody", "output");
-            writer.write("err = $L(&output, decoder)", documentDeserFunctionName);
-            handleDecodeError(writer, "");
-            writer.insertTrailingNewline();
+            boolean isNoErrorWrapping = context.getService().getTrait(RestXmlTrait.class).map(
+                    RestXmlTrait::isNoErrorWrapping).orElse(false);
+
+            Runnable writeErrorDelegator = () -> {
+                writer.write("err = $L(&output, decoder)", documentDeserFunctionName);
+                handleDecodeError(writer, "");
+                writer.insertTrailingNewline();
+            };
+
+            if (isNoErrorWrapping) {
+                writeErrorDelegator.run();
+            } else {
+                writer.write("t, err = decoder.GetElement(\"Error\")");
+                XmlProtocolUtils.handleDecodeError(writer, "");
+                Symbol wrapNodeDecoder = SymbolUtils.createValueSymbolBuilder("WrapNodeDecoder",
+                        SmithyGoDependency.SMITHY_XML).build();
+                writer.write("decoder = $T(decoder.Decoder, t)", wrapNodeDecoder);
+                writeErrorDelegator.run();
+            }
         }
 
         writer.write("return output");

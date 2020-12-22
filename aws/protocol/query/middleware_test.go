@@ -5,8 +5,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/awslabs/smithy-go/middleware"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	"github.com/aws/smithy-go/middleware"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func TestAsGetRequestMiddleware(t *testing.T) {

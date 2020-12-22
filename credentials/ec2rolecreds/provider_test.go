@@ -11,7 +11,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
-	"github.com/awslabs/smithy-go"
+	"github.com/aws/smithy-go"
 )
 
 const credsRespTmpl = `{

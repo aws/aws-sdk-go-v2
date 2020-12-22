@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/awslabs/smithy-go/middleware"
+	"github.com/aws/smithy-go/middleware"
 
 	"github.com/aws/aws-sdk-go-v2/aws/arn"
 )

@@ -9,8 +9,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
-	"github.com/awslabs/smithy-go/middleware"
-	smithyHTTP "github.com/awslabs/smithy-go/transport/http"
+	"github.com/aws/smithy-go/middleware"
+	smithyHTTP "github.com/aws/smithy-go/transport/http"
 )
 
 // HTTPPresigner is an interface to a SigV4 signer that can sign create a

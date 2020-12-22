@@ -9,9 +9,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	mlcust "github.com/aws/aws-sdk-go-v2/service/machinelearning/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
-	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/middleware"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	smithy "github.com/aws/smithy-go"
+	"github.com/aws/smithy-go/middleware"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Generates a prediction for the observation using the specified ML Model. Note:

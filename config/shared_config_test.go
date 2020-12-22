@@ -11,7 +11,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/ini"
-	"github.com/awslabs/smithy-go/ptr"
+	"github.com/aws/smithy-go/ptr"
 )
 
 var _ regionProvider = (*SharedConfig)(nil)

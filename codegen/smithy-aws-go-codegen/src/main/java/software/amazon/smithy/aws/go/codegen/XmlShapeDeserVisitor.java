@@ -9,7 +9,6 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
-import software.amazon.smithy.go.codegen.CodegenUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.DocumentShapeDeserVisitor;
@@ -23,14 +22,12 @@ import software.amazon.smithy.model.shapes.MapShape;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.SetShape;
 import software.amazon.smithy.model.shapes.Shape;
-import software.amazon.smithy.model.shapes.ShapeType;
 import software.amazon.smithy.model.shapes.SimpleShape;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.EnumTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.XmlAttributeTrait;
-import software.amazon.smithy.model.traits.XmlFlattenedTrait;
 import software.amazon.smithy.model.traits.XmlNameTrait;
 import software.amazon.smithy.utils.FunctionalUtils;
 
@@ -164,11 +161,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
                     writer.write("var col $P", context.getSymbolProvider().toSymbol(member));
                     target.accept(getMemberDeserVisitor(member, "col", false));
                     writer.write("sv = append(sv, col)");
-
-                    // conditionally break if aggregate shape
-                    if (!(target instanceof SimpleShape)) {
-                        writer.write("break");
-                    }
+                    writer.write("break");
                 });
 
                 writer.write(" break }");
@@ -275,6 +268,10 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
                             writer.write("break");
                         });
 
+                        writer.write("originalDecoder := decoder");
+                        writer.write("decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)");
+                        writer.insertTrailingNewline();
+
                         writer.openBlock("switch {", "}", () -> {
                             writer.addUseImports(SmithyGoDependency.STRINGS);
                             writer.openBlock("case strings.EqualFold($S, t.Name.Local):", "", getSerializedMemberName(keyShape), () -> {
@@ -290,9 +287,11 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
                             });
 
                             writer.openBlock("default:", "", () -> {
-                                writer.writeDocs("Do nothing and ignore the unexpected tag element");
+                                writer.write("err = decoder.Decoder.Skip()");
+                                writer.write("if err != nil { return err }");
                             });
                         });
+                        writer.write("decoder = originalDecoder");
                     });
                     writer.write("*v = sv");
                     writer.write("return nil");
@@ -366,6 +365,8 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
 
                 writer.openBlock("default:", "", () -> {
                     writer.writeDocs("Do nothing and ignore the unexpected tag element");
+                    writer.write("err = decoder.Decoder.Skip()");
+                    writer.write("if err != nil { return err }");
                 });
             });
             // re-assign the  original decoder

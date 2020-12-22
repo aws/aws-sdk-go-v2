@@ -8,10 +8,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/awslabs/smithy-go"
-	smithyio "github.com/awslabs/smithy-go/io"
-	"github.com/awslabs/smithy-go/middleware"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	"github.com/aws/smithy-go"
+	smithyio "github.com/aws/smithy-go/io"
+	"github.com/aws/smithy-go/middleware"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 const getIAMInfoPath = getMetadataPath + "/iam/info"

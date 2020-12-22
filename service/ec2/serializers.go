@@ -8,11 +8,11 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/query"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
-	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/encoding/httpbinding"
-	"github.com/awslabs/smithy-go/middleware"
-	smithytime "github.com/awslabs/smithy-go/time"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	smithy "github.com/aws/smithy-go"
+	"github.com/aws/smithy-go/encoding/httpbinding"
+	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 type awsEc2query_serializeOpAcceptReservedInstancesExchangeQuote struct {

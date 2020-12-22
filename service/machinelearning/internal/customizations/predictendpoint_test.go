@@ -2,11 +2,12 @@ package customizations
 
 import (
 	"context"
-	"github.com/awslabs/smithy-go/middleware"
-	"github.com/awslabs/smithy-go/ptr"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"strings"
 	"testing"
+
+	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func TestPredictEndpointMiddleware(t *testing.T) {

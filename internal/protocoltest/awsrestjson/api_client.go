@@ -9,11 +9,11 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
-	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/logging"
-	"github.com/awslabs/smithy-go/middleware"
-	smithyrand "github.com/awslabs/smithy-go/rand"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	smithy "github.com/aws/smithy-go"
+	"github.com/aws/smithy-go/logging"
+	"github.com/aws/smithy-go/middleware"
+	smithyrand "github.com/aws/smithy-go/rand"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/http"
 )
 

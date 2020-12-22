@@ -16,8 +16,8 @@ import (
 	v1Request "github.com/aws/aws-sdk-go/aws/request"
 	v1Unit "github.com/aws/aws-sdk-go/awstesting/unit"
 	v1Client "github.com/aws/aws-sdk-go/service/lexruntimeservice"
-	"github.com/awslabs/smithy-go/ptr"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	"github.com/aws/smithy-go/ptr"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func BenchmarkPutSession(b *testing.B) {

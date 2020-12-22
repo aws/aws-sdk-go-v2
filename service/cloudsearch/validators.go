@@ -6,8 +6,8 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
-	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/middleware"
+	smithy "github.com/aws/smithy-go"
+	"github.com/aws/smithy-go/middleware"
 )
 
 type validateOpBuildSuggesters struct {

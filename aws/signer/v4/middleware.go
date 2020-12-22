@@ -11,8 +11,8 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	v4Internal "github.com/aws/aws-sdk-go-v2/aws/signer/internal/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
-	"github.com/awslabs/smithy-go/middleware"
-	smithyHTTP "github.com/awslabs/smithy-go/transport/http"
+	"github.com/aws/smithy-go/middleware"
+	smithyHTTP "github.com/aws/smithy-go/transport/http"
 )
 
 const computePayloadHashMiddlewareID = "ComputePayloadHash"

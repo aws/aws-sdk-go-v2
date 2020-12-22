@@ -5,8 +5,8 @@ package ec2query
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/awslabs/smithy-go/middleware"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	"github.com/aws/smithy-go/middleware"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func (c *Client) XmlEmptyBlobs(ctx context.Context, params *XmlEmptyBlobsInput, optFns ...func(*Options)) (*XmlEmptyBlobsOutput, error) {

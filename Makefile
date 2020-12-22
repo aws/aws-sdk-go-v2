@@ -71,11 +71,11 @@ gen-repo-mod-replace:
 
 gen-mod-replace-smithy:
 	cd ./internal/repotools/cmd/eachmodule \
-    		&& go run . "go mod edit -replace github.com/awslabs/smithy-go=${SMITHY_GO_SRC}"
+    		&& go run . "go mod edit -replace github.com/aws/smithy-go=${SMITHY_GO_SRC}"
 
 gen-mod-dropreplace-smithy:
 	cd ./internal/repotools/cmd/eachmodule \
-    		&& go run . "go mod edit -dropreplace github.com/awslabs/smithy-go"
+    		&& go run . "go mod edit -dropreplace github.com/aws/smithy-go"
 
 gen-aws-ptrs:
 	cd aws && go generate

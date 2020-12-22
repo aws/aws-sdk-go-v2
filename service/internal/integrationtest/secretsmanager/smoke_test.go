@@ -11,7 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
-	"github.com/awslabs/smithy-go"
+	"github.com/aws/smithy-go"
 )
 
 func TestInteg_00_ListSecrets(t *testing.T) {

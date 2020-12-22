@@ -9,10 +9,9 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/awslabs/smithy-go/logging"
-
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+	"github.com/aws/smithy-go/logging"
 )
 
 // resolveDefaultAWSConfig will write default configuration values into the cfg

@@ -6,8 +6,8 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/types"
-	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/middleware"
+	smithy "github.com/aws/smithy-go"
+	"github.com/aws/smithy-go/middleware"
 )
 
 type validateOpGetClip struct {
