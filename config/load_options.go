@@ -59,17 +59,25 @@ type LoadOptions struct {
 	// SharedConfigFiles is the slice of custom shared config files to use when loading the SharedConfig.
 	// A non-default profile used within config file must have name defined with prefix 'profile '.
 	// eg [profile xyz] indicates a profile with name 'xyz'.
-	// If duplicate profiles are provided with a same, or across multiple shared config files, the next parsed
-	// profile will override only properties that conflict with the previously defined profile.
+	// To read more on the format of the config file, please refer the documentation at
+	// https://docs.aws.amazon.com/credref/latest/refdocs/file-format.html#file-format-config
+	//
+	// If duplicate profiles are provided within the same, or across multiple shared config files, the next parsed
+	// profile will override only the properties that conflict with the previously defined profile.
+	// Note that if duplicate profiles are provided within the SharedCredentialsFiles and SharedConfigFiles,
+	// the properties defined in shared credentials file take precedence.
 	SharedConfigFiles []string
 
 	// SharedCredentialsFile is the slice of custom shared credentials files to use when loading the SharedConfig.
 	// The profile name used within credentials file must not prefix 'profile '.
 	// eg [xyz] indicates a profile with name 'xyz'. Profile declared as [profile xyz] will be ignored.
+	// To read more on the format of the credentials file, please refer the documentation at
+	// https://docs.aws.amazon.com/credref/latest/refdocs/file-format.html#file-format-creds
+	//
 	// If duplicate profiles are provided with a same, or across multiple shared credentials files, the next parsed
 	// profile will override only properties that conflict with the previously defined profile.
-	// If duplicate profiles are provided within a shared credentials and shared config files, the properties
-	// defined in shared credentials file take precedence.
+	// Note that if duplicate profiles are provided within the SharedCredentialsFiles and SharedConfigFiles,
+	// the properties defined in shared credentials file take precedence.
 	SharedCredentialsFiles []string
 
 	// CustomCABundle is CA bundle PEM bytes reader

@@ -21,7 +21,7 @@ region = us-west-2
 
 func BenchmarkINIParser(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		ParseBytes([]byte(section), "ini/bench_test")
+		ParseBytes([]byte(section))
 	}
 }
 

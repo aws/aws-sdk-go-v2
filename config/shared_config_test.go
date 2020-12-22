@@ -221,18 +221,21 @@ func TestNewSharedConfig(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			cfg, err := NewSharedConfig(context.TODO(), c.Profile, sharedConfigsLoadInfo{
-				ConfigurationFiles: c.Filenames,
+			cfg, err := LoadSharedConfigProfile(context.TODO(), c.Profile, func(o *LoadSharedConfigOptions) {
+				o.ConfigFiles = c.Filenames
+				o.CredentialsFiles = []string{filepath.Join("testdata", "empty_creds_config")}
 			})
-			if c.Err != nil {
+			if c.Err != nil && err != nil {
 				if e, a := c.Err.Error(), err.Error(); !strings.Contains(a, e) {
 					t.Errorf("expect %q to be in %q", e, a)
 				}
 				return
 			}
-
 			if err != nil {
 				t.Fatalf("expect no error, got %v", err)
+			}
+			if c.Err != nil {
+				t.Errorf("expect error: %v, got none", c.Err)
 			}
 			if e, a := c.Expected, cfg; !reflect.DeepEqual(e, a) {
 				t.Errorf(" expect %v, got %v", e, a)
@@ -376,15 +379,6 @@ func TestLoadSharedConfigFromSection(t *testing.T) {
 	}
 }
 
-func cmpFiles(expects, actuals []parsedINIFile) bool {
-	for i, expect := range expects {
-		if expect.Filename != actuals[i].Filename {
-			return false
-		}
-	}
-	return true
-}
-
 func TestLoadSharedConfig(t *testing.T) {
 	origProf := defaultSharedConfigProfile
 	origConfigFiles := DefaultSharedConfigFiles
@@ -519,8 +513,8 @@ func TestSharedConfigLoading(t *testing.T) {
 		"duplicate profiles in the configuration files": {
 			LoadOptionFns: []func(*LoadOptions) error{
 				WithSharedConfigProfile("duplicate-profile"),
-				WithSharedConfigFiles([]string{"testdata/load_config"}),
-				WithSharedCredentialsFiles([]string{"testdata/empty_creds_config"}),
+				WithSharedConfigFiles([]string{filepath.Join("testdata", "load_config")}),
+				WithSharedCredentialsFiles([]string{filepath.Join("testdata", "empty_creds_config")}),
 				WithLogConfigurationWarnings(true),
 				WithLogger(logger),
 			},
@@ -536,8 +530,8 @@ func TestSharedConfigLoading(t *testing.T) {
 		"profile prefix not used in the configuration files": {
 			LoadOptionFns: []func(*LoadOptions) error{
 				WithSharedConfigProfile("no-such-profile"),
-				WithSharedConfigFiles([]string{"testdata/load_config"}),
-				WithSharedCredentialsFiles([]string{"testdata/empty_creds_config"}),
+				WithSharedConfigFiles([]string{filepath.Join("testdata", "load_config")}),
+				WithSharedCredentialsFiles([]string{filepath.Join("testdata", "empty_creds_config")}),
 				WithLogConfigurationWarnings(true),
 				WithLogger(logger),
 			},
@@ -548,8 +542,8 @@ func TestSharedConfigLoading(t *testing.T) {
 
 		"profile prefix overrides default": {
 			LoadOptionFns: []func(*LoadOptions) error{
-				WithSharedConfigFiles([]string{"testdata/load_config"}),
-				WithSharedCredentialsFiles([]string{"testdata/empty_creds_config"}),
+				WithSharedConfigFiles([]string{filepath.Join("testdata", "load_config")}),
+				WithSharedCredentialsFiles([]string{filepath.Join("testdata", "empty_creds_config")}),
 				WithLogConfigurationWarnings(true),
 				WithLogger(logger),
 			},
@@ -564,8 +558,8 @@ func TestSharedConfigLoading(t *testing.T) {
 		"duplicate profiles in credentials file": {
 			LoadOptionFns: []func(*LoadOptions) error{
 				WithSharedConfigProfile("duplicate-profile"),
-				WithSharedConfigFiles([]string{"testdata/empty_creds_config"}),
-				WithSharedCredentialsFiles([]string{"testdata/load_credentials"}),
+				WithSharedConfigFiles([]string{filepath.Join("testdata", "empty_creds_config")}),
+				WithSharedCredentialsFiles([]string{filepath.Join("testdata", "load_credentials")}),
 				WithLogConfigurationWarnings(true),
 				WithLogger(logger),
 			},
@@ -581,20 +575,20 @@ func TestSharedConfigLoading(t *testing.T) {
 		"profile prefix used in credentials files": {
 			LoadOptionFns: []func(*LoadOptions) error{
 				WithSharedConfigProfile("unused-profile"),
-				WithSharedConfigFiles([]string{"testdata/empty_creds_config"}),
-				WithSharedCredentialsFiles([]string{"testdata/load_credentials"}),
+				WithSharedConfigFiles([]string{filepath.Join("testdata", "empty_creds_config")}),
+				WithSharedCredentialsFiles([]string{filepath.Join("testdata", "load_credentials")}),
 				WithLogConfigurationWarnings(true),
 				WithLogger(logger),
 			},
 			LoadFn:    loadSharedConfig,
-			ExpectLog: "profile unused-profile is ignored. A profile with the \"profile \" prefix is invalid for the shared credentials file",
+			ExpectLog: "profile defined with name `profile unused-profile` is ignored.",
 			Err:       "failed to get shared config profile, unused-profile",
 		},
 		"partial credentials in configuration files": {
 			LoadOptionFns: []func(*LoadOptions) error{
 				WithSharedConfigProfile("partial-creds-1"),
-				WithSharedConfigFiles([]string{"testdata/load_config"}),
-				WithSharedCredentialsFiles([]string{"testdata/empty_creds_config"}),
+				WithSharedConfigFiles([]string{filepath.Join("testdata", "load_config")}),
+				WithSharedCredentialsFiles([]string{filepath.Join("testdata", "empty_creds_config")}),
 				WithLogConfigurationWarnings(true),
 				WithLogger(logger),
 			},
@@ -602,13 +596,13 @@ func TestSharedConfigLoading(t *testing.T) {
 			Expect: SharedConfig{
 				Profile: "partial-creds-1",
 			},
-			Err: "Partial Credentials",
+			Err: "partial credentials",
 		},
 		"parital credentials in the credentials files": {
 			LoadOptionFns: []func(*LoadOptions) error{
 				WithSharedConfigProfile("partial-creds-1"),
-				WithSharedConfigFiles([]string{"testdata/empty_creds_config"}),
-				WithSharedCredentialsFiles([]string{"testdata/load_credentials"}),
+				WithSharedConfigFiles([]string{filepath.Join("testdata", "empty_creds_config")}),
+				WithSharedCredentialsFiles([]string{filepath.Join("testdata", "load_credentials")}),
 				WithLogConfigurationWarnings(true),
 				WithLogger(logger),
 			},
@@ -616,13 +610,13 @@ func TestSharedConfigLoading(t *testing.T) {
 			Expect: SharedConfig{
 				Profile: "partial-creds-1",
 			},
-			Err: "Partial Credentials found for profile partial-creds-1",
+			Err: "partial credentials found for profile partial-creds-1",
 		},
 		"credentials override configuration profile": {
 			LoadOptionFns: []func(*LoadOptions) error{
 				WithSharedConfigProfile("complete"),
-				WithSharedConfigFiles([]string{"testdata/load_config"}),
-				WithSharedCredentialsFiles([]string{"testdata/load_credentials"}),
+				WithSharedConfigFiles([]string{filepath.Join("testdata", "load_config")}),
+				WithSharedCredentialsFiles([]string{filepath.Join("testdata", "load_credentials")}),
 				WithLogConfigurationWarnings(true),
 				WithLogger(logger),
 			},
@@ -632,7 +626,8 @@ func TestSharedConfigLoading(t *testing.T) {
 				Credentials: aws.Credentials{
 					AccessKeyID:     "credsAccessKey",
 					SecretAccessKey: "credsSecretKey",
-					Source:          "SharedConfigCredentials: testdata/load_credentials",
+					Source: fmt.Sprintf("SharedConfigCredentials: %v",
+						filepath.Join("testdata", "load_credentials")),
 				},
 				Region: "us-west-2",
 			},
@@ -640,8 +635,8 @@ func TestSharedConfigLoading(t *testing.T) {
 		"credentials profile has complete credentials": {
 			LoadOptionFns: []func(*LoadOptions) error{
 				WithSharedConfigProfile("complete"),
-				WithSharedConfigFiles([]string{"testdata/empty_creds_config"}),
-				WithSharedCredentialsFiles([]string{"testdata/load_credentials"}),
+				WithSharedConfigFiles([]string{filepath.Join("testdata", "empty_creds_config")}),
+				WithSharedCredentialsFiles([]string{filepath.Join("testdata", "load_credentials")}),
 				WithLogConfigurationWarnings(true),
 				WithLogger(logger),
 			},
@@ -658,10 +653,10 @@ func TestSharedConfigLoading(t *testing.T) {
 		"credentials split between multiple credentials files": {
 			LoadOptionFns: []func(*LoadOptions) error{
 				WithSharedConfigProfile("partial-creds-1"),
-				WithSharedConfigFiles([]string{"testdata/empty_creds_config"}),
+				WithSharedConfigFiles([]string{filepath.Join("testdata", "empty_creds_config")}),
 				WithSharedCredentialsFiles([]string{
-					"testdata/load_credentials",
-					"testdata/load_credentials_secondary",
+					filepath.Join("testdata", "load_credentials"),
+					filepath.Join("testdata", "load_credentials_secondary"),
 				}),
 				WithLogConfigurationWarnings(true),
 				WithLogger(logger),
@@ -670,15 +665,15 @@ func TestSharedConfigLoading(t *testing.T) {
 			Expect: SharedConfig{
 				Profile: "partial-creds-1",
 			},
-			Err: "Partial Credentials",
+			Err: "partial credentials",
 		},
 		"credentials split between multiple configuration files": {
 			LoadOptionFns: []func(*LoadOptions) error{
 				WithSharedConfigProfile("partial-creds-1"),
-				WithSharedCredentialsFiles([]string{"testdata/empty_creds_config"}),
+				WithSharedCredentialsFiles([]string{filepath.Join("testdata", "empty_creds_config")}),
 				WithSharedConfigFiles([]string{
-					"testdata/load_config",
-					"testdata/load_config_secondary",
+					filepath.Join("testdata", "load_config"),
+					filepath.Join("testdata", "load_config_secondary"),
 				}),
 				WithLogConfigurationWarnings(true),
 				WithLogger(logger),
@@ -689,26 +684,231 @@ func TestSharedConfigLoading(t *testing.T) {
 				Region:  "us-west-2",
 			},
 			ExpectLog: "",
-			Err:       "Partial Credentials",
+			Err:       "partial credentials",
 		},
 		"credentials split between credentials and config files": {
 			LoadOptionFns: []func(*LoadOptions) error{
 				WithSharedConfigProfile("partial-creds-1"),
 				WithSharedConfigFiles([]string{
-					"testdata/load_config",
+					filepath.Join("testdata", "load_config"),
 				}),
 				WithSharedCredentialsFiles([]string{
-					"testdata/load_credentials",
+					filepath.Join("testdata", "load_credentials"),
+				}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn: loadSharedConfig,
+			Expect: SharedConfig{
+				Profile: "partial-creds-1",
+			},
+			ExpectLog: "",
+			Err:       "partial credentials",
+		},
+		"replaced profile with prefixed profile in config files": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("replaced-profile"),
+				WithSharedConfigFiles([]string{
+					filepath.Join("testdata", "load_config"),
+				}),
+				WithSharedCredentialsFiles([]string{
+					filepath.Join("testdata", "empty_creds_config"),
+				}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn: loadSharedConfig,
+			Expect: SharedConfig{
+				Profile: "replaced-profile",
+				Region:  "eu-west-1",
+			},
+			ExpectLog: "profile defined with name `replaced-profile` is ignored.",
+		},
+		"replaced profile with prefixed profile in credentials files": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("replaced-profile"),
+				WithSharedCredentialsFiles([]string{
+					filepath.Join("testdata", "load_credentials"),
+				}),
+				WithSharedConfigFiles([]string{
+					filepath.Join("testdata", "empty_creds_config"),
+				}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn: loadSharedConfig,
+			Expect: SharedConfig{
+				Profile: "replaced-profile",
+				Region:  "us-west-2",
+			},
+			ExpectLog: "profile defined with name `profile replaced-profile` is ignored.",
+		},
+		"ignored profiles w/o prefixed profile across credentials and config files": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("replaced-profile"),
+				WithSharedCredentialsFiles([]string{
+					filepath.Join("testdata", "load_credentials"),
+				}),
+				WithSharedConfigFiles([]string{
+					filepath.Join("testdata", "load_config"),
+				}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn: loadSharedConfig,
+			Expect: SharedConfig{
+				Profile: "replaced-profile",
+				Region:  "us-west-2",
+			},
+			ExpectLog: "profile defined with name `profile replaced-profile` is ignored.",
+		},
+		"1. profile with name as `profile` in config file": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("profile"),
+				WithSharedCredentialsFiles([]string{
+					filepath.Join("testdata", "empty_creds_config"),
+				}),
+				WithSharedConfigFiles([]string{
+					filepath.Join("testdata", "load_config"),
 				}),
 				WithLogConfigurationWarnings(true),
 				WithLogger(logger),
 			},
 			LoadFn:    loadSharedConfig,
-			Expect:    SharedConfig{
-				Profile: "partial-creds-1",
+			Err:       "failed to get shared config profile, profile",
+			ExpectLog: "profile defined with name `profile` is ignored",
+		},
+		"2. profile with name as `profile ` in config file": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("profile "),
+				WithSharedCredentialsFiles([]string{
+					filepath.Join("testdata", "empty_creds_config"),
+				}),
+				WithSharedConfigFiles([]string{
+					filepath.Join("testdata", "load_config"),
+				}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
 			},
-			ExpectLog: "",
-			Err:       "Partial Credentials",
+			LoadFn:    loadSharedConfig,
+			Err:       "failed to get shared config profile, profile",
+			ExpectLog: "profile defined with name `profile` is ignored",
+		},
+		"3. profile with name as `profile\t` in config file": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("profile"),
+				WithSharedCredentialsFiles([]string{
+					filepath.Join("testdata", "empty_creds_config"),
+				}),
+				WithSharedConfigFiles([]string{
+					filepath.Join("testdata", "load_config"),
+				}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn:    loadSharedConfig,
+			Err:       "failed to get shared config profile, profile",
+			ExpectLog: "profile defined with name `profile` is ignored",
+		},
+		"profile with tabs as delimiter for profile prefix in config file": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("with-tab"),
+				WithSharedCredentialsFiles([]string{
+					filepath.Join("testdata", "empty_creds_config"),
+				}),
+				WithSharedConfigFiles([]string{
+					filepath.Join("testdata", "load_config"),
+				}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn: loadSharedConfig,
+			Expect: SharedConfig{
+				Profile: "with-tab",
+				Region:  "cn-north-1",
+			},
+		},
+		"profile with tabs as delimiter for profile prefix in credentials file": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("with-tab"),
+				WithSharedCredentialsFiles([]string{
+					filepath.Join("testdata", "load_credentials"),
+				}),
+				WithSharedConfigFiles([]string{
+					filepath.Join("testdata", "empty_creds_config"),
+				}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn:    loadSharedConfig,
+			Err:       "failed to get shared config profile, with-tab",
+			ExpectLog: "profile defined with name `profile with-tab` is ignored",
+		},
+		"profile with name as `profile profile` in credentials file": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("profile"),
+				WithSharedCredentialsFiles([]string{
+					filepath.Join("testdata", "load_credentials"),
+				}),
+				WithSharedConfigFiles([]string{
+					filepath.Join("testdata", "empty_creds_config"),
+				}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn:    loadSharedConfig,
+			Err:       "failed to get shared config profile, profile",
+			ExpectLog: "profile defined with name `profile profile` is ignored",
+		},
+		"profile with name profile-bar in credentials file": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("profile-bar"),
+				WithSharedCredentialsFiles([]string{
+					filepath.Join("testdata", "load_credentials"),
+				}),
+				WithSharedConfigFiles([]string{
+					filepath.Join("testdata", "empty_creds_config"),
+				}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn: loadSharedConfig,
+			Expect: SharedConfig{
+				Profile: "profile-bar",
+				Region:  "us-west-2",
+			},
+		},
+		"profile with name profile-bar in config file": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("profile-bar"),
+				WithSharedCredentialsFiles([]string{
+					filepath.Join("testdata", "empty_creds_config"),
+				}),
+				WithSharedConfigFiles([]string{
+					filepath.Join("testdata", "load_config"),
+				}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn:    loadSharedConfig,
+			Err:       "failed to get shared config profile, profile-bar",
+			ExpectLog: "profile defined with name `profile-bar` is ignored",
+		},
+		"profile ignored in credentials and config file": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("ignored-profile"),
+				WithSharedCredentialsFiles([]string{
+					filepath.Join("testdata", "load_credentials"),
+				}),
+				WithSharedConfigFiles([]string{
+					filepath.Join("testdata", "load_config"),
+				}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn:    loadSharedConfig,
+			Err:       "failed to get shared config profile, ignored-profile",
+			ExpectLog: "profile defined with name `ignored-profile` is ignored.",
 		},
 	}
 
@@ -723,6 +923,14 @@ func TestSharedConfigLoading(t *testing.T) {
 			}
 
 			cfg, err := c.LoadFn(context.Background(), configs{options})
+
+			if e, a := c.ExpectLog, loggerBuf.String(); !strings.Contains(a, e) {
+				t.Errorf("expect %v logged in %v", e, a)
+			}
+			if loggerBuf.Len() == 0 && len(c.ExpectLog) != 0 {
+				t.Errorf("expected log, got none")
+			}
+
 			if len(c.Err) > 0 {
 				if err == nil {
 					t.Fatalf("expected error %v, got none", c.Err)
@@ -739,12 +947,6 @@ func TestSharedConfigLoading(t *testing.T) {
 				t.Errorf("expect %v got %v", e, a)
 			}
 
-			if e, a := c.ExpectLog, loggerBuf.String(); !strings.Contains(a, e) {
-				t.Errorf("expect %v logged in %v", e, a)
-			}
-			if loggerBuf.Len() == 0 && len(c.ExpectLog) != 0 {
-				t.Errorf("expected log, got none")
-			}
 		})
 	}
 }

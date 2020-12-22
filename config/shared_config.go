@@ -16,6 +16,9 @@ import (
 )
 
 const (
+	// Prefix to use for filtering profiles
+	profilePrefix = `profile `
+
 	// Static Credentials group
 	accessKeyIDKey  = `aws_access_key_id`     // group required
 	secretAccessKey = `aws_secret_access_key` // group required
@@ -187,7 +190,7 @@ func loadSharedConfigIgnoreNotExist(ctx context.Context, configs configs) (Confi
 // * sharedConfigFilesProvider
 func loadSharedConfig(ctx context.Context, configs configs) (Config, error) {
 	var profile string
-	var configurationFiles []string
+	var configFiles []string
 	var credentialsFiles []string
 	var ok bool
 	var err error
@@ -200,20 +203,14 @@ func loadSharedConfig(ctx context.Context, configs configs) (Config, error) {
 		profile = defaultSharedConfigProfile
 	}
 
-	configurationFiles, ok, err = getSharedConfigFiles(ctx, configs)
+	configFiles, ok, err = getSharedConfigFiles(ctx, configs)
 	if err != nil {
 		return nil, err
-	}
-	if !ok {
-		configurationFiles = DefaultSharedConfigFiles
 	}
 
 	credentialsFiles, ok, err = getSharedCredentialsFiles(ctx, configs)
 	if err != nil {
 		return nil, err
-	}
-	if !ok {
-		credentialsFiles = DefaultSharedCredentialsFiles
 	}
 
 	// setup logger if log configuration warning is seti
@@ -232,58 +229,75 @@ func loadSharedConfig(ctx context.Context, configs configs) (Config, error) {
 		}
 	}
 
-	return NewSharedConfig(ctx, profile, sharedConfigsLoadInfo{
-		CredentialsFiles:   credentialsFiles,
-		ConfigurationFiles: configurationFiles,
-		Logger:             logger,
-	})
+	return LoadSharedConfigProfile(ctx, profile,
+		func(o *LoadSharedConfigOptions) {
+			o.Logger = logger
+			o.ConfigFiles = configFiles
+			o.CredentialsFiles = credentialsFiles
+		},
+	)
 }
 
-// sharedConfigsLoadInfo struct contains Values that can be used to load the config.
-type sharedConfigsLoadInfo struct {
+// LoadSharedConfigOptions struct contains optional values that can be used to load the config.
+type LoadSharedConfigOptions struct {
 
 	// CredentialsFiles are the shared credentials files
 	CredentialsFiles []string
 
-	// ConfigurationFiles are the shared config files
-	ConfigurationFiles []string
+	// ConfigFiles are the shared config files
+	ConfigFiles []string
 
 	// Logger is the logger used to log shared config behavior
 	Logger logging.Logger
 }
 
-// NewSharedConfig retrieves the configuration from the list of files
+// LoadSharedConfigProfile retrieves the configuration from the list of files
 // using the profile provided. The order the files are listed will determine
 // precedence. Values in subsequent files will overwrite values defined in
 // earlier files.
 //
 // For example, given two files A and B. Both define credentials. If the order
 // of the files are A then B, B's credential values will be used instead of A's.
-func NewSharedConfig(ctx context.Context, profile string, options sharedConfigsLoadInfo) (SharedConfig, error) {
-	if len(options.ConfigurationFiles) == 0 && len(options.CredentialsFiles) == 0 {
-		return SharedConfig{}, fmt.Errorf("no shared config or shared credentials options provided")
+//
+// If no config files, credentials files are provided, the LoadSharedConfigProfile
+// will default to location `.aws/config` for config files and `.aws/credentials`
+// for credentials files respectively as per
+// https://docs.aws.amazon.com/credref/latest/refdocs/file-location.html#file-location
+//
+func LoadSharedConfigProfile(ctx context.Context, profile string, optFns ...func(*LoadSharedConfigOptions)) (SharedConfig, error) {
+	var option LoadSharedConfigOptions
+	for _, fn := range optFns {
+		fn(&option)
+	}
+
+	if len(option.ConfigFiles) == 0 {
+		option.ConfigFiles = DefaultSharedConfigFiles
+	}
+
+	if len(option.CredentialsFiles) == 0 {
+		option.CredentialsFiles = DefaultSharedCredentialsFiles
 	}
 
 	// load shared configuration sections from shared configuration INI options
-	configSections, err := loadIniFiles(options.ConfigurationFiles)
+	configSections, err := loadIniFiles(option.ConfigFiles)
 	if err != nil {
 		return SharedConfig{}, err
 	}
 
 	// check for profile prefix and drop duplicates or invalid profiles
-	err = processConfigSections(ctx, configSections, options.Logger)
+	err = processConfigSections(ctx, configSections, option.Logger)
 	if err != nil {
 		return SharedConfig{}, err
 	}
 
 	// load shared credentials sections from shared credentials INI options
-	credentialsSections, err := loadIniFiles(options.CredentialsFiles)
+	credentialsSections, err := loadIniFiles(option.CredentialsFiles)
 	if err != nil {
 		return SharedConfig{}, err
 	}
 
 	// check for profile prefix and drop duplicates or invalid profiles
-	err = processCredentialsSections(ctx, credentialsSections, options.Logger)
+	err = processCredentialsSections(ctx, credentialsSections, option.Logger)
 	if err != nil {
 		return SharedConfig{}, err
 	}
@@ -298,7 +312,7 @@ func NewSharedConfig(ctx context.Context, profile string, options sharedConfigsL
 
 	cfg := SharedConfig{}
 	profiles := map[string]struct{}{}
-	if err = cfg.setFromIniSections(profiles, profile, configSections, options.Logger); err != nil {
+	if err = cfg.setFromIniSections(profiles, profile, configSections, option.Logger); err != nil {
 		return SharedConfig{}, err
 	}
 
@@ -306,18 +320,16 @@ func NewSharedConfig(ctx context.Context, profile string, options sharedConfigsL
 }
 
 func processConfigSections(ctx context.Context, sections ini.Sections, logger logging.Logger) error {
-
-	prefix := "profile "
 	for _, section := range sections.List() {
 		// drop profiles without prefix for config files
-		if !strings.HasPrefix(section, prefix) && !strings.EqualFold(section, "default") {
+		if !strings.HasPrefix(section, profilePrefix) && !strings.EqualFold(section, "default") {
 			// drop this section, as invalid profile name
 			sections.DeleteSection(section)
 
 			if logger != nil {
 				logger.Logf(logging.Debug,
-					"profile %v is ignored. A non-default profile without the \"profile \" prefix is invalid "+
-						"for the shared configuration file.\n",
+					"A profile defined with name `%v` is ignored. For use within a shared configuration file, " +
+					"a non-default profile must have `profile ` prefixed to the profile name.\n",
 					section,
 				)
 			}
@@ -327,7 +339,7 @@ func processConfigSections(ctx context.Context, sections ini.Sections, logger lo
 	// rename sections to remove `profile ` prefixing to match with credentials file.
 	// if default is already present, it will be dropped.
 	for _, section := range sections.List() {
-		if strings.HasPrefix(section, prefix) {
+		if strings.HasPrefix(section, profilePrefix) {
 			v, ok := sections.GetSection(section)
 			if !ok {
 				return fmt.Errorf("error processing profiles within the shared configuration files")
@@ -337,11 +349,11 @@ func processConfigSections(ctx context.Context, sections ini.Sections, logger lo
 			sections.DeleteSection(section)
 
 			// set the value to non-prefixed name in sections.
-			section = strings.TrimPrefix(section, prefix)
+			section = strings.TrimPrefix(section, profilePrefix)
 			if sections.HasSection(section) {
 				oldSection, _ := sections.GetSection(section)
 				v.Logs = append(v.Logs,
-					fmt.Sprintf("A default profile prefixed with `profile` found in %s, "+
+					fmt.Sprintf("A default profile prefixed with `profile ` found in %s, "+
 						"overrided non-prefixed default profile from %s", v.SourceFile, oldSection.SourceFile))
 			}
 
@@ -354,17 +366,15 @@ func processConfigSections(ctx context.Context, sections ini.Sections, logger lo
 }
 
 func processCredentialsSections(ctx context.Context, sections ini.Sections, logger logging.Logger) error {
-
-	prefix := "profile"
 	for _, section := range sections.List() {
 		// drop profiles with prefix for credential files
-		if strings.HasPrefix(section, prefix) {
+		if strings.HasPrefix(section, profilePrefix) {
 			// drop this section, as invalid profile name
 			sections.DeleteSection(section)
 
 			if logger != nil {
 				logger.Logf(logging.Debug,
-					"The %v is ignored. A profile with the \"profile \" prefix is invalid "+
+					"The profile defined with name `%v` is ignored. A profile with the `profile ` prefix is invalid "+
 						"for the shared credentials file.\n",
 					section,
 				)
@@ -372,11 +382,6 @@ func processCredentialsSections(ctx context.Context, sections ini.Sections, logg
 		}
 	}
 	return nil
-}
-
-type parsedINIFile struct {
-	Filename string
-	IniData  ini.Sections
 }
 
 func loadIniFiles(filenames []string) (ini.Sections, error) {
@@ -411,7 +416,7 @@ func mergeSections(dst, src ini.Sections) error {
 		if (!srcSection.Has(accessKeyIDKey) && srcSection.Has(secretAccessKey)) ||
 			(srcSection.Has(accessKeyIDKey) && !srcSection.Has(secretAccessKey)) {
 			srcSection.Errors = append(srcSection.Errors,
-				fmt.Errorf("Partial Credentials found for profile %v", sectionName))
+				fmt.Errorf("partial credentials found for profile %v", sectionName))
 		}
 
 		if !dst.HasSection(sectionName) {
@@ -593,6 +598,18 @@ func mergeSections(dst, src ini.Sections) error {
 			dstSection.UpdateSourceFile(roleSessionNameKey, srcSection.SourceFile[roleSessionNameKey])
 		}
 
+		// role duration seconds key update
+		if srcSection.Has(roleDurationSecondsKey) {
+			roleDurationSeconds := srcSection.Int(roleDurationSecondsKey)
+			v, err := ini.NewIntValue(roleDurationSeconds)
+			if err != nil {
+				return fmt.Errorf("error merging role duration seconds key, %w", err)
+			}
+			dstSection.UpdateValue(roleDurationSecondsKey, v)
+
+			dstSection.UpdateSourceFile(roleDurationSecondsKey, srcSection.SourceFile[roleDurationSecondsKey])
+		}
+
 		if srcSection.Has(regionKey) {
 			key := srcSection.String(regionKey)
 			val, err := ini.NewStringValue(key)
@@ -686,18 +703,6 @@ func mergeSections(dst, src ini.Sections) error {
 
 			dstSection.UpdateValue(s3UseARNRegionKey, val)
 			dstSection.UpdateSourceFile(s3UseARNRegionKey, srcSection.SourceFile[s3UseARNRegionKey])
-		}
-
-		// role duration seconds key update
-		if srcSection.Has(roleDurationSecondsKey) {
-			roleDurationSeconds := srcSection.Int(roleDurationSecondsKey)
-			v, err := ini.NewIntValue(roleDurationSeconds)
-			if err != nil {
-				return fmt.Errorf("error merging role duration seconds key, %w", err)
-			}
-			dstSection.UpdateValue(roleDurationSecondsKey, v)
-
-			dstSection.UpdateSourceFile(roleDurationSecondsKey, srcSection.SourceFile[roleDurationSecondsKey])
 		}
 
 		// set srcSection on dst srcSection
@@ -808,11 +813,7 @@ func (c *SharedConfig) setFromIniSection(profile string, section ini.Section) er
 			sources = append(sources, v)
 		}
 
-		return SharedConfigProfileNotExistError{
-			Filename: sources,
-			Profile:  profile,
-			Err:      nil,
-		}
+		return fmt.Errorf("parsing error : could not find profile section name after processing files: %v", sources)
 	}
 
 	if len(section.Errors) != 0 {

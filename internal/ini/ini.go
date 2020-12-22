@@ -34,13 +34,13 @@ func Parse(f io.Reader, path string) (Sections, error) {
 }
 
 // ParseBytes will parse the given bytes and return the parsed sections.
-func ParseBytes(b []byte, path string) (Sections, error) {
+func ParseBytes(b []byte) (Sections, error) {
 	tree, err := ParseASTBytes(b)
 	if err != nil {
 		return Sections{}, err
 	}
 
-	v := NewDefaultVisitor(path)
+	v := NewDefaultVisitor("")
 	if err = Walk(tree, v); err != nil {
 		return Sections{}, err
 	}

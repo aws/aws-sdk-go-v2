@@ -255,7 +255,7 @@ func (c EnvConfig) getSharedConfigProfile(ctx context.Context) (string, bool, er
 // Will return the filenames in the order of:
 // * Shared Config
 func (c EnvConfig) getSharedConfigFiles(context.Context) ([]string, bool, error) {
-	files := make([]string, 0, 2)
+	var files []string
 	if v := c.SharedConfigFile; len(v) > 0 {
 		files = append(files, v)
 	}
@@ -271,7 +271,7 @@ func (c EnvConfig) getSharedConfigFiles(context.Context) ([]string, bool, error)
 // Will return the filenames in the order of:
 // * Shared Credentials
 func (c EnvConfig) getSharedCredentialsFiles(context.Context) ([]string, bool, error) {
-	files := make([]string, 0, 2)
+	var files []string
 	if v := c.SharedCredentialsFile; len(v) > 0 {
 		files = append(files, v)
 	}

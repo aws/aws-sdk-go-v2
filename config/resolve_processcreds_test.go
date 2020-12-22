@@ -33,7 +33,6 @@ func TestProcessCredentialsProvider_FromConfig(t *testing.T) {
 	defer awstesting.PopEnv(restoreEnv)
 
 	setupEnvForProcesscredsConfigFile()
-	os.Setenv("AWS_SDK_LOAD_CONFIG", "1")
 
 	config, err := LoadDefaultConfig(context.Background(), WithRegion("region"))
 	if err != nil {
@@ -63,7 +62,6 @@ func TestProcessCredentialsProvider_FromConfigWithProfile(t *testing.T) {
 	restoreEnv := awstesting.StashEnv()
 	defer awstesting.PopEnv(restoreEnv)
 
-	os.Setenv("AWS_SDK_LOAD_CONFIG", "1")
 	os.Setenv("AWS_PROFILE", "not_expire")
 	setupEnvForProcesscredsConfigFile()
 
@@ -87,7 +85,6 @@ func TestProcessCredentialsProvider_FromConfigWithStaticCreds(t *testing.T) {
 	restoreEnv := awstesting.StashEnv()
 	defer awstesting.PopEnv(restoreEnv)
 
-	os.Setenv("AWS_SDK_LOAD_CONFIG", "1")
 	os.Setenv("AWS_PROFILE", "not_alone")
 	setupEnvForProcesscredsConfigFile()
 
