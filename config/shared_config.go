@@ -259,9 +259,11 @@ type LoadSharedConfigOptions struct {
 // For example, given two files A and B. Both define credentials. If the order
 // of the files are A then B, B's credential values will be used instead of A's.
 //
-// If no config files, credentials files are provided, the LoadSharedConfigProfile
-// will default to location `.aws/config` for config files and `.aws/credentials`
-// for credentials files respectively as per
+// If config files are not set, SDK will default to using a file at location `.aws/config` if present.
+// If credentials files are not set, SDK will default to using a file at location `.aws/credentials` if present.
+// No default files are set, if files set to an empty slice.
+//
+// You can read more about shared config and credentials file location at
 // https://docs.aws.amazon.com/credref/latest/refdocs/file-location.html#file-location
 //
 func LoadSharedConfigProfile(ctx context.Context, profile string, optFns ...func(*LoadSharedConfigOptions)) (SharedConfig, error) {
@@ -270,11 +272,11 @@ func LoadSharedConfigProfile(ctx context.Context, profile string, optFns ...func
 		fn(&option)
 	}
 
-	if len(option.ConfigFiles) == 0 {
+	if option.ConfigFiles == nil {
 		option.ConfigFiles = DefaultSharedConfigFiles
 	}
 
-	if len(option.CredentialsFiles) == 0 {
+	if option.CredentialsFiles == nil {
 		option.CredentialsFiles = DefaultSharedCredentialsFiles
 	}
 
@@ -328,8 +330,8 @@ func processConfigSections(ctx context.Context, sections ini.Sections, logger lo
 
 			if logger != nil {
 				logger.Logf(logging.Debug,
-					"A profile defined with name `%v` is ignored. For use within a shared configuration file, " +
-					"a non-default profile must have `profile ` prefixed to the profile name.\n",
+					"A profile defined with name `%v` is ignored. For use within a shared configuration file, "+
+						"a non-default profile must have `profile ` prefixed to the profile name.\n",
 					section,
 				)
 			}

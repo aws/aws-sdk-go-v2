@@ -910,6 +910,16 @@ func TestSharedConfigLoading(t *testing.T) {
 			Err:       "failed to get shared config profile, ignored-profile",
 			ExpectLog: "profile defined with name `ignored-profile` is ignored.",
 		},
+		"config and creds files explicitly set to empty slice": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedCredentialsFiles([]string{}),
+				WithSharedConfigFiles([]string{}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn: loadSharedConfig,
+			Err:    "failed to get shared config profile, default",
+		},
 	}
 
 	for name, c := range cases {

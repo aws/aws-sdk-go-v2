@@ -33,7 +33,7 @@ region = us-west-2
 [profile ]
 region = ap-east-2
 
-[profile\t]
+[profile    ]
 region = ap-south-1
 
 [profile-bar]
