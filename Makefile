@@ -30,6 +30,7 @@ RUN_NONE=-run NONE
 RUN_INTEG=-run '^TestInteg_'
 
 CODEGEN_RESOURCES_PATH=$(shell pwd)/codegen/smithy-aws-go-codegen/src/main/resources/software/amazon/smithy/aws/go/codegen
+CODEGEN_API_MODELS_PATH=$(shell pwd)/codegen/sdk-codegen/aws-models
 ENDPOINTS_JSON=${CODEGEN_RESOURCES_PATH}/endpoints.json
 ENDPOINT_PREFIX_JSON=${CODEGEN_RESOURCES_PATH}/endpoint-prefix.json
 
@@ -109,6 +110,12 @@ gen-endpoint-prefix.json:
 		go run . \
 			-m '/tmp/aws-sdk-go-model-sync/models/apis/*/*/api-2.json' \
 			-o ${ENDPOINT_PREFIX_JSON}
+
+sync-api-models:
+	cd internal/repotools/cmd/syncAPIModels && \
+		go run . \
+			-m ${API_MODELS} \
+			-o ${CODEGEN_API_MODELS_PATH}
 
 copy-attributevalue-feature:
 	cd ./feature/dynamodbstreams/attributevalue && \
