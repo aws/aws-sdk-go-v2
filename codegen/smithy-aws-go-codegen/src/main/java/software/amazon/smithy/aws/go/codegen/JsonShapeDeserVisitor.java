@@ -244,8 +244,6 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
                             symbol.getNamespace()
                     ).build();
                     writer.write("uv = &$T{Tag: key}", unknownMemberSymbol);
-                    writer.writeDocs("TODO: FIX ME");
-                    writer.write("_ = value");
                     writer.write("break loop");
                 });
             });
