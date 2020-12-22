@@ -27,7 +27,7 @@ func SetupBucket(ctx context.Context, svc *s3.Client, bucketName string) (err er
 	_, err = svc.CreateBucket(ctx, &s3.CreateBucketInput{
 		Bucket: &bucketName,
 		CreateBucketConfiguration: &types.CreateBucketConfiguration{
-			LocationConstraint: types.BucketLocationConstraintUsWest2,
+			LocationConstraint: "us-west-2",
 		},
 	})
 	if err != nil {

@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 type EndpointResolverFunc func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error)
@@ -84,7 +83,7 @@ func TestErrorResponseWith200StatusCode(t *testing.T) {
 			svc := s3.New(options)
 			resp, err := svc.CompleteMultipartUpload(context.Background(), &s3.CompleteMultipartUploadInput{
 				UploadId:     aws.String("mockID"),
-				RequestPayer: types.RequestPayerRequester,
+				RequestPayer: "requester",
 				Bucket:       aws.String("bucket"),
 				Key:          aws.String("mockKey"),
 			})

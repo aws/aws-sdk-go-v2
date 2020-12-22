@@ -232,7 +232,7 @@ func ExampleBuilder_WithUpdate() {
 			"Artist":    &types.AttributeValueMemberS{Value: "Acme Band"},
 			"SongTitle": &types.AttributeValueMemberS{Value: "Happy Day"},
 		},
-		ReturnValues:     types.ReturnValueAllNew,
+		ReturnValues:     "ALL_NEW",
 		TableName:        aws.String("Music"),
 		UpdateExpression: expr.Update(),
 	}
