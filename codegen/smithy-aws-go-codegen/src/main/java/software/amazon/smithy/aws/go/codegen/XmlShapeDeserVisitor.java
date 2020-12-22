@@ -36,10 +36,10 @@ import software.amazon.smithy.utils.FunctionalUtils;
 /**
  * Visitor to generate deserialization functions for shapes in XML protocol
  * document bodies.
- *
+ * <p>
  * This class handles function body generation for all types expected by the
  * {@code DocumentShapeDeserVisitor}. No other shape type serialization is overwritten.
- *
+ * <p>
  * Timestamps are serialized to {@link TimestampFormatTrait.Format}.DATE_TIME by default.
  */
 public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
@@ -70,7 +70,11 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
         return Collections.singletonMap("decoder", "smithyxml.NodeDecoder");
     }
 
-    private XmlMemberDeserVisitor getMemberDeserVisitor(MemberShape member, String dataDest, boolean isXmlAttributeMember) {
+    private XmlMemberDeserVisitor getMemberDeserVisitor(
+            MemberShape member,
+            String dataDest,
+            boolean isXmlAttributeMember
+    ) {
         // Get the timestamp format to be used, defaulting to rfc 3339 date-time format.
         TimestampFormatTrait.Format format = member.getMemberTrait(getContext().getModel(), TimestampFormatTrait.class)
                 .map(TimestampFormatTrait::getFormat).orElse(DEFAULT_TIMESTAMP_FORMAT);
@@ -118,18 +122,18 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
 
     /**
      * Deserializes the collection shapes.
-     *
+     * <p>
      * In case of nested collections we will have nested `Member` element tags.
      * for eg: <ParentList><Member><ChildList><Member>abc</Member></ChildList></Member></ParentList>
-     *
+     * <p>
      * The XMLNodeDecoder decodes per xml element node level and exits when it encounters an end element
      * with xml name that matches the xml name of start element.
-     *
+     * <p>
      * For simple type members their is no function scoping, instead we use a loop to provide appropriate scoping.
      * This helps ensure we do not exit early when we have nested tags with same element name.
      *
      * @param context the generation context.
-     * @param shape the Collection shape to be deserialized.
+     * @param shape   the Collection shape to be deserialized.
      */
     @Override
     protected void deserializeCollection(GenerationContext context, CollectionShape shape) {
@@ -157,17 +161,17 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
                 writer.write("decoder = memberDecoder");
             }
 
-            writer.openBlock("for {", "}", () -> {
-                writer.addUseImports(SmithyGoDependency.STRINGS);
-                writer.openBlock("if strings.EqualFold($S, t.Name.Local) {", "} else {", serializedMemberName, () -> {
+            writer.addUseImports(SmithyGoDependency.STRINGS);
+            writer.openBlock("switch {", "}", () -> {
+                writer.openBlock("case strings.EqualFold($S, t.Name.Local):", "", serializedMemberName, () -> {
                     writer.write("var col $P", context.getSymbolProvider().toSymbol(member));
                     target.accept(getMemberDeserVisitor(member, "col", false));
                     writer.write("sv = append(sv, col)");
-                    writer.write("break");
                 });
-
-                writer.write(" break }");
-
+                writer.openBlock("default:", "", () -> {
+                    writer.write("err = decoder.Decoder.Skip()");
+                    writer.write("if err != nil { return err }");
+                });
             });
             writer.write("decoder = originalDecoder");
         });
@@ -218,13 +222,19 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
 
             // non-flattened maps
             writer.addUseImports(SmithyGoDependency.STRINGS);
-            writer.openBlock("if strings.EqualFold(\"entry\", t.Name.Local) {", "}", () -> {
-                writer.write("entryDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)");
-                // delegate to unwrapped map deserializer function
-                writer.openBlock("if err := $L(&sv, entryDecoder); err != nil {", "}",
-                        getUnwrappedMapDelegateFunctionName(context, shape), () -> {
-                            writer.write("return err");
-                        });
+            writer.openBlock("switch {", "}", () -> {
+                writer.openBlock("case strings.EqualFold(\"entry\", t.Name.Local):", "", () -> {
+                    writer.write("entryDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)");
+                    // delegate to unwrapped map deserializer function
+                    writer.openBlock("if err := $L(&sv, entryDecoder); err != nil {", "}",
+                            getUnwrappedMapDelegateFunctionName(context, shape), () -> {
+                                writer.write("return err");
+                            });
+                });
+                writer.openBlock("default:", "", () -> {
+                    writer.write("err = decoder.Decoder.Skip()");
+                    writer.write("if err != nil { return err }");
+                });
             });
         });
 
@@ -297,7 +307,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
                     });
                     writer.write("*v = sv");
                     writer.write("return nil");
-        });
+                });
     }
 
     private String getUnwrappedMapDelegateFunctionName(GenerationContext context, Shape shape) {
