@@ -1,6 +1,6 @@
 package integrationtest
 
-import "github.com/awslabs/smithy-go/middleware"
+import "github.com/aws/smithy-go/middleware"
 
 // RemoveOperationInputValidationMiddleware removes the validation middleware
 // from the stack.

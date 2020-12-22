@@ -13,7 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 
 	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
-	"github.com/awslabs/smithy-go"
+	"github.com/aws/smithy-go"
 )
 
 func TestInteg_00_DescribeConfigurationRecorders(t *testing.T) {

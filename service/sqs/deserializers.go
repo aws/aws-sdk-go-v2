@@ -11,12 +11,12 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	awsxml "github.com/aws/aws-sdk-go-v2/aws/protocol/xml"
 	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
-	smithy "github.com/awslabs/smithy-go"
-	smithyxml "github.com/awslabs/smithy-go/encoding/xml"
-	smithyio "github.com/awslabs/smithy-go/io"
-	"github.com/awslabs/smithy-go/middleware"
-	"github.com/awslabs/smithy-go/ptr"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	smithy "github.com/aws/smithy-go"
+	smithyxml "github.com/aws/smithy-go/encoding/xml"
+	smithyio "github.com/aws/smithy-go/io"
+	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"strconv"
 	"strings"
@@ -66,6 +66,18 @@ func (m *awsAwsquery_deserializeOpAddPermission) HandleDeserialize(ctx context.C
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("AddPermissionResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentAddPermissionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -162,6 +174,18 @@ func (m *awsAwsquery_deserializeOpChangeMessageVisibility) HandleDeserialize(ctx
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("ChangeMessageVisibilityResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentChangeMessageVisibilityOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -261,6 +285,18 @@ func (m *awsAwsquery_deserializeOpChangeMessageVisibilityBatch) HandleDeserializ
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("ChangeMessageVisibilityBatchResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeOpDocumentChangeMessageVisibilityBatchOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -366,6 +402,18 @@ func (m *awsAwsquery_deserializeOpCreateQueue) HandleDeserialize(ctx context.Con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("CreateQueueResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeOpDocumentCreateQueueOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -465,6 +513,18 @@ func (m *awsAwsquery_deserializeOpDeleteMessage) HandleDeserialize(ctx context.C
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("DeleteMessageResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentDeleteMessageOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -564,6 +624,18 @@ func (m *awsAwsquery_deserializeOpDeleteMessageBatch) HandleDeserialize(ctx cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("DeleteMessageBatchResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeOpDocumentDeleteMessageBatchOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -669,6 +741,18 @@ func (m *awsAwsquery_deserializeOpDeleteQueue) HandleDeserialize(ctx context.Con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("DeleteQueueResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentDeleteQueueOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -762,6 +846,18 @@ func (m *awsAwsquery_deserializeOpGetQueueAttributes) HandleDeserialize(ctx cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("GetQueueAttributesResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeOpDocumentGetQueueAttributesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -858,6 +954,18 @@ func (m *awsAwsquery_deserializeOpGetQueueUrl) HandleDeserialize(ctx context.Con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("GetQueueUrlResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeOpDocumentGetQueueUrlOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -954,6 +1062,18 @@ func (m *awsAwsquery_deserializeOpListDeadLetterSourceQueues) HandleDeserialize(
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("ListDeadLetterSourceQueuesResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeOpDocumentListDeadLetterSourceQueuesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -1050,6 +1170,18 @@ func (m *awsAwsquery_deserializeOpListQueues) HandleDeserialize(ctx context.Cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("ListQueuesResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeOpDocumentListQueuesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -1143,6 +1275,18 @@ func (m *awsAwsquery_deserializeOpListQueueTags) HandleDeserialize(ctx context.C
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("ListQueueTagsResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeOpDocumentListQueueTagsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -1236,6 +1380,18 @@ func (m *awsAwsquery_deserializeOpPurgeQueue) HandleDeserialize(ctx context.Cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("PurgeQueueResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentPurgeQueueOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -1335,6 +1491,18 @@ func (m *awsAwsquery_deserializeOpReceiveMessage) HandleDeserialize(ctx context.
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("ReceiveMessageResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeOpDocumentReceiveMessageOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -1431,6 +1599,18 @@ func (m *awsAwsquery_deserializeOpRemovePermission) HandleDeserialize(ctx contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("RemovePermissionResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentRemovePermissionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -1524,6 +1704,18 @@ func (m *awsAwsquery_deserializeOpSendMessage) HandleDeserialize(ctx context.Con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("SendMessageResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeOpDocumentSendMessageOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -1623,6 +1815,18 @@ func (m *awsAwsquery_deserializeOpSendMessageBatch) HandleDeserialize(ctx contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("SendMessageBatchResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeOpDocumentSendMessageBatchOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -1734,6 +1938,18 @@ func (m *awsAwsquery_deserializeOpSetQueueAttributes) HandleDeserialize(ctx cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("SetQueueAttributesResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentSetQueueAttributesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -1830,6 +2046,18 @@ func (m *awsAwsquery_deserializeOpTagQueue) HandleDeserialize(ctx context.Contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("TagQueueResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentTagQueueOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -1923,6 +2151,18 @@ func (m *awsAwsquery_deserializeOpUntagQueue) HandleDeserialize(ctx context.Cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("UntagQueueResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentUntagQueueOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -2076,6 +2316,10 @@ func awsAwsquery_deserializeDocumentBatchEntryIdsNotDistinct(v **types.BatchEntr
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -2108,6 +2352,10 @@ func awsAwsquery_deserializeDocumentBatchRequestTooLong(v **types.BatchRequestTo
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -2139,62 +2387,53 @@ func awsAwsquery_deserializeDocumentBatchResultErrorEntry(v **types.BatchResultE
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Code", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Code = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Code = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SenderFault", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
@@ -2204,6 +2443,10 @@ func awsAwsquery_deserializeDocumentBatchResultErrorEntry(v **types.BatchResultE
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -2303,17 +2546,14 @@ func awsAwsquery_deserializeDocumentBinaryList(v *[][]byte, decoder smithyxml.No
 			if strings.EqualFold("BinaryListValue", t.Name.Local) {
 				var col []byte
 				var data string
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
-					if val == nil {
-						col = []byte{}
-					}
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					data = xtv
 				}
@@ -2322,6 +2562,7 @@ func awsAwsquery_deserializeDocumentBinaryList(v *[][]byte, decoder smithyxml.No
 					return err
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -2346,17 +2587,14 @@ func awsAwsquery_deserializeDocumentBinaryListUnwrapped(v *[][]byte, decoder smi
 		t := decoder.StartEl
 		_ = t
 		var data string
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
-			if val == nil {
-				mv = []byte{}
-			}
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			data = xtv
 		}
@@ -2392,23 +2630,24 @@ func awsAwsquery_deserializeDocumentChangeMessageVisibilityBatchResultEntry(v **
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -2505,23 +2744,24 @@ func awsAwsquery_deserializeDocumentDeleteMessageBatchResultEntry(v **types.Dele
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -2619,6 +2859,10 @@ func awsAwsquery_deserializeDocumentEmptyBatchRequest(v **types.EmptyBatchReques
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -2651,6 +2895,10 @@ func awsAwsquery_deserializeDocumentInvalidAttributeName(v **types.InvalidAttrib
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -2683,6 +2931,10 @@ func awsAwsquery_deserializeDocumentInvalidBatchEntryId(v **types.InvalidBatchEn
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -2715,6 +2967,10 @@ func awsAwsquery_deserializeDocumentInvalidIdFormat(v **types.InvalidIdFormat, d
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -2747,6 +3003,10 @@ func awsAwsquery_deserializeDocumentInvalidMessageContents(v **types.InvalidMess
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -2784,49 +3044,40 @@ func awsAwsquery_deserializeDocumentMessage(v **types.Message, decoder smithyxml
 			}
 
 		case strings.EqualFold("Body", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Body = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Body = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MD5OfBody", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.MD5OfBody = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.MD5OfBody = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MD5OfMessageAttributes", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.MD5OfMessageAttributes = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.MD5OfMessageAttributes = ptr.String(xtv)
 			}
@@ -2838,39 +3089,37 @@ func awsAwsquery_deserializeDocumentMessage(v **types.Message, decoder smithyxml
 			}
 
 		case strings.EqualFold("MessageId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.MessageId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.MessageId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("ReceiptHandle", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.ReceiptHandle = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.ReceiptHandle = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -2909,17 +3158,14 @@ func awsAwsquery_deserializeDocumentMessageAttributeValue(v **types.MessageAttri
 
 		case strings.EqualFold("BinaryValue", t.Name.Local):
 			var data string
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.BinaryValue = []byte{}
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				data = xtv
 			}
@@ -2929,17 +3175,14 @@ func awsAwsquery_deserializeDocumentMessageAttributeValue(v **types.MessageAttri
 			}
 
 		case strings.EqualFold("DataType", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.DataType = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.DataType = ptr.String(xtv)
 			}
@@ -2951,23 +3194,24 @@ func awsAwsquery_deserializeDocumentMessageAttributeValue(v **types.MessageAttri
 			}
 
 		case strings.EqualFold("StringValue", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.StringValue = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.StringValue = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -3025,16 +3269,18 @@ func awsAwsquery_deserializeDocumentMessageBodyAttributeMapUnwrapped(v *map[stri
 			sv[ek] = ev
 			break
 		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Name", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				ek = xtv
 			}
@@ -3049,9 +3295,13 @@ func awsAwsquery_deserializeDocumentMessageBodyAttributeMapUnwrapped(v *map[stri
 			ev = *destAddr
 
 		default:
-			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -3145,6 +3395,10 @@ func awsAwsquery_deserializeDocumentMessageNotInflight(v **types.MessageNotInfli
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -3202,37 +3456,43 @@ func awsAwsquery_deserializeDocumentMessageSystemAttributeMapUnwrapped(v *map[st
 			sv[string(ek)] = ev
 			break
 		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Name", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				ek = types.MessageSystemAttributeName(xtv)
 			}
 
 		case strings.EqualFold("Value", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				ev = xtv
 			}
 
 		default:
-			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -3261,6 +3521,10 @@ func awsAwsquery_deserializeDocumentOverLimit(v **types.OverLimit, decoder smith
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -3293,6 +3557,10 @@ func awsAwsquery_deserializeDocumentPurgeQueueInProgress(v **types.PurgeQueueInP
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -3350,37 +3618,43 @@ func awsAwsquery_deserializeDocumentQueueAttributeMapUnwrapped(v *map[string]str
 			sv[string(ek)] = ev
 			break
 		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Name", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				ek = types.QueueAttributeName(xtv)
 			}
 
 		case strings.EqualFold("Value", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				ev = xtv
 			}
 
 		default:
-			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -3409,6 +3683,10 @@ func awsAwsquery_deserializeDocumentQueueDeletedRecently(v **types.QueueDeletedR
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -3441,6 +3719,10 @@ func awsAwsquery_deserializeDocumentQueueDoesNotExist(v **types.QueueDoesNotExis
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -3473,6 +3755,10 @@ func awsAwsquery_deserializeDocumentQueueNameExists(v **types.QueueNameExists, d
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -3506,18 +3792,19 @@ func awsAwsquery_deserializeDocumentQueueUrlList(v *[]string, decoder smithyxml.
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
 				var col string
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					col = xtv
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -3541,14 +3828,14 @@ func awsAwsquery_deserializeDocumentQueueUrlListUnwrapped(v *[]string, decoder s
 		var mv string
 		t := decoder.StartEl
 		_ = t
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			mv = xtv
 		}
@@ -3581,6 +3868,10 @@ func awsAwsquery_deserializeDocumentReceiptHandleIsInvalid(v **types.ReceiptHand
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -3612,103 +3903,89 @@ func awsAwsquery_deserializeDocumentSendMessageBatchResultEntry(v **types.SendMe
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MD5OfMessageAttributes", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.MD5OfMessageAttributes = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.MD5OfMessageAttributes = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MD5OfMessageBody", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.MD5OfMessageBody = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.MD5OfMessageBody = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MD5OfMessageSystemAttributes", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.MD5OfMessageSystemAttributes = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.MD5OfMessageSystemAttributes = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MessageId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.MessageId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.MessageId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SequenceNumber", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.SequenceNumber = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.SequenceNumber = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -3807,18 +4084,19 @@ func awsAwsquery_deserializeDocumentStringList(v *[]string, decoder smithyxml.No
 		for {
 			if strings.EqualFold("StringListValue", t.Name.Local) {
 				var col string
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					col = xtv
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -3842,14 +4120,14 @@ func awsAwsquery_deserializeDocumentStringListUnwrapped(v *[]string, decoder smi
 		var mv string
 		t := decoder.StartEl
 		_ = t
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			mv = xtv
 		}
@@ -3907,37 +4185,43 @@ func awsAwsquery_deserializeDocumentTagMapUnwrapped(v *map[string]string, decode
 			sv[ek] = ev
 			break
 		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Key", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				ek = xtv
 			}
 
 		case strings.EqualFold("Value", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				ev = xtv
 			}
 
 		default:
-			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -3966,6 +4250,10 @@ func awsAwsquery_deserializeDocumentTooManyEntriesInBatchRequest(v **types.TooMa
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -3998,6 +4286,10 @@ func awsAwsquery_deserializeDocumentUnsupportedOperation(v **types.UnsupportedOp
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4030,6 +4322,10 @@ func awsAwsquery_deserializeDocumentAddPermissionOutput(v **AddPermissionOutput,
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4074,6 +4370,10 @@ func awsAwsquery_deserializeOpDocumentChangeMessageVisibilityBatchOutput(v **Cha
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4106,6 +4406,10 @@ func awsAwsquery_deserializeDocumentChangeMessageVisibilityOutput(v **ChangeMess
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4137,23 +4441,24 @@ func awsAwsquery_deserializeOpDocumentCreateQueueOutput(v **CreateQueueOutput, d
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("QueueUrl", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.QueueUrl = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.QueueUrl = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4198,6 +4503,10 @@ func awsAwsquery_deserializeOpDocumentDeleteMessageBatchOutput(v **DeleteMessage
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4230,6 +4539,10 @@ func awsAwsquery_deserializeDocumentDeleteMessageOutput(v **DeleteMessageOutput,
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4262,6 +4575,10 @@ func awsAwsquery_deserializeDocumentDeleteQueueOutput(v **DeleteQueueOutput, dec
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4300,6 +4617,10 @@ func awsAwsquery_deserializeOpDocumentGetQueueAttributesOutput(v **GetQueueAttri
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4331,23 +4652,24 @@ func awsAwsquery_deserializeOpDocumentGetQueueUrlOutput(v **GetQueueUrlOutput, d
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("QueueUrl", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.QueueUrl = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.QueueUrl = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4379,17 +4701,14 @@ func awsAwsquery_deserializeOpDocumentListDeadLetterSourceQueuesOutput(v **ListD
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("NextToken", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.NextToken = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.NextToken = ptr.String(xtv)
 			}
@@ -4402,6 +4721,10 @@ func awsAwsquery_deserializeOpDocumentListDeadLetterSourceQueuesOutput(v **ListD
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4433,17 +4756,14 @@ func awsAwsquery_deserializeOpDocumentListQueuesOutput(v **ListQueuesOutput, dec
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("NextToken", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.NextToken = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.NextToken = ptr.String(xtv)
 			}
@@ -4456,6 +4776,10 @@ func awsAwsquery_deserializeOpDocumentListQueuesOutput(v **ListQueuesOutput, dec
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4494,6 +4818,10 @@ func awsAwsquery_deserializeOpDocumentListQueueTagsOutput(v **ListQueueTagsOutpu
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4526,6 +4854,10 @@ func awsAwsquery_deserializeDocumentPurgeQueueOutput(v **PurgeQueueOutput, decod
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4564,6 +4896,10 @@ func awsAwsquery_deserializeOpDocumentReceiveMessageOutput(v **ReceiveMessageOut
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4596,6 +4932,10 @@ func awsAwsquery_deserializeDocumentRemovePermissionOutput(v **RemovePermissionO
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4640,6 +4980,10 @@ func awsAwsquery_deserializeOpDocumentSendMessageBatchOutput(v **SendMessageBatc
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4671,87 +5015,76 @@ func awsAwsquery_deserializeOpDocumentSendMessageOutput(v **SendMessageOutput, d
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("MD5OfMessageAttributes", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.MD5OfMessageAttributes = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.MD5OfMessageAttributes = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MD5OfMessageBody", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.MD5OfMessageBody = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.MD5OfMessageBody = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MD5OfMessageSystemAttributes", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.MD5OfMessageSystemAttributes = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.MD5OfMessageSystemAttributes = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MessageId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.MessageId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.MessageId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SequenceNumber", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.SequenceNumber = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.SequenceNumber = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4784,6 +5117,10 @@ func awsAwsquery_deserializeDocumentSetQueueAttributesOutput(v **SetQueueAttribu
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4816,6 +5153,10 @@ func awsAwsquery_deserializeDocumentTagQueueOutput(v **TagQueueOutput, decoder s
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4848,6 +5189,10 @@ func awsAwsquery_deserializeDocumentUntagQueueOutput(v **UntagQueueOutput, decod
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder

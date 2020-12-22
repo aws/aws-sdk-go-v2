@@ -8,8 +8,8 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
-	"github.com/awslabs/smithy-go/middleware"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	"github.com/aws/smithy-go/middleware"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get all rules for a detector (paginated) if ruleId and ruleVersion are not

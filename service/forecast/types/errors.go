@@ -4,7 +4,7 @@ package types
 
 import (
 	"fmt"
-	smithy "github.com/awslabs/smithy-go"
+	smithy "github.com/aws/smithy-go"
 )
 
 // We can't process the request because it includes an invalid value or a value

@@ -4,7 +4,7 @@ package types
 
 import (
 	"fmt"
-	smithy "github.com/awslabs/smithy-go"
+	smithy "github.com/aws/smithy-go"
 )
 
 // Returned if there is insufficient capacity to process this expedited request.

@@ -12,7 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/iam"
 
 	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
-	"github.com/awslabs/smithy-go"
+	"github.com/aws/smithy-go"
 )
 
 func TestInteg_00_ListUsers(t *testing.T) {

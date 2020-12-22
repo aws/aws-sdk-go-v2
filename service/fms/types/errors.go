@@ -4,7 +4,7 @@ package types
 
 import (
 	"fmt"
-	smithy "github.com/awslabs/smithy-go"
+	smithy "github.com/aws/smithy-go"
 )
 
 // The operation failed because of a system problem, even though the request was

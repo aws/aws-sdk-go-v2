@@ -5,8 +5,8 @@ package cognitoidentity
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/awslabs/smithy-go/middleware"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	"github.com/aws/smithy-go/middleware"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Unlinks a federated identity from an existing account. Unlinked logins will be

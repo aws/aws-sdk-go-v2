@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/awslabs/smithy-go/middleware"
+	"github.com/aws/smithy-go/middleware"
 )
 
 func TestServiceMetadataProvider(t *testing.T) {

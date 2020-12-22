@@ -4,7 +4,7 @@ package types
 
 import (
 	"fmt"
-	smithy "github.com/awslabs/smithy-go"
+	smithy "github.com/aws/smithy-go"
 )
 
 // An internal error has occurred. Retry your request. If the problem persists,

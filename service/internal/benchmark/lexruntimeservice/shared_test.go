@@ -9,7 +9,7 @@ import (
 	"testing"
 
 	smithyClient "github.com/aws/aws-sdk-go-v2/service/lexruntimeservice"
-	"github.com/awslabs/smithy-go/middleware"
+	"github.com/aws/smithy-go/middleware"
 )
 
 var (

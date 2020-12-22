@@ -8,10 +8,10 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/query"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
-	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/encoding/httpbinding"
-	"github.com/awslabs/smithy-go/middleware"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	smithy "github.com/aws/smithy-go"
+	"github.com/aws/smithy-go/encoding/httpbinding"
+	"github.com/aws/smithy-go/middleware"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 type awsAwsquery_serializeOpAddTags struct {

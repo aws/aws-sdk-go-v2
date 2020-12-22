@@ -5,8 +5,8 @@ package workmailmessageflow
 import (
 	"context"
 	"fmt"
-	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/middleware"
+	smithy "github.com/aws/smithy-go"
+	"github.com/aws/smithy-go/middleware"
 )
 
 type validateOpGetRawMessageContent struct {

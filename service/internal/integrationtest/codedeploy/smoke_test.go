@@ -10,9 +10,8 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy"
-
 	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
-	"github.com/awslabs/smithy-go"
+	"github.com/aws/smithy-go"
 )
 
 func TestInteg_00_ListApplications(t *testing.T) {

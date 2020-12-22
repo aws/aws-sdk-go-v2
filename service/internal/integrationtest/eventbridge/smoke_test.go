@@ -12,7 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge"
 
 	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
-	"github.com/awslabs/smithy-go"
+	"github.com/aws/smithy-go"
 )
 
 func TestInteg_00_ListRules(t *testing.T) {

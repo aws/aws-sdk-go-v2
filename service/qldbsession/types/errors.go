@@ -4,7 +4,7 @@ package types
 
 import (
 	"fmt"
-	smithy "github.com/awslabs/smithy-go"
+	smithy "github.com/aws/smithy-go"
 )
 
 // Returned if the request is malformed or contains an error such as an invalid

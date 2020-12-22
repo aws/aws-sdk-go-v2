@@ -6,8 +6,8 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/awslabs/smithy-go/middleware"
-	"github.com/awslabs/smithy-go/transport/http"
+	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/transport/http"
 
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"

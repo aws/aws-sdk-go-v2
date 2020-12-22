@@ -11,7 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway"
 
-	"github.com/awslabs/smithy-go"
+	"github.com/aws/smithy-go"
 )
 
 func Test_EmptyResponse(t *testing.T) {

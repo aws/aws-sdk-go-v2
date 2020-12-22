@@ -8,7 +8,7 @@ import (
 	"os"
 	"text/template"
 
-	"github.com/awslabs/smithy-go/ptr"
+	"github.com/aws/smithy-go/ptr"
 )
 
 func main() {
@@ -44,7 +44,7 @@ var ptrTmpl = template.Must(template.New("ptrTmpl").Parse(`
 	package aws
 
 	import (
-		"github.com/awslabs/smithy-go/ptr"
+		"github.com/aws/smithy-go/ptr"
 		{{- range $_, $import := $.Imports }}
 			"{{ $import.Path }}"
 		{{- end }}

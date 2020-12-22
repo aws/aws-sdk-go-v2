@@ -9,9 +9,9 @@ import (
 	"net/http"
 	"strconv"
 
-	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/middleware"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	smithy "github.com/aws/smithy-go"
+	"github.com/aws/smithy-go/middleware"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // AddValidateResponseChecksumOptions provides the options for the

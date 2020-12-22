@@ -3,8 +3,8 @@ package http
 import (
 	"context"
 	"fmt"
-	"github.com/awslabs/smithy-go/middleware"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	"github.com/aws/smithy-go/middleware"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // removeContentTypeHeader is a build middleware that removes

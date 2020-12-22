@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
-	"github.com/awslabs/smithy-go"
+	"github.com/aws/smithy-go"
 
 	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
 )

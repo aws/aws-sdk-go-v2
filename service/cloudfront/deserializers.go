@@ -10,13 +10,13 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	awsxml "github.com/aws/aws-sdk-go-v2/aws/protocol/xml"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
-	smithy "github.com/awslabs/smithy-go"
-	smithyxml "github.com/awslabs/smithy-go/encoding/xml"
-	smithyio "github.com/awslabs/smithy-go/io"
-	"github.com/awslabs/smithy-go/middleware"
-	"github.com/awslabs/smithy-go/ptr"
-	smithytime "github.com/awslabs/smithy-go/time"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	smithy "github.com/aws/smithy-go"
+	smithyxml "github.com/aws/smithy-go/encoding/xml"
+	smithyio "github.com/aws/smithy-go/io"
+	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
+	smithytime "github.com/aws/smithy-go/time"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"strconv"
 	"strings"
@@ -190,6 +190,10 @@ func awsRestxml_deserializeOpDocumentCreateCachePolicyOutput(v **CreateCachePoli
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -357,6 +361,10 @@ func awsRestxml_deserializeOpDocumentCreateCloudFrontOriginAccessIdentityOutput(
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -665,6 +673,10 @@ func awsRestxml_deserializeOpDocumentCreateDistributionOutput(v **CreateDistribu
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -976,6 +988,10 @@ func awsRestxml_deserializeOpDocumentCreateDistributionWithTagsOutput(v **Create
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -1152,6 +1168,10 @@ func awsRestxml_deserializeOpDocumentCreateFieldLevelEncryptionConfigOutput(v **
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -1328,6 +1348,10 @@ func awsRestxml_deserializeOpDocumentCreateFieldLevelEncryptionProfileOutput(v *
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -1496,6 +1520,10 @@ func awsRestxml_deserializeOpDocumentCreateInvalidationOutput(v **CreateInvalida
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -1660,6 +1688,10 @@ func awsRestxml_deserializeOpDocumentCreateKeyGroupOutput(v **CreateKeyGroupOutp
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -1796,6 +1828,10 @@ func awsRestxml_deserializeOpDocumentCreateMonitoringSubscriptionOutput(v **Crea
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -1972,6 +2008,10 @@ func awsRestxml_deserializeOpDocumentCreateOriginRequestPolicyOutput(v **CreateO
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -2133,6 +2173,10 @@ func awsRestxml_deserializeOpDocumentCreatePublicKeyOutput(v **CreatePublicKeyOu
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -2275,6 +2319,10 @@ func awsRestxml_deserializeOpDocumentCreateRealtimeLogConfigOutput(v **CreateRea
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -2463,6 +2511,10 @@ func awsRestxml_deserializeOpDocumentCreateStreamingDistributionOutput(v **Creat
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -2654,6 +2706,10 @@ func awsRestxml_deserializeOpDocumentCreateStreamingDistributionWithTagsOutput(v
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -3667,6 +3723,10 @@ func awsRestxml_deserializeOpDocumentGetCachePolicyOutput(v **GetCachePolicyOutp
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -3820,6 +3880,10 @@ func awsRestxml_deserializeOpDocumentGetCachePolicyConfigOutput(v **GetCachePoli
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -3973,6 +4037,10 @@ func awsRestxml_deserializeOpDocumentGetCloudFrontOriginAccessIdentityOutput(v *
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4126,6 +4194,10 @@ func awsRestxml_deserializeOpDocumentGetCloudFrontOriginAccessIdentityConfigOutp
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4279,6 +4351,10 @@ func awsRestxml_deserializeOpDocumentGetDistributionOutput(v **GetDistributionOu
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4432,6 +4508,10 @@ func awsRestxml_deserializeOpDocumentGetDistributionConfigOutput(v **GetDistribu
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4585,6 +4665,10 @@ func awsRestxml_deserializeOpDocumentGetFieldLevelEncryptionOutput(v **GetFieldL
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4738,6 +4822,10 @@ func awsRestxml_deserializeOpDocumentGetFieldLevelEncryptionConfigOutput(v **Get
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -4891,6 +4979,10 @@ func awsRestxml_deserializeOpDocumentGetFieldLevelEncryptionProfileOutput(v **Ge
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -5044,6 +5136,10 @@ func awsRestxml_deserializeOpDocumentGetFieldLevelEncryptionProfileConfigOutput(
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -5183,6 +5279,10 @@ func awsRestxml_deserializeOpDocumentGetInvalidationOutput(v **GetInvalidationOu
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -5333,6 +5433,10 @@ func awsRestxml_deserializeOpDocumentGetKeyGroupOutput(v **GetKeyGroupOutput, de
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -5483,6 +5587,10 @@ func awsRestxml_deserializeOpDocumentGetKeyGroupConfigOutput(v **GetKeyGroupConf
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -5619,6 +5727,10 @@ func awsRestxml_deserializeOpDocumentGetMonitoringSubscriptionOutput(v **GetMoni
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -5772,6 +5884,10 @@ func awsRestxml_deserializeOpDocumentGetOriginRequestPolicyOutput(v **GetOriginR
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -5925,6 +6041,10 @@ func awsRestxml_deserializeOpDocumentGetOriginRequestPolicyConfigOutput(v **GetO
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -6078,6 +6198,10 @@ func awsRestxml_deserializeOpDocumentGetPublicKeyOutput(v **GetPublicKeyOutput, 
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -6231,6 +6355,10 @@ func awsRestxml_deserializeOpDocumentGetPublicKeyConfigOutput(v **GetPublicKeyCo
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -6370,6 +6498,10 @@ func awsRestxml_deserializeOpDocumentGetRealtimeLogConfigOutput(v **GetRealtimeL
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -6523,6 +6655,10 @@ func awsRestxml_deserializeOpDocumentGetStreamingDistributionOutput(v **GetStrea
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -6676,6 +6812,10 @@ func awsRestxml_deserializeOpDocumentGetStreamingDistributionConfigOutput(v **Ge
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -6815,6 +6955,10 @@ func awsRestxml_deserializeOpDocumentListCachePoliciesOutput(v **ListCachePolici
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -6948,6 +7092,10 @@ func awsRestxml_deserializeOpDocumentListCloudFrontOriginAccessIdentitiesOutput(
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -7081,6 +7229,10 @@ func awsRestxml_deserializeOpDocumentListDistributionsOutput(v **ListDistributio
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -7220,6 +7372,10 @@ func awsRestxml_deserializeOpDocumentListDistributionsByCachePolicyIdOutput(v **
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -7356,6 +7512,10 @@ func awsRestxml_deserializeOpDocumentListDistributionsByKeyGroupOutput(v **ListD
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -7495,6 +7655,10 @@ func awsRestxml_deserializeOpDocumentListDistributionsByOriginRequestPolicyIdOut
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -7628,6 +7792,10 @@ func awsRestxml_deserializeOpDocumentListDistributionsByRealtimeLogConfigOutput(
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -7764,6 +7932,10 @@ func awsRestxml_deserializeOpDocumentListDistributionsByWebACLIdOutput(v **ListD
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -7897,6 +8069,10 @@ func awsRestxml_deserializeOpDocumentListFieldLevelEncryptionConfigsOutput(v **L
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -8030,6 +8206,10 @@ func awsRestxml_deserializeOpDocumentListFieldLevelEncryptionProfilesOutput(v **
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -8169,6 +8349,10 @@ func awsRestxml_deserializeOpDocumentListInvalidationsOutput(v **ListInvalidatio
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -8302,6 +8486,10 @@ func awsRestxml_deserializeOpDocumentListKeyGroupsOutput(v **ListKeyGroupsOutput
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -8441,6 +8629,10 @@ func awsRestxml_deserializeOpDocumentListOriginRequestPoliciesOutput(v **ListOri
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -8574,6 +8766,10 @@ func awsRestxml_deserializeOpDocumentListPublicKeysOutput(v **ListPublicKeysOutp
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -8713,6 +8909,10 @@ func awsRestxml_deserializeOpDocumentListRealtimeLogConfigsOutput(v **ListRealti
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -8846,6 +9046,10 @@ func awsRestxml_deserializeOpDocumentListStreamingDistributionsOutput(v **ListSt
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -8988,6 +9192,10 @@ func awsRestxml_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForRe
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -9320,6 +9528,10 @@ func awsRestxml_deserializeOpDocumentUpdateCachePolicyOutput(v **UpdateCachePoli
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -9491,6 +9703,10 @@ func awsRestxml_deserializeOpDocumentUpdateCloudFrontOriginAccessIdentityOutput(
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -9794,6 +10010,10 @@ func awsRestxml_deserializeOpDocumentUpdateDistributionOutput(v **UpdateDistribu
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -9974,6 +10194,10 @@ func awsRestxml_deserializeOpDocumentUpdateFieldLevelEncryptionConfigOutput(v **
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -10157,6 +10381,10 @@ func awsRestxml_deserializeOpDocumentUpdateFieldLevelEncryptionProfileOutput(v *
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -10322,6 +10550,10 @@ func awsRestxml_deserializeOpDocumentUpdateKeyGroupOutput(v **UpdateKeyGroupOutp
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -10502,6 +10734,10 @@ func awsRestxml_deserializeOpDocumentUpdateOriginRequestPolicyOutput(v **UpdateO
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -10670,6 +10906,10 @@ func awsRestxml_deserializeOpDocumentUpdatePublicKeyOutput(v **UpdatePublicKeyOu
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -10809,6 +11049,10 @@ func awsRestxml_deserializeOpDocumentUpdateRealtimeLogConfigOutput(v **UpdateRea
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -10995,6 +11239,10 @@ func awsRestxml_deserializeOpDocumentUpdateStreamingDistributionOutput(v **Updat
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -11023,6 +11271,17 @@ func awsRestxml_deserializeErrorAccessDenied(response *smithyhttp.Response, erro
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentAccessDenied(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11056,6 +11315,17 @@ func awsRestxml_deserializeErrorBatchTooLarge(response *smithyhttp.Response, err
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentBatchTooLarge(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11089,6 +11359,17 @@ func awsRestxml_deserializeErrorCachePolicyAlreadyExists(response *smithyhttp.Re
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentCachePolicyAlreadyExists(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11122,6 +11403,17 @@ func awsRestxml_deserializeErrorCachePolicyInUse(response *smithyhttp.Response, 
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentCachePolicyInUse(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11155,6 +11447,17 @@ func awsRestxml_deserializeErrorCannotChangeImmutablePublicKeyFields(response *s
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentCannotChangeImmutablePublicKeyFields(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11188,6 +11491,17 @@ func awsRestxml_deserializeErrorCloudFrontOriginAccessIdentityAlreadyExists(resp
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentCloudFrontOriginAccessIdentityAlreadyExists(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11221,6 +11535,17 @@ func awsRestxml_deserializeErrorCloudFrontOriginAccessIdentityInUse(response *sm
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentCloudFrontOriginAccessIdentityInUse(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11254,6 +11579,17 @@ func awsRestxml_deserializeErrorCNAMEAlreadyExists(response *smithyhttp.Response
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentCNAMEAlreadyExists(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11287,6 +11623,17 @@ func awsRestxml_deserializeErrorDistributionAlreadyExists(response *smithyhttp.R
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentDistributionAlreadyExists(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11320,6 +11667,17 @@ func awsRestxml_deserializeErrorDistributionNotDisabled(response *smithyhttp.Res
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentDistributionNotDisabled(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11353,6 +11711,17 @@ func awsRestxml_deserializeErrorFieldLevelEncryptionConfigAlreadyExists(response
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentFieldLevelEncryptionConfigAlreadyExists(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11386,6 +11755,17 @@ func awsRestxml_deserializeErrorFieldLevelEncryptionConfigInUse(response *smithy
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentFieldLevelEncryptionConfigInUse(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11419,6 +11799,17 @@ func awsRestxml_deserializeErrorFieldLevelEncryptionProfileAlreadyExists(respons
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentFieldLevelEncryptionProfileAlreadyExists(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11452,6 +11843,17 @@ func awsRestxml_deserializeErrorFieldLevelEncryptionProfileInUse(response *smith
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentFieldLevelEncryptionProfileInUse(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11485,6 +11887,17 @@ func awsRestxml_deserializeErrorFieldLevelEncryptionProfileSizeExceeded(response
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentFieldLevelEncryptionProfileSizeExceeded(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11518,6 +11931,17 @@ func awsRestxml_deserializeErrorIllegalDelete(response *smithyhttp.Response, err
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentIllegalDelete(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11551,6 +11975,17 @@ func awsRestxml_deserializeErrorIllegalFieldLevelEncryptionConfigAssociationWith
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentIllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11584,6 +12019,17 @@ func awsRestxml_deserializeErrorIllegalUpdate(response *smithyhttp.Response, err
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentIllegalUpdate(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11617,6 +12063,17 @@ func awsRestxml_deserializeErrorInconsistentQuantities(response *smithyhttp.Resp
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInconsistentQuantities(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11650,6 +12107,17 @@ func awsRestxml_deserializeErrorInvalidArgument(response *smithyhttp.Response, e
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidArgument(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11683,6 +12151,17 @@ func awsRestxml_deserializeErrorInvalidDefaultRootObject(response *smithyhttp.Re
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidDefaultRootObject(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11716,6 +12195,17 @@ func awsRestxml_deserializeErrorInvalidErrorCode(response *smithyhttp.Response, 
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidErrorCode(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11749,6 +12239,17 @@ func awsRestxml_deserializeErrorInvalidForwardCookies(response *smithyhttp.Respo
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidForwardCookies(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11782,6 +12283,17 @@ func awsRestxml_deserializeErrorInvalidGeoRestrictionParameter(response *smithyh
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidGeoRestrictionParameter(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11815,6 +12327,17 @@ func awsRestxml_deserializeErrorInvalidHeadersForS3Origin(response *smithyhttp.R
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidHeadersForS3Origin(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11848,6 +12371,17 @@ func awsRestxml_deserializeErrorInvalidIfMatchVersion(response *smithyhttp.Respo
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidIfMatchVersion(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11881,6 +12415,17 @@ func awsRestxml_deserializeErrorInvalidLambdaFunctionAssociation(response *smith
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidLambdaFunctionAssociation(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11914,6 +12459,17 @@ func awsRestxml_deserializeErrorInvalidLocationCode(response *smithyhttp.Respons
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidLocationCode(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11947,6 +12503,17 @@ func awsRestxml_deserializeErrorInvalidMinimumProtocolVersion(response *smithyht
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidMinimumProtocolVersion(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11980,6 +12547,17 @@ func awsRestxml_deserializeErrorInvalidOrigin(response *smithyhttp.Response, err
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidOrigin(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12013,6 +12591,17 @@ func awsRestxml_deserializeErrorInvalidOriginAccessIdentity(response *smithyhttp
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidOriginAccessIdentity(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12046,6 +12635,17 @@ func awsRestxml_deserializeErrorInvalidOriginKeepaliveTimeout(response *smithyht
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidOriginKeepaliveTimeout(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12079,6 +12679,17 @@ func awsRestxml_deserializeErrorInvalidOriginReadTimeout(response *smithyhttp.Re
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidOriginReadTimeout(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12112,6 +12723,17 @@ func awsRestxml_deserializeErrorInvalidProtocolSettings(response *smithyhttp.Res
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidProtocolSettings(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12145,6 +12767,17 @@ func awsRestxml_deserializeErrorInvalidQueryStringParameters(response *smithyhtt
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidQueryStringParameters(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12178,6 +12811,17 @@ func awsRestxml_deserializeErrorInvalidRelativePath(response *smithyhttp.Respons
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidRelativePath(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12211,6 +12855,17 @@ func awsRestxml_deserializeErrorInvalidRequiredProtocol(response *smithyhttp.Res
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidRequiredProtocol(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12244,6 +12899,17 @@ func awsRestxml_deserializeErrorInvalidResponseCode(response *smithyhttp.Respons
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidResponseCode(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12277,6 +12943,17 @@ func awsRestxml_deserializeErrorInvalidTagging(response *smithyhttp.Response, er
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidTagging(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12310,6 +12987,17 @@ func awsRestxml_deserializeErrorInvalidTTLOrder(response *smithyhttp.Response, e
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidTTLOrder(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12343,6 +13031,17 @@ func awsRestxml_deserializeErrorInvalidViewerCertificate(response *smithyhttp.Re
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidViewerCertificate(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12376,6 +13075,17 @@ func awsRestxml_deserializeErrorInvalidWebACLId(response *smithyhttp.Response, e
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidWebACLId(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12409,6 +13119,17 @@ func awsRestxml_deserializeErrorKeyGroupAlreadyExists(response *smithyhttp.Respo
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentKeyGroupAlreadyExists(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12442,6 +13163,17 @@ func awsRestxml_deserializeErrorMissingBody(response *smithyhttp.Response, error
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentMissingBody(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12475,6 +13207,17 @@ func awsRestxml_deserializeErrorNoSuchCachePolicy(response *smithyhttp.Response,
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentNoSuchCachePolicy(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12508,6 +13251,17 @@ func awsRestxml_deserializeErrorNoSuchCloudFrontOriginAccessIdentity(response *s
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentNoSuchCloudFrontOriginAccessIdentity(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12541,6 +13295,17 @@ func awsRestxml_deserializeErrorNoSuchDistribution(response *smithyhttp.Response
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentNoSuchDistribution(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12574,6 +13339,17 @@ func awsRestxml_deserializeErrorNoSuchFieldLevelEncryptionConfig(response *smith
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentNoSuchFieldLevelEncryptionConfig(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12607,6 +13383,17 @@ func awsRestxml_deserializeErrorNoSuchFieldLevelEncryptionProfile(response *smit
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentNoSuchFieldLevelEncryptionProfile(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12640,6 +13427,17 @@ func awsRestxml_deserializeErrorNoSuchInvalidation(response *smithyhttp.Response
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentNoSuchInvalidation(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12673,6 +13471,17 @@ func awsRestxml_deserializeErrorNoSuchOrigin(response *smithyhttp.Response, erro
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentNoSuchOrigin(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12706,6 +13515,17 @@ func awsRestxml_deserializeErrorNoSuchOriginRequestPolicy(response *smithyhttp.R
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentNoSuchOriginRequestPolicy(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12739,6 +13559,17 @@ func awsRestxml_deserializeErrorNoSuchPublicKey(response *smithyhttp.Response, e
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentNoSuchPublicKey(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12772,6 +13603,17 @@ func awsRestxml_deserializeErrorNoSuchRealtimeLogConfig(response *smithyhttp.Res
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentNoSuchRealtimeLogConfig(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12805,6 +13647,17 @@ func awsRestxml_deserializeErrorNoSuchResource(response *smithyhttp.Response, er
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentNoSuchResource(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12838,6 +13691,17 @@ func awsRestxml_deserializeErrorNoSuchStreamingDistribution(response *smithyhttp
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentNoSuchStreamingDistribution(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12871,6 +13735,17 @@ func awsRestxml_deserializeErrorOriginRequestPolicyAlreadyExists(response *smith
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentOriginRequestPolicyAlreadyExists(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12904,6 +13779,17 @@ func awsRestxml_deserializeErrorOriginRequestPolicyInUse(response *smithyhttp.Re
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentOriginRequestPolicyInUse(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12937,6 +13823,17 @@ func awsRestxml_deserializeErrorPreconditionFailed(response *smithyhttp.Response
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentPreconditionFailed(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12970,6 +13867,17 @@ func awsRestxml_deserializeErrorPublicKeyAlreadyExists(response *smithyhttp.Resp
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentPublicKeyAlreadyExists(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13003,6 +13911,17 @@ func awsRestxml_deserializeErrorPublicKeyInUse(response *smithyhttp.Response, er
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentPublicKeyInUse(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13036,6 +13955,17 @@ func awsRestxml_deserializeErrorQueryArgProfileEmpty(response *smithyhttp.Respon
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentQueryArgProfileEmpty(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13069,6 +13999,17 @@ func awsRestxml_deserializeErrorRealtimeLogConfigAlreadyExists(response *smithyh
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentRealtimeLogConfigAlreadyExists(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13102,6 +14043,17 @@ func awsRestxml_deserializeErrorRealtimeLogConfigInUse(response *smithyhttp.Resp
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentRealtimeLogConfigInUse(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13135,6 +14087,17 @@ func awsRestxml_deserializeErrorResourceInUse(response *smithyhttp.Response, err
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentResourceInUse(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13168,6 +14131,17 @@ func awsRestxml_deserializeErrorStreamingDistributionAlreadyExists(response *smi
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentStreamingDistributionAlreadyExists(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13201,6 +14175,17 @@ func awsRestxml_deserializeErrorStreamingDistributionNotDisabled(response *smith
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentStreamingDistributionNotDisabled(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13234,6 +14219,17 @@ func awsRestxml_deserializeErrorTooManyCacheBehaviors(response *smithyhttp.Respo
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyCacheBehaviors(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13267,6 +14263,17 @@ func awsRestxml_deserializeErrorTooManyCachePolicies(response *smithyhttp.Respon
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyCachePolicies(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13300,6 +14307,17 @@ func awsRestxml_deserializeErrorTooManyCertificates(response *smithyhttp.Respons
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyCertificates(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13333,6 +14351,17 @@ func awsRestxml_deserializeErrorTooManyCloudFrontOriginAccessIdentities(response
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyCloudFrontOriginAccessIdentities(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13366,6 +14395,17 @@ func awsRestxml_deserializeErrorTooManyCookieNamesInWhiteList(response *smithyht
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyCookieNamesInWhiteList(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13399,6 +14439,17 @@ func awsRestxml_deserializeErrorTooManyCookiesInCachePolicy(response *smithyhttp
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyCookiesInCachePolicy(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13432,6 +14483,17 @@ func awsRestxml_deserializeErrorTooManyCookiesInOriginRequestPolicy(response *sm
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyCookiesInOriginRequestPolicy(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13465,6 +14527,17 @@ func awsRestxml_deserializeErrorTooManyDistributionCNAMEs(response *smithyhttp.R
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyDistributionCNAMEs(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13498,6 +14571,17 @@ func awsRestxml_deserializeErrorTooManyDistributions(response *smithyhttp.Respon
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyDistributions(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13531,6 +14615,17 @@ func awsRestxml_deserializeErrorTooManyDistributionsAssociatedToCachePolicy(resp
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyDistributionsAssociatedToCachePolicy(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13564,6 +14659,17 @@ func awsRestxml_deserializeErrorTooManyDistributionsAssociatedToFieldLevelEncryp
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyDistributionsAssociatedToFieldLevelEncryptionConfig(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13597,6 +14703,17 @@ func awsRestxml_deserializeErrorTooManyDistributionsAssociatedToKeyGroup(respons
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyDistributionsAssociatedToKeyGroup(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13630,6 +14747,17 @@ func awsRestxml_deserializeErrorTooManyDistributionsAssociatedToOriginRequestPol
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyDistributionsAssociatedToOriginRequestPolicy(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13663,6 +14791,17 @@ func awsRestxml_deserializeErrorTooManyDistributionsWithLambdaAssociations(respo
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyDistributionsWithLambdaAssociations(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13696,6 +14835,17 @@ func awsRestxml_deserializeErrorTooManyDistributionsWithSingleFunctionARN(respon
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyDistributionsWithSingleFunctionARN(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13729,6 +14879,17 @@ func awsRestxml_deserializeErrorTooManyFieldLevelEncryptionConfigs(response *smi
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyFieldLevelEncryptionConfigs(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13762,6 +14923,17 @@ func awsRestxml_deserializeErrorTooManyFieldLevelEncryptionContentTypeProfiles(r
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyFieldLevelEncryptionContentTypeProfiles(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13795,6 +14967,17 @@ func awsRestxml_deserializeErrorTooManyFieldLevelEncryptionEncryptionEntities(re
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyFieldLevelEncryptionEncryptionEntities(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13828,6 +15011,17 @@ func awsRestxml_deserializeErrorTooManyFieldLevelEncryptionFieldPatterns(respons
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyFieldLevelEncryptionFieldPatterns(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13861,6 +15055,17 @@ func awsRestxml_deserializeErrorTooManyFieldLevelEncryptionProfiles(response *sm
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyFieldLevelEncryptionProfiles(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13894,6 +15099,17 @@ func awsRestxml_deserializeErrorTooManyFieldLevelEncryptionQueryArgProfiles(resp
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyFieldLevelEncryptionQueryArgProfiles(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13927,6 +15143,17 @@ func awsRestxml_deserializeErrorTooManyHeadersInCachePolicy(response *smithyhttp
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyHeadersInCachePolicy(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13960,6 +15187,17 @@ func awsRestxml_deserializeErrorTooManyHeadersInForwardedValues(response *smithy
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyHeadersInForwardedValues(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -13993,6 +15231,17 @@ func awsRestxml_deserializeErrorTooManyHeadersInOriginRequestPolicy(response *sm
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyHeadersInOriginRequestPolicy(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14026,6 +15275,17 @@ func awsRestxml_deserializeErrorTooManyInvalidationsInProgress(response *smithyh
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyInvalidationsInProgress(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14059,6 +15319,17 @@ func awsRestxml_deserializeErrorTooManyKeyGroups(response *smithyhttp.Response, 
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyKeyGroups(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14092,6 +15363,17 @@ func awsRestxml_deserializeErrorTooManyKeyGroupsAssociatedToDistribution(respons
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyKeyGroupsAssociatedToDistribution(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14125,6 +15407,17 @@ func awsRestxml_deserializeErrorTooManyLambdaFunctionAssociations(response *smit
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyLambdaFunctionAssociations(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14158,6 +15451,17 @@ func awsRestxml_deserializeErrorTooManyOriginCustomHeaders(response *smithyhttp.
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyOriginCustomHeaders(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14191,6 +15495,17 @@ func awsRestxml_deserializeErrorTooManyOriginGroupsPerDistribution(response *smi
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyOriginGroupsPerDistribution(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14224,6 +15539,17 @@ func awsRestxml_deserializeErrorTooManyOriginRequestPolicies(response *smithyhtt
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyOriginRequestPolicies(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14257,6 +15583,17 @@ func awsRestxml_deserializeErrorTooManyOrigins(response *smithyhttp.Response, er
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyOrigins(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14290,6 +15627,17 @@ func awsRestxml_deserializeErrorTooManyPublicKeys(response *smithyhttp.Response,
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyPublicKeys(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14323,6 +15671,17 @@ func awsRestxml_deserializeErrorTooManyPublicKeysInKeyGroup(response *smithyhttp
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyPublicKeysInKeyGroup(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14356,6 +15715,17 @@ func awsRestxml_deserializeErrorTooManyQueryStringParameters(response *smithyhtt
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyQueryStringParameters(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14389,6 +15759,17 @@ func awsRestxml_deserializeErrorTooManyQueryStringsInCachePolicy(response *smith
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyQueryStringsInCachePolicy(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14422,6 +15803,17 @@ func awsRestxml_deserializeErrorTooManyQueryStringsInOriginRequestPolicy(respons
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyQueryStringsInOriginRequestPolicy(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14455,6 +15847,17 @@ func awsRestxml_deserializeErrorTooManyRealtimeLogConfigs(response *smithyhttp.R
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyRealtimeLogConfigs(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14488,6 +15891,17 @@ func awsRestxml_deserializeErrorTooManyStreamingDistributionCNAMEs(response *smi
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyStreamingDistributionCNAMEs(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14521,6 +15935,17 @@ func awsRestxml_deserializeErrorTooManyStreamingDistributions(response *smithyht
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyStreamingDistributions(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14554,6 +15979,17 @@ func awsRestxml_deserializeErrorTooManyTrustedSigners(response *smithyhttp.Respo
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyTrustedSigners(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14587,6 +16023,17 @@ func awsRestxml_deserializeErrorTrustedKeyGroupDoesNotExist(response *smithyhttp
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTrustedKeyGroupDoesNotExist(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14620,6 +16067,17 @@ func awsRestxml_deserializeErrorTrustedSignerDoesNotExist(response *smithyhttp.R
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTrustedSignerDoesNotExist(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14656,23 +16114,24 @@ func awsRestxml_deserializeDocumentAccessDenied(v **types.AccessDenied, decoder 
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -14704,14 +16163,14 @@ func awsRestxml_deserializeDocumentActiveTrustedKeyGroups(v **types.ActiveTruste
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Enabled", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -14726,14 +16185,14 @@ func awsRestxml_deserializeDocumentActiveTrustedKeyGroups(v **types.ActiveTruste
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -14744,6 +16203,10 @@ func awsRestxml_deserializeDocumentActiveTrustedKeyGroups(v **types.ActiveTruste
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -14775,14 +16238,14 @@ func awsRestxml_deserializeDocumentActiveTrustedSigners(v **types.ActiveTrustedS
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Enabled", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -14797,14 +16260,14 @@ func awsRestxml_deserializeDocumentActiveTrustedSigners(v **types.ActiveTrustedS
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -14815,6 +16278,10 @@ func awsRestxml_deserializeDocumentActiveTrustedSigners(v **types.ActiveTrustedS
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -14852,14 +16319,14 @@ func awsRestxml_deserializeDocumentAliases(v **types.Aliases, decoder smithyxml.
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -14870,6 +16337,10 @@ func awsRestxml_deserializeDocumentAliases(v **types.Aliases, decoder smithyxml.
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -14901,36 +16372,37 @@ func awsRestxml_deserializeDocumentAliasICPRecordal(v **types.AliasICPRecordal, 
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("CNAME", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.CNAME = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.CNAME = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("ICPRecordalStatus", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.ICPRecordalStatus = types.ICPRecordalStatus(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -15029,18 +16501,19 @@ func awsRestxml_deserializeDocumentAliasList(v *[]string, decoder smithyxml.Node
 		for {
 			if strings.EqualFold("CNAME", t.Name.Local) {
 				var col string
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					col = xtv
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -15064,14 +16537,14 @@ func awsRestxml_deserializeDocumentAliasListUnwrapped(v *[]string, decoder smith
 		var mv string
 		t := decoder.StartEl
 		_ = t
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			mv = xtv
 		}
@@ -15115,14 +16588,14 @@ func awsRestxml_deserializeDocumentAllowedMethods(v **types.AllowedMethods, deco
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -15133,6 +16606,10 @@ func awsRestxml_deserializeDocumentAllowedMethods(v **types.AllowedMethods, deco
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -15166,18 +16643,19 @@ func awsRestxml_deserializeDocumentAwsAccountNumberList(v *[]string, decoder smi
 		for {
 			if strings.EqualFold("AwsAccountNumber", t.Name.Local) {
 				var col string
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					col = xtv
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -15201,14 +16679,14 @@ func awsRestxml_deserializeDocumentAwsAccountNumberListUnwrapped(v *[]string, de
 		var mv string
 		t := decoder.StartEl
 		_ = t
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			mv = xtv
 		}
@@ -15240,23 +16718,24 @@ func awsRestxml_deserializeDocumentBatchTooLarge(v **types.BatchTooLarge, decode
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -15294,30 +16773,27 @@ func awsRestxml_deserializeDocumentCacheBehavior(v **types.CacheBehavior, decode
 			}
 
 		case strings.EqualFold("CachePolicyId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.CachePolicyId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.CachePolicyId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Compress", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -15326,14 +16802,14 @@ func awsRestxml_deserializeDocumentCacheBehavior(v **types.CacheBehavior, decode
 			}
 
 		case strings.EqualFold("DefaultTTL", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -15343,17 +16819,14 @@ func awsRestxml_deserializeDocumentCacheBehavior(v **types.CacheBehavior, decode
 			}
 
 		case strings.EqualFold("FieldLevelEncryptionId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.FieldLevelEncryptionId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.FieldLevelEncryptionId = ptr.String(xtv)
 			}
@@ -15371,14 +16844,14 @@ func awsRestxml_deserializeDocumentCacheBehavior(v **types.CacheBehavior, decode
 			}
 
 		case strings.EqualFold("MaxTTL", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -15388,14 +16861,14 @@ func awsRestxml_deserializeDocumentCacheBehavior(v **types.CacheBehavior, decode
 			}
 
 		case strings.EqualFold("MinTTL", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -15405,62 +16878,53 @@ func awsRestxml_deserializeDocumentCacheBehavior(v **types.CacheBehavior, decode
 			}
 
 		case strings.EqualFold("OriginRequestPolicyId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.OriginRequestPolicyId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.OriginRequestPolicyId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("PathPattern", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.PathPattern = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.PathPattern = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("RealtimeLogConfigArn", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.RealtimeLogConfigArn = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.RealtimeLogConfigArn = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SmoothStreaming", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -15469,17 +16933,14 @@ func awsRestxml_deserializeDocumentCacheBehavior(v **types.CacheBehavior, decode
 			}
 
 		case strings.EqualFold("TargetOriginId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.TargetOriginId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.TargetOriginId = ptr.String(xtv)
 			}
@@ -15497,20 +16958,24 @@ func awsRestxml_deserializeDocumentCacheBehavior(v **types.CacheBehavior, decode
 			}
 
 		case strings.EqualFold("ViewerProtocolPolicy", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.ViewerProtocolPolicy = types.ViewerProtocolPolicy(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -15613,14 +17078,14 @@ func awsRestxml_deserializeDocumentCacheBehaviors(v **types.CacheBehaviors, deco
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -15631,6 +17096,10 @@ func awsRestxml_deserializeDocumentCacheBehaviors(v **types.CacheBehaviors, deco
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -15668,14 +17137,14 @@ func awsRestxml_deserializeDocumentCachedMethods(v **types.CachedMethods, decode
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -15686,6 +17155,10 @@ func awsRestxml_deserializeDocumentCachedMethods(v **types.CachedMethods, decode
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -15723,30 +17196,27 @@ func awsRestxml_deserializeDocumentCachePolicy(v **types.CachePolicy, decoder sm
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("LastModifiedTime", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				t, err := smithytime.ParseDateTime(xtv)
 				if err != nil {
@@ -15757,6 +17227,10 @@ func awsRestxml_deserializeDocumentCachePolicy(v **types.CachePolicy, decoder sm
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -15788,23 +17262,24 @@ func awsRestxml_deserializeDocumentCachePolicyAlreadyExists(v **types.CachePolic
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -15836,30 +17311,27 @@ func awsRestxml_deserializeDocumentCachePolicyConfig(v **types.CachePolicyConfig
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Comment", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Comment = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Comment = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("DefaultTTL", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -15869,14 +17341,14 @@ func awsRestxml_deserializeDocumentCachePolicyConfig(v **types.CachePolicyConfig
 			}
 
 		case strings.EqualFold("MaxTTL", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -15886,14 +17358,14 @@ func awsRestxml_deserializeDocumentCachePolicyConfig(v **types.CachePolicyConfig
 			}
 
 		case strings.EqualFold("MinTTL", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -15903,17 +17375,14 @@ func awsRestxml_deserializeDocumentCachePolicyConfig(v **types.CachePolicyConfig
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Name = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Name = ptr.String(xtv)
 			}
@@ -15926,6 +17395,10 @@ func awsRestxml_deserializeDocumentCachePolicyConfig(v **types.CachePolicyConfig
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -15957,14 +17430,14 @@ func awsRestxml_deserializeDocumentCachePolicyCookiesConfig(v **types.CachePolic
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("CookieBehavior", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.CookieBehavior = types.CachePolicyCookieBehavior(xtv)
 			}
@@ -15977,6 +17450,10 @@ func awsRestxml_deserializeDocumentCachePolicyCookiesConfig(v **types.CachePolic
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -16008,14 +17485,14 @@ func awsRestxml_deserializeDocumentCachePolicyHeadersConfig(v **types.CachePolic
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("HeaderBehavior", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.HeaderBehavior = types.CachePolicyHeaderBehavior(xtv)
 			}
@@ -16028,6 +17505,10 @@ func awsRestxml_deserializeDocumentCachePolicyHeadersConfig(v **types.CachePolic
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -16059,23 +17540,24 @@ func awsRestxml_deserializeDocumentCachePolicyInUse(v **types.CachePolicyInUse, 
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -16113,14 +17595,14 @@ func awsRestxml_deserializeDocumentCachePolicyList(v **types.CachePolicyList, de
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -16130,30 +17612,27 @@ func awsRestxml_deserializeDocumentCachePolicyList(v **types.CachePolicyList, de
 			}
 
 		case strings.EqualFold("NextMarker", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.NextMarker = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.NextMarker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -16164,6 +17643,10 @@ func awsRestxml_deserializeDocumentCachePolicyList(v **types.CachePolicyList, de
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -16195,14 +17678,14 @@ func awsRestxml_deserializeDocumentCachePolicyQueryStringsConfig(v **types.Cache
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("QueryStringBehavior", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.QueryStringBehavior = types.CachePolicyQueryStringBehavior(xtv)
 			}
@@ -16215,6 +17698,10 @@ func awsRestxml_deserializeDocumentCachePolicyQueryStringsConfig(v **types.Cache
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -16252,20 +17739,24 @@ func awsRestxml_deserializeDocumentCachePolicySummary(v **types.CachePolicySumma
 			}
 
 		case strings.EqualFold("Type", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Type = types.CachePolicyType(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -16362,23 +17853,24 @@ func awsRestxml_deserializeDocumentCannotChangeImmutablePublicKeyFields(v **type
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -16416,39 +17908,37 @@ func awsRestxml_deserializeDocumentCloudFrontOriginAccessIdentity(v **types.Clou
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("S3CanonicalUserId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.S3CanonicalUserId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.S3CanonicalUserId = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -16480,23 +17970,24 @@ func awsRestxml_deserializeDocumentCloudFrontOriginAccessIdentityAlreadyExists(v
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -16528,39 +18019,37 @@ func awsRestxml_deserializeDocumentCloudFrontOriginAccessIdentityConfig(v **type
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("CallerReference", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.CallerReference = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.CallerReference = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Comment", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Comment = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Comment = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -16592,23 +18081,24 @@ func awsRestxml_deserializeDocumentCloudFrontOriginAccessIdentityInUse(v **types
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -16640,14 +18130,14 @@ func awsRestxml_deserializeDocumentCloudFrontOriginAccessIdentityList(v **types.
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("IsTruncated", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -16662,30 +18152,27 @@ func awsRestxml_deserializeDocumentCloudFrontOriginAccessIdentityList(v **types.
 			}
 
 		case strings.EqualFold("Marker", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Marker = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Marker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -16695,30 +18182,27 @@ func awsRestxml_deserializeDocumentCloudFrontOriginAccessIdentityList(v **types.
 			}
 
 		case strings.EqualFold("NextMarker", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.NextMarker = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.NextMarker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -16729,6 +18213,10 @@ func awsRestxml_deserializeDocumentCloudFrontOriginAccessIdentityList(v **types.
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -16760,55 +18248,50 @@ func awsRestxml_deserializeDocumentCloudFrontOriginAccessIdentitySummary(v **typ
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Comment", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Comment = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Comment = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("S3CanonicalUserId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.S3CanonicalUserId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.S3CanonicalUserId = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -16905,23 +18388,24 @@ func awsRestxml_deserializeDocumentCNAMEAlreadyExists(v **types.CNAMEAlreadyExis
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -16953,52 +18437,50 @@ func awsRestxml_deserializeDocumentContentTypeProfile(v **types.ContentTypeProfi
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("ContentType", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.ContentType = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.ContentType = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Format", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Format = types.Format(xtv)
 			}
 
 		case strings.EqualFold("ProfileId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.ProfileId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.ProfileId = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -17036,14 +18518,14 @@ func awsRestxml_deserializeDocumentContentTypeProfileConfig(v **types.ContentTyp
 			}
 
 		case strings.EqualFold("ForwardWhenContentTypeIsUnknown", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -17053,6 +18535,10 @@ func awsRestxml_deserializeDocumentContentTypeProfileConfig(v **types.ContentTyp
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -17155,14 +18641,14 @@ func awsRestxml_deserializeDocumentContentTypeProfiles(v **types.ContentTypeProf
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -17173,6 +18659,10 @@ func awsRestxml_deserializeDocumentContentTypeProfiles(v **types.ContentTypeProf
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -17206,18 +18696,19 @@ func awsRestxml_deserializeDocumentCookieNameList(v *[]string, decoder smithyxml
 		for {
 			if strings.EqualFold("Name", t.Name.Local) {
 				var col string
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					col = xtv
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -17241,14 +18732,14 @@ func awsRestxml_deserializeDocumentCookieNameListUnwrapped(v *[]string, decoder 
 		var mv string
 		t := decoder.StartEl
 		_ = t
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			mv = xtv
 		}
@@ -17286,14 +18777,14 @@ func awsRestxml_deserializeDocumentCookieNames(v **types.CookieNames, decoder sm
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -17304,6 +18795,10 @@ func awsRestxml_deserializeDocumentCookieNames(v **types.CookieNames, decoder sm
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -17335,14 +18830,14 @@ func awsRestxml_deserializeDocumentCookiePreference(v **types.CookiePreference, 
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Forward", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Forward = types.ItemSelection(xtv)
 			}
@@ -17355,6 +18850,10 @@ func awsRestxml_deserializeDocumentCookiePreference(v **types.CookiePreference, 
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -17386,14 +18885,14 @@ func awsRestxml_deserializeDocumentCustomErrorResponse(v **types.CustomErrorResp
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("ErrorCachingMinTTL", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -17403,14 +18902,14 @@ func awsRestxml_deserializeDocumentCustomErrorResponse(v **types.CustomErrorResp
 			}
 
 		case strings.EqualFold("ErrorCode", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -17420,39 +18919,37 @@ func awsRestxml_deserializeDocumentCustomErrorResponse(v **types.CustomErrorResp
 			}
 
 		case strings.EqualFold("ResponseCode", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.ResponseCode = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.ResponseCode = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("ResponsePagePath", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.ResponsePagePath = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.ResponsePagePath = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -17555,14 +19052,14 @@ func awsRestxml_deserializeDocumentCustomErrorResponses(v **types.CustomErrorRes
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -17573,6 +19070,10 @@ func awsRestxml_deserializeDocumentCustomErrorResponses(v **types.CustomErrorRes
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -17610,14 +19111,14 @@ func awsRestxml_deserializeDocumentCustomHeaders(v **types.CustomHeaders, decode
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -17628,6 +19129,10 @@ func awsRestxml_deserializeDocumentCustomHeaders(v **types.CustomHeaders, decode
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -17659,14 +19164,14 @@ func awsRestxml_deserializeDocumentCustomOriginConfig(v **types.CustomOriginConf
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("HTTPPort", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -17676,14 +19181,14 @@ func awsRestxml_deserializeDocumentCustomOriginConfig(v **types.CustomOriginConf
 			}
 
 		case strings.EqualFold("HTTPSPort", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -17693,14 +19198,14 @@ func awsRestxml_deserializeDocumentCustomOriginConfig(v **types.CustomOriginConf
 			}
 
 		case strings.EqualFold("OriginKeepaliveTimeout", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -17710,27 +19215,27 @@ func awsRestxml_deserializeDocumentCustomOriginConfig(v **types.CustomOriginConf
 			}
 
 		case strings.EqualFold("OriginProtocolPolicy", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.OriginProtocolPolicy = types.OriginProtocolPolicy(xtv)
 			}
 
 		case strings.EqualFold("OriginReadTimeout", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -17747,6 +19252,10 @@ func awsRestxml_deserializeDocumentCustomOriginConfig(v **types.CustomOriginConf
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -17784,30 +19293,27 @@ func awsRestxml_deserializeDocumentDefaultCacheBehavior(v **types.DefaultCacheBe
 			}
 
 		case strings.EqualFold("CachePolicyId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.CachePolicyId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.CachePolicyId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Compress", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -17816,14 +19322,14 @@ func awsRestxml_deserializeDocumentDefaultCacheBehavior(v **types.DefaultCacheBe
 			}
 
 		case strings.EqualFold("DefaultTTL", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -17833,17 +19339,14 @@ func awsRestxml_deserializeDocumentDefaultCacheBehavior(v **types.DefaultCacheBe
 			}
 
 		case strings.EqualFold("FieldLevelEncryptionId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.FieldLevelEncryptionId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.FieldLevelEncryptionId = ptr.String(xtv)
 			}
@@ -17861,14 +19364,14 @@ func awsRestxml_deserializeDocumentDefaultCacheBehavior(v **types.DefaultCacheBe
 			}
 
 		case strings.EqualFold("MaxTTL", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -17878,14 +19381,14 @@ func awsRestxml_deserializeDocumentDefaultCacheBehavior(v **types.DefaultCacheBe
 			}
 
 		case strings.EqualFold("MinTTL", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -17895,46 +19398,40 @@ func awsRestxml_deserializeDocumentDefaultCacheBehavior(v **types.DefaultCacheBe
 			}
 
 		case strings.EqualFold("OriginRequestPolicyId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.OriginRequestPolicyId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.OriginRequestPolicyId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("RealtimeLogConfigArn", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.RealtimeLogConfigArn = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.RealtimeLogConfigArn = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SmoothStreaming", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -17943,17 +19440,14 @@ func awsRestxml_deserializeDocumentDefaultCacheBehavior(v **types.DefaultCacheBe
 			}
 
 		case strings.EqualFold("TargetOriginId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.TargetOriginId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.TargetOriginId = ptr.String(xtv)
 			}
@@ -17971,20 +19465,24 @@ func awsRestxml_deserializeDocumentDefaultCacheBehavior(v **types.DefaultCacheBe
 			}
 
 		case strings.EqualFold("ViewerProtocolPolicy", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.ViewerProtocolPolicy = types.ViewerProtocolPolicy(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -18034,17 +19532,14 @@ func awsRestxml_deserializeDocumentDistribution(v **types.Distribution, decoder 
 			}
 
 		case strings.EqualFold("ARN", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.ARN = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.ARN = ptr.String(xtv)
 			}
@@ -18056,46 +19551,40 @@ func awsRestxml_deserializeDocumentDistribution(v **types.Distribution, decoder 
 			}
 
 		case strings.EqualFold("DomainName", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.DomainName = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.DomainName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("InProgressInvalidationBatches", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -18105,14 +19594,14 @@ func awsRestxml_deserializeDocumentDistribution(v **types.Distribution, decoder 
 			}
 
 		case strings.EqualFold("LastModifiedTime", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				t, err := smithytime.ParseDateTime(xtv)
 				if err != nil {
@@ -18122,23 +19611,24 @@ func awsRestxml_deserializeDocumentDistribution(v **types.Distribution, decoder 
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Status = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Status = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -18170,23 +19660,24 @@ func awsRestxml_deserializeDocumentDistributionAlreadyExists(v **types.Distribut
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -18230,33 +19721,27 @@ func awsRestxml_deserializeDocumentDistributionConfig(v **types.DistributionConf
 			}
 
 		case strings.EqualFold("CallerReference", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.CallerReference = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.CallerReference = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Comment", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Comment = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Comment = ptr.String(xtv)
 			}
@@ -18274,30 +19759,27 @@ func awsRestxml_deserializeDocumentDistributionConfig(v **types.DistributionConf
 			}
 
 		case strings.EqualFold("DefaultRootObject", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.DefaultRootObject = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.DefaultRootObject = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Enabled", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -18306,27 +19788,27 @@ func awsRestxml_deserializeDocumentDistributionConfig(v **types.DistributionConf
 			}
 
 		case strings.EqualFold("HttpVersion", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.HttpVersion = types.HttpVersion(xtv)
 			}
 
 		case strings.EqualFold("IsIPV6Enabled", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -18353,14 +19835,14 @@ func awsRestxml_deserializeDocumentDistributionConfig(v **types.DistributionConf
 			}
 
 		case strings.EqualFold("PriceClass", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.PriceClass = types.PriceClass(xtv)
 			}
@@ -18378,23 +19860,24 @@ func awsRestxml_deserializeDocumentDistributionConfig(v **types.DistributionConf
 			}
 
 		case strings.EqualFold("WebACLId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.WebACLId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.WebACLId = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -18426,14 +19909,14 @@ func awsRestxml_deserializeDocumentDistributionIdList(v **types.DistributionIdLi
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("IsTruncated", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -18448,30 +19931,27 @@ func awsRestxml_deserializeDocumentDistributionIdList(v **types.DistributionIdLi
 			}
 
 		case strings.EqualFold("Marker", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Marker = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Marker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -18481,30 +19961,27 @@ func awsRestxml_deserializeDocumentDistributionIdList(v **types.DistributionIdLi
 			}
 
 		case strings.EqualFold("NextMarker", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.NextMarker = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.NextMarker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -18515,6 +19992,10 @@ func awsRestxml_deserializeDocumentDistributionIdList(v **types.DistributionIdLi
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -18548,18 +20029,19 @@ func awsRestxml_deserializeDocumentDistributionIdListSummary(v *[]string, decode
 		for {
 			if strings.EqualFold("DistributionId", t.Name.Local) {
 				var col string
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					col = xtv
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -18583,14 +20065,14 @@ func awsRestxml_deserializeDocumentDistributionIdListSummaryUnwrapped(v *[]strin
 		var mv string
 		t := decoder.StartEl
 		_ = t
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			mv = xtv
 		}
@@ -18622,14 +20104,14 @@ func awsRestxml_deserializeDocumentDistributionList(v **types.DistributionList, 
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("IsTruncated", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -18644,30 +20126,27 @@ func awsRestxml_deserializeDocumentDistributionList(v **types.DistributionList, 
 			}
 
 		case strings.EqualFold("Marker", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Marker = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Marker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -18677,30 +20156,27 @@ func awsRestxml_deserializeDocumentDistributionList(v **types.DistributionList, 
 			}
 
 		case strings.EqualFold("NextMarker", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.NextMarker = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.NextMarker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -18711,6 +20187,10 @@ func awsRestxml_deserializeDocumentDistributionList(v **types.DistributionList, 
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -18742,23 +20222,24 @@ func awsRestxml_deserializeDocumentDistributionNotDisabled(v **types.Distributio
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -18802,17 +20283,14 @@ func awsRestxml_deserializeDocumentDistributionSummary(v **types.DistributionSum
 			}
 
 		case strings.EqualFold("ARN", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.ARN = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.ARN = ptr.String(xtv)
 			}
@@ -18824,17 +20302,14 @@ func awsRestxml_deserializeDocumentDistributionSummary(v **types.DistributionSum
 			}
 
 		case strings.EqualFold("Comment", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Comment = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Comment = ptr.String(xtv)
 			}
@@ -18852,30 +20327,27 @@ func awsRestxml_deserializeDocumentDistributionSummary(v **types.DistributionSum
 			}
 
 		case strings.EqualFold("DomainName", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.DomainName = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.DomainName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Enabled", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -18884,43 +20356,40 @@ func awsRestxml_deserializeDocumentDistributionSummary(v **types.DistributionSum
 			}
 
 		case strings.EqualFold("HttpVersion", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.HttpVersion = types.HttpVersion(xtv)
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("IsIPV6Enabled", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -18929,14 +20398,14 @@ func awsRestxml_deserializeDocumentDistributionSummary(v **types.DistributionSum
 			}
 
 		case strings.EqualFold("LastModifiedTime", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				t, err := smithytime.ParseDateTime(xtv)
 				if err != nil {
@@ -18958,14 +20427,14 @@ func awsRestxml_deserializeDocumentDistributionSummary(v **types.DistributionSum
 			}
 
 		case strings.EqualFold("PriceClass", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.PriceClass = types.PriceClass(xtv)
 			}
@@ -18977,17 +20446,14 @@ func awsRestxml_deserializeDocumentDistributionSummary(v **types.DistributionSum
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Status = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Status = ptr.String(xtv)
 			}
@@ -18999,23 +20465,24 @@ func awsRestxml_deserializeDocumentDistributionSummary(v **types.DistributionSum
 			}
 
 		case strings.EqualFold("WebACLId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.WebACLId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.WebACLId = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -19118,14 +20585,14 @@ func awsRestxml_deserializeDocumentEncryptionEntities(v **types.EncryptionEntiti
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -19136,6 +20603,10 @@ func awsRestxml_deserializeDocumentEncryptionEntities(v **types.EncryptionEntiti
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -19173,39 +20644,37 @@ func awsRestxml_deserializeDocumentEncryptionEntity(v **types.EncryptionEntity, 
 			}
 
 		case strings.EqualFold("ProviderId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.ProviderId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.ProviderId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("PublicKeyId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.PublicKeyId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.PublicKeyId = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -19308,23 +20777,24 @@ func awsRestxml_deserializeDocumentEndPoint(v **types.EndPoint, decoder smithyxm
 			}
 
 		case strings.EqualFold("StreamType", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.StreamType = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.StreamType = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -19427,30 +20897,27 @@ func awsRestxml_deserializeDocumentFieldLevelEncryption(v **types.FieldLevelEncr
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("LastModifiedTime", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				t, err := smithytime.ParseDateTime(xtv)
 				if err != nil {
@@ -19461,6 +20928,10 @@ func awsRestxml_deserializeDocumentFieldLevelEncryption(v **types.FieldLevelEncr
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -19492,33 +20963,27 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionConfig(v **types.FieldLev
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("CallerReference", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.CallerReference = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.CallerReference = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Comment", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Comment = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Comment = ptr.String(xtv)
 			}
@@ -19537,6 +21002,10 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionConfig(v **types.FieldLev
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -19568,23 +21037,24 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionConfigAlreadyExists(v **t
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -19616,23 +21086,24 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionConfigInUse(v **types.Fie
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -19670,14 +21141,14 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionList(v **types.FieldLevel
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -19687,30 +21158,27 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionList(v **types.FieldLevel
 			}
 
 		case strings.EqualFold("NextMarker", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.NextMarker = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.NextMarker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -19721,6 +21189,10 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionList(v **types.FieldLevel
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -19758,30 +21230,27 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionProfile(v **types.FieldLe
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("LastModifiedTime", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				t, err := smithytime.ParseDateTime(xtv)
 				if err != nil {
@@ -19792,6 +21261,10 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionProfile(v **types.FieldLe
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -19823,23 +21296,24 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionProfileAlreadyExists(v **
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -19871,33 +21345,27 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionProfileConfig(v **types.F
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("CallerReference", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.CallerReference = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.CallerReference = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Comment", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Comment = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Comment = ptr.String(xtv)
 			}
@@ -19909,23 +21377,24 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionProfileConfig(v **types.F
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Name = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Name = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -19957,23 +21426,24 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionProfileInUse(v **types.Fi
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -20011,14 +21481,14 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionProfileList(v **types.Fie
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -20028,30 +21498,27 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionProfileList(v **types.Fie
 			}
 
 		case strings.EqualFold("NextMarker", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.NextMarker = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.NextMarker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -20062,6 +21529,10 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionProfileList(v **types.Fie
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -20093,23 +21564,24 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionProfileSizeExceeded(v **t
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -20141,17 +21613,14 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionProfileSummary(v **types.
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Comment", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Comment = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Comment = ptr.String(xtv)
 			}
@@ -20163,30 +21632,27 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionProfileSummary(v **types.
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("LastModifiedTime", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				t, err := smithytime.ParseDateTime(xtv)
 				if err != nil {
@@ -20196,23 +21662,24 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionProfileSummary(v **types.
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Name = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Name = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -20309,17 +21776,14 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionSummary(v **types.FieldLe
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Comment", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Comment = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Comment = ptr.String(xtv)
 			}
@@ -20331,30 +21795,27 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionSummary(v **types.FieldLe
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("LastModifiedTime", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				t, err := smithytime.ParseDateTime(xtv)
 				if err != nil {
@@ -20371,6 +21832,10 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionSummary(v **types.FieldLe
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -20469,18 +21934,19 @@ func awsRestxml_deserializeDocumentFieldList(v *[]string, decoder smithyxml.Node
 		for {
 			if strings.EqualFold("Field", t.Name.Local) {
 				var col string
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					col = xtv
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -20504,14 +21970,14 @@ func awsRestxml_deserializeDocumentFieldListUnwrapped(v *[]string, decoder smith
 		var mv string
 		t := decoder.StartEl
 		_ = t
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			mv = xtv
 		}
@@ -20545,18 +22011,19 @@ func awsRestxml_deserializeDocumentFieldPatternList(v *[]string, decoder smithyx
 		for {
 			if strings.EqualFold("FieldPattern", t.Name.Local) {
 				var col string
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					col = xtv
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -20580,14 +22047,14 @@ func awsRestxml_deserializeDocumentFieldPatternListUnwrapped(v *[]string, decode
 		var mv string
 		t := decoder.StartEl
 		_ = t
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			mv = xtv
 		}
@@ -20625,14 +22092,14 @@ func awsRestxml_deserializeDocumentFieldPatterns(v **types.FieldPatterns, decode
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -20643,6 +22110,10 @@ func awsRestxml_deserializeDocumentFieldPatterns(v **types.FieldPatterns, decode
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -20686,14 +22157,14 @@ func awsRestxml_deserializeDocumentForwardedValues(v **types.ForwardedValues, de
 			}
 
 		case strings.EqualFold("QueryString", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -20709,6 +22180,10 @@ func awsRestxml_deserializeDocumentForwardedValues(v **types.ForwardedValues, de
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -20746,14 +22221,14 @@ func awsRestxml_deserializeDocumentGeoRestriction(v **types.GeoRestriction, deco
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -20763,20 +22238,24 @@ func awsRestxml_deserializeDocumentGeoRestriction(v **types.GeoRestriction, deco
 			}
 
 		case strings.EqualFold("RestrictionType", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.RestrictionType = types.GeoRestrictionType(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -20810,18 +22289,19 @@ func awsRestxml_deserializeDocumentHeaderList(v *[]string, decoder smithyxml.Nod
 		for {
 			if strings.EqualFold("Name", t.Name.Local) {
 				var col string
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					col = xtv
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -20845,14 +22325,14 @@ func awsRestxml_deserializeDocumentHeaderListUnwrapped(v *[]string, decoder smit
 		var mv string
 		t := decoder.StartEl
 		_ = t
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			mv = xtv
 		}
@@ -20890,14 +22370,14 @@ func awsRestxml_deserializeDocumentHeaders(v **types.Headers, decoder smithyxml.
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -20908,6 +22388,10 @@ func awsRestxml_deserializeDocumentHeaders(v **types.Headers, decoder smithyxml.
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -20939,23 +22423,24 @@ func awsRestxml_deserializeDocumentIllegalDelete(v **types.IllegalDelete, decode
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -20987,23 +22472,24 @@ func awsRestxml_deserializeDocumentIllegalFieldLevelEncryptionConfigAssociationW
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -21035,23 +22521,24 @@ func awsRestxml_deserializeDocumentIllegalUpdate(v **types.IllegalUpdate, decode
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -21083,23 +22570,24 @@ func awsRestxml_deserializeDocumentInconsistentQuantities(v **types.Inconsistent
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -21131,23 +22619,24 @@ func awsRestxml_deserializeDocumentInvalidArgument(v **types.InvalidArgument, de
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -21179,14 +22668,14 @@ func awsRestxml_deserializeDocumentInvalidation(v **types.Invalidation, decoder 
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("CreateTime", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				t, err := smithytime.ParseDateTime(xtv)
 				if err != nil {
@@ -21196,17 +22685,14 @@ func awsRestxml_deserializeDocumentInvalidation(v **types.Invalidation, decoder 
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
@@ -21218,23 +22704,24 @@ func awsRestxml_deserializeDocumentInvalidation(v **types.Invalidation, decoder 
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Status = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Status = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -21266,17 +22753,14 @@ func awsRestxml_deserializeDocumentInvalidationBatch(v **types.InvalidationBatch
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("CallerReference", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.CallerReference = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.CallerReference = ptr.String(xtv)
 			}
@@ -21289,6 +22773,10 @@ func awsRestxml_deserializeDocumentInvalidationBatch(v **types.InvalidationBatch
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -21320,14 +22808,14 @@ func awsRestxml_deserializeDocumentInvalidationList(v **types.InvalidationList, 
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("IsTruncated", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -21342,30 +22830,27 @@ func awsRestxml_deserializeDocumentInvalidationList(v **types.InvalidationList, 
 			}
 
 		case strings.EqualFold("Marker", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Marker = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Marker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -21375,30 +22860,27 @@ func awsRestxml_deserializeDocumentInvalidationList(v **types.InvalidationList, 
 			}
 
 		case strings.EqualFold("NextMarker", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.NextMarker = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.NextMarker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -21409,6 +22891,10 @@ func awsRestxml_deserializeDocumentInvalidationList(v **types.InvalidationList, 
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -21440,14 +22926,14 @@ func awsRestxml_deserializeDocumentInvalidationSummary(v **types.InvalidationSum
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("CreateTime", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				t, err := smithytime.ParseDateTime(xtv)
 				if err != nil {
@@ -21457,39 +22943,37 @@ func awsRestxml_deserializeDocumentInvalidationSummary(v **types.InvalidationSum
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Status = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Status = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -21586,23 +23070,24 @@ func awsRestxml_deserializeDocumentInvalidDefaultRootObject(v **types.InvalidDef
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -21634,23 +23119,24 @@ func awsRestxml_deserializeDocumentInvalidErrorCode(v **types.InvalidErrorCode, 
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -21682,23 +23168,24 @@ func awsRestxml_deserializeDocumentInvalidForwardCookies(v **types.InvalidForwar
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -21730,23 +23217,24 @@ func awsRestxml_deserializeDocumentInvalidGeoRestrictionParameter(v **types.Inva
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -21778,23 +23266,24 @@ func awsRestxml_deserializeDocumentInvalidHeadersForS3Origin(v **types.InvalidHe
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -21826,23 +23315,24 @@ func awsRestxml_deserializeDocumentInvalidIfMatchVersion(v **types.InvalidIfMatc
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -21874,23 +23364,24 @@ func awsRestxml_deserializeDocumentInvalidLambdaFunctionAssociation(v **types.In
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -21922,23 +23413,24 @@ func awsRestxml_deserializeDocumentInvalidLocationCode(v **types.InvalidLocation
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -21970,23 +23462,24 @@ func awsRestxml_deserializeDocumentInvalidMinimumProtocolVersion(v **types.Inval
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -22018,23 +23511,24 @@ func awsRestxml_deserializeDocumentInvalidOrigin(v **types.InvalidOrigin, decode
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -22066,23 +23560,24 @@ func awsRestxml_deserializeDocumentInvalidOriginAccessIdentity(v **types.Invalid
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -22114,23 +23609,24 @@ func awsRestxml_deserializeDocumentInvalidOriginKeepaliveTimeout(v **types.Inval
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -22162,23 +23658,24 @@ func awsRestxml_deserializeDocumentInvalidOriginReadTimeout(v **types.InvalidOri
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -22210,23 +23707,24 @@ func awsRestxml_deserializeDocumentInvalidProtocolSettings(v **types.InvalidProt
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -22258,23 +23756,24 @@ func awsRestxml_deserializeDocumentInvalidQueryStringParameters(v **types.Invali
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -22306,23 +23805,24 @@ func awsRestxml_deserializeDocumentInvalidRelativePath(v **types.InvalidRelative
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -22354,23 +23854,24 @@ func awsRestxml_deserializeDocumentInvalidRequiredProtocol(v **types.InvalidRequ
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -22402,23 +23903,24 @@ func awsRestxml_deserializeDocumentInvalidResponseCode(v **types.InvalidResponse
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -22450,23 +23952,24 @@ func awsRestxml_deserializeDocumentInvalidTagging(v **types.InvalidTagging, deco
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -22498,23 +24001,24 @@ func awsRestxml_deserializeDocumentInvalidTTLOrder(v **types.InvalidTTLOrder, de
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -22546,23 +24050,24 @@ func awsRestxml_deserializeDocumentInvalidViewerCertificate(v **types.InvalidVie
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -22594,23 +24099,24 @@ func awsRestxml_deserializeDocumentInvalidWebACLId(v **types.InvalidWebACLId, de
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -22642,17 +24148,14 @@ func awsRestxml_deserializeDocumentKeyGroup(v **types.KeyGroup, decoder smithyxm
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
@@ -22664,14 +24167,14 @@ func awsRestxml_deserializeDocumentKeyGroup(v **types.KeyGroup, decoder smithyxm
 			}
 
 		case strings.EqualFold("LastModifiedTime", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				t, err := smithytime.ParseDateTime(xtv)
 				if err != nil {
@@ -22682,6 +24185,10 @@ func awsRestxml_deserializeDocumentKeyGroup(v **types.KeyGroup, decoder smithyxm
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -22713,23 +24220,24 @@ func awsRestxml_deserializeDocumentKeyGroupAlreadyExists(v **types.KeyGroupAlrea
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -22761,17 +24269,14 @@ func awsRestxml_deserializeDocumentKeyGroupConfig(v **types.KeyGroupConfig, deco
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Comment", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Comment = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Comment = ptr.String(xtv)
 			}
@@ -22783,23 +24288,24 @@ func awsRestxml_deserializeDocumentKeyGroupConfig(v **types.KeyGroupConfig, deco
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Name = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Name = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -22837,14 +24343,14 @@ func awsRestxml_deserializeDocumentKeyGroupList(v **types.KeyGroupList, decoder 
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -22854,30 +24360,27 @@ func awsRestxml_deserializeDocumentKeyGroupList(v **types.KeyGroupList, decoder 
 			}
 
 		case strings.EqualFold("NextMarker", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.NextMarker = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.NextMarker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -22888,6 +24391,10 @@ func awsRestxml_deserializeDocumentKeyGroupList(v **types.KeyGroupList, decoder 
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -22926,6 +24433,10 @@ func awsRestxml_deserializeDocumentKeyGroupSummary(v **types.KeyGroupSummary, de
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -23024,18 +24535,19 @@ func awsRestxml_deserializeDocumentKeyPairIdList(v *[]string, decoder smithyxml.
 		for {
 			if strings.EqualFold("KeyPairId", t.Name.Local) {
 				var col string
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					col = xtv
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -23059,14 +24571,14 @@ func awsRestxml_deserializeDocumentKeyPairIdListUnwrapped(v *[]string, decoder s
 		var mv string
 		t := decoder.StartEl
 		_ = t
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			mv = xtv
 		}
@@ -23104,14 +24616,14 @@ func awsRestxml_deserializeDocumentKeyPairIds(v **types.KeyPairIds, decoder smit
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -23122,6 +24634,10 @@ func awsRestxml_deserializeDocumentKeyPairIds(v **types.KeyPairIds, decoder smit
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -23153,17 +24669,14 @@ func awsRestxml_deserializeDocumentKGKeyPairIds(v **types.KGKeyPairIds, decoder 
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("KeyGroupId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.KeyGroupId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.KeyGroupId = ptr.String(xtv)
 			}
@@ -23176,6 +24689,10 @@ func awsRestxml_deserializeDocumentKGKeyPairIds(v **types.KGKeyPairIds, decoder 
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -23272,39 +24789,37 @@ func awsRestxml_deserializeDocumentKinesisStreamConfig(v **types.KinesisStreamCo
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("RoleARN", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.RoleARN = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.RoleARN = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("StreamARN", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.StreamARN = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.StreamARN = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -23336,27 +24851,27 @@ func awsRestxml_deserializeDocumentLambdaFunctionAssociation(v **types.LambdaFun
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("EventType", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.EventType = types.EventType(xtv)
 			}
 
 		case strings.EqualFold("IncludeBody", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -23365,23 +24880,24 @@ func awsRestxml_deserializeDocumentLambdaFunctionAssociation(v **types.LambdaFun
 			}
 
 		case strings.EqualFold("LambdaFunctionARN", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.LambdaFunctionARN = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.LambdaFunctionARN = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -23484,14 +25000,14 @@ func awsRestxml_deserializeDocumentLambdaFunctionAssociations(v **types.LambdaFu
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -23502,6 +25018,10 @@ func awsRestxml_deserializeDocumentLambdaFunctionAssociations(v **types.LambdaFu
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -23535,18 +25055,19 @@ func awsRestxml_deserializeDocumentLocationList(v *[]string, decoder smithyxml.N
 		for {
 			if strings.EqualFold("Location", t.Name.Local) {
 				var col string
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					col = xtv
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -23570,14 +25091,14 @@ func awsRestxml_deserializeDocumentLocationListUnwrapped(v *[]string, decoder sm
 		var mv string
 		t := decoder.StartEl
 		_ = t
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			mv = xtv
 		}
@@ -23609,30 +25130,27 @@ func awsRestxml_deserializeDocumentLoggingConfig(v **types.LoggingConfig, decode
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Bucket", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Bucket = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Bucket = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Enabled", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -23641,14 +25159,14 @@ func awsRestxml_deserializeDocumentLoggingConfig(v **types.LoggingConfig, decode
 			}
 
 		case strings.EqualFold("IncludeCookies", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -23657,23 +25175,24 @@ func awsRestxml_deserializeDocumentLoggingConfig(v **types.LoggingConfig, decode
 			}
 
 		case strings.EqualFold("Prefix", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Prefix = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Prefix = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -23707,18 +25226,19 @@ func awsRestxml_deserializeDocumentMethodsList(v *[]types.Method, decoder smithy
 		for {
 			if strings.EqualFold("Method", t.Name.Local) {
 				var col types.Method
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					col = types.Method(xtv)
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -23742,14 +25262,14 @@ func awsRestxml_deserializeDocumentMethodsListUnwrapped(v *[]types.Method, decod
 		var mv types.Method
 		t := decoder.StartEl
 		_ = t
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			mv = types.Method(xtv)
 		}
@@ -23781,23 +25301,24 @@ func awsRestxml_deserializeDocumentMissingBody(v **types.MissingBody, decoder sm
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -23836,6 +25357,10 @@ func awsRestxml_deserializeDocumentMonitoringSubscription(v **types.MonitoringSu
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -23867,23 +25392,24 @@ func awsRestxml_deserializeDocumentNoSuchCachePolicy(v **types.NoSuchCachePolicy
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -23915,23 +25441,24 @@ func awsRestxml_deserializeDocumentNoSuchCloudFrontOriginAccessIdentity(v **type
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -23963,23 +25490,24 @@ func awsRestxml_deserializeDocumentNoSuchDistribution(v **types.NoSuchDistributi
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -24011,23 +25539,24 @@ func awsRestxml_deserializeDocumentNoSuchFieldLevelEncryptionConfig(v **types.No
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -24059,23 +25588,24 @@ func awsRestxml_deserializeDocumentNoSuchFieldLevelEncryptionProfile(v **types.N
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -24107,23 +25637,24 @@ func awsRestxml_deserializeDocumentNoSuchInvalidation(v **types.NoSuchInvalidati
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -24155,23 +25686,24 @@ func awsRestxml_deserializeDocumentNoSuchOrigin(v **types.NoSuchOrigin, decoder 
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -24203,23 +25735,24 @@ func awsRestxml_deserializeDocumentNoSuchOriginRequestPolicy(v **types.NoSuchOri
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -24251,23 +25784,24 @@ func awsRestxml_deserializeDocumentNoSuchPublicKey(v **types.NoSuchPublicKey, de
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -24299,23 +25833,24 @@ func awsRestxml_deserializeDocumentNoSuchRealtimeLogConfig(v **types.NoSuchRealt
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -24347,23 +25882,24 @@ func awsRestxml_deserializeDocumentNoSuchResource(v **types.NoSuchResource, deco
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -24395,23 +25931,24 @@ func awsRestxml_deserializeDocumentNoSuchStreamingDistribution(v **types.NoSuchS
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -24443,14 +25980,14 @@ func awsRestxml_deserializeDocumentOrigin(v **types.Origin, decoder smithyxml.No
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("ConnectionAttempts", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -24460,14 +25997,14 @@ func awsRestxml_deserializeDocumentOrigin(v **types.Origin, decoder smithyxml.No
 			}
 
 		case strings.EqualFold("ConnectionTimeout", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -24489,49 +26026,40 @@ func awsRestxml_deserializeDocumentOrigin(v **types.Origin, decoder smithyxml.No
 			}
 
 		case strings.EqualFold("DomainName", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.DomainName = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.DomainName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("OriginPath", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.OriginPath = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.OriginPath = ptr.String(xtv)
 			}
@@ -24550,6 +26078,10 @@ func awsRestxml_deserializeDocumentOrigin(v **types.Origin, decoder smithyxml.No
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -24581,39 +26113,37 @@ func awsRestxml_deserializeDocumentOriginCustomHeader(v **types.OriginCustomHead
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("HeaderName", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.HeaderName = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.HeaderName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("HeaderValue", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.HeaderValue = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.HeaderValue = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -24716,17 +26246,14 @@ func awsRestxml_deserializeDocumentOriginGroup(v **types.OriginGroup, decoder sm
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
@@ -24739,6 +26266,10 @@ func awsRestxml_deserializeDocumentOriginGroup(v **types.OriginGroup, decoder sm
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -24777,6 +26308,10 @@ func awsRestxml_deserializeDocumentOriginGroupFailoverCriteria(v **types.OriginG
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -24873,23 +26408,24 @@ func awsRestxml_deserializeDocumentOriginGroupMember(v **types.OriginGroupMember
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("OriginId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.OriginId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.OriginId = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -24992,14 +26528,14 @@ func awsRestxml_deserializeDocumentOriginGroupMembers(v **types.OriginGroupMembe
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -25010,6 +26546,10 @@ func awsRestxml_deserializeDocumentOriginGroupMembers(v **types.OriginGroupMembe
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -25047,14 +26587,14 @@ func awsRestxml_deserializeDocumentOriginGroups(v **types.OriginGroups, decoder 
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -25065,6 +26605,10 @@ func awsRestxml_deserializeDocumentOriginGroups(v **types.OriginGroups, decoder 
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -25161,30 +26705,27 @@ func awsRestxml_deserializeDocumentOriginRequestPolicy(v **types.OriginRequestPo
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("LastModifiedTime", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				t, err := smithytime.ParseDateTime(xtv)
 				if err != nil {
@@ -25201,6 +26742,10 @@ func awsRestxml_deserializeDocumentOriginRequestPolicy(v **types.OriginRequestPo
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -25232,23 +26777,24 @@ func awsRestxml_deserializeDocumentOriginRequestPolicyAlreadyExists(v **types.Or
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -25280,17 +26826,14 @@ func awsRestxml_deserializeDocumentOriginRequestPolicyConfig(v **types.OriginReq
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Comment", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Comment = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Comment = ptr.String(xtv)
 			}
@@ -25308,17 +26851,14 @@ func awsRestxml_deserializeDocumentOriginRequestPolicyConfig(v **types.OriginReq
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Name = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Name = ptr.String(xtv)
 			}
@@ -25331,6 +26871,10 @@ func awsRestxml_deserializeDocumentOriginRequestPolicyConfig(v **types.OriginReq
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -25362,14 +26906,14 @@ func awsRestxml_deserializeDocumentOriginRequestPolicyCookiesConfig(v **types.Or
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("CookieBehavior", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.CookieBehavior = types.OriginRequestPolicyCookieBehavior(xtv)
 			}
@@ -25382,6 +26926,10 @@ func awsRestxml_deserializeDocumentOriginRequestPolicyCookiesConfig(v **types.Or
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -25413,14 +26961,14 @@ func awsRestxml_deserializeDocumentOriginRequestPolicyHeadersConfig(v **types.Or
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("HeaderBehavior", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.HeaderBehavior = types.OriginRequestPolicyHeaderBehavior(xtv)
 			}
@@ -25433,6 +26981,10 @@ func awsRestxml_deserializeDocumentOriginRequestPolicyHeadersConfig(v **types.Or
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -25464,23 +27016,24 @@ func awsRestxml_deserializeDocumentOriginRequestPolicyInUse(v **types.OriginRequ
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -25518,14 +27071,14 @@ func awsRestxml_deserializeDocumentOriginRequestPolicyList(v **types.OriginReque
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -25535,30 +27088,27 @@ func awsRestxml_deserializeDocumentOriginRequestPolicyList(v **types.OriginReque
 			}
 
 		case strings.EqualFold("NextMarker", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.NextMarker = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.NextMarker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -25569,6 +27119,10 @@ func awsRestxml_deserializeDocumentOriginRequestPolicyList(v **types.OriginReque
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -25600,14 +27154,14 @@ func awsRestxml_deserializeDocumentOriginRequestPolicyQueryStringsConfig(v **typ
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("QueryStringBehavior", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.QueryStringBehavior = types.OriginRequestPolicyQueryStringBehavior(xtv)
 			}
@@ -25620,6 +27174,10 @@ func awsRestxml_deserializeDocumentOriginRequestPolicyQueryStringsConfig(v **typ
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -25657,20 +27215,24 @@ func awsRestxml_deserializeDocumentOriginRequestPolicySummary(v **types.OriginRe
 			}
 
 		case strings.EqualFold("Type", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Type = types.OriginRequestPolicyType(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -25773,14 +27335,14 @@ func awsRestxml_deserializeDocumentOrigins(v **types.Origins, decoder smithyxml.
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -25791,6 +27353,10 @@ func awsRestxml_deserializeDocumentOrigins(v **types.Origins, decoder smithyxml.
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -25822,14 +27388,14 @@ func awsRestxml_deserializeDocumentOriginShield(v **types.OriginShield, decoder 
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Enabled", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -25838,23 +27404,24 @@ func awsRestxml_deserializeDocumentOriginShield(v **types.OriginShield, decoder 
 			}
 
 		case strings.EqualFold("OriginShieldRegion", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.OriginShieldRegion = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.OriginShieldRegion = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -25892,14 +27459,14 @@ func awsRestxml_deserializeDocumentOriginSslProtocols(v **types.OriginSslProtoco
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -25910,6 +27477,10 @@ func awsRestxml_deserializeDocumentOriginSslProtocols(v **types.OriginSslProtoco
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -25947,14 +27518,14 @@ func awsRestxml_deserializeDocumentParametersInCacheKeyAndForwardedToOrigin(v **
 			}
 
 		case strings.EqualFold("EnableAcceptEncodingBrotli", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -25963,14 +27534,14 @@ func awsRestxml_deserializeDocumentParametersInCacheKeyAndForwardedToOrigin(v **
 			}
 
 		case strings.EqualFold("EnableAcceptEncodingGzip", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -25992,6 +27563,10 @@ func awsRestxml_deserializeDocumentParametersInCacheKeyAndForwardedToOrigin(v **
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -26025,18 +27600,19 @@ func awsRestxml_deserializeDocumentPathList(v *[]string, decoder smithyxml.NodeD
 		for {
 			if strings.EqualFold("Path", t.Name.Local) {
 				var col string
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					col = xtv
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -26060,14 +27636,14 @@ func awsRestxml_deserializeDocumentPathListUnwrapped(v *[]string, decoder smithy
 		var mv string
 		t := decoder.StartEl
 		_ = t
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			mv = xtv
 		}
@@ -26105,14 +27681,14 @@ func awsRestxml_deserializeDocumentPaths(v **types.Paths, decoder smithyxml.Node
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -26123,6 +27699,10 @@ func awsRestxml_deserializeDocumentPaths(v **types.Paths, decoder smithyxml.Node
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -26154,23 +27734,24 @@ func awsRestxml_deserializeDocumentPreconditionFailed(v **types.PreconditionFail
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -26202,14 +27783,14 @@ func awsRestxml_deserializeDocumentPublicKey(v **types.PublicKey, decoder smithy
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("CreatedTime", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				t, err := smithytime.ParseDateTime(xtv)
 				if err != nil {
@@ -26219,17 +27800,14 @@ func awsRestxml_deserializeDocumentPublicKey(v **types.PublicKey, decoder smithy
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
@@ -26242,6 +27820,10 @@ func awsRestxml_deserializeDocumentPublicKey(v **types.PublicKey, decoder smithy
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -26273,23 +27855,24 @@ func awsRestxml_deserializeDocumentPublicKeyAlreadyExists(v **types.PublicKeyAlr
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -26321,71 +27904,63 @@ func awsRestxml_deserializeDocumentPublicKeyConfig(v **types.PublicKeyConfig, de
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("CallerReference", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.CallerReference = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.CallerReference = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Comment", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Comment = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Comment = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("EncodedKey", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.EncodedKey = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.EncodedKey = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Name = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Name = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -26419,18 +27994,19 @@ func awsRestxml_deserializeDocumentPublicKeyIdList(v *[]string, decoder smithyxm
 		for {
 			if strings.EqualFold("PublicKey", t.Name.Local) {
 				var col string
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					col = xtv
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -26454,14 +28030,14 @@ func awsRestxml_deserializeDocumentPublicKeyIdListUnwrapped(v *[]string, decoder
 		var mv string
 		t := decoder.StartEl
 		_ = t
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			mv = xtv
 		}
@@ -26493,23 +28069,24 @@ func awsRestxml_deserializeDocumentPublicKeyInUse(v **types.PublicKeyInUse, deco
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -26547,14 +28124,14 @@ func awsRestxml_deserializeDocumentPublicKeyList(v **types.PublicKeyList, decode
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -26564,30 +28141,27 @@ func awsRestxml_deserializeDocumentPublicKeyList(v **types.PublicKeyList, decode
 			}
 
 		case strings.EqualFold("NextMarker", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.NextMarker = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.NextMarker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -26598,6 +28172,10 @@ func awsRestxml_deserializeDocumentPublicKeyList(v **types.PublicKeyList, decode
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -26629,30 +28207,27 @@ func awsRestxml_deserializeDocumentPublicKeySummary(v **types.PublicKeySummary, 
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Comment", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Comment = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Comment = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("CreatedTime", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				t, err := smithytime.ParseDateTime(xtv)
 				if err != nil {
@@ -26662,55 +28237,50 @@ func awsRestxml_deserializeDocumentPublicKeySummary(v **types.PublicKeySummary, 
 			}
 
 		case strings.EqualFold("EncodedKey", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.EncodedKey = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.EncodedKey = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Name = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Name = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -26807,39 +28377,37 @@ func awsRestxml_deserializeDocumentQueryArgProfile(v **types.QueryArgProfile, de
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("ProfileId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.ProfileId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.ProfileId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("QueryArg", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.QueryArg = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.QueryArg = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -26871,14 +28439,14 @@ func awsRestxml_deserializeDocumentQueryArgProfileConfig(v **types.QueryArgProfi
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("ForwardWhenQueryArgProfileIsUnknown", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -26894,6 +28462,10 @@ func awsRestxml_deserializeDocumentQueryArgProfileConfig(v **types.QueryArgProfi
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -26925,23 +28497,24 @@ func awsRestxml_deserializeDocumentQueryArgProfileEmpty(v **types.QueryArgProfil
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -27044,14 +28617,14 @@ func awsRestxml_deserializeDocumentQueryArgProfiles(v **types.QueryArgProfiles, 
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -27062,6 +28635,10 @@ func awsRestxml_deserializeDocumentQueryArgProfiles(v **types.QueryArgProfiles, 
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -27099,14 +28676,14 @@ func awsRestxml_deserializeDocumentQueryStringCacheKeys(v **types.QueryStringCac
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -27117,6 +28694,10 @@ func awsRestxml_deserializeDocumentQueryStringCacheKeys(v **types.QueryStringCac
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -27150,18 +28731,19 @@ func awsRestxml_deserializeDocumentQueryStringCacheKeysList(v *[]string, decoder
 		for {
 			if strings.EqualFold("Name", t.Name.Local) {
 				var col string
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					col = xtv
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -27185,14 +28767,14 @@ func awsRestxml_deserializeDocumentQueryStringCacheKeysListUnwrapped(v *[]string
 		var mv string
 		t := decoder.StartEl
 		_ = t
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			mv = xtv
 		}
@@ -27230,14 +28812,14 @@ func awsRestxml_deserializeDocumentQueryStringNames(v **types.QueryStringNames, 
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -27248,6 +28830,10 @@ func awsRestxml_deserializeDocumentQueryStringNames(v **types.QueryStringNames, 
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -27281,18 +28867,19 @@ func awsRestxml_deserializeDocumentQueryStringNamesList(v *[]string, decoder smi
 		for {
 			if strings.EqualFold("Name", t.Name.Local) {
 				var col string
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					col = xtv
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -27316,14 +28903,14 @@ func awsRestxml_deserializeDocumentQueryStringNamesListUnwrapped(v *[]string, de
 		var mv string
 		t := decoder.StartEl
 		_ = t
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			mv = xtv
 		}
@@ -27355,17 +28942,14 @@ func awsRestxml_deserializeDocumentRealtimeLogConfig(v **types.RealtimeLogConfig
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("ARN", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.ARN = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.ARN = ptr.String(xtv)
 			}
@@ -27383,30 +28967,27 @@ func awsRestxml_deserializeDocumentRealtimeLogConfig(v **types.RealtimeLogConfig
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Name = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Name = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SamplingRate", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -27417,6 +28998,10 @@ func awsRestxml_deserializeDocumentRealtimeLogConfig(v **types.RealtimeLogConfig
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -27448,23 +29033,24 @@ func awsRestxml_deserializeDocumentRealtimeLogConfigAlreadyExists(v **types.Real
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -27496,23 +29082,24 @@ func awsRestxml_deserializeDocumentRealtimeLogConfigInUse(v **types.RealtimeLogC
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -27609,14 +29196,14 @@ func awsRestxml_deserializeDocumentRealtimeLogConfigs(v **types.RealtimeLogConfi
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("IsTruncated", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -27631,30 +29218,27 @@ func awsRestxml_deserializeDocumentRealtimeLogConfigs(v **types.RealtimeLogConfi
 			}
 
 		case strings.EqualFold("Marker", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Marker = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Marker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -27664,23 +29248,24 @@ func awsRestxml_deserializeDocumentRealtimeLogConfigs(v **types.RealtimeLogConfi
 			}
 
 		case strings.EqualFold("NextMarker", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.NextMarker = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.NextMarker = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -27712,20 +29297,24 @@ func awsRestxml_deserializeDocumentRealtimeMetricsSubscriptionConfig(v **types.R
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("RealtimeMetricsSubscriptionStatus", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.RealtimeMetricsSubscriptionStatus = types.RealtimeMetricsSubscriptionStatus(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -27757,23 +29346,24 @@ func awsRestxml_deserializeDocumentResourceInUse(v **types.ResourceInUse, decode
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -27812,6 +29402,10 @@ func awsRestxml_deserializeDocumentRestrictions(v **types.Restrictions, decoder 
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -27843,39 +29437,37 @@ func awsRestxml_deserializeDocumentS3Origin(v **types.S3Origin, decoder smithyxm
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("DomainName", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.DomainName = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.DomainName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("OriginAccessIdentity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.OriginAccessIdentity = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.OriginAccessIdentity = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -27907,23 +29499,24 @@ func awsRestxml_deserializeDocumentS3OriginConfig(v **types.S3OriginConfig, deco
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("OriginAccessIdentity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.OriginAccessIdentity = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.OriginAccessIdentity = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -27955,17 +29548,14 @@ func awsRestxml_deserializeDocumentSigner(v **types.Signer, decoder smithyxml.No
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("AwsAccountNumber", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.AwsAccountNumber = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.AwsAccountNumber = ptr.String(xtv)
 			}
@@ -27978,6 +29568,10 @@ func awsRestxml_deserializeDocumentSigner(v **types.Signer, decoder smithyxml.No
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -28076,18 +29670,19 @@ func awsRestxml_deserializeDocumentSslProtocolsList(v *[]types.SslProtocol, deco
 		for {
 			if strings.EqualFold("SslProtocol", t.Name.Local) {
 				var col types.SslProtocol
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					col = types.SslProtocol(xtv)
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -28111,14 +29706,14 @@ func awsRestxml_deserializeDocumentSslProtocolsListUnwrapped(v *[]types.SslProto
 		var mv types.SslProtocol
 		t := decoder.StartEl
 		_ = t
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			mv = types.SslProtocol(xtv)
 		}
@@ -28152,14 +29747,14 @@ func awsRestxml_deserializeDocumentStatusCodeList(v *[]int32, decoder smithyxml.
 		for {
 			if strings.EqualFold("StatusCode", t.Name.Local) {
 				var col int32
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					i64, err := strconv.ParseInt(xtv, 10, 64)
 					if err != nil {
@@ -28168,6 +29763,7 @@ func awsRestxml_deserializeDocumentStatusCodeList(v *[]int32, decoder smithyxml.
 					col = int32(i64)
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -28191,14 +29787,14 @@ func awsRestxml_deserializeDocumentStatusCodeListUnwrapped(v *[]int32, decoder s
 		var mv int32
 		t := decoder.StartEl
 		_ = t
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			i64, err := strconv.ParseInt(xtv, 10, 64)
 			if err != nil {
@@ -28240,14 +29836,14 @@ func awsRestxml_deserializeDocumentStatusCodes(v **types.StatusCodes, decoder sm
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -28258,6 +29854,10 @@ func awsRestxml_deserializeDocumentStatusCodes(v **types.StatusCodes, decoder sm
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -28295,62 +29895,53 @@ func awsRestxml_deserializeDocumentStreamingDistribution(v **types.StreamingDist
 			}
 
 		case strings.EqualFold("ARN", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.ARN = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.ARN = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("DomainName", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.DomainName = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.DomainName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("LastModifiedTime", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				t, err := smithytime.ParseDateTime(xtv)
 				if err != nil {
@@ -28360,17 +29951,14 @@ func awsRestxml_deserializeDocumentStreamingDistribution(v **types.StreamingDist
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Status = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Status = ptr.String(xtv)
 			}
@@ -28383,6 +29971,10 @@ func awsRestxml_deserializeDocumentStreamingDistribution(v **types.StreamingDist
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -28414,23 +30006,24 @@ func awsRestxml_deserializeDocumentStreamingDistributionAlreadyExists(v **types.
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -28468,46 +30061,40 @@ func awsRestxml_deserializeDocumentStreamingDistributionConfig(v **types.Streami
 			}
 
 		case strings.EqualFold("CallerReference", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.CallerReference = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.CallerReference = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Comment", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Comment = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Comment = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Enabled", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -28522,14 +30109,14 @@ func awsRestxml_deserializeDocumentStreamingDistributionConfig(v **types.Streami
 			}
 
 		case strings.EqualFold("PriceClass", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.PriceClass = types.PriceClass(xtv)
 			}
@@ -28548,6 +30135,10 @@ func awsRestxml_deserializeDocumentStreamingDistributionConfig(v **types.Streami
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -28579,14 +30170,14 @@ func awsRestxml_deserializeDocumentStreamingDistributionList(v **types.Streaming
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("IsTruncated", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -28601,30 +30192,27 @@ func awsRestxml_deserializeDocumentStreamingDistributionList(v **types.Streaming
 			}
 
 		case strings.EqualFold("Marker", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Marker = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Marker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MaxItems", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -28634,30 +30222,27 @@ func awsRestxml_deserializeDocumentStreamingDistributionList(v **types.Streaming
 			}
 
 		case strings.EqualFold("NextMarker", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.NextMarker = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.NextMarker = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -28668,6 +30253,10 @@ func awsRestxml_deserializeDocumentStreamingDistributionList(v **types.Streaming
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -28699,23 +30288,24 @@ func awsRestxml_deserializeDocumentStreamingDistributionNotDisabled(v **types.St
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -28753,62 +30343,53 @@ func awsRestxml_deserializeDocumentStreamingDistributionSummary(v **types.Stream
 			}
 
 		case strings.EqualFold("ARN", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.ARN = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.ARN = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Comment", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Comment = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Comment = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("DomainName", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.DomainName = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.DomainName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Enabled", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -28817,30 +30398,27 @@ func awsRestxml_deserializeDocumentStreamingDistributionSummary(v **types.Stream
 			}
 
 		case strings.EqualFold("Id", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Id = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("LastModifiedTime", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				t, err := smithytime.ParseDateTime(xtv)
 				if err != nil {
@@ -28850,14 +30428,14 @@ func awsRestxml_deserializeDocumentStreamingDistributionSummary(v **types.Stream
 			}
 
 		case strings.EqualFold("PriceClass", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.PriceClass = types.PriceClass(xtv)
 			}
@@ -28869,17 +30447,14 @@ func awsRestxml_deserializeDocumentStreamingDistributionSummary(v **types.Stream
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Status = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Status = ptr.String(xtv)
 			}
@@ -28892,6 +30467,10 @@ func awsRestxml_deserializeDocumentStreamingDistributionSummary(v **types.Stream
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -28988,30 +30567,27 @@ func awsRestxml_deserializeDocumentStreamingLoggingConfig(v **types.StreamingLog
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Bucket", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Bucket = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Bucket = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Enabled", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -29020,23 +30596,24 @@ func awsRestxml_deserializeDocumentStreamingLoggingConfig(v **types.StreamingLog
 			}
 
 		case strings.EqualFold("Prefix", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Prefix = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Prefix = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -29068,39 +30645,37 @@ func awsRestxml_deserializeDocumentTag(v **types.Tag, decoder smithyxml.NodeDeco
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Key", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Key = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Key = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Value", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Value = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Value = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -29204,6 +30779,10 @@ func awsRestxml_deserializeDocumentTags(v **types.Tags, decoder smithyxml.NodeDe
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -29235,23 +30814,24 @@ func awsRestxml_deserializeDocumentTooManyCacheBehaviors(v **types.TooManyCacheB
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -29283,23 +30863,24 @@ func awsRestxml_deserializeDocumentTooManyCachePolicies(v **types.TooManyCachePo
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -29331,23 +30912,24 @@ func awsRestxml_deserializeDocumentTooManyCertificates(v **types.TooManyCertific
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -29379,23 +30961,24 @@ func awsRestxml_deserializeDocumentTooManyCloudFrontOriginAccessIdentities(v **t
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -29427,23 +31010,24 @@ func awsRestxml_deserializeDocumentTooManyCookieNamesInWhiteList(v **types.TooMa
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -29475,23 +31059,24 @@ func awsRestxml_deserializeDocumentTooManyCookiesInCachePolicy(v **types.TooMany
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -29523,23 +31108,24 @@ func awsRestxml_deserializeDocumentTooManyCookiesInOriginRequestPolicy(v **types
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -29571,23 +31157,24 @@ func awsRestxml_deserializeDocumentTooManyDistributionCNAMEs(v **types.TooManyDi
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -29619,23 +31206,24 @@ func awsRestxml_deserializeDocumentTooManyDistributions(v **types.TooManyDistrib
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -29667,23 +31255,24 @@ func awsRestxml_deserializeDocumentTooManyDistributionsAssociatedToCachePolicy(v
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -29715,23 +31304,24 @@ func awsRestxml_deserializeDocumentTooManyDistributionsAssociatedToFieldLevelEnc
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -29763,23 +31353,24 @@ func awsRestxml_deserializeDocumentTooManyDistributionsAssociatedToKeyGroup(v **
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -29811,23 +31402,24 @@ func awsRestxml_deserializeDocumentTooManyDistributionsAssociatedToOriginRequest
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -29859,23 +31451,24 @@ func awsRestxml_deserializeDocumentTooManyDistributionsWithLambdaAssociations(v 
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -29907,23 +31500,24 @@ func awsRestxml_deserializeDocumentTooManyDistributionsWithSingleFunctionARN(v *
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -29955,23 +31549,24 @@ func awsRestxml_deserializeDocumentTooManyFieldLevelEncryptionConfigs(v **types.
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30003,23 +31598,24 @@ func awsRestxml_deserializeDocumentTooManyFieldLevelEncryptionContentTypeProfile
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30051,23 +31647,24 @@ func awsRestxml_deserializeDocumentTooManyFieldLevelEncryptionEncryptionEntities
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30099,23 +31696,24 @@ func awsRestxml_deserializeDocumentTooManyFieldLevelEncryptionFieldPatterns(v **
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30147,23 +31745,24 @@ func awsRestxml_deserializeDocumentTooManyFieldLevelEncryptionProfiles(v **types
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30195,23 +31794,24 @@ func awsRestxml_deserializeDocumentTooManyFieldLevelEncryptionQueryArgProfiles(v
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30243,23 +31843,24 @@ func awsRestxml_deserializeDocumentTooManyHeadersInCachePolicy(v **types.TooMany
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30291,23 +31892,24 @@ func awsRestxml_deserializeDocumentTooManyHeadersInForwardedValues(v **types.Too
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30339,23 +31941,24 @@ func awsRestxml_deserializeDocumentTooManyHeadersInOriginRequestPolicy(v **types
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30387,23 +31990,24 @@ func awsRestxml_deserializeDocumentTooManyInvalidationsInProgress(v **types.TooM
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30435,23 +32039,24 @@ func awsRestxml_deserializeDocumentTooManyKeyGroups(v **types.TooManyKeyGroups, 
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30483,23 +32088,24 @@ func awsRestxml_deserializeDocumentTooManyKeyGroupsAssociatedToDistribution(v **
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30531,23 +32137,24 @@ func awsRestxml_deserializeDocumentTooManyLambdaFunctionAssociations(v **types.T
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30579,23 +32186,24 @@ func awsRestxml_deserializeDocumentTooManyOriginCustomHeaders(v **types.TooManyO
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30627,23 +32235,24 @@ func awsRestxml_deserializeDocumentTooManyOriginGroupsPerDistribution(v **types.
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30675,23 +32284,24 @@ func awsRestxml_deserializeDocumentTooManyOriginRequestPolicies(v **types.TooMan
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30723,23 +32333,24 @@ func awsRestxml_deserializeDocumentTooManyOrigins(v **types.TooManyOrigins, deco
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30771,23 +32382,24 @@ func awsRestxml_deserializeDocumentTooManyPublicKeys(v **types.TooManyPublicKeys
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30819,23 +32431,24 @@ func awsRestxml_deserializeDocumentTooManyPublicKeysInKeyGroup(v **types.TooMany
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30867,23 +32480,24 @@ func awsRestxml_deserializeDocumentTooManyQueryStringParameters(v **types.TooMan
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30915,23 +32529,24 @@ func awsRestxml_deserializeDocumentTooManyQueryStringsInCachePolicy(v **types.To
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -30963,23 +32578,24 @@ func awsRestxml_deserializeDocumentTooManyQueryStringsInOriginRequestPolicy(v **
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -31011,23 +32627,24 @@ func awsRestxml_deserializeDocumentTooManyRealtimeLogConfigs(v **types.TooManyRe
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -31059,23 +32676,24 @@ func awsRestxml_deserializeDocumentTooManyStreamingDistributionCNAMEs(v **types.
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -31107,23 +32725,24 @@ func awsRestxml_deserializeDocumentTooManyStreamingDistributions(v **types.TooMa
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -31155,23 +32774,24 @@ func awsRestxml_deserializeDocumentTooManyTrustedSigners(v **types.TooManyTruste
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -31203,23 +32823,24 @@ func awsRestxml_deserializeDocumentTrustedKeyGroupDoesNotExist(v **types.Trusted
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -31253,18 +32874,19 @@ func awsRestxml_deserializeDocumentTrustedKeyGroupIdList(v *[]string, decoder sm
 		for {
 			if strings.EqualFold("KeyGroup", t.Name.Local) {
 				var col string
-				val, done, err := decoder.Value()
+				val, err := decoder.Value()
 				if err != nil {
 					return err
 				}
-				if done {
+				if val == nil {
 					break
 				}
-				if val != nil {
+				{
 					xtv := string(val)
 					col = xtv
 				}
 				sv = append(sv, col)
+				break
 			} else {
 				break
 			}
@@ -31288,14 +32910,14 @@ func awsRestxml_deserializeDocumentTrustedKeyGroupIdListUnwrapped(v *[]string, d
 		var mv string
 		t := decoder.StartEl
 		_ = t
-		val, done, err := decoder.Value()
+		val, err := decoder.Value()
 		if err != nil {
 			return err
 		}
-		if done {
+		if val == nil {
 			break
 		}
-		if val != nil {
+		{
 			xtv := string(val)
 			mv = xtv
 		}
@@ -31327,14 +32949,14 @@ func awsRestxml_deserializeDocumentTrustedKeyGroups(v **types.TrustedKeyGroups, 
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Enabled", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -31349,14 +32971,14 @@ func awsRestxml_deserializeDocumentTrustedKeyGroups(v **types.TrustedKeyGroups, 
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -31367,6 +32989,10 @@ func awsRestxml_deserializeDocumentTrustedKeyGroups(v **types.TrustedKeyGroups, 
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -31398,23 +33024,24 @@ func awsRestxml_deserializeDocumentTrustedSignerDoesNotExist(v **types.TrustedSi
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Message = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -31446,14 +33073,14 @@ func awsRestxml_deserializeDocumentTrustedSigners(v **types.TrustedSigners, deco
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Enabled", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -31468,14 +33095,14 @@ func awsRestxml_deserializeDocumentTrustedSigners(v **types.TrustedSigners, deco
 			}
 
 		case strings.EqualFold("Quantity", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				i64, err := strconv.ParseInt(xtv, 10, 64)
 				if err != nil {
@@ -31486,6 +33113,10 @@ func awsRestxml_deserializeDocumentTrustedSigners(v **types.TrustedSigners, deco
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder
@@ -31517,59 +33148,53 @@ func awsRestxml_deserializeDocumentViewerCertificate(v **types.ViewerCertificate
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("ACMCertificateArn", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.ACMCertificateArn = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.ACMCertificateArn = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Certificate", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.Certificate = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.Certificate = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("CertificateSource", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.CertificateSource = types.CertificateSource(xtv)
 			}
 
 		case strings.EqualFold("CloudFrontDefaultCertificate", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
 					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
@@ -31578,49 +33203,50 @@ func awsRestxml_deserializeDocumentViewerCertificate(v **types.ViewerCertificate
 			}
 
 		case strings.EqualFold("IAMCertificateId", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
-				if val == nil {
-					sv.IAMCertificateId = ptr.String("")
-				}
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.IAMCertificateId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MinimumProtocolVersion", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.MinimumProtocolVersion = types.MinimumProtocolVersion(xtv)
 			}
 
 		case strings.EqualFold("SSLSupportMethod", t.Name.Local):
-			val, done, err := decoder.Value()
+			val, err := decoder.Value()
 			if err != nil {
 				return err
 			}
-			if done {
+			if val == nil {
 				break
 			}
-			if val != nil {
+			{
 				xtv := string(val)
 				sv.SSLSupportMethod = types.SSLSupportMethod(xtv)
 			}
 
 		default:
 			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
 
 		}
 		decoder = originalDecoder

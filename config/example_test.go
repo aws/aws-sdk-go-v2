@@ -3,18 +3,17 @@ package config_test
 import (
 	"context"
 	"fmt"
-	"github.com/awslabs/smithy-go/middleware"
 	"log"
 	"net/http"
 	"path/filepath"
-
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
+	"github.com/aws/smithy-go/middleware"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func ExampleWithSharedConfigProfile() {
@@ -64,8 +63,8 @@ func ExampleWithCredentialsProvider() {
 }
 
 func ExampleWithAPIOptions() {
-	// import "github.com/awslabs/smithy-go/middleware"
-	// import smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	// import "github.com/aws/smithy-go/middleware"
+	// import smithyhttp "github.com/aws/smithy-go/transport/http"
 
 	cfg, err := config.LoadDefaultConfig(context.TODO(),
 		config.WithAPIOptions([]func(*middleware.Stack) error{

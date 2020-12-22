@@ -3,7 +3,7 @@ package query
 import (
 	"bytes"
 	"fmt"
-	smithytesting "github.com/awslabs/smithy-go/testing"
+	smithytesting "github.com/aws/smithy-go/testing"
 	"testing"
 )
 

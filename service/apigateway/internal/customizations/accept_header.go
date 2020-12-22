@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/awslabs/smithy-go/middleware"
-	"github.com/awslabs/smithy-go/transport/http"
+	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/transport/http"
 )
 
 // AddAcceptHeader is the helper function used to add middleware to the stack

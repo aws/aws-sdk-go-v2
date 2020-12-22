@@ -7,11 +7,11 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubconfig/types"
-	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/encoding/httpbinding"
-	smithyjson "github.com/awslabs/smithy-go/encoding/json"
-	"github.com/awslabs/smithy-go/middleware"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	smithy "github.com/aws/smithy-go"
+	"github.com/aws/smithy-go/encoding/httpbinding"
+	smithyjson "github.com/aws/smithy-go/encoding/json"
+	"github.com/aws/smithy-go/middleware"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 type awsAwsjson11_serializeOpCreateHomeRegionControl struct {

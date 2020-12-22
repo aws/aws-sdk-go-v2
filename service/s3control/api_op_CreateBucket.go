@@ -9,8 +9,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
-	"github.com/awslabs/smithy-go/middleware"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	"github.com/aws/smithy-go/middleware"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This API operation creates an Amazon S3 on Outposts bucket. To create an S3

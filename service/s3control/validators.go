@@ -6,8 +6,8 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
-	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/middleware"
+	smithy "github.com/aws/smithy-go"
+	"github.com/aws/smithy-go/middleware"
 )
 
 type validateOpCreateAccessPoint struct {

@@ -2,8 +2,9 @@ package customizations
 
 import (
 	"context"
-	"github.com/awslabs/smithy-go/middleware"
 	"testing"
+
+	"github.com/aws/smithy-go/middleware"
 )
 
 type accountIDBearer struct {

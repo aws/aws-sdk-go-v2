@@ -9,8 +9,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
-	"github.com/awslabs/smithy-go/middleware"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	"github.com/aws/smithy-go/middleware"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You

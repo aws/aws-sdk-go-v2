@@ -14,7 +14,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/awslabs/smithy-go/logging"
+	"github.com/aws/smithy-go/logging"
 )
 
 const userAgentKey = "S3Manager"

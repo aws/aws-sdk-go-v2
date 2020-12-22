@@ -9,7 +9,7 @@ import (
 	"time"
 
 	elb "github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing"
-	"github.com/awslabs/smithy-go"
+	"github.com/aws/smithy-go"
 
 	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
 )

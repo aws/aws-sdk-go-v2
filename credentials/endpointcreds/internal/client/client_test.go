@@ -12,8 +12,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/awslabs/smithy-go"
-	smithytesting "github.com/awslabs/smithy-go/testing"
+	"github.com/aws/smithy-go"
+	smithytesting "github.com/aws/smithy-go/testing"
 )
 
 func TestClient_GetCredentials(t *testing.T) {

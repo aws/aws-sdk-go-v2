@@ -14,7 +14,7 @@ import (
 	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/manager"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/awslabs/smithy-go/middleware"
+	"github.com/aws/smithy-go/middleware"
 )
 
 var integBuf12MB = make([]byte, 1024*1024*12)

@@ -7,12 +7,12 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/types"
-	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/encoding/httpbinding"
-	smithyjson "github.com/awslabs/smithy-go/encoding/json"
-	"github.com/awslabs/smithy-go/middleware"
-	smithytime "github.com/awslabs/smithy-go/time"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	smithy "github.com/aws/smithy-go"
+	"github.com/aws/smithy-go/encoding/httpbinding"
+	smithyjson "github.com/aws/smithy-go/encoding/json"
+	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 type awsAwsjson10_serializeOpEmptyInputAndEmptyOutput struct {

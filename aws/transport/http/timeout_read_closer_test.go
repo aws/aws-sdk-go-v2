@@ -3,12 +3,13 @@ package http
 import (
 	"context"
 	"errors"
-	"github.com/awslabs/smithy-go/middleware"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"net/http"
 	"testing"
 	"time"
+
+	"github.com/aws/smithy-go/middleware"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 type testReader struct {

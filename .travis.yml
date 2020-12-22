@@ -40,7 +40,7 @@ matrix:
         - JAVA_TOOL_OPTIONS="-Xmx1g"
       before_script:
           - rm -rf /tmp/smithy-go
-          - git clone https://github.com/awslabs/smithy-go /tmp/smithy-go
+          - git clone https://github.com/aws/smithy-go /tmp/smithy-go
           - pushd /tmp/smithy-go/codegen
           - ./gradlew clean publishToMavenLocal -Plog-tests
           - popd
@@ -53,7 +53,7 @@ matrix:
         - JAVA_TOOL_OPTIONS="-Xmx1g"
       before_script:
           - rm -rf /tmp/smithy-go
-          - git clone https://github.com/awslabs/smithy-go /tmp/smithy-go
+          - git clone https://github.com/aws/smithy-go /tmp/smithy-go
           - pushd /tmp/smithy-go/codegen
           - ./gradlew clean publishToMavenLocal -Plog-tests
           - popd

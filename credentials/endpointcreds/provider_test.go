@@ -13,7 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/credentials/endpointcreds"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
-	"github.com/awslabs/smithy-go"
+	"github.com/aws/smithy-go"
 )
 
 type mockClient func(*http.Request) (*http.Response, error)

@@ -36,7 +36,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/credentials/endpointcreds/internal/client"
-	"github.com/awslabs/smithy-go/middleware"
+	"github.com/aws/smithy-go/middleware"
 )
 
 // ProviderName is the name of the credentials provider.

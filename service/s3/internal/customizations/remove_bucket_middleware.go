@@ -3,8 +3,8 @@ package customizations
 import (
 	"context"
 	"fmt"
-	"github.com/awslabs/smithy-go/middleware"
-	"github.com/awslabs/smithy-go/transport/http"
+	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/transport/http"
 )
 
 // removeBucketFromPathMiddleware needs to be executed after serialize step is performed

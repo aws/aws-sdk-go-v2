@@ -9,8 +9,8 @@ import (
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	kinesiscust "github.com/aws/aws-sdk-go-v2/service/kinesis/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
-	"github.com/awslabs/smithy-go/middleware"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	"github.com/aws/smithy-go/middleware"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets data records from a Kinesis data stream's shard. Specify a shard iterator
